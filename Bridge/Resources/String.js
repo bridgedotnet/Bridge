@@ -144,14 +144,6 @@
 
         contains: function (str, value) {
             return str.indexOf(value) > -1;
-        },
-
-        isDigit: function (str) {
-            if (str.length > 1) {
-                return false;
-            }
-
-            return str >= "0" && str <= "9";
         }
     };
 

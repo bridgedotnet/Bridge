@@ -4,6 +4,7 @@
   <file name="Core.js" />
   <file name="Nullable.js" />
   <file name="String.js" />
+  <file name="Char.js" />
   <file name="Class.js" />
   <file name="Exception.js" />
   <file name="Interfaces.js" />
@@ -29,6 +30,7 @@
     <include name="Core.js" />
     <include name="Nullable.js" />
     <include name="String.js" />
+    <include name="Char.js" />
     <include name="Class.js" />
     <include name="Exception.js" />
     <include name="Interfaces.js" />

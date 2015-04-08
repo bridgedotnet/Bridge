@@ -94,13 +94,13 @@ namespace System
 			return (char)0;
 		}
 
-        [Template("String.isDigit({ch})")]
+        [Template("Char.isDigit({ch})")]
 		public static bool IsDigit(char ch) 
         {
 			return false;
 		}
 
-        [Template("String.isDigit({ch}).charAt({index})")]
+        [Template("Char.isDigit({ch}).charAt({index})")]
         public static bool IsDigit(char ch, int index)
         {
             return false;

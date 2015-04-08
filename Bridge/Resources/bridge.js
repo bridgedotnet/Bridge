@@ -913,8 +913,16 @@
 
         contains: function (str, value) {
             return str.indexOf(value) > -1;
-        },
+        }
+    };
 
+    Bridge.String = string;
+})();
+
+// @source Char.js
+
+(function () {
+    var chr = {
         isDigit: function (str) {
             if (str.length > 1) {
                 return false;
@@ -924,7 +932,7 @@
         }
     };
 
-    Bridge.String = string;
+    Bridge.Char = chr;
 })();
 
 // @source Class.js
