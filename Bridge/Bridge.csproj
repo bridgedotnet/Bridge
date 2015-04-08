@@ -189,4 +189,7 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>$(ProjectDir)\Resources\build.bat</PreBuildEvent>
+  </PropertyGroup>
 </Project>
