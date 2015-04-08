@@ -94,11 +94,17 @@ namespace System
 			return (char)0;
 		}
 
-        [Template("({ch} >= 48 && {ch} <= 57)")]
+        [Template("String.isDigit({ch})")]
 		public static bool IsDigit(char ch) 
         {
 			return false;
 		}
+
+        [Template("String.isDigit({ch}).charAt({index})")]
+        public static bool IsDigit(char ch, int index)
+        {
+            return false;
+        }
 
         [Template("/\\s/.test(String.fromCharCode({ch}))")]
 		public static bool IsWhiteSpace(char ch) 
