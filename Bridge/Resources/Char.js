@@ -3,11 +3,7 @@
 (function () {
     var chr = {
         isDigit: function (str) {
-            if (str.length > 1) {
-                return false;
-            }
-
-            return str >= "0" && str <= "9";
+            return str >= '0' && str <= '9';
         }
     };
 

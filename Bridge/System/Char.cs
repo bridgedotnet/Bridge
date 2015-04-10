@@ -94,14 +94,14 @@ namespace System
 			return (char)0;
 		}
 
-        [Template("Char.isDigit({ch})")]
+        [Template("Bridge.Char.isDigit(String.fromCharCode({ch}))")]
 		public static bool IsDigit(char ch) 
         {
 			return false;
 		}
 
-        [Template("Char.isDigit({ch}).charAt({index})")]
-        public static bool IsDigit(char ch, int index)
+        [Template("Bridge.Char.isDigit({ch}.charAt({index}))")]
+        public static bool IsDigit(string ch, int index)
         {
             return false;
         }
