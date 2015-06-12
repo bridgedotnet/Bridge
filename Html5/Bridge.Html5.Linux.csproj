@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{99DECD28-D3E3-4EA7-ACAE-AB5DFC9913BD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Bridge.Html5</RootNamespace>
+    <AssemblyName>Bridge.Html5</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591</NoWarn>
+    <DocumentationFile>bin\Debug\Bridge.Html5.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Bridge.Html5.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoStdLib>True</NoStdLib>
+    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
+    <AdditionalExplicitAssemblyReferences />
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Ajax\AjaxReadyState.cs" />
+    <Compile Include="Ajax\FormData.cs" />
+    <Compile Include="Ajax\XMLHttpRequestUpload.cs" />
+    <Compile Include="Ajax\XMLHttpRequest.cs" />
+    <Compile Include="Ajax\XMLHttpRequestEventTarget.cs" />
+    <Compile Include="Ajax\XMLHttpRequestResponseType.cs" />
+    <Compile Include="BarProp.cs" />
+    <Compile Include="CaretPosition.cs" />
+    <Compile Include="ClientRect.cs" />
+    <Compile Include="ClientRectList.cs" />
+    <Compile Include="CompatMode.cs" />
+    <Compile Include="Console.cs" />
+    <Compile Include="String.cs" />
+    <Compile Include="TypedArray\Float32Array.cs" />
+    <Compile Include="TypedArray\Float64Array.cs" />
+    <Compile Include="TypedArray\Int16Array.cs" />
+    <Compile Include="TypedArray\Int32Array.cs" />
+    <Compile Include="TypedArray\Int8Array.cs" />
+    <Compile Include="Interfaces\CanvasGradient.cs" />
+    <Compile Include="Interfaces\CanvasPattern.cs" />
+    <Compile Include="Interfaces\ImageData.cs" />
+    <Compile Include="Interfaces\Path2D.cs" />
+    <Compile Include="Interfaces\SVGMatrix.cs" />
+    <Compile Include="Interfaces\SVGOperations.cs" />
+    <Compile Include="Interfaces\Types\CanvasCompositeOperationType.cs" />
+    <Compile Include="Interfaces\Types\CanvasContextTypes.cs" />
+    <Compile Include="Interfaces\Types\CanvasTypes.cs" />
+    <Compile Include="Interfaces\CanvasRenderingContext2D.cs" />
+    <Compile Include="Elements\ElementType.cs" />
+    <Compile Include="Events\EventAttributes.cs" />
+    <Compile Include="Interfaces\TextMetrics.cs" />
+    <Compile Include="JSON.cs" />
+    <Compile Include="CSS\AlignContent.cs" />
+    <Compile Include="CSS\AlignItems.cs" />
+    <Compile Include="CSS\All.cs" />
+    <Compile Include="CSS\AnimationDirection.cs" />
+    <Compile Include="CSS\AnimationFillMode.cs" />
+    <Compile Include="CSS\AnimationPlayState.cs" />
+    <Compile Include="CSS\BackFaceVisibility.cs" />
+    <Compile Include="CSS\BackgroundAttachment.cs" />
+    <Compile Include="CSS\BackgroundBlendMode.cs" />
+    <Compile Include="CSS\BackgroundClip.cs" />
+    <Compile Include="CSS\BackgroundRepeat.cs" />
+    <Compile Include="CSS\BorderCollapse.cs" />
+    <Compile Include="CSS\BorderImageRepeat.cs" />
+    <Compile Include="CSS\BorderStyle.cs" />
+    <Compile Include="CSS\BorderWidth.cs" />
+    <Compile Include="CSS\BoxDecorationBreak.cs" />
+    <Compile Include="CSS\BoxSizing.cs" />
+    <Compile Include="CSS\CaptionSide.cs" />
+    <Compile Include="CSS\Clear.cs" />
+    <Compile Include="CSS\ColumnFill.cs" />
+    <Compile Include="CSS\ColumnSpan.cs" />
+    <Compile Include="CSS\CSSRule.cs" />
+    <Compile Include="CSS\CSSRuleType.cs" />
+    <Compile Include="CSS\CSSStyleDeclaration.cs" />
+    <Compile Include="CSS\CSSStyleSheet.cs" />
+    <Compile Include="CSS\CSSValue.cs" />
+    <Compile Include="CSS\Cursor.cs" />
+    <Compile Include="CSS\Direction.cs" />
+    <Compile Include="CSS\Display.cs" />
+    <Compile Include="CSS\DominantBaseline.cs" />
+    <Compile Include="CSS\EmptyCells.cs" />
+    <Compile Include="CSS\FlexDirection.cs" />
+    <Compile Include="CSS\FlexWrap.cs" />
+    <Compile Include="CSS\Float.cs" />
+    <Compile Include="CSS\FontKerning.cs" />
+    <Compile Include="CSS\FontStretch.cs" />
+    <Compile Include="CSS\FontStyle.cs" />
+    <Compile Include="CSS\FontSynthesis.cs" />
+    <Compile Include="CSS\FontVariant.cs" />
+    <Compile Include="CSS\FontVariantCaps.cs" />
+    <Compile Include="CSS\FontVariantLigatures.cs" />
+    <Compile Include="CSS\FontVariantPosition.cs" />
+    <Compile Include="CSS\GridAutoFlow.cs" />
+    <Compile Include="CSS\HTMLColor.cs" />
+    <Compile Include="CSS\Hyphens.cs" />
+    <Compile Include="CSS\ImageRendering.cs" />
+    <Compile Include="CSS\ImeMode.cs" />
+    <Compile Include="CSS\JustifyContent.cs" />
+    <Compile Include="CSS\ListStylePosition.cs" />
+    <Compile Include="CSS\ListStyleType.cs" />
+    <Compile Include="CSS\MaskType.cs" />
+    <Compile Include="CSS\ObjectFit.cs" />
+    <Compile Include="CSS\Overflow.cs" />
+    <Compile Include="CSS\OverflowWrap.cs" />
+    <Compile Include="CSS\PageBreak.cs" />
+    <Compile Include="CSS\PageBreakInside.cs" />
+    <Compile Include="CSS\PointerEvents.cs" />
+    <Compile Include="CSS\Position.cs" />
+    <Compile Include="CSS\Resize.cs" />
+    <Compile Include="CSS\StyleSheet.cs" />
+    <Compile Include="CSS\StyleSheetList.cs" />
+    <Compile Include="CSS\TableLayout.cs" />
+    <Compile Include="CSS\TextAlign.cs" />
+    <Compile Include="CSS\TextDecoration.cs" />
+    <Compile Include="CSS\TextDecorationLine.cs" />
+    <Compile Include="CSS\TextDecorationStyle.cs" />
+    <Compile Include="CSS\TextOverflow.cs" />
+    <Compile Include="CSS\TextRendering.cs" />
+    <Compile Include="CSS\TextTransform.cs" />
+    <Compile Include="CSS\TextUnderlinePosition.cs" />
+    <Compile Include="CSS\TimingFunction.cs" />
+    <Compile Include="CSS\TouchAction.cs" />
+    <Compile Include="CSS\TransformStyle.cs" />
+    <Compile Include="CSS\UnicodeBidi.cs" />
+    <Compile Include="CSS\VerticalAlign.cs" />
+    <Compile Include="CSS\Visibility.cs" />
+    <Compile Include="CSS\WhiteSpace.cs" />
+    <Compile Include="CSS\WordBreak.cs" />
+    <Compile Include="CSS\WordWrap.cs" />
+    <Compile Include="CSS\WritingMode.cs" />
+    <Compile Include="Document.cs" />
+    <Compile Include="DocumentFragment.cs" />
+    <Compile Include="DocumentInstance.cs" />
+    <Compile Include="DocumentType.cs" />
+    <Compile Include="DOMImplementation.cs" />
+    <Compile Include="DOMStringList.cs" />
+    <Compile Include="DOMStringMap.cs" />
+    <Compile Include="DOMSettableTokenList.cs" />
+    <Compile Include="DOMTokenList.cs" />
+    <Compile Include="Elements\AudioElement.cs" />
+    <Compile Include="Elements\BRElement.cs" />
+    <Compile Include="Elements\BodyElement.cs" />
+    <Compile Include="Elements\BaseElement.cs" />
+    <Compile Include="Elements\AreaElement.cs" />
+    <Compile Include="Elements\DataListElement.cs" />
+    <Compile Include="Elements\EmbedElement.cs" />
+    <Compile Include="Elements\DListElement.cs" />
+    <Compile Include="Elements\FieldSetElement.cs" />
+    <Compile Include="Elements\MediaElement.cs" />
+    <Compile Include="Elements\MeterElement.cs" />
+    <Compile Include="Elements\ModElement.cs" />
+    <Compile Include="Elements\ObjectElement.cs" />
+    <Compile Include="Elements\OListElement.cs" />
+    <Compile Include="Elements\OptGroupElement.cs" />
+    <Compile Include="Elements\OptionElement.cs" />
+    <Compile Include="Elements\OutputElement.cs" />
+    <Compile Include="Elements\ParagraphElement.cs" />
+    <Compile Include="Elements\MetaElement.cs" />
+    <Compile Include="Elements\MapElement.cs" />
+    <Compile Include="Elements\LinkElement.cs" />
+    <Compile Include="Elements\LIElement.cs" />
+    <Compile Include="Elements\LegendElement.cs" />
+    <Compile Include="Elements\ImageElement.cs" />
+    <Compile Include="Elements\IFrameElement.cs" />
+    <Compile Include="Elements\HRElement.cs" />
+    <Compile Include="Elements\HtmlElement.cs" />
+    <Compile Include="Elements\HeadElement.cs" />
+    <Compile Include="Elements\HeadingElement.cs" />
+    <Compile Include="Elements\LabelElement.cs" />
+    <Compile Include="Elements\KeyGenElement.cs" />
+    <Compile Include="Elements\ParamElement.cs" />
+    <Compile Include="Elements\PreElement.cs" />
+    <Compile Include="Elements\ProgressElement.cs" />
+    <Compile Include="Elements\QuoteElement.cs" />
+    <Compile Include="Elements\ScriptElement.cs" />
+    <Compile Include="Elements\SelectElement.cs" />
+    <Compile Include="Elements\SourceElement.cs" />
+    <Compile Include="Elements\StyleElement.cs" />
+    <Compile Include="Elements\TableCaptionElement.cs" />
+    <Compile Include="Elements\TableCellElement.cs" />
+    <Compile Include="Elements\TableColElement.cs" />
+    <Compile Include="Elements\TableElement.cs" />
+    <Compile Include="Elements\TableHeaderCellElement.cs" />
+    <Compile Include="Elements\TableDataCellElement.cs" />
+    <Compile Include="Elements\TableRowElement.cs" />
+    <Compile Include="Elements\TableSectionElement.cs" />
+    <Compile Include="Elements\TextAreaElement.cs" />
+    <Compile Include="Elements\SpanElement.cs" />
+    <Compile Include="Elements\DivElement.cs" />
+    <Compile Include="Elements\FormElement.cs" />
+    <Compile Include="Elements\AnchorElement.cs" />
+    <Compile Include="Elements\ButtonElement.cs" />
+    <Compile Include="Elements\InputElement.cs" />
+    <Compile Include="Elements\ButtonType.cs" />
+    <Compile Include="Elements\InputType.cs" />
+    <Compile Include="Elements\TitleElement.cs" />
+    <Compile Include="Elements\TextTrack.cs" />
+    <Compile Include="Elements\TrackElement.cs" />
+    <Compile Include="Elements\UListElement.cs" />
+    <Compile Include="Elements\UnknownElement.cs" />
+    <Compile Include="Elements\CanvasElement.cs" />
+    <Compile Include="Elements\VideoElement.cs" />
+    <Compile Include="ErrorEventHandler.cs" />
+    <Compile Include="Errors\EvalError.cs" />
+    <Compile Include="Errors\RangeError.cs" />
+    <Compile Include="Errors\ReferenceError.cs" />
+    <Compile Include="Errors\SyntaxError.cs" />
+    <Compile Include="Errors\TypeError.cs" />
+    <Compile Include="Errors\URIError.cs" />
+    <Compile Include="Events\AnimationEvent.cs" />
+    <Compile Include="Events\CompositionEvent.cs" />
+    <Compile Include="Events\CustomEvent.cs" />
+    <Compile Include="Events\Event.cs" />
+    <Compile Include="Events\EventType.cs" />
+    <Compile Include="Events\FocusEvent.cs" />
+    <Compile Include="Events\HashChangeEvent.cs" />
+    <Compile Include="Events\IEventListener.cs" />
+    <Compile Include="Events\KeyboardEvent.cs" />
+    <Compile Include="Events\MouseEvent.cs" />
+    <Compile Include="Events\ProgressEvent.cs" />
+    <Compile Include="Events\UIEvent.cs" />
+    <Compile Include="Events\WheelEvent.cs" />
+    <Compile Include="Events\EventTarget.cs" />
+    <Compile Include="File\Blob.cs" />
+    <Compile Include="File\BlobPropertyBag.cs" />
+    <Compile Include="File\Endings.cs" />
+    <Compile Include="File\File.cs" />
+    <Compile Include="File\FileList.cs" />
+    <Compile Include="FormControlsCollection.cs" />
+    <Compile Include="Geolocation\Geolocation.cs" />
+    <Compile Include="Geolocation\GeolocationCoordinates.cs" />
+    <Compile Include="Geolocation\GeolocationPosition.cs" />
+    <Compile Include="Geolocation\GeolocationPositionError.cs" />
+    <Compile Include="Geolocation\GeolocationPositionOptions.cs" />
+    <Compile Include="History.cs" />
+    <Compile Include="INodeFilter.cs" />
+    <Compile Include="Location.cs" />
+    <Compile Include="MediaList.cs" />
+    <Compile Include="MediaQueryList.cs" />
+    <Compile Include="Navigator.cs" />
+    <Compile Include="NodeFilter.cs" />
+    <Compile Include="NodeIterator.cs" />
+    <Compile Include="Node\Attr.cs" />
+    <Compile Include="Node\CDATASection.cs" />
+    <Compile Include="Node\CharacterData.cs" />
+    <Compile Include="Node\Comment.cs" />
+    <Compile Include="Node\ContentEditable.cs" />
+    <Compile Include="Node\DocumentPosition.cs" />
+    <Compile Include="Node\Element.cs" />
+    <Compile Include="Node\ElementList.cs" />
+    <Compile Include="Node\HTMLCollection.cs" />
+    <Compile Include="Node\InsertPosition.cs" />
+    <Compile Include="Node\NamedNodeMap.cs" />
+    <Compile Include="Node\Node.cs" />
+    <Compile Include="Node\NodeList.cs" />
+    <Compile Include="Node\NodeType.cs" />
+    <Compile Include="Node\OptionsCollection.cs" />
+    <Compile Include="Node\ProcessingInstruction.cs" />
+    <Compile Include="Node\Text.cs" />
+    <Compile Include="Node\TextDirection.cs" />
+    <Compile Include="Performance.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadyState.cs" />
+    <Compile Include="Screen.cs" />
+    <Compile Include="Selection\Range.cs" />
+    <Compile Include="Selection\RangeComparison.cs" />
+    <Compile Include="Selection\Selection.cs" />
+    <Compile Include="Selection\SelectionAlter.cs" />
+    <Compile Include="Selection\SelectionDirection.cs" />
+    <Compile Include="Selection\SelectionGranularity.cs" />
+    <Compile Include="Storage.cs" />
+    <Compile Include="TreeWalker.cs" />
+    <Compile Include="TypedArray\ArrayBuffer.cs" />
+    <Compile Include="TypedArray\ArrayBufferView.cs" />
+    <Compile Include="TypedArray\DataView.cs" />
+    <Compile Include="TypedArray\Prototype.cs" />
+    <Compile Include="TypedArray\Uint16Array.cs" />
+    <Compile Include="TypedArray\Uint32Array.cs" />
+    <Compile Include="TypedArray\Uint8Array.cs" />
+    <Compile Include="TypedArray\Uint8ClampedArray.cs" />
+    <Compile Include="URLSearchParams.cs" />
+    <Compile Include="ValidityState.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="Window.cs" />
+    <Compile Include="WindowInstance.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bridge\Bridge.Linux.csproj">
+      <Project>{de78b8b7-c0f5-415b-a70b-02194433f450}</Project>
+      <Name>Bridge</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent />
+  </PropertyGroup>
+</Project>

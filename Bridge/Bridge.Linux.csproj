@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DE78B8B7-C0F5-415B-A70B-02194433F450}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Bridge</RootNamespace>
+    <AssemblyName>Bridge</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <NoStdLib>true</NoStdLib>
+    <DocumentationFile>bin\$(Configuration)\$(MSBuildProjectName).xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWarn>1591</NoWarn>
+    <DocumentationFile>bin\Release\Bridge.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoStdLib>True</NoStdLib>
+    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
+    <AdditionalExplicitAssemblyReferences />
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\GlobalTargetAttribute.cs" />
+    <Compile Include="Attributes\IgnoreCastAttribute.cs" />
+    <Compile Include="Attributes\IgnoreGenericAttribute.cs" />
+    <Compile Include="Attributes\FieldPropertyAttribute.cs" />
+    <Compile Include="Attributes\PriorityAttribute.cs" />
+    <Compile Include="Attributes\AdapterAttribute.cs" />
+    <Compile Include="Attributes\EnumAttribute.cs" />
+    <Compile Include="Attributes\AllowAttribute.cs" />
+    <Compile Include="Attributes\ConstructorAttribute.cs" />
+    <Compile Include="Attributes\TemplateAttribute.cs" />
+    <Compile Include="Attributes\ModuleDependencyAttribute.cs" />
+    <Compile Include="Attributes\ModuleAttribute.cs" />
+    <Compile Include="Attributes\CastAttribute.cs" />
+    <Compile Include="Attributes\ObjectLiteralAttribute.cs" />
+    <Compile Include="Attributes\InlineConstAttribute.cs" />
+    <Compile Include="Attributes\NamespaceAttribute.cs" />
+    <Compile Include="Attributes\NameAttribute.cs" />
+    <Compile Include="Attributes\IgnoreAttribute.cs" />
+    <Compile Include="Attributes\FileNameAttribute.cs" />
+    <Compile Include="Attributes\ScriptAttribute.cs" />
+    <Compile Include="Bridge\Linq\Enumerable.cs" />
+    <Compile Include="IBridgeClass.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Script.cs" />
+    <Compile Include="System\Action.cs" />
+    <Compile Include="System\Activator.cs" />
+    <Compile Include="System\ArgumentNullException.cs" />
+    <Compile Include="System\ArgumentException.cs" />
+    <Compile Include="System\ArithmeticException.cs" />
+    <Compile Include="System\Collections\Generic\Comparer.cs" />
+    <Compile Include="System\Collections\Generic\IComparer.cs" />
+    <Compile Include="System\Collections\Generic\IList.cs" />
+    <Compile Include="System\Collections\ObjectModel\ReadOnlyCollection.cs" />
+    <Compile Include="System\Comparison.cs" />
+    <Compile Include="System\Environment.cs" />
+    <Compile Include="System\IDisposable.cs" />
+    <Compile Include="System\Linq\Enumerable.cs" />
+    <Compile Include="System\Linq\Grouping.cs" />
+    <Compile Include="System\Linq\EnumerableInstance.cs" />
+    <Compile Include="System\Linq\Lookup.cs" />
+    <Compile Include="System\Linq\OrderedEnumerable.cs" />
+    <Compile Include="System\StringComparison.cs" />
+    <Compile Include="This.cs" />
+    <Compile Include="System\OverflowException.cs" />
+    <Compile Include="System\Globalization\CultureNotFoundException.cs" />
+    <Compile Include="System\ArgumentOutOfRangeException.cs" />
+    <Compile Include="System\Array.cs" />
+    <Compile Include="System\Boolean.cs" />
+    <Compile Include="System\Char.cs" />
+    <Compile Include="System\DateTime.cs" />
+    <Compile Include="System\DayOfWeek.cs" />
+    <Compile Include="System\Double.cs" />
+    <Compile Include="System\Globalization\CultureInfo.cs" />
+    <Compile Include="System\Globalization\DateTimeFormatInfo.cs" />
+    <Compile Include="System\Globalization\NumberFormatInfo.cs" />
+    <Compile Include="System\ICloneable.cs" />
+    <Compile Include="System\IFormatProvider.cs" />
+    <Compile Include="System\SByte.cs" />
+    <Compile Include="System\Byte.cs" />
+    <Compile Include="System\Int16.cs" />
+    <Compile Include="System\Single.cs" />
+    <Compile Include="System\Text\StringBuilder.cs" />
+    <Compile Include="System\UInt16.cs" />
+    <Compile Include="System\Int32.cs" />
+    <Compile Include="System\Int64.cs" />
+    <Compile Include="System\UInt64.cs" />
+    <Compile Include="System\UInt32.cs" />
+    <Compile Include="System\Validation.cs" />
+    <Compile Include="System\Browser.cs" />
+    <Compile Include="System\Collections\Generic\Dictionary.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="System\Collections\Generic\ICollection.cs" />
+    <Compile Include="System\Collections\Generic\IDictionary.cs" />
+    <Compile Include="System\Collections\Generic\IEnumerable.cs" />
+    <Compile Include="System\Collections\Generic\IEnumerator.cs" />
+    <Compile Include="System\Collections\Generic\IEqualityComparer.cs" />
+    <Compile Include="System\Collections\Generic\KeyValuePair.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="System\Collections\Generic\List.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="System\Collections\ICollection.cs" />
+    <Compile Include="System\Collections\IEnumerable.cs" />
+    <Compile Include="System\Collections\IEnumerator.cs" />
+    <Compile Include="System\Collections\IEqualityComparer.cs" />
+    <Compile Include="System\Collections\Generic\KeyNotFoundException.cs" />
+    <Compile Include="System\DivideByZeroException.cs" />
+    <Compile Include="System\Error.cs" />
+    <Compile Include="System\ErrorException.cs" />
+    <Compile Include="System\FormatException.cs" />
+    <Compile Include="System\IFormattable.cs" />
+    <Compile Include="System\Decimal.cs" />
+    <Compile Include="System\IComparable.cs" />
+    <Compile Include="System\IEquatable.cs" />
+    <Compile Include="System\INotifyPropertyChanged.cs" />
+    <Compile Include="System\InvalidCastException.cs" />
+    <Compile Include="System\InvalidOperationException.cs" />
+    <Compile Include="System\LocaleOptions.cs" />
+    <Compile Include="System\Func.cs" />
+    <Compile Include="System\Date.cs" />
+    <Compile Include="System\Exception.cs" />
+    <Compile Include="System\Delegate.cs" />
+    <Compile Include="System\Math.cs" />
+    <Compile Include="System\NotImplementedException.cs" />
+    <Compile Include="System\NotSupportedException.cs" />
+    <Compile Include="System\Nullable.cs" />
+    <Compile Include="System\NullReferenceException.cs" />
+    <Compile Include="System\Object.cs" />
+    <Compile Include="System\Runtime.cs" />
+    <Compile Include="System\String.cs" />
+    <Compile Include="System\Stubs.cs" />
+    <Compile Include="System\Text\Regex.cs" />
+    <Compile Include="System\Text\RegexMatch.cs" />
+    <Compile Include="System\Threading\Promise.cs" />
+    <Compile Include="System\Threading\TaskAwaiter.cs" />
+    <Compile Include="System\Threading\TaskStatus.cs" />
+    <Compile Include="System\Threading\Task.cs" />
+    <Compile Include="System\TimeSpan.cs" />
+    <Compile Include="System\Any.cs" />
+    <Compile Include="System\Tuple.cs" />
+    <Compile Include="System\Void.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Array.js" />
+    <Content Include="Resources\Collections\Comparer.js" />
+    <Content Include="Resources\Finally.js" />
+    <Content Include="Resources\Init.js" />
+    <Content Include="Resources\Attribute.js" />
+    <Content Include="Resources\Browser.js" />
+    <Content Include="Resources\Class.js" />
+    <Content Include="Resources\Collections\EqualityComparer.js" />
+    <Content Include="Resources\Collections\List.js" />
+    <Content Include="Resources\Collections\ArrayEnumerator.js" />
+    <Content Include="Resources\Collections\CustomEnumerator.js" />
+    <Content Include="Resources\Collections\Dictionary.js" />
+    <Content Include="Resources\Collections\Interfaces.js" />
+    <Content Include="Resources\Globalization.js" />
+    <Content Include="Resources\Exception.js" />
+    <Content Include="Resources\INotifyPropertyChanged.js" />
+    <Content Include="Resources\Date.js" />
+    <Content Include="Resources\linq.js" />
+    <Content Include="Resources\Locales\ru-RU.js" />
+    <Content Include="Resources\Char.js" />
+    <Content Include="Resources\Text\StringBuilder.js" />
+    <Content Include="Resources\TimeSpan.js" />
+    <Content Include="Resources\Integer.js" />
+    <Content Include="Resources\Interfaces.js" />
+    <Content Include="Resources\String.js" />
+    <Content Include="Resources\Task.js" />
+    <Content Include="Resources\Nullable.js" />
+    <Content Include="Resources\Core.js" />
+    <Content Include="Resources\Validation.js" />
+    <EmbeddedResource Include="Resources\bridge.js" />
+    <EmbeddedResource Include="Resources\bridge.min.js" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>"$(ProjectDir)Resources/JSBuilder/JSBuildConsole.exe" /path="$(ProjectDir)Resources/Bridge.jsb"</PreBuildEvent>
+  </PropertyGroup>
+</Project>
