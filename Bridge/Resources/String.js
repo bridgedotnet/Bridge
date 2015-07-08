@@ -307,15 +307,15 @@
             return arr;
         },
 
-        concatArray: function (strs) {
-            if (strs == null) {
+        concatArray: function () {
+            if (arguments.length == 0) {
                 throw new Bridge.ArgumentNullException();
             }
 
             var sb = new Bridge.Text.StringBuilder();
 
-            for (var i = 0; i < strs.length; i++) {
-                sb.append(strs[i]);
+            for (var i = 0; i < arguments.length; i++) {
+                sb.append(arguments[i]);
             }
 
             return sb.toString();
