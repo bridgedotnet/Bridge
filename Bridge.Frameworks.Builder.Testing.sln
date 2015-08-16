@@ -84,6 +84,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "www", "www", "{F8D2127F-704
 		Testing\www\testTypeScript.html = Testing\www\testTypeScript.html
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bridge.AngularJS", "..\Frameworks\AngularJS\Bridge.AngularJS.csproj", "{CFD49E9D-FA2D-46A6-B50D-8D114F07C07C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -146,6 +148,10 @@ Global
 		{2F36A7E8-FC89-49A9-8161-5BBBE8F66A3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F36A7E8-FC89-49A9-8161-5BBBE8F66A3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F36A7E8-FC89-49A9-8161-5BBBE8F66A3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFD49E9D-FA2D-46A6-B50D-8D114F07C07C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFD49E9D-FA2D-46A6-B50D-8D114F07C07C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFD49E9D-FA2D-46A6-B50D-8D114F07C07C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFD49E9D-FA2D-46A6-B50D-8D114F07C07C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -166,5 +172,6 @@ Global
 		{6E1D7559-DAA0-41B7-B0E5-8E106072D704} = {47D6D365-36CE-43C2-91D0-5A071928C62A}
 		{2F36A7E8-FC89-49A9-8161-5BBBE8F66A3A} = {7C762820-1165-4EB4-B7A3-3BB45DF33CE7}
 		{F8D2127F-7042-40D2-8ABC-0E3F58D09C42} = {4466FE4E-78E3-46A8-BAA4-C304D7FFABD9}
+		{CFD49E9D-FA2D-46A6-B50D-8D114F07C07C} = {7C762820-1165-4EB4-B7A3-3BB45DF33CE7}
 	EndGlobalSection
 EndGlobal
