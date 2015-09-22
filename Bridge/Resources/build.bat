@@ -4,10 +4,10 @@ rem tags on Bridge.jsb file into a single bridge.js file.
 
 cd %~dp0
 
-type dostools\utfbom.txt > newbridge.js
+type dostools\utfbom.dat > newbridge.js
 <nul set /p="/*" >> newbridge.js
-type dostools\unixnl.txt >> newbridge.js
-type dostools\spacechar.txt >> newbridge.js
+type dostools\unixnl.dat >> newbridge.js
+type dostools\spacechar.dat >> newbridge.js
 
 setlocal EnableDelayedExpansion
 set "sep= copyright"
@@ -32,16 +32,16 @@ for /F "usebackq delims=" %%l in (`findstr /c:"%sep%=" Bridge.jsb`) do (
  for /f "tokens=1* delims=\" %%A in ("!header!") do (
   set crline=%%A
   <nul set /p= * !crline! >> newbridge.js
-  type dostools\unixnl.txt >> newbridge.js
-  type dostools\spacechar.txt >> newbridge.js
+  type dostools\unixnl.dat >> newbridge.js
+  type dostools\spacechar.dat >> newbridge.js
   set header=%%B
  )
  if defined header goto nextLine
 )
 
 <nul set /p=*/ >> newbridge.js
-type dostools\unixnl.txt >> newbridge.js
-type dostools\unixnl.txt >> newbridge.js
+type dostools\unixnl.dat >> newbridge.js
+type dostools\unixnl.dat >> newbridge.js
 
 set "sep=include name"
 for /F "usebackq delims=" %%l in (`findstr /c:"%sep%=" Bridge.jsb`) do (
@@ -51,7 +51,7 @@ for /F "usebackq delims=" %%l in (`findstr /c:"%sep%=" Bridge.jsb`) do (
  set "value=!value:/=\!
  echo Merging !value!
  type !value! >> newbridge.js
- type dostools\unixnl.txt >> newbridge.js
+ type dostools\unixnl.dat >> newbridge.js
 )
 
 ..\..\packages\BOMStrip.1.0.0\tools\BOMStrip.exe newbridge.js
