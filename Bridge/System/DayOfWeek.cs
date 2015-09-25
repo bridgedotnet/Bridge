@@ -2,12 +2,12 @@ using Bridge;
 
 namespace System
 {
-	/// <summary>
-	/// Specifies the day of the week.
-	/// </summary>
-	[Ignore]
+    /// <summary>
+    /// Specifies the day of the week.
+    /// </summary>
+    [Ignore]
     [Enum(Emit.Value)]
-	public enum DayOfWeek
+    public enum DayOfWeek
     {
         /// <summary>
         /// Indicates Sunday.
@@ -43,5 +43,5 @@ namespace System
         /// Indicates Saturday.
         /// </summary>
         Saturday = 6
-	}
+    }
 }

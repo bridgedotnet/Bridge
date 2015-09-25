@@ -16,7 +16,7 @@ Bridge.define('TestProject2.TestClassB', {
              * @this TestProject2.TestClassB
              * @memberof TestProject2.TestClassB
              * @function getValue1
-             * @return  {number}        
+             * @return  {number}
              */
             /**
              * @instance
@@ -24,8 +24,8 @@ Bridge.define('TestProject2.TestClassB', {
              * @this TestProject2.TestClassB
              * @memberof TestProject2.TestClassB
              * @function setValue1
-             * @param   {number}    value    
-             * @return  {void}               
+             * @param   {number}    value
+             * @return  {void}
              */
             Value1: 0
         }

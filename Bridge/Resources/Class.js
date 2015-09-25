@@ -215,7 +215,7 @@
             var instanceConfig = prop.$config || prop.config;
 
             if (instanceConfig && !Bridge.isFunction(instanceConfig)) {
-                Bridge.Class.initConfig(extend, base, instanceConfig, false, prop);                
+                Bridge.Class.initConfig(extend, base, instanceConfig, false, prop);
 
                 if (document && (document.readyState == "complete" || document.readyState == "loaded")) {
                     Bridge.Class.createAccessors(instanceConfig, prototype);
@@ -382,7 +382,7 @@
                         cls[key] = exists[key];
                     }
                 }
-            }            
+            }
 
             scope[name] = cls;
 

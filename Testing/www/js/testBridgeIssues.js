@@ -513,10 +513,10 @@ Bridge.define('ClientTestLibrary.TestBridgeIssues', {
 
             // TEST
             var items = Bridge.merge(new Bridge.List$1(Bridge.Int)(), [
-                [0], 
-                [1], 
-                [2], 
-                [3], 
+                [0],
+                [1],
+                [2],
+                [3],
                 [4]
             ] );
 
@@ -683,8 +683,8 @@ Bridge.define('ClientTestLibrary.TestBridgeIssues', {
             assert.expect(2);
 
             var dictionary = new ClientTestLibrary.Bridge342("constructor$1", Bridge.merge(new Bridge.Dictionary$2(Bridge.Int,String)(), [
-                [3, "b"], 
-                [6, "z"], 
+                [3, "b"],
+                [6, "z"],
                 [9, "x"]
             ] ));
 
@@ -762,25 +762,25 @@ Bridge.define('ClientTestLibrary.TestBridgeIssues', {
             var test = TESTD;
             var result = null;
             switch (test) {
-                case TESTA: 
+                case TESTA:
                     result = TESTA;
                     break;
-                case TESTB: 
+                case TESTB:
                     result = TESTB;
                     break;
-                case TESTC: 
+                case TESTC:
                     result = TESTC;
                     break;
-                case TESTD: 
+                case TESTD:
                     result = TESTD;
                     break;
-                case TESTE: 
+                case TESTE:
                     result = TESTE;
                     break;
-                case TESTF: 
+                case TESTF:
                     result = TESTF;
                     break;
-                case TESTG: 
+                case TESTG:
                     result = TESTG;
                     break;
             }
@@ -981,10 +981,10 @@ Bridge.define('ClientTestLibrary.TestBridgeIssues', {
         },
         n438: function (assert) {
             var magic = Bridge.merge(new Bridge.List$1(Bridge.Int)(), [
-                [0], 
-                [1], 
-                [2], 
-                [3], 
+                [0],
+                [1],
+                [2],
+                [3],
                 [4]
             ] );
             var epic = magic.getRange(0, 3);
@@ -1034,7 +1034,7 @@ Bridge.define('ClientTestLibrary.TestBridgeIssues', {
 
             var count = 0;
 
-            for (var i = 0; i < 10; i++) 
+            for (var i = 0; i < 10; i++)
             {
                 var $t = (function () {
                     if (!Bridge.Linq.Enumerable.from(testList).any(function (x) {

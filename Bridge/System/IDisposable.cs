@@ -2,9 +2,9 @@ using Bridge;
 
 namespace System
 {
-	[Namespace("Bridge")]
-	public interface IDisposable
+    [Namespace("Bridge")]
+    public interface IDisposable
     {
-		void Dispose();
-	}
+        void Dispose();
+    }
 }

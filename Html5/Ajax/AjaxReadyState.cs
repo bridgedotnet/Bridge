@@ -1,17 +1,17 @@
 ﻿using Bridge;
 namespace Bridge.Html5
 {
-	/// <summary>
+    /// <summary>
     /// The state of the XMLHttpRequest
-	/// </summary>
+    /// </summary>
     [Ignore]
     [Enum(Emit.Value)]
     [Name("Number")]
     public enum AjaxReadyState
     {
-		/// <summary>
+        /// <summary>
         /// open() has not been called yet.
-		/// </summary>
+        /// </summary>
         Unsent = 0,
 
         /// <summary>
@@ -33,5 +33,5 @@ namespace Bridge.Html5
         /// The operation is complete.
         /// </summary>
         Done = 4
-	}
+    }
 }

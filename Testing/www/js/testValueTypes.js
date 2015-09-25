@@ -26,7 +26,7 @@ Bridge.define('ClientTestLibrary.Point', {
     },
     test2: function (p) {
         return Bridge.merge(new ClientTestLibrary.Point(), {
-            x: this.x + p.x, 
+            x: this.x + p.x,
             y: this.y + p.y
         } );
     },
@@ -134,7 +134,7 @@ Bridge.define('ClientTestLibrary.TestValueTypes', {
             a.y = 400;
 
             var b = Bridge.merge(new ClientTestLibrary.Point(), {
-                x: 5, 
+                x: 5,
                 y: 7
             } );
             var c = b.test2(a.$clone());

@@ -67,7 +67,7 @@ namespace ClientTestLibrary.Linq
             var groupJoinWithDefault =
                             (from g in Group.GetGroups()
                              join p in Person.GetPersons() on g.Name equals p.Group into pg
-                             from ep in pg.DefaultIfEmpty() // DefaultIfEmpty preserves left-hand elements that have no matches on the right side 
+                             from ep in pg.DefaultIfEmpty() // DefaultIfEmpty preserves left-hand elements that have no matches on the right side
                              select new
                              {
                                  GroupName = g.Name,

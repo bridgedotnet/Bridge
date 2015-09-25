@@ -10,20 +10,20 @@ namespace Bridge.Html5
     [Name("Blob")]
     public class Blob
     {
-		/// <summary>
-		///
-		/// </summary>
+        /// <summary>
+        ///
+        /// </summary>
         public Blob()
         {
-		}
+        }
 
         /// <summary>
         ///
         /// </summary>
         /// <param name="parts">An Array of data objects to put into the new Blob object. This can be any number of ArrayBuffer, ArrayBufferView (typed array), Blob, or strings, in any order.</param>
-		public Blob(Any<ArrayBuffer, ArrayBufferView, Blob, string>[] parts)
+        public Blob(Any<ArrayBuffer, ArrayBufferView, Blob, string>[] parts)
         {
-		}
+        }
 
         /// <summary>
         ///
@@ -32,7 +32,7 @@ namespace Bridge.Html5
         /// <param name="properties">A BlobPropertyBag object that provides the properties for the new Blob object.</param>
         public Blob(Any<ArrayBuffer, ArrayBufferView, Blob, string>[] parts, BlobPropertyBag properties)
         {
-		}
+        }
 
         /// <summary>
         /// The size, in bytes, of the data contained in the Blob object.
@@ -48,20 +48,20 @@ namespace Bridge.Html5
         /// Returns a new Blob object containing the data in the specified range of bytes of the source Blob.
         /// </summary>
         /// <returns>A new Blob object containing the specified data from the source Blob.</returns>
-		public virtual Blob Slice()
+        public virtual Blob Slice()
         {
-			return null;
-		}
+            return null;
+        }
 
         /// <summary>
         /// Returns a new Blob object containing the data in the specified range of bytes of the source Blob.
         /// </summary>
         /// <param name="start">An index into the Blob indicating the first byte to copy into the new Blob. If you specify a negative value, it's treated as an offset from the end of the string toward the beginning. For example, -10 would be the 10th from last byte in the Blob. The default value is 0. If you specify a value for start that is larger than the size of the source Blob, the returned Blob has size 0 and contains no data.</param>
         /// <returns>A new Blob object containing the specified data from the source Blob.</returns>
-		public virtual Blob Slice(long start)
+        public virtual Blob Slice(long start)
         {
             return null;
-		}
+        }
 
         /// <summary>
         /// Returns a new Blob object containing the data in the specified range of bytes of the source Blob.
@@ -69,10 +69,10 @@ namespace Bridge.Html5
         /// <param name="start">An index into the Blob indicating the first byte to copy into the new Blob. If you specify a negative value, it's treated as an offset from the end of the string toward the beginning. For example, -10 would be the 10th from last byte in the Blob. The default value is 0. If you specify a value for start that is larger than the size of the source Blob, the returned Blob has size 0 and contains no data.</param>
         /// <param name="end">An index into the Blob indicating the last byte to copy into the new Blob. If you specify a negative value, it's treated as an offset from the end of the string toward the beginning. For example, -10 would be the 10th from last byte in the Blob. The default value is size.</param>
         /// <returns>A new Blob object containing the specified data from the source Blob.</returns>
-		public virtual Blob Slice(long start, long end)
+        public virtual Blob Slice(long start, long end)
         {
             return null;
-		}
+        }
 
         /// <summary>
         /// Returns a new Blob object containing the data in the specified range of bytes of the source Blob.
@@ -81,9 +81,9 @@ namespace Bridge.Html5
         /// <param name="end">An index into the Blob indicating the last byte to copy into the new Blob. If you specify a negative value, it's treated as an offset from the end of the string toward the beginning. For example, -10 would be the 10th from last byte in the Blob. The default value is size.</param>
         /// <param name="contentType">The content type to assign to the new Blob; this will be the value of its type property. The default value is an empty string.</param>
         /// <returns>A new Blob object containing the specified data from the source Blob.</returns>
-		public virtual Blob Slice(long start, long end, string contentType)
+        public virtual Blob Slice(long start, long end, string contentType)
         {
             return null;
-		}
-	}
+        }
+    }
 }

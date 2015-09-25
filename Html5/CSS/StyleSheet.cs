@@ -7,20 +7,20 @@ namespace Bridge.Html5
     /// </summary>
     [Ignore]
     [Name("StyleSheet")]
-	public class StyleSheet
+    public class StyleSheet
     {
-		protected internal StyleSheet()
+        protected internal StyleSheet()
         {
-		}
+        }
 
-		/// <summary>
+        /// <summary>
         /// Is a Boolean representing whether the current stylesheet has been applied or not.
-		/// </summary>
+        /// </summary>
         public bool Disabled;
 
-		/// <summary>
+        /// <summary>
         /// Returns a DOMString representing the location of the stylesheet.
-		/// </summary>
+        /// </summary>
         public readonly string Href;
 
         // <summary>
@@ -36,7 +36,7 @@ namespace Bridge.Html5
         /// <summary>
         /// Returns a StyleSheet including this one, if any; returns null if there aren't any.
         /// </summary>
-		public readonly StyleSheet ParentStyleSheet;
+        public readonly StyleSheet ParentStyleSheet;
 
         /// <summary>
         /// Returns a DOMString representing the advisory title of the current style sheet.
@@ -47,5 +47,5 @@ namespace Bridge.Html5
         /// Returns a DOMString representing the style sheet language for this style sheet.
         /// </summary>
         public readonly string Type;
-	}
+    }
 }

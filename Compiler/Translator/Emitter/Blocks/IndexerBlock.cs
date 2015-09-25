@@ -407,7 +407,7 @@ namespace Bridge.Translator
                                 this.Write("1");
                             }
 
-                            
+
                             this.WriteCloseParentheses();
                             this.WriteComma();
 

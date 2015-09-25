@@ -2,22 +2,22 @@ using Bridge;
 
 namespace System.Globalization
 {
-	[Ignore]
+    [Ignore]
     [Namespace("Bridge")]
-	public sealed class DateTimeFormatInfo : IFormatProvider, ICloneable, IBridgeClass
+    public sealed class DateTimeFormatInfo : IFormatProvider, ICloneable, IBridgeClass
     {
-		public DateTimeFormatInfo()
+        public DateTimeFormatInfo()
         {
-		}
+        }
 
-		[FieldProperty]
-		public static DateTimeFormatInfo InvariantInfo
+        [FieldProperty]
+        public static DateTimeFormatInfo InvariantInfo
         {
-			get
+            get
             {
-				return null;
-			}
-		}
+                return null;
+            }
+        }
 
         [FieldProperty]
         [Name("amDesignator")]
@@ -27,76 +27,76 @@ namespace System.Globalization
             set;
         }
 
-		[FieldProperty]
+        [FieldProperty]
         [Name("pmDesignator")]
-		public string PMDesignator
+        public string PMDesignator
         {
             get;
             set;
-		}
+        }
 
-		[FieldProperty]
-		public string DateSeparator
+        [FieldProperty]
+        public string DateSeparator
         {
             get;
             set;
-		}
+        }
 
-		[FieldProperty]
-		public string TimeSeparator
+        [FieldProperty]
+        public string TimeSeparator
         {
             get;
             set;
-		}
+        }
 
-		[FieldProperty]
+        [FieldProperty]
         public string UniversalSortableDateTimePattern
         {
             get;
             set;
-		}
+        }
 
-		[FieldProperty]
-		public string SortableDateTimePattern
+        [FieldProperty]
+        public string SortableDateTimePattern
         {
             get;
             set;
-		}
+        }
 
-		[FieldProperty]
-		public string FullDateTimePattern
+        [FieldProperty]
+        public string FullDateTimePattern
         {
             get;
             set;
-		}
+        }
 
-		[FieldProperty]
-		public string LongDatePattern
+        [FieldProperty]
+        public string LongDatePattern
         {
             get;
             set;
-		}
+        }
 
-		[FieldProperty]
-		public string ShortDatePattern
+        [FieldProperty]
+        public string ShortDatePattern
         {
             get;
             set;
-		}
+        }
 
-		[FieldProperty]
-		public string LongTimePattern
+        [FieldProperty]
+        public string LongTimePattern
         {
             get;
             set;
-		}
+        }
 
-		[FieldProperty]
-		public string ShortTimePattern
+        [FieldProperty]
+        public string ShortTimePattern
         {
             get;
             set;
-		}
+        }
 
         [FieldProperty]
         public int FirstDayOfWeek
@@ -105,33 +105,33 @@ namespace System.Globalization
             set;
         }
 
-		[FieldProperty]
-		public string[] DayNames
+        [FieldProperty]
+        public string[] DayNames
         {
-			get;
+            get;
             set;
-		}
+        }
 
-		[FieldProperty]
+        [FieldProperty]
         public string[] AbbreviatedDayNames
         {
             get;
             set;
-		}
+        }
 
-		[FieldProperty]
+        [FieldProperty]
         public string[] ShortestDayNames
         {
             get;
             set;
-		}
+        }
 
-		[FieldProperty]
-		public string[] MonthNames
+        [FieldProperty]
+        public string[] MonthNames
         {
             get;
             set;
-		}
+        }
 
         [FieldProperty]
         public string[] MonthGenitiveNames
@@ -140,12 +140,12 @@ namespace System.Globalization
             set;
         }
 
-		[FieldProperty]
+        [FieldProperty]
         public string[] AbbreviatedMonthNames
         {
             get;
             set;
-		}
+        }
 
         [FieldProperty]
         public string[] AbbreviatedMonthGenitiveNames
@@ -183,10 +183,10 @@ namespace System.Globalization
             set;
         }
 
-		public object GetFormat(Type formatType)
+        public object GetFormat(Type formatType)
         {
-			return null;
-		}
+            return null;
+        }
 
         public object Clone()
         {
@@ -236,5 +236,5 @@ namespace System.Globalization
         {
             return null;
         }
-	}
+    }
 }

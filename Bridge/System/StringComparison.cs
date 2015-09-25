@@ -2,12 +2,12 @@ using Bridge;
 
 namespace System
 {
-	/// <summary>
+    /// <summary>
     /// Specifies the culture, case, and sort rules to be used by certain overloads of the String.Compare and String.Equals methods.
-	/// </summary>
-	[Ignore]
+    /// </summary>
+    [Ignore]
     [Enum(Emit.Value)]
-	public enum StringComparison
+    public enum StringComparison
     {
         CurrentCulture = 0,
 
@@ -20,5 +20,5 @@ namespace System
         Ordinal = 4,
 
         OrdinalIgnoreCase = 5
-	}
+    }
 }

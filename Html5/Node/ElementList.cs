@@ -23,22 +23,22 @@ namespace Bridge.Html5
         /// <returns></returns>
         public virtual Element this[int index]
         {
-			get
+            get
             {
-				return null;
-			}
-		}
+                return null;
+            }
+        }
 
         /// <summary>
         /// Returns an item in the list by its index, or null if out-of-bounds. Equivalent to nodeList[idx].
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-		[Name("item")]
+        [Name("item")]
         public virtual Element GetItem(int index)
         {
-			return null;
-		}
+            return null;
+        }
 
         /// <summary>
         /// The number of nodes in the NodeList.

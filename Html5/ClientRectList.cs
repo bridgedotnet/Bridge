@@ -21,24 +21,24 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-		public virtual ClientRect this[int index]
+        public virtual ClientRect this[int index]
         {
-			get
+            get
             {
-				return null;
-			}
-		}
+                return null;
+            }
+        }
 
         /// <summary>
         /// Returns an item in the list by its index, or null if out-of-bounds. Equivalent to nodeList[idx].
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-		[Name("item")]
+        [Name("item")]
         public virtual ClientRect GetItem(int index)
         {
-			return null;
-		}
+            return null;
+        }
 
         /// <summary>
         /// The number of items in the ClientRectList.

@@ -26,13 +26,13 @@ namespace ClientTestLibrary.Linq
             // TEST
             var persons = Person.GetPersons();
             var filteredPersonByCounts = (from p in Person.GetPersons() where p.Count < 501 select p).ToArray();
-            
+
             assert.DeepEqual(filteredPersonByCounts, new[] { persons[0], persons[1], persons[3], persons[4] },
                 "Where elements in Person array have Count below 501. Returns Person instances");
 
             // TEST
             var filteredPersonByCountAndIndex = persons.Where((p, index) => p.Count < index * 100).ToArray();
-            
+
             assert.DeepEqual(filteredPersonByCountAndIndex, new[] { persons[4] },
                 "Where elements in Person array have Count meet condition (p.Count < index * 100). Returns Person instances");
         }

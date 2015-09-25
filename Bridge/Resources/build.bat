@@ -14,7 +14,7 @@ set "sep= copyright"
 for /F "usebackq delims=" %%l in (`findstr /c:"%sep%=" Bridge.jsb`) do (
  set "line=%%l"
  set "header=!line:*%sep%=!"
- 
+
  rem remove =" characters
  set "header=!header:~2!"
 

@@ -7,9 +7,9 @@ namespace System
     [Constructor("Number")]
     public struct Int32 : IComparable, IComparable<Int32>, IEquatable<Int32>, IFormattable
     {
-		private Int32(int i)
+        private Int32(int i)
         {
-		}
+        }
 
         [InlineConst]
         public const int MinValue = -2147483648;
@@ -89,5 +89,5 @@ namespace System
         {
             return false;
         }
-	}
+    }
 }

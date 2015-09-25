@@ -593,7 +593,7 @@ Bridge.define('Bridge.Int', {
             if (Bridge.isNumber(x) && !type.instanceOf(x)) {
                 throw new Bridge.OverflowException();
             }
-                
+
             return x;
         },
 

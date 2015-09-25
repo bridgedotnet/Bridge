@@ -4,11 +4,11 @@ namespace Bridge.Html5
 {
     [Ignore]
     [Name("ClientRect")]
-	public class ClientRect
+    public class ClientRect
     {
-		public ClientRect()
+        public ClientRect()
         {
-		}
+        }
 
         /// <summary>
         /// Y-coordinate, relative to the viewport origin, of the bottom of the rectangle box. Read only.
@@ -39,5 +39,5 @@ namespace Bridge.Html5
         /// Height of the rectangle box (This is identical to bottom minus top). Read only.
         /// </summary>
         public readonly double Height;
-	}
+    }
 }

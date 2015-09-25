@@ -13,35 +13,35 @@ namespace System.Linq
         IOrderedEnumerable<TSource> ThenByDescending<TKey>(Func<TSource, TKey> keySelector, IComparer<TKey> comparer);
     }
 
-	[Ignore]
+    [Ignore]
     [IgnoreGeneric]
-	public class OrderedEnumerable<TElement> : EnumerableInstance<TElement>, IOrderedEnumerable<TElement>
+    public class OrderedEnumerable<TElement> : EnumerableInstance<TElement>, IOrderedEnumerable<TElement>
     {
-		internal OrderedEnumerable()
+        internal OrderedEnumerable()
         {
         }
 
-		IOrderedEnumerable<TElement> IOrderedEnumerable<TElement>.ThenBy<TKey>(Func<TElement, TKey> keySelector)
-        {
-            return null;
-        }
-
-		IOrderedEnumerable<TElement> IOrderedEnumerable<TElement>.ThenBy<TKey>(Func<TElement, TKey> keySelector, IComparer<TKey> comparer)
+        IOrderedEnumerable<TElement> IOrderedEnumerable<TElement>.ThenBy<TKey>(Func<TElement, TKey> keySelector)
         {
             return null;
         }
 
-		IOrderedEnumerable<TElement> IOrderedEnumerable<TElement>.ThenByDescending<TKey>(Func<TElement, TKey> keySelector)
+        IOrderedEnumerable<TElement> IOrderedEnumerable<TElement>.ThenBy<TKey>(Func<TElement, TKey> keySelector, IComparer<TKey> comparer)
         {
             return null;
         }
 
-		IOrderedEnumerable<TElement> IOrderedEnumerable<TElement>.ThenByDescending<TKey>(Func<TElement, TKey> keySelector, IComparer<TKey> comparer)
+        IOrderedEnumerable<TElement> IOrderedEnumerable<TElement>.ThenByDescending<TKey>(Func<TElement, TKey> keySelector)
         {
             return null;
         }
 
-		public OrderedEnumerable<TElement> ThenBy<TKey>(Func<TElement, TKey> keySelector)
+        IOrderedEnumerable<TElement> IOrderedEnumerable<TElement>.ThenByDescending<TKey>(Func<TElement, TKey> keySelector, IComparer<TKey> comparer)
+        {
+            return null;
+        }
+
+        public OrderedEnumerable<TElement> ThenBy<TKey>(Func<TElement, TKey> keySelector)
         {
             return null;
         }
@@ -51,14 +51,14 @@ namespace System.Linq
             return null;
         }
 
-		public OrderedEnumerable<TElement> ThenByDescending<TKey>(Func<TElement, TKey> keySelector)
+        public OrderedEnumerable<TElement> ThenByDescending<TKey>(Func<TElement, TKey> keySelector)
         {
             return null;
         }
 
-		public OrderedEnumerable<TElement> ThenByDescending<TKey>(Func<TElement, TKey> keySelector, IComparer<TKey> comparer)
+        public OrderedEnumerable<TElement> ThenByDescending<TKey>(Func<TElement, TKey> keySelector, IComparer<TKey> comparer)
         {
             return null;
         }
-	}
+    }
 }

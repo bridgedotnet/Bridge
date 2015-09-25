@@ -27,23 +27,23 @@ namespace ClientTestLibrary.Linq
 
             // TEST
             string[] strings = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
-            
+
             var textNumbers = (from n in numbers select strings[n]).ToArray();
             assert.DeepEqual(textNumbers, new[] { "one", "three", "five", "seven" }, "Selects names as items of another array");
 
             // TEST
             var anonimNames = (from p in persons select new { Name = p.Name }).ToArray();
-            
+
             object[] anonimNamesToCompare = {
                                                 new { Name = "Frank" }, new { Name = "Zeppa" }, new { Name = "John" },
                                                 new { Name = "Billy" }, new { Name = "Dora" }, new { Name = "Ian" },
                                                 new { Name = "Mary" }, new { Name = "Nemo" } };
-            
+
             assert.DeepEqual(anonimNames, anonimNamesToCompare, "Selects names as an anonymous type");
 
             // TEST
             numbers = new[] { 0, 1, 3, 3 };
-            
+
             var numberssInPlace = numbers
                                     .Select((n, index) => new
                                         {
@@ -57,7 +57,7 @@ namespace ClientTestLibrary.Linq
                                                   new { Number = 3, IsIndex = false },
                                                   new { Number = 3, IsIndex = true }
                                               };
-            
+
             assert.DeepEqual(numberssInPlace, anonimNumbersToCompare, "Selects numbers as an anonymous type");
 
             // TEST
@@ -69,9 +69,9 @@ namespace ClientTestLibrary.Linq
                  where a < b
                  select new { A = a, B = b }
                 ).ToArray();
-            
+
             object[] expectedSimplePairs = { new { A = 1, B = 3 }, new { A = 1, B = 4 }, new { A = 1, B = 2 }, new { A = 2, B = 3 }, new { A = 2, B = 4 } };
-            
+
             assert.DeepEqual(simplePairs, expectedSimplePairs, "Join two numeric arrays with one where clause");
 
             // TEST
@@ -89,7 +89,7 @@ namespace ClientTestLibrary.Linq
             object[] expectedPairs = { new { Sum = 8}, new { Sum = 7}, new { Sum = 6}, new { Sum = 3},
                                      new { Sum = 7}, new { Sum = 6}, new { Sum = 5},
                                      new { Sum = 5}, new { Sum = 4},};
-            
+
             assert.DeepEqual(pairs, expectedPairs, "Join two numeric arrays with two where clauses");
 
             // TEST
