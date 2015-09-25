@@ -25,13 +25,13 @@ namespace System.Linq
 
     [Ignore]
     [IgnoreGeneric]
-	public class Lookup<TKey, TElement> : ILookup<TKey, TElement>
+    public class Lookup<TKey, TElement> : ILookup<TKey, TElement>
     {
-		internal Lookup()
+        internal Lookup()
         {
         }
 
-		public int Count
+        public int Count
         {
             get
             {
@@ -39,7 +39,7 @@ namespace System.Linq
             }
         }
 
-		public EnumerableInstance<TElement> this[TKey key]
+        public EnumerableInstance<TElement> this[TKey key]
         {
             get
             {
@@ -47,19 +47,19 @@ namespace System.Linq
             }
         }
 
-		public bool Contains(TKey key)
+        public bool Contains(TKey key)
         {
             return false;
         }
 
-		public IEnumerator<Grouping<TKey, TElement>> GetEnumerator()
+        public IEnumerator<Grouping<TKey, TElement>> GetEnumerator()
         {
-			return null;
-		}
+            return null;
+        }
 
-		IEnumerator IEnumerable.GetEnumerator()
+        IEnumerator IEnumerable.GetEnumerator()
         {
-			return null;
-		}
-	}
+            return null;
+        }
+    }
 }

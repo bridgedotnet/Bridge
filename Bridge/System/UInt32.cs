@@ -7,9 +7,9 @@ namespace System
     [Constructor("Number")]
     public struct UInt32 : IComparable, IComparable<UInt32>, IEquatable<UInt32>, IFormattable
     {
-		private UInt32(int i)
+        private UInt32(int i)
         {
-		}
+        }
 
         [InlineConst]
         public const uint MinValue = 0;
@@ -89,5 +89,5 @@ namespace System
         {
             return false;
         }
-	}
+    }
 }

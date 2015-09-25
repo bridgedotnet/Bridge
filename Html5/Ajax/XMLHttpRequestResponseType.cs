@@ -5,9 +5,9 @@ namespace Bridge.Html5
     [Ignore]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
-	public enum XMLHttpRequestResponseType
+    public enum XMLHttpRequestResponseType
     {
-		[Name("")]
+        [Name("")]
         String,
 
         [Name("arraybuffer")]
@@ -20,5 +20,5 @@ namespace Bridge.Html5
         Json,
 
         Text
-	}
+    }
 }

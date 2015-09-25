@@ -8,11 +8,11 @@ namespace Bridge.Html5
     /// </summary>
     [Ignore]
     [Name("TreeWalker")]
-	public class TreeWalker
+    public class TreeWalker
     {
-		internal TreeWalker()
+        internal TreeWalker()
         {
-		}
+        }
 
         /// <summary>
         /// Returns a Node representing the root node as specified when the TreeWalker was created.
@@ -43,23 +43,23 @@ namespace Bridge.Html5
             return null;
         }
 
-		/// <summary>
+        /// <summary>
         /// Moves the current Node to the first visible child of the current node, and returns the found child. It also moves the current node to this child. If no such child exists, returns null and the current node is not changed.
-		/// </summary>
-		/// <returns></returns>
-		public virtual Node FirstChild()
+        /// </summary>
+        /// <returns></returns>
+        public virtual Node FirstChild()
         {
-			return null;
-		}
+            return null;
+        }
 
         /// <summary>
         /// Moves the current Node to the last visible child of the current node, and returns the found child. It also moves the current node to this child. If no such child exists, returns null and the current node is not changed.
         /// </summary>
         /// <returns></returns>
-		public virtual Node LastChild()
+        public virtual Node LastChild()
         {
-			return null;
-		}
+            return null;
+        }
 
         /// <summary>
         /// Moves the current Node to its previous sibling, if any, and returns the found sibling. I there is no such node, return null and the current node is not changed.
@@ -92,9 +92,9 @@ namespace Bridge.Html5
         /// Moves the current Node to the next visible node in the document order, and returns the found node. It also moves the current node to this one. If no such node exists, returns null and the current node is not changed.
         /// </summary>
         /// <returns></returns>
-		public virtual Node NextNode()
+        public virtual Node NextNode()
         {
-			return null;
-		}
-	}
+            return null;
+        }
+    }
 }

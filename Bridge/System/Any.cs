@@ -1,8 +1,8 @@
 ﻿namespace Bridge
 {
-	[Ignore,IgnoreGeneric,IgnoreCast]
+    [Ignore,IgnoreGeneric,IgnoreCast]
     [Name("Object")]
-	public class Any<T1, T2>
+    public class Any<T1, T2>
     {
         public static implicit operator Any<T1, T2>(T1 t)
         {
@@ -23,7 +23,7 @@
         {
             return default(T2);
         }
-	}
+    }
 
     [Ignore,IgnoreGeneric,IgnoreCast]
     [Name("Object")]

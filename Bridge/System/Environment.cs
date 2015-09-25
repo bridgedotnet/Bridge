@@ -5,14 +5,14 @@ namespace System
     [Ignore]
     public static class Environment
     {
-	    public static string NewLine
-	    {
-	        [Template("'\\n'")]
+        public static string NewLine
+        {
+            [Template("'\\n'")]
             get
-	        {
-	            return null;
-	        }
-	    }
+            {
+                return null;
+            }
+        }
 
 
         public static int CurrentManagedThreadId
@@ -23,5 +23,5 @@ namespace System
                 return 0;
             }
         }
-	}
+    }
 }

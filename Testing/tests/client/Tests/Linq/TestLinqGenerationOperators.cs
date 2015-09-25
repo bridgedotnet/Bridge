@@ -25,7 +25,7 @@ namespace ClientTestLibrary.Linq
             // TEST
             var repeatNumbers = Enumerable.Repeat(-3, 4).ToArray();
             var repeatNumbersExpected = new[] { -3, -3, -3, -3 };
-            
+
             assert.DeepEqual(repeatNumbers, repeatNumbersExpected, "Repeat() -3 four times");
         }
     }

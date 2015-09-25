@@ -6,10 +6,10 @@ Release Date     : 2015-03-10
 Current Version  : 2.5.0
 Previous Version : 2.4.0
 
-	NONE
+    NONE
 
-	If you catch any, please report in GitHub Issues
-	https://github.com/objectdotnet/Utilities/issues
+    If you catch any, please report in GitHub Issues
+    https://github.com/objectdotnet/Utilities/issues
 
 
 **************************************************************************
@@ -21,9 +21,8 @@ Current Version  : 2.4.0
 Previous Version : 2.3.0
 
 1. The FindControls<T>(Control seed, ...) methods have been revised. Now it treats a seed parameter as an INamingContainer instance.
-   It checks if a seed is an INamingContainer instance or not. If it is, it starts searching from that seed, otherwise - from seed.NamingContainer. 
+   It checks if a seed is an INamingContainer instance or not. If it is, it starts searching from that seed, otherwise - from seed.NamingContainer.
    So, now it has the same logic as the native ASP.NET FindControl method, as well as the Object.Net.Utilities's FindControl one.
 
-	If you catch any, please report in GitHub Issues
-	https://github.com/objectdotnet/Utilities/issues
-	
+    If you catch any, please report in GitHub Issues
+    https://github.com/objectdotnet/Utilities/issues

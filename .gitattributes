@@ -12,7 +12,7 @@
 *.csproj text
 *.htm text
 *.html text
-*.js eol=lf
+*.js text eol=lf
 *.jsb text
 *.json text
 *.md text
@@ -21,9 +21,9 @@
 *.py text
 *.sln text
 *.sql text
-*.d.ts eol=lf
+*.d.ts text eol=lf
 *.target text
-*.txt eol=lf
+*.txt text eol=lf
 *.xml text
 
 # These are expected to be always treated as binary files.

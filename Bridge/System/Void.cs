@@ -2,9 +2,9 @@ using Bridge;
 
 namespace System
 {
-	[Ignore, IgnoreCast]
-	[Name("Object")]
-	public struct Void
+    [Ignore, IgnoreCast]
+    [Name("Object")]
+    public struct Void
     {
-	}
+    }
 }

@@ -2,20 +2,20 @@ using Bridge;
 
 namespace System
 {
-	[Ignore]
-	[Namespace("Bridge")]
+    [Ignore]
+    [Namespace("Bridge")]
     public class InvalidCastException : Exception, IBridgeClass
     {
-		public InvalidCastException()
+        public InvalidCastException()
         {
-		}
+        }
 
-		public InvalidCastException(string message)
+        public InvalidCastException(string message)
         {
-		}
+        }
 
-		public InvalidCastException(string message, Exception innerException)
+        public InvalidCastException(string message, Exception innerException)
         {
-		}
-	}
+        }
+    }
 }

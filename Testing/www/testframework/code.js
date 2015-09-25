@@ -384,7 +384,7 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.GenericDictionaryTests', {
     keysWorks: function () {
         var $t;
         var d = Bridge.merge(new Bridge.Dictionary$2(String,String)(), [
-            ["1", "a"], 
+            ["1", "a"],
             ["2", "b"]
         ] );
         var keys = d.getKeys();
@@ -409,7 +409,7 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.GenericDictionaryTests', {
     valuesWorks: function () {
         var $t;
         var d = Bridge.merge(new Bridge.Dictionary$2(Bridge.Int,String)(), [
-            [1, "a"], 
+            [1, "a"],
             [2, "b"]
         ] );
         var values = d.getValues();
@@ -433,14 +433,14 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.GenericDictionaryTests', {
     }    ,
     indexerGetterWorksForExistingItems: function () {
         var d = Bridge.merge(new Bridge.Dictionary$2(Bridge.Int,String)(), [
-            [1, "a"], 
+            [1, "a"],
             [2, "b"]
         ] );
         Bridge.Test.Assert.areEqual(d.get(1), "a");
     },
     indexerSetterWorks: function () {
         var d = Bridge.merge(new Bridge.Dictionary$2(Bridge.Int,String)(), [
-            [1, "a"], 
+            [1, "a"],
             [2, "b"]
         ] );
         d.set(2, "c");
@@ -452,7 +452,7 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.GenericDictionaryTests', {
     },
     indexerGetterThrowsForNonExistingItems: function () {
         var d = Bridge.merge(new Bridge.Dictionary$2(Bridge.Int,String)(), [
-            [1, "a"], 
+            [1, "a"],
             [2, "b"]
         ] );
         try {
@@ -470,7 +470,7 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.GenericDictionaryTests', {
     },
     addWorks: function () {
         var d = Bridge.merge(new Bridge.Dictionary$2(Bridge.Int,String)(), [
-            [1, "a"], 
+            [1, "a"],
             [2, "b"]
         ] );
         d.add(3, "c");
@@ -481,7 +481,7 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.GenericDictionaryTests', {
     },
     addThrowsIfItemAlreadyExists: function () {
         var d = Bridge.merge(new Bridge.Dictionary$2(Bridge.Int,String)(), [
-            [1, "a"], 
+            [1, "a"],
             [2, "b"]
         ] );
         try {
@@ -499,7 +499,7 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.GenericDictionaryTests', {
     },
     clearWorks: function () {
         var d = Bridge.merge(new Bridge.Dictionary$2(Bridge.Int,String)(), [
-            [1, "a"], 
+            [1, "a"],
             [2, "b"]
         ] );
         d.clear();
@@ -507,7 +507,7 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.GenericDictionaryTests', {
     },
     containsKeyWorks: function () {
         var d = Bridge.merge(new Bridge.Dictionary$2(Bridge.Int,String)(), [
-            [1, "a"], 
+            [1, "a"],
             [2, "b"]
         ] );
         Bridge.Test.Assert.$true(d.containsKey(1));
@@ -516,7 +516,7 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.GenericDictionaryTests', {
     enumeratingWorks: function () {
         var $t;
         var d = Bridge.merge(new Bridge.Dictionary$2(String,String)(), [
-            ["1", "a"], 
+            ["1", "a"],
             ["2", "b"]
         ] );
         var count = 0;
@@ -526,7 +526,7 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.GenericDictionaryTests', {
             if (kvp.key === "1") {
                 Bridge.Test.Assert.areEqual(kvp.value, "a");
             }
-            else 
+            else
                 if (kvp.key === "2") {
                     Bridge.Test.Assert.areEqual(kvp.value, "b");
                 }
@@ -539,7 +539,7 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.GenericDictionaryTests', {
     }    ,
     removeWorks: function () {
         var d = Bridge.merge(new Bridge.Dictionary$2(Bridge.Int,String)(), [
-            [1, "a"], 
+            [1, "a"],
             [2, "b"]
         ] );
         Bridge.Test.Assert.areStrictEqual(d.remove(2), true);
@@ -549,7 +549,7 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.GenericDictionaryTests', {
     },
     tryGetValueWithIntKeysWorks: function () {
         var d = Bridge.merge(new Bridge.Dictionary$2(String,Bridge.Int)(), [
-            ["a", 1], 
+            ["a", 1],
             ["b", 2]
         ] );
         var i = { };
@@ -561,7 +561,7 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.GenericDictionaryTests', {
     },
     tryGetValueWithObjectKeysWorks: function () {
         var d = Bridge.merge(new Bridge.Dictionary$2(String,Object)(), [
-            ["a", 1], 
+            ["a", 1],
             ["b", "X"]
         ] );
         var o = { };
@@ -573,7 +573,7 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.GenericDictionaryTests', {
     },
     canUseCustomComparer: function () {
         var d = Bridge.merge(new Bridge.Dictionary$2(String, Bridge.Int)(null, new Bridge.ClientTest.Collections.Generic.GenericDictionaryTests.TestEqualityComparer()), [
-            ["a", 1], 
+            ["a", 1],
             ["b", 2]
         ] );
         d.set("a2", 100);
@@ -730,8 +730,8 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.IDictionaryTests', {
         var $t;
         var actualKeys = [3, 6, 9];
         var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary("constructor$1", Bridge.merge(new Bridge.Dictionary$2(Bridge.Int,String)(), [
-            [3, "b"], 
-            [6, "z"], 
+            [3, "b"],
+            [6, "z"],
             [9, "x"]
         ] ));
         var keys = d.getKeys();
@@ -749,8 +749,8 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.IDictionaryTests', {
     }    ,
     getItemWorks: function () {
         var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary("constructor$1", Bridge.merge(new Bridge.Dictionary$2(Bridge.Int,String)(), [
-            [3, "b"], 
-            [6, "z"], 
+            [3, "b"],
+            [6, "z"],
             [9, "x"]
         ] ));
 
@@ -779,8 +779,8 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.IDictionaryTests', {
         var $t;
         var actualValues = ["b", "z", "x"];
         var d2 = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary("constructor$1", Bridge.merge(new Bridge.Dictionary$2(Bridge.Int,String)(), [
-            [3, "b"], 
-            [6, "z"], 
+            [3, "b"],
+            [6, "z"],
             [9, "x"]
         ] ));
         var values = d2.getValues();
@@ -798,8 +798,8 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.IDictionaryTests', {
     }    ,
     containsKeyWorks: function () {
         var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary("constructor$1", Bridge.merge(new Bridge.Dictionary$2(Bridge.Int,String)(), [
-            [3, "b"], 
-            [6, "z"], 
+            [3, "b"],
+            [6, "z"],
             [9, "x"]
         ] ));
         var di2 = Bridge.cast(d, Bridge.IDictionary$2(Bridge.Int,String));
@@ -812,8 +812,8 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.IDictionaryTests', {
     },
     tryGetValueWorks: function () {
         var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary("constructor$1", Bridge.merge(new Bridge.Dictionary$2(Bridge.Int,String)(), [
-            [3, "b"], 
-            [6, "z"], 
+            [3, "b"],
+            [6, "z"],
             [9, "x"]
         ] ));
         var di2 = Bridge.cast(d, Bridge.IDictionary$2(Bridge.Int,String));
@@ -860,8 +860,8 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.IDictionaryTests', {
     },
     clearWorks: function () {
         var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary("constructor$1", Bridge.merge(new Bridge.Dictionary$2(Bridge.Int,String)(), [
-            [3, "b"], 
-            [6, "z"], 
+            [3, "b"],
+            [6, "z"],
             [9, "x"]
         ] ));
 
@@ -871,9 +871,9 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.IDictionaryTests', {
     },
     removeWorks: function () {
         var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary("constructor$1", Bridge.merge(new Bridge.Dictionary$2(Bridge.Int,String)(), [
-            [3, "b"], 
-            [6, "z"], 
-            [9, "x"], 
+            [3, "b"],
+            [6, "z"],
+            [9, "x"],
             [13, "y"]
         ] ));
         var di = Bridge.cast(d, Bridge.IDictionary$2(Bridge.Int,String));
@@ -890,9 +890,9 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.IDictionaryTests', {
     },
     setItemWorks: function () {
         var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary("constructor$1", Bridge.merge(new Bridge.Dictionary$2(Bridge.Int,String)(), [
-            [3, "b"], 
-            [6, "z"], 
-            [9, "x"], 
+            [3, "b"],
+            [6, "z"],
+            [9, "x"],
             [13, "y"]
         ] ));
         var di = Bridge.cast(d, Bridge.IDictionary$2(Bridge.Int,String));
@@ -1441,17 +1441,17 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
             ["x"]
         ] ).getCount(), 1);
         Bridge.Test.Assert.areEqual(Bridge.merge(new Bridge.List$1(String)(), [
-            ["x"], 
+            ["x"],
             ["y"]
         ] ).getCount(), 2);
     },
     indexingWorks: function () {
         Bridge.Test.Assert.areEqual(Bridge.merge(new Bridge.List$1(String)(), [
-            ["x"], 
+            ["x"],
             ["y"]
         ] ).getItem(0), "x");
         Bridge.Test.Assert.areEqual(Bridge.merge(new Bridge.List$1(String)(), [
-            ["x"], 
+            ["x"],
             ["y"]
         ] ).getItem(1), "y");
     },
@@ -1459,7 +1459,7 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
         var $t;
         var result = "";
         $t = Bridge.getEnumerator(Bridge.merge(new Bridge.List$1(String)(), [
-            ["x"], 
+            ["x"],
             ["y"]
         ] ));
         while ($t.moveNext()) {
@@ -1470,7 +1470,7 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     }    ,
     getEnumeratorWorks: function () {
         var e = Bridge.merge(new Bridge.List$1(String)(), [
-            ["x"], 
+            ["x"],
             ["y"]
         ] ).getEnumerator();
         Bridge.Test.Assert.$true(e.moveNext());
@@ -1481,7 +1481,7 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     addWorks: function () {
         var l = Bridge.merge(new Bridge.List$1(String)(), [
-            ["x"], 
+            ["x"],
             ["y"]
         ] );
         l.add("a");
@@ -1489,7 +1489,7 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     addRangeWorks: function () {
         var l = Bridge.merge(new Bridge.List$1(String)(), [
-            ["x"], 
+            ["x"],
             ["y"]
         ] );
         l.addRange(["a", "b", "c"]);
@@ -1497,7 +1497,7 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     clearWorks: function () {
         var l = Bridge.merge(new Bridge.List$1(String)(), [
-            ["x"], 
+            ["x"],
             ["y"]
         ] );
         l.clear();
@@ -1505,7 +1505,7 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     containsWorks: function () {
         var list = Bridge.merge(new Bridge.List$1(String)(), [
-            ["x"], 
+            ["x"],
             ["y"]
         ] );
         Bridge.Test.Assert.$true(list.contains("x"));
@@ -1513,8 +1513,8 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     containsUsesEqualsMethod: function () {
         var l = Bridge.merge(new Bridge.List$1(Bridge.ClientTest.Collections.Generic.ListTests.C)(), [
-            [new Bridge.ClientTest.Collections.Generic.ListTests.C(1)], 
-            [new Bridge.ClientTest.Collections.Generic.ListTests.C(2)], 
+            [new Bridge.ClientTest.Collections.Generic.ListTests.C(1)],
+            [new Bridge.ClientTest.Collections.Generic.ListTests.C(2)],
             [new Bridge.ClientTest.Collections.Generic.ListTests.C(3)]
         ] );
         Bridge.Test.Assert.$true(l.contains(new Bridge.ClientTest.Collections.Generic.ListTests.C(2)));
@@ -1522,25 +1522,25 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     sliceWithoutEndWorks: function () {
         Bridge.Test.Assert.areEqual(Bridge.merge(new Bridge.List$1(String)(), [
-            ["a"], 
-            ["b"], 
-            ["c"], 
+            ["a"],
+            ["b"],
+            ["c"],
             ["d"]
         ] ).slice(2).toArray(), ["c", "d"]);
     },
     sliceWithEndWorks: function () {
         Bridge.Test.Assert.areEqual(Bridge.merge(new Bridge.List$1(String)(), [
-            ["a"], 
-            ["b"], 
-            ["c"], 
+            ["a"],
+            ["b"],
+            ["c"],
             ["d"]
         ] ).slice(1, 3).toArray(), ["b", "c"]);
     },
     foreachWithListItemCallbackWorks: function () {
         var result = "";
         Bridge.Linq.Enumerable.from(Bridge.merge(new Bridge.List$1(String)(), [
-            ["a"], 
-            ["b"], 
+            ["a"],
+            ["b"],
             ["c"]
         ] )).forEach(function (s) {
             return result += s;
@@ -1550,8 +1550,8 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     foreachWithListCallbackWorks: function () {
         var result = "";
         Bridge.Linq.Enumerable.from(Bridge.merge(new Bridge.List$1(String)(), [
-            ["a"], 
-            ["b"], 
+            ["a"],
+            ["b"],
             ["c"]
         ] )).forEach(function (s, i) {
             return result += s + i;
@@ -1563,8 +1563,8 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     indexOfWithoutStartIndexUsesEqualsMethod: function () {
         var l = Bridge.merge(new Bridge.List$1(Bridge.ClientTest.Collections.Generic.ListTests.C)(), [
-            [new Bridge.ClientTest.Collections.Generic.ListTests.C(1)], 
-            [new Bridge.ClientTest.Collections.Generic.ListTests.C(2)], 
+            [new Bridge.ClientTest.Collections.Generic.ListTests.C(1)],
+            [new Bridge.ClientTest.Collections.Generic.ListTests.C(2)],
             [new Bridge.ClientTest.Collections.Generic.ListTests.C(3)]
         ] );
         Bridge.Test.Assert.areEqual(l.indexOf(new Bridge.ClientTest.Collections.Generic.ListTests.C(2)), 1);
@@ -1572,23 +1572,23 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     indexOfWithStartIndexWorks: function () {
         Bridge.Test.Assert.areEqual(Bridge.merge(new Bridge.List$1(String)(), [
-            ["a"], 
-            ["b"], 
-            ["c"], 
+            ["a"],
+            ["b"],
+            ["c"],
             ["b"]
         ] ).indexOf("b", 2), 3);
     },
     indexOfWithStartIndexUsesEqualsMethod: function () {
         Bridge.Test.Assert.areEqual(Bridge.merge(new Bridge.List$1(Bridge.ClientTest.Collections.Generic.ListTests.C)(), [
-            [new Bridge.ClientTest.Collections.Generic.ListTests.C(1)], 
-            [new Bridge.ClientTest.Collections.Generic.ListTests.C(2)], 
-            [new Bridge.ClientTest.Collections.Generic.ListTests.C(3)], 
+            [new Bridge.ClientTest.Collections.Generic.ListTests.C(1)],
+            [new Bridge.ClientTest.Collections.Generic.ListTests.C(2)],
+            [new Bridge.ClientTest.Collections.Generic.ListTests.C(3)],
             [new Bridge.ClientTest.Collections.Generic.ListTests.C(2)]
         ] ).indexOf(new Bridge.ClientTest.Collections.Generic.ListTests.C(2), 2), 3);
     },
     insertWorks: function () {
         var l = Bridge.merge(new Bridge.List$1(String)(), [
-            ["x"], 
+            ["x"],
             ["y"]
         ] );
         l.insert(1, "a");
@@ -1596,7 +1596,7 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     insertRangeWorks: function () {
         var l = Bridge.merge(new Bridge.List$1(String)(), [
-            ["x"], 
+            ["x"],
             ["y"]
         ] );
 
@@ -1608,25 +1608,25 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     joinWithoutDelimiterWorks: function () {
         Bridge.Test.Assert.areEqual(Bridge.merge(new Bridge.List$1(String)(), [
-            ["a"], 
-            ["b"], 
-            ["c"], 
+            ["a"],
+            ["b"],
+            ["c"],
             ["b"]
         ] ).join(), "a,b,c,b");
     },
     joinWithDelimiterWorks: function () {
         Bridge.Test.Assert.areEqual(Bridge.merge(new Bridge.List$1(String)(), [
-            ["a"], 
-            ["b"], 
-            ["c"], 
+            ["a"],
+            ["b"],
+            ["c"],
             ["b"]
         ] ).join("|"), "a|b|c|b");
     },
     removeWorks: function () {
         var list = Bridge.merge(new Bridge.List$1(String)(), [
-            ["a"], 
-            ["b"], 
-            ["c"], 
+            ["a"],
+            ["b"],
+            ["c"],
             ["a"]
         ] );
         Bridge.Test.Assert.$true(list.remove("a"));
@@ -1634,9 +1634,9 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     removeReturnsFalseIfTheElementWasNotFound: function () {
         var list = Bridge.merge(new Bridge.List$1(String)(), [
-            ["a"], 
-            ["b"], 
-            ["c"], 
+            ["a"],
+            ["b"],
+            ["c"],
             ["a"]
         ] );
         Bridge.Test.Assert.$false(list.remove("d"));
@@ -1644,9 +1644,9 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     removeCanRemoveNullItem: function () {
         var list = Bridge.merge(new Bridge.List$1(String)(), [
-            ["a"], 
-            [null], 
-            ["c"], 
+            ["a"],
+            [null],
+            ["c"],
             [null]
         ] );
         Bridge.Test.Assert.$true(list.remove(null));
@@ -1654,8 +1654,8 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     removeUsesEqualsMethod: function () {
         var list = Bridge.merge(new Bridge.List$1(Bridge.ClientTest.Collections.Generic.ListTests.C)(), [
-            [new Bridge.ClientTest.Collections.Generic.ListTests.C(1)], 
-            [new Bridge.ClientTest.Collections.Generic.ListTests.C(2)], 
+            [new Bridge.ClientTest.Collections.Generic.ListTests.C(1)],
+            [new Bridge.ClientTest.Collections.Generic.ListTests.C(2)],
             [new Bridge.ClientTest.Collections.Generic.ListTests.C(3)]
         ] );
         list.remove(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
@@ -1665,9 +1665,9 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     removeAtWorks: function () {
         var list = Bridge.merge(new Bridge.List$1(String)(), [
-            ["a"], 
-            ["b"], 
-            ["c"], 
+            ["a"],
+            ["b"],
+            ["c"],
             ["a"]
         ] );
         list.removeAt(1);
@@ -1675,9 +1675,9 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     removeRangeWorks: function () {
         var list = Bridge.merge(new Bridge.List$1(String)(), [
-            ["a"], 
-            ["b"], 
-            ["c"], 
+            ["a"],
+            ["b"],
+            ["c"],
             ["d"]
         ] );
         list.removeRange(1, 2);
@@ -1685,11 +1685,11 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     reverseWorks: function () {
         var list = Bridge.merge(new Bridge.List$1(Bridge.Int)(), [
-            [1], 
-            [3], 
-            [4], 
-            [1], 
-            [3], 
+            [1],
+            [3],
+            [4],
+            [1],
+            [3],
             [2]
         ] );
         list.reverse();
@@ -1697,10 +1697,10 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     sortWithDefaultCompareWorks: function () {
         var list = Bridge.merge(new Bridge.List$1(Bridge.Int)(), [
-            [1], 
-            [6], 
-            [6], 
-            [4], 
+            [1],
+            [6],
+            [6],
+            [4],
             [2]
         ] );
         list.sort();
@@ -1708,10 +1708,10 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     sortWithCompareCallbackWorks: function () {
         var list = Bridge.merge(new Bridge.List$1(Bridge.Int)(), [
-            [1], 
-            [6], 
-            [6], 
-            [4], 
+            [1],
+            [6],
+            [6],
+            [4],
             [2]
         ] );
         list.sort(function (x, y) {
@@ -1721,10 +1721,10 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     sortWithIComparerWorks: function () {
         var list = Bridge.merge(new Bridge.List$1(Bridge.Int)(), [
-            [1], 
-            [6], 
-            [6], 
-            [4], 
+            [1],
+            [6],
+            [6],
+            [4],
             [2]
         ] );
         list.sort(Bridge.fn.bind(new Bridge.ClientTest.Collections.Generic.ListTests.TestReverseComparer(), new Bridge.ClientTest.Collections.Generic.ListTests.TestReverseComparer().compare));
@@ -1733,7 +1733,7 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     foreachWhenCastToIEnumerableWorks: function () {
         var $t;
         var list = Bridge.merge(new Bridge.List$1(String)(), [
-            ["x"], 
+            ["x"],
             ["y"]
         ] );
         var result = "";
@@ -1746,7 +1746,7 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     }    ,
     iEnumerableGetEnumeratorWorks: function () {
         var l = Bridge.cast(Bridge.merge(new Bridge.List$1(String)(), [
-            ["x"], 
+            ["x"],
             ["y"]
         ] ), Bridge.IEnumerable$1(String));
         var e = Bridge.getEnumerator(l, "$1");
@@ -1758,16 +1758,16 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     iCollectionCountWorks: function () {
         var l = Bridge.merge(new Bridge.List$1(String)(), [
-            ["x"], 
-            ["y"], 
+            ["x"],
+            ["y"],
             ["z"]
         ] );
         Bridge.Test.Assert.areEqual(Bridge.Array.getCount(l), 3);
     },
     iCollectionAddWorks: function () {
         var l = Bridge.merge(new Bridge.List$1(String)(), [
-            ["x"], 
-            ["y"], 
+            ["x"],
+            ["y"],
             ["z"]
         ] );
         Bridge.Array.add(l, "a");
@@ -1775,8 +1775,8 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     iCollectionClearWorks: function () {
         var l = Bridge.merge(new Bridge.List$1(String)(), [
-            ["x"], 
-            ["y"], 
+            ["x"],
+            ["y"],
             ["z"]
         ] );
         Bridge.Array.clear(l);
@@ -1784,8 +1784,8 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     iCollectionContainsWorks: function () {
         var l = Bridge.merge(new Bridge.List$1(String)(), [
-            ["x"], 
-            ["y"], 
+            ["x"],
+            ["y"],
             ["z"]
         ] );
         Bridge.Test.Assert.$true(Bridge.Array.contains(l, "y"));
@@ -1793,8 +1793,8 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     iCollectionContainsUsesEqualsMethod: function () {
         var l = Bridge.merge(new Bridge.List$1(Bridge.ClientTest.Collections.Generic.ListTests.C)(), [
-            [new Bridge.ClientTest.Collections.Generic.ListTests.C(1)], 
-            [new Bridge.ClientTest.Collections.Generic.ListTests.C(2)], 
+            [new Bridge.ClientTest.Collections.Generic.ListTests.C(1)],
+            [new Bridge.ClientTest.Collections.Generic.ListTests.C(2)],
             [new Bridge.ClientTest.Collections.Generic.ListTests.C(3)]
         ] );
         Bridge.Test.Assert.$true(Bridge.Array.contains(l, new Bridge.ClientTest.Collections.Generic.ListTests.C(2)));
@@ -1802,8 +1802,8 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     iCollectionRemoveWorks: function () {
         var l = Bridge.merge(new Bridge.List$1(String)(), [
-            ["x"], 
-            ["y"], 
+            ["x"],
+            ["y"],
             ["z"]
         ] );
         Bridge.Test.Assert.$true(Bridge.Array.remove(l, "y"));
@@ -1814,9 +1814,9 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     iCollectionRemoveCanRemoveNullItem: function () {
         var list = Bridge.merge(new Bridge.List$1(String)(), [
-            ["a"], 
-            [null], 
-            ["c"], 
+            ["a"],
+            [null],
+            ["c"],
             [null]
         ] );
         Bridge.Test.Assert.$true(Bridge.Array.remove(list, null));
@@ -1824,8 +1824,8 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     iCollectionRemoveUsesEqualsMethod: function () {
         var list = Bridge.merge(new Bridge.List$1(Bridge.ClientTest.Collections.Generic.ListTests.C)(), [
-            [new Bridge.ClientTest.Collections.Generic.ListTests.C(1)], 
-            [new Bridge.ClientTest.Collections.Generic.ListTests.C(2)], 
+            [new Bridge.ClientTest.Collections.Generic.ListTests.C(1)],
+            [new Bridge.ClientTest.Collections.Generic.ListTests.C(2)],
             [new Bridge.ClientTest.Collections.Generic.ListTests.C(3)]
         ] );
         Bridge.Array.remove(list, new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
@@ -1835,8 +1835,8 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     iListIndexingWorks: function () {
         var l = Bridge.merge(new Bridge.List$1(String)(), [
-            ["x"], 
-            ["y"], 
+            ["x"],
+            ["y"],
             ["z"]
         ] );
         Bridge.Test.Assert.areEqual(Bridge.Array.getItem(l, 1), "y");
@@ -1845,8 +1845,8 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     iListIndexOfWorks: function () {
         var l = Bridge.merge(new Bridge.List$1(String)(), [
-            ["x"], 
-            ["y"], 
+            ["x"],
+            ["y"],
             ["z"]
         ] );
         Bridge.Test.Assert.areEqual(Bridge.Array.indexOf(l, "y"), 1);
@@ -1854,8 +1854,8 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     iListIndexOfUsesEqualsMethod: function () {
         var l = Bridge.merge(new Bridge.List$1(Bridge.ClientTest.Collections.Generic.ListTests.C)(), [
-            [new Bridge.ClientTest.Collections.Generic.ListTests.C(1)], 
-            [new Bridge.ClientTest.Collections.Generic.ListTests.C(2)], 
+            [new Bridge.ClientTest.Collections.Generic.ListTests.C(1)],
+            [new Bridge.ClientTest.Collections.Generic.ListTests.C(2)],
             [new Bridge.ClientTest.Collections.Generic.ListTests.C(3)]
         ] );
         Bridge.Test.Assert.areEqual(Bridge.Array.indexOf(l, new Bridge.ClientTest.Collections.Generic.ListTests.C(2)), 1);
@@ -1863,8 +1863,8 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     iListInsertWorks: function () {
         var l = Bridge.merge(new Bridge.List$1(String)(), [
-            ["x"], 
-            ["y"], 
+            ["x"],
+            ["y"],
             ["z"]
         ] );
         Bridge.Array.insert(l, 1, "a");
@@ -1872,8 +1872,8 @@ Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
     },
     iListRemoveAtWorks: function () {
         var l = Bridge.merge(new Bridge.List$1(String)(), [
-            ["x"], 
-            ["y"], 
+            ["x"],
+            ["y"],
             ["z"]
         ] );
         Bridge.Array.removeAt(l, 1);
@@ -2224,16 +2224,16 @@ Bridge.define('Bridge.ClientTest.DecimalMathTests.Logger', {
                     var d1 = Bridge.cast(o, Bridge.Decimal);
                     if (d1.equals(Bridge.ClientTest.DecimalMathTests.maxValue))
                         result[j] = "DecimalMathTests.MaxValue";
-                    else 
+                    else
                         if (d1.equals(Bridge.ClientTest.DecimalMathTests.minValue))
                             result[j] = "DecimalMathTests.MinValue";
-                        else 
+                        else
                             if (d1.equals(Bridge.Decimal.MinusOne))
                                 result[j] = "decimal.MinusOne";
-                            else 
+                            else
                                 if (d1.equals(Bridge.Decimal.One))
                                     result[j] = "decimal.One";
-                                else 
+                                else
                                     result[j] = d1.toString() + "m";
                 }
                 else  {

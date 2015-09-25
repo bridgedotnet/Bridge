@@ -44,10 +44,10 @@ namespace Bridge.Html5
 
         /// <summary>
         /// The readiness state of the track.
-        /// NONE 	    0 	Indicates that the text track's cues have not been obtained.
-        /// LOADING 	1 	Indicates that the text track is loading and there have been no fatal errors encountered so far. Further cues might still be added to the track by the parser.
-        /// LOADED 	    2 	Indicates that the text track has been loaded with no fatal errors.
-        /// ERROR 	    3 	Indicates that the text track was enabled, but when the user agent attempted to obtain it, this failed in some way. Some or all of the cues are likely missing and will not be obtained.
+        /// NONE         0     Indicates that the text track's cues have not been obtained.
+        /// LOADING     1     Indicates that the text track is loading and there have been no fatal errors encountered so far. Further cues might still be added to the track by the parser.
+        /// LOADED         2     Indicates that the text track has been loaded with no fatal errors.
+        /// ERROR         3     Indicates that the text track was enabled, but when the user agent attempted to obtain it, this failed in some way. Some or all of the cues are likely missing and will not be obtained.
         /// </summary>
         public readonly int ReadyState;
 

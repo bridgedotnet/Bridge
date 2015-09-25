@@ -79,7 +79,7 @@ namespace System
         }
 
         public extern decimal Abs();
-        
+
         [Name("ceil")]
         public extern decimal Ceiling();
 

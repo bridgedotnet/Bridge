@@ -10,24 +10,24 @@ namespace Bridge.Html5
     /// </summary>
     [Ignore]
     [Name("DOMTokenList")]
-	public class DOMTokenList : IEnumerable<string>
+    public class DOMTokenList : IEnumerable<string>
     {
         protected internal DOMTokenList()
         {
-		}
+        }
 
         /// <summary>
         /// Returns an item in the list by its index (or undefined if the number is greater than or equal to the length of the list, prior to Gecko 7.0 returned null)
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-		public virtual string this[int index]
+        public virtual string this[int index]
         {
-			get
+            get
             {
-				return null;
-			}
-		}
+                return null;
+            }
+        }
 
         /// <summary>
         /// Returns an item in the list by its index (or undefined if the number is greater than or equal to the length of the list, prior to Gecko 7.0 returned null)
@@ -54,27 +54,27 @@ namespace Bridge.Html5
         /// adds token to the underlying string
         /// </summary>
         /// <param name="token"></param>
-		public virtual void Add(string token)
+        public virtual void Add(string token)
         {
-		}
+        }
 
         /// <summary>
         /// Remove token from the underlying string
         /// </summary>
         /// <param name="token"></param>
-		public virtual void Remove(string token)
+        public virtual void Remove(string token)
         {
-		}
+        }
 
         /// <summary>
         /// Removes token from string and returns false. If token doesn't exist it's added and the function returns true
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>
-		public virtual bool Toggle(string token)
+        public virtual bool Toggle(string token)
         {
-			return false;
-		}
+            return false;
+        }
 
         /// <summary>
         /// Removes token from string and returns false. If token doesn't exist it's added and the function returns true
@@ -82,10 +82,10 @@ namespace Bridge.Html5
         /// <param name="token"></param>
         /// <param name="force"></param>
         /// <returns></returns>
-		public virtual bool Toggle(string token, bool force)
+        public virtual bool Toggle(string token, bool force)
         {
-			return false;
-		}
+            return false;
+        }
 
         public readonly int Length;
 
@@ -98,5 +98,5 @@ namespace Bridge.Html5
         {
             return null;
         }
-	}
+    }
 }

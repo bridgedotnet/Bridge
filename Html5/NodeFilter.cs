@@ -4,24 +4,24 @@ using Bridge;
 
 namespace Bridge.Html5
 {
-	/// <summary>
+    /// <summary>
     /// types of Node that must to be presented
-	/// </summary>
+    /// </summary>
     [Flags]
     [Ignore]
     [Enum(Emit.Value)]
     [Name("Number")]
-	public enum NodeFilter
+    public enum NodeFilter
     {
-		/// <summary>
+        /// <summary>
         /// Shows all nodes.
-		/// </summary>
+        /// </summary>
         ShowAll = -1,
 
         /// <summary>
         /// Shows attribute Attr nodes. This is meaningful only when creating a NodeIterator with an Attr node as its root; in this case, it means that the attribute node will appear in the first position of the iteration or traversal. Since attributes are never children of other nodes, they do not appear when traversing over the document tree.
         /// </summary>
-		ShowAttribute = 2,
+        ShowAttribute = 2,
 
         /// <summary>
         /// Shows CDATASection nodes.
@@ -41,7 +41,7 @@ namespace Bridge.Html5
         /// <summary>
         /// Shows DocumentFragment nodes.
         /// </summary>
-		ShowDocumentFragment = 1024,
+        ShowDocumentFragment = 1024,
 
         /// <summary>
         /// Shows DocumentType nodes.
@@ -51,7 +51,7 @@ namespace Bridge.Html5
         /// <summary>
         /// Shows Element nodes.
         /// </summary>
-		ShowElement = 1,
+        ShowElement = 1,
 
         /// <summary>
         /// Shows Entity nodes. This is meaningful only when creating a NodeIterator with an Entity node as its root; in this case, it means that the Entity node will appear in the first position of the traversal. Since entities are not part of the document tree, they do not appear when traversing over the document tree.
@@ -77,5 +77,5 @@ namespace Bridge.Html5
         /// Shows Text nodes.
         /// </summary>
         ShowText = 4
-	}
+    }
 }

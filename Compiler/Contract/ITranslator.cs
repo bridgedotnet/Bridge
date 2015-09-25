@@ -35,7 +35,7 @@ namespace Bridge.Contract
         bool Recursive { get; set; }
         string Configuration { get; set; }
         List<string> DefineConstants { get; set; }
-		IEnumerable<AssemblyDefinition> References { get; set; }
+        IEnumerable<AssemblyDefinition> References { get; set; }
         void Flush(string outputPath, string fileName);
     }
 }

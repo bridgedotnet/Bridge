@@ -7,9 +7,9 @@ namespace System
     [Constructor("Number")]
     public struct UInt64 : IComparable, IComparable<UInt64>, IEquatable<UInt64>, IFormattable
     {
-		private UInt64(int i)
+        private UInt64(int i)
         {
-		}
+        }
 
         [InlineConst]
         public const ulong MinValue = 0;
@@ -89,5 +89,5 @@ namespace System
         {
             return false;
         }
-	}
+    }
 }

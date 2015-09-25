@@ -4,21 +4,21 @@ using System.Runtime.CompilerServices;
 
 namespace System.Collections.ObjectModel
 {
-	[Ignore]
+    [Ignore]
     [Namespace("Bridge")]
-	public class ReadOnlyCollection<T> : IList<T>
+    public class ReadOnlyCollection<T> : IList<T>
     {
         public ReadOnlyCollection(IList<T> list)
         {
         }
 
-		public int Count
+        public int Count
         {
             get;
             private set;
         }
 
-		public T this[int index]
+        public T this[int index]
         {
             [Template("get({0})")]
             get
@@ -27,20 +27,20 @@ namespace System.Collections.ObjectModel
             }
         }
 
-		public bool Contains(T value)
+        public bool Contains(T value)
         {
-			return false;
-		}
+            return false;
+        }
 
-		public IEnumerator<T> GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
-			return null;
-		}
+            return null;
+        }
 
-		public int IndexOf(T value)
+        public int IndexOf(T value)
         {
-			return 0;
-		}
+            return 0;
+        }
 
         T IList<T>.this[int index]
         {
@@ -54,30 +54,30 @@ namespace System.Collections.ObjectModel
             }
         }
 
-		void ICollection<T>.Add(T value)
+        void ICollection<T>.Add(T value)
         {
-		}
+        }
 
-		void ICollection<T>.Clear()
+        void ICollection<T>.Clear()
         {
-		}
+        }
 
-		void IList<T>.Insert(int index, T value)
+        void IList<T>.Insert(int index, T value)
         {
-		}
+        }
 
-		bool ICollection<T>.Remove(T value)
+        bool ICollection<T>.Remove(T value)
         {
-			return false;
-		}
+            return false;
+        }
 
-		void IList<T>.RemoveAt(int index)
+        void IList<T>.RemoveAt(int index)
         {
-		}
+        }
 
-		IEnumerator IEnumerable.GetEnumerator()
+        IEnumerator IEnumerable.GetEnumerator()
         {
-			return null;
-		}
-	}
+            return null;
+        }
+    }
 }

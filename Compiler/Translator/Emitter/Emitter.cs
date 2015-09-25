@@ -36,7 +36,7 @@ namespace Bridge.Translator
                 this.JsDoc.Init();
                 block.Emit();
             }
-            
+
             return this.TransformOutputs();
         }
 

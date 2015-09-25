@@ -350,7 +350,7 @@
             if (Bridge.Array.getRank(arr) !== 1) {
                 throw new Bridge.Exception("Only single dimension arrays are supported here.");
             }
- 
+
             var i = index,
                 j = index + length - 1;
 

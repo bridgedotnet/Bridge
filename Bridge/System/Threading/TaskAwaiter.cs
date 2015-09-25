@@ -4,11 +4,11 @@ using Bridge;
 
 namespace System.Threading.Tasks
 {
-	[Ignore]
-	[Name("Bridge.Task")]
-	public class TaskAwaiter : INotifyCompletion
+    [Ignore]
+    [Name("Bridge.Task")]
+    public class TaskAwaiter : INotifyCompletion
     {
-		internal TaskAwaiter()
+        internal TaskAwaiter()
         {
         }
 
@@ -22,20 +22,20 @@ namespace System.Threading.Tasks
         }
 
         [Name("continueWith")]
-		public void OnCompleted(Action continuation)
+        public void OnCompleted(Action continuation)
         {
         }
 
-		public void GetResult()
+        public void GetResult()
         {
         }
-	}
+    }
 
-	[Ignore]
-	[Name("Bridge.Task")]
-	public class TaskAwaiter<TResult> : INotifyCompletion
+    [Ignore]
+    [Name("Bridge.Task")]
+    public class TaskAwaiter<TResult> : INotifyCompletion
     {
-		internal TaskAwaiter()
+        internal TaskAwaiter()
         {
         }
 
@@ -49,13 +49,13 @@ namespace System.Threading.Tasks
         }
 
         [Name("continueWith")]
-		public void OnCompleted(Action continuation)
+        public void OnCompleted(Action continuation)
         {
         }
 
-		public TResult GetResult()
+        public TResult GetResult()
         {
             return default(TResult);
         }
-	}
+    }
 }

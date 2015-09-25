@@ -55,7 +55,7 @@ namespace Bridge.Translator
                 }
                 else
                 {
-                    new BreakBlock(this.Emitter, this.YieldBreakStatement).Emit();    
+                    new BreakBlock(this.Emitter, this.YieldBreakStatement).Emit();
                 }
             }
         }

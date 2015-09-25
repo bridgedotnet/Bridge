@@ -230,7 +230,7 @@ namespace Bridge.Translator
 
                     this.WriteDot();
                 }
-                
+
 
                 if (method != null)
                 {
@@ -479,7 +479,7 @@ namespace Bridge.Translator
 
                                 this.Write("1");
                             }
-                            
+
                             this.WriteCloseParentheses();
                         }
                         else

@@ -530,7 +530,7 @@ namespace Bridge.Contract
                 {
                    //return name1.Length.CompareTo(name2.Length);
                 }
-                
+
                 return string.Compare(name1, name2);
             });
         }

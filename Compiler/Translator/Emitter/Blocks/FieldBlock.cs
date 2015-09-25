@@ -164,7 +164,7 @@ namespace Bridge.Translator
                     }
                     else
                     {
-                        this.Write("new " + BridgeTypes.ToJsName((AstType)primitiveExpr.Value, this.Emitter) + "()");    
+                        this.Write("new " + BridgeTypes.ToJsName((AstType)primitiveExpr.Value, this.Emitter) + "()");
                     }
                 }
                 else
