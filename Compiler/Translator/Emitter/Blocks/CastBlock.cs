@@ -263,12 +263,12 @@ namespace Bridge.Translator
             }
             else if (resolveResult.Type.Kind == TypeKind.Delegate)
             {
-                this.Write("Function"); 
-            }   
+                this.Write("Function");
+            }
             else if (resolveResult.Type.Kind == TypeKind.Array)
             {
-                this.Write("Array"); 
-            }   
+                this.Write("Array");
+            }
             else
             {
                 astType.AcceptVisitor(this.Emitter);

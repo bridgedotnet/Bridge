@@ -380,7 +380,7 @@ namespace Bridge.Translator
                 int count = this.Emitter.Writers.Count;
                 if (count == 0 && !thisAssignment && !special)
                 {
-                    this.Write("= ");    
+                    this.Write("= ");
                 }
             }
             else if (!isEvent)

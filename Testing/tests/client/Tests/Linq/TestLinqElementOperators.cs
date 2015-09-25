@@ -13,7 +13,7 @@ namespace ClientTestLibrary.Linq
             // TEST
             var persons = Person.GetPersons();
             var person3 = (from p in Person.GetPersons() where p.ID == 3 select p).First();
-            
+
             assert.DeepEqual(person3, Person.GetPersons()[2], "First() with ID = 3");
             assert.DeepEqual(persons.First(x => x.ID == 3), Person.GetPersons()[2], "First() with ID = 3 by lambda");
             assert.DeepEqual(persons.Where(x => x.ID == 3).First(), Person.GetPersons()[2], "First() with Where() with ID = 3 by lambda");
@@ -30,7 +30,7 @@ namespace ClientTestLibrary.Linq
 
             // TEST
             var lastPerson = (from p in Person.GetPersons() select p).Last();
-            
+
             assert.DeepEqual(lastPerson, Person.GetPersons()[7], "Last() person");
             assert.DeepEqual(persons.Last(x => x.ID == 4), Person.GetPersons()[3], "Last() with ID = 4 by lambda");
             assert.DeepEqual(persons.Last(x => x.Group == "B"), Person.GetPersons()[6], "Last() with Group = 'B' by lambda");
@@ -46,7 +46,7 @@ namespace ClientTestLibrary.Linq
             // TEST
             int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
             int elementAt1 = (from n in numbers where n > 5 select n).ElementAt(1);
-            
+
             assert.DeepEqual(elementAt1, 8, "ElementAt() should return 8");
             assert.Throws(TestLinqElementOperators.ThrowExceptionOnElementAt1, "ElementAt() should throw exception if no element found");
             assert.Throws(TestLinqElementOperators.ThrowExceptionOnElementAt2, "ElementAt() should throw exception on empty collection");
@@ -60,7 +60,7 @@ namespace ClientTestLibrary.Linq
             assert.DeepEqual(elementAt2OrDefault, 6, "ElementAtOrDefault() should return 6");
 
             // TEST
-            int elementAt100OrDefault = (from n in numbers where n > 5 select n).ElementAtOrDefault(100);            
+            int elementAt100OrDefault = (from n in numbers where n > 5 select n).ElementAtOrDefault(100);
             assert.DeepEqual(elementAt100OrDefault, 0, "ElementAtOrDefault() should return 0");
         }
 

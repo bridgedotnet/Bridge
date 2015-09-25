@@ -873,8 +873,8 @@ namespace Bridge.Html5
         /// <param name="dirtyHeight">
         /// Height of the rectangle to be painted, in the origin image data. Defaults to the height of the image data.
         /// </param>
-        public virtual void PutImageData(ImageData imagedata, int dx, int dy, 
-                                         Any<uint?, int?> dirtyX, Any<uint?, int?> dirtyY, 
+        public virtual void PutImageData(ImageData imagedata, int dx, int dy,
+                                         Any<uint?, int?> dirtyX, Any<uint?, int?> dirtyY,
                                          Any<uint?, int?> dirtyWidth, Any<uint?, int?> dirtyHeight)
         {
             return;

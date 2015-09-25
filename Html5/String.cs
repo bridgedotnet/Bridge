@@ -23,7 +23,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The toLocaleLowerCase() method returns the calling string value converted to lower case, according to any locale-specific case mappings.
         /// </summary>
-        /// <returns></returns>        
+        /// <returns></returns>
         [Template("{this}.toLocaleLowerCase()")]
         public static string ToLocaleLowerCase(this string str)
         {
@@ -48,6 +48,6 @@ namespace Bridge.Html5
         public static string ToLocaleUpperCase(this string str)
         {
             return null;
-        }        
+        }
     }
 }

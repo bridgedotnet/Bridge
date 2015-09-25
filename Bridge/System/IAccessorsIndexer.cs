@@ -2,8 +2,8 @@ using Bridge;
 
 namespace Bridge
 {
-	[Ignore]
+    [Ignore]
     public interface IAccessorsIndexer
     {
-	}
+    }
 }

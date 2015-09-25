@@ -47,7 +47,7 @@ namespace ClientTestLibrary.Linq
                     (from n in numbers
                      group n by n % 5 into g
                      select new { Remainder = g.Key, Numbers = g.ToArray() }).ToArray();
-           
+
             var numberGroupsExpected = new[]
                 {
                     new {Remainder = 2, Numbers = new[] { 2 } },
@@ -63,7 +63,7 @@ namespace ClientTestLibrary.Linq
                     (from w in words
                      group w by w[0] into g
                      select new { FirstLetter = g.Key, Words = g.ToArray() }).ToArray();
-            
+
             var wordGroupsExpected = new[]
                 {
                     new {FirstLetter = '1', Words = new[] { "1.one", "11.eleven" } },
@@ -202,7 +202,7 @@ namespace ClientTestLibrary.Linq
                 {
                     Number = 3,
                     Words = new []
-                    { 
+                    {
                         new
                         {
                             Letter = '3',
@@ -226,7 +226,7 @@ namespace ClientTestLibrary.Linq
                 {
                     Number = 1,
                     Words = new []
-                    { 
+                    {
                         new
                         {
                             Letter = '1',

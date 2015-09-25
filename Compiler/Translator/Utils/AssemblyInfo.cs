@@ -193,8 +193,8 @@ namespace Bridge.Translator
         public string Configuration { get; set; }
 
         public List<string> DefineConstants { get; set; }
-		
-		public bool InjectScriptToAssembly { get; set; }
+
+        public bool InjectScriptToAssembly { get; set; }
 
         public string Locales
         {
@@ -209,7 +209,7 @@ namespace Bridge.Translator
 
         public string LocalesFileName
         {
-            get; 
+            get;
             set;
         }
 
@@ -221,7 +221,7 @@ namespace Bridge.Translator
 
         public bool CombineScripts
         {
-            get; 
+            get;
             set;
         }
     }

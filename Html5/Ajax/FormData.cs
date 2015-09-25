@@ -6,24 +6,24 @@ namespace Bridge.Html5
     /// XMLHttpRequest Level 2 adds support for the new FormData interface. FormData objects provide a way to easily construct a set of key/value pairs representing form fields and their values, which can then be easily sent using the XMLHttpRequest send() method.
     /// It uses the same format a form would use if the encoding type were set to "multipart/form-data".
     /// </summary>
-	[Ignore]
+    [Ignore]
     [Name("FormData")]
-	public class FormData
+    public class FormData
     {
         /// <summary>
         ///
         /// </summary>
-		public FormData()
+        public FormData()
         {
-		}
+        }
 
         /// <summary>
         ///
         /// </summary>
         /// <param name="form">HTML Form Element to send for keys/values. It will also encode file input content.</param>
-		public FormData(FormElement form)
+        public FormData(FormElement form)
         {
-		}
+        }
 
         /// <summary>
         /// Appends a key/value pair to the FormData object.
@@ -39,9 +39,9 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="name">The name of the field whose data is contained in value.</param>
         /// <param name="value">The field's value. Can be a Blob, File, or a string, if neither, the value is converted to a string.</param>
-		public virtual void Append(string name, Blob value)
+        public virtual void Append(string name, Blob value)
         {
-		}
+        }
 
         /// <summary>
         /// Appends a key/value pair to the FormData object.
@@ -58,9 +58,9 @@ namespace Bridge.Html5
         /// <param name="name">The name of the field whose data is contained in value.</param>
         /// <param name="value">The field's value. Can be a Blob, File, or a string, if neither, the value is converted to a string.</param>
         /// <param name="filename">The filename reported to the server, when a Blob or File is passed as second paramter. The default filename for Blob objects is "blob".</param>
-		public virtual void Append(string name, Blob value, string filename)
+        public virtual void Append(string name, Blob value, string filename)
         {
-		}
+        }
 
         /// <summary>
         /// Appends a key/value pair to the FormData object.
@@ -71,5 +71,5 @@ namespace Bridge.Html5
         public virtual void Append(string name, File value, string filename)
         {
         }
-	}
+    }
 }

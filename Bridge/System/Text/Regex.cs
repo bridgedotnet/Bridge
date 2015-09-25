@@ -2,96 +2,96 @@ using Bridge;
 
 namespace System.Text.RegularExpressions
 {
-	[Ignore]
-	[Name("RegExp")]
-	public sealed class Regex
+    [Ignore]
+    [Name("RegExp")]
+    public sealed class Regex
     {
-		public Regex(string pattern)
+        public Regex(string pattern)
         {
-		}
+        }
 
-		public Regex(string pattern, string flags)
+        public Regex(string pattern, string flags)
         {
-		}
+        }
 
         [FieldProperty]
         [Name("lastIndex")]
-		public int LastIndex
+        public int LastIndex
         {
-			get
+            get
             {
-				return 0;
-			}
-			set
+                return 0;
+            }
+            set
             {
-			}
-		}
+            }
+        }
 
         [FieldProperty]
         [Name("global")]
-		public bool Global
+        public bool Global
         {
-			get
+            get
             {
-				return false;
-			}
-		}
+                return false;
+            }
+        }
 
         [FieldProperty]
         [Name("ignoreCase")]
-		public bool IgnoreCase
+        public bool IgnoreCase
         {
-			get
+            get
             {
-				return false;
-			}
-		}
+                return false;
+            }
+        }
 
         [FieldProperty]
         [Name("multiline")]
-		public bool Multiline
+        public bool Multiline
         {
-			get
+            get
             {
-				return false;
-			}
-		}
+                return false;
+            }
+        }
 
         [FieldProperty]
         [Name("source")]
-		public string Pattern
+        public string Pattern
         {
-			get
+            get
             {
-				return null;
-			}
-		}
+                return null;
+            }
+        }
 
         [FieldProperty]
         [Name("source")]
-		public string Source
+        public string Source
         {
-			get
+            get
             {
-				return null;
-			}
-		}
+                return null;
+            }
+        }
 
         public string[] Exec(string s)
-		//public RegexMatch Exec(string s)
+        //public RegexMatch Exec(string s)
         {
-			return null;
-		}
+            return null;
+        }
 
-		public bool Test(string s)
+        public bool Test(string s)
         {
-			return false;
-		}
+            return false;
+        }
 
-		[Template("Bridge.regexpEscape({s})")]
-		public static string Escape(string s)
+        [Template("Bridge.regexpEscape({s})")]
+        public static string Escape(string s)
         {
-			return null;
-		}
-	}
+            return null;
+        }
+    }
 }

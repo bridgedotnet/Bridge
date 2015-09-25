@@ -2,20 +2,20 @@ using Bridge;
 
 namespace System
 {
-	[Ignore]
-	[Namespace("Bridge")]
+    [Ignore]
+    [Namespace("Bridge")]
     public class OverflowException : ArithmeticException, IBridgeClass
     {
-		public OverflowException()
+        public OverflowException()
         {
-		}
+        }
 
-		public OverflowException(string message)
+        public OverflowException(string message)
         {
-		}
+        }
 
         public OverflowException(string message, Exception innerException)
         {
-		}
-	}
+        }
+    }
 }

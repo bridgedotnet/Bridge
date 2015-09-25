@@ -2,17 +2,17 @@
 
 namespace Bridge.Html5
 {
-	/// <summary>
-	/// The NodeIterator interface represents an iterator over the members of a list of the nodes in a subtree of the DOM. The nodes will be returned in document order.
+    /// <summary>
+    /// The NodeIterator interface represents an iterator over the members of a list of the nodes in a subtree of the DOM. The nodes will be returned in document order.
     /// A NodeIterator can be created using the Document.createNodeIterator() method
-	/// </summary>
+    /// </summary>
     [Ignore]
     [Name("NodeIterator")]
-	public class NodeIterator
+    public class NodeIterator
     {
-		internal NodeIterator()
+        internal NodeIterator()
         {
-		}
+        }
 
         /// <summary>
         /// Returns a Node representing the root node as specified when the NodeIterator was created.
@@ -56,9 +56,9 @@ namespace Bridge.Html5
         /// Returns the next Node in the document, or null if there are none.
         /// </summary>
         /// <returns></returns>
-		public virtual Node NextNode()
+        public virtual Node NextNode()
         {
-			return null;
-		}
-	}
+            return null;
+        }
+    }
 }

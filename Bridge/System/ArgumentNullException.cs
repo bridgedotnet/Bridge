@@ -2,8 +2,8 @@ using Bridge;
 
 namespace System
 {
-	[Ignore]
-	[Namespace("Bridge")]
+    [Ignore]
+    [Namespace("Bridge")]
     public class ArgumentNullException : ArgumentException, IBridgeClass
     {
         public ArgumentNullException()
@@ -22,5 +22,5 @@ namespace System
         public ArgumentNullException(string message, Exception innerException)
         {
         }
-	}
+    }
 }

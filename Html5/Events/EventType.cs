@@ -160,7 +160,7 @@ namespace Bridge.Html5
         DeviceLight,
 
         /// <summary>
-        /// DeviceMotionEvent -	Device Orientation Events
+        /// DeviceMotionEvent -    Device Orientation Events
         /// Fresh data is available from a motion sensor.
         /// </summary>
         DeviceMotion,

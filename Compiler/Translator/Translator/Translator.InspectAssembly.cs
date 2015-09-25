@@ -17,7 +17,7 @@ namespace Bridge.Translator
             string name;
             string path;
             AssemblyDefinition reference;
-            
+
             foreach (AssemblyNameReference r in assemblyDefinition.MainModule.AssemblyReferences)
             {
                 name = r.Name;
@@ -170,7 +170,7 @@ namespace Bridge.Translator
                     }
 
                     var syntaxTree = parser.Parse(reader, fileName);
-                    
+
                     if (parser.HasErrors)
                     {
                         foreach (var error in parser.Errors)

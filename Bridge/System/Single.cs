@@ -2,32 +2,32 @@ using Bridge;
 
 namespace System
 {
-	[Ignore]
-	[Name("Number")]
+    [Ignore]
+    [Name("Number")]
     [Constructor("Number")]
     public struct Single : IComparable, IComparable<Single>, IEquatable<Single>, IFormattable
     {
         private Single(int i)
         {
-		}
+        }
 
-		[InlineConst]
-		public const float MaxValue = (float)3.40282346638528859e+38;
+        [InlineConst]
+        public const float MaxValue = (float)3.40282346638528859e+38;
 
-		[InlineConst]
-		public const float MinValue = (float)-3.40282346638528859e+38;
+        [InlineConst]
+        public const float MinValue = (float)-3.40282346638528859e+38;
 
-		[InlineConst]
+        [InlineConst]
         public const float Epsilon = (float)1.4e-45;
 
-		[Name("NaN")]
-		public static readonly float NaN = 0;
+        [Name("NaN")]
+        public static readonly float NaN = 0;
 
-		[Name("NEGATIVE_INFINITY")]
-		public static readonly float NegativeInfinity = 0;
+        [Name("NEGATIVE_INFINITY")]
+        public static readonly float NegativeInfinity = 0;
 
-		[Name("POSITIVE_INFINITY")]
-		public static readonly float PositiveInfinity = 0;
+        [Name("POSITIVE_INFINITY")]
+        public static readonly float PositiveInfinity = 0;
 
         [Template("Bridge.Int.format({this}, {format})")]
         public string Format(string format)
@@ -84,34 +84,34 @@ namespace System
             return false;
         }
 
-		public string ToExponential()
+        public string ToExponential()
         {
-			return null;
-		}
+            return null;
+        }
 
-		public string ToExponential(int fractionDigits) {
-			return null;
-		}
+        public string ToExponential(int fractionDigits) {
+            return null;
+        }
 
-		public string ToFixed()
+        public string ToFixed()
         {
-			return null;
-		}
+            return null;
+        }
 
-		public string ToFixed(int fractionDigits)
+        public string ToFixed(int fractionDigits)
         {
-			return null;
-		}
+            return null;
+        }
 
-		public string ToPrecision()
+        public string ToPrecision()
         {
-			return null;
-		}
+            return null;
+        }
 
-		public string ToPrecision(int precision)
+        public string ToPrecision(int precision)
         {
-			return null;
-		}
+            return null;
+        }
 
         [Template("({d} === Number.POSITIVE_INFINITY)")]
         public static bool IsPositiveInfinity(float d)
@@ -159,5 +159,5 @@ namespace System
         {
             return false;
         }
-	}
+    }
 }

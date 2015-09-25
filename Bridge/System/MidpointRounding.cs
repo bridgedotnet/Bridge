@@ -2,13 +2,13 @@ using Bridge;
 
 namespace System
 {
-	/// <summary>
-	/// Specifies how mathematical rounding methods should process a number that is midway between two numbers.
-	/// </summary>
-	[Ignore]
+    /// <summary>
+    /// Specifies how mathematical rounding methods should process a number that is midway between two numbers.
+    /// </summary>
+    [Ignore]
     [Enum(Emit.Value)]
-	public enum MidpointRounding
-	{
+    public enum MidpointRounding
+    {
         /// <summary>
         /// Rounds away from zero
         /// </summary>
@@ -53,5 +53,5 @@ namespace System
         /// Rounds towards nearest neighbour. If equidistant, rounds towards -Infinity
         /// </summary>
         Floor = 8
-	}
+    }
 }

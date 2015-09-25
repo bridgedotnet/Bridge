@@ -24,11 +24,11 @@ namespace Bridge.Html5
         /// <returns></returns>
         public virtual T this[int index]
         {
-			get
+            get
             {
-				return null;
-			}
-		}
+                return null;
+            }
+        }
 
         /// <summary>
         /// Returns the specific node whose ID or, as a fallback, name matches the string specified by name. Matching by name is only done as a last resort, only in HTML, and only if the referenced element supports the name attribute. Returns null if no node exists by the given name.
@@ -48,11 +48,11 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-		[Name("item")]
+        [Name("item")]
         public virtual T GetItem(int index)
         {
-			return null;
-		}
+            return null;
+        }
 
         /// <summary>
         /// Returns the specific node whose ID or, as a fallback, name matches the string specified by name. Matching by name is only done as a last resort, only in HTML, and only if the referenced element supports the name attribute. Returns null if no node exists by the given name.

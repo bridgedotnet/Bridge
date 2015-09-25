@@ -366,7 +366,7 @@ namespace Bridge.Translator
 
         public bool ReplaceJump
         {
-            get; 
+            get;
             set;
         }
     }

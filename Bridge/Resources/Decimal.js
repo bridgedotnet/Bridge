@@ -32,7 +32,7 @@
 
     Bridge.Decimal.$$inherits = [];
     Bridge.Class.addExtend(Bridge.Decimal, [Bridge.IComparable, Bridge.IFormattable, Bridge.IComparable$1(Bridge.Decimal), Bridge.IEquatable$1(Bridge.Decimal)]);
-    
+
 
     Bridge.Decimal.getDefaultValue = function () {
         return new Bridge.Decimal(0);
@@ -64,7 +64,7 @@
 
     Bridge.Decimal.lift = function (d) {
         return d == null ? null : Bridge.Decimal.create(d);
-    }; 
+    };
 
     Bridge.Decimal.prototype.toString = function (format, provider) {
         if (!format && !provider) {
@@ -391,8 +391,8 @@
 
             d = this.value.toFormat(dp, rm);
         }
-        
-        
+
+
         Bridge.$Decimal.format = old;
         return d;
     };

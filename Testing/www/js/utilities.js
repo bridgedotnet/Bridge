@@ -24,19 +24,19 @@ Bridge.define('ClientTestLibrary.Utilities.Group', {
         getGroups: function () {
             var groups = new Bridge.List$1(ClientTestLibrary.Utilities.Group)();
             groups.add(Bridge.merge(new ClientTestLibrary.Utilities.Group(), {
-                setName: "A", 
+                setName: "A",
                 setLimit: 1000
             } ));
             groups.add(Bridge.merge(new ClientTestLibrary.Utilities.Group(), {
-                setName: "B", 
+                setName: "B",
                 setLimit: 400
             } ));
             groups.add(Bridge.merge(new ClientTestLibrary.Utilities.Group(), {
-                setName: "C", 
+                setName: "C",
                 setLimit: 800
             } ));
             groups.add(Bridge.merge(new ClientTestLibrary.Utilities.Group(), {
-                setName: "D", 
+                setName: "D",
                 setLimit: 200
             } ));
 
@@ -57,59 +57,59 @@ Bridge.define('ClientTestLibrary.Utilities.Person', {
             var persons = new Bridge.List$1(ClientTestLibrary.Utilities.Person)();
 
             persons.add(Bridge.merge(new ClientTestLibrary.Utilities.Person(), {
-                setID: 1, 
-                setName: "Frank", 
-                setCity: "Edmonton", 
-                setCount: 300, 
+                setID: 1,
+                setName: "Frank",
+                setCity: "Edmonton",
+                setCount: 300,
                 setGroup: "A"
             } ));
             persons.add(Bridge.merge(new ClientTestLibrary.Utilities.Person(), {
-                setID: 2, 
-                setName: "Zeppa", 
-                setCity: "Tokyo", 
-                setCount: 100, 
+                setID: 2,
+                setName: "Zeppa",
+                setCity: "Tokyo",
+                setCount: 100,
                 setGroup: "C"
             } ));
             persons.add(Bridge.merge(new ClientTestLibrary.Utilities.Person(), {
-                setID: 3, 
-                setName: "John", 
-                setCity: "Lisbon", 
-                setCount: 700, 
+                setID: 3,
+                setName: "John",
+                setCity: "Lisbon",
+                setCount: 700,
                 setGroup: "B"
             } ));
             persons.add(Bridge.merge(new ClientTestLibrary.Utilities.Person(), {
-                setID: 4, 
-                setName: "Billy", 
-                setCity: "Paris", 
-                setCount: 500, 
+                setID: 4,
+                setName: "Billy",
+                setCity: "Paris",
+                setCount: 500,
                 setGroup: "C"
             } ));
             persons.add(Bridge.merge(new ClientTestLibrary.Utilities.Person(), {
-                setID: 5, 
-                setName: "Dora", 
-                setCity: "Budapest", 
-                setCount: 50, 
+                setID: 5,
+                setName: "Dora",
+                setCity: "Budapest",
+                setCount: 50,
                 setGroup: "B"
             } ));
             persons.add(Bridge.merge(new ClientTestLibrary.Utilities.Person(), {
-                setID: 6, 
-                setName: "Ian", 
-                setCity: "Rome", 
-                setCount: 550, 
+                setID: 6,
+                setName: "Ian",
+                setCity: "Rome",
+                setCount: 550,
                 setGroup: "B"
             } ));
             persons.add(Bridge.merge(new ClientTestLibrary.Utilities.Person(), {
-                setID: 7, 
-                setName: "Mary", 
-                setCity: "Dortmund", 
-                setCount: 700, 
+                setID: 7,
+                setName: "Mary",
+                setCity: "Dortmund",
+                setCount: 700,
                 setGroup: "B"
             } ));
             persons.add(Bridge.merge(new ClientTestLibrary.Utilities.Person(), {
-                setID: 8, 
-                setName: "Nemo", 
-                setCity: "Ocean", 
-                setCount: 3000, 
+                setID: 8,
+                setName: "Nemo",
+                setCity: "Ocean",
+                setCount: 3000,
                 setGroup: null
             } ));
 

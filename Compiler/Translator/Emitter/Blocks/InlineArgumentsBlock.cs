@@ -136,7 +136,7 @@ namespace Bridge.Translator
                             {
                                 s = "null";
                             }
-                            
+
 
                             this.Write(this.WriteIndentToString(s));
                         }

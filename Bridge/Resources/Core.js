@@ -272,26 +272,26 @@
         },
 
         is: function (obj, type, ignoreFn, allowNull) {
-	        if (typeof type == "string") {
+            if (typeof type == "string") {
                 type = Bridge.unroll(type);
-	        }
+            }
 
             if (obj == null) {
                 return !!allowNull;
             }
 
             if (ignoreFn !== true) {
-	            if (Bridge.isFunction(type.$is)) {
-	                return type.$is(obj);
-	            }
+                if (Bridge.isFunction(type.$is)) {
+                    return type.$is(obj);
+                }
 
-	            if (Bridge.isFunction(type.instanceOf)) {
-	                return type.instanceOf(obj);
-	            }
+                if (Bridge.isFunction(type.instanceOf)) {
+                    return type.instanceOf(obj);
+                }
             }
 
             if ((obj.constructor == type) || (obj instanceof type)) {
-	            return true;
+                return true;
             }
 
             if (Bridge.isArray(obj)) {
@@ -306,15 +306,15 @@
 
             for (var i = 0; i < inheritors.length; i++) {
                 if (Bridge.is(obj, inheritors[i])) {
-	                return true;
-	            }
+                    return true;
+                }
             }
 
             return false;
-	    },
+        },
 
         as: function (obj, type, allowNull) {
-	        return Bridge.is(obj, type, false, allowNull) ? obj : null;
+            return Bridge.is(obj, type, false, allowNull) ? obj : null;
         },
 
         cast: function (obj, type, allowNull) {
@@ -324,141 +324,141 @@
 
             var result = Bridge.as(obj, type, allowNull);
 
-	        if (result == null) {
-	            throw new Bridge.InvalidCastException('Unable to cast type ' + Bridge.getTypeName(obj) + ' to type ' + Bridge.getTypeName(type));
-	        }
+            if (result == null) {
+                throw new Bridge.InvalidCastException('Unable to cast type ' + Bridge.getTypeName(obj) + ' to type ' + Bridge.getTypeName(type));
+            }
 
-	        return result;
+            return result;
         },
 
-	    apply: function (obj, values) {
-	        var names = Bridge.getPropertyNames(values, false);
+        apply: function (obj, values) {
+            var names = Bridge.getPropertyNames(values, false);
 
-	        for (var i = 0; i < names.length; i++) {
-	            var name = names[i];
+            for (var i = 0; i < names.length; i++) {
+                var name = names[i];
 
-	            if (typeof obj[name] == "function" && typeof values[name] != "function") {
-	                obj[name](values[name]);
-	            }
-	            else {
-	                obj[name] = values[name];
-	            }
-	        }
+                if (typeof obj[name] == "function" && typeof values[name] != "function") {
+                    obj[name](values[name]);
+                }
+                else {
+                    obj[name] = values[name];
+                }
+            }
 
-	        return obj;
+            return obj;
         },
 
-	    merge: function (to, from) {
-	        var object,
+        merge: function (to, from) {
+            var object,
                 key,
-			    i,
+                i,
                 value,
                 toValue,
-			    fn;
+                fn;
 
-	        if (Bridge.isArray(from) && Bridge.isFunction(to.add || to.push)) {
-	            fn = Bridge.isArray(to) ? to.push : to.add;
+            if (Bridge.isArray(from) && Bridge.isFunction(to.add || to.push)) {
+                fn = Bridge.isArray(to) ? to.push : to.add;
 
-	            for (i = 0; i < from.length; i++) {
-	                fn.apply(to, from[i]);
-	            }
-	        }
-	        else {
-	            for (key in from) {
-	                value = from[key];
+                for (i = 0; i < from.length; i++) {
+                    fn.apply(to, from[i]);
+                }
+            }
+            else {
+                for (key in from) {
+                    value = from[key];
 
-	                if (typeof to[key] == "function" && typeof value != "function") {
-	                    if (key.match(/^\s*get[A-Z]/)) {
-	                        Bridge.merge(to[key](), value);
-	                    }
-	                    else {
-	                        to[key](value);
-	                    }
-	                }
-	                else {
-	                    var setter = "set" + key.charAt(0).toUpperCase() + key.slice(1);
+                    if (typeof to[key] == "function" && typeof value != "function") {
+                        if (key.match(/^\s*get[A-Z]/)) {
+                            Bridge.merge(to[key](), value);
+                        }
+                        else {
+                            to[key](value);
+                        }
+                    }
+                    else {
+                        var setter = "set" + key.charAt(0).toUpperCase() + key.slice(1);
 
-	                    if (typeof to[setter] == "function" && typeof value != "function") {
-	                        to[setter](value);
-	                    }
-	                    else if (value && value.constructor === Object && to[key]) {
-	                        toValue = to[key];
-	                        Bridge.merge(toValue, value);
-	                    }
-	                    else {
-	                        to[key] = value;
-	                    }
-	                }
-	            }
-	        }
+                        if (typeof to[setter] == "function" && typeof value != "function") {
+                            to[setter](value);
+                        }
+                        else if (value && value.constructor === Object && to[key]) {
+                            toValue = to[key];
+                            Bridge.merge(toValue, value);
+                        }
+                        else {
+                            to[key] = value;
+                        }
+                    }
+                }
+            }
 
-	        return to;
-	    },
+            return to;
+        },
 
-	    getEnumerator: function (obj, suffix) {
-	        if (typeof obj === "string") {
-	            obj = Bridge.String.toCharArray(obj);
-	        }
+        getEnumerator: function (obj, suffix) {
+            if (typeof obj === "string") {
+                obj = Bridge.String.toCharArray(obj);
+            }
 
-	        if (suffix && obj && obj["getEnumerator" + suffix]) {
-	            return obj["getEnumerator" + suffix].call(obj);
-	        }
+            if (suffix && obj && obj["getEnumerator" + suffix]) {
+                return obj["getEnumerator" + suffix].call(obj);
+            }
 
-	        if (obj && obj.getEnumerator) {
-	            return obj.getEnumerator();
-	        }
+            if (obj && obj.getEnumerator) {
+                return obj.getEnumerator();
+            }
 
-	        if ((Object.prototype.toString.call(obj) === '[object Array]') ||
+            if ((Object.prototype.toString.call(obj) === '[object Array]') ||
                 (obj && Bridge.isDefined(obj.length))) {
-	            return new Bridge.ArrayEnumerator(obj);
-	        }
+                return new Bridge.ArrayEnumerator(obj);
+            }
 
-	        throw new Bridge.InvalidOperationException('Cannot create enumerator');
-	    },
+            throw new Bridge.InvalidOperationException('Cannot create enumerator');
+        },
 
-	    getPropertyNames: function (obj, includeFunctions) {
-	        var names = [],
-	            name;
+        getPropertyNames: function (obj, includeFunctions) {
+            var names = [],
+                name;
 
-	        for (name in obj) {
+            for (name in obj) {
                 if (includeFunctions || typeof obj[name] !== 'function') {
                     names.push(name);
                 }
-	        }
+            }
 
-	        return names;
-	    },
+            return names;
+        },
 
-	    isDefined: function (value, noNull) {
-	        return typeof value !== 'undefined' && (noNull ? value != null : true);
-	    },
+        isDefined: function (value, noNull) {
+            return typeof value !== 'undefined' && (noNull ? value != null : true);
+        },
 
-	    isEmpty: function (value, allowEmpty) {
-	        return (value == null) || (!allowEmpty ? value === '' : false) || ((!allowEmpty && Bridge.isArray(value)) ? value.length === 0 : false);
-	    },
+        isEmpty: function (value, allowEmpty) {
+            return (value == null) || (!allowEmpty ? value === '' : false) || ((!allowEmpty && Bridge.isArray(value)) ? value.length === 0 : false);
+        },
 
-	    toArray: function (ienumerable) {
-	        var i,
-	            item,
+        toArray: function (ienumerable) {
+            var i,
+                item,
                 len,
-	            result = [];
+                result = [];
 
-	        if (Bridge.isArray(ienumerable)) {
+            if (Bridge.isArray(ienumerable)) {
                 for (i = 0, len = ienumerable.length; i < len; ++i) {
                     result.push(ienumerable[i]);
                 }
-	        }
-	        else {
+            }
+            else {
                 i = Bridge.getEnumerator(ienumerable);
 
                 while (i.moveNext()) {
                     item = i.getCurrent();
                     result.push(item);
                 }
-	        }
+            }
 
-	        return result;
-	    },
+            return result;
+        },
 
         isArray: function (obj) {
             return Object.prototype.toString.call(obj) === '[object Array]';

@@ -161,7 +161,7 @@ namespace Bridge.Translator
                 {
                     unaryOperatorExpression.Expression.AcceptVisitor(this.Emitter);
                 }
-                
+
                 this.Emitter.IsUnaryAccessor = oldAccessor;
 
                 if (this.Emitter.Writers.Count > count)
@@ -396,9 +396,9 @@ namespace Bridge.Translator
                 {
                     if (!isOneOp)
                     {
-                        this.Write(Bridge.Translator.Emitter.ROOT + ".Nullable.");    
+                        this.Write(Bridge.Translator.Emitter.ROOT + ".Nullable.");
                     }
-                    
+
                     string action = "lift1";
                     string op_name = null;
 
@@ -421,7 +421,7 @@ namespace Bridge.Translator
                             this.UnaryOperatorExpression.Expression.AcceptVisitor(this.Emitter);
                             this.Write(")");
                             this.WriteCloseParentheses();
-                            
+
                             this.Write(" : null)");
                             break;
                         case UnaryOperatorType.PostIncrement:
