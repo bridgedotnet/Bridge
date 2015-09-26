@@ -120,7 +120,7 @@ Bridge.define('ClientTestLibrary.ClassA', {
         } );
 
         return Bridge.merge(new ClientTestLibrary.ClassA.Aux1(), {
-            setNumber: 2,
+            setNumber: 2, 
             setRelated: a1
         } );
     },

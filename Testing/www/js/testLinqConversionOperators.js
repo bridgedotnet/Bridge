@@ -50,19 +50,19 @@ Bridge.define('ClientTestLibrary.Linq.TestLinqConversionOperators', {
             var expectedGroupDictionary1 = new Bridge.Dictionary$2(String,ClientTestLibrary.Utilities.Group)();
 
             expectedGroupDictionary1.add("A", Bridge.merge(new ClientTestLibrary.Utilities.Group(), {
-                setName: "A",
+                setName: "A", 
                 setLimit: 1000
             } ));
             expectedGroupDictionary1.add("B", Bridge.merge(new ClientTestLibrary.Utilities.Group(), {
-                setName: "B",
+                setName: "B", 
                 setLimit: 400
             } ));
             expectedGroupDictionary1.add("C", Bridge.merge(new ClientTestLibrary.Utilities.Group(), {
-                setName: "C",
+                setName: "C", 
                 setLimit: 800
             } ));
             expectedGroupDictionary1.add("D", Bridge.merge(new ClientTestLibrary.Utilities.Group(), {
-                setName: "D",
+                setName: "D", 
                 setLimit: 200
             } ));
             assert.deepEqual(ClientTestLibrary.Utilities.TypeHelper.getTypeName(groupDictionary1), "Bridge.Dictionary$2$String$ClientTestLibrary.Utilities.Group", "ToDictionary(keySelector, elementSelector) conversion for <string, Group> - check type name");
@@ -73,19 +73,19 @@ Bridge.define('ClientTestLibrary.Linq.TestLinqConversionOperators', {
             var expectedGroupDictionary2 = new Bridge.Dictionary$2(String, ClientTestLibrary.Utilities.Group)(null, comparer);
 
             expectedGroupDictionary2.add("A", Bridge.merge(new ClientTestLibrary.Utilities.Group(), {
-                setName: "A",
+                setName: "A", 
                 setLimit: 1000
             } ));
             expectedGroupDictionary2.add("B", Bridge.merge(new ClientTestLibrary.Utilities.Group(), {
-                setName: "B",
+                setName: "B", 
                 setLimit: 400
             } ));
             expectedGroupDictionary2.add("C", Bridge.merge(new ClientTestLibrary.Utilities.Group(), {
-                setName: "C",
+                setName: "C", 
                 setLimit: 800
             } ));
             expectedGroupDictionary2.add("D", Bridge.merge(new ClientTestLibrary.Utilities.Group(), {
-                setName: "D",
+                setName: "D", 
                 setLimit: 200
             } ));
 
