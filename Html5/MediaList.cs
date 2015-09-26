@@ -10,37 +10,37 @@ namespace Bridge.Html5
     /// </summary>
     [Ignore]
     [Name("MediaList")]
-	public class MediaList : IEnumerable<string>
+    public class MediaList : IEnumerable<string>
     {
         internal MediaList()
         {
-		}
+        }
 
-		public virtual string this[int index]
+        public virtual string this[int index]
         {
-			get
+            get
             {
-				return null;
-			}
-		}
+                return null;
+            }
+        }
 
-		public virtual void AppendMedium(string newMedium)
+        public virtual void AppendMedium(string newMedium)
         {
-		}
+        }
 
-		public virtual void DeleteMedium(string oldMedium)
+        public virtual void DeleteMedium(string oldMedium)
         {
-		}
+        }
 
         [Name("item")]
-		public virtual string GetItem(int index)
+        public virtual string GetItem(int index)
         {
-			return null;
-		}
+            return null;
+        }
 
-		public readonly int Length;
+        public readonly int Length;
 
-		public string MediaText;
+        public string MediaText;
 
         public virtual IEnumerator<string> GetEnumerator()
         {
@@ -51,5 +51,5 @@ namespace Bridge.Html5
         {
             return null;
         }
-	}
+    }
 }

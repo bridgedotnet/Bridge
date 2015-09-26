@@ -21,6 +21,6 @@ namespace Bridge.Html5
         Document = 9,
         DocumentType = 10,
         DocumentFragment = 11,
-        Notation = 	12
+        Notation =     12
     }
 }

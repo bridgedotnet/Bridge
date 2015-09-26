@@ -303,7 +303,7 @@ namespace Bridge.Translator
                         {
                             this.WriteNewLine();
                         }
-                        
+
                         this.ConvertParamsToReferences(ctor.Parameters);
                         ctor.Body.AcceptChildren(this.Emitter);
 

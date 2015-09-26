@@ -5,9 +5,9 @@ using System.Text.RegularExpressions;
 
 namespace System.Linq
 {
-	[Ignore]
+    [Ignore]
     [Name("Bridge.Linq.Enumerable")]
-	public static class Enumerable
+    public static class Enumerable
     {
         /// <summary>
         /// Applies an accumulator function over a sequence.
@@ -2565,10 +2565,10 @@ namespace System.Linq
         /// source contains no elements.
         /// </exception>
         [Template("Bridge.Linq.Enumerable.from({source}).max()")]
-	    public static long Max(this IEnumerable<long> source)
-	    {
-	        return 0;
-	    }
+        public static long Max(this IEnumerable<long> source)
+        {
+            return 0;
+        }
 
         /// <summary>
         /// Invokes a transform function on each element of a sequence and returns the

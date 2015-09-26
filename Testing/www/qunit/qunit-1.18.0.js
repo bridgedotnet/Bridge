@@ -2020,8 +2020,8 @@ QUnit.diff = (function () {
      * which means: delete 'Hello', add 'Goodbye' and keep ' world.'
      */
     var DIFF_DELETE = -1,
-		DIFF_INSERT = 1,
-		DIFF_EQUAL = 0;
+        DIFF_INSERT = 1,
+        DIFF_EQUAL = 0;
 
     /**
      * Find the differences between two texts.  Simplifies the problem by stripping
@@ -2038,7 +2038,7 @@ QUnit.diff = (function () {
      */
     DiffMatchPatch.prototype.DiffMain = function (text1, text2, optChecklines, optDeadline) {
         var deadline, checklines, commonlength,
-			commonprefix, commonsuffix, diffs;
+            commonprefix, commonsuffix, diffs;
         // Set a deadline by which time the diff must be complete.
         if (typeof optDeadline === "undefined") {
             if (this.DiffTimeout <= 0) {
@@ -2103,7 +2103,7 @@ QUnit.diff = (function () {
      */
     DiffMatchPatch.prototype.diffCleanupEfficiency = function (diffs) {
         var changes, equalities, equalitiesLength, lastequality,
-			pointer, preIns, preDel, postIns, postDel;
+            pointer, preIns, preDel, postIns, postDel;
         changes = false;
         equalities = []; // Stack of indices where equalities are found.
         equalitiesLength = 0; // Keeping our own length var is faster in JS.
@@ -2278,8 +2278,8 @@ QUnit.diff = (function () {
      */
     DiffMatchPatch.prototype.diffCompute = function (text1, text2, checklines, deadline) {
         var diffs, longtext, shorttext, i, hm,
-			text1A, text2A, text1B, text2B,
-			midCommon, diffsA, diffsB;
+            text1A, text2A, text1B, text2B,
+            midCommon, diffsA, diffsB;
 
         if (!text1) {
             // Just add some text (speedup).
@@ -2359,8 +2359,8 @@ QUnit.diff = (function () {
      */
     DiffMatchPatch.prototype.diffHalfMatch = function (text1, text2) {
         var longtext, shorttext, dmp,
-			text1A, text2B, text2A, text1B, midCommon,
-			hm1, hm2, hm;
+            text1A, text2B, text2A, text1B, midCommon,
+            hm1, hm2, hm;
         if (this.DiffTimeout <= 0) {
             // Don't risk returning a non-optimal diff if we have unlimited time.
             return null;
@@ -2386,7 +2386,7 @@ QUnit.diff = (function () {
          */
         function diffHalfMatchI(longtext, shorttext, i) {
             var seed, j, bestCommon, prefixLength, suffixLength,
-				bestLongtextA, bestLongtextB, bestShorttextA, bestShorttextB;
+                bestLongtextA, bestLongtextB, bestShorttextA, bestShorttextB;
             // Start with a 1/4 length substring at position i as a seed.
             seed = longtext.substring(i, i + Math.floor(longtext.length / 4));
             j = -1;
@@ -2460,7 +2460,7 @@ QUnit.diff = (function () {
      */
     DiffMatchPatch.prototype.diffLineMode = function (text1, text2, deadline) {
         var a, diffs, linearray, pointer, countInsert,
-			countDelete, textInsert, textDelete, j;
+            countDelete, textInsert, textDelete, j;
         // Scan the text on a line-by-line basis first.
         a = this.diffLinesToChars(text1, text2);
         text1 = a.chars1;
@@ -2530,8 +2530,8 @@ QUnit.diff = (function () {
      */
     DiffMatchPatch.prototype.diffBisect = function (text1, text2, deadline) {
         var text1Length, text2Length, maxD, vOffset, vLength,
-			v1, v2, x, delta, front, k1start, k1end, k2start,
-			k2end, k2Offset, k1Offset, x1, x2, y1, y2, d, k1, k2;
+            v1, v2, x, delta, front, k1start, k1end, k2start,
+            k2end, k2Offset, k1Offset, x1, x2, y1, y2, d, k1, k2;
         // Cache the text lengths to prevent multiple calls.
         text1Length = text1.length;
         text2Length = text2.length;
@@ -2674,8 +2674,8 @@ QUnit.diff = (function () {
      */
     DiffMatchPatch.prototype.diffCleanupSemantic = function (diffs) {
         var changes, equalities, equalitiesLength, lastequality,
-			pointer, lengthInsertions2, lengthDeletions2, lengthInsertions1,
-			lengthDeletions1, deletion, insertion, overlapLength1, overlapLength2;
+            pointer, lengthInsertions2, lengthDeletions2, lengthInsertions1,
+            lengthDeletions1, deletion, insertion, overlapLength1, overlapLength2;
         changes = false;
         equalities = []; // Stack of indices where equalities are found.
         equalitiesLength = 0; // Keeping our own length var is faster in JS.
@@ -2789,7 +2789,7 @@ QUnit.diff = (function () {
      */
     DiffMatchPatch.prototype.diffCommonOverlap = function (text1, text2) {
         var text1Length, text2Length, textLength,
-			best, length, pattern, found;
+            best, length, pattern, found;
         // Cache the text lengths to prevent multiple calls.
         text1Length = text1.length;
         text2Length = text2.length;
@@ -2922,7 +2922,7 @@ QUnit.diff = (function () {
      */
     DiffMatchPatch.prototype.diffCleanupMerge = function (diffs) {
         var pointer, countDelete, countInsert, textInsert, textDelete,
-			commonlength, changes;
+            commonlength, changes;
         diffs.push([DIFF_EQUAL, ""]); // Add a dummy entry at the end.
         pointer = 0;
         countDelete = 0;

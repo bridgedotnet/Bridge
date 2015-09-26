@@ -936,8 +936,8 @@
 
             return new IEnumerator(
                 function () {
-					enumerator = Bridge.getEnumerator(source);
-				},
+                    enumerator = Bridge.getEnumerator(source);
+                },
                 function () {
                     while (enumerator.moveNext()) {
                         var v = Bridge.as(enumerator.getCurrent(), type);
@@ -948,8 +948,8 @@
                     return false;
                 },
                 function () {
-					Utils.dispose(enumerator);
-				});
+                    Utils.dispose(enumerator);
+                });
         });
     };
 
@@ -2133,10 +2133,10 @@
                 function () { sourceEnumerator = source.getEnumerator(); },
                 function () {
                     if (enumerator == null) {
-	                    while (sourceEnumerator.moveNext()) {
-	                        if (q.length == count) q.shift();
-	                        q.push(sourceEnumerator.getCurrent());
-	                    }
+                        while (sourceEnumerator.moveNext()) {
+                            if (q.length == count) q.shift();
+                            q.push(sourceEnumerator.getCurrent());
+                        }
                         enumerator = Enumerable.from(q).getEnumerator();
                     }
                     return (enumerator.moveNext())

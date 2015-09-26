@@ -109,7 +109,7 @@ namespace Bridge.Contract
 
         int LastEnumValue
         {
-            get; 
+            get;
             set;
         }
 

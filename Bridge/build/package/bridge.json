@@ -1,9 +1,9 @@
 {
     "output": "Bridge/output"
-    
+
     // Uncomment to add TypeScript Definition file (.d.ts) generation to your project.
     // , "generateTypeScript": true
 
-    // More options available at: 
+    // More options available at:
     // http://bridge.net/kb/global-configuration
 }

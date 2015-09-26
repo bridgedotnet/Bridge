@@ -6,7 +6,7 @@ namespace System.Collections.Generic
     [Namespace("Bridge")]
     public interface IDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>, IBridgeClass
     {
-		TValue this[TKey key]
+        TValue this[TKey key]
         {
             [Template("getItem({0})")]
             get;
@@ -14,27 +14,27 @@ namespace System.Collections.Generic
             set;
         }
 
-		ICollection<TKey> Keys
+        ICollection<TKey> Keys
         {
             get;
         }
 
-		ICollection<TValue> Values
+        ICollection<TValue> Values
         {
             get;
         }
 
-		int Count
+        int Count
         {
             get;
         }
 
-		bool ContainsKey(TKey key);
+        bool ContainsKey(TKey key);
 
-		void Add(TKey key, TValue value);
+        void Add(TKey key, TValue value);
 
-		bool Remove(TKey key);
+        bool Remove(TKey key);
 
-		bool TryGetValue(TKey key, out TValue value);
-	}
+        bool TryGetValue(TKey key, out TValue value);
+    }
 }

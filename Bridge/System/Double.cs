@@ -2,22 +2,22 @@ using Bridge;
 
 namespace System
 {
-	[Ignore]
-	[Name("Number")]
+    [Ignore]
+    [Name("Number")]
     [Constructor("Number")]
     public struct Double : IComparable, IComparable<Double>, IEquatable<Double>, IFormattable
     {
-		private Double(int i)
+        private Double(int i)
         {
-		}
+        }
 
-		[Name("MAX_VALUE")]
-		public static readonly double MaxValue = 0;
+        [Name("MAX_VALUE")]
+        public static readonly double MaxValue = 0;
         [Name("MIN_VALUE")]
         public static readonly double MinValue = 0;
 
-		[InlineConst]
-		public const double Epsilon = 4.94065645841247E-324;
+        [InlineConst]
+        public const double Epsilon = 4.94065645841247E-324;
 
         [Name("NEGATIVE_INFINITY")]
         public static readonly double NegativeInfinity = 0;
@@ -25,8 +25,8 @@ namespace System
         [Name("POSITIVE_INFINITY")]
         public static readonly double PositiveInfinity = 0;
 
-		[Name("NaN")]
-		public static readonly double NaN = 0;
+        [Name("NaN")]
+        public static readonly double NaN = 0;
 
         [Template("Bridge.Int.format({this}, {format})")]
         public string Format(string format)
@@ -83,71 +83,71 @@ namespace System
             return false;
         }
 
-		public string ToExponential()
+        public string ToExponential()
         {
-			return null;
-		}
+            return null;
+        }
 
-		public string ToExponential(int fractionDigits)
+        public string ToExponential(int fractionDigits)
         {
-			return null;
-		}
+            return null;
+        }
 
-		public string ToFixed()
+        public string ToFixed()
         {
-			return null;
-		}
+            return null;
+        }
 
-		public string ToFixed(int fractionDigits)
+        public string ToFixed(int fractionDigits)
         {
-			return null;
-		}
+            return null;
+        }
 
-		public string ToPrecision()
+        public string ToPrecision()
         {
-			return null;
-		}
+            return null;
+        }
 
-		public string ToPrecision(int precision)
+        public string ToPrecision(int precision)
         {
-			return null;
-		}
+            return null;
+        }
 
-		[Template("({d} === Number.POSITIVE_INFINITY)")]
-		public static bool IsPositiveInfinity(double d)
+        [Template("({d} === Number.POSITIVE_INFINITY)")]
+        public static bool IsPositiveInfinity(double d)
         {
-			return false;
-		}
+            return false;
+        }
 
         [Template("({d} === Number.NEGATIVE_INFINITY)")]
-		public static bool IsNegativeInfinity(double d)
+        public static bool IsNegativeInfinity(double d)
         {
-			return false;
-		}
+            return false;
+        }
 
-		[Template("(Math.abs({d}) === Number.POSITIVE_INFINITY)")]
-		public static bool IsInfinity(double d)
+        [Template("(Math.abs({d}) === Number.POSITIVE_INFINITY)")]
+        public static bool IsInfinity(double d)
         {
-			return false;
-		}
+            return false;
+        }
 
         [Template("isFinite({d})")]
-		public static bool IsFinite(double d)
+        public static bool IsFinite(double d)
         {
-			return false;
-		}
+            return false;
+        }
 
         [Template("isNaN({d})")]
-		public static bool IsNaN(double d)
+        public static bool IsNaN(double d)
         {
-			return false;
-		}
+            return false;
+        }
 
-		[Template("Bridge.compare({this}, {other})")]
-		public int CompareTo(double other)
+        [Template("Bridge.compare({this}, {other})")]
+        public int CompareTo(double other)
         {
-			return 0;
-		}
+            return 0;
+        }
 
         [Template("Bridge.compare({this}, {obj})")]
         public int CompareTo(object obj)
@@ -156,9 +156,9 @@ namespace System
         }
 
         [Template("Bridge.equalsT({this}, {other})")]
-		public bool Equals(double other)
+        public bool Equals(double other)
         {
-			return false;
-		}
-	}
+            return false;
+        }
+    }
 }

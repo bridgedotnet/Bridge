@@ -7,11 +7,11 @@ namespace Bridge.Html5
     /// </summary>
     [Ignore]
     [Name("DOMImplementation")]
-	public partial class DOMImplementation
+    public partial class DOMImplementation
     {
-		internal DOMImplementation()
+        internal DOMImplementation()
         {
-		}
+        }
 
         /// <summary>
         /// The DOMImplementation.createDocument() method creates and returns an XMLDocument.
@@ -21,8 +21,8 @@ namespace Bridge.Html5
         /// <returns></returns>
         public virtual DocumentInstance CreateDocument(string namespaceURI, string qualifiedName)
         {
-			return null;
-		}
+            return null;
+        }
 
         /// <summary>
         /// The DOMImplementation.createDocument() method creates and returns an XMLDocument.
@@ -33,8 +33,8 @@ namespace Bridge.Html5
         /// <returns></returns>
         public virtual DocumentInstance CreateDocument(string namespaceURI, string qualifiedName, DocumentType documentType)
         {
-			return null;
-		}
+            return null;
+        }
 
         /// <summary>
         /// The DOMImplementation.createDocumentType() method returns a DocumentType object which can either be used with DOMImplementation.createDocument upon document creation or can be put into the document via methods like Node.insertBefore() or Node.replaceChild().
@@ -43,29 +43,29 @@ namespace Bridge.Html5
         /// <param name="publicId">Is a DOMString containing the PUBLIC identifier.</param>
         /// <param name="systemId">Is a DOMString containing the SYSTEM identifiers.</param>
         /// <returns></returns>
-		public virtual DocumentType CreateDocumentType(string qualifiedName, string publicId, string systemId)
+        public virtual DocumentType CreateDocumentType(string qualifiedName, string publicId, string systemId)
         {
-			return null;
-		}
+            return null;
+        }
 
         /// <summary>
         /// The DOMImplementation.createHTMLDocument() method creates a new HTML Document.
         /// </summary>
         /// <returns></returns>
-		public virtual DocumentInstance CreateHTMLDocument()
+        public virtual DocumentInstance CreateHTMLDocument()
         {
-			return null;
-		}
+            return null;
+        }
 
         /// <summary>
         /// The DOMImplementation.createHTMLDocument() method creates a new HTML Document.
         /// </summary>
         /// <param name="title">Is a DOMString containing the title to give the new HTML document.</param>
         /// <returns></returns>
-		public virtual DocumentInstance CreateHTMLDocument(string title)
+        public virtual DocumentInstance CreateHTMLDocument(string title)
         {
-			return null;
-		}
+            return null;
+        }
 
         /// <summary>
         /// The DOMImplementation.hasFeature() method returns a Boolean flag indicating if a given feature is supported.
@@ -74,9 +74,9 @@ namespace Bridge.Html5
         /// <param name="feature">Is a DOMString representing the feature name.</param>
         /// <param name="version">Is a DOMString representing the version of the specification defining the feature.</param>
         /// <returns></returns>
-		public virtual bool HasFeature(string feature, string version)
+        public virtual bool HasFeature(string feature, string version)
         {
-			return false;
-		}
-	}
+            return false;
+        }
+    }
 }

@@ -30,7 +30,7 @@ namespace System
         [Template("String.fromCharCode.apply(null, {value})")]
         public String(char[] value)
         {
-            
+
         }
 
         /// <summary>

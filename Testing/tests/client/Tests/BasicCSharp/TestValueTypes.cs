@@ -128,7 +128,7 @@ namespace ClientTestLibrary
 
             Point.StatitIntNotInitialized = -1;
             assert.DeepEqual(Point.StatitIntNotInitialized, -1, "Point.StatitIntNotInitialized -1");
-            
+
             var i = Point.Test3();
             assert.DeepEqual(i, 499, "i 499");
         }

@@ -248,9 +248,9 @@ namespace Bridge.Translator
                 {
                     var list = typedArguments.ToList();
                     for (int i = 0; i < list.Count; i++)
-			        {
+                    {
                         this.TypeArguments[i] = new TypeParamExpression(method.TypeParameters[i].Name, list[i], null);
-			        }
+                    }
                 }
                 else
                 {
@@ -364,7 +364,7 @@ namespace Bridge.Translator
                     i++;
                 }
 
-                
+
                 for (i = 0; i < result.Length; i++)
                 {
                     if (result[i] == null)
@@ -387,7 +387,7 @@ namespace Bridge.Translator
                         names[i] = parameters[i + shift].Name;
                     }
                 }
-                
+
 
                 this.ArgumentsExpressions = result;
                 this.ArgumentsNames = names;

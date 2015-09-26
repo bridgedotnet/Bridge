@@ -10,45 +10,45 @@ namespace Bridge.Html5
     /// </summary>
     [Ignore]
     [Name("DOMStringList")]
-	public class DOMStringList : IEnumerable<string>
+    public class DOMStringList : IEnumerable<string>
     {
-		internal DOMStringList()
+        internal DOMStringList()
         {
-		}
+        }
 
         /// <summary>
         /// returns a DOMString (a string)
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-		public virtual string this[int index]
+        public virtual string this[int index]
         {
-			get
+            get
             {
-				return null;
-			}
-		}
+                return null;
+            }
+        }
 
         /// <summary>
         ///  Returns true/false depending on whether the given string is in the list
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-		public virtual bool Contains(string str)
+        public virtual bool Contains(string str)
         {
-			return false;
-		}
+            return false;
+        }
 
         /// <summary>
         ///  returns a DOMString (a string)
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-		[Name("item")]
+        [Name("item")]
         public virtual string GetItem(int index)
         {
-			return null;
-		}
+            return null;
+        }
 
         /// <summary>
         /// Gives length of the list
@@ -64,5 +64,5 @@ namespace Bridge.Html5
         {
             return null;
         }
-	}
+    }
 }

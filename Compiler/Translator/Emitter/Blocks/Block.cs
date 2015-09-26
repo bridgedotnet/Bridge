@@ -98,13 +98,13 @@ namespace Bridge.Translator
 
         public string LoopVar
         {
-            get; 
+            get;
             set;
         }
 
         public bool OldReplaceJump
         {
-            get; 
+            get;
             set;
         }
 
@@ -319,7 +319,7 @@ namespace Bridge.Translator
                     this.EndBlock();
                     this.RemoveTempVar(this.LoopVar);
                 }
-                
+
                 this.Emitter.ReplaceJump = this.OldReplaceJump;
             }
 

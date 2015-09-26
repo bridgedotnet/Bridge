@@ -3,19 +3,19 @@ using Bridge;
 namespace System
 {
     [Ignore]
-	[Name("Bridge.Int")]
+    [Name("Bridge.Int")]
     [Constructor("Number")]
     public struct UInt16 : IComparable, IComparable<UInt16>, IEquatable<UInt16>, IFormattable
     {
-		private UInt16(int i)
+        private UInt16(int i)
         {
-		}
-
-		[InlineConst]
-		public const ushort MinValue = 0;
+        }
 
         [InlineConst]
-		public const ushort MaxValue = 65535;
+        public const ushort MinValue = 0;
+
+        [InlineConst]
+        public const ushort MaxValue = 65535;
 
         [Template("Bridge.Int.parseInt({s}, 0, 65535)")]
         public static ushort Parse(string s)
@@ -72,11 +72,11 @@ namespace System
             return null;
         }
 
-		[Template("Bridge.compare({this}, {other})")]
-		public int CompareTo(ushort other)
+        [Template("Bridge.compare({this}, {other})")]
+        public int CompareTo(ushort other)
         {
-			return 0;
-		}
+            return 0;
+        }
 
         [Template("Bridge.compare({this}, {obj})")]
         public int CompareTo(object obj)
@@ -85,9 +85,9 @@ namespace System
         }
 
         [Template("Bridge.equalsT({this}, {other})")]
-		public bool Equals(ushort other)
+        public bool Equals(ushort other)
         {
-			return false;
-		}
-	}
+            return false;
+        }
+    }
 }

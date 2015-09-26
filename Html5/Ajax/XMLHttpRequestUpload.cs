@@ -11,7 +11,7 @@ namespace Bridge.Html5
     public class XMLHttpRequestUpload : XMLHttpRequestEventTarget
     {
         internal XMLHttpRequestUpload ()
-	    {
-	    }
+        {
+        }
     }
 }

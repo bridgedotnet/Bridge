@@ -3,15 +3,15 @@ using Bridge;
 namespace System
 {
     [Ignore]
-	[Name("Bridge.Int")]
+    [Name("Bridge.Int")]
     [Constructor("Number")]
     public struct Int16 : IComparable, IComparable<Int16>, IEquatable<Int16>, IFormattable
     {
-		private Int16(int i)
+        private Int16(int i)
         {
-		}
+        }
 
-		[InlineConst]
+        [InlineConst]
         public const short MinValue = -32768;
 
         [InlineConst]
@@ -72,11 +72,11 @@ namespace System
             return null;
         }
 
-		[Template("Bridge.compare({this}, {other})")]
-		public int CompareTo(short other)
+        [Template("Bridge.compare({this}, {other})")]
+        public int CompareTo(short other)
         {
-			return 0;
-		}
+            return 0;
+        }
 
         [Template("Bridge.compare({this}, {obj})")]
         public int CompareTo(object obj)
@@ -85,9 +85,9 @@ namespace System
         }
 
         [Template("Bridge.equalsT({this}, {other})")]
-		public bool Equals(short other)
+        public bool Equals(short other)
         {
-			return false;
-		}
-	}
+            return false;
+        }
+    }
 }

@@ -14,6 +14,6 @@ namespace System
     public interface IComparable<in T> : IBridgeClass
     {
         [Template("Bridge.compare({this}, {other})")]
-		int CompareTo(T other);
-	}
+        int CompareTo(T other);
+    }
 }

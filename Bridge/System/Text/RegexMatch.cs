@@ -2,10 +2,10 @@ using Bridge;
 
 namespace System.Text.RegularExpressions
 {
-	[Ignore]
-	public sealed class RegexMatch
+    [Ignore]
+    public sealed class RegexMatch
     {
-		public int Index
+        public int Index
         {
             [Name("index")]
             get;
@@ -13,7 +13,7 @@ namespace System.Text.RegularExpressions
             set;
         }
 
-		public int Length
+        public int Length
         {
             [Name("length")]
             get;
@@ -21,7 +21,7 @@ namespace System.Text.RegularExpressions
             set;
         }
 
-		public string Input
+        public string Input
         {
             [Name("input")]
             get;
@@ -29,7 +29,7 @@ namespace System.Text.RegularExpressions
             set;
         }
 
-		public string this[int index]
+        public string this[int index]
         {
             [Ignore]
             get
@@ -42,14 +42,14 @@ namespace System.Text.RegularExpressions
             }
         }
 
-		public static implicit operator string[](RegexMatch rm)
+        public static implicit operator string[](RegexMatch rm)
         {
-			return null;
-		}
+            return null;
+        }
 
-		public static explicit operator RegexMatch(string[] a)
+        public static explicit operator RegexMatch(string[] a)
         {
-			return null;
-		}
-	}
+            return null;
+        }
+    }
 }

@@ -14,15 +14,15 @@ namespace System.Linq
         }
     }
 
-	[Ignore]
+    [Ignore]
     [IgnoreGeneric]
-	public class Grouping<TKey, TElement> : EnumerableInstance<TElement>, IGrouping<TKey, TElement>
+    public class Grouping<TKey, TElement> : EnumerableInstance<TElement>, IGrouping<TKey, TElement>
     {
-		internal Grouping()
+        internal Grouping()
         {
         }
 
-		public TKey Key
+        public TKey Key
         {
             [Template("key()")]
             get
@@ -30,5 +30,5 @@ namespace System.Linq
                 return default(TKey);
             }
         }
-	}
+    }
 }

@@ -1,9 +1,9 @@
 ﻿/*
- * @version   : 1.9.0 - Bridge.NET 
- * @author    : Object.NET, Inc. http://bridge.net/ 
- * @date      : 2015-09-21 
- * @copyright : Copyright (c) 2008-2015, Object.NET, Inc. (http://object.net/). All rights reserved. 
- * @license   : See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE. 
+ * @version   : 1.9.0 - Bridge.NET
+ * @author    : Object.NET, Inc. http://bridge.net/
+ * @date      : 2015-09-21
+ * @copyright : Copyright (c) 2008-2015, Object.NET, Inc. (http://object.net/). All rights reserved.
+ * @license   : See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE.
  */ 
 
 "use strict";
@@ -282,26 +282,26 @@
         },
 
         is: function (obj, type, ignoreFn, allowNull) {
-	        if (typeof type == "string") {
+            if (typeof type == "string") {
                 type = Bridge.unroll(type);
-	        }
+            }
 
             if (obj == null) {
                 return !!allowNull;
             }
 
             if (ignoreFn !== true) {
-	            if (Bridge.isFunction(type.$is)) {
-	                return type.$is(obj);
-	            }
+                if (Bridge.isFunction(type.$is)) {
+                    return type.$is(obj);
+                }
 
-	            if (Bridge.isFunction(type.instanceOf)) {
-	                return type.instanceOf(obj);
-	            }
+                if (Bridge.isFunction(type.instanceOf)) {
+                    return type.instanceOf(obj);
+                }
             }
 
             if ((obj.constructor == type) || (obj instanceof type)) {
-	            return true;
+                return true;
             }
 
             if (Bridge.isArray(obj)) {
@@ -316,15 +316,15 @@
 
             for (var i = 0; i < inheritors.length; i++) {
                 if (Bridge.is(obj, inheritors[i])) {
-	                return true;
-	            }
+                    return true;
+                }
             }
 
             return false;
-	    },
+        },
 
         as: function (obj, type, allowNull) {
-	        return Bridge.is(obj, type, false, allowNull) ? obj : null;
+            return Bridge.is(obj, type, false, allowNull) ? obj : null;
         },
 
         cast: function (obj, type, allowNull) {
@@ -334,141 +334,141 @@
 
             var result = Bridge.as(obj, type, allowNull);
 
-	        if (result == null) {
-	            throw new Bridge.InvalidCastException('Unable to cast type ' + Bridge.getTypeName(obj) + ' to type ' + Bridge.getTypeName(type));
-	        }
+            if (result == null) {
+                throw new Bridge.InvalidCastException('Unable to cast type ' + Bridge.getTypeName(obj) + ' to type ' + Bridge.getTypeName(type));
+            }
 
-	        return result;
+            return result;
         },
 
-	    apply: function (obj, values) {
-	        var names = Bridge.getPropertyNames(values, false);
+        apply: function (obj, values) {
+            var names = Bridge.getPropertyNames(values, false);
 
-	        for (var i = 0; i < names.length; i++) {
-	            var name = names[i];
+            for (var i = 0; i < names.length; i++) {
+                var name = names[i];
 
-	            if (typeof obj[name] == "function" && typeof values[name] != "function") {
-	                obj[name](values[name]);
-	            }
-	            else {
-	                obj[name] = values[name];
-	            }
-	        }
+                if (typeof obj[name] == "function" && typeof values[name] != "function") {
+                    obj[name](values[name]);
+                }
+                else {
+                    obj[name] = values[name];
+                }
+            }
 
-	        return obj;
+            return obj;
         },
 
-	    merge: function (to, from) {
-	        var object,
+        merge: function (to, from) {
+            var object,
                 key,
-			    i,
+                i,
                 value,
                 toValue,
-			    fn;
+                fn;
 
-	        if (Bridge.isArray(from) && Bridge.isFunction(to.add || to.push)) {
-	            fn = Bridge.isArray(to) ? to.push : to.add;
+            if (Bridge.isArray(from) && Bridge.isFunction(to.add || to.push)) {
+                fn = Bridge.isArray(to) ? to.push : to.add;
 
-	            for (i = 0; i < from.length; i++) {
-	                fn.apply(to, from[i]);
-	            }
-	        }
-	        else {
-	            for (key in from) {
-	                value = from[key];
+                for (i = 0; i < from.length; i++) {
+                    fn.apply(to, from[i]);
+                }
+            }
+            else {
+                for (key in from) {
+                    value = from[key];
 
-	                if (typeof to[key] == "function" && typeof value != "function") {
-	                    if (key.match(/^\s*get[A-Z]/)) {
-	                        Bridge.merge(to[key](), value);
-	                    }
-	                    else {
-	                        to[key](value);
-	                    }
-	                }
-	                else {
-	                    var setter = "set" + key.charAt(0).toUpperCase() + key.slice(1);
+                    if (typeof to[key] == "function" && typeof value != "function") {
+                        if (key.match(/^\s*get[A-Z]/)) {
+                            Bridge.merge(to[key](), value);
+                        }
+                        else {
+                            to[key](value);
+                        }
+                    }
+                    else {
+                        var setter = "set" + key.charAt(0).toUpperCase() + key.slice(1);
 
-	                    if (typeof to[setter] == "function" && typeof value != "function") {
-	                        to[setter](value);
-	                    }
-	                    else if (value && value.constructor === Object && to[key]) {
-	                        toValue = to[key];
-	                        Bridge.merge(toValue, value);
-	                    }
-	                    else {
-	                        to[key] = value;
-	                    }
-	                }
-	            }
-	        }
+                        if (typeof to[setter] == "function" && typeof value != "function") {
+                            to[setter](value);
+                        }
+                        else if (value && value.constructor === Object && to[key]) {
+                            toValue = to[key];
+                            Bridge.merge(toValue, value);
+                        }
+                        else {
+                            to[key] = value;
+                        }
+                    }
+                }
+            }
 
-	        return to;
-	    },
+            return to;
+        },
 
-	    getEnumerator: function (obj, suffix) {
-	        if (typeof obj === "string") {
-	            obj = Bridge.String.toCharArray(obj);
-	        }
+        getEnumerator: function (obj, suffix) {
+            if (typeof obj === "string") {
+                obj = Bridge.String.toCharArray(obj);
+            }
 
-	        if (suffix && obj && obj["getEnumerator" + suffix]) {
-	            return obj["getEnumerator" + suffix].call(obj);
-	        }
+            if (suffix && obj && obj["getEnumerator" + suffix]) {
+                return obj["getEnumerator" + suffix].call(obj);
+            }
 
-	        if (obj && obj.getEnumerator) {
-	            return obj.getEnumerator();
-	        }
+            if (obj && obj.getEnumerator) {
+                return obj.getEnumerator();
+            }
 
-	        if ((Object.prototype.toString.call(obj) === '[object Array]') ||
+            if ((Object.prototype.toString.call(obj) === '[object Array]') ||
                 (obj && Bridge.isDefined(obj.length))) {
-	            return new Bridge.ArrayEnumerator(obj);
-	        }
+                return new Bridge.ArrayEnumerator(obj);
+            }
 
-	        throw new Bridge.InvalidOperationException('Cannot create enumerator');
-	    },
+            throw new Bridge.InvalidOperationException('Cannot create enumerator');
+        },
 
-	    getPropertyNames: function (obj, includeFunctions) {
-	        var names = [],
-	            name;
+        getPropertyNames: function (obj, includeFunctions) {
+            var names = [],
+                name;
 
-	        for (name in obj) {
+            for (name in obj) {
                 if (includeFunctions || typeof obj[name] !== 'function') {
                     names.push(name);
                 }
-	        }
+            }
 
-	        return names;
-	    },
+            return names;
+        },
 
-	    isDefined: function (value, noNull) {
-	        return typeof value !== 'undefined' && (noNull ? value != null : true);
-	    },
+        isDefined: function (value, noNull) {
+            return typeof value !== 'undefined' && (noNull ? value != null : true);
+        },
 
-	    isEmpty: function (value, allowEmpty) {
-	        return (value == null) || (!allowEmpty ? value === '' : false) || ((!allowEmpty && Bridge.isArray(value)) ? value.length === 0 : false);
-	    },
+        isEmpty: function (value, allowEmpty) {
+            return (value == null) || (!allowEmpty ? value === '' : false) || ((!allowEmpty && Bridge.isArray(value)) ? value.length === 0 : false);
+        },
 
-	    toArray: function (ienumerable) {
-	        var i,
-	            item,
+        toArray: function (ienumerable) {
+            var i,
+                item,
                 len,
-	            result = [];
+                result = [];
 
-	        if (Bridge.isArray(ienumerable)) {
+            if (Bridge.isArray(ienumerable)) {
                 for (i = 0, len = ienumerable.length; i < len; ++i) {
                     result.push(ienumerable[i]);
                 }
-	        }
-	        else {
+            }
+            else {
                 i = Bridge.getEnumerator(ienumerable);
 
                 while (i.moveNext()) {
                     item = i.getCurrent();
                     result.push(item);
                 }
-	        }
+            }
 
-	        return result;
-	    },
+            return result;
+        },
 
         isArray: function (obj) {
             return Object.prototype.toString.call(obj) === '[object Array]';
@@ -934,7 +934,7 @@
         },
 
         sub: function (a, b) {
-	        return Bridge.hasValue(a) && Bridge.hasValue(b) ? a - b : null;
+            return Bridge.hasValue(a) && Bridge.hasValue(b) ? a - b : null;
         },
 
         bnot: function (a) {
@@ -946,27 +946,27 @@
         },
 
         not: function (a) {
-	        return Bridge.hasValue(a) ? !a : null;
+            return Bridge.hasValue(a) ? !a : null;
         },
 
         pos: function (a) {
-	        return Bridge.hasValue(a) ? +a : null;
+            return Bridge.hasValue(a) ? +a : null;
         },
 
         lift: function () {
-	        for (var i = 1; i < arguments.length; i++) {
-	            if (!Bridge.hasValue(arguments[i])) {
-	                return null;
-	            }
-	        }
+            for (var i = 1; i < arguments.length; i++) {
+                if (!Bridge.hasValue(arguments[i])) {
+                    return null;
+                }
+            }
 
-	        if (arguments[0] == null)
-	            return null;
+            if (arguments[0] == null)
+                return null;
 
-	        if (arguments[0].apply == undefined)
-	            return arguments[0];
+            if (arguments[0].apply == undefined)
+                return arguments[0];
 
-	        return arguments[0].apply(null, Array.prototype.slice.call(arguments, 1));
+            return arguments[0].apply(null, Array.prototype.slice.call(arguments, 1));
         },
 
         lift1: function (f, o) {
@@ -1639,7 +1639,7 @@
             var instanceConfig = prop.$config || prop.config;
 
             if (instanceConfig && !Bridge.isFunction(instanceConfig)) {
-                Bridge.Class.initConfig(extend, base, instanceConfig, false, prop);                
+                Bridge.Class.initConfig(extend, base, instanceConfig, false, prop);
 
                 if (document && (document.readyState == "complete" || document.readyState == "loaded")) {
                     Bridge.Class.createAccessors(instanceConfig, prototype);
@@ -1806,7 +1806,7 @@
                         cls[key] = exists[key];
                     }
                 }
-            }            
+            }
 
             scope[name] = cls;
 
@@ -3036,7 +3036,7 @@ Bridge.define('Bridge.Int', {
             if (Bridge.isNumber(x) && !type.instanceOf(x)) {
                 throw new Bridge.OverflowException();
             }
-                
+
             return x;
         },
 
@@ -3118,7 +3118,7 @@ Bridge.Class.addExtend(Bridge.Int, [Bridge.IComparable$1(Bridge.Int), Bridge.IEq
 
     Bridge.Decimal.$$inherits = [];
     Bridge.Class.addExtend(Bridge.Decimal, [Bridge.IComparable, Bridge.IFormattable, Bridge.IComparable$1(Bridge.Decimal), Bridge.IEquatable$1(Bridge.Decimal)]);
-    
+
 
     Bridge.Decimal.getDefaultValue = function () {
         return new Bridge.Decimal(0);
@@ -3150,7 +3150,7 @@ Bridge.Class.addExtend(Bridge.Int, [Bridge.IComparable$1(Bridge.Int), Bridge.IEq
 
     Bridge.Decimal.lift = function (d) {
         return d == null ? null : Bridge.Decimal.create(d);
-    }; 
+    };
 
     Bridge.Decimal.prototype.toString = function (format, provider) {
         if (!format && !provider) {
@@ -3477,8 +3477,8 @@ Bridge.Class.addExtend(Bridge.Int, [Bridge.IComparable$1(Bridge.Int), Bridge.IEq
 
             d = this.value.toFormat(dp, rm);
         }
-        
-        
+
+
         Bridge.$Decimal.format = old;
         return d;
     };
@@ -3509,11 +3509,11 @@ Bridge.Class.addExtend(Bridge.Int, [Bridge.IComparable$1(Bridge.Int), Bridge.IEq
         },
 
         isUseGenitiveForm: function (format, index, tokenLen, patternToMatch) {
-	        var i,
+            var i,
                 repeat = 0;
 
-	        for (i = index - 1; i >= 0 && format[i] != patternToMatch; i--) {
-	        }
+            for (i = index - 1; i >= 0 && format[i] != patternToMatch; i--) {
+            }
 
             if (i >= 0) {
                 while (--i >= 0 && format[i] == patternToMatch) {
@@ -3567,171 +3567,171 @@ Bridge.Class.addExtend(Bridge.Int, [Bridge.IComparable$1(Bridge.Int), Bridge.IEq
             }
 
             return format.replace(/(\\.|'[^']*'|"[^"]*"|d{1,4}|M{1,4}|yyyy|yy|y|HH?|hh?|mm?|ss?|tt?|f{1,3}|z{1,3}|\:|\/)/g,
-			    function (match, group, index) {
-			        var part = match;
+                function (match, group, index) {
+                    var part = match;
 
-			        switch (match) {
-			            case "dddd":
-			                part = df.dayNames[dayOfWeek];
+                    switch (match) {
+                        case "dddd":
+                            part = df.dayNames[dayOfWeek];
 
-			                break;
-			            case "ddd":
-			                part = df.abbreviatedDayNames[dayOfWeek];
+                            break;
+                        case "ddd":
+                            part = df.abbreviatedDayNames[dayOfWeek];
 
-			                break;
-			            case "dd":
-			                part = dayOfMonth < 10 ? "0" + dayOfMonth : dayOfMonth;
+                            break;
+                        case "dd":
+                            part = dayOfMonth < 10 ? "0" + dayOfMonth : dayOfMonth;
 
-			                break;
-			            case "d":
-			                part = dayOfMonth;
+                            break;
+                        case "d":
+                            part = dayOfMonth;
 
-			                break;
-			            case "MMMM":
-			                if (me.isUseGenitiveForm(format, index, 4, "d")) {
-			                    part = df.monthGenitiveNames[month];
-			                }
-			                else {
-			                    part = df.monthNames[month];
-			                }
+                            break;
+                        case "MMMM":
+                            if (me.isUseGenitiveForm(format, index, 4, "d")) {
+                                part = df.monthGenitiveNames[month];
+                            }
+                            else {
+                                part = df.monthNames[month];
+                            }
 
-			                break;
-			            case "MMM":
-			                if (me.isUseGenitiveForm(format, index, 3, "d")) {
-			                    part = df.abbreviatedMonthGenitiveNames[month];
-			                }
-			                else {
-			                    part = df.abbreviatedMonthNames[month];
-			                }
+                            break;
+                        case "MMM":
+                            if (me.isUseGenitiveForm(format, index, 3, "d")) {
+                                part = df.abbreviatedMonthGenitiveNames[month];
+                            }
+                            else {
+                                part = df.abbreviatedMonthNames[month];
+                            }
 
-			                break;
-			            case "MM":
-			                part = (month + 1) < 10 ? "0" + (month + 1) : (month + 1);
+                            break;
+                        case "MM":
+                            part = (month + 1) < 10 ? "0" + (month + 1) : (month + 1);
 
-			                break;
-			            case "M":
-			                part = month + 1;
+                            break;
+                        case "M":
+                            part = month + 1;
 
-			                break;
-			            case "yyyy":
-			                part = year;
+                            break;
+                        case "yyyy":
+                            part = year;
 
-			                break;
-			            case "yy":
-			                part = (year % 100).toString();
+                            break;
+                        case "yy":
+                            part = (year % 100).toString();
 
-			                if (part.length == 1) {
-			                    part = "0" + part;
-			                }
+                            if (part.length == 1) {
+                                part = "0" + part;
+                            }
 
-			                break;
-			            case "y":
-			                part = year % 100;
+                            break;
+                        case "y":
+                            part = year % 100;
 
-			                break;
-			            case "h":
-			            case "hh":
-			                part = hour % 12;
+                            break;
+                        case "h":
+                        case "hh":
+                            part = hour % 12;
 
-			                if (!part) {
-			                    part = "12";
-			                }
-			                else if (match == "hh" && part.length == 1) {
-			                    part = "0" + part;
-			                }
+                            if (!part) {
+                                part = "12";
+                            }
+                            else if (match == "hh" && part.length == 1) {
+                                part = "0" + part;
+                            }
 
-			                break;
-			            case "HH":
-			                part = hour.toString();
+                            break;
+                        case "HH":
+                            part = hour.toString();
 
-			                if (part.length == 1) {
-			                    part = "0" + part;
-			                }
+                            if (part.length == 1) {
+                                part = "0" + part;
+                            }
 
-			                break;
-			            case "H":
-			                part = hour;
-			                break;
-			            case "mm":
-			                part = minute.toString();
+                            break;
+                        case "H":
+                            part = hour;
+                            break;
+                        case "mm":
+                            part = minute.toString();
 
-			                if (part.length == 1) {
-			                    part = "0" + part;
-			                }
+                            if (part.length == 1) {
+                                part = "0" + part;
+                            }
 
-			                break;
-			            case "m":
-			                part = minute;
+                            break;
+                        case "m":
+                            part = minute;
 
-			                break;
-			            case "ss":
-			                part = second.toString();
+                            break;
+                        case "ss":
+                            part = second.toString();
 
-			                if (part.length == 1) {
-			                    part = "0" + part;
-			                }
+                            if (part.length == 1) {
+                                part = "0" + part;
+                            }
 
-			                break;
-			            case "s":
-			                part = second;
-			                break;
-			            case "t":
-			            case "tt":
-			                part = (hour < 12) ? df.amDesignator : df.pmDesignator;
+                            break;
+                        case "s":
+                            part = second;
+                            break;
+                        case "t":
+                        case "tt":
+                            part = (hour < 12) ? df.amDesignator : df.pmDesignator;
 
-			                if (match == "t") {
-			                    part = part.charAt(0);
-			                }
+                            if (match == "t") {
+                                part = part.charAt(0);
+                            }
 
-			                break;
-			            case "f":
-			            case "ff":
-			            case "fff":
-			                part = millisecond.toString();
+                            break;
+                        case "f":
+                        case "ff":
+                        case "fff":
+                            part = millisecond.toString();
 
-			                if (part.length < 3) {
-			                    part = Array(3 - part.length).join("0") + part;
-			                }
+                            if (part.length < 3) {
+                                part = Array(3 - part.length).join("0") + part;
+                            }
 
-			                if (match == "ff") {
-			                    part = part.substr(0, 2);
-			                }
-			                else if (match == "f") {
-			                    part = part.charAt(0);
-			                }
+                            if (match == "ff") {
+                                part = part.substr(0, 2);
+                            }
+                            else if (match == "f") {
+                                part = part.charAt(0);
+                            }
 
-			                break;
-			            case "z":
-			                part = timezoneOffset / 60;
-			                part = ((part >= 0) ? "-" : "+") + Math.floor(Math.abs(part));
+                            break;
+                        case "z":
+                            part = timezoneOffset / 60;
+                            part = ((part >= 0) ? "-" : "+") + Math.floor(Math.abs(part));
 
-			                break;
-			            case "zz":
-			            case "zzz":
-			                part = timezoneOffset / 60;
-			                part = ((part >= 0) ? "-" : "+") + Bridge.String.alignString(Math.floor(Math.abs(part)).toString(), 2, "0", 2);
+                            break;
+                        case "zz":
+                        case "zzz":
+                            part = timezoneOffset / 60;
+                            part = ((part >= 0) ? "-" : "+") + Bridge.String.alignString(Math.floor(Math.abs(part)).toString(), 2, "0", 2);
 
-			                if (match == "zzz") {
-			                    part += df.timeSeparator + Bridge.String.alignString(Math.floor(Math.abs(timezoneOffset % 60)).toString(), 2, "0", 2);
-			                }
+                            if (match == "zzz") {
+                                part += df.timeSeparator + Bridge.String.alignString(Math.floor(Math.abs(timezoneOffset % 60)).toString(), 2, "0", 2);
+                            }
 
-			                break;
-			            case ":":
-			                part = df.timeSeparator;
+                            break;
+                        case ":":
+                            part = df.timeSeparator;
 
-			                break;
-			            case "/":
-			                part = df.dateSeparator;
+                            break;
+                        case "/":
+                            part = df.dateSeparator;
 
-			                break;
-			            default:
-			                part = match.substr(1, match.length - 1 - (match.charAt(0) != "\\"));
+                            break;
+                        default:
+                            part = match.substr(1, match.length - 1 - (match.charAt(0) != "\\"));
 
-			                break;
-			        }
+                            break;
+                    }
 
-			        return part;
-			    });
+                    return part;
+                });
         },
 
         parse: function (value, provider, utc, silent) {
@@ -4724,10 +4724,10 @@ Bridge.define('Bridge.Text.StringBuilder', {
 // @source Browser.js
 
 (function () {
-	if(!document) {
-		return;
-	}
-	
+    if(!document) {
+        return;
+    }
+
     var check = function (regex) {
         return regex.test(navigator.userAgent);
     },
@@ -6938,7 +6938,7 @@ Bridge.define('Bridge.PropertyChangedEventArgs', {
             if (Bridge.Array.getRank(arr) !== 1) {
                 throw new Bridge.Exception("Only single dimension arrays are supported here.");
             }
- 
+
             var i = index,
                 j = index + length - 1;
 
@@ -7893,8 +7893,8 @@ Bridge.define('Bridge.PropertyChangedEventArgs', {
 
             return new IEnumerator(
                 function () {
-					enumerator = Bridge.getEnumerator(source);
-				},
+                    enumerator = Bridge.getEnumerator(source);
+                },
                 function () {
                     while (enumerator.moveNext()) {
                         var v = Bridge.as(enumerator.getCurrent(), type);
@@ -7905,8 +7905,8 @@ Bridge.define('Bridge.PropertyChangedEventArgs', {
                     return false;
                 },
                 function () {
-					Utils.dispose(enumerator);
-				});
+                    Utils.dispose(enumerator);
+                });
         });
     };
 
@@ -9090,10 +9090,10 @@ Bridge.define('Bridge.PropertyChangedEventArgs', {
                 function () { sourceEnumerator = source.getEnumerator(); },
                 function () {
                     if (enumerator == null) {
-	                    while (sourceEnumerator.moveNext()) {
-	                        if (q.length == count) q.shift();
-	                        q.push(sourceEnumerator.getCurrent());
-	                    }
+                        while (sourceEnumerator.moveNext()) {
+                            if (q.length == count) q.shift();
+                            q.push(sourceEnumerator.getCurrent());
+                        }
                         enumerator = Enumerable.from(q).getEnumerator();
                     }
                     return (enumerator.moveNext())

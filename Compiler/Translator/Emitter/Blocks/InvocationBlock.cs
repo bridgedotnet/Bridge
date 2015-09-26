@@ -143,7 +143,7 @@ namespace Bridge.Translator
 
                         return;
                     }
-                } 
+                }
             }
 
             MemberReferenceExpression targetMember = invocationExpression.Target as MemberReferenceExpression;
@@ -195,7 +195,7 @@ namespace Bridge.Translator
                             invocationResult = null;
                         }
 
-                        
+
 
                         if (this.IsEmptyPartialInvoking(csharpInvocation.Member as IMethod))
                         {
@@ -323,7 +323,7 @@ namespace Bridge.Translator
                 if (rr != null)
                 {
                     proto = rr.IsVirtualCall;
-                    
+
                     /*var method = rr.Member as IMethod;
                     if (method != null && method.IsVirtual)
                     {
