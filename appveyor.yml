@@ -9,7 +9,7 @@
 #---------------------------------#
 
 # version format
-version: 1.9.{build}-{branch}
+version: 1.10.{build}-{branch}
 
 # branches to build
 branches:
@@ -40,7 +40,7 @@ init:
 clone_folder: c:\projects\Bridge
 
 # fetch repository as zip archive
-shallow_clone: false                 # default is "false"
+shallow_clone: true                 # default is "false"
 
 # set clone depth
 clone_depth: 30                      # clone entire repository history if not defined
@@ -51,6 +51,10 @@ environment:
   # this is how to set encrypted variable. Go to "Encrypt data" page in account menu to encrypt data.
   #my_secure_var1:
     #secure: FW3tJ3fMncxvs58/ifSP7w==
+
+# build cache to preserve files/folders between builds
+cache:
+  - packages -> **\packages.config
 
 # scripts that run after cloning repository
 install:

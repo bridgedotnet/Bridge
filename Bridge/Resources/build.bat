@@ -31,7 +31,7 @@ for /F "usebackq delims=" %%l in (`findstr /c:"%sep%=" Bridge.jsb`) do (
  rem consume the 'header' var until it is empty. output one per line, formatted
  for /f "tokens=1* delims=\" %%A in ("!header!") do (
   set crline=%%A
-  <nul set /p= * !crline! >> newbridge.js
+  <nul set /p=" * !crline!" >> newbridge.js
   type dostools\unixnl.dat >> newbridge.js
   type dostools\spacechar.dat >> newbridge.js
   set header=%%B
@@ -39,7 +39,7 @@ for /F "usebackq delims=" %%l in (`findstr /c:"%sep%=" Bridge.jsb`) do (
  if defined header goto nextLine
 )
 
-<nul set /p=*/ >> newbridge.js
+<nul set /p=" */" >> newbridge.js
 type dostools\unixnl.dat >> newbridge.js
 type dostools\unixnl.dat >> newbridge.js
 

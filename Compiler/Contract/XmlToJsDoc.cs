@@ -1124,26 +1124,55 @@ namespace Bridge.Contract
                 comment.Append(exception.Item1 + newLine);
             }
 
+            int argCount = 0;
             foreach (JsDocParam param in this.Parameters)
             {
                 comment.Append(" * @param   {" + param.Type + "}");
+
                 comment.Append(new String(' ', typeColumnWidth - param.Type.Length));
                 comment.Append(param.Name);
-                comment.Append(new String(' ', nameColumnWidth - param.Name.Length));
-                comment.Append(param.Desc + newLine);
+
+                var desc = param.Desc;
+                if (desc != null)
+                {
+                    desc = desc.Trim();
+                }
+
+                // If we are not in the last parameter argument or description exists
+                // (for last argument), then print whitespaces after param name.
+                if (++argCount < this.Parameters.Count() || desc != null)
+                {
+                    comment.Append(new String(' ', nameColumnWidth - param.Name.Length));
+                }
+
+                comment.Append(desc + newLine);
             }
 
+            argCount = 0;
             foreach (JsDocParam param in this.Returns)
             {
                 comment.Append(" * @return  {" + param.Type + "}");
-                comment.Append(new String(' ', typeColumnWidth - param.Type.Length));
-                comment.Append(new String(' ', nameColumnWidth));
-                comment.Append(param.Desc + newLine);
+
+                var desc = param.Desc;
+                if (desc != null)
+                {
+                    desc = desc.Trim();
+                }
+
+                // If we are not in the last parameter argument or description exists
+                // (for last argument), then print whitespaces after param name.
+                if (++argCount < this.Returns.Count() || desc != null)
+                {
+                    comment.Append(new String(' ', typeColumnWidth - param.Type.Length));
+                    comment.Append(new String(' ', nameColumnWidth));
+                }
+
+                comment.Append(desc + newLine);
             }
 
             foreach (var see in this.SeeAlso)
             {
-                comment.Append(" * @see {@link " + see + "}");
+                comment.Append(" * @see {@link " + see + "}" + newLine);
             }
 
             comment.Append(" */");
