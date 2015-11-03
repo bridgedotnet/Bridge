@@ -11,6 +11,7 @@ namespace Bridge.Html5
     /// methods, or using standard array index syntax (that is, using bracket notation).
     /// </summary>
     [Ignore]
+    [Namespace(false)]
     public class Uint8ClampedArray
     {
         /// <summary>
