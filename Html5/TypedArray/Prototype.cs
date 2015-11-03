@@ -12,6 +12,7 @@ namespace Bridge.Html5.TypedArray
     /// typed array types.
     /// </summary>
     [Ignore]
+    [Namespace(false)]
     public class Prototype<TypedArray, TypedElement>
     {
         #region Properties

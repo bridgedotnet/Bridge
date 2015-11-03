@@ -11,6 +11,7 @@ namespace Bridge.Html5
     /// notation).
     /// </summary>
     [Ignore]
+    [Namespace(false)]
     public class Float32Array
     {
         /// <summary>

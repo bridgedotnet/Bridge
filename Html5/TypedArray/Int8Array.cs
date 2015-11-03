@@ -10,6 +10,7 @@ namespace Bridge.Html5
     /// array index syntax (that is, using bracket notation).
     /// </summary>
     [Ignore]
+    [Namespace(false)]
     public class Int8Array
     {
         /// <summary>
