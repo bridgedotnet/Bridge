@@ -11,7 +11,7 @@ namespace Bridge.Html5
     /// </summary>
     [Ignore]
     [Namespace(false)]
-    public class Uint16Array
+    public class Uint16Array : TypedArray.Prototype<Uint16Array, ushort>
     {
         /// <summary>
         /// Creates a new Uint16Array of the specified length.
@@ -79,11 +79,6 @@ namespace Bridge.Html5
         /// Returns the string value of the constructor name. In the case of the Uint16Array type: "Uint16Array".
         /// </summary>
         public const string name = "Uint16Array";
-
-        /// <summary>
-        /// Prototype for the TypedArray objects.
-        /// </summary>
-        public readonly TypedArray.Prototype<Uint16Array, ushort> Prototype;
 
         #endregion Properties
 

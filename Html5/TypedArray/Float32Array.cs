@@ -12,7 +12,7 @@ namespace Bridge.Html5
     /// </summary>
     [Ignore]
     [Namespace(false)]
-    public class Float32Array
+    public class Float32Array : TypedArray.Prototype<Float32Array, float>
     {
         /// <summary>
         /// Creates a new Float32Array of the specified length.
@@ -80,11 +80,6 @@ namespace Bridge.Html5
         /// Returns the string value of the constructor name. In the case of the Float32Array type: "Float32Array".
         /// </summary>
         public const string name = "Float32Array";
-
-        /// <summary>
-        /// Prototype for the TypedArray objects.
-        /// </summary>
-        public readonly TypedArray.Prototype<Float32Array, float> Prototype;
 
         #endregion Properties
 

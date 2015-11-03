@@ -12,7 +12,7 @@ namespace Bridge.Html5
     /// </summary>
     [Ignore]
     [Namespace(false)]
-    public class Uint8ClampedArray
+    public class Uint8ClampedArray: TypedArray.Prototype<Uint8ClampedArray, byte>
     {
         /// <summary>
         /// Creates a new Uint8ClampedArray of the specified length.
@@ -82,11 +82,6 @@ namespace Bridge.Html5
         /// Returns the string value of the constructor name. In the case of the Uint8ClampedArray type: "Uint8ClampedArray".
         /// </summary>
         public const string name = "Uint8ClampedArray";
-
-        /// <summary>
-        /// Prototype for the TypedArray objects.
-        /// </summary>
-        public readonly TypedArray.Prototype<Uint8ClampedArray, byte> Prototype;
 
         #endregion Properties
 
