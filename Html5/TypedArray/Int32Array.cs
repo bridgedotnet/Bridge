@@ -10,7 +10,7 @@ namespace Bridge.Html5
     /// standard array index syntax (that is, using bracket notation).
     /// </summary>
     [Ignore]
-    public class Int32Array
+    public class Int32Array : TypedArray.Prototype<Int32Array, int>
     {
         /// <summary>
         /// Creates a new Int32Array of the specified length.
@@ -78,11 +78,6 @@ namespace Bridge.Html5
         /// Returns the string value of the constructor name. In the case of the Int32Array type: "Int32Array".
         /// </summary>
         public const string name = "Int32Array";
-
-        /// <summary>
-        /// Prototype for the TypedArray objects.
-        /// </summary>
-        public readonly TypedArray.Prototype<Int32Array, int> Prototype;
 
         #endregion Properties
 
