@@ -68,6 +68,7 @@
     <Compile Include="Tests\BridgeIssues\N501.cs" />
     <Compile Include="Tests\BridgeIssues\N485.cs" />
     <Compile Include="Tests\BridgeIssues\N472.cs" />
+    <Compile Include="Tests\BridgeIssues\N548.cs" />
     <Compile Include="Tests\Linq\TestLinqGroupingOperators.cs" />
     <Compile Include="Tests\Linq\TestLinqConversionOperators.cs" />
     <Compile Include="Tests\Linq\TestLinqAggregateOperators.cs" />
