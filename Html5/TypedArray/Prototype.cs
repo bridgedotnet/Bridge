@@ -3,6 +3,8 @@
 
 using System;
 
+// This class has its usage limited drastically as it is not supposed to be used by users, unless when
+// extending a new TypedArray object that might come into existence.
 namespace Bridge.Html5.TypedArray
 {
     /// <summary>
@@ -13,7 +15,7 @@ namespace Bridge.Html5.TypedArray
     /// </summary>
     [Ignore]
     [Namespace(false)]
-    public class Prototype<TypedArray, TypedElement>
+    public abstract class Prototype<TypedArray, TypedElement>
     {
         #region Properties
 
