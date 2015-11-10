@@ -849,6 +849,45 @@ Bridge.define('ClientTestLibrary.Bridge546', {
     }
 });
 
+/** @namespace ClientTestLibrary */
+
+/**
+ * This test will check whether TypedArray types are emitted to JavaScript
+ the right way. [#548]
+ *
+ * @class ClientTestLibrary.Bridge548
+ */
+Bridge.define('ClientTestLibrary.Bridge548', {
+    statics: {
+        config: {
+            init: function () {
+                Bridge.ready(this.testUseCase);
+            }
+        },
+        testUseCase: function (assert) {
+            assert.expect(9);
+            var v1 = new Float32Array(1);
+            assert.ok(v1);
+            var v2 = new Float64Array(1);
+            assert.ok(v2);
+            var v3 = new Int16Array(1);
+            assert.ok(v3);
+            var v4 = new Int32Array(1);
+            assert.ok(v4);
+            var v5 = new Int8Array(1);
+            assert.ok(v5);
+            var v6 = new Uint16Array(1);
+            assert.ok(v6);
+            var v7 = new Uint32Array(1);
+            assert.ok(v7);
+            var v8 = new Uint8Array(1);
+            assert.ok(v8);
+            var v9 = new Uint8ClampedArray(1);
+            assert.ok(v9);
+        }
+    }
+});
+
 Bridge.define('ClientTestLibrary.Bridge554', {
     statics: {
         testUseCase: function (assert) {
