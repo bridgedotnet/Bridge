@@ -533,7 +533,10 @@ namespace Bridge.Html5.TypedArray
         /// A new TypedArray on the same ArrayBuffer store and with the same element types
         /// as for this TypedArray object.
         /// </returns>
-        /// <remarks>Most browsers do not support this yet.</remarks>
+        /// <remarks>
+        /// Some browsers do not support this yet (may require begin and end parameters).
+        /// </remarks>
+        [Name("subarray")]
         public TypedArray SubArray()
         {
             return default(TypedArray);
@@ -547,6 +550,7 @@ namespace Bridge.Html5.TypedArray
         /// A new TypedArray on the same ArrayBuffer store and with the same element types
         /// as for this TypedArray object.
         /// </returns>
+        [Name("subarray")]
         public TypedArray SubArray(Any<int, long, uint, ulong> begin)
         {
             return default(TypedArray);
