@@ -72,3 +72,6 @@ Bridge.define('ClientTestLibrary.TestInheritance.B', {
     }
 });
 
+
+
+Bridge.init();

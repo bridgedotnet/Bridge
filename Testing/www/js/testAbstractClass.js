@@ -63,3 +63,6 @@ Bridge.define('ClientTestLibrary.TestAbstractClass.C', {
     }
 });
 
+
+
+Bridge.init();

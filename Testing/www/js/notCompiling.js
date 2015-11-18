@@ -86,3 +86,6 @@ Bridge.define('ClientTestLibrary.Rectangle66', {
     $clone: function (to) { return this; }
 });
 
+
+
+Bridge.init();

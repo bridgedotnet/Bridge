@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace System
 {
-    [Ignore]
+    [External]
     [Name("Bridge.Exception")]
     public class Exception : IBridgeClass
     {

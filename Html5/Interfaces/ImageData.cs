@@ -9,7 +9,7 @@ namespace Bridge.Html5
     /// object associated with a canvas: createImageData() and getImageData(). It can also be used to set
     /// a part of the canvas by using putImageData().
     /// </summary>
-    [Ignore]
+    [External]
     [Namespace(false)]
     public class ImageData
     {

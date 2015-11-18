@@ -3,9 +3,9 @@ namespace Bridge.Html5
     /// <summary>
     /// The template element is used to declare fragments of HTML that can be cloned and inserted in the document by script.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLTemplateElement")]
-    public class TemplateElement : Element
+    public class TemplateElement : Element<TemplateElement>
     {
         [Template("document.createElement('template')")]
         public TemplateElement()

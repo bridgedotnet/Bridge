@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The vertical-align CSS property specifies the vertical alignment of an inline or table-cell box.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum VerticalAlign

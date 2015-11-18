@@ -2,7 +2,7 @@
 
 namespace Bridge
 {
-    [Ignore]
+    [External]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
     public sealed class ConstructorAttribute : Attribute
     {

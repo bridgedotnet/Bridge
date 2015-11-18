@@ -7,7 +7,7 @@ namespace Bridge.Html5
     /// The CanvasPattern interface represents an opaque object describing a pattern, based on a image,
     /// a canvas or a video, created by the CanvasRenderingContext2D.createPattern() method.
     /// </summary>
-    [Ignore]
+    [External]
     [Namespace(false)]
     public class CanvasPattern
     {

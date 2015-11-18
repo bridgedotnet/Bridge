@@ -22,7 +22,7 @@ Bridge.define("Bridge.Task", {
         },
 
         fromResult: function (result) {
-            var task = new Bridge.Task();
+            var t = new Bridge.Task();
 
             t.status = Bridge.TaskStatus.ranToCompletion;
             t.result = result;
@@ -52,7 +52,10 @@ Bridge.define("Bridge.Task", {
                 errors = [],
                 i;
 
-            if (!Bridge.isArray(tasks)) {
+            if (Bridge.is(tasks, Bridge.IEnumerable)) {
+                tasks = Bridge.toArray(tasks);
+            }
+            else if (!Bridge.isArray(tasks)) {
                 tasks = Array.prototype.slice.call(arguments, 0);
             }
 
@@ -99,7 +102,10 @@ Bridge.define("Bridge.Task", {
         },
 
         whenAny: function (tasks) {
-            if (!Bridge.isArray(tasks)) {
+            if (Bridge.is(tasks, Bridge.IEnumerable)) {
+                tasks = Bridge.toArray(tasks);
+            }
+            else if (!Bridge.isArray(tasks)) {
                 tasks = Array.prototype.slice.call(arguments, 0);
             }
 

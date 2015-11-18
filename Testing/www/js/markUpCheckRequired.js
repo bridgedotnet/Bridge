@@ -35,3 +35,6 @@ Bridge.define('ClientTestLibrary.Point69', {
     }
 });
 
+
+
+Bridge.init();

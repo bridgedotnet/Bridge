@@ -2,15 +2,22 @@ using Bridge;
 
 namespace System.Collections.Generic
 {
-    [Ignore]
+    [External]
     [Namespace("Bridge")]
     public class KeyValuePair<TKey, TValue> : IBridgeClass
     {
-        internal KeyValuePair()
+        public extern KeyValuePair(TKey key, TValue value);
+
+        [FieldProperty]
+        public extern TKey Key
         {
+            get;
         }
 
-        public TKey Key;
-        public TValue Value;
+        [FieldProperty]
+        public extern TValue Value
+        {
+            get;
+        }
     }
 }

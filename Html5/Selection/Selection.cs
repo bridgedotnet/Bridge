@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// Selection is the class of the object returned by window.getSelection() and other methods. It represents the text selection in the greater page, possibly spanning multiple elements, when the user drags over static text and other parts of the page. For information about text selection in an individual text editing element, see Input, TextArea and document.activeElement which typically return the parent object returned from window.getSelection().
     /// </summary>
-    [Ignore]
+    [External]
     [Name("Selection")]
     public class Selection
     {

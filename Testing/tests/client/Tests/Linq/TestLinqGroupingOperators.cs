@@ -27,7 +27,7 @@ namespace ClientTestLibrary.Linq
             }
 
             var wordChars = word.ToCharArray();
-            wordChars.Sort();
+            wordChars.JsSort();
 
             return new string(wordChars);
         }

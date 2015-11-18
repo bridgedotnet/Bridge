@@ -69,3 +69,6 @@ Bridge.define('ClientTestLibrary.Linq.TestLinqSetOperators', {
     }
 });
 
+
+
+Bridge.init();

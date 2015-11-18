@@ -2,7 +2,7 @@ using Bridge;
 
 namespace System
 {
-    [Ignore]
+    [External]
     [IgnoreCast]
     [Name("Object")]
     public struct Void

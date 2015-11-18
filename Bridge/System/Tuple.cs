@@ -2,7 +2,7 @@ using Bridge;
 
 namespace System
 {
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
@@ -23,7 +23,7 @@ namespace System
         }
     }
 
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
@@ -53,7 +53,7 @@ namespace System
         }
     }
 
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
@@ -92,7 +92,7 @@ namespace System
         }
     }
 
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
@@ -140,7 +140,7 @@ namespace System
         }
     }
 
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
@@ -197,7 +197,7 @@ namespace System
         }
     }
 
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
@@ -263,7 +263,7 @@ namespace System
         }
     }
 
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
@@ -338,7 +338,7 @@ namespace System
         }
     }
 
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
@@ -422,7 +422,7 @@ namespace System
         }
     }
 
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]

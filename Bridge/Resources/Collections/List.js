@@ -7,7 +7,7 @@ Bridge.Class.generic('Bridge.List$1', function (T) {
         inherits: [Bridge.ICollection$1(T), Bridge.ICollection, Bridge.IList$1(T)],
         constructor: function (obj) {
             if (Object.prototype.toString.call(obj) === '[object Array]') {
-                this.items = obj;
+                this.items = Bridge.Array.clone(obj);
             } else if (Bridge.is(obj, Bridge.IEnumerable)) {
                 this.items = Bridge.toArray(obj);
             } else {
@@ -127,9 +127,10 @@ Bridge.Class.generic('Bridge.List$1', function (T) {
             this.checkIndex(index + count - 1);
 
             var result = [],
-                i;
-
-            for (i = index; i < count; i++) {
+                i,
+				maxIndex = index + count;
+				
+            for (i = index; i < maxIndex; i++) {
                 result.push(this.items[i]);
             }
 
@@ -234,6 +235,34 @@ Bridge.Class.generic('Bridge.List$1', function (T) {
             if (this.readOnly) {
                 throw new Bridge.NotSupportedException();
             }
+        },
+
+        binarySearch: function (index, length, value, comparer) {
+            if (arguments.length === 1) {
+                value = index;
+                index = null;
+            }
+
+            if (arguments.length === 2) {
+                value = index;
+                comparer = length;
+                index = null;
+                length = null;
+            }
+
+            if (!Bridge.isNumber(index)) {
+                index = 0;
+            }
+
+            if (!Bridge.isNumber(length)) {
+                length = this.items.length;
+            }
+
+            if (!comparer) {
+                comparer = Bridge.Comparer$1.$default;
+            }
+
+            return Bridge.Array.binarySearch(this.items, index, length, value, comparer);
         }
     }));
 });

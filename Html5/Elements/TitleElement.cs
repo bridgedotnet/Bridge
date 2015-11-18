@@ -3,9 +3,9 @@ namespace Bridge.Html5
     /// <summary>
     /// The HTMLTitleElement interface contains the title for a document. This element inherits all of the properties and methods of the HTMLElement interface.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLTitleElement")]
-    public class TitleElement : Element
+    public class TitleElement : Element<TitleElement>
     {
         [Template("document.createElement('title')")]
         public TitleElement()

@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The font-style CSS property allows italic or oblique faces to be selected within a font-family.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum FontStyle

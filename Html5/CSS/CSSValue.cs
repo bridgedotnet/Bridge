@@ -1,6 +1,6 @@
 namespace Bridge.Html5
 {
-    [Ignore]
+    [External]
     [Name("CSSValue")]
     public class CSSValue
     {

@@ -6,7 +6,7 @@ namespace Bridge.Html5
     /// <summary>
     /// collection of rectangles that indicate the bounding rectangles for each box in a client.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("ClientRectList")]
     public class ClientRectList : IEnumerable<ClientRect>
     {

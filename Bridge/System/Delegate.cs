@@ -2,7 +2,7 @@ using Bridge;
 
 namespace System
 {
-    [Ignore]
+    [External]
     [IgnoreCast]
     [Name("Function")]
     public class Delegate
@@ -56,7 +56,7 @@ namespace System
         }
     }
 
-    [Ignore]
+    [External]
     [IgnoreCast]
     [Name("Function")]
     public class MulticastDelegate : Delegate

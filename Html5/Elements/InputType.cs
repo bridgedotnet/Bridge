@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The type of control to display.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum InputType

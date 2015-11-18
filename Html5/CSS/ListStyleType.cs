@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The list-style-type CSS property specifies appearance of a list item element. As it is the only one who defaults to display:list-item, this is usually a &lt;li&gt; element, but can be any element with this display value.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum ListStyleType

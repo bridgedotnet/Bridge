@@ -13,7 +13,7 @@ Bridge.define('TestProject1.TestClassA', {
              * @this TestProject1.TestClassA
              * @memberof TestProject1.TestClassA
              * @function getValue1
-             * @return  {number}        
+             * @return  {number}
              */
             /**
              * Some property
@@ -23,8 +23,8 @@ Bridge.define('TestProject1.TestClassA', {
              * @this TestProject1.TestClassA
              * @memberof TestProject1.TestClassA
              * @function setValue1
-             * @param   {number}    value    
-             * @return  {void}               
+             * @param   {number}    value
+             * @return  {void}
              */
             Value1: 0
         }
@@ -54,3 +54,5 @@ Bridge.define('TestProject2.TestClassB', {
         return 0;
     }
 });
+
+Bridge.init();

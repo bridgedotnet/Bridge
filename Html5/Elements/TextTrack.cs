@@ -7,7 +7,7 @@ namespace Bridge.Html5
     /// <summary>
     /// Represents a text track.
     /// </summary>
-    [Ignore]
+    [External]
     public class TextTrack
     {
         /// <summary>
@@ -60,7 +60,7 @@ namespace Bridge.Html5
     /// <summary>
     /// Represents the available text tracks for the the audio/video.
     /// </summary>
-    [Ignore]
+    [External]
     public class TextTrackList : IEnumerable<TextTrack>
     {
         /// <summary>
@@ -95,7 +95,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The possible types of a text track
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum TextTrackKind
@@ -129,7 +129,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The possible modes of a text track
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum TextTrackMode
@@ -153,7 +153,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The TextTrackCue object represents the individual cues, and provides methods and properties to access the data and events to act on changes to cue state.
     /// </summary>
-    [Ignore]
+    [External]
     public class TextTrackCue // TODO: events?
     {
         /// <summary>
@@ -198,7 +198,7 @@ namespace Bridge.Html5
     /// <summary>
     /// TextTrackCueList represents a dynamically updating list of text track cues.
     /// </summary>
-    [Ignore]
+    [External]
     public class TextTrackCueList : IEnumerable<TextTrackCue>
     {
         /// <summary>

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace System.Linq
 {
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     public class EnumerableInstance<TElement> : IEnumerable<TElement>
     {

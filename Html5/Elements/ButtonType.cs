@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// Indicates the behavior of the button.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum ButtonType

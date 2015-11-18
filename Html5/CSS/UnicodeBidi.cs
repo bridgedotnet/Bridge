@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The unicode-bidi CSS property together with the direction property relates to the handling of bidirectional text in a document.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum UnicodeBidi

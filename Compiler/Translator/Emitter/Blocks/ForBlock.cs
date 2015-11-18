@@ -126,10 +126,10 @@ namespace Bridge.Translator
 
             IAsyncStep iteratorsStep = this.Emitter.AsyncBlock.AddAsyncStep();
 
-            foreach (var item in forStatement.Iterators)
+            /*foreach (var item in forStatement.Iterators)
             {
                 this.WriteAwaiters(item);
-            }
+            }*/
 
             var lastIteratorStep = this.Emitter.AsyncBlock.Steps.Last();
 
@@ -141,6 +141,7 @@ namespace Bridge.Translator
             lastIteratorStep.JumpToStep = conditionStep.Step;
             this.Emitter.ReplaceAwaiterByVar = true;
 
+            var beforeStepsCount = this.Emitter.AsyncBlock.Steps.Count;
             foreach (var item in forStatement.Iterators)
             {
                 item.AcceptVisitor(this.Emitter);
@@ -151,6 +152,11 @@ namespace Bridge.Translator
                 }
 
                 this.WriteNewLine();
+            }
+
+            if (beforeStepsCount < this.Emitter.AsyncBlock.Steps.Count)
+            {
+                this.Emitter.AsyncBlock.Steps.Last().JumpToStep = conditionStep.Step;
             }
 
             this.Emitter.ReplaceAwaiterByVar = oldValue;

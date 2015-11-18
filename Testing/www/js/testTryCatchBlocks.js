@@ -223,3 +223,6 @@ Bridge.define('ClientTestLibrary.TestTryCatchBlocks', {
     }
 });
 
+
+
+Bridge.init();

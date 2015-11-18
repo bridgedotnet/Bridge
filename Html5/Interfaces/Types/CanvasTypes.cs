@@ -1,6 +1,6 @@
 namespace Bridge.Html5
 {
-    [Ignore]
+    [External]
     [Name("Object")]
     public partial class CanvasTypes
     {
@@ -8,7 +8,7 @@ namespace Bridge.Html5
         /// There are three possible values for this property and those are: butt, round and square.
         /// By default this property is set to butt.
         /// </summary>
-        [Ignore]
+        [External]
         [Enum(Emit.StringNameLowerCase)]
         [Name("String")]
         public enum CanvasLineCapType
@@ -42,7 +42,7 @@ namespace Bridge.Html5
         /// Note that the lineJoin setting has no effect if the two connected segments have the same direction,
         /// because no joining area will be added in this case.
         /// </summary>
-        [Ignore]
+        [External]
         [Enum(Emit.StringNameLowerCase)]
         [Name("String")]
         public enum CanvasLineJoinType
@@ -75,7 +75,7 @@ namespace Bridge.Html5
         }
 
         // This is different from CSS' TextAlign in regards of valid options list
-        [Ignore]
+        [External]
         [Enum(Emit.StringNameLowerCase)]
         [Name("String")]
         public enum CanvasTextAlign
@@ -115,7 +115,7 @@ namespace Bridge.Html5
             Null
         }
 
-        [Ignore]
+        [External]
         [Enum(Emit.StringNameLowerCase)]
         [Name("String")]
         public enum CanvasTextBaselineAlign
@@ -161,7 +161,7 @@ namespace Bridge.Html5
         }
 
         // This is different from CSS' TextDirection in regards to valid options list
-        [Ignore]
+        [External]
         [Enum(Emit.StringNameLowerCase)]
         [Name("String")]
         public enum CanvasTextDirection
@@ -189,7 +189,7 @@ namespace Bridge.Html5
         }
 
         // This is different from CSS' BackgroundRepeat in regards to valid options list
-        [Ignore]
+        [External]
         [Enum(Emit.StringNameLowerCase)]
         [Name("String")]
         public enum CanvasRepetitionTypes
@@ -224,7 +224,7 @@ namespace Bridge.Html5
             Null
         }
 
-        [Ignore]
+        [External]
         [Enum(Emit.StringNameLowerCase)]
         [Name("String")]
         public enum CanvasFillRule

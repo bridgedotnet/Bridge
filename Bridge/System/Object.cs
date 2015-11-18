@@ -2,7 +2,7 @@ using Bridge;
 
 namespace System
 {
-    [Ignore]
+    [External]
     [Name("Object")]
     [IgnoreCast]
     [Constructor("{ }")]
@@ -10,12 +10,12 @@ namespace System
     {
         public virtual object this[string name]
         {
-            [Ignore]
+            [External]
             get
             {
                 return null;
             }
-            [Ignore]
+            [External]
             set
             {
             }
@@ -112,7 +112,7 @@ namespace System
         }
     }
 
-    [Ignore]
+    [External]
     public static class ObjectExtensions
     {
         [Template("{0}")]

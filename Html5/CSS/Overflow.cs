@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The overflow CSS property specifies whether to clip content, render scroll bars or display overflow content of a block-level element.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum Overflow

@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The page-break-inside CSS property adjusts page breaks inside the current element.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum PageBreakInside

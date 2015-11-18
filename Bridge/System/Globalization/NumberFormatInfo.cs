@@ -3,7 +3,7 @@ using Bridge;
 namespace System.Globalization
 {
     [Namespace("Bridge")]
-    [Ignore]
+    [External]
     public sealed class NumberFormatInfo : IFormatProvider, ICloneable, IBridgeClass
     {
         public NumberFormatInfo()

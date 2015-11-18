@@ -1,11 +1,11 @@
-using Bridge;
+﻿using Bridge;
 
 namespace System
 {
     /// <summary>
     /// An object with some or all of the following properties:
     /// </summary>
-    [Ignore]
+    [External]
     [Name("LocaleOptions")]
     [ObjectLiteral]
     public sealed class LocaleOptions
@@ -48,7 +48,7 @@ namespace System
     /// <summary>
     /// Whether upper case or lower case should sort first. Possible values are "upper", "lower", or "false" (use the locale's default); the default is "false". This option can be set through an options property or through a Unicode extension key; if both are provided, the options property takes precedence. Implementations are not required to support this property.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     public enum CaseFirst
     {
@@ -60,7 +60,7 @@ namespace System
     /// <summary>
     /// Which differences in the strings should lead to non-zero result values.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     public enum Sensitivity
     {
@@ -88,7 +88,7 @@ namespace System
     /// <summary>
     /// Whether the comparison is for sorting or for searching for matching strings. Possible values are "sort" and "search"; the default is "sort".
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     public enum Usage
     {
@@ -99,7 +99,7 @@ namespace System
     /// <summary>
     /// The locale matching algorithm to use. Possible values are "lookup" and "best fit"; the default is "best fit". For information about this option, see the Intl page.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     public enum LocaleMatcher
     {

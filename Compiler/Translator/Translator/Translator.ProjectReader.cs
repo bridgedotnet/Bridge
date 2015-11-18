@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
+using Microsoft.Build.Evaluation;
 
 namespace Bridge.Translator
 {
@@ -139,19 +140,18 @@ namespace Bridge.Translator
 
         protected virtual IList<string> GetSourceFiles(XDocument doc)
         {
-            var result = new List<string>();
+            var project = new Project(this.Location);
+            var sourceFiles = new List<string>();
 
-            var nodeList = from n in doc.Descendants()
-                           where n.Name.LocalName == "Compile" &&
-                                 !string.IsNullOrWhiteSpace(n.Attribute("Include").Value)
-                           select n;
-
-            foreach (var node in nodeList)
+            foreach (var projectItem in project.Items)
             {
-                result.Add(node.Attribute("Include").Value);
+                if (projectItem.ItemType == "Compile")
+                {
+                    sourceFiles.Add(projectItem.EvaluatedInclude);
+                }
             }
 
-            return result;
+            return sourceFiles;
         }
 
         protected virtual void ReadDefineConstants(XDocument doc)

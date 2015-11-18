@@ -5,7 +5,7 @@ namespace Bridge.Html5
     /// <summary>
     /// Indicate whether or not the element is editable.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum ContentEditable

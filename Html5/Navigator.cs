@@ -7,7 +7,7 @@ namespace Bridge.Html5
     ///  The Navigator interface represents the state and the identity of the user agent. It allows scripts to query it and to register themselves to carry on some activities.
     /// A Navigator object can be retrieved using the read-only Window.navigator property.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("Navigator")]
     public class Navigator
     {

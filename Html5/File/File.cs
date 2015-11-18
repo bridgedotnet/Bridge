@@ -7,7 +7,7 @@ namespace Bridge.Html5
     /// These are generally retrieved from a FileList object returned as a result of a user selecting files using the &lt;input&gt; element, from a drag and drop operation's DataTransfer object, or from the mozGetAsFile() API on an HTMLCanvasElement.
     /// The file reference can be saved when the form is submitted while the user is offline, so that the data can be retrieved and uploaded when the Internet connection is restored.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("File")]
     public class File : Blob
     {

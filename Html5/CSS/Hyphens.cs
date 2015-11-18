@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The hyphens CSS property tells the browser how to go about splitting words to improve the layout of text when line-wrapping.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum Hyphens

@@ -23,28 +23,6 @@ declare module Interfaces {
     }
     var Class4: Class4Func;
 
-    export interface Interface4 {
-        method6(b: {v: boolean}): void;
-        method7(i: number, b: {v: boolean}): void;
-        method8(s: {v: string}): void;
-        method9(i: number, s: {v: string}): void;
-        method10(i: number, b: {v: boolean}, s: {v: string}): void;
-    }
-    var Interface4: Function;
-
-    export interface Interface62 {
-        getProperty(): number;
-        setProperty$1(s: string): void;
-        setProperty(i: number): void;
-    }
-    var Interface62: Function;
-
-    export interface Interface61 {
-        getProperty(): number;
-        setProperty(value: number): void;
-    }
-    var Interface61: Function;
-
     export interface Class6 extends Interfaces.Interface6 {
         getProperty$3(): number;
         setProperty$3(value: number): void;
@@ -59,6 +37,28 @@ declare module Interfaces {
         new (): Class6;
     }
     var Class6: Class6Func;
+
+    export interface Class3 extends Interfaces.Class2,Interfaces.Interface3 {
+        method5(i: Interfaces.Interface3): Interfaces.Interface2;
+    }
+    export interface Class3Func extends Function {
+        prototype: Class3;
+        new (): Class3;
+    }
+    var Class3: Class3Func;
+
+    export interface Interface62 {
+        getProperty(): number;
+        setProperty$1(s: string): void;
+        setProperty(i: number): void;
+    }
+    var Interface62: Function;
+
+    export interface Interface61 {
+        getProperty(): number;
+        setProperty(value: number): void;
+    }
+    var Interface61: Function;
 
     export interface Interface3 extends Interfaces.Interface2 {
         method5(i: Interfaces.Interface3): Interfaces.Interface2;
@@ -79,14 +79,14 @@ declare module Interfaces {
     }
     var Interface1: Function;
 
-    export interface Class3 extends Interfaces.Class2,Interfaces.Interface3 {
-        method5(i: Interfaces.Interface3): Interfaces.Interface2;
+    export interface Interface4 {
+        method6(b: {v: boolean}): void;
+        method7(i: number, b: {v: boolean}): void;
+        method8(s: {v: string}): void;
+        method9(i: number, s: {v: string}): void;
+        method10(i: number, b: {v: boolean}, s: {v: string}): void;
     }
-    export interface Class3Func extends Function {
-        prototype: Class3;
-        new (): Class3;
-    }
-    var Class3: Class3Func;
+    var Interface4: Function;
 
     export interface Class2 extends Interfaces.Class1,Interfaces.Interface2 {
         method1(): void;

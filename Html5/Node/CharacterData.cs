@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The CharacterData abstract interface represents a Node object that contains characters. This is an abstract interface, meaning there aren't any object of type CharacterData: it is implemented by other interfaces, like Text, Comment, or ProcessingInstruction which aren't abstract.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("CharacterData")]
     public class CharacterData : Node
     {

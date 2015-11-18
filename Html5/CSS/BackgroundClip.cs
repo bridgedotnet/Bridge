@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The background-clip CSS property specifies whether an element's background, either the color or image, extends underneath its border.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum BackgroundClip

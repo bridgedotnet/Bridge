@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The DocumentType interface represents a Node containing a doctype.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("DocumentType")]
     public class DocumentType : Node
     {

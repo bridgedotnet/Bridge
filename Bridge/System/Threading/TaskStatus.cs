@@ -2,7 +2,7 @@ using Bridge;
 
 namespace System.Threading.Tasks
 {
-    [Ignore]
+    [External]
     [Enum(Emit.Name)]
     [Namespace("Bridge")]
     public enum TaskStatus

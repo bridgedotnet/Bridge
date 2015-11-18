@@ -3,7 +3,7 @@
 
 namespace Bridge.Html5
 {
-    [Ignore]
+    [External]
     [Name("Location")]
     public class Location
     {

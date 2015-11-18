@@ -10,7 +10,6 @@ namespace Bridge.Translator
     {
         public Inspector()
         {
-            this.Usings = new HashSet<string>();
             this.Types = new List<ITypeInfo>();
             this.AssemblyInfo = new AssemblyInfo();
         }
@@ -65,7 +64,7 @@ namespace Bridge.Translator
 
         protected virtual bool HasIgnore(EntityDeclaration declaration)
         {
-            return this.HasAttribute(declaration, Translator.Bridge_ASSEMBLY + ".Ignore");
+            return this.HasAttribute(declaration, Translator.Bridge_ASSEMBLY + ".External") || this.HasAttribute(declaration, Translator.Bridge_ASSEMBLY + ".Ignore");
         }
 
         protected virtual bool HasInline(EntityDeclaration declaration)

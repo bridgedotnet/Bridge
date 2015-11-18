@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     ///
     /// </summary>
-    [Ignore]
+    [External]
     [Name("XMLHttpRequestUpload")]
     public class XMLHttpRequestUpload : XMLHttpRequestEventTarget
     {

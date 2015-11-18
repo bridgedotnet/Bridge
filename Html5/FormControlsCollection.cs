@@ -4,7 +4,7 @@ namespace Bridge.Html5
     /// The HTMLFormControlsCollection interface represents a collection of HTML form control elements. It provides one additional method besides the properties and methods inherited from HTMLCollection.
     /// This interface is used by the HTMLFormElement interface's elements property, and the HTMLFieldSetElement interface's elements property.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLFormControlsCollection")]
     public class FormControlsCollection : HTMLCollection
     {

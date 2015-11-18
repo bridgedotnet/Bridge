@@ -5,7 +5,7 @@ namespace Bridge
     /// <summary>
     /// TemplateAttribute is instruction to replace method calling (in expression) by required code
     /// </summary>
-    [Ignore]
+    [External]
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Field | AttributeTargets.Constructor)]
     public sealed class TemplateAttribute : Attribute
     {

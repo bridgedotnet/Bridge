@@ -7,7 +7,7 @@ namespace Bridge
     /// instead of its actual C# implementation. C# implementation is completely discarded if
     /// this attribute is used.
     /// </summary>
-    [Ignore]
+    [External]
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor)]
     public sealed class ScriptAttribute : Attribute
     {

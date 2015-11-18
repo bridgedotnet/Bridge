@@ -2,7 +2,7 @@ using Bridge;
 
 namespace System.Text.RegularExpressions
 {
-    [Ignore]
+    [External]
     public sealed class RegexMatch
     {
         public int Index
@@ -31,12 +31,12 @@ namespace System.Text.RegularExpressions
 
         public string this[int index]
         {
-            [Ignore]
+            [External]
             get
             {
                 return null;
             }
-            [Ignore]
+            [External]
             set
             {
             }

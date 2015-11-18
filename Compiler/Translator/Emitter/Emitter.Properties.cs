@@ -313,6 +313,12 @@ namespace Bridge.Translator
             set;
         }
 
+        public Action BeforeBlock
+        {
+            get;
+            set;
+        }
+
         public IWriterInfo LastSavedWriter
         {
             get;

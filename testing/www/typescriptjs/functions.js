@@ -27,3 +27,6 @@ Bridge.define('Functions.Parameters', {
     }
 });
 
+
+
+Bridge.init();

@@ -1,14 +1,6 @@
 ﻿/// <reference path="./bridge.d.ts" />
 
 declare module Functions {
-    export interface Delegates {
-    }
-    export interface DelegatesFunc extends Function {
-        prototype: Delegates;
-        new (): Delegates;
-    }
-    var Delegates: DelegatesFunc;
-
     export interface Parameters {
         getSomething(i?: number): number;
         join(numbers: number[]): string;
@@ -18,6 +10,14 @@ declare module Functions {
         new (): Parameters;
     }
     var Parameters: ParametersFunc;
+
+    export interface Delegates {
+    }
+    export interface DelegatesFunc extends Function {
+        prototype: Delegates;
+        new (): Delegates;
+    }
+    var Delegates: DelegatesFunc;
 
     export interface DelegateClass {
         methodVoidDelegate: {(): void};

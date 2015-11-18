@@ -1,4 +1,5 @@
-﻿using Bridge.Contract;
+﻿using System;
+using Bridge.Contract;
 using ICSharpCode.NRefactory.CSharp;
 using System.Collections.Generic;
 using System.Linq;
@@ -214,20 +215,24 @@ namespace Bridge.Translator
             this.BeginBlock();
 
             this.PushLocals();
-            var varName = this.AddLocal(foreachStatement.VariableName, foreachStatement.VariableType);
+            Action ac = () =>
+            {
+                var varName = this.AddLocal(foreachStatement.VariableName, foreachStatement.VariableType);
 
-            this.WriteVar();
-            this.Write(varName, " = ", iteratorName);
+                this.WriteVar();
+                this.Write(varName, " = ", iteratorName);
 
-            this.WriteDot();
-            this.Write(Bridge.Translator.Emitter.GET_CURRENT);
+                this.WriteDot();
+                this.Write(Bridge.Translator.Emitter.GET_CURRENT);
 
-            this.WriteOpenCloseParentheses();
-            this.WriteSemiColon();
-            this.WriteNewLine();
+                this.WriteOpenCloseParentheses();
+                this.WriteSemiColon();
+                this.WriteNewLine();
+            };
+            this.Emitter.BeforeBlock = ac;
 
             BlockStatement block = foreachStatement.EmbeddedStatement as BlockStatement;
-
+            
             if (replaceAwaiterByVar.HasValue)
             {
                 this.Emitter.ReplaceAwaiterByVar = replaceAwaiterByVar.Value;
@@ -235,15 +240,18 @@ namespace Bridge.Translator
 
             if (block != null)
             {
-                block.AcceptChildren(this.Emitter);
+                this.Emitter.NoBraceBlock = block;
             }
-            else
-            {
-                foreachStatement.EmbeddedStatement.AcceptVisitor(this.Emitter);
-            }
+
+            foreachStatement.EmbeddedStatement.AcceptVisitor(this.Emitter);
 
             this.PopLocals();
 
+            if (!this.Emitter.IsNewLine)
+            {
+                this.WriteNewLine();    
+            }
+            
             this.EndBlock();
             this.WriteNewLine();
         }

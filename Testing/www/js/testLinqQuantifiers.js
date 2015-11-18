@@ -48,3 +48,6 @@ Bridge.define('ClientTestLibrary.Linq.TestLinqQuantifiers', {
     }
 });
 
+
+
+Bridge.init();

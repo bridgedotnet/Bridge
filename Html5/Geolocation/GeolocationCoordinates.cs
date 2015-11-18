@@ -6,7 +6,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The Coordinates interface represents the position and attitude of the device on Earth, as well as the accuracy with which these data are computed.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("Object")]
     public class GeolocationCoordinates
     {

@@ -1,6 +1,6 @@
 namespace Bridge.Html5
 {
-    [Ignore]
+    [External]
     [Name("Storage")]
     public class Storage
     {

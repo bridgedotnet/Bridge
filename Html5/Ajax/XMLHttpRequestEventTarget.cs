@@ -5,7 +5,7 @@ namespace Bridge.Html5
     /// <summary>
     /// XMLHttpRequestEventTarget is the interface that describes the event handlers you can implement in an object that will handle events for an XMLHttpRequest.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("XMLHttpRequestEventTarget")]
     public abstract class XMLHttpRequestEventTarget : EventTarget
     {

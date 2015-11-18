@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The DOM WheelEvent represents events that occur due to the user moving a mouse wheel or similar input device.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("WheelEvent")]
     public class WheelEvent : Event
     {
@@ -35,7 +35,7 @@ namespace Bridge.Html5
     /// <summary>
     /// Unit of delta values.
     /// </summary>
-    [Ignore]
+    [External]
     public enum DeltaMode
     {
         /// <summary>

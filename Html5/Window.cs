@@ -8,7 +8,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The window object represents a window containing a DOM document; the document property points to the DOM document loaded in that window.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("window")]
     public static class Window
     {

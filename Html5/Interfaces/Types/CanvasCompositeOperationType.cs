@@ -6,7 +6,7 @@ namespace Bridge.Html5
         /// Indicates the desired type of compositing operation among the existing ones.
         /// See example effects in https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation
         /// </summary>
-        [Ignore]
+        [External]
         [Enum(Emit.StringNameLowerCase)]
         [Name("String")]
         public enum CanvasCompositeOperationType

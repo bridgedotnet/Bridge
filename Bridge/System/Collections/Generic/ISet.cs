@@ -7,7 +7,7 @@ namespace System.Collections.Generic
     /// by some comparer. It also supports basic set operations such as Union, Intersection,
     /// Complement and Exclusive Complement.
     /// </summary>
-    [Ignore]
+    [External]
     [Namespace("Bridge")]
     public interface ISet<T> : ICollection<T>
     {

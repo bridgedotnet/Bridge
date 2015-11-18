@@ -48,3 +48,6 @@ Bridge.define('ClientTestLibrary.Linq.TestLinqRestrictionOperators', {
     }
 });
 
+
+
+Bridge.init();

@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The word-break CSS property is used to specify how (or if) to break lines within words.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum WordBreak

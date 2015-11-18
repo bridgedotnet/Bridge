@@ -5,7 +5,7 @@ namespace Bridge.Html5
     /// <summary>
     ///  Each web page loaded in the browser has its own document object. The Document interface serves as an entry point to the web page's content (the DOM tree, including elements such as body and table) and provides functionality global to the document (such as obtaining the page's URL and creating new elements in the document).
     /// </summary>
-    [Ignore]
+    [External]
     [Name("document")]
     public static class Document
     {

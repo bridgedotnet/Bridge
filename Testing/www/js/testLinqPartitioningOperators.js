@@ -51,3 +51,6 @@ Bridge.define('ClientTestLibrary.Linq.TestLinqPartitioningOperators', {
     }
 });
 
+
+
+Bridge.init();

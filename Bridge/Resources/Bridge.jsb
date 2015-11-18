@@ -1,15 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<project path="" name="Bridge.NET" author="Object.NET, Inc." version="1.9.0" copyright="@version   : 1.9.0 - Bridge.NET&#xD;&#xA;@author    : Object.NET, Inc. http://bridge.net/&#xD;&#xA;@date      : 2015-09-21&#xD;&#xA;@copyright : Copyright (c) 2008-2015, Object.NET, Inc. (http://object.net/). All rights reserved.&#xD;&#xA;@license   : See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE." output="$project" source="False" minify="False" doc="False" master="true" zip="true">
+<project path="" name="Bridge.NET" author="Object.NET, Inc." version="1.10.0" copyright="@version   : 1.10.0 - Bridge.NET&#xD;&#xA;@author    : Object.NET, Inc. http://bridge.net/&#xD;&#xA;@date      : 2015-11-18&#xD;&#xA;@copyright : Copyright (c) 2008-2015, Object.NET, Inc. (http://object.net/). All rights reserved.&#xD;&#xA;@license   : See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE." output="$project" source="False" minify="False" doc="False" master="true" zip="true">
   <file name="Init.js" />
   <file name="End.js" />
   <file name="Core.js" />
   <file name="Nullable.js" />
   <file name="Char.js" />
   <file name="String.js" />
+  <file name="Enum.js" />
   <file name="Class.js" />
   <file name="Exception.js" />
   <file name="Interfaces.js" />
   <file name="Globalization.js" />
+  <file name="Math.js" />
   <file name="Integer.js" />
   <file name="Decimal.js" />
   <file name="Date.js" />
@@ -37,10 +39,12 @@
     <include name="Nullable.js" />
     <include name="Char.js" />
     <include name="String.js" />
+    <include name="Enum.js" />
     <include name="Class.js" />
     <include name="Exception.js" />
     <include name="Interfaces.js" />
     <include name="Globalization.js" />
+    <include name="Math.js" />
     <include name="Integer.js" />
     <include name="Decimal.js" />
     <include name="Date.js" />
@@ -48,6 +52,7 @@
     <include name="Text/StringBuilder.js" />
     <include name="Text/Regex.js" />
     <include name="Browser.js" />
+    <include name="Array.js" />
     <include name="Collections/Interfaces.js" />
     <include name="Collections/CustomEnumerator.js" />
     <include name="Collections/ArrayEnumerator.js" />
@@ -60,7 +65,6 @@
     <include name="Version.js" />
     <include name="Attribute.js" />
     <include name="INotifyPropertyChanged.js" />
-    <include name="Array.js" />
     <include name="linq.js" />
     <include name="End.js" />
   </target>

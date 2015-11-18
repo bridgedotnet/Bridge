@@ -3,9 +3,9 @@ namespace Bridge.Html5
     /// <summary>
     /// The HTMLAreaElement interface provides special properties and methods (beyond those of the regular object HTMLElement interface it also has available to it by inheritance) for manipulating the layout and presentation of area elements.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLAreaElement")]
-    public class AreaElement : Element
+    public class AreaElement : Element<AreaElement>
     {
         [Template("document.createElement('area')")]
         public AreaElement()

@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The font-stretch CSS property selects a normal, condensed, or expanded face from a font.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum FontStretch

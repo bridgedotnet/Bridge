@@ -5,7 +5,7 @@ namespace System
     /// <summary>
     /// The TypeError object represents an error when a value is not of the expected type.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("TypeError")]
     [Constructor("TypeError")]
     public class TypeException : Exception

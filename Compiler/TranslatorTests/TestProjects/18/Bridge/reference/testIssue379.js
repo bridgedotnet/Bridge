@@ -44,3 +44,6 @@ Bridge.define('TestIssue379.Tests', {
     }
 });
 
+
+
+Bridge.init();

@@ -130,3 +130,6 @@ Bridge.define('Generics.SimpleGeneric$1', function (T) { return {
     }
 }; });
 
+
+
+Bridge.init();

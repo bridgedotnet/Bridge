@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The CSS align-items property aligns flex items of the current flex line the same way as justify-content but in the perpendicular direction.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum AlignItems

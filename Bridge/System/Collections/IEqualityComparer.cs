@@ -2,7 +2,7 @@
 
 namespace System.Collections
 {
-    [Ignore]
+    [External]
     [Namespace("Bridge")]
     public interface IEqualityComparer : IBridgeClass
     {

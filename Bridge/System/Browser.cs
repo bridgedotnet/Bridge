@@ -1,6 +1,6 @@
 namespace Bridge
 {
-    [Ignore]
+    [External]
     [Name("Bridge.Browser")]
     public sealed class Browser
     {

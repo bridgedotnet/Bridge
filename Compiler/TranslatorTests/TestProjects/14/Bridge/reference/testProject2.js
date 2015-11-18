@@ -12,3 +12,5 @@ Bridge.define('TestProject2.TestClassB', {
         return 0;
     }
 });
+
+Bridge.init();

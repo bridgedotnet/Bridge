@@ -1,5 +1,6 @@
 using Object.Net.Utilities;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace Bridge.Translator
@@ -31,17 +32,15 @@ namespace Bridge.Translator
                 var fileName = outputPair.Key;
                 var output = outputPair.Value;
 
+                string extension = Path.GetExtension(fileName);
+                bool isJs = extension == ('.' + Bridge.Translator.AssemblyInfo.JAVASCRIPT_EXTENSION);
+
                 foreach (var moduleOutput in output.ModuleOutput)
                 {
                     WriteNewLine(output.NonModuletOutput, moduleOutput.Value.ToString());
                 }
 
-                if (this.AssemblyInfo.Output.IsNotEmpty())
-                {
-                    //fileName = Path.Combine(this.AssemblyInfo.Output, fileName);
-                }
-
-                result.Add(fileName, output.NonModuletOutput.ToString());
+                result.Add(fileName, output.NonModuletOutput.ToString() + (isJs ? "\n\nBridge.init();" : ""));
             }
 
             return result;

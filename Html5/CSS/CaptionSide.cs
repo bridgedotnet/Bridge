@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The caption-side CSS property positions the content of a table's &lt;caption&gt; on the specified side.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum CaptionSide

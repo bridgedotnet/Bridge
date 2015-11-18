@@ -6,7 +6,7 @@ namespace Bridge.Html5
     /// <summary>
     /// A collection of nodes returned by Node.attributes
     /// </summary>
-    [Ignore]
+    [External]
     [Name("NamedNodeMap")]
     public class NamedNodeMap : IEnumerable<Node>
     {

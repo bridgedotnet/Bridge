@@ -356,9 +356,9 @@ namespace Bridge.Translator
 
                 string name = null;
 
-                if (this.TypeInfo.TypeDeclaration.BaseTypes.Any())
+                if (this.TypeInfo.GetBaseTypes(this.Emitter).Any())
                 {
-                    name = BridgeTypes.ToJsName(this.TypeInfo.TypeDeclaration.BaseTypes.First(), this.Emitter);
+                    name = BridgeTypes.ToJsName(this.TypeInfo.GetBaseClass(this.Emitter), this.Emitter);
                 }
                 else
                 {
@@ -372,7 +372,9 @@ namespace Bridge.Translator
             }
             else
             {
-                this.WriteThis();
+               // this.WriteThis();
+                string name = BridgeTypes.ToJsName(this.TypeInfo.Type, this.Emitter);
+                this.Write(name, ".prototype");
                 this.WriteDot();
 
                 var baseName = "constructor";
@@ -389,6 +391,8 @@ namespace Bridge.Translator
                 }
 
                 this.Write(baseName);
+                this.Write(".call");
+                appendScope = true;
             }
 
             this.WriteOpenParentheses();

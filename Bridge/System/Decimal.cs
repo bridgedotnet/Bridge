@@ -8,7 +8,7 @@ namespace System
     /// The decimal data type.
     /// http://mikemcl.github.io/decimal.js/
     /// </summary>
-    [Ignore]
+    [External]
     [Name("Bridge.Decimal")]
     [Constructor("Bridge.Decimal")]
     public struct Decimal : IComparable, IComparable<Decimal>, IEquatable<Decimal>, IFormattable
@@ -245,6 +245,12 @@ namespace System
         [Template("Bridge.Decimal.round({d}, 6)")]
         public static extern decimal Round(decimal d);
 
+        [Template("Bridge.Decimal.toDecimalPlaces({d}, {decimals}, 6)")]
+        public static extern decimal Round(decimal d, int decimals);
+
+        [Template("Bridge.Decimal.toDecimalPlaces({d}, {decimals}, {mode})")]
+        public static extern decimal Round(decimal d, int decimals, MidpointRounding mode);
+
         [Template("Bridge.Decimal.round({d}, {mode})")]
         public static extern decimal Round(decimal d, MidpointRounding mode);
 
@@ -385,7 +391,7 @@ namespace System
 
     [Name("Object")]
     [Constructor("{ }")]
-    [Ignore]
+    [External]
     public class DecimalConfig
     {
         /// <summary>
@@ -442,7 +448,7 @@ namespace System
 
     [Name("Object")]
     [Constructor("{ }")]
-    [Ignore]
+    [External]
     public class DecimalFormatConfig
     {
         /// <summary>

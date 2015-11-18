@@ -263,7 +263,7 @@ namespace Bridge.Translator
 
                     type.Module = typeInfo.Module;
                     type.FileName = typeInfo.FileName;
-                    type.Dependencies = type.Dependencies;
+                    type.Dependencies = typeInfo.Dependencies;
                     typeInfo = type;
                 }
                 else

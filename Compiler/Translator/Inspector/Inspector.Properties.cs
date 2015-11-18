@@ -31,12 +31,6 @@ namespace Bridge.Translator
             set;
         }
 
-        public HashSet<string> Usings
-        {
-            get;
-            set;
-        }
-
         public List<ITypeInfo> Types
         {
             get;

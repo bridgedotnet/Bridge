@@ -1,3 +1,5 @@
+using ICSharpCode.NRefactory.TypeSystem;
+
 namespace Bridge.Contract
 {
     public interface IValidator
@@ -55,6 +57,8 @@ namespace Bridge.Contract
         bool IsIgnoreType(Mono.Cecil.ICustomAttributeProvider type, bool ignoreLiteral = false);
 
         bool IsIgnoreType(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition, bool ignoreLiteral = false);
+
+        bool IsIgnoreType(IEntity enity, bool ignoreLiteral = false);
 
         bool IsBridgeClass(Mono.Cecil.TypeDefinition type);
 

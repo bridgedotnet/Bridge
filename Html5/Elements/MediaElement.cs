@@ -1,12 +1,13 @@
-namespace Bridge.Html5
+﻿namespace Bridge.Html5
 {
     /// <summary>
     /// The HTMLMediaElement interface has special properties and methods (beyond the properties and methods available for all children of HTMLElement), that are common to all media-related objects.
     /// This interface is inherited by HTMLVideoElement and HTMLAudioElement.
     /// </summary>
-    [Ignore]
+    /// <typeparam name="TCurrentTarget">The CurrentTarget type of all MediaElement's events</typeparam>
+    [External]
     [Name("HTMLMediaElement")]
-    public abstract class MediaElement : Element
+    public abstract class MediaElement<TCurrentTarget> : Element<TCurrentTarget> where TCurrentTarget : Element<TCurrentTarget>
     {
         /// <summary>
         /// Reflects the autoplay HTML attribute, indicating whether playback should automatically begin as soon as enough media is available to do so without interruption.
@@ -195,6 +196,13 @@ namespace Bridge.Html5
         {
         }
     }
+
+    /// <summary>
+    /// The non-generic MediaElement class. Events' CurrentTarget has the MediaElement type.
+    /// </summary>
+    [External]
+    [Name("HTMLMediaElement")]
+    public abstract class MediaElement : Element<MediaElement> { }
 
     /// <summary>
     /// The TimeRanges interface is used to represent a set of time ranges, primarily for the purpose of tracking which portions of media have been buffered when loading it for use by the &lt;audio&gt; and &lt;video&gt; elements.

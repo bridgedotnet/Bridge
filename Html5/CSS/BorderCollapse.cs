@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The border-collapse CSS property selects a table's border model. This has a big influence on the look and style of the table cells.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum BorderCollapse

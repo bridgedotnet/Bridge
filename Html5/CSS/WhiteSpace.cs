@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The white-space CSS property is used to to describe how whitespace inside the element is handled.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum WhiteSpace

@@ -2,7 +2,7 @@ using Bridge;
 
 namespace System
 {
-    [Ignore]
+    [External]
     [Constructor("")]
     public struct Nullable<T> where T : struct
     {

@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The AnimationEvent interface represents events providing information related to animations.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("AnimationEvent")]
     public class AnimationEvent : Event
     {

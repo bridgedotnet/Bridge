@@ -3,9 +3,8 @@
 
 namespace Bridge.Html5
 {
-    [Ignore]
+    [External]
     [Name("Object")]
-    [Cast("{$is: function(obj){return Bridge.isFunction(obj.handleEvent);}}")]
     public interface IEventListener
     {
         /// <summary>

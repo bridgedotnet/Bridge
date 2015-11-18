@@ -246,7 +246,8 @@ namespace Bridge.Translator
                                 }
                                 else if (!isNative)
                                 {
-                                    string name = BridgeTypes.ToJsName(resolvedMethod.DeclaringType, this.Emitter) + "." + this.Emitter.GetEntityName(resolvedMethod);
+                                    var overloads = OverloadsCollection.Create(this.Emitter, resolvedMethod);
+                                    string name = BridgeTypes.ToJsName(resolvedMethod.DeclaringType, this.Emitter) + "." + overloads.GetOverloadName();
                                     var isIgnoreClass = resolvedMethod.DeclaringTypeDefinition != null && this.Emitter.Validator.IsIgnoreType(resolvedMethod.DeclaringTypeDefinition);
 
                                     this.Write(name);
@@ -357,25 +358,34 @@ namespace Bridge.Translator
 
                 string name = null;
 
-                if (this.Emitter.TypeInfo.TypeDeclaration.BaseTypes.Any())
+                if (this.Emitter.TypeInfo.GetBaseTypes(this.Emitter).Any())
                 {
-                    name = BridgeTypes.ToJsName(this.Emitter.TypeInfo.TypeDeclaration.BaseTypes.First(), this.Emitter);
+                    name = BridgeTypes.ToJsName(this.Emitter.TypeInfo.GetBaseClass(this.Emitter), this.Emitter);
                 }
                 else
                 {
                     name = BridgeTypes.ToJsName(baseType, this.Emitter);
                 }
 
-                if (resolveResult != null && resolveResult is InvocationResolveResult)
+                string baseMethod;
+
+                if (resolveResult is InvocationResolveResult)
                 {
                     InvocationResolveResult invocationResult = (InvocationResolveResult)resolveResult;
-                    this.Write(name, ".prototype.", this.Emitter.GetEntityName(invocationResult.Member));
+                    baseMethod = OverloadsCollection.Create(this.Emitter, invocationResult.Member).GetOverloadName();
+                }
+                else if (resolveResult is MemberResolveResult)
+                {
+                    MemberResolveResult memberResult = (MemberResolveResult)resolveResult;
+                    baseMethod = OverloadsCollection.Create(this.Emitter, memberResult.Member).GetOverloadName();
                 }
                 else
                 {
-                    string baseMethod = targetMember.MemberName;
-                    this.Write(name, ".prototype.", this.Emitter.AssemblyInfo.PreserveMemberCase ? baseMethod : Object.Net.Utilities.StringUtils.ToLowerCamelCase(baseMethod));
+                    baseMethod = targetMember.MemberName;
+                    baseMethod = this.Emitter.AssemblyInfo.PreserveMemberCase ? baseMethod : Object.Net.Utilities.StringUtils.ToLowerCamelCase(baseMethod);
                 }
+
+                this.Write(name, ".prototype.", baseMethod);
 
                 if (!isIgnore && argsInfo.HasTypeArguments)
                 {
@@ -468,6 +478,8 @@ namespace Bridge.Translator
                 }
             }
 
+            Helpers.CheckValueTypeClone(this.Emitter.Resolver.ResolveNode(invocationExpression, this.Emitter), invocationExpression, this);
+
             this.Emitter.ReplaceAwaiterByVar = oldValue;
             this.Emitter.AsyncExpressionHandling = oldAsyncExpressionHandling;
         }
@@ -475,7 +487,7 @@ namespace Bridge.Translator
         private bool IsNativeMethod(IMethod resolvedMethod)
         {
             return resolvedMethod.DeclaringTypeDefinition != null &&
-                   this.Emitter.Validator.HasAttribute(resolvedMethod.DeclaringTypeDefinition.Attributes, "Bridge.IgnoreAttribute");
+                   this.Emitter.Validator.IsIgnoreType(resolvedMethod.DeclaringTypeDefinition);
         }
     }
 }

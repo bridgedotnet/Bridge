@@ -627,6 +627,10 @@ Bridge.define("Bridge.Int", {
 
         clipu64: function (x) {
             return Bridge.isNumber(x) ? (Math.floor(x / 0x100000000) >>> 0) * 0x100000000 + (x >>> 0) : null;
+        },
+
+        sign: function (x) {
+            return Bridge.isNumber(x) ? (x === 0 ? 0 : (x < 0 ? -1 : 1)) : null;
         }
     }
 });

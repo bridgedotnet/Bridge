@@ -3,9 +3,9 @@ namespace Bridge.Html5
     /// <summary>
     /// The HTML &lt;meter&gt; elements expose the HTMLMeterElement interface, which provides special properties and methods (beyond the HTMLElement object interface they also have available to them by inheritance) for manipulating the layout and presentation of &lt;meter&gt; elements.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLMeterElement")]
-    public class MeterElement : Element
+    public class MeterElement : Element<MeterElement>
     {
         [Template("document.createElement('meter')")]
         public MeterElement()

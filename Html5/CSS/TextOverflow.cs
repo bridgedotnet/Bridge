@@ -1,9 +1,9 @@
-namespace Bridge.Html5
+﻿namespace Bridge.Html5
 {
     /// <summary>
     /// The text-overflow CSS property determines how overflowed content that is not displayed is signaled to the users. It can be clipped, or display an ellipsis ('…', U+2026 HORIZONTAL ELLIPSIS) or a Web author-defined string.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum TextOverflow

@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The FocusEvent interface represents focus-related events like focus, blur, focusin, or focusout.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("FocusEvent")]
     public class FocusEvent : UIEvent
     {

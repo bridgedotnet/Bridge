@@ -25,67 +25,54 @@
             }
         },
 
-        createAccessors: function (cfg, scope) {
-            var name,
-                config;
-
-            config = Bridge.isFunction(cfg) ? cfg() : cfg;
-
-            if (config.properties) {
-                for (name in config.properties) {
-                    Bridge.property(scope, name, config.properties[name]);
-                }
-            }
-        },
-
         initConfig: function (extend, base, cfg, statics, scope) {
             var initFn,
                 isFn = Bridge.isFunction(cfg),
                 fn = function () {
-                var name,
-                    config;
+                    var name,
+                        config;
 
-                config = Bridge.isFunction(cfg) ? cfg() : cfg;
+                    config = Bridge.isFunction(cfg) ? cfg() : cfg;
 
-                if (extend && !statics && base.$initMembers) {
-                    base.$initMembers.apply(this, arguments);
-                }
-
-                if (config.fields) {
-                    for (name in config.fields) {
-                        this[name] = config.fields[name];
-                    }
-                }
-
-                if (config.properties) {
-                    for (name in config.properties) {
-                        Bridge.property(this, name, config.properties[name]);
-                    }
-                }
-
-                if (config.events) {
-                    for (name in config.events) {
-                        Bridge.event(this, name, config.events[name]);
-                    }
-                }
-                if (config.alias) {
-                    for (name in config.alias) {
-                        if (this[name]) {
-                            this[name] = this[config.alias[name]];
+                    if (config.fields) {
+                        for (name in config.fields) {
+                            this[name] = config.fields[name];
                         }
                     }
-                }
 
-                if (config.init) {
-                    initFn = config.init;
-                }
-            };
+                    if (config.properties) {
+                        for (name in config.properties) {
+                            Bridge.property(this, name, config.properties[name]);
+                        }
+                    }
+
+                    if (config.events) {
+                        for (name in config.events) {
+                            Bridge.event(this, name, config.events[name]);
+                        }
+                    }
+                    if (config.alias) {
+                        for (name in config.alias) {
+                            if (this[name]) {
+                                this[name] = this[config.alias[name]];
+                            }
+                        }
+                    }
+
+                    if (config.init) {
+                        initFn = config.init;
+                    }
+                };
 
             if (!isFn) {
                 fn.apply(scope);
             }
 
             scope.$initMembers = function () {
+                if (extend && !statics && base.$initMembers) {
+                    base.$initMembers.apply(this, arguments);
+                }
+
                 if (isFn) {
                     fn.apply(this);
                 }
@@ -184,6 +171,10 @@
 
             scope = Bridge.Class.set(scope, className, Class);
 
+            if (cacheName) {
+                Bridge.Class.cache[cacheName] = Class;
+            }
+
             if (extend && Bridge.isFunction(extend)) {
                 extend = extend();
             }
@@ -214,14 +205,6 @@
 
             if (instanceConfig && !Bridge.isFunction(instanceConfig)) {
                 Bridge.Class.initConfig(extend, base, instanceConfig, false, prop);                
-
-                if (document && (document.readyState === "complete" || document.readyState === "loaded")) {
-                    Bridge.Class.createAccessors(instanceConfig, prototype);
-                } else {
-                    setTimeout(function () {
-                        Bridge.Class.createAccessors(instanceConfig, prototype);
-                    }, 0);
-                }
 
                 if (prop.$config) {
                     delete prop.$config;
@@ -282,10 +265,6 @@
 
             prototype.$$name = className;
 
-            if (cacheName) {
-                Bridge.Class.cache[cacheName] = Class;
-            }
-
             // Populate our constructed prototype object
             Class.prototype = prototype;
 
@@ -329,7 +308,7 @@
             if (document && (document.readyState === "complete" || document.readyState === "loaded")) {
                 fn();
             } else {
-                setTimeout(fn, 0);
+                Bridge.Class.$queue.push(fn);
             }
 
             return Class;
@@ -399,13 +378,26 @@
                 fn = scope;
                 scope = Bridge.global;
             }
-
+            fn.$$name = className;
             Bridge.Class.set(scope, className, fn);
 
             return fn;
+        },
+
+        init: function (fn) {
+            for (var i = 0; i < Bridge.Class.$queue.length; i++) {
+                Bridge.Class.$queue[i]();
+            }
+            Bridge.Class.$queue.length = 0;
+
+            if (fn) {
+                fn();
+            }
         }
     };
 
     Bridge.Class = base;
+    Bridge.Class.$queue = [];
     Bridge.define = Bridge.Class.define;
+    Bridge.init = Bridge.Class.init;
 })();

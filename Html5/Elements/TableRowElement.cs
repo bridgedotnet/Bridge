@@ -3,9 +3,9 @@ namespace Bridge.Html5
     /// <summary>
     /// The HTMLTableRowElement interface provides special properties and methods (beyond the HTMLElement interface it also has available to it by inheritance) for manipulating the layout and presentation of rows in an HTML table.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLTableRowElement")]
-    public class TableRowElement : Element
+    public class TableRowElement : Element<TableRowElement>
     {
         [Template("document.createElement('tr')")]
         public TableRowElement()

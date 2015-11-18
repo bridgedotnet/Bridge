@@ -6,7 +6,7 @@ namespace Bridge.Html5
     /// XMLHttpRequest is a JavaScript object that was designed by Microsoft and adopted by Mozilla, Apple, and Google. It's now being standardized in the W3C. It provides an easy way to retrieve data from a URL without having to do a full page refresh. A Web page can update just a part of the page without disrupting what the user is doing.  XMLHttpRequest is used heavily in AJAX programming.
     /// Despite its name, XMLHttpRequest can be used to retrieve any type of data, not just XML, and it supports protocols other than HTTP (including file and ftp).
     /// </summary>
-    [Ignore]
+    [External]
     [Name("XMLHttpRequest")]
     public class XMLHttpRequest : XMLHttpRequestEventTarget
     {

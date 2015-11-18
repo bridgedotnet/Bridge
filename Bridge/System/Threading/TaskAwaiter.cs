@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace System.Threading.Tasks
 {
-    [Ignore]
+    [External]
     [Name("Bridge.Task")]
     public class TaskAwaiter : INotifyCompletion
     {
@@ -30,7 +30,7 @@ namespace System.Threading.Tasks
         }
     }
 
-    [Ignore]
+    [External]
     [Name("Bridge.Task")]
     public class TaskAwaiter<TResult> : INotifyCompletion
     {

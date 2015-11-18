@@ -5,9 +5,9 @@ namespace Bridge.Html5
     /// <summary>
     /// The HTMLInputElement interface provides special properties and methods (beyond the regular HTMLElement interface it also has available to it by inheritance) for manipulating the layout and presentation of input elements.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLInputElement")]
-    public class InputElement : Element
+    public class InputElement : Element<InputElement>
     {
         [Template("document.createElement('input')")]
         public InputElement()
@@ -394,7 +394,7 @@ namespace Bridge.Html5
     /// <summary>
     ///
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum AutoComplete

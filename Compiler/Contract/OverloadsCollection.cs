@@ -398,7 +398,7 @@ namespace Bridge.Contract
         {
             var originalMember = member;
 
-            while (member.IsOverride)
+            while (member != null && member.IsOverride && !this.IsTemplateOverride(member))
             {
                 member = InheritanceHelper.GetBaseMember(member);
             }
@@ -595,6 +595,30 @@ namespace Bridge.Contract
             return sb.ToString();
         }
 
+        public virtual bool IsTemplateOverride(IMember member)
+        {
+            if (member.IsOverride)
+            {
+                member = InheritanceHelper.GetBaseMember(member);
+
+                if (member != null)
+                {
+                    var inline = this.Emitter.GetInline(member);
+                    bool isInline = !string.IsNullOrWhiteSpace(inline);
+                    if (isInline)
+                    {
+                        if (member.IsOverride)
+                        {
+                            return this.IsTemplateOverride(member);
+                        }
+                        return true;
+                    }
+                }    
+            }
+
+            return false;
+        }
+
         protected virtual List<IMethod> GetMethodOverloads(List<IMethod> list = null, ITypeDefinition typeDef = null)
         {
             bool isTop = list == null;
@@ -623,7 +647,7 @@ namespace Bridge.Contract
                             return false;
                         }
 
-                        if (m.IsOverride)
+                        if (m.IsOverride && !this.IsTemplateOverride(m))
                         {
                             return false;
                         }
@@ -638,7 +662,7 @@ namespace Bridge.Contract
 
                 if (this.Inherit)
                 {
-                    var baseTypeDefinitions = typeDef.DirectBaseTypes.Where(t => t.Kind == typeDef.Kind);
+                    var baseTypeDefinitions = typeDef.DirectBaseTypes.Where(t => t.Kind == typeDef.Kind || (typeDef.Kind == TypeKind.Struct && t.Kind == TypeKind.Class));
 
                     foreach (var baseTypeDef in baseTypeDefinitions)
                     {
@@ -679,8 +703,8 @@ namespace Bridge.Contract
                     bool eq = false;
                     if (p.IsStatic == this.Static)
                     {
-                        var getterIgnore = p.Getter != null && this.Emitter.Validator.HasAttribute(p.Getter.Attributes, "Bridge.IgnoreAttribute");
-                        var setterIgnore = p.Setter != null && this.Emitter.Validator.HasAttribute(p.Setter.Attributes, "Bridge.IgnoreAttribute");
+                        var getterIgnore = p.Getter != null && this.Emitter.Validator.IsIgnoreType(p.Getter);
+                        var setterIgnore = p.Setter != null && this.Emitter.Validator.IsIgnoreType(p.Setter);
                         var getterName = p.Getter != null ? Helpers.GetPropertyRef(p, this.Emitter, false, true, true) : null;
                         var setterName = p.Setter != null ? Helpers.GetPropertyRef(p, this.Emitter, true, true, true) : null;
                         if (!getterIgnore && getterName != null && (getterName == this.JsName || getterName == this.AltJsName))
@@ -695,7 +719,7 @@ namespace Bridge.Contract
 
                     if (eq)
                     {
-                        if (p.IsOverride)
+                        if (p.IsOverride && !this.IsTemplateOverride(p))
                         {
                             return false;
                         }
@@ -710,7 +734,7 @@ namespace Bridge.Contract
 
                 if (this.Inherit)
                 {
-                    var baseTypeDefinitions = typeDef.DirectBaseTypes.Where(t => t.Kind == typeDef.Kind);
+                    var baseTypeDefinitions = typeDef.DirectBaseTypes.Where(t => t.Kind == typeDef.Kind || (typeDef.Kind == TypeKind.Struct && t.Kind == TypeKind.Class));
 
                     foreach (var baseTypeDef in baseTypeDefinitions)
                     {
@@ -752,7 +776,7 @@ namespace Bridge.Contract
 
                 if (this.Inherit)
                 {
-                    var baseTypeDefinitions = typeDef.DirectBaseTypes.Where(t => t.Kind == typeDef.Kind);
+                    var baseTypeDefinitions = typeDef.DirectBaseTypes.Where(t => t.Kind == typeDef.Kind || (typeDef.Kind == TypeKind.Struct && t.Kind == TypeKind.Class));
 
                     foreach (var baseTypeDef in baseTypeDefinitions)
                     {
@@ -804,7 +828,7 @@ namespace Bridge.Contract
 
                     if (eq)
                     {
-                        if (e.IsOverride)
+                        if (e.IsOverride && !this.IsTemplateOverride(e))
                         {
                             return false;
                         }
@@ -819,7 +843,7 @@ namespace Bridge.Contract
 
                 if (this.Inherit)
                 {
-                    var baseTypeDefinitions = typeDef.DirectBaseTypes.Where(t => t.Kind == typeDef.Kind);
+                    var baseTypeDefinitions = typeDef.DirectBaseTypes.Where(t => t.Kind == typeDef.Kind || (typeDef.Kind == TypeKind.Struct && t.Kind == TypeKind.Class));
 
                     foreach (var baseTypeDef in baseTypeDefinitions)
                     {

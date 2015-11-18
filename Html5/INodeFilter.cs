@@ -1,6 +1,6 @@
 namespace Bridge.Html5
 {
-    [Ignore]
+    [External]
     public interface INodeFilter
     {
         /// <summary>
@@ -11,7 +11,7 @@ namespace Bridge.Html5
         NodeFilterResult AcceptNode(Node node);
     }
 
-    [Ignore]
+    [External]
     [Enum(Emit.Value)]
     [Name("Number")]
     public enum NodeFilterResult

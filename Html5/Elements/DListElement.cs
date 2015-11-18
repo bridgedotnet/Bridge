@@ -3,9 +3,9 @@ namespace Bridge.Html5
     /// <summary>
     /// The HTMLDListElement interface provides special properties (beyond those of the regular HTMLElement interface it also has available to it by inheritance) for manipulating definition list elements.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLDListElement")]
-    public class DListElement : Element
+    public class DListElement : Element<DListElement>
     {
         [Template("document.createElement('dl')")]
         public DListElement()

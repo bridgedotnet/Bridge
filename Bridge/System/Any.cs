@@ -1,6 +1,6 @@
 namespace Bridge
 {
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
@@ -27,7 +27,7 @@ namespace Bridge
         }
     }
 
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
@@ -64,7 +64,7 @@ namespace Bridge
         }
     }
 
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
@@ -111,7 +111,7 @@ namespace Bridge
         }
     }
 
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
@@ -168,7 +168,7 @@ namespace Bridge
         }
     }
 
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
@@ -235,7 +235,7 @@ namespace Bridge
         }
     }
 
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
@@ -312,7 +312,7 @@ namespace Bridge
         }
     }
 
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]

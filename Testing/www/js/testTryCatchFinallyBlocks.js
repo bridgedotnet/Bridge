@@ -235,3 +235,6 @@ Bridge.define('ClientTestLibrary.TestTryCatchFinallyBlocks', {
     }
 });
 
+
+
+Bridge.init();

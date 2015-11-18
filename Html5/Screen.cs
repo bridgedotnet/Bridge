@@ -6,7 +6,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The screen object is a special object for inspecting properties of the screen on which the current window is being rendered.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("Screen")]
     public class Screen
     {

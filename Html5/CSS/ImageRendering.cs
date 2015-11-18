@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The image-rendering CSS property provides a hint to the user agent about how to handle its image rendering.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum ImageRendering

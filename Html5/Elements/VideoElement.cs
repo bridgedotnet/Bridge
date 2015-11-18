@@ -5,9 +5,9 @@ namespace Bridge.Html5
     /// The HTML &lt;video&gt; element is used to embed video content. It may contain several video sources, represented using the src attribute or the &lt;source&gt; element; the browser will choose the most suitable one.
     /// The list of supported media formats vary from one browser to the other.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLVideoElement")]
-    public class VideoElement : MediaElement
+    public class VideoElement : MediaElement<VideoElement>
     {
         [Template("document.createElement('video')")]
         public VideoElement()

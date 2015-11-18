@@ -2,7 +2,7 @@ using Bridge;
 
 namespace System.Text
 {
-    [Ignore]
+    [External]
     [Namespace("Bridge.Text")]
     public class StringBuilder : IBridgeClass
     {

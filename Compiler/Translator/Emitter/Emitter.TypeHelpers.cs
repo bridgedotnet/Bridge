@@ -6,6 +6,7 @@ using Mono.Cecil;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TopologicalSorting;
 
 namespace Bridge.Translator
 {
@@ -65,6 +66,8 @@ namespace Bridge.Translator
 
         public virtual void SortTypesByInheritance()
         {
+            this.TopologicalSort();
+
             var clonedTypes = new List<ITypeInfo>(this.Types);
 
             foreach (var t in clonedTypes)
@@ -80,6 +83,62 @@ namespace Bridge.Translator
                         break;
                     }
                 }
+            }
+        }
+
+        public virtual void TopologicalSort()
+        {
+            var graph = new TopologicalSorting.DependencyGraph();
+
+            foreach (var t in this.Types)
+            {
+                var finder = new DependencyFinderVisitor(this);
+                t.TypeDeclaration.AcceptVisitor(finder);
+                var tProcess = new TopologicalSorting.OrderedProcess(graph, t.Type.FullName);
+
+                if (finder.Dependencies.Count > 0)
+                {
+                    foreach (var dependency in finder.Dependencies)
+                    {
+                        if (tProcess.Predecessors.All(p => p.Name != dependency.Type.FullName))
+                        {
+                            var dProcess = new TopologicalSorting.OrderedProcess(graph, dependency.Type.FullName);
+                            tProcess.After(dProcess);
+                        }
+                    }
+                }
+            }
+
+            if (graph.ProcessCount > 0)
+            {
+                ITypeInfo tInfo = null;
+
+                try
+                {
+                    IEnumerable<IEnumerable<OrderedProcess>> sorted = graph.CalculateSort();
+
+                    var list = new List<ITypeInfo>(this.Types.Count);
+                    foreach (var processes in sorted)
+                    {
+                        foreach (var process in processes)
+                        {
+                            tInfo = this.Types.First(ti => ti.Type.FullName == process.Name);
+
+                            if (list.All(t => t.Type.FullName != tInfo.Type.FullName))
+                            {
+                                list.Add(tInfo);
+                            }
+                        }
+                    }
+
+                    this.Types.Clear();
+                    this.Types.AddRange(list);
+                }
+                catch (Exception ex)
+                {
+                    this.LogWarning(string.Format("Topological sort failed {0} with error {1}", tInfo != null ? "at type " + tInfo.Type.FullName : string.Empty,  ex));
+                }
+
             }
         }
 
@@ -144,7 +203,7 @@ namespace Bridge.Translator
 
             var list = new List<string>();
 
-            foreach (var t in this.TypeInfo.TypeDeclaration.BaseTypes)
+            foreach (var t in this.TypeInfo.GetBaseTypes(this))
             {
                 var name = BridgeTypes.ToJsName(t, this);
 

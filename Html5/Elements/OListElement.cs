@@ -1,13 +1,13 @@
-using System;
+﻿using System;
 
 namespace Bridge.Html5
 {
     /// <summary>
     /// The HTMLOListElement interface provides special properties (beyond those defined on the regular HTMLElement interface it also has available to it by inheritance) for manipulating ordered list elements.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLOListElement")]
-    public class OListElement : Element
+    public class OListElement : Element<OListElement>
     {
         [Template("document.createElement('ol')")]
         public OListElement()
@@ -38,7 +38,7 @@ namespace Bridge.Html5
     /// <summary>
     /// Defines the kind of marker to be used to display with an &lt;ol&gt;. Reflects to the &lt;ol&gt;'s type attribute.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringName)]
     [Name("String")]
     public enum OListType

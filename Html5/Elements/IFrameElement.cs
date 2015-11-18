@@ -3,9 +3,9 @@ namespace Bridge.Html5
     /// <summary>
     /// The HTMLIFrameElement interface provides special properties and methods (beyond those of the HTMLElement interface it also has available to it by inheritance) for manipulating the layout and presentation of inline frame elements.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLIFrameElement")]
-    public class IFrameElement : Element
+    public class IFrameElement : Element<IFrameElement>
     {
         [Template("document.createElement('iframe')")]
         public IFrameElement()

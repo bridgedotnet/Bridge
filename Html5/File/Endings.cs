@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// Specifies how strings containing \n are to be written out.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     public enum Endings
     {

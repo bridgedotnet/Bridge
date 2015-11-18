@@ -2,7 +2,7 @@
 
 namespace Bridge
 {
-    [Ignore]
+    [External]
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class FieldPropertyAttribute : Attribute
     {

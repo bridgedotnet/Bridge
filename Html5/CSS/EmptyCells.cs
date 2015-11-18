@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The empty-cells CSS property specifies how user agents should render borders and backgrounds around cells that have no visible content.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum EmptyCells

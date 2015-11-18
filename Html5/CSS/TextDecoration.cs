@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The text-decoration CSS property is used to set the text formatting to underline, overline, line-through or blink.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum TextDecoration

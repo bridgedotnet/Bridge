@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The CSS all shorthand property resets all properties, but unicode-bidi and direction to their initial or inherited value.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum All

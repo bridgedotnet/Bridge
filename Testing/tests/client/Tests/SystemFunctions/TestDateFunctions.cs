@@ -38,11 +38,11 @@ namespace ClientTestLibrary
             DateTime d1;
             var b1 = DateTime.TryParse("2001-01-01", out d1, true);
             assert.Ok(b1, "TryParse parsed '2001 - 01 - 01'");
-            assert.Equal(d1.GetUTCFullYear(), 2001, "TryParse works Year");
+            assert.Equal(d1.GetUtcFullYear(), 2001, "TryParse works Year");
             assert.Equal(d1.GetUtcMonth(), 1, "TryParse works Month");
-            assert.Equal(d1.GetUTCDay(), 1, "TryParse works Day");
+            assert.Equal(d1.GetUtcDay(), 1, "TryParse works Day");
 
-            var d2 = DateTime.Parse("2001-01-01");
+            var d2 = DateTime.Parse("2001-01-01", true);
             assert.DeepEqual(d2.ToString(), d1.ToString(), "TryParse And Parse give the same result");
         }
 

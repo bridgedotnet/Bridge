@@ -81,11 +81,6 @@ namespace Bridge.Translator
         {
             this.Emitter.Locals.Add(name, type);
 
-            if (this.Emitter.IsAsync && !this.Emitter.AsyncVariables.Contains(name))
-            {
-                this.Emitter.AsyncVariables.Add(name);
-            }
-
             name = name.StartsWith(Bridge.Translator.Emitter.FIX_ARGUMENT_NAME) ? name.Substring(Bridge.Translator.Emitter.FIX_ARGUMENT_NAME.Length) : name;
             string vName = name;
 
@@ -103,16 +98,42 @@ namespace Bridge.Translator
                 this.Emitter.LocalsNamesMap[name] = this.GetUniqueName(vName);
             }
 
-            return this.Emitter.LocalsNamesMap[name];
+            var result = this.Emitter.LocalsNamesMap[name];
+
+            if (this.Emitter.IsAsync && !this.Emitter.AsyncVariables.Contains(result))
+            {
+                this.Emitter.AsyncVariables.Add(result);
+            }
+
+            return result;
         }
 
         protected virtual string GetUniqueName(string name)
         {
-            string tempName = name + "1";
+            int index = 1;
+
+            if (this.Emitter.LocalsNamesMap.ContainsKey(name))
+            {
+                var value = this.Emitter.LocalsNamesMap[name];
+                if (value.Length > name.Length)
+                {
+                    var suffix = value.Substring(name.Length);
+
+                    int subindex;
+                    bool isNumeric = int.TryParse(suffix, out subindex);
+
+                    if (isNumeric)
+                    {
+                        index = subindex + 1;
+                    }
+                }
+            }
+
+            string tempName = name + index;
 
             while (this.Emitter.LocalsNamesMap.ContainsValue(tempName))
             {
-                tempName += "1";
+                tempName = name + ++index;
             }
 
             return tempName;

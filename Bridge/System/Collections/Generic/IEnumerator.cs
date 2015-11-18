@@ -2,7 +2,7 @@ using Bridge;
 
 namespace System.Collections.Generic
 {
-    [Ignore]
+    [External]
     [Namespace("Bridge")]
     public interface IEnumerator<out T> : IBridgeClass, IDisposable, IEnumerator
     {

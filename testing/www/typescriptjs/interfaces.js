@@ -97,3 +97,6 @@ Bridge.define('Interfaces.Interface61');
 
 Bridge.define('Interfaces.Interface62');
 
+
+
+Bridge.init();

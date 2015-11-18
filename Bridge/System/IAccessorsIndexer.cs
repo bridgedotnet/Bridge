@@ -1,6 +1,6 @@
 namespace Bridge
 {
-    [Ignore]
+    [External]
     public interface IAccessorsIndexer
     {
     }

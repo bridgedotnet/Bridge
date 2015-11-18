@@ -89,3 +89,6 @@ Bridge.define('ClientTestLibrary.Linq.TestLinqJoinOperators', {
     }
 });
 
+
+
+Bridge.init();

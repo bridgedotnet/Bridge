@@ -175,6 +175,14 @@ namespace Bridge.Translator
                     case UnaryOperatorType.BitNot:
                         if (nullable)
                         {
+                            bool is64bit = resolveOperator.Type.IsKnownType(KnownTypeCode.UInt64) ||
+                               resolveOperator.Type.IsKnownType(KnownTypeCode.Int64);
+
+                            if (is64bit)
+                            {
+                                throw new EmitterException(this.UnaryOperatorExpression, "Bitwise operations are not allowed on 64-bit types");
+                            }
+
                             this.Write("bnot(");
                             unaryOperatorExpression.Expression.AcceptVisitor(this.Emitter);
                             this.Write(")");

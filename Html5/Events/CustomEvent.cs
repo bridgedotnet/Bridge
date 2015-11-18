@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The DOM CustomEvent are events initialized by an application for any purpose.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("CustomEvent")]
     public class CustomEvent : Event
     {
@@ -32,7 +32,7 @@ namespace Bridge.Html5
         }
     }
 
-    [Ignore]
+    [External]
     [Name("Object")]
     public class CustomEventInit : EventInit
     {

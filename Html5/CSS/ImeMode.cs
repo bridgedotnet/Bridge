@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The ime-mode CSS property controls the state of the input method editor for text fields.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum ImeMode

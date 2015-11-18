@@ -1,6 +1,6 @@
 namespace Bridge.Html5
 {
-    [Ignore]
+    [External]
     public enum HtmlEventTarget
     {
         [Template("{0}")]
@@ -13,13 +13,14 @@ namespace Bridge.Html5
         QuerySelector = 2
     }
 
-    [Ignore]
+    [External]
     public abstract class EventAttribute : Bridge.AdapterAttribute
     {
         public const string Format = "Bridge.on('{0}', {1}, this.{2});";
+        public const string FormatScope = "Bridge.on('{0}', {1}, this.{2}, this);";
     }
 
-    [Ignore]
+    [External]
     public class HtmlEventAttribute : EventAttribute
     {
         public const bool IsCommonEvent = true;
@@ -37,10 +38,11 @@ namespace Bridge.Html5
     /// Makes the method to be called once the page is loaded. If using jQuery2, triggers jQuery's event,
     /// otherwise, uses DOMContentReady event from HTML5.
     /// </summary>
-    [Ignore]
+    [External]
     public class ReadyAttribute : EventAttribute
     {
         new public const string Format = "Bridge.ready(this.{2});";
+        new public const string FormatScope = "Bridge.ready(this.{2}, this);";
         public const string Event = "ready";
 
         public ReadyAttribute()
@@ -48,7 +50,7 @@ namespace Bridge.Html5
         }
     }
 
-    [Ignore]
+    [External]
     public class ClickAttribute : EventAttribute
     {
         public const string Event = "click";

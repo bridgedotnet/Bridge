@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The ArrayBuffer is a data type that is used to represent a generic, fixed-length binary data buffer. You can't directly manipulate the contents of an ArrayBuffer; instead, you create an ArrayBufferView object which represents the buffer in a specific format, and use that to read and write the contents of the buffer.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("ArrayBuffer")]
     public class ArrayBuffer
     {

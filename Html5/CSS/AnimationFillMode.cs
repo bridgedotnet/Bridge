@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The animation-fill-mode CSS property specifies how a CSS animation should apply styles to its target before and after it is executing.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum AnimationFillMode

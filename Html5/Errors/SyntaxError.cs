@@ -5,7 +5,7 @@ namespace System
     /// <summary>
     /// The SyntaxError object represents an error when trying to interpret syntactically invalid code.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("SyntaxError")]
     [Constructor("SyntaxError")]
     public class SyntaxException : Exception

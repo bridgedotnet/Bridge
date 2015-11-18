@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The direction in which to adjust the current selection.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum SelectionDirection

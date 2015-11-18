@@ -2,7 +2,7 @@ using Bridge;
 
 namespace System.Collections.Generic
 {
-    [Ignore]
+    [External]
     [Namespace("Bridge")]
     public interface IEqualityComparer<in T> : IBridgeClass
     {
@@ -13,7 +13,7 @@ namespace System.Collections.Generic
         int GetHashCode(T obj);
     }
 
-    [Ignore]
+    [External]
     [Namespace("Bridge")]
     public abstract class EqualityComparer<T> : IEqualityComparer<T>, IBridgeClass
     {

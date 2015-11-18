@@ -21,6 +21,7 @@ namespace Bridge.Translator
             this.Operators = new Dictionary<OperatorType, List<OperatorDeclaration>>();
             this.StaticConfig = new TypeConfigInfo();
             this.InstanceConfig = new TypeConfigInfo();
+            this.PartialTypeDeclarations = new List<TypeDeclaration>();
         }
 
         public string Key
@@ -59,6 +60,12 @@ namespace Bridge.Translator
             set;
         }
 
+        public List<TypeDeclaration> PartialTypeDeclarations
+        {
+            get;
+            set;
+        }
+
         public bool IsStatic
         {
             get;
@@ -78,12 +85,6 @@ namespace Bridge.Translator
         }
 
         public string Name
-        {
-            get;
-            set;
-        }
-
-        public HashSet<string> Usings
         {
             get;
             set;
@@ -273,6 +274,43 @@ namespace Bridge.Translator
         {
             get;
             set;
+        }
+
+        public AstType GetBaseClass(IEmitter emitter)
+        {
+            var types = this.GetBaseTypes(emitter);
+            var baseClass = types.FirstOrDefault(t => emitter.Resolver.ResolveNode(t, emitter).Type.Kind != TypeKind.Interface);
+
+            return baseClass ?? types.First();
+        }
+
+        private List<AstType> baseTypes;
+        public List<AstType> GetBaseTypes(IEmitter emitter)
+        {
+            if (this.baseTypes != null)
+            {
+                return this.baseTypes;
+            }
+
+            this.baseTypes = new List<AstType>();
+            this.baseTypes.AddRange(this.TypeDeclaration.BaseTypes);
+
+            foreach (var partialTypeDeclaration in this.PartialTypeDeclarations)
+            {
+                var temp = new List<AstType>();
+                foreach (var baseType in partialTypeDeclaration.BaseTypes)
+                {
+                    var t = emitter.Resolver.ResolveNode(baseType, emitter);
+                    if (this.baseTypes.All(bt => emitter.Resolver.ResolveNode(baseType, emitter).Type.FullName != t.Type.FullName))
+                    {
+                        temp.Add(baseType);
+                    }
+                }
+
+                this.baseTypes.AddRange(temp);
+            }
+
+            return this.baseTypes;
         }
     }
 }

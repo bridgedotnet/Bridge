@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The CaretPosition interface represents the caret postion, an indicator for the text insertion point. You can get a CaretPosition using the document.caretPositionFromPoint method.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("CaretPosition")]
     public class CaretPosition
     {

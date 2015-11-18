@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// returns an unsigned short integer representing the type of the node.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.Value)]
     [Name("Number")]
     public enum NodeType

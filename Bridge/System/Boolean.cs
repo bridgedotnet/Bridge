@@ -2,7 +2,7 @@
 
 namespace System
 {
-    [Ignore]
+    [External]
     [Name("Boolean")]
     //[Constructor("!!")]
     public struct Boolean

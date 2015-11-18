@@ -3,9 +3,9 @@ namespace Bridge.Html5
     /// <summary>
     /// The HTMLBaseElement interface contains the base URI for a document. This object inherits all of the properties and methods as described in the HTMLElement interface.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLBaseElement")]
-    public class BaseElement : Element
+    public class BaseElement : Element<BaseElement>
     {
         [Template("document.createElement('base')")]
         public BaseElement()

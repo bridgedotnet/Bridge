@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The position relative to the element
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum InsertPosition

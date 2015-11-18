@@ -258,13 +258,17 @@ namespace Bridge.Translator
                 this.Emitter.ReturnType = this.ReturnType;
             }
 
+            if (this.Emitter.BeforeBlock != null)
+            {
+                this.Emitter.BeforeBlock();
+                this.Emitter.BeforeBlock = null;
+            }
+
             this.BlockStatement.Children.ToList().ForEach(child => child.AcceptVisitor(this.Emitter));
         }
 
         public void EndEmitBlock()
         {
-            var blockWasEnded = false;
-
             if (this.IsYield)
             {
                 YieldBlock.EmitYieldReturn(this, this.ReturnType);
@@ -278,24 +282,27 @@ namespace Bridge.Translator
             if (!this.NoBraces && (!this.Emitter.IsAsync || (!this.AsyncNoBraces && this.BlockStatement.Parent != this.Emitter.AsyncBlock.Node)))
             {
                 this.EndBlock();
-                blockWasEnded = true;
             }
 
             if (this.AddEndBlock)
             {
                 this.WriteNewLine();
                 this.EndBlock();
-                blockWasEnded = true;
             }
 
-            if (blockWasEnded && this.WrapByFn.HasValue && this.WrapByFn.Value)
+            if (this.WrapByFn.HasValue && this.WrapByFn.Value)
             {
                 var isBlock = (this.HandleContinue.HasValue && this.HandleContinue.Value) ||
                               (this.HandleBreak.HasValue && this.HandleBreak.Value);
 
-                if (!isBlock)
+                if (this.NoBraces)
                 {
                     this.Outdent();
+                }
+
+                if (this.NoBraces)
+                {
+                    this.Write("}");
                 }
 
                 this.Write(").call(this);");
@@ -312,10 +319,14 @@ namespace Bridge.Translator
                     this.Write("if(" + this.LoopVar + " == 2) break;");
                 }
 
-                if (isBlock)
+                if (!this.NoBraces)
                 {
                     this.WriteNewLine();
                     this.EndBlock();
+                }
+
+                if (isBlock)
+                {
                     this.RemoveTempVar(this.LoopVar);
                 }
 
@@ -339,27 +350,29 @@ namespace Bridge.Translator
         {
             this.PushLocals();
 
-            if (!this.NoBraces && (!this.Emitter.IsAsync || (!this.AsyncNoBraces && this.BlockStatement.Parent != this.Emitter.AsyncBlock.Node)))
+            if (this.WrapByFn.HasValue && this.WrapByFn.Value)
             {
-                if (this.WrapByFn.HasValue && this.WrapByFn.Value)
+                if (!this.NoBraces)
                 {
-                    this.WriteNewLine();
-
-                    if ((this.HandleContinue.HasValue && this.HandleContinue.Value) ||
-                        (this.HandleBreak.HasValue && this.HandleBreak.Value))
-                    {
-                        this.BeginBlock();
-                        this.LoopVar = this.GetTempVarName();
-                        this.Write("var " + this.LoopVar + " = ");
-                    }
-                    else
-                    {
-                        this.Indent();
-                    }
-
-                    this.Write("(function () ");
+                    this.BeginBlock();
                 }
 
+                if ((this.HandleContinue.HasValue && this.HandleContinue.Value) ||
+                    (this.HandleBreak.HasValue && this.HandleBreak.Value))
+                {
+                    this.LoopVar = this.GetTempVarName();
+                    this.Write("var " + this.LoopVar + " = ");
+                }
+                else if (!this.NoBraces)
+                {
+                    //this.Indent();
+                }
+
+                this.Write("(function () ");
+                this.BeginBlock();
+            }
+            else if (!this.NoBraces && (!this.Emitter.IsAsync || (!this.AsyncNoBraces && this.BlockStatement.Parent != this.Emitter.AsyncBlock.Node)))
+            {
                 this.BeginBlock();
             }
 

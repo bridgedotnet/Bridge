@@ -6,7 +6,7 @@ namespace Bridge.Html5
     /// <summary>
     /// MediaList representing the intended destination medium for style information.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("MediaList")]
     public class MediaList : IEnumerable<string>
     {

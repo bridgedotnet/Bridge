@@ -224,6 +224,12 @@ namespace Bridge.Contract
             set;
         }
 
+        Action BeforeBlock
+        {
+            get; 
+            set;
+        }
+
         System.Text.StringBuilder Output
         {
             get;

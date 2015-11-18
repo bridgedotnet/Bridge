@@ -127,3 +127,6 @@ Bridge.define('ClientTestLibrary.Linq.TestLinqGroupingOperators', {
     }
 });
 
+
+
+Bridge.init();

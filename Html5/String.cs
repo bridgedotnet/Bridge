@@ -5,7 +5,7 @@ namespace Bridge.Html5
     /// <summary>
     /// String global object extension methods to cater for the ECMA String prototype object.
     /// </summary>
-    [Ignore]
+    [External]
     public static class StringPrototype
     {
         /// <summary>

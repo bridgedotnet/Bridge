@@ -31,7 +31,11 @@ namespace Bridge.Translator
                 foreach (var attr in attrSection.Attributes)
                 {
                     var rr = this.Emitter.Resolver.ResolveNode(attr.Type, this.Emitter);
-                    if (rr.Type.FullName == "Bridge.InitAttribute")
+                    if (rr.Type.FullName == "Bridge.ExternalAttribute" || rr.Type.FullName == "Bridge.IgnoreAttribute")
+                    {
+                        return;
+                    }
+                    else if (rr.Type.FullName == "Bridge.InitAttribute")
                     {
                         int initPosition = 0;
 

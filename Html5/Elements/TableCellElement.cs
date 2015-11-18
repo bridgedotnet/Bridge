@@ -4,9 +4,10 @@ namespace Bridge.Html5
     /// The HTMLTableCellElement interface provides special properties and methods (beyond the regular HTMLElement interface it also has available to it by inheritance) for manipulating the layout and presentation of table cells, either header or data cells, in an HTML document.
     /// The HTML elements implementing this interface: &lt;th&gt; and &lt;td&gt;.
     /// </summary>
-    [Ignore]
+    /// <typeparam name="TCurrentTarget">The CurrentTarget type of all TableCellElement's events</typeparam>
+    [External]
     [Name("HTMLTableCellElement")]
-    public abstract class TableCellElement : Element
+    public abstract class TableCellElement<TCurrentTarget> : Element<TCurrentTarget> where TCurrentTarget : Element<TCurrentTarget>
     {
         /// <summary>
         /// Is an unsigned long that represents the number of columns this cell must span. It reflects the colspan attribute.
@@ -30,4 +31,11 @@ namespace Bridge.Html5
         /// </summary>
         public int CellIndex;
     }
+
+    /// <summary>
+    /// The non-generic TableCellElement class. Events' CurrentTarget has the TableCellElement type.
+    /// </summary>
+    [External]
+    [Name("HTMLTableCellElement")]
+    public abstract class TableCellElement : Element<TableCellElement> { }
 }

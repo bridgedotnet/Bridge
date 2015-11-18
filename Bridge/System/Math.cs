@@ -2,7 +2,7 @@ using Bridge;
 
 namespace System
 {
-    [Ignore]
+    [External]
     [Name("Math")]
     public static class Math
     {
@@ -123,19 +123,39 @@ namespace System
         [Template("{d}.floor()")]
         public static extern decimal Floor(decimal d);
 
-        public static double Round(double x)
-        {
-            return 0;
-        }
-
         [Template("Bridge.Decimal.round({x}, 6)")]
         public static decimal Round(decimal x)
         {
             return 0;
         }
 
+
+        [Template("Bridge.Math.round({d}, 0, 6)")]
+        public static extern double Round(double d);
+
+        [Template("Math.round({d})")]
+        public static extern double JsRound(double d);
+
+        [Template("Bridge.Decimal.toDecimalPlaces({d}, {digits}, 6)")]
+        public static extern decimal Round(decimal d, int digits);
+
+        [Template("Bridge.Math.round({d}, {digits}, 6)")]
+        public static extern double Round(double d, int digits);
+
         [Template("Bridge.Decimal.round({d}, {method})")]
         public static extern decimal Round(decimal d, MidpointRounding method);
+
+        [Template("Bridge.Math.round({d}, 0, {method})")]
+        public static extern double Round(double d, MidpointRounding method);
+
+        [Template("Bridge.Decimal.toDecimalPlaces({d}, {digits}, {method})")]
+        public static extern decimal Round(decimal d, int digits, MidpointRounding method);
+
+        [Template("Bridge.Math.round({d}, {digits}, {method})")]
+        public static extern double Round(double d, int digits, MidpointRounding method);
+
+        [Template("{x} - ({y} * Math.round({x} / {y}))")]
+        public static extern double IEEERemainder(double x, double y);
 
         public static double Exp(double x)
         {
@@ -182,6 +202,11 @@ namespace System
             return 0;
         }
 
+        public static double Pow(int x, int y)
+        {
+            return 0;
+        }
+
         public static double Acos(double x)
         {
             return 0;
@@ -223,7 +248,16 @@ namespace System
         [Template("{d}.trunc()")]
         public static extern decimal Truncate(decimal d);
 
+        [Template("Bridge.Int.sign({value})")]
+        public static extern int Sign(double value);
+
         [Template("{value}.sign()")]
         public static extern int Sign(decimal value);
+
+        [Template("Bridge.Math.divRem({a}, {b}, {result})")]
+        public static extern int DivRem(int a, int b, out int result);
+
+        [Template("Bridge.Math.divRem({a}, {b}, {result})")]
+        public static extern long DivRem(long a, long b, out long result);
     }
 }

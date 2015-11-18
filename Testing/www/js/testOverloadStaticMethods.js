@@ -82,3 +82,6 @@ Bridge.define('ClientTestLibrary.TestOverloadStaticMethods.Static', {
     }
 });
 
+
+
+Bridge.init();

@@ -66,12 +66,11 @@
     <Compile Include="Attributes\InitAttribute.cs" />
     <Compile Include="Attributes\ModuleDependencyAttribute.cs" />
     <Compile Include="Attributes\ModuleAttribute.cs" />
-    <Compile Include="Attributes\CastAttribute.cs" />
     <Compile Include="Attributes\ObjectLiteralAttribute.cs" />
     <Compile Include="Attributes\InlineConstAttribute.cs" />
     <Compile Include="Attributes\NamespaceAttribute.cs" />
     <Compile Include="Attributes\NameAttribute.cs" />
-    <Compile Include="Attributes\IgnoreAttribute.cs" />
+    <Compile Include="Attributes\ExternalAttribute.cs" />
     <Compile Include="Attributes\FileNameAttribute.cs" />
     <Compile Include="Attributes\ScriptAttribute.cs" />
     <Compile Include="Bridge\Linq\Enumerable.cs" />
@@ -90,11 +89,13 @@
     <Compile Include="System\Collections\Generic\ISet.cs" />
     <Compile Include="System\Collections\ObjectModel\ReadOnlyCollection.cs" />
     <Compile Include="System\Comparison.cs" />
+    <Compile Include="System\Enum.cs" />
     <Compile Include="System\Environment.cs" />
     <Compile Include="System\EventArgs.cs" />
     <Compile Include="System\EventHandler.cs" />
     <Compile Include="System\IDisposable.cs" />
     <Compile Include="System\IAccessorsIndexer.cs" />
+    <Compile Include="System\RankException.cs" />
     <Compile Include="System\Linq\Enumerable.cs" />
     <Compile Include="System\Linq\Grouping.cs" />
     <Compile Include="System\Linq\EnumerableInstance.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="System\Linq\OrderedEnumerable.cs" />
     <Compile Include="System\MidpointRounding.cs" />
     <Compile Include="System\StringComparison.cs" />
+    <Compile Include="System\StringSplitOptions.cs" />
     <Compile Include="System\Version.cs" />
     <Compile Include="This.cs" />
     <Compile Include="System\OverflowException.cs" />
@@ -602,6 +604,8 @@
     <EmbeddedResource Include="Resources\Locales\zh.js" />
     <EmbeddedResource Include="Resources\Locales\zu-ZA.js" />
     <EmbeddedResource Include="Resources\Locales\zu.js" />
+    <Content Include="Resources\Enum.js" />
+    <Content Include="Resources\Math.js" />
     <Content Include="Resources\Version.js" />
     <None Include="AdditionalCompilerOptions.txt" />
     <Content Include="Resources\Array.js" />

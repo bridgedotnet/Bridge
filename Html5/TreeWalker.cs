@@ -4,7 +4,7 @@ namespace Bridge.Html5
     /// The TreeWalker object represents the nodes of a document subtree and a position within them.
     /// A TreeWalker can be created using the Document.createTreeWalker() method.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("TreeWalker")]
     public class TreeWalker
     {

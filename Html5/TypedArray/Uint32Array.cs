@@ -9,8 +9,9 @@ namespace Bridge.Html5
     /// Once established, you can reference elements in the array using the object's methods, or using
     /// standard array index syntax (that is, using bracket notation).
     /// </summary>
-    [Ignore]
-    public class Uint32Array
+    [External]
+    [Namespace(false)]
+    public class Uint32Array : TypedArray.Prototype<Uint32Array, uint>
     {
         /// <summary>
         /// Creates a new Uint32Array of the specified length.
@@ -78,11 +79,6 @@ namespace Bridge.Html5
         /// Returns the string value of the constructor name. In the case of the Uint32Array type: "Uint32Array".
         /// </summary>
         public const string name = "Uint32Array";
-
-        /// <summary>
-        /// Prototype for the TypedArray objects.
-        /// </summary>
-        public readonly TypedArray.Prototype<Uint32Array, uint> Prototype;
 
         #endregion Properties
 

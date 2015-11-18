@@ -40,3 +40,6 @@ Bridge.define('ClientTestLibrary.Linq.TestLinqMiscellaneousOperators', {
     }
 });
 
+
+
+Bridge.init();

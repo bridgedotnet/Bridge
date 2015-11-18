@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace System
 {
-    [Ignore]
+    [External]
     [Name("Array")]
     public sealed class Array : IEnumerable, ICloneable
     {
@@ -16,12 +16,12 @@ namespace System
 
         public object this[int index]
         {
-            [Ignore]
+            [External]
             get
             {
                 return null;
             }
-            [Ignore]
+            [External]
             set
             {
             }
@@ -112,11 +112,13 @@ namespace System
             return null;
         }
 
-        public void Sort()
+        [Name("sort")]
+        public void JsSort()
         {
         }
 
-        public void Sort(object compareFunction)
+        [Name("sort")]
+        public void JsSort(Func<object, object, int> compareFunction)
         {
         }
 
@@ -215,6 +217,12 @@ namespace System
         [Template("Bridge.Array.copy({src}, 0, {dst}, 0, {len})")]
         public static extern void Copy(Array src, Array dst, int len);
 
+        [Template("Bridge.Array.copy({this}, {index}, {array}, 0, {this}.length - {index})")]
+        public extern void CopyTo(Array array, int index);
+
+        [Template("Bridge.Array.copy({this}, {index}, {array}, 0, {this}.length - {index})")]
+        public extern void CopyTo(Array array, long index);
+
         [Template("Bridge.Array.resize({array}, {newSize}, {T}.getDefaultValue || Bridge.getDefaultValue({T}))")]
         public static extern void Resize<T>(T[] array, int newSize);
 
@@ -223,5 +231,29 @@ namespace System
 
         [Template("Bridge.Array.reverse({array}, {index}, {length})")]
         public static extern void Reverse(Array array, int index, int length);
+
+        [Template("Bridge.Array.binarySearch({array}, 0, {array}.length, {value})")]
+        public static extern int BinarySearch<T>(T[] array, T value);
+
+        [Template("Bridge.Array.binarySearch({array}, {index}, {length}, {value})")]
+        public static extern int BinarySearch<T>(T[] array, int index, int length, T value);
+
+        [Template("Bridge.Array.binarySearch({array}, 0, {array}.length, {value}, {comparer})")]
+        public static extern int BinarySearch<T>(T[] array, T value, IComparer<T> comparer);
+
+        [Template("Bridge.Array.binarySearch({array}, {index}, {length}, {value}, {comparer})")]
+        public static extern int BinarySearch<T>(T[] array, int index, int length, T value, IComparer<T> comparer);
+
+        [Template("Bridge.Array.sort({array}, {index}, {length}, {comparer})")]
+        public static extern void Sort<T>(T[] array, int index, int length, IComparer<T> comparer);
+
+        [Template("Bridge.Array.sort({array}, {index}, {length})")]
+        public static extern void Sort<T>(T[] array, int index, int length);
+
+        [Template("Bridge.Array.sort({array})")]
+        public static extern void Sort<T>(T[] array);
+
+        [Template("Bridge.Array.sort({array}, {comparer})")]
+        public static extern void Sort<T>(T[] array, IComparer<T> comparer);
     }
 }

@@ -2,7 +2,7 @@ using Bridge;
 
 namespace System.Collections.Generic
 {
-    [Ignore]
+    [External]
     [Namespace("Bridge")]
     public class Dictionary<TKey, TValue> : IDictionary<TKey, TValue>, IBridgeClass
     {

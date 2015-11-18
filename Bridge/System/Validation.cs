@@ -2,7 +2,7 @@ using System;
 
 namespace Bridge
 {
-    [Ignore]
+    [External]
     [Name("Bridge.Validation")]
     public sealed class Validation
     {
@@ -62,7 +62,7 @@ namespace Bridge
         }
     }
 
-    [Ignore]
+    [External]
     [Enum(Emit.StringNamePreserveCase)]
     public enum CreditCardType
     {

@@ -174,9 +174,25 @@ namespace Bridge.Translator
 
         protected virtual void EmitInstantiableBlock()
         {
+            if (this.TypeInfo.IsEnum)
+            {
+                this.EnsureComma();
+                this.Write("enum: true");
+                this.Emitter.Comma = true;
+
+                if (this.Emitter.GetTypeDefinition(this.TypeInfo.Type)
+                        .CustomAttributes.Any(attr => attr.AttributeType.FullName == "System.FlagsAttribute"))
+                {
+                    this.EnsureComma();
+                    this.Write("flags: true");
+                    this.Emitter.Comma = true;
+                }
+            }
+
+
             var ctorBlock = new ConstructorBlock(this.Emitter, this.TypeInfo, false);
 
-            if (this.TypeInfo.HasInstantiable || this.Emitter.Plugins.HasConstructorInjectors(ctorBlock))
+            if (this.TypeInfo.HasInstantiable || this.Emitter.Plugins.HasConstructorInjectors(ctorBlock) || this.TypeInfo.ClassType == ClassType.Struct)
             {
                 this.EnsureComma();
                 ctorBlock.Emit();
@@ -323,7 +339,7 @@ namespace Bridge.Translator
             return this.GetDefineMethods("Before",
                 (method, rrMethod) =>
                 {
-                    this.PushWriter("(function(){0})();");
+                    this.PushWriter("Bridge.init(function(){0});");
                     this.ResetLocals();
                     var prevMap = this.BuildLocalsMap();
                     var prevNamesMap = this.BuildLocalsNamesMap();
@@ -340,8 +356,8 @@ namespace Bridge.Translator
         {
             return this.GetDefineMethods("After",
                 (method, rrMethod) =>
-                    BridgeTypes.ToJsName(rrMethod.DeclaringTypeDefinition, this.Emitter) + "." +
-                    this.Emitter.GetEntityName(method) + "();");
+                    "Bridge.init(" + BridgeTypes.ToJsName(rrMethod.DeclaringTypeDefinition, this.Emitter) + "." +
+                    this.Emitter.GetEntityName(method) + ");");
         }
     }
 }

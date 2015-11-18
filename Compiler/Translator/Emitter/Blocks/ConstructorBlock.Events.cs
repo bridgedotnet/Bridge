@@ -46,7 +46,8 @@ namespace Bridge.Translator
                                     }
 
                                     string format = null;
-                                    var formatField = resolveresult.Type.GetFields(f => f.Name == "Format", GetMemberOptions.IgnoreInheritedMembers);
+                                    string formatName = this.StaticBlock ? "Format" : "FormatScope";
+                                    var formatField = resolveresult.Type.GetFields(f => f.Name == formatName, GetMemberOptions.IgnoreInheritedMembers);
 
                                     if (formatField.Count() > 0)
                                     {
@@ -56,7 +57,7 @@ namespace Bridge.Translator
                                     {
                                         for (int i = baseTypes.Length - 1; i >= 0; i--)
                                         {
-                                            formatField = baseTypes[i].GetFields(f => f.Name == "Format");
+                                            formatField = baseTypes[i].GetFields(f => f.Name == formatName);
 
                                             if (formatField.Count() > 0)
                                             {

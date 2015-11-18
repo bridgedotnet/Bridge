@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The background-blend-mode CSS property describes how a background should blend with the element's background that is below it and the element's background color. Background elements should be blended while content appearance should be kept unchanged.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum BackgroundBlendMode

@@ -4,7 +4,7 @@ namespace Bridge.Html5
     /// XMLHttpRequest Level 2 adds support for the new FormData interface. FormData objects provide a way to easily construct a set of key/value pairs representing form fields and their values, which can then be easily sent using the XMLHttpRequest send() method.
     /// It uses the same format a form would use if the encoding type were set to "multipart/form-data".
     /// </summary>
-    [Ignore]
+    [External]
     [Name("FormData")]
     public class FormData
     {

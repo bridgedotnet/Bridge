@@ -70,3 +70,6 @@ Bridge.define('ClientTestLibrary.Linq.TestLinqOrderingOperators', {
     }
 });
 
+
+
+Bridge.init();

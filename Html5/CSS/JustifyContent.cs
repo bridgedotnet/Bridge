@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The CSS justify-content property defines how a browser distributes available space between and around elements when aligning flex items in the main-axis of the current line.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum JustifyContent

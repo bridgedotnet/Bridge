@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// CSS rule types
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.Value)]
     public enum CSSRuleType
     {

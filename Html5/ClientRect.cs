@@ -1,6 +1,6 @@
 namespace Bridge.Html5
 {
-    [Ignore]
+    [External]
     [Name("ClientRect")]
     public class ClientRect
     {

@@ -1,9 +1,9 @@
-// Event WebAPI by Mozilla Contributors is licensed under CC-BY-SA 2.5.
+﻿// Event WebAPI by Mozilla Contributors is licensed under CC-BY-SA 2.5.
 // https://developer.mozilla.org/en-US/docs/Web/API/event
 
 namespace Bridge.Html5
 {
-    [Ignore]
+    [External]
     [Name("KeyboardEvent")]
     public class KeyboardEvent : UIEvent
     {
@@ -1236,7 +1236,7 @@ namespace Bridge.Html5
         #endregion Key codes consts
     }
 
-    [Ignore]
+    [External]
     [Name("Object")]
     public class KeyboardEventInit : UIEventInit
     {
@@ -1283,7 +1283,7 @@ namespace Bridge.Html5
     /// <summary>
     /// These constants describe the location on the keyboard of key events.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.Value)]
     public enum KeyLocation
     {

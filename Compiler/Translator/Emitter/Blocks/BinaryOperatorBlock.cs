@@ -88,6 +88,19 @@ namespace Bridge.Translator
             OperatorResolveResult orr = resolveOperator as OperatorResolveResult;
             var leftResolverResult = this.Emitter.Resolver.ResolveNode(binaryOperatorExpression.Left, this.Emitter);
             var rightResolverResult = this.Emitter.Resolver.ResolveNode(binaryOperatorExpression.Right, this.Emitter);
+            var charToString = -1;
+
+            if (orr != null && orr.Type.IsKnownType(KnownTypeCode.String))
+            {
+                for (int i = 0; i < orr.Operands.Count; i++)
+                {
+                    var crr = orr.Operands[i] as ConversionResolveResult;
+                    if (crr != null && crr.Input.Type.IsKnownType(KnownTypeCode.Char))
+                    {
+                        charToString = i;
+                    }
+                }
+            }
 
             if (resolveOperator is ConstantResolveResult)
             {
@@ -160,7 +173,17 @@ namespace Bridge.Translator
             }
             else
             {
+                if (charToString == 0)
+                {
+                    this.Write("String.fromCharCode(");
+                }
+
                 binaryOperatorExpression.Left.AcceptVisitor(this.Emitter);
+                
+                if (charToString == 0)
+                {
+                    this.Write(")");
+                }
             }
 
             if (!delegateOperator)
@@ -170,6 +193,24 @@ namespace Bridge.Translator
                     this.WriteSpace();
                 }
                 bool isBool = NullableType.IsNullable(resolveOperator.Type) ? NullableType.GetUnderlyingType(resolveOperator.Type).IsKnownType(KnownTypeCode.Boolean) : resolveOperator.Type.IsKnownType(KnownTypeCode.Boolean);
+                bool isUint = resolveOperator.Type.IsKnownType(KnownTypeCode.UInt16) ||
+                              resolveOperator.Type.IsKnownType(KnownTypeCode.UInt32) ||
+                              resolveOperator.Type.IsKnownType(KnownTypeCode.UInt64);
+
+                bool is64bit = resolveOperator.Type.IsKnownType(KnownTypeCode.UInt64) ||
+                               resolveOperator.Type.IsKnownType(KnownTypeCode.Int64);
+
+                bool isBitwise = binaryOperatorExpression.Operator == BinaryOperatorType.BitwiseAnd ||
+                                 binaryOperatorExpression.Operator == BinaryOperatorType.BitwiseOr ||
+                                 binaryOperatorExpression.Operator == BinaryOperatorType.ExclusiveOr ||
+                                 binaryOperatorExpression.Operator == BinaryOperatorType.ShiftLeft ||
+                                 binaryOperatorExpression.Operator == BinaryOperatorType.ShiftRight;
+
+                if (isBitwise && is64bit)
+                {   
+                    throw new EmitterException(this.BinaryOperatorExpression, "Bitwise operations are not allowed on 64-bit types");
+                }
+
                 switch (binaryOperatorExpression.Operator)
                 {
                     case BinaryOperatorType.Add:
@@ -256,7 +297,15 @@ namespace Bridge.Translator
                         break;
 
                     case BinaryOperatorType.ShiftRight:
-                        this.Write(rootSpecial ? "sr" : ">>");
+                        if (isUint)
+                        {
+                            this.Write(rootSpecial ? "srr" : ">>>");
+                        }
+                        else
+                        {
+                            this.Write(rootSpecial ? "sr" : ">>");    
+                        }
+                        
                         break;
 
                     case BinaryOperatorType.Subtract:
@@ -275,7 +324,18 @@ namespace Bridge.Translator
             if (special)
             {
                 this.WriteOpenParentheses();
+                if (charToString == 0)
+                {
+                    this.Write("String.fromCharCode(");
+                }
+
                 binaryOperatorExpression.Left.AcceptVisitor(this.Emitter);
+
+                if (charToString == 0)
+                {
+                    this.Write(")");
+                }
+
                 this.WriteComma();
             }
             else
@@ -283,7 +343,17 @@ namespace Bridge.Translator
                 this.WriteSpace();
             }
 
+            if (charToString == 1)
+            {
+                this.Write("String.fromCharCode(");
+            }
+
             binaryOperatorExpression.Right.AcceptVisitor(this.Emitter);
+
+            if (charToString == 1)
+            {
+                this.Write(")");
+            }
 
             if (delegateOperator || special)
             {

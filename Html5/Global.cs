@@ -5,7 +5,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The global object represents an object ontaining a DOM document;
     /// </summary>
-    [Ignore]
+    [External]
     [Name("Bridge.global")]
     public static class Global
     {

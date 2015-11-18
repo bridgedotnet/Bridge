@@ -1,7 +1,7 @@
 namespace Bridge
 {
     [Name("Object")]
-    [Ignore]
+    [External]
     public interface IBridgeClass
     {
     }

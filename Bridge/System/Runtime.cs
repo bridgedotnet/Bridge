@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace System
 {
-    [Ignore]
+    [External]
     [Name("Bridge.Attribute")]
     public class Attribute : IBridgeClass
     {
@@ -17,7 +17,8 @@ namespace System
         }
     }
 
-    [Ignore]
+    [External]
+    [Flags]
     public enum AttributeTargets
     {
         Assembly = 0x0001,
@@ -42,7 +43,7 @@ namespace System
               Delegate | ReturnValue | GenericParameter
     }
 
-    [Ignore]
+    [External]
     [AttributeUsage(AttributeTargets.Class)]
     public class AttributeUsageAttribute : Attribute
     {
@@ -50,10 +51,29 @@ namespace System
         {
         }
 
+        internal extern AttributeUsageAttribute(AttributeTargets validOn, bool allowMultiple, bool inherited);
+
+        /// <summary>Gets or sets a Boolean value indicating whether more than one instance of the indicated attribute can be specified for a single program element.</summary>
+        /// <returns>true if more than one instance is allowed to be specified; otherwise, false. The default is false.</returns>
         public bool AllowMultiple
         {
             get;
             set;
+        }
+
+        /// <summary>Gets or sets a Boolean value indicating whether the indicated attribute can be inherited by derived classes and overriding members.</summary>
+        /// <returns>true if the attribute can be inherited by derived classes and overriding members; otherwise, false. The default is true.</returns>
+        public extern bool Inherited
+        {
+            get;
+            set;
+        }
+
+        /// <summary>Gets a set of values identifying which program elements that the indicated attribute can be applied to.</summary>
+        /// <returns>One or several <see cref="T:System.AttributeTargets"/> values. The default is All.</returns>
+        public extern AttributeTargets ValidOn
+        {
+            get;
         }
     }
 
@@ -61,13 +81,33 @@ namespace System
     public class FlagsAttribute : Attribute
     {
     }
+
+    [AttributeUsage(AttributeTargets.Delegate | AttributeTargets.Interface | AttributeTargets.Event | AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Enum | AttributeTargets.Struct | AttributeTargets.Class, Inherited = false)]
+    public sealed class ObsoleteAttribute : Attribute
+    {
+        public extern ObsoleteAttribute();
+
+        public extern ObsoleteAttribute(string message);
+
+        public extern ObsoleteAttribute(string message, bool error);
+
+        public extern bool IsError
+        {
+            get;
+        }
+
+        public extern string Message
+        {
+            get;
+        }
+    } 
 }
 
 namespace System.Runtime.InteropServices
 {
     [ComVisible(true)]
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class)]
-    [Ignore]
+    [External]
     public sealed class ComVisibleAttribute : Attribute
     {
         public ComVisibleAttribute(bool visibility)
@@ -83,7 +123,7 @@ namespace System.Runtime.InteropServices
     }
 
     [AttributeUsageAttribute(AttributeTargets.Parameter)]
-    [Ignore]
+    [External]
     public sealed class OutAttribute : Attribute
     {
     }
@@ -93,7 +133,7 @@ namespace System.Runtime.InteropServices
 {
     [ComVisible(true)]
     [AttributeUsage(AttributeTargets.Assembly)]
-    [Ignore]
+    [External]
     public sealed class GuidAttribute : Attribute
     {
         public GuidAttribute(string guid)
@@ -112,7 +152,7 @@ namespace System.Runtime.InteropServices
 namespace System.Reflection
 {
     [AttributeUsage(AttributeTargets.Assembly)]
-    [Ignore]
+    [External]
     public sealed class AssemblyTitleAttribute : Attribute
     {
         public AssemblyTitleAttribute(string title)
@@ -128,7 +168,7 @@ namespace System.Reflection
     }
 
     [AttributeUsage(AttributeTargets.Assembly)]
-    [Ignore]
+    [External]
     public sealed class AssemblyDescriptionAttribute : Attribute
     {
         public AssemblyDescriptionAttribute(string description)
@@ -144,7 +184,7 @@ namespace System.Reflection
     }
 
     [AttributeUsage(AttributeTargets.Assembly)]
-    [Ignore]
+    [External]
     public sealed class AssemblyConfigurationAttribute : Attribute
     {
         public AssemblyConfigurationAttribute(string configuration)
@@ -160,7 +200,7 @@ namespace System.Reflection
     }
 
     [AttributeUsage(AttributeTargets.Assembly)]
-    [Ignore]
+    [External]
     public sealed class AssemblyCompanyAttribute : Attribute
     {
         public AssemblyCompanyAttribute(string company)
@@ -176,7 +216,7 @@ namespace System.Reflection
     }
 
     [AttributeUsage(AttributeTargets.Assembly)]
-    [Ignore]
+    [External]
     public sealed class AssemblyProductAttribute : Attribute
     {
         public AssemblyProductAttribute(string product)
@@ -192,7 +232,7 @@ namespace System.Reflection
     }
 
     [AttributeUsage(AttributeTargets.Assembly)]
-    [Ignore]
+    [External]
     public sealed class AssemblyCopyrightAttribute : Attribute
     {
         public AssemblyCopyrightAttribute(string copyright)
@@ -208,7 +248,7 @@ namespace System.Reflection
     }
 
     [AttributeUsage(AttributeTargets.Assembly)]
-    [Ignore]
+    [External]
     public sealed class AssemblyTrademarkAttribute : Attribute
     {
         public AssemblyTrademarkAttribute(string trademark)
@@ -224,7 +264,7 @@ namespace System.Reflection
     }
 
     [AttributeUsage(AttributeTargets.Assembly)]
-    [Ignore]
+    [External]
     public sealed class AssemblyCultureAttribute : Attribute
     {
         public AssemblyCultureAttribute(string culture)
@@ -240,7 +280,7 @@ namespace System.Reflection
     }
 
     [AttributeUsage(AttributeTargets.Assembly)]
-    [Ignore]
+    [External]
     public sealed class AssemblyVersionAttribute : Attribute
     {
         public AssemblyVersionAttribute(string version)
@@ -256,7 +296,7 @@ namespace System.Reflection
     }
 
     [AttributeUsage(AttributeTargets.Assembly)]
-    [Ignore]
+    [External]
     public sealed class AssemblyFileVersionAttribute : Attribute
     {
         public AssemblyFileVersionAttribute(string version)
@@ -271,7 +311,7 @@ namespace System.Reflection
         }
     }
 
-    [Ignore]
+    [External]
     public sealed class DefaultMemberAttribute : Attribute
     {
         public DefaultMemberAttribute(string memberName)
@@ -290,7 +330,7 @@ namespace System.Reflection
 namespace System.Runtime.Versioning
 {
     [AttributeUsage(AttributeTargets.Assembly)]
-    [Ignore]
+    [External]
     public sealed class TargetFrameworkAttribute : Attribute
     {
         public TargetFrameworkAttribute()
@@ -322,7 +362,7 @@ namespace System.Runtime.CompilerServices
     /// If a constructor for a value type takes an instance of this type as a parameter, any attribute applied to that constructor will instead be applied to the default (undeclarable) constructor.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [Ignore]
+    [External]
     public sealed class DummyTypeUsedToAddAttributeToDefaultValueTypeConstructor
     {
         private DummyTypeUsedToAddAttributeToDefaultValueTypeConstructor()
@@ -330,7 +370,7 @@ namespace System.Runtime.CompilerServices
         }
     }
 
-    [Ignore]
+    [External]
     [AttributeUsage(AttributeTargets.Property)]
     public class IndexerNameAttribute : Attribute
     {
@@ -366,7 +406,7 @@ namespace System.Runtime.CompilerServices
         }
     }
 
-    [Ignore]
+    [External]
     public static class RuntimeHelpers
     {
         public static void InitializeArray(Array array, RuntimeFieldHandle handle)
@@ -388,7 +428,7 @@ namespace System.Runtime.CompilerServices
     }
 
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method)]
-    [Ignore]
+    [External]
     public sealed class ExtensionAttribute : Attribute
     {
         public ExtensionAttribute()
@@ -397,7 +437,7 @@ namespace System.Runtime.CompilerServices
     }
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.ReturnValue)]
-    [Ignore]
+    [External]
     public sealed class DynamicAttribute : Attribute
     {
         public DynamicAttribute()
@@ -417,7 +457,7 @@ namespace System.Runtime.CompilerServices
         }
     }
 
-    [Ignore]
+    [External]
     public class CallSite
     {
         public CallSiteBinder Binder
@@ -434,7 +474,7 @@ namespace System.Runtime.CompilerServices
         }
     }
 
-    [Ignore]
+    [External]
     public sealed class CallSite<T> : CallSite where T : class
     {
         public T Update
@@ -453,7 +493,7 @@ namespace System.Runtime.CompilerServices
         }
     }
 
-    [Ignore]
+    [External]
     public abstract class CallSiteBinder
     {
         public static LabelTarget UpdateLabel
@@ -470,7 +510,7 @@ namespace System.Runtime.CompilerServices
         }
     }
 
-    [Ignore]
+    [External]
     public struct AsyncVoidMethodBuilder
     {
         public static AsyncVoidMethodBuilder Create()
@@ -507,7 +547,7 @@ namespace System.Runtime.CompilerServices
         }
     }
 
-    [Ignore]
+    [External]
     public struct AsyncTaskMethodBuilder
     {
         public Task Task
@@ -552,7 +592,7 @@ namespace System.Runtime.CompilerServices
         }
     }
 
-    [Ignore]
+    [External]
     public struct AsyncTaskMethodBuilder<TResult>
     {
         public Task<TResult> Task
@@ -597,7 +637,7 @@ namespace System.Runtime.CompilerServices
         }
     }
 
-    [Ignore]
+    [External]
     public interface IAsyncStateMachine
     {
         void MoveNext();
@@ -605,13 +645,13 @@ namespace System.Runtime.CompilerServices
         void SetStateMachine(IAsyncStateMachine stateMachine);
     }
 
-    [Ignore]
+    [External]
     public interface INotifyCompletion
     {
         void OnCompleted(Action continuation);
     }
 
-    [Ignore]
+    [External]
     public interface ICriticalNotifyCompletion : INotifyCompletion
     {
         void UnsafeOnCompleted(Action continuation);
@@ -620,7 +660,7 @@ namespace System.Runtime.CompilerServices
 
 namespace Microsoft.CSharp.RuntimeBinder
 {
-    [Ignore]
+    [External]
     public static class Binder
     {
         public static CallSiteBinder BinaryOperation(CSharpBinderFlags flags, ExpressionType operation, Type context, IEnumerable<CSharpArgumentInfo> argumentInfo)
@@ -679,7 +719,7 @@ namespace Microsoft.CSharp.RuntimeBinder
         }
     }
 
-    [Ignore]
+    [External]
     public enum CSharpBinderFlags
     {
         None = 0,
@@ -694,7 +734,7 @@ namespace Microsoft.CSharp.RuntimeBinder
         ResultDiscarded = 256,
     }
 
-    [Ignore]
+    [External]
     public sealed class CSharpArgumentInfo
     {
         public static CSharpArgumentInfo Create(CSharpArgumentInfoFlags flags, string name)
@@ -703,7 +743,7 @@ namespace Microsoft.CSharp.RuntimeBinder
         }
     }
 
-    [Ignore]
+    [External]
     public enum CSharpArgumentInfoFlags
     {
         None = 0,
@@ -718,7 +758,7 @@ namespace Microsoft.CSharp.RuntimeBinder
 
 namespace System.Linq.Expressions
 {
-    [Ignore]
+    [External]
     public sealed class LabelTarget
     {
         internal LabelTarget()
@@ -742,7 +782,7 @@ namespace System.Linq.Expressions
         }
     }
 
-    [Ignore]
+    [External]
     public enum ExpressionType
     {
         Add,
@@ -850,14 +890,14 @@ namespace System.ComponentModel
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Method, AllowMultiple = false)]
-    [Ignore]
+    [External]
     public sealed class BrowsableAttribute : Attribute
     {
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum | AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Event | AttributeTargets.Delegate | AttributeTargets.Interface)]
-    [Ignore]
+    [External]
     public sealed class EditorBrowsableAttribute : Attribute
     {
         public extern EditorBrowsableAttribute(EditorBrowsableState state);
@@ -869,7 +909,7 @@ namespace System.ComponentModel
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [Ignore]
+    [External]
     public enum EditorBrowsableState
     {
         Always = 0,
@@ -881,7 +921,7 @@ namespace System.ComponentModel
 namespace System.Threading
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [Ignore]
+    [External]
     public static class Interlocked
     {
         public static extern int CompareExchange(ref int location1, int value, int comparand);
@@ -890,7 +930,7 @@ namespace System.Threading
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [Ignore]
+    [External]
     public static class Monitor
     {
         public static extern void Enter(object obj);
@@ -901,7 +941,7 @@ namespace System.Threading
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [Ignore]
+    [External]
     public class Thread
     {
         public extern int ManagedThreadId

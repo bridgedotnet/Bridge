@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace System.Linq
 {
-    [Ignore]
+    [External]
     [Name("Bridge.Linq.Enumerable")]
     public static class Enumerable
     {

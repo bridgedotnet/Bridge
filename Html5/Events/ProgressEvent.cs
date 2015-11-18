@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The ProgressEvent interface represents events measuring progress of an underlying process, like an HTTP request (for an XMLHttpRequest, or the loading of the underlying resource of an &lt;img&gt;, &lt;audio&gt;, &lt;video&gt;, &lt;style&gt; or &lt;link&gt;).
     /// </summary>
-    [Ignore]
+    [External]
     [Name("ProgressEvent")]
     public class ProgressEvent : Event
     {

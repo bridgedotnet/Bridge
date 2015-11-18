@@ -32,7 +32,7 @@ Bridge.define('ClientTestLibrary.TestStringBuilderFunctions', {
             assert.deepEqual(sb.getCapacity(), 10, ".Capacity");
 
             // Length
-            assert.deepEqual(sb.getLength(), "foo".length, ".Length");
+            assert.deepEqual(sb.getLength(), ("foo").length, ".Length");
 
             // TEST methods
 
@@ -80,3 +80,6 @@ Bridge.define('ClientTestLibrary.TestStringBuilderFunctions', {
     }
 });
 
+
+
+Bridge.init();

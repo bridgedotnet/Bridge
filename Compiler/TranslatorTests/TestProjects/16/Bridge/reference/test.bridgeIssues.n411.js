@@ -10,3 +10,6 @@ Bridge.define('Test.BridgeIssues.N411.App', {
     }
 });
 
+
+
+Bridge.init();

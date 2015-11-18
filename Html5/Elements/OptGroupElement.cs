@@ -3,9 +3,9 @@ namespace Bridge.Html5
     /// <summary>
     /// The HTMLOptGroupElement interface provides special properties and methods (beyond the regular HTMLElement object interface they also have available to them by inheritance) for manipulating the layout and presentation of &lt;optgroup&gt; elements.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLOptGroupElement")]
-    public class OptGroupElement : Element
+    public class OptGroupElement : Element<OptGroupElement>
     {
         [Template("document.createElement('optgroup')")]
         public OptGroupElement()

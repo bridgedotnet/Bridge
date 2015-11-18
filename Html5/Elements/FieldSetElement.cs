@@ -3,9 +3,9 @@ namespace Bridge.Html5
     /// <summary>
     /// The HTMLFieldSetElement interface special properties and methods (beyond the regular HTMLelement interface it also has available to it by inheritance) for manipulating the layout and presentation of field-set elements.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLFieldSetElement")]
-    public class FieldSetElement : Element
+    public class FieldSetElement : Element<FieldSetElement>
     {
         [Template("document.createElement('fieldset')")]
         public FieldSetElement()

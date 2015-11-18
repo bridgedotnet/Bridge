@@ -260,10 +260,27 @@ namespace Bridge.Contract
                 return;
             }
 
-            if (resolveResult is InvocationResolveResult ||
-               block.Emitter.IsAssignment)
+            if (block.Emitter.IsAssignment)
             {
                 return;
+            }
+
+            if (resolveResult is InvocationResolveResult)
+            {
+                bool ret = true;
+                if (expression.Parent is InvocationExpression)
+                {
+                    var invocationExpression = (InvocationExpression)expression.Parent;
+                    if (invocationExpression.Arguments.Any(a => a == expression))
+                    {
+                        ret = false;
+                    }
+                }
+
+                if (ret)
+                {
+                    return;
+                }
             }
 
             if (resolveResult.Type.Kind == TypeKind.Struct)
@@ -293,6 +310,15 @@ namespace Bridge.Contract
                     expression.Parent is AssignmentExpression ||
                     expression.Parent is VariableInitializer)
                 {
+                    if (expression.Parent is InvocationExpression)
+                    {
+                        var invocationExpression = (InvocationExpression) expression.Parent;
+                        if (invocationExpression.Target == expression)
+                        {
+                            return;
+                        }
+                    }
+
                     block.Write(".$clone()");
                 }
             }

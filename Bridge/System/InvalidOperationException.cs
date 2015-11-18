@@ -2,7 +2,7 @@ using Bridge;
 
 namespace System
 {
-    [Ignore]
+    [External]
     [Namespace("Bridge")]
     public class InvalidOperationException : Exception, IBridgeClass
     {

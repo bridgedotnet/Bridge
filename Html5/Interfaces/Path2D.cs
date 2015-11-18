@@ -12,7 +12,7 @@ namespace Bridge.Html5
     /// and replay as required on a canvas.
     /// </summary>
     /// <remarks>This is experimental API that should not be used in production code.</remarks>
-    [Ignore]
+    [External]
     [Namespace(false)]
     public class Path2D : SVGOperations
     {

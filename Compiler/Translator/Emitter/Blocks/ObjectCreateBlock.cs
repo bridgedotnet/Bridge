@@ -171,8 +171,7 @@ namespace Bridge.Translator
                     {
                         if (needComma)
                         {
-                            this.WriteComma();
-                            this.WriteNewLine();
+                            this.WriteComma(true);
                         }
 
                         needComma = true;

@@ -3,9 +3,9 @@ namespace Bridge.Html5
     /// <summary>
     /// The HTMLEmbedElement interface, which provides special properties (beyond the regular &lt;htmlelement&gt; interface it also has available to it by inheritance) for manipulating &lt;embed&gt; elements.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLEmbedElement")]
-    public class EmbedElement : Element
+    public class EmbedElement : Element<EmbedElement>
     {
         [Template("document.createElement('embed')")]
         public EmbedElement()

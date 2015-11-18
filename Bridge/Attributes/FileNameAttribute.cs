@@ -5,7 +5,7 @@ namespace Bridge
     /// <summary>
     /// The file name where JavaScript is generated to.
     /// </summary>
-    [Ignore]
+    [External]
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Enum | AttributeTargets.Struct | AttributeTargets.Interface)]
     public sealed class FileNameAttribute : Attribute
     {
@@ -18,7 +18,7 @@ namespace Bridge
     /// The output folder path for generated JavaScript. A non-absolute path is concatenated with a project's root.
     /// Examples: "Bridge/output/", "../Bridge/output/", "c:\\output\\"
     /// </summary>
-    [Ignore]
+    [External]
     [AttributeUsage(AttributeTargets.Assembly)]
     public sealed class OutputAttribute : Attribute
     {
@@ -31,7 +31,7 @@ namespace Bridge
     /// The option to manage JavaScript output folders and files.
     /// See TypesSplit enum for more details.
     /// </summary>
-    [Ignore]
+    [External]
     [AttributeUsage(AttributeTargets.Assembly)]
     public sealed class OutputByAttribute : Attribute
     {
@@ -47,7 +47,7 @@ namespace Bridge
     /// <summary>
     /// The options to manage JavaScript output folders and files.
     /// </summary>
-    [Ignore]
+    [External]
     public enum OutputBy
     {
         /// <summary>

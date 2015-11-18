@@ -2,7 +2,7 @@
 
 namespace Bridge
 {
-    [Ignore]
+    [External]
     [AttributeUsage(AttributeTargets.Method)]
     public class InitAttribute : Attribute
     {
@@ -15,7 +15,7 @@ namespace Bridge
         }
     }
 
-    [Ignore]
+    [External]
     public enum InitPosition
     {
         /// <summary>

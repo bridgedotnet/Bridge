@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The URLSearchParams interface defines utility methods to work with the query string of a URL.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("URLSearchParams")]
     public partial class URLSearchParams
     {

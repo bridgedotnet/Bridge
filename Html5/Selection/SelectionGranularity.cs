@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The distance to adjust the current selection or cursor position.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum SelectionGranularity

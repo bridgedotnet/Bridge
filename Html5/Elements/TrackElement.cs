@@ -1,12 +1,12 @@
-namespace Bridge.Html5
+﻿namespace Bridge.Html5
 {
     /// <summary>
     /// The HTMLTrackElement interface provides access to the properties of &lt;track&gt; elements, as well as methods to manipulate them.
     /// The HTML &lt;track&gt; element is used as a child of the media elements — &lt;audio&gt; and &lt;video&gt;. It lets you specify timed text tracks (or time-based data), for example to automaticaly handle subtitles.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLTrackElement")]
-    public class TrackElement : Element
+    public class TrackElement : Element<TrackElement>
     {
         [Template("document.createElement('track')")]
         public TrackElement()

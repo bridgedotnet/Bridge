@@ -217,3 +217,11 @@ Bridge.define("Bridge.NullReferenceException", {
         Bridge.Exception.prototype.$constructor.call(this, message || "Object is null.", innerException);
     }
 });
+
+Bridge.define("Bridge.RankException", {
+    inherits: [Bridge.Exception],
+
+    constructor: function (message, innerException) {
+        Bridge.Exception.prototype.$constructor.call(this, message || "Attempted to operate on an array with the incorrect number of dimensions.", innerException);
+    }
+});

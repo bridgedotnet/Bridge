@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The animation-direction CSS property indicates whether the animation should play in reverse on alternate cycles.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum AnimationDirection

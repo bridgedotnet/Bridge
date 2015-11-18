@@ -1,3 +1,5 @@
+using Bridge;
+
 namespace System
 {
     // A Version object contains four hierarchical numeric components: major, minor,
@@ -5,6 +7,7 @@ namespace System
     // internally as a -1.  By definition, an unspecified component matches anything
     // (both unspecified and specified), and an unspecified component is "less than" any
     // specified component.
+    [Name("Bridge.Version")]
     public sealed class Version : ICloneable, IComparable<Version>, IEquatable<Version>
     {
         public Version(int major, int minor, int build, int revision)

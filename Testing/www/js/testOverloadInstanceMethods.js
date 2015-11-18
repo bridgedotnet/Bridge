@@ -83,3 +83,6 @@ Bridge.define('ClientTestLibrary.TestOverloadInstanceMethods.Instance', {
     }
 });
 
+
+
+Bridge.init();

@@ -27,3 +27,6 @@ Bridge.define('ClientTestLibrary.TestMethodParametersClass', {
     }
 });
 
+
+
+Bridge.init();

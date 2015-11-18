@@ -6,7 +6,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The PositionOptions interface describes the options to use when calling the geolocation backend. The user agent itself doesn't create such an object itself: it is the calling script that create it and use it as a parameter of Geolocation.getCurrentPosition() and Geolocation.watchPosition().
     /// </summary>
-    [Ignore]
+    [External]
     [Name("Object")]
     public class GeolocationPositionOptions
     {

@@ -7,7 +7,7 @@ namespace Bridge.Html5
     /// The generic version of the HTMLCollection class.
     /// HTMLCollection is an class representing a generic collection (array) of elements (in document order) and offers methods and properties for selecting from the list.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLCollection")]
     public class HTMLCollection<T> : IEnumerable<T> where T : Element
     {
@@ -83,7 +83,7 @@ namespace Bridge.Html5
     /// The non-generic version of the HTMLCollection class.
     /// HTMLCollection is an class representing a generic collection (array) of elements (in document order) and offers methods and properties for selecting from the list.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLCollection")]
     public class HTMLCollection : HTMLCollection<Element>
     {

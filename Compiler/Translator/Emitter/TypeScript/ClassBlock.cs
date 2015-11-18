@@ -107,7 +107,7 @@ namespace Bridge.Translator.TypeScript
 
             var list = new List<string>();
 
-            foreach (var t in this.TypeInfo.TypeDeclaration.BaseTypes)
+            foreach (var t in this.TypeInfo.GetBaseTypes(this.Emitter))
             {
                 var name = BridgeTypes.ToTypeScriptName(t, this.Emitter);
 

@@ -5,7 +5,7 @@ namespace Bridge.Html5
         /// <summary>
         /// Indicates the 2D context on CanvaslElement.GetContext().
         /// </summary>
-        [Ignore]
+        [External]
         [Enum(Emit.StringNameLowerCase)]
         [Name("String")]
         public enum CanvasContext2DType
@@ -20,7 +20,7 @@ namespace Bridge.Html5
         /// <summary>
         /// Indicates the WebGL (OpenGL ES 2.0) context on CanvaslElement.GetContext().
         /// </summary>
-        [Ignore]
+        [External]
         [Enum(Emit.StringNameLowerCase)]
         [Name("String")]
         public enum CanvasContextWebGLType

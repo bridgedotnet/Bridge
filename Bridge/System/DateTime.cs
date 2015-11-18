@@ -2,7 +2,7 @@ using Bridge;
 
 namespace System
 {
-    [Ignore]
+    [External]
     [Name("Date")]
     public struct DateTime : IComparable, IComparable<DateTime>, IEquatable<DateTime>, IFormattable
     {
@@ -59,37 +59,37 @@ namespace System
         }
 
         [Template("Date.UTC({year}, {month} - 1, {day}, {hours}, {minutes}, {seconds}, {ms})")]
-        public static long UTC(int year, int month, int day, int hours, int minutes, int seconds, int ms)
+        public static long Utc(int year, int month, int day, int hours, int minutes, int seconds, int ms)
         {
             return 0;
         }
 
         [Template("Date.UTC({year}, {month} - 1, {day}, {hours}, {minutes}, {seconds})")]
-        public static long UTC(int year, int month, int day, int hours, int minutes, int seconds)
+        public static long Utc(int year, int month, int day, int hours, int minutes, int seconds)
         {
             return 0;
         }
 
         [Template("Date.UTC({year}, {month} - 1, {day}, {hours}, {minutes})")]
-        public static long UTC(int year, int month, int day, int hours, int minutes)
+        public static long Utc(int year, int month, int day, int hours, int minutes)
         {
             return 0;
         }
 
         [Template("Date.UTC({year}, {month} - 1, {day}, {hours})")]
-        public static long UTC(int year, int month, int day, int hours)
+        public static long Utc(int year, int month, int day, int hours)
         {
             return 0;
         }
 
         [Template("Date.UTC({year}, {month} - 1, {day})")]
-        public static long UTC(int year, int month, int day)
+        public static long Utc(int year, int month, int day)
         {
             return 0;
         }
 
         [Template("Date.UTC({year}, {month} - 1)")]
-        public static long UTC(int year, int month)
+        public static long Utc(int year, int month)
         {
             return 0;
         }
@@ -129,6 +129,12 @@ namespace System
 
         [Template("Bridge.Date.format({this}, {format}, {provider})")]
         public string Format(string format, IFormatProvider provider)
+        {
+            return null;
+        }
+
+        [Template("Bridge.Date.format({this})")]
+        public override string ToString()
         {
             return null;
         }
@@ -175,7 +181,7 @@ namespace System
             return 0;
         }
 
-        [Template("{this}.getMonth() + 1")]
+        [Template("({this}.getMonth() + 1)")]
         public int GetMonth()
         {
             return 0;
@@ -196,43 +202,50 @@ namespace System
             return 0;
         }
 
-        public int GetUTCDate()
+        [Name("getUTCDate")]
+        public int GetUtcDate()
         {
             return 0;
         }
 
-        public int GetUTCDay()
+        [Name("getUTCDay")]
+        public int GetUtcDay()
         {
             return 0;
         }
 
-        public int GetUTCFullYear()
+        [Name("getUTCFullYear")]
+        public int GetUtcFullYear()
         {
             return 0;
         }
 
-        public int GetUTCHours()
+        [Name("getUTCHours")]
+        public int GetUtcHours()
         {
             return 0;
         }
 
-        public int GetUTCMilliseconds()
+        [Name("getUTCMilliseconds")]
+        public int GetUtcMilliseconds()
         {
             return 0;
         }
 
-        public int GetUTCMinutes()
+        [Name("getUTCMinutes")]
+        public int GetUtcMinutes()
         {
             return 0;
         }
 
-        [Template("{this}.getUTCMonth() + 1")]
+        [Template("({this}.getUTCMonth() + 1)")]
         public int GetUtcMonth()
         {
             return 0;
         }
 
-        public int GetUTCSeconds()
+        [Name("getUTCSeconds")]
+        public int GetUtcSeconds()
         {
             return 0;
         }
@@ -413,18 +426,19 @@ namespace System
             return null;
         }
 
-        public string ToUTCString()
+        [Name("toUTCString")]
+        public string ToUtcString()
         {
             return null;
         }
 
-        [Template("new Date({d} - new Date({t} / 10000))")]
+        [Template("new Date({d} - new Date(({t}).ticks / 10000))")]
         public static DateTime operator -(DateTime d, TimeSpan t)
         {
             return default(DateTime);
         }
 
-        [Template("new Date({d}.getTime() + ({t} / 10000))")]
+        [Template("new Date({d}.getTime() + (({t}).ticks / 10000))")]
         public static DateTime operator +(DateTime d, TimeSpan t)
         {
             return default(DateTime);
@@ -555,7 +569,7 @@ namespace System
 
         public int Month
         {
-            [Template("{this}.getMonth() + 1")]
+            [Template("({this}.getMonth() + 1)")]
             get
             {
                 return 0;
@@ -580,13 +594,13 @@ namespace System
             }
         }
 
-        [Template("new Date({this}.valueOf() + Math.round({value} * 864e5))")]
+        [Template("new Date({this}.valueOf() + Math.round(({value}) * 864e5))")]
         public DateTime AddDays(double value)
         {
             return default(DateTime);
         }
 
-        [Template("new Date({this}.valueOf() + Math.round({value} * 36e5))")]
+        [Template("new Date({this}.valueOf() + Math.round(({value}) * 36e5))")]
         public DateTime AddHours(double value)
         {
             return default(DateTime);
@@ -598,7 +612,7 @@ namespace System
             return default(DateTime);
         }
 
-        [Template("new Date({this}.valueOf() + Math.round({value} * 6e4))")]
+        [Template("new Date({this}.valueOf() + Math.round(({value}) * 6e4))")]
         public DateTime AddMinutes(double value)
         {
             return default(DateTime);
@@ -610,7 +624,7 @@ namespace System
             return default(DateTime);
         }
 
-        [Template("new Date({this}.valueOf() + Math.round({value} * 1e3))")]
+        [Template("new Date({this}.valueOf() + Math.round(({value}) * 1e3))")]
         public DateTime AddSeconds(double value)
         {
             return default(DateTime);
@@ -622,13 +636,13 @@ namespace System
             return default(DateTime);
         }
 
-        [Template("new Date({year}, {month}, -1).getDate() + 1")]
+        [Template("(new Date({year}, {month}, -1).getDate() + 1)")]
         public static int DaysInMonth(int year, int month)
         {
             return 0;
         }
 
-        [Template("new Date({year}, 2, -1).getDate() === 28")]
+        [Template("(new Date({year}, 2, -1).getDate() === 28)")]
         public static bool IsLeapYear(int year)
         {
             return false;
@@ -671,7 +685,7 @@ namespace System
         }
 
         [Template("Bridge.Date.toUTC({this})")]
-        public DateTime ToUTC()
+        public DateTime ToUniversalTime()
         {
             return default(DateTime);
         }
@@ -680,6 +694,33 @@ namespace System
         public DateTime ToLocalTime()
         {
             return default(DateTime);
+        }
+
+        [Template("new Date(({this}).getTime() + (({value}).ticks / 10000))")]
+        public extern DateTime Add(TimeSpan value);
+
+        [Template("new Date(({this}).getTime() + (({value}) / 10000))")]
+        public extern DateTime AddTicks(long value);
+
+        [Template("new Date({this} - new Date(({value}).ticks / 10000))")]
+        public extern DateTime Subtract(TimeSpan value);
+
+        public TimeSpan TimeOfDay
+        {
+            [Template("Bridge.Date.timeOfDay({this})")] 
+            get
+            {
+                return default(TimeSpan);
+            }
+        }
+
+        public long Ticks
+        {
+            [Template("{this}.getTime() * 10000")]
+            get
+            {
+                return 0;
+            }
         }
     }
 }

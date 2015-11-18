@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// An object implementing the CSSStyleSheet interface represents a single CSS style sheet.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("CSSStyleSheet")]
     public partial class CSSStyleSheet : StyleSheet
     {

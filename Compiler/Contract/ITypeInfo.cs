@@ -47,12 +47,6 @@ namespace Bridge.Contract
             set;
         }
 
-        HashSet<string> Usings
-        {
-            get;
-            set;
-        }
-
         List<ConstructorDeclaration> Ctors
         {
             get;
@@ -165,6 +159,15 @@ namespace Bridge.Contract
             set;
         }
 
+        List<TypeDeclaration> PartialTypeDeclarations
+        {
+            get;
+            set;
+        }
+
         bool HasRealStatic(IEmitter emitter);
+
+        List<AstType> GetBaseTypes(IEmitter emitter);
+        AstType GetBaseClass(IEmitter emitter);
     }
 }

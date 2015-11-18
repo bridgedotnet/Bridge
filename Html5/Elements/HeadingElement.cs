@@ -5,9 +5,9 @@ namespace Bridge.Html5
     /// <summary>
     /// The HTMLHeadingElement interface represents the different heading elements.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLHeadingElement")]
-    public class HeadingElement : Element
+    public class HeadingElement : Element<HeadingElement>
     {
         [Template("document.createElement('h1')")]
         public HeadingElement()
@@ -26,7 +26,7 @@ namespace Bridge.Html5
     /// <summary>
     /// Specifies the type of heading
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum HeadingType

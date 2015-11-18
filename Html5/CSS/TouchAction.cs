@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// Determines whether touch input may trigger default behavior supplied by the user agent, such as panning or zooming.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum TouchAction

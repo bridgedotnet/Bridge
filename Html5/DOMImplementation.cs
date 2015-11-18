@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The DOMImplementation interface represent an object providing methods which are not dependent on any particular document. Such an object is returned by the Document.implementation property.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("DOMImplementation")]
     public partial class DOMImplementation
     {

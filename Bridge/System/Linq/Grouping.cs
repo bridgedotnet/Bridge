@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace System.Linq
 {
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     public interface IGrouping<out TKey, TElement> : IEnumerable<TElement>
     {
@@ -14,7 +14,7 @@ namespace System.Linq
         }
     }
 
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     public class Grouping<TKey, TElement> : EnumerableInstance<TElement>, IGrouping<TKey, TElement>
     {

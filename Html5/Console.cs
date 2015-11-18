@@ -6,7 +6,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The console object provides access to the browser's debugging console (e.g. the Web Console in Firefox). The specifics of how it works vary from browser to browser, but there is a de facto set of features that are typically provided.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("console")]
     public static class Console
     {

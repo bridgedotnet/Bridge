@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// This value specifies whether the user agent is allowed to synthesize bold or oblique font faces when a font family lacks bold or italic faces.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum FontSynthesis

@@ -42,3 +42,6 @@ Bridge.define('ClientTestLibrary.TestVirtualMethods.B', {
     }
 });
 
+
+
+Bridge.init();

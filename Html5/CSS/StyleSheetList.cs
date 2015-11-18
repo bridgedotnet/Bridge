@@ -7,7 +7,7 @@ namespace Bridge.Html5
     /// The StyleSheetList interface provides the abstraction of an ordered collection of style sheets.
     /// The items in the StyleSheetList are accessible via an integral index, starting from 0.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("StyleSheetList")]
     public class StyleSheetList : IEnumerable<StyleSheet>
     {

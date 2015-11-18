@@ -5,7 +5,7 @@ namespace Bridge.Html5
     /// <summary>
     /// Relationship of nodes
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.Value)]
     [Name("Number")]
     [Flags]

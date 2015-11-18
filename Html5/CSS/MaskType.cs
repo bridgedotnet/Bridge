@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The CSS mask-type properties defines if a SVG &lt;mask&gt; element is a luminance or an alpha mask.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum MaskType

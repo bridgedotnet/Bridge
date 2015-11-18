@@ -3,9 +3,9 @@ namespace Bridge.Html5
     /// <summary>
     /// The HTMLOutputElement interface provides properties and methods (beyond those inherited from HTMLElement) for manipulating the layout and presentation of &lt;output&gt; elements.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLOutputElement")]
-    public class OutputElement : Element
+    public class OutputElement : Element<OptionElement>
     {
         [Template("document.createElement('output')")]
         public OutputElement()

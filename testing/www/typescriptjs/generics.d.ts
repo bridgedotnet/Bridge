@@ -19,21 +19,14 @@ declare module Generics {
     }
     var INamedEntity: INamedEntityFunc;
 
-    export interface implementation {
+    export interface NewClass {
+        data: number;
     }
-    export interface implementationFunc extends Function {
-        prototype: implementation;
-        new (): implementation;
-        simpleGenericInt: Generics.SimpleGeneric$1<number>;
-        simpleDoubleGenericIntString: Generics.SimpleDoubleGeneric$2<number,string>;
-        genericINamedEntity: Generics.GenericINamedEntity$1<Generics.INamedEntity>;
-        genericNamedEntity: Generics.GenericNamedEntity$1<Generics.NamedEntity>;
-        genericClassObject: Generics.GenericClass$1<Object>;
-        genericClassNamedEntity: Generics.GenericClass$1<Generics.NamedEntity>;
-        genericNew: Generics.GenericNew$1<Generics.NewClass>;
-        genericNewAndClass: Generics.GenericNewAndClass$1<Generics.NewClass>;
+    export interface NewClassFunc extends Function {
+        prototype: NewClass;
+        new (): NewClass;
     }
-    var implementation: implementationFunc;
+    var NewClass: NewClassFunc;
 
     export interface SimpleGeneric$1<T> {
         instance: T;
@@ -60,14 +53,21 @@ declare module Generics {
         };
     }
 
-    export interface NewClass {
-        data: number;
+    export interface implementation {
     }
-    export interface NewClassFunc extends Function {
-        prototype: NewClass;
-        new (): NewClass;
+    export interface implementationFunc extends Function {
+        prototype: implementation;
+        new (): implementation;
+        simpleGenericInt: Generics.SimpleGeneric$1<number>;
+        simpleDoubleGenericIntString: Generics.SimpleDoubleGeneric$2<number,string>;
+        genericINamedEntity: Generics.GenericINamedEntity$1<Generics.INamedEntity>;
+        genericNamedEntity: Generics.GenericNamedEntity$1<Generics.NamedEntity>;
+        genericClassObject: Generics.GenericClass$1<Object>;
+        genericClassNamedEntity: Generics.GenericClass$1<Generics.NamedEntity>;
+        genericNew: Generics.GenericNew$1<Generics.NewClass>;
+        genericNewAndClass: Generics.GenericNewAndClass$1<Generics.NewClass>;
     }
-    var NewClass: NewClassFunc;
+    var implementation: implementationFunc;
 
     export interface GenericNamedEntity$1<T> {
         instance: T;

@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The DOM CompositionEvent represents events that occur due to the user indirectly entering text.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("CompositionEvent")]
     public class CompositionEvent : UIEvent
     {

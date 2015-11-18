@@ -2,7 +2,7 @@ using Bridge;
 
 namespace System.Globalization
 {
-    [Ignore]
+    [External]
     [Namespace("Bridge")]
     public class CultureNotFoundException : ArgumentException, IBridgeClass
     {

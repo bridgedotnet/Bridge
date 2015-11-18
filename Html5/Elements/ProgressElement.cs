@@ -3,9 +3,9 @@ namespace Bridge.Html5
     /// <summary>
     /// The HTMLProgressElement interface provides special properties and methods (beyond the regular HTMLElement interface it also has available to it by inheritance) for manipulating the layout and presentation of &lt;progress&gt; elements.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLProgressElement")]
-    public class ProgressElement : Element
+    public class ProgressElement : Element<ProgressElement>
     {
         [Template("document.createElement('progress')")]
         public ProgressElement()

@@ -2,6 +2,7 @@ using Bridge.Contract;
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.TypeSystem;
 using System.Collections.Generic;
+using ICSharpCode.NRefactory.Semantics;
 
 namespace Bridge.Translator
 {
@@ -110,13 +111,32 @@ namespace Bridge.Translator
 
             foreach (var member in members)
             {
+                object constValue = null;
+                bool isPrimitive = false;
                 var primitiveExpr = member.Initializer as PrimitiveExpression;
+                if (primitiveExpr != null)
+                {
+                    isPrimitive = true;
+                    constValue = primitiveExpr.Value;
+                }
+
                 var isNull = member.Initializer.IsNull || member.Initializer is NullReferenceExpression;
+
+                if (!isNull && !isPrimitive)
+                {
+                    var constrr = this.Emitter.Resolver.ResolveNode(member.Initializer, this.Emitter) as ConstantResolveResult;
+                    if (constrr != null)
+                    {
+                        isPrimitive = true;
+                        constValue = constrr.ConstantValue;
+                    }
+                }
+
                 var isNullable = false;
 
-                if (primitiveExpr != null && primitiveExpr.Value is AstType)
+                if (isPrimitive && constValue is AstType)
                 {
-                    var itype = this.Emitter.Resolver.ResolveNode((AstType)primitiveExpr.Value, this.Emitter);
+                    var itype = this.Emitter.Resolver.ResolveNode((AstType)constValue, this.Emitter);
 
                     if (NullableType.IsNullable(itype.Type))
                     {
@@ -124,11 +144,11 @@ namespace Bridge.Translator
                     }
                 }
 
-                if (!isNull && (primitiveExpr == null || (primitiveExpr.Value is AstType)))
+                if (!isNull && (!isPrimitive || (constValue is AstType)))
                 {
                     string value = null;
 
-                    if (primitiveExpr == null)
+                    if (!isPrimitive)
                     {
                         var oldWriter = this.SaveWriter();
                         this.NewWriter();
@@ -144,7 +164,7 @@ namespace Bridge.Translator
                         }
                         else
                         {
-                            value = "new " + BridgeTypes.ToJsName((AstType)primitiveExpr.Value, this.Emitter) + "()";
+                            value = "new " + BridgeTypes.ToJsName((AstType)constValue, this.Emitter) + "()";
                         }
                     }
 
@@ -157,7 +177,7 @@ namespace Bridge.Translator
                 this.Write(member.GetName(this.Emitter));
                 this.WriteColon();
 
-                if (primitiveExpr != null && primitiveExpr.Value is AstType)
+                if (constValue is AstType)
                 {
                     if (isNullable)
                     {
@@ -165,7 +185,7 @@ namespace Bridge.Translator
                     }
                     else
                     {
-                        this.Write("new " + BridgeTypes.ToJsName((AstType)primitiveExpr.Value, this.Emitter) + "()");
+                        this.Write("new " + BridgeTypes.ToJsName((AstType)constValue, this.Emitter) + "()");
                     }
                 }
                 else
@@ -189,15 +209,33 @@ namespace Bridge.Translator
         {
             foreach (var member in members)
             {
+                object constValue = null;
+                bool isPrimitive = false;
                 var primitiveExpr = member.Initializer as PrimitiveExpression;
+                if (primitiveExpr != null)
+                {
+                    isPrimitive = true;
+                    constValue = primitiveExpr.Value;
+                }
+
                 var isNull = member.Initializer.IsNull || member.Initializer is NullReferenceExpression;
+
+                if (!isNull && !isPrimitive)
+                {
+                    var constrr = this.Emitter.Resolver.ResolveNode(member.Initializer, this.Emitter) as ConstantResolveResult;
+                    if (constrr != null)
+                    {
+                        isPrimitive = true;
+                        constValue = constrr.ConstantValue;
+                    }
+                }
 
                 if (isNull)
                 {
                     return true;
                 }
 
-                if (primitiveExpr == null || (primitiveExpr.Value is AstType))
+                if (!isPrimitive || (constValue is AstType))
                 {
                     continue;
                 }

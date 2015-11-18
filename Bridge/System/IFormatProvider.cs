@@ -3,7 +3,7 @@ using Bridge;
 namespace System
 {
     [Namespace("Bridge")]
-    [Ignore]
+    [External]
     public interface IFormatProvider : IBridgeClass
     {
         object GetFormat(Type formatType);

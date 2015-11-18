@@ -8,7 +8,7 @@ namespace Bridge.Html5
     /// It is returned by the methods CanvasRenderingContext2D.createLinearGradient() or
     /// CanvasRenderingContext2D.createRadialGradient().
     /// </summary>
-    [Ignore]
+    [External]
     [Namespace(false)]
     public class CanvasGradient
     {

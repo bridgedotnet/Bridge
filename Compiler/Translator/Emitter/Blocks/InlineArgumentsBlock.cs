@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using ICSharpCode.NRefactory.Semantics;
 
 namespace Bridge.Translator
 {
@@ -84,6 +85,20 @@ namespace Bridge.Translator
                 bool isRaw = m.Groups[1].Success && m.Groups[1].Value == "*";
                 bool ignoreArray = isRaw || argsInfo.ParamsExpression == null;
                 string modifier = m.Groups[1].Success ? m.Groups[4].Value : null;
+                string paramsName = null;
+                if (argsInfo.ResolveResult != null)
+                {
+                    var paramsParam = argsInfo.ResolveResult.Member.Parameters.FirstOrDefault(p => p.IsParams);
+                    if (paramsParam != null)
+                    {
+                        paramsName = paramsParam.Name;
+                    }
+                }
+
+                if (modifier == "array")
+                {
+                    ignoreArray = false;
+                }
 
                 StringBuilder oldSb = this.Emitter.Output;
                 this.Emitter.Output = new StringBuilder();
@@ -102,8 +117,17 @@ namespace Bridge.Translator
                     IList<Expression> exprs = this.GetExpressionsByKey(expressions, key);
                     if (exprs.Count > 0)
                     {
-                        if (exprs.Count > 1)
+                        if (exprs.Count > 1 || paramsName == key)
                         {
+                            if (exprs.Count == 1 && exprs[0].Parent != null)
+                            {
+                                var exprrr = this.Emitter.Resolver.ResolveNode(exprs[0], this.Emitter);
+                                if (exprrr.Type.Kind == TypeKind.Array)
+                                {
+                                    ignoreArray = true;
+                                }
+                            }
+
                             if (!ignoreArray)
                             {
                                 this.Write("[");

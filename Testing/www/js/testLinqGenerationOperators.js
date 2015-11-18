@@ -24,3 +24,6 @@ Bridge.define('ClientTestLibrary.Linq.TestLinqGenerationOperators', {
     }
 });
 
+
+
+Bridge.init();

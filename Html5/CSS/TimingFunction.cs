@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The CSS animation-timing-function property specifies how a CSS animation should progress over the duration of each cycle.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum TimingFunction

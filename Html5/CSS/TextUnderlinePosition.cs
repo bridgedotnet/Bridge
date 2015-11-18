@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The CSS text-underline-position property specifies the position of the underline which is set using the text-decoration property underline value.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum TextUnderlinePosition

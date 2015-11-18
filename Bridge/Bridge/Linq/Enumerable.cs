@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace Bridge.Linq
 {
-    [Ignore]
+    [External]
     [Name("Bridge.Linq.Enumerable")]
     public static class Enumerable
     {

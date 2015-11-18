@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The border style CSS property sets the width of the border of a box.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum BorderWidth

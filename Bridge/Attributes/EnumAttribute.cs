@@ -2,7 +2,7 @@
 
 namespace Bridge
 {
-    [Ignore]
+    [External]
     [AttributeUsage(AttributeTargets.Enum)]
     public class EnumAttribute : Attribute
     {
@@ -11,7 +11,7 @@ namespace Bridge
         }
     }
 
-    [Ignore]
+    [External]
     public enum Emit
     {
         Name = 1,

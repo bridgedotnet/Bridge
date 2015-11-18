@@ -326,7 +326,7 @@ namespace Bridge.Translator
                     {
                         NamedArgumentExpression namedArg = (NamedArgumentExpression)arg;
                         var namedParam = parameters.First(p => p.Name == namedArg.Name);
-                        var index = parameters.IndexOf(namedParam);
+                        var index = parameters.IndexOf(namedParam) - shift;
 
                         result[index] = namedArg.Expression;
                         names[index] = namedArg.Name;

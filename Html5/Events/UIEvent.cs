@@ -3,7 +3,7 @@
 
 namespace Bridge.Html5
 {
-    [Ignore]
+    [External]
     [Name("UIEvent")]
     public class UIEvent : Event
     {
@@ -69,7 +69,7 @@ namespace Bridge.Html5
         public string ReturnValue;
     }
 
-    [Ignore]
+    [External]
     [Name("Object")]
     public class UIEventInit : EventInit
     {

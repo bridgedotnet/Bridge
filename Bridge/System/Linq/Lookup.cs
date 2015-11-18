@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace System.Linq
 {
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     public interface ILookup<TKey, TElement> : IEnumerable<Grouping<TKey, TElement>>
     {
@@ -23,7 +23,7 @@ namespace System.Linq
         bool Contains(TKey key);
     }
 
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     public class Lookup<TKey, TElement> : ILookup<TKey, TElement>
     {

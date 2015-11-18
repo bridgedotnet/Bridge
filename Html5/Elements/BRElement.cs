@@ -3,9 +3,9 @@ namespace Bridge.Html5
     /// <summary>
     /// The HTMLBRElement interface represents a HTML line break element.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLBRElement")]
-    public class BRElement : Element
+    public class BRElement : Element<BRElement>
     {
         [Template("document.createElement('br')")]
         public BRElement()

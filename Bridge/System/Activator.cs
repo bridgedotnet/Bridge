@@ -2,7 +2,7 @@ using Bridge;
 
 namespace System
 {
-    [Ignore]
+    [External]
     public static class Activator
     {
         [Template("new {type}({*arguments})")]

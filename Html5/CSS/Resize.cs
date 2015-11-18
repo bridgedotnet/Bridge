@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The resize CSS property lets you control the resizability of an element.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum Resize

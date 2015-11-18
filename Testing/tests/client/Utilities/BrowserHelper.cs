@@ -10,6 +10,16 @@ namespace ClientTestLibrary.Utilities
             return Script.Get<string>("navigator.userAgent").Contains("PhantomJS");
         }
 
+        public static bool IsFirefox()
+        {
+            return Script.Get<string>("navigator.userAgent").Contains("Firefox");
+        }
+
+        public static bool IsChrome()
+        {
+            return Script.Get<string>("navigator.userAgent").Contains("Chrome");
+        }
+
         public static string GetBrowserInfo()
         {
             var userAgent = Script.Get<string>("navigator.userAgent");

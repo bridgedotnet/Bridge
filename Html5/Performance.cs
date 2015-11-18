@@ -3,7 +3,7 @@
 
 namespace Bridge.Html5
 {
-    [Ignore]
+    [External]
     [Name("Performance")]
     public class Performance
     {
@@ -35,7 +35,7 @@ namespace Bridge.Html5
     /// The PerformanceTiming interface represents timing-related performance information for the given page.
     /// An object of this type can be obtained by calling the Performance.timing read-only attribute.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("PerformanceTiming")]
     public class PerformanceTiming
     {
@@ -153,7 +153,7 @@ namespace Bridge.Html5
     /// The PerformanceNavigation interface represents information about how the navigation to the current document was done.
     /// An object of this type can be obtained by calling the Performance.navigation read-only attribute.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("PerformanceNavigation")]
     public class PerformanceNavigation
     {
@@ -175,7 +175,7 @@ namespace Bridge.Html5
     /// <summary>
     /// A constant describing how the navigation to this page was done.
     /// </summary>
-    [Ignore]
+    [External]
     public enum PerformanceNavigationType
     {
         /// <summary>

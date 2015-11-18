@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace System.Collections.ObjectModel
 {
-    [Ignore]
+    [External]
     [Namespace("Bridge")]
     public class ReadOnlyCollection<T> : IList<T>
     {

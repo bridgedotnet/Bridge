@@ -1,9 +1,9 @@
-namespace Bridge.Html5
+﻿namespace Bridge.Html5
 {
     /// <summary>
     /// The position CSS property chooses alternative rules for positioning elements, designed to be useful for scripted animation effects.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum Position

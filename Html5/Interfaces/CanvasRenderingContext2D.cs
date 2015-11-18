@@ -1,4 +1,4 @@
-// The documentation for this class (on <summary> tags) was extracted from:
+﻿// The documentation for this class (on <summary> tags) was extracted from:
 // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
 
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ namespace Bridge.Html5
     /// To get an object of this interface, call getContext() on a &lt;canvas>, supplying
     /// "CanvasContext2DType.CanvasRenderingContext2D" as the argument.
     /// </summary>
-    [Ignore]
+    [External]
     [Namespace(false)]
     public class CanvasRenderingContext2D : SVGOperations
     {
@@ -990,7 +990,7 @@ namespace Bridge.Html5
 
         // FIXME: Find a better place to define this class on. It is not an interface neither an element, but an
         //        auxiliary object, used only on CanvasRenderingContext2D.
-        [Ignore]
+        [External]
         [Name("Object")]
         public class CanvasHitRegionOptions
         {

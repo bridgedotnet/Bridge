@@ -131,3 +131,6 @@ Bridge.define('ClientTestLibrary.Linq.TestLinqElementOperators', {
     }
 });
 
+
+
+Bridge.init();

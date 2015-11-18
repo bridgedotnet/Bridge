@@ -52,6 +52,7 @@ namespace Bridge.Translator
             IMethod method = null;
             var oldIsAssignment = this.Emitter.IsAssignment;
             var oldUnary = this.Emitter.IsUnaryAccessor;
+            bool isName = false;
 
             if (memberResolveResult != null)
             {
@@ -66,7 +67,14 @@ namespace Bridge.Translator
                     member = (IProperty)resolvedMember;
                     method = this.Emitter.IsAssignment ? member.Setter : member.Getter;
                     inlineAttr = this.Emitter.GetAttribute(method.Attributes, Translator.Bridge_ASSEMBLY + ".TemplateAttribute");
-                    ignoreAccessor = this.Emitter.Validator.HasAttribute(method.Attributes, "Bridge.IgnoreAttribute");
+
+                    if (inlineAttr == null)
+                    {
+                        inlineAttr = this.Emitter.GetAttribute(method.Attributes, Translator.Bridge_ASSEMBLY + ".NameAttribute");
+                        isName = true;
+                    }
+
+                    ignoreAccessor = this.Emitter.Validator.IsIgnoreType(method);
                 }
             }
 
@@ -77,6 +85,11 @@ namespace Bridge.Translator
                 if (inlineArg.ConstantValue != null)
                 {
                     inlineCode = inlineArg.ConstantValue.ToString();
+
+                    if (inlineCode != null && isName)
+                    {
+                        inlineCode += "({0})";
+                    }
                 }
             }
 

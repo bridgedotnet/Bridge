@@ -112,3 +112,6 @@ Bridge.define('ClientTestLibrary.TestInterfaces.C', {
     }
 });
 
+
+
+Bridge.init();

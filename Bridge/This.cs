@@ -1,6 +1,6 @@
 namespace Bridge
 {
-    [Ignore]
+    [External]
     [Name("this")]
     public static class This
     {
@@ -36,7 +36,7 @@ namespace Bridge
         }
     }
 
-    [Ignore]
+    [External]
     [Name("this")]
     public class ThisInstance
     {

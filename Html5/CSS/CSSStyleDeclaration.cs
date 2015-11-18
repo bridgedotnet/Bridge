@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 
 namespace Bridge.Html5
@@ -6,7 +6,7 @@ namespace Bridge.Html5
     /// <summary>
     /// A CSSStyleDeclaration is an interface to the declaration block returned by the style property of a cssRule in a stylesheet, when the rule is a CSSStyleRule.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("CSSStyleDeclaration")]
     public class CSSStyleDeclaration : IEnumerable<string>
     {
@@ -136,13 +136,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The background-color CSS property sets the background color of an element, either through a color value or the keyword transparent.
         /// </summary>
-        public HTMLColor BackgroundColor;
-
-        /// <summary>
-        /// The background-color CSS property sets the background color of an element, either through a color value or the keyword transparent.
-        /// </summary>
-        [Name("backgroundColor")]
-        public string BackgroundColorString;
+        public string BackgroundColor;
 
         /// <summary>
         /// The CSS background-image property sets one or several background images for an element. The images are drawn on successive stacking context layers, with the first specified being drawn as if it is the closest to the user. The borders of the element are then drawn on top of them, and the background-color is drawn beneath them.
@@ -188,13 +182,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The border-bottom-color CSS property sets the color of the bottom border of an element. Note that in many cases the shorthand CSS properties border-color or border-bottom are more convenient and preferable.
         /// </summary>
-        public HTMLColor BorderBottomColor;
-
-        /// <summary>
-        /// The border-bottom-color CSS property sets the color of the bottom border of an element. Note that in many cases the shorthand CSS properties border-color or border-bottom are more convenient and preferable.
-        /// </summary>
-        [Name("borderBottomColor")]
-        public string BorderBottomColorString;
+        public string BorderBottomColor;
 
         /// <summary>
         /// The border-bottom-left-radius CSS property sets the rounding of the bottom-left corner of the element. The rounding can be a circle or an ellipse, or if one of the value is 0 no rounding is done and the corner is square.
@@ -230,13 +218,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The border-color CSS property is a shorthand for setting the color of the four sides of an element's border: border-top-color, border-right-color, border-bottom-color, border-left-color
         /// </summary>
-        public HTMLColor BorderColor;
-
-        /// <summary>
-        /// The border-color CSS property is a shorthand for setting the color of the four sides of an element's border: border-top-color, border-right-color, border-bottom-color, border-left-color
-        /// </summary>
-        [Name("borderColor")]
-        public string BorderColorString;
+        public string BorderColor;
 
         /// <summary>
         /// The border-image CSS property allows drawing an image on the borders of elements. This makes drawing complex looking widgets much simpler than it has been and removes the need for nine boxes in some cases.
@@ -282,13 +264,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The border-left-color CSS property sets the color of the bottom border of an element. Note that in many cases the shorthand CSS properties border-color or border-left are more convenient and preferable.
         /// </summary>
-        public HTMLColor BorderLeftColor;
-
-        /// <summary>
-        /// The border-left-color CSS property sets the color of the bottom border of an element. Note that in many cases the shorthand CSS properties border-color or border-left are more convenient and preferable.
-        /// </summary>
-        [Name("borderLeftColor")]
-        public string BorderLeftColorString;
+        public string BorderLeftColor;
 
         /// <summary>
         /// The border-left-style CSS property sets the line style of the left border of a box.
@@ -319,13 +295,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The border-right-color CSS property sets the color of the right border of an element. Note that in many cases the shorthand CSS properties  border-color or border-right are more convenient and preferable.
         /// </summary>
-        public HTMLColor BorderRightColor;
-
-        /// <summary>
-        /// The border-right-color CSS property sets the color of the right border of an element. Note that in many cases the shorthand CSS properties  border-color or border-right are more convenient and preferable.
-        /// </summary>
-        [Name("borderRightColor")]
-        public string BorderRightColorString;
+        public string BorderRightColor;
 
         /// <summary>
         /// The border-right-style CSS property sets the line style of the right border of a box.
@@ -361,13 +331,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The border-top-color CSS property sets the color of the top border of an element. Note that in many cases the shorthand CSS properties border-color or border-top are more convenient and preferable.
         /// </summary>
-        public HTMLColor BorderTopColor;
-
-        /// <summary>
-        /// The border-top-color CSS property sets the color of the top border of an element. Note that in many cases the shorthand CSS properties border-color or border-top are more convenient and preferable.
-        /// </summary>
-        [Name("borderTopColor")]
-        public string BorderTopColorString;
+        public string BorderTopColor;
 
         /// <summary>
         /// The border-top-left-radius CSS property sets the rounding of the top-left corner of the element. The rounding can be a circle or an ellipse, or if one of the value is 0 no rounding is done and the corner is square.
@@ -451,13 +415,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The CSS color property sets the foreground color of an element's text content, and its decorations. It doesn't affect any other characteristic of the element; it should really be called text-color and would have been named so, save for historical reasons and its appearance in CSS Level 1.
         /// </summary>
-        public HTMLColor Color;
-
-        /// <summary>
-        /// The CSS color property sets the foreground color of an element's text content, and its decorations. It doesn't affect any other characteristic of the element; it should really be called text-color and would have been named so, save for historical reasons and its appearance in CSS Level 1.
-        /// </summary>
-        [Name("color")]
-        public string ColorString;
+        public string Color;
 
         /// <summary>
         /// The columns CSS property is a shorthand property allowing to set both the column-width and the column-count properties at the same time.
@@ -487,13 +445,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The column-rule-color CSS property lets you set the color of the rule drawn between columns in multi-column layouts.
         /// </summary>
-        public HTMLColor ColumnRuleColor;
-
-        /// <summary>
-        /// The column-rule-color CSS property lets you set the color of the rule drawn between columns in multi-column layouts.
-        /// </summary>
-        [Name("columnRuleColor")]
-        public string ColumnRuleColorString;
+        public string ColumnRuleColor;
 
         /// <summary>
         /// The column-rule-style CSS property lets you set the style of the rule drawn between columns in multi-column layouts.
@@ -1016,13 +968,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The outline-color CSS property sets the color of the outline of an element. An outline is a line that is drawn around elements, outside the border edge, to make the element stand out.
         /// </summary>
-        public HTMLColor OutlineColor;
-
-        /// <summary>
-        /// The outline-color CSS property sets the color of the outline of an element. An outline is a line that is drawn around elements, outside the border edge, to make the element stand out.
-        /// </summary>
-        [Name("outlineColor")]
-        public string OutlineColorString;
+        public string OutlineColor;
 
         /// <summary>
         /// The outline-offset CSS property is used to set space between an outline and the edge or border of an element. An outline is a line that is drawn around elements, outside the border edge.
@@ -1184,13 +1130,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The text-decoration-color CSS property sets the color used when drawing underlines, overlines, or strike-throughs specified by text-decoration-line.
         /// </summary>
-        public HTMLColor TextDecorationColor;
-
-        /// <summary>
-        /// The text-decoration-color CSS property sets the color used when drawing underlines, overlines, or strike-throughs specified by text-decoration-line.
-        /// </summary>
-        [Name("textDecorationColor")]
-        public string TextDecorationColorString;
+        public string TextDecorationColor;
 
         /// <summary>
         /// The text-decoration-line CSS property sets what kind of line decorations are added to an element.

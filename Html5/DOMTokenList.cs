@@ -6,7 +6,7 @@ namespace Bridge.Html5
     /// <summary>
     /// This type represents a set of space-separated tokens.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("DOMTokenList")]
     public class DOMTokenList : IEnumerable<string>
     {

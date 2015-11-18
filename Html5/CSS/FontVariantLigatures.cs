@@ -1,9 +1,9 @@
-namespace Bridge.Html5
+﻿namespace Bridge.Html5
 {
     /// <summary>
     ///  font-variant-ligatures is a CSS property to control ligatures in text.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum FontVariantLigatures

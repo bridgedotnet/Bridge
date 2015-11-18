@@ -2,7 +2,7 @@ using System;
 
 namespace Bridge.Html5
 {
-    [Ignore]
+    [External]
     [Name("EventTarget")]
     public abstract class EventTarget
     {

@@ -10,10 +10,10 @@ namespace System
     /// <summary>
     /// The String global object is a constructor for strings, or a sequence of characters.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("String")]
     [Constructor("String")]
-    public sealed class String : IEnumerable, IEnumerable<char>
+    public sealed class String : IEnumerable, IEnumerable<char>, IComparable<String>, IEquatable<String>
     {
         [FieldProperty]
         public int Length
@@ -56,6 +56,9 @@ namespace System
         public String(char c, int count)
         {
         }
+
+        [Template("String.fromCharCode.apply(null, {value}.slice({startIndex}, {startIndex} + {length}))")]
+        public extern String(char[] value, int startIndex, int length);
 
         /// <summary>
         /// Indicates whether the specified string is null or an Empty string.
@@ -210,7 +213,7 @@ namespace System
         /// </summary>
         /// <param name="strings">Strings to concatenate to this string.</param>
         /// <returns></returns>
-        [Template("[{strings}].toString().split(',').join('')")]
+        [Template("{strings:array}.toString().split(',').join('')")]
         public static string Concat(params string[] strings)
         {
             return null;
@@ -260,7 +263,7 @@ namespace System
         /// </summary>
         /// <param name="objects">Strings to concatenate to this string.</param>
         /// <returns></returns>
-        [Template("[{objects}].toString().split(',').join('')")]
+        [Template("{objects:array}.toString().split(',').join('')")]
         public static string Concat(params object[] objects)
         {
             return null;
@@ -463,26 +466,30 @@ namespace System
             return -1;
         }
 
-        /// <summary>
-        /// The lastIndexOf() method returns the index within the calling String object of the last occurrence of the specified value, or -1 if not found. The calling string is searched backward, starting at fromIndex.
-        /// </summary>
-        /// <param name="searchValue">A string representing the value to search for.</param>
-        /// <returns></returns>
-        public int LastIndexOf(string searchValue)
-        {
-            return -1;
-        }
+        [Template("{this}.lastIndexOf(String.fromCharCode({ch}))")]
+        public extern int LastIndexOf(char ch);
 
-        /// <summary>
-        /// The lastIndexOf() method returns the index within the calling String object of the last occurrence of the specified value, or -1 if not found. The calling string is searched backward, starting at fromIndex.
-        /// </summary>
-        /// <param name="searchValue">A string representing the value to search for.</param>
-        /// <param name="fromIndex">The location within the calling string to start the search at, indexed from left to right. It can be any integer. The default value is searchValue.length - 1. If fromIndex &lt; 0 or fromIndex &gt;= searchValue.length, the method will return -1.</param>
-        /// <returns></returns>
-        public int LastIndexOf(string searchValue, int fromIndex)
-        {
-            return -1;
-        }
+        public extern int LastIndexOf(string subString);
+
+        public extern int LastIndexOf(string subString, int startIndex);
+
+        [Template("Bridge.String.lastIndexOf({this}, String.fromCharCode({ch}), {startIndex}, {count})")]
+        public extern int LastIndexOf(char ch, int startIndex, int count);
+
+        [Template("Bridge.String.lastIndexOf({this}, {subString}, {startIndex}, {count})")]
+        public extern int LastIndexOf(string subString, int startIndex, int count);
+
+        [Template("{this}.lastIndexOf(String.fromCharCode({ch}), {startIndex})")]
+        public extern int LastIndexOf(char ch, int startIndex);
+
+        [Template("Bridge.String.lastIndexOfAny({this}, {ch:array})")]
+        public extern int LastIndexOfAny(params char[] ch);
+
+        [Template("Bridge.String.lastIndexOfAny({this}, {ch}, {startIndex})")]
+        public extern int LastIndexOfAny(char[] ch, int startIndex);
+
+        [Template("Bridge.String.lastIndexOfAny({this}, {ch}, {startIndex}, {count})")]
+        public extern int LastIndexOfAny(char[] ch, int startIndex, int count);
 
         /// <summary>
         /// The localeCompare() method returns a number indicating whether a reference string comes before or after or is the same as the given string in sort order.
@@ -607,6 +614,9 @@ namespace System
             return null;
         }
 
+        [Template("Bridge.String.replaceAll({this}, String.fromCharCode({oldChar}), String.fromCharCode({replaceChar}))")]
+        public extern string Replace(char oldChar, char replaceChar);
+
         /// <summary>
         /// The replace() method returns a new string with some or all matches of a pattern replaced by a replacement.  The pattern can be a string or a Regex, and the replacement can be a string or a function to be called for each match.
         /// </summary>
@@ -694,56 +704,47 @@ namespace System
         public string Slice(int beginSlice, int endSlice)
         {
             return null;
-        }
+        }    
 
-        /// <summary>
-        /// The split() method splits a String object into an array of strings by separating the string into substrings.
-        /// </summary>
-        /// <param name="separator">Specifies the character(s) to use for separating the string. The separator is treated as a string or a regular expression. If separator is omitted, the array returned contains one element consisting of the entire string. If separator is an empty string, str is converted to an array of characters.</param>
-        /// <returns></returns>
-        public string[] Split(string separator)
-        {
-            return null;
-        }
+        [Template("Bridge.String.split({this}, {separator:array}.map(function(i) {{ return String.fromCharCode(i); }}))")]
+        public extern string[] Split(params char[] separator);
 
-        /// <summary>
-        /// The split() method splits a String object into an array of strings by separating the string into substrings.
-        /// </summary>
-        /// <param name="separator">Specifies the character(s) to use for separating the string. The separator is treated as a string or a regular expression. If separator is omitted, the array returned contains one element consisting of the entire string. If separator is an empty string, str is converted to an array of characters.</param>
-        /// <returns></returns>
-        public string[] Split(Regex separator)
-        {
-            return null;
-        }
+        [Template("Bridge.String.split({this}, {separator}.map(function(i) {{ return String.fromCharCode(i); }}), {limit})")]
+        public extern string[] Split(char[] separator, int limit);
 
-        /// <summary>
-        /// The split() method splits a String object into an array of strings by separating the string into substrings.
-        /// </summary>
-        /// <param name="separator">Specifies the character(s) to use for separating the string. The separator is treated as a string or a regular expression. If separator is omitted, the array returned contains one element consisting of the entire string. If separator is an empty string, str is converted to an array of characters.</param>
-        /// <param name="limit">Integer specifying a limit on the number of splits to be found. The split method still splits on every match of separator, but it truncates the returned array to at most limit elements.</param>
-        /// <returns></returns>
-        public string[] Split(string separator, int limit)
-        {
-            return null;
-        }
+        [Template("Bridge.String.split({this}, {separator}.map(function(i) {{ return String.fromCharCode(i); }}), {limit}, {options})")]
+        public extern string[] Split(char[] separator, int limit, StringSplitOptions options);
 
-        /// <summary>
-        /// The split() method splits a String object into an array of strings by separating the string into substrings.
-        /// </summary>
-        /// <param name="separator">Specifies the character(s) to use for separating the string. The separator is treated as a string or a regular expression. If separator is omitted, the array returned contains one element consisting of the entire string. If separator is an empty string, str is converted to an array of characters.</param>
-        /// <param name="limit">Integer specifying a limit on the number of splits to be found. The split method still splits on every match of separator, but it truncates the returned array to at most limit elements.</param>
-        /// <returns></returns>
-        public string[] Split(Regex separator, int limit)
-        {
-            return null;
-        }
+        [Template("Bridge.String.split({this}, {separator}.map(function(i) {{ return String.fromCharCode(i); }}), null, {options})")]
+        public extern string[] Split(char[] separator, StringSplitOptions options);
+
+        [Template("Bridge.String.split({this}, {separator}, null, {options})")]
+        public extern string[] Split(string[] separator, StringSplitOptions options);
+
+        [Template("Bridge.String.split({this}, {separator}, {limit}, {options})")]
+        public extern string[] Split(string[] separator, int limit, StringSplitOptions options);
+
+        public extern string[] Split(string separator);
+
+        [Template("{this}.split(String.fromCharCode({separator}))")]
+        public extern string[] Split(char separator);
+
+        public extern string[] Split(Regex regex);
+
+        [Template("{this}.split(String.fromCharCode({separator}), {limit})")]
+        public extern string[] Split(char separator, int limit);
+
+        public extern string[] Split(Regex regex, int limit);
+
+        public extern string[] Split(string separator, int limit);
 
         /// <summary>
         /// The substring() method returns a subset of a string between one index and another, or through the end of the string.
         /// </summary>
         /// <param name="indexA">An integer between 0 and the length of the string.</param>
         /// <returns></returns>
-        public string Substring(int indexA)
+        [Name("substring")]
+        public string JsSubstring(int indexA)
         {
             return null;
         }
@@ -754,7 +755,8 @@ namespace System
         /// <param name="indexA">An integer between 0 and the length of the string.</param>
         /// <param name="indexB">An integer between 0 and the length of the string.</param>
         /// <returns></returns>
-        public string Substring(int indexA, int indexB)
+        [Name("substring")]
+        public string JsSubstring(int indexA, int indexB)
         {
             return null;
         }
@@ -773,9 +775,32 @@ namespace System
         /// The substr() method returns the characters in a string beginning at the specified location through the specified number of characters.
         /// </summary>
         /// <param name="start">Location at which to begin extracting characters. If a negative number is given, it is treated as strLength+start where strLength = to the length of the string (for example, if start is -3 it is treated as strLength-3.)</param>
+        /// <returns></returns>
+        [Name("substr")]
+        public string Substring(int start)
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// The substr() method returns the characters in a string beginning at the specified location through the specified number of characters.
+        /// </summary>
+        /// <param name="start">Location at which to begin extracting characters. If a negative number is given, it is treated as strLength+start where strLength = to the length of the string (for example, if start is -3 it is treated as strLength-3.)</param>
         /// <param name="length">The number of characters to extract.</param>
         /// <returns></returns>
         public string Substr(int start, int length)
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// The substr() method returns the characters in a string beginning at the specified location through the specified number of characters.
+        /// </summary>
+        /// <param name="start">Location at which to begin extracting characters. If a negative number is given, it is treated as strLength+start where strLength = to the length of the string (for example, if start is -3 it is treated as strLength-3.)</param>
+        /// <param name="length">The number of characters to extract.</param>
+        /// <returns></returns>
+        [Name("substr")]
+        public string Substring(int start, int length)
         {
             return null;
         }
@@ -808,6 +833,21 @@ namespace System
         {
             return null;
         }
+
+        [Template("Bridge.String.trim({this}, {values:array})")]
+        public extern string Trim(params char[] values);
+
+        [Template("Bridge.String.trimStart({this}, {values:array})")]
+        public extern string TrimStart(params char[] values);
+
+        [Template("Bridge.String.trimEnd({this}, {values:array})")]
+        public extern string TrimEnd(params char[] values);
+
+        [Template("Bridge.String.trimStart({this})")]
+        public extern string TrimStart();
+
+        [Template("Bridge.String.trimEnd({this})")]
+        public extern string TrimEnd();
 
         /// <summary>
         /// Returns a value indicating whether a specified substring occurs within this string.
@@ -993,7 +1033,7 @@ namespace System
         [IndexerName("Chars")]
         public char this[int index]
         {
-            [Ignore]
+            [External]
             [Template("charCodeAt({0})")]
             get
             {
@@ -1018,5 +1058,44 @@ namespace System
         {
             return null;
         }
+
+        [Template("Bridge.String.compare({this}, {other})")]
+        public extern int CompareTo(string other);
+
+        [Template("Bridge.String.insert({startIndex}, {this}, {value})")]
+        public extern string Insert(int startIndex, string value);
+
+        [Template("{args}.join({separator})")]
+        public static extern string Join(string separator, params string[] args);
+
+        [Template("{args}.join({separator})")]
+        public static extern string Join(string separator, params object[] args);
+
+        [Template("Bridge.toArray({args}).join({separator})")]
+        public static extern string Join(string separator, IEnumerable<string> args);
+
+        [Template("Bridge.toArray({args}).join({separator})")]
+        public static extern string Join<T>(string separator, IEnumerable<T> args);
+
+        [Template("{args}.slice({startIndex}, {startIndex} + {count}).join({separator})")]
+        public static extern string Join(string separator, string[] args, int startIndex, int count);
+
+        [Template("Bridge.String.alignString({this}, {totalWidth})")]
+        public extern string PadLeft(int totalWidth);
+
+        [Template("Bridge.String.alignString({this}, {totalWidth}, {ch})")]
+        public extern string PadLeft(int totalWidth, char ch);
+
+        [Template("Bridge.String.alignString({this}, -{totalWidth})")]
+        public extern string PadRight(int totalWidth);
+
+        [Template("Bridge.String.alignString({this}, -{totalWidth}, {ch})")]
+        public extern string PadRight(int totalWidth, char ch);
+
+        [Template("Bridge.String.remove({this}, {index})")]
+        public extern string Remove(int index);
+
+        [Template("Bridge.String.remove({this}, {index}, {count})")]
+        public extern string Remove(int index, int count);
     }
 }

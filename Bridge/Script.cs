@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Bridge
 {
-    [Ignore]
+    [External]
     [Name("Bridge")]
     public static class Script
     {
@@ -278,6 +278,12 @@ namespace Bridge
 
         [Template("this")]
         public static T This<T>()
+        {
+            return default(T);
+        }
+
+        [Template("(Bridge.caller[0] || this)")]
+        public static T Caller<T>()
         {
             return default(T);
         }

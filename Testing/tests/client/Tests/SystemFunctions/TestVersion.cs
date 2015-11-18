@@ -219,5 +219,13 @@ namespace ClientTestLibrary
             assert.NotOk(v4 < v5, "v4 < v5");
             assert.NotOk(v4 <= v5, "v4 <= v5");
         }
+
+        public static void TestIssue499(Assert assert)
+        {
+            assert.Expect(1);
+
+            var v1 = new Version();
+            assert.Equal(v1.GetClassName(), "Bridge.Version", "#499 Version type name");
+        }
     }
 }

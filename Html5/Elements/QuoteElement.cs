@@ -5,9 +5,9 @@ namespace Bridge.Html5
     /// <summary>
     /// The HTMLQuoteElement interface provides special properties and methods (beyond the regular HTMLElement interface it also has available to it by inheritance) for manipulating quoting elements, like &lt;blockquote&gt; and &lt;q&gt;, but not the &lt;cite&gt; element.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLQuoteElement")]
-    public class QuoteElement : Element
+    public class QuoteElement : Element<QuoteElement>
     {
         [Template("document.createElement('blockquote')")]
         public QuoteElement()
@@ -28,7 +28,7 @@ namespace Bridge.Html5
     /// <summary>
     /// Specifies the type of quote: &lt;blockquote&gt; or &lt;q&gt;
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum QuoteType

@@ -2,7 +2,7 @@ using Bridge;
 
 namespace System.Text.RegularExpressions
 {
-    [Ignore]
+    [External]
     [Name("RegExp")]
     public sealed class Regex
     {

@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     ///
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.Value)]
     [Name("Number")]
     public enum RangeComparison

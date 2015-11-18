@@ -2,7 +2,7 @@ using Bridge;
 
 namespace System
 {
-    [Ignore]
+    [External]
     [Namespace("Bridge")]
     public interface IComparable : IBridgeClass
     {
@@ -10,7 +10,7 @@ namespace System
         int CompareTo(Object obj);
     }
 
-    [Ignore]
+    [External]
     [Namespace("Bridge")]
     public interface IComparable<in T> : IBridgeClass
     {

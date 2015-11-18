@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace System.Threading.Tasks
 {
-    [Ignore]
+    [External]
     [Name("Bridge.Task")]
     public class Task : IDisposable, IBridgeClass
     {
@@ -182,7 +182,7 @@ namespace System.Threading.Tasks
         }
     }
 
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     [Name("Bridge.Task")]
     public class Task<TResult> : Task

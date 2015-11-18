@@ -3,9 +3,9 @@ namespace Bridge.Html5
     /// <summary>
     /// The HTMLMetaElement interface contains descriptive metadata about a document. Itt inherits all of the properties and methods described in the HTMLElement interface.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLMetaElement")]
-    public class MetaElement : Element
+    public class MetaElement : Element<MetaElement>
     {
         [Template("document.createElement('meta')")]
         public MetaElement()

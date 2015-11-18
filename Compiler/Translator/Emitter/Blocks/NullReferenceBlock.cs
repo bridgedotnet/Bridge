@@ -3,7 +3,7 @@ using ICSharpCode.NRefactory.CSharp;
 
 namespace Bridge.Translator
 {
-    public class NullReferenceBlock : AbstractEmitterBlock
+    public class NullReferenceBlock : ConversionBlock
     {
         public NullReferenceBlock(IEmitter emitter, AstNode nullNode)
             : base(emitter, nullNode)
@@ -18,7 +18,18 @@ namespace Bridge.Translator
             set;
         }
 
-        protected override void DoEmit()
+protected override Expression GetExpression()
+        {
+            var expr = this.NullNode as Expression;
+            return  expr;
+        }
+
+        protected override void EmitConversionExpression()
+        {
+            this.VisitNull();
+        }
+
+        protected void VisitNull()
         {
             this.Write("null");
         }

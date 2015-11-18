@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The page-break-after CSS property adjusts page breaks after/before the current element.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum PageBreak

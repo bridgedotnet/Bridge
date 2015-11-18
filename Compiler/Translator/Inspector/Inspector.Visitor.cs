@@ -16,10 +16,6 @@ namespace Bridge.Translator
 
         public override void VisitUsingDeclaration(UsingDeclaration usingDeclaration)
         {
-            if (!this.Usings.Contains(usingDeclaration.Namespace))
-            {
-                this.Usings.Add(usingDeclaration.Namespace);
-            }
         }
 
         public override void VisitNamespaceDeclaration(NamespaceDeclaration namespaceDeclaration)
@@ -32,15 +28,12 @@ namespace Bridge.Translator
             ValidateNamespace(namespaceDeclaration);
 
             var prevNamespace = this.Namespace;
-            var prevUsings = this.Usings;
 
             this.Namespace = namespaceDeclaration.Name;
-            this.Usings = new HashSet<string>(prevUsings);
 
             namespaceDeclaration.AcceptChildren(this);
 
             this.Namespace = prevNamespace;
-            this.Usings = prevUsings;
         }
 
         public override void VisitTypeDeclaration(TypeDeclaration typeDeclaration)
@@ -83,7 +76,6 @@ namespace Bridge.Translator
                     Name = typeDeclaration.Name,
                     ClassType = typeDeclaration.ClassType,
                     Namespace = this.Namespace,
-                    Usings = new HashSet<string>(Usings),
                     IsEnum = typeDeclaration.ClassType == ClassType.Enum,
                     IsStatic = typeDeclaration.ClassType == ClassType.Enum || typeDeclaration.HasModifier(Modifiers.Static),
                     IsObjectLiteral = this.IsObjectLiteral(typeDeclaration),
@@ -98,6 +90,7 @@ namespace Bridge.Translator
             else
             {
                 this.CurrentType = partialType;
+                this.CurrentType.PartialTypeDeclarations.Add(typeDeclaration);
                 add = false;
             }
 
@@ -312,6 +305,7 @@ namespace Bridge.Translator
             }
 
             if (!propertyDeclaration.Getter.IsNull
+                && !this.HasIgnore(propertyDeclaration)
                 && !this.HasInline(propertyDeclaration.Getter)
                 && propertyDeclaration.Getter.Body.IsNull
                 && !this.HasScript(propertyDeclaration.Getter))
@@ -348,7 +342,23 @@ namespace Bridge.Translator
             Expression initializer = enumMemberDeclaration.Initializer;
             if (enumMemberDeclaration.Initializer.IsNull)
             {
-                initializer = new PrimitiveExpression(++this.CurrentType.LastEnumValue);
+                if (this.CurrentType.Type.GetDefinition().Attributes.Any(attr => attr.AttributeType.FullName == "System.FlagsAttribute"))
+                {
+                    if (this.CurrentType.LastEnumValue <= 0)
+                    {
+                        this.CurrentType.LastEnumValue = 1;
+                    }
+                    else
+                    {
+                        this.CurrentType.LastEnumValue *= 2;    
+                    }
+                    
+                    initializer = new PrimitiveExpression(this.CurrentType.LastEnumValue);
+                }
+                else
+                {
+                    initializer = new PrimitiveExpression(++this.CurrentType.LastEnumValue);    
+                }
             }
             else
             {

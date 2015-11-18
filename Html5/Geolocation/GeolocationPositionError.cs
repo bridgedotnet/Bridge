@@ -6,7 +6,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The PositionError interface represents the reason of an error occuring when using the geolocating device.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("Object")]
     public class GeolocationPositionError
     {
@@ -25,7 +25,7 @@ namespace Bridge.Html5
         public readonly string Message;
     }
 
-    [Ignore]
+    [External]
     public enum GeolocationErrorCode
     {
         /// <summary>

@@ -2,7 +2,7 @@ using Bridge;
 
 namespace System
 {
-    [Ignore]
+    [External]
     [Name("Bridge.ErrorException")]
     public class ErrorException : Exception, IBridgeClass
     {

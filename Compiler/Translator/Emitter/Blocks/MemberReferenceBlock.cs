@@ -44,8 +44,19 @@ namespace Bridge.Translator
             string targetVar = null;
             string valueVar = null;
             bool isStatement = false;
+            bool isConstTarget = false;
 
             var targetrr = this.Emitter.Resolver.ResolveNode(memberReferenceExpression.Target, this.Emitter);
+            if (targetrr is ConstantResolveResult)
+            {
+                isConstTarget = true;
+            }
+
+            var memberTargetrr = targetrr as MemberResolveResult;
+            if (memberTargetrr != null && memberTargetrr.Type.Kind == TypeKind.Enum && memberTargetrr.Member is DefaultResolvedField && this.Emitter.Validator.EnumEmitMode(memberTargetrr.Type) == 2)
+            {
+                isConstTarget = true;
+            }
 
             if (memberReferenceExpression.Parent is InvocationExpression && (((InvocationExpression)(memberReferenceExpression.Parent)).Target == memberReferenceExpression))
             {
@@ -69,7 +80,15 @@ namespace Bridge.Translator
             {
                 this.Emitter.IsAssignment = false;
                 this.Emitter.IsUnaryAccessor = false;
+                if (isConstTarget)
+                {
+                    this.Write("(");
+                }
                 memberReferenceExpression.Target.AcceptVisitor(this.Emitter);
+                if (isConstTarget)
+                {
+                    this.Write(")");
+                }
                 this.Emitter.IsAssignment = oldIsAssignment;
                 this.Emitter.IsUnaryAccessor = oldUnary;
                 this.WriteDot();
@@ -164,7 +183,15 @@ namespace Bridge.Translator
                 this.Emitter.Output = new StringBuilder();
                 this.Emitter.IsAssignment = false;
                 this.Emitter.IsUnaryAccessor = false;
+                if (isConstTarget)
+                {
+                    this.Write("(");
+                }
                 memberReferenceExpression.Target.AcceptVisitor(this.Emitter);
+                if (isConstTarget)
+                {
+                    this.Write(")");
+                }
                 this.Emitter.IsAssignment = oldIsAssignment;
                 this.Emitter.IsUnaryAccessor = oldUnary;
                 inline = inline.Replace("{this}", this.Emitter.Output.ToString());
@@ -297,7 +324,15 @@ namespace Bridge.Translator
                     {
                         this.Emitter.IsAssignment = false;
                         this.Emitter.IsUnaryAccessor = false;
+                        if (isConstTarget)
+                        {
+                            this.Write("(");
+                        }
                         memberReferenceExpression.Target.AcceptVisitor(this.Emitter);
+                        if (isConstTarget)
+                        {
+                            this.Write(")");
+                        }
                         this.Emitter.IsAssignment = oldIsAssignment;
                         this.Emitter.IsUnaryAccessor = oldUnary;
                     }
@@ -345,7 +380,6 @@ namespace Bridge.Translator
 
                         if (writeTargetVar)
                         {
-                            var memberTargetrr = targetrr as MemberResolveResult;
                             bool isField = memberTargetrr != null && memberTargetrr.Member is IField && (memberTargetrr.TargetResult is ThisResolveResult || memberTargetrr.TargetResult is LocalResolveResult);
 
                             if (!(targetrr is ThisResolveResult || targetrr is TypeResolveResult || targetrr is LocalResolveResult || isField))
@@ -368,7 +402,15 @@ namespace Bridge.Translator
 
                     this.Emitter.IsAssignment = false;
                     this.Emitter.IsUnaryAccessor = false;
+                    if (isConstTarget)
+                    {
+                        this.Write("(");
+                    }
                     memberReferenceExpression.Target.AcceptVisitor(this.Emitter);
+                    if (isConstTarget)
+                    {
+                        this.Write(")");
+                    }
                     this.Emitter.IsAssignment = oldIsAssignment;
                     this.Emitter.IsUnaryAccessor = oldUnary;
 
@@ -560,7 +602,15 @@ namespace Bridge.Translator
                                     }
                                     else
                                     {
+                                        if (isConstTarget)
+                                        {
+                                            this.Write("(");
+                                        }
                                         memberReferenceExpression.Target.AcceptVisitor(this.Emitter);
+                                        if (isConstTarget)
+                                        {
+                                            this.Write(")");
+                                        }
                                     }
 
                                     this.WriteDot();
@@ -616,7 +666,15 @@ namespace Bridge.Translator
                                 }
                                 else
                                 {
+                                    if (isConstTarget)
+                                    {
+                                        this.Write("(");
+                                    }
                                     memberReferenceExpression.Target.AcceptVisitor(this.Emitter);
+                                    if (isConstTarget)
+                                    {
+                                        this.Write(")");
+                                    }
                                 }
 
                                 this.WriteDot();
@@ -818,11 +876,22 @@ namespace Bridge.Translator
                         this.Write(OverloadsCollection.Create(this.Emitter, invocationResult.Member).GetOverloadName());
                     }
                 }
-                else if (member.Member is DefaultResolvedEvent && this.Emitter.IsAssignment && (this.Emitter.AssignmentType == AssignmentOperatorType.Add || this.Emitter.AssignmentType == AssignmentOperatorType.Subtract))
+                else if (member.Member is DefaultResolvedEvent)
                 {
-                    this.Write(this.Emitter.AssignmentType == AssignmentOperatorType.Add ? "add" : "remove");
-                    this.Write(OverloadsCollection.Create(this.Emitter, member.Member, this.Emitter.AssignmentType == AssignmentOperatorType.Subtract).GetOverloadName());
-                    this.WriteOpenParentheses();
+                    if (this.Emitter.IsAssignment &&
+                        (this.Emitter.AssignmentType == AssignmentOperatorType.Add ||
+                         this.Emitter.AssignmentType == AssignmentOperatorType.Subtract))
+                    {
+                        this.Write(this.Emitter.AssignmentType == AssignmentOperatorType.Add ? "add" : "remove");
+                        this.Write(
+                            OverloadsCollection.Create(this.Emitter, member.Member,
+                                this.Emitter.AssignmentType == AssignmentOperatorType.Subtract).GetOverloadName());
+                        this.WriteOpenParentheses();
+                    }
+                    else
+                    {
+                        this.Write(this.Emitter.GetEntityName(member.Member, true));
+                    }
                 }
                 else
                 {

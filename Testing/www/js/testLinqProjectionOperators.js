@@ -105,3 +105,6 @@ Bridge.define('ClientTestLibrary.Linq.TestLinqProjectionOperators', {
     }
 });
 
+
+
+Bridge.init();

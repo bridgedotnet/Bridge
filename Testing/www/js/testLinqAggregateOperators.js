@@ -205,3 +205,6 @@ Bridge.define('ClientTestLibrary.Linq.TestLinqAggregateOperators', {
     }
 });
 
+
+
+Bridge.init();

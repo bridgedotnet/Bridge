@@ -5,7 +5,7 @@ namespace System
     /// <summary>
     /// Specifies how mathematical rounding methods should process a number that is midway between two numbers.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.Value)]
     public enum MidpointRounding
     {

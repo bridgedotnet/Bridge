@@ -4,7 +4,7 @@ namespace Bridge.Html5
     /// A Blob object represents a file-like object of immutable, raw data. Blobs represent data that isn't necessarily in a JavaScript-native format. The File interface is based on Blob, inheriting blob functionality and expanding it to support files on the user's system.
     /// An easy way to construct a Blob is by invoking the Blob constuctor. Another way is to use the slice() method to create a blob that contains a subset of another blob's data.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("Blob")]
     public class Blob
     {

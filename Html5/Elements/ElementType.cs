@@ -2,7 +2,7 @@ using System;
 
 namespace Bridge.Html5
 {
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     public enum ElementType
     {

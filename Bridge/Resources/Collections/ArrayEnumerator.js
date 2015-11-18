@@ -2,11 +2,12 @@
 
 Bridge.define('Bridge.ArrayEnumerator', {
     inherits: [Bridge.IEnumerator],
+
     constructor: function (array) {
         this.array = array;
         this.reset();
     },
-
+    
     moveNext: function () {
         this.index++;
 

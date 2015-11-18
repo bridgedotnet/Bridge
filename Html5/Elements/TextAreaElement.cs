@@ -5,9 +5,9 @@ namespace Bridge.Html5
     /// <summary>
     /// The HTMLTextAreaElement interface, which provides special properties and methods (beyond the regular HTMLElement interface it also has available to it by inheritance) for manipulating the layout and presentation of &lt;textarea&gt; elements.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLTextAreaElement")]
-    public class TextAreaElement : Element
+    public class TextAreaElement : Element<TextAreaElement>
     {
         [Template("document.createElement('textarea')")]
         public TextAreaElement()
@@ -193,7 +193,7 @@ namespace Bridge.Html5
     /// <summary>
     /// Indicates how the control wraps text.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum Wrap

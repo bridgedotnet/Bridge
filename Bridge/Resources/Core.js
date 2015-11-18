@@ -93,10 +93,14 @@
             return scope;
         },
 
-        ready: function (fn) {
+        ready: function (fn, scope) {
             var delayfn = function () {
                 setTimeout(function () {
-                    fn();
+                    if (scope) {
+                        fn.apply(scope);
+                    } else {
+                        fn();
+                    }
                 }, 1);
             };
 
@@ -111,9 +115,9 @@
             }
         },
 
-        on: function (event, elem, fn) {
+        on: function (event, elem, fn, scope) {
             var listenHandler = function (e) {
-                var ret = fn.apply(this, arguments);
+                var ret = fn.apply(scope || this, arguments);
 
                 if (ret === false) {
                     e.stopPropagation();
@@ -124,7 +128,7 @@
             };
 
             var attachHandler = function () {
-                var ret = fn.call(elem, Bridge.global.event);
+                var ret = fn.call(scope || elem, Bridge.global.event);
 
                 if (ret === false) {
                     Bridge.global.event.returnValue = false;
@@ -289,8 +293,12 @@
 	            return true;
             }
 
-            if (Bridge.isArray(obj)) {
+            if (Bridge.isArray(obj) || obj instanceof Bridge.ArrayEnumerator) {
                 return Bridge.Array.is(obj, type);
+            }
+
+            if (Bridge.isString(obj)) {
+                return Bridge.String.is(obj, type);
             }
 
             if (!type.$$inheritors) {
@@ -345,6 +353,20 @@
         },
 
 	    merge: function (to, from) {
+	        if (to instanceof Bridge.Decimal && Bridge.isNumber(from)) {
+	            return new Bridge.Decimal(from);
+	        }
+
+	        if (to instanceof Boolean ||
+                to instanceof Number ||
+                to instanceof String ||
+                to instanceof Function ||
+                to instanceof Date ||
+                to instanceof Bridge.Int ||
+                to instanceof Bridge.Decimal) {
+	            return from;
+	        }
+
 	        var key,
 			    i,
                 value,
@@ -577,6 +599,9 @@
 
                 throw new Bridge.NullReferenceException();
             } else if (Bridge.isNumber(a) || Bridge.isString(a) || Bridge.isBoolean(a)) {
+                if (Bridge.isString(a) && !Bridge.hasValue(b)) {
+                    return 1;
+                }
                 return a < b ? -1 : (a > b ? 1 : 0);
             } else if (Bridge.isDate(a)) {
                 return Bridge.compare(a.valueOf(), b.valueOf());
@@ -648,6 +673,32 @@
                 return obj[fnName].apply(obj, args);
             },
 
+            makeFn: function (fn, length) {
+                switch (length) {
+                    case 0  : return function () { return fn.apply(this, arguments); };
+                    case 1  : return function (a) { return fn.apply(this, arguments); };
+                    case 2  : return function (a,b) { return fn.apply(this, arguments); };
+                    case 3  : return function (a,b,c) { return fn.apply(this, arguments); };
+                    case 4  : return function (a,b,c,d) { return fn.apply(this, arguments); };
+                    case 5  : return function (a,b,c,d,e) { return fn.apply(this, arguments); };
+                    case 6  : return function (a,b,c,d,e,f) { return fn.apply(this, arguments); };
+                    case 7  : return function (a,b,c,d,e,f,g) { return fn.apply(this, arguments); };
+                    case 8  : return function (a,b,c,d,e,f,g,h) { return fn.apply(this, arguments); };
+                    case 9  : return function (a, b, c, d, e, f, g, h, i) { return fn.apply(this, arguments); };
+                    case 10:  return function (a, b, c, d, e, f, g, h, i, j) { return fn.apply(this, arguments); };
+                    case 11:  return function (a, b, c, d, e, f, g, h, i, j, k) { return fn.apply(this, arguments); };
+                    case 12:  return function (a, b, c, d, e, f, g, h, i, j, k, l) { return fn.apply(this, arguments); };
+                    case 13:  return function (a, b, c, d, e, f, g, h, i, j, k, l, m) { return fn.apply(this, arguments); };
+                    case 14:  return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n) { return fn.apply(this, arguments); };
+                    case 15:  return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) { return fn.apply(this, arguments); };
+                    case 16:  return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) { return fn.apply(this, arguments); };
+                    case 17:  return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q) { return fn.apply(this, arguments); };
+                    case 18:  return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r) { return fn.apply(this, arguments); };
+                    case 19:  return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s) { return fn.apply(this, arguments); };
+                    default:  return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t) { return fn.apply(this, arguments); };
+                }
+            },
+
             bind: function (obj, method, args, appendArgs) {
                 if (method && method.$method === method && method.$scope === obj) {
                     return method;
@@ -656,11 +707,15 @@
                 var fn;
 
                 if (arguments.length === 2) {
-                    fn = function () {
-                        return method.apply(obj, arguments);
-                    };
+                    fn = Bridge.fn.makeFn(function () {
+                        Bridge.caller.unshift(this);
+                        var result = method.apply(obj, arguments);
+                        Bridge.caller.shift(this);
+
+                        return result;
+                    }, method.length);
                 } else {
-                    fn = function () {
+                    fn = Bridge.fn.makeFn(function () {
                         var callArgs = args || arguments;
 
                         if (appendArgs === true) {
@@ -677,9 +732,12 @@
                                 callArgs.push.apply(callArgs, args);
                             }
                         }
+                        Bridge.caller.unshift(this);
+                        var result = method.apply(obj, callArgs);
+                        Bridge.caller.shift(this);
 
-                        return method.apply(obj, callArgs);
-                    };
+                        return result;
+                    }, method.length);
                 }
 
                 fn.$method = method;
@@ -689,13 +747,17 @@
             },
 
             bindScope: function (obj, method) {
-                var fn = function () {
+                var fn = Bridge.fn.makeFn(function () {
                     var callArgs = Array.prototype.slice.call(arguments, 0);
 
                     callArgs.unshift.apply(callArgs, [obj]);
 
-                    return method.apply(obj, callArgs);
-                };
+                    Bridge.caller.unshift(this);
+                    var result = method.apply(obj, callArgs);
+                    Bridge.caller.shift(this);
+
+                    return result;
+                }, method.length);
 
                 fn.$method = method;
                 fn.$scope = obj;
@@ -793,4 +855,5 @@
     }
 
     globals.Bridge = core;
+    globals.Bridge.caller = [];
 })(this);

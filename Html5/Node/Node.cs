@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// A Node is an interface from which a number of DOM types inherit, and allows these various types to be treated (or tested) similarly.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("Node")]
     public class Node : EventTarget
     {

@@ -138,6 +138,20 @@ namespace Bridge.Translator
             bool isDecimalExpected = Helpers.IsDecimalType(expectedType, this.Emitter.Resolver);
             bool isUserOperator = this.IsUserOperator(orr);
 
+            var charToString = -1;
+
+            if (orr != null && orr.Type.IsKnownType(KnownTypeCode.String))
+            {
+                for (int i = 0; i < orr.Operands.Count; i++)
+                {
+                    var crr = orr.Operands[i] as ConversionResolveResult;
+                    if (crr != null && crr.Input.Type.IsKnownType(KnownTypeCode.Char))
+                    {
+                        charToString = i;
+                    }
+                }
+            }
+
             if (assignmentExpression.Operator == AssignmentOperatorType.Divide &&
                 (
                     (Helpers.IsIntegerType(leftResolverResult.Type, this.Emitter.Resolver) &&
@@ -413,7 +427,17 @@ namespace Bridge.Translator
             oldValue = this.Emitter.ReplaceAwaiterByVar;
             this.Emitter.ReplaceAwaiterByVar = true;
 
+            if (charToString == 1)
+            {
+                this.Write("String.fromCharCode(");
+            }
+
             assignmentExpression.Right.AcceptVisitor(this.Emitter);
+
+            if (charToString == 1)
+            {
+                this.Write(")");
+            }
 
             if (special)
             {

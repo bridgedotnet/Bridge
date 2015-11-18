@@ -7,6 +7,21 @@ Bridge.Class.generic('Bridge.KeyValuePair$2', function (TKey, TValue) {
         constructor: function (key, value) {
             this.key = key;
             this.value = value;
+        },
+
+        toString: function() {
+            var s = "[";
+            
+            if( this.key != null) {
+                s += this.key.toString();
+            }
+
+            s += ", ";
+            if(this.value != null) {
+                s += this.value.toString();
+            }
+            s += "]";
+            return s;
         }
     }));
 });
@@ -102,7 +117,7 @@ Bridge.Class.generic('Bridge.Dictionary$2', function (TKey, TValue) {
         },
 
         getItem: function (key) {
-            return get(key);
+            return this.get(key);
         },
 
         set: function (key, value, add) {
@@ -131,7 +146,7 @@ Bridge.Class.generic('Bridge.Dictionary$2', function (TKey, TValue) {
         },
 
         setItem: function (key, value, add) {
-            set(key, value, add);
+            this.set(key, value, add);
         },
 
         add: function (key, value) {

@@ -49,3 +49,6 @@ Bridge.define('ClientTestLibrary.Linq.TestLinqQueryExecution', {
     }
 });
 
+
+
+Bridge.init();

@@ -3,9 +3,9 @@ namespace Bridge.Html5
     /// <summary>
     /// The &lt;keygen&gt; elements expose the HTMLKeygenElement interface, which provides special properties and methods (beyond the regular element object interface they also have available to them by inheritance) for manipulating the layout and presentation of keygen elements.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLKeygenElement")]
-    public class KeygenElement : Element
+    public class KeygenElement : Element<KeygenElement>
     {
         [Template("document.createElement('keygen')")]
         public KeygenElement()

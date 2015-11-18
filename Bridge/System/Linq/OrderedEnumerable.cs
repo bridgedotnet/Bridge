@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace System.Linq
 {
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     public interface IOrderedEnumerable<TSource> : IEnumerable<TSource>
     {
@@ -16,7 +16,7 @@ namespace System.Linq
         IOrderedEnumerable<TSource> ThenByDescending<TKey>(Func<TSource, TKey> keySelector, IComparer<TKey> comparer);
     }
 
-    [Ignore]
+    [External]
     [IgnoreGeneric]
     public class OrderedEnumerable<TElement> : EnumerableInstance<TElement>, IOrderedEnumerable<TElement>
     {

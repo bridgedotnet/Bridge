@@ -5,9 +5,9 @@ namespace Bridge.Html5
     /// <summary>
     /// The HTMLTableHeaderCellElement interface provides special properties and methods (beyond the regular HTMLTableCellElement and HTMLElement interfaces it also has available to it by inheritance) for manipulating the layout and presentation of table header cells in an HTML document.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLTableHeaderCellElement")]
-    public class TableHeaderCellElement : TableCellElement
+    public class TableHeaderCellElement : TableCellElement<TableHeaderCellElement>
     {
         [Template("document.createElement('th')")]
         public TableHeaderCellElement()
@@ -29,7 +29,7 @@ namespace Bridge.Html5
     /// <summary>
     /// The scope attribute specifies whether a header cell is a header for a column, row, or group of columns or rows.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum TableHeaderCellScope

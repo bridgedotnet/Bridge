@@ -6,7 +6,7 @@ namespace Bridge.Html5
     /// <summary>
     /// NodeList objects are collections of nodes such as those returned by Node.childNodes and the querySelectorAll method.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("NodeList")]
     public class NodeList : IEnumerable<Node>
     {

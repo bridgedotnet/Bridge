@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// loading status of the document
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringNameLowerCase)]
     [Name("String")]
     public enum ReadyState

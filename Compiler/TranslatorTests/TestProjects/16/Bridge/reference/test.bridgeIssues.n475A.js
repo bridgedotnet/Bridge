@@ -49,3 +49,6 @@ Bridge.define('Test.BridgeIssues.N475A.Test', {
     }
 });
 
+
+
+Bridge.init();

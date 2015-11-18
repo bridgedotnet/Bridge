@@ -3,7 +3,7 @@ namespace Bridge.Html5
     /// <summary>
     /// A BlobPropertyBag object that provides the properties for the new Blob object.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("BlobPropertyBag")]
     public class BlobPropertyBag
     {

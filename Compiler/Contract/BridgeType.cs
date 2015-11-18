@@ -60,6 +60,15 @@ namespace Bridge.Contract
                 type.Emitter = emitter;
                 type.Type = ReflectionHelper.ParseReflectionName(key).Resolve(emitter.Resolver.Resolver.TypeResolveContext);
                 type.TypeInfo = emitter.Types.FirstOrDefault(t => t.Key == key);
+
+                if (type.TypeInfo != null && emitter.TypeInfoDefinitions.ContainsKey(type.TypeInfo.Key))
+                {
+                    var typeInfo = this.Emitter.TypeInfoDefinitions[type.Key];
+
+                    type.TypeInfo.Module = typeInfo.Module;
+                    type.TypeInfo.FileName = typeInfo.FileName;
+                    type.TypeInfo.Dependencies = typeInfo.Dependencies;
+                }
             }
         }
 

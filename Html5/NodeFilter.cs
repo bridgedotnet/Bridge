@@ -6,7 +6,7 @@ namespace Bridge.Html5
     /// types of Node that must to be presented
     /// </summary>
     [Flags]
-    [Ignore]
+    [External]
     [Enum(Emit.Value)]
     [Name("Number")]
     public enum NodeFilter

@@ -30,11 +30,11 @@ Bridge.define('ClientTestLibrary.TestDateFunctions', {
             var b1 = Bridge.Date.tryParse("2001-01-01", null, d1, true);
             assert.ok(b1, "TryParse parsed '2001 - 01 - 01'");
             assert.equal(d1.v.getUTCFullYear(), 2001, "TryParse works Year");
-            assert.equal(d1.v.getUTCMonth() + 1, 1, "TryParse works Month");
+            assert.equal((d1.v.getUTCMonth() + 1), 1, "TryParse works Month");
             assert.equal(d1.v.getUTCDay(), 1, "TryParse works Day");
 
-            var d2 = Bridge.Date.parse("2001-01-01");
-            assert.deepEqual(d2.toString(), d1.v.toString(), "TryParse And Parse give the same result");
+            var d2 = Bridge.Date.parse("2001-01-01", null, true);
+            assert.deepEqual(Bridge.Date.format(d2), Bridge.Date.format(d1.v), "TryParse And Parse give the same result");
         },
         bridge349: function (assert) {
             assert.expect(5);
@@ -47,9 +47,12 @@ Bridge.define('ClientTestLibrary.TestDateFunctions', {
             var parsed = Bridge.Date.tryParse("22.08.2015", culture, date);
             assert.ok(parsed, "Parsed \"22.08.2015\"");
             assert.equal(date.v.getFullYear(), 2015, "TryParse works Year");
-            assert.equal(date.v.getMonth() + 1, 8, "TryParse works Month");
+            assert.equal((date.v.getMonth() + 1), 8, "TryParse works Month");
             assert.equal(date.v.getDate(), 22, "TryParse works Day");
         }
     }
 });
 
+
+
+Bridge.init();

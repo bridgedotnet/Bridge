@@ -6,9 +6,9 @@ namespace Bridge.Html5
     /// The HTMLTableColElement interface provides special properties (beyond the HTMLElement interface it also has available to it inheritance) for manipulating single or grouped table column elements.
     /// The HTML element implementing this interface: &lt;col&gt; and &lt;colgroup&gt;.
     /// </summary>
-    [Ignore]
+    [External]
     [Name("HTMLTableColElement")]
-    public class TableColElement : Element
+    public class TableColElement : Element<TableColElement>
     {
         [Template("document.createElement('col')")]
         public TableColElement()
@@ -29,7 +29,7 @@ namespace Bridge.Html5
     /// <summary>
     /// Specifies the type of a table column. It can be a single &lt;col&gt; or a group &lt;colgroup&gt; column.
     /// </summary>
-    [Ignore]
+    [External]
     [Enum(Emit.StringName)]
     [Name("String")]
     public enum TableColumnType

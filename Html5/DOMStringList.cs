@@ -6,7 +6,7 @@ namespace Bridge.Html5
     /// <summary>
     /// A type returned by some APIs which contains a list of DOMString (strings).
     /// </summary>
-    [Ignore]
+    [External]
     [Name("DOMStringList")]
     public class DOMStringList : IEnumerable<string>
     {
