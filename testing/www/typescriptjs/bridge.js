@@ -6845,8 +6845,7 @@ Bridge.Class.generic('Bridge.ReadOnlyCollection$1', function (T) {
         },
 
         url: function (value) {
-            var re = /(((^https?)|(^ftp)):\/\/((([\-\w]+\.)+\w{2,3}(\/[%\-\w]+(\.\w{2,})?)*(([\w\-\.\?\\\/+@&#;`~=%!]*)(\.\w{2,})?)*)|(localhost|LOCALHOST))\/?)/i;
-
+            var re = /(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:\.\d{1,3}){3})(?!(?:\.\d{1,3}){2})(?!\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/;
             return re.test(value);
         },
 
@@ -6866,23 +6865,24 @@ Bridge.Class.generic('Bridge.ReadOnlyCollection$1', function (T) {
             var re,
                 checksum,
                 i,
-                digit;
+                digit,
+                notype= false;
 
             if (type === "Visa") {
                 // Visa: length 16, prefix 4, dashes optional.
-                re = /^4\d{3}-?\d{4}-?\d{4}-?\d{4}$/;
+                re = /^4\d{3}[- ]?\d{4}[- ]?\d{4}[- ]?\d{4}$/;
             } else if (type === "MasterCard") {
                 // Mastercard: length 16, prefix 51-55, dashes optional.
-                re = /^5[1-5]\d{2}-?\d{4}-?\d{4}-?\d{4}$/;
+                re = /^5[1-5]\d{2}[- ]?\d{4}[- ]?\d{4}[- ]?\d{4}$/;
             } else if (type === "Discover") {
                 // Discover: length 16, prefix 6011, dashes optional.
-                re = /^6011-?\d{4}-?\d{4}-?\d{4}$/;
+                re = /^6011[- ]?\d{4}[- ]?\d{4}[- ]?\d{4}$/;
             } else if (type === "AmericanExpress") {
                 // American Express: length 15, prefix 34 or 37.
                 re = /^3[4,7]\d{13}$/;
             } else if (type === "DinersClub") {
                 // Diners: length 14, prefix 30, 36, or 38.
-                re = /^3[0,6,8]\d{12}$/;
+                re = /^(3[0,6,8]\d{12})|(5[45]\d{14})$/;
             } else {
                 // Basing min and max length on
                 // http://developer.ean.com/general_info/Valid_Credit_Card_Types
@@ -6891,6 +6891,7 @@ Bridge.Class.generic('Bridge.ReadOnlyCollection$1', function (T) {
                 }
 
                 re = /[^0-9 \-]+/;
+                notype = true;
             }
 
             if (!re.test(value)) {
@@ -6898,7 +6899,7 @@ Bridge.Class.generic('Bridge.ReadOnlyCollection$1', function (T) {
             }
 
             // Remove all dashes for the checksum checks to eliminate negative numbers
-            value = value.split("-").join("");
+            value = value.split(notype ? "-" : /[- ]/).join("");
 
             // Checksum ("Mod 10")
             // Add even digits in even length strings or odd digits in odd length strings.

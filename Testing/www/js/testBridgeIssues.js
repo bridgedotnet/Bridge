@@ -2816,6 +2816,17 @@ Bridge.define('ClientTestLibrary.Bridge786', {
     }
 });
 
+Bridge.define('ClientTestLibrary.Bridge788', {
+    statics: {
+        testUseCase: function (assert) {
+            assert.expect(2);
+
+            assert.ok(Bridge.Validation.url("http://127.0.0.1"));
+            assert.notOk(Bridge.Validation.url("http://127.0.1"));
+        }
+    }
+});
+
 Bridge.define('ClientTestLibrary.Bridge796', {
     statics: {
         testUseCase: function (assert) {
