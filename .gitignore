@@ -188,3 +188,4 @@ FakesAssemblies/
 *.ts
 *.d.ts
 /Bridge.dev.sln
+/Testing/tests/client/Bridge/plugins/*

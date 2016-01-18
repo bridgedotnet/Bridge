@@ -1,9 +1,8 @@
 using Bridge;
 using System.Collections.Generic;
 
-namespace ClientTestLibrary.Utilities
+namespace Bridge.ClientTest.Utilities
 {
-    [FileName("utilities.js")]
     public class Person
     {
         public int ID
@@ -108,8 +107,6 @@ namespace ClientTestLibrary.Utilities
             return persons;
         }
     }
-
-    [FileName("utilities.js")]
     public class Group
     {
         public string Name

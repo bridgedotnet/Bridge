@@ -38,6 +38,11 @@ namespace Bridge.Translator.Utils
             }
         }
 
+        public static string ConfigToString(IAssemblyInfo config)
+        {
+            return JsonConvert.SerializeObject(config);
+        }
+
         public static void ConvertConfigPaths(IAssemblyInfo assemblyInfo)
         {
             if (!string.IsNullOrWhiteSpace(assemblyInfo.AfterBuild))

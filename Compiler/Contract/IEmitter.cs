@@ -202,7 +202,7 @@ namespace Bridge.Contract
             set;
         }
 
-        Action<string, string> Log
+        ILogger Log
         {
             get;
             set;

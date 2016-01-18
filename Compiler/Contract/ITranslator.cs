@@ -37,7 +37,7 @@ namespace Bridge.Contract
             get;
         }
 
-        Action<string, string> Log
+        ILogger Log
         {
             get;
             set;

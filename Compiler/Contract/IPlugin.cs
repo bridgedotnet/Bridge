@@ -4,6 +4,8 @@ namespace Bridge.Contract
 {
     public interface IPlugin
     {
+        ILogger Logger { get; set; }
+
         IEnumerable<string> GetConstructorInjectors(IConstructorBlock constructorBlock);
 
         bool HasConstructorInjectors(IConstructorBlock constructorBlock);

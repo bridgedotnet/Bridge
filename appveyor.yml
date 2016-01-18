@@ -9,14 +9,13 @@
 #---------------------------------#
 
 # version format
-version: 1.10.{build}-{branch}
+version: 1.11.{build}-{branch}
 
 # branches to build
 branches:
   # whitelist
   only:
     - master
-    - release1.10
 
   # blacklist
   #except:
@@ -200,7 +199,7 @@ on_failure:
 
 # after build failure or success
 on_finish:
-- ps: $root = Resolve-Path Compiler\TranslatorTests\bin\Release; [IO.Directory]::GetFiles($root.Path, '*.log', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName TranslatorTestsLog }  
+- ps: $root = Resolve-Path Compiler\TranslatorTests; [IO.Directory]::GetFiles($root.Path, '*.log', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName TranslatorTestsLog }  
 
 
 #---------------------------------#

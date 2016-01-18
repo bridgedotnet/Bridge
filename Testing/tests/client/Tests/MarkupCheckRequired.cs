@@ -1,20 +1,16 @@
 using Bridge;
 
-namespace ClientTestLibrary
+namespace Bridge.ClientTest.BridgeIssues
 {
     // [#62] - check file name outputs
-    [FileName("markUpCheckRequired.js")]
     public class CI1
     {
     }
-
-    [FileName("MarkUpCheckRequired.js")]
     public class CI2
     {
     }
 
     // [#69]
-    [FileName("markUpCheckRequired.js")]
     public struct Point69
     {
         public int x;

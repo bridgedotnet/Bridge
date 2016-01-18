@@ -1,9 +1,13 @@
+using Bridge.Contract;
+
 using System.IO;
 
 namespace Bridge.Translator.Tests
 {
     internal class TranslatorRunner
     {
+        public ILogger Logger { get; set; }
+
         public string ProjectLocation
         {
             get;
@@ -14,16 +18,6 @@ namespace Bridge.Translator.Tests
         {
             get;
             set;
-        }
-
-        private void LogMessage(string level, string message)
-        {
-            SimpleLogger.Instance.WriteLine("{0}: {1}", level.ToUpper(), message);
-        }
-
-        private void LogInfo(string message)
-        {
-            SimpleLogger.Instance.LogInfo(message);
         }
 
         private static string FindBridgeDllPathByConfiguration(string configurationName)
@@ -76,10 +70,10 @@ namespace Bridge.Translator.Tests
 
             var translator = new Bridge.Translator.Translator(ProjectLocation);
 
-            translator.Log = LogMessage;
+            translator.Log = this.Logger;
             translator.Rebuild = true;
 
-            LogInfo("\t\tProjectLocation: " + ProjectLocation);
+            this.Logger.Info("\t\tProjectLocation: " + ProjectLocation);
 
             string configuration;
             translator.BridgeLocation = FindBridgeDllPath(out configuration);
@@ -92,9 +86,9 @@ namespace Bridge.Translator.Tests
             translator.BuildArguments = WrapBuildArguments(configuration);
             translator.Configuration = configuration;
 
-            LogInfo("\t\tBuildArguments: " + translator.BuildArguments);
-            LogInfo("\t\tConfiguration: " + translator.Configuration);
-            LogInfo("\t\tBridgeLocation: " + translator.BridgeLocation);
+            this.Logger.Info("\t\tBuildArguments: " + translator.BuildArguments);
+            this.Logger.Info("\t\tConfiguration: " + translator.Configuration);
+            this.Logger.Info("\t\tBridgeLocation: " + translator.BridgeLocation);
 
             translator.Translate();
 
@@ -104,7 +98,7 @@ namespace Bridge.Translator.Tests
                                     Path.Combine(Path.GetDirectoryName(ProjectLocation), translator.AssemblyInfo.Output) :
                                     path;
 
-            LogInfo("\t\toutputDir: " + outputDir);
+            this.Logger.Info("\t\toutputDir: " + outputDir);
             translator.SaveTo(outputDir, Path.GetFileNameWithoutExtension(outputLocation));
 
             return outputDir;
@@ -116,10 +110,10 @@ namespace Bridge.Translator.Tests
 
             var translator = new Bridge.Translator.Translator(ProjectLocation);
 
-            translator.Log = LogMessage;
+            translator.Log = this.Logger;
             //translator.Rebuild = true;
 
-            LogInfo("\t\tProjectLocation: " + ProjectLocation);
+            this.Logger.Info("\t\tProjectLocation: " + ProjectLocation);
 
             string configuration;
 
@@ -133,9 +127,9 @@ namespace Bridge.Translator.Tests
             translator.BuildArguments = WrapBuildArguments(configuration);
             translator.Configuration = configuration;
 
-            LogInfo("\t\tBuildArguments: " + translator.BuildArguments);
-            LogInfo("\t\tConfiguration: " + translator.Configuration);
-            LogInfo("\t\tBridgeLocation: " + translator.BridgeLocation);
+            this.Logger.Info("\t\tBuildArguments: " + translator.BuildArguments);
+            this.Logger.Info("\t\tConfiguration: " + translator.Configuration);
+            this.Logger.Info("\t\tBridgeLocation: " + translator.BridgeLocation);
 
             translator.BuildAssembly();
         }

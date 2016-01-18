@@ -716,7 +716,7 @@ namespace System
 
         public long Ticks
         {
-            [Template("{this}.getTime() * 10000")]
+            [Template("({this}.getTime() * 10000)")]
             get
             {
                 return 0;

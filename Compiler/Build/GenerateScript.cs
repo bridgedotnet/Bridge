@@ -1,9 +1,13 @@
 using Bridge.Contract;
-using Microsoft.Build.Framework;
-using Microsoft.Build.Utilities;
+using Bridge.Translator.Logging;
+
 using System;
 using System.IO;
 using System.Linq;
+
+using Microsoft.Build.Framework;
+using Microsoft.Build.Utilities;
+
 
 namespace Bridge.Build
 {
@@ -69,26 +73,6 @@ namespace Bridge.Build
 
 #endif
 
-        protected virtual void LogMessage(string level, string message)
-        {
-            level = level ?? "message";
-
-            switch (level.ToLowerInvariant())
-            {
-                case "message":
-                    this.Log.LogMessage(message);
-                    break;
-
-                case "warning":
-                    this.Log.LogWarning(message);
-                    break;
-
-                case "error":
-                    this.Log.LogError(message);
-                    break;
-            }
-        }
-
         public override bool Execute()
         {
             var success = true;
@@ -114,7 +98,7 @@ namespace Bridge.Build
 
                 translator.BridgeLocation = Path.Combine(this.AssembliesPath, "Bridge.dll");
                 translator.Rebuild = false;
-                translator.Log = this.LogMessage;
+                translator.Log = new Translator.Logging.Logger("Bridge.Build.Task", true, new ConsoleLoggerWriter(), SimpleFileLoggerWriter.Instance);
                 translator.Translate();
 
                 string fileName = Path.GetFileNameWithoutExtension(this.Assembly.ItemSpec);

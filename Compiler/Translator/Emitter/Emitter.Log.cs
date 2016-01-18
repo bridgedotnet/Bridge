@@ -5,7 +5,7 @@ namespace Bridge.Translator
 {
     public partial class Emitter : ILog
     {
-        public Action<string, string> Log
+        public ILogger Log
         {
             get;
             set;
@@ -13,24 +13,33 @@ namespace Bridge.Translator
 
         public virtual void LogWarning(string message)
         {
-            this.LogMessage("warning", message);
+            if (this.Log != null)
+            {
+                this.Log.Warn(message);
+            }
         }
 
         public virtual void LogError(string message)
         {
-            this.LogMessage("error", message);
+            if (this.Log != null)
+            {
+                this.Log.Error(message);
+            }
         }
 
         public virtual void LogMessage(string message)
         {
-            this.LogMessage("message", message);
+            if (this.Log != null)
+            {
+                this.Log.Info(message);
+            }
         }
 
         public virtual void LogMessage(string level, string message)
         {
             if (this.Log != null)
             {
-                this.Log(level, message);
+                this.Log.Info(level + ": " + message);
             }
         }
     }

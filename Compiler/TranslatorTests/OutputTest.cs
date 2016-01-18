@@ -1,4 +1,7 @@
+using Bridge.Translator.Logging;
+
 using NUnit.Framework;
+
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -62,11 +65,6 @@ namespace Bridge.Translator.Tests
             ReferenceFolder = Path.Combine(ProjectFolder, @"Bridge\Reference");
         }
 
-        private void LogInfo(string message)
-        {
-            SimpleLogger.Instance.LogInfo(message);
-        }
-
         [TestFixtureSetUp]
         public void TestFixtureSetUp()
         {
@@ -97,20 +95,23 @@ namespace Bridge.Translator.Tests
         [TestCase("18", true, true, TestName = "OutputTest 18 - Features")]
         public void Test(string folder, bool isToTranslate, bool useSpecialFileCompare)
         {
+            var logger = new Logger("Bridge.Test.Runner", true, SimpleFileLoggerWriter.Instance, new ConsoleLoggerWriter());
+
             GetPaths(folder);
 
-            LogInfo("OutputTest Project " + folder);
+            logger.Info("OutputTest Project " + folder);
 
-            LogInfo("\tProjectFileName " + ProjectFileName);
-            LogInfo("\tProjectFolder " + ProjectFolder);
+            logger.Info("\tProjectFileName " + ProjectFileName);
+            logger.Info("\tProjectFolder " + ProjectFolder);
 
-            LogInfo("\tProjectFilePath " + ProjectFilePath);
+            logger.Info("\tProjectFilePath " + ProjectFilePath);
 
-            LogInfo("\tOutputFolder " + OutputFolder);
-            LogInfo("\tReferenceFolder " + ReferenceFolder);
+            logger.Info("\tOutputFolder " + OutputFolder);
+            logger.Info("\tReferenceFolder " + ReferenceFolder);
 
             var translator = new TranslatorRunner()
             {
+                Logger = logger,
                 ProjectLocation = ProjectFilePath,
                 BuildArguments = OutputTest.BuildArguments
             };
@@ -133,7 +134,9 @@ namespace Bridge.Translator.Tests
 
             try
             {
-                var comparence = FolderComparer.CompareFolders(this.ReferenceFolder, this.OutputFolder, useSpecialFileCompare ? SpecialFiles : null);
+                var folderComparer = new FolderComparer() { Logger = logger };
+
+                var comparence = folderComparer.CompareFolders(this.ReferenceFolder, this.OutputFolder, useSpecialFileCompare ? SpecialFiles : null);
 
                 if (comparence.Any())
                 {
@@ -144,14 +147,17 @@ namespace Bridge.Translator.Tests
                         sb.AppendLine(diff.ToString());
                     }
 
-                    FolderComparer.LogDifferences("Project " + folder + " differences:", comparence);
+                    folderComparer.LogDifferences("Project " + folder + " differences:", comparence);
 
                     Assert.Fail(sb.ToString());
                 }
             }
             catch (Exception ex)
             {
-                Assert.Fail("Could not compare the project {0} output. Exception occurred: {1}.", folder, ex.Message);
+                var message = string.Format("Could not compare the project {0} output. Exception occurred: {1}.", folder, ex.Message);
+
+                logger.Error(message);
+                Assert.Fail(message);
             }
         }
     }

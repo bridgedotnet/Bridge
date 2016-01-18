@@ -1,4 +1,6 @@
 using Bridge.Contract;
+using Bridge.Translator.Logging;
+
 using System;
 using System.IO;
 using System.Linq;
@@ -8,33 +10,10 @@ namespace Bridge.Builder
 {
     internal class Program
     {
-        private static void LogMessage(string level, string message)
-        {
-            level = level ?? "message";
-            switch (level.ToLowerInvariant())
-            {
-                case "message":
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.WriteLine("Message: {0}", message);
-                    Console.ResetColor();
-                    break;
-
-                case "warning":
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine("Warning: {0}", message);
-                    Console.ResetColor();
-                    break;
-
-                case "error":
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Error: {0}", message);
-                    Console.ResetColor();
-                    break;
-            }
-        }
-
         private static void Main(string[] args)
         {
+            var logger = new Logger("Bridge.Builder.Console", true, new ConsoleLoggerWriter(), SimpleFileLoggerWriter.Instance);
+
             string projectLocation = null;
             string outputLocation = null;
             string bridgeLocation = null;
@@ -49,20 +28,20 @@ namespace Bridge.Builder
 
             if (args.Length == 0)
             {
-                Console.WriteLine("Bridge.Builder commands:");
-                Console.WriteLine("-p or -project           Path to csproj file (required)");
-                Console.WriteLine("-o or -output            Output directory for generated script");
-                Console.WriteLine("-cfg or -configuration   Configuration name, typically Debug/Release");
-                Console.WriteLine("-r or -rebuild           Force assembly rebuilding");
-                Console.WriteLine("-nocore                  Do not extract core javascript files");
-                Console.WriteLine("-def or -define          Defines project constants. For example, \"CONSTANT1;CONSTANT2\" ");
+                logger.Info("Bridge.Builder commands:");
+                logger.Info("-p or -project           Path to csproj file (required)");
+                logger.Info("-o or -output            Output directory for generated script");
+                logger.Info("-cfg or -configuration   Configuration name, typically Debug/Release");
+                logger.Info("-r or -rebuild           Force assembly rebuilding");
+                logger.Info("-nocore                  Do not extract core javascript files");
+                logger.Info("-def or -define          Defines project constants. For example, \"CONSTANT1;CONSTANT2\" ");
 #if DEBUG
                 // This code and logic is only compiled in when building bridge.net in Debug configuration
-                Console.WriteLine("-d or -debug             Attach the builder to an visual studio debugging instance.");
-                Console.WriteLine("                         Use this to attach the process to an open Bridge.NET solution.");
-                Console.WriteLine("                         This option is equivalent to Build.dll's 'AttachDebugger'.");
+                logger.Info("-d or -debug             Attach the builder to an visual studio debugging instance.");
+                logger.Info("                         Use this to attach the process to an open Bridge.NET solution.");
+                logger.Info("                         This option is equivalent to Build.dll's 'AttachDebugger'.");
 #endif
-                Console.WriteLine("");
+                logger.Info("");
                 return;
             }
 
@@ -129,7 +108,7 @@ namespace Bridge.Builder
                         break;
 #endif
                     default:
-                        Console.WriteLine("Unknown command: " + args[i]);
+                        logger.Info("Unknown command: " + args[i]);
                         return;
                 }
 
@@ -144,7 +123,7 @@ namespace Bridge.Builder
             Bridge.Translator.Translator translator = null;
             try
             {
-                Console.WriteLine("Generating script...");
+                logger.Info("Generating script...");
 
                 if (!string.IsNullOrWhiteSpace(projectLocation))
                 {
@@ -165,7 +144,7 @@ namespace Bridge.Builder
 
                 translator.BridgeLocation = bridgeLocation;
                 translator.Rebuild = rebuild;
-                translator.Log = LogMessage;
+                translator.Log = logger;
                 translator.Configuration = cfg;
                 if (def != null)
                 {
@@ -188,49 +167,47 @@ namespace Bridge.Builder
 
                 if (translator.AssemblyInfo != null && translator.AssemblyInfo.CleanOutputFolderBeforeBuild)
                 {
-                    Console.WriteLine("Cleaning output folder before extracting scripts...");
+                    logger.Info("Cleaning output folder before extracting scripts...");
                     CleanDirectory(outputPath);
                 }
 
                 if (extractCore)
                 {
-                    Console.WriteLine("Extracting core scripts...");
+                    logger.Info("Extracting core scripts...");
                     translator.ExtractCore(outputPath);
                 }
 
-                Console.WriteLine("Saving to " + outputPath);
+                logger.Info("Saving to " + outputPath);
                 translator.SaveTo(outputPath, Path.GetFileName(outputLocation));
                 translator.Flush(outputPath, Path.GetFileName(outputLocation));
                 translator.Plugins.AfterOutput(translator, outputPath, !extractCore);
 
-                Console.WriteLine("Done.");
+                logger.Info("Done translation console");
             }
-            catch (EmitterException e)
+            catch (EmitterException ex)
             {
-                Console.WriteLine("Error: {2} ({3}, {4}) {0} {1}", e.Message, e.StackTrace, e.FileName, e.StartLine, e.StartColumn, e.EndLine, e.EndColumn);
+                logger.Error(string.Format("Error: {2} ({3}, {4}) {0} {1}", ex.Message, ex.StackTrace, ex.FileName, ex.StartLine, ex.StartColumn, ex.EndLine, ex.EndColumn));
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 var ee = translator != null ? translator.CreateExceptionFromLastNode() : null;
-                Console.ForegroundColor = ConsoleColor.Red;
 
                 if (ee != null)
                 {
-                    Console.WriteLine("Error: {2} ({3}, {4}) {0} {1}", e.Message, e.StackTrace, ee.FileName, ee.StartLine, ee.StartColumn, ee.EndLine, ee.EndColumn);
+                    logger.Error(string.Format("Error: {2} ({3}, {4}) {0} {1}", ex.Message, ex.StackTrace, ee.FileName, ee.StartLine, ee.StartColumn, ee.EndLine, ee.EndColumn));
                 }
                 else
                 {
                     // Iteractively print inner exceptions
-                    var ine = e;
+                    var ine = ex;
                     var elvl = 0;
                     while (ine != null)
                     {
-                        Console.WriteLine("Error: exception level: {0} - {1}\nStack trace:\n{2}", elvl++, ine.Message, ine.StackTrace);
+                        logger.Error(string.Format("Error: exception level: {0} - {1}\nStack trace:\n{2}", elvl++, ine.Message, ine.StackTrace));
                         ine = ine.InnerException;
                     }
                 }
 
-                Console.ResetColor();
                 Console.ReadLine();
             }
         }

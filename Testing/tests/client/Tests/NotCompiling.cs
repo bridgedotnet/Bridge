@@ -1,9 +1,8 @@
 using Bridge;
 
-namespace ClientTestLibrary
+namespace Bridge.ClientTest.BridgeIssues
 {
     // Does not compile issue [#59]
-    [FileName("notCompiling.js")]
     internal class Class59
     {
         public static void Method1()
@@ -21,7 +20,7 @@ namespace ClientTestLibrary
 
     // Does not compile issue [#61]
     // TODO It shows a correct error description now. How to check that in tests?
-    // [FileName("notCompiling.js")]
+    //
     // class Class61
     // {
     //     public static void Test1(bool condition, string message = null)
@@ -40,7 +39,6 @@ namespace ClientTestLibrary
     // }
 
     // [#64]
-    [FileName("notCompiling.js")]
     internal class Class64
     {
         public class Aux1
@@ -63,21 +61,17 @@ namespace ClientTestLibrary
     }
 
     // [#65]
-    [FileName("notCompiling.js")]
     internal class Class65_1
     {
         public class Nested
         {
         }
     }
-
-    [FileName("notCompiling.js")]
     internal class Class65_2 : Class65_1.Nested
     {
     }
 
     // [#66]
-    [FileName("notCompiling.js")]
     public struct Rectangle66
     {
         public Rectangle66(int x1)
@@ -89,8 +83,6 @@ namespace ClientTestLibrary
         {
         }
     }
-
-    [FileName("notCompiling.js")]
     // [#84] Does not compile
     internal class Class84
     {
@@ -106,7 +98,7 @@ namespace ClientTestLibrary
     }
 
     // [#89]
-    // [FileName("notCompiling.js")]
+    //
     // public class Class89
     // {
     //     void Test(params object[] p)
@@ -116,7 +108,6 @@ namespace ClientTestLibrary
     // }
 
     // [#391]
-    [FileName("notCompiling.js")]
     internal class Class391
     {
         public static void Main()

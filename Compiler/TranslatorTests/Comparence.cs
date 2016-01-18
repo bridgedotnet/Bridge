@@ -1,3 +1,5 @@
+using Bridge.Contract;
+
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -99,12 +101,9 @@ namespace Bridge.Translator.Tests
 
     internal class FolderComparer
     {
-        private static void LogWarning(string message)
-        {
-            SimpleLogger.Instance.LogWarning(message);
-        }
+        public ILogger Logger { get; set; }
 
-        public static List<Comparence> CompareFolders(string referenceFolder, string outputFolder, Dictionary<string, CompareMode> specialFiles)
+        public List<Comparence> CompareFolders(string referenceFolder, string outputFolder, Dictionary<string, CompareMode> specialFiles)
         {
             var referenceDirectory = new DirectoryInfo(referenceFolder);
             var referenceFiles = referenceDirectory.GetFiles("*", SearchOption.AllDirectories);
@@ -127,7 +126,7 @@ namespace Bridge.Translator.Tests
             return comparence.Values.Where(x => x.Result != CompareResult.TheSame).ToList();
         }
 
-        public static void LogDifferences(string diffName, List<Comparence> comparence)
+        public void LogDifferences(string diffName, List<Comparence> comparence)
         {
             var differ = new DiffMatchPatch.diff_match_patch();
             differ.Diff_Timeout = 10;
@@ -175,11 +174,11 @@ namespace Bridge.Translator.Tests
                 }
             }
 
-            SimpleLogger.Instance.WriteLine(string.Empty);
-            LogWarning(sb.ToString());
+            Logger.Warn(string.Empty);
+            Logger.Warn(sb.ToString());
         }
 
-        private static void HandleFile(string folder1, string folder2, Dictionary<string, CompareMode> specialFiles, Dictionary<string, Comparence> comparence, FileInfo file, bool inReference, bool ignoreSame = true)
+        private void HandleFile(string folder1, string folder2, Dictionary<string, CompareMode> specialFiles, Dictionary<string, Comparence> comparence, FileInfo file, bool inReference, bool ignoreSame = true)
         {
             if (comparence.ContainsKey(file.Name))
             {

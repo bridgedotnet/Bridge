@@ -1,8 +1,7 @@
 using Bridge;
 
-namespace ClientTestLibrary.Utilities
+namespace Bridge.ClientTest.Utilities
 {
-    [FileName("utilities.js")]
     public class BrowserHelper
     {
         public static bool IsPhantomJs()
