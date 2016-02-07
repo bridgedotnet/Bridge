@@ -4,47 +4,6 @@
     "use strict";
 
     Bridge.define('Bridge.ClientTestOne.BridgeIssues.N772', {
-        statics: {
-            testUseCase: function () {
-                //These arrays depend on "useTypedArray" bridge.json option
-                var byteArray = new Uint8Array(1);
-                var sbyteArray = new Int8Array(2);
-                var shortArray = new Int16Array(3);
-                var ushortArray = new Uint16Array(4);
-                var intArray = new Int32Array(5);
-                var uintArray = new Uint32Array(6);
-                var floatArray = new Float32Array(7);
-                var doubleArray = new Float64Array(8);
-    
-                //These arrays do not depend on "useTypedArray" bridge.json option
-                var stringArray = Bridge.Array.init(9, null);
-                var decimalArray = Bridge.Array.init(10, 0);
-    
-                byteArray[0] = 1;
-                sbyteArray[0] = 2;
-                shortArray[0] = 3;
-                ushortArray[0] = 4;
-                intArray[0] = 5;
-                uintArray[0] = 6;
-                floatArray[0] = 7;
-                doubleArray[0] = 8;
-    
-                stringArray[0] = "9";
-                decimalArray[0]  = Bridge.Decimal(10.0);
-    
-                Bridge.get(Bridge.Test.Assert).areEqual$1(byteArray[0], 1, "get byteArray[0]");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(sbyteArray[0], 2, "get sbyteArray[0]");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(shortArray[0], 3, "get shortArray[0]");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(ushortArray[0], 4, "get ushortArray[0]");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(intArray[0], 5, "get intArray[0]");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(uintArray[0], 6, "get uintArray[0]");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(floatArray[0], 7, "get floatArray[0]");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(doubleArray[0], 8, "get doubleArray[0]");
-    
-                Bridge.get(Bridge.Test.Assert).areEqual$1(stringArray[0], "9", "get stringArray[0]");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(decimalArray[0], Bridge.Decimal(10.0), "get decimalArray[0]");
-            }
-        },
         typePropertiesAreCorrect: function () {
             var arr = [1, 2, 3];
             Bridge.get(Bridge.Test.Assert).true$1(Bridge.is(arr, Array), "is Array should be true");
@@ -134,12 +93,8 @@
             Bridge.get(Bridge.Test.Assert).$false(Bridge.Linq.Enumerable.from(arr).contains(new Bridge.ClientTestOne.BridgeIssues.N772.C(4)));
         },
         allWithArrayItemFilterCallbackWorks: function () {
-            Bridge.get(Bridge.Test.Assert).$true(Bridge.Linq.Enumerable.from([1, 2, 3]).all(function (x) {
-                return x > 0;
-            }));
-            Bridge.get(Bridge.Test.Assert).$false(Bridge.Linq.Enumerable.from([1, 2, 3]).all(function (x) {
-                return x > 1;
-            }));
+            Bridge.get(Bridge.Test.Assert).$true(Bridge.Linq.Enumerable.from([1, 2, 3]).all(Bridge.ClientTestOne.BridgeIssues.N772.$f1));
+            Bridge.get(Bridge.Test.Assert).$false(Bridge.Linq.Enumerable.from([1, 2, 3]).all(Bridge.ClientTestOne.BridgeIssues.N772.$f2));
         },
         sliceWithoutEndWorks: function () {
             Bridge.get(Bridge.Test.Assert).areDeepEqual(["a", "b", "c", "d"].slice(2), ["c", "d"]);
@@ -181,12 +136,8 @@
             Bridge.get(Bridge.Test.Assert).areDeepEqual(arr, [2, 3, 1, 4, 3, 1]);
         },
         anyWithArrayItemFilterCallbackWorks: function () {
-            Bridge.get(Bridge.Test.Assert).$true(Bridge.Linq.Enumerable.from([1, 2, 3, 4]).any(function (i) {
-                return i > 1;
-            }));
-            Bridge.get(Bridge.Test.Assert).$false(Bridge.Linq.Enumerable.from([1, 2, 3, 4]).any(function (i) {
-                return i > 5;
-            }));
+            Bridge.get(Bridge.Test.Assert).$true(Bridge.Linq.Enumerable.from([1, 2, 3, 4]).any(Bridge.ClientTestOne.BridgeIssues.N772.$f3));
+            Bridge.get(Bridge.Test.Assert).$false(Bridge.Linq.Enumerable.from([1, 2, 3, 4]).any(Bridge.ClientTestOne.BridgeIssues.N772.$f4));
         },
         binarySearch1Works: function () {
             var arr = [1, 2, 3, 3, 4, 5];
@@ -329,6 +280,59 @@
             var l = ["x", "y", "z"];
             Bridge.Array.removeAt(l, 1);
             Bridge.get(Bridge.Test.Assert).areDeepEqual(l, ["x", "z"]);
+        },
+        statics: {
+            testUseCase: function () {
+                //These arrays depend on "useTypedArray" bridge.json option
+                var byteArray = new Uint8Array(1);
+                var sbyteArray = new Int8Array(2);
+                var shortArray = new Int16Array(3);
+                var ushortArray = new Uint16Array(4);
+                var intArray = new Int32Array(5);
+                var uintArray = new Uint32Array(6);
+                var floatArray = new Float32Array(7);
+                var doubleArray = new Float64Array(8);
+    
+                //These arrays do not depend on "useTypedArray" bridge.json option
+                var stringArray = Bridge.Array.init(9, null);
+                var decimalArray = Bridge.Array.init(10, 0);
+    
+                byteArray[0] = 1;
+                sbyteArray[0] = 2;
+                shortArray[0] = 3;
+                ushortArray[0] = 4;
+                intArray[0] = 5;
+                uintArray[0] = 6;
+                floatArray[0] = 7;
+                doubleArray[0] = 8;
+    
+                stringArray[0] = "9";
+                decimalArray[0]  = Bridge.Decimal(10.0);
+    
+                Bridge.get(Bridge.Test.Assert).areEqual$1(byteArray[0], 1, "get byteArray[0]");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(sbyteArray[0], 2, "get sbyteArray[0]");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(shortArray[0], 3, "get shortArray[0]");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(ushortArray[0], 4, "get ushortArray[0]");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(intArray[0], 5, "get intArray[0]");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(uintArray[0], 6, "get uintArray[0]");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(floatArray[0], 7, "get floatArray[0]");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(doubleArray[0], 8, "get doubleArray[0]");
+    
+                Bridge.get(Bridge.Test.Assert).areEqual$1(stringArray[0], "9", "get stringArray[0]");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(decimalArray[0], Bridge.Decimal(10.0), "get decimalArray[0]");
+            },
+            $f1: function (x) {
+                return x > 0;
+            },
+            $f2: function (x) {
+                return x > 1;
+            },
+            $f3: function (i) {
+                return i > 1;
+            },
+            $f4: function (i) {
+                return i > 5;
+            }
         }
     });
     

@@ -180,10 +180,13 @@
     <Compile Include="Logging\SimpleFileLoggerWriter.cs" />
     <Compile Include="Translator\Plugins.cs" />
     <Compile Include="Translator\Translator.Config.cs" />
+    <Compile Include="Utils\CombinedAstAndResolveResultVisitor.cs" />
     <Compile Include="Utils\DependencyFinderVisitor.cs" />
     <Compile Include="Utils\AssemblyConfigHelper.cs" />
     <Compile Include="Utils\EmptyLambdaFixer.cs" />
+    <Compile Include="Utils\IResolveResultVisitor.cs" />
     <Compile Include="Utils\JsDoc.cs" />
+    <Compile Include="Utils\CaptureAnalyzer.cs" />
     <Compile Include="Utils\YieldSearchVisitor.cs" />
     <Compile Include="Utils\LambdaVisitor.cs" />
     <Compile Include="Utils\ParsedSourceFile.cs" />

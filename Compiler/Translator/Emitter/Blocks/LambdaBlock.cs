@@ -1,6 +1,7 @@
 using Bridge.Contract;
 using ICSharpCode.NRefactory.CSharp;
 using System.Collections.Generic;
+using System.Linq;
 using ICSharpCode.NRefactory.CSharp.Resolver;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
@@ -120,6 +121,15 @@ namespace Bridge.Translator
 
         protected virtual void EmitLambda(IEnumerable<ParameterDeclaration> parameters, AstNode body, AstNode context)
         {
+            var analyzer = new CaptureAnalyzer(this.Emitter.Resolver.Resolver);
+            analyzer.Analyze(this.Body, this.Parameters.Select(p => p.Name));
+
+            var oldLevel = this.Emitter.Level;
+            if (analyzer.UsedVariables.Count == 0)
+            {
+                this.Emitter.Level = 2;
+            }
+
             AsyncBlock asyncBlock = null;
             this.PushLocals();
 
@@ -191,15 +201,25 @@ namespace Bridge.Translator
                 this.EndBlock();
             }
 
+            if (!block && !this.IsAsync)
+            {
+                this.EmitTempVars(pos);
+            }
+
+            if (analyzer.UsedVariables.Count == 0)
+            {
+                var name = "$f" + (this.Emitter.NamedFunctions.Count + 1);
+                var code = this.Emitter.Output.ToString().Substring(savedPos);
+                this.Emitter.NamedFunctions.Add(name, code);
+                this.Emitter.Output.Remove(savedPos, this.Emitter.Output.Length - savedPos);
+                this.Emitter.Output.Insert(savedPos, BridgeTypes.ToJsName(this.Emitter.TypeInfo.Type, this.Emitter) + "." + name);
+                this.Emitter.Level = oldLevel;
+            }
+
             if (this.Emitter.ThisRefCounter > savedThisCount)
             {
                 this.Emitter.Output.Insert(savedPos, Bridge.Translator.Emitter.ROOT + "." + Bridge.Translator.Emitter.DELEGATE_BIND + "(this, ");
                 this.WriteCloseParentheses();
-            }
-
-            if (!block && !this.IsAsync)
-            {
-                this.EmitTempVars(pos);
             }
 
             this.PopLocals();

@@ -43,8 +43,10 @@ namespace Bridge.Translator
             this.EmitClassHeader();
             if (this.TypeInfo.TypeDeclaration.ClassType != ClassType.Interface)
             {
-                this.EmitStaticBlock();
+                this.Emitter.NamedFunctions = new Dictionary<string, string>();
+                
                 this.EmitInstantiableBlock();
+                this.EmitStaticBlock();
             }
             this.EmitClassEnd();
         }
@@ -162,8 +164,9 @@ namespace Bridge.Translator
 
         protected virtual void EmitStaticBlock()
         {
-            if (this.TypeInfo.HasRealStatic(this.Emitter))
+            if (this.TypeInfo.HasRealStatic(this.Emitter) || this.Emitter.NamedFunctions.Count > 0)
             {
+                this.Emitter.StaticBlock = true;
                 this.EnsureComma();
 
                 if (this.TypeInfo.InstanceMethods.Any(m => m.Value.Any(subm => this.Emitter.GetEntityName(subm) == "statics")) ||
@@ -179,9 +182,20 @@ namespace Bridge.Translator
                 new ConstructorBlock(this.Emitter, this.TypeInfo, true).Emit();
                 new MethodBlock(this.Emitter, this.TypeInfo, true).Emit();
 
+                if (this.Emitter.NamedFunctions.Count > 0)
+                {
+                    foreach (KeyValuePair<string, string> namedFunction in this.Emitter.NamedFunctions)
+                    {
+                        this.EnsureComma();
+                        this.Write(namedFunction.Key + ": " + namedFunction.Value);
+                        this.Emitter.Comma = true;
+                    }
+                }
+
                 this.WriteNewLine();
                 this.EndBlock();
                 this.Emitter.Comma = true;
+                this.Emitter.StaticBlock = false;
             }
         }
 
@@ -204,15 +218,12 @@ namespace Bridge.Translator
 
             var ctorBlock = new ConstructorBlock(this.Emitter, this.TypeInfo, false);
 
-            if (this.TypeInfo.HasInstantiable || this.Emitter.Plugins.HasConstructorInjectors(ctorBlock) || this.TypeInfo.ClassType == ClassType.Struct)
+            if (this.TypeInfo.HasInstantiable || this.Emitter.Plugins.HasConstructorInjectors(ctorBlock) ||
+                this.TypeInfo.ClassType == ClassType.Struct)
             {
                 this.EnsureComma();
                 ctorBlock.Emit();
                 new MethodBlock(this.Emitter, this.TypeInfo, false).Emit();
-            }
-            else
-            {
-                this.Emitter.Comma = false;
             }
         }
 
