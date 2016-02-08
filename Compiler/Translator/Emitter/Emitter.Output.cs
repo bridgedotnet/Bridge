@@ -2,6 +2,8 @@ using Object.Net.Utilities;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Bridge.Contract;
+using Mono.Cecil;
 
 namespace Bridge.Translator
 {
@@ -20,17 +22,28 @@ namespace Bridge.Translator
 
         protected virtual Dictionary<string, string> TransformOutputs()
         {
+            this.Log.Info("Transforming outputs...");
+
             this.WrapToModules();
-            return this.CombineOutputs();
+
+            var outputs = this.CombineOutputs();
+
+            this.Log.Info("Transforming outputs done");
+
+            return outputs;
         }
 
         protected virtual Dictionary<string, string> CombineOutputs()
         {
+            this.Log.Trace("Combining outputs...");
+
             Dictionary<string, string> result = new Dictionary<string, string>();
             foreach (var outputPair in this.Outputs)
             {
                 var fileName = outputPair.Key;
                 var output = outputPair.Value;
+
+                this.Log.Trace("File name " + (fileName ?? ""));
 
                 string extension = Path.GetExtension(fileName);
                 bool isJs = extension == ('.' + Bridge.Translator.AssemblyInfo.JAVASCRIPT_EXTENSION);
@@ -91,6 +104,8 @@ namespace Bridge.Translator
                 result.Add(fileName, tmp.ToString());
             }
 
+            this.Log.Trace("Combining outputs done");
+
             return result;
         }
 
@@ -110,6 +125,8 @@ namespace Bridge.Translator
 
         protected virtual void WrapToModules()
         {
+            this.Log.Trace("Wrapping to modules...");
+
             foreach (var outputPair in this.Outputs)
             {
                 var output = outputPair.Value;
@@ -118,6 +135,9 @@ namespace Bridge.Translator
                 {
                     var moduleName = moduleOutputPair.Key;
                     var moduleOutput = moduleOutputPair.Value;
+
+                    this.Log.Trace("Module " + (moduleName ?? "") + " ...");
+
                     AbstractEmitterBlock.RemovePenultimateEmptyLines(moduleOutput, true);
                     var str = moduleOutput.ToString();
                     moduleOutput.Length = 0;
@@ -171,6 +191,8 @@ namespace Bridge.Translator
                     WriteNewLine(moduleOutput, "});");
                 }
             }
+
+            this.Log.Trace("Wrapping to modules done");
         }
     }
 }

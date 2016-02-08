@@ -12,16 +12,25 @@ namespace Bridge.Translator
             List<ITypeInfo> types,
             IValidator validator,
             IMemberResolver resolver,
-            Dictionary<string, ITypeInfo> typeInfoDefinitions)
+            Dictionary<string, ITypeInfo> typeInfoDefinitions,
+            ILogger logger)
         {
+            this.Log = logger;
+
             this.Resolver = resolver;
             this.TypeDefinitions = typeDefinitions;
             this.TypeInfoDefinitions = typeInfoDefinitions;
             this.Types = types;
             this.BridgeTypes = bridgeTypes;
+
             this.BridgeTypes.InitItems(this);
+
+            logger.Trace("Sorting types infos by name...");
             this.Types.Sort(this.CompareTypeInfosByName);
+            logger.Trace("Sorting types infos by name done");
+
             this.SortTypesByInheritance();
+
             this.Validator = validator;
             this.AssignmentType = ICSharpCode.NRefactory.CSharp.AssignmentOperatorType.Any;
             this.UnaryOperatorType = ICSharpCode.NRefactory.CSharp.UnaryOperatorType.Any;
@@ -30,6 +39,8 @@ namespace Bridge.Translator
 
         public virtual Dictionary<string, string> Emit()
         {
+            this.Log.Info("Emitting...");
+
             var blocks = this.GetBlocks();
             foreach (var block in blocks)
             {
@@ -37,7 +48,11 @@ namespace Bridge.Translator
                 block.Emit();
             }
 
-            return this.TransformOutputs();
+            var output = this.TransformOutputs();
+
+            this.Log.Info("Emitting done");
+
+            return output;
         }
 
         private IEnumerable<IAbstractEmitterBlock> GetBlocks()

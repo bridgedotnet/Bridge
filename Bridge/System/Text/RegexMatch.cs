@@ -3,6 +3,7 @@ using Bridge;
 namespace System.Text.RegularExpressions
 {
     [External]
+    [Name("Object")]
     public sealed class RegexMatch
     {
         public int Index

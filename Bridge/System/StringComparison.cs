@@ -7,6 +7,7 @@ namespace System
     /// </summary>
     [External]
     [Enum(Emit.Value)]
+    [Name("Number")]
     public enum StringComparison
     {
         CurrentCulture = 0,

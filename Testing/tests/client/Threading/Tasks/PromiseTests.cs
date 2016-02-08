@@ -116,29 +116,29 @@ namespace Bridge.ClientTest.Threading
 
             var promise = CreatePromise();
             var task = Task.FromPromise(promise);
+
             Assert.AreEqual(task.Status, TaskStatus.Running, "Task should be running after being created");
+
             bool continuationRun = false;
-            task.ContinueWith(t =>
-            {
-                Assert.True(t == task, "ContinueWith parameter should be correct");
-                continuationRun = true;
-            });
 
-            Global.SetTimeout(() =>
-            {
-                Assert.False(continuationRun, "Continuation should not be run too early.");
-                Assert.AreEqual(task.Status, TaskStatus.Running, "Task should be running before promise is completed.");
-                promise.Resolve(42, "result 123", 101);
-            }, 100);
+            var task1 = task.ContinueWith(t =>
+                {
+                    Assert.True(t == task, "ContinueWith parameter should be correct");
+                    continuationRun = true;
+                });
 
-            Global.SetTimeout(() =>
-            {
-                Assert.AreEqual(task.Status, TaskStatus.RanToCompletion, "Task should be completed after promise");
-                Assert.True(continuationRun, "Continuation should have been run after promise was completed.");
-                Assert.AreDeepEqual(task.Result, new object[] { 42, "result 123", 101 }, "The result should be correct");
+            Assert.False(continuationRun, "Continuation should not be run too early.");
+            Assert.AreEqual(task.Status, TaskStatus.Running, "Task should be running before promise is completed.");
+            promise.Resolve(42, "result 123", 101);
 
-                completeAsync();
-            }, 200);
+            task1.ContinueWith(x =>
+                {
+                    Assert.AreEqual(task.Status, TaskStatus.RanToCompletion, "Task should be completed after promise");
+                    Assert.True(continuationRun, "Continuation should have been run after promise was completed.");
+                    Assert.AreDeepEqual(task.Result, new object[] { 42, "result 123", 101 }, "The result should be correct");
+
+                    completeAsync();
+                });
         }
 
         [Test(ExpectedCount = 7)]
@@ -150,34 +150,34 @@ namespace Bridge.ClientTest.Threading
 
             var promise = CreatePromise();
             var task = Task.FromPromise<TaskResult>(promise, trh);
+
             Assert.AreEqual(task.Status, TaskStatus.Running, "Task should be running after being created");
+
             bool continuationRun = false;
-            task.ContinueWith(t =>
-            {
-                Assert.True(t == task, "ContinueWith parameter should be correct");
-                continuationRun = true;
-            });
 
-            Global.SetTimeout(() =>
-            {
-                Assert.False(continuationRun, "Continuation should not be run too early.");
-                Assert.AreEqual(task.Status, TaskStatus.Running, "Task should be running before promise is completed.");
-                promise.Resolve(42, "result 123", 101);
-            }, 100);
-
-            Global.SetTimeout(() =>
-            {
-                Assert.AreEqual(task.Status, TaskStatus.RanToCompletion, "Task should be completed after promise");
-                Assert.True(continuationRun, "Continuation should have been run after promise was completed.");
-                Assert.AreDeepEqual(task.Result, new TaskResult()
+            var task1 = task.ContinueWith(t =>
                 {
-                    I = 42,
-                    S = "result 123",
-                    J = 101
+                    Assert.True(t == task, "ContinueWith parameter should be correct");
+                    continuationRun = true;
                 });
 
-                completeAsync();
-            }, 200);
+            Assert.False(continuationRun, "Continuation should not be run too early.");
+            Assert.AreEqual(task.Status, TaskStatus.Running, "Task should be running before promise is completed.");
+            promise.Resolve(42, "result 123", 101);
+
+            task1.ContinueWith(x =>
+                {
+                    Assert.AreEqual(task.Status, TaskStatus.RanToCompletion, "Task should be completed after promise");
+                    Assert.True(continuationRun, "Continuation should have been run after promise was completed.");
+                    Assert.AreDeepEqual(task.Result, new TaskResult()
+                    {
+                        I = 42,
+                        S = "result 123",
+                        J = 101
+                    });
+
+                    completeAsync();
+                });
         }
 
         [Test(ExpectedCount = 10)]
@@ -187,35 +187,36 @@ namespace Bridge.ClientTest.Threading
 
             var promise = CreatePromise();
             var task = Task.FromPromise(promise);
+
             Assert.AreEqual(task.Status, TaskStatus.Running, "Task should be running after being created");
+
             bool continuationRun = false;
-            task.ContinueWith(t =>
-            {
-                Assert.True(t == task, "ContinueWith parameter should be correct");
-                continuationRun = true;
-            });
 
-            Global.SetTimeout(() =>
-            {
-                Assert.False(continuationRun, "Continuation should not be run too early.");
-                Assert.AreEqual(task.Status, TaskStatus.Running, "Task should be running before promise is completed.");
-                promise.Reject(42, "result 123", 101);
-            }, 100);
+            var task1 = task.ContinueWith(t =>
+                {
+                    Assert.True(t == task, "ContinueWith parameter should be correct");
+                    continuationRun = true;
+                });
 
-            Global.SetTimeout(() =>
-            {
-                Assert.AreEqual(task.Status, TaskStatus.Faulted, "Task should have faulted after the promise was rejected.");
-                Assert.True(continuationRun, "Continuation should have been run after promise was rejected.");
-                Assert.True((object)task.Exception is AggregateException, "Exception should be an AggregateException");
-                Assert.AreEqual(task.Exception.InnerExceptions.Count, 1, "Exception should have one inner exception");
-                Assert.True(task.Exception.InnerExceptions[0] is PromiseException, "Inner exception should be a PromiseException");
-                Assert.AreDeepEqual(((PromiseException)task.Exception.InnerExceptions[0]).Arguments, new object[] { 42, "result 123", 101 }, "The PromiseException arguments should be correct");
+            Assert.False(continuationRun, "Continuation should not be run too early.");
+            Assert.AreEqual(task.Status, TaskStatus.Running, "Task should be running before promise is completed.");
+            promise.Reject(42, "result 123", 101);
 
-                completeAsync();
-            }, 200);
+
+            task1.ContinueWith(x =>
+                {
+                    Assert.AreEqual(task.Status, TaskStatus.Faulted, "Task should have faulted after the promise was rejected.");
+                    Assert.True(continuationRun, "Continuation should have been run after promise was rejected.");
+                    Assert.True((object)task.Exception is AggregateException, "Exception should be an AggregateException");
+                    Assert.AreEqual(task.Exception.InnerExceptions.Count, 1, "Exception should have one inner exception");
+                    Assert.True(task.Exception.InnerExceptions[0] is PromiseException, "Inner exception should be a PromiseException");
+                    Assert.AreDeepEqual(((PromiseException)task.Exception.InnerExceptions[0]).Arguments, new object[] { 42, "result 123", 101 }, "The PromiseException arguments should be correct");
+
+                    completeAsync();
+                });
         }
 
-        [Test(ExpectedCount = 2)]
+        [Test(ExpectedCount = 3)]
         public async void CompletingPromiseCanBeAwaited()
         {
             var completeAsync = Assert.Async();
@@ -223,55 +224,55 @@ namespace Bridge.ClientTest.Threading
             var promise = CreatePromise();
             object[] result = null;
 
-            Global.SetTimeout(() =>
-            {
-                Assert.True(result == null, "Await should not finish too early.");
-                promise.Resolve(42, "result 123", 101);
-            }, 100);
+            var task = Task.Run(() =>
+               {
+                   Assert.True(result == null, "Await should not finish too early (a).");
+                   promise.Resolve(42, "result 123", 101);
+               });
 
-            Global.SetTimeout(() =>
-            {
-                Assert.AreEqual(result, new object[] { 42, "result 123", 101 }, "The result should be correct");
-                completeAsync();
-            }, 200);
+            Assert.True(result == null, "Await should not finish too early (b).");
 
             result = await promise;
+
+            Assert.AreEqual(result, new object[] { 42, "result 123", 101 }, "The result should be correct");
+            completeAsync();
         }
 
-        [Test(ExpectedCount = 3)]
+        [Test(ExpectedCount = 4)]
         public async void FailingPromiseCanBeAwaited()
         {
             var completeAsync = Assert.Async();
 
             var promise = CreatePromise();
+
             bool continuationRun = false;
 
-            Global.SetTimeout(() =>
-            {
-                Assert.False(continuationRun, "Continuation should not be run too early.");
-                promise.Reject(42, "result 123", 101);
-            }, 100);
-
-            Global.SetTimeout(() =>
-            {
-                Assert.True(continuationRun, "Continuation should have been run after promise was rejected.");
-                completeAsync();
-            }, 200);
+            var task = Task.Run(() =>
+                {
+                    Assert.False(continuationRun, "Continuation should not be run too early (a).");
+                    promise.Reject(42, "result 123", 101);
+                });
 
             try
             {
+                Assert.False(continuationRun, "Continuation should not be run too early (b).");
                 await promise;
+
                 Assert.Fail("Await should throw");
             }
             catch (PromiseException ex)
             {
+                continuationRun = true;
                 Assert.AreEqual(ex.Arguments, new object[] { 42, "result 123", 101 }, "The PromiseException arguments should be correct");
             }
             catch (Exception ex)
             {
                 Assert.Fail("Thrown exception should have been an AggregateException, was " + ex.GetClassName());
             }
-            continuationRun = true;
+
+            Assert.True(continuationRun, "Continuation should have been run after promise was rejected.");
+
+            completeAsync();
         }
     }
 }

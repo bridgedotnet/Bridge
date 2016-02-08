@@ -11,6 +11,8 @@
     <AssemblyName>TypeScriptTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
+    <AdditionalExplicitAssemblyReferences />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -64,11 +66,16 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <PropertyGroup>
-    <PostBuildEvent Condition="$(OS) != Unix">"$(ProjectDir)..\..\..\Compiler\Builder\$(OutDir)Bridge.Builder.exe" -p "$(ProjectPath)" -b "$(ProjectDir)$(OutDir)Bridge.dll"</PostBuildEvent>
-    <PostBuildEvent Condition="$(OS) == Unix">mono "$(ProjectDir)../../../Compiler/Builder/$(OutDir)Bridge.Builder.exe" -p "$(ProjectDir)/$(MSBuildProjectFile)" -b "$(ProjectDir)$(OutDir)Bridge.dll"</PostBuildEvent>
-    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
-    <AdditionalExplicitAssemblyReferences />
+  <PropertyGroup Condition="'$(OS)' != 'Unix'">
+    <PostBuildEvent>
+REM Run Bridge Compiler for the project
+"$(ProjectDir)..\..\..\Compiler\Builder\$(OutDir)Bridge.Builder.exe" -p "$(ProjectPath)" -b "$(ProjectDir)$(OutDir)Bridge.dll" -cfg "$(Configuration)"
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(OS)' == 'Unix'">
+    <PostBuildEvent>
+mono "$(ProjectDir)../../../Compiler/Builder/$(OutDir)Bridge.Builder.exe" -p "$(ProjectDir)/$(MSBuildProjectFile)" -b "$(ProjectDir)$(OutDir)Bridge.dll" -cfg "$(Configuration)"
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

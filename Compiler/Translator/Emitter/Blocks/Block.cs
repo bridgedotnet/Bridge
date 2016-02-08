@@ -13,6 +13,11 @@ namespace Bridge.Translator
             this.Emitter = emitter;
             this.BlockStatement = blockStatement;
 
+            if (blockStatement.Parent is BlockStatement && this.Emitter.IsAsync)
+            {
+                this.Emitter.IgnoreBlock = blockStatement;
+            }
+
             if (this.Emitter.IgnoreBlock == blockStatement)
             {
                 this.AsyncNoBraces = true;

@@ -1776,11 +1776,21 @@
         var sum = 0;
         var count = 0;
         this.forEach(function (x) {
-            sum += selector(x);
+            x = selector(x);
+
+            if (x instanceof Bridge.Decimal) {
+                sum = x.add(sum);
+            }
+            else if (sum instanceof Bridge.Decimal) {
+                sum = sum.add(x);
+            } else {
+                sum += x;
+            }
+            
             ++count;
         });
 
-        return sum / count;
+        return sum instanceof Bridge.Decimal ? sum.div(count) : (sum / count);
     };
 
     Enumerable.prototype.nullableAverage = function (selector) {
@@ -1855,7 +1865,15 @@
     // Overload:function (selector)
     Enumerable.prototype.sum = function (selector) {
         if (selector == null) selector = Functions.Identity;
-        return this.select(selector).aggregate(0, function (a, b) { return a + b; });
+        return this.select(selector).aggregate(0, function(a, b) {
+             if (a instanceof Bridge.Decimal) {
+                 return a.add(b);
+             }
+             if (b instanceof Bridge.Decimal) {
+                 return b.add(a);
+             }
+             return a + b;
+        });
     };
 
     Enumerable.prototype.nullableSum = function (selector) {

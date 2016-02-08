@@ -92,17 +92,14 @@ namespace Bridge.Translator
             if (this.FolderMode)
             {
                 this.ReadFolderFiles();
-                logger.Trace("Read folder files");
             }
             else
             {
                 this.ReadProjectFile();
-                logger.Trace("Read project file");
 
                 if (this.Rebuild || !File.Exists(this.AssemblyLocation))
                 {
                     this.BuildAssembly();
-                    logger.Trace("Build assembly");
                 }
             }
 
@@ -110,14 +107,18 @@ namespace Bridge.Translator
             this.References = references;
 
             this.Plugins = Bridge.Translator.Plugins.GetPlugins(this, config, logger);
+
+            logger.Info("Reading plugin configs...");
             this.Plugins.OnConfigRead(config);
+            logger.Info("Reading plugin configs done");
 
             if (!string.IsNullOrWhiteSpace(config.BeforeBuild))
             {
                 try
                 {
-                    logger.Trace("Running BeforeBuild event");
+                    logger.Info("Running BeforeBuild event " + config.BeforeBuild + " ...");
                     this.RunEvent(config.BeforeBuild);
+                    logger.Info("Running BeforeBuild event done");
                 }
                 catch (Exception exc)
                 {
@@ -129,14 +130,15 @@ namespace Bridge.Translator
                 }
             }
 
-            logger.Trace("BuildSyntaxTree");
             this.BuildSyntaxTree();
-            var resolver = new MemberResolver(this.ParsedSourceFiles, Emitter.ToAssemblyReferences(references));
+
+            var resolver = new MemberResolver(this.ParsedSourceFiles, Emitter.ToAssemblyReferences(references, logger));
 
             this.InspectTypes(resolver, config);
 
             resolver.CanFreeze = true;
             var emitter = this.CreateEmitter(resolver);
+
             emitter.Translator = this;
             emitter.AssemblyInfo = this.AssemblyInfo;
             emitter.References = references;
@@ -145,9 +147,16 @@ namespace Bridge.Translator
             emitter.Plugins = this.Plugins;
 
             this.SortReferences();
+
+            logger.Info("Before emitting...");
             this.Plugins.BeforeEmit(emitter, this);
+            logger.Info("Before emitting done");
+
             this.Outputs = emitter.Emit();
+
+            logger.Info("After emitting...");
             this.Plugins.AfterEmit(emitter, this);
+            logger.Info("After emitting done");
 
             logger.Info("Translating done");
 
@@ -156,6 +165,8 @@ namespace Bridge.Translator
 
         protected virtual void SortReferences()
         {
+            this.Log.Info("Sorting " + (this.References != null ? this.References.Count().ToString() : "no") + " reference(s)...");
+
             var list = this.References.ToList();
             list.Sort((r1, r2) =>
             {
@@ -185,6 +196,8 @@ namespace Bridge.Translator
             });
 
             this.References = list;
+
+            this.Log.Info("Sorting references done");
         }
 
         public virtual string GetCode()
@@ -344,7 +357,13 @@ namespace Bridge.Translator
 
         protected virtual Emitter CreateEmitter(IMemberResolver resolver)
         {
-            return new Emitter(this.TypeDefinitions, this.BridgeTypes, this.Types, this.Validator, resolver, this.TypeInfoDefinitions);
+            this.Log.Info("Creating emitter...");
+
+            var emitter = new Emitter(this.TypeDefinitions, this.BridgeTypes, this.Types, this.Validator, resolver, this.TypeInfoDefinitions, this.Log);
+
+            this.Log.Info("Creating emitter done");
+
+            return emitter;
         }
 
         protected virtual Validator CreateValidator()

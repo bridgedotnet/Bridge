@@ -4,6 +4,7 @@ namespace System
 {
     [External]
     [Constructor("")]
+    [Name("Bridge.Nullable")]
     public struct Nullable<T> where T : struct
     {
         [Template("{0}")]

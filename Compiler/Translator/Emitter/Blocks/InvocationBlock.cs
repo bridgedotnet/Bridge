@@ -4,6 +4,7 @@ using ICSharpCode.NRefactory.CSharp.Resolver;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -53,6 +54,41 @@ namespace Bridge.Translator
                 }
             }
         }
+
+        public static bool IsConditionallyRemoved(InvocationExpression invocationExpression, IEntity entity)
+ 		{
+            if (entity == null)
+            {
+                return false;
+            }
+ 			var result = new List<string>();
+ 			foreach (var a in entity.Attributes)
+ 			{
+ 				var type = a.AttributeType.GetDefinition();
+ 				if (type != null && type.FullName.Equals("System.Diagnostics.ConditionalAttribute", StringComparison.Ordinal))
+                {
+ 					if (a.PositionalArguments.Count > 0)
+                    {
+ 						var symbol = a.PositionalArguments[0].ConstantValue as string;
+                        if (symbol != null)
+                        {
+                            result.Add(symbol);
+                        }
+ 					}
+ 				}
+ 			}
+
+            if (result.Count > 0)
+            {
+                var syntaxTree = invocationExpression.GetParent<SyntaxTree>();
+                if (syntaxTree != null)
+                {
+                    return !result.Intersect(syntaxTree.ConditionalSymbols).Any();    
+                }
+            }
+
+ 			return false;
+ 		}
 
         protected void VisitInvocationExpression()
         {
@@ -197,7 +233,7 @@ namespace Bridge.Translator
                             invocationResult = null;
                         }
 
-                        if (this.IsEmptyPartialInvoking(csharpInvocation.Member as IMethod))
+                        if (this.IsEmptyPartialInvoking(csharpInvocation.Member as IMethod) || IsConditionallyRemoved(invocationExpression, csharpInvocation.Member))
                         {
                             this.Emitter.SkipSemiColon = true;
                             this.Emitter.ReplaceAwaiterByVar = oldValue;
@@ -210,7 +246,7 @@ namespace Bridge.Translator
                     {
                         invocationResult = targetResolve as InvocationResolveResult;
 
-                        if (invocationResult != null && this.IsEmptyPartialInvoking(invocationResult.Member as IMethod))
+                        if (invocationResult != null && (this.IsEmptyPartialInvoking(invocationResult.Member as IMethod) || IsConditionallyRemoved(invocationExpression, invocationResult.Member)))
                         {
                             this.Emitter.SkipSemiColon = true;
                             this.Emitter.ReplaceAwaiterByVar = oldValue;
@@ -440,7 +476,7 @@ namespace Bridge.Translator
                     method = invocationResolveResult.Member as IMethod;
                 }
 
-                if (this.IsEmptyPartialInvoking(method))
+                if (this.IsEmptyPartialInvoking(method) || IsConditionallyRemoved(invocationExpression, method))
                 {
                     this.Emitter.SkipSemiColon = true;
                     this.Emitter.ReplaceAwaiterByVar = oldValue;

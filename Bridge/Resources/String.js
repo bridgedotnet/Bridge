@@ -385,7 +385,7 @@
         },
 
         split: function (s, strings, limit, options) {
-            var re = new RegExp(strings.map(Bridge.String.escape).join('|'), 'g'),
+            var re = (!Bridge.hasValue(strings) || strings.length === 0) ? new RegExp("\\s", "g") : new RegExp(strings.map(Bridge.String.escape).join('|'), 'g'),
                 res = [],
                 m,
                 i;

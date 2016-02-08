@@ -92,12 +92,33 @@
     <Compile Include="System\Collections\Generic\ISet.cs" />
     <Compile Include="System\Collections\ObjectModel\ReadOnlyCollection.cs" />
     <Compile Include="System\Comparison.cs" />
+    <Compile Include="System\Diagnostics\ConditionalAttribute.cs" />
+    <Compile Include="System\Diagnostics\Contracts\Contract.cs" />
+    <Compile Include="System\Diagnostics\Contracts\ContractAbbreviatorAttribute.cs" />
+    <Compile Include="System\Diagnostics\Contracts\ContractArgumentValidatorAttribute.cs" />
+    <Compile Include="System\Diagnostics\Contracts\ContractClassAttribute.cs" />
+    <Compile Include="System\Diagnostics\Contracts\ContractClassForAttribute.cs" />
+    <Compile Include="System\Diagnostics\Contracts\ContractException.cs" />
+    <Compile Include="System\Diagnostics\Contracts\ContractFailedEventArgs.cs" />
+    <Compile Include="System\Diagnostics\Contracts\ContractFailureKind.cs" />
+    <Compile Include="System\Diagnostics\Contracts\ContractInvariantMethodAttribute.cs" />
+    <Compile Include="System\Diagnostics\Contracts\ContractOptionAttribute.cs" />
+    <Compile Include="System\Diagnostics\Contracts\ContractPublicPropertyNameAttribute.cs" />
+    <Compile Include="System\Diagnostics\Contracts\ContractReferenceAssemblyAttribute.cs" />
+    <Compile Include="System\Diagnostics\Contracts\ContractRuntimeIgnoredAttribute.cs" />
+    <Compile Include="System\Diagnostics\Contracts\ContractVerificationAttribute.cs" />
+    <Compile Include="System\Diagnostics\Contracts\PureAttribute.cs" />
+    <Compile Include="System\Diagnostics\Debug.cs" />
+    <Compile Include="System\Diagnostics\Debugger.cs" />
+    <Compile Include="System\Diagnostics\Stopwatch.cs" />
+    <Compile Include="System\Diagnostics\SuppressMessageAttribute.cs" />
     <Compile Include="System\Enum.cs" />
     <Compile Include="System\Environment.cs" />
     <Compile Include="System\EventArgs.cs" />
     <Compile Include="System\EventHandler.cs" />
     <Compile Include="System\IDisposable.cs" />
     <Compile Include="System\IAccessorsIndexer.cs" />
+    <Compile Include="System\Predicate.cs" />
     <Compile Include="System\RankException.cs" />
     <Compile Include="System\Linq\Enumerable.cs" />
     <Compile Include="System\Linq\Grouping.cs" />
@@ -615,6 +636,7 @@
     <EmbeddedResource Include="Resources\Locales\zh.js" />
     <EmbeddedResource Include="Resources\Locales\zu-ZA.js" />
     <EmbeddedResource Include="Resources\Locales\zu.js" />
+    <Content Include="Resources\Diagnostics.js" />
     <Content Include="Resources\Enum.js" />
     <Content Include="Resources\Math.js" />
     <Content Include="Resources\Version.js" />
@@ -658,7 +680,9 @@
     <EmbeddedResource Include="Resources\bridge.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Bridge.jsb" />
+    <None Include="Resources\Bridge.jsb">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resources\build.bat" />
     <None Include="Resources\build.sh" />
   </ItemGroup>

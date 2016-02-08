@@ -3,6 +3,7 @@ using Bridge;
 namespace System
 {
     [External]
+    [Name("Object")]
     public static class Activator
     {
         [Template("new {type}({*arguments})")]

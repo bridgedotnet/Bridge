@@ -12,6 +12,8 @@ namespace Bridge.Translator
     {
         protected virtual AssemblyDefinition LoadAssembly(string location, List<AssemblyDefinition> references)
         {
+            this.Log.Trace("Assembly definition loading " + (location ?? "") + " ...");
+
             var assemblyDefinition = AssemblyDefinition.ReadAssembly(location);
             string name;
             string path;
@@ -35,12 +37,18 @@ namespace Bridge.Translator
                 }
             }
 
+            this.Log.Trace("Assembly definition loading " + (location ?? "") + " done");
+
             return assemblyDefinition;
         }
 
         protected virtual void ReadTypes(AssemblyDefinition assembly)
         {
+            this.Log.Trace("Reading types for assembly " + (assembly != null && assembly.Name != null && assembly.Name.Name != null ? assembly.Name.Name : "") + " ...");
+
             this.AddNestedTypes(assembly.MainModule.Types);
+
+            this.Log.Trace("Reading types for assembly done");
         }
 
         protected virtual void AddNestedTypes(IEnumerable<TypeDefinition> types)
@@ -102,6 +110,8 @@ namespace Bridge.Translator
 
         protected virtual List<AssemblyDefinition> InspectReferences()
         {
+            this.Log.Info("Inspecting references...");
+
             this.TypeInfoDefinitions = new Dictionary<string, ITypeInfo>();
 
             var references = new List<AssemblyDefinition>();
@@ -130,22 +140,31 @@ namespace Bridge.Translator
                 }
             }
 
+            this.Log.Info("Inspecting references done");
+
             return references;
         }
 
         protected virtual void InspectTypes(MemberResolver resolver, IAssemblyInfo config)
         {
+            this.Log.Info("Inspecting types...");
+
             Inspector inspector = this.CreateInspector();
             inspector.AssemblyInfo = config;
             inspector.Resolver = resolver;
 
             for (int i = 0; i < this.ParsedSourceFiles.Count; i++)
             {
-                inspector.VisitSyntaxTree(this.ParsedSourceFiles[i].SyntaxTree);
+                var sourceFile = this.ParsedSourceFiles[i];
+                this.Log.Trace("Visiting syntax tree " + (sourceFile != null && sourceFile.ParsedFile != null && sourceFile.ParsedFile.FileName != null ? sourceFile.ParsedFile.FileName : ""));
+
+                inspector.VisitSyntaxTree(sourceFile.SyntaxTree);
             }
 
             this.AssemblyInfo = inspector.AssemblyInfo;
             this.Types = inspector.Types;
+
+            this.Log.Info("Inspecting types done");
         }
 
         protected virtual Inspector CreateInspector()
@@ -155,9 +174,13 @@ namespace Bridge.Translator
 
         protected void BuildSyntaxTree()
         {
+            this.Log.Info("Building syntax tree...");
+
             for (int i = 0; i < this.SourceFiles.Count; i++)
             {
                 var fileName = this.SourceFiles[i];
+
+                this.Log.Trace("Source file " + (fileName ?? string.Empty) + " ...");
 
                 using (var reader = new StreamReader(fileName))
                 {
@@ -172,6 +195,7 @@ namespace Bridge.Translator
                     }
 
                     var syntaxTree = parser.Parse(reader, fileName);
+                    this.Log.Trace("\tParsing syntax tree done");
 
                     if (parser.HasErrors)
                     {
@@ -182,15 +206,19 @@ namespace Bridge.Translator
                     }
 
                     var expandResult = new QueryExpressionExpander().ExpandQueryExpressions(syntaxTree);
+                    this.Log.Trace("\tExpanding query expressions done");
+
                     syntaxTree = (expandResult != null ? (SyntaxTree)expandResult.AstNode : syntaxTree);
 
                     var emptyLambdaDetecter = new EmptyLambdaDetecter();
                     syntaxTree.AcceptVisitor(emptyLambdaDetecter);
+                    this.Log.Trace("\tAccepting lambda detector visitor done");
 
                     if (emptyLambdaDetecter.Found)
                     {
                         var fixer = new EmptyLambdaFixer();
                         var astNode = syntaxTree.AcceptVisitor(fixer);
+                        this.Log.Trace("\tAccepting lambda fixer visitor done");
                         syntaxTree = (astNode != null ? (SyntaxTree)astNode : syntaxTree);
                     }
 
@@ -202,8 +230,13 @@ namespace Bridge.Translator
 
                     var tcv = new TypeSystemConvertVisitor(f.ParsedFile);
                     f.SyntaxTree.AcceptVisitor(tcv);
+                    this.Log.Trace("\tAccepting type system convert visitor done");
+
+                    this.Log.Trace("Source file " + (fileName ?? string.Empty) + " done");
                 }
             }
+
+            this.Log.Info("Building syntax tree done");
         }
     }
 }

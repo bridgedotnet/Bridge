@@ -544,6 +544,9 @@
         equals: function (a, b) {
             if (a && Bridge.isFunction(a.equals) && a.equals.length === 1) {
                 return a.equals(b);
+            }
+            if (b && Bridge.isFunction(b.equals) && b.equals.length === 1) {
+                return a.equals(b);
             } else if (Bridge.isDate(a) && Bridge.isDate(b)) {
                 return a.valueOf() === b.valueOf();
             } else if (Bridge.isNull(a) && Bridge.isNull(b)) {
@@ -634,11 +637,19 @@
                 return Bridge.compare(a.valueOf(), b.valueOf());
             }
 
-            if (safe && !a.compareTo) {
+            if (Bridge.isFunction(a.compareTo)) {
+                return a.compareTo(b);
+            }
+
+            if (Bridge.isFunction(b.compareTo)) {
+                return -b.compareTo(a);
+            }
+
+            if (safe) {
                 return 0;
             }
 
-            return a.compareTo(b);
+            throw new Bridge.Exception("Cannot compare items");
         },
 
         equalsT: function (a, b) {
@@ -650,7 +661,7 @@
                 return a.valueOf() === b.valueOf();
             }
 
-            return a.equalsT(b);
+            return a.equalsT ? a.equalsT(b) : b.equalsT(a);
         },
 
         format: function (obj, formatString) {
@@ -1525,7 +1536,7 @@
         },
 
         split: function (s, strings, limit, options) {
-            var re = new RegExp(strings.map(Bridge.String.escape).join('|'), 'g'),
+            var re = (!Bridge.hasValue(strings) || strings.length === 0) ? new RegExp("\\s", "g") : new RegExp(strings.map(Bridge.String.escape).join('|'), 'g'),
                 res = [],
                 m,
                 i;
@@ -4134,6 +4145,19 @@
 
     // @source Date.js
 
+Bridge.define("Bridge.DayOfWeek", {
+    $enum: true,
+    $statics: {
+        sunday: 0,
+        monday: 1,
+        tuesday: 2,
+        wednesday: 3,
+        thursday: 4,
+        friday: 5,
+        saturday: 6
+    }
+});
+
 var date = {
         getDefaultValue: function() {
             return new Date(-864e13);
@@ -4879,6 +4903,34 @@ var date = {
                                      date.getMinutes(),
                                      date.getSeconds(),
                                      date.getMilliseconds()));
+        },
+
+        subdt: function(d, t) {
+            return Bridge.hasValue(d) && Bridge.hasValue(t) ? (new Date(d - new Date(t.ticks / 10000))) : null;
+        },
+
+        adddt: function(d, t) {
+            return Bridge.hasValue(d) && Bridge.hasValue(t) ? (new Date(d.getTime() + (t.ticks / 10000))) : null;
+        },
+
+        subdd: function (a, b) {
+            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (new Bridge.TimeSpan((a - b) * 10000)) : null;
+        },
+
+        gt: function (a, b) {
+            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a > b) : false;
+        },
+
+        gte: function (a, b) {
+            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a >= b) : false;
+        },
+
+        lt: function (a, b) {
+            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a < b) : false;
+        },
+
+        lte: function (a, b) {
+            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a <= b) : false;
         }
     };
 
@@ -4921,6 +4973,46 @@ var date = {
 
             getDefaultValue: function () {
                 return new Bridge.TimeSpan(0);
+            },
+
+            neg: function (t) {
+                return Bridge.hasValue(t) ? (new Bridge.TimeSpan(-t.ticks)) : null;
+            },
+
+            sub: function (t1, t2) {
+                return Bridge.hasValue(t1) && Bridge.hasValue(t2) ? (new Bridge.TimeSpan(t1.ticks - t2.ticks)) : null;
+            },
+
+            eq: function(t1, t2) {
+                return Bridge.hasValue(t1) && Bridge.hasValue(t2) ? (t1.ticks === t2.ticks) : null;
+            },
+
+            neq: function (t1, t2) {
+                return Bridge.hasValue(t1) && Bridge.hasValue(t2) ? (t1.ticks !== t2.ticks) : null;
+            },
+
+            plus: function (t) {
+                return Bridge.hasValue(t) ? (new Bridge.TimeSpan(t.ticks)) : null;
+            },
+
+            add: function (t1, t2) {
+                return Bridge.hasValue(t1) && Bridge.hasValue(t2) ? (new Bridge.TimeSpan(t1.ticks + t2.ticks)) : null;
+            },
+
+            gt: function (a, b) {
+                return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a.ticks > b.ticks) : false;
+            },
+
+            gte: function (a, b) {
+                return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a.ticks >= b.ticks) : false;
+            },
+
+            lt: function (a, b) {
+                return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a.ticks < b.ticks) : false;
+            },
+
+            lte: function (a, b) {
+                return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a.ticks <= b.ticks) : false;
             }
         },
 
@@ -5334,6 +5426,236 @@ Bridge.define("Bridge.Text.StringBuilder", {
     Bridge.regexpEscape = regexpEscape;
 })();
 
+Bridge.Debug = {
+    writeln: function (text) {
+        var global = Bridge.global;
+        if (global.console) {
+            if (global.console.debug) {
+                global.console.debug(text);
+                return;
+            }
+            else if (global.console.log) {
+                global.console.log(text);
+                return;
+            }
+        }
+        else if (global.opera && global.opera.postError) {
+            global.opera.postError(text);
+            return;
+        }
+    },
+
+    _fail: function (message) {
+        Bridge.Debug.writeln(message);
+        debugger;
+    },
+
+    assert: function (condition, message) {
+        if (!condition) {
+            message = 'Assert failed: ' + message;
+            if (confirm(message + '\r\n\r\nBreak into debugger?')) {
+                Bridge.Debug._fail(message);
+            }
+        }
+    },
+
+    fail: function (message) {
+        Bridge.Debug._fail(message);
+    }
+}
+
+Bridge.define("Bridge.Stopwatch", {
+    constructor: function () {
+        this._stopTime = 0;
+        this._startTime = 0;
+        this.isRunning = false;
+    },
+
+    reset: function () {
+        this._stopTime = this._startTime = Bridge.Stopwatch.getTimestamp();
+        this.isRunning = false;
+    },
+
+    ticks: function () {
+        return (this.isRunning ? Bridge.Stopwatch.getTimestamp() : this._stopTime) - this._startTime;
+    },
+
+    milliseconds: function () {
+        return Math.round(this.ticks() / Bridge.Stopwatch.frequency * 1000);
+    },
+
+    timeSpan: function () {
+        return new Bridge.TimeSpan(this.milliseconds() * 10000);
+    },
+
+    start: function () {
+        if (this.isRunning)
+            return;
+        this._startTime = Bridge.Stopwatch.getTimestamp();
+        this.isRunning = true;
+    },
+
+    stop: function () {
+        if (!this.isRunning)
+            return;
+        this._stopTime = Bridge.Stopwatch.getTimestamp();
+        this.isRunning = false;
+    },
+
+    restart: function () {
+        this.isRunning = false;
+        this.start();
+    },
+
+    statics: {
+        startNew: function () {
+            var s = new Bridge.Stopwatch();
+            s.start();
+            return s;
+        }
+    }
+});
+
+if (typeof (window) !== 'undefined' && window.performance && window.performance.now) {
+    Bridge.Stopwatch.frequency = 1e6;
+    Bridge.Stopwatch.isHighResolution = true;
+    Bridge.Stopwatch.getTimestamp = function () { return Math.round(window.performance.now() * 1000); };
+}
+else if (typeof (process) !== 'undefined' && process.hrtime) {
+    Bridge.Stopwatch.frequency = 1e9;
+    Bridge.Stopwatch.isHighResolution = true;
+    Bridge.Stopwatch.getTimestamp = function () { var hr = process.hrtime(); return hr[0] * 1e9 + hr[1]; };
+}
+else {
+    Bridge.Stopwatch.frequency = 1e3;
+    Bridge.Stopwatch.isHighResolution = false;
+    Bridge.Stopwatch.getTimestamp = function () { return new Date().valueOf(); };
+}
+
+Bridge.Contract = {
+	reportFailure: function (failureKind, userMessage, condition, innerException, TException) {
+		var conditionText = condition.toString();
+		conditionText = conditionText.substring(conditionText.indexOf("return") + 7);
+		conditionText = conditionText.substr(0, conditionText.lastIndexOf(";"));
+
+		var failureMessage = (conditionText) ? "Contract '" + conditionText + "' failed" : "Contract failed";
+		var displayMessage = (userMessage) ? failureMessage + ": " + userMessage : failureMessage;
+
+		if (TException) {
+			throw new TException(conditionText, userMessage);
+		}
+		else {
+			throw new Bridge.ContractException(failureKind, displayMessage, userMessage, conditionText, innerException);
+		}
+	},
+	assert: function (failureKind, condition, message) {
+		if (!condition()) {
+			Bridge.Contract.reportFailure(failureKind, message, condition, null);
+		}
+	},
+	requires: function (TException, condition, message) {
+		if (!condition()) {
+			Bridge.Contract.reportFailure(0, message, condition, null, TException);
+		}
+	},
+	forAll: function (fromInclusive, toExclusive, predicate) {
+		if (!predicate) {
+			throw new Bridge.ArgumentNullException("predicate");
+		}
+		for (; fromInclusive < toExclusive; fromInclusive++) {
+			if (!predicate(fromInclusive)) {
+				return false;
+			}
+		}
+		return true;
+	},
+	forAll$1: function (collection, predicate) {
+		if (!collection) {
+			throw new Bridge.ArgumentNullException("collection");
+		}
+		if (!predicate) {
+			throw new Bridge.ArgumentNullException("predicate");
+		}
+		var enumerator = Bridge.getEnumerator(collection);
+		try {
+			while (enumerator.moveNext()) {
+				if (!predicate(enumerator.getCurrent())) {
+					return false;
+				}
+			}
+			return true;
+		} finally {
+			enumerator.dispose();
+		}
+	},
+	exists: function (fromInclusive, toExclusive, predicate) {
+		if (!predicate) {
+			throw new Bridge.ArgumentNullException("predicate");
+		}
+		for (; fromInclusive < toExclusive; fromInclusive++) {
+			if (predicate(fromInclusive)) {
+				return true;
+			}
+		}
+		return false;
+	},
+	exists$1: function (collection, predicate) {
+		if (!collection) {
+			throw new Bridge.ArgumentNullException("collection");
+		}
+		if (!predicate) {
+			throw new Bridge.ArgumentNullException("predicate");
+		}
+		var enumerator = Bridge.getEnumerator(collection);
+		try {
+			while (enumerator.moveNext()) {
+				if (predicate(enumerator.getCurrent())) {
+					return true;
+				}
+			}
+			return false;
+		} finally {
+			enumerator.dispose();
+		}
+	}
+};
+
+Bridge.define("Bridge.ContractFailureKind", {
+    $enum: true,
+    $statics: {
+        precondition: 0,
+        postcondition: 1,
+        postconditionOnException: 2,
+        invarian: 3,
+        assert: 4,
+        assume: 5
+    }
+});
+
+Bridge.define("Bridge.ContractException", {
+    inherits: [Bridge.Exception],
+
+    constructor: function (failureKind, failureMessage, userMessage, condition, innerException) {
+        Bridge.Exception.prototype.$constructor.call(this, failureMessage, innerException);
+        this._kind = failureKind;
+        this._failureMessage = failureMessage || null;
+        this._userMessage = userMessage || null;
+        this._condition = condition || null;
+    },
+
+    getKind: function () {
+		return this._kind;
+	},
+	getFailure: function () {
+		return this._failureMessage;
+	},
+	getUserMessage: function () {
+		return this._userMessage;
+	},
+	getCondition: function() {
+		return this._condition;
+	}
+});
     // @source Array.js
 
     var array = {
@@ -9689,11 +10011,21 @@ Bridge.Class.generic('Bridge.ReadOnlyCollection$1', function (T) {
         var sum = 0;
         var count = 0;
         this.forEach(function (x) {
-            sum += selector(x);
+            x = selector(x);
+
+            if (x instanceof Bridge.Decimal) {
+                sum = x.add(sum);
+            }
+            else if (sum instanceof Bridge.Decimal) {
+                sum = sum.add(x);
+            } else {
+                sum += x;
+            }
+            
             ++count;
         });
 
-        return sum / count;
+        return sum instanceof Bridge.Decimal ? sum.div(count) : (sum / count);
     };
 
     Enumerable.prototype.nullableAverage = function (selector) {
@@ -9768,7 +10100,15 @@ Bridge.Class.generic('Bridge.ReadOnlyCollection$1', function (T) {
     // Overload:function (selector)
     Enumerable.prototype.sum = function (selector) {
         if (selector == null) selector = Functions.Identity;
-        return this.select(selector).aggregate(0, function (a, b) { return a + b; });
+        return this.select(selector).aggregate(0, function(a, b) {
+             if (a instanceof Bridge.Decimal) {
+                 return a.add(b);
+             }
+             if (b instanceof Bridge.Decimal) {
+                 return b.add(a);
+             }
+             return a + b;
+        });
     };
 
     Enumerable.prototype.nullableSum = function (selector) {

@@ -40,12 +40,18 @@ namespace Bridge.Translator
 
         public virtual void BuildAssembly()
         {
+            this.Log.Info("Building assembly...");
+
             var info = new ProcessStartInfo()
             {
                 FileName = this.GetBuilderPath(),
                 Arguments = this.GetBuilderArguments(),
                 UseShellExecute = true
             };
+
+            this.Log.Trace("\tFile name " + (info.FileName ?? ""));
+            this.Log.Trace("\tArguments " + (info.Arguments ?? ""));
+
             info.WindowStyle = ProcessWindowStyle.Hidden;
             using (var p = Process.Start(info))
             {
@@ -56,6 +62,8 @@ namespace Bridge.Translator
                     Bridge.Translator.Exception.Throw("Compilation was not successful, exit code - {0}; FileName - {1}; Arguments - {2}.", p.ExitCode, info.FileName, info.Arguments);
                 }
             }
+
+            this.Log.Info("Building assembly done");
         }
     }
 }

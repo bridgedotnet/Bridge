@@ -131,7 +131,7 @@ namespace Bridge.Translator.Logging
 
             if (this.UseTimeStamp)
             {
-                wrappedMessage += DateTime.Now.ToString("s") + " ";
+                wrappedMessage += DateTime.Now.ToString("s") + ":" + DateTime.Now.Millisecond + " ";
             }
 
             wrappedMessage += message;

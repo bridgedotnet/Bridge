@@ -1,5 +1,18 @@
 ﻿    // @source Date.js
 
+Bridge.define("Bridge.DayOfWeek", {
+    $enum: true,
+    $statics: {
+        sunday: 0,
+        monday: 1,
+        tuesday: 2,
+        wednesday: 3,
+        thursday: 4,
+        friday: 5,
+        saturday: 6
+    }
+});
+
 var date = {
         getDefaultValue: function() {
             return new Date(-864e13);
@@ -745,6 +758,34 @@ var date = {
                                      date.getMinutes(),
                                      date.getSeconds(),
                                      date.getMilliseconds()));
+        },
+
+        subdt: function(d, t) {
+            return Bridge.hasValue(d) && Bridge.hasValue(t) ? (new Date(d - new Date(t.ticks / 10000))) : null;
+        },
+
+        adddt: function(d, t) {
+            return Bridge.hasValue(d) && Bridge.hasValue(t) ? (new Date(d.getTime() + (t.ticks / 10000))) : null;
+        },
+
+        subdd: function (a, b) {
+            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (new Bridge.TimeSpan((a - b) * 10000)) : null;
+        },
+
+        gt: function (a, b) {
+            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a > b) : false;
+        },
+
+        gte: function (a, b) {
+            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a >= b) : false;
+        },
+
+        lt: function (a, b) {
+            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a < b) : false;
+        },
+
+        lte: function (a, b) {
+            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a <= b) : false;
         }
     };
 

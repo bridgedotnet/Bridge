@@ -8,6 +8,7 @@ namespace System
     /// <param name="sender">The source of the event.</param>
     /// <param name="e">An System.EventArgs that contains no event data.</param>
     [External]
+    [Name("Function")]
     public delegate void EventHandler(object sender, EventArgs e);
 
     /// <summary>
@@ -17,5 +18,6 @@ namespace System
     /// <param name="sender">The source of the event.</param>
     /// <param name="e">An System.EventArgs that contains the event data.</param>
     [External]
+    [Name("Function")]
     public delegate void EventHandler<TEventArgs>(object sender, TEventArgs e);
 }

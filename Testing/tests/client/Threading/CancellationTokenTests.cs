@@ -267,21 +267,6 @@ namespace Bridge.ClientTest.Threading
             Assert.AreEqual(state, 1);
         }
 
-        //public async void RegisterOnNonACancelledSourceWithoutContextRegistersTheCallbackForExecution()
-        //{
-        //    var cts = new CancellationTokenSource();
-        //    int state = 0;
-        //    cts.Token.Register(() => state = 1);
-
-        //    Globals.SetTimeout(() => cts.Cancel(), 100);
-
-        //    Globals.SetTimeout(() =>
-        //    {
-        //        Assert.AreEqual(state, 1);
-        //        Engine.Start();
-        //    }, 200);
-        //}
-
         [Test]
         public void RegisterWithArgumentOnACancelledSourceInvokesTheCallback()
         {
@@ -296,26 +281,6 @@ namespace Bridge.ClientTest.Threading
             }, context);
             Assert.AreEqual(state, 1);
         }
-
-        //public async void RegisterWithArgumentOnANonCancelledSourcetRegistersTheCallbackForExecution()
-        //{
-        //    var cts = new CancellationTokenSource();
-        //    var context = new object();
-        //    int state = 0;
-        //    cts.Token.Register(c =>
-        //    {
-        //        Assert.True(ReferenceEquals(context, c), "context");
-        //        state = 1;
-        //    }, context);
-
-        //    Globals.SetTimeout(() => cts.Cancel(), 100);
-
-        //    Globals.SetTimeout(() =>
-        //    {
-        //        Assert.AreEqual(state, 1);
-        //        Engine.Start();
-        //    }, 200);
-        //}
 
         [Test]
         public void RegisterOnACancelledSourceWithoutContextRethrowsAThrownException()
@@ -389,99 +354,6 @@ namespace Bridge.ClientTest.Threading
             Assert.True(true);
         }
 
-        //public async void ConstructorWithMillisecondsArgumentWorks()
-        //{
-        //    var cts = new CancellationTokenSource(100);
-        //    int state = 0;
-        //    cts.Token.Register(() => state = 1);
-
-        //    Globals.SetTimeout(() =>
-        //    {
-        //        Assert.AreEqual(state, 1);
-        //        Engine.Start();
-        //    }, 200);
-        //}
-
-        //public async void CancelAfterWithMillisecondsArgumentWorks()
-        //{
-        //    var cts = new CancellationTokenSource();
-        //    cts.CancelAfter(100);
-        //    int state = 0;
-        //    cts.Token.Register(() => state = 1);
-
-        //    Globals.SetTimeout(() =>
-        //    {
-        //        Assert.AreEqual(state, 1);
-        //        Engine.Start();
-        //    }, 200);
-        //}
-
-        //public async void ConstructorWithTimeSpanArgumentWorks()
-        //{
-        //    var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(100));
-
-        //    int state = 0;
-        //    cts.Token.Register(() => state = 1);
-
-        //    Globals.SetTimeout(() =>
-        //    {
-        //        Assert.AreEqual(state, 1);
-        //        Engine.Start();
-        //    }, 200);
-        //}
-
-        //public async void CancelAfterWithTimeSpanArgumentWorks()
-        //{
-        //    var cts = new CancellationTokenSource();
-        //    cts.CancelAfter(TimeSpan.FromMilliseconds(100));
-
-        //    int state = 0;
-        //    cts.Token.Register(() => state = 1);
-
-        //    Globals.SetTimeout(() =>
-        //    {
-        //        Assert.AreEqual(state, 1);
-        //        Engine.Start();
-        //    }, 200);
-        //}
-
-        //public async void CancelAfterRunsAllCallbacksEvenIfSomeThrowExceptions()
-        //{
-        //    var ex1 = new Exception();
-        //    var ex2 = new Exception();
-        //    var cts = new CancellationTokenSource();
-        //    cts.CancelAfter(100);
-        //    var calledHandlers = new List<int>();
-        //    cts.Token.Register(() =>
-        //    {
-        //        calledHandlers.Add(0);
-        //    });
-        //    cts.Token.Register(() =>
-        //    {
-        //        calledHandlers.Add(1);
-        //        throw ex1;
-        //    });
-        //    cts.Token.Register(() =>
-        //    {
-        //        calledHandlers.Add(2);
-        //    });
-        //    cts.Token.Register(() =>
-        //    {
-        //        calledHandlers.Add(3);
-        //        throw ex2;
-        //    });
-        //    cts.Token.Register(() =>
-        //    {
-        //        calledHandlers.Add(4);
-        //    });
-
-        //    Globals.SetTimeout(() =>
-        //    {
-        //        Assert.True(calledHandlers.Contains(0) && calledHandlers.Contains(1) && calledHandlers.Contains(2) && calledHandlers.Contains(3) && calledHandlers.Contains(4));
-        //        Engine.Start();
-        //    }, 200);
-        //}
-
         [Test]
         public void RegisterOnCancellationTokenCreatedNonCancelledDoesNothing()
         {
@@ -509,27 +381,6 @@ namespace Bridge.ClientTest.Threading
             }, context);
             Assert.AreEqual(state, 2, "state 2");
         }
-
-        //public async void CancelAfterResetsTheCancelTimer()
-        //{
-        //    var cts = new CancellationTokenSource();
-        //    cts.CancelAfter(TimeSpan.FromMilliseconds(100));
-        //    cts.CancelAfter(TimeSpan.FromMilliseconds(300));
-
-        //    int state = 0;
-        //    cts.Token.Register(() => state = 1);
-
-        //    Globals.SetTimeout(() =>
-        //    {
-        //        Assert.AreEqual(state, 0, "#1");
-        //    }, 200);
-
-        //    Globals.SetTimeout(() =>
-        //    {
-        //        Assert.AreEqual(state, 1, "#2");
-        //        Engine.Start();
-        //    }, 400);
-        //}
 
         [Test]
         public void DuplicateCancelDoesNotCauseCallbacksToBeCalledTwice()

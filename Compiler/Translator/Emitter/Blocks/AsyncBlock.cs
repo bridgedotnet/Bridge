@@ -239,7 +239,11 @@ namespace Bridge.Translator
 
             IType type;
 
-            if (resolveResult is InvocationResolveResult)
+            if (resolveResult is DynamicInvocationResolveResult)
+            {
+                return expression.Parent is UnaryOperatorExpression && !(expression.Parent.Parent is Statement);
+            }
+            else if (resolveResult is InvocationResolveResult)
             {
                 type = ((InvocationResolveResult)resolveResult).Member.ReturnType;
             }
@@ -477,7 +481,7 @@ namespace Bridge.Translator
                             this.Write("$step = " + step + ";");
 
                             this.WriteNewLine();
-                            this.Write("setTimeout($asyncBody, 0);");
+                            this.Write("$asyncBody();");
                             this.WriteNewLine();
                             this.Write("return;");
                         }
@@ -519,7 +523,7 @@ namespace Bridge.Translator
                             this.Write("$step = " + step + ";");
 
                             this.WriteNewLine();
-                            this.Write("setTimeout($asyncBody, 0);");
+                            this.Write("$asyncBody();");
                             this.WriteNewLine();
                             this.Write("return;");
                             this.WriteNewLine();
@@ -550,7 +554,7 @@ namespace Bridge.Translator
                     this.Write("$step = " + info.FinallyStep + ";");
 
                     this.WriteNewLine();
-                    this.Write("setTimeout($asyncBody, 0);");
+                    this.Write("$asyncBody();");
                     this.WriteNewLine();
                     this.Write("return;");
 

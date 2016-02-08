@@ -52,6 +52,10 @@ namespace Bridge.Contract
     {
         public void InitItems(IEmitter emitter)
         {
+            var logger = emitter.Log;
+
+            logger.Trace("Initializing items for Bridge types...");
+
             this.Emitter = emitter;
             foreach (var item in this)
             {
@@ -70,6 +74,8 @@ namespace Bridge.Contract
                     type.TypeInfo.Dependencies = typeInfo.Dependencies;
                 }
             }
+
+            logger.Trace("Initializing items for Bridge types done");
         }
 
         public IEmitter Emitter

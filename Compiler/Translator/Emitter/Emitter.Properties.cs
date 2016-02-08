@@ -198,14 +198,16 @@ namespace Bridge.Translator
                     return this.list;
                 }
 
-                this.list = Emitter.ToAssemblyReferences(this.References);
+                this.list = Emitter.ToAssemblyReferences(this.References, this.Log);
 
                 return this.list;
             }
         }
 
-        internal static List<IAssemblyReference> ToAssemblyReferences(IEnumerable<AssemblyDefinition> references)
+        internal static List<IAssemblyReference> ToAssemblyReferences(IEnumerable<AssemblyDefinition> references, ILogger logger)
         {
+            logger.Info("Assembly definition to references...");
+
             var list = new List<IAssemblyReference>();
 
             if (references == null)
@@ -215,10 +217,17 @@ namespace Bridge.Translator
 
             foreach (var reference in references)
             {
+                logger.Trace("\tLoading AssemblyDefinition " + (reference != null && reference.Name != null && reference.Name.Name != null ? reference.Name.Name : "") + " ...");
+
                 var loader = new CecilLoader();
                 loader.IncludeInternalMembers = true;
+
                 list.Add(loader.LoadAssembly(reference));
+
+                logger.Trace("\tLoading AssemblyDefinition done");
             }
+
+            logger.Info("Assembly definition to references done");
 
             return list;
         }

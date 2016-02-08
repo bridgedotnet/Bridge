@@ -432,25 +432,25 @@ namespace System
             return null;
         }
 
-        [Template("new Date({d} - new Date(({t}).ticks / 10000))")]
+        [Template("Bridge.Date.subdt({d}, {t})")]
         public static DateTime operator -(DateTime d, TimeSpan t)
         {
             return default(DateTime);
         }
 
-        [Template("new Date({d}.getTime() + (({t}).ticks / 10000))")]
+        [Template("Bridge.Date.adddt({d}, {t})")]
         public static DateTime operator +(DateTime d, TimeSpan t)
         {
             return default(DateTime);
         }
 
-        [Template("new Bridge.TimeSpan(({a} - {b}) * 10000)")]
+        [Template("Bridge.Date.subdd({a}, {b})")]
         public static TimeSpan operator -(DateTime a, DateTime b)
         {
             return default(TimeSpan);
         }
 
-        [Template("new Bridge.TimeSpan(({this} - {value}) * 10000)")]
+        [Template("Bridge.Date.subdd({this}, {value})")]
         public TimeSpan Subtract(DateTime value)
         {
             return default(TimeSpan);
@@ -468,25 +468,25 @@ namespace System
             return false;
         }
 
-        [Template("{a} < {b}")]
+        [Template("Bridge.Date.lt({a}, {b})")]
         public static bool operator <(DateTime a, DateTime b)
         {
             return false;
         }
 
-        [Template("{a} > {b}")]
+        [Template("Bridge.Date.gt({a}, {b})")]
         public static bool operator >(DateTime a, DateTime b)
         {
             return false;
         }
 
-        [Template("{a} <= {b}")]
+        [Template("Bridge.Date.lte({a}, {b})")]
         public static bool operator <=(DateTime a, DateTime b)
         {
             return false;
         }
 
-        [Template("{a} >= {b}")]
+        [Template("Bridge.Date.gte({a}, {b})")]
         public static bool operator >=(DateTime a, DateTime b)
         {
             return false;
