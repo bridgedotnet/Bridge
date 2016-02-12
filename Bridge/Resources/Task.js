@@ -313,15 +313,15 @@
             return this.status === Bridge.TaskStatus.faulted;
         },
 
-        _getResult: function (await) {
+        _getResult: function (await_) {
             switch (this.status) {
                 case Bridge.TaskStatus.ranToCompletion:
                     return this.result;
                 case Bridge.TaskStatus.canceled:
                     var ex = new Bridge.TaskCanceledException(null, this);
-                    throw await ? ex : new Bridge.AggregateException(null, [ex]);
+                    throw await_ ? ex : new Bridge.AggregateException(null, [ex]);
                 case Bridge.TaskStatus.faulted:
-                    throw await ? (this.exception.innerExceptions.getCount() > 0 ? this.exception.innerExceptions.get(0) : null) : this.exception;
+                    throw await_ ? (this.exception.innerExceptions.getCount() > 0 ? this.exception.innerExceptions.get(0) : null) : this.exception;
                 default:
                     throw new Bridge.InvalidOperationException("Task is not yet completed.");
             }
