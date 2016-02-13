@@ -9,6 +9,84 @@ using ICSharpCode.NRefactory.TypeSystem;
 
 namespace Bridge.Translator
 {
+    public class TypeVariable : IVariable, IEquatable<TypeVariable>, IEquatable<IVariable>
+    {
+        private readonly IType typeVar;
+        public TypeVariable(IType type)
+        {
+            this.typeVar = type;
+        }
+        public ISymbolReference ToReference()
+        {
+            throw new NotImplementedException();
+        }
+
+        public SymbolKind SymbolKind 
+        {
+            get
+            {
+                return SymbolKind.TypeParameter;
+            }
+        }
+
+        string IVariable.Name
+        {
+            get
+            {
+                return this.typeVar.Name;
+            }
+        }
+
+        public DomRegion Region
+        {
+            get { return default(DomRegion); }
+        }
+
+        public IType Type
+        {
+            get { return this.typeVar; }
+        }
+
+        public bool IsConst
+        {
+            get { return false; }
+        }
+
+        public object ConstantValue
+        {
+            get { return null; }
+        }
+
+        string ISymbol.Name
+        {
+            get
+            {
+                return this.typeVar.Name;
+            }
+        }
+
+        public bool Equals(TypeVariable other)
+        {
+            return this.typeVar.Equals(other.typeVar);
+        }
+
+        public bool Equals(IVariable other)
+        {
+            var typeVariable = other as TypeVariable;
+            if (typeVariable != null)
+            {
+                return this.Equals(typeVariable);
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.typeVar.GetHashCode();
+        }
+    }
+
     public class CaptureAnalyzer : CombinedAstAndResolveResultVisitor
     {
         private bool _usesThis;
@@ -39,6 +117,48 @@ namespace Bridge.Translator
             }
 
             node.AcceptVisitor(this);
+        }
+
+        public override object VisitTypeOfResolveResult(TypeOfResolveResult rr, object data)
+        {
+            if (rr.ReferencedType.Kind == TypeKind.TypeParameter)
+            {
+                var ivar = new TypeVariable(rr.ReferencedType);
+                if (!_usedVariables.Contains(ivar))
+                {
+                    _usedVariables.Add(ivar);
+                }
+            }
+
+            return base.VisitTypeOfResolveResult(rr, data);
+        }
+
+        public override object VisitTypeResolveResult(TypeResolveResult rr, object data)
+        {
+            if (rr.Type.Kind == TypeKind.TypeParameter)
+            {
+                var ivar = new TypeVariable(rr.Type);
+                if (!_usedVariables.Contains(ivar))
+                {
+                    _usedVariables.Add(ivar);
+                }
+            }
+
+            return base.VisitTypeResolveResult(rr, data);
+        }
+
+        public override object VisitConstantResolveResult(ConstantResolveResult rr, object data)
+        {
+            if (rr.Type.Kind == TypeKind.TypeParameter)
+            {
+                var ivar = new TypeVariable(rr.Type);
+                if (!_usedVariables.Contains(ivar))
+                {
+                    _usedVariables.Add(ivar);
+                }
+            }
+
+            return base.VisitConstantResolveResult(rr, data);
         }
 
         public override object VisitThisResolveResult(ThisResolveResult rr, object data)

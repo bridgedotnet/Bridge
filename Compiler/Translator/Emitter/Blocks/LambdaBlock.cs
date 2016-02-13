@@ -127,7 +127,7 @@ namespace Bridge.Translator
             var oldLevel = this.Emitter.Level;
             if (analyzer.UsedVariables.Count == 0)
             {
-                this.Emitter.Level = 2;
+                this.Emitter.Level = 1;
             }
 
             AsyncBlock asyncBlock = null;
@@ -208,7 +208,7 @@ namespace Bridge.Translator
 
             if (analyzer.UsedVariables.Count == 0)
             {
-                var name = "$f" + (this.Emitter.NamedFunctions.Count + 1);
+                var name = "f" + (this.Emitter.NamedFunctions.Count + 1);
                 var code = this.Emitter.Output.ToString().Substring(savedPos);
                 var pair = this.Emitter.NamedFunctions.FirstOrDefault(p => p.Value == code);
 
@@ -222,7 +222,7 @@ namespace Bridge.Translator
                 }
                 
                 this.Emitter.Output.Remove(savedPos, this.Emitter.Output.Length - savedPos);
-                this.Emitter.Output.Insert(savedPos, BridgeTypes.ToJsName(this.Emitter.TypeInfo.Type, this.Emitter) + "." + name);
+                this.Emitter.Output.Insert(savedPos, BridgeTypes.ToJsName(this.Emitter.TypeInfo.Type, this.Emitter, true) + "$." + name);
                 this.Emitter.Level = oldLevel;
             }
 

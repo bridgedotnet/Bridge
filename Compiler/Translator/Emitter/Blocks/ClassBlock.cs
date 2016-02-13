@@ -164,7 +164,7 @@ namespace Bridge.Translator
 
         protected virtual void EmitStaticBlock()
         {
-            if (this.TypeInfo.HasRealStatic(this.Emitter) || this.Emitter.NamedFunctions.Count > 0)
+            if (this.TypeInfo.HasRealStatic(this.Emitter))
             {
                 this.Emitter.StaticBlock = true;
                 this.EnsureComma();
@@ -181,16 +181,6 @@ namespace Bridge.Translator
 
                 new ConstructorBlock(this.Emitter, this.TypeInfo, true).Emit();
                 new MethodBlock(this.Emitter, this.TypeInfo, true).Emit();
-
-                if (this.Emitter.NamedFunctions.Count > 0)
-                {
-                    foreach (KeyValuePair<string, string> namedFunction in this.Emitter.NamedFunctions)
-                    {
-                        this.EnsureComma();
-                        this.Write(namedFunction.Key + ": " + namedFunction.Value);
-                        this.Emitter.Comma = true;
-                    }
-                }
 
                 this.WriteNewLine();
                 this.EndBlock();
@@ -266,8 +256,34 @@ namespace Bridge.Translator
                 }
             }
 
+            this.EmitNamedFunctions();
+
             this.WriteNewLine();
             this.WriteNewLine();
+        }
+
+        protected virtual void EmitNamedFunctions()
+        {
+            if (this.Emitter.NamedFunctions.Count > 0)
+            {
+                this.Emitter.Comma = false;
+                this.WriteNewLine();
+                this.WriteNewLine();
+                this.Write(BridgeTypes.ToJsName(this.Emitter.TypeInfo.Type, this.Emitter, true) + "$");
+                this.Write(" = ");
+                this.BeginBlock();
+
+                foreach (KeyValuePair<string, string> namedFunction in this.Emitter.NamedFunctions)
+                {
+                    this.EnsureComma();
+                    this.Write(namedFunction.Key + ": " + namedFunction.Value);
+                    this.Emitter.Comma = true;
+                }
+
+                this.WriteNewLine();
+                this.EndBlock();
+                this.WriteSemiColon();
+            }
         }
 
         protected virtual IEnumerable<string> GetDefineMethods(string prefix, Func<MethodDeclaration, IMethod, string> fn)

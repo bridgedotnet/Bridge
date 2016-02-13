@@ -368,7 +368,13 @@
 
             if (exists) {
                 for (key in exists) {
-                    if (typeof exists[key] === "function" && exists[key].$$name) {
+                    if (key.indexOf("$", key.length - 1) !== -1) {
+                        var key1 = key.slice(0, -1);
+                        if (typeof exists[key1] === "function" && exists[key1].$$name) {
+                            cls[key] = exists[key];
+                        }
+                    }
+                    else if (typeof exists[key] === "function" && exists[key].$$name) {
                         cls[key] = exists[key];
                     }
                 }
