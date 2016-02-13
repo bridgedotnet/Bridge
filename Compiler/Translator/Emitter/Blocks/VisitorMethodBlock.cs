@@ -77,19 +77,9 @@ namespace Bridge.Translator
 
             this.WriteColon();
 
-            if (methodDeclaration.TypeParameters.Count > 0)
-            {
-                this.WriteFunction();
-                this.EmitTypeParameters(methodDeclaration.TypeParameters, methodDeclaration);
-                this.WriteSpace();
-                this.BeginBlock();
-                this.WriteReturn(true);
-                this.Write("Bridge.fn.bind(this, ");
-            }
-
             this.WriteFunction();
 
-            this.EmitMethodParameters(methodDeclaration.Parameters, methodDeclaration);
+            this.EmitMethodParameters(methodDeclaration.Parameters, methodDeclaration.TypeParameters, methodDeclaration);
 
             this.WriteSpace();
 
@@ -116,13 +106,6 @@ namespace Bridge.Translator
                     this.WriteNewLine();
                 }
 
-                this.EndBlock();
-            }
-
-            if (methodDeclaration.TypeParameters.Count > 0)
-            {
-                this.Write(");");
-                this.WriteNewLine();
                 this.EndBlock();
             }
 

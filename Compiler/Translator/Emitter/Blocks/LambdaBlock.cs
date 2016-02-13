@@ -158,7 +158,7 @@ namespace Bridge.Translator
             var savedThisCount = this.Emitter.ThisRefCounter;
 
             this.WriteFunction();
-            this.EmitMethodParameters(parameters, context);
+            this.EmitMethodParameters(parameters, null, context);
             this.WriteSpace();
 
             int pos = 0;
@@ -210,7 +210,17 @@ namespace Bridge.Translator
             {
                 var name = "$f" + (this.Emitter.NamedFunctions.Count + 1);
                 var code = this.Emitter.Output.ToString().Substring(savedPos);
-                this.Emitter.NamedFunctions.Add(name, code);
+                var pair = this.Emitter.NamedFunctions.FirstOrDefault(p => p.Value == code);
+
+                if (pair.Key != null && pair.Value != null)
+                {
+                    name = pair.Key;
+                }
+                else
+                {
+                    this.Emitter.NamedFunctions.Add(name, code);    
+                }
+                
                 this.Emitter.Output.Remove(savedPos, this.Emitter.Output.Length - savedPos);
                 this.Emitter.Output.Insert(savedPos, BridgeTypes.ToJsName(this.Emitter.TypeInfo.Type, this.Emitter) + "." + name);
                 this.Emitter.Level = oldLevel;

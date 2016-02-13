@@ -1,6 +1,7 @@
 ﻿using Bridge.Contract;
 using ICSharpCode.NRefactory.CSharp;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Bridge.Translator.TypeScript
 {
@@ -35,7 +36,7 @@ namespace Bridge.Translator.TypeScript
                 string name = overloads.GetOverloadName();
                 this.Write((setter ? "set" : "get") + name);
 
-                this.EmitMethodParameters(indexerDeclaration.Parameters, indexerDeclaration, setter);
+                this.EmitMethodParameters(indexerDeclaration.Parameters, null, indexerDeclaration, setter);
 
                 if (setter)
                 {
@@ -59,7 +60,7 @@ namespace Bridge.Translator.TypeScript
             }
         }
 
-        protected override void EmitMethodParameters(IEnumerable<ParameterDeclaration> declarations, AstNode context, bool skipClose)
+        protected override void EmitMethodParameters(IEnumerable<ParameterDeclaration> declarations, IEnumerable<TypeParameterDeclaration> typeParamsdeclarations, AstNode context, bool skipClose)
         {
             this.WriteOpenParentheses();
             bool needComma = false;

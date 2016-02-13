@@ -54,6 +54,7 @@ namespace Bridge.Translator
                 {
                     continue;
                 }
+                this.EnsureComma(false);
 
                 this.Emitter.Translator.EmitNode = expr.AstType;
                 if (needComma)
@@ -76,6 +77,11 @@ namespace Bridge.Translator
                     throw new EmitterException(this.PreviousNode, "There is no type information");
                 }
             }
+
+            if (needComma)
+            {
+                this.Emitter.Comma = true;
+            }
         }
 
         protected virtual void EmitExpressionList(IEnumerable<AstType> types)
@@ -84,6 +90,7 @@ namespace Bridge.Translator
 
             foreach (var type in types)
             {
+                this.EnsureComma(false);
                 this.Emitter.Translator.EmitNode = type;
                 if (needComma)
                 {
@@ -92,6 +99,11 @@ namespace Bridge.Translator
 
                 needComma = true;
                 this.Write(BridgeTypes.ToJsName(type, this.Emitter));
+            }
+
+            if (needComma)
+            {
+                this.Emitter.Comma = true;
             }
         }
     }

@@ -61,7 +61,7 @@ namespace Bridge.Translator
 
             this.WriteFunction();
 
-            this.EmitMethodParameters(operatorDeclaration.Parameters, operatorDeclaration);
+            this.EmitMethodParameters(operatorDeclaration.Parameters, null, operatorDeclaration);
 
             this.WriteSpace();
 
