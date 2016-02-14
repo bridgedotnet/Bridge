@@ -407,10 +407,5 @@ namespace Bridge.Contract
             get;
             set;
         }
-
-        IList<string[]> RegisteredPrivateNamespaces
-        {
-            get;
-        }
     }
 }

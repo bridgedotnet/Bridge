@@ -18614,6 +18614,8 @@
         }
     });
     
+    Bridge.ns("Bridge.ClientTest.Threading.PromiseTests", $_)
+    
     Bridge.apply($_.Bridge.ClientTest.Threading.PromiseTests, {
         f1: function (i, s, j) {
             return Bridge.merge(new Bridge.ClientTest.Threading.PromiseTests.TaskResult(), {
