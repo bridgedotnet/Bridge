@@ -262,15 +262,60 @@ namespace Bridge.Translator
             this.WriteNewLine();
         }
 
+        private bool NsIsRegistered(string[] parts)
+        {
+            foreach (var ns in this.Emitter.RegisteredPrivateNamespaces)
+            {
+                bool eq = true;
+                for (int i = 0; i < parts.Length; i++)
+                {
+                    if (i >= ns.Length || ns[i] != parts[i])
+                    {
+                        eq = false;
+                    }
+                }
+
+                if (eq)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         protected virtual void EmitNamedFunctions()
         {
             if (this.Emitter.NamedFunctions.Count > 0)
             {
                 this.Emitter.Comma = false;
+
+                if (!this.Emitter.IsPrivateVarIntroduced)
+                {
+                    this.WriteNewLine();
+                    this.WriteNewLine();
+                    this.Write("var $_ = {};");
+                    this.Emitter.IsPrivateVarIntroduced = true;
+                }
+
+                var name = BridgeTypes.ToJsName(this.Emitter.TypeInfo.Type, this.Emitter, true);
+                var parts = name.Split(new[]{'.'}, StringSplitOptions.RemoveEmptyEntries);
+
+                if (!this.NsIsRegistered(parts))
+                {
+                    this.WriteNewLine();
+                    this.WriteNewLine();
+                    this.Write("Bridge.ns(");
+                    this.WriteScript(name);
+                    this.Write(", $_)");
+                    this.Emitter.RegisteredPrivateNamespaces.Add(parts);
+                }
+                
                 this.WriteNewLine();
                 this.WriteNewLine();
-                this.Write(BridgeTypes.ToJsName(this.Emitter.TypeInfo.Type, this.Emitter, true) + "$");
-                this.Write(" = ");
+                this.Write("Bridge.apply($_.");
+                this.Write(name);
+                this.Write(", ");
                 this.BeginBlock();
 
                 foreach (KeyValuePair<string, string> namedFunction in this.Emitter.NamedFunctions)
@@ -282,6 +327,7 @@ namespace Bridge.Translator
 
                 this.WriteNewLine();
                 this.EndBlock();
+                this.WriteCloseParentheses();
                 this.WriteSemiColon();
             }
         }

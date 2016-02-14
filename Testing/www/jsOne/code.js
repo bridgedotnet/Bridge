@@ -93,8 +93,8 @@
             Bridge.get(Bridge.Test.Assert).$false(Bridge.Linq.Enumerable.from(arr).contains(new Bridge.ClientTestOne.BridgeIssues.N772.C(4)));
         },
         allWithArrayItemFilterCallbackWorks: function () {
-            Bridge.get(Bridge.Test.Assert).$true(Bridge.Linq.Enumerable.from([1, 2, 3]).all(Bridge.ClientTestOne.BridgeIssues.N772$.f1));
-            Bridge.get(Bridge.Test.Assert).$false(Bridge.Linq.Enumerable.from([1, 2, 3]).all(Bridge.ClientTestOne.BridgeIssues.N772$.f2));
+            Bridge.get(Bridge.Test.Assert).$true(Bridge.Linq.Enumerable.from([1, 2, 3]).all($_.Bridge.ClientTestOne.BridgeIssues.N772.f1));
+            Bridge.get(Bridge.Test.Assert).$false(Bridge.Linq.Enumerable.from([1, 2, 3]).all($_.Bridge.ClientTestOne.BridgeIssues.N772.f2));
         },
         sliceWithoutEndWorks: function () {
             Bridge.get(Bridge.Test.Assert).areDeepEqual(["a", "b", "c", "d"].slice(2), ["c", "d"]);
@@ -136,8 +136,8 @@
             Bridge.get(Bridge.Test.Assert).areDeepEqual(arr, [2, 3, 1, 4, 3, 1]);
         },
         anyWithArrayItemFilterCallbackWorks: function () {
-            Bridge.get(Bridge.Test.Assert).$true(Bridge.Linq.Enumerable.from([1, 2, 3, 4]).any(Bridge.ClientTestOne.BridgeIssues.N772$.f3));
-            Bridge.get(Bridge.Test.Assert).$false(Bridge.Linq.Enumerable.from([1, 2, 3, 4]).any(Bridge.ClientTestOne.BridgeIssues.N772$.f4));
+            Bridge.get(Bridge.Test.Assert).$true(Bridge.Linq.Enumerable.from([1, 2, 3, 4]).any($_.Bridge.ClientTestOne.BridgeIssues.N772.f3));
+            Bridge.get(Bridge.Test.Assert).$false(Bridge.Linq.Enumerable.from([1, 2, 3, 4]).any($_.Bridge.ClientTestOne.BridgeIssues.N772.f4));
         },
         binarySearch1Works: function () {
             var arr = [1, 2, 3, 3, 4, 5];
@@ -324,7 +324,11 @@
         }
     });
     
-    Bridge.ClientTestOne.BridgeIssues.N772$ = {
+    var $_ = {};
+    
+    Bridge.ns("Bridge.ClientTestOne.BridgeIssues.N772", $_)
+    
+    Bridge.apply($_.Bridge.ClientTestOne.BridgeIssues.N772, {
         f1: function (x) {
             return x > 0;
         },
@@ -337,7 +341,7 @@
         f4: function (i) {
             return i > 5;
         }
-    };
+    });
     
     Bridge.define('Bridge.ClientTestOne.BridgeIssues.N772.C', {
         i: 0,

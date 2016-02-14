@@ -222,7 +222,7 @@ namespace Bridge.Translator
                 }
                 
                 this.Emitter.Output.Remove(savedPos, this.Emitter.Output.Length - savedPos);
-                this.Emitter.Output.Insert(savedPos, BridgeTypes.ToJsName(this.Emitter.TypeInfo.Type, this.Emitter, true) + "$." + name);
+                this.Emitter.Output.Insert(savedPos, "$_." + BridgeTypes.ToJsName(this.Emitter.TypeInfo.Type, this.Emitter, true) + "." + name);
                 this.Emitter.Level = oldLevel;
             }
 

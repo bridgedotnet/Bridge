@@ -106,6 +106,8 @@
                 if (typeof scope[nsParts[i]] === "undefined") {
                     scope[nsParts[i]] = { };
                 }
+
+                scope = scope[nsParts[i]];
             }
 
             return scope;
@@ -352,7 +354,7 @@
         },
 
 	    apply: function (obj, values) {
-	        var names = Bridge.getPropertyNames(values, false),
+	        var names = Bridge.getPropertyNames(values, true),
 	            i;
 
 	        for (i = 0; i < names.length; i++) {

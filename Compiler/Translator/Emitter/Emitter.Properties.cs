@@ -411,5 +411,20 @@ namespace Bridge.Translator
             get;
             set;
         }
+
+        public bool IsPrivateVarIntroduced
+        {
+            get;
+            set;
+        }
+
+        private IList<string[]> registeredPrivateNamespaces;
+        public IList<string[]> RegisteredPrivateNamespaces
+        {
+            get
+            {
+                return this.registeredPrivateNamespaces ?? (this.registeredPrivateNamespaces = new List<string[]>());
+            }
+        }
     }
 }
