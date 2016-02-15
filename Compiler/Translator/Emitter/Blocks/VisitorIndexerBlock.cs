@@ -47,7 +47,7 @@ namespace Bridge.Translator
                 this.Write((setter ? "set" : "get") + name);
                 this.WriteColon();
                 this.WriteFunction();
-                this.EmitMethodParameters(indexerDeclaration.Parameters, indexerDeclaration, setter);
+                this.EmitMethodParameters(indexerDeclaration.Parameters, null, indexerDeclaration, setter);
 
                 if (setter)
                 {

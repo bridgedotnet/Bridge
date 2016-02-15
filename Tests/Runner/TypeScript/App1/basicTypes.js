@@ -24,12 +24,12 @@
     });
     
     Bridge.define('BasicTypes.Color', {
+        $enum: true,
         statics: {
             red: 0,
             green: 1,
             blue: 2
-        },
-        $enum: true
+        }
     });
     
     Bridge.define('BasicTypes.Keywords', {

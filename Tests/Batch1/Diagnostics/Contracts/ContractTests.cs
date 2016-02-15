@@ -120,6 +120,7 @@ namespace Bridge.ClientTest.Diagnostics.Contracts
         [Test]
         public void ForAll()
         {
+            var c = this.Constructor;
             Assert.Throws(() => Contract.ForAll(2, 5, null), error => error is ArgumentNullException, "ArgumentNullException");
             AssertNoExceptions(() => Contract.ForAll(2, 5, s => s != 3));
             Assert.False(Contract.ForAll(2, 5, s => s != 3));

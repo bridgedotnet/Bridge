@@ -705,6 +705,7 @@
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <NuGetPackageSourcePath Include="$(SolutionDir).build\specs\Bridge.Dev.nuspec">
       <Path>$(SolutionDir).build\specs\Bridge.Dev.nuspec</Path>
+      <SubType>Designer</SubType>
     </NuGetPackageSourcePath>
   </ItemGroup>
   <Import Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " Project="$(SolutionDir)\.build\common\NuGet.Build.Package.targets" />

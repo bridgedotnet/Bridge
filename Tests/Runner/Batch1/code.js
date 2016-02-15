@@ -55,10 +55,8 @@
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge306Component$1', function (TProps) { return {
         statics: {
-            $new: function (TComponent) {
-                return Bridge.fn.bind(this, function (props) {
-                    return Bridge.getTypeName(props) + ":" + props;
-                });
+            $new: function (TComponent, props) {
+                return Bridge.getTypeName(props) + ":" + props;
             }
         }
     }; });
@@ -359,42 +357,6 @@
     });
     
     Bridge.define('Bridge.ClientTest.BasicCSharp.ClassA', {
-        statics: {
-            constructor: function () {
-                Bridge.get(Bridge.ClientTest.BasicCSharp.ClassA).staticString = "Defined string";
-                Bridge.get(Bridge.ClientTest.BasicCSharp.ClassA).staticInt = -340;
-            },
-            statitIntNotInitialized: 0,
-            statitStringNotInitialized: null,
-            staticInt: 0,
-            staticString: null,
-            CONST_CHAR: 81,
-            CONST_DECIMAL: Bridge.Decimal("3.123456789324324324"),
-            staticMethod1: function (i, s, d) {
-                Bridge.get(Bridge.ClientTest.BasicCSharp.ClassA).statitIntNotInitialized = i;
-                Bridge.get(Bridge.ClientTest.BasicCSharp.ClassA).statitStringNotInitialized = s;
-    
-                return Bridge.merge(new Bridge.ClientTest.BasicCSharp.ClassA("constructor"), {
-                    setDoubleA: d
-                } );
-            },
-            staticMethod2: function (p) {
-                if (p === void 0) { p = []; }
-                var i = Bridge.cast(p[0], Bridge.Int) + 1000;
-                var s = Bridge.cast(p[1], String);
-                var d = Bridge.cast(p[2], Number);
-    
-                return Bridge.get(Bridge.ClientTest.BasicCSharp.ClassA).staticMethod1(i, s, d);
-            },
-            tryParse: function (o, i) {
-                i.v = 3;
-    
-                return true;
-            },
-            getDefaultInt: function () {
-                return Bridge.getDefaultValue(Bridge.Int);
-            }
-        },
         data: null,
         config: {
             properties: {
@@ -494,6 +456,42 @@
             if (i === void 0) { i = -50; }
             if (k === void 0) { k = -60; }
             return i + k;
+        },
+        statics: {
+            constructor: function () {
+                Bridge.get(Bridge.ClientTest.BasicCSharp.ClassA).staticString = "Defined string";
+                Bridge.get(Bridge.ClientTest.BasicCSharp.ClassA).staticInt = -340;
+            },
+            statitIntNotInitialized: 0,
+            statitStringNotInitialized: null,
+            staticInt: 0,
+            staticString: null,
+            CONST_CHAR: 81,
+            CONST_DECIMAL: Bridge.Decimal("3.123456789324324324"),
+            staticMethod1: function (i, s, d) {
+                Bridge.get(Bridge.ClientTest.BasicCSharp.ClassA).statitIntNotInitialized = i;
+                Bridge.get(Bridge.ClientTest.BasicCSharp.ClassA).statitStringNotInitialized = s;
+    
+                return Bridge.merge(new Bridge.ClientTest.BasicCSharp.ClassA("constructor"), {
+                    setDoubleA: d
+                } );
+            },
+            staticMethod2: function (p) {
+                if (p === void 0) { p = []; }
+                var i = Bridge.cast(p[0], Bridge.Int) + 1000;
+                var s = Bridge.cast(p[1], String);
+                var d = Bridge.cast(p[2], Number);
+    
+                return Bridge.get(Bridge.ClientTest.BasicCSharp.ClassA).staticMethod1(i, s, d);
+            },
+            tryParse: function (o, i) {
+                i.v = 3;
+    
+                return true;
+            },
+            getDefaultInt: function () {
+                return Bridge.getDefaultValue(Bridge.Int);
+            }
         }
     });
     
@@ -518,21 +516,6 @@
     });
     
     Bridge.define('Bridge.ClientTest.BasicCSharp.Point', {
-        statics: {
-            constructor: function () {
-                Bridge.get(Bridge.ClientTest.BasicCSharp.Point).staticInt = 500;
-                Bridge.get(Bridge.ClientTest.BasicCSharp.Point).staticString = "Initialized";
-            },
-            statitIntNotInitialized: 0,
-            statitStringNotInitialized: null,
-            staticInt: 0,
-            staticString: null,
-            CONST_CHAR: 87,
-            test3: function () {
-                return Bridge.get(Bridge.ClientTest.BasicCSharp.Point).statitIntNotInitialized + Bridge.get(Bridge.ClientTest.BasicCSharp.Point).staticInt;
-            },
-            getDefaultValue: function () { return new Bridge.ClientTest.BasicCSharp.Point(); }
-        },
         x: 0,
         y: 0,
         constructor: function () {
@@ -563,13 +546,25 @@
             s.x = this.x;
             s.y = this.y;
             return s;
+        },
+        statics: {
+            constructor: function () {
+                Bridge.get(Bridge.ClientTest.BasicCSharp.Point).staticInt = 500;
+                Bridge.get(Bridge.ClientTest.BasicCSharp.Point).staticString = "Initialized";
+            },
+            statitIntNotInitialized: 0,
+            statitStringNotInitialized: null,
+            staticInt: 0,
+            staticString: null,
+            CONST_CHAR: 87,
+            test3: function () {
+                return Bridge.get(Bridge.ClientTest.BasicCSharp.Point).statitIntNotInitialized + Bridge.get(Bridge.ClientTest.BasicCSharp.Point).staticInt;
+            },
+            getDefaultValue: function () { return new Bridge.ClientTest.BasicCSharp.Point(); }
         }
     });
     
     Bridge.define('Bridge.ClientTest.BasicCSharp.Rectangle', {
-        statics: {
-            getDefaultValue: function () { return new Bridge.ClientTest.BasicCSharp.Rectangle(); }
-        },
         config: {
             init: function () {
                 this.l = new Bridge.ClientTest.BasicCSharp.Point();
@@ -608,19 +603,24 @@
             s.l = this.l;
             s.t = this.t;
             return s;
+        },
+        statics: {
+            getDefaultValue: function () { return new Bridge.ClientTest.BasicCSharp.Rectangle(); }
         }
     });
     
     Bridge.define('Bridge.ClientTest.BasicCSharp.TestEnum.Digits', {
+        $enum: true,
         statics: {
             zero: 0,
             one: 1,
             two: 2
-        },
-        $enum: true
+        }
     });
     
     Bridge.define('Bridge.ClientTest.BasicCSharp.TestEnum.Pets', {
+        $enum: true,
+        $flags: true,
         statics: {
             none: 0,
             dog: 1,
@@ -628,21 +628,20 @@
             bird: 4,
             rabbit: 8,
             other: 16
-        },
-        $enum: true,
-        $flags: true
+        }
     });
     
     Bridge.define('Bridge.ClientTest.BasicCSharp.TestEnum.Abc', {
+        $enum: true,
         statics: {
             a: -1,
             b: 0,
             c: 1
-        },
-        $enum: true
+        }
     });
     
     Bridge.define('Bridge.ClientTest.BasicCSharp.TestEnum.Pets1', {
+        $enum: true,
         statics: {
             none: 0,
             dog: 1,
@@ -650,8 +649,7 @@
             bird: 4,
             rabbit: 8,
             other: 16
-        },
-        $enum: true
+        }
     });
     
     Bridge.define('Bridge.ClientTest.BasicCSharp.TestOverloadInstanceMethods.Instance', {
@@ -755,9 +753,6 @@
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge069.Point69', {
-        statics: {
-            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge069.Point69(); }
-        },
         x: 0,
         y: 0,
         constructor$1: function (y1) {
@@ -783,6 +778,9 @@
             s.x = this.x;
             s.y = this.y;
             return s;
+        },
+        statics: {
+            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge069.Point69(); }
         }
     });
     
@@ -790,15 +788,24 @@
         statics: {
             number: 0,
             m1: function () {
-                (function () {
-                    Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge169).number = 1;
-                })();
+                ($_.Bridge.ClientTest.BridgeIssues.Bridge169.f1)();
             },
             m2: function () {
-                (function () {
-                    Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge169).number = 2;
-                })();
+                ($_.Bridge.ClientTest.BridgeIssues.Bridge169.f2)();
             }
+        }
+    });
+    
+    var $_ = {};
+    
+    Bridge.ns("Bridge.ClientTest.BridgeIssues.Bridge169", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.BridgeIssues.Bridge169, {
+        f1: function () {
+            Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge169).number = 1;
+        },
+        f2: function () {
+            Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge169).number = 2;
         }
     });
     
@@ -811,19 +818,19 @@
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge272.MyEnum', {
+        $enum: true,
         statics: {
             abc: 1,
             def: 2,
             ghi: 3
-        },
-        $enum: true
+        }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge277', {
+        $enum: true,
         statics: {
             $int: 0
-        },
-        $enum: true
+        }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge294', {
@@ -835,9 +842,7 @@
             return this.name;
         },
         getNameThroughGeneric: function (T) {
-            return Bridge.fn.bind(this, function () {
-                return this.name;
-            });
+            return this.name;
         }
     });
     
@@ -963,14 +968,6 @@
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge407', {
-        statics: {
-            op_Addition: function (x, y) {
-                return Bridge.merge(new Bridge.ClientTest.BridgeIssues.Bridge407(), {
-                    setA: x.getA() + y.getA()
-                } );
-            },
-            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge407(); }
-        },
         config: {
             properties: {
                 A: 0
@@ -993,6 +990,14 @@
             var s = to || new Bridge.ClientTest.BridgeIssues.Bridge407();
             s.A = this.A;
             return s;
+        },
+        statics: {
+            op_Addition: function (x, y) {
+                return Bridge.merge(new Bridge.ClientTest.BridgeIssues.Bridge407(), {
+                    setA: x.getA() + y.getA()
+                } );
+            },
+            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge407(); }
         }
     });
     
@@ -1008,12 +1013,12 @@
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge422', {
+        $enum: true,
         statics: {
             first: 0,
             next: 100,
             afterNext: 101
-        },
-        $enum: true
+        }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge439', {
@@ -1055,11 +1060,6 @@
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge470', {
         inherits: function () { return [Bridge.IEqualityComparer$1(Bridge.ClientTest.BridgeIssues.Bridge470)]; },
-        statics: {
-            isOdd: function (value) {
-                return value % 2 !== 0;
-            }
-        },
         config: {
             properties: {
                 Data: 0
@@ -1070,6 +1070,11 @@
         },
         getHashCode: function (obj) {
             return Bridge.getHashCode(obj.getData());
+        },
+        statics: {
+            isOdd: function (value) {
+                return value % 2 !== 0;
+            }
         }
     });
     
@@ -1092,16 +1097,23 @@
             }
         },
         fire: function () {
-            var getEvt = function (s) {
-                return s.Fired;
-            };
+            var getEvt = $_.Bridge.ClientTest.BridgeIssues.Bridge520.Source.f1;
             var evt = getEvt(this);
     
-            evt = Bridge.fn.combine(evt, Bridge.fn.bind(this, function (sender, args) {
-                this.setCounter(this.getCounter()+1);
-            }));
+            evt = Bridge.fn.combine(evt, Bridge.fn.bind(this, $_.Bridge.ClientTest.BridgeIssues.Bridge520.Source.f2));
     
             evt(this, new Object());
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.BridgeIssues.Bridge520.Source", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.BridgeIssues.Bridge520.Source, {
+        f1: function (s) {
+            return s.Fired;
+        },
+        f2: function (sender, args) {
+            this.setCounter(this.getCounter()+1);
         }
     });
     
@@ -1159,16 +1171,13 @@
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge577.Bridge577UnitA', {
+        $clone: function (to) { return this; },
         statics: {
             getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge577.Bridge577UnitA(); }
-        },
-        $clone: function (to) { return this; }
+        }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge577.Bridge577UnitB', {
-        statics: {
-            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge577.Bridge577UnitB(); }
-        },
         config: {
             properties: {
                 Number: 0
@@ -1191,17 +1200,27 @@
             var s = to || new Bridge.ClientTest.BridgeIssues.Bridge577.Bridge577UnitB();
             s.Number = this.Number;
             return s;
+        },
+        statics: {
+            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge577.Bridge577UnitB(); }
         }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge586A', {
         statics: {
     
-        },
-    
+        }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge588C.C2', {
+        config: {
+            properties: {
+                Name: null
+            }
+        },
+        constructor: function (name) {
+            this.setName(name);
+        },
         statics: {
             config: {
                 init: function () {
@@ -1211,14 +1230,6 @@
             getDefault: function () {
                 return Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge588C.C2)._default;
             }
-        },
-        config: {
-            properties: {
-                Name: null
-            }
-        },
-        constructor: function (name) {
-            this.setName(name);
         }
     });
     
@@ -1244,11 +1255,6 @@
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge595B', {
-        statics: {
-            render: function (buffer) {
-                buffer.append("Render1");
-            }
-        },
         buffer: null,
         constructor: function (buffer) {
             this.buffer = buffer;
@@ -1256,6 +1262,11 @@
         render: function () {
             this.buffer.append("Render0");
             Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge595B).render(this.buffer);
+        },
+        statics: {
+            render: function (buffer) {
+                buffer.append("Render1");
+            }
         }
     });
     
@@ -1263,29 +1274,28 @@
         _something: "HI!",
         get: function () {
             var items = ["a"];
-            var mappedItemsWithoutInstanceMemberAccess = Bridge.Linq.Enumerable.from(items).select(function (value, index) {
-                return index + ":" + value;
-            }).toArray();
+            var mappedItemsWithoutInstanceMemberAccess = Bridge.Linq.Enumerable.from(items).select($_.Bridge.ClientTest.BridgeIssues.Bridge597A.f1).toArray();
             return mappedItemsWithoutInstanceMemberAccess[0];
         },
         getWithMember: function () {
             var items = ["a"];
-            var mappedItemsWithInstanceMemberAccess = Bridge.Linq.Enumerable.from(items).select(Bridge.fn.bind(this, function (value, index) {
-                return this._something + ":" + index + ":" + value;
-            })).toArray();
+            var mappedItemsWithInstanceMemberAccess = Bridge.Linq.Enumerable.from(items).select(Bridge.fn.bind(this, $_.Bridge.ClientTest.BridgeIssues.Bridge597A.f2)).toArray();
             return mappedItemsWithInstanceMemberAccess[0];
         }
     });
     
-    Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge603A', {
-        statics: {
-            op_Implicit: function (value) {
-                var $t;
-                value = ($t = value, Bridge.hasValue($t) ? $t : "[Null]");
-                return new Bridge.ClientTest.BridgeIssues.Bridge603A("constructor$1", value);
-            },
-            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge603A(); }
+    Bridge.ns("Bridge.ClientTest.BridgeIssues.Bridge597A", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.BridgeIssues.Bridge597A, {
+        f1: function (value, index) {
+            return index + ":" + value;
         },
+        f2: function (value, index) {
+            return this._something + ":" + index + ":" + value;
+        }
+    });
+    
+    Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge603A', {
         value: null,
         constructor$1: function (value) {
             this.value = value;
@@ -1307,6 +1317,14 @@
             var s = to || new Bridge.ClientTest.BridgeIssues.Bridge603A();
             s.value = this.value;
             return s;
+        },
+        statics: {
+            op_Implicit: function (value) {
+                var $t;
+                value = ($t = value, Bridge.hasValue($t) ? $t : "[Null]");
+                return new Bridge.ClientTest.BridgeIssues.Bridge603A("constructor$1", value);
+            },
+            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge603A(); }
         }
     });
     
@@ -1374,9 +1392,6 @@
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge608A', {
-        statics: {
-            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge608A(); }
-        },
         field: null,
         constructor$1: function (field) {
             this.field = field;
@@ -1396,6 +1411,9 @@
             var s = to || new Bridge.ClientTest.BridgeIssues.Bridge608A();
             s.field = this.field;
             return s;
+        },
+        statics: {
+            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge608A(); }
         }
     });
     
@@ -1503,11 +1521,6 @@
     }; });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge648A', {
-        statics: {
-            op_Implicit: function (value) {
-                return value.getValue();
-            }
-        },
         config: {
             properties: {
                 Value: null
@@ -1515,6 +1528,11 @@
         },
         constructor: function (value) {
             this.setValue(value);
+        },
+        statics: {
+            op_Implicit: function (value) {
+                return value.getValue();
+            }
         }
     });
     
@@ -1563,17 +1581,6 @@
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge660Optional$1', function (T) { return {
-        statics: {
-            config: {
-                init: function () {
-                    this._missing = new Bridge.ClientTest.BridgeIssues.Bridge660Optional$1(T)("constructor$2", Bridge.getDefaultValue(T), false);
-                }
-            },
-            getMissing: function () {
-                return Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge660Optional$1(T))._missing.$clone();
-            },
-            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge660Optional$1(T)(); }
-        },
         value: null,
         isDefined: false,
         constructor$1: function (value) {
@@ -1606,6 +1613,17 @@
             s.value = this.value;
             s.isDefined = this.isDefined;
             return s;
+        },
+        statics: {
+            config: {
+                init: function () {
+                    this._missing = new Bridge.ClientTest.BridgeIssues.Bridge660Optional$1(T)("constructor$2", Bridge.getDefaultValue(T), false);
+                }
+            },
+            getMissing: function () {
+                return Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge660Optional$1(T))._missing.$clone();
+            },
+            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge660Optional$1(T)(); }
         }
     }; });
     
@@ -1620,11 +1638,6 @@
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge687A', {
-        statics: {
-            op_Implicit: function (value) {
-                return value.getValue();
-            }
-        },
         config: {
             properties: {
                 Value: null
@@ -1632,6 +1645,11 @@
         },
         constructor: function (value) {
             this.setValue(value);
+        },
+        statics: {
+            op_Implicit: function (value) {
+                return value.getValue();
+            }
         }
     });
     
@@ -1800,16 +1818,13 @@
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge692.A', {
+        $clone: function (to) { return this; },
         statics: {
             getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge692.A(); }
-        },
-        $clone: function (to) { return this; }
+        }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge692.B1', {
-        statics: {
-            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge692.B1(); }
-        },
         field1: 0,
         constructor$1: function (f) {
             this.field1 = f;
@@ -1831,25 +1846,25 @@
             var s = to || new Bridge.ClientTest.BridgeIssues.Bridge692.B1();
             s.field1 = this.field1;
             return s;
+        },
+        statics: {
+            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge692.B1(); }
         }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge692.B3', {
-        statics: {
-            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge692.B3(); }
-        },
         constructor: function () {
         },
         getProp1: function () {
             return 0;
         },
-        $clone: function (to) { return this; }
+        $clone: function (to) { return this; },
+        statics: {
+            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge692.B3(); }
+        }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge692.C1', {
-        statics: {
-            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge692.C1(); }
-        },
         field1: 0,
         constructor$1: function (i) {
             this.field1 = i;
@@ -1874,13 +1889,13 @@
             var s = to || new Bridge.ClientTest.BridgeIssues.Bridge692.C1();
             s.field1 = this.field1;
             return s;
+        },
+        statics: {
+            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge692.C1(); }
         }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge692.C2', {
-        statics: {
-            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge692.C2(); }
-        },
         field1: 0,
         constructor$1: function (i) {
             this.field1 = i;
@@ -1908,13 +1923,13 @@
             var s = to || new Bridge.ClientTest.BridgeIssues.Bridge692.C2();
             s.field1 = this.field1;
             return s;
+        },
+        statics: {
+            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge692.C2(); }
         }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge692.C3', {
-        statics: {
-            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge692.C3(); }
-        },
         config: {
             properties: {
                 Prop1: 0
@@ -1937,13 +1952,13 @@
             var s = to || new Bridge.ClientTest.BridgeIssues.Bridge692.C3();
             s.Prop1 = this.Prop1;
             return s;
+        },
+        statics: {
+            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge692.C3(); }
         }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge692.B2', {
-        statics: {
-            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge692.B2(); }
-        },
         field1: 0,
         constructor$1: function (f) {
             this.field1 = f;
@@ -1968,20 +1983,20 @@
             var s = to || new Bridge.ClientTest.BridgeIssues.Bridge692.B2();
             s.field1 = this.field1;
             return s;
+        },
+        statics: {
+            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge692.B2(); }
         }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge762A', {
+        $clone: function (to) { return this; },
         statics: {
             getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge762A(); }
-        },
-        $clone: function (to) { return this; }
+        }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge762B', {
-        statics: {
-            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge762B(); }
-        },
         config: {
             properties: {
                 Data: 0
@@ -2004,6 +2019,9 @@
             var s = to || new Bridge.ClientTest.BridgeIssues.Bridge762B();
             s.Data = this.Data;
             return s;
+        },
+        statics: {
+            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge762B(); }
         }
     });
     
@@ -2021,9 +2039,6 @@
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge785.DataStruct', {
-        statics: {
-            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge785.DataStruct(); }
-        },
         config: {
             properties: {
                 Value: 0
@@ -2051,13 +2066,13 @@
             var s = to || new Bridge.ClientTest.BridgeIssues.Bridge785.DataStruct();
             s.Value = this.Value;
             return s;
+        },
+        statics: {
+            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge785.DataStruct(); }
         }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge789A', {
-        statics: {
-            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge789A(); }
-        },
         field1: 0,
         constructor: function () {
         },
@@ -2076,19 +2091,13 @@
             var s = to || new Bridge.ClientTest.BridgeIssues.Bridge789A();
             s.field1 = this.field1;
             return s;
+        },
+        statics: {
+            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge789A(); }
         }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge795A', {
-        statics: {
-            op_Equality: function (x, y) {
-                return x.equals(y.$clone());
-            },
-            op_Inequality: function (x, y) {
-                return !(Bridge.ClientTest.BridgeIssues.Bridge795A.op_Equality(x, y));
-            },
-            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge795A(); }
-        },
         config: {
             properties: {
                 Value: 0
@@ -2114,31 +2123,19 @@
             var s = to || new Bridge.ClientTest.BridgeIssues.Bridge795A();
             s.Value = this.Value;
             return s;
+        },
+        statics: {
+            op_Equality: function (x, y) {
+                return x.equals(y.$clone());
+            },
+            op_Inequality: function (x, y) {
+                return !(Bridge.ClientTest.BridgeIssues.Bridge795A.op_Equality(x, y));
+            },
+            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge795A(); }
         }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge795B', {
-        statics: {
-            op_Equality: function (x, y) {
-                return x.getValue() === y.getValue();
-            },
-            op_Inequality: function (x, y) {
-                return !(Bridge.ClientTest.BridgeIssues.Bridge795B.op_Equality(x, y));
-            },
-            op_GreaterThanOrEqual: function (x, y) {
-                return x.getValue() >= y.getValue();
-            },
-            op_GreaterThan: function (x, y) {
-                return x.getValue() > y.getValue();
-            },
-            op_LessThanOrEqual: function (x, y) {
-                return x.getValue() <= y.getValue();
-            },
-            op_LessThan: function (x, y) {
-                return x.getValue() < y.getValue();
-            },
-            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge795B(); }
-        },
         config: {
             properties: {
                 Value: 0
@@ -2165,6 +2162,27 @@
             var s = to || new Bridge.ClientTest.BridgeIssues.Bridge795B();
             s.Value = this.Value;
             return s;
+        },
+        statics: {
+            op_Equality: function (x, y) {
+                return x.getValue() === y.getValue();
+            },
+            op_Inequality: function (x, y) {
+                return !(Bridge.ClientTest.BridgeIssues.Bridge795B.op_Equality(x, y));
+            },
+            op_GreaterThanOrEqual: function (x, y) {
+                return x.getValue() >= y.getValue();
+            },
+            op_GreaterThan: function (x, y) {
+                return x.getValue() > y.getValue();
+            },
+            op_LessThanOrEqual: function (x, y) {
+                return x.getValue() <= y.getValue();
+            },
+            op_LessThan: function (x, y) {
+                return x.getValue() < y.getValue();
+            },
+            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge795B(); }
         }
     });
     
@@ -2185,9 +2203,6 @@
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge815.B', {
-        statics: {
-            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge815.B(); }
-        },
         field: 0,
         constructor$1: function (i) {
             this.field = i;
@@ -2209,10 +2224,17 @@
             var s = to || new Bridge.ClientTest.BridgeIssues.Bridge815.B();
             s.field = this.field;
             return s;
+        },
+        statics: {
+            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge815.B(); }
         }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge826A', {
+        _val: Bridge.Decimal(0.0),
+        constructor: function (val) {
+            this._val  = val;
+        },
         statics: {
             op_Implicit: function (val) {
                 return new Bridge.ClientTest.BridgeIssues.Bridge826A(val);
@@ -2220,14 +2242,14 @@
             op_Implicit$1: function (val) {
                 return Bridge.hasValue(val) ? val._val : Bridge.Decimal(0);
             }
-        },
-        _val: Bridge.Decimal(0.0),
-        constructor: function (val) {
-            this._val  = val;
         }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge826B', {
+        _val: 0,
+        constructor: function (val) {
+            this._val = val;
+        },
         statics: {
             op_Implicit: function (val) {
                 return new Bridge.ClientTest.BridgeIssues.Bridge826B(val);
@@ -2235,18 +2257,14 @@
             op_Implicit$1: function (val) {
                 return Bridge.hasValue(val) ? val._val : 0;
             }
-        },
-        _val: 0,
-        constructor: function (val) {
-            this._val = val;
         }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge835.Dot', {
+        $clone: function (to) { return this; },
         statics: {
             getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge835.Dot(); }
-        },
-        $clone: function (to) { return this; }
+        }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge849A', {
@@ -2259,36 +2277,36 @@
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge857A', {
+        $enum: true,
         statics: {
             all: 4294967295
-        },
-        $enum: true
+        }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge857B', {
+        $enum: true,
         statics: {
             all: 4294967295
-        },
-        $enum: true
+        }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge857C', {
+        $enum: true,
         statics: {
             all1: 0,
             all2: 1,
             all: 4294967295
-        },
-        $enum: true
+        }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge857D', {
+        $enum: true,
+        $flags: true,
         statics: {
             all1: 1,
             all2: 2,
             all: 4294967295
-        },
-        $enum: true,
-        $flags: true
+        }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge861A', {
@@ -2306,10 +2324,10 @@
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge881A', {
+        $enum: true,
         statics: {
             $name: 0
-        },
-        $enum: true
+        }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge882_Static.Bridge882_A_Static', {
@@ -2336,21 +2354,21 @@
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge893A', {
+        $enum: true,
         statics: {
             testA1: 0,
             testA2: 1
-        },
-        $enum: true
+        }
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge893B', {
+        $enum: true,
+        $flags: true,
         statics: {
             testB1: 1,
             testB2: 2,
             testB3: 4
-        },
-        $enum: true,
-        $flags: true
+        }
     });
     
     Bridge.define('Bridge.ClientTest.Collections.Generic.ComparerTests.C', {
@@ -2664,54 +2682,6 @@
     });
     
     Bridge.define('Bridge.ClientTest.DecimalMathTests.Logger', {
-        statics: {
-            convertParameters: function (parameters) {
-                if (parameters === void 0) { parameters = []; }
-                var result = Bridge.Array.init(parameters.length + 1, null);
-    
-                for (var i = 0; i < parameters.length; i++) {
-                    if (i === 0) {
-                        var d = Bridge.cast(parameters[0], Bridge.Decimal, true);
-                        result[0] = Bridge.Nullable.hasValue(d) ? "HasDotNetDiff" : "NoDotNetDiff";
-                        result[1] = Bridge.Nullable.hasValue(d) ? Bridge.Int.format(d, 'G') + "m" : "null";
-    
-                        continue;
-                    }
-    
-                    var o = parameters[i];
-                    var j = i + 1;
-                    if (Bridge.is(o, Bridge.Decimal)) {
-                        var d1 = Bridge.cast(o, Bridge.Decimal);
-                        if (d1.equalsT(Bridge.get(Bridge.ClientTest.DecimalMathTests).maxValue)) {
-                            result[j] = "DecimalMathTests.MaxValue";
-                        }
-                        else  {
-                            if (d1.equalsT(Bridge.get(Bridge.ClientTest.DecimalMathTests).minValue)) {
-                                result[j] = "DecimalMathTests.MinValue";
-                            }
-                            else  {
-                                if (d1.equalsT(Bridge.Decimal.MinusOne)) {
-                                    result[j] = "decimal.MinusOne";
-                                }
-                                else  {
-                                    if (d1.equalsT(Bridge.Decimal.One)) {
-                                        result[j] = "decimal.One";
-                                    }
-                                    else  {
-                                        result[j] = Bridge.Int.format(d1, 'G') + "m";
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    else  {
-                        result[j] = o;
-                    }
-                }
-    
-                return result;
-            }
-        },
         config: {
             properties: {
                 Text: null
@@ -2771,6 +2741,54 @@
             sb.append("};");
     
             console.log(sb.toString());
+        },
+        statics: {
+            convertParameters: function (parameters) {
+                if (parameters === void 0) { parameters = []; }
+                var result = Bridge.Array.init(parameters.length + 1, null);
+    
+                for (var i = 0; i < parameters.length; i++) {
+                    if (i === 0) {
+                        var d = Bridge.cast(parameters[0], Bridge.Decimal, true);
+                        result[0] = Bridge.Nullable.hasValue(d) ? "HasDotNetDiff" : "NoDotNetDiff";
+                        result[1] = Bridge.Nullable.hasValue(d) ? Bridge.Int.format(d, 'G') + "m" : "null";
+    
+                        continue;
+                    }
+    
+                    var o = parameters[i];
+                    var j = i + 1;
+                    if (Bridge.is(o, Bridge.Decimal)) {
+                        var d1 = Bridge.cast(o, Bridge.Decimal);
+                        if (d1.equalsT(Bridge.get(Bridge.ClientTest.DecimalMathTests).maxValue)) {
+                            result[j] = "DecimalMathTests.MaxValue";
+                        }
+                        else  {
+                            if (d1.equalsT(Bridge.get(Bridge.ClientTest.DecimalMathTests).minValue)) {
+                                result[j] = "DecimalMathTests.MinValue";
+                            }
+                            else  {
+                                if (d1.equalsT(Bridge.Decimal.MinusOne)) {
+                                    result[j] = "decimal.MinusOne";
+                                }
+                                else  {
+                                    if (d1.equalsT(Bridge.Decimal.One)) {
+                                        result[j] = "decimal.One";
+                                    }
+                                    else  {
+                                        result[j] = Bridge.Int.format(d1, 'G') + "m";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else  {
+                        result[j] = o;
+                    }
+                }
+    
+                return result;
+            }
         }
     });
     
@@ -2833,6 +2851,12 @@
     });
     
     Bridge.define('Bridge.ClientTest.Utilities.Group', {
+        config: {
+            properties: {
+                Name: null,
+                Limit: 0
+            }
+        },
         statics: {
             getGroups: function () {
                 var groups = new Bridge.List$1(Bridge.ClientTest.Utilities.Group)();
@@ -2855,16 +2879,19 @@
     
                 return groups;
             }
-        },
-        config: {
-            properties: {
-                Name: null,
-                Limit: 0
-            }
         }
     });
     
     Bridge.define('Bridge.ClientTest.Utilities.Person', {
+        config: {
+            properties: {
+                ID: 0,
+                Name: null,
+                City: null,
+                Count: 0,
+                Group: null
+            }
+        },
         statics: {
             getPersons: function () {
                 var persons = new Bridge.List$1(Bridge.ClientTest.Utilities.Person)();
@@ -2928,15 +2955,6 @@
     
                 return persons;
             }
-        },
-        config: {
-            properties: {
-                ID: 0,
-                Name: null,
-                City: null,
-                Count: 0,
-                Group: null
-            }
         }
     });
     
@@ -2964,6 +2982,21 @@
     });
     
     Bridge.define('Bridge.ClientTest.PropertyAccessorTests.C1', {
+        f1: 0,
+        f2: 0,
+        f3: 0,
+        getP1: function () {
+            return this.f1 + 1;
+        },
+        setP1: function (value) {
+            this.f1 = value - 1;
+        },
+        getP2: function () {
+            return this.f2 + 1;
+        },
+        setP3: function (value) {
+            this.f3 = value - 1;
+        },
         statics: {
             fS1: 0,
             fS2: 0,
@@ -2980,10 +3013,13 @@
             setPS3: function (value) {
                 Bridge.get(Bridge.ClientTest.PropertyAccessorTests.C1).fS3 = value - 1;
             }
-        },
-        f1: 0,
-        f2: 0,
-        f3: 0,
+        }
+    });
+    
+    Bridge.define('Bridge.ClientTest.PropertyAccessorTests.C2$1', function (T) { return {
+        f1: null,
+        f2: null,
+        f3: null,
         getP1: function () {
             return this.f1 + 1;
         },
@@ -2995,10 +3031,7 @@
         },
         setP3: function (value) {
             this.f3 = value - 1;
-        }
-    });
-    
-    Bridge.define('Bridge.ClientTest.PropertyAccessorTests.C2$1', function (T) { return {
+        },
         statics: {
             fS1: null,
             fS2: null,
@@ -3015,21 +3048,6 @@
             setPS3: function (value) {
                 Bridge.get(Bridge.ClientTest.PropertyAccessorTests.C2$1(T)).fS3 = value - 1;
             }
-        },
-        f1: null,
-        f2: null,
-        f3: null,
-        getP1: function () {
-            return this.f1 + 1;
-        },
-        setP1: function (value) {
-            this.f1 = value - 1;
-        },
-        getP2: function () {
-            return this.f2 + 1;
-        },
-        setP3: function (value) {
-            this.f3 = value - 1;
         }
     }; });
     
@@ -3048,23 +3066,23 @@
     });
     
     Bridge.define('Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum', {
+        $enum: true,
+        $flags: true,
         statics: {
             none: 0,
             firstValue: 1,
             secondValue: 2,
             thirdValue: 4
-        },
-        $enum: true,
-        $flags: true
+        }
     });
     
     Bridge.define('Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum', {
+        $enum: true,
         statics: {
             firstValue: 0,
             secondValue: 1,
             thirdValue: 2
-        },
-        $enum: true
+        }
     });
     
     Bridge.define('Bridge.ClientTest.SimpleTypes.StringTests.MyEnumerable$1', function (T) { return {
@@ -3108,13 +3126,7 @@
         constructor: function () {
             this.setThens(new Bridge.List$1(Bridge.ClientTest.Threading.PromiseTests.SimplePromise.A)());
     
-            this.doThen = Bridge.fn.bind(this, function (f, e, p) {
-                this.getThens().add(Bridge.merge(new Bridge.ClientTest.Threading.PromiseTests.SimplePromise.A(), {
-                    setFilled: f,
-                    setError: e,
-                    setProgress: p
-                } ));
-            });
+            this.doThen = Bridge.fn.bind(this, $_.Bridge.ClientTest.Threading.PromiseTests.SimplePromise.f1);
         },
         then: function (fulfilledHandler, errorHandler, progressHandler) {
             if (errorHandler === void 0) { errorHandler = null; }
@@ -3162,6 +3174,18 @@
         }
     });
     
+    Bridge.ns("Bridge.ClientTest.Threading.PromiseTests.SimplePromise", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.Threading.PromiseTests.SimplePromise, {
+        f1: function (f, e, p) {
+            this.getThens().add(Bridge.merge(new Bridge.ClientTest.Threading.PromiseTests.SimplePromise.A(), {
+                setFilled: f,
+                setError: e,
+                setProgress: p
+            } ));
+        }
+    });
+    
     Bridge.define('Bridge.ClientTest.Threading.PromiseTests.SimplePromise.A', {
         config: {
             properties: {
@@ -3173,11 +3197,11 @@
     });
     
     Bridge.define('Bridge.ClientTest.Threading.PromiseTests.SimplePromise.Which', {
+        $enum: true,
         statics: {
             resolve: 0,
             reject: 1
-        },
-        $enum: true
+        }
     });
     
     Bridge.define('Bridge.ClientTest.BasicCSharp.TestAbstractClass.B', {
@@ -3302,7 +3326,7 @@
         inherits: [Bridge.ClientTest.BridgeIssues.Bridge306Component$1(Bridge.ClientTest.BridgeIssues.Bridge306A.Props)],
         statics: {
             $new: function (props) {
-                return Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge306Component$1(Bridge.ClientTest.BridgeIssues.Bridge306A.Props)).$new(Bridge.ClientTest.BridgeIssues.Bridge306A)(props);
+                return Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge306Component$1(Bridge.ClientTest.BridgeIssues.Bridge306A.Props)).$new(Bridge.ClientTest.BridgeIssues.Bridge306A, props);
             }
         }
     });
@@ -3311,7 +3335,7 @@
         inherits: [Bridge.ClientTest.BridgeIssues.Bridge306Component$1(Bridge.ClientTest.BridgeIssues.Bridge306B.Props)],
         statics: {
             $new: function (props) {
-                return Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge306Component$1(Bridge.ClientTest.BridgeIssues.Bridge306B.Props)).$new(Bridge.ClientTest.BridgeIssues.Bridge306B)(props);
+                return Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge306Component$1(Bridge.ClientTest.BridgeIssues.Bridge306B.Props)).$new(Bridge.ClientTest.BridgeIssues.Bridge306B, props);
             }
         }
     });
@@ -3348,6 +3372,22 @@
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge537B', {
         inherits: [Bridge.IEnumerable$1(Bridge.ClientTest.BridgeIssues.Bridge537A)],
+        list: null,
+        constructor: function () {
+            this.list = new Bridge.List$1(Bridge.ClientTest.BridgeIssues.Bridge537A)();
+        },
+        add: function (value) {
+            this.list.add(value);
+        },
+        getEnumerator$1: function () {
+            return this.list.getEnumerator();
+        },
+        getEnumerator: function () {
+            return this.list.getEnumerator();
+        },
+        getCount: function () {
+            return this.list.getCount();
+        },
         statics: {
             getCount: function (l) {
                 return l.list.getCount();
@@ -3373,22 +3413,6 @@
     
                 return Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge537B).getCount(l);
             }
-        },
-        list: null,
-        constructor: function () {
-            this.list = new Bridge.List$1(Bridge.ClientTest.BridgeIssues.Bridge537A)();
-        },
-        add: function (value) {
-            this.list.add(value);
-        },
-        getEnumerator$1: function () {
-            return this.list.getEnumerator();
-        },
-        getEnumerator: function () {
-            return this.list.getEnumerator();
-        },
-        getCount: function () {
-            return this.list.getCount();
         }
     });
     
@@ -3612,12 +3636,8 @@
             Bridge.get(Bridge.Test.Assert).$false(Bridge.Linq.Enumerable.from(arr).contains(new Bridge.ClientTest.ArrayTests.C(4)));
         },
         allWithArrayItemFilterCallbackWorks: function () {
-            Bridge.get(Bridge.Test.Assert).$true(Bridge.Linq.Enumerable.from([1, 2, 3]).all(function (x) {
-                return x > 0;
-            }));
-            Bridge.get(Bridge.Test.Assert).$false(Bridge.Linq.Enumerable.from([1, 2, 3]).all(function (x) {
-                return x > 1;
-            }));
+            Bridge.get(Bridge.Test.Assert).$true(Bridge.Linq.Enumerable.from([1, 2, 3]).all($_.Bridge.ClientTest.ArrayTests.f1));
+            Bridge.get(Bridge.Test.Assert).$false(Bridge.Linq.Enumerable.from([1, 2, 3]).all($_.Bridge.ClientTest.ArrayTests.f2));
         },
         sliceWithoutEndWorks: function () {
             Bridge.get(Bridge.Test.Assert).areDeepEqual(["c", "d"], ["a", "b", "c", "d"].slice(2));
@@ -3659,12 +3679,8 @@
             Bridge.get(Bridge.Test.Assert).areDeepEqual([2, 3, 1, 4, 3, 1], arr);
         },
         anyWithArrayItemFilterCallbackWorks: function () {
-            Bridge.get(Bridge.Test.Assert).$true(Bridge.Linq.Enumerable.from([1, 2, 3, 4]).any(function (i) {
-                return i > 1;
-            }));
-            Bridge.get(Bridge.Test.Assert).$false(Bridge.Linq.Enumerable.from([1, 2, 3, 4]).any(function (i) {
-                return i > 5;
-            }));
+            Bridge.get(Bridge.Test.Assert).$true(Bridge.Linq.Enumerable.from([1, 2, 3, 4]).any($_.Bridge.ClientTest.ArrayTests.f3));
+            Bridge.get(Bridge.Test.Assert).$false(Bridge.Linq.Enumerable.from([1, 2, 3, 4]).any($_.Bridge.ClientTest.ArrayTests.f4));
         },
         binarySearch1Works: function () {
             var arr = [1, 2, 3, 3, 4, 5];
@@ -3805,6 +3821,23 @@
         }
     });
     
+    Bridge.ns("Bridge.ClientTest.ArrayTests", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.ArrayTests, {
+        f1: function (x) {
+            return x > 0;
+        },
+        f2: function (x) {
+            return x > 1;
+        },
+        f3: function (i) {
+            return i > 1;
+        },
+        f4: function (i) {
+            return i > 5;
+        }
+    });
+    
     Bridge.define('Bridge.ClientTest.BasicCSharp.TestEnum', {
         statics: {
             testParse: function () {
@@ -3814,18 +3847,14 @@
                 Bridge.get(Bridge.Test.Assert).areEqual$1(3, Bridge.Enum.parse(Bridge.ClientTest.BasicCSharp.TestEnum.Pets, "Dog, Cat"), "Parse Dog, Cat");
                 Bridge.get(Bridge.Test.Assert).areEqual$1(14, Bridge.Enum.parse(Bridge.ClientTest.BasicCSharp.TestEnum.Pets, "Bird, Cat, Rabbit"), "Parse Bird, Cat, Rabbit");
     
-                Bridge.get(Bridge.Test.Assert).throws$5(function () {
-                    var d = Bridge.Enum.parse(Bridge.ClientTest.BasicCSharp.TestEnum.Digits, "ONE");
-                }, "Parse ONE");
+                Bridge.get(Bridge.Test.Assert).throws$5($_.Bridge.ClientTest.BasicCSharp.TestEnum.f1, "Parse ONE");
             },
             testParseIgnoreCase: function () {
                 Bridge.get(Bridge.Test.Assert).areEqual$1(Bridge.ClientTest.BasicCSharp.TestEnum.Digits.zero, Bridge.Enum.parse(Bridge.ClientTest.BasicCSharp.TestEnum.Digits, "zero", true), "Parse Digits.Zero");
                 Bridge.get(Bridge.Test.Assert).areEqual$1(Bridge.ClientTest.BasicCSharp.TestEnum.Digits.one, Bridge.Enum.parse(Bridge.ClientTest.BasicCSharp.TestEnum.Digits, "oNe", true), "Parse Digits.One");
                 Bridge.get(Bridge.Test.Assert).areEqual$1(Bridge.ClientTest.BasicCSharp.TestEnum.Digits.two, Bridge.Enum.parse(Bridge.ClientTest.BasicCSharp.TestEnum.Digits, "TWO", true), "Parse Digits.Two");
     
-                Bridge.get(Bridge.Test.Assert).throws$5(function () {
-                    var d = Bridge.Enum.parse(Bridge.ClientTest.BasicCSharp.TestEnum.Digits, "ONN", true);
-                }, "Parse ONN");
+                Bridge.get(Bridge.Test.Assert).throws$5($_.Bridge.ClientTest.BasicCSharp.TestEnum.f2, "Parse ONN");
             },
             testToString: function () {
                 Bridge.get(Bridge.Test.Assert).areEqual$1("Zero", Bridge.Enum.toString(Bridge.ClientTest.BasicCSharp.TestEnum.Digits, Bridge.ClientTest.BasicCSharp.TestEnum.Digits.zero), "ToString Digits.Zero");
@@ -3911,6 +3940,17 @@
                 Bridge.get(Bridge.Test.Assert).areEqual(14, outPets.v);
                 Bridge.get(Bridge.Test.Assert).areEqual$1(false, Bridge.Enum.tryParse(Bridge.ClientTest.BasicCSharp.TestEnum.Digits, "ONE", outVar), "TryParse ONE");
             }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.BasicCSharp.TestEnum", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.BasicCSharp.TestEnum, {
+        f1: function () {
+            var d = Bridge.Enum.parse(Bridge.ClientTest.BasicCSharp.TestEnum.Digits, "ONE");
+        },
+        f2: function () {
+            var d = Bridge.Enum.parse(Bridge.ClientTest.BasicCSharp.TestEnum.Digits, "ONN", true);
         }
     });
     
@@ -4054,9 +4094,7 @@
                 Bridge.get(Bridge.Test.Assert).true$1(Bridge.get(Bridge.ClientTest.BasicCSharp.TestTryCatchBlocks).getIsCTry(), "C. exception caught and re-thrown - try section called");
                 Bridge.get(Bridge.Test.Assert).true$1(Bridge.get(Bridge.ClientTest.BasicCSharp.TestTryCatchBlocks).getIsCCatch(), "C. exception caught and re-thrown - catch section called");
     
-                Bridge.get(Bridge.Test.Assert).throws$2(Bridge.get(Bridge.ClientTest.BasicCSharp.TestTryCatchBlocks).tryCatchWithRethrowEx, function (error) {
-                    return error.toString() === "catch me";
-                }, "D. Rethrow with parameter");
+                Bridge.get(Bridge.Test.Assert).throws$2(Bridge.get(Bridge.ClientTest.BasicCSharp.TestTryCatchBlocks).tryCatchWithRethrowEx, $_.Bridge.ClientTest.BasicCSharp.TestTryCatchBlocks.f1, "D. Rethrow with parameter");
                 Bridge.get(Bridge.Test.Assert).true$1(Bridge.get(Bridge.ClientTest.BasicCSharp.TestTryCatchBlocks).getIsDTry(), "D. exception caught and re-thrown  - try section called");
                 Bridge.get(Bridge.Test.Assert).true$1(Bridge.get(Bridge.ClientTest.BasicCSharp.TestTryCatchBlocks).getIsDCatch(), "D. exception caught and re-thrown  - catch section called");
             },
@@ -4220,6 +4258,14 @@
         }
     });
     
+    Bridge.ns("Bridge.ClientTest.BasicCSharp.TestTryCatchBlocks", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.BasicCSharp.TestTryCatchBlocks, {
+        f1: function (error) {
+            return error.toString() === "catch me";
+        }
+    });
+    
     Bridge.define('Bridge.ClientTest.BasicCSharp.TestTryCatchFinallyBlocks', {
         statics: {
             config: {
@@ -4280,9 +4326,7 @@
                 Bridge.get(Bridge.Test.Assert).true$1(Bridge.get(Bridge.ClientTest.BasicCSharp.TestTryCatchFinallyBlocks).getIsCCatch(), "C. exception caught and re-thrown  - catch section called");
                 Bridge.get(Bridge.Test.Assert).true$1(Bridge.get(Bridge.ClientTest.BasicCSharp.TestTryCatchFinallyBlocks).getIsCFinally(), "C. exception caught and re-thrown  - finally section called");
     
-                Bridge.get(Bridge.Test.Assert).throws$2(Bridge.get(Bridge.ClientTest.BasicCSharp.TestTryCatchFinallyBlocks).tryCatchWithRethrowEx, function (error) {
-                    return error.toString() === "catch me";
-                }, "D. Rethrow with parameter");
+                Bridge.get(Bridge.Test.Assert).throws$2(Bridge.get(Bridge.ClientTest.BasicCSharp.TestTryCatchFinallyBlocks).tryCatchWithRethrowEx, $_.Bridge.ClientTest.BasicCSharp.TestTryCatchFinallyBlocks.f1, "D. Rethrow with parameter");
                 Bridge.get(Bridge.Test.Assert).true$1(Bridge.get(Bridge.ClientTest.BasicCSharp.TestTryCatchFinallyBlocks).getIsDTry(), "D. exception caught and re-thrown  - try section called");
                 Bridge.get(Bridge.Test.Assert).true$1(Bridge.get(Bridge.ClientTest.BasicCSharp.TestTryCatchFinallyBlocks).getIsDCatch(), "D. exception caught and re-thrown  - catch section called");
                 Bridge.get(Bridge.Test.Assert).true$1(Bridge.get(Bridge.ClientTest.BasicCSharp.TestTryCatchFinallyBlocks).getIsDFinally(), "D. exception caught and re-thrown  - finally section called");
@@ -4436,6 +4480,14 @@
                     Bridge.get(Bridge.ClientTest.BasicCSharp.TestTryCatchFinallyBlocks).setIsDFinally(true);
                 }
             }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.BasicCSharp.TestTryCatchFinallyBlocks", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.BasicCSharp.TestTryCatchFinallyBlocks, {
+        f1: function (error) {
+            return error.toString() === "catch me";
         }
     });
     
@@ -4623,26 +4675,35 @@
                 Bridge.get(Bridge.Test.Assert).areEqual$1("third", magic2.getItem(2), "magic1[2]");
                 Bridge.get(Bridge.Test.Assert).areEqual$1("fourth", magic2.getItem(3), "magic1[3]");
     
-                Bridge.get(Bridge.Test.Assert).throws$5(function () {
-                    var magic = new Bridge.List$1(String)();
-                    magic.insert(1, "first");
-                }, "Insert at length + 1");
+                Bridge.get(Bridge.Test.Assert).throws$5($_.Bridge.ClientTest.BridgeIssues.Bridge472.f1, "Insert at length + 1");
     
-                Bridge.get(Bridge.Test.Assert).throws$5(function () {
-                    var magic = new Bridge.List$1(String)();
-                    magic.insert(-1, "first");
-                }, "Insert at -1");
+                Bridge.get(Bridge.Test.Assert).throws$5($_.Bridge.ClientTest.BridgeIssues.Bridge472.f2, "Insert at -1");
     
-                Bridge.get(Bridge.Test.Assert).throws$5(function () {
-                    var magic = new Bridge.List$1(String)();
-                    magic.insertRange(1, ["first", "second"]);
-                }, "InsertRange at length + 1");
+                Bridge.get(Bridge.Test.Assert).throws$5($_.Bridge.ClientTest.BridgeIssues.Bridge472.f3, "InsertRange at length + 1");
     
-                Bridge.get(Bridge.Test.Assert).throws$5(function () {
-                    var magic = new Bridge.List$1(String)();
-                    magic.insertRange(-1, ["first", "second"]);
-                }, "InsertRange at -1");
+                Bridge.get(Bridge.Test.Assert).throws$5($_.Bridge.ClientTest.BridgeIssues.Bridge472.f4, "InsertRange at -1");
             }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.BridgeIssues.Bridge472", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.BridgeIssues.Bridge472, {
+        f1: function () {
+            var magic = new Bridge.List$1(String)();
+            magic.insert(1, "first");
+        },
+        f2: function () {
+            var magic = new Bridge.List$1(String)();
+            magic.insert(-1, "first");
+        },
+        f3: function () {
+            var magic = new Bridge.List$1(String)();
+            magic.insertRange(1, ["first", "second"]);
+        },
+        f4: function () {
+            var magic = new Bridge.List$1(String)();
+            magic.insertRange(-1, ["first", "second"]);
         }
     });
     
@@ -4666,16 +4727,23 @@
                 list.add({ lastName: "Cobb", firstName: "Ty" });
                 list.add({ lastName: "Schmidt", firstName: "Mike" });
     
-                var query = Bridge.Linq.Enumerable.from(list).where(function (p) {
-                    return p.lastName.length === 4;
-                }).select(function (p) {
-                    return { lastName: p.lastName, firstName: p.firstName };
-                });
+                var query = Bridge.Linq.Enumerable.from(list).where($_.Bridge.ClientTest.BridgeIssues.Bridge485.f1).select($_.Bridge.ClientTest.BridgeIssues.Bridge485.f2);
     
                 var s = JSON.stringify(query.toList(Object));
     
                 Bridge.get(Bridge.Test.Assert).areEqual$1("{\"items\":[{\"lastName\":\"Ruth\",\"firstName\":\"Babe\"},{\"lastName\":\"Cobb\",\"firstName\":\"Ty\"}]}", s, "#485");
             }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.BridgeIssues.Bridge485", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.BridgeIssues.Bridge485, {
+        f1: function (p) {
+            return p.lastName.length === 4;
+        },
+        f2: function (p) {
+            return { lastName: p.lastName, firstName: p.firstName };
         }
     });
     
@@ -5970,20 +6038,29 @@
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge586', {
         statics: {
             testUseCase: function () {
-                Bridge.get(Bridge.Test.Assert).throws$5(function () {
-                    Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge586A).setSomeDataStatic(Bridge.Decimal(4));
-                }, "a.SomeDataStatic is external");
-                Bridge.get(Bridge.Test.Assert).throws$5(function () {
-                    Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge586A).doSomethingStatic();
-                }, "a.DoSomethingStatic() is external");
+                Bridge.get(Bridge.Test.Assert).throws$5($_.Bridge.ClientTest.BridgeIssues.Bridge586.f1, "a.SomeDataStatic is external");
+                Bridge.get(Bridge.Test.Assert).throws$5($_.Bridge.ClientTest.BridgeIssues.Bridge586.f2, "a.DoSomethingStatic() is external");
     
-                Bridge.get(Bridge.Test.Assert).throws$5(function () {
-                    Bridge.ClientTest.BridgeIssues.Bridge586B.setSomeDataStatic(Bridge.Decimal(4));
-                }, "b.SomeDataStatic is external");
-                Bridge.get(Bridge.Test.Assert).throws$5(function () {
-                    Bridge.ClientTest.BridgeIssues.Bridge586B.doSomethingStatic();
-                }, "b.DoSomethingStatic() is external");
+                Bridge.get(Bridge.Test.Assert).throws$5($_.Bridge.ClientTest.BridgeIssues.Bridge586.f3, "b.SomeDataStatic is external");
+                Bridge.get(Bridge.Test.Assert).throws$5($_.Bridge.ClientTest.BridgeIssues.Bridge586.f4, "b.DoSomethingStatic() is external");
             }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.BridgeIssues.Bridge586", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.BridgeIssues.Bridge586, {
+        f1: function () {
+            Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge586A).setSomeDataStatic(Bridge.Decimal(4));
+        },
+        f2: function () {
+            Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge586A).doSomethingStatic();
+        },
+        f3: function () {
+            Bridge.ClientTest.BridgeIssues.Bridge586B.setSomeDataStatic(Bridge.Decimal(4));
+        },
+        f4: function () {
+            Bridge.ClientTest.BridgeIssues.Bridge586B.doSomethingStatic();
         }
     });
     
@@ -6001,6 +6078,14 @@
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge588C.C1', {
+        config: {
+            properties: {
+                Value: null
+            }
+        },
+        constructor: function (value) {
+            this.setValue(value);
+        },
         statics: {
             config: {
                 init: function () {
@@ -6010,14 +6095,6 @@
             getDefault: function () {
                 return Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge588C.C1)._default;
             }
-        },
-        config: {
-            properties: {
-                Value: null
-            }
-        },
-        constructor: function (value) {
-            this.setValue(value);
         }
     });
     
@@ -6076,24 +6153,6 @@
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge603B', {
-        statics: {
-            op_Implicit$2: function (value) {
-                var $t;
-                value = ($t = value, Bridge.hasValue($t) ? $t : "[Null]");
-                return new Bridge.ClientTest.BridgeIssues.Bridge603B("constructor$3", value);
-            },
-            op_Implicit$1: function (value) {
-                return new Bridge.ClientTest.BridgeIssues.Bridge603B("constructor$2", value);
-            },
-            op_Implicit: function (value) {
-                var $t;
-                value = ($t = value, Bridge.hasValue($t) ? $t : Bridge.merge(new Bridge.ClientTest.BridgeIssues.Bridge603Class(), {
-                    setData: "[Null]"
-                } ));
-                return new Bridge.ClientTest.BridgeIssues.Bridge603B("constructor$1", value);
-            },
-            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge603B(); }
-        },
         value: null,
         intValue: 0,
         constructor$3: function (value) {
@@ -6127,6 +6186,24 @@
             s.value = this.value;
             s.intValue = this.intValue;
             return s;
+        },
+        statics: {
+            op_Implicit$2: function (value) {
+                var $t;
+                value = ($t = value, Bridge.hasValue($t) ? $t : "[Null]");
+                return new Bridge.ClientTest.BridgeIssues.Bridge603B("constructor$3", value);
+            },
+            op_Implicit$1: function (value) {
+                return new Bridge.ClientTest.BridgeIssues.Bridge603B("constructor$2", value);
+            },
+            op_Implicit: function (value) {
+                var $t;
+                value = ($t = value, Bridge.hasValue($t) ? $t : Bridge.merge(new Bridge.ClientTest.BridgeIssues.Bridge603Class(), {
+                    setData: "[Null]"
+                } ));
+                return new Bridge.ClientTest.BridgeIssues.Bridge603B("constructor$1", value);
+            },
+            getDefaultValue: function () { return new Bridge.ClientTest.BridgeIssues.Bridge603B(); }
         }
     });
     
@@ -6193,31 +6270,30 @@
             testUseCase: function () {
                 var list = [1, 2, 3];
     
-                var d1 = Bridge.Linq.Enumerable.from(list).toDictionary(function (x) {
-                    return x;
-                }, null, Bridge.Int, Bridge.Int);
+                var d1 = Bridge.Linq.Enumerable.from(list).toDictionary($_.Bridge.ClientTest.BridgeIssues.Bridge625.f1, null, Bridge.Int, Bridge.Int);
                 Bridge.get(Bridge.Test.Assert).true$1(true, "Bridge625 d1");
     
-                var d2 = Bridge.Linq.Enumerable.from(list).toDictionary(function (x) {
-                    return x;
-                }, null, Bridge.Int, Bridge.Int, new Bridge.ClientTest.BridgeIssues.Bridge625A());
+                var d2 = Bridge.Linq.Enumerable.from(list).toDictionary($_.Bridge.ClientTest.BridgeIssues.Bridge625.f1, null, Bridge.Int, Bridge.Int, new Bridge.ClientTest.BridgeIssues.Bridge625A());
                 Bridge.get(Bridge.Test.Assert).true$1(true, "Bridge625 d2");
     
-                var d3 = Bridge.Linq.Enumerable.from(list).toDictionary(function (x) {
-                    return x;
-                }, function (y) {
-                    return y;
-                }, Bridge.Int, Bridge.Int);
+                var d3 = Bridge.Linq.Enumerable.from(list).toDictionary($_.Bridge.ClientTest.BridgeIssues.Bridge625.f1, $_.Bridge.ClientTest.BridgeIssues.Bridge625.f2, Bridge.Int, Bridge.Int);
                 Bridge.get(Bridge.Test.Assert).true$1(true, "Bridge625 d3");
     
-                var d4 = Bridge.Linq.Enumerable.from(list).toDictionary(function (x) {
-                    return x;
-                }, function (y) {
-                    return y;
-                }, Bridge.Int, Bridge.Int, new Bridge.ClientTest.BridgeIssues.Bridge625A());
+                var d4 = Bridge.Linq.Enumerable.from(list).toDictionary($_.Bridge.ClientTest.BridgeIssues.Bridge625.f1, $_.Bridge.ClientTest.BridgeIssues.Bridge625.f2, Bridge.Int, Bridge.Int, new Bridge.ClientTest.BridgeIssues.Bridge625A());
                 Bridge.get(Bridge.Test.Assert).true$1(true, "Bridge625 d4");
     
             }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.BridgeIssues.Bridge625", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.BridgeIssues.Bridge625, {
+        f1: function (x) {
+            return x;
+        },
+        f2: function (y) {
+            return y;
         }
     });
     
@@ -6328,38 +6404,48 @@
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge655', {
         statics: {
             testUseCase: function () {
-                var item11 = function () {
-                    return 11;
-                };
+                var item11 = $_.Bridge.ClientTest.BridgeIssues.Bridge655.f1;
                 Bridge.get(Bridge.Test.Assert).areEqual$1(false, Bridge.ClientTest.BridgeIssues.Bridge655A.isNullOrUndefined(item11), "Bridge655 IsNullOrUndefined11");
                 Bridge.get(Bridge.Test.Assert).areEqual$1(11, item11(), "Bridge655 item11");
     
-                var item12 = function (i) {
-                    return i;
-                };
+                var item12 = $_.Bridge.ClientTest.BridgeIssues.Bridge655.f2;
                 Bridge.get(Bridge.Test.Assert).areEqual$1(false, Bridge.ClientTest.BridgeIssues.Bridge655A.isNullOrUndefined(item12), "Bridge655 IsNullOrUndefined12");
                 Bridge.get(Bridge.Test.Assert).areEqual$1(12, item12(12), "Bridge655 item12");
     
-                var item21 = function () {
-                    return 21;
-                };
+                var item21 = $_.Bridge.ClientTest.BridgeIssues.Bridge655.f3;
                 Bridge.get(Bridge.Test.Assert).areEqual$1(false, Bridge.ClientTest.BridgeIssues.Bridge655A.isNullOrUndefined$1(item21, 21), "Bridge655 IsNullOrUndefined21 false");
                 Bridge.get(Bridge.Test.Assert).areEqual$1(true, Bridge.ClientTest.BridgeIssues.Bridge655A.isNullOrUndefined$1(item21, 0), "Bridge655 IsNullOrUndefined21 true");
                 Bridge.get(Bridge.Test.Assert).areEqual$1(21, item21(), "Bridge655 item21");
     
-                var item22 = function (i, s) {
-                    return i + s.length;
-                };
+                var item22 = $_.Bridge.ClientTest.BridgeIssues.Bridge655.f4;
                 Bridge.get(Bridge.Test.Assert).areEqual$1("false", Bridge.ClientTest.BridgeIssues.Bridge655A.isNullOrUndefined$2(item22, "22"), "Bridge655 IsNullOrUndefined22 false");
                 Bridge.get(Bridge.Test.Assert).areEqual$1("true", Bridge.ClientTest.BridgeIssues.Bridge655A.isNullOrUndefined$2(item22, ""), "Bridge655 IsNullOrUndefined22 true");
                 Bridge.get(Bridge.Test.Assert).areEqual$1(22, item22(19, "two"), "Bridge655 item22");
     
-                var item32 = function (i, s) {
-                    var b = i === s.length;
-                };
+                var item32 = $_.Bridge.ClientTest.BridgeIssues.Bridge655.f5;
                 Bridge.get(Bridge.Test.Assert).areEqual$1("false", Bridge.ClientTest.BridgeIssues.Bridge655A.isNullOrUndefined$2(item32, "32"), "Bridge655 IsNullOrUndefined32 false");
                 Bridge.get(Bridge.Test.Assert).areEqual$1("true", Bridge.ClientTest.BridgeIssues.Bridge655A.isNullOrUndefined$2(item32, ""), "Bridge655 IsNullOrUndefined32 true");
             }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.BridgeIssues.Bridge655", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.BridgeIssues.Bridge655, {
+        f1: function () {
+            return 11;
+        },
+        f2: function (i) {
+            return i;
+        },
+        f3: function () {
+            return 21;
+        },
+        f4: function (i, s) {
+            return i + s.length;
+        },
+        f5: function (i, s) {
+            var b = i === s.length;
         }
     });
     
@@ -6398,19 +6484,26 @@
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge664', {
         statics: {
             testUseCase: function () {
-                var f = function (s) {
-                    return s;
-                };
+                var f = $_.Bridge.ClientTest.BridgeIssues.Bridge664.f1;
                 // if cast will be emitted then exception will be thrown because Bridge664A is not emitted
                 Bridge.get(Bridge.Test.Assert).areEqual$1("test", f("test"), "Bridge664");
     
-                Bridge.get(Bridge.Test.Assert).throws$5(function () {
-                    var b = { };
-                    var s = Bridge.cast(b, Bridge.ClientTest.BridgeIssues.Bridge664B);
-                }, "Bridge664 Should throw exception");
+                Bridge.get(Bridge.Test.Assert).throws$5($_.Bridge.ClientTest.BridgeIssues.Bridge664.f2, "Bridge664 Should throw exception");
     
     
             }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.BridgeIssues.Bridge664", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.BridgeIssues.Bridge664, {
+        f1: function (s) {
+            return s;
+        },
+        f2: function () {
+            var b = { };
+            var s = Bridge.cast(b, Bridge.ClientTest.BridgeIssues.Bridge664B);
         }
     });
     
@@ -6448,11 +6541,6 @@
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge671', {
-        statics: {
-            testUseCase: function () {
-                Bridge.get(Bridge.Test.Assert).areEqual(1, new Bridge.ClientTest.BridgeIssues.Bridge671().invoke());
-            }
-        },
         one: 1,
         getOne: function () {
             return this.one;
@@ -6460,6 +6548,11 @@
         invoke: function () {
             var b = new Bridge.ClientTest.BridgeIssues.Bridge671A(Bridge.fn.bind(this, this.getOne));
             return b.invoke();
+        },
+        statics: {
+            testUseCase: function () {
+                Bridge.get(Bridge.Test.Assert).areEqual(1, new Bridge.ClientTest.BridgeIssues.Bridge671().invoke());
+            }
         }
     });
     
@@ -6614,31 +6707,33 @@
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge691', {
         statics: {
             testUseCase: function () {
-                var $t;
                 var pos = 0;
                 var lines = ["", "", "str"];
                 while (pos < lines.length) {
-                    var $t = (function () {
-                        while (pos < lines.length && lines[pos].length === 0) {
-                            pos++;
-                        }
+                    while (pos < lines.length && lines[pos].length === 0) {
+                        pos++;
+                    }
     
-                        if (!(pos < lines.length)) {
-                            return {jump:2};
-                        }
+                    if (!(pos < lines.length)) {
+                        break;
+                    }
     
-                        var a = function (p) {
-                        };
+                    var a = $_.Bridge.ClientTest.BridgeIssues.Bridge691.f1;
     
-                        if (pos > 0) {
-                            return {jump:2};
-                        }
-                    }).call(this) || {};
-                    if($t.jump == 2) break;
+                    if (pos > 0) {
+                        break;
+                    }
                 }
     
                 Bridge.get(Bridge.Test.Assert).areEqual$1(2, pos, "Bridge691");
             }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.BridgeIssues.Bridge691", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.BridgeIssues.Bridge691, {
+        f1: function (p) {
         }
     });
     
@@ -6680,11 +6775,7 @@
                 fruits[1] = "apple";
                 fruits[2] = "lemon";
     
-                var list = Bridge.Linq.Enumerable.from(fruits).select(function(x) { return Bridge.cast(x, String); }).orderBy(function (fruit) {
-                    return fruit;
-                }).select(function (fruit) {
-                    return fruit;
-                }).toList(String);
+                var list = Bridge.Linq.Enumerable.from(fruits).select(function(x) { return Bridge.cast(x, String); }).orderBy($_.Bridge.ClientTest.BridgeIssues.Bridge694.f1).select($_.Bridge.ClientTest.BridgeIssues.Bridge694.f1).toList(String);
                 Bridge.get(Bridge.Test.Assert).areEqual$1("apple", list.getItem(0), "Bridge694 apple");
                 Bridge.get(Bridge.Test.Assert).areEqual$1("lemon", list.getItem(1), "Bridge694 lemon");
                 Bridge.get(Bridge.Test.Assert).areEqual$1("mango", list.getItem(2), "Bridge694 mango");
@@ -6692,20 +6783,32 @@
         }
     });
     
+    Bridge.ns("Bridge.ClientTest.BridgeIssues.Bridge694", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.BridgeIssues.Bridge694, {
+        f1: function (fruit) {
+            return fruit;
+        }
+    });
+    
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge696', {
         statics: {
             testUseCase: function () {
                 var namedCallbacks = new Bridge.Dictionary$2(String,Function)();
-                namedCallbacks.add("Shout", function (message) {
-                    return message.length;
-                });
-                namedCallbacks.add("Whisper", function (message) {
-                    return message.length;
-                });
+                namedCallbacks.add("Shout", $_.Bridge.ClientTest.BridgeIssues.Bridge696.f1);
+                namedCallbacks.add("Whisper", $_.Bridge.ClientTest.BridgeIssues.Bridge696.f1);
     
                 Bridge.get(Bridge.Test.Assert).areEqual$1(6, namedCallbacks.get("Shout")("HELLO!"), "Bridge696 HELLO!");
                 Bridge.get(Bridge.Test.Assert).areEqual$1(5, namedCallbacks.get("Whisper")("HELLO"), "Bridge696 HELLO");
             }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.BridgeIssues.Bridge696", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.BridgeIssues.Bridge696, {
+        f1: function (message) {
+            return message.length;
         }
     });
     
@@ -6826,6 +6929,13 @@
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge722', {
+        lastItem: 0,
+        getItem: function (item) {
+            return this.lastItem;
+        },
+        setItem: function (item, value) {
+            this.lastItem = value;
+        },
         statics: {
             m1: function (i) {
                 return i;
@@ -6852,19 +6962,18 @@
     
                 var data4 = [Bridge.Decimal(1.0), Bridge.Decimal(2.0), Bridge.Decimal(3.0), Bridge.Decimal(4.0), Bridge.Decimal(7.0)];
                 var c4 = new Bridge.Dictionary$2(String,Bridge.Decimal)();
-                var asset4 = ($t6 = Bridge.Linq.Enumerable.from(data4).select(function (x) {
-                    return x;
-                }).last(), c4.set("path", $t6), $t6);
+                var asset4 = ($t6 = Bridge.Linq.Enumerable.from(data4).select($_.Bridge.ClientTest.BridgeIssues.Bridge722.f1).last(), c4.set("path", $t6), $t6);
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(Bridge.Decimal(7.0), asset4, "Bridge722 asset4");
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(Bridge.Decimal(7.0), c4.get("path"), "Bridge722 c4");
             }
-        },
-        lastItem: 0,
-        getItem: function (item) {
-            return this.lastItem;
-        },
-        setItem: function (item, value) {
-            this.lastItem = value;
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.BridgeIssues.Bridge722", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.BridgeIssues.Bridge722, {
+        f1: function (x) {
+            return x;
         }
     });
     
@@ -6930,12 +7039,18 @@
                     [1],
                     [2]
                 ] );
-                var v1 = Bridge.Linq.Enumerable.from(values).count(function (el1) {
-                    return el1 === 1;
-                });
+                var v1 = Bridge.Linq.Enumerable.from(values).count($_.Bridge.ClientTest.BridgeIssues.Bridge751.f1);
     
                 Bridge.get(Bridge.Test.Assert).areEqual$1(1, v1, "Bridge751");
             }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.BridgeIssues.Bridge751", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.BridgeIssues.Bridge751, {
+        f1: function (el1) {
+            return el1 === 1;
         }
     });
     
@@ -7546,24 +7661,28 @@
                 var result = 0;
                 $t = Bridge.getEnumerator(testListA);
                 while ($t.moveNext()) {
-                    (function () {
-                        var item = $t.getCurrent();
-                        var fn = function () {
-                        };
+                    var item = $t.getCurrent();
+                    var fn = $_.Bridge.ClientTest.BridgeIssues.Bridge841.f1;
     
-                        switch (item) {
-                            case 1: 
-                                result += 1;
-                                break;
-                            case 2: 
-                                result += 2;
-                                break;
-                        }
-                    }).call(this);
+                    switch (item) {
+                        case 1: 
+                            result += 1;
+                            break;
+                        case 2: 
+                            result += 2;
+                            break;
+                    }
                 }
     
                 Bridge.get(Bridge.Test.Assert).areEqual$1(3, result, "Bridge841");
             }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.BridgeIssues.Bridge841", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.BridgeIssues.Bridge841, {
+        f1: function () {
         }
     });
     
@@ -7609,23 +7728,30 @@
                     setMyId: 1
                 } );
     
-                testA.setDelegates(Bridge.fn.combine(testA.getDelegates(), function (data) {
-                    var $t;
-                    ($t = data.getMyId(), data.setMyId($t+1), $t);
-                }));
+                testA.setDelegates(Bridge.fn.combine(testA.getDelegates(), $_.Bridge.ClientTest.BridgeIssues.Bridge861.f1));
     
                 var testB = Bridge.merge(new Bridge.ClientTest.BridgeIssues.Bridge861A(), {
                     setMyId: 2,
                     setDelegates: testA.getDelegates()
                 } );
     
-                testB.setDelegates(Bridge.fn.combine(testB.getDelegates(), function (data) {
-                    data.setMyId(0);
-                }));
+                testB.setDelegates(Bridge.fn.combine(testB.getDelegates(), $_.Bridge.ClientTest.BridgeIssues.Bridge861.f2));
                 testB.invokeDelegates();
     
                 Bridge.get(Bridge.Test.Assert).areEqual(0, testB.getMyId());
             }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.BridgeIssues.Bridge861", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.BridgeIssues.Bridge861, {
+        f1: function (data) {
+            var $t;
+            ($t = data.getMyId(), data.setMyId($t+1), $t);
+        },
+        f2: function (data) {
+            data.setMyId(0);
         }
     });
     
@@ -7715,31 +7841,29 @@
             testUseCase: function () {
                 Bridge.get(Bridge.Test.Assert).areEqual(0, Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge889).count());
             },
-            makeEnumerable: function (T) {
-                return Bridge.fn.bind(this, function (arr) {
-                    var $t;
-                    if (arr === void 0) { arr = []; }
-                    var $yield = [];
-                    $t = Bridge.getEnumerator(arr);
-                    while ($t.moveNext()) {
-                        var x = $t.getCurrent();
-                        $yield.push(x);
-                    }
-                    return Bridge.Array.toEnumerable($yield);
-                });
+            makeEnumerable: function (T, arr) {
+                var $t;
+                if (arr === void 0) { arr = []; }
+                var $yield = [];
+                $t = Bridge.getEnumerator(arr);
+                while ($t.moveNext()) {
+                    var x = $t.getCurrent();
+                    $yield.push(x);
+                }
+                return Bridge.Array.toEnumerable($yield);
             },
             testMakeEnumerable: function () {
-                Bridge.get(Bridge.Test.Assert).areEqual$1(0, Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge889).makeEnumerable(Object)()).count(), "MakeEnumerable object 0");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(2, Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge889).makeEnumerable(Object)([1, 2.0])).count(), "MakeEnumerable object 2");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(0, Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge889).makeEnumerable(Object)).count(), "MakeEnumerable object 0");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(2, Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge889).makeEnumerable(Object, [1, 2.0])).count(), "MakeEnumerable object 2");
     
-                Bridge.get(Bridge.Test.Assert).areEqual$1(0, Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge889).makeEnumerable(String)()).count(), "MakeEnumerable string 0");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(3, Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge889).makeEnumerable(String)(["a", "b", "c"])).count(), "MakeEnumerable string 3");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(0, Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge889).makeEnumerable(String)).count(), "MakeEnumerable string 0");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(3, Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge889).makeEnumerable(String, ["a", "b", "c"])).count(), "MakeEnumerable string 3");
     
-                Bridge.get(Bridge.Test.Assert).areEqual$1(0, Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge889).makeEnumerable(Bridge.IEnumerable$1(Object))()).count(), "MakeEnumerable IEnumerable<object> 0");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(1, Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge889).makeEnumerable(Bridge.IEnumerable$1(Object))([[1, 2]])).count(), "MakeEnumerable IEnumerable<object> 1");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(0, Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge889).makeEnumerable(Bridge.IEnumerable$1(Object))).count(), "MakeEnumerable IEnumerable<object> 0");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(1, Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge889).makeEnumerable(Bridge.IEnumerable$1(Object), [[1, 2]])).count(), "MakeEnumerable IEnumerable<object> 1");
     
-                Bridge.get(Bridge.Test.Assert).areEqual$1(0, Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge889).makeEnumerable(Bridge.List$1(Bridge.List$1(Object)))()).count(), "MakeEnumerable List<List<object>> 0");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(2, Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge889).makeEnumerable(Bridge.List$1(Bridge.List$1(Bridge.Int)))([new Bridge.List$1(Bridge.List$1(Bridge.Int))(), new Bridge.List$1(Bridge.List$1(Bridge.Int))()])).count(), "MakeEnumerable List<List<object>> 2");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(0, Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge889).makeEnumerable(Bridge.List$1(Bridge.List$1(Object)))).count(), "MakeEnumerable List<List<object>> 0");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(2, Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.BridgeIssues.Bridge889).makeEnumerable(Bridge.List$1(Bridge.List$1(Bridge.Int)), [new Bridge.List$1(Bridge.List$1(Bridge.Int))(), new Bridge.List$1(Bridge.List$1(Bridge.Int))()])).count(), "MakeEnumerable List<List<object>> 2");
             }
         }
     });
@@ -8080,6 +8204,44 @@
     });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge918', {
+        test: function () {
+            var $step = 0,
+                $task1, 
+                $jumpFromFinally, 
+                $tcs = new Bridge.TaskCompletionSource(), 
+                $returnValue, 
+                $async_e, 
+                $asyncBody = Bridge.fn.bind(this, function () {
+                    try {
+                        for (;;) {
+                            $step = Bridge.Array.min([0,1], $step);
+                            switch ($step) {
+                                case 0: {
+                                    $task1 = Bridge.Task.delay(1);
+                                    $step = 1;
+                                    $task1.continueWith($asyncBody);
+                                    return;
+                                }
+                                case 1: {
+                                    $task1.getAwaitedResult();
+                                    $tcs.setResult(1);
+                                    return;
+                                }
+                                default: {
+                                    $tcs.setResult(null);
+                                    return;
+                                }
+                            }
+                        }
+                    } catch($async_e1) {
+                        $async_e = Bridge.Exception.create($async_e1);
+                        $tcs.setException($async_e);
+                    }
+                }, arguments);
+    
+            $asyncBody();
+            return $tcs.task;
+        },
         statics: {
             testDynamicAsyncResult: function () {
                 var $step = 0,
@@ -8119,44 +8281,6 @@
     
                 $asyncBody();
             }
-        },
-        test: function () {
-            var $step = 0,
-                $task1, 
-                $jumpFromFinally, 
-                $tcs = new Bridge.TaskCompletionSource(), 
-                $returnValue, 
-                $async_e, 
-                $asyncBody = Bridge.fn.bind(this, function () {
-                    try {
-                        for (;;) {
-                            $step = Bridge.Array.min([0,1], $step);
-                            switch ($step) {
-                                case 0: {
-                                    $task1 = Bridge.Task.delay(1);
-                                    $step = 1;
-                                    $task1.continueWith($asyncBody);
-                                    return;
-                                }
-                                case 1: {
-                                    $task1.getAwaitedResult();
-                                    $tcs.setResult(1);
-                                    return;
-                                }
-                                default: {
-                                    $tcs.setResult(null);
-                                    return;
-                                }
-                            }
-                        }
-                    } catch($async_e1) {
-                        $async_e = Bridge.Exception.create($async_e1);
-                        $tcs.setException($async_e);
-                    }
-                }, arguments);
-    
-            $asyncBody();
-            return $tcs.task;
         }
     });
     
@@ -8600,12 +8724,18 @@
             Bridge.get(Bridge.Test.Assert).areEqual$1(1, new Bridge.Comparer$1(Bridge.ClientTest.Collections.Generic.ComparerTests.C)(Bridge.Comparer$1.$default.fn).compare(new Bridge.ClientTest.Collections.Generic.ComparerTests.C(8), new Bridge.ClientTest.Collections.Generic.ComparerTests.C(3)), "Compare(8, 3) should be 1");
         },
         createWorks: function () {
-            var comparer = new Bridge.Comparer$1(Bridge.Int)(function (x, y) {
-                Bridge.get(Bridge.Test.Assert).areEqual$1(8, x, "x should be 8");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(3, y, "y should be 3");
-                return 42;
-            });
+            var comparer = new Bridge.Comparer$1(Bridge.Int)($_.Bridge.ClientTest.Collections.Generic.ComparerTests.f1);
             Bridge.get(Bridge.Test.Assert).areEqual$1(42, comparer.compare(8, 3), "The result should be 42");
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.Collections.Generic.ComparerTests", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.Collections.Generic.ComparerTests, {
+        f1: function (x, y) {
+            Bridge.get(Bridge.Test.Assert).areEqual$1(8, x, "x should be 8");
+            Bridge.get(Bridge.Test.Assert).areEqual$1(3, y, "y should be 3");
+            return 42;
         }
     });
     
@@ -9819,9 +9949,7 @@
                 [4],
                 [2]
             ] );
-            list.sort(function (x, y) {
-                return y - x;
-            });
+            list.sort($_.Bridge.ClientTest.Collections.Generic.ListTests.f1);
             Bridge.get(Bridge.Test.Assert).areDeepEqual([6, 6, 4, 2, 1], list.toArray());
         },
         sortWithIComparerWorks: function () {
@@ -9995,6 +10123,14 @@
         }
     });
     
+    Bridge.ns("Bridge.ClientTest.Collections.Generic.ListTests", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.Collections.Generic.ListTests, {
+        f1: function (x, y) {
+            return y - x;
+        }
+    });
+    
     Bridge.define('Bridge.ClientTest.CultureInfoTests', {
         typePropertiesAreCorrect: function () {
             var culture = Bridge.get(Bridge.CultureInfo).invariantCulture;
@@ -10067,68 +10203,44 @@
                 }
             },
             testSubtractOperator: function () {
-                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet$1(Bridge.get(Bridge.ClientTest.DecimalMathTests).inputSubtract, "SubtractOperator", function (a, b) {
-                    return a.sub(b);
-                });
+                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet$1(Bridge.get(Bridge.ClientTest.DecimalMathTests).inputSubtract, "SubtractOperator", $_.Bridge.ClientTest.DecimalMathTests.f1);
             },
             testRemainderOperator: function () {
-                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet$1(Bridge.get(Bridge.ClientTest.DecimalMathTests).inputRemainder, "RemainderOperator", function (a, b) {
-                    return a.mod(b);
-                });
+                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet$1(Bridge.get(Bridge.ClientTest.DecimalMathTests).inputRemainder, "RemainderOperator", $_.Bridge.ClientTest.DecimalMathTests.f2);
             },
             testMultiplyOperator: function () {
-                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet$1(Bridge.get(Bridge.ClientTest.DecimalMathTests).inputMultiply, "MultiplyOperator", function (a, b) {
-                    return a.mul(b);
-                });
+                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet$1(Bridge.get(Bridge.ClientTest.DecimalMathTests).inputMultiply, "MultiplyOperator", $_.Bridge.ClientTest.DecimalMathTests.f3);
             },
             testDivideOperator: function () {
-                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet$1(Bridge.get(Bridge.ClientTest.DecimalMathTests).inputDivide, "DivideOperator", function (a, b) {
-                    return a.div(b);
-                });
+                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet$1(Bridge.get(Bridge.ClientTest.DecimalMathTests).inputDivide, "DivideOperator", $_.Bridge.ClientTest.DecimalMathTests.f4);
             },
             testAddOperator: function () {
-                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet$1(Bridge.get(Bridge.ClientTest.DecimalMathTests).inputAdd, "AddOperator", function (a, b) {
-                    return a.add(b);
-                });
+                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet$1(Bridge.get(Bridge.ClientTest.DecimalMathTests).inputAdd, "AddOperator", $_.Bridge.ClientTest.DecimalMathTests.f5);
             },
             testAddMethod: function () {
-                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet$1(Bridge.get(Bridge.ClientTest.DecimalMathTests).inputAdd, "AddMethod", function (a, b) {
-                    return a.add(b);
-                });
+                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet$1(Bridge.get(Bridge.ClientTest.DecimalMathTests).inputAdd, "AddMethod", $_.Bridge.ClientTest.DecimalMathTests.f5);
             },
             testDivideMethod: function () {
-                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet$1(Bridge.get(Bridge.ClientTest.DecimalMathTests).inputDivide, "DivideMethod", function (a, b) {
-                    return a.div(b);
-                });
+                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet$1(Bridge.get(Bridge.ClientTest.DecimalMathTests).inputDivide, "DivideMethod", $_.Bridge.ClientTest.DecimalMathTests.f4);
             },
             testMultiplyMethod: function () {
-                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet$1(Bridge.get(Bridge.ClientTest.DecimalMathTests).inputMultiply, "MiltiplyMethod", function (a, b) {
-                    return a.mul(b);
-                });
+                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet$1(Bridge.get(Bridge.ClientTest.DecimalMathTests).inputMultiply, "MiltiplyMethod", $_.Bridge.ClientTest.DecimalMathTests.f3);
             },
             testRemainderMethod: function () {
-                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet$1(Bridge.get(Bridge.ClientTest.DecimalMathTests).inputRemainder, "RemainderMethod", function (a, b) {
-                    return a.mod(b);
-                });
+                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet$1(Bridge.get(Bridge.ClientTest.DecimalMathTests).inputRemainder, "RemainderMethod", $_.Bridge.ClientTest.DecimalMathTests.f2);
             },
             testSubtractMethod: function () {
-                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet$1(Bridge.get(Bridge.ClientTest.DecimalMathTests).inputSubtract, "SubtractMethod", function (a, b) {
-                    return a.sub(b);
-                });
+                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet$1(Bridge.get(Bridge.ClientTest.DecimalMathTests).inputSubtract, "SubtractMethod", $_.Bridge.ClientTest.DecimalMathTests.f1);
             },
             testCeilingMethod: function () {
                 var input = Bridge.Array.create(null, [[Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal(0.0), Bridge.Decimal(0.0)], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal("-443534569034876.12345678901235"), Bridge.Decimal(-443534569034876.0)], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal("-443534569034876.82345678901235"), Bridge.Decimal(-443534569034876.0)], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal("443534569034876.12345678901235"), Bridge.Decimal(443534569034877.0)], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal("443534569034876.62345678901235"), Bridge.Decimal(443534569034877.0)], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal("443534569034876.49999999999999"), Bridge.Decimal(443534569034877.0)], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal("443534569034876.50000000000001"), Bridge.Decimal(443534569034877.0)], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal("443534569034876.99999999999999"), Bridge.Decimal(443534569034877.0)], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal("4435345690348766678656790453"), Bridge.Decimal("4435345690348766678656790453")], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal(17.9345324), Bridge.Decimal(18.0)], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal("-0.9434567690348714234"), Bridge.Decimal(0.0)], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal("6999545690348766678656790453"), Bridge.Decimal("6999545690348766678656790453")], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.get(Bridge.ClientTest.DecimalMathTests).maxValue, Bridge.get(Bridge.ClientTest.DecimalMathTests).maxValue], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal.MinusOne, Bridge.Decimal.MinusOne], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.get(Bridge.ClientTest.DecimalMathTests).minValue, Bridge.get(Bridge.ClientTest.DecimalMathTests).minValue]], 15, 4);
     
-                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet(input, "CeilingMethod", function (a) {
-                    return a.ceil();
-                });
+                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet(input, "CeilingMethod", $_.Bridge.ClientTest.DecimalMathTests.f6);
             },
             testFloorMethod: function () {
                 var input = Bridge.Array.create(null, [[Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal(0.0), Bridge.Decimal(0.0)], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal("-443534569034876.12345678901235"), Bridge.Decimal(-443534569034877.0)], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal("-443534569034876.82345678901235"), Bridge.Decimal(-443534569034877.0)], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal("443534569034876.12345678901235"), Bridge.Decimal(443534569034876.0)], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal("443534569034876.62345678901235"), Bridge.Decimal(443534569034876.0)], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal("443534569034876.49999999999999"), Bridge.Decimal(443534569034876.0)], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal("443534569034876.50000000000001"), Bridge.Decimal(443534569034876.0)], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal("443534569034876.99999999999999"), Bridge.Decimal(443534569034876.0)], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal("4435345690348766678656790453"), Bridge.Decimal("4435345690348766678656790453")], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal(17.9345324), Bridge.Decimal(17.0)], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal("-0.9434567690348714234"), Bridge.Decimal.MinusOne], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal("6999545690348766678656790453"), Bridge.Decimal("6999545690348766678656790453")], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.get(Bridge.ClientTest.DecimalMathTests).maxValue, Bridge.get(Bridge.ClientTest.DecimalMathTests).maxValue], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.Decimal.MinusOne, Bridge.Decimal.MinusOne], [Bridge.get(Bridge.ClientTest.DecimalMathTests).NoDotNetDiff, null, Bridge.get(Bridge.ClientTest.DecimalMathTests).minValue, Bridge.get(Bridge.ClientTest.DecimalMathTests).minValue]], 15, 4);
     
-                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet(input, "FloorMethod", function (a) {
-                    return a.floor();
-                });
+                Bridge.get(Bridge.ClientTest.DecimalMathTests).runOperationSet(input, "FloorMethod", $_.Bridge.ClientTest.DecimalMathTests.f7);
             },
             runOperationSet$1: function (input, name, operation) {
                 var logger = new Bridge.ClientTest.DecimalMathTests.Logger();
@@ -10223,6 +10335,32 @@
         }
     });
     
+    Bridge.ns("Bridge.ClientTest.DecimalMathTests", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.DecimalMathTests, {
+        f1: function (a, b) {
+            return a.sub(b);
+        },
+        f2: function (a, b) {
+            return a.mod(b);
+        },
+        f3: function (a, b) {
+            return a.mul(b);
+        },
+        f4: function (a, b) {
+            return a.div(b);
+        },
+        f5: function (a, b) {
+            return a.add(b);
+        },
+        f6: function (a) {
+            return a.ceil();
+        },
+        f7: function (a) {
+            return a.floor();
+        }
+    });
+    
     Bridge.define('Bridge.ClientTest.Diagnostics.Contracts.ContractTests', {
         assertNoExceptions: function (block) {
             try {
@@ -10262,9 +10400,7 @@
             var a = 0;
             Bridge.get(Bridge.Test.Assert).throws$2(function () {
                 Bridge.Contract.assert(5, function () { return a !== 0; });
-            }, function (error) {
-                return Bridge.is(error, Bridge.ContractException);
-            }, "ContractException");
+            }, $_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f1, "ContractException");
             this.assertNoExceptions(function () {
                 Bridge.Contract.assert(5, function () { return a === 0; });
             });
@@ -10276,9 +10412,7 @@
             var a = 0;
             Bridge.get(Bridge.Test.Assert).throws$2(function () {
                 Bridge.Contract.assert(5, function () { return a !== 0; }, "is not zero");
-            }, function (error) {
-                return Bridge.is(error, Bridge.ContractException);
-            }, "ContractException");
+            }, $_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f1, "ContractException");
             this.assertNoExceptions(function () {
                 Bridge.Contract.assert(5, function () { return a === 0; }, "is zero");
             });
@@ -10290,9 +10424,7 @@
             var a = 0;
             Bridge.get(Bridge.Test.Assert).throws$2(function () {
                 Bridge.Contract.assert(4, function () { return a !== 0; });
-            }, function (error) {
-                return Bridge.is(error, Bridge.ContractException);
-            }, "ContractException");
+            }, $_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f1, "ContractException");
             this.assertNoExceptions(function () {
                 Bridge.Contract.assert(4, function () { return a === 0; });
             });
@@ -10304,9 +10436,7 @@
             var a = 0;
             Bridge.get(Bridge.Test.Assert).throws$2(function () {
                 Bridge.Contract.assert(4, function () { return a !== 0; }, "is not zero");
-            }, function (error) {
-                return Bridge.is(error, Bridge.ContractException);
-            }, "ContractException");
+            }, $_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f1, "ContractException");
             this.assertNoExceptions(function () {
                 Bridge.Contract.assert(4, function () { return a === 0; }, "is zero");
             });
@@ -10318,9 +10448,7 @@
             var a = 0;
             Bridge.get(Bridge.Test.Assert).throws$2(function () {
                 Bridge.Contract.assert(0, function () { return a !== 0; });
-            }, function (error) {
-                return Bridge.is(error, Bridge.ContractException);
-            }, "ContractException");
+            }, $_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f1, "ContractException");
             this.assertNoExceptions(function () {
                 Bridge.Contract.assert(0, function () { return a === 0; });
             });
@@ -10332,9 +10460,7 @@
             var a = 0;
             Bridge.get(Bridge.Test.Assert).throws$2(function () {
                 Bridge.Contract.assert(0, function () { return a !== 0; }, "must not be zero");
-            }, function (error) {
-                return Bridge.is(error, Bridge.ContractException);
-            }, "ContractException");
+            }, $_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f1, "ContractException");
             this.assertNoExceptions(function () {
                 Bridge.Contract.assert(0, function () { return a === 0; }, "can only be zero");
             });
@@ -10361,76 +10487,76 @@
             });
         },
         forAll: function () {
-            Bridge.get(Bridge.Test.Assert).throws$2(function () {
-                Bridge.Contract.forAll(2, 5, null);
-            }, function (error) {
-                return Bridge.is(error, Bridge.ArgumentNullException);
-            }, "ArgumentNullException");
-            this.assertNoExceptions(function () {
-                Bridge.Contract.forAll(2, 5, function (s) {
-                    return s !== 3;
-                });
-            });
-            Bridge.get(Bridge.Test.Assert).$false(Bridge.Contract.forAll(2, 5, function (s) {
-                return s !== 3;
-            }));
-            Bridge.get(Bridge.Test.Assert).$true(Bridge.Contract.forAll(2, 5, function (s) {
-                return s !== 6;
-            }));
+            var c = this.constructor;
+            Bridge.get(Bridge.Test.Assert).throws$2($_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f2, $_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f3, "ArgumentNullException");
+            this.assertNoExceptions($_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f5);
+            Bridge.get(Bridge.Test.Assert).$false(Bridge.Contract.forAll(2, 5, $_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f4));
+            Bridge.get(Bridge.Test.Assert).$true(Bridge.Contract.forAll(2, 5, $_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f6));
         },
         forAllWithCollection: function () {
-            Bridge.get(Bridge.Test.Assert).throws$2(function () {
-                Bridge.Contract.forAll$1([1, 2, 3], null);
-            }, function (error) {
-                return Bridge.is(error, Bridge.ArgumentNullException);
-            }, "ArgumentNullException");
-            this.assertNoExceptions(function () {
-                Bridge.Contract.forAll$1([1, 2, 3], function (s) {
-                    return s !== 3;
-                });
-            });
-            Bridge.get(Bridge.Test.Assert).$false(Bridge.Contract.forAll$1([1, 2, 3], function (s) {
-                return s !== 3;
-            }));
-            Bridge.get(Bridge.Test.Assert).$true(Bridge.Contract.forAll$1([1, 2, 3], function (s) {
-                return s !== 6;
-            }));
+            Bridge.get(Bridge.Test.Assert).throws$2($_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f7, $_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f3, "ArgumentNullException");
+            this.assertNoExceptions($_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f8);
+            Bridge.get(Bridge.Test.Assert).$false(Bridge.Contract.forAll$1([1, 2, 3], $_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f4));
+            Bridge.get(Bridge.Test.Assert).$true(Bridge.Contract.forAll$1([1, 2, 3], $_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f6));
         },
         exists: function () {
-            Bridge.get(Bridge.Test.Assert).throws$2(function () {
-                Bridge.Contract.exists(1, 5, null);
-            }, function (error) {
-                return Bridge.is(error, Bridge.ArgumentNullException);
-            }, "ArgumentNullException");
-            this.assertNoExceptions(function () {
-                Bridge.Contract.exists(1, 5, function (s) {
-                    return s === 3;
-                });
-            });
-            Bridge.get(Bridge.Test.Assert).$true(Bridge.Contract.exists(1, 5, function (s) {
-                return s === 3;
-            }));
-            Bridge.get(Bridge.Test.Assert).$false(Bridge.Contract.exists(1, 5, function (s) {
-                return s === 6;
-            }));
+            Bridge.get(Bridge.Test.Assert).throws$2($_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f9, $_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f3, "ArgumentNullException");
+            this.assertNoExceptions($_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f11);
+            Bridge.get(Bridge.Test.Assert).$true(Bridge.Contract.exists(1, 5, $_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f10));
+            Bridge.get(Bridge.Test.Assert).$false(Bridge.Contract.exists(1, 5, $_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f12));
         },
         existsWithCollection: function () {
-            Bridge.get(Bridge.Test.Assert).throws$2(function () {
-                Bridge.Contract.exists$1([1, 2, 3], null);
-            }, function (error) {
-                return Bridge.is(error, Bridge.ArgumentNullException);
-            }, "ArgumentNullException");
-            this.assertNoExceptions(function () {
-                Bridge.Contract.exists$1([1, 2, 3], function (s) {
-                    return s === 3;
-                });
-            });
-            Bridge.get(Bridge.Test.Assert).$true(Bridge.Contract.exists$1([1, 2, 3], function (s) {
-                return s === 3;
-            }));
-            Bridge.get(Bridge.Test.Assert).$false(Bridge.Contract.exists$1([1, 2, 3], function (s) {
-                return s === 6;
-            }));
+            Bridge.get(Bridge.Test.Assert).throws$2($_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f13, $_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f3, "ArgumentNullException");
+            this.assertNoExceptions($_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f14);
+            Bridge.get(Bridge.Test.Assert).$true(Bridge.Contract.exists$1([1, 2, 3], $_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f10));
+            Bridge.get(Bridge.Test.Assert).$false(Bridge.Contract.exists$1([1, 2, 3], $_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f12));
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.Diagnostics.Contracts.ContractTests", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests, {
+        f1: function (error) {
+            return Bridge.is(error, Bridge.ContractException);
+        },
+        f2: function () {
+            Bridge.Contract.forAll(2, 5, null);
+        },
+        f3: function (error) {
+            return Bridge.is(error, Bridge.ArgumentNullException);
+        },
+        f4: function (s) {
+            return s !== 3;
+        },
+        f5: function () {
+            Bridge.Contract.forAll(2, 5, $_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f4);
+        },
+        f6: function (s) {
+            return s !== 6;
+        },
+        f7: function () {
+            Bridge.Contract.forAll$1([1, 2, 3], null);
+        },
+        f8: function () {
+            Bridge.Contract.forAll$1([1, 2, 3], $_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f4);
+        },
+        f9: function () {
+            Bridge.Contract.exists(1, 5, null);
+        },
+        f10: function (s) {
+            return s === 3;
+        },
+        f11: function () {
+            Bridge.Contract.exists(1, 5, $_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f10);
+        },
+        f12: function (s) {
+            return s === 6;
+        },
+        f13: function () {
+            Bridge.Contract.exists$1([1, 2, 3], null);
+        },
+        f14: function () {
+            Bridge.Contract.exists$1([1, 2, 3], $_.Bridge.ClientTest.Diagnostics.Contracts.ContractTests.f10);
         }
     });
     
@@ -10496,21 +10622,16 @@
     });
     
     Bridge.define('Bridge.ClientTest.Exceptions.AggregateExceptionTests', {
-        statics: {
-            DefaultMessage: "One or more errors occurred."
-        },
-        makeEnumerable: function (T) {
-            return Bridge.fn.bind(this, function (arr) {
-                var $t;
-                if (arr === void 0) { arr = []; }
-                var $yield = [];
-                $t = Bridge.getEnumerator(arr);
-                while ($t.moveNext()) {
-                    var x = $t.getCurrent();
-                    $yield.push(x);
-                }
-                return Bridge.Array.toEnumerable($yield);
-            });
+        makeEnumerable: function (T, arr) {
+            var $t;
+            if (arr === void 0) { arr = []; }
+            var $yield = [];
+            $t = Bridge.getEnumerator(arr);
+            while ($t.moveNext()) {
+                var x = $t.getCurrent();
+                $yield.push(x);
+            }
+            return Bridge.Array.toEnumerable($yield);
         },
         typePropertiesAreCorrect: function () {
             Bridge.get(Bridge.Test.Assert).areEqual$1("Bridge.AggregateException", Bridge.getTypeName(Bridge.AggregateException), "Name");
@@ -10530,14 +10651,14 @@
             var inner1 = new Bridge.Exception("a");
             var inner2 = new Bridge.Exception("b");
     
-            var ex1 = new Bridge.AggregateException(null, this.makeEnumerable(Bridge.Exception)());
+            var ex1 = new Bridge.AggregateException(null, this.makeEnumerable(Bridge.Exception));
             Bridge.get(Bridge.Test.Assert).true$1(Bridge.is(ex1, Bridge.AggregateException), "ex1 is AggregateException");
             Bridge.get(Bridge.Test.Assert).true$1(!Bridge.hasValue(ex1.getInnerException()), "ex1 InnerException");
             Bridge.get(Bridge.Test.Assert).true$1(Bridge.is(ex1.innerExceptions, Bridge.ReadOnlyCollection$1(Bridge.Exception)), "ex1 InnerExceptions is ReadOnlyCollection");
             Bridge.get(Bridge.Test.Assert).areEqual$1(0, ex1.innerExceptions.getCount(), "ex1 InnerExceptions.Length");
             Bridge.get(Bridge.Test.Assert).areEqual$1(Bridge.get(Bridge.ClientTest.Exceptions.AggregateExceptionTests).DefaultMessage, ex1.getMessage(), "ex1 Message");
     
-            var ex2 = new Bridge.AggregateException(null, this.makeEnumerable(Bridge.Exception)([inner1]));
+            var ex2 = new Bridge.AggregateException(null, this.makeEnumerable(Bridge.Exception, [inner1]));
             Bridge.get(Bridge.Test.Assert).true$1(Bridge.is(ex2, Bridge.AggregateException), "ex2 is AggregateException");
             Bridge.get(Bridge.Test.Assert).true$1(ex2.getInnerException() === inner1, "ex2 InnerException");
             Bridge.get(Bridge.Test.Assert).true$1(Bridge.is(ex2.innerExceptions, Bridge.ReadOnlyCollection$1(Bridge.Exception)), "ex2 InnerExceptions is ReadOnlyCollection");
@@ -10545,7 +10666,7 @@
             Bridge.get(Bridge.Test.Assert).true$1(ex2.innerExceptions.get(0) === inner1, "ex2 InnerExceptions[0]");
             Bridge.get(Bridge.Test.Assert).areEqual$1(Bridge.get(Bridge.ClientTest.Exceptions.AggregateExceptionTests).DefaultMessage, ex2.getMessage(), "ex2 Message");
     
-            var ex3 = new Bridge.AggregateException(null, this.makeEnumerable(Bridge.Exception)([inner1, inner2]));
+            var ex3 = new Bridge.AggregateException(null, this.makeEnumerable(Bridge.Exception, [inner1, inner2]));
             Bridge.get(Bridge.Test.Assert).true$1(Bridge.is(ex3, Bridge.AggregateException), "ex3 is AggregateException");
             Bridge.get(Bridge.Test.Assert).true$1(ex3.getInnerException() === inner1, "ex3 InnerException");
             Bridge.get(Bridge.Test.Assert).true$1(Bridge.is(ex3.innerExceptions, Bridge.ReadOnlyCollection$1(Bridge.Exception)), "ex3 InnerExceptions is ReadOnlyCollection");
@@ -10594,14 +10715,14 @@
             var inner1 = new Bridge.Exception("a");
             var inner2 = new Bridge.Exception("b");
     
-            var ex1 = new Bridge.AggregateException("Message #1", this.makeEnumerable(Bridge.Exception)());
+            var ex1 = new Bridge.AggregateException("Message #1", this.makeEnumerable(Bridge.Exception));
             Bridge.get(Bridge.Test.Assert).true$1(Bridge.is(ex1, Bridge.AggregateException), "ex1 is AggregateException");
             Bridge.get(Bridge.Test.Assert).true$1(!Bridge.hasValue(ex1.getInnerException()), "ex1 InnerException");
             Bridge.get(Bridge.Test.Assert).true$1(Bridge.is(ex1.innerExceptions, Bridge.ReadOnlyCollection$1(Bridge.Exception)), "ex1 InnerExceptions is ReadOnlyCollection");
             Bridge.get(Bridge.Test.Assert).areEqual$1(0, ex1.innerExceptions.getCount(), "ex1 InnerExceptions.Length");
             Bridge.get(Bridge.Test.Assert).areEqual$1("Message #1", ex1.getMessage(), "ex1 Message");
     
-            var ex2 = new Bridge.AggregateException("Message #2", this.makeEnumerable(Bridge.Exception)([inner1]));
+            var ex2 = new Bridge.AggregateException("Message #2", this.makeEnumerable(Bridge.Exception, [inner1]));
             Bridge.get(Bridge.Test.Assert).true$1(Bridge.is(ex2, Bridge.AggregateException), "ex2 is AggregateException");
             Bridge.get(Bridge.Test.Assert).true$1(ex2.getInnerException() === inner1, "ex2 InnerException");
             Bridge.get(Bridge.Test.Assert).true$1(Bridge.is(ex2.innerExceptions, Bridge.ReadOnlyCollection$1(Bridge.Exception)), "ex2 InnerExceptions is ReadOnlyCollection");
@@ -10609,7 +10730,7 @@
             Bridge.get(Bridge.Test.Assert).true$1(ex2.innerExceptions.get(0) === inner1, "ex2 InnerExceptions[0]");
             Bridge.get(Bridge.Test.Assert).areEqual$1("Message #2", ex2.getMessage(), "ex2 Message");
     
-            var ex3 = new Bridge.AggregateException("Message #3", this.makeEnumerable(Bridge.Exception)([inner1, inner2]));
+            var ex3 = new Bridge.AggregateException("Message #3", this.makeEnumerable(Bridge.Exception, [inner1, inner2]));
             Bridge.get(Bridge.Test.Assert).true$1(Bridge.is(ex3, Bridge.AggregateException), "ex3 is AggregateException");
             Bridge.get(Bridge.Test.Assert).true$1(ex3.getInnerException() === inner1, "ex3 InnerException");
             Bridge.get(Bridge.Test.Assert).true$1(Bridge.is(ex3.innerExceptions, Bridge.ReadOnlyCollection$1(Bridge.Exception)), "ex3 InnerExceptions is ReadOnlyCollection");
@@ -10663,13 +10784,13 @@
             Bridge.get(Bridge.Test.Assert).true$1(actual.innerExceptions.get(4) === ex6, "6");
             Bridge.get(Bridge.Test.Assert).true$1(actual.innerExceptions.get(5) === ex3, "3");
             Bridge.get(Bridge.Test.Assert).true$1(actual.innerExceptions.get(6) === ex4, "4");
+        },
+        statics: {
+            DefaultMessage: "One or more errors occurred."
         }
     });
     
     Bridge.define('Bridge.ClientTest.Exceptions.ArgumentExceptionTests', {
-        statics: {
-            DefaultMessage: "Value does not fall within the expected range."
-        },
         typePropertiesAreCorrect: function () {
             Bridge.get(Bridge.Test.Assert).areEqual$1("Bridge.ArgumentException", Bridge.getTypeName(Bridge.ArgumentException), "Name");
             var d = new Bridge.ArgumentException();
@@ -10713,6 +10834,9 @@
             Bridge.get(Bridge.Test.Assert).true$1(ex.getInnerException() === inner, "InnerException");
             Bridge.get(Bridge.Test.Assert).areEqual$1(inner, ex.getInnerException(), "InnerException");
             Bridge.get(Bridge.Test.Assert).areEqual("The message", ex.getMessage());
+        },
+        statics: {
+            DefaultMessage: "Value does not fall within the expected range."
         }
     });
     
@@ -10855,9 +10979,6 @@
     });
     
     Bridge.define('Bridge.ClientTest.Exceptions.CultureNotFoundExceptionTests', {
-        statics: {
-            DefaultMessage: "Culture is not supported."
-        },
         typePropertiesAreCorrect: function () {
             Bridge.get(Bridge.Test.Assert).areEqual$1("Bridge.CultureNotFoundException", Bridge.getTypeName(Bridge.CultureNotFoundException), "Name");
             var d = new Bridge.CultureNotFoundException();
@@ -10938,6 +11059,9 @@
             Bridge.get(Bridge.Test.Assert).areEqual("The message", ex.getMessage());
             Bridge.get(Bridge.Test.Assert).areEqual$1(null, ex.getInvalidCultureName(), "InvalidCultureName");
             Bridge.get(Bridge.Test.Assert).areEqual$1(2, ex.getInvalidCultureId(), "InvalidCultureId");
+        },
+        statics: {
+            DefaultMessage: "Culture is not supported."
         }
     });
     
@@ -11340,9 +11464,6 @@
     });
     
     Bridge.define('Bridge.ClientTest.Exceptions.RankExceptionTests', {
-        statics: {
-            DefaultMessage: "Attempted to operate on an array with the incorrect number of dimensions."
-        },
         typePropertiesAreCorrect: function () {
             Bridge.get(Bridge.Test.Assert).areEqual$1("Bridge.RankException", Bridge.getTypeName(Bridge.RankException), "Name");
             var d = new Bridge.RankException();
@@ -11360,6 +11481,9 @@
             Bridge.get(Bridge.Test.Assert).true$1(Bridge.is(ex, Bridge.RankException), "is RankException");
             Bridge.get(Bridge.Test.Assert).areEqual$1(null, ex.getInnerException(), "InnerException");
             Bridge.get(Bridge.Test.Assert).areEqual("The message", ex.getMessage());
+        },
+        statics: {
+            DefaultMessage: "Attempted to operate on an array with the incorrect number of dimensions."
         }
     });
     
@@ -11567,30 +11691,18 @@
                 Bridge.get(Bridge.Test.Assert).areEqual$1(4, uniqueNumbers, "Count() distinct numbers");
     
                 // TEST
-                var oddNumbers = Bridge.Linq.Enumerable.from(numbers).count(function (n) {
-                    return n % 2 === 1;
-                });
+                var oddNumbers = Bridge.Linq.Enumerable.from(numbers).count($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f1);
                 Bridge.get(Bridge.Test.Assert).areEqual$1(3, oddNumbers, "Count() odd numbers");
     
                 // TEST
-                var groupJoin = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Group).getGroups()).groupJoin(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons(), function (g) {
-                    return g.getName();
-                }, function (p) {
-                    return p.getGroup();
-                }, function (g, pg) {
-                    return { group: g.getName(), personCount: Bridge.Linq.Enumerable.from(pg).count() };
-                })).toArray();
+                var groupJoin = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Group).getGroups()).groupJoin(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons(), $_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f2, $_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f3, $_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f4)).toArray();
     
                 var groupJoinExpected = [{ group: "A", personCount: 1 }, { group: "B", personCount: 4 }, { group: "C", personCount: 2 }, { group: "D", personCount: 0 }];
     
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(groupJoinExpected, groupJoin, "Count() within joint collections");
     
                 // TEST
-                var grouped = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).groupBy(function (p) {
-                    return p.getGroup();
-                }).select(function (g) {
-                    return { group: g.key(), personCount: g.count() };
-                })).toArray();
+                var grouped = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).groupBy($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f3).select($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f5)).toArray();
     
                 var groupedExpected = [{ group: "A", personCount: 1 }, { group: "C", personCount: 2 }, { group: "B", personCount: 4 }, { group: Bridge.cast(null, String), personCount: 1 }];
     
@@ -11601,19 +11713,11 @@
                 Bridge.get(Bridge.Test.Assert).areEqual$1(17, numSum, "Sum() numbers");
     
                 // TEST
-                var totalChars = Bridge.Linq.Enumerable.from(words).sum(function (w) {
-                    return w.length;
-                });
+                var totalChars = Bridge.Linq.Enumerable.from(words).sum($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f6);
                 Bridge.get(Bridge.Test.Assert).areEqual$1(11, totalChars, "Sum() total chars");
     
                 // TEST
-                var groupedSum = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).groupBy(function (p) {
-                    return p.getGroup();
-                }).select(function (g) {
-                    return { group: g.key(), sum: g.sum(function (x) {
-                        return x.getCount();
-                    }) };
-                })).toArray();
+                var groupedSum = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).groupBy($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f3).select($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f8)).toArray();
     
                 var groupedSumExpected = [{ group: "A", sum: 300 }, { group: "C", sum: 600 }, { group: "B", sum: 2000 }, { group: Bridge.cast(null, String), sum: 3000 }];
     
@@ -11624,38 +11728,18 @@
                 Bridge.get(Bridge.Test.Assert).areEqual$1(-1, minNum, "Min() number");
     
                 // TEST
-                var shortestWordLength = Bridge.Linq.Enumerable.from(words).min(function (w) {
-                    return w.length;
-                });
+                var shortestWordLength = Bridge.Linq.Enumerable.from(words).min($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f6);
                 Bridge.get(Bridge.Test.Assert).areEqual$1(3, shortestWordLength, "Min() for shortest word");
     
                 // TEST
-                var groupedMin = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).groupBy(function (p) {
-                    return p.getGroup();
-                }).select(function (g) {
-                    return { group: g.key(), min: g.min(function (x) {
-                        return x.getCount();
-                    }) };
-                })).toArray();
+                var groupedMin = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).groupBy($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f3).select($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f9)).toArray();
     
                 var groupedMinExpected = [{ group: "A", min: 300 }, { group: "C", min: 100 }, { group: "B", min: 50 }, { group: Bridge.cast(null, String), min: 3000 }];
     
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(groupedMinExpected, groupedMin, "Min() within group");
     
                 // TEST
-                var groupedMinWithLet = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).groupBy(function (p) {
-                    return p.getGroup();
-                }).select(function (g) {
-                    return { g: g, minCount: g.min(function (x) {
-                        return x.getCount();
-                    }) };
-                }).select(function (x0) {
-                    return { group: x0.g.key(), name: x0.g.where(function (x) {
-                        return x.getCount() === x0.minCount;
-                    }).select(function (x) {
-                        return x.getName();
-                    }).toArray() };
-                })).toArray();
+                var groupedMinWithLet = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).groupBy($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f3).select($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f10).select($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f12)).toArray();
     
                 var groupedMinWithLetExpected = [{ group: "A", name: ["Frank"] }, { group: "C", name: ["Zeppa"] }, { group: "B", name: ["Dora"] }, { group: Bridge.cast(null, String), name: ["Nemo"] }];
     
@@ -11666,38 +11750,18 @@
                 Bridge.get(Bridge.Test.Assert).areEqual$1(5, maxNum, "Max() number");
     
                 // TEST
-                var longestWordLength = Bridge.Linq.Enumerable.from(words).max(function (w) {
-                    return w.length;
-                });
+                var longestWordLength = Bridge.Linq.Enumerable.from(words).max($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f6);
                 Bridge.get(Bridge.Test.Assert).areEqual$1(5, longestWordLength, "Max() for longest word");
     
                 // TEST
-                var groupedMax = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).groupBy(function (p) {
-                    return p.getGroup();
-                }).select(function (g) {
-                    return { group: g.key(), max: g.max(function (x) {
-                        return x.getCount();
-                    }) };
-                })).toArray();
+                var groupedMax = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).groupBy($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f3).select($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f13)).toArray();
     
                 var groupedMaxExpected = [{ group: "A", max: 300 }, { group: "C", max: 500 }, { group: "B", max: 700 }, { group: Bridge.cast(null, String), max: 3000 }];
     
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(groupedMaxExpected, groupedMax, "Max() within group");
     
                 // TEST
-                var groupedMaxWithLet = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).groupBy(function (p) {
-                    return p.getGroup();
-                }).select(function (g) {
-                    return { g: g, maxCount: g.max(function (x) {
-                        return x.getCount();
-                    }) };
-                }).select(function (x1) {
-                    return { group: x1.g.key(), name: x1.g.where(function (x) {
-                        return x.getCount() === x1.maxCount;
-                    }).select(function (x) {
-                        return x.getName();
-                    }).toArray() };
-                })).toArray();
+                var groupedMaxWithLet = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).groupBy($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f3).select($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f14).select($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f15)).toArray();
     
                 var groupedMaxWithLetExpected = [{ group: "A", name: ["Frank"] }, { group: "C", name: ["Billy"] }, { group: "B", name: ["John", "Mary"] }, { group: Bridge.cast(null, String), name: ["Nemo"] }];
     
@@ -11709,19 +11773,11 @@
     
                 // TEST
                 var averageWordLengths = ["1", "22", "333", "4444", "55555"];
-                var averageWordLength = Bridge.Linq.Enumerable.from(averageWordLengths).average(function (w) {
-                    return w.length;
-                });
+                var averageWordLength = Bridge.Linq.Enumerable.from(averageWordLengths).average($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f6);
                 Bridge.get(Bridge.Test.Assert).areEqual$1(3, averageWordLength, "Average() for word lengths");
     
                 // TEST
-                var groupedAverage = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).groupBy(function (p) {
-                    return p.getGroup();
-                }).select(function (g) {
-                    return { group: g.key(), average: g.average(function (x) {
-                        return x.getCount();
-                    }) };
-                })).toArray();
+                var groupedAverage = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).groupBy($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f3).select($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f16)).toArray();
     
                 var groupedAverageExpected = [{ group: "A", average: 300 }, { group: "C", average: 300 }, { group: "B", average: 500 }, { group: Bridge.cast(null, String), average: 3000 }];
     
@@ -11729,28 +11785,88 @@
     
                 // TEST
                 var doublesForAggregate = [1.0, 2.0, 3.0, 4.0, 5.0];
-                var product = Bridge.Linq.Enumerable.from(doublesForAggregate).aggregate(function (runningProduct, nextFactor) {
-                    return runningProduct * nextFactor;
-                });
+                var product = Bridge.Linq.Enumerable.from(doublesForAggregate).aggregate($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f17);
                 Bridge.get(Bridge.Test.Assert).areEqual$1(120, product, "Aggregate() within doubles");
     
                 // TEST
                 var startBalance = 100.0;
                 var attemptedWithdrawals = [20, 10, 40, 50, 10, 70, 30];
     
-                var endBalance = Bridge.Linq.Enumerable.from(attemptedWithdrawals).aggregate(startBalance, function (balance, nextWithdrawal) {
-                    return ((nextWithdrawal <= balance) ? (balance - nextWithdrawal) : balance);
-                });
+                var endBalance = Bridge.Linq.Enumerable.from(attemptedWithdrawals).aggregate(startBalance, $_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f18);
     
                 Bridge.get(Bridge.Test.Assert).areEqual$1(20, endBalance, "Aggregate() balance");
             },
             bridge315: function () {
-                var q = Bridge.Linq.Enumerable.from("a,b,c,a".toUpperCase().split(",")).aggregate("", function (workingSentence, next) {
-                    return next + " " + workingSentence;
-                });
+                var q = Bridge.Linq.Enumerable.from("a,b,c,a".toUpperCase().split(",")).aggregate("", $_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f19);
     
                 Bridge.get(Bridge.Test.Assert).areStrictEqual$1("A C B A ", q, "Enumerable.Aggregate");
             }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.Linq.TestLinqAggregateOperators", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators, {
+        f1: function (n) {
+            return n % 2 === 1;
+        },
+        f2: function (g) {
+            return g.getName();
+        },
+        f3: function (p) {
+            return p.getGroup();
+        },
+        f4: function (g, pg) {
+            return { group: g.getName(), personCount: Bridge.Linq.Enumerable.from(pg).count() };
+        },
+        f5: function (g) {
+            return { group: g.key(), personCount: g.count() };
+        },
+        f6: function (w) {
+            return w.length;
+        },
+        f7: function (x) {
+            return x.getCount();
+        },
+        f8: function (g) {
+            return { group: g.key(), sum: g.sum($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f7) };
+        },
+        f9: function (g) {
+            return { group: g.key(), min: g.min($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f7) };
+        },
+        f10: function (g) {
+            return { g: g, minCount: g.min($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f7) };
+        },
+        f11: function (x) {
+            return x.getName();
+        },
+        f12: function (x0) {
+            return { group: x0.g.key(), name: x0.g.where(function (x) {
+                return x.getCount() === x0.minCount;
+            }).select($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f11).toArray() };
+        },
+        f13: function (g) {
+            return { group: g.key(), max: g.max($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f7) };
+        },
+        f14: function (g) {
+            return { g: g, maxCount: g.max($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f7) };
+        },
+        f15: function (x1) {
+            return { group: x1.g.key(), name: x1.g.where(function (x) {
+                return x.getCount() === x1.maxCount;
+            }).select($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f11).toArray() };
+        },
+        f16: function (g) {
+            return { group: g.key(), average: g.average($_.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f7) };
+        },
+        f17: function (runningProduct, nextFactor) {
+            return runningProduct * nextFactor;
+        },
+        f18: function (balance, nextWithdrawal) {
+            return ((nextWithdrawal <= balance) ? (balance - nextWithdrawal) : balance);
+        },
+        f19: function (workingSentence, next) {
+            return next + " " + workingSentence;
         }
     });
     
@@ -11760,9 +11876,7 @@
                 // TEST
                 var doubles = [1.7, 2.3, 1.9, 4.1, 2.9];
     
-                var sameDoubles = Bridge.Linq.Enumerable.from(doubles).select(function (d) {
-                    return d;
-                });
+                var sameDoubles = Bridge.Linq.Enumerable.from(doubles).select($_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f1);
                 var doublesArray = sameDoubles.toArray();
     
                 Bridge.get(Bridge.Test.Assert).true$1(Bridge.String.contains(Bridge.getType(doublesArray).toString(),"function Array()"), "ToArray() conversion for doubles - check type name");
@@ -11771,18 +11885,14 @@
                 // TEST
                 var words = ["1.one", "2.two", "3.three"];
     
-                var wordList1 = Bridge.Linq.Enumerable.from((Bridge.Linq.Enumerable.from(words).orderByDescending(function (w) {
-                    return w;
-                }))).toList(String);
+                var wordList1 = Bridge.Linq.Enumerable.from((Bridge.Linq.Enumerable.from(words).orderByDescending($_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f2))).toList(String);
                 var wordListExpected1 = new Bridge.List$1(String)(["3.three", "2.two", "1.one"]);
     
                 Bridge.get(Bridge.Test.Assert).areEqual$1("Bridge.List$1$String", Bridge.get(Bridge.ClientTest.Utilities.TypeHelper).getTypeName(wordList1), "ToList() conversion with explicit String type for string - check type name");
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(wordListExpected1, wordList1, "ToList() conversion for strings with explicit String type - check content");
     
                 // TEST
-                var wordList2 = (Bridge.Linq.Enumerable.from(words).orderByDescending(function (w) {
-                    return w;
-                })).toList(String);
+                var wordList2 = (Bridge.Linq.Enumerable.from(words).orderByDescending($_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f2)).toList(String);
                 var wordListExpected2 = new Bridge.List$1(String)(["3.three", "2.two", "1.one"]);
     
                 Bridge.get(Bridge.Test.Assert).areEqual$1("Bridge.List$1$String", Bridge.get(Bridge.ClientTest.Utilities.TypeHelper).getTypeName(wordList2), "ToList() conversion for string - check type name");
@@ -11790,13 +11900,7 @@
     
                 // TEST
                 var groups = Bridge.get(Bridge.ClientTest.Utilities.Group).getGroups();
-                var groupDictionary1 = (Bridge.Linq.Enumerable.from(groups).select(function (g) {
-                    return g;
-                })).toDictionary(function (g) {
-                    return g.getName();
-                }, function (g) {
-                    return g;
-                }, String, Bridge.ClientTest.Utilities.Group);
+                var groupDictionary1 = (Bridge.Linq.Enumerable.from(groups).select($_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f3)).toDictionary($_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f4, $_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f3, String, Bridge.ClientTest.Utilities.Group);
                 var expectedGroupDictionary1 = new Bridge.Dictionary$2(String,Bridge.ClientTest.Utilities.Group)();
     
                 expectedGroupDictionary1.add("A", Bridge.merge(new Bridge.ClientTest.Utilities.Group(), {
@@ -11839,23 +11943,13 @@
                     setLimit: 200
                 } ));
     
-                var groupDictionary2 = (Bridge.Linq.Enumerable.from(groups).select(function (g) {
-                    return g;
-                })).toDictionary(function (g) {
-                    return g.getName();
-                }, function (g) {
-                    return g;
-                }, String, Bridge.ClientTest.Utilities.Group, comparer);
+                var groupDictionary2 = (Bridge.Linq.Enumerable.from(groups).select($_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f3)).toDictionary($_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f4, $_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f3, String, Bridge.ClientTest.Utilities.Group, comparer);
     
                 Bridge.get(Bridge.Test.Assert).areEqual$1("Bridge.Dictionary$2$String$Bridge.ClientTest.Utilities.Group", Bridge.get(Bridge.ClientTest.Utilities.TypeHelper).getTypeName(groupDictionary2), "ToDictionary(keySelector, elementSelector, IEqualityComparer) conversion for <string, Group> - check type name");
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(expectedGroupDictionary2, groupDictionary2, "ToDictionary(keySelector, elementSelector, IEqualityComparer) conversion for <string, Group> - check content");
     
                 // TEST
-                var groupDictionary3 = (Bridge.Linq.Enumerable.from(groups).select(function (g) {
-                    return g;
-                })).toDictionary(function (g) {
-                    return g.getName();
-                }, null, String, Bridge.ClientTest.Utilities.Group);
+                var groupDictionary3 = (Bridge.Linq.Enumerable.from(groups).select($_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f3)).toDictionary($_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f4, null, String, Bridge.ClientTest.Utilities.Group);
     
                 Bridge.get(Bridge.Test.Assert).areEqual$1("Bridge.Dictionary$2$String$Bridge.ClientTest.Utilities.Group", Bridge.get(Bridge.ClientTest.Utilities.TypeHelper).getTypeName(groupDictionary3), "ToDictionary(keySelector) conversion for <string, Group> - check type name");
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(expectedGroupDictionary1, groupDictionary3, "ToDictionary(keySelector) conversion for <string, Group> - check content");
@@ -11870,75 +11964,62 @@
         }
     });
     
+    Bridge.ns("Bridge.ClientTest.Linq.TestLinqConversionOperators", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.Linq.TestLinqConversionOperators, {
+        f1: function (d) {
+            return d;
+        },
+        f2: function (w) {
+            return w;
+        },
+        f3: function (g) {
+            return g;
+        },
+        f4: function (g) {
+            return g.getName();
+        }
+    });
+    
     Bridge.define('Bridge.ClientTest.Linq.TestLinqElementOperators', {
         statics: {
             test: function () {
                 // TEST
                 var persons = Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons();
-                var person3 = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).where(function (p) {
-                    return p.getID() === 3;
-                })).first();
+                var person3 = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).where($_.Bridge.ClientTest.Linq.TestLinqElementOperators.f1)).first();
     
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons().getItem(2), person3, "First() with ID = 3");
-                Bridge.get(Bridge.Test.Assert).areDeepEqual$1(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons().getItem(2), Bridge.Linq.Enumerable.from(persons).first(function (x) {
-                    return x.getID() === 3;
-                }), "First() with ID = 3 by lambda");
-                Bridge.get(Bridge.Test.Assert).areDeepEqual$1(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons().getItem(2), Bridge.Linq.Enumerable.from(persons).where(function (x) {
-                    return x.getID() === 3;
-                }).first(), "First() with Where() with ID = 3 by lambda");
-                Bridge.get(Bridge.Test.Assert).areDeepEqual$1(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons().getItem(1), Bridge.Linq.Enumerable.from(persons).first(function (x) {
-                    return x.getGroup() === "C";
-                }), "First() with Group = 'C' by lambda");
+                Bridge.get(Bridge.Test.Assert).areDeepEqual$1(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons().getItem(2), Bridge.Linq.Enumerable.from(persons).first($_.Bridge.ClientTest.Linq.TestLinqElementOperators.f2), "First() with ID = 3 by lambda");
+                Bridge.get(Bridge.Test.Assert).areDeepEqual$1(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons().getItem(2), Bridge.Linq.Enumerable.from(persons).where($_.Bridge.ClientTest.Linq.TestLinqElementOperators.f2).first(), "First() with Where() with ID = 3 by lambda");
+                Bridge.get(Bridge.Test.Assert).areDeepEqual$1(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons().getItem(1), Bridge.Linq.Enumerable.from(persons).first($_.Bridge.ClientTest.Linq.TestLinqElementOperators.f3), "First() with Group = 'C' by lambda");
                 Bridge.get(Bridge.Test.Assert).throws$5(Bridge.get(Bridge.ClientTest.Linq.TestLinqElementOperators).throwExceptionOnFirst1, "First() should throw exception if no element found");
                 Bridge.get(Bridge.Test.Assert).throws$5(Bridge.get(Bridge.ClientTest.Linq.TestLinqElementOperators).throwExceptionOnFirst2, "First() should throw exception on empty collection");
     
                 // TEST
-                Bridge.get(Bridge.Test.Assert).areEqual$1(null, Bridge.Linq.Enumerable.from(persons).firstOrDefault(function (x) {
-                    return x.getID() === -1;
-                }, Bridge.getDefaultValue(Bridge.ClientTest.Utilities.Person)), "FirstOrDefault() unexisting element by lambda");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(null, Bridge.Linq.Enumerable.from(persons).where(function (x) {
-                    return x.getID() === -1;
-                }).firstOrDefault(null, Bridge.getDefaultValue(Bridge.ClientTest.Utilities.Person)), "FirstOrDefault() with Where() unexisting element by lambda");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(persons.getItem(7), Bridge.Linq.Enumerable.from(persons).firstOrDefault(function (x) {
-                    return x.getName() === "Nemo";
-                }, Bridge.getDefaultValue(Bridge.ClientTest.Utilities.Person)), "FirstOrDefault() with Name = 'Nemo' by lambda");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(persons.getItem(7), Bridge.Linq.Enumerable.from(persons).where(function (x) {
-                    return x.getName() === "Nemo";
-                }).firstOrDefault(null, Bridge.getDefaultValue(Bridge.ClientTest.Utilities.Person)), "FirstOrDefault() with Where() with Name = 'Nemo' by lambda");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(null, Bridge.Linq.Enumerable.from(persons).firstOrDefault($_.Bridge.ClientTest.Linq.TestLinqElementOperators.f4, Bridge.getDefaultValue(Bridge.ClientTest.Utilities.Person)), "FirstOrDefault() unexisting element by lambda");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(null, Bridge.Linq.Enumerable.from(persons).where($_.Bridge.ClientTest.Linq.TestLinqElementOperators.f4).firstOrDefault(null, Bridge.getDefaultValue(Bridge.ClientTest.Utilities.Person)), "FirstOrDefault() with Where() unexisting element by lambda");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(persons.getItem(7), Bridge.Linq.Enumerable.from(persons).firstOrDefault($_.Bridge.ClientTest.Linq.TestLinqElementOperators.f5, Bridge.getDefaultValue(Bridge.ClientTest.Utilities.Person)), "FirstOrDefault() with Name = 'Nemo' by lambda");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(persons.getItem(7), Bridge.Linq.Enumerable.from(persons).where($_.Bridge.ClientTest.Linq.TestLinqElementOperators.f5).firstOrDefault(null, Bridge.getDefaultValue(Bridge.ClientTest.Utilities.Person)), "FirstOrDefault() with Where() with Name = 'Nemo' by lambda");
                 Bridge.get(Bridge.Test.Assert).areEqual$1(null, Bridge.Linq.Enumerable.from(([])).firstOrDefault(null, Bridge.getDefaultValue(Object)), "FirstOrDefault() within zero-length array by lambda");
     
                 // TEST
-                var lastPerson = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).select(function (p) {
-                    return p;
-                })).last();
+                var lastPerson = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).select($_.Bridge.ClientTest.Linq.TestLinqElementOperators.f6)).last();
     
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons().getItem(7), lastPerson, "Last() person");
-                Bridge.get(Bridge.Test.Assert).areDeepEqual$1(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons().getItem(3), Bridge.Linq.Enumerable.from(persons).last(function (x) {
-                    return x.getID() === 4;
-                }), "Last() with ID = 4 by lambda");
-                Bridge.get(Bridge.Test.Assert).areDeepEqual$1(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons().getItem(6), Bridge.Linq.Enumerable.from(persons).last(function (x) {
-                    return x.getGroup() === "B";
-                }), "Last() with Group = 'B' by lambda");
+                Bridge.get(Bridge.Test.Assert).areDeepEqual$1(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons().getItem(3), Bridge.Linq.Enumerable.from(persons).last($_.Bridge.ClientTest.Linq.TestLinqElementOperators.f7), "Last() with ID = 4 by lambda");
+                Bridge.get(Bridge.Test.Assert).areDeepEqual$1(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons().getItem(6), Bridge.Linq.Enumerable.from(persons).last($_.Bridge.ClientTest.Linq.TestLinqElementOperators.f8), "Last() with Group = 'B' by lambda");
                 Bridge.get(Bridge.Test.Assert).throws$5(Bridge.get(Bridge.ClientTest.Linq.TestLinqElementOperators).throwExceptionOnLast1, "Last() should throw exception if no element found");
                 Bridge.get(Bridge.Test.Assert).throws$5(Bridge.get(Bridge.ClientTest.Linq.TestLinqElementOperators).throwExceptionOnLast2, "Last() should throw exception on empty collection");
     
                 // TEST
-                Bridge.get(Bridge.Test.Assert).areEqual$1(null, Bridge.Linq.Enumerable.from(persons).lastOrDefault(function (x) {
-                    return x.getID() === -1;
-                }, Bridge.getDefaultValue(Bridge.ClientTest.Utilities.Person)), "LastOrDefault() unexisting element by lambda");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(null, Bridge.Linq.Enumerable.from(persons).where(function (x) {
-                    return x.getID() === -1;
-                }).lastOrDefault(null, Bridge.getDefaultValue(Bridge.ClientTest.Utilities.Person)), "LastOrDefault() with Where() unexisting element by lambda");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(persons.getItem(7), Bridge.Linq.Enumerable.from(persons).lastOrDefault(function (x) {
-                    return x.getName() === "Nemo";
-                }, Bridge.getDefaultValue(Bridge.ClientTest.Utilities.Person)), "LastOrDefault() with Name = 'Nemo' by lambda");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(null, Bridge.Linq.Enumerable.from(persons).lastOrDefault($_.Bridge.ClientTest.Linq.TestLinqElementOperators.f4, Bridge.getDefaultValue(Bridge.ClientTest.Utilities.Person)), "LastOrDefault() unexisting element by lambda");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(null, Bridge.Linq.Enumerable.from(persons).where($_.Bridge.ClientTest.Linq.TestLinqElementOperators.f4).lastOrDefault(null, Bridge.getDefaultValue(Bridge.ClientTest.Utilities.Person)), "LastOrDefault() with Where() unexisting element by lambda");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(persons.getItem(7), Bridge.Linq.Enumerable.from(persons).lastOrDefault($_.Bridge.ClientTest.Linq.TestLinqElementOperators.f5, Bridge.getDefaultValue(Bridge.ClientTest.Utilities.Person)), "LastOrDefault() with Name = 'Nemo' by lambda");
                 Bridge.get(Bridge.Test.Assert).areEqual$1(null, Bridge.Linq.Enumerable.from(([])).lastOrDefault(null, Bridge.getDefaultValue(Object)), "LastOrDefault() within zero-length array by lambda");
     
                 // TEST
                 var numbers = [5, 4, 1, 3, 9, 8, 6, 7, 2, 0];
-                var elementAt1 = (Bridge.Linq.Enumerable.from(numbers).where(function (n) {
-                    return n > 5;
-                })).elementAt(1);
+                var elementAt1 = (Bridge.Linq.Enumerable.from(numbers).where($_.Bridge.ClientTest.Linq.TestLinqElementOperators.f9)).elementAt(1);
     
                 Bridge.get(Bridge.Test.Assert).areEqual$1(8, elementAt1, "ElementAt() should return 8");
                 Bridge.get(Bridge.Test.Assert).throws$5(Bridge.get(Bridge.ClientTest.Linq.TestLinqElementOperators).throwExceptionOnElementAt1, "ElementAt() should throw exception if no element found");
@@ -11949,23 +12030,17 @@
                 Bridge.get(Bridge.Test.Assert).areEqual$1(4, elementAt1OrDefault, "ElementAtOrDefault() should return 4");
     
                 // TEST
-                var elementAt2OrDefault = (Bridge.Linq.Enumerable.from(numbers).where(function (n) {
-                    return n > 5;
-                })).elementAtOrDefault(2, Bridge.getDefaultValue(Bridge.Int));
+                var elementAt2OrDefault = (Bridge.Linq.Enumerable.from(numbers).where($_.Bridge.ClientTest.Linq.TestLinqElementOperators.f9)).elementAtOrDefault(2, Bridge.getDefaultValue(Bridge.Int));
                 Bridge.get(Bridge.Test.Assert).areEqual$1(6, elementAt2OrDefault, "ElementAtOrDefault() should return 6");
     
                 // TEST
-                var elementAt100OrDefault = (Bridge.Linq.Enumerable.from(numbers).where(function (n) {
-                    return n > 5;
-                })).elementAtOrDefault(100, Bridge.getDefaultValue(Bridge.Int));
+                var elementAt100OrDefault = (Bridge.Linq.Enumerable.from(numbers).where($_.Bridge.ClientTest.Linq.TestLinqElementOperators.f9)).elementAtOrDefault(100, Bridge.getDefaultValue(Bridge.Int));
                 Bridge.get(Bridge.Test.Assert).areEqual$1(0, elementAt100OrDefault, "ElementAtOrDefault() should return 0");
             },
             throwExceptionOnFirst1: function () {
                 var numbers = [3, 4];
     
-                Bridge.Linq.Enumerable.from(numbers).first(function (x) {
-                    return x === 5;
-                });
+                Bridge.Linq.Enumerable.from(numbers).first($_.Bridge.ClientTest.Linq.TestLinqElementOperators.f10);
             },
             throwExceptionOnFirst2: function () {
                 var numbers = [];
@@ -11975,9 +12050,7 @@
             throwExceptionOnLast1: function () {
                 var numbers = [3, 4];
     
-                Bridge.Linq.Enumerable.from(numbers).last(function (x) {
-                    return x === 5;
-                });
+                Bridge.Linq.Enumerable.from(numbers).last($_.Bridge.ClientTest.Linq.TestLinqElementOperators.f10);
             },
             throwExceptionOnLast2: function () {
                 var numbers = [];
@@ -11997,13 +12070,46 @@
         }
     });
     
+    Bridge.ns("Bridge.ClientTest.Linq.TestLinqElementOperators", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.Linq.TestLinqElementOperators, {
+        f1: function (p) {
+            return p.getID() === 3;
+        },
+        f2: function (x) {
+            return x.getID() === 3;
+        },
+        f3: function (x) {
+            return x.getGroup() === "C";
+        },
+        f4: function (x) {
+            return x.getID() === -1;
+        },
+        f5: function (x) {
+            return x.getName() === "Nemo";
+        },
+        f6: function (p) {
+            return p;
+        },
+        f7: function (x) {
+            return x.getID() === 4;
+        },
+        f8: function (x) {
+            return x.getGroup() === "B";
+        },
+        f9: function (n) {
+            return n > 5;
+        },
+        f10: function (x) {
+            return x === 5;
+        }
+    });
+    
     Bridge.define('Bridge.ClientTest.Linq.TestLinqGenerationOperators', {
         statics: {
             test: function () {
                 // TEST
-                var numbers = (Bridge.Linq.Enumerable.range(0, 6).select(function (n) {
-                    return { number: n, isOdd: n % 2 === 1 };
-                })).toArray();
+                var numbers = (Bridge.Linq.Enumerable.range(0, 6).select($_.Bridge.ClientTest.Linq.TestLinqGenerationOperators.f1)).toArray();
                 var numbersExpected = [{ number: 0, isOdd: false }, { number: 1, isOdd: true }, { number: 2, isOdd: false }, { number: 3, isOdd: true }, { number: 4, isOdd: false }, { number: 5, isOdd: true }];
     
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(numbersExpected, numbers, "Range() 6 items from 0");
@@ -12017,6 +12123,14 @@
         }
     });
     
+    Bridge.ns("Bridge.ClientTest.Linq.TestLinqGenerationOperators", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.Linq.TestLinqGenerationOperators, {
+        f1: function (n) {
+            return { number: n, isOdd: n % 2 === 1 };
+        }
+    });
+    
     Bridge.define('Bridge.ClientTest.Linq.TestLinqGroupingOperators', {
         statics: {
             test: function () {
@@ -12024,35 +12138,21 @@
                 var numbers = [2, 10, 3, 5, 30, 1, -15];
                 var words = ["1.one", "3.three", "2.two", "22.twentytwo", "11.eleven", "30.thirty"];
     
-                var numberGroups = (Bridge.Linq.Enumerable.from(numbers).groupBy(function (n) {
-                    return n % 5;
-                }).select(function (g) {
-                    return { remainder: g.key(), numbers: g.toArray() };
-                })).toArray();
+                var numberGroups = (Bridge.Linq.Enumerable.from(numbers).groupBy($_.Bridge.ClientTest.Linq.TestLinqGroupingOperators.f1).select($_.Bridge.ClientTest.Linq.TestLinqGroupingOperators.f2)).toArray();
     
                 var numberGroupsExpected = [{ remainder: 2, numbers: [2] }, { remainder: 0, numbers: [10, 5, 30, -15] }, { remainder: 3, numbers: [3] }, { remainder: 1, numbers: [1] }];
     
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(numberGroupsExpected, numberGroups, "Group numbers by remainders");
     
                 // TEST
-                var wordGroups = (Bridge.Linq.Enumerable.from(words).groupBy(function (w) {
-                    return w.charCodeAt(0);
-                }).select(function (g) {
-                    return { firstLetter: g.key(), words: g.toArray() };
-                })).toArray();
+                var wordGroups = (Bridge.Linq.Enumerable.from(words).groupBy($_.Bridge.ClientTest.Linq.TestLinqGroupingOperators.f3).select($_.Bridge.ClientTest.Linq.TestLinqGroupingOperators.f4)).toArray();
     
                 var wordGroupsExpected = [{ firstLetter: 49, words: ["1.one", "11.eleven"] }, { firstLetter: 51, words: ["3.three", "30.thirty"] }, { firstLetter: 50, words: ["2.two", "22.twentytwo"] }];
     
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(wordGroupsExpected, wordGroups, "Group words by first letters");
     
                 // TEST
-                var personGroups = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).groupBy(function (p) {
-                    return p.getGroup();
-                }).select(function (g) {
-                    return { group: g.key(), persons: g.select(function (x) {
-                        return x.getName();
-                    }).toArray() };
-                })).toArray();
+                var personGroups = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).groupBy($_.Bridge.ClientTest.Linq.TestLinqGroupingOperators.f5).select($_.Bridge.ClientTest.Linq.TestLinqGroupingOperators.f7)).toArray();
     
                 var personGroupsExpected = [{ group: "A", persons: ["Frank"] }, { group: "C", persons: ["Zeppa", "Billy"] }, { group: "B", persons: ["John", "Dora", "Ian", "Mary"] }, { group: Bridge.cast(null, String), persons: ["Nemo"] }];
     
@@ -12066,17 +12166,7 @@
                 var complexGrouping = (Bridge.Linq.Enumerable.from(numbers).select(function (n) {
                     return { number: n, words: (Bridge.Linq.Enumerable.from(words).where(function (w) {
                         return String.fromCharCode(w.charCodeAt(0)) === n.toString();
-                    }).groupBy(function (w) {
-                        return w.charCodeAt(0);
-                    }).select(function (g) {
-                        return { letter: g.key(), letterGroups: (Bridge.Linq.Enumerable.from(g).groupBy(function (l) {
-                            return l;
-                        }, function (l) {
-                            return l;
-                        }).select(function (mg) {
-                            return { letter: mg.key(), letters: mg.toArray() };
-                        })).toArray() };
-                    })).toArray() };
+                    }).groupBy($_.Bridge.ClientTest.Linq.TestLinqGroupingOperators.f3).select($_.Bridge.ClientTest.Linq.TestLinqGroupingOperators.f10)).toArray() };
                 })).toArray();
     
                 var complexGroupingExpected = Bridge.get(Bridge.ClientTest.Linq.TestLinqGroupingOperators).getComplexGroupingExpectedResult();
@@ -12086,24 +12176,14 @@
                 // TEST
                 var anagrams = [" from ", " salt ", " earn ", " last ", " near ", " form "];
     
-                var anagramsGroups = Bridge.Linq.Enumerable.from(anagrams).groupBy(function (w) {
-                    return w.trim();
-                }, null, null, new Bridge.ClientTest.Linq.AnagramEqualityComparer()).select(function (x) {
-                    return { key: x.key(), words: x.toArray() };
-                }).toArray();
+                var anagramsGroups = Bridge.Linq.Enumerable.from(anagrams).groupBy($_.Bridge.ClientTest.Linq.TestLinqGroupingOperators.f11, null, null, new Bridge.ClientTest.Linq.AnagramEqualityComparer()).select($_.Bridge.ClientTest.Linq.TestLinqGroupingOperators.f12).toArray();
     
                 var anagramsGroupsExpected = [{ key: "from", words: [" from ", " form "] }, { key: "salt", words: [" salt ", " last "] }, { key: "earn", words: [" earn ", " near "] }];
     
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(anagramsGroupsExpected, anagramsGroups, "Anagram grouping with equality comparer");
     
                 // TEST
-                var anagramsGroups1 = Bridge.Linq.Enumerable.from(anagrams).groupBy(function (w) {
-                    return w.trim();
-                }, function (a) {
-                    return a.toUpperCase();
-                }, null, new Bridge.ClientTest.Linq.AnagramEqualityComparer()).select(function (x) {
-                    return { key: x.key(), words: x.toArray() };
-                }).toArray();
+                var anagramsGroups1 = Bridge.Linq.Enumerable.from(anagrams).groupBy($_.Bridge.ClientTest.Linq.TestLinqGroupingOperators.f11, $_.Bridge.ClientTest.Linq.TestLinqGroupingOperators.f13, null, new Bridge.ClientTest.Linq.AnagramEqualityComparer()).select($_.Bridge.ClientTest.Linq.TestLinqGroupingOperators.f12).toArray();
                 var anagramsGroupsExpected1 = [{ key: "from", words: [" FROM ", " FORM "] }, { key: "salt", words: [" SALT ", " LAST "] }, { key: "earn", words: [" EARN ", " NEAR "] }];
     
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(anagramsGroupsExpected1, anagramsGroups1, "Anagram grouping with equality compare and upper case");
@@ -12116,88 +12196,135 @@
         }
     });
     
+    Bridge.ns("Bridge.ClientTest.Linq.TestLinqGroupingOperators", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.Linq.TestLinqGroupingOperators, {
+        f1: function (n) {
+            return n % 5;
+        },
+        f2: function (g) {
+            return { remainder: g.key(), numbers: g.toArray() };
+        },
+        f3: function (w) {
+            return w.charCodeAt(0);
+        },
+        f4: function (g) {
+            return { firstLetter: g.key(), words: g.toArray() };
+        },
+        f5: function (p) {
+            return p.getGroup();
+        },
+        f6: function (x) {
+            return x.getName();
+        },
+        f7: function (g) {
+            return { group: g.key(), persons: g.select($_.Bridge.ClientTest.Linq.TestLinqGroupingOperators.f6).toArray() };
+        },
+        f8: function (l) {
+            return l;
+        },
+        f9: function (mg) {
+            return { letter: mg.key(), letters: mg.toArray() };
+        },
+        f10: function (g) {
+            return { letter: g.key(), letterGroups: (Bridge.Linq.Enumerable.from(g).groupBy($_.Bridge.ClientTest.Linq.TestLinqGroupingOperators.f8, $_.Bridge.ClientTest.Linq.TestLinqGroupingOperators.f8).select($_.Bridge.ClientTest.Linq.TestLinqGroupingOperators.f9)).toArray() };
+        },
+        f11: function (w) {
+            return w.trim();
+        },
+        f12: function (x) {
+            return { key: x.key(), words: x.toArray() };
+        },
+        f13: function (a) {
+            return a.toUpperCase();
+        }
+    });
+    
     Bridge.define('Bridge.ClientTest.Linq.TestLinqJoinOperators', {
         statics: {
             test: function () {
                 // TEST
-                var persons = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).join(Bridge.get(Bridge.ClientTest.Utilities.Group).getGroups(), function (p) {
-                    return p.getGroup();
-                }, function (g) {
-                    return g.getName();
-                }, function (p, g) {
-                    return { name: p.getName(), limit: g.getLimit() };
-                })).toArray();
+                var persons = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).join(Bridge.get(Bridge.ClientTest.Utilities.Group).getGroups(), $_.Bridge.ClientTest.Linq.TestLinqJoinOperators.f1, $_.Bridge.ClientTest.Linq.TestLinqJoinOperators.f2, $_.Bridge.ClientTest.Linq.TestLinqJoinOperators.f3)).toArray();
     
                 var personsExpected = [{ name: "Frank", limit: 1000 }, { name: "Zeppa", limit: 800 }, { name: "John", limit: 400 }, { name: "Billy", limit: 800 }, { name: "Dora", limit: 400 }, { name: "Ian", limit: 400 }, { name: "Mary", limit: 400 }];
     
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(personsExpected, persons, "Join Persons and Groups");
     
                 // TEST
-                var personsByLambda = Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).join(Bridge.get(Bridge.ClientTest.Utilities.Group).getGroups(), function (p) {
-                    return p.getGroup();
-                }, function (g) {
-                    return g.getName();
-                }, function (p, g) {
-                    return { name: p.getName(), limit: g.getLimit() };
-                }).toArray();
+                var personsByLambda = Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).join(Bridge.get(Bridge.ClientTest.Utilities.Group).getGroups(), $_.Bridge.ClientTest.Linq.TestLinqJoinOperators.f1, $_.Bridge.ClientTest.Linq.TestLinqJoinOperators.f2, $_.Bridge.ClientTest.Linq.TestLinqJoinOperators.f3).toArray();
     
                 var personsByLambdaExpected = [{ name: "Frank", limit: 1000 }, { name: "Zeppa", limit: 800 }, { name: "John", limit: 400 }, { name: "Billy", limit: 800 }, { name: "Dora", limit: 400 }, { name: "Ian", limit: 400 }, { name: "Mary", limit: 400 }];
     
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(personsByLambdaExpected, personsByLambda, "Join Persons and Groups by lambda");
     
                 // TEST
-                var groupJoin = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Group).getGroups()).groupJoin(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons(), function (g) {
-                    return g.getName();
-                }, function (p) {
-                    return p.getGroup();
-                }, function (g, pg) {
-                    return { group: g.getName(), persons: Bridge.Linq.Enumerable.from(pg).select(function (x) {
-                        return x.getName();
-                    }).toArray() };
-                })).toArray();
+                var groupJoin = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Group).getGroups()).groupJoin(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons(), $_.Bridge.ClientTest.Linq.TestLinqJoinOperators.f2, $_.Bridge.ClientTest.Linq.TestLinqJoinOperators.f1, $_.Bridge.ClientTest.Linq.TestLinqJoinOperators.f5)).toArray();
     
                 var groupJoinExpected = [{ group: "A", persons: ["Frank"] }, { group: "B", persons: ["John", "Dora", "Ian", "Mary"] }, { group: "C", persons: ["Zeppa", "Billy"] }, { group: "D", persons: [] }];
     
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(groupJoinExpected, groupJoin, "Grouped join Persons and Groups");
     
                 // TEST
-                var groupJoinWithDefault = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Group).getGroups()).groupJoin(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons(), function (g) {
-                    return g.getName();
-                }, function (p) {
-                    return p.getGroup();
-                }, function (g, pg) {
-                    return { g: g, pg: pg };
-                }).selectMany(function (x0) {
-                    return Bridge.Linq.Enumerable.from(x0.pg).defaultIfEmpty(Bridge.getDefaultValue(Bridge.ClientTest.Utilities.Person));
-                }, function (x1, ep) {
-                    return { groupName: x1.g.getName(), personName: Bridge.hasValue(ep) ? ep.getName() : "" };
-                })).toArray();
+                var groupJoinWithDefault = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Group).getGroups()).groupJoin(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons(), $_.Bridge.ClientTest.Linq.TestLinqJoinOperators.f2, $_.Bridge.ClientTest.Linq.TestLinqJoinOperators.f1, $_.Bridge.ClientTest.Linq.TestLinqJoinOperators.f6).selectMany($_.Bridge.ClientTest.Linq.TestLinqJoinOperators.f7, $_.Bridge.ClientTest.Linq.TestLinqJoinOperators.f8)).toArray();
     
                 var groupJoinWithDefaultExpected = [{ groupName: "A", personName: "Frank" }, { groupName: "B", personName: "John" }, { groupName: "B", personName: "Dora" }, { groupName: "B", personName: "Ian" }, { groupName: "B", personName: "Mary" }, { groupName: "C", personName: "Zeppa" }, { groupName: "C", personName: "Billy" }, { groupName: "D", personName: "" }];
     
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(groupJoinWithDefaultExpected, groupJoinWithDefault, "Grouped join Persons and Groups with DefaultIfEmpty");
     
                 // TEST
-                var groupJoinWithDefaultAndComplexEquals = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Group).getGroups()).groupJoin(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons(), function (g) {
-                    return { name: g.getName(), digit: 1 };
-                }, function (p) {
-                    return { name: p.getGroup(), digit: 1 };
-                }, function (g, pg) {
-                    return { g: g, pg: pg };
-                }).selectMany(function (x2) {
-                    return Bridge.Linq.Enumerable.from(x2.pg).defaultIfEmpty(Bridge.getDefaultValue(Bridge.ClientTest.Utilities.Person));
-                }, function (x3, ep) {
-                    return { x3: x3, ep: ep };
-                }).orderByDescending(function (x4) {
-                    return Bridge.hasValue(x4.ep) ? x4.ep.getName() : null;
-                }).select(function (x5) {
-                    return { groupName: Bridge.hasValue(x5.x3.g) ? x5.x3.g.getName() : null, personName: Bridge.hasValue(x5.ep) ? x5.ep.getName() : null };
-                })).toArray();
+                var groupJoinWithDefaultAndComplexEquals = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Group).getGroups()).groupJoin(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons(), $_.Bridge.ClientTest.Linq.TestLinqJoinOperators.f9, $_.Bridge.ClientTest.Linq.TestLinqJoinOperators.f10, $_.Bridge.ClientTest.Linq.TestLinqJoinOperators.f6).selectMany($_.Bridge.ClientTest.Linq.TestLinqJoinOperators.f11, $_.Bridge.ClientTest.Linq.TestLinqJoinOperators.f12).orderByDescending($_.Bridge.ClientTest.Linq.TestLinqJoinOperators.f13).select($_.Bridge.ClientTest.Linq.TestLinqJoinOperators.f14)).toArray();
     
                 var groupJoinWithDefaultAndComplexEqualsExpected = [{ groupName: "C", personName: "Zeppa" }, { groupName: "B", personName: "Mary" }, { groupName: "B", personName: "John" }, { groupName: "B", personName: "Ian" }, { groupName: "A", personName: "Frank" }, { groupName: "B", personName: "Dora" }, { groupName: "C", personName: "Billy" }, { groupName: "D", personName: Bridge.cast(null, String) }];
     
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(groupJoinWithDefaultAndComplexEqualsExpected, groupJoinWithDefaultAndComplexEquals, "Issue #209. Grouped join Persons and Groups with DefaultIfEmpty, complex equals and ordering");
             }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.Linq.TestLinqJoinOperators", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.Linq.TestLinqJoinOperators, {
+        f1: function (p) {
+            return p.getGroup();
+        },
+        f2: function (g) {
+            return g.getName();
+        },
+        f3: function (p, g) {
+            return { name: p.getName(), limit: g.getLimit() };
+        },
+        f4: function (x) {
+            return x.getName();
+        },
+        f5: function (g, pg) {
+            return { group: g.getName(), persons: Bridge.Linq.Enumerable.from(pg).select($_.Bridge.ClientTest.Linq.TestLinqJoinOperators.f4).toArray() };
+        },
+        f6: function (g, pg) {
+            return { g: g, pg: pg };
+        },
+        f7: function (x0) {
+            return Bridge.Linq.Enumerable.from(x0.pg).defaultIfEmpty(Bridge.getDefaultValue(Bridge.ClientTest.Utilities.Person));
+        },
+        f8: function (x1, ep) {
+            return { groupName: x1.g.getName(), personName: Bridge.hasValue(ep) ? ep.getName() : "" };
+        },
+        f9: function (g) {
+            return { name: g.getName(), digit: 1 };
+        },
+        f10: function (p) {
+            return { name: p.getGroup(), digit: 1 };
+        },
+        f11: function (x2) {
+            return Bridge.Linq.Enumerable.from(x2.pg).defaultIfEmpty(Bridge.getDefaultValue(Bridge.ClientTest.Utilities.Person));
+        },
+        f12: function (x3, ep) {
+            return { x3: x3, ep: ep };
+        },
+        f13: function (x4) {
+            return Bridge.hasValue(x4.ep) ? x4.ep.getName() : null;
+        },
+        f14: function (x5) {
+            return { groupName: Bridge.hasValue(x5.x3.g) ? x5.x3.g.getName() : null, personName: Bridge.hasValue(x5.ep) ? x5.ep.getName() : null };
         }
     });
     
@@ -12212,12 +12339,8 @@
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1([4, 1, 3, 2, 3, 5], concatNumbers, "Concat() numbers");
     
                 // TEST
-                var names = Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).select(function (p) {
-                    return p.getName();
-                });
-                var cities = Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).select(function (p) {
-                    return p.getCity();
-                });
+                var names = Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).select($_.Bridge.ClientTest.Linq.TestLinqMiscellaneousOperators.f1);
+                var cities = Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).select($_.Bridge.ClientTest.Linq.TestLinqMiscellaneousOperators.f2);
                 var concatNames = names.concat(cities).toArray();
     
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(["Frank", "Zeppa", "John", "Billy", "Dora", "Ian", "Mary", "Nemo", "Edmonton", "Tokyo", "Lisbon", "Paris", "Budapest", "Rome", "Dortmund", "Ocean"], concatNames, "Concat() two sequences");
@@ -12237,61 +12360,50 @@
         }
     });
     
+    Bridge.ns("Bridge.ClientTest.Linq.TestLinqMiscellaneousOperators", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.Linq.TestLinqMiscellaneousOperators, {
+        f1: function (p) {
+            return p.getName();
+        },
+        f2: function (p) {
+            return p.getCity();
+        }
+    });
+    
     Bridge.define('Bridge.ClientTest.Linq.TestLinqOrderingOperators', {
         statics: {
             test: function () {
                 // TEST
                 var words = ["ab2", "ac", "a", "ab12", "", "ab", "bac", "z"];
-                var sortedWords = (Bridge.Linq.Enumerable.from(words).orderBy(function (word) {
-                    return word;
-                })).toArray();
+                var sortedWords = (Bridge.Linq.Enumerable.from(words).orderBy($_.Bridge.ClientTest.Linq.TestLinqOrderingOperators.f1)).toArray();
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(["", "a", "ab", "ab12", "ab2", "ac", "bac", "z"], sortedWords, "Order by words");
     
                 // TEST
-                var sortedWordsByLength = (Bridge.Linq.Enumerable.from(words).orderBy(function (word) {
-                    return word.length;
-                })).toArray();
+                var sortedWordsByLength = (Bridge.Linq.Enumerable.from(words).orderBy($_.Bridge.ClientTest.Linq.TestLinqOrderingOperators.f2)).toArray();
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(["", "a", "z", "ac", "ab", "ab2", "bac", "ab12"], sortedWordsByLength, "Order by word length");
     
                 // TEST
-                var sortedPersonsByName = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).orderBy(function (p) {
-                    return p.getName();
-                }).select(function (p) {
-                    return p.getName();
-                })).toArray();
+                var sortedPersonsByName = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).orderBy($_.Bridge.ClientTest.Linq.TestLinqOrderingOperators.f3).select($_.Bridge.ClientTest.Linq.TestLinqOrderingOperators.f3)).toArray();
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(["Billy", "Dora", "Frank", "Ian", "John", "Mary", "Nemo", "Zeppa"], sortedPersonsByName, "Order by person names");
     
                 // TODO test with System.StringComparison
     
                 // TEST
                 var doubles = [1.0, -0.7, 2.1, 0.9, 1.4, 2.9];
-                var sortedDoubles = (Bridge.Linq.Enumerable.from(doubles).orderByDescending(function (d) {
-                    return d;
-                })).toArray();
+                var sortedDoubles = (Bridge.Linq.Enumerable.from(doubles).orderByDescending($_.Bridge.ClientTest.Linq.TestLinqOrderingOperators.f4)).toArray();
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1([2.9, 2.1, 1.4, 1.0, 0.9, -0.7], sortedDoubles, "Order by descending double");
     
                 // TEST
-                var sortedPersonsByCountDesc = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).orderByDescending(function (p) {
-                    return p.getCount();
-                }).select(function (p) {
-                    return p.getCount();
-                })).toArray();
+                var sortedPersonsByCountDesc = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).orderByDescending($_.Bridge.ClientTest.Linq.TestLinqOrderingOperators.f5).select($_.Bridge.ClientTest.Linq.TestLinqOrderingOperators.f5)).toArray();
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1([3000, 700, 700, 550, 500, 300, 100, 50], sortedPersonsByCountDesc, "Order by person count descending");
     
                 // TEST
-                var sortedWordsByLengthAndLetters = (Bridge.Linq.Enumerable.from(words).orderBy(function (word) {
-                    return word.length;
-                }).thenBy(function (word) {
-                    return word;
-                })).toArray();
+                var sortedWordsByLengthAndLetters = (Bridge.Linq.Enumerable.from(words).orderBy($_.Bridge.ClientTest.Linq.TestLinqOrderingOperators.f2).thenBy($_.Bridge.ClientTest.Linq.TestLinqOrderingOperators.f1)).toArray();
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(["", "a", "z", "ab", "ac", "ab2", "bac", "ab12"], sortedWordsByLengthAndLetters, "Order by word length then by letters");
     
                 // TEST
-                var sortedWordsByLengthAndLettersLambda = Bridge.Linq.Enumerable.from(words).orderBy(function (x) {
-                    return x.length;
-                }).thenByDescending(function (x) {
-                    return x;
-                }).toArray();
+                var sortedWordsByLengthAndLettersLambda = Bridge.Linq.Enumerable.from(words).orderBy($_.Bridge.ClientTest.Linq.TestLinqOrderingOperators.f6).thenByDescending($_.Bridge.ClientTest.Linq.TestLinqOrderingOperators.f7).toArray();
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(["", "z", "a", "ac", "ab", "bac", "ab2", "ab12"], sortedWordsByLengthAndLettersLambda, "Order by word length then by letters as lambda");
     
                 // TEST
@@ -12300,6 +12412,32 @@
                 var numbersReversed = Bridge.Linq.Enumerable.from(numbers).reverse().toArray();
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1([5, 1, 6, 4, 2], numbersReversed, "Reverse() numbers");
             }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.Linq.TestLinqOrderingOperators", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.Linq.TestLinqOrderingOperators, {
+        f1: function (word) {
+            return word;
+        },
+        f2: function (word) {
+            return word.length;
+        },
+        f3: function (p) {
+            return p.getName();
+        },
+        f4: function (d) {
+            return d;
+        },
+        f5: function (p) {
+            return p.getCount();
+        },
+        f6: function (x) {
+            return x.length;
+        },
+        f7: function (x) {
+            return x;
         }
     });
     
@@ -12320,15 +12458,11 @@
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1([1, 3, 5], exceptTwoLast, "TakeExceptLast() the first array elements except the last two");
     
                 // TEST
-                var takeWhileLessTwo = Bridge.Linq.Enumerable.from(numbers).takeWhile(function (number) {
-                    return number < 2;
-                }).toArray();
+                var takeWhileLessTwo = Bridge.Linq.Enumerable.from(numbers).takeWhile($_.Bridge.ClientTest.Linq.TestLinqPartitioningOperators.f1).toArray();
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1([1], takeWhileLessTwo, "TakeWhile() less two");
     
                 // TEST
-                var takeWhileSome = Bridge.Linq.Enumerable.from(numbers).takeWhile(function (number, index) {
-                    return number - index <= 4;
-                }).toArray();
+                var takeWhileSome = Bridge.Linq.Enumerable.from(numbers).takeWhile($_.Bridge.ClientTest.Linq.TestLinqPartitioningOperators.f2).toArray();
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1([1, 3, 5, 7], takeWhileSome, "TakeWhile() by value and index");
     
                 // TEST
@@ -12336,17 +12470,30 @@
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1([7, 9], skipThree, "Skip() the first three");
     
                 // TEST
-                var skipWhileLessNine = Bridge.Linq.Enumerable.from(numbers).skipWhile(function (number) {
-                    return number < 9;
-                }).toArray();
+                var skipWhileLessNine = Bridge.Linq.Enumerable.from(numbers).skipWhile($_.Bridge.ClientTest.Linq.TestLinqPartitioningOperators.f3).toArray();
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1([9], skipWhileLessNine, "SkipWhile() less then 9");
     
                 // TEST
-                var skipWhileSome = Bridge.Linq.Enumerable.from(numbers).skipWhile(function (number, index) {
-                    return number <= 3 && index < 2;
-                }).toArray();
+                var skipWhileSome = Bridge.Linq.Enumerable.from(numbers).skipWhile($_.Bridge.ClientTest.Linq.TestLinqPartitioningOperators.f4).toArray();
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1([5, 7, 9], skipWhileSome, "SkipWhile() by value and index");
             }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.Linq.TestLinqPartitioningOperators", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.Linq.TestLinqPartitioningOperators, {
+        f1: function (number) {
+            return number < 2;
+        },
+        f2: function (number, index) {
+            return number - index <= 4;
+        },
+        f3: function (number) {
+            return number < 9;
+        },
+        f4: function (number, index) {
+            return number <= 3 && index < 2;
         }
     });
     
@@ -12355,16 +12502,12 @@
             test: function () {
                 // TEST
                 var numbers = [1, 3, 5, 7];
-                var numberPlusOne = (Bridge.Linq.Enumerable.from(numbers).select(function (n) {
-                    return n + 1;
-                })).toArray();
+                var numberPlusOne = (Bridge.Linq.Enumerable.from(numbers).select($_.Bridge.ClientTest.Linq.TestLinqProjectionOperators.f1)).toArray();
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1([2, 4, 6, 8], numberPlusOne, "A sequence of ints one higher than the numbers[]");
     
                 // TEST
                 var persons = Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons();
-                var names = (Bridge.Linq.Enumerable.from(persons).select(function (p) {
-                    return p.getName();
-                })).toArray();
+                var names = (Bridge.Linq.Enumerable.from(persons).select($_.Bridge.ClientTest.Linq.TestLinqProjectionOperators.f2)).toArray();
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(["Frank", "Zeppa", "John", "Billy", "Dora", "Ian", "Mary", "Nemo"], names, "Selects names as instance field");
     
                 // TEST
@@ -12376,9 +12519,7 @@
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(["one", "three", "five", "seven"], textNumbers, "Selects names as items of another array");
     
                 // TEST
-                var anonimNames = (Bridge.Linq.Enumerable.from(persons).select(function (p) {
-                    return { name: p.getName() };
-                })).toArray();
+                var anonimNames = (Bridge.Linq.Enumerable.from(persons).select($_.Bridge.ClientTest.Linq.TestLinqProjectionOperators.f3)).toArray();
     
                 var anonimNamesToCompare = [{ name: "Frank" }, { name: "Zeppa" }, { name: "John" }, { name: "Billy" }, { name: "Dora" }, { name: "Ian" }, { name: "Mary" }, { name: "Nemo" }];
     
@@ -12387,9 +12528,7 @@
                 // TEST
                 numbers = [0, 1, 3, 3];
     
-                var numberssInPlace = Bridge.Linq.Enumerable.from(numbers).select(function (n, index) {
-                    return { number: n, isIndex: n === index };
-                }).toArray();
+                var numberssInPlace = Bridge.Linq.Enumerable.from(numbers).select($_.Bridge.ClientTest.Linq.TestLinqProjectionOperators.f4).toArray();
     
                 var anonimNumbersToCompare = [{ number: 0, isIndex: true }, { number: 1, isIndex: true }, { number: 3, isIndex: false }, { number: 3, isIndex: true }];
     
@@ -12400,13 +12539,7 @@
                 var numbersB = [3, 4, 2];
                 var simplePairs = (Bridge.Linq.Enumerable.from(numbersA).selectMany(function (a) {
                     return numbersB;
-                }, function (a, b) {
-                    return { a: a, b: b };
-                }).where(function (x0) {
-                    return x0.a < x0.b;
-                }).select(function (x1) {
-                    return { a: x1.a, b: x1.b };
-                })).toArray();
+                }, $_.Bridge.ClientTest.Linq.TestLinqProjectionOperators.f5).where($_.Bridge.ClientTest.Linq.TestLinqProjectionOperators.f6).select($_.Bridge.ClientTest.Linq.TestLinqProjectionOperators.f7)).toArray();
     
                 var expectedSimplePairs = [{ a: 1, b: 3 }, { a: 1, b: 4 }, { a: 1, b: 2 }, { a: 2, b: 3 }, { a: 2, b: 4 }];
     
@@ -12416,17 +12549,9 @@
                 numbersA = [1, 5, 2, 4, 3];
                 numbersB = [3, 4, 2, 5, 1];
     
-                var pairs = (Bridge.Linq.Enumerable.from(numbersA).where(function (a) {
-                    return a > 1;
-                }).selectMany(function (a) {
+                var pairs = (Bridge.Linq.Enumerable.from(numbersA).where($_.Bridge.ClientTest.Linq.TestLinqProjectionOperators.f8).selectMany(function (a) {
                     return numbersB;
-                }, function (a, b) {
-                    return { a: a, b: b };
-                }).where(function (x2) {
-                    return x2.b < 4 && x2.a > x2.b;
-                }).select(function (x3) {
-                    return { sum: x3.a + x3.b };
-                })).toArray();
+                }, $_.Bridge.ClientTest.Linq.TestLinqProjectionOperators.f5).where($_.Bridge.ClientTest.Linq.TestLinqProjectionOperators.f9).select($_.Bridge.ClientTest.Linq.TestLinqProjectionOperators.f10)).toArray();
     
                 var expectedPairs = [{ sum: 8 }, { sum: 7 }, { sum: 6 }, { sum: 3 }, { sum: 7 }, { sum: 6 }, { sum: 5 }, { sum: 5 }, { sum: 4 }];
     
@@ -12451,47 +12576,92 @@
         }
     });
     
+    Bridge.ns("Bridge.ClientTest.Linq.TestLinqProjectionOperators", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.Linq.TestLinqProjectionOperators, {
+        f1: function (n) {
+            return n + 1;
+        },
+        f2: function (p) {
+            return p.getName();
+        },
+        f3: function (p) {
+            return { name: p.getName() };
+        },
+        f4: function (n, index) {
+            return { number: n, isIndex: n === index };
+        },
+        f5: function (a, b) {
+            return { a: a, b: b };
+        },
+        f6: function (x0) {
+            return x0.a < x0.b;
+        },
+        f7: function (x1) {
+            return { a: x1.a, b: x1.b };
+        },
+        f8: function (a) {
+            return a > 1;
+        },
+        f9: function (x2) {
+            return x2.b < 4 && x2.a > x2.b;
+        },
+        f10: function (x3) {
+            return { sum: x3.a + x3.b };
+        }
+    });
+    
     Bridge.define('Bridge.ClientTest.Linq.TestLinqQuantifiers', {
         statics: {
             test: function () {
                 // TEST
                 var words = ["count", "tree", "mount", "five", "doubt"];
-                var anyOu = Bridge.Linq.Enumerable.from(words).any(function (w) {
-                    return Bridge.String.contains(w,"ou");
-                });
+                var anyOu = Bridge.Linq.Enumerable.from(words).any($_.Bridge.ClientTest.Linq.TestLinqQuantifiers.f1);
                 Bridge.get(Bridge.Test.Assert).true$1(anyOu, "Any() to return words containing 'ou'");
     
                 // TEST
                 var oddNumbers = [3, 7, 9, 5, 247, 1000001];
-                var onlyOdd = Bridge.Linq.Enumerable.from(oddNumbers).all(function (n) {
-                    return n % 2 === 1;
-                });
+                var onlyOdd = Bridge.Linq.Enumerable.from(oddNumbers).all($_.Bridge.ClientTest.Linq.TestLinqQuantifiers.f2);
                 Bridge.get(Bridge.Test.Assert).true$1(onlyOdd, "All() is odd");
     
                 // TEST
                 var someNumbers = [2, 3, 7, 9, 5, 247, 1000001];
-                var notOnlyOdd = !Bridge.Linq.Enumerable.from(someNumbers).all(function (n) {
-                    return n % 2 === 1;
-                });
+                var notOnlyOdd = !Bridge.Linq.Enumerable.from(someNumbers).all($_.Bridge.ClientTest.Linq.TestLinqQuantifiers.f2);
                 Bridge.get(Bridge.Test.Assert).true$1(notOnlyOdd, "All() is not only odd");
     
                 // TEST
-                var productGroups = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).groupBy(function (p) {
-                    return p.getGroup();
-                }).where(function (pGroup) {
-                    return pGroup.any(function (p) {
-                        return p.getCount() >= 500;
-                    });
-                }).select(function (pGroup) {
-                    return { group: pGroup.key(), names: pGroup.select(function (x) {
-                        return x.getName();
-                    }).toArray() };
-                })).toArray();
+                var productGroups = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).groupBy($_.Bridge.ClientTest.Linq.TestLinqQuantifiers.f3).where($_.Bridge.ClientTest.Linq.TestLinqQuantifiers.f5).select($_.Bridge.ClientTest.Linq.TestLinqQuantifiers.f7)).toArray();
     
                 var productGroupsExpected = [{ group: "C", names: ["Zeppa", "Billy"] }, { group: "B", names: ["John", "Dora", "Ian", "Mary"] }, { group: Bridge.cast(null, String), names: ["Nemo"] }];
     
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(productGroupsExpected, productGroups, "Any() to return a grouped array of names only for groups having any item with Count > 500");
             }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.Linq.TestLinqQuantifiers", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.Linq.TestLinqQuantifiers, {
+        f1: function (w) {
+            return Bridge.String.contains(w,"ou");
+        },
+        f2: function (n) {
+            return n % 2 === 1;
+        },
+        f3: function (p) {
+            return p.getGroup();
+        },
+        f4: function (p) {
+            return p.getCount() >= 500;
+        },
+        f5: function (pGroup) {
+            return pGroup.any($_.Bridge.ClientTest.Linq.TestLinqQuantifiers.f4);
+        },
+        f6: function (x) {
+            return x.getName();
+        },
+        f7: function (pGroup) {
+            return { group: pGroup.key(), names: pGroup.select($_.Bridge.ClientTest.Linq.TestLinqQuantifiers.f6).toArray() };
         }
     });
     
@@ -12520,12 +12690,8 @@
                 Bridge.get(Bridge.Test.Assert).areEqual$1(10, i, "Max() executes immediately");
     
                 // TEST
-                var smallNumbers = Bridge.Linq.Enumerable.from(numbers).where(function (n) {
-                    return n <= 3;
-                });
-                var smallerEvenNumbers = smallNumbers.where(function (n) {
-                    return n % 2 === 0;
-                });
+                var smallNumbers = Bridge.Linq.Enumerable.from(numbers).where($_.Bridge.ClientTest.Linq.TestLinqQueryExecution.f1);
+                var smallerEvenNumbers = smallNumbers.where($_.Bridge.ClientTest.Linq.TestLinqQueryExecution.f2);
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1([2, 0], smallerEvenNumbers.toArray(), "Query in a query");
     
                 // TEST
@@ -12540,47 +12706,64 @@
         }
     });
     
+    Bridge.ns("Bridge.ClientTest.Linq.TestLinqQueryExecution", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.Linq.TestLinqQueryExecution, {
+        f1: function (n) {
+            return n <= 3;
+        },
+        f2: function (n) {
+            return n % 2 === 0;
+        }
+    });
+    
     Bridge.define('Bridge.ClientTest.Linq.TestLinqRestrictionOperators', {
         statics: {
             test: function () {
                 // TEST
                 var numbers = [5, 4, 1, 3, 9, 8, 6, 7, 2, 0];
-                var filteredNumbers = (Bridge.Linq.Enumerable.from(numbers).where(function (n) {
-                    return n <= 6;
-                })).toArray();
+                var filteredNumbers = (Bridge.Linq.Enumerable.from(numbers).where($_.Bridge.ClientTest.Linq.TestLinqRestrictionOperators.f1)).toArray();
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1([5, 4, 1, 3, 6, 2, 0], filteredNumbers, "Where elements in integer array are below or equal 6");
     
                 // TEST
-                var filteredCounts = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).where(function (p) {
-                    return p.getCount() < 501;
-                }).select(function (p) {
-                    return p.getCount();
-                })).toArray();
+                var filteredCounts = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).where($_.Bridge.ClientTest.Linq.TestLinqRestrictionOperators.f2).select($_.Bridge.ClientTest.Linq.TestLinqRestrictionOperators.f3)).toArray();
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1([300, 100, 500, 50], filteredCounts, "Where elements in Person array have Count below 501");
     
                 // TEST
-                filteredCounts = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).where(function (p) {
-                    return p.getCount() < 501 && p.getGroup() === "A";
-                }).select(function (p) {
-                    return p.getCount();
-                })).toArray();
+                filteredCounts = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).where($_.Bridge.ClientTest.Linq.TestLinqRestrictionOperators.f4).select($_.Bridge.ClientTest.Linq.TestLinqRestrictionOperators.f3)).toArray();
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1([300], filteredCounts, "Where elements in Person array have Count below 501 ang in group 'A'");
     
                 // TEST
                 var persons = Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons();
-                var filteredPersonByCounts = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).where(function (p) {
-                    return p.getCount() < 501;
-                })).toArray();
+                var filteredPersonByCounts = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).where($_.Bridge.ClientTest.Linq.TestLinqRestrictionOperators.f2)).toArray();
     
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1([persons.getItem(0), persons.getItem(1), persons.getItem(3), persons.getItem(4)], filteredPersonByCounts, "Where elements in Person array have Count below 501. Returns Person instances");
     
                 // TEST
-                var filteredPersonByCountAndIndex = Bridge.Linq.Enumerable.from(persons).where(function (p, index) {
-                    return p.getCount() < index * 100;
-                }).toArray();
+                var filteredPersonByCountAndIndex = Bridge.Linq.Enumerable.from(persons).where($_.Bridge.ClientTest.Linq.TestLinqRestrictionOperators.f5).toArray();
     
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1([persons.getItem(4)], filteredPersonByCountAndIndex, "Where elements in Person array have Count meet condition (p.Count < index * 100). Returns Person instances");
             }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.Linq.TestLinqRestrictionOperators", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.Linq.TestLinqRestrictionOperators, {
+        f1: function (n) {
+            return n <= 6;
+        },
+        f2: function (p) {
+            return p.getCount() < 501;
+        },
+        f3: function (p) {
+            return p.getCount();
+        },
+        f4: function (p) {
+            return p.getCount() < 501 && p.getGroup() === "A";
+        },
+        f5: function (p, index) {
+            return p.getCount() < index * 100;
         }
     });
     
@@ -12600,9 +12783,7 @@
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1([1, 2, 3, 5, 4], uniqueNumbers, "Distinct() to remove duplicate elements");
     
                 // TEST
-                var distinctPersonGroups = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).select(function (p) {
-                    return p.getGroup();
-                })).distinct().toArray();
+                var distinctPersonGroups = (Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).select($_.Bridge.ClientTest.Linq.TestLinqSetOperators.f1)).distinct().toArray();
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1(["A", "C", "B", null], distinctPersonGroups, "Distinct() to remove duplicate Group elements");
     
                 // TEST
@@ -12613,12 +12794,8 @@
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1([0, 2, 4, 5, 6, 8, 9, 1, 3, 7], uniqueNumbersAB, "Union() to get unique number sequence");
     
                 // TEST
-                var nameChars = Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).select(function (p) {
-                    return p.getName().charCodeAt(0);
-                });
-                var cityChars = Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).select(function (p) {
-                    return p.getCity().charCodeAt(0);
-                });
+                var nameChars = Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).select($_.Bridge.ClientTest.Linq.TestLinqSetOperators.f2);
+                var cityChars = Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).select($_.Bridge.ClientTest.Linq.TestLinqSetOperators.f3);
                 var uniqueFirstChars = nameChars.union(cityChars).toArray();
     
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1([Bridge.cast(70, Bridge.Int), Bridge.cast(90, Bridge.Int), Bridge.cast(74, Bridge.Int), Bridge.cast(66, Bridge.Int), Bridge.cast(68, Bridge.Int), Bridge.cast(73, Bridge.Int), Bridge.cast(77, Bridge.Int), Bridge.cast(78, Bridge.Int), Bridge.cast(69, Bridge.Int), Bridge.cast(84, Bridge.Int), Bridge.cast(76, Bridge.Int), Bridge.cast(80, Bridge.Int), Bridge.cast(82, Bridge.Int), Bridge.cast(79, Bridge.Int)], uniqueFirstChars, "Union to get unique first letters of Name and City");
@@ -12628,12 +12805,8 @@
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1([5, 8], commonNumbersCD, "Intersect() to get common number sequence");
     
                 // TEST
-                nameChars = Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).select(function (p) {
-                    return p.getName().charCodeAt(0);
-                });
-                cityChars = Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).select(function (p) {
-                    return p.getCity().charCodeAt(0);
-                });
+                nameChars = Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).select($_.Bridge.ClientTest.Linq.TestLinqSetOperators.f2);
+                cityChars = Bridge.Linq.Enumerable.from(Bridge.get(Bridge.ClientTest.Utilities.Person).getPersons()).select($_.Bridge.ClientTest.Linq.TestLinqSetOperators.f3);
     
                 var commonFirstChars = Bridge.Linq.Enumerable.from(nameChars).intersect(cityChars).toArray();
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1([Bridge.cast(66, Bridge.Int), Bridge.cast(68, Bridge.Int)], commonFirstChars, "Intersect() to get common first letters of Name and City");
@@ -12646,6 +12819,20 @@
                 var exceptFirstChars = nameChars.except(cityChars).toArray();
                 Bridge.get(Bridge.Test.Assert).areDeepEqual$1([Bridge.cast(70, Bridge.Int), Bridge.cast(90, Bridge.Int), Bridge.cast(74, Bridge.Int), Bridge.cast(73, Bridge.Int), Bridge.cast(77, Bridge.Int), Bridge.cast(78, Bridge.Int)], exceptFirstChars, "Except() to get letters from Name sequence and does not contain City letters");
             }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.Linq.TestLinqSetOperators", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.Linq.TestLinqSetOperators, {
+        f1: function (p) {
+            return p.getGroup();
+        },
+        f2: function (p) {
+            return p.getName().charCodeAt(0);
+        },
+        f3: function (p) {
+            return p.getCity().charCodeAt(0);
         }
     });
     
@@ -13297,10 +13484,8 @@
     });
     
     Bridge.define('Bridge.ClientTest.NullableTests', {
-        isOfType: function (T) {
-            return Bridge.fn.bind(this, function (value) {
-                return Bridge.is(value, T);
-            });
+        isOfType: function (T, value) {
+            return Bridge.is(value, T);
         },
         typePropertiesAreCorrect: function () {
             var a = 3, b = null;
@@ -13309,10 +13494,10 @@
             Bridge.get(Bridge.Test.Assert).true$1(Bridge.is(a, Bridge.Int), "is int? #1");
             Bridge.get(Bridge.Test.Assert).false$1(Bridge.is(b, Bridge.Int), "is int? #2");
     
-            Bridge.get(Bridge.Test.Assert).true$1(this.isOfType(Bridge.Int)(3), "IsOfType #1");
-            Bridge.get(Bridge.Test.Assert).false$1(this.isOfType(Bridge.Int)(3.14), "IsOfType #2");
-            Bridge.get(Bridge.Test.Assert).true$1(this.isOfType(Bridge.TimeSpan)(new Bridge.TimeSpan(1)), "IsOfType #3");
-            Bridge.get(Bridge.Test.Assert).false$1(this.isOfType(Bridge.TimeSpan)(3.14), "IsOfType #4");
+            Bridge.get(Bridge.Test.Assert).true$1(this.isOfType(Bridge.Int, 3), "IsOfType #1");
+            Bridge.get(Bridge.Test.Assert).false$1(this.isOfType(Bridge.Int, 3.14), "IsOfType #2");
+            Bridge.get(Bridge.Test.Assert).true$1(this.isOfType(Bridge.TimeSpan, new Bridge.TimeSpan(1)), "IsOfType #3");
+            Bridge.get(Bridge.Test.Assert).false$1(this.isOfType(Bridge.TimeSpan, 3.14), "IsOfType #4");
         },
         convertingToNullableWorks: function () {
             var i = 3;
@@ -13364,10 +13549,7 @@
             }
         },
         unboxingValueOfWrongTypeThrowsAnException: function () {
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                var o = "x";
-                var x = Bridge.cast(o, Bridge.Int);
-            });
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.NullableTests.f1);
         },
         getValueOrDefaultWithArgWorks: function () {
             var a = 3, b = null;
@@ -13533,6 +13715,15 @@
         }
     });
     
+    Bridge.ns("Bridge.ClientTest.NullableTests", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.NullableTests, {
+        f1: function () {
+            var o = "x";
+            var x = Bridge.cast(o, Bridge.Int);
+        }
+    });
+    
     Bridge.define('Bridge.ClientTest.NumberFormatInfoTests', {
         typePropertiesAreCorrect: function () {
             var format = Bridge.NumberFormatInfo.invariantInfo;
@@ -13670,12 +13861,10 @@
             Bridge.get(Bridge.Test.Assert).areEqual("Boolean", Bridge.getTypeName(Boolean));
         },
         getDefaultValue: function (T) {
-            return Bridge.fn.bind(this, function () {
-                return Bridge.getDefaultValue(T);
-            });
+            return Bridge.getDefaultValue(T);
         },
         defaultValueIsFalse: function () {
-            Bridge.get(Bridge.Test.Assert).areEqual(false, this.getDefaultValue(Boolean)());
+            Bridge.get(Bridge.Test.Assert).areEqual(false, this.getDefaultValue(Boolean));
         },
         creatingInstanceReturnsFalse: function () {
             Bridge.get(Bridge.Test.Assert).areEqual(false, new Boolean());
@@ -13864,12 +14053,10 @@
             }
         },
         getDefaultValue: function (T) {
-            return Bridge.fn.bind(this, function () {
-                return Bridge.getDefaultValue(T);
-            });
+            return Bridge.getDefaultValue(T);
         },
         defaultValueIs0: function () {
-            Bridge.get(Bridge.Test.Assert).areStrictEqual(0, this.getDefaultValue(Bridge.Int)());
+            Bridge.get(Bridge.Test.Assert).areStrictEqual(0, this.getDefaultValue(Bridge.Int));
         },
         defaultConstructorReturnsZero: function () {
             Bridge.get(Bridge.Test.Assert).areStrictEqual(0, Number());
@@ -13919,24 +14106,12 @@
         },
         parseWorks: function () {
             Bridge.get(Bridge.Test.Assert).areEqual(234, Bridge.Int.parseInt("234", 0, 255));
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("", 0, 255);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt(null, 0, 255);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("notanumber", 0, 255);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("54768", 0, 255);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("-1", 0, 255);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("2.5", 0, 255);
-            });
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.ByteTests.f1);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.ByteTests.f2);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.ByteTests.f3);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.ByteTests.f4);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.ByteTests.f5);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.ByteTests.f6);
         },
         toStringWithoutRadixWorks: function () {
             Bridge.get(Bridge.Test.Assert).areEqual("123", ((Bridge.cast(123, Bridge.Int))).toString());
@@ -13976,6 +14151,29 @@
             Bridge.get(Bridge.Test.Assert).$true(Bridge.compare((Bridge.cast((Bridge.cast(0, Bridge.Int)), Bridge.IComparable$1(Bridge.Int))), Bridge.cast(0, Bridge.Int)) === 0);
             Bridge.get(Bridge.Test.Assert).$true(Bridge.compare((Bridge.cast((Bridge.cast(1, Bridge.Int)), Bridge.IComparable$1(Bridge.Int))), Bridge.cast(0, Bridge.Int)) > 0);
             Bridge.get(Bridge.Test.Assert).$true(Bridge.compare((Bridge.cast((Bridge.cast(0, Bridge.Int)), Bridge.IComparable$1(Bridge.Int))), Bridge.cast(1, Bridge.Int)) < 0);
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.SimpleTypes.ByteTests", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.SimpleTypes.ByteTests, {
+        f1: function () {
+            Bridge.Int.parseInt("", 0, 255);
+        },
+        f2: function () {
+            Bridge.Int.parseInt(null, 0, 255);
+        },
+        f3: function () {
+            Bridge.Int.parseInt("notanumber", 0, 255);
+        },
+        f4: function () {
+            Bridge.Int.parseInt("54768", 0, 255);
+        },
+        f5: function () {
+            Bridge.Int.parseInt("-1", 0, 255);
+        },
+        f6: function () {
+            Bridge.Int.parseInt("2.5", 0, 255);
         }
     });
     
@@ -14020,12 +14218,10 @@
             }
         },
         getDefaultValue: function (T) {
-            return Bridge.fn.bind(this, function () {
-                return Bridge.getDefaultValue(T);
-            });
+            return Bridge.getDefaultValue(T);
         },
         defaultValueWorks: function () {
-            Bridge.get(Bridge.Test.Assert).areEqual(0, Bridge.cast(this.getDefaultValue(Bridge.Int)(), Bridge.Int));
+            Bridge.get(Bridge.Test.Assert).areEqual(0, Bridge.cast(this.getDefaultValue(Bridge.Int), Bridge.Int));
         },
         defaultConstructorReturnsZero: function () {
             Bridge.get(Bridge.Test.Assert).areStrictEqual(0, Bridge.cast(Number(), Bridge.Int));
@@ -14048,15 +14244,9 @@
         },
         parseWorks: function () {
             Bridge.get(Bridge.Test.Assert).areEqual$1(97, Bridge.Char.charCodeAt("a", 0), "Parse 1");
-            Bridge.get(Bridge.Test.Assert).throws$5(function () {
-                Bridge.Char.charCodeAt(null, 0);
-            }, "Parse 2");
-            Bridge.get(Bridge.Test.Assert).throws$5(function () {
-                Bridge.Char.charCodeAt("", 0);
-            }, "Parse 3");
-            Bridge.get(Bridge.Test.Assert).throws$5(function () {
-                Bridge.Char.charCodeAt("ab", 0);
-            }, "Parse 4");
+            Bridge.get(Bridge.Test.Assert).throws$5($_.Bridge.ClientTest.SimpleTypes.CharTests.f1, "Parse 2");
+            Bridge.get(Bridge.Test.Assert).throws$5($_.Bridge.ClientTest.SimpleTypes.CharTests.f2, "Parse 3");
+            Bridge.get(Bridge.Test.Assert).throws$5($_.Bridge.ClientTest.SimpleTypes.CharTests.f3, "Parse 4");
         },
         formatWorks: function () {
             Bridge.get(Bridge.Test.Assert).areEqual("0023", Bridge.Int.format((35), "x4"));
@@ -14140,6 +14330,20 @@
         }
     });
     
+    Bridge.ns("Bridge.ClientTest.SimpleTypes.CharTests", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.SimpleTypes.CharTests, {
+        f1: function () {
+            Bridge.Char.charCodeAt(null, 0);
+        },
+        f2: function () {
+            Bridge.Char.charCodeAt("", 0);
+        },
+        f3: function () {
+            Bridge.Char.charCodeAt("ab", 0);
+        }
+    });
+    
     Bridge.define('Bridge.ClientTest.SimpleTypes.DecimalTests', {
         assertIsDecimalAndEqualTo: function (v, d, message) {
             if (message === void 0) { message = null; }
@@ -14154,12 +14358,10 @@
             Bridge.get(Bridge.Test.Assert).$true(Bridge.is(d, Bridge.IFormattable));
         },
         getDefaultValue: function (T) {
-            return Bridge.fn.bind(this, function () {
-                return Bridge.getDefaultValue(T);
-            });
+            return Bridge.getDefaultValue(T);
         },
         defaultValueIs0: function () {
-            this.assertIsDecimalAndEqualTo(this.getDefaultValue(Bridge.Decimal)(), 0);
+            this.assertIsDecimalAndEqualTo(this.getDefaultValue(Bridge.Decimal), 0);
         },
         creatingInstanceReturnsZero: function () {
             this.assertIsDecimalAndEqualTo(new Bridge.Decimal(), 0);
@@ -14407,12 +14609,10 @@
             Bridge.get(Bridge.Test.Assert).$true(Bridge.is(d, Bridge.IFormattable));
         },
         getDefaultValue: function (T) {
-            return Bridge.fn.bind(this, function () {
-                return Bridge.getDefaultValue(T);
-            });
+            return Bridge.getDefaultValue(T);
         },
         defaultValueIs0: function () {
-            Bridge.get(Bridge.Test.Assert).areStrictEqual(0, this.getDefaultValue(Number)());
+            Bridge.get(Bridge.Test.Assert).areStrictEqual(0, this.getDefaultValue(Number));
         },
         creatingInstanceReturnsZero: function () {
             Bridge.get(Bridge.Test.Assert).areStrictEqual(0, new Number());
@@ -14526,15 +14726,13 @@
             Bridge.get(Bridge.Test.Assert).$true(Bridge.hasValue(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.firstValue));
         },
         getDefaultValue: function (T) {
-            return Bridge.fn.bind(this, function () {
-                return Bridge.getDefaultValue(T);
-            });
+            return Bridge.getDefaultValue(T);
         },
         defaultValueOfEnumClassIsNull: function () {
-            Bridge.get(Bridge.Test.Assert).areStrictEqual(null, this.getDefaultValue(Bridge.Enum)());
+            Bridge.get(Bridge.Test.Assert).areStrictEqual(null, this.getDefaultValue(Bridge.Enum));
         },
         defaultValueOfEnumTypeIsZero: function () {
-            Bridge.get(Bridge.Test.Assert).areStrictEqual(0, this.getDefaultValue(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum)());
+            Bridge.get(Bridge.Test.Assert).areStrictEqual(0, this.getDefaultValue(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum));
         },
         defaultConstructorOfEnumTypeReturnsZero: function () {
             Bridge.get(Bridge.Test.Assert).areStrictEqual(0, new Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum().valueOf());
@@ -14606,12 +14804,10 @@
             }
         },
         getDefaultValue: function (T) {
-            return Bridge.fn.bind(this, function () {
-                return Bridge.getDefaultValue(T);
-            });
+            return Bridge.getDefaultValue(T);
         },
         defaultValueIs0: function () {
-            Bridge.get(Bridge.Test.Assert).areStrictEqual(0, this.getDefaultValue(Bridge.Int)());
+            Bridge.get(Bridge.Test.Assert).areStrictEqual(0, this.getDefaultValue(Bridge.Int));
         },
         defaultConstructorReturnsZero: function () {
             Bridge.get(Bridge.Test.Assert).areStrictEqual(0, Number());
@@ -14661,24 +14857,12 @@
         },
         parseWorks: function () {
             Bridge.get(Bridge.Test.Assert).areEqual(234, Bridge.Int.parseInt("234", -32768, 32767));
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("", -32768, 32767);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt(null, -32768, 32767);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("notanumber", -32768, 32767);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("54768", -32768, 32767);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("-55678", -32768, 32767);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("2.5", -32768, 32767);
-            });
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.Int16Tests.f1);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.Int16Tests.f2);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.Int16Tests.f3);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.Int16Tests.f4);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.Int16Tests.f5);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.Int16Tests.f6);
         },
         toStringWithoutRadixWorks: function () {
             Bridge.get(Bridge.Test.Assert).areEqual("123", ((Bridge.cast(123, Bridge.Int))).toString());
@@ -14718,6 +14902,29 @@
             Bridge.get(Bridge.Test.Assert).$true(Bridge.compare((Bridge.cast((Bridge.cast(0, Bridge.Int)), Bridge.IComparable$1(Bridge.Int))), Bridge.cast(0, Bridge.Int)) === 0);
             Bridge.get(Bridge.Test.Assert).$true(Bridge.compare((Bridge.cast((Bridge.cast(1, Bridge.Int)), Bridge.IComparable$1(Bridge.Int))), Bridge.cast(0, Bridge.Int)) > 0);
             Bridge.get(Bridge.Test.Assert).$true(Bridge.compare((Bridge.cast((Bridge.cast(0, Bridge.Int)), Bridge.IComparable$1(Bridge.Int))), Bridge.cast(1, Bridge.Int)) < 0);
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.SimpleTypes.Int16Tests", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.SimpleTypes.Int16Tests, {
+        f1: function () {
+            Bridge.Int.parseInt("", -32768, 32767);
+        },
+        f2: function () {
+            Bridge.Int.parseInt(null, -32768, 32767);
+        },
+        f3: function () {
+            Bridge.Int.parseInt("notanumber", -32768, 32767);
+        },
+        f4: function () {
+            Bridge.Int.parseInt("54768", -32768, 32767);
+        },
+        f5: function () {
+            Bridge.Int.parseInt("-55678", -32768, 32767);
+        },
+        f6: function () {
+            Bridge.Int.parseInt("2.5", -32768, 32767);
         }
     });
     
@@ -14794,12 +15001,10 @@
             Bridge.get(Bridge.Test.Assert).areEqual(1, Bridge.cast(i, Bridge.Int, true));
         },
         getDefaultValue: function (T) {
-            return Bridge.fn.bind(this, function () {
-                return Bridge.getDefaultValue(T);
-            });
+            return Bridge.getDefaultValue(T);
         },
         defaultValueIs0: function () {
-            Bridge.get(Bridge.Test.Assert).areStrictEqual(0, this.getDefaultValue(Bridge.Int)());
+            Bridge.get(Bridge.Test.Assert).areStrictEqual(0, this.getDefaultValue(Bridge.Int));
         },
         defaultConstructorReturnsZero: function () {
             Bridge.get(Bridge.Test.Assert).areStrictEqual(0, Number());
@@ -14847,24 +15052,12 @@
             Bridge.get(Bridge.Test.Assert).areEqual(57574, Bridge.Int.parseInt("57574", -2147483648, 2147483647));
             Bridge.get(Bridge.Test.Assert).areEqual(-14, Bridge.Int.parseInt("-14", -2147483648, 2147483647));
     
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("", -2147483648, 2147483647);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt(null, -2147483648, 2147483647);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("notanumber", -2147483648, 2147483647);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("2147483648", -2147483648, 2147483647);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("-2147483649", -2147483648, 2147483647);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("2.5", -2147483648, 2147483647);
-            });
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.Int32Tests.f1);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.Int32Tests.f2);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.Int32Tests.f3);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.Int32Tests.f4);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.Int32Tests.f5);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.Int32Tests.f6);
         },
         toStringWithoutRadixWorks: function () {
             Bridge.get(Bridge.Test.Assert).areEqual("123", ((123)).toString());
@@ -14943,6 +15136,29 @@
         }
     });
     
+    Bridge.ns("Bridge.ClientTest.SimpleTypes.Int32Tests", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.SimpleTypes.Int32Tests, {
+        f1: function () {
+            Bridge.Int.parseInt("", -2147483648, 2147483647);
+        },
+        f2: function () {
+            Bridge.Int.parseInt(null, -2147483648, 2147483647);
+        },
+        f3: function () {
+            Bridge.Int.parseInt("notanumber", -2147483648, 2147483647);
+        },
+        f4: function () {
+            Bridge.Int.parseInt("2147483648", -2147483648, 2147483647);
+        },
+        f5: function () {
+            Bridge.Int.parseInt("-2147483649", -2147483648, 2147483647);
+        },
+        f6: function () {
+            Bridge.Int.parseInt("2.5", -2147483648, 2147483647);
+        }
+    });
+    
     Bridge.define('Bridge.ClientTest.SimpleTypes.Int64Tests', {
         typePropertiesAreCorrect: function () {
             Bridge.get(Bridge.Test.Assert).$true(Bridge.is(Bridge.cast(0, Bridge.Int), Bridge.Int));
@@ -14983,12 +15199,10 @@
             }
         },
         getDefaultValue: function (T) {
-            return Bridge.fn.bind(this, function () {
-                return Bridge.getDefaultValue(T);
-            });
+            return Bridge.getDefaultValue(T);
         },
         defaultValueIs0: function () {
-            Bridge.get(Bridge.Test.Assert).areStrictEqual(0, this.getDefaultValue(Bridge.Int)());
+            Bridge.get(Bridge.Test.Assert).areStrictEqual(0, this.getDefaultValue(Bridge.Int));
         },
         defaultConstructorReturnsZero: function () {
             Bridge.get(Bridge.Test.Assert).areStrictEqual(0, Number());
@@ -15039,24 +15253,12 @@
         parseWorks: function () {
             Bridge.get(Bridge.Test.Assert).areEqual(13453634535, Bridge.Int.parseInt("13453634535", -9007199254740991, 9007199254740991));
             Bridge.get(Bridge.Test.Assert).areEqual(-234253069384953, Bridge.Int.parseInt("-234253069384953", -9007199254740991, 9007199254740991));
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("", -9007199254740991, 9007199254740991);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt(null, -9007199254740991, 9007199254740991);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("notanumber", -9007199254740991, 9007199254740991);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("2.5", -9007199254740991, 9007199254740991);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("-10000000000000000000", -9007199254740991, 9007199254740991);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("10000000000000000000", -9007199254740991, 9007199254740991);
-            });
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.Int64Tests.f1);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.Int64Tests.f2);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.Int64Tests.f3);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.Int64Tests.f4);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.Int64Tests.f5);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.Int64Tests.f6);
         },
         castingOfLargeDoublesToInt64Works: function () {
             var d1 = 5000000000.5, d2 = -d1;
@@ -15110,27 +15312,30 @@
         }
     });
     
-    Bridge.define('Bridge.ClientTest.SimpleTypes.JsDateTimeTests', {
-        statics: {
-            dateTimes: function () {
-                // TEST
-                // [#83] by C#
-                var str = "2015-03-24T10:48:09.1500225+03:00";
-                var bridgeDate = Bridge.Date.parse(str);
-                var bridgeDate1 = new Date(str);
+    Bridge.ns("Bridge.ClientTest.SimpleTypes.Int64Tests", $_)
     
-                Bridge.get(Bridge.Test.Assert).areDeepEqual$1(bridgeDate1, bridgeDate, "[#83] C# bridgeDate = bridgeDate1");
-    
-                // TEST
-                // [#83] by JavaScript code. This is to check the same issue as above and just to check another way of calling QUnit from JavaScript
-                //Script.Write<dynamic>("var str = \"2015-03-24T10:48:09.1500225+03:00\";");
-                //Script.Write<dynamic>("var bridgeDate2 = Bridge.Date.parse(str);");
-                //Script.Write<dynamic>("var jsDate = new Date(Date.parse(str));");
-                //Script.Write<dynamic>("var format = \"yyyy-MM-dd hh:mm:ss\";");
-    
-                //Script.Write<dynamic>("assert.deepEqual(Bridge.Date.format(bridgeDate2, format), Bridge.Date.format(jsDate, format), \"[#83] js\");");
-            }
+    Bridge.apply($_.Bridge.ClientTest.SimpleTypes.Int64Tests, {
+        f1: function () {
+            Bridge.Int.parseInt("", -9007199254740991, 9007199254740991);
         },
+        f2: function () {
+            Bridge.Int.parseInt(null, -9007199254740991, 9007199254740991);
+        },
+        f3: function () {
+            Bridge.Int.parseInt("notanumber", -9007199254740991, 9007199254740991);
+        },
+        f4: function () {
+            Bridge.Int.parseInt("2.5", -9007199254740991, 9007199254740991);
+        },
+        f5: function () {
+            Bridge.Int.parseInt("-10000000000000000000", -9007199254740991, 9007199254740991);
+        },
+        f6: function () {
+            Bridge.Int.parseInt("10000000000000000000", -9007199254740991, 9007199254740991);
+        }
+    });
+    
+    Bridge.define('Bridge.ClientTest.SimpleTypes.JsDateTimeTests', {
         typePropertiesAreCorrect: function () {
             Bridge.get(Bridge.Test.Assert).areEqual("Date", Bridge.getTypeName(Date));
             var o = new Date();
@@ -15457,6 +15662,26 @@
             Bridge.get(Bridge.Test.Assert).$true(Bridge.compare((Bridge.cast(new Date(0), Bridge.IComparable$1(Date))), new Date(0)) === 0);
             Bridge.get(Bridge.Test.Assert).$true(Bridge.compare((Bridge.cast(new Date(1), Bridge.IComparable$1(Date))), new Date(0)) > 0);
             Bridge.get(Bridge.Test.Assert).$true(Bridge.compare((Bridge.cast(new Date(0), Bridge.IComparable$1(Date))), new Date(1)) < 0);
+        },
+        statics: {
+            dateTimes: function () {
+                // TEST
+                // [#83] by C#
+                var str = "2015-03-24T10:48:09.1500225+03:00";
+                var bridgeDate = Bridge.Date.parse(str);
+                var bridgeDate1 = new Date(str);
+    
+                Bridge.get(Bridge.Test.Assert).areDeepEqual$1(bridgeDate1, bridgeDate, "[#83] C# bridgeDate = bridgeDate1");
+    
+                // TEST
+                // [#83] by JavaScript code. This is to check the same issue as above and just to check another way of calling QUnit from JavaScript
+                //Script.Write<dynamic>("var str = \"2015-03-24T10:48:09.1500225+03:00\";");
+                //Script.Write<dynamic>("var bridgeDate2 = Bridge.Date.parse(str);");
+                //Script.Write<dynamic>("var jsDate = new Date(Date.parse(str));");
+                //Script.Write<dynamic>("var format = \"yyyy-MM-dd hh:mm:ss\";");
+    
+                //Script.Write<dynamic>("assert.deepEqual(Bridge.Date.format(bridgeDate2, format), Bridge.Date.format(jsDate, format), \"[#83] js\");");
+            }
         }
     });
     
@@ -15550,12 +15775,10 @@
             }
         },
         getDefaultValue: function (T) {
-            return Bridge.fn.bind(this, function () {
-                return Bridge.getDefaultValue(T);
-            });
+            return Bridge.getDefaultValue(T);
         },
         defaultValueIs0: function () {
-            Bridge.get(Bridge.Test.Assert).areStrictEqual(0, this.getDefaultValue(Bridge.Int)());
+            Bridge.get(Bridge.Test.Assert).areStrictEqual(0, this.getDefaultValue(Bridge.Int));
         },
         defaultConstructorReturnsZero: function () {
             Bridge.get(Bridge.Test.Assert).areStrictEqual(0, Number());
@@ -15606,21 +15829,11 @@
         parseWorks: function () {
             Bridge.get(Bridge.Test.Assert).areEqual(124, Bridge.Int.parseInt("124", -128, 127));
             Bridge.get(Bridge.Test.Assert).areEqual(-123, Bridge.Int.parseInt("-123", -128, 127));
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("", -128, 127);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt(null, -128, 127);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("notanumber", -128, 127);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("54768", -128, 127);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("2.5", -128, 127);
-            });
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.SByteTests.f1);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.SByteTests.f2);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.SByteTests.f3);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.SByteTests.f4);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.SByteTests.f5);
         },
         toStringWithoutRadixWorks: function () {
             Bridge.get(Bridge.Test.Assert).areEqual("123", ((Bridge.cast(123, Bridge.Int))).toString());
@@ -15663,6 +15876,26 @@
         }
     });
     
+    Bridge.ns("Bridge.ClientTest.SimpleTypes.SByteTests", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.SimpleTypes.SByteTests, {
+        f1: function () {
+            Bridge.Int.parseInt("", -128, 127);
+        },
+        f2: function () {
+            Bridge.Int.parseInt(null, -128, 127);
+        },
+        f3: function () {
+            Bridge.Int.parseInt("notanumber", -128, 127);
+        },
+        f4: function () {
+            Bridge.Int.parseInt("54768", -128, 127);
+        },
+        f5: function () {
+            Bridge.Int.parseInt("2.5", -128, 127);
+        }
+    });
+    
     Bridge.define('Bridge.ClientTest.SimpleTypes.SingleTests', {
         typePropertiesAreCorrect: function () {
             Bridge.get(Bridge.Test.Assert).$true(Bridge.is(Bridge.cast(0.5, Number), Number));
@@ -15673,12 +15906,10 @@
             Bridge.get(Bridge.Test.Assert).$true(Bridge.is(f, Bridge.IFormattable));
         },
         getDefaultValue: function (T) {
-            return Bridge.fn.bind(this, function () {
-                return Bridge.getDefaultValue(T);
-            });
+            return Bridge.getDefaultValue(T);
         },
         defaultValueIs0: function () {
-            Bridge.get(Bridge.Test.Assert).areStrictEqual(0, this.getDefaultValue(Number)());
+            Bridge.get(Bridge.Test.Assert).areStrictEqual(0, this.getDefaultValue(Number));
         },
         creatingInstanceReturnsZero: function () {
             Bridge.get(Bridge.Test.Assert).areStrictEqual(0, new Number());
@@ -15794,161 +16025,6 @@
     });
     
     Bridge.define('Bridge.ClientTest.SimpleTypes.StringTests', {
-        statics: {
-            strings: function () {
-                var $t;
-                // In PhantomJS some correct tests failed. We will skip them in this environment.
-                var isPhantomJs = Bridge.get(Bridge.ClientTest.Utilities.BrowserHelper).isPhantomJs();
-    
-                //var expectedCount = isPhantomJs ? 28 : 48;
-                //assert.Expect(expectedCount);
-    
-                // TEST ToLower, ToLowerCase, ToLocaleLowerCase
-                var s = ("HELLO").toLowerCase();
-                Bridge.get(Bridge.Test.Assert).areEqual$1("hello", s, "'HELLO'.ToLower()");
-    
-                s = "HELLO".toLowerCase();
-                Bridge.get(Bridge.Test.Assert).areEqual$1("hello", s, "'HELLO'.ToLowerCase()");
-    
-                s = "HELLO".toLocaleLowerCase();
-                Bridge.get(Bridge.Test.Assert).areEqual$1("hello", s, "'HELLO'.ToLocaleLowerCase()");
-    
-                // TEST ToUpper, ToUpperCase, ToLocaleUpperCase
-                s = ("hello").toUpperCase();
-                Bridge.get(Bridge.Test.Assert).areEqual$1("HELLO", s, "'hello'.ToUpper()");
-    
-                s = "hello".toUpperCase();
-                Bridge.get(Bridge.Test.Assert).areEqual$1("HELLO", s, "'hello'.ToUpperCase()");
-    
-                s = "HELLO".toLocaleUpperCase();
-                Bridge.get(Bridge.Test.Assert).areEqual$1("HELLO", s, "'hello'.ToLocaleUpperCase()");
-    
-                s = "Hello Bridge.NET";
-                // TEST String(string) constructor
-                Bridge.get(Bridge.Test.Assert).areEqual$1(s, String(s), "new String('" + s + "')");
-    
-                // TEST String(char, count) constructor
-                Bridge.get(Bridge.Test.Assert).areEqual$1("----", Bridge.String.fromCharCount(45, 4), "new String('-',4)");
-    
-                // TEST IndexOfAny
-                var anyOf = [120, 98, 105];
-                var sAnyOf = "['x','b','i']";
-    
-                Bridge.get(Bridge.Test.Assert).areEqual$1(8, Bridge.String.indexOfAny(s, anyOf), "'" + s + "'.IndexOfAny(" + sAnyOf + ")");
-                Bridge.get(Bridge.Test.Assert).throws$5(function () {
-                    Bridge.String.indexOfAny(s, anyOf, 18, 8);
-                }, "'" + s + "'.IndexOfAny(" + sAnyOf + ")");
-                Bridge.get(Bridge.Test.Assert).throws$5(function () {
-                    Bridge.String.indexOfAny(s, null);
-                }, "'" + s + "'.IndexOfAny(null)");
-    
-                s = "";
-                Bridge.get(Bridge.Test.Assert).areEqual$1(-1, Bridge.String.indexOfAny(s, anyOf), "String.Empty.IndexOfAny(" + sAnyOf + ")");
-    
-                s = null;
-                Bridge.get(Bridge.Test.Assert).areEqual$1(-1, Bridge.String.indexOfAny(s, anyOf), "null.IndexOfAny(" + sAnyOf + ")");
-    
-                // TEST IndexOf
-                s = "Hello Bridge.NET";
-    
-                Bridge.get(Bridge.Test.Assert).areEqual$1(1, Bridge.String.indexOf(s, String.fromCharCode(101)), "'" + s + "'.IndexOf('e')");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(11, Bridge.String.indexOf(s, "e."), "'" + s + "'.IndexOf('e.')");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(11, Bridge.String.indexOf(s, String.fromCharCode(101), 6, 8), "'" + s + "'.IndexOf('e', 6, 8)");
-                Bridge.get(Bridge.Test.Assert).throws$5(function () {
-                    Bridge.String.indexOf(s, null);
-                }, "'" + s + "'.IndexOf(null)");
-    
-                if (!isPhantomJs) {
-                    Bridge.get(Bridge.Test.Assert).areEqual$1(11, Bridge.String.indexOf(s, "E", 6, 8, 1), "'" + s + "'.IndexOf('E', 6, 8, StringComparison.CurrentCultureIgnoreCase)");
-                }
-    
-                s = "";
-                Bridge.get(Bridge.Test.Assert).areEqual$1(-1, Bridge.String.indexOf(s, String.fromCharCode(101)), "String.Empty.IndexOf('e')");
-    
-                s = null;
-                Bridge.get(Bridge.Test.Assert).areEqual$1(-1, Bridge.String.indexOf(s, String.fromCharCode(101)), "null.IndexOf('e')");
-    
-                // TEST Compare
-                var s1 = "Animal";
-                var s2 = "animal";
-    
-                Bridge.get(Bridge.Test.Assert).areEqual$1(0, Bridge.String.compare(s1, s2, true), "String.Compare('" + s1 + "', '" + s2 + "', true)");
-    
-                if (!isPhantomJs) {
-                    Bridge.get(Bridge.Test.Assert).areEqual$1(1, Bridge.String.compare(s1, s2, false), "String.Compare('" + s1 + "', '" + s2 + "', false)");
-                }
-    
-                if (!isPhantomJs) {
-                    var threeIs = Bridge.Array.init(3, null);
-                    threeIs[0] = "i";
-                    threeIs[1] = "ı";
-                    threeIs[2] = "I";
-    
-                    var scValues = [0, 1, 2, 3, 4, 5];
-    
-                    var expected = [-1, -1, 1, -1, 0, 1, -1, -1, 1, -1, 0, 1, -1, 1, 1, 0, 0, 0];
-                    var expectedIndex = 0;
-    
-                    $t = Bridge.getEnumerator(scValues);
-                    while ($t.moveNext()) {
-                        var sc = $t.getCurrent();
-                        Bridge.get(Bridge.ClientTest.SimpleTypes.StringTests).test(0, 1, sc, threeIs, expected, expectedIndex++);
-                        Bridge.get(Bridge.ClientTest.SimpleTypes.StringTests).test(0, 2, sc, threeIs, expected, expectedIndex++);
-                        Bridge.get(Bridge.ClientTest.SimpleTypes.StringTests).test(1, 2, sc, threeIs, expected, expectedIndex++);
-                    }
-                }
-    
-                // TEST Contains
-                s = "Hello Bridge.NET";
-    
-                Bridge.get(Bridge.Test.Assert).areEqual$1(true, Bridge.String.contains(s,"Bridge"), "'" + s + "'.Contains('Bridge')");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(true, Bridge.String.contains(s,""), "'" + s + "'.Contains(String.Empty)");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(false, Bridge.String.contains("","Bridge"), "String.Empty.Contains('Bridge')");
-                Bridge.get(Bridge.Test.Assert).throws$5(function () {
-                    Bridge.String.contains(s,null);
-                }, "null.Contains('Bridge')");
-    
-                // TEST Concat
-                s = [s, "2", "3", "4"].join('');
-                Bridge.get(Bridge.Test.Assert).areEqual$1("Hello Bridge.NET234", s, "string.Concat()");
-    
-                s = [null, true, 3, false].join('');
-                Bridge.get(Bridge.Test.Assert).areEqual$1("true3false", s, "string.Concat()");
-    
-                s = ["1", "2", "3", "4", "5"].toString().split(',').join('');
-                Bridge.get(Bridge.Test.Assert).areEqual$1("12345", s, "string.Concat()");
-    
-                s = [1, null, 2, null, 3].toString().split(',').join('');
-                Bridge.get(Bridge.Test.Assert).areEqual$1("123", s, "string.Concat()");
-            },
-            test: function (x, y, comparison, testI, expected, expectedIndex) {
-                var cmpValue = 0;
-                cmpValue = Bridge.String.compare(testI[x], testI[y], comparison);
-                Bridge.get(Bridge.Test.Assert).areEqual$1(expected[expectedIndex], cmpValue, "String.Compare('" + testI[x] + "', '" + testI[y] + "'," + comparison + ")");
-            },
-            enumerable: function () {
-                var $t;
-                var a;
-                var i = 0;
-                var result = Bridge.Array.init(5, function (){
-                    return new Bridge.Int();
-                });
-                $t = Bridge.getEnumerator("danny");
-                while ($t.moveNext()) {
-                    var c = $t.getCurrent();
-                    a = c;
-                    result[i] = a;
-    
-                    i++;
-                }
-    
-                Bridge.get(Bridge.Test.Assert).areEqual(100, result[0]);
-                Bridge.get(Bridge.Test.Assert).areEqual(97, result[1]);
-                Bridge.get(Bridge.Test.Assert).areEqual(110, result[2]);
-                Bridge.get(Bridge.Test.Assert).areEqual(110, result[3]);
-                Bridge.get(Bridge.Test.Assert).areEqual(121, result[4]);
-            }
-        },
         typePropertiesAreCorrect: function () {
             Bridge.get(Bridge.Test.Assert).areEqual("String", Bridge.getTypeName(String));
             var s = "X";
@@ -16208,9 +16284,7 @@
             Bridge.get(Bridge.Test.Assert).areEqual("xxcxxcxxc", ("abcabcabc").replace(new RegExp("a|b", "g"), "x"));
         },
         replaceRegexWithReplaceCallbackWorks: function () {
-            Bridge.get(Bridge.Test.Assert).areEqual("xycxycxyc", ("abcabcabc").replace(new RegExp("a|b", "g"), function (s) {
-                return s === "a" ? "x" : "y";
-            }));
+            Bridge.get(Bridge.Test.Assert).areEqual("xycxycxyc", ("abcabcabc").replace(new RegExp("a|b", "g"), $_.Bridge.ClientTest.SimpleTypes.StringTests.f1));
         },
         searchWorks: function () {
             Bridge.get(Bridge.Test.Assert).areEqual(2, ("abcabcabc").search(new RegExp("ca")));
@@ -16506,6 +16580,169 @@
         toCharArrayWorks: function () {
             var text = "Lorem sit dolor";
             Bridge.get(Bridge.Test.Assert).areDeepEqual([76, 111, 114, 101, 109, 32, 115, 105, 116, 32, 100, 111, 108, 111, 114], Bridge.String.toCharArray(text, 0, text.length));
+        },
+        statics: {
+            strings: function () {
+                var $t;
+                // In PhantomJS some correct tests failed. We will skip them in this environment.
+                var isPhantomJs = Bridge.get(Bridge.ClientTest.Utilities.BrowserHelper).isPhantomJs();
+    
+                //var expectedCount = isPhantomJs ? 28 : 48;
+                //assert.Expect(expectedCount);
+    
+                // TEST ToLower, ToLowerCase, ToLocaleLowerCase
+                var s = ("HELLO").toLowerCase();
+                Bridge.get(Bridge.Test.Assert).areEqual$1("hello", s, "'HELLO'.ToLower()");
+    
+                s = "HELLO".toLowerCase();
+                Bridge.get(Bridge.Test.Assert).areEqual$1("hello", s, "'HELLO'.ToLowerCase()");
+    
+                s = "HELLO".toLocaleLowerCase();
+                Bridge.get(Bridge.Test.Assert).areEqual$1("hello", s, "'HELLO'.ToLocaleLowerCase()");
+    
+                // TEST ToUpper, ToUpperCase, ToLocaleUpperCase
+                s = ("hello").toUpperCase();
+                Bridge.get(Bridge.Test.Assert).areEqual$1("HELLO", s, "'hello'.ToUpper()");
+    
+                s = "hello".toUpperCase();
+                Bridge.get(Bridge.Test.Assert).areEqual$1("HELLO", s, "'hello'.ToUpperCase()");
+    
+                s = "HELLO".toLocaleUpperCase();
+                Bridge.get(Bridge.Test.Assert).areEqual$1("HELLO", s, "'hello'.ToLocaleUpperCase()");
+    
+                s = "Hello Bridge.NET";
+                // TEST String(string) constructor
+                Bridge.get(Bridge.Test.Assert).areEqual$1(s, String(s), "new String('" + s + "')");
+    
+                // TEST String(char, count) constructor
+                Bridge.get(Bridge.Test.Assert).areEqual$1("----", Bridge.String.fromCharCount(45, 4), "new String('-',4)");
+    
+                // TEST IndexOfAny
+                var anyOf = [120, 98, 105];
+                var sAnyOf = "['x','b','i']";
+    
+                Bridge.get(Bridge.Test.Assert).areEqual$1(8, Bridge.String.indexOfAny(s, anyOf), "'" + s + "'.IndexOfAny(" + sAnyOf + ")");
+                Bridge.get(Bridge.Test.Assert).throws$5(function () {
+                    Bridge.String.indexOfAny(s, anyOf, 18, 8);
+                }, "'" + s + "'.IndexOfAny(" + sAnyOf + ")");
+                Bridge.get(Bridge.Test.Assert).throws$5(function () {
+                    Bridge.String.indexOfAny(s, null);
+                }, "'" + s + "'.IndexOfAny(null)");
+    
+                s = "";
+                Bridge.get(Bridge.Test.Assert).areEqual$1(-1, Bridge.String.indexOfAny(s, anyOf), "String.Empty.IndexOfAny(" + sAnyOf + ")");
+    
+                s = null;
+                Bridge.get(Bridge.Test.Assert).areEqual$1(-1, Bridge.String.indexOfAny(s, anyOf), "null.IndexOfAny(" + sAnyOf + ")");
+    
+                // TEST IndexOf
+                s = "Hello Bridge.NET";
+    
+                Bridge.get(Bridge.Test.Assert).areEqual$1(1, Bridge.String.indexOf(s, String.fromCharCode(101)), "'" + s + "'.IndexOf('e')");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(11, Bridge.String.indexOf(s, "e."), "'" + s + "'.IndexOf('e.')");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(11, Bridge.String.indexOf(s, String.fromCharCode(101), 6, 8), "'" + s + "'.IndexOf('e', 6, 8)");
+                Bridge.get(Bridge.Test.Assert).throws$5(function () {
+                    Bridge.String.indexOf(s, null);
+                }, "'" + s + "'.IndexOf(null)");
+    
+                if (!isPhantomJs) {
+                    Bridge.get(Bridge.Test.Assert).areEqual$1(11, Bridge.String.indexOf(s, "E", 6, 8, 1), "'" + s + "'.IndexOf('E', 6, 8, StringComparison.CurrentCultureIgnoreCase)");
+                }
+    
+                s = "";
+                Bridge.get(Bridge.Test.Assert).areEqual$1(-1, Bridge.String.indexOf(s, String.fromCharCode(101)), "String.Empty.IndexOf('e')");
+    
+                s = null;
+                Bridge.get(Bridge.Test.Assert).areEqual$1(-1, Bridge.String.indexOf(s, String.fromCharCode(101)), "null.IndexOf('e')");
+    
+                // TEST Compare
+                var s1 = "Animal";
+                var s2 = "animal";
+    
+                Bridge.get(Bridge.Test.Assert).areEqual$1(0, Bridge.String.compare(s1, s2, true), "String.Compare('" + s1 + "', '" + s2 + "', true)");
+    
+                if (!isPhantomJs) {
+                    Bridge.get(Bridge.Test.Assert).areEqual$1(1, Bridge.String.compare(s1, s2, false), "String.Compare('" + s1 + "', '" + s2 + "', false)");
+                }
+    
+                if (!isPhantomJs) {
+                    var threeIs = Bridge.Array.init(3, null);
+                    threeIs[0] = "i";
+                    threeIs[1] = "ı";
+                    threeIs[2] = "I";
+    
+                    var scValues = [0, 1, 2, 3, 4, 5];
+    
+                    var expected = [-1, -1, 1, -1, 0, 1, -1, -1, 1, -1, 0, 1, -1, 1, 1, 0, 0, 0];
+                    var expectedIndex = 0;
+    
+                    $t = Bridge.getEnumerator(scValues);
+                    while ($t.moveNext()) {
+                        var sc = $t.getCurrent();
+                        Bridge.get(Bridge.ClientTest.SimpleTypes.StringTests).test(0, 1, sc, threeIs, expected, expectedIndex++);
+                        Bridge.get(Bridge.ClientTest.SimpleTypes.StringTests).test(0, 2, sc, threeIs, expected, expectedIndex++);
+                        Bridge.get(Bridge.ClientTest.SimpleTypes.StringTests).test(1, 2, sc, threeIs, expected, expectedIndex++);
+                    }
+                }
+    
+                // TEST Contains
+                s = "Hello Bridge.NET";
+    
+                Bridge.get(Bridge.Test.Assert).areEqual$1(true, Bridge.String.contains(s,"Bridge"), "'" + s + "'.Contains('Bridge')");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(true, Bridge.String.contains(s,""), "'" + s + "'.Contains(String.Empty)");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(false, Bridge.String.contains("","Bridge"), "String.Empty.Contains('Bridge')");
+                Bridge.get(Bridge.Test.Assert).throws$5(function () {
+                    Bridge.String.contains(s,null);
+                }, "null.Contains('Bridge')");
+    
+                // TEST Concat
+                s = [s, "2", "3", "4"].join('');
+                Bridge.get(Bridge.Test.Assert).areEqual$1("Hello Bridge.NET234", s, "string.Concat()");
+    
+                s = [null, true, 3, false].join('');
+                Bridge.get(Bridge.Test.Assert).areEqual$1("true3false", s, "string.Concat()");
+    
+                s = ["1", "2", "3", "4", "5"].toString().split(',').join('');
+                Bridge.get(Bridge.Test.Assert).areEqual$1("12345", s, "string.Concat()");
+    
+                s = [1, null, 2, null, 3].toString().split(',').join('');
+                Bridge.get(Bridge.Test.Assert).areEqual$1("123", s, "string.Concat()");
+            },
+            test: function (x, y, comparison, testI, expected, expectedIndex) {
+                var cmpValue = 0;
+                cmpValue = Bridge.String.compare(testI[x], testI[y], comparison);
+                Bridge.get(Bridge.Test.Assert).areEqual$1(expected[expectedIndex], cmpValue, "String.Compare('" + testI[x] + "', '" + testI[y] + "'," + comparison + ")");
+            },
+            enumerable: function () {
+                var $t;
+                var a;
+                var i = 0;
+                var result = Bridge.Array.init(5, function (){
+                    return new Bridge.Int();
+                });
+                $t = Bridge.getEnumerator("danny");
+                while ($t.moveNext()) {
+                    var c = $t.getCurrent();
+                    a = c;
+                    result[i] = a;
+    
+                    i++;
+                }
+    
+                Bridge.get(Bridge.Test.Assert).areEqual(100, result[0]);
+                Bridge.get(Bridge.Test.Assert).areEqual(97, result[1]);
+                Bridge.get(Bridge.Test.Assert).areEqual(110, result[2]);
+                Bridge.get(Bridge.Test.Assert).areEqual(110, result[3]);
+                Bridge.get(Bridge.Test.Assert).areEqual(121, result[4]);
+            }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.SimpleTypes.StringTests", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.SimpleTypes.StringTests, {
+        f1: function (s) {
+            return s === "a" ? "x" : "y";
         }
     });
     
@@ -16643,9 +16880,7 @@
     
                 Bridge.get(Bridge.Test.Assert).areEqual$1(v2.toString(), Bridge.get(Bridge.Version).parse(s2).toString(), "Version.Parse(s2)");
     
-                Bridge.get(Bridge.Test.Assert).throws$5(function () {
-                    Bridge.get(Bridge.Version).parse("12,123.23.12");
-                }, "Version.Parse(\"12,123.23.12\")");
+                Bridge.get(Bridge.Test.Assert).throws$5($_.Bridge.ClientTest.SimpleTypes.TestVersion.f1, "Version.Parse(\"12,123.23.12\")");
     
                 var vp1 = { };
                 var b1 = Bridge.get(Bridge.Version).tryParse("12,123.23.12", vp1);
@@ -16699,6 +16934,14 @@
                 Bridge.get(Bridge.Test.Assert).false$1(Bridge.Version.op_LessThan(v4, v5), "v4 < v5");
                 Bridge.get(Bridge.Test.Assert).false$1(Bridge.Version.op_LessThanOrEqual(v4, v5), "v4 <= v5");
             }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.SimpleTypes.TestVersion", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.SimpleTypes.TestVersion, {
+        f1: function () {
+            Bridge.get(Bridge.Version).parse("12,123.23.12");
         }
     });
     
@@ -17058,12 +17301,10 @@
             }
         },
         getDefaultValue: function (T) {
-            return Bridge.fn.bind(this, function () {
-                return Bridge.getDefaultValue(T);
-            });
+            return Bridge.getDefaultValue(T);
         },
         defaultValueIs0: function () {
-            Bridge.get(Bridge.Test.Assert).areStrictEqual(0, this.getDefaultValue(Bridge.Int)());
+            Bridge.get(Bridge.Test.Assert).areStrictEqual(0, this.getDefaultValue(Bridge.Int));
         },
         defaultConstructorReturnsZero: function () {
             Bridge.get(Bridge.Test.Assert).areStrictEqual(0, Number());
@@ -17113,24 +17354,12 @@
         },
         parseWorks: function () {
             Bridge.get(Bridge.Test.Assert).areEqual(23445, Bridge.Int.parseInt("23445", 0, 65535));
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("", 0, 65535);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt(null, 0, 65535);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("notanumber", 0, 65535);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("65536", 0, 65535);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("-1", 0, 65535);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("2.5", 0, 65535);
-            });
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.UInt16Tests.f1);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.UInt16Tests.f2);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.UInt16Tests.f3);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.UInt16Tests.f4);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.UInt16Tests.f5);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.UInt16Tests.f6);
         },
         toStringWithoutRadixWorks: function () {
             Bridge.get(Bridge.Test.Assert).areEqual("123", ((Bridge.cast(123, Bridge.Int))).toString());
@@ -17170,6 +17399,29 @@
             Bridge.get(Bridge.Test.Assert).$true(Bridge.compare((Bridge.cast((Bridge.cast(0, Bridge.Int)), Bridge.IComparable$1(Bridge.Int))), Bridge.cast(0, Bridge.Int)) === 0);
             Bridge.get(Bridge.Test.Assert).$true(Bridge.compare((Bridge.cast((Bridge.cast(1, Bridge.Int)), Bridge.IComparable$1(Bridge.Int))), Bridge.cast(0, Bridge.Int)) > 0);
             Bridge.get(Bridge.Test.Assert).$true(Bridge.compare((Bridge.cast((Bridge.cast(0, Bridge.Int)), Bridge.IComparable$1(Bridge.Int))), Bridge.cast(1, Bridge.Int)) < 0);
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.SimpleTypes.UInt16Tests", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.SimpleTypes.UInt16Tests, {
+        f1: function () {
+            Bridge.Int.parseInt("", 0, 65535);
+        },
+        f2: function () {
+            Bridge.Int.parseInt(null, 0, 65535);
+        },
+        f3: function () {
+            Bridge.Int.parseInt("notanumber", 0, 65535);
+        },
+        f4: function () {
+            Bridge.Int.parseInt("65536", 0, 65535);
+        },
+        f5: function () {
+            Bridge.Int.parseInt("-1", 0, 65535);
+        },
+        f6: function () {
+            Bridge.Int.parseInt("2.5", 0, 65535);
         }
     });
     
@@ -17219,12 +17471,10 @@
             }
         },
         getDefaultValue: function (T) {
-            return Bridge.fn.bind(this, function () {
-                return Bridge.getDefaultValue(T);
-            });
+            return Bridge.getDefaultValue(T);
         },
         defaultValueIs0: function () {
-            Bridge.get(Bridge.Test.Assert).areStrictEqual(0, this.getDefaultValue(Bridge.Int)());
+            Bridge.get(Bridge.Test.Assert).areStrictEqual(0, this.getDefaultValue(Bridge.Int));
         },
         defaultConstructorReturnsZero: function () {
             Bridge.get(Bridge.Test.Assert).areStrictEqual(0, Number());
@@ -17270,24 +17520,12 @@
         },
         parseWorks: function () {
             Bridge.get(Bridge.Test.Assert).areEqual(23445, Bridge.Int.parseInt("23445", 0, 4294967295));
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("", 0, 4294967295);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt(null, 0, 4294967295);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("notanumber", 0, 4294967295);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("4294967296", 0, 4294967295);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("-1", 0, 4294967295);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("2.5", 0, 4294967295);
-            });
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.UInt32Tests.f1);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.UInt32Tests.f2);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.UInt32Tests.f3);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.UInt32Tests.f4);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.UInt32Tests.f5);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.UInt32Tests.f6);
         },
         toStringWithoutRadixWorks: function () {
             Bridge.get(Bridge.Test.Assert).areEqual("123", ((Bridge.cast(123, Bridge.Int))).toString());
@@ -17327,6 +17565,29 @@
             Bridge.get(Bridge.Test.Assert).$true(Bridge.compare((Bridge.cast((Bridge.cast(0, Bridge.Int)), Bridge.IComparable$1(Bridge.Int))), Bridge.cast(0, Bridge.Int)) === 0);
             Bridge.get(Bridge.Test.Assert).$true(Bridge.compare((Bridge.cast((Bridge.cast(1, Bridge.Int)), Bridge.IComparable$1(Bridge.Int))), Bridge.cast(0, Bridge.Int)) > 0);
             Bridge.get(Bridge.Test.Assert).$true(Bridge.compare((Bridge.cast((Bridge.cast(0, Bridge.Int)), Bridge.IComparable$1(Bridge.Int))), Bridge.cast(1, Bridge.Int)) < 0);
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.SimpleTypes.UInt32Tests", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.SimpleTypes.UInt32Tests, {
+        f1: function () {
+            Bridge.Int.parseInt("", 0, 4294967295);
+        },
+        f2: function () {
+            Bridge.Int.parseInt(null, 0, 4294967295);
+        },
+        f3: function () {
+            Bridge.Int.parseInt("notanumber", 0, 4294967295);
+        },
+        f4: function () {
+            Bridge.Int.parseInt("4294967296", 0, 4294967295);
+        },
+        f5: function () {
+            Bridge.Int.parseInt("-1", 0, 4294967295);
+        },
+        f6: function () {
+            Bridge.Int.parseInt("2.5", 0, 4294967295);
         }
     });
     
@@ -17370,12 +17631,10 @@
             }
         },
         getDefaultValue: function (T) {
-            return Bridge.fn.bind(this, function () {
-                return Bridge.getDefaultValue(T);
-            });
+            return Bridge.getDefaultValue(T);
         },
         defaultValueIs0: function () {
-            Bridge.get(Bridge.Test.Assert).areStrictEqual(0, this.getDefaultValue(Bridge.Int)());
+            Bridge.get(Bridge.Test.Assert).areStrictEqual(0, this.getDefaultValue(Bridge.Int));
         },
         defaultConstructorReturnsZero: function () {
             Bridge.get(Bridge.Test.Assert).areStrictEqual(0, Number());
@@ -17433,24 +17692,12 @@
         },
         parseWorks: function () {
             Bridge.get(Bridge.Test.Assert).areEqual(23445, Bridge.Int.parseInt("23445", 0, 9007199254740991));
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("", 0, 9007199254740991);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt(null, 0, 9007199254740991);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("notanumber", 0, 9007199254740991);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("-1", 0, 9007199254740991);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("2.5", 0, 9007199254740991);
-            });
-            Bridge.get(Bridge.Test.Assert).$throws(function () {
-                Bridge.Int.parseInt("100000000000000000000", 0, 9007199254740991);
-            });
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.UInt64Tests.f1);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.UInt64Tests.f2);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.UInt64Tests.f3);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.UInt64Tests.f4);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.UInt64Tests.f5);
+            Bridge.get(Bridge.Test.Assert).$throws($_.Bridge.ClientTest.SimpleTypes.UInt64Tests.f6);
         },
         toStringWithoutRadixWorks: function () {
             Bridge.get(Bridge.Test.Assert).areEqual("123", ((Bridge.cast(123, Bridge.Int))).toString());
@@ -17493,13 +17740,30 @@
         }
     });
     
-    Bridge.define('Bridge.ClientTest.Text.RegularExpressions.RegexTests', {
-        statics: {
-            escapeWorks: function () {
-                var escaped = Bridge.regexpEscape("[-/\\^$*+?.()|[]{}]");
-                Bridge.get(Bridge.Test.Assert).areEqual("\\[\\-\\/\\\\\\^\\$\\*\\+\\?\\.\\(\\)\\|\\[\\]\\{\\}\\]", escaped);
-            }
+    Bridge.ns("Bridge.ClientTest.SimpleTypes.UInt64Tests", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.SimpleTypes.UInt64Tests, {
+        f1: function () {
+            Bridge.Int.parseInt("", 0, 9007199254740991);
         },
+        f2: function () {
+            Bridge.Int.parseInt(null, 0, 9007199254740991);
+        },
+        f3: function () {
+            Bridge.Int.parseInt("notanumber", 0, 9007199254740991);
+        },
+        f4: function () {
+            Bridge.Int.parseInt("-1", 0, 9007199254740991);
+        },
+        f5: function () {
+            Bridge.Int.parseInt("2.5", 0, 9007199254740991);
+        },
+        f6: function () {
+            Bridge.Int.parseInt("100000000000000000000", 0, 9007199254740991);
+        }
+    });
+    
+    Bridge.define('Bridge.ClientTest.Text.RegularExpressions.RegexTests', {
         typePropertiesAreCorrect: function () {
             var re = new RegExp("");
             Bridge.get(Bridge.Test.Assert).areEqual("RegExp", Bridge.getTypeName(RegExp));
@@ -17548,83 +17812,16 @@
         testWorks: function () {
             Bridge.get(Bridge.Test.Assert).$true(new RegExp("a|b").test("xaybz"));
             Bridge.get(Bridge.Test.Assert).$false(new RegExp("c").test("xaybz"));
+        },
+        statics: {
+            escapeWorks: function () {
+                var escaped = Bridge.regexpEscape("[-/\\^$*+?.()|[]{}]");
+                Bridge.get(Bridge.Test.Assert).areEqual("\\[\\-\\/\\\\\\^\\$\\*\\+\\?\\.\\(\\)\\|\\[\\]\\{\\}\\]", escaped);
+            }
         }
     });
     
     Bridge.define('Bridge.ClientTest.Text.StringBuilderTests', {
-        statics: {
-            stringBuilders: function () {
-                // TEST constructors
-                var sb = new Bridge.Text.StringBuilder();
-                var sb1 = new Bridge.Text.StringBuilder("", 128);
-                Bridge.get(Bridge.Test.Assert).areEqual$1("", sb.toString(), "StringBuilder() .ctor");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(sb1.toString(), sb.toString(), "StringBuilder(capacity) .ctor");
-    
-                sb = new Bridge.Text.StringBuilder("foo");
-                sb1 = new Bridge.Text.StringBuilder("foo", 2);
-                Bridge.get(Bridge.Test.Assert).areEqual$1("foo", sb.toString(), "StringBuilder(string) .ctor");
-                Bridge.get(Bridge.Test.Assert).areEqual$1(sb1.toString(), sb.toString(), "StringBuilder(string, capacity) .ctor");
-    
-                sb = new Bridge.Text.StringBuilder("foo bar", 4, 3);
-                Bridge.get(Bridge.Test.Assert).areEqual$1("bar", sb.toString(), "StringBuilder(string) .ctor");
-    
-                // TEST properties
-    
-                // Capacity
-                sb = new Bridge.Text.StringBuilder("", 128);
-                Bridge.get(Bridge.Test.Assert).areEqual$1(128, sb.getCapacity(), ".Capacity");
-                sb = new Bridge.Text.StringBuilder("foo", 2);
-                Bridge.get(Bridge.Test.Assert).areEqual$1(16, sb.getCapacity(), ".Capacity");
-                sb.setCapacity(10);
-                Bridge.get(Bridge.Test.Assert).areEqual$1(10, sb.getCapacity(), ".Capacity");
-    
-                // Length
-                Bridge.get(Bridge.Test.Assert).areEqual$1(("foo").length, sb.getLength(), ".Length");
-    
-                // TEST methods
-    
-                // Clear
-                sb.clear();
-                Bridge.get(Bridge.Test.Assert).areEqual$1(0, sb.getLength(), ".Clear()");
-                Bridge.get(Bridge.Test.Assert).areEqual$1("", sb.toString(), ".Clear()");
-    
-                // Append
-                sb.append("foo");
-                sb.append("foo bar", 3, 4);
-                sb.append(true);
-                sb.append(String.fromCharCode(61));
-                sb.append(123);
-                Bridge.get(Bridge.Test.Assert).areEqual$1("foo bartrue=123", sb.toString(), ".Append()");
-    
-                // AppendLine
-                sb.appendLine();
-                Bridge.get(Bridge.Test.Assert).areEqual$1("foo bartrue=123\r\n", sb.toString(), ".AppendLine()");
-                sb.appendLine("foo bar");
-                Bridge.get(Bridge.Test.Assert).areEqual$1("foo bartrue=123\r\nfoo bar\r\n", sb.toString(), ".AppendLine(string)");
-    
-                // AppendFormat
-                sb.appendFormat("({0}, {1})", "foo", false);
-                Bridge.get(Bridge.Test.Assert).areEqual$1("foo bartrue=123\r\nfoo bar\r\n(foo, false)", sb.toString(), ".AppendFormat(format, args)");
-    
-                // Insert
-                sb.insert(0, 56.7);
-                Bridge.get(Bridge.Test.Assert).areEqual$1("56.7foo bartrue=123\r\nfoo bar\r\n(foo, false)", sb.toString(), ".Insert()");
-    
-                // Remove
-                sb.remove(4, 7);
-                Bridge.get(Bridge.Test.Assert).areEqual$1("56.7true=123\r\nfoo bar\r\n(foo, false)", sb.toString(), ".Remove(start, length)");
-    
-                // Replace
-                sb.replace("foo bar", "bar foo");
-                Bridge.get(Bridge.Test.Assert).areEqual$1("56.7true=123\r\nbar foo\r\n(foo, false)", sb.toString(), ".Replace(string, string)");
-                sb.replace(String.fromCharCode(13), String.fromCharCode(10));
-                Bridge.get(Bridge.Test.Assert).areEqual$1("56.7true=123\n\nbar foo\n\n(foo, false)", sb.toString(), ".Replace(char, char)");
-                sb.replace(String.fromCharCode(102), String.fromCharCode(70), 23, 6);
-                Bridge.get(Bridge.Test.Assert).areEqual$1("56.7true=123\n\nbar foo\n\n(Foo, false)", sb.toString(), ".Replace(char, char, start, length)");
-                sb.replace("Foo", "foo", 23, 6);
-                Bridge.get(Bridge.Test.Assert).areEqual$1("56.7true=123\n\nbar foo\n\n(foo, false)", sb.toString(), ".Replace(string, string, start, length)");
-            }
-        },
         typePropertiesAreCorrect: function () {
             var sb = new Bridge.Text.StringBuilder();
             Bridge.get(Bridge.Test.Assert).areEqual("Bridge.Text.StringBuilder", Bridge.getTypeName(Bridge.Text.StringBuilder));
@@ -17718,6 +17915,79 @@
             // Yes, this is tested by every other test as well. Included for completeness only
             var sb = new Bridge.Text.StringBuilder("some text");
             Bridge.get(Bridge.Test.Assert).areEqual(9, sb.getLength());
+        },
+        statics: {
+            stringBuilders: function () {
+                // TEST constructors
+                var sb = new Bridge.Text.StringBuilder();
+                var sb1 = new Bridge.Text.StringBuilder("", 128);
+                Bridge.get(Bridge.Test.Assert).areEqual$1("", sb.toString(), "StringBuilder() .ctor");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(sb1.toString(), sb.toString(), "StringBuilder(capacity) .ctor");
+    
+                sb = new Bridge.Text.StringBuilder("foo");
+                sb1 = new Bridge.Text.StringBuilder("foo", 2);
+                Bridge.get(Bridge.Test.Assert).areEqual$1("foo", sb.toString(), "StringBuilder(string) .ctor");
+                Bridge.get(Bridge.Test.Assert).areEqual$1(sb1.toString(), sb.toString(), "StringBuilder(string, capacity) .ctor");
+    
+                sb = new Bridge.Text.StringBuilder("foo bar", 4, 3);
+                Bridge.get(Bridge.Test.Assert).areEqual$1("bar", sb.toString(), "StringBuilder(string) .ctor");
+    
+                // TEST properties
+    
+                // Capacity
+                sb = new Bridge.Text.StringBuilder("", 128);
+                Bridge.get(Bridge.Test.Assert).areEqual$1(128, sb.getCapacity(), ".Capacity");
+                sb = new Bridge.Text.StringBuilder("foo", 2);
+                Bridge.get(Bridge.Test.Assert).areEqual$1(16, sb.getCapacity(), ".Capacity");
+                sb.setCapacity(10);
+                Bridge.get(Bridge.Test.Assert).areEqual$1(10, sb.getCapacity(), ".Capacity");
+    
+                // Length
+                Bridge.get(Bridge.Test.Assert).areEqual$1(("foo").length, sb.getLength(), ".Length");
+    
+                // TEST methods
+    
+                // Clear
+                sb.clear();
+                Bridge.get(Bridge.Test.Assert).areEqual$1(0, sb.getLength(), ".Clear()");
+                Bridge.get(Bridge.Test.Assert).areEqual$1("", sb.toString(), ".Clear()");
+    
+                // Append
+                sb.append("foo");
+                sb.append("foo bar", 3, 4);
+                sb.append(true);
+                sb.append(String.fromCharCode(61));
+                sb.append(123);
+                Bridge.get(Bridge.Test.Assert).areEqual$1("foo bartrue=123", sb.toString(), ".Append()");
+    
+                // AppendLine
+                sb.appendLine();
+                Bridge.get(Bridge.Test.Assert).areEqual$1("foo bartrue=123\r\n", sb.toString(), ".AppendLine()");
+                sb.appendLine("foo bar");
+                Bridge.get(Bridge.Test.Assert).areEqual$1("foo bartrue=123\r\nfoo bar\r\n", sb.toString(), ".AppendLine(string)");
+    
+                // AppendFormat
+                sb.appendFormat("({0}, {1})", "foo", false);
+                Bridge.get(Bridge.Test.Assert).areEqual$1("foo bartrue=123\r\nfoo bar\r\n(foo, false)", sb.toString(), ".AppendFormat(format, args)");
+    
+                // Insert
+                sb.insert(0, 56.7);
+                Bridge.get(Bridge.Test.Assert).areEqual$1("56.7foo bartrue=123\r\nfoo bar\r\n(foo, false)", sb.toString(), ".Insert()");
+    
+                // Remove
+                sb.remove(4, 7);
+                Bridge.get(Bridge.Test.Assert).areEqual$1("56.7true=123\r\nfoo bar\r\n(foo, false)", sb.toString(), ".Remove(start, length)");
+    
+                // Replace
+                sb.replace("foo bar", "bar foo");
+                Bridge.get(Bridge.Test.Assert).areEqual$1("56.7true=123\r\nbar foo\r\n(foo, false)", sb.toString(), ".Replace(string, string)");
+                sb.replace(String.fromCharCode(13), String.fromCharCode(10));
+                Bridge.get(Bridge.Test.Assert).areEqual$1("56.7true=123\n\nbar foo\n\n(foo, false)", sb.toString(), ".Replace(char, char)");
+                sb.replace(String.fromCharCode(102), String.fromCharCode(70), 23, 6);
+                Bridge.get(Bridge.Test.Assert).areEqual$1("56.7true=123\n\nbar foo\n\n(Foo, false)", sb.toString(), ".Replace(char, char, start, length)");
+                sb.replace("Foo", "foo", 23, 6);
+                Bridge.get(Bridge.Test.Assert).areEqual$1("56.7true=123\n\nbar foo\n\n(foo, false)", sb.toString(), ".Replace(string, string, start, length)");
+            }
         }
     });
     
@@ -18439,10 +18709,8 @@
         },
         registrationsCanBeCompared: function () {
             var cts = new Bridge.CancellationTokenSource();
-            var ctr1 = cts.token.register(function () {
-            });
-            var ctr2 = cts.token.register(function () {
-            });
+            var ctr1 = cts.token.register($_.Bridge.ClientTest.Threading.CancellationTokenTests.f1);
+            var ctr2 = cts.token.register($_.Bridge.ClientTest.Threading.CancellationTokenTests.f1);
     
             Bridge.get(Bridge.Test.Assert).true$1(ctr1.equalsT(ctr1), "#1");
             Bridge.get(Bridge.Test.Assert).false$1(ctr1.equalsT(ctr2), "#2");
@@ -18539,6 +18807,13 @@
         }
     });
     
+    Bridge.ns("Bridge.ClientTest.Threading.CancellationTokenTests", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.Threading.CancellationTokenTests, {
+        f1: function () {
+        }
+    });
+    
     Bridge.define('Bridge.ClientTest.Threading.PromiseTests', {
         createPromise: function () {
             return new Bridge.ClientTest.Threading.PromiseTests.SimplePromise();
@@ -18573,13 +18848,7 @@
         taskFromPromiseWithResultFactoryWorksWhenPromiseCompletes: function () {
             var completeAsync = Bridge.get(Bridge.Test.Assert).async();
     
-            var trh = function (i, s, j) {
-                return Bridge.merge(new Bridge.ClientTest.Threading.PromiseTests.TaskResult(), {
-                    setI: i,
-                    setS: s,
-                    setJ: j
-                } );
-            };
+            var trh = $_.Bridge.ClientTest.Threading.PromiseTests.f1;
     
             var promise = this.createPromise();
             var task = Bridge.Task.fromPromise(promise, trh);
@@ -18781,19 +19050,29 @@
         }
     });
     
+    Bridge.ns("Bridge.ClientTest.Threading.PromiseTests", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.Threading.PromiseTests, {
+        f1: function (i, s, j) {
+            return Bridge.merge(new Bridge.ClientTest.Threading.PromiseTests.TaskResult(), {
+                setI: i,
+                setS: s,
+                setJ: j
+            } );
+        }
+    });
+    
     Bridge.define('Bridge.ClientTest.Threading.TaskTests', {
-        makeEnumerable: function (T) {
-            return Bridge.fn.bind(this, function (args) {
-                var $t;
-                if (args === void 0) { args = []; }
-                var $yield = [];
-                $t = Bridge.getEnumerator(args);
-                while ($t.moveNext()) {
-                    var a = $t.getCurrent();
-                    $yield.push(a);
-                }
-                return Bridge.Array.toEnumerable($yield);
-            });
+        makeEnumerable: function (T, args) {
+            var $t;
+            if (args === void 0) { args = []; }
+            var $yield = [];
+            $t = Bridge.getEnumerator(args);
+            while ($t.moveNext()) {
+                var a = $t.getCurrent();
+                $yield.push(a);
+            }
+            return Bridge.Array.toEnumerable($yield);
         },
         taskCompletionSourceTypePropertiesAreCorrect: function () {
             Bridge.get(Bridge.Test.Assert).areEqual$1("Bridge.TaskCompletionSource", Bridge.getTypeName(Bridge.TaskCompletionSource), "FullName should be correct");
@@ -18907,7 +19186,7 @@
             Bridge.get(Bridge.Test.Assert).areEqual$1(Bridge.TaskStatus.running, task.status, "The task should be running before the SetException() call");
             Bridge.get(Bridge.Test.Assert).false$1(callbackRun, "Callback should not be run before SetException() is called");
     
-            tcs.setException(this.makeEnumerable(Bridge.Exception)([ex1, ex2]));
+            tcs.setException(this.makeEnumerable(Bridge.Exception, [ex1, ex2]));
     
             Bridge.get(Bridge.Test.Assert).areEqual$1(Bridge.TaskStatus.faulted, task.status, "The task should be faulted immediately after the SetException() call");
             Bridge.get(Bridge.Test.Assert).$true(Bridge.is(task.exception, Bridge.AggregateException));
@@ -19195,9 +19474,7 @@
     
             var continuedTask = null;
     
-            continuedTask = task.continueWith(function (t) {
-                eval("throw 'This is a test message'");
-            });
+            continuedTask = task.continueWith($_.Bridge.ClientTest.Threading.TaskTests.f1);
     
             Bridge.get(Bridge.Test.Assert).false$1(task === continuedTask, "task and continuedTask should not be the same");
     
@@ -19514,7 +19791,7 @@
                 Bridge.get(Bridge.Test.Assert).false$1(continuationRun, "Continuation should not be run too early.");
             });
     
-            var task = Bridge.Task.whenAll(this.makeEnumerable(Bridge.Task)([tcs1.task, tcs2.task, tcs3.task]));
+            var task = Bridge.Task.whenAll(this.makeEnumerable(Bridge.Task, [tcs1.task, tcs2.task, tcs3.task]));
     
             var doneTask = task.continueWith(function (t) {
                 Bridge.get(Bridge.Test.Assert).false$1(continuationRun, "Continuation should only be run once.");
@@ -19611,7 +19888,7 @@
                 Bridge.get(Bridge.Test.Assert).false$1(continuationRun, "Continuation should not be run too early.");
             });
     
-            var task = Bridge.Task.whenAll(this.makeEnumerable(Bridge.Task)([Bridge.cast(tcs1.task, Bridge.Task), Bridge.cast(tcs2.task, Bridge.Task), Bridge.cast(tcs3.task, Bridge.Task)]));
+            var task = Bridge.Task.whenAll(this.makeEnumerable(Bridge.Task, [Bridge.cast(tcs1.task, Bridge.Task), Bridge.cast(tcs2.task, Bridge.Task), Bridge.cast(tcs3.task, Bridge.Task)]));
     
             var doneTask = task.continueWith(function (t) {
                 Bridge.get(Bridge.Test.Assert).false$1(continuationRun, "Continuation should only be run once.");
@@ -19667,7 +19944,7 @@
             var ex1 = new Bridge.Exception("exception 1");
             var ex2 = new Bridge.Exception("exception 1");
     
-            var task = Bridge.Task.whenAll(this.makeEnumerable(Bridge.Task)([Bridge.cast(tcs1.task, Bridge.Task), Bridge.cast(tcs2.task, Bridge.Task), Bridge.cast(tcs3.task, Bridge.Task), Bridge.cast(tcs4.task, Bridge.Task)]));
+            var task = Bridge.Task.whenAll(this.makeEnumerable(Bridge.Task, [Bridge.cast(tcs1.task, Bridge.Task), Bridge.cast(tcs2.task, Bridge.Task), Bridge.cast(tcs3.task, Bridge.Task), Bridge.cast(tcs4.task, Bridge.Task)]));
     
             var doneTask = task.continueWith(function (t) {
                 Bridge.get(Bridge.Test.Assert).false$1(continuationRun, "Continuation should only be run once.");
@@ -19797,7 +20074,7 @@
             var tcs2 = new Bridge.TaskCompletionSource();
             var tcs3 = new Bridge.TaskCompletionSource();
     
-            var task = Bridge.Task.whenAny(this.makeEnumerable(Bridge.Task)([tcs1.task, tcs2.task, tcs3.task]));
+            var task = Bridge.Task.whenAny(this.makeEnumerable(Bridge.Task, [tcs1.task, tcs2.task, tcs3.task]));
     
             var task1 = task.continueWith(function (t) {
                 Bridge.get(Bridge.Test.Assert).false$1(continuationRun, "Continuation should only be run once.");
@@ -19880,7 +20157,7 @@
             var tcs2 = new Bridge.TaskCompletionSource();
             var tcs3 = new Bridge.TaskCompletionSource();
     
-            var task = Bridge.Task.whenAny(this.makeEnumerable(Bridge.Task)([Bridge.cast(tcs1.task, Bridge.Task), Bridge.cast(tcs2.task, Bridge.Task), Bridge.cast(tcs3.task, Bridge.Task)]));
+            var task = Bridge.Task.whenAny(this.makeEnumerable(Bridge.Task, [Bridge.cast(tcs1.task, Bridge.Task), Bridge.cast(tcs2.task, Bridge.Task), Bridge.cast(tcs3.task, Bridge.Task)]));
     
             var task1 = task.continueWith(function (t) {
                 Bridge.get(Bridge.Test.Assert).false$1(continuationRun, "Continuation should only be run once.");
@@ -19922,7 +20199,7 @@
             var tcs3 = new Bridge.TaskCompletionSource();
             var ex = new Bridge.Exception("Some text");
     
-            var task = Bridge.Task.whenAny(this.makeEnumerable(Bridge.Task)([tcs1.task, tcs2.task, tcs3.task]));
+            var task = Bridge.Task.whenAny(this.makeEnumerable(Bridge.Task, [tcs1.task, tcs2.task, tcs3.task]));
     
             var task1 = task.continueWith(function (t) {
                 Bridge.get(Bridge.Test.Assert).false$1(continuationRun, "Continuation should only be run once.");
@@ -19962,7 +20239,7 @@
             var tcs2 = new Bridge.TaskCompletionSource();
             var tcs3 = new Bridge.TaskCompletionSource();
     
-            var task = Bridge.Task.whenAny(this.makeEnumerable(Bridge.Task)([tcs1.task, tcs2.task, tcs3.task]));
+            var task = Bridge.Task.whenAny(this.makeEnumerable(Bridge.Task, [tcs1.task, tcs2.task, tcs3.task]));
     
             var task1 = task.continueWith(function (t) {
                 Bridge.get(Bridge.Test.Assert).false$1(continuationRun, "Continuation should only be run once.");
@@ -20166,6 +20443,14 @@
     
                 completeAsync();
             });
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.Threading.TaskTests", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.Threading.TaskTests, {
+        f1: function (t) {
+            eval("throw 'This is a test message'");
         }
     });
     
@@ -20667,9 +20952,7 @@
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge623', {
         statics: {
             testUseCase: function () {
-                var func1 = function () {
-                    return (Bridge.caller[0] || this).foo;
-                };
+                var func1 = $_.Bridge.ClientTest.BridgeIssues.Bridge623.f1;
     
                 var point1 = new Bridge.ClientTest.BridgeIssues.Bridge623A(1, func1);
                 var point2 = new Bridge.ClientTest.BridgeIssues.Bridge623A(2, func1);
@@ -20683,9 +20966,7 @@
                 Bridge.get(Bridge.Test.Assert).areEqual$1(3, point3.call(), "Bridge623B1 point3 func1");
                 Bridge.get(Bridge.Test.Assert).areEqual$1(4, point4.call(), "Bridge623B1 point4 func1");
     
-                var func2 = function () {
-                    return (Bridge.caller[0] || this).getFoo();
-                };
+                var func2 = $_.Bridge.ClientTest.BridgeIssues.Bridge623.f2;
     
                 var point5 = new Bridge.ClientTest.BridgeIssues.Bridge623B1(5, func2);
                 var point6 = new Bridge.ClientTest.BridgeIssues.Bridge623B1(6, func2);
@@ -20693,9 +20974,7 @@
                 Bridge.get(Bridge.Test.Assert).areEqual$1(10, point5.call(), "Bridge623B1 point5 func2");
                 Bridge.get(Bridge.Test.Assert).areEqual$1(12, point6.call(), "Bridge623B1 point6 func2");
     
-                var func3 = function () {
-                    return (Bridge.caller[0] || this).getFoo();
-                };
+                var func3 = $_.Bridge.ClientTest.BridgeIssues.Bridge623.f2;
     
                 var point7 = new Bridge.ClientTest.BridgeIssues.Bridge623B2(7, func3);
                 var point8 = new Bridge.ClientTest.BridgeIssues.Bridge623B2(8, func3);
@@ -20703,6 +20982,17 @@
                 Bridge.get(Bridge.Test.Assert).areEqual$1(1021, point7.call(), "Bridge623B2 point7 func3");
                 Bridge.get(Bridge.Test.Assert).areEqual$1(1024, point8.call(), "Bridge623B2 point8 func3");
             }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.BridgeIssues.Bridge623", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.BridgeIssues.Bridge623, {
+        f1: function () {
+            return (Bridge.caller[0] || this).foo;
+        },
+        f2: function () {
+            return (Bridge.caller[0] || this).getFoo();
         }
     });
     
@@ -20788,7 +21078,7 @@
                 var c = new Bridge.ClientTest.BridgeIssues.Bridge294("Vlad");
     
                 Bridge.get(Bridge.Test.Assert).areEqual$1("Vlad", c.getName(), "Class method works");
-                Bridge.get(Bridge.Test.Assert).areEqual$1("Vlad", c.getNameThroughGeneric(Bridge.Int)(), "Generic class method works");
+                Bridge.get(Bridge.Test.Assert).areEqual$1("Vlad", c.getNameThroughGeneric(Bridge.Int), "Generic class method works");
             },
             n304: function () {
                 var c = new Bridge.ClientTest.BridgeIssues.Bridge304();
@@ -21205,9 +21495,7 @@
             },
             n418: function () {
                 var t = new Bridge.ClientTest.BridgeIssues.Bridge418();
-                t.setDelegate(Bridge.fn.combine(t.getDelegate(), function (i) {
-                    return i * 2;
-                }));
+                t.setDelegate(Bridge.fn.combine(t.getDelegate(), $_.Bridge.ClientTest.BridgeIssues.TestBridgeIssues.f1));
                 var r = t.callDelegate(10);
     
                 Bridge.get(Bridge.Test.Assert).areEqual$1(20, r, "Delegate added and called var r = t.CallDelegate(10);");
@@ -21370,6 +21658,14 @@
                 var v1 = new Bridge.Version("constructor");
                 Bridge.get(Bridge.Test.Assert).areEqual$1("Bridge.Version", Bridge.getTypeName(v1), "#499 Version type name");
             }
+        }
+    });
+    
+    Bridge.ns("Bridge.ClientTest.BridgeIssues.TestBridgeIssues", $_)
+    
+    Bridge.apply($_.Bridge.ClientTest.BridgeIssues.TestBridgeIssues, {
+        f1: function (i) {
+            return i * 2;
         }
     });
     

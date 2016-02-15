@@ -126,7 +126,7 @@ namespace Bridge.Translator
                      this.BlockStatement.Parent is WhileStatement ||
                      this.BlockStatement.Parent is DoWhileStatement))
             {
-                var visitor = new LambdaVisitor();
+                var visitor = new LambdaVisitor(true, this.Emitter);
                 this.BlockStatement.AcceptVisitor(visitor);
 
                 this.WrapByFn = visitor.LambdaExpression.Count > 0;

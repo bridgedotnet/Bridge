@@ -400,10 +400,27 @@ namespace Bridge.Translator
             set;
         }
 
-        public string CatchBlockVariable
+        public bool StaticBlock
         {
             get;
             set;
         }
-    }
+
+        public Dictionary<string, string> NamedFunctions
+        {
+            get;
+            set;
+        }
+
+        public bool IsPrivateVarIntroduced
+        {
+            get;
+            set;
+        }
+
+        public string CatchBlockVariable
+        {
+            get;
+            set;
+        }    }
 }

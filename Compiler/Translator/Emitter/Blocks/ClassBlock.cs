@@ -43,8 +43,10 @@ namespace Bridge.Translator
             this.EmitClassHeader();
             if (this.TypeInfo.TypeDeclaration.ClassType != ClassType.Interface)
             {
-                this.EmitStaticBlock();
+                this.Emitter.NamedFunctions = new Dictionary<string, string>();
+                
                 this.EmitInstantiableBlock();
+                this.EmitStaticBlock();
             }
             this.EmitClassEnd();
         }
@@ -164,6 +166,7 @@ namespace Bridge.Translator
         {
             if (this.TypeInfo.HasRealStatic(this.Emitter))
             {
+                this.Emitter.StaticBlock = true;
                 this.EnsureComma();
 
                 if (this.TypeInfo.InstanceMethods.Any(m => m.Value.Any(subm => this.Emitter.GetEntityName(subm) == "statics")) ||
@@ -182,6 +185,7 @@ namespace Bridge.Translator
                 this.WriteNewLine();
                 this.EndBlock();
                 this.Emitter.Comma = true;
+                this.Emitter.StaticBlock = false;
             }
         }
 
@@ -204,15 +208,12 @@ namespace Bridge.Translator
 
             var ctorBlock = new ConstructorBlock(this.Emitter, this.TypeInfo, false);
 
-            if (this.TypeInfo.HasInstantiable || this.Emitter.Plugins.HasConstructorInjectors(ctorBlock) || this.TypeInfo.ClassType == ClassType.Struct)
+            if (this.TypeInfo.HasInstantiable || this.Emitter.Plugins.HasConstructorInjectors(ctorBlock) ||
+                this.TypeInfo.ClassType == ClassType.Struct)
             {
                 this.EnsureComma();
                 ctorBlock.Emit();
                 new MethodBlock(this.Emitter, this.TypeInfo, false).Emit();
-            }
-            else
-            {
-                this.Emitter.Comma = false;
             }
         }
 
@@ -255,8 +256,54 @@ namespace Bridge.Translator
                 }
             }
 
+            this.EmitNamedFunctions();
+
             this.WriteNewLine();
             this.WriteNewLine();
+        }
+
+        protected virtual void EmitNamedFunctions()
+        {
+            if (this.Emitter.NamedFunctions.Count > 0)
+            {
+                this.Emitter.Comma = false;
+
+                if (!this.Emitter.IsPrivateVarIntroduced)
+                {
+                    this.WriteNewLine();
+                    this.WriteNewLine();
+                    this.Write("var $_ = {};");
+                    this.Emitter.IsPrivateVarIntroduced = true;
+                }
+
+                var name = BridgeTypes.ToJsName(this.Emitter.TypeInfo.Type, this.Emitter, true);
+                var parts = name.Split(new[]{'.'}, StringSplitOptions.RemoveEmptyEntries);
+
+                this.WriteNewLine();
+                this.WriteNewLine();
+                this.Write("Bridge.ns(");
+                this.WriteScript(name);
+                this.Write(", $_)");
+                
+                this.WriteNewLine();
+                this.WriteNewLine();
+                this.Write("Bridge.apply($_.");
+                this.Write(name);
+                this.Write(", ");
+                this.BeginBlock();
+
+                foreach (KeyValuePair<string, string> namedFunction in this.Emitter.NamedFunctions)
+                {
+                    this.EnsureComma();
+                    this.Write(namedFunction.Key + ": " + namedFunction.Value);
+                    this.Emitter.Comma = true;
+                }
+
+                this.WriteNewLine();
+                this.EndBlock();
+                this.WriteCloseParentheses();
+                this.WriteSemiColon();
+            }
         }
 
         protected virtual IEnumerable<string> GetDefineMethods(string prefix, Func<MethodDeclaration, IMethod, string> fn)

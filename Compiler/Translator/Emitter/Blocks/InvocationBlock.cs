@@ -290,15 +290,17 @@ namespace Bridge.Translator
                                     var isIgnoreClass = resolvedMethod.DeclaringTypeDefinition != null && this.Emitter.Validator.IsIgnoreType(resolvedMethod.DeclaringTypeDefinition);
 
                                     this.Write(name);
+                                    
+                                    this.WriteOpenParentheses();
+
+                                    this.Emitter.Comma = false;
 
                                     if (!isIgnoreClass && argsInfo.HasTypeArguments)
                                     {
-                                        this.WriteOpenParentheses();
                                         new TypeExpressionListBlock(this.Emitter, argsInfo.TypeArguments).Emit();
-                                        this.WriteCloseParentheses();
                                     }
 
-                                    this.WriteOpenParentheses();
+                                    this.EnsureComma(false);
 
                                     this.WriteThisExtension(invocationExpression.Target);
 
@@ -426,23 +428,23 @@ namespace Bridge.Translator
 
                 this.Write(name, ".prototype.", baseMethod);
 
-                if (!isIgnore && argsInfo.HasTypeArguments)
-                {
-                    this.WriteOpenParentheses();
-                    new TypeExpressionListBlock(this.Emitter, argsInfo.TypeArguments).Emit();
-                    this.WriteCloseParentheses();
-                }
-
                 this.WriteDot();
 
                 this.Write("call");
                 this.WriteOpenParentheses();
-
                 this.WriteThis();
-                needComma = true;
+                this.Emitter.Comma = true;
+                if (!isIgnore && argsInfo.HasTypeArguments)
+                {
+                    new TypeExpressionListBlock(this.Emitter, argsInfo.TypeArguments).Emit();
+                }
+                
+                needComma = false;
 
                 foreach (var arg in argsExpressions)
                 {
+                    this.EnsureComma(false);
+
                     if (needComma)
                     {
                         this.WriteComma();
@@ -451,7 +453,7 @@ namespace Bridge.Translator
                     needComma = true;
                     arg.AcceptVisitor(this.Emitter);
                 }
-
+                this.Emitter.Comma = false;
                 this.WriteCloseParentheses();
             }
             else
@@ -531,13 +533,6 @@ namespace Bridge.Translator
                 }
                 else
                 {
-                    if (!isIgnore && argsInfo.HasTypeArguments)
-                    {
-                        this.WriteOpenParentheses();
-                        new TypeExpressionListBlock(this.Emitter, argsInfo.TypeArguments).Emit();
-                        this.WriteCloseParentheses();
-                    }
-
                     if (needExpand && isIgnore)
                     {
                         this.Write(".apply");
@@ -554,7 +549,15 @@ namespace Bridge.Translator
                         this.Emitter.Output = savedBuilder;
 
                         this.Write(thisArg);
-                        this.WriteComma();
+                        
+                        this.Emitter.Comma = true;
+
+                        if (!isIgnore && argsInfo.HasTypeArguments)
+                        {
+                            new TypeExpressionListBlock(this.Emitter, argsInfo.TypeArguments).Emit();
+                        }
+                        
+                        this.EnsureComma(false);
 
                         if (argsExpressions.Length > 1)
                         {
@@ -572,6 +575,17 @@ namespace Bridge.Translator
                     }
                     else
                     {
+                        this.Emitter.Comma = false;
+                        if (!isIgnore && argsInfo.HasTypeArguments)
+                        {
+                            new TypeExpressionListBlock(this.Emitter, argsInfo.TypeArguments).Emit();
+                        }
+
+                        if (invocationExpression.Arguments.Count > 0)
+                        {
+                            this.EnsureComma(false);    
+                        }
+
                         new ExpressionListBlock(this.Emitter, argsExpressions, paramsArg, invocationExpression).Emit();    
                     }
                     

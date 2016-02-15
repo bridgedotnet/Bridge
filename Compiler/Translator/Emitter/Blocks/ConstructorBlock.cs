@@ -272,7 +272,7 @@ namespace Bridge.Translator
                 this.WriteColon();
                 this.WriteFunction();
 
-                this.EmitMethodParameters(ctor.Parameters, ctor);
+                this.EmitMethodParameters(ctor.Parameters, null, ctor);
 
                 this.WriteSpace();
                 this.BeginBlock();

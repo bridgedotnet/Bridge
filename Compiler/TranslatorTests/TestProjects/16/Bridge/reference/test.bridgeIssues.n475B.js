@@ -17,14 +17,20 @@
             n475: function () {
                 var b = new Test.BridgeIssues.N475B.Bridge475();
     
-                b.keyDown(function (ev) {
-                    ev.preventDefault();
-                });
+                b.keyDown($_.Test.BridgeIssues.N475B.Test.f1);
     
                 b.keyDown(4);
     
                 b.keyDown("5");
             }
+        }
+    });
+    
+    Bridge.ns("Test.BridgeIssues.N475B.Test", $_)
+    
+    Bridge.apply($_.Test.BridgeIssues.N475B.Test, {
+        f1: function (ev) {
+            ev.preventDefault();
         }
     });
     

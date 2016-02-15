@@ -1,12 +1,18 @@
 using ICSharpCode.NRefactory.CSharp;
 using System.Collections.Generic;
+using System.Linq;
+using Bridge.Contract;
 
 namespace Bridge.Translator
 {
     public class LambdaVisitor : DepthFirstAstVisitor
     {
-        public LambdaVisitor()
+        private bool captureOnly;
+        private IEmitter emitter;
+        public LambdaVisitor(bool captureOnly = false, IEmitter emitter = null)
         {
+            this.emitter = emitter;
+            this.captureOnly = captureOnly;
             this.LambdaExpression = new List<Expression>();
         }
 
@@ -18,13 +24,41 @@ namespace Bridge.Translator
 
         public override void VisitAnonymousMethodExpression(AnonymousMethodExpression anonymousMethodExpression)
         {
-            this.LambdaExpression.Add(anonymousMethodExpression);
+            if (captureOnly)
+            {
+                var analyzer = new CaptureAnalyzer(this.emitter.Resolver.Resolver);
+                analyzer.Analyze(anonymousMethodExpression.Body, anonymousMethodExpression.Parameters.Select(p => p.Name));
+
+                if (analyzer.UsedVariables.Count > 0)
+                {
+                    this.LambdaExpression.Add(anonymousMethodExpression);
+                }
+            }
+            else
+            {
+                this.LambdaExpression.Add(anonymousMethodExpression);
+            }
+            
             base.VisitAnonymousMethodExpression(anonymousMethodExpression);
         }
 
         public override void VisitLambdaExpression(LambdaExpression lambdaExpression)
         {
-            this.LambdaExpression.Add(lambdaExpression);
+            if (captureOnly)
+            {
+                var analyzer = new CaptureAnalyzer(this.emitter.Resolver.Resolver);
+                analyzer.Analyze(lambdaExpression.Body, lambdaExpression.Parameters.Select(p => p.Name));
+
+                if (analyzer.UsedVariables.Count > 0)
+                {
+                    this.LambdaExpression.Add(lambdaExpression);
+                }
+            }
+            else
+            {
+                this.LambdaExpression.Add(lambdaExpression);
+            }
+
             base.VisitLambdaExpression(lambdaExpression);
         }
     }

@@ -106,6 +106,8 @@
                 if (typeof scope[nsParts[i]] === "undefined") {
                     scope[nsParts[i]] = { };
                 }
+
+                scope = scope[nsParts[i]];
             }
 
             return scope;
@@ -352,7 +354,7 @@
         },
 
 	    apply: function (obj, values) {
-	        var names = Bridge.getPropertyNames(values, false),
+	        var names = Bridge.getPropertyNames(values, true),
 	            i;
 
 	        for (i = 0; i < names.length; i++) {
@@ -2258,7 +2260,13 @@
 
             if (exists) {
                 for (key in exists) {
-                    if (typeof exists[key] === "function" && exists[key].$$name) {
+                    if (key.indexOf("$", key.length - 1) !== -1) {
+                        var key1 = key.slice(0, -1);
+                        if (typeof exists[key1] === "function" && exists[key1].$$name) {
+                            cls[key] = exists[key];
+                        }
+                    }
+                    else if (typeof exists[key] === "function" && exists[key].$$name) {
                         cls[key] = exists[key];
                     }
                 }

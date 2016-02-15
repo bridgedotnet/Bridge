@@ -39,10 +39,10 @@ namespace Bridge.Translator.TypeScript
                 this.Write(this.Emitter.GetEntityName(methodDeclaration));
             }
 
+            bool needComma = false;
             var isGeneric = methodDeclaration.TypeParameters.Count > 0;
             if (isGeneric)
             {
-                bool needComma = false;
                 this.Write("<");
                 foreach (var p in methodDeclaration.TypeParameters)
                 {
@@ -75,25 +75,25 @@ namespace Bridge.Translator.TypeScript
                     this.WriteCloseBrace();
                     comma = true;
                 }
+            }
+            else
+            {
+                this.WriteOpenParentheses();
+            }
 
-                this.WriteCloseParentheses();
-
-                this.WriteColon();
-                this.WriteOpenBrace();
-                this.WriteSpace();
+            if (needComma && methodDeclaration.Parameters.Count > 0)
+            {
+                this.WriteComma();
             }
 
             this.EmitMethodParameters(methodDeclaration.Parameters, methodDeclaration);
+
+            this.WriteCloseParentheses();
+
             this.WriteColon();
 
             var retType = BridgeTypes.ToTypeScriptName(methodDeclaration.ReturnType, this.Emitter);
             this.Write(retType);
-
-            if (isGeneric)
-            {
-                this.WriteSpace();
-                this.WriteCloseBrace();
-            }
 
             this.WriteSemiColon();
             this.WriteNewLine();
@@ -101,7 +101,6 @@ namespace Bridge.Translator.TypeScript
 
         protected virtual void EmitMethodParameters(IEnumerable<ParameterDeclaration> declarations, AstNode context)
         {
-            this.WriteOpenParentheses();
             bool needComma = false;
 
             foreach (var p in declarations)
@@ -130,8 +129,6 @@ namespace Bridge.Translator.TypeScript
                 }
                 this.Write(name);
             }
-
-            this.WriteCloseParentheses();
         }
     }
 }

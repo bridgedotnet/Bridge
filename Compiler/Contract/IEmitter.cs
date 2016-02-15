@@ -391,10 +391,27 @@ namespace Bridge.Contract
             set;
         }
 
-        string CatchBlockVariable
+        Dictionary<string, string> NamedFunctions
         {
             get;
             set;
         }
-    }
+
+        bool StaticBlock
+        {
+            get;
+            set;
+        }
+
+        bool IsPrivateVarIntroduced
+        {
+            get;
+            set;
+        }
+
+        string CatchBlockVariable
+        {
+            get;
+            set;
+        }    }
 }
