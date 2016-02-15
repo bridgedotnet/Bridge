@@ -1,15 +1,14 @@
-using System.Runtime.CompilerServices;
 using Bridge;
 
-namespace System.Diagnostics 
+namespace System.Diagnostics
 {
-	[External]
+    [External]
     [Name("Object")]
-	public static class Debugger
+    public static class Debugger
     {
-		[Template("debugger")]
-		public static void Break() 
+        [Template("debugger")]
+        public static void Break()
         {
-		}
-	}
+        }
+    }
 }

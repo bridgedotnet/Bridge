@@ -1,6 +1,4 @@
-﻿/* global Bridge */
-
-(function (globals) {
+﻿(function (globals) {
     "use strict";
 
     Bridge.define('TestProject2.TestClassB', {

@@ -40,7 +40,7 @@ namespace Bridge.Translator
                 var exceptionType = (firstClause == null || firstClause.Type.IsNull) ? null : BridgeTypes.ToJsName(firstClause.Type, this.Emitter);
                 var isBaseException = exceptionType == null || exceptionType == "Bridge.Exception";
 
-                string name = "$e";
+                string name = this.Emitter.CatchBlockVariable ?? "$async_e";
                 if (count == 1 && isBaseException)
                 {
                     var clause = tryStatement.CatchClauses.First();

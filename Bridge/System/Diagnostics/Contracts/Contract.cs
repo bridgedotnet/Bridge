@@ -1,6 +1,5 @@
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Bridge;
+using System.Collections.Generic;
 
 namespace System.Diagnostics.Contracts
 {

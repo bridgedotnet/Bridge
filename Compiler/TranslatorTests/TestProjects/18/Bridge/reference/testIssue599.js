@@ -1,9 +1,8 @@
-﻿/* global Bridge */
-
-(function (globals) {
+﻿(function (globals) {
     "use strict";
 
     Bridge.define('TestIssue599.Issue599', {
+        _something: "HI!",
         statics: {
             config: {
                 init: function () {
@@ -13,9 +12,10 @@
             main: function () {
                 console.log(new TestIssue599.Issue599()._something);
             }
-        },
-        _something: "HI!"
+        }
     });
+    
+    
     
     Bridge.init();
 })(this);

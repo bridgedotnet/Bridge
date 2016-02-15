@@ -21,6 +21,5 @@ namespace Bridge
         public NameAttribute(bool changeCase)
         {
         }
-
     }
 }

@@ -1,6 +1,4 @@
-﻿/* global Bridge */
-
-(function (globals) {
+﻿(function (globals) {
     "use strict";
 
     Bridge.define('TestIssue461.Issue461', {
@@ -8,20 +6,11 @@
             test: function () {
                 var input = document.createElement('input');
     
-                input.onchange = Bridge.fn.combine(input.onchange, function (ev) {
-                    // Tests if ev.CurrentTarget.Value compiles
-                    console.log("ev.CurrentTarget.Value: " + ev.currentTarget.value);
-    
-                    // Tests if ev.IsMouseEvent() compiles
-                    console.log("IsMouseEvent: " + Bridge.is(ev, MouseEvent));
-                });
+                input.onchange = Bridge.fn.combine(input.onchange, $_.TestIssue461.Issue461.f1);
     
                 var anchor = document.createElement('a');
     
-                anchor.onclick = Bridge.fn.combine(anchor.onclick, function (ev) {
-                    // Tests if ev.CurrentTarget.Href compiles
-                    console.log("ev.CurrentTarget.Href: " + ev.currentTarget.href);
-                });
+                anchor.onclick = Bridge.fn.combine(anchor.onclick, $_.TestIssue461.Issue461.f2);
     
                 // Test if Document.GetElementById<>() compiles
                 var div = document.getElementById("div1");
@@ -32,6 +21,24 @@
                 element = document.createElement('input');
                 element = document.createElement('textarea');
             }
+        }
+    });
+    
+    var $_ = {};
+    
+    Bridge.ns("TestIssue461.Issue461", $_)
+    
+    Bridge.apply($_.TestIssue461.Issue461, {
+        f1: function (ev) {
+            // Tests if ev.CurrentTarget.Value compiles
+            console.log("ev.CurrentTarget.Value: " + ev.currentTarget.value);
+    
+            // Tests if ev.IsMouseEvent() compiles
+            console.log("IsMouseEvent: " + Bridge.is(ev, MouseEvent));
+        },
+        f2: function (ev) {
+            // Tests if ev.CurrentTarget.Href compiles
+            console.log("ev.CurrentTarget.Href: " + ev.currentTarget.href);
         }
     });
     

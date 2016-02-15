@@ -239,7 +239,11 @@ namespace Bridge.Translator
 
             IType type;
 
-            if (resolveResult is InvocationResolveResult)
+            if (resolveResult is DynamicInvocationResolveResult)
+            {
+                return expression.Parent is UnaryOperatorExpression && !(expression.Parent.Parent is Statement);
+            }
+            else if (resolveResult is InvocationResolveResult)
             {
                 type = ((InvocationResolveResult)resolveResult).Member.ReturnType;
             }
@@ -303,11 +307,10 @@ namespace Bridge.Translator
 
         protected void EmitAsyncBlock()
         {
-            var pos = 0;
             this.BeginBlock();
             this.WriteVar(true);
             this.Write("$step = 0,");
-            pos = this.Emitter.Output.Length;
+            var pos = this.Emitter.Output.Length;
             this.WriteNewLine();
 
             this.Indent();
@@ -397,11 +400,16 @@ namespace Bridge.Translator
 
             if (needTry)
             {
+                if (!this.Emitter.Locals.ContainsKey("$async_e"))
+                {
+                    this.AddLocal("$async_e", AstType.Null);
+                }
+
                 this.WriteNewLine();
                 this.EndBlock();
-                this.Write(" catch($e1) ");
+                this.Write(" catch($async_e1) ");
                 this.BeginBlock();
-                this.Write("$e1 = Bridge.Exception.create($e1);");
+                this.Write("$async_e = Bridge.Exception.create($async_e1);");
                 this.WriteNewLine();
                 this.InjectCatchHandlers();
 
@@ -419,7 +427,7 @@ namespace Bridge.Translator
             for (int i = 0; i < this.Steps.Count; i++)
             {
                 var step = this.Steps[i];
-                if (string.IsNullOrWhiteSpace(step.Output.ToString()) && step.JumpToStep == (i + 1))
+                if (string.IsNullOrWhiteSpace(step.Output.ToString()) && step.JumpToStep == (i + 1) && step.FromTaskNumber < 0)
                 {
                     continue;
                 }
@@ -456,22 +464,14 @@ namespace Bridge.Translator
                         {
                             if (!string.IsNullOrEmpty(varName))
                             {
-                                this.Write(varName + " = $e1;");
+                                this.Write(varName + " = $async_e;");
                                 this.WriteNewLine();
                             }
-                            /*else
-                            {
-                                if (!this.Emitter.Locals.ContainsKey("$e"))
-                                {
-                                    this.AddLocal("$e", AstType.Null);
-                                }
-                                this.Write("$e = $e1;");
-                            }*/
 
                             this.Write("$step = " + step + ";");
 
                             this.WriteNewLine();
-                            this.Write("setTimeout($asyncBody, 0);");
+                            this.Write("$asyncBody();");
                             this.WriteNewLine();
                             this.Write("return;");
                         }
@@ -487,7 +487,7 @@ namespace Bridge.Translator
                             {
                                 this.WriteIf();
                                 this.WriteOpenParentheses();
-                                this.Write("Bridge.is($e1, " + exceptionType + ")");
+                                this.Write("Bridge.is($async_e, " + exceptionType + ")");
                                 this.WriteCloseParentheses();
                                 this.WriteSpace();
                             }
@@ -498,22 +498,14 @@ namespace Bridge.Translator
 
                             if (!string.IsNullOrEmpty(varName))
                             {
-                                this.Write(varName + " = $e1;");
+                                this.Write(varName + " = $async_e;");
                                 this.WriteNewLine();
                             }
-                            /*else
-                            {
-                                if (!this.Emitter.Locals.ContainsKey("$e"))
-                                {
-                                    this.AddLocal("$e", AstType.Null);
-                                }
-                                this.Write("$e = $e1;");
-                            }*/
 
                             this.Write("$step = " + step + ";");
 
                             this.WriteNewLine();
-                            this.Write("setTimeout($asyncBody, 0);");
+                            this.Write("$asyncBody();");
                             this.WriteNewLine();
                             this.Write("return;");
                             this.WriteNewLine();
@@ -528,9 +520,9 @@ namespace Bridge.Translator
 
                 if (info.FinallyStep > 0)
                 {
-                    if (!this.Emitter.Locals.ContainsKey("$e"))
+                    if (!this.Emitter.Locals.ContainsKey("$async_e"))
                     {
-                        this.AddLocal("$e", AstType.Null);
+                        this.AddLocal("$async_e", AstType.Null);
                     }
 
                     this.WriteIf();
@@ -539,12 +531,12 @@ namespace Bridge.Translator
                     this.WriteCloseParentheses();
                     this.BeginBlock();
 
-                    this.Write("$e = $e1;");
+                    //this.Write("$e = $async_e;");
                     this.WriteNewLine();
                     this.Write("$step = " + info.FinallyStep + ";");
 
                     this.WriteNewLine();
-                    this.Write("setTimeout($asyncBody, 0);");
+                    this.Write("$asyncBody();");
                     this.WriteNewLine();
                     this.Write("return;");
 
@@ -556,11 +548,11 @@ namespace Bridge.Translator
 
             if (this.IsTaskReturn)
             {
-                this.Write("$tcs.setException($e1);");
+                this.Write("$tcs.setException($async_e);");
             }
             else
             {
-                this.Write("throw $e1;");
+                this.Write("throw $async_e;");
             }
         }
 
@@ -583,7 +575,7 @@ namespace Bridge.Translator
 
                 var output = step.Output.ToString();
 
-                if (string.IsNullOrWhiteSpace(output) && step.JumpToStep == (i + 1))
+                if (string.IsNullOrWhiteSpace(output) && step.JumpToStep == (i + 1) && step.FromTaskNumber < 0)
                 {
                     continue;
                 }

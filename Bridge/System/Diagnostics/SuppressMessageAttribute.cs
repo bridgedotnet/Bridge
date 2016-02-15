@@ -1,14 +1,11 @@
-using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using Bridge;
 
 namespace System.Diagnostics.CodeAnalysis
 {
-	[AttributeUsage(AttributeTargets.All, Inherited = false, AllowMultiple = true)]
-	[External]
+    [AttributeUsage(AttributeTargets.All, Inherited = false, AllowMultiple = true)]
+    [External]
     [Name("Object")]
-	public sealed class SuppressMessageAttribute : Attribute 
+    public sealed class SuppressMessageAttribute : Attribute
     {
         public extern SuppressMessageAttribute(string category, string checkId);
 
@@ -23,5 +20,5 @@ namespace System.Diagnostics.CodeAnalysis
         public extern string Target { get; set; }
 
         public extern string MessageId { get; set; }
-	}
+    }
 }

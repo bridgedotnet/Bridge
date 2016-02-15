@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using Bridge;
 
 namespace System.Diagnostics.Contracts

@@ -59,6 +59,7 @@ namespace Bridge
         /// <returns></returns>
         [Template]
         public static extern T Write<T>(string code, params object[] args);
+
         /// <summary>
         /// Inject javascript code
         /// </summary>

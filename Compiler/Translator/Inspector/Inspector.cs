@@ -113,12 +113,19 @@ namespace Bridge.Translator
 
             var resolveResult = resolver.ResolveNode(type, null);
 
+            var o = GetDefaultFieldValue(resolveResult.Type, false);
+
+            if (o != null)
+            {
+                return o;
+            }
+
             if (!resolveResult.IsError && NullableType.IsNullable(resolveResult.Type))
             {
                 return null;
             }
 
-            if (!resolveResult.IsError && resolveResult.Type.Kind == TypeKind.Enum)
+            if (!resolveResult.IsError && resolveResult.Type.IsKnownType(KnownTypeCode.Enum))
             {
                 return 0;
             }
@@ -131,7 +138,7 @@ namespace Bridge.Translator
             return null;
         }
 
-        public static object GetDefaultFieldValue(IType type)
+        public static object GetDefaultFieldValue(IType type, bool wrapType = true)
         {
             if (type.IsKnownType(KnownTypeCode.Int16) ||
                 type.IsKnownType(KnownTypeCode.Int32) ||
@@ -141,7 +148,6 @@ namespace Bridge.Translator
                 type.IsKnownType(KnownTypeCode.UInt64) ||
                 type.IsKnownType(KnownTypeCode.Byte) ||
                 type.IsKnownType(KnownTypeCode.Double) ||
-                type.IsKnownType(KnownTypeCode.Decimal) ||
                 type.IsKnownType(KnownTypeCode.SByte) ||
                 type.IsKnownType(KnownTypeCode.Single) ||
                 type.IsKnownType(KnownTypeCode.Enum))
@@ -154,12 +160,22 @@ namespace Bridge.Translator
                 return null;
             }
 
+            if (type.IsKnownType(KnownTypeCode.Decimal))
+            {
+                return 0m;
+            }
+
             if (type.IsKnownType(KnownTypeCode.Boolean))
             {
                 return false;
             }
 
-            if (type.Kind == TypeKind.Struct)
+            if (type.IsKnownType(KnownTypeCode.Enum))
+            {
+                return 0;
+            }
+
+            if (type.Kind == TypeKind.Struct && wrapType)
             {
                 return type;
             }

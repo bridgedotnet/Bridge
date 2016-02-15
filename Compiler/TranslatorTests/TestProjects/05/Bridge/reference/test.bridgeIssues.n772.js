@@ -1,6 +1,4 @@
-﻿/* global Bridge */
-
-(function (globals) {
+﻿(function (globals) {
     "use strict";
 
     Bridge.define('Test.BridgeIssues.N772.App', {
@@ -18,7 +16,7 @@
     
                 //These arrays do not depend on "useTypedArray" bridge.json option
                 var stringArray = Bridge.Array.init(9, null);
-                var decimalArray = Bridge.Array.init(10, 0);
+                var decimalArray = Bridge.Array.init(10, Bridge.Decimal(0.0));
     
                 byteArray[0] = 1;
                 sbyteArray[0] = 2;

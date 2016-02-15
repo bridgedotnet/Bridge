@@ -61,12 +61,6 @@ namespace Bridge.Translator
                     tmp.Append("\n");
                 }
 
-                if (isJs)
-                {
-                    tmp.Append(this.GetOutputHeader(true, false));
-                    tmp.Append("\n");
-                }
-
                 if (output.NonModuletOutput.Length > 0)
                 {
                     if (isJs)
@@ -74,7 +68,7 @@ namespace Bridge.Translator
                         tmp.Append("(function (globals) {");
                         tmp.Append("\n");
                         tmp.Append("    ");
-                        tmp.Append(this.GetOutputHeader(false, true));
+                        tmp.Append(this.GetOutputHeader());
                         tmp.Append("\n");
                     }
 
@@ -109,18 +103,14 @@ namespace Bridge.Translator
             return result;
         }
 
-        protected string GetOutputHeader(bool needGlobalComment, bool needStrictModeInstruction)
+        protected string GetOutputHeader()
         {
-            if (this.Translator.NoStrictModeAndGlobal)
+            if (this.Translator.NoStrictMode)
             {
-                needGlobalComment = false;
-                needStrictModeInstruction = false;
+                return string.Empty;
             }
 
-            string header = needGlobalComment ? "/* global Bridge */\n" : string.Empty;
-            header = header + (needStrictModeInstruction ? "\"use strict\";\n" : string.Empty);
-
-            return header;
+            return "\"use strict\";\n";
         }
 
         protected virtual void WrapToModules()

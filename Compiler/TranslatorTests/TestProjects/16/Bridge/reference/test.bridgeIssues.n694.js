@@ -1,6 +1,4 @@
-﻿/* global Bridge */
-
-(function (globals) {
+﻿(function (globals) {
     "use strict";
 
     Bridge.define('Test.BridgeIssues.N694.Bridge694', {
@@ -11,12 +9,18 @@
                 fruits[1] = "apple";
                 fruits[2] = "lemon";
     
-                var list = Bridge.Linq.Enumerable.from(fruits).select(function(x) { return Bridge.cast(x, String); }).orderBy(function (fruit) {
-                    return fruit;
-                }).select(function (fruit) {
-                    return fruit;
-                }).toList(String);
+                var list = Bridge.Linq.Enumerable.from(fruits).select(function(x) { return Bridge.cast(x, String); }).orderBy($_.Test.BridgeIssues.N694.Bridge694.f1).select($_.Test.BridgeIssues.N694.Bridge694.f1).toList(String);
             }
+        }
+    });
+    
+    var $_ = {};
+    
+    Bridge.ns("Test.BridgeIssues.N694.Bridge694", $_)
+    
+    Bridge.apply($_.Test.BridgeIssues.N694.Bridge694, {
+        f1: function (fruit) {
+            return fruit;
         }
     });
     

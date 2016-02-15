@@ -1,6 +1,4 @@
-﻿/* global Bridge */
-
-(function (globals) {
+﻿(function (globals) {
     "use strict";
 
     define("Bridge528_A", ["bridge","dep1"], function (_, dep1) {

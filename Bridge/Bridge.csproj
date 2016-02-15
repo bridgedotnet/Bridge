@@ -76,7 +76,7 @@
     <Compile Include="Bridge\Linq\Enumerable.cs" />
     <Compile Include="IBridgeClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="..\.build\CommonAssemblyInfo.cs">
+    <Compile Include="..\.build\common\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Script.cs" />
@@ -705,9 +705,10 @@
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <NuGetPackageSourcePath Include="$(SolutionDir).build\specs\Bridge.Dev.nuspec">
       <Path>$(SolutionDir).build\specs\Bridge.Dev.nuspec</Path>
+      <SubType>Designer</SubType>
     </NuGetPackageSourcePath>
   </ItemGroup>
-  <Import Project="$(SolutionDir)\.build\NuGet.Build.Package.targets" />
+  <Import Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " Project="$(SolutionDir)\.build\common\NuGet.Build.Package.targets" />
   <Target Name="CleanProjectNuGetOutput" BeforeTargets="Clean">
     <ItemGroup>
       <FilesToDelete Include="$(ProjectDir)$(OutDir)Bridge.*.nupkg" />

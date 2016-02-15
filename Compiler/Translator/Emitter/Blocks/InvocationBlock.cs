@@ -142,7 +142,8 @@ namespace Bridge.Translator
                             value = InlineArgumentsBlock.ReplaceInlineArgs(this, inlineExpression.Value.ToString(), invocationExpression.Arguments.Skip(1).ToArray());
                             this.Write(value);
 
-                            if (value[value.Length - 1] == ';')
+                            value = value.Trim();
+                            if (value[value.Length - 1] == ';' || value.EndsWith("*/", StringComparison.InvariantCulture) || value.StartsWith("//"))
                             {
                                 this.Emitter.EnableSemicolon = false;
                                 this.WriteNewLine();

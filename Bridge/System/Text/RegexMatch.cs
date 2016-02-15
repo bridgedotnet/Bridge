@@ -43,7 +43,7 @@ namespace System.Text.RegularExpressions
             }
         }
 
-        public static implicit operator string[](RegexMatch rm)
+        public static implicit operator string[] (RegexMatch rm)
         {
             return null;
         }

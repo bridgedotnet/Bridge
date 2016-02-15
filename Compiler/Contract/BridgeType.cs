@@ -215,7 +215,7 @@ namespace Bridge.Contract
             while (type.DeclaringType != null)
             {
                 var name = BridgeTypes.ConvertName(type.DeclaringType.Name);
-                
+
                 if (type.DeclaringType.TypeArguments.Count > 0)
                 {
                     name += "$" + type.TypeArguments.Count;
@@ -253,7 +253,7 @@ namespace Bridge.Contract
             BridgeType bridgeType = emitter.BridgeTypes.Get(type, true);
 
             var name = excludens ? "" : type.Namespace;
-            
+
             var hasTypeDef = bridgeType != null && bridgeType.TypeDefinition != null;
             if (hasTypeDef)
             {
@@ -279,7 +279,6 @@ namespace Bridge.Contract
 
                 name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.ConvertName(type.Name);
             }
-            
 
             bool isCustomName = false;
             if (bridgeType != null)
@@ -412,7 +411,7 @@ namespace Bridge.Contract
             return BridgeTypes.convRegex.Replace
             (
                 name,
-                delegate(Match m)
+                delegate (Match m)
                 {
                     return replacements[m.Value];
                 }

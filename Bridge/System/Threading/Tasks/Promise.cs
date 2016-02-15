@@ -20,17 +20,17 @@ namespace System.Threading.Tasks
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     [External]
-    public static class PromiseExtensions 
+    public static class PromiseExtensions
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="promise"></param>
         /// <returns></returns>
         [Template("Bridge.Task.fromPromise({promise})")]
-		public static extern TaskAwaiter<object[]> GetAwaiter(this IPromise promise);
-	}
+        public static extern TaskAwaiter<object[]> GetAwaiter(this IPromise promise);
+    }
 }

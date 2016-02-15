@@ -35,6 +35,46 @@
 
             getDefaultValue: function () {
                 return new Bridge.TimeSpan(0);
+            },
+
+            neg: function (t) {
+                return Bridge.hasValue(t) ? (new Bridge.TimeSpan(-t.ticks)) : null;
+            },
+
+            sub: function (t1, t2) {
+                return Bridge.hasValue(t1) && Bridge.hasValue(t2) ? (new Bridge.TimeSpan(t1.ticks - t2.ticks)) : null;
+            },
+
+            eq: function(t1, t2) {
+                return Bridge.hasValue(t1) && Bridge.hasValue(t2) ? (t1.ticks === t2.ticks) : null;
+            },
+
+            neq: function (t1, t2) {
+                return Bridge.hasValue(t1) && Bridge.hasValue(t2) ? (t1.ticks !== t2.ticks) : null;
+            },
+
+            plus: function (t) {
+                return Bridge.hasValue(t) ? (new Bridge.TimeSpan(t.ticks)) : null;
+            },
+
+            add: function (t1, t2) {
+                return Bridge.hasValue(t1) && Bridge.hasValue(t2) ? (new Bridge.TimeSpan(t1.ticks + t2.ticks)) : null;
+            },
+
+            gt: function (a, b) {
+                return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a.ticks > b.ticks) : false;
+            },
+
+            gte: function (a, b) {
+                return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a.ticks >= b.ticks) : false;
+            },
+
+            lt: function (a, b) {
+                return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a.ticks < b.ticks) : false;
+            },
+
+            lte: function (a, b) {
+                return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a.ticks <= b.ticks) : false;
             }
         },
 

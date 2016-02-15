@@ -32,6 +32,5 @@ namespace System.Globalization
         public extern string InvalidCultureName { get; }
 
         public extern int? InvalidCultureId { get; }
-        
     }
 }

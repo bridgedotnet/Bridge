@@ -1,8 +1,0 @@
-﻿{
-    "output": "..\\..\\www\\js",
-    "cleanOutputFolderBeforeBuild": true,
-    "outputFormatting": "Formatted",
-    "fileName": "code.js",
-    "outputBy": "Project",
-    "loggerLevel": "Info"
-}

@@ -1,0 +1,6 @@
+{
+    "output": "..\\..\\Runner\\TypeScript\\App1",
+    "cleanOutputFolderBeforeBuild": true,
+    "outputBy": "Namespace",
+    "generateTypeScript": "true"
+}

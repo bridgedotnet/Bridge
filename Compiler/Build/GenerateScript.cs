@@ -1,13 +1,10 @@
 using Bridge.Contract;
 using Bridge.Translator.Logging;
-
+using Microsoft.Build.Framework;
+using Microsoft.Build.Utilities;
 using System;
 using System.IO;
 using System.Linq;
-
-using Microsoft.Build.Framework;
-using Microsoft.Build.Utilities;
-
 
 namespace Bridge.Build
 {
@@ -98,7 +95,15 @@ namespace Bridge.Build
 
                 translator.BridgeLocation = Path.Combine(this.AssembliesPath, "Bridge.dll");
                 translator.Rebuild = false;
-                translator.Log = new Translator.Logging.Logger("Bridge.Build.Task", true, SimpleFileLoggerWriter.Instance);
+                translator.Log = new Translator.Logging.Logger("Bridge.Build.Task", true, new SimpleFileLoggerWriter());
+
+                translator.Log.Info("Translator properties:");
+                translator.Log.Info("\tBridgeLocation:" + translator.BridgeLocation ?? "");
+                translator.Log.Info("\tBuildArguments:" + translator.BuildArguments ?? "");
+                translator.Log.Info("\tConfiguration:" + translator.Configuration ?? "");
+                translator.Log.Info("\tDefineConstants:" + (translator.DefineConstants != null ? string.Join(" ", translator.DefineConstants) : ""));
+                translator.Log.Info("\tRebuild:" + translator.Rebuild);
+
                 translator.Translate();
 
                 string fileName = Path.GetFileNameWithoutExtension(this.Assembly.ItemSpec);
@@ -106,7 +111,6 @@ namespace Bridge.Build
                 string outputPath = !string.IsNullOrWhiteSpace(translator.AssemblyInfo.Output)
                     ? Path.Combine(Path.GetDirectoryName(this.ProjectPath), translator.AssemblyInfo.Output)
                     : this.OutputPath;
-
 
                 translator.CleanOutputFolderIfRequired(outputPath);
 

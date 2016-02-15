@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A C# to JavaScript compiler. Write modern mobile and web apps in C#. Run them anywhere with JavaScript.</description>
     <summary>A C# to JavaScript compiler. Write modern mobile and web apps in C#. Run them anywhere in JavaScript with Bridge.NET.</summary>
-    <copyright>Copyright (c) 2008-2015, Object.NET, Inc. (http://object.net/). All rights reserved.</copyright>
+    <copyright>Copyright (c) 2008-2016, Object.NET, Inc. (http://object.net/). All rights reserved.</copyright>
     <tags>bridge bridge.net bridge js javascript C# csharp mobile ios asp.net aspnet mvc aspnetmvc web transpiler compiler object.net</tags>
     <dependencies>
     </dependencies>
@@ -20,36 +20,37 @@
     </frameworkAssemblies>
   </metadata>
   <files>
+    <!--content-->
+    <file src="..\..\README.md" target="content\App_Readme\Bridge.NET\README.md"/>
+    <file src="..\..\LICENSE" target="content\App_Readme\Bridge.NET\LICENSE"/>
+    
+    <file src="..\..\.build\files\bridge.json" target="content\Bridge\bridge.json"/>
+    <file src="..\..\.build\files\output_readme.txt" target="content\Bridge\output\readme.txt"/>
+    <file src="..\..\.build\files\demo.html.pp" target="content\Bridge\www\demo.html.pp"/>
+
     <!--build-->
-    <file src="..\..\..\Bridge\Bridge\build\package\Bridge.targets" target="build\Bridge.targets"/>
+    <file src="..\..\.build\files\Bridge.targets" target="build\Bridge.targets"/>
 
     <!--tools-->
-    <file src="..\..\..\Bridge\Bridge\build\package\install.ps1" target="tools\install.ps1"/>
-    <file src="..\..\..\Bridge\Compiler\Build\bin\Release\Bridge.Build.dll" target="tools\Bridge.Builder.dll"/>
-    <file src="..\..\..\Bridge\Compiler\Build\bin\Release\AjaxMin.dll" target="tools\AjaxMin.dll"/>
-    <file src="..\..\..\Bridge\Compiler\Build\bin\Release\Bridge.Contract.dll" target="tools\Bridge.Contract.dll"/>
-    <file src="..\..\..\Bridge\Compiler\Build\bin\Release\Bridge.Translator.dll" target="tools\Bridge.Translator.dll"/>
-    <file src="..\..\..\Bridge\Compiler\Build\bin\Release\ICSharpCode.NRefactory.Cecil.dll" target="tools\ICSharpCode.NRefactory.Cecil.dll"/>
-    <file src="..\..\..\Bridge\Compiler\Build\bin\Release\ICSharpCode.NRefactory.CSharp.dll" target="tools\ICSharpCode.NRefactory.CSharp.dll"/>
-    <file src="..\..\..\Bridge\Compiler\Build\bin\Release\ICSharpCode.NRefactory.dll" target="tools\ICSharpCode.NRefactory.dll"/>
-    <file src="..\..\..\Bridge\Compiler\Build\bin\Release\Mono.Cecil.dll" target="tools\Mono.Cecil.dll"/>
-    <file src="..\..\..\Bridge\Compiler\Build\bin\Release\Newtonsoft.Json.dll" target="tools\Newtonsoft.Json.dll"/>
-    <file src="..\..\..\Bridge\Compiler\Build\bin\Release\Object.Net.Utilities.dll" target="tools\Object.Net.Utilities.dll"/>
-    <file src="..\..\..\Bridge\Compiler\Build\bin\Release\TopologicalSorting.dll" target="tools\TopologicalSorting.dll"/>
-
-    <!--content-->
-    <file src="..\..\..\Bridge\Bridge\build\package\README.txt" target="content\App_Readme\Bridge.NET\README.txt"/>
-    <file src="..\..\..\Bridge\Bridge\build\package\LICENSE.txt" target="content\App_Readme\Bridge.NET\LICENSE.txt"/>
-    <file src="..\..\..\Bridge\Bridge\build\package\bridge.json" target="content\Bridge\bridge.json"/>
-    <file src="..\..\..\Bridge\Bridge\build\package\output_readme.txt" target="content\Bridge\output\readme.txt"/>
-    <file src="..\..\..\Bridge\Bridge\build\package\demo.html.pp" target="content\Bridge\www\demo.html.pp"/>
+    <file src="..\..\.build\files\install.ps1" target="tools\install.ps1"/>
+    <file src="..\..\Compiler\Build\bin\Release\Bridge.Build.dll" target="tools\Bridge.Builder.dll"/>
+    <file src="..\..\Compiler\Build\bin\Release\AjaxMin.dll" target="tools\AjaxMin.dll"/>
+    <file src="..\..\Compiler\Build\bin\Release\Bridge.Contract.dll" target="tools\Bridge.Contract.dll"/>
+    <file src="..\..\Compiler\Build\bin\Release\Bridge.Translator.dll" target="tools\Bridge.Translator.dll"/>
+    <file src="..\..\Compiler\Build\bin\Release\ICSharpCode.NRefactory.Cecil.dll" target="tools\ICSharpCode.NRefactory.Cecil.dll"/>
+    <file src="..\..\Compiler\Build\bin\Release\ICSharpCode.NRefactory.CSharp.dll" target="tools\ICSharpCode.NRefactory.CSharp.dll"/>
+    <file src="..\..\Compiler\Build\bin\Release\ICSharpCode.NRefactory.dll" target="tools\ICSharpCode.NRefactory.dll"/>
+    <file src="..\..\Compiler\Build\bin\Release\Mono.Cecil.dll" target="tools\Mono.Cecil.dll"/>
+    <file src="..\..\Compiler\Build\bin\Release\Newtonsoft.Json.dll" target="tools\Newtonsoft.Json.dll"/>
+    <file src="..\..\Compiler\Build\bin\Release\Object.Net.Utilities.dll" target="tools\Object.Net.Utilities.dll"/>
+    <file src="..\..\Compiler\Build\bin\Release\TopologicalSorting.dll" target="tools\TopologicalSorting.dll"/>
 
     <!--NET40-->
-    <file src="..\..\..\Bridge\Bridge\bin\Release\Bridge.dll" target="lib\net40\Bridge.dll"/>
-    <file src="..\..\..\Bridge\Bridge\bin\Release\Bridge.xml" target="lib\net40\Bridge.xml"/>
-    <file src="..\..\..\Bridge\Bridge\bin\Release\Bridge.pdb" target="lib\net40\pdb\Bridge.pdb"/>
-    <file src="..\..\..\Bridge\Html5\bin\Release\Bridge.Html5.dll" target="lib\net40\Bridge.Html5.dll"/>
-    <file src="..\..\..\Bridge\Html5\bin\Release\Bridge.Html5.xml" target="lib\net40\Bridge.Html5.xml"/>
-    <file src="..\..\..\Bridge\Html5\bin\Release\Bridge.Html5.pdb" target="lib\net40\pdb\Bridge.Html5.pdb"/>
+    <file src="..\..\Bridge\bin\Release\Bridge.dll" target="lib\net40\Bridge.dll"/>
+    <file src="..\..\Bridge\bin\Release\Bridge.xml" target="lib\net40\Bridge.xml"/>
+    <file src="..\..\Bridge\bin\Release\Bridge.pdb" target="lib\net40\pdb\Bridge.pdb"/>
+    <file src="..\..\Html5\bin\Release\Bridge.Html5.dll" target="lib\net40\Bridge.Html5.dll"/>
+    <file src="..\..\Html5\bin\Release\Bridge.Html5.xml" target="lib\net40\Bridge.Html5.xml"/>
+    <file src="..\..\Html5\bin\Release\Bridge.Html5.pdb" target="lib\net40\pdb\Bridge.Html5.pdb"/>
   </files>
 </package>

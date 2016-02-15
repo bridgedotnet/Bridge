@@ -12,7 +12,7 @@ namespace Bridge.Builder
     {
         private static void Main(string[] args)
         {
-            var logger = new Logger("Bridge.Builder.Console", true, new ConsoleLoggerWriter(), SimpleFileLoggerWriter.Instance);
+            var logger = new Logger(null, true, new ConsoleLoggerWriter(), new SimpleFileLoggerWriter());
 
             string projectLocation = null;
             string outputLocation = null;
@@ -123,7 +123,12 @@ namespace Bridge.Builder
             Bridge.Translator.Translator translator = null;
             try
             {
+                logger.Name = "Bridge.Builder.Console";
+
                 logger.Info("Generating script...");
+
+                logger.Info("Command line arguments:");
+                logger.Info("\t" + (string.Join(" ", args) ?? ""));
 
                 if (!string.IsNullOrWhiteSpace(projectLocation))
                 {
@@ -151,6 +156,14 @@ namespace Bridge.Builder
                     translator.DefineConstants.AddRange(def.Split(';').Select(s => s.Trim()).Where(s => s != ""));
                     translator.DefineConstants = translator.DefineConstants.Distinct().ToList();
                 }
+
+                translator.Log.Info("Translator properties:");
+                translator.Log.Info("\tBridgeLocation:" + translator.BridgeLocation ?? "");
+                translator.Log.Info("\tBuildArguments:" + translator.BuildArguments ?? "");
+                translator.Log.Info("\tConfiguration:" + translator.Configuration ?? "");
+                translator.Log.Info("\tDefineConstants:" + (translator.DefineConstants != null ? string.Join(" ", translator.DefineConstants) : ""));
+                translator.Log.Info("\tRebuild:" + translator.Rebuild);
+
                 translator.Translate();
 
                 string path = string.IsNullOrWhiteSpace(Path.GetFileName(outputLocation)) ? outputLocation : Path.GetDirectoryName(outputLocation);

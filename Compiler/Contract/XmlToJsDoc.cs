@@ -137,7 +137,7 @@ namespace Bridge.Contract
 
                 try
                 {
-                    doc.LoadXml(xml.ToString());    
+                    doc.LoadXml(xml.ToString());
                 }
                 catch (XmlException)
                 {
@@ -736,8 +736,6 @@ namespace Bridge.Contract
             BridgeType bridgeType = emitter.BridgeTypes.Get(type, true);
             //string name = BridgeTypes.ConvertName(type.FullName);
 
-
-
             var name = type.Namespace;
 
             var hasTypeDef = bridgeType != null && bridgeType.TypeDefinition != null;
@@ -765,8 +763,6 @@ namespace Bridge.Contract
 
                 name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.ConvertName(type.Name);
             }
-
-
 
             bool isCustomName = false;
             if (bridgeType != null)

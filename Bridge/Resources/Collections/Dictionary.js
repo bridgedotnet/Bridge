@@ -12,15 +12,18 @@ Bridge.Class.generic('Bridge.KeyValuePair$2', function (TKey, TValue) {
         toString: function() {
             var s = "[";
             
-            if( this.key != null) {
+            if (this.key != null) {
                 s += this.key.toString();
             }
 
             s += ", ";
-            if(this.value != null) {
+
+            if (this.value != null) {
                 s += this.value.toString();
             }
+
             s += "]";
+
             return s;
         }
     }));

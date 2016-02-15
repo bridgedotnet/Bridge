@@ -42,7 +42,7 @@ namespace System
             return default(T);
         }
 
-        public static implicit operator T?(T value)
+        public static implicit operator T? (T value)
         {
             return null;
         }

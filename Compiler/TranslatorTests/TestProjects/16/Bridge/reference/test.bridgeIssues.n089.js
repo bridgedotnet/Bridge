@@ -1,0 +1,14 @@
+﻿(function (globals) {
+    "use strict";
+
+    Bridge.define('Test.BridgeIssues.N089.Class89', {
+        test: function (p) {
+            if (p === void 0) { p = []; }
+            var i = p[0];
+        }
+    });
+    
+    
+    
+    Bridge.init();
+})(this);

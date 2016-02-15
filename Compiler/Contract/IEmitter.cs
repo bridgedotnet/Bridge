@@ -393,7 +393,8 @@ namespace Bridge.Contract
 
         Dictionary<string, string> NamedFunctions
         {
-            get; set;
+            get;
+            set;
         }
 
         bool StaticBlock
@@ -407,5 +408,10 @@ namespace Bridge.Contract
             get;
             set;
         }
-    }
+
+        string CatchBlockVariable
+        {
+            get;
+            set;
+        }    }
 }

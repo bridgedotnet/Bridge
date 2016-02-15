@@ -41,61 +41,61 @@ namespace System
         {
         }
 
-        [Template("new Bridge.TimeSpan(-{t}.ticks)")]
+        [Template("Bridge.TimeSpan.neg({t})")]
         public static TimeSpan operator -(TimeSpan t)
         {
             return new TimeSpan();
         }
 
-        [Template("new Bridge.TimeSpan({t1}.ticks - {t2}.ticks)")]
+        [Template("Bridge.TimeSpan.sub({t1}, {t2})")]
         public static TimeSpan operator -(TimeSpan t1, TimeSpan t2)
         {
             return new TimeSpan();
         }
 
-        [Template("{t1}.ticks !== {t2}.ticks")]
+        [Template("Bridge.TimeSpan.neq({t1}, {t2})")]
         public static bool operator !=(TimeSpan t1, TimeSpan t2)
         {
             return false;
         }
 
-        [Template("new Bridge.TimeSpan({t}.ticks)")]
+        [Template("Bridge.TimeSpan.plus({t})")]
         public static TimeSpan operator +(TimeSpan t)
         {
             return new TimeSpan();
         }
 
-        [Template("new Bridge.TimeSpan({t1}.ticks + {t2}.ticks)")]
+        [Template("Bridge.TimeSpan.add({t1}, {t2})")]
         public static TimeSpan operator +(TimeSpan t1, TimeSpan t2)
         {
             return new TimeSpan();
         }
 
-        [Template("{t1}.ticks < {t2}.ticks")]
+        [Template("Bridge.TimeSpan.lt({t1}, {t2})")]
         public static bool operator <(TimeSpan t1, TimeSpan t2)
         {
             return false;
         }
 
-        [Template("{t1}.ticks <= {t2}.ticks")]
+        [Template("Bridge.TimeSpan.lte({t1}, {t2})")]
         public static bool operator <=(TimeSpan t1, TimeSpan t2)
         {
             return false;
         }
 
-        [Template("{t1}.ticks === {t2}.ticks")]
+        [Template("Bridge.TimeSpan.eq({t1}, {t2})")]
         public static bool operator ==(TimeSpan t1, TimeSpan t2)
         {
             return false;
         }
 
-        [Template("{t1}.ticks > {t2}.ticks")]
+        [Template("Bridge.TimeSpan.gt({t1}, {t2})")]
         public static bool operator >(TimeSpan t1, TimeSpan t2)
         {
             return false;
         }
 
-        [Template("{t1}.ticks >= {t2}.ticks")]
+        [Template("Bridge.TimeSpan.gte({t1}, {t2})")]
         public static bool operator >=(TimeSpan t1, TimeSpan t2)
         {
             return false;

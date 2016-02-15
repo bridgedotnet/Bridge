@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A C# to JavaScript compiler. Write modern mobile and web apps in C#. Run them anywhere with JavaScript.</description>
     <summary>A C# to JavaScript compiler. Write modern mobile and web apps in C#. Run them anywhere in JavaScript with Bridge.NET.</summary>
-    <copyright>Copyright (c) 2008-2015, Object.NET, Inc. (http://object.net/). All rights reserved.</copyright>
+    <copyright>Copyright (c) 2008-2016, Object.NET, Inc. (http://object.net/). All rights reserved.</copyright>
     <tags>bridge bridge.net bridge js javascript C# csharp mobile ios asp.net aspnet mvc aspnetmvc web transpiler compiler object.net</tags>
     <dependencies>
       <dependency id="Bridge.Dev" version="1.11.0" />
@@ -22,7 +22,7 @@
   </metadata>
   <files>
     <!--content-->
-    <file src="..\..\..\Bridge\Bridge\build\package\LICENSE.txt" target="content\App_Readme\Bridge.NET\LICENSE.txt"/>
+    <file src="..\..\LICENSE" target="content\App_Readme\Bridge.NET\LICENSE"/>
 
     <!--NET40-->
     <file src="..\..\..\Bridge\Html5\bin\Release\Bridge.Html5.dll" target="lib\net40\Bridge.Html5.dll"/>

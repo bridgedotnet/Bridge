@@ -26,35 +26,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bridge.Contract", "Compiler
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bridge.Translator", "Compiler\Translator\Bridge.Translator.csproj", "{44124331-C60A-4071-B387-4B8E71324B10}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{4466FE4E-78E3-46A8-BAA4-C304D7FFABD9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "client", "Testing\tests\client\client.csproj", "{306AD788-87E9-4DF9-A216-95948E024BC8}"
-	ProjectSection(ProjectDependencies) = postProject
-		{243BB709-3912-4C65-82D4-787A5E2201D7} = {243BB709-3912-4C65-82D4-787A5E2201D7}
-		{28703D12-116A-4968-BD85-F26D7F7E7DA4} = {28703D12-116A-4968-BD85-F26D7F7E7DA4}
-		{44124331-C60A-4071-B387-4B8E71324B10} = {44124331-C60A-4071-B387-4B8E71324B10}
-		{52AE9E3E-6929-4720-AB7A-F9F22B9A8972} = {52AE9E3E-6929-4720-AB7A-F9F22B9A8972}
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{42D82A7C-EC6C-4C9F-A169-3F22275ED2BB}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "typeScriptBridge", "Testing\tests\typeScriptBridge\typeScriptBridge.csproj", "{518C57D4-62CC-47F7-A310-23405F5ED3AD}"
-	ProjectSection(ProjectDependencies) = postProject
-		{243BB709-3912-4C65-82D4-787A5E2201D7} = {243BB709-3912-4C65-82D4-787A5E2201D7}
-		{28703D12-116A-4968-BD85-F26D7F7E7DA4} = {28703D12-116A-4968-BD85-F26D7F7E7DA4}
-		{44124331-C60A-4071-B387-4B8E71324B10} = {44124331-C60A-4071-B387-4B8E71324B10}
-		{52AE9E3E-6929-4720-AB7A-F9F22B9A8972} = {52AE9E3E-6929-4720-AB7A-F9F22B9A8972}
-		{306AD788-87E9-4DF9-A216-95948E024BC8} = {306AD788-87E9-4DF9-A216-95948E024BC8}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "typeScriptHtml", "Testing\tests\typeScriptHtml\typeScriptHtml.csproj", "{411D4BE8-B1F0-4F61-9AD1-00250D9CC4FA}"
-	ProjectSection(ProjectDependencies) = postProject
-		{518C57D4-62CC-47F7-A310-23405F5ED3AD} = {518C57D4-62CC-47F7-A310-23405F5ED3AD}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bridge.Translator.Tests", "Compiler\TranslatorTests\Bridge.Translator.Tests.csproj", "{6E1D7559-DAA0-41B7-B0E5-8E106072D704}"
@@ -65,25 +41,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bridge.Translator.Tests", "
 		{DE78B8B7-C0F5-415B-A70B-02194433F450} = {DE78B8B7-C0F5-415B-A70B-02194433F450}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "www", "www", "{F8D2127F-7042-40D2-8ABC-0E3F58D09C42}"
-	ProjectSection(SolutionItems) = preProject
-		Testing\www\index.html = Testing\www\index.html
-		Testing\www\testTypeScript.html = Testing\www\testTypeScript.html
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{00CA952C-4292-47FC-8D03-B525B294B846}"
-	ProjectSection(SolutionItems) = preProject
-		.build\CommonAssemblyInfo.cs = .build\CommonAssemblyInfo.cs
-		.build\NuGet.Build.Package.targets = .build\NuGet.Build.Package.targets
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "clientOne", "Testing\tests\clientOne\clientOne.csproj", "{AE48EC97-AFCB-49ED-82F6-8863F9860C9C}"
-	ProjectSection(ProjectDependencies) = postProject
-		{243BB709-3912-4C65-82D4-787A5E2201D7} = {243BB709-3912-4C65-82D4-787A5E2201D7}
-		{28703D12-116A-4968-BD85-F26D7F7E7DA4} = {28703D12-116A-4968-BD85-F26D7F7E7DA4}
-		{44124331-C60A-4071-B387-4B8E71324B10} = {44124331-C60A-4071-B387-4B8E71324B10}
-		{52AE9E3E-6929-4720-AB7A-F9F22B9A8972} = {52AE9E3E-6929-4720-AB7A-F9F22B9A8972}
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "specs", "specs", "{E12E9F2A-984B-4340-A62E-E356C716358E}"
 	ProjectSection(SolutionItems) = preProject
@@ -92,6 +50,85 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "specs", "specs", "{E12E9F2A
 		.build\specs\Bridge.Dev.nuspec = .build\specs\Bridge.Dev.nuspec
 		.build\specs\Bridge.Html5.Dev.nuspec = .build\specs\Bridge.Html5.Dev.nuspec
 		.build\specs\Bridge.nuspec = .build\specs\Bridge.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "files", "files", "{B83954AB-3E5F-4778-8BC0-F1CEEDE6F187}"
+	ProjectSection(SolutionItems) = preProject
+		.build\files\bridge.json = .build\files\bridge.json
+		.build\files\Bridge.targets = .build\files\Bridge.targets
+		.build\files\demo.html.pp = .build\files\demo.html.pp
+		.build\files\install.ps1 = .build\files\install.ps1
+		.build\files\output_readme.txt = .build\files\output_readme.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "packages", "packages", "{0A8F2D26-ED54-4A8C-A323-A8018F6DD742}"
+	ProjectSection(SolutionItems) = preProject
+		.build\packages\collect.bat = .build\packages\collect.bat
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "targets", "targets", "{169F0BA9-3B0A-43DD-98E2-C9DB1A89CAB0}"
+	ProjectSection(SolutionItems) = preProject
+		.build\targets\Bridge.targets = .build\targets\Bridge.targets
+		.build\targets\BridgeNoTask.targets = .build\targets\BridgeNoTask.targets
+		.build\targets\BridgeProjectRefs.targets = .build\targets\BridgeProjectRefs.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{3E6E252D-69D8-4B9A-8E6C-E994697F8090}"
+	ProjectSection(SolutionItems) = preProject
+		.build\common\CommonAssemblyInfo.cs = .build\common\CommonAssemblyInfo.cs
+		.build\common\NuGet.Build.Package.targets = .build\common\NuGet.Build.Package.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E14B88A0-6D55-4C94-AF76-2B1BC4B4C775}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Runner", "Tests\Runner\", "{DE1ED6BA-EEA3-4136-8732-C39F070CC7F2}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_49753"
+		Debug.AspNetCompiler.PhysicalPath = "Tests\Runner\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49753\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_49753"
+		Release.AspNetCompiler.PhysicalPath = "Tests\Runner\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49753\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "49753"
+		SlnRelativePath = "Tests\Runner\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+	ProjectSection(ProjectDependencies) = postProject
+		{306AD788-87E9-4DF9-A216-95948E024BC8} = {306AD788-87E9-4DF9-A216-95948E024BC8}
+		{AE48EC97-AFCB-49ED-82F6-8863F9860C9C} = {AE48EC97-AFCB-49ED-82F6-8863F9860C9C}
+		{518C57D4-62CC-47F7-A310-23405F5ED3AD} = {518C57D4-62CC-47F7-A310-23405F5ED3AD}
+		{411D4BE8-B1F0-4F61-9AD1-00250D9CC4FA} = {411D4BE8-B1F0-4F61-9AD1-00250D9CC4FA}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Batch1", "Tests\Batch1\Batch1.csproj", "{306AD788-87E9-4DF9-A216-95948E024BC8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{243BB709-3912-4C65-82D4-787A5E2201D7} = {243BB709-3912-4C65-82D4-787A5E2201D7}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Batch2", "Tests\Batch2\Batch2.csproj", "{AE48EC97-AFCB-49ED-82F6-8863F9860C9C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{243BB709-3912-4C65-82D4-787A5E2201D7} = {243BB709-3912-4C65-82D4-787A5E2201D7}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TypeScript", "TypeScript", "{E4A735E0-1C3F-4ED4-BD3A-42A313536994}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App1", "Tests\TypeScript\App1\App1.csproj", "{518C57D4-62CC-47F7-A310-23405F5ED3AD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{243BB709-3912-4C65-82D4-787A5E2201D7} = {243BB709-3912-4C65-82D4-787A5E2201D7}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Batch1", "Tests\TypeScript\Batch1\Batch1.csproj", "{411D4BE8-B1F0-4F61-9AD1-00250D9CC4FA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{518C57D4-62CC-47F7-A310-23405F5ED3AD} = {518C57D4-62CC-47F7-A310-23405F5ED3AD}
 	EndProjectSection
 EndProject
 Global
@@ -124,10 +161,22 @@ Global
 		{44124331-C60A-4071-B387-4B8E71324B10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44124331-C60A-4071-B387-4B8E71324B10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44124331-C60A-4071-B387-4B8E71324B10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E1D7559-DAA0-41B7-B0E5-8E106072D704}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E1D7559-DAA0-41B7-B0E5-8E106072D704}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E1D7559-DAA0-41B7-B0E5-8E106072D704}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E1D7559-DAA0-41B7-B0E5-8E106072D704}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE1ED6BA-EEA3-4136-8732-C39F070CC7F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE1ED6BA-EEA3-4136-8732-C39F070CC7F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE1ED6BA-EEA3-4136-8732-C39F070CC7F2}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE1ED6BA-EEA3-4136-8732-C39F070CC7F2}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{306AD788-87E9-4DF9-A216-95948E024BC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{306AD788-87E9-4DF9-A216-95948E024BC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{306AD788-87E9-4DF9-A216-95948E024BC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{306AD788-87E9-4DF9-A216-95948E024BC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE48EC97-AFCB-49ED-82F6-8863F9860C9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE48EC97-AFCB-49ED-82F6-8863F9860C9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE48EC97-AFCB-49ED-82F6-8863F9860C9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE48EC97-AFCB-49ED-82F6-8863F9860C9C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{518C57D4-62CC-47F7-A310-23405F5ED3AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{518C57D4-62CC-47F7-A310-23405F5ED3AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{518C57D4-62CC-47F7-A310-23405F5ED3AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -136,14 +185,6 @@ Global
 		{411D4BE8-B1F0-4F61-9AD1-00250D9CC4FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{411D4BE8-B1F0-4F61-9AD1-00250D9CC4FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{411D4BE8-B1F0-4F61-9AD1-00250D9CC4FA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6E1D7559-DAA0-41B7-B0E5-8E106072D704}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6E1D7559-DAA0-41B7-B0E5-8E106072D704}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6E1D7559-DAA0-41B7-B0E5-8E106072D704}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6E1D7559-DAA0-41B7-B0E5-8E106072D704}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AE48EC97-AFCB-49ED-82F6-8863F9860C9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE48EC97-AFCB-49ED-82F6-8863F9860C9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AE48EC97-AFCB-49ED-82F6-8863F9860C9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE48EC97-AFCB-49ED-82F6-8863F9860C9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -155,12 +196,17 @@ Global
 		{99DECD28-D3E3-4EA7-ACAE-AB5DFC9913BD} = {32B4E540-81E6-4E3F-8383-5813786DC899}
 		{52AE9E3E-6929-4720-AB7A-F9F22B9A8972} = {47D6D365-36CE-43C2-91D0-5A071928C62A}
 		{44124331-C60A-4071-B387-4B8E71324B10} = {47D6D365-36CE-43C2-91D0-5A071928C62A}
-		{306AD788-87E9-4DF9-A216-95948E024BC8} = {4466FE4E-78E3-46A8-BAA4-C304D7FFABD9}
-		{518C57D4-62CC-47F7-A310-23405F5ED3AD} = {4466FE4E-78E3-46A8-BAA4-C304D7FFABD9}
-		{411D4BE8-B1F0-4F61-9AD1-00250D9CC4FA} = {4466FE4E-78E3-46A8-BAA4-C304D7FFABD9}
 		{6E1D7559-DAA0-41B7-B0E5-8E106072D704} = {47D6D365-36CE-43C2-91D0-5A071928C62A}
-		{F8D2127F-7042-40D2-8ABC-0E3F58D09C42} = {4466FE4E-78E3-46A8-BAA4-C304D7FFABD9}
-		{AE48EC97-AFCB-49ED-82F6-8863F9860C9C} = {4466FE4E-78E3-46A8-BAA4-C304D7FFABD9}
 		{E12E9F2A-984B-4340-A62E-E356C716358E} = {00CA952C-4292-47FC-8D03-B525B294B846}
+		{B83954AB-3E5F-4778-8BC0-F1CEEDE6F187} = {00CA952C-4292-47FC-8D03-B525B294B846}
+		{0A8F2D26-ED54-4A8C-A323-A8018F6DD742} = {00CA952C-4292-47FC-8D03-B525B294B846}
+		{169F0BA9-3B0A-43DD-98E2-C9DB1A89CAB0} = {00CA952C-4292-47FC-8D03-B525B294B846}
+		{3E6E252D-69D8-4B9A-8E6C-E994697F8090} = {00CA952C-4292-47FC-8D03-B525B294B846}
+		{DE1ED6BA-EEA3-4136-8732-C39F070CC7F2} = {E14B88A0-6D55-4C94-AF76-2B1BC4B4C775}
+		{306AD788-87E9-4DF9-A216-95948E024BC8} = {E14B88A0-6D55-4C94-AF76-2B1BC4B4C775}
+		{AE48EC97-AFCB-49ED-82F6-8863F9860C9C} = {E14B88A0-6D55-4C94-AF76-2B1BC4B4C775}
+		{E4A735E0-1C3F-4ED4-BD3A-42A313536994} = {E14B88A0-6D55-4C94-AF76-2B1BC4B4C775}
+		{518C57D4-62CC-47F7-A310-23405F5ED3AD} = {E4A735E0-1C3F-4ED4-BD3A-42A313536994}
+		{411D4BE8-B1F0-4F61-9AD1-00250D9CC4FA} = {E4A735E0-1C3F-4ED4-BD3A-42A313536994}
 	EndGlobalSection
 EndGlobal

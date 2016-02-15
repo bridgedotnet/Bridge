@@ -74,9 +74,9 @@ namespace Bridge.Translator
                 this.WriteNewLine();
             }
 
-            if (/*tryCatchStatement.CatchClauses.Count == 0 && */!this.Emitter.Locals.ContainsKey("$e"))
+            if (!this.Emitter.Locals.ContainsKey("$async_e"))
             {
-                this.AddLocal("$e", AstType.Null);
+                this.AddLocal("$async_e", AstType.Null);
             }
 
             IAsyncStep finalyStep = null;
@@ -122,11 +122,11 @@ namespace Bridge.Translator
                 this.WriteElse();
                 this.WriteIf();
                 this.WriteOpenParentheses();
-                this.Write("$e");
+                this.Write("$async_e");
                 this.WriteCloseParentheses();
                 this.WriteSpace();
                 this.BeginBlock();
-                this.Write("$tcs.setException($e);");
+                this.Write("$tcs.setException($async_e);");
                 this.WriteNewLine();
                 this.WriteReturn(false);
                 this.WriteSemiColon();
@@ -165,9 +165,9 @@ namespace Bridge.Translator
                 this.WriteNewLine();
                 this.EndBlock();
 
-                if (!this.Emitter.Locals.ContainsKey("$e"))
+                if (!this.Emitter.Locals.ContainsKey("$async_e"))
                 {
-                    this.AddLocal("$e", AstType.Null);
+                    this.AddLocal("$async_e", AstType.Null);
                 }
             }
 
@@ -249,12 +249,15 @@ namespace Bridge.Translator
 
                 if (String.IsNullOrEmpty(varName))
                 {
-                    varName = this.AddLocal("$e", AstType.Null);
+                    varName = this.AddLocal(this.GetUniqueName("$e"), AstType.Null);
                 }
                 else
                 {
                     varName = this.AddLocal(varName, clause.Type);
                 }
+
+                var oldVar = this.Emitter.CatchBlockVariable;
+                this.Emitter.CatchBlockVariable = varName;
 
                 this.WriteCatch();
                 this.WriteOpenParentheses();
@@ -276,20 +279,26 @@ namespace Bridge.Translator
                 this.WriteNewLine();
 
                 this.PopLocals();
+                this.Emitter.CatchBlockVariable = oldVar;
             }
         }
 
         protected virtual void EmitMultipleCatchBlock()
         {
             TryCatchStatement tryCatchStatement = this.TryCatchStatement;
-
+            
             this.WriteCatch();
             this.WriteOpenParentheses();
-            this.Write("$e");
+            var varName = this.AddLocal(this.GetUniqueName("$e"), AstType.Null);
+            
+            var oldVar = this.Emitter.CatchBlockVariable;
+            this.Emitter.CatchBlockVariable = varName;
+
+            this.Write(varName);
             this.WriteCloseParentheses();
             this.WriteSpace();
             this.BeginBlock();
-            this.Write("$e = Bridge.Exception.create($e);");
+            this.Write(string.Format("{0} = Bridge.Exception.create({0});", varName));
             this.WriteNewLine();
 
             var catchVars = new Dictionary<string, string>();
@@ -339,7 +348,7 @@ namespace Bridge.Translator
                 {
                     this.WriteIf();
                     this.WriteOpenParentheses();
-                    this.Write("Bridge.is($e, " + exceptionType + ")");
+                    this.Write(string.Format("Bridge.is({0}, {1})", varName, exceptionType));
                     this.WriteCloseParentheses();
                     this.WriteSpace();
                 }
@@ -351,7 +360,8 @@ namespace Bridge.Translator
 
                 if (clause.VariableName.IsNotEmpty())
                 {
-                    this.Write(clause.VariableName + " = $e;");
+                    this.Write(clause.VariableName + " = " + varName);
+                    this.WriteSemiColon();
                     this.WriteNewLine();
                 }
 
@@ -368,7 +378,8 @@ namespace Bridge.Translator
             {
                 this.WriteElse();
                 this.BeginBlock();
-                this.Write("throw $e;");
+                this.Write("throw " + varName);
+                this.WriteSemiColon();
                 this.WriteNewLine();
                 this.EndBlock();
                 this.WriteNewLine();
@@ -376,6 +387,7 @@ namespace Bridge.Translator
 
             this.EndBlock();
             this.WriteNewLine();
+            this.Emitter.CatchBlockVariable = oldVar;
         }
     }
 

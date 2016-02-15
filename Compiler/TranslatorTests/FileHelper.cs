@@ -15,12 +15,16 @@ namespace Bridge.Translator.Tests
 
         public static string GetRelativeToCurrentDirPath(string relativePath)
         {
-            return FileHelper.CombineRelativePath(Directory.GetCurrentDirectory(), relativePath);
+            var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
+
+            location = Path.GetDirectoryName(location);
+
+            return FileHelper.CombineRelativePath(location, relativePath);
         }
 
         public static string GetRelativeToCurrentDirPath(params string[] relativePaths)
         {
-            return FileHelper.GetRelativeToCurrentDirPath(string.Join("\\", relativePaths));
+            return FileHelper.GetRelativeToCurrentDirPath(string.Join(Path.DirectorySeparatorChar.ToString(), relativePaths));
         }
 
         public static string ReadProjectOutputFolder(string configurationName, string projectFileFullName)
@@ -30,6 +34,7 @@ namespace Bridge.Translator.Tests
             var opnodes = from n in doc.Descendants()
                           where n.Name.LocalName == "OutputPath"
                           select n;
+
             var nodes = from n in doc.Descendants()
                         where n.Name.LocalName == "OutputPath" &&
                               n.Parent.Attribute("Condition").Value.Contains(configurationName)
@@ -41,6 +46,7 @@ namespace Bridge.Translator.Tests
             }
 
             var path = nodes.First().Value;
+
             return path;
         }
     }

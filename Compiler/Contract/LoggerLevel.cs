@@ -1,5 +1,3 @@
-using System;
-
 namespace Bridge.Contract
 {
     public enum LoggerLevel

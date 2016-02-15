@@ -1,0 +1,10 @@
+﻿{
+  "output": "..\\Runner\\Batch2",
+  "cleanOutputFolderBeforeBuild": true,
+  "outputFormatting": "Formatted",
+  "fileName": "code.js",
+  "outputBy": "Project",
+  "loggerLevel": "Info",
+
+  "useTypedArrays": true
+}

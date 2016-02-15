@@ -12,14 +12,14 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A C# to JavaScript compiler. Write modern mobile and web apps in C#. Run them anywhere with JavaScript.</description>
     <summary>A C# to JavaScript compiler. Write modern mobile and web apps in C#. Run them anywhere in JavaScript with Bridge.NET.</summary>
-    <copyright>Copyright (c) 2008-2015, Object.NET, Inc. (http://object.net/). All rights reserved.</copyright>
+    <copyright>Copyright (c) 2008-2016, Object.NET, Inc. (http://object.net/). All rights reserved.</copyright>
     <tags>bridge bridge.net bridge js javascript C# csharp mobile ios asp.net aspnet mvc aspnetmvc web transpiler compiler object.net</tags>
     <dependencies>
       <dependency id="Bridge.Contract" version="1.11.0" />
       <dependency id="AjaxMin" version="5.14.5506.26202" />
       <dependency id="Bridge.NRefactory" version="5.5.2" />
-      <dependency id="Mono.Cecil" version="0.9.5.4" />
-      <dependency id="Newtonsoft.Json" version="7.0.1" />
+      <dependency id="Mono.Cecil" version="0.9.6.1" />
+      <dependency id="Newtonsoft.Json" version="8.0.2" />
       <dependency id="Object.NET.Utilities" version="2.5.0" />
       <dependency id="TopologicalSorting" version="1.0.1.0" />
     </dependencies>
@@ -28,10 +28,10 @@
   </metadata>
   <files>
     <!--content-->
-    <file src="..\..\..\Bridge\Bridge\build\package\LICENSE.txt" target="content\App_Readme\Bridge.NET\LICENSE.txt"/>
+    <file src="..\..\LICENSE" target="content\App_Readme\Bridge.NET\LICENSE" />
 
     <!--NET40-->
-    <file src="..\..\..\Bridge\Compiler\Translator\bin\Release\Bridge.Translator.dll" target="lib\net40\Bridge.Translator.dll"/>
-    <file src="..\..\..\Bridge\Compiler\Translator\bin\Release\Bridge.Translator.pdb" target="lib\net40\pdb\Bridge.Translator.pdb"/>
+    <file src="..\..\Compiler\Translator\bin\Release\Bridge.Translator.dll" target="lib\net40\Bridge.Translator.dll" />
+    <file src="..\..\Compiler\Translator\bin\Release\Bridge.Translator.pdb" target="lib\net40\pdb\Bridge.Translator.pdb" />
   </files>
 </package>

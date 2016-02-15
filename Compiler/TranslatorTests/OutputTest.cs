@@ -50,8 +50,8 @@ namespace Bridge.Translator.Tests
 
         private static Dictionary<string, CompareMode> SpecialFiles = new Dictionary<string, CompareMode>
         {
-            { "bridge.js", CompareMode.Presence},
-            { "bridge.min.js", CompareMode.Presence}
+            { "bridge.js", CompareMode.Presence },
+            { "bridge.min.js", CompareMode.Presence }
         };
 
         private void GetPaths(string folder)
@@ -65,10 +65,15 @@ namespace Bridge.Translator.Tests
             ReferenceFolder = Path.Combine(ProjectFolder, @"Bridge\Reference");
         }
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
-            var logFiles = Directory.GetFiles(Directory.GetCurrentDirectory(), LogFileNameWithoutExtention + ".*", SearchOption.AllDirectories);
+            var currentFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+            Directory.SetCurrentDirectory(currentFolder);
+
+            var logFiles = Directory.GetFiles(currentFolder, LogFileNameWithoutExtention + ".*", SearchOption.AllDirectories);
+
             foreach (var logFile in logFiles)
             {
                 File.Delete(logFile);
@@ -95,7 +100,11 @@ namespace Bridge.Translator.Tests
         [TestCase("18", true, true, TestName = "OutputTest 18 - Features")]
         public void Test(string folder, bool isToTranslate, bool useSpecialFileCompare)
         {
-            var logger = new Logger("Bridge.Test.Runner", true, SimpleFileLoggerWriter.Instance, new ConsoleLoggerWriter());
+            var logDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+            Directory.SetCurrentDirectory(logDir);
+
+            var logger = new Logger("Bridge.Test.Runner", true, new SimpleFileLoggerWriter(logDir), new ConsoleLoggerWriter());
 
             GetPaths(folder);
 

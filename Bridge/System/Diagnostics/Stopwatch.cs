@@ -1,49 +1,48 @@
-using System.Runtime.CompilerServices;
 using Bridge;
 
-namespace System.Diagnostics 
+namespace System.Diagnostics
 {
-	[External]
-	[Namespace("Bridge")]
-	public class Stopwatch 
+    [External]
+    [Namespace("Bridge")]
+    public class Stopwatch
     {
-		public static readonly long Frequency = 0;
-		public static readonly bool IsHighResolution = false;
+        public static readonly long Frequency = 0;
+        public static readonly bool IsHighResolution = false;
 
-	    public static extern Stopwatch StartNew();
+        public static extern Stopwatch StartNew();
 
-        public extern TimeSpan Elapsed 
+        public extern TimeSpan Elapsed
         {
-		    [Name("timeSpan")] 
+            [Name("timeSpan")]
             get;
-		}
+        }
 
-		public extern long ElapsedMilliseconds 
+        public extern long ElapsedMilliseconds
         {
-			[Name("milliseconds")]
-			get;
-		}
+            [Name("milliseconds")]
+            get;
+        }
 
-		public extern long ElapsedTicks 
+        public extern long ElapsedTicks
         {
-			[Name("ticks")]
-			get;
-		}
+            [Name("ticks")]
+            get;
+        }
 
-		[FieldProperty]
-		public extern bool IsRunning 
+        [FieldProperty]
+        public extern bool IsRunning
         {
-			get;
-		}
+            get;
+        }
 
-	    public extern void Reset();
+        public extern void Reset();
 
-	    public extern void Start();
+        public extern void Start();
 
-	    public extern void Stop();
+        public extern void Stop();
 
-	    public extern void Restart();
+        public extern void Restart();
 
-	    public extern static long GetTimestamp();
+        public extern static long GetTimestamp();
     }
 }

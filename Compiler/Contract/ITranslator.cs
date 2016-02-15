@@ -1,6 +1,5 @@
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
-using System;
 using System.Collections.Generic;
 
 namespace Bridge.Contract
@@ -144,9 +143,9 @@ namespace Bridge.Contract
         void Flush(string outputPath, string fileName);
 
         /// <summary>
-        /// Indicates whether strict mode and global header will be added to generated script files
+        /// Indicates whether strict mode will be added to generated script files
         /// </summary>
-        bool NoStrictModeAndGlobal
+        bool NoStrictMode
         {
             get;
             set;

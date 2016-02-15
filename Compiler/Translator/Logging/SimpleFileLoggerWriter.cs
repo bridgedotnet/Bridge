@@ -6,72 +6,92 @@ using Bridge.Contract;
 
 namespace Bridge.Translator.Logging
 {
-    public sealed class SimpleFileLoggerWriter : ILogger, IDisposable
+    public class SimpleFileLoggerWriter : ILogger, IDisposable
     {
-        public static SimpleFileLoggerWriter Instance
-        {
-            get
-            {
-                return Nested.instance;
-            }
-        }
+        public string BaseDirectory { get; private set; }
+        public string FullName { get; private set; }
 
-        private class Nested
-        {
-            // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
-            static Nested()
-            {
-            }
-
-            internal static readonly SimpleFileLoggerWriter instance = new SimpleFileLoggerWriter();
-        }
-
-        private TextWriter Writer
-        {
-            get;
-            set;
-        }
 
         private const string LoggerFileName = "bridge.log";
         private const int LoggerFileMaxLength = 16 * 1024 * 1024;
 
-        private SimpleFileLoggerWriter()
+        public SimpleFileLoggerWriter()
         {
-            var loggerFile = new FileInfo(LoggerFileName);
+            CreateLogger();
+        }
 
-            if (loggerFile.Exists && loggerFile.Length > LoggerFileMaxLength)
+        public SimpleFileLoggerWriter(string baseDir)
+        {
+            this.BaseDirectory = Path.GetDirectoryName(baseDir);
+
+            CreateLogger();
+        }
+
+        private void CreateLogger()
+        {
+            if (string.IsNullOrEmpty(this.BaseDirectory))
             {
-                loggerFile.Delete();
+                this.FullName = LoggerFileName;
+            }
+            else
+            {
+                this.FullName = Path.Combine(this.BaseDirectory, LoggerFileName);
             }
 
-            Writer = new StreamWriter(
-                File.Open(LoggerFileName, FileMode.Append, FileAccess.Write, FileShare.ReadWrite | FileShare.Delete),
-                Encoding.UTF8
-            );
+            try
+            {
+                var loggerFile = new FileInfo(this.FullName);
+
+                if (!loggerFile.Directory.Exists)
+                {
+                    loggerFile.Directory.Create();
+                }
+
+                if (loggerFile.Exists && loggerFile.Length > LoggerFileMaxLength)
+                {
+                    loggerFile.Delete();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
 
-        private void Write(string s)
+        private void WriteToLogFile(string message, bool useWriteLine)
         {
-            Writer.Write(s);
-            Writer.Flush();
+            try
+            {
+                FileInfo file = new FileInfo(this.FullName);
+                using (Stream stream = file.Open(FileMode.Append, FileAccess.Write, FileShare.Write | FileShare.ReadWrite | FileShare.Delete))
+                {
+                    using (StreamWriter writer = new StreamWriter(stream, Encoding.UTF8))
+                    {
+                        stream.Position = stream.Length;
+
+                        if (useWriteLine)
+                        {
+                            writer.WriteLine(message);
+                        }
+                        else
+                        {
+                            writer.Write(message);
+                        }
+
+                        writer.Flush();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                WriteLine(ex.ToString());
+            }
         }
 
-        private void Write(string format, params object[] arg)
-        {
-            Writer.Write(format, arg);
-            Writer.Flush();
-        }
 
         private void WriteLine(string s)
         {
-            Writer.WriteLine(s);
-            Writer.Flush();
-        }
-
-        private void WriteLine(string format, params object[] arg)
-        {
-            Writer.WriteLine(format, arg);
-            Writer.Flush();
+            WriteToLogFile(s, true);
         }
 
         public void Error(string message)
@@ -96,7 +116,13 @@ namespace Bridge.Translator.Logging
 
         public void Dispose()
         {
-            Writer.Close();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            return;
         }
     }
 }

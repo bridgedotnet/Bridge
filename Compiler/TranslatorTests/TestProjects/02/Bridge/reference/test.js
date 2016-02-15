@@ -1,8 +1,8 @@
 ﻿/*
- * @version   : 1.10.4 - Bridge.NET
+ * @version   : 1.11.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2015-12-31
- * @copyright : Copyright (c) 2008-2015, Object.NET, Inc. (http://object.net/). All rights reserved.
+ * @date      : 2016-02-15
+ * @copyright : Copyright (c) 2008-2016, Object.NET, Inc. (http://object.net/). All rights reserved.
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE.
  */
 
@@ -544,6 +544,9 @@
         equals: function (a, b) {
             if (a && Bridge.isFunction(a.equals) && a.equals.length === 1) {
                 return a.equals(b);
+            }
+            if (b && Bridge.isFunction(b.equals) && b.equals.length === 1) {
+                return a.equals(b);
             } else if (Bridge.isDate(a) && Bridge.isDate(b)) {
                 return a.valueOf() === b.valueOf();
             } else if (Bridge.isNull(a) && Bridge.isNull(b)) {
@@ -634,11 +637,19 @@
                 return Bridge.compare(a.valueOf(), b.valueOf());
             }
 
-            if (safe && !a.compareTo) {
+            if (Bridge.isFunction(a.compareTo)) {
+                return a.compareTo(b);
+            }
+
+            if (Bridge.isFunction(b.compareTo)) {
+                return -b.compareTo(a);
+            }
+
+            if (safe) {
                 return 0;
             }
 
-            return a.compareTo(b);
+            throw new Bridge.Exception("Cannot compare items");
         },
 
         equalsT: function (a, b) {
@@ -650,7 +661,7 @@
                 return a.valueOf() === b.valueOf();
             }
 
-            return a.equalsT(b);
+            return a.equalsT ? a.equalsT(b) : b.equalsT(a);
         },
 
         format: function (obj, formatString) {
@@ -4892,6 +4903,34 @@ var date = {
                                      date.getMinutes(),
                                      date.getSeconds(),
                                      date.getMilliseconds()));
+        },
+
+        subdt: function(d, t) {
+            return Bridge.hasValue(d) && Bridge.hasValue(t) ? (new Date(d - new Date(t.ticks / 10000))) : null;
+        },
+
+        adddt: function(d, t) {
+            return Bridge.hasValue(d) && Bridge.hasValue(t) ? (new Date(d.getTime() + (t.ticks / 10000))) : null;
+        },
+
+        subdd: function (a, b) {
+            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (new Bridge.TimeSpan((a - b) * 10000)) : null;
+        },
+
+        gt: function (a, b) {
+            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a > b) : false;
+        },
+
+        gte: function (a, b) {
+            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a >= b) : false;
+        },
+
+        lt: function (a, b) {
+            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a < b) : false;
+        },
+
+        lte: function (a, b) {
+            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a <= b) : false;
         }
     };
 
@@ -4934,6 +4973,46 @@ var date = {
 
             getDefaultValue: function () {
                 return new Bridge.TimeSpan(0);
+            },
+
+            neg: function (t) {
+                return Bridge.hasValue(t) ? (new Bridge.TimeSpan(-t.ticks)) : null;
+            },
+
+            sub: function (t1, t2) {
+                return Bridge.hasValue(t1) && Bridge.hasValue(t2) ? (new Bridge.TimeSpan(t1.ticks - t2.ticks)) : null;
+            },
+
+            eq: function(t1, t2) {
+                return Bridge.hasValue(t1) && Bridge.hasValue(t2) ? (t1.ticks === t2.ticks) : null;
+            },
+
+            neq: function (t1, t2) {
+                return Bridge.hasValue(t1) && Bridge.hasValue(t2) ? (t1.ticks !== t2.ticks) : null;
+            },
+
+            plus: function (t) {
+                return Bridge.hasValue(t) ? (new Bridge.TimeSpan(t.ticks)) : null;
+            },
+
+            add: function (t1, t2) {
+                return Bridge.hasValue(t1) && Bridge.hasValue(t2) ? (new Bridge.TimeSpan(t1.ticks + t2.ticks)) : null;
+            },
+
+            gt: function (a, b) {
+                return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a.ticks > b.ticks) : false;
+            },
+
+            gte: function (a, b) {
+                return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a.ticks >= b.ticks) : false;
+            },
+
+            lt: function (a, b) {
+                return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a.ticks < b.ticks) : false;
+            },
+
+            lte: function (a, b) {
+                return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a.ticks <= b.ticks) : false;
             }
         },
 
@@ -6364,15 +6443,18 @@ Bridge.Class.generic('Bridge.KeyValuePair$2', function (TKey, TValue) {
         toString: function() {
             var s = "[";
             
-            if( this.key != null) {
+            if (this.key != null) {
                 s += this.key.toString();
             }
 
             s += ", ";
-            if(this.value != null) {
+
+            if (this.value != null) {
                 s += this.value.toString();
             }
+
             s += "]";
+
             return s;
         }
     }));
@@ -7223,15 +7305,15 @@ Bridge.Class.generic('Bridge.ReadOnlyCollection$1', function (T) {
             return this.status === Bridge.TaskStatus.faulted;
         },
 
-        _getResult: function (await) {
+        _getResult: function (awaiting) {
             switch (this.status) {
                 case Bridge.TaskStatus.ranToCompletion:
                     return this.result;
                 case Bridge.TaskStatus.canceled:
                     var ex = new Bridge.TaskCanceledException(null, this);
-                    throw await ? ex : new Bridge.AggregateException(null, [ex]);
+                    throw awaiting ? ex : new Bridge.AggregateException(null, [ex]);
                 case Bridge.TaskStatus.faulted:
-                    throw await ? (this.exception.innerExceptions.getCount() > 0 ? this.exception.innerExceptions.get(0) : null) : this.exception;
+                    throw awaiting ? (this.exception.innerExceptions.getCount() > 0 ? this.exception.innerExceptions.get(0) : null) : this.exception;
                 default:
                     throw new Bridge.InvalidOperationException("Task is not yet completed.");
             }
@@ -9932,11 +10014,21 @@ Bridge.Class.generic('Bridge.ReadOnlyCollection$1', function (T) {
         var sum = 0;
         var count = 0;
         this.forEach(function (x) {
-            sum += selector(x);
+            x = selector(x);
+
+            if (x instanceof Bridge.Decimal) {
+                sum = x.add(sum);
+            }
+            else if (sum instanceof Bridge.Decimal) {
+                sum = sum.add(x);
+            } else {
+                sum += x;
+            }
+            
             ++count;
         });
 
-        return sum / count;
+        return sum instanceof Bridge.Decimal ? sum.div(count) : (sum / count);
     };
 
     Enumerable.prototype.nullableAverage = function (selector) {
@@ -10011,7 +10103,15 @@ Bridge.Class.generic('Bridge.ReadOnlyCollection$1', function (T) {
     // Overload:function (selector)
     Enumerable.prototype.sum = function (selector) {
         if (selector == null) selector = Functions.Identity;
-        return this.select(selector).aggregate(0, function (a, b) { return a + b; });
+        return this.select(selector).aggregate(0, function(a, b) {
+             if (a instanceof Bridge.Decimal) {
+                 return a.add(b);
+             }
+             if (b instanceof Bridge.Decimal) {
+                 return b.add(a);
+             }
+             return a + b;
+        });
     };
 
     Enumerable.prototype.nullableSum = function (selector) {
@@ -11068,8 +11168,6 @@ Bridge.Class.generic('Bridge.ReadOnlyCollection$1', function (T) {
 
 })(this);
 
-
-/* global Bridge */
 
 (function (globals) {
     "use strict";

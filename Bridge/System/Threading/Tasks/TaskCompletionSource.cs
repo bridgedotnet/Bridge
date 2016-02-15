@@ -1,39 +1,36 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Text;
 using Bridge;
+using System.Collections.Generic;
 
-namespace System.Threading.Tasks 
- {
-	[External]
-	[IgnoreGeneric]
-	[Namespace("Bridge")]
+namespace System.Threading.Tasks
+{
+    [External]
+    [IgnoreGeneric]
+    [Namespace("Bridge")]
     [Name("Bridge.TaskCompletionSource")]
-	public class TaskCompletionSource<TResult> {
-		public extern TaskCompletionSource();
+    public class TaskCompletionSource<TResult>
+    {
+        public extern TaskCompletionSource();
 
-	    [FieldProperty]
-	    public extern Task<TResult> Task
-	    {
-	        get;
-	    }
+        [FieldProperty]
+        public extern Task<TResult> Task
+        {
+            get;
+        }
 
-		public extern void SetCanceled();
+        public extern void SetCanceled();
 
-		public extern void SetException(IEnumerable<Exception> exceptions);
+        public extern void SetException(IEnumerable<Exception> exceptions);
 
-		public extern void SetException(Exception exception);
+        public extern void SetException(Exception exception);
 
-		public extern void SetResult(TResult result);
+        public extern void SetResult(TResult result);
 
-		public extern bool TrySetCanceled();
+        public extern bool TrySetCanceled();
 
-		public extern bool TrySetException(IEnumerable<Exception> exceptions);
+        public extern bool TrySetException(IEnumerable<Exception> exceptions);
 
-		public extern bool TrySetException(Exception exception);
+        public extern bool TrySetException(Exception exception);
 
-		public extern bool TrySetResult(TResult result);
-	}
+        public extern bool TrySetResult(TResult result);
+    }
 }

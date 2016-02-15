@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
+
+    <!-- Download NuGet.exe if it does not already exist -->
+    <DownloadNuGetExe Condition=" '$(DownloadNuGetExe)' == '' ">false</DownloadNuGetExe>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(OS)' == 'Windows_NT'">
+    <!-- Windows specific commands -->
+    <NuGetToolsPath>$([System.IO.Path]::Combine($(SolutionDir), ".nuget"))</NuGetToolsPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(OS)' != 'Windows_NT'">
+    <!-- We need to launch nuget.exe with the mono command if we're not on windows -->
+    <NuGetToolsPath>$(SolutionDir).nuget</NuGetToolsPath>
+  </PropertyGroup>
+
+
+  <PropertyGroup>
+    <!-- NuGet command -->
+    <NuGetExePath Condition=" '$(NuGetExePath)' == '' ">$(NuGetToolsPath)\NuGet.exe</NuGetExePath>
+
+    <NuGetCommand Condition=" '$(OS)' == 'Windows_NT'">"$(NuGetExePath)"</NuGetCommand>
+    <NuGetCommand Condition=" '$(OS)' != 'Windows_NT' ">mono --runtime=v4.0.30319 "$(NuGetExePath)"</NuGetCommand>
+
+
+    <RequireConsentSwitch Condition=" $(RequireRestoreConsent) == 'true' ">-RequireConsent</RequireConsentSwitch>
+    <NonInteractiveSwitch Condition=" '$(VisualStudioVersion)' != '' AND '$(OS)' == 'Windows_NT' ">-NonInteractive</NonInteractiveSwitch>
+
+    <PaddedSolutionDir Condition=" '$(OS)' == 'Windows_NT'">"$(SolutionDir) "</PaddedSolutionDir>
+    <PaddedSolutionDir Condition=" '$(OS)' != 'Windows_NT' ">"$(SolutionDir)"</PaddedSolutionDir>
+
+    <!-- Make the build depend on restore packages -->
+    <BuildDependsOn Condition="$(NuGetBuildPackage) == 'true'">
+      $(BuildDependsOn);
+      BuildPackage;
+    </BuildDependsOn>
+  </PropertyGroup>
+
+  <Target Name="CheckPrerequisites">
+    <!-- Raise an error if we're unable to locate nuget.exe  -->
+    <Error Condition="'$(DownloadNuGetExe)' != 'true' AND !Exists('$(NuGetExePath)')" Text="Unable to locate '$(NuGetExePath)'" />
+    <!--
+        Take advantage of MsBuild's build dependency tracking to make sure that we only ever download nuget.exe once.
+        This effectively acts as a lock that makes sure that the download operation will only happen once and all
+        parallel builds will have to wait for it to complete.
+        -->
+    <MsBuild Targets="_DownloadNuGet" Projects="$(MSBuildThisFileFullPath)" Properties="Configuration=NOT_IMPORTANT;DownloadNuGetExe=$(DownloadNuGetExe)" />
+  </Target>
+
+  <Target Name="_DownloadNuGet">
+    <DownloadNuGet OutputFilename="$(NuGetExePath)" Condition=" '$(DownloadNuGetExe)' == 'true' AND !Exists('$(NuGetExePath)')" />
+  </Target>
+
+  <Target Name="BuildPackage" DependsOnTargets="CheckPrerequisites">
+    <PropertyGroup>
+      <NuGetUseExplicitVersion Condition=" '$(NuGetUseExplicitVersion)' == '' ">false</NuGetUseExplicitVersion>
+      <!-- Set default NuGetPackageOutputDir if not defined-->
+      <!-- NuGetPackageOutputDir == true means package version will be taken from nuspec-->
+      <!-- NuGetPackageOutputDir == false means package version will be taken from project's output assembly version-->
+      <NuGetPackageOutputDir Condition="$(NuGetPackageOutputDir) == '' Or $(NuGetPackageOutputDir) == '*Undefined*'">$(ProjectDir)$(OutDir)</NuGetPackageOutputDir>
+      <NuGetPackageOutputDir>$(NuGetPackageOutputDir.Trim('\\'))</NuGetPackageOutputDir>
+    </PropertyGroup>
+
+    <GetAssemblyIdentity Condition="$(NuGetUseExplicitVersion) == 'false'" AssemblyFiles="$(ProjectDir)$(OutDir)$(AssemblyName).dll">
+      <Output TaskParameter="Assemblies" ItemName="AssemblyInfo"/>
+    </GetAssemblyIdentity>
+
+    <Message Condition="$(NuGetUseExplicitVersion) == 'false'" Text="Retrieved assembly version from $(ProjectDir)$(OutDir)$(AssemblyName).dll %(AssemblyInfo.Version)" Importance="high" />
+    <Message Condition="$(NuGetUseExplicitVersion) == 'true'" Text="Will use package version from nuspec" Importance="high" />
+
+    <PropertyGroup>
+      <!--For $(NuGetUseExplicitVersion) == 'false' scenario, define nuget.exe VErsion parameter into NuGetPackageVersion as "-Version " + major.minor.build-->
+      <TrimmedAssemblyVersion  Condition=" '%(AssemblyInfo.Version)' != '' And '%(AssemblyInfo.Version)' != '*Undefined*' ">$([System.Version]::Parse(%(AssemblyInfo.Version)).ToString(3))</TrimmedAssemblyVersion>
+      <NuGetPackageVersion Condition=" '%(AssemblyInfo.Version)' != '' And '%(AssemblyInfo.Version)' != '*Undefined*' "> -Version "$(TrimmedAssemblyVersion)"</NuGetPackageVersion>
+      <NuGetPackageVersion Condition=" '%(AssemblyInfo.Version)' == '' Or '%(AssemblyInfo.Version)' == '*Undefined*' "></NuGetPackageVersion>
+    </PropertyGroup>
+
+    <Message Condition="$(NuGetUseExplicitVersion) == 'false'" Text="Applying $(NuGetPackageVersion) for NuGet package %(NuGetPackageSourcePath.Path)" Importance="high" />
+
+    <Exec Command="$(NuGetCommand) pack  &quot;%(NuGetPackageSourcePath.Path)&quot;$(NuGetPackageVersion) -Properties &quot;Configuration=$(Configuration);Platform=$(Platform)&quot; $(NonInteractiveSwitch) -OutputDirectory &quot;$(NuGetPackageOutputDir)&quot; -NoDefaultExcludes"
+          Condition=" '$(OS)' != 'Windows_NT' " />
+
+    <Exec Command="$(NuGetCommand) pack  &quot;%(NuGetPackageSourcePath.Path)&quot;$(NuGetPackageVersion) -Properties &quot;Configuration=$(Configuration);Platform=$(Platform)&quot; $(NonInteractiveSwitch) -OutputDirectory &quot;$(NuGetPackageOutputDir)&quot; -NoDefaultExcludes"
+          LogStandardErrorAsError="true"
+          Condition=" '$(OS)' == 'Windows_NT' " />
+
+    <ItemGroup>
+      <NuGetPAckageOutputDirFiles Include="$(NuGetPackageOutputDir)\*.nupkg"/>
+    </ItemGroup>
+
+    <Copy
+      Condition="$(NuGetPackageCommonDir) != '' And $(NuGetPackageCommonDir) != '*Undefined*'"
+      SourceFiles="@(NuGetPAckageOutputDirFiles)"
+      DestinationFolder="$(NuGetPackageCommonDir)"
+      ContinueOnError="true"
+      />
+  </Target>
+
+  <UsingTask TaskName="DownloadNuGet" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <OutputFilename ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.Core" />
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Net" />
+      <Using Namespace="Microsoft.Build.Framework" />
+      <Using Namespace="Microsoft.Build.Utilities" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+                try {
+                    OutputFilename = Path.GetFullPath(OutputFilename);
+
+                    Log.LogMessage("Downloading latest version of NuGet.exe...");
+                    WebClient webClient = new WebClient();
+                    webClient.DownloadFile("https://www.nuget.org/nuget.exe", OutputFilename);
+
+                    return true;
+                }
+                catch (Exception ex) {
+                    Log.LogErrorFromException(ex);
+                    return false;
+                }
+            ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+</Project>

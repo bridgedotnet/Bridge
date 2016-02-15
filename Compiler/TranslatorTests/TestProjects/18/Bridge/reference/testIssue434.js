@@ -1,6 +1,4 @@
-﻿// Top;
-
-/* global Bridge */
+﻿// Top
 
 (function (globals) {
     "use strict";
@@ -64,4 +62,4 @@
     Bridge.init();
 })(this);
 
-// Bottom;
+// Bottom

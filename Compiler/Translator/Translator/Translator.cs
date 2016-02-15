@@ -610,7 +610,7 @@ namespace Bridge.Translator
             }
 
             var settings = MinifierCodeSettingsSafe;
-            if (this.NoStrictModeAndGlobal)
+            if (this.NoStrictMode)
             {
                 settings = settings.Clone();
                 settings.StrictMode = false;
