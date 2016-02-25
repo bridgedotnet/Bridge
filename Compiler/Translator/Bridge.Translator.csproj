@@ -179,6 +179,7 @@
     <Compile Include="Logging\ConsoleLoggerWriter.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Logging\FileLoggerWriter.cs" />
+    <Compile Include="Translator\InvocationInterceptor.cs" />
     <Compile Include="Translator\Plugins.cs" />
     <Compile Include="Translator\Translator.Config.cs" />
     <Compile Include="Translator\TranslatorProcessor.cs" />

@@ -8,7 +8,8 @@ using System.ComponentModel.Composition.Primitives;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-
+using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.NRefactory.Semantics;
 using Mono.Cecil;
 
 namespace Bridge.Translator
@@ -331,10 +332,47 @@ namespace Bridge.Translator
             IEnumerable<string> result = new List<string>();
             foreach (var plugin in this.Parts)
             {
-                result = result.Concat(plugin.GetConstructorInjectors(constructorBlock));
+                var answer = plugin.GetConstructorInjectors(constructorBlock);
+                if (answer != null)
+                {
+                    result = result.Concat(answer);    
+                }
             }
 
             return result;
+        }
+
+        private InvocationInterceptor defaultInterceptor;
+        private InvocationInterceptor GetInterceptor()
+        {
+            if (this.defaultInterceptor == null)
+            {
+                this.defaultInterceptor = new InvocationInterceptor();
+            }
+
+            this.defaultInterceptor.Cancel = false;
+            this.defaultInterceptor.Replacement = null;
+            return this.defaultInterceptor;
+        }
+
+        public IInvocationInterceptor OnInvocation(IAbstractEmitterBlock block, InvocationExpression expression, InvocationResolveResult resolveResult)
+        {
+            InvocationInterceptor interceptor = this.GetInterceptor();
+            
+            interceptor.Block = block;
+            interceptor.Expression = expression;
+            interceptor.ResolveResult = resolveResult;
+
+            foreach (var plugin in this.Parts)
+            {
+                plugin.OnInvocation(interceptor);
+                if (interceptor.Cancel)
+                {
+                    return interceptor;
+                }                
+            }
+
+            return interceptor;
         }
 
         public bool HasConstructorInjectors(IConstructorBlock constructorBlock)
