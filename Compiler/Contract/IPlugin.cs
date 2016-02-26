@@ -12,6 +12,8 @@ namespace Bridge.Contract
 
         void OnInvocation(IInvocationInterceptor interceptor);
 
+        void OnReference(IReferenceInterceptor interceptor);
+
         bool HasConstructorInjectors(IConstructorBlock constructorBlock);
 
         void OnConfigRead(IAssemblyInfo config);

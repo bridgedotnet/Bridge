@@ -342,22 +342,22 @@ namespace Bridge.Translator
             return result;
         }
 
-        private InvocationInterceptor defaultInterceptor;
-        private InvocationInterceptor GetInterceptor()
+        private InvocationInterceptor defaultInvocationInterceptor;
+        private InvocationInterceptor GetInvocationInterceptor()
         {
-            if (this.defaultInterceptor == null)
+            if (this.defaultInvocationInterceptor == null)
             {
-                this.defaultInterceptor = new InvocationInterceptor();
+                this.defaultInvocationInterceptor = new InvocationInterceptor();
             }
 
-            this.defaultInterceptor.Cancel = false;
-            this.defaultInterceptor.Replacement = null;
-            return this.defaultInterceptor;
+            this.defaultInvocationInterceptor.Cancel = false;
+            this.defaultInvocationInterceptor.Replacement = null;
+            return this.defaultInvocationInterceptor;
         }
 
         public IInvocationInterceptor OnInvocation(IAbstractEmitterBlock block, InvocationExpression expression, InvocationResolveResult resolveResult)
         {
-            InvocationInterceptor interceptor = this.GetInterceptor();
+            InvocationInterceptor interceptor = this.GetInvocationInterceptor();
             
             interceptor.Block = block;
             interceptor.Expression = expression;
@@ -370,6 +370,39 @@ namespace Bridge.Translator
                 {
                     return interceptor;
                 }                
+            }
+
+            return interceptor;
+        }
+
+        private ReferenceInterceptor defaultReferenceInterceptor;
+        private ReferenceInterceptor GetReferenceInterceptor()
+        {
+            if (this.defaultReferenceInterceptor == null)
+            {
+                this.defaultReferenceInterceptor = new ReferenceInterceptor();
+            }
+
+            this.defaultReferenceInterceptor.Cancel = false;
+            this.defaultReferenceInterceptor.Replacement = null;
+            return this.defaultReferenceInterceptor;
+        }
+
+        public IReferenceInterceptor OnReference(IAbstractEmitterBlock block, MemberReferenceExpression expression, MemberResolveResult resolveResult)
+        {
+            ReferenceInterceptor interceptor = this.GetReferenceInterceptor();
+
+            interceptor.Block = block;
+            interceptor.Expression = expression;
+            interceptor.ResolveResult = resolveResult;
+
+            foreach (var plugin in this.Parts)
+            {
+                plugin.OnReference(interceptor);
+                if (interceptor.Cancel)
+                {
+                    return interceptor;
+                }
             }
 
             return interceptor;

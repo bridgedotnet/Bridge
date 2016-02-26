@@ -17,6 +17,10 @@ namespace Bridge.Contract
         {
         }
 
+        public void OnReference(IReferenceInterceptor interceptor)
+        {
+        }
+
         public virtual bool HasConstructorInjectors(IConstructorBlock constructorBlock)
         {
             return false;

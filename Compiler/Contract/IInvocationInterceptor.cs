@@ -32,4 +32,33 @@ namespace Bridge.Contract
             set;
         }
     }
+
+    public interface IReferenceInterceptor
+    {
+        IAbstractEmitterBlock Block
+        {
+            get;
+        }
+
+        MemberReferenceExpression Expression
+        {
+            get;
+        }
+
+        MemberResolveResult ResolveResult
+        {
+            get;
+        }
+
+        string Replacement
+        {
+            get;
+        }
+
+        bool Cancel
+        {
+            get;
+            set;
+        }
+    }
 }

@@ -169,6 +169,16 @@ namespace Bridge.Translator
             MemberResolveResult member = resolveResult as MemberResolveResult;
             var globalTarget = member != null ? this.Emitter.IsGlobalTarget(member.Member) : null;
 
+            if (!(resolveResult is InvocationResolveResult) && member != null && member.Member is IMethod)
+            {
+                var interceptor = this.Emitter.Plugins.OnReference(this, this.MemberReferenceExpression, member);
+
+                if (interceptor.Cancel)
+                {
+                    return;
+                }
+            }
+
             if (globalTarget != null && globalTarget.Item1)
             {
                 var target = globalTarget.Item2;
