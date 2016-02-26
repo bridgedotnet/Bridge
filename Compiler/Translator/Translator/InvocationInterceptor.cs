@@ -69,4 +69,37 @@ namespace Bridge.Translator
             set;
         }
     }
+
+    public class ReferenceInterceptor : IReferenceInterceptor
+    {
+        public IAbstractEmitterBlock Block
+        {
+            get;
+            internal set;
+        }
+
+        public MemberReferenceExpression Expression
+        {
+            get;
+            internal set;
+        }
+
+        public MemberResolveResult ResolveResult
+        {
+            get;
+            internal set;
+        }
+
+        public string Replacement
+        {
+            get;
+            internal set;
+        }
+
+        public bool Cancel
+        {
+            get;
+            set;
+        }
+    }
 }
