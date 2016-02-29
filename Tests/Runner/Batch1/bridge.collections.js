@@ -1,6 +1,4 @@
-﻿/* global Bridge */
-
-(function (globals) {
+﻿(function (globals) {
     "use strict";
 
     Bridge.define('Bridge.Collections.BitArray', {
@@ -377,13 +375,11 @@
              * @param   {Bridge.IEnumerable$1}    source    The enumerable to convert.
              * @return  {Array.<T>}                         The resulting array.
              */
-            toArray: function (T) {
-                return Bridge.fn.bind(this, function (source) {
-                    var count = { };
-                    var results = Bridge.get(Bridge.Collections.EnumerableHelpers).toArray$1(T)(source, count);
-                    Bridge.Array.resize(results, count.v, T.getDefaultValue || Bridge.getDefaultValue(T));
-                    return results;
-                });
+            toArray: function (T, source) {
+                var count = { };
+                var results = Bridge.get(Bridge.Collections.EnumerableHelpers).toArray$1(T, source, count);
+                Bridge.Array.resize(results, count.v, T.getDefaultValue || Bridge.getDefaultValue(T));
+                return results;
             },
             /**
              * Converts an enumerable to an array using the same logic as does List{T}.
@@ -397,59 +393,57 @@
              * @return  {Array.<T>}                         The resulting array.  The length of the array may be greater than <b />,
              which is the actual number of elements in the array.
              */
-            toArray$1: function (T) {
-                return Bridge.fn.bind(this, function (source, length) {
-                    var en = Bridge.getEnumerator(source, "$1");
-                    try {
-                        if (en.moveNext()) {
-                            var DefaultCapacity = 4;
-                            var arr = Bridge.Array.init(DefaultCapacity, null);
-                            arr[0] = en.getCurrent$1();
-                            var count = 1;
+            toArray$1: function (T, source, length) {
+                var en = Bridge.getEnumerator(source, "$1");
+                try {
+                    if (en.moveNext()) {
+                        var DefaultCapacity = 4;
+                        var arr = Bridge.Array.init(DefaultCapacity, null);
+                        arr[0] = en.getCurrent$1();
+                        var count = 1;
     
-                            while (en.moveNext()) {
-                                if (count === arr.length) {
-                                    // MaxArrayLength is defined in Array.MaxArrayLength and in gchelpers in CoreCLR.
-                                    // It represents the maximum number of elements that can be in an array where
-                                    // the size of the element is greater than one byte; a separate, slightly larger constant,
-                                    // is used when the size of the element is one.
-                                    var MaxArrayLength = 2146435071;
+                        while (en.moveNext()) {
+                            if (count === arr.length) {
+                                // MaxArrayLength is defined in Array.MaxArrayLength and in gchelpers in CoreCLR.
+                                // It represents the maximum number of elements that can be in an array where
+                                // the size of the element is greater than one byte; a separate, slightly larger constant,
+                                // is used when the size of the element is one.
+                                var MaxArrayLength = 2146435071;
     
-                                    // This is the same growth logic as in List<T>:
-                                    // If the array is currently empty, we make it a default size.  Otherwise, we attempt to
-                                    // double the size of the array.  Doubling will overflow once the size of the array reaches
-                                    // 2^30, since doubling to 2^31 is 1 larger than Int32.MaxValue.  In that case, we instead
-                                    // constrain the length to be MaxArrayLength (this overflow check works because of of the
-                                    // cast to uint).  Because a slightly larger constant is used when T is one byte in size, we
-                                    // could then end up in a situation where arr.Length is MaxArrayLength or slightly larger, such
-                                    // that we constrain newLength to be MaxArrayLength but the needed number of elements is actually
-                                    // larger than that.  For that case, we then ensure that the newLength is large enough to hold
-                                    // the desired capacity.  This does mean that in the very rare case where we've grown to such a
-                                    // large size, each new element added after MaxArrayLength will end up doing a resize.
-                                    var newLength = count << 1;
-                                    if (Bridge.cast(newLength, Bridge.Int) > MaxArrayLength) {
-                                        newLength = MaxArrayLength <= count ? count + 1 : MaxArrayLength;
-                                    }
-    
-                                    Bridge.Array.resize(arr, newLength, T.getDefaultValue || Bridge.getDefaultValue(T));
+                                // This is the same growth logic as in List<T>:
+                                // If the array is currently empty, we make it a default size.  Otherwise, we attempt to
+                                // double the size of the array.  Doubling will overflow once the size of the array reaches
+                                // 2^30, since doubling to 2^31 is 1 larger than Int32.MaxValue.  In that case, we instead
+                                // constrain the length to be MaxArrayLength (this overflow check works because of of the
+                                // cast to uint).  Because a slightly larger constant is used when T is one byte in size, we
+                                // could then end up in a situation where arr.Length is MaxArrayLength or slightly larger, such
+                                // that we constrain newLength to be MaxArrayLength but the needed number of elements is actually
+                                // larger than that.  For that case, we then ensure that the newLength is large enough to hold
+                                // the desired capacity.  This does mean that in the very rare case where we've grown to such a
+                                // large size, each new element added after MaxArrayLength will end up doing a resize.
+                                var newLength = count << 1;
+                                if (Bridge.cast(newLength, Bridge.Int) > MaxArrayLength) {
+                                    newLength = MaxArrayLength <= count ? count + 1 : MaxArrayLength;
                                 }
     
-                                arr[count++] = en.getCurrent$1();
+                                Bridge.Array.resize(arr, newLength, T.getDefaultValue || Bridge.getDefaultValue(T));
                             }
     
-                            length.v = count;
-                            return arr;
+                            arr[count++] = en.getCurrent$1();
                         }
-                    }
-                    finally {
-                        if (Bridge.hasValue(en)) {
-                            en.dispose();
-                        }
-                    }
     
-                    length.v = 0;
-                    return Bridge.Array.init(0, null);
-                });
+                        length.v = count;
+                        return arr;
+                    }
+                }
+                finally {
+                    if (Bridge.hasValue(en)) {
+                        en.dispose();
+                    }
+                }
+    
+                length.v = 0;
+                return Bridge.Array.init(0, null);
             }
         }
     });
@@ -1639,7 +1633,7 @@
                 throw new Bridge.ArgumentNullException("collection");
             }
             var length = { };
-            this._array = Bridge.get(Bridge.Collections.EnumerableHelpers).toArray$1(T)(collection, length);
+            this._array = Bridge.get(Bridge.Collections.EnumerableHelpers).toArray$1(T, collection, length);
             this._size = length.v;
         },
         getCount: function () {
@@ -1719,8 +1713,8 @@
                 Bridge.Array.copy(this._array, 0, array, arrayIndex, this._size);
                 Bridge.Array.reverse(array, arrayIndex, this._size);
             }
-            catch ($e) {
-                $e = Bridge.Exception.create($e);
+            catch ($e1) {
+                $e1 = Bridge.Exception.create($e1);
                 throw new Bridge.ArgumentException("Target array type is not compatible with the type of items in the collection.");
             }
         },
