@@ -13,11 +13,11 @@ namespace Bridge.Contract
             return null;
         }
 
-        public void OnInvocation(IInvocationInterceptor interceptor)
+        public virtual void OnInvocation(IInvocationInterceptor interceptor)
         {
         }
 
-        public void OnReference(IReferenceInterceptor interceptor)
+        public virtual void OnReference(IReferenceInterceptor interceptor)
         {
         }
 
