@@ -59,11 +59,24 @@ namespace Bridge.Translator
 
                 if (assemblyLoaded != null)
                 {
-                    this.Logger.Trace("Resolved for " + assemblyLoaded.FullName);
+                    this.Logger.Trace("Resolved for " + assemblyLoaded.FullName + " in the loaded domain assemblies");
                     return assemblyLoaded;
                 }
 
-                this.Logger.Trace("Did not resolve assembly " + args.Name);
+                this.Logger.Trace("Did not find the assembly " + args.Name + " in the loaded domain assemblies");
+
+                if (args.RequestingAssembly != null)
+                {
+                    assemblyLoaded = Plugins.LoadAssemblyFromResources(this.Logger, args.RequestingAssembly, askedAssembly);
+
+                    if (assemblyLoaded != null)
+                    {
+                        this.Logger.Trace("Resolved for " + assemblyLoaded.FullName + " in " + args.RequestingAssembly.FullName + " resources");
+                        return assemblyLoaded;
+                    }
+                }
+
+                this.Logger.Trace("Did not resolve assembly " + args.Name + " in " + args.RequestingAssembly.FullName + " resources");
 
                 return null;
             }
@@ -247,9 +260,66 @@ namespace Bridge.Translator
             return trimmedName;
         }
 
+        public static string TrimAssemblyName(string assemblyName)
+        {
+            var trimmedName = assemblyName;
+
+            var i = trimmedName.LastIndexOf(".dll");
+            if (i >= 0)
+            {
+                trimmedName = trimmedName.Remove(i, 4);
+            }
+
+            return trimmedName;
+        }
+
+        public static Assembly LoadAssemblyFromResources(ILogger logger, Assembly sourceAssembly, AssemblyName assemblyName)
+        {
+            if (assemblyName == null)
+            {
+                logger.Warn("Cannot try to load assembly from resources as the assemblyName is null");
+            }
+
+            if (sourceAssembly == null)
+            {
+                logger.Warn("Cannot try to load assembly " + assemblyName.FullName + " from resources as the source assembly is null");
+            }
+
+            logger.Trace("Trying to resolve " + assemblyName.FullName + " in the resources of " + sourceAssembly.FullName + " ...");
+
+            logger.Trace("Will use assembly name " + assemblyName.Name);
+
+            var resourceNames = sourceAssembly.GetManifestResourceNames();
+
+            foreach (var resourceName in resourceNames)
+            {
+                var trimmedResourceName = Plugins.TrimAssemblyName(resourceName);
+
+                if (trimmedResourceName == assemblyName.Name)
+                {
+                    logger.Trace("Found resource with name " + resourceName);
+
+                    using (var resourcesStream = sourceAssembly.GetManifestResourceStream(resourceName))
+                    {
+                        var ba = new byte[(int)resourcesStream.Length];
+                        resourcesStream.Read(ba, 0, (int)resourcesStream.Length);
+
+                        logger.Trace("Read the assembly resource stream of " + resourcesStream.Length + " bytes length");
+
+                        return CheckIfAssemblyLoaded(logger, ba, null, resourceName);
+                    }
+                }
+            }
+
+            return null;
+
+        }
+
+
         public static Assembly CheckIfAssemblyLoaded(ILogger logger, byte[] ba, AssemblyName assemblyName, string trimmedName)
         {
             logger.Trace("Check if assembly " + trimmedName + " already loaded");
+
             Assembly assembly = AssemblyResolver.CheckIfAssemblyLoaded(trimmedName, AppDomain.CurrentDomain);
             if (assembly != null)
             {
@@ -270,6 +340,7 @@ namespace Bridge.Translator
 
                 logger.Trace("Assembly " + assembly.FullName + " is loaded into domain " + AppDomain.CurrentDomain.FriendlyName);
             }
+
             return assembly;
         }
 
