@@ -317,7 +317,6 @@ namespace Bridge.Translator
 
         }
 
-
         public static Assembly CheckIfAssemblyLoaded(ILogger logger, byte[] ba, AssemblyName assemblyName, string trimmedName)
         {
             logger.Trace("Check if assembly " + trimmedName + " already loaded");
