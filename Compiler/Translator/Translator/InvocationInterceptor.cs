@@ -42,19 +42,19 @@ namespace Bridge.Translator
         public IAbstractEmitterBlock Block
         {
             get;
-            internal set;
+            set;
         }
 
         public MemberReferenceExpression Expression
         {
             get;
-            internal set;
+            set;
         }
 
         public MemberResolveResult ResolveResult
         {
             get;
-            internal set;
+            set;
         }
 
         public string Replacement
@@ -93,7 +93,7 @@ namespace Bridge.Translator
         public string Replacement
         {
             get;
-            internal set;
+            set;
         }
 
         public bool Cancel
