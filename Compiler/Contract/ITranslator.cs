@@ -1,6 +1,9 @@
+using System;
+using System.Collections.Generic;
+
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
-using System.Collections.Generic;
+
 
 namespace Bridge.Contract
 {
@@ -146,6 +149,12 @@ namespace Bridge.Contract
         /// Indicates whether strict mode will be added to generated script files
         /// </summary>
         bool NoStrictMode
+        {
+            get;
+            set;
+        }
+
+        Guid ProjectGuid
         {
             get;
             set;

@@ -18,6 +18,15 @@ namespace Bridge.Translator
 
             this.ValidateProject(doc);
 
+            var projectType = (from n in doc.Descendants()
+                               where n.Name.LocalName == "OutputType"
+                               select n).ToArray();
+
+            if (projectType.Length > 0 && projectType[0] != null && projectType[0].Value != Translator.SupportedProjectType)
+            {
+                Bridge.Translator.TranslatorException.Throw("Project type ({0}) is not supported, please use Library instead of {0}", projectType[0].Value);
+            }
+
             this.BuildAssemblyLocation(doc);
             this.SourceFiles = this.GetSourceFiles(doc);
             this.ParsedSourceFiles = new List<ParsedSourceFile>();
@@ -27,16 +36,44 @@ namespace Bridge.Translator
                 this.ReadDefineConstants(doc);
             }
 
-            var projectType = (from n in doc.Descendants()
-                          where n.Name.LocalName == "OutputType"
-                          select n).ToArray();
-
-            if (projectType.Length > 0 && projectType[0] != null && projectType[0].Value != Translator.SupportedProjectType)
-            {
-                Bridge.Translator.TranslatorException.Throw("Project type ({0}) is not supported, please use Library instead of {0}", projectType[0].Value);
-            }
+            this.ReadProjectGuid(doc);
 
             this.Log.Info("Reading project file done");
+        }
+
+        protected virtual void ReadProjectGuid(XDocument doc)
+        {
+            this.Log.Info("Reading project Guid...");
+
+            if (doc == null)
+            {
+                this.Log.Warn("doc is null");
+                return;
+            }
+            else
+            {
+                var guidElement = doc.Descendants().Where(x => x.Name.LocalName == "ProjectGuid").FirstOrDefault();
+
+                if (guidElement == null)
+                {
+                    this.Log.Warn("guid is null");
+                }
+                else
+                {
+                    System.Guid projectGuid;
+                    if (System.Guid.TryParse(guidElement.Value, out projectGuid))
+                    {
+                        this.ProjectGuid = projectGuid;
+                        this.Log.Info("Project Guid " + projectGuid.ToString());
+                    }
+                    else
+                    {
+                        this.Log.Warn("Could not parse guid " + guidElement.Value);
+                    }
+                }
+            }
+
+            this.Log.Info("Reading project Guid done");
         }
 
         protected virtual void ReadFolderFiles()
