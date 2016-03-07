@@ -27,7 +27,7 @@ namespace Bridge.Translator
         public string Replacement
         {
             get;
-            internal set;
+            set;
         }
 
         public bool Cancel
@@ -60,7 +60,7 @@ namespace Bridge.Translator
         public string Replacement
         {
             get;
-            internal set;
+            set;
         }
 
         public bool Cancel

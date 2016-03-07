@@ -24,6 +24,7 @@ namespace Bridge.Contract
         string Replacement
         {
             get;
+            set;
         }
 
         bool Cancel
@@ -53,6 +54,7 @@ namespace Bridge.Contract
         string Replacement
         {
             get;
+            set;
         }
 
         bool Cancel
