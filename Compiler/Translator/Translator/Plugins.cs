@@ -295,6 +295,8 @@ namespace Bridge.Translator
             {
                 var trimmedResourceName = Plugins.TrimAssemblyName(resourceName);
 
+                logger.Trace("Scanning resource " + resourceName + ". Trimmed resource name " + trimmedResourceName + " ...");
+
                 if (trimmedResourceName == assemblyName.Name)
                 {
                     logger.Trace("Found resource with name " + resourceName);
