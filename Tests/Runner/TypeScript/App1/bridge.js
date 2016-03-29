@@ -6998,6 +6998,16 @@ Bridge.Class.generic('Bridge.List$1', function (T) {
             }
 
             return Bridge.Array.binarySearch(this.items, index, length, value, comparer);
+        },
+        convertAll: function (T2, action) {
+            var $t;
+            var result = new Bridge.List$1(T2)();
+            $t = Bridge.getEnumerator(this);
+            while ($t.moveNext()) {
+                var item = $t.getCurrent();
+                result.add(action(item));
+            }
+            return result;
         }
     }));
 });

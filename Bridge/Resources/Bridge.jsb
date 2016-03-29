@@ -35,6 +35,8 @@
   <file name="Convert.js" />
   <file name="Array.js" />
   <file name="linq.js" />
+  <file name="Random.js" />
+  <file name="seedrandom.js" />
   <target name="Bridge.NET" file="$output\bridge.js" debug="True">
     <include name="Init.js" />
     <include name="Core.js" />
@@ -48,6 +50,8 @@
     <include name="Interfaces.js" />
     <include name="Globalization.js" />
     <include name="Math.js" />
+    <include name="Random.js" />
+    <include name="seedrandom.js" />
     <include name="Integer.js" />
     <include name="Decimal.js" />
     <include name="Date.js" />
