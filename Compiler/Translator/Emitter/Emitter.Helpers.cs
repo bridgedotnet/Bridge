@@ -462,6 +462,11 @@ namespace Bridge.Translator
                 enumMode = -1;
             }
 
+            if (member.SymbolKind == SymbolKind.Event)
+            {
+                enumMode = 7;
+            }
+
             if (enumMode > 6)
             {
                 switch (enumMode)
