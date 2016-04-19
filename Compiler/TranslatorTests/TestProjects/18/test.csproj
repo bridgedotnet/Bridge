@@ -43,6 +43,7 @@
     <Compile Include="Issues\Issue958.cs" />
     <Compile Include="Issues\Issue921Instance.cs" />
     <Compile Include="Issues\Issue921Static.cs" />
+    <Compile Include="Issues\IssueEvents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Issues\Issue379.cs" />
     <Compile Include="Issues\Issue434.cs" />
