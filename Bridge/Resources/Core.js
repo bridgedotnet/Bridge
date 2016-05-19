@@ -364,6 +364,9 @@
             var result = Bridge.as(obj, type, allowNull);
 
 	        if (result === null) {
+	            if (navigator.platform && navigator.platform.substr(0,2) === 'iP') {
+	                return obj;
+	            }
 	            throw new Bridge.InvalidCastException("Unable to cast type " + (obj ? Bridge.getTypeName(obj) : "'null'") + " to type " + Bridge.getTypeName(type));
 	        }
 
