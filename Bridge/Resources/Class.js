@@ -290,8 +290,8 @@
 
             prototype.$$name = className;
 
-            for (let x of inherits) {
-                for (let y of x.statics || x.$statics) {
+            for (var x of inherits) {
+                for (var y of x.statics || x.$statics) {
                     prototype.statics.push(y);
                 }
             }
