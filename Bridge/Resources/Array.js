@@ -310,7 +310,10 @@ var array = {
 
     getItem: function (obj, idx) {
         if (Bridge.isArray(obj)) {
-            return obj[idx];
+            if (idx < obj.length && idx > -1) {
+                return obj[idx];
+            }
+            throw new Bridge.ArgumentException("Index " + idx + " out of range");
         } else if (Bridge.isFunction(obj.get)) {
             return obj.get(idx);
         } else if (Bridge.isFunction(obj.getItem)) {

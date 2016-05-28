@@ -1067,6 +1067,7 @@ namespace Bridge.Translator
 
         protected virtual void EmitSingleDimArrayIndexer(IndexerExpression indexerExpression)
         {
+            this.Write("Bridge.Array.getItem(");
             var oldIsAssignment = this.Emitter.IsAssignment;
             var oldUnary = this.Emitter.IsUnaryAccessor;
             this.Emitter.IsAssignment = false;
@@ -1108,17 +1109,14 @@ namespace Bridge.Translator
                 }
                 else
                 {
-                    this.WriteDot();
-                    this.Write("$get");
-                    this.WriteOpenParentheses();
-                    this.WriteOpenBracket();
+                    this.WriteComma();
+                    this.WriteSpace();
                 }
                 
                 index.AcceptVisitor(this.Emitter);
 
                 if (!this.isRefArg)
                 {
-                    this.WriteCloseBracket();
                     this.WriteCloseParentheses();
                 }
                 
