@@ -300,6 +300,12 @@
 
             prototype.$$name = className;
 
+            for (var x of inherits) {
+                for (var y of x.statics || x.$statics) {
+                    prototype.statics.push(y);
+                }
+            }
+
             // Populate our constructed prototype object
             Class.prototype = prototype;
 
