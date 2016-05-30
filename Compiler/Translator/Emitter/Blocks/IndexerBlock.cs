@@ -1067,7 +1067,7 @@ namespace Bridge.Translator
 
         protected virtual void EmitSingleDimArrayIndexer(IndexerExpression indexerExpression)
         {
-            this.Write("Bridge.Array.getItem(");
+            this.Write("System.Array.getItem(");
             var oldIsAssignment = this.Emitter.IsAssignment;
             var oldUnary = this.Emitter.IsUnaryAccessor;
             this.Emitter.IsAssignment = false;
