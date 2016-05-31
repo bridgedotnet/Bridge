@@ -1067,7 +1067,12 @@ namespace Bridge.Translator
 
         protected virtual void EmitSingleDimArrayIndexer(IndexerExpression indexerExpression)
         {
-            this.Write("System.Array.getItem(");
+            var index = indexerExpression.Arguments.First();
+            var primitive = index as PrimitiveExpression;
+            var cond = primitive != null && primitive.Value != null &&
+                Regex.Match(primitive.Value.ToString(), "^[_$a-z][_$a-z0-9]*$", RegexOptions.IgnoreCase).Success;
+            if (!cond)
+                this.Write("System.Array.getItem(");
             var oldIsAssignment = this.Emitter.IsAssignment;
             var oldUnary = this.Emitter.IsUnaryAccessor;
             this.Emitter.IsAssignment = false;
@@ -1081,12 +1086,7 @@ namespace Bridge.Translator
                 throw new EmitterException(indexerExpression, "Only one index is supported");
             }
 
-            var index = indexerExpression.Arguments.First();
-
-            var primitive = index as PrimitiveExpression;
-
-            if (primitive != null && primitive.Value != null &&
-                Regex.Match(primitive.Value.ToString(), "^[_$a-z][_$a-z0-9]*$", RegexOptions.IgnoreCase).Success)
+            if (cond)
             {
                 if (this.isRefArg)
                 {
