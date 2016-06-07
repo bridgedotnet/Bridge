@@ -125,7 +125,7 @@ namespace Transpiled.System
             return doubleView[0];
         }
 
-        [Template("System.Long([{0}, {1}])")]
+        [Template("System.Int64([{0}, {1}])")]
         static extern long CreateLong(uint low, uint high);
 
         public static int ToInt32(byte[] value, int index)

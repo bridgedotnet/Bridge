@@ -79,7 +79,7 @@
                 var buf = new ArrayBuffer(8);
                 (new Float64Array(buf))[0] = value;
                 var uintArray = new Uint32Array(buf);
-                return System.Long([uintArray[0], uintArray[1]]);
+                return System.Int64([uintArray[0], uintArray[1]]);
             },
             int64BitsToDouble: function (value) {
                 var buffer = new ArrayBuffer(8);
