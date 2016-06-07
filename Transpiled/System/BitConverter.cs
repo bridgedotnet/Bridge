@@ -111,7 +111,7 @@ namespace Transpiled.System
         {
             var buf = new ArrayBuffer(8);
             (new Float64Array(buf))[0] = value;
-            var uintArray = new Int32Array(buf);
+            var uintArray = new Uint32Array(buf);
             return CreateLong(uintArray[0], uintArray[1]);
         }
 
@@ -125,8 +125,8 @@ namespace Transpiled.System
             return doubleView[0];
         }
 
-        [Template("Bridge.Long([{0}, {1}])")]
-        static extern long CreateLong(int low, int high);
+        [Template("System.Long([{0}, {1}])")]
+        static extern long CreateLong(uint low, uint high);
 
         public static int ToInt32(byte[] value, int index)
         {
