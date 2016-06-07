@@ -27,7 +27,7 @@
 
         public class Funcs
         {
-            public const string BRIDGE_AUTO_STARTUP_METHOD_TEMPLATE = "Bridge.ready(this.{0})";
+            public const string BRIDGE_AUTO_STARTUP_METHOD_TEMPLATE = "Bridge.ready(this.{0});";
             public const string BRIDGE_APPLY = "Bridge.apply";
             public const string BRIDGE_BIND = "Bridge.fn.bind";
             public const string BRIDGE_BIND_SCOPE = "Bridge.fn.bindScope";

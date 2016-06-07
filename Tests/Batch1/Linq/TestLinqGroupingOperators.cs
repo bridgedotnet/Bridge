@@ -114,7 +114,7 @@ namespace Bridge.ClientTest.Linq
             (
                from n in numbers
                select
-                   Script.PlainObject(new
+                   Script.ToPlainObject(new
                    {
                        Number = n,
                        Words =
@@ -123,14 +123,14 @@ namespace Bridge.ClientTest.Linq
                            where w[0].ToString() == n.ToString()
                            group w by w[0] into g
                            select
-                               Script.PlainObject(new
+                               Script.ToPlainObject(new
                                {
                                    Letter = g.Key,
                                    LetterGroups =
                                        (
                                        from l in g
                                        group l by l into mg
-                                       select Script.PlainObject(new
+                                       select Script.ToPlainObject(new
                                        {
                                            Letter = mg.Key,
                                            Letters = mg.ToArray()
@@ -197,66 +197,66 @@ namespace Bridge.ClientTest.Linq
         {
             var complexGroupingExpected = new object[]
             {
-                Script.PlainObject(new
+                Script.ToPlainObject(new
                 {
                     Number = 2,
                     Words = new []
-                    { Script.PlainObject(new
+                    { Script.ToPlainObject(new
                         {
                             Letter = '2',
                             LetterGroups = new[]
                             {
-                                Script.PlainObject(new { Letter = "2.two", Letters = new []{"2.two"} }),
-                                Script.PlainObject(new { Letter = "22.twentytwo", Letters = new []{"22.twentytwo"} })
+                                Script.ToPlainObject(new { Letter = "2.two", Letters = new []{"2.two"} }),
+                                Script.ToPlainObject(new { Letter = "22.twentytwo", Letters = new []{"22.twentytwo"} })
                             }
                         })
                     }
                 }),
-                Script.PlainObject(new
+                Script.ToPlainObject(new
                 {
                     Number = 10, Words = new object[] { }
                 }),
-                Script.PlainObject(new
+                Script.ToPlainObject(new
                 {
                     Number = 3,
                     Words = new []
                     {
-                        Script.PlainObject(new
+                        Script.ToPlainObject(new
                         {
                             Letter = '3',
                             LetterGroups = new[]
                             {
-                                Script.PlainObject(new { Letter = "3.three", Letters = new []{"3.three"} }),
-                                Script.PlainObject(new { Letter = "30.thirty", Letters = new []{"30.thirty"} })
+                                Script.ToPlainObject(new { Letter = "3.three", Letters = new []{"3.three"} }),
+                                Script.ToPlainObject(new { Letter = "30.thirty", Letters = new []{"30.thirty"} })
                             }
                         })
                     }
                 }),
-                Script.PlainObject(new
+                Script.ToPlainObject(new
                 {
                     Number = 5, Words = new object[] { }
                 }),
-                Script.PlainObject(new
+                Script.ToPlainObject(new
                 {
                     Number = 30, Words = new object[] { }
                 }),
-                Script.PlainObject(new
+                Script.ToPlainObject(new
                 {
                     Number = 1,
                     Words = new []
                     {
-                        Script.PlainObject(new
+                        Script.ToPlainObject(new
                         {
                             Letter = '1',
                             LetterGroups = new[]
                             {
-                                Script.PlainObject(new { Letter = "1.one", Letters = new []{"1.one"} }),
-                                Script.PlainObject(new { Letter = "11.eleven", Letters = new []{"11.eleven"} })
+                                Script.ToPlainObject(new { Letter = "1.one", Letters = new []{"1.one"} }),
+                                Script.ToPlainObject(new { Letter = "11.eleven", Letters = new []{"11.eleven"} })
                             }
                         })
                     }
                 }),
-                Script.PlainObject(new
+                Script.ToPlainObject(new
                 {
                     Number = -15, Words = new object[] { }
                 }),

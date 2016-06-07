@@ -36,7 +36,27 @@ namespace Bridge.Translator
             }
             else
             {
-                this.VisitAnonymousTypeCreateExpression();
+                var rr = this.Emitter.Resolver.ResolveNode(this.AnonymousTypeCreateExpression.Parent, this.Emitter);
+                var member_rr = rr as MemberResolveResult;
+
+                if (member_rr == null)
+                {
+                    var o_rr = rr as OperatorResolveResult;
+                    if (o_rr != null)
+                    {
+                        member_rr = o_rr.Operands[0] as MemberResolveResult;
+                    }
+                }
+
+                if (member_rr != null && member_rr.Member.DeclaringTypeDefinition != null &&
+                    this.Emitter.Validator.IsObjectLiteral(member_rr.Member.DeclaringTypeDefinition))
+                {
+                    this.VisitPlainAnonymousTypeCreateExpression();
+                }
+                else
+                {
+                    this.VisitAnonymousTypeCreateExpression();
+                }
             }
         }
 

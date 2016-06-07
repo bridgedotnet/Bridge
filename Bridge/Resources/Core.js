@@ -7,6 +7,49 @@
 
         identity: function (x) { return x; },
 
+        isPlainObject: function (obj) {
+            if (typeof obj == 'object' && obj !== null) {
+                if (typeof Object.getPrototypeOf == 'function') {
+                    var proto = Object.getPrototypeOf(obj);
+                    return proto === Object.prototype || proto === null;
+                }
+    
+                return Object.prototype.toString.call(obj) === '[object Object]';
+            }
+  
+            return false;
+        },
+
+        toPlain: function (o) {
+            if (!o || Bridge.isPlainObject(o) || typeof o != "object") {
+                return o;
+            }
+
+            if (typeof o.toJSON == 'function') {
+                return o.toJSON();
+            }
+
+            if (Bridge.isArray(o)) {
+                var arr = [];
+                for (var i = 0; i < o.length; i++) {
+                    arr.push(Bridge.toPlain(o[i]));
+                }
+                return arr;
+            }
+
+            var newo = {},
+                m;
+
+            for (var key in o) {
+                m = o[key];
+                if (!Bridge.isFunction(m)) {
+                    newo[key] = m;
+                }
+            }
+
+            return newo;
+        },
+
         ref: function (o, n) {
             if (Bridge.isArray(n)) {
                 n = System.Array.toIndex(o, n);

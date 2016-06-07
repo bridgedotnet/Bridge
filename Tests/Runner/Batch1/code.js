@@ -8640,6 +8640,63 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
         }
     });
     
+    Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge1448', {
+        statics: {
+            testPlainForNonAnonymous: function () {
+                var a = Bridge.merge(new Bridge.ClientTest.BridgeIssues.Bridge1448.A(), {
+                    data: 5
+                } );
+    
+                var plainee = Bridge.toPlain(a);
+    
+                Bridge.Test.Assert.notNull$1(plainee, "plainee not null");
+                Bridge.Test.Assert.notNull$1(plainee.data, "plainee has data");
+                Bridge.Test.Assert.areEqual$1(5, plainee.data, "plainee.Data == 5");
+                Bridge.Test.Assert.null$1(plainee.getHashCode, "plainee has no getHashCode");
+                Bridge.Test.Assert.null$1(plainee.toJSON, "plainee has no toJSON");
+                Bridge.Test.Assert.null$1(plainee.$constructor, "plainee has no $constructor");
+                Bridge.Test.Assert.null$1(plainee.equals, "plainee has no equals");
+            },
+            testObjectLiteralProperty: function () {
+                var a = Bridge.merge(new Bridge.ClientTest.BridgeIssues.Bridge1448.A(), {
+                    data: 5
+                } );
+    
+                var l = { v: { data: 5 } };
+    
+                var plainee = l.v;
+    
+                Bridge.Test.Assert.notNull$1(plainee, "plainee not null");
+                Bridge.Test.Assert.notNull$1(plainee.data, "plainee has data");
+                Bridge.Test.Assert.areEqual$1(5, plainee.data, "plainee.Data == 5");
+                Bridge.Test.Assert.null$1(plainee.getHashCode, "plainee has no getHashCode");
+                Bridge.Test.Assert.null$1(plainee.toJSON, "plainee has no toJSON");
+                Bridge.Test.Assert.null$1(plainee.$constructor, "plainee has no $constructor");
+                Bridge.Test.Assert.null$1(plainee.equals, "plainee has no equals");
+            },
+            testToObjectLiteralAlias: function () {
+                var o1 = { a: 1 };
+                Bridge.Test.Assert.notNull$1(o1, "o1 not null");
+                Bridge.Test.Assert.areEqual$1(1, o1.a, "o1.A == 1");
+    
+                Bridge.Test.Assert.null$1(o1.getHashCode, "o1 has no getHashCode");
+                Bridge.Test.Assert.null$1(o1.toJSON, "o1 has no toJSON");
+                Bridge.Test.Assert.null$1(o1.$constructor, "o1 has no $constructor");
+                Bridge.Test.Assert.null$1(o1.equals, "o1 has no equals");
+                Bridge.Test.Assert.notNull$1(o1.a, "o1 has a");
+            }
+        }
+    });
+    
+    Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge1448.A', {
+        data: 0,
+        doSomething: function () {
+            return this.data;
+        }
+    });
+    
+    Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge1448.Plainer');
+    
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge169', {
         statics: {
             number: 0,

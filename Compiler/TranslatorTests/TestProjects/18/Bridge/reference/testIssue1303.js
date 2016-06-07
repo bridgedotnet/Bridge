@@ -24,7 +24,7 @@
             config: {
                 init: function () {
                     Bridge.ready(this.notMain);
-                    Bridge.ready(this.main)
+                    Bridge.ready(this.main);
                 }
             },
             notMain: function () {

@@ -468,10 +468,14 @@ namespace Bridge.Translator
                                     var an = exprs[0] as AnonymousTypeCreateExpression;
                                     if (an == null)
                                     {
-                                        throw new EmitterException(exprs[0], "Plain modifier can be applied to AnonymousTypeCreateExpression only");
+                                        this.Write("Bridge.toPlain(");
+                                        exprs[0].AcceptVisitor(this.Emitter);
+                                        this.Write(")");
                                     }
-
-                                    new AnonymousTypeCreateBlock(this.Emitter, an, true).Emit();
+                                    else
+                                    {
+                                        new AnonymousTypeCreateBlock(this.Emitter, an, true).Emit();
+                                    }
                                 }
                                 else
                                 {

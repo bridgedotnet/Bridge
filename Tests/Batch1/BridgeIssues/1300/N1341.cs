@@ -9,7 +9,7 @@ namespace Bridge.ClientTest.BridgeIssues
         [Test]
         public static void TestPlainObject()
         {
-            var o1 = Script.PlainObject(new { A = 1 });
+            var o1 = Script.ToPlainObject(new { A = 1 });
             Assert.NotNull(o1, "o1 not null");
             Assert.AreEqual(1, o1.A, "o1.A == 1");
 
@@ -19,24 +19,24 @@ namespace Bridge.ClientTest.BridgeIssues
             Assert.Null(o1["equals"], "o1 has no equals");
             Assert.NotNull(o1["a"], "o1 has a");
 
-            var o2 = Script.PlainObject(new { A = 1, B = "2" });
+            var o2 = Script.ToPlainObject(new { A = 1, B = "2" });
             Assert.NotNull(o2, "o2 not null");
             Assert.AreEqual(1, o2.A, "o2.A == 1");
             Assert.AreEqual("2", o2.B, "o2.B == \"2\"");
 
-            var o3 = Script.PlainObject(new { A = 1, B = new SomeStructA() { Value1 = 1 } });
+            var o3 = Script.ToPlainObject(new { A = 1, B = new SomeStructA() { Value1 = 1 } });
             Assert.NotNull(o3, "o3 not null");
             Assert.AreEqual(1, o3.A, "o3.A == 1");
             Assert.NotNull(o3.B, "o3.B not null");
             Assert.AreEqual(1, o3.B.Value1, "o3.B.Value1 == 1");
 
-            var o4 = Script.PlainObject(new { A = 1, B = new SomeStructA() { Value1 = 1 } });
+            var o4 = Script.ToPlainObject(new { A = 1, B = new SomeStructA() { Value1 = 1 } });
             Assert.NotNull(o4, "o4 not null");
             Assert.AreEqual(1, o4.A, "o4.A == 1");
             Assert.NotNull(o4.B, "o4.B not null");
             Assert.AreEqual(1, o4.B.Value1, "o4.B.Value1 == 1");
 
-            var o5 = Script.PlainObject(new { A = 1, B = new SomeClassB() { Value1 = 1, Value2 = new SomeStructA() { Value1 = 1 } } });
+            var o5 = Script.ToPlainObject(new { A = 1, B = new SomeClassB() { Value1 = 1, Value2 = new SomeStructA() { Value1 = 1 } } });
             Assert.NotNull(o5, "o5 not null");
             Assert.AreEqual(1, o5.A, "o5.A == 1");
             Assert.NotNull(o5.B, "o5.B not null");
