@@ -39,6 +39,7 @@
   <file name="Array.js" />
   <file name="linq.js" />
   <file name="random.js" />
+  <file name="bitConverter.js"></file>
   <file name="Guid.js" />
   <file name="Text/RegularExpressions/Regex.js" />
   <file name="Text/RegularExpressions/RegexCapture.js" />
@@ -56,6 +57,7 @@
   <file name="Text/RegularExpressions/RegexNetEngineParser.js" />
   <file name="timer.js" />
   <target name="Bridge.NET" file="$output\bridge.js" debug="True">
+    <include name="bitConverter.js"></include>
     <include name="Init.js" />
     <include name="Core.js" />
     <include name="Nullable.js" />

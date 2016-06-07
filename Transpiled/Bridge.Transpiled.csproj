@@ -49,6 +49,7 @@
     <Compile Include="..\.build\common\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="System\BitConverter.cs" />
     <Compile Include="System\Random.cs" />
     <Compile Include="System\Threading\Timer.cs" />
     <None Include="Bridge\bridge.json" />
@@ -64,6 +65,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="transpiled\system\bitConverter.js" />
     <Content Include="transpiled\system\random.js" />
     <Content Include="transpiled\system\threading\timer.js" />
   </ItemGroup>
