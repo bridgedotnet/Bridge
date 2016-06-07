@@ -1,6 +1,9 @@
-using System.Linq;
 using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
+
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Bridge.Translator
@@ -106,7 +109,7 @@ namespace Bridge.Translator
 
             if (comment.CommentType == CommentType.MultiLine && injection.Success)
             {
-                string code = removeStars.Replace(injection.Groups[1].Value, "$1");
+                string code = removeStars.Replace(injection.Groups[1].Value, JS.Vars.D + "1");
 
                 if (code.EndsWith("@"))
                 {

@@ -1,5 +1,8 @@
 using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
+
 using System.Collections.Generic;
 using System.Linq;
 
@@ -66,7 +69,7 @@ namespace Bridge.Translator
             this.WriteSpace();
             this.BeginBlock();
             this.WriteNewLine();
-            this.Write("$step = " + loopStep.Step + ";");
+            this.Write(JS.Vars.ASYNC_STEP + " = " + loopStep.Step + ";");
             this.WriteNewLine();
             this.Write("continue;");
             this.WriteNewLine();

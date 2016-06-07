@@ -7,7 +7,7 @@
 
         identity: function (x) { return x; },
 
-        ref: function(o, n) {
+        ref: function (o, n) {
             if (Bridge.isArray(n)) {
                 n = System.Array.toIndex(o, n);
             }
@@ -252,7 +252,7 @@
 
             if (Bridge.isString(value)) {
                 var hash = 0,
-                i;
+                    i;
 
                 for (i = 0; i < value.length; i++) {
                     hash = (((hash << 5) - hash) + value.charCodeAt(i)) & 0xFFFFFFFF;
@@ -298,7 +298,54 @@
             }
 
             var results = (/function (.{1,})\(/).exec(str);
+
             return (results && results.length > 1) ? results[1] : "Object";
+        },
+
+        getBaseType: function (obj) {
+            if (obj == null) {
+                throw new System.NullReferenceException();
+            }
+
+            if (obj.$interface) {
+                return null;
+            }
+
+            if (obj.$$inherits) {
+                return obj.$$inherits[0].$interface ? Object : obj.$$inherits[0];
+            } else {
+                return obj.$$name ? Object : null;
+            }
+        },
+
+        isAssignableFrom: function (baseType, type) {
+            if (baseType === null) {
+                throw new System.NullReferenceException();
+            }
+
+            if (type === null) {
+                return false;
+            }        
+
+            if (baseType == type || baseType == Object) {
+                return true;
+            }
+
+            var inheritors = type.$$inherits,
+                i,
+                r;
+
+            if (inheritors) {
+                for (i = 0; i < inheritors.length; i++) {
+                    r = Bridge.isAssignableFrom(baseType, inheritors[i]);
+
+                    if (r) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         },
 
         is: function (obj, type, ignoreFn, allowNull) {
@@ -387,7 +434,13 @@
 	        return obj;
         },
 
-	    merge: function (to, from) {
+	    merge: function (to, from, elemFactory) {
+	        // Maps instance of plain JS value or Object into Bridge object. 
+	        // Used for deserialization. Proper deserialization requires reflection that is currently not supported in Bridge. 
+	        // It currently is only capable to deserialize:
+	        // -instance of single class or primitive
+	        // -array of primitives 
+	        // -array of single class            
 	        if (to instanceof System.Decimal && Bridge.isNumber(from)) {
 	            return new System.Decimal(from);
 	        }
@@ -430,9 +483,9 @@
 	            for (i = 0; i < from.length; i++) {
 	                var item = from[i];
 
-                    if (!Bridge.isArray(item)) {
-                        item = [item];
-                    }
+	                if (!Bridge.isArray(item)) {
+	                    item = [typeof elemFactory === 'undefined' ? item : Bridge.merge(elemFactory(), item)];
+	                }
 
                     fn.apply(to, item);
 	            }
@@ -582,8 +635,16 @@
             return o;
         },
 
-        referenceEquals: function(a, b) {
+        referenceEquals: function (a, b) {
             return Bridge.hasValue(a) ? a === b : !Bridge.hasValue(b);
+        },
+        
+        staticEquals: function (a, b) {
+            if (!Bridge.hasValue(a)) {
+                return !Bridge.hasValue(b);
+            }
+                
+            return Bridge.hasValue(b) ? Bridge.equals(a, b) : false;
         },
 
         equals: function (a, b) {
@@ -594,6 +655,7 @@
             if (a && Bridge.isFunction(a.equals) && a.equals.length === 1) {
                 return a.equals(b);
             }
+
             if (b && Bridge.isFunction(b.equals) && b.equals.length === 1) {
                 return b.equals(a);
             } else if (Bridge.isDate(a) && Bridge.isDate(b)) {
@@ -605,6 +667,7 @@
             }
 
             var eq = a === b;
+
             if (!eq && typeof a === "object" && typeof b === "object" && a !== null && b !== null && a.$struct && b.$struct && a.$$name === b.$$name) {
                 return Bridge.getHashCode(a) === Bridge.getHashCode(b) && Bridge.objectEquals(a, b);
             }
@@ -653,8 +716,7 @@
 
                     if (a[p] === b[p]) {
                         continue;
-                    }
-                    else if (typeof (a[p]) === "object") {
+                    } else if (typeof (a[p]) === "object") {
                         Bridge.$$leftChain.push(a);
                         Bridge.$$rightChain.push(b);
 
@@ -688,6 +750,7 @@
                 if (Bridge.isString(a) && !Bridge.hasValue(b)) {
                     return 1;
                 }
+
                 return a < b ? -1 : (a > b ? 1 : 0);
             } else if (Bridge.isDate(a)) {
                 return Bridge.compare(a.valueOf(), b.valueOf());
@@ -767,6 +830,18 @@
         },
 
         fn: {
+            equals: function (fn) {
+                if (this === fn) {
+                    return true;
+                }
+
+                if (fn == null || (this.constructor !== fn.constructor)) {
+                    return false;
+                }
+
+                return this.equals === fn.equals && this.$method === fn.$method && this.$scope === fn.$scope;
+            },
+
             call: function (obj, fnName) {
                 var args = Array.prototype.slice.call(arguments, 2);
 
@@ -844,6 +919,7 @@
 
                 fn.$method = method;
                 fn.$scope = obj;
+                fn.equals = Bridge.fn.equals;
 
                 return fn;
             },
@@ -863,6 +939,7 @@
 
                 fn.$method = method;
                 fn.$scope = obj;
+                fn.equals = Bridge.fn.equals;
 
                 return fn;
             },
@@ -900,6 +977,10 @@
                     list2 = fn2.$invocationList ? fn2.$invocationList : [fn2];
 
                 return Bridge.fn.$build(list1.concat(list2));
+            },
+
+            getInvocationList: function () {
+                
             },
 
             remove: function (fn1, fn2) {
@@ -966,5 +1047,3 @@
     globals.System.Diagnostics = {};
     globals.System.Diagnostics.Contracts = {};
     globals.System.Threading = {};
-
-

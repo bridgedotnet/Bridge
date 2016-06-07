@@ -7,7 +7,9 @@
         }
     });
     
-    Bridge.define('TestIssue960.IHaveNamed');
+    Bridge.define('TestIssue960.IHaveNamed', {
+        $interface: true
+    });
     
     Bridge.define('TestIssue960.Issue960', {
         statics: {

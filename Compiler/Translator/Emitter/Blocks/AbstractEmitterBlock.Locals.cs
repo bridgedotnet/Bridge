@@ -1,10 +1,14 @@
 using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
+using ICSharpCode.NRefactory.TypeSystem;
 using ICSharpCode.NRefactory.TypeSystem.Implementation;
+
 using System.Collections.Generic;
 using System.Linq;
-using ICSharpCode.NRefactory.TypeSystem;
+
 
 namespace Bridge.Translator
 {
@@ -84,7 +88,7 @@ namespace Bridge.Translator
         {
             this.Emitter.Locals.Add(name, type);
 
-            name = name.StartsWith(Bridge.Translator.Emitter.FIX_ARGUMENT_NAME) ? name.Substring(Bridge.Translator.Emitter.FIX_ARGUMENT_NAME.Length) : name;
+            name = name.StartsWith(JS.Vars.FIX_ARGUMENT_NAME) ? name.Substring(JS.Vars.FIX_ARGUMENT_NAME.Length) : name;
             string vName = valueName ?? name;
 
             if (Helpers.IsReservedWord(vName))
@@ -271,15 +275,15 @@ namespace Bridge.Translator
                 }
             }
 
-            string name = "$t";
+            string name = JS.Vars.T;
             int i = 0;
 
             while (this.Emitter.TempVariables.ContainsKey(name) || (this.Emitter.ParentTempVariables != null && this.Emitter.ParentTempVariables.ContainsKey(name)))
             {
-                name = "$t" + ++i;
+                name = JS.Vars.T + ++i;
             }
 
-            name = "$t" + (i > 0 ? i.ToString() : "");
+            name = JS.Vars.T + (i > 0 ? i.ToString() : "");
 
             this.IntroduceTempVar(name);
 

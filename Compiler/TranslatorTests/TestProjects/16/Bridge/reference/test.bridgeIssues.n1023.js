@@ -25,7 +25,7 @@
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Test.BridgeIssues.N1023.Optional$1(T))) {
+            if (!Bridge.is(o, Test.BridgeIssues.N1023.Optional$1(T))) {
                 return false;
             }
             return Bridge.equals(this.Value, o.Value);

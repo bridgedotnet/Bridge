@@ -1,4 +1,6 @@
 using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
@@ -61,7 +63,7 @@ namespace Bridge.Translator
             if (proto)
             {
                 var baseType = this.Emitter.GetBaseTypeDefinition();
-                this.Write(BridgeTypes.ToJsName(baseType, this.Emitter), ".prototype");
+                this.Write(BridgeTypes.ToJsName(baseType, this.Emitter), "." + JS.Fields.PROTOTYPE);
             }
             else
             {

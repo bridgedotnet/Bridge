@@ -20,7 +20,7 @@
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,TestIssue1035.StructBridge1035)) {
+            if (!Bridge.is(o, TestIssue1035.StructBridge1035)) {
                 return false;
             }
             return Bridge.equals(this.Data, o.Data);

@@ -1,11 +1,13 @@
 using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.NRefactory.CSharp.Resolver;
+using ICSharpCode.NRefactory.TypeSystem;
+
 using System.Collections.Generic;
 using System.Linq;
-using ICSharpCode.NRefactory.CSharp.Resolver;
-using ICSharpCode.NRefactory.Semantics;
-using ICSharpCode.NRefactory.TypeSystem;
-using Object.Net.Utilities;
+
 
 namespace Bridge.Translator
 {
@@ -227,13 +229,13 @@ namespace Bridge.Translator
                 }
                 
                 this.Emitter.Output.Remove(savedPos, this.Emitter.Output.Length - savedPos);
-                this.Emitter.Output.Insert(savedPos, "$_." + BridgeTypes.ToJsName(this.Emitter.TypeInfo.Type, this.Emitter, true) + "." + name);
+                this.Emitter.Output.Insert(savedPos, JS.Vars.D_ + "." + BridgeTypes.ToJsName(this.Emitter.TypeInfo.Type, this.Emitter, true) + "." + name);
                 this.Emitter.Level = oldLevel;
             }
 
             if (this.Emitter.ThisRefCounter > savedThisCount)
             {
-                this.Emitter.Output.Insert(savedPos, Bridge.Translator.Emitter.ROOT + "." + Bridge.Translator.Emitter.DELEGATE_BIND + "(this, ");
+                this.Emitter.Output.Insert(savedPos, JS.Funcs.BRIDGE_BIND + "(this, ");
                 this.WriteCloseParentheses();
             }
 

@@ -98,15 +98,15 @@ namespace Bridge.Translator
         {
             if (this.CastExpression != null)
             {
-                this.EmitCastExpression(this.CastExpression.Expression, this.CastExpression.Type, Bridge.Translator.Emitter.CAST);
+                this.EmitCastExpression(this.CastExpression.Expression, this.CastExpression.Type, CS.Ops.CAST);
             }
             else if (this.AsExpression != null)
             {
-                this.EmitCastExpression(this.AsExpression.Expression, this.AsExpression.Type, Bridge.Translator.Emitter.AS);
+                this.EmitCastExpression(this.AsExpression.Expression, this.AsExpression.Type, CS.Ops.AS);
             }
             else if (this.IsExpression != null)
             {
-                this.EmitCastExpression(this.IsExpression.Expression, this.IsExpression.Type, Bridge.Translator.Emitter.IS);
+                this.EmitCastExpression(this.IsExpression.Expression, this.IsExpression.Type, CS.Ops.IS);
             }
             else if (this.IType != null)
             {
@@ -122,13 +122,13 @@ namespace Bridge.Translator
         {
             var castToEnum = this.Emitter.BridgeTypes.ToType(type).Kind == TypeKind.Enum;
 
-            if (method != Bridge.Translator.Emitter.IS && (Helpers.IsIgnoreCast(type, this.Emitter) || castToEnum))
+            if (method != CS.Ops.IS && (Helpers.IsIgnoreCast(type, this.Emitter) || castToEnum))
             {
                 expression.AcceptVisitor(this.Emitter);
                 return;
             }
 
-            if (method == Bridge.Translator.Emitter.CAST)
+            if (method == CS.Ops.CAST)
             {
                 var cast_rr = this.Emitter.Resolver.ResolveNode(this.CastExpression, this.Emitter);
 
@@ -153,7 +153,7 @@ namespace Bridge.Translator
                 }
             }
 
-            if (method == Bridge.Translator.Emitter.IS && castToEnum)
+            if (method == CS.Ops.IS && castToEnum)
             {
                 this.Write("Bridge.hasValue(");
                 expression.AcceptVisitor(this.Emitter);
@@ -166,7 +166,7 @@ namespace Bridge.Translator
 
             if (expressionrr.Type.Equals(typerr.Type))
             {
-                if (method == Bridge.Translator.Emitter.IS)
+                if (method == CS.Ops.IS)
                 {
                     this.WriteScript(true);
                 }
@@ -189,7 +189,7 @@ namespace Bridge.Translator
                 return;
             }
 
-            bool isCast = method == Bridge.Translator.Emitter.CAST;
+            bool isCast = method == CS.Ops.CAST;
             if (isCast)
             {
                 if (ConversionBlock.IsUserDefinedConversion(this, this.CastExpression.Expression) || ConversionBlock.IsUserDefinedConversion(this, this.CastExpression))
@@ -213,19 +213,19 @@ namespace Bridge.Translator
 
             if (simpleType != null && simpleType.Identifier == "dynamic")
             {
-                if (method == Bridge.Translator.Emitter.CAST || method == Bridge.Translator.Emitter.AS)
+                if (method == CS.Ops.CAST || method == CS.Ops.AS)
                 {
                     expression.AcceptVisitor(this.Emitter);
                     return;
                 }
-                else if (method == Bridge.Translator.Emitter.IS)
+                else if (method == CS.Ops.IS)
                 {
                     hasValue = true;
                     method = "hasValue";
                 }
             }
 
-            this.Write(Bridge.Translator.Emitter.ROOT);
+            this.Write(JS.NS.BRIDGE);
             this.WriteDot();
             this.Write(method);
             this.WriteOpenParentheses();
@@ -246,7 +246,7 @@ namespace Bridge.Translator
                 }
             }
 
-            if (isResultNullable && method != Bridge.Translator.Emitter.IS)
+            if (isResultNullable && method != CS.Ops.IS)
             {
                 this.WriteComma();
                 this.WriteScript(true);
@@ -263,15 +263,15 @@ namespace Bridge.Translator
             {
                 if (Helpers.IsDecimalType(expectedType, this.Emitter.Resolver))
                 {
-                    typeName = TypeNames.Decimal;
+                    typeName = JS.Types.SYSTEM_DECIMAL;
                 }
                 else if (Helpers.IsLongType(expectedType, this.Emitter.Resolver))
                 {
-                    typeName = TypeNames.Int64;
+                    typeName = JS.Types.SYSTEM_INT64;
                 }
                 else if (Helpers.IsULongType(expectedType, this.Emitter.Resolver))
                 {
-                    typeName = TypeNames.UInt64;
+                    typeName = JS.Types.SYSTEM_UInt64;
                 }
             }
 
@@ -299,7 +299,7 @@ namespace Bridge.Translator
             }
             else if (resolveResult.Type.Kind == TypeKind.Delegate)
             {
-                this.Write("Function");
+                this.Write(JS.Types.FUNCTION);
             }
             else if (resolveResult.Type.Kind == TypeKind.Array)
             {
@@ -319,7 +319,7 @@ namespace Bridge.Translator
             }
             else if (iType.Kind == TypeKind.Delegate)
             {
-                this.Write("Function");
+                this.Write(JS.Types.FUNCTION);
             }
             else if (iType.Kind == TypeKind.Array)
             {
@@ -327,7 +327,7 @@ namespace Bridge.Translator
             }
             else if (iType.Kind == TypeKind.Anonymous)
             {
-                this.Write("Object");
+                this.Write(JS.Types.OBJECT);
             }
             else
             {
@@ -369,7 +369,7 @@ namespace Bridge.Translator
             }
             else
             {
-                this.Write("Array");
+                this.Write(JS.Types.ARRAY);
             }
         }
 

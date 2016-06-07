@@ -1,6 +1,9 @@
 using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,7 +96,7 @@ namespace Bridge.Translator
                     Type = rr.Type
                 };
 
-                if (parentTypeInfo != null && Emitter.reservedStaticNames.Any(n => String.Equals(this.CurrentType.Name, n, StringComparison.InvariantCultureIgnoreCase)))
+                if (parentTypeInfo != null && JS.Reserved.StaticNames.Any(n => String.Equals(this.CurrentType.Name, n, StringComparison.InvariantCultureIgnoreCase)))
                 {
                     throw new EmitterException(typeDeclaration, "Nested class cannot have such name: " + this.CurrentType.Name + ". Please rename it.");
                 }
@@ -326,6 +329,11 @@ namespace Bridge.Translator
                 dict.Add(key, new List<EntityDeclaration>(new[] { propertyDeclaration }));
             }
 
+            var isResolvedProperty = false;
+            MemberResolveResult resolvedProperty = null;
+
+            CheckFieldProperty(propertyDeclaration, ref isResolvedProperty, ref resolvedProperty);
+
             if (!propertyDeclaration.Getter.IsNull
                 && !this.HasIgnore(propertyDeclaration)
                 && !this.HasInline(propertyDeclaration.Getter)
@@ -335,7 +343,12 @@ namespace Bridge.Translator
                 Expression initializer = this.GetDefaultFieldInitializer(propertyDeclaration.ReturnType);
                 TypeConfigInfo info = isStatic ? this.CurrentType.StaticConfig : this.CurrentType.InstanceConfig;
 
-                var resolvedProperty = Resolver.ResolveNode(propertyDeclaration, null) as MemberResolveResult;
+                if (!isResolvedProperty)
+                {
+                    resolvedProperty = Resolver.ResolveNode(propertyDeclaration, null) as MemberResolveResult;
+                    isResolvedProperty = true;
+                }
+
                 bool autoPropertyToField = false;
                 if (resolvedProperty != null && resolvedProperty.Member != null)
                 {
@@ -375,6 +388,51 @@ namespace Bridge.Translator
                     });
                 }
             }
+        }
+
+        private void CheckFieldProperty(PropertyDeclaration propertyDeclaration, ref bool isResolvedProperty, ref MemberResolveResult resolvedProperty)
+        {
+            if (this.HasIgnore(propertyDeclaration))
+            {
+                return;
+            }
+
+            var possiblyWrongGetter = !propertyDeclaration.Getter.IsNull
+                && !propertyDeclaration.Getter.Body.IsNull
+                && !this.HasInline(propertyDeclaration.Getter)
+                && !this.HasScript(propertyDeclaration.Getter);
+
+            var possiblyWrongSetter = !propertyDeclaration.Setter.IsNull
+                && !propertyDeclaration.Setter.Body.IsNull
+                && !this.HasInline(propertyDeclaration.Setter)
+                && !this.HasScript(propertyDeclaration.Setter);
+
+            if (possiblyWrongGetter || possiblyWrongSetter)
+            {
+                if (!isResolvedProperty)
+                {
+                    resolvedProperty = Resolver.ResolveNode(propertyDeclaration, null) as MemberResolveResult;
+                    isResolvedProperty = true;
+                }
+
+                if (resolvedProperty != null && resolvedProperty.Member != null)
+                {
+                    var isField = Helpers.IsFieldProperty(resolvedProperty.Member, AssemblyInfo);
+
+                    if (isField)
+                    {
+                        var message = string.Format(
+                            "{0} is marked with [FieldProperty] attribute but implements {1}{2}. To fix the problem either remove [FieldProperty] (swith off bridge.json option `autoPropertyToField`) or add [External]/[Template] attributes",
+                            resolvedProperty.Member.ToString(),
+                            possiblyWrongGetter ? "getter" : string.Empty,
+                            possiblyWrongSetter ? (possiblyWrongGetter ? " and " : string.Empty) + "setter" : string.Empty
+                        );
+
+                        throw new EmitterException(propertyDeclaration, message);
+                    }
+                }
+            }
+
         }
 
         public override void VisitDelegateDeclaration(DelegateDeclaration delegateDeclaration)
@@ -624,3 +682,4 @@ namespace Bridge.Translator
         }
     }
 }
+

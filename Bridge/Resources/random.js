@@ -1,4 +1,4 @@
-﻿// @source random.js
+﻿    // @source random.js
 
     Bridge.define('System.Random', {
         statics: {

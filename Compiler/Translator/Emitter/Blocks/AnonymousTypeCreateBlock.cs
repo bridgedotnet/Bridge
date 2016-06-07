@@ -1,5 +1,6 @@
-using System.Text;
 using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
@@ -35,14 +36,14 @@ namespace Bridge.Translator
             }
             else
             {
-                this.VisitAnonymousTypeCreateExpression();    
+                this.VisitAnonymousTypeCreateExpression();
             }
         }
 
         protected void VisitPlainAnonymousTypeCreateExpression()
         {
             AnonymousTypeCreateExpression anonymousTypeCreateExpression = this.AnonymousTypeCreateExpression;
-           
+
             this.WriteOpenBrace();
             this.WriteSpace();
 
@@ -91,13 +92,14 @@ namespace Bridge.Translator
         protected virtual IAnonymousTypeConfig CreateAnonymousType(AnonymousType type)
         {
             var config = new AnonymousTypeConfig();
-            config.Name = "Bridge.$AnonymousType$" + (this.Emitter.AnonymousTypes.Count + 1);
+            config.Name = JS.Types.BRIDGE_ANONYMOUS + (this.Emitter.AnonymousTypes.Count + 1);
             config.Type = type;
 
             var oldWriter = this.SaveWriter();
             this.NewWriter();
 
-            this.Write("Bridge.define(");
+            this.Write(JS.Funcs.BRIDGE_DEFINE);
+            this.WriteOpenParentheses();
             this.WriteScript(config.Name);
             this.Write(", ");
             this.BeginBlock();
@@ -105,7 +107,7 @@ namespace Bridge.Translator
             this.GenereateCtor(type);
             this.GenereateGetters(config);
             this.GenereateEquals(config);
-            this.GenereateHashCode(config);
+            this.GenerateHashCode(config);
             this.GenereateToJSON(config);
 
             this.WriteNewLine();
@@ -120,7 +122,7 @@ namespace Bridge.Translator
         private void GenereateCtor(AnonymousType type)
         {
             this.EnsureComma();
-            this.Write("constructor: function (");
+            this.Write(JS.Funcs.CONSTRUCTOR + ": function (");
             foreach (var property in type.Properties)
             {
                 this.EnsureComma(false);
@@ -163,10 +165,10 @@ namespace Bridge.Translator
         private void GenereateEquals(IAnonymousTypeConfig config)
         {
             this.EnsureComma();
-            this.Write("equals: function (o) ");
+            this.Write(JS.Funcs.EQUALS + ": function (o) ");
             this.BeginBlock();
 
-            this.Write("if (!Bridge.is(o,");
+            this.Write("if (!" + JS.Funcs.BRIDGE_IS + "(o, ");
             this.Write(config.Name);
             this.Write(")) ");
             this.BeginBlock();
@@ -189,7 +191,7 @@ namespace Bridge.Translator
 
                 and = true;
 
-                this.Write("Bridge.equals(this.");
+                this.Write(JS.Funcs.BRIDGE_EQUALS + "(this.");
                 this.Write(name);
                 this.Write(", o.");
                 this.Write(name);
@@ -203,10 +205,10 @@ namespace Bridge.Translator
             this.Emitter.Comma = true;
         }
 
-        private void GenereateHashCode(IAnonymousTypeConfig config)
+        private void GenerateHashCode(IAnonymousTypeConfig config)
         {
             this.EnsureComma();
-            this.Write("getHashCode: function () ");
+            this.Write(JS.Funcs.GETHASHCODE + ": function () ");
             this.BeginBlock();
             this.Write("var hash = 17;");
 
@@ -221,7 +223,7 @@ namespace Bridge.Translator
                 this.Write("hash = hash * 23 + ");
                 this.Write("(this." + name);
                 this.Write(" == null ? 0 : ");
-                this.Write("Bridge.getHashCode(");
+                this.Write(JS.Funcs.BRIDGE_GETHASHCODE + "(");
                 this.Write("this." + name);
                 this.Write("));");
             }

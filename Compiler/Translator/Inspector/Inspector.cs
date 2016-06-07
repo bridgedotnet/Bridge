@@ -251,7 +251,7 @@ namespace Bridge.Translator
 
             foreach (var p in parameters)
             {
-                string newName = Emitter.FIX_ARGUMENT_NAME + p.Name;
+                string newName = JS.Vars.FIX_ARGUMENT_NAME + p.Name;
                 string oldName = p.Name;
 
                 VariableDeclarationStatement varState = new VariableDeclarationStatement(p.Type.Clone(), oldName, new CastExpression(p.Type.Clone(), new IdentifierExpression(newName)));

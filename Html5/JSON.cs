@@ -2,6 +2,7 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON
 
 using System;
+using System.Collections.Generic;
 
 namespace Bridge.Html5
 {
@@ -20,12 +21,21 @@ namespace Bridge.Html5
         public static extern object Parse(string text);
 
         /// <summary>
-        /// The JSON.parse() method parses a string as JSON, optionally transforming the value produced by parsing.
+        /// The JSON.parse() method parses a string as JSON, optionally transforming the value produced by parsing. 
+        /// Not compatible with collections of nonprimitives - for that case use <see cref="Bridge.Html5.JSON.ParseAsArray&lt;T&gt;(System.String)"/>
         /// </summary>
         /// <param name="text">The string to parse as JSON. See the JSON object for a description of JSON syntax.</param>
         /// <returns>The Object corresponding to the given JSON text.</returns>
         [Template("Bridge.merge(new {T}(), JSON.parse({text}))")]
         public static extern T Parse<T>(string text);
+        
+        /// <summary>
+        /// Arrays of custom classes compatible version of <see cref="Bridge.Html5.JSON.Parse&lt;T&gt;(System.String)"/>
+        /// </summary>
+        /// <param name="text">The string to parse as JSON. See the JSON object for a description of JSON syntax.</param>
+        /// <returns>The Object corresponding to the given JSON text.</returns>
+        [Template("Bridge.merge(new Array(), JSON.parse({text}), function(){return new {T}();})")]
+        public static extern T[] ParseAsArray<T>(string text) where T : new();
 
         /// <summary>
         /// The JSON.parse() method parses a string as JSON, optionally transforming the value produced by parsing.

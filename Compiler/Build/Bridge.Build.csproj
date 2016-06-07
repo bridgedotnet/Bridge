@@ -55,6 +55,7 @@
     <Compile Include="..\..\.build\common\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="VSLoggerWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Contract\Bridge.Contract.csproj">

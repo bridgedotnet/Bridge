@@ -81,7 +81,7 @@ namespace Bridge.Translator.Tests
         }
 
         [TestCase("01", true, false, TestName = "OutputTest 01 - Bridge.json Default")]
-        [TestCase("02", false, true, TestName = "OutputTest 02 - using Task Bridge.json outputFormatting Formatted, autoPropertyToField, combineScripts")]
+        [TestCase("02", false, true, TestName = "OutputTest 02 - using GenerateScript Task Bridge.json outputFormatting Formatted, autoPropertyToField, combineScripts")]
         [TestCase("03", true, true, TestName = "OutputTest 03 - Bridge.json outputFormatting Minified")]
         [TestCase("04", true, true, TestName = "OutputTest 04 - Bridge.json outputBy Class ignoreCast")]
         [TestCase("05", true, true, TestName = "OutputTest 05 - Bridge.json outputBy Namespace ignoreCast default useTypedArrays default")]

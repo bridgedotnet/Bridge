@@ -1,5 +1,8 @@
 using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
+
 using System.Collections.Generic;
 using System.Linq;
 
@@ -31,7 +34,7 @@ namespace Bridge.Translator
             {
                 var name = this.Emitter.GetEntityName(p);
 
-                name = name.Replace(Bridge.Translator.Emitter.FIX_ARGUMENT_NAME, "");
+                name = name.Replace(JS.Vars.FIX_ARGUMENT_NAME, "");
 
                 if (this.Emitter.LocalsNamesMap != null && this.Emitter.LocalsNamesMap.ContainsKey(name))
                 {
@@ -67,7 +70,7 @@ namespace Bridge.Translator
                 }
 
                 needComma = true;
-                this.Write(p.Name.Replace(Bridge.Translator.Emitter.FIX_ARGUMENT_NAME, ""));
+                this.Write(p.Name.Replace(JS.Vars.FIX_ARGUMENT_NAME, ""));
                 this.Emitter.Comma = true;
             }
         }

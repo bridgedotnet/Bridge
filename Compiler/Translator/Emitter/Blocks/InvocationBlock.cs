@@ -1,13 +1,15 @@
 using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.CSharp.Resolver;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace Bridge.Translator
 {
@@ -434,11 +436,9 @@ namespace Bridge.Translator
                     baseMethod = this.Emitter.AssemblyInfo.PreserveMemberCase ? baseMethod : Object.Net.Utilities.StringUtils.ToLowerCamelCase(baseMethod);
                 }
 
-                this.Write(name, ".prototype.", baseMethod);
+                this.Write(name, "." + JS.Fields.PROTOTYPE + ".", baseMethod);
 
-                this.WriteDot();
-
-                this.Write("call");
+                this.WriteCall();
                 this.WriteOpenParentheses();
                 this.WriteThis();
                 this.Emitter.Comma = true;
@@ -552,7 +552,7 @@ namespace Bridge.Translator
                 {
                     if (needExpand && isIgnore)
                     {
-                        this.Write(".apply");
+                        this.Write("." + JS.Funcs.APPLY);
                     }
 
                     this.WriteOpenParentheses();

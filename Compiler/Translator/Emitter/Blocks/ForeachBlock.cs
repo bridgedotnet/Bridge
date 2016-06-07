@@ -1,5 +1,8 @@
 using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +41,7 @@ namespace Bridge.Translator
         protected virtual string GetNextIteratorName()
         {
             var index = this.Emitter.IteratorCount++;
-            var result = "$i";
+            var result = JS.Vars.ITERATOR;
 
             if (index > 0)
             {
@@ -82,9 +85,7 @@ namespace Bridge.Translator
             var iteratorName = this.AddLocal(this.GetTempVarName(), AstType.Null);
 
             //this.WriteVar();
-            this.Write(iteratorName, " = ", Bridge.Translator.Emitter.ROOT);
-            this.WriteDot();
-            this.Write(Bridge.Translator.Emitter.ENUMERATOR);
+            this.Write(iteratorName, " = ", JS.Funcs.BRIDGE_GET_ENUMERATOR);
 
             this.WriteOpenParentheses();
             foreachStatement.InExpression.AcceptVisitor(this.Emitter);
@@ -92,7 +93,7 @@ namespace Bridge.Translator
             this.WriteCloseParentheses();
             this.WriteSemiColon();
             this.WriteNewLine();
-            this.Write("$step = " + this.Emitter.AsyncBlock.Step + ";");
+            this.Write(JS.Vars.ASYNC_STEP + " = " + this.Emitter.AsyncBlock.Step + ";");
             this.WriteNewLine();
             this.Write("continue;");
             this.WriteNewLine();
@@ -103,7 +104,7 @@ namespace Bridge.Translator
             this.WriteOpenParentheses();
             this.Write(iteratorName);
             this.WriteDot();
-            this.Write(Bridge.Translator.Emitter.MOVE_NEXT);
+            this.Write(JS.Funcs.MOVE_NEXT);
             this.WriteOpenCloseParentheses();
             this.WriteCloseParentheses();
             this.WriteSpace();
@@ -116,13 +117,13 @@ namespace Bridge.Translator
             this.Write(varName, " = ", iteratorName);
 
             this.WriteDot();
-            this.Write(Bridge.Translator.Emitter.GET_CURRENT);
+            this.Write(JS.Funcs.GET_CURRENT);
 
             this.WriteOpenCloseParentheses();
             this.WriteSemiColon();
             this.WriteNewLine();
 
-            this.Write("$step = " + this.Emitter.AsyncBlock.Step + ";");
+            this.Write(JS.Vars.ASYNC_STEP + " = " + this.Emitter.AsyncBlock.Step + ";");
             this.WriteNewLine();
             this.Write("continue;");
 
@@ -154,7 +155,7 @@ namespace Bridge.Translator
 
             if (!AbstractEmitterBlock.IsJumpStatementLast(this.Emitter.Output.ToString()))
             {
-                this.Write("$step = " + conditionStep.Step + ";");
+                this.Write(JS.Vars.ASYNC_STEP + " = " + conditionStep.Step + ";");
                 this.WriteNewLine();
                 this.Write("continue;");
                 this.WriteNewLine();
@@ -194,9 +195,7 @@ namespace Bridge.Translator
             var iteratorName = this.AddLocal(iteratorVar, AstType.Null);
 
             //this.WriteVar();
-            this.Write(iteratorName, " = ", Bridge.Translator.Emitter.ROOT);
-            this.WriteDot();
-            this.Write(Bridge.Translator.Emitter.ENUMERATOR);
+            this.Write(iteratorName, " = ", JS.Funcs.BRIDGE_GET_ENUMERATOR);
 
             this.WriteOpenParentheses();
             foreachStatement.InExpression.AcceptVisitor(this.Emitter);
@@ -208,7 +207,7 @@ namespace Bridge.Translator
             this.WriteOpenParentheses();
             this.Write(iteratorName);
             this.WriteDot();
-            this.Write(Bridge.Translator.Emitter.MOVE_NEXT);
+            this.Write(JS.Funcs.MOVE_NEXT);
             this.WriteOpenCloseParentheses();
             this.WriteCloseParentheses();
             this.WriteSpace();
@@ -223,7 +222,7 @@ namespace Bridge.Translator
                 this.Write(varName, " = ", iteratorName);
 
                 this.WriteDot();
-                this.Write(Bridge.Translator.Emitter.GET_CURRENT);
+                this.Write(JS.Funcs.GET_CURRENT);
 
                 this.WriteOpenCloseParentheses();
                 this.WriteSemiColon();

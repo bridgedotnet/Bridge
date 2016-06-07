@@ -1,4 +1,6 @@
 using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
 
 namespace Bridge.Translator
@@ -37,11 +39,11 @@ namespace Bridge.Translator
 
                     if (finallyNode != null)
                     {
-                        this.Write("$returnValue = ");
+                        this.Write(JS.Vars.ASYNC_RETURN_VALUE + " = ");
                     }
                     else
                     {
-                        this.Write("$tcs.setResult(");
+                        this.Write(JS.Vars.ASYNC_TCS + "." + JS.Funcs.SET_RESULT + "(");
                     }
 
                     if (!returnStatement.Expression.IsNull)
@@ -68,7 +70,7 @@ namespace Bridge.Translator
                         Node = finallyNode,
                         Output = this.Emitter.Output
                     });
-                    this.Write("$step = ${" + hashcode + "};");
+                    this.Write(JS.Vars.ASYNC_STEP + " = " + Helpers.PrefixDollar("{", hashcode, "};"));
                     this.WriteNewLine();
                     this.Write("continue;");
                 }

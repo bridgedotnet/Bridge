@@ -1,7 +1,9 @@
 ﻿(function (globals) {
     "use strict";
 
-    Bridge.define('TestIssue958.IMessage');
+    Bridge.define('TestIssue958.IMessage', {
+        $interface: true
+    });
     
     Bridge.define('TestIssue958.Issue958', {
         statics: {

@@ -1,7 +1,7 @@
 var log = [];
 var testName;
 QUnit.done(function (test_results) {
-  var tests = log.map(function(details){
+  var tests = log.map(function (details) {
     return {
       name: details.name,
       result: details.result,
@@ -21,7 +21,7 @@ QUnit.done(function (test_results) {
 });
 
 
-  QUnit.log(function(details){
+  QUnit.log(function (details) {
     if (!details.result) {
       //details.name = testDetails.name;
       log.push(details);

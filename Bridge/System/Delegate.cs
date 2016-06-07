@@ -13,6 +13,10 @@ namespace System
             get;
         }
 
+        protected extern Delegate(object target, string method);
+
+        protected extern Delegate(Type target, string method);
+
         protected extern Delegate();
 
         public virtual extern object Apply(object thisArg);
@@ -32,6 +36,12 @@ namespace System
 
         [Template("Bridge.fn.remove({0}, {1})")]
         public static extern Delegate Remove(Delegate source, Delegate value);
+
+        [Template("Bridge.staticEquals({a}, {b})")]
+        public static extern bool operator ==(Delegate a, Delegate b);
+
+        [Template("!Bridge.staticEquals({a}, {b})")]
+        public static extern bool operator !=(Delegate a, Delegate b);
     }
 
     [External]
@@ -40,5 +50,18 @@ namespace System
     public class MulticastDelegate : Delegate
     {
         protected extern MulticastDelegate();
+
+        protected extern MulticastDelegate(object target, string method);
+
+        protected extern MulticastDelegate(Type target, string method);
+
+        [Template("Bridge.staticEquals({a}, {b})")]
+        public static extern bool operator ==(MulticastDelegate a, MulticastDelegate b);
+
+        [Template("!Bridge.staticEquals({a}, {b})")]
+        public static extern bool operator !=(MulticastDelegate a, MulticastDelegate b);
+
+        [Template("{this}.$invocationList")]
+        public extern Delegate[] GetInvocationList();
     }
 }

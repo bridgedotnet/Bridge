@@ -1649,7 +1649,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.G)) {
+            if (!Bridge.is(o, Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.G)) {
                 return false;
             }
             return Bridge.equals(this.x, o.x) && Bridge.equals(this.s, o.s) && Bridge.equals(this.z, o.z);
@@ -1663,9 +1663,13 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
         }
     });
     
-    Bridge.define('Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.I1');
+    Bridge.define('Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.I1', {
+        $interface: true
+    });
     
-    Bridge.define('Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.I2');
+    Bridge.define('Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.I2', {
+        $interface: true
+    });
     
     Bridge.define('Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.IntegerComparer', {
         inherits: [System.Collections.Generic.IComparer$1(System.Int32),System.Collections.IEqualityComparer],
@@ -1702,7 +1706,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.S)) {
+            if (!Bridge.is(o, Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.S)) {
                 return false;
             }
             return Bridge.equals(this.x, o.x);
@@ -1939,7 +1943,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BasicCSharp.Point)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BasicCSharp.Point)) {
                 return false;
             }
             return Bridge.equals(this.x, o.x) && Bridge.equals(this.y, o.y);
@@ -1986,7 +1990,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BasicCSharp.Rectangle)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BasicCSharp.Rectangle)) {
                 return false;
             }
             return Bridge.equals(this.l, o.l) && Bridge.equals(this.t, o.t);
@@ -2284,9 +2288,13 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
         }
     });
     
-    Bridge.define('Bridge.ClientTest.BasicCSharp.TestInterfaces.ISimple');
+    Bridge.define('Bridge.ClientTest.BasicCSharp.TestInterfaces.ISimple', {
+        $interface: true
+    });
     
-    Bridge.define('Bridge.ClientTest.BasicCSharp.TestInterfaces.ISimpleAsWell');
+    Bridge.define('Bridge.ClientTest.BasicCSharp.TestInterfaces.ISimpleAsWell', {
+        $interface: true
+    });
     
     Bridge.define('Bridge.ClientTest.BasicCSharp.TestMethodParametersClass', {
         statics: {
@@ -3190,7 +3198,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge069.Point69)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge069.Point69)) {
                 return false;
             }
             return Bridge.equals(this.x, o.x) && Bridge.equals(this.y, o.y);
@@ -4329,7 +4337,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge1128.Foo.Item)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge1128.Foo.Item)) {
                 return false;
             }
             return Bridge.equals(this.value, o.value);
@@ -4377,7 +4385,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge1128.Foo1.Item)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge1128.Foo1.Item)) {
                 return false;
             }
             return Bridge.equals(this.value, o.value);
@@ -5010,7 +5018,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge1180.Vector2)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge1180.Vector2)) {
                 return false;
             }
             return Bridge.equals(this.x, o.x) && Bridge.equals(this.y, o.y);
@@ -5264,7 +5272,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             }
         },
         validate: function () {
-            return this.IsNotWorking == null ? "no subscribers" : this.IsNotWorking();
+            return Bridge.staticEquals(this.IsNotWorking, null) ? "no subscribers" : this.IsNotWorking();
         }
     }; });
     
@@ -5507,6 +5515,26 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
         }
     });
     
+    Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge122', {
+        statics: {
+            nx: 1,
+            breaker: null,
+            config: {
+                init: function () {
+                    this.breaker = System.Array.create(0, [[1, 2], [3, 4]], 2, 2);
+                }
+            },
+            test2DArrayConstruction: function () {
+                var x = 0;
+                var y = 1;
+    
+                var retval = (x >= 0 && x < Bridge.ClientTest.BridgeIssues.Bridge122.nx && Bridge.ClientTest.BridgeIssues.Bridge122.breaker.length > ((((((x + 1) | 0)) * Bridge.ClientTest.BridgeIssues.Bridge122.nx) | 0))) ? Bridge.ClientTest.BridgeIssues.Bridge122.breaker.get([x, y]) : 0;
+    
+                Bridge.Test.Assert.areEqual(2, retval);
+            }
+        }
+    });
+    
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge1220', {
         statics: {
             testConstInGenericClass: function () {
@@ -5602,7 +5630,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
     }; });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge1231.I1$1', function (T) { return {
-    
+        $interface: true
     }; });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge1232', {
@@ -6275,7 +6303,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge1296.MessageId)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge1296.MessageId)) {
                 return false;
             }
             return Bridge.equals(this.Value, o.Value);
@@ -6650,7 +6678,9 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
         }
     });
     
-    Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge1313.IInterface');
+    Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge1313.IInterface', {
+        $interface: true
+    });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge1316', {
         statics: {
@@ -6810,7 +6840,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge1328.Optional3$1(T))) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge1328.Optional3$1(T))) {
                 return false;
             }
             return Bridge.equals(this.Value, o.Value);
@@ -6844,7 +6874,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge1328.StructLink)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge1328.StructLink)) {
                 return false;
             }
             return Bridge.equals(this.name, o.name);
@@ -6882,7 +6912,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge1328.StructLink2)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge1328.StructLink2)) {
                 return false;
             }
             return Bridge.equals(this.name, o.name);
@@ -6928,7 +6958,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge1328.StructLink3)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge1328.StructLink3)) {
                 return false;
             }
             return Bridge.equals(this.name, o.name) && Bridge.equals(this.Url, o.Url) && Bridge.equals(this.Text, o.Text);
@@ -7263,7 +7293,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge1340.Data$1(T))) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge1340.Data$1(T))) {
                 return false;
             }
             return Bridge.equals(this.value2, o.value2) && Bridge.equals(this.Value1, o.Value1);
@@ -7297,7 +7327,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge1340.Data$2(T,K))) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge1340.Data$2(T,K))) {
                 return false;
             }
             return Bridge.equals(this.value2, o.value2) && Bridge.equals(this.Value1, o.Value1);
@@ -7606,7 +7636,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.a;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$1)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$1)) {
                 return false;
             }
             return Bridge.equals(this.a, o.a);
@@ -7636,7 +7666,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.b;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$2)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$2)) {
                 return false;
             }
             return Bridge.equals(this.a, o.a) && Bridge.equals(this.b, o.b);
@@ -7668,7 +7698,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.b;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$3)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$3)) {
                 return false;
             }
             return Bridge.equals(this.a, o.a) && Bridge.equals(this.b, o.b);
@@ -7700,7 +7730,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.b;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$4)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$4)) {
                 return false;
             }
             return Bridge.equals(this.a, o.a) && Bridge.equals(this.b, o.b);
@@ -7728,7 +7758,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.value1;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$5)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$5)) {
                 return false;
             }
             return Bridge.equals(this.value1, o.value1);
@@ -7754,7 +7784,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.value2;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$6)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$6)) {
                 return false;
             }
             return Bridge.equals(this.value2, o.value2);
@@ -7780,7 +7810,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.b;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$7)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$7)) {
                 return false;
             }
             return Bridge.equals(this.b, o.b);
@@ -7810,7 +7840,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.c;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$8)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$8)) {
                 return false;
             }
             return Bridge.equals(this.b, o.b) && Bridge.equals(this.c, o.c);
@@ -7842,7 +7872,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.b;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$9)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$9)) {
                 return false;
             }
             return Bridge.equals(this.a, o.a) && Bridge.equals(this.b, o.b);
@@ -7874,7 +7904,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.c;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$10)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$10)) {
                 return false;
             }
             return Bridge.equals(this.b, o.b) && Bridge.equals(this.c, o.c);
@@ -7906,7 +7936,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.a;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$11)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$11)) {
                 return false;
             }
             return Bridge.equals(this.b, o.b) && Bridge.equals(this.a, o.a);
@@ -7938,7 +7968,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.c;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$12)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$12)) {
                 return false;
             }
             return Bridge.equals(this.b, o.b) && Bridge.equals(this.c, o.c);
@@ -7997,7 +8027,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge1341.SomeStructA)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge1341.SomeStructA)) {
                 return false;
             }
             return Bridge.equals(this.Value1, o.Value1);
@@ -8028,7 +8058,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge1341.SomeStructA1)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge1341.SomeStructA1)) {
                 return false;
             }
             return Bridge.equals(this.Value1, o.Value1);
@@ -8059,7 +8089,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge1341.SomeStructA2)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge1341.SomeStructA2)) {
                 return false;
             }
             return Bridge.equals(this.Value2, o.Value2);
@@ -8510,6 +8540,106 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
         }
     });
     
+    Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge1428', {
+        statics: {
+            testEqOperatorWithNull: function () {
+                var c = new Bridge.ClientTest.BridgeIssues.Bridge1428();
+    
+                var test = new System.Collections.Generic.List$1(Function)();
+                test.add(Bridge.fn.bind(c, c.method1));
+    
+                Bridge.Test.Assert.areEqual(1, test.getCount());
+                test.remove(Bridge.fn.bind(c, c.method1));
+                Bridge.Test.Assert.areEqual(0, test.getCount());
+    
+                var l1 = Bridge.fn.bind(c, c.method1);
+                var l2 = Bridge.fn.bind(c, c.method1);
+    
+                Bridge.Test.Assert.true(Bridge.staticEquals(l1, l2));
+    
+                l1 = Bridge.fn.bind(c, c.method1);
+                l2 = Bridge.fn.bind(c, c.method2);
+    
+                Bridge.Test.Assert.false(Bridge.staticEquals(l1, l2));
+            }
+        },
+        method1: function () {
+        },
+        method2: function () {
+        }
+    });
+    
+    Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge1429', {
+        statics: {
+            testEqOperatorWithNull: function () {
+                Bridge.Test.Assert.true$1(Bridge.ClientTest.BridgeIssues.Bridge1429.op_Equality(new Bridge.ClientTest.BridgeIssues.Bridge1429(), null), "new Bridge1429() == null");
+    
+                var a = new Bridge.ClientTest.BridgeIssues.Bridge1429();
+                var b = new Bridge.ClientTest.BridgeIssues.Bridge1429();
+                var aa = a;
+    
+                Bridge.Test.Assert.true$1(Bridge.ClientTest.BridgeIssues.Bridge1429.op_Equality(a, b), "a == b");
+                Bridge.Test.Assert.true$1(Bridge.ClientTest.BridgeIssues.Bridge1429.op_Inequality(a, aa), "a != aa");
+    
+                var c = null;
+                var d = null;
+    
+                Bridge.Test.Assert.true$1(Bridge.ClientTest.BridgeIssues.Bridge1429.op_Inequality(c, d), "c != d");
+            },
+            op_Equality: function (a, b) {
+                return true;
+            },
+            op_Inequality: function (a, b) {
+                return true;
+            }
+        }
+    });
+    
+    Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge1438', {
+        statics: {
+            testJSONParse: function () {
+                var serialized = JSON.stringify(Bridge.merge(new Bridge.ClientTest.BridgeIssues.Bridge1438.Foo(), {
+                    setValue: 100
+                } ));
+    
+                Bridge.Test.Assert.notNull$1(serialized, " serialized should not be null");
+    
+                var result = Bridge.merge(new Bridge.ClientTest.BridgeIssues.Bridge1438.Foo(), JSON.parse(serialized));
+    
+                Bridge.Test.Assert.notNull$1(result, " result should not be null");
+                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.BridgeIssues.Bridge1438.Foo", Bridge.getTypeName(result), "Check result type name");
+                Bridge.Test.Assert.areEqual$1(100, result.getValue(), "result.Value = 100");
+            },
+            testJSONParseAsArray: function () {
+                var serialized = JSON.stringify([Bridge.merge(new Bridge.ClientTest.BridgeIssues.Bridge1438.Foo(), {
+                    setValue: 101
+                } )]);
+    
+                Bridge.Test.Assert.notNull$1(serialized, " serialized should not be null");
+    
+                var result = Bridge.merge(new Array(), JSON.parse(serialized), function(){return new Bridge.ClientTest.BridgeIssues.Bridge1438.Foo();});
+    
+                Bridge.Test.Assert.notNull$1(result, " result should not be null");
+                Bridge.Test.Assert.areEqual$1("Array", Bridge.getTypeName(result), "Check result type name");
+                Bridge.Test.Assert.areEqual$1(1, result.length, "Check result length");
+                Bridge.Test.Assert.notNull$1(result[0], " result[0] should not be null");
+                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.BridgeIssues.Bridge1438.Foo", Bridge.getTypeName(result[0]), "Check result[0] type name");
+                Bridge.Test.Assert.areEqual$1(101, result[0].getValue(), "result[0].Value = 101");
+            }
+        }
+    });
+    
+    Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge1438.Foo', {
+        config: {
+            properties: {
+                Value: 0
+            }
+        },
+        someMethod: function () {
+            return "I'm " + Bridge.getTypeName(Bridge.getType(this)) + " and my value is " + this.getValue();
+        }
+    });
+    
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge169', {
         statics: {
             number: 0,
@@ -8597,7 +8727,9 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
         }
     });
     
-    Bridge.define('Bridge.ClientTest.BridgeIssues.IBridge304');
+    Bridge.define('Bridge.ClientTest.BridgeIssues.IBridge304', {
+        $interface: true
+    });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge305', {
         inherits: [System.Collections.Generic.IEnumerable$1(String)],
@@ -8804,7 +8936,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge407)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge407)) {
                 return false;
             }
             return Bridge.equals(this.A, o.A);
@@ -9018,7 +9150,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.firstName;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$13)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$13)) {
                 return false;
             }
             return Bridge.equals(this.lastName, o.lastName) && Bridge.equals(this.firstName, o.firstName);
@@ -9426,7 +9558,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
         constructor: function () {
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$14)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$14)) {
                 return false;
             }
             return ;
@@ -10378,7 +10510,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge577.Bridge577UnitB)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge577.Bridge577UnitB)) {
                 return false;
             }
             return Bridge.equals(this.Number, o.Number);
@@ -10886,7 +11018,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge603A)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge603A)) {
                 return false;
             }
             return Bridge.equals(this.value, o.value);
@@ -10942,7 +11074,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge603B)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge603B)) {
                 return false;
             }
             return Bridge.equals(this.value, o.value) && Bridge.equals(this.intValue, o.intValue);
@@ -11641,7 +11773,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge660Optional$1(T))) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge660Optional$1(T))) {
                 return false;
             }
             return Bridge.equals(this.value, o.value) && Bridge.equals(this.isDefined, o.isDefined);
@@ -12193,7 +12325,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge692.B1)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge692.B1)) {
                 return false;
             }
             return Bridge.equals(this.field1, o.field1);
@@ -12222,7 +12354,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge692.B2)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge692.B2)) {
                 return false;
             }
             return Bridge.equals(this.field1, o.field1);
@@ -12264,7 +12396,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge692.C1)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge692.C1)) {
                 return false;
             }
             return Bridge.equals(this.field1, o.field1);
@@ -12300,7 +12432,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge692.C2)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge692.C2)) {
                 return false;
             }
             return Bridge.equals(this.field1, o.field1);
@@ -12331,7 +12463,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge692.C3)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge692.C3)) {
                 return false;
             }
             return Bridge.equals(this.Prop1, o.Prop1);
@@ -12357,7 +12489,9 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
         }
     }; });
     
-    Bridge.define('Bridge.ClientTest.BridgeIssues.IBridge693D');
+    Bridge.define('Bridge.ClientTest.BridgeIssues.IBridge693D', {
+        $interface: true
+    });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge694', {
         statics: {
@@ -12790,7 +12924,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge762B)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge762B)) {
                 return false;
             }
             return Bridge.equals(this.Data, o.Data);
@@ -12979,7 +13113,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge785.DataStruct)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge785.DataStruct)) {
                 return false;
             }
             return Bridge.equals(this.Value, o.Value);
@@ -13045,7 +13179,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge789A)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge789A)) {
                 return false;
             }
             return Bridge.equals(this.field1, o.field1);
@@ -13086,7 +13220,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
         statics: {
             testUseCase: function () {
                 var wrappedValue = new Bridge.ClientTest.BridgeIssues.Bridge795A("constructor$1", 1);
-                var wrappedValueIsNull = (wrappedValue == null);
+                var wrappedValueIsNull = (System.Nullable.lifteq(Bridge.ClientTest.BridgeIssues.Bridge795A.op_Equality, wrappedValue, null));
     
                 Bridge.Test.Assert.areEqual$1(false, wrappedValueIsNull, "Bridge795");
             },
@@ -13290,7 +13424,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.ClientTest.BridgeIssues.Bridge815.B)) {
+            if (!Bridge.is(o, Bridge.ClientTest.BridgeIssues.Bridge815.B)) {
                 return false;
             }
             return Bridge.equals(this.field, o.field);
@@ -13753,7 +13887,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             }
         },
         invokeDelegates: function () {
-            if (this.getDelegates() != null) {
+            if (!Bridge.staticEquals(this.getDelegates(), null)) {
                 this.getDelegates()(this);
             }
         }
@@ -13884,7 +14018,9 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
         }
     });
     
-    Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge883_IInterface');
+    Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge883_IInterface', {
+        $interface: true
+    });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge883_3', {
         statics: {
@@ -14180,7 +14316,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.value;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$15)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$15)) {
                 return false;
             }
             return Bridge.equals(this.value, o.value);
@@ -15889,7 +16025,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.i;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$16)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$16)) {
                 return false;
             }
             return Bridge.equals(this.i, o.i);
@@ -18942,6 +19078,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             MODULE_THREADING: "Threading",
             MODULE_DIAGNOSTICS: "Diagnostics",
             MODULE_CHECKED_UNCKECKED: "Checked/Unckecked",
+            MODULE_TYPE_SYSTEM: "Type system",
             IGNORE_DATE: null
         }
     });
@@ -19218,7 +19355,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             },
             verify: function (input, action) {
                 if (action === void 0) { action = null; }
-                if (action != null) {
+                if (!Bridge.staticEquals(action, null)) {
                     action(System.Convert.fromBase64CharArray(System.String.toCharArray(input, 0, input.length), 0, input.length));
                     action(System.Convert.fromBase64String(input));
                 }
@@ -22769,7 +22906,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.personCount;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$17)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$17)) {
                 return false;
             }
             return Bridge.equals(this.group, o.group) && Bridge.equals(this.personCount, o.personCount);
@@ -22801,7 +22938,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.sum;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$18)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$18)) {
                 return false;
             }
             return Bridge.equals(this.group, o.group) && Bridge.equals(this.sum, o.sum);
@@ -22833,7 +22970,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.min;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$19)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$19)) {
                 return false;
             }
             return Bridge.equals(this.group, o.group) && Bridge.equals(this.min, o.min);
@@ -22865,7 +23002,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.minCount;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$20)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$20)) {
                 return false;
             }
             return Bridge.equals(this.g, o.g) && Bridge.equals(this.minCount, o.minCount);
@@ -22897,7 +23034,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.name;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$21)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$21)) {
                 return false;
             }
             return Bridge.equals(this.group, o.group) && Bridge.equals(this.name, o.name);
@@ -22929,7 +23066,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.max;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$22)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$22)) {
                 return false;
             }
             return Bridge.equals(this.group, o.group) && Bridge.equals(this.max, o.max);
@@ -22961,7 +23098,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.maxCount;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$23)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$23)) {
                 return false;
             }
             return Bridge.equals(this.g, o.g) && Bridge.equals(this.maxCount, o.maxCount);
@@ -23326,7 +23463,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.isOdd;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$24)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$24)) {
                 return false;
             }
             return Bridge.equals(this.number, o.number) && Bridge.equals(this.isOdd, o.isOdd);
@@ -23431,7 +23568,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.numbers;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$25)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$25)) {
                 return false;
             }
             return Bridge.equals(this.remainder, o.remainder) && Bridge.equals(this.numbers, o.numbers);
@@ -23463,7 +23600,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.words;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$26)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$26)) {
                 return false;
             }
             return Bridge.equals(this.firstLetter, o.firstLetter) && Bridge.equals(this.words, o.words);
@@ -23495,7 +23632,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.persons;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$27)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$27)) {
                 return false;
             }
             return Bridge.equals(this.group, o.group) && Bridge.equals(this.persons, o.persons);
@@ -23527,7 +23664,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.words;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$28)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$28)) {
                 return false;
             }
             return Bridge.equals(this.key, o.key) && Bridge.equals(this.words, o.words);
@@ -23644,7 +23781,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.limit;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$29)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$29)) {
                 return false;
             }
             return Bridge.equals(this.name, o.name) && Bridge.equals(this.limit, o.limit);
@@ -23676,7 +23813,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.pg;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$30)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$30)) {
                 return false;
             }
             return Bridge.equals(this.g, o.g) && Bridge.equals(this.pg, o.pg);
@@ -23708,7 +23845,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.personName;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$31)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$31)) {
                 return false;
             }
             return Bridge.equals(this.groupName, o.groupName) && Bridge.equals(this.personName, o.personName);
@@ -23740,7 +23877,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.digit;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$32)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$32)) {
                 return false;
             }
             return Bridge.equals(this.name, o.name) && Bridge.equals(this.digit, o.digit);
@@ -23772,7 +23909,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.ep;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$33)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$33)) {
                 return false;
             }
             return Bridge.equals(this.x3, o.x3) && Bridge.equals(this.ep, o.ep);
@@ -24095,7 +24232,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.name;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$34)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$34)) {
                 return false;
             }
             return Bridge.equals(this.name, o.name);
@@ -24125,7 +24262,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.isIndex;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$35)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$35)) {
                 return false;
             }
             return Bridge.equals(this.number, o.number) && Bridge.equals(this.isIndex, o.isIndex);
@@ -24157,7 +24294,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.b;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$36)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$36)) {
                 return false;
             }
             return Bridge.equals(this.a, o.a) && Bridge.equals(this.b, o.b);
@@ -24189,7 +24326,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.b;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$37)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$37)) {
                 return false;
             }
             return Bridge.equals(this.a, o.a) && Bridge.equals(this.b, o.b);
@@ -24217,7 +24354,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.sum;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$38)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$38)) {
                 return false;
             }
             return Bridge.equals(this.sum, o.sum);
@@ -24251,7 +24388,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.i;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$39)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$39)) {
                 return false;
             }
             return Bridge.equals(this.a, o.a) && Bridge.equals(this.b, o.b) && Bridge.equals(this.i, o.i);
@@ -24348,7 +24485,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return this.names;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Bridge.$AnonymousType$40)) {
+            if (!Bridge.is(o, Bridge.$AnonymousType$40)) {
                 return false;
             }
             return Bridge.equals(this.group, o.group) && Bridge.equals(this.names, o.names);
@@ -27283,14 +27420,14 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             Bridge.Test.Assert.true$1(System.Nullable.lifteq("equals", System.Int64(5754), System.Int64.clip64(ni3)), "nullable 5754 unchecked");
             Bridge.Test.Assert.true$1(System.Nullable.lifteq("equals", System.Int64([-808,2147483647]), System.Int64.clip64(ni4)), "nullable 9223372036854775000 unchecked");
             Bridge.Test.Assert.true$1(System.Nullable.liftcmp("lt", System.Int64.clip64(ni5), System.Int64(0)), "nullable 16223372036854776000 unchecked");
-            Bridge.Test.Assert.true$1(System.Int64.lift(null) == System.Int64.clip64(ni6), "null unchecked");
+            Bridge.Test.Assert.true$1(System.Nullable.lifteq("equals", System.Int64.lift(null), System.Int64.clip64(ni6)), "null unchecked");
     
             Bridge.Test.Assert.true$1(System.Int64(5754).equals(System.Int64.check(i3, System.Int64)), "5754 checked");
             Bridge.Test.Assert.true$1(System.Int64([-808,2147483647]).equals(System.Int64.check(i4, System.Int64)), "9223372036854775000 checked");
     
             Bridge.Test.Assert.true$1(System.Nullable.lifteq("equals", System.Int64(5754), System.Int64.check(ni3, System.Int64)), "nullable 5754 checked");
             Bridge.Test.Assert.true$1(System.Nullable.lifteq("equals", System.Int64([-808,2147483647]), System.Int64.check(ni4, System.Int64)), "nullable 9223372036854775000 checked");
-            Bridge.Test.Assert.true$1(System.Int64.lift(null) == System.Int64.check(ni6, System.Int64), "null checked");
+            Bridge.Test.Assert.true$1(System.Nullable.lifteq("equals", System.Int64.lift(null), System.Int64.check(ni6, System.Int64)), "null checked");
         },
         overflowWorks: function () {
             var min = System.Int64.MinValue;
@@ -28980,7 +29117,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             testConstructors: function () {
                 var v1 = new System.Version("constructor");
     
-                Bridge.Test.Assert.true$1(v1 != null, "v1 created");
+                Bridge.Test.Assert.true$1(System.Version.op_Inequality(v1, null), "v1 created");
                 Bridge.Test.Assert.areEqual$1(0, v1.getMajor(), "v1.Major 0");
                 Bridge.Test.Assert.areEqual$1(0, v1.getMinor(), "v1.Minor 0");
                 Bridge.Test.Assert.areEqual$1(-1, v1.getBuild(), "v1.Build -1");
@@ -28989,7 +29126,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
                 Bridge.Test.Assert.areEqual$1(-1, v1.getMinorRevision(), "v1.MinorRevision -1");
     
                 var v2 = new System.Version("constructor$4", "2.4.1128.2");
-                Bridge.Test.Assert.true$1(v2 != null, "v2 created");
+                Bridge.Test.Assert.true$1(System.Version.op_Inequality(v2, null), "v2 created");
                 Bridge.Test.Assert.areEqual$1(2, v2.getMajor(), "v2.Major 2");
                 Bridge.Test.Assert.areEqual$1(4, v2.getMinor(), "v2.Minor 4");
                 Bridge.Test.Assert.areEqual$1(1128, v2.getBuild(), "v2.Build 1128");
@@ -28998,7 +29135,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
                 Bridge.Test.Assert.areEqual$1(2, v2.getMinorRevision(), "v2.MinorRevision 2");
     
                 var v3 = new System.Version("constructor$4", "2.4.1128.65537");
-                Bridge.Test.Assert.true$1(v3 != null, "v3 created");
+                Bridge.Test.Assert.true$1(System.Version.op_Inequality(v3, null), "v3 created");
                 Bridge.Test.Assert.areEqual$1(2, v3.getMajor(), "v3.Major 2");
                 Bridge.Test.Assert.areEqual$1(4, v3.getMinor(), "v3.Minor 4");
                 Bridge.Test.Assert.areEqual$1(1128, v3.getBuild(), "v3.Build 1128");
@@ -29007,7 +29144,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
                 Bridge.Test.Assert.areEqual$1(1, v3.getMinorRevision(), "v3.MinorRevision 1");
     
                 var v4 = new System.Version("constructor$1", 20, 10);
-                Bridge.Test.Assert.true$1(v4 != null, "v4 created");
+                Bridge.Test.Assert.true$1(System.Version.op_Inequality(v4, null), "v4 created");
                 Bridge.Test.Assert.areEqual$1(20, v4.getMajor(), "v4.Major 20");
                 Bridge.Test.Assert.areEqual$1(10, v4.getMinor(), "v4.Minor 10");
                 Bridge.Test.Assert.areEqual$1(-1, v4.getBuild(), "v4.Build -1");
@@ -29016,7 +29153,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
                 Bridge.Test.Assert.areEqual$1(-1, v4.getMinorRevision(), "v4.MinorRevision -1");
     
                 var v5 = new System.Version("constructor$2", 200, 100, 300);
-                Bridge.Test.Assert.true$1(v5 != null, "v5 created");
+                Bridge.Test.Assert.true$1(System.Version.op_Inequality(v5, null), "v5 created");
                 Bridge.Test.Assert.areEqual$1(200, v5.getMajor(), "v5.Major 200");
                 Bridge.Test.Assert.areEqual$1(100, v5.getMinor(), "v5.Minor 100");
                 Bridge.Test.Assert.areEqual$1(300, v5.getBuild(), "v5.Build 300");
@@ -29025,7 +29162,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
                 Bridge.Test.Assert.areEqual$1(-1, v5.getMinorRevision(), "v5.MinorRevision -1");
     
                 var v6 = new System.Version("constructor$3", 2000, 1000, 3000, 22613920);
-                Bridge.Test.Assert.true$1(v6 != null, "v6 created");
+                Bridge.Test.Assert.true$1(System.Version.op_Inequality(v6, null), "v6 created");
                 Bridge.Test.Assert.areEqual$1(2000, v6.getMajor(), "v6.Major 2000");
                 Bridge.Test.Assert.areEqual$1(1000, v6.getMinor(), "v6.Minor 1000");
                 Bridge.Test.Assert.areEqual$1(3000, v6.getBuild(), "v6.Build 3000");
@@ -29040,7 +29177,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
                 Bridge.Test.Assert.true$1(o != null, "v1 Cloned");
     
                 var v2 = Bridge.as(o, System.Version);
-                Bridge.Test.Assert.true$1(v2 != null, "v1 Cloned as Version");
+                Bridge.Test.Assert.true$1(System.Version.op_Inequality(v2, null), "v1 Cloned as Version");
     
                 Bridge.Test.Assert.areEqual$1(1, v2.getMajor(), "v2.Major 1");
                 Bridge.Test.Assert.areEqual$1(2, v2.getMinor(), "v2.Minor 2");
@@ -29139,15 +29276,15 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
                 Bridge.Test.Assert.true$1(System.Version.op_LessThan(v1, v3), "v1 < v3");
                 Bridge.Test.Assert.true$1(System.Version.op_LessThanOrEqual(v1, v3), "v1 <= v3");
     
-                Bridge.Test.Assert.false$1(v1 == null, "v1 == null");
-                Bridge.Test.Assert.true$1(v1 != null, "v1 != null");
+                Bridge.Test.Assert.false$1(System.Version.op_Equality(v1, null), "v1 == null");
+                Bridge.Test.Assert.true$1(System.Version.op_Inequality(v1, null), "v1 != null");
                 Bridge.Test.Assert.true$1(System.Version.op_GreaterThan(v1, null), "v1 > null");
                 Bridge.Test.Assert.true$1(System.Version.op_GreaterThanOrEqual(v1, null), "v1 >= null");
                 Bridge.Test.Assert.false$1(System.Version.op_LessThan(v1, null), "v1 < null");
                 Bridge.Test.Assert.false$1(System.Version.op_LessThanOrEqual(v1, null), "v1 <= null");
     
-                Bridge.Test.Assert.false$1(null == v3, "null == v3");
-                Bridge.Test.Assert.true$1(null != v3, "null != v3");
+                Bridge.Test.Assert.false$1(System.Version.op_Equality(null, v3), "null == v3");
+                Bridge.Test.Assert.true$1(System.Version.op_Inequality(null, v3), "null != v3");
                 Bridge.Test.Assert.false$1(System.Version.op_GreaterThan(null, v3), "null > v3");
                 Bridge.Test.Assert.false$1(System.Version.op_GreaterThanOrEqual(null, v3), "null >= v3");
                 Bridge.Test.Assert.true$1(System.Version.op_LessThan(null, v3), "null < v3");
@@ -29876,7 +30013,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             Bridge.Test.Assert.true$1(System.Nullable.lifteq("equals", System.UInt64(0), System.Int64.clipu64(ni2)), "nullable 0 unchecked");
             Bridge.Test.Assert.true$1(System.Nullable.lifteq("equals", System.UInt64(234), System.Int64.clipu64(ni3)), "nullable 234 unchecked");
             Bridge.Test.Assert.true$1(System.Nullable.lifteq("equals", System.UInt64(System.Int64([-808,2147483647])), System.Int64.clipu64(ni4)), "nullable 9223372036854775000 unchecked");
-            Bridge.Test.Assert.true$1(System.UInt64.lift(null) == System.Int64.clipu64(ni6), "null unchecked");
+            Bridge.Test.Assert.true$1(System.Nullable.lifteq("equals", System.UInt64.lift(null), System.Int64.clipu64(ni6)), "null unchecked");
     
             Bridge.Test.Assert.true$1(System.UInt64(0).equals(System.Int64.check(i2, System.UInt64)), "0 checked");
             Bridge.Test.Assert.true$1(System.UInt64(234).equals(System.Int64.check(i3, System.UInt64)), "234 checked");
@@ -29885,7 +30022,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             Bridge.Test.Assert.true$1(System.Nullable.lifteq("equals", System.UInt64(0), System.Int64.check(ni2, System.UInt64)), "nullable 0 checked");
             Bridge.Test.Assert.true$1(System.Nullable.lifteq("equals", System.UInt64(234), System.Int64.check(ni3, System.UInt64)), "nullable 234 checked");
             Bridge.Test.Assert.true$1(System.Nullable.lifteq("equals", System.UInt64(System.Int64([-808,2147483647])), System.Int64.check(ni4, System.UInt64)), "nullable 9223372036854775000 checked");
-            Bridge.Test.Assert.true$1(System.UInt64.lift(null) == System.Int64.check(ni6, System.UInt64), "null checked");
+            Bridge.Test.Assert.true$1(System.Nullable.lifteq("equals", System.UInt64.lift(null), System.Int64.check(ni6, System.UInt64)), "null checked");
         },
         overflowWorks: function () {
             var min = System.UInt64.MinValue;
@@ -32021,7 +32158,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             while (i < this.getThens().getCount()) {
                 var aThen = this.getThens().getItem(i);
     
-                if (aThen.getProgress() != null) {
+                if (!Bridge.staticEquals(aThen.getProgress(), null)) {
                     aThen.getProgress()(args);
                 }
     
@@ -32046,17 +32183,17 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
                 var aThen = this.getThens().getItem(i);
     
                 if (which === Bridge.ClientTest.Threading.PromiseTests.SimplePromise.Which.Resolve) {
-                    if (aThen.getFilled() != null) {
+                    if (!Bridge.staticEquals(aThen.getFilled(), null)) {
                         aThen.getFilled().apply(null, args);
                     }
                 }
                 else  {
-                    if (aThen.getError() != null) {
+                    if (!Bridge.staticEquals(aThen.getError(), null)) {
                         aThen.getError().apply(null, args);
                     }
                 }
     
-                if (aThen.getProgress() != null) {
+                if (!Bridge.staticEquals(aThen.getProgress(), null)) {
                     aThen.getProgress()([100]);
                 }
     
@@ -33881,6 +34018,101 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
         }
     });
     
+    Bridge.define('Bridge.ClientTest.TypeSystemTests', {
+        gettingBaseTypeWorks: function () {
+            Bridge.Test.Assert.areEqual$1(null, Bridge.getBaseType(Bridge.ClientTest.TypeSystemTests.I1), "#1");
+            Bridge.Test.Assert.areEqual$1(null, Bridge.getBaseType(Bridge.ClientTest.TypeSystemTests.I2), "#2");
+            Bridge.Test.Assert.areEqual$1(Object, Bridge.getBaseType(Bridge.ClientTest.TypeSystemTests.B), "#3");
+            Bridge.Test.Assert.areEqual$1(Bridge.ClientTest.TypeSystemTests.B, Bridge.getBaseType(Bridge.ClientTest.TypeSystemTests.C), "#4");
+            Bridge.Test.Assert.areEqual$1(null, Bridge.getBaseType(Object), "#5");
+    
+            var t = null;
+            Bridge.Test.Assert.throws$7(System.NullReferenceException, function () {
+                var b = Bridge.getBaseType(t);
+            }, "NullReferenceException");
+        },
+        isAssignableFromWorks: function () {
+            Bridge.Test.Assert.true$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.C1, Bridge.ClientTest.TypeSystemTests.AssignableTypes.C1), "#1");
+            Bridge.Test.Assert.false$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.C1, Object), "#2");
+            Bridge.Test.Assert.true$1(Bridge.isAssignableFrom(Object, Bridge.ClientTest.TypeSystemTests.AssignableTypes.C1), "#3");
+            Bridge.Test.Assert.false$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.I1, Object), "#4");
+            Bridge.Test.Assert.true$1(Bridge.isAssignableFrom(Object, Bridge.ClientTest.TypeSystemTests.AssignableTypes.I1), "#5");
+            Bridge.Test.Assert.false$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.I3, Bridge.ClientTest.TypeSystemTests.AssignableTypes.I1), "#6");
+            Bridge.Test.Assert.true$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.I1, Bridge.ClientTest.TypeSystemTests.AssignableTypes.I3), "#7");
+            Bridge.Test.Assert.false$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.D1, Bridge.ClientTest.TypeSystemTests.AssignableTypes.C1), "#8");
+            Bridge.Test.Assert.true$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.C1, Bridge.ClientTest.TypeSystemTests.AssignableTypes.D1), "#9");
+            Bridge.Test.Assert.true$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.I1, Bridge.ClientTest.TypeSystemTests.AssignableTypes.D1), "#10");
+            Bridge.Test.Assert.true$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.C2$1(System.Int32), Bridge.ClientTest.TypeSystemTests.AssignableTypes.D2$1(System.Int32)), "#11");
+            Bridge.Test.Assert.false$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.C2$1(String), Bridge.ClientTest.TypeSystemTests.AssignableTypes.D2$1(System.Int32)), "#12");
+            Bridge.Test.Assert.true$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.I2$1(System.Int32), Bridge.ClientTest.TypeSystemTests.AssignableTypes.D2$1(System.Int32)), "#13");
+            Bridge.Test.Assert.false$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.I2$1(String), Bridge.ClientTest.TypeSystemTests.AssignableTypes.D2$1(System.Int32)), "#14");
+            Bridge.Test.Assert.true$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.I1, Bridge.ClientTest.TypeSystemTests.AssignableTypes.D2$1(System.Int32)), "#15");
+            Bridge.Test.Assert.false$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.C2$1(String), Bridge.ClientTest.TypeSystemTests.AssignableTypes.D3), "#16");
+            Bridge.Test.Assert.true$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.C2$1(System.Int32), Bridge.ClientTest.TypeSystemTests.AssignableTypes.D3), "#17");
+            Bridge.Test.Assert.false$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.I2$1(System.Int32), Bridge.ClientTest.TypeSystemTests.AssignableTypes.D3), "#18");
+            Bridge.Test.Assert.true$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.I2$1(String), Bridge.ClientTest.TypeSystemTests.AssignableTypes.D3), "#19");
+            Bridge.Test.Assert.false$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.I2$1(System.Int32), Bridge.ClientTest.TypeSystemTests.AssignableTypes.I5$1(String)), "#20");
+            Bridge.Test.Assert.true$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.I2$1(System.Int32), Bridge.ClientTest.TypeSystemTests.AssignableTypes.I5$1(System.Int32)), "#21");
+            Bridge.Test.Assert.false$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.I5$1(System.Int32), Bridge.ClientTest.TypeSystemTests.AssignableTypes.I2$1(System.Int32)), "#22");
+            Bridge.Test.Assert.true$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.I1, Bridge.ClientTest.TypeSystemTests.AssignableTypes.D4), "#23");
+            Bridge.Test.Assert.true$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.I3, Bridge.ClientTest.TypeSystemTests.AssignableTypes.D4), "#24");
+            Bridge.Test.Assert.true$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.I4, Bridge.ClientTest.TypeSystemTests.AssignableTypes.D4), "#25");
+            Bridge.Test.Assert.true$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.AssignableTypes.I1, Bridge.ClientTest.TypeSystemTests.AssignableTypes.X2), "#26");
+            Bridge.Test.Assert.false$1(Bridge.isAssignableFrom(Bridge.ClientTest.TypeSystemTests.E1, Bridge.ClientTest.TypeSystemTests.E2), "#30");
+            Bridge.Test.Assert.false$1(Bridge.isAssignableFrom(System.Int32, Bridge.ClientTest.TypeSystemTests.E1), "#31");
+            Bridge.Test.Assert.true$1(Bridge.isAssignableFrom(Object, Bridge.ClientTest.TypeSystemTests.E1), "#32");
+        }
+    });
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.AssignableTypes');
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.AssignableTypes.C1');
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.AssignableTypes.C2$1', function (T) { return {
+    
+    }; });
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.AssignableTypes.I1', {
+        $interface: true
+    });
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.AssignableTypes.I2$1', function (T1) { return {
+        $interface: true
+    }; });
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.AssignableTypes.I4', {
+        $interface: true
+    });
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.AssignableTypes.I7$1', function (T) { return {
+        $interface: true
+    }; });
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.AssignableTypes.I6$1', function (T) { return {
+        $interface: true
+    }; });
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.AssignableTypes.I9$2', function (T1, T2) { return {
+        $interface: true
+    }; });
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.I1', {
+        $interface: true
+    });
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.I3', {
+        $interface: true
+    });
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.E1', {
+        $enum: true
+    });
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.E2', {
+        $enum: true,
+        $flags: true
+    });
+    
     Bridge.define('Bridge.ClientTest.Utilities.BrowserHelper', {
         statics: {
             isPhantomJs: function () {
@@ -34211,7 +34443,7 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Demo.Bridge1231.Class1$1.MyStruct(T))) {
+            if (!Bridge.is(o, Demo.Bridge1231.Class1$1.MyStruct(T))) {
                 return false;
             }
             return Bridge.equals(this.field, o.field);
@@ -39445,6 +39677,47 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
         }
     });
     
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.AssignableTypes.D1', {
+        inherits: [Bridge.ClientTest.TypeSystemTests.AssignableTypes.C1,Bridge.ClientTest.TypeSystemTests.AssignableTypes.I1]
+    });
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.AssignableTypes.D2$1', function (T) { return {
+        inherits: [Bridge.ClientTest.TypeSystemTests.AssignableTypes.C2$1(T),Bridge.ClientTest.TypeSystemTests.AssignableTypes.I2$1(T),Bridge.ClientTest.TypeSystemTests.AssignableTypes.I1]
+    }; });
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.AssignableTypes.D3', {
+        inherits: [Bridge.ClientTest.TypeSystemTests.AssignableTypes.C2$1(System.Int32),Bridge.ClientTest.TypeSystemTests.AssignableTypes.I2$1(String)]
+    });
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.AssignableTypes.I3', {
+        inherits: [Bridge.ClientTest.TypeSystemTests.AssignableTypes.I1],
+        $interface: true
+    });
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.AssignableTypes.I8$2', function (T1, T2) { return {
+        inherits: [Bridge.ClientTest.TypeSystemTests.AssignableTypes.I6$1(T1),Bridge.ClientTest.TypeSystemTests.AssignableTypes.I7$1(T2)],
+        $interface: true
+    }; });
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.AssignableTypes.I5$1', function (T1) { return {
+        inherits: [Bridge.ClientTest.TypeSystemTests.AssignableTypes.I2$1(T1)],
+        $interface: true
+    }; });
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.AssignableTypes.X1', {
+        inherits: [Bridge.ClientTest.TypeSystemTests.AssignableTypes.I1]
+    });
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.I2', {
+        inherits: [Bridge.ClientTest.TypeSystemTests.I1],
+        $interface: true
+    });
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.I4', {
+        inherits: [Bridge.ClientTest.TypeSystemTests.I3],
+        $interface: true
+    });
+    
     Bridge.define('Bridge.ClientTest.BasicCSharp.TestAbstractClass.C', {
         inherits: [Bridge.ClientTest.BasicCSharp.TestAbstractClass.B],
         getString: function () {
@@ -39498,6 +39771,23 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
         inherits: [Bridge.ClientTest.BridgeIssues.Bridge883_2]
     });
     
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.AssignableTypes.D4', {
+        inherits: [Bridge.ClientTest.TypeSystemTests.AssignableTypes.I3,Bridge.ClientTest.TypeSystemTests.AssignableTypes.I4]
+    });
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.AssignableTypes.I10$2', function (T1, T2) { return {
+        inherits: [Bridge.ClientTest.TypeSystemTests.AssignableTypes.I8$2(T1,T2)],
+        $interface: true
+    }; });
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.AssignableTypes.X2', {
+        inherits: [Bridge.ClientTest.TypeSystemTests.AssignableTypes.X1]
+    });
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.B', {
+        inherits: [Bridge.ClientTest.TypeSystemTests.I2]
+    });
+    
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge1339.Foo3', {
         inherits: [Bridge.ClientTest.BridgeIssues.Bridge1339.Foo2],
         statics: {
@@ -39526,6 +39816,10 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
             }
         }
     }; });
+    
+    Bridge.define('Bridge.ClientTest.TypeSystemTests.C', {
+        inherits: [Bridge.ClientTest.TypeSystemTests.B,Bridge.ClientTest.TypeSystemTests.I4]
+    });
     
     Bridge.define('Bridge.ClientTest.BridgeIssues.Bridge1339.Foo4', {
         inherits: [Bridge.ClientTest.BridgeIssues.Bridge1339.Foo3]

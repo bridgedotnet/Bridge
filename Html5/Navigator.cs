@@ -8,7 +8,7 @@ namespace Bridge.Html5
     /// A Navigator object can be retrieved using the read-only Window.navigator property.
     /// </summary>
     [External]
-    [Name(false)]
+    [Namespace(false)]
     public class Navigator
     {
         private Navigator()

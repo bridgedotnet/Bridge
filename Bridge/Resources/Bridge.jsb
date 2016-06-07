@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project path="" name="Bridge.NET" author="Object.NET, Inc." version="1.13.0" copyright="@version   : 1.13.0 - Bridge.NET&#xD;&#xA;@author    : Object.NET, Inc. http://bridge.net/&#xD;&#xA;@date      : 2016-05-03&#xD;&#xA;@copyright : Copyright (c) 2008-2016, Object.NET, Inc. (http://object.net/). All rights reserved.&#xD;&#xA;@license   : See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE." output="$project" source="False" minify="False" doc="False" master="true" zip="true">
+<project path="" name="Bridge.NET" author="Object.NET, Inc." version="1.14.0" copyright="@version   : 1.14.0 - Bridge.NET&#xD;&#xA;@author    : Object.NET, Inc. http://bridge.net/&#xD;&#xA;@date      : 2016-06-06&#xD;&#xA;@copyright : Copyright (c) 2008-2016, Object.NET, Inc. (http://object.net/). All rights reserved.&#xD;&#xA;@license   : See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE." output="$project" source="False" minify="False" doc="False" master="true" zip="true">
   <file name="Init.js" />
   <file name="End.js" />
   <file name="Core.js" />
@@ -36,7 +36,10 @@
   <file name="Attribute.js" />
   <file name="INotifyPropertyChanged.js" />
   <file name="Convert.js" />
+  <file name="ClientWebSocket.js" />
+  <file name="Uri.js" />
   <file name="Array.js" />
+  <file name="ArraySegment.js" />
   <file name="linq.js" />
   <file name="random.js" />
   <file name="bitConverter.js"></file>
@@ -80,6 +83,7 @@
     <include name="Text/BridgeRegex.js" />
     <include name="Diagnostics.js" />
     <include name="Array.js" />
+    <include name="ArraySegment.js" />
     <include name="Collections/Interfaces.js" />
     <include name="Collections/CustomEnumerator.js" />
     <include name="Collections/ArrayEnumerator.js" />
@@ -93,6 +97,8 @@
     <include name="Attribute.js" />
     <include name="INotifyPropertyChanged.js" />
     <include name="Convert.js" />
+    <include name="ClientWebSocket.js" />
+    <include name="Uri.js" />
     <include name="linq.js" />
     <include name="random.js" />
     <include name="Guid.js" />

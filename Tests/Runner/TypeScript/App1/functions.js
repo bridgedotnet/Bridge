@@ -7,7 +7,9 @@
         methodStringDelegateIntResult: null
     });
     
-    Bridge.define('Functions.DelegateInterface');
+    Bridge.define('Functions.DelegateInterface', {
+        $interface: true
+    });
     
     Bridge.define('Functions.Delegates');
     

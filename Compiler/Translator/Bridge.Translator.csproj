@@ -94,8 +94,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\Methods.cs" />
-    <Compile Include="Constants\Attributes.cs" />
     <Compile Include="Emitter\ArgumentsInfo.cs" />
     <Compile Include="Emitter\Blocks\AbstractEmitterBlock.Locals.cs" />
     <Compile Include="Emitter\Blocks\AbstractCommentBlock.cs" />

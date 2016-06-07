@@ -20,6 +20,7 @@ namespace Bridge.Builder
 
             if (bridgeOptions == null)
             {
+                ShowHelp(logger);
                 return 1;
             }
 
@@ -131,12 +132,6 @@ namespace Bridge.Builder
 
         private static BridgeOptions GetBridgeOptionsFromCommandLine(string[] args, ILogger logger)
         {
-            if (args.Length == 0)
-            {
-                ShowHelp(logger);
-                return null; // error: arguments not provided, so can't guess what to do
-            }
-
             var bridgeOptions = new BridgeOptions();
 
             bridgeOptions.Name = "Bridge.Builder.Console";
@@ -153,7 +148,6 @@ namespace Bridge.Builder
                         if (bridgeOptions.Lib != null)
                         {
                             logger.Error("Error: Project and assembly file specification is mutually exclusive.");
-                            ShowHelp(logger);
                             return null;
                         };
                         bridgeOptions.ProjectLocation = args[++i];
@@ -218,7 +212,6 @@ namespace Bridge.Builder
                         if (bridgeOptions.ProjectLocation != null)
                         {
                             logger.Error("Error: Project and assembly file specification is mutually exclusive.");
-                            ShowHelp(logger);
                             return null;
                         }
                         bridgeOptions.Lib = args[++i];
@@ -264,7 +257,6 @@ namespace Bridge.Builder
                         if (!BindCmdArgumentToOption(args[i], bridgeOptions, logger))
                         {
                             logger.Error("Invalid argument: " + args[i]);
-                            ShowHelp(logger);
                             return null;
                         }
                         break;
@@ -275,9 +267,36 @@ namespace Bridge.Builder
 
             if (bridgeOptions.ProjectLocation == null && bridgeOptions.Lib == null)
             {
-                logger.Error("Error: Project or assembly file name must be specified.");
-                ShowHelp(logger);
-                return null;
+                var folder = bridgeOptions.Folder ?? Environment.CurrentDirectory;
+
+                var csprojs = new string[] { };
+
+                try
+                {
+                    csprojs = Directory.GetFiles(folder, "*.csproj", SearchOption.TopDirectoryOnly);
+                }
+                catch (Exception ex)
+                {
+                    logger.Error(ex.ToString());
+                }
+
+                if (csprojs.Length > 1)
+                {
+                    logger.Error("Could not default to a csproj because multiple were found:");
+                    logger.Info(string.Join(", ", csprojs.Select(path => Path.GetFileName(path))));
+                    return null; // error: arguments not provided, so can't guess what to do
+                }
+
+                if (csprojs.Length == 0)
+                {
+                    logger.Warn("Could not default to a csproj because none were found.");
+                    logger.Error("Error: Project or assembly file name must be specified.");
+                    return null;
+                }
+
+                var csproj = csprojs[0];
+                bridgeOptions.ProjectLocation = csproj;
+                logger.Info("Defaulting Project Location to " + csproj);
             }
 
             if (string.IsNullOrEmpty(bridgeOptions.OutputLocation))

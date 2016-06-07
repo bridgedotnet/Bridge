@@ -79,6 +79,7 @@
             }
 
             var type = typeof (value);
+
             valueTypeCode = valueTypeCode || scope.internal.suggestTypeCode(value);
 
             if (valueTypeCode === typeCodes.String && value == null) {

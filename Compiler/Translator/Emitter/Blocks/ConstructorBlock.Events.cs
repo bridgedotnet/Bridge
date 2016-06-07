@@ -1,8 +1,11 @@
 using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
 using ICSharpCode.NRefactory.TypeSystem.Implementation;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,20 +20,43 @@ namespace Bridge.Translator
             List<string> list = new List<string>();
 
             bool hasReadyAttribute;
+            var isGenericType = this.IsGenericType();
 
             foreach (var methodGroup in methods)
             {
                 foreach (var method in methodGroup.Value)
                 {
+                    var isGenericMethod = this.IsGenericMethod(method);
+
                     HandleAttributes(list, methodGroup, method, out hasReadyAttribute);
 
-                    if (this.StaticBlock && !hasReadyAttribute)
+                    if (hasReadyAttribute)
                     {
-                        if (method.Name == Constants.Methods.AUTO_STARTUP_METHOD_NAME && method.HasModifier(Modifiers.Static) && !method.HasModifier(Modifiers.Abstract))
+                        if (isGenericType || isGenericMethod)
                         {
-                            this.Emitter.AutoStartupMethods.Add(this.TypeInfo.Name + "." + method.Name);
-                            list.Add(string.Format(Constants.Methods.AUTO_STARTUP_METHOD_TEMPLATE, this.Emitter.GetEntityName(method)));
-                            hasReadyAttribute = true;
+                            hasReadyAttribute = false;
+                        }
+                    }
+                    else
+                    {
+                        if (this.StaticBlock && !hasReadyAttribute)
+                        {
+                            if (method.Name == CS.Methods.AUTO_STARTUP_METHOD_NAME
+                                && method.HasModifier(Modifiers.Static)
+                                && !method.HasModifier(Modifiers.Abstract))
+                            {
+                                if (isGenericType || isGenericMethod)
+                                {
+                                    LogAutoStartupWarning(method);
+                                }
+                                else
+                                {
+                                    this.Emitter.AutoStartupMethods.Add(this.TypeInfo.Name + "." + method.Name);
+                                    list.Add(string.Format(JS.Funcs.BRIDGE_AUTO_STARTUP_METHOD_TEMPLATE, this.Emitter.GetEntityName(method)));
+
+                                    hasReadyAttribute = true;
+                                }
+                            }
                         }
                     }
 
@@ -47,21 +73,29 @@ namespace Bridge.Translator
         private void HandleAttributes(List<string> list, KeyValuePair<string, List<MethodDeclaration>> methodGroup, MethodDeclaration method, out bool hasReadyAttribute)
         {
             hasReadyAttribute = false;
+            var isGenericType = this.IsGenericType();
+            var isGenericMethod = this.IsGenericMethod(method);
 
             foreach (var attrSection in method.Attributes)
             {
                 foreach (var attr in attrSection.Attributes)
                 {
-                    var resolveresult = this.Emitter.Resolver.ResolveNode(attr, this.Emitter) as InvocationResolveResult;
+                    var resolveResult = this.Emitter.Resolver.ResolveNode(attr, this.Emitter) as InvocationResolveResult;
 
-                    if (resolveresult != null)
+                    if (resolveResult != null)
                     {
-                        if (resolveresult.Type.FullName == Bridge.Translator.Constants.Attributes.READY_ATTRIBUTE_NAME)
+                        if (resolveResult.Type.FullName == CS.Attributes.READY_ATTRIBUTE_NAME)
                         {
                             hasReadyAttribute = true;
+
+                            if (isGenericType || isGenericMethod)
+                            {
+                                LogAutoStartupWarning(method);
+                                continue;
+                            }
                         }
 
-                        var baseTypes = resolveresult.Type.GetAllBaseTypes().ToArray();
+                        var baseTypes = resolveResult.Type.GetAllBaseTypes().ToArray();
 
                         if (baseTypes.Any(t => t.FullName == "Bridge.AdapterAttribute"))
                         {
@@ -70,7 +104,7 @@ namespace Bridge.Translator
                                 throw new EmitterException(attr, "Overloaded method cannot be event handler");
                             }
 
-                            var staticFlagField = resolveresult.Type.GetFields(f => f.Name == "StaticOnly");
+                            var staticFlagField = resolveResult.Type.GetFields(f => f.Name == "StaticOnly");
 
                             if (staticFlagField.Count() > 0)
                             {
@@ -78,12 +112,12 @@ namespace Bridge.Translator
 
                                 if (staticValue is bool && ((bool)staticValue) && !method.HasModifier(Modifiers.Static))
                                 {
-                                    throw new EmitterException(attr, resolveresult.Type.FullName + " can be applied for static methods only");
+                                    throw new EmitterException(attr, resolveResult.Type.FullName + " can be applied for static methods only");
                                 }
                             }
 
                             string eventName = methodGroup.Key;
-                            var eventField = resolveresult.Type.GetFields(f => f.Name == "Event");
+                            var eventField = resolveResult.Type.GetFields(f => f.Name == "Event");
 
                             if (eventField.Count() > 0)
                             {
@@ -92,7 +126,7 @@ namespace Bridge.Translator
 
                             string format = null;
                             string formatName = this.StaticBlock ? "Format" : "FormatScope";
-                            var formatField = resolveresult.Type.GetFields(f => f.Name == formatName, GetMemberOptions.IgnoreInheritedMembers);
+                            var formatField = resolveResult.Type.GetFields(f => f.Name == formatName, GetMemberOptions.IgnoreInheritedMembers);
 
                             if (formatField.Count() > 0)
                             {
@@ -113,7 +147,7 @@ namespace Bridge.Translator
                             }
 
                             bool isCommon = false;
-                            var commonField = resolveresult.Type.GetFields(f => f.Name == "IsCommonEvent");
+                            var commonField = resolveResult.Type.GetFields(f => f.Name == "IsCommonEvent");
 
                             if (commonField.Count() > 0)
                             {
@@ -154,7 +188,7 @@ namespace Bridge.Translator
                             }
                             else
                             {
-                                var resolvedmethod = resolveresult.Member as IMethod;
+                                var resolvedmethod = resolveResult.Member as IMethod;
 
                                 if (resolvedmethod.Parameters.Count > selectorIndex)
                                 {
@@ -178,7 +212,7 @@ namespace Bridge.Translator
                             }
                             else
                             {
-                                var resolvedmethod = resolveresult.Member as IMethod;
+                                var resolvedmethod = resolveResult.Member as IMethod;
 
                                 if (resolvedmethod.Parameters.Count > (selectorIndex + 1))
                                 {
@@ -221,6 +255,30 @@ namespace Bridge.Translator
                     }
                 }
             }
+        }
+
+        private void LogWarning(string message)
+        {
+            var logger = this.Emitter.Log as Bridge.Translator.Logging.Logger;
+            bool? wrappingValue = null;
+
+            if (logger != null && logger.UseTimeStamp)
+            {
+                wrappingValue = logger.UseTimeStamp;
+                logger.UseTimeStamp = false;
+            }
+
+            this.Emitter.Log.Warn(message);
+
+            if (wrappingValue.HasValue)
+            {
+                logger.UseTimeStamp = wrappingValue.Value;
+            }
+        }
+
+        private void LogAutoStartupWarning(MethodDeclaration method)
+        {
+            this.LogWarning(string.Format("'{0}.{1}': an entry point cannot be generic or in a generic type", this.TypeInfo.Type.ReflectionName, method.Name));
         }
     }
 }

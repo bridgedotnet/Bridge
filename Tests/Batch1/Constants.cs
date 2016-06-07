@@ -93,6 +93,7 @@ namespace Bridge.ClientTest
         public const string MODULE_THREADING = "Threading"; // + "ArgumentException";
         public const string MODULE_DIAGNOSTICS = "Diagnostics";
         public const string MODULE_CHECKED_UNCKECKED = "Checked/Unckecked";
+        public const string MODULE_TYPE_SYSTEM = "Type system";
 
         public const string IGNORE_DATE = null;
     }

@@ -57,6 +57,7 @@
     <Compile Include="BasicCSharp\TestTryCatchBlocks.cs" />
     <Compile Include="BasicCSharp\TestReferenceTypes.cs" />
     <Compile Include="BasicCSharp\TestValueTypes.cs" />
+    <Compile Include="BridgeIssues\0100\N122.cs" />
     <Compile Include="BridgeIssues\0100\N069.cs" />
     <Compile Include="BridgeIssues\0400\N447.cs" />
     <Compile Include="BridgeIssues\0400\N495.cs" />
@@ -277,6 +278,9 @@
     <Compile Include="BridgeIssues\1300\N1305.cs" />
     <Compile Include="BridgeIssues\1300\N1304.cs" />
     <Compile Include="BridgeIssues\1400\N1410.cs" />
+    <Compile Include="BridgeIssues\1400\N1428.cs" />
+    <Compile Include="BridgeIssues\1400\N1438.cs" />
+    <Compile Include="BridgeIssues\1400\N1429.cs" />
     <Compile Include="BridgeIssues\1400\N1411.cs" />
     <Compile Include="BridgeIssues\1400\N1402.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
@@ -328,6 +332,7 @@
     <Compile Include="Linq\TestLinqQueryExecution.cs" />
     <Compile Include="Linq\TestLinqRestrictionOperators.cs" />
     <Compile Include="Linq\TestLinqSetOperators.cs" />
+    <Compile Include="TypeSystemTests.cs" />
     <Compile Include="RandomTests.cs" />
     <Compile Include="Format\StringFormatTests.cs" />
     <Compile Include="Format\NumberFormatSpecifiersTests.cs" />

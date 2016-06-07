@@ -1,8 +1,12 @@
 using Bridge.Contract;
+using Bridge.Contract.Constants;
+
+
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
 using Mono.Cecil;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -129,9 +133,7 @@ namespace Bridge.Translator
             {
                 if (hasInitializer)
                 {
-                    this.Write(Bridge.Translator.Emitter.ROOT);
-                    this.WriteDot();
-                    this.Write(Bridge.Translator.Emitter.MERGE_OBJECT);
+                    this.Write(JS.Funcs.BRIDGE_MERGE);
                     this.WriteOpenParentheses();
                 }
 

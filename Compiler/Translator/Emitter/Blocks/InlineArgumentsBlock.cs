@@ -1,14 +1,18 @@
-using System;
 using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.NRefactory.CSharp.Resolver;
+using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
+using Object.Net.Utilities;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using ICSharpCode.NRefactory.CSharp.Resolver;
-using ICSharpCode.NRefactory.Semantics;
-using Object.Net.Utilities;
+
 
 namespace Bridge.Translator
 {
@@ -232,7 +236,9 @@ namespace Bridge.Translator
 
                                 StringBuilder sb = new StringBuilder();
                                 sb.Append(methodName);
-                                sb.Append(".apply(");
+                                sb.Append(".");
+                                sb.Append(JS.Funcs.APPLY);
+                                sb.Append("(");
                                 sb.Append(target ?? "null");
 
                                 if (args.Contains(","))
@@ -293,7 +299,7 @@ namespace Bridge.Translator
                     {
                         if (isNull)
                         {
-                            this.Write("$t");
+                            this.Write(JS.Vars.T);
                         }
                         else if (this.Method.IsExtensionMethod && this.TargetResolveResult is TypeResolveResult)
                         {
@@ -317,7 +323,8 @@ namespace Bridge.Translator
                     }
                     else if (paramsName == key && !ignoreArray)
                     {
-                        this.Write("Array.prototype.slice.call(arguments, " + paramsIndex + ")");
+                        this.Write(JS.Types.ARRAY + "." + JS.Fields.PROTOTYPE + "." + JS.Funcs.SLICE);
+                        this.WriteCall("(" + JS.Vars.ARGUMENTS + ", " + paramsIndex + ")");
                     }
                     else
                     {
@@ -359,7 +366,7 @@ namespace Bridge.Translator
 
                                 if (thisValue != null)
                                 {
-                                    this.Write("Bridge.getType(" + thisValue + ")");
+                                    this.Write(JS.Funcs.BRIDGE_GET_TYPE + "(" + thisValue + ")");
                                 } 
                             }
                         }
@@ -569,7 +576,7 @@ namespace Bridge.Translator
                     s = "null";
                 }
 
-                this.Write(this.WriteIndentToString("Bridge.getType(" + s + ")"));
+                this.Write(this.WriteIndentToString(JS.Funcs.BRIDGE_GET_TYPE + "(" + s + ")"));
             }
         }
 
@@ -647,7 +654,7 @@ namespace Bridge.Translator
 
             if (isNull)
             {
-                this.Write("$t");
+                this.Write(JS.Vars.T);
                 needComma = true;
             }
             else if (!(this.TargetResolveResult is TypeResolveResult))

@@ -1,3 +1,5 @@
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
@@ -536,7 +538,7 @@ namespace Bridge.Contract
                 list.Add(name);
             }
 
-            if (list.Count > 0 && list[0] == "Object")
+            if (list.Count > 0 && list[0] == JS.Types.OBJECT)
             {
                 list.RemoveAt(0);
             }
@@ -622,7 +624,7 @@ namespace Bridge.Contract
             var composedType = astType as ComposedType;
             if (composedType != null && composedType.ArraySpecifiers != null && composedType.ArraySpecifiers.Count > 0)
             {
-                return "Array.<" + BridgeTypes.ToTypeScriptName(composedType.BaseType, emitter) + ">";
+                return JS.Types.ARRAY + ".<" + BridgeTypes.ToTypeScriptName(composedType.BaseType, emitter) + ">";
             }
 
             var simpleType = astType as SimpleType;
@@ -715,7 +717,7 @@ namespace Bridge.Contract
             if (type.Kind == TypeKind.Array)
             {
                 ICSharpCode.NRefactory.TypeSystem.ArrayType arrayType = (ICSharpCode.NRefactory.TypeSystem.ArrayType)type;
-                return "Array.<" + XmlToJsDoc.ToJavascriptName(arrayType.ElementType, emitter) + ">";
+                return JS.Types.ARRAY + ".<" + XmlToJsDoc.ToJavascriptName(arrayType.ElementType, emitter) + ">";
             }
 
             if (type.Kind == TypeKind.Dynamic)
@@ -757,7 +759,7 @@ namespace Bridge.Contract
 
                     if (type.DeclaringType.TypeArguments.Count > 0)
                     {
-                        name += "$" + type.TypeArguments.Count;
+                        name += Helpers.PrefixDollar(type.TypeArguments.Count);
                     }
                 }
 
@@ -772,7 +774,7 @@ namespace Bridge.Contract
 
             if (!hasTypeDef && !isCustomName && type.TypeArguments.Count > 0)
             {
-                name += "$" + type.TypeArguments.Count;
+                name += Helpers.PrefixDollar(type.TypeArguments.Count);
             }
 
             return name;

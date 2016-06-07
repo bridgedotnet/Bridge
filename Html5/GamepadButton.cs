@@ -1,7 +1,7 @@
 ﻿namespace Bridge.Html5
 {
     [External]
-    [Name(false)]
+    [Namespace(false)]
     public class GamepadButton
     {
         /// <summary>

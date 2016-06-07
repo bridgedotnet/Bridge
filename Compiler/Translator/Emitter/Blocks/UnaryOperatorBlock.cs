@@ -50,7 +50,7 @@ namespace Bridge.Translator
                 {
                     if (orr.IsLiftedOperator)
                     {
-                        this.Write(TypeNames.Nullable + ".lift(");
+                        this.Write(JS.Types.SYSTEM_NULLABLE + "." + JS.Funcs.Math.LIFT + ".(");
                     }
 
                     this.Write(BridgeTypes.ToJsName(method.DeclaringType, this.Emitter));
@@ -142,7 +142,7 @@ namespace Bridge.Translator
                     op != UnaryOperatorType.PostIncrement &&
                     op != UnaryOperatorType.PostDecrement)
                 {
-                    this.Write(TypeNames.Nullable + ".");
+                    this.Write(JS.Types.SYSTEM_NULLABLE + ".");
                 }
             }
 
@@ -333,7 +333,7 @@ namespace Bridge.Translator
                         if (this.Emitter.ReplaceAwaiterByVar)
                         {
                             var index = System.Array.IndexOf(this.Emitter.AsyncBlock.AwaitExpressions, unaryOperatorExpression.Expression) + 1;
-                            this.Write("$taskResult" + index);
+                            this.Write(JS.Vars.ASYNC_TASK_RESULT + index);
                         }
                         else
                         {
@@ -371,7 +371,7 @@ namespace Bridge.Translator
         {
             if ((typeCode == KnownTypeCode.Int64 || typeCode == KnownTypeCode.UInt64) && ConversionBlock.IsInCheckedContext(this.Emitter, this.UnaryOperatorExpression))
             {
-                if (op_name == "neg" || op_name == "dec" || op_name == "inc")
+                if (op_name == JS.Funcs.Math.NEG || op_name == JS.Funcs.Math.DEC || op_name == JS.Funcs.Math.INC)
                 {
                     if (lifted)
                     {
@@ -458,16 +458,16 @@ namespace Bridge.Translator
             {
                 if (!isOneOp)
                 {
-                    this.Write(TypeNames.Nullable + ".");
+                    this.Write(JS.Types.SYSTEM_NULLABLE + ".");
                 }
 
-                string action = "lift1";
+                string action = JS.Funcs.Math.LIFT1;
                 string op_name = null;
 
                 switch (this.UnaryOperatorExpression.Operator)
                 {
                     case UnaryOperatorType.Minus:
-                        op_name = "neg";
+                        op_name = JS.Funcs.Math.NEG;
                         break;
 
                     case UnaryOperatorType.Plus:
@@ -485,9 +485,9 @@ namespace Bridge.Translator
                         this.Write(") ? ");
                         this.WriteOpenParentheses();
                         this.UnaryOperatorExpression.Expression.AcceptVisitor(this.Emitter);
-                        this.Write(" = " + TypeNames.Nullable + ".lift1('" + (op == UnaryOperatorType.Decrement ? "dec" : "inc") + "', ");
+                        this.Write(" = " + JS.Types.SYSTEM_NULLABLE + "." + JS.Funcs.Math.LIFT1 + "('" + (op == UnaryOperatorType.Decrement ? JS.Funcs.Math.DEC : JS.Funcs.Math.INC) + "', ");
                         this.UnaryOperatorExpression.Expression.AcceptVisitor(this.Emitter);
-                        this.AddOveflowFlag(typeCode, "dec", true);
+                        this.AddOveflowFlag(typeCode, JS.Funcs.Math.DEC, true);
                         this.Write(")");
                         this.WriteCloseParentheses();
 
@@ -508,9 +508,9 @@ namespace Bridge.Translator
                         this.UnaryOperatorExpression.Expression.AcceptVisitor(this.Emitter);
                         this.WriteComma();
                         this.UnaryOperatorExpression.Expression.AcceptVisitor(this.Emitter);
-                        this.Write(" = " + TypeNames.Nullable + ".lift1('" + (op == UnaryOperatorType.PostDecrement ? "dec" : "inc") + "', ");
+                        this.Write(" = " + JS.Types.SYSTEM_NULLABLE + "." + JS.Funcs.Math.LIFT1 + "('" + (op == UnaryOperatorType.PostDecrement ? JS.Funcs.Math.DEC : JS.Funcs.Math.INC) + "', ");
                         this.UnaryOperatorExpression.Expression.AcceptVisitor(this.Emitter);
-                        this.AddOveflowFlag(typeCode, "dec", true);
+                        this.AddOveflowFlag(typeCode, JS.Funcs.Math.DEC, true);
                         this.Write(")");
                         this.WriteComma();
                         this.Write(valueVar);
@@ -553,7 +553,7 @@ namespace Bridge.Translator
                 switch (op)
                 {
                     case UnaryOperatorType.Minus:
-                        op_name = "neg";
+                        op_name = JS.Funcs.Math.NEG;
                         break;
 
                     case UnaryOperatorType.Plus:
@@ -574,8 +574,8 @@ namespace Bridge.Translator
                         this.UnaryOperatorExpression.Expression.AcceptVisitor(this.Emitter);
                         this.Write(" = ");
                         this.UnaryOperatorExpression.Expression.AcceptVisitor(this.Emitter);
-                        this.Write("." + (op == UnaryOperatorType.Decrement ? "dec" : "inc") + "(");
-                        this.AddOveflowFlag(typeCode, "dec", false);
+                        this.Write("." + (op == UnaryOperatorType.Decrement ? JS.Funcs.Math.DEC : JS.Funcs.Math.INC) + "(");
+                        this.AddOveflowFlag(typeCode, JS.Funcs.Math.DEC, false);
                         this.Write(")");
                         
                         if (!isStatement)
@@ -597,8 +597,8 @@ namespace Bridge.Translator
                         this.UnaryOperatorExpression.Expression.AcceptVisitor(this.Emitter);
                         this.Write(" = ");
                         this.UnaryOperatorExpression.Expression.AcceptVisitor(this.Emitter);
-                        this.Write("." + (op == UnaryOperatorType.PostDecrement ? "dec" : "inc") + "(");
-                        this.AddOveflowFlag(typeCode, "dec", false);
+                        this.Write("." + (op == UnaryOperatorType.PostDecrement ? JS.Funcs.Math.DEC : JS.Funcs.Math.INC) + "(");
+                        this.AddOveflowFlag(typeCode, JS.Funcs.Math.DEC, false);
                         this.Write("), ");
                         this.Write(valueVar);
                         this.WriteCloseParentheses();

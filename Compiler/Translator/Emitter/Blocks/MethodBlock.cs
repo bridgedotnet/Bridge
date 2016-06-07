@@ -1,10 +1,12 @@
 ﻿using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
-using Object.Net.Utilities;
+using ICSharpCode.NRefactory.TypeSystem;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ICSharpCode.NRefactory.TypeSystem;
 
 namespace Bridge.Translator
 {
@@ -128,21 +130,21 @@ namespace Bridge.Translator
             list.AddRange(props);
 
             this.EnsureComma();
-            this.Write("$struct: true");
+            this.Write(JS.Fields.STRUCT + ": true");
             this.Emitter.Comma = true;
 
             if (list.Count == 0)
             {
                 this.EnsureComma();
-                this.Write("$clone: function (to) { return this; }");
+                this.Write(JS.Funcs.CLONE + ": function (to) { return this; }");
                 this.Emitter.Comma = true;
                 return;
             }
 
-            if (!this.TypeInfo.InstanceMethods.ContainsKey("GetHashCode"))
+            if (!this.TypeInfo.InstanceMethods.ContainsKey(CS.Methods.GETHASHCODE))
             {
                 this.EnsureComma();
-                this.Write("getHashCode: function () ");
+                this.Write(JS.Funcs.GETHASHCODE + ": function () ");
                 this.BeginBlock();
                 this.Write("var hash = 17;");
 
@@ -157,7 +159,7 @@ namespace Bridge.Translator
                     this.Write("hash = hash * 23 + ");
                     this.Write("(this." + fieldName);
                     this.Write(" == null ? 0 : ");
-                    this.Write("Bridge.getHashCode(");
+                    this.Write(JS.Funcs.BRIDGE_GETHASHCODE + "(");
                     this.Write("this." + fieldName);
                     this.Write("));");
                 }
@@ -169,12 +171,12 @@ namespace Bridge.Translator
                 this.Emitter.Comma = true;
             }
 
-            if (!this.TypeInfo.InstanceMethods.ContainsKey("Equals"))
+            if (!this.TypeInfo.InstanceMethods.ContainsKey(CS.Methods.EQUALS))
             {
                 this.EnsureComma();
-                this.Write("equals: function (o) ");
+                this.Write(JS.Funcs.EQUALS + ": function (o) ");
                 this.BeginBlock();
-                this.Write("if (!Bridge.is(o,");
+                this.Write("if (!" + JS.Funcs.BRIDGE_IS + "(o, ");
                 this.Write(structName);
                 this.Write(")) ");
                 this.BeginBlock();
@@ -197,7 +199,7 @@ namespace Bridge.Translator
 
                     and = true;
 
-                    this.Write("Bridge.equals(this.");
+                    this.Write(JS.Funcs.BRIDGE_EQUALS + "(this.");
                     this.Write(fieldName);
                     this.Write(", o.");
                     this.Write(fieldName);
@@ -214,11 +216,11 @@ namespace Bridge.Translator
 
             if (immutable)
             {
-                this.Write("$clone: function (to) { return this; }");
+                this.Write(JS.Funcs.CLONE + ": function (to) { return this; }");
             }
             else
             {
-                this.Write("$clone: function (to) ");
+                this.Write(JS.Funcs.CLONE + ": function (to) ");
                 this.BeginBlock();
                 this.Write("var s = to || new ");
                 this.Write(structName);
@@ -241,7 +243,7 @@ namespace Bridge.Translator
                 this.WriteNewLine();
                 this.EndBlock();
             }
-           
+
             this.Emitter.Comma = true;
         }
 
@@ -249,7 +251,7 @@ namespace Bridge.Translator
         {
             string name = evtVar.Name;
 
-            this.Write(add ? "add" : "remove", name, " : ");
+            this.Write(Helpers.GetAddOrRemove(add), name, " : ");
             this.WriteFunction();
             this.WriteOpenParentheses();
             this.Write("value");
@@ -260,7 +262,7 @@ namespace Bridge.Translator
             this.WriteDot();
             this.Write(this.Emitter.GetEntityName(e));
             this.Write(" = ");
-            this.Write(Bridge.Translator.Emitter.ROOT, ".", add ? Bridge.Translator.Emitter.DELEGATE_COMBINE : Bridge.Translator.Emitter.DELEGATE_REMOVE);
+            this.Write(add ? JS.Funcs.BRIDGE_COMBINE : JS.Funcs.BRIDGE_REMOVE);
             this.WriteOpenParentheses();
             this.WriteThis();
             this.WriteDot();

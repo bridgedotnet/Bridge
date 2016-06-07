@@ -81,15 +81,15 @@ namespace Bridge.Translator
             }
             else if (value is decimal)
             {
-                s = TypeNames.Decimal + "(" + this.DecimalConstant((decimal)value) + ")";
+                s = JS.Types.SYSTEM_DECIMAL + "(" + this.DecimalConstant((decimal)value) + ")";
             }
             else if (value is long)
             {
-                s = TypeNames.Int64 + "(" + this.LongConstant((long)value) + ")";
+                s = JS.Types.SYSTEM_INT64 + "(" + this.LongConstant((long)value) + ")";
             }
             else if (value is ulong)
             {
-                s = TypeNames.UInt64 + "(" + this.ULongConstant((ulong)value) + ")";
+                s = JS.Types.SYSTEM_UInt64 + "(" + this.ULongConstant((ulong)value) + ")";
             }
             else
             {
@@ -152,6 +152,23 @@ namespace Bridge.Translator
             }
 
             return this.Emitter.ToJavaScript(value);
+        }
+
+        public virtual void WriteCall(object callee = null)
+        {
+            this.WriteDot();
+
+            if (callee == null)
+            {
+                this.Write(JS.Funcs.CALL);
+            }
+            else
+            {
+                this.Write(JS.Funcs.CALL);
+                this.WriteOpenParentheses();
+                this.Write(callee);
+                this.WriteCloseParentheses();
+            }
         }
 
         public virtual void WriteComma()

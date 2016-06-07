@@ -1,19 +1,19 @@
 ﻿    // @source Date.js
 
-Bridge.define("System.DayOfWeek", {
-    $enum: true,
-    $statics: {
-        sunday: 0,
-        monday: 1,
-        tuesday: 2,
-        wednesday: 3,
-        thursday: 4,
-        friday: 5,
-        saturday: 6
-    }
-});
+    Bridge.define("System.DayOfWeek", {
+        $enum: true,
+        $statics: {
+            sunday: 0,
+            monday: 1,
+            tuesday: 2,
+            wednesday: 3,
+            thursday: 4,
+            friday: 5,
+            saturday: 6
+        }
+    });
 
-var date = {
+    var date = {
         getDefaultValue: function () {
             return new Date(-864e13);
         },

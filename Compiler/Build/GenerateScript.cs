@@ -6,7 +6,6 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using System;
 using System.IO;
-using System.Linq;
 
 namespace Bridge.Build
 {
@@ -82,7 +81,7 @@ namespace Bridge.Build
                 System.Diagnostics.Debugger.Launch();
             };
 #endif
-            var logger = new Translator.Logging.Logger(null, false, LoggerLevel.Info, true, new ConsoleLoggerWriter(), new FileLoggerWriter());
+            var logger = new Translator.Logging.Logger(null, false, LoggerLevel.Info, true, new VSLoggerWriter(this.Log), new FileLoggerWriter());
             var bridgeOptions = this.GetBridgeOptions();
 
             var processor = new TranslatorProcessor(bridgeOptions, logger);

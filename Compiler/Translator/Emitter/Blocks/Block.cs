@@ -322,7 +322,8 @@ namespace Bridge.Translator
                     this.Write("}");
                 }
 
-                this.Write(").call(this)");
+                this.Write(")");
+                this.WriteCall("this");
 
                 if (isBlock)
                 {

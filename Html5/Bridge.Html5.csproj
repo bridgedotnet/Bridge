@@ -54,9 +54,15 @@
     <Compile Include="ClientRect.cs" />
     <Compile Include="ClientRectList.cs" />
     <Compile Include="CompatMode.cs" />
+    <Compile Include="DragDrop\DataTransferItem.cs" />
+    <Compile Include="DragDrop\DropEffect.cs" />
+    <Compile Include="DragDrop\EffectAllowed.cs" />
+    <Compile Include="DragDrop\DataTransferItemList.cs" />
+    <Compile Include="DragDrop\DataTransfer.cs" />
     <Compile Include="Elements\MarkElement.cs" />
     <Compile Include="Elements\TemplateElement.cs" />
     <Compile Include="Events\GamepadEvent.cs" />
+    <Compile Include="Events\DragEvent.cs" />
     <Compile Include="Events\MessageEvent.cs" />
     <Compile Include="Events\CloseEvent.cs" />
     <Compile Include="Events\TouchEvent.cs" />

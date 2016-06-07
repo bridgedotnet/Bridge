@@ -1,6 +1,6 @@
     // @source Math.js
 
-    var math = {
+    Bridge.Math = {
         divRem: function (a, b, result) {
             var remainder = a % b;
 
@@ -25,15 +25,15 @@
             return Math.round(n) / m;
         },
 
-        sinh: function(x) {
+        sinh: Math.sinh || function (x) {
             return (Math.exp(x) - Math.exp(-x)) / 2;
         },
 
-        cosh: function(x) {
+        cosh: Math.cosh || function (x) {
             return (Math.exp(x) + Math.exp(-x)) / 2;
         },
 
-        tanh: function(x) {
+        tanh: Math.tanh|| function (x) {
             if (x === Infinity) {
                 return 1;
             } else if (x === -Infinity) {
@@ -44,8 +44,3 @@
             }
         }
     };
-
-    math.sinh = Math.sinh || math.sinh;
-    math.cosh = Math.cosh || math.cosh;
-    math.tanh = Math.tanh || math.tanh;
-    Bridge.Math = math;    

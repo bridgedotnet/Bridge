@@ -57,7 +57,7 @@
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,Classes.Point)) {
+            if (!Bridge.is(o, Classes.Point)) {
                 return false;
             }
             return Bridge.equals(this.x, o.x) && Bridge.equals(this.y, o.y);

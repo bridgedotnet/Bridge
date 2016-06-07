@@ -1,6 +1,9 @@
 using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
 using Object.Net.Utilities;
+
 using System.Collections.Generic;
 using System.Linq;
 
@@ -72,7 +75,7 @@ namespace Bridge.Translator.TypeScript
                         continue;
                     }
                     XmlToJsDoc.EmitComment(this, ctor);
-                    var ctorName = "$constructor";
+                    var ctorName = JS.Funcs.DCONSTRUCTOR;
 
                     if (this.TypeInfo.Ctors.Count > 1 && ctor.Parameters.Count > 0)
                     {

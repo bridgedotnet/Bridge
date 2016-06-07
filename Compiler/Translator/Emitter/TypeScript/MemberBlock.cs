@@ -1,4 +1,6 @@
 using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
 
 namespace Bridge.Translator.TypeScript
@@ -56,13 +58,10 @@ namespace Bridge.Translator.TypeScript
                     if (ev.Entity.HasModifier(Modifiers.Public))
                     {
                         var name = ev.GetName(this.Emitter);
-                        if (name.StartsWith("$"))
-                        {
-                            name = name.Substring(1);
-                        }
+                        name = Helpers.ReplaceFirstDollar(name);
 
-                        this.WriteEvent(ev, "add" + name);
-                        this.WriteEvent(ev, "remove" + name);
+                        this.WriteEvent(ev, Helpers.GetAddOrRemove(true,  name));
+                        this.WriteEvent(ev, Helpers.GetAddOrRemove(false, name));
                     }
                 }
             }
@@ -74,10 +73,7 @@ namespace Bridge.Translator.TypeScript
                     if (prop.Entity.HasModifier(Modifiers.Public))
                     {
                         var name = prop.GetName(this.Emitter);
-                        if (name.StartsWith("$"))
-                        {
-                            name = name.Substring(1);
-                        }
+                        name = Helpers.ReplaceFirstDollar(name);
 
                         this.WriteProp(prop, name, true);
                         this.WriteProp(prop, name, false);

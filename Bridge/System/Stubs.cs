@@ -11,7 +11,17 @@ namespace System
             [Template("Bridge.getTypeName({this})")]
             get;
         }
+
+        public extern Type BaseType
+        {
+            [Template("Bridge.getBaseType({this})")]
+            get;
+        }
+
         public static extern Type GetTypeFromHandle(RuntimeTypeHandle typeHandle);
+
+        [Template("Bridge.isAssignableFrom({this}, {type})")]
+        public extern bool IsAssignableFrom(Type type);
     }
 
     [External]

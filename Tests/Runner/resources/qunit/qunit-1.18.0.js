@@ -1780,7 +1780,7 @@
                         }
                         ret += "( ";
 
-                        ret = [ret, dump.parse(fn, "functionArgs"), "){"].join("");
+                        ret = [ret, dump.parse(fn, "functionArgs"), ") {"].join("");
                         return join(ret, dump.parse(fn, "functionCode"), "}");
                     },
                     array: array,

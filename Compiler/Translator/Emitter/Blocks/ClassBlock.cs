@@ -1,8 +1,11 @@
 using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
 using Object.Net.Utilities;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,13 +50,27 @@ namespace Bridge.Translator
             XmlToJsDoc.EmitComment(this, this.Emitter.Translator.EmitNode);
 
             this.EmitClassHeader();
+
             this.Emitter.NamedFunctions = new Dictionary<string, string>();
+
             if (this.TypeInfo.TypeDeclaration.ClassType != ClassType.Interface)
             {
                 this.EmitStaticBlock();
                 this.EmitInstantiableBlock();
             }
+            else
+            {
+                this.EmitInterfaceBlock();
+            }
+
             this.EmitClassEnd();
+        }
+
+        private void EmitInterfaceBlock()
+        {
+            this.EnsureComma();
+            this.Write(JS.Fields.INTERFACE + ": true");
+            this.Emitter.Comma = true;
         }
 
         protected virtual void EmitClassHeader()
@@ -98,7 +115,7 @@ namespace Bridge.Translator
                 name = BridgeTypes.DefinitionToJsName(this.TypeInfo.Type, this.Emitter);
             }
 
-            this.Write(Bridge.Translator.Emitter.ROOT + ".define");
+            this.Write(JS.Funcs.BRIDGE_DEFINE);
 
             this.WriteOpenParentheses();
 
@@ -131,13 +148,13 @@ namespace Bridge.Translator
             {
                 var bridgeType = this.Emitter.BridgeTypes.Get(this.Emitter.TypeInfo);
 
-                if (this.TypeInfo.InstanceMethods.Any(m => m.Value.Any(subm => this.Emitter.GetEntityName(subm) == "inherits")) ||
-                    this.TypeInfo.InstanceConfig.Fields.Any(m => m.GetName(this.Emitter) == "inherits"))
+                if (this.TypeInfo.InstanceMethods.Any(m => m.Value.Any(subm => this.Emitter.GetEntityName(subm) == JS.Fields.INHERITS)) ||
+                    this.TypeInfo.InstanceConfig.Fields.Any(m => m.GetName(this.Emitter) == JS.Fields.INHERITS))
                 {
-                    this.Write("$");
+                    this.Write(JS.Vars.D);
                 }
 
-                this.Write("inherits");
+                this.Write(JS.Fields.INHERITS);
                 this.WriteColon();
                 if (Helpers.IsTypeArgInSubclass(bridgeType.TypeDefinition, bridgeType.TypeDefinition, this.Emitter, false))
                 {
@@ -166,9 +183,9 @@ namespace Bridge.Translator
         protected virtual void WriteScope()
         {
             this.EnsureComma();
-            this.Write("$scope");
+            this.Write(JS.Vars.SCOPE);
             this.WriteColon();
-            this.Write("exports");
+            this.Write(JS.Vars.EXPORTS);
             this.Emitter.Comma = true;
         }
 
@@ -182,7 +199,7 @@ namespace Bridge.Translator
                 if (this.TypeInfo.InstanceMethods.Any(m => m.Value.Any(subm => this.Emitter.GetEntityName(subm) == "statics")) ||
                     this.TypeInfo.InstanceConfig.Fields.Any(m => m.GetName(this.Emitter) == "statics"))
                 {
-                    this.Write("$");
+                    this.Write(JS.Vars.D);
                 }
 
                 this.Write("statics");
@@ -207,14 +224,14 @@ namespace Bridge.Translator
             if (this.TypeInfo.IsEnum)
             {
                 this.EnsureComma();
-                this.Write("$enum: true");
+                this.Write(JS.Fields.ENUM + ": true");
                 this.Emitter.Comma = true;
 
                 if (this.Emitter.GetTypeDefinition(this.TypeInfo.Type)
                         .CustomAttributes.Any(attr => attr.AttributeType.FullName == "System.FlagsAttribute"))
                 {
                     this.EnsureComma();
-                    this.Write("$flags: true");
+                    this.Write(JS.Fields.FLAGS + ": true");
                     this.Emitter.Comma = true;
                 }
             }
@@ -222,7 +239,7 @@ namespace Bridge.Translator
             if (HasEntryPoint)
             {
                 this.EnsureComma();
-                this.Write("$entryPoint: true");
+                this.Write(JS.Fields.ENTRY_POINT + ": true");
                 this.Emitter.Comma = true;
             }
 
@@ -315,7 +332,7 @@ namespace Bridge.Translator
                 {
                     this.WriteNewLine();
                     this.WriteNewLine();
-                    this.Write("var $_ = {};");
+                    this.Write("var " + JS.Vars.D_ + " = {};");
                     this.Emitter.EmitterOutput.IsPrivateVarIntroduced = true;
                 }
 
@@ -324,13 +341,14 @@ namespace Bridge.Translator
 
                 this.WriteNewLine();
                 this.WriteNewLine();
-                this.Write("Bridge.ns(");
+                this.Write(JS.Funcs.BRIDGE_NS);
+                this.WriteOpenParentheses();
                 this.WriteScript(name);
-                this.Write(", $_)");
+                this.Write(", " + JS.Vars.D_ + ")");
                 
                 this.WriteNewLine();
                 this.WriteNewLine();
-                this.Write("Bridge.apply($_.");
+                this.Write(JS.Funcs.BRIDGE_APPLY + "(" + JS.Vars.D_ + ".");
                 this.Write(name);
                 this.Write(", ");
                 this.BeginBlock();

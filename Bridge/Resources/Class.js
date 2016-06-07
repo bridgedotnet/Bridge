@@ -201,11 +201,6 @@
                 extend = extend();
             }
 
-            if (extend && !extend[0])
-            {
-                var ttt = 0;
-            }
-
             base = extend ? extend[0].prototype : this.prototype;
 
             // Instantiate a base class (but only create the instance,
@@ -305,6 +300,11 @@
 
             // Enforce the constructor to be what we expect
             Class.prototype.constructor = Class;
+
+            if (prop.$interface) {
+                Class.$interface = prop.$interface;
+                delete prop.$interface;
+            }
 
             if (statics) {
                 for (name in statics) {

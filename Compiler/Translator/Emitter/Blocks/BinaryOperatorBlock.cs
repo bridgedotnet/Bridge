@@ -53,34 +53,34 @@ namespace Bridge.Translator
                 {
                     if (orr.IsLiftedOperator)
                     {
-                        this.Write(TypeNames.Nullable + ".");
+                        this.Write(JS.Types.SYSTEM_NULLABLE + ".");
 
-                        string action = "lift";
+                        string action = JS.Funcs.Math.LIFT;
 
                         switch (this.BinaryOperatorExpression.Operator)
                         {
                             case BinaryOperatorType.GreaterThan:
-                                action = "liftcmp";
+                                action = JS.Funcs.Math.LIFTCMP;
                                 break;
 
                             case BinaryOperatorType.GreaterThanOrEqual:
-                                action = "liftcmp";
+                                action = JS.Funcs.Math.LIFTCMP;
                                 break;
 
                             case BinaryOperatorType.Equality:
-                                action = "lifteq";
+                                action = JS.Funcs.Math.LIFTEQ;
                                 break;
 
                             case BinaryOperatorType.InEquality:
-                                action = "liftne";
+                                action = JS.Funcs.Math.LIFTNE;
                                 break;
 
                             case BinaryOperatorType.LessThan:
-                                action = "liftcmp";
+                                action = JS.Funcs.Math.LIFTCMP;
                                 break;
 
                             case BinaryOperatorType.LessThanOrEqual:
-                                action = "liftcmp";
+                                action = JS.Funcs.Math.LIFTCMP;
                                 break;
                         }
 
@@ -137,26 +137,6 @@ namespace Bridge.Translator
             var rightExpected = this.Emitter.Resolver.Resolver.GetExpectedType(binaryOperatorExpression.Right);
             var strictNullChecks = this.Emitter.AssemblyInfo.StrictNullChecks;
 
-            if (binaryOperatorExpression.Operator == BinaryOperatorType.Equality || binaryOperatorExpression.Operator == BinaryOperatorType.InEquality)
-            {
-                if (leftIsNull || rightIsNull)
-                {
-                    binaryOperatorExpression.Left.AcceptVisitor(this.Emitter);
-
-                    if (binaryOperatorExpression.Operator == BinaryOperatorType.Equality)
-                    {
-                        this.Write(strictNullChecks ? " === " : " == ");
-                    }
-                    else
-                    {
-                        this.Write(strictNullChecks ? " !== " : " != ");
-                    }
-
-                    binaryOperatorExpression.Right.AcceptVisitor(this.Emitter);
-                    return;
-                }
-            }
-
             if (orr != null && orr.Type.IsKnownType(KnownTypeCode.String))
             {
                 for (int i = 0; i < orr.Operands.Count; i++)
@@ -212,6 +192,26 @@ namespace Bridge.Translator
                 return;
             }
 
+            if (binaryOperatorExpression.Operator == BinaryOperatorType.Equality || binaryOperatorExpression.Operator == BinaryOperatorType.InEquality)
+            {
+                if (leftIsNull || rightIsNull)
+                {
+                    binaryOperatorExpression.Left.AcceptVisitor(this.Emitter);
+
+                    if (binaryOperatorExpression.Operator == BinaryOperatorType.Equality)
+                    {
+                        this.Write(strictNullChecks ? " === " : " == ");
+                    }
+                    else
+                    {
+                        this.Write(strictNullChecks ? " !== " : " != ");
+                    }
+
+                    binaryOperatorExpression.Right.AcceptVisitor(this.Emitter);
+                    return;
+                }
+            }
+
             if (binaryOperatorExpression.Operator == BinaryOperatorType.Divide &&
                 !(this.Emitter.IsJavaScriptOverflowMode && !ConversionBlock.InsideOverflowContext(this.Emitter, binaryOperatorExpression)) &&
                 (
@@ -222,7 +222,7 @@ namespace Bridge.Translator
                     Helpers.IsIntegerType(this.Emitter.Resolver.Resolver.GetExpectedType(binaryOperatorExpression.Right), this.Emitter.Resolver))
                 ))
             {
-                this.Write(TypeNames.Int + ".div(");
+                this.Write(JS.Types.BRIDGE_INT + "." + JS.Funcs.Math.DIV + "(");
                 binaryOperatorExpression.Left.AcceptVisitor(this.Emitter);
                 this.Write(", ");
                 binaryOperatorExpression.Right.AcceptVisitor(this.Emitter);
@@ -238,14 +238,14 @@ namespace Bridge.Translator
                 if (this.Emitter.Validator.IsDelegateOrLambda(leftResolverResult) && this.Emitter.Validator.IsDelegateOrLambda(rightResolverResult))
                 {
                     delegateOperator = true;
-                    this.Write(Bridge.Translator.Emitter.ROOT + "." + (add ? Bridge.Translator.Emitter.DELEGATE_COMBINE : Bridge.Translator.Emitter.DELEGATE_REMOVE));
+                    this.Write(add ? JS.Funcs.BRIDGE_COMBINE : JS.Funcs.BRIDGE_REMOVE);
                     this.WriteOpenParentheses();
                 }
             }
 
             bool nullable = orr != null && orr.IsLiftedOperator;
             bool isCoalescing = binaryOperatorExpression.Operator == BinaryOperatorType.NullCoalescing;
-            string root = TypeNames.Nullable + ".";
+            string root = JS.Types.SYSTEM_NULLABLE + ".";
             bool special = nullable;
             bool rootSpecial = nullable;
             bool isBool = NullableType.IsNullable(resolveOperator.Type) ? NullableType.GetUnderlyingType(resolveOperator.Type).IsKnownType(KnownTypeCode.Boolean) : resolveOperator.Type.IsKnownType(KnownTypeCode.Boolean);
@@ -270,7 +270,7 @@ namespace Bridge.Translator
                 }
                 else if (charToString == 0)
                 {
-                    this.Write("String.fromCharCode(");
+                    this.Write(JS.Funcs.STRING_FROMCHARCODE + "(");
                 }
 
                 if (toBool)
@@ -302,7 +302,7 @@ namespace Bridge.Translator
                 {
                     this.Write("!");
                 }
-                this.Write("Bridge.referenceEquals");
+                this.Write(JS.Funcs.BRIDGE_REFERENCEEQUALS);
                 special = true;
             }
 
@@ -316,17 +316,17 @@ namespace Bridge.Translator
                 switch (binaryOperatorExpression.Operator)
                 {
                     case BinaryOperatorType.Add:
-                        this.Write(rootSpecial ? "add" : "+");
+                        this.Write(rootSpecial ? JS.Funcs.Math.ADD : "+");
                         break;
 
                     case BinaryOperatorType.BitwiseAnd:
                         if (isBool)
                         {
-                            this.Write(rootSpecial ? "and" : "&");
+                            this.Write(rootSpecial ? JS.Funcs.Math.AND : "&");
                         }
                         else
                         {
-                            this.Write(rootSpecial ? "band" : "&");
+                            this.Write(rootSpecial ? JS.Funcs.Math.BAND : "&");
                         }
 
                         break;
@@ -334,16 +334,16 @@ namespace Bridge.Translator
                     case BinaryOperatorType.BitwiseOr:
                         if (isBool)
                         {
-                            this.Write(rootSpecial ? "or" : "|");
+                            this.Write(rootSpecial ? JS.Funcs.Math.OR : "|");
                         }
                         else
                         {
-                            this.Write(rootSpecial ? "bor" : "|");
+                            this.Write(rootSpecial ? JS.Funcs.Math.BOR : "|");
                         }
                         break;
 
                     case BinaryOperatorType.ConditionalAnd:
-                        this.Write(rootSpecial ? "and" : "&&");
+                        this.Write(rootSpecial ? JS.Funcs.Math.AND : "&&");
                         break;
 
                     case BinaryOperatorType.NullCoalescing:
@@ -351,11 +351,11 @@ namespace Bridge.Translator
                         break;
 
                     case BinaryOperatorType.ConditionalOr:
-                        this.Write(rootSpecial ? "or" : "||");
+                        this.Write(rootSpecial ? JS.Funcs.Math.OR : "||");
                         break;
 
                     case BinaryOperatorType.Divide:
-                        this.Write(rootSpecial ? "div" : "/");
+                        this.Write(rootSpecial ? JS.Funcs.Math.DIV : "/");
                         break;
 
                     case BinaryOperatorType.Equality:
@@ -367,15 +367,15 @@ namespace Bridge.Translator
                         break;
 
                     case BinaryOperatorType.ExclusiveOr:
-                        this.Write(rootSpecial ? "xor" : "^");
+                        this.Write(rootSpecial ? JS.Funcs.Math.XOR : "^");
                         break;
 
                     case BinaryOperatorType.GreaterThan:
-                        this.Write(rootSpecial ? "gt" : ">");
+                        this.Write(rootSpecial ? JS.Funcs.Math.GT : ">");
                         break;
 
                     case BinaryOperatorType.GreaterThanOrEqual:
-                        this.Write(rootSpecial ? "gte" : ">=");
+                        this.Write(rootSpecial ? JS.Funcs.Math.GTE : ">=");
                         break;
 
                     case BinaryOperatorType.InEquality:
@@ -386,39 +386,39 @@ namespace Bridge.Translator
                         break;
 
                     case BinaryOperatorType.LessThan:
-                        this.Write(rootSpecial ? "lt" : "<");
+                        this.Write(rootSpecial ? JS.Funcs.Math.LT : "<");
                         break;
 
                     case BinaryOperatorType.LessThanOrEqual:
-                        this.Write(rootSpecial ? "lte" : "<=");
+                        this.Write(rootSpecial ? JS.Funcs.Math.LTE : "<=");
                         break;
 
                     case BinaryOperatorType.Modulus:
-                        this.Write(rootSpecial ? "mod" : "%");
+                        this.Write(rootSpecial ? JS.Funcs.Math.MOD : "%");
                         break;
 
                     case BinaryOperatorType.Multiply:
-                        this.Write(rootSpecial ? "mul" : "*");
+                        this.Write(rootSpecial ? JS.Funcs.Math.MUL : "*");
                         break;
 
                     case BinaryOperatorType.ShiftLeft:
-                        this.Write(rootSpecial ? "sl" : "<<");
+                        this.Write(rootSpecial ? JS.Funcs.Math.SL : "<<");
                         break;
 
                     case BinaryOperatorType.ShiftRight:
                         if (isUint)
                         {
-                            this.Write(rootSpecial ? "srr" : ">>>");
+                            this.Write(rootSpecial ? JS.Funcs.Math.SRR : ">>>");
                         }
                         else
                         {
-                            this.Write(rootSpecial ? "sr" : ">>");
+                            this.Write(rootSpecial ? JS.Funcs.Math.SR : ">>");
                         }
 
                         break;
 
                     case BinaryOperatorType.Subtract:
-                        this.Write(rootSpecial ? "sub" : "-");
+                        this.Write(rootSpecial ? JS.Funcs.Math.SUB : "-");
                         break;
 
                     default:
@@ -435,7 +435,7 @@ namespace Bridge.Translator
                 this.WriteOpenParentheses();
                 if (charToString == 0)
                 {
-                    this.Write("String.fromCharCode(");
+                    this.Write(JS.Funcs.STRING_FROMCHARCODE + "(");
                 }
 
                 binaryOperatorExpression.Left.AcceptVisitor(this.Emitter);
@@ -454,7 +454,7 @@ namespace Bridge.Translator
 
             if (charToString == 1)
             {
-                this.Write("String.fromCharCode(");
+                this.Write(JS.Funcs.STRING_FROMCHARCODE + "(");
             }
 
             binaryOperatorExpression.Right.AcceptVisitor(this.Emitter);
@@ -493,7 +493,7 @@ namespace Bridge.Translator
 
                 if (orr.IsLiftedOperator)
                 {
-                    this.Write(TypeNames.Nullable + ".");
+                    this.Write(JS.Types.SYSTEM_NULLABLE + ".");
                     this.Write(action);
                     this.WriteOpenParentheses();
                     this.WriteScript(op_name);
@@ -529,7 +529,7 @@ namespace Bridge.Translator
             {
                 if (orr.IsLiftedOperator)
                 {
-                    this.Write(TypeNames.Nullable + ".");
+                    this.Write(JS.Types.SYSTEM_NULLABLE + ".");
                     this.Write(action);
                     this.WriteOpenParentheses();
                     this.WriteScript(op_name);
@@ -557,7 +557,7 @@ namespace Bridge.Translator
         {
             if ((typeCode == KnownTypeCode.Int64 || typeCode == KnownTypeCode.UInt64) && ConversionBlock.IsInCheckedContext(this.Emitter, this.BinaryOperatorExpression))
             {
-                if (op_name == "add" || op_name == "sub" || op_name == "mul")
+                if (op_name == JS.Funcs.Math.ADD || op_name == JS.Funcs.Math.SUB || op_name == JS.Funcs.Math.MUL)
                 {
                     this.Write(", 1");
                 }
@@ -566,59 +566,59 @@ namespace Bridge.Translator
 
         private void HandleDecimal(ResolveResult resolveOperator)
         {
-            string action = "lift2";
+            string action = JS.Funcs.Math.LIFT2;
             string op_name = null;
 
             switch (this.BinaryOperatorExpression.Operator)
             {
                 case BinaryOperatorType.GreaterThan:
-                    op_name = "gt";
-                    action = "liftcmp";
+                    op_name = JS.Funcs.Math.GT;
+                    action = JS.Funcs.Math.LIFTCMP;
                     break;
 
                 case BinaryOperatorType.GreaterThanOrEqual:
-                    op_name = "gte";
-                    action = "liftcmp";
+                    op_name = JS.Funcs.Math.GTE;
+                    action = JS.Funcs.Math.LIFTCMP;
                     break;
 
                 case BinaryOperatorType.Equality:
-                    op_name = "equals";
-                    action = "lifteq";
+                    op_name = JS.Funcs.Math.EQUALS;
+                    action = JS.Funcs.Math.LIFTEQ;
                     break;
 
                 case BinaryOperatorType.InEquality:
-                    op_name = "ne";
-                    action = "liftne";
+                    op_name = JS.Funcs.Math.NE;
+                    action = JS.Funcs.Math.LIFTNE;
                     break;
 
                 case BinaryOperatorType.LessThan:
-                    op_name = "lt";
-                    action = "liftcmp";
+                    op_name = JS.Funcs.Math.LT;
+                    action = JS.Funcs.Math.LIFTCMP;
                     break;
 
                 case BinaryOperatorType.LessThanOrEqual:
-                    op_name = "lte";
-                    action = "liftcmp";
+                    op_name = JS.Funcs.Math.LTE;
+                    action = JS.Funcs.Math.LIFTCMP;
                     break;
 
                 case BinaryOperatorType.Add:
-                    op_name = "add";
+                    op_name = JS.Funcs.Math.ADD;
                     break;
 
                 case BinaryOperatorType.Subtract:
-                    op_name = "sub";
+                    op_name = JS.Funcs.Math.SUB;
                     break;
 
                 case BinaryOperatorType.Multiply:
-                    op_name = "mul";
+                    op_name = JS.Funcs.Math.MUL;
                     break;
 
                 case BinaryOperatorType.Divide:
-                    op_name = "div";
+                    op_name = JS.Funcs.Math.DIV;
                     break;
 
                 case BinaryOperatorType.Modulus:
-                    op_name = "mod";
+                    op_name = JS.Funcs.Math.MOD;
                     break;
 
                 default:
@@ -630,83 +630,83 @@ namespace Bridge.Translator
 
         private void HandleLong(ResolveResult resolveOperator, bool isUint)
         {
-            string action = "lift2";
+            string action = JS.Funcs.Math.LIFT2;
             string op_name = null;
 
             switch (this.BinaryOperatorExpression.Operator)
             {
                 case BinaryOperatorType.GreaterThan:
-                    op_name = "gt";
-                    action = "liftcmp";
+                    op_name = JS.Funcs.Math.GT;
+                    action = JS.Funcs.Math.LIFTCMP;
                     break;
 
                 case BinaryOperatorType.GreaterThanOrEqual:
-                    op_name = "gte";
-                    action = "liftcmp";
+                    op_name = JS.Funcs.Math.GTE;
+                    action = JS.Funcs.Math.LIFTCMP;
                     break;
 
                 case BinaryOperatorType.Equality:
-                    op_name = "equals";
-                    action = "lifteq";
+                    op_name = JS.Funcs.Math.EQUALS;
+                    action = JS.Funcs.Math.LIFTEQ;
                     break;
 
                 case BinaryOperatorType.InEquality:
-                    op_name = "ne";
-                    action = "liftne";
+                    op_name = JS.Funcs.Math.NE;
+                    action = JS.Funcs.Math.LIFTNE;
                     break;
 
                 case BinaryOperatorType.LessThan:
-                    op_name = "lt";
-                    action = "liftcmp";
+                    op_name = JS.Funcs.Math.LT;
+                    action = JS.Funcs.Math.LIFTCMP;
                     break;
 
                 case BinaryOperatorType.LessThanOrEqual:
-                    op_name = "lte";
-                    action = "liftcmp";
+                    op_name = JS.Funcs.Math.LTE;
+                    action = JS.Funcs.Math.LIFTCMP;
                     break;
 
                 case BinaryOperatorType.Add:
-                    op_name = "add";
+                    op_name = JS.Funcs.Math.ADD;
                     break;
 
                 case BinaryOperatorType.Subtract:
-                    op_name = "sub";
+                    op_name = JS.Funcs.Math.SUB;
                     break;
 
                 case BinaryOperatorType.Multiply:
-                    op_name = "mul";
+                    op_name = JS.Funcs.Math.MUL;
                     break;
 
                 case BinaryOperatorType.Divide:
-                    op_name = "div";
+                    op_name = JS.Funcs.Math.DIV;
                     if (Helpers.IsFloatType(resolveOperator.Type, this.Emitter.Resolver))
                     {
-                        op_name = "toNumberDivided";
+                        op_name = "JS.Funcs.Math.TO_NUMBER_DIVIDED";
                     }
                     break;
 
                 case BinaryOperatorType.Modulus:
-                    op_name = "mod";
+                    op_name = JS.Funcs.Math.MOD;
                     break;
 
                 case BinaryOperatorType.BitwiseAnd:
-                    op_name = "and";
+                    op_name = JS.Funcs.Math.AND;
                     break;
 
                 case BinaryOperatorType.BitwiseOr:
-                    op_name = "or";
+                    op_name = JS.Funcs.Math.OR;
                     break;
 
                 case BinaryOperatorType.ExclusiveOr:
-                    op_name = "xor";
+                    op_name = JS.Funcs.Math.XOR;
                     break;
 
                 case BinaryOperatorType.ShiftLeft:
-                    op_name = "shl";
+                    op_name = JS.Funcs.Math.SHL;
                     break;
 
                 case BinaryOperatorType.ShiftRight:
-                    op_name = isUint ? "shru" : "shr";
+                    op_name = isUint ? JS.Funcs.Math.SHRU : JS.Funcs.Math.SHR;
                     break;
 
                 default:

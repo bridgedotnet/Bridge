@@ -1,10 +1,10 @@
+using Bridge.Contract.Constants;
+
 using Object.Net.Utilities;
+
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using Bridge.Contract;
-using Mono.Cecil;
 
 namespace Bridge.Translator
 {
@@ -134,7 +134,7 @@ namespace Bridge.Translator
                     var str = moduleOutput.ToString();
                     moduleOutput.Length = 0;
 
-                    moduleOutput.Append("define(");
+                    moduleOutput.Append(JS.Funcs.DEFINE + "(");
 
                     if (moduleName != Bridge.Translator.AssemblyInfo.DEFAULT_FILENAME)
                     {
@@ -171,7 +171,7 @@ namespace Bridge.Translator
 
                     string indent = str.StartsWith("    ") ? "" : "    ";
                     moduleOutput.Append("    ");
-                    WriteNewLine(moduleOutput, "var exports = { };");
+                    WriteNewLine(moduleOutput, "var " + JS.Vars.EXPORTS + " = { };");
                     moduleOutput.Append(indent + str.Replace("\n", "\n" + indent));
 
                     if (!str.Trim().EndsWith("\n"))
@@ -179,7 +179,7 @@ namespace Bridge.Translator
                         WriteNewLine(moduleOutput);
                     }
 
-                    WriteNewLine(moduleOutput, "    return exports;");
+                    WriteNewLine(moduleOutput, "    return " + JS.Vars.EXPORTS + ";");
                     WriteNewLine(moduleOutput, "});");
                 }
             }

@@ -1,6 +1,9 @@
 using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using Mono.Cecil;
 using Object.Net.Utilities;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -114,7 +117,7 @@ namespace Bridge.Translator.TypeScript
                 list.Add(name);
             }
 
-            if (list.Count > 0 && list[0] == "Object")
+            if (list.Count > 0 && list[0] == JS.Types.OBJECT)
             {
                 list.RemoveAt(0);
             }
@@ -185,7 +188,7 @@ namespace Bridge.Translator.TypeScript
                         this.Write(p.Name);
                         this.WriteColon();
                         this.WriteOpenBrace();
-                        this.Write("prototype");
+                        this.Write(JS.Fields.PROTOTYPE);
                         this.WriteColon();
                         this.Write(p.Name);
 
@@ -199,7 +202,7 @@ namespace Bridge.Translator.TypeScript
 
                 this.BeginBlock();
 
-                this.Write("prototype: ");
+                this.Write(JS.Fields.PROTOTYPE + ": ");
                 this.Write(this.JsName);
                 this.WriteSemiColon();
                 this.WriteNewLine();
@@ -273,7 +276,7 @@ namespace Bridge.Translator.TypeScript
                 var isInterface = this.Emitter.TypeInfo.TypeDeclaration.ClassType == ICSharpCode.NRefactory.CSharp.ClassType.Interface;
                 if (isInterface)
                 {
-                    this.Write("Function");
+                    this.Write(JS.Types.FUNCTION);
                 }
                 else
                 {

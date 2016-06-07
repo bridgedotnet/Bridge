@@ -1,6 +1,9 @@
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -640,7 +643,7 @@ namespace Bridge.Contract
 
                     var name = this.Emitter.GetEntityName(m, false, true);
                     if ((name == this.JsName || name == this.AltJsName) && m.IsStatic == this.Static &&
-                        ((m.IsConstructor && this.JsName == "$constructor") || m.IsConstructor == this.Constructor))
+                        ((m.IsConstructor && this.JsName == JS.Funcs.DCONSTRUCTOR) || m.IsConstructor == this.Constructor))
                     {
                         if (m.IsConstructor != this.Constructor)
                         {
@@ -885,7 +888,7 @@ namespace Bridge.Contract
             string name = this.Emitter.GetEntityName(definition, this.CancelChangeCase);
             if (name.StartsWith(".ctor"))
             {
-                name = "constructor";
+                name = JS.Funcs.CONSTRUCTOR;
             }
 
             var attr = Helpers.GetInheritedAttribute(definition, "Bridge.NameAttribute");
@@ -908,19 +911,16 @@ namespace Bridge.Contract
 
             if (definition is IMethod && ((IMethod)definition).IsConstructor)
             {
-                name = "constructor";
+                name = JS.Funcs.CONSTRUCTOR;
             }
 
             var index = this.GetIndex(definition);
 
             if (index > 0)
             {
-                name += "$" + index;
+                name += Helpers.PrefixDollar(index);
 
-                if (name.StartsWith("$"))
-                {
-                    name = name.Substring(1);
-                }
+                name = Helpers.ReplaceFirstDollar(name);
             }
 
             if (definition.ImplementedInterfaceMembers.Count > 0)

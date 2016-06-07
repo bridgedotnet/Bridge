@@ -39,7 +39,7 @@ namespace Bridge.Translator
                 XmlToJsDoc.EmitComment(this, this.CustomEventDeclaration);
                 var overloads = OverloadsCollection.Create(this.Emitter, customEventDeclaration, remover);
 
-                this.Write((remover ? "remove" : "add") + overloads.GetOverloadName());
+                this.Write(Helpers.GetAddOrRemove(!remover, overloads.GetOverloadName()));
                 this.WriteColon();
                 this.WriteFunction();
                 this.WriteOpenParentheses();

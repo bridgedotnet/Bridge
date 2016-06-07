@@ -198,7 +198,7 @@
                 this.m_array[((Bridge.Int.div(index, 32)) | 0)] = this.m_array[((Bridge.Int.div(index, 32)) | 0)] | (1 << (index % 32));
             }
             else  {
-                this.m_array[((Bridge.Int.div(index, 32)) | 0)] = this.m_array[((Bridge.Int.div(index, 32)) | 0)] & ~(1 << (index % 32));
+                this.m_array[((Bridge.Int.div(index, 32)) | 0)] = this.m_array[((Bridge.Int.div(index, 32)) | 0)] & (~(1 << (index % 32)));
             }
     
             this._version = (this._version + 1) | 0;
@@ -844,7 +844,7 @@
             }
         },
         removeWhere: function (match) {
-            if (match == null) {
+            if (Bridge.staticEquals(match, null)) {
                 throw new System.ArgumentNullException("match");
             }
             var numRemoved = 0;
@@ -1167,7 +1167,7 @@
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,System.Collections.Generic.HashSet$1.ElementCount(T))) {
+            if (!Bridge.is(o, System.Collections.Generic.HashSet$1.ElementCount(T))) {
                 return false;
             }
             return Bridge.equals(this.uniqueCount, o.uniqueCount) && Bridge.equals(this.unfoundCount, o.unfoundCount);
@@ -1242,7 +1242,7 @@
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,System.Collections.Generic.HashSet$1.Enumerator(T))) {
+            if (!Bridge.is(o, System.Collections.Generic.HashSet$1.Enumerator(T))) {
                 return false;
             }
             return Bridge.equals(this._set, o._set) && Bridge.equals(this._index, o._index) && Bridge.equals(this._version, o._version) && Bridge.equals(this._current, o._current);
@@ -1276,7 +1276,7 @@
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,System.Collections.Generic.HashSet$1.Slot(T))) {
+            if (!Bridge.is(o, System.Collections.Generic.HashSet$1.Slot(T))) {
                 return false;
             }
             return Bridge.equals(this.hashCode, o.hashCode) && Bridge.equals(this.value, o.value) && Bridge.equals(this.next, o.next);
@@ -1569,7 +1569,7 @@
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,System.Collections.Generic.Queue$1.Enumerator(T))) {
+            if (!Bridge.is(o, System.Collections.Generic.Queue$1.Enumerator(T))) {
                 return false;
             }
             return Bridge.equals(this._q, o._q) && Bridge.equals(this._index, o._index) && Bridge.equals(this._version, o._version) && Bridge.equals(this._currentElement, o._currentElement);
@@ -1832,7 +1832,7 @@
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o,System.Collections.Generic.Stack$1.Enumerator(T))) {
+            if (!Bridge.is(o, System.Collections.Generic.Stack$1.Enumerator(T))) {
                 return false;
             }
             return Bridge.equals(this._stack, o._stack) && Bridge.equals(this._index, o._index) && Bridge.equals(this._version, o._version) && Bridge.equals(this._currentElement, o._currentElement);

@@ -33,6 +33,7 @@
     <NoStdLib>True</NoStdLib>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BridgeIssues\N1424.cs" />
     <Compile Include="BridgeIssues\N770.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestClassB.cs" />

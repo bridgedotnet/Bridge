@@ -84,6 +84,8 @@
     <Compile Include="AbstractPlugin.cs" />
     <Compile Include="BridgeType.cs" />
     <Compile Include="ConfigHelper.cs" />
+    <Compile Include="Constants\CS.cs" />
+    <Compile Include="Constants\JS.cs" />
     <Compile Include="IAnonymousType.cs" />
     <Compile Include="IWriter.cs" />
     <Compile Include="OverflowMode.cs" />
@@ -122,7 +124,6 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ITypeInfo.cs" />
-    <Compile Include="Constants\TypeNames.cs" />
     <Compile Include="XmlToJsDoc.cs" />
   </ItemGroup>
   <ItemGroup>

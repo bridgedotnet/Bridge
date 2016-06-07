@@ -1,4 +1,6 @@
 using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
 using System.Collections.Generic;
 
@@ -68,7 +70,7 @@ namespace Bridge.Translator.TypeScript
                     this.Write(p.Name);
                     this.WriteColon();
                     this.WriteOpenBrace();
-                    this.Write("prototype");
+                    this.Write(JS.Fields.PROTOTYPE);
                     this.WriteColon();
                     this.Write(p.Name);
 

@@ -1,4 +1,6 @@
 using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.CSharp.Resolver;
 using ICSharpCode.NRefactory.Semantics;
@@ -119,7 +121,7 @@ namespace Bridge.Translator
             this.Emitter.AsyncBlock.WrittenAwaitExpressions.Add(node);
 
             var index = System.Array.IndexOf(this.Emitter.AsyncBlock.AwaitExpressions, node) + 1;
-            this.Write("$task" + index + " = ");
+            this.Write(JS.Vars.ASYNC_TASK + index + " = ");
             bool customAwaiter = false;
             var oldValue = this.Emitter.ReplaceAwaiterByVar;
             this.Emitter.ReplaceAwaiterByVar = true;
@@ -150,16 +152,16 @@ namespace Bridge.Translator
 
             this.WriteSemiColon();
             this.WriteNewLine();
-            this.Write("$step = " + this.Emitter.AsyncBlock.Step + ";");
+            this.Write(JS.Vars.ASYNC_STEP + " = " + this.Emitter.AsyncBlock.Step + ";");
             this.WriteNewLine();
 
             if (this.Emitter.AsyncBlock.IsTaskReturn)
             {
-                this.Write("$task" + index + ".continueWith($asyncBody);");
+                this.Write(JS.Vars.ASYNC_TASK + index + "." + JS.Funcs.CONTINUE_WITH + "(" + JS.Funcs.ASYNC_BODY + ");");
             }
             else
             {
-                this.Write("$task" + index + ".continueWith($asyncBody, true);");
+                this.Write(JS.Vars.ASYNC_TASK + index + "." + JS.Funcs.CONTINUE_WITH + "(" + JS.Funcs.ASYNC_BODY + ", true);");
             }
 
             this.WriteNewLine();

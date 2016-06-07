@@ -1,4 +1,6 @@
 using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
 
 namespace Bridge.Translator
@@ -36,7 +38,7 @@ namespace Bridge.Translator
             {
                 var varName = this.AddLocal(variable.Name, this.VariableDeclarationStatement.Type);
 
-                if (variable.Initializer != null && !variable.Initializer.IsNull && variable.Initializer.ToString().Contains(Bridge.Translator.Emitter.FIX_ARGUMENT_NAME))
+                if (variable.Initializer != null && !variable.Initializer.IsNull && variable.Initializer.ToString().Contains(JS.Vars.FIX_ARGUMENT_NAME))
                 {
                     continue;
                 }

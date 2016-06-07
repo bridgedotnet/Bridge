@@ -176,7 +176,8 @@ namespace Bridge.Translator
                 if (!isStatic)
                 {
                     var isExtensionMethod = resolvedMethod.IsExtensionMethod;
-                    this.Write(Bridge.Translator.Emitter.ROOT + "." + (isExtensionMethod ? Bridge.Translator.Emitter.DELEGATE_BIND_SCOPE : Bridge.Translator.Emitter.DELEGATE_BIND) + "(");
+                    this.Write(isExtensionMethod ? JS.Funcs.BRIDGE_BIND_SCOPE : JS.Funcs.BRIDGE_BIND);
+                    this.WriteOpenParentheses();
                     this.WriteThis();
                     this.Write(", ");
                     appendAdditionalCode = ")";
@@ -248,16 +249,16 @@ namespace Bridge.Translator
                             {
                                 if (isNullable)
                                 {
-                                    this.Write(TypeNames.Nullable + ".lift1");
+                                    this.Write(JS.Types.SYSTEM_NULLABLE + "." + JS.Funcs.Math.LIFT1);
                                     this.WriteOpenParentheses();
                                     if (this.Emitter.UnaryOperatorType == UnaryOperatorType.Increment ||
                                         this.Emitter.UnaryOperatorType == UnaryOperatorType.PostIncrement)
                                     {
-                                        this.WriteScript("inc");
+                                        this.WriteScript(JS.Funcs.Math.INC);
                                     }
                                     else
                                     {
-                                        this.WriteScript("dec");
+                                        this.WriteScript(JS.Funcs.Math.DEC);
                                     }
 
                                     this.WriteComma();
@@ -280,11 +281,11 @@ namespace Bridge.Translator
                                     if (this.Emitter.UnaryOperatorType == UnaryOperatorType.Increment ||
                                         this.Emitter.UnaryOperatorType == UnaryOperatorType.PostIncrement)
                                     {
-                                        this.Write("inc");
+                                        this.Write(JS.Funcs.Math.INC);
                                     }
                                     else
                                     {
-                                        this.Write("dec");
+                                        this.Write(JS.Funcs.Math.DEC);
                                     }
 
                                     this.WriteOpenParentheses();
@@ -328,16 +329,16 @@ namespace Bridge.Translator
                             {
                                 if (isNullable)
                                 {
-                                    this.Write(TypeNames.Nullable + ".lift1");
+                                    this.Write(JS.Types.SYSTEM_NULLABLE + "." + JS.Funcs.Math.LIFT1);
                                     this.WriteOpenParentheses();
                                     if (this.Emitter.UnaryOperatorType == UnaryOperatorType.Increment ||
                                         this.Emitter.UnaryOperatorType == UnaryOperatorType.PostIncrement)
                                     {
-                                        this.WriteScript("inc");
+                                        this.WriteScript(JS.Funcs.Math.INC);
                                     }
                                     else
                                     {
-                                        this.WriteScript("dec");
+                                        this.WriteScript(JS.Funcs.Math.DEC);
                                     }
 
                                     this.WriteComma();
@@ -353,11 +354,11 @@ namespace Bridge.Translator
                                     if (this.Emitter.UnaryOperatorType == UnaryOperatorType.Increment ||
                                         this.Emitter.UnaryOperatorType == UnaryOperatorType.PostIncrement)
                                     {
-                                        this.Write("inc");
+                                        this.Write(JS.Funcs.Math.INC);
                                     }
                                     else
                                     {
-                                        this.Write("dec");
+                                        this.Write(JS.Funcs.Math.DEC);
                                     }
 
                                     this.WriteOpenParentheses();
@@ -451,7 +452,7 @@ namespace Bridge.Translator
                     }
                     else
                     {
-                        this.Write(this.Emitter.AssignmentType == AssignmentOperatorType.Add ? "add" : "remove");
+                        this.Write(Helpers.GetAddOrRemove(this.Emitter.AssignmentType == AssignmentOperatorType.Add));
                         this.Write(
                             OverloadsCollection.Create(this.Emitter, memberResult.Member,
                                 this.Emitter.AssignmentType == AssignmentOperatorType.Subtract).GetOverloadName());
@@ -473,35 +474,7 @@ namespace Bridge.Translator
                 }
                 else if (isResolved)
                 {
-                    if (resolveResult is TypeResolveResult)
-                    {
-                        var typeResolveResult = (TypeResolveResult)resolveResult;
-
-                        var isNative = this.Emitter.Validator.IsIgnoreType(typeResolveResult.Type.GetDefinition());
-                        this.Write(BridgeTypes.ToJsName(typeResolveResult.Type, this.Emitter));
-                        /*if (!isNative)
-                        {
-                            this.Write("Bridge.get(" + BridgeTypes.ToJsName(typeResolveResult.Type, this.Emitter));
-                        }
-                        else
-                        {
-                            this.Write(BridgeTypes.ToJsName(typeResolveResult.Type, this.Emitter));
-                        }*/
-                        
-
-                        if (typeResolveResult.Type.TypeParameterCount > 0)
-                        {
-                            this.WriteOpenParentheses();
-                            new TypeExpressionListBlock(this.Emitter, this.IdentifierExpression.TypeArguments).Emit();
-                            this.WriteCloseParentheses();
-                        }
-
-                        if (!isNative)
-                        {
-                            this.Write(")");
-                        }                        
-                    }
-                    else if (resolveResult is LocalResolveResult)
+                    if (resolveResult is LocalResolveResult)
                     {
                         var localResolveResult = (LocalResolveResult)resolveResult;
                         this.Write(localResolveResult.Variable.Name);
@@ -543,14 +516,6 @@ namespace Bridge.Translator
             if (memberResult.Member.IsStatic)
             {
                 this.Write(BridgeTypes.ToJsName(memberResult.Member.DeclaringType, this.Emitter));
-                /*if (!this.Emitter.Validator.IsIgnoreType(memberResult.Member.DeclaringTypeDefinition) && memberResult.Member.DeclaringTypeDefinition.Kind != TypeKind.Enum)
-                {
-                    this.Write("Bridge.get(" + BridgeTypes.ToJsName(memberResult.Member.DeclaringType, this.Emitter) + ")");
-                }
-                else
-                {
-                    this.Write(BridgeTypes.ToJsName(memberResult.Member.DeclaringType, this.Emitter));
-                }*/
             }
             else
             {

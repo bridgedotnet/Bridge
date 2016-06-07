@@ -1,6 +1,9 @@
 using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
 using Object.Net.Utilities;
+
 using System.Collections.Generic;
 
 namespace Bridge.Translator.TypeScript
@@ -115,7 +118,7 @@ namespace Bridge.Translator.TypeScript
 
             if (this.TypeInfo.InstanceConfig.Fields.Count == 0)
             {
-                this.Write("$clone(to");
+                this.Write(JS.Funcs.CLONE + "(to");
                 this.WriteColon();
                 this.Write(structName);
                 this.WriteCloseParentheses();
@@ -126,28 +129,28 @@ namespace Bridge.Translator.TypeScript
                 return;
             }
 
-            if (!this.TypeInfo.InstanceMethods.ContainsKey("GetHashCode"))
+            if (!this.TypeInfo.InstanceMethods.ContainsKey(CS.Methods.GETHASHCODE))
             {
-                this.Write("getHashCode()");
+                this.Write(JS.Funcs.GETHASHCODE + "()");
                 this.WriteColon();
                 this.Write(structName);
                 this.WriteSemiColon();
                 this.WriteNewLine();
             }
 
-            if (!this.TypeInfo.InstanceMethods.ContainsKey("Equals"))
+            if (!this.TypeInfo.InstanceMethods.ContainsKey(CS.Methods.EQUALS))
             {
-                this.Write("equals(o");
+                this.Write(JS.Funcs.EQUALS + "(o");
                 this.WriteColon();
                 this.Write(structName);
                 this.WriteCloseParentheses();
                 this.WriteColon();
-                this.Write("Boolean");
+                this.Write(JS.Types.BOOLEAN);
                 this.WriteSemiColon();
                 this.WriteNewLine();
             }
 
-            this.Write("$clone(to");
+            this.Write(JS.Funcs.CLONE + "(to");
             this.WriteColon();
             this.Write(structName);
             this.WriteCloseParentheses();
