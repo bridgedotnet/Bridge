@@ -132,7 +132,7 @@ namespace Bridge.Translator
 
             return WrapNullableMember(info, member, node);
         }
-        
+
         public virtual Tuple<bool, bool, string> GetInlineCode(InvocationExpression node)
         {
             var target = node.Target as MemberReferenceExpression;
@@ -178,7 +178,7 @@ namespace Bridge.Translator
         {
             if (member != null && !string.IsNullOrEmpty(info.Item3))
             {
-                IMethod method = (IMethod) member;
+                IMethod method = (IMethod)member;
 
                 StringBuilder savedBuilder = this.Output;
                 this.Output = new StringBuilder();
@@ -191,7 +191,7 @@ namespace Bridge.Translator
 
                 if (member.Name == CS.Methods.EQUALS)
                 {
-                    tpl = string.Format(JS.Types.SYSTEM_NULLABLE + "." + JS.Funcs.EQUALS + "({{this}}, {{{0}}}, {1})", method.Parameters.First().Name, tpl);    
+                    tpl = string.Format(JS.Types.SYSTEM_NULLABLE + "." + JS.Funcs.EQUALS + "({{this}}, {{{0}}}, {1})", method.Parameters.First().Name, tpl);
                 }
                 else if (member.Name == CS.Methods.TOSTRING)
                 {
@@ -236,7 +236,7 @@ namespace Bridge.Translator
 
                 if (name != null)
                 {
-                    var type = ((ParameterizedType) targetrr.Type).TypeArguments[0];
+                    var type = ((ParameterizedType)targetrr.Type).TypeArguments[0];
                     var methods = type.GetMethods(null, GetMemberOptions.IgnoreInheritedMembers);
 
                     if (count == 0)
@@ -253,7 +253,7 @@ namespace Bridge.Translator
                             member = methods.FirstOrDefault(m => m.Name == name && m.Parameters.Count == count && m.Parameters.First().Type.GetDefinition().IsDerivedFrom(typeDef));
                         }
                     }
-                    
+
                 }
             }
             return member;
@@ -357,7 +357,7 @@ namespace Bridge.Translator
                 {
                     name = value.ToString();
                     if (!isIgnore &&
-                        ((isStatic && Emitter.IsReservedStaticName(name)) /*||
+                        ((isStatic && Emitter.IsReservedStaticName(name)) || name == "__proto__"/*||
                         Helpers.IsReservedWord(name)*/))
                     {
                         name = Helpers.ChangeReservedWord(name);
@@ -367,14 +367,14 @@ namespace Bridge.Translator
 
                 preserveMemberCase = !(bool)value;
             }
-            
+
             if (name.Contains("."))
             {
                 name = Object.Net.Utilities.StringUtils.RightOfRightmostOf(name, '.');
             }
             name = preserveMemberCase ? name : Object.Net.Utilities.StringUtils.ToLowerCamelCase(name);
             if (!isIgnore &&
-                ((isStatic && Emitter.IsReservedStaticName(name)) /*||
+                ((isStatic && Emitter.IsReservedStaticName(name)) || name == "__proto__" /*||
                 Helpers.IsReservedWord(name)*/))
             {
                 name = Helpers.ChangeReservedWord(name);
@@ -454,7 +454,7 @@ namespace Bridge.Translator
                 if (value is string)
                 {
                     name = value.ToString();
-                    if (!isIgnore && ((member.IsStatic && Emitter.IsReservedStaticName(name)) /*|| Helpers.IsReservedWord(name)*/))
+                    if (!isIgnore && ((member.IsStatic && Emitter.IsReservedStaticName(name)) || name == "__proto__" /*|| Helpers.IsReservedWord(name)*/))
                     {
                         name = Helpers.ChangeReservedWord(name);
                     }
@@ -485,9 +485,9 @@ namespace Bridge.Translator
             {
                 name = !preserveMemberChange && !forcePreserveMemberCase ? Object.Net.Utilities.StringUtils.ToLowerCamelCase(name) : name;
             }
-            
 
-            if (!isIgnore && ((member.IsStatic && Emitter.IsReservedStaticName(name))/* || Helpers.IsReservedWord(name)*/))
+
+            if (!isIgnore && ((member.IsStatic && Emitter.IsReservedStaticName(name)) || name == "__proto__"/* || Helpers.IsReservedWord(name)*/))
             {
                 name = Helpers.ChangeReservedWord(name);
             }
