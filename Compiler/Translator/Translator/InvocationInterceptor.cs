@@ -42,39 +42,6 @@ namespace Bridge.Translator
         public IAbstractEmitterBlock Block
         {
             get;
-            set;
-        }
-
-        public MemberReferenceExpression Expression
-        {
-            get;
-            set;
-        }
-
-        public MemberResolveResult ResolveResult
-        {
-            get;
-            set;
-        }
-
-        public string Replacement
-        {
-            get;
-            set;
-        }
-
-        public bool Cancel
-        {
-            get;
-            set;
-        }
-    }
-
-    public class ReferenceInterceptor : IReferenceInterceptor
-    {
-        public IAbstractEmitterBlock Block
-        {
-            get;
             internal set;
         }
 
