@@ -7,7 +7,7 @@ namespace Test.BridgeIssues.N411
     {
         public void TestFillText()
         {
-            var canvas = Document.GetElementById<CanvasElement>("mycanvas");
+            var canvas = Document.GetElementById<HTMLCanvasElement>("mycanvas");
             var ctx = canvas.GetContext(CanvasTypes.CanvasContext2DType.CanvasRenderingContext2D);
             ctx.FillText("text", 50, 50);
         }

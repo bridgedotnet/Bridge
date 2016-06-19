@@ -16,7 +16,7 @@
     
     var $_ = {};
     
-    Bridge.ns("Test.BridgeIssues.N694.Bridge694", $_)
+    Bridge.ns("Test.BridgeIssues.N694.Bridge694", $_);
     
     Bridge.apply($_.Test.BridgeIssues.N694.Bridge694, {
         f1: function (fruit) {

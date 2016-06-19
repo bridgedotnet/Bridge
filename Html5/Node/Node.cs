@@ -64,12 +64,12 @@ namespace Bridge.Html5
         /// <summary>
         /// Returns an Element that is the parent of this node. If the node has no parent, or if that parent is not an Element, this property returns null.
         /// </summary>
-        public readonly Element ParentElement;
+        public readonly HTMLElement ParentElement;
 
         /// <summary>
         /// Returns a Node representing the previous node in the tree, or null if there isn't such node.
         /// </summary>
-        public readonly Element PreviousSibling;
+        public readonly HTMLElement PreviousSibling;
 
         /// <summary>
         /// Is a DOMString representing the textual content of an element and all its descendants.

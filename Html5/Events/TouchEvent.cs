@@ -49,7 +49,7 @@ namespace Bridge.Html5
     /// <typeparam name="TCurrentTarget">The CurrentTarget type</typeparam>
     [External]
     [Name("TouchEvent")]
-    public class TouchEvent<TCurrentTarget> : UIEvent<TCurrentTarget> where TCurrentTarget : Element
+    public class TouchEvent<TCurrentTarget> : UIEvent<TCurrentTarget> where TCurrentTarget : HTMLElement
     {
         /// <summary>
         /// A Boolean value indicating whether or not the alt key was down when the touch event was fired.

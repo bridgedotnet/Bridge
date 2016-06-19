@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project path="" name="Bridge.NET" author="Object.NET, Inc." version="1.14.0" copyright="@version   : 1.14.0 - Bridge.NET&#xD;&#xA;@author    : Object.NET, Inc. http://bridge.net/&#xD;&#xA;@date      : 2016-06-06&#xD;&#xA;@copyright : Copyright (c) 2008-2016, Object.NET, Inc. (http://object.net/). All rights reserved.&#xD;&#xA;@license   : See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE." output="$project" source="False" minify="False" doc="False" master="true" zip="true">
+<project path="" name="Bridge.NET" author="Object.NET, Inc." version="1.14.0" copyright="@version   : 1.14.0 - Bridge.NET&#xD;&#xA;@author    : Object.NET, Inc. http://bridge.net/&#xD;&#xA;@date      : 2016-06-08&#xD;&#xA;@copyright : Copyright (c) 2008-2016, Object.NET, Inc. (http://object.net/). All rights reserved.&#xD;&#xA;@license   : See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE." output="$project" source="False" minify="False" doc="False" master="true" zip="true">
   <file name="Init.js" />
   <file name="End.js" />
   <file name="Core.js" />

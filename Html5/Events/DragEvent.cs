@@ -40,5 +40,5 @@
     /// <typeparam name="TCurrentTarget">The CurrentTarget type.</typeparam>
     [External]
     [Name("DragEvent")]
-    public class DragEvent<TCurrentTarget> : MouseEvent<TCurrentTarget> where TCurrentTarget : Element { }
+    public class DragEvent<TCurrentTarget> : MouseEvent<TCurrentTarget> where TCurrentTarget : HTMLElement { }
 }

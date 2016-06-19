@@ -8,7 +8,7 @@ namespace TestIssue461
     {
         public static void Test()
         {
-            InputElement input = new InputElement();
+            HTMLInputElement input = new HTMLInputElement();
 
             input.OnChange += (ev) =>
             {
@@ -19,7 +19,7 @@ namespace TestIssue461
                 Console.WriteLine("IsMouseEvent: " + ev.IsMouseEvent());
             };
 
-            AnchorElement anchor = new AnchorElement();
+            HTMLAnchorElement anchor = new HTMLAnchorElement();
 
             anchor.OnClick += (ev) =>
             {
@@ -28,13 +28,13 @@ namespace TestIssue461
             };
 
             // Test if Document.GetElementById<>() compiles
-            DivElement div = Document.GetElementById<DivElement>("div1");
+            HTMLDivElement div = Document.GetElementById<HTMLDivElement>("div1");
 
             // Tests if Element is still a superclass of all the element classes and the following code compiles
-            Element element;
+            HTMLElement element;
 
-            element = new InputElement();
-            element = new TextAreaElement();
+            element = new HTMLInputElement();
+            element = new HTMLTextAreaElement();
         }
     }
 }

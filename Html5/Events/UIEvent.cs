@@ -90,5 +90,5 @@ namespace Bridge.Html5
     /// <typeparam name="TCurrentTarget">The CurrentTarget type</typeparam>
     [External]
     [Name("UIEvent")]
-    public class UIEvent<TCurrentTarget> : Event<TCurrentTarget> where TCurrentTarget : Element { }
+    public class UIEvent<TCurrentTarget> : Event<TCurrentTarget> where TCurrentTarget : HTMLElement { }
 }

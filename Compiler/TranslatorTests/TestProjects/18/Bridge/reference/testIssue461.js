@@ -26,7 +26,7 @@
     
     var $_ = {};
     
-    Bridge.ns("TestIssue461.Issue461", $_)
+    Bridge.ns("TestIssue461.Issue461", $_);
     
     Bridge.apply($_.TestIssue461.Issue461, {
         f1: function (ev) {

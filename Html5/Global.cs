@@ -29,7 +29,7 @@ namespace Bridge.Html5
         /// <summary>
         /// Returns the element (such as &lt;iframe&gt; or &lt;object&gt;) in which the window is embedded, or null if the window is top-level.
         /// </summary>
-        public static readonly IFrameElement FrameElement;
+        public static readonly HTMLIFrameElement FrameElement;
 
         /// <summary>
         /// Returns the window itself, which is an array-like object, listing the direct sub-frames of the current window.
@@ -479,7 +479,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="el">The Element for which to get the computed style.</param>
         /// <returns>The returned style is a CSSStyleDeclaration object.</returns>
-        public static extern CSSStyleDeclaration GetComputedStyle(Element el);
+        public static extern CSSStyleDeclaration GetComputedStyle(HTMLElement el);
 
         /// <summary>
         /// The Window.getComputedStyle() method gives the values of all the CSS properties of an element after applying the active stylesheets and resolving any basic computation those values may contain
@@ -487,14 +487,14 @@ namespace Bridge.Html5
         /// <param name="el">The Element for which to get the computed style.</param>
         /// <param name="pseudoElt">A string specifying the pseudo-element to match. Must be omitted (or null) for regular elements.</param>
         /// <returns>The returned style is a CSSStyleDeclaration object.</returns>
-        public static extern CSSStyleDeclaration GetComputedStyle(Element el, string pseudoElt);
+        public static extern CSSStyleDeclaration GetComputedStyle(HTMLElement el, string pseudoElt);
 
         /// <summary>
         /// getDefaultComputedStyle() gives the default computed values of all the CSS properties of an element, ignoring author styling.  That is, only user-agent and user styles are taken into account.
         /// </summary>
         /// <param name="el">The Element for which to get the computed style.</param>
         /// <returns>The returned style is a CSSStyleDeclaration object.</returns>
-        public static extern CSSStyleDeclaration GetDefaultComputedStyle(Element el);
+        public static extern CSSStyleDeclaration GetDefaultComputedStyle(HTMLElement el);
 
         /// <summary>
         /// getDefaultComputedStyle() gives the default computed values of all the CSS properties of an element, ignoring author styling.  That is, only user-agent and user styles are taken into account.
@@ -502,7 +502,7 @@ namespace Bridge.Html5
         /// <param name="el">The Element for which to get the computed style.</param>
         /// <param name="pseudoElt">A string specifying the pseudo-element to match. Must be null (or not specified) for regular elements.</param>
         /// <returns>The returned style is a CSSStyleDeclaration object.</returns>
-        public static extern CSSStyleDeclaration GetDefaultComputedStyle(Element el, string pseudoElt);
+        public static extern CSSStyleDeclaration GetDefaultComputedStyle(HTMLElement el, string pseudoElt);
 
         /// <summary>
         /// Returns a selection object representing the range of text selected by the user.

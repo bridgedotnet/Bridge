@@ -19,7 +19,7 @@ namespace Bridge.Html5
         ///
         /// </summary>
         /// <param name="form">HTML Form Element to send for keys/values. It will also encode file input content.</param>
-        public FormData(FormElement form)
+        public FormData(HTMLFormElement form)
         {
         }
 

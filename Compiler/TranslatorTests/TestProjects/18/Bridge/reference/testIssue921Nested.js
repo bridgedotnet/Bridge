@@ -45,7 +45,7 @@
     
     var $_ = {};
     
-    Bridge.ns("TestIssue921Nested.Issue921NestedOuter", $_)
+    Bridge.ns("TestIssue921Nested.Issue921NestedOuter", $_);
     
     Bridge.apply($_.TestIssue921Nested.Issue921NestedOuter, {
         f1: function (x) {
@@ -159,7 +159,7 @@
         }
     });
     
-    Bridge.ns("TestIssue921Nested.Issue921NestedOuter.Issue921Nested", $_)
+    Bridge.ns("TestIssue921Nested.Issue921NestedOuter.Issue921Nested", $_);
     
     Bridge.apply($_.TestIssue921Nested.Issue921NestedOuter.Issue921Nested, {
         f1: function (i) {

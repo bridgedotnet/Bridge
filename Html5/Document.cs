@@ -312,12 +312,12 @@ namespace Bridge.Html5
         /// <summary>
         /// Returns an Element that is the parent of this node. If the node has no parent, or if that parent is not an Element, this property returns null.
         /// </summary>
-        public static readonly Element ParentElement;
+        public static readonly HTMLElement ParentElement;
 
         /// <summary>
         /// Returns a Node representing the previous node in the tree, or null if there isn't such node.
         /// </summary>
-        public static readonly Element PreviousSibling;
+        public static readonly HTMLElement PreviousSibling;
 
         /// <summary>
         /// Is a DOMString representing the textual content of an element and all its descendants.
@@ -422,12 +422,12 @@ namespace Bridge.Html5
         /// <summary>
         /// The ParentNode.firstElementChild read-only property returns the object's first child Element, or null if there are no child elements.
         /// </summary>
-        public static readonly Element FirstElementChild;
+        public static readonly HTMLElement FirstElementChild;
 
         /// <summary>
         /// The ParentNode.lastElementChild read-only method returns the object's last child Element or null if there are no child elements.
         /// </summary>
-        public static readonly Element LastElementChild;
+        public static readonly HTMLElement LastElementChild;
 
         /// <summary>
         /// The oncopy property returns the onCopy event handler code on the current element.
@@ -837,7 +837,7 @@ namespace Bridge.Html5
         /// <summary>
         /// Returns the Element that is the root element of the document (for example, the &lt;html&gt; element for HTML documents).
         /// </summary>
-        public static readonly Element DocumentElement;
+        public static readonly HTMLElement DocumentElement;
 
         /// <summary>
         /// Returns the document location as string.
@@ -877,7 +877,7 @@ namespace Bridge.Html5
         /// <summary>
         /// Returns the currently focused element, that is, the element that will get keystroke events if the user types any.
         /// </summary>
-        public static readonly Element ActiveElement;
+        public static readonly HTMLElement ActiveElement;
 
         /// <summary>
         /// Returns or sets the color of an active link in the document body. A link is active during the time between mousedown and mouseup events.
@@ -902,7 +902,7 @@ namespace Bridge.Html5
         /// <summary>
         /// Returns the body or frameset node of the current document, or null if no such element exists.
         /// </summary>
-        public static Element Body;
+        public static HTMLElement Body;
 
         /// <summary>
         /// Get and set the cookies associated with the current document.
@@ -947,7 +947,7 @@ namespace Bridge.Html5
         /// <summary>
         /// Returns the head element of the current document. If there are more than one head elements, the first one is returned.
         /// </summary>
-        public static readonly Element Head;
+        public static readonly HTMLElement Head;
 
         /// <summary>
         /// Returns a list of the images in the current document.
@@ -1081,7 +1081,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="tagName">tagName is a string that specifies the type of element to be created. The nodeName of the created element is initialized with the value of tagName. Don't use qualified names (like "html:a") with this method.</param>
         /// <returns>created element object</returns>
-        public static extern Element CreateElement(string tagName);
+        public static extern HTMLElement CreateElement(string tagName);
 
         /// <summary>
         /// In an HTML document creates the specified HTML element or HTMLUnknownElement if the element is not known.
@@ -1090,7 +1090,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="tagName">tagName is a string that specifies the type of element to be created. The nodeName of the created element is initialized with the value of tagName. Don't use qualified names (like "html:a") with this method.</param>
         /// <returns>created element object</returns>
-        public static extern T CreateElement<T>(string tagName) where T : Element;
+        public static extern T CreateElement<T>(string tagName) where T : HTMLElement;
 
         /// <summary>
         /// Creates an element with the specified namespace URI and qualified name.
@@ -1098,7 +1098,7 @@ namespace Bridge.Html5
         /// <param name="namespaceURI"> a string that specifies the namespace URI to associate with the element. The namespaceURI property of the created element is initialized with the value of namespaceURI. (see section below for "Valid Namespace URI's")</param>
         /// <param name="qualifiedName">a string that specifies the type of element to be created. The nodeName property of the created element is initialized with the value of qualifiedName</param>
         /// <returns>the created element.</returns>
-        public static extern Element CreateElementNS(string namespaceURI, string qualifiedName);
+        public static extern HTMLElement CreateElementNS(string namespaceURI, string qualifiedName);
 
         /// <summary>
         /// Creates an element with the specified namespace URI and qualified name.
@@ -1106,7 +1106,7 @@ namespace Bridge.Html5
         /// <param name="namespaceURI"> a string that specifies the namespace URI to associate with the element. The namespaceURI property of the created element is initialized with the value of namespaceURI. (see section below for "Valid Namespace URI's")</param>
         /// <param name="qualifiedName">a string that specifies the type of element to be created. The nodeName property of the created element is initialized with the value of qualifiedName</param>
         /// <returns>the created element.</returns>
-        public static extern T CreateElementNS<T>(string namespaceURI, string qualifiedName) where T : Element;
+        public static extern T CreateElementNS<T>(string namespaceURI, string qualifiedName) where T : HTMLElement;
 
         /// <summary>
         /// Creates an event of the type specified. The returned object should be first initialized and can then be passed to element.dispatchEvent.
@@ -1197,7 +1197,7 @@ namespace Bridge.Html5
         /// <param name="x">x and y specify the coordinates to check, in CSS pixels relative to the upper-left corner of the document's containing window or frame.</param>
         /// <param name="y">x and y specify the coordinates to check, in CSS pixels relative to the upper-left corner of the document's containing window or frame.</param>
         /// <returns></returns>
-        public static extern Element ElementFromPoint(int x, int y);
+        public static extern HTMLElement ElementFromPoint(int x, int y);
 
         /// <summary>
         /// Enables the style sheets matching the specified name in the current style sheet set, and disables all other style sheets (except those without a title, which are always enabled).
@@ -1258,7 +1258,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="id">id is a case-sensitive string representing the unique ID of the element being sought.</param>
         /// <returns>element is a reference to an Element object, or null if an element with the specified ID is not in the document.</returns>
-        public static extern Element GetElementById(string id);
+        public static extern HTMLElement GetElementById(string id);
 
         /// <summary>
         /// Returns a reference to the element by its ID.
@@ -1266,21 +1266,21 @@ namespace Bridge.Html5
         /// <typeparam name="T"></typeparam>
         /// <param name="id">id is a case-sensitive string representing the unique ID of the element being sought.</param>
         /// <returns>element is a reference to an Element object, or null if an element with the specified ID is not in the document.</returns>
-        public static extern T GetElementById<T>(string id) where T : Element;
+        public static extern T GetElementById<T>(string id) where T : HTMLElement;
 
         /// <summary>
         /// Returns the first element within the document (using depth-first pre-order traversal of the document's nodes) that matches the specified group of selectors.
         /// </summary>
         /// <param name="selectors">selectors is a string containing one or more CSS selectors separated by commas.</param>
         /// <returns></returns>
-        public static extern Element QuerySelector(string selectors);
+        public static extern HTMLElement QuerySelector(string selectors);
 
         /// <summary>
         /// Returns the first element within the document (using depth-first pre-order traversal of the document's nodes) that matches the specified group of selectors.
         /// </summary>
         /// <param name="selectors">selectors is a string containing one or more CSS selectors separated by commas.</param>
         /// <returns></returns>
-        public static extern T QuerySelector<T>(string selectors) where T : Element;
+        public static extern T QuerySelector<T>(string selectors) where T : HTMLElement;
 
         /// <summary>
         /// Returns a list of the elements within the document (using depth-first pre-order traversal of the document's nodes) that match the specified group of selectors. The object returned is a NodeList.

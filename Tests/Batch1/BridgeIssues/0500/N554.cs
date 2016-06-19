@@ -1,8 +1,5 @@
-using Bridge;
 using Bridge.Test;
 
-using System;
-using System.Collections.Generic;
 
 namespace Bridge.ClientTest.BridgeIssues
 {
@@ -17,9 +14,9 @@ namespace Bridge.ClientTest.BridgeIssues
             var s = "0123456789";
 
             Assert.AreEqual("01234", s.Remove(5), "Remove(5)");
-            Assert.AreEqual("0123456789", s.Remove(10), "Remove(10)");
+            Assert.AreEqual("012345678", s.Remove(9), "Remove(9)");
             Assert.AreEqual("03456789", s.Remove(1, 2), "Remove(1, 2)");
-            Assert.AreEqual("0", s.Remove(1, 10), "Remove(1, 10)");
+            Assert.AreEqual("0", s.Remove(1, 9), "Remove(1, 9)");
         }
     }
 }

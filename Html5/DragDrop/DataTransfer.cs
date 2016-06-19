@@ -65,6 +65,6 @@
         /// <param name="img">An image Element element to use for the drag feedback image.</param>
         /// <param name="xOffset">A long indicating the horizontal offset within the image.</param>
         /// <param name="yOffset">A long indicating the vertical offset within the image.</param>
-        public extern void SetDragImage(Element img, int xOffset, int yOffset);
+        public extern void SetDragImage(HTMLElement img, int xOffset, int yOffset);
     }
 }

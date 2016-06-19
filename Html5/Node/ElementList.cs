@@ -8,7 +8,7 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("NodeList")]
-    public class ElementList : IEnumerable<Element>
+    public class ElementList : IEnumerable<HTMLElement>
     {
         protected internal ElementList()
         {
@@ -19,7 +19,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public virtual Element this[int index]
+        public virtual HTMLElement this[int index]
         {
             get
             {
@@ -33,14 +33,14 @@ namespace Bridge.Html5
         /// <param name="index"></param>
         /// <returns></returns>
         [Name("item")]
-        public virtual extern Element GetItem(int index);
+        public virtual extern HTMLElement GetItem(int index);
 
         /// <summary>
         /// The number of nodes in the NodeList.
         /// </summary>
         public readonly int Length;
 
-        public virtual extern IEnumerator<Element> GetEnumerator();
+        public virtual extern IEnumerator<HTMLElement> GetEnumerator();
 
         extern IEnumerator IEnumerable.GetEnumerator();
     }

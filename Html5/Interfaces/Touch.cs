@@ -43,9 +43,9 @@ namespace Bridge.Html5
         public readonly int PageY;
 
         /// <summary>
-        /// Returns the <see cref="Bridge.Html5.Element"/> on which the touch point started when it was first placed on the surface, even if the touch point has since moved outside the interactive area of that element or even been removed from the document.
+        /// Returns the <see cref="Bridge.Html5.HTMLElement"/> on which the touch point started when it was first placed on the surface, even if the touch point has since moved outside the interactive area of that element or even been removed from the document.
         /// </summary>
-        public readonly Element Target;
+        public readonly HTMLElement Target;
 
         /// <summary>
         /// Returns the X radius of the ellipse that most closely circumscribes the area of contact with the screen. The value is in pixels of the same scale as screenX.

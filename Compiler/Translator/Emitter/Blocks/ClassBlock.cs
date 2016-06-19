@@ -311,6 +311,9 @@ namespace Bridge.Translator
             var types = this.Emitter.AnonymousTypes.Values.Where(t => !t.Emitted).ToArray();
             if (types.Any())
             {
+                this.Emitter.Comma = false;
+                this.IntroducePrivateVar();
+
                 foreach (IAnonymousTypeConfig type in types)
                 {
                     this.WriteNewLine();
@@ -328,13 +331,7 @@ namespace Bridge.Translator
             {
                 this.Emitter.Comma = false;
 
-                if (!this.Emitter.EmitterOutput.IsPrivateVarIntroduced)
-                {
-                    this.WriteNewLine();
-                    this.WriteNewLine();
-                    this.Write("var " + JS.Vars.D_ + " = {};");
-                    this.Emitter.EmitterOutput.IsPrivateVarIntroduced = true;
-                }
+                this.IntroducePrivateVar();
 
                 var name = BridgeTypes.ToJsName(this.Emitter.TypeInfo.Type, this.Emitter, true);
                 var parts = name.Split(new[]{'.'}, StringSplitOptions.RemoveEmptyEntries);
@@ -345,6 +342,7 @@ namespace Bridge.Translator
                 this.WriteOpenParentheses();
                 this.WriteScript(name);
                 this.Write(", " + JS.Vars.D_ + ")");
+                this.WriteSemiColon();
                 
                 this.WriteNewLine();
                 this.WriteNewLine();
@@ -364,6 +362,17 @@ namespace Bridge.Translator
                 this.EndBlock();
                 this.WriteCloseParentheses();
                 this.WriteSemiColon();
+            }
+        }
+
+        private void IntroducePrivateVar()
+        {
+            if (!this.Emitter.EmitterOutput.IsPrivateVarIntroduced)
+            {
+                this.WriteNewLine();
+                this.WriteNewLine();
+                this.Write("var " + JS.Vars.D_ + " = {};");
+                this.Emitter.EmitterOutput.IsPrivateVarIntroduced = true;
             }
         }
 

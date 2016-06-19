@@ -49,7 +49,6 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.True(s is IEquatable<string>);
         }
 
-
         [Test]
         public void DefaultConstructorWorks()
         {
@@ -392,7 +391,6 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual(-1, "abcdabcd".LastIndexOfAny(new[] { 'b' }, 4, 2));
         }
 
-
         [Test]
         public void LocaleCompareWorks()
         {
@@ -436,12 +434,41 @@ namespace Bridge.ClientTest.SimpleTypes
         public void RemoveWorks()
         {
             Assert.AreEqual("ab", "abcde".Remove(2));
+
+            var val = "Hello";
+            Assert.Throws<ArgumentOutOfRangeException>(() => { val.Remove(-2); });
+            Assert.Throws<ArgumentOutOfRangeException>(() => { val.Remove(5); });
+
+            string s = null;
+            Assert.Throws<NullReferenceException>(() => { s.Remove(2); });
         }
 
         [Test]
         public void RemoveWithCountWorks()
         {
             Assert.AreEqual("abe", "abcde".Remove(2, 2));
+
+            var val = "Hello";
+
+            Assert.AreEqual("Hello", val.Remove(0, 0));
+            Assert.AreEqual("ello", val.Remove(0, 1));
+            Assert.AreEqual("llo", val.Remove(0, 2));
+            Assert.AreEqual("lo", val.Remove(0, 3));
+            Assert.AreEqual("o", val.Remove(0, 4));
+            Assert.AreEqual("", val.Remove(0, 5));
+
+            Assert.AreEqual("Hello", val.Remove(1, 0));
+            Assert.AreEqual("Hello", val.Remove(2, 0));
+            Assert.AreEqual("Hello", val.Remove(3, 0));
+            Assert.AreEqual("Hello", val.Remove(4, 0));
+            Assert.AreEqual("Hello", val.Remove(5, 0));
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => { val.Remove(-2, 2); });
+            Assert.Throws<ArgumentOutOfRangeException>(() => { val.Remove(2, -2); });
+            Assert.Throws<ArgumentOutOfRangeException>(() => { val.Remove(2, 4); });
+
+            string s = null;
+            Assert.Throws<NullReferenceException>(() => { s.Remove(0, 0); });
         }
 
         [Test]
@@ -482,22 +509,22 @@ namespace Bridge.ClientTest.SimpleTypes
             var numbers = "0123456789";
 
             // Let's start by using both begin and end.
-             Assert.AreEqual(numbers.Slice(3, 7), "3456");
+            Assert.AreEqual(numbers.Slice(3, 7), "3456");
 
             // What happens when we start with a negative number.
-             Assert.AreEqual(numbers.Slice(-7, 7), "3456");
+            Assert.AreEqual(numbers.Slice(-7, 7), "3456");
 
             // What happens when we use two negative numbers.
-             Assert.AreEqual(numbers.Slice(-7, -3), "3456");
+            Assert.AreEqual(numbers.Slice(-7, -3), "3456");
 
             // What happens when we omit the last argument.
-             Assert.AreEqual(numbers.Slice(3), "3456789");
+            Assert.AreEqual(numbers.Slice(3), "3456789");
 
             // And with the negative, end-relevant index.
-             Assert.AreEqual(numbers.Slice(-7), "3456789");
+            Assert.AreEqual(numbers.Slice(-7), "3456789");
 
             // If the index is out of range, it returns the empty string.
-             Assert.AreEqual(numbers.Slice(100, 101), "");
+            Assert.AreEqual(numbers.Slice(100, 101), "");
         }
 
         [Test]

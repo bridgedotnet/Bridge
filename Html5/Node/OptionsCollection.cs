@@ -5,7 +5,7 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("OptionsCollection")]
-    public class OptionsCollection : HTMLCollection<OptionElement>
+    public class OptionsCollection : HTMLCollection<HTMLOptionElement>
     {
     }
 }

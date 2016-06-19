@@ -382,7 +382,29 @@
         },
 
         remove: function (s, index, count) {
-            if (!count || ((index + count) > this.length)) {
+            if (s == null) {
+                throw new System.NullReferenceException();
+            }
+
+            if (index < 0) {
+                throw new System.ArgumentOutOfRangeException("startIndex", "StartIndex cannot be less than zero");
+            }
+
+            if (count != null) {
+                if (count < 0) {
+                    throw new System.ArgumentOutOfRangeException("count", "Count cannot be less than zero");
+                }
+
+                if (count > s.length - index) {
+                    throw new System.ArgumentOutOfRangeException("count", "Index and count must refer to a location within the string");
+                }
+            } else {
+                if (index >= s.length) {
+                    throw new System.ArgumentOutOfRangeException("startIndex", "startIndex must be less than length of string");
+                }
+            }
+
+            if (count == null || ((index + count) > s.length)) {
                 return s.substr(0, index);
             }
 

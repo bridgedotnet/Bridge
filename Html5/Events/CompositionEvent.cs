@@ -30,5 +30,5 @@ namespace Bridge.Html5
     /// <typeparam name="TCurrentTarget">The CurrentTarget type</typeparam>
     [External]
     [Name("CompositionEvent")]
-    public class CompositionEvent<TCurrentTarget> : UIEvent<TCurrentTarget> where TCurrentTarget : Element { }
+    public class CompositionEvent<TCurrentTarget> : UIEvent<TCurrentTarget> where TCurrentTarget : HTMLElement { }
 }

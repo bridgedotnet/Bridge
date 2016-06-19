@@ -101,7 +101,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The secondary target for the event, if there is one.
         /// </summary>
-        public readonly Element RelatedTarget;
+        public readonly HTMLElement RelatedTarget;
 
         /// <summary>
         /// The X coordinate of the mouse pointer relative to the position of the last mousemove event.
@@ -138,7 +138,7 @@ namespace Bridge.Html5
         /// <param name="metaKey">whether or not meta key was depressed during the Event.</param>
         /// <param name="button">the Event's mouse event.button.</param>
         /// <param name="relatedTarget">the Event's related EventTarget. Only used with some event types (e.g. mouseover and mouseout). In other cases, pass null.</param>
-        public virtual extern void InitMouseEvent(string type, bool canBubble, bool cancelable, WindowInstance view, int detail, int screenX, int screenY, int clientX, int clientY, bool ctrlKey, bool altKey, bool shiftKey, bool metaKey, short button, Element relatedTarget);
+        public virtual extern void InitMouseEvent(string type, bool canBubble, bool cancelable, WindowInstance view, int detail, int screenX, int screenY, int clientX, int clientY, bool ctrlKey, bool altKey, bool shiftKey, bool metaKey, short button, HTMLElement relatedTarget);
     }
 
     [External]
@@ -173,7 +173,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The secondary target for the event, if there is one.
         /// </summary>
-        public Element RelatedTarget;
+        public HTMLElement RelatedTarget;
 
         /// <summary>
         /// Returns the horizontal coordinate of the event within the screen as a whole.
@@ -192,5 +192,5 @@ namespace Bridge.Html5
     /// <typeparam name="TCurrentTarget">The CurrentTarget type</typeparam>
     [External]
     [Name("MouseEvent")]
-    public class MouseEvent<TCurrentTarget> : UIEvent<TCurrentTarget> where TCurrentTarget : Element { }
+    public class MouseEvent<TCurrentTarget> : UIEvent<TCurrentTarget> where TCurrentTarget : HTMLElement { }
 }

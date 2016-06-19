@@ -287,7 +287,7 @@ namespace Bridge.Html5
         /// it defined inside.
         /// </remarks>
         public virtual extern CanvasPattern CreatePattern(
-            Any<ImageElement, VideoElement, CanvasElement, CanvasRenderingContext2D, object, ImageData, Blob> image,
+            Any<HTMLImageElement, HTMLVideoElement, HTMLCanvasElement, CanvasRenderingContext2D, object, ImageData, Blob> image,
             CanvasTypes.CanvasRepetitionTypes repetition);
 
         #endregion Gradients and Patterns
@@ -387,7 +387,7 @@ namespace Bridge.Html5
         /// If a given element is focused, this method draws a focus ring around the current path.
         /// </summary>
         /// <param name="element">The element to check whether it is focused or not.</param>
-        public virtual void DrawFocusIfNeeded(Element element)
+        public virtual void DrawFocusIfNeeded(HTMLElement element)
         {
             return;
         }
@@ -397,7 +397,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="path">A Path2D path to use.</param>
         /// <param name="element">The element to check whether it is focused or not.</param>
-        public virtual void DrawFocusIfNeeded(Path2D path, Element element)
+        public virtual void DrawFocusIfNeeded(Path2D path, HTMLElement element)
         {
             return;
         }
@@ -666,7 +666,7 @@ namespace Bridge.Html5
         /// <param name="dy">
         /// The Y coordinate in the destination canvas at which to place the top-left corner of the source image.
         /// </param>
-        public virtual void DrawImage(Any<ImageElement, VideoElement, CanvasElement, CanvasRenderingContext2D> image,
+        public virtual void DrawImage(Any<HTMLImageElement, HTMLVideoElement, HTMLCanvasElement, CanvasRenderingContext2D> image,
                                       Any<int, uint, float, double> dx, Any<int, uint, float, double> dy)
         {
             return;
@@ -693,7 +693,7 @@ namespace Bridge.Html5
         /// The height to draw the image in the destination canvas. This allows scaling of the drawn image.
         /// If null, the image is not scaled in height when drawn.
         /// </param>
-        public virtual void DrawImage(Any<ImageElement, VideoElement, CanvasElement, CanvasRenderingContext2D> image,
+        public virtual void DrawImage(Any<HTMLImageElement, HTMLVideoElement, HTMLCanvasElement, CanvasRenderingContext2D> image,
                                       Any<int, uint, float, double> dx, Any<int, uint, float, double> dy,
                                       Any<int?, uint?, float?, double?> dWidth, Any<int?, uint?, float?, double?> dHeight)
         {
@@ -735,7 +735,7 @@ namespace Bridge.Html5
         /// The height to draw the image in the destination canvas. This allows scaling of the drawn image.
         /// If not specified or null, the image is not scaled in height when drawn.
         /// </param>
-        public virtual void DrawImage(Any<ImageElement, VideoElement, CanvasElement, CanvasRenderingContext2D> image,
+        public virtual void DrawImage(Any<HTMLImageElement, HTMLVideoElement, HTMLCanvasElement, CanvasRenderingContext2D> image,
                                       Any<int, uint, float, double> sx, Any<int, uint, float, double> sy,
                                       Any<int?, uint?, float?, double?> sWidth,
                                       Any<int?, uint?, float?, double?> sHeight,
@@ -887,7 +887,7 @@ namespace Bridge.Html5
         /// A read-only back-reference to the HTMLCanvasElement.
         /// Might be null if it is not associated with a &lt;canvas> element.
         /// </summary>
-        public readonly CanvasElement Canvas;
+        public readonly HTMLCanvasElement Canvas;
 
         #endregion Canvas State
 
@@ -1001,7 +1001,7 @@ namespace Bridge.Html5
             /// <summary>
             /// An element (descendant of the canvas) to which events are to be routed. Defaults to null.
             /// </summary>
-            public Element Control
+            public HTMLElement Control
             {
                 get;
                 set;

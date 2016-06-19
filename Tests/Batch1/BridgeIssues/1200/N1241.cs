@@ -16,7 +16,7 @@ namespace Bridge.ClientTest.BridgeIssues
             Assert.NotNull(markElement1, "MarkElement created");
             Assert.AreEqual(markElement1.TagName, "MARK");
 
-            var p = new ParagraphElement();
+            var p = new HTMLParagraphElement();
             root.AppendChild(p);
 
             markElement1.Id = "markElement1";

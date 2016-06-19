@@ -125,7 +125,7 @@
             public const string SYSTEM_EXCEPTION = "System.Exception";
             public const string BRIDGE_IBridgeClass = "Bridge.IBridgeClass";
             public const string BRIDGE_INT = "Bridge.Int";
-            public const string BRIDGE_ANONYMOUS = "Bridge.$AnonymousType$";
+            public const string BRIDGE_ANONYMOUS = "$AnonymousType$";
 
             public const string BOOLEAN = "Boolean";
             public const string ARRAY = "Array";

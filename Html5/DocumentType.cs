@@ -20,12 +20,12 @@ namespace Bridge.Html5
         /// <summary>
         /// Returns the Element immediately prior to this ChildNode in its parent's children list, or null if there is no Element in the list prior to this ChildNode.
         /// </summary>
-        public readonly Element PreviousElementSibling;
+        public readonly HTMLElement PreviousElementSibling;
 
         /// <summary>
         /// Returns the Element immediately following this ChildNode in its parent's children list, or null if there is no Element in the list following this ChildNode.
         /// </summary>
-        public readonly Element NextElementSibling;
+        public readonly HTMLElement NextElementSibling;
 
         /// <summary>
         /// Removes the object from its parent children list.

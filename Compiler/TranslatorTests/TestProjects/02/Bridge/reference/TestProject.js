@@ -1,7 +1,7 @@
 ﻿/*
  * @version   : 1.14.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2016-06-06
+ * @date      : 2016-06-08
  * @copyright : Copyright (c) 2008-2016, Object.NET, Inc. (http://object.net/). All rights reserved.
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE.
  */
@@ -1667,7 +1667,29 @@
         },
 
         remove: function (s, index, count) {
-            if (!count || ((index + count) > this.length)) {
+            if (s == null) {
+                throw new System.NullReferenceException();
+            }
+
+            if (index < 0) {
+                throw new System.ArgumentOutOfRangeException("startIndex", "StartIndex cannot be less than zero");
+            }
+
+            if (count != null) {
+                if (count < 0) {
+                    throw new System.ArgumentOutOfRangeException("count", "Count cannot be less than zero");
+                }
+
+                if (count > s.length - index) {
+                    throw new System.ArgumentOutOfRangeException("count", "Index and count must refer to a location within the string");
+                }
+            } else {
+                if (index >= s.length) {
+                    throw new System.ArgumentOutOfRangeException("startIndex", "startIndex must be less than length of string");
+                }
+            }
+
+            if (count == null || ((index + count) > s.length)) {
                 return s.substr(0, index);
             }
 
@@ -2189,7 +2211,7 @@
                 base,
                 cacheName = prop.$cacheName,
                 prototype,
-                scope = prop.$scope || Bridge.global,
+                scope = prop.$scope || gscope || Bridge.global,
                 i,
                 v,
                 ctorCounter,

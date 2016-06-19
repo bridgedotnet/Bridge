@@ -93,7 +93,7 @@
     
     var $_ = {};
     
-    Bridge.ns("TestIssue921Instance.Issue921Instance", $_)
+    Bridge.ns("TestIssue921Instance.Issue921Instance", $_);
     
     Bridge.apply($_.TestIssue921Instance.Issue921Instance, {
         f1: function (value) {

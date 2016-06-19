@@ -14,7 +14,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The FocusEvent.relatedTarget read-only property represents a secondary target for this event, which will depend of the event itself. As in some cases (like when tabbing in or out a page), this property may be set to null for security reasons.
         /// </summary>
-        public readonly Element RelatedTarget;
+        public readonly HTMLElement RelatedTarget;
     }
 
     /// <summary>
@@ -23,5 +23,5 @@ namespace Bridge.Html5
     /// <typeparam name="TCurrentTarget">The CurrentTarget type</typeparam>
     [External]
     [Name("FocusEvent")]
-    public class FocusEvent<TCurrentTarget> : UIEvent<TCurrentTarget> where TCurrentTarget : Element { }
+    public class FocusEvent<TCurrentTarget> : UIEvent<TCurrentTarget> where TCurrentTarget : HTMLElement { }
 }

@@ -404,7 +404,7 @@
     
     var $_ = {};
     
-    Bridge.ns("Bridge.ClientTest.Batch2.BridgeIssues.N772", $_)
+    Bridge.ns("Bridge.ClientTest.Batch2.BridgeIssues.N772", $_);
     
     Bridge.apply($_.Bridge.ClientTest.Batch2.BridgeIssues.N772, {
         f1: function (x) {
