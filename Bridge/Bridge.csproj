@@ -85,6 +85,7 @@
     <Compile Include="Bridge\Script.cs" />
     <Compile Include="System\Action.cs" />
     <Compile Include="System\Activator.cs" />
+    <Compile Include="System\BitConverter.cs" />
     <Compile Include="System\Guid.cs" />
     <Compile Include="System\Random.cs" />
     <Compile Include="System\IndexOutOfRangeException.cs" />
@@ -772,6 +773,9 @@
     <NuGetPackageSourcePath Include="$(SolutionDir).build\specs\Bridge.nuspec">
       <Path>$(SolutionDir).build\specs\Bridge.nuspec</Path>
     </NuGetPackageSourcePath>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
   </ItemGroup>
   <Import Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " Project="$(SolutionDir)\.build\common\NuGet.Build.Package.targets" />
   <Target Name="CleanProjectNuGetOutput" BeforeTargets="Clean">
