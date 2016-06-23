@@ -1,6 +1,7 @@
 namespace Bridge.Html5
 {
     [External]
+	[ExternalInterface]
     public interface INodeFilter
     {
         /// <summary>

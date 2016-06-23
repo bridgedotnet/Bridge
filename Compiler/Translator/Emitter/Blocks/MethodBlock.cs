@@ -97,7 +97,7 @@ namespace Bridge.Translator
                     string structName = BridgeTypes.ToJsName(this.TypeInfo.Type, this.Emitter);
 
                     this.EnsureComma();
-                    this.Write("getDefaultValue: function () { return new " + structName + "(); }");
+                    this.Write(JS.Funcs.GETDEFAULTVALUE + ": function () { return new " + structName + "(); }");
                     this.Emitter.Comma = true;
                 }
             }

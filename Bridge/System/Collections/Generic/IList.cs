@@ -7,19 +7,19 @@ namespace System.Collections.Generic
     {
         T this[int index]
         {
-            [Template("System.Array.getItem({this}, {0})")]
+            [Template("System.Array.getItem({this}, {0}, {T})")]
             get;
-            [Template("System.Array.setItem({this}, {0})")]
+            [Template("System.Array.setItem({this}, {0}, {T})")]
             set;
         }
 
-        [Template("System.Array.indexOf({this}, {item})")]
+        [Template("System.Array.indexOf({this}, {item}, 0, null, {T})")]
         int IndexOf(T item);
 
-        [Template("System.Array.insert({this}, {index}, {item})")]
+        [Template("System.Array.insert({this}, {index}, {item}, {T})")]
         void Insert(int index, T item);
 
-        [Template("System.Array.removeAt({this}, {index})")]
+        [Template("System.Array.removeAt({this}, {index}, {T})")]
         void RemoveAt(int index);
     }
 }

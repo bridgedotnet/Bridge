@@ -5,6 +5,13 @@ Bridge.define("System.Text.RegularExpressions.GroupCollection", {
         return [System.Collections.ICollection];
     },
 
+    config: {
+        alias: [
+        "getEnumerator", "System$Collections$IEnumerable$getEnumerator",
+        "getCount", "System$Collections$ICollection$getCount"
+        ]
+    },
+
     _match: null,
     _captureMap: null,
     _groups: null,
@@ -132,6 +139,14 @@ Bridge.define("System.Text.RegularExpressions.GroupCollection", {
 Bridge.define("System.Text.RegularExpressions.GroupEnumerator", {
     inherits: function () {
         return [System.Collections.IEnumerator];
+    },
+
+    config: {
+        alias: [
+            "getCurrent", "System$Collections$IEnumerator$getCurrent",
+            "moveNext", "System$Collections$IEnumerator$moveNext",
+            "reset", "System$Collections$IEnumerator$reset"
+        ]
     },
 
     _groupColl: null,

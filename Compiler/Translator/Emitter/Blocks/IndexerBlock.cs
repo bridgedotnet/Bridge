@@ -121,6 +121,60 @@ namespace Bridge.Translator
             Helpers.CheckValueTypeClone(resolveResult, indexerExpression, this, pos);
         }
 
+        private void WriteInterfaceMember(string interfaceTempVar, MemberResolveResult resolveResult, bool isSetter, string prefix = null)
+        {
+            if (interfaceTempVar != null)
+            {
+                this.WriteComma();
+                this.Write(interfaceTempVar);
+            }
+
+            var externalInterface = this.Emitter.Validator.IsExternalInterface(resolveResult.Member.DeclaringTypeDefinition);
+
+            this.WriteOpenBracket();
+            if (externalInterface)
+            {
+                this.Write(JS.Funcs.BRIDGE_GET_I);
+                this.WriteOpenParentheses();
+
+                if (interfaceTempVar != null)
+                {
+                    this.Write(interfaceTempVar);
+                }
+                else
+                {
+                    var oldIsAssignment = this.Emitter.IsAssignment;
+                    var oldUnary = this.Emitter.IsUnaryAccessor;
+
+                    this.Emitter.IsAssignment = false;
+                    this.Emitter.IsUnaryAccessor = false;
+                    this.IndexerExpression.Target.AcceptVisitor(this.Emitter);
+                    this.Emitter.IsAssignment = oldIsAssignment;
+                    this.Emitter.IsUnaryAccessor = oldUnary;
+                }
+
+                this.WriteComma();
+
+                this.WriteScript(
+                    OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(false, prefix));
+                this.WriteComma();
+                this.WriteScript(
+                    OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(true, prefix));
+
+                this.Write(")");
+            }
+            else
+            {
+                this.Write(OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(false, prefix));
+            }
+            this.WriteCloseBracket();
+
+            if (interfaceTempVar != null)
+            {
+                this.WriteCloseParentheses();
+            }
+        }
+
         protected virtual IndexerAccessor GetIndexerAccessor(IProperty member, bool setter)
         {
             string inlineCode = null;
@@ -184,13 +238,19 @@ namespace Bridge.Translator
                 this.Emitter.IsAssignment = false;
                 this.Emitter.IsUnaryAccessor = false;
                 indexerExpression.Target.AcceptVisitor(this.Emitter);
-                this.Emitter.IsAssignment = oldIsAssignment;
-                this.Emitter.IsUnaryAccessor = oldUnary;
                 int thisIndex = inlineCode.IndexOf("{this}");
                 var thisArg = this.Emitter.Output.ToString();
                 inlineCode = inlineCode.Replace("{this}", thisArg);
-                this.Emitter.Output = oldBuilder;
 
+                this.Emitter.Output = new StringBuilder();
+                inlineCode = inlineCode.Replace("{0}", "[[0]]");
+                new InlineArgumentsBlock(this.Emitter, new ArgumentsInfo(this.Emitter, indexerExpression, this.Emitter.Resolver.ResolveNode(indexerExpression, this.Emitter) as InvocationResolveResult), inlineCode).Emit();
+                inlineCode = this.Emitter.Output.ToString();
+                inlineCode = inlineCode.Replace("[[0]]", "{0}");
+
+                this.Emitter.IsAssignment = oldIsAssignment;
+                this.Emitter.IsUnaryAccessor = oldUnary;
+                this.Emitter.Output = oldBuilder;
                 int[] range = null;
 
                 if (thisIndex > -1)
@@ -242,12 +302,19 @@ namespace Bridge.Translator
             bool isStatement = false;
             var oldIsAssignment = this.Emitter.IsAssignment;
             var oldUnary = this.Emitter.IsUnaryAccessor;
+            var isInterfaceMember = false;
+            var isExternalInterface = this.Emitter.Validator.IsExternalInterface(memberResolveResult.Member.DeclaringTypeDefinition);
+            var hasTypeParemeter = memberResolveResult.Member.DeclaringType.TypeArguments.Any(arg => arg.Kind == TypeKind.TypeParameter);
 
-            if (this.Emitter.IsAssignment && this.Emitter.AssignmentType != AssignmentOperatorType.Assign)
+            if (memberResolveResult != null && memberResolveResult.Member.DeclaringTypeDefinition != null &&
+                memberResolveResult.Member.DeclaringTypeDefinition.Kind == TypeKind.Interface &&
+                (isExternalInterface || hasTypeParemeter))
             {
-               // writeTargetVar = true;
+                isInterfaceMember = true;
+                writeTargetVar = true;
             }
-            else if (this.Emitter.IsUnaryAccessor)
+
+            if (this.Emitter.IsUnaryAccessor)
             {
                 writeTargetVar = true;
 
@@ -265,14 +332,19 @@ namespace Bridge.Translator
                 }
             }
 
+            var targetrr = this.Emitter.Resolver.ResolveNode(indexerExpression.Target, this.Emitter);
+            var memberTargetrr = targetrr as MemberResolveResult;
+            bool isField = memberTargetrr != null && memberTargetrr.Member is IField &&
+                           (memberTargetrr.TargetResult is ThisResolveResult ||
+                            memberTargetrr.TargetResult is LocalResolveResult);
+
+            if (isInterfaceMember && (!this.Emitter.IsUnaryAccessor || isStatement) && !(targetrr is ThisResolveResult || targetrr is LocalResolveResult || isField))
+            {
+                this.WriteOpenParentheses();
+            }
+
             if (writeTargetVar)
             {
-                var targetrr = this.Emitter.Resolver.ResolveNode(indexerExpression.Target, this.Emitter);
-                var memberTargetrr = targetrr as MemberResolveResult;
-                bool isField = memberTargetrr != null && memberTargetrr.Member is IField &&
-                               (memberTargetrr.TargetResult is ThisResolveResult ||
-                                memberTargetrr.TargetResult is LocalResolveResult);
-
                 if (!(targetrr is ThisResolveResult || targetrr is LocalResolveResult || isField))
                 {
                     targetVar = this.GetTempVarName();
@@ -308,7 +380,7 @@ namespace Bridge.Translator
 
                     this.Write(targetVar);
                 }
-                else
+                else if(!isInterfaceMember)
                 {
                     this.WriteSemiColon();
                     this.WriteNewLine();
@@ -316,7 +388,11 @@ namespace Bridge.Translator
                 }
             }
 
-            this.WriteDot();
+            if (!isInterfaceMember)
+            {
+                this.WriteDot();
+            }
+            
             var argsInfo = new ArgumentsInfo(this.Emitter, indexerExpression);
             var argsExpressions = argsInfo.ArgumentsExpressions;
             var paramsArg = argsInfo.ParamsExpression;
@@ -337,7 +413,15 @@ namespace Bridge.Translator
                     bool isNullable = NullableType.IsNullable(member.ReturnType);
                     if (isStatement)
                     {
-                        this.Write(Helpers.GetPropertyRef(member, this.Emitter, true));
+                        if (isInterfaceMember)
+                        {
+                            this.WriteInterfaceMember(targetVar, memberResolveResult, true, JS.Funcs.Property.SET);
+                        }
+                        else
+                        {
+                            this.Write(Helpers.GetPropertyRef(memberResolveResult.Member, this.Emitter, true));
+                        }
+
                         this.WriteOpenParentheses();
                         this.Write(paramsStr);
                         this.WriteComma(false);
@@ -368,9 +452,16 @@ namespace Bridge.Translator
                                     indexerExpression.Target.AcceptVisitor(this.Emitter);
                                 }
 
-                                this.WriteDot();
-
-                                this.Write(Helpers.GetPropertyRef(member, this.Emitter, false));
+                                if (!isInterfaceMember)
+                                {
+                                    this.WriteDot();
+                                    this.Write(Helpers.GetPropertyRef(member, this.Emitter, false));
+                                }
+                                else
+                                {
+                                    this.WriteInterfaceMember(targetVar, memberResolveResult, false, JS.Funcs.Property.GET);
+                                }
+                                
                                 this.WriteOpenParentheses();
                                 this.Write(paramsStr);
                                 this.WriteCloseParentheses();
@@ -388,9 +479,16 @@ namespace Bridge.Translator
                                     indexerExpression.Target.AcceptVisitor(this.Emitter);
                                 }
 
-                                this.WriteDot();
+                                if (!isInterfaceMember)
+                                {
+                                    this.WriteDot();
+                                    this.Write(Helpers.GetPropertyRef(member, this.Emitter, false));
+                                }
+                                else
+                                {
+                                    this.WriteInterfaceMember(targetVar, memberResolveResult, false, JS.Funcs.Property.GET);
+                                }
 
-                                this.Write(Helpers.GetPropertyRef(member, this.Emitter, false));
                                 this.WriteOpenParentheses();
                                 this.Write(paramsStr);
                                 this.WriteCloseParentheses();
@@ -418,9 +516,16 @@ namespace Bridge.Translator
                                 indexerExpression.Target.AcceptVisitor(this.Emitter);
                             }
 
-                            this.WriteDot();
+                            if (!isInterfaceMember)
+                            {
+                                this.WriteDot();
+                                this.Write(Helpers.GetPropertyRef(member, this.Emitter, false));
+                            }
+                            else
+                            {
+                                this.WriteInterfaceMember(targetVar, memberResolveResult, false, JS.Funcs.Property.GET);
+                            }
 
-                            this.Write(Helpers.GetPropertyRef(member, this.Emitter, false));
                             this.WriteOpenParentheses();
                             this.Write(paramsStr);
                             this.WriteCloseParentheses();
@@ -442,7 +547,15 @@ namespace Bridge.Translator
                     }
                     else
                     {
-                        this.Write(Helpers.GetPropertyRef(member, this.Emitter, false));
+                        if (!isInterfaceMember)
+                        {
+                            this.Write(Helpers.GetPropertyRef(member, this.Emitter, false));
+                        }
+                        else
+                        {
+                            this.WriteInterfaceMember(targetVar, memberResolveResult, false, JS.Funcs.Property.GET);
+                        }
+
                         this.WriteOpenParentheses();
                         this.Write(paramsStr);
                         this.WriteCloseParentheses();
@@ -456,8 +569,16 @@ namespace Bridge.Translator
                         {
                             indexerExpression.Target.AcceptVisitor(this.Emitter);
                         }
-                        this.WriteDot();
-                        this.Write(Helpers.GetPropertyRef(member, this.Emitter, true));
+                        if (!isInterfaceMember)
+                        {
+                            this.WriteDot();
+                            this.Write(Helpers.GetPropertyRef(member, this.Emitter, true));
+                        }
+                        else
+                        {
+                            this.WriteInterfaceMember(targetVar, memberResolveResult, true, JS.Funcs.Property.SET);
+                        }
+
                         this.WriteOpenParentheses();
                         this.Write(paramsStr);
                         this.WriteComma(false);
@@ -530,8 +651,15 @@ namespace Bridge.Translator
                             {
                                 indexerExpression.Target.AcceptVisitor(this.Emitter);
                             }
-                            this.WriteDot();
-                            this.Write(Helpers.GetPropertyRef(member, this.Emitter, false));
+                            if (!isInterfaceMember)
+                            {
+                                this.WriteDot();
+                                this.Write(Helpers.GetPropertyRef(member, this.Emitter, false));
+                            }
+                            else
+                            {
+                                this.WriteInterfaceMember(targetVar, memberResolveResult, false, JS.Funcs.Property.GET);
+                            }
                             this.WriteOpenParentheses();
                             this.Write(paramsStr);
                             this.WriteCloseParentheses();
@@ -556,7 +684,15 @@ namespace Bridge.Translator
                 }
                 else
                 {
-                    this.Write(name);
+                    if (!isInterfaceMember)
+                    {
+                        this.Write(name);
+                    }
+                    else
+                    {
+                        this.WriteInterfaceMember(targetVar, memberResolveResult, this.Emitter.IsAssignment, Helpers.GetSetOrGet(this.Emitter.IsAssignment));
+                    }
+                    
                     this.WriteOpenParentheses();
                     new ExpressionListBlock(this.Emitter, argsExpressions, paramsArg).Emit();
                     this.WriteCloseParentheses();
@@ -572,16 +708,53 @@ namespace Bridge.Translator
                     var paramsStr = this.Emitter.Output.ToString();
                     this.RestoreWriter(oldWriter);
 
+                    string memberStr;
+                    if (isInterfaceMember)
+                    {
+                        oldWriter = this.SaveWriter();
+                        this.NewWriter();
+
+                        this.Emitter.IsAssignment = false;
+                        this.Emitter.IsUnaryAccessor = false;
+                        this.WriteInterfaceMember(targetVar, memberResolveResult, this.Emitter.IsAssignment, Helpers.GetSetOrGet(this.Emitter.IsAssignment));
+                        this.Emitter.IsAssignment = oldIsAssignment;
+                        this.Emitter.IsUnaryAccessor = oldUnary;
+                        memberStr = this.Emitter.Output.ToString();
+                        this.RestoreWriter(oldWriter);
+                    }
+                    else
+                    {
+                        memberStr = name;
+                    }
+
+                    string getterMember;
+                    if (isInterfaceMember)
+                    {
+                        oldWriter = this.SaveWriter();
+                        this.NewWriter();
+
+                        this.Emitter.IsAssignment = false;
+                        this.Emitter.IsUnaryAccessor = false;
+                        this.WriteInterfaceMember(targetVar, memberResolveResult, false, JS.Funcs.Property.GET);
+                        this.Emitter.IsAssignment = oldIsAssignment;
+                        this.Emitter.IsUnaryAccessor = oldUnary;
+                        getterMember = this.Emitter.Output.ToString();
+                        this.RestoreWriter(oldWriter);
+                    }
+                    else
+                    {
+                        getterMember = "." + Helpers.GetPropertyRef(memberResolveResult.Member, this.Emitter, false);
+                    }
+
                     if (targetVar != null)
                     {
                         this.PushWriter(string.Concat(
-                            name,
+                            memberStr,
                             "(",
                             paramsStr,
                             ", ",
                             targetVar,
-                            ".",
-                            Helpers.GetPropertyRef(member, this.Emitter, false),
+                            getterMember,
                             "(",
                             paramsStr,
                             "){0})"));
@@ -603,13 +776,12 @@ namespace Bridge.Translator
 
                         this.RestoreWriter(oldWriter);
                         this.PushWriter(string.Concat(
-                            name,
+                            memberStr,
                             "(",
                             paramsStr,
                             ", ",
                             trg,
-                            ".",
-                            Helpers.GetPropertyRef(member, this.Emitter, false),
+                            getterMember,
                             "(",
                             paramsStr,
                             "){0})"));
@@ -617,7 +789,15 @@ namespace Bridge.Translator
                 }
                 else
                 {
-                    this.Write(name);
+                    if (!isInterfaceMember)
+                    {
+                        this.Write(name);
+                    }
+                    else
+                    {
+                        this.WriteInterfaceMember(targetVar, memberResolveResult, this.Emitter.IsAssignment, Helpers.GetSetOrGet(this.Emitter.IsAssignment));
+                    }
+
                     this.WriteOpenParentheses();
                     this.Emitter.IsAssignment = false;
                     this.Emitter.IsUnaryAccessor = false;
@@ -735,7 +915,7 @@ namespace Bridge.Translator
 
                     if (isStatement)
                     {
-                        this.Write("set");
+                        this.Write(JS.Funcs.Property.SET);
                         this.WriteOpenParentheses();
                         this.WriteOpenBracket();
                         new ExpressionListBlock(this.Emitter, argsExpressions, paramsArg).Emit();
@@ -769,7 +949,7 @@ namespace Bridge.Translator
 
                                 this.WriteDot();
 
-                                this.Write("get");
+                                this.Write(JS.Funcs.Property.GET);
                                 this.WriteOpenParentheses();
                                 this.WriteOpenBracket();
                                 new ExpressionListBlock(this.Emitter, argsExpressions, paramsArg).Emit();
@@ -790,7 +970,7 @@ namespace Bridge.Translator
 
                                 this.WriteDot();
 
-                                this.Write("get");
+                                this.Write(JS.Funcs.Property.GET);
                                 this.WriteOpenParentheses();
                                 this.WriteOpenBracket();
                                 new ExpressionListBlock(this.Emitter, argsExpressions, paramsArg).Emit();
@@ -822,7 +1002,7 @@ namespace Bridge.Translator
 
                             this.WriteDot();
 
-                            this.Write("get");
+                            this.Write(JS.Funcs.Property.GET);
                             this.WriteOpenParentheses();
                             this.WriteOpenBracket();
                             new ExpressionListBlock(this.Emitter, argsExpressions, paramsArg).Emit();
@@ -845,7 +1025,7 @@ namespace Bridge.Translator
                     }
                     else
                     {
-                        this.Write("get");
+                        this.Write(JS.Funcs.Property.GET);
                         this.WriteOpenParentheses();
                         this.WriteOpenBracket();
                         new ExpressionListBlock(this.Emitter, argsExpressions, paramsArg).Emit();
@@ -862,7 +1042,7 @@ namespace Bridge.Translator
                             indexerExpression.Target.AcceptVisitor(this.Emitter);
                         }
                         this.WriteDot();
-                        this.Write("set");
+                        this.Write(JS.Funcs.Property.SET);
                         this.WriteOpenParentheses();
                         this.WriteOpenBracket();
                         new ExpressionListBlock(this.Emitter, argsExpressions, paramsArg).Emit();
@@ -890,7 +1070,7 @@ namespace Bridge.Translator
 
                                 this.WriteDot();
 
-                                this.Write("get");
+                                this.Write(JS.Funcs.Property.GET);
                                 this.WriteOpenParentheses();
                                 this.WriteOpenBracket();
                                 new ExpressionListBlock(this.Emitter, argsExpressions, paramsArg).Emit();
@@ -911,7 +1091,7 @@ namespace Bridge.Translator
 
                                 this.WriteDot();
 
-                                this.Write("get");
+                                this.Write(JS.Funcs.Property.GET);
                                 this.WriteOpenParentheses();
                                 this.WriteOpenBracket();
                                 new ExpressionListBlock(this.Emitter, argsExpressions, paramsArg).Emit();
@@ -966,7 +1146,7 @@ namespace Bridge.Translator
 
                             this.WriteDot();
 
-                            this.Write("get");
+                            this.Write(JS.Funcs.Property.GET);
                             this.WriteOpenParentheses();
                             this.WriteOpenBracket();
                             new ExpressionListBlock(this.Emitter, argsExpressions, paramsArg).Emit();
@@ -995,7 +1175,7 @@ namespace Bridge.Translator
                 {
                     if (!this.isRefArg)
                     {
-                        this.Write("get");
+                        this.Write(JS.Funcs.Property.GET);
                         this.WriteOpenParentheses();    
                     }
                     
@@ -1021,7 +1201,8 @@ namespace Bridge.Translator
                     if (targetVar != null)
                     {
                         this.PushWriter(string.Concat(
-                            "set([",
+                            JS.Funcs.Property.SET,
+                            "([",
                             paramsStr,
                             "],",
                             targetVar,
@@ -1047,7 +1228,8 @@ namespace Bridge.Translator
 
                         this.RestoreWriter(oldWriter);
                         this.PushWriter(string.Concat(
-                            "set([",
+                            JS.Funcs.Property.SET,
+                            "([",
                             paramsStr,
                             "],",
                             trg,
@@ -1058,7 +1240,7 @@ namespace Bridge.Translator
                 }
                 else
                 {
-                    this.Write("set");
+                    this.Write(JS.Funcs.Property.SET);
                     this.WriteOpenParentheses();
                     this.WriteOpenBracket();
                     new ExpressionListBlock(this.Emitter, argsExpressions, paramsArg).Emit();

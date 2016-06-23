@@ -20,6 +20,7 @@ namespace System.Linq
             get;
         }
 
+        [Template("contains({key})")]
         bool Contains(TKey key);
     }
 

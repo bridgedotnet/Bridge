@@ -2,6 +2,12 @@ Bridge.define('System.Collections.Generic.Comparer$1', function (T) {
     return {
         inherits: [System.Collections.Generic.IComparer$1(T)],
 
+        config: {
+            alias: [
+                "compare", "System$Collections$Generic$IComparer$1$" + Bridge.getTypeAlias(T) + "$compare"
+            ]
+        },
+
         constructor: function (fn) {
             this.fn = fn;
             this.compare = fn;

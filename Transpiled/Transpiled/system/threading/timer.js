@@ -15,6 +15,11 @@
         state: null,
         id: null,
         disposed: false,
+        config: {
+            alias: [
+            "dispose", "System$IDisposable$dispose"
+            ]
+        },
         constructor$1: function (callback, state, dueTime, period) {
             this.timerSetup(callback, state, System.Int64(dueTime), System.Int64(period));
         },

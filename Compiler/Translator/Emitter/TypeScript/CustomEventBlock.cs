@@ -29,9 +29,7 @@ namespace Bridge.Translator.TypeScript
             if (!accessor.IsNull && this.Emitter.GetInline(accessor) == null)
             {
                 XmlToJsDoc.EmitComment(this, customEventDeclaration);
-                var overloads = OverloadsCollection.Create(this.Emitter, customEventDeclaration, remover);
-
-                this.Write(Helpers.GetAddOrRemove(!remover, overloads.GetOverloadName()));
+                this.Write(Helpers.GetEventRef(customEventDeclaration, this.Emitter, remover, false, false));
                 this.WriteOpenParentheses();
                 this.Write("value");
                 this.WriteColon();

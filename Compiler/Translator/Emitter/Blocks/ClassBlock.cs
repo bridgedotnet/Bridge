@@ -196,13 +196,13 @@ namespace Bridge.Translator
                 this.Emitter.StaticBlock = true;
                 this.EnsureComma();
 
-                if (this.TypeInfo.InstanceMethods.Any(m => m.Value.Any(subm => this.Emitter.GetEntityName(subm) == "statics")) ||
-                    this.TypeInfo.InstanceConfig.Fields.Any(m => m.GetName(this.Emitter) == "statics"))
+                if (this.TypeInfo.InstanceMethods.Any(m => m.Value.Any(subm => this.Emitter.GetEntityName(subm) == JS.Fields.STATICS)) ||
+                    this.TypeInfo.InstanceConfig.Fields.Any(m => m.GetName(this.Emitter) == JS.Fields.STATICS))
                 {
                     this.Write(JS.Vars.D);
                 }
 
-                this.Write("statics");
+                this.Write(JS.Fields.STATICS);
                 this.WriteColon();
                 this.BeginBlock();
 

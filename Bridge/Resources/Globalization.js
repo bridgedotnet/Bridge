@@ -4,6 +4,12 @@
     Bridge.define("System.Globalization.DateTimeFormatInfo", {
         inherits: [System.IFormatProvider, System.ICloneable],
 
+        config: {
+            alias: {
+                getFormat: "System$IFormatProvider$getFormat"
+            }
+        },
+
         statics: {
             $allStandardFormats: {
                 "d": "shortDatePattern",
@@ -176,6 +182,12 @@
     Bridge.define("System.Globalization.NumberFormatInfo", {
         inherits: [System.IFormatProvider, System.ICloneable],
 
+        config: {
+            alias: {
+                getFormat: "System$IFormatProvider$getFormat"
+            }
+        },
+
         statics: {
             constructor: function () {
                 this.numberNegativePatterns =  ["(n)", "-n", "- n", "n-", "n -"];
@@ -257,6 +269,12 @@
 
     Bridge.define("System.Globalization.CultureInfo", {
         inherits: [System.IFormatProvider, System.ICloneable],
+
+        config: {
+            alias: {
+                getFormat: "System$IFormatProvider$getFormat"
+            }
+        },
 
         statics: {
             constructor: function () {

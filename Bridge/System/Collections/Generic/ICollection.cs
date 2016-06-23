@@ -7,20 +7,20 @@ namespace System.Collections.Generic
     {
         int Count
         {
-            [Template("System.Array.getCount({this})")]
+            [Template("System.Array.getCount({this}, {T})")]
             get;
         }
 
-        [Template("System.Array.add({this}, {item})")]
+        [Template("System.Array.add({this}, {item}, {T})")]
         void Add(T item);
 
         [Template("System.Array.clear({this}, {T})")]
         void Clear();
 
-        [Template("System.Array.contains({this}, {item})")]
+        [Template("System.Array.contains({this}, {item}, {T})")]
         bool Contains(T item);
 
-        [Template("System.Array.remove({this}, {item})")]
+        [Template("System.Array.remove({this}, {item}, {T})")]
         bool Remove(T item);
     }
 }

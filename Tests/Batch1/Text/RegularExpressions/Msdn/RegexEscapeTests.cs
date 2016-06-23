@@ -85,5 +85,56 @@ namespace Bridge.ClientTest.Text.RegularExpressions.Msdn
                 }, "Char must not be escapable: " + ch);
             }
         }
+
+        [Test]
+        public void BracketEscapeTest()
+        {
+            const string pattern = @"\)\s+\(";
+            const string text = ") (";
+            var rgx = new Regex(pattern);
+            var m = rgx.Match(text);
+
+            ValidateMatch(m, 0, 3, ") (", 1, true);
+
+            ValidateGroup(m, 0, 0, 3, true, ") (", 1);
+            ValidateCapture(m, 0, 0, 0, 3, ") (");
+        }
+
+        [Test]
+        public void BracketEscapeInGroupTest()
+        {
+            const string pattern = @"(\))\s+(\()";
+            const string text = ") (";
+            var rgx = new Regex(pattern);
+            var m = rgx.Match(text);
+
+            ValidateMatch(m, 0, 3, ") (", 3, true);
+
+            ValidateGroup(m, 0, 0, 3, true, ") (", 1);
+            ValidateCapture(m, 0, 0, 0, 3, ") (");
+
+            ValidateGroup(m, 1, 0, 1, true, ")", 1);
+            ValidateCapture(m, 1, 0, 0, 1, ")");
+
+            ValidateGroup(m, 2, 2, 1, true, "(", 1);
+            ValidateCapture(m, 2, 0, 2, 1, "(");
+        }
+
+        [Test]
+        public void BracketEscapeInCharGroupTest()
+        {
+            const string pattern = @"[\)\(]\s+([\)\(])";
+            const string text = ") (";
+            var rgx = new Regex(pattern);
+            var m = rgx.Match(text);
+
+            ValidateMatch(m, 0, 3, ") (", 2, true);
+
+            ValidateGroup(m, 0, 0, 3, true, ") (", 1);
+            ValidateCapture(m, 0, 0, 0, 3, ") (");
+
+            ValidateGroup(m, 1, 2, 1, true, "(", 1);
+            ValidateCapture(m, 1, 0, 2, 1, "(");
+        }
     }
 }

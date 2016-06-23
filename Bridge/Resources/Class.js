@@ -24,7 +24,7 @@
             }
         },
 
-        initConfig: function (extend, base, cfg, statics, scope) {
+        initConfig: function (extend, base, cfg, statics, scope, prototype) {
             var initFn,
                 isFn = Bridge.isFunction(cfg),
                 fn = function () {
@@ -52,10 +52,15 @@
                     }
 
                     if (config.alias) {
-                        for (name in config.alias) {
-                            if (this[name]) {
-                                this[name] = this[config.alias[name]];
+                        for (var i = 0; i < config.alias.length; i++) {
+                            var m = this[config.alias[i]];
+
+                            if (m === undefined && prototype) {
+                                m = prototype[config.alias[i]];
                             }
+
+                            this[config.alias[i + 1]] = m;
+                            i++;
                         }
                     }
 
@@ -226,7 +231,7 @@
             var instanceConfig = prop.$config || prop.config;
 
             if (instanceConfig && !Bridge.isFunction(instanceConfig)) {
-                Bridge.Class.initConfig(extend, base, instanceConfig, false, prop);                
+                Bridge.Class.initConfig(extend, base, instanceConfig, false, prop, prototype);
 
                 if (prop.$config) {
                     delete prop.$config;

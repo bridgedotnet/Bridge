@@ -192,7 +192,7 @@ namespace System
         [Template("System.Array.toEnumerator({this})")]
         public extern IEnumerator ToEnumerator();
 
-        [Template("System.Array.toEnumerator({this})")]
+        [Template("System.Array.toEnumerator({this}, {T})")]
         public extern IEnumerator<T> ToEnumerator<T>();
 
         [Template("System.Array.clone({this})")]

@@ -215,13 +215,6 @@ namespace Bridge.Translator
                 }
             }
 
-
-            ResolveResult targetMemberResolveResult = null;
-            if (targetMember != null)
-            {
-                targetMemberResolveResult = this.Emitter.Resolver.ResolveNode(targetMember.Target, this.Emitter);
-            }
-
             if (targetMember != null)
             {
                 var member = this.Emitter.Resolver.ResolveNode(targetMember.Target, this.Emitter);

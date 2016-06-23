@@ -2,6 +2,13 @@
 
     Bridge.define("System.TimeSpan", {
         inherits: [System.IComparable],
+
+        config: {
+            alias: [
+            "compareTo", "System$IComparable$compareTo"
+            ]
+        },
+
         $struct: true,
         statics: {
             fromDays: function (value) {

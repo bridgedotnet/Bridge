@@ -2,6 +2,7 @@ using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
 using System.Collections.Generic;
 using System.Globalization;
+using ICSharpCode.NRefactory.TypeSystem;
 
 namespace Bridge.Contract
 {
@@ -37,18 +38,28 @@ namespace Bridge.Contract
             set;
         }
 
-        public string GetName(IEmitter emitter)
+        public IMember InterfaceMember
+        {
+            get; set;
+        }
+
+        public IMember DerivedMember
+        {
+            get; set;
+        }
+
+        public string GetName(IEmitter emitter, bool withoutTypeParams = false)
         {
             string fieldName = this.Name;
 
             if (this.VarInitializer != null)
             {
                 var rr = emitter.Resolver.ResolveNode(this.VarInitializer, emitter) as MemberResolveResult;
-                fieldName = OverloadsCollection.Create(emitter, rr.Member).GetOverloadName();
+                fieldName = OverloadsCollection.Create(emitter, rr.Member).GetOverloadName(false, null, withoutTypeParams);
             }
             else if (this.Entity is PropertyDeclaration)
             {
-                fieldName = OverloadsCollection.Create(emitter, (PropertyDeclaration)this.Entity).GetOverloadName();
+                fieldName = OverloadsCollection.Create(emitter, (PropertyDeclaration)this.Entity).GetOverloadName(false, null, withoutTypeParams);
             }
             else
             {
@@ -59,7 +70,7 @@ namespace Bridge.Contract
 
                     if (rr != null)
                     {
-                        fieldName = OverloadsCollection.Create(emitter, rr.Member).GetOverloadName();
+                        fieldName = OverloadsCollection.Create(emitter, rr.Member).GetOverloadName(false, null, withoutTypeParams);
                         done = true;
                     }
                 }

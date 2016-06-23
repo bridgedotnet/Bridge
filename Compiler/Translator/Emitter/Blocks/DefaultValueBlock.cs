@@ -1,4 +1,6 @@
 using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.TypeSystem;
 
@@ -29,7 +31,7 @@ namespace Bridge.Translator
             }
             else
             {
-                this.Write("Bridge.getDefaultValue(" + BridgeTypes.ToJsName(DefaultValueExpression.Type, this.Emitter) + ")");
+                this.Write(JS.Funcs.BRIDGE_GETDEFAULTVALUE + "(" + BridgeTypes.ToJsName(DefaultValueExpression.Type, this.Emitter) + ")");
             }
         }
     }

@@ -46,9 +46,8 @@ namespace Bridge.Translator.TypeScript
             {
                 XmlToJsDoc.EmitComment(this, this.PropertyDeclaration);
                 var p = (PropertyDeclaration)accessor.Parent;
-                var overloads = OverloadsCollection.Create(this.Emitter, propertyDeclaration, setter);
-                string name = overloads.GetOverloadName();
-                this.Write((setter ? "set" : "get") + name);
+                string name = Helpers.GetPropertyRef(memberResult.Member, this.Emitter, setter, false, false);
+                this.Write(name);
                 this.WriteOpenParentheses();
                 if (setter)
                 {
