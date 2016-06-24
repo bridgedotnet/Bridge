@@ -36,44 +36,7 @@ namespace Bridge.Translator
                 this.ReadDefineConstants(doc);
             }
 
-            this.ReadProjectGuid(doc);
-
             this.Log.Info("Reading project file done");
-        }
-
-        protected virtual void ReadProjectGuid(XDocument doc)
-        {
-            this.Log.Info("Reading project Guid...");
-
-            if (doc == null)
-            {
-                this.Log.Warn("doc is null");
-                return;
-            }
-            else
-            {
-                var guidElement = doc.Descendants().Where(x => x.Name.LocalName == "ProjectGuid").FirstOrDefault();
-
-                if (guidElement == null)
-                {
-                    this.Log.Warn("guid is null");
-                }
-                else
-                {
-                    System.Guid projectGuid;
-                    if (System.Guid.TryParse(guidElement.Value, out projectGuid))
-                    {
-                        this.ProjectGuid = projectGuid;
-                        this.Log.Info("Project Guid " + projectGuid.ToString());
-                    }
-                    else
-                    {
-                        this.Log.Warn("Could not parse guid " + guidElement.Value);
-                    }
-                }
-            }
-
-            this.Log.Info("Reading project Guid done");
         }
 
         protected virtual void ReadFolderFiles()

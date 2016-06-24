@@ -200,11 +200,5 @@ namespace Bridge.Translator
             get;
             set;
         }
-
-        public Guid ProjectGuid
-        {
-            get;
-            set;
-        }
     }
 }

@@ -153,11 +153,5 @@ namespace Bridge.Contract
             get;
             set;
         }
-
-        Guid ProjectGuid
-        {
-            get;
-            set;
-        }
     }
 }
