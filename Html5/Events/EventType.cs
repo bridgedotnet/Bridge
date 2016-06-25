@@ -528,9 +528,21 @@ namespace Bridge.Html5
 
         /// <summary>
         /// Event - Pointer Lock
+        /// The pointer was locked or released.
+        /// </summary>
+        MozPointerLockChange,
+
+        /// <summary>
+        /// Event - Pointer Lock
         /// It was impossible to lock the pointer for technical reasons or because the permission was denied.
         /// </summary>
         PointerLockError,
+
+        /// <summary>
+        /// Event - Pointer Lock
+        /// It was impossible to lock the pointer for technical reasons or because the permission was denied.
+        /// </summary>
+        MozPointerLockError,
 
         /// <summary>
         /// Event - HTML5 media

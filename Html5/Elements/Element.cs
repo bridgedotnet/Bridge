@@ -240,6 +240,10 @@ namespace Bridge.Html5
         [Name("requestFullscreen")]
         public extern void RequestFullScreen();
 
+        public extern void RequestPointerLock();
+
+        public extern void MozRequestPointerLock();
+
         /// <summary>
         /// The Element.requestFullscreen() method issues an asynchronous request to make the element be displayed full-screen.
         /// </summary>

@@ -759,6 +759,12 @@ namespace Bridge.Html5
         [Name("onplaying")]
         public static Action<Event> OnPlaying;
 
+        [Name("onpointerlockchange")]
+        public static Action<Event> OnPointerLockChange;
+
+        [Name("onmozpointerlockchange")]
+        public static Action<Event> OnMozPointerLockChange;
+
         /// <summary>
         /// Is an EventHandler representing the code to be called when the progress event is raised
         /// </summary>
@@ -1057,6 +1063,10 @@ namespace Bridge.Html5
         /// </summary>
         public static readonly HTMLCollection Plugins;
 
+        public static readonly Element PointerLockElement;
+
+        public static readonly Element MozPointerLockElement;
+
         /// <summary>
         /// Returns loading status of the document.
         /// </summary>
@@ -1288,6 +1298,12 @@ namespace Bridge.Html5
         /// To track the success or failure of the request, it is necessary to listen for the pointerlockchange and pointerlockerror events.
         /// </summary>
         public static extern void ExitPointerLock();
+
+        /// <summary>
+        /// The exitPointerLock asynchronously releases a pointer lock previously requested through Element.requestPointerLock.
+        /// To track the success or failure of the request, it is necessary to listen for the pointerlockchange and pointerlockerror events.
+        /// </summary>
+        public static extern void MozExitPointerLock();
 
         /// <summary>
         /// The Document.exitFullscrean() is a method that takes the document out of full-screen mode; this is used to reverse the effects of a call to make an element in the document full-screen using its Element.requestFullscreen() method.

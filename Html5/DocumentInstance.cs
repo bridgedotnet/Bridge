@@ -344,6 +344,12 @@ namespace Bridge.Html5
         [Name("onplaying")]
         public Action<Event> OnPlaying;
 
+        [Name("onpointerlockchange")]
+        public static Action<Event> OnPointerLockChange;
+
+        [Name("onmozpointerlockchange")]
+        public static Action<Event> OnMozPointerLockChange;
+        
         /// <summary>
         /// Is an EventHandler representing the code to be called when the progress event is raised
         /// </summary>
@@ -463,6 +469,10 @@ namespace Bridge.Html5
         /// Returns the Element that is the root element of the document (for example, the &lt;html&gt; element for HTML documents).
         /// </summary>
         public readonly HTMLElement DocumentElement;
+        
+        public readonly Element PointerLockElement;
+
+        public readonly Element MozPointerLockElement;
 
         /// <summary>
         /// Returns the document location as string.
@@ -1052,6 +1062,12 @@ namespace Bridge.Html5
         /// <param name="command">The command for which to determine support.</param>
         /// <returns></returns>
         public virtual extern bool QueryCommandSupported(string command);
+
+        /// <summary>
+        /// The exitPointerLock asynchronously releases a pointer lock previously requested through Element.requestPointerLock.
+        /// To track the success or failure of the request, it is necessary to listen for the pointerlockchange and pointerlockerror events.
+        /// </summary>
+        public static extern void MozExitPointerLock();
 
         /// <summary>
         /// Returns the current value of the current range for a formating command.
