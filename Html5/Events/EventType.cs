@@ -455,6 +455,7 @@ namespace Bridge.Html5
         /// A pointing device button is released over an element.
         /// </summary>
         MouseUp,
+        MozFullScreenError,
 
         /// <summary>
         /// Event - Offline
@@ -799,6 +800,11 @@ namespace Bridge.Html5
         /// Playback has stopped because of a temporary lack of data.
         /// </summary>
         Waiting,
+
+        /// <summary>
+        /// Triggered when there is an error getting into full screen mode.
+        /// </summary>
+        WebKitFullScreenError,
 
         /// <summary>
         /// WheelEvent - DOM L3

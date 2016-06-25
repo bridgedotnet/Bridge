@@ -78,6 +78,33 @@ namespace Bridge.Html5
         public Action<Event> OnFocus;
 
         /// <summary>
+        /// The Document.onfullscreenchange property is an event handler for the fullscreenchange event that is fire when a document goes in or out of the fullscreen mode.
+        /// </summary>
+        [Name("onfullscreenchange")]
+        public Action<Event> OnFullScreenChange;
+
+        /// <summary>
+        /// The Document.onfullscreenchange property is an event handler for the fullscreenchange event that is fire when a document goes in or out of the fullscreen mode.
+        /// </summary>
+        [Name("onwebkitfullscreenchange")]
+        public Action<Event> OnWebKitFullScreenChange;
+
+        /// <summary>
+        /// The Document.onfullscreenchange property is an event handler for the fullscreenchange event that is fire when a document goes in or out of the fullscreen mode.
+        /// </summary>
+        [Name("onmozfullscreenchange")]
+        public Action<Event> OnMozFullScreenChange;
+
+        [Name("onfullscreenchange")]
+        public Action<Event> OnFullScreenError;
+
+        [Name("onwebkitfullscreenchange")]
+        public Action<Event> OnWebKitFullScreenError;
+
+        [Name("onmozfullscreenchange")]
+        public Action<Event> OnMozFullScreenError;
+
+        /// <summary>
         /// EventHandler representing the code to be called when the cancel event is raised.
         /// </summary>
         [Name("oncancel")]
@@ -543,6 +570,42 @@ namespace Bridge.Html5
         public readonly HTMLCollection Forms;
 
         /// <summary>
+        /// The Document.fullscreenElement read-only property returns the Element that is currently being presented in full-screen mode in this document, or null if full-screen mode is not currently in use.
+        /// </summary>
+        [Name("fullscreenElement")]
+        public readonly Element FullScreenElement;
+
+        /// <summary>
+        /// The Document.fullscreenElement read-only property returns the Element that is currently being presented in full-screen mode in this document, or null if full-screen mode is not currently in use.
+        /// </summary>
+        [Name("mozFullscreenElement")]
+        public readonly Element MozFullScreenElement;
+
+        /// <summary>
+        /// The Document.fullscreenElement read-only property returns the Element that is currently being presented in full-screen mode in this document, or null if full-screen mode is not currently in use.
+        /// </summary>
+        [Name("webkitFullscreenElement")]
+        public readonly Element WebKitFullScreenElement;
+
+        /// <summary>
+        /// Returns a boolean equal to whether the window is in full screen.
+        /// </summary>
+        [Name("fullscreenEnabled")]
+        public readonly bool FullScreenEnabled;
+
+        /// <summary>
+        /// Returns a boolean equal to whether the window is in full screen.
+        /// </summary>
+        [Name("webkitFullscreenEnabled")]
+        public readonly bool WebKitFullScreenEnabled;
+
+        /// <summary>
+        /// Returns a boolean equal to whether the window is in full screen.
+        /// </summary>
+        [Name("mozFullscreenEnabled")]
+        public readonly bool MozFullScreenEnabled;
+
+        /// <summary>
         /// Returns the head element of the current document. If there are more than one head elements, the first one is returned.
         /// </summary>
         public readonly HTMLElement Head;
@@ -619,6 +682,22 @@ namespace Bridge.Html5
         /// <param name="externalNode">the node from another document to be adopted.</param>
         /// <returns>the adopted node that can be used in the current document. The new node's parentNode is null, since it has not yet been inserted into the document tree.</returns>
         public virtual extern Node AdoptNode(Node externalNode);
+
+        [Name("webkitCancelFullscreen")]
+        public extern void WebKitCancelFullScreen();
+
+        [Name("mozCancelFullscreen")]
+        public extern void MozCancelFullScreen();
+
+        [Name("cancelFullscreen")]
+        public extern void CancelFullScreen();
+
+        [Name("webkitExitFullscreen")]
+        public extern void WebKitExitFullScreen();
+
+        [Name("mozExitFullscreen")]
+        public extern void MozExitFullScreen();
+
 
         /// <summary>
         /// This method is used to retrieve the caret position in a document based on two coordinates. A CaretPosition is returned, containing the found DOM node and the character offset in that node.
@@ -801,6 +880,13 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="name">The name of the style sheets to enable. All style sheets with a title that match this name will be enabled, while all others that have a title will be disabled. Specify an empty string for the name parameter to disable all alternate and preferred style sheets (but not the persistent style sheets; that is, those with no title attribute).</param>
         public virtual extern void EnableStyleSheetsForSet(string name);
+
+        /// <summary>
+        /// The Document.exitFullscrean() is a method that takes the document out of full-screen mode; this is used to reverse the effects of a call to make an element in the document full-screen using its Element.requestFullscreen() method.
+        /// </summary>
+        [Name("exitFullscreen")]
+        public extern void ExitFullScreen();
+
 
         /// <summary>
         /// The exitPointerLock asynchronously releases a pointer lock previously requested through Element.requestPointerLock.
