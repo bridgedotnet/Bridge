@@ -247,6 +247,12 @@ namespace Bridge.Html5
         /// <summary>
         /// The Element.requestFullscreen() method issues an asynchronous request to make the element be displayed full-screen.
         /// </summary>
+        [Name("msRequestFullscreen")]
+        public extern void MsRequestFullScreen();
+
+        /// <summary>
+        /// The Element.requestFullscreen() method issues an asynchronous request to make the element be displayed full-screen.
+        /// </summary>
         [Name("webkitRequestFullscreen")]
         public extern void WebKitRequestFullScreen();
 
