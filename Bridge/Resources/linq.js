@@ -160,10 +160,18 @@
                 state = State.After;
             }
         };
+
+        this.getCurrent$1 = this.getCurrent;
+        this.System$Collections$IEnumerator$getCurrent = this.getCurrent;
+        this.System$Collections$IEnumerator$moveNext = this.moveNext;
+        this.System$Collections$IEnumerator$reset = this.reset;
     };
     
     System.IDisposable.$$inheritors = System.IDisposable.$$inheritors || [];
     System.IDisposable.$$inheritors.push(IEnumerator);
+
+    System.Collections.IEnumerator.$$inheritors = System.Collections.IEnumerator.$$inheritors || [];
+    System.Collections.IEnumerator.$$inheritors.push(IEnumerator);
 
     // for tryGetNext
     var Yielder = function () {
@@ -181,6 +189,7 @@
     // Enumerable constuctor
     var Enumerable = function (getEnumerator) {
         this.getEnumerator = getEnumerator;
+
     };
     System.Collections.IEnumerable.$$inheritors = System.Collections.IEnumerable.$$inheritors || [];
     System.Collections.IEnumerable.$$inheritors.push(Enumerable);

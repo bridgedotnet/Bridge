@@ -7,12 +7,16 @@ namespace System.Linq
     [IgnoreGeneric]
     public interface IOrderedEnumerable<TSource> : IEnumerable<TSource>
     {
+        [Template("thenBy({keySelector})")]
         IOrderedEnumerable<TSource> ThenBy<TKey>(Func<TSource, TKey> keySelector);
 
+        [Template("thenBy({keySelector}, {comparer})")]
         IOrderedEnumerable<TSource> ThenBy<TKey>(Func<TSource, TKey> keySelector, IComparer<TKey> comparer);
 
+        [Template("thenByDescending({keySelector})")]
         IOrderedEnumerable<TSource> ThenByDescending<TKey>(Func<TSource, TKey> keySelector);
 
+        [Template("thenByDescending({keySelector}, {comparer})")]
         IOrderedEnumerable<TSource> ThenByDescending<TKey>(Func<TSource, TKey> keySelector, IComparer<TKey> comparer);
     }
 

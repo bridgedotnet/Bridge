@@ -1,11 +1,24 @@
 ﻿// @source /Collections/ArrayEnumerator.js
 
 Bridge.define('Bridge.ArrayEnumerator', {
-    inherits: [System.Collections.IEnumerator],
+    inherits: [System.Collections.IEnumerator, System.IDisposable],
 
-    constructor: function (array) {
+    config: {
+        alias: [
+            "getCurrent", "System$Collections$IEnumerator$getCurrent",
+            "moveNext", "System$Collections$IEnumerator$moveNext",
+            "reset", "System$Collections$IEnumerator$reset",
+            "dispose", "System$IDisposable$dispose"
+        ]
+    },
+
+    constructor: function (array, T) {
         this.array = array;
         this.reset();
+
+        if (T) {
+            this["System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$getCurrent$1"] = this.getCurrent;
+        }
     },
     
     moveNext: function () {
@@ -31,6 +44,13 @@ Bridge.define('Bridge.ArrayEnumerator', {
 
 Bridge.define('Bridge.ArrayEnumerable', {
     inherits: [System.Collections.IEnumerable],
+
+    config: {
+        alias: [
+            "getEnumerator", "System$Collections$IEnumerable$getEnumerator"
+        ]
+    },
+
     constructor: function (array) {
         this.array = array;
     },

@@ -8,6 +8,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
+using ICSharpCode.NRefactory.MonoCSharp;
+using ITypeDefinition = ICSharpCode.NRefactory.TypeSystem.ITypeDefinition;
+using Modifiers = ICSharpCode.NRefactory.CSharp.Modifiers;
 
 namespace Bridge.Contract
 {
@@ -632,6 +636,11 @@ namespace Bridge.Contract
             {
                 var methods = typeDef.Methods.Where(m =>
                 {
+                    if (m.IsExplicitInterfaceImplementation)
+                    {
+                        return false;
+                    }
+
                     if (!this.IncludeInline)
                     {
                         var inline = this.Emitter.GetInline(m);
@@ -688,6 +697,11 @@ namespace Bridge.Contract
             {
                 var properties = typeDef.Properties.Where(p =>
                 {
+                    if (p.IsExplicitInterfaceImplementation)
+                    {
+                        return false;
+                    }
+
                     if (!this.IncludeInline)
                     {
                         var inline = p.Getter != null ? this.Emitter.GetInline(p.Getter) : null;
@@ -760,6 +774,11 @@ namespace Bridge.Contract
             {
                 var fields = typeDef.Fields.Where(f =>
                 {
+                    if (f.IsExplicitInterfaceImplementation)
+                    {
+                        return false;
+                    }
+
                     var inline = this.Emitter.GetInline(f);
                     if (!string.IsNullOrWhiteSpace(inline))
                     {
@@ -802,6 +821,11 @@ namespace Bridge.Contract
             {
                 var events = typeDef.Events.Where(e =>
                 {
+                    if (e.IsExplicitInterfaceImplementation)
+                    {
+                        return false;
+                    }
+
                     var inline = e.AddAccessor != null ? this.Emitter.GetInline(e.AddAccessor) : null;
                     if (!string.IsNullOrWhiteSpace(inline))
                     {
@@ -861,7 +885,7 @@ namespace Bridge.Contract
 
         private string overloadName;
 
-        public string GetOverloadName()
+        public string GetOverloadName(bool skipInterfaceName = false, string prefix = null, bool withoutTypeParams = false)
         {
             if (this.Member == null)
             {
@@ -877,14 +901,76 @@ namespace Bridge.Contract
 
             if (this.overloadName == null && this.Member != null)
             {
-                this.overloadName = this.GetOverloadName(this.Member);
+                this.overloadName = this.GetOverloadName(this.Member, skipInterfaceName, prefix, withoutTypeParams);
             }
 
             return this.overloadName;
         }
 
-        protected virtual string GetOverloadName(IMember definition)
+        public static string NormalizeInterfaceName(string interfaceName)
         {
+            return Regex.Replace(interfaceName, @"[\.\(\)\,]", JS.Vars.D.ToString());
+        }
+
+        public static string GetInterfaceMemberName(IEmitter emitter, IMember interfaceMember, string name, string prefix, bool withoutTypeParams = false, bool isSetter = false)
+        {
+            var interfaceMemberName = name ?? OverloadsCollection.Create(emitter, interfaceMember, isSetter).GetOverloadName(true, prefix);
+            var interfaceName = BridgeTypes.ToJsName(interfaceMember.DeclaringType, emitter, withoutTypeParams, false, true);
+
+            if (interfaceName.StartsWith("\""))
+            {
+                if (interfaceName.EndsWith(")"))
+                {
+                    return interfaceName + " + \"" + JS.Vars.D + interfaceMemberName + "\"";
+                }
+
+                if (interfaceName.EndsWith("\""))
+                {
+                    interfaceName = interfaceName.Substring(0, interfaceName.Length - 1);
+                }
+
+                return interfaceName  + JS.Vars.D + interfaceMemberName + "\"";
+            }
+
+            return interfaceName + (interfaceName.EndsWith(JS.Vars.D.ToString()) ? "" : JS.Vars.D.ToString()) + interfaceMemberName;
+        }
+
+        public static bool NeedCreateAlias(MemberResolveResult rr)
+        {
+            if (rr == null || rr.Member.ImplementedInterfaceMembers.Count == 0)
+            {
+                return false;
+            }
+
+            if (rr.Member.IsExplicitInterfaceImplementation)
+            {
+                var explicitInterfaceMember = rr.Member.ImplementedInterfaceMembers.First();
+                var typeDef = explicitInterfaceMember.DeclaringTypeDefinition;
+                var type = explicitInterfaceMember.DeclaringType;
+
+                return typeDef != null && !Helpers.IsIgnoreGeneric(typeDef) && type != null && type.TypeArguments.Count > 0 && type.TypeArguments.Any(p => p.Kind == TypeKind.TypeParameter);
+            }
+
+            return true;
+        }
+
+        protected virtual string GetOverloadName(IMember definition, bool skipInterfaceName = false, string prefix = null, bool withoutTypeParams = false)
+        {
+            IMember interfaceMember = null;
+            if (definition.IsExplicitInterfaceImplementation)
+            {
+                interfaceMember = definition.ImplementedInterfaceMembers.First();
+            }
+            else if (definition.DeclaringTypeDefinition != null && definition.DeclaringTypeDefinition.Kind == TypeKind.Interface)
+            {
+                interfaceMember = definition;
+            }
+
+            if (interfaceMember != null && !skipInterfaceName)
+            {
+                return OverloadsCollection.GetInterfaceMemberName(this.Emitter, interfaceMember, null, prefix, withoutTypeParams, this.IsSetter);
+            }
+
             string name = this.Emitter.GetEntityName(definition, this.CancelChangeCase);
             if (name.StartsWith(".ctor"))
             {
@@ -904,9 +990,29 @@ namespace Bridge.Contract
                 }
             }
 
+            if (attr != null)
+            {
+                var value = attr.PositionalArguments.First().ConstantValue;
+                if (value is string)
+                {
+                    name = value.ToString();
+                }
+
+                prefix = null;
+            }
+
+            if (attr != null && definition.ImplementedInterfaceMembers.Count > 0)
+            {
+                if (this.Members.Where(member => member.ImplementedInterfaceMembers.Count > 0)
+                        .Any(member => definition.ImplementedInterfaceMembers.Any(implementedInterfaceMember => member.ImplementedInterfaceMembers.Any(m => m.DeclaringTypeDefinition == implementedInterfaceMember.DeclaringTypeDefinition))))
+                {
+                    attr = null;
+                }
+            }
+
             if (attr != null || (definition.DeclaringTypeDefinition != null && definition.DeclaringTypeDefinition.Kind != TypeKind.Interface && this.Emitter.Validator.IsIgnoreType(definition.DeclaringTypeDefinition)))
             {
-                return name;
+                return prefix != null ? prefix + name : name;
             }
 
             if (definition is IMethod && ((IMethod)definition).IsConstructor)
@@ -923,19 +1029,7 @@ namespace Bridge.Contract
                 name = Helpers.ReplaceFirstDollar(name);
             }
 
-            if (definition.ImplementedInterfaceMembers.Count > 0)
-            {
-                foreach (var iMember in definition.ImplementedInterfaceMembers)
-                {
-                    if (OverloadsCollection.Create(this.Emitter, iMember, false, true).GetOverloadName() != name)
-                    {
-                        string message = "Cannot translate interface ({2}) member '{0}' in '{1}' due name conflicts. Please rename methods or refactor your code";
-                        throw new Exception(string.Format(message, definition.ToString(), definition.DeclaringType.ToString(), iMember.DeclaringType.ToString()));
-                    }
-                }
-            }
-
-            return name;
+            return prefix != null ? prefix + name : name;
         }
 
         protected virtual IMember FindMember(EntityDeclaration entity)

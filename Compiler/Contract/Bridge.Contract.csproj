@@ -103,6 +103,7 @@
     <Compile Include="IEmitterOutputs.cs" />
     <Compile Include="IJsDoc.cs" />
     <Compile Include="IJumpInfo.cs" />
+    <Compile Include="IInvocationInterceptor.cs" />
     <Compile Include="LoggerLevel.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="ILog.cs" />

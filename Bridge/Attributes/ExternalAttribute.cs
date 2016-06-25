@@ -18,4 +18,13 @@ namespace Bridge
     public sealed class IgnoreAttribute : Attribute
     {
     }
+
+    /// <summary>
+    /// Applies to interface if it's implementation is done outside Bridge type system (class implementation doesn't provide aliases for interface members implementations)
+    /// </summary>
+    [External]
+    [AttributeUsage(AttributeTargets.Interface)]
+    public sealed class ExternalInterfaceAttribute : Attribute
+    {
+    }
 }

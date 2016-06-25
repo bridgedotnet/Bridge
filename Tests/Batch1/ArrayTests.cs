@@ -449,7 +449,7 @@ namespace Bridge.ClientTest
         }
 
         [Category(Constants.MODULE_ARRAY)]
-        [TestFixture(TestNameFormat = "Array - Set1 {0}")]
+        [TestFixture(TestNameFormat = "Array - Set2 {0}")]
         public class ArrayTestsSet2
         {
             [Test]

@@ -72,7 +72,7 @@ namespace Bridge.Translator
             var overloads = OverloadsCollection.Create(this.Emitter, methodDeclaration);
             XmlToJsDoc.EmitComment(this, this.MethodDeclaration);
 
-            string name = overloads.GetOverloadName();
+            string name = overloads.GetOverloadName(false, null, true);
             this.Write(name);
 
             this.WriteColon();

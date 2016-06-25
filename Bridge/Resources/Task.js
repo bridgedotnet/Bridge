@@ -2,6 +2,13 @@
 
     Bridge.define("System.Threading.Tasks.Task", {
         inherits: [System.IDisposable],
+
+        config: {
+            alias: [
+                "dispose", "System$IDisposable$dispose"
+            ]
+        },
+
         constructor: function (action, state) {
             this.action = action;
             this.state = state;
@@ -466,6 +473,13 @@
         inherits: function () {
             return [System.IDisposable, System.IEquatable$1(System.Threading.CancellationTokenRegistration)];
         },
+
+        config: {
+            alias: [
+                "dispose", "System$IDisposable$dispose"
+            ]
+        },
+
         constructor: function (cts, o) {
             this.cts = cts;
             this.o = o;
@@ -495,6 +509,12 @@
 
     Bridge.define("System.Threading.CancellationTokenSource", {
         inherits: [System.IDisposable],
+
+        config: {
+            alias: [
+                "dispose", "System$IDisposable$dispose"
+            ]
+        },
 
         constructor: function (delay) {
             this.timeout = typeof delay === "number" && delay >= 0 ? setTimeout(Bridge.fn.bind(this, this.cancel), delay, -1) : null;

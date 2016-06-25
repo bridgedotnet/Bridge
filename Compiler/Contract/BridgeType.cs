@@ -231,7 +231,7 @@ namespace Bridge.Contract
             return names.Join(".");
         }
 
-        public static string ToJsName(IType type, IEmitter emitter, bool asDefinition = false, bool excludens = false)
+        public static string ToJsName(IType type, IEmitter emitter, bool asDefinition = false, bool excludens = false, bool isAlias = false)
         {
             if (type.Kind == TypeKind.Array)
             {
@@ -294,23 +294,92 @@ namespace Bridge.Contract
                 name += Helpers.PrefixDollar(type.TypeArguments.Count);
             }
 
-            if (!asDefinition && type.TypeArguments.Count > 0 && !Helpers.IsIgnoreGeneric(type, emitter))
+            if (isAlias)
             {
-                StringBuilder sb = new StringBuilder(name);
-                bool needComma = false;
-                sb.Append("(");
-                foreach (var typeArg in type.TypeArguments)
+                name = OverloadsCollection.NormalizeInterfaceName(name);
+            }
+
+            if (type.TypeArguments.Count > 0 && !Helpers.IsIgnoreGeneric(type, emitter))
+            {
+                if (isAlias)
                 {
-                    if (needComma)
+                    StringBuilder sb = new StringBuilder(name);
+                    bool needComma = false;
+                    sb.Append(JS.Vars.D);
+                    bool isStr = false;
+                    foreach (var typeArg in type.TypeArguments)
                     {
-                        sb.Append(",");
+                        if (sb.ToString().EndsWith(")"))
+                        {
+                            sb.Append(" + \"");
+                        }
+
+                        if (needComma && !sb.ToString().EndsWith(JS.Vars.D.ToString()))
+                        {
+                            sb.Append(JS.Vars.D);
+                        }
+
+                        needComma = true;
+                        bool needGet = typeArg.Kind == TypeKind.TypeParameter && !asDefinition;
+                        if (needGet)
+                        {
+                            if (!isStr)
+                            {
+                                sb.Insert(0, "\"");
+                                isStr = true;
+                            }
+                            sb.Append("\" + Bridge.getTypeAlias(");
+                        }
+
+                        var typeArgName = BridgeTypes.ToJsName(typeArg, emitter, false, false, true);
+
+                        if (!needGet && typeArgName.StartsWith("\""))
+                        {
+                            sb.Append(typeArgName.Substring(1));
+
+                            if (!isStr)
+                            {
+                                isStr = true;
+                                sb.Insert(0, "\"");
+                            }
+                        }
+                        else
+                        {
+                            sb.Append(typeArgName);
+                        }
+
+                        if (needGet)
+                        {
+                            sb.Append(")");
+                        }
                     }
 
-                    needComma = true;
-                    sb.Append(BridgeTypes.ToJsName(typeArg, emitter));
+                    if (isStr && !sb.ToString().EndsWith(")"))
+                    {
+                        sb.Append("\"");
+                    }
+
+                    name = sb.ToString();
                 }
-                sb.Append(")");
-                name = sb.ToString();
+                else if(!asDefinition)
+                {
+                    StringBuilder sb = new StringBuilder(name);
+                    bool needComma = false;
+                    sb.Append( "(");
+                    foreach (var typeArg in type.TypeArguments)
+                    {
+                        if (needComma)
+                        {
+                            sb.Append(",");
+                        }
+
+                        needComma = true;
+                        
+                        sb.Append(BridgeTypes.ToJsName(typeArg, emitter));
+                    }
+                    sb.Append(")");
+                    name = sb.ToString();
+                }
             }
 
             return name;

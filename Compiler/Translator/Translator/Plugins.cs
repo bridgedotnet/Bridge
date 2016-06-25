@@ -8,7 +8,8 @@ using System.ComponentModel.Composition.Primitives;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-
+using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.NRefactory.Semantics;
 using Mono.Cecil;
 
 namespace Bridge.Translator
@@ -58,11 +59,24 @@ namespace Bridge.Translator
 
                 if (assemblyLoaded != null)
                 {
-                    this.Logger.Trace("Resolved for " + assemblyLoaded.FullName);
+                    this.Logger.Trace("Resolved for " + assemblyLoaded.FullName + " in the loaded domain assemblies");
                     return assemblyLoaded;
                 }
 
-                this.Logger.Trace("Did not resolve assembly " + args.Name);
+                this.Logger.Trace("Did not find the assembly " + args.Name + " in the loaded domain assemblies");
+
+                if (args.RequestingAssembly != null)
+                {
+                    assemblyLoaded = Plugins.LoadAssemblyFromResources(this.Logger, args.RequestingAssembly, askedAssembly);
+
+                    if (assemblyLoaded != null)
+                    {
+                        this.Logger.Trace("Resolved for " + assemblyLoaded.FullName + " in " + args.RequestingAssembly.FullName + " resources");
+                        return assemblyLoaded;
+                    }
+                }
+
+                this.Logger.Trace("Did not resolve assembly " + args.Name + " in " + args.RequestingAssembly.FullName + " resources");
 
                 return null;
             }
@@ -246,9 +260,67 @@ namespace Bridge.Translator
             return trimmedName;
         }
 
+        public static string TrimAssemblyName(string assemblyName)
+        {
+            var trimmedName = assemblyName;
+
+            var i = trimmedName.LastIndexOf(".dll");
+            if (i >= 0)
+            {
+                trimmedName = trimmedName.Remove(i, 4);
+            }
+
+            return trimmedName;
+        }
+
+        public static Assembly LoadAssemblyFromResources(ILogger logger, Assembly sourceAssembly, AssemblyName assemblyName)
+        {
+            if (assemblyName == null)
+            {
+                logger.Warn("Cannot try to load assembly from resources as the assemblyName is null");
+            }
+
+            if (sourceAssembly == null)
+            {
+                logger.Warn("Cannot try to load assembly " + assemblyName.FullName + " from resources as the source assembly is null");
+            }
+
+            logger.Trace("Trying to resolve " + assemblyName.FullName + " in the resources of " + sourceAssembly.FullName + " ...");
+
+            logger.Trace("Will use assembly name " + assemblyName.Name);
+
+            var resourceNames = sourceAssembly.GetManifestResourceNames();
+
+            foreach (var resourceName in resourceNames)
+            {
+                var trimmedResourceName = Plugins.TrimAssemblyName(resourceName);
+
+                logger.Trace("Scanning resource " + resourceName + ". Trimmed resource name " + trimmedResourceName + " ...");
+
+                if (trimmedResourceName == assemblyName.Name)
+                {
+                    logger.Trace("Found resource with name " + resourceName);
+
+                    using (var resourcesStream = sourceAssembly.GetManifestResourceStream(resourceName))
+                    {
+                        var ba = new byte[(int)resourcesStream.Length];
+                        resourcesStream.Read(ba, 0, (int)resourcesStream.Length);
+
+                        logger.Trace("Read the assembly resource stream of " + resourcesStream.Length + " bytes length");
+
+                        return CheckIfAssemblyLoaded(logger, ba, null, resourceName);
+                    }
+                }
+            }
+
+            return null;
+
+        }
+
         public static Assembly CheckIfAssemblyLoaded(ILogger logger, byte[] ba, AssemblyName assemblyName, string trimmedName)
         {
             logger.Trace("Check if assembly " + trimmedName + " already loaded");
+
             Assembly assembly = AssemblyResolver.CheckIfAssemblyLoaded(trimmedName, AppDomain.CurrentDomain);
             if (assembly != null)
             {
@@ -269,6 +341,7 @@ namespace Bridge.Translator
 
                 logger.Trace("Assembly " + assembly.FullName + " is loaded into domain " + AppDomain.CurrentDomain.FriendlyName);
             }
+
             return assembly;
         }
 
@@ -331,10 +404,80 @@ namespace Bridge.Translator
             IEnumerable<string> result = new List<string>();
             foreach (var plugin in this.Parts)
             {
-                result = result.Concat(plugin.GetConstructorInjectors(constructorBlock));
+                var answer = plugin.GetConstructorInjectors(constructorBlock);
+                if (answer != null)
+                {
+                    result = result.Concat(answer);    
+                }
             }
 
             return result;
+        }
+
+        private InvocationInterceptor defaultInvocationInterceptor;
+        private InvocationInterceptor GetInvocationInterceptor()
+        {
+            if (this.defaultInvocationInterceptor == null)
+            {
+                this.defaultInvocationInterceptor = new InvocationInterceptor();
+            }
+
+            this.defaultInvocationInterceptor.Cancel = false;
+            this.defaultInvocationInterceptor.Replacement = null;
+            return this.defaultInvocationInterceptor;
+        }
+
+        public IInvocationInterceptor OnInvocation(IAbstractEmitterBlock block, InvocationExpression expression, InvocationResolveResult resolveResult)
+        {
+            InvocationInterceptor interceptor = this.GetInvocationInterceptor();
+            
+            interceptor.Block = block;
+            interceptor.Expression = expression;
+            interceptor.ResolveResult = resolveResult;
+
+            foreach (var plugin in this.Parts)
+            {
+                plugin.OnInvocation(interceptor);
+                if (interceptor.Cancel)
+                {
+                    return interceptor;
+                }                
+            }
+
+            return interceptor;
+        }
+
+        private ReferenceInterceptor defaultReferenceInterceptor;
+        private ReferenceInterceptor GetReferenceInterceptor()
+        {
+            if (this.defaultReferenceInterceptor == null)
+            {
+                this.defaultReferenceInterceptor = new ReferenceInterceptor();
+            }
+
+            this.defaultReferenceInterceptor.Cancel = false;
+            this.defaultReferenceInterceptor.Replacement = null;
+            return this.defaultReferenceInterceptor;
+        }
+
+        public IReferenceInterceptor OnReference(IAbstractEmitterBlock block, MemberReferenceExpression expression, MemberResolveResult resolveResult)
+        {
+            ReferenceInterceptor interceptor = this.GetReferenceInterceptor();
+
+            interceptor.Block = block;
+            interceptor.Expression = expression;
+            interceptor.ResolveResult = resolveResult;
+
+            foreach (var plugin in this.Parts)
+            {
+                plugin.OnReference(interceptor);
+                if (interceptor.Cancel)
+                {
+                    return interceptor;
+                }
+            }
+
+            return interceptor;
         }
 
         public bool HasConstructorInjectors(IConstructorBlock constructorBlock)

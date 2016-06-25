@@ -18,6 +18,15 @@ namespace Bridge.Translator
 
             this.ValidateProject(doc);
 
+            var projectType = (from n in doc.Descendants()
+                               where n.Name.LocalName == "OutputType"
+                               select n).ToArray();
+
+            if (projectType.Length > 0 && projectType[0] != null && projectType[0].Value != Translator.SupportedProjectType)
+            {
+                Bridge.Translator.TranslatorException.Throw("Project type ({0}) is not supported, please use Library instead of {0}", projectType[0].Value);
+            }
+
             this.BuildAssemblyLocation(doc);
             this.SourceFiles = this.GetSourceFiles(doc);
             this.ParsedSourceFiles = new List<ParsedSourceFile>();
@@ -25,15 +34,6 @@ namespace Bridge.Translator
             if (!this.FromTask)
             {
                 this.ReadDefineConstants(doc);
-            }
-
-            var projectType = (from n in doc.Descendants()
-                          where n.Name.LocalName == "OutputType"
-                          select n).ToArray();
-
-            if (projectType.Length > 0 && projectType[0] != null && projectType[0].Value != Translator.SupportedProjectType)
-            {
-                Bridge.Translator.TranslatorException.Throw("Project type ({0}) is not supported, please use Library instead of {0}", projectType[0].Value);
             }
 
             this.Log.Info("Reading project file done");

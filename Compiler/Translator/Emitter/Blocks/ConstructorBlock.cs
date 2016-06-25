@@ -6,6 +6,7 @@ using ICSharpCode.NRefactory.Semantics;
 using System.Collections.Generic;
 
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Bridge.Translator
 {
@@ -176,6 +177,10 @@ namespace Bridge.Translator
                 return;
             }
 
+            int pos = this.Emitter.Output.Length;
+            bool oldComma = this.Emitter.Comma;
+            bool oldNewLine = this.Emitter.IsNewLine;
+
             if (this.TypeInfo.InstanceMethods.Any(m => m.Value.Any(subm => this.Emitter.GetEntityName(subm) == JS.Fields.CONFIG)) ||
                 this.TypeInfo.InstanceConfig.Fields.Any(m => m.GetName(this.Emitter) == JS.Fields.CONFIG))
             {
@@ -235,6 +240,15 @@ namespace Bridge.Translator
 
             this.WriteNewLine();
             this.EndBlock();
+
+            var str = this.Emitter.Output.ToString().Substring(pos);
+
+            if (Regex.IsMatch(str, "^\\s*\\$?config\\s*:\\s*\\{\\s*\\}\\s*$", RegexOptions.Multiline))
+            {
+                this.Emitter.Output.Length = pos;
+                this.Emitter.Comma = oldComma;
+                this.Emitter.IsNewLine = oldNewLine;
+            }
         }
 
         protected virtual void EmitCtorForInstantiableClass()

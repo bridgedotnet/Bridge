@@ -175,10 +175,10 @@
         statics: {
             config: {
                 init: function () {
-                    Bridge.ready(this.runTests);
+                    Bridge.ready(this.main);
                 }
             },
-            runTests: function () {
+            main: function () {
                 QUnit.module("Checked/Unckecked");
                 QUnit.test("CheckedInsideUnchecked - Batch2 TestInt32", Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests.testInt32);
                 QUnit.test("CheckedInsideUnchecked - Batch2 TestUInt32", Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests.testUInt32);

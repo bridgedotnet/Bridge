@@ -1,6 +1,9 @@
+using System;
+using System.Collections.Generic;
+
 using ICSharpCode.NRefactory.CSharp;
 using Mono.Cecil;
-using System.Collections.Generic;
+
 
 namespace Bridge.Contract
 {

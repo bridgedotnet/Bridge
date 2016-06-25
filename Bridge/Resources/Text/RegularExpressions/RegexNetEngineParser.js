@@ -1195,6 +1195,11 @@ Bridge.define("System.Text.RegularExpressions.RegexNetEngineParser", {
                 var index = bodyIndex;
                 while (index < endIndex) {
                     ch = pattern[index];
+                    if (ch === "\\") {
+                        index += 2; // skip the escaped char
+                        continue;
+                    }
+
                     if (ch === "(" && !isComment) {
                         ++bracketLvl;
                     } else if (ch === ")") {

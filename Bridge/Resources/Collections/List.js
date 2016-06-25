@@ -3,6 +3,23 @@
 Bridge.define('System.Collections.Generic.List$1', function (T) {
     return {
         inherits: [System.Collections.Generic.ICollection$1(T), System.Collections.ICollection, System.Collections.Generic.IList$1(T)],
+
+        config: {
+            alias: [
+            "getItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem",
+            "setItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem",
+            "getCount", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getCount",
+            "add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
+            "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
+            "contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
+            "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
+            "indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
+            "insert", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert",
+            "remove", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$remove",
+            "removeAt", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt"
+            ]
+        },
+
         constructor: function (obj) {
             if (Object.prototype.toString.call(obj) === '[object Array]') {
                 this.items = System.Array.clone(obj);
@@ -106,7 +123,7 @@ Bridge.define('System.Collections.Generic.List$1', function (T) {
         },
 
         getEnumerator: function () {
-            return new Bridge.ArrayEnumerator(this.items);
+            return new Bridge.ArrayEnumerator(this.items, T);
         },
 
         getRange: function (index, count) {

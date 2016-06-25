@@ -1,4 +1,6 @@
 ﻿using Bridge.Contract;
+using Bridge.Contract.Constants;
+
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.CSharp.Resolver;
 using System.Collections.Generic;
@@ -84,7 +86,7 @@ namespace Bridge.Translator
 
                     if (rr != null && !(rr.ElementResult is LocalResolveResult))
                     {
-                        this.Write("Bridge.ref(");
+                        this.Write(JS.Funcs.BRIDGE_REF + "(");
 
                         this.Emitter.IsRefArg = true;
                         expr.AcceptVisitor(this.Emitter);

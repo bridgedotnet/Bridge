@@ -444,7 +444,7 @@ namespace Bridge.Translator
 
                                     if (rr != null && !(rr.ElementResult is LocalResolveResult))
                                     {
-                                        this.Write("Bridge.ref(");
+                                        this.Write(JS.Funcs.BRIDGE_REF + "(");
 
                                         this.Emitter.IsRefArg = true;
                                         exprs[0].AcceptVisitor(this.Emitter);
@@ -468,7 +468,8 @@ namespace Bridge.Translator
                                     var an = exprs[0] as AnonymousTypeCreateExpression;
                                     if (an == null)
                                     {
-                                        this.Write("Bridge.toPlain(");
+                                        this.Write(JS.Funcs.BRIDGE_TOPLAIN);
+                                        this.WriteOpenParentheses();
                                         exprs[0].AcceptVisitor(this.Emitter);
                                         this.Write(")");
                                     }
@@ -608,7 +609,7 @@ namespace Bridge.Translator
             {
                 if (modifier == "defaultFn")
                 {
-                    this.Write(BridgeTypes.ToJsName((AstType) def, this.Emitter) + ".getDefaultValue");
+                    this.Write(BridgeTypes.ToJsName((AstType) def, this.Emitter) + "." + JS.Funcs.GETDEFAULTVALUE);
                 }
                 else
                 {
@@ -619,7 +620,7 @@ namespace Bridge.Translator
             {
                 if (modifier == "defaultFn")
                 {
-                    this.Write(BridgeTypes.ToJsName((IType) def, this.Emitter) + ".getDefaultValue");
+                    this.Write(BridgeTypes.ToJsName((IType) def, this.Emitter) + "." + JS.Funcs.GETDEFAULTVALUE);
                 }
                 else
                 {

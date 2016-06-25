@@ -20,6 +20,7 @@
             public const string EVENTS = "events";
             public const string PROPERTIES = "properties";
             public const string INTERFACE = "$interface";
+            public const string STATICS = "statics";
 
             public const string ASYNC_TASK = "task";
             public const string PROTOTYPE = "prototype";
@@ -39,12 +40,16 @@
             public const string BRIDGE_IS_DEFINED = "Bridge.isDefined";
             public const string BRIDGE_GET_ENUMERATOR = "Bridge.getEnumerator";
             public const string BRIDGE_GET_TYPE = "Bridge.getType";
+            public const string BRIDGE_GET_I = "Bridge.geti";
             public const string BRIDGE_NS = "Bridge.ns";
             public const string BRIDGE_EQUALS = "Bridge.equals";
             public const string BRIDGE_GETHASHCODE = "Bridge.getHashCode";
             public const string BRIDGE_REFERENCEEQUALS = "Bridge.referenceEquals";
+            public const string BRIDGE_REF = "Bridge.ref";
+            public const string BRIDGE_GETDEFAULTVALUE = "Bridge." + GETDEFAULTVALUE;
             public const string BRIDGE_EVENT = "Bridge.event";
             public const string BRIDGE_PROPERTY = "Bridge.property";
+            public const string BRIDGE_TOPLAIN = "Bridge.toPlain";
 
             public const string DCONSTRUCTOR = "$constructor";
             public const string CLONE = "$clone";
@@ -55,7 +60,9 @@
             public const string TOSTIRNG = "toString";
             public const string EQUALS = "equals";
             public const string GETHASHCODE = "getHashCode";
-            public const string STRING_FROMCHARCODE = "String.fromCharCode";            
+            public const string GETDEFAULTVALUE = "getDefaultValue";
+            public const string STRING_FROMCHARCODE = "String.fromCharCode";
+            public const string TOJSON = "toJSON";
 
             public const string ASYNC_BODY = "$asyncBody";
             public const string GET_AWAITED_RESULT = "getAwaitedResult";
@@ -74,6 +81,12 @@
             {
                 public const string ADD = "add";
                 public const string REMOVE = "remove";
+            }
+
+            public class Property
+            {
+                public const string GET = "get";
+                public const string SET = "set";
             }
 
             public class Math

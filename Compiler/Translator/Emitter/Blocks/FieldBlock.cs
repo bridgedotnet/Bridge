@@ -6,6 +6,7 @@ using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
 
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Bridge.Translator
 {
@@ -62,7 +63,7 @@ namespace Bridge.Translator
             {
                 if (info.Fields.Count > 0)
                 {
-                    var hasProperties = this.WriteObject(null, info.Fields, "this.{0} = {1};");
+                    var hasProperties = this.WriteObject(null, info.Fields, "this.{0} = {1};", "this[{0}] = {1};");
                     if (hasProperties)
                     {
                         this.Emitter.Comma = true;
@@ -74,7 +75,7 @@ namespace Bridge.Translator
 
             if (info.Events.Count > 0)
             {
-                var hasProperties = this.WriteObject(JS.Fields.EVENTS, info.Events, JS.Funcs.BRIDGE_EVENT + "(this, \"{0}\", {1});");
+                var hasProperties = this.WriteObject(JS.Fields.EVENTS, info.Events, JS.Funcs.BRIDGE_EVENT + "(this, \"{0}\", {1});", JS.Funcs.BRIDGE_EVENT + "(this, {0}, {1});");
                 if (hasProperties)
                 {
                     this.Emitter.Comma = true;
@@ -84,7 +85,7 @@ namespace Bridge.Translator
 
             if (info.Properties.Count > 0)
             {
-                var hasProperties = this.WriteObject(JS.Fields.PROPERTIES, info.Properties, JS.Funcs.BRIDGE_PROPERTY + "(this, \"{0}\", {1});");
+                var hasProperties = this.WriteObject(JS.Fields.PROPERTIES, info.Properties, JS.Funcs.BRIDGE_PROPERTY + "(this, \"{0}\", {1});", JS.Funcs.BRIDGE_PROPERTY + "(this, {0}, {1});");
                 if (hasProperties)
                 {
                     this.Emitter.Comma = true;
@@ -99,7 +100,7 @@ namespace Bridge.Translator
             }
         }
 
-        protected virtual bool WriteObject(string objectName, List<TypeConfigItem> members, string format)
+        protected virtual bool WriteObject(string objectName, List<TypeConfigItem> members, string format, string interfaceFormat)
         {
             bool hasProperties = this.HasProperties(objectName, members);
 
@@ -203,14 +204,15 @@ namespace Bridge.Translator
                         needContinue = !isProperty && !isNullable;
                     }
 
+                    var name = member.GetName(this.Emitter);
                     if (isProperty && isPrimitive)
                     {
                         constValue = "null";
-                        this.Injectors.Add(string.Format("this.{0} = {1};", member.GetName(this.Emitter), value)); 
+                        this.Injectors.Add(string.Format(name.StartsWith("\"") ? "this[{0}] = {1};" : "this.{0} = {1};", name, value));
                     }
                     else
                     {
-                        this.Injectors.Add(string.Format(format, member.GetName(this.Emitter), value + defValue));    
+                        this.Injectors.Add(string.Format(name.StartsWith("\"") ? interfaceFormat : format, name, value + defValue));    
                     }
 
                     if (needContinue)
@@ -221,7 +223,7 @@ namespace Bridge.Translator
 
                 this.EnsureComma();
                 XmlToJsDoc.EmitComment(this, member.Entity);
-                this.Write(member.GetName(this.Emitter));
+                this.Write(member.GetName(this.Emitter, true));
                 this.WriteColon();
 
                 if (constValue is AstType)
@@ -314,27 +316,182 @@ namespace Bridge.Translator
 
         protected virtual void WriteAlias(string objectName, List<TypeConfigItem> members)
         {
-            /*if (objectName != null)
+            int pos = this.Emitter.Output.Length;
+            bool oldComma = this.Emitter.Comma;
+            bool oldNewLine = this.Emitter.IsNewLine;
+            bool nonEmpty = false;
+
+            if (objectName != null)
             {
                 this.EnsureComma();
                 this.Write(objectName);
 
                 this.WriteColon();
-                this.BeginBlock();
+                this.WriteOpenBracket();
+                this.WriteNewLine();
             }
 
             foreach (var member in members)
             {
-                this.EnsureComma();
-                this.Write(member.Item1);
-                this.WriteColon();
+                if (member.DerivedMember != null)
+                {
+                    if (this.EmitMemberAlias(member.DerivedMember, member.InterfaceMember))
+                    {
+                        nonEmpty = true;
+                    }
 
-                this.Write(member.Item2);
-                this.Emitter.Comma = true;
+                    continue;
+                }
+
+                var rr = Emitter.Resolver.ResolveNode(member.Entity, Emitter) as MemberResolveResult;
+
+                if (rr == null && member.VarInitializer != null)
+                {
+                    rr = Emitter.Resolver.ResolveNode(member.VarInitializer, Emitter) as MemberResolveResult;
+                }
+
+                if (rr != null)
+                {
+                    foreach (var interfaceMember in rr.Member.ImplementedInterfaceMembers)
+                    {
+                        if (this.EmitMemberAlias(rr.Member, interfaceMember))
+                        {
+                            nonEmpty = true;
+                        }
+                    }
+                }
             }
 
             this.WriteNewLine();
-            this.EndBlock();*/
+            this.WriteCloseBracket();
+
+            if (!nonEmpty)
+            {
+                this.Emitter.Output.Length = pos;
+                this.Emitter.Comma = oldComma;
+                this.Emitter.IsNewLine = oldNewLine;
+            }
+        }
+
+        protected bool EmitMemberAlias(IMember member, IMember interfaceMember)
+        {
+            bool nonEmpty = false;
+            if (member.IsShadowing || !member.IsOverride)
+            {
+                var baseMember = InheritanceHelper.GetBaseMember(member);
+
+                if (baseMember != null && baseMember.ImplementedInterfaceMembers.Contains(interfaceMember))
+                {
+                    return false;
+                }
+            }
+
+            if (member is IProperty)
+            {
+                var property = (IProperty)member;
+                if (property.CanGet)
+                {
+                    nonEmpty = true;
+                    this.EnsureComma();
+                    this.WriteScript(Helpers.GetPropertyRef(member, this.Emitter, false, false, true, true));
+                    this.WriteComma();
+                    var alias = Helpers.GetPropertyRef(interfaceMember, this.Emitter, false, false, false);
+
+                    if (alias.StartsWith("\""))
+                    {
+                        this.Write(alias);
+                    }
+                    else
+                    {
+                        this.WriteScript(alias);
+                    }
+
+                    this.Emitter.Comma = true;
+                }
+
+                if (property.CanSet)
+                {
+                    nonEmpty = true;
+                    this.EnsureComma();
+                    this.WriteScript(Helpers.GetPropertyRef(member, this.Emitter, true, false, true, true));
+                    this.WriteComma();
+                    var alias = Helpers.GetPropertyRef(interfaceMember, this.Emitter, true, false, false);
+
+                    if (alias.StartsWith("\""))
+                    {
+                        this.Write(alias);
+                    }
+                    else
+                    {
+                        this.WriteScript(alias);
+                    }
+
+                    this.Emitter.Comma = true;
+                }
+            }
+            else if (member is IEvent)
+            {
+                var ev = (IEvent)member;
+                if (ev.CanAdd)
+                {
+                    nonEmpty = true;
+                    this.EnsureComma();
+                    this.WriteScript(Helpers.GetEventRef(member, this.Emitter, false, false, true, true));
+                    this.WriteComma();
+                    var alias = Helpers.GetEventRef(interfaceMember, this.Emitter, false, false, false);
+
+                    if (alias.StartsWith("\""))
+                    {
+                        this.Write(alias);
+                    }
+                    else
+                    {
+                        this.WriteScript(alias);
+                    }
+
+                    this.Emitter.Comma = true;
+                }
+
+                if (ev.CanRemove)
+                {
+                    nonEmpty = true;
+                    this.EnsureComma();
+                    this.WriteScript(Helpers.GetEventRef(member, this.Emitter, true, false, true, true));
+                    this.WriteComma();
+                    var alias = Helpers.GetEventRef(interfaceMember, this.Emitter, true, false, false);
+
+                    if (alias.StartsWith("\""))
+                    {
+                        this.Write(alias);
+                    }
+                    else
+                    {
+                        this.WriteScript(alias);
+                    }
+
+                    this.Emitter.Comma = true;
+                }
+            }
+            else
+            {
+                nonEmpty = true;
+                this.EnsureComma();
+                this.WriteScript(OverloadsCollection.Create(Emitter, member).GetOverloadName(false, null, true));
+                this.WriteComma();
+                var alias = OverloadsCollection.Create(Emitter, interfaceMember).GetOverloadName();
+
+                if (alias.StartsWith("\""))
+                {
+                    this.Write(alias);
+                }
+                else
+                {
+                    this.WriteScript(alias);
+                }
+            }
+
+            this.Emitter.Comma = true;
+            return nonEmpty;
         }
     }
 }

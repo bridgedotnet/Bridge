@@ -30,10 +30,8 @@ namespace Bridge.Translator.TypeScript
             if (!accessor.IsNull && this.Emitter.GetInline(accessor) == null)
             {
                 XmlToJsDoc.EmitComment(this, this.IndexerDeclaration);
-                var overloads = OverloadsCollection.Create(this.Emitter, indexerDeclaration, setter);
-
-                string name = overloads.GetOverloadName();
-                this.Write((setter ? "set" : "get") + name);
+                string name = Helpers.GetPropertyRef(this.IndexerDeclaration, this.Emitter, setter, false, false);
+                this.Write(name);
 
                 this.EmitMethodParameters(indexerDeclaration.Parameters, null, indexerDeclaration, setter);
 

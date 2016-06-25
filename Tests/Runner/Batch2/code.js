@@ -338,47 +338,47 @@
         },
         iCollectionCountWorks: function () {
             var l = ["x", "y", "z"];
-            Bridge.Test.Assert.areEqual(3, System.Array.getCount(l));
+            Bridge.Test.Assert.areEqual(3, System.Array.getCount(l, String));
         },
         iCollectionAddWorks: function () {
             var l = ["x", "y", "z"];
-            System.Array.add(l, "a");
+            System.Array.add(l, "a", String);
             Bridge.Test.Assert.areDeepEqual(["x", "y", "z", "a"], l);
         },
         iCollectionClearWorks: function () {
             var l = ["x", "y", "z"];
             System.Array.clear(l, String);
             Bridge.Test.Assert.areDeepEqual(System.Array.init(3, null), l);
-            Bridge.Test.Assert.areDeepEqual(null, System.Array.getItem(l, 0));
-            Bridge.Test.Assert.areDeepEqual(null, System.Array.getItem(l, 1));
-            Bridge.Test.Assert.areDeepEqual(null, System.Array.getItem(l, 2));
+            Bridge.Test.Assert.areDeepEqual(null, System.Array.getItem(l, 0, String));
+            Bridge.Test.Assert.areDeepEqual(null, System.Array.getItem(l, 1, String));
+            Bridge.Test.Assert.areDeepEqual(null, System.Array.getItem(l, 2, String));
         },
         iCollectionContainsWorks: function () {
             var l = ["x", "y", "z"];
-            Bridge.Test.Assert.true(System.Array.contains(l, "y"));
-            Bridge.Test.Assert.false(System.Array.contains(l, "a"));
+            Bridge.Test.Assert.true(System.Array.contains(l, "y", String));
+            Bridge.Test.Assert.false(System.Array.contains(l, "a", String));
         },
         iCollectionContainsUsesEqualsMethod: function () {
             var l = [new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(1), new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(2), new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(3)];
-            Bridge.Test.Assert.true(System.Array.contains(l, new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(2)));
-            Bridge.Test.Assert.false(System.Array.contains(l, new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(4)));
+            Bridge.Test.Assert.true(System.Array.contains(l, new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(2), Bridge.ClientTest.Batch2.BridgeIssues.N772.C));
+            Bridge.Test.Assert.false(System.Array.contains(l, new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(4), Bridge.ClientTest.Batch2.BridgeIssues.N772.C));
         },
         iCollectionRemoveWorks: function () {
             var l = ["x", "y", "z"];
-            Bridge.Test.Assert.true(System.Array.remove(l, "y"));
-            Bridge.Test.Assert.false(System.Array.remove(l, "a"));
+            Bridge.Test.Assert.true(System.Array.remove(l, "y", String));
+            Bridge.Test.Assert.false(System.Array.remove(l, "a", String));
             Bridge.Test.Assert.areDeepEqual(["x", "z"], l);
         },
         iListIndexingWorks: function () {
             var l = ["x", "y", "z"];
-            Bridge.Test.Assert.areEqual("y", System.Array.getItem(l, 1));
-            System.Array.setItem(l, 1, "a");
+            Bridge.Test.Assert.areEqual("y", System.Array.getItem(l, 1, String));
+            System.Array.setItem(l, 1, "a", String);
             Bridge.Test.Assert.areDeepEqual(["x", "a", "z"], l);
         },
         iListIndexOfWorks: function () {
             var l = ["x", "y", "z"];
-            Bridge.Test.Assert.areEqual(1, System.Array.indexOf(l, "y"));
-            Bridge.Test.Assert.areEqual(-1, System.Array.indexOf(l, "a"));
+            Bridge.Test.Assert.areEqual(1, System.Array.indexOf(l, "y", 0, null, String));
+            Bridge.Test.Assert.areEqual(-1, System.Array.indexOf(l, "a", 0, null, String));
         },
         iListIndexOfUsesEqualsMethod: function () {
             var arr = [new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(1), new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(2), new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(3)];
@@ -387,17 +387,17 @@
         },
         iListInsertWorks: function () {
             var l = ["x", "y", "z"];
-            System.Array.insert(l, 1, "a");
+            System.Array.insert(l, 1, "a", String);
             Bridge.Test.Assert.areDeepEqual(["x", "a", "y", "z"], l);
         },
         iListRemoveAtWorks: function () {
             var l = ["x", "y", "z"];
-            System.Array.removeAt(l, 1);
+            System.Array.removeAt(l, 1, String);
             Bridge.Test.Assert.areDeepEqual(["x", "z"], l);
         },
         issueSpecific: function () {
             var l = ["x", "y", "z"];
-            System.Array.removeAt(l, 1);
+            System.Array.removeAt(l, 1, String);
             Bridge.Test.Assert.areDeepEqual(["x", "z"], l);
         }
     });
@@ -436,6 +436,11 @@
     
     Bridge.define('Bridge.ClientTest.Batch2.BridgeIssues.N772.TestReverseComparer', {
         inherits: [System.Collections.Generic.IComparer$1(System.Int32)],
+        config: {
+            alias: [
+            "compare", "System$Collections$Generic$IComparer$1$System$Int32$compare"
+            ]
+        },
         compare: function (x, y) {
             return x === y ? 0 : (x > y ? -1 : 1);
         }

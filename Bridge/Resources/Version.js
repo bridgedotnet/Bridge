@@ -168,6 +168,12 @@
         _Minor: 0,
 
         config: {
+            alias: [
+            "clone", "System$ICloneable$clone",
+            "compareTo", "System$IComparable$1$System$Version$compareTo",
+            "equalsT", "System$IEquatable$1$System$Version$equalsT"
+            ],
+
             init: function () {
                 this._Build = -1;
                 this._Revision = -1;

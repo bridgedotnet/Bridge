@@ -12,7 +12,7 @@ namespace System
     [External]
     public interface IComparable<in T> : IBridgeClass
     {
-        [Template("Bridge.compare({this}, {other})")]
+        [Template("Bridge.compare({this}, {other}, false, {T})")]
         int CompareTo(T other);
     }
 }

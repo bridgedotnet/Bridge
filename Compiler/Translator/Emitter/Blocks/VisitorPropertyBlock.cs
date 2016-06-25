@@ -59,7 +59,7 @@ namespace Bridge.Translator
                 }
 
                 XmlToJsDoc.EmitComment(this, this.PropertyDeclaration);
-                string name = Helpers.GetPropertyRef(propertyDeclaration, this.Emitter, setter);
+                string name = Helpers.GetPropertyRef(propertyDeclaration, this.Emitter, setter, false, false, true);
                 this.Write(name);
                 this.WriteColon();
                 this.WriteFunction();

@@ -260,7 +260,7 @@ namespace Bridge.Translator
         private void GenereateToJSON(IAnonymousTypeConfig config)
         {
             this.EnsureComma();
-            this.Write("toJSON: function () ");
+            this.Write(JS.Funcs.TOJSON + ": function () ");
             this.BeginBlock();
             this.Write("return ");
             this.BeginBlock();

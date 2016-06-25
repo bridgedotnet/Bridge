@@ -5,6 +5,7 @@ namespace Bridge.Html5
 {
     [External]
     [Name("Object")]
+	[ExternalInterface]
     public interface IEventListener
     {
         /// <summary>

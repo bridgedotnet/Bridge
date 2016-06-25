@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.NRefactory.Semantics;
 
 namespace Bridge.Contract
 {
@@ -9,6 +11,14 @@ namespace Bridge.Contract
         public virtual IEnumerable<string> GetConstructorInjectors(IConstructorBlock constructorBlock)
         {
             return null;
+        }
+
+        public virtual void OnInvocation(IInvocationInterceptor interceptor)
+        {
+        }
+
+        public virtual void OnReference(IReferenceInterceptor interceptor)
+        {
         }
 
         public virtual bool HasConstructorInjectors(IConstructorBlock constructorBlock)

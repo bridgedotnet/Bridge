@@ -7,6 +7,7 @@ using ICSharpCode.NRefactory.Semantics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ICSharpCode.NRefactory.TypeSystem;
 
 namespace Bridge.Translator
 {
@@ -122,6 +123,11 @@ namespace Bridge.Translator
                 this.Types.Add(this.CurrentType);
             }
 
+            if (typeDeclaration.ClassType != ClassType.Interface)
+            {
+                this.AddMissingAliases(typeDeclaration);
+            }
+
             this.CurrentType = null;
 
             while (this.NestedTypes != null && this.NestedTypes.Count > 0)
@@ -131,6 +137,62 @@ namespace Bridge.Translator
                 foreach (var nestedType in types)
                 {
                     this.VisitTypeDeclaration(nestedType.Item1);
+                }
+            }
+        }
+
+        private void AddMissingAliases(TypeDeclaration typeDeclaration)
+        {
+            var type = this.Resolver.ResolveNode(typeDeclaration, null).Type;
+            var interfaces = type.DirectBaseTypes.Where(t => t.Kind == TypeKind.Interface).ToArray();
+            var members = type.GetMembers(null, GetMemberOptions.IgnoreInheritedMembers).ToArray();
+            var baseTypes = type.GetNonInterfaceBaseTypes().ToArray().Reverse();
+
+            if (interfaces.Length > 0)
+            {
+                foreach (var baseInterface in interfaces)
+                {
+                    var interfaceMembers = baseInterface.GetMembers().Where(m => m.DeclaringTypeDefinition.Kind == TypeKind.Interface);
+                    foreach (var interfaceMember in interfaceMembers)
+                    {
+                        var isDirectlyImplemented = members.Any(m => m.ImplementedInterfaceMembers.Contains(interfaceMember));
+                        if (!isDirectlyImplemented)
+                        {
+                            foreach (var baseType in baseTypes)
+                            {
+                                //var derivedMember = InheritanceHelper.GetDerivedMember(interfaceMember, baseType.GetDefinition());
+                                IMember derivedMember = null;
+                                IEnumerable<IMember> baseMembers;
+                                if (interfaceMember.SymbolKind == SymbolKind.Accessor)
+                                {
+                                    baseMembers = baseType.GetAccessors(m => m.Name == interfaceMember.Name && !m.IsExplicitInterfaceImplementation, GetMemberOptions.IgnoreInheritedMembers);
+                                }
+                                else
+                                {
+                                    baseMembers = baseType.GetMembers(m => m.Name == interfaceMember.Name && !m.IsExplicitInterfaceImplementation, GetMemberOptions.IgnoreInheritedMembers);
+                                }
+
+                                foreach (IMember baseMember in baseMembers)
+                                {
+                                    if (baseMember.IsPrivate)
+                                    {
+                                        continue;
+                                    }
+                                    if (SignatureComparer.Ordinal.Equals(interfaceMember, baseMember))
+                                    {
+                                        derivedMember = baseMember.Specialize(interfaceMember.Substitution);
+                                        break;
+                                    }
+                                }
+
+                                if (derivedMember != null && !derivedMember.ImplementedInterfaceMembers.Contains(interfaceMember))
+                                {
+                                    this.CurrentType.InstanceConfig.Alias.Add(new TypeConfigItem { Entity = typeDeclaration, InterfaceMember = interfaceMember, DerivedMember = derivedMember});
+                                    break;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -183,6 +245,14 @@ namespace Bridge.Translator
                         VarInitializer = item,
                         Initializer = initializer
                     });
+                }
+
+                if (OverloadsCollection.NeedCreateAlias(rr))
+                {
+                    var config = isStatic
+                    ? CurrentType.StaticConfig
+                    : CurrentType.InstanceConfig;
+                    config.Alias.Add(new TypeConfigItem { Entity = fieldDeclaration, VarInitializer = item});
                 }
             }
         }
@@ -251,6 +321,15 @@ namespace Bridge.Translator
             {
                 dict.Add(key, new List<EntityDeclaration>(new[] { indexerDeclaration }));
             }
+
+            var rr = this.Resolver.ResolveNode(indexerDeclaration, null) as MemberResolveResult;
+            if (OverloadsCollection.NeedCreateAlias(rr))
+            {
+                var config = rr.Member.IsStatic
+                ? CurrentType.StaticConfig
+                : CurrentType.InstanceConfig;
+                config.Alias.Add(new TypeConfigItem { Entity = indexerDeclaration });
+            }
         }
 
         public override void VisitMethodDeclaration(MethodDeclaration methodDeclaration)
@@ -278,6 +357,16 @@ namespace Bridge.Translator
             {
                 dict.Add(key, new List<MethodDeclaration>(new[] { methodDeclaration }));
             }
+
+            var memberrr = Resolver.ResolveNode(methodDeclaration, null) as MemberResolveResult;
+
+            if (OverloadsCollection.NeedCreateAlias(memberrr))
+            {
+                var config = isStatic
+                ? CurrentType.StaticConfig
+                : CurrentType.InstanceConfig;
+                config.Alias.Add(new TypeConfigItem { Entity = methodDeclaration });
+            }
         }
 
         public override void VisitCustomEventDeclaration(CustomEventDeclaration customEventDeclaration)
@@ -303,6 +392,15 @@ namespace Bridge.Translator
             {
                 dict.Add(key, new List<EntityDeclaration>(new[] { customEventDeclaration }));
             }
+
+            var rr = this.Resolver.ResolveNode(customEventDeclaration, null) as MemberResolveResult;
+            if (OverloadsCollection.NeedCreateAlias(rr))
+            {
+                var config = rr.Member.IsStatic
+                ? CurrentType.StaticConfig
+                : CurrentType.InstanceConfig;
+                config.Alias.Add(new TypeConfigItem { Entity = customEventDeclaration });
+            }
         }
 
         public override void VisitPropertyDeclaration(PropertyDeclaration propertyDeclaration)
@@ -327,6 +425,15 @@ namespace Bridge.Translator
             else
             {
                 dict.Add(key, new List<EntityDeclaration>(new[] { propertyDeclaration }));
+            }
+
+            var rr = this.Resolver.ResolveNode(propertyDeclaration, null) as MemberResolveResult;
+            if (OverloadsCollection.NeedCreateAlias(rr))
+            {
+                var config = rr.Member.IsStatic
+                ? CurrentType.StaticConfig
+                : CurrentType.InstanceConfig;
+                config.Alias.Add(new TypeConfigItem { Entity = propertyDeclaration });
             }
 
             var isResolvedProperty = false;
@@ -510,6 +617,15 @@ namespace Bridge.Translator
                         Initializer = initializer,
                         VarInitializer = item
                     });
+                }
+
+                var rr = this.Resolver.ResolveNode(item, null) as MemberResolveResult;
+                if (OverloadsCollection.NeedCreateAlias(rr))
+                {
+                    var config = rr.Member.IsStatic
+                    ? CurrentType.StaticConfig
+                    : CurrentType.InstanceConfig;
+                    config.Alias.Add(new TypeConfigItem { Entity = eventDeclaration, VarInitializer = item});
                 }
             }
         }

@@ -197,7 +197,8 @@ namespace Bridge.Translator
 
         public OverflowMode? OverflowMode
         {
-            get; set;
+            get;
+            set;
         }
     }
 }

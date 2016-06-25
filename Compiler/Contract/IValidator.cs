@@ -57,6 +57,8 @@ namespace Bridge.Contract
 
         bool IsIgnoreType(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition, bool ignoreLiteral = false);
 
+        bool IsExternalInterface(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition);
+
         bool IsImmutableType(ICustomAttributeProvider type);
 
         bool IsIgnoreType(IEntity enity, bool ignoreLiteral = false);

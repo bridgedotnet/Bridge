@@ -104,7 +104,7 @@ namespace Bridge.Translator.TypeScript
         private void WriteProp(TypeConfigItem ev, string name, bool getter)
         {
             XmlToJsDoc.EmitComment(this, ev.Entity);
-            this.Write(getter ? "get" : "set");
+            this.Write(Helpers.GetSetOrGet(!getter));
             this.Write(name);
             this.WriteOpenParentheses();
 
