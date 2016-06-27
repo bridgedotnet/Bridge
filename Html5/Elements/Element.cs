@@ -244,6 +244,11 @@ namespace Bridge.Html5
 
         public extern void MozRequestPointerLock();
 
+        public extern void MsRequestPointerLock();
+
+        [Name("webkitRequestPointerLock")]
+        public extern void WebKitRequestPointerLock();
+
         /// <summary>
         /// The Element.requestFullscreen() method issues an asynchronous request to make the element be displayed full-screen.
         /// </summary>

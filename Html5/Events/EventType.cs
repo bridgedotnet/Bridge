@@ -308,9 +308,21 @@ namespace Bridge.Html5
 
         /// <summary>
         /// Event - Full Screen
+        /// An element was turned to fullscreen mode or back to normal mode.
+        /// </summary>
+        MsFullScreenChange,
+
+        /// <summary>
+        /// Event - Full Screen
         /// It was impossible to switch to fullscreen mode for technical reasons or because the permission was denied.
         /// </summary>
         FullScreenError,
+
+        /// <summary>
+        /// Event - Full Screen
+        /// It was impossible to switch to fullscreen mode for technical reasons or because the permission was denied.
+        /// </summary>
+        MsFullScreenError,
 
         /// <summary>
         /// GamepadEvent - Gamepad
@@ -534,9 +546,21 @@ namespace Bridge.Html5
 
         /// <summary>
         /// Event - Pointer Lock
+        /// The pointer was locked or released.
+        /// </summary>
+        MsPointerLockChange,
+
+        /// <summary>
+        /// Event - Pointer Lock
         /// It was impossible to lock the pointer for technical reasons or because the permission was denied.
         /// </summary>
         PointerLockError,
+
+        /// <summary>
+        /// Event - Pointer Lock
+        /// It was impossible to lock the pointer for technical reasons or because the permission was denied.
+        /// </summary>
+        MsPointerLockError,
 
         /// <summary>
         /// Event - Pointer Lock
@@ -816,7 +840,22 @@ namespace Bridge.Html5
         /// <summary>
         /// Triggered when there is an error getting into full screen mode.
         /// </summary>
+        WebKitFullScreenChange,
+
+        /// <summary>
+        /// Triggered when there is an error getting into full screen mode.
+        /// </summary>
         WebKitFullScreenError,
+
+        /// <summary>
+        /// Triggered when there is an error getting into full screen mode.
+        /// </summary>
+        WebKitPointerLockChange,
+
+        /// <summary>
+        /// Triggered when there is an error getting into full screen mode.
+        /// </summary>
+        WebKitPointerLockError,
 
         /// <summary>
         /// WheelEvent - DOM L3

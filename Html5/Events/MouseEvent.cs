@@ -114,6 +114,38 @@ namespace Bridge.Html5
         public readonly int MovementY;
 
         /// <summary>
+        /// The X coordinate of the mouse pointer relative to the position of the last mousemove event.
+        /// </summary>
+        public readonly int MozMovementX;
+
+        /// <summary>
+        /// The Y coordinate of the mouse pointer relative to the position of the last mousemove event.
+        /// </summary>
+        public readonly int MozMovementY;
+
+        /// <summary>
+        /// The X coordinate of the mouse pointer relative to the position of the last mousemove event.
+        /// </summary>
+        [Name("webkitMovementX")]
+        public readonly int WebKitMovementX;
+
+        /// <summary>
+        /// The Y coordinate of the mouse pointer relative to the position of the last mousemove event.
+        /// </summary>
+        [Name("webkitMovementY")]
+        public readonly int WebKitMovementY;
+
+        /// <summary>
+        /// The X coordinate of the mouse pointer relative to the position of the last mousemove event.
+        /// </summary>
+        public readonly int MsMovementX;
+
+        /// <summary>
+        /// The Y coordinate of the mouse pointer relative to the position of the last mousemove event.
+        /// </summary>
+        public readonly int MsMovementY;
+
+        /// <summary>
         /// Returns the current state of the specified modifier key.
         /// </summary>
         /// <param name="keyArg">A string identifying the modifier key whose value you wish to determine. This may be an implementation-defined value or one of: "Alt", "AltGraph", "CapsLock", "Control", "Fn", "Meta", "NumLock", "ScrollLock", "Shift", "SymbolLock", or "OS". Note that IE9 uses "Scroll" for "ScrollLock" and "Win" for "OS". If you use these older draft's name, Gecko's getModifierState() always returns false.</param>
