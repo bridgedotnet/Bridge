@@ -328,6 +328,7 @@
     <Compile Include="URLSearchParams.cs" />
     <Compile Include="ValidityState.cs" />
     <Compile Include="Global.cs" />
+    <Compile Include="WeakMap.cs" />
     <Compile Include="WebSocket.cs" />
     <Compile Include="Window.cs" />
     <Compile Include="WindowInstance.cs" />

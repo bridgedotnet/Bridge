@@ -291,6 +291,7 @@
     <Compile Include="BridgeIssues\1500\N1501.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Collections\Generic\StackTests.cs" />
+    <Compile Include="Collections\Native\WeakMapTests.cs" />
     <Compile Include="Convert\ConvertFromBase64Tests.cs" />
     <Compile Include="Convert\ConvertTestBase.cs" />
     <Compile Include="Convert\ConvertToBase64CharArrayTests.cs" />

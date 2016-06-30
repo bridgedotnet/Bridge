@@ -50,6 +50,7 @@ namespace Bridge.ClientTest
 
         public const string MODULE_ICOLLECTION = PREFIX_COLLECTIONS; // + "ICollection";
         public const string MODULE_IDICTIONARY = PREFIX_COLLECTIONS; // + "IDictionary";
+        public const string MODULE_WEAKCOLLECTION = PREFIX_COLLECTIONS;
         public const string MODULE_LIST = PREFIX_COLLECTIONS; // + "List";
         public const string MODULE_ILIST = PREFIX_COLLECTIONS; // + "IList";
         public const string MODULE_ITERATORBLOCK = PREFIX_COLLECTIONS; // + "IteratorBlock";
