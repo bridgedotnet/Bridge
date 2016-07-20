@@ -79,6 +79,10 @@ namespace Bridge.Contract
                 {
                     fieldName = emitter.AssemblyInfo.PreserveMemberCase ? fieldName : TypeConfigItem.ToLowerCamelCase(fieldName);
 
+                    if (fieldName == "__proto__")
+                    {
+                        fieldName = "$__proto__";
+                    }
                     /*if (Helpers.IsReservedWord(fieldName))
                     {
                         fieldName = Helpers.ChangeReservedWord(fieldName);
