@@ -109,14 +109,15 @@ namespace Bridge.Translator
             else if (strict)
             {
                 throw new InvalidOperationException("Could not get output folder as assembly configuration is still null");
-            } else
+            }
+            else
             {
                 this.Logger.Warn("Could not get assembly output folder");
             }
 
             string outputPath = string.IsNullOrWhiteSpace(assemblyOutput)
-                ? outputPath = Path.Combine(basePath, Path.GetDirectoryName(bridgeOptions.OutputLocation))
-                : outputPath = Path.Combine(basePath, assemblyOutput);
+                ? Path.Combine(basePath, Path.GetDirectoryName(bridgeOptions.OutputLocation))
+                : Path.Combine(basePath, assemblyOutput);
 
             // This were for Task
             //string fileName = Path.GetFileNameWithoutExtension(this.Assembly.ItemSpec);
@@ -182,13 +183,14 @@ namespace Bridge.Translator
                 else if (assemblyConfig.Logging.TimeStamps.HasValue)
                 {
                     logger.UseTimeStamp = assemblyConfig.Logging.TimeStamps.Value;
-                }else
+                }
+                else
                 {
                     logger.UseTimeStamp = true;
                 }
 
-
                 var fileLoggerWriter = logger.GetFileLogger();
+                
                 if (fileLoggerWriter != null)
                 {
                     var logFileFolder = assemblyConfig.Logging.Folder;
