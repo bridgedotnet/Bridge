@@ -5,5 +5,9 @@
   "outputBy": "ClassPath",
   "logging": {
     "level": "None"
+  },
+  "assembly": {
+    "disableInitAssembly": true,
+    "enableReservedNamespaces": true
   }
 }

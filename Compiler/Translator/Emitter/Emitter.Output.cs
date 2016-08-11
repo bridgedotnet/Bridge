@@ -43,6 +43,7 @@ namespace Bridge.Translator
 
             Dictionary<string, string> result = new Dictionary<string, string>();
             bool metaDataWritten = false;
+            var disableAsm = this.AssemblyInfo.Assembly.DisableInitAssembly;
             foreach (var outputPair in this.Outputs)
             {
                 var fileName = outputPair.Key;
@@ -68,43 +69,48 @@ namespace Bridge.Translator
 
                 if (output.NonModuletOutput.Length > 0)
                 {
+                    
                     if (isJs)
                     {
-                        tmp.Append("Bridge.initAssembly(");
-                        if (this.Translator.AssemblyName != null)
+                        if (!disableAsm)
                         {
-                            tmp.Append("\"");
-                            tmp.Append(this.Translator.AssemblyName);
-                            tmp.Append("\"");
-                        }
-                        else
-                        {
-                            tmp.Append("null");
-                        }
-
-                        tmp.Append(", ");
-
-                        if (!metaDataWritten && (this.MetaDataOutputName == null || fileName == this.MetaDataOutputName))
-                        {
-                            var res = this.GetIncludedResources();
-
-                            if (res != null)
+                            tmp.Append("Bridge.initAssembly(");
+                            string asmName = this.AssemblyInfo.Assembly.FullName ?? this.Translator.AssemblyName;
+                            if (!string.IsNullOrEmpty(asmName))
                             {
-                                tmp.Append(res);
-                                tmp.Append(", ");
+                                tmp.Append("\"");
+                                tmp.Append(this.Translator.AssemblyName);
+                                tmp.Append("\"");
+                            }
+                            else
+                            {
+                                tmp.Append("null");
                             }
 
-                            metaDataWritten = true;
-                        }
+                            tmp.Append(", ");
 
-                        tmp.Append("function ($asm, globals) {");
-                        tmp.Append("\n");
-                        tmp.Append("    ");
-                        tmp.Append(this.GetOutputHeader());
-                        tmp.Append("\n");
+                            if (!metaDataWritten && (this.MetaDataOutputName == null || fileName == this.MetaDataOutputName))
+                            {
+                                var res = this.GetIncludedResources();
+
+                                if (res != null)
+                                {
+                                    tmp.Append(res);
+                                    tmp.Append(", ");
+                                }
+
+                                metaDataWritten = true;
+                            }
+
+                            tmp.Append("function ($asm, globals) {");
+                            tmp.Append("\n");
+                            tmp.Append("    ");
+                            tmp.Append(this.GetOutputHeader());
+                            tmp.Append("\n");
+                        }
                     }
 
-                    var afterOutput = (isJs ? "\n\nBridge.init();" : "");
+                    var afterOutput = (isJs && !disableAsm ? "\n\nBridge.init();" : "");
                     var code = output.NonModuletOutput.ToString() + afterOutput;
 
                     if (isJs)
@@ -114,7 +120,7 @@ namespace Bridge.Translator
 
                     tmp.Append(code);
 
-                    if (isJs)
+                    if (isJs && !disableAsm)
                     {
                         tmp.Append("\n");
                         tmp.Append("});");

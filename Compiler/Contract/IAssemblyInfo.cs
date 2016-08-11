@@ -277,6 +277,12 @@ namespace Bridge.Contract
         {
             get; set;
         }
+
+        AssemblyConfig Assembly
+        {
+            get;
+            set;
+        }
     }
 
     public class LoggingOptions
@@ -286,5 +292,23 @@ namespace Bridge.Contract
         public long? MaxSize { get; set; }
         public string Folder { get; set; }
         public string FileName { get; set; }
+    }
+
+    public class AssemblyConfig
+    {
+        public bool DisableInitAssembly
+        {
+            get; set;
+        }
+
+        public bool EnableReservedNamespaces
+        {
+            get; set;
+        }
+
+        public string FullName
+        {
+            get; set;
+        }
     }
 }

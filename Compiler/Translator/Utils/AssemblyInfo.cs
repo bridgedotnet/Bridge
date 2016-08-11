@@ -15,6 +15,7 @@ namespace Bridge.Translator
             this.Logging = new LoggingOptions();
             this.Reflection = new ReflectionConfig();
             this.ReflectionInternal = new ReflectionConfig();
+            this.Assembly = new AssemblyConfig();
         }
 
         /// <summary>
@@ -306,6 +307,11 @@ namespace Bridge.Translator
         }
 
         internal IReflectionConfig ReflectionInternal
+        {
+            get; set;
+        }
+
+        public AssemblyConfig Assembly
         {
             get; set;
         }

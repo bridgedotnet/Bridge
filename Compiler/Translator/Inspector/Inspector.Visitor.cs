@@ -27,7 +27,10 @@ namespace Bridge.Translator
                 throw (EmitterException)this.CreateException(namespaceDeclaration, "Nested namespaces are not supported");
             }
 
-            ValidateNamespace(namespaceDeclaration);
+            if (!this.AssemblyInfo.Assembly.EnableReservedNamespaces)
+            {
+                ValidateNamespace(namespaceDeclaration);
+            }
 
             var prevNamespace = this.Namespace;
 
