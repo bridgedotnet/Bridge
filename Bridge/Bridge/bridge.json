@@ -3,8 +3,9 @@
   "cleanOutputFolderBeforeBuild": true,
   "outputFormatting": "Formatted",
   "outputBy": "ClassPath",
+  "generateDocumentation": "None",
   "logging": {
-    "level": "Trace"
+    "level": "None"
   },
   "assembly": {
     "disableInitAssembly": true,
