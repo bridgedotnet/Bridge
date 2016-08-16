@@ -1,13 +1,14 @@
 ﻿{
-  "output": "",
+  "output": "Resources\\Transpiled",
   "cleanOutputFolderBeforeBuild": true,
   "outputFormatting": "Formatted",
   "outputBy": "ClassPath",
   "logging": {
-    "level": "None"
+    "level": "Trace"
   },
   "assembly": {
     "disableInitAssembly": true,
-    "enableReservedNamespaces": true
+    "enableReservedNamespaces": true
+    //fullName: ""
   }
 }

@@ -810,6 +810,7 @@
     <EmbeddedResource Include="Resources\bridge.d.ts" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Bridge\bridge.json" />
     <None Include="Resources\Bridge.jsb">
       <SubType>Designer</SubType>
     </None>

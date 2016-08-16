@@ -51,7 +51,6 @@
     </Compile>
     <Compile Include="System\Random.cs" />
     <Compile Include="System\Threading\Timer.cs" />
-    <None Include="Bridge\bridge.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bridge\Bridge.csproj">
@@ -71,13 +70,13 @@
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <PropertyGroup Condition="'$(OS)' != 'Unix'">
     <PostBuildEvent>
-REM Run Bridge Compiler for the project
-"$(ProjectDir)..\Compiler\Builder\$(OutDir)Bridge.Builder.exe" -p "$(ProjectPath)" -b "$(ProjectDir)$(OutDir)Bridge.dll" -cfg "$(Configuration)"
+      REM Run Bridge Compiler for the project
+      "$(ProjectDir)..\Compiler\Builder\$(OutDir)Bridge.Builder.exe" -p "$(ProjectDir)..\Bridge\Bridge.csproj" -b "$(ProjectDir)..\Bridge\$(OutDir)Bridge.dll" -cfg "$(Configuration)"
     </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(OS)' == 'Unix'">
     <PostBuildEvent>
-mono "$(ProjectDir)../Compiler/Builder/$(OutDir)Bridge.Builder.exe" -p "$(ProjectDir)/$(MSBuildProjectFile)" -b "$(ProjectDir)$(OutDir)Bridge.dll" -cfg "$(Configuration)"
+      mono "$(ProjectDir)../Compiler/Builder/$(OutDir)Bridge.Builder.exe" -p "$(ProjectDir)../Bridge/Bridge.csproj" -b "$(ProjectDir)../Bridge/$(OutDir)Bridge.dll" -cfg "$(Configuration)"
     </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
