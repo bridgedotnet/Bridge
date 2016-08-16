@@ -829,27 +829,4 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
-  <!-- NuGet packaging starts -->
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <NuGetBuildPackage>true</NuGetBuildPackage>
-  </PropertyGroup>
-  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <NuGetPackageSourcePath Include="$(SolutionDir).build\specs\Bridge.Core.nuspec">
-      <Path>$(SolutionDir).build\specs\Bridge.Core.nuspec</Path>
-    </NuGetPackageSourcePath>
-  </ItemGroup>
-  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <NuGetPackageSourcePath Include="$(SolutionDir).build\specs\Bridge.nuspec">
-      <Path>$(SolutionDir).build\specs\Bridge.nuspec</Path>
-    </NuGetPackageSourcePath>
-  </ItemGroup>
-  <Import Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " Project="$(SolutionDir)\.build\common\NuGet.Build.Package.targets" />
-  <Target Name="CleanProjectNuGetOutput" BeforeTargets="Clean">
-    <ItemGroup>
-      <FilesToDelete Include="$(ProjectDir)$(OutDir)Bridge.*.nupkg" />
-    </ItemGroup>
-    <Message Text="Cleaning NuGet packages in $(ProjectDir)$(OutDir)" Importance="high" />
-    <Delete Files="@(FilesToDelete)" ContinueOnError="true" />
-  </Target>
-  <!-- NuGet packaging finishes -->
 </Project>
