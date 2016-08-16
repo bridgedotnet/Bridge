@@ -77,15 +77,18 @@ namespace Bridge.Translator
                 incAtt.SetValue(incAtt.Value.Replace("\\", "/"));
             }
 
-            foreach (var tag in combined_tags)
+            if (!this.AssemblyInfo.Assembly.EnableReservedNamespaces)
             {
-                if (tag.Value == "Bridge")
+                foreach (var tag in combined_tags)
                 {
-                    valid = false;
-                    if (!failList.Contains(tag.Value))
+                    if (tag.Value == "Bridge")
                     {
-                        failList.Add(tag.Value);
-                        failNodeList.Add(tag);
+                        valid = false;
+                        if (!failList.Contains(tag.Value))
+                        {
+                            failList.Add(tag.Value);
+                            failNodeList.Add(tag);
+                        }
                     }
                 }
             }

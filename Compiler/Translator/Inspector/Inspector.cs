@@ -282,6 +282,11 @@ namespace Bridge.Translator
         /// <param name="tpDecl">The TypeDefinition object of the validated item.</param>
         private void ValidateNamespace(TypeDeclaration tpDecl)
         {
+            if (this.AssemblyInfo.Assembly.EnableReservedNamespaces)
+            {
+                return;
+            }
+
             ICSharpCode.NRefactory.CSharp.Attribute nsAt;
             if (this.TryGetAttribute(tpDecl, "Namespace", out nsAt))
             {
