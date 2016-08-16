@@ -52,8 +52,9 @@ namespace Bridge.Translator
             string ignoreAttr = Translator.Bridge_ASSEMBLY + ".IgnoreAttribute";
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
             string objectLiteralAttr = Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute";
+            string nonScriptableAttr = Translator.Bridge_ASSEMBLY + ".NonScriptableAttribute";
 
-            return this.HasAttribute(type.CustomAttributes, ignoreAttr) || this.HasAttribute(type.CustomAttributes, externalAttr) || (!ignoreLiteral && this.HasAttribute(type.CustomAttributes, objectLiteralAttr));
+            return this.HasAttribute(type.CustomAttributes, ignoreAttr) || this.HasAttribute(type.CustomAttributes, externalAttr) || (!ignoreLiteral && this.HasAttribute(type.CustomAttributes, objectLiteralAttr)) || this.HasAttribute(type.CustomAttributes, nonScriptableAttr);
         }
 
         public virtual bool IsIgnoreType(IEntity enity, bool ignoreLiteral = false)
@@ -61,10 +62,12 @@ namespace Bridge.Translator
             string ignoreAttr = Translator.Bridge_ASSEMBLY + ".IgnoreAttribute";
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
             string objectLiteralAttr = Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute";
+            string nonScriptableAttr = Translator.Bridge_ASSEMBLY + ".NonScriptableAttribute";
 
             return this.HasAttribute(enity.Attributes, ignoreAttr)
                    || this.HasAttribute(enity.Attributes, externalAttr)
-                   || (!ignoreLiteral && this.HasAttribute(enity.Attributes, objectLiteralAttr));
+                   || (!ignoreLiteral && this.HasAttribute(enity.Attributes, objectLiteralAttr))
+                   || this.HasAttribute(enity.Attributes, nonScriptableAttr);
         }
 
         public virtual bool IsBridgeClass(TypeDefinition type)

@@ -192,7 +192,7 @@ namespace Bridge.Translator
             this.BridgeTypes = new BridgeTypes();
             this.AssemblyDefinition = assembly;
 
-            if (assembly.Name.Name != Translator.Bridge_ASSEMBLY)
+            if (assembly.Name.Name != Translator.Bridge_ASSEMBLY || this.AssemblyInfo.Assembly != null && this.AssemblyInfo.Assembly.EnableReservedNamespaces)
             {
                 this.ReadTypes(assembly);
             }

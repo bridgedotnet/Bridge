@@ -58,7 +58,7 @@ namespace Bridge.Translator
             var add = true;
             var ignored = this.IgnoredTypes.Contains(fullName);
 
-            if (ignored || this.HasIgnore(typeDeclaration) && !this.IsObjectLiteral(typeDeclaration))
+            if (ignored || this.HasIgnore(typeDeclaration) || this.IsNonScriptable(typeDeclaration) && !this.IsObjectLiteral(typeDeclaration))
             {
                 if (partialType != null)
                 {
