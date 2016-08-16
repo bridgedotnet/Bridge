@@ -11,11 +11,9 @@
     <AssemblyName>Bridge.Transpiled</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
-    <AdditionalExplicitAssemblyReferences />
+    <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>eebaf867</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,7 +23,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <NoStdLib>True</NoStdLib>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -35,7 +32,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <NoStdLib>True</NoStdLib>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="$(OS) != Unix">
@@ -49,35 +45,19 @@
     <Compile Include="..\.build\common\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="System\Random.cs" />
-    <Compile Include="System\Threading\Timer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Bridge\Bridge.csproj">
-      <Project>{de78b8b7-c0f5-415b-a70b-02194433f450}</Project>
-      <Name>Bridge</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Html5\Bridge.Html5.csproj">
-      <Project>{99decd28-d3e3-4ea7-acae-ab5dfc9913bd}</Project>
-      <Name>Bridge.Html5</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="transpiled\system\random.js" />
-    <Content Include="transpiled\system\threading\timer.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <PropertyGroup Condition="'$(OS)' != 'Unix'">
-    <PostBuildEvent>
+    <PreBuildEvent>
       REM Run Bridge Compiler for the project
       "$(ProjectDir)..\Compiler\Builder\$(OutDir)Bridge.Builder.exe" -p "$(ProjectDir)..\Bridge\Bridge.csproj" -b "$(ProjectDir)..\Bridge\$(OutDir)Bridge.dll" -cfg "$(Configuration)"
-    </PostBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(OS)' == 'Unix'">
-    <PostBuildEvent>
+    <PreBuildEvent>
       mono "$(ProjectDir)../Compiler/Builder/$(OutDir)Bridge.Builder.exe" -p "$(ProjectDir)../Bridge/Bridge.csproj" -b "$(ProjectDir)../Bridge/$(OutDir)Bridge.dll" -cfg "$(Configuration)"
-    </PostBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
