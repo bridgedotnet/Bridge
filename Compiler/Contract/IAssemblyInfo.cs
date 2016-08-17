@@ -375,6 +375,11 @@ namespace Bridge.Contract
             get; set;
         }
 
+        public bool SubDirs
+        {
+            get; set;
+        }
+
         public string[] Locations
         {
             get; set;

@@ -566,7 +566,7 @@ namespace Bridge.Translator
 
         private void ReadResourseItem(string outputPath, StringBuilder resourceBuffer, ResourceItem item)
         {
-            this.Log.Trace("Reading resource item with Source = " + item.Source + " and Dir = " + item.Dir);
+            this.Log.Trace("Reading resource item with Source = " + item.Source + " and Dir = " + item.Dir + " and SubDirs = " + item.SubDirs);
 
             if (item.Source == ResourceItemSource.File || item.Source == ResourceItemSource.Output)
             {
@@ -606,9 +606,10 @@ namespace Bridge.Translator
                             break;
                         }
 
-                        this.Log.Trace("Searching files for resources in folder: " + directoryPath);
+                        var searchOption = item.SubDirs ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
+                        this.Log.Trace("Searching files for resources in folder: " + directoryPath + " with search option: " + searchOption.ToString());
 
-                        var files = directory.GetFiles(filePathCleaned, SearchOption.AllDirectories);
+                        var files = directory.GetFiles(filePathCleaned, searchOption);
 
                         if (!files.Any())
                         {
