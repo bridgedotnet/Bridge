@@ -804,9 +804,10 @@
     <Content Include="Resources\Nullable.js" />
     <Content Include="Resources\Core.js" />
     <Content Include="Resources\Validation.js" />
-    <Content Include="Resources\.typescript\bridge.d.ts" />  </ItemGroup>
+    <Content Include="Resources\.typescript\bridge.d.ts" />
+  </ItemGroup>
   <ItemGroup>
-    <None Include="Bridge\bridge.json" />
+    <None Include="bridge.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
