@@ -1,14 +1,5 @@
-﻿    // @source timer.js
-
-    Bridge.define('System.Threading.Timer', {
+﻿    Bridge.define('System.Threading.Timer', {
         inherits: [System.IDisposable],
-
-        config: {
-            alias: [
-                "dispose", "System$IDisposable$dispose"
-            ]
-        },
-
         statics: {
             MAX_SUPPORTED_TIMEOUT: 4294967294,
             EXC_LESS: "Number must be either non-negative and less than or equal to Int32.MaxValue or -1.",
@@ -21,6 +12,11 @@
         state: null,
         id: null,
         disposed: false,
+        config: {
+            alias: [
+            "dispose", "System$IDisposable$dispose"
+            ]
+        },
         $constructor1: function (callback, state, dueTime, period) {
             this.$initialize();
             this.timerSetup(callback, state, System.Int64(dueTime), System.Int64(period));
@@ -29,7 +25,7 @@
             this.$initialize();
             var dueTm = Bridge.Int.clip64(dueTime.getTotalMilliseconds());
             var periodTm = Bridge.Int.clip64(period.getTotalMilliseconds());
-
+    
             this.timerSetup(callback, state, dueTm, periodTm);
         },
         $constructor4: function (callback, state, dueTime, period) {
@@ -46,18 +42,18 @@
             var period = -1; // Change after a timer instance is created.  This is to avoid the potential
             // for a timer to be fired before the returned value is assigned to the variable,
             // potentially causing the callback to reference a bogus value (if passing the timer to the callback).
-
+    
             this.timerSetup(callback, this, System.Int64(dueTime), System.Int64(period));
         },
         timerSetup: function (callback, state, dueTime, period) {
             if (this.disposed) {
                 throw new System.InvalidOperationException(System.Threading.Timer.EXC_DISPOSED);
             }
-
+    
             if (Bridge.staticEquals(callback, null)) {
                 throw new System.ArgumentNullException("TimerCallback");
             }
-
+    
             if (dueTime.lt(System.Int64(-1))) {
                 throw new System.ArgumentOutOfRangeException("dueTime", System.Threading.Timer.EXC_LESS);
             }
@@ -70,24 +66,24 @@
             if (period.gt(System.Int64(System.Threading.Timer.MAX_SUPPORTED_TIMEOUT))) {
                 throw new System.ArgumentOutOfRangeException("period", System.Threading.Timer.EXC_MORE);
             }
-
+    
             this.dueTime = dueTime;
             this.period = period;
-
+    
             this.state = state;
             this.timerCallback = callback;
-
+    
             return this.runTimer(this.dueTime);
         },
         handleCallback: function () {
             if (this.disposed) {
                 return;
             }
-
+    
             if (!Bridge.staticEquals(this.timerCallback, null)) {
                 var myId = this.id;
                 this.timerCallback(this.state);
-
+    
                 // timerCallback may call Change(). To prevent double call we can check if timer changed
                 if (System.Nullable.eq(this.id, myId)) {
                     this.runTimer(this.period, false);
@@ -95,19 +91,17 @@
             }
         },
         runTimer: function (period, checkDispose) {
-            if (checkDispose === void 0) {
-                checkDispose = true;
-            }
+            if (checkDispose === void 0) { checkDispose = true; }
             if (checkDispose && this.disposed) {
                 throw new System.InvalidOperationException(System.Threading.Timer.EXC_DISPOSED);
             }
-
+    
             if (period.ne(System.Int64(-1)) && !this.disposed) {
                 var p = period.toNumber();
                 this.id = Bridge.global.setTimeout(Bridge.fn.bind(this, this.handleCallback), p);
                 return true;
             }
-
+    
             return false;
         },
         change: function (dueTime, period) {
@@ -128,7 +122,7 @@
         },
         clearTimeout: function () {
             if (System.Nullable.hasValue(this.id)) {
-                window.clearTimeout(System.Nullable.getValue(this.id));
+                Bridge.global.clearTimeout(System.Nullable.getValue(this.id));
                 this.id = null;
             }
         },
@@ -137,3 +131,5 @@
             this.disposed = true;
         }
     });
+    
+    

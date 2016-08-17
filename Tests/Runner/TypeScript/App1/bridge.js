@@ -2,9 +2,9 @@
  * @version   : 15.0.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
  * @date      : 2016-09-12
- * @copyright : Copyright (c) 2008-2016, Object.NET, Inc. (http://object.net/). All rights reserved.
+ * @copyright : Copyright 2008-2016 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE.
- */
+*/
 
 (function (globals) {
     "use strict";
@@ -16174,144 +16174,6 @@ Bridge.define('System.Collections.ObjectModel.ReadOnlyCollection$1', function (T
     System.Linq.Enumerable = Enumerable;
 })(Bridge.global);
 
-    // @source random.js
-
-    Bridge.define('System.Random', {
-        statics: {
-            MBIG: 2147483647,
-            MSEED: 161803398,
-            MZ: 0
-        },
-        inext: 0,
-        inextp: 0,
-        seedArray: null,
-        config: {
-            init: function () {
-                this.seedArray = System.Array.init(56, 0);
-            }
-        },
-        constructor: function () {
-            this.$initialize();
-            System.Random.$constructor1.call(this, System.Int64.clip32(System.Int64((new Date()).getTime()).mul(10000)));
-        },
-        $constructor1: function (Seed) {
-            this.$initialize();
-            var ii;
-            var mj, mk;
-
-            //Initialize our Seed array.
-            //This algorithm comes from Numerical Recipes in C (2nd Ed.)
-            var subtraction = (Seed === -2147483648) ? 2147483647 : Math.abs(Seed);
-            mj = (System.Random.MSEED - subtraction) | 0;
-            this.seedArray[55] = mj;
-            mk = 1;
-            for (var i = 1; i < 55; i = (i + 1) | 0) { //Apparently the range [1..55] is special (Knuth) and so we're wasting the 0'th position.
-                ii = (((21 * i) | 0)) % 55;
-                this.seedArray[ii] = mk;
-                mk = (mj - mk) | 0;
-                if (mk < 0) {
-                    mk = (mk + System.Random.MBIG) | 0;
-                }
-                mj = this.seedArray[ii];
-            }
-            for (var k = 1; k < 5; k = (k + 1) | 0) {
-                for (var i1 = 1; i1 < 56; i1 = (i1 + 1) | 0) {
-                    this.seedArray[i1] = (this.seedArray[i1] - this.seedArray[((1 + (((i1 + 30) | 0)) % 55) | 0)]) | 0;
-                    if (this.seedArray[i1] < 0) {
-                        this.seedArray[i1] = (this.seedArray[i1] + System.Random.MBIG) | 0;
-                    }
-                }
-            }
-            this.inext = 0;
-            this.inextp = 21;
-            Seed = 1;
-        },
-        sample: function () {
-            //Including this division at the end gives us significantly improved
-            //random number distribution.
-            return (this.internalSample() * (4.6566128752457969E-10));
-        },
-        internalSample: function () {
-            var retVal;
-            var locINext = this.inext;
-            var locINextp = this.inextp;
-
-            if (((locINext = (locINext + 1) | 0)) >= 56) {
-                locINext = 1;
-            }
-
-            if (((locINextp = (locINextp + 1) | 0)) >= 56) {
-                locINextp = 1;
-            }
-
-            retVal = (this.seedArray[locINext] - this.seedArray[locINextp]) | 0;
-
-            if (retVal === System.Random.MBIG) {
-                retVal = (retVal - 1) | 0;
-            }
-
-            if (retVal < 0) {
-                retVal = (retVal + System.Random.MBIG) | 0;
-            }
-
-            this.seedArray[locINext] = retVal;
-
-            this.inext = locINext;
-            this.inextp = locINextp;
-
-            return retVal;
-        },
-        next: function () {
-            return this.internalSample();
-        },
-        next$2: function (minValue, maxValue) {
-            if (minValue > maxValue) {
-                throw new System.ArgumentOutOfRangeException("minValue", "'minValue' cannot be greater than maxValue.");
-            }
-
-            var range = System.Int64(maxValue).sub(System.Int64(minValue));
-            if (range.lte(System.Int64(2147483647))) {
-                return (((Bridge.Int.clip32(this.sample() * System.Int64.toNumber(range)) + minValue) | 0));
-            } else {
-                return System.Int64.clip32(Bridge.Int.clip64(this.getSampleForLargeRange() * System.Int64.toNumber(range)).add(System.Int64(minValue)));
-            }
-        },
-        next$1: function (maxValue) {
-            if (maxValue < 0) {
-                throw new System.ArgumentOutOfRangeException("maxValue", "'maxValue' must be greater than zero.");
-            }
-            return Bridge.Int.clip32(this.sample() * maxValue);
-        },
-        getSampleForLargeRange: function () {
-            // The distribution of double value returned by Sample
-            // is not distributed well enough for a large range.
-            // If we use Sample for a range [Int32.MinValue..Int32.MaxValue)
-            // We will end up getting even numbers only.
-
-            var result = this.internalSample();
-            // Note we can't use addition here. The distribution will be bad if we do that.
-            var negative = (this.internalSample() % 2 === 0) ? true : false; // decide the sign based on second sample
-            if (negative) {
-                result = (-result) | 0;
-            }
-            var d = result;
-            d += (2147483646); // get a number in range [0 .. 2 * Int32MaxValue - 1)
-            d /= 4294967293;
-            return d;
-        },
-        nextDouble: function () {
-            return this.sample();
-        },
-        nextBytes: function (buffer) {
-            if (buffer == null) {
-                throw new System.ArgumentNullException("buffer");
-            }
-            for (var i = 0; i < buffer.length; i = (i + 1) | 0) {
-                buffer[i] = ((this.internalSample() % (256))) & 255;
-            }
-        }
-    });
-
     // @source Guid.js
     Bridge.define("System.Guid", {
         inherits: function () {
@@ -22284,17 +22146,145 @@ Bridge.define("System.Text.RegularExpressions.RegexEngineParser", {
         }
     };
 
-    // @source timer.js
-
+    Bridge.define('System.Random', {
+        statics: {
+            MBIG: 2147483647,
+            MSEED: 161803398,
+            MZ: 0
+        },
+        inext: 0,
+        inextp: 0,
+        seedArray: null,
+        config: {
+            init: function () {
+                this.seedArray = System.Array.init(56, 0);
+            }
+        },
+        constructor: function () {
+            System.Random.$constructor1.call(this, System.Int64.clip32(System.Int64((new Date()).getTime()).mul(10000)));
+        },
+        $constructor1: function (seed) {
+            this.$initialize();
+            var ii;
+            var mj, mk;
+    
+            //Initialize our Seed array.
+            //This algorithm comes from Numerical Recipes in C (2nd Ed.)
+            var subtraction = (seed === -2147483648) ? 2147483647 : Math.abs(seed);
+            mj = (System.Random.MSEED - subtraction) | 0;
+            this.seedArray[55] = mj;
+            mk = 1;
+            for (var i = 1; i < 55; i = (i + 1) | 0) { //Apparently the range [1..55] is special (Knuth) and so we're wasting the 0'th position.
+                ii = (((21 * i) | 0)) % 55;
+                this.seedArray[ii] = mk;
+                mk = (mj - mk) | 0;
+                if (mk < 0) {
+                    mk = (mk + System.Random.MBIG) | 0;
+                }
+                mj = this.seedArray[ii];
+            }
+            for (var k = 1; k < 5; k = (k + 1) | 0) {
+                for (var i1 = 1; i1 < 56; i1 = (i1 + 1) | 0) {
+                    this.seedArray[i1] = (this.seedArray[i1] - this.seedArray[((1 + (((i1 + 30) | 0)) % 55) | 0)]) | 0;
+                    if (this.seedArray[i1] < 0) {
+                        this.seedArray[i1] = (this.seedArray[i1] + System.Random.MBIG) | 0;
+                    }
+                }
+            }
+            this.inext = 0;
+            this.inextp = 21;
+            seed = 1;
+        },
+        sample: function () {
+            //Including this division at the end gives us significantly improved
+            //random number distribution.
+            return (this.internalSample() * (4.6566128752457969E-10));
+        },
+        internalSample: function () {
+            var retVal;
+            var locINext = this.inext;
+            var locINextp = this.inextp;
+    
+            if (((locINext = (locINext + 1) | 0)) >= 56) {
+                locINext = 1;
+            }
+    
+            if (((locINextp = (locINextp + 1) | 0)) >= 56) {
+                locINextp = 1;
+            }
+    
+            retVal = (this.seedArray[locINext] - this.seedArray[locINextp]) | 0;
+    
+            if (retVal === System.Random.MBIG) {
+                retVal = (retVal - 1) | 0;
+            }
+    
+            if (retVal < 0) {
+                retVal = (retVal + System.Random.MBIG) | 0;
+            }
+    
+            this.seedArray[locINext] = retVal;
+    
+            this.inext = locINext;
+            this.inextp = locINextp;
+    
+            return retVal;
+        },
+        next: function () {
+            return this.internalSample();
+        },
+        next$2: function (minValue, maxValue) {
+            if (minValue > maxValue) {
+                throw new System.ArgumentOutOfRangeException("minValue", "'minValue' cannot be greater than maxValue.");
+            }
+    
+            var range = System.Int64(maxValue).sub(System.Int64(minValue));
+            if (range.lte(System.Int64(2147483647))) {
+                return (((Bridge.Int.clip32(this.sample() * System.Int64.toNumber(range)) + minValue) | 0));
+            }
+            else  {
+                return System.Int64.clip32(Bridge.Int.clip64(this.getSampleForLargeRange() * System.Int64.toNumber(range)).add(System.Int64(minValue)));
+            }
+        },
+        next$1: function (maxValue) {
+            if (maxValue < 0) {
+                throw new System.ArgumentOutOfRangeException("maxValue", "'maxValue' must be greater than zero.");
+            }
+            return Bridge.Int.clip32(this.sample() * maxValue);
+        },
+        getSampleForLargeRange: function () {
+            // The distribution of double value returned by Sample
+            // is not distributed well enough for a large range.
+            // If we use Sample for a range [Int32.MinValue..Int32.MaxValue)
+            // We will end up getting even numbers only.
+    
+            var result = this.internalSample();
+            // Note we can't use addition here. The distribution will be bad if we do that.
+            var negative = (this.internalSample() % 2 === 0) ? true : false; // decide the sign based on second sample
+            if (negative) {
+                result = (-result) | 0;
+            }
+            var d = result;
+            d += (2147483646); // get a number in range [0 .. 2 * Int32MaxValue - 1)
+            d /= 4294967293;
+            return d;
+        },
+        nextDouble: function () {
+            return this.sample();
+        },
+        nextBytes: function (buffer) {
+            if (buffer == null) {
+                throw new System.ArgumentNullException("buffer");
+            }
+            for (var i = 0; i < buffer.length; i = (i + 1) | 0) {
+                buffer[i] = ((this.internalSample() % (256))) & 255;
+            }
+        }
+    });
+    
+    
     Bridge.define('System.Threading.Timer', {
         inherits: [System.IDisposable],
-
-        config: {
-            alias: [
-                "dispose", "System$IDisposable$dispose"
-            ]
-        },
-
         statics: {
             MAX_SUPPORTED_TIMEOUT: 4294967294,
             EXC_LESS: "Number must be either non-negative and less than or equal to Int32.MaxValue or -1.",
@@ -22307,6 +22297,11 @@ Bridge.define("System.Text.RegularExpressions.RegexEngineParser", {
         state: null,
         id: null,
         disposed: false,
+        config: {
+            alias: [
+            "dispose", "System$IDisposable$dispose"
+            ]
+        },
         $constructor1: function (callback, state, dueTime, period) {
             this.$initialize();
             this.timerSetup(callback, state, System.Int64(dueTime), System.Int64(period));
@@ -22315,7 +22310,7 @@ Bridge.define("System.Text.RegularExpressions.RegexEngineParser", {
             this.$initialize();
             var dueTm = Bridge.Int.clip64(dueTime.getTotalMilliseconds());
             var periodTm = Bridge.Int.clip64(period.getTotalMilliseconds());
-
+    
             this.timerSetup(callback, state, dueTm, periodTm);
         },
         $constructor4: function (callback, state, dueTime, period) {
@@ -22332,18 +22327,18 @@ Bridge.define("System.Text.RegularExpressions.RegexEngineParser", {
             var period = -1; // Change after a timer instance is created.  This is to avoid the potential
             // for a timer to be fired before the returned value is assigned to the variable,
             // potentially causing the callback to reference a bogus value (if passing the timer to the callback).
-
+    
             this.timerSetup(callback, this, System.Int64(dueTime), System.Int64(period));
         },
         timerSetup: function (callback, state, dueTime, period) {
             if (this.disposed) {
                 throw new System.InvalidOperationException(System.Threading.Timer.EXC_DISPOSED);
             }
-
+    
             if (Bridge.staticEquals(callback, null)) {
                 throw new System.ArgumentNullException("TimerCallback");
             }
-
+    
             if (dueTime.lt(System.Int64(-1))) {
                 throw new System.ArgumentOutOfRangeException("dueTime", System.Threading.Timer.EXC_LESS);
             }
@@ -22356,24 +22351,24 @@ Bridge.define("System.Text.RegularExpressions.RegexEngineParser", {
             if (period.gt(System.Int64(System.Threading.Timer.MAX_SUPPORTED_TIMEOUT))) {
                 throw new System.ArgumentOutOfRangeException("period", System.Threading.Timer.EXC_MORE);
             }
-
+    
             this.dueTime = dueTime;
             this.period = period;
-
+    
             this.state = state;
             this.timerCallback = callback;
-
+    
             return this.runTimer(this.dueTime);
         },
         handleCallback: function () {
             if (this.disposed) {
                 return;
             }
-
+    
             if (!Bridge.staticEquals(this.timerCallback, null)) {
                 var myId = this.id;
                 this.timerCallback(this.state);
-
+    
                 // timerCallback may call Change(). To prevent double call we can check if timer changed
                 if (System.Nullable.eq(this.id, myId)) {
                     this.runTimer(this.period, false);
@@ -22381,19 +22376,17 @@ Bridge.define("System.Text.RegularExpressions.RegexEngineParser", {
             }
         },
         runTimer: function (period, checkDispose) {
-            if (checkDispose === void 0) {
-                checkDispose = true;
-            }
+            if (checkDispose === void 0) { checkDispose = true; }
             if (checkDispose && this.disposed) {
                 throw new System.InvalidOperationException(System.Threading.Timer.EXC_DISPOSED);
             }
-
+    
             if (period.ne(System.Int64(-1)) && !this.disposed) {
                 var p = period.toNumber();
                 this.id = Bridge.global.setTimeout(Bridge.fn.bind(this, this.handleCallback), p);
                 return true;
             }
-
+    
             return false;
         },
         change: function (dueTime, period) {
@@ -22414,7 +22407,7 @@ Bridge.define("System.Text.RegularExpressions.RegexEngineParser", {
         },
         clearTimeout: function () {
             if (System.Nullable.hasValue(this.id)) {
-                window.clearTimeout(System.Nullable.getValue(this.id));
+                Bridge.global.clearTimeout(System.Nullable.getValue(this.id));
                 this.id = null;
             }
         },
@@ -22423,7 +22416,8 @@ Bridge.define("System.Text.RegularExpressions.RegexEngineParser", {
             this.disposed = true;
         }
     });
-
+    
+    
     // @source End.js
 
     // module export
@@ -22436,4 +22430,3 @@ Bridge.define("System.Text.RegularExpressions.RegexEngineParser", {
     }
 
 })(this);
-

@@ -319,6 +319,9 @@
     <Compile Include="System\Void.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Transpiled\bridge.js" />
+    <Content Include="Transpiled\system\random.js" />
+    <Content Include="Transpiled\system\threading\timer.js" />
     <EmbeddedResource Include="Resources\Locales\af-ZA.js" />
     <EmbeddedResource Include="Resources\Locales\af.js" />
     <EmbeddedResource Include="Resources\Locales\am-ET.js" />
@@ -741,11 +744,10 @@
     <Content Include="Resources\Convert.js" />
     <Content Include="Resources\Enum.js" />
     <Content Include="Resources\Guid.js" />
-    <Content Include="Resources\LongLib.js" />
+    <Content Include="Resources\.lib\LongLib.js" />
     <Content Include="Resources\Long.js" />
     <Content Include="Resources\Math.js" />
     <Content Include="Resources\Console.js" />
-    <Content Include="Resources\random.js" />
     <Content Include="Resources\FormattableString.js" />
     <Content Include="Resources\Text\RegularExpressions\Regex.js" />
     <Content Include="Resources\Text\RegularExpressions\RegexEngineBranch.js" />
@@ -765,7 +767,6 @@
     <Content Include="Resources\Text\RegularExpressions\RegexParser.js" />
     <Content Include="Resources\Text\RegularExpressions\RegexReplacement.js" />
     <Content Include="Resources\Text\RegularExpressions\RegexRunner.js" />
-    <Content Include="Resources\timer.js" />
     <Content Include="Resources\Reflection.js" />
     <Content Include="Resources\Version.js" />
     <Content Include="Resources\ClientWebSocket.js" />
@@ -774,9 +775,9 @@
     <Content Include="Resources\Array.js" />
     <Content Include="Resources\Collections\Comparer.js" />
     <Content Include="Resources\Decimal.js" />
-    <Content Include="Resources\Finally.js" />
-    <Content Include="Resources\End.js" />
-    <Content Include="Resources\Init.js" />
+    <Content Include="Resources\.auxiliary\Finally.js" />
+    <Content Include="Resources\.auxiliary\End.js" />
+    <Content Include="Resources\.auxiliary\Init.js" />
     <Content Include="Resources\Attribute.js" />
     <Content Include="Resources\Browser.js" />
     <Content Include="Resources\Class.js" />
@@ -791,7 +792,6 @@
     <Content Include="Resources\INotifyPropertyChanged.js" />
     <Content Include="Resources\Date.js" />
     <Content Include="Resources\linq.js" />
-    <EmbeddedResource Include="Resources\list" />
     <EmbeddedResource Include="Resources\Locales\ru-RU.js" />
     <Content Include="Resources\Char.js" />
     <Content Include="Resources\Text\BridgeRegex.js" />
@@ -804,24 +804,11 @@
     <Content Include="Resources\Nullable.js" />
     <Content Include="Resources\Core.js" />
     <Content Include="Resources\Validation.js" />
-    <EmbeddedResource Include="Resources\bridge.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\bridge.d.ts" />
-  </ItemGroup>
+    <Content Include="Resources\.typescript\bridge.d.ts" />  </ItemGroup>
   <ItemGroup>
     <None Include="Bridge\bridge.json" />
-    <None Include="Resources\Bridge.jsb">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Resources\build.bat" />
-    <None Include="Resources\build.sh" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PreBuildEvent Condition="$(OS) != Unix">"$(ProjectDir)\Resources\build.bat"</PreBuildEvent>
-    <PreBuildEvent Condition="$(OS) == Unix">"$(ProjectDir)\Resources\build.sh"</PreBuildEvent>
-  </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

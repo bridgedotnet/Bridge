@@ -1,6 +1,4 @@
-﻿    // @source random.js
-
-    Bridge.define('System.Random', {
+﻿    Bridge.define('System.Random', {
         statics: {
             MBIG: 2147483647,
             MSEED: 161803398,
@@ -15,17 +13,16 @@
             }
         },
         constructor: function () {
-            this.$initialize();
             System.Random.$constructor1.call(this, System.Int64.clip32(System.Int64((new Date()).getTime()).mul(10000)));
         },
-        $constructor1: function (Seed) {
+        $constructor1: function (seed) {
             this.$initialize();
             var ii;
             var mj, mk;
-
+    
             //Initialize our Seed array.
             //This algorithm comes from Numerical Recipes in C (2nd Ed.)
-            var subtraction = (Seed === -2147483648) ? 2147483647 : Math.abs(Seed);
+            var subtraction = (seed === -2147483648) ? 2147483647 : Math.abs(seed);
             mj = (System.Random.MSEED - subtraction) | 0;
             this.seedArray[55] = mj;
             mk = 1;
@@ -48,7 +45,7 @@
             }
             this.inext = 0;
             this.inextp = 21;
-            Seed = 1;
+            seed = 1;
         },
         sample: function () {
             //Including this division at the end gives us significantly improved
@@ -59,30 +56,30 @@
             var retVal;
             var locINext = this.inext;
             var locINextp = this.inextp;
-
+    
             if (((locINext = (locINext + 1) | 0)) >= 56) {
                 locINext = 1;
             }
-
+    
             if (((locINextp = (locINextp + 1) | 0)) >= 56) {
                 locINextp = 1;
             }
-
+    
             retVal = (this.seedArray[locINext] - this.seedArray[locINextp]) | 0;
-
+    
             if (retVal === System.Random.MBIG) {
                 retVal = (retVal - 1) | 0;
             }
-
+    
             if (retVal < 0) {
                 retVal = (retVal + System.Random.MBIG) | 0;
             }
-
+    
             this.seedArray[locINext] = retVal;
-
+    
             this.inext = locINext;
             this.inextp = locINextp;
-
+    
             return retVal;
         },
         next: function () {
@@ -92,11 +89,12 @@
             if (minValue > maxValue) {
                 throw new System.ArgumentOutOfRangeException("minValue", "'minValue' cannot be greater than maxValue.");
             }
-
+    
             var range = System.Int64(maxValue).sub(System.Int64(minValue));
             if (range.lte(System.Int64(2147483647))) {
                 return (((Bridge.Int.clip32(this.sample() * System.Int64.toNumber(range)) + minValue) | 0));
-            } else {
+            }
+            else  {
                 return System.Int64.clip32(Bridge.Int.clip64(this.getSampleForLargeRange() * System.Int64.toNumber(range)).add(System.Int64(minValue)));
             }
         },
@@ -111,7 +109,7 @@
             // is not distributed well enough for a large range.
             // If we use Sample for a range [Int32.MinValue..Int32.MaxValue)
             // We will end up getting even numbers only.
-
+    
             var result = this.internalSample();
             // Note we can't use addition here. The distribution will be bad if we do that.
             var negative = (this.internalSample() % 2 === 0) ? true : false; // decide the sign based on second sample
@@ -135,3 +133,5 @@
             }
         }
     });
+    
+    

@@ -1,5 +1,5 @@
 ﻿{
-  "output": "Resources\\Transpiled",
+  "output": "Transpiled",
   "cleanOutputFolderBeforeBuild": true,
   "outputFormatting": "Formatted",
   "outputBy": "ClassPath",
@@ -11,5 +11,114 @@
     "disableInitAssembly": true,
     "enableReservedNamespaces": true
     //fullName: ""
+  },
+
+  "resources": {
+    "items": [
+      {
+        "name": "bridge.js",
+        "captionInfo": {
+          "version": "{0} - Bridge.NET",
+          "author": "{0} http://bridge.net/",
+          "date": "2016-09-12",
+          "copyright": "{0} http://object.net/",
+          "license": "See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE."
+        },
+        "extract": true,
+        "items": [
+          // Header
+          {
+            "locations": [ "../Resources/.auxiliary/Init.js" ]
+          },
+          // Content
+          {
+            "dir": "../Resources",
+            "locations": [
+              "Core.js",
+              "Nullable.js",
+              "String.js",
+              "Enum.js",
+              "Browser.js",
+              "Class.js",
+              "Reflection.js",
+              "Interfaces.js",
+              "Char.js",
+              "FormattableString.js",
+              "Exception.js",
+              "Globalization.js",
+              "Math.js",
+              "Bool.js",
+              "Integer.js",
+              "Long.js",
+              "Decimal.js",
+              "Date.js",
+              "TimeSpan.js",
+              "Text/StringBuilder.js",
+              "Text/BridgeRegex.js",
+              "Diagnostics.js",
+              "Array.js",
+              "ArraySegment.js",
+              "Collections/Interfaces.js",
+              "Collections/CustomEnumerator.js",
+              "Collections/ArrayEnumerator.js",
+              "Collections/EqualityComparer.js",
+              "Collections/Comparer.js",
+              "Collections/Dictionary.js",
+              "Collections/List.js",
+              "Task.js",
+              "Validation.js",
+              "Version.js",
+              "Attribute.js",
+              "INotifyPropertyChanged.js",
+              "Convert.js",
+              "ClientWebSocket.js",
+              "Uri.js",
+              "linq.js",
+              "Guid.js",
+              "Text/RegularExpressions/Regex.js",
+              "Text/RegularExpressions/RegexCapture.js",
+              "Text/RegularExpressions/RegexCaptureCollection.js",
+              "Text/RegularExpressions/RegexGroup.js",
+              "Text/RegularExpressions/RegexGroupCollection.js",
+              "Text/RegularExpressions/RegexMatch.js",
+              "Text/RegularExpressions/RegexMatchCollection.js",
+              "Text/RegularExpressions/RegexOptions.js",
+              "Text/RegularExpressions/RegexRunner.js",
+              "Text/RegularExpressions/RegexParser.js",
+              "Text/RegularExpressions/RegexNode.js",
+              "Text/RegularExpressions/RegexReplacement.js",
+              "Text/RegularExpressions/RegexEngine.js",
+              "Text/RegularExpressions/RegexEngineBranch.js",
+              "Text/RegularExpressions/RegexEngineState.js",
+              "Text/RegularExpressions/RegexEnginePass.js",
+              "Text/RegularExpressions/RegexEngineProbe.js",
+              "Text/RegularExpressions/RegexEngineParser.js",
+              "Console.js"
+            ]
+          },
+          // transpiled
+          {
+            "dir": "system",
+            "locations": [ "random.js", "threading/timer.js" ]
+          },
+          // Footer
+          {
+            "dir": "../Resources/.auxiliary",
+            "locations": [ "End.js", "Finally.js" ]
+          }
+        ]
+      },
+      {
+        "name": "bridge.d.ts",
+        "captionInfo": {
+          "version": "{0} - Bridge.NET",
+          "author": "{0} http://bridge.net/",
+          "date": "2016-06-08",
+          "copyright": "{0} http://object.net/",
+          "license": "See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE."
+        },
+        "items": [ { "locations": [ "../Resources/.typescript/bridge.d.ts" ] } ]
+      }
+    ]
   }
 }
