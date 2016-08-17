@@ -405,6 +405,8 @@ namespace Bridge.Translator
 
                 foreach (var resource in this.AssemblyInfo.Resources.Items)
                 {
+                    this.Log.Trace("Preparing resource " + resource.Name);
+
                     var resourceBuffer = new StringBuilder();
 
                     if (resource.Caption || resource.CaptionInfo.Any())
@@ -412,10 +414,7 @@ namespace Bridge.Translator
                         this.GenerateResourseCaption(resourceBuffer, resource);
                     }
 
-                    foreach (var item in resource.Items)
-                    {
-                        this.ReadResourseItem(outputPath, resourceBuffer, item);
-                    }
+                    this.ReadResourseFiles(outputPath, resourceBuffer, resource);
 
                     if (resourceBuffer.Length > 0)
                     {
@@ -447,7 +446,11 @@ namespace Bridge.Translator
                     {
                         this.Log.Error("No files found for resource " + resource.Name);
                     }
+
+                    this.Log.Trace("Done preparing resource " + resource.Name);
                 }
+
+                this.Log.Trace("Done preparing resources specified in config...");
             }
             else
             {
@@ -469,6 +472,8 @@ namespace Bridge.Translator
                         this.Log.Error(ex.ToString());
                     }
                 }
+
+                this.Log.Trace("Done preparing output files for resources");
             }
 
             return resourcesToEmbed;
@@ -564,80 +569,64 @@ namespace Bridge.Translator
             }
         }
 
-        private void ReadResourseItem(string outputPath, StringBuilder resourceBuffer, ResourceItem item)
+        private void ReadResourseFiles(string outputPath, StringBuilder resourceBuffer, ResourceConfigItem item)
         {
-            this.Log.Trace("Reading resource item with Source = " + item.Source + " and Dir = " + item.Dir + " and SubDirs = " + item.SubDirs);
+            this.Log.Trace("Reading resource with " + item.Files.Length + " items");
 
-            if (item.Source == ResourceItemSource.File || item.Source == ResourceItemSource.Output)
+            foreach (var fileName in item.Files)
             {
-                foreach (var fileName in item.Locations)
+                this.Log.Trace("Reading resource item(s) in location " + fileName);
+
+                try
                 {
-                    this.Log.Trace("Reading resource item(s) in location " + fileName);
+                    string directoryPath;
 
-                    try
+                    directoryPath = outputPath;
+
+                    var dirPathInFileName = Path.GetDirectoryName(fileName);
+                    var filePathCleaned = fileName;
+                    if (!string.IsNullOrEmpty(dirPathInFileName))
                     {
-                        string directoryPath;
+                        directoryPath = Path.Combine(directoryPath, dirPathInFileName);
+                        this.Log.Trace("Cleaned folder path part: " + dirPathInFileName + " from location: " + fileName + "and added to the directory path: " + directoryPath);
 
-                        if (string.IsNullOrWhiteSpace(item.Dir))
-                        {
-                            directoryPath = outputPath;
-                        }
-                        else
-                        {
-                            this.Log.Trace("Applying Dir: " + item.Dir);
-                            directoryPath = Path.Combine(outputPath, item.Dir);
-                        }
-
-                        var dirPathInFileName = Path.GetDirectoryName(fileName);
-                        var filePathCleaned = fileName;
-                        if (!string.IsNullOrEmpty(dirPathInFileName))
-                        {
-                            directoryPath = Path.Combine(directoryPath, dirPathInFileName);
-                            this.Log.Trace("Cleaned folder path part: " + dirPathInFileName + " from location: " + fileName + "and added to the directory path: " + directoryPath);
-
-                            filePathCleaned = Path.GetFileName(filePathCleaned);
-                        }
-
-                        var directory = new DirectoryInfo(directoryPath);
-
-                        if (!directory.Exists)
-                        {
-                            this.Log.Error("Could not find folder for resources: " + directoryPath);
-                            break;
-                        }
-
-                        var searchOption = item.SubDirs ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
-                        this.Log.Trace("Searching files for resources in folder: " + directoryPath + " with search option: " + searchOption.ToString());
-
-                        var files = directory.GetFiles(filePathCleaned, searchOption);
-
-                        if (!files.Any())
-                        {
-                            this.Log.Error("Could not find any file in folder: " + directoryPath);
-                            break;
-                        }
-
-                        foreach (var file in files)
-                        {
-                            NewLine(resourceBuffer);
-
-                            this.Log.Trace("Reading resource item at " + file.FullName);
-
-                            var content = File.ReadAllText(file.FullName);
-                            resourceBuffer.Append(content);
-
-                            this.Log.Trace("Read " + content.Length + " bytes");
-                        }
+                        filePathCleaned = Path.GetFileName(filePathCleaned);
                     }
-                    catch (Exception ex)
+
+                    var directory = new DirectoryInfo(directoryPath);
+
+                    if (!directory.Exists)
                     {
-                        this.Log.Error(ex.ToString());
+                        this.Log.Error("Could not find folder for resources: " + directoryPath);
+                        break;
+                    }
+
+                    this.Log.Trace("Searching files for resources in folder: " + directoryPath);
+
+                    var files = directory.GetFiles(filePathCleaned, SearchOption.TopDirectoryOnly);
+
+                    if (!files.Any())
+                    {
+                        this.Log.Error("Could not find any file in folder: " + directoryPath);
+                        break;
+                    }
+
+                    foreach (var file in files)
+                    {
+                        NewLine(resourceBuffer);
+
+                        this.Log.Trace("Reading resource item at " + file.FullName);
+
+                        var content = File.ReadAllText(file.FullName);
+                        resourceBuffer.Append(content);
+
+                        this.Log.Trace("Read " + content.Length + " bytes");
                     }
                 }
-            }
-            else
-            {
-                this.Log.Warn("The source is not handled Source = " + item.Source);
+                catch (Exception ex)
+                {
+                    this.Log.Error(ex.ToString());
+                }
             }
         }
 

@@ -87,9 +87,9 @@ namespace Bridge.Translator.Utils
             {
                 foreach (var resourceConfigItem in assemblyInfo.Resources.Items)
                 {
-                    if (resourceConfigItem.Items != null)
+                    if (resourceConfigItem.Files != null)
                     {
-                        foreach (var resourceItem in resourceConfigItem.Items)
+                        foreach (var resourceItem in resourceConfigItem.Files)
                         {
                             ConvertResourcePath(resourceItem);
                         }
@@ -98,32 +98,14 @@ namespace Bridge.Translator.Utils
             }
         }
 
-        private void ConvertResourcePath(ResourceItem resourceItem)
+        private void ConvertResourcePath(string resourceItem)
         {
             if (resourceItem == null)
             {
                 return;
             }
 
-            if (resourceItem.Dir != null)
-            {
-                resourceItem.Dir = helper.ConvertPath(resourceItem.Dir);
-            }
-
-            if (resourceItem.Locations == null)
-            {
-                return;
-            }
-
-            for (int i = 0; i < resourceItem.Locations.Length; i++)
-            {
-                var location = resourceItem.Locations[i];
-
-                if (location != null)
-                {
-                    resourceItem.Locations[i] = helper.ConvertPath(location);
-                }
-            }
+            resourceItem = helper.ConvertPath(resourceItem);
         }
     }
 }

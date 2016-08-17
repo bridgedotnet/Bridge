@@ -327,7 +327,7 @@ namespace Bridge.Contract
     {
         public ResourceConfigItem()
         {
-            this.Items = new ResourceItem[] { };
+            this.Files = new string[] { };
             this.CaptionInfo = new Dictionary<string, string>();
         }
 
@@ -351,58 +351,9 @@ namespace Bridge.Contract
             get; set;
         }
 
-        public ResourceItem[] Items
+        public string[] Files
         {
             get; set;
         }
-    }
-
-    public class ResourceItem
-    {
-        public ResourceItem()
-        {
-            this.Source = ResourceItemSource.File;
-            this.Locations = new string[] { };
-        }
-
-        public ResourceItemSource Source
-        {
-            get; set;
-        }
-
-        public string Dir
-        {
-            get; set;
-        }
-
-        public bool SubDirs
-        {
-            get; set;
-        }
-
-        public string[] Locations
-        {
-            get; set;
-        }
-    }
-
-    public enum ResourceItemSource
-    {
-        None = 0,
-
-        /// <summary>
-        /// Resource item can be found by generated file name
-        /// </summary>
-        Output = 1,
-
-        /// <summary>
-        /// Resource item can be found by project resource name
-        /// </summary>
-        Resources = 2,
-
-        /// <summary>
-        /// Resource item can be found by a relative file name
-        /// </summary>
-        File = 3,
     }
 }
