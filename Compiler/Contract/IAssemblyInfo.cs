@@ -83,110 +83,92 @@ namespace Bridge.Contract
     {
         bool PreserveMemberCase
         {
-            get;
-            set;
+            get; set;
         }
 
         System.Collections.Generic.List<IPluginDependency> Dependencies
         {
-            get;
-            set;
+            get; set;
         }
 
         string FileName
         {
-            get;
-            set;
+            get; set;
         }
 
         OutputBy OutputBy
         {
-            get;
-            set;
+            get; set;
         }
 
         FileNameCaseConvert FileNameCasing
         {
-            get;
-            set;
+            get; set;
         }
 
         JavaScriptOutputType OutputFormatting
         {
-            get;
-            set;
+            get; set;
         }
 
         string Module
         {
-            get;
-            set;
+            get; set;
         }
 
         string Output
         {
-            get;
-            set;
+            get; set;
         }
 
         int StartIndexInName
         {
-            get;
-            set;
+            get; set;
         }
 
         string BeforeBuild
         {
-            get;
-            set;
+            get; set;
         }
 
         string AfterBuild
         {
-            get;
-            set;
+            get; set;
         }
 
         bool AutoPropertyToField
         {
-            get;
-            set;
+            get; set;
         }
 
         string PluginsPath
         {
-            get;
-            set;
+            get; set;
         }
 
         bool GenerateTypeScript
         {
-            get;
-            set;
+            get; set;
         }
 
         DocumentationMode GenerateDocumentation
         {
-            get;
-            set;
+            get; set;
         }
 
         string BuildArguments
         {
-            get;
-            set;
+            get; set;
         }
 
         string Configuration
         {
-            get;
-            set;
+            get; set;
         }
 
         List<string> DefineConstants
         {
-            get;
-            set;
+            get; set;
         }
 
         /// <summary>
@@ -195,8 +177,7 @@ namespace Bridge.Contract
         /// </summary>
         bool CleanOutputFolderBeforeBuild
         {
-            get;
-            set;
+            get; set;
         }
 
         /// <summary>
@@ -204,68 +185,57 @@ namespace Bridge.Contract
         /// </summary>
         string CleanOutputFolderBeforeBuildPattern
         {
-            get;
-            set;
+            get; set;
         }
 
         bool InjectScriptToAssembly
         {
-            get;
-            set;
+            get; set;
         }
 
         string Locales
         {
-            get;
-            set;
+            get; set;
         }
 
         string LocalesOutput
         {
-            get;
-            set;
+            get; set;
         }
 
         string LocalesFileName
         {
-            get;
-            set;
+            get; set;
         }
 
         bool CombineLocales
         {
-            get;
-            set;
+            get; set;
         }
 
         bool CombineScripts
         {
-            get;
-            set;
+            get; set;
         }
 
         bool UseTypedArrays
         {
-            get;
-            set;
+            get; set;
         }
 
         bool IgnoreCast
         {
-            get;
-            set;
+            get; set;
         }
 
         LoggingOptions Logging
         {
-            get;
-            set;
+            get; set;
         }
 
         OverflowMode? OverflowMode
         {
-            get;
-            set;
+            get; set;
         }
 
         bool StrictNullChecks
@@ -280,18 +250,41 @@ namespace Bridge.Contract
 
         AssemblyConfig Assembly
         {
-            get;
-            set;
+            get; set;
+        }
+
+        ResourceConfig Resources
+        {
+            get; set;
         }
     }
 
     public class LoggingOptions
     {
-        public LoggerLevel? Level { get; set; }
-        public bool? TimeStamps { get; set; }
-        public long? MaxSize { get; set; }
-        public string Folder { get; set; }
-        public string FileName { get; set; }
+        public LoggerLevel? Level
+        {
+            get; set;
+        }
+
+        public bool? TimeStamps
+        {
+            get; set;
+        }
+
+        public long? MaxSize
+        {
+            get; set;
+        }
+
+        public string Folder
+        {
+            get; set;
+        }
+
+        public string FileName
+        {
+            get; set;
+        }
     }
 
     public class AssemblyConfig
@@ -310,5 +303,101 @@ namespace Bridge.Contract
         {
             get; set;
         }
+    }
+
+    public class ResourceConfig
+    {
+        public ResourceConfig()
+        {
+            this.Items = new ResourceConfigItem[] { };
+        }
+
+        public ResourceConfigItem[] Items
+        {
+            get; set;
+        }
+
+        public bool HasResources()
+        {
+            return this.Items != null && this.Items.Length > 0;
+        }
+    }
+
+    public class ResourceConfigItem
+    {
+        public ResourceConfigItem()
+        {
+            this.Items = new ResourceItem[] { };
+            this.CaptionInfo = new Dictionary<string, string>();
+        }
+
+        public bool Caption
+        {
+            get; set;
+        }
+
+        public Dictionary<string, string> CaptionInfo
+        {
+            get; set;
+        }
+
+        public bool Extract
+        {
+            get; set;
+        }
+
+        public string Name
+        {
+            get; set;
+        }
+
+        public ResourceItem[] Items
+        {
+            get; set;
+        }
+    }
+
+    public class ResourceItem
+    {
+        public ResourceItem()
+        {
+            this.Source = ResourceItemSource.File;
+            this.Locations = new string[] { };
+        }
+
+        public ResourceItemSource Source
+        {
+            get; set;
+        }
+
+        public string Dir
+        {
+            get; set;
+        }
+
+        public string[] Locations
+        {
+            get; set;
+        }
+    }
+
+    public enum ResourceItemSource
+    {
+        None = 0,
+
+        /// <summary>
+        /// Resource item can be found by generated file name
+        /// </summary>
+        Output = 1,
+
+        /// <summary>
+        /// Resource item can be found by project resource name
+        /// </summary>
+        Resources = 2,
+
+        /// <summary>
+        /// Resource item can be found by a relative file name
+        /// </summary>
+        File = 3,
     }
 }

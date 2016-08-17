@@ -82,6 +82,48 @@ namespace Bridge.Translator.Utils
             {
                 assemblyInfo.Logging.Folder = helper.ConvertPath(assemblyInfo.Logging.Folder);
             }
+
+            if (assemblyInfo.Resources != null)
+            {
+                foreach (var resourceConfigItem in assemblyInfo.Resources.Items)
+                {
+                    if (resourceConfigItem.Items != null)
+                    {
+                        foreach (var resourceItem in resourceConfigItem.Items)
+                        {
+                            ConvertResourcePath(resourceItem);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void ConvertResourcePath(ResourceItem resourceItem)
+        {
+            if (resourceItem == null)
+            {
+                return;
+            }
+
+            if (resourceItem.Dir != null)
+            {
+                resourceItem.Dir = helper.ConvertPath(resourceItem.Dir);
+            }
+
+            if (resourceItem.Locations == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < resourceItem.Locations.Length; i++)
+            {
+                var location = resourceItem.Locations[i];
+
+                if (location != null)
+                {
+                    resourceItem.Locations[i] = helper.ConvertPath(location);
+                }
+            }
         }
     }
 }

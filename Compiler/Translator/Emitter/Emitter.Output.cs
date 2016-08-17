@@ -69,7 +69,6 @@ namespace Bridge.Translator
 
                 if (output.NonModuletOutput.Length > 0)
                 {
-                    
                     if (isJs)
                     {
                         if (!disableAsm)
