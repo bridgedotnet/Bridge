@@ -322,6 +322,9 @@
     <Content Include="Transpiled\bridge.js" />
     <Content Include="Transpiled\system\random.js" />
     <Content Include="Transpiled\system\threading\timer.js" />
+    <Content Include="Transpiled\system\version.js" />
+    <Content Include="Transpiled\system\version\parseFailureKind.js" />
+    <Content Include="Transpiled\system\version\versionResult.js" />
     <EmbeddedResource Include="Resources\Locales\af-ZA.js" />
     <EmbeddedResource Include="Resources\Locales\af.js" />
     <EmbeddedResource Include="Resources\Locales\am-ET.js" />
@@ -768,7 +771,6 @@
     <Content Include="Resources\Text\RegularExpressions\RegexReplacement.js" />
     <Content Include="Resources\Text\RegularExpressions\RegexRunner.js" />
     <Content Include="Resources\Reflection.js" />
-    <Content Include="Resources\Version.js" />
     <Content Include="Resources\ClientWebSocket.js" />
     <Content Include="Resources\Uri.js" />
     <None Include="AdditionalCompilerOptions.txt" />

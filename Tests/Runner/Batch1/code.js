@@ -23399,8 +23399,12 @@
     
                 Bridge.Test.Assert.false$1(System.Version.op_Equality(v1, null), "v1 == null");
                 Bridge.Test.Assert.true$1(System.Version.op_Inequality(v1, null), "v1 != null");
-                Bridge.Test.Assert.true$1(System.Version.op_GreaterThan(v1, null), "v1 > null");
-                Bridge.Test.Assert.true$1(System.Version.op_GreaterThanOrEqual(v1, null), "v1 >= null");
+                Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                    var b = System.Version.op_GreaterThan(v1, null);
+                }, "v1 > null");
+                Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                    var b = System.Version.op_GreaterThanOrEqual(v1, null);
+                }, "v1 >= null");
                 Bridge.Test.Assert.false$1(System.Version.op_LessThan(v1, null), "v1 < null");
                 Bridge.Test.Assert.false$1(System.Version.op_LessThanOrEqual(v1, null), "v1 <= null");
     
@@ -23408,18 +23412,30 @@
                 Bridge.Test.Assert.true$1(System.Version.op_Inequality(null, v3), "null != v3");
                 Bridge.Test.Assert.false$1(System.Version.op_GreaterThan(null, v3), "null > v3");
                 Bridge.Test.Assert.false$1(System.Version.op_GreaterThanOrEqual(null, v3), "null >= v3");
-                Bridge.Test.Assert.true$1(System.Version.op_LessThan(null, v3), "null < v3");
-                Bridge.Test.Assert.true$1(System.Version.op_LessThanOrEqual(null, v3), "null <= v3");
+                Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                    var b = System.Version.op_LessThan(null, v3);
+                }, "null < v3");
+                Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                    var b = System.Version.op_LessThanOrEqual(null, v3);
+                }, "null <= v3");
     
                 var v4 = null;
                 var v5 = null;
     
                 Bridge.Test.Assert.true$1(System.Version.op_Equality(v4, v5), "v4 == v5");
                 Bridge.Test.Assert.false$1(System.Version.op_Inequality(v4, v5), "v4 != v5");
-                Bridge.Test.Assert.false$1(System.Version.op_GreaterThan(v4, v5), "v4 > v5");
-                Bridge.Test.Assert.false$1(System.Version.op_GreaterThanOrEqual(v4, v5), "v4 >= v5");
-                Bridge.Test.Assert.false$1(System.Version.op_LessThan(v4, v5), "v4 < v5");
-                Bridge.Test.Assert.false$1(System.Version.op_LessThanOrEqual(v4, v5), "v4 <= v5");
+                Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                    var b = System.Version.op_GreaterThan(v4, v5);
+                }, "v4 > v5");
+                Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                    var b = System.Version.op_GreaterThanOrEqual(v4, v5);
+                }, "v4 >= v5");
+                Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                    var b = System.Version.op_LessThan(v4, v5);
+                }, "v4 < v5");
+                Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                    var b = System.Version.op_LessThanOrEqual(v4, v5);
+                }, "v4 <= v5");
             }
         }
     });
