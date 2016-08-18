@@ -1,5 +1,5 @@
 ﻿{
-  "output": "Transpiled",
+  "output": "Resources/.generated",
   "cleanOutputFolderBeforeBuild": true,
   "outputFormatting": "Formatted",
   "outputBy": "ClassPath",
@@ -62,9 +62,9 @@
           "Resources/Collections/List.js",
           "Resources/Task.js",
           "Resources/Validation.js",
-          "Transpiled/system/version.js",
-          "Transpiled/system/version/parseFailureKind.js",
-          "Transpiled/system/version/versionResult.js",
+          "Resources/.generated/system/version.js",
+          "Resources/.generated/system/version/parseFailureKind.js",
+          "Resources/.generated/system/version/versionResult.js",
           "Resources/Attribute.js",
           "Resources/INotifyPropertyChanged.js",
           "Resources/Convert.js",
@@ -91,8 +91,8 @@
           "Resources/Text/RegularExpressions/RegexEngineProbe.js",
           "Resources/Text/RegularExpressions/RegexEngineParser.js",
           "Resources/Console.js",
-          "Transpiled/system/random.js",
-          "Transpiled/system/threading/timer.js",
+          "Resources/.generated/system/random.js",
+          "Resources/.generated/system/threading/timer.js",
           "Resources/.auxiliary/End.js",
           "Resources/.auxiliary/Finally.js"
         ]

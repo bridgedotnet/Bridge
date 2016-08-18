@@ -394,7 +394,6 @@ namespace Bridge.Translator
 
         private Dictionary<string, byte[]> PrepareResources(string outputPath, string resourcesBasePath, Dictionary<string, string> files)
         {
-            System.Diagnostics.Debugger.Launch();
             var resourcesToEmbed = new Dictionary<string, byte[]>();
 
             if (this.AssemblyInfo.Resources.HasResources())

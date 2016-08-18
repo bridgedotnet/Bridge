@@ -319,12 +319,12 @@
     <Compile Include="System\Void.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Transpiled\bridge.js" />
-    <Content Include="Transpiled\system\random.js" />
-    <Content Include="Transpiled\system\threading\timer.js" />
-    <Content Include="Transpiled\system\version.js" />
-    <Content Include="Transpiled\system\version\parseFailureKind.js" />
-    <Content Include="Transpiled\system\version\versionResult.js" />
+    <Content Include="Resources\.generated\bridge.js" />
+    <Content Include="Resources\.generated\system\random.js" />
+    <Content Include="Resources\.generated\system\threading\timer.js" />
+    <Content Include="Resources\.generated\system\version.js" />
+    <Content Include="Resources\.generated\system\version\parseFailureKind.js" />
+    <Content Include="Resources\.generated\system\version\versionResult.js" />
     <EmbeddedResource Include="Resources\Locales\af-ZA.js" />
     <EmbeddedResource Include="Resources\Locales\af.js" />
     <EmbeddedResource Include="Resources\Locales\am-ET.js" />
