@@ -193,8 +193,8 @@ namespace Bridge.ClientTest.SimpleTypes
 
             Assert.False(v1 == null, "v1 == null");
             Assert.True(v1 != null, "v1 != null");
-            Assert.True(v1 > null, "v1 > null");
-            Assert.True(v1 >= null, "v1 >= null");
+            Assert.Throws<ArgumentNullException>(() => { var b = v1 > null; }, "v1 > null");
+            Assert.Throws<ArgumentNullException>(() => { var b = v1 >= null; }, "v1 >= null");
             Assert.False(v1 < null, "v1 < null");
             Assert.False(v1 <= null, "v1 <= null");
 
@@ -202,18 +202,18 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.True(null != v3, "null != v3");
             Assert.False(null > v3, "null > v3");
             Assert.False(null >= v3, "null >= v3");
-            Assert.True(null < v3, "null < v3");
-            Assert.True(null <= v3, "null <= v3");
+            Assert.Throws<ArgumentNullException>(() => { var b = null < v3; }, "null < v3");
+            Assert.Throws<ArgumentNullException>(() => { var b = null <= v3; }, "null <= v3");
 
             Version v4 = null;
             Version v5 = null;
 
             Assert.True(v4 == v5, "v4 == v5");
             Assert.False(v4 != v5, "v4 != v5");
-            Assert.False(v4 > v5, "v4 > v5");
-            Assert.False(v4 >= v5, "v4 >= v5");
-            Assert.False(v4 < v5, "v4 < v5");
-            Assert.False(v4 <= v5, "v4 <= v5");
+            Assert.Throws<ArgumentNullException>(() => { var b = v4 > v5; }, "v4 > v5");
+            Assert.Throws<ArgumentNullException>(() => { var b = v4 >= v5; }, "v4 >= v5");
+            Assert.Throws<ArgumentNullException>(() => { var b = v4 < v5; }, "v4 < v5");
+            Assert.Throws<ArgumentNullException>(() => { var b = v4 <= v5; }, "v4 <= v5");
         }
     }
 }
