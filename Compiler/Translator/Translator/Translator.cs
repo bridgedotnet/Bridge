@@ -439,6 +439,7 @@ namespace Bridge.Translator
                             catch (Exception ex)
                             {
                                 this.Log.Error(ex.ToString());
+                                throw;
                             }
                         }
                     }
@@ -470,6 +471,7 @@ namespace Bridge.Translator
                     catch (Exception ex)
                     {
                         this.Log.Error(ex.ToString());
+                        throw;
                     }
                 }
 
@@ -597,8 +599,7 @@ namespace Bridge.Translator
 
                     if (!directory.Exists)
                     {
-                        this.Log.Error("Could not find folder for resources: " + directoryPath);
-                        break;
+                        throw new InvalidOperationException("Could not find any folder: " + directory.FullName + " for resource " + item.Name + " and location " + fileName);
                     }
 
                     this.Log.Trace("Searching files for resources in folder: " + directoryPath);
@@ -607,8 +608,7 @@ namespace Bridge.Translator
 
                     if (!files.Any())
                     {
-                        this.Log.Error("Could not find any file in folder: " + directoryPath);
-                        break;
+                        throw new InvalidOperationException("Could not find any file in folder: " + directory.FullName + " for resource " + item.Name + " and location " + fileName);
                     }
 
                     foreach (var file in files)
@@ -626,6 +626,7 @@ namespace Bridge.Translator
                 catch (Exception ex)
                 {
                     this.Log.Error(ex.ToString());
+                    throw;
                 }
             }
         }
