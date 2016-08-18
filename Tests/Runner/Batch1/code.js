@@ -8129,8 +8129,8 @@
                 Bridge.Test.Assert.areEqual("i = 00, j = 1, k =            2", System.String.format("i = {0:00}, j = {1:##}, k = {2,12:#0}", i, j, k));
                 Bridge.Test.Assert.areEqual("0, 0, 0", System.String.format("{0}, {1}, {2}", Bridge.ClientTest.CSharp6.TestInterpolatedStrings.f1(), ($t = Bridge.ClientTest.CSharp6.TestInterpolatedStrings.f2(), Bridge.ClientTest.CSharp6.TestInterpolatedStrings.setP($t), $t), Bridge.ClientTest.CSharp6.TestInterpolatedStrings.f3()));
     
-                var f1 = System.FormattableStringFactory.create("i = {0}, j = {1}", [i, j]);
-                var f2 = System.FormattableStringFactory.create("i = {0}, j = {1}", [i, j]);
+                var f1 = System.Runtime.CompilerServices.FormattableStringFactory.create("i = {0}, j = {1}", [i, j]);
+                var f2 = System.Runtime.CompilerServices.FormattableStringFactory.create("i = {0}, j = {1}", [i, j]);
                 Bridge.Test.Assert.areEqual(2, f2.getArgumentCount());
                 Bridge.Test.Assert.areEqual("i = {0}, j = {1}", f2.getFormat());
                 Bridge.Test.Assert.areEqual(0, f2.getArgument(0));

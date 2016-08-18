@@ -320,7 +320,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\.generated\bridge.js" />
+    <Content Include="Resources\.generated\system\formattableString.js" />
+    <Content Include="Resources\.generated\system\formattableStringImpl.js" />
     <Content Include="Resources\.generated\system\random.js" />
+    <Content Include="Resources\.generated\system\runtime\compilerServices\formattableStringFactory.js" />
     <Content Include="Resources\.generated\system\threading\timer.js" />
     <Content Include="Resources\.generated\system\version.js" />
     <Content Include="Resources\.generated\system\version\parseFailureKind.js" />
@@ -751,7 +754,6 @@
     <Content Include="Resources\Long.js" />
     <Content Include="Resources\Math.js" />
     <Content Include="Resources\Console.js" />
-    <Content Include="Resources\FormattableString.js" />
     <Content Include="Resources\Text\RegularExpressions\Regex.js" />
     <Content Include="Resources\Text\RegularExpressions\RegexEngineBranch.js" />
     <Content Include="Resources\Text\RegularExpressions\RegexEnginePass.js" />

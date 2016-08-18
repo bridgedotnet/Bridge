@@ -3727,48 +3727,58 @@
 
     Bridge.define('System.FormattableString', {
         inherits: [System.IFormattable],
-        format: function (_, provider) {
-            return this.fmt(provider);
+        statics: {
+            invariant: function (formattable) {
+                return formattable.toString$1(System.Globalization.CultureInfo.invariantCulture);
+            }
         },
-
         toString: function () {
-            return this.fmt(System.Globalization.CultureInfo.getCurrentCulture());
+            return this.toString$1(System.Globalization.CultureInfo.getCurrentCulture());
+        },
+        System$IFormattable$format: function (format, formatProvider) {
+            return this.toString$1(formatProvider);
         }
     });
-
+    
+    
     Bridge.define('System.FormattableStringImpl', {
         inherits: [System.FormattableString],
-
+        args: null,
+        format: null,
         constructor: function (format, args) {
-            this._format = format;
-            this._args = args;
+            if (args === void 0) { args = []; }
+    
+            this.$initialize();
+            System.FormattableString.$constructor.call(this);
+            this.format = format;
+            this.args = args;
         },
-
-        fmt: function (provider) {
-            return System.String.formatProvider.apply(System.String, [provider, this._format].concat(this._args));
-		},
-		getArgumentCount: function () {
-			return this._args.length;
-		},
-		getFormat: function () {
-			return this._format;
-		},
-		getArgument: function (i) {
-			return this._args[i];
-		},
-		getArguments: function () {
-			return this._args;
-		}
+        getArgumentCount: function () {
+            return this.args.length;
+        },
+        getFormat: function () {
+            return this.format;
+        },
+        getArgument: function (index) {
+            return this.args[index];
+        },
+        getArguments: function () {
+            return this.args;
+        },
+        toString$1: function (formatProvider) {
+            return System.String.formatProvider.apply(System.String, [formatProvider, this.format].concat(this.args));
+        }
     });
-
-    Bridge.define('System.FormattableStringFactory', {
+    Bridge.define('System.Runtime.CompilerServices.FormattableStringFactory', {
         statics: {
-            create: function (fmt, args) {
-                return new System.FormattableStringImpl(fmt, args);
+            create: function (format, args) {
+                if (args === void 0) { args = []; }
+                return new System.FormattableStringImpl(format, args);
             }
         }
     });
-
+    
+    
     // @source Exception.js
 
     Bridge.define("System.Exception", {
@@ -11327,6 +11337,8 @@ Bridge.define('System.Collections.ObjectModel.ReadOnlyCollection$1', function (T
             return s;
         }
     });
+    
+    
     // @source Attribute.js
 
     Bridge.define("System.Attribute");
