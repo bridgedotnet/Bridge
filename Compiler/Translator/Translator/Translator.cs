@@ -341,7 +341,8 @@ namespace Bridge.Translator
                 return;
             }
 
-            var resourcesToEmbed = PrepareResources(outputPath, files);
+            var resourceBasePath = Path.GetDirectoryName(this.Location);
+            var resourcesToEmbed = PrepareResources(outputPath, resourceBasePath, files);
 
             var assemblyDef = this.AssemblyDefinition;
             var resources = assemblyDef.MainModule.Resources;
@@ -391,8 +392,9 @@ namespace Bridge.Translator
             assemblyDef.Write(this.AssemblyLocation);
         }
 
-        private Dictionary<string, byte[]> PrepareResources(string outputPath, Dictionary<string, string> files)
+        private Dictionary<string, byte[]> PrepareResources(string outputPath, string resourcesBasePath, Dictionary<string, string> files)
         {
+            System.Diagnostics.Debugger.Launch();
             var resourcesToEmbed = new Dictionary<string, byte[]>();
 
             if (this.AssemblyInfo.Resources.HasResources())
@@ -414,7 +416,7 @@ namespace Bridge.Translator
                         this.GenerateResourseCaption(resourceBuffer, resource);
                     }
 
-                    this.ReadResourseFiles(outputPath, resourceBuffer, resource);
+                    this.ReadResourseFiles(resourcesBasePath, resourceBuffer, resource);
 
                     if (resourceBuffer.Length > 0)
                     {
