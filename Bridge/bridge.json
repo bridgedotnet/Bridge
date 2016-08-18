@@ -25,6 +25,8 @@
           "license": "See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE."
         },
         "extract": true,
+
+        // File path relative to project root
         "files": [
           "../Resources/.auxiliary/Init.js",
           "../Resources/Core.js",
@@ -102,7 +104,9 @@
           "copyright": "{0} http://object.net/",
           "license": "See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE."
         },
-        "files": [ "../Resources/.typescript/bridge.d.ts" ]
+        "files": [
+          "../Resources/.typescript/bridge.d.ts"
+        ]
       }
     ]
   }
