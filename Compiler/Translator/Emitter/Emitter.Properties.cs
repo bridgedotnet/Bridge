@@ -66,7 +66,7 @@ namespace Bridge.Translator
             set;
         }
 
-        public Dictionary<string, string> LocalsMap
+        public Dictionary<IVariable, string> LocalsMap
         {
             get;
             set;

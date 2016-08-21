@@ -177,7 +177,20 @@ namespace Bridge.Translator
             this.ThisArgument = expression;
             this.NamedExpressions = this.CreateNamedExpressions(this.ArgumentsNames, this.ArgumentsExpressions);
 
-            this.BuildTypedArguments(rr);
+            this.BuildTypedArguments(rr.Member);
+        }
+
+        public ArgumentsInfo(IEmitter emitter, Expression expression, IMethod method)
+        {
+            this.Emitter = emitter;
+            this.Expression = expression;
+
+            this.ArgumentsExpressions = new Expression[] { expression };
+            this.ArgumentsNames = new string[] {method.Parameters.Count > 0 ? method.Parameters.First().Name : "{this}" };
+            this.ThisArgument = expression;
+            this.NamedExpressions = this.CreateNamedExpressions(this.ArgumentsNames, this.ArgumentsExpressions);
+
+            this.BuildTypedArguments(method);
         }
 
         public ArgumentsInfo(IEmitter emitter, Expression expression, ResolveResult rr = null)
@@ -192,7 +205,7 @@ namespace Bridge.Translator
 
             if (rr is MemberResolveResult)
             {
-                this.BuildTypedArguments((MemberResolveResult)rr);
+                this.BuildTypedArguments(((MemberResolveResult)rr).Member);
             }
         }
 
@@ -276,10 +289,10 @@ namespace Bridge.Translator
             }
         }
 
-        private void BuildTypedArguments(MemberResolveResult rr)
+        private void BuildTypedArguments(IMember member)
         {
-            var typeParams = rr.Member.DeclaringTypeDefinition.TypeParameters;
-            var typeArgs = rr.Member.DeclaringType.TypeArguments;
+            var typeParams = member.DeclaringTypeDefinition.TypeParameters;
+            var typeArgs = member.DeclaringType.TypeArguments;
             var temp = new TypeParamExpression[typeParams.Count];
 
             for (int i = 0; i < typeParams.Count; i++)

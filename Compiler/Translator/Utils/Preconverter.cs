@@ -41,7 +41,7 @@ namespace Bridge.Translator
                 unaryOperatorExpression.Operator == UnaryOperatorType.Decrement ||
                 unaryOperatorExpression.Operator == UnaryOperatorType.PostDecrement)
             {
-                var rr = this.Resolver.ResolveNode(unaryOperatorExpression, null);
+                var rr = (OperatorResolveResult)this.Resolver.ResolveNode(unaryOperatorExpression, null);
 
                 if (!Helpers.IsFloatType(rr.Type, this.Resolver) && !Helpers.Is64Type(rr.Type, this.Resolver))
                 {
@@ -59,6 +59,11 @@ namespace Bridge.Translator
                 var rr = this.Resolver.ResolveNode(assignmentExpression, null);
                 var isInt = Helpers.IsIntegerType(rr.Type, this.Resolver);
                 if (isInt || !(assignmentExpression.Parent is ExpressionStatement))
+                {
+                    this.Found = true;
+                }
+
+                if (assignmentExpression.Operator == AssignmentOperatorType.Add && rr.Type.IsKnownType(KnownTypeCode.String))
                 {
                     this.Found = true;
                 }
@@ -284,7 +289,7 @@ namespace Bridge.Translator
                 unaryOperatorExpression.Operator == UnaryOperatorType.Decrement ||
                 unaryOperatorExpression.Operator == UnaryOperatorType.PostDecrement)
             {
-                var rr = this.Resolver.ResolveNode(unaryOperatorExpression, null);
+                var rr = (OperatorResolveResult)this.Resolver.ResolveNode(unaryOperatorExpression, null);
                 if (Helpers.IsFloatType(rr.Type, this.Resolver) || Helpers.Is64Type(rr.Type, this.Resolver))
                 {
                     return base.VisitUnaryOperatorExpression(unaryOperatorExpression);
@@ -301,9 +306,18 @@ namespace Bridge.Translator
 
                 var isStatement = unaryOperatorExpression.Parent is ExpressionStatement;
                 var isIncr = clonUnaryOperatorExpression.Operator == UnaryOperatorType.Increment || clonUnaryOperatorExpression.Operator == UnaryOperatorType.PostIncrement;
+                AssignmentExpression ae;
 
-                var ae = new AssignmentExpression(clonUnaryOperatorExpression.Expression.Clone(),
+                if (rr.UserDefinedOperatorMethod != null)
+                {
+                    ae = new AssignmentExpression(clonUnaryOperatorExpression.Expression.Clone(), clonUnaryOperatorExpression);
+                }
+                else
+                {
+                    ae = new AssignmentExpression(clonUnaryOperatorExpression.Expression.Clone(),
                              new BinaryOperatorExpression(clonUnaryOperatorExpression.Expression.Clone(), isIncr ? BinaryOperatorType.Add : BinaryOperatorType.Subtract, new PrimitiveExpression(1)));
+                }
+                    
 
                 if (isPost && !isStatement)
                 {
@@ -341,6 +355,11 @@ namespace Bridge.Translator
                 {
                     found = false;
                 }
+            }
+
+            if (assignmentExpression.Operator == AssignmentOperatorType.Add && rr.Type.IsKnownType(KnownTypeCode.String))
+            {
+                found = true;
             }
 
             if (assignmentExpression.Operator != AssignmentOperatorType.Any &&

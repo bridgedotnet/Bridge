@@ -22,7 +22,7 @@
             if (numbers === void 0) { numbers = []; }
             var s = "";
             for (var i = 0; i < numbers.length; i = (i + 1) | 0) {
-                s = s + numbers[i];
+                s = System.String.concat(s,  numbers[i]);
             }
     
             return s;

@@ -1,10 +1,8 @@
 using Bridge.Contract;
 using Bridge.Contract.Constants;
-
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
-
 using System.Collections.Generic;
 
 namespace Bridge.Translator
@@ -125,7 +123,7 @@ namespace Bridge.Translator
                 {
                     isPrimitive = true;
                     constValue = primitiveExpr.Value;
-                    writeScript = true;
+                    //writeScript = true;
                 }
 
                 if (constValue is RawValue)

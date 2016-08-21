@@ -65,7 +65,7 @@ namespace Bridge.Translator
 
                 if (!String.IsNullOrEmpty(varName) && !this.Emitter.Locals.ContainsKey(varName))
                 {
-                    varName = this.AddLocal(varName, clause.Type);
+                    varName = this.AddLocal(varName, clause.VariableNameToken, clause.Type);
                 }
 
                 this.Emitter.IgnoreBlock = clause.Body;
@@ -80,7 +80,7 @@ namespace Bridge.Translator
 
             if (!this.Emitter.Locals.ContainsKey(JS.Vars.ASYNC_E))
             {
-                this.AddLocal(JS.Vars.ASYNC_E, AstType.Null);
+                this.AddLocal(JS.Vars.ASYNC_E, null, AstType.Null);
             }
 
             IAsyncStep finalyStep = null;
@@ -183,7 +183,7 @@ namespace Bridge.Translator
 
                 if (!this.Emitter.Locals.ContainsKey(JS.Vars.ASYNC_E))
                 {
-                    this.AddLocal(JS.Vars.ASYNC_E, AstType.Null);
+                    this.AddLocal(JS.Vars.ASYNC_E, null, AstType.Null);
                 }
             }
 
@@ -260,14 +260,14 @@ namespace Bridge.Translator
                 this.PushLocals();
 
                 var varName = clause.VariableName;
-
+                
                 if (String.IsNullOrEmpty(varName))
                 {
-                    varName = this.AddLocal(this.GetUniqueName(JS.Vars.E), AstType.Null);
+                    varName = this.AddLocal(this.GetUniqueName(JS.Vars.E), null, AstType.Null);
                 }
                 else
                 {
-                    varName = this.AddLocal(varName, clause.Type);
+                    varName = this.AddLocal(varName, clause.VariableNameToken, clause.Type);
                 }
 
                 var oldVar = this.Emitter.CatchBlockVariable;
@@ -303,7 +303,7 @@ namespace Bridge.Translator
 
             this.WriteCatch();
             this.WriteOpenParentheses();
-            var varName = this.AddLocal(this.GetUniqueName(JS.Vars.E), AstType.Null);
+            var varName = this.AddLocal(this.GetUniqueName(JS.Vars.E), null, AstType.Null);
 
             var oldVar = this.Emitter.CatchBlockVariable;
             this.Emitter.CatchBlockVariable = varName;

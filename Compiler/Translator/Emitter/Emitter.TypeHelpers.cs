@@ -63,11 +63,13 @@ namespace Bridge.Translator
                 return 1;
             }
 
-            var xTypeDefinition = this.TypeDefinitions[x.Key];
-            var yTypeDefinition = this.TypeDefinitions[y.Key];
+            var xZero = x.Key == "0";
+            var yZero = y.Key == "0";
+            var xTypeDefinition = xZero ? null : this.TypeDefinitions[x.Key];
+            var yTypeDefinition = yZero ? null : this.TypeDefinitions[y.Key];
 
-            var xPriority = this.GetPriority(xTypeDefinition);
-            var yPriority = this.GetPriority(yTypeDefinition);
+            var xPriority = xZero ? 0 : this.GetPriority(xTypeDefinition);
+            var yPriority = yZero ? 0 : this.GetPriority(yTypeDefinition);
 
             return -xPriority.CompareTo(yPriority);
         }
@@ -93,47 +95,31 @@ namespace Bridge.Translator
             return inherits;
         }
 
-        private void QuickSort(IList<ITypeInfo> list, int l, int r)
+        private List<ITypeInfo> SortByPriority(IList<ITypeInfo> list)
         {
-            ITypeInfo temp;
-            ITypeInfo x = list[l + (r - l) / 2];
-            int i = l;
-            int j = r;
-            while (i <= j)
+            List<ITypeInfo> sortable = new List<ITypeInfo>();
+            List<ITypeInfo> nonSortable = new List<ITypeInfo>();
+            for (int i = 0; i < list.Count; i++)
             {
-                while (this.CompareTypeInfosByPriority(list[i], x) == -1)
+                if (this.GetPriority(this.TypeDefinitions[list[i].Key]) == 0)
                 {
-                    i++;
+                    nonSortable.Add(list[i]);
                 }
-
-                while (this.CompareTypeInfosByPriority(list[j], x) == 1)
+                else
                 {
-                    j--;
-                }
-
-                if (i <= j)
-                {
-                    if (this.CompareTypeInfosByPriority(list[i], list[j]) != 0)
-                    {
-                        temp = list[i];
-                        list[i] = list[j];
-                        list[j] = temp;
-                    }
-
-                    i++;
-                    j--;
+                    sortable.Add(list[i]);
                 }
             }
 
-            if (i < r)
-            {
-                this.QuickSort(list, i, r);
-            }
+            var zeroPlaceholder = new TypeInfo() {Key = "0"};
+            sortable.Add(zeroPlaceholder);
+            sortable.Sort(this.CompareTypeInfosByPriority);
 
-            if (l < j)
-            {
-                this.QuickSort(list, l, j);
-            }
+            var idx = sortable.FindIndex(t => t.Key == "0");
+            sortable.RemoveAt(idx);
+            sortable.InsertRange(idx, nonSortable);
+
+            return sortable;
         }
 
         public virtual void SortTypesByInheritance()
@@ -148,7 +134,7 @@ namespace Bridge.Translator
 
                 this.Log.Trace("Priority sorting...");
 
-                this.QuickSort(this.Types, 0, this.Types.Count - 1);
+                this.Types = this.SortByPriority(this.Types);
 
                 this.Log.Trace("Priority sorting done");
             }
@@ -462,8 +448,14 @@ namespace Bridge.Translator
             return sb.ToString();
         }
 
+        private Dictionary<TypeDefinition, int> priorityMap = new Dictionary<TypeDefinition, int>(); 
         public virtual int GetPriority(TypeDefinition type)
         {
+            if (this.priorityMap.ContainsKey(type))
+            {
+                return this.priorityMap[type];
+            }
+
             var attr = type.CustomAttributes.FirstOrDefault(a =>
             {
                 return a.AttributeType.FullName == "Bridge.PriorityAttribute";
@@ -471,17 +463,20 @@ namespace Bridge.Translator
 
             if (attr != null)
             {
-                return System.Convert.ToInt32(attr.ConstructorArguments[0].Value);
+                var attrp = System.Convert.ToInt32(attr.ConstructorArguments[0].Value);
+                this.priorityMap[type] = attrp;
+                return attrp;
             }
 
             var baseType = this.GetBaseTypeDefinition(type);
-
+            var p = 0;
             if (baseType != null)
             {
-                return this.GetPriority(baseType);
+                p = this.GetPriority(baseType);
             }
 
-            return 0;
+            this.priorityMap[type] = p;
+            return p;
         }
     }
 }

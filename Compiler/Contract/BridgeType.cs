@@ -468,7 +468,7 @@ namespace Bridge.Contract
 
             if (primitive != null && primitive.KnownTypeCode == KnownTypeCode.Void)
             {
-                return "void";
+                return "Object";
             }
 
             var composedType = astType as ComposedType;

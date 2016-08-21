@@ -2,6 +2,7 @@ using Bridge.Contract;
 using Bridge.Contract.Constants;
 
 using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.NRefactory.Semantics;
 
 namespace Bridge.Translator
 {
@@ -36,7 +37,7 @@ namespace Bridge.Translator
 
             foreach (var variable in this.VariableDeclarationStatement.Variables)
             {
-                var varName = this.AddLocal(variable.Name, this.VariableDeclarationStatement.Type);
+                var varName = this.AddLocal(variable.Name, variable, this.VariableDeclarationStatement.Type);
 
                 if (variable.Initializer != null && !variable.Initializer.IsNull && variable.Initializer.ToString().Contains(JS.Vars.FIX_ARGUMENT_NAME))
                 {
@@ -50,10 +51,11 @@ namespace Bridge.Translator
                 }
 
                 bool isReferenceLocal = false;
+                var lrr = this.Emitter.Resolver.ResolveNode(variable, this.Emitter) as LocalResolveResult;
 
-                if (this.Emitter.LocalsMap != null && this.Emitter.LocalsMap.ContainsKey(variable.Name))
+                if (this.Emitter.LocalsMap != null && lrr != null && this.Emitter.LocalsMap.ContainsKey(lrr.Variable))
                 {
-                    isReferenceLocal = this.Emitter.LocalsMap[variable.Name].EndsWith(".v");
+                    isReferenceLocal = this.Emitter.LocalsMap[lrr.Variable].EndsWith(".v");
                 }
 
                 this.WriteAwaiters(variable.Initializer);
@@ -70,7 +72,7 @@ namespace Bridge.Translator
                     }
                 }
 
-                if (!this.Emitter.IsAsync || hasInitializer)
+                if (!this.Emitter.IsAsync || hasInitializer || isReferenceLocal)
                 {
                     if (needComma)
                     {

@@ -7,7 +7,7 @@
                 return ((a + b) | 0);
             },
             getSum$2: function (a, b) {
-                return a + b;
+                return System.String.concat(a,  b);
             },
             getSum: function (a, b) {
                 return a.add(b);

@@ -186,7 +186,7 @@ namespace Bridge.Contract
             set;
         }
 
-        System.Collections.Generic.Dictionary<string, string> LocalsMap
+        System.Collections.Generic.Dictionary<IVariable, string> LocalsMap
         {
             get;
             set;

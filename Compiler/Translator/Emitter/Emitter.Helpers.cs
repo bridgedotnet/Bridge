@@ -68,13 +68,16 @@ namespace Bridge.Translator
         {
             try
             {
-                var rr = emitter.Resolver.ResolveNode(expression, emitter);
-                var conversion = emitter.Resolver.Resolver.GetConversion(expression);
-                var expectedType = emitter.Resolver.Resolver.GetExpectedType(expression);
-
-                if (conversion.IsNumericConversion && expectedType.IsKnownType(KnownTypeCode.Double) && rr.Type.IsKnownType(KnownTypeCode.Single))
+                if (expression.Parent != null)
                 {
-                    return (double) (float) value;
+                    var rr = emitter.Resolver.ResolveNode(expression, emitter);
+                    var conversion = emitter.Resolver.Resolver.GetConversion(expression);
+                    var expectedType = emitter.Resolver.Resolver.GetExpectedType(expression);
+
+                    if (conversion.IsNumericConversion && expectedType.IsKnownType(KnownTypeCode.Double) && rr.Type.IsKnownType(KnownTypeCode.Single))
+                    {
+                        return (double)(float)value;
+                    }
                 }
             }
             catch (Exception)
@@ -667,8 +670,22 @@ namespace Bridge.Translator
 
             foreach (var arg in attr.Arguments)
             {
-                PrimitiveExpression expr = (PrimitiveExpression)arg;
-                result.Add((string)expr.Value);
+                string value = "";
+                if (arg is PrimitiveExpression)
+                {
+                    PrimitiveExpression expr = (PrimitiveExpression) arg;
+                    value = (string) expr.Value;
+                }
+                else
+                {
+                    var rr = this.Resolver.ResolveNode(arg, this) as ConstantResolveResult;
+                    if (rr != null && rr.ConstantValue != null)
+                    {
+                        value = rr.ConstantValue.ToString();
+                    }
+                }
+                
+                result.Add(value);
             }
 
             return result;

@@ -6,6 +6,9 @@ using ICSharpCode.NRefactory.CSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ICSharpCode.NRefactory.MonoCSharp;
+using ICSharpCode.NRefactory.Semantics;
+using EmptyStatement = ICSharpCode.NRefactory.CSharp.EmptyStatement;
 
 namespace Bridge.Translator
 {
@@ -82,7 +85,7 @@ namespace Bridge.Translator
             }
 
             //var iteratorName = this.GetNextIteratorName();
-            var iteratorName = this.AddLocal(this.GetTempVarName(), AstType.Null);
+            var iteratorName = this.AddLocal(this.GetTempVarName(), null, AstType.Null);
 
             //this.WriteVar();
             this.Write(iteratorName, " = ", JS.Funcs.BRIDGE_GET_ENUMERATOR);
@@ -111,7 +114,7 @@ namespace Bridge.Translator
             this.BeginBlock();
 
             this.PushLocals();
-            var varName = this.AddLocal(foreachStatement.VariableName, foreachStatement.VariableType);
+            var varName = this.AddLocal(foreachStatement.VariableName, foreachStatement.VariableNameToken, foreachStatement.VariableType);
 
             this.WriteVar();
             this.Write(varName, " = ", iteratorName);
@@ -192,7 +195,7 @@ namespace Bridge.Translator
             }
 
             var iteratorVar = this.GetTempVarName();
-            var iteratorName = this.AddLocal(iteratorVar, AstType.Null);
+            var iteratorName = this.AddLocal(iteratorVar, null, AstType.Null);
 
             //this.WriteVar();
             this.Write(iteratorName, " = ", JS.Funcs.BRIDGE_GET_ENUMERATOR);
@@ -216,15 +219,30 @@ namespace Bridge.Translator
             this.PushLocals();
             Action ac = () =>
             {
-                var varName = this.AddLocal(foreachStatement.VariableName, foreachStatement.VariableType);
+                var varName = this.AddLocal(foreachStatement.VariableName, foreachStatement.VariableNameToken, foreachStatement.VariableType);
 
                 this.WriteVar();
-                this.Write(varName, " = ", iteratorName);
+                this.Write(varName + " = ");
+
+                var rr = this.Emitter.Resolver.ResolveNode(foreachStatement, this.Emitter) as ForEachResolveResult;
+                var needCast = rr != null && rr.ElementType != rr.ElementVariable.Type;
+                if (needCast)
+                {
+                    this.Write(JS.Funcs.BRIDGE_CAST);
+                    this.WriteOpenParentheses();
+                }
+
+                this.Write(iteratorName);
 
                 this.WriteDot();
                 this.Write(JS.Funcs.GET_CURRENT);
-
                 this.WriteOpenCloseParentheses();
+
+                if (needCast)
+                {
+                    this.Write(", ", BridgeTypes.ToJsName(rr.ElementVariable.Type, this.Emitter), ")");
+                }
+
                 this.WriteSemiColon();
                 this.WriteNewLine();
             };

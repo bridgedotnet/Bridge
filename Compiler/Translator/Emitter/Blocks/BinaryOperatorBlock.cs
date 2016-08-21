@@ -157,20 +157,21 @@ namespace Bridge.Translator
             }
 
             var resultIsString = expectedType.IsKnownType(KnownTypeCode.String) || resolveOperator.Type.IsKnownType(KnownTypeCode.String);
+            var isStringConcat = resultIsString && binaryOperatorExpression.Operator == BinaryOperatorType.Add;
             var toStringForLeft = false;
             var toStringForRight = false;
 
-            if (charToString == -1 && resultIsString && binaryOperatorExpression.Operator == BinaryOperatorType.Add && !leftResolverResult.Type.IsKnownType(KnownTypeCode.String))
+            if (charToString == -1 && isStringConcat && !leftResolverResult.Type.IsKnownType(KnownTypeCode.String))
             {
                 toStringForLeft = true;
             }
 
-            if (charToString == -1 && resultIsString && binaryOperatorExpression.Operator == BinaryOperatorType.Add && !rightResolverResult.Type.IsKnownType(KnownTypeCode.String))
+            if (charToString == -1 && isStringConcat && !rightResolverResult.Type.IsKnownType(KnownTypeCode.String))
             {
                 toStringForRight = true;
             }
 
-            if (!(resultIsString && binaryOperatorExpression.Operator == BinaryOperatorType.Add) && (Helpers.IsDecimalType(leftResolverResult.Type, this.Emitter.Resolver) || Helpers.IsDecimalType(rightResolverResult.Type, this.Emitter.Resolver)))
+            if (!isStringConcat && (Helpers.IsDecimalType(leftResolverResult.Type, this.Emitter.Resolver) || Helpers.IsDecimalType(rightResolverResult.Type, this.Emitter.Resolver)))
             {
                 isDecimal = true;
                 isDecimalExpected = true;
@@ -184,6 +185,19 @@ namespace Bridge.Translator
 
             var isLeftLong = Helpers.Is64Type(leftExpected, this.Emitter.Resolver);
             var isRightLong = Helpers.Is64Type(rightExpected, this.Emitter.Resolver);
+
+            if (!isLeftLong && !isRightLong)
+            {
+                if (leftExpected.Kind == TypeKind.Enum && Helpers.Is64Type(leftExpected.GetDefinition().EnumUnderlyingType, this.Emitter.Resolver))
+                {
+                    isLeftLong = true;
+                }
+
+                if (rightExpected.Kind == TypeKind.Enum && Helpers.Is64Type(rightExpected.GetDefinition().EnumUnderlyingType, this.Emitter.Resolver))
+                {
+                    isRightLong = true;
+                }
+            }
 
             if (!(resultIsString && binaryOperatorExpression.Operator == BinaryOperatorType.Add) && (isLeftLong || isRightLong))
             {
@@ -258,8 +272,18 @@ namespace Bridge.Translator
                 }
             }
 
+            if (isStringConcat)
+            {
+                this.Write(JS.Types.System.String.CONCAT);
+                this.WriteOpenParentheses();
+            }
+
             bool nullable = orr != null && orr.IsLiftedOperator;
-            bool isCoalescing = binaryOperatorExpression.Operator == BinaryOperatorType.NullCoalescing;
+            bool isCoalescing = (this.Emitter.AssemblyInfo.StrictNullChecks ||
+                                 NullableType.IsNullable(leftResolverResult.Type) ||
+                                 leftResolverResult.Type.IsKnownType(KnownTypeCode.String) ||
+                                 leftResolverResult.Type.IsKnownType(KnownTypeCode.Object)
+                                ) && binaryOperatorExpression.Operator == BinaryOperatorType.NullCoalescing;
             string root = JS.Types.SYSTEM_NULLABLE + ".";
             bool special = nullable;
             bool rootSpecial = nullable;
@@ -321,7 +345,7 @@ namespace Bridge.Translator
                 special = true;
             }
 
-            if (!delegateOperator)
+            if (!delegateOperator && !isStringConcat)
             {
                 if (!special)
                 {
@@ -362,7 +386,7 @@ namespace Bridge.Translator
                         break;
 
                     case BinaryOperatorType.NullCoalescing:
-                        this.Write(":");
+                        this.Write(isCoalescing ? ":" : "||");
                         break;
 
                     case BinaryOperatorType.ConditionalOr:
@@ -484,7 +508,7 @@ namespace Bridge.Translator
                 this.WriteCloseParentheses();
             }
 
-            if (delegateOperator || special)
+            if (delegateOperator || special || isStringConcat)
             {
                 this.WriteCloseParentheses();
             }

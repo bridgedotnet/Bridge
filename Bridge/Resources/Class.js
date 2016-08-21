@@ -109,7 +109,11 @@
 
                     obj = prop.apply(null, args);
                     obj.$cacheName = name;
-                    c = Bridge.define(name, obj, true, { fn: fn, args: args});
+                    c = Bridge.define(name, obj, true, { fn: fn, args: args });
+
+                    if (!Bridge.Class.staticInitAllow) {
+                        Bridge.Class.$queue.push(c);
+                    }
 
                     return Bridge.get(c);
                 };
@@ -341,7 +345,7 @@
             };
 
             if (isEntryPoint) {
-                Bridge.Class.$queue.push(Class);
+                Bridge.Class.$queueEntry.push(Class);
             }
 
             Class.$staticInit = fn;
@@ -537,15 +541,16 @@
 
         init: function (fn) {
             Bridge.Class.staticInitAllow = true;
-
-            for (var i = 0; i < Bridge.Class.$queue.length; i++) {
-                var t = Bridge.Class.$queue[i];
+            var queue = Bridge.Class.$queue.concat(Bridge.Class.$queueEntry);
+            for (var i = 0; i < queue.length; i++) {
+                var t = queue[i];
 
                 if (t.$staticInit) {
                     t.$staticInit();
                 }
             }
             Bridge.Class.$queue.length = 0;
+            Bridge.Class.$queueEntry.length = 0;
 
             if (fn) {
                 fn();
@@ -555,6 +560,7 @@
 
     Bridge.Class = base;
     Bridge.Class.$queue = [];
+    Bridge.Class.$queueEntry = [];
     Bridge.define = Bridge.Class.define;
     Bridge.definei = Bridge.Class.definei;
     Bridge.init = Bridge.Class.init;

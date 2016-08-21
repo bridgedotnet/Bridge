@@ -60,6 +60,8 @@
     <Compile Include="BridgeIssues\1000\N883.cs" />
     <Compile Include="BridgeIssues\1000\N882.cs" />
     <Compile Include="BridgeIssues\1000\N856.cs" />
+    <Compile Include="BridgeIssues\1500\N1499.cs" />
+    <Compile Include="BridgeIssues\1500\N1472.cs" />
     <Compile Include="BridgeIssues\1500\N1461.cs" />
     <Compile Include="BridgeIssues\1500\N1424.cs" />
     <Compile Include="BridgeIssues\1500\N1412.cs" />
@@ -68,6 +70,9 @@
     <Compile Include="BridgeIssues\1500\N1151.cs" />
     <Compile Include="BridgeIssues\1500\N1023.cs" />
     <Compile Include="BridgeIssues\1500\N1009.cs" />
+    <Compile Include="BridgeIssues\2000\N1537.cs" />
+    <Compile Include="BridgeIssues\2000\N1508.cs" />
+    <Compile Include="BridgeIssues\2000\N1552.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BridgeIssues\0500\N384.cs" />
   </ItemGroup>

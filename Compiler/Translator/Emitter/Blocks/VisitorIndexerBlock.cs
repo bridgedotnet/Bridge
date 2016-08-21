@@ -53,7 +53,11 @@ namespace Bridge.Translator
 
                 if (setter)
                 {
-                    this.AddLocals(new ParameterDeclaration[] { new ParameterDeclaration { Name = "value" } }, accessor.Body);
+                    this.AddLocals(new ParameterDeclaration[] {new ParameterDeclaration {Name = "value"}}, accessor.Body);
+                }
+                else
+                {
+                    this.AddLocals(new ParameterDeclaration[0], accessor.Body);
                 }
 
                 XmlToJsDoc.EmitComment(this, this.IndexerDeclaration);

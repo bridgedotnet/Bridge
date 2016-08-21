@@ -10,6 +10,48 @@
         }
     });
     
+    Bridge.define('Bridge.ClientTest.Batch2.BridgeIssues.Bridge1499', {
+        testObjectStringCoalesceWorks: function () {
+            var $t, $t1, $t2, $t3, $t4, $t5, $t6, $t7, $t8, $t9, $t10, $t11, $t12, $t13, $t14, $t15, $t16, $t17, $t18, $t19;
+            var def = 1;
+            var app = null;
+            var o1 = "";
+            var o2 = "test";
+            var o3 = null;
+    
+            Bridge.Test.Assert.areStrictEqual(1, ($t = app, $t !== null ? $t : def));
+            Bridge.Test.Assert.areStrictEqual("", ($t1 = o1, $t1 !== null ? $t1 : o2));
+            Bridge.Test.Assert.areStrictEqual("", ($t2 = o1, $t2 !== null ? $t2 : "test"));
+            Bridge.Test.Assert.areStrictEqual("test", ($t3 = o3, $t3 !== null ? $t3 : o2));
+            Bridge.Test.Assert.areStrictEqual("test", ($t4 = o3, $t4 !== null ? $t4 : "test"));
+    
+            var s1 = "";
+            var s2 = "test";
+            var s3 = null;
+    
+            Bridge.Test.Assert.areStrictEqual("", ($t5 = s1, $t5 !== null ? $t5 : s2));
+            Bridge.Test.Assert.areStrictEqual("", ($t6 = s1, $t6 !== null ? $t6 : o2));
+            Bridge.Test.Assert.areStrictEqual("", ($t7 = s1, $t7 !== null ? $t7 : "test"));
+            Bridge.Test.Assert.areStrictEqual("", ($t8 = "", $t8 !== null ? $t8 : "test"));
+            Bridge.Test.Assert.areStrictEqual("test", ($t9 = s3, $t9 !== null ? $t9 : s2));
+            Bridge.Test.Assert.areStrictEqual("test", ($t10 = s3, $t10 !== null ? $t10 : o2));
+            Bridge.Test.Assert.areStrictEqual("test", ($t11 = s3, $t11 !== null ? $t11 : "test"));
+            Bridge.Test.Assert.areStrictEqual("test", ($t12 = null, $t12 !== null ? $t12 : "test"));
+    
+            var i1 = 0;
+            var i2 = 1;
+            var i3 = null;
+    
+            Bridge.Test.Assert.areStrictEqual(0, ($t13 = i1, $t13 !== null ? $t13 : i2));
+            Bridge.Test.Assert.areStrictEqual(0, ($t14 = i1, $t14 !== null ? $t14 : o2));
+            Bridge.Test.Assert.areStrictEqual(0, ($t15 = i1, $t15 !== null ? $t15 : 1));
+            Bridge.Test.Assert.areStrictEqual(1, ($t16 = i3, $t16 !== null ? $t16 : i2));
+            Bridge.Test.Assert.areStrictEqual("test", ($t17 = i3, $t17 !== null ? $t17 : o2));
+            Bridge.Test.Assert.areStrictEqual(1, ($t18 = i3, $t18 !== null ? $t18 : 1));
+            Bridge.Test.Assert.areStrictEqual(1, ($t19 = null, $t19 !== null ? $t19 : i2));
+        }
+    });
+    
     Bridge.define('Bridge.ClientTest.Batch2.BridgeIssues.N1122', {
         statics: {
             testClippingInJavaScriptOverflowMode: function () {
@@ -182,7 +224,7 @@
             $t = Bridge.getEnumerator(["x", "y"]);
             while ($t.moveNext()) {
                 var s = $t.getCurrent();
-                result += s;
+                result = System.String.concat(result,  s);
             }
             Bridge.Test.Assert.areEqual("xy", result);
         },
@@ -219,14 +261,14 @@
         foreachWithArrayItemCallbackWorks: function () {
             var result = "";
             ["a", "b", "c"].forEach(function (s) {
-                result += s;
+                result = System.String.concat(result,  s);
             });
             Bridge.Test.Assert.areEqual("abc", result);
         },
         foreachWithArrayCallbackWorks: function () {
             var result = "";
             Bridge.Linq.Enumerable.from(["a", "b", "c"]).forEach(function (s, i) {
-                result += s + i;
+                result = System.String.concat(result,  (System.String.concat(s,  i)));
             });
             Bridge.Test.Assert.areEqual("a0b1c2", result);
         },
@@ -332,7 +374,7 @@
             $t = Bridge.getEnumerator(list);
             while ($t.moveNext()) {
                 var s = $t.getCurrent();
-                result += s;
+                result = System.String.concat(result,  s);
             }
             Bridge.Test.Assert.areEqual("xy", result);
         },

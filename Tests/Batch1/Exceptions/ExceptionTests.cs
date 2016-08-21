@@ -36,7 +36,7 @@ namespace Bridge.ClientTest.Exceptions
             var ex = new Exception();
             Assert.True((object)ex is Exception, "is Exception");
             Assert.AreEqual(null, ex.InnerException, "InnerException");
-            Assert.AreEqual(null, ex.Message);
+            Assert.AreEqual("Exception of type 'System.Exception' was thrown.", ex.Message);
         }
 
         [Test]

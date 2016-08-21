@@ -3,7 +3,7 @@
     Bridge.define("System.Exception", {
         constructor: function (message, innerException) {
             this.$initialize();
-            this.message = message ? message : null;
+            this.message = message ? message : ("Exception of type '" + Bridge.getTypeName(this) + "' was thrown.");
             this.innerException = innerException ? innerException : null;
             this.errorStack = new Error();
             this.data = new(System.Collections.Generic.Dictionary$2(Object, Object))();
@@ -351,8 +351,15 @@
 
         constructor: function (args, message, innerException) {
             this.$initialize();
-            System.Exception.$constructor.call(this, message || (args.length && args[0] ? args[0].toString() : "An error occurred"), innerException);
             this.arguments = System.Array.clone(args);
+
+            if (message == null) {
+                message = "Promise exception: [";
+                message += this.arguments.map(function (item) { return item == null ? "null" : item.toString(); }).join(", ");
+                message += "]";
+            }
+
+            System.Exception.$constructor.call(this, message, innerException);
         },
 
         getArguments: function () {

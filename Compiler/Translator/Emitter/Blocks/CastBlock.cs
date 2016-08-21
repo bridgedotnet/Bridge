@@ -221,7 +221,7 @@ namespace Bridge.Translator
 
             var conversion = this.Emitter.Resolver.Resolver.GetConversion(expression);
 
-            if (conversion.IsNumericConversion || (isCast && conversion.IsIdentityConversion))
+            if (conversion.IsNumericConversion || conversion.IsEnumerationConversion || (isCast && conversion.IsIdentityConversion))
             {
                 expression.AcceptVisitor(this.Emitter);
                 return;
@@ -289,7 +289,7 @@ namespace Bridge.Translator
                 }
                 else if (Helpers.IsLongType(expectedType, this.Emitter.Resolver))
                 {
-                    typeName = JS.Types.SYSTEM_INT64;
+                    typeName = JS.Types.System.Int64.NAME;
                 }
                 else if (Helpers.IsULongType(expectedType, this.Emitter.Resolver))
                 {

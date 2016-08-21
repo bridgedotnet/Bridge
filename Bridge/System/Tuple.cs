@@ -16,6 +16,12 @@ namespace System
             [Template("item1")]
             get;
         }
+
+        [Template("Bridge.objectEquals({this}, {o})")]
+        public override extern bool Equals(object o);
+
+        [Template("Bridge.getHashCode({this}, false, true)")]
+        public override extern int GetHashCode();
     }
 
     [External]
@@ -38,6 +44,12 @@ namespace System
             [Template("item2")]
             get;
         }
+
+        [Template("Bridge.objectEquals({this}, {o})")]
+        public override extern bool Equals(object o);
+
+        [Template("Bridge.getHashCode({this}, false, true)")]
+        public override extern int GetHashCode();
     }
 
     [External]
@@ -66,6 +78,12 @@ namespace System
             [Template("item3")]
             get;
         }
+
+        [Template("Bridge.objectEquals({this}, {o})")]
+        public override extern bool Equals(object o);
+
+        [Template("Bridge.getHashCode({this}, false, true)")]
+        public override extern int GetHashCode();
     }
 
     [External]
@@ -100,6 +118,12 @@ namespace System
             [Template("item4")]
             get;
         }
+
+        [Template("Bridge.objectEquals({this}, {o})")]
+        public override extern bool Equals(object o);
+
+        [Template("Bridge.getHashCode({this}, false, true)")]
+        public override extern int GetHashCode();
     }
 
     [External]
@@ -140,6 +164,12 @@ namespace System
             [Template("item5")]
             get;
         }
+
+        [Template("Bridge.objectEquals({this}, {o})")]
+        public override extern bool Equals(object o);
+
+        [Template("Bridge.getHashCode({this}, false, true)")]
+        public override extern int GetHashCode();
     }
 
     [External]
@@ -186,6 +216,12 @@ namespace System
             [Template("item6")]
             get;
         }
+
+        [Template("Bridge.objectEquals({this}, {o})")]
+        public override extern bool Equals(object o);
+
+        [Template("Bridge.getHashCode({this}, false, true)")]
+        public override extern int GetHashCode();
     }
 
     [External]
@@ -238,6 +274,12 @@ namespace System
             [Template("item7")]
             get;
         }
+
+        [Template("Bridge.objectEquals({this}, {o})")]
+        public override extern bool Equals(object o);
+
+        [Template("Bridge.getHashCode({this}, false, true)")]
+        public override extern int GetHashCode();
     }
 
     [External]
@@ -296,6 +338,12 @@ namespace System
             [Template("rest")]
             get;
         }
+
+        [Template("Bridge.objectEquals({this}, {o})")]
+        public override extern bool Equals(object o);
+
+        [Template("Bridge.getHashCode({this}, false, true)")]
+        public override extern int GetHashCode();
     }
 
     [External]

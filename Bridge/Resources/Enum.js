@@ -82,11 +82,12 @@
 
             System.Enum.checkEnumType(enumType);
 
-            var values = enumType;
+            var values = enumType,
+                isLong = System.Int64.is64Bit(value);
 
             if (((!enumType.prototype || !enumType.prototype.$flags) && forceFlags !== true) || (value === 0)) {
                 for (var i in values) {
-                    if (values[i] === value) {
+                    if (isLong && System.Int64.is64Bit(values[i]) ? (values[i].eq(value)) : (values[i] === value)) {
                         return enumMethods.toName(i);
                     }
                 }
@@ -97,7 +98,7 @@
                 var parts = [];
 
                 for (var i in values) {
-                    if (values[i] & value) {
+                    if (isLong && System.Int64.is64Bit(values[i]) ? (!values[i].and(value).isZero()) : (values[i] & value)) {
                         parts.push(enumMethods.toName(i));
                     }
                 }

@@ -121,7 +121,7 @@
             fixtureFabric: Bridge.getDefaultValue(T),
             getFixtureFabric: function () {
                 if (Bridge.Test.QUnit.TestFixture$1(T).fixtureFabric == null) {
-                    Bridge.Test.QUnit.TestFixture$1(T).fixtureFabric = new T();
+                    Bridge.Test.QUnit.TestFixture$1(T).fixtureFabric = Bridge.createInstance(T);
                 }
     
                 return Bridge.Test.QUnit.TestFixture$1(T).fixtureFabric;

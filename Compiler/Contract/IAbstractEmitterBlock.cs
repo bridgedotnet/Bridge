@@ -1,18 +1,20 @@
 using System;
+using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.NRefactory.TypeSystem;
 
 namespace Bridge.Contract
 {
     public interface IAbstractEmitterBlock
     {
-        string AddLocal(string name, ICSharpCode.NRefactory.CSharp.AstType type, string valueName = null);
+        string AddLocal(string name, AstNode node, ICSharpCode.NRefactory.CSharp.AstType type, string valueName = null);
 
         void AddLocals(System.Collections.Generic.IEnumerable<ICSharpCode.NRefactory.CSharp.ParameterDeclaration> declarations, ICSharpCode.NRefactory.CSharp.AstNode statement);
 
         void BeginBlock();
 
-        System.Collections.Generic.Dictionary<string, string> BuildLocalsMap();
+        System.Collections.Generic.Dictionary<IVariable, string> BuildLocalsMap();
 
-        void ClearLocalsMap(System.Collections.Generic.Dictionary<string, string> prevMap = null);
+        void ClearLocalsMap(System.Collections.Generic.Dictionary<IVariable, string> prevMap = null);
 
         System.Collections.Generic.Dictionary<string, string> BuildLocalsNamesMap();
 

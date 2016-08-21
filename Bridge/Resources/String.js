@@ -460,6 +460,10 @@
 
         trim: function (s, chars) {
             return System.String.trimStart(System.String.trimEnd(s, chars), chars);
+        },
+
+        concat: function(s1, s2) {
+            return (s1 == null ? "" : s1) + (s2 == null ? "" : s2);
         }
     };
 

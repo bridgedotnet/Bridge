@@ -1,3 +1,4 @@
+using System;
 using Bridge.Contract;
 using Bridge.Contract.Constants;
 using ICSharpCode.NRefactory.CSharp;
@@ -46,43 +47,49 @@ namespace Bridge.Translator
 
         public virtual void AddLocals(IEnumerable<ParameterDeclaration> declarations, AstNode statement)
         {
+            var visitor = new ReferenceArgumentVisitor();
+            statement.AcceptVisitor(visitor);
+
             declarations.ToList().ForEach(item =>
             {
+                var rr = item.Parent != null ? (LocalResolveResult)this.Emitter.Resolver.ResolveNode(item, this.Emitter) : null;
                 var name = this.Emitter.GetEntityName(item);
-                var vName = this.AddLocal(item.Name, item.Type, name);
+                var vName = this.AddLocal(item.Name, item, item.Type, name);
 
+                if (item.Parent == null && item.Name == "value" && visitor.DirectionExpression.Any(expr => expr is IdentifierExpression && ((IdentifierExpression)expr).Identifier == "value"))
+                {
+                    return;
+                }
+               
                 if (item.ParameterModifier == ParameterModifier.Out || item.ParameterModifier == ParameterModifier.Ref)
                 {
-                    this.Emitter.LocalsMap[item.Name] = vName + ".v";
+                    this.Emitter.LocalsMap[rr != null ? rr.Variable : new DefaultVariable(ReflectionHelper.FindType(this.Emitter.Resolver.Compilation, TypeCode.Object), name)] = vName + ".v";
                 }
                 else
                 {
-                    this.Emitter.LocalsMap[item.Name] = vName;
+                    this.Emitter.LocalsMap[rr != null ? rr.Variable : new DefaultVariable(ReflectionHelper.FindType(this.Emitter.Resolver.Compilation, TypeCode.Object), name)] = vName;
                 }
             });
-
-            var visitor = new ReferenceArgumentVisitor();
-            statement.AcceptVisitor(visitor);
 
             foreach (var expr in visitor.DirectionExpression)
             {
                 var rr = this.Emitter.Resolver.ResolveNode(expr, this.Emitter);
 
                 IdentifierExpression identifierExpression;
-
-                if (rr is LocalResolveResult && ((identifierExpression = expr as IdentifierExpression) != null))
+                var lrr = rr as LocalResolveResult;
+                if (lrr != null && ((identifierExpression = expr as IdentifierExpression) != null))
                 {
                     var name = identifierExpression.Identifier;
                     if (Helpers.IsReservedWord(name))
                     {
                         name = Helpers.ChangeReservedWord(name);
                     }
-                    this.Emitter.LocalsMap[identifierExpression.Identifier] = name + ".v";
+                    this.Emitter.LocalsMap[lrr.Variable] = name + ".v";
                 }
             }
         }
 
-        public string AddLocal(string name, AstType type, string valueName = null)
+        public string AddLocal(string name, AstNode node, AstType type, string valueName = null)
         {
             this.Emitter.Locals.Add(name, type);
 
@@ -104,11 +111,12 @@ namespace Bridge.Translator
             }
 
             var result = this.Emitter.LocalsNamesMap[name];
+            var lrr = node != null && node.Parent != null ? this.Emitter.Resolver.ResolveNode(node, this.Emitter) as LocalResolveResult : null;
 
-            if (this.Emitter.LocalsMap != null && this.Emitter.LocalsMap.ContainsKey(name))
+            if (this.Emitter.LocalsMap != null && lrr != null && this.Emitter.LocalsMap.ContainsKey(lrr.Variable))
             {
-                var oldValue = this.Emitter.LocalsMap[name];
-                this.Emitter.LocalsMap[name] = result + (oldValue.EndsWith(".v") ? ".v" : "");
+                var oldValue = this.Emitter.LocalsMap[lrr.Variable];
+                this.Emitter.LocalsMap[lrr.Variable] = result + (oldValue.EndsWith(".v") ? ".v" : "");
             }
 
             if (this.Emitter.IsAsync && !this.Emitter.AsyncVariables.Contains(result))
@@ -150,23 +158,23 @@ namespace Bridge.Translator
             return tempName;
         }
 
-        public virtual Dictionary<string, string> BuildLocalsMap()
+        public virtual Dictionary<IVariable, string> BuildLocalsMap()
         {
             var prevMap = this.Emitter.LocalsMap;
 
             if (prevMap == null)
             {
-                this.Emitter.LocalsMap = new Dictionary<string, string>();
+                this.Emitter.LocalsMap = new Dictionary<IVariable, string>();
             }
             else
             {
-                this.Emitter.LocalsMap = new Dictionary<string, string>(prevMap);
+                this.Emitter.LocalsMap = new Dictionary<IVariable, string>(prevMap);
             }
 
             return prevMap;
         }
 
-        public virtual void ClearLocalsMap(Dictionary<string, string> prevMap = null)
+        public virtual void ClearLocalsMap(Dictionary<IVariable, string> prevMap = null)
         {
             this.Emitter.LocalsMap = prevMap;
         }
@@ -212,7 +220,13 @@ namespace Bridge.Translator
                             {
                                 if (prm.IsOptional)
                                 {
-                                    this.Write(string.Format("if ({0} === void 0) {{ {0} = ", prm.Name));
+                                    var name = prm.Name;
+                                    if (Helpers.IsReservedWord(name))
+                                    {
+                                        name = Helpers.ChangeReservedWord(name);
+                                    }
+
+                                    this.Write(string.Format("if ({0} === void 0) {{ {0} = ", name));
                                     if (prm.ConstantValue == null && prm.Type.Kind == TypeKind.Struct && !prm.Type.IsKnownType(KnownTypeCode.NullableOfT))
                                     {
                                         this.Write(Inspector.GetStructDefaultValue(prm.Type, this.Emitter));
@@ -227,14 +241,20 @@ namespace Bridge.Translator
                                 }
                                 else if (prm.IsParams)
                                 {
+                                    var name = prm.Name;
+                                    if (Helpers.IsReservedWord(name))
+                                    {
+                                        name = Helpers.ChangeReservedWord(name);
+                                    }
+
                                     if (expandParams)
                                     {
                                         //var args = Array.prototype.slice.call(arguments, 1);
-                                        this.Write(string.Format("{0} = Array.prototype.slice.call(arguments, {1});", prm.Name, method.Parameters.IndexOf(prm) + method.TypeParameters.Count));
+                                        this.Write(string.Format("{0} = Array.prototype.slice.call(arguments, {1});", name, method.Parameters.IndexOf(prm) + method.TypeParameters.Count));
                                     }
                                     else
                                     {
-                                        this.Write(string.Format("if ({0} === void 0) {{ {0} = []; }}", prm.Name));
+                                        this.Write(string.Format("if ({0} === void 0) {{ {0} = []; }}", name));
                                     }
 
                                     this.WriteNewLine();
@@ -247,7 +267,17 @@ namespace Bridge.Translator
 
             declarations.ToList().ForEach(item =>
             {
-                var isReferenceLocal = this.Emitter.LocalsMap.ContainsKey(item.Name) && this.Emitter.LocalsMap[item.Name].EndsWith(".v");
+                var lrr = item.Parent != null ? (LocalResolveResult)this.Emitter.Resolver.ResolveNode(item, this.Emitter) : null;
+                var isReferenceLocal = lrr != null && this.Emitter.LocalsMap.ContainsKey(lrr.Variable) && this.Emitter.LocalsMap[lrr.Variable].EndsWith(".v");
+
+                if (item.Parent == null && item.Name == "value")
+                {
+                    var p = this.Emitter.LocalsMap.FirstOrDefault(pair => pair.Key.Name == "value");
+                    if (p.Value != null && p.Value.EndsWith(".v"))
+                    {
+                        isReferenceLocal = true;
+                    }
+                }
 
                 if (isReferenceLocal && !(item.ParameterModifier == ParameterModifier.Out || item.ParameterModifier == ParameterModifier.Ref))
                 {

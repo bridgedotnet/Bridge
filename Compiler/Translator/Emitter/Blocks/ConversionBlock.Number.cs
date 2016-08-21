@@ -42,9 +42,35 @@ namespace Bridge.Translator
                 toType = toType.GetDefinition().EnumUnderlyingType;
             }
 
-            if (conversion.IsNumericConversion && conversion.IsExplicit)
+            bool isArrayIndex = false;
+            if (Helpers.Is64Type(toType, block.Emitter.Resolver) && expression.Parent is IndexerExpression &&
+                ((IndexerExpression)expression.Parent).Arguments.Contains(expression))
             {
-                if (Helpers.IsDecimalType(toType, block.Emitter.Resolver) && !Helpers.IsDecimalType(fromType, block.Emitter.Resolver))
+                block.Write(JS.Types.System.Int64.TONUMBER);
+                block.Write("(");
+                isArrayIndex = true;
+            }
+
+            if ((conversion.IsNumericConversion || conversion.IsEnumerationConversion) && conversion.IsExplicit)
+            {
+                if (!(expression.Parent is ArrayInitializerExpression) &&
+                     Helpers.Is64Type(fromType, block.Emitter.Resolver) &&
+                     Helpers.IsFloatType(toType, block.Emitter.Resolver) &&
+                     !Helpers.IsDecimalType(toType, block.Emitter.Resolver))
+                {
+                    var be = expression.Parent as BinaryOperatorExpression;
+
+                    if (be == null || be.Operator != BinaryOperatorType.Divide || be.Left != expression)
+                    {
+                        block.Write(JS.Types.System.Int64.TONUMBER);
+                        if (!(expression is CastExpression && ((CastExpression)expression).Expression is ParenthesizedExpression))
+                        {
+                            block.Write("(");
+                            block.AfterOutput += ")";
+                        }
+                    }
+                }
+                else if (Helpers.IsDecimalType(toType, block.Emitter.Resolver) && !Helpers.IsDecimalType(fromType, block.Emitter.Resolver))
                 {
                     block.Write(JS.Types.SYSTEM_DECIMAL + "(");
                     block.AfterOutput += ", null, " + BridgeTypes.ToJsName(fromType, block.Emitter) + ")";
@@ -82,7 +108,7 @@ namespace Bridge.Translator
 
                 if (be == null || be.Operator != BinaryOperatorType.Divide || be.Left != expression)
                 {
-                    block.Write(JS.Types.SYSTEM_INT64 + ".toNumber");
+                    block.Write(JS.Types.System.Int64.TONUMBER);
                     if (!(expression is CastExpression && ((CastExpression)expression).Expression is ParenthesizedExpression))
                     {
                         block.Write("(");
@@ -239,6 +265,11 @@ namespace Bridge.Translator
                     ClipInteger(block, expression, toType, false);
                 }
             }
+
+            if (isArrayIndex)
+            {
+                block.AfterOutput += ")";
+            }
         }
 
         private static void ClipDecimal(Expression expression, ConversionBlock block, IType expectedType)
@@ -270,7 +301,8 @@ namespace Bridge.Translator
 
             if (isChecked)
             {
-                block.Write(JS.Types.SYSTEM_INT64 + ".check(");
+                block.Write(JS.Types.System.Int64.CHECK);
+                block.WriteOpenParentheses();
 
                 block.AfterOutput += ", ";
                 block.AfterOutput += BridgeTypes.ToJsName(expectedType, block.Emitter);
@@ -326,7 +358,7 @@ namespace Bridge.Translator
                     throw new ArgumentException("Can not narrow to " + expectedType, "expectedType");
                 }
 
-                block.Write(JS.Types.SYSTEM_INT64 + ".");
+                block.Write(JS.Types.System.Int64.NAME + ".");
                 block.Write(action);
                 if (!(expression is CastExpression && ((CastExpression)expression).Expression is ParenthesizedExpression))
                 {

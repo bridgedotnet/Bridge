@@ -646,14 +646,37 @@ namespace Bridge.Translator
                     dynamic i = this.CurrentType.LastEnumValue;
                     ++i;
                     this.CurrentType.LastEnumValue = i;
-                    initializer = new PrimitiveExpression(this.CurrentType.LastEnumValue);
+
+                    if (member != null && member.Member.DeclaringTypeDefinition.EnumUnderlyingType.IsKnownType(KnownTypeCode.Int64))
+                    {
+                        initializer = new PrimitiveExpression(Convert.ToInt64(this.CurrentType.LastEnumValue));
+                    }
+                    else if (member != null && member.Member.DeclaringTypeDefinition.EnumUnderlyingType.IsKnownType(KnownTypeCode.UInt64))
+                    {
+                        initializer = new PrimitiveExpression(Convert.ToUInt64(this.CurrentType.LastEnumValue));
+                    }
+                    else
+                    {
+                        initializer = new PrimitiveExpression(this.CurrentType.LastEnumValue);
+                    }
                 }
                 else
                 {
                     var rr = this.Resolver.ResolveNode(enumMemberDeclaration.Initializer, null) as ConstantResolveResult;
                     if (rr != null)
                     {
-                        initializer = new PrimitiveExpression(rr.ConstantValue);
+                        if (member != null && member.Member.DeclaringTypeDefinition.EnumUnderlyingType.IsKnownType(KnownTypeCode.Int64))
+                        {
+                            initializer = new PrimitiveExpression(Convert.ToInt64(rr.ConstantValue));
+                        }
+                        else if (member != null && member.Member.DeclaringTypeDefinition.EnumUnderlyingType.IsKnownType(KnownTypeCode.UInt64))
+                        {
+                            initializer = new PrimitiveExpression(Convert.ToUInt64(rr.ConstantValue));
+                        }
+                        else
+                        {
+                            initializer = new PrimitiveExpression(rr.ConstantValue);
+                        }
                         this.CurrentType.LastEnumValue = rr.ConstantValue;
                     }
                 }

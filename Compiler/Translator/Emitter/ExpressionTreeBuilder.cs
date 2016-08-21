@@ -186,9 +186,9 @@ namespace Bridge.Translator
             {
                 id = this._emitter.LocalsNamesMap[id];
             }
-            else if (this._emitter.LocalsMap != null && this._emitter.LocalsMap.ContainsKey(id))
+            else if (this._emitter.LocalsMap != null && this._emitter.LocalsMap.ContainsKey(rr.Variable))
             {
-                id = this._emitter.LocalsMap[id];
+                id = this._emitter.LocalsMap[rr.Variable];
             }
 
             return GetExpressionForLocal(rr.Variable.Name, id, rr.Variable.Type);

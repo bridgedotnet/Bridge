@@ -62,14 +62,14 @@
             b.v = true;
         },
         method8: function (s) {
-            s.v = s.v + "Method8";
+            s.v = System.String.concat(s.v,  "Method8");
         },
         method9: function (i, s) {
-            s.v = s.v + i;
+            s.v = System.String.concat(s.v,  i);
         },
         method10: function (i, b, s) {
             b.v = true;
-            s.v = s.v + i;
+            s.v = System.String.concat(s.v,  i);
         }
     });
     

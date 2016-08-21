@@ -1,6 +1,5 @@
 using Bridge.Contract;
 using Bridge.Contract.Constants;
-
 using ICSharpCode.NRefactory.CSharp;
 
 namespace Bridge.Translator
@@ -12,6 +11,19 @@ namespace Bridge.Translator
         {
             this.Emitter = emitter;
             this.ReturnStatement = returnStatement;
+        }
+
+        public ReturnBlock(IEmitter emitter, Expression expression)
+            : base(emitter, expression)
+        {
+            this.Emitter = emitter;
+            this.Expression = expression;
+        }
+
+        public Expression Expression
+        {
+            get;
+            set;
         }
 
         public ReturnStatement ReturnStatement
@@ -28,14 +40,16 @@ namespace Bridge.Translator
         protected void VisitReturnStatement()
         {
             ReturnStatement returnStatement = this.ReturnStatement;
+            Expression expression = this.Expression;
 
             if (this.Emitter.IsAsync)
             {
-                var finallyNode = this.GetParentFinallyBlock(returnStatement, false);
+                var finallyNode = this.GetParentFinallyBlock(returnStatement ?? (AstNode)expression, false);
+                expression = returnStatement != null ? returnStatement.Expression : expression;
 
                 if (this.Emitter.AsyncBlock != null && this.Emitter.AsyncBlock.IsTaskReturn)
                 {
-                    this.WriteAwaiters(returnStatement.Expression);
+                    this.WriteAwaiters(expression);
 
                     if (finallyNode != null)
                     {
@@ -46,11 +60,11 @@ namespace Bridge.Translator
                         this.Write(JS.Vars.ASYNC_TCS + "." + JS.Funcs.SET_RESULT + "(");
                     }
 
-                    if (!returnStatement.Expression.IsNull)
+                    if (!expression.IsNull)
                     {
                         var oldValue = this.Emitter.ReplaceAwaiterByVar;
                         this.Emitter.ReplaceAwaiterByVar = true;
-                        returnStatement.Expression.AcceptVisitor(this.Emitter);
+                        expression.AcceptVisitor(this.Emitter);
                         this.Emitter.ReplaceAwaiterByVar = oldValue;
                     }
                     else
@@ -84,24 +98,25 @@ namespace Bridge.Translator
             else
             {
                 this.WriteReturn(false);
+                expression = returnStatement != null ? returnStatement.Expression : expression;
 
                 if (this.Emitter.ReplaceJump && this.Emitter.JumpStatements == null)
                 {
                     this.WriteSpace();
                     this.Write("{jump: 3");
 
-                    if (!returnStatement.Expression.IsNull)
+                    if (!expression.IsNull)
                     {
                         this.Write(", v: ");
-                        returnStatement.Expression.AcceptVisitor(this.Emitter);
+                        expression.AcceptVisitor(this.Emitter);
                     }
 
                     this.Write("}");
                 }
-                else if (!returnStatement.Expression.IsNull)
+                else if (!expression.IsNull)
                 {
                     this.WriteSpace();
-                    returnStatement.Expression.AcceptVisitor(this.Emitter);
+                    expression.AcceptVisitor(this.Emitter);
                 }
 
                 this.WriteSemiColon();

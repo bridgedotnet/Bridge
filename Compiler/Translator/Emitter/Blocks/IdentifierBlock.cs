@@ -53,9 +53,10 @@ namespace Bridge.Translator
 
             if (this.Emitter.Locals != null && this.Emitter.Locals.ContainsKey(id) && resolveResult is LocalResolveResult)
             {
-                if (this.Emitter.LocalsMap != null && this.Emitter.LocalsMap.ContainsKey(id) && !(identifierExpression.Parent is DirectionExpression))
+                var lrr = (LocalResolveResult) resolveResult;
+                if (this.Emitter.LocalsMap != null && this.Emitter.LocalsMap.ContainsKey(lrr.Variable) && !(identifierExpression.Parent is DirectionExpression))
                 {
-                    this.Write(this.Emitter.LocalsMap[id]);
+                    this.Write(this.Emitter.LocalsMap[lrr.Variable]);
                 }
                 else if (this.Emitter.LocalsNamesMap != null && this.Emitter.LocalsNamesMap.ContainsKey(id))
                 {

@@ -149,6 +149,12 @@ namespace Bridge.Contract
             private set;
         }
 
+        public string FieldJsName
+        {
+            get;
+            private set;
+        }
+
         public string ParametersCount
         {
             get;
@@ -232,6 +238,7 @@ namespace Bridge.Contract
             this.Name = eventDeclaration.Name;
             this.JsName = Helpers.GetEventRef(eventDeclaration, emitter, remove, true);
             this.AltJsName = Helpers.GetEventRef(eventDeclaration, emitter, !remove, true);
+            this.FieldJsName = emitter.GetEntityName(eventDeclaration);
             this.Inherit = !eventDeclaration.HasModifier(Modifiers.Static);
             this.CancelChangeCase = true;
             this.IsSetter = remove;
@@ -278,6 +285,7 @@ namespace Bridge.Contract
             this.Name = propDeclaration.Name;
             this.JsName = Helpers.GetPropertyRef(propDeclaration, emitter, isSetter, true, true);
             this.AltJsName = Helpers.GetPropertyRef(propDeclaration, emitter, !isSetter, true, true);
+            this.FieldJsName = propDeclaration.Getter != null && propDeclaration.Getter.Body.IsNull ? emitter.GetEntityName(propDeclaration) : null;
             this.Inherit = !propDeclaration.HasModifier(Modifiers.Static);
             this.Static = propDeclaration.HasModifier(Modifiers.Static);
             this.CancelChangeCase = !Helpers.IsFieldProperty(propDeclaration, emitter);
@@ -344,12 +352,14 @@ namespace Bridge.Contract
                 this.CancelChangeCase = !Helpers.IsFieldProperty(member, emitter);
                 this.JsName = Helpers.GetPropertyRef(member, emitter, isSetter, true, true);
                 this.AltJsName = Helpers.GetPropertyRef(member, emitter, !isSetter, true, true);
+                this.FieldJsName = Helpers.IsAutoProperty((IProperty) member) ? emitter.GetEntityName(member) : null;
             }
             else if (member is IEvent)
             {
                 this.CancelChangeCase = true;
                 this.JsName = Helpers.GetEventRef(member, emitter, isSetter, true, true);
                 this.AltJsName = Helpers.GetEventRef(member, emitter, !isSetter, true, true);
+                this.FieldJsName = emitter.GetEntityName(member);
             }
             else
             {
@@ -648,7 +658,7 @@ namespace Bridge.Contract
                     }
 
                     var name = this.Emitter.GetEntityName(m, false, true);
-                    if ((name == this.JsName || name == this.AltJsName) && m.IsStatic == this.Static &&
+                    if ((name == this.JsName || name == this.AltJsName || name == this.FieldJsName) && m.IsStatic == this.Static &&
                         ((m.IsConstructor && this.JsName == JS.Funcs.DCONSTRUCTOR) || m.IsConstructor == this.Constructor))
                     {
                         if (m.IsConstructor != this.Constructor)
@@ -721,11 +731,17 @@ namespace Bridge.Contract
                         var setterIgnore = p.Setter != null && this.Emitter.Validator.IsIgnoreType(p.Setter);
                         var getterName = p.Getter != null ? Helpers.GetPropertyRef(p, this.Emitter, false, true, true) : null;
                         var setterName = p.Setter != null ? Helpers.GetPropertyRef(p, this.Emitter, true, true, true) : null;
-                        if (!getterIgnore && getterName != null && (getterName == this.JsName || getterName == this.AltJsName))
+                        var fieldName = Helpers.IsAutoProperty(p) ? this.Emitter.GetEntityName(p) : null;
+
+                        if (!getterIgnore && getterName != null && (getterName == this.JsName || getterName == this.AltJsName || getterName == this.FieldJsName))
                         {
                             eq = true;
                         }
-                        else if (!setterIgnore && setterName != null && (setterName == this.JsName || setterName == this.AltJsName))
+                        else if (!setterIgnore && setterName != null && (setterName == this.JsName || setterName == this.AltJsName || setterName == this.FieldJsName))
+                        {
+                            eq = true;
+                        }
+                        else if (fieldName != null && (fieldName == this.JsName || fieldName == this.AltJsName || fieldName == this.FieldJsName))
                         {
                             eq = true;
                         }
@@ -783,7 +799,7 @@ namespace Bridge.Contract
                     }
 
                     var name = this.Emitter.GetEntityName(f);
-                    if ((name == this.JsName || name == this.AltJsName) && f.IsStatic == this.Static)
+                    if ((name == this.JsName || name == this.AltJsName || name == this.FieldJsName) && f.IsStatic == this.Static)
                     {
                         return true;
                     }
@@ -840,11 +856,16 @@ namespace Bridge.Contract
                     {
                         var addName = e.AddAccessor != null ? Helpers.GetEventRef(e, this.Emitter, false, true, true) : null;
                         var removeName = e.RemoveAccessor != null ? Helpers.GetEventRef(e, this.Emitter, true, true, true) : null;
-                        if (addName != null && (addName == this.JsName || addName == this.AltJsName))
+                        var fieldName = this.Emitter.GetEntityName(e);
+                        if (addName != null && (addName == this.JsName || addName == this.AltJsName || addName == this.FieldJsName))
                         {
                             eq = true;
                         }
-                        else if (removeName != null && (removeName == this.JsName || removeName == this.AltJsName))
+                        else if (removeName != null && (removeName == this.JsName || removeName == this.AltJsName || removeName == this.FieldJsName))
+                        {
+                            eq = true;
+                        }
+                        else if (fieldName != null && (fieldName == this.JsName || fieldName == this.AltJsName || fieldName == this.FieldJsName))
                         {
                             eq = true;
                         }

@@ -121,7 +121,7 @@
             fixtureFabric: Bridge.getDefaultValue(T),
             getFixtureFabric: function () {
                 if (Bridge.Test.QUnit.TestFixture$1(T).fixtureFabric == null) {
-                    Bridge.Test.QUnit.TestFixture$1(T).fixtureFabric = new T();
+                    Bridge.Test.QUnit.TestFixture$1(T).fixtureFabric = Bridge.createInstance(T);
                 }
     
                 return Bridge.Test.QUnit.TestFixture$1(T).fixtureFabric;
@@ -202,6 +202,7 @@
                 QUnit.test("WithNoUncheckedKeyword - Batch2 TestULong", Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch2_WithNoUncheckedKeywordTests.testULong);
                 QUnit.module("Issues2");
                 QUnit.test("#1385 - Batch2 TestIsTypedArrayForByte", Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch2_BridgeIssues_Bridge1385.testIsTypedArrayForByte);
+                QUnit.test("#1499 - Batch2 TestObjectStringCoalesceWorks", Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch2_BridgeIssues_Bridge1499.testObjectStringCoalesceWorks);
                 QUnit.test("#1122 - Batch2 TestClippingInJavaScriptOverflowMode", Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch2_BridgeIssues_N1122.testClippingInJavaScriptOverflowMode);
                 QUnit.test("#1122 - Batch2 TestIntegerDivisionInJavaScriptOverflowMode", Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch2_BridgeIssues_N1122.testIntegerDivisionInJavaScriptOverflowMode);
                 QUnit.test("#1204 - Batch2 TestStrictNullChecksOptionForNulls", Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch2_BridgeIssues_N1204.testStrictNullChecksOptionForNulls);
@@ -266,6 +267,16 @@
             testIsTypedArrayForByte: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.Bridge1385).beforeTest(false, assert, Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch2_BridgeIssues_Bridge1385);
                 Bridge.ClientTest.Batch2.BridgeIssues.Bridge1385.testIsTypedArrayForByte();
+            }
+        }
+    });
+    
+    Bridge.define('Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch2_BridgeIssues_Bridge1499', {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.Bridge1499)],
+        statics: {
+            testObjectStringCoalesceWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.Bridge1499).beforeTest(true, assert, Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch2_BridgeIssues_Bridge1499);
+                t.getFixture().testObjectStringCoalesceWorks();
             }
         }
     });

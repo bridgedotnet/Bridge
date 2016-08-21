@@ -395,7 +395,14 @@ namespace Bridge.Translator
             var writer = this.SaveWriter();
             this.AddAsyncStep();
 
-            this.Body.AcceptVisitor(this.Emitter);
+            if (this.Body.Parent is LambdaExpression && this.Body is Expression && this.IsTaskReturn)
+            {
+                new ReturnBlock(this.Emitter, (Expression)this.Body).Emit();
+            }
+            else
+            {
+                this.Body.AcceptVisitor(this.Emitter);
+            }
 
             this.RestoreWriter(writer);
 
@@ -412,7 +419,7 @@ namespace Bridge.Translator
             {
                 if (!this.Emitter.Locals.ContainsKey(JS.Vars.ASYNC_E))
                 {
-                    this.AddLocal(JS.Vars.ASYNC_E, AstType.Null);
+                    this.AddLocal(JS.Vars.ASYNC_E, null, AstType.Null);
                 }
 
                 this.WriteNewLine();
@@ -532,7 +539,7 @@ namespace Bridge.Translator
                 {
                     if (!this.Emitter.Locals.ContainsKey(JS.Vars.ASYNC_E))
                     {
-                        this.AddLocal(JS.Vars.ASYNC_E, AstType.Null);
+                        this.AddLocal(JS.Vars.ASYNC_E, null, AstType.Null);
                     }
 
                     this.WriteIf();

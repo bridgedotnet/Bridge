@@ -1,11 +1,9 @@
 using Bridge.Contract;
 using Bridge.Contract.Constants;
-
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
 using Mono.Cecil;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,7 +48,19 @@ namespace Bridge.Translator
                 return;
             }
 
-            bool isTypeParam = resolveResult.Type.Kind == TypeKind.TypeParameter;
+            bool isTypeParam = resolveResult != null && resolveResult.Type.Kind == TypeKind.TypeParameter;
+            var invocationResolveResult = this.Emitter.Resolver.ResolveNode(objectCreateExpression, this.Emitter) as InvocationResolveResult;
+
+            if (isTypeParam && invocationResolveResult != null && invocationResolveResult.Member.Parameters.Count == 0)
+            {
+                this.Write(JS.Funcs.BRIDGE_CREATEINSTANCE);
+                this.WriteOpenParentheses();
+                this.Write(resolveResult.Type.Name);
+                this.WriteCloseParentheses();
+
+                return;
+            }
+
             var type = isTypeParam ? null : this.Emitter.GetTypeDefinition(objectCreateExpression.Type);
 
             if (type != null && type.BaseType != null && type.BaseType.FullName == "System.MulticastDelegate")
@@ -80,7 +90,6 @@ namespace Bridge.Translator
             var argsExpressions = argsInfo.ArgumentsExpressions;
             var paramsArg = argsInfo.ParamsExpression;
 
-            var invocationResolveResult = this.Emitter.Resolver.ResolveNode(objectCreateExpression, this.Emitter) as InvocationResolveResult;
             string inlineCode = null;
 
             if (invocationResolveResult != null)

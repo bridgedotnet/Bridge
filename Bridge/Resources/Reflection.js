@@ -91,6 +91,7 @@
 
     Bridge.Reflection = {
         setMetadata: function (type, metadata) {
+            type.$getMetadata = Bridge.Reflection.getMetadata;
             type.$metadata = metadata;
         },
 
@@ -177,7 +178,7 @@
         },
 
         getBaseType: function (type) {
-            if (type === Object || type.$kind === "interface") {
+            if (type === Object || type.$kind === "interface" || type.prototype == null) {
                 return null;
             } else if (Object.getPrototypeOf) {
                 return Object.getPrototypeOf(type.prototype).constructor;

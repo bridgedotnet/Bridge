@@ -334,5 +334,24 @@ namespace Bridge.Translator
 
             base.VisitAssignmentExpression(assignmentExpression);
         }
+
+        public override void VisitInvocationExpression(InvocationExpression invocationExpression)
+        {
+            var rr = resolver.Resolve(invocationExpression) as CSharpInvocationResolveResult;
+            
+            foreach (var argument in rr.Arguments)
+            {
+                if (argument.Type.Kind == TypeKind.TypeParameter)
+                {
+                    var ivar = new TypeVariable(argument.Type);
+                    if (!_usedVariables.Contains(ivar))
+                    {
+                        _usedVariables.Add(ivar);
+                    }
+                }
+            }
+
+            base.VisitInvocationExpression(invocationExpression);
+        }
     }
 }

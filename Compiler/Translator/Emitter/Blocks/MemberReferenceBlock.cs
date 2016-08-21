@@ -9,6 +9,7 @@ using Object.Net.Utilities;
 using System;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Bridge.Translator
 {
@@ -379,6 +380,7 @@ namespace Bridge.Translator
                 var oldBuilder = this.Emitter.Output;
                 var oldInline = inline;
                 string thisArg = null;
+                bool isSimple = true;
 
                 if (this.MemberReferenceExpression.Target is BaseReferenceExpression)
                 {
@@ -400,10 +402,44 @@ namespace Bridge.Translator
                     }
 
                     thisArg = this.Emitter.Output.ToString();
+
+                    if (Regex.Matches(inline, @"\{(\*?)this(\:(\w+))?\}").Count > 1)
+                    {
+                        var mrr = resolveResult as MemberResolveResult;
+                        bool isField = mrr != null && mrr.Member is IField &&
+                                       (mrr.TargetResult is ThisResolveResult ||
+                                        mrr.TargetResult is LocalResolveResult);
+
+                        isSimple = (mrr != null && (mrr.TargetResult is ThisResolveResult || mrr.TargetResult is ConstantResolveResult || mrr.TargetResult is LocalResolveResult)) || isField;
+                    }
                 }
 
-                int thisIndex = inline.IndexOf("{this}");
-                inline = inline.Replace("{this}", thisArg);
+                int thisIndex;
+
+                if (!isSimple)
+                {
+                    StringBuilder sb = new StringBuilder();
+
+                    sb.Append("(");
+                    var tempVar = this.GetTempVarName();
+                    inline = inline.Replace("{this}", tempVar);
+                    thisIndex = tempVar.Length + 2;
+
+                    sb.Append(tempVar);
+                    sb.Append("=");
+                    sb.Append(thisArg);
+                    sb.Append(", ");
+
+                    sb.Append(inline);
+                    sb.Append(")");
+
+                    inline = sb.ToString();
+                }
+                else
+                {
+                    thisIndex = inline.IndexOf("{this}", StringComparison.Ordinal);
+                    inline = inline.Replace("{this}", thisArg);
+                }
 
                 if (member != null && member.Member is IProperty)
                 {

@@ -405,7 +405,7 @@ namespace Bridge.Translator
                     (this.HandleReturn.HasValue && this.HandleReturn.Value))
                 {
                     this.LoopVar = this.GetTempVarName();
-                    this.Write("var " + this.LoopVar + " = ");
+                    this.Write(this.LoopVar + " = ");
                 }
                 else if (!this.NoBraces)
                 {

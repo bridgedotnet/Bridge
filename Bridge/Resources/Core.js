@@ -309,7 +309,7 @@
             }
         },
 
-        getHashCode: function (value, safe) {
+        getHashCode: function (value, safe, deep) {
             // In CLR: mutable object should keep on returning same value
             // Bridge.NET goals: make it deterministic (to make testing easier) without breaking CLR contracts
             //     for value types it returns deterministic values (f.e. for int 3 it returns 3)
@@ -358,6 +358,23 @@
 
             if (value.$$hashCode) {
                 return value.$$hashCode;
+            }
+
+            if (deep && typeof value == "object") {
+                var result = 0,
+                    temp;
+
+                for (var property in value) {
+                    if (value.hasOwnProperty(property)) {
+                        temp = Bridge.isEmpty(value[property], true) ? 0 : Bridge.getHashCode(value[property]);
+                        result = 29 * result + temp;
+                    }
+                }
+
+                if (result !== 0) {
+                    value.$$hashCode = result;
+                    return result;
+                }
             }
 
             value.$$hashCode = (Math.random() * 0x100000000) | 0;
@@ -647,17 +664,19 @@
         },
 
         isArray: function (obj) {
-            return Object.prototype.toString.call(obj) in {
-                "[object Array]": 1,
-                "[object Uint8Array]": 1,
-                "[object Int8Array]": 1,
-                "[object Int16Array]": 1,
-                "[object Uint16Array]": 1,
-                "[object Int32Array]": 1,
-                "[object Uint32Array]": 1,
-                "[object Float32Array]": 1,
-                "[object Float64Array]": 1
-            };
+            if (obj == null) {
+                return false;
+            }
+            var c = obj.constructor;
+            return c === Array ||
+                c === Uint8Array ||
+                c === Int8Array ||
+                c === Int16Array ||
+                c === Uint16Array ||
+                c === Int32Array ||
+                c === Uint32Array ||
+                c === Float32Array ||
+                c === Float64Array;
         },
 
         isFunction: function (obj) {
@@ -895,7 +914,7 @@
             }
 
             if (typeof (instance) === "number") {
-                if (Math.floor(instance, 0) === instance) {
+                if (!isNaN(instance) && isFinite(instance) && Math.floor(instance, 0) === instance) {
                     return System.Int32;
                 } else {
                     return System.Double;
@@ -1198,7 +1217,9 @@
         },
 
         getMetadata: function (t) {
-            return t.$getMetadata ? t.$getMetadata() : t.$metadata;
+            var m = t.$getMetadata ? t.$getMetadata() : t.$metadata;
+
+            return m;
         }
     };
 

@@ -36,14 +36,14 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test(ExpectedCount = 8)]
         public static void TestUseCase()
         {
-            Assert.AreEqual(0xFFFFFFFF, Bridge857A.All, "Bridge857 Bridge857A");
-            Assert.AreEqual(0xFFFFFFFF, Bridge857B.All, "Bridge857 Bridge857B");
+            Assert.True(0xFFFFFFFF == (ulong)Bridge857A.All, "Bridge857 Bridge857A");
+            Assert.True(0xFFFFFFFF == (long)Bridge857B.All, "Bridge857 Bridge857B");
             Assert.AreEqual(0xFFFFFFFF, Bridge857C.All, "Bridge857 Bridge857C All");
             Assert.AreEqual(0, Bridge857C.All1, "Bridge857 Bridge857C All1");
             Assert.AreEqual(1, Bridge857C.All2, "Bridge857 Bridge857C All2");
-            Assert.AreEqual(0xFFFFFFFF, Bridge857D.All, "Bridge857 Bridge857D All");
-            Assert.AreEqual(0, Bridge857D.All1, "Bridge857 Bridge857D All1");
-            Assert.AreEqual(1, Bridge857D.All2, "Bridge857 Bridge857D All2");
+            Assert.True(0xFFFFFFFF == (ulong)Bridge857D.All, "Bridge857 Bridge857D All");
+            Assert.True(0 == (ulong)Bridge857D.All1, "Bridge857 Bridge857D All1");
+            Assert.True(1 == (ulong)Bridge857D.All2, "Bridge857 Bridge857D All2");
         }
     }
 }
