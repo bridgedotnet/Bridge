@@ -1,4 +1,12 @@
-﻿﻿These server-side NUnit tests are to check transpilation process from end to end and can be considered as integration tests as well.
+﻿**Please note**
+The test project should have a dependency on **Bridge.Transpiled** project (the project that triggers Bridge Core JavaScript generation).
+The dependency can be set in **Solution Properties** -> **Project Dependencies**.
+This is required in order to get NUnit Test Adapter not triggering **Bridge** and **Bridge.Html5** projects compilation
+afterwards or instead of **Bridge.Transpiled** project.
+
+
+
+﻿These server-side NUnit tests are to check transpilation process from end to end and can be considered as integration tests as well.
 
 There is `NUnit test project` located at 
   https://github.com/bridgedotnet/Bridge/blob/master/Compiler/TranslatorTests/Bridge.Translator.Tests.csproj
