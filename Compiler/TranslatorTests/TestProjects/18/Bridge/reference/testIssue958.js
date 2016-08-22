@@ -24,10 +24,10 @@
     
     Bridge.apply($_.TestIssue958.Issue958, {
         f1: function (action) {
-            System.Console.log(System.String.concat("Name: ",  action.getName()));
+            System.Console.log(System.String.concat("Name: ", action.getName()));
         },
         f2: function (action) {
-            System.Console.log(System.String.concat("Value: ",  action.getValue()));
+            System.Console.log(System.String.concat("Value: ", action.getValue()));
         }
     });
     
