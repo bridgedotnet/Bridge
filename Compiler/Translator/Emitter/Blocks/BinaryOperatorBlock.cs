@@ -486,7 +486,7 @@ namespace Bridge.Translator
 
                 this.WriteComma();
             }
-            else
+            else if (!delegateOperator && !isStringConcat)
             {
                 this.WriteSpace();
             }

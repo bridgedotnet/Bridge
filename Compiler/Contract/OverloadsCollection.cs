@@ -722,6 +722,12 @@ namespace Bridge.Contract
                         {
                             return false;
                         }
+
+                        if (p.IsIndexer && p.CanGet &&
+                            p.Getter.Attributes.Any(a => a.AttributeType.FullName == "Bridge.ExternalAttribute"))
+                        {
+                            return false;
+                        }
                     }
 
                     bool eq = false;
