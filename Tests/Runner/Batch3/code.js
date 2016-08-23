@@ -6743,8 +6743,6 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
                                 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-                                
-                                
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6774,7 +6772,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -7210,6 +7208,20 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         item: Bridge.getDefaultValue(T),
         nextIfAny: null
     }; });
+    
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1704', {
+        testBaseMethodWithOptionalParams: function () {
+            var d = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1704.Derived();
+            Bridge.Test.Assert.areEqual(1, d.show());
+        }
+    });
+    
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1704.Base', {
+        show: function (i) {
+            if (i === void 0) { i = 1; }
+            return i;
+        }
+    });
     
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A', {
         config: {
@@ -15061,6 +15073,14 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1684.MessageTable', {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1684.PureComponent$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1684.Set$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1684.MessageEditState))]
+    });
+    
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1704.Derived', {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1704.Base],
+        show: function (i) {
+            if (i === void 0) { i = 1; }
+            return Bridge.ClientTest.Batch3.BridgeIssues.Bridge1704.Base.prototype.show.call(this);
+        }
     });
     
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge240B', {
