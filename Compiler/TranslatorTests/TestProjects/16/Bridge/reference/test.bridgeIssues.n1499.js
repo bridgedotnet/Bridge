@@ -16,8 +16,6 @@
         },
         $entryPoint: true
     });
-    
-    
-    
+
     Bridge.init();
 });

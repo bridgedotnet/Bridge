@@ -11,6 +11,6 @@
             return 0;
         }
     });
-    
+
     Bridge.init();
 });

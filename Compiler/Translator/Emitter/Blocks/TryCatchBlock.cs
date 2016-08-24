@@ -260,7 +260,7 @@ namespace Bridge.Translator
                 this.PushLocals();
 
                 var varName = clause.VariableName;
-                
+
                 if (String.IsNullOrEmpty(varName))
                 {
                     varName = this.AddLocal(this.GetUniqueName(JS.Vars.E), null, AstType.Null);
@@ -343,6 +343,7 @@ namespace Bridge.Translator
 
             var firstClause = true;
             var writeElse = true;
+            var needNewLine = false;
 
             foreach (var clause in tryCatchStatement.CatchClauses)
             {
@@ -351,6 +352,7 @@ namespace Bridge.Translator
 
                 if (!firstClause)
                 {
+                    this.WriteSpace();
                     this.WriteElse();
                 }
 
@@ -383,20 +385,28 @@ namespace Bridge.Translator
                 clause.Body.AcceptVisitor(this.Emitter);
                 this.Emitter.NoBraceBlock = null;
                 this.EndBlock();
-                this.WriteNewLine();
+
+                needNewLine = true;
 
                 this.PopLocals();
             }
 
             if (writeElse)
             {
+                this.WriteSpace();
                 this.WriteElse();
                 this.BeginBlock();
                 this.Write("throw " + varName);
                 this.WriteSemiColon();
                 this.WriteNewLine();
                 this.EndBlock();
+                needNewLine = true;
+            }
+
+            if (needNewLine)
+            {
                 this.WriteNewLine();
+                needNewLine = false;
             }
 
             this.EndBlock();

@@ -36,7 +36,7 @@
             return s;
         }
     }; });
-    
+
     Bridge.define('Test.BridgeIssues.N1023.PersonDetails', {
         config: {
             properties: {
@@ -51,8 +51,6 @@
             this.setName(name.$clone());
         }
     });
-    
-    
-    
+
     Bridge.init();
 });

@@ -122,6 +122,7 @@
                 if (Bridge.Test.QUnit.TestFixture$1(T).fixtureFabric == null) {
                     Bridge.Test.QUnit.TestFixture$1(T).fixtureFabric = Bridge.createInstance(T);
                 }
+
                 return Bridge.Test.QUnit.TestFixture$1(T).fixtureFabric;
             },
             setFixtureFabric: function (value) {
@@ -131,6 +132,7 @@
                 if (Bridge.Test.QUnit.TestFixture$1(T).instanceFabric == null) {
                     Bridge.Test.QUnit.TestFixture$1(T).instanceFabric = Bridge.cast(Bridge.createInstance(type), Bridge.Test.QUnit.TestFixture$1(T));
                 }
+
                 return Bridge.Test.QUnit.TestFixture$1(T).instanceFabric;
             },
             beforeTest: function (needInstance, assert, type, expectedCount) {
@@ -140,6 +142,7 @@
                 if (System.Nullable.hasValue(expectedCount)) {
                     assert.expect(System.Nullable.getValue(expectedCount));
                 }
+
                 var instance = Bridge.Test.QUnit.TestFixture$1(T).instanceFabric$1(type);
                 instance.setFixture(needInstance ? Bridge.Test.QUnit.TestFixture$1(T).getFixtureFabric() : Bridge.getDefaultValue(T));
 

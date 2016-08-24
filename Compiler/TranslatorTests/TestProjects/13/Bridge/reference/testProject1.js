@@ -42,8 +42,6 @@
             return "";
         }
     });
-    
-    
-    
+
     Bridge.init();
 });

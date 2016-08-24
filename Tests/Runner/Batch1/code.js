@@ -1339,6 +1339,7 @@
                 if (length < 2) {
                     return result;
                 }
+
                 for (var i = index; i < ((((index + length) | 0) - 1) | 0); i = (i + 1) | 0) {
                     var tmp = result[i];
                     for (var j = (i + 1) | 0; j < ((index + length) | 0); j = (j + 1) | 0) {
@@ -1346,7 +1347,8 @@
                             result[i] = result[j];
                             result[j] = tmp;
                             tmp = result[i];
-                        }}
+                        }
+                    }
                 }
                 return result;
             },
@@ -1356,10 +1358,12 @@
 
                 if (a.length !== b.length) {
                     return false;
-                }for (var i = 0; i < a.length; i = (i + 1) | 0) {
+                }
+                for (var i = 0; i < a.length; i = (i + 1) | 0) {
                     if (0 !== comparer["System$Collections$Generic$IComparer$1$" + Bridge.getTypeAlias(T) + "$compare"](a[i], b[i])) {
                         return false;
-                    }}
+                    }
+                }
                 return true;
             },
             testTrueForAll: function () {
@@ -1782,11 +1786,14 @@
         compare: function (x, y) {
             if (Bridge.referenceEquals(x, y)) {
                 return 0;
-            }if (x == null) {
+            }
+            if (x == null) {
                 return -1;
-            }if (y == null) {
+            }
+            if (y == null) {
                 return 1;
-            }return System.String.compare(x, y);
+            }
+            return System.String.compare(x, y);
         }
     });
 
@@ -1864,6 +1871,7 @@
             if (d == null) {
                 throw new System.Exception("Related should not be null");
             }
+
             this.setData(d);
         },
         $constructor2: function (p) {
@@ -1873,24 +1881,31 @@
             if (p == null || p.length < 6) {
                 throw new System.Exception("Should pass six parameters");
             }
+
             if (Bridge.is(p[0], System.Int32)) {
                 this.setNumberA(System.Nullable.getValue(Bridge.cast(p[0], System.Int32)));
             }
+
             if (Bridge.is(p[1], String)) {
                 this.setStringA(Bridge.cast(p[1], String));
             }
+
             if (Bridge.is(p[2], Boolean)) {
                 this.setBoolA(System.Nullable.getValue(Bridge.cast(p[2], Boolean)));
             }
+
             if (Bridge.is(p[3], System.Double)) {
                 this.setDoubleA(System.Nullable.getValue(Bridge.cast(p[3], System.Double)));
             }
+
             if (Bridge.is(p[4], System.Decimal)) {
                 this.setDecimalA(System.Nullable.getValue(Bridge.cast(p[4], System.Decimal)));
             }
+
             if (Bridge.is(p[5], Bridge.ClientTest.BasicCSharp.ClassA.Aux1)) {
                 this.setData(Bridge.cast(p[5], Bridge.ClientTest.BasicCSharp.ClassA.Aux1));
-            }},
+            }
+        },
         getData: function () {
             return this.data;
         },
@@ -1914,6 +1929,7 @@
             if (this.getData() != null) {
                 return this.getData().toString();
             }
+
             return "no data";
         },
         method4: function (i, add) {
@@ -2762,8 +2778,7 @@
                     $e1 = System.Exception.create($e1);
                     var ex;
                     if (Bridge.is($e1, System.ArgumentException)) {
-                    }
-                    else {
+                    } else {
                         ex = $e1;
                         exceptionMessage = ex.getMessage();
                     }
@@ -2806,8 +2821,7 @@
                     if (Bridge.is($e1, System.ArgumentException)) {
                         ex = $e1;
                         return ex.getMessage();
-                    }
-                    else {
+                    } else {
                         throw $e1;
                     }
                 }
@@ -2824,8 +2838,7 @@
                     $e1 = System.Exception.create($e1);
                     if (Bridge.is($e1, System.ArgumentException)) {
                         Bridge.ClientTest.BasicCSharp.TestTryCatchBlocks.setIsATry(true);
-                    }
-                    else {
+                    } else {
                         throw $e1;
                     }
                 }
@@ -2848,8 +2861,7 @@
                         ex = $e1;
                         Bridge.ClientTest.BasicCSharp.TestTryCatchBlocks.setIsBCatch(true);
                         var s = ex.getMessage();
-                    }
-                    else {
+                    } else {
                         throw $e1;
                     }
                 }
@@ -3019,8 +3031,7 @@
                         data.setCount((data.getCount() + 2) | 0);
 
                         return ex.getMessage();
-                    }
-                    else {
+                    } else {
                         throw $e1;
                     }
                 }
@@ -3042,8 +3053,7 @@
                     $e1 = System.Exception.create($e1);
                     if (Bridge.is($e1, System.ArgumentException)) {
                         Bridge.ClientTest.BasicCSharp.TestTryCatchFinallyBlocks.setIsACatch(true);
-                    }
-                    else {
+                    } else {
                         throw $e1;
                     }
                 }
@@ -3068,8 +3078,7 @@
                         ex = $e1;
                         var s = ex.getMessage();
                         Bridge.ClientTest.BasicCSharp.TestTryCatchFinallyBlocks.setIsBCatch(true);
-                    }
-                    else {
+                    } else {
                         throw $e1;
                     }
                 }
@@ -4676,7 +4685,8 @@
                 var key = $t.getCurrent();
                 if (!Bridge.referenceEquals(key, "1") && !Bridge.referenceEquals(key, "2")) {
                     Bridge.Test.Assert.fail$1(System.String.concat("Unexpected key ", key));
-                }count = (count + 1) | 0;
+                }
+                count = (count + 1) | 0;
             }
             Bridge.Test.Assert.areEqual(2, count);
         },
@@ -4700,7 +4710,8 @@
                 var value = $t.getCurrent();
                 if (!Bridge.referenceEquals(value, "a") && !Bridge.referenceEquals(value, "b")) {
                     Bridge.Test.Assert.fail$1(System.String.concat("Unexpected key ", value));
-                }count = (count + 1) | 0;
+                }
+                count = (count + 1) | 0;
             }
             Bridge.Test.Assert.areEqual(2, count);
         },
@@ -4735,8 +4746,7 @@
             catch ($e1) {
                 $e1 = System.Exception.create($e1);
                 if (Bridge.is($e1, System.Collections.Generic.KeyNotFoundException)) {
-                }
-                else {
+                } else {
                     throw $e1;
                 }
             }
@@ -4764,8 +4774,7 @@
             catch ($e1) {
                 $e1 = System.Exception.create($e1);
                 if (Bridge.is($e1, System.ArgumentException)) {
-                }
-                else {
+                } else {
                     throw $e1;
                 }
             }
@@ -6631,10 +6640,12 @@
                 if (expected == null) {
                     expected = input;
                 }
+
                 Bridge.ClientTest.ConvertTests.ConvertFromBase64Tests.verify(input, function (result) {
                     if (System.Nullable.hasValue(expectedLengthBytes)) {
                         Bridge.Test.Assert.areEqual(System.Nullable.getValue(expectedLengthBytes), result.length);
-                    }Bridge.Test.Assert.areEqual(expected, System.Convert.toBase64String(result, null, null, null));
+                    }
+                    Bridge.Test.Assert.areEqual(expected, System.Convert.toBase64String(result, null, null, null));
                     Bridge.Test.Assert.areEqual(expected, System.Convert.toBase64String(result, 0, result.length, null));
                 });
             },
@@ -6653,7 +6664,8 @@
                 if (!Bridge.staticEquals(action, null)) {
                     action(System.Convert.fromBase64CharArray(System.String.toCharArray(input, 0, input.length), 0, input.length));
                     action(System.Convert.fromBase64String(input));
-                }}
+                }
+            }
         }
     });
 
@@ -6699,6 +6711,7 @@
                 Bridge.Test.Assert.fail$1("Test data should have the same lenght");
                 return;
             }
+
             for (var i = 0; i < testValues.length; i = (i + 1) | 0) {
                 var testValue = testValues[i];
 
@@ -6738,6 +6751,7 @@
                 Bridge.Test.Assert.fail$1("Test data should have the same lenght");
                 return;
             }
+
             for (var i = 0; i < testValues.length; i = (i + 1) | 0) {
                 var testValue = testValues[i];
 
@@ -6814,6 +6828,7 @@
                 Bridge.Test.Assert.fail$1("Test data should have the same lenghts");
                 return;
             }
+
             for (var i = 0; i < testValues.length; i = (i + 1) | 0) {
                 var testValue = testValues[i];
                 var radix = testBases[i];
@@ -6853,6 +6868,7 @@
                 Bridge.Test.Assert.fail$1("Test data should have the same lenght");
                 return;
             }
+
             for (var i = 0; i < testValues.length; i = (i + 1) | 0) {
                 (function () {
                     try {
@@ -7868,8 +7884,7 @@
                             } else {
                                 throw $e1;
                             }
-                        }
-                        else {
+                        } else {
                             throw $e1;
                         }
                     }
@@ -7878,8 +7893,7 @@
                     $e2 = System.Exception.create($e2);
                     if (Bridge.is($e2, Bridge.ClientTest.CSharp6.TestExceptionFilter.MyException)) {
                         isCaught = true;
-                    }
-                    else {
+                    } else {
                         throw $e2;
                     }
                 }
@@ -7904,8 +7918,7 @@
                         } else {
                             throw $e1;
                         }
-                    }
-                    else {
+                    } else {
                         throw $e1;
                     }
                 }
@@ -7916,6 +7929,7 @@
                 if (e != null) {
                     Bridge.ClientTest.CSharp6.TestExceptionFilter.logParameter = Bridge.as(e, Bridge.ClientTest.CSharp6.TestExceptionFilter.MyException);
                 }
+
                 return result;
             }
         }
@@ -8050,9 +8064,11 @@
         set: function (bit, value) {
             if (value < 0 || value > 1) {
                 throw new System.ArgumentOutOfRangeException();
-            }if (bit < 1 || bit > 32) {
+            }
+            if (bit < 1 || bit > 32) {
                 throw new System.ArgumentOutOfRangeException();
             }
+
             var filterBit = 1 << bit;
             this.setValue((value === 1) ? this.getValue() | filterBit : this.getValue() & ~filterBit);
         }
@@ -8306,9 +8322,11 @@
                 if (o == null) {
                     return System.Decimal.lift(null);
                 }
+
                 if (Bridge.is(o, String)) {
                     return System.Decimal(o.toString());
                 }
+
                 var dotNetDiff = Bridge.cast(input.get([i, ((lowerBound + 1) | 0)]), System.Decimal, true);
                 return dotNetDiff;
             },
@@ -8386,6 +8404,7 @@
 
                         continue;
                     }
+
                     var o = parameters[i];
                     var j = (i + 1) | 0;
                     if (Bridge.is(o, System.Decimal)) {
@@ -8424,11 +8443,13 @@
             this.$initialize();
             if (Bridge.ClientTest.DecimalMathTests.useLogging) {
                 this.setText(new System.Text.StringBuilder());
-            }},
+            }
+        },
         onLogBegin: function (name) {
             if (!Bridge.ClientTest.DecimalMathTests.useLogging) {
                 return;
             }
+
             this.getText().appendLine(System.String.concat(System.String.concat("//------------------------------", name), "------------------------------"));
             this.getText().appendLine("object[,] input = new object[,]");
             this.getText().append("{");
@@ -8438,6 +8459,7 @@
             if (!Bridge.ClientTest.DecimalMathTests.useLogging) {
                 return;
             }
+
             var sb = new System.Text.StringBuilder("{{");
             for (var i = 0; i < ((parameters.length + 1) | 0); i = (i + 1) | 0) {
                 sb.append(" {");
@@ -8455,13 +8477,16 @@
             var convertedParams = Bridge.ClientTest.DecimalMathTests.Logger.convertParameters(parameters);
             if (convertedParams.length === 4) {
                 this.getText().appendFormat(format, convertedParams[0], convertedParams[1], convertedParams[2], convertedParams[3]);
-            }if (convertedParams.length === 5) {
+            }
+            if (convertedParams.length === 5) {
                 this.getText().appendFormat(format, convertedParams[0], convertedParams[1], convertedParams[2], convertedParams[3], convertedParams[4]);
-            }},
+            }
+        },
         onLogEnd: function () {
             if (!Bridge.ClientTest.DecimalMathTests.useLogging) {
                 return;
             }
+
             var sb = this.getText();
 
             sb.remove(((sb.getLength() - 1) | 0), 1);
@@ -8493,6 +8518,7 @@
                 if (cex == null) {
                     Bridge.Test.Assert.fail$1("Unexpected Exception");
                 }
+
                 Bridge.Test.Assert.true$1(cex.getKind() === expectedKind, "Kind");
                 Bridge.Test.Assert.true$1(Bridge.referenceEquals(cex.getMessage(), expectedMessage), "Message");
                 Bridge.Test.Assert.true$1(Bridge.referenceEquals(cex.getUserMessage(), expectedUserMessage), "UserMessage");
@@ -8501,7 +8527,8 @@
                 } else {
                     if (cex.getInnerException() == null && expectedInnerException != null) {
                         Bridge.Test.Assert.fail$1("InnerException");
-                    }}
+                    }
+                }
             }
         },
         assume: function () {
@@ -8701,7 +8728,8 @@
             while (System.TimeSpan.lt((Bridge.Date.subdd(new Date(), before)), System.TimeSpan.fromMilliseconds(200))) {
                 if (watch.ticks().gt(System.Int64(0))) {
                     hasIncreased = true;
-                }}
+                }
+            }
             watch.stop();
             Bridge.Test.Assert.true$1(hasIncreased, "Times should increase inside the loop");
             Bridge.Test.Assert.true$1(watch.milliseconds().gt(System.Int64(150)), System.String.concat("ElapsedMilliseconds > 150 Actual: ", watch.milliseconds()));
@@ -9047,8 +9075,7 @@
                     ex = $e1;
                     var inner = ex.getInnerException();
                     Bridge.Test.Assert.notNull$1(inner, "Inner Exception");
-                }
-                else {
+                } else {
                     ex = $e1;
                     Bridge.Test.Assert.fail$1(System.String.concat("Expected ArgumentOutOfRangeException, got ", Bridge.getType(ex)));
                 }
@@ -9097,8 +9124,7 @@
                     e = $e1;
                     Bridge.Test.Assert.areEqual("The message", e.getMessage());
                     return;
-                }
-                else {
+                } else {
                     throw $e1;
                 }
             }
@@ -9114,13 +9140,11 @@
                 var e;
                 if (Bridge.is($e1, Bridge.ClientTest.Exceptions.CommonExceptionTests.E2)) {
                     Bridge.Test.Assert.fail$1("Should not catch E2");
-                }
-                else if (Bridge.is($e1, Bridge.ClientTest.Exceptions.CommonExceptionTests.E1)) {
+                } else if (Bridge.is($e1, Bridge.ClientTest.Exceptions.CommonExceptionTests.E1)) {
                     e = $e1;
                     Bridge.Test.Assert.areEqual("The message", e.getMessage());
                     return;
-                }
-                else {
+                } else {
                     throw $e1;
                 }
             }
@@ -9138,8 +9162,7 @@
                     e = $e1;
                     Bridge.Test.Assert.areEqual("The message", e.getMessage());
                     return;
-                }
-                else {
+                } else {
                     throw $e1;
                 }
             }
@@ -9155,8 +9178,7 @@
                 var e;
                 if (Bridge.is($e1, Bridge.ClientTest.Exceptions.CommonExceptionTests.E1)) {
                     Bridge.Test.Assert.fail$1("Should not catch E1");
-                }
-                else {
+                } else {
                     e = $e1;
                     Bridge.Test.Assert.areEqual("The message", e.getMessage());
                     return;
@@ -9173,8 +9195,7 @@
                 $e1 = System.Exception.create($e1);
                 if (Bridge.is($e1, Bridge.ClientTest.Exceptions.CommonExceptionTests.E1)) {
                     Bridge.Test.Assert.fail$1("Should not catch E1");
-                }
-                else {
+                } else {
                     Bridge.Test.Assert.true(true);
                     return;
                 }
@@ -9599,8 +9620,7 @@
                     ex = $e1;
                     var inner = ex.getInnerException();
                     Bridge.Test.Assert.notNull$1(inner, "Inner Exception");
-                }
-                else {
+                } else {
                     ex = $e1;
                     Bridge.Test.Assert.fail$1(System.String.concat("Expected NullReferenceException, got type ", Bridge.getType(ex)));
                 }
@@ -10630,6 +10650,7 @@
             if (word == null) {
                 return null;
             }
+
             var wordChars = System.String.toCharArray(word, 0, word.length);
             wordChars.sort();
 
@@ -12435,7 +12456,8 @@
             if (checkReference) {
                 var ctor = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 1, 284, null, argTypes);
                 Bridge.Test.Assert.true$1(Bridge.referenceEquals(ctor, ne.constructor), System.String.concat(title, " constructor reference"));
-            }},
+            }
+        },
         f9: function (expr, title) {
             var $t;
             var mie = Bridge.as(expr, Bridge.hasValue(expr) && (expr.ntype === 24));
@@ -12647,7 +12669,8 @@
         getEnumerator: function () {
             if (this._hasEnumerated) {
                 throw new System.Exception("Already enumerated");
-            }this._hasEnumerated = true;
+            }
+            this._hasEnumerated = true;
             return Bridge.getEnumerator(this._items, "$1", T);
         }
     }; });
@@ -13226,6 +13249,7 @@
             if (obj == null) {
                 return 0;
             }
+
             return Bridge.getHashCode(obj);
         }
     });
@@ -14579,7 +14603,8 @@
             var diff = d2 - d1;
             if (diff < 0) {
                 diff = -diff;
-            }Bridge.Test.Assert.true(diff < 1E-08);
+            }
+            Bridge.Test.Assert.true(diff < 1E-08);
         },
         assertIsDecimalAndEqualTo: function (v, d, message) {
             if (message === void 0) { message = null; }
@@ -15301,8 +15326,7 @@
             catch ($e1) {
                 $e1 = System.Exception.create($e1);
                 if (Bridge.is($e1, System.InvalidOperationException)) {
-                }
-                else {
+                } else {
                     throw $e1;
                 }
             }
@@ -15317,8 +15341,7 @@
             catch ($e1) {
                 $e1 = System.Exception.create($e1);
                 if (Bridge.is($e1, System.InvalidOperationException)) {
-                }
-                else {
+                } else {
                     throw $e1;
                 }
             }
@@ -17995,7 +18018,8 @@
             raiseE2: function () {
                 if (!Bridge.staticEquals(Bridge.ClientTest.Reflection.ReflectionTests.C13.E2, null)) {
                     Bridge.ClientTest.Reflection.ReflectionTests.C13.E2();
-                }}
+                }
+            }
         },
         addedE3Handler: null,
         removedE3Handler: null,
@@ -18011,7 +18035,8 @@
         raiseE1: function () {
             if (!Bridge.staticEquals(this.E1, null)) {
                 this.E1();
-            }}
+            }
+        }
     });
 
     Bridge.define('Bridge.ClientTest.Reflection.ReflectionTests.C14', {
@@ -21387,6 +21412,7 @@
             if (message == null) {
                 message = "";
             }
+
             var typeMessage = System.String.concat(System.String.concat(message, "Type is "), checkedType);
             Bridge.Test.Assert.areEqual$1(checkedType, Bridge.getTypeName(Bridge.getType(actual)), typeMessage);
 
@@ -22443,6 +22469,7 @@
                 if (!isPhantomJs) {
                     Bridge.Test.Assert.areEqual$1(11, System.String.indexOf(s, "E", 6, 8, 1), System.String.concat(System.String.concat("'", s), "'.IndexOf('E', 6, 8, StringComparison.CurrentCultureIgnoreCase)"));
                 }
+
                 s = "";
                 Bridge.Test.Assert.areEqual$1(-1, System.String.indexOf(s, String.fromCharCode(101)), "String.Empty.IndexOf('e')");
 
@@ -22458,6 +22485,7 @@
                 if (!isPhantomJs) {
                     Bridge.Test.Assert.areEqual$1(1, System.String.compare(s1, s2, false), System.String.concat(System.String.concat(System.String.concat(System.String.concat("String.Compare('", s1), "', '"), s2), "', false)"));
                 }
+
                 if (!isPhantomJs) {
                     var threeIs = System.Array.init(3, null);
                     threeIs[0] = "i";
@@ -22477,6 +22505,7 @@
                         Bridge.ClientTest.SimpleTypes.StringTests.test(1, 2, sc, threeIs, expected, Bridge.identity(expectedIndex, (expectedIndex = (expectedIndex + 1) | 0)));
                     }
                 }
+
                 // TEST Contains
                 s = "Hello Bridge.NET";
 
@@ -23539,7 +23568,8 @@
             var diff = d2 - d1;
             if (diff < 0) {
                 diff = -diff;
-            }Bridge.Test.Assert.true(diff < 1E-08);
+            }
+            Bridge.Test.Assert.true(diff < 1E-08);
         },
         comparisonOperatorsWork: function () {
             var time1 = new System.TimeSpan(15, 10, 20, 5, 14);
@@ -24042,6 +24072,7 @@
             if (message == null) {
                 message = "";
             }
+
             var typeMessage = System.String.concat(System.String.concat(message, "Type is "), checkedType);
             Bridge.Test.Assert.areEqual$1(checkedType, Bridge.getTypeName(Bridge.getType(actual)), typeMessage);
 
@@ -24285,11 +24316,13 @@
             if (groupCount > 0) {
                 this.validateGroupImpl(match.getGroups().get(0), index, length, success, value, matchCapCount, "ValidateMatch: Match.Group0");
             }
+
             Bridge.Test.Assert.notNull$1(match.getCaptures(), "ValidateMatch: Match.Captures is not NULL");
             Bridge.Test.Assert.areEqual$1(matchCapCount, match.getCaptures().getCount(), "ValidateMatch: Match.Captures.Count");
             if (success) {
                 this.validateCaptureImpl(match.getCaptures().get(0), index, length, value, "ValidateMatch: Match.Capture0");
-            }},
+            }
+        },
         validateGroup: function (match, groupIndex, index, length, success, value, captureCount) {
             var group = match.getGroups().get(groupIndex);
             this.validateGroupImpl(group, index, length, success, value, captureCount, System.String.concat("ValidateGroup: Group", groupIndex));
@@ -24392,7 +24425,8 @@
                     Bridge.Test.Assert.true(m.getSuccess());
                     if (m.getSuccess()) {
                         Bridge.Test.Assert.areEqual(expected[i], m.getValue());
-                    }}
+                    }
+                }
             }
         }
     });
@@ -24537,7 +24571,8 @@
                 if (Bridge.isLower(x.charCodeAt(0))) {
                     // Capitalize it.
                     return System.String.concat(String.fromCharCode(String.fromCharCode(x.charCodeAt(0)).toUpperCase().charCodeAt(0)), x.substr(1, ((x.length - 1) | 0)));
-                }return x;
+                }
+                return x;
             },
             reverseLetter: function (match) {
                 return System.Text.RegularExpressions.Regex.replace$1(match.getValue(), "([ie])([ie])", "$2$1", 1);
@@ -24801,7 +24836,8 @@
                 var substrings = rgx.split$2(input, 3, startAt);
 
                 this.validateResult(expected, substrings);
-            }},
+            }
+        },
         splitWithCountAndStartAtTest2: function () {
             var expected = ["apple-apricot-plum", "-", "pear", "-", "pomegranate", "-", "pineapple-peach"];
 
@@ -25583,8 +25619,7 @@
                     Bridge.Test.Assert.areEqual$1(2, ex.innerExceptions.getCount(), "count");
                     Bridge.Test.Assert.true$1(ex.innerExceptions.contains(ex1), "ex1");
                     Bridge.Test.Assert.true$1(ex.innerExceptions.contains(ex2), "ex2");
-                }
-                else {
+                } else {
                     throw $e1;
                 }
             }
@@ -25626,8 +25661,7 @@
                     Bridge.Test.Assert.areEqual$1(2, ex.innerExceptions.getCount(), "ex count");
                     Bridge.Test.Assert.true$1(ex.innerExceptions.contains(ex1), "ex1");
                     Bridge.Test.Assert.true$1(ex.innerExceptions.contains(ex2), "ex2");
-                }
-                else {
+                } else {
                     throw $e1;
                 }
             }
@@ -26225,6 +26259,7 @@
                 if (!Bridge.staticEquals(aThen.getProgress(), null)) {
                     aThen.getProgress()(args);
                 }
+
                 i = (i + 1) | 0;
             }
         },
@@ -26247,14 +26282,17 @@
                 if (which === Bridge.ClientTest.Threading.PromiseTests.SimplePromise.Which.Resolve) {
                     if (!Bridge.staticEquals(aThen.getFilled(), null)) {
                         aThen.getFilled().apply(null, args);
-                    }} else {
+                    }
+                } else {
                     if (!Bridge.staticEquals(aThen.getError(), null)) {
                         aThen.getError().apply(null, args);
-                    }}
+                    }
+                }
 
                 if (!Bridge.staticEquals(aThen.getProgress(), null)) {
                     aThen.getProgress()([100]);
                 }
+
                 i = (i + 1) | 0;
             }
             this.getThens().clear();
@@ -26570,8 +26608,7 @@
                     var tce = Bridge.as(ex.innerExceptions.get(0), System.Threading.Tasks.TaskCanceledException);
                     Bridge.Test.Assert.notNull$1(tce, "is TaskCanceledException");
                     Bridge.Test.Assert.true$1(Bridge.referenceEquals(tcs.task, tce.task), "Task");
-                }
-                else {
+                } else {
                     throw $e1;
                 }
             }
@@ -31964,7 +32001,8 @@
                 m = m.nextMatch();
                 if (m.getIndex() > 15) {
                     break;
-                }}
+                }
+            }
 
             this.validateCollection(String, expectedGroupValues, actualGroupValues.toArray(), "GroupValues");
             this.validateCollection(String, expectedCaptureValues, actualCaptureValues.toArray(), "CaptureValues");
@@ -32815,9 +32853,11 @@
                     endPos = ((startPos + 70) | 0) <= input.length ? 70 : ((input.length - startPos) | 0);
                     if (!System.String.contains(input.substr(startPos, endPos),",")) {
                         break;
-                    }match = match.nextMatch();
+                    }
+                    match = match.nextMatch();
                 }
             }
+
             this.validateCollection(String, expecteds, actuals.toArray(), "Result");
         },
         msdnStartOfStringOrLineMultilineModeTest: function () {
@@ -32845,9 +32885,11 @@
                     endPos = ((startPos + 70) | 0) <= input.length ? 70 : ((input.length - startPos) | 0);
                     if (!System.String.contains(input.substr(startPos, endPos),",")) {
                         break;
-                    }match = match.nextMatch();
+                    }
+                    match = match.nextMatch();
                 }
             }
+
             this.validateCollection(String, expecteds, actuals.toArray(), "Result");
         },
         msdnEndOfStringOrLineTest1: function () {
@@ -32880,9 +32922,11 @@
                     endPos = ((startPos + 70) | 0) <= input.length ? 70 : ((input.length - startPos) | 0);
                     if (!System.String.contains(input.substr(startPos, endPos),",")) {
                         break;
-                    }match = match.nextMatch();
+                    }
+                    match = match.nextMatch();
                 }
             }
+
             this.validateCollection(String, expecteds, actuals.toArray(), "Result");
         },
         msdnEndOfStringOrLineTest2: function () {
@@ -32905,6 +32949,7 @@
                 if (team.length > 70) {
                     continue;
                 }
+
                 var match = System.Text.RegularExpressions.Regex.match(team, pattern);
                 if (match.getSuccess()) {
                     var actual = System.String.format("The {0} played in the {1} in", match.getGroups().get(1).getValue(), match.getGroups().get(4).getValue());
@@ -32951,9 +32996,11 @@
                     endPos = ((startPos + 70) | 0) <= input.length ? 70 : ((input.length - startPos) | 0);
                     if (!System.String.contains(input.substr(startPos, endPos),",")) {
                         break;
-                    }match = match.nextMatch();
+                    }
+                    match = match.nextMatch();
                 }
             }
+
             this.validateCollection(String, expecteds, actuals.toArray(), "Result");
         },
         msdnEndOfStringOrLineTest4: function () {
@@ -32988,9 +33035,11 @@
                     endPos = ((startPos + 70) | 0) <= input.length ? 70 : ((input.length - startPos) | 0);
                     if (!System.String.contains(input.substr(startPos, endPos),",")) {
                         break;
-                    }match = match.nextMatch();
+                    }
+                    match = match.nextMatch();
                 }
             }
+
             this.validateCollection(String, expecteds, actuals.toArray(), "Result");
         },
         msdnStartOfStringOnlyTest: function () {
@@ -33019,9 +33068,11 @@
                     endPos = ((startPos + 70) | 0) <= input.length ? 70 : ((input.length - startPos) | 0);
                     if (!System.String.contains(input.substr(startPos, endPos),",")) {
                         break;
-                    }match = match.nextMatch();
+                    }
+                    match = match.nextMatch();
                 }
             }
+
             this.validateCollection(String, expecteds, actuals.toArray(), "Result");
         },
         msdnEndOfStringOrNewlineTest: function () {
@@ -33037,7 +33088,8 @@
                 var input = $t.getCurrent();
                 if (input.length > 70 || !System.String.contains(input,",")) {
                     continue;
-                }var match = System.Text.RegularExpressions.Regex.match(input, pattern);
+                }
+                var match = System.Text.RegularExpressions.Regex.match(input, pattern);
                 actuals.add(match.getSuccess());
             }
 
@@ -33056,7 +33108,8 @@
                 var input = $t.getCurrent();
                 if (input.length > 70 || !System.String.contains(input,",")) {
                     continue;
-                }var match = System.Text.RegularExpressions.Regex.match(input, pattern);
+                }
+                var match = System.Text.RegularExpressions.Regex.match(input, pattern);
                 actuals.add(match.getSuccess());
             }
 

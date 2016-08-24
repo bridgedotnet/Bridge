@@ -2,7 +2,7 @@
     "use strict";
 
     /** @namespace TestProject2 */
-    
+
     /**
      * @class TestProject2.TestClassB
      */
@@ -30,6 +30,6 @@
             }
         }
     });
-    
+
     Bridge.init();
 });

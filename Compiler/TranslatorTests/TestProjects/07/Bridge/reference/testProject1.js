@@ -12,8 +12,7 @@
         });
         return exports;
     });
-    
-    
-    
+
+
     Bridge.init();
 });

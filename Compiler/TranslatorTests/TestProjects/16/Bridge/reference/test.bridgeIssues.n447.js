@@ -14,7 +14,7 @@
             }
         }
     });
-    
+
     Bridge.define('Test.BridgeIssues.N447.N447', {
         statics: {
             Five: 5,
@@ -32,8 +32,6 @@
             }
         }
     });
-    
-    
-    
+
     Bridge.init();
 });

@@ -8,8 +8,6 @@
             ctx.fillText("text", 50, 50);
         }
     });
-    
-    
-    
+
     Bridge.init();
 });

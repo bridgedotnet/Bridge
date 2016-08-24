@@ -42,7 +42,7 @@
             return "";
         }
     });
-    
+
     Bridge.define('TestProject2.TestClassB', {
         config: {
             properties: {
@@ -53,6 +53,6 @@
             return 0;
         }
     });
-    
+
     Bridge.init();
 });

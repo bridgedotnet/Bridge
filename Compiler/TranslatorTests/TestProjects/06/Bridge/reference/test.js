@@ -7,19 +7,19 @@
                 // Should contain instruction to check data type range as cspoj contains <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
                 var maxInt32 = 2147483647;
                 var rInt32Max = Bridge.Int.check(maxInt32 + 1, System.Int32);
-    
+
                 var maxUInt32 = 4294967295;
                 var rUInt32Max = Bridge.Int.check(maxUInt32 + 1, System.UInt32);
-    
+
                 var maxLong = System.Int64.MaxValue;
                 var rLongMax = maxLong.add(System.Int64(1), 1);
-    
+
                 var maxULong = System.UInt64.MaxValue;
                 var rUlongMax = maxULong.add(System.UInt64(1), 1);
             }
         }
     });
-    
+
     Bridge.define('Test.BridgeIssues.N772.App', {
         statics: {
             main1: function () {
@@ -32,11 +32,11 @@
                 var uintArray = new Uint32Array(6);
                 var floatArray = new Float32Array(7);
                 var doubleArray = new Float64Array(8);
-    
+
                 //These arrays do not depend on "useTypedArray" bridge.json option
                 var stringArray = System.Array.init(9, null);
                 var decimalArray = System.Array.init(10, System.Decimal(0.0));
-    
+
                 byteArray[0] = 1;
                 sbyteArray[0] = 2;
                 shortArray[0] = 3;
@@ -45,13 +45,13 @@
                 uintArray[0] = 6;
                 floatArray[0] = 7;
                 doubleArray[0] = 8;
-    
+
                 stringArray[0] = "9";
                 decimalArray[0] = System.Decimal(10.0);
             }
         }
     });
-    
+
     Bridge.define('TestProject1.TestClassA', {
         config: {
             properties: {
@@ -59,7 +59,7 @@
             }
         }
     });
-    
+
     Bridge.define('TestProject2.TestClassB', {
         config: {
             properties: {
@@ -67,6 +67,6 @@
             }
         }
     });
-    
+
     Bridge.init();
 });

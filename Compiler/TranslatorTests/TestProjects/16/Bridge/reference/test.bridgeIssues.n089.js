@@ -7,8 +7,6 @@
             var i = p[0];
         }
     });
-    
-    
-    
+
     Bridge.init();
 });

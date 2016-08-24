@@ -44,12 +44,10 @@
                         if (Bridge.is($e1, System.FormatException)) {
                             e = $e1;
                             return e;
-                        }
-                        else if (Bridge.is($e1, System.OverflowException)) {
+                        } else if (Bridge.is($e1, System.OverflowException)) {
                             e = $e1;
                             return e;
-                        }
-                        else {
+                        } else {
                             throw $e1;
                         }
                     }

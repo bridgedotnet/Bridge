@@ -9,12 +9,10 @@
             var pointerValue = pointer.v;
         }
     });
-    
+
     Bridge.define('Test.BridgeIssues.N1552.Pointer$1', function (T) { return {
-    
+
     }; });
-    
-    
-    
+
     Bridge.init();
 });

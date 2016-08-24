@@ -18,8 +18,6 @@
         },
         $clone: function (to) { return this; }
     });
-    
-    
-    
+
     Bridge.init();
 });

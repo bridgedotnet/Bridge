@@ -13,11 +13,11 @@
                 var uintArray = System.Array.init(6, 0);
                 var floatArray = System.Array.init(7, 0);
                 var doubleArray = System.Array.init(8, 0);
-    
+
                 //These arrays do not depend on "useTypedArray" bridge.json option
                 var stringArray = System.Array.init(9, null);
                 var decimalArray = System.Array.init(10, System.Decimal(0.0));
-    
+
                 byteArray[0] = 1;
                 sbyteArray[0] = 2;
                 shortArray[0] = 3;
@@ -26,14 +26,12 @@
                 uintArray[0] = 6;
                 floatArray[0] = 7;
                 doubleArray[0] = 8;
-    
+
                 stringArray[0] = "9";
                 decimalArray[0] = System.Decimal(10.0);
             }
         }
     });
-    
-    
-    
+
     Bridge.init();
 });

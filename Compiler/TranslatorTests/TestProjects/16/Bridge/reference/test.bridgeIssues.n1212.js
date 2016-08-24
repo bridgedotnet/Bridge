@@ -57,8 +57,6 @@
             var v4 = (v = v.dec());
         }
     });
-    
-    
-    
+
     Bridge.init();
 });

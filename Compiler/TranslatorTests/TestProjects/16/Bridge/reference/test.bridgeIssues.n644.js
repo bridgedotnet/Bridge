@@ -7,8 +7,6 @@
         doSomething1: function () {
         }
     });
-    
-    
-    
+
     Bridge.init();
 });

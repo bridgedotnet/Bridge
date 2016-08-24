@@ -8,7 +8,7 @@
                 var v = 7;
                 var l = System.Int64(v);
                 l = System.Int64(v);
-    
+
                 System.Console.log(System.Int64(v).toString());
                 System.Console.log(System.Int64((v)).toString());
                 System.Console.log(System.Int64(2).toString());
@@ -28,7 +28,7 @@
                 var v = 7;
                 var l = System.Decimal(v);
                 l = System.Decimal(v);
-    
+
                 System.Console.log(System.Decimal(v).toString());
                 System.Console.log(System.Decimal((v)).toString());
                 System.Console.log(System.Decimal(2.0).toString());
@@ -41,7 +41,7 @@
                 var v = 7;
                 var l = v;
                 l = v;
-    
+
                 System.Console.log(v);
                 System.Console.log((v));
                 System.Console.log(2);
@@ -52,8 +52,6 @@
             }
         }
     });
-    
-    
-    
+
     Bridge.init();
 });

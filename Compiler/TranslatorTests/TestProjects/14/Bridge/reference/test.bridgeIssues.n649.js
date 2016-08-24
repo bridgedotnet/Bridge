@@ -7,8 +7,6 @@
             System.Console.log("Say something");
         }
     });
-    
-    
-    
+
     Bridge.init();
 });

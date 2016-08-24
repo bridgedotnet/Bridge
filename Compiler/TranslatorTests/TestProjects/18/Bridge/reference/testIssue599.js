@@ -15,8 +15,6 @@
         $entryPoint: true,
         _something: "HI!"
     });
-    
-    
-    
+
     Bridge.init();
 });

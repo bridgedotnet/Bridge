@@ -4,24 +4,24 @@
     Bridge.define('TestIssue921Nested.Issue921NestedOuter', {
         useAField1: function () {
             var n = new TestIssue921Nested.Issue921NestedOuter.Issue921Nested(100);
-    
+
             var t = System.Linq.Enumerable.from(n.getName()).select($_.TestIssue921Nested.Issue921NestedOuter.f1);
         },
         useAField2: function () {
             var n = new TestIssue921Nested.Issue921NestedOuter.Issue921Nested(200);
-    
+
             var t = System.Linq.Enumerable.from(n.getName()).select($_.TestIssue921Nested.Issue921NestedOuter.f1);
         },
         useNestedFunOneInt: function () {
             var n = new TestIssue921Nested.Issue921NestedOuter.Issue921Nested(300);
-    
+
             System.Linq.Enumerable.from([1, 2, 3]).select(function (x) {
                 return n.computeNumber(x);
             });
         },
         useNestedFuncTwoInts: function () {
             var n = new TestIssue921Nested.Issue921NestedOuter.Issue921Nested(400);
-    
+
             System.Linq.Enumerable.from([1, 2, 3]).select(function (x, i) {
                 return n.computeTwoNumbers(x, i);
             });
@@ -29,7 +29,7 @@
         useNestedActionTwoInts: function () {
             var $t;
             var n = new TestIssue921Nested.Issue921NestedOuter.Issue921Nested(400);
-    
+
             $t = Bridge.getEnumerator([1, 2, 3]);
             while ($t.moveNext()) {
                 var item = $t.getCurrent();
@@ -38,15 +38,15 @@
         },
         useNestedFunOneIntStatic: function () {
             var n = new TestIssue921Nested.Issue921NestedOuter.Issue921Nested(500);
-    
+
             System.Linq.Enumerable.from([1, 2, 3]).select($_.TestIssue921Nested.Issue921NestedOuter.f2);
         }
     });
-    
+
     var $_ = {};
-    
+
     Bridge.ns("TestIssue921Nested.Issue921NestedOuter", $_);
-    
+
     Bridge.apply($_.TestIssue921Nested.Issue921NestedOuter, {
         f1: function (x) {
             return x;
@@ -55,7 +55,7 @@
             return TestIssue921Nested.Issue921NestedOuter.Issue921Nested.computeNumberStatic(x);
         }
     });
-    
+
     Bridge.define('TestIssue921Nested.Issue921NestedOuter.Issue921Nested', {
         statics: {
             computeNumberStatic: null,
@@ -99,21 +99,21 @@
         },
         lambaLiftingWithProperty: function () {
             var localValue = "What a name";
-    
+
             return System.Linq.Enumerable.from(["one", "two", "three"]).select($_.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f9).select($_.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f9).select($_.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f10).select(Bridge.fn.bind(this, $_.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f11)).select(Bridge.fn.bind(this, $_.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f12)).select(function (value) {
                 return System.String.concat(value, localValue);
             });
         },
         lambaLiftingWithStaticProperty: function () {
             var localValue = "What a name";
-    
+
             return System.Linq.Enumerable.from(["one", "two", "three"]).select($_.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f9).select($_.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f9).select($_.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f10).select(Bridge.fn.bind(this, $_.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f11)).select($_.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f13).select(function (value) {
                 return System.String.concat(value, localValue);
             });
         },
         lambaLiftingWithInstanceMethod: function () {
             var localValue = System.Decimal(10.0);
-    
+
             return System.Linq.Enumerable.from([System.Decimal(1.0), System.Decimal(2.0), System.Decimal(3.0)]).select($_.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f14).select($_.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f14).select(Bridge.fn.bind(this, $_.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f15)).select(Bridge.fn.bind(this, $_.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f16)).select(Bridge.fn.bind(this, $_.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f17)).select(function (value) {
                 return value.add(localValue);
             });
@@ -121,9 +121,9 @@
         lambaLiftingWithDelegate: function () {
             // Lift
             var addThousand = $_.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f18;
-    
+
             var localValue = 123;
-    
+
             return System.Linq.Enumerable.from([1, 2, 3]).select(function (value) {
                 return addThousand(((value + 1) | 0));
             }).select(function (value) {
@@ -141,9 +141,9 @@
         lambaLiftingWithDelegateChangingType: function () {
             // Lift
             var toString = $_.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f19;
-    
+
             var localValue = 7;
-    
+
             return System.Linq.Enumerable.from([1, 2, 3]).select(function (value) {
                 return toString(((value + 1) | 0));
             }).select(function (value) {
@@ -159,9 +159,9 @@
             });
         }
     });
-    
+
     Bridge.ns("TestIssue921Nested.Issue921NestedOuter.Issue921Nested", $_);
-    
+
     Bridge.apply($_.TestIssue921Nested.Issue921NestedOuter.Issue921Nested, {
         f1: function (i) {
             return ((((3 * i) | 0) + TestIssue921Nested.Issue921NestedOuter.Issue921Nested.getIntStatic()) | 0);
@@ -221,8 +221,6 @@
             return i.toString();
         }
     });
-    
-    
-    
+
     Bridge.init();
 });
