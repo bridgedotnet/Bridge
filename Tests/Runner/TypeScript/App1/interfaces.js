@@ -4,23 +4,23 @@
     Bridge.define('Interfaces.Interface1', {
         $kind: "interface"
     });
-    
+
     Bridge.define('Interfaces.Interface4', {
         $kind: "interface"
     });
-    
+
     Bridge.define('Interfaces.Interface6', {
         $kind: "interface"
     });
-    
+
     Bridge.define('Interfaces.Interface61', {
         $kind: "interface"
     });
-    
+
     Bridge.define('Interfaces.Interface62', {
         $kind: "interface"
     });
-    
+
     Bridge.define('Interfaces.Class1', {
         inherits: [Interfaces.Interface1],
         field: 200,
@@ -38,12 +38,12 @@
             this.property = value;
         }
     });
-    
+
     Bridge.define('Interfaces.Interface2', {
         inherits: [Interfaces.Interface1],
         $kind: "interface"
     });
-    
+
     Bridge.define('Interfaces.Class4', {
         inherits: [Interfaces.Interface4],
         config: {
@@ -72,7 +72,7 @@
             s.v = System.String.concat(s.v, i);
         }
     });
-    
+
     Bridge.define('Interfaces.Class6', {
         inherits: [Interfaces.Interface6],
         config: {
@@ -98,7 +98,7 @@
             this.setMethodProperty(i);
         }
     });
-    
+
     Bridge.define('Interfaces.Class2', {
         inherits: [Interfaces.Class1,Interfaces.Interface2],
         config: {
@@ -121,16 +121,16 @@
         },
         method4: function (i) {
             this.field = i.Interfaces$Interface1$getProperty();
-    
+
             return true;
         }
     });
-    
+
     Bridge.define('Interfaces.Interface3', {
         inherits: [Interfaces.Interface2],
         $kind: "interface"
     });
-    
+
     Bridge.define('Interfaces.Class3', {
         inherits: [Interfaces.Class2,Interfaces.Interface3],
         config: {
@@ -142,6 +142,6 @@
             return i;
         }
     });
-    
+
     Bridge.init();
 });

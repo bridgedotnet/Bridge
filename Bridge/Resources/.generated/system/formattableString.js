@@ -12,5 +12,3 @@
             return this.toString$1(formatProvider);
         }
     });
-    
-    

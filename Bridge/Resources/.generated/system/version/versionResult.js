@@ -23,8 +23,7 @@
             this.m_exceptionArgument = argument;
             if (this.m_canThrow) {
                 throw this.getVersionParseException();
-            }
-        },
+            }},
         getVersionParseException: function () {
             switch (this.m_failure) {
                 case System.Version.ParseFailureKind.ArgumentNullException: 
@@ -84,5 +83,3 @@
             return s;
         }
     });
-    
-    

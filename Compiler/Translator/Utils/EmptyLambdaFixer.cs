@@ -19,7 +19,7 @@ namespace Bridge.Translator
                 this.Found = true;
             }
 
-            if (ifElseStatement.FalseStatement != null && !ifElseStatement.FalseStatement.IsNull && !(ifElseStatement.FalseStatement is BlockStatement))
+            if (ifElseStatement.FalseStatement != null && !ifElseStatement.FalseStatement.IsNull && !(ifElseStatement.FalseStatement is BlockStatement || ifElseStatement.FalseStatement is IfElseStatement))
             {
                 this.Found = true;
             }
@@ -257,7 +257,7 @@ namespace Bridge.Translator
             IfElseStatement cloneIf = null;
             var hasFalse = ifElseStatement.FalseStatement != null && !ifElseStatement.FalseStatement.IsNull;
 
-            if (ifElseStatement.TrueStatement is BlockStatement && (!hasFalse || ifElseStatement.FalseStatement is BlockStatement))
+            if (ifElseStatement.TrueStatement is BlockStatement && (!hasFalse || ifElseStatement.FalseStatement is BlockStatement || ifElseStatement.FalseStatement is IfElseStatement))
             {
                 return base.VisitIfElseStatement(ifElseStatement);
             }

@@ -4,7 +4,7 @@
         format$1: null,
         constructor: function (format, args) {
             if (args === void 0) { args = []; }
-    
+
             this.$initialize();
             System.FormattableString.$constructor.call(this);
             this.format$1 = format;

@@ -72,7 +72,7 @@
             throws$7: function (T, block, message) {
                 var actual = null;
                 var expected = Bridge.getTypeName(T);
-    
+
                 try {
                     block();
                 }
@@ -80,11 +80,10 @@
                     ex = System.Exception.create(ex);
                     actual = Bridge.getTypeName(ex);
                 }
-    
+
                 if (!Bridge.referenceEquals(actual, expected)) {
                     Bridge.Test.Assert.assert.equal(actual, expected, message);
-                }
-                else  {
+                } else {
                     Bridge.Test.Assert.assert.ok(true, message);
                 }
             },
@@ -114,7 +113,7 @@
             }
         }
     });
-    
+
     Bridge.define('Bridge.Test.QUnit.TestFixture$1', function (T) { return {
         statics: {
             instanceFabric: null,
@@ -123,7 +122,6 @@
                 if (Bridge.Test.QUnit.TestFixture$1(T).fixtureFabric == null) {
                     Bridge.Test.QUnit.TestFixture$1(T).fixtureFabric = Bridge.createInstance(T);
                 }
-    
                 return Bridge.Test.QUnit.TestFixture$1(T).fixtureFabric;
             },
             setFixtureFabric: function (value) {
@@ -133,30 +131,28 @@
                 if (Bridge.Test.QUnit.TestFixture$1(T).instanceFabric == null) {
                     Bridge.Test.QUnit.TestFixture$1(T).instanceFabric = Bridge.cast(Bridge.createInstance(type), Bridge.Test.QUnit.TestFixture$1(T));
                 }
-    
                 return Bridge.Test.QUnit.TestFixture$1(T).instanceFabric;
             },
             beforeTest: function (needInstance, assert, type, expectedCount) {
                 if (expectedCount === void 0) { expectedCount = null; }
                 Bridge.Test.Assert.assert = assert;
-    
+
                 if (System.Nullable.hasValue(expectedCount)) {
                     assert.expect(System.Nullable.getValue(expectedCount));
                 }
-    
                 var instance = Bridge.Test.QUnit.TestFixture$1(T).instanceFabric$1(type);
                 instance.setFixture(needInstance ? Bridge.Test.QUnit.TestFixture$1(T).getFixtureFabric() : Bridge.getDefaultValue(T));
-    
+
                 try {
                     instance.setUp();
                 }
                 catch ($e1) {
                     $e1 = System.Exception.create($e1);
                     assert.ok(false, "The test failed SetUp");
-    
+
                     throw $e1;
                 }
-    
+
                 return instance;
             }
         },
@@ -170,7 +166,7 @@
         tearDown: function () {
         }
     }; });
-    
+
     Bridge.define('Bridge.Test.QUnit.TestRunner', {
         statics: {
             config: {
@@ -260,7 +256,7 @@
         },
         $entryPoint: true
     });
-    
+
     Bridge.define('Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch2_BridgeIssues_Bridge1385', {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.Bridge1385)],
         statics: {
@@ -270,7 +266,7 @@
             }
         }
     });
-    
+
     Bridge.define('Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch2_BridgeIssues_Bridge1499', {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.Bridge1499)],
         statics: {
@@ -280,7 +276,7 @@
             }
         }
     });
-    
+
     Bridge.define('Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch2_BridgeIssues_N1122', {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N1122)],
         statics: {
@@ -294,7 +290,7 @@
             }
         }
     });
-    
+
     Bridge.define('Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch2_BridgeIssues_N1204', {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N1204)],
         statics: {
@@ -304,7 +300,7 @@
             }
         }
     });
-    
+
     Bridge.define('Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch2_BridgeIssues_N772', {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772)],
         statics: {
@@ -510,7 +506,7 @@
             }
         }
     });
-    
+
     Bridge.define('Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests', {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests)],
         statics: {
@@ -532,7 +528,7 @@
             }
         }
     });
-    
+
     Bridge.define('Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch2_CheckedTests', {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests)],
         statics: {
@@ -554,7 +550,7 @@
             }
         }
     });
-    
+
     Bridge.define('Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch2_UncheckedInsideCheckedTests', {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests)],
         statics: {
@@ -576,7 +572,7 @@
             }
         }
     });
-    
+
     Bridge.define('Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch2_UncheckedTests', {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests)],
         statics: {
@@ -598,7 +594,7 @@
             }
         }
     });
-    
+
     Bridge.define('Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch2_WithNoUncheckedKeywordTests', {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests)],
         statics: {
@@ -620,6 +616,6 @@
             }
         }
     });
-    
+
     Bridge.init();
 });

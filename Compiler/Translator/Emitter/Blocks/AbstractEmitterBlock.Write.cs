@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Bridge.Translator
 {
@@ -361,7 +362,7 @@ namespace Bridge.Translator
 
         public virtual void WriteDo()
         {
-            this.Write("do ");
+            this.Write("do");
         }
 
         public virtual void WriteSwitch()
@@ -506,7 +507,10 @@ namespace Bridge.Translator
 
             string indent = output.ToString();
 
-            return value.Replace("\n", "\n" + indent);
+            return Regex.Replace(value, "\\n(?!\\s*$)(.+)", (m) =>
+            {
+                return "\n" + indent + m.Groups[1].Value;
+            }, RegexOptions.Multiline);
         }
 
         public static string RemoveIndentFromString(string value, int offset)

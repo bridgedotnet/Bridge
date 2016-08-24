@@ -18,7 +18,7 @@
             return 1;
         }
     });
-    
+
     Bridge.define('Classes.MovePoint', {
         statics: {
             move: function (p, dx, dy) {
@@ -37,7 +37,7 @@
             this.setPoint(Classes.MovePoint.move(this.getPoint().$clone(), dx, dy).$clone());
         }
     });
-    
+
     Bridge.define('Classes.Point', {
         $kind: "struct",
         statics: {
@@ -73,7 +73,7 @@
             return s;
         }
     });
-    
+
     Bridge.define('Classes.StaticClass', {
         statics: {
             move: function (p, dx, dy) {
@@ -81,7 +81,7 @@
             }
         }
     });
-    
+
     Bridge.define('Classes.Dog', {
         inherits: [Classes.Animal],
         constructor: function (name) {
@@ -92,7 +92,7 @@
             return 20;
         }
     });
-    
+
     Bridge.define('Classes.Employee', {
         inherits: [Classes.Animal],
         name$1: null,
@@ -104,7 +104,7 @@
             this.id = id;
         }
     });
-    
+
     Bridge.define('Classes.Snake', {
         inherits: [Classes.Animal],
         constructor: function (name) {
@@ -115,8 +115,6 @@
             return 5;
         }
     });
-    
-    
-    
+
     Bridge.init();
 });

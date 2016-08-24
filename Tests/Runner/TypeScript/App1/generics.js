@@ -11,7 +11,7 @@
             return input;
         }
     }; });
-    
+
     Bridge.define('Generics.INamedEntity', {
         config: {
             properties: {
@@ -19,7 +19,7 @@
             }
         }
     });
-    
+
     Bridge.define('Generics.GenericNew$1', function (T) { return {
         instance: Bridge.getDefaultValue(T),
         constructor: function (instance) {
@@ -30,7 +30,7 @@
             return input;
         }
     }; });
-    
+
     Bridge.define('Generics.GenericNewAndClass$1', function (T) { return {
         instance: Bridge.getDefaultValue(T),
         constructor: function (instance) {
@@ -41,7 +41,7 @@
             return input;
         }
     }; });
-    
+
     Bridge.define('Generics.GenericStruct$1', function (T) { return {
         instance: Bridge.getDefaultValue(T),
         constructor: function (instance) {
@@ -52,7 +52,7 @@
             return input;
         }
     }; });
-    
+
     Bridge.define('Generics.implementation', {
         statics: {
             simpleGenericInt: null,
@@ -77,7 +77,7 @@
             }
         }
     });
-    
+
     Bridge.define('Generics.NewClass', {
         data: 0,
         constructor: function () {
@@ -85,7 +85,7 @@
             this.data = 30;
         }
     });
-    
+
     Bridge.define('Generics.SimpleDoubleGeneric$2', function (T, K) { return {
         instanceT: Bridge.getDefaultValue(T),
         instanceK: Bridge.getDefaultValue(K),
@@ -104,7 +104,7 @@
             return input;
         }
     }; });
-    
+
     Bridge.define('Generics.SimpleGeneric$1', function (T) { return {
         instance: Bridge.getDefaultValue(T),
         constructor: function (instance) {
@@ -115,7 +115,7 @@
             return input;
         }
     }; });
-    
+
     Bridge.define('Generics.GenericINamedEntity$1', function (T) { return {
         instance: Bridge.getDefaultValue(T),
         constructor: function (instance) {
@@ -126,7 +126,7 @@
             return input;
         }
     }; });
-    
+
     Bridge.define('Generics.NamedEntity', {
         inherits: [Generics.INamedEntity],
         config: {
@@ -135,7 +135,7 @@
             }
         }
     });
-    
+
     Bridge.define('Generics.GenericNamedEntity$1', function (T) { return {
         instance: Bridge.getDefaultValue(T),
         constructor: function (instance) {
@@ -146,8 +146,6 @@
             return input;
         }
     }; });
-    
-    
-    
+
     Bridge.init();
 });
