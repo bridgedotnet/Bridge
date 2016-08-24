@@ -55,7 +55,7 @@ namespace Bridge.Translator
             bool block = node is BlockStatement;
             var ifStatement = node.Parent as IfElseStatement;
 
-            if (node is IfElseStatement && ifStatement != null && ifStatement.FalseStatement == node)
+            if (!block && node is IfElseStatement && ifStatement != null && ifStatement.FalseStatement == node)
             {
                 block = true;
             }

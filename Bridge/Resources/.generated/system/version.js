@@ -17,11 +17,13 @@
                 if (input == null) {
                     throw new System.ArgumentNullException("input");
                 }
+
                 var r = { v : new System.Version.VersionResult() };
                 r.v.init("input", true);
                 if (!System.Version.tryParseVersion(input, r)) {
                     throw r.v.getVersionParseException();
-                }return r.v.m_parsedVersion;
+                }
+                return r.v.m_parsedVersion;
             },
             tryParse: function (input, result) {
                 var r = { v : new System.Version.VersionResult() };
@@ -37,24 +39,29 @@
                     result.v.setFailure(System.Version.ParseFailureKind.ArgumentNullException);
                     return false;
                 }
+
                 var parsedComponents = version.split(System.Version.separatorsArray);
                 var parsedComponentsLength = parsedComponents.length;
                 if ((parsedComponentsLength < 2) || (parsedComponentsLength > 4)) {
                     result.v.setFailure(System.Version.ParseFailureKind.ArgumentException);
                     return false;
                 }
+
                 if (!System.Version.tryParseComponent(parsedComponents[0], "version", result, major)) {
                     return false;
                 }
+
                 if (!System.Version.tryParseComponent(parsedComponents[1], "version", result, minor)) {
                     return false;
                 }
+
                 parsedComponentsLength = (parsedComponentsLength - 2) | 0;
 
                 if (parsedComponentsLength > 0) {
                     if (!System.Version.tryParseComponent(parsedComponents[2], "build", result, build)) {
                         return false;
                     }
+
                     parsedComponentsLength = (parsedComponentsLength - 1) | 0;
 
                     if (parsedComponentsLength > 0) {
@@ -77,16 +84,19 @@
                     result.v.setFailure$1(System.Version.ParseFailureKind.FormatException, component);
                     return false;
                 }
+
                 if (parsedComponent.v < 0) {
                     result.v.setFailure$1(System.Version.ParseFailureKind.ArgumentOutOfRangeException, componentName);
                     return false;
                 }
+
                 return true;
             },
             op_Equality: function (v1, v2) {
                 if (Bridge.referenceEquals(v1, null)) {
                     return Bridge.referenceEquals(v2, null);
                 }
+
                 return v1.equalsT(v2);
             },
             op_Inequality: function (v1, v2) {
@@ -96,12 +106,14 @@
                 if (v1 == null) {
                     throw new System.ArgumentNullException("v1");
                 }
+
                 return (v1.compareTo(v2) < 0);
             },
             op_LessThanOrEqual: function (v1, v2) {
                 if (v1 == null) {
                     throw new System.ArgumentNullException("v1");
                 }
+
                 return (v1.compareTo(v2) <= 0);
             },
             op_GreaterThan: function (v1, v2) {
@@ -127,15 +139,19 @@
             if (major < 0) {
                 throw new System.ArgumentOutOfRangeException("major", "Cannot be < 0");
             }
+
             if (minor < 0) {
                 throw new System.ArgumentOutOfRangeException("minor", "Cannot be < 0");
             }
+
             if (build < 0) {
                 throw new System.ArgumentOutOfRangeException("build", "Cannot be < 0");
             }
+
             if (revision < 0) {
                 throw new System.ArgumentOutOfRangeException("revision", "Cannot be < 0");
             }
+
             this._Major = major;
             this._Minor = minor;
             this._Build = build;
@@ -146,12 +162,15 @@
             if (major < 0) {
                 throw new System.ArgumentOutOfRangeException("major", "Cannot be < 0");
             }
+
             if (minor < 0) {
                 throw new System.ArgumentOutOfRangeException("minor", "Cannot be < 0");
             }
+
             if (build < 0) {
                 throw new System.ArgumentOutOfRangeException("build", "Cannot be < 0");
             }
+
             this._Major = major;
             this._Minor = minor;
             this._Build = build;
@@ -161,9 +180,11 @@
             if (major < 0) {
                 throw new System.ArgumentOutOfRangeException("major", "Cannot be < 0");
             }
+
             if (minor < 0) {
                 throw new System.ArgumentOutOfRangeException("minor", "Cannot be < 0");
             }
+
             this._Major = major;
             this._Minor = minor;
         },
@@ -210,10 +231,12 @@
             if (version == null) {
                 return 1;
             }
+
             var v = Bridge.as(version, System.Version);
             if (System.Version.op_Equality(v, null)) {
                 throw new System.ArgumentException("version should be of System.Version type");
             }
+
             if (this._Major !== v._Major) {
                 if (this._Major > v._Major) {
                     return 1;
@@ -221,6 +244,7 @@
                     return -1;
                 }
             }
+
             if (this._Minor !== v._Minor) {
                 if (this._Minor > v._Minor) {
                     return 1;
@@ -228,6 +252,7 @@
                     return -1;
                 }
             }
+
             if (this._Build !== v._Build) {
                 if (this._Build > v._Build) {
                     return 1;
@@ -235,6 +260,7 @@
                     return -1;
                 }
             }
+
             if (this._Revision !== v._Revision) {
                 if (this._Revision > v._Revision) {
                     return 1;
@@ -242,12 +268,14 @@
                     return -1;
                 }
             }
+
             return 0;
         },
         compareTo: function (value) {
             if (System.Version.op_Equality(value, null)) {
                 return 1;
             }
+
             if (this._Major !== value._Major) {
                 if (this._Major > value._Major) {
                     return 1;
@@ -255,6 +283,7 @@
                     return -1;
                 }
             }
+
             if (this._Minor !== value._Minor) {
                 if (this._Minor > value._Minor) {
                     return 1;
@@ -262,6 +291,7 @@
                     return -1;
                 }
             }
+
             if (this._Build !== value._Build) {
                 if (this._Build > value._Build) {
                     return 1;
@@ -269,6 +299,7 @@
                     return -1;
                 }
             }
+
             if (this._Revision !== value._Revision) {
                 if (this._Revision > value._Revision) {
                     return 1;
@@ -276,6 +307,7 @@
                     return -1;
                 }
             }
+
             return 0;
         },
         equals: function (obj) {
@@ -283,20 +315,24 @@
             if (System.Version.op_Equality(v, null)) {
                 return false;
             }
+
             // check that major, minor, build & revision numbers match
             if ((this._Major !== v._Major) || (this._Minor !== v._Minor) || (this._Build !== v._Build) || (this._Revision !== v._Revision)) {
                 return false;
             }
+
             return true;
         },
         equalsT: function (obj) {
             if (System.Version.op_Equality(obj, null)) {
                 return false;
             }
+
             // check that major, minor, build & revision numbers match
             if ((this._Major !== obj._Major) || (this._Minor !== obj._Minor) || (this._Build !== obj._Build) || (this._Revision !== obj._Revision)) {
                 return false;
             }
+
             return true;
         },
         getHashCode: function () {
@@ -315,9 +351,11 @@
         toString: function () {
             if (this._Build === -1) {
                 return (this.toString$1(2));
-            }if (this._Revision === -1) {
+            }
+            if (this._Revision === -1) {
                 return (this.toString$1(3));
-            }return (this.toString$1(4));
+            }
+            return (this.toString$1(4));
         },
         toString$1: function (fieldCount) {
             var sb;
@@ -335,7 +373,8 @@
                 default: 
                     if (this._Build === -1) {
                         throw new System.ArgumentException("Build should be > 0 if fieldCount > 2", "fieldCount");
-                    }if (fieldCount === 3) {
+                    }
+                    if (fieldCount === 3) {
                         sb = new System.Text.StringBuilder();
                         System.Version.appendPositiveNumber(this._Major, sb);
                         sb.append(String.fromCharCode(46));
@@ -343,9 +382,11 @@
                         sb.append(String.fromCharCode(46));
                         System.Version.appendPositiveNumber(this._Build, sb);
                         return sb.toString();
-                    }if (this._Revision === -1) {
+                    }
+                    if (this._Revision === -1) {
                         throw new System.ArgumentException("Revision should be > 0 if fieldCount > 3", "fieldCount");
-                    }if (fieldCount === 4) {
+                    }
+                    if (fieldCount === 4) {
                         sb = new System.Text.StringBuilder();
                         System.Version.appendPositiveNumber(this._Major, sb);
                         sb.append(String.fromCharCode(46));
@@ -355,7 +396,8 @@
                         sb.append(String.fromCharCode(46));
                         System.Version.appendPositiveNumber(this._Revision, sb);
                         return sb.toString();
-                    }throw new System.ArgumentException("Should be < 5", "fieldCount");
+                    }
+                    throw new System.ArgumentException("Should be < 5", "fieldCount");
             }
         }
     });
