@@ -1,14 +1,10 @@
 using Bridge.Contract;
-using ICSharpCode.NRefactory.CSharp;
-using Microsoft.Ajax.Utilities;
 using Mono.Cecil;
-using Object.Net.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using AssemblyDefinition = Mono.Cecil.AssemblyDefinition;
 
 namespace Bridge.Translator
 {
@@ -16,14 +12,17 @@ namespace Bridge.Translator
     {
         protected virtual void InjectResources(string outputPath, Dictionary<string, string> files)
         {
-            if ((files == null || files.Count == 0) && !this.AssemblyInfo.Resources.HasResources())
+            this.PrepareResourcesConfig();
+
+            if ((files == null || files.Count == 0)
+                && !this.AssemblyInfo.Resources.HasResources())
             {
                 this.Log.Trace("No files nor resources to inject");
                 return;
             }
 
             var resourceBasePath = Path.GetDirectoryName(this.Location);
-            var resourcesToEmbed = PrepareResources(outputPath, resourceBasePath, files);
+            var resourcesToEmbed = this.PrepareResources(outputPath, resourceBasePath, files);
 
             var assemblyDef = this.AssemblyDefinition;
             var resources = assemblyDef.MainModule.Resources;
@@ -66,7 +65,7 @@ namespace Bridge.Translator
             var mscorlib = assemblyDef.MainModule.AssemblyReferences.FirstOrDefault(r => r.Name == "mscorlib");
             if (mscorlib != null)
             {
-                this.Log.Info("Removing mscorlib reference");
+                this.Log.Trace("Removing mscorlib reference");
                 assemblyDef.MainModule.AssemblyReferences.Remove(mscorlib);
             }
 
@@ -103,7 +102,7 @@ namespace Bridge.Translator
 
                         resourcesToEmbed.Add(resource.Name, code);
 
-                        if (resource.Extract)
+                        if (resource.Extract == true)
                         {
                             try
                             {
@@ -390,6 +389,76 @@ namespace Bridge.Translator
                     resourceBuffer.Append(remarkLine);
                     NewLine(resourceBuffer);
                 }
+            }
+        }
+
+        private void PrepareResourcesConfig()
+        {
+            this.Log.Trace("Preparing resources config...");
+
+            var config = this.AssemblyInfo.Resources;
+
+            var rawResources = config.Items;
+
+            var resources = new List<ResourceConfigItem>();
+            ResourceConfigItem defaultSetting = null;
+
+            if (rawResources != null)
+            {
+                var defaultResources = rawResources.Where(x => x.Name == null);
+
+                if (defaultResources.Count() > 1)
+                {
+                    this.Log.Error("There are more than one default resource in the configuration setting file (resources section). Will use the first occurrence as a default resource settings");
+                }
+
+                defaultSetting = defaultResources.FirstOrDefault();
+
+                if (defaultSetting != null)
+                {
+                    this.Log.Trace("The resources config section has a default settings");
+
+                    foreach (var resource in rawResources.Where(x => x.Name != null))
+                    {
+                        ApplyDefaultResourceConfigSetting(defaultSetting, resource);
+
+                        resources.Add(resource);
+                    }
+                }
+                else
+                {
+                    resources.AddRange(rawResources);
+                }
+
+                this.Log.Trace("The resources config section has " + resources.Count + " non-default settings");
+            }
+
+            config.PrepareDefault(defaultSetting, resources.ToArray());
+            this.Log.Trace("Done preparing resources config");
+
+            return;
+        }
+
+        private void ApplyDefaultResourceConfigSetting(ResourceConfigItem defaultSetting, ResourceConfigItem current)
+        {
+            if (!current.Extract.HasValue)
+            {
+                current.Extract = defaultSetting.Extract;
+            }
+
+            if (current.Files == null)
+            {
+                current.Files = defaultSetting.Files.Select(x => x).ToArray();
+            }
+
+            if (current.Header == null)
+            {
+                current.Header = defaultSetting.Header;
+            }
+
+            if (current.Remark == null)
+            {
+                current.Remark = defaultSetting.Remark;
             }
         }
     }
