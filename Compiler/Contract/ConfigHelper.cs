@@ -5,7 +5,25 @@ using System.IO;
 
 namespace Bridge.Contract
 {
-    public class ConfigHelper<T>
+    public class ConfigHelper
+    {
+        public string ConvertPath(string path)
+        {
+            if (Path.DirectorySeparatorChar != '/')
+            {
+                path = path.Replace('/', Path.DirectorySeparatorChar);
+            }
+
+            if (Path.DirectorySeparatorChar != '\\')
+            {
+                path.Replace('\\', Path.DirectorySeparatorChar);
+            }
+
+            return path;
+        }
+    }
+
+    public class ConfigHelper<T> : ConfigHelper
     {
         private ILogger Logger { get; set; }
 
@@ -112,21 +130,6 @@ namespace Bridge.Contract
             }
 
             this.Logger.Info("Getting configuration file path done - " + (path ?? ""));
-
-            return path;
-        }
-
-        public string ConvertPath(string path)
-        {
-            if (Path.DirectorySeparatorChar != '/')
-            {
-                path = path.Replace('/', Path.DirectorySeparatorChar);
-            }
-
-            if (Path.DirectorySeparatorChar != '\\')
-            {
-                path.Replace('\\', Path.DirectorySeparatorChar);
-            }
 
             return path;
         }

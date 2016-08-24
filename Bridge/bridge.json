@@ -16,17 +16,10 @@
   "resources": {
     "items": [
       {
+        // File paths relative to project root
         "name": "bridge.js",
-        "captionInfo": {
-          "version": "{0} - Bridge.NET",
-          "author": "{0} http://bridge.net/",
-          "date": "2016-09-12",
-          "copyright": "{0} http://object.net/",
-          "license": "See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE."
-        },
+        "header": "Resources/.auxiliary/Header.js",
         "extract": true,
-
-        // File path relative to project root
         "files": [
           "Resources/.auxiliary/Init.js",
           "Resources/Core.js",
@@ -101,13 +94,7 @@
       },
       {
         "name": "bridge.d.ts",
-        "captionInfo": {
-          "version": "{0} - Bridge.NET",
-          "author": "{0} http://bridge.net/",
-          "date": "2016-06-08",
-          "copyright": "{0} http://object.net/",
-          "license": "See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE."
-        },
+        "header": "Resources/.typescript/header.d.ts",
         "files": [
           "Resources/.typescript/bridge.d.ts"
         ]

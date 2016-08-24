@@ -328,15 +328,9 @@ namespace Bridge.Contract
         public ResourceConfigItem()
         {
             this.Files = new string[] { };
-            this.CaptionInfo = new Dictionary<string, string>();
         }
 
-        public bool Caption
-        {
-            get; set;
-        }
-
-        public Dictionary<string, string> CaptionInfo
+        public string Header
         {
             get; set;
         }

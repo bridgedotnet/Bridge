@@ -319,6 +319,7 @@
     <Compile Include="System\Void.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\.auxiliary\Header.js" />
     <Content Include="Resources\.generated\bridge.js" />
     <Content Include="Resources\.generated\system\formattableString.js" />
     <Content Include="Resources\.generated\system\formattableStringImpl.js" />
@@ -328,6 +329,8 @@
     <Content Include="Resources\.generated\system\version.js" />
     <Content Include="Resources\.generated\system\version\parseFailureKind.js" />
     <Content Include="Resources\.generated\system\version\versionResult.js" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Resources\Locales\af-ZA.js" />
     <EmbeddedResource Include="Resources\Locales\af.js" />
     <EmbeddedResource Include="Resources\Locales\am-ET.js" />
@@ -624,6 +627,7 @@
     <EmbeddedResource Include="Resources\Locales\ro-RO.js" />
     <EmbeddedResource Include="Resources\Locales\ro.js" />
     <EmbeddedResource Include="Resources\Locales\ru.js" />
+    <EmbeddedResource Include="Resources\Locales\ru-RU.js" />
     <EmbeddedResource Include="Resources\Locales\rw-RW.js" />
     <EmbeddedResource Include="Resources\Locales\rw.js" />
     <EmbeddedResource Include="Resources\Locales\sa-IN.js" />
@@ -744,6 +748,8 @@
     <EmbeddedResource Include="Resources\Locales\zh.js" />
     <EmbeddedResource Include="Resources\Locales\zu-ZA.js" />
     <EmbeddedResource Include="Resources\Locales\zu.js" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Resources\Bool.js" />
     <Content Include="Resources\ArraySegment.js" />
     <Content Include="Resources\Diagnostics.js" />
@@ -775,7 +781,6 @@
     <Content Include="Resources\Reflection.js" />
     <Content Include="Resources\ClientWebSocket.js" />
     <Content Include="Resources\Uri.js" />
-    <None Include="AdditionalCompilerOptions.txt" />
     <Content Include="Resources\Array.js" />
     <Content Include="Resources\Collections\Comparer.js" />
     <Content Include="Resources\Decimal.js" />
@@ -796,7 +801,6 @@
     <Content Include="Resources\INotifyPropertyChanged.js" />
     <Content Include="Resources\Date.js" />
     <Content Include="Resources\linq.js" />
-    <EmbeddedResource Include="Resources\Locales\ru-RU.js" />
     <Content Include="Resources\Char.js" />
     <Content Include="Resources\Text\BridgeRegex.js" />
     <Content Include="Resources\Text\StringBuilder.js" />
@@ -808,10 +812,14 @@
     <Content Include="Resources\Nullable.js" />
     <Content Include="Resources\Core.js" />
     <Content Include="Resources\Validation.js" />
-    <Content Include="Resources\.typescript\bridge.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bridge.json" />
+    <None Include="AdditionalCompilerOptions.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\.typescript\bridge.d.ts" />
+    <Content Include="Resources\.typescript\header.d.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

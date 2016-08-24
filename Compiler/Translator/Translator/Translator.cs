@@ -333,305 +333,6 @@ namespace Bridge.Translator
             logger.Trace("SaveTo path = " + path + " done");
         }
 
-        protected virtual void InjectResources(string outputPath, Dictionary<string, string> files)
-        {
-            if ((files == null || files.Count == 0) && !this.AssemblyInfo.Resources.HasResources())
-            {
-                this.Log.Trace("No files nor resources to inject");
-                return;
-            }
-
-            var resourceBasePath = Path.GetDirectoryName(this.Location);
-            var resourcesToEmbed = PrepareResources(outputPath, resourceBasePath, files);
-
-            var assemblyDef = this.AssemblyDefinition;
-            var resources = assemblyDef.MainModule.Resources;
-            var resourcesList = new List<string>();
-
-            foreach (var item in resourcesToEmbed)
-            {
-                var name = item.Key;
-                name = this.NormalizePath(name);
-                var newResource = new EmbeddedResource(name, ManifestResourceAttributes.Private, item.Value);
-
-                var existingResource = resources.FirstOrDefault(r => r.Name == name);
-                if (existingResource != null)
-                {
-                    resources.Remove(existingResource);
-                }
-
-                resources.Add(newResource);
-                resourcesList.Add(item.Key + ":" + name);
-            }
-
-            StringBuilder sb = new StringBuilder();
-            foreach (var res in resourcesList)
-            {
-                sb.Append(res).Append("+");
-            }
-            sb.Remove(sb.Length - 1, 1);
-
-            var listResources = new EmbeddedResource(Translator.BridgeResourcesList, ManifestResourceAttributes.Private, Translator.OutputEncoding.GetBytes(sb.ToString()));
-
-            var existingList = resources.FirstOrDefault(r => r.Name == Translator.BridgeResourcesList);
-            if (existingList != null)
-            {
-                resources.Remove(existingList);
-            }
-
-            resources.Add(listResources);
-
-            // Checking if mscorlib reference added and removing if added
-            var mscorlib = assemblyDef.MainModule.AssemblyReferences.FirstOrDefault(r => r.Name == "mscorlib");
-            if (mscorlib != null)
-            {
-                this.Log.Info("Removing mscorlib reference");
-                assemblyDef.MainModule.AssemblyReferences.Remove(mscorlib);
-            }
-
-            assemblyDef.Write(this.AssemblyLocation);
-        }
-
-        private Dictionary<string, byte[]> PrepareResources(string outputPath, string resourcesBasePath, Dictionary<string, string> files)
-        {
-            var resourcesToEmbed = new Dictionary<string, byte[]>();
-
-            if (this.AssemblyInfo.Resources.HasResources())
-            {
-                // There are resources defined in the config so let's grab files
-                // Find all items and put in the order
-                this.Log.Trace("Preparing resources specified in config...");
-
-                var resourceItems = new Dictionary<string, string>();
-
-                foreach (var resource in this.AssemblyInfo.Resources.Items)
-                {
-                    this.Log.Trace("Preparing resource " + resource.Name);
-
-                    var resourceBuffer = new StringBuilder();
-
-                    if (resource.Caption || resource.CaptionInfo.Any())
-                    {
-                        this.GenerateResourseCaption(resourceBuffer, resource);
-                    }
-
-                    this.ReadResourseFiles(resourcesBasePath, resourceBuffer, resource);
-
-                    if (resourceBuffer.Length > 0)
-                    {
-                        this.Log.Trace("Prepared files for resource " + resource.Name);
-
-                        var code = OutputEncoding.GetBytes(resourceBuffer.ToString());
-
-                        resourcesToEmbed.Add(resource.Name, code);
-
-                        if (resource.Extract)
-                        {
-                            try
-                            {
-                                this.Log.Trace("Extracting resource " + resource.Name);
-
-                                var path = Path.Combine(outputPath, resource.Name);
-                                this.Log.Trace("Extracting resource into " + path);
-
-                                File.WriteAllBytes(path, code);
-                                this.Log.Trace("Done");
-                            }
-                            catch (Exception ex)
-                            {
-                                this.Log.Error(ex.ToString());
-                                throw;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        this.Log.Error("No files found for resource " + resource.Name);
-                    }
-
-                    this.Log.Trace("Done preparing resource " + resource.Name);
-                }
-
-                this.Log.Trace("Done preparing resources specified in config...");
-            }
-            else
-            {
-                // There are no resources defined in the config so let's just grab files
-                this.Log.Trace("Preparing output files for resources");
-
-                foreach (var file in files)
-                {
-                    try
-                    {
-                        this.Log.Trace("Reading output file " + file.Value);
-                        var content = File.ReadAllBytes(file.Value);
-
-                        resourcesToEmbed.Add(file.Key, content);
-                        this.Log.Trace("Read " + content.Length + " bytes");
-                    }
-                    catch (Exception ex)
-                    {
-                        this.Log.Error(ex.ToString());
-                        throw;
-                    }
-                }
-
-                this.Log.Trace("Done preparing output files for resources");
-            }
-
-            return resourcesToEmbed;
-        }
-
-        private void GenerateResourseCaption(StringBuilder resourceBuffer, ResourceConfigItem resource)
-        {
-            this.Log.Trace("Writing caption for resource config item " + resource.Name);
-
-            var captionInfo = PrepareResourseCaptionInfo(resource);
-
-            NewLine(resourceBuffer, "/*");
-
-            WriteResourceCaptionLine(resourceBuffer, captionInfo, " * @");
-
-            NewLine(resourceBuffer, "*/");
-
-            this.Log.Trace("Done writing caption for resource config item " + resource.Name);
-        }
-
-        private Dictionary<string, string> PrepareResourseCaptionInfo(ResourceConfigItem resource)
-        {
-            var assemblyInfo = this.GetExecutingAssemblyVersion();
-
-            string version = null;
-            string author = null;
-            string date = DateTime.Now.ToString("yyyy-MM-dd");
-            string copyright = null;
-
-            if (assemblyInfo == null)
-            {
-                this.Log.Error("Could not get assembly version to generate caption for resourse " + resource.Name);
-            }
-            else
-            {
-                version = assemblyInfo.ProductVersion;
-                author = assemblyInfo.CompanyName;
-                copyright = assemblyInfo.LegalCopyright;
-            }
-
-            var captionInfo = new Dictionary<string, string>
-            {
-                ["version"] = version,
-                ["author"] = author,
-                ["date"] = date,
-                ["copyright"] = copyright
-            };
-
-            var caption = resource.CaptionInfo;
-            if (caption != null && caption.Any())
-            {
-                var keys = new List<string>(caption.Keys);
-                foreach (var key in keys)
-                {
-                    string v;
-                    if (captionInfo.TryGetValue(key, out v))
-                    {
-                        var s = caption[key];
-                        caption[key] = string.Format(s, v);
-                    }
-                }
-            }
-            else
-            {
-                caption = captionInfo;
-            }
-
-            return caption;
-        }
-
-        private static void WriteResourceCaptionLine(StringBuilder sb, Dictionary<string, string> info, string linePrefix, int? firstColumnSize = null)
-        {
-            var prefixLength = linePrefix.Length;
-
-            if (!firstColumnSize.HasValue)
-            {
-                firstColumnSize = info.Keys.Max(x => x.Length) + prefixLength + 1;
-            }
-
-            foreach (var d in info)
-            {
-                sb.Append(linePrefix + d.Key);
-
-                var cpl = firstColumnSize.Value - prefixLength - d.Key.Length;
-                if ( cpl > 0 )
-                {
-                    sb.Append(new string(' ', cpl));
-                }
-
-                sb.Append(": ");
-
-                NewLine(sb, d.Value);
-            }
-        }
-
-        private void ReadResourseFiles(string outputPath, StringBuilder resourceBuffer, ResourceConfigItem item)
-        {
-            this.Log.Trace("Reading resource with " + item.Files.Length + " items");
-
-            foreach (var fileName in item.Files)
-            {
-                this.Log.Trace("Reading resource item(s) in location " + fileName);
-
-                try
-                {
-                    string directoryPath;
-
-                    directoryPath = outputPath;
-
-                    var dirPathInFileName = Path.GetDirectoryName(fileName);
-                    var filePathCleaned = fileName;
-                    if (!string.IsNullOrEmpty(dirPathInFileName))
-                    {
-                        directoryPath = Path.Combine(directoryPath, dirPathInFileName);
-                        this.Log.Trace("Cleaned folder path part: " + dirPathInFileName + " from location: " + fileName + "and added to the directory path: " + directoryPath);
-
-                        filePathCleaned = Path.GetFileName(filePathCleaned);
-                    }
-
-                    var directory = new DirectoryInfo(directoryPath);
-
-                    if (!directory.Exists)
-                    {
-                        throw new InvalidOperationException("Could not find any folder: " + directory.FullName + " for resource " + item.Name + " and location " + fileName);
-                    }
-
-                    this.Log.Trace("Searching files for resources in folder: " + directoryPath);
-
-                    var files = directory.GetFiles(filePathCleaned, SearchOption.TopDirectoryOnly);
-
-                    if (!files.Any())
-                    {
-                        throw new InvalidOperationException("Could not find any file in folder: " + directory.FullName + " for resource " + item.Name + " and location " + fileName);
-                    }
-
-                    foreach (var file in files)
-                    {
-                        NewLine(resourceBuffer);
-
-                        this.Log.Trace("Reading resource item at " + file.FullName);
-
-                        var content = File.ReadAllText(file.FullName);
-                        resourceBuffer.Append(content);
-
-                        this.Log.Trace("Read " + content.Length + " bytes");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    this.Log.Error(ex.ToString());
-                    throw;
-                }
-            }
-        }
-
         private string NormalizePath(string value)
         {
             value = value.Replace(@"\", ".");
@@ -1111,18 +812,32 @@ namespace Bridge.Translator
             return compilerInfo;
         }
 
-        public System.Diagnostics.FileVersionInfo GetBridgeAssemblyVersion()
+        public System.Diagnostics.FileVersionInfo GetAssemblyVersionByPath(string path)
         {
-            System.Diagnostics.FileVersionInfo bridgeInfo = null;
+            System.Diagnostics.FileVersionInfo fileVerionInfo = null;
             try
             {
-                bridgeInfo = System.Diagnostics.FileVersionInfo.GetVersionInfo(this.BridgeLocation);
+                fileVerionInfo = System.Diagnostics.FileVersionInfo.GetVersionInfo(path);
             }
             catch (System.Exception ex)
             {
-                this.Log.Error("Could not load Bridge.dll to get assembly info");
+                this.Log.Error("Could not load " + path + " to get the assembly info");
                 this.Log.Error(ex.ToString());
             }
+
+            return fileVerionInfo;
+        }
+
+        public System.Diagnostics.FileVersionInfo GetCurrentAssemblyVersion()
+        {
+            var bridgeInfo = GetAssemblyVersionByPath(this.AssemblyLocation);
+
+            return bridgeInfo;
+        }
+
+        public System.Diagnostics.FileVersionInfo GetBridgeAssemblyVersion()
+        {
+            var bridgeInfo =  GetAssemblyVersionByPath(this.BridgeLocation);
 
             return bridgeInfo;
         }
