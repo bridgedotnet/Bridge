@@ -1,6 +1,4 @@
-﻿    // @source Integer.js
-
-    (function () {
+﻿    (function () {
         var createIntType = function (name, min, max, precision) {
             var type = Bridge.define(name, {
                 inherits: [System.IComparable, System.IFormattable],

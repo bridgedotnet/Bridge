@@ -328,6 +328,7 @@ namespace Bridge.Contract
         public ResourceConfigItem()
         {
             this.Files = new string[] { };
+            Remark = null;
         }
 
         public string Header
@@ -346,6 +347,11 @@ namespace Bridge.Contract
         }
 
         public string[] Files
+        {
+            get; set;
+        }
+
+        public string Remark
         {
             get; set;
         }

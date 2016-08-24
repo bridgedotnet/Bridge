@@ -1,5 +1,3 @@
-    // @source Uri.js
-
     Bridge.define("System.Uri", {
         constructor: function (uriString) {
             this.$initialize();

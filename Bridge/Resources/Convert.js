@@ -1,6 +1,4 @@
-﻿    // @source Convert.js
-
-    var scope = {};
+﻿    var scope = {};
 
     scope.convert = {
         typeCodes: {

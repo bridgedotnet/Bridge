@@ -1,6 +1,4 @@
-﻿    // @source Class.js
-    // The base Class implementation
-    var base = {
+﻿    var base = {
         cache: {},
 
         initialize: function () {

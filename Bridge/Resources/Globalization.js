@@ -1,6 +1,3 @@
-    /// <reference path="Init.js" />
-    // @source Globalization.js
-
     Bridge.define("System.Globalization.DateTimeFormatInfo", {
         inherits: [System.IFormatProvider, System.ICloneable],
 

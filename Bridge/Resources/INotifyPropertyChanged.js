@@ -1,6 +1,4 @@
-﻿    // @source INotifyPropertyChanged.js
-
-    Bridge.define("System.ComponentModel.INotifyPropertyChanged", {
+﻿    Bridge.define("System.ComponentModel.INotifyPropertyChanged", {
         $kind: "interface",
     });
 

@@ -44,746 +44,746 @@
     }; b.shr = b.shiftRight; b.shiftRightUnsigned = function (a) { g(a) && (a = a.toInt()); a &= 63; if (0 === a) return this; var b = this.high; return 32 > a ? e(this.low >>> a | b << 32 - a, b >>> a, this.unsigned) : 32 === a ? e(b, 0, this.unsigned) : e(b >>> a - 32, 0, this.unsigned) }; b.shru = b.shiftRightUnsigned; b.toSigned = function () { return this.unsigned ? e(this.low, this.high, !1) : this }; b.toUnsigned = function () { return this.unsigned ? this : e(this.low, this.high, !0) }
 })(Bridge.global);
 
-System.Int64 = function (l) {
-    if (this.constructor !== System.Int64) {
+    System.Int64 = function (l) {
+        if (this.constructor !== System.Int64) {
+            return new System.Int64(l);
+        }
+
+        if (!Bridge.hasValue(l)) {
+            l = 0;
+        }
+
+        this.T = System.Int64;
+        this.unsigned = false;
+        this.value = System.Int64.getValue(l);
+    }
+
+    System.Int64.$$name = "System.Int64";
+    System.Int64.prototype.$$name = "System.Int64";
+
+    System.Int64.$$inherits = [];
+    Bridge.Class.addExtend(System.Int64, [System.IComparable, System.IFormattable, System.IComparable$1(System.Int64), System.IEquatable$1(System.Int64)]);
+
+    System.Int64.instanceOf = function (instance) {
+        return instance instanceof System.Int64;
+    };
+
+    System.Int64.is64Bit = function (instance) {
+        return instance instanceof System.Int64 || instance instanceof System.UInt64;
+    };
+
+    System.Int64.getDefaultValue = function () {
+        return System.Int64.Zero;
+    };
+
+    System.Int64.getValue = function (l) {
+        if (!Bridge.hasValue(l)) {
+            return null;
+        }
+
+        if (l instanceof Bridge.$Long) {
+            return l;
+        }
+
+        if (l instanceof System.Int64) {
+            return l.value;
+        }
+
+        if (l instanceof System.UInt64) {
+            return l.value.toSigned();
+        }
+
+        if (Bridge.isArray(l)) {
+            return new Bridge.$Long(l[0], l[1]);
+        }
+
+        if (Bridge.isString(l)) {
+            return Bridge.$Long.fromString(l);
+        }
+
+        if (Bridge.isNumber(l)) {
+            return Bridge.$Long.fromNumber(l);
+        }
+
+        if (l instanceof System.Decimal) {
+            return Bridge.$Long.fromString(l.toString());
+        }
+
+        return Bridge.$Long.fromValue(l);
+    };
+
+    System.Int64.create = function (l) {
+        if (!Bridge.hasValue(l)) {
+            return null;
+        }
+
+        if (l instanceof System.Int64) {
+            return l;
+        }
+
         return new System.Int64(l);
-    }
+    };
 
-    if (!Bridge.hasValue(l)) {
-        l = 0;
-    }
+    System.Int64.lift = function (l) {
+        if (!Bridge.hasValue(l)) {
+            return null;
+        }
+        return System.Int64.create(l);
+    };
 
-    this.T = System.Int64;
-    this.unsigned = false;
-    this.value = System.Int64.getValue(l);
-}
+    System.Int64.toNumber = function (value) {
+        if (!value) {
+            return null;
+        }
 
-System.Int64.$$name = "System.Int64";
-System.Int64.prototype.$$name = "System.Int64";
+        return value.toNumber();
+    };
 
-System.Int64.$$inherits = [];
-Bridge.Class.addExtend(System.Int64, [System.IComparable, System.IFormattable, System.IComparable$1(System.Int64), System.IEquatable$1(System.Int64)]);
+    System.Int64.prototype.toNumberDivided = function (divisor) {
+        var integral = this.div(divisor),
+            remainder = this.mod(divisor),
+            scaledRemainder = remainder.toNumber() / divisor;
 
-System.Int64.instanceOf = function (instance) {
-    return instance instanceof System.Int64;
-};
+        return integral.toNumber() + scaledRemainder;
+    };
 
-System.Int64.is64Bit = function (instance) {
-	return instance instanceof System.Int64 || instance instanceof System.UInt64;
-};
+    System.Int64.prototype.toJSON = function () {
+        return this.toNumber();
+    };
 
-System.Int64.getDefaultValue = function () {
-    return System.Int64.Zero;
-};
+    System.Int64.prototype.toString = function (format, provider) {
+        if (!format && !provider) {
+            return this.value.toString();
+        }
 
-System.Int64.getValue = function (l) {
-    if (!Bridge.hasValue(l)) {
-        return null;
-    }
+        if (Bridge.isNumber(format) && !provider) {
+            return this.value.toString(format);
+        }
 
-    if (l instanceof Bridge.$Long) {
-        return l;
-    }
+        return Bridge.Int.format(this, format, provider);
+    };
 
-    if (l instanceof System.Int64) {
-        return l.value;
-    }
+    System.Int64.prototype.format = function (format, provider) {
+        return Bridge.Int.format(this, format, provider);
+    };
 
-    if (l instanceof System.UInt64) {
-        return l.value.toSigned();
-    }
+    System.Int64.prototype.isNegative = function () {
+        return this.value.isNegative();
+    };
 
-    if (Bridge.isArray(l)) {
-        return new Bridge.$Long(l[0], l[1]);
-    }
-
-    if (Bridge.isString(l)) {
-        return Bridge.$Long.fromString(l);
-    }
-
-    if (Bridge.isNumber(l)) {
-        return Bridge.$Long.fromNumber(l);
-    }
-
-    if (l instanceof System.Decimal) {
-        return Bridge.$Long.fromString(l.toString());
-    }
-
-    return Bridge.$Long.fromValue(l);
-};
-
-System.Int64.create = function (l) {
-    if (!Bridge.hasValue(l)) {
-        return null;
-    }
-
-    if (l instanceof System.Int64) {
-        return l;
-    }
-
-    return new System.Int64(l);
-};
-
-System.Int64.lift = function (l) {
-    if (!Bridge.hasValue(l)) {
-        return null;
-    }
-    return System.Int64.create(l);
-};
-
-System.Int64.toNumber = function (value) {
-    if (!value) {
-        return null;
-    }
-
-    return value.toNumber();
-};
-
-System.Int64.prototype.toNumberDivided = function (divisor) {
-    var integral = this.div(divisor),
-        remainder = this.mod(divisor),
-        scaledRemainder = remainder.toNumber() / divisor;
-
-    return integral.toNumber() + scaledRemainder;
-};
-
-System.Int64.prototype.toJSON = function () {
-    return this.toNumber();
-};
-
-System.Int64.prototype.toString = function (format, provider) {
-    if (!format && !provider) {
-        return this.value.toString();
-    }
-
-    if (Bridge.isNumber(format) && !provider) {
-        return this.value.toString(format);
-    }
-
-    return Bridge.Int.format(this, format, provider);
-};
-
-System.Int64.prototype.format = function (format, provider) {
-    return Bridge.Int.format(this, format, provider);
-};
-
-System.Int64.prototype.isNegative = function () {
-    return this.value.isNegative();
-};
-
-System.Int64.prototype.abs = function () {
-    if (this.T === System.Int64 && this.eq(System.Int64.MinValue)) {
-        throw new System.OverflowException();
-    }
-    return new this.T(this.value.isNegative() ? this.value.neg() : this.value);
-};
-
-System.Int64.prototype.compareTo = function (l) {
-    return this.value.compare(this.T.getValue(l));
-};
-
-System.Int64.prototype.add = function (l, overflow) {
-    var addl = this.T.getValue(l),
-        r = new this.T(this.value.add(addl));
-
-    if (overflow) {
-        var neg1 = this.value.isNegative(),
-            neg2 = addl.isNegative(),
-            rneg = r.value.isNegative();
-
-        if ((neg1 && neg2 && !rneg) ||
-            (!neg1 && !neg2 && rneg) ||
-            (this.T === System.UInt64 && r.lt(System.UInt64.max(this, addl)))) {
+    System.Int64.prototype.abs = function () {
+        if (this.T === System.Int64 && this.eq(System.Int64.MinValue)) {
             throw new System.OverflowException();
         }
-    }
+        return new this.T(this.value.isNegative() ? this.value.neg() : this.value);
+    };
 
-    return r;
-};
+    System.Int64.prototype.compareTo = function (l) {
+        return this.value.compare(this.T.getValue(l));
+    };
 
-System.Int64.prototype.sub = function (l, overflow) {
-    var subl = this.T.getValue(l),
-        r = new this.T(this.value.sub(subl));
+    System.Int64.prototype.add = function (l, overflow) {
+        var addl = this.T.getValue(l),
+            r = new this.T(this.value.add(addl));
 
-    if (overflow) {
-        var neg1 = this.value.isNegative(),
-            neg2 = subl.isNegative(),
-            rneg = r.value.isNegative();
+        if (overflow) {
+            var neg1 = this.value.isNegative(),
+                neg2 = addl.isNegative(),
+                rneg = r.value.isNegative();
 
-        if ((neg1 && !neg2 && !rneg) ||
-            (!neg1 && neg2 && rneg) ||
-            (this.T === System.UInt64 && this.value.lt(subl))) {
-            throw new System.OverflowException();
-        }
-    }
-
-    return r;
-};
-
-System.Int64.prototype.isZero = function () {
-    return this.value.isZero();
-};
-
-System.Int64.prototype.mul = function (l, overflow) {
-    var arg = this.T.getValue(l),
-        r = new this.T(this.value.mul(arg));
-
-    if (overflow) {
-        var s1 = this.sign(),
-            s2 = arg.isZero() ? 0 : (arg.isNegative() ? -1 : 1),
-            rs = r.sign();
-
-        if (this.T === System.Int64) {
-            if (this.eq(System.Int64.MinValue) || this.eq(System.Int64.MaxValue)) {
-                if (arg.neq(1) && arg.neq(0)) {
-                    throw new System.OverflowException();
-                }
-
-                return r;
-            }
-
-            if (arg.eq(Bridge.$Long.MIN_VALUE) || arg.eq(Bridge.$Long.MAX_VALUE)) {
-                if (this.neq(1) && this.neq(0)) {
-                    throw new System.OverflowException();
-                }
-
-                return r;
-            }
-
-            if ((s1 === -1 && s2 === -1 && rs !== 1) ||
-                (s1 === 1 && s2 === 1 && rs !== 1) ||
-                (s1 === -1 && s2 === 1 && rs !== -1) ||
-                (s1 === 1 && s2 === -1 && rs !== -1)) {
+            if ((neg1 && neg2 && !rneg) ||
+                (!neg1 && !neg2 && rneg) ||
+                (this.T === System.UInt64 && r.lt(System.UInt64.max(this, addl)))) {
                 throw new System.OverflowException();
             }
-
-            var r_abs = r.abs();
-
-            if (r_abs.lt(this.abs()) || r_abs.lt(System.Int64(arg).abs())) {
-                throw new System.OverflowException();
-            }
-        } else {
-            if (this.eq(System.UInt64.MaxValue)) {
-                if (arg.neq(1) && arg.neq(0)) {
-                    throw new System.OverflowException();
-                }
-
-                return r;
-            }
-
-            if (arg.eq(Bridge.$Long.MAX_UNSIGNED_VALUE)) {
-                if (this.neq(1) && this.neq(0)) {
-                    throw new System.OverflowException();
-                }
-
-                return r;
-            }
-
-            var r_abs = r.abs();
-
-            if (r_abs.lt(this.abs()) || r_abs.lt(System.Int64(arg).abs())) {
-                throw new System.OverflowException();
-            }
-        }
-    }
-
-    return r;
-};
-
-System.Int64.prototype.div = function (l) {
-    return new this.T(this.value.div(this.T.getValue(l)));
-};
-
-System.Int64.prototype.mod = function (l) {
-    return new this.T(this.value.mod(this.T.getValue(l)));
-};
-
-System.Int64.prototype.neg = function (overflow) {
-    if (overflow && this.T === System.Int64 && this.eq(System.Int64.MinValue)) {
-        throw new System.OverflowException();
-    }
-    return new this.T(this.value.neg());
-};
-
-System.Int64.prototype.inc = function (overflow) {
-    return this.add(1, overflow);
-};
-
-System.Int64.prototype.dec = function (overflow) {
-    return this.sub(1, overflow);
-};
-
-System.Int64.prototype.sign = function () {
-    return this.value.isZero() ? 0 : (this.value.isNegative() ? -1 : 1);
-};
-
-System.Int64.prototype.clone = function () {
-    return new this.T(this);
-};
-
-System.Int64.prototype.ne = function (l) {
-    return this.value.neq(this.T.getValue(l));
-};
-
-System.Int64.prototype.neq = function (l) {
-    return this.value.neq(this.T.getValue(l));
-};
-
-System.Int64.prototype.eq = function (l) {
-    return this.value.eq(this.T.getValue(l));
-};
-
-System.Int64.prototype.lt = function (l) {
-    return this.value.lt(this.T.getValue(l));
-};
-
-System.Int64.prototype.lte = function (l) {
-    return this.value.lte(this.T.getValue(l));
-};
-
-System.Int64.prototype.gt = function (l) {
-    return this.value.gt(this.T.getValue(l));
-};
-
-System.Int64.prototype.gte = function (l) {
-    return this.value.gte(this.T.getValue(l));
-};
-
-System.Int64.prototype.equals = function (l) {
-    return this.value.eq(this.T.getValue(l));
-};
-
-System.Int64.prototype.equalsT = function (l) {
-    return this.equals(l);
-};
-
-System.Int64.prototype.getHashCode = function () {
-    var n = (this.sign() * 397 + this.value.high) | 0;
-    n = (n * 397 + this.value.low) | 0;
-
-    return n;
-};
-
-System.Int64.prototype.toNumber = function () {
-    return this.value.toNumber();
-};
-
-System.Int64.parse = function (str) {
-    if (str == null) {
-        throw new System.ArgumentNullException("str");
-    }
-
-    if (!/^[+-]?[0-9]+$/.test(str)) {
-        throw new System.FormatException("Input string was not in a correct format.");
-    }
-
-    var result = new System.Int64(str);
-
-    if (str !== result.toString()) {
-        throw new System.OverflowException();
-    }
-
-    return result;
-};
-
-System.Int64.tryParse = function (str, v) {
-    try {
-        if (str == null || !/^[+-]?[0-9]+$/.test(str)) {
-            v.v = System.Int64(Bridge.$Long.ZERO);
-            return false;
-        }
-
-        v.v = new System.Int64(str);
-
-        if (str !== v.v.toString()) {
-            v.v = System.Int64(Bridge.$Long.ZERO);
-            return false;
-        }
-
-        return true;
-    } catch (e) {
-        v.v = System.Int64(Bridge.$Long.ZERO);
-        return false;
-    }
-};
-
-System.Int64.divRem = function (a, b, result) {
-    a = System.Int64(a);
-    b = System.Int64(b);
-    var remainder = a.mod(b);
-    result.v = remainder;
-    return a.sub(remainder).div(b);
-};
-
-System.Int64.min = function () {
-    var values = [],
-        min, i, len;
-
-    for (i = 0, len = arguments.length; i < len; i++) {
-        values.push(System.Int64.getValue(arguments[i]));
-    }
-
-    i = 0;
-    min = values[0];
-    for (; ++i < values.length;) {
-        if (values[i].lt(min)) {
-            min = values[i];
-        }
-    }
-
-    return new System.Int64(min);
-};
-
-System.Int64.max = function () {
-    var values = [],
-        max, i, len;
-
-    for (i = 0, len = arguments.length; i < len; i++) {
-        values.push(System.Int64.getValue(arguments[i]));
-    }
-
-    i = 0;
-    max = values[0];
-    for (; ++i < values.length;) {
-        if (values[i].gt(max)) {
-            max = values[i];
-        }
-    }
-
-    return new System.Int64(max);
-};
-
-System.Int64.prototype.and = function (l) {
-    return new this.T(this.value.and(this.T.getValue(l)));
-};
-
-System.Int64.prototype.not = function () {
-    return new this.T(this.value.not());
-};
-
-System.Int64.prototype.or = function (l) {
-    return new this.T(this.value.or(this.T.getValue(l)));
-};
-
-System.Int64.prototype.shl = function (l) {
-    return new this.T(this.value.shl(l));
-};
-
-System.Int64.prototype.shr = function (l) {
-    return new this.T(this.value.shr(l));
-};
-
-System.Int64.prototype.shru = function (l) {
-    return new this.T(this.value.shru(l));
-};
-
-System.Int64.prototype.xor = function (l) {
-    return new this.T(this.value.xor(this.T.getValue(l)));
-};
-
-System.Int64.check = function (v, tp) {
-    if (Bridge.Int.isInfinite(v)) {
-        if (tp === System.Int64 || tp === System.UInt64) {
-            return tp.MinValue;
-        }
-        return tp.min;
-    }
-
-    if (!v) {
-        return null;
-    }
-
-    var str, r;
-    if (tp === System.Int64) {
-        if (v instanceof System.Int64) {
-            return v;
-        }
-
-        str = v.value.toString();
-        r = new System.Int64(str);
-
-        if (str !== r.value.toString()) {
-            throw new System.OverflowException();
         }
 
         return r;
-    }
+    };
 
-    if (tp === System.UInt64) {
-        if (v instanceof System.UInt64) {
-            return v;
-        }
+    System.Int64.prototype.sub = function (l, overflow) {
+        var subl = this.T.getValue(l),
+            r = new this.T(this.value.sub(subl));
 
-        if (v.value.isNegative()) {
-            throw new System.OverflowException();
-        }
-        str = v.value.toString();
-        r = new System.UInt64(str);
+        if (overflow) {
+            var neg1 = this.value.isNegative(),
+                neg2 = subl.isNegative(),
+                rneg = r.value.isNegative();
 
-        if (str !== r.value.toString()) {
-            throw new System.OverflowException();
+            if ((neg1 && !neg2 && !rneg) ||
+                (!neg1 && neg2 && rneg) ||
+                (this.T === System.UInt64 && this.value.lt(subl))) {
+                throw new System.OverflowException();
+            }
         }
 
         return r;
+    };
+
+    System.Int64.prototype.isZero = function () {
+        return this.value.isZero();
+    };
+
+    System.Int64.prototype.mul = function (l, overflow) {
+        var arg = this.T.getValue(l),
+            r = new this.T(this.value.mul(arg));
+
+        if (overflow) {
+            var s1 = this.sign(),
+                s2 = arg.isZero() ? 0 : (arg.isNegative() ? -1 : 1),
+                rs = r.sign();
+
+            if (this.T === System.Int64) {
+                if (this.eq(System.Int64.MinValue) || this.eq(System.Int64.MaxValue)) {
+                    if (arg.neq(1) && arg.neq(0)) {
+                        throw new System.OverflowException();
+                    }
+
+                    return r;
+                }
+
+                if (arg.eq(Bridge.$Long.MIN_VALUE) || arg.eq(Bridge.$Long.MAX_VALUE)) {
+                    if (this.neq(1) && this.neq(0)) {
+                        throw new System.OverflowException();
+                    }
+
+                    return r;
+                }
+
+                if ((s1 === -1 && s2 === -1 && rs !== 1) ||
+                    (s1 === 1 && s2 === 1 && rs !== 1) ||
+                    (s1 === -1 && s2 === 1 && rs !== -1) ||
+                    (s1 === 1 && s2 === -1 && rs !== -1)) {
+                    throw new System.OverflowException();
+                }
+
+                var r_abs = r.abs();
+
+                if (r_abs.lt(this.abs()) || r_abs.lt(System.Int64(arg).abs())) {
+                    throw new System.OverflowException();
+                }
+            } else {
+                if (this.eq(System.UInt64.MaxValue)) {
+                    if (arg.neq(1) && arg.neq(0)) {
+                        throw new System.OverflowException();
+                    }
+
+                    return r;
+                }
+
+                if (arg.eq(Bridge.$Long.MAX_UNSIGNED_VALUE)) {
+                    if (this.neq(1) && this.neq(0)) {
+                        throw new System.OverflowException();
+                    }
+
+                    return r;
+                }
+
+                var r_abs = r.abs();
+
+                if (r_abs.lt(this.abs()) || r_abs.lt(System.Int64(arg).abs())) {
+                    throw new System.OverflowException();
+                }
+            }
+        }
+
+        return r;
+    };
+
+    System.Int64.prototype.div = function (l) {
+        return new this.T(this.value.div(this.T.getValue(l)));
+    };
+
+    System.Int64.prototype.mod = function (l) {
+        return new this.T(this.value.mod(this.T.getValue(l)));
+    };
+
+    System.Int64.prototype.neg = function (overflow) {
+        if (overflow && this.T === System.Int64 && this.eq(System.Int64.MinValue)) {
+            throw new System.OverflowException();
+        }
+        return new this.T(this.value.neg());
+    };
+
+    System.Int64.prototype.inc = function (overflow) {
+        return this.add(1, overflow);
+    };
+
+    System.Int64.prototype.dec = function (overflow) {
+        return this.sub(1, overflow);
+    };
+
+    System.Int64.prototype.sign = function () {
+        return this.value.isZero() ? 0 : (this.value.isNegative() ? -1 : 1);
+    };
+
+    System.Int64.prototype.clone = function () {
+        return new this.T(this);
+    };
+
+    System.Int64.prototype.ne = function (l) {
+        return this.value.neq(this.T.getValue(l));
+    };
+
+    System.Int64.prototype.neq = function (l) {
+        return this.value.neq(this.T.getValue(l));
+    };
+
+    System.Int64.prototype.eq = function (l) {
+        return this.value.eq(this.T.getValue(l));
+    };
+
+    System.Int64.prototype.lt = function (l) {
+        return this.value.lt(this.T.getValue(l));
+    };
+
+    System.Int64.prototype.lte = function (l) {
+        return this.value.lte(this.T.getValue(l));
+    };
+
+    System.Int64.prototype.gt = function (l) {
+        return this.value.gt(this.T.getValue(l));
+    };
+
+    System.Int64.prototype.gte = function (l) {
+        return this.value.gte(this.T.getValue(l));
+    };
+
+    System.Int64.prototype.equals = function (l) {
+        return this.value.eq(this.T.getValue(l));
+    };
+
+    System.Int64.prototype.equalsT = function (l) {
+        return this.equals(l);
+    };
+
+    System.Int64.prototype.getHashCode = function () {
+        var n = (this.sign() * 397 + this.value.high) | 0;
+        n = (n * 397 + this.value.low) | 0;
+
+        return n;
+    };
+
+    System.Int64.prototype.toNumber = function () {
+        return this.value.toNumber();
+    };
+
+    System.Int64.parse = function (str) {
+        if (str == null) {
+            throw new System.ArgumentNullException("str");
+        }
+
+        if (!/^[+-]?[0-9]+$/.test(str)) {
+            throw new System.FormatException("Input string was not in a correct format.");
+        }
+
+        var result = new System.Int64(str);
+
+        if (str !== result.toString()) {
+            throw new System.OverflowException();
+        }
+
+        return result;
+    };
+
+    System.Int64.tryParse = function (str, v) {
+        try {
+            if (str == null || !/^[+-]?[0-9]+$/.test(str)) {
+                v.v = System.Int64(Bridge.$Long.ZERO);
+                return false;
+            }
+
+            v.v = new System.Int64(str);
+
+            if (str !== v.v.toString()) {
+                v.v = System.Int64(Bridge.$Long.ZERO);
+                return false;
+            }
+
+            return true;
+        } catch (e) {
+            v.v = System.Int64(Bridge.$Long.ZERO);
+            return false;
+        }
+    };
+
+    System.Int64.divRem = function (a, b, result) {
+        a = System.Int64(a);
+        b = System.Int64(b);
+        var remainder = a.mod(b);
+        result.v = remainder;
+        return a.sub(remainder).div(b);
+    };
+
+    System.Int64.min = function () {
+        var values = [],
+            min, i, len;
+
+        for (i = 0, len = arguments.length; i < len; i++) {
+            values.push(System.Int64.getValue(arguments[i]));
+        }
+
+        i = 0;
+        min = values[0];
+        for (; ++i < values.length;) {
+            if (values[i].lt(min)) {
+                min = values[i];
+            }
+        }
+
+        return new System.Int64(min);
+    };
+
+    System.Int64.max = function () {
+        var values = [],
+            max, i, len;
+
+        for (i = 0, len = arguments.length; i < len; i++) {
+            values.push(System.Int64.getValue(arguments[i]));
+        }
+
+        i = 0;
+        max = values[0];
+        for (; ++i < values.length;) {
+            if (values[i].gt(max)) {
+                max = values[i];
+            }
+        }
+
+        return new System.Int64(max);
+    };
+
+    System.Int64.prototype.and = function (l) {
+        return new this.T(this.value.and(this.T.getValue(l)));
+    };
+
+    System.Int64.prototype.not = function () {
+        return new this.T(this.value.not());
+    };
+
+    System.Int64.prototype.or = function (l) {
+        return new this.T(this.value.or(this.T.getValue(l)));
+    };
+
+    System.Int64.prototype.shl = function (l) {
+        return new this.T(this.value.shl(l));
+    };
+
+    System.Int64.prototype.shr = function (l) {
+        return new this.T(this.value.shr(l));
+    };
+
+    System.Int64.prototype.shru = function (l) {
+        return new this.T(this.value.shru(l));
+    };
+
+    System.Int64.prototype.xor = function (l) {
+        return new this.T(this.value.xor(this.T.getValue(l)));
+    };
+
+    System.Int64.check = function (v, tp) {
+        if (Bridge.Int.isInfinite(v)) {
+            if (tp === System.Int64 || tp === System.UInt64) {
+                return tp.MinValue;
+            }
+            return tp.min;
+        }
+
+        if (!v) {
+            return null;
+        }
+
+        var str, r;
+        if (tp === System.Int64) {
+            if (v instanceof System.Int64) {
+                return v;
+            }
+
+            str = v.value.toString();
+            r = new System.Int64(str);
+
+            if (str !== r.value.toString()) {
+                throw new System.OverflowException();
+            }
+
+            return r;
+        }
+
+        if (tp === System.UInt64) {
+            if (v instanceof System.UInt64) {
+                return v;
+            }
+
+            if (v.value.isNegative()) {
+                throw new System.OverflowException();
+            }
+            str = v.value.toString();
+            r = new System.UInt64(str);
+
+            if (str !== r.value.toString()) {
+                throw new System.OverflowException();
+            }
+
+            return r;
+        }
+
+        return Bridge.Int.check(v.toNumber(), tp);
+    };
+
+    System.Int64.clip8 = function (x) {
+        return x ? Bridge.Int.sxb(x.value.low & 0xff) : (Bridge.Int.isInfinite(x) ? System.SByte.min : null);
+    };
+
+    System.Int64.clipu8 = function (x) {
+        return x ? x.value.low & 0xff : (Bridge.Int.isInfinite(x) ? System.Byte.min : null);
+    };
+
+    System.Int64.clip16 = function (x) {
+        return x ? Bridge.Int.sxs(x.value.low & 0xffff) : (Bridge.Int.isInfinite(x) ? System.Int16.min : null);
+    };
+
+    System.Int64.clipu16 = function (x) {
+        return x ? x.value.low & 0xffff : (Bridge.Int.isInfinite(x) ? System.UInt16.min : null);
+    };
+
+    System.Int64.clip32 = function (x) {
+        return x ? x.value.low | 0 : (Bridge.Int.isInfinite(x) ? System.Int32.min : null);
+    };
+
+    System.Int64.clipu32 = function (x) {
+        return x ? x.value.low >>> 0 : (Bridge.Int.isInfinite(x) ? System.UInt32.min : null);
+    };
+
+    System.Int64.clip64 = function (x) {
+        return x ? new System.Int64(x.value.toSigned()) : (Bridge.Int.isInfinite(x) ? System.Int64.MinValue : null);
+    };
+
+    System.Int64.clipu64 = function (x) {
+        return x ? new System.UInt64(x.value.toUnsigned()) : (Bridge.Int.isInfinite(x) ? System.UInt64.MinValue : null);
+    };
+
+    System.Int64.Zero = System.Int64(Bridge.$Long.ZERO);
+    System.Int64.MinValue = System.Int64(Bridge.$Long.MIN_VALUE);
+    System.Int64.MaxValue = System.Int64(Bridge.$Long.MAX_VALUE);
+    System.Int64.precision = 19;
+
+    /* ULONG */
+
+    System.UInt64 = function (l) {
+        if (this.constructor !== System.UInt64) {
+            return new System.UInt64(l);
+        }
+
+        if (!Bridge.hasValue(l)) {
+            l = 0;
+        }
+
+        this.T = System.UInt64;
+        this.unsigned = true;
+        this.value = System.UInt64.getValue(l, true);
     }
 
-    return Bridge.Int.check(v.toNumber(), tp);
-};
+    System.UInt64.$$name = "System.UInt64";
+    System.UInt64.prototype.$$name = "System.UInt64";
+    System.UInt64.$$inherits = [];
+    Bridge.Class.addExtend(System.UInt64, [System.IComparable, System.IFormattable, System.IComparable$1(System.UInt64), System.IEquatable$1(System.UInt64)]);
 
-System.Int64.clip8 = function (x) {
-    return x ? Bridge.Int.sxb(x.value.low & 0xff) : (Bridge.Int.isInfinite(x) ? System.SByte.min : null);
-};
+    System.UInt64.instanceOf = function (instance) {
+        return instance instanceof System.UInt64;
+    };
 
-System.Int64.clipu8 = function (x) {
-    return x ? x.value.low & 0xff : (Bridge.Int.isInfinite(x) ? System.Byte.min : null);
-};
+    System.UInt64.getDefaultValue = function () {
+        return System.UInt64.Zero;
+    };
 
-System.Int64.clip16 = function (x) {
-    return x ? Bridge.Int.sxs(x.value.low & 0xffff) : (Bridge.Int.isInfinite(x) ? System.Int16.min : null);
-};
+    System.UInt64.getValue = function (l) {
+        if (!Bridge.hasValue(l)) {
+            return null;
+        }
 
-System.Int64.clipu16 = function (x) {
-    return x ? x.value.low & 0xffff : (Bridge.Int.isInfinite(x) ? System.UInt16.min : null);
-};
+        if (l instanceof Bridge.$Long) {
+            return l;
+        }
 
-System.Int64.clip32 = function (x) {
-    return x ? x.value.low | 0 : (Bridge.Int.isInfinite(x) ? System.Int32.min : null);
-};
+        if (l instanceof System.UInt64) {
+            return l.value;
+        }
 
-System.Int64.clipu32 = function (x) {
-    return x ? x.value.low >>> 0 : (Bridge.Int.isInfinite(x) ? System.UInt32.min : null);
-};
+        if (l instanceof System.Int64) {
+            return l.value.toUnsigned();
+        }
 
-System.Int64.clip64 = function (x) {
-    return x ? new System.Int64(x.value.toSigned()) : (Bridge.Int.isInfinite(x) ? System.Int64.MinValue : null);
-};
+        if (Bridge.isArray(l)) {
+            return new Bridge.$Long(l[0], l[1], true);
+        }
 
-System.Int64.clipu64 = function (x) {
-    return x ? new System.UInt64(x.value.toUnsigned()) : (Bridge.Int.isInfinite(x) ? System.UInt64.MinValue : null);
-};
+        if (Bridge.isString(l)) {
+            return Bridge.$Long.fromString(l, true);
+        }
 
-System.Int64.Zero = System.Int64(Bridge.$Long.ZERO);
-System.Int64.MinValue = System.Int64(Bridge.$Long.MIN_VALUE);
-System.Int64.MaxValue = System.Int64(Bridge.$Long.MAX_VALUE);
-System.Int64.precision = 19;
+        if (Bridge.isNumber(l)) {
+            return Bridge.$Long.fromNumber(l, true);
+        }
 
-/* ULONG */
+        if (l instanceof System.Decimal) {
+            return Bridge.$Long.fromString(l.toString(), true);
+        }
 
-System.UInt64 = function (l) {
-    if (this.constructor !== System.UInt64) {
+        return Bridge.$Long.fromValue(l);
+    };
+
+    System.UInt64.create = function (l) {
+        if (!Bridge.hasValue(l)) {
+            return null;
+        }
+
+        if (l instanceof System.UInt64) {
+            return l;
+        }
+
         return new System.UInt64(l);
-    }
+    };
 
-    if (!Bridge.hasValue(l)) {
-        l = 0;
-    }
+    System.UInt64.lift = function (l) {
+        if (!Bridge.hasValue(l)) {
+            return null;
+        }
+        return System.UInt64.create(l);
+    };
 
-    this.T = System.UInt64;
-    this.unsigned = true;
-    this.value = System.UInt64.getValue(l, true);
-}
+    System.UInt64.prototype.toJSON = System.Int64.prototype.toJSON;
+    System.UInt64.prototype.toString = System.Int64.prototype.toString;
+    System.UInt64.prototype.format = System.Int64.prototype.format;
+    System.UInt64.prototype.isNegative = System.Int64.prototype.isNegative;
+    System.UInt64.prototype.abs = System.Int64.prototype.abs;
+    System.UInt64.prototype.compareTo = System.Int64.prototype.compareTo;
+    System.UInt64.prototype.add = System.Int64.prototype.add;
+    System.UInt64.prototype.sub = System.Int64.prototype.sub;
+    System.UInt64.prototype.isZero = System.Int64.prototype.isZero;
+    System.UInt64.prototype.mul = System.Int64.prototype.mul;
+    System.UInt64.prototype.div = System.Int64.prototype.div;
+    System.UInt64.prototype.toNumberDivided = System.Int64.prototype.toNumberDivided;
+    System.UInt64.prototype.mod = System.Int64.prototype.mod;
+    System.UInt64.prototype.neg = System.Int64.prototype.neg;
+    System.UInt64.prototype.inc = System.Int64.prototype.inc;
+    System.UInt64.prototype.dec = System.Int64.prototype.dec;
+    System.UInt64.prototype.sign = System.Int64.prototype.sign;
+    System.UInt64.prototype.clone = System.Int64.prototype.clone;
+    System.UInt64.prototype.ne = System.Int64.prototype.ne;
+    System.UInt64.prototype.neq = System.Int64.prototype.neq;
+    System.UInt64.prototype.eq = System.Int64.prototype.eq;
+    System.UInt64.prototype.lt = System.Int64.prototype.lt;
+    System.UInt64.prototype.lte = System.Int64.prototype.lte;
+    System.UInt64.prototype.gt = System.Int64.prototype.gt;
+    System.UInt64.prototype.gte = System.Int64.prototype.gte;
+    System.UInt64.prototype.equals = System.Int64.prototype.equals;
+    System.UInt64.prototype.equalsT = System.Int64.prototype.equalsT;
+    System.UInt64.prototype.getHashCode = System.Int64.prototype.getHashCode;
+    System.UInt64.prototype.toNumber = System.Int64.prototype.toNumber;
 
-System.UInt64.$$name = "System.UInt64";
-System.UInt64.prototype.$$name = "System.UInt64";
-System.UInt64.$$inherits = [];
-Bridge.Class.addExtend(System.UInt64, [System.IComparable, System.IFormattable, System.IComparable$1(System.UInt64), System.IEquatable$1(System.UInt64)]);
+    System.UInt64.parse = function (str) {
+        if (str == null) {
+            throw new System.ArgumentNullException("str");
+        }
 
-System.UInt64.instanceOf = function (instance) {
-    return instance instanceof System.UInt64;
-};
+        if (!/^[+-]?[0-9]+$/.test(str)) {
+            throw new System.FormatException("Input string was not in a correct format.");
+        }
 
-System.UInt64.getDefaultValue = function () {
-    return System.UInt64.Zero;
-};
+        var result = new System.UInt64(str);
 
-System.UInt64.getValue = function (l) {
-    if (!Bridge.hasValue(l)) {
-        return null;
-    }
+        if (result.value.isNegative()) {
+            throw new System.OverflowException();
+        }
 
-    if (l instanceof Bridge.$Long) {
-        return l;
-    }
+        if (str !== result.toString()) {
+            throw new System.OverflowException();
+        }
 
-    if (l instanceof System.UInt64) {
-        return l.value;
-    }
+        return result;
+    };
 
-    if (l instanceof System.Int64) {
-        return l.value.toUnsigned();
-    }
+    System.UInt64.tryParse = function (str, v) {
+        try {
+            if (str == null || !/^[+-]?[0-9]+$/.test(str)) {
+                v.v = System.UInt64(Bridge.$Long.UZERO);
+                return false;
+            }
 
-    if (Bridge.isArray(l)) {
-        return new Bridge.$Long(l[0], l[1], true);
-    }
+            v.v = new System.UInt64(str);
 
-    if (Bridge.isString(l)) {
-        return Bridge.$Long.fromString(l, true);
-    }
+            if (v.v.isNegative()) {
+                v.v = System.UInt64(Bridge.$Long.UZERO);
+                return false;
+            }
 
-    if (Bridge.isNumber(l)) {
-        return Bridge.$Long.fromNumber(l, true);
-    }
+            if (str !== v.v.toString()) {
+                v.v = System.UInt64(Bridge.$Long.UZERO);
+                return false;
+            }
 
-    if (l instanceof System.Decimal) {
-        return Bridge.$Long.fromString(l.toString(), true);
-    }
-
-    return Bridge.$Long.fromValue(l);
-};
-
-System.UInt64.create = function (l) {
-    if (!Bridge.hasValue(l)) {
-        return null;
-    }
-
-    if (l instanceof System.UInt64) {
-        return l;
-    }
-
-    return new System.UInt64(l);
-};
-
-System.UInt64.lift = function (l) {
-    if (!Bridge.hasValue(l)) {
-        return null;
-    }
-    return System.UInt64.create(l);
-};
-
-System.UInt64.prototype.toJSON = System.Int64.prototype.toJSON;
-System.UInt64.prototype.toString = System.Int64.prototype.toString;
-System.UInt64.prototype.format = System.Int64.prototype.format;
-System.UInt64.prototype.isNegative = System.Int64.prototype.isNegative;
-System.UInt64.prototype.abs = System.Int64.prototype.abs;
-System.UInt64.prototype.compareTo = System.Int64.prototype.compareTo;
-System.UInt64.prototype.add = System.Int64.prototype.add;
-System.UInt64.prototype.sub = System.Int64.prototype.sub;
-System.UInt64.prototype.isZero = System.Int64.prototype.isZero;
-System.UInt64.prototype.mul = System.Int64.prototype.mul;
-System.UInt64.prototype.div = System.Int64.prototype.div;
-System.UInt64.prototype.toNumberDivided = System.Int64.prototype.toNumberDivided;
-System.UInt64.prototype.mod = System.Int64.prototype.mod;
-System.UInt64.prototype.neg = System.Int64.prototype.neg;
-System.UInt64.prototype.inc = System.Int64.prototype.inc;
-System.UInt64.prototype.dec = System.Int64.prototype.dec;
-System.UInt64.prototype.sign = System.Int64.prototype.sign;
-System.UInt64.prototype.clone = System.Int64.prototype.clone;
-System.UInt64.prototype.ne = System.Int64.prototype.ne;
-System.UInt64.prototype.neq = System.Int64.prototype.neq;
-System.UInt64.prototype.eq = System.Int64.prototype.eq;
-System.UInt64.prototype.lt = System.Int64.prototype.lt;
-System.UInt64.prototype.lte = System.Int64.prototype.lte;
-System.UInt64.prototype.gt = System.Int64.prototype.gt;
-System.UInt64.prototype.gte = System.Int64.prototype.gte;
-System.UInt64.prototype.equals = System.Int64.prototype.equals;
-System.UInt64.prototype.equalsT = System.Int64.prototype.equalsT;
-System.UInt64.prototype.getHashCode = System.Int64.prototype.getHashCode;
-System.UInt64.prototype.toNumber = System.Int64.prototype.toNumber;
-
-System.UInt64.parse = function (str) {
-    if (str == null) {
-        throw new System.ArgumentNullException("str");
-    }
-
-    if (!/^[+-]?[0-9]+$/.test(str)) {
-        throw new System.FormatException("Input string was not in a correct format.");
-    }
-
-    var result = new System.UInt64(str);
-
-    if (result.value.isNegative()) {
-        throw new System.OverflowException();
-    }
-
-    if (str !== result.toString()) {
-        throw new System.OverflowException();
-    }
-
-    return result;
-};
-
-System.UInt64.tryParse = function (str, v) {
-    try {
-        if (str == null || !/^[+-]?[0-9]+$/.test(str)) {
+            return true;
+        } catch (e) {
             v.v = System.UInt64(Bridge.$Long.UZERO);
             return false;
         }
+    };
 
-        v.v = new System.UInt64(str);
+    System.UInt64.min = function () {
+        var values = [],
+            min, i, len;
 
-        if (v.v.isNegative()) {
-            v.v = System.UInt64(Bridge.$Long.UZERO);
-            return false;
+        for (i = 0, len = arguments.length; i < len; i++) {
+            values.push(System.UInt64.getValue(arguments[i]));
         }
 
-        if (str !== v.v.toString()) {
-            v.v = System.UInt64(Bridge.$Long.UZERO);
-            return false;
+        i = 0;
+        min = values[0];
+        for (; ++i < values.length;) {
+            if (values[i].lt(min)) {
+                min = values[i];
+            }
         }
 
-        return true;
-    } catch (e) {
-        v.v = System.UInt64(Bridge.$Long.UZERO);
-        return false;
-    }
-};
+        return new System.UInt64(min);
+    };
 
-System.UInt64.min = function () {
-    var values = [],
-        min, i, len;
+    System.UInt64.max = function () {
+        var values = [],
+            max, i, len;
 
-    for (i = 0, len = arguments.length; i < len; i++) {
-        values.push(System.UInt64.getValue(arguments[i]));
-    }
-
-    i = 0;
-    min = values[0];
-    for (; ++i < values.length;) {
-        if (values[i].lt(min)) {
-            min = values[i];
+        for (i = 0, len = arguments.length; i < len; i++) {
+            values.push(System.UInt64.getValue(arguments[i]));
         }
-    }
 
-    return new System.UInt64(min);
-};
-
-System.UInt64.max = function () {
-    var values = [],
-        max, i, len;
-
-    for (i = 0, len = arguments.length; i < len; i++) {
-        values.push(System.UInt64.getValue(arguments[i]));
-    }
-
-    i = 0;
-    max = values[0];
-    for (; ++i < values.length;) {
-        if (values[i].gt(max)) {
-            max = values[i];
+        i = 0;
+        max = values[0];
+        for (; ++i < values.length;) {
+            if (values[i].gt(max)) {
+                max = values[i];
+            }
         }
-    }
 
-    return new System.UInt64(max);
-};
+        return new System.UInt64(max);
+    };
 
-System.UInt64.divRem = function (a, b, result) {
-    a = System.UInt64(a);
-    b = System.UInt64(b);
-    var remainder = a.mod(b);
-    result.v = remainder;
-    return a.sub(remainder).div(b);
-};
+    System.UInt64.divRem = function (a, b, result) {
+        a = System.UInt64(a);
+        b = System.UInt64(b);
+        var remainder = a.mod(b);
+        result.v = remainder;
+        return a.sub(remainder).div(b);
+    };
 
-System.UInt64.prototype.and = System.Int64.prototype.and;
-System.UInt64.prototype.not = System.Int64.prototype.not;
-System.UInt64.prototype.or = System.Int64.prototype.or;
-System.UInt64.prototype.shl = System.Int64.prototype.shl;
-System.UInt64.prototype.shr = System.Int64.prototype.shr;
-System.UInt64.prototype.shru = System.Int64.prototype.shru;
-System.UInt64.prototype.xor = System.Int64.prototype.xor;
+    System.UInt64.prototype.and = System.Int64.prototype.and;
+    System.UInt64.prototype.not = System.Int64.prototype.not;
+    System.UInt64.prototype.or = System.Int64.prototype.or;
+    System.UInt64.prototype.shl = System.Int64.prototype.shl;
+    System.UInt64.prototype.shr = System.Int64.prototype.shr;
+    System.UInt64.prototype.shru = System.Int64.prototype.shru;
+    System.UInt64.prototype.xor = System.Int64.prototype.xor;
 
-System.UInt64.Zero = System.UInt64(Bridge.$Long.UZERO);
-System.UInt64.MinValue = System.UInt64.Zero;
-System.UInt64.MaxValue = System.UInt64(Bridge.$Long.MAX_UNSIGNED_VALUE);
-System.UInt64.precision = 20;
+    System.UInt64.Zero = System.UInt64(Bridge.$Long.UZERO);
+    System.UInt64.MinValue = System.UInt64.Zero;
+    System.UInt64.MaxValue = System.UInt64(Bridge.$Long.MAX_UNSIGNED_VALUE);
+    System.UInt64.precision = 20;

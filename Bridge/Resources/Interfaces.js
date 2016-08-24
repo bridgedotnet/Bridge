@@ -1,6 +1,4 @@
-﻿    // @source Interfaces.js
-
-    Bridge.define("System.IFormattable", {
+﻿    Bridge.define("System.IFormattable", {
         $kind: "interface",
         statics: {
             $is: function (obj) {

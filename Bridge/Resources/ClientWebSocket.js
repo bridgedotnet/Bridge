@@ -1,5 +1,3 @@
-    // @source ClientWebSocket.js
-
     Bridge.define("System.Net.WebSockets.ClientWebSocket", {
         inherits: [System.IDisposable],
         constructor: function () {

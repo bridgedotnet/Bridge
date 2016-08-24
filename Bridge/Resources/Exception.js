@@ -1,6 +1,4 @@
-﻿    // @source Exception.js
-
-    Bridge.define("System.Exception", {
+﻿    Bridge.define("System.Exception", {
         constructor: function (message, innerException) {
             this.$initialize();
             this.message = message ? message : ("Exception of type '" + Bridge.getTypeName(this) + "' was thrown.");

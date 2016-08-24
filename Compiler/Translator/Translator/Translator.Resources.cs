@@ -225,6 +225,15 @@ namespace Bridge.Translator
             return headerInfo;
         }
 
+        private StringBuilder ApplyTokens(string s, Dictionary<string, string> info)
+        {
+            var sb = new StringBuilder(s);
+
+            ApplyTokens(sb, info);
+
+            return sb;
+        }
+
         private void ApplyTokens(StringBuilder sb, Dictionary<string, string> info)
         {
             this.Log.Trace("Applying tokens...");
@@ -342,6 +351,8 @@ namespace Bridge.Translator
                     {
                         NewLine(resourceBuffer);
 
+                        GenerateResourceFileRemark(resourceBuffer, item, file);
+
                         this.Log.Trace("Reading resource item at " + file.FullName);
 
                         var content = File.ReadAllText(file.FullName);
@@ -358,5 +369,28 @@ namespace Bridge.Translator
             }
         }
 
+        private void GenerateResourceFileRemark(StringBuilder resourceBuffer, ResourceConfigItem item, FileInfo file)
+        {
+            if (item.Remark != null)
+            {
+                this.Log.Trace("Inserting resource file remark");
+
+                var remarkInfo = new Dictionary<string, string>()
+                {
+                    ["name"] = file.Name,
+                    ["path"] = file.FullName
+                };
+
+                var remarkBuffer = ApplyTokens(item.Remark, remarkInfo);
+                remarkBuffer.Replace("\r\n", "\n");
+
+                var remarkLines = remarkBuffer.ToString().Split(new[] { "\n" }, StringSplitOptions.None);
+                foreach (var remarkLine in remarkLines)
+                {
+                    resourceBuffer.Append(remarkLine);
+                    NewLine(resourceBuffer);
+                }
+            }
+        }
     }
 }

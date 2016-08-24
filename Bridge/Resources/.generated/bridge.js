@@ -6,10 +6,13 @@
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE.
 */
 
+// @source @Init.js
+
 (function (globals) {
     "use strict";
 
-    // @source Core.js
+// @source @Core.js
+
     var core = {
         global: globals,
 
@@ -1242,7 +1245,7 @@
     globals.System.Diagnostics.Contracts = {};
     globals.System.Threading = {};
 
-    // @source Nullable.js
+// @source @Nullable.js
 
     var nullable = {
         hasValue: function (obj) {
@@ -1425,7 +1428,7 @@
     System.Nullable = nullable;
     Bridge.hasValue = System.Nullable.hasValue;
 
-    // @source String.js
+// @source @String.js
 
     var string = {
         is: function (obj, type) {
@@ -1896,7 +1899,7 @@
 
     System.String = string;
 
-    // @source Enum.js
+// @source @Enum.js
 
     var enumMethods = {
         nameEquals: function (n1, n2, ignoreCase) {
@@ -2114,7 +2117,7 @@
 
     System.Enum = enumMethods;
 
-    // @source Browser.js
+// @source @Browser.js
 
     var check = function (regex) {
             return regex.test(navigator.userAgent.toLowerCase());
@@ -2239,8 +2242,8 @@
 
     Bridge.Browser = browser;
 
-    // @source Class.js
-    // The base Class implementation
+// @source @Class.js
+
     var base = {
         cache: {},
 
@@ -2806,7 +2809,7 @@
     Bridge.definei = Bridge.Class.definei;
     Bridge.init = Bridge.Class.init;
 
-    // @source Reflection.js
+// @source @Reflection.js
 
     Bridge.initAssembly = function (assemblyName, res, callback) {
         if (!callback) {
@@ -3553,7 +3556,7 @@
         }
     };
 
-    // @source Interfaces.js
+// @source @Interfaces.js
 
     Bridge.define("System.IFormattable", {
         $kind: "interface",
@@ -3630,7 +3633,7 @@
         $kind: "interface"
     });
 
-    // @source Char.js
+// @source @Char.js
 
     Bridge.define("System.Char", {
         inherits: [System.IComparable, System.IFormattable],
@@ -3758,6 +3761,8 @@
 
     Bridge.Class.addExtend(System.Char, [System.IComparable$1(System.Char), System.IEquatable$1(System.Char)]);
 
+// @source @formattableString.js
+
     Bridge.define('System.FormattableString', {
         inherits: [System.IFormattable],
         statics: {
@@ -3772,6 +3777,8 @@
             return this.toString$1(formatProvider);
         }
     });
+
+// @source @formattableStringImpl.js
 
     Bridge.define('System.FormattableStringImpl', {
         inherits: [System.FormattableString],
@@ -3802,6 +3809,8 @@
         }
     });
 
+// @source @formattableStringFactory.js
+
     Bridge.define('System.Runtime.CompilerServices.FormattableStringFactory', {
         statics: {
             create: function (format, args) {
@@ -3811,7 +3820,7 @@
         }
     });
 
-    // @source Exception.js
+// @source @Exception.js
 
     Bridge.define("System.Exception", {
         constructor: function (message, innerException) {
@@ -4287,8 +4296,7 @@
         }
     });
 
-    /// <reference path="Init.js" />
-    // @source Globalization.js
+// @source @Globalization.js
 
     Bridge.define("System.Globalization.DateTimeFormatInfo", {
         inherits: [System.IFormatProvider, System.ICloneable],
@@ -4653,7 +4661,7 @@
         }
     });
 
-    // @source Math.js
+// @source @Math.js
 
     Bridge.Math = {
         divRem: function (a, b, result) {
@@ -4700,7 +4708,7 @@
         }
     };
 
-    // @source Bool.js
+// @source @Bool.js
 
     var _boolean = {
         trueString: "True",
@@ -4798,7 +4806,7 @@
 
     System.Boolean = _boolean;
 
-    // @source Integer.js
+// @source @Integer.js
 
     (function () {
         var createIntType = function (name, min, max, precision) {
@@ -5583,6 +5591,8 @@
 
     Bridge.Class.addExtend(System.Single, [System.IComparable$1(System.Single), System.IEquatable$1(System.Single)]);
 
+// @source @Long.js
+
 /* long.js https://github.com/dcodeIO/long.js/blob/master/LICENSE */
 (function (b) {
     function d(a, b, c) { this.low = a | 0; this.high = b | 0; this.unsigned = !!c } function g(a) { return !0 === (a && a.__isLong__) } function m(a, b) { var c, u; if (b) { a >>>= 0; if (u = 0 <= a && 256 > a) if (c = A[a]) return c; c = e(a, 0 > (a | 0) ? -1 : 0, !0); u && (A[a] = c) } else { a |= 0; if (u = -128 <= a && 128 > a) if (c = B[a]) return c; c = e(a, 0 > a ? -1 : 0, !1); u && (B[a] = c) } return c } function n(a, b) {
@@ -5629,751 +5639,751 @@
     }; b.shr = b.shiftRight; b.shiftRightUnsigned = function (a) { g(a) && (a = a.toInt()); a &= 63; if (0 === a) return this; var b = this.high; return 32 > a ? e(this.low >>> a | b << 32 - a, b >>> a, this.unsigned) : 32 === a ? e(b, 0, this.unsigned) : e(b >>> a - 32, 0, this.unsigned) }; b.shru = b.shiftRightUnsigned; b.toSigned = function () { return this.unsigned ? e(this.low, this.high, !1) : this }; b.toUnsigned = function () { return this.unsigned ? this : e(this.low, this.high, !0) }
 })(Bridge.global);
 
-System.Int64 = function (l) {
-    if (this.constructor !== System.Int64) {
+    System.Int64 = function (l) {
+        if (this.constructor !== System.Int64) {
+            return new System.Int64(l);
+        }
+
+        if (!Bridge.hasValue(l)) {
+            l = 0;
+        }
+
+        this.T = System.Int64;
+        this.unsigned = false;
+        this.value = System.Int64.getValue(l);
+    }
+
+    System.Int64.$$name = "System.Int64";
+    System.Int64.prototype.$$name = "System.Int64";
+
+    System.Int64.$$inherits = [];
+    Bridge.Class.addExtend(System.Int64, [System.IComparable, System.IFormattable, System.IComparable$1(System.Int64), System.IEquatable$1(System.Int64)]);
+
+    System.Int64.instanceOf = function (instance) {
+        return instance instanceof System.Int64;
+    };
+
+    System.Int64.is64Bit = function (instance) {
+        return instance instanceof System.Int64 || instance instanceof System.UInt64;
+    };
+
+    System.Int64.getDefaultValue = function () {
+        return System.Int64.Zero;
+    };
+
+    System.Int64.getValue = function (l) {
+        if (!Bridge.hasValue(l)) {
+            return null;
+        }
+
+        if (l instanceof Bridge.$Long) {
+            return l;
+        }
+
+        if (l instanceof System.Int64) {
+            return l.value;
+        }
+
+        if (l instanceof System.UInt64) {
+            return l.value.toSigned();
+        }
+
+        if (Bridge.isArray(l)) {
+            return new Bridge.$Long(l[0], l[1]);
+        }
+
+        if (Bridge.isString(l)) {
+            return Bridge.$Long.fromString(l);
+        }
+
+        if (Bridge.isNumber(l)) {
+            return Bridge.$Long.fromNumber(l);
+        }
+
+        if (l instanceof System.Decimal) {
+            return Bridge.$Long.fromString(l.toString());
+        }
+
+        return Bridge.$Long.fromValue(l);
+    };
+
+    System.Int64.create = function (l) {
+        if (!Bridge.hasValue(l)) {
+            return null;
+        }
+
+        if (l instanceof System.Int64) {
+            return l;
+        }
+
         return new System.Int64(l);
-    }
+    };
 
-    if (!Bridge.hasValue(l)) {
-        l = 0;
-    }
+    System.Int64.lift = function (l) {
+        if (!Bridge.hasValue(l)) {
+            return null;
+        }
+        return System.Int64.create(l);
+    };
 
-    this.T = System.Int64;
-    this.unsigned = false;
-    this.value = System.Int64.getValue(l);
-}
+    System.Int64.toNumber = function (value) {
+        if (!value) {
+            return null;
+        }
 
-System.Int64.$$name = "System.Int64";
-System.Int64.prototype.$$name = "System.Int64";
+        return value.toNumber();
+    };
 
-System.Int64.$$inherits = [];
-Bridge.Class.addExtend(System.Int64, [System.IComparable, System.IFormattable, System.IComparable$1(System.Int64), System.IEquatable$1(System.Int64)]);
+    System.Int64.prototype.toNumberDivided = function (divisor) {
+        var integral = this.div(divisor),
+            remainder = this.mod(divisor),
+            scaledRemainder = remainder.toNumber() / divisor;
 
-System.Int64.instanceOf = function (instance) {
-    return instance instanceof System.Int64;
-};
+        return integral.toNumber() + scaledRemainder;
+    };
 
-System.Int64.is64Bit = function (instance) {
-	return instance instanceof System.Int64 || instance instanceof System.UInt64;
-};
+    System.Int64.prototype.toJSON = function () {
+        return this.toNumber();
+    };
 
-System.Int64.getDefaultValue = function () {
-    return System.Int64.Zero;
-};
+    System.Int64.prototype.toString = function (format, provider) {
+        if (!format && !provider) {
+            return this.value.toString();
+        }
 
-System.Int64.getValue = function (l) {
-    if (!Bridge.hasValue(l)) {
-        return null;
-    }
+        if (Bridge.isNumber(format) && !provider) {
+            return this.value.toString(format);
+        }
 
-    if (l instanceof Bridge.$Long) {
-        return l;
-    }
+        return Bridge.Int.format(this, format, provider);
+    };
 
-    if (l instanceof System.Int64) {
-        return l.value;
-    }
+    System.Int64.prototype.format = function (format, provider) {
+        return Bridge.Int.format(this, format, provider);
+    };
 
-    if (l instanceof System.UInt64) {
-        return l.value.toSigned();
-    }
+    System.Int64.prototype.isNegative = function () {
+        return this.value.isNegative();
+    };
 
-    if (Bridge.isArray(l)) {
-        return new Bridge.$Long(l[0], l[1]);
-    }
-
-    if (Bridge.isString(l)) {
-        return Bridge.$Long.fromString(l);
-    }
-
-    if (Bridge.isNumber(l)) {
-        return Bridge.$Long.fromNumber(l);
-    }
-
-    if (l instanceof System.Decimal) {
-        return Bridge.$Long.fromString(l.toString());
-    }
-
-    return Bridge.$Long.fromValue(l);
-};
-
-System.Int64.create = function (l) {
-    if (!Bridge.hasValue(l)) {
-        return null;
-    }
-
-    if (l instanceof System.Int64) {
-        return l;
-    }
-
-    return new System.Int64(l);
-};
-
-System.Int64.lift = function (l) {
-    if (!Bridge.hasValue(l)) {
-        return null;
-    }
-    return System.Int64.create(l);
-};
-
-System.Int64.toNumber = function (value) {
-    if (!value) {
-        return null;
-    }
-
-    return value.toNumber();
-};
-
-System.Int64.prototype.toNumberDivided = function (divisor) {
-    var integral = this.div(divisor),
-        remainder = this.mod(divisor),
-        scaledRemainder = remainder.toNumber() / divisor;
-
-    return integral.toNumber() + scaledRemainder;
-};
-
-System.Int64.prototype.toJSON = function () {
-    return this.toNumber();
-};
-
-System.Int64.prototype.toString = function (format, provider) {
-    if (!format && !provider) {
-        return this.value.toString();
-    }
-
-    if (Bridge.isNumber(format) && !provider) {
-        return this.value.toString(format);
-    }
-
-    return Bridge.Int.format(this, format, provider);
-};
-
-System.Int64.prototype.format = function (format, provider) {
-    return Bridge.Int.format(this, format, provider);
-};
-
-System.Int64.prototype.isNegative = function () {
-    return this.value.isNegative();
-};
-
-System.Int64.prototype.abs = function () {
-    if (this.T === System.Int64 && this.eq(System.Int64.MinValue)) {
-        throw new System.OverflowException();
-    }
-    return new this.T(this.value.isNegative() ? this.value.neg() : this.value);
-};
-
-System.Int64.prototype.compareTo = function (l) {
-    return this.value.compare(this.T.getValue(l));
-};
-
-System.Int64.prototype.add = function (l, overflow) {
-    var addl = this.T.getValue(l),
-        r = new this.T(this.value.add(addl));
-
-    if (overflow) {
-        var neg1 = this.value.isNegative(),
-            neg2 = addl.isNegative(),
-            rneg = r.value.isNegative();
-
-        if ((neg1 && neg2 && !rneg) ||
-            (!neg1 && !neg2 && rneg) ||
-            (this.T === System.UInt64 && r.lt(System.UInt64.max(this, addl)))) {
+    System.Int64.prototype.abs = function () {
+        if (this.T === System.Int64 && this.eq(System.Int64.MinValue)) {
             throw new System.OverflowException();
         }
-    }
+        return new this.T(this.value.isNegative() ? this.value.neg() : this.value);
+    };
 
-    return r;
-};
+    System.Int64.prototype.compareTo = function (l) {
+        return this.value.compare(this.T.getValue(l));
+    };
 
-System.Int64.prototype.sub = function (l, overflow) {
-    var subl = this.T.getValue(l),
-        r = new this.T(this.value.sub(subl));
+    System.Int64.prototype.add = function (l, overflow) {
+        var addl = this.T.getValue(l),
+            r = new this.T(this.value.add(addl));
 
-    if (overflow) {
-        var neg1 = this.value.isNegative(),
-            neg2 = subl.isNegative(),
-            rneg = r.value.isNegative();
+        if (overflow) {
+            var neg1 = this.value.isNegative(),
+                neg2 = addl.isNegative(),
+                rneg = r.value.isNegative();
 
-        if ((neg1 && !neg2 && !rneg) ||
-            (!neg1 && neg2 && rneg) ||
-            (this.T === System.UInt64 && this.value.lt(subl))) {
-            throw new System.OverflowException();
-        }
-    }
-
-    return r;
-};
-
-System.Int64.prototype.isZero = function () {
-    return this.value.isZero();
-};
-
-System.Int64.prototype.mul = function (l, overflow) {
-    var arg = this.T.getValue(l),
-        r = new this.T(this.value.mul(arg));
-
-    if (overflow) {
-        var s1 = this.sign(),
-            s2 = arg.isZero() ? 0 : (arg.isNegative() ? -1 : 1),
-            rs = r.sign();
-
-        if (this.T === System.Int64) {
-            if (this.eq(System.Int64.MinValue) || this.eq(System.Int64.MaxValue)) {
-                if (arg.neq(1) && arg.neq(0)) {
-                    throw new System.OverflowException();
-                }
-
-                return r;
-            }
-
-            if (arg.eq(Bridge.$Long.MIN_VALUE) || arg.eq(Bridge.$Long.MAX_VALUE)) {
-                if (this.neq(1) && this.neq(0)) {
-                    throw new System.OverflowException();
-                }
-
-                return r;
-            }
-
-            if ((s1 === -1 && s2 === -1 && rs !== 1) ||
-                (s1 === 1 && s2 === 1 && rs !== 1) ||
-                (s1 === -1 && s2 === 1 && rs !== -1) ||
-                (s1 === 1 && s2 === -1 && rs !== -1)) {
+            if ((neg1 && neg2 && !rneg) ||
+                (!neg1 && !neg2 && rneg) ||
+                (this.T === System.UInt64 && r.lt(System.UInt64.max(this, addl)))) {
                 throw new System.OverflowException();
             }
-
-            var r_abs = r.abs();
-
-            if (r_abs.lt(this.abs()) || r_abs.lt(System.Int64(arg).abs())) {
-                throw new System.OverflowException();
-            }
-        } else {
-            if (this.eq(System.UInt64.MaxValue)) {
-                if (arg.neq(1) && arg.neq(0)) {
-                    throw new System.OverflowException();
-                }
-
-                return r;
-            }
-
-            if (arg.eq(Bridge.$Long.MAX_UNSIGNED_VALUE)) {
-                if (this.neq(1) && this.neq(0)) {
-                    throw new System.OverflowException();
-                }
-
-                return r;
-            }
-
-            var r_abs = r.abs();
-
-            if (r_abs.lt(this.abs()) || r_abs.lt(System.Int64(arg).abs())) {
-                throw new System.OverflowException();
-            }
-        }
-    }
-
-    return r;
-};
-
-System.Int64.prototype.div = function (l) {
-    return new this.T(this.value.div(this.T.getValue(l)));
-};
-
-System.Int64.prototype.mod = function (l) {
-    return new this.T(this.value.mod(this.T.getValue(l)));
-};
-
-System.Int64.prototype.neg = function (overflow) {
-    if (overflow && this.T === System.Int64 && this.eq(System.Int64.MinValue)) {
-        throw new System.OverflowException();
-    }
-    return new this.T(this.value.neg());
-};
-
-System.Int64.prototype.inc = function (overflow) {
-    return this.add(1, overflow);
-};
-
-System.Int64.prototype.dec = function (overflow) {
-    return this.sub(1, overflow);
-};
-
-System.Int64.prototype.sign = function () {
-    return this.value.isZero() ? 0 : (this.value.isNegative() ? -1 : 1);
-};
-
-System.Int64.prototype.clone = function () {
-    return new this.T(this);
-};
-
-System.Int64.prototype.ne = function (l) {
-    return this.value.neq(this.T.getValue(l));
-};
-
-System.Int64.prototype.neq = function (l) {
-    return this.value.neq(this.T.getValue(l));
-};
-
-System.Int64.prototype.eq = function (l) {
-    return this.value.eq(this.T.getValue(l));
-};
-
-System.Int64.prototype.lt = function (l) {
-    return this.value.lt(this.T.getValue(l));
-};
-
-System.Int64.prototype.lte = function (l) {
-    return this.value.lte(this.T.getValue(l));
-};
-
-System.Int64.prototype.gt = function (l) {
-    return this.value.gt(this.T.getValue(l));
-};
-
-System.Int64.prototype.gte = function (l) {
-    return this.value.gte(this.T.getValue(l));
-};
-
-System.Int64.prototype.equals = function (l) {
-    return this.value.eq(this.T.getValue(l));
-};
-
-System.Int64.prototype.equalsT = function (l) {
-    return this.equals(l);
-};
-
-System.Int64.prototype.getHashCode = function () {
-    var n = (this.sign() * 397 + this.value.high) | 0;
-    n = (n * 397 + this.value.low) | 0;
-
-    return n;
-};
-
-System.Int64.prototype.toNumber = function () {
-    return this.value.toNumber();
-};
-
-System.Int64.parse = function (str) {
-    if (str == null) {
-        throw new System.ArgumentNullException("str");
-    }
-
-    if (!/^[+-]?[0-9]+$/.test(str)) {
-        throw new System.FormatException("Input string was not in a correct format.");
-    }
-
-    var result = new System.Int64(str);
-
-    if (str !== result.toString()) {
-        throw new System.OverflowException();
-    }
-
-    return result;
-};
-
-System.Int64.tryParse = function (str, v) {
-    try {
-        if (str == null || !/^[+-]?[0-9]+$/.test(str)) {
-            v.v = System.Int64(Bridge.$Long.ZERO);
-            return false;
-        }
-
-        v.v = new System.Int64(str);
-
-        if (str !== v.v.toString()) {
-            v.v = System.Int64(Bridge.$Long.ZERO);
-            return false;
-        }
-
-        return true;
-    } catch (e) {
-        v.v = System.Int64(Bridge.$Long.ZERO);
-        return false;
-    }
-};
-
-System.Int64.divRem = function (a, b, result) {
-    a = System.Int64(a);
-    b = System.Int64(b);
-    var remainder = a.mod(b);
-    result.v = remainder;
-    return a.sub(remainder).div(b);
-};
-
-System.Int64.min = function () {
-    var values = [],
-        min, i, len;
-
-    for (i = 0, len = arguments.length; i < len; i++) {
-        values.push(System.Int64.getValue(arguments[i]));
-    }
-
-    i = 0;
-    min = values[0];
-    for (; ++i < values.length;) {
-        if (values[i].lt(min)) {
-            min = values[i];
-        }
-    }
-
-    return new System.Int64(min);
-};
-
-System.Int64.max = function () {
-    var values = [],
-        max, i, len;
-
-    for (i = 0, len = arguments.length; i < len; i++) {
-        values.push(System.Int64.getValue(arguments[i]));
-    }
-
-    i = 0;
-    max = values[0];
-    for (; ++i < values.length;) {
-        if (values[i].gt(max)) {
-            max = values[i];
-        }
-    }
-
-    return new System.Int64(max);
-};
-
-System.Int64.prototype.and = function (l) {
-    return new this.T(this.value.and(this.T.getValue(l)));
-};
-
-System.Int64.prototype.not = function () {
-    return new this.T(this.value.not());
-};
-
-System.Int64.prototype.or = function (l) {
-    return new this.T(this.value.or(this.T.getValue(l)));
-};
-
-System.Int64.prototype.shl = function (l) {
-    return new this.T(this.value.shl(l));
-};
-
-System.Int64.prototype.shr = function (l) {
-    return new this.T(this.value.shr(l));
-};
-
-System.Int64.prototype.shru = function (l) {
-    return new this.T(this.value.shru(l));
-};
-
-System.Int64.prototype.xor = function (l) {
-    return new this.T(this.value.xor(this.T.getValue(l)));
-};
-
-System.Int64.check = function (v, tp) {
-    if (Bridge.Int.isInfinite(v)) {
-        if (tp === System.Int64 || tp === System.UInt64) {
-            return tp.MinValue;
-        }
-        return tp.min;
-    }
-
-    if (!v) {
-        return null;
-    }
-
-    var str, r;
-    if (tp === System.Int64) {
-        if (v instanceof System.Int64) {
-            return v;
-        }
-
-        str = v.value.toString();
-        r = new System.Int64(str);
-
-        if (str !== r.value.toString()) {
-            throw new System.OverflowException();
         }
 
         return r;
-    }
+    };
 
-    if (tp === System.UInt64) {
-        if (v instanceof System.UInt64) {
-            return v;
-        }
+    System.Int64.prototype.sub = function (l, overflow) {
+        var subl = this.T.getValue(l),
+            r = new this.T(this.value.sub(subl));
 
-        if (v.value.isNegative()) {
-            throw new System.OverflowException();
-        }
-        str = v.value.toString();
-        r = new System.UInt64(str);
+        if (overflow) {
+            var neg1 = this.value.isNegative(),
+                neg2 = subl.isNegative(),
+                rneg = r.value.isNegative();
 
-        if (str !== r.value.toString()) {
-            throw new System.OverflowException();
+            if ((neg1 && !neg2 && !rneg) ||
+                (!neg1 && neg2 && rneg) ||
+                (this.T === System.UInt64 && this.value.lt(subl))) {
+                throw new System.OverflowException();
+            }
         }
 
         return r;
+    };
+
+    System.Int64.prototype.isZero = function () {
+        return this.value.isZero();
+    };
+
+    System.Int64.prototype.mul = function (l, overflow) {
+        var arg = this.T.getValue(l),
+            r = new this.T(this.value.mul(arg));
+
+        if (overflow) {
+            var s1 = this.sign(),
+                s2 = arg.isZero() ? 0 : (arg.isNegative() ? -1 : 1),
+                rs = r.sign();
+
+            if (this.T === System.Int64) {
+                if (this.eq(System.Int64.MinValue) || this.eq(System.Int64.MaxValue)) {
+                    if (arg.neq(1) && arg.neq(0)) {
+                        throw new System.OverflowException();
+                    }
+
+                    return r;
+                }
+
+                if (arg.eq(Bridge.$Long.MIN_VALUE) || arg.eq(Bridge.$Long.MAX_VALUE)) {
+                    if (this.neq(1) && this.neq(0)) {
+                        throw new System.OverflowException();
+                    }
+
+                    return r;
+                }
+
+                if ((s1 === -1 && s2 === -1 && rs !== 1) ||
+                    (s1 === 1 && s2 === 1 && rs !== 1) ||
+                    (s1 === -1 && s2 === 1 && rs !== -1) ||
+                    (s1 === 1 && s2 === -1 && rs !== -1)) {
+                    throw new System.OverflowException();
+                }
+
+                var r_abs = r.abs();
+
+                if (r_abs.lt(this.abs()) || r_abs.lt(System.Int64(arg).abs())) {
+                    throw new System.OverflowException();
+                }
+            } else {
+                if (this.eq(System.UInt64.MaxValue)) {
+                    if (arg.neq(1) && arg.neq(0)) {
+                        throw new System.OverflowException();
+                    }
+
+                    return r;
+                }
+
+                if (arg.eq(Bridge.$Long.MAX_UNSIGNED_VALUE)) {
+                    if (this.neq(1) && this.neq(0)) {
+                        throw new System.OverflowException();
+                    }
+
+                    return r;
+                }
+
+                var r_abs = r.abs();
+
+                if (r_abs.lt(this.abs()) || r_abs.lt(System.Int64(arg).abs())) {
+                    throw new System.OverflowException();
+                }
+            }
+        }
+
+        return r;
+    };
+
+    System.Int64.prototype.div = function (l) {
+        return new this.T(this.value.div(this.T.getValue(l)));
+    };
+
+    System.Int64.prototype.mod = function (l) {
+        return new this.T(this.value.mod(this.T.getValue(l)));
+    };
+
+    System.Int64.prototype.neg = function (overflow) {
+        if (overflow && this.T === System.Int64 && this.eq(System.Int64.MinValue)) {
+            throw new System.OverflowException();
+        }
+        return new this.T(this.value.neg());
+    };
+
+    System.Int64.prototype.inc = function (overflow) {
+        return this.add(1, overflow);
+    };
+
+    System.Int64.prototype.dec = function (overflow) {
+        return this.sub(1, overflow);
+    };
+
+    System.Int64.prototype.sign = function () {
+        return this.value.isZero() ? 0 : (this.value.isNegative() ? -1 : 1);
+    };
+
+    System.Int64.prototype.clone = function () {
+        return new this.T(this);
+    };
+
+    System.Int64.prototype.ne = function (l) {
+        return this.value.neq(this.T.getValue(l));
+    };
+
+    System.Int64.prototype.neq = function (l) {
+        return this.value.neq(this.T.getValue(l));
+    };
+
+    System.Int64.prototype.eq = function (l) {
+        return this.value.eq(this.T.getValue(l));
+    };
+
+    System.Int64.prototype.lt = function (l) {
+        return this.value.lt(this.T.getValue(l));
+    };
+
+    System.Int64.prototype.lte = function (l) {
+        return this.value.lte(this.T.getValue(l));
+    };
+
+    System.Int64.prototype.gt = function (l) {
+        return this.value.gt(this.T.getValue(l));
+    };
+
+    System.Int64.prototype.gte = function (l) {
+        return this.value.gte(this.T.getValue(l));
+    };
+
+    System.Int64.prototype.equals = function (l) {
+        return this.value.eq(this.T.getValue(l));
+    };
+
+    System.Int64.prototype.equalsT = function (l) {
+        return this.equals(l);
+    };
+
+    System.Int64.prototype.getHashCode = function () {
+        var n = (this.sign() * 397 + this.value.high) | 0;
+        n = (n * 397 + this.value.low) | 0;
+
+        return n;
+    };
+
+    System.Int64.prototype.toNumber = function () {
+        return this.value.toNumber();
+    };
+
+    System.Int64.parse = function (str) {
+        if (str == null) {
+            throw new System.ArgumentNullException("str");
+        }
+
+        if (!/^[+-]?[0-9]+$/.test(str)) {
+            throw new System.FormatException("Input string was not in a correct format.");
+        }
+
+        var result = new System.Int64(str);
+
+        if (str !== result.toString()) {
+            throw new System.OverflowException();
+        }
+
+        return result;
+    };
+
+    System.Int64.tryParse = function (str, v) {
+        try {
+            if (str == null || !/^[+-]?[0-9]+$/.test(str)) {
+                v.v = System.Int64(Bridge.$Long.ZERO);
+                return false;
+            }
+
+            v.v = new System.Int64(str);
+
+            if (str !== v.v.toString()) {
+                v.v = System.Int64(Bridge.$Long.ZERO);
+                return false;
+            }
+
+            return true;
+        } catch (e) {
+            v.v = System.Int64(Bridge.$Long.ZERO);
+            return false;
+        }
+    };
+
+    System.Int64.divRem = function (a, b, result) {
+        a = System.Int64(a);
+        b = System.Int64(b);
+        var remainder = a.mod(b);
+        result.v = remainder;
+        return a.sub(remainder).div(b);
+    };
+
+    System.Int64.min = function () {
+        var values = [],
+            min, i, len;
+
+        for (i = 0, len = arguments.length; i < len; i++) {
+            values.push(System.Int64.getValue(arguments[i]));
+        }
+
+        i = 0;
+        min = values[0];
+        for (; ++i < values.length;) {
+            if (values[i].lt(min)) {
+                min = values[i];
+            }
+        }
+
+        return new System.Int64(min);
+    };
+
+    System.Int64.max = function () {
+        var values = [],
+            max, i, len;
+
+        for (i = 0, len = arguments.length; i < len; i++) {
+            values.push(System.Int64.getValue(arguments[i]));
+        }
+
+        i = 0;
+        max = values[0];
+        for (; ++i < values.length;) {
+            if (values[i].gt(max)) {
+                max = values[i];
+            }
+        }
+
+        return new System.Int64(max);
+    };
+
+    System.Int64.prototype.and = function (l) {
+        return new this.T(this.value.and(this.T.getValue(l)));
+    };
+
+    System.Int64.prototype.not = function () {
+        return new this.T(this.value.not());
+    };
+
+    System.Int64.prototype.or = function (l) {
+        return new this.T(this.value.or(this.T.getValue(l)));
+    };
+
+    System.Int64.prototype.shl = function (l) {
+        return new this.T(this.value.shl(l));
+    };
+
+    System.Int64.prototype.shr = function (l) {
+        return new this.T(this.value.shr(l));
+    };
+
+    System.Int64.prototype.shru = function (l) {
+        return new this.T(this.value.shru(l));
+    };
+
+    System.Int64.prototype.xor = function (l) {
+        return new this.T(this.value.xor(this.T.getValue(l)));
+    };
+
+    System.Int64.check = function (v, tp) {
+        if (Bridge.Int.isInfinite(v)) {
+            if (tp === System.Int64 || tp === System.UInt64) {
+                return tp.MinValue;
+            }
+            return tp.min;
+        }
+
+        if (!v) {
+            return null;
+        }
+
+        var str, r;
+        if (tp === System.Int64) {
+            if (v instanceof System.Int64) {
+                return v;
+            }
+
+            str = v.value.toString();
+            r = new System.Int64(str);
+
+            if (str !== r.value.toString()) {
+                throw new System.OverflowException();
+            }
+
+            return r;
+        }
+
+        if (tp === System.UInt64) {
+            if (v instanceof System.UInt64) {
+                return v;
+            }
+
+            if (v.value.isNegative()) {
+                throw new System.OverflowException();
+            }
+            str = v.value.toString();
+            r = new System.UInt64(str);
+
+            if (str !== r.value.toString()) {
+                throw new System.OverflowException();
+            }
+
+            return r;
+        }
+
+        return Bridge.Int.check(v.toNumber(), tp);
+    };
+
+    System.Int64.clip8 = function (x) {
+        return x ? Bridge.Int.sxb(x.value.low & 0xff) : (Bridge.Int.isInfinite(x) ? System.SByte.min : null);
+    };
+
+    System.Int64.clipu8 = function (x) {
+        return x ? x.value.low & 0xff : (Bridge.Int.isInfinite(x) ? System.Byte.min : null);
+    };
+
+    System.Int64.clip16 = function (x) {
+        return x ? Bridge.Int.sxs(x.value.low & 0xffff) : (Bridge.Int.isInfinite(x) ? System.Int16.min : null);
+    };
+
+    System.Int64.clipu16 = function (x) {
+        return x ? x.value.low & 0xffff : (Bridge.Int.isInfinite(x) ? System.UInt16.min : null);
+    };
+
+    System.Int64.clip32 = function (x) {
+        return x ? x.value.low | 0 : (Bridge.Int.isInfinite(x) ? System.Int32.min : null);
+    };
+
+    System.Int64.clipu32 = function (x) {
+        return x ? x.value.low >>> 0 : (Bridge.Int.isInfinite(x) ? System.UInt32.min : null);
+    };
+
+    System.Int64.clip64 = function (x) {
+        return x ? new System.Int64(x.value.toSigned()) : (Bridge.Int.isInfinite(x) ? System.Int64.MinValue : null);
+    };
+
+    System.Int64.clipu64 = function (x) {
+        return x ? new System.UInt64(x.value.toUnsigned()) : (Bridge.Int.isInfinite(x) ? System.UInt64.MinValue : null);
+    };
+
+    System.Int64.Zero = System.Int64(Bridge.$Long.ZERO);
+    System.Int64.MinValue = System.Int64(Bridge.$Long.MIN_VALUE);
+    System.Int64.MaxValue = System.Int64(Bridge.$Long.MAX_VALUE);
+    System.Int64.precision = 19;
+
+    /* ULONG */
+
+    System.UInt64 = function (l) {
+        if (this.constructor !== System.UInt64) {
+            return new System.UInt64(l);
+        }
+
+        if (!Bridge.hasValue(l)) {
+            l = 0;
+        }
+
+        this.T = System.UInt64;
+        this.unsigned = true;
+        this.value = System.UInt64.getValue(l, true);
     }
 
-    return Bridge.Int.check(v.toNumber(), tp);
-};
+    System.UInt64.$$name = "System.UInt64";
+    System.UInt64.prototype.$$name = "System.UInt64";
+    System.UInt64.$$inherits = [];
+    Bridge.Class.addExtend(System.UInt64, [System.IComparable, System.IFormattable, System.IComparable$1(System.UInt64), System.IEquatable$1(System.UInt64)]);
 
-System.Int64.clip8 = function (x) {
-    return x ? Bridge.Int.sxb(x.value.low & 0xff) : (Bridge.Int.isInfinite(x) ? System.SByte.min : null);
-};
+    System.UInt64.instanceOf = function (instance) {
+        return instance instanceof System.UInt64;
+    };
 
-System.Int64.clipu8 = function (x) {
-    return x ? x.value.low & 0xff : (Bridge.Int.isInfinite(x) ? System.Byte.min : null);
-};
+    System.UInt64.getDefaultValue = function () {
+        return System.UInt64.Zero;
+    };
 
-System.Int64.clip16 = function (x) {
-    return x ? Bridge.Int.sxs(x.value.low & 0xffff) : (Bridge.Int.isInfinite(x) ? System.Int16.min : null);
-};
+    System.UInt64.getValue = function (l) {
+        if (!Bridge.hasValue(l)) {
+            return null;
+        }
 
-System.Int64.clipu16 = function (x) {
-    return x ? x.value.low & 0xffff : (Bridge.Int.isInfinite(x) ? System.UInt16.min : null);
-};
+        if (l instanceof Bridge.$Long) {
+            return l;
+        }
 
-System.Int64.clip32 = function (x) {
-    return x ? x.value.low | 0 : (Bridge.Int.isInfinite(x) ? System.Int32.min : null);
-};
+        if (l instanceof System.UInt64) {
+            return l.value;
+        }
 
-System.Int64.clipu32 = function (x) {
-    return x ? x.value.low >>> 0 : (Bridge.Int.isInfinite(x) ? System.UInt32.min : null);
-};
+        if (l instanceof System.Int64) {
+            return l.value.toUnsigned();
+        }
 
-System.Int64.clip64 = function (x) {
-    return x ? new System.Int64(x.value.toSigned()) : (Bridge.Int.isInfinite(x) ? System.Int64.MinValue : null);
-};
+        if (Bridge.isArray(l)) {
+            return new Bridge.$Long(l[0], l[1], true);
+        }
 
-System.Int64.clipu64 = function (x) {
-    return x ? new System.UInt64(x.value.toUnsigned()) : (Bridge.Int.isInfinite(x) ? System.UInt64.MinValue : null);
-};
+        if (Bridge.isString(l)) {
+            return Bridge.$Long.fromString(l, true);
+        }
 
-System.Int64.Zero = System.Int64(Bridge.$Long.ZERO);
-System.Int64.MinValue = System.Int64(Bridge.$Long.MIN_VALUE);
-System.Int64.MaxValue = System.Int64(Bridge.$Long.MAX_VALUE);
-System.Int64.precision = 19;
+        if (Bridge.isNumber(l)) {
+            return Bridge.$Long.fromNumber(l, true);
+        }
 
-/* ULONG */
+        if (l instanceof System.Decimal) {
+            return Bridge.$Long.fromString(l.toString(), true);
+        }
 
-System.UInt64 = function (l) {
-    if (this.constructor !== System.UInt64) {
+        return Bridge.$Long.fromValue(l);
+    };
+
+    System.UInt64.create = function (l) {
+        if (!Bridge.hasValue(l)) {
+            return null;
+        }
+
+        if (l instanceof System.UInt64) {
+            return l;
+        }
+
         return new System.UInt64(l);
-    }
+    };
 
-    if (!Bridge.hasValue(l)) {
-        l = 0;
-    }
+    System.UInt64.lift = function (l) {
+        if (!Bridge.hasValue(l)) {
+            return null;
+        }
+        return System.UInt64.create(l);
+    };
 
-    this.T = System.UInt64;
-    this.unsigned = true;
-    this.value = System.UInt64.getValue(l, true);
-}
+    System.UInt64.prototype.toJSON = System.Int64.prototype.toJSON;
+    System.UInt64.prototype.toString = System.Int64.prototype.toString;
+    System.UInt64.prototype.format = System.Int64.prototype.format;
+    System.UInt64.prototype.isNegative = System.Int64.prototype.isNegative;
+    System.UInt64.prototype.abs = System.Int64.prototype.abs;
+    System.UInt64.prototype.compareTo = System.Int64.prototype.compareTo;
+    System.UInt64.prototype.add = System.Int64.prototype.add;
+    System.UInt64.prototype.sub = System.Int64.prototype.sub;
+    System.UInt64.prototype.isZero = System.Int64.prototype.isZero;
+    System.UInt64.prototype.mul = System.Int64.prototype.mul;
+    System.UInt64.prototype.div = System.Int64.prototype.div;
+    System.UInt64.prototype.toNumberDivided = System.Int64.prototype.toNumberDivided;
+    System.UInt64.prototype.mod = System.Int64.prototype.mod;
+    System.UInt64.prototype.neg = System.Int64.prototype.neg;
+    System.UInt64.prototype.inc = System.Int64.prototype.inc;
+    System.UInt64.prototype.dec = System.Int64.prototype.dec;
+    System.UInt64.prototype.sign = System.Int64.prototype.sign;
+    System.UInt64.prototype.clone = System.Int64.prototype.clone;
+    System.UInt64.prototype.ne = System.Int64.prototype.ne;
+    System.UInt64.prototype.neq = System.Int64.prototype.neq;
+    System.UInt64.prototype.eq = System.Int64.prototype.eq;
+    System.UInt64.prototype.lt = System.Int64.prototype.lt;
+    System.UInt64.prototype.lte = System.Int64.prototype.lte;
+    System.UInt64.prototype.gt = System.Int64.prototype.gt;
+    System.UInt64.prototype.gte = System.Int64.prototype.gte;
+    System.UInt64.prototype.equals = System.Int64.prototype.equals;
+    System.UInt64.prototype.equalsT = System.Int64.prototype.equalsT;
+    System.UInt64.prototype.getHashCode = System.Int64.prototype.getHashCode;
+    System.UInt64.prototype.toNumber = System.Int64.prototype.toNumber;
 
-System.UInt64.$$name = "System.UInt64";
-System.UInt64.prototype.$$name = "System.UInt64";
-System.UInt64.$$inherits = [];
-Bridge.Class.addExtend(System.UInt64, [System.IComparable, System.IFormattable, System.IComparable$1(System.UInt64), System.IEquatable$1(System.UInt64)]);
+    System.UInt64.parse = function (str) {
+        if (str == null) {
+            throw new System.ArgumentNullException("str");
+        }
 
-System.UInt64.instanceOf = function (instance) {
-    return instance instanceof System.UInt64;
-};
+        if (!/^[+-]?[0-9]+$/.test(str)) {
+            throw new System.FormatException("Input string was not in a correct format.");
+        }
 
-System.UInt64.getDefaultValue = function () {
-    return System.UInt64.Zero;
-};
+        var result = new System.UInt64(str);
 
-System.UInt64.getValue = function (l) {
-    if (!Bridge.hasValue(l)) {
-        return null;
-    }
+        if (result.value.isNegative()) {
+            throw new System.OverflowException();
+        }
 
-    if (l instanceof Bridge.$Long) {
-        return l;
-    }
+        if (str !== result.toString()) {
+            throw new System.OverflowException();
+        }
 
-    if (l instanceof System.UInt64) {
-        return l.value;
-    }
+        return result;
+    };
 
-    if (l instanceof System.Int64) {
-        return l.value.toUnsigned();
-    }
+    System.UInt64.tryParse = function (str, v) {
+        try {
+            if (str == null || !/^[+-]?[0-9]+$/.test(str)) {
+                v.v = System.UInt64(Bridge.$Long.UZERO);
+                return false;
+            }
 
-    if (Bridge.isArray(l)) {
-        return new Bridge.$Long(l[0], l[1], true);
-    }
+            v.v = new System.UInt64(str);
 
-    if (Bridge.isString(l)) {
-        return Bridge.$Long.fromString(l, true);
-    }
+            if (v.v.isNegative()) {
+                v.v = System.UInt64(Bridge.$Long.UZERO);
+                return false;
+            }
 
-    if (Bridge.isNumber(l)) {
-        return Bridge.$Long.fromNumber(l, true);
-    }
+            if (str !== v.v.toString()) {
+                v.v = System.UInt64(Bridge.$Long.UZERO);
+                return false;
+            }
 
-    if (l instanceof System.Decimal) {
-        return Bridge.$Long.fromString(l.toString(), true);
-    }
-
-    return Bridge.$Long.fromValue(l);
-};
-
-System.UInt64.create = function (l) {
-    if (!Bridge.hasValue(l)) {
-        return null;
-    }
-
-    if (l instanceof System.UInt64) {
-        return l;
-    }
-
-    return new System.UInt64(l);
-};
-
-System.UInt64.lift = function (l) {
-    if (!Bridge.hasValue(l)) {
-        return null;
-    }
-    return System.UInt64.create(l);
-};
-
-System.UInt64.prototype.toJSON = System.Int64.prototype.toJSON;
-System.UInt64.prototype.toString = System.Int64.prototype.toString;
-System.UInt64.prototype.format = System.Int64.prototype.format;
-System.UInt64.prototype.isNegative = System.Int64.prototype.isNegative;
-System.UInt64.prototype.abs = System.Int64.prototype.abs;
-System.UInt64.prototype.compareTo = System.Int64.prototype.compareTo;
-System.UInt64.prototype.add = System.Int64.prototype.add;
-System.UInt64.prototype.sub = System.Int64.prototype.sub;
-System.UInt64.prototype.isZero = System.Int64.prototype.isZero;
-System.UInt64.prototype.mul = System.Int64.prototype.mul;
-System.UInt64.prototype.div = System.Int64.prototype.div;
-System.UInt64.prototype.toNumberDivided = System.Int64.prototype.toNumberDivided;
-System.UInt64.prototype.mod = System.Int64.prototype.mod;
-System.UInt64.prototype.neg = System.Int64.prototype.neg;
-System.UInt64.prototype.inc = System.Int64.prototype.inc;
-System.UInt64.prototype.dec = System.Int64.prototype.dec;
-System.UInt64.prototype.sign = System.Int64.prototype.sign;
-System.UInt64.prototype.clone = System.Int64.prototype.clone;
-System.UInt64.prototype.ne = System.Int64.prototype.ne;
-System.UInt64.prototype.neq = System.Int64.prototype.neq;
-System.UInt64.prototype.eq = System.Int64.prototype.eq;
-System.UInt64.prototype.lt = System.Int64.prototype.lt;
-System.UInt64.prototype.lte = System.Int64.prototype.lte;
-System.UInt64.prototype.gt = System.Int64.prototype.gt;
-System.UInt64.prototype.gte = System.Int64.prototype.gte;
-System.UInt64.prototype.equals = System.Int64.prototype.equals;
-System.UInt64.prototype.equalsT = System.Int64.prototype.equalsT;
-System.UInt64.prototype.getHashCode = System.Int64.prototype.getHashCode;
-System.UInt64.prototype.toNumber = System.Int64.prototype.toNumber;
-
-System.UInt64.parse = function (str) {
-    if (str == null) {
-        throw new System.ArgumentNullException("str");
-    }
-
-    if (!/^[+-]?[0-9]+$/.test(str)) {
-        throw new System.FormatException("Input string was not in a correct format.");
-    }
-
-    var result = new System.UInt64(str);
-
-    if (result.value.isNegative()) {
-        throw new System.OverflowException();
-    }
-
-    if (str !== result.toString()) {
-        throw new System.OverflowException();
-    }
-
-    return result;
-};
-
-System.UInt64.tryParse = function (str, v) {
-    try {
-        if (str == null || !/^[+-]?[0-9]+$/.test(str)) {
+            return true;
+        } catch (e) {
             v.v = System.UInt64(Bridge.$Long.UZERO);
             return false;
         }
+    };
 
-        v.v = new System.UInt64(str);
+    System.UInt64.min = function () {
+        var values = [],
+            min, i, len;
 
-        if (v.v.isNegative()) {
-            v.v = System.UInt64(Bridge.$Long.UZERO);
-            return false;
+        for (i = 0, len = arguments.length; i < len; i++) {
+            values.push(System.UInt64.getValue(arguments[i]));
         }
 
-        if (str !== v.v.toString()) {
-            v.v = System.UInt64(Bridge.$Long.UZERO);
-            return false;
+        i = 0;
+        min = values[0];
+        for (; ++i < values.length;) {
+            if (values[i].lt(min)) {
+                min = values[i];
+            }
         }
 
-        return true;
-    } catch (e) {
-        v.v = System.UInt64(Bridge.$Long.UZERO);
-        return false;
-    }
-};
+        return new System.UInt64(min);
+    };
 
-System.UInt64.min = function () {
-    var values = [],
-        min, i, len;
+    System.UInt64.max = function () {
+        var values = [],
+            max, i, len;
 
-    for (i = 0, len = arguments.length; i < len; i++) {
-        values.push(System.UInt64.getValue(arguments[i]));
-    }
-
-    i = 0;
-    min = values[0];
-    for (; ++i < values.length;) {
-        if (values[i].lt(min)) {
-            min = values[i];
+        for (i = 0, len = arguments.length; i < len; i++) {
+            values.push(System.UInt64.getValue(arguments[i]));
         }
-    }
 
-    return new System.UInt64(min);
-};
-
-System.UInt64.max = function () {
-    var values = [],
-        max, i, len;
-
-    for (i = 0, len = arguments.length; i < len; i++) {
-        values.push(System.UInt64.getValue(arguments[i]));
-    }
-
-    i = 0;
-    max = values[0];
-    for (; ++i < values.length;) {
-        if (values[i].gt(max)) {
-            max = values[i];
+        i = 0;
+        max = values[0];
+        for (; ++i < values.length;) {
+            if (values[i].gt(max)) {
+                max = values[i];
+            }
         }
-    }
 
-    return new System.UInt64(max);
-};
+        return new System.UInt64(max);
+    };
 
-System.UInt64.divRem = function (a, b, result) {
-    a = System.UInt64(a);
-    b = System.UInt64(b);
-    var remainder = a.mod(b);
-    result.v = remainder;
-    return a.sub(remainder).div(b);
-};
+    System.UInt64.divRem = function (a, b, result) {
+        a = System.UInt64(a);
+        b = System.UInt64(b);
+        var remainder = a.mod(b);
+        result.v = remainder;
+        return a.sub(remainder).div(b);
+    };
 
-System.UInt64.prototype.and = System.Int64.prototype.and;
-System.UInt64.prototype.not = System.Int64.prototype.not;
-System.UInt64.prototype.or = System.Int64.prototype.or;
-System.UInt64.prototype.shl = System.Int64.prototype.shl;
-System.UInt64.prototype.shr = System.Int64.prototype.shr;
-System.UInt64.prototype.shru = System.Int64.prototype.shru;
-System.UInt64.prototype.xor = System.Int64.prototype.xor;
+    System.UInt64.prototype.and = System.Int64.prototype.and;
+    System.UInt64.prototype.not = System.Int64.prototype.not;
+    System.UInt64.prototype.or = System.Int64.prototype.or;
+    System.UInt64.prototype.shl = System.Int64.prototype.shl;
+    System.UInt64.prototype.shr = System.Int64.prototype.shr;
+    System.UInt64.prototype.shru = System.Int64.prototype.shru;
+    System.UInt64.prototype.xor = System.Int64.prototype.xor;
 
-System.UInt64.Zero = System.UInt64(Bridge.$Long.UZERO);
-System.UInt64.MinValue = System.UInt64.Zero;
-System.UInt64.MaxValue = System.UInt64(Bridge.$Long.MAX_UNSIGNED_VALUE);
-System.UInt64.precision = 20;
+    System.UInt64.Zero = System.UInt64(Bridge.$Long.UZERO);
+    System.UInt64.MinValue = System.UInt64.Zero;
+    System.UInt64.MaxValue = System.UInt64(Bridge.$Long.MAX_UNSIGNED_VALUE);
+    System.UInt64.precision = 20;
 
-    // @source Decimal.js
+// @source @Decimal.js
 
     /* decimal.js v5.0.7 https://github.com/MikeMcl/decimal.js/LICENCE */
 
@@ -6847,7 +6857,7 @@ System.UInt64.precision = 20;
     System.Decimal.MaxValue = System.Decimal("79228162514264337593543950335");
     System.Decimal.precision = 29;
 
-    // @source Date.js
+// @source @Date.js
 
     Bridge.define("System.DayOfWeek", {
         $kind: "enum",
@@ -7658,7 +7668,7 @@ System.UInt64.precision = 20;
 
     Bridge.Date = date;
 
-    // @source TimeSpan.js
+// @source @TimeSpan.js
 
     Bridge.define("System.TimeSpan", {
         inherits: [System.IComparable],
@@ -7909,260 +7919,260 @@ System.UInt64.precision = 20;
 
     Bridge.Class.addExtend(System.TimeSpan, [System.IComparable$1(System.TimeSpan), System.IEquatable$1(System.TimeSpan)]);
 
-// @source Text/StringBuilder.js
+// @source @StringBuilder.js
 
-Bridge.define("System.Text.StringBuilder", {
-    constructor: function () {
-		this.$initialize();
-        this.buffer = [],
-        this.capacity = 16;
+    Bridge.define("System.Text.StringBuilder", {
+        constructor: function () {
+            this.$initialize();
+            this.buffer = [],
+            this.capacity = 16;
 
-        if (arguments.length === 1) {
-            this.append(arguments[0]);
-        } else if (arguments.length === 2) {
-            this.append(arguments[0]);
-            this.setCapacity(arguments[1]);
-        } else if (arguments.length === 3) {
-            this.append(arguments[0], arguments[1], arguments[2]);
-        }
-    },
+            if (arguments.length === 1) {
+                this.append(arguments[0]);
+            } else if (arguments.length === 2) {
+                this.append(arguments[0]);
+                this.setCapacity(arguments[1]);
+            } else if (arguments.length === 3) {
+                this.append(arguments[0], arguments[1], arguments[2]);
+            }
+        },
 
-    getLength: function () {
-        if (this.buffer.length < 2) {
-            return this.buffer[0] ? this.buffer[0].length : 0;
-        }
+        getLength: function () {
+            if (this.buffer.length < 2) {
+                return this.buffer[0] ? this.buffer[0].length : 0;
+            }
 
-        var s = this.buffer.join("");
+            var s = this.buffer.join("");
 
-        this.buffer = [];
-        this.buffer[0] = s;
+            this.buffer = [];
+            this.buffer[0] = s;
 
-        return s.length;
-    },
+            return s.length;
+        },
 
-    getCapacity: function () {
-        var length = this.getLength();
+        getCapacity: function () {
+            var length = this.getLength();
 
-        return (this.capacity > length) ? this.capacity : length;
-    },
+            return (this.capacity > length) ? this.capacity : length;
+        },
 
-    setCapacity: function (value) {
-        var length = this.getLength();
+        setCapacity: function (value) {
+            var length = this.getLength();
 
-        if (value > length) {
-            this.capacity = value;
-        }
-    },
+            if (value > length) {
+                this.capacity = value;
+            }
+        },
 
-    toString: function () {
-        var s = this.buffer.join("");
+        toString: function () {
+            var s = this.buffer.join("");
 
-        this.buffer = [];
-        this.buffer[0] = s;
+            this.buffer = [];
+            this.buffer[0] = s;
 
-        if (arguments.length === 2) {
-            var startIndex = arguments[0],
-                length = arguments[1];
+            if (arguments.length === 2) {
+                var startIndex = arguments[0],
+                    length = arguments[1];
+
+                this.checkLimits(s, startIndex, length);
+
+                return s.substr(startIndex, length);
+            }
+
+            return s;
+        },
+
+        append: function (value) {
+            if (value == null) {
+                return this;
+            }
+
+            if (arguments.length === 2) {
+                // append a char repeated count times
+                var count = arguments[1];
+
+                if (count === 0) {
+                    return this;
+                } else if (count < 0) {
+                    throw new System.ArgumentOutOfRangeException("count", "cannot be less than zero");
+                }
+
+                value = Array(count + 1).join(value).toString();
+            } else if (arguments.length === 3) {
+                // append a (startIndex, count) substring of value
+                var startIndex = arguments[1],
+                    count = arguments[2];
+
+                if (count === 0) {
+                    return this;
+                }
+
+                this.checkLimits(value, startIndex, count);
+                value = value.substr(startIndex, count);
+            }
+
+            this.buffer[this.buffer.length] = value;
+
+            return this;
+        },
+
+        appendFormat: function (format) {
+            return this.append(System.String.format.apply(System.String, arguments));
+        },
+
+        clear: function () {
+            this.buffer = [];
+
+            return this;
+        },
+
+        appendLine: function () {
+            if (arguments.length === 1) {
+                this.append(arguments[0]);
+            }
+
+            return this.append("\r\n");
+        },
+
+        equals: function (sb) {
+            if (sb == null) {
+                return false;
+            }
+
+            if (sb === this) {
+                return true;
+            }
+
+            return this.toString() === sb.toString();
+        },
+
+        remove: function (startIndex, length) {
+            var s = this.buffer.join("");
 
             this.checkLimits(s, startIndex, length);
 
-            return s.substr(startIndex, length);
-        }
+            if (s.length === length && startIndex === 0) {
+                // Optimization.  If we are deleting everything
+                return this.clear();
+            }
 
-        return s;
-    },
+            if (length > 0) {
+                this.buffer = [];
+                this.buffer[0] = s.substring(0, startIndex);
+                this.buffer[1] = s.substring(startIndex + length, s.length);
+            }
 
-    append: function (value) {
-        if (value == null) {
             return this;
-        }
+        },
 
-        if (arguments.length === 2) {
-            // append a char repeated count times
-            var count = arguments[1];
-
-            if (count === 0) {
-                return this;
-            } else if (count < 0) {
-                throw new System.ArgumentOutOfRangeException("count", "cannot be less than zero");
-            }
-
-            value = Array(count + 1).join(value).toString();
-        } else if (arguments.length === 3) {
-            // append a (startIndex, count) substring of value
-            var startIndex = arguments[1],
-                count = arguments[2];
-
-            if (count === 0) {
+        insert: function (index, value) {
+            if (value == null) {
                 return this;
             }
 
-            this.checkLimits(value, startIndex, count);
-            value = value.substr(startIndex, count);
-        }
+            if (arguments.length === 3) {
+                // insert value repeated count times
+                var count = arguments[2];
 
-        this.buffer[this.buffer.length] = value;
+                if (count === 0) {
+                    return this;
+                } else if (count < 0) {
+                    throw new System.ArgumentOutOfRangeException("count", "cannot be less than zero");
+                }
 
-        return this;
-    },
+                value = Array(count + 1).join(value).toString();
+            }
 
-    appendFormat: function (format) {
-        return this.append(System.String.format.apply(System.String, arguments));
-    },
-
-    clear: function () {
-        this.buffer = [];
-
-        return this;
-    },
-
-    appendLine: function () {
-        if (arguments.length === 1) {
-            this.append(arguments[0]);
-        }
-
-        return this.append("\r\n");
-    },
-
-    equals: function (sb) {
-        if (sb == null) {
-            return false;
-        }
-
-        if (sb === this) {
-            return true;
-        }
-
-        return this.toString() === sb.toString();
-    },
-
-    remove: function (startIndex, length) {
-        var s = this.buffer.join("");
-
-        this.checkLimits(s, startIndex, length);
-
-        if (s.length === length && startIndex === 0) {
-            // Optimization.  If we are deleting everything
-            return this.clear();
-        }
-
-        if (length > 0) {
+            var s = this.buffer.join("");
             this.buffer = [];
-            this.buffer[0] = s.substring(0, startIndex);
-            this.buffer[1] = s.substring(startIndex + length, s.length);
-        }
 
-        return this;
-    },
-
-    insert: function (index, value) {
-        if (value == null) {
-            return this;
-        }
-
-        if (arguments.length === 3) {
-            // insert value repeated count times
-            var count = arguments[2];
-
-            if (count === 0) {
-                return this;
-            } else if (count < 0) {
-                throw new System.ArgumentOutOfRangeException("count", "cannot be less than zero");
+            if (index < 1) {
+                this.buffer[0] = value;
+                this.buffer[1] = s;
+            } else if (index >= s.length) {
+                this.buffer[0] = s;
+                this.buffer[1] = value;
+            } else {
+                this.buffer[0] = s.substring(0, index);
+                this.buffer[1] = value;
+                this.buffer[2] = s.substring(index, s.length);
             }
 
-            value = Array(count + 1).join(value).toString();
+            return this;
+        },
+
+        replace: function (oldValue, newValue) {
+            var r = new RegExp(oldValue, "g"),
+                s = this.buffer.join("");
+
+            this.buffer = [];
+
+            if (arguments.length === 4) {
+                var startIndex = arguments[2],
+                    count = arguments[3],
+                    b = s.substr(startIndex, count);
+
+                this.checkLimits(s, startIndex, count);
+
+                this.buffer[0] = s.substring(0, startIndex);
+                this.buffer[1] = b.replace(r, newValue);
+                this.buffer[2] = s.substring(startIndex + count, s.length);
+            } else {
+                this.buffer[0] = s.replace(r, newValue);
+            }
+
+            return this;
+        },
+
+        checkLimits: function (value, startIndex, length) {
+            if (length < 0) {
+                throw new System.ArgumentOutOfRangeException("length", "must be non-negative");
+            }
+
+            if (startIndex < 0) {
+                throw new System.ArgumentOutOfRangeException("startIndex", "startIndex cannot be less than zero");
+            }
+
+            if (length > value.length - startIndex) {
+                throw new System.ArgumentOutOfRangeException("Index and length must refer to a location within the string");
+            }
         }
+    });
 
-        var s = this.buffer.join("");
-        this.buffer = [];
+// @source @BridgeRegex.js
 
-        if (index < 1) {
-            this.buffer[0] = value;
-            this.buffer[1] = s;
-        } else if (index >= s.length) {
-            this.buffer[0] = s;
-            this.buffer[1] = value;
-        } else {
-            this.buffer[0] = s.substring(0, index);
-            this.buffer[1] = value;
-            this.buffer[2] = s.substring(index, s.length);
-        }
+    (function () {
+        var specials = [
+                // order matters for these
+                  "-"
+                , "["
+                , "]"
+                // order doesn't matter for any of these
+                , "/"
+                , "{"
+                , "}"
+                , "("
+                , ")"
+                , "*"
+                , "+"
+                , "?"
+                , "."
+                , "\\"
+                , "^"
+                , "$"
+                , "|"
+        ],
 
-        return this;
-    },
+        regex = RegExp("[" + specials.join("\\") + "]", "g"),
 
-    replace: function (oldValue, newValue) {
-        var r = new RegExp(oldValue, "g"),
-            s = this.buffer.join("");
+        regexpEscape = function (s) {
+            return s.replace(regex, "\\$&");
+        };
 
-        this.buffer = [];
+        Bridge.regexpEscape = regexpEscape;
+    })();
 
-        if (arguments.length === 4) {
-            var startIndex = arguments[2],
-                count = arguments[3],
-                b = s.substr(startIndex, count);
-
-            this.checkLimits(s, startIndex, count);
-
-            this.buffer[0] = s.substring(0, startIndex);
-            this.buffer[1] = b.replace(r, newValue);
-            this.buffer[2] = s.substring(startIndex + count, s.length);
-        } else {
-            this.buffer[0] = s.replace(r, newValue);
-        }
-
-        return this;
-    },
-
-    checkLimits: function (value, startIndex, length) {
-        if (length < 0) {
-            throw new System.ArgumentOutOfRangeException("length", "must be non-negative");
-        }
-
-        if (startIndex < 0) {
-            throw new System.ArgumentOutOfRangeException("startIndex", "startIndex cannot be less than zero");
-        }
-
-        if (length > value.length - startIndex) {
-            throw new System.ArgumentOutOfRangeException("Index and length must refer to a location within the string");
-        }
-    }
-});
-
-// @source Text/BridgeRegex.js
-
-(function () {
-    var specials = [
-            // order matters for these
-              "-"
-            , "["
-            , "]"
-            // order doesn't matter for any of these
-            , "/"
-            , "{"
-            , "}"
-            , "("
-            , ")"
-            , "*"
-            , "+"
-            , "?"
-            , "."
-            , "\\"
-            , "^"
-            , "$"
-            , "|"
-    ],
-
-    regex = RegExp("[" + specials.join("\\") + "]", "g"),
-
-    regexpEscape = function (s) {
-        return s.replace(regex, "\\$&");
-    };
-
-    Bridge.regexpEscape = regexpEscape;
-})();
-
-    // @source Diagnostics.js
+// @source @Diagnostics.js
 
     System.Diagnostics.Debug = {
         writeln: function (text) {
@@ -8421,811 +8431,812 @@ Bridge.define("System.Text.StringBuilder", {
         }
     });
 
-// @source Array.js
-var array = {
-    toIndex: function (arr, indices) {
-        if (indices.length !== (arr.$s ? arr.$s.length : 1)) {
-            throw new System.ArgumentException("Invalid number of indices");
-        }
+// @source @Array.js
 
-        if (indices[0] < 0 || indices[0] >= (arr.$s ? arr.$s[0] : arr.length)) {
-            throw new System.ArgumentException("Index 0 out of range");
-        }
-
-        var idx = indices[0],
-            i;
-
-        if (arr.$s) {
-            for (i = 1; i < arr.$s.length; i++) {
-                if (indices[i] < 0 || indices[i] >= arr.$s[i]) {
-                    throw new System.ArgumentException("Index " + i + " out of range");
-                }
-
-                idx = idx * arr.$s[i] + indices[i];
+    var array = {
+        toIndex: function (arr, indices) {
+            if (indices.length !== (arr.$s ? arr.$s.length : 1)) {
+                throw new System.ArgumentException("Invalid number of indices");
             }
-        }
 
-        return idx;
-    },
+            if (indices[0] < 0 || indices[0] >= (arr.$s ? arr.$s[0] : arr.length)) {
+                throw new System.ArgumentException("Index 0 out of range");
+            }
 
-    $get: function (indices) {
-        var r = this[System.Array.toIndex(this, indices)];
+            var idx = indices[0],
+                i;
 
-        return typeof r !== "undefined" ? r : this.$v;
-    },
+            if (arr.$s) {
+                for (i = 1; i < arr.$s.length; i++) {
+                    if (indices[i] < 0 || indices[i] >= arr.$s[i]) {
+                        throw new System.ArgumentException("Index " + i + " out of range");
+                    }
 
-    get: function (arr) {
-        if (arguments.length < 2) {
-            throw new System.ArgumentNullException("indices");
-        }
+                    idx = idx * arr.$s[i] + indices[i];
+                }
+            }
 
-        var idx = Array.prototype.slice.call(arguments, 1);
+            return idx;
+        },
 
-        for (var i = 0; i < idx.length; i++) {
-            if (!Bridge.hasValue(idx[i])) {
+        $get: function (indices) {
+            var r = this[System.Array.toIndex(this, indices)];
+
+            return typeof r !== "undefined" ? r : this.$v;
+        },
+
+        get: function (arr) {
+            if (arguments.length < 2) {
                 throw new System.ArgumentNullException("indices");
             }
-        }
 
-        var r = arr[System.Array.toIndex(arr, idx)];
+            var idx = Array.prototype.slice.call(arguments, 1);
 
-        return typeof r !== "undefined" ? r : arr.$v;
-    },
-
-    $set: function (indices, value) {
-        this[System.Array.toIndex(this, Array.prototype.slice.call(indices, 0))] = value;
-    },
-
-    set: function (arr, value) {
-        var indices = Array.prototype.slice.call(arguments, 2);
-        arr[System.Array.toIndex(arr, indices)] = value;
-    },
-
-    getLength: function (arr, dimension) {
-        if (dimension < 0 || dimension >= (arr.$s ? arr.$s.length : 1)) {
-            throw new System.IndexOutOfRangeException();
-        }
-
-        return arr.$s ? arr.$s[dimension] : arr.length;
-    },
-
-    getRank: function (arr) {
-        return arr.$s ? arr.$s.length : 1;
-    },
-
-    getLower: function (arr, d) {
-        System.Array.getLength(arr, d);
-
-        return 0;
-    },
-
-    create: function (defvalue, initValues, sizes) {
-        var arr = [],
-            length = arguments.length > 2 ? 1 : 0,
-            i, s, v,
-            idx,
-            indices,
-            flatIdx;
-
-        arr.$v = defvalue;
-        arr.$s = [];
-        arr.get = System.Array.$get;
-        arr.set = System.Array.$set;
-
-        for (i = 2; i < arguments.length; i++) {
-            length *= arguments[i];
-            arr.$s[i - 2] = arguments[i];
-        }
-
-        arr.length = length;
-
-        if (initValues) {
-            for (i = 0; i < arr.length; i++) {
-                indices = [];
-                flatIdx = i;
-
-                for (s = arr.$s.length - 1; s >= 0; s--) {
-                    idx = flatIdx % arr.$s[s];
-                    indices.unshift(idx);
-                    flatIdx = Bridge.Int.div(flatIdx - idx, arr.$s[s]);
+            for (var i = 0; i < idx.length; i++) {
+                if (!Bridge.hasValue(idx[i])) {
+                    throw new System.ArgumentNullException("indices");
                 }
-
-                v = initValues;
-
-                for (idx = 0; idx < indices.length; idx++) {
-                    v = v[indices[idx]];
-                }
-
-                arr[i] = v;
             }
-        }
 
-        return arr;
-    },
+            var r = arr[System.Array.toIndex(arr, idx)];
 
-    init: function (size, value, addFn) {
-        var arr = new Array(size),
-            isFn = addFn !== true && Bridge.isFunction(value);
+            return typeof r !== "undefined" ? r : arr.$v;
+        },
 
-        for (var i = 0; i < size; i++) {
-            arr[i] = isFn ? value() : value;
-        }
+        $set: function (indices, value) {
+            this[System.Array.toIndex(this, Array.prototype.slice.call(indices, 0))] = value;
+        },
 
-        return arr;
-    },
+        set: function (arr, value) {
+            var indices = Array.prototype.slice.call(arguments, 2);
+            arr[System.Array.toIndex(arr, indices)] = value;
+        },
 
-    toEnumerable: function (array) {
-        return new Bridge.ArrayEnumerable(array);
-    },
+        getLength: function (arr, dimension) {
+            if (dimension < 0 || dimension >= (arr.$s ? arr.$s.length : 1)) {
+                throw new System.IndexOutOfRangeException();
+            }
 
-    toEnumerator: function (array, T) {
-        return new Bridge.ArrayEnumerator(array, T);
-    },
+            return arr.$s ? arr.$s[dimension] : arr.length;
+        },
 
-    _typedArrays: {
-        Float32Array: true,
-        Float64Array: true,
-        Int8Array: true,
-        Int16Array: true,
-        Int32Array: true,
-        Uint8Array: true,
-        Uint8ClampedArray: true,
-        Uint16Array: true,
-        Uint32Array: true
-    },
+        getRank: function (arr) {
+            return arr.$s ? arr.$s.length : 1;
+        },
 
-    is: function (obj, type) {
-        if (obj instanceof Bridge.ArrayEnumerator) {
-            if ((obj.constructor === type) || (obj instanceof type) ||
-                type === Bridge.ArrayEnumerator ||
-                type.$$name && System.String.startsWith(type.$$name, "System.Collections.IEnumerator") ||
-                type.$$name && System.String.startsWith(type.$$name, "System.Collections.Generic.IEnumerator")) {
+        getLower: function (arr, d) {
+            System.Array.getLength(arr, d);
+
+            return 0;
+        },
+
+        create: function (defvalue, initValues, sizes) {
+            var arr = [],
+                length = arguments.length > 2 ? 1 : 0,
+                i, s, v,
+                idx,
+                indices,
+                flatIdx;
+
+            arr.$v = defvalue;
+            arr.$s = [];
+            arr.get = System.Array.$get;
+            arr.set = System.Array.$set;
+
+            for (i = 2; i < arguments.length; i++) {
+                length *= arguments[i];
+                arr.$s[i - 2] = arguments[i];
+            }
+
+            arr.length = length;
+
+            if (initValues) {
+                for (i = 0; i < arr.length; i++) {
+                    indices = [];
+                    flatIdx = i;
+
+                    for (s = arr.$s.length - 1; s >= 0; s--) {
+                        idx = flatIdx % arr.$s[s];
+                        indices.unshift(idx);
+                        flatIdx = Bridge.Int.div(flatIdx - idx, arr.$s[s]);
+                    }
+
+                    v = initValues;
+
+                    for (idx = 0; idx < indices.length; idx++) {
+                        v = v[indices[idx]];
+                    }
+
+                    arr[i] = v;
+                }
+            }
+
+            return arr;
+        },
+
+        init: function (size, value, addFn) {
+            var arr = new Array(size),
+                isFn = addFn !== true && Bridge.isFunction(value);
+
+            for (var i = 0; i < size; i++) {
+                arr[i] = isFn ? value() : value;
+            }
+
+            return arr;
+        },
+
+        toEnumerable: function (array) {
+            return new Bridge.ArrayEnumerable(array);
+        },
+
+        toEnumerator: function (array, T) {
+            return new Bridge.ArrayEnumerator(array, T);
+        },
+
+        _typedArrays: {
+            Float32Array: true,
+            Float64Array: true,
+            Int8Array: true,
+            Int16Array: true,
+            Int32Array: true,
+            Uint8Array: true,
+            Uint8ClampedArray: true,
+            Uint16Array: true,
+            Uint32Array: true
+        },
+
+        is: function (obj, type) {
+            if (obj instanceof Bridge.ArrayEnumerator) {
+                if ((obj.constructor === type) || (obj instanceof type) ||
+                    type === Bridge.ArrayEnumerator ||
+                    type.$$name && System.String.startsWith(type.$$name, "System.Collections.IEnumerator") ||
+                    type.$$name && System.String.startsWith(type.$$name, "System.Collections.Generic.IEnumerator")) {
+                    return true;
+                }
+
+                return false;
+            }
+
+            if (!Bridge.isArray(obj)) {
+                return false;
+            }
+
+            if ((obj.constructor === type) || (obj instanceof type)) {
                 return true;
             }
 
-            return false;
-        }
-
-        if (!Bridge.isArray(obj)) {
-            return false;
-        }
-
-        if ((obj.constructor === type) || (obj instanceof type)) {
-            return true;
-        }
-
-        if (type === System.Collections.IEnumerable ||
-            type === System.Collections.ICollection ||
-            type === System.ICloneable ||
-            type.$$name && System.String.startsWith(type.$$name, "System.Collections.Generic.IEnumerable$1") ||
-            type.$$name && System.String.startsWith(type.$$name, "System.Collections.Generic.ICollection$1") ||
-            type.$$name && System.String.startsWith(type.$$name, "System.Collections.Generic.IList$1")) {
-            return true;
-        }
-
-        return !!System.Array._typedArrays[String.prototype.slice.call(Object.prototype.toString.call(obj), 8, -1)];
-    },
-
-    clone: function (arr) {
-        if (arr.length === 1) {
-            return [arr[0]];
-        } else {
-            return arr.slice(0);
-        }
-    },
-
-    getCount: function (obj, T) {
-        var name;
-        if (Bridge.isArray(obj)) {
-            return obj.length;
-        } else if (Bridge.isFunction(obj[name = "System$Collections$ICollection$getCount"])) {
-            return obj[name]();
-        } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getCount"])) {
-            return obj[name]();
-        } else if (Bridge.isFunction(obj.getCount)) {
-            return obj.getCount();
-        }
-
-        return 0;
-    },
-
-    add: function (obj, item, T) {
-        var name;
-        if (Bridge.isArray(obj)) {
-            obj.push(item);
-        } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add"])) {
-            obj[name](item);
-        } else if (Bridge.isFunction(obj.add)) {
-            obj.add(item);
-        }
-    },
-
-    clear: function (obj, T) {
-        var name;
-        if (Bridge.isArray(obj)) {
-            System.Array.fill(obj, T ? (T.getDefaultValue || Bridge.getDefaultValue(T)) : null, 0, obj.length);
-        } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear"])) {
-            obj[name]();
-        } else if (Bridge.isFunction(obj.clear)) {
-            obj.clear();
-        }
-    },
-
-    fill: function (dst, val, index, count) {
-        if (!Bridge.hasValue(dst)) {
-            throw new System.ArgumentNullException("dst");
-        }
-
-        if (index < 0 || count < 0 || (index + count) > dst.length) {
-            throw new System.IndexOutOfRangeException();
-        }
-
-        var isFn = Bridge.isFunction(val);
-
-        while (--count >= 0) {
-            dst[index + count] = isFn ? val() : val;
-        }
-    },
-
-    copy: function (src, spos, dst, dpos, len) {
-        if (spos < 0 || dpos < 0 || len < 0) {
-            throw new System.ArgumentOutOfRangeException();
-        }
-
-        if (len > (src.length - spos) || len > (dst.length - dpos)) {
-            throw new System.IndexOutOfRangeException();
-        }
-
-        if (spos < dpos && src === dst) {
-            while (--len >= 0) {
-                dst[dpos + len] = src[spos + len];
+            if (type === System.Collections.IEnumerable ||
+                type === System.Collections.ICollection ||
+                type === System.ICloneable ||
+                type.$$name && System.String.startsWith(type.$$name, "System.Collections.Generic.IEnumerable$1") ||
+                type.$$name && System.String.startsWith(type.$$name, "System.Collections.Generic.ICollection$1") ||
+                type.$$name && System.String.startsWith(type.$$name, "System.Collections.Generic.IList$1")) {
+                return true;
             }
-        } else {
+
+            return !!System.Array._typedArrays[String.prototype.slice.call(Object.prototype.toString.call(obj), 8, -1)];
+        },
+
+        clone: function (arr) {
+            if (arr.length === 1) {
+                return [arr[0]];
+            } else {
+                return arr.slice(0);
+            }
+        },
+
+        getCount: function (obj, T) {
+            var name;
+            if (Bridge.isArray(obj)) {
+                return obj.length;
+            } else if (Bridge.isFunction(obj[name = "System$Collections$ICollection$getCount"])) {
+                return obj[name]();
+            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getCount"])) {
+                return obj[name]();
+            } else if (Bridge.isFunction(obj.getCount)) {
+                return obj.getCount();
+            }
+
+            return 0;
+        },
+
+        add: function (obj, item, T) {
+            var name;
+            if (Bridge.isArray(obj)) {
+                obj.push(item);
+            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add"])) {
+                obj[name](item);
+            } else if (Bridge.isFunction(obj.add)) {
+                obj.add(item);
+            }
+        },
+
+        clear: function (obj, T) {
+            var name;
+            if (Bridge.isArray(obj)) {
+                System.Array.fill(obj, T ? (T.getDefaultValue || Bridge.getDefaultValue(T)) : null, 0, obj.length);
+            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear"])) {
+                obj[name]();
+            } else if (Bridge.isFunction(obj.clear)) {
+                obj.clear();
+            }
+        },
+
+        fill: function (dst, val, index, count) {
+            if (!Bridge.hasValue(dst)) {
+                throw new System.ArgumentNullException("dst");
+            }
+
+            if (index < 0 || count < 0 || (index + count) > dst.length) {
+                throw new System.IndexOutOfRangeException();
+            }
+
+            var isFn = Bridge.isFunction(val);
+
+            while (--count >= 0) {
+                dst[index + count] = isFn ? val() : val;
+            }
+        },
+
+        copy: function (src, spos, dst, dpos, len) {
+            if (spos < 0 || dpos < 0 || len < 0) {
+                throw new System.ArgumentOutOfRangeException();
+            }
+
+            if (len > (src.length - spos) || len > (dst.length - dpos)) {
+                throw new System.IndexOutOfRangeException();
+            }
+
+            if (spos < dpos && src === dst) {
+                while (--len >= 0) {
+                    dst[dpos + len] = src[spos + len];
+                }
+            } else {
+                for (var i = 0; i < len; i++) {
+                    dst[dpos + i] = src[spos + i];
+                }
+            }
+        },
+
+        indexOf: function (arr, item, startIndex, count, T) {
+            var name;
+            if (Bridge.isArray(arr)) {
+                var i,
+                    el,
+                    endIndex;
+
+                startIndex = startIndex || 0;
+                count = count || arr.length;
+                endIndex = startIndex + count;
+
+                for (i = startIndex; i < endIndex; i++) {
+                    el = arr[i];
+
+                    if (el === item || System.Collections.Generic.EqualityComparer$1.$default.equals2(el, item)) {
+                        return i;
+                    }
+                }
+            } else if (T && Bridge.isFunction(arr[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf"])) {
+                return arr[name](item);
+            } else if (Bridge.isFunction(arr.indexOf)) {
+                return arr.indexOf(item);
+            }
+
+            return -1;
+        },
+
+        contains: function (obj, item, T) {
+            var name;
+            if (Bridge.isArray(obj)) {
+                return System.Array.indexOf(obj, item) > -1;
+            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains"])) {
+                return obj[name](item);
+            } else if (Bridge.isFunction(obj.contains)) {
+                return obj.contains(item);
+            }
+
+            return false;
+        },
+
+        remove: function (obj, item, T) {
+            var name;
+            if (Bridge.isArray(obj)) {
+                var index = System.Array.indexOf(obj, item);
+
+                if (index > -1) {
+                    obj.splice(index, 1);
+
+                    return true;
+                }
+            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$remove"])) {
+                return obj[name](item);
+            } else if (Bridge.isFunction(obj.remove)) {
+                return obj.remove(item);
+            }
+
+            return false;
+        },
+
+        insert: function (obj, index, item, T) {
+            var name;
+            if (Bridge.isArray(obj)) {
+                obj.splice(index, 0, item);
+            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert"])) {
+                obj[name](index, item);
+            } else if (Bridge.isFunction(obj.insert)) {
+                obj.insert(index, item);
+            }
+        },
+
+        removeAt: function (obj, index, T) {
+            var name;
+            if (Bridge.isArray(obj)) {
+                obj.splice(index, 1);
+            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt"])) {
+                obj[name](index);
+            } else if (Bridge.isFunction(obj.removeAt)) {
+                obj.removeAt(index);
+            }
+        },
+
+        getItem: function (obj, idx, T) {
+            var name;
+            if (Bridge.isArray(obj)) {
+                return obj[idx];
+            } else if (Bridge.isFunction(obj.get)) {
+                return obj.get(idx);
+            } else if (Bridge.isFunction(obj.getItem)) {
+                return obj.getItem(idx);
+            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem"])) {
+                return obj[name](idx);
+            } else if (Bridge.isFunction(obj.get_Item)) {
+                return obj.get_Item(idx);
+            }
+        },
+
+        setItem: function (obj, idx, value, T) {
+            var name;
+            if (Bridge.isArray(obj)) {
+                obj[idx] = value;
+            } else if (Bridge.isFunction(obj.set)) {
+                obj.set(idx, value);
+            } else if (Bridge.isFunction(obj.setItem)) {
+                obj.setItem(idx, value);
+            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem"])) {
+                return obj[name](idx, value);
+            } else if (Bridge.isFunction(obj.set_Item)) {
+                obj.set_Item(idx, value);
+            }
+        },
+
+        resize: function (arr, newSize, val) {
+            if (newSize < 0) {
+                throw new System.ArgumentOutOfRangeException("newSize", null, null, newSize);
+            }
+
+            var oldSize = 0,
+                isFn = Bridge.isFunction(val),
+                ref = arr.v;
+
+            if (!ref) {
+                ref = new Array(newSize);
+            } else {
+                oldSize = ref.length;
+                ref.length = newSize;
+            }
+
+            for (var i = oldSize; i < newSize; i++) {
+                ref[i] = isFn ? val() : val;
+            }
+
+            arr.v = ref;
+        },
+
+        reverse: function (arr, index, length) {
+            if (!array) {
+                throw new System.ArgumentNullException("arr");
+            }
+
+            if (!index && index !== 0) {
+                index = 0;
+                length = arr.length;
+            }
+
+            if (index < 0 || length < 0) {
+                throw new System.ArgumentOutOfRangeException((index < 0 ? "index" : "length"), "Non-negative number required.");
+            }
+
+            if ((array.length - index) < length) {
+                throw new System.ArgumentException("Offset and length were out of bounds for the array or count is greater than the number of elements from index to the end of the source collection.");
+            }
+
+            if (System.Array.getRank(arr) !== 1) {
+                throw new System.Exception("Only single dimension arrays are supported here.");
+            }
+
+            var i = index,
+                j = index + length - 1;
+
+            while (i < j) {
+                var temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+                i++;
+                j--;
+            }
+        },
+
+        binarySearch: function (array, index, length, value, comparer) {
+            if (!array) {
+                throw new System.ArgumentNullException("array");
+            }
+
+            var lb = 0;
+
+            if (index < lb || length < 0) {
+                throw new System.ArgumentOutOfRangeException(index < lb ? "index" : "length", "Non-negative number required.");
+            }
+
+            if (array.length - (index - lb) < length) {
+                throw new System.ArgumentException("Offset and length were out of bounds for the array or count is greater than the number of elements from index to the end of the source collection.");
+            }
+
+            if (System.Array.getRank(array) !== 1) {
+                throw new System.RankException("Only single dimensional arrays are supported for the requested action.");
+            }
+
+            if (!comparer) {
+                comparer = System.Collections.Generic.Comparer$1.$default;
+            }
+
+            var lo = index,
+                hi = index + length - 1,
+                i,
+                c;
+
+            while (lo <= hi) {
+                i = lo + ((hi - lo) >> 1);
+
+                try {
+                    c = comparer.compare(array[i], value);
+                } catch (e) {
+                    throw new System.InvalidOperationException("Failed to compare two elements in the array.", e);
+                }
+
+                if (c === 0) {
+                    return i;
+                }
+
+                if (c < 0) {
+                    lo = i + 1;
+                } else {
+                    hi = i - 1;
+                }
+            }
+
+            return ~lo;
+        },
+
+        sort: function (array, index, length, comparer) {
+            if (!array) {
+                throw new System.ArgumentNullException("array");
+            }
+
+            if (arguments.length === 2 && typeof index === "object") {
+                comparer = index;
+                index = null;
+            }
+
+            if (!Bridge.isNumber(index)) {
+                index = 0;
+            }
+
+            if (!Bridge.isNumber(length)) {
+                length = array.length;
+            }
+
+            if (!comparer) {
+                comparer = System.Collections.Generic.Comparer$1.$default;
+            }
+
+            if (index === 0 && length === array.length) {
+                array.sort(Bridge.fn.bind(comparer, comparer.compare));
+            } else {
+                var newarray = array.slice(index, index + length);
+
+                newarray.sort(Bridge.fn.bind(comparer, comparer.compare));
+
+                for (var i = index; i < (index + length) ; i++) {
+                    array[i] = newarray[i - index];
+                }
+            }
+        },
+
+        min: function (arr, minValue) {
+            var min = arr[0],
+                len = arr.length;
+
             for (var i = 0; i < len; i++) {
-                dst[dpos + i] = src[spos + i];
+                if ((arr[i] < min || min < minValue) && !(arr[i] < minValue)) {
+                    min = arr[i];
+                }
             }
-        }
-    },
+            return min;
+        },
 
-    indexOf: function (arr, item, startIndex, count, T) {
-        var name;
-        if (Bridge.isArray(arr)) {
-            var i,
-                el,
-                endIndex;
+        max: function (arr, maxValue) {
+            var max = arr[0],
+                len = arr.length;
 
-            startIndex = startIndex || 0;
-            count = count || arr.length;
-            endIndex = startIndex + count;
+            for (var i = 0; i < len; i++) {
+                if ((arr[i] > max || max > maxValue) && !(arr[i] > maxValue)) {
+                    max = arr[i];
+                }
+            }
 
-            for (i = startIndex; i < endIndex; i++) {
-                el = arr[i];
+            return max;
+        },
 
-                if (el === item || System.Collections.Generic.EqualityComparer$1.$default.equals2(el, item)) {
+        addRange: function (arr, items) {
+            if (Bridge.isArray(items)) {
+                arr.push.apply(arr, items);
+            } else {
+                var e = Bridge.getEnumerator(items);
+
+                try {
+                    while (e.moveNext()) {
+                        arr.push(e.getCurrent());
+                    }
+                } finally {
+                    if (Bridge.is(e, System.IDisposable)) {
+                        e.dispose();
+                    }
+                }
+            }
+        },
+
+        convertAll: function (array, converter) {
+            if (!Bridge.hasValue(array)) {
+                throw new System.ArgumentNullException("array");
+            }
+
+            if (!Bridge.hasValue(converter)) {
+                throw new System.ArgumentNullException("converter");
+            }
+
+            var array2 = array.map(converter);
+
+            return array2;
+        },
+
+        find: function (T, array, match) {
+            if (!Bridge.hasValue(array)) {
+                throw new System.ArgumentNullException("array");
+            }
+
+            if (!Bridge.hasValue(match)) {
+                throw new System.ArgumentNullException("match");
+            }
+
+            for (var i = 0; i < array.length; i++) {
+                if (match(array[i])) {
+                    return array[i];
+                }
+            }
+
+            return Bridge.getDefaultValue(T);
+        },
+
+        findAll: function (array, match) {
+            if (!Bridge.hasValue(array)) {
+                throw new System.ArgumentNullException("array");
+            }
+
+            if (!Bridge.hasValue(match)) {
+                throw new System.ArgumentNullException("match");
+            }
+
+            var list = [];
+
+            for (var i = 0; i < array.length; i++) {
+                if (match(array[i])) {
+                    list.push(array[i]);
+                }
+            }
+
+            return list;
+        },
+
+        findIndex: function (array, startIndex, count, match) {
+            if (!Bridge.hasValue(array)) {
+                throw new System.ArgumentNullException("array");
+            }
+
+            if (arguments.length === 2) {
+                match = startIndex;
+                startIndex = 0;
+                count = array.length;
+            } else if (arguments.length === 3) {
+                match = count;
+                count = array.length - startIndex;
+            }
+
+            if (startIndex < 0 || startIndex > array.length) {
+                throw new System.ArgumentOutOfRangeException("startIndex");
+            }
+
+            if (count < 0 || startIndex > array.length - count) {
+                throw new System.ArgumentOutOfRangeException("count");
+            }
+
+            if (!Bridge.hasValue(match)) {
+                throw new System.ArgumentNullException("match");
+            }
+
+            var endIndex = startIndex + count;
+
+            for (var i = startIndex; i < endIndex; i++) {
+                if (match(array[i])) {
                     return i;
                 }
             }
-        } else if (T && Bridge.isFunction(arr[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf"])) {
-            return arr[name](item);
-        } else if (Bridge.isFunction(arr.indexOf)) {
-            return arr.indexOf(item);
-        }
 
-        return -1;
-    },
+            return -1;
+        },
 
-    contains: function (obj, item, T) {
-        var name;
-        if (Bridge.isArray(obj)) {
-            return System.Array.indexOf(obj, item) > -1;
-        } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains"])) {
-            return obj[name](item);
-        } else if (Bridge.isFunction(obj.contains)) {
-            return obj.contains(item);
-        }
-
-        return false;
-    },
-
-    remove: function (obj, item, T) {
-        var name;
-        if (Bridge.isArray(obj)) {
-            var index = System.Array.indexOf(obj, item);
-
-            if (index > -1) {
-                obj.splice(index, 1);
-
-                return true;
-            }
-        } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$remove"])) {
-            return obj[name](item);
-        } else if (Bridge.isFunction(obj.remove)) {
-            return obj.remove(item);
-        }
-
-        return false;
-    },
-
-    insert: function (obj, index, item, T) {
-        var name;
-        if (Bridge.isArray(obj)) {
-            obj.splice(index, 0, item);
-        } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert"])) {
-            obj[name](index, item);
-        } else if (Bridge.isFunction(obj.insert)) {
-            obj.insert(index, item);
-        }
-    },
-
-    removeAt: function (obj, index, T) {
-        var name;
-        if (Bridge.isArray(obj)) {
-            obj.splice(index, 1);
-        } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt"])) {
-            obj[name](index);
-        } else if (Bridge.isFunction(obj.removeAt)) {
-            obj.removeAt(index);
-        }
-    },
-
-    getItem: function (obj, idx, T) {
-        var name;
-        if (Bridge.isArray(obj)) {
-            return obj[idx];
-        } else if (Bridge.isFunction(obj.get)) {
-            return obj.get(idx);
-        } else if (Bridge.isFunction(obj.getItem)) {
-            return obj.getItem(idx);
-        } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem"])) {
-            return obj[name](idx);
-        } else if (Bridge.isFunction(obj.get_Item)) {
-            return obj.get_Item(idx);
-        }
-    },
-
-    setItem: function (obj, idx, value, T) {
-        var name;
-        if (Bridge.isArray(obj)) {
-            obj[idx] = value;
-        } else if (Bridge.isFunction(obj.set)) {
-            obj.set(idx, value);
-        } else if (Bridge.isFunction(obj.setItem)) {
-            obj.setItem(idx, value);
-        } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem"])) {
-            return obj[name](idx, value);
-        } else if (Bridge.isFunction(obj.set_Item)) {
-            obj.set_Item(idx, value);
-        }
-    },
-
-    resize: function (arr, newSize, val) {
-        if (newSize < 0) {
-            throw new System.ArgumentOutOfRangeException("newSize", null, null, newSize);
-        }
-
-        var oldSize = 0,
-            isFn = Bridge.isFunction(val),
-            ref = arr.v;
-
-        if (!ref) {
-            ref = new Array(newSize);
-        } else {
-            oldSize = ref.length;
-            ref.length = newSize;
-        }
-
-        for (var i = oldSize; i < newSize; i++) {
-            ref[i] = isFn ? val() : val;
-        }
-
-        arr.v = ref;
-    },
-
-    reverse: function (arr, index, length) {
-        if (!array) {
-            throw new System.ArgumentNullException("arr");
-        }
-
-        if (!index && index !== 0) {
-            index = 0;
-            length = arr.length;
-        }
-
-        if (index < 0 || length < 0) {
-            throw new System.ArgumentOutOfRangeException((index < 0 ? "index" : "length"), "Non-negative number required.");
-        }
-
-        if ((array.length - index) < length) {
-            throw new System.ArgumentException("Offset and length were out of bounds for the array or count is greater than the number of elements from index to the end of the source collection.");
-        }
-
-        if (System.Array.getRank(arr) !== 1) {
-            throw new System.Exception("Only single dimension arrays are supported here.");
-        }
-
-        var i = index,
-            j = index + length - 1;
-
-        while (i < j) {
-            var temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
-            i++;
-            j--;
-        }
-    },
-
-    binarySearch: function (array, index, length, value, comparer) {
-        if (!array) {
-            throw new System.ArgumentNullException("array");
-        }
-
-        var lb = 0;
-
-        if (index < lb || length < 0) {
-            throw new System.ArgumentOutOfRangeException(index < lb ? "index" : "length", "Non-negative number required.");
-        }
-
-        if (array.length - (index - lb) < length) {
-            throw new System.ArgumentException("Offset and length were out of bounds for the array or count is greater than the number of elements from index to the end of the source collection.");
-        }
-
-        if (System.Array.getRank(array) !== 1) {
-            throw new System.RankException("Only single dimensional arrays are supported for the requested action.");
-        }
-
-        if (!comparer) {
-            comparer = System.Collections.Generic.Comparer$1.$default;
-        }
-
-        var lo = index,
-            hi = index + length - 1,
-            i,
-            c;
-
-        while (lo <= hi) {
-            i = lo + ((hi - lo) >> 1);
-
-            try {
-                c = comparer.compare(array[i], value);
-            } catch (e) {
-                throw new System.InvalidOperationException("Failed to compare two elements in the array.", e);
+        findLast: function (T, array, match) {
+            if (!Bridge.hasValue(array)) {
+                throw new System.ArgumentNullException("array");
             }
 
-            if (c === 0) {
-                return i;
+            if (!Bridge.hasValue(match)) {
+                throw new System.ArgumentNullException("match");
             }
 
-            if (c < 0) {
-                lo = i + 1;
+            for (var i = array.length - 1; i >= 0; i--) {
+                if (match(array[i])) {
+                    return array[i];
+                }
+            }
+
+            return Bridge.getDefaultValue(T);
+        },
+
+        findLastIndex: function (array, startIndex, count, match) {
+            if (!Bridge.hasValue(array)) {
+                throw new System.ArgumentNullException("array");
+            }
+
+            if (arguments.length === 2) {
+                match = startIndex;
+                startIndex = array.length - 1;
+                count = array.length;
+            } else if (arguments.length === 3) {
+                match = count;
+                count = startIndex + 1;
+            }
+
+            if (!Bridge.hasValue(match)) {
+                throw new System.ArgumentNullException("match");
+            }
+
+            if (array.length === 0) {
+                if (startIndex !== -1) {
+                    throw new System.ArgumentOutOfRangeException("startIndex");
+                }
             } else {
-                hi = i - 1;
-            }
-        }
-
-        return ~lo;
-    },
-
-    sort: function (array, index, length, comparer) {
-        if (!array) {
-            throw new System.ArgumentNullException("array");
-        }
-
-        if (arguments.length === 2 && typeof index === "object") {
-            comparer = index;
-            index = null;
-        }
-
-        if (!Bridge.isNumber(index)) {
-            index = 0;
-        }
-
-        if (!Bridge.isNumber(length)) {
-            length = array.length;
-        }
-
-        if (!comparer) {
-            comparer = System.Collections.Generic.Comparer$1.$default;
-        }
-
-        if (index === 0 && length === array.length) {
-            array.sort(Bridge.fn.bind(comparer, comparer.compare));
-        } else {
-            var newarray = array.slice(index, index + length);
-
-            newarray.sort(Bridge.fn.bind(comparer, comparer.compare));
-
-            for (var i = index; i < (index + length) ; i++) {
-                array[i] = newarray[i - index];
-            }
-        }
-    },
-
-    min: function (arr, minValue) {
-        var min = arr[0],
-            len = arr.length;
-
-        for (var i = 0; i < len; i++) {
-            if ((arr[i] < min || min < minValue) && !(arr[i] < minValue)) {
-                min = arr[i];
-            }
-        }
-        return min;
-    },
-
-    max: function (arr, maxValue) {
-        var max = arr[0],
-            len = arr.length;
-
-        for (var i = 0; i < len; i++) {
-            if ((arr[i] > max || max > maxValue) && !(arr[i] > maxValue)) {
-                max = arr[i];
-            }
-        }
-
-        return max;
-    },
-
-    addRange: function (arr, items) {
-        if (Bridge.isArray(items)) {
-            arr.push.apply(arr, items);
-        } else {
-            var e = Bridge.getEnumerator(items);
-
-            try {
-                while (e.moveNext()) {
-                    arr.push(e.getCurrent());
-                }
-            } finally {
-                if (Bridge.is(e, System.IDisposable)) {
-                    e.dispose();
+                if (startIndex < 0 || startIndex >= array.length) {
+                    throw new System.ArgumentOutOfRangeException("startIndex");
                 }
             }
-        }
-    },
 
-    convertAll: function (array, converter) {
-        if (!Bridge.hasValue(array)) {
-            throw new System.ArgumentNullException("array");
-        }
-
-        if (!Bridge.hasValue(converter)) {
-            throw new System.ArgumentNullException("converter");
-        }
-
-        var array2 = array.map(converter);
-
-        return array2;
-    },
-
-    find: function (T, array, match) {
-        if (!Bridge.hasValue(array)) {
-            throw new System.ArgumentNullException("array");
-        }
-
-        if (!Bridge.hasValue(match)) {
-            throw new System.ArgumentNullException("match");
-        }
-
-        for (var i = 0; i < array.length; i++) {
-            if (match(array[i])) {
-                return array[i];
+            if (count < 0 || startIndex - count + 1 < 0) {
+                throw new System.ArgumentOutOfRangeException("count");
             }
-        }
 
-        return Bridge.getDefaultValue(T);
-    },
+            var endIndex = startIndex - count;
 
-    findAll: function (array, match) {
-        if (!Bridge.hasValue(array)) {
-            throw new System.ArgumentNullException("array");
-        }
-
-        if (!Bridge.hasValue(match)) {
-            throw new System.ArgumentNullException("match");
-        }
-
-        var list = [];
-
-        for (var i = 0; i < array.length; i++) {
-            if (match(array[i])) {
-                list.push(array[i]);
+            for (var i = startIndex; i > endIndex; i--) {
+                if (match(array[i])) {
+                    return i;
+                }
             }
-        }
 
-        return list;
-    },
+            return -1;
+        },
 
-    findIndex: function (array, startIndex, count, match) {
-        if (!Bridge.hasValue(array)) {
-            throw new System.ArgumentNullException("array");
-        }
-
-        if (arguments.length === 2) {
-            match = startIndex;
-            startIndex = 0;
-            count = array.length;
-        } else if (arguments.length === 3) {
-            match = count;
-            count = array.length - startIndex;
-        }
-
-        if (startIndex < 0 || startIndex > array.length) {
-            throw new System.ArgumentOutOfRangeException("startIndex");
-        }
-
-        if (count < 0 || startIndex > array.length - count) {
-            throw new System.ArgumentOutOfRangeException("count");
-        }
-
-        if (!Bridge.hasValue(match)) {
-            throw new System.ArgumentNullException("match");
-        }
-
-        var endIndex = startIndex + count;
-
-        for (var i = startIndex; i < endIndex; i++) {
-            if (match(array[i])) {
-                return i;
+        forEach: function (array, action) {
+            if (!Bridge.hasValue(array)) {
+                throw new System.ArgumentNullException("array");
             }
-        }
 
-        return -1;
-    },
-
-    findLast: function (T, array, match) {
-        if (!Bridge.hasValue(array)) {
-            throw new System.ArgumentNullException("array");
-        }
-
-        if (!Bridge.hasValue(match)) {
-            throw new System.ArgumentNullException("match");
-        }
-
-        for (var i = array.length - 1; i >= 0; i--) {
-            if (match(array[i])) {
-                return array[i];
+            if (!Bridge.hasValue(action)) {
+                throw new System.ArgumentNullException("action");
             }
-        }
 
-        return Bridge.getDefaultValue(T);
-    },
-
-    findLastIndex: function (array, startIndex, count, match) {
-        if (!Bridge.hasValue(array)) {
-            throw new System.ArgumentNullException("array");
-        }
-
-        if (arguments.length === 2) {
-            match = startIndex;
-            startIndex = array.length - 1;
-            count = array.length;
-        } else if (arguments.length === 3) {
-            match = count;
-            count = startIndex + 1;
-        }
-
-        if (!Bridge.hasValue(match)) {
-            throw new System.ArgumentNullException("match");
-        }
-
-        if (array.length === 0) {
-            if (startIndex !== -1) {
-                throw new System.ArgumentOutOfRangeException("startIndex");
+            for (var i = 0; i < array.length; i++) {
+                action(array[i], i, array);
             }
-        } else {
-            if (startIndex < 0 || startIndex >= array.length) {
-                throw new System.ArgumentOutOfRangeException("startIndex");
+        },
+
+        indexOfT: function (array, value, startIndex, count) {
+            if (!Bridge.hasValue(array)) {
+                throw new System.ArgumentNullException("array");
             }
-        }
 
-        if (count < 0 || startIndex - count + 1 < 0) {
-            throw new System.ArgumentOutOfRangeException("count");
-        }
-
-        var endIndex = startIndex - count;
-
-        for (var i = startIndex; i > endIndex; i--) {
-            if (match(array[i])) {
-                return i;
+            if (arguments.length === 2) {
+                startIndex = 0;
+                count = array.length;
+            } else if (arguments.length === 3) {
+                count = array.length - startIndex;
             }
-        }
 
-        return -1;
-    },
-
-    forEach: function (array, action) {
-        if (!Bridge.hasValue(array)) {
-            throw new System.ArgumentNullException("array");
-        }
-
-        if (!Bridge.hasValue(action)) {
-            throw new System.ArgumentNullException("action");
-        }
-
-        for (var i = 0; i < array.length; i++) {
-            action(array[i], i, array);
-        }
-    },
-
-    indexOfT: function (array, value, startIndex, count) {
-        if (!Bridge.hasValue(array)) {
-            throw new System.ArgumentNullException("array");
-        }
-
-        if (arguments.length === 2) {
-            startIndex = 0;
-            count = array.length;
-        } else if (arguments.length === 3) {
-            count = array.length - startIndex;
-        }
-
-        if (startIndex < 0 || (startIndex >= array.length && array.length > 0)) {
-            throw new System.ArgumentOutOfRangeException("startIndex", "out of range");
-        }
-
-        if (count < 0 || count > array.length - startIndex) {
-            throw new System.ArgumentOutOfRangeException("count", "out of range");
-        }
-
-        return System.Array.indexOf(array, value, startIndex, count);
-    },
-
-    lastIndexOfT: function (array, value, startIndex, count) {
-        if (!Bridge.hasValue(array)) {
-            throw new System.ArgumentNullException("array");
-        }
-
-        if (arguments.length === 2) {
-            startIndex = array.length - 1;
-            count = array.length;
-        } else if (arguments.length === 3) {
-            count = (array.length === 0) ? 0 : (startIndex + 1);
-        }
-
-        if (startIndex < 0 || (startIndex >= array.length && array.length > 0)) {
-            throw new System.ArgumentOutOfRangeException("startIndex", "out of range");
-        }
-
-        if (count < 0 || startIndex - count + 1 < 0) {
-            throw new System.ArgumentOutOfRangeException("count", "out of range");
-        }
-
-        var endIndex = startIndex - count + 1;
-
-        for (var i = startIndex; i >= endIndex; i--) {
-            var el = array[i];
-
-            if (el === value || System.Collections.Generic.EqualityComparer$1.$default.equals2(el, value)) {
-                return i;
+            if (startIndex < 0 || (startIndex >= array.length && array.length > 0)) {
+                throw new System.ArgumentOutOfRangeException("startIndex", "out of range");
             }
-        }
 
-        return -1;
-    },
-
-    trueForAll: function (array, match) {
-        if (!Bridge.hasValue(array)) {
-            throw new System.ArgumentNullException("array");
-        }
-
-        if (!Bridge.hasValue(match)) {
-            throw new System.ArgumentNullException("match");
-        }
-
-        for (var i = 0; i < array.length; i++) {
-            if (!match(array[i])) {
-                return false;
+            if (count < 0 || count > array.length - startIndex) {
+                throw new System.ArgumentOutOfRangeException("count", "out of range");
             }
+
+            return System.Array.indexOf(array, value, startIndex, count);
+        },
+
+        lastIndexOfT: function (array, value, startIndex, count) {
+            if (!Bridge.hasValue(array)) {
+                throw new System.ArgumentNullException("array");
+            }
+
+            if (arguments.length === 2) {
+                startIndex = array.length - 1;
+                count = array.length;
+            } else if (arguments.length === 3) {
+                count = (array.length === 0) ? 0 : (startIndex + 1);
+            }
+
+            if (startIndex < 0 || (startIndex >= array.length && array.length > 0)) {
+                throw new System.ArgumentOutOfRangeException("startIndex", "out of range");
+            }
+
+            if (count < 0 || startIndex - count + 1 < 0) {
+                throw new System.ArgumentOutOfRangeException("count", "out of range");
+            }
+
+            var endIndex = startIndex - count + 1;
+
+            for (var i = startIndex; i >= endIndex; i--) {
+                var el = array[i];
+
+                if (el === value || System.Collections.Generic.EqualityComparer$1.$default.equals2(el, value)) {
+                    return i;
+                }
+            }
+
+            return -1;
+        },
+
+        trueForAll: function (array, match) {
+            if (!Bridge.hasValue(array)) {
+                throw new System.ArgumentNullException("array");
+            }
+
+            if (!Bridge.hasValue(match)) {
+                throw new System.ArgumentNullException("match");
+            }
+
+            for (var i = 0; i < array.length; i++) {
+                if (!match(array[i])) {
+                    return false;
+                }
+            }
+
+            return true;
         }
+    };
 
-        return true;
-    }
-};
+    System.Array = array;
 
-System.Array = array;
-
-    // @source ArraySegment.js
+// @source @ArraySegment.js
 
     Bridge.define('System.ArraySegment', {
         constructor: function (array, offset, count) {
@@ -9248,878 +9259,880 @@ System.Array = array;
         }
     });
 
-// @source /Collections/Interfaces.js
+// @source @Interfaces.js
 
-Bridge.define('System.Collections.IEnumerable', {
-    $kind: "interface"
-});
-Bridge.define('System.Collections.IEnumerator', {
-    $kind: "interface"
-});
-Bridge.define('System.Collections.IEqualityComparer', {
-    $kind: "interface"
-});
-Bridge.define('System.Collections.ICollection', {
-    inherits: [System.Collections.IEnumerable],
-    $kind: "interface"
-});
-
-Bridge.define('System.Collections.Generic.IEnumerator$1', function (T) {
-    return {
-        inherits: [System.Collections.IEnumerator],
+    Bridge.define('System.Collections.IEnumerable', {
         $kind: "interface"
-    };
-});
-
-Bridge.define('System.Collections.Generic.IEnumerable$1', function (T) {
-    return {
+    });
+    Bridge.define('System.Collections.IEnumerator', {
+        $kind: "interface"
+    });
+    Bridge.define('System.Collections.IEqualityComparer', {
+        $kind: "interface"
+    });
+    Bridge.define('System.Collections.ICollection', {
         inherits: [System.Collections.IEnumerable],
         $kind: "interface"
-    };
-});
+    });
 
-Bridge.define('System.Collections.Generic.ICollection$1', function (T) {
-    return {
-        inherits: [System.Collections.Generic.IEnumerable$1(T)],
-        $kind: "interface"
-    };
-});
+    Bridge.define('System.Collections.Generic.IEnumerator$1', function (T) {
+        return {
+            inherits: [System.Collections.IEnumerator],
+            $kind: "interface"
+        };
+    });
 
-Bridge.define('System.Collections.Generic.IEqualityComparer$1', function (T) {
-    return {
-        $kind: "interface"
-    };
-});
+    Bridge.define('System.Collections.Generic.IEnumerable$1', function (T) {
+        return {
+            inherits: [System.Collections.IEnumerable],
+            $kind: "interface"
+        };
+    });
 
-Bridge.define('System.Collections.Generic.IDictionary$2', function (TKey, TValue) {
-    return {
-        inherits: [System.Collections.Generic.IEnumerable$1(System.Collections.Generic.KeyValuePair$2(TKey, TValue))],
-        $kind: "interface"
-    };
-});
+    Bridge.define('System.Collections.Generic.ICollection$1', function (T) {
+        return {
+            inherits: [System.Collections.Generic.IEnumerable$1(T)],
+            $kind: "interface"
+        };
+    });
 
-Bridge.define('System.Collections.Generic.IList$1', function (T) {
-    return {
-        inherits: [System.Collections.Generic.ICollection$1(T)],
-        $kind: "interface"
-    };
-});
+    Bridge.define('System.Collections.Generic.IEqualityComparer$1', function (T) {
+        return {
+            $kind: "interface"
+        };
+    });
 
-Bridge.define('System.Collections.Generic.IComparer$1', function (T) {
-    return {
-        $kind: "interface"
-    };
-});
+    Bridge.define('System.Collections.Generic.IDictionary$2', function (TKey, TValue) {
+        return {
+            inherits: [System.Collections.Generic.IEnumerable$1(System.Collections.Generic.KeyValuePair$2(TKey, TValue))],
+            $kind: "interface"
+        };
+    });
 
-Bridge.define('System.Collections.Generic.ISet$1', function (T) {
-    return {
-        inherits: [System.Collections.Generic.ICollection$1(T)],
-        $kind: "interface"
-    };
-});
+    Bridge.define('System.Collections.Generic.IList$1', function (T) {
+        return {
+            inherits: [System.Collections.Generic.ICollection$1(T)],
+            $kind: "interface"
+        };
+    });
 
-// @source /Collections/CustomEnumerator.js
+    Bridge.define('System.Collections.Generic.IComparer$1', function (T) {
+        return {
+            $kind: "interface"
+        };
+    });
 
-Bridge.define('Bridge.CustomEnumerator', {
-    inherits: [System.Collections.IEnumerator],
+    Bridge.define('System.Collections.Generic.ISet$1', function (T) {
+        return {
+            inherits: [System.Collections.Generic.ICollection$1(T)],
+            $kind: "interface"
+        };
+    });
 
-    config: {
-        alias: [
-            "getCurrent", "System$Collections$IEnumerator$getCurrent",
-            "moveNext", "System$Collections$IEnumerator$moveNext",
-            "reset", "System$Collections$IEnumerator$reset"
-        ]
-    },
+// @source @CustomEnumerator.js
 
-    constructor: function (moveNext, getCurrent, reset, dispose, scope) {
-		this.$initialize();
-        this.$moveNext = moveNext;
-        this.$getCurrent = getCurrent;
-        this.$dispose = dispose;
-        this.$reset = reset;
-        this.scope = scope;
-    },
-
-    moveNext: function () {
-        try {
-            return this.$moveNext.call(this.scope);
-        }
-        catch (ex) {
-            this.dispose.call(this.scope);
-
-            throw ex;
-        }
-    },
-
-    getCurrent: function () {
-        return this.$getCurrent.call(this.scope);
-    },
-
-    getCurrent$1: function () {
-        return this.$getCurrent.call(this.scope);
-    },
-
-    reset: function () {
-        if (this.$reset) {
-            this.$reset.call(this.scope);
-        }
-    },
-
-    dispose: function () {
-        if (this.$dispose) {
-            this.$dispose.call(this.scope);
-        }
-    }
-});
-
-// @source /Collections/ArrayEnumerator.js
-
-Bridge.define('Bridge.ArrayEnumerator', {
-    inherits: [System.Collections.IEnumerator, System.IDisposable],
-
-    config: {
-        alias: [
-            "getCurrent", "System$Collections$IEnumerator$getCurrent",
-            "moveNext", "System$Collections$IEnumerator$moveNext",
-            "reset", "System$Collections$IEnumerator$reset",
-            "dispose", "System$IDisposable$dispose"
-        ]
-    },
-
-    constructor: function (array, T) {
-        this.$initialize();
-        this.array = array;
-        this.reset();
-
-        if (T) {
-            this["System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$getCurrent$1"] = this.getCurrent;
-        }
-    },
-
-    moveNext: function () {
-        this.index++;
-
-        return this.index < this.array.length;
-    },
-
-    getCurrent: function () {
-        return this.array[this.index];
-    },
-
-    getCurrent$1: function () {
-        return this.array[this.index];
-    },
-
-    reset: function () {
-        this.index = -1;
-    },
-
-    dispose: Bridge.emptyFn
-});
-
-Bridge.define('Bridge.ArrayEnumerable', {
-    inherits: [System.Collections.IEnumerable],
-
-    config: {
-        alias: [
-            "getEnumerator", "System$Collections$IEnumerable$getEnumerator"
-        ]
-    },
-
-    constructor: function (array) {
-        this.$initialize();
-        this.array = array;
-    },
-
-    getEnumerator: function () {
-        return new Bridge.ArrayEnumerator(this.array);
-    }
-});
-
-// @source /Collections/Comparer.js
-
-Bridge.define('System.Collections.Generic.EqualityComparer$1', function (T) {
-    return {
-        inherits: [System.Collections.Generic.IEqualityComparer$1(T)],
+    Bridge.define('Bridge.CustomEnumerator', {
+        inherits: [System.Collections.IEnumerator],
 
         config: {
             alias: [
-                "equals2", "System$Collections$Generic$IEqualityComparer$1$" + Bridge.getTypeAlias(T) + "$equals2",
-                "getHashCode2", "System$Collections$Generic$IEqualityComparer$1$" + Bridge.getTypeAlias(T) + "$getHashCode2"
+                "getCurrent", "System$Collections$IEnumerator$getCurrent",
+                "moveNext", "System$Collections$IEnumerator$moveNext",
+                "reset", "System$Collections$IEnumerator$reset"
             ]
         },
 
-        equals2: function (x, y) {
-            if (!Bridge.isDefined(x, true)) {
-                return !Bridge.isDefined(y, true);
-            } else if (Bridge.isDefined(y, true)) {
-                var isBridge = x && x.$$name;
-
-                if (!isBridge) {
-                    return Bridge.equals(x, y);
-                }
-                else if (Bridge.isFunction(x.equalsT)) {
-                    return Bridge.equalsT(x, y);
-                }
-                else if (Bridge.isFunction(x.equals)) {
-                    return Bridge.equals(x, y);
-                }
-
-                return x === y;
-            }
-
-            return false;
+        constructor: function (moveNext, getCurrent, reset, dispose, scope) {
+            this.$initialize();
+            this.$moveNext = moveNext;
+            this.$getCurrent = getCurrent;
+            this.$dispose = dispose;
+            this.$reset = reset;
+            this.scope = scope;
         },
 
-        getHashCode2: function (obj) {
-            return Bridge.isDefined(obj, true) ? Bridge.getHashCode(obj) : 0;
+        moveNext: function () {
+            try {
+                return this.$moveNext.call(this.scope);
+            }
+            catch (ex) {
+                this.dispose.call(this.scope);
+
+                throw ex;
+            }
+        },
+
+        getCurrent: function () {
+            return this.$getCurrent.call(this.scope);
+        },
+
+        getCurrent$1: function () {
+            return this.$getCurrent.call(this.scope);
+        },
+
+        reset: function () {
+            if (this.$reset) {
+                this.$reset.call(this.scope);
+            }
+        },
+
+        dispose: function () {
+            if (this.$dispose) {
+                this.$dispose.call(this.scope);
+            }
         }
-    };
-});
+    });
 
-System.Collections.Generic.EqualityComparer$1.$default = new (System.Collections.Generic.EqualityComparer$1(Object))();
+// @source @ArrayEnumerator.js
 
-Bridge.define('System.Collections.Generic.Comparer$1', function (T) {
-    return {
-        inherits: [System.Collections.Generic.IComparer$1(T)],
+    Bridge.define('Bridge.ArrayEnumerator', {
+        inherits: [System.Collections.IEnumerator, System.IDisposable],
 
         config: {
             alias: [
-                "compare", "System$Collections$Generic$IComparer$1$" + Bridge.getTypeAlias(T) + "$compare"
+                "getCurrent", "System$Collections$IEnumerator$getCurrent",
+                "moveNext", "System$Collections$IEnumerator$moveNext",
+                "reset", "System$Collections$IEnumerator$reset",
+                "dispose", "System$IDisposable$dispose"
             ]
         },
 
-        constructor: function (fn) {
-			this.$initialize();
-            this.fn = fn;
-            this.compare = fn;
-        }
-    }
-});
+        constructor: function (array, T) {
+            this.$initialize();
+            this.array = array;
+            this.reset();
 
-System.Collections.Generic.Comparer$1.$default = new (System.Collections.Generic.Comparer$1(Object))(function (x, y) {
-    if (!Bridge.hasValue(x)) {
-        return !Bridge.hasValue(y) ? 0 : -1;
-    } else if (!Bridge.hasValue(y)) {
-        return 1;
-    }
-
-    return Bridge.compare(x, y);
-});
-
-// @source /Collections/Dictionary.js
-
-Bridge.define('System.Collections.Generic.KeyValuePair$2', function (TKey, TValue) {
-    return {
-        constructor: function (key, value) {
-			this.$initialize();
-            this.key = key;
-            this.value = value;
+            if (T) {
+                this["System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$getCurrent$1"] = this.getCurrent;
+            }
         },
 
-        toString: function () {
-            var s = "[";
+        moveNext: function () {
+            this.index++;
 
-            if (this.key != null) {
-                s += this.key.toString();
-            }
+            return this.index < this.array.length;
+        },
 
-            s += ", ";
+        getCurrent: function () {
+            return this.array[this.index];
+        },
 
-            if (this.value != null) {
-                s += this.value.toString();
-            }
+        getCurrent$1: function () {
+            return this.array[this.index];
+        },
 
-            s += "]";
+        reset: function () {
+            this.index = -1;
+        },
 
-            return s;
-        }
-    };
-});
+        dispose: Bridge.emptyFn
+    });
 
-Bridge.define('System.Collections.Generic.Dictionary$2', function (TKey, TValue) {
-    return {
-        inherits: [System.Collections.Generic.IDictionary$2(TKey, TValue)],
+    Bridge.define('Bridge.ArrayEnumerable', {
+        inherits: [System.Collections.IEnumerable],
 
         config: {
             alias: [
-                "getCount", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getCount",
-                "getKeys", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getKeys",
-                "getValues", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getValues",
-                "get", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getItem",
-                "set", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$setItem",
-                "add", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$add",
-                "containsKey", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$containsKey",
-                "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$Collections$Generic$KeyValuePair$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getEnumerator",
-                "remove", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$remove",
-                "tryGetValue", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$tryGetValue"
+                "getEnumerator", "System$Collections$IEnumerable$getEnumerator"
             ]
         },
 
-        constructor: function (obj, comparer) {
-			this.$initialize();
-            this.comparer = comparer || System.Collections.Generic.EqualityComparer$1.$default;
-            this.clear();
+        constructor: function (array) {
+            this.$initialize();
+            this.array = array;
+        },
 
-            if (Bridge.is(obj, System.Collections.Generic.Dictionary$2(TKey, TValue))) {
-                var e = Bridge.getEnumerator(obj),
-                    c;
+        getEnumerator: function () {
+            return new Bridge.ArrayEnumerator(this.array);
+        }
+    });
 
-                while (e.moveNext()) {
-                    c = e.getCurrent();
-                    this.add(c.key, c.value);
+// @source @EqualityComparer.js
+
+    Bridge.define('System.Collections.Generic.EqualityComparer$1', function (T) {
+        return {
+            inherits: [System.Collections.Generic.IEqualityComparer$1(T)],
+
+            config: {
+                alias: [
+                    "equals2", "System$Collections$Generic$IEqualityComparer$1$" + Bridge.getTypeAlias(T) + "$equals2",
+                    "getHashCode2", "System$Collections$Generic$IEqualityComparer$1$" + Bridge.getTypeAlias(T) + "$getHashCode2"
+                ]
+            },
+
+            equals2: function (x, y) {
+                if (!Bridge.isDefined(x, true)) {
+                    return !Bridge.isDefined(y, true);
+                } else if (Bridge.isDefined(y, true)) {
+                    var isBridge = x && x.$$name;
+
+                    if (!isBridge) {
+                        return Bridge.equals(x, y);
+                    }
+                    else if (Bridge.isFunction(x.equalsT)) {
+                        return Bridge.equalsT(x, y);
+                    }
+                    else if (Bridge.isFunction(x.equals)) {
+                        return Bridge.equals(x, y);
+                    }
+
+                    return x === y;
                 }
-            } else if (Object.prototype.toString.call(obj) === '[object Object]') {
-                var names = Bridge.getPropertyNames(obj),
-                    name;
 
-                for (var i = 0; i < names.length; i++) {
-                    name = names[i];
-                    this.add(name, obj[name]);
-                }
+                return false;
+            },
+
+            getHashCode2: function (obj) {
+                return Bridge.isDefined(obj, true) ? Bridge.getHashCode(obj) : 0;
             }
-        },
+        };
+    });
 
-        getKeys: function () {
-            return new (System.Collections.Generic.DictionaryCollection$1(TKey))(this, true);
-        },
+    System.Collections.Generic.EqualityComparer$1.$default = new (System.Collections.Generic.EqualityComparer$1(Object))();
 
-        getValues: function () {
-            return new (System.Collections.Generic.DictionaryCollection$1(TValue))(this, false);
-        },
+// @source @Comparer.js
 
-        clear: function () {
-            this.entries = { };
-            this.count = 0;
-        },
+    Bridge.define('System.Collections.Generic.Comparer$1', function (T) {
+        return {
+            inherits: [System.Collections.Generic.IComparer$1(T)],
 
-        findEntry: function (key) {
-            var hash = this.comparer.getHashCode2(key),
-                entries,
-                i;
+            config: {
+                alias: [
+                    "compare", "System$Collections$Generic$IComparer$1$" + Bridge.getTypeAlias(T) + "$compare"
+                ]
+            },
 
-            if (Bridge.isDefined(this.entries[hash])) {
+            constructor: function (fn) {
+                this.$initialize();
+                this.fn = fn;
+                this.compare = fn;
+            }
+        }
+    });
+
+    System.Collections.Generic.Comparer$1.$default = new (System.Collections.Generic.Comparer$1(Object))(function (x, y) {
+        if (!Bridge.hasValue(x)) {
+            return !Bridge.hasValue(y) ? 0 : -1;
+        } else if (!Bridge.hasValue(y)) {
+            return 1;
+        }
+
+        return Bridge.compare(x, y);
+    });
+
+// @source @Dictionary.js
+
+    Bridge.define('System.Collections.Generic.KeyValuePair$2', function (TKey, TValue) {
+        return {
+            constructor: function (key, value) {
+                this.$initialize();
+                this.key = key;
+                this.value = value;
+            },
+
+            toString: function () {
+                var s = "[";
+
+                if (this.key != null) {
+                    s += this.key.toString();
+                }
+
+                s += ", ";
+
+                if (this.value != null) {
+                    s += this.value.toString();
+                }
+
+                s += "]";
+
+                return s;
+            }
+        };
+    });
+
+    Bridge.define('System.Collections.Generic.Dictionary$2', function (TKey, TValue) {
+        return {
+            inherits: [System.Collections.Generic.IDictionary$2(TKey, TValue)],
+
+            config: {
+                alias: [
+                    "getCount", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getCount",
+                    "getKeys", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getKeys",
+                    "getValues", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getValues",
+                    "get", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getItem",
+                    "set", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$setItem",
+                    "add", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$add",
+                    "containsKey", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$containsKey",
+                    "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$Collections$Generic$KeyValuePair$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getEnumerator",
+                    "remove", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$remove",
+                    "tryGetValue", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$tryGetValue"
+                ]
+            },
+
+            constructor: function (obj, comparer) {
+                this.$initialize();
+                this.comparer = comparer || System.Collections.Generic.EqualityComparer$1.$default;
+                this.clear();
+
+                if (Bridge.is(obj, System.Collections.Generic.Dictionary$2(TKey, TValue))) {
+                    var e = Bridge.getEnumerator(obj),
+                        c;
+
+                    while (e.moveNext()) {
+                        c = e.getCurrent();
+                        this.add(c.key, c.value);
+                    }
+                } else if (Object.prototype.toString.call(obj) === '[object Object]') {
+                    var names = Bridge.getPropertyNames(obj),
+                        name;
+
+                    for (var i = 0; i < names.length; i++) {
+                        name = names[i];
+                        this.add(name, obj[name]);
+                    }
+                }
+            },
+
+            getKeys: function () {
+                return new (System.Collections.Generic.DictionaryCollection$1(TKey))(this, true);
+            },
+
+            getValues: function () {
+                return new (System.Collections.Generic.DictionaryCollection$1(TValue))(this, false);
+            },
+
+            clear: function () {
+                this.entries = { };
+                this.count = 0;
+            },
+
+            findEntry: function (key) {
+                var hash = this.comparer.getHashCode2(key),
+                    entries,
+                    i;
+
+                if (Bridge.isDefined(this.entries[hash])) {
+                    entries = this.entries[hash];
+
+                    for (i = 0; i < entries.length; i++) {
+                        if (this.comparer.equals2(entries[i].key, key)) {
+                            return entries[i];
+                        }
+                    }
+                }
+            },
+
+            containsKey: function (key) {
+                return !!this.findEntry(key);
+            },
+
+            containsValue: function (value) {
+                var e, i;
+
+                for (e in this.entries) {
+                    if (this.entries.hasOwnProperty(e)) {
+                        var entries = this.entries[e];
+
+                        for (i = 0; i < entries.length; i++) {
+                            if (this.comparer.equals2(entries[i].value, value)) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+
+                return false;
+            },
+
+            get: function (key) {
+                var entry = this.findEntry(key);
+
+                if (!entry) {
+                    throw new System.Collections.Generic.KeyNotFoundException('Key ' + key + ' does not exist.');
+                }
+
+                return entry.value;
+            },
+
+            getItem: function (key) {
+                return this.get(key);
+            },
+
+            set: function (key, value, add) {
+                var entry = this.findEntry(key),
+                    hash;
+
+                if (entry) {
+                    if (add) {
+                        throw new System.ArgumentException('Key ' + key + ' already exists.');
+                    }
+
+                    entry.value = value;
+                    return;
+                }
+
+                hash = this.comparer.getHashCode2(key);
+                entry = new (System.Collections.Generic.KeyValuePair$2(TKey, TValue))(key, value);
+
+                if (this.entries[hash]) {
+                    this.entries[hash].push(entry);
+                } else {
+                    this.entries[hash] = [entry];
+                }
+
+                this.count++;
+            },
+
+            setItem: function (key, value, add) {
+                this.set(key, value, add);
+            },
+
+            add: function (key, value) {
+                this.set(key, value, true);
+            },
+
+            remove: function (key) {
+                var hash = this.comparer.getHashCode2(key),
+                    entries,
+                    i;
+
+                if (!this.entries[hash]) {
+                    return false;
+                }
+
                 entries = this.entries[hash];
 
                 for (i = 0; i < entries.length; i++) {
                     if (this.comparer.equals2(entries[i].key, key)) {
-                        return entries[i];
-                    }
-                }
-            }
-        },
+                        entries.splice(i, 1);
 
-        containsKey: function (key) {
-            return !!this.findEntry(key);
-        },
-
-        containsValue: function (value) {
-            var e, i;
-
-            for (e in this.entries) {
-                if (this.entries.hasOwnProperty(e)) {
-                    var entries = this.entries[e];
-
-                    for (i = 0; i < entries.length; i++) {
-                        if (this.comparer.equals2(entries[i].value, value)) {
-                            return true;
+                        if (entries.length == 0) {
+                            delete this.entries[hash];
                         }
+
+                        this.count--;
+
+                        return true;
                     }
                 }
-            }
 
-            return false;
-        },
-
-        get: function (key) {
-            var entry = this.findEntry(key);
-
-            if (!entry) {
-                throw new System.Collections.Generic.KeyNotFoundException('Key ' + key + ' does not exist.');
-            }
-
-            return entry.value;
-        },
-
-        getItem: function (key) {
-            return this.get(key);
-        },
-
-        set: function (key, value, add) {
-            var entry = this.findEntry(key),
-                hash;
-
-            if (entry) {
-                if (add) {
-                    throw new System.ArgumentException('Key ' + key + ' already exists.');
-                }
-
-                entry.value = value;
-                return;
-            }
-
-            hash = this.comparer.getHashCode2(key);
-            entry = new (System.Collections.Generic.KeyValuePair$2(TKey, TValue))(key, value);
-
-            if (this.entries[hash]) {
-                this.entries[hash].push(entry);
-            } else {
-                this.entries[hash] = [entry];
-            }
-
-            this.count++;
-        },
-
-        setItem: function (key, value, add) {
-            this.set(key, value, add);
-        },
-
-        add: function (key, value) {
-            this.set(key, value, true);
-        },
-
-        remove: function (key) {
-            var hash = this.comparer.getHashCode2(key),
-                entries,
-                i;
-
-            if (!this.entries[hash]) {
                 return false;
-            }
+            },
 
-            entries = this.entries[hash];
+            getCount: function () {
+                return this.count;
+            },
 
-            for (i = 0; i < entries.length; i++) {
-                if (this.comparer.equals2(entries[i].key, key)) {
-                    entries.splice(i, 1);
+            getComparer: function () {
+                return this.comparer;
+            },
 
-                    if (entries.length == 0) {
-                        delete this.entries[hash];
+            tryGetValue: function (key, value) {
+                var entry = this.findEntry(key);
+
+                value.v = entry ? entry.value : Bridge.getDefaultValue(TValue);
+
+                return !!entry;
+            },
+
+            getCustomEnumerator: function (fn) {
+                var hashes = Bridge.getPropertyNames(this.entries),
+                    hashIndex = -1,
+                    keyIndex;
+
+                return new Bridge.CustomEnumerator(function () {
+                    if (hashIndex < 0 || keyIndex >= (this.entries[hashes[hashIndex]].length - 1)) {
+                        keyIndex = -1;
+                        hashIndex++;
                     }
 
-                    this.count--;
+                    if (hashIndex >= hashes.length) {
+                        return false;
+                    }
+
+                    keyIndex++;
 
                     return true;
-                }
+                }, function () {
+                    return fn(this.entries[hashes[hashIndex]][keyIndex]);
+                }, function () {
+                    hashIndex = -1;
+                }, null, this);
+            },
+
+            getEnumerator: function () {
+                return this.getCustomEnumerator(function (e) {
+                     return e;
+                });
             }
+        };
+    });
 
-            return false;
-        },
+    Bridge.define('System.Collections.Generic.DictionaryCollection$1', function (T) {
+        return {
+            inherits: [System.Collections.Generic.ICollection$1(T)],
 
-        getCount: function () {
-            return this.count;
-        },
+            config: {
+                alias: [
+                  "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
+                  "getCount", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getCount",
+                  "add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
+                  "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
+                  "contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
+                  "remove", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$remove"
+                ]
+            },
 
-        getComparer: function () {
-            return this.comparer;
-        },
+            constructor: function (dictionary, keys) {
+                this.$initialize();
+                this.dictionary = dictionary;
+                this.keys = keys;
+            },
 
-        tryGetValue: function (key, value) {
-            var entry = this.findEntry(key);
+            getCount: function () {
+                return this.dictionary.getCount();
+            },
 
-            value.v = entry ? entry.value : Bridge.getDefaultValue(TValue);
+            getEnumerator: function () {
+                return this.dictionary.getCustomEnumerator(this.keys ? function (e) {
+                    return e.key;
+                } : function (e) {
+                    return e.value;
+                });
+            },
 
-            return !!entry;
-        },
+            contains: function (value) {
+                return this.keys ? this.dictionary.containsKey(value) : this.dictionary.containsValue(value);
+            },
 
-        getCustomEnumerator: function (fn) {
-            var hashes = Bridge.getPropertyNames(this.entries),
-                hashIndex = -1,
-                keyIndex;
+            add: function (v) {
+                throw new System.NotSupportedException();
+            },
 
-            return new Bridge.CustomEnumerator(function () {
-                if (hashIndex < 0 || keyIndex >= (this.entries[hashes[hashIndex]].length - 1)) {
-                    keyIndex = -1;
-                    hashIndex++;
+            clear: function () {
+                throw new System.NotSupportedException();
+            },
+
+            remove: function () {
+                throw new System.NotSupportedException();
+            }
+        };
+    });
+
+// @source @List.js
+
+    Bridge.define('System.Collections.Generic.List$1', function (T) {
+        return {
+            inherits: [System.Collections.Generic.ICollection$1(T), System.Collections.ICollection, System.Collections.Generic.IList$1(T)],
+
+            config: {
+                alias: [
+                "getItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem",
+                "setItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem",
+                "getCount", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getCount",
+                "add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
+                "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
+                "contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
+                "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
+                "indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
+                "insert", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert",
+                "remove", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$remove",
+                "removeAt", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt"
+                ]
+            },
+
+            constructor: function (obj) {
+                this.$initialize();
+                if (Object.prototype.toString.call(obj) === '[object Array]') {
+                    this.items = System.Array.clone(obj);
+                } else if (Bridge.is(obj, System.Collections.IEnumerable)) {
+                    this.items = Bridge.toArray(obj);
+                } else {
+                    this.items = [];
+                }
+            },
+
+            checkIndex: function (index) {
+                if (index < 0 || index > (this.items.length - 1)) {
+                    throw new System.ArgumentOutOfRangeException('Index out of range');
+                }
+            },
+
+            getCount: function () {
+                return this.items.length;
+            },
+
+            get: function (index) {
+                this.checkIndex(index);
+
+                return this.items[index];
+            },
+
+            getItem: function (index) {
+                return this.get(index);
+            },
+
+            set: function (index, value) {
+                this.checkReadOnly();
+                this.checkIndex(index);
+                this.items[index] = value;
+            },
+
+            setItem: function (index, value) {
+                this.set(index, value);
+            },
+
+            add: function (value) {
+                this.checkReadOnly();
+                this.items.push(value);
+            },
+
+            addRange: function (items) {
+                this.checkReadOnly();
+
+                var array = Bridge.toArray(items),
+                    i,
+                    len;
+
+                for (i = 0, len = array.length; i < len; ++i) {
+                    this.items.push(array[i]);
+                }
+            },
+
+            clear: function () {
+                this.checkReadOnly();
+                this.items = [];
+            },
+
+            indexOf: function (item, startIndex) {
+                var i, el;
+
+                if (!Bridge.isDefined(startIndex)) {
+                    startIndex = 0;
                 }
 
-                if (hashIndex >= hashes.length) {
+                if (startIndex !== 0) {
+                    this.checkIndex(startIndex);
+                }
+
+                for (i = startIndex; i < this.items.length; i++) {
+                    el = this.items[i];
+
+                    if (el === item || System.Collections.Generic.EqualityComparer$1.$default.equals2(el, item)) {
+                        return i;
+                    }
+                }
+
+                return -1;
+            },
+
+            insertRange: function (index, items) {
+                this.checkReadOnly();
+
+                if (index !== this.items.length) {
+                    this.checkIndex(index);
+                }
+
+                var array = Bridge.toArray(items);
+
+                for (var i = 0; i < array.length; i++) {
+                    this.insert(index++, array[i]);
+                }
+            },
+
+            contains: function (item) {
+                return this.indexOf(item) > -1;
+            },
+
+            getEnumerator: function () {
+                return new Bridge.ArrayEnumerator(this.items, T);
+            },
+
+            getRange: function (index, count) {
+                if (!Bridge.isDefined(index)) {
+                    index = 0;
+                }
+
+                if (!Bridge.isDefined(count)) {
+                    count = this.items.length;
+                }
+
+                if (index !== 0) {
+                    this.checkIndex(index);
+                }
+
+                this.checkIndex(index + count - 1);
+
+                var result = [],
+                    i,
+                    maxIndex = index + count;
+
+                for (i = index; i < maxIndex; i++) {
+                    result.push(this.items[i]);
+                }
+
+                return new (System.Collections.Generic.List$1(T))(result);
+            },
+
+            insert: function (index, item) {
+                this.checkReadOnly();
+
+                if (index !== this.items.length) {
+                    this.checkIndex(index);
+                }
+
+                if (Bridge.isArray(item)) {
+                    for (var i = 0; i < item.length; i++) {
+                        this.insert(index++, item[i]);
+                    }
+                } else {
+                    this.items.splice(index, 0, item);
+                }
+            },
+
+            join: function (delimeter) {
+                return this.items.join(delimeter);
+            },
+
+            lastIndexOf: function (item, fromIndex) {
+                if (!Bridge.isDefined(fromIndex)) {
+                    fromIndex = this.items.length - 1;
+                }
+
+                if (fromIndex !== 0) {
+                    this.checkIndex(fromIndex);
+                }
+
+                for (var i = fromIndex; i >= 0; i--) {
+                    if (item === this.items[i]) {
+                        return i;
+                    }
+                }
+
+                return -1;
+            },
+
+            remove: function (item) {
+                this.checkReadOnly();
+
+                var index = this.indexOf(item);
+
+                if (index < 0) {
                     return false;
                 }
 
-                keyIndex++;
-
+                this.checkIndex(index);
+                this.items.splice(index, 1);
                 return true;
-            }, function () {
-                return fn(this.entries[hashes[hashIndex]][keyIndex]);
-            }, function () {
-                hashIndex = -1;
-            }, null, this);
-        },
+            },
 
-        getEnumerator: function () {
-            return this.getCustomEnumerator(function (e) {
-                 return e;
-            });
-        }
-    };
-});
-
-Bridge.define('System.Collections.Generic.DictionaryCollection$1', function (T) {
-    return {
-        inherits: [System.Collections.Generic.ICollection$1(T)],
-
-        config: {
-            alias: [
-              "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
-              "getCount", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getCount",
-              "add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
-              "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
-              "contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
-              "remove", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$remove"
-            ]
-        },
-
-        constructor: function (dictionary, keys) {
-			this.$initialize();
-            this.dictionary = dictionary;
-            this.keys = keys;
-        },
-
-        getCount: function () {
-            return this.dictionary.getCount();
-        },
-
-        getEnumerator: function () {
-            return this.dictionary.getCustomEnumerator(this.keys ? function (e) {
-                return e.key;
-            } : function (e) {
-                return e.value;
-            });
-        },
-
-        contains: function (value) {
-            return this.keys ? this.dictionary.containsKey(value) : this.dictionary.containsValue(value);
-        },
-
-        add: function (v) {
-            throw new System.NotSupportedException();
-        },
-
-        clear: function () {
-            throw new System.NotSupportedException();
-        },
-
-        remove: function () {
-            throw new System.NotSupportedException();
-        }
-    };
-});
-
-// @source /Collections/List.js
-
-Bridge.define('System.Collections.Generic.List$1', function (T) {
-    return {
-        inherits: [System.Collections.Generic.ICollection$1(T), System.Collections.ICollection, System.Collections.Generic.IList$1(T)],
-
-        config: {
-            alias: [
-            "getItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem",
-            "setItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem",
-            "getCount", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getCount",
-            "add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
-            "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
-            "contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
-            "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
-            "indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
-            "insert", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert",
-            "remove", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$remove",
-            "removeAt", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt"
-            ]
-        },
-
-        constructor: function (obj) {
-			this.$initialize();
-            if (Object.prototype.toString.call(obj) === '[object Array]') {
-                this.items = System.Array.clone(obj);
-            } else if (Bridge.is(obj, System.Collections.IEnumerable)) {
-                this.items = Bridge.toArray(obj);
-            } else {
-                this.items = [];
-            }
-        },
-
-        checkIndex: function (index) {
-            if (index < 0 || index > (this.items.length - 1)) {
-                throw new System.ArgumentOutOfRangeException('Index out of range');
-            }
-        },
-
-        getCount: function () {
-            return this.items.length;
-        },
-
-        get: function (index) {
-            this.checkIndex(index);
-
-            return this.items[index];
-        },
-
-        getItem: function (index) {
-            return this.get(index);
-        },
-
-        set: function (index, value) {
-            this.checkReadOnly();
-            this.checkIndex(index);
-            this.items[index] = value;
-        },
-
-        setItem: function (index, value) {
-            this.set(index, value);
-        },
-
-        add: function (value) {
-            this.checkReadOnly();
-            this.items.push(value);
-        },
-
-        addRange: function (items) {
-            this.checkReadOnly();
-
-            var array = Bridge.toArray(items),
-                i,
-                len;
-
-            for (i = 0, len = array.length; i < len; ++i) {
-                this.items.push(array[i]);
-            }
-        },
-
-        clear: function () {
-            this.checkReadOnly();
-            this.items = [];
-        },
-
-        indexOf: function (item, startIndex) {
-            var i, el;
-
-            if (!Bridge.isDefined(startIndex)) {
-                startIndex = 0;
-            }
-
-            if (startIndex !== 0) {
-                this.checkIndex(startIndex);
-            }
-
-            for (i = startIndex; i < this.items.length; i++) {
-                el = this.items[i];
-
-                if (el === item || System.Collections.Generic.EqualityComparer$1.$default.equals2(el, item)) {
-                    return i;
-                }
-            }
-
-            return -1;
-        },
-
-        insertRange: function (index, items) {
-            this.checkReadOnly();
-
-            if (index !== this.items.length) {
+            removeAt: function (index) {
+                this.checkReadOnly();
                 this.checkIndex(index);
-            }
+                this.items.splice(index, 1);
+            },
 
-            var array = Bridge.toArray(items);
-
-            for (var i = 0; i < array.length; i++) {
-                this.insert(index++, array[i]);
-            }
-        },
-
-        contains: function (item) {
-            return this.indexOf(item) > -1;
-        },
-
-        getEnumerator: function () {
-            return new Bridge.ArrayEnumerator(this.items, T);
-        },
-
-        getRange: function (index, count) {
-            if (!Bridge.isDefined(index)) {
-                index = 0;
-            }
-
-            if (!Bridge.isDefined(count)) {
-                count = this.items.length;
-            }
-
-            if (index !== 0) {
+            removeRange: function (index, count) {
+                this.checkReadOnly();
                 this.checkIndex(index);
-            }
+                this.items.splice(index, count);
+            },
 
-            this.checkIndex(index + count - 1);
+            reverse: function () {
+                this.checkReadOnly();
+                this.items.reverse();
+            },
 
-            var result = [],
-                i,
-				maxIndex = index + count;
+            slice: function (start, end) {
+                this.checkReadOnly();
 
-            for (i = index; i < maxIndex; i++) {
-                result.push(this.items[i]);
-            }
+                return new (System.Collections.Generic.List$1(this.$$name.substr(this.$$name.lastIndexOf('$')+1)))(this.items.slice(start, end));
+            },
 
-            return new (System.Collections.Generic.List$1(T))(result);
-        },
+            sort: function (comparison) {
+                this.checkReadOnly();
+                this.items.sort(comparison || System.Collections.Generic.Comparer$1.$default.compare);
+            },
 
-        insert: function (index, item) {
-            this.checkReadOnly();
+            splice: function (start, count, items) {
+                this.checkReadOnly();
+                this.items.splice(start, count, items);
+            },
 
-            if (index !== this.items.length) {
-                this.checkIndex(index);
-            }
+            unshift: function () {
+                this.checkReadOnly();
+                this.items.unshift();
+            },
 
-            if (Bridge.isArray(item)) {
-                for (var i = 0; i < item.length; i++) {
-                    this.insert(index++, item[i]);
+            toArray: function () {
+                return Bridge.toArray(this);
+            },
+
+            checkReadOnly: function () {
+                if (this.readOnly) {
+                    throw new System.NotSupportedException();
                 }
-            } else {
-                this.items.splice(index, 0, item);
-            }
-        },
+            },
 
-        join: function (delimeter) {
-            return this.items.join(delimeter);
-        },
-
-        lastIndexOf: function (item, fromIndex) {
-            if (!Bridge.isDefined(fromIndex)) {
-                fromIndex = this.items.length - 1;
-            }
-
-            if (fromIndex !== 0) {
-                this.checkIndex(fromIndex);
-            }
-
-            for (var i = fromIndex; i >= 0; i--) {
-                if (item === this.items[i]) {
-                    return i;
+            binarySearch: function (index, length, value, comparer) {
+                if (arguments.length === 1) {
+                    value = index;
+                    index = null;
                 }
+
+                if (arguments.length === 2) {
+                    value = index;
+                    comparer = length;
+                    index = null;
+                    length = null;
+                }
+
+                if (!Bridge.isNumber(index)) {
+                    index = 0;
+                }
+
+                if (!Bridge.isNumber(length)) {
+                    length = this.items.length;
+                }
+
+                if (!comparer) {
+                    comparer = System.Collections.Generic.Comparer$1.$default;
+                }
+
+                return System.Array.binarySearch(this.items, index, length, value, comparer);
+            },
+
+            convertAll: function (TOutput, converter) {
+                if (!Bridge.hasValue(converter)) {
+                    throw new System.ArgumentNullException("converter is null.");
+                }
+
+                var list = new (System.Collections.Generic.List$1(TOutput))(this.items.length);
+                for (var i = 0; i < this.items.length; i++) {
+                    list.items[i] = converter(this.items[i]);
+                }
+
+                return list;
             }
+        };
+    });
 
-            return -1;
-        },
+    Bridge.define('System.Collections.ObjectModel.ReadOnlyCollection$1', function (T) {
+        return {
+            inherits: [System.Collections.Generic.List$1(T)],
+            constructor: function (list) {
+                this.$initialize();
+                if (list == null) {
+                    throw new System.ArgumentNullException("list");
+                }
 
-        remove: function (item) {
-            this.checkReadOnly();
-
-            var index = this.indexOf(item);
-
-            if (index < 0) {
-                return false;
+                System.Collections.Generic.List$1(T).$constructor.call(this, list);
+                this.readOnly = true;
             }
+        };
+    });
 
-            this.checkIndex(index);
-            this.items.splice(index, 1);
-            return true;
-        },
-
-        removeAt: function (index) {
-            this.checkReadOnly();
-            this.checkIndex(index);
-            this.items.splice(index, 1);
-        },
-
-        removeRange: function (index, count) {
-            this.checkReadOnly();
-            this.checkIndex(index);
-            this.items.splice(index, count);
-        },
-
-        reverse: function () {
-            this.checkReadOnly();
-            this.items.reverse();
-        },
-
-        slice: function (start, end) {
-            this.checkReadOnly();
-
-            return new (System.Collections.Generic.List$1(this.$$name.substr(this.$$name.lastIndexOf('$')+1)))(this.items.slice(start, end));
-        },
-
-        sort: function (comparison) {
-            this.checkReadOnly();
-            this.items.sort(comparison || System.Collections.Generic.Comparer$1.$default.compare);
-        },
-
-        splice: function (start, count, items) {
-            this.checkReadOnly();
-            this.items.splice(start, count, items);
-        },
-
-        unshift: function () {
-            this.checkReadOnly();
-            this.items.unshift();
-        },
-
-        toArray: function () {
-            return Bridge.toArray(this);
-        },
-
-        checkReadOnly: function () {
-            if (this.readOnly) {
-                throw new System.NotSupportedException();
-            }
-        },
-
-        binarySearch: function (index, length, value, comparer) {
-            if (arguments.length === 1) {
-                value = index;
-                index = null;
-            }
-
-            if (arguments.length === 2) {
-                value = index;
-                comparer = length;
-                index = null;
-                length = null;
-            }
-
-            if (!Bridge.isNumber(index)) {
-                index = 0;
-            }
-
-            if (!Bridge.isNumber(length)) {
-                length = this.items.length;
-            }
-
-            if (!comparer) {
-                comparer = System.Collections.Generic.Comparer$1.$default;
-            }
-
-            return System.Array.binarySearch(this.items, index, length, value, comparer);
-        },
-
-        convertAll: function (TOutput, converter) {
-            if (!Bridge.hasValue(converter)) {
-                throw new System.ArgumentNullException("converter is null.");
-            }
-
-            var list = new (System.Collections.Generic.List$1(TOutput))(this.items.length);
-            for (var i = 0; i < this.items.length; i++) {
-                list.items[i] = converter(this.items[i]);
-            }
-
-            return list;
-        }
-    };
-});
-
-Bridge.define('System.Collections.ObjectModel.ReadOnlyCollection$1', function (T) {
-    return {
-        inherits: [System.Collections.Generic.List$1(T)],
-        constructor: function (list) {
-			this.$initialize();
-            if (list == null) {
-                throw new System.ArgumentNullException("list");
-            }
-
-            System.Collections.Generic.List$1(T).$constructor.call(this, list);
-            this.readOnly = true;
-        }
-    };
-});
-
-    // @source Task.js
+// @source @Task.js
 
     Bridge.define("System.Threading.Tasks.Task", {
         inherits: [System.IDisposable],
@@ -10756,7 +10769,7 @@ Bridge.define('System.Collections.ObjectModel.ReadOnlyCollection$1', function (T
         }
     });
 
-    // @source Validation.js
+// @source @Validation.js
 
     var validation = {
         isNull: function (value) {
@@ -10866,6 +10879,8 @@ Bridge.define('System.Collections.ObjectModel.ReadOnlyCollection$1', function (T
     };
 
     Bridge.Validation = validation;
+
+// @source @version.js
 
     Bridge.define('System.Version', {
         inherits: function () { return [System.ICloneable,System.IComparable$1(System.Version),System.IEquatable$1(System.Version)]; },
@@ -11271,6 +11286,8 @@ Bridge.define('System.Collections.ObjectModel.ReadOnlyCollection$1', function (T
         }
     });
 
+// @source @parseFailureKind.js
+
     Bridge.define('System.Version.ParseFailureKind', {
         $kind: "enum",
         statics: {
@@ -11280,6 +11297,8 @@ Bridge.define('System.Collections.ObjectModel.ReadOnlyCollection$1', function (T
             FormatException: 3
         }
     });
+
+// @source @versionResult.js
 
     Bridge.define('System.Version.VersionResult', {
         $kind: "struct",
@@ -11366,11 +11385,11 @@ Bridge.define('System.Collections.ObjectModel.ReadOnlyCollection$1', function (T
         }
     });
 
-    // @source Attribute.js
+// @source @Attribute.js
 
     Bridge.define("System.Attribute");
 
-    // @source INotifyPropertyChanged.js
+// @source @INotifyPropertyChanged.js
 
     Bridge.define("System.ComponentModel.INotifyPropertyChanged", {
         $kind: "interface",
@@ -11385,7 +11404,7 @@ Bridge.define('System.Collections.ObjectModel.ReadOnlyCollection$1', function (T
         }
     });
 
-    // @source Convert.js
+// @source @Convert.js
 
     var scope = {};
 
@@ -12902,7 +12921,7 @@ Bridge.define('System.Collections.ObjectModel.ReadOnlyCollection$1', function (T
 
     System.Convert = scope.convert;
 
-    // @source ClientWebSocket.js
+// @source @ClientWebSocket.js
 
     Bridge.define("System.Net.WebSockets.ClientWebSocket", {
         inherits: [System.IDisposable],
@@ -13226,7 +13245,7 @@ Bridge.define('System.Collections.ObjectModel.ReadOnlyCollection$1', function (T
         }
     });
 
-    // @source Uri.js
+// @source @Uri.js
 
     Bridge.define("System.Uri", {
         constructor: function (uriString) {
@@ -13238,6 +13257,8 @@ Bridge.define('System.Collections.ObjectModel.ReadOnlyCollection$1', function (T
             return this.absoluteUri;
         }
     });
+
+// @source @linq.js
 
 /*--------------------------------------------------------------------------
  * linq.js - LINQ for JavaScript
@@ -16168,7 +16189,8 @@ Bridge.define('System.Collections.ObjectModel.ReadOnlyCollection$1', function (T
     System.Linq.Enumerable = Enumerable;
 })(Bridge.global);
 
-    // @source Guid.js
+// @source @Guid.js
+
     Bridge.define("System.Guid", {
         inherits: function () {
             return [System.IComparable$1(System.Guid), System.IEquatable$1(System.Guid), System.IFormattable];
@@ -16307,1462 +16329,1462 @@ Bridge.define('System.Collections.ObjectModel.ReadOnlyCollection$1', function (T
         }
     });
 
-// @source Text/RegularExpressions/Regex.js
-
-Bridge.define("System.Text.RegularExpressions.Regex", {
-    statics: {
-        _cacheSize: 15,
-        _defaultMatchTimeout: System.TimeSpan.fromMilliseconds(-1),
-
-        getCacheSize: function () {
-            return System.Text.RegularExpressions.Regex._cacheSize;
-        },
-
-        setCacheSize: function (value) {
-            if (value < 0) {
-                throw new System.ArgumentOutOfRangeException("value");
-            }
-
-            System.Text.RegularExpressions.Regex._cacheSize = value;
-            //TODO: remove extra items from cache
-        },
-
-        escape: function (str) {
-            if (str == null) {
-                throw new System.ArgumentNullException("str");
-            }
-
-            return System.Text.RegularExpressions.RegexParser.escape(str);
-        },
-
-        unescape: function (str) {
-            if (str == null) {
-                throw new System.ArgumentNullException("str");
-            }
-
-            return System.Text.RegularExpressions.RegexParser.unescape(str);
-        },
-
-        isMatch: function (input, pattern) {
-            var scope = System.Text.RegularExpressions;
-            return scope.Regex.isMatch$2(input, pattern, scope.RegexOptions.None, scope.Regex._defaultMatchTimeout);
-        },
-
-        isMatch$1: function (input, pattern, options) {
-            var scope = System.Text.RegularExpressions;
-            return scope.Regex.isMatch$2(input, pattern, options, scope.Regex._defaultMatchTimeout);
-        },
-
-        isMatch$2: function (input, pattern, options, matchTimeout) {
-            var regex = new System.Text.RegularExpressions.Regex.$constructor3(pattern, options, matchTimeout, true);
-            return regex.isMatch(input);
-        },
-
-        match: function (input, pattern) {
-            var scope = System.Text.RegularExpressions;
-            return scope.Regex.match$2(input, pattern, scope.RegexOptions.None, scope.Regex._defaultMatchTimeout);
-        },
-
-        match$1: function (input, pattern, options) {
-            var scope = System.Text.RegularExpressions;
-            return scope.Regex.match$2(input, pattern, options, scope.Regex._defaultMatchTimeout);
-        },
-
-        match$2: function (input, pattern, options, matchTimeout) {
-            var regex = new System.Text.RegularExpressions.Regex.$constructor3(pattern, options, matchTimeout, true);
-            return regex.match(input);
-        },
-
-        matches: function (input, pattern) {
-            var scope = System.Text.RegularExpressions;
-            return scope.Regex.matches$2(input, pattern, scope.RegexOptions.None, scope.Regex._defaultMatchTimeout);
-        },
-
-        matches$1: function (input, pattern, options) {
-            var scope = System.Text.RegularExpressions;
-            return scope.Regex.matches$2(input, pattern, options, scope.Regex._defaultMatchTimeout);
-        },
-
-        matches$2: function (input, pattern, options, matchTimeout) {
-            var regex = new System.Text.RegularExpressions.Regex.$constructor3(pattern, options, matchTimeout, true);
-            return regex.matches(input);
-        },
-
-        replace: function (input, pattern, replacement) {
-            var scope = System.Text.RegularExpressions;
-            return scope.Regex.replace$2(input, pattern, replacement, scope.RegexOptions.None, scope.Regex._defaultMatchTimeout);
-        },
-
-        replace$1: function (input, pattern, replacement, options) {
-            var scope = System.Text.RegularExpressions;
-            return scope.Regex.replace$2(input, pattern, replacement, options, scope.Regex._defaultMatchTimeout);
-        },
-
-        replace$2: function (input, pattern, replacement, options, matchTimeout) {
-            var regex = new System.Text.RegularExpressions.Regex.$constructor3(pattern, options, matchTimeout, true);
-            return regex.replace(input, replacement);
-        },
-
-        replace$3: function (input, pattern, evaluator) {
-            var scope = System.Text.RegularExpressions;
-            return scope.Regex.replace$5(input, pattern, evaluator, scope.RegexOptions.None, scope.Regex._defaultMatchTimeout);
-        },
-
-        replace$4: function (input, pattern, evaluator, options) {
-            var scope = System.Text.RegularExpressions;
-            return scope.Regex.replace$5(input, pattern, evaluator, options, scope.Regex._defaultMatchTimeout);
-        },
-
-        replace$5: function (input, pattern, evaluator, options, matchTimeout) {
-            var regex = new System.Text.RegularExpressions.Regex.$constructor3(pattern, options, matchTimeout, true);
-            return regex.replace$3(input, evaluator);
-        },
-
-        split: function (input, pattern) {
-            var scope = System.Text.RegularExpressions;
-            return scope.Regex.split$2(input, pattern, scope.RegexOptions.None, scope.Regex._defaultMatchTimeout);
-        },
-
-        split$1: function (input, pattern, options) {
-            var scope = System.Text.RegularExpressions;
-            return scope.Regex.split$2(input, pattern, options, scope.Regex._defaultMatchTimeout);
-        },
-
-        split$2: function (input, pattern, options, matchTimeout) {
-            var regex = new System.Text.RegularExpressions.Regex.$constructor3(pattern, options, matchTimeout, true);
-            return regex.split(input);
-        }
-    },
-
-    _pattern: "",
-    _matchTimeout: System.TimeSpan.fromMilliseconds(-1),
-    _runner: null,
-    _caps: null,
-    _capsize: 0,
-    _capnames: null,
-    _capslist: null,
-
-    config: {
-        init: function () {
-            this._options = System.Text.RegularExpressions.RegexOptions.None;
-        }
-    },
-
-    constructor: function (pattern) {
-        this.$constructor1(pattern, System.Text.RegularExpressions.RegexOptions.None);
-    },
-
-    $constructor1: function (pattern, options) {
-        this.$constructor2(pattern, options, System.TimeSpan.fromMilliseconds(-1));
-    },
-
-    $constructor2: function (pattern, options, matchTimeout) {
-        this.$constructor3(pattern, options, matchTimeout, false);
-    },
-
-    $constructor3: function (pattern, options, matchTimeout, useCache) {
-		this.$initialize();
-        var scope = System.Text.RegularExpressions;
-
-        if (pattern == null) {
-            throw new System.ArgumentNullException("pattern");
-        }
-
-        if (options < scope.RegexOptions.None || ((options >> 10) !== 0)) {
-            throw new System.ArgumentOutOfRangeException("options");
-        }
-
-        if (((options & scope.RegexOptions.ECMAScript) !== 0) &&
-            ((options & ~(scope.RegexOptions.ECMAScript |
-                scope.RegexOptions.IgnoreCase |
-                scope.RegexOptions.Multiline |
-                scope.RegexOptions.CultureInvariant
-            )) !== 0)) {
-            throw new System.ArgumentOutOfRangeException("options");
-        }
-
-        // Check if the specified options are supported.
-        var supportedOptions =
-            System.Text.RegularExpressions.RegexOptions.IgnoreCase |
-            System.Text.RegularExpressions.RegexOptions.Multiline |
-            System.Text.RegularExpressions.RegexOptions.Singleline |
-            System.Text.RegularExpressions.RegexOptions.IgnorePatternWhitespace |
-            System.Text.RegularExpressions.RegexOptions.ExplicitCapture;
-
-        if ((options | supportedOptions) !== supportedOptions) {
-            throw new System.NotSupportedException("Specified Regex options are not supported.");
-        }
-
-        this._validateMatchTimeout(matchTimeout);
-
-        this._pattern = pattern;
-        this._options = options;
-        this._matchTimeout = matchTimeout;
-        this._runner = new scope.RegexRunner(this);
-
-        //TODO: cache
-        var patternInfo = this._runner.parsePattern();
-
-        this._capnames = patternInfo.sparseSettings.sparseSlotNameMap;
-        this._capslist = patternInfo.sparseSettings.sparseSlotNameMap.keys;
-        this._capsize = this._capslist.length;
-    },
-
-    getMatchTimeout: function () {
-        return this._matchTimeout;
-    },
-
-    getOptions: function () {
-        return this._options;
-    },
-
-    getRightToLeft: function () {
-        return (this._options & System.Text.RegularExpressions.RegexOptions.RightToLeft) !== 0;
-    },
-
-    isMatch: function (input) {
-        if (input == null) {
-            throw new System.ArgumentNullException("input");
-        }
-
-        var startat = this.getRightToLeft() ? input.length : 0;
-
-        return this.isMatch$1(input, startat);
-    },
-
-    isMatch$1: function (input, startat) {
-        if (input == null) {
-            throw new System.ArgumentNullException("input");
-        }
-
-        var match = this._runner.run(true, -1, input, 0, input.length, startat);
-
-        return match == null;
-    },
-
-    match: function (input) {
-        if (input == null) {
-            throw new System.ArgumentNullException("input");
-        }
-
-        var startat = this.getRightToLeft() ? input.length : 0;
-
-        return this.match$1(input, startat);
-    },
-
-    match$1: function (input, startat) {
-        if (input == null) {
-            throw new System.ArgumentNullException("input");
-        }
-
-        return this._runner.run(false, -1, input, 0, input.length, startat);
-    },
-
-    match$2: function (input, beginning, length) {
-        if (input == null) {
-            throw new System.ArgumentNullException("input");
-        }
-
-        var startat = this.getRightToLeft() ? beginning + length : beginning;
-
-        return this._runner.run(false, -1, input, beginning, length, startat);
-    },
-
-    matches: function (input) {
-        if (input == null) {
-            throw new System.ArgumentNullException("input");
-        }
-
-        var startat = this.getRightToLeft() ? input.length : 0;
-
-        return this.matches$1(input, startat);
-    },
-
-    matches$1: function (input, startat) {
-        if (input == null) {
-            throw new System.ArgumentNullException("input");
-        }
-
-        return new System.Text.RegularExpressions.MatchCollection(this, input, 0, input.length, startat);
-    },
-
-    getGroupNames: function () {
-        if (this._capslist == null) {
-            var invariantCulture = System.Globalization.CultureInfo.invariantCulture;
-
-            var result = [];
-            var max = this._capsize;
-            var i;
-
-            for (i = 0; i < max; i++) {
-                result[i] = System.Convert.toString(i, invariantCulture, System.Convert.typeCodes.Int32);
-            }
-
-            return result;
-        } else {
-            return this._capslist.slice();
-        }
-    },
-
-    getGroupNumbers: function () {
-        var caps = this._caps;
-        var result;
-        var key;
-        var max;
-        var i;
-
-        if (caps == null) {
-            result = [];
-            max = this._capsize;
-            for (i = 0; i < max; i++) {
-                result.push(i);
-            }
-        } else {
-            result = [];
-            for (key in caps) {
-                if (caps.hasOwnProperty(key)) {
-                    result[caps[key]] = key;
-                }
-            }
-        }
-
-        return result;
-    },
-
-    groupNameFromNumber: function (i) {
-        if (this._capslist == null) {
-            if (i >= 0 && i < this._capsize) {
-                var invariantCulture = System.Globalization.CultureInfo.invariantCulture;
-
-                return System.Convert.toString(i, invariantCulture, System.Convert.typeCodes.Int32);
-            }
-
-            return "";
-        } else {
-            if (this._caps != null) {
-                var obj = this._caps[i];
-
-                if (obj == null) {
-                    return "";
+// @source @Regex.js
+
+    Bridge.define("System.Text.RegularExpressions.Regex", {
+        statics: {
+            _cacheSize: 15,
+            _defaultMatchTimeout: System.TimeSpan.fromMilliseconds(-1),
+
+            getCacheSize: function () {
+                return System.Text.RegularExpressions.Regex._cacheSize;
+            },
+
+            setCacheSize: function (value) {
+                if (value < 0) {
+                    throw new System.ArgumentOutOfRangeException("value");
                 }
 
-                return parseInt(obj);
+                System.Text.RegularExpressions.Regex._cacheSize = value;
+                //TODO: remove extra items from cache
+            },
+
+            escape: function (str) {
+                if (str == null) {
+                    throw new System.ArgumentNullException("str");
+                }
+
+                return System.Text.RegularExpressions.RegexParser.escape(str);
+            },
+
+            unescape: function (str) {
+                if (str == null) {
+                    throw new System.ArgumentNullException("str");
+                }
+
+                return System.Text.RegularExpressions.RegexParser.unescape(str);
+            },
+
+            isMatch: function (input, pattern) {
+                var scope = System.Text.RegularExpressions;
+                return scope.Regex.isMatch$2(input, pattern, scope.RegexOptions.None, scope.Regex._defaultMatchTimeout);
+            },
+
+            isMatch$1: function (input, pattern, options) {
+                var scope = System.Text.RegularExpressions;
+                return scope.Regex.isMatch$2(input, pattern, options, scope.Regex._defaultMatchTimeout);
+            },
+
+            isMatch$2: function (input, pattern, options, matchTimeout) {
+                var regex = new System.Text.RegularExpressions.Regex.$constructor3(pattern, options, matchTimeout, true);
+                return regex.isMatch(input);
+            },
+
+            match: function (input, pattern) {
+                var scope = System.Text.RegularExpressions;
+                return scope.Regex.match$2(input, pattern, scope.RegexOptions.None, scope.Regex._defaultMatchTimeout);
+            },
+
+            match$1: function (input, pattern, options) {
+                var scope = System.Text.RegularExpressions;
+                return scope.Regex.match$2(input, pattern, options, scope.Regex._defaultMatchTimeout);
+            },
+
+            match$2: function (input, pattern, options, matchTimeout) {
+                var regex = new System.Text.RegularExpressions.Regex.$constructor3(pattern, options, matchTimeout, true);
+                return regex.match(input);
+            },
+
+            matches: function (input, pattern) {
+                var scope = System.Text.RegularExpressions;
+                return scope.Regex.matches$2(input, pattern, scope.RegexOptions.None, scope.Regex._defaultMatchTimeout);
+            },
+
+            matches$1: function (input, pattern, options) {
+                var scope = System.Text.RegularExpressions;
+                return scope.Regex.matches$2(input, pattern, options, scope.Regex._defaultMatchTimeout);
+            },
+
+            matches$2: function (input, pattern, options, matchTimeout) {
+                var regex = new System.Text.RegularExpressions.Regex.$constructor3(pattern, options, matchTimeout, true);
+                return regex.matches(input);
+            },
+
+            replace: function (input, pattern, replacement) {
+                var scope = System.Text.RegularExpressions;
+                return scope.Regex.replace$2(input, pattern, replacement, scope.RegexOptions.None, scope.Regex._defaultMatchTimeout);
+            },
+
+            replace$1: function (input, pattern, replacement, options) {
+                var scope = System.Text.RegularExpressions;
+                return scope.Regex.replace$2(input, pattern, replacement, options, scope.Regex._defaultMatchTimeout);
+            },
+
+            replace$2: function (input, pattern, replacement, options, matchTimeout) {
+                var regex = new System.Text.RegularExpressions.Regex.$constructor3(pattern, options, matchTimeout, true);
+                return regex.replace(input, replacement);
+            },
+
+            replace$3: function (input, pattern, evaluator) {
+                var scope = System.Text.RegularExpressions;
+                return scope.Regex.replace$5(input, pattern, evaluator, scope.RegexOptions.None, scope.Regex._defaultMatchTimeout);
+            },
+
+            replace$4: function (input, pattern, evaluator, options) {
+                var scope = System.Text.RegularExpressions;
+                return scope.Regex.replace$5(input, pattern, evaluator, options, scope.Regex._defaultMatchTimeout);
+            },
+
+            replace$5: function (input, pattern, evaluator, options, matchTimeout) {
+                var regex = new System.Text.RegularExpressions.Regex.$constructor3(pattern, options, matchTimeout, true);
+                return regex.replace$3(input, evaluator);
+            },
+
+            split: function (input, pattern) {
+                var scope = System.Text.RegularExpressions;
+                return scope.Regex.split$2(input, pattern, scope.RegexOptions.None, scope.Regex._defaultMatchTimeout);
+            },
+
+            split$1: function (input, pattern, options) {
+                var scope = System.Text.RegularExpressions;
+                return scope.Regex.split$2(input, pattern, options, scope.Regex._defaultMatchTimeout);
+            },
+
+            split$2: function (input, pattern, options, matchTimeout) {
+                var regex = new System.Text.RegularExpressions.Regex.$constructor3(pattern, options, matchTimeout, true);
+                return regex.split(input);
             }
+        },
+
+        _pattern: "",
+        _matchTimeout: System.TimeSpan.fromMilliseconds(-1),
+        _runner: null,
+        _caps: null,
+        _capsize: 0,
+        _capnames: null,
+        _capslist: null,
 
-            if (i >= 0 && i < this._capslist.length) {
-                return this._capslist[i];
-            }
-
-            return "";
-        }
-    },
-
-    groupNumberFromName: function (name) {
-        if (name == null) {
-            throw new System.ArgumentNullException("name");
-        }
-
-        // look up name if we have a hashtable of names
-        if (this._capnames != null) {
-            var ret = this._capnames[name];
-
-            if (ret == null) {
-                return -1;
-            }
-
-            return parseInt(ret);
-        }
-
-        // convert to an int if it looks like a number
-        var result = 0;
-        var ch;
-        var i;
-
-        for (i = 0; i < name.Length; i++) {
-            ch = name[i];
-
-            if (ch > "9" || ch < "0") {
-                return -1;
-            }
-
-            result *= 10;
-            result += (ch - "0");
-        }
-
-        // return int if it's in range
-        if (result >= 0 && result < this._capsize) {
-            return result;
-        }
-
-        return -1;
-    },
-
-    replace: function (input, replacement) {
-        if (input == null) {
-            throw new System.ArgumentNullException("input");
-        }
-
-        var startat = this.getRightToLeft() ? input.length : 0;
-
-        return this.replace$2(input, replacement, -1, startat);
-    },
-
-    replace$1: function (input, replacement, count) {
-        if (input == null) {
-            throw new System.ArgumentNullException("input");
-        }
-
-        var startat = this.getRightToLeft() ? input.length : 0;
-
-        return this.replace$2(input, replacement, count, startat);
-    },
-
-    replace$2: function (input, replacement, count, startat) {
-        if (input == null) {
-            throw new System.ArgumentNullException("input");
-        }
-
-        if (replacement == null) {
-            throw new System.ArgumentNullException("replacement");
-        }
-
-        var repl = System.Text.RegularExpressions.RegexParser.parseReplacement(replacement, this._caps, this._capsize, this._capnames, this._options);
-        //TODO: Cache
-
-        return repl.replace(this, input, count, startat);
-    },
-
-    replace$3: function (input, evaluator) {
-        if (input == null) {
-            throw new System.ArgumentNullException("input");
-        }
-
-        var startat = this.getRightToLeft() ? input.length : 0;
-        return this.replace$5(input, evaluator, -1, startat);
-    },
-
-    replace$4: function (input, evaluator, count) {
-        if (input == null) {
-            throw new System.ArgumentNullException("input");
-        }
-
-        var startat = this.getRightToLeft() ? input.length : 0;
-
-        return this.replace$5(input, evaluator, count, startat);
-    },
-
-    replace$5: function (input, evaluator, count, startat) {
-        if (input == null) {
-            throw new System.ArgumentNullException("input");
-        }
-
-        return System.Text.RegularExpressions.RegexReplacement.replace(evaluator, this, input, count, startat);
-    },
-
-    split: function (input) {
-        if (input == null) {
-            throw new System.ArgumentNullException("input");
-        }
-
-        var startat = this.getRightToLeft() ? input.length : 0;
-
-        return this.split$2(input, 0, startat);
-    },
-
-    split$1: function (input, count) {
-        if (input == null) {
-            throw new System.ArgumentNullException("input");
-        }
-
-        var startat = this.getRightToLeft() ? input.length : 0;
-
-        return this.split$2(input, count, startat);
-    },
-
-    split$2: function (input, count, startat) {
-        if (input == null) {
-            throw new System.ArgumentNullException("input");
-        }
-
-        return System.Text.RegularExpressions.RegexReplacement.split(this, input, count, startat);
-    },
-
-    _validateMatchTimeout: function (matchTimeout) {
-        var ms = matchTimeout.getTotalMilliseconds();
-
-        if (-1 === ms) {
-            return;
-        }
-
-        if (ms > 0 && ms <= 2147483646) {
-            return;
-        }
-
-        throw new System.ArgumentOutOfRangeException("matchTimeout");
-    }
-});
-
-// @source Text/RegularExpressions/RegexCapture.js
-
-Bridge.define("System.Text.RegularExpressions.Capture", {
-    _text: "",
-    _index: 0,
-    _length: 0,
-
-    constructor: function (text, i, l) {
-		this.$initialize();
-        this._text = text;
-        this._index = i;
-        this._length = l;
-    },
-
-    getIndex: function () {
-        return this._index;
-    },
-
-    getLength: function () {
-        return this._length;
-    },
-
-    getValue: function () {
-        return this._text.substr(this._index, this._length);
-    },
-
-    toString: function () {
-        return this.getValue();
-    },
-
-    _getOriginalString: function () {
-        return this._text;
-    },
-
-    _getLeftSubstring: function () {
-        return this._text.slice(0, _index);
-    },
-
-    _getRightSubstring: function () {
-        return this._text.slice(this._index + this._length, this._text.length);
-    }
-});
-
-// @source Text/RegularExpressions/RegexCaptureCollection.js
-
-Bridge.define("System.Text.RegularExpressions.CaptureCollection", {
-    inherits: function () {
-        return [System.Collections.ICollection];
-    },
-
-    config: {
-        alias: [
-        "getEnumerator", "System$Collections$IEnumerable$getEnumerator",
-        "getCount", "System$Collections$ICollection$getCount"
-        ]
-    },
-
-    _group: null,
-    _capcount: 0,
-    _captures: null,
-
-    constructor: function (group) {
-		this.$initialize();
-        this._group = group;
-        this._capcount = group._capcount;
-    },
-
-    getSyncRoot: function () {
-        return this._group;
-    },
-
-    getIsSynchronized: function () {
-        return false;
-    },
-
-    getIsReadOnly: function () {
-        return true;
-    },
-
-    getCount: function () {
-        return this._capcount;
-    },
-
-    get: function (i) {
-        if (i === this._capcount - 1 && i >= 0) {
-            return this._group;
-        }
-
-        if (i >= this._capcount || i < 0) {
-            throw new System.ArgumentOutOfRangeException("i");
-        }
-
-        this._ensureCapturesInited();
-
-        return this._captures[i];
-    },
-
-    copyTo: function (array, arrayIndex) {
-        if (array == null) {
-            throw new System.ArgumentNullException("array");
-        }
-
-        if (array.length < arrayIndex + this._capcount) {
-            throw new System.IndexOutOfRangeException();
-        }
-
-        var capture;
-        var i;
-        var j;
-
-        for (i = arrayIndex, j = 0; j < this._capcount; i++, j++) {
-            capture = this.get(j);
-            System.Array.set(array, capture, [i]);
-        }
-    },
-
-    getEnumerator: function () {
-        return new System.Text.RegularExpressions.CaptureEnumerator(this);
-    },
-
-    _ensureCapturesInited: function () {
-        // first time a capture is accessed, compute them all
-        if (this._captures == null) {
-            var captures = [];
-            var j;
-
-            captures.length = this._capcount;
-            for (j = 0; j < this._capcount - 1; j++) {
-                var index = this._group._caps[j * 2];
-                var length = this._group._caps[j * 2 + 1];
-
-                captures[j] = new System.Text.RegularExpressions.Capture(this._group._text, index, length);
-            }
-
-            if (this._capcount > 0) {
-                captures[this._capcount - 1] = this._group;
-            }
-
-            this._captures = captures;
-        }
-    }
-});
-
-Bridge.define("System.Text.RegularExpressions.CaptureEnumerator", {
-    inherits: function () {
-        return [System.Collections.IEnumerator];
-    },
-
-    config: {
-        alias: [
-            "getCurrent", "System$Collections$IEnumerator$getCurrent",
-            "moveNext", "System$Collections$IEnumerator$moveNext",
-            "reset", "System$Collections$IEnumerator$reset"
-        ]
-    },
-
-    _captureColl: null,
-    _curindex: 0,
-
-    constructor: function (captureColl) {
-		this.$initialize();
-        this._curindex = -1;
-        this._captureColl = captureColl;
-    },
-
-    moveNext: function () {
-        var size = this._captureColl.getCount();
-
-        if (this._curindex >= size) {
-            return false;
-        }
-
-        this._curindex++;
-        return (this._curindex < size);
-    },
-
-    getCurrent: function () {
-        return this.getCapture();
-    },
-
-    getCapture: function () {
-        if (this._curindex < 0 || this._curindex >= this._captureColl.getCount()) {
-            throw new System.InvalidOperationException("Enumeration has either not started or has already finished.");
-        }
-
-        return this._captureColl.get(this._curindex);
-    },
-
-    reset: function () {
-        this._curindex = -1;
-    }
-});
-
-// @source Text/RegularExpressions/RegexGroup.js
-
-Bridge.define("System.Text.RegularExpressions.Group", {
-    inherits: function () {
-        return [System.Text.RegularExpressions.Capture];
-    },
-
-    statics: {
         config: {
             init: function () {
-                var empty = new System.Text.RegularExpressions.Group("", [], 0);
-
-                this.getEmpty = function () {
-                    return empty;
-                }
+                this._options = System.Text.RegularExpressions.RegexOptions.None;
             }
         },
 
-        synchronized: function (group) {
-            if (group == null) {
-                throw new System.ArgumentNullException("group");
+        constructor: function (pattern) {
+            this.$constructor1(pattern, System.Text.RegularExpressions.RegexOptions.None);
+        },
+
+        $constructor1: function (pattern, options) {
+            this.$constructor2(pattern, options, System.TimeSpan.fromMilliseconds(-1));
+        },
+
+        $constructor2: function (pattern, options, matchTimeout) {
+            this.$constructor3(pattern, options, matchTimeout, false);
+        },
+
+        $constructor3: function (pattern, options, matchTimeout, useCache) {
+            this.$initialize();
+            var scope = System.Text.RegularExpressions;
+
+            if (pattern == null) {
+                throw new System.ArgumentNullException("pattern");
             }
 
-            // force Captures to be computed.
-            var captures = group.getCaptures();
+            if (options < scope.RegexOptions.None || ((options >> 10) !== 0)) {
+                throw new System.ArgumentOutOfRangeException("options");
+            }
 
-            if (captures.getCount() > 0) {
-                captures.get(0);
+            if (((options & scope.RegexOptions.ECMAScript) !== 0) &&
+                ((options & ~(scope.RegexOptions.ECMAScript |
+                    scope.RegexOptions.IgnoreCase |
+                    scope.RegexOptions.Multiline |
+                    scope.RegexOptions.CultureInvariant
+                )) !== 0)) {
+                throw new System.ArgumentOutOfRangeException("options");
+            }
+
+            // Check if the specified options are supported.
+            var supportedOptions =
+                System.Text.RegularExpressions.RegexOptions.IgnoreCase |
+                System.Text.RegularExpressions.RegexOptions.Multiline |
+                System.Text.RegularExpressions.RegexOptions.Singleline |
+                System.Text.RegularExpressions.RegexOptions.IgnorePatternWhitespace |
+                System.Text.RegularExpressions.RegexOptions.ExplicitCapture;
+
+            if ((options | supportedOptions) !== supportedOptions) {
+                throw new System.NotSupportedException("Specified Regex options are not supported.");
+            }
+
+            this._validateMatchTimeout(matchTimeout);
+
+            this._pattern = pattern;
+            this._options = options;
+            this._matchTimeout = matchTimeout;
+            this._runner = new scope.RegexRunner(this);
+
+            //TODO: cache
+            var patternInfo = this._runner.parsePattern();
+
+            this._capnames = patternInfo.sparseSettings.sparseSlotNameMap;
+            this._capslist = patternInfo.sparseSettings.sparseSlotNameMap.keys;
+            this._capsize = this._capslist.length;
+        },
+
+        getMatchTimeout: function () {
+            return this._matchTimeout;
+        },
+
+        getOptions: function () {
+            return this._options;
+        },
+
+        getRightToLeft: function () {
+            return (this._options & System.Text.RegularExpressions.RegexOptions.RightToLeft) !== 0;
+        },
+
+        isMatch: function (input) {
+            if (input == null) {
+                throw new System.ArgumentNullException("input");
+            }
+
+            var startat = this.getRightToLeft() ? input.length : 0;
+
+            return this.isMatch$1(input, startat);
+        },
+
+        isMatch$1: function (input, startat) {
+            if (input == null) {
+                throw new System.ArgumentNullException("input");
+            }
+
+            var match = this._runner.run(true, -1, input, 0, input.length, startat);
+
+            return match == null;
+        },
+
+        match: function (input) {
+            if (input == null) {
+                throw new System.ArgumentNullException("input");
+            }
+
+            var startat = this.getRightToLeft() ? input.length : 0;
+
+            return this.match$1(input, startat);
+        },
+
+        match$1: function (input, startat) {
+            if (input == null) {
+                throw new System.ArgumentNullException("input");
+            }
+
+            return this._runner.run(false, -1, input, 0, input.length, startat);
+        },
+
+        match$2: function (input, beginning, length) {
+            if (input == null) {
+                throw new System.ArgumentNullException("input");
+            }
+
+            var startat = this.getRightToLeft() ? beginning + length : beginning;
+
+            return this._runner.run(false, -1, input, beginning, length, startat);
+        },
+
+        matches: function (input) {
+            if (input == null) {
+                throw new System.ArgumentNullException("input");
+            }
+
+            var startat = this.getRightToLeft() ? input.length : 0;
+
+            return this.matches$1(input, startat);
+        },
+
+        matches$1: function (input, startat) {
+            if (input == null) {
+                throw new System.ArgumentNullException("input");
+            }
+
+            return new System.Text.RegularExpressions.MatchCollection(this, input, 0, input.length, startat);
+        },
+
+        getGroupNames: function () {
+            if (this._capslist == null) {
+                var invariantCulture = System.Globalization.CultureInfo.invariantCulture;
+
+                var result = [];
+                var max = this._capsize;
+                var i;
+
+                for (i = 0; i < max; i++) {
+                    result[i] = System.Convert.toString(i, invariantCulture, System.Convert.typeCodes.Int32);
+                }
+
+                return result;
+            } else {
+                return this._capslist.slice();
+            }
+        },
+
+        getGroupNumbers: function () {
+            var caps = this._caps;
+            var result;
+            var key;
+            var max;
+            var i;
+
+            if (caps == null) {
+                result = [];
+                max = this._capsize;
+                for (i = 0; i < max; i++) {
+                    result.push(i);
+                }
+            } else {
+                result = [];
+                for (key in caps) {
+                    if (caps.hasOwnProperty(key)) {
+                        result[caps[key]] = key;
+                    }
+                }
+            }
+
+            return result;
+        },
+
+        groupNameFromNumber: function (i) {
+            if (this._capslist == null) {
+                if (i >= 0 && i < this._capsize) {
+                    var invariantCulture = System.Globalization.CultureInfo.invariantCulture;
+
+                    return System.Convert.toString(i, invariantCulture, System.Convert.typeCodes.Int32);
+                }
+
+                return "";
+            } else {
+                if (this._caps != null) {
+                    var obj = this._caps[i];
+
+                    if (obj == null) {
+                        return "";
+                    }
+
+                    return parseInt(obj);
+                }
+
+                if (i >= 0 && i < this._capslist.length) {
+                    return this._capslist[i];
+                }
+
+                return "";
+            }
+        },
+
+        groupNumberFromName: function (name) {
+            if (name == null) {
+                throw new System.ArgumentNullException("name");
+            }
+
+            // look up name if we have a hashtable of names
+            if (this._capnames != null) {
+                var ret = this._capnames[name];
+
+                if (ret == null) {
+                    return -1;
+                }
+
+                return parseInt(ret);
+            }
+
+            // convert to an int if it looks like a number
+            var result = 0;
+            var ch;
+            var i;
+
+            for (i = 0; i < name.Length; i++) {
+                ch = name[i];
+
+                if (ch > "9" || ch < "0") {
+                    return -1;
+                }
+
+                result *= 10;
+                result += (ch - "0");
+            }
+
+            // return int if it's in range
+            if (result >= 0 && result < this._capsize) {
+                return result;
+            }
+
+            return -1;
+        },
+
+        replace: function (input, replacement) {
+            if (input == null) {
+                throw new System.ArgumentNullException("input");
+            }
+
+            var startat = this.getRightToLeft() ? input.length : 0;
+
+            return this.replace$2(input, replacement, -1, startat);
+        },
+
+        replace$1: function (input, replacement, count) {
+            if (input == null) {
+                throw new System.ArgumentNullException("input");
+            }
+
+            var startat = this.getRightToLeft() ? input.length : 0;
+
+            return this.replace$2(input, replacement, count, startat);
+        },
+
+        replace$2: function (input, replacement, count, startat) {
+            if (input == null) {
+                throw new System.ArgumentNullException("input");
+            }
+
+            if (replacement == null) {
+                throw new System.ArgumentNullException("replacement");
+            }
+
+            var repl = System.Text.RegularExpressions.RegexParser.parseReplacement(replacement, this._caps, this._capsize, this._capnames, this._options);
+            //TODO: Cache
+
+            return repl.replace(this, input, count, startat);
+        },
+
+        replace$3: function (input, evaluator) {
+            if (input == null) {
+                throw new System.ArgumentNullException("input");
+            }
+
+            var startat = this.getRightToLeft() ? input.length : 0;
+            return this.replace$5(input, evaluator, -1, startat);
+        },
+
+        replace$4: function (input, evaluator, count) {
+            if (input == null) {
+                throw new System.ArgumentNullException("input");
+            }
+
+            var startat = this.getRightToLeft() ? input.length : 0;
+
+            return this.replace$5(input, evaluator, count, startat);
+        },
+
+        replace$5: function (input, evaluator, count, startat) {
+            if (input == null) {
+                throw new System.ArgumentNullException("input");
+            }
+
+            return System.Text.RegularExpressions.RegexReplacement.replace(evaluator, this, input, count, startat);
+        },
+
+        split: function (input) {
+            if (input == null) {
+                throw new System.ArgumentNullException("input");
+            }
+
+            var startat = this.getRightToLeft() ? input.length : 0;
+
+            return this.split$2(input, 0, startat);
+        },
+
+        split$1: function (input, count) {
+            if (input == null) {
+                throw new System.ArgumentNullException("input");
+            }
+
+            var startat = this.getRightToLeft() ? input.length : 0;
+
+            return this.split$2(input, count, startat);
+        },
+
+        split$2: function (input, count, startat) {
+            if (input == null) {
+                throw new System.ArgumentNullException("input");
+            }
+
+            return System.Text.RegularExpressions.RegexReplacement.split(this, input, count, startat);
+        },
+
+        _validateMatchTimeout: function (matchTimeout) {
+            var ms = matchTimeout.getTotalMilliseconds();
+
+            if (-1 === ms) {
+                return;
+            }
+
+            if (ms > 0 && ms <= 2147483646) {
+                return;
+            }
+
+            throw new System.ArgumentOutOfRangeException("matchTimeout");
+        }
+    });
+
+// @source @RegexCapture.js
+
+    Bridge.define("System.Text.RegularExpressions.Capture", {
+        _text: "",
+        _index: 0,
+        _length: 0,
+
+        constructor: function (text, i, l) {
+            this.$initialize();
+            this._text = text;
+            this._index = i;
+            this._length = l;
+        },
+
+        getIndex: function () {
+            return this._index;
+        },
+
+        getLength: function () {
+            return this._length;
+        },
+
+        getValue: function () {
+            return this._text.substr(this._index, this._length);
+        },
+
+        toString: function () {
+            return this.getValue();
+        },
+
+        _getOriginalString: function () {
+            return this._text;
+        },
+
+        _getLeftSubstring: function () {
+            return this._text.slice(0, _index);
+        },
+
+        _getRightSubstring: function () {
+            return this._text.slice(this._index + this._length, this._text.length);
+        }
+    });
+
+// @source @RegexCaptureCollection.js
+
+    Bridge.define("System.Text.RegularExpressions.CaptureCollection", {
+        inherits: function () {
+            return [System.Collections.ICollection];
+        },
+
+        config: {
+            alias: [
+            "getEnumerator", "System$Collections$IEnumerable$getEnumerator",
+            "getCount", "System$Collections$ICollection$getCount"
+            ]
+        },
+
+        _group: null,
+        _capcount: 0,
+        _captures: null,
+
+        constructor: function (group) {
+            this.$initialize();
+            this._group = group;
+            this._capcount = group._capcount;
+        },
+
+        getSyncRoot: function () {
+            return this._group;
+        },
+
+        getIsSynchronized: function () {
+            return false;
+        },
+
+        getIsReadOnly: function () {
+            return true;
+        },
+
+        getCount: function () {
+            return this._capcount;
+        },
+
+        get: function (i) {
+            if (i === this._capcount - 1 && i >= 0) {
+                return this._group;
+            }
+
+            if (i >= this._capcount || i < 0) {
+                throw new System.ArgumentOutOfRangeException("i");
+            }
+
+            this._ensureCapturesInited();
+
+            return this._captures[i];
+        },
+
+        copyTo: function (array, arrayIndex) {
+            if (array == null) {
+                throw new System.ArgumentNullException("array");
+            }
+
+            if (array.length < arrayIndex + this._capcount) {
+                throw new System.IndexOutOfRangeException();
+            }
+
+            var capture;
+            var i;
+            var j;
+
+            for (i = arrayIndex, j = 0; j < this._capcount; i++, j++) {
+                capture = this.get(j);
+                System.Array.set(array, capture, [i]);
+            }
+        },
+
+        getEnumerator: function () {
+            return new System.Text.RegularExpressions.CaptureEnumerator(this);
+        },
+
+        _ensureCapturesInited: function () {
+            // first time a capture is accessed, compute them all
+            if (this._captures == null) {
+                var captures = [];
+                var j;
+
+                captures.length = this._capcount;
+                for (j = 0; j < this._capcount - 1; j++) {
+                    var index = this._group._caps[j * 2];
+                    var length = this._group._caps[j * 2 + 1];
+
+                    captures[j] = new System.Text.RegularExpressions.Capture(this._group._text, index, length);
+                }
+
+                if (this._capcount > 0) {
+                    captures[this._capcount - 1] = this._group;
+                }
+
+                this._captures = captures;
+            }
+        }
+    });
+
+    Bridge.define("System.Text.RegularExpressions.CaptureEnumerator", {
+        inherits: function () {
+            return [System.Collections.IEnumerator];
+        },
+
+        config: {
+            alias: [
+                "getCurrent", "System$Collections$IEnumerator$getCurrent",
+                "moveNext", "System$Collections$IEnumerator$moveNext",
+                "reset", "System$Collections$IEnumerator$reset"
+            ]
+        },
+
+        _captureColl: null,
+        _curindex: 0,
+
+        constructor: function (captureColl) {
+            this.$initialize();
+            this._curindex = -1;
+            this._captureColl = captureColl;
+        },
+
+        moveNext: function () {
+            var size = this._captureColl.getCount();
+
+            if (this._curindex >= size) {
+                return false;
+            }
+
+            this._curindex++;
+            return (this._curindex < size);
+        },
+
+        getCurrent: function () {
+            return this.getCapture();
+        },
+
+        getCapture: function () {
+            if (this._curindex < 0 || this._curindex >= this._captureColl.getCount()) {
+                throw new System.InvalidOperationException("Enumeration has either not started or has already finished.");
+            }
+
+            return this._captureColl.get(this._curindex);
+        },
+
+        reset: function () {
+            this._curindex = -1;
+        }
+    });
+
+// @source @RegexGroup.js
+
+    Bridge.define("System.Text.RegularExpressions.Group", {
+        inherits: function () {
+            return [System.Text.RegularExpressions.Capture];
+        },
+
+        statics: {
+            config: {
+                init: function () {
+                    var empty = new System.Text.RegularExpressions.Group("", [], 0);
+
+                    this.getEmpty = function () {
+                        return empty;
+                    }
+                }
+            },
+
+            synchronized: function (group) {
+                if (group == null) {
+                    throw new System.ArgumentNullException("group");
+                }
+
+                // force Captures to be computed.
+                var captures = group.getCaptures();
+
+                if (captures.getCount() > 0) {
+                    captures.get(0);
+                }
+
+                return group;
+            }
+        },
+
+        _caps: null,
+        _capcount: 0,
+        _capColl: null,
+
+        constructor: function (text, caps, capcount) {
+            this.$initialize();
+            var scope = System.Text.RegularExpressions;
+            var index = capcount === 0 ? 0 : caps[(capcount - 1) * 2];
+            var length = capcount === 0 ? 0 : caps[(capcount * 2) - 1];
+
+            scope.Capture.$constructor.call(this, text, index, length);
+
+            this._caps = caps;
+            this._capcount = capcount;
+        },
+
+        getSuccess: function () {
+            return this._capcount !== 0;
+        },
+
+        getCaptures: function () {
+            if (this._capColl == null) {
+                this._capColl = new System.Text.RegularExpressions.CaptureCollection(this);
+            }
+
+            return this._capColl;
+        }
+    });
+
+// @source @RegexGroupCollection.js
+
+    Bridge.define("System.Text.RegularExpressions.GroupCollection", {
+        inherits: function () {
+            return [System.Collections.ICollection];
+        },
+
+        config: {
+            alias: [
+            "getEnumerator", "System$Collections$IEnumerable$getEnumerator",
+            "getCount", "System$Collections$ICollection$getCount"
+            ]
+        },
+
+        _match: null,
+        _captureMap: null,
+        _groups: null,
+
+        constructor: function (match, caps) {
+            this.$initialize();
+            this._match = match;
+            this._captureMap = caps;
+        },
+
+        getSyncRoot: function () {
+            return this._match;
+        },
+
+        getIsSynchronized: function () {
+            return false;
+        },
+
+        getIsReadOnly: function () {
+            return true;
+        },
+
+        getCount: function () {
+            return this._match._matchcount.length;
+        },
+
+        get: function (groupnum) {
+            return this._getGroup(groupnum);
+        },
+
+        getByName: function (groupname) {
+            if (this._match._regex == null) {
+                return System.Text.RegularExpressions.Group.getEmpty();
+            }
+
+            var groupnum = this._match._regex.groupNumberFromName(groupname);
+
+            return this._getGroup(groupnum);
+        },
+
+        copyTo: function (array, arrayIndex) {
+            if (array == null) {
+                throw new System.ArgumentNullException("array");
+            }
+
+            var count = this.getCount();
+
+            if (array.length < arrayIndex + count) {
+                throw new System.IndexOutOfRangeException();
+            }
+
+            var group;
+            var i;
+            var j;
+
+            for (i = arrayIndex, j = 0; j < count; i++, j++) {
+                group = this._getGroup(j);
+                System.Array.set(array, group, [i]);
+            }
+        },
+
+        getEnumerator: function () {
+            return new System.Text.RegularExpressions.GroupEnumerator(this);
+        },
+
+        _getGroup: function (groupnum) {
+            var group;
+
+            if (this._captureMap != null) {
+                var num = this._captureMap[groupnum];
+
+                if (num == null) {
+                    group = System.Text.RegularExpressions.Group.getEmpty();
+                } else {
+                    group = this._getGroupImpl(num);
+                }
+            } else {
+                if (groupnum >= this._match._matchcount.length || groupnum < 0) {
+                    group = System.Text.RegularExpressions.Group.getEmpty();
+                } else {
+                    group = this._getGroupImpl(groupnum);
+                }
             }
 
             return group;
-        }
-    },
+        },
 
-    _caps: null,
-    _capcount: 0,
-    _capColl: null,
-
-    constructor: function (text, caps, capcount) {
-		this.$initialize();
-        var scope = System.Text.RegularExpressions;
-        var index = capcount === 0 ? 0 : caps[(capcount - 1) * 2];
-        var length = capcount === 0 ? 0 : caps[(capcount * 2) - 1];
-
-        scope.Capture.$constructor.call(this, text, index, length);
-
-        this._caps = caps;
-        this._capcount = capcount;
-    },
-
-    getSuccess: function () {
-        return this._capcount !== 0;
-    },
-
-    getCaptures: function () {
-        if (this._capColl == null) {
-            this._capColl = new System.Text.RegularExpressions.CaptureCollection(this);
-        }
-
-        return this._capColl;
-    }
-});
-
-// @source Text/RegularExpressions/RegexGroupCollection.js
-
-Bridge.define("System.Text.RegularExpressions.GroupCollection", {
-    inherits: function () {
-        return [System.Collections.ICollection];
-    },
-
-    config: {
-        alias: [
-        "getEnumerator", "System$Collections$IEnumerable$getEnumerator",
-        "getCount", "System$Collections$ICollection$getCount"
-        ]
-    },
-
-    _match: null,
-    _captureMap: null,
-    _groups: null,
-
-    constructor: function (match, caps) {
-		this.$initialize();
-        this._match = match;
-        this._captureMap = caps;
-    },
-
-    getSyncRoot: function () {
-        return this._match;
-    },
-
-    getIsSynchronized: function () {
-        return false;
-    },
-
-    getIsReadOnly: function () {
-        return true;
-    },
-
-    getCount: function () {
-        return this._match._matchcount.length;
-    },
-
-    get: function (groupnum) {
-        return this._getGroup(groupnum);
-    },
-
-    getByName: function (groupname) {
-        if (this._match._regex == null) {
-            return System.Text.RegularExpressions.Group.getEmpty();
-        }
-
-        var groupnum = this._match._regex.groupNumberFromName(groupname);
-
-        return this._getGroup(groupnum);
-    },
-
-    copyTo: function (array, arrayIndex) {
-        if (array == null) {
-            throw new System.ArgumentNullException("array");
-        }
-
-        var count = this.getCount();
-
-        if (array.length < arrayIndex + count) {
-            throw new System.IndexOutOfRangeException();
-        }
-
-        var group;
-        var i;
-        var j;
-
-        for (i = arrayIndex, j = 0; j < count; i++, j++) {
-            group = this._getGroup(j);
-            System.Array.set(array, group, [i]);
-        }
-    },
-
-    getEnumerator: function () {
-        return new System.Text.RegularExpressions.GroupEnumerator(this);
-    },
-
-    _getGroup: function (groupnum) {
-        var group;
-
-        if (this._captureMap != null) {
-            var num = this._captureMap[groupnum];
-
-            if (num == null) {
-                group = System.Text.RegularExpressions.Group.getEmpty();
-            } else {
-                group = this._getGroupImpl(num);
-            }
-        } else {
-            if (groupnum >= this._match._matchcount.length || groupnum < 0) {
-                group = System.Text.RegularExpressions.Group.getEmpty();
-            } else {
-                group = this._getGroupImpl(groupnum);
-            }
-        }
-
-        return group;
-    },
-
-    _getGroupImpl: function (groupnum) {
-        if (groupnum === 0) {
-            return this._match;
-        }
-
-        this._ensureGroupsInited();
-
-        return this._groups[groupnum];
-    },
-
-    _ensureGroupsInited: function () {
-        // Construct all the Group objects the first time GetGroup is called
-        if (this._groups == null) {
-            var groups = [];
-
-            groups.length = this._match._matchcount.length;
-
-            if (groups.length > 0) {
-                groups[0] = this._match;
+        _getGroupImpl: function (groupnum) {
+            if (groupnum === 0) {
+                return this._match;
             }
 
-            var matchText;
-            var matchCaps;
-            var matchCapcount;
-            var i;
+            this._ensureGroupsInited();
 
-            for (i = 0; i < groups.length - 1; i++) {
-                matchText = this._match._text;
-                matchCaps = this._match._matches[i + 1];
-                matchCapcount = this._match._matchcount[i + 1];
-                groups[i + 1] = new System.Text.RegularExpressions.Group(matchText, matchCaps, matchCapcount);
-            }
-            this._groups = groups;
-        }
-    }
-});
+            return this._groups[groupnum];
+        },
 
-Bridge.define("System.Text.RegularExpressions.GroupEnumerator", {
-    inherits: function () {
-        return [System.Collections.IEnumerator];
-    },
+        _ensureGroupsInited: function () {
+            // Construct all the Group objects the first time GetGroup is called
+            if (this._groups == null) {
+                var groups = [];
 
-    config: {
-        alias: [
-            "getCurrent", "System$Collections$IEnumerator$getCurrent",
-            "moveNext", "System$Collections$IEnumerator$moveNext",
-            "reset", "System$Collections$IEnumerator$reset"
-        ]
-    },
+                groups.length = this._match._matchcount.length;
 
-    _groupColl: null,
-    _curindex: 0,
-
-    constructor: function (groupColl) {
-		this.$initialize();
-        this._curindex = -1;
-        this._groupColl = groupColl;
-    },
-
-    moveNext: function () {
-        var size = this._groupColl.getCount();
-
-        if (this._curindex >= size) {
-            return false;
-        }
-
-        this._curindex++;
-
-        return (this._curindex < size);
-    },
-
-    getCurrent: function () {
-        return this.getCapture();
-    },
-
-    getCapture: function () {
-        if (this._curindex < 0 || this._curindex >= this._groupColl.getCount()) {
-            throw new System.InvalidOperationException("Enumeration has either not started or has already finished.");
-        }
-
-        return this._groupColl.get(this._curindex);
-    },
-
-    reset: function () {
-        this._curindex = -1;
-    }
-});
-
-// @source Text/RegularExpressions/RegexMatch.js
-
-Bridge.define("System.Text.RegularExpressions.Match", {
-    inherits: function () {
-        return [System.Text.RegularExpressions.Group];
-    },
-
-    statics: {
-        config: {
-            init: function () {
-                var empty = new System.Text.RegularExpressions.Match(null, 1, "", 0, 0, 0);
-
-                this.getEmpty = function () {
-                    return empty;
+                if (groups.length > 0) {
+                    groups[0] = this._match;
                 }
+
+                var matchText;
+                var matchCaps;
+                var matchCapcount;
+                var i;
+
+                for (i = 0; i < groups.length - 1; i++) {
+                    matchText = this._match._text;
+                    matchCaps = this._match._matches[i + 1];
+                    matchCapcount = this._match._matchcount[i + 1];
+                    groups[i + 1] = new System.Text.RegularExpressions.Group(matchText, matchCaps, matchCapcount);
+                }
+                this._groups = groups;
+            }
+        }
+    });
+
+    Bridge.define("System.Text.RegularExpressions.GroupEnumerator", {
+        inherits: function () {
+            return [System.Collections.IEnumerator];
+        },
+
+        config: {
+            alias: [
+                "getCurrent", "System$Collections$IEnumerator$getCurrent",
+                "moveNext", "System$Collections$IEnumerator$moveNext",
+                "reset", "System$Collections$IEnumerator$reset"
+            ]
+        },
+
+        _groupColl: null,
+        _curindex: 0,
+
+        constructor: function (groupColl) {
+            this.$initialize();
+            this._curindex = -1;
+            this._groupColl = groupColl;
+        },
+
+        moveNext: function () {
+            var size = this._groupColl.getCount();
+
+            if (this._curindex >= size) {
+                return false;
+            }
+
+            this._curindex++;
+
+            return (this._curindex < size);
+        },
+
+        getCurrent: function () {
+            return this.getCapture();
+        },
+
+        getCapture: function () {
+            if (this._curindex < 0 || this._curindex >= this._groupColl.getCount()) {
+                throw new System.InvalidOperationException("Enumeration has either not started or has already finished.");
+            }
+
+            return this._groupColl.get(this._curindex);
+        },
+
+        reset: function () {
+            this._curindex = -1;
+        }
+    });
+
+// @source @RegexMatch.js
+
+    Bridge.define("System.Text.RegularExpressions.Match", {
+        inherits: function () {
+            return [System.Text.RegularExpressions.Group];
+        },
+
+        statics: {
+            config: {
+                init: function () {
+                    var empty = new System.Text.RegularExpressions.Match(null, 1, "", 0, 0, 0);
+
+                    this.getEmpty = function () {
+                        return empty;
+                    }
+                }
+            },
+
+            synchronized: function (match) {
+                if (match == null) {
+                    throw new System.ArgumentNullException("match");
+                }
+
+                // Populate all groups by looking at each one
+                var groups = match.getGroups();
+                var groupsCount = groups.getCount();
+                var group;
+                var i;
+
+                for (i = 0; i < groupsCount; i++) {
+                    group = groups.get(i);
+                    System.Text.RegularExpressions.Group.synchronized(group);
+                }
+
+                return match;
             }
         },
 
-        synchronized: function (match) {
-            if (match == null) {
-                throw new System.ArgumentNullException("match");
+        _regex: null,
+        _matchcount: null,
+        _matches: null,
+        _textbeg: 0,
+        _textend: 0,
+        _textstart: 0,
+        _groupColl: null,
+        _textpos: 0,
+
+        constructor: function (regex, capcount, text, begpos, len, startpos) {
+            this.$initialize();
+            var scope = System.Text.RegularExpressions;
+            var caps = [0, 0];
+
+            scope.Group.$constructor.call(this, text, caps, 0);
+
+            this._regex = regex;
+
+            this._matchcount = [];
+            this._matchcount.length = capcount;
+
+            var i;
+            for (i = 0; i < capcount; i++) {
+                this._matchcount[i] = 0;
             }
 
-            // Populate all groups by looking at each one
-            var groups = match.getGroups();
-            var groupsCount = groups.getCount();
-            var group;
-            var i;
+            this._matches = [];
+            this._matches.length = capcount;
+            this._matches[0] = caps;
 
-            for (i = 0; i < groupsCount; i++) {
-                group = groups.get(i);
-                System.Text.RegularExpressions.Group.synchronized(group);
+            this._textbeg = begpos;
+            this._textend = begpos + len;
+            this._textstart = startpos;
+        },
+
+        getGroups: function () {
+            if (this._groupColl == null) {
+                this._groupColl = new System.Text.RegularExpressions.GroupCollection(this, null);
+            }
+
+            return this._groupColl;
+        },
+
+        nextMatch: function () {
+            if (this._regex == null) {
+                return this;
+            }
+
+            return this._regex._runner.run(false, this._length, this._text, this._textbeg, this._textend - this._textbeg, this._textpos);
+        },
+
+        result: function (replacement) {
+            if (replacement == null) {
+                throw new System.ArgumentNullException("replacement");
+            }
+
+            if (this._regex == null) {
+                throw new System.NotSupportedException("Result cannot be called on a failed Match.");
+            }
+
+            var repl = System.Text.RegularExpressions.RegexParser.parseReplacement(replacement, this._regex._caps, this._regex._capsize, this._regex._capnames, this._regex._options);
+            //TODO: cache
+
+            return repl.replacement(this);
+        },
+
+        _isMatched: function (cap) {
+            return cap < this._matchcount.length && this._matchcount[cap] > 0 && this._matches[cap][this._matchcount[cap] * 2 - 1] !== (-3 + 1);
+        },
+
+        _addMatch: function (cap, start, len) {
+            if (this._matches[cap] == null) {
+                this._matches[cap] = new Array(2);
+            }
+
+            var capcount = this._matchcount[cap];
+
+            if (capcount * 2 + 2 > this._matches[cap].length) {
+                var oldmatches = this._matches[cap];
+                var newmatches = new Array(capcount * 8);
+                var j;
+
+                for (j = 0; j < capcount * 2; j++) {
+                    newmatches[j] = oldmatches[j];
+                }
+
+                this._matches[cap] = newmatches;
+            }
+
+            this._matches[cap][capcount * 2] = start;
+            this._matches[cap][capcount * 2 + 1] = len;
+            this._matchcount[cap] = capcount + 1;
+        },
+
+        _tidy: function (textpos) {
+            var interval = this._matches[0];
+            this._index = interval[0];
+            this._length = interval[1];
+            this._textpos = textpos;
+            this._capcount = this._matchcount[0];
+        },
+
+        _groupToStringImpl: function (groupnum) {
+            var c = this._matchcount[groupnum];
+
+            if (c === 0) {
+                return "";
+            }
+
+            var matches = this._matches[groupnum];
+            var capIndex = matches[(c - 1) * 2];
+            var capLength = matches[(c * 2) - 1];
+
+            return this._text.slice(capIndex, capIndex + capLength);
+        },
+
+        _lastGroupToStringImpl: function () {
+            return this._groupToStringImpl(this._matchcount.length - 1);
+        }
+    });
+
+    Bridge.define("System.Text.RegularExpressions.MatchSparse", {
+        inherits: function () {
+            return [System.Text.RegularExpressions.Match];
+        },
+
+        _caps: null,
+
+        constructor: function (regex, caps, capcount, text, begpos, len, startpos) {
+            this.$initialize();
+            var scope = System.Text.RegularExpressions;
+            scope.Match.$constructor.call(this, regex, capcount, text, begpos, len, startpos);
+
+            this._caps = caps;
+        },
+
+        getGroups: function () {
+            if (this._groupColl == null) {
+                this._groupColl = new System.Text.RegularExpressions.GroupCollection(this, this._caps);
+            }
+            return this._groupColl;
+        },
+    });
+
+// @source @RegexMatchCollection.js
+
+    Bridge.define("System.Text.RegularExpressions.MatchCollection", {
+        inherits: function () {
+            return [System.Collections.ICollection];
+        },
+
+        config: {
+            alias: [
+            "getEnumerator", "System$Collections$IEnumerable$getEnumerator",
+            "getCount", "System$Collections$ICollection$getCount"
+            ]
+        },
+
+        _regex: null,
+        _input: null,
+        _beginning: 0,
+        _length: 0,
+        _startat: 0,
+        _prevlen: 0,
+        _matches: null,
+        _done: false,
+
+        constructor: function (regex, input, beginning, length, startat) {
+            this.$initialize();
+            if (startat < 0 || startat > input.Length) {
+                throw new System.ArgumentOutOfRangeException("startat");
+            }
+
+            this._regex = regex;
+            this._input = input;
+            this._beginning = beginning;
+            this._length = length;
+            this._startat = startat;
+            this._prevlen = -1;
+            this._matches = [];
+        },
+
+        getCount: function () {
+            if (!this._done) {
+                this._getMatch(0x7FFFFFFF);
+            }
+
+            return this._matches.length;
+        },
+
+        getSyncRoot: function () {
+            return this;
+        },
+
+        getIsSynchronized: function () {
+            return false;
+        },
+
+        getIsReadOnly: function () {
+            return true;
+        },
+
+        get: function (i) {
+            var match = this._getMatch(i);
+
+            if (match == null) {
+                throw new System.ArgumentOutOfRangeException("i");
             }
 
             return match;
-        }
-    },
+        },
 
-    _regex: null,
-    _matchcount: null,
-    _matches: null,
-    _textbeg: 0,
-    _textend: 0,
-    _textstart: 0,
-    _groupColl: null,
-    _textpos: 0,
-
-    constructor: function (regex, capcount, text, begpos, len, startpos) {
-		this.$initialize();
-        var scope = System.Text.RegularExpressions;
-        var caps = [0, 0];
-
-        scope.Group.$constructor.call(this, text, caps, 0);
-
-        this._regex = regex;
-
-        this._matchcount = [];
-        this._matchcount.length = capcount;
-
-        var i;
-        for (i = 0; i < capcount; i++) {
-            this._matchcount[i] = 0;
-        }
-
-        this._matches = [];
-        this._matches.length = capcount;
-        this._matches[0] = caps;
-
-        this._textbeg = begpos;
-        this._textend = begpos + len;
-        this._textstart = startpos;
-    },
-
-    getGroups: function () {
-        if (this._groupColl == null) {
-            this._groupColl = new System.Text.RegularExpressions.GroupCollection(this, null);
-        }
-
-        return this._groupColl;
-    },
-
-    nextMatch: function () {
-        if (this._regex == null) {
-            return this;
-        }
-
-        return this._regex._runner.run(false, this._length, this._text, this._textbeg, this._textend - this._textbeg, this._textpos);
-    },
-
-    result: function (replacement) {
-        if (replacement == null) {
-            throw new System.ArgumentNullException("replacement");
-        }
-
-        if (this._regex == null) {
-            throw new System.NotSupportedException("Result cannot be called on a failed Match.");
-        }
-
-        var repl = System.Text.RegularExpressions.RegexParser.parseReplacement(replacement, this._regex._caps, this._regex._capsize, this._regex._capnames, this._regex._options);
-        //TODO: cache
-
-        return repl.replacement(this);
-    },
-
-    _isMatched: function (cap) {
-        return cap < this._matchcount.length && this._matchcount[cap] > 0 && this._matches[cap][this._matchcount[cap] * 2 - 1] !== (-3 + 1);
-    },
-
-    _addMatch: function (cap, start, len) {
-        if (this._matches[cap] == null) {
-            this._matches[cap] = new Array(2);
-        }
-
-        var capcount = this._matchcount[cap];
-
-        if (capcount * 2 + 2 > this._matches[cap].length) {
-            var oldmatches = this._matches[cap];
-            var newmatches = new Array(capcount * 8);
-            var j;
-
-            for (j = 0; j < capcount * 2; j++) {
-                newmatches[j] = oldmatches[j];
+        copyTo: function (array, arrayIndex) {
+            if (array == null) {
+                throw new System.ArgumentNullException("array");
             }
 
-            this._matches[cap] = newmatches;
-        }
+            var count = this.getCount();
 
-        this._matches[cap][capcount * 2] = start;
-        this._matches[cap][capcount * 2 + 1] = len;
-        this._matchcount[cap] = capcount + 1;
-    },
+            if (array.length < arrayIndex + count) {
+                throw new System.IndexOutOfRangeException();
+            }
 
-    _tidy: function (textpos) {
-        var interval = this._matches[0];
-        this._index = interval[0];
-        this._length = interval[1];
-        this._textpos = textpos;
-        this._capcount = this._matchcount[0];
-    },
+            var match;
+            var i;
+            var j;
 
-    _groupToStringImpl: function (groupnum) {
-        var c = this._matchcount[groupnum];
+            for (i = arrayIndex, j = 0; j < count; i++, j++) {
+                match = this._getMatch(j);
+                System.Array.set(array, match, [i]);
+            }
+        },
 
-        if (c === 0) {
-            return "";
-        }
+        getEnumerator: function () {
+            return new System.Text.RegularExpressions.MatchEnumerator(this);
+        },
 
-        var matches = this._matches[groupnum];
-        var capIndex = matches[(c - 1) * 2];
-        var capLength = matches[(c * 2) - 1];
-
-        return this._text.slice(capIndex, capIndex + capLength);
-    },
-
-    _lastGroupToStringImpl: function () {
-        return this._groupToStringImpl(this._matchcount.length - 1);
-    }
-});
-
-Bridge.define("System.Text.RegularExpressions.MatchSparse", {
-    inherits: function () {
-        return [System.Text.RegularExpressions.Match];
-    },
-
-    _caps: null,
-
-    constructor: function (regex, caps, capcount, text, begpos, len, startpos) {
-		this.$initialize();
-        var scope = System.Text.RegularExpressions;
-        scope.Match.$constructor.call(this, regex, capcount, text, begpos, len, startpos);
-
-        this._caps = caps;
-    },
-
-    getGroups: function () {
-        if (this._groupColl == null) {
-            this._groupColl = new System.Text.RegularExpressions.GroupCollection(this, this._caps);
-        }
-        return this._groupColl;
-    },
-});
-
-// @source Text/RegularExpressions/RegexMatchCollection.js
-
-Bridge.define("System.Text.RegularExpressions.MatchCollection", {
-    inherits: function () {
-        return [System.Collections.ICollection];
-    },
-
-    config: {
-        alias: [
-        "getEnumerator", "System$Collections$IEnumerable$getEnumerator",
-        "getCount", "System$Collections$ICollection$getCount"
-        ]
-    },
-
-    _regex: null,
-    _input: null,
-    _beginning: 0,
-    _length: 0,
-    _startat: 0,
-    _prevlen: 0,
-    _matches: null,
-    _done: false,
-
-    constructor: function (regex, input, beginning, length, startat) {
-		this.$initialize();
-        if (startat < 0 || startat > input.Length) {
-            throw new System.ArgumentOutOfRangeException("startat");
-        }
-
-        this._regex = regex;
-        this._input = input;
-        this._beginning = beginning;
-        this._length = length;
-        this._startat = startat;
-        this._prevlen = -1;
-        this._matches = [];
-    },
-
-    getCount: function () {
-        if (!this._done) {
-            this._getMatch(0x7FFFFFFF);
-        }
-
-        return this._matches.length;
-    },
-
-    getSyncRoot: function () {
-        return this;
-    },
-
-    getIsSynchronized: function () {
-        return false;
-    },
-
-    getIsReadOnly: function () {
-        return true;
-    },
-
-    get: function (i) {
-        var match = this._getMatch(i);
-
-        if (match == null) {
-            throw new System.ArgumentOutOfRangeException("i");
-        }
-
-        return match;
-    },
-
-    copyTo: function (array, arrayIndex) {
-        if (array == null) {
-            throw new System.ArgumentNullException("array");
-        }
-
-        var count = this.getCount();
-
-        if (array.length < arrayIndex + count) {
-            throw new System.IndexOutOfRangeException();
-        }
-
-        var match;
-        var i;
-        var j;
-
-        for (i = arrayIndex, j = 0; j < count; i++, j++) {
-            match = this._getMatch(j);
-            System.Array.set(array, match, [i]);
-        }
-    },
-
-    getEnumerator: function () {
-        return new System.Text.RegularExpressions.MatchEnumerator(this);
-    },
-
-    _getMatch: function (i) {
-        if (i < 0) {
-            return null;
-        }
-
-        if (this._matches.length > i) {
-            return this._matches[i];
-        }
-
-        if (this._done) {
-            return null;
-        }
-
-        var match;
-
-        do {
-            match = this._regex._runner.run(false, this._prevLen, this._input, this._beginning, this._length, this._startat);
-            if (!match.getSuccess()) {
-                this._done = true;
+        _getMatch: function (i) {
+            if (i < 0) {
                 return null;
             }
 
-            this._matches.push(match);
+            if (this._matches.length > i) {
+                return this._matches[i];
+            }
 
-            this._prevLen = match._length;
-            this._startat = match._textpos;
-        } while (this._matches.length <= i);
+            if (this._done) {
+                return null;
+            }
 
-        return match;
-    }
-});
+            var match;
 
-Bridge.define("System.Text.RegularExpressions.MatchEnumerator", {
-    inherits: function () {
-        return [System.Collections.IEnumerator];
-    },
+            do {
+                match = this._regex._runner.run(false, this._prevLen, this._input, this._beginning, this._length, this._startat);
+                if (!match.getSuccess()) {
+                    this._done = true;
+                    return null;
+                }
 
-    config: {
-        alias: [
-            "getCurrent", "System$Collections$IEnumerator$getCurrent",
-            "moveNext", "System$Collections$IEnumerator$moveNext",
-            "reset", "System$Collections$IEnumerator$reset"
-        ]
-    },
+                this._matches.push(match);
 
-    _matchcoll: null,
-    _match: null,
-    _curindex: 0,
-    _done: false,
+                this._prevLen = match._length;
+                this._startat = match._textpos;
+            } while (this._matches.length <= i);
 
-    constructor: function (matchColl) {
-		this.$initialize();
-        this._matchcoll = matchColl;
-    },
-
-    moveNext: function () {
-        if (this._done) {
-            return false;
+            return match;
         }
+    });
 
-        this._match = this._matchcoll._getMatch(this._curindex);
-        this._curindex++;
+    Bridge.define("System.Text.RegularExpressions.MatchEnumerator", {
+        inherits: function () {
+            return [System.Collections.IEnumerator];
+        },
 
-        if (this._match == null) {
-            this._done = true;
+        config: {
+            alias: [
+                "getCurrent", "System$Collections$IEnumerator$getCurrent",
+                "moveNext", "System$Collections$IEnumerator$moveNext",
+                "reset", "System$Collections$IEnumerator$reset"
+            ]
+        },
 
-            return false;
+        _matchcoll: null,
+        _match: null,
+        _curindex: 0,
+        _done: false,
+
+        constructor: function (matchColl) {
+            this.$initialize();
+            this._matchcoll = matchColl;
+        },
+
+        moveNext: function () {
+            if (this._done) {
+                return false;
+            }
+
+            this._match = this._matchcoll._getMatch(this._curindex);
+            this._curindex++;
+
+            if (this._match == null) {
+                this._done = true;
+
+                return false;
+            }
+
+            return true;
+        },
+
+        getCurrent: function () {
+            if (this._match == null) {
+                throw new System.InvalidOperationException("Enumeration has either not started or has already finished.");
+            }
+
+            return this._match;
+        },
+
+        reset: function () {
+            this._curindex = 0;
+            this._done = false;
+            this._match = null;
         }
+    });
 
-        return true;
-    },
+// @source @RegexOptions.js
 
-    getCurrent: function () {
-        if (this._match == null) {
-            throw new System.InvalidOperationException("Enumeration has either not started or has already finished.");
-        }
+    Bridge.define("System.Text.RegularExpressions.RegexOptions", {
+        statics: {
+            None: 0x0000,
+            IgnoreCase: 0x0001,
+            Multiline: 0x0002,
+            ExplicitCapture: 0x0004,
+            Compiled: 0x0008,
+            Singleline: 0x0010,
+            IgnorePatternWhitespace: 0x0020,
+            RightToLeft: 0x0040,
+            ECMAScript: 0x0100,
+            CultureInvariant: 0x0200
+        },
 
-        return this._match;
-    },
+        $kind: "enum",
+        $flags: true
+    });
 
-    reset: function () {
-        this._curindex = 0;
-        this._done = false;
-        this._match = null;
-    }
-});
+// @source @RegexRunner.js
 
-// @source Text/RegularExpressions/RegexOptions.js
+    Bridge.define("System.Text.RegularExpressions.RegexRunner", {
+        statics: {},
 
-Bridge.define("System.Text.RegularExpressions.RegexOptions", {
-    statics: {
-        None: 0x0000,
-        IgnoreCase: 0x0001,
-        Multiline: 0x0002,
-        ExplicitCapture: 0x0004,
-        Compiled: 0x0008,
-        Singleline: 0x0010,
-        IgnorePatternWhitespace: 0x0020,
-        RightToLeft: 0x0040,
-        ECMAScript: 0x0100,
-        CultureInvariant: 0x0200
-    },
+        _runregex: null,
+        _netEngine: null,
 
-    $kind: "enum",
-    $flags: true
-});
+        _runtext: "", // text to search
+        _runtextpos: 0, // current position in text
 
-// @source Text/RegularExpressions/RegexRunner.js
+        _runtextbeg: 0, // beginning of text to search
+        _runtextend: 0, // end of text to search
+        _runtextstart: 0, // starting point for search
+        _quick: false, // true value means IsMatch method call
+        _prevlen: 0,
 
-Bridge.define("System.Text.RegularExpressions.RegexRunner", {
-    statics: {},
+        constructor: function (regex) {
+            this.$initialize();
+            if (regex == null) {
+                throw new System.ArgumentNullException("regex");
+            }
 
-    _runregex: null,
-    _netEngine: null,
+            this._runregex = regex;
 
-    _runtext: "", // text to search
-    _runtextpos: 0, // current position in text
+            var options = regex.getOptions();
+            var optionsEnum = System.Text.RegularExpressions.RegexOptions;
 
-    _runtextbeg: 0, // beginning of text to search
-    _runtextend: 0, // end of text to search
-    _runtextstart: 0, // starting point for search
-    _quick: false, // true value means IsMatch method call
-    _prevlen: 0,
+            var isCaseInsensitive = (options & optionsEnum.IgnoreCase) === optionsEnum.IgnoreCase;
+            var isMultiline = (options & optionsEnum.Multiline) === optionsEnum.Multiline;
+            var isSingleline = (options & optionsEnum.Singleline) === optionsEnum.Singleline;
+            var isIgnoreWhitespace = (options & optionsEnum.IgnorePatternWhitespace) === optionsEnum.IgnorePatternWhitespace;
+            var isExplicitCapture = (options & optionsEnum.ExplicitCapture) === optionsEnum.ExplicitCapture;
 
-    constructor: function (regex) {
-		this.$initialize();
-        if (regex == null) {
-            throw new System.ArgumentNullException("regex");
-        }
+            var timeoutMs = regex._matchTimeout.getTotalMilliseconds();
 
-        this._runregex = regex;
+            this._netEngine = new System.Text.RegularExpressions.RegexEngine(regex._pattern, isCaseInsensitive, isMultiline, isSingleline, isIgnoreWhitespace, isExplicitCapture, timeoutMs);
+        },
 
-        var options = regex.getOptions();
-        var optionsEnum = System.Text.RegularExpressions.RegexOptions;
+        run: function (quick, prevlen, input, beginning, length, startat) {
+            if (startat < 0 || startat > input.Length) {
+                throw new System.ArgumentOutOfRangeException("start", "Start index cannot be less than 0 or greater than input length.");
+            }
 
-        var isCaseInsensitive = (options & optionsEnum.IgnoreCase) === optionsEnum.IgnoreCase;
-        var isMultiline = (options & optionsEnum.Multiline) === optionsEnum.Multiline;
-        var isSingleline = (options & optionsEnum.Singleline) === optionsEnum.Singleline;
-        var isIgnoreWhitespace = (options & optionsEnum.IgnorePatternWhitespace) === optionsEnum.IgnorePatternWhitespace;
-        var isExplicitCapture = (options & optionsEnum.ExplicitCapture) === optionsEnum.ExplicitCapture;
+            if (length < 0 || length > input.Length) {
+                throw new ArgumentOutOfRangeException("length", "Length cannot be less than 0 or exceed input length.");
+            }
 
-        var timeoutMs = regex._matchTimeout.getTotalMilliseconds();
+            this._runtext = input;
+            this._runtextbeg = beginning;
+            this._runtextend = beginning + length;
+            this._runtextstart = startat;
+            this._quick = quick;
+            this._prevlen = prevlen;
 
-        this._netEngine = new System.Text.RegularExpressions.RegexEngine(regex._pattern, isCaseInsensitive, isMultiline, isSingleline, isIgnoreWhitespace, isExplicitCapture, timeoutMs);
-    },
+            var stoppos;
+            var bump;
 
-    run: function (quick, prevlen, input, beginning, length, startat) {
-        if (startat < 0 || startat > input.Length) {
-            throw new System.ArgumentOutOfRangeException("start", "Start index cannot be less than 0 or greater than input length.");
-        }
+            if (this._runregex.getRightToLeft()) {
+                stoppos = this._runtextbeg;
+                bump = -1;
+            } else {
+                stoppos = this._runtextend;
+                bump = 1;
+            }
 
-        if (length < 0 || length > input.Length) {
-            throw new ArgumentOutOfRangeException("length", "Length cannot be less than 0 or exceed input length.");
-        }
+            if (this._prevlen === 0) {
+                if (this._runtextstart === stoppos) {
+                    return System.Text.RegularExpressions.Match.getEmpty();
+                }
 
-        this._runtext = input;
-        this._runtextbeg = beginning;
-        this._runtextend = beginning + length;
-        this._runtextstart = startat;
-        this._quick = quick;
-        this._prevlen = prevlen;
+                this._runtextstart += bump;
+            }
 
-        var stoppos;
-        var bump;
+            // Execute Regex:
+            var jsMatch = this._netEngine.match(this._runtext, this._runtextstart);
 
-        if (this._runregex.getRightToLeft()) {
-            stoppos = this._runtextbeg;
-            bump = -1;
-        } else {
-            stoppos = this._runtextend;
-            bump = 1;
-        }
+            // Convert the results:
+            var result = this._convertNetEngineResults(jsMatch);
+            return result;
+        },
 
-        if (this._prevlen === 0) {
-            if (this._runtextstart === stoppos) {
+        parsePattern: function () {
+            var result = this._netEngine.parsePattern();
+            return result;
+        },
+
+        _convertNetEngineResults: function (jsMatch) {
+            if (jsMatch.success && this._quick) {
+                return null; // in quick mode, a successful match returns null
+            }
+
+            if (!jsMatch.success) {
                 return System.Text.RegularExpressions.Match.getEmpty();
             }
 
-            this._runtextstart += bump;
-        }
+            var patternInfo = this.parsePattern();
+            var match;
 
-        // Execute Regex:
-        var jsMatch = this._netEngine.match(this._runtext, this._runtextstart);
-
-        // Convert the results:
-        var result = this._convertNetEngineResults(jsMatch);
-        return result;
-    },
-
-    parsePattern: function () {
-        var result = this._netEngine.parsePattern();
-        return result;
-    },
-
-    _convertNetEngineResults: function (jsMatch) {
-        if (jsMatch.success && this._quick) {
-            return null; // in quick mode, a successful match returns null
-        }
-
-        if (!jsMatch.success) {
-            return System.Text.RegularExpressions.Match.getEmpty();
-        }
-
-        var patternInfo = this.parsePattern();
-        var match;
-
-        if (patternInfo.sparseSettings.isSparse) {
-            match = new System.Text.RegularExpressions.MatchSparse(this._runregex, patternInfo.sparseSettings.sparseSlotMap, jsMatch.groups.length, this._runtext, 0, this._runtext.length, this._runtextstart);
-        } else {
-            match = new System.Text.RegularExpressions.Match(this._runregex, jsMatch.groups.length, this._runtext, 0, this._runtext.length, this._runtextstart);
-        }
-
-        var jsGroup;
-        var jsCapture;
-        var grOrder;
-        var i;
-        var j;
-
-        for (i = 0; i < jsMatch.groups.length; i++) {
-            jsGroup = jsMatch.groups[i];
-
-            // Paste group index/length according to group ordering:
-            grOrder = 0;
-            if (jsGroup.descriptor != null) {
-                grOrder = this._runregex.groupNumberFromName(jsGroup.descriptor.name);
+            if (patternInfo.sparseSettings.isSparse) {
+                match = new System.Text.RegularExpressions.MatchSparse(this._runregex, patternInfo.sparseSettings.sparseSlotMap, jsMatch.groups.length, this._runtext, 0, this._runtext.length, this._runtextstart);
+            } else {
+                match = new System.Text.RegularExpressions.Match(this._runregex, jsMatch.groups.length, this._runtext, 0, this._runtext.length, this._runtextstart);
             }
 
-            for (j = 0; j < jsGroup.captures.length; j++) {
-                jsCapture = jsGroup.captures[j];
-                match._addMatch(grOrder, jsCapture.capIndex, jsCapture.capLength);
+            var jsGroup;
+            var jsCapture;
+            var grOrder;
+            var i;
+            var j;
+
+            for (i = 0; i < jsMatch.groups.length; i++) {
+                jsGroup = jsMatch.groups[i];
+
+                // Paste group index/length according to group ordering:
+                grOrder = 0;
+                if (jsGroup.descriptor != null) {
+                    grOrder = this._runregex.groupNumberFromName(jsGroup.descriptor.name);
+                }
+
+                for (j = 0; j < jsGroup.captures.length; j++) {
+                    jsCapture = jsGroup.captures[j];
+                    match._addMatch(grOrder, jsCapture.capIndex, jsCapture.capLength);
+                }
             }
+
+            var textEndPos = jsMatch.capIndex + jsMatch.capLength;
+            match._tidy(textEndPos);
+
+            return match;
         }
+    });
 
-        var textEndPos = jsMatch.capIndex + jsMatch.capLength;
-        match._tidy(textEndPos);
-
-        return match;
-    }
-});
-
-// @source Text/RegularExpressions/RegexParser.js
+// @source @RegexParser.js
 
 Bridge.define("System.Text.RegularExpressions.RegexParser", {
     statics: {
@@ -18345,174 +18367,431 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
     }
 });
 
-// @source Text/RegularExpressions/RegexNode.js
+// @source @RegexNode.js
 
-Bridge.define("System.Text.RegularExpressions.RegexNode", {
-    statics: {
-        One: 9, // char     a
-        Multi: 12, // string   abcdef
-        Ref: 13, // index    \1
-        Empty: 23, //          ()
-        Concatenate: 25 //          ab
-    },
+    Bridge.define("System.Text.RegularExpressions.RegexNode", {
+        statics: {
+            One: 9, // char     a
+            Multi: 12, // string   abcdef
+            Ref: 13, // index    \1
+            Empty: 23, //          ()
+            Concatenate: 25 //          ab
+        },
 
-    _type: 0,
-    _str: null,
-    _children: null,
-    _next: null,
-    _m: 0,
+        _type: 0,
+        _str: null,
+        _children: null,
+        _next: null,
+        _m: 0,
 
-    config: {
-        init: function () {
-            this._options = System.Text.RegularExpressions.RegexOptions.None;
-        }
-    },
+        config: {
+            init: function () {
+                this._options = System.Text.RegularExpressions.RegexOptions.None;
+            }
+        },
 
-    constructor: function (type, options, arg) {
-		this.$initialize();
-        this._type = type;
-        this._options = options;
+        constructor: function (type, options, arg) {
+            this.$initialize();
+            this._type = type;
+            this._options = options;
 
-        if (type === System.Text.RegularExpressions.RegexNode.Ref) {
-            this._m = arg;
-        } else {
-            this._str = arg || null;
-        }
-    },
+            if (type === System.Text.RegularExpressions.RegexNode.Ref) {
+                this._m = arg;
+            } else {
+                this._str = arg || null;
+            }
+        },
 
-    addChild: function (newChild) {
-        if (this._children == null) {
-            this._children = [];
-        }
+        addChild: function (newChild) {
+            if (this._children == null) {
+                this._children = [];
+            }
 
-        var reducedChild = newChild._reduce();
-        this._children.push(reducedChild);
-        reducedChild._next = this;
-    },
+            var reducedChild = newChild._reduce();
+            this._children.push(reducedChild);
+            reducedChild._next = this;
+        },
 
-    childCount: function () {
-        return this._children == null ? 0 : this._children.length;
-    },
+        childCount: function () {
+            return this._children == null ? 0 : this._children.length;
+        },
 
-    child: function (i) {
-        return this._children[i];
-    },
+        child: function (i) {
+            return this._children[i];
+        },
 
-    _reduce: function () {
-        // Warning: current implementation is just partial (for Replacement servicing)
+        _reduce: function () {
+            // Warning: current implementation is just partial (for Replacement servicing)
 
-        var n;
+            var n;
 
-        switch (this._type) {
-            case System.Text.RegularExpressions.RegexNode.Concatenate:
-                n = this._reduceConcatenation();
-                break;
+            switch (this._type) {
+                case System.Text.RegularExpressions.RegexNode.Concatenate:
+                    n = this._reduceConcatenation();
+                    break;
 
-            default:
-                n = this;
-                break;
-        }
+                default:
+                    n = this;
+                    break;
+            }
 
-        return n;
-    },
+            return n;
+        },
 
-    _reduceConcatenation: function () {
-        var wasLastString = false;
-        var optionsLast = 0;
-        var optionsAt;
-        var at;
-        var prev;
-        var i;
-        var j;
-        var k;
+        _reduceConcatenation: function () {
+            var wasLastString = false;
+            var optionsLast = 0;
+            var optionsAt;
+            var at;
+            var prev;
+            var i;
+            var j;
+            var k;
 
-        if (this._children == null) {
-            return new System.Text.RegularExpressions.RegexNode(System.Text.RegularExpressions.RegexNode.Empty, this._options);
-        }
+            if (this._children == null) {
+                return new System.Text.RegularExpressions.RegexNode(System.Text.RegularExpressions.RegexNode.Empty, this._options);
+            }
 
-        for (i = 0, j = 0; i < this._children.length; i++, j++) {
-            at = this._children[i];
+            for (i = 0, j = 0; i < this._children.length; i++, j++) {
+                at = this._children[i];
+
+                if (j < i) {
+                    this._children[j] = at;
+                }
+
+                if (at._type === System.Text.RegularExpressions.RegexNode.Concatenate && at._isRightToLeft()) {
+                    for (k = 0; k < at._children.length; k++) {
+                        at._children[k]._next = this;
+                    }
+
+                    this._children.splice.apply(this._children, [i + 1, 0].concat(at._children)); // _children.InsertRange(i + 1, at._children);
+                    j--;
+                } else if (at._type === System.Text.RegularExpressions.RegexNode.Multi || at._type === System.Text.RegularExpressions.RegexNode.One) {
+                    // Cannot merge strings if L or I options differ
+                    optionsAt = at._options & (System.Text.RegularExpressions.RegexOptions.RightToLeft | System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+                    if (!wasLastString || optionsLast !== optionsAt) {
+                        wasLastString = true;
+                        optionsLast = optionsAt;
+                        continue;
+                    }
+
+                    prev = this._children[--j];
+
+                    if (prev._type === System.Text.RegularExpressions.RegexNode.One) {
+                        prev._type = System.Text.RegularExpressions.RegexNode.Multi;
+                        prev._str = prev._str;
+                    }
+
+                    if ((optionsAt & System.Text.RegularExpressions.RegexOptions.RightToLeft) === 0) {
+                        prev._str += at._str;
+                    } else {
+                        prev._str = at._str + prev._str;
+                    }
+                } else if (at._type === System.Text.RegularExpressions.RegexNode.Empty) {
+                    j--;
+                } else {
+                    wasLastString = false;
+                }
+            }
 
             if (j < i) {
-                this._children[j] = at;
+                this._children.splice(j, i - j);
             }
 
-            if (at._type === System.Text.RegularExpressions.RegexNode.Concatenate && at._isRightToLeft()) {
-                for (k = 0; k < at._children.length; k++) {
-                    at._children[k]._next = this;
+            return this._stripEnation(System.Text.RegularExpressions.RegexNode.Empty);
+        },
+
+        _stripEnation: function (emptyType) {
+            switch (this.childCount()) {
+                case 0:
+                    return new scope.RegexNode(emptyType, this._options);
+                case 1:
+                    return this.child(0);
+                default:
+                    return this;
+            }
+        },
+
+        _isRightToLeft: function () {
+            if ((this._options & System.Text.RegularExpressions.RegexOptions.RightToLeft) > 0) {
+                return true;
+            }
+
+            return false;
+        },
+    });
+
+// @source @RegexReplacement.js
+
+    Bridge.define("System.Text.RegularExpressions.RegexReplacement", {
+        statics: {
+            replace: function (evaluator, regex, input, count, startat) {
+                if (evaluator == null) {
+                    throw new System.ArgumentNullException("evaluator");
                 }
 
-                this._children.splice.apply(this._children, [i + 1, 0].concat(at._children)); // _children.InsertRange(i + 1, at._children);
-                j--;
-            } else if (at._type === System.Text.RegularExpressions.RegexNode.Multi || at._type === System.Text.RegularExpressions.RegexNode.One) {
-                // Cannot merge strings if L or I options differ
-                optionsAt = at._options & (System.Text.RegularExpressions.RegexOptions.RightToLeft | System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-
-                if (!wasLastString || optionsLast !== optionsAt) {
-                    wasLastString = true;
-                    optionsLast = optionsAt;
-                    continue;
+                if (count < -1) {
+                    throw new System.ArgumentOutOfRangeException("count", "Count cannot be less than -1.");
                 }
 
-                prev = this._children[--j];
-
-                if (prev._type === System.Text.RegularExpressions.RegexNode.One) {
-                    prev._type = System.Text.RegularExpressions.RegexNode.Multi;
-                    prev._str = prev._str;
+                if (startat < 0 || startat > input.length) {
+                    throw new System.ArgumentOutOfRangeException("startat", "Start index cannot be less than 0 or greater than input length.");
                 }
 
-                if ((optionsAt & System.Text.RegularExpressions.RegexOptions.RightToLeft) === 0) {
-                    prev._str += at._str;
+                if (count === 0) {
+                    return input;
+                }
+
+                var match = regex.match$1(input, startat);
+
+                if (!match.getSuccess()) {
+                    return input;
                 } else {
-                    prev._str = at._str + prev._str;
+                    var sb = "";
+                    var prevat;
+                    var matchIndex;
+                    var matchLength;
+
+                    if (!regex.getRightToLeft()) {
+                        prevat = 0;
+
+                        do {
+                            matchIndex = match.getIndex();
+                            matchLength = match.getLength();
+
+                            if (matchIndex !== prevat) {
+                                sb += input.slice(prevat, matchIndex);
+                            }
+
+                            prevat = matchIndex + matchLength;
+                            sb += evaluator(match);
+
+                            if (--count === 0) {
+                                break;
+                            }
+
+                            match = match.nextMatch();
+                        } while (match.getSuccess());
+
+                        if (prevat < input.length) {
+                            sb += input.slice(prevat, input.length);
+                        }
+                    } else {
+                        var al = [];
+
+                        prevat = input.length;
+
+                        do {
+                            matchIndex = match.getIndex();
+                            matchLength = match.getLength();
+
+                            if (matchIndex + matchLength !== prevat) {
+                                al.push(input.slice(matchIndex + matchLength, prevat));
+                            }
+
+                            prevat = matchIndex;
+                            al.push(evaluator(match));
+
+                            if (--count === 0) {
+                                break;
+                            }
+
+                            match = match.nextMatch();
+                        } while (match.getSuccess());
+
+                        sb = new StringBuilder();
+
+                        if (prevat > 0) {
+                            sb += sb.slice(0, prevat);
+                        }
+
+                        var i;
+                        for (i = al.length - 1; i >= 0; i--) {
+                            sb += al[i];
+                        }
+                    }
+
+                    return sb;
                 }
-            } else if (at._type === System.Text.RegularExpressions.RegexNode.Empty) {
-                j--;
-            } else {
-                wasLastString = false;
+            },
+
+            split: function (regex, input, count, startat) {
+                if (count < 0) {
+                    throw new System.ArgumentOutOfRangeException("count", "Count can't be less than 0.");
+                }
+
+                if (startat < 0 || startat > input.length) {
+                    throw new System.ArgumentOutOfRangeException("startat", "Start index cannot be less than 0 or greater than input length.");
+                }
+
+                var result = [];
+
+                if (count === 1) {
+                    result.push(input);
+
+                    return result;
+                }
+
+                --count;
+                var match = regex.match$1(input, startat);
+
+                if (!match.getSuccess()) {
+                    result.push(input);
+                } else {
+                    var i;
+                    var prevat;
+                    var matchIndex;
+                    var matchLength;
+                    var matchGroups;
+                    var matchGroupsCount;
+
+                    if (!regex.getRightToLeft()) {
+                        prevat = 0;
+
+                        for (;;) {
+                            matchIndex = match.getIndex();
+                            matchLength = match.getLength();
+                            matchGroups = match.getGroups();
+                            matchGroupsCount = matchGroups.getCount();
+
+                            result.push(input.slice(prevat, matchIndex));
+                            prevat = matchIndex + matchLength;
+
+                            // add all matched capture groups to the list.
+                            for (i = 1; i < matchGroupsCount; i++) {
+                                if (match._isMatched(i)) {
+                                    result.push(matchGroups.get(i).toString());
+                                }
+                            }
+
+                            --count;
+                            if (count === 0) {
+                                break;
+                            }
+
+                            match = match.nextMatch();
+
+                            if (!match.getSuccess()) {
+                                break;
+                            }
+                        }
+
+                        result.push(input.slice(prevat, input.length));
+                    } else {
+                        prevat = input.length;
+
+                        for (;;) {
+                            matchIndex = match.getIndex();
+                            matchLength = match.getLength();
+                            matchGroups = match.getGroups();
+                            matchGroupsCount = matchGroups.getCount();
+
+                            result.push(input.slice(matchIndex + matchLength, prevat));
+                            prevat = matchIndex;
+
+                            // add all matched capture groups to the list.
+                            for (i = 1; i < matchGroupsCount; i++) {
+                                if (match._isMatched(i)) {
+                                    result.push(matchGroups.get(i).toString());
+                                }
+                            }
+
+                            --count;
+                            if (count === 0) {
+                                break;
+                            }
+
+                            match = match.nextMatch();
+                            if (!match.getSuccess()) {
+                                break;
+                            }
+                        }
+
+                        result.push(input.slice(0, prevat));
+                        result.reverse();
+                    }
+                }
+
+                return result;
+            },
+
+            Specials: 4,
+            LeftPortion: -1,
+            RightPortion: -2,
+            LastGroup: -3,
+            WholeString: -4
+        },
+
+        _rep: "",
+        _strings: [], // table of string constants
+        _rules: [], // negative -> group #, positive -> string #
+
+        constructor: function (rep, concat, caps) {
+            this.$initialize();
+            this._rep = rep;
+
+            if (concat._type !== System.Text.RegularExpressions.RegexNode.Concatenate) {
+                throw new System.ArgumentException("Replacement error.");
             }
-        }
 
-        if (j < i) {
-            this._children.splice(j, i - j);
-        }
+            var sb = "";
+            var strings = [];
+            var rules = [];
+            var slot;
+            var child;
+            var i;
 
-        return this._stripEnation(System.Text.RegularExpressions.RegexNode.Empty);
-    },
+            for (i = 0; i < concat.childCount(); i++) {
+                child = concat.child(i);
 
-    _stripEnation: function (emptyType) {
-        switch (this.childCount()) {
-            case 0:
-                return new scope.RegexNode(emptyType, this._options);
-            case 1:
-                return this.child(0);
-            default:
-                return this;
-        }
-    },
+                switch (child._type) {
+                    case System.Text.RegularExpressions.RegexNode.Multi:
+                    case System.Text.RegularExpressions.RegexNode.One:
+                        sb += child._str;
+                        break;
 
-    _isRightToLeft: function () {
-        if ((this._options & System.Text.RegularExpressions.RegexOptions.RightToLeft) > 0) {
-            return true;
-        }
+                    case System.Text.RegularExpressions.RegexNode.Ref:
+                        if (sb.length > 0) {
+                            rules.push(strings.length);
+                            strings.push(sb);
+                            sb = "";
+                        }
 
-        return false;
-    },
-});
+                        slot = child._m;
 
-// @source Text/RegularExpressions/RegexReplacement.js
+                        if (caps != null && slot >= 0) {
+                            slot = caps[slot];
+                        }
 
-Bridge.define("System.Text.RegularExpressions.RegexReplacement", {
-    statics: {
-        replace: function (evaluator, regex, input, count, startat) {
-            if (evaluator == null) {
-                throw new System.ArgumentNullException("evaluator");
+                        rules.push(-System.Text.RegularExpressions.RegexReplacement.Specials - 1 - slot);
+                        break;
+                    default:
+                        throw new System.ArgumentException("Replacement error.");
+                }
             }
 
+            if (sb.length > 0) {
+                rules.push(strings.length);
+                strings.push(sb);
+            }
+
+            this._strings = strings;
+            this._rules = rules;
+        },
+
+        getPattern: function () {
+            return _rep;
+        },
+
+        replacement: function (match) {
+            return this._replacementImpl("", match);
+        },
+
+        replace: function (regex, input, count, startat) {
             if (count < -1) {
                 throw new System.ArgumentOutOfRangeException("count", "Count cannot be less than -1.");
             }
-
             if (startat < 0 || startat > input.length) {
                 throw new System.ArgumentOutOfRangeException("startat", "Start index cannot be less than 0 or greater than input length.");
             }
@@ -18543,7 +18822,7 @@ Bridge.define("System.Text.RegularExpressions.RegexReplacement", {
                         }
 
                         prevat = matchIndex + matchLength;
-                        sb += evaluator(match);
+                        sb = this._replacementImpl(sb, match);
 
                         if (--count === 0) {
                             break;
@@ -18557,7 +18836,6 @@ Bridge.define("System.Text.RegularExpressions.RegexReplacement", {
                     }
                 } else {
                     var al = [];
-
                     prevat = input.length;
 
                     do {
@@ -18569,7 +18847,7 @@ Bridge.define("System.Text.RegularExpressions.RegexReplacement", {
                         }
 
                         prevat = matchIndex;
-                        al.push(evaluator(match));
+                        this._replacementImplRTL(al, match);
 
                         if (--count === 0) {
                             break;
@@ -18577,8 +18855,6 @@ Bridge.define("System.Text.RegularExpressions.RegexReplacement", {
 
                         match = match.nextMatch();
                     } while (match.getSuccess());
-
-                    sb = new StringBuilder();
 
                     if (prevat > 0) {
                         sb += sb.slice(0, prevat);
@@ -18594,2125 +18870,1860 @@ Bridge.define("System.Text.RegularExpressions.RegexReplacement", {
             }
         },
 
-        split: function (regex, input, count, startat) {
-            if (count < 0) {
-                throw new System.ArgumentOutOfRangeException("count", "Count can't be less than 0.");
-            }
+        _replacementImpl: function (sb, match) {
+            var specials = System.Text.RegularExpressions.RegexReplacement.Specials;
+            var r;
+            var i;
 
-            if (startat < 0 || startat > input.length) {
-                throw new System.ArgumentOutOfRangeException("startat", "Start index cannot be less than 0 or greater than input length.");
-            }
+            for (i = 0; i < this._rules.length; i++) {
+                r = this._rules[i];
 
-            var result = [];
-
-            if (count === 1) {
-                result.push(input);
-
-                return result;
-            }
-
-            --count;
-            var match = regex.match$1(input, startat);
-
-            if (!match.getSuccess()) {
-                result.push(input);
-            } else {
-                var i;
-                var prevat;
-                var matchIndex;
-                var matchLength;
-                var matchGroups;
-                var matchGroupsCount;
-
-                if (!regex.getRightToLeft()) {
-                    prevat = 0;
-
-                    for (;;) {
-                        matchIndex = match.getIndex();
-                        matchLength = match.getLength();
-                        matchGroups = match.getGroups();
-                        matchGroupsCount = matchGroups.getCount();
-
-                        result.push(input.slice(prevat, matchIndex));
-                        prevat = matchIndex + matchLength;
-
-                        // add all matched capture groups to the list.
-                        for (i = 1; i < matchGroupsCount; i++) {
-                            if (match._isMatched(i)) {
-                                result.push(matchGroups.get(i).toString());
-                            }
-                        }
-
-                        --count;
-                        if (count === 0) {
-                            break;
-                        }
-
-                        match = match.nextMatch();
-
-                        if (!match.getSuccess()) {
-                            break;
-                        }
-                    }
-
-                    result.push(input.slice(prevat, input.length));
+                if (r >= 0) {
+                    // string lookup
+                    sb += this._strings[r];
+                } else if (r < -specials) {
+                    // group lookup
+                    sb += match._groupToStringImpl(-specials - 1 - r);
                 } else {
-                    prevat = input.length;
-
-                    for (;;) {
-                        matchIndex = match.getIndex();
-                        matchLength = match.getLength();
-                        matchGroups = match.getGroups();
-                        matchGroupsCount = matchGroups.getCount();
-
-                        result.push(input.slice(matchIndex + matchLength, prevat));
-                        prevat = matchIndex;
-
-                        // add all matched capture groups to the list.
-                        for (i = 1; i < matchGroupsCount; i++) {
-                            if (match._isMatched(i)) {
-                                result.push(matchGroups.get(i).toString());
-                            }
-                        }
-
-                        --count;
-                        if (count === 0) {
+                    // special insertion patterns
+                    switch (-specials - 1 - r) {
+                        case System.Text.RegularExpressions.RegexReplacement.LeftPortion:
+                            sb += match._getLeftSubstring();
                             break;
-                        }
-
-                        match = match.nextMatch();
-                        if (!match.getSuccess()) {
+                        case System.Text.RegularExpressions.RegexReplacement.RightPortion:
+                            sb += match._getRightSubstring();
                             break;
-                        }
+                        case System.Text.RegularExpressions.RegexReplacement.LastGroup:
+                            sb += match._lastGroupToStringImpl();
+                            break;
+                        case System.Text.RegularExpressions.RegexReplacement.WholeString:
+                            sb += match._getOriginalString();
+                            break;
                     }
-
-                    result.push(input.slice(0, prevat));
-                    result.reverse();
-                }
-            }
-
-            return result;
-        },
-
-        Specials: 4,
-        LeftPortion: -1,
-        RightPortion: -2,
-        LastGroup: -3,
-        WholeString: -4
-    },
-
-    _rep: "",
-    _strings: [], // table of string constants
-    _rules: [], // negative -> group #, positive -> string #
-
-    constructor: function (rep, concat, caps) {
-		this.$initialize();
-        this._rep = rep;
-
-        if (concat._type !== System.Text.RegularExpressions.RegexNode.Concatenate) {
-            throw new System.ArgumentException("Replacement error.");
-        }
-
-        var sb = "";
-        var strings = [];
-        var rules = [];
-        var slot;
-        var child;
-        var i;
-
-        for (i = 0; i < concat.childCount(); i++) {
-            child = concat.child(i);
-
-            switch (child._type) {
-                case System.Text.RegularExpressions.RegexNode.Multi:
-                case System.Text.RegularExpressions.RegexNode.One:
-                    sb += child._str;
-                    break;
-
-                case System.Text.RegularExpressions.RegexNode.Ref:
-                    if (sb.length > 0) {
-                        rules.push(strings.length);
-                        strings.push(sb);
-                        sb = "";
-                    }
-
-                    slot = child._m;
-
-                    if (caps != null && slot >= 0) {
-                        slot = caps[slot];
-                    }
-
-                    rules.push(-System.Text.RegularExpressions.RegexReplacement.Specials - 1 - slot);
-                    break;
-                default:
-                    throw new System.ArgumentException("Replacement error.");
-            }
-        }
-
-        if (sb.length > 0) {
-            rules.push(strings.length);
-            strings.push(sb);
-        }
-
-        this._strings = strings;
-        this._rules = rules;
-    },
-
-    getPattern: function () {
-        return _rep;
-    },
-
-    replacement: function (match) {
-        return this._replacementImpl("", match);
-    },
-
-    replace: function (regex, input, count, startat) {
-        if (count < -1) {
-            throw new System.ArgumentOutOfRangeException("count", "Count cannot be less than -1.");
-        }
-        if (startat < 0 || startat > input.length) {
-            throw new System.ArgumentOutOfRangeException("startat", "Start index cannot be less than 0 or greater than input length.");
-        }
-
-        if (count === 0) {
-            return input;
-        }
-
-        var match = regex.match$1(input, startat);
-
-        if (!match.getSuccess()) {
-            return input;
-        } else {
-            var sb = "";
-            var prevat;
-            var matchIndex;
-            var matchLength;
-
-            if (!regex.getRightToLeft()) {
-                prevat = 0;
-
-                do {
-                    matchIndex = match.getIndex();
-                    matchLength = match.getLength();
-
-                    if (matchIndex !== prevat) {
-                        sb += input.slice(prevat, matchIndex);
-                    }
-
-                    prevat = matchIndex + matchLength;
-                    sb = this._replacementImpl(sb, match);
-
-                    if (--count === 0) {
-                        break;
-                    }
-
-                    match = match.nextMatch();
-                } while (match.getSuccess());
-
-                if (prevat < input.length) {
-                    sb += input.slice(prevat, input.length);
-                }
-            } else {
-                var al = [];
-                prevat = input.length;
-
-                do {
-                    matchIndex = match.getIndex();
-                    matchLength = match.getLength();
-
-                    if (matchIndex + matchLength !== prevat) {
-                        al.push(input.slice(matchIndex + matchLength, prevat));
-                    }
-
-                    prevat = matchIndex;
-                    this._replacementImplRTL(al, match);
-
-                    if (--count === 0) {
-                        break;
-                    }
-
-                    match = match.nextMatch();
-                } while (match.getSuccess());
-
-                if (prevat > 0) {
-                    sb += sb.slice(0, prevat);
-                }
-
-                var i;
-                for (i = al.length - 1; i >= 0; i--) {
-                    sb += al[i];
                 }
             }
 
             return sb;
-        }
-    },
+        },
 
-    _replacementImpl: function (sb, match) {
-        var specials = System.Text.RegularExpressions.RegexReplacement.Specials;
-        var r;
-        var i;
+        _replacementImplRTL: function (al, match) {
+            var specials = System.Text.RegularExpressions.RegexReplacement.Specials;
+            var r;
+            var i;
 
-        for (i = 0; i < this._rules.length; i++) {
-            r = this._rules[i];
+            for (i = _rules.length - 1; i >= 0; i--) {
+                r = this._rules[i];
 
-            if (r >= 0) {
-                // string lookup
-                sb += this._strings[r];
-            } else if (r < -specials) {
-                // group lookup
-                sb += match._groupToStringImpl(-specials - 1 - r);
-            } else {
-                // special insertion patterns
-                switch (-specials - 1 - r) {
-                    case System.Text.RegularExpressions.RegexReplacement.LeftPortion:
-                        sb += match._getLeftSubstring();
-                        break;
-                    case System.Text.RegularExpressions.RegexReplacement.RightPortion:
-                        sb += match._getRightSubstring();
-                        break;
-                    case System.Text.RegularExpressions.RegexReplacement.LastGroup:
-                        sb += match._lastGroupToStringImpl();
-                        break;
-                    case System.Text.RegularExpressions.RegexReplacement.WholeString:
-                        sb += match._getOriginalString();
-                        break;
-                }
-            }
-        }
-
-        return sb;
-    },
-
-    _replacementImplRTL: function (al, match) {
-        var specials = System.Text.RegularExpressions.RegexReplacement.Specials;
-        var r;
-        var i;
-
-        for (i = _rules.length - 1; i >= 0; i--) {
-            r = this._rules[i];
-
-            if (r >= 0) {
-                // string lookup
-                al.push(this._strings[r]);
-            } else if (r < -specials) {
-                // group lookup
-                al.push(match._groupToStringImpl(-specials - 1 - r));
-            } else {
-                // special insertion patterns
-                switch (-specials - 1 - r) {
-                    case System.Text.RegularExpressions.RegexReplacement.LeftPortion:
-                        al.push(match._getLeftSubstring());
-                        break;
-                    case System.Text.RegularExpressions.RegexReplacement.RightPortion:
-                        al.push(match._getRightSubstring());
-                        break;
-                    case System.Text.RegularExpressions.RegexReplacement.LastGroup:
-                        al.push(match._lastGroupToStringImpl());
-                        break;
-                    case System.Text.RegularExpressions.RegexReplacement.WholeString:
-                        al.push(match._getOriginalString());
-                        break;
-                }
-            }
-        }
-    }
-});
-
-// @source Text/RegularExpressions/RegexEngine.js
-
-Bridge.define("System.Text.RegularExpressions.RegexEngine", {
-    _pattern: "",
-    _patternInfo: null,
-
-    _text: "",
-    _textStart: 0,
-    _timeoutMs: -1,
-    _timeoutTime: -1,
-    _settings: null,
-
-    _branchType: {
-        base: 0,
-        offset: 1,
-        lazy: 2,
-        greedy: 3,
-        or: 4
-    },
-
-    _branchResultKind: {
-        ok: 1,
-        endPass: 2,
-        nextPass: 3,
-        nextBranch: 4
-    },
-
-    // ============================================================================================
-    // Public functions
-    // ============================================================================================
-    constructor: function (pattern, isCaseInsensitive, isMultiLine, isSingleline, isIgnoreWhitespace, isExplicitCapture, timeoutMs) {
-        this.$initialize();
-
-        if (pattern == null) {
-            throw new System.ArgumentNullException("pattern");
-        }
-
-        this._pattern = pattern;
-        this._timeoutMs = timeoutMs;
-        this._settings = {
-            ignoreCase: isCaseInsensitive,
-            multiline: isMultiLine,
-            singleline: isSingleline,
-            ignoreWhitespace: isIgnoreWhitespace,
-            explicitCapture: isExplicitCapture
-        };
-    },
-
-    match: function (text, textStart) {
-        if (text == null) {
-            throw new System.ArgumentNullException("text");
-        }
-
-        if (textStart != null && (textStart < 0 || textStart > text.length)) {
-            throw new System.ArgumentOutOfRangeException("textStart", "Start index cannot be less than 0 or greater than input length.");
-        }
-
-        this._text = text;
-        this._textStart = textStart;
-        this._timeoutTime = this._timeoutMs > 0 ? new Date().getTime() + System.Convert.toInt32(this._timeoutMs + 0.5) : -1;
-
-        // Get group descriptors
-        var patternInfo = this.parsePattern();
-        if (patternInfo.shouldFail) {
-            return this._getEmptyMatch();
-        }
-
-        this._checkTimeout();
-
-        var scanRes = this._scanAndTransformResult(textStart, patternInfo.tokens, false, null);
-        return scanRes;
-    },
-
-    parsePattern: function () {
-        if (this._patternInfo == null) {
-            var parser = System.Text.RegularExpressions.RegexEngineParser;
-            var patternInfo = parser.parsePattern(this._pattern, this._cloneSettings(this._settings));
-            this._patternInfo = patternInfo;
-        }
-        return this._patternInfo;
-    },
-
-    // ============================================================================================
-    // Engine main logic
-    // ============================================================================================
-    _scanAndTransformResult: function (textPos, tokens, noOffset, desiredLen) {
-        var state = this._scan(textPos, this._text.length, tokens, noOffset, desiredLen);
-        var transformedRes = this._collectScanResults(state, textPos);
-        return transformedRes;
-    },
-
-    _scan: function (textPos, textEndPos, tokens, noOffset, desiredLen) {
-        var resKind = this._branchResultKind;
-        var branches = [];
-        branches.grCaptureCache = {};
-
-        var branch = null;
-        var res = null;
-
-        // Empty pattern case:
-        if (tokens.length === 0) {
-            var state = new System.Text.RegularExpressions.RegexEngineState();
-            state.capIndex = textPos;
-            state.txtIndex = textPos;
-            state.capLength = 0;
-            return state;
-        }
-
-        // Init base branch:
-        var baseBranchType = noOffset ? this._branchType.base : this._branchType.offset;
-
-        var endPos = this._patternInfo.isContiguous ? textPos : textEndPos;
-        var baseBranch = new System.Text.RegularExpressions.RegexEngineBranch(baseBranchType, textPos, textPos, endPos);
-        baseBranch.pushPass(0, tokens, this._cloneSettings(this._settings));
-        baseBranch.started = true;
-        baseBranch.state.txtIndex = textPos;
-        branches.push(baseBranch);
-
-        while (branches.length) {
-            branch = branches[branches.length - 1];
-
-            res = this._scanBranch(textEndPos, branches, branch);
-            if (res === resKind.ok && (desiredLen == null || branch.state.capLength === desiredLen)) {
-                return branch.state;
-            }
-
-            //if (!this.branchLimit) {
-            //    this.branchLimit = 1;
-            //} else {
-            //    this.branchLimit++;
-            //    if (this.branchLimit > 200000) {
-            //        alert("Too many branches :(");
-            //        break;
-            //    }
-            //}
-
-            this._advanceToNextBranch(branches, branch);
-            this._checkTimeout();
-        }
-
-        return null;
-    },
-
-    _scanBranch: function (textEndPos, branches, branch) {
-        var resKind = this._branchResultKind;
-        var pass;
-        var res;
-
-        if (branch.mustFail) {
-            branch.mustFail = false;
-            return resKind.nextBranch;
-        }
-
-        while (branch.hasPass()) {
-            pass = branch.peekPass();
-
-            if (pass.tokens == null || pass.tokens.length === 0) {
-                res = resKind.endPass;
-            } else {
-                // Add alternation branches before scanning:
-                if (this._addAlternationBranches(branches, branch, pass) === resKind.nextBranch) {
-                    return resKind.nextBranch;
-                }
-
-                // Scan:
-                res = this._scanPass(textEndPos, branches, branch, pass);
-            }
-
-            switch (res) {
-                case resKind.nextBranch:
-                    // Move to the next branch:
-                    return res;
-
-                case resKind.nextPass:
-                    // switch to the recently added pass
-                    continue;
-
-                case resKind.endPass:
-                case resKind.ok:
-                    // End of pass has been reached:
-                    branch.popPass();
-                    break;
-
-                default:
-                    throw new System.InvalidOperationException("Unexpected branch result.");
-            }
-        }
-
-        return resKind.ok;
-    },
-
-    _scanPass: function (textEndPos, branches, branch, pass) {
-        var resKind = this._branchResultKind;
-        var passEndIndex = pass.tokens.length;
-        var token;
-        var probe;
-        var res;
-
-        while (pass.index < passEndIndex) {
-            token = pass.tokens[pass.index];
-            probe = pass.probe;
-
-            // Add probing:
-            if (probe == null) {
-                if (this._addBranchBeforeProbing(branches, branch, pass, token)) {
-                    return resKind.nextBranch;
-                }
-            } else {
-                if (probe.value < probe.min || probe.forced) {
-                    res = this._scanToken(textEndPos, branches, branch, pass, token);
-                    if (res !== resKind.ok) {
-                        return res;
+                if (r >= 0) {
+                    // string lookup
+                    al.push(this._strings[r]);
+                } else if (r < -specials) {
+                    // group lookup
+                    al.push(match._groupToStringImpl(-specials - 1 - r));
+                } else {
+                    // special insertion patterns
+                    switch (-specials - 1 - r) {
+                        case System.Text.RegularExpressions.RegexReplacement.LeftPortion:
+                            al.push(match._getLeftSubstring());
+                            break;
+                        case System.Text.RegularExpressions.RegexReplacement.RightPortion:
+                            al.push(match._getRightSubstring());
+                            break;
+                        case System.Text.RegularExpressions.RegexReplacement.LastGroup:
+                            al.push(match._lastGroupToStringImpl());
+                            break;
+                        case System.Text.RegularExpressions.RegexReplacement.WholeString:
+                            al.push(match._getOriginalString());
+                            break;
                     }
-                    probe.value += 1;
-                    probe.forced = false;
-                    continue;
                 }
-
-                this._addBranchAfterProbing(branches, branch, pass, probe);
-                if (probe.forced) {
-                    continue;
-                }
-
-                pass.probe = null;
-                pass.index++;
-                continue;
-            }
-
-            // Process the token:
-            res = this._scanToken(textEndPos, branches, branch, pass, token);
-
-            // Process the result of the token scan:
-            switch (res) {
-                case resKind.nextBranch:
-                case resKind.nextPass:
-                case resKind.endPass:
-                    return res;
-
-                case resKind.ok:
-                    // Advance to the next token within the current pass:
-                    pass.index++;
-                    break;
-
-                default:
-                    throw new System.InvalidOperationException("Unexpected branch-pass result.");
             }
         }
+    });
 
-        return resKind.ok;
-    },
+// @source @RegexEngine.js
 
-    _addAlternationBranches: function (branches, branch, pass) {
-        var tokenTypes = System.Text.RegularExpressions.RegexEngineParser.tokenTypes;
-        var branchTypes = this._branchType;
-        var passEndIndex = pass.tokens.length;
-        var resKind = this._branchResultKind;
-        var orIndexes;
-        var newBranch;
-        var newPass;
-        var token;
-        var i;
+    Bridge.define("System.Text.RegularExpressions.RegexEngine", {
+        _pattern: "",
+        _patternInfo: null,
 
-        // Scan potential alternations:
-        if (!pass.alternationHandled && !pass.tokens.noAlternation) {
-            orIndexes = [-1];
-            for (i = 0; i < passEndIndex; i++) {
-                token = pass.tokens[i];
-                if (token.type === tokenTypes.alternation) {
-                    orIndexes.push(i);
-                }
+        _text: "",
+        _textStart: 0,
+        _timeoutMs: -1,
+        _timeoutTime: -1,
+        _settings: null,
+
+        _branchType: {
+            base: 0,
+            offset: 1,
+            lazy: 2,
+            greedy: 3,
+            or: 4
+        },
+
+        _branchResultKind: {
+            ok: 1,
+            endPass: 2,
+            nextPass: 3,
+            nextBranch: 4
+        },
+
+        // ============================================================================================
+        // Public functions
+        // ============================================================================================
+        constructor: function (pattern, isCaseInsensitive, isMultiLine, isSingleline, isIgnoreWhitespace, isExplicitCapture, timeoutMs) {
+            this.$initialize();
+
+            if (pattern == null) {
+                throw new System.ArgumentNullException("pattern");
             }
 
-            if (orIndexes.length > 1) {
-                for (i = 0; i < orIndexes.length; i++) {
-                    newBranch = new System.Text.RegularExpressions.RegexEngineBranch(branchTypes.or, i, 0, orIndexes.length, branch.state);
-                    newBranch.isNotFailing = true;
-                    newPass = newBranch.peekPass();
-                    newPass.alternationHandled = true;
-                    newPass.index = orIndexes[i] + 1;
-                    branches.splice(branches.length - i, 0, newBranch);
+            this._pattern = pattern;
+            this._timeoutMs = timeoutMs;
+            this._settings = {
+                ignoreCase: isCaseInsensitive,
+                multiline: isMultiLine,
+                singleline: isSingleline,
+                ignoreWhitespace: isIgnoreWhitespace,
+                explicitCapture: isExplicitCapture
+            };
+        },
+
+        match: function (text, textStart) {
+            if (text == null) {
+                throw new System.ArgumentNullException("text");
+            }
+
+            if (textStart != null && (textStart < 0 || textStart > text.length)) {
+                throw new System.ArgumentOutOfRangeException("textStart", "Start index cannot be less than 0 or greater than input length.");
+            }
+
+            this._text = text;
+            this._textStart = textStart;
+            this._timeoutTime = this._timeoutMs > 0 ? new Date().getTime() + System.Convert.toInt32(this._timeoutMs + 0.5) : -1;
+
+            // Get group descriptors
+            var patternInfo = this.parsePattern();
+            if (patternInfo.shouldFail) {
+                return this._getEmptyMatch();
+            }
+
+            this._checkTimeout();
+
+            var scanRes = this._scanAndTransformResult(textStart, patternInfo.tokens, false, null);
+            return scanRes;
+        },
+
+        parsePattern: function () {
+            if (this._patternInfo == null) {
+                var parser = System.Text.RegularExpressions.RegexEngineParser;
+                var patternInfo = parser.parsePattern(this._pattern, this._cloneSettings(this._settings));
+                this._patternInfo = patternInfo;
+            }
+            return this._patternInfo;
+        },
+
+        // ============================================================================================
+        // Engine main logic
+        // ============================================================================================
+        _scanAndTransformResult: function (textPos, tokens, noOffset, desiredLen) {
+            var state = this._scan(textPos, this._text.length, tokens, noOffset, desiredLen);
+            var transformedRes = this._collectScanResults(state, textPos);
+            return transformedRes;
+        },
+
+        _scan: function (textPos, textEndPos, tokens, noOffset, desiredLen) {
+            var resKind = this._branchResultKind;
+            var branches = [];
+            branches.grCaptureCache = {};
+
+            var branch = null;
+            var res = null;
+
+            // Empty pattern case:
+            if (tokens.length === 0) {
+                var state = new System.Text.RegularExpressions.RegexEngineState();
+                state.capIndex = textPos;
+                state.txtIndex = textPos;
+                state.capLength = 0;
+                return state;
+            }
+
+            // Init base branch:
+            var baseBranchType = noOffset ? this._branchType.base : this._branchType.offset;
+
+            var endPos = this._patternInfo.isContiguous ? textPos : textEndPos;
+            var baseBranch = new System.Text.RegularExpressions.RegexEngineBranch(baseBranchType, textPos, textPos, endPos);
+            baseBranch.pushPass(0, tokens, this._cloneSettings(this._settings));
+            baseBranch.started = true;
+            baseBranch.state.txtIndex = textPos;
+            branches.push(baseBranch);
+
+            while (branches.length) {
+                branch = branches[branches.length - 1];
+
+                res = this._scanBranch(textEndPos, branches, branch);
+                if (res === resKind.ok && (desiredLen == null || branch.state.capLength === desiredLen)) {
+                    return branch.state;
                 }
 
-                // The last branch must fail:
-                branches[branches.length - orIndexes.length].isNotFailing = false;
+                //if (!this.branchLimit) {
+                //    this.branchLimit = 1;
+                //} else {
+                //    this.branchLimit++;
+                //    if (this.branchLimit > 200000) {
+                //        alert("Too many branches :(");
+                //        break;
+                //    }
+                //}
 
-                // The parent branch must be ended up immediately:
-                branch.mustFail = true;
+                this._advanceToNextBranch(branches, branch);
+                this._checkTimeout();
+            }
 
-                pass.alternationHandled = true;
+            return null;
+        },
+
+        _scanBranch: function (textEndPos, branches, branch) {
+            var resKind = this._branchResultKind;
+            var pass;
+            var res;
+
+            if (branch.mustFail) {
+                branch.mustFail = false;
                 return resKind.nextBranch;
+            }
+
+            while (branch.hasPass()) {
+                pass = branch.peekPass();
+
+                if (pass.tokens == null || pass.tokens.length === 0) {
+                    res = resKind.endPass;
+                } else {
+                    // Add alternation branches before scanning:
+                    if (this._addAlternationBranches(branches, branch, pass) === resKind.nextBranch) {
+                        return resKind.nextBranch;
+                    }
+
+                    // Scan:
+                    res = this._scanPass(textEndPos, branches, branch, pass);
+                }
+
+                switch (res) {
+                    case resKind.nextBranch:
+                        // Move to the next branch:
+                        return res;
+
+                    case resKind.nextPass:
+                        // switch to the recently added pass
+                        continue;
+
+                    case resKind.endPass:
+                    case resKind.ok:
+                        // End of pass has been reached:
+                        branch.popPass();
+                        break;
+
+                    default:
+                        throw new System.InvalidOperationException("Unexpected branch result.");
+                }
+            }
+
+            return resKind.ok;
+        },
+
+        _scanPass: function (textEndPos, branches, branch, pass) {
+            var resKind = this._branchResultKind;
+            var passEndIndex = pass.tokens.length;
+            var token;
+            var probe;
+            var res;
+
+            while (pass.index < passEndIndex) {
+                token = pass.tokens[pass.index];
+                probe = pass.probe;
+
+                // Add probing:
+                if (probe == null) {
+                    if (this._addBranchBeforeProbing(branches, branch, pass, token)) {
+                        return resKind.nextBranch;
+                    }
+                } else {
+                    if (probe.value < probe.min || probe.forced) {
+                        res = this._scanToken(textEndPos, branches, branch, pass, token);
+                        if (res !== resKind.ok) {
+                            return res;
+                        }
+                        probe.value += 1;
+                        probe.forced = false;
+                        continue;
+                    }
+
+                    this._addBranchAfterProbing(branches, branch, pass, probe);
+                    if (probe.forced) {
+                        continue;
+                    }
+
+                    pass.probe = null;
+                    pass.index++;
+                    continue;
+                }
+
+                // Process the token:
+                res = this._scanToken(textEndPos, branches, branch, pass, token);
+
+                // Process the result of the token scan:
+                switch (res) {
+                    case resKind.nextBranch:
+                    case resKind.nextPass:
+                    case resKind.endPass:
+                        return res;
+
+                    case resKind.ok:
+                        // Advance to the next token within the current pass:
+                        pass.index++;
+                        break;
+
+                    default:
+                        throw new System.InvalidOperationException("Unexpected branch-pass result.");
+                }
+            }
+
+            return resKind.ok;
+        },
+
+        _addAlternationBranches: function (branches, branch, pass) {
+            var tokenTypes = System.Text.RegularExpressions.RegexEngineParser.tokenTypes;
+            var branchTypes = this._branchType;
+            var passEndIndex = pass.tokens.length;
+            var resKind = this._branchResultKind;
+            var orIndexes;
+            var newBranch;
+            var newPass;
+            var token;
+            var i;
+
+            // Scan potential alternations:
+            if (!pass.alternationHandled && !pass.tokens.noAlternation) {
+                orIndexes = [-1];
+                for (i = 0; i < passEndIndex; i++) {
+                    token = pass.tokens[i];
+                    if (token.type === tokenTypes.alternation) {
+                        orIndexes.push(i);
+                    }
+                }
+
+                if (orIndexes.length > 1) {
+                    for (i = 0; i < orIndexes.length; i++) {
+                        newBranch = new System.Text.RegularExpressions.RegexEngineBranch(branchTypes.or, i, 0, orIndexes.length, branch.state);
+                        newBranch.isNotFailing = true;
+                        newPass = newBranch.peekPass();
+                        newPass.alternationHandled = true;
+                        newPass.index = orIndexes[i] + 1;
+                        branches.splice(branches.length - i, 0, newBranch);
+                    }
+
+                    // The last branch must fail:
+                    branches[branches.length - orIndexes.length].isNotFailing = false;
+
+                    // The parent branch must be ended up immediately:
+                    branch.mustFail = true;
+
+                    pass.alternationHandled = true;
+                    return resKind.nextBranch;
+                } else {
+                    pass.tokens.noAlternation = true;
+                }
+            }
+
+            return resKind.ok;
+        },
+
+        _addBranchBeforeProbing: function (branches, branch, pass, token) {
+            // Add +, *, ? branches:
+            var probe = this._tryGetTokenProbe(token);
+            if (probe == null) {
+                return false;
+            }
+
+            pass.probe = probe;
+
+            var branchType = probe.isLazy ? this._branchType.lazy : this._branchType.greedy;
+            var newBranch = new System.Text.RegularExpressions.RegexEngineBranch(branchType, probe.value, probe.min, probe.max, branch.state);
+            branches.push(newBranch);
+            return true;
+        },
+
+        _addBranchAfterProbing: function (branches, branch, pass, probe) {
+            if (probe.isLazy) {
+                if (probe.value + 1 <= probe.max) {
+                    var lazyBranch = branch.clone();
+                    var lazyProbe = lazyBranch.peekPass().probe;
+                    lazyBranch.value += 1;
+                    lazyProbe.forced = true;
+
+                    // add to the left from the current branch
+                    branches.splice(branches.length - 1, 0, lazyBranch);
+                    branch.isNotFailing = true;
+                }
             } else {
-                pass.tokens.noAlternation = true;
+                if (probe.value + 1 <= probe.max) {
+                    var greedyBranch = branch.clone();
+                    greedyBranch.started = true;
+                    greedyBranch.peekPass().probe = null;
+                    greedyBranch.peekPass().index++;
+                    branches.splice(branches.length - 1, 0, greedyBranch);
+
+                    probe.forced = true;
+                    branch.value += 1;
+                    branch.isNotFailing = true;
+                }
             }
-        }
+        },
 
-        return resKind.ok;
-    },
-
-    _addBranchBeforeProbing: function (branches, branch, pass, token) {
-        // Add +, *, ? branches:
-        var probe = this._tryGetTokenProbe(token);
-        if (probe == null) {
-            return false;
-        }
-
-        pass.probe = probe;
-
-        var branchType = probe.isLazy ? this._branchType.lazy : this._branchType.greedy;
-        var newBranch = new System.Text.RegularExpressions.RegexEngineBranch(branchType, probe.value, probe.min, probe.max, branch.state);
-        branches.push(newBranch);
-        return true;
-    },
-
-    _addBranchAfterProbing: function (branches, branch, pass, probe) {
-        if (probe.isLazy) {
-            if (probe.value + 1 <= probe.max) {
-                var lazyBranch = branch.clone();
-                var lazyProbe = lazyBranch.peekPass().probe;
-                lazyBranch.value += 1;
-                lazyProbe.forced = true;
-
-                // add to the left from the current branch
-                branches.splice(branches.length - 1, 0, lazyBranch);
-                branch.isNotFailing = true;
+        _tryGetTokenProbe: function (token) {
+            var qtoken = token.qtoken;
+            if (qtoken == null) {
+                return null;
             }
-        } else {
-            if (probe.value + 1 <= probe.max) {
-                var greedyBranch = branch.clone();
-                greedyBranch.started = true;
-                greedyBranch.peekPass().probe = null;
-                greedyBranch.peekPass().index++;
-                branches.splice(branches.length - 1, 0, greedyBranch);
 
-                probe.forced = true;
-                branch.value += 1;
-                branch.isNotFailing = true;
+            var tokenTypes = System.Text.RegularExpressions.RegexEngineParser.tokenTypes;
+            var min;
+            var max;
+
+            if (qtoken.type === tokenTypes.quantifier) {
+                switch (qtoken.value) {
+                    case "*":
+                    case "*?":
+                        min = 0;
+                        max = 2147483647;
+                        break;
+
+                    case "+":
+                    case "+?":
+                        min = 1;
+                        max = 2147483647;
+                        break;
+
+                    case "?":
+                    case "??":
+                        min = 0;
+                        max = 1;
+                        break;
+
+                    default:
+                        throw new System.InvalidOperationException("Unexpected quantifier value.");
+                }
+            } else if (qtoken.type === tokenTypes.quantifierN) {
+                min = qtoken.data.n;
+                max = qtoken.data.n;
+            } else if (qtoken.type === tokenTypes.quantifierNM) {
+                min = qtoken.data.n;
+                max = qtoken.data.m != null ? qtoken.data.m : 2147483647;
+            } else {
+                return null;
             }
-        }
-    },
 
-    _tryGetTokenProbe: function (token) {
-        var qtoken = token.qtoken;
-        if (qtoken == null) {
-            return null;
-        }
+            var probe = new System.Text.RegularExpressions.RegexEngineProbe(min, max, 0, qtoken.data.isLazy);
+            return probe;
+        },
 
-        var tokenTypes = System.Text.RegularExpressions.RegexEngineParser.tokenTypes;
-        var min;
-        var max;
-
-        if (qtoken.type === tokenTypes.quantifier) {
-            switch (qtoken.value) {
-                case "*":
-                case "*?":
-                    min = 0;
-                    max = 2147483647;
-                    break;
-
-                case "+":
-                case "+?":
-                    min = 1;
-                    max = 2147483647;
-                    break;
-
-                case "?":
-                case "??":
-                    min = 0;
-                    max = 1;
-                    break;
-
-                default:
-                    throw new System.InvalidOperationException("Unexpected quantifier value.");
-            }
-        } else if (qtoken.type === tokenTypes.quantifierN) {
-            min = qtoken.data.n;
-            max = qtoken.data.n;
-        } else if (qtoken.type === tokenTypes.quantifierNM) {
-            min = qtoken.data.n;
-            max = qtoken.data.m != null ? qtoken.data.m : 2147483647;
-        } else {
-            return null;
-        }
-
-        var probe = new System.Text.RegularExpressions.RegexEngineProbe(min, max, 0, qtoken.data.isLazy);
-        return probe;
-    },
-
-    _advanceToNextBranch: function (branches, branch) {
-        if (branches.length === 0) {
-            return;
-        }
-
-        var lastBranch = branches[branches.length - 1];
-        if (!lastBranch.started) {
-            lastBranch.started = true;
-            return;
-        }
-
-        if (branch !== lastBranch) {
-            throw new System.InvalidOperationException("Current branch is supposed to be the last one.");
-        }
-
-        if (branches.length === 1 && branch.type === this._branchType.offset) {
-            branch.value++;
-            branch.state.txtIndex = branch.value;
-            branch.mustFail = false;
-
-            // clear state:
-            branch.state.capIndex = null;
-            branch.state.capLength = 0;
-            branch.state.groups.length = 0;
-            branch.state.passes.length = 1;
-            branch.state.passes[0].clearState(this._cloneSettings(this._settings));
-
-            if (branch.value > branch.max) {
-                branches.pop();
-            }
-        } else {
-            branches.pop();
-
-            if (!branch.isNotFailing) {
-                lastBranch = branches[branches.length - 1];
-                this._advanceToNextBranch(branches, lastBranch);
+        _advanceToNextBranch: function (branches, branch) {
+            if (branches.length === 0) {
                 return;
             }
-        }
-    },
 
-    _collectScanResults: function (state, textPos) {
-        var groupDescs = this._patternInfo.groups;
-        var text = this._text;
-        var processedGroupNames = {};
-        var capGroups;
-        var capGroup;
-        var groupsMap = {};
-        var groupDesc;
-        var capture;
-        var group;
-        var i;
-
-        // Create Empty match object:
-        var match = this._getEmptyMatch();
-
-        if (state != null) {
-            capGroups = state.groups;
-
-            // For successful match fill Match object:
-            this._fillMatch(match, state.capIndex, state.capLength, textPos);
-
-            // Fill group captures:
-            for (i = 0; i < capGroups.length; i++) {
-                capGroup = capGroups[i];
-                groupDesc = groupDescs[capGroup.rawIndex - 1];
-                if (groupDesc.constructs.skipCapture) {
-                    continue;
-                }
-
-                capture = {
-                    capIndex: capGroup.capIndex,
-                    capLength: capGroup.capLength,
-                    value: text.slice(capGroup.capIndex, capGroup.capIndex + capGroup.capLength)
-                };
-
-                group = groupsMap[groupDesc.name];
-                if (group == null) {
-                    group = {
-                        capIndex: 0,
-                        capLength: 0,
-                        value: "",
-                        success: false,
-                        captures: [capture]
-                    };
-
-                    groupsMap[groupDesc.name] = group;
-                } else {
-                    group.captures.push(capture);
-                }
+            var lastBranch = branches[branches.length - 1];
+            if (!lastBranch.started) {
+                lastBranch.started = true;
+                return;
             }
 
-            // Add groups to Match in the required order:
-            for (i = 0; i < groupDescs.length; i++) {
-                groupDesc = groupDescs[i];
-                if (groupDesc.constructs.skipCapture) {
-                    continue;
-                }
+            if (branch !== lastBranch) {
+                throw new System.InvalidOperationException("Current branch is supposed to be the last one.");
+            }
 
-                if (processedGroupNames[groupDesc.name] === true) {
-                    continue;
-                }
+            if (branches.length === 1 && branch.type === this._branchType.offset) {
+                branch.value++;
+                branch.state.txtIndex = branch.value;
+                branch.mustFail = false;
 
-                group = groupsMap[groupDesc.name];
-                if (group == null) {
-                    group = {
-                        capIndex: 0,
-                        capLength: 0,
-                        value: "",
-                        success: false,
-                        captures: []
+                // clear state:
+                branch.state.capIndex = null;
+                branch.state.capLength = 0;
+                branch.state.groups.length = 0;
+                branch.state.passes.length = 1;
+                branch.state.passes[0].clearState(this._cloneSettings(this._settings));
+
+                if (branch.value > branch.max) {
+                    branches.pop();
+                }
+            } else {
+                branches.pop();
+
+                if (!branch.isNotFailing) {
+                    lastBranch = branches[branches.length - 1];
+                    this._advanceToNextBranch(branches, lastBranch);
+                    return;
+                }
+            }
+        },
+
+        _collectScanResults: function (state, textPos) {
+            var groupDescs = this._patternInfo.groups;
+            var text = this._text;
+            var processedGroupNames = {};
+            var capGroups;
+            var capGroup;
+            var groupsMap = {};
+            var groupDesc;
+            var capture;
+            var group;
+            var i;
+
+            // Create Empty match object:
+            var match = this._getEmptyMatch();
+
+            if (state != null) {
+                capGroups = state.groups;
+
+                // For successful match fill Match object:
+                this._fillMatch(match, state.capIndex, state.capLength, textPos);
+
+                // Fill group captures:
+                for (i = 0; i < capGroups.length; i++) {
+                    capGroup = capGroups[i];
+                    groupDesc = groupDescs[capGroup.rawIndex - 1];
+                    if (groupDesc.constructs.skipCapture) {
+                        continue;
+                    }
+
+                    capture = {
+                        capIndex: capGroup.capIndex,
+                        capLength: capGroup.capLength,
+                        value: text.slice(capGroup.capIndex, capGroup.capIndex + capGroup.capLength)
                     };
-                } else {
-                    // Update group values with the last capture info:
-                    if (group.captures.length > 0) {
-                        capture = group.captures[group.captures.length - 1];
 
-                        group.capIndex = capture.capIndex;
-                        group.capLength = capture.capLength;
-                        group.value = capture.value;
-                        group.success = true;
+                    group = groupsMap[groupDesc.name];
+                    if (group == null) {
+                        group = {
+                            capIndex: 0,
+                            capLength: 0,
+                            value: "",
+                            success: false,
+                            captures: [capture]
+                        };
+
+                        groupsMap[groupDesc.name] = group;
+                    } else {
+                        group.captures.push(capture);
                     }
                 }
 
-                processedGroupNames[groupDesc.name] = true;
-                group.descriptor = groupDesc; // TODO: check if we can get rid of this
-                match.groups.push(group);
+                // Add groups to Match in the required order:
+                for (i = 0; i < groupDescs.length; i++) {
+                    groupDesc = groupDescs[i];
+                    if (groupDesc.constructs.skipCapture) {
+                        continue;
+                    }
+
+                    if (processedGroupNames[groupDesc.name] === true) {
+                        continue;
+                    }
+
+                    group = groupsMap[groupDesc.name];
+                    if (group == null) {
+                        group = {
+                            capIndex: 0,
+                            capLength: 0,
+                            value: "",
+                            success: false,
+                            captures: []
+                        };
+                    } else {
+                        // Update group values with the last capture info:
+                        if (group.captures.length > 0) {
+                            capture = group.captures[group.captures.length - 1];
+
+                            group.capIndex = capture.capIndex;
+                            group.capLength = capture.capLength;
+                            group.value = capture.value;
+                            group.success = true;
+                        }
+                    }
+
+                    processedGroupNames[groupDesc.name] = true;
+                    group.descriptor = groupDesc; // TODO: check if we can get rid of this
+                    match.groups.push(group);
+                }
             }
-        }
 
-        return match;
-    },
+            return match;
+        },
 
-    // ============================================================================================
-    // Token processing
-    // ============================================================================================
-    _scanToken: function (textEndPos, branches, branch, pass, token) {
-        var tokenTypes = System.Text.RegularExpressions.RegexEngineParser.tokenTypes;
-        var resKind = this._branchResultKind;
+        // ============================================================================================
+        // Token processing
+        // ============================================================================================
+        _scanToken: function (textEndPos, branches, branch, pass, token) {
+            var tokenTypes = System.Text.RegularExpressions.RegexEngineParser.tokenTypes;
+            var resKind = this._branchResultKind;
 
-        switch (token.type) {
-            case tokenTypes.group:
-            case tokenTypes.groupImnsx:
-            case tokenTypes.alternationGroup:
-                return this._scanGroupToken(textEndPos, branches, branch, pass, token);
+            switch (token.type) {
+                case tokenTypes.group:
+                case tokenTypes.groupImnsx:
+                case tokenTypes.alternationGroup:
+                    return this._scanGroupToken(textEndPos, branches, branch, pass, token);
 
-            case tokenTypes.groupImnsxMisc:
-                return this._scanGroupImnsxToken(token.group.constructs, pass.settings);
+                case tokenTypes.groupImnsxMisc:
+                    return this._scanGroupImnsxToken(token.group.constructs, pass.settings);
 
-            case tokenTypes.charGroup:
-                return this._scanCharGroupToken(branches, branch, pass, token, false);
+                case tokenTypes.charGroup:
+                    return this._scanCharGroupToken(branches, branch, pass, token, false);
 
-            case tokenTypes.charNegativeGroup:
-                return this._scanCharNegativeGroupToken(branches, branch, pass, token, false);
+                case tokenTypes.charNegativeGroup:
+                    return this._scanCharNegativeGroupToken(branches, branch, pass, token, false);
 
-            case tokenTypes.escChar:
-            case tokenTypes.escCharOctal:
-            case tokenTypes.escCharHex:
-            case tokenTypes.escCharUnicode:
-            case tokenTypes.escCharCtrl:
-                return this._scanLiteral(textEndPos, branches, branch, pass, token.data.ch);
+                case tokenTypes.escChar:
+                case tokenTypes.escCharOctal:
+                case tokenTypes.escCharHex:
+                case tokenTypes.escCharUnicode:
+                case tokenTypes.escCharCtrl:
+                    return this._scanLiteral(textEndPos, branches, branch, pass, token.data.ch);
 
-            case tokenTypes.escCharOther:
-            case tokenTypes.escCharClass:
-                return this._scanEscapeToken(branches, branch, pass, token);
+                case tokenTypes.escCharOther:
+                case tokenTypes.escCharClass:
+                    return this._scanEscapeToken(branches, branch, pass, token);
 
-            case tokenTypes.escCharClassCategory:
-                throw new System.NotSupportedException("Unicode Category constructions are not supported.");
+                case tokenTypes.escCharClassCategory:
+                    throw new System.NotSupportedException("Unicode Category constructions are not supported.");
 
-            case tokenTypes.escCharClassBlock:
-                throw new System.NotSupportedException("Unicode Named block constructions are not supported.");
+                case tokenTypes.escCharClassBlock:
+                    throw new System.NotSupportedException("Unicode Named block constructions are not supported.");
 
-            case tokenTypes.escCharClassDot:
-                return this._scanDotToken(textEndPos, branches, branch, pass);
+                case tokenTypes.escCharClassDot:
+                    return this._scanDotToken(textEndPos, branches, branch, pass);
 
-            case tokenTypes.escBackrefNumber:
-                return this._scanBackrefNumberToken(textEndPos, branches, branch, pass, token);
+                case tokenTypes.escBackrefNumber:
+                    return this._scanBackrefNumberToken(textEndPos, branches, branch, pass, token);
 
-            case tokenTypes.escBackrefName:
-                return this._scanBackrefNameToken(textEndPos, branches, branch, pass, token);
+                case tokenTypes.escBackrefName:
+                    return this._scanBackrefNameToken(textEndPos, branches, branch, pass, token);
 
-            case tokenTypes.anchor:
-            case tokenTypes.escAnchor:
-                return this._scanAnchorToken(textEndPos, branches, branch, pass, token);
+                case tokenTypes.anchor:
+                case tokenTypes.escAnchor:
+                    return this._scanAnchorToken(textEndPos, branches, branch, pass, token);
 
-            case tokenTypes.groupConstruct:
-            case tokenTypes.groupConstructName:
-            case tokenTypes.groupConstructImnsx:
-            case tokenTypes.groupConstructImnsxMisc:
-                return resKind.ok;
+                case tokenTypes.groupConstruct:
+                case tokenTypes.groupConstructName:
+                case tokenTypes.groupConstructImnsx:
+                case tokenTypes.groupConstructImnsxMisc:
+                    return resKind.ok;
 
-            case tokenTypes.alternationGroupCondition:
-            case tokenTypes.alternationGroupRefNameCondition:
-            case tokenTypes.alternationGroupRefNumberCondition:
-                return this._scanAlternationConditionToken(textEndPos, branches, branch, pass, token);
+                case tokenTypes.alternationGroupCondition:
+                case tokenTypes.alternationGroupRefNameCondition:
+                case tokenTypes.alternationGroupRefNumberCondition:
+                    return this._scanAlternationConditionToken(textEndPos, branches, branch, pass, token);
 
-            case tokenTypes.alternation:
-                return resKind.endPass;
+                case tokenTypes.alternation:
+                    return resKind.endPass;
 
-            case tokenTypes.commentInline:
-            case tokenTypes.commentXMode:
-                return resKind.ok;
+                case tokenTypes.commentInline:
+                case tokenTypes.commentXMode:
+                    return resKind.ok;
 
-            default:
-                return this._scanLiteral(textEndPos, branches, branch, pass, token.value);
-        }
-    },
+                default:
+                    return this._scanLiteral(textEndPos, branches, branch, pass, token.value);
+            }
+        },
 
-    _scanGroupToken: function (textEndPos, branches, branch, pass, token) {
-        var tokenTypes = System.Text.RegularExpressions.RegexEngineParser.tokenTypes;
-        var resKind = this._branchResultKind;
-        var textIndex = branch.state.txtIndex;
+        _scanGroupToken: function (textEndPos, branches, branch, pass, token) {
+            var tokenTypes = System.Text.RegularExpressions.RegexEngineParser.tokenTypes;
+            var resKind = this._branchResultKind;
+            var textIndex = branch.state.txtIndex;
 
-        if (pass.onHold) {
-            if (token.type === tokenTypes.group) {
-                var rawIndex = token.group.rawIndex;
-                var capIndex = pass.onHoldTextIndex;
-                var capLength = textIndex - capIndex;
+            if (pass.onHold) {
+                if (token.type === tokenTypes.group) {
+                    var rawIndex = token.group.rawIndex;
+                    var capIndex = pass.onHoldTextIndex;
+                    var capLength = textIndex - capIndex;
 
-                // Cache value to avoid proceeding with the already checked route:
-                var tokenCache = branches.grCaptureCache[rawIndex];
-                if (tokenCache == null) {
-                    tokenCache = {};
-                    branches.grCaptureCache[rawIndex] = tokenCache;
+                    // Cache value to avoid proceeding with the already checked route:
+                    var tokenCache = branches.grCaptureCache[rawIndex];
+                    if (tokenCache == null) {
+                        tokenCache = {};
+                        branches.grCaptureCache[rawIndex] = tokenCache;
+                    }
+
+                    var key = capIndex.toString() + "_" + capLength.toString();
+                    if (tokenCache[key] == null) {
+                        tokenCache[key] = true;
+                    } else {
+                        return resKind.nextBranch;
+                    }
+
+                    if (!token.group.constructs.emptyCapture) {
+                        if (token.group.isBalancing) {
+                            branch.state.logCaptureGroupBalancing(token.group, capIndex);
+                        } else {
+                            branch.state.logCaptureGroup(token.group, capIndex, capLength);
+                        }
+                    }
                 }
 
-                var key = capIndex.toString() + "_" + capLength.toString();
-                if (tokenCache[key] == null) {
-                    tokenCache[key] = true;
+                pass.onHold = false;
+                pass.onHoldTextIndex = -1;
+                return resKind.ok;
+            }
+
+            if (token.type === tokenTypes.group ||
+                token.type === tokenTypes.groupImnsx) {
+                var constructs = token.group.constructs;
+
+                // Update Pass settings:
+                this._scanGroupImnsxToken(constructs, pass.settings);
+
+                // Scan Grouping constructs:
+                if (constructs.isPositiveLookahead || constructs.isNegativeLookahead ||
+                    constructs.isPositiveLookbehind || constructs.isNegativeLookbehind) {
+                    var scanLookRes = this._scanLook(branch, textIndex, textEndPos, token);
+                    return scanLookRes;
+                } else if (constructs.isNonbacktracking) {
+                    var scanNonBacktrackingRes = this._scanNonBacktracking(branch, textIndex, textEndPos, token);
+                    return scanNonBacktrackingRes;
+                }
+            }
+
+            // Continue scanning a regular group:
+            pass.onHoldTextIndex = textIndex;
+            pass.onHold = true;
+
+            branch.pushPass(0, token.children, this._cloneSettings(pass.settings));
+            return resKind.nextPass;
+        },
+
+        _scanGroupImnsxToken: function (constructs, settings) {
+            var resKind = this._branchResultKind;
+
+            if (constructs.isIgnoreCase != null) {
+                settings.ignoreCase = constructs.isIgnoreCase;
+            }
+
+            if (constructs.isMultiline != null) {
+                settings.multiline = constructs.isMultiline;
+            }
+
+            if (constructs.isSingleLine != null) {
+                settings.singleline = constructs.isSingleLine;
+            }
+
+            if (constructs.isIgnoreWhitespace != null) {
+                settings.ignoreWhitespace = constructs.isIgnoreWhitespace;
+            }
+
+            if (constructs.isExplicitCapture != null) {
+                settings.explicitCapture = constructs.isExplicitCapture;
+            }
+
+            return resKind.ok;
+        },
+
+        _scanAlternationConditionToken: function (textEndPos, branches, branch, pass, token) {
+            var tokenTypes = System.Text.RegularExpressions.RegexEngineParser.tokenTypes;
+            var resKind = this._branchResultKind;
+            var children = token.children;
+            var textIndex = branch.state.txtIndex;
+            var res = resKind.nextBranch;
+
+            if (token.type === tokenTypes.alternationGroupRefNameCondition ||
+                token.type === tokenTypes.alternationGroupRefNumberCondition) {
+                var grCapture = branch.state.resolveBackref(token.data.packedSlotId);
+                if (grCapture != null) {
+                    res = resKind.ok;
+                } else {
+                    res = resKind.nextBranch;
+                }
+            } else {
+                // Resolve expression:
+                var state = this._scan(textIndex, textEndPos, children, true, null);
+                if (this._combineScanResults(branch, state)) {
+                    res = resKind.ok;
+                }
+            }
+
+            if (res === resKind.nextBranch && pass.tokens.noAlternation) {
+                res = resKind.endPass;
+            }
+
+            return res;
+        },
+
+        _scanLook: function (branch, textIndex, textEndPos, token) {
+            var constructs = token.group.constructs;
+            var resKind = this._branchResultKind;
+            var children = token.children;
+            var expectedRes;
+            var actualRes;
+
+            var isLookahead = constructs.isPositiveLookahead || constructs.isNegativeLookahead;
+            var isLookbehind = constructs.isPositiveLookbehind || constructs.isNegativeLookbehind;
+
+            if (isLookahead || isLookbehind) {
+                children = children.slice(1, children.length); // remove constructs
+
+                expectedRes = constructs.isPositiveLookahead || constructs.isPositiveLookbehind;
+                if (isLookahead) {
+                    actualRes = this._scanLookAhead(branch, textIndex, textEndPos, children);
+                } else {
+                    actualRes = this._scanLookBehind(branch, textIndex, textEndPos, children);
+                }
+
+                if (expectedRes === actualRes) {
+                    return resKind.ok;
                 } else {
                     return resKind.nextBranch;
                 }
+            }
 
-                if (!token.group.constructs.emptyCapture) {
-                    if (token.group.isBalancing) {
-                        branch.state.logCaptureGroupBalancing(token.group, capIndex);
-                    } else {
-                        branch.state.logCaptureGroup(token.group, capIndex, capLength);
-                    }
+            return null;
+        },
+
+        _scanLookAhead: function (branch, textIndex, textEndPos, tokens) {
+            var state = this._scan(textIndex, textEndPos, tokens, true, null);
+            return this._combineScanResults(branch, state);
+        },
+
+        _scanLookBehind: function (branch, textIndex, textEndPos, tokens) {
+            var currIndex = textIndex;
+            var strLen;
+            var state;
+
+            while (currIndex >= 0) {
+                strLen = textIndex - currIndex;
+                state = this._scan(currIndex, textEndPos, tokens, true, strLen);
+
+                if (this._combineScanResults(branch, state)) {
+                    return true;
                 }
+
+                --currIndex;
             }
 
-            pass.onHold = false;
-            pass.onHoldTextIndex = -1;
-            return resKind.ok;
-        }
+            return false;
+        },
 
-        if (token.type === tokenTypes.group ||
-            token.type === tokenTypes.groupImnsx) {
-            var constructs = token.group.constructs;
-
-            // Update Pass settings:
-            this._scanGroupImnsxToken(constructs, pass.settings);
-
-            // Scan Grouping constructs:
-            if (constructs.isPositiveLookahead || constructs.isNegativeLookahead ||
-                constructs.isPositiveLookbehind || constructs.isNegativeLookbehind) {
-                var scanLookRes = this._scanLook(branch, textIndex, textEndPos, token);
-                return scanLookRes;
-            } else if (constructs.isNonbacktracking) {
-                var scanNonBacktrackingRes = this._scanNonBacktracking(branch, textIndex, textEndPos, token);
-                return scanNonBacktrackingRes;
-            }
-        }
-
-        // Continue scanning a regular group:
-        pass.onHoldTextIndex = textIndex;
-        pass.onHold = true;
-
-        branch.pushPass(0, token.children, this._cloneSettings(pass.settings));
-        return resKind.nextPass;
-    },
-
-    _scanGroupImnsxToken: function (constructs, settings) {
-        var resKind = this._branchResultKind;
-
-        if (constructs.isIgnoreCase != null) {
-            settings.ignoreCase = constructs.isIgnoreCase;
-        }
-
-        if (constructs.isMultiline != null) {
-            settings.multiline = constructs.isMultiline;
-        }
-
-        if (constructs.isSingleLine != null) {
-            settings.singleline = constructs.isSingleLine;
-        }
-
-        if (constructs.isIgnoreWhitespace != null) {
-            settings.ignoreWhitespace = constructs.isIgnoreWhitespace;
-        }
-
-        if (constructs.isExplicitCapture != null) {
-            settings.explicitCapture = constructs.isExplicitCapture;
-        }
-
-        return resKind.ok;
-    },
-
-    _scanAlternationConditionToken: function (textEndPos, branches, branch, pass, token) {
-        var tokenTypes = System.Text.RegularExpressions.RegexEngineParser.tokenTypes;
-        var resKind = this._branchResultKind;
-        var children = token.children;
-        var textIndex = branch.state.txtIndex;
-        var res = resKind.nextBranch;
-
-        if (token.type === tokenTypes.alternationGroupRefNameCondition ||
-            token.type === tokenTypes.alternationGroupRefNumberCondition) {
-            var grCapture = branch.state.resolveBackref(token.data.packedSlotId);
-            if (grCapture != null) {
-                res = resKind.ok;
-            } else {
-                res = resKind.nextBranch;
-            }
-        } else {
-            // Resolve expression:
-            var state = this._scan(textIndex, textEndPos, children, true, null);
-            if (this._combineScanResults(branch, state)) {
-                res = resKind.ok;
-            }
-        }
-
-        if (res === resKind.nextBranch && pass.tokens.noAlternation) {
-            res = resKind.endPass;
-        }
-
-        return res;
-    },
-
-    _scanLook: function (branch, textIndex, textEndPos, token) {
-        var constructs = token.group.constructs;
-        var resKind = this._branchResultKind;
-        var children = token.children;
-        var expectedRes;
-        var actualRes;
-
-        var isLookahead = constructs.isPositiveLookahead || constructs.isNegativeLookahead;
-        var isLookbehind = constructs.isPositiveLookbehind || constructs.isNegativeLookbehind;
-
-        if (isLookahead || isLookbehind) {
+        _scanNonBacktracking: function (branch, textIndex, textEndPos, token) {
+            var resKind = this._branchResultKind;
+            var children = token.children;
             children = children.slice(1, children.length); // remove constructs
 
-            expectedRes = constructs.isPositiveLookahead || constructs.isPositiveLookbehind;
-            if (isLookahead) {
-                actualRes = this._scanLookAhead(branch, textIndex, textEndPos, children);
-            } else {
-                actualRes = this._scanLookBehind(branch, textIndex, textEndPos, children);
-            }
-
-            if (expectedRes === actualRes) {
-                return resKind.ok;
-            } else {
+            var state = this._scan(textIndex, textEndPos, children, true, null);
+            if (!state) {
                 return resKind.nextBranch;
             }
-        }
 
-        return null;
-    },
+            branch.state.logCapture(state.capLength);
 
-    _scanLookAhead: function (branch, textIndex, textEndPos, tokens) {
-        var state = this._scan(textIndex, textEndPos, tokens, true, null);
-        return this._combineScanResults(branch, state);
-    },
-
-    _scanLookBehind: function (branch, textIndex, textEndPos, tokens) {
-        var currIndex = textIndex;
-        var strLen;
-        var state;
-
-        while (currIndex >= 0) {
-            strLen = textIndex - currIndex;
-            state = this._scan(currIndex, textEndPos, tokens, true, strLen);
-
-            if (this._combineScanResults(branch, state)) {
-                return true;
-            }
-
-            --currIndex;
-        }
-
-        return false;
-    },
-
-    _scanNonBacktracking: function (branch, textIndex, textEndPos, token) {
-        var resKind = this._branchResultKind;
-        var children = token.children;
-        children = children.slice(1, children.length); // remove constructs
-
-        var state = this._scan(textIndex, textEndPos, children, true, null);
-        if (!state) {
-            return resKind.nextBranch;
-        }
-
-        branch.state.logCapture(state.capLength);
-
-        return resKind.ok;
-    },
-
-    _scanLiteral: function (textEndPos, branches, branch, pass, literal) {
-        var resKind = this._branchResultKind;
-        var index = branch.state.txtIndex;
-
-        if (index + literal.length > textEndPos) {
-            return resKind.nextBranch;
-        }
-
-        var i;
-        if (pass.settings.ignoreCase) {
-            for (i = 0; i < literal.length; i++) {
-                if (this._text[index + i].toLowerCase() !== literal[i].toLowerCase()) {
-                    return resKind.nextBranch;
-                }
-            }
-        } else {
-            for (i = 0; i < literal.length; i++) {
-                if (this._text[index + i] !== literal[i]) {
-                    return resKind.nextBranch;
-                }
-            }
-        }
-
-        branch.state.logCapture(literal.length);
-        return resKind.ok;
-    },
-
-    _scanWithJsRegex: function (branches, branch, pass, token, tokenValue) {
-        var resKind = this._branchResultKind;
-        var index = branch.state.txtIndex;
-        var ch = this._text[index];
-        if (ch == null) {
-            ch = "";
-        }
-
-        var options = pass.settings.ignoreCase ? "i" : "";
-
-        var rgx = token.rgx;
-        if (rgx == null) {
-            if (tokenValue == null) {
-                tokenValue = token.value;
-            }
-            rgx = new RegExp(tokenValue, options);
-            token.rgx = rgx;
-        }
-
-        if (rgx.test(ch)) {
-            branch.state.logCapture(ch.length);
             return resKind.ok;
-        }
+        },
 
-        return resKind.nextBranch;
-    },
+        _scanLiteral: function (textEndPos, branches, branch, pass, literal) {
+            var resKind = this._branchResultKind;
+            var index = branch.state.txtIndex;
 
-    _scanWithJsRegex2: function (textIndex, pattern) {
-        var resKind = this._branchResultKind;
-        var ch = this._text[textIndex];
-        if (ch == null) {
-            ch = "";
-        }
+            if (index + literal.length > textEndPos) {
+                return resKind.nextBranch;
+            }
 
-        var rgx = new RegExp(pattern, "");
-        if (rgx.test(ch)) {
-            return resKind.ok;
-        }
-
-        return resKind.nextBranch;
-    },
-
-    _scanCharGroupToken: function (branches, branch, pass, token, skipLoggingCapture) {
-        var tokenTypes = System.Text.RegularExpressions.RegexEngineParser.tokenTypes;
-        var resKind = this._branchResultKind;
-        var index = branch.state.txtIndex;
-        var ch = this._text[index];
-        if (ch == null) {
-            return resKind.nextBranch;
-        }
-
-        var i;
-        var j;
-        var n = ch.charCodeAt(0);
-        var ranges = token.data.ranges;
-        var range;
-        var upperCh;
-
-        // Check susbstruct group:
-        if (token.data.substractToken != null) {
-            var substractRes;
-            if (token.data.substractToken.type === tokenTypes.charGroup) {
-                substractRes = this._scanCharGroupToken(branches, branch, pass, token.data.substractToken, true);
-            } else if (token.data.substractToken.type === tokenTypes.charNegativeGroup) {
-                substractRes = this._scanCharNegativeGroupToken(branches, branch, pass, token.data.substractToken, true);
+            var i;
+            if (pass.settings.ignoreCase) {
+                for (i = 0; i < literal.length; i++) {
+                    if (this._text[index + i].toLowerCase() !== literal[i].toLowerCase()) {
+                        return resKind.nextBranch;
+                    }
+                }
             } else {
-                throw new System.InvalidOperationException("Unexpected substuct group token.");
+                for (i = 0; i < literal.length; i++) {
+                    if (this._text[index + i] !== literal[i]) {
+                        return resKind.nextBranch;
+                    }
+                }
             }
 
-            if (substractRes === resKind.ok) {
-                return token.type === tokenTypes.charGroup ? resKind.nextBranch : resKind.ok;
-            }
-        }
+            branch.state.logCapture(literal.length);
+            return resKind.ok;
+        },
 
-        // Try CharClass tokens like: \s \S \d \D
-        if (ranges.charClassToken != null) {
-            var charClassRes = this._scanWithJsRegex(branches, branch, pass, ranges.charClassToken);
-            if (charClassRes === resKind.ok) {
+        _scanWithJsRegex: function (branches, branch, pass, token, tokenValue) {
+            var resKind = this._branchResultKind;
+            var index = branch.state.txtIndex;
+            var ch = this._text[index];
+            if (ch == null) {
+                ch = "";
+            }
+
+            var options = pass.settings.ignoreCase ? "i" : "";
+
+            var rgx = token.rgx;
+            if (rgx == null) {
+                if (tokenValue == null) {
+                    tokenValue = token.value;
+                }
+                rgx = new RegExp(tokenValue, options);
+                token.rgx = rgx;
+            }
+
+            if (rgx.test(ch)) {
+                branch.state.logCapture(ch.length);
                 return resKind.ok;
             }
-        }
 
-        // 2 iterations - to handle both cases: upper and lower
-        for (j = 0; j < 2; j++) {
-            //TODO: [Performance] Use binary search
-            for (i = 0; i < ranges.length; i++) {
-                range = ranges[i];
+            return resKind.nextBranch;
+        },
 
-                if (range.n > n) {
-                    break;
+        _scanWithJsRegex2: function (textIndex, pattern) {
+            var resKind = this._branchResultKind;
+            var ch = this._text[textIndex];
+            if (ch == null) {
+                ch = "";
+            }
+
+            var rgx = new RegExp(pattern, "");
+            if (rgx.test(ch)) {
+                return resKind.ok;
+            }
+
+            return resKind.nextBranch;
+        },
+
+        _scanCharGroupToken: function (branches, branch, pass, token, skipLoggingCapture) {
+            var tokenTypes = System.Text.RegularExpressions.RegexEngineParser.tokenTypes;
+            var resKind = this._branchResultKind;
+            var index = branch.state.txtIndex;
+            var ch = this._text[index];
+            if (ch == null) {
+                return resKind.nextBranch;
+            }
+
+            var i;
+            var j;
+            var n = ch.charCodeAt(0);
+            var ranges = token.data.ranges;
+            var range;
+            var upperCh;
+
+            // Check susbstruct group:
+            if (token.data.substractToken != null) {
+                var substractRes;
+                if (token.data.substractToken.type === tokenTypes.charGroup) {
+                    substractRes = this._scanCharGroupToken(branches, branch, pass, token.data.substractToken, true);
+                } else if (token.data.substractToken.type === tokenTypes.charNegativeGroup) {
+                    substractRes = this._scanCharNegativeGroupToken(branches, branch, pass, token.data.substractToken, true);
+                } else {
+                    throw new System.InvalidOperationException("Unexpected substuct group token.");
                 }
 
-                if (n <= range.m) {
-                    if (!skipLoggingCapture) {
-                        branch.state.logCapture(1);
-                    }
+                if (substractRes === resKind.ok) {
+                    return token.type === tokenTypes.charGroup ? resKind.nextBranch : resKind.ok;
+                }
+            }
+
+            // Try CharClass tokens like: \s \S \d \D
+            if (ranges.charClassToken != null) {
+                var charClassRes = this._scanWithJsRegex(branches, branch, pass, ranges.charClassToken);
+                if (charClassRes === resKind.ok) {
                     return resKind.ok;
                 }
             }
 
-            if (upperCh == null && pass.settings.ignoreCase) {
-                upperCh = ch.toUpperCase();
+            // 2 iterations - to handle both cases: upper and lower
+            for (j = 0; j < 2; j++) {
+                //TODO: [Performance] Use binary search
+                for (i = 0; i < ranges.length; i++) {
+                    range = ranges[i];
 
-                // Invert case for the 2nd attempt;
-                if (ch === upperCh) {
-                    ch = ch.toLowerCase();
-                } else {
-                    ch = upperCh;
+                    if (range.n > n) {
+                        break;
+                    }
+
+                    if (n <= range.m) {
+                        if (!skipLoggingCapture) {
+                            branch.state.logCapture(1);
+                        }
+                        return resKind.ok;
+                    }
                 }
 
-                n = ch.charCodeAt(0);
-            }
-        }
+                if (upperCh == null && pass.settings.ignoreCase) {
+                    upperCh = ch.toUpperCase();
 
-        return resKind.nextBranch;
-    },
+                    // Invert case for the 2nd attempt;
+                    if (ch === upperCh) {
+                        ch = ch.toLowerCase();
+                    } else {
+                        ch = upperCh;
+                    }
 
-    _scanCharNegativeGroupToken: function (branches, branch, pass, token, skipLoggingCapture) {
-        var resKind = this._branchResultKind;
-        var index = branch.state.txtIndex;
-        var ch = this._text[index];
-        if (ch == null) {
-            return resKind.nextBranch;
-        }
-
-        // Get result for positive group:
-        var positiveRes = this._scanCharGroupToken(branches, branch, pass, token, true);
-
-        // Inverse the positive result:
-        if (positiveRes === resKind.ok) {
-            return resKind.nextBranch;
-        }
-
-        if (!skipLoggingCapture) {
-            branch.state.logCapture(1);
-        }
-
-        return resKind.ok;
-    },
-
-    _scanEscapeToken: function (branches, branch, pass, token) {
-        return this._scanWithJsRegex(branches, branch, pass, token);
-    },
-
-    _scanDotToken: function (textEndPos, branches, branch, pass) {
-        var resKind = this._branchResultKind;
-        var index = branch.state.txtIndex;
-
-        if (pass.settings.singleline) {
-            if (index < textEndPos) {
-                branch.state.logCapture(1);
-                return resKind.ok;
-            }
-        } else {
-            if (index < textEndPos && this._text[index] !== "\n") {
-                branch.state.logCapture(1);
-                return resKind.ok;
-            }
-        }
-
-        return resKind.nextBranch;
-    },
-
-    _scanBackrefNumberToken: function (textEndPos, branches, branch, pass, token) {
-        var resKind = this._branchResultKind;
-
-        var grCapture = branch.state.resolveBackref(token.data.slotId);
-        if (grCapture == null) {
-            return resKind.nextBranch;
-        }
-
-        var grCaptureTxt = this._text.slice(grCapture.capIndex, grCapture.capIndex + grCapture.capLength);
-        return this._scanLiteral(textEndPos, branches, branch, pass, grCaptureTxt);
-    },
-
-    _scanBackrefNameToken: function (textEndPos, branches, branch, pass, token) {
-        var resKind = this._branchResultKind;
-
-        var grCapture = branch.state.resolveBackref(token.data.slotId);
-        if (grCapture == null) {
-            return resKind.nextBranch;
-        }
-
-        var grCaptureTxt = this._text.slice(grCapture.capIndex, grCapture.capIndex + grCapture.capLength);
-        return this._scanLiteral(textEndPos, branches, branch, pass, grCaptureTxt);
-    },
-
-    _scanAnchorToken: function (textEndPos, branches, branch, pass, token) {
-        var resKind = this._branchResultKind;
-        var index = branch.state.txtIndex;
-
-        if (token.value === "\\b" || token.value === "\\B") {
-            var prevIsWord = index > 0 && this._scanWithJsRegex2(index - 1, "\\w") === resKind.ok;
-            var currIsWord = this._scanWithJsRegex2(index, "\\w") === resKind.ok;
-            if ((prevIsWord === currIsWord) === (token.value === "\\B")) {
-                return resKind.ok;
-            }
-        } else if (token.value === "^") {
-            if (index === 0) {
-                return resKind.ok;
-            }
-            if (pass.settings.multiline && this._text[index - 1] === "\n") {
-                return resKind.ok;
-            }
-        } else if (token.value === "$") {
-            if (index === textEndPos) {
-                return resKind.ok;
-            }
-            if (pass.settings.multiline && this._text[index] === "\n") {
-                return resKind.ok;
-            }
-        } else if (token.value === "\\A") {
-            if (index === 0) {
-                return resKind.ok;
-            }
-        } else if (token.value === "\\z") {
-            if (index === textEndPos) {
-                return resKind.ok;
-            }
-        } else if (token.value === "\\Z") {
-            if (index === textEndPos) {
-                return resKind.ok;
-            }
-            if (index === textEndPos - 1 && this._text[index] === "\n") {
-                return resKind.ok;
-            }
-        } else if (token.value === "\\G") {
-            return resKind.ok;
-        }
-
-        return resKind.nextBranch;
-    },
-
-    // ============================================================================================
-    // Auxiliary functions
-    // ============================================================================================
-    _cloneSettings: function (settings) {
-        var cloned = {
-            ignoreCase: settings.ignoreCase,
-            multiline: settings.multiline,
-            singleline: settings.singleline,
-            ignoreWhitespace: settings.ignoreWhitespace,
-            explicitCapture: settings.explicitCapture
-        };
-        return cloned;
-    },
-
-    _combineScanResults: function (branch, srcState) {
-        if (srcState != null) {
-            var dstGroups = branch.state.groups;
-            var srcGroups = srcState.groups;
-            var srcGroupsLen = srcGroups.length;
-            var i;
-
-            for (i = 0; i < srcGroupsLen; ++i) {
-                dstGroups.push(srcGroups[i]);
+                    n = ch.charCodeAt(0);
                 }
-
-            return true;
-        }
-        return false;
-    },
-
-    _getEmptyMatch: function () {
-        var match = {
-            capIndex: 0,    // start index of total capture
-            capLength: 0,   // length of total capture
-            success: false,
-            value: "",
-            groups: [],
-            captures: []
-        };
-
-        return match;
-    },
-
-    _fillMatch: function (match, capIndex, capLength, textPos) {
-        if (capIndex == null) {
-            capIndex = textPos;
-        }
-
-        match.capIndex = capIndex;
-        match.capLength = capLength;
-        match.success = true;
-        match.value = this._text.slice(capIndex, capIndex + capLength);
-
-        match.groups.push({
-            capIndex: capIndex,
-            capLength: capLength,
-            value: match.value,
-            success: true,
-            captures: [
-                {
-                    capIndex: capIndex,
-                    capLength: capLength,
-                    value: match.value
-                }
-            ]
-        });
-
-        match.captures.push(match.groups[0].captures[0]);
-    },
-
-    _checkTimeout: function () {
-        if (this._timeoutTime < 0) {
-            return;
-        }
-
-        var time = new Date().getTime();
-
-        if (time >= this._timeoutTime) {
-            throw new System.RegexMatchTimeoutException(this._text, this._pattern, System.TimeSpan.fromMilliseconds(this._timeoutMs));
-        }
-    }
-});
-
-// @source Text/RegularExpressions/RegexEngine.js
-
-Bridge.define("System.Text.RegularExpressions.RegexEngineBranch", {
-    type: 0,
-    value: 0,
-    min: 0,
-    max: 0,
-
-    isStarted: false,
-    isNotFailing: false,
-
-    state: null,
-
-    constructor: function (branchType, currVal, minVal, maxVal, parentState) {
-        this.$initialize();
-
-        this.type = branchType;
-
-        this.value = currVal;
-        this.min = minVal;
-        this.max = maxVal;
-
-        this.state = parentState != null ? parentState.clone() : new System.Text.RegularExpressions.RegexEngineState();
-    },
-
-    pushPass: function (index, tokens, settings) {
-        var pass = new System.Text.RegularExpressions.RegexEnginePass(index, tokens, settings);
-        this.state.passes.push(pass);
-    },
-
-    peekPass: function () {
-        return this.state.passes[this.state.passes.length - 1];
-    },
-
-    popPass: function () {
-        return this.state.passes.pop();
-    },
-
-    hasPass: function () {
-        return this.state.passes.length > 0;
-    },
-
-    clone: function () {
-        var cloned = new System.Text.RegularExpressions.RegexEngineBranch(this.type, this.value, this.min, this.max, this.state);
-        cloned.isNotFailing = this.isNotFailing;
-        return cloned;
-    }
-});
-
-// @source Text/RegularExpressions/RegexEngine.js
-
-Bridge.define("System.Text.RegularExpressions.RegexEngineState", {
-    txtIndex: 0, // current index
-    capIndex: null, // first index of captured text
-    capLength: 0, // current length
-    passes: null,
-    groups: null, // captured groups
-
-    constructor: function () {
-        this.$initialize();
-
-        this.passes = [];
-        this.groups = [];
-    },
-
-    logCapture: function (length) {
-        if (this.capIndex == null) {
-            this.capIndex = this.txtIndex;
-        }
-
-        this.txtIndex += length;
-        this.capLength += length;
-    },
-
-    logCaptureGroup: function (group, index, length) {
-        this.groups.push({ rawIndex: group.rawIndex, slotId: group.packedSlotId, capIndex: index, capLength: length });
-    },
-
-    logCaptureGroupBalancing: function (group, capIndex) {
-        var balancingSlotId = group.balancingSlotId;
-        var groups = this.groups;
-        var index = groups.length - 1;
-        var group2;
-        var group2Index;
-
-        while (index >= 0) {
-            if (groups[index].slotId === balancingSlotId) {
-                group2 = groups[index];
-                group2Index = index;
-                break;
-            }
-            --index;
-        }
-
-        if (group2 != null && group2Index != null) {
-            groups.splice(group2Index, 1); // remove group2 from the collection
-
-            // Add balancing group value:
-            if (group.constructs.name1 != null) {
-                var balCapIndex = group2.capIndex + group2.capLength;
-                var balCapLength = capIndex - balCapIndex;
-
-                this.logCaptureGroup(group, balCapIndex, balCapLength);
             }
 
-            return true;
-        }
-
-        return false;
-    },
-
-    resolveBackref: function (packedSlotId) {
-        var groups = this.groups;
-        var index = groups.length - 1;
-
-        while (index >= 0) {
-            if (groups[index].slotId === packedSlotId) {
-                return groups[index];
-            }
-            --index;
-        }
-
-        return null;
-    },
-
-    clone: function () {
-        var cloned = new System.Text.RegularExpressions.RegexEngineState();
-        cloned.txtIndex = this.txtIndex;
-        cloned.capIndex = this.capIndex;
-        cloned.capLength = this.capLength;
-
-        // Clone passes:
-        var clonedPasses = cloned.passes;
-        var thisPasses = this.passes;
-        var len = thisPasses.length;
-        var clonedItem;
-        var i;
-
-        for (i = 0; i < len; i++) {
-            clonedItem = thisPasses[i].clone();
-            clonedPasses.push(clonedItem);
-        }
-
-        // Clone groups:
-        var clonedGroups = cloned.groups;
-        var thisGroups = this.groups;
-        len = thisGroups.length;
-
-        for (i = 0; i < len; i++) {
-            clonedItem = thisGroups[i];
-            clonedGroups.push(clonedItem);
-        }
-
-        return cloned;
-    }
-});
-
-// @source Text/RegularExpressions/RegexEngine.js
-
-Bridge.define("System.Text.RegularExpressions.RegexEnginePass", {
-    index: 0,
-    tokens: null,
-    probe: null,
-
-    onHold: false,
-    onHoldTextIndex: -1,
-    alternationHandled: false,
-
-    settings: null,
-
-    constructor: function (index, tokens, settings) {
-        this.$initialize();
-
-        this.index = index;
-        this.tokens = tokens;
-        this.settings = settings;
-    },
-
-    clearState: function (settings) {
-        this.index = 0;
-        this.probe = null;
-        this.onHold = false;
-        this.onHoldTextIndex = -1;
-        this.alternationHandled = false;
-        this.settings = settings;
-    },
-
-    clone: function () {
-        var cloned = new System.Text.RegularExpressions.RegexEnginePass(this.index, this.tokens, this.settings);
-        cloned.onHold = this.onHold;
-        cloned.onHoldTextIndex = this.onHoldTextIndex;
-        cloned.alternationHandled = this.alternationHandled;
-        cloned.probe = this.probe != null ? this.probe.clone() : null;
-        return cloned;
-    }
-});
-
-// @source Text/RegularExpressions/RegexEngine.js
-
-Bridge.define("System.Text.RegularExpressions.RegexEngineProbe", {
-    min: 0,
-    max: 0,
-    value: 0,
-    isLazy: false,
-    forced: false,
-
-    constructor: function (min, max, value, isLazy) {
-        this.$initialize();
-
-        this.min = min;
-        this.max = max;
-        this.value = value;
-        this.isLazy = isLazy;
-        this.forced = false;
-    },
-
-    clone: function () {
-        var cloned = new System.Text.RegularExpressions.RegexEngineProbe(this.min, this.max, this.value, this.isLazy);
-        cloned.forced = this.forced;
-        return cloned;
-    }
-});
-
-// @source Text/RegularExpressions/RegexEngineParser.js
-
-Bridge.define("System.Text.RegularExpressions.RegexEngineParser", {
-    statics: {
-        _hexSymbols: "0123456789abcdefABCDEF",
-        _octSymbols: "01234567",
-        _decSymbols: "0123456789",
-
-        _escapedChars: "abtrvfnexcu",
-        _escapedCharClasses: "pPwWsSdD",
-        _escapedAnchors: "AZzGbB",
-        _escapedSpecialSymbols: " .,$^{}[]()|*+-=?\\|/\"':;~!@#%&",
-
-        _whiteSpaceChars: " \r\n\t\v\f\u00A0\uFEFF", //TODO: This is short version of .NET WhiteSpace category.
-        _unicodeCategories: ["Lu", "Ll", "Lt", "Lm", "Lo", "L", "Mn", "Mc", "Me", "M", "Nd", "Nl", "No", "N", "Pc", "Pd", "Ps", "Pe", "Pi", "Pf", "Po", "P", "Sm", "Sc", "Sk", "So", "S", "Zs", "Zl", "Zp", "Z", "Cc", "Cf", "Cs", "Co", "Cn", "C"],
-        _namedCharBlocks: ["IsBasicLatin", "IsLatin-1Supplement", "IsLatinExtended-A", "IsLatinExtended-B", "IsIPAExtensions", "IsSpacingModifierLetters", "IsCombiningDiacriticalMarks", "IsGreek", "IsGreekandCoptic", "IsCyrillic", "IsCyrillicSupplement", "IsArmenian", "IsHebrew", "IsArabic", "IsSyriac", "IsThaana", "IsDevanagari", "IsBengali", "IsGurmukhi", "IsGujarati", "IsOriya", "IsTamil", "IsTelugu", "IsKannada", "IsMalayalam", "IsSinhala", "IsThai", "IsLao", "IsTibetan", "IsMyanmar", "IsGeorgian", "IsHangulJamo", "IsEthiopic", "IsCherokee", "IsUnifiedCanadianAboriginalSyllabics", "IsOgham", "IsRunic", "IsTagalog", "IsHanunoo", "IsBuhid", "IsTagbanwa", "IsKhmer", "IsMongolian", "IsLimbu", "IsTaiLe", "IsKhmerSymbols", "IsPhoneticExtensions", "IsLatinExtendedAdditional", "IsGreekExtended", "IsGeneralPunctuation", "IsSuperscriptsandSubscripts", "IsCurrencySymbols", "IsCombiningDiacriticalMarksforSymbols", "IsCombiningMarksforSymbols", "IsLetterlikeSymbols", "IsNumberForms", "IsArrows", "IsMathematicalOperators", "IsMiscellaneousTechnical", "IsControlPictures", "IsOpticalCharacterRecognition", "IsEnclosedAlphanumerics", "IsBoxDrawing", "IsBlockElements", "IsGeometricShapes", "IsMiscellaneousSymbols", "IsDingbats", "IsMiscellaneousMathematicalSymbols-A", "IsSupplementalArrows-A", "IsBraillePatterns", "IsSupplementalArrows-B", "IsMiscellaneousMathematicalSymbols-B", "IsSupplementalMathematicalOperators", "IsMiscellaneousSymbolsandArrows", "IsCJKRadicalsSupplement", "IsKangxiRadicals", "IsIdeographicDescriptionCharacters", "IsCJKSymbolsandPunctuation", "IsHiragana", "IsKatakana", "IsBopomofo", "IsHangulCompatibilityJamo", "IsKanbun", "IsBopomofoExtended", "IsKatakanaPhoneticExtensions", "IsEnclosedCJKLettersandMonths", "IsCJKCompatibility", "IsCJKUnifiedIdeographsExtensionA", "IsYijingHexagramSymbols", "IsCJKUnifiedIdeographs", "IsYiSyllables", "IsYiRadicals", "IsHangulSyllables", "IsHighSurrogates", "IsHighPrivateUseSurrogates", "IsLowSurrogates", "IsPrivateUse or IsPrivateUseArea", "IsCJKCompatibilityIdeographs", "IsAlphabeticPresentationForms", "IsArabicPresentationForms-A", "IsVariationSelectors", "IsCombiningHalfMarks", "IsCJKCompatibilityForms", "IsSmallFormVariants", "IsArabicPresentationForms-B", "IsHalfwidthandFullwidthForms", "IsSpecials"],
-        _controlChars: ["@", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "[", "\\", "]", "^", "_"],
-
-        tokenTypes: {
-            literal: 0,
-
-            escChar: 110,
-            escCharOctal: 111,
-            escCharHex: 112,
-            escCharCtrl: 113,
-            escCharUnicode: 114,
-            escCharOther: 115,
-
-            escCharClass: 120,
-            escCharClassCategory: 121,
-            escCharClassBlock: 122,
-            escCharClassDot: 123,
-
-            escAnchor: 130,
-
-            escBackrefNumber: 140,
-            escBackrefName: 141,
-
-            charGroup: 200,
-            charNegativeGroup: 201,
-            charInterval: 202,
-
-            anchor: 300,
-
-            group: 400,
-            groupImnsx: 401,
-            groupImnsxMisc: 402,
-
-            groupConstruct: 403,
-            groupConstructName: 404,
-            groupConstructImnsx: 405,
-            groupConstructImnsxMisc: 406,
-
-            quantifier: 500,
-            quantifierN: 501,
-            quantifierNM: 502,
-
-            alternation: 600,
-            alternationGroup: 601,
-            alternationGroupCondition: 602,
-            alternationGroupRefNumberCondition: 603,
-            alternationGroupRefNameCondition: 604,
-
-            commentInline: 700,
-            commentXMode: 701
+            return resKind.nextBranch;
         },
 
-        parsePattern: function (pattern, settings) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
+        _scanCharNegativeGroupToken: function (branches, branch, pass, token, skipLoggingCapture) {
+            var resKind = this._branchResultKind;
+            var index = branch.state.txtIndex;
+            var ch = this._text[index];
+            if (ch == null) {
+                return resKind.nextBranch;
+            }
 
-            // Parse tokens in the original pattern:
-            var tokens = scope._parsePatternImpl(pattern, settings, 0, pattern.length);
+            // Get result for positive group:
+            var positiveRes = this._scanCharGroupToken(branches, branch, pass, token, true);
 
-            // Collect and fill group descriptors into Group tokens.
-            // We need do it before any token modification.
-            var groups = [];
-            scope._fillGroupDescriptors(tokens, groups);
+            // Inverse the positive result:
+            if (positiveRes === resKind.ok) {
+                return resKind.nextBranch;
+            }
 
-            // Fill Sparse Info:
-            var sparseSettings = scope._getGroupSparseInfo(groups);
+            if (!skipLoggingCapture) {
+                branch.state.logCapture(1);
+            }
 
-            // Fill balancing info for the groups with "name2":
-            scope._fillBalancingGroupInfo(groups, sparseSettings);
+            return resKind.ok;
+        },
 
-            // Transform tokens for usage in JS RegExp:
-            scope._preTransformBackrefTokens(pattern, tokens, sparseSettings);
-            scope._transformRawTokens(settings, tokens, sparseSettings, [], [], 0);
+        _scanEscapeToken: function (branches, branch, pass, token) {
+            return this._scanWithJsRegex(branches, branch, pass, token);
+        },
 
-            // Update group descriptors as tokens have been transformed (at least indexes were changed):
-            scope._updateGroupDescriptors(tokens);
+        _scanDotToken: function (textEndPos, branches, branch, pass) {
+            var resKind = this._branchResultKind;
+            var index = branch.state.txtIndex;
 
-            var result = {
-                groups: groups,
-                sparseSettings: sparseSettings,
-                isContiguous: settings.isContiguous || false,
-                shouldFail: settings.shouldFail || false,
-                tokens: tokens
+            if (pass.settings.singleline) {
+                if (index < textEndPos) {
+                    branch.state.logCapture(1);
+                    return resKind.ok;
+                }
+            } else {
+                if (index < textEndPos && this._text[index] !== "\n") {
+                    branch.state.logCapture(1);
+                    return resKind.ok;
+                }
+            }
+
+            return resKind.nextBranch;
+        },
+
+        _scanBackrefNumberToken: function (textEndPos, branches, branch, pass, token) {
+            var resKind = this._branchResultKind;
+
+            var grCapture = branch.state.resolveBackref(token.data.slotId);
+            if (grCapture == null) {
+                return resKind.nextBranch;
+            }
+
+            var grCaptureTxt = this._text.slice(grCapture.capIndex, grCapture.capIndex + grCapture.capLength);
+            return this._scanLiteral(textEndPos, branches, branch, pass, grCaptureTxt);
+        },
+
+        _scanBackrefNameToken: function (textEndPos, branches, branch, pass, token) {
+            var resKind = this._branchResultKind;
+
+            var grCapture = branch.state.resolveBackref(token.data.slotId);
+            if (grCapture == null) {
+                return resKind.nextBranch;
+            }
+
+            var grCaptureTxt = this._text.slice(grCapture.capIndex, grCapture.capIndex + grCapture.capLength);
+            return this._scanLiteral(textEndPos, branches, branch, pass, grCaptureTxt);
+        },
+
+        _scanAnchorToken: function (textEndPos, branches, branch, pass, token) {
+            var resKind = this._branchResultKind;
+            var index = branch.state.txtIndex;
+
+            if (token.value === "\\b" || token.value === "\\B") {
+                var prevIsWord = index > 0 && this._scanWithJsRegex2(index - 1, "\\w") === resKind.ok;
+                var currIsWord = this._scanWithJsRegex2(index, "\\w") === resKind.ok;
+                if ((prevIsWord === currIsWord) === (token.value === "\\B")) {
+                    return resKind.ok;
+                }
+            } else if (token.value === "^") {
+                if (index === 0) {
+                    return resKind.ok;
+                }
+                if (pass.settings.multiline && this._text[index - 1] === "\n") {
+                    return resKind.ok;
+                }
+            } else if (token.value === "$") {
+                if (index === textEndPos) {
+                    return resKind.ok;
+                }
+                if (pass.settings.multiline && this._text[index] === "\n") {
+                    return resKind.ok;
+                }
+            } else if (token.value === "\\A") {
+                if (index === 0) {
+                    return resKind.ok;
+                }
+            } else if (token.value === "\\z") {
+                if (index === textEndPos) {
+                    return resKind.ok;
+                }
+            } else if (token.value === "\\Z") {
+                if (index === textEndPos) {
+                    return resKind.ok;
+                }
+                if (index === textEndPos - 1 && this._text[index] === "\n") {
+                    return resKind.ok;
+                }
+            } else if (token.value === "\\G") {
+                return resKind.ok;
+            }
+
+            return resKind.nextBranch;
+        },
+
+        // ============================================================================================
+        // Auxiliary functions
+        // ============================================================================================
+        _cloneSettings: function (settings) {
+            var cloned = {
+                ignoreCase: settings.ignoreCase,
+                multiline: settings.multiline,
+                singleline: settings.singleline,
+                ignoreWhitespace: settings.ignoreWhitespace,
+                explicitCapture: settings.explicitCapture
+            };
+            return cloned;
+        },
+
+        _combineScanResults: function (branch, srcState) {
+            if (srcState != null) {
+                var dstGroups = branch.state.groups;
+                var srcGroups = srcState.groups;
+                var srcGroupsLen = srcGroups.length;
+                var i;
+
+                for (i = 0; i < srcGroupsLen; ++i) {
+                    dstGroups.push(srcGroups[i]);
+                    }
+
+                return true;
+            }
+            return false;
+        },
+
+        _getEmptyMatch: function () {
+            var match = {
+                capIndex: 0,    // start index of total capture
+                capLength: 0,   // length of total capture
+                success: false,
+                value: "",
+                groups: [],
+                captures: []
             };
 
-            return result;
+            return match;
         },
 
-        _transformRawTokens: function (settings, tokens, sparseSettings, allowedPackedSlotIds, nestedGroupIds, nestingLevel) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var tokenTypes = scope.tokenTypes;
-            var prevToken;
-            var token;
-            var value;
-            var packedSlotId;
-            var groupNumber;
-            var matchRes;
-            var localNestedGroupIds;
-            var localSettings;
-            var qtoken;
-            var i;
+        _fillMatch: function (match, capIndex, capLength, textPos) {
+            if (capIndex == null) {
+                capIndex = textPos;
+            }
 
-            // Transform/adjust tokens collection to work with JS RegExp:
-            for (i = 0; i < tokens.length; i++) {
-                token = tokens[i];
+            match.capIndex = capIndex;
+            match.capLength = capLength;
+            match.success = true;
+            match.value = this._text.slice(capIndex, capIndex + capLength);
 
-                if (i < tokens.length - 1) {
-                    qtoken = tokens[i + 1];
-                    switch (qtoken.type) {
-                        case tokenTypes.quantifier:
-                        case tokenTypes.quantifierN:
-                        case tokenTypes.quantifierNM:
-                            token.qtoken = qtoken;
-                            tokens.splice(i + 1, 1);
-                            --i;
+            match.groups.push({
+                capIndex: capIndex,
+                capLength: capLength,
+                value: match.value,
+                success: true,
+                captures: [
+                    {
+                        capIndex: capIndex,
+                        capLength: capLength,
+                        value: match.value
                     }
+                ]
+            });
+
+            match.captures.push(match.groups[0].captures[0]);
+        },
+
+        _checkTimeout: function () {
+            if (this._timeoutTime < 0) {
+                return;
+            }
+
+            var time = new Date().getTime();
+
+            if (time >= this._timeoutTime) {
+                throw new System.RegexMatchTimeoutException(this._text, this._pattern, System.TimeSpan.fromMilliseconds(this._timeoutMs));
+            }
+        }
+    });
+
+// @source @RegexEngineBranch.js
+
+    Bridge.define("System.Text.RegularExpressions.RegexEngineBranch", {
+        type: 0,
+        value: 0,
+        min: 0,
+        max: 0,
+
+        isStarted: false,
+        isNotFailing: false,
+
+        state: null,
+
+        constructor: function (branchType, currVal, minVal, maxVal, parentState) {
+            this.$initialize();
+
+            this.type = branchType;
+
+            this.value = currVal;
+            this.min = minVal;
+            this.max = maxVal;
+
+            this.state = parentState != null ? parentState.clone() : new System.Text.RegularExpressions.RegexEngineState();
+        },
+
+        pushPass: function (index, tokens, settings) {
+            var pass = new System.Text.RegularExpressions.RegexEnginePass(index, tokens, settings);
+            this.state.passes.push(pass);
+        },
+
+        peekPass: function () {
+            return this.state.passes[this.state.passes.length - 1];
+        },
+
+        popPass: function () {
+            return this.state.passes.pop();
+        },
+
+        hasPass: function () {
+            return this.state.passes.length > 0;
+        },
+
+        clone: function () {
+            var cloned = new System.Text.RegularExpressions.RegexEngineBranch(this.type, this.value, this.min, this.max, this.state);
+            cloned.isNotFailing = this.isNotFailing;
+            return cloned;
+        }
+    });
+
+// @source @RegexEngineState.js
+
+    Bridge.define("System.Text.RegularExpressions.RegexEngineState", {
+        txtIndex: 0, // current index
+        capIndex: null, // first index of captured text
+        capLength: 0, // current length
+        passes: null,
+        groups: null, // captured groups
+
+        constructor: function () {
+            this.$initialize();
+
+            this.passes = [];
+            this.groups = [];
+        },
+
+        logCapture: function (length) {
+            if (this.capIndex == null) {
+                this.capIndex = this.txtIndex;
+            }
+
+            this.txtIndex += length;
+            this.capLength += length;
+        },
+
+        logCaptureGroup: function (group, index, length) {
+            this.groups.push({ rawIndex: group.rawIndex, slotId: group.packedSlotId, capIndex: index, capLength: length });
+        },
+
+        logCaptureGroupBalancing: function (group, capIndex) {
+            var balancingSlotId = group.balancingSlotId;
+            var groups = this.groups;
+            var index = groups.length - 1;
+            var group2;
+            var group2Index;
+
+            while (index >= 0) {
+                if (groups[index].slotId === balancingSlotId) {
+                    group2 = groups[index];
+                    group2Index = index;
+                    break;
+                }
+                --index;
+            }
+
+            if (group2 != null && group2Index != null) {
+                groups.splice(group2Index, 1); // remove group2 from the collection
+
+                // Add balancing group value:
+                if (group.constructs.name1 != null) {
+                    var balCapIndex = group2.capIndex + group2.capLength;
+                    var balCapLength = capIndex - balCapIndex;
+
+                    this.logCaptureGroup(group, balCapIndex, balCapLength);
                 }
 
-                if (token.type === tokenTypes.escBackrefNumber) {
-                    groupNumber = token.data.number;
-                    packedSlotId = sparseSettings.getPackedSlotIdBySlotNumber(groupNumber);
-                    if (packedSlotId == null) {
-                        throw new System.ArgumentException("Reference to undefined group number " + groupNumber.toString() + ".");
-                    }
-                    if (allowedPackedSlotIds.indexOf(packedSlotId) < 0) {
-                        settings.shouldFail = true; // Backreferences to unreachable group number lead to an empty match.
-                        continue;
+                return true;
+            }
+
+            return false;
+        },
+
+        resolveBackref: function (packedSlotId) {
+            var groups = this.groups;
+            var index = groups.length - 1;
+
+            while (index >= 0) {
+                if (groups[index].slotId === packedSlotId) {
+                    return groups[index];
+                }
+                --index;
+            }
+
+            return null;
+        },
+
+        clone: function () {
+            var cloned = new System.Text.RegularExpressions.RegexEngineState();
+            cloned.txtIndex = this.txtIndex;
+            cloned.capIndex = this.capIndex;
+            cloned.capLength = this.capLength;
+
+            // Clone passes:
+            var clonedPasses = cloned.passes;
+            var thisPasses = this.passes;
+            var len = thisPasses.length;
+            var clonedItem;
+            var i;
+
+            for (i = 0; i < len; i++) {
+                clonedItem = thisPasses[i].clone();
+                clonedPasses.push(clonedItem);
+            }
+
+            // Clone groups:
+            var clonedGroups = cloned.groups;
+            var thisGroups = this.groups;
+            len = thisGroups.length;
+
+            for (i = 0; i < len; i++) {
+                clonedItem = thisGroups[i];
+                clonedGroups.push(clonedItem);
+            }
+
+            return cloned;
+        }
+    });
+
+// @source @RegexEnginePass.js
+
+    Bridge.define("System.Text.RegularExpressions.RegexEnginePass", {
+        index: 0,
+        tokens: null,
+        probe: null,
+
+        onHold: false,
+        onHoldTextIndex: -1,
+        alternationHandled: false,
+
+        settings: null,
+
+        constructor: function (index, tokens, settings) {
+            this.$initialize();
+
+            this.index = index;
+            this.tokens = tokens;
+            this.settings = settings;
+        },
+
+        clearState: function (settings) {
+            this.index = 0;
+            this.probe = null;
+            this.onHold = false;
+            this.onHoldTextIndex = -1;
+            this.alternationHandled = false;
+            this.settings = settings;
+        },
+
+        clone: function () {
+            var cloned = new System.Text.RegularExpressions.RegexEnginePass(this.index, this.tokens, this.settings);
+            cloned.onHold = this.onHold;
+            cloned.onHoldTextIndex = this.onHoldTextIndex;
+            cloned.alternationHandled = this.alternationHandled;
+            cloned.probe = this.probe != null ? this.probe.clone() : null;
+            return cloned;
+        }
+    });
+
+// @source @RegexEngineProbe.js
+
+    Bridge.define("System.Text.RegularExpressions.RegexEngineProbe", {
+        min: 0,
+        max: 0,
+        value: 0,
+        isLazy: false,
+        forced: false,
+
+        constructor: function (min, max, value, isLazy) {
+            this.$initialize();
+
+            this.min = min;
+            this.max = max;
+            this.value = value;
+            this.isLazy = isLazy;
+            this.forced = false;
+        },
+
+        clone: function () {
+            var cloned = new System.Text.RegularExpressions.RegexEngineProbe(this.min, this.max, this.value, this.isLazy);
+            cloned.forced = this.forced;
+            return cloned;
+        }
+    });
+
+// @source @RegexEngineParser.js
+
+    Bridge.define("System.Text.RegularExpressions.RegexEngineParser", {
+        statics: {
+            _hexSymbols: "0123456789abcdefABCDEF",
+            _octSymbols: "01234567",
+            _decSymbols: "0123456789",
+
+            _escapedChars: "abtrvfnexcu",
+            _escapedCharClasses: "pPwWsSdD",
+            _escapedAnchors: "AZzGbB",
+            _escapedSpecialSymbols: " .,$^{}[]()|*+-=?\\|/\"':;~!@#%&",
+
+            _whiteSpaceChars: " \r\n\t\v\f\u00A0\uFEFF", //TODO: This is short version of .NET WhiteSpace category.
+            _unicodeCategories: ["Lu", "Ll", "Lt", "Lm", "Lo", "L", "Mn", "Mc", "Me", "M", "Nd", "Nl", "No", "N", "Pc", "Pd", "Ps", "Pe", "Pi", "Pf", "Po", "P", "Sm", "Sc", "Sk", "So", "S", "Zs", "Zl", "Zp", "Z", "Cc", "Cf", "Cs", "Co", "Cn", "C"],
+            _namedCharBlocks: ["IsBasicLatin", "IsLatin-1Supplement", "IsLatinExtended-A", "IsLatinExtended-B", "IsIPAExtensions", "IsSpacingModifierLetters", "IsCombiningDiacriticalMarks", "IsGreek", "IsGreekandCoptic", "IsCyrillic", "IsCyrillicSupplement", "IsArmenian", "IsHebrew", "IsArabic", "IsSyriac", "IsThaana", "IsDevanagari", "IsBengali", "IsGurmukhi", "IsGujarati", "IsOriya", "IsTamil", "IsTelugu", "IsKannada", "IsMalayalam", "IsSinhala", "IsThai", "IsLao", "IsTibetan", "IsMyanmar", "IsGeorgian", "IsHangulJamo", "IsEthiopic", "IsCherokee", "IsUnifiedCanadianAboriginalSyllabics", "IsOgham", "IsRunic", "IsTagalog", "IsHanunoo", "IsBuhid", "IsTagbanwa", "IsKhmer", "IsMongolian", "IsLimbu", "IsTaiLe", "IsKhmerSymbols", "IsPhoneticExtensions", "IsLatinExtendedAdditional", "IsGreekExtended", "IsGeneralPunctuation", "IsSuperscriptsandSubscripts", "IsCurrencySymbols", "IsCombiningDiacriticalMarksforSymbols", "IsCombiningMarksforSymbols", "IsLetterlikeSymbols", "IsNumberForms", "IsArrows", "IsMathematicalOperators", "IsMiscellaneousTechnical", "IsControlPictures", "IsOpticalCharacterRecognition", "IsEnclosedAlphanumerics", "IsBoxDrawing", "IsBlockElements", "IsGeometricShapes", "IsMiscellaneousSymbols", "IsDingbats", "IsMiscellaneousMathematicalSymbols-A", "IsSupplementalArrows-A", "IsBraillePatterns", "IsSupplementalArrows-B", "IsMiscellaneousMathematicalSymbols-B", "IsSupplementalMathematicalOperators", "IsMiscellaneousSymbolsandArrows", "IsCJKRadicalsSupplement", "IsKangxiRadicals", "IsIdeographicDescriptionCharacters", "IsCJKSymbolsandPunctuation", "IsHiragana", "IsKatakana", "IsBopomofo", "IsHangulCompatibilityJamo", "IsKanbun", "IsBopomofoExtended", "IsKatakanaPhoneticExtensions", "IsEnclosedCJKLettersandMonths", "IsCJKCompatibility", "IsCJKUnifiedIdeographsExtensionA", "IsYijingHexagramSymbols", "IsCJKUnifiedIdeographs", "IsYiSyllables", "IsYiRadicals", "IsHangulSyllables", "IsHighSurrogates", "IsHighPrivateUseSurrogates", "IsLowSurrogates", "IsPrivateUse or IsPrivateUseArea", "IsCJKCompatibilityIdeographs", "IsAlphabeticPresentationForms", "IsArabicPresentationForms-A", "IsVariationSelectors", "IsCombiningHalfMarks", "IsCJKCompatibilityForms", "IsSmallFormVariants", "IsArabicPresentationForms-B", "IsHalfwidthandFullwidthForms", "IsSpecials"],
+            _controlChars: ["@", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "[", "\\", "]", "^", "_"],
+
+            tokenTypes: {
+                literal: 0,
+
+                escChar: 110,
+                escCharOctal: 111,
+                escCharHex: 112,
+                escCharCtrl: 113,
+                escCharUnicode: 114,
+                escCharOther: 115,
+
+                escCharClass: 120,
+                escCharClassCategory: 121,
+                escCharClassBlock: 122,
+                escCharClassDot: 123,
+
+                escAnchor: 130,
+
+                escBackrefNumber: 140,
+                escBackrefName: 141,
+
+                charGroup: 200,
+                charNegativeGroup: 201,
+                charInterval: 202,
+
+                anchor: 300,
+
+                group: 400,
+                groupImnsx: 401,
+                groupImnsxMisc: 402,
+
+                groupConstruct: 403,
+                groupConstructName: 404,
+                groupConstructImnsx: 405,
+                groupConstructImnsxMisc: 406,
+
+                quantifier: 500,
+                quantifierN: 501,
+                quantifierNM: 502,
+
+                alternation: 600,
+                alternationGroup: 601,
+                alternationGroupCondition: 602,
+                alternationGroupRefNumberCondition: 603,
+                alternationGroupRefNameCondition: 604,
+
+                commentInline: 700,
+                commentXMode: 701
+            },
+
+            parsePattern: function (pattern, settings) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+
+                // Parse tokens in the original pattern:
+                var tokens = scope._parsePatternImpl(pattern, settings, 0, pattern.length);
+
+                // Collect and fill group descriptors into Group tokens.
+                // We need do it before any token modification.
+                var groups = [];
+                scope._fillGroupDescriptors(tokens, groups);
+
+                // Fill Sparse Info:
+                var sparseSettings = scope._getGroupSparseInfo(groups);
+
+                // Fill balancing info for the groups with "name2":
+                scope._fillBalancingGroupInfo(groups, sparseSettings);
+
+                // Transform tokens for usage in JS RegExp:
+                scope._preTransformBackrefTokens(pattern, tokens, sparseSettings);
+                scope._transformRawTokens(settings, tokens, sparseSettings, [], [], 0);
+
+                // Update group descriptors as tokens have been transformed (at least indexes were changed):
+                scope._updateGroupDescriptors(tokens);
+
+                var result = {
+                    groups: groups,
+                    sparseSettings: sparseSettings,
+                    isContiguous: settings.isContiguous || false,
+                    shouldFail: settings.shouldFail || false,
+                    tokens: tokens
+                };
+
+                return result;
+            },
+
+            _transformRawTokens: function (settings, tokens, sparseSettings, allowedPackedSlotIds, nestedGroupIds, nestingLevel) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+                var tokenTypes = scope.tokenTypes;
+                var prevToken;
+                var token;
+                var value;
+                var packedSlotId;
+                var groupNumber;
+                var matchRes;
+                var localNestedGroupIds;
+                var localSettings;
+                var qtoken;
+                var i;
+
+                // Transform/adjust tokens collection to work with JS RegExp:
+                for (i = 0; i < tokens.length; i++) {
+                    token = tokens[i];
+
+                    if (i < tokens.length - 1) {
+                        qtoken = tokens[i + 1];
+                        switch (qtoken.type) {
+                            case tokenTypes.quantifier:
+                            case tokenTypes.quantifierN:
+                            case tokenTypes.quantifierNM:
+                                token.qtoken = qtoken;
+                                tokens.splice(i + 1, 1);
+                                --i;
+                        }
                     }
 
-                    token.data.slotId = packedSlotId;
-                } else if (token.type === tokenTypes.escBackrefName) {
-                    value = token.data.name;
-                    packedSlotId = sparseSettings.getPackedSlotIdBySlotName(value);
-                    if (packedSlotId == null) {
-                        // TODO: Move this code to earlier stages
-                        // If the name is number, treat the backreference as a numbered:
-                        matchRes = scope._matchChars(value, 0, value.length, scope._decSymbols);
-                        if (matchRes.matchLength === value.length) {
-                            value = "\\" + value;
-                            scope._updatePatternToken(token, tokenTypes.escBackrefNumber, token.index, value.length, value);
-                            --i; // process the token again
+                    if (token.type === tokenTypes.escBackrefNumber) {
+                        groupNumber = token.data.number;
+                        packedSlotId = sparseSettings.getPackedSlotIdBySlotNumber(groupNumber);
+                        if (packedSlotId == null) {
+                            throw new System.ArgumentException("Reference to undefined group number " + groupNumber.toString() + ".");
+                        }
+                        if (allowedPackedSlotIds.indexOf(packedSlotId) < 0) {
+                            settings.shouldFail = true; // Backreferences to unreachable group number lead to an empty match.
                             continue;
                         }
-                        throw new System.ArgumentException("Reference to undefined group name '" + value + "'.");
-                    }
 
-                    if (allowedPackedSlotIds.indexOf(packedSlotId) < 0) {
-                        settings.shouldFail = true; // Backreferences to unreachable group number lead to an empty match.
-                        continue;
-                    }
-
-                    token.data.slotId = packedSlotId;
-                } else if (token.type === tokenTypes.anchor || token.type === tokenTypes.escAnchor) {
-                    if (token.value === "\\G") {
-                        if (nestingLevel === 0 && i === 0) {
-                            settings.isContiguous = true;
-                        } else {
-                            settings.shouldFail = true;
+                        token.data.slotId = packedSlotId;
+                    } else if (token.type === tokenTypes.escBackrefName) {
+                        value = token.data.name;
+                        packedSlotId = sparseSettings.getPackedSlotIdBySlotName(value);
+                        if (packedSlotId == null) {
+                            // TODO: Move this code to earlier stages
+                            // If the name is number, treat the backreference as a numbered:
+                            matchRes = scope._matchChars(value, 0, value.length, scope._decSymbols);
+                            if (matchRes.matchLength === value.length) {
+                                value = "\\" + value;
+                                scope._updatePatternToken(token, tokenTypes.escBackrefNumber, token.index, value.length, value);
+                                --i; // process the token again
+                                continue;
+                            }
+                            throw new System.ArgumentException("Reference to undefined group name '" + value + "'.");
                         }
 
-                        tokens.splice(i, 1);
-                        --i;
-                        continue;
-                    }
-                } else if (token.type === tokenTypes.commentInline || token.type === tokenTypes.commentXMode) {
-                    // We can safely remove comments from the pattern
-                    tokens.splice(i, 1);
-                    --i;
-                    continue;
-                } else if (token.type === tokenTypes.literal) {
-                    // Combine literal tokens for better performance:
-                    if (i > 0 && !token.qtoken) {
-                        prevToken = tokens[i - 1];
-                        if (prevToken.type === tokenTypes.literal && !prevToken.qtoken) {
-                            prevToken.value += token.value;
-                            prevToken.length += token.length;
+                        if (allowedPackedSlotIds.indexOf(packedSlotId) < 0) {
+                            settings.shouldFail = true; // Backreferences to unreachable group number lead to an empty match.
+                            continue;
+                        }
+
+                        token.data.slotId = packedSlotId;
+                    } else if (token.type === tokenTypes.anchor || token.type === tokenTypes.escAnchor) {
+                        if (token.value === "\\G") {
+                            if (nestingLevel === 0 && i === 0) {
+                                settings.isContiguous = true;
+                            } else {
+                                settings.shouldFail = true;
+                            }
 
                             tokens.splice(i, 1);
                             --i;
                             continue;
                         }
-                    }
-                } else if (token.type === tokenTypes.alternationGroupCondition) {
-                    if (token.data != null) {
-                        if (token.data.number != null) {
-                            packedSlotId = sparseSettings.getPackedSlotIdBySlotNumber(token.data.number);
-                            if (packedSlotId == null) {
-                                throw new System.ArgumentException("Reference to undefined group number " + value + ".");
+                    } else if (token.type === tokenTypes.commentInline || token.type === tokenTypes.commentXMode) {
+                        // We can safely remove comments from the pattern
+                        tokens.splice(i, 1);
+                        --i;
+                        continue;
+                    } else if (token.type === tokenTypes.literal) {
+                        // Combine literal tokens for better performance:
+                        if (i > 0 && !token.qtoken) {
+                            prevToken = tokens[i - 1];
+                            if (prevToken.type === tokenTypes.literal && !prevToken.qtoken) {
+                                prevToken.value += token.value;
+                                prevToken.length += token.length;
+
+                                tokens.splice(i, 1);
+                                --i;
+                                continue;
                             }
-                            token.data.packedSlotId = packedSlotId;
-                            scope._updatePatternToken(token, tokenTypes.alternationGroupRefNumberCondition, token.index, token.length, token.value);
-                        } else {
-                            packedSlotId = sparseSettings.getPackedSlotIdBySlotName(token.data.name);
-                            if (packedSlotId != null) {
+                        }
+                    } else if (token.type === tokenTypes.alternationGroupCondition) {
+                        if (token.data != null) {
+                            if (token.data.number != null) {
+                                packedSlotId = sparseSettings.getPackedSlotIdBySlotNumber(token.data.number);
+                                if (packedSlotId == null) {
+                                    throw new System.ArgumentException("Reference to undefined group number " + value + ".");
+                                }
                                 token.data.packedSlotId = packedSlotId;
-                                scope._updatePatternToken(token, tokenTypes.alternationGroupRefNameCondition, token.index, token.length, token.value);
+                                scope._updatePatternToken(token, tokenTypes.alternationGroupRefNumberCondition, token.index, token.length, token.value);
                             } else {
-                                delete token.data;
+                                packedSlotId = sparseSettings.getPackedSlotIdBySlotName(token.data.name);
+                                if (packedSlotId != null) {
+                                    token.data.packedSlotId = packedSlotId;
+                                    scope._updatePatternToken(token, tokenTypes.alternationGroupRefNameCondition, token.index, token.length, token.value);
+                                } else {
+                                    delete token.data;
+                                }
                             }
                         }
                     }
-                }
 
-                // Update children tokens:
-                if (token.children && token.children.length) {
-                    localNestedGroupIds = token.type === tokenTypes.group ? [token.group.rawIndex] : [];
-                    localNestedGroupIds = localNestedGroupIds.concat(nestedGroupIds);
+                    // Update children tokens:
+                    if (token.children && token.children.length) {
+                        localNestedGroupIds = token.type === tokenTypes.group ? [token.group.rawIndex] : [];
+                        localNestedGroupIds = localNestedGroupIds.concat(nestedGroupIds);
 
-                    localSettings = token.localSettings || settings;
-                    scope._transformRawTokens(localSettings, token.children, sparseSettings, allowedPackedSlotIds, localNestedGroupIds, nestingLevel + 1);
-                    settings.shouldFail = settings.shouldFail || localSettings.shouldFail;
-                    settings.isContiguous = settings.isContiguous || localSettings.isContiguous;
-                }
+                        localSettings = token.localSettings || settings;
+                        scope._transformRawTokens(localSettings, token.children, sparseSettings, allowedPackedSlotIds, localNestedGroupIds, nestingLevel + 1);
+                        settings.shouldFail = settings.shouldFail || localSettings.shouldFail;
+                        settings.isContiguous = settings.isContiguous || localSettings.isContiguous;
+                    }
 
-                // Group is processed. Now it can be referenced with Backref:
-                if (token.type === tokenTypes.group) {
-                    allowedPackedSlotIds.push(token.group.packedSlotId);
-                }
-            }
-        },
-
-        _fillGroupDescriptors: function (tokens, groups) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var group;
-            var i;
-
-            // Fill group structure:
-            scope._fillGroupStructure(groups, tokens, null);
-
-            // Assign name or id:
-            var groupId = 1;
-            for (i = 0; i < groups.length; i++) {
-                group = groups[i];
-
-                if (group.constructs.name1 != null) {
-                    group.name = group.constructs.name1;
-                    group.hasName = true;
-                } else {
-                    group.hasName = false;
-                    group.name = groupId.toString();
-                    ++groupId;
-                }
-            }
-        },
-
-        _fillGroupStructure: function (groups, tokens, parentGroup) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var tokenTypes = scope.tokenTypes;
-            var group;
-            var token;
-            var constructs;
-            var constructCandidateToken;
-            var hasChildren;
-            var i;
-
-            for (i = 0; i < tokens.length; i++) {
-                token = tokens[i];
-                hasChildren = token.children && token.children.length;
-
-                if (token.type === tokenTypes.group || token.type === tokenTypes.groupImnsx || token.type === tokenTypes.groupImnsxMisc) {
-                    group = {
-                        rawIndex: groups.length + 1,
-                        number: -1,
-
-                        parentGroup: null,
-                        innerGroups: [],
-
-                        name: null,
-                        hasName: false,
-
-                        constructs: null,
-                        quantifier: null,
-
-                        exprIndex: -1,
-                        exprLength: 0,
-                        expr: null,
-                        exprFull: null
-                    };
-
-                    token.group = group;
-
+                    // Group is processed. Now it can be referenced with Backref:
                     if (token.type === tokenTypes.group) {
-                        groups.push(group);
+                        allowedPackedSlotIds.push(token.group.packedSlotId);
+                    }
+                }
+            },
 
-                        if (parentGroup != null) {
-                            token.group.parentGroup = parentGroup;
-                            parentGroup.innerGroups.push(group);
+            _fillGroupDescriptors: function (tokens, groups) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+                var group;
+                var i;
+
+                // Fill group structure:
+                scope._fillGroupStructure(groups, tokens, null);
+
+                // Assign name or id:
+                var groupId = 1;
+                for (i = 0; i < groups.length; i++) {
+                    group = groups[i];
+
+                    if (group.constructs.name1 != null) {
+                        group.name = group.constructs.name1;
+                        group.hasName = true;
+                    } else {
+                        group.hasName = false;
+                        group.name = groupId.toString();
+                        ++groupId;
+                    }
+                }
+            },
+
+            _fillGroupStructure: function (groups, tokens, parentGroup) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+                var tokenTypes = scope.tokenTypes;
+                var group;
+                var token;
+                var constructs;
+                var constructCandidateToken;
+                var hasChildren;
+                var i;
+
+                for (i = 0; i < tokens.length; i++) {
+                    token = tokens[i];
+                    hasChildren = token.children && token.children.length;
+
+                    if (token.type === tokenTypes.group || token.type === tokenTypes.groupImnsx || token.type === tokenTypes.groupImnsxMisc) {
+                        group = {
+                            rawIndex: groups.length + 1,
+                            number: -1,
+
+                            parentGroup: null,
+                            innerGroups: [],
+
+                            name: null,
+                            hasName: false,
+
+                            constructs: null,
+                            quantifier: null,
+
+                            exprIndex: -1,
+                            exprLength: 0,
+                            expr: null,
+                            exprFull: null
+                        };
+
+                        token.group = group;
+
+                        if (token.type === tokenTypes.group) {
+                            groups.push(group);
+
+                            if (parentGroup != null) {
+                                token.group.parentGroup = parentGroup;
+                                parentGroup.innerGroups.push(group);
+                            }
                         }
+
+                        // fill group constructs:
+                        constructCandidateToken = hasChildren ? token.children[0] : null;
+                        group.constructs = scope._fillGroupConstructs(constructCandidateToken);
+                        constructs = group.constructs;
+
+                        if (token.isNonCapturingExplicit) {
+                            delete token.isNonCapturingExplicit;
+                            constructs.isNonCapturingExplicit = true;
+                        }
+
+                        if (token.isEmptyCapturing) {
+                            delete token.isEmptyCapturing;
+                            constructs.emptyCapture = true;
+                        }
+
+                        constructs.skipCapture =
+                            constructs.isNonCapturing ||
+                            constructs.isNonCapturingExplicit ||
+                            constructs.isNonbacktracking ||
+                            constructs.isPositiveLookahead ||
+                            constructs.isNegativeLookahead ||
+                            constructs.isPositiveLookbehind ||
+                            constructs.isNegativeLookbehind ||
+                            (constructs.name1 == null && constructs.name2 != null);
                     }
 
-                    // fill group constructs:
-                    constructCandidateToken = hasChildren ? token.children[0] : null;
-                    group.constructs = scope._fillGroupConstructs(constructCandidateToken);
-                    constructs = group.constructs;
-
-                    if (token.isNonCapturingExplicit) {
-                        delete token.isNonCapturingExplicit;
-                        constructs.isNonCapturingExplicit = true;
-                    }
-
-                    if (token.isEmptyCapturing) {
-                        delete token.isEmptyCapturing;
-                        constructs.emptyCapture = true;
-                    }
-
-                    constructs.skipCapture =
-                        constructs.isNonCapturing ||
-                        constructs.isNonCapturingExplicit ||
-                        constructs.isNonbacktracking ||
-                        constructs.isPositiveLookahead ||
-                        constructs.isNegativeLookahead ||
-                        constructs.isPositiveLookbehind ||
-                        constructs.isNegativeLookbehind ||
-                        (constructs.name1 == null && constructs.name2 != null);
-                }
-
-                // fill group descriptors for inner tokens:
-                if (hasChildren) {
-                    scope._fillGroupStructure(groups, token.children, token.group);
-                }
-            }
-        },
-
-        _getGroupSparseInfo: function (groups) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-
-            var explNumberedGroups = {};
-            var explNumberedGroupKeys = [];
-            var explNamedGroups = {};
-            var explGroups;
-
-            var numberedGroups;
-            var slotNumber;
-            var slotName;
-            var group;
-            var i;
-            var j;
-
-            var sparseSlotMap = { 0: 0 };
-            sparseSlotMap.lastSlot = 0;
-
-            var sparseSlotNameMap = { "0": 0 };
-            sparseSlotNameMap.keys = ["0"];
-
-            // Fill Explicit Numbers:
-            for (i = 0; i < groups.length; i++) {
-                group = groups[i];
-                if (group.constructs.skipCapture) {
-                    continue;
-                }
-
-                if (group.constructs.isNumberName1) {
-                    slotNumber = parseInt(group.constructs.name1);
-                    explNumberedGroupKeys.push(slotNumber);
-
-                    if (explNumberedGroups[slotNumber]) {
-                        explNumberedGroups[slotNumber].push(group);
-                    } else {
-                        explNumberedGroups[slotNumber] = [group];
-                    }
-                } else {
-                    slotName = group.constructs.name1;
-
-                    if (explNamedGroups[slotName]) {
-                        explNamedGroups[slotName].push(group);
-                    } else {
-                        explNamedGroups[slotName] = [group];
+                    // fill group descriptors for inner tokens:
+                    if (hasChildren) {
+                        scope._fillGroupStructure(groups, token.children, token.group);
                     }
                 }
-            }
+            },
 
-            // Sort explicitly set Number names:
-            var sortNum = function (a, b) {
-                return a - b;
-            };
-            explNumberedGroupKeys.sort(sortNum);
+            _getGroupSparseInfo: function (groups) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
 
-            // Add group without names first (emptyCapture = false first, than emptyCapture = true):
-            var allowEmptyCapture = false;
-            for (j = 0; j < 2; j++) {
+                var explNumberedGroups = {};
+                var explNumberedGroupKeys = [];
+                var explNamedGroups = {};
+                var explGroups;
+
+                var numberedGroups;
+                var slotNumber;
+                var slotName;
+                var group;
+                var i;
+                var j;
+
+                var sparseSlotMap = { 0: 0 };
+                sparseSlotMap.lastSlot = 0;
+
+                var sparseSlotNameMap = { "0": 0 };
+                sparseSlotNameMap.keys = ["0"];
+
+                // Fill Explicit Numbers:
                 for (i = 0; i < groups.length; i++) {
                     group = groups[i];
                     if (group.constructs.skipCapture) {
                         continue;
                     }
 
-                    if ((group.constructs.emptyCapture === true) !== allowEmptyCapture) {
+                    if (group.constructs.isNumberName1) {
+                        slotNumber = parseInt(group.constructs.name1);
+                        explNumberedGroupKeys.push(slotNumber);
+
+                        if (explNumberedGroups[slotNumber]) {
+                            explNumberedGroups[slotNumber].push(group);
+                        } else {
+                            explNumberedGroups[slotNumber] = [group];
+                        }
+                    } else {
+                        slotName = group.constructs.name1;
+
+                        if (explNamedGroups[slotName]) {
+                            explNamedGroups[slotName].push(group);
+                        } else {
+                            explNamedGroups[slotName] = [group];
+                        }
+                    }
+                }
+
+                // Sort explicitly set Number names:
+                var sortNum = function (a, b) {
+                    return a - b;
+                };
+                explNumberedGroupKeys.sort(sortNum);
+
+                // Add group without names first (emptyCapture = false first, than emptyCapture = true):
+                var allowEmptyCapture = false;
+                for (j = 0; j < 2; j++) {
+                    for (i = 0; i < groups.length; i++) {
+                        group = groups[i];
+                        if (group.constructs.skipCapture) {
+                            continue;
+                        }
+
+                        if ((group.constructs.emptyCapture === true) !== allowEmptyCapture) {
+                            continue;
+                        }
+
+                        slotNumber = sparseSlotNameMap.keys.length;
+                        if (!group.hasName) {
+                            numberedGroups = [group];
+                            explGroups = explNumberedGroups[slotNumber];
+                            if (explGroups != null) {
+                                numberedGroups = numberedGroups.concat(explGroups);
+                                explNumberedGroups[slotNumber] = null;
+                            }
+
+                            scope._addSparseSlotForSameNamedGroups(numberedGroups, slotNumber, sparseSlotMap, sparseSlotNameMap);
+                        }
+                    }
+                    allowEmptyCapture = true;
+                }
+
+                // Then add named groups:
+                for (i = 0; i < groups.length; i++) {
+                    group = groups[i];
+                    if (group.constructs.skipCapture) {
                         continue;
                     }
 
-                    slotNumber = sparseSlotNameMap.keys.length;
-                    if (!group.hasName) {
-                        numberedGroups = [group];
-                        explGroups = explNumberedGroups[slotNumber];
-                        if (explGroups != null) {
-                            numberedGroups = numberedGroups.concat(explGroups);
-                            explNumberedGroups[slotNumber] = null;
-                        }
-
-                        scope._addSparseSlotForSameNamedGroups(numberedGroups, slotNumber, sparseSlotMap, sparseSlotNameMap);
+                    if (!group.hasName || group.constructs.isNumberName1) {
+                        continue;
                     }
-                }
-                allowEmptyCapture = true;
-            }
 
-            // Then add named groups:
-            for (i = 0; i < groups.length; i++) {
-                group = groups[i];
-                if (group.constructs.skipCapture) {
-                    continue;
-                }
-
-                if (!group.hasName || group.constructs.isNumberName1) {
-                    continue;
-                }
-
-                // If the slot is already occupied by an explicitly numbered group,
-                // add this group to the slot:
-                slotNumber = sparseSlotNameMap.keys.length;
-                explGroups = explNumberedGroups[slotNumber];
-                while (explGroups != null) {
-                    scope._addSparseSlotForSameNamedGroups(explGroups, slotNumber, sparseSlotMap, sparseSlotNameMap);
-
-                    explNumberedGroups[slotNumber] = null; // Group is processed.
-                    slotNumber = sparseSlotNameMap.keys.length;
-                    explGroups = explNumberedGroups[slotNumber];
-                }
-
-                if (!group.constructs.isNumberName1) {
+                    // If the slot is already occupied by an explicitly numbered group,
+                    // add this group to the slot:
                     slotNumber = sparseSlotNameMap.keys.length;
                     explGroups = explNumberedGroups[slotNumber];
                     while (explGroups != null) {
@@ -20722,1409 +20733,1420 @@ Bridge.define("System.Text.RegularExpressions.RegexEngineParser", {
                         slotNumber = sparseSlotNameMap.keys.length;
                         explGroups = explNumberedGroups[slotNumber];
                     }
+
+                    if (!group.constructs.isNumberName1) {
+                        slotNumber = sparseSlotNameMap.keys.length;
+                        explGroups = explNumberedGroups[slotNumber];
+                        while (explGroups != null) {
+                            scope._addSparseSlotForSameNamedGroups(explGroups, slotNumber, sparseSlotMap, sparseSlotNameMap);
+
+                            explNumberedGroups[slotNumber] = null; // Group is processed.
+                            slotNumber = sparseSlotNameMap.keys.length;
+                            explGroups = explNumberedGroups[slotNumber];
+                        }
+                    }
+
+                    // Add the named group(s) to the 1st free slot:
+                    slotName = group.constructs.name1;
+                    explGroups = explNamedGroups[slotName];
+                    if (explGroups != null) {
+                        scope._addSparseSlotForSameNamedGroups(explGroups, slotNumber, sparseSlotMap, sparseSlotNameMap);
+                        explNamedGroups[slotName] = null;  // Group is processed.
+                    }
                 }
 
-                // Add the named group(s) to the 1st free slot:
-                slotName = group.constructs.name1;
-                explGroups = explNamedGroups[slotName];
-                if (explGroups != null) {
-                    scope._addSparseSlotForSameNamedGroups(explGroups, slotNumber, sparseSlotMap, sparseSlotNameMap);
-                    explNamedGroups[slotName] = null;  // Group is processed.
+                // Add the rest explicitly numbered groups:
+                for (i = 0; i < explNumberedGroupKeys.length; i++) {
+                    slotNumber = explNumberedGroupKeys[i];
+                    explGroups = explNumberedGroups[slotNumber];
+                    if (explGroups != null) {
+                        scope._addSparseSlotForSameNamedGroups(explGroups, slotNumber, sparseSlotMap, sparseSlotNameMap);
+
+                        explNumberedGroups[slotNumber] = null; // Group is processed.
+                    }
                 }
-            }
 
-            // Add the rest explicitly numbered groups:
-            for (i = 0; i < explNumberedGroupKeys.length; i++) {
-                slotNumber = explNumberedGroupKeys[i];
-                explGroups = explNumberedGroups[slotNumber];
-                if (explGroups != null) {
-                    scope._addSparseSlotForSameNamedGroups(explGroups, slotNumber, sparseSlotMap, sparseSlotNameMap);
+                return {
+                    isSparse: sparseSlotMap.isSparse || false, //sparseSlotNumbers.length !== (1 + sparseSlotNumbers[sparseSlotNumbers.length - 1]),
+                    sparseSlotMap: sparseSlotMap,           // <SlotNumber, PackedSlotId>
+                    sparseSlotNameMap: sparseSlotNameMap,   // <SlotName, PackedSlotId>
 
-                    explNumberedGroups[slotNumber] = null; // Group is processed.
+                    getPackedSlotIdBySlotNumber: function(slotNumber) {
+                        return this.sparseSlotMap[slotNumber];
+                    },
+
+                    getPackedSlotIdBySlotName: function (slotName) {
+                        return this.sparseSlotNameMap[slotName];
+                    }
+                };
+            },
+
+            _addSparseSlot: function (group, slotNumber, sparseSlotMap, sparseSlotNameMap) {
+                var packedSlotId = sparseSlotNameMap.keys.length; // 0-based index. Raw Slot number, 0,1..n (without gaps)
+
+                group.packedSlotId = packedSlotId;
+
+                sparseSlotMap[slotNumber] = packedSlotId;
+                sparseSlotNameMap[group.name] = packedSlotId;
+                sparseSlotNameMap.keys.push(group.name);
+
+                if (!sparseSlotMap.isSparse && ((slotNumber - sparseSlotMap.lastSlot) > 1)) {
+                    sparseSlotMap.isSparse = true;
                 }
-            }
 
-            return {
-                isSparse: sparseSlotMap.isSparse || false, //sparseSlotNumbers.length !== (1 + sparseSlotNumbers[sparseSlotNumbers.length - 1]),
-                sparseSlotMap: sparseSlotMap,           // <SlotNumber, PackedSlotId>
-                sparseSlotNameMap: sparseSlotNameMap,   // <SlotName, PackedSlotId>
+                sparseSlotMap.lastSlot = slotNumber;
+            },
 
-                getPackedSlotIdBySlotNumber: function(slotNumber) {
-                    return this.sparseSlotMap[slotNumber];
-                },
+            _addSparseSlotForSameNamedGroups: function (groups, slotNumber, sparseSlotMap, sparseSlotNameMap) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+                var i;
 
-                getPackedSlotIdBySlotName: function (slotName) {
-                    return this.sparseSlotNameMap[slotName];
+                scope._addSparseSlot(groups[0], slotNumber, sparseSlotMap, sparseSlotNameMap);
+                var sparseSlotId = groups[0].sparseSlotId;
+                var packedSlotId = groups[0].packedSlotId;
+
+                // Assign SlotID for all expl. named groups in this slot.
+                if (groups.length > 1) {
+                    for (i = 1; i < groups.length; i++) {
+                        groups[i].sparseSlotId = sparseSlotId;
+                        groups[i].packedSlotId = packedSlotId;
+                    }
                 }
-            };
-        },
+            },
 
-        _addSparseSlot: function (group, slotNumber, sparseSlotMap, sparseSlotNameMap) {
-            var packedSlotId = sparseSlotNameMap.keys.length; // 0-based index. Raw Slot number, 0,1..n (without gaps)
+            _fillGroupConstructs: function (childToken) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+                var tokenTypes = scope.tokenTypes;
+                var constructs = {
+                    name1: null,
+                    name2: null,
 
-            group.packedSlotId = packedSlotId;
+                    isNumberName1: false,
+                    isNumberName2: false,
 
-            sparseSlotMap[slotNumber] = packedSlotId;
-            sparseSlotNameMap[group.name] = packedSlotId;
-            sparseSlotNameMap.keys.push(group.name);
+                    isNonCapturing: false,
+                    isNonCapturingExplicit: false,
 
-            if (!sparseSlotMap.isSparse && ((slotNumber - sparseSlotMap.lastSlot) > 1)) {
-                sparseSlotMap.isSparse = true;
-            }
+                    isIgnoreCase: null,
+                    isMultiline: null,
+                    isExplicitCapture: null,
+                    isSingleLine: null,
+                    isIgnoreWhitespace: null,
 
-            sparseSlotMap.lastSlot = slotNumber;
-        },
+                    isPositiveLookahead: false,
+                    isNegativeLookahead: false,
+                    isPositiveLookbehind: false,
+                    isNegativeLookbehind: false,
 
-        _addSparseSlotForSameNamedGroups: function (groups, slotNumber, sparseSlotMap, sparseSlotNameMap) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var i;
+                    isNonbacktracking: false
+                };
 
-            scope._addSparseSlot(groups[0], slotNumber, sparseSlotMap, sparseSlotNameMap);
-            var sparseSlotId = groups[0].sparseSlotId;
-            var packedSlotId = groups[0].packedSlotId;
-
-            // Assign SlotID for all expl. named groups in this slot.
-            if (groups.length > 1) {
-                for (i = 1; i < groups.length; i++) {
-                    groups[i].sparseSlotId = sparseSlotId;
-                    groups[i].packedSlotId = packedSlotId;
+                if (childToken == null) {
+                    return constructs;
                 }
-            }
-        },
 
-        _fillGroupConstructs: function (childToken) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var tokenTypes = scope.tokenTypes;
-            var constructs = {
-                name1: null,
-                name2: null,
+                if (childToken.type === tokenTypes.groupConstruct) {
+                    // ?:
+                    // ?=
+                    // ?!
+                    // ?<=
+                    // ?<!
+                    // ?>
 
-                isNumberName1: false,
-                isNumberName2: false,
+                    switch (childToken.value) {
+                        case "?:":
+                            constructs.isNonCapturing = true;
+                            break;
 
-                isNonCapturing: false,
-                isNonCapturingExplicit: false,
+                        case "?=":
+                            constructs.isPositiveLookahead = true;
+                            break;
 
-                isIgnoreCase: null,
-                isMultiline: null,
-                isExplicitCapture: null,
-                isSingleLine: null,
-                isIgnoreWhitespace: null,
+                        case "?!":
+                            constructs.isNegativeLookahead = true;
+                            break;
 
-                isPositiveLookahead: false,
-                isNegativeLookahead: false,
-                isPositiveLookbehind: false,
-                isNegativeLookbehind: false,
+                        case "?>":
+                            constructs.isNonbacktracking = true;
+                            break;
 
-                isNonbacktracking: false
-            };
+                        case "?<=":
+                            constructs.isPositiveLookbehind = true;
+                            break;
 
-            if (childToken == null) {
+                        case "?<!":
+                            constructs.isNegativeLookbehind = true;
+                            break;
+
+                        default:
+                            throw new System.ArgumentException("Unrecognized grouping construct.");
+                    }
+                } else if (childToken.type === tokenTypes.groupConstructName) {
+                    // ?<name1>
+                    // ?'name1'
+                    // ?<name1-name2>
+                    // ?'name1-name2'
+
+                    var nameExpr = childToken.value.slice(2, childToken.length - 1);
+                    var groupNames = nameExpr.split("-");
+                    if (groupNames.length === 0 || groupNames.length > 2) {
+                        throw new System.ArgumentException("Invalid group name.");
+                    }
+
+                    if (groupNames[0].length) {
+                        constructs.name1 = groupNames[0];
+                        var nameRes1 = scope._validateGroupName(groupNames[0]);
+                        constructs.isNumberName1 = nameRes1.isNumberName;
+                    }
+
+                    if (groupNames.length === 2) {
+                        constructs.name2 = groupNames[1];
+                        var nameRes2 = scope._validateGroupName(groupNames[1]);
+                        constructs.isNumberName2 = nameRes2.isNumberName;
+                    }
+                } else if (childToken.type === tokenTypes.groupConstructImnsx || childToken.type === tokenTypes.groupConstructImnsxMisc) {
+                    // ?imnsx-imnsx:
+                    var imnsxPostfixLen = childToken.type === tokenTypes.groupConstructImnsx ? 1 : 0;
+                    var imnsxExprLen = childToken.length - 1 - imnsxPostfixLen; // - prefix - postfix
+                    var imnsxVal = true;
+                    var ch;
+                    var i;
+
+                    for (i = 1; i <= imnsxExprLen; i++) {
+                        ch = childToken.value[i];
+
+                        if (ch === "-") {
+                            imnsxVal = false;
+                        } else if (ch === "i") {
+                            constructs.isIgnoreCase = imnsxVal;
+                        } else if (ch === "m") {
+                            constructs.isMultiline = imnsxVal;
+                        } else if (ch === "n") {
+                            constructs.isExplicitCapture = imnsxVal;
+                        } else if (ch === "s") {
+                            constructs.isSingleLine = imnsxVal;
+                        } else if (ch === "x") {
+                            constructs.isIgnoreWhitespace = imnsxVal;
+                        }
+                    }
+                }
+
                 return constructs;
-            }
+            },
 
-            if (childToken.type === tokenTypes.groupConstruct) {
+            _validateGroupName: function (name) {
+                if (!name || !name.length) {
+                    throw new System.ArgumentException("Invalid group name: Group names must begin with a word character.");
+                }
+
+                var isDigit = name[0] >= "0" && name[0] <= "9";
+                if (isDigit) {
+                    var scope = System.Text.RegularExpressions.RegexEngineParser;
+                    var res = scope._matchChars(name, 0, name.length, scope._decSymbols);
+                    if (res.matchLength !== name.length) {
+                        throw new System.ArgumentException("Invalid group name: Group names must begin with a word character.");
+                    }
+                }
+
+                return {
+                    isNumberName: isDigit
+                };
+            },
+
+            _fillBalancingGroupInfo: function (groups, sparseSettings) {
+                var group;
+                var i;
+
+                // Assign name or id:
+                for (i = 0; i < groups.length; i++) {
+                    group = groups[i];
+
+                    if (group.constructs.name2 != null) {
+                        group.isBalancing = true;
+
+                        group.balancingSlotId = sparseSettings.getPackedSlotIdBySlotName(group.constructs.name2);
+                        if (group.balancingSlotId == null) {
+                            throw new System.ArgumentException("Reference to undefined group name '" + group.constructs.name2 + "'.");
+                        }
+                    }
+                }
+            },
+
+            _preTransformBackrefTokens: function (pattern, tokens, sparseSettings) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+                var tokenTypes = scope.tokenTypes;
+
+                var groupNumber;
+                var octalCharToken;
+                var extraLength;
+                var literalToken;
+                var token;
+                var i;
+
+                for (i = 0; i < tokens.length; i++) {
+                    token = tokens[i];
+                    if (token.type === tokenTypes.escBackrefNumber) {
+                        groupNumber = token.data.number;
+
+                        if (groupNumber >= 1 && sparseSettings.getPackedSlotIdBySlotNumber(groupNumber) != null) {
+                            // Expressions from \10 and greater are considered backreferences
+                            // if there is a group corresponding to that number;
+                            // otherwise, they are interpreted as octal codes.
+                            continue; // validated
+                        }
+
+                        if (groupNumber <= 9) {
+                            // The expressions \1 through \9 are always interpreted as backreferences, and not as octal codes.
+                            throw new System.ArgumentException("Reference to undefined group number " + groupNumber.toString() + ".");
+                        }
+
+                        // Otherwise, transform the token to OctalNumber:
+                        octalCharToken = scope._parseOctalCharToken(token.value, 0, token.length);
+                        if (octalCharToken == null) {
+                            throw new System.ArgumentException("Unrecognized escape sequence " + token.value.slice(0, 2) + ".");
+                        }
+
+                        extraLength = token.length - octalCharToken.length;
+                        scope._modifyPatternToken(token, pattern, tokenTypes.escCharOctal, null, octalCharToken.length);
+                        token.data = octalCharToken.data;
+
+                        if (extraLength > 0) {
+                            literalToken = scope._createPatternToken(pattern, tokenTypes.literal, token.index + token.length, extraLength);
+                            tokens.splice(i + 1, 0, literalToken);
+                        }
+                    }
+
+                    if (token.children && token.children.length) {
+                        scope._preTransformBackrefTokens(pattern, token.children, sparseSettings);
+                    }
+                }
+            },
+
+            _updateGroupDescriptors: function (tokens, parentIndex) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+                var tokenTypes = scope.tokenTypes;
+                var group;
+                var token;
+                var quantCandidateToken;
+                var childrenValue;
+                var childrenIndex;
+                var i;
+
+                var index = parentIndex || 0;
+                for (i = 0; i < tokens.length; i++) {
+                    token = tokens[i];
+                    token.index = index;
+
+                    // Calculate children indexes/lengths to update parent length:
+                    if (token.children) {
+                        childrenIndex = token.childrenPostfix.length;
+                        scope._updateGroupDescriptors(token.children, index + childrenIndex);
+
+                        // Update parent value if children have been changed:
+                        childrenValue = scope._constructPattern(token.children);
+                        token.value = token.childrenPrefix + childrenValue + token.childrenPostfix;
+                        token.length = token.value.length;
+                    }
+
+                    // Update group information:
+                    if (token.type === tokenTypes.group && token.group) {
+                        group = token.group;
+                        group.exprIndex = token.index;
+                        group.exprLength = token.length;
+
+                        if (i + 1 < tokens.length) {
+                            quantCandidateToken = tokens[i + 1];
+                            if (quantCandidateToken.type === tokenTypes.quantifier ||
+                                quantCandidateToken.type === tokenTypes.quantifierN ||
+                                quantCandidateToken.type === tokenTypes.quantifierNM) {
+                                group.quantifier = quantCandidateToken.value;
+                            }
+                        }
+
+                        group.expr = token.value;
+                        group.exprFull = group.expr + (group.quantifier != null ? group.quantifier : "");
+                    }
+
+                    // Update current index:
+                    index += token.length;
+                }
+            },
+
+            _constructPattern: function (tokens) {
+                var pattern = "";
+                var token;
+                var i;
+
+                for (i = 0; i < tokens.length; i++) {
+                    token = tokens[i];
+                    pattern += token.value;
+                }
+
+                return pattern;
+            },
+
+            _parsePatternImpl: function (pattern, settings, startIndex, endIndex) {
+                if (pattern == null) {
+                    throw new System.ArgumentNullException("pattern");
+                }
+                if (startIndex < 0 || startIndex > pattern.length) {
+                    throw new System.ArgumentOutOfRangeException("startIndex");
+                }
+                if (endIndex < startIndex || endIndex > pattern.length) {
+                    throw new System.ArgumentOutOfRangeException("endIndex");
+                }
+
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+                var tokenTypes = scope.tokenTypes;
+                var tokens = [];
+                var token;
+                var ch;
+                var i;
+
+                i = startIndex;
+                while (i < endIndex) {
+                    ch = pattern[i];
+
+                    // Ignore whitespaces (if it was requested):
+                    if (settings.ignoreWhitespace && scope._whiteSpaceChars.indexOf(ch) >= 0) {
+                        ++i;
+                        continue;
+                    }
+
+                    if (ch === ".") {
+                        token = scope._parseDotToken(pattern, i, endIndex);
+                    } else if (ch === "\\") {
+                        token = scope._parseEscapeToken(pattern, i, endIndex);
+                    } else if (ch === "[") {
+                        token = scope._parseCharRangeToken(pattern, i, endIndex);
+                    } else if (ch === "^" || ch === "$") {
+                        token = scope._parseAnchorToken(pattern, i);
+                    } else if (ch === "(") {
+                        token = scope._parseGroupToken(pattern, settings, i, endIndex);
+                    } else if (ch === "|") {
+                        token = scope._parseAlternationToken(pattern, i);
+                    } else if (ch === "#" && settings.ignoreWhitespace) {
+                        token = scope._parseXModeCommentToken(pattern, i, endIndex);
+                    } else {
+                        token = scope._parseQuantifierToken(pattern, i, endIndex);
+                    }
+
+                    if (token == null) {
+                        token = scope._createPatternToken(pattern, tokenTypes.literal, i, 1);
+                    }
+
+                    if (token != null) {
+                        tokens.push(token);
+                        i += token.length;
+                    }
+                }
+
+                return tokens;
+            },
+
+            _parseEscapeToken: function (pattern, i, endIndex) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+                var tokenTypes = scope.tokenTypes;
+
+                var ch = pattern[i];
+                if (ch !== "\\") {
+                    return null;
+                }
+                if (i + 1 >= endIndex) {
+                    throw new System.ArgumentException("Illegal \\ at end of pattern.");
+                }
+
+                ch = pattern[i + 1];
+
+                // Parse a sequence for a numbered reference ("Backreference Constructs")
+                if (ch >= "1" && ch <= "9") {
+                    // check if the number is a group backreference
+                    var groupDigits = scope._matchChars(pattern, i + 1, endIndex, scope._decSymbols, 3); // assume: there are not more than 999 groups
+                    var backrefNumberToken = scope._createPatternToken(pattern, tokenTypes.escBackrefNumber, i, 1 + groupDigits.matchLength); // "\nnn"
+                    backrefNumberToken.data = { number: parseInt(groupDigits.match, 10) };
+                    return backrefNumberToken;
+                }
+
+                // Parse a sequence for "Anchors"
+                if (scope._escapedAnchors.indexOf(ch) >= 0) {
+                    return scope._createPatternToken(pattern, tokenTypes.escAnchor, i, 2); // "\A" or "\Z" or "\z" or "\G" or "\b" or "\B"
+                }
+
+                // Parse a sequence for "Character Escapes" or "Character Classes"
+                var escapedCharToken = scope._parseEscapedChar(pattern, i, endIndex);
+                if (escapedCharToken != null) {
+                    return escapedCharToken;
+                }
+
+                // Parse a sequence for a named backreference ("Backreference Constructs")
+                if (ch === "k") {
+                    if (i + 2 < endIndex) {
+                        var nameQuoteCh = pattern[i + 2];
+                        if (nameQuoteCh === "'" || nameQuoteCh === "<") {
+                            var closingCh = nameQuoteCh === "<" ? ">" : "'";
+                            var refNameChars = scope._matchUntil(pattern, i + 3, endIndex, closingCh);
+                            if (refNameChars.unmatchLength === 1 && refNameChars.matchLength > 0) {
+                                var backrefNameToken = scope._createPatternToken(pattern, tokenTypes.escBackrefName, i, 3 + refNameChars.matchLength + 1); // "\k<Name>" or "\k'Name'"
+                                backrefNameToken.data = { name: refNameChars.match };
+                                return backrefNameToken;
+                            }
+                        }
+                    }
+
+                    throw new System.ArgumentException("Malformed \\k<...> named back reference.");
+                }
+
+                // Unrecognized escape sequence:
+                throw new System.ArgumentException("Unrecognized escape sequence \\" + ch + ".");
+            },
+
+            _parseOctalCharToken: function (pattern, i, endIndex) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+                var tokenTypes = scope.tokenTypes;
+
+                var ch = pattern[i];
+                if (ch === "\\" && i + 1 < endIndex) {
+                    ch = pattern[i + 1];
+
+                    if (ch >= "0" && ch <= "7") {
+                        var octalDigits = scope._matchChars(pattern, i + 1, endIndex, scope._octSymbols, 3);
+                        var octalVal = parseInt(octalDigits.match, 8);
+                        var token = scope._createPatternToken(pattern, tokenTypes.escCharOctal, i, 1 + octalDigits.matchLength); // "\0" or "\nn" or "\nnn"
+                        token.data = { n: octalVal, ch: String.fromCharCode(octalVal) };
+                        return token;
+                    }
+                }
+
+                return null;
+            },
+
+            _parseEscapedChar: function (pattern, i, endIndex) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+                var tokenTypes = scope.tokenTypes;
+                var token;
+
+                var ch = pattern[i];
+                if (ch !== "\\" || i + 1 >= endIndex) {
+                    return null;
+                }
+
+                ch = pattern[i + 1];
+
+                // Parse a sequence for "Character Escapes"
+                if (scope._escapedChars.indexOf(ch) >= 0) {
+                    if (ch === "x") {
+                        var hexDigits = scope._matchChars(pattern, i + 2, endIndex, scope._hexSymbols, 2);
+                        if (hexDigits.matchLength !== 2) {
+                            throw new System.ArgumentException("Insufficient hexadecimal digits.");
+                        }
+
+                        var hexVal = parseInt(hexDigits.match, 16);
+                        token = scope._createPatternToken(pattern, tokenTypes.escCharHex, i, 4); // "\xnn"
+                        token.data = { n: hexVal, ch: String.fromCharCode(hexVal) };
+                        return token;
+                    } else if (ch === "c") {
+                        if (i + 2 >= endIndex) {
+                            throw new System.ArgumentException("Missing control character.");
+                        }
+
+                        var ctrlCh = pattern[i + 2];
+                        ctrlCh = ctrlCh.toUpperCase();
+                        var ctrlIndex = this._controlChars.indexOf(ctrlCh);
+                        if (ctrlIndex >= 0) {
+                            token = scope._createPatternToken(pattern, tokenTypes.escCharCtrl, i, 3); // "\cx" or "\cX"
+                            token.data = { n: ctrlIndex, ch: String.fromCharCode(ctrlIndex) };
+                            return token;
+                        }
+
+                        throw new System.ArgumentException("Unrecognized control character.");
+                    } else if (ch === "u") {
+                        var ucodeDigits = scope._matchChars(pattern, i + 2, endIndex, scope._hexSymbols, 4);
+                        if (ucodeDigits.matchLength !== 4) {
+                            throw new System.ArgumentException("Insufficient hexadecimal digits.");
+                        }
+
+                        var ucodeVal = parseInt(ucodeDigits.match, 16);
+                        token = scope._createPatternToken(pattern, tokenTypes.escCharUnicode, i, 6); // "\unnnn"
+                        token.data = { n: ucodeVal, ch: String.fromCharCode(ucodeVal) };
+                        return token;
+                    }
+
+                    token = scope._createPatternToken(pattern, tokenTypes.escChar, i, 2); // "\a" or "\b" or "\t" or "\r" or "\v" or "f" or "n" or "e"-
+                    var escVal;
+                    switch (ch) {
+                        case "a":
+                            escVal = 7;
+                            break;
+                        case "b":
+                            escVal = 8;
+                            break;
+                        case "t":
+                            escVal = 9;
+                            break;
+                        case "r":
+                            escVal = 13;
+                            break;
+                        case "v":
+                            escVal = 11;
+                            break;
+                        case "f":
+                            escVal = 12;
+                            break;
+                        case "n":
+                            escVal = 10;
+                            break;
+                        case "e":
+                            escVal = 27;
+                            break;
+
+                        default:
+                            throw new System.ArgumentException("Unexpected escaped char: '" + ch + "'.");
+                    }
+
+                    token.data = { n: escVal, ch: String.fromCharCode(escVal) };
+                    return token;
+                }
+
+                // Parse a sequence for an octal character("Character Escapes")
+                if (ch >= "0" && ch <= "7") {
+                    var octalCharToken = scope._parseOctalCharToken(pattern, i, endIndex);
+                    return octalCharToken;
+                }
+
+                // Parse a sequence for "Character Classes"
+                if (scope._escapedCharClasses.indexOf(ch) >= 0) {
+                    if (ch === "p" || ch === "P") {
+                        var catNameChars = scope._matchUntil(pattern, i + 2, endIndex, "}"); // the longest category name is 37 + 2 brackets, but .NET does not limit the value on this step
+                        if (catNameChars.matchLength < 2 || catNameChars.match[0] !== "{" || catNameChars.unmatchLength !== 1) {
+                            throw new System.ArgumentException("Incomplete \p{X} character escape.");
+                        }
+
+                        var catName = catNameChars.match.slice(1);
+
+                        if (scope._unicodeCategories.indexOf(catName) >= 0) {
+                            return scope._createPatternToken(pattern, tokenTypes.escCharClassCategory, i, 2 + catNameChars.matchLength + 1); // "\p{Name}" or "\P{Name}"
+                        }
+
+                        if (scope._namedCharBlocks.indexOf(catName) >= 0) {
+                            return scope._createPatternToken(pattern, tokenTypes.escCharClassBlock, i, 2 + catNameChars.matchLength + 1); // "\p{Name}" or "\P{Name}"
+                        }
+
+                        throw new System.ArgumentException("Unknown property '" + catName + "'.");
+                    }
+
+                    return scope._createPatternToken(pattern, tokenTypes.escCharClass, i, 2); // "\w" or "\W" or "\s" or "\S" or "\d" or "\D"
+                }
+
+                // Some other literal
+                if (scope._escapedSpecialSymbols.indexOf(ch) >= 0) {
+                    token = scope._createPatternToken(pattern, tokenTypes.escCharOther, i, 2); // "\." or "\$" or ... "\\"
+                    token.data = { n: ch.charCodeAt(0), ch: ch };
+                    return token;
+                }
+
+                return null;
+            },
+
+            _parseCharRangeToken: function (pattern, i, endIndex) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+                var tokenTypes = scope.tokenTypes;
+                var tokens = [];
+                var intervalToken;
+                var substractToken;
+                var token;
+                var isNegative = false;
+                var noMoreTokenAllowed = false;
+                var hasSubstractToken = false;
+
+                var ch = pattern[i];
+                if (ch !== "[") {
+                    return null;
+                }
+
+                var index = i + 1;
+                var closeBracketIndex = -1;
+                var toInc;
+
+                if (index < endIndex && pattern[index] === "^") {
+                    isNegative = true;
+                    index ++;
+                }
+
+                while (index < endIndex) {
+                    ch = pattern[index];
+
+                    noMoreTokenAllowed = hasSubstractToken;
+
+                    if (ch === "-" && index + 1 < endIndex && pattern[index + 1] === "[") {
+                        substractToken = scope._parseCharRangeToken(pattern, index + 1, endIndex);
+                        substractToken.childrenPrefix = "-" + substractToken.childrenPrefix;
+                        substractToken.length ++;
+                        token = substractToken;
+                        toInc = substractToken.length;
+                        hasSubstractToken = true;
+                    } else if (ch === "\\") {
+                        token = scope._parseEscapedChar(pattern, index, endIndex);
+                        if (token == null) {
+                            throw new System.ArgumentException("Unrecognized escape sequence \\" + ch + ".");
+                        }
+                        toInc = token.length;
+                    } else if (ch === "]") {
+                        closeBracketIndex = index;
+                        break;
+                    } else {
+                        token = scope._createPatternToken(pattern, tokenTypes.literal, index, 1);
+                        toInc = 1;
+                    }
+
+                    if (noMoreTokenAllowed) {
+                        throw new System.ArgumentException("A subtraction must be the last element in a character class.");
+                    }
+
+                    // Check for interval:
+                    if (tokens.length > 1) {
+                        intervalToken = scope._parseCharIntervalToken(pattern, tokens[tokens.length - 2], tokens[tokens.length - 1], token);
+                        if (intervalToken != null) {
+                            tokens.pop(); //pop Dush
+                            tokens.pop(); //pop Interval start
+                            token = intervalToken;
+                        }
+                    }
+
+                    // Add token:
+                    if (token != null) {
+                        tokens.push(token);
+                        index += toInc;
+                    }
+                }
+
+                if (closeBracketIndex < 0 || tokens.length < 1) {
+                    throw new System.ArgumentException("Unterminated [] set.");
+                }
+
+                var groupToken;
+                if (!isNegative) {
+                    groupToken = scope._createPatternToken(pattern, tokenTypes.charGroup, i, 1 + closeBracketIndex - i, tokens, "[", "]");
+                } else {
+                    groupToken = scope._createPatternToken(pattern, tokenTypes.charNegativeGroup, i, 1 + closeBracketIndex - i, tokens, "[^", "]");
+                }
+
+                // Create full range data:
+                var ranges = scope._tidyCharRange(tokens);
+                groupToken.data = { ranges: ranges };
+                if (substractToken != null) {
+                    groupToken.data.substractToken = substractToken;
+                }
+
+                return groupToken;
+            },
+
+            _parseCharIntervalToken: function (pattern, intervalStartToken, dashToken, intervalEndToken) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+                var tokenTypes = scope.tokenTypes;
+
+                if (dashToken.type !== tokenTypes.literal || dashToken.value !== "-") {
+                    return null;
+                }
+
+                if (intervalStartToken.type !== tokenTypes.literal &&
+                    intervalStartToken.type !== tokenTypes.escChar &&
+                    intervalStartToken.type !== tokenTypes.escCharOctal &&
+                    intervalStartToken.type !== tokenTypes.escCharHex &&
+                    intervalStartToken.type !== tokenTypes.escCharCtrl &&
+                    intervalStartToken.type !== tokenTypes.escCharUnicode &&
+                    intervalStartToken.type !== tokenTypes.escCharOther) {
+                    return null;
+                }
+
+                if (intervalEndToken.type !== tokenTypes.literal &&
+                    intervalEndToken.type !== tokenTypes.escChar &&
+                    intervalEndToken.type !== tokenTypes.escCharOctal &&
+                    intervalEndToken.type !== tokenTypes.escCharHex &&
+                    intervalEndToken.type !== tokenTypes.escCharCtrl &&
+                    intervalEndToken.type !== tokenTypes.escCharUnicode &&
+                    intervalEndToken.type !== tokenTypes.escCharOther) {
+                    return null;
+                }
+
+                var startN;
+                var startCh;
+                if (intervalStartToken.type === tokenTypes.literal) {
+                    startN = intervalStartToken.value.charCodeAt(0);
+                    startCh = intervalStartToken.value;
+                } else {
+                    startN = intervalStartToken.data.n;
+                    startCh = intervalStartToken.data.ch;
+                }
+
+                var endN;
+                var endCh;
+                if (intervalEndToken.type === tokenTypes.literal) {
+                    endN = intervalEndToken.value.charCodeAt(0);
+                    endCh = intervalEndToken.value;
+                } else {
+                    endN = intervalEndToken.data.n;
+                    endCh = intervalEndToken.data.ch;
+                }
+
+                if (startN > endN) {
+                    throw new System.NotSupportedException("[x-y] range in reverse order.");
+                }
+
+                var index = intervalStartToken.index;
+                var length = intervalStartToken.length + dashToken.length + intervalEndToken.length;
+                var intervalToken = scope._createPatternToken(pattern, tokenTypes.charInterval, index, length, [intervalStartToken, dashToken, intervalEndToken], "", "");
+
+                intervalToken.data = {
+                    startN: startN,
+                    startCh: startCh,
+                    endN: endN,
+                    endCh: endCh
+                };
+
+                return intervalToken;
+            },
+
+            _tidyCharRange: function (tokens) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+                var tokenTypes = scope.tokenTypes;
+
+                var j;
+                var k;
+                var n;
+                var m;
+                var token;
+                var ranges = [];
+                var classTokens = [];
+
+                var range;
+                var nextRange;
+                var toSkip;
+
+                for (j = 0; j < tokens.length; j++) {
+                    token = tokens[j];
+
+                    if (token.type === tokenTypes.literal) {
+                        n = token.value.charCodeAt(0);
+                        m = n;
+                    } else if (token.type === tokenTypes.charInterval) {
+                        n = token.data.startN;
+                        m = token.data.endN;
+                    } else if (token.type === tokenTypes.literal ||
+                        token.type === tokenTypes.escChar ||
+                        token.type === tokenTypes.escCharOctal ||
+                        token.type === tokenTypes.escCharHex ||
+                        token.type === tokenTypes.escCharCtrl ||
+                        token.type === tokenTypes.escCharUnicode ||
+                        token.type === tokenTypes.escCharOther) {
+                        n = token.data.n;
+                        m = n;
+                    } else if (
+                        token.type === tokenTypes.charGroup ||
+                        token.type === tokenTypes.charNegativeGroup) {
+                        continue;
+                    } else {
+                        classTokens.push(token);
+                        continue;
+                    }
+
+                    if (ranges.length === 0) {
+                        ranges.push({ n: n, m: m });
+                        continue;
+                    }
+
+                    //TODO: [Performance] Use binary search
+                    for (k = 0; k < ranges.length; k++) {
+                        if (ranges[k].n > n) {
+                            break;
+                        }
+                    }
+
+                    ranges.splice(k, 0, { n: n, m: m });
+                }
+
+                // Combine ranges:
+                for (j = 0; j < ranges.length; j++) {
+                    range = ranges[j];
+
+                    toSkip = 0;
+                    for (k = j + 1; k < ranges.length; k++) {
+                        nextRange = ranges[k];
+                        if (nextRange.n > 1 + range.m) {
+                            break;
+                        }
+                        toSkip++;
+                        if (nextRange.m > range.m) {
+                            range.m = nextRange.m;
+                        }
+                    }
+                    if (toSkip > 0) {
+                        ranges.splice(j + 1, toSkip);
+                    }
+                }
+
+                if (classTokens.length > 0) {
+                    var charClassStr = "[" + scope._constructPattern(classTokens) + "]";
+                    ranges.charClassToken = scope._createPatternToken(charClassStr, tokenTypes.charGroup, 0, charClassStr.length, tokens, "[", "]");
+                }
+
+                return ranges;
+            },
+
+            _parseDotToken: function (pattern, i) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+                var tokenTypes = scope.tokenTypes;
+
+                var ch = pattern[i];
+                if (ch !== ".") {
+                    return null;
+                }
+
+                return scope._createPatternToken(pattern, tokenTypes.escCharClassDot, i, 1);
+            },
+
+            _parseAnchorToken: function (pattern, i) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+                var tokenTypes = scope.tokenTypes;
+
+                var ch = pattern[i];
+                if (ch !== "^" && ch !== "$") {
+                    return null;
+                }
+
+                return scope._createPatternToken(pattern, tokenTypes.anchor, i, 1);
+            },
+
+            _updateSettingsFromConstructs: function (settings, constructs) {
+                if (constructs.isIgnoreWhitespace != null) {
+                    settings.ignoreWhitespace = constructs.isIgnoreWhitespace;
+                }
+                if (constructs.isExplicitCapture != null) {
+                    settings.explicitCapture = constructs.isExplicitCapture;
+                }
+            },
+
+            _parseGroupToken: function (pattern, settings, i, endIndex) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+                var tokenTypes = scope.tokenTypes;
+                var groupSettings = {
+                    ignoreWhitespace: settings.ignoreWhitespace,
+                    explicitCapture: settings.explicitCapture
+                };
+
+                var ch = pattern[i];
+                if (ch !== "(") {
+                    return null;
+                }
+
+                var bracketLvl = 1;
+                var bodyIndex = i + 1;
+                var closeBracketIndex = -1;
+
+                var isComment = false;
+                var isAlternation = false;
+                var isInlineOptions = false;
+                var isImnsxConstructed = false;
+                var isNonCapturingExplicit = false;
+
+                var grConstructs = null;
+
+                // Parse the Group construct, if any:
+                var constructToken = scope._parseGroupConstructToken(pattern, groupSettings, i + 1, endIndex);
+                if (constructToken != null) {
+                    grConstructs = this._fillGroupConstructs(constructToken);
+
+                    bodyIndex += constructToken.length;
+                    if (constructToken.type === tokenTypes.commentInline) {
+                        isComment = true;
+                    } else if (constructToken.type === tokenTypes.alternationGroupCondition) {
+                        isAlternation = true;
+                    } else if (constructToken.type === tokenTypes.groupConstructImnsx) {
+                        this._updateSettingsFromConstructs(groupSettings, grConstructs);
+                        isImnsxConstructed = true;
+                    } else if (constructToken.type === tokenTypes.groupConstructImnsxMisc) {
+                        this._updateSettingsFromConstructs(settings, grConstructs); // parent settings!
+                        isInlineOptions = true;
+                    }
+                }
+
+                if (groupSettings.explicitCapture && (grConstructs == null || grConstructs.name1 == null)) {
+                    isNonCapturingExplicit = true;
+                }
+
+                var index = bodyIndex;
+                while (index < endIndex) {
+                    ch = pattern[index];
+                    if (ch === "\\") {
+                        index += 2; // skip the escaped char
+                        continue;
+                    }
+
+                    if (ch === "(" && !isComment) {
+                        ++bracketLvl;
+                    } else if (ch === ")") {
+                        --bracketLvl;
+                    }
+
+                    if (bracketLvl === 0) {
+                        closeBracketIndex = index;
+                        break;
+                    }
+
+                    ++index;
+                }
+
+                var result = null;
+
+                if (isComment) {
+                    if (closeBracketIndex < 0) {
+                        throw new System.ArgumentException("Unterminated (?#...) comment.");
+                    }
+
+                    result = scope._createPatternToken(pattern, tokenTypes.commentInline, i, 1 + closeBracketIndex - i);
+                } else {
+                    if (closeBracketIndex < 0) {
+                        throw new System.ArgumentException("Not enough )'s.");
+                    }
+
+                    // Parse the "Body" of the group
+                    var innerTokens = scope._parsePatternImpl(pattern, groupSettings, bodyIndex, closeBracketIndex);
+                    if (constructToken != null) {
+                        innerTokens.splice(0, 0, constructToken);
+                    }
+
+                    // If there is an Alternation expression, treat the group as Alternation group
+                    if (isAlternation) {
+                        var innerTokensLen = innerTokens.length;
+                        var innerToken;
+                        var j;
+
+                        // Check that there is only 1 alternation symbol:
+                        var altCount = 0;
+                        for (j = 0; j < innerTokensLen; j++) {
+                            innerToken = innerTokens[j];
+                            if (innerToken.type === tokenTypes.alternation) {
+                                ++altCount;
+                                if (altCount > 1) {
+                                    throw new System.ArgumentException("Too many | in (?()|).");
+                                }
+                            }
+                        }
+                        if (altCount === 0) {
+                            // Though .NET works with this case, it ends up with unexpected result. Let's avoid this behaviour.
+                            throw new System.NotSupportedException("Alternation group without | is not supported.");
+                        }
+
+                        var altGroupToken = scope._createPatternToken(pattern, tokenTypes.alternationGroup, i, 1 + closeBracketIndex - i, innerTokens, "(", ")");
+                        result = altGroupToken;
+                    } else {
+                        // Create Group token:
+                        var tokenType = tokenTypes.group;
+                        if (isInlineOptions) {
+                            tokenType = tokenTypes.groupImnsxMisc;
+                        } else if (isImnsxConstructed) {
+                            tokenType = tokenTypes.groupImnsx;
+                        }
+
+                        var groupToken = scope._createPatternToken(pattern, tokenType, i, 1 + closeBracketIndex - i, innerTokens, "(", ")");
+                        groupToken.localSettings = groupSettings;
+                        result = groupToken;
+                    }
+                }
+
+                if (isNonCapturingExplicit) {
+                    result.isNonCapturingExplicit = true;
+                }
+
+                return result;
+            },
+
+            _parseGroupConstructToken: function (pattern, settings, i, endIndex) {
+                // ?<name1>
+                // ?'name1'
+                // ?<name1-name2>
+                // ?'name1-name2'
                 // ?:
+                // ?imnsx-imnsx
                 // ?=
                 // ?!
                 // ?<=
                 // ?<!
                 // ?>
+                // ?#
 
-                switch (childToken.value) {
-                    case "?:":
-                        constructs.isNonCapturing = true;
-                        break;
-
-                    case "?=":
-                        constructs.isPositiveLookahead = true;
-                        break;
-
-                    case "?!":
-                        constructs.isNegativeLookahead = true;
-                        break;
-
-                    case "?>":
-                        constructs.isNonbacktracking = true;
-                        break;
-
-                    case "?<=":
-                        constructs.isPositiveLookbehind = true;
-                        break;
-
-                    case "?<!":
-                        constructs.isNegativeLookbehind = true;
-                        break;
-
-                    default:
-                        throw new System.ArgumentException("Unrecognized grouping construct.");
-                }
-            } else if (childToken.type === tokenTypes.groupConstructName) {
-                // ?<name1>
-                // ?'name1'
-                // ?<name1-name2>
-                // ?'name1-name2'
-
-                var nameExpr = childToken.value.slice(2, childToken.length - 1);
-                var groupNames = nameExpr.split("-");
-                if (groupNames.length === 0 || groupNames.length > 2) {
-                    throw new System.ArgumentException("Invalid group name.");
-                }
-
-                if (groupNames[0].length) {
-                    constructs.name1 = groupNames[0];
-                    var nameRes1 = scope._validateGroupName(groupNames[0]);
-                    constructs.isNumberName1 = nameRes1.isNumberName;
-                }
-
-                if (groupNames.length === 2) {
-                    constructs.name2 = groupNames[1];
-                    var nameRes2 = scope._validateGroupName(groupNames[1]);
-                    constructs.isNumberName2 = nameRes2.isNumberName;
-                }
-            } else if (childToken.type === tokenTypes.groupConstructImnsx || childToken.type === tokenTypes.groupConstructImnsxMisc) {
-                // ?imnsx-imnsx:
-                var imnsxPostfixLen = childToken.type === tokenTypes.groupConstructImnsx ? 1 : 0;
-                var imnsxExprLen = childToken.length - 1 - imnsxPostfixLen; // - prefix - postfix
-                var imnsxVal = true;
-                var ch;
-                var i;
-
-                for (i = 1; i <= imnsxExprLen; i++) {
-                    ch = childToken.value[i];
-
-                    if (ch === "-") {
-                        imnsxVal = false;
-                    } else if (ch === "i") {
-                        constructs.isIgnoreCase = imnsxVal;
-                    } else if (ch === "m") {
-                        constructs.isMultiline = imnsxVal;
-                    } else if (ch === "n") {
-                        constructs.isExplicitCapture = imnsxVal;
-                    } else if (ch === "s") {
-                        constructs.isSingleLine = imnsxVal;
-                    } else if (ch === "x") {
-                        constructs.isIgnoreWhitespace = imnsxVal;
-                    }
-                }
-            }
-
-            return constructs;
-        },
-
-        _validateGroupName: function (name) {
-            if (!name || !name.length) {
-                throw new System.ArgumentException("Invalid group name: Group names must begin with a word character.");
-            }
-
-            var isDigit = name[0] >= "0" && name[0] <= "9";
-            if (isDigit) {
                 var scope = System.Text.RegularExpressions.RegexEngineParser;
-                var res = scope._matchChars(name, 0, name.length, scope._decSymbols);
-                if (res.matchLength !== name.length) {
-                    throw new System.ArgumentException("Invalid group name: Group names must begin with a word character.");
-                }
-            }
+                var tokenTypes = scope.tokenTypes;
 
-            return {
-                isNumberName: isDigit
-            };
-        },
-
-        _fillBalancingGroupInfo: function (groups, sparseSettings) {
-            var group;
-            var i;
-
-            // Assign name or id:
-            for (i = 0; i < groups.length; i++) {
-                group = groups[i];
-
-                if (group.constructs.name2 != null) {
-                    group.isBalancing = true;
-
-                    group.balancingSlotId = sparseSettings.getPackedSlotIdBySlotName(group.constructs.name2);
-                    if (group.balancingSlotId == null) {
-                        throw new System.ArgumentException("Reference to undefined group name '" + group.constructs.name2 + "'.");
-                    }
-                }
-            }
-        },
-
-        _preTransformBackrefTokens: function (pattern, tokens, sparseSettings) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var tokenTypes = scope.tokenTypes;
-
-            var groupNumber;
-            var octalCharToken;
-            var extraLength;
-            var literalToken;
-            var token;
-            var i;
-
-            for (i = 0; i < tokens.length; i++) {
-                token = tokens[i];
-                if (token.type === tokenTypes.escBackrefNumber) {
-                    groupNumber = token.data.number;
-
-                    if (groupNumber >= 1 && sparseSettings.getPackedSlotIdBySlotNumber(groupNumber) != null) {
-                        // Expressions from \10 and greater are considered backreferences
-                        // if there is a group corresponding to that number;
-                        // otherwise, they are interpreted as octal codes.
-                        continue; // validated
-                    }
-
-                    if (groupNumber <= 9) {
-                        // The expressions \1 through \9 are always interpreted as backreferences, and not as octal codes.
-                        throw new System.ArgumentException("Reference to undefined group number " + groupNumber.toString() + ".");
-                    }
-
-                    // Otherwise, transform the token to OctalNumber:
-                    octalCharToken = scope._parseOctalCharToken(token.value, 0, token.length);
-                    if (octalCharToken == null) {
-                        throw new System.ArgumentException("Unrecognized escape sequence " + token.value.slice(0, 2) + ".");
-                    }
-
-                    extraLength = token.length - octalCharToken.length;
-                    scope._modifyPatternToken(token, pattern, tokenTypes.escCharOctal, null, octalCharToken.length);
-                    token.data = octalCharToken.data;
-
-                    if (extraLength > 0) {
-                        literalToken = scope._createPatternToken(pattern, tokenTypes.literal, token.index + token.length, extraLength);
-                        tokens.splice(i + 1, 0, literalToken);
-                    }
+                var ch = pattern[i];
+                if (ch !== "?" || i + 1 >= endIndex) {
+                    return null;
                 }
 
-                if (token.children && token.children.length) {
-                    scope._preTransformBackrefTokens(pattern, token.children, sparseSettings);
-                }
-            }
-        },
-
-        _updateGroupDescriptors: function (tokens, parentIndex) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var tokenTypes = scope.tokenTypes;
-            var group;
-            var token;
-            var quantCandidateToken;
-            var childrenValue;
-            var childrenIndex;
-            var i;
-
-            var index = parentIndex || 0;
-            for (i = 0; i < tokens.length; i++) {
-                token = tokens[i];
-                token.index = index;
-
-                // Calculate children indexes/lengths to update parent length:
-                if (token.children) {
-                    childrenIndex = token.childrenPostfix.length;
-                    scope._updateGroupDescriptors(token.children, index + childrenIndex);
-
-                    // Update parent value if children have been changed:
-                    childrenValue = scope._constructPattern(token.children);
-                    token.value = token.childrenPrefix + childrenValue + token.childrenPostfix;
-                    token.length = token.value.length;
-                }
-
-                // Update group information:
-                if (token.type === tokenTypes.group && token.group) {
-                    group = token.group;
-                    group.exprIndex = token.index;
-                    group.exprLength = token.length;
-
-                    if (i + 1 < tokens.length) {
-                        quantCandidateToken = tokens[i + 1];
-                        if (quantCandidateToken.type === tokenTypes.quantifier ||
-                            quantCandidateToken.type === tokenTypes.quantifierN ||
-                            quantCandidateToken.type === tokenTypes.quantifierNM) {
-                            group.quantifier = quantCandidateToken.value;
-                        }
-                    }
-
-                    group.expr = token.value;
-                    group.exprFull = group.expr + (group.quantifier != null ? group.quantifier : "");
-                }
-
-                // Update current index:
-                index += token.length;
-            }
-        },
-
-        _constructPattern: function (tokens) {
-            var pattern = "";
-            var token;
-            var i;
-
-            for (i = 0; i < tokens.length; i++) {
-                token = tokens[i];
-                pattern += token.value;
-            }
-
-            return pattern;
-        },
-
-        _parsePatternImpl: function (pattern, settings, startIndex, endIndex) {
-            if (pattern == null) {
-                throw new System.ArgumentNullException("pattern");
-            }
-            if (startIndex < 0 || startIndex > pattern.length) {
-                throw new System.ArgumentOutOfRangeException("startIndex");
-            }
-            if (endIndex < startIndex || endIndex > pattern.length) {
-                throw new System.ArgumentOutOfRangeException("endIndex");
-            }
-
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var tokenTypes = scope.tokenTypes;
-            var tokens = [];
-            var token;
-            var ch;
-            var i;
-
-            i = startIndex;
-            while (i < endIndex) {
-                ch = pattern[i];
-
-                // Ignore whitespaces (if it was requested):
-                if (settings.ignoreWhitespace && scope._whiteSpaceChars.indexOf(ch) >= 0) {
-                    ++i;
-                    continue;
-                }
-
-                if (ch === ".") {
-                    token = scope._parseDotToken(pattern, i, endIndex);
-                } else if (ch === "\\") {
-                    token = scope._parseEscapeToken(pattern, i, endIndex);
-                } else if (ch === "[") {
-                    token = scope._parseCharRangeToken(pattern, i, endIndex);
-                } else if (ch === "^" || ch === "$") {
-                    token = scope._parseAnchorToken(pattern, i);
-                } else if (ch === "(") {
-                    token = scope._parseGroupToken(pattern, settings, i, endIndex);
-                } else if (ch === "|") {
-                    token = scope._parseAlternationToken(pattern, i);
-                } else if (ch === "#" && settings.ignoreWhitespace) {
-                    token = scope._parseXModeCommentToken(pattern, i, endIndex);
-                } else {
-                    token = scope._parseQuantifierToken(pattern, i, endIndex);
-                }
-
-                if (token == null) {
-                    token = scope._createPatternToken(pattern, tokenTypes.literal, i, 1);
-                }
-
-                if (token != null) {
-                    tokens.push(token);
-                    i += token.length;
-                }
-            }
-
-            return tokens;
-        },
-
-        _parseEscapeToken: function (pattern, i, endIndex) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var tokenTypes = scope.tokenTypes;
-
-            var ch = pattern[i];
-            if (ch !== "\\") {
-                return null;
-            }
-            if (i + 1 >= endIndex) {
-                throw new System.ArgumentException("Illegal \\ at end of pattern.");
-            }
-
-            ch = pattern[i + 1];
-
-            // Parse a sequence for a numbered reference ("Backreference Constructs")
-            if (ch >= "1" && ch <= "9") {
-                // check if the number is a group backreference
-                var groupDigits = scope._matchChars(pattern, i + 1, endIndex, scope._decSymbols, 3); // assume: there are not more than 999 groups
-                var backrefNumberToken = scope._createPatternToken(pattern, tokenTypes.escBackrefNumber, i, 1 + groupDigits.matchLength); // "\nnn"
-                backrefNumberToken.data = { number: parseInt(groupDigits.match, 10) };
-                return backrefNumberToken;
-            }
-
-            // Parse a sequence for "Anchors"
-            if (scope._escapedAnchors.indexOf(ch) >= 0) {
-                return scope._createPatternToken(pattern, tokenTypes.escAnchor, i, 2); // "\A" or "\Z" or "\z" or "\G" or "\b" or "\B"
-            }
-
-            // Parse a sequence for "Character Escapes" or "Character Classes"
-            var escapedCharToken = scope._parseEscapedChar(pattern, i, endIndex);
-            if (escapedCharToken != null) {
-                return escapedCharToken;
-            }
-
-            // Parse a sequence for a named backreference ("Backreference Constructs")
-            if (ch === "k") {
-                if (i + 2 < endIndex) {
-                    var nameQuoteCh = pattern[i + 2];
-                    if (nameQuoteCh === "'" || nameQuoteCh === "<") {
-                        var closingCh = nameQuoteCh === "<" ? ">" : "'";
-                        var refNameChars = scope._matchUntil(pattern, i + 3, endIndex, closingCh);
-                        if (refNameChars.unmatchLength === 1 && refNameChars.matchLength > 0) {
-                            var backrefNameToken = scope._createPatternToken(pattern, tokenTypes.escBackrefName, i, 3 + refNameChars.matchLength + 1); // "\k<Name>" or "\k'Name'"
-                            backrefNameToken.data = { name: refNameChars.match };
-                            return backrefNameToken;
-                        }
-                    }
-                }
-
-                throw new System.ArgumentException("Malformed \\k<...> named back reference.");
-            }
-
-            // Unrecognized escape sequence:
-            throw new System.ArgumentException("Unrecognized escape sequence \\" + ch + ".");
-        },
-
-        _parseOctalCharToken: function (pattern, i, endIndex) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var tokenTypes = scope.tokenTypes;
-
-            var ch = pattern[i];
-            if (ch === "\\" && i + 1 < endIndex) {
                 ch = pattern[i + 1];
-
-                if (ch >= "0" && ch <= "7") {
-                    var octalDigits = scope._matchChars(pattern, i + 1, endIndex, scope._octSymbols, 3);
-                    var octalVal = parseInt(octalDigits.match, 8);
-                    var token = scope._createPatternToken(pattern, tokenTypes.escCharOctal, i, 1 + octalDigits.matchLength); // "\0" or "\nn" or "\nnn"
-                    token.data = { n: octalVal, ch: String.fromCharCode(octalVal) };
-                    return token;
-                }
-            }
-
-            return null;
-        },
-
-        _parseEscapedChar: function (pattern, i, endIndex) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var tokenTypes = scope.tokenTypes;
-            var token;
-
-            var ch = pattern[i];
-            if (ch !== "\\" || i + 1 >= endIndex) {
-                return null;
-            }
-
-            ch = pattern[i + 1];
-
-            // Parse a sequence for "Character Escapes"
-            if (scope._escapedChars.indexOf(ch) >= 0) {
-                if (ch === "x") {
-                    var hexDigits = scope._matchChars(pattern, i + 2, endIndex, scope._hexSymbols, 2);
-                    if (hexDigits.matchLength !== 2) {
-                        throw new System.ArgumentException("Insufficient hexadecimal digits.");
-                    }
-
-                    var hexVal = parseInt(hexDigits.match, 16);
-                    token = scope._createPatternToken(pattern, tokenTypes.escCharHex, i, 4); // "\xnn"
-                    token.data = { n: hexVal, ch: String.fromCharCode(hexVal) };
-                    return token;
-                } else if (ch === "c") {
-                    if (i + 2 >= endIndex) {
-                        throw new System.ArgumentException("Missing control character.");
-                    }
-
-                    var ctrlCh = pattern[i + 2];
-                    ctrlCh = ctrlCh.toUpperCase();
-                    var ctrlIndex = this._controlChars.indexOf(ctrlCh);
-                    if (ctrlIndex >= 0) {
-                        token = scope._createPatternToken(pattern, tokenTypes.escCharCtrl, i, 3); // "\cx" or "\cX"
-                        token.data = { n: ctrlIndex, ch: String.fromCharCode(ctrlIndex) };
-                        return token;
-                    }
-
-                    throw new System.ArgumentException("Unrecognized control character.");
-                } else if (ch === "u") {
-                    var ucodeDigits = scope._matchChars(pattern, i + 2, endIndex, scope._hexSymbols, 4);
-                    if (ucodeDigits.matchLength !== 4) {
-                        throw new System.ArgumentException("Insufficient hexadecimal digits.");
-                    }
-
-                    var ucodeVal = parseInt(ucodeDigits.match, 16);
-                    token = scope._createPatternToken(pattern, tokenTypes.escCharUnicode, i, 6); // "\unnnn"
-                    token.data = { n: ucodeVal, ch: String.fromCharCode(ucodeVal) };
-                    return token;
+                if (ch === ":" || ch === "=" || ch === "!" || ch === ">") {
+                    return scope._createPatternToken(pattern, tokenTypes.groupConstruct, i, 2);
                 }
 
-                token = scope._createPatternToken(pattern, tokenTypes.escChar, i, 2); // "\a" or "\b" or "\t" or "\r" or "\v" or "f" or "n" or "e"-
-                var escVal;
-                switch (ch) {
-                    case "a":
-                        escVal = 7;
-                        break;
-                    case "b":
-                        escVal = 8;
-                        break;
-                    case "t":
-                        escVal = 9;
-                        break;
-                    case "r":
-                        escVal = 13;
-                        break;
-                    case "v":
-                        escVal = 11;
-                        break;
-                    case "f":
-                        escVal = 12;
-                        break;
-                    case "n":
-                        escVal = 10;
-                        break;
-                    case "e":
-                        escVal = 27;
-                        break;
-
-                    default:
-                        throw new System.ArgumentException("Unexpected escaped char: '" + ch + "'.");
+                if (ch === "#") {
+                    return scope._createPatternToken(pattern, tokenTypes.commentInline, i, 2);
                 }
 
-                token.data = { n: escVal, ch: String.fromCharCode(escVal) };
-                return token;
-            }
-
-            // Parse a sequence for an octal character("Character Escapes")
-            if (ch >= "0" && ch <= "7") {
-                var octalCharToken = scope._parseOctalCharToken(pattern, i, endIndex);
-                return octalCharToken;
-            }
-
-            // Parse a sequence for "Character Classes"
-            if (scope._escapedCharClasses.indexOf(ch) >= 0) {
-                if (ch === "p" || ch === "P") {
-                    var catNameChars = scope._matchUntil(pattern, i + 2, endIndex, "}"); // the longest category name is 37 + 2 brackets, but .NET does not limit the value on this step
-                    if (catNameChars.matchLength < 2 || catNameChars.match[0] !== "{" || catNameChars.unmatchLength !== 1) {
-                        throw new System.ArgumentException("Incomplete \p{X} character escape.");
-                    }
-
-                    var catName = catNameChars.match.slice(1);
-
-                    if (scope._unicodeCategories.indexOf(catName) >= 0) {
-                        return scope._createPatternToken(pattern, tokenTypes.escCharClassCategory, i, 2 + catNameChars.matchLength + 1); // "\p{Name}" or "\P{Name}"
-                    }
-
-                    if (scope._namedCharBlocks.indexOf(catName) >= 0) {
-                        return scope._createPatternToken(pattern, tokenTypes.escCharClassBlock, i, 2 + catNameChars.matchLength + 1); // "\p{Name}" or "\P{Name}"
-                    }
-
-                    throw new System.ArgumentException("Unknown property '" + catName + "'.");
+                if (ch === "(") {
+                    return scope._parseAlternationGroupConditionToken(pattern, settings, i, endIndex);
                 }
 
-                return scope._createPatternToken(pattern, tokenTypes.escCharClass, i, 2); // "\w" or "\W" or "\s" or "\S" or "\d" or "\D"
-            }
-
-            // Some other literal
-            if (scope._escapedSpecialSymbols.indexOf(ch) >= 0) {
-                token = scope._createPatternToken(pattern, tokenTypes.escCharOther, i, 2); // "\." or "\$" or ... "\\"
-                token.data = { n: ch.charCodeAt(0), ch: ch };
-                return token;
-            }
-
-            return null;
-        },
-
-        _parseCharRangeToken: function (pattern, i, endIndex) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var tokenTypes = scope.tokenTypes;
-            var tokens = [];
-            var intervalToken;
-            var substractToken;
-            var token;
-            var isNegative = false;
-            var noMoreTokenAllowed = false;
-            var hasSubstractToken = false;
-
-            var ch = pattern[i];
-            if (ch !== "[") {
-                return null;
-            }
-
-            var index = i + 1;
-            var closeBracketIndex = -1;
-            var toInc;
-
-            if (index < endIndex && pattern[index] === "^") {
-                isNegative = true;
-                index ++;
-            }
-
-            while (index < endIndex) {
-                ch = pattern[index];
-
-                noMoreTokenAllowed = hasSubstractToken;
-
-                if (ch === "-" && index + 1 < endIndex && pattern[index + 1] === "[") {
-                    substractToken = scope._parseCharRangeToken(pattern, index + 1, endIndex);
-                    substractToken.childrenPrefix = "-" + substractToken.childrenPrefix;
-                    substractToken.length ++;
-                    token = substractToken;
-                    toInc = substractToken.length;
-                    hasSubstractToken = true;
-                } else if (ch === "\\") {
-                    token = scope._parseEscapedChar(pattern, index, endIndex);
-                    if (token == null) {
-                        throw new System.ArgumentException("Unrecognized escape sequence \\" + ch + ".");
-                    }
-                    toInc = token.length;
-                } else if (ch === "]") {
-                    closeBracketIndex = index;
-                    break;
-                } else {
-                    token = scope._createPatternToken(pattern, tokenTypes.literal, index, 1);
-                    toInc = 1;
-                }
-
-                if (noMoreTokenAllowed) {
-                    throw new System.ArgumentException("A subtraction must be the last element in a character class.");
-                }
-
-                // Check for interval:
-                if (tokens.length > 1) {
-                    intervalToken = scope._parseCharIntervalToken(pattern, tokens[tokens.length - 2], tokens[tokens.length - 1], token);
-                    if (intervalToken != null) {
-                        tokens.pop(); //pop Dush
-                        tokens.pop(); //pop Interval start
-                        token = intervalToken;
+                if (ch === "<" && i + 2 < endIndex) {
+                    var ch3 = pattern[i + 2];
+                    if (ch3 === "=" || ch3 === "!") {
+                        return scope._createPatternToken(pattern, tokenTypes.groupConstruct, i, 3);
                     }
                 }
 
-                // Add token:
-                if (token != null) {
-                    tokens.push(token);
-                    index += toInc;
-                }
-            }
-
-            if (closeBracketIndex < 0 || tokens.length < 1) {
-                throw new System.ArgumentException("Unterminated [] set.");
-            }
-
-            var groupToken;
-            if (!isNegative) {
-                groupToken = scope._createPatternToken(pattern, tokenTypes.charGroup, i, 1 + closeBracketIndex - i, tokens, "[", "]");
-            } else {
-                groupToken = scope._createPatternToken(pattern, tokenTypes.charNegativeGroup, i, 1 + closeBracketIndex - i, tokens, "[^", "]");
-            }
-
-            // Create full range data:
-            var ranges = scope._tidyCharRange(tokens);
-            groupToken.data = { ranges: ranges };
-            if (substractToken != null) {
-                groupToken.data.substractToken = substractToken;
-            }
-
-            return groupToken;
-        },
-
-        _parseCharIntervalToken: function (pattern, intervalStartToken, dashToken, intervalEndToken) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var tokenTypes = scope.tokenTypes;
-
-            if (dashToken.type !== tokenTypes.literal || dashToken.value !== "-") {
-                return null;
-            }
-
-            if (intervalStartToken.type !== tokenTypes.literal &&
-                intervalStartToken.type !== tokenTypes.escChar &&
-                intervalStartToken.type !== tokenTypes.escCharOctal &&
-                intervalStartToken.type !== tokenTypes.escCharHex &&
-                intervalStartToken.type !== tokenTypes.escCharCtrl &&
-                intervalStartToken.type !== tokenTypes.escCharUnicode &&
-                intervalStartToken.type !== tokenTypes.escCharOther) {
-                return null;
-            }
-
-            if (intervalEndToken.type !== tokenTypes.literal &&
-                intervalEndToken.type !== tokenTypes.escChar &&
-                intervalEndToken.type !== tokenTypes.escCharOctal &&
-                intervalEndToken.type !== tokenTypes.escCharHex &&
-                intervalEndToken.type !== tokenTypes.escCharCtrl &&
-                intervalEndToken.type !== tokenTypes.escCharUnicode &&
-                intervalEndToken.type !== tokenTypes.escCharOther) {
-                return null;
-            }
-
-            var startN;
-            var startCh;
-            if (intervalStartToken.type === tokenTypes.literal) {
-                startN = intervalStartToken.value.charCodeAt(0);
-                startCh = intervalStartToken.value;
-            } else {
-                startN = intervalStartToken.data.n;
-                startCh = intervalStartToken.data.ch;
-            }
-
-            var endN;
-            var endCh;
-            if (intervalEndToken.type === tokenTypes.literal) {
-                endN = intervalEndToken.value.charCodeAt(0);
-                endCh = intervalEndToken.value;
-            } else {
-                endN = intervalEndToken.data.n;
-                endCh = intervalEndToken.data.ch;
-            }
-
-            if (startN > endN) {
-                throw new System.NotSupportedException("[x-y] range in reverse order.");
-            }
-
-            var index = intervalStartToken.index;
-            var length = intervalStartToken.length + dashToken.length + intervalEndToken.length;
-            var intervalToken = scope._createPatternToken(pattern, tokenTypes.charInterval, index, length, [intervalStartToken, dashToken, intervalEndToken], "", "");
-
-            intervalToken.data = {
-                startN: startN,
-                startCh: startCh,
-                endN: endN,
-                endCh: endCh
-            };
-
-            return intervalToken;
-        },
-
-        _tidyCharRange: function (tokens) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var tokenTypes = scope.tokenTypes;
-
-            var j;
-            var k;
-            var n;
-            var m;
-            var token;
-            var ranges = [];
-            var classTokens = [];
-
-            var range;
-            var nextRange;
-            var toSkip;
-
-            for (j = 0; j < tokens.length; j++) {
-                token = tokens[j];
-
-                if (token.type === tokenTypes.literal) {
-                    n = token.value.charCodeAt(0);
-                    m = n;
-                } else if (token.type === tokenTypes.charInterval) {
-                    n = token.data.startN;
-                    m = token.data.endN;
-                } else if (token.type === tokenTypes.literal ||
-                    token.type === tokenTypes.escChar ||
-                    token.type === tokenTypes.escCharOctal ||
-                    token.type === tokenTypes.escCharHex ||
-                    token.type === tokenTypes.escCharCtrl ||
-                    token.type === tokenTypes.escCharUnicode ||
-                    token.type === tokenTypes.escCharOther) {
-                    n = token.data.n;
-                    m = n;
-                } else if (
-                    token.type === tokenTypes.charGroup ||
-                    token.type === tokenTypes.charNegativeGroup) {
-                    continue;
-                } else {
-                    classTokens.push(token);
-                    continue;
-                }
-
-                if (ranges.length === 0) {
-                    ranges.push({ n: n, m: m });
-                    continue;
-                }
-
-                //TODO: [Performance] Use binary search
-                for (k = 0; k < ranges.length; k++) {
-                    if (ranges[k].n > n) {
-                        break;
-                    }
-                }
-
-                ranges.splice(k, 0, { n: n, m: m });
-            }
-
-            // Combine ranges:
-            for (j = 0; j < ranges.length; j++) {
-                range = ranges[j];
-
-                toSkip = 0;
-                for (k = j + 1; k < ranges.length; k++) {
-                    nextRange = ranges[k];
-                    if (nextRange.n > 1 + range.m) {
-                        break;
-                    }
-                    toSkip++;
-                    if (nextRange.m > range.m) {
-                        range.m = nextRange.m;
-                    }
-                }
-                if (toSkip > 0) {
-                    ranges.splice(j + 1, toSkip);
-                }
-            }
-
-            if (classTokens.length > 0) {
-                var charClassStr = "[" + scope._constructPattern(classTokens) + "]";
-                ranges.charClassToken = scope._createPatternToken(charClassStr, tokenTypes.charGroup, 0, charClassStr.length, tokens, "[", "]");
-            }
-
-            return ranges;
-        },
-
-        _parseDotToken: function (pattern, i) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var tokenTypes = scope.tokenTypes;
-
-            var ch = pattern[i];
-            if (ch !== ".") {
-                return null;
-            }
-
-            return scope._createPatternToken(pattern, tokenTypes.escCharClassDot, i, 1);
-        },
-
-        _parseAnchorToken: function (pattern, i) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var tokenTypes = scope.tokenTypes;
-
-            var ch = pattern[i];
-            if (ch !== "^" && ch !== "$") {
-                return null;
-            }
-
-            return scope._createPatternToken(pattern, tokenTypes.anchor, i, 1);
-        },
-
-        _updateSettingsFromConstructs: function (settings, constructs) {
-            if (constructs.isIgnoreWhitespace != null) {
-                settings.ignoreWhitespace = constructs.isIgnoreWhitespace;
-            }
-            if (constructs.isExplicitCapture != null) {
-                settings.explicitCapture = constructs.isExplicitCapture;
-            }
-        },
-
-        _parseGroupToken: function (pattern, settings, i, endIndex) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var tokenTypes = scope.tokenTypes;
-            var groupSettings = {
-                ignoreWhitespace: settings.ignoreWhitespace,
-                explicitCapture: settings.explicitCapture
-            };
-
-            var ch = pattern[i];
-            if (ch !== "(") {
-                return null;
-            }
-
-            var bracketLvl = 1;
-            var bodyIndex = i + 1;
-            var closeBracketIndex = -1;
-
-            var isComment = false;
-            var isAlternation = false;
-            var isInlineOptions = false;
-            var isImnsxConstructed = false;
-            var isNonCapturingExplicit = false;
-
-            var grConstructs = null;
-
-            // Parse the Group construct, if any:
-            var constructToken = scope._parseGroupConstructToken(pattern, groupSettings, i + 1, endIndex);
-            if (constructToken != null) {
-                grConstructs = this._fillGroupConstructs(constructToken);
-
-                bodyIndex += constructToken.length;
-                if (constructToken.type === tokenTypes.commentInline) {
-                    isComment = true;
-                } else if (constructToken.type === tokenTypes.alternationGroupCondition) {
-                    isAlternation = true;
-                } else if (constructToken.type === tokenTypes.groupConstructImnsx) {
-                    this._updateSettingsFromConstructs(groupSettings, grConstructs);
-                    isImnsxConstructed = true;
-                } else if (constructToken.type === tokenTypes.groupConstructImnsxMisc) {
-                    this._updateSettingsFromConstructs(settings, grConstructs); // parent settings!
-                    isInlineOptions = true;
-                }
-            }
-
-            if (groupSettings.explicitCapture && (grConstructs == null || grConstructs.name1 == null)) {
-                isNonCapturingExplicit = true;
-            }
-
-            var index = bodyIndex;
-            while (index < endIndex) {
-                ch = pattern[index];
-                if (ch === "\\") {
-                    index += 2; // skip the escaped char
-                    continue;
-                }
-
-                if (ch === "(" && !isComment) {
-                    ++bracketLvl;
-                } else if (ch === ")") {
-                    --bracketLvl;
-                }
-
-                if (bracketLvl === 0) {
-                    closeBracketIndex = index;
-                    break;
-                }
-
-                ++index;
-            }
-
-            var result = null;
-
-            if (isComment) {
-                if (closeBracketIndex < 0) {
-                    throw new System.ArgumentException("Unterminated (?#...) comment.");
-                }
-
-                result = scope._createPatternToken(pattern, tokenTypes.commentInline, i, 1 + closeBracketIndex - i);
-            } else {
-                if (closeBracketIndex < 0) {
-                    throw new System.ArgumentException("Not enough )'s.");
-                }
-
-                // Parse the "Body" of the group
-                var innerTokens = scope._parsePatternImpl(pattern, groupSettings, bodyIndex, closeBracketIndex);
-                if (constructToken != null) {
-                    innerTokens.splice(0, 0, constructToken);
-                }
-
-                // If there is an Alternation expression, treat the group as Alternation group
-                if (isAlternation) {
-                    var innerTokensLen = innerTokens.length;
-                    var innerToken;
-                    var j;
-
-                    // Check that there is only 1 alternation symbol:
-                    var altCount = 0;
-                    for (j = 0; j < innerTokensLen; j++) {
-                        innerToken = innerTokens[j];
-                        if (innerToken.type === tokenTypes.alternation) {
-                            ++altCount;
-                            if (altCount > 1) {
-                                throw new System.ArgumentException("Too many | in (?()|).");
-                            }
-                        }
-                    }
-                    if (altCount === 0) {
-                        // Though .NET works with this case, it ends up with unexpected result. Let's avoid this behaviour.
-                        throw new System.NotSupportedException("Alternation group without | is not supported.");
+                if (ch === "<" || ch === "'") {
+                    var closingCh = ch === "<" ? ">" : ch;
+                    var nameChars = scope._matchUntil(pattern, i + 2, endIndex, closingCh);
+                    if (nameChars.unmatchLength !== 1 || nameChars.matchLength === 0) {
+                        throw new System.ArgumentException("Unrecognized grouping construct.");
                     }
 
-                    var altGroupToken = scope._createPatternToken(pattern, tokenTypes.alternationGroup, i, 1 + closeBracketIndex - i, innerTokens, "(", ")");
-                    result = altGroupToken;
-                } else {
-                    // Create Group token:
-                    var tokenType = tokenTypes.group;
-                    if (isInlineOptions) {
-                        tokenType = tokenTypes.groupImnsxMisc;
-                    } else if (isImnsxConstructed) {
-                        tokenType = tokenTypes.groupImnsx;
+                    var nameFirstCh = nameChars.match.slice(0, 1);
+                    if ("`~@#$%^&*()+{}[]|\\/|'\";:,.?".indexOf(nameFirstCh) >= 0) {
+                        // TODO: replace the "black list" of wrong characters with char class check:
+                        // According to UTS#18 Unicode Regular Expressions (http://www.unicode.org/reports/tr18/)
+                        // RL 1.4 Simple Word Boundaries  The class of <word_character> includes all Alphabetic
+                        // values from the Unicode character database, from UnicodeData.txt [UData], plus the U+200C
+                        // ZERO WIDTH NON-JOINER and U+200D ZERO WIDTH JOINER.
+                        throw new System.ArgumentException("Invalid group name: Group names must begin with a word character.");
                     }
 
-                    var groupToken = scope._createPatternToken(pattern, tokenType, i, 1 + closeBracketIndex - i, innerTokens, "(", ")");
-                    groupToken.localSettings = groupSettings;
-                    result = groupToken;
-                }
-            }
-
-            if (isNonCapturingExplicit) {
-                result.isNonCapturingExplicit = true;
-            }
-
-            return result;
-        },
-
-        _parseGroupConstructToken: function (pattern, settings, i, endIndex) {
-            // ?<name1>
-            // ?'name1'
-            // ?<name1-name2>
-            // ?'name1-name2'
-            // ?:
-            // ?imnsx-imnsx
-            // ?=
-            // ?!
-            // ?<=
-            // ?<!
-            // ?>
-            // ?#
-
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var tokenTypes = scope.tokenTypes;
-
-            var ch = pattern[i];
-            if (ch !== "?" || i + 1 >= endIndex) {
-                return null;
-            }
-
-            ch = pattern[i + 1];
-            if (ch === ":" || ch === "=" || ch === "!" || ch === ">") {
-                return scope._createPatternToken(pattern, tokenTypes.groupConstruct, i, 2);
-            }
-
-            if (ch === "#") {
-                return scope._createPatternToken(pattern, tokenTypes.commentInline, i, 2);
-            }
-
-            if (ch === "(") {
-                return scope._parseAlternationGroupConditionToken(pattern, settings, i, endIndex);
-            }
-
-            if (ch === "<" && i + 2 < endIndex) {
-                var ch3 = pattern[i + 2];
-                if (ch3 === "=" || ch3 === "!") {
-                    return scope._createPatternToken(pattern, tokenTypes.groupConstruct, i, 3);
-                }
-            }
-
-            if (ch === "<" || ch === "'") {
-                var closingCh = ch === "<" ? ">" : ch;
-                var nameChars = scope._matchUntil(pattern, i + 2, endIndex, closingCh);
-                if (nameChars.unmatchLength !== 1 || nameChars.matchLength === 0) {
-                    throw new System.ArgumentException("Unrecognized grouping construct.");
+                    return scope._createPatternToken(pattern, tokenTypes.groupConstructName, i, 2 + nameChars.matchLength + 1);
                 }
 
-                var nameFirstCh = nameChars.match.slice(0, 1);
-                if ("`~@#$%^&*()+{}[]|\\/|'\";:,.?".indexOf(nameFirstCh) >= 0) {
-                    // TODO: replace the "black list" of wrong characters with char class check:
-                    // According to UTS#18 Unicode Regular Expressions (http://www.unicode.org/reports/tr18/)
-                    // RL 1.4 Simple Word Boundaries  The class of <word_character> includes all Alphabetic
-                    // values from the Unicode character database, from UnicodeData.txt [UData], plus the U+200C
-                    // ZERO WIDTH NON-JOINER and U+200D ZERO WIDTH JOINER.
-                    throw new System.ArgumentException("Invalid group name: Group names must begin with a word character.");
+                var imnsxChars = scope._matchChars(pattern, i + 1, endIndex, "imnsx-");
+                if (imnsxChars.matchLength > 0 && (imnsxChars.unmatchCh === ":" || imnsxChars.unmatchCh === ")")) {
+                    var imnsxTokenType = imnsxChars.unmatchCh === ":" ? tokenTypes.groupConstructImnsx : tokenTypes.groupConstructImnsxMisc;
+                    var imnsxPostfixLen = imnsxChars.unmatchCh === ":" ? 1 : 0;
+                    return scope._createPatternToken(pattern, imnsxTokenType, i, 1 + imnsxChars.matchLength + imnsxPostfixLen);
                 }
 
-                return scope._createPatternToken(pattern, tokenTypes.groupConstructName, i, 2 + nameChars.matchLength + 1);
-            }
+                throw new System.ArgumentException("Unrecognized grouping construct.");
+            },
 
-            var imnsxChars = scope._matchChars(pattern, i + 1, endIndex, "imnsx-");
-            if (imnsxChars.matchLength > 0 && (imnsxChars.unmatchCh === ":" || imnsxChars.unmatchCh === ")")) {
-                var imnsxTokenType = imnsxChars.unmatchCh === ":" ? tokenTypes.groupConstructImnsx : tokenTypes.groupConstructImnsxMisc;
-                var imnsxPostfixLen = imnsxChars.unmatchCh === ":" ? 1 : 0;
-                return scope._createPatternToken(pattern, imnsxTokenType, i, 1 + imnsxChars.matchLength + imnsxPostfixLen);
-            }
+            _parseQuantifierToken: function (pattern, i, endIndex) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+                var tokenTypes = scope.tokenTypes;
+                var token = null;
 
-            throw new System.ArgumentException("Unrecognized grouping construct.");
-        },
+                var ch = pattern[i];
 
-        _parseQuantifierToken: function (pattern, i, endIndex) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var tokenTypes = scope.tokenTypes;
-            var token = null;
-
-            var ch = pattern[i];
-
-            if (ch === "*" || ch === "+" || ch === "?") {
-                token = scope._createPatternToken(pattern, tokenTypes.quantifier, i, 1);
-                token.data = { val: ch };
-            } else if (ch === "{") {
-                var dec1Chars = scope._matchChars(pattern, i + 1, endIndex, scope._decSymbols);
-                if (dec1Chars.matchLength !== 0) {
-                    if (dec1Chars.unmatchCh === "}") {
-                        token = scope._createPatternToken(pattern, tokenTypes.quantifierN, i, 1 + dec1Chars.matchLength + 1);
-                        token.data = {
-                            n: parseInt(dec1Chars.match, 10)
-                        };
-                    } else if (dec1Chars.unmatchCh === ",") {
-                        var dec2Chars = scope._matchChars(pattern, dec1Chars.unmatchIndex + 1, endIndex, scope._decSymbols);
-                        if (dec2Chars.unmatchCh === "}") {
-                            token = scope._createPatternToken(pattern, tokenTypes.quantifierNM, i, 1 + dec1Chars.matchLength + 1 + dec2Chars.matchLength + 1);
+                if (ch === "*" || ch === "+" || ch === "?") {
+                    token = scope._createPatternToken(pattern, tokenTypes.quantifier, i, 1);
+                    token.data = { val: ch };
+                } else if (ch === "{") {
+                    var dec1Chars = scope._matchChars(pattern, i + 1, endIndex, scope._decSymbols);
+                    if (dec1Chars.matchLength !== 0) {
+                        if (dec1Chars.unmatchCh === "}") {
+                            token = scope._createPatternToken(pattern, tokenTypes.quantifierN, i, 1 + dec1Chars.matchLength + 1);
                             token.data = {
-                                n: parseInt(dec1Chars.match, 10),
-                                m: null
+                                n: parseInt(dec1Chars.match, 10)
                             };
-                            if (dec2Chars.matchLength !== 0) {
-                                token.data.m = parseInt(dec2Chars.match, 10);
-                                if (token.data.n > token.data.m) {
-                                    throw new System.ArgumentException("Illegal {x,y} with x > y.");
+                        } else if (dec1Chars.unmatchCh === ",") {
+                            var dec2Chars = scope._matchChars(pattern, dec1Chars.unmatchIndex + 1, endIndex, scope._decSymbols);
+                            if (dec2Chars.unmatchCh === "}") {
+                                token = scope._createPatternToken(pattern, tokenTypes.quantifierNM, i, 1 + dec1Chars.matchLength + 1 + dec2Chars.matchLength + 1);
+                                token.data = {
+                                    n: parseInt(dec1Chars.match, 10),
+                                    m: null
+                                };
+                                if (dec2Chars.matchLength !== 0) {
+                                    token.data.m = parseInt(dec2Chars.match, 10);
+                                    if (token.data.n > token.data.m) {
+                                        throw new System.ArgumentException("Illegal {x,y} with x > y.");
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            if (token != null) {
-                var nextChIndex = i + token.length;
-                if (nextChIndex < endIndex) {
-                    var nextCh = pattern[nextChIndex];
-                    if (nextCh === "?") {
-                        this._modifyPatternToken(token, pattern, token.type, token.index, token.length + 1);
-                        token.data.isLazy = true;
-                    }
-                }
-            }
-
-            return token;
-        },
-
-        _parseAlternationToken: function (pattern, i) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var tokenTypes = scope.tokenTypes;
-
-            var ch = pattern[i];
-            if (ch !== "|") {
-                return null;
-            }
-
-            return scope._createPatternToken(pattern, tokenTypes.alternation, i, 1);
-        },
-
-        _parseAlternationGroupConditionToken: function (pattern, settings, i, endIndex) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var tokenTypes = scope.tokenTypes;
-            var constructToken;
-            var childToken;
-            var data = null;
-
-            var ch = pattern[i];
-            if (ch !== "?" || i + 1 >= endIndex || pattern[i + 1] !== "(") {
-                return null;
-            }
-
-            // Parse Alternation condition as a group:
-            var expr = scope._parseGroupToken(pattern, settings, i + 1, endIndex);
-            if (expr == null) {
-                return null;
-            }
-            if (expr.type === tokenTypes.commentInline) {
-                throw new System.ArgumentException("Alternation conditions cannot be comments.");
-            }
-
-            var children = expr.children;
-            if (children && children.length) {
-                constructToken = children[0];
-                if (constructToken.type === tokenTypes.groupConstructName) {
-                    throw new System.ArgumentException("Alternation conditions do not capture and cannot be named.");
-                }
-
-                if (constructToken.type === tokenTypes.groupConstruct || constructToken.type === tokenTypes.groupConstructImnsx) {
-                    childToken = scope._findFirstGroupWithoutConstructs(children);
-                    if (childToken != null) {
-                        childToken.isEmptyCapturing = true;
+                if (token != null) {
+                    var nextChIndex = i + token.length;
+                    if (nextChIndex < endIndex) {
+                        var nextCh = pattern[nextChIndex];
+                        if (nextCh === "?") {
+                            this._modifyPatternToken(token, pattern, token.type, token.index, token.length + 1);
+                            token.data.isLazy = true;
+                        }
                     }
                 }
 
-                if (constructToken.type === tokenTypes.literal) {
-                    var literalVal = expr.value.slice(1, expr.value.length - 1);
-                    var isDigit = literalVal[0] >= "0" && literalVal[0] <= "9";
-                    if (isDigit) {
-                        var res = scope._matchChars(literalVal, 0, literalVal.length, scope._decSymbols);
-                        if (res.matchLength !== literalVal.length) {
-                            throw new System.ArgumentException("Malformed Alternation group number: " + literalVal + ".");
+                return token;
+            },
+
+            _parseAlternationToken: function (pattern, i) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+                var tokenTypes = scope.tokenTypes;
+
+                var ch = pattern[i];
+                if (ch !== "|") {
+                    return null;
+                }
+
+                return scope._createPatternToken(pattern, tokenTypes.alternation, i, 1);
+            },
+
+            _parseAlternationGroupConditionToken: function (pattern, settings, i, endIndex) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+                var tokenTypes = scope.tokenTypes;
+                var constructToken;
+                var childToken;
+                var data = null;
+
+                var ch = pattern[i];
+                if (ch !== "?" || i + 1 >= endIndex || pattern[i + 1] !== "(") {
+                    return null;
+                }
+
+                // Parse Alternation condition as a group:
+                var expr = scope._parseGroupToken(pattern, settings, i + 1, endIndex);
+                if (expr == null) {
+                    return null;
+                }
+                if (expr.type === tokenTypes.commentInline) {
+                    throw new System.ArgumentException("Alternation conditions cannot be comments.");
+                }
+
+                var children = expr.children;
+                if (children && children.length) {
+                    constructToken = children[0];
+                    if (constructToken.type === tokenTypes.groupConstructName) {
+                        throw new System.ArgumentException("Alternation conditions do not capture and cannot be named.");
+                    }
+
+                    if (constructToken.type === tokenTypes.groupConstruct || constructToken.type === tokenTypes.groupConstructImnsx) {
+                        childToken = scope._findFirstGroupWithoutConstructs(children);
+                        if (childToken != null) {
+                            childToken.isEmptyCapturing = true;
+                        }
+                    }
+
+                    if (constructToken.type === tokenTypes.literal) {
+                        var literalVal = expr.value.slice(1, expr.value.length - 1);
+                        var isDigit = literalVal[0] >= "0" && literalVal[0] <= "9";
+                        if (isDigit) {
+                            var res = scope._matchChars(literalVal, 0, literalVal.length, scope._decSymbols);
+                            if (res.matchLength !== literalVal.length) {
+                                throw new System.ArgumentException("Malformed Alternation group number: " + literalVal + ".");
+                            }
+
+                            var number = parseInt(literalVal, 10);
+                            data = { number: number };
+                        } else {
+                            data = { name: literalVal };
+                        }
+                    }
+                }
+
+                // Add "Noncapturing" construct if there are no other ones.
+                if (!children.length || (children[0].type !== tokenTypes.groupConstruct && children[0].type !== tokenTypes.groupConstructImnsx)) {
+                    constructToken = scope._createPatternToken("?:", tokenTypes.groupConstruct, 0, 2);
+                    children.splice(0, 0, constructToken);
+                }
+
+                // Transform Group token to Alternation expression token:
+                var token = scope._createPatternToken(pattern, tokenTypes.alternationGroupCondition, expr.index - 1, 1 + expr.length, [expr], "?", "");
+                if (data != null) {
+                    token.data = data;
+                }
+                return token;
+            },
+
+            _findFirstGroupWithoutConstructs: function (tokens) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+                var tokenTypes = scope.tokenTypes;
+                var result = null;
+                var token;
+                var i;
+
+                for (i = 0; i < tokens.length; ++i) {
+                    token = tokens[i];
+                    if (token.type === tokenTypes.group && token.children && token.children.length) {
+                        if (token.children[0].type !== tokenTypes.groupConstruct && token.children[0].type !== tokenTypes.groupConstructImnsx) {
+                            result = token;
+                            break;
                         }
 
-                        var number = parseInt(literalVal, 10);
-                        data = { number: number };
-                    } else {
-                        data = { name: literalVal };
+                        if (token.children && token.children.length) {
+                            result = scope._findFirstGroupWithoutConstructs(token.children);
+                            if (result != null) {
+                                break;
+                            }
+                        }
                     }
                 }
-            }
 
-            // Add "Noncapturing" construct if there are no other ones.
-            if (!children.length || (children[0].type !== tokenTypes.groupConstruct && children[0].type !== tokenTypes.groupConstructImnsx)) {
-                constructToken = scope._createPatternToken("?:", tokenTypes.groupConstruct, 0, 2);
-                children.splice(0, 0, constructToken);
-            }
+                return result;
+            },
 
-            // Transform Group token to Alternation expression token:
-            var token = scope._createPatternToken(pattern, tokenTypes.alternationGroupCondition, expr.index - 1, 1 + expr.length, [expr], "?", "");
-            if (data != null) {
-                token.data = data;
-            }
-            return token;
-        },
+            _parseXModeCommentToken: function (pattern, i, endIndex) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+                var tokenTypes = scope.tokenTypes;
 
-        _findFirstGroupWithoutConstructs: function (tokens) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var tokenTypes = scope.tokenTypes;
-            var result = null;
-            var token;
-            var i;
+                var ch = pattern[i];
+                if (ch !== "#") {
+                    return null;
+                }
 
-            for (i = 0; i < tokens.length; ++i) {
-                token = tokens[i];
-                if (token.type === tokenTypes.group && token.children && token.children.length) {
-                    if (token.children[0].type !== tokenTypes.groupConstruct && token.children[0].type !== tokenTypes.groupConstructImnsx) {
-                        result = token;
+                var index = i + 1;
+                while (index < endIndex) {
+                    ch = pattern[index];
+                    ++index; // index should be changed before breaking
+
+                    if (ch === "\n") {
+                        break;
+                    }
+                }
+
+                return scope._createPatternToken(pattern, tokenTypes.commentXMode, i, index - i);
+            },
+
+            _createLiteralToken: function (body) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+                var token = scope._createPatternToken(body, scope.tokenTypes.literal, 0, body.length);
+                return token;
+            },
+
+            _createPositiveLookaheadToken: function (body, settings) {
+                var scope = System.Text.RegularExpressions.RegexEngineParser;
+
+                var pattern = "(?=" + body + ")";
+                var groupToken = scope._parseGroupToken(pattern, settings, 0, pattern.length);
+
+                return groupToken;
+            },
+
+            _createPatternToken: function (pattern, type, i, len, innerTokens, innerTokensPrefix, innerTokensPostfix) {
+                var token = {
+                    type: type,
+                    index: i,
+                    length: len,
+                    value: pattern.slice(i, i + len)
+                };
+
+                if (innerTokens != null && innerTokens.length > 0) {
+                    token.children = innerTokens;
+                    token.childrenPrefix = innerTokensPrefix;
+                    token.childrenPostfix = innerTokensPostfix;
+                }
+
+                return token;
+            },
+
+            _modifyPatternToken: function (token, pattern, type, i, len) {
+                if (type != null) {
+                    token.type = type;
+                }
+
+                if (i != null || len != null) {
+                    if (i != null) {
+                        token.index = i;
+                    }
+                    if (len != null) {
+                        token.length = len;
+                    }
+
+                    token.value = pattern.slice(token.index, token.index + token.length);
+                }
+            },
+
+            _updatePatternToken: function (token, type, i, len, value) {
+                token.type = type;
+                token.index = i;
+                token.length = len;
+                token.value = value;
+            },
+
+            _matchChars: function (str, startIndex, endIndex, allowedChars, maxLength) {
+                var res = {
+                    match: "",
+                    matchIndex: -1,
+                    matchLength: 0,
+                    unmatchCh: "",
+                    unmatchIndex: -1,
+                    unmatchLength: 0
+                };
+
+                var index = startIndex;
+                var ch;
+
+                if (maxLength != null && maxLength >= 0) {
+                    endIndex = startIndex + maxLength;
+                }
+
+                while (index < endIndex) {
+                    ch = str[index];
+
+                    if (allowedChars.indexOf(ch) < 0) {
+                        res.unmatchCh = ch;
+                        res.unmatchIndex = index;
+                        res.unmatchLength = 1;
                         break;
                     }
 
-                    if (token.children && token.children.length) {
-                        result = scope._findFirstGroupWithoutConstructs(token.children);
-                        if (result != null) {
-                            break;
-                        }
+                    index++;
+                }
+
+                if (index > startIndex) {
+                    res.match = str.slice(startIndex, index);
+                    res.matchIndex = startIndex;
+                    res.matchLength = index - startIndex;
+                }
+
+                return res;
+            },
+
+            _matchUntil: function (str, startIndex, endIndex, unallowedChars, maxLength) {
+                var res = {
+                    match: "",
+                    matchIndex: -1,
+                    matchLength: 0,
+                    unmatchCh: "",
+                    unmatchIndex: -1,
+                    unmatchLength: 0
+                };
+
+                var index = startIndex;
+                var ch;
+
+                if (maxLength != null && maxLength >= 0) {
+                    endIndex = startIndex + maxLength;
+                }
+
+                while (index < endIndex) {
+                    ch = str[index];
+
+                    if (unallowedChars.indexOf(ch) >= 0) {
+                        res.unmatchCh = ch;
+                        res.unmatchIndex = index;
+                        res.unmatchLength = 1;
+                        break;
                     }
-                }
-            }
 
-            return result;
-        },
-
-        _parseXModeCommentToken: function (pattern, i, endIndex) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var tokenTypes = scope.tokenTypes;
-
-            var ch = pattern[i];
-            if (ch !== "#") {
-                return null;
-            }
-
-            var index = i + 1;
-            while (index < endIndex) {
-                ch = pattern[index];
-                ++index; // index should be changed before breaking
-
-                if (ch === "\n") {
-                    break;
-                }
-            }
-
-            return scope._createPatternToken(pattern, tokenTypes.commentXMode, i, index - i);
-        },
-
-        _createLiteralToken: function (body) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-            var token = scope._createPatternToken(body, scope.tokenTypes.literal, 0, body.length);
-            return token;
-        },
-
-        _createPositiveLookaheadToken: function (body, settings) {
-            var scope = System.Text.RegularExpressions.RegexEngineParser;
-
-            var pattern = "(?=" + body + ")";
-            var groupToken = scope._parseGroupToken(pattern, settings, 0, pattern.length);
-
-            return groupToken;
-        },
-
-        _createPatternToken: function (pattern, type, i, len, innerTokens, innerTokensPrefix, innerTokensPostfix) {
-            var token = {
-                type: type,
-                index: i,
-                length: len,
-                value: pattern.slice(i, i + len)
-            };
-
-            if (innerTokens != null && innerTokens.length > 0) {
-                token.children = innerTokens;
-                token.childrenPrefix = innerTokensPrefix;
-                token.childrenPostfix = innerTokensPostfix;
-            }
-
-            return token;
-        },
-
-        _modifyPatternToken: function (token, pattern, type, i, len) {
-            if (type != null) {
-                token.type = type;
-            }
-
-            if (i != null || len != null) {
-                if (i != null) {
-                    token.index = i;
-                }
-                if (len != null) {
-                    token.length = len;
+                    index++;
                 }
 
-                token.value = pattern.slice(token.index, token.index + token.length);
-            }
-        },
-
-        _updatePatternToken: function (token, type, i, len, value) {
-            token.type = type;
-            token.index = i;
-            token.length = len;
-            token.value = value;
-        },
-
-        _matchChars: function (str, startIndex, endIndex, allowedChars, maxLength) {
-            var res = {
-                match: "",
-                matchIndex: -1,
-                matchLength: 0,
-                unmatchCh: "",
-                unmatchIndex: -1,
-                unmatchLength: 0
-            };
-
-            var index = startIndex;
-            var ch;
-
-            if (maxLength != null && maxLength >= 0) {
-                endIndex = startIndex + maxLength;
-            }
-
-            while (index < endIndex) {
-                ch = str[index];
-
-                if (allowedChars.indexOf(ch) < 0) {
-                    res.unmatchCh = ch;
-                    res.unmatchIndex = index;
-                    res.unmatchLength = 1;
-                    break;
+                if (index > startIndex) {
+                    res.match = str.slice(startIndex, index);
+                    res.matchIndex = startIndex;
+                    res.matchLength = index - startIndex;
                 }
 
-                index++;
+                return res;
             }
-
-            if (index > startIndex) {
-                res.match = str.slice(startIndex, index);
-                res.matchIndex = startIndex;
-                res.matchLength = index - startIndex;
-            }
-
-            return res;
-        },
-
-        _matchUntil: function (str, startIndex, endIndex, unallowedChars, maxLength) {
-            var res = {
-                match: "",
-                matchIndex: -1,
-                matchLength: 0,
-                unmatchCh: "",
-                unmatchIndex: -1,
-                unmatchLength: 0
-            };
-
-            var index = startIndex;
-            var ch;
-
-            if (maxLength != null && maxLength >= 0) {
-                endIndex = startIndex + maxLength;
-            }
-
-            while (index < endIndex) {
-                ch = str[index];
-
-                if (unallowedChars.indexOf(ch) >= 0) {
-                    res.unmatchCh = ch;
-                    res.unmatchIndex = index;
-                    res.unmatchLength = 1;
-                    break;
-                }
-
-                index++;
-            }
-
-            if (index > startIndex) {
-                res.match = str.slice(startIndex, index);
-                res.matchIndex = startIndex;
-                res.matchLength = index - startIndex;
-            }
-
-            return res;
         }
-    }
-});
+    });
 
-    // @source Console.js
+// @source @Console.js
 
     System.Console = {
         output: null,
@@ -22139,6 +22161,8 @@ Bridge.define("System.Text.RegularExpressions.RegexEngineParser", {
             console.log(obj);
         }
     };
+
+// @source @random.js
 
     Bridge.define('System.Random', {
         statics: {
@@ -22275,6 +22299,8 @@ Bridge.define("System.Text.RegularExpressions.RegexEngineParser", {
         }
     });
 
+// @source @timer.js
+
     Bridge.define('System.Threading.Timer', {
         inherits: [System.IDisposable],
         statics: {
@@ -22409,7 +22435,7 @@ Bridge.define("System.Text.RegularExpressions.RegexEngineParser", {
         }
     });
 
-    // @source End.js
+// @source @End.js
 
     // module export
     if (typeof define === "function" && define.amd) {
@@ -22419,5 +22445,7 @@ Bridge.define("System.Text.RegularExpressions.RegexEngineParser", {
         // Node
         module.exports = Bridge;
     }
+
+// @source @Finally.js
 
 })(this);

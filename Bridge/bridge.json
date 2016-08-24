@@ -20,6 +20,7 @@
         "name": "bridge.js",
         "header": "Resources/.auxiliary/Header.js",
         "extract": true,
+        "remark": "// @source @{name}\n",
         "files": [
           "Resources/.auxiliary/Init.js",
           "Resources/Core.js",

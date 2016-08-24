@@ -1,5 +1,4 @@
-﻿    // @source Guid.js
-    Bridge.define("System.Guid", {
+﻿    Bridge.define("System.Guid", {
         inherits: function () {
             return [System.IComparable$1(System.Guid), System.IEquatable$1(System.Guid), System.IFormattable];
         },
