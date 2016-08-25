@@ -146,7 +146,7 @@ namespace Bridge.Translator.Logging
             string wrappedMessage = string.Format(
                 "{0}\t{1}\t{2}\t{3}",
                 d,
-                loggerLevel,
+                logLevel,
                 this.Name,
                 message);
 
