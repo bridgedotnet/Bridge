@@ -420,6 +420,7 @@
                 QUnit.test("#1700 - TestULongAsIndex", Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1700.testULongAsIndex);
                 QUnit.test("#1700 - TestLongAsIndex", Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1700.testLongAsIndex);
                 QUnit.test("#1702 - TestFieldWithItemName", Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1702.testFieldWithItemName);
+                QUnit.test("#1704 - TestBaseMethodWithOptionalParams", Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1704.testBaseMethodWithOptionalParams);
                 QUnit.test("#381 - TestUseCase", Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge381.testUseCase);
                 QUnit.test("#447 - CheckInlineExpression", Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge447.checkInlineExpression);
                 QUnit.test("#447 - CheckInlineCalls", Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge447.checkInlineCalls);
@@ -2419,6 +2420,16 @@
             testFieldWithItemName: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1702).beforeTest(true, assert, Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1702, 3);
                 t.getFixture().testFieldWithItemName();
+            }
+        }
+    });
+
+    Bridge.define('Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1704', {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1704)],
+        statics: {
+            testBaseMethodWithOptionalParams: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1704).beforeTest(true, assert, Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1704);
+                t.getFixture().testBaseMethodWithOptionalParams();
             }
         }
     });

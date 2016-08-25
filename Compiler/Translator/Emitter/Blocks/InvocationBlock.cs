@@ -462,6 +462,11 @@ namespace Bridge.Translator
 
                 foreach (var arg in argsExpressions)
                 {
+                    if (arg == null)
+                    {
+                        continue;
+                    }
+
                     this.EnsureComma(false);
 
                     if (needComma)
