@@ -9,6 +9,11 @@ namespace Bridge.Contract
     {
         public string ConvertPath(string path)
         {
+            if (path == null)
+            {
+                return null;
+            }
+
             if (Path.DirectorySeparatorChar != '/')
             {
                 path = path.Replace('/', Path.DirectorySeparatorChar);

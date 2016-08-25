@@ -72,6 +72,11 @@ namespace Bridge.Contract
             get; set;
         }
 
+        public string Output
+        {
+            get; set;
+        }
+
         public string[] Files
         {
             get; set;

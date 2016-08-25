@@ -53,59 +53,31 @@ namespace Bridge.Translator.Utils
 
         public void ConvertConfigPaths(IAssemblyInfo assemblyInfo)
         {
-            if (!string.IsNullOrWhiteSpace(assemblyInfo.AfterBuild))
-            {
-                assemblyInfo.AfterBuild = helper.ConvertPath(assemblyInfo.AfterBuild);
-            }
-
-            if (!string.IsNullOrWhiteSpace(assemblyInfo.BeforeBuild))
-            {
-                assemblyInfo.BeforeBuild = helper.ConvertPath(assemblyInfo.BeforeBuild);
-            }
-
-            if (!string.IsNullOrWhiteSpace(assemblyInfo.Output))
-            {
-                assemblyInfo.Output = helper.ConvertPath(assemblyInfo.Output);
-            }
-
-            if (!string.IsNullOrWhiteSpace(assemblyInfo.PluginsPath))
-            {
-                assemblyInfo.PluginsPath = helper.ConvertPath(assemblyInfo.PluginsPath);
-            }
-
-            if (!string.IsNullOrWhiteSpace(assemblyInfo.LocalesOutput))
-            {
-                assemblyInfo.LocalesOutput = helper.ConvertPath(assemblyInfo.LocalesOutput);
-            }
-
-            if (!string.IsNullOrWhiteSpace(assemblyInfo.Logging.Folder))
-            {
-                assemblyInfo.Logging.Folder = helper.ConvertPath(assemblyInfo.Logging.Folder);
-            }
+            assemblyInfo.AfterBuild = helper.ConvertPath(assemblyInfo.AfterBuild);
+            assemblyInfo.BeforeBuild = helper.ConvertPath(assemblyInfo.BeforeBuild);
+            assemblyInfo.Output = helper.ConvertPath(assemblyInfo.Output);
+            assemblyInfo.PluginsPath = helper.ConvertPath(assemblyInfo.PluginsPath);
+            assemblyInfo.LocalesOutput = helper.ConvertPath(assemblyInfo.LocalesOutput);
+            assemblyInfo.Logging.Folder = helper.ConvertPath(assemblyInfo.Logging.Folder);
 
             if (assemblyInfo.Resources != null)
             {
                 foreach (var resourceConfigItem in assemblyInfo.Resources.Items)
                 {
-                    if (resourceConfigItem.Files != null)
+                    var files = resourceConfigItem.Files;
+
+                    if (files != null)
                     {
-                        foreach (var resourceItem in resourceConfigItem.Files)
+                        for (int i = 0; i < files.Length; i++)
                         {
-                            ConvertResourcePath(resourceItem);
+                            var resourceItem = files[i];
+                            files[i] = helper.ConvertPath(resourceItem);
                         }
                     }
+
+                    resourceConfigItem.Output = helper.ConvertPath(resourceConfigItem.Output);
                 }
             }
-        }
-
-        private void ConvertResourcePath(string resourceItem)
-        {
-            if (resourceItem == null)
-            {
-                return;
-            }
-
-            resourceItem = helper.ConvertPath(resourceItem);
         }
     }
 }

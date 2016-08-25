@@ -60,6 +60,8 @@ namespace Bridge.Translator
             var bridgeOptions = this.BridgeOptions;
             var translator = this.Translator;
 
+            logger.Info("Post processing...");
+
             var outputPath = GetOutputFolder();
 
             logger.Info("outputPath is " + outputPath);
@@ -80,7 +82,7 @@ namespace Bridge.Translator
 
             translator.Plugins.AfterOutput(translator, outputPath, !bridgeOptions.ExtractCore);
 
-            logger.Info("Done translating Bridge files.");
+            logger.Info("Done post processing");
 
             return outputPath;
         }
@@ -88,7 +90,6 @@ namespace Bridge.Translator
         private string GetOutputFolder(bool basePathOnly = false, bool strict = false)
         {
             var bridgeOptions = this.BridgeOptions;
-
             string basePath = bridgeOptions.IsFolderMode ? bridgeOptions.Folder : Path.GetDirectoryName(bridgeOptions.ProjectLocation);
 
             if (basePathOnly)
