@@ -140,6 +140,11 @@ namespace Bridge.Translator
 
             if (expression is NullReferenceExpression || (method != CS.Ops.IS && Helpers.IsIgnoreCast(type, this.Emitter)))
             {
+                if (expression is ParenthesizedExpression)
+                {
+                    expression = ((ParenthesizedExpression) expression).Expression;
+                }
+                
                 expression.AcceptVisitor(this.Emitter);
                 return;
             }

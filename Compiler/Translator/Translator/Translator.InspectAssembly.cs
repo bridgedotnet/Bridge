@@ -271,7 +271,7 @@ namespace Bridge.Translator
                     var syntaxTree = parser.Parse(rewriter.Rewrite(i), fileName);
                     //var syntaxTree = parser.Parse(reader, fileName);
                     this.Log.Trace("\tParsing syntax tree done");
-
+                    
                     if (parser.HasErrors)
                     {
                         foreach (var error in parser.Errors)

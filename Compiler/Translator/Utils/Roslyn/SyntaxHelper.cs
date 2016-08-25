@@ -180,6 +180,11 @@ namespace Bridge.Translator
             return SyntaxFactory.ParseTypeName(name);
         }
 
+        public static TypeSyntax GenerateTypeSyntax(ITypeSymbol type)
+        {
+            return SyntaxFactory.IdentifierName(type.ToDisplayString()).WithoutTrivia();
+        }
+
         /// <summary>
         /// Generates the name of the generic.
         /// </summary>
@@ -188,6 +193,11 @@ namespace Bridge.Translator
             return SyntaxFactory.GenericName(SyntaxFactory.Identifier(name),
                 SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList(types.Select(GenerateTypeSyntax)))
             );
+        }
+
+        public static GenericNameSyntax GenerateGenericName(SyntaxToken name, IEnumerable<ITypeSymbol> types)
+        {
+            return SyntaxFactory.GenericName(name, SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList(types.Select(GenerateTypeSyntax))));
         }
 
         /// <summary>
