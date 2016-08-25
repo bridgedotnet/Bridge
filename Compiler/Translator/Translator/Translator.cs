@@ -308,11 +308,7 @@ namespace Bridge.Translator
                 }
             }
 
-            if (this.AssemblyInfo.InjectScriptToAssembly)
-            {
-                logger.Trace("Injecting resources");
-                this.InjectResources(path, files);
-            }
+            this.InjectResources(path, files);
 
             if (!string.IsNullOrWhiteSpace(this.AssemblyInfo.AfterBuild))
             {

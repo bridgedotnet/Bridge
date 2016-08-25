@@ -10,18 +10,44 @@ namespace Bridge.Translator
 {
     public partial class Translator
     {
+        private Dictionary<string, string> resourceHeaderInfo;
+        private Dictionary<string, string> ResourceHeaderInfo
+        {
+            get
+            {
+                if (resourceHeaderInfo == null)
+                {
+                    resourceHeaderInfo = PrepareResourseHeaderInfo();
+                }
+
+                return resourceHeaderInfo;
+            }
+        }
+
         protected virtual void InjectResources(string outputPath, Dictionary<string, string> files)
         {
+            this.Log.Trace("Injecting resources...");
+
             this.PrepareResourcesConfig();
 
-            if ((files == null || files.Count == 0)
-                && !this.AssemblyInfo.Resources.HasResources())
+            var resourcesConfig = this.AssemblyInfo.Resources;
+
+            if (resourcesConfig.Default != null
+                && resourcesConfig.Default.Inject != true)
             {
-                this.Log.Trace("No files nor resources to inject");
+                this.Log.Info("Resource config option to inject resources `inject` is switched off. Skipping embedding resources");
+                return;
+            }
+
+            if ((files == null || files.Count == 0)
+                && !resourcesConfig.HasResources())
+            {
+                this.Log.Info("No files nor resources to inject");
                 return;
             }
 
             var resourceBasePath = Path.GetDirectoryName(this.Location);
+
             var resourcesToEmbed = this.PrepareResources(outputPath, resourceBasePath, files);
 
             var assemblyDef = this.AssemblyDefinition;
@@ -87,6 +113,12 @@ namespace Bridge.Translator
                 foreach (var resource in this.AssemblyInfo.Resources.Items)
                 {
                     this.Log.Trace("Preparing resource " + resource.Name);
+
+                    if (resource.Inject != true && resource.Extract != true)
+                    {
+                        this.Log.Trace("Skipping the resource as it has inject != true and extract != true");
+                        continue;
+                    }
 
                     var resourceBuffer = new StringBuilder();
 
@@ -169,7 +201,7 @@ namespace Bridge.Translator
 
             this.Log.Trace("Writing header for resource config item " + resource.Name);
 
-            var headerInfo = PrepareResourseHeaderInfo(resource);
+            var headerInfo = ResourceHeaderInfo;
 
             var headerContent = GetHeaderContent(resource, basePath);
 
@@ -189,7 +221,7 @@ namespace Bridge.Translator
             this.Log.Trace("Done writing header for resource config item " + resource.Name);
         }
 
-        private Dictionary<string, string> PrepareResourseHeaderInfo(ResourceConfigItem resource)
+        private Dictionary<string, string> PrepareResourseHeaderInfo()
         {
             var assemblyInfo = this.GetCurrentAssemblyVersion();
 
@@ -203,7 +235,7 @@ namespace Bridge.Translator
 
             if (assemblyInfo == null)
             {
-                this.Log.Error("Could not get assembly version to generate header for resourse " + resource.Name);
+                this.Log.Error("Could not get assembly version to generate resource header info");
             }
             else
             {
@@ -444,6 +476,11 @@ namespace Bridge.Translator
             if (!current.Extract.HasValue)
             {
                 current.Extract = defaultSetting.Extract;
+            }
+
+            if (!current.Inject.HasValue)
+            {
+                current.Inject = defaultSetting.Inject;
             }
 
             if (current.Files == null)

@@ -111,11 +111,6 @@ namespace Bridge.Contract
             get; set;
         }
 
-        bool InjectScriptToAssembly
-        {
-            get; set;
-        }
-
         string Locales
         {
             get; set;

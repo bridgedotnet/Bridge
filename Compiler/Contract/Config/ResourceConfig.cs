@@ -49,6 +49,7 @@ namespace Bridge.Contract
     {
         public ResourceConfigItem()
         {
+            this.Inject = true;
         }
 
         public string Header
@@ -57,6 +58,11 @@ namespace Bridge.Contract
         }
 
         public bool? Extract
+        {
+            get; set;
+        }
+
+        public bool? Inject
         {
             get; set;
         }
@@ -88,9 +94,40 @@ namespace Bridge.Contract
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            var resourceConfig = new ResourceConfig();
+            var resourceConfig = existingValue as ResourceConfig;
 
-            resourceConfig.Items = serializer.Deserialize<ResourceConfigItem[]>(reader);
+            ResourceConfigItem[] items = null;
+
+            var failed = false;
+
+            try
+            {
+                // Check if the resource setting format used is "resources": true/false
+                // This case has low possibility
+                // but to have a more meaningful exception details for the second case (below)
+                // it is done at first
+                var inject = serializer.Deserialize<bool>(reader);
+
+                items = new ResourceConfigItem[]
+                {
+                    new ResourceConfigItem()
+                    {
+                        Inject = inject
+                    }
+                };
+            }
+            catch (JsonSerializationException)
+            {
+                failed = true;
+            }
+
+            if (failed)
+            {
+                // Check if the resource setting format used is "resources": [ {} ]
+                items = serializer.Deserialize<ResourceConfigItem[]>(reader);
+            }
+
+            resourceConfig.Items = items;
 
             return resourceConfig;
 
@@ -98,7 +135,7 @@ namespace Bridge.Contract
 
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(ResourceConfigItem[]);
+            return objectType == typeof(ResourceConfigItem[]) || objectType == typeof(bool);
         }
     }
 }
