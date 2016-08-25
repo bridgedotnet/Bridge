@@ -24,40 +24,39 @@ namespace Bridge.Translator
             }
         }
 
-        protected virtual void InjectResources(string outputPath, Dictionary<string, string> files)
+        public virtual void InjectResources(string outputPath, string projectPath, Dictionary<string, string> files)
         {
-            this.Log.Trace("Injecting resources...");
-
-            this.PrepareResourcesConfig();
+            this.Log.Info("Injecting resources...");
 
             var resourcesConfig = this.AssemblyInfo.Resources;
 
             if (resourcesConfig.Default != null
-                && resourcesConfig.Default.Inject != true)
+                && resourcesConfig.Default.Inject != true
+                && !resourcesConfig.HasEmbedResources())
             {
                 this.Log.Info("Resource config option to inject resources `inject` is switched off. Skipping embedding resources");
                 return;
             }
 
             if ((files == null || files.Count == 0)
-                && !resourcesConfig.HasResources())
+                && !resourcesConfig.HasEmbedResources())
             {
                 this.Log.Info("No files nor resources to inject");
                 return;
             }
 
-            var projectPath = Path.GetDirectoryName(this.Location);
-
             var resourcesToEmbed = this.PrepareAndExtractResources(outputPath, projectPath, files);
 
             this.EmbeddResources(resourcesToEmbed);
+
+            this.Log.Info("Done injecting resources");
         }
 
         private Dictionary<string, byte[]> PrepareAndExtractResources(string outputPath, string projectPath, Dictionary<string, string> files)
         {
             var resourcesToEmbed = new Dictionary<string, byte[]>();
 
-            if (this.AssemblyInfo.Resources.HasResources())
+            if (this.AssemblyInfo.Resources.HasEmbedResources())
             {
                 // There are resources defined in the config so let's grab files
                 // Find all items and put in the order
@@ -65,7 +64,7 @@ namespace Bridge.Translator
 
                 var resourceItems = new Dictionary<string, string>();
 
-                foreach (var resource in this.AssemblyInfo.Resources.Items)
+                foreach (var resource in this.AssemblyInfo.Resources.EmbedItems)
                 {
                     this.Log.Trace("Preparing resource " + resource.Name);
 
@@ -256,7 +255,7 @@ namespace Bridge.Translator
             }
         }
 
-        private void GetResourceOutputPath(string projectPath, ResourceConfigItem resource, ref string resourceOutputFileName, ref string resourceOutputDirName)
+        public void GetResourceOutputPath(string projectPath, ResourceConfigItem resource, ref string resourceOutputFileName, ref string resourceOutputDirName)
         {
             this.Log.Trace("Checking output path setting " + resource.Output);
 
@@ -265,35 +264,84 @@ namespace Bridge.Translator
                 var pathParts = this.GetPathComponents(resource.Output);
 
                 resourceOutputDirName = pathParts[0];
-                resourceOutputFileName = pathParts[1];
-
                 this.Log.Trace("Resource output setting directory relative to project root is " + resourceOutputDirName);
+
+                resourceOutputFileName = pathParts[1];
                 this.Log.Trace("Resource output setting file name is " + resourceOutputFileName);
+
+                if (resourceOutputDirName != null)
+                {
+                    this.Log.Trace("Checking resource output directory on invalid characters");
+                    resourceOutputDirName = CheckInvalidCharacters(resource, resourceOutputDirName, this.InvalidPathChars);
+                }
+
+                if (resourceOutputDirName != null)
+                {
+                    this.Log.Trace("Getting absolute resource output directory");
+                    resourceOutputDirName = Path.Combine(projectPath, resourceOutputDirName);
+                    this.Log.Trace("Resource output directory is " + resourceOutputDirName);
+
+                    if (resourceOutputFileName != null)
+                    {
+                        this.Log.Trace("Checking resource output file name on invalid characters");
+                        resourceOutputFileName = CheckInvalidCharacters(resource, resourceOutputFileName, Path.GetInvalidFileNameChars());
+
+                        if (resourceOutputFileName == null)
+                        {
+                            this.Log.Trace("Setting resource output directory to null as file name part contains invalid characters");
+                            resourceOutputDirName = null;
+                        }
+                    }
+                }
+                else
+                {
+                    this.Log.Trace("Setting resource output file name to null as directory part contains invalid characters");
+                    resourceOutputFileName = null;
+                }
+
+
             }
             catch (Exception ex) when (ex is ArgumentException || ex is ArgumentNullException || ex is PathTooLongException)
             {
                 this.Log.Trace("Could not extract directory name from resource output setting");
                 this.Log.Error(ex.ToString());
 
+                if (resource.Silent != true)
+                {
+                    throw;
+                }
+
                 resourceOutputDirName = null;
                 resourceOutputFileName = null;
             }
+        }
 
-            if (resourceOutputDirName != null)
+        private string CheckInvalidCharacters(ResourceConfigItem resource, string s, ICollection<char> invalidChars)
+        {
+            if (s == null)
             {
-                try
-                {
-                    resourceOutputDirName = Path.Combine(projectPath, resourceOutputDirName);
-                    this.Log.Trace("Resource output directory is " + resourceOutputDirName);
-                }
-                catch (Exception ex) when (ex is ArgumentException || ex is ArgumentNullException)
-                {
-                    this.Log.Trace("Could not combine output directory and project root");
-                    this.Log.Error(ex.ToString());
+                return null;
+            }
 
-                    resourceOutputDirName = null;
+            if (s.Select(x => invalidChars.Contains(x)).Where(x => x).Any())
+            {
+                var message = "There is invalid path character contained in resource.output setting = "
+                        + s
+                        + " for resource "
+                        + resource.Name;
+
+                if (resource.Silent != true)
+                {
+                    throw new ArgumentException(message);
+                }
+                else
+                {
+                    this.Log.Trace(message);
+                    s = null;
                 }
             }
+
+            return s;
         }
 
         private void GenerateResourseHeader(StringBuilder resourceBuffer, ResourceConfigItem resource, string basePath)
@@ -529,7 +577,7 @@ namespace Bridge.Translator
             }
         }
 
-        private void PrepareResourcesConfig()
+        public void PrepareResourcesConfig()
         {
             this.Log.Trace("Preparing resources config...");
 
@@ -542,6 +590,20 @@ namespace Bridge.Translator
 
             if (rawResources != null)
             {
+                Array.ForEach(rawResources, (x) =>
+                {
+                    if (x.Name != null)
+                    {
+                        var parts = x.Name.Split(new[] { '#' }, StringSplitOptions.None);
+
+                        if (parts.Length > 1)
+                        {
+                            x.Assembly = parts[0];
+                            x.Name = parts[1];
+                        }
+                    }
+                });
+
                 var defaultResources = rawResources.Where(x => x.Name == null);
 
                 if (defaultResources.Count() > 1)
@@ -554,6 +616,8 @@ namespace Bridge.Translator
                 if (defaultSetting != null)
                 {
                     this.Log.Trace("The resources config section has a default settings");
+
+                    defaultSetting.SetDefaulValues();
 
                     var rawNonDefaultResources = rawResources.Where(x => x.Name != null);
 
@@ -568,13 +632,17 @@ namespace Bridge.Translator
                 }
                 else
                 {
+                    Array.ForEach(rawResources, x => x.SetDefaulValues());
                     resources.AddRange(rawResources);
                 }
 
                 this.Log.Trace("The resources config section has " + resources.Count + " non-default settings");
             }
 
-            config.PrepareDefault(defaultSetting, resources.ToArray());
+            var toEmbed = resources.Where(x => x.Files != null && x.Files.Count() > 0).ToArray();
+            var toExtract = resources.Where(x => x.Files == null || x.Files.Count() <= 0).ToArray();
+
+            config.Prepare(defaultSetting, toEmbed, toExtract);
             this.Log.Trace("Done preparing resources config");
 
             return;

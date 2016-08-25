@@ -68,19 +68,33 @@ namespace Bridge.Translator
 
             translator.CleanOutputFolderIfRequired(outputPath);
 
+            translator.PrepareResourcesConfig();
+
+            var projectPath = Path.GetDirectoryName(translator.Location);
+            logger.Info("projectPath is " + projectPath);
+
             if (bridgeOptions.ExtractCore)
             {
-                logger.Info("Extracting core scripts...");
-                translator.ExtractCore(outputPath);
+                translator.ExtractCore(outputPath, projectPath);
+            }
+            else
+            {
+                logger.Info("No extracting core scripts option enabled");
             }
 
             var fileName = bridgeOptions.DefaultFileName;
 
-            logger.Info("Saving to " + outputPath);
-            translator.SaveTo(outputPath, fileName);
+            var files = translator.SaveTo(outputPath, fileName);
+
+            translator.InjectResources(outputPath, projectPath, files);
+
+            translator.RunAfterBuild();
+
             translator.Flush(outputPath, fileName);
 
+            logger.Info("Run plugins AfterOutput...");
             translator.Plugins.AfterOutput(translator, outputPath, !bridgeOptions.ExtractCore);
+            logger.Info("Done plugins AfterOutput");
 
             logger.Info("Done post processing");
 

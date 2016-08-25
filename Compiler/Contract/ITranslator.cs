@@ -64,7 +64,7 @@ namespace Bridge.Contract
             set;
         }
 
-        void SaveTo(string path, string defaultFileName);
+        Dictionary<string, string> SaveTo(string path, string defaultFileName);
 
         System.Collections.Generic.IList<string> SourceFiles
         {

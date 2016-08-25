@@ -16,9 +16,14 @@ namespace Bridge.Contract
             get; set;
         }
 
-        public bool HasResources()
+        public bool HasExtractResources()
         {
-            return this.Items != null && this.Items.Length > 0;
+            return this.ExtractItems!= null && this.ExtractItems.Length > 0;
+        }
+
+        public bool HasEmbedResources()
+        {
+            return this.EmbedItems != null && this.EmbedItems.Length > 0;
         }
 
         public bool IsPrepared { get; private set; }
@@ -30,17 +35,46 @@ namespace Bridge.Contract
             {
                 if (!IsPrepared)
                 {
-                    throw new InvalidOperationException("Accessing Default before calling PrepareDefault");
+                    throw new InvalidOperationException("Accessing Default before calling Prepare");
                 }
 
                 return @default;
             }
         }
 
-        public void PrepareDefault(ResourceConfigItem @default, ResourceConfigItem[] adjustedItems)
+        private ResourceConfigItem[] embedItems;
+        public ResourceConfigItem[] EmbedItems
+        {
+            get
+            {
+                if (!IsPrepared)
+                {
+                    throw new InvalidOperationException("Accessing EmbedItems before calling Prepare");
+                }
+
+                return embedItems;
+            }
+        }
+
+        private ResourceConfigItem[] extractItems;
+        public ResourceConfigItem[] ExtractItems
+        {
+            get
+            {
+                if (!IsPrepared)
+                {
+                    throw new InvalidOperationException("Accessing ExtractItems before calling Prepare");
+                }
+
+                return extractItems;
+            }
+        }
+
+        public void Prepare(ResourceConfigItem @default, ResourceConfigItem[] embedItems, ResourceConfigItem[] extractItems)
         {
             this.@default = @default;
-            this.Items = adjustedItems;
+            this.extractItems = extractItems;
+            this.embedItems = embedItems;
             this.IsPrepared = true;
         }
     }
@@ -49,8 +83,24 @@ namespace Bridge.Contract
     {
         public ResourceConfigItem()
         {
-            this.Inject = true;
-            this.Extract = true;
+        }
+
+        public void SetDefaulValues()
+        {
+            if (!this.Extract.HasValue)
+            {
+                this.Extract = true;
+            }
+
+            if (!this.Inject.HasValue)
+            {
+                this.Inject = true;
+            }
+
+            if (!this.Silent.HasValue)
+            {
+                this.Silent = true;
+            }
         }
 
         public string Header
@@ -68,7 +118,17 @@ namespace Bridge.Contract
             get; set;
         }
 
+        public bool? Silent
+        {
+            get; set;
+        }
+
         public string Name
+        {
+            get; set;
+        }
+
+        public string Assembly
         {
             get; set;
         }
