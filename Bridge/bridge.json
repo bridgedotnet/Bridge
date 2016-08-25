@@ -18,7 +18,6 @@
       // File paths relative to project root
       "name": "bridge.js",
       "header": "Resources/.auxiliary/Header.js",
-      "extract": true,
       "remark": "// @source @{name}\n",
       "files": [
         "Resources/.auxiliary/Init.js",
@@ -95,6 +94,7 @@
     {
       "name": "bridge.d.ts",
       "header": "Resources/.typescript/header.d.ts",
+      "extract": false,
       "files": [
         "Resources/.typescript/bridge.d.ts"
       ]

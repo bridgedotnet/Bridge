@@ -50,6 +50,7 @@ namespace Bridge.Contract
         public ResourceConfigItem()
         {
             this.Inject = true;
+            this.Extract = true;
         }
 
         public string Header
