@@ -3,5 +3,12 @@
   "cleanOutputFolderBeforeBuild": true,
   "outputFormatting": "Formatted",
   "fileName": "code.js",
-  "outputBy": "Project"
+  "outputBy": "Project",
+
+  "resources": [
+    {
+      "name": "bridge.js",
+      "extract": false
+    }
+  ],
 }

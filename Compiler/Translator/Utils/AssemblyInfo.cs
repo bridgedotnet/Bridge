@@ -11,10 +11,11 @@ namespace Bridge.Translator
         public AssemblyInfo()
         {
             this.Dependencies = new List<IPluginDependency>();
-            this.InjectScriptToAssembly = true;
             this.Logging = new LoggingOptions();
             this.Reflection = new ReflectionConfig();
             this.ReflectionInternal = new ReflectionConfig();
+            this.Assembly = new AssemblyConfig();
+            this.Resources = new ResourceConfig();
         }
 
         /// <summary>
@@ -23,8 +24,7 @@ namespace Bridge.Translator
         /// </summary>
         public bool PreserveMemberCase
         {
-            get;
-            set;
+            get; set;
         }
 
         /// <summary>
@@ -34,8 +34,7 @@ namespace Bridge.Translator
         /// </summary>
         public string FileName
         {
-            get;
-            set;
+            get; set;
         }
 
         /// <summary>
@@ -44,8 +43,7 @@ namespace Bridge.Translator
         /// </summary>
         public string Output
         {
-            get;
-            set;
+            get; set;
         }
 
         private OutputBy outputBy = OutputBy.Namespace;
@@ -112,8 +110,7 @@ namespace Bridge.Translator
         /// </summary>
         public int StartIndexInName
         {
-            get;
-            set;
+            get; set;
         }
 
         /// <summary>
@@ -122,8 +119,7 @@ namespace Bridge.Translator
         /// </summary>
         public string Module
         {
-            get;
-            set;
+            get; set;
         }
 
         /// <summary>
@@ -131,8 +127,7 @@ namespace Bridge.Translator
         /// </summary>
         public List<IPluginDependency> Dependencies
         {
-            get;
-            set;
+            get; set;
         }
 
         /// <summary>
@@ -141,8 +136,7 @@ namespace Bridge.Translator
         /// </summary>
         public string BeforeBuild
         {
-            get;
-            set;
+            get; set;
         }
 
         /// <summary>
@@ -151,26 +145,22 @@ namespace Bridge.Translator
         /// </summary>
         public string AfterBuild
         {
-            get;
-            set;
+            get; set;
         }
 
         public bool AutoPropertyToField
         {
-            get;
-            set;
+            get; set;
         }
 
         public string PluginsPath
         {
-            get;
-            set;
+            get; set;
         }
 
         public bool GenerateTypeScript
         {
-            get;
-            set;
+            get; set;
         }
 
         private Bridge.Contract.DocumentationMode generateDocumentation = Bridge.Contract.DocumentationMode.Basic;
@@ -193,8 +183,7 @@ namespace Bridge.Translator
         /// </summary>
         public string BuildArguments
         {
-            get;
-            set;
+            get; set;
         }
 
         /// <summary>
@@ -203,8 +192,7 @@ namespace Bridge.Translator
         /// </summary>
         public bool CleanOutputFolderBeforeBuild
         {
-            get;
-            set;
+            get; set;
         }
 
         /// <summary>
@@ -212,92 +200,72 @@ namespace Bridge.Translator
         /// </summary>
         public string CleanOutputFolderBeforeBuildPattern
         {
-            get;
-            set;
+            get; set;
         }
 
         public string Configuration
         {
-            get;
-            set;
+            get; set;
         }
 
         public List<string> DefineConstants
         {
-            get;
-            set;
-        }
-
-        public bool InjectScriptToAssembly
-        {
-            get;
-            set;
+            get; set;
         }
 
         public string Locales
         {
-            get;
-            set;
+            get; set;
         }
 
         public string LocalesOutput
         {
-            get;
-            set;
+            get; set;
         }
 
         public string LocalesFileName
         {
-            get;
-            set;
+            get; set;
         }
 
         public bool CombineLocales
         {
-            get;
-            set;
+            get; set;
         }
 
         public bool CombineScripts
         {
-            get;
-            set;
+            get; set;
         }
 
         public bool UseTypedArrays
         {
-            get;
-            set;
+            get; set;
         }
 
         public bool IgnoreCast
         {
-            get;
-            set;
+            get; set;
         }
 
         public LoggingOptions Logging
         {
-            get;
-            set;
+            get; set;
         }
 
         public OverflowMode? OverflowMode
         {
-            get;
-            set;
+            get; set;
         }
 
         public bool? NoLoggerTimeStamps
         {
-            get;
-            set;
+            get; set;
         }
 
         public bool StrictNullChecks
         {
-            get;
-            set;
+            get; set;
         }
 
         public IReflectionConfig Reflection
@@ -306,6 +274,16 @@ namespace Bridge.Translator
         }
 
         internal IReflectionConfig ReflectionInternal
+        {
+            get; set;
+        }
+
+        public AssemblyConfig Assembly
+        {
+            get; set;
+        }
+
+        public ResourceConfig Resources
         {
             get; set;
         }

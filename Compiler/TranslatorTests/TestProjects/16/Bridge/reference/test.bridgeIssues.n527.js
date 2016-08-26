@@ -12,7 +12,7 @@
         });
         return exports;
     });
-    
+
     define("Bridge527_B", ["bridge"], function (_) {
         var exports = { };
         Bridge.define('Test.BridgeIssues.N527.Bridge527_B', {
@@ -20,8 +20,7 @@
         });
         return exports;
     });
-    
-    
-    
+
+
     Bridge.init();
 });

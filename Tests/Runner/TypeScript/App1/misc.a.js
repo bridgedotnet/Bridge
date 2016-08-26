@@ -6,13 +6,13 @@
             return i;
         }
     });
-    
+
     Bridge.define('Misc.A.EnumTest', {
         doSomething: function (m) {
             return m;
         }
     });
-    
+
     Bridge.define('Misc.A.EnumTest.EnumA', {
         $kind: "enum",
         statics: {
@@ -20,8 +20,6 @@
             M2: 1
         }
     });
-    
-    
-    
+
     Bridge.init();
 });

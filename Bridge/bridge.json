@@ -1,0 +1,103 @@
+﻿{
+  "output": "Resources/.generated",
+  "cleanOutputFolderBeforeBuild": true,
+  "outputFormatting": "Formatted",
+  "outputBy": "ClassPath",
+  "generateDocumentation": "None",
+  "logging": {
+    "level": "None"
+  },
+  "assembly": {
+    "disableInitAssembly": true,
+    "enableReservedNamespaces": true
+    //fullName: ""
+  },
+
+  "resources": [
+    {
+      // File paths relative to project root
+      "name": "bridge.js",
+      "header": "Resources/.auxiliary/Header.js",
+      "remark": "// @source @{name}\n",
+      "files": [
+        "Resources/.auxiliary/Init.js",
+        "Resources/Core.js",
+        "Resources/Nullable.js",
+        "Resources/String.js",
+        "Resources/Enum.js",
+        "Resources/Browser.js",
+        "Resources/Class.js",
+        "Resources/Reflection.js",
+        "Resources/Interfaces.js",
+        "Resources/Char.js",
+        "Resources/.generated/system/formattableString.js",
+        "Resources/.generated/system/formattableStringImpl.js",
+        "Resources/.generated/system/runtime/compilerServices/formattableStringFactory.js",
+        "Resources/Exception.js",
+        "Resources/Globalization.js",
+        "Resources/Math.js",
+        "Resources/Bool.js",
+        "Resources/Integer.js",
+        "Resources/Long.js",
+        "Resources/Decimal.js",
+        "Resources/Date.js",
+        "Resources/TimeSpan.js",
+        "Resources/Text/StringBuilder.js",
+        "Resources/Text/BridgeRegex.js",
+        "Resources/Diagnostics.js",
+        "Resources/Array.js",
+        "Resources/ArraySegment.js",
+        "Resources/Collections/Interfaces.js",
+        "Resources/Collections/CustomEnumerator.js",
+        "Resources/Collections/ArrayEnumerator.js",
+        "Resources/Collections/EqualityComparer.js",
+        "Resources/Collections/Comparer.js",
+        "Resources/Collections/Dictionary.js",
+        "Resources/Collections/List.js",
+        "Resources/Task.js",
+        "Resources/Validation.js",
+        "Resources/.generated/system/version.js",
+        "Resources/.generated/system/version/parseFailureKind.js",
+        "Resources/.generated/system/version/versionResult.js",
+        "Resources/Attribute.js",
+        "Resources/INotifyPropertyChanged.js",
+        "Resources/Convert.js",
+        "Resources/ClientWebSocket.js",
+        "Resources/Uri.js",
+        "Resources/linq.js",
+        "Resources/Guid.js",
+        "Resources/Text/RegularExpressions/Regex.js",
+        "Resources/Text/RegularExpressions/RegexCapture.js",
+        "Resources/Text/RegularExpressions/RegexCaptureCollection.js",
+        "Resources/Text/RegularExpressions/RegexGroup.js",
+        "Resources/Text/RegularExpressions/RegexGroupCollection.js",
+        "Resources/Text/RegularExpressions/RegexMatch.js",
+        "Resources/Text/RegularExpressions/RegexMatchCollection.js",
+        "Resources/Text/RegularExpressions/RegexOptions.js",
+        "Resources/Text/RegularExpressions/RegexRunner.js",
+        "Resources/Text/RegularExpressions/RegexParser.js",
+        "Resources/Text/RegularExpressions/RegexNode.js",
+        "Resources/Text/RegularExpressions/RegexReplacement.js",
+        "Resources/Text/RegularExpressions/RegexEngine.js",
+        "Resources/Text/RegularExpressions/RegexEngineBranch.js",
+        "Resources/Text/RegularExpressions/RegexEngineState.js",
+        "Resources/Text/RegularExpressions/RegexEnginePass.js",
+        "Resources/Text/RegularExpressions/RegexEngineProbe.js",
+        "Resources/Text/RegularExpressions/RegexEngineParser.js",
+        "Resources/Console.js",
+        "Resources/.generated/system/random.js",
+        "Resources/.generated/system/threading/timer.js",
+        "Resources/.auxiliary/End.js",
+        "Resources/.auxiliary/Finally.js"
+      ]
+    },
+    {
+      "name": "bridge.d.ts",
+      "header": "Resources/.typescript/header.d.ts",
+      "extract": false,
+      "files": [
+        "Resources/.typescript/bridge.d.ts"
+      ]
+    }
+  ]
+}

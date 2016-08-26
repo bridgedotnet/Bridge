@@ -45,6 +45,11 @@ namespace Bridge.Translator
 
         protected override void DoEmit()
         {
+            if (this.Emitter.Output.Length > 0)
+            {
+                this.WriteNewLine();
+            }
+
             XmlToJsDoc.EmitComment(this, this.Emitter.Translator.EmitNode);
             string globalTarget = BridgeTypes.GetGlobalTarget(this.TypeInfo.Type.GetDefinition(), this.TypeInfo.TypeDeclaration);
 
@@ -71,7 +76,6 @@ namespace Bridge.Translator
 
                 this.WriteAfterInitMethods();
 
-                this.WriteNewLine();
                 this.WriteNewLine();
             }
             else
@@ -379,7 +383,6 @@ namespace Bridge.Translator
 
             this.WriteAfterInitMethods();
 
-            this.WriteNewLine();
             this.WriteNewLine();
         }
 

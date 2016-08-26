@@ -1,16 +1,13 @@
-﻿Bridge.initAssembly("TestProject", function ($asm, globals) {
-    "use strict";
-
-    Bridge.define('TestIssue960.Example', {
+﻿    Bridge.define('TestIssue960.Example', {
         getName: function (x) {
             return x.TestIssue960$IHaveNamed$getName();
         }
     });
-    
+
     Bridge.define('TestIssue960.IHaveNamed', {
         $kind: "interface"
     });
-    
+
     Bridge.define('TestIssue960.Issue960', {
         statics: {
             config: {
@@ -26,7 +23,7 @@
         },
         $entryPoint: true
     });
-    
+
     Bridge.define('TestIssue960.Named', {
         inherits: [TestIssue960.IHaveNamed],
         config: {
@@ -43,6 +40,3 @@
             this.setName(name);
         }
     });
-    
-    Bridge.init();
-});

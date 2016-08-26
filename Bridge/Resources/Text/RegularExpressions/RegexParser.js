@@ -1,6 +1,4 @@
-﻿// @source Text/RegularExpressions/RegexParser.js
-
-Bridge.define("System.Text.RegularExpressions.RegexParser", {
+﻿Bridge.define("System.Text.RegularExpressions.RegexParser", {
     statics: {
         _Q: 5, // quantifier
         _S: 4, // ordinary stoppper

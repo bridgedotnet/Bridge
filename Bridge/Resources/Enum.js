@@ -1,5 +1,3 @@
-    // @source Enum.js
-
     var enumMethods = {
         nameEquals: function (n1, n2, ignoreCase) {
             if (ignoreCase) {

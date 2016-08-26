@@ -7,9 +7,9 @@
             var o1 = new $_.$AnonymousType$1(1);
         }
     });
-    
+
     var $_ = {};
-    
+
     Bridge.define("$AnonymousType$1", $_, {
         $kind: "anonymous",
         constructor: function (a) {
@@ -36,8 +36,6 @@
             };
         }
     });
-    
-    
-    
+
     Bridge.init();
 });

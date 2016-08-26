@@ -1,7 +1,4 @@
-﻿Bridge.initAssembly("TestProject", function ($asm, globals) {
-    "use strict";
-
-    Bridge.define('TestIssue599.Issue599', {
+﻿    Bridge.define('TestIssue599.Issue599', {
         statics: {
             config: {
                 init: function () {
@@ -15,8 +12,3 @@
         $entryPoint: true,
         _something: "HI!"
     });
-    
-    
-    
-    Bridge.init();
-});

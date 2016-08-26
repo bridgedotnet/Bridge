@@ -1,4 +1,3 @@
-    // @source Core.js
     var core = {
         global: globals,
 

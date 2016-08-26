@@ -8,6 +8,13 @@
     "level": "None"
   },
 
+  "resources": [
+    {
+      "name": "bridge#bridge.js",
+      "extract": false
+    }
+  ],
+
   "useTypedArrays": true,
   "overflowMode": "Javascript",
   "strictNullChecks": true

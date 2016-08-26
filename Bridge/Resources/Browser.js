@@ -1,6 +1,4 @@
-﻿    // @source Browser.js
-
-    var check = function (regex) {
+﻿    var check = function (regex) {
             return regex.test(navigator.userAgent.toLowerCase());
         },
 

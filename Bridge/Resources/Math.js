@@ -1,5 +1,3 @@
-    // @source Math.js
-
     Bridge.Math = {
         divRem: function (a, b, result) {
             var remainder = a % b;

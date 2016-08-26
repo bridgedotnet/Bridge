@@ -43,7 +43,7 @@
             this.methodC$1("R", 40);
         }
     });
-    
+
     Bridge.define('Test.BridgeIssues.N477.App2', {
         inherits: [Test.BridgeIssues.N477.App1],
         methodA$2: function (optionalNumber) {
@@ -67,8 +67,6 @@
             this.methodA$1("Y", 4000);
         }
     });
-    
-    
-    
+
     Bridge.init();
 });

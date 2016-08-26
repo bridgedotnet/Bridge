@@ -193,6 +193,12 @@ namespace Bridge.Translator
                 return true;
             }
 
+            var ifStatement = parent as IfElseStatement;
+            if (ifStatement != null && ifStatement.FalseStatement != null && !ifStatement.FalseStatement.IsNull && ifStatement.FalseStatement != block)
+            {
+                return true;
+            }
+
             return false;
         }
 

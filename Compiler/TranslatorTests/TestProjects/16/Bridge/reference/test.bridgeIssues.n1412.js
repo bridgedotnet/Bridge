@@ -9,18 +9,16 @@
             var $t;
             // There should be a teml JS variavble generated with no comma
             var animationComp = this.getComponent(String);
-    
+
             if (animationComp != null) {
                 $t = Bridge.getEnumerator(animationComp);
                 while ($t.moveNext()) {
                     var state = $t.getCurrent();
-    
+
                 }
             }
         }
     });
-    
-    
-    
+
     Bridge.init();
 });

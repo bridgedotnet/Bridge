@@ -6,13 +6,13 @@
         methodStringDelegate: null,
         methodStringDelegateIntResult: null
     });
-    
+
     Bridge.define('Functions.DelegateInterface', {
         $kind: "interface"
     });
-    
+
     Bridge.define('Functions.Delegates');
-    
+
     Bridge.define('Functions.Parameters', {
         getSomething: function (i) {
             if (i === void 0) { i = 5; }
@@ -24,12 +24,10 @@
             for (var i = 0; i < numbers.length; i = (i + 1) | 0) {
                 s = System.String.concat(s, numbers[i]);
             }
-    
+
             return s;
         }
     });
-    
-    
-    
+
     Bridge.init();
 });

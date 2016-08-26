@@ -1,5 +1,3 @@
-    // @source Console.js
-
     System.Console = {
         output: null,
 

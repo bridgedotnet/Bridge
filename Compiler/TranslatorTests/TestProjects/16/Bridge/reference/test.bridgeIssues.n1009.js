@@ -7,12 +7,10 @@ Bridge.initAssembly("TestProject", function ($asm, globals) {
 
     Bridge.define('Test.BridgeIssues.N1009.Class1009', {
         statics: {
-    
+
         }
     });
-    
-    
-    
+
     Bridge.init();
 });
 

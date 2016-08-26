@@ -1,5 +1,3 @@
-    // @source Task.js
-
     Bridge.define("System.Threading.Tasks.Task", {
         inherits: [System.IDisposable],
 

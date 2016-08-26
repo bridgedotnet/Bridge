@@ -1,10 +1,7 @@
-﻿Bridge.initAssembly("TestProject", function ($asm, globals) {
-    "use strict";
-
-    Bridge.define('TestIssue958.IMessage', {
+﻿    Bridge.define('TestIssue958.IMessage', {
         $kind: "interface"
     });
-    
+
     Bridge.define('TestIssue958.Issue958', {
         statics: {
             main1: function () {
@@ -17,11 +14,11 @@
             }
         }
     });
-    
+
     var $_ = {};
-    
+
     Bridge.ns("TestIssue958.Issue958", $_);
-    
+
     Bridge.apply($_.TestIssue958.Issue958, {
         f1: function (action) {
             System.Console.log(System.String.concat("Name: ", action.getName()));
@@ -30,7 +27,7 @@
             System.Console.log(System.String.concat("Value: ", action.getValue()));
         }
     });
-    
+
     Bridge.define('TestIssue958.MessageExtensions', {
         statics: {
             if: function (T, source, work) {
@@ -41,7 +38,7 @@
             }
         }
     });
-    
+
     Bridge.define('TestIssue958.SetName', {
         inherits: [TestIssue958.IMessage],
         config: {
@@ -54,7 +51,7 @@
             this.setName(name);
         }
     });
-    
+
     Bridge.define('TestIssue958.SetValue', {
         inherits: [TestIssue958.IMessage],
         config: {
@@ -67,8 +64,3 @@
             this.setValue(value);
         }
     });
-    
-    
-    
-    Bridge.init();
-});

@@ -1,10 +1,10 @@
-using Bridge;
-
 namespace System.Runtime.CompilerServices
 {
-    [Namespace("System")]
     public static class FormattableStringFactory
     {
-        public static extern FormattableString Create(string format, params object[] arguments);
+        public static FormattableString Create(string format, params object[] args)
+        {
+            return new FormattableStringImpl(format, args);
+        }
     }
 }

@@ -8,21 +8,19 @@
                 /* 
                     vBoubli (@"/faaa");
                 */
-    
+
                 return blable;
             },
             test2: function () {
                 var blable = "";
-                
+            
                     vBoubli (@"/faaa");
-                
-    
+            
+
                 return blable;
             }
         }
     });
-    
-    
-    
+
     Bridge.init();
 });

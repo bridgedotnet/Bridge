@@ -27,7 +27,7 @@
         voidFunction: function () {
         }
     });
-    
+
     Bridge.define('BasicTypes.Color', {
         $kind: "enum",
         statics: {
@@ -36,7 +36,7 @@
             Blue: 2
         }
     });
-    
+
     Bridge.define('BasicTypes.Keywords', {
         break: "break",
         case: "case",
@@ -100,8 +100,6 @@
         from: "from",
         of: "of"
     });
-    
-    
-    
+
     Bridge.init();
 });

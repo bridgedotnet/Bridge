@@ -1,6 +1,4 @@
-﻿    // @source ArraySegment.js
-
-    Bridge.define('System.ArraySegment', {
+﻿    Bridge.define('System.ArraySegment', {
         constructor: function (array, offset, count) {
 	    this.$initialize();
             this.array = array;

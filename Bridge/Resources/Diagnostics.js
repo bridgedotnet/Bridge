@@ -1,5 +1,3 @@
-    // @source Diagnostics.js
-
     System.Diagnostics.Debug = {
         writeln: function (text) {
             var global = Bridge.global;

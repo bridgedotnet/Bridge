@@ -7,7 +7,7 @@
                 var $t, $t1, $t2, $t3;
                 var TestArray1 = ["TestA", "TestB", "TestC"];
                 var TestArray2 = ["TestA", "TestB", "TestC"];
-    
+
                 var doSomething = false;
                 $t = Bridge.getEnumerator(TestArray1);
                 while ($t.moveNext()) {
@@ -18,7 +18,7 @@
                         doSomething = System.String.equals(x, y);
                     }
                 }
-    
+
                 $t2 = Bridge.getEnumerator(TestArray1);
                 while ($t2.moveNext()) {
                     var x1 = $t2.getCurrent();
@@ -31,8 +31,6 @@
             }
         }
     });
-    
-    
-    
+
     Bridge.init();
 });

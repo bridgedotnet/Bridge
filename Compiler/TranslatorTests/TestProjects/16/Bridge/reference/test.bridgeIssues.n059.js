@@ -9,10 +9,8 @@
         method1: function (d) {
         }
     });
-    
+
     Bridge.define('Test.BridgeIssues.N059.Class59.Aux1');
-    
-    
-    
+
     Bridge.init();
 });

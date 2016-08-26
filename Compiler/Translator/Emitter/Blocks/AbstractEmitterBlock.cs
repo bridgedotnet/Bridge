@@ -53,6 +53,12 @@ namespace Bridge.Translator
         public virtual void EmitBlockOrIndentedLine(AstNode node)
         {
             bool block = node is BlockStatement;
+            var ifStatement = node.Parent as IfElseStatement;
+
+            if (!block && node is IfElseStatement && ifStatement != null && ifStatement.FalseStatement == node)
+            {
+                block = true;
+            }
 
             if (!block)
             {

@@ -1,5 +1,3 @@
-    // @source Char.js
-
     Bridge.define("System.Char", {
         inherits: [System.IComparable, System.IFormattable],
         $kind: "struct",

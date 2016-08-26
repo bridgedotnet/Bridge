@@ -1,3 +1,1 @@
-﻿    // @source Attribute.js
-
-    Bridge.define("System.Attribute");
+﻿    Bridge.define("System.Attribute");

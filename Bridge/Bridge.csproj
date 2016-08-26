@@ -319,6 +319,18 @@
     <Compile Include="System\Void.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\.auxiliary\Header.js" />
+    <Content Include="Resources\.generated\bridge.js" />
+    <Content Include="Resources\.generated\system\formattableString.js" />
+    <Content Include="Resources\.generated\system\formattableStringImpl.js" />
+    <Content Include="Resources\.generated\system\random.js" />
+    <Content Include="Resources\.generated\system\runtime\compilerServices\formattableStringFactory.js" />
+    <Content Include="Resources\.generated\system\threading\timer.js" />
+    <Content Include="Resources\.generated\system\version.js" />
+    <Content Include="Resources\.generated\system\version\parseFailureKind.js" />
+    <Content Include="Resources\.generated\system\version\versionResult.js" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Resources\Locales\af-ZA.js" />
     <EmbeddedResource Include="Resources\Locales\af.js" />
     <EmbeddedResource Include="Resources\Locales\am-ET.js" />
@@ -615,6 +627,7 @@
     <EmbeddedResource Include="Resources\Locales\ro-RO.js" />
     <EmbeddedResource Include="Resources\Locales\ro.js" />
     <EmbeddedResource Include="Resources\Locales\ru.js" />
+    <EmbeddedResource Include="Resources\Locales\ru-RU.js" />
     <EmbeddedResource Include="Resources\Locales\rw-RW.js" />
     <EmbeddedResource Include="Resources\Locales\rw.js" />
     <EmbeddedResource Include="Resources\Locales\sa-IN.js" />
@@ -735,18 +748,18 @@
     <EmbeddedResource Include="Resources\Locales\zh.js" />
     <EmbeddedResource Include="Resources\Locales\zu-ZA.js" />
     <EmbeddedResource Include="Resources\Locales\zu.js" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Resources\Bool.js" />
     <Content Include="Resources\ArraySegment.js" />
     <Content Include="Resources\Diagnostics.js" />
     <Content Include="Resources\Convert.js" />
     <Content Include="Resources\Enum.js" />
     <Content Include="Resources\Guid.js" />
-    <Content Include="Resources\LongLib.js" />
+    <Content Include="Resources\.lib\LongLib.js" />
     <Content Include="Resources\Long.js" />
     <Content Include="Resources\Math.js" />
     <Content Include="Resources\Console.js" />
-    <Content Include="Resources\random.js" />
-    <Content Include="Resources\FormattableString.js" />
     <Content Include="Resources\Text\RegularExpressions\Regex.js" />
     <Content Include="Resources\Text\RegularExpressions\RegexEngineBranch.js" />
     <Content Include="Resources\Text\RegularExpressions\RegexEnginePass.js" />
@@ -765,18 +778,15 @@
     <Content Include="Resources\Text\RegularExpressions\RegexParser.js" />
     <Content Include="Resources\Text\RegularExpressions\RegexReplacement.js" />
     <Content Include="Resources\Text\RegularExpressions\RegexRunner.js" />
-    <Content Include="Resources\timer.js" />
     <Content Include="Resources\Reflection.js" />
-    <Content Include="Resources\Version.js" />
     <Content Include="Resources\ClientWebSocket.js" />
     <Content Include="Resources\Uri.js" />
-    <None Include="AdditionalCompilerOptions.txt" />
     <Content Include="Resources\Array.js" />
     <Content Include="Resources\Collections\Comparer.js" />
     <Content Include="Resources\Decimal.js" />
-    <Content Include="Resources\Finally.js" />
-    <Content Include="Resources\End.js" />
-    <Content Include="Resources\Init.js" />
+    <Content Include="Resources\.auxiliary\Finally.js" />
+    <Content Include="Resources\.auxiliary\End.js" />
+    <Content Include="Resources\.auxiliary\Init.js" />
     <Content Include="Resources\Attribute.js" />
     <Content Include="Resources\Browser.js" />
     <Content Include="Resources\Class.js" />
@@ -791,8 +801,6 @@
     <Content Include="Resources\INotifyPropertyChanged.js" />
     <Content Include="Resources\Date.js" />
     <Content Include="Resources\linq.js" />
-    <EmbeddedResource Include="Resources\list" />
-    <EmbeddedResource Include="Resources\Locales\ru-RU.js" />
     <Content Include="Resources\Char.js" />
     <Content Include="Resources\Text\BridgeRegex.js" />
     <Content Include="Resources\Text\StringBuilder.js" />
@@ -804,23 +812,16 @@
     <Content Include="Resources\Nullable.js" />
     <Content Include="Resources\Core.js" />
     <Content Include="Resources\Validation.js" />
-    <EmbeddedResource Include="Resources\bridge.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\bridge.d.ts" />
+    <None Include="bridge.json" />
+    <None Include="AdditionalCompilerOptions.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Bridge.jsb">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Resources\build.bat" />
-    <None Include="Resources\build.sh" />
+    <Content Include="Resources\.typescript\bridge.d.ts" />
+    <Content Include="Resources\.typescript\header.d.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PreBuildEvent Condition="$(OS) != Unix">"$(ProjectDir)\Resources\build.bat"</PreBuildEvent>
-    <PreBuildEvent Condition="$(OS) == Unix">"$(ProjectDir)\Resources\build.sh"</PreBuildEvent>
-  </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -828,27 +829,4 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
-  <!-- NuGet packaging starts -->
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <NuGetBuildPackage>true</NuGetBuildPackage>
-  </PropertyGroup>
-  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <NuGetPackageSourcePath Include="$(SolutionDir).build\specs\Bridge.Core.nuspec">
-      <Path>$(SolutionDir).build\specs\Bridge.Core.nuspec</Path>
-    </NuGetPackageSourcePath>
-  </ItemGroup>
-  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <NuGetPackageSourcePath Include="$(SolutionDir).build\specs\Bridge.nuspec">
-      <Path>$(SolutionDir).build\specs\Bridge.nuspec</Path>
-    </NuGetPackageSourcePath>
-  </ItemGroup>
-  <Import Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " Project="$(SolutionDir)\.build\common\NuGet.Build.Package.targets" />
-  <Target Name="CleanProjectNuGetOutput" BeforeTargets="Clean">
-    <ItemGroup>
-      <FilesToDelete Include="$(ProjectDir)$(OutDir)Bridge.*.nupkg" />
-    </ItemGroup>
-    <Message Text="Cleaning NuGet packages in $(ProjectDir)$(OutDir)" Importance="high" />
-    <Delete Files="@(FilesToDelete)" ContinueOnError="true" />
-  </Target>
-  <!-- NuGet packaging finishes -->
 </Project>

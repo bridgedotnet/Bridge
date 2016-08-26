@@ -49,7 +49,7 @@ namespace Bridge.Translator
                 this.EmitBlockOrIndentedLine(ifElseStatement.TrueStatement);
                 if (ifElseStatement.FalseStatement != null && !ifElseStatement.FalseStatement.IsNull)
                 {
-                    this.WriteElse();
+                    this.Write(" else");
                     this.EmitBlockOrIndentedLine(ifElseStatement.FalseStatement);
                 }
                 return;

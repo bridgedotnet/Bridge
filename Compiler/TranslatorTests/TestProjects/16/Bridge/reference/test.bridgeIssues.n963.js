@@ -7,7 +7,7 @@
         before = (before + 1) | 0;
         // One line below the method
     })();
-    
+
     Bridge.define('Test.BridgeIssues.N963.Class963', {
         statics: {
             main1: function () {
@@ -16,8 +16,6 @@
             }
         }
     });
-    
-    
-    
+
     Bridge.init();
 });

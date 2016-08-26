@@ -2,7 +2,6 @@ using Bridge.Test;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
-    [External]
     [ObjectLiteral]
     public class Bridge647A
     {
@@ -10,7 +9,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public int foo;
     }
 
-    [External]
     [ObjectLiteral(DefaultValueMode.DefaultValue)]
     public class Bridge647B
     {

@@ -65,6 +65,11 @@ namespace Bridge.Translator
             return this.HasAttribute(declaration, Translator.Bridge_ASSEMBLY + ".ObjectLiteral");
         }
 
+        protected virtual bool IsNonScriptable(EntityDeclaration declaration)
+        {
+            return this.HasAttribute(declaration, Translator.Bridge_ASSEMBLY + ".NonScriptable");
+        }
+
         protected virtual bool HasIgnore(EntityDeclaration declaration)
         {
             return this.HasAttribute(declaration, Translator.Bridge_ASSEMBLY + ".External") || this.HasAttribute(declaration, Translator.Bridge_ASSEMBLY + ".Ignore");
@@ -282,6 +287,11 @@ namespace Bridge.Translator
         /// <param name="tpDecl">The TypeDefinition object of the validated item.</param>
         private void ValidateNamespace(TypeDeclaration tpDecl)
         {
+            if (this.AssemblyInfo.Assembly.EnableReservedNamespaces)
+            {
+                return;
+            }
+
             ICSharpCode.NRefactory.CSharp.Attribute nsAt;
             if (this.TryGetAttribute(tpDecl, "Namespace", out nsAt))
             {

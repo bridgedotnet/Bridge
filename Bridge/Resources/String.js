@@ -1,5 +1,3 @@
-    // @source String.js
-
     var string = {
         is: function (obj, type) {
             if (!Bridge.isString(obj)) {

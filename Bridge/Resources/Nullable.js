@@ -1,5 +1,3 @@
-    // @source Nullable.js
-
     var nullable = {
         hasValue: function (obj) {
             return (obj !== null) && (obj !== undefined);

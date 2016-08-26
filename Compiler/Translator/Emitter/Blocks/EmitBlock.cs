@@ -350,6 +350,12 @@ namespace Bridge.Translator
                 this.Emitter.Output = this.GetOutputForType(null, output);
                 this.Emitter.MetaDataOutputName = this.Emitter.EmitterOutput.FileName;
             }
+            var scriptableAttributes = MetadataUtils.GetScriptableAttributes(this.Emitter.Resolver.Compilation.MainAssembly.AssemblyAttributes, this.Emitter, null).ToList();
+
+            if (metas.Count > 0 || scriptableAttributes.Count > 0)
+            {
+                this.WriteNewLine();
+            }
 
             foreach (var meta in metas)
             {
@@ -377,8 +383,7 @@ namespace Bridge.Translator
                 this.Write(string.Format("Bridge.setMetadata({0}, function ({2}) {{ return {1}; }});", BridgeTypes.ToJsName(meta.Key, this.Emitter, true), metaData.ToString(Formatting.None), typeArgs));
                 this.WriteNewLine();
             }
-
-            var scriptableAttributes = MetadataUtils.GetScriptableAttributes(this.Emitter.Resolver.Compilation.MainAssembly.AssemblyAttributes, this.Emitter, null).ToList();
+            
             if (scriptableAttributes.Count > 0)
             {
                 JArray attrArr = new JArray();
@@ -388,11 +393,12 @@ namespace Bridge.Translator
                 }
 
                 this.Write(string.Format("$asm.attr= {0};", attrArr.ToString(Formatting.None)));
+                this.WriteNewLine();
             }
 
             this.Emitter.Output = lastOutput;
 
-            this.RemovePenultimateEmptyLines(true);
+            //this.RemovePenultimateEmptyLines(true);
 
             this.Emitter.Translator.Plugins.AfterTypesEmit(this.Emitter, this.Emitter.Types);
         }

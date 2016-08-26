@@ -1,9 +1,0 @@
-﻿{
-  "output": "",
-  "cleanOutputFolderBeforeBuild": true,
-  "outputFormatting": "Formatted",
-  "outputBy": "ClassPath",
-  "logging": {
-    "level": "None"
-  }
-}

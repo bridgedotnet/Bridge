@@ -1,14 +1,11 @@
-﻿Bridge.initAssembly("TestProject", function ($asm, globals) {
-    "use strict";
-
-    Bridge.define('TestIssue1230.Issue1230', {
+﻿    Bridge.define('TestIssue1230.Issue1230', {
         statics: {
             testLong: function () {
                 // Conversions should not have duplicated Bridge.Long: Bridge.Long(Bridge.Long(v))
                 var v = 7;
                 var l = System.Int64(v);
                 l = System.Int64(v);
-    
+
                 System.Console.log(System.Int64(v).toString());
                 System.Console.log(System.Int64((v)).toString());
                 System.Console.log(System.Int64(2).toString());
@@ -28,7 +25,7 @@
                 var v = 7;
                 var l = System.Decimal(v);
                 l = System.Decimal(v);
-    
+
                 System.Console.log(System.Decimal(v).toString());
                 System.Console.log(System.Decimal((v)).toString());
                 System.Console.log(System.Decimal(2.0).toString());
@@ -41,7 +38,7 @@
                 var v = 7;
                 var l = v;
                 l = v;
-    
+
                 System.Console.log(v);
                 System.Console.log((v));
                 System.Console.log(2);
@@ -52,8 +49,3 @@
             }
         }
     });
-    
-    
-    
-    Bridge.init();
-});

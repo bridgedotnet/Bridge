@@ -74,6 +74,9 @@
     <Folder Include="Bridge\build\" />
     <Folder Include="Bridge\output\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bridge\res\header.js" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent Condition="$(OS) != Unix">"$(ProjectDir)..\..\..\Builder\$(OutDir)Bridge.Builder.exe" -p "$(ProjectPath)" -b "$(ProjectDir)$(OutDir)Bridge.dll" -cfg "$(Configuration)"</PostBuildEvent>

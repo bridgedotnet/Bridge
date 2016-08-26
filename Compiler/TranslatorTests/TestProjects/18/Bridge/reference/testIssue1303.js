@@ -1,7 +1,4 @@
-﻿Bridge.initAssembly("TestProject", function ($asm, globals) {
-    "use strict";
-
-    Bridge.define('TestIssue1303.App', {
+﻿    Bridge.define('TestIssue1303.App', {
         statics: {
             config: {
                 init: function () {
@@ -18,7 +15,7 @@
         },
         $entryPoint: true
     });
-    
+
     Bridge.define('TestIssue1303.App1', {
         statics: {
             config: {
@@ -36,7 +33,7 @@
         },
         $entryPoint: true
     });
-    
+
     Bridge.define('TestIssue1303.App2', {
         statics: {
             config: {
@@ -50,8 +47,3 @@
         },
         $entryPoint: true
     });
-    
-    
-    
-    Bridge.init();
-});
