@@ -505,7 +505,8 @@ namespace Bridge.Translator
 
                     directoryPath = outputPath;
 
-                    var dirPathInFileName = Path.GetDirectoryName(fileName);
+                    var dirPathInFileName = this.GetPathComponents(fileName)[0];
+
                     var filePathCleaned = fileName;
                     if (!string.IsNullOrEmpty(dirPathInFileName))
                     {
@@ -535,7 +536,7 @@ namespace Bridge.Translator
                     {
                         NewLine(resourceBuffer);
 
-                        GenerateResourceFileRemark(resourceBuffer, item, file);
+                        GenerateResourceFileRemark(resourceBuffer, item, file, dirPathInFileName);
 
                         this.Log.Trace("Reading resource item at " + file.FullName);
 
@@ -553,7 +554,7 @@ namespace Bridge.Translator
             }
         }
 
-        private void GenerateResourceFileRemark(StringBuilder resourceBuffer, ResourceConfigItem item, FileInfo file)
+        private void GenerateResourceFileRemark(StringBuilder resourceBuffer, ResourceConfigItem item, FileInfo file, string dirPathInFileName)
         {
             if (item.Remark != null)
             {
@@ -562,7 +563,7 @@ namespace Bridge.Translator
                 var remarkInfo = new Dictionary<string, string>()
                 {
                     ["name"] = file.Name,
-                    ["path"] = file.FullName
+                    ["path"] = dirPathInFileName + "\\" + file.Name
                 };
 
                 var remarkBuffer = ApplyTokens(item.Remark, remarkInfo);
@@ -695,7 +696,7 @@ namespace Bridge.Translator
                 current.Output = defaultSetting.Output;
             }
 
-            if (current.Files == null)
+            if (current.Files == null && defaultSetting.Files != null)
             {
                 current.Files = defaultSetting.Files.Select(x => x).ToArray();
             }
