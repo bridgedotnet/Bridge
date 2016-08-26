@@ -7368,6 +7368,106 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN', {
+        statics: {
+            buffer: null,
+            overloaded: function (action) {
+                Bridge.Test.Assert.fail$1("overload with action called");
+            },
+            overloaded$1: function ($function) {
+                Bridge.Test.Assert.true$1(true, "overload with Func<int> called");
+            },
+            doSomething: function () {
+                Bridge.Test.Assert.fail$1("DoSomething should not be called");
+                return 0;
+            },
+            foo$2: function (func) {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer = System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer, "Func<long>");
+            },
+            foo$4: function (func) {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer = System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer, "Func<ulong>");
+            },
+            foo$1: function (func) {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer = System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer, "Func<int>");
+            },
+            foo: function (func) {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer = System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer, "Func<decimal>");
+            },
+            foo$3: function (func) {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer = System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer, "Func<string>");
+            },
+            testOverloadResolutionMSDN2: function () {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer = "";
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.foo$2($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f2);
+                Bridge.Test.Assert.areEqual$1("Func<long>", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer, "Should call Func<long>");
+
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer = "";
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.foo$2($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f4);
+                Bridge.Test.Assert.areEqual$1("Func<long>", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer, "Should call Func<long>");
+
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer = "";
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.foo$4($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f6);
+                Bridge.Test.Assert.areEqual$1("Func<ulong>", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer, "Should call Func<ulong>");
+
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer = "";
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.foo$1($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f8);
+                Bridge.Test.Assert.areEqual$1("Func<int>", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer, "Should call Func<int>");
+
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer = "";
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.foo($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f10);
+                Bridge.Test.Assert.areEqual$1("Func<decimal>", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer, "Should call Func<decimal>");
+
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer = "";
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.foo$3($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f12);
+                Bridge.Test.Assert.areEqual$1("Func<string>", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer, "Should call Func<string>");
+            }
+        },
+        testOverloadResolutionMSDN1: function () {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.overloaded$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.doSomething);
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN", $_);
+
+    Bridge.apply($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN, {
+        f1: function () {
+            return System.Int64(9);
+        },
+        f2: function () {
+            return $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f1;
+        },
+        f3: function () {
+            return System.Int64(5);
+        },
+        f4: function () {
+            return $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f3;
+        },
+        f5: function () {
+            return System.UInt64(3);
+        },
+        f6: function () {
+            return $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f5;
+        },
+        f7: function () {
+            return 7;
+        },
+        f8: function () {
+            return $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f7;
+        },
+        f9: function () {
+            return System.Decimal(11.0);
+        },
+        f10: function () {
+            return $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f9;
+        },
+        f11: function () {
+            return "15";
+        },
+        f12: function () {
+            return $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f11;
+        }
+    });
+
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A', {
         config: {
             properties: {
