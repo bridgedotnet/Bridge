@@ -53,7 +53,7 @@
       "name": "testResources3.js",
       "extract": true,
       "output": "Bridge\\output\\resources",
-      "header": "// Content header: {version} {copyright} {date} {year} {author}",
+      "header": "// Content header: {version} {copyright} {notdate} {year} {author}",
       "remark": "// ---\n// Content remark: Path: {path}; name: {name}\r\n// ---\n",
       "files": [
         "Bridge\\output/testIssue434.js",

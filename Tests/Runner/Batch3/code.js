@@ -6772,6 +6772,8 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
+
+
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6801,7 +6803,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                }; /// Async method lacks 'await' operators and will run synchronously
+                                };
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -7300,23 +7302,23 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712", $_);
 
     Bridge.apply($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712, {
-        f1: function (_o19) {
-            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712Extensions.add(_o19, 4);
-            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712Extensions.add(_o19, 5);
-            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712Extensions.add(_o19, 6);
-            return _o19;
-        },
-        f2: function (_o20) {
-            _o20.add(System.Int32, 1);
-            _o20.add(System.Int32, 2);
-            _o20.add(System.Int32, 3);
+        f1: function (_o20) {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712Extensions.add(_o20, 4);
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712Extensions.add(_o20, 5);
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712Extensions.add(_o20, 6);
             return _o20;
         },
-        f3: function (_o21) {
-            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712MSDNExtensions.add(System.Int32, _o21, 4);
-            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712MSDNExtensions.add(System.Int32, _o21, 5);
-            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712MSDNExtensions.add(System.Int32, _o21, 6);
+        f2: function (_o21) {
+            _o21.add(System.Int32, 1);
+            _o21.add(System.Int32, 2);
+            _o21.add(System.Int32, 3);
             return _o21;
+        },
+        f3: function (_o22) {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712MSDNExtensions.add(System.Int32, _o22, 4);
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712MSDNExtensions.add(System.Int32, _o22, 5);
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712MSDNExtensions.add(System.Int32, _o22, 6);
+            return _o22;
         }
     });
 
@@ -7495,6 +7497,50 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         f12: function () {
             return $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f11;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1715', {
+        testCollectionInitializerWithAdd: function () {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1715.MyList.buffer = "";
+
+            var list = $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1715.f1(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1715.MyList());
+
+            Bridge.Test.Assert.areEqual("Add(1);Add(2, 3);", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1715.MyList.buffer);
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1715", $_);
+
+    Bridge.apply($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1715, {
+        f1: function (_o19) {
+            _o19.add(1);
+            _o19.add$1(2, 3);
+            return _o19;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1715.MyList', {
+        inherits: [System.Collections.IEnumerable],
+        statics: {
+            buffer: null
+        },
+        config: {
+            alias: [
+            "getEnumerator", "System$Collections$IEnumerable$getEnumerator"
+            ]
+        },
+        constructor: function () {
+            this.$initialize();
+        },
+        add: function (i) {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1715.MyList.buffer = System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1715.MyList.buffer, (System.String.concat(System.String.concat("Add(", i), ");")));
+        },
+        add$1: function (i, j) {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1715.MyList.buffer = System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1715.MyList.buffer, (System.String.concat(System.String.concat(System.String.concat(System.String.concat("Add(", i), ", "), j), ");")));
+        },
+        getEnumerator: function () {
+            throw new System.Exception();
         }
     });
 
@@ -14960,30 +15006,30 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues", $_);
 
     Bridge.apply($_.Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues, {
-        f1: function (_o22) {
-            _o22.add(0);
-            _o22.add(1);
-            _o22.add(2);
-            _o22.add(3);
-            _o22.add(4);
-            return _o22;
-        },
-        f2: function (_o23) {
-            _o23.add(3, "b");
-            _o23.add(6, "z");
-            _o23.add(9, "x");
+        f1: function (_o23) {
+            _o23.add(0);
+            _o23.add(1);
+            _o23.add(2);
+            _o23.add(3);
+            _o23.add(4);
             return _o23;
+        },
+        f2: function (_o24) {
+            _o24.add(3, "b");
+            _o24.add(6, "z");
+            _o24.add(9, "x");
+            return _o24;
         },
         f3: function (i) {
             return ((i * 2) | 0);
         },
-        f4: function (_o24) {
-            _o24.add(0);
-            _o24.add(1);
-            _o24.add(2);
-            _o24.add(3);
-            _o24.add(4);
-            return _o24;
+        f4: function (_o25) {
+            _o25.add(0);
+            _o25.add(1);
+            _o25.add(2);
+            _o25.add(3);
+            _o25.add(4);
+            return _o25;
         }
     });
 
