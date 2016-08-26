@@ -7264,6 +7264,38 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1711', {
+        testImplicitOperatorOrder: function () {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1711.Wrapper.call();
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1711.Wrapper', {
+        statics: {
+            method: function (w) {
+                return w.value;
+            },
+            call: function () {
+                var a = 5;
+                var b = 6;
+                // At runtime agument type is uint
+                // but Wrapper expected; Because >>> 0 extract value with ValueOf method
+                Bridge.Test.Assert.areEqual$1(7, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1711.Wrapper.method(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1711.Wrapper.op_Implicit(((a | b) >>> 0))), "First");
+                //Agument type is Wrapper as expected;
+                Bridge.Test.Assert.areEqual$1(7, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1711.Wrapper.method(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1711.Wrapper.op_Implicit((((a | b) >>> 0)))), "Second");
+            },
+            op_Implicit: function (i) {
+                return Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1711.Wrapper(), {
+                    value: i
+                } );
+            }
+        },
+        value: 0,
+        valueOf: function () {
+            return this.value;
+        }
+    });
+
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712', {
         statics: {
             config: {

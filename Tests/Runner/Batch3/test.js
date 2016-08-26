@@ -422,6 +422,7 @@
                 QUnit.test("#1702 - TestFieldWithItemName", Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1702.testFieldWithItemName);
                 QUnit.test("#1704 - TestBaseMethodWithOptionalParams", Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1704.testBaseMethodWithOptionalParams);
                 QUnit.test("#1709 - TestGenericMethodWithoutTypeArgument", Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1709.testGenericMethodWithoutTypeArgument);
+                QUnit.test("#1711 - TestImplicitOperatorOrder", Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1711.testImplicitOperatorOrder);
                 QUnit.test("#1712 - TestCollectionAddWithExtensionMethod", Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1712.testCollectionAddWithExtensionMethod);
                 QUnit.test("#1712 - TestCollectionWithAdd_BeforeCS6", Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1712.testCollectionWithAdd_BeforeCS6);
                 QUnit.test("#1712 - TestCollectionWithAdd_CS6", Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1712.testCollectionWithAdd_CS6);
@@ -2449,6 +2450,16 @@
             testGenericMethodWithoutTypeArgument: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1709).beforeTest(true, assert, Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1709);
                 t.getFixture().testGenericMethodWithoutTypeArgument();
+            }
+        }
+    });
+
+    Bridge.define('Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1711', {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1711)],
+        statics: {
+            testImplicitOperatorOrder: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1711).beforeTest(true, assert, Bridge.Test.QUnit.TestRunner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1711, 2);
+                t.getFixture().testImplicitOperatorOrder();
             }
         }
     });
