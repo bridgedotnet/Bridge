@@ -7265,9 +7265,16 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     });
 
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712', {
+        statics: {
+            config: {
+                properties: {
+                    Buffer: null
+                }
+            }
+        },
         testCollectionAddWithExtensionMethod: function () {
             var $t;
-            var collection2 = $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712.f1(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712Collection());
+            var collection2 = $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712.f1(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712.Collection());
 
             var i = 4;
             $t = Bridge.getEnumerator(collection2);
@@ -7275,6 +7282,18 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 var item = Bridge.cast($t.getCurrent(), System.Int32);
                 Bridge.Test.Assert.areEqual(Bridge.identity(i, (i = (i + 1) | 0)), item);
             }
+        },
+        testCollectionWithAdd_BeforeCS6: function () {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712.setBuffer("");
+            var collection = $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712.f2(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712.MSDNCollectionWithAdd());
+
+            Bridge.Test.Assert.areEqual("123", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712.getBuffer());
+        },
+        testCollectionWithAdd_CS6: function () {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712.setBuffer("");
+            var collection = $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712.f3(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712.MSDNCollectionWithoutAdd());
+
+            Bridge.Test.Assert.areEqual("456", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712.getBuffer());
         }
     });
 
@@ -7286,10 +7305,22 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712Extensions.add(_o19, 5);
             Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712Extensions.add(_o19, 6);
             return _o19;
+        },
+        f2: function (_o20) {
+            _o20.add(System.Int32, 1);
+            _o20.add(System.Int32, 2);
+            _o20.add(System.Int32, 3);
+            return _o20;
+        },
+        f3: function (_o21) {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712MSDNExtensions.add(System.Int32, _o21, 4);
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712MSDNExtensions.add(System.Int32, _o21, 5);
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712MSDNExtensions.add(System.Int32, _o21, 6);
+            return _o21;
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712Collection', {
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712.Collection', {
         inherits: [System.Collections.IEnumerable],
         list: null,
         config: {
@@ -7305,10 +7336,45 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712.MSDNCollectionWithAdd', {
+        inherits: [System.Collections.IEnumerable],
+        config: {
+            alias: [
+            "getEnumerator", "System$Collections$IEnumerable$getEnumerator"
+            ]
+        },
+        add: function (T, item) {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712.setBuffer(System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712.getBuffer(), item));
+        },
+        getEnumerator: function () {
+            throw new System.InvalidOperationException();
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712.MSDNCollectionWithoutAdd', {
+        inherits: [System.Collections.IEnumerable],
+        config: {
+            alias: [
+            "getEnumerator", "System$Collections$IEnumerable$getEnumerator"
+            ]
+        },
+        getEnumerator: function () {
+            throw new System.NotImplementedException();
+        }
+    });
+
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712Extensions', {
         statics: {
             add: function (collection, item) {
                 collection.list.add(item);
+            }
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712MSDNExtensions', {
+        statics: {
+            add: function (T, collection, item) {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712.setBuffer(System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712.getBuffer(), item));
             }
         }
     });
@@ -7329,6 +7395,106 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         testOverloadResolution: function () {
             Bridge.Test.Assert.areEqual(1, this.overloaded$1(Bridge.fn.bind(this, this.doSomething1)));
             Bridge.Test.Assert.areEqual(2, this.overloaded(Bridge.fn.bind(this, this.doSomething2)));
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN', {
+        statics: {
+            buffer: null,
+            overloaded: function (action) {
+                Bridge.Test.Assert.fail$1("overload with action called");
+            },
+            overloaded$1: function ($function) {
+                Bridge.Test.Assert.true$1(true, "overload with Func<int> called");
+            },
+            doSomething: function () {
+                Bridge.Test.Assert.fail$1("DoSomething should not be called");
+                return 0;
+            },
+            foo$2: function (func) {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer = System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer, "Func<long>");
+            },
+            foo$4: function (func) {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer = System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer, "Func<ulong>");
+            },
+            foo$1: function (func) {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer = System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer, "Func<int>");
+            },
+            foo: function (func) {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer = System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer, "Func<decimal>");
+            },
+            foo$3: function (func) {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer = System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer, "Func<string>");
+            },
+            testOverloadResolutionMSDN2: function () {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer = "";
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.foo$2($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f2);
+                Bridge.Test.Assert.areEqual$1("Func<long>", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer, "Should call Func<long>");
+
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer = "";
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.foo$2($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f4);
+                Bridge.Test.Assert.areEqual$1("Func<long>", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer, "Should call Func<long>");
+
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer = "";
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.foo$4($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f6);
+                Bridge.Test.Assert.areEqual$1("Func<ulong>", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer, "Should call Func<ulong>");
+
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer = "";
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.foo$1($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f8);
+                Bridge.Test.Assert.areEqual$1("Func<int>", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer, "Should call Func<int>");
+
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer = "";
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.foo($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f10);
+                Bridge.Test.Assert.areEqual$1("Func<decimal>", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer, "Should call Func<decimal>");
+
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer = "";
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.foo$3($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f12);
+                Bridge.Test.Assert.areEqual$1("Func<string>", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.buffer, "Should call Func<string>");
+            }
+        },
+        testOverloadResolutionMSDN1: function () {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.overloaded$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.doSomething);
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN", $_);
+
+    Bridge.apply($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN, {
+        f1: function () {
+            return System.Int64(9);
+        },
+        f2: function () {
+            return $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f1;
+        },
+        f3: function () {
+            return System.Int64(5);
+        },
+        f4: function () {
+            return $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f3;
+        },
+        f5: function () {
+            return System.UInt64(3);
+        },
+        f6: function () {
+            return $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f5;
+        },
+        f7: function () {
+            return 7;
+        },
+        f8: function () {
+            return $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f7;
+        },
+        f9: function () {
+            return System.Decimal(11.0);
+        },
+        f10: function () {
+            return $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f9;
+        },
+        f11: function () {
+            return "15";
+        },
+        f12: function () {
+            return $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN.f11;
         }
     });
 
@@ -14794,30 +14960,30 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues", $_);
 
     Bridge.apply($_.Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues, {
-        f1: function (_o20) {
-            _o20.add(0);
-            _o20.add(1);
-            _o20.add(2);
-            _o20.add(3);
-            _o20.add(4);
-            return _o20;
-        },
-        f2: function (_o21) {
-            _o21.add(3, "b");
-            _o21.add(6, "z");
-            _o21.add(9, "x");
-            return _o21;
-        },
-        f3: function (i) {
-            return ((i * 2) | 0);
-        },
-        f4: function (_o22) {
+        f1: function (_o22) {
             _o22.add(0);
             _o22.add(1);
             _o22.add(2);
             _o22.add(3);
             _o22.add(4);
             return _o22;
+        },
+        f2: function (_o23) {
+            _o23.add(3, "b");
+            _o23.add(6, "z");
+            _o23.add(9, "x");
+            return _o23;
+        },
+        f3: function (i) {
+            return ((i * 2) | 0);
+        },
+        f4: function (_o24) {
+            _o24.add(0);
+            _o24.add(1);
+            _o24.add(2);
+            _o24.add(3);
+            _o24.add(4);
+            return _o24;
         }
     });
 

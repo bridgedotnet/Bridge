@@ -36,4 +36,86 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual(2, Overloaded(DoSomething2));
         }
     }
+
+    [Category(Constants.MODULE_ISSUES)]
+    [TestFixture(TestNameFormat = "#1713 - {0}")]
+    public class Bridge1713MSDN
+    {
+        static void Overloaded(Action action)
+        {
+            Assert.Fail("overload with action called");
+        }
+
+        static void Overloaded(Func<int> function)
+        {
+            Assert.True(true, "overload with Func<int> called");
+        }
+
+        static int DoSomething()
+        {
+            Assert.Fail("DoSomething should not be called");
+            return 0;
+        }
+
+        [Test]
+        public void TestOverloadResolutionMSDN1()
+        {
+            Overloaded(DoSomething);
+        }
+
+        static string buffer;
+
+        static void Foo(Func<Func<long>> func)
+        {
+            buffer += "Func<long>";
+        }
+
+        static void Foo(Func<Func<ulong>> func)
+        {
+            buffer += "Func<ulong>";
+        }
+
+        static void Foo(Func<Func<int>> func)
+        {
+            buffer += "Func<int>";
+        }
+
+        static void Foo(Func<Func<decimal>> func)
+        {
+            buffer += "Func<decimal>";
+        }
+
+        static void Foo(Func<Func<string>> func)
+        {
+            buffer += "Func<string>";
+        }
+
+        [Test]
+        public static void TestOverloadResolutionMSDN2()
+        {
+            buffer = string.Empty;
+            Foo(() => () => 9L);
+            Assert.AreEqual("Func<long>", buffer, "Should call Func<long>");
+
+            buffer = string.Empty;
+            Foo(() => () => 5u);
+            Assert.AreEqual("Func<long>", buffer, "Should call Func<long>");
+
+            buffer = string.Empty;
+            Foo(() => () => 3UL);
+            Assert.AreEqual("Func<ulong>", buffer, "Should call Func<ulong>");
+
+            buffer = string.Empty;
+            Foo(() => () => 7);
+            Assert.AreEqual("Func<int>", buffer, "Should call Func<int>");
+
+            buffer = string.Empty;
+            Foo(() => () => 11m);
+            Assert.AreEqual("Func<decimal>", buffer, "Should call Func<decimal>");
+
+            buffer = string.Empty;
+            Foo(() => () => "15");
+            Assert.AreEqual("Func<string>", buffer, "Should call Func<string>");
+        }
+    }
 }
