@@ -17,7 +17,7 @@ namespace Bridge.Translator
         /// <summary>
         /// Generates the static method call.
         /// </summary>
-        public static ExpressionStatementSyntax GenerateStaticMethodCall(string methodName, string className, ArgumentSyntax[] arguments = null, Type[] typeArguments = null)
+        public static ExpressionStatementSyntax GenerateStaticMethodCall(string methodName, string className, ArgumentSyntax[] arguments = null, ITypeSymbol[] typeArguments = null)
         {
             var methodIdentifier = GenerateMethodIdentifier(methodName, className, typeArguments);
             return SyntaxFactory.ExpressionStatement(
@@ -29,7 +29,7 @@ namespace Bridge.Translator
         /// <summary>
         /// Generates the method call.
         /// </summary>
-        public static ExpressionStatementSyntax GenerateMethodCall(string methodName, string targetIdentifier, ArgumentSyntax[] arguments = null, Type[] typeArguments = null)
+        public static ExpressionStatementSyntax GenerateMethodCall(string methodName, string targetIdentifier, ArgumentSyntax[] arguments = null, ITypeSymbol[] typeArguments = null)
         {
             var methodIdentifier = GenerateMethodIdentifier(methodName, targetIdentifier, typeArguments);
             return SyntaxFactory.ExpressionStatement(
@@ -41,7 +41,7 @@ namespace Bridge.Translator
         /// <summary>
         /// Generates the method identifier.
         /// </summary>
-        public static ExpressionSyntax GenerateMethodIdentifier(string methodName, string targetIdentifierOrTypeName, Type[] typeArguments = null)
+        public static ExpressionSyntax GenerateMethodIdentifier(string methodName, string targetIdentifierOrTypeName, ITypeSymbol[] typeArguments = null)
         {
             ExpressionSyntax methodIdentifier = SyntaxFactory.IdentifierName(targetIdentifierOrTypeName + "." + methodName);
             if (typeArguments != null)
@@ -585,5 +585,11 @@ namespace Bridge.Translator
 
             return null;
         }
+
+        public static bool IsExpressionOfT(this ITypeSymbol type)
+        {
+            return type is INamedTypeSymbol && type.OriginalDefinition.MetadataName == typeof(System.Linq.Expressions.Expression<>).Name && type.ContainingNamespace.FullyQualifiedName() == typeof(System.Linq.Expressions.Expression<>).Namespace;
+        }
+
     }
 }

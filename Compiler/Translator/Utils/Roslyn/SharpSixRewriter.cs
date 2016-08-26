@@ -516,18 +516,61 @@ namespace Bridge.Translator
             return node;
         }
 
+        public override SyntaxNode VisitParenthesizedLambdaExpression(ParenthesizedLambdaExpressionSyntax node)
+        {
+            var ti = this.semanticModel.GetTypeInfo(node);
+            var oldValue = this.IsExpressionOfT;
+
+            if (ti.Type != null && ti.Type.IsExpressionOfT() ||
+                ti.ConvertedType != null && ti.ConvertedType.IsExpressionOfT())
+            {
+                this.IsExpressionOfT = true;
+            }
+
+            var newNode = base.VisitParenthesizedLambdaExpression(node);
+
+            this.IsExpressionOfT = oldValue;
+
+            return newNode;
+        }
+
+        public override SyntaxNode VisitSimpleLambdaExpression(SimpleLambdaExpressionSyntax node)
+        {
+            var ti = this.semanticModel.GetTypeInfo(node);
+            var oldValue = this.IsExpressionOfT;
+
+            if (ti.Type != null && ti.Type.IsExpressionOfT() ||
+                ti.ConvertedType != null && ti.ConvertedType.IsExpressionOfT())
+            {
+                this.IsExpressionOfT = true;
+            }
+
+            var newNode = base.VisitSimpleLambdaExpression(node);
+
+            this.IsExpressionOfT = oldValue;
+
+            return newNode;
+        }
+
+        public bool IsExpressionOfT { get; set; }
+        private int indexInstance;
+
         public override SyntaxNode VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
         {
             IMethodSymbol method = null;
-
+            bool extensionMethodExists = false;
             if (node.Initializer != null)
             {
                 foreach (var init in node.Initializer.Expressions)
                 {
                     var collectionInitializer = this.semanticModel.GetCollectionInitializerSymbolInfo(init).Symbol;
                     var mInfo = collectionInitializer != null ? collectionInitializer as IMethodSymbol : null;
-                    if (mInfo != null && mInfo.IsExtensionMethod)
+                    if (mInfo != null)
                     {
+                        if (mInfo.IsExtensionMethod)
+                        {
+                            extensionMethodExists = true;
+                        }
                         method = mInfo;
                         break;
                     }
@@ -535,7 +578,7 @@ namespace Bridge.Translator
             }
 
             node = (ObjectCreationExpressionSyntax)base.VisitObjectCreationExpression(node);
-
+            bool isImplicitElementAccessSyntax = false;
             if (node.Initializer != null && (method != null || node.Initializer.Expressions.Any(init =>
             {
                 if (init.Kind() == SyntaxKind.SimpleAssignmentExpression)
@@ -543,6 +586,7 @@ namespace Bridge.Translator
                     var be = (AssignmentExpressionSyntax)init;
                     if (be.Left is ImplicitElementAccessSyntax)
                     {
+                        isImplicitElementAccessSyntax = true;
                         return true;
                     }
                 }
@@ -550,6 +594,23 @@ namespace Bridge.Translator
                 return false;
             })))
             {
+                if (this.IsExpressionOfT)
+                {
+                    if (isImplicitElementAccessSyntax)
+                    {
+                        var mapped = this.semanticModel.SyntaxTree.GetLineSpan(node.Span);
+                        throw new Exception(string.Format(CultureInfo.InvariantCulture, "{2} - {3}({0},{1}): {4}", mapped.StartLinePosition.Line + 1, mapped.StartLinePosition.Character + 1, "Index collection initializer is not supported inside Expression<T>", this.semanticModel.SyntaxTree.FilePath, node.ToString()));
+                    }
+
+                    if (extensionMethodExists)
+                    {
+                        var mapped = this.semanticModel.SyntaxTree.GetLineSpan(node.Span);
+                        throw new Exception(string.Format(CultureInfo.InvariantCulture, "{2} - {3}({0},{1}): {4}", mapped.StartLinePosition.Line + 1, mapped.StartLinePosition.Character + 1, "Extension method for collection initializer is not supported inside Expression<T>", this.semanticModel.SyntaxTree.FilePath, node.ToString()));
+                    }
+
+                    return node;
+                }
+
                 var initializers = node.Initializer.Expressions;
                 ExpressionSyntax[] args = new ExpressionSyntax[2];
                 var target = node.WithInitializer(null).WithoutTrivia();
@@ -563,16 +624,64 @@ namespace Bridge.Translator
 
                 List<StatementSyntax> statements = new List<StatementSyntax>();
 
+                var parent = node.Parent;
+
+                while (parent != null && !(parent is MethodDeclarationSyntax) && !(parent is ClassDeclarationSyntax))
+                {
+                    parent = parent.Parent;
+                }
+
+                string instance = "_o" + ++indexInstance;
+                if (parent != null)
+                {
+                    var info = LocalUsageGatherer.GatherInfo(this.semanticModel, parent);
+                    while (info.DirectlyOrIndirectlyUsedLocals.Any(s => s.Name == instance))
+                    {
+                        instance = "_o" + ++indexInstance;
+                    }
+                }
+
                 foreach (var init in initializers)
                 {
                     var collectionInitializer = this.semanticModel.GetCollectionInitializerSymbolInfo(init).Symbol;
                     var mInfo = collectionInitializer != null ? collectionInitializer as IMethodSymbol : null;
-                    if (mInfo != null && mInfo.IsExtensionMethod)
+                    if (mInfo != null)
                     {
-                        var ie = SyntaxHelper.GenerateStaticMethodCall(mInfo.Name,
-                            mInfo.ContainingType.FullyQualifiedName(),
-                            new[] {SyntaxFactory.Argument(SyntaxFactory.IdentifierName("o")), SyntaxFactory.Argument(init.WithoutTrivia()) });
-                        statements.Add(ie);
+                        if (mInfo.IsStatic)
+                        {
+                            var ie = SyntaxHelper.GenerateStaticMethodCall(mInfo.Name,
+                                mInfo.ContainingType.FullyQualifiedName(),
+                                new[]
+                                {
+                                    SyntaxFactory.Argument(SyntaxFactory.IdentifierName(instance)),
+                                    SyntaxFactory.Argument(init.WithoutTrivia())
+                                }, mInfo.TypeArguments.ToArray());
+                            statements.Add(ie);
+                        }
+                        else
+                        {
+                            ArgumentSyntax[] arguments = null;
+                            if (init.Kind() == SyntaxKind.ComplexElementInitializerExpression)
+                            {
+                                var complexInit = (InitializerExpressionSyntax) init;
+
+                                arguments = new ArgumentSyntax[complexInit.Expressions.Count];
+                                for (int i = 0; i < complexInit.Expressions.Count; i++)
+                                {
+                                    arguments[i] = SyntaxFactory.Argument(complexInit.Expressions[i].WithoutTrivia());
+                                }
+                            }
+                            else
+                            {
+                                arguments = new[]
+                                {
+                                    SyntaxFactory.Argument(init.WithoutTrivia())
+                                };
+                            }
+
+                            var ie = SyntaxHelper.GenerateMethodCall(mInfo.Name, instance, arguments, mInfo.TypeArguments.ToArray());
+                            statements.Add(ie);
+                        }
                     }
                     else
                     {
@@ -581,12 +690,12 @@ namespace Bridge.Translator
 
                         if (indexerKeys != null)
                         {
-                            be = be.WithLeft(SyntaxFactory.ElementAccessExpression(SyntaxFactory.IdentifierName("o"), indexerKeys.ArgumentList.WithoutTrivia()));
+                            be = be.WithLeft(SyntaxFactory.ElementAccessExpression(SyntaxFactory.IdentifierName(instance), indexerKeys.ArgumentList.WithoutTrivia()));
                         }
                         else
                         {
                             var identifier = (IdentifierNameSyntax)be.Left;
-                            be = be.WithLeft(SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, SyntaxFactory.IdentifierName("o"), SyntaxFactory.IdentifierName(identifier.Identifier.ValueText)));
+                            be = be.WithLeft(SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, SyntaxFactory.IdentifierName(instance), SyntaxFactory.IdentifierName(identifier.Identifier.ValueText)));
                         }
 
                         be = be.WithRight(be.Right.WithoutTrivia());
@@ -596,10 +705,10 @@ namespace Bridge.Translator
                     }
                 }
 
-                statements.Add(SyntaxFactory.ReturnStatement(SyntaxFactory.IdentifierName("o").WithLeadingTrivia(SyntaxFactory.Space)));
+                statements.Add(SyntaxFactory.ReturnStatement(SyntaxFactory.IdentifierName(instance).WithLeadingTrivia(SyntaxFactory.Space)));
 
                 var body = SyntaxFactory.Block(statements);
-                var lambda = SyntaxFactory.ParenthesizedLambdaExpression(SyntaxFactory.ParameterList(SyntaxFactory.SeparatedList(new[] { SyntaxFactory.Parameter(SyntaxFactory.Identifier("o")) })), body);
+                var lambda = SyntaxFactory.ParenthesizedLambdaExpression(SyntaxFactory.ParameterList(SyntaxFactory.SeparatedList(new[] { SyntaxFactory.Parameter(SyntaxFactory.Identifier(instance)) })), body);
                 args[1] = lambda;
 
                 var methodIdentifier = SyntaxFactory.IdentifierName("Bridge.Script.CallFor");
