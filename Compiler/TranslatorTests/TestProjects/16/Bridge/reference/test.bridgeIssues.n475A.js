@@ -33,7 +33,7 @@
             n475: function () {
                 var b = new Test.BridgeIssues.N475A.Bridge475();
 
-                b.keyDown($_.Test.BridgeIssues.N475A.Test.f1);
+                Test.BridgeIssues.N475A.Bridge475Extension1.keyDown(Test.BridgeIssues.N475A.Bridge475Event, b, $_.Test.BridgeIssues.N475A.Test.f1);
 
                 b.keyDown(4);
 

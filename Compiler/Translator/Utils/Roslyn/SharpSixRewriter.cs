@@ -220,9 +220,14 @@ namespace Bridge.Translator
                     pType = ((IArrayTypeSymbol)parameter.Type).ElementType;
                 }
 
+                if (node.Expression is CastExpressionSyntax && type.Equals(pType))
+                {
+                    return node;
+                }
+
                 if (pType.TypeKind == TypeKind.Delegate || parameter.IsParams && ((IArrayTypeSymbol)parameter.Type).ElementType.TypeKind == TypeKind.Delegate)
                 {
-                    var name = SyntaxFactory.IdentifierName(pType.ToDisplayString()).WithoutTrivia();
+                    var name = SyntaxFactory.IdentifierName(pType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)).WithoutTrivia();
                     var expr = node.Expression;
 
                     if (expr is LambdaExpressionSyntax)

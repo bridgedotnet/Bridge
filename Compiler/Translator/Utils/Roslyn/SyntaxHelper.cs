@@ -182,7 +182,7 @@ namespace Bridge.Translator
 
         public static TypeSyntax GenerateTypeSyntax(ITypeSymbol type)
         {
-            return SyntaxFactory.IdentifierName(type.ToDisplayString()).WithoutTrivia();
+            return SyntaxFactory.IdentifierName(type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)).WithoutTrivia();
         }
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace Bridge.Translator
             {
                 name = name.Substring(0, name.IndexOf("`"));
             }
-            return name;
+            return "global::" + name;
         }
 
         /// <summary>
