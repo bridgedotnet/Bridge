@@ -237,6 +237,12 @@ namespace Bridge.Translator
                     {
                         collection = this.CurrentType.StaticConfig.AutoPropertyInitializers;
                         var prop = this.CurrentType.StaticConfig.Properties.FirstOrDefault(p => p.Name == name);
+
+                        if (prop == null)
+                        {
+                            prop = this.CurrentType.StaticConfig.Fields.FirstOrDefault(p => p.Name == name);
+                        }
+
                         if (prop != null)
                         {
                             prop.Initializer = initializer;
@@ -259,6 +265,12 @@ namespace Bridge.Translator
                     {
                         collection = this.CurrentType.InstanceConfig.AutoPropertyInitializers;
                         var prop = this.CurrentType.InstanceConfig.Properties.FirstOrDefault(p => p.Name == name);
+
+                        if (prop == null)
+                        {
+                            prop = this.CurrentType.InstanceConfig.Fields.FirstOrDefault(p => p.Name == name);
+                        }
+
                         if (prop != null)
                         {
                             prop.Initializer = initializer;
