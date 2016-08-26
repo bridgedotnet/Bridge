@@ -10,9 +10,6 @@ alert("I'm header 1.0.0-beta");
 
 // -- remark with no tokens
 
-Bridge.initAssembly("TestProject", function ($asm, globals) {
-    "use strict";
-
     Bridge.define('TestIssue599.Issue599', {
         statics: {
             config: {
@@ -28,13 +25,7 @@ Bridge.initAssembly("TestProject", function ($asm, globals) {
         _something: "HI!"
     });
 
-    Bridge.init();
-});
-
 // -- remark with no tokens
-
-Bridge.initAssembly("TestProject", function ($asm, globals) {
-    "use strict";
 
     Bridge.define('TestIssue948.Issue948', {
         statics: {
@@ -58,6 +49,3 @@ Bridge.initAssembly("TestProject", function ($asm, globals) {
             }
         }
     });
-
-    Bridge.init();
-});

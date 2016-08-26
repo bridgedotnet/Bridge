@@ -1,7 +1,4 @@
-﻿Bridge.initAssembly("TestProject", function ($asm, globals) {
-    "use strict";
-
-    Bridge.define('TestIssue461.Issue461', {
+﻿    Bridge.define('TestIssue461.Issue461', {
         statics: {
             test: function () {
                 var input = document.createElement('input');
@@ -41,6 +38,3 @@
             System.Console.log(System.String.concat("ev.CurrentTarget.Href: ", ev.currentTarget.href));
         }
     });
-
-    Bridge.init();
-});

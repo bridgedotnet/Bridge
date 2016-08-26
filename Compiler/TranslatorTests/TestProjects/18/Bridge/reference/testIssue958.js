@@ -1,7 +1,4 @@
-﻿Bridge.initAssembly("TestProject", function ($asm, globals) {
-    "use strict";
-
-    Bridge.define('TestIssue958.IMessage', {
+﻿    Bridge.define('TestIssue958.IMessage', {
         $kind: "interface"
     });
 
@@ -67,6 +64,3 @@
             this.setValue(value);
         }
     });
-
-    Bridge.init();
-});

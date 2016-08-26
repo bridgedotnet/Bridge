@@ -1,7 +1,4 @@
-﻿Bridge.initAssembly("TestProject", function ($asm, globals) {
-    "use strict";
-
-    Bridge.define('TestIssue1050.App', {
+﻿    Bridge.define('TestIssue1050.App', {
         statics: {
             field: 0,
             config: {
@@ -23,6 +20,3 @@
             TestIssue1050.App.method();
         }
     });
-
-    Bridge.init();
-});

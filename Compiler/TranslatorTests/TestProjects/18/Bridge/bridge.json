@@ -11,6 +11,13 @@
   "logging": {
     "level": "None"
   },
+  // #1656 test
+  "assembly": {
+    "disableInitAssembly": true,
+    "enableReservedNamespaces": false,
+    "fullName": "BridgeTest18Assembly"
+  },
+
   // #1680 test
   "resources": [
     // Check defaults are used

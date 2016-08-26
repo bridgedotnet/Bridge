@@ -1,7 +1,4 @@
-﻿Bridge.initAssembly("TestProject", function ($asm, globals) {
-    "use strict";
-
-    Bridge.define('TestIssue921Nested.Issue921NestedOuter', {
+﻿    Bridge.define('TestIssue921Nested.Issue921NestedOuter', {
         useAField1: function () {
             var n = new TestIssue921Nested.Issue921NestedOuter.Issue921Nested(100);
 
@@ -221,6 +218,3 @@
             return i.toString();
         }
     });
-
-    Bridge.init();
-});

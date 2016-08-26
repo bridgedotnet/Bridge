@@ -6,9 +6,6 @@
 
 // Top
 
-Bridge.initAssembly("TestProject", function ($asm, globals) {
-    "use strict";
-
     (function(){
         TestIssue434.Issue434A.doSomething(2);
     })();
@@ -65,17 +62,11 @@ Bridge.initAssembly("TestProject", function ($asm, globals) {
         }
     });
 
-    Bridge.init();
-});
-
 // Bottom
 
 // ---
 // Content remark: Path: Bridge\output\testIssue461.js; name: testIssue461.js
 // ---
-
-Bridge.initAssembly("TestProject", function ($asm, globals) {
-    "use strict";
 
     Bridge.define('TestIssue461.Issue461', {
         statics: {
@@ -117,6 +108,3 @@ Bridge.initAssembly("TestProject", function ($asm, globals) {
             System.Console.log(System.String.concat("ev.CurrentTarget.Href: ", ev.currentTarget.href));
         }
     });
-
-    Bridge.init();
-});

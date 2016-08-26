@@ -1,7 +1,4 @@
-﻿Bridge.initAssembly("TestProject", function ($asm, globals) {
-    "use strict";
-
-    Bridge.define('TestIssue1035.StructBridge1035', {
+﻿    Bridge.define('TestIssue1035.StructBridge1035', {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new TestIssue1035.StructBridge1035(); }
@@ -28,6 +25,3 @@
         },
         $clone: function (to) { return this; }
     });
-
-    Bridge.init();
-});

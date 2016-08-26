@@ -1,7 +1,4 @@
-﻿Bridge.initAssembly("TestProject", function ($asm, globals) {
-    "use strict";
-
-    Bridge.define('TestIssue921Static.Issue921Static', {
+﻿    Bridge.define('TestIssue921Static.Issue921Static', {
         statics: {
             constructor: function () {
                 TestIssue921Static.Issue921Static._offset = 10;
@@ -126,6 +123,3 @@
             return i.toString();
         }
     });
-
-    Bridge.init();
-});

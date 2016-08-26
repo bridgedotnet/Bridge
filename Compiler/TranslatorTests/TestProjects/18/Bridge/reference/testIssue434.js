@@ -1,8 +1,5 @@
 ﻿// Top
 
-Bridge.initAssembly("TestProject", function ($asm, globals) {
-    "use strict";
-
     (function(){
         TestIssue434.Issue434A.doSomething(2);
     })();
@@ -58,8 +55,5 @@ Bridge.initAssembly("TestProject", function ($asm, globals) {
 
         }
     });
-
-    Bridge.init();
-});
 
 // Bottom

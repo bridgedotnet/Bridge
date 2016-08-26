@@ -1,7 +1,4 @@
 
-Bridge.initAssembly("TestProject", function ($asm, globals) {
-    "use strict";
-
     Bridge.define('LinkedFiles.Issue531Link1');
 
     Bridge.define('LinkedFiles.Issue531Link2');
@@ -9,12 +6,6 @@ Bridge.initAssembly("TestProject", function ($asm, globals) {
     Bridge.define('LinkedFiles.Issue531Link3');
 
     Bridge.define('LinkedFiles.Issue531Link4');
-
-    Bridge.init();
-});
-
-Bridge.initAssembly("TestProject", function ($asm, globals) {
-    "use strict";
 
     Bridge.define('TestIssue379.Tests', {
         testDataIgnore: function () {
@@ -57,6 +48,3 @@ Bridge.initAssembly("TestProject", function ($asm, globals) {
             var d8 = { mode: 1, int1: 1, int2: 22, str3: "3", str4: "Str44", intNull5: 5, intNull6: 66, decimal7: System.Decimal(7), decimal8: System.Decimal(88) };
         }
     });
-
-    Bridge.init();
-});
