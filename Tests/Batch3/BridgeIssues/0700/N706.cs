@@ -3,7 +3,6 @@ using System;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
-    // Bridge[#706]
     [Category(Constants.MODULE_ISSUES)]
     [TestFixture(TestNameFormat = "#706 - {0}")]
     public class Bridge706

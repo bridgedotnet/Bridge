@@ -6772,6 +6772,8 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
+
+
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6801,7 +6803,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                }; /// Async method lacks 'await' operators and will run synchronously
+                                };
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
