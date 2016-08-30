@@ -29,7 +29,7 @@
 	// args is the solution file name.
 
     // Release Build
-	"args": [ "/p:Configuration=Release", "Bridge.NoTest.sln", "/t:Clean" ]
+	"args": [ "/p:Configuration=Release", "Bridge.NoTest.sln" ]
 	
     // Debug Build
     // "args": [ "Bridge.NoTest.sln" ]
