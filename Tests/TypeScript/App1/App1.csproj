@@ -65,7 +65,7 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Import Project="$(SolutionDir).nuget\NuGet.targets" Condition="Exists('$(SolutionDir).nuget\NuGet.targets')" />
   <PropertyGroup Condition="'$(OS)' != 'Unix'">
     <PostBuildEvent>
 REM Run Bridge Compiler for the project
