@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Bridge.Contract
 {
@@ -19,16 +21,19 @@ namespace Bridge.Contract
             get; set;
         }
 
+        [JsonConverter(typeof(StringEnumConverter))]
         OutputBy OutputBy
         {
             get; set;
         }
 
+        [JsonConverter(typeof(StringEnumConverter))]
         FileNameCaseConvert FileNameCasing
         {
             get; set;
         }
 
+        [JsonConverter(typeof(StringEnumConverter))]
         JavaScriptOutputType OutputFormatting
         {
             get; set;
@@ -74,6 +79,7 @@ namespace Bridge.Contract
             get; set;
         }
 
+        [JsonConverter(typeof(StringEnumConverter))]
         DocumentationMode GenerateDocumentation
         {
             get; set;
@@ -151,6 +157,7 @@ namespace Bridge.Contract
             get; set;
         }
 
+        [JsonConverter(typeof(StringEnumConverter))]
         OverflowMode? OverflowMode
         {
             get; set;
