@@ -7,9 +7,12 @@ before_install:
 #- cd $TRAVIS_BUILD_DIR
 - mono .nuget/NuGet.exe
 install:
-- mono .nuget/nuget.exe restore Bridge.NoTest.sln -Verbosity detailed
+- mono .nuget/NuGet.exe restore Bridge.NoTest.sln -Verbosity detailed
 language: csharp
 solution: Bridge.NoTest.sln
+cache:
+  directories:
+  - packages
 
 notifications:
   slack:
