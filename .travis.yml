@@ -4,6 +4,7 @@ before_install:
 # We skip downloading and restoring latest nuget.exe as we have it in our solution
 # - mkdir -p .nuget
 # - wget -O .nuget/nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+- echo $TRAVIS_BUILD_DIR
 - mono .nuget/nuget.exe
 install:
 - mono .nuget/nuget.exe restore Bridge.NoTest.sln -Verbosity detailed
