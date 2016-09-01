@@ -65,13 +65,13 @@
       <NuGetPackageOutputDir>$(NuGetPackageOutputDir.Trim('/'))</NuGetPackageOutputDir>
     </PropertyGroup>
 
-    <!--<GetAssemblyVersionFromTextFile Condition="$(NuGetUseExplicitVersion) == 'false'" Filename="$(SolutionDir).build\common\CommonAssemblyInfo.cs">
+    <GetAssemblyVersionFromTextFile Condition="'$(OS)' == 'Windows_NT' AND $(NuGetUseExplicitVersion) == 'false'" Filename="$(SolutionDir).build\common\CommonAssemblyInfo.cs">
       <Output TaskParameter="Version" ItemName="AssemblyInformationalVersion"/>
     </GetAssemblyVersionFromTextFile>
 
-    <GetAssemblyVersionFromDll Condition="$(NuGetUseExplicitVersion) == 'false' And (@(AssemblyInformationalVersion) == '' Or @(AssemblyInformationalVersion) == '*Undefined*') " Filename="$(ProjectDir)$(OutDir)$(AssemblyName).dll">
+    <GetAssemblyVersionFromDll Condition="'$(OS)' == 'Windows_NT' AND $(NuGetUseExplicitVersion) == 'false' AND (@(AssemblyInformationalVersion) == '' OR @(AssemblyInformationalVersion) == '*Undefined*') " Filename="$(ProjectDir)$(OutDir)$(AssemblyName).dll">
       <Output TaskParameter="Version" ItemName="AssemblyInformationalVersion"/>
-    </GetAssemblyVersionFromDll>-->
+    </GetAssemblyVersionFromDll>
 
     <Message Condition="$(NuGetUseExplicitVersion) == 'true'" Text="Will use package version from nuspec" Importance="high" />
 
@@ -82,27 +82,37 @@
       <NuGetPackageVersion Condition="$(NuGetUseExplicitVersion) == 'false' AND ($(NuGetPackageVersion) == '' Or $(NuGetPackageVersion) == '*Undefined*')"> -Version "15.0.0"</NuGetPackageVersion>
     </PropertyGroup>
 
+    <PropertyGroup>
+      <NuGetPackageVersion Condition="$(NuGetUseExplicitVersion) == 'false' AND ($(NuGetPackageVersion) == '' Or $(NuGetPackageVersion) == '*Undefined*')"> -Version "15.0.0"</NuGetPackageVersion>
+    </PropertyGroup>
+
     <Message Condition="$(NuGetUseExplicitVersion) == 'false'" Text="Applying $(NuGetPackageVersion) for NuGet package %(NuGetPackageSourcePath.Path)" Importance="high" />
+
+    <Message Text="NuGetCommand before trim: $(NuGetCommand)" Importance="high" />
 
     <PropertyGroup>
       <NuGetCommand>$(NuGetCommand.Replace("\\\\", "\\"))</NuGetCommand>
-      <NuGetCommand>$(NuGetCommand.Trim("\\"))</NuGetCommand>
+      <NuGetCommand>$(NuGetCommand.Trim('\\'))</NuGetCommand>
       <NuGetCommand>$(NuGetCommand.Replace("//", "/"))</NuGetCommand>
       <NuGetCommand>$(NuGetCommand.Trim('/'))</NuGetCommand>
       <NuGetCommand Condition="'$(OS)' == 'Windows_NT'">$(NuGetCommand.Replace('\\', '/'))</NuGetCommand>
       <NuGetCommand Condition="'$(OS)' != 'Windows_NT'">$(NuGetCommand.Replace('/', '\\'))</NuGetCommand>
     </PropertyGroup>
 
-    <!--<FormatPath Path="$(NuGetCommand)" OS="$(OS)">
-      <Output TaskParameter="Path" ItemName="NuGetCommand"/>
-    </FormatPath>-->
+    <Message Text="NuGetCommand  after trim: $(NuGetCommand)" Importance="high" />
 
-    <Exec Command="$(NuGetCommand) pack  &quot;%(NuGetPackageSourcePath.Path)&quot;$(NuGetPackageVersion) -Properties &quot;Configuration=$(Configuration);Platform=$(Platform)&quot; $(NonInteractiveSwitch) -OutputDirectory &quot;$(NuGetPackageOutputDir)&quot; -NoDefaultExcludes"
-          Condition=" '$(OS)' != 'Windows_NT' " />
+    <PropertyGroup>
+      <NuGetCommand>$(NuGetCommand) pack  &quot;%(NuGetPackageSourcePath.Path)&quot;$(NuGetPackageVersion) -Properties &quot;Configuration=$(Configuration);Platform=$(Platform)&quot; $(NonInteractiveSwitch) -OutputDirectory &quot;$(NuGetPackageOutputDir)&quot; -NoDefaultExcludes</NuGetCommand>
+    </PropertyGroup>
 
-    <Exec Command="$(NuGetCommand) pack  &quot;%(NuGetPackageSourcePath.Path)&quot;$(NuGetPackageVersion) -Properties &quot;Configuration=$(Configuration);Platform=$(Platform)&quot; $(NonInteractiveSwitch) -OutputDirectory &quot;$(NuGetPackageOutputDir)&quot; -NoDefaultExcludes"
+    <Message Text="Full NuGetCommand: $(NuGetCommand)" Importance="high" />
+
+    <Exec Command="$(NuGetCommand)"
+          Condition="'$(OS)' != 'Windows_NT'" />
+
+    <Exec Command="$(NuGetCommand)"
           LogStandardErrorAsError="true"
-          Condition=" '$(OS)' == 'Windows_NT' " />
+          Condition="'$(OS)' == 'Windows_NT'" />
 
     <ItemGroup>
       <NuGetPackageOutputDirFiles Include="$(NuGetPackageOutputDir)\*.nupkg"/>
