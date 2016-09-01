@@ -29,10 +29,10 @@
   </metadata>
   <files>
     <!--content-->
-    <file src="..\..\LICENSE" target="content\App_Readme\Bridge.NET\LICENSE" />
+    <file src="../../LICENSE" target="content/App_Readme/Bridge.NET/LICENSE" />
 
     <!--NET40-->
-    <file src="..\..\Compiler\Translator\bin\Release\Bridge.Translator.dll" target="lib\net40\Bridge.Translator.dll" />
-    <file src="..\..\Compiler\Translator\bin\Release\Bridge.Translator.pdb" target="lib\net40\pdb\Bridge.Translator.pdb" />
+    <file src="../../Compiler/Translator/bin/Release/Bridge.Translator.dll" target="lib/net40/Bridge.Translator.dll" />
+    <!--<file src="../../Compiler/Translator/bin/Release/Bridge.Translator.pdb" target="lib/net40/pdb/Bridge.Translator.pdb" />-->
   </files>
 </package>
