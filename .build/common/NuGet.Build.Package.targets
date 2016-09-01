@@ -3,7 +3,7 @@
   <PropertyGroup>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
 
-    <!-- Download NuGet.exe if it does not already exist -->
+    <!-- Download nuget.exe if it does not already exist -->
     <DownloadNuGetExe Condition=" '$(DownloadNuGetExe)' == '' ">false</DownloadNuGetExe>
   </PropertyGroup>
 
@@ -20,10 +20,10 @@
 
   <PropertyGroup>
     <!-- NuGet command -->
-    <NuGetExePath Condition=" '$(NuGetExePath)' == '' ">$(NuGetToolsPath)\NuGet.exe</NuGetExePath>
+    <NuGetExePath Condition=" '$(NuGetExePath)' == ''">$(NuGetToolsPath)\nuget.exe</NuGetExePath>
 
     <NuGetCommand Condition=" '$(OS)' == 'Windows_NT'">"$(NuGetExePath)"</NuGetCommand>
-    <NuGetCommand Condition=" '$(OS)' != 'Windows_NT' ">mono --runtime=v4.0.30319 "$(NuGetExePath)"</NuGetCommand>
+    <NuGetCommand Condition=" '$(OS)' != 'Windows_NT'">mono --runtime=v4.0.30319 "$(NuGetExePath)"</NuGetCommand>
 
 
     <RequireConsentSwitch Condition=" $(RequireRestoreConsent) == 'true' ">-RequireConsent</RequireConsentSwitch>
@@ -54,7 +54,7 @@
     <DownloadNuGet OutputFilename="$(NuGetExePath)" Condition=" '$(DownloadNuGetExe)' == 'true' AND !Exists('$(NuGetExePath)')" />
   </Target>
 
-  <Target Name="BuildPackage" DependsOnTargets="CheckPrerequisites" Condition="'$(OS)' != 'Unix'">
+  <Target Name="BuildPackage" DependsOnTargets="CheckPrerequisites">
     <PropertyGroup>
       <NuGetUseExplicitVersion Condition=" '$(NuGetUseExplicitVersion)' == '' ">false</NuGetUseExplicitVersion>
       <!-- Set default NuGetPackageOutputDir if not defined-->
@@ -62,6 +62,7 @@
       <!-- NuGetPackageOutputDir == false means package version will be taken from $(SolutionDir).build\common\CommonAssemblyInfo.cs or project's output assembly version-->
       <NuGetPackageOutputDir Condition="$(NuGetPackageOutputDir) == '' Or $(NuGetPackageOutputDir) == '*Undefined*'">$(ProjectDir)$(OutDir)</NuGetPackageOutputDir>
       <NuGetPackageOutputDir>$(NuGetPackageOutputDir.Trim('\\'))</NuGetPackageOutputDir>
+      <NuGetPackageOutputDir>$(NuGetPackageOutputDir.Trim('/'))</NuGetPackageOutputDir>
     </PropertyGroup>
 
     <GetAssemblyVersionFromTextFile Condition="$(NuGetUseExplicitVersion) == 'false'" Filename="$(SolutionDir).build\common\CommonAssemblyInfo.cs">
@@ -82,6 +83,10 @@
 
     <Message Condition="$(NuGetUseExplicitVersion) == 'false'" Text="Applying $(NuGetPackageVersion) for NuGet package %(NuGetPackageSourcePath.Path)" Importance="high" />
 
+    <FormatPath Path="$(NuGetCommand)" OS="$(OS)">
+      <Output TaskParameter="Path" ItemName="NuGetCommand"/>
+    </FormatPath>
+
     <Exec Command="$(NuGetCommand) pack  &quot;%(NuGetPackageSourcePath.Path)&quot;$(NuGetPackageVersion) -Properties &quot;Configuration=$(Configuration);Platform=$(Platform)&quot; $(NonInteractiveSwitch) -OutputDirectory &quot;$(NuGetPackageOutputDir)&quot; -NoDefaultExcludes"
           Condition=" '$(OS)' != 'Windows_NT' " />
 
@@ -90,18 +95,18 @@
           Condition=" '$(OS)' == 'Windows_NT' " />
 
     <ItemGroup>
-      <NuGetPAckageOutputDirFiles Include="$(NuGetPackageOutputDir)\*.nupkg"/>
+      <NuGetPackageOutputDirFiles Include="$(NuGetPackageOutputDir)\*.nupkg"/>
     </ItemGroup>
 
     <Copy
       Condition="$(NuGetPackageCommonDir) != '' And $(NuGetPackageCommonDir) != '*Undefined*'"
-      SourceFiles="@(NuGetPAckageOutputDirFiles)"
+      SourceFiles="@(NuGetPackageOutputDirFiles)"
       DestinationFolder="$(NuGetPackageCommonDir)"
       ContinueOnError="true"
       />
   </Target>
 
-  <UsingTask TaskName="DownloadNuGet" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+  <UsingTask TaskName="DownloadNuGet" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
     <ParameterGroup>
       <OutputFilename ParameterType="System.String" Required="true" />
     </ParameterGroup>
@@ -117,7 +122,7 @@
                 try {
                     OutputFilename = Path.GetFullPath(OutputFilename);
 
-                    Log.LogMessage("Downloading latest version of NuGet.exe...");
+                    Log.LogMessage("Downloading latest version of nuget.exe...");
                     WebClient webClient = new WebClient();
                     webClient.DownloadFile("https://www.nuget.org/nuget.exe", OutputFilename);
 
@@ -132,7 +137,7 @@
     </Task>
   </UsingTask>
 
-  <UsingTask TaskName="GetAssemblyVersionFromTextFile" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+  <UsingTask TaskName="GetAssemblyVersionFromTextFile" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
     <ParameterGroup>
       <Filename ParameterType="System.String" Required="true" />
       <Version ParameterType="System.String" Output="True" />
@@ -148,14 +153,14 @@
                 {
                     Log.LogMessage(Microsoft.Build.Framework.MessageImportance.High, "Searching " + (Filename ?? string.Empty) + " for version...");
                     Version = null;
-                    
+
                     if (string.IsNullOrWhiteSpace(Filename))
                     {
                         Log.LogMessage(Microsoft.Build.Framework.MessageImportance.High, "Filename " + (Filename ?? string.Empty) + " is empty.");
                         return true;
                     }
-                    
-                    Filename = Path.GetFullPath(Filename);                   
+
+                    Filename = Path.GetFullPath(Filename);
                     if (!File.Exists(Filename))
                     {
                         Log.LogMessage(Microsoft.Build.Framework.MessageImportance.High, "Filename " + (Filename ?? string.Empty) + " does not exist.");
@@ -164,22 +169,22 @@
 
                     string fileContent = File.ReadAllText(Filename);
                     Log.LogMessage(Microsoft.Build.Framework.MessageImportance.High, "Read " + fileContent.Length + " symbols");
-                    
+
                     var attributeName = "AssemblyInformationalVersion";
                     var options = RegexOptions.IgnoreCase | RegexOptions.Compiled;
                     var regex = new Regex("\\[assembly: " + attributeName + "\\(\"(.*)\"\\)\\]", options);
-                    
+
                     var match = regex.Match(fileContent);
 
                     if (!match.Success)
                     {
                         Log.LogMessage(Microsoft.Build.Framework.MessageImportance.High, "Did not find " + attributeName + " in " + (Filename ?? string.Empty));
                         return true;
-                    }                    
-               
+                    }
+
                     Version = match.Groups[1].Value;
                     Log.LogMessage(Microsoft.Build.Framework.MessageImportance.High, "Found " + attributeName + " " + (Version ?? string.Empty) + " in " + (Filename ?? string.Empty));
-                    
+
                     return true;
                 }
                 catch (Exception ex) {
@@ -191,7 +196,7 @@
     </Task>
   </UsingTask>
 
-  <UsingTask TaskName="GetAssemblyVersionFromDll" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+  <UsingTask TaskName="GetAssemblyVersionFromDll" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
     <ParameterGroup>
       <Filename ParameterType="System.String" Required="true" />
       <Version ParameterType="System.String" Output="True" />
@@ -207,25 +212,74 @@
                 {
                     Log.LogMessage(Microsoft.Build.Framework.MessageImportance.High, "Searching " + (Filename ?? string.Empty) + " for version...");
                     Version = null;
-                    
+
                     if (string.IsNullOrWhiteSpace(Filename))
                     {
                         Log.LogMessage(Microsoft.Build.Framework.MessageImportance.High, "Filename " + (Filename ?? string.Empty) + " is empty.");
                         return false;
                     }
-                    
-                    Filename = Path.GetFullPath(Filename);                   
+
+                    Filename = Path.GetFullPath(Filename);
                     if (!File.Exists(Filename))
                     {
                         Log.LogMessage(Microsoft.Build.Framework.MessageImportance.High, "Filename " + (Filename ?? string.Empty) + " does not exist.");
                         return false;
                     }
-                    
+
                     var fileVersionInfo = FileVersionInfo.GetVersionInfo(Filename);
                     Version = fileVersionInfo.ProductVersion;
-               
+
                     Log.LogMessage(Microsoft.Build.Framework.MessageImportance.High, "Found ProductVersion " + (Version ?? string.Empty) + " in " + (Filename ?? string.Empty));
-                    
+
+                    return true;
+                }
+                catch (Exception ex) {
+                    Log.LogWarningFromException(ex);
+                    return false;
+                }
+            ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+  <UsingTask TaskName="FormatPath" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
+    <ParameterGroup>
+      <OS ParameterType="System.String" Required="true" />
+      <Path ParameterType="System.String" Required="true" Output="True"/>
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.Core" />
+      <Using Namespace="System" />
+      <Using Namespace="System.Diagnostics" />
+      <Using Namespace="System.Reflection" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+                try
+                {
+                    Log.LogMessage(Microsoft.Build.Framework.MessageImportance.High, "Formatting for OS " + (OS ?? string.Empty) + " path " + (Path ?? string.Empty));
+
+                    if (Path == null)
+                    {
+                        Log.LogMessage(Microsoft.Build.Framework.MessageImportance.High, "Path " + (Path ?? string.Empty) + " is null.");
+                        return false;
+                    }
+
+                    Path = Path.Replace("\\\\", "\\");
+                    Path = Path.Trim('\\');
+                    Path = Path.Replace("//", "/");
+                    Path = Path.Trim('/');
+
+                    if (OS != "Windows_NT")
+                    {
+                    	Path = Path.Replace('\\', '/');
+                    }
+                    else
+                    {
+                    	Path = Path.Replace('/', '\\');
+                    }
+
+                    Log.LogMessage(Microsoft.Build.Framework.MessageImportance.High, "Formatted path " + (Path ?? string.Empty));
+
                     return true;
                 }
                 catch (Exception ex) {

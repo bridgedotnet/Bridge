@@ -351,7 +351,7 @@
       <Path>$(SolutionDir).build\specs\Bridge.Html5.nuspec</Path>
     </NuGetPackageSourcePath>
   </ItemGroup>
-  <Import Condition="'$(OS)' != 'Unix' AND '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " Project="$(SolutionDir).build\common\NuGet.Build.Package.targets" />
+  <Import Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'" Project="$(SolutionDir).build\common\NuGet.Build.Package.targets" />
   <Target Name="CleanProjectNuGetOutput" BeforeTargets="Clean">
     <ItemGroup>
       <FilesToDelete Include="$(ProjectDir)$(OutDir)Bridge.*.nupkg" />
