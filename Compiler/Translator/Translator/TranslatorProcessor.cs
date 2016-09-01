@@ -158,6 +158,8 @@ namespace Bridge.Translator
             //translator.Flush(outputPath, fileName);
             //translator.Plugins.AfterOutput(translator, outputPath, this.NoCore);
 
+            outputPath = new ConfigHelper().ConvertPath(outputPath);
+
             return outputPath;
         }
 
