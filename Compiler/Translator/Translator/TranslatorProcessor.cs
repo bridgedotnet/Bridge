@@ -26,6 +26,7 @@ namespace Bridge.Translator
         public string PreProcess()
         {
             //System.Diagnostics.Debugger.Launch();
+            this.AdjustBridgeOptions();
 
             this.TranslatorConfiguration = this.ReadConfiguration();
 
@@ -47,6 +48,20 @@ namespace Bridge.Translator
             }
 
             return null;
+        }
+
+        private void AdjustBridgeOptions()
+        {
+            var pathHelper = new ConfigHelper();
+            var bridgeOptions = this.BridgeOptions;
+
+            bridgeOptions.BridgeLocation = pathHelper.ConvertPath(bridgeOptions.BridgeLocation);
+            bridgeOptions.DefaultFileName = pathHelper.ConvertPath(bridgeOptions.DefaultFileName);
+            bridgeOptions.Folder = pathHelper.ConvertPath(bridgeOptions.Folder);
+            bridgeOptions.Lib = pathHelper.ConvertPath(bridgeOptions.Lib);
+            bridgeOptions.OutputLocation = pathHelper.ConvertPath(bridgeOptions.OutputLocation);
+            bridgeOptions.ProjectLocation = pathHelper.ConvertPath(bridgeOptions.ProjectLocation);
+            bridgeOptions.Source = pathHelper.ConvertPath(bridgeOptions.Source);
         }
 
         public void Process()
