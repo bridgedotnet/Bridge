@@ -50,7 +50,20 @@ namespace Bridge.Translator.Tests
                 return null;
             }
 
-            var path = nodes.First().Value;
+            var path = AgjustPath(nodes.First().Value);
+
+            return path;
+        }
+
+        public static string AgjustPath(string path)
+        {
+            if (path == null)
+            {
+                return null;
+            }
+
+            path = path.Replace('\\', Path.DirectorySeparatorChar);
+            path = path.Replace('/', Path.DirectorySeparatorChar);
 
             return path;
         }
