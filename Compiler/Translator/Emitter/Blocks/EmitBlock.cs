@@ -53,7 +53,7 @@ namespace Bridge.Translator
 
                     case OutputBy.NamespacePath:
                     case OutputBy.Namespace:
-                        fileName = this.GetNamespaceFilename(typeInfo);
+                        fileName = typeInfo.GetNamespace(this.Emitter);
                         break;
 
                     default:
@@ -193,25 +193,6 @@ namespace Bridge.Translator
             this.Emitter.CurrentDependencies = dependencies;
 
             return moduleOutput;
-        }
-
-        private string GetNamespaceFilename(ITypeInfo typeInfo)
-        {
-            var cas = this.Emitter.BridgeTypes.Get(typeInfo.Key).TypeDefinition.CustomAttributes;
-
-            // Search for an 'NamespaceAttribute' entry
-            foreach (var ca in cas)
-            {
-                if (ca.AttributeType.Name == "NamespaceAttribute" &&
-                    ca.ConstructorArguments.Count > 0 &&
-                    ca.ConstructorArguments[0].Value is string &&
-                    !string.IsNullOrWhiteSpace(ca.ConstructorArguments[0].Value.ToString()))
-                {
-                    return ca.ConstructorArguments[0].Value.ToString();
-                }
-            }
-
-            return typeInfo.Namespace;
         }
 
         /// <summary>
@@ -383,7 +364,7 @@ namespace Bridge.Translator
                 this.Write(string.Format("Bridge.setMetadata({0}, function ({2}) {{ return {1}; }});", BridgeTypes.ToJsName(meta.Key, this.Emitter, true), metaData.ToString(Formatting.None), typeArgs));
                 this.WriteNewLine();
             }
-            
+
             if (scriptableAttributes.Count > 0)
             {
                 JArray attrArr = new JArray();

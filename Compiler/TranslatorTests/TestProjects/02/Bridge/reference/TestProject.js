@@ -2695,6 +2695,10 @@
             exists = scope[name];
 
             if (exists) {
+                if (exists.$$name === className) {
+                    throw "Class '" + className + "' is already defined";
+                }
+
                 for (key in exists) {
                     var o = exists[key];
 
@@ -4271,19 +4275,6 @@
             }
 
             return new System.AggregateException(this.getMessage(), flattenedExceptions);
-        }
-    });
-
-    Bridge.define("System.IndexOutOfRangeException", {
-        inherits: [System.SystemException],
-
-        constructor: function (message, innerException) {
-            this.$initialize();
-            if (!message) {
-                message = "Index was outside the bounds of the array.";
-            }
-
-            System.SystemException.$constructor.call(this, message, innerException);
         }
     });
 

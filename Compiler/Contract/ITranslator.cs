@@ -34,6 +34,12 @@ namespace Bridge.Contract
             set;
         }
 
+        string DefaultNamespace
+        {
+            get;
+            set;
+        }
+
         string GetCode();
 
         string Location

@@ -37,13 +37,24 @@ namespace Bridge.Translator.Utils
             return ReadConfig(CONFIG_FILE_NAME, folderMode, location, configuration);
         }
 
-        public void CreateConfig(IAssemblyInfo bridgeConfig, string folder)
+        public string CreateConfig(IAssemblyInfo bridgeConfig, string folder)
         {
-            using (var textFile = File.CreateText(folder + Path.DirectorySeparatorChar + CONFIG_FILE_NAME))
+            var path = Path.Combine(folder, CONFIG_FILE_NAME);
+
+            using (var textFile = File.CreateText(path))
             {
-                var config = JsonConvert.SerializeObject(bridgeConfig);
+                var jss = new JsonSerializerSettings()
+                {
+                    Formatting = Formatting.Indented,
+                    ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver()
+                };
+
+                var config = JsonConvert.SerializeObject(bridgeConfig, jss);
+
                 textFile.Write(config);
             }
+
+            return path;
         }
 
         public static string ConfigToString(IAssemblyInfo config)
