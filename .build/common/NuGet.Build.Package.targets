@@ -91,18 +91,22 @@
     <Message Text="NuGetCommand before trim: $(NuGetCommand)" Importance="high" />
 
     <PropertyGroup>
-      <NuGetCommand>$(NuGetCommand.Replace("\\\\", "\\"))</NuGetCommand>
-      <NuGetCommand>$(NuGetCommand.Trim('\\'))</NuGetCommand>
+      <NuGetCommand>$(NuGetCommand.Replace("\\", "\"))</NuGetCommand>
+      <NuGetCommand>$(NuGetCommand.Trim('\'))</NuGetCommand>
       <NuGetCommand>$(NuGetCommand.Replace("//", "/"))</NuGetCommand>
       <NuGetCommand>$(NuGetCommand.Trim('/'))</NuGetCommand>
-      <NuGetCommand Condition="'$(OS)' == 'Windows_NT'">$(NuGetCommand.Replace('\\', '/'))</NuGetCommand>
-      <NuGetCommand Condition="'$(OS)' != 'Windows_NT'">$(NuGetCommand.Replace('/', '\\'))</NuGetCommand>
+      <NuGetCommand Condition="'$(OS)' == 'Windows_NT'">$(NuGetCommand.Replace('/', '\'))</NuGetCommand>
+      <NuGetCommand Condition="'$(OS)' != 'Windows_NT'">$(NuGetCommand.Replace('\', '/'))</NuGetCommand>
     </PropertyGroup>
 
     <Message Text="NuGetCommand  after trim: $(NuGetCommand)" Importance="high" />
 
     <PropertyGroup>
-      <NuGetCommand>$(NuGetCommand) pack  &quot;%(NuGetPackageSourcePath.Path)&quot;$(NuGetPackageVersion) -Properties &quot;Configuration=$(Configuration);Platform=$(Platform)&quot; $(NonInteractiveSwitch) -OutputDirectory &quot;$(NuGetPackageOutputDir)&quot; -NoDefaultExcludes</NuGetCommand>
+      <PackPath>%(NuGetPackageSourcePath.Path)</PackPath>
+    </PropertyGroup>
+
+    <PropertyGroup>
+      <NuGetCommand>$(NuGetCommand) pack  &quot;$(PackPath)&quot;$(NuGetPackageVersion) -Properties &quot;Configuration=$(Configuration);Platform=$(Platform)&quot; $(NonInteractiveSwitch) -OutputDirectory &quot;$(NuGetPackageOutputDir)&quot; -NoDefaultExcludes</NuGetCommand>
     </PropertyGroup>
 
     <Message Text="Full NuGetCommand: $(NuGetCommand)" Importance="high" />
