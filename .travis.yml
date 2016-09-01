@@ -10,8 +10,9 @@ install:
 - mono .nuget/nuget.exe restore Bridge.NoTest.sln -Verbosity detailed
 language: csharp
 solution: Bridge.NoTest.sln
-after_script:
-- mono ./packages/NUnit.ConsoleRunner.*/tools/nunit*-console.exe ./Bridge/Compiler/TranslatorTests/bin/Release/Bridge.Translator.Tests.dll
+script:
+- xbuild /p:Configuration=Release Bridge.NoTest.sln
+- mono ./packages/NUnit.ConsoleRunner.*/tools/nunit*-console.exe ./Compiler/TranslatorTests/bin/Release/Bridge.Translator.Tests.dll
 cache:
   directories:
   - packages
