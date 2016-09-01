@@ -106,17 +106,19 @@
     </PropertyGroup>
 
     <PropertyGroup>
-      <NuGetCommand>$(NuGetCommand) pack  &quot;$(PackPath)&quot;$(NuGetPackageVersion) -Properties &quot;Configuration=$(Configuration);Platform=$(Platform)&quot; $(NonInteractiveSwitch) -OutputDirectory &quot;$(NuGetPackageOutputDir)&quot; -NoDefaultExcludes</NuGetCommand>
+      <!--xbuild cannot recognize %(NuGetPackageSourcePath.Path) so use it on Win only-->
+      <NuGetCommand Condition="'$(OS)' == 'Windows_NT'">$(NuGetCommand) pack &quot;$(PackPath)&quot;$(NuGetPackageVersion) -Properties &quot;Configuration=$(Configuration);Platform=$(Platform)&quot; $(NonInteractiveSwitch) -OutputDirectory &quot;$(NuGetPackageOutputDir)&quot; -NoDefaultExcludes</NuGetCommand>
     </PropertyGroup>
 
-    <Message Text="Full NuGetCommand: $(NuGetCommand)" Importance="high" />
+    <Message Condition="'$(OS)' == 'Windows_NT'" Text="Full NuGetCommand: $(NuGetCommand)" Importance="high" />
+    <Message Condition="'$(OS)' != 'Windows_NT'" Text="Raw NuGetCommand: $(NuGetCommand)" Importance="high" />
 
     <Exec Command="$(NuGetCommand)"
-          Condition="'$(OS)' != 'Windows_NT'" />
+      LogStandardErrorAsError="true"
+      Condition="'$(OS)' == 'Windows_NT'" />
 
-    <Exec Command="$(NuGetCommand)"
-          LogStandardErrorAsError="true"
-          Condition="'$(OS)' == 'Windows_NT'" />
+    <Exec Command="$(NuGetCommand) pack  &quot;%(NuGetPackageSourcePath.Path)&quot;$(NuGetPackageVersion) -Properties &quot;Configuration=$(Configuration);Platform=$(Platform)&quot; $(NonInteractiveSwitch) -OutputDirectory &quot;$(NuGetPackageOutputDir)&quot; -NoDefaultExcludes"
+      Condition=" '$(OS)' != 'Windows_NT' " />
 
     <ItemGroup>
       <NuGetPackageOutputDirFiles Include="$(NuGetPackageOutputDir)\*.nupkg"/>
