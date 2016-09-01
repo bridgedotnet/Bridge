@@ -6,16 +6,21 @@ namespace Bridge.Translator.Tests
 {
     internal static class FileHelper
     {
+        public static string GetExecutingAssemblyPath()
+        {
+            return System.Reflection.Assembly.GetExecutingAssembly().Location;
+        }
+
         public static string CombineRelativePath(string absolutePath, string relativePath)
         {
-            var di = new DirectoryInfo(absolutePath + relativePath);
+            var di = new DirectoryInfo(Path.Combine(absolutePath, relativePath));
 
             return di.FullName;
         }
 
         public static string GetRelativeToCurrentDirPath(string relativePath)
         {
-            var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            var location = GetExecutingAssemblyPath();
 
             location = Path.GetDirectoryName(location);
 
@@ -24,7 +29,7 @@ namespace Bridge.Translator.Tests
 
         public static string GetRelativeToCurrentDirPath(params string[] relativePaths)
         {
-            return FileHelper.GetRelativeToCurrentDirPath(string.Join(Path.DirectorySeparatorChar.ToString(), relativePaths));
+            return FileHelper.GetRelativeToCurrentDirPath(Path.Combine(relativePaths));
         }
 
         public static string ReadProjectOutputFolder(string configurationName, string projectFileFullName)

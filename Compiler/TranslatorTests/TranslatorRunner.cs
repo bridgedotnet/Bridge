@@ -22,7 +22,7 @@ namespace Bridge.Translator.Tests
 
         private static string FindBridgeDllPathByConfiguration(string configurationName)
         {
-            var bridgeProjectPath = FileHelper.GetRelativeToCurrentDirPath(@"\..\..\..\..\Bridge\Bridge.csproj");
+            var bridgeProjectPath = FileHelper.GetRelativeToCurrentDirPath(Path.Combine("..", "..", "..", "..", "Bridge", "Bridge.csproj"));
 
             var outputPath = FileHelper.ReadProjectOutputFolder(configurationName, bridgeProjectPath);
 
@@ -61,7 +61,7 @@ namespace Bridge.Translator.Tests
 
         private string WrapBuildArguments(string configuration)
         {
-            return this.BuildArguments + @" /p:Platform=AnyCPU /p:OutDir=bin\" + configuration + "\\";
+            return this.BuildArguments + @" /p:Platform=AnyCPU /p:OutDir=bin" + Path.DirectorySeparatorChar + configuration + Path.DirectorySeparatorChar;
         }
 
         public void Translate(bool byBuilding = false)
