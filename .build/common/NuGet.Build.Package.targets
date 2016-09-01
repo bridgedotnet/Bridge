@@ -106,7 +106,7 @@
       />
   </Target>
 
-  <UsingTask TaskName="DownloadNuGet" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
+  <UsingTask TaskName="DownloadNuGet" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
     <ParameterGroup>
       <OutputFilename ParameterType="System.String" Required="true" />
     </ParameterGroup>
@@ -137,7 +137,7 @@
     </Task>
   </UsingTask>
 
-  <UsingTask TaskName="GetAssemblyVersionFromTextFile" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
+  <UsingTask TaskName="GetAssemblyVersionFromTextFile" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
     <ParameterGroup>
       <Filename ParameterType="System.String" Required="true" />
       <Version ParameterType="System.String" Output="True" />
@@ -196,7 +196,7 @@
     </Task>
   </UsingTask>
 
-  <UsingTask TaskName="GetAssemblyVersionFromDll" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
+  <UsingTask TaskName="GetAssemblyVersionFromDll" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
     <ParameterGroup>
       <Filename ParameterType="System.String" Required="true" />
       <Version ParameterType="System.String" Output="True" />
@@ -242,7 +242,7 @@
     </Task>
   </UsingTask>
 
-  <UsingTask TaskName="FormatPath" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
+  <UsingTask TaskName="FormatPath" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
     <ParameterGroup>
       <OS ParameterType="System.String" Required="true" />
       <Path ParameterType="System.String" Required="true" Output="True"/>
