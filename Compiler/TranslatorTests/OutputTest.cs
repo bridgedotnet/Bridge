@@ -59,8 +59,8 @@ namespace Bridge.Translator.Tests
 
             ProjectFilePath = Path.Combine(ProjectFolder, ProjectFileName);
 
-            OutputFolder = Path.Combine(ProjectFolder, "Bridge", "Output");
-            ReferenceFolder = Path.Combine(ProjectFolder, "Bridge", "Reference");
+            OutputFolder = Path.Combine(ProjectFolder, "Bridge", "output");
+            ReferenceFolder = Path.Combine(ProjectFolder, "Bridge", "reference");
         }
 
         [OneTimeSetUp]
