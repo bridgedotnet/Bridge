@@ -854,6 +854,8 @@ namespace Bridge.Translator
 
         protected virtual bool ReadOutputPathInfo(ICSharpCode.NRefactory.CSharp.Attribute attr, string name, ResolveResult resolveResult)
         {
+            var configHelper = new ConfigHelper();
+
             if ((name == (Translator.Bridge_ASSEMBLY + ".Output")) ||
                 (resolveResult != null && resolveResult.Type != null && resolveResult.Type.FullName == (Translator.Bridge_ASSEMBLY + ".OutputPathAttribute")))
             {
@@ -863,7 +865,7 @@ namespace Bridge.Translator
 
                     if (nameObj is string)
                     {
-                        this.AssemblyInfo.Output = nameObj.ToString();
+                        this.AssemblyInfo.Output = configHelper.ConvertPath(nameObj.ToString());
                     }
                 }
 
