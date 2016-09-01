@@ -241,8 +241,6 @@ namespace Bridge.Translator
         {
             this.Log.Info("Reading define constants...");
 
-            var result = new List<string>();
-
             var nodeList = doc.Descendants().Where(n =>
             {
                 if (n.Name.LocalName != "PropertyGroup")

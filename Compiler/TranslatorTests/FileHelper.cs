@@ -31,9 +31,9 @@ namespace Bridge.Translator.Tests
         {
             var doc = XDocument.Load(projectFileFullName, LoadOptions.SetLineInfo);
 
-            var opnodes = from n in doc.Descendants()
-                          where n.Name.LocalName == "OutputPath"
-                          select n;
+//            var opnodes = from n in doc.Descendants()
+//                          where n.Name.LocalName == "OutputPath"
+//                          select n;
 
             var nodes = from n in doc.Descendants()
                         where n.Name.LocalName == "OutputPath" &&

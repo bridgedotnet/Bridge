@@ -67,7 +67,6 @@ namespace Bridge.Translator.TypeScript
             }
             else
             {
-                var isGeneric = typeDef.GenericParameters.Count > 0;
                 foreach (var ctor in this.TypeInfo.Ctors)
                 {
                     if (!ctor.HasModifier(Modifiers.Public))

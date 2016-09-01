@@ -74,7 +74,7 @@ namespace Bridge.Translator
 
             var writer = this.SaveWriter();
 
-            var bodyStep = this.Emitter.AsyncBlock.AddAsyncStep();
+            this.Emitter.AsyncBlock.AddAsyncStep();
             this.Emitter.IgnoreBlock = this.WhileStatement.EmbeddedStatement;
 
             var startCount = this.Emitter.AsyncBlock.Steps.Count;

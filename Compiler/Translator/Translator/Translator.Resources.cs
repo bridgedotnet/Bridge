@@ -62,8 +62,6 @@ namespace Bridge.Translator
                 // Find all items and put in the order
                 this.Log.Trace("Preparing resources specified in config...");
 
-                var resourceItems = new Dictionary<string, string>();
-
                 foreach (var resource in this.AssemblyInfo.Resources.EmbedItems)
                 {
                     this.Log.Trace("Preparing resource " + resource.Name);

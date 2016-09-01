@@ -326,8 +326,6 @@ namespace Bridge.Translator
 
             this.FixMethodParameters(operatorDeclaration.Parameters, operatorDeclaration.Body);
 
-            bool isStatic = operatorDeclaration.HasModifier(Modifiers.Static);
-
             Dictionary<OperatorType, List<OperatorDeclaration>> dict = this.CurrentType.Operators;
 
             var key = operatorDeclaration.OperatorType;
@@ -753,12 +751,12 @@ namespace Bridge.Translator
                 var name = attr.Type.ToString();
                 var resolveResult = this.Resolver.ResolveNode(attr, null);
 
-                var handled = this.ReadModuleInfo(attr, name, resolveResult) ||
-                              this.ReadFileNameInfo(attr, name, resolveResult) ||
-                              this.ReadOutputPathInfo(attr, name, resolveResult) ||
-                              this.ReadFileHierarchyInfo(attr, name, resolveResult) ||
-                              this.ReadModuleDependency(attr, name, resolveResult) ||
-                              this.ReadReflectionInfo(attr, name, resolveResult);
+                this.ReadModuleInfo(attr, name, resolveResult);
+                this.ReadFileNameInfo(attr, name, resolveResult);
+                this.ReadOutputPathInfo(attr, name, resolveResult);
+                this.ReadFileHierarchyInfo(attr, name, resolveResult);
+                this.ReadModuleDependency(attr, name, resolveResult);
+                this.ReadReflectionInfo(attr, name, resolveResult);
             }
         }
 

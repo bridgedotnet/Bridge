@@ -188,8 +188,6 @@ namespace Bridge.Contract
                     reference = reference.GetElementType();
                 }
 
-                string key = BridgeTypes.GetTypeDefinitionKey(reference.FullName);
-
                 if (emitter.TypeDefinitions.ContainsKey(reference.FullName))
                 {
                     return emitter.TypeDefinitions[reference.FullName];

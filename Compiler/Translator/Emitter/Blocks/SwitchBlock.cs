@@ -268,21 +268,15 @@ namespace Bridge.Translator
             }
 
             int startCount = this.Emitter.AsyncBlock.Steps.Count;
-            IAsyncStep thisStep = null;
             this.WriteSpace();
             this.BeginBlock();
             this.Write(JS.Vars.ASYNC_STEP + " = " + this.Emitter.AsyncBlock.Step + ";");
             this.WriteNewLine();
             this.Write("continue;");
             var writer = this.SaveWriter();
-            var bodyStep = this.Emitter.AsyncBlock.AddAsyncStep();
+            this.Emitter.AsyncBlock.AddAsyncStep();
 
             switchSection.Statements.AcceptVisitor(this.Emitter);
-
-            if (this.Emitter.AsyncBlock.Steps.Count > startCount)
-            {
-                thisStep = this.Emitter.AsyncBlock.Steps.Last();
-            }
 
             if (this.RestoreWriter(writer) && !this.IsOnlyWhitespaceOnPenultimateLine(true))
             {
