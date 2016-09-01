@@ -29,8 +29,8 @@
     <RequireConsentSwitch Condition=" $(RequireRestoreConsent) == 'true' ">-RequireConsent</RequireConsentSwitch>
     <NonInteractiveSwitch Condition=" '$(VisualStudioVersion)' != '' AND '$(OS)' == 'Windows_NT' ">-NonInteractive</NonInteractiveSwitch>
 
-    <PaddedSolutionDir Condition=" '$(OS)' == 'Windows_NT'">"$(SolutionDir) "</PaddedSolutionDir>
-    <PaddedSolutionDir Condition=" '$(OS)' != 'Windows_NT' ">"$(SolutionDir)"</PaddedSolutionDir>
+    <PaddedSolutionDir Condition="'$(OS)' == 'Windows_NT'">"$(SolutionDir) "</PaddedSolutionDir>
+    <PaddedSolutionDir Condition="'$(OS)' != 'Windows_NT' ">"$(SolutionDir)"</PaddedSolutionDir>
 
     <!-- Make the build depend on restore packages -->
     <BuildDependsOn Condition="$(NuGetBuildPackage) == 'true'">
@@ -65,27 +65,37 @@
       <NuGetPackageOutputDir>$(NuGetPackageOutputDir.Trim('/'))</NuGetPackageOutputDir>
     </PropertyGroup>
 
-    <GetAssemblyVersionFromTextFile Condition="$(NuGetUseExplicitVersion) == 'false'" Filename="$(SolutionDir).build\common\CommonAssemblyInfo.cs">
+    <!--<GetAssemblyVersionFromTextFile Condition="$(NuGetUseExplicitVersion) == 'false'" Filename="$(SolutionDir).build\common\CommonAssemblyInfo.cs">
       <Output TaskParameter="Version" ItemName="AssemblyInformationalVersion"/>
     </GetAssemblyVersionFromTextFile>
 
     <GetAssemblyVersionFromDll Condition="$(NuGetUseExplicitVersion) == 'false' And (@(AssemblyInformationalVersion) == '' Or @(AssemblyInformationalVersion) == '*Undefined*') " Filename="$(ProjectDir)$(OutDir)$(AssemblyName).dll">
       <Output TaskParameter="Version" ItemName="AssemblyInformationalVersion"/>
-    </GetAssemblyVersionFromDll>
+    </GetAssemblyVersionFromDll>-->
 
     <Message Condition="$(NuGetUseExplicitVersion) == 'true'" Text="Will use package version from nuspec" Importance="high" />
 
     <PropertyGroup>
       <!--For $(NuGetUseExplicitVersion) == 'false' scenario, define nuget.exe Version parameter into NuGetPackageVersion as "-Version " + @(AssemblyInformationalVersion)-->
-      <NuGetPackageVersion Condition=" '@(AssemblyInformationalVersion)' != '*Undefined*' "> -Version "@(AssemblyInformationalVersion)"</NuGetPackageVersion>
-      <NuGetPackageVersion Condition=" '@(AssemblyInformationalVersion)' == '*Undefined*' "></NuGetPackageVersion>
+      <NuGetPackageVersion Condition="'@(AssemblyInformationalVersion)' != '' AND '@(AssemblyInformationalVersion)' != '*Undefined*' "> -Version "@(AssemblyInformationalVersion)"</NuGetPackageVersion>
+      <NuGetPackageVersion Condition="'@(AssemblyInformationalVersion)' == '' OR '@(AssemblyInformationalVersion)' == '*Undefined*' "></NuGetPackageVersion>
+      <NuGetPackageVersion Condition="$(NuGetUseExplicitVersion) == 'false' AND ($(NuGetPackageVersion) == '' Or $(NuGetPackageVersion) == '*Undefined*')"> -Version "15.0.0"</NuGetPackageVersion>
     </PropertyGroup>
 
     <Message Condition="$(NuGetUseExplicitVersion) == 'false'" Text="Applying $(NuGetPackageVersion) for NuGet package %(NuGetPackageSourcePath.Path)" Importance="high" />
 
-    <FormatPath Path="$(NuGetCommand)" OS="$(OS)">
+    <PropertyGroup>
+      <NuGetCommand>$(NuGetCommand.Replace("\\\\", "\\"))</NuGetCommand>
+      <NuGetCommand>$(NuGetCommand.Trim("\\"))</NuGetCommand>
+      <NuGetCommand>$(NuGetCommand.Replace("//", "/"))</NuGetCommand>
+      <NuGetCommand>$(NuGetCommand.Trim('/'))</NuGetCommand>
+      <NuGetCommand Condition="'$(OS)' == 'Windows_NT'">$(NuGetCommand.Replace('\\', '/'))</NuGetCommand>
+      <NuGetCommand Condition="'$(OS)' != 'Windows_NT'">$(NuGetCommand.Replace('/', '\\'))</NuGetCommand>
+    </PropertyGroup>
+
+    <!--<FormatPath Path="$(NuGetCommand)" OS="$(OS)">
       <Output TaskParameter="Path" ItemName="NuGetCommand"/>
-    </FormatPath>
+    </FormatPath>-->
 
     <Exec Command="$(NuGetCommand) pack  &quot;%(NuGetPackageSourcePath.Path)&quot;$(NuGetPackageVersion) -Properties &quot;Configuration=$(Configuration);Platform=$(Platform)&quot; $(NonInteractiveSwitch) -OutputDirectory &quot;$(NuGetPackageOutputDir)&quot; -NoDefaultExcludes"
           Condition=" '$(OS)' != 'Windows_NT' " />
