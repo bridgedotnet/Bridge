@@ -35,7 +35,7 @@
     <DocumentationFile>bin\Release\Bridge.Html5.xml</DocumentationFile>
     <NoWarn>1591, 0626, 0824, 0660, 0661</NoWarn>
   </PropertyGroup>
-  <PropertyGroup Condition="$(OS) != Unix">
+  <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>

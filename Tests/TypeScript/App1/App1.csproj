@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
     <NoStdLib>True</NoStdLib>
   </PropertyGroup>
-  <PropertyGroup Condition="$(OS) != Unix">
+  <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
