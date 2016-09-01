@@ -20,14 +20,20 @@ namespace Bridge.Translator.Tests
             set;
         }
 
-        private static string FindBridgeDllPathByConfiguration(string configurationName)
+        private string FindBridgeDllPathByConfiguration(string configurationName)
         {
             var bridgeProjectPath = FileHelper.GetRelativeToCurrentDirPath(Path.Combine("..", "..", "..", "..", "Bridge", "Bridge.csproj"));
 
+            this.Logger.Info("Searching Bridge assembly in " + bridgeProjectPath);
+
             var outputPath = FileHelper.ReadProjectOutputFolder(configurationName, bridgeProjectPath);
 
+            this.Logger.Info("Output path " + outputPath + " in project " + bridgeProjectPath + " for configuration " + configurationName);
+
             if (outputPath == null)
+            {
                 return null;
+            }
 
             if (!Path.IsPathRooted(outputPath))
             {
@@ -36,13 +42,18 @@ namespace Bridge.Translator.Tests
 
             outputPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(outputPath), "Bridge.dll"));
 
+            this.Logger.Info("Full Output path " + outputPath);
+
             if (!File.Exists(outputPath))
+            {
+                this.Logger.Info("The full Output path does not exists");
                 return null;
+            }
 
             return outputPath;
         }
 
-        private static string FindBridgeDllPath(out string configuration)
+        private string FindBridgeDllPath(out string configuration)
         {
             configuration = "Release";
 #if DEBUG
