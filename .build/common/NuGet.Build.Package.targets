@@ -108,26 +108,26 @@
     </PropertyGroup>
 
     <PropertyGroup>
+      <!--xbuild requires BasePath specified to handle ..\ paths in nuget specs-->
+      <!--So the spec files have file pathes related on solution directory -->
+      <SpecBasePath>$(SolutionDir)</SpecBasePath>
+      <SpecBasePath>$(SpecBasePath.Replace("\\", "\"))</SpecBasePath>
+      <SpecBasePath>$(SpecBasePath.Trim('\'))</SpecBasePath>
+      <SpecBasePath>$(SpecBasePath.Replace("//", "/"))</SpecBasePath>
+      <SpecBasePath>$(SpecBasePath.Trim('/'))</SpecBasePath>
+      <SpecBasePath Condition="'$(OS)' == 'Windows_NT'">$(SpecBasePath.Replace('/', '\'))</SpecBasePath>
+      <SpecBasePath Condition="'$(OS)' != 'Windows_NT'">$(SpecBasePath.Replace('\', '/'))</SpecBasePath>
+    </PropertyGroup>
+
+    <PropertyGroup>
       <!--xbuild cannot recognize %(NuGetPackageSourcePath.Path) so use it on Win only-->
-      <NuGetCommand Condition="'$(OS)' == 'Windows_NT'">$(NuGetCommand) pack &quot;$(PackPath)&quot;$(NuGetPackageVersion) -Properties &quot;Configuration=$(Configuration);Platform=$(Platform)&quot; $(NonInteractiveSwitch) -OutputDirectory &quot;$(NuGetPackageOutputDir)&quot; -NoDefaultExcludes</NuGetCommand>
+      <NuGetCommand Condition="'$(OS)' == 'Windows_NT'">$(NuGetCommand) pack &quot;$(PackPath)&quot; -BasePath &quot;$(SpecBasePath)&quot; $(NuGetPackageVersion) -Properties &quot;Configuration=$(Configuration);Platform=$(Platform)&quot; $(NonInteractiveSwitch) -OutputDirectory &quot;$(NuGetPackageOutputDir)&quot; -NoDefaultExcludes</NuGetCommand>
     </PropertyGroup>
 
     <Message Condition="'$(OS)' == 'Windows_NT'" Text="Full NuGetCommand: $(NuGetCommand)" Importance="high" />
     <Message Condition="'$(OS)' != 'Windows_NT'" Text="Raw NuGetCommand: $(NuGetCommand)" Importance="high" />
 
-    <Exec Command="$(NuGetCommand)"
-      LogStandardErrorAsError="true"
-      Condition="'$(OS)' == 'Windows_NT'" />
-
-    <PropertyGroup>
-      <!--xbuild requires BasePath specified to handle ..\ paths in nuget specs-->
-      <SpecBasePath Condition="'$(OS)' != 'Windows_NT'">$(SolutionDir)\.build\specs</SpecBasePath>
-      <SpecBasePath Condition="'$(OS)' != 'Windows_NT'">$(SpecBasePath.Replace("\\", "\"))</SpecBasePath>
-      <SpecBasePath Condition="'$(OS)' != 'Windows_NT'">$(SpecBasePath.Trim('\'))</SpecBasePath>
-      <SpecBasePath Condition="'$(OS)' != 'Windows_NT'">$(SpecBasePath.Replace("//", "/"))</SpecBasePath>
-      <SpecBasePath Condition="'$(OS)' != 'Windows_NT'">$(SpecBasePath.Trim('/'))</SpecBasePath>
-      <SpecBasePath Condition="'$(OS)' != 'Windows_NT'">$(SpecBasePath.Replace('\', '/'))</SpecBasePath>
-    </PropertyGroup>
+    <Exec Command="$(NuGetCommand)" LogStandardErrorAsError="true" Condition="'$(OS)' == 'Windows_NT'" />
 
     <Exec Command="$(NuGetCommand) pack &quot;%(NuGetPackageSourcePath.Path)&quot; -BasePath &quot;$(SpecBasePath)&quot; $(NuGetPackageVersion) -Properties &quot;Configuration=$(Configuration);Platform=$(Platform)&quot; $(NonInteractiveSwitch) -OutputDirectory &quot;$(NuGetPackageOutputDir)&quot; -NoDefaultExcludes"
       Condition=" '$(OS)' != 'Windows_NT' " />
