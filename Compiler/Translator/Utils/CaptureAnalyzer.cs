@@ -337,16 +337,19 @@ namespace Bridge.Translator
 
         public override void VisitInvocationExpression(InvocationExpression invocationExpression)
         {
-            var rr = resolver.Resolve(invocationExpression) as CSharpInvocationResolveResult;
-            
-            foreach (var argument in rr.Arguments)
+            var rr = resolver.Resolve(invocationExpression) as InvocationResolveResult;
+
+            if (rr != null)
             {
-                if (argument.Type.Kind == TypeKind.TypeParameter)
+                foreach (var argument in rr.Arguments)
                 {
-                    var ivar = new TypeVariable(argument.Type);
-                    if (!_usedVariables.Contains(ivar))
+                    if (argument.Type != null && argument.Type.Kind == TypeKind.TypeParameter)
                     {
-                        _usedVariables.Add(ivar);
+                        var ivar = new TypeVariable(argument.Type);
+                        if (!_usedVariables.Contains(ivar))
+                        {
+                            _usedVariables.Add(ivar);
+                        }
                     }
                 }
             }

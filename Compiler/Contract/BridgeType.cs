@@ -794,21 +794,7 @@ namespace Bridge.Contract
 
         public static Tuple<string, string> GetNamespaceFilename(ITypeInfo typeInfo, IEmitter emitter)
         {
-            var cas = emitter.BridgeTypes.Get(typeInfo.Key).TypeDefinition.CustomAttributes;
-            var fileName = typeInfo.Namespace;
-
-            // Search for an 'NamespaceAttribute' entry
-            foreach (var ca in cas)
-            {
-                if (ca.AttributeType.Name == "NamespaceAttribute" &&
-                    ca.ConstructorArguments.Count > 0 &&
-                    ca.ConstructorArguments[0].Value is string &&
-                    !string.IsNullOrWhiteSpace(ca.ConstructorArguments[0].Value.ToString()))
-                {
-                    fileName = ca.ConstructorArguments[0].Value.ToString();
-                    break;
-                }
-            }
+            var fileName = typeInfo.GetNamespace(emitter);
 
             var ns = fileName;
 

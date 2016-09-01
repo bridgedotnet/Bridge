@@ -48,6 +48,9 @@ namespace Bridge.Translator
             foreach (var block in blocks)
             {
                 this.JsDoc.Init();
+
+                this.Log.Trace("Emitting block " + block.GetType());
+
                 block.Emit();
             }
 

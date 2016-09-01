@@ -314,5 +314,40 @@ namespace Bridge.Translator
 
             return this.baseTypes;
         }
+
+        public string GetNamespace(IEmitter emitter)
+        {
+            if (emitter == null)
+            {
+                throw new System.ArgumentNullException("emitter");
+            }
+
+            var name = this.Namespace;
+
+            var bridgeType = emitter.BridgeTypes.Get(this.Key);
+            var cas = bridgeType.TypeDefinition.CustomAttributes;
+
+            // Search for an 'NamespaceAttribute' entry
+            foreach (var ca in cas)
+            {
+                if (ca.AttributeType.Name == "NamespaceAttribute" && ca.ConstructorArguments.Count > 0)
+                {
+                    var constructorArgumentValue = ca.ConstructorArguments[0].Value as string;
+
+                    if (!string.IsNullOrWhiteSpace(constructorArgumentValue))
+                    {
+                        name = constructorArgumentValue;
+                        break;
+                    }
+                }
+            }
+
+            if (name == null)
+            {
+                name = emitter.Translator.DefaultNamespace;
+            }
+
+            return name;
+        }
     }
 }

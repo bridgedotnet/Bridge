@@ -18,6 +18,7 @@ namespace Bridge.Translator
         public const string BridgeResourcesList = "Bridge.Resources.list";
         public const string LocalesPrefix = "Bridge.Resources.Locales.";
         public const string SupportedProjectType = "Library";
+        public const string DefaultRootNamespace = "ClassLibrary";
 
         private static readonly Encoding OutputEncoding = Encoding.UTF8;
         private static readonly string[] MinifierCodeSettingsInternalFileNames = new string[] { "bridge.js", "bridge.min.js", "bridge.collections.js", "bridge.collections.min.js" };
