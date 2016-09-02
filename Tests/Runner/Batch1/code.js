@@ -6881,7 +6881,7 @@
                     if (useTrue) {
                         Bridge.Test.Assert.true$1(Bridge.equals(expected, result), System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat("Test: ", testValue), " Expected: "), expected.toString()), " Result: "), result.toString()));
                     } else {
-                        Bridge.Test.Assert.areEqual(expected, result);
+                        Bridge.Test.Assert.areEqual$1(expected, result, System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat("Test: ", testValue), " Expected: "), expected.toString()), " Result: "), result.toString()));
                     }
                 }
                 catch (ex) {
@@ -29002,7 +29002,7 @@
             }
         },
         fromString: function () {
-            var expectedValues = [new Date(1999, 12 - 1, 31, 23, 59, 59), new Date(100, 1 - 1, 1, 0, 0, 0), new Date(2216, 2 - 1, 29, 0, 0, 0), new Date(1, 1 - 1, 1, 0, 0, 0)];
+            var expectedValues = [new Date(1999, 12 - 1, 31, 23, 59, 59), new Date(100, 1 - 1, 1, 0, 0, 59), new Date(2216, 2 - 1, 29, 0, 0, 0), new Date(1, 1 - 1, 1, 0, 0, 0)];
 
             var dateTimeFormat = System.Globalization.CultureInfo.getCurrentCulture().dateTimeFormat;
             var pattern = System.String.concat(System.String.concat(dateTimeFormat.longDatePattern, String.fromCharCode(32)), dateTimeFormat.longTimePattern);
