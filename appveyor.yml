@@ -9,13 +9,13 @@
 #---------------------------------#
 
 # version format
-version: 1.11.{build}-{branch}
+version: 15.0.{build}-{branch}
 
 # branches to build
 branches:
   # whitelist
-  only:
-    - temp
+  # only:
+    # - temp
 
   # blacklist
   #except:
@@ -56,8 +56,8 @@ cache:
   - packages -> **\packages.config
 
 # scripts that run after cloning repository
-install:
-  - cmd: git.exe clone -q --progress -v  --depth 20 --branch=master "https://github.com/bridgedotnet/Frameworks" "c:\projects\Frameworks"
+#install:
+#  - cmd: git.exe clone -q --progress -v  --depth 20 --branch=master "https://github.com/bridgedotnet/Frameworks" "c:\projects\Frameworks"
 #  - cmd: git.exe clone -q --progress -v  --depth 20 --branch=master "https://github.com/bridgedotnet/Testing" "c:\projects\Testing"
 
 #---------------------------------#
@@ -72,7 +72,7 @@ configuration: Release
 
 build:
   # parallel: true                  # enable MSBuild parallel builds
-  project: c:\projects\Bridge\Bridge.sln      # path to Visual Studio solution or project
+  project: c:\projects\Bridge\Bridge.NoTest.sln      # path to Visual Studio solution or project
 
   # MSBuild verbosity level
   verbosity: minimal
@@ -99,9 +99,9 @@ before_test:
       #$ChutzpahDir = get-childitem chutzpah.console.exe -recurse | select-object -first 1 | select -expand Directory
       
       #$ChutzpahPath = "${ChutzpahDir}" + "\chutzpah.console.exe"
-      $ChutzpahPath = "c:\projects\Bridge\packages\Chutzpah.4.0.1\tools\chutzpah.console.exe"
+      $ChutzpahPath = "c:\projects\Bridge\packages\Chutzpah.4.2.3\tools\chutzpah.console.exe"
       
-      $ChutzpahHtml = "c:\projects\" + "Bridge\Testing\www\index.html"
+      $ChutzpahHtml = "c:\projects\" + "Bridge\Tests\Runner\index.html"
       
       $Exe = "${ChutzpahPath}"
       
