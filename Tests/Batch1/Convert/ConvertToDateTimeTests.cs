@@ -17,7 +17,7 @@ namespace Bridge.ClientTest.ConvertTests
         [Test]
         public void FromString()
         {
-            DateTime[] expectedValues = { new DateTime(1999, 12, 31, 23, 59, 59), new DateTime(100, 1, 2, 0, 10, 59), new DateTime(2216, 2, 29, 0, 0, 0), new DateTime(1, 1, 1, 0, 0, 0) };
+            DateTime[] expectedValues = { new DateTime(1999, 12, 31, 23, 59, 59), new DateTime(100, 2, 2, 0, 10, 59), new DateTime(2216, 2, 29, 0, 0, 0), new DateTime(1, 1, 1, 0, 0, 0) };
 
             var dateTimeFormat = CultureInfo.CurrentCulture.DateTimeFormat;
             string pattern = dateTimeFormat.LongDatePattern + ' ' + dateTimeFormat.LongTimePattern;
