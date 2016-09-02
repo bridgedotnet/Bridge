@@ -35,7 +35,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1643959563;
+            hash = hash * 23 + 1856153028;
             hash = hash * 23 + (this.x == null ? 0 : Bridge.getHashCode(this.x));
             hash = hash * 23 + (this.y == null ? 0 : Bridge.getHashCode(this.y));
             return hash;
@@ -1518,7 +1518,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -1126420587;
+            hash = hash * 23 + 1835365449;
             hash = hash * 23 + (this.value == null ? 0 : Bridge.getHashCode(this.value));
             return hash;
         },
@@ -1573,7 +1573,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -1126420587;
+            hash = hash * 23 + 1835365449;
             hash = hash * 23 + (this.value == null ? 0 : Bridge.getHashCode(this.value));
             return hash;
         },
@@ -2214,7 +2214,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1335531435;
+            hash = hash * 23 + 1955977157;
             hash = hash * 23 + (this.x == null ? 0 : Bridge.getHashCode(this.x));
             hash = hash * 23 + (this.y == null ? 0 : Bridge.getHashCode(this.y));
             return hash;
@@ -3523,7 +3523,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -1223576436;
+            hash = hash * 23 + 3168324882;
             hash = hash * 23 + (this.Value == null ? 0 : Bridge.getHashCode(this.Value));
             return hash;
         },
@@ -4096,7 +4096,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -1469106983;
+            hash = hash * 23 + 3587563249;
             hash = hash * 23 + (this.Value == null ? 0 : Bridge.getHashCode(this.Value));
             return hash;
         },
@@ -4130,7 +4130,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1552938783;
+            hash = hash * 23 + 3737080868;
             hash = hash * 23 + (this.name == null ? 0 : Bridge.getHashCode(this.name));
             return hash;
         },
@@ -4168,7 +4168,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 344944561;
+            hash = hash * 23 + 3740357668;
             hash = hash * 23 + (this.name == null ? 0 : Bridge.getHashCode(this.name));
             return hash;
         },
@@ -4212,7 +4212,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 344944560;
+            hash = hash * 23 + 3740423204;
             hash = hash * 23 + (this.name == null ? 0 : Bridge.getHashCode(this.name));
             hash = hash * 23 + (this.Url == null ? 0 : Bridge.getHashCode(this.Url));
             hash = hash * 23 + (this.Text == null ? 0 : Bridge.getHashCode(this.Text));
@@ -4548,7 +4548,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 2620942;
+            hash = hash * 23 + 1635017028;
             hash = hash * 23 + (this.value2 == null ? 0 : Bridge.getHashCode(this.value2));
             hash = hash * 23 + (this.Value1 == null ? 0 : Bridge.getHashCode(this.Value1));
             return hash;
@@ -4583,7 +4583,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 2620942;
+            hash = hash * 23 + 1635017028;
             hash = hash * 23 + (this.value2 == null ? 0 : Bridge.getHashCode(this.value2));
             hash = hash * 23 + (this.Value1 == null ? 0 : Bridge.getHashCode(this.Value1));
             return hash;
@@ -5297,7 +5297,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 593585434;
+            hash = hash * 23 + 3676395529;
             hash = hash * 23 + (this.Value1 == null ? 0 : Bridge.getHashCode(this.Value1));
             return hash;
         },
@@ -5329,7 +5329,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -776575217;
+            hash = hash * 23 + 4498479113;
             hash = hash * 23 + (this.Value1 == null ? 0 : Bridge.getHashCode(this.Value1));
             return hash;
         },
@@ -5361,7 +5361,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -1179859744;
+            hash = hash * 23 + 4515256329;
             hash = hash * 23 + (this.Value2 == null ? 0 : Bridge.getHashCode(this.Value2));
             return hash;
         },
@@ -7867,7 +7867,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1091152776;
+            hash = hash * 23 + 2493372384;
             hash = hash * 23 + (this.A == null ? 0 : Bridge.getHashCode(this.A));
             return hash;
         },
@@ -9431,7 +9431,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1430308972;
+            hash = hash * 23 + 4379733844;
             hash = hash * 23 + (this.Number == null ? 0 : Bridge.getHashCode(this.Number));
             return hash;
         },
@@ -9944,7 +9944,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -701022801;
+            hash = hash * 23 + 2493520092;
             hash = hash * 23 + (this.value == null ? 0 : Bridge.getHashCode(this.value));
             return hash;
         },
@@ -10002,7 +10002,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -1104307328;
+            hash = hash * 23 + 2493520348;
             hash = hash * 23 + (this.value == null ? 0 : Bridge.getHashCode(this.value));
             hash = hash * 23 + (this.intValue == null ? 0 : Bridge.getHashCode(this.intValue));
             return hash;
@@ -10720,7 +10720,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 390689245;
+            hash = hash * 23 + 6182311598;
             hash = hash * 23 + (this.value == null ? 0 : Bridge.getHashCode(this.value));
             hash = hash * 23 + (this.isDefined == null ? 0 : Bridge.getHashCode(this.isDefined));
             return hash;
@@ -11283,7 +11283,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -1467239093;
+            hash = hash * 23 + 12610;
             hash = hash * 23 + (this.field1 == null ? 0 : Bridge.getHashCode(this.field1));
             return hash;
         },
@@ -11314,7 +11314,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -1063954566;
+            hash = hash * 23 + 12866;
             hash = hash * 23 + (this.field1 == null ? 0 : Bridge.getHashCode(this.field1));
             return hash;
         },
@@ -11359,7 +11359,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -1467239094;
+            hash = hash * 23 + 12611;
             hash = hash * 23 + (this.field1 == null ? 0 : Bridge.getHashCode(this.field1));
             return hash;
         },
@@ -11396,7 +11396,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -1063954567;
+            hash = hash * 23 + 12867;
             hash = hash * 23 + (this.field1 == null ? 0 : Bridge.getHashCode(this.field1));
             return hash;
         },
@@ -11428,7 +11428,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1664928788;
+            hash = hash * 23 + 13123;
             hash = hash * 23 + (this.Prop1 == null ? 0 : Bridge.getHashCode(this.Prop1));
             return hash;
         },
@@ -11918,7 +11918,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -1386632298;
+            hash = hash * 23 + 2594249179;
             hash = hash * 23 + (this.Data == null ? 0 : Bridge.getHashCode(this.Data));
             return hash;
         },
@@ -12108,7 +12108,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -847529689;
+            hash = hash * 23 + 3605481978;
             hash = hash * 23 + (this.Value == null ? 0 : Bridge.getHashCode(this.Value));
             return hash;
         },
@@ -12175,7 +12175,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 428277234;
+            hash = hash * 23 + 2627803362;
             hash = hash * 23 + (this.field1 == null ? 0 : Bridge.getHashCode(this.field1));
             return hash;
         },
@@ -12422,7 +12422,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 372029408;
+            hash = hash * 23 + 66;
             hash = hash * 23 + (this.field == null ? 0 : Bridge.getHashCode(this.field));
             return hash;
         },
@@ -15408,7 +15408,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1473705463;
+            hash = hash * 23 + 3904302783;
             hash = hash * 23 + (this.field == null ? 0 : Bridge.getHashCode(this.field));
             return hash;
         },

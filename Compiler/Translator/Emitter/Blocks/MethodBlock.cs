@@ -149,7 +149,10 @@ namespace Bridge.Translator
                 this.Write("var hash = 17;");
 
                 this.WriteNewLine();
-                this.Write("hash = hash * 23 + " + this.TypeInfo.Name.GetHashCode() + ";");
+
+                var nameHashValue = new HashHelper().GetDeterministicHash(this.TypeInfo.Name);
+
+                this.Write("hash = hash * 23" + nameHashValue + ";");
 
                 foreach (var field in list)
                 {
