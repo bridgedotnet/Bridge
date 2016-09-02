@@ -54,6 +54,7 @@
     <Compile Include="ClientRect.cs" />
     <Compile Include="ClientRectList.cs" />
     <Compile Include="CompatMode.cs" />
+    <Compile Include="DOMParser.cs" />
     <Compile Include="DragDrop\DataTransferItem.cs" />
     <Compile Include="DragDrop\DropEffect.cs" />
     <Compile Include="DragDrop\EffectAllowed.cs" />
@@ -350,6 +351,9 @@
     <NuGetPackageSourcePath Include="$(SolutionDir).build\specs\Bridge.Html5.nuspec">
       <Path>$(SolutionDir).build\specs\Bridge.Html5.nuspec</Path>
     </NuGetPackageSourcePath>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
   </ItemGroup>
   <Import Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " Project="$(SolutionDir)\.build\common\NuGet.Build.Package.targets" />
   <Target Name="CleanProjectNuGetOutput" BeforeTargets="Clean">
