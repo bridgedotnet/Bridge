@@ -68,6 +68,25 @@
       <NuGetPackageOutputDir>$(NuGetPackageOutputDir.Trim('/'))</NuGetPackageOutputDir>
     </PropertyGroup>
 
+    <!--Inline tasks not supported in xbuild-->
+    <!--So we will use SmallApplicationVersion matched from AssemblyIdentityInfo in non Windows-->
+    <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
+      <Output TaskParameter="Assemblies" ItemName="AssemblyIdentityInfo"/>
+    </GetAssemblyIdentity>
+
+    <PropertyGroup>
+      <ApplicationVersion>%(AssemblyIdentityInfo.Version)</ApplicationVersion>
+    </PropertyGroup>
+
+    <Message Text="ApplicationVersion from GetAssemblyIdentity: $(ApplicationVersion)" Importance="high" />
+
+    <PropertyGroup>
+      <SmallApplicationVersion>$([System.Text.RegularExpressions.Regex]::Match($(ApplicationVersion), '(\d+)\.(\d+)\.(\d+)'))</SmallApplicationVersion>
+      <SmallApplicationVersion Condition="$(SmallApplicationVersion) == '' Or $(SmallApplicationVersion) == '*Undefined*'">ApplicationVersion</SmallApplicationVersion>
+    </PropertyGroup>
+
+    <Message Text="SmallApplicationVersion by matching ApplicationVersion: $(SmallApplicationVersion)" Importance="high" />
+
     <GetAssemblyVersionFromTextFile Condition="'$(OS)' == 'Windows_NT' AND $(NuGetUseExplicitVersion) == 'false'" Filename="$(SolutionDir).build\common\CommonAssemblyInfo.cs">
       <Output TaskParameter="Version" ItemName="AssemblyInformationalVersion"/>
     </GetAssemblyVersionFromTextFile>
@@ -82,11 +101,7 @@
       <!--For $(NuGetUseExplicitVersion) == 'false' scenario, define nuget.exe Version parameter into NuGetPackageVersion as "-Version " + @(AssemblyInformationalVersion)-->
       <NuGetPackageVersion Condition="'@(AssemblyInformationalVersion)' != '' AND '@(AssemblyInformationalVersion)' != '*Undefined*' "> -Version "@(AssemblyInformationalVersion)"</NuGetPackageVersion>
       <NuGetPackageVersion Condition="'@(AssemblyInformationalVersion)' == '' OR '@(AssemblyInformationalVersion)' == '*Undefined*' "></NuGetPackageVersion>
-      <NuGetPackageVersion Condition="$(NuGetUseExplicitVersion) == 'false' AND ($(NuGetPackageVersion) == '' Or $(NuGetPackageVersion) == '*Undefined*')"> -Version "15.0.0"</NuGetPackageVersion>
-    </PropertyGroup>
-
-    <PropertyGroup>
-      <NuGetPackageVersion Condition="$(NuGetUseExplicitVersion) == 'false' AND ($(NuGetPackageVersion) == '' Or $(NuGetPackageVersion) == '*Undefined*')"> -Version "15.0.0"</NuGetPackageVersion>
+      <NuGetPackageVersion Condition="$(NuGetUseExplicitVersion) == 'false' AND ($(NuGetPackageVersion) == '' Or $(NuGetPackageVersion) == '*Undefined*')"> -Version "$(SmallApplicationVersion)"</NuGetPackageVersion>
     </PropertyGroup>
 
     <Message Condition="$(NuGetUseExplicitVersion) == 'false'" Text="Applying $(NuGetPackageVersion) for NuGet package %(NuGetPackageSourcePath.Path)" Importance="high" />
