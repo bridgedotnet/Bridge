@@ -1,6 +1,0 @@
-{
-  "output": "Bridge\\output",
-  "cleanOutputFolderBeforeBuildPattern": "*.*",
-  "outputFormatting": "Formatted",
-  "outputBy": "Project"
-}
