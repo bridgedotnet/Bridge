@@ -88,7 +88,11 @@ namespace Bridge.Translator.Tests
         [TestCase("08", true, true, TestName = "OutputTest 08 - Bridge.json fileNameCasing Lowercase")]
         [TestCase("09", true, true, TestName = "OutputTest 09 - Bridge.json fileNameCasing CamelCase")]
         [TestCase("10", true, true, TestName = "OutputTest 10 - Bridge.json fileNameCasing None")]
+#if UNIX
+        [TestCase("11", true, true, TestName = "OutputTest 11 - Bridge.json generateTypeScript", Ignore = "Bridge issue #1731")]
+#else
         [TestCase("11", true, true, TestName = "OutputTest 11 - Bridge.json generateTypeScript")]
+#endif
         [TestCase("12", true, true, TestName = "OutputTest 12 - Bridge.json generateDocumentation Full")]
         [TestCase("13", true, true, TestName = "OutputTest 13 - Bridge.json generateDocumentation Basic")]
         [TestCase("14", true, true, TestName = "OutputTest 14 - Bridge.json preserveMemberCase")]
@@ -96,6 +100,11 @@ namespace Bridge.Translator.Tests
         [TestCase("16", true, true, TestName = "OutputTest 16 - Issues")]
         [TestCase("17", true, true, TestName = "OutputTest 17 - Define project constant #375")]
         [TestCase("18", true, true, TestName = "OutputTest 18 - Features")]
+#if UNIX
+        [TestCase("19", true, true, TestName = "OutputTest 19 - Linked files feature #531 #562", Ignore = "It is not supported in Mono (Mono issue logged as #38224 at Mono's official BugZilla)")]
+#else
+        [TestCase("19", true, true, TestName = "OutputTest 19 - Linked files feature #531 #562")]
+#endif
         public void Test(string folder, bool isToTranslate, bool useSpecialFileCompare)
         {
             var logDir = Path.GetDirectoryName(FileHelper.GetExecutingAssemblyPath());
