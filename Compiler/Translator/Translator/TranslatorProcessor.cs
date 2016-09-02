@@ -123,7 +123,7 @@ namespace Bridge.Translator
 
             if (basePathOnly)
             {
-                return basePath;
+                return new ConfigHelper().ConvertPath(basePath);
             }
 
             string assemblyOutput = string.Empty;

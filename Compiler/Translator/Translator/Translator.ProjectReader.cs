@@ -179,6 +179,8 @@ namespace Bridge.Translator
                 path = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Location), path));
             }
 
+            path = new Bridge.Contract.ConfigHelper().ConvertPath(path);
+
             return path;
         }
 
