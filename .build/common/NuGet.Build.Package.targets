@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
+    <!--This value will be used if NuGetUseExplicitVersion != true and the target is not able to read version automatically-->
+    <DefaultPackageVersion>15.0.0</DefaultPackageVersion>
     <OnWin>true</OnWin>
     <OnWin Condition="'$(OS)' != 'Windows_NT'">false</OnWin>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
@@ -75,10 +77,15 @@
     </GetAssemblyIdentity>
 
     <PropertyGroup>
+      <FirstSymbolIfPercentNotSupported>%25</FirstSymbolIfPercentNotSupported>
       <ApplicationVersion>%(AssemblyIdentityInfo.Version)</ApplicationVersion>
+      <CouldNotGetApplicationVersion Condition="'$(ApplicationVersion)' == '' OR '$(ApplicationVersion.StartsWith($(FirstSymbolIfPercentNotSupported)))' == 'true'">true</CouldNotGetApplicationVersion>
+      <ApplicationVersion Condition="'$(CouldNotGetApplicationVersion)' == 'true'">$(DefaultPackageVersion)</ApplicationVersion>
     </PropertyGroup>
 
-    <Message Text="ApplicationVersion from GetAssemblyIdentity: $(ApplicationVersion)" Importance="high" />
+    <Message Text="DefaultPackageVersion: $(DefaultPackageVersion)" Importance="high" />
+    <Message Condition="'$(CouldNotGetApplicationVersion)' == 'true'" Text="Could not get ApplicationVersion by GetAssemblyIdentity. Using DefaultPackageVersion if not be able to get it automatically)" Importance="high" />
+    <Message Condition="'$(CouldNotGetApplicationVersion)' != 'true'" Text="ApplicationVersion by GetAssemblyIdentity: $(ApplicationVersion)" Importance="high" />
 
     <PropertyGroup>
       <SmallApplicationVersion>$([System.Text.RegularExpressions.Regex]::Match($(ApplicationVersion), '(\d+)\.(\d+)\.(\d+)'))</SmallApplicationVersion>
@@ -91,9 +98,17 @@
       <Output TaskParameter="Version" ItemName="AssemblyInformationalVersion"/>
     </GetAssemblyVersionFromTextFile>
 
-    <GetAssemblyVersionFromDll Condition="'$(OS)' == 'Windows_NT' AND $(NuGetUseExplicitVersion) == 'false' AND (@(AssemblyInformationalVersion) == '' OR @(AssemblyInformationalVersion) == '*Undefined*') " Filename="$(ProjectDir)$(OutDir)$(AssemblyName).dll">
+    <Message Condition="'$(OS)' == 'Windows_NT' AND $(NuGetUseExplicitVersion) == 'false'" Text="AssemblyInformationalVersion by GetAssemblyVersionFromTextFile: @(AssemblyInformationalVersion)" Importance="high" />
+
+    <PropertyGroup>
+      <NeedGetAssemblyVersionFromDll Condition="'$(OS)' == 'Windows_NT' AND '$(NuGetUseExplicitVersion)' == 'false' AND ('@(AssemblyInformationalVersion)' == '' OR '@(AssemblyInformationalVersion)' == '*Undefined*')">true</NeedGetAssemblyVersionFromDll>
+    </PropertyGroup>
+
+    <GetAssemblyVersionFromDll Condition="'$(NeedGetAssemblyVersionFromDll)' == 'true'" Filename="$(ProjectDir)$(OutDir)$(AssemblyName).dll">
       <Output TaskParameter="Version" ItemName="AssemblyInformationalVersion"/>
     </GetAssemblyVersionFromDll>
+
+    <Message Condition="'$(NeedGetAssemblyVersionFromDll)' == 'true'" Text="AssemblyInformationalVersion by GetAssemblyVersionFromDll: @(AssemblyInformationalVersion)" Importance="high" />
 
     <Message Condition="$(NuGetUseExplicitVersion) == 'true'" Text="Will use package version from nuspec" Importance="high" />
 
