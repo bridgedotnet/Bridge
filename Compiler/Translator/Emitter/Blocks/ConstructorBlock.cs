@@ -259,17 +259,20 @@ namespace Bridge.Translator
 
         protected virtual void EmitCtorForInstantiableClass()
         {
-            var ctorWrappers = this.EmitInitMembers().ToArray();
+            var baseType = this.Emitter.GetBaseTypeDefinition();
+            var typeDef = this.Emitter.GetTypeDefinition();
+            var isObjectLiteral = this.Emitter.Validator.IsObjectLiteral(typeDef);
+
+            var ctorWrappers = isObjectLiteral ? new string[0] : this.EmitInitMembers().ToArray();
 
             if (!this.TypeInfo.HasInstantiable && ctorWrappers.Length == 0)
             {
                 return;
             }
 
-            var baseType = this.Emitter.GetBaseTypeDefinition();
-            var typeDef = this.Emitter.GetTypeDefinition();
+            bool forceDefCtor = isObjectLiteral && this.TypeInfo.Ctors.Count == 0;
 
-            if (typeDef.IsValueType || (this.TypeInfo.Ctors.Count == 0 && ctorWrappers.Length > 0))
+            if (typeDef.IsValueType || forceDefCtor || (this.TypeInfo.Ctors.Count == 0 && ctorWrappers.Length > 0))
             {
                 this.TypeInfo.Ctors.Add(new ConstructorDeclaration
                 {
@@ -324,30 +327,108 @@ namespace Bridge.Translator
                     requireNewLine = true;
                 }
 
+                if (isObjectLiteral)
+                {
+                    if (requireNewLine)
+                    {
+                        this.WriteNewLine();
+                    }
+
+                    this.Write("var $this = ");
+
+                    if (baseType != null && (!this.Emitter.Validator.IsIgnoreType(baseType) || this.Emitter.Validator.IsBridgeClass(baseType)) ||
+                    (ctor.Initializer != null && ctor.Initializer.ConstructorInitializerType == ConstructorInitializerType.This))
+                    {
+                        this.EmitBaseConstructor(ctor, ctorName, true);
+                    }
+                    else if (baseType != null && ctor.Initializer != null &&
+                             ctor.Initializer.ConstructorInitializerType == ConstructorInitializerType.Base)
+                    {
+                        this.CheckBaseCtorTemplate(ctor, ref requireNewLine);
+                    }
+                    else
+                    {
+                        this.Write("{};");
+                    }
+
+                    this.WriteNewLine();
+                    this.Write("(function()");
+                    this.BeginBlock();
+                    requireNewLine = false;
+                }
+
                 if (noThisInvocation)
                 {
                     if (requireNewLine)
                     {
                         this.WriteNewLine();
                     }
-                    this.Write("this." + JS.Funcs.INITIALIZE + "();");
-                    requireNewLine = true;
+
+                    if (isObjectLiteral)
+                    {
+                        var fieldBlock = new FieldBlock(this.Emitter, this.TypeInfo, false, false, true);
+                        fieldBlock.Emit();
+
+                        var properties = this.TypeInfo.InstanceProperties;
+
+                        var names = new List<string>(properties.Keys);
+
+                        foreach (var name in names)
+                        {
+                            var props = properties[name];
+
+                            foreach (var prop in props)
+                            {
+                                var p = prop as PropertyDeclaration;
+                                if (p != null)
+                                {
+                                    if (p.Getter.Body.IsNull && p.Setter.Body.IsNull)
+                                    {
+                                        continue;
+                                    }
+
+                                    this.Write("Object.defineProperty(this, ");
+                                    this.WriteScript(OverloadsCollection.Create(this.Emitter, p).GetOverloadName());
+                                    this.WriteComma();
+                                    this.Emitter.Comma = false;
+                                    this.BeginBlock();
+                                    var block = new VisitorPropertyBlock(this.Emitter, p);
+                                    block.EmitPropertyMethod(p, p.Getter, false, true);
+                                    block.EmitPropertyMethod(p, p.Setter, true, true);
+                                    this.EnsureComma(true);
+                                    this.Write("enumerable: true");
+                                    this.WriteNewLine();
+                                    this.EndBlock();
+                                    this.Write(");");
+                                    this.WriteNewLine();
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        this.Write("this." + JS.Funcs.INITIALIZE + "();");
+                        requireNewLine = true;
+                    }
                 }
 
-                if (baseType != null && (!this.Emitter.Validator.IsIgnoreType(baseType) || this.Emitter.Validator.IsBridgeClass(baseType)) ||
+                if (!isObjectLiteral)
+                {
+                    if (baseType != null && (!this.Emitter.Validator.IsIgnoreType(baseType) || this.Emitter.Validator.IsBridgeClass(baseType)) ||
                     (ctor.Initializer != null && ctor.Initializer.ConstructorInitializerType == ConstructorInitializerType.This))
-                {
-                    if (requireNewLine)
                     {
-                        this.WriteNewLine();
-                        requireNewLine = false;
+                        if (requireNewLine)
+                        {
+                            this.WriteNewLine();
+                            requireNewLine = false;
+                        }
+                        this.EmitBaseConstructor(ctor, ctorName, false);
                     }
-                    this.EmitBaseConstructor(ctor, ctorName);
-                }
-                else if (baseType != null && ctor.Initializer != null &&
-                         ctor.Initializer.ConstructorInitializerType == ConstructorInitializerType.Base)
-                {
-                    this.CheckBaseCtorTemplate(ctor, ref requireNewLine);
+                    else if (baseType != null && ctor.Initializer != null &&
+                             ctor.Initializer.ConstructorInitializerType == ConstructorInitializerType.Base)
+                    {
+                        this.CheckBaseCtorTemplate(ctor, ref requireNewLine);
+                    }
                 }
 
                 var script = this.Emitter.GetScript(ctor);
@@ -387,6 +468,19 @@ namespace Bridge.Translator
                 if (oldWriter != null)
                 {
                     this.WrapBody(oldWriter, ctorWrappers, ctorParams);
+                }
+
+                if (isObjectLiteral)
+                {
+                    if (requireNewLine)
+                    {
+                        this.WriteNewLine();
+                    }
+                    this.EndBlock();
+                    this.Write(").call($this);");
+                    this.WriteNewLine();
+                    this.Write("return $this;");
+                    this.WriteNewLine();
                 }
 
                 this.EndBlock();
@@ -489,7 +583,7 @@ namespace Bridge.Translator
             this.WriteNewLine();
         }
 
-        protected virtual void EmitBaseConstructor(ConstructorDeclaration ctor, string ctorName)
+        protected virtual void EmitBaseConstructor(ConstructorDeclaration ctor, string ctorName, bool isObjectLiteral)
         {
             var initializer = ctor.Initializer != null && !ctor.Initializer.IsNull ? ctor.Initializer : new ConstructorInitializer()
             {
@@ -530,8 +624,12 @@ namespace Bridge.Translator
 
                 this.Write(name, ".");
                 this.Write(baseName);
-                this.WriteCall();
-                appendScope = true;
+
+                if (!isObjectLiteral)
+                {
+                    this.WriteCall();
+                    appendScope = true;
+                }
             }
             else
             {
@@ -554,8 +652,12 @@ namespace Bridge.Translator
                 }
 
                 this.Write(baseName);
-                this.WriteCall();
-                appendScope = true;
+
+                if (!isObjectLiteral)
+                {
+                    this.WriteCall();
+                    appendScope = true;
+                }
             }
             int openPos = this.Emitter.Output.Length;
             this.WriteOpenParentheses();
@@ -581,7 +683,11 @@ namespace Bridge.Translator
 
             this.WriteCloseParentheses();
             this.WriteSemiColon();
-            this.WriteNewLine();
+
+            if (!isObjectLiteral)
+            {
+                this.WriteNewLine();
+            }
         }
 
         protected virtual bool IsGenericType()

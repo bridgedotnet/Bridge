@@ -33,40 +33,89 @@ namespace Bridge.Translator
 
         public virtual void CheckType(TypeDefinition type, ITranslator translator)
         {
-            if (this.CanIgnoreType(type) && !this.IsObjectLiteral(type))
+            if (this.CanIgnoreType(type))
             {
                 return;
             }
 
             this.CheckConstructors(type, translator);
+            this.CheckConstructors(type, translator);
             this.CheckFields(type, translator);
             this.CheckMethods(type, translator);
             this.CheckProperties(type, translator);
+            this.CheckEvents(type, translator);
             this.CheckFileName(type, translator);
             this.CheckModule(type, translator);
             this.CheckModuleDependenies(type, translator);
+        }
+
+        public virtual void CheckObjectLiteral(TypeDefinition type, ITranslator translator)
+        {
+            if (this.IsObjectLiteral(type))
+            {
+                if (type.IsInterface && type.HasMethods || type.HasProperties || type.HasEvents || type.HasFields)
+                {
+                    TranslatorException.Throw("ObjectLiteral interface doesn't support any contract members: {0}", type);
+                }
+                
+                if (type.BaseType != null)
+                {
+                    TypeDefinition baseType = null;
+                    try
+                    {
+                        baseType = type.BaseType.Resolve();
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                    if (baseType != null && baseType.FullName != "System.Object" && !this.IsObjectLiteral(baseType))
+                    {
+                        TranslatorException.Throw("[ObjectLiteral] base type must be object literal also: {0}", type);
+                    }
+                }
+
+                if (type.Interfaces.Count > 0)
+                {
+                    foreach (var @interface in type.Interfaces)
+                    {
+                        TypeDefinition iDef = null;
+                        try
+                        {
+                            iDef = @interface.Resolve();
+                        }
+                        catch (Exception)
+                        {
+
+                        }
+
+                        if (iDef != null && iDef.FullName != "System.Object" && !this.IsObjectLiteral(iDef))
+                        {
+                            TranslatorException.Throw("[ObjectLiteral] should implement an interface which must be object literal also: {0}", type);
+                        }
+                    }
+                }
+            }
         }
 
         public virtual bool IsIgnoreType(ICustomAttributeProvider type, bool ignoreLiteral = false)
         {
             string ignoreAttr = Translator.Bridge_ASSEMBLY + ".IgnoreAttribute";
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
-            string objectLiteralAttr = Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute";
             string nonScriptableAttr = Translator.Bridge_ASSEMBLY + ".NonScriptableAttribute";
 
-            return this.HasAttribute(type.CustomAttributes, ignoreAttr) || this.HasAttribute(type.CustomAttributes, externalAttr) || (!ignoreLiteral && this.HasAttribute(type.CustomAttributes, objectLiteralAttr)) || this.HasAttribute(type.CustomAttributes, nonScriptableAttr);
+            return this.HasAttribute(type.CustomAttributes, ignoreAttr) || this.HasAttribute(type.CustomAttributes, externalAttr) || this.HasAttribute(type.CustomAttributes, nonScriptableAttr);
         }
 
         public virtual bool IsIgnoreType(IEntity enity, bool ignoreLiteral = false)
         {
             string ignoreAttr = Translator.Bridge_ASSEMBLY + ".IgnoreAttribute";
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
-            string objectLiteralAttr = Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute";
             string nonScriptableAttr = Translator.Bridge_ASSEMBLY + ".NonScriptableAttribute";
 
             return this.HasAttribute(enity.Attributes, ignoreAttr)
                    || this.HasAttribute(enity.Attributes, externalAttr)
-                   || (!ignoreLiteral && this.HasAttribute(enity.Attributes, objectLiteralAttr))
                    || this.HasAttribute(enity.Attributes, nonScriptableAttr);
         }
 
@@ -87,9 +136,10 @@ namespace Bridge.Translator
         {
             string ignoreAttr = Translator.Bridge_ASSEMBLY + ".IgnoreAttribute";
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
-            string objectLiteralAttr = Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute";
 
-            return typeDefinition.Attributes.Any(attr => attr.Constructor != null && ((attr.Constructor.DeclaringType.FullName == ignoreAttr) || (attr.Constructor.DeclaringType.FullName == externalAttr) || (!ignoreLiteral && attr.Constructor.DeclaringType.FullName == objectLiteralAttr)));
+            return typeDefinition.Attributes.Any(attr => attr.Constructor != null && (
+            (attr.Constructor.DeclaringType.FullName == ignoreAttr) || 
+            (attr.Constructor.DeclaringType.FullName == externalAttr)));
         }
 
         public virtual bool IsExternalInterface(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition)
@@ -305,11 +355,6 @@ namespace Bridge.Translator
                 return name;
             }
 
-            if (this.HasAttribute(type.CustomAttributes, Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute"))
-            {
-                return JS.Types.OBJECT;
-            }
-
             return null;
         }
 
@@ -345,29 +390,28 @@ namespace Bridge.Translator
 
         public virtual void CheckFields(TypeDefinition type, ITranslator translator)
         {
-            if (this.IsObjectLiteral(type) && type.HasFields)
+
+        }
+
+        public virtual void CheckProperties(TypeDefinition type, ITranslator translator)
+        {
+            if (type.HasProperties && this.IsObjectLiteral(type))
             {
-                foreach (FieldDefinition field in type.Fields)
+                foreach (PropertyDefinition prop in type.Properties)
                 {
-                    if (field.IsStatic)
+                    if ((prop.GetMethod != null && prop.GetMethod.IsVirtual) || (prop.SetMethod != null && prop.SetMethod.IsVirtual))
                     {
-                        TranslatorException.Throw("ObjectLiteral type doesn't support static members: {0}", type);
+                        TranslatorException.Throw("ObjectLiteral type doesn't support virtual members: {0}", type);
                     }
                 }
             }
         }
 
-        public virtual void CheckProperties(TypeDefinition type, ITranslator translator)
+        public virtual void CheckEvents(TypeDefinition type, ITranslator translator)
         {
-            if (this.IsObjectLiteral(type) && type.HasProperties)
+            if (type.HasEvents && this.IsObjectLiteral(type))
             {
-                foreach (PropertyDefinition prop in type.Properties)
-                {
-                    if ((prop.GetMethod != null && prop.GetMethod.IsStatic) || (prop.SetMethod != null && prop.SetMethod.IsStatic))
-                    {
-                        TranslatorException.Throw("ObjectLiteral type doesn't support static members: {0}", type);
-                    }
-                }
+                TranslatorException.Throw("ObjectLiteral type doesn't support events: {0}", type);
             }
         }
 
@@ -383,7 +427,7 @@ namespace Bridge.Translator
 
                 this.CheckMethodArguments(method);
 
-                if (!method.IsConstructor && !method.IsGetter && !method.IsSetter)
+                if (method.IsVirtual)
                 {
                     methodsCount++;
                 }
@@ -391,7 +435,7 @@ namespace Bridge.Translator
 
             if (this.IsObjectLiteral(type) && methodsCount > 0)
             {
-                Bridge.Translator.TranslatorException.Throw("ObjectLiteral doesn't support methods: {0}", type);
+                Bridge.Translator.TranslatorException.Throw("ObjectLiteral doesn't support virtual methods: {0}", type);
             }
         }
 

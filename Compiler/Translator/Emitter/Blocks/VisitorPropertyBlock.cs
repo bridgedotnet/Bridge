@@ -27,11 +27,21 @@ namespace Bridge.Translator
                 return;
             }
 
-            this.EmitPropertyMethod(this.PropertyDeclaration, this.PropertyDeclaration.Getter, false);
-            this.EmitPropertyMethod(this.PropertyDeclaration, this.PropertyDeclaration.Setter, true);
+            if (this.Emitter.Validator.IsObjectLiteral(this.Emitter.GetTypeDefinition()))
+            {
+                var memberResult = this.Emitter.Resolver.ResolveNode(this.PropertyDeclaration, this.Emitter) as MemberResolveResult;
+
+                if (memberResult != null && !memberResult.Member.IsStatic)
+                {
+                    return;
+                }
+            }
+
+            this.EmitPropertyMethod(this.PropertyDeclaration, this.PropertyDeclaration.Getter, false, false);
+            this.EmitPropertyMethod(this.PropertyDeclaration, this.PropertyDeclaration.Setter, true, false);
         }
 
-        protected virtual void EmitPropertyMethod(PropertyDeclaration propertyDeclaration, Accessor accessor, bool setter)
+        public virtual void EmitPropertyMethod(PropertyDeclaration propertyDeclaration, Accessor accessor, bool setter, bool isObjectLiteral)
         {
             var memberResult = this.Emitter.Resolver.ResolveNode(propertyDeclaration, this.Emitter) as MemberResolveResult;
 
@@ -63,8 +73,17 @@ namespace Bridge.Translator
                 }
 
                 XmlToJsDoc.EmitComment(this, this.PropertyDeclaration);
-                string name = Helpers.GetPropertyRef(propertyDeclaration, this.Emitter, setter, false, false, true);
-                this.Write(name);
+
+                if (isObjectLiteral)
+                {
+                    this.Write(setter ? "set" : "get");
+                }
+                else
+                {
+                    string name = Helpers.GetPropertyRef(propertyDeclaration, this.Emitter, setter, false, false, true);
+                    this.Write(name);
+                }
+                
                 this.WriteColon();
                 this.WriteFunction();
                 this.WriteOpenParentheses();

@@ -58,7 +58,7 @@ namespace Bridge.Translator
             var add = true;
             var ignored = this.IgnoredTypes.Contains(fullName);
 
-            if (ignored || this.HasIgnore(typeDeclaration) || this.IsNonScriptable(typeDeclaration) && !this.IsObjectLiteral(typeDeclaration))
+            if (ignored || this.HasIgnore(typeDeclaration) || this.IsNonScriptable(typeDeclaration))
             {
                 if (partialType != null)
                 {
@@ -545,7 +545,7 @@ namespace Bridge.Translator
 
         private void CheckFieldProperty(PropertyDeclaration propertyDeclaration, ref bool isResolvedProperty, ref MemberResolveResult resolvedProperty)
         {
-            if (this.HasIgnore(propertyDeclaration))
+            if (this.HasIgnore(propertyDeclaration) || this.CurrentType.IsObjectLiteral)
             {
                 return;
             }

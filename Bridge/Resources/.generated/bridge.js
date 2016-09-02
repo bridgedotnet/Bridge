@@ -420,6 +420,10 @@
         },
 
         is: function (obj, type, ignoreFn, allowNull) {
+            if (type && type.prototype && type.prototype.$literal && Bridge.isPlainObject(obj)) {
+                return true;
+            }
+
             if (typeof type === "boolean") {
                 return type;
             }
@@ -2247,7 +2251,7 @@
     var base = {
         cache: {},
 
-        initialize: function () {
+        _initialize: function () {
             if (this.$initialized) {
                 return;
             }
@@ -2521,7 +2525,7 @@
                 };
             }
 
-            prop.$initialize = Bridge.Class.initialize;
+            prop.$initialize = Bridge.Class._initialize;
 
             var keys = [];
 

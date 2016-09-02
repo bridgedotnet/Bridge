@@ -6008,6 +6008,17 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1448.Literal', {
+        $literal: true,
+        constructor: function () {
+            var $this = {};
+            (function(){
+                this.v = null;
+            }).call($this);
+            return $this;
+        }
+    });
+
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1448.Plainer');
 
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1459', {
@@ -6738,6 +6749,115 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1529', {
+        testObjectLiteral: function () {
+            var bs = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1529.BS.$constructor();
+            Bridge.Test.Assert.true(Bridge.isPlainObject(bs));
+            Bridge.Test.Assert.areEqual(10, bs.field1);
+            Bridge.Test.Assert.areEqual("test", bs.field2);
+            Bridge.Test.Assert.areEqual(10, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1529.BS.prototype.getField1.call(bs));
+            Bridge.Test.Assert.areEqual("test", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1529.BS.prototype.getField2.call(bs));
+            Bridge.Test.Assert.areEqual(0, bs.prop1);
+            Bridge.Test.Assert.areEqual(10, bs.proxyField1);
+            Bridge.Test.Assert.areEqual("test", bs.proxyField2);
+            Bridge.Test.Assert.areEqual(0, bs.prop1);
+            Bridge.Test.Assert.null(bs.prop2);
+            Bridge.Test.Assert.areEqual(11, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1529.BS.getStaticProp());
+
+            var bs1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1529.BS.create(3, "test3");
+            Bridge.Test.Assert.true(Bridge.isPlainObject(bs1));
+            Bridge.Test.Assert.areEqual(3, bs1.field1);
+            Bridge.Test.Assert.areEqual("test3", bs1.field2);
+
+            var bs2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1529.BS.$constructor1(5);
+            Bridge.Test.Assert.true(Bridge.isPlainObject(bs2));
+            Bridge.Test.Assert.areEqual(5, bs2.field1);
+            Bridge.Test.Assert.areEqual("test", bs2.field2);
+
+            var bs3 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1529.BS.$constructor2("test5");
+            Bridge.Test.Assert.true(Bridge.isPlainObject(bs3));
+            Bridge.Test.Assert.areEqual(10, bs3.field1);
+            Bridge.Test.Assert.areEqual("test5", bs3.field2);
+
+            var ds1 = Bridge.merge(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1529.DS.$constructor(), {
+                field: 9
+            } );
+            Bridge.Test.Assert.true(Bridge.isPlainObject(ds1));
+            Bridge.Test.Assert.areEqual(9, ds1.field);
+            Bridge.Test.Assert.areEqual(10, ds1.field1);
+            Bridge.Test.Assert.areEqual("test", ds1.field2);
+            Bridge.Test.Assert.areEqual(0, ds1.prop1);
+
+            var ts = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1529.TS.$constructor();
+            Bridge.Test.Assert.true(Bridge.isPlainObject(ts));
+            Bridge.Test.Assert.areEqual(8, ts.field1);
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1529.BS', {
+        $literal: true,
+        statics: {
+            getStaticProp: function () {
+                return 11;
+            },
+            create: function (i, s) {
+                return Bridge.merge(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1529.BS.$constructor(), {
+                    field1: i, field2: s
+                } );
+            }
+        },
+        constructor: function () {
+            var $this = {};
+            (function(){
+                this.field1 = 0;
+                this.field2 = null;
+                this.prop1 = 0;
+                this.prop2 = null;
+                Object.defineProperty(this, "proxyField1", {
+                    get: function () {
+                        return this.field1;
+                    },
+                    set: function (value) {
+                        this.field1 = value;
+                    },
+                    enumerable: true
+                });
+                Object.defineProperty(this, "proxyField2", {
+                    get: function () {
+                        return this.field2;
+                    },
+                    set: function (value) {
+                        this.field2 = value;
+                    },
+                    enumerable: true
+                });
+                this.field1 = 10;
+                this.field2 = "test";
+            }).call($this);
+            return $this;
+        },
+        $constructor1: function (i) {
+            var $this = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1529.BS.$constructor();
+            (function(){
+                this.field1 = i;
+            }).call($this);
+            return $this;
+        },
+        $constructor2: function (s) {
+            var $this = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1529.BS.$constructor();
+            (function(){
+                this.field2 = s;
+            }).call($this);
+            return $this;
+        },
+        getField1: function () {
+            return this.field1;
+        },
+        getField2: function () {
+            return this.field2;
+        }
+    });
+
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1533', {
         testStringNullConcationation: function () {
             var s = null;
@@ -6772,8 +6892,6 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6803,7 +6921,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -7777,6 +7895,20 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         clear: function () {
             this._backingDictionary.clear();
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge377', {
+        $literal: true,
+        constructor: function () {
+            var $this = {};
+            (function(){
+                this.field1 = null;
+                this.field2 = null;
+                this.field3 = 0;
+                this.field4 = 0;
+            }).call($this);
+            return $this;
         }
     });
 
@@ -10492,6 +10624,29 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 Bridge.Test.Assert.areEqual$1(1, b.bar, "Bridge647 B bar");
                 Bridge.Test.Assert.areEqual$1(12, b.bar1, "Bridge647 B bar1");
             }
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge647A', {
+        $literal: true,
+        constructor: function () {
+            var $this = {};
+            (function(){
+                this.bar = 0;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge647B', {
+        $literal: true,
+        constructor: function () {
+            var $this = {};
+            (function(){
+                this.bar = 0;
+                this.bar1 = 12;
+            }).call($this);
+            return $this;
         }
     });
 
@@ -15467,6 +15622,30 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1467.SomeClass2', {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1467.SomeClass1]
+    });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1529.DS', {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1529.BS],
+        $literal: true,
+        constructor: function () {
+            var $this = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1529.BS.$constructor();
+            (function(){
+                this.field = 0;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1529.TS', {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1529.BS],
+        $literal: true,
+        constructor: function () {
+            var $this = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1529.BS.$constructor1(8);
+            (function(){
+
+            }).call($this);
+            return $this;
+        }
     });
 
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1684.MessageTable', {

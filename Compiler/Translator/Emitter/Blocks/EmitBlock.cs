@@ -258,11 +258,6 @@ namespace Bridge.Translator
                 this.Emitter.Translator.Plugins.BeforeTypeEmit(this.Emitter, type);
 
                 this.Emitter.Translator.EmitNode = type.TypeDeclaration;
-                if (type.IsObjectLiteral)
-                {
-                    this.Emitter.Translator.Plugins.AfterTypeEmit(this.Emitter, type);
-                    continue;
-                }
 
                 this.Emitter.InitEmitter();
 

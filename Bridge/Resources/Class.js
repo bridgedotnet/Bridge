@@ -1,7 +1,7 @@
 ﻿    var base = {
         cache: {},
 
-        initialize: function () {
+        _initialize: function () {
             if (this.$initialized) {
                 return;
             }
@@ -275,7 +275,7 @@
                 };
             }
 
-            prop.$initialize = Bridge.Class.initialize;
+            prop.$initialize = Bridge.Class._initialize;
 
             var keys = [];
 

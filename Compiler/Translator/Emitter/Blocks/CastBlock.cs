@@ -120,6 +120,14 @@ namespace Bridge.Translator
         protected virtual void EmitCastExpression(Expression expression, AstType type, string method)
         {
             var itype = this.Emitter.BridgeTypes.ToType(type);
+            bool isCastAttr;
+            string castCode = this.GetCastCode(expression, type, out isCastAttr);
+
+            if (itype != null && castCode == null && method != CS.Ops.CAST && itype.GetDefinition() != null && this.Emitter.Validator.IsObjectLiteral(itype.GetDefinition()))
+            {
+                throw new EmitterException(expression, "The type " + itype.FullName + " cannot be used in cast operation because there is no way to check its type");
+            }
+
             var enumType = itype;
             if (NullableType.IsNullable(enumType))
             {
@@ -202,9 +210,7 @@ namespace Bridge.Translator
 
                 return;
             }
-
-            bool isCastAttr;
-            string castCode = this.GetCastCode(expression, type, out isCastAttr);
+            
             bool isResultNullable = NullableType.IsNullable(typerr.Type);
 
             if (castCode != null)

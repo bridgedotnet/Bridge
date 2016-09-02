@@ -405,6 +405,10 @@
         },
 
         is: function (obj, type, ignoreFn, allowNull) {
+            if (type && type.prototype && type.prototype.$literal && Bridge.isPlainObject(obj)) {
+                return true;
+            }
+
             if (typeof type === "boolean") {
                 return type;
             }

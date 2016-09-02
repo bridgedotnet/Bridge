@@ -9,7 +9,7 @@ namespace Bridge.Translator
 {
     public class FieldBlock : AbstractEmitterBlock
     {
-        public FieldBlock(IEmitter emitter, ITypeInfo typeInfo, bool staticBlock, bool fieldsOnly)
+        public FieldBlock(IEmitter emitter, ITypeInfo typeInfo, bool staticBlock, bool fieldsOnly, bool isObjectLiteral = false)
             : base(emitter, typeInfo.TypeDeclaration)
         {
             this.Emitter = emitter;
@@ -17,6 +17,13 @@ namespace Bridge.Translator
             this.StaticBlock = staticBlock;
             this.FieldsOnly = fieldsOnly;
             this.Injectors = new List<string>();
+            this.IsObjectLiteral = isObjectLiteral;
+        }
+
+        public bool IsObjectLiteral
+        {
+            get;
+            set;
         }
 
         public ITypeInfo TypeInfo
@@ -56,7 +63,7 @@ namespace Bridge.Translator
 
         protected virtual void EmitFields(TypeConfigInfo info)
         {
-            if (this.FieldsOnly)
+            if (this.FieldsOnly || this.IsObjectLiteral)
             {
                 if (info.Fields.Count > 0)
                 {
@@ -67,10 +74,14 @@ namespace Bridge.Translator
                         this.WasEmitted = true;
                     }
                 }
-                return;
+
+                if (!this.IsObjectLiteral)
+                {
+                    return;
+                }
             }
 
-            if (info.Events.Count > 0)
+            if (info.Events.Count > 0 && !this.IsObjectLiteral)
             {
                 var hasProperties = this.WriteObject(JS.Fields.EVENTS, info.Events, JS.Funcs.BRIDGE_EVENT + "(this, \"{0}\", {1});", JS.Funcs.BRIDGE_EVENT + "(this, {0}, {1});");
                 if (hasProperties)
@@ -90,7 +101,7 @@ namespace Bridge.Translator
                 }
             }
 
-            if (info.Alias.Count > 0)
+            if (info.Alias.Count > 0 && !this.IsObjectLiteral)
             {
                 this.WriteAlias("alias", info.Alias);
                 this.Emitter.Comma = true;
@@ -101,7 +112,7 @@ namespace Bridge.Translator
         {
             bool hasProperties = this.HasProperties(objectName, members);
 
-            if (hasProperties && objectName != null)
+            if (hasProperties && objectName != null && !this.IsObjectLiteral)
             {
                 this.EnsureComma();
                 this.Write(objectName);
@@ -158,6 +169,7 @@ namespace Bridge.Translator
                     }
                 }
 
+                bool written = false;
                 if (!isNull && (!isPrimitive || (constValue is AstType)))
                 {
                     string value = null;
@@ -190,26 +202,48 @@ namespace Bridge.Translator
 
                         if (needContinue && !(member.Initializer is ObjectCreateExpression))
                         {
-                            defValue = " || " + Inspector.GetStructDefaultValue((IType)constValue, this.Emitter);
+                            defValue = " || " + Inspector.GetStructDefaultValue((IType) constValue, this.Emitter);
                         }
                     }
                     else
                     {
-                        value = isNullable ? "null" : Inspector.GetStructDefaultValue((AstType)constValue, this.Emitter);
+                        value = isNullable
+                            ? "null"
+                            : Inspector.GetStructDefaultValue((AstType) constValue, this.Emitter);
                         constValue = value;
                         write = true;
                         needContinue = !isProperty && !isNullable;
                     }
 
                     var name = member.GetName(this.Emitter);
+
                     if (isProperty && isPrimitive)
                     {
                         constValue = "null";
-                        this.Injectors.Add(string.Format(name.StartsWith("\"") ? "this[{0}] = {1};" : "this.{0} = {1};", name, value));
+
+                        if (this.IsObjectLiteral)
+                        {
+                            written = true;
+                            this.Write(string.Format("this.{0} = {1};", name, value));
+                            this.WriteNewLine();
+                        }
+                        else
+                        {
+                            this.Injectors.Add(string.Format(name.StartsWith("\"") ? "this[{0}] = {1};" : "this.{0} = {1};", name, value));
+                        }
                     }
                     else
                     {
-                        this.Injectors.Add(string.Format(name.StartsWith("\"") ? interfaceFormat : format, name, value + defValue));
+                        if (this.IsObjectLiteral)
+                        {
+                            written = true;
+                            this.Write(string.Format("this.{0} = {1};", name, value + defValue));
+                            this.WriteNewLine();
+                        }
+                        else
+                        {
+                            this.Injectors.Add(string.Format(name.StartsWith("\"") ? interfaceFormat : format, name,value + defValue));
+                        }
                     }
 
                     if (needContinue)
@@ -218,10 +252,25 @@ namespace Bridge.Translator
                     }
                 }
 
-                this.EnsureComma();
-                XmlToJsDoc.EmitComment(this, member.Entity);
-                this.Write(member.GetName(this.Emitter, true));
-                this.WriteColon();
+                if (written)
+                {
+                    continue;
+                }
+
+                if (this.IsObjectLiteral)
+                {
+                    this.WriteThis();
+                    this.WriteDot();
+                    this.Write(member.GetName(this.Emitter, true));
+                    this.Write(" = ");
+                }
+                else
+                {
+                    this.EnsureComma();
+                    XmlToJsDoc.EmitComment(this, member.Entity);
+                    this.Write(member.GetName(this.Emitter, true));
+                    this.WriteColon();
+                }
 
                 if (constValue is AstType)
                 {
@@ -256,6 +305,11 @@ namespace Bridge.Translator
                 else
                 {
                     member.Initializer.AcceptVisitor(this.Emitter);
+                }
+
+                if (this.IsObjectLiteral)
+                {
+                    this.WriteSemiColon(true);
                 }
 
                 this.Emitter.Comma = true;

@@ -13,6 +13,7 @@
         {
             public const string ENTRY_POINT = "$entryPoint";
             public const string KIND = "$kind";
+            public const string LITERAL = "$literal";
             public const string VARIANCE = "$variance";
             public const string FLAGS = "$flags";
             public const string UNDERLYINGTYPE = "$utype";
