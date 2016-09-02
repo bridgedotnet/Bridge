@@ -1,37 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Import Project="$(MSBuildProjectDirectory)\..\.common\CompilerTestProject.Props.targets" />
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{16777B9C-A3B6-4E0B-B5A2-AA933A2F54D3}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TestProject</RootNamespace>
     <AssemblyName>TestProject</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoStdLib>True</NoStdLib>
     <DefineConstants>TEST1;TEST2</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoStdLib>True</NoStdLib>
     <DefineConstants>TEST1;TEST2</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
@@ -53,11 +34,6 @@
     <Compile Include="Issues\Issue461.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Bridge\bridge.Release.json" />
-    <None Include="Bridge\bridge.Debug.json" />
-    <None Include="Bridge\bridge.json" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="Bridge">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Bridge\bin\$(Configuration)\Bridge.dll</HintPath>
@@ -68,17 +44,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Bridge\bridge.Release.json" />
+    <None Include="Bridge\bridge.Debug.json" />
+    <None Include="Bridge\bridge.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Bridge\build\" />
     <Folder Include="Bridge\output\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Bridge\res\header.js" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent Condition="$(OS) != Unix">"$(ProjectDir)..\..\..\Builder\$(OutDir)Bridge.Builder.exe" -p "$(ProjectPath)" -b "$(ProjectDir)$(OutDir)Bridge.dll" -cfg "$(Configuration)"</PostBuildEvent>
-    <PostBuildEvent Condition="$(OS) == Unix">mono "$(ProjectDir)../../../Builder/$(OutDir)Bridge.Builder.exe" -p "$(ProjectDir)/$(MSBuildProjectFile)" -b "$(ProjectDir)$(OutDir)Bridge.dll"  -cfg "$(Configuration)"</PostBuildEvent>
-    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
-    <AdditionalExplicitAssemblyReferences />
-  </PropertyGroup>
+  <Import Project="$(MSBuildProjectDirectory)\..\.common\CompilerTestProject.Bridge.targets" />
 </Project>
