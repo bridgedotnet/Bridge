@@ -80,6 +80,7 @@ build:
 
 # scripts to run before build
 before_build:
+- nuget restore "c:\projects\Bridge\.nuget\packages.config" -PackagesDirectory "c:\projects\Bridge\packages"
 
 # scripts to run after build
 after_build:
