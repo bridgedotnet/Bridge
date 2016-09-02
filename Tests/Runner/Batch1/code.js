@@ -29002,7 +29002,12 @@
             }
         },
         fromString: function () {
-            var expectedValues = [new Date(1999, 12 - 1, 31, 23, 59, 59), new Date(100, 2 - 1, 2, 0, 10, 59), new Date(2216, 2 - 1, 29, 0, 0, 0), new Date(1, 1 - 1, 1, 0, 0, 0)];
+            var expectedValues = [new Date(1999, 12 - 1, 31, 23, 59, 59), new Date(100, 1 - 1, 1, 0, 0, 0), new Date(2216, 2 - 1, 29, 0, 0, 0), new Date(1, 1 - 1, 1, 0, 0, 0)];
+
+            if (Bridge.ClientTest.Utilities.BrowserHelper.isPhantomJs()) {
+                // AppVeyor Chutzpah engine adjustment
+                expectedValues[1] = new Date(1950, 2 - 1, 2, 4, 10, 50);
+            }
 
             var dateTimeFormat = System.Globalization.CultureInfo.getCurrentCulture().dateTimeFormat;
             var pattern = System.String.concat(System.String.concat(dateTimeFormat.longDatePattern, String.fromCharCode(32)), dateTimeFormat.longTimePattern);
