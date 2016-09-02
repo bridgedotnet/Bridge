@@ -15,7 +15,7 @@ namespace Bridge.Contract
             }
 
             path = path.Replace('/', Path.DirectorySeparatorChar);
-            path.Replace('\\', Path.DirectorySeparatorChar);
+            path = path.Replace('\\', Path.DirectorySeparatorChar);
 
             return path;
         }
