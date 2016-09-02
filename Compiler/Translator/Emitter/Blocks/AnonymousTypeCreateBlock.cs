@@ -252,6 +252,52 @@ namespace Bridge.Translator
             this.Emitter.Comma = true;
         }
 
+        /// <summary>
+        /// This function takes a string as input. It processes the string four bytes at a time,
+        /// and interprets each of the four-byte chunks as a single long integer value.
+        /// The integer values for the four-byte chunks are added together.
+        /// In the end, the resulting sum is converted to the range 0 to M-1 using the modulus operator.
+        /// http://research.cs.vt.edu/AVresearch/hashing/strings.php
+        /// </summary>
+        /// <param name="s">Input string</param>
+        /// <param name="m">Modulus operator</param>
+        /// <returns>Hash</returns>
+        private long SimpleDeterministicHash(string s, long m)
+        {
+            int l = s.Length;
+            long sum = 0;
+            char[] c;
+            long mult;
+            var i = 0;
+            var j = 0;
+            while (true)
+            {
+                j = i + 4;
+
+                if (j > l)
+                {
+                    j = l;
+                }
+
+                c = s.Substring(i, j - i).ToCharArray();
+                mult = 1;
+                for (int k = 0; k < c.Length; k++)
+                {
+                    sum += c[k] * mult;
+                    mult *= 256;
+                }
+
+                i += 4;
+
+                if (i >= l)
+                {
+                    break;
+                }
+            }
+
+            return System.Math.Abs(sum) % m;
+        }
+
         private void GenerateHashCode(IAnonymousTypeConfig config)
         {
             this.EnsureComma();
@@ -260,7 +306,23 @@ namespace Bridge.Translator
             this.Write("var hash = 17;");
 
             this.WriteNewLine();
-            this.Write("hash = hash * 23 + " + config.Name.GetHashCode() + ";");
+
+            var m = 0xFFFFFFFFFF;
+            long nameHash;
+            try
+            {
+                // Just in case
+                nameHash = this.SimpleDeterministicHash(config.Name, m);
+            }
+            catch
+            {
+                nameHash = config.Name.GetHashCode();
+            }
+
+            // Avoid +-value when nameHash below zero
+            string nameHashValue = nameHash > 0 ? " + " + nameHash : " - " + System.Math.Abs(nameHash);
+
+            this.Write("hash = hash * 23" + nameHashValue + ";");
 
             foreach (var property in config.Type.Properties)
             {

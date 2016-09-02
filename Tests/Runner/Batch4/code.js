@@ -8409,7 +8409,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1276122535;
+            hash = hash * 23 + 6320272310;
             hash = hash * 23 + (this.a == null ? 0 : Bridge.getHashCode(this.a));
             hash = hash * 23 + (this.b == null ? 0 : Bridge.getHashCode(this.b));
             return hash;
@@ -8442,7 +8442,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1276122536;
+            hash = hash * 23 + 6320337846;
             hash = hash * 23 + (this.a == null ? 0 : Bridge.getHashCode(this.a));
             hash = hash * 23 + (this.b == null ? 0 : Bridge.getHashCode(this.b));
             return hash;
@@ -14044,7 +14044,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1276122537;
+            hash = hash * 23 + 6320403382;
             hash = hash * 23 + (this.x == null ? 0 : Bridge.getHashCode(this.x));
             return hash;
         },
@@ -14075,7 +14075,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1276122538;
+            hash = hash * 23 + 6320468918;
             hash = hash * 23 + (this.x == null ? 0 : Bridge.getHashCode(this.x));
             hash = hash * 23 + (this.y == null ? 0 : Bridge.getHashCode(this.y));
             return hash;
@@ -14569,7 +14569,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1276122539;
+            hash = hash * 23 + 6320534454;
             return hash;
         },
         toJSON: function () {
