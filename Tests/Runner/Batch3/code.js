@@ -6772,8 +6772,6 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6803,7 +6801,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -7573,6 +7571,15 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getEnumerator: function () {
             throw new System.Exception();
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1735', {
+        testTryGetValueWithDelegate: function () {
+            var delegateCache = new (System.Collections.Generic.Dictionary$2(String,Function))();
+            var setter = { };
+            var result = delegateCache.tryGetValue("test", setter);
+            Bridge.Test.Assert.false(result);
         }
     });
 
