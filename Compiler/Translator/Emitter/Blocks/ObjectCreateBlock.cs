@@ -153,7 +153,7 @@ namespace Bridge.Translator
                 this.WriteOpenBrace();
                 this.WriteSpace();
 
-                this.WriteObjectInitializer(objectCreateExpression.Initializer.Elements, this.Emitter.AssemblyInfo.PreserveMemberCase, type, invocationResolveResult, false);
+                this.WriteObjectInitializer(objectCreateExpression.Initializer.Elements, type, invocationResolveResult, false);
                 this.WriteSpace();
 
                 this.WriteCloseBrace();
@@ -259,7 +259,7 @@ namespace Bridge.Translator
 
                     if (isObjectLiteral)
                     {
-                        this.WriteObjectInitializer(objectCreateExpression.Initializer.Elements, this.Emitter.AssemblyInfo.PreserveMemberCase, type, invocationResolveResult, true);
+                        this.WriteObjectInitializer(objectCreateExpression.Initializer.Elements, type, invocationResolveResult, true);
                     }
                     else
                     {
@@ -446,7 +446,7 @@ namespace Bridge.Translator
             return inlineCode;
         }
 
-        protected virtual void WriteObjectInitializer(IEnumerable<Expression> expressions, bool preserveMemberCase, TypeDefinition type, InvocationResolveResult rr, bool withCtor)
+        protected virtual void WriteObjectInitializer(IEnumerable<Expression> expressions, TypeDefinition type, InvocationResolveResult rr, bool withCtor)
         {
             bool needComma = false;
             List<string> names = new List<string>();
@@ -495,16 +495,10 @@ namespace Bridge.Translator
                     NamedArgumentExpression namedArgumentExpression = item as NamedArgumentExpression;
                     string name = namedExression != null ? namedExression.Name : namedArgumentExpression.Name;
 
-                    if (!preserveMemberCase)
-                    {
-                        name = Object.Net.Utilities.StringUtils.ToLowerCamelCase(name);
-                    }
-
                     var itemrr = this.Emitter.Resolver.ResolveNode(item, this.Emitter) as MemberResolveResult;
                     if (itemrr != null)
                     {
                         var oc = OverloadsCollection.Create(this.Emitter, itemrr.Member);
-                        oc.CancelChangeCase = this.Emitter.IsNativeMember(itemrr.Member.FullName) ? false : preserveMemberCase;
                         name = oc.GetOverloadName();
                     }
 
@@ -576,11 +570,6 @@ namespace Bridge.Translator
                             }
 
                             var name = member.GetName(this.Emitter);
-
-                            if (!preserveMemberCase)
-                            {
-                                name = Object.Net.Utilities.StringUtils.ToLowerCamelCase(name);
-                            }
 
                             if (names.Contains(name))
                             {
