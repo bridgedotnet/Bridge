@@ -10,7 +10,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test]
         public static void TestVoidTypeOf()
         {
-            object value = typeof(void);
+            var value = typeof(void);
+            Assert.AreEqual("Object", value.FullName);
+            Assert.AreEqual("Object", value.GetClassName());
             Assert.AreEqual("Function", value.GetType().FullName);
         }
     }

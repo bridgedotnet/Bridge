@@ -203,5 +203,8 @@ namespace System
         [EditorBrowsable(EditorBrowsableState.Never)]
         [NonScriptable]
         public static extern Type GetTypeFromHandle(RuntimeTypeHandle typeHandle);
+
+        [Template("Bridge.getTypeName({this})")]
+        public override extern string GetClassName();
     }
 }

@@ -1080,10 +1080,10 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         statics: {
             testDecimalLongWithDictionary: function () {
                 var decimalDict = $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1065.f1(new (System.Collections.Generic.Dictionary$2(System.Int64,System.Decimal))());
-                Bridge.Test.Assert.areEqual("System.Decimal", Bridge.getTypeName(decimalDict.get(System.Int64(0))));
+                Bridge.Test.Assert.areEqual("System.Decimal", Bridge.getTypeName(Bridge.getType(decimalDict.get(System.Int64(0)))));
                 Bridge.Test.Assert.areEqual("5", Bridge.Int.format(decimalDict.get(System.Int64(0)), 'G'));
                 decimalDict.set(System.Int64(0), System.Decimal(1));
-                Bridge.Test.Assert.areEqual("System.Decimal", Bridge.getTypeName(decimalDict.get(System.Int64(0))));
+                Bridge.Test.Assert.areEqual("System.Decimal", Bridge.getTypeName(Bridge.getType(decimalDict.get(System.Int64(0)))));
                 Bridge.Test.Assert.areEqual("1", Bridge.Int.format(decimalDict.get(System.Int64(0)), 'G'));
             }
         }
@@ -5417,7 +5417,9 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         statics: {
             testVoidTypeOf: function () {
                 var value = Object;
-                Bridge.Test.Assert.areEqual("Function", Bridge.Reflection.getTypeFullName(Bridge.getType(value)));
+                Bridge.Test.Assert.areEqual("Object", Bridge.Reflection.getTypeFullName(value));
+                Bridge.Test.Assert.areEqual("Object", Bridge.getTypeName(value));
+                Bridge.Test.Assert.areEqual("Function", Bridge.Reflection.getTypeFullName(Function));
             }
         }
     });
@@ -5920,7 +5922,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 var result = Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo(), JSON.parse(serialized));
 
                 Bridge.Test.Assert.notNull$1(result, " result should not be null");
-                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo", Bridge.getTypeName(result), "Check result type name");
+                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo", Bridge.getTypeName(Bridge.getType(result)), "Check result type name");
                 Bridge.Test.Assert.areEqual$1(100, result.getValue(), "result.Value = 100");
             },
             testJSONParseAsArray: function () {
@@ -5933,10 +5935,10 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 var result = Bridge.merge(new Array(), JSON.parse(serialized), null, function(){return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo();});
 
                 Bridge.Test.Assert.notNull$1(result, " result should not be null");
-                Bridge.Test.Assert.areEqual$1("Array", Bridge.getTypeName(result), "Check result type name");
+                Bridge.Test.Assert.areEqual$1("Array", Bridge.getTypeName(Bridge.getType(result)), "Check result type name");
                 Bridge.Test.Assert.areEqual$1(1, result.length, "Check result length");
                 Bridge.Test.Assert.notNull$1(result[0], " result[0] should not be null");
-                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo", Bridge.getTypeName(result[0]), "Check result[0] type name");
+                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo", Bridge.getTypeName(Bridge.getType(result[0])), "Check result[0] type name");
                 Bridge.Test.Assert.areEqual$1(101, result[0].getValue(), "result[0].Value = 101");
             }
         }
@@ -6772,8 +6774,6 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6803,7 +6803,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -7576,6 +7576,20 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1737', {
+        testGetClassName: function () {
+            var x = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1737.SomethingOfSomethingElse();
+            Bridge.Test.Assert.areEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1737.SomethingOfSomethingElse", Bridge.getTypeName(Bridge.getType(x)));
+            Bridge.Test.Assert.true(Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(x)), Bridge.getTypeName(Bridge.getType(x))));
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1737.Something$1', function (T) { return {
+
+    }; });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1737.SomethingElse');
+
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A', {
         config: {
             properties: {
@@ -7677,7 +7691,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge306Component$1', function (TProps) { return {
         statics: {
             new: function (TComponent, props) {
-                return System.String.concat(System.String.concat(Bridge.getTypeName(props), ":"), props);
+                return System.String.concat(System.String.concat(Bridge.getTypeName(Bridge.getType(props)), ":"), props);
             }
         }
     }; });
@@ -8738,55 +8752,55 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 var thisType = "Float32Array";
                 Bridge.Test.Assert.true$1(v1 != null, System.String.concat(thisType, " created"));
                 var thisName = isSpecialTypeName ? "Object" : thisType;
-                Bridge.Test.Assert.areEqual$1(thisName, Bridge.getTypeName(v1), System.String.concat(thisType, " class name"));
+                Bridge.Test.Assert.areEqual$1(thisName, Bridge.getTypeName(Bridge.getType(v1)), System.String.concat(thisType, " class name"));
 
                 var v2 = new Float64Array(1);
                 thisType = "Float64Array";
                 Bridge.Test.Assert.true$1(v2 != null, System.String.concat(thisType, " created"));
                 thisName = isSpecialTypeName ? "Object" : thisType;
-                Bridge.Test.Assert.areEqual$1(thisName, Bridge.getTypeName(v2), System.String.concat(thisType, " class name"));
+                Bridge.Test.Assert.areEqual$1(thisName, Bridge.getTypeName(Bridge.getType(v2)), System.String.concat(thisType, " class name"));
 
                 var v3 = new Int16Array(1);
                 thisType = "Int16Array";
                 Bridge.Test.Assert.true$1(v3 != null, System.String.concat(thisType, " created"));
                 thisName = isSpecialTypeName ? "Object" : thisType;
-                Bridge.Test.Assert.areEqual$1(thisName, Bridge.getTypeName(v3), System.String.concat(thisType, " class name"));
+                Bridge.Test.Assert.areEqual$1(thisName, Bridge.getTypeName(Bridge.getType(v3)), System.String.concat(thisType, " class name"));
 
                 var v4 = new Int32Array(1);
                 thisType = "Int32Array";
                 Bridge.Test.Assert.true$1(v4 != null, System.String.concat(thisType, " created"));
                 thisName = isSpecialTypeName ? "Object" : thisType;
-                Bridge.Test.Assert.areEqual$1(thisName, Bridge.getTypeName(v4), System.String.concat(thisType, " class name"));
+                Bridge.Test.Assert.areEqual$1(thisName, Bridge.getTypeName(Bridge.getType(v4)), System.String.concat(thisType, " class name"));
 
                 var v5 = new Int8Array(1);
                 thisType = "Int8Array";
                 Bridge.Test.Assert.true$1(v5 != null, System.String.concat(thisType, " created"));
                 thisName = isSpecialTypeName ? "Object" : thisType;
-                Bridge.Test.Assert.areEqual$1(thisName, Bridge.getTypeName(v5), System.String.concat(thisType, " class name"));
+                Bridge.Test.Assert.areEqual$1(thisName, Bridge.getTypeName(Bridge.getType(v5)), System.String.concat(thisType, " class name"));
 
                 var v6 = new Uint16Array(1);
                 thisType = "Uint16Array";
                 Bridge.Test.Assert.true$1(v6 != null, System.String.concat(thisType, " created"));
                 thisName = isSpecialTypeName ? "Object" : thisType;
-                Bridge.Test.Assert.areEqual$1(thisName, Bridge.getTypeName(v6), System.String.concat(thisType, " class name"));
+                Bridge.Test.Assert.areEqual$1(thisName, Bridge.getTypeName(Bridge.getType(v6)), System.String.concat(thisType, " class name"));
 
                 var v7 = new Uint32Array(1);
                 thisType = "Uint32Array";
                 Bridge.Test.Assert.true$1(v7 != null, System.String.concat(thisType, " created"));
                 thisName = isSpecialTypeName ? "Object" : thisType;
-                Bridge.Test.Assert.areEqual$1(thisName, Bridge.getTypeName(v7), System.String.concat(thisType, " class name"));
+                Bridge.Test.Assert.areEqual$1(thisName, Bridge.getTypeName(Bridge.getType(v7)), System.String.concat(thisType, " class name"));
 
                 var v8 = new Uint8Array(1);
                 thisType = "Uint8Array";
                 Bridge.Test.Assert.true$1(v8 != null, System.String.concat(thisType, " created"));
                 thisName = isSpecialTypeName ? "Object" : thisType;
-                Bridge.Test.Assert.areEqual$1(thisName, Bridge.getTypeName(v8), System.String.concat(thisType, " class name"));
+                Bridge.Test.Assert.areEqual$1(thisName, Bridge.getTypeName(Bridge.getType(v8)), System.String.concat(thisType, " class name"));
 
                 var v9 = new Uint8ClampedArray(1);
                 thisType = "Uint8ClampedArray";
                 Bridge.Test.Assert.true$1(v9 != null, System.String.concat(thisType, " created"));
                 thisName = isSpecialTypeName ? "Object" : thisType;
-                Bridge.Test.Assert.areEqual$1(thisName, Bridge.getTypeName(v9), System.String.concat(thisType, " class name"));
+                Bridge.Test.Assert.areEqual$1(thisName, Bridge.getTypeName(Bridge.getType(v9)), System.String.concat(thisType, " class name"));
             }
         }
     });
@@ -10320,13 +10334,13 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 var a5 = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested$1.SubNested(String,System.Int32))();
                 var a6 = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested$1.SubNested$1(String,System.Int32,System.Int32))();
 
-                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1[[String]]", Bridge.getTypeName(a), "Bridge634 A a");
-                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested[[String]]", Bridge.getTypeName(a1), "Bridge634 A a1");
-                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested$1[[String],[System.Int32, mscorlib]]", Bridge.getTypeName(a2), "Bridge634 A a2");
-                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested.SubNested[[String]]", Bridge.getTypeName(a3), "Bridge634 A a3");
-                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested.SubNested$1[[String],[System.Int32, mscorlib]]", Bridge.getTypeName(a4), "Bridge634 A a4");
-                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested$1.SubNested[[String],[System.Int32, mscorlib]]", Bridge.getTypeName(a5), "Bridge634 A a5");
-                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested$1.SubNested$1[[String],[System.Int32, mscorlib],[System.Int32, mscorlib]]", Bridge.getTypeName(a6), "Bridge634 A a6");
+                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1[[String]]", Bridge.getTypeName(Bridge.getType(a)), "Bridge634 A a");
+                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested[[String]]", Bridge.getTypeName(Bridge.getType(a1)), "Bridge634 A a1");
+                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested$1[[String],[System.Int32, mscorlib]]", Bridge.getTypeName(Bridge.getType(a2)), "Bridge634 A a2");
+                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested.SubNested[[String]]", Bridge.getTypeName(Bridge.getType(a3)), "Bridge634 A a3");
+                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested.SubNested$1[[String],[System.Int32, mscorlib]]", Bridge.getTypeName(Bridge.getType(a4)), "Bridge634 A a4");
+                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested$1.SubNested[[String],[System.Int32, mscorlib]]", Bridge.getTypeName(Bridge.getType(a5)), "Bridge634 A a5");
+                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested$1.SubNested$1[[String],[System.Int32, mscorlib],[System.Int32, mscorlib]]", Bridge.getTypeName(Bridge.getType(a6)), "Bridge634 A a6");
 
                 var b = new (ClientTestLibraryCustom.Bridge634B$1(String))();
                 var b1 = new (ClientTestLibraryCustom.Bridge634B$1.Nested(String))();
@@ -10336,13 +10350,13 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 var b5 = new (ClientTestLibraryCustom.Bridge634B$1.Nested$1.SubNested(String,System.Int32))();
                 var b6 = new (ClientTestLibraryCustom.Bridge634B$1.Nested$1.SubNested$1(String,System.Int32,System.Int32))();
 
-                Bridge.Test.Assert.areEqual$1("ClientTestLibraryCustom.Bridge634B$1[[String]]", Bridge.getTypeName(b), "Bridge634 B b");
-                Bridge.Test.Assert.areEqual$1("ClientTestLibraryCustom.Bridge634B$1.Nested[[String]]", Bridge.getTypeName(b1), "Bridge634 B b1");
-                Bridge.Test.Assert.areEqual$1("ClientTestLibraryCustom.Bridge634B$1.Nested$1[[String],[System.Int32, mscorlib]]", Bridge.getTypeName(b2), "Bridge634 B b2");
-                Bridge.Test.Assert.areEqual$1("ClientTestLibraryCustom.Bridge634B$1.Nested.SubNested[[String]]", Bridge.getTypeName(b3), "Bridge634 B b3");
-                Bridge.Test.Assert.areEqual$1("ClientTestLibraryCustom.Bridge634B$1.Nested.SubNested$1[[String],[System.Int32, mscorlib]]", Bridge.getTypeName(b4), "Bridge634 B b4");
-                Bridge.Test.Assert.areEqual$1("ClientTestLibraryCustom.Bridge634B$1.Nested$1.SubNested[[String],[System.Int32, mscorlib]]", Bridge.getTypeName(b5), "Bridge634 B b5");
-                Bridge.Test.Assert.areEqual$1("ClientTestLibraryCustom.Bridge634B$1.Nested$1.SubNested$1[[String],[System.Int32, mscorlib],[System.Int32, mscorlib]]", Bridge.getTypeName(b6), "Bridge634 B b6");
+                Bridge.Test.Assert.areEqual$1("ClientTestLibraryCustom.Bridge634B$1[[String]]", Bridge.getTypeName(Bridge.getType(b)), "Bridge634 B b");
+                Bridge.Test.Assert.areEqual$1("ClientTestLibraryCustom.Bridge634B$1.Nested[[String]]", Bridge.getTypeName(Bridge.getType(b1)), "Bridge634 B b1");
+                Bridge.Test.Assert.areEqual$1("ClientTestLibraryCustom.Bridge634B$1.Nested$1[[String],[System.Int32, mscorlib]]", Bridge.getTypeName(Bridge.getType(b2)), "Bridge634 B b2");
+                Bridge.Test.Assert.areEqual$1("ClientTestLibraryCustom.Bridge634B$1.Nested.SubNested[[String]]", Bridge.getTypeName(Bridge.getType(b3)), "Bridge634 B b3");
+                Bridge.Test.Assert.areEqual$1("ClientTestLibraryCustom.Bridge634B$1.Nested.SubNested$1[[String],[System.Int32, mscorlib]]", Bridge.getTypeName(Bridge.getType(b4)), "Bridge634 B b4");
+                Bridge.Test.Assert.areEqual$1("ClientTestLibraryCustom.Bridge634B$1.Nested$1.SubNested[[String],[System.Int32, mscorlib]]", Bridge.getTypeName(Bridge.getType(b5)), "Bridge634 B b5");
+                Bridge.Test.Assert.areEqual$1("ClientTestLibraryCustom.Bridge634B$1.Nested$1.SubNested$1[[String],[System.Int32, mscorlib],[System.Int32, mscorlib]]", Bridge.getTypeName(Bridge.getType(b6)), "Bridge634 B b6");
 
                 var c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C();
                 var c1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested();
@@ -10352,13 +10366,13 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 var c5 = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested$1.SubNested(System.Int32))();
                 var c6 = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested$1.SubNested$1(System.Int32,System.Int32))();
 
-                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C", Bridge.getTypeName(c), "Bridge634 C c");
-                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested", Bridge.getTypeName(c1), "Bridge634 C c1");
-                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested$1[[System.Int32, mscorlib]]", Bridge.getTypeName(c2), "Bridge634 C c2");
-                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested.SubNested", Bridge.getTypeName(c3), "Bridge634 C c3");
-                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested.SubNested$1[[System.Int32, mscorlib]]", Bridge.getTypeName(c4), "Bridge634 C c4");
-                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested$1.SubNested[[System.Int32, mscorlib]]", Bridge.getTypeName(c5), "Bridge634 C c5");
-                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested$1.SubNested$1[[System.Int32, mscorlib],[System.Int32, mscorlib]]", Bridge.getTypeName(c6), "Bridge634 C c6");
+                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C", Bridge.getTypeName(Bridge.getType(c)), "Bridge634 C c");
+                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested", Bridge.getTypeName(Bridge.getType(c1)), "Bridge634 C c1");
+                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested$1[[System.Int32, mscorlib]]", Bridge.getTypeName(Bridge.getType(c2)), "Bridge634 C c2");
+                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested.SubNested", Bridge.getTypeName(Bridge.getType(c3)), "Bridge634 C c3");
+                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested.SubNested$1[[System.Int32, mscorlib]]", Bridge.getTypeName(Bridge.getType(c4)), "Bridge634 C c4");
+                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested$1.SubNested[[System.Int32, mscorlib]]", Bridge.getTypeName(Bridge.getType(c5)), "Bridge634 C c5");
+                Bridge.Test.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested$1.SubNested$1[[System.Int32, mscorlib],[System.Int32, mscorlib]]", Bridge.getTypeName(Bridge.getType(c6)), "Bridge634 C c6");
             }
         }
     });
@@ -10652,8 +10666,8 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 var d = new Bridge634D();
                 var d1 = new Bridge634D.Nested();
 
-                Bridge.Test.Assert.areEqual$1("Bridge634D", Bridge.getTypeName(d), "Bridge634 D d");
-                Bridge.Test.Assert.areEqual$1("Bridge634D.Nested", Bridge.getTypeName(d1), "Bridge634 D d1");
+                Bridge.Test.Assert.areEqual$1("Bridge634D", Bridge.getTypeName(Bridge.getType(d)), "Bridge634 D d");
+                Bridge.Test.Assert.areEqual$1("Bridge634D.Nested", Bridge.getTypeName(Bridge.getType(d1)), "Bridge634 D d1");
             }
         }
     });
@@ -13138,14 +13152,14 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 var test = System.Decimal(check ? 1 : 2);
 
                 Bridge.Test.Assert.true$1(test.equalsT(System.Decimal(1)), "One True");
-                Bridge.Test.Assert.areEqual$1("System.Decimal", Bridge.getTypeName(test), "Is decimal");
+                Bridge.Test.Assert.areEqual$1("System.Decimal", Bridge.Reflection.getTypeFullName(System.Decimal), "Is decimal");
             },
             testDoubleConversion: function () {
                 var check = true;
                 var test = check ? 1 : 2;
 
                 Bridge.Test.Assert.true$1(test === 1, "One True");
-                Bridge.Test.Assert.areEqual$1("Number", Bridge.getTypeName(test), "Is number");
+                Bridge.Test.Assert.areEqual$1("System.Double", Bridge.Reflection.getTypeFullName(System.Double), "Is number");
             }
         }
     });
@@ -15012,7 +15026,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             },
             n499: function () {
                 var v1 = new System.Version.$constructor();
-                Bridge.Test.Assert.areEqual$1("System.Version", Bridge.getTypeName(v1), "#499 Version type name");
+                Bridge.Test.Assert.areEqual$1("System.Version", Bridge.getTypeName(Bridge.getType(v1)), "#499 Version type name");
             }
         }
     });
@@ -15479,6 +15493,10 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             if (i === void 0) { i = 1; }
             return Bridge.ClientTest.Batch3.BridgeIssues.Bridge1704.Base.prototype.show.call(this);
         }
+    });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1737.SomethingOfSomethingElse', {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1737.Something$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1737.SomethingElse)]
     });
 
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge240B', {

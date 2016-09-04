@@ -2445,6 +2445,8 @@
                 result += ']';
 
                 Class.$$fullname = result;
+            } else {
+                Class.$$fullname = Class.$$name;
             }
 
             if (extend && Bridge.isFunction(extend)) {
@@ -2486,10 +2488,7 @@
             Class.$$initCtor = function () {};
             Class.$$initCtor.prototype = prototype;
             Class.$$initCtor.prototype.constructor = Class;
-
-            if (Class.$$fullname) {
-                Class.$$initCtor.prototype.$$fullname = Class.$$fullname;
-            }
+            Class.$$initCtor.prototype.$$fullname = gCfg && isGenericInstance ? Class.$$fullname : Class.$$name;
 
             if (statics) {
                 var staticsConfig = statics.$config || statics.config;

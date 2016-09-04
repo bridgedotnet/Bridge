@@ -4636,14 +4636,14 @@
         defaultConstructorWorks: function () {
             var d = new (System.Collections.Generic.Dictionary$2(System.Int32,String))();
             Bridge.Test.Assert.areEqual$1(0, d.getCount(), "Count is 0");
-            Bridge.Test.Assert.areEqual$1("Bridge.CustomEnumerator", Bridge.getTypeName(d.getEnumerator()), "Enumerator should be Bridge.CustomEnumerator");
-            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.EqualityComparer$1[[Object]]", Bridge.getTypeName(d.getComparer()), "Comparer should be Bridge.EqualityComparer$1$Object");
+            Bridge.Test.Assert.areEqual$1("Bridge.CustomEnumerator", Bridge.getTypeName(Bridge.getType(d.getEnumerator())), "Enumerator should be Bridge.CustomEnumerator");
+            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.EqualityComparer$1[[Object]]", Bridge.getTypeName(Bridge.getType(d.getComparer())), "Comparer should be Bridge.EqualityComparer$1$Object");
         },
         capacityConstructorWorks: function () {
             var d = new (System.Collections.Generic.Dictionary$2(System.Int32, String))();
             Bridge.Test.Assert.areEqual(0, d.getCount());
-            Bridge.Test.Assert.areEqual$1("Bridge.CustomEnumerator", Bridge.getTypeName(d.getEnumerator()), "Enumerator should be Bridge.CustomEnumerator");
-            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.EqualityComparer$1[[Object]]", Bridge.getTypeName(d.getComparer()), "Comparer should be Bridge.EqualityComparer$1$Object");
+            Bridge.Test.Assert.areEqual$1("Bridge.CustomEnumerator", Bridge.getTypeName(Bridge.getType(d.getEnumerator())), "Enumerator should be Bridge.CustomEnumerator");
+            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.EqualityComparer$1[[Object]]", Bridge.getTypeName(Bridge.getType(d.getComparer())), "Comparer should be Bridge.EqualityComparer$1$Object");
         },
         capacityAndEqualityComparerWorks: function () {
             var c = new Bridge.ClientTest.Collections.Generic.GenericDictionaryTests.TestEqualityComparer();
@@ -7033,7 +7033,7 @@
                         Bridge.Test.Assert.throws$2(function () {
                             convert(testValues[i], testBases[i]);
                         }, function (err) {
-                            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(TException));
+                            return Bridge.referenceEquals(Bridge.getTypeName(Bridge.getType(err)), Bridge.getTypeName(TException));
                         }, System.String.concat(System.String.concat(System.String.concat("Value ", testValues[i]), " base "), testBases[i]));
                     }
                     catch (e) {
@@ -7064,7 +7064,7 @@
                         Bridge.Test.Assert.throws$2(function () {
                             convert(testValues[i]);
                         }, function (err) {
-                            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(TException));
+                            return Bridge.referenceEquals(Bridge.getTypeName(Bridge.getType(err)), Bridge.getTypeName(TException));
                         }, System.String.concat("Value ", testValues[i]));
                     }
                     catch (e) {
@@ -7096,7 +7096,7 @@
                         Bridge.Test.Assert.throws$2(function () {
                             convert(testValues[i]);
                         }, function (err) {
-                            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(TException));
+                            return Bridge.referenceEquals(Bridge.getTypeName(Bridge.getType(err)), Bridge.getTypeName(TException));
                         }, System.String.concat("Value ", testValues[i]));
                     }
                     catch (e) {
@@ -7763,7 +7763,7 @@
         },
         toString$1: function (format, formatProvider) {
             if (formatProvider != null) {
-                return System.String.format("{0}: {1}", Bridge.getTypeName(formatProvider), this._value);
+                return System.String.format("{0}: {1}", Bridge.getTypeName(Bridge.getType(formatProvider)), this._value);
             } else {
                 return System.String.format("FooFormattable: {0}", (this._value));
             }
@@ -26309,7 +26309,7 @@
                                     continue;
                                 }
                                 case 4: {
-                                    Bridge.Test.Assert.fail$1(System.String.concat("Thrown exception should have been an AggregateException, was ", Bridge.getTypeName(ex1)));
+                                    Bridge.Test.Assert.fail$1(System.String.concat("Thrown exception should have been an AggregateException, was ", Bridge.getTypeName(Bridge.getType(ex1))));
                                     $async_e = null;
                                     $step = 5;
                                     continue;
@@ -28541,7 +28541,7 @@
     Bridge.define('Bridge.ClientTest.Utilities.TypeHelper', {
         statics: {
             getTypeName: function (o) {
-                return Bridge.getTypeName(o);
+                return Bridge.getTypeName(Bridge.getType(o));
                 // return Script.Get<string>("o.__proto__.$$name");
             }
         }
@@ -30906,10 +30906,10 @@
 
     Bridge.apply($_.Bridge.ClientTest.Text.RegularExpressions.Entities.RegexCaptureCollectionTests, {
         f1: function (err) {
-            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(System.ArgumentNullException));
+            return Bridge.referenceEquals(Bridge.getTypeName(Bridge.getType(err)), Bridge.getTypeName(System.ArgumentNullException));
         },
         f2: function (err) {
-            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(System.IndexOutOfRangeException));
+            return Bridge.referenceEquals(Bridge.getTypeName(Bridge.getType(err)), Bridge.getTypeName(System.IndexOutOfRangeException));
         }
     });
 
@@ -31459,10 +31459,10 @@
 
     Bridge.apply($_.Bridge.ClientTest.Text.RegularExpressions.Entities.RegexGroupCollectionTests, {
         f1: function (err) {
-            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(System.ArgumentNullException));
+            return Bridge.referenceEquals(Bridge.getTypeName(Bridge.getType(err)), Bridge.getTypeName(System.ArgumentNullException));
         },
         f2: function (err) {
-            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(System.IndexOutOfRangeException));
+            return Bridge.referenceEquals(Bridge.getTypeName(Bridge.getType(err)), Bridge.getTypeName(System.IndexOutOfRangeException));
         }
     });
 
@@ -31605,10 +31605,10 @@
 
     Bridge.apply($_.Bridge.ClientTest.Text.RegularExpressions.Entities.RegexMatchCollectionTests, {
         f1: function (err) {
-            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(System.ArgumentNullException));
+            return Bridge.referenceEquals(Bridge.getTypeName(Bridge.getType(err)), Bridge.getTypeName(System.ArgumentNullException));
         },
         f2: function (err) {
-            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(System.IndexOutOfRangeException));
+            return Bridge.referenceEquals(Bridge.getTypeName(Bridge.getType(err)), Bridge.getTypeName(System.IndexOutOfRangeException));
         }
     });
 
