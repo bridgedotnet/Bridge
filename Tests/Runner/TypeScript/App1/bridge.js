@@ -2245,8 +2245,6 @@
 // @source @Class.js
 
     var base = {
-        cache: {},
-
         initialize: function () {
             if (this.$initialized) {
                 return;
@@ -2339,21 +2337,20 @@
 
             if (Bridge.isFunction(prop)) {
                 fn = function () {
-                    var args = Array.prototype.slice.call(arguments),
-                        name,
+                    var args,
+                        key,
                         obj,
                         c;
 
-                    name = Bridge.Class.genericName(className, args);
-                    c = Bridge.Class.cache[name];
+                    key = Bridge.Class.getCachedType(fn, arguments);
 
-                    if (c) {
-                        return c;
+                    if (key) {
+                        return key.type;
                     }
 
+                    args = Array.prototype.slice.call(arguments);
                     obj = prop.apply(null, args);
-                    obj.$cacheName = name;
-                    c = Bridge.define(name, obj, true, { fn: fn, args: args });
+                    c = Bridge.define(Bridge.Class.genericName(className, args), obj, true, { fn: fn, args: args });
 
                     if (!Bridge.Class.staticInitAllow) {
                         Bridge.Class.$queue.push(c);
@@ -2361,6 +2358,8 @@
 
                     return Bridge.get(c);
                 };
+
+                fn.$cache = [];
 
                 return Bridge.Class.generic(className, gscope, fn, prop.length);
             }
@@ -2375,7 +2374,6 @@
                 statics = prop.$statics || prop.statics,
                 isEntryPoint = prop.$entryPoint,
                 base,
-                cacheName = prop.$cacheName,
                 prototype,
                 scope = prop.$scope || gscope || Bridge.global,
                 i,
@@ -2404,10 +2402,6 @@
                 delete prop.statics;
             }
 
-            if (prop.$cacheName) {
-                delete prop.$cacheName;
-            }
-
             var Class,
                 cls = prop.hasOwnProperty("constructor") && prop.constructor || prop.$constructor;
 
@@ -2425,8 +2419,8 @@
 
             scope = Bridge.Class.set(scope, className, Class);
 
-            if (cacheName) {
-                Bridge.Class.cache[cacheName] = Class;
+            if (gCfg) {
+                gCfg.fn.$cache.push({type: Class, args: gCfg.args});
             }
 
             Class.$$name = className;
@@ -2771,6 +2765,34 @@
             }
 
             return gName;
+        },
+
+        getCachedType: function(fn, args) {
+            var arr = fn.$cache,
+                len = arr.length,
+                key,
+                found,
+                i, g;
+
+            for (i = 0; i < len; i++) {
+                key = arr[i];
+
+                if (key.args.length === args.length) {
+                    found = true;
+                    for (g = 0; g < key.args.length; g++) {
+                        if (key.args[g] !== args[g]) {
+                            found = false;
+                            break;
+                        }
+                    }
+
+                    if (found) {
+                        return key;
+                    }
+                }
+            }
+
+            return null;
         },
 
         generic: function (className, scope, fn, length) {
@@ -10037,7 +10059,9 @@
             slice: function (start, end) {
                 this.checkReadOnly();
 
-                return new (System.Collections.Generic.List$1(this.$$name.substr(this.$$name.lastIndexOf('$')+1)))(this.items.slice(start, end));
+                var gName = this.$$name.substr(this.$$name.lastIndexOf('$') + 1);
+
+                return new (System.Collections.Generic.List$1(Bridge.unroll(gName)))(this.items.slice(start, end));
             },
 
             sort: function (comparison) {
