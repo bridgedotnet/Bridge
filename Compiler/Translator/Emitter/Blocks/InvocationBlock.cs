@@ -54,7 +54,7 @@ namespace Bridge.Translator
                 }
                 else
                 {
-                    this.WriteThis();   
+                    this.WriteThis();
                 }
             }
         }
@@ -310,15 +310,15 @@ namespace Bridge.Translator
 
                                     if (isObjectLiteral && !resolvedMethod.IsStatic)
                                     {
-                                        name += "prototype." + overloads.GetOverloadName() + ".";
+                                        name += JS.Fields.PROTOTYPE + "." + overloads.GetOverloadName() + ".";
 
                                         if (resolvedMethod.Parameters.Count > 0)
                                         {
-                                            name += "apply";
+                                            name += JS.Funcs.APPLY;
                                         }
                                         else
                                         {
-                                            name += "call";
+                                            name += JS.Funcs.CALL;
                                         }
                                     }
                                     else

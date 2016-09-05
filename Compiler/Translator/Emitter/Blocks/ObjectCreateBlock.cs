@@ -50,7 +50,7 @@ namespace Bridge.Translator
 
             bool isTypeParam = resolveResult != null && resolveResult.Type.Kind == TypeKind.TypeParameter;
             var invocationResolveResult = this.Emitter.Resolver.ResolveNode(objectCreateExpression, this.Emitter) as InvocationResolveResult;
-            
+
             if (isTypeParam && invocationResolveResult != null && invocationResolveResult.Member.Parameters.Count == 0)
             {
                 this.Write(JS.Funcs.BRIDGE_CREATEINSTANCE);
@@ -182,7 +182,7 @@ namespace Bridge.Translator
 
                         if (ctor_rr.Type.Kind == TypeKind.Array && !(paramsArg is ArrayCreateExpression) && objectCreateExpression.Arguments.Last() == paramsArg)
                         {
-                            this.Write("Bridge.Reflection.applyConstructor(");
+                            this.Write(JS.Types.Bridge.Reflection.APPLYCONSTRUCTOR + "(");
                             applyCtor = true;
                         }
                     }

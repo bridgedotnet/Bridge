@@ -1,4 +1,5 @@
 ﻿using Bridge.Contract;
+using Bridge.Contract.Constants;
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
 using System.Linq;
@@ -65,7 +66,7 @@ namespace Bridge.Translator
 
                 if (setter)
                 {
-                    this.AddLocals(new ParameterDeclaration[] {new ParameterDeclaration {Name = "value"}}, accessor.Body);
+                    this.AddLocals(new ParameterDeclaration[] { new ParameterDeclaration { Name = "value" } }, accessor.Body);
                 }
                 else
                 {
@@ -76,14 +77,14 @@ namespace Bridge.Translator
 
                 if (isObjectLiteral)
                 {
-                    this.Write(setter ? "set" : "get");
+                    this.Write(setter ? JS.Funcs.Property.SET : JS.Funcs.Property.GET);
                 }
                 else
                 {
                     string name = Helpers.GetPropertyRef(propertyDeclaration, this.Emitter, setter, false, false, true);
                     this.Write(name);
                 }
-                
+
                 this.WriteColon();
                 this.WriteFunction();
                 this.WriteOpenParentheses();

@@ -59,7 +59,8 @@ namespace Bridge.Translator
                 this.Emitter.NamedFunctions = new Dictionary<string, string>();
                 this.WriteTopInitMethods();
 
-                this.Write("Bridge.apply(");
+                this.Write(JS.Types.Bridge.APPLY);
+                this.WriteOpenParentheses();
                 this.Write(globalTarget);
                 this.Write(", ");
                 this.BeginBlock();
@@ -466,7 +467,7 @@ namespace Bridge.Translator
 
                 this.WriteNewLine();
                 this.WriteNewLine();
-                this.Write(JS.Funcs.BRIDGE_APPLY + "(" + JS.Vars.D_ + ".");
+                this.Write(JS.Types.Bridge.APPLY + "(" + JS.Vars.D_ + ".");
                 this.Write(name);
                 this.Write(", ");
                 this.BeginBlock();

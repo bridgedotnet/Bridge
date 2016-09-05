@@ -32,7 +32,6 @@
         public class Funcs
         {
             public const string BRIDGE_AUTO_STARTUP_METHOD_TEMPLATE = "Bridge.ready(this.{0});";
-            public const string BRIDGE_APPLY = "Bridge.apply";
             public const string BRIDGE_BIND = "Bridge.fn.bind";
             public const string BRIDGE_BIND_SCOPE = "Bridge.fn.bindScope";
             public const string BRIDGE_CAST = "Bridge.cast";
@@ -183,12 +182,26 @@
                 public class Int64
                 {
                     public const string NAME = System.DOTNAME + "Int64";
-                    private const string DOTNAME = System.DOTNAME + "Int64.";
+                    private const string DOTNAME = NAME + ".";
 
                     public const string TONUMBER = DOTNAME + "toNumber";
                     public const string CHECK = DOTNAME + "check";
                 }
+            }
 
+            public class Bridge
+            {
+                private const string DOTNAME = NS.BRIDGE + ".";
+
+                public const string APPLY = DOTNAME + "apply";
+
+                public class Reflection
+                {
+                    public const string NAME = Bridge.DOTNAME + "Reflection";
+                    private const string DOTNAME = NAME + ".";
+
+                    public const string APPLYCONSTRUCTOR = DOTNAME + "applyConstructor";
+                }
             }
         }
 
@@ -196,6 +209,7 @@
         {
             public const char D = '$';
             public const string D_ = "$_";
+            public const string D_THIS = "$this";
 
             public const string T = "$t";
             public const string E = "$e";

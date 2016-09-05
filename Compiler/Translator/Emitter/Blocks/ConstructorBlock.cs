@@ -334,7 +334,7 @@ namespace Bridge.Translator
                         this.WriteNewLine();
                     }
 
-                    this.Write("var $this = ");
+                    this.Write("var " + JS.Vars.D_THIS + " = ");
 
                     if (baseType != null && (!this.Emitter.Validator.IsIgnoreType(baseType) || this.Emitter.Validator.IsBridgeClass(baseType)) ||
                     (ctor.Initializer != null && ctor.Initializer.ConstructorInitializerType == ConstructorInitializerType.This))
@@ -477,9 +477,9 @@ namespace Bridge.Translator
                         this.WriteNewLine();
                     }
                     this.EndBlock();
-                    this.Write(").call($this);");
+                    this.Write(").call(" + JS.Vars.D_THIS + ");");
                     this.WriteNewLine();
-                    this.Write("return $this;");
+                    this.Write("return " + JS.Vars.D_THIS + ";");
                     this.WriteNewLine();
                 }
 

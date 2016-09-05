@@ -60,7 +60,7 @@ namespace Bridge.Translator
                 {
                     return;
                 }
-               
+
                 if (item.ParameterModifier == ParameterModifier.Out || item.ParameterModifier == ParameterModifier.Ref)
                 {
                     this.Emitter.LocalsMap[rr != null ? rr.Variable : new DefaultVariable(ReflectionHelper.FindType(this.Emitter.Resolver.Compilation, TypeCode.Object), name)] = vName + ".v";
@@ -249,8 +249,7 @@ namespace Bridge.Translator
 
                                     if (expandParams)
                                     {
-                                        //var args = Array.prototype.slice.call(arguments, 1);
-                                        this.Write(string.Format("{0} = Array.prototype.slice.call(arguments, {1});", name, method.Parameters.IndexOf(prm) + method.TypeParameters.Count));
+                                        this.Write(string.Format("{0} = " + JS.Types.ARRAY + "." + JS.Fields.PROTOTYPE + "." + JS.Funcs.SLICE + "." + JS.Funcs.CALL +"(" + JS.Vars.ARGUMENTS +", {1});", name, method.Parameters.IndexOf(prm) + method.TypeParameters.Count));
                                     }
                                     else
                                     {

@@ -100,7 +100,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             public TS() : base(8)
             {
-                
+
             }
         }
 
@@ -140,7 +140,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual(10, bs3.field1);
             Assert.AreEqual("test5", bs3.field2);
 
-            var ds1 = new DS {field = 9};
+            var ds1 = new DS { field = 9 };
             Assert.True(Bridge1529.IsPlainObject(ds1));
             Assert.AreEqual(9, ds1.field);
             Assert.AreEqual(10, ds1.field1);
