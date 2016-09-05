@@ -684,6 +684,7 @@
             var c = obj.constructor;
             return c === Array ||
                 c === Uint8Array ||
+                c === Uint8ClampedArray ||
                 c === Int8Array ||
                 c === Int16Array ||
                 c === Uint16Array ||
