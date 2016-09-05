@@ -149,7 +149,10 @@ namespace Bridge.Translator
                 this.Write("var hash = 17;");
 
                 this.WriteNewLine();
-                this.Write("hash = hash * 23 + " + this.TypeInfo.Name.GetHashCode() + ";");
+
+                var nameHashValue = new HashHelper().GetDeterministicHash(this.TypeInfo.Name);
+
+                this.Write("hash = hash * 23" + nameHashValue + ";");
 
                 foreach (var field in list)
                 {
@@ -321,9 +324,8 @@ namespace Bridge.Translator
             }
             else
             {
-                var typeDef = this.Emitter.GetTypeDefinition();
                 var name = group[0].Name;
-                var methodsDef = typeDef.Methods.Where(m => m.Name == name);
+                var methodsDef = this.Emitter.GetTypeDefinition().Methods.Where(m => m.Name == name);
                 this.Emitter.MethodsGroup = methodsDef;
                 this.Emitter.MethodsGroupBuilder = new Dictionary<int, StringBuilder>();
 

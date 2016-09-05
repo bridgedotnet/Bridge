@@ -133,7 +133,7 @@ namespace Bridge.Translator
             BlockStatement block = foreachStatement.EmbeddedStatement as BlockStatement;
 
             var writer = this.SaveWriter();
-            var bodyStep = this.Emitter.AsyncBlock.AddAsyncStep();
+            this.Emitter.AsyncBlock.AddAsyncStep();
             this.Emitter.IgnoreBlock = foreachStatement.EmbeddedStatement;
             var startCount = this.Emitter.AsyncBlock.Steps.Count;
 

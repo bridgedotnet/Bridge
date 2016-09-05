@@ -21,6 +21,6 @@
   </metadata>
   <files>
     <!--tools-->
-    <file src="..\..\.build\files\install_clean.ps1" target="tools\install.ps1" />
+    <file src="../../.build/files/install_clean.ps1" target="tools/install.ps1" />
   </files>
 </package>

@@ -450,19 +450,6 @@
         }
     });
 
-    Bridge.define("System.IndexOutOfRangeException", {
-        inherits: [System.SystemException],
-
-        constructor: function (message, innerException) {
-            this.$initialize();
-            if (!message) {
-                message = "Index was outside the bounds of the array.";
-            }
-
-            System.SystemException.$constructor.call(this, message, innerException);
-        }
-    });
-
     Bridge.define("System.Reflection.AmbiguousMatchException", {
         inherits: [System.Exception],
 

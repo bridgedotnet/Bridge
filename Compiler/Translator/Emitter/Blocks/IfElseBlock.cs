@@ -86,7 +86,7 @@ namespace Bridge.Translator
                 this.WriteNewLine();
                 this.Write("continue;");
                 var writer = this.SaveWriter();
-                var bodyStep = this.Emitter.AsyncBlock.AddAsyncStep();
+                this.Emitter.AsyncBlock.AddAsyncStep();
                 ifElseStatement.TrueStatement.AcceptVisitor(this.Emitter);
 
                 if (this.Emitter.AsyncBlock.Steps.Count > startCount)
@@ -121,7 +121,7 @@ namespace Bridge.Translator
                     this.WriteNewLine();
                     this.Write("continue;");
                     var writer = this.SaveWriter();
-                    var bodyStep = this.Emitter.AsyncBlock.AddAsyncStep();
+                    this.Emitter.AsyncBlock.AddAsyncStep();
                     ifElseStatement.FalseStatement.AcceptVisitor(this.Emitter);
 
                     if (this.Emitter.AsyncBlock.Steps.Count > elseCount)

@@ -1,7 +1,11 @@
 namespace Bridge.Contract
 {
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+
     public class LoggingOptions
     {
+        [JsonConverter(typeof(StringEnumConverter))]
         public LoggerLevel? Level
         {
             get; set;

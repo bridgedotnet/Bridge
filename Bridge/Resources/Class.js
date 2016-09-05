@@ -449,6 +449,10 @@
             exists = scope[name];
 
             if (exists) {
+                if (exists.$$name === className) {
+                    throw "Class '" + className + "' is already defined";
+                }
+
                 for (key in exists) {
                     var o = exists[key];
 

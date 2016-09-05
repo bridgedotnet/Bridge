@@ -6,12 +6,12 @@
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE.
 */
 
-// @source @Init.js
+    // @source Init.js
 
 (function (globals) {
     "use strict";
 
-// @source @Core.js
+    // @source Core.js
 
     var core = {
         global: globals,
@@ -420,6 +420,10 @@
         },
 
         is: function (obj, type, ignoreFn, allowNull) {
+            if (type && type.prototype && type.prototype.$literal && Bridge.isPlainObject(obj)) {
+                return true;
+            }
+
             if (typeof type === "boolean") {
                 return type;
             }
@@ -1245,7 +1249,7 @@
     globals.System.Diagnostics.Contracts = {};
     globals.System.Threading = {};
 
-// @source @Nullable.js
+    // @source Nullable.js
 
     var nullable = {
         hasValue: function (obj) {
@@ -1428,7 +1432,7 @@
     System.Nullable = nullable;
     Bridge.hasValue = System.Nullable.hasValue;
 
-// @source @String.js
+    // @source String.js
 
     var string = {
         is: function (obj, type) {
@@ -1899,7 +1903,7 @@
 
     System.String = string;
 
-// @source @Enum.js
+    // @source Enum.js
 
     var enumMethods = {
         nameEquals: function (n1, n2, ignoreCase) {
@@ -2117,7 +2121,7 @@
 
     System.Enum = enumMethods;
 
-// @source @Browser.js
+    // @source Browser.js
 
     var check = function (regex) {
             return regex.test(navigator.userAgent.toLowerCase());
@@ -2242,12 +2246,12 @@
 
     Bridge.Browser = browser;
 
-// @source @Class.js
+    // @source Class.js
 
     var base = {
         cache: {},
 
-        initialize: function () {
+        _initialize: function () {
             if (this.$initialized) {
                 return;
             }
@@ -2521,7 +2525,7 @@
                 };
             }
 
-            prop.$initialize = Bridge.Class.initialize;
+            prop.$initialize = Bridge.Class._initialize;
 
             var keys = [];
 
@@ -2695,6 +2699,10 @@
             exists = scope[name];
 
             if (exists) {
+                if (exists.$$name === className) {
+                    throw "Class '" + className + "' is already defined";
+                }
+
                 for (key in exists) {
                     var o = exists[key];
 
@@ -2809,7 +2817,7 @@
     Bridge.definei = Bridge.Class.definei;
     Bridge.init = Bridge.Class.init;
 
-// @source @Reflection.js
+    // @source Reflection.js
 
     Bridge.initAssembly = function (assemblyName, res, callback) {
         if (!callback) {
@@ -3556,7 +3564,7 @@
         }
     };
 
-// @source @Interfaces.js
+    // @source Interfaces.js
 
     Bridge.define("System.IFormattable", {
         $kind: "interface",
@@ -3633,7 +3641,7 @@
         $kind: "interface"
     });
 
-// @source @Char.js
+    // @source Char.js
 
     Bridge.define("System.Char", {
         inherits: [System.IComparable, System.IFormattable],
@@ -3761,7 +3769,7 @@
 
     Bridge.Class.addExtend(System.Char, [System.IComparable$1(System.Char), System.IEquatable$1(System.Char)]);
 
-// @source @formattableString.js
+    // @source formattableString.js
 
     Bridge.define('System.FormattableString', {
         inherits: [System.IFormattable],
@@ -3778,7 +3786,7 @@
         }
     });
 
-// @source @formattableStringImpl.js
+    // @source formattableStringImpl.js
 
     Bridge.define('System.FormattableStringImpl', {
         inherits: [System.FormattableString],
@@ -3809,7 +3817,7 @@
         }
     });
 
-// @source @formattableStringFactory.js
+    // @source formattableStringFactory.js
 
     Bridge.define('System.Runtime.CompilerServices.FormattableStringFactory', {
         statics: {
@@ -3820,7 +3828,7 @@
         }
     });
 
-// @source @Exception.js
+    // @source Exception.js
 
     Bridge.define("System.Exception", {
         constructor: function (message, innerException) {
@@ -4274,19 +4282,6 @@
         }
     });
 
-    Bridge.define("System.IndexOutOfRangeException", {
-        inherits: [System.SystemException],
-
-        constructor: function (message, innerException) {
-            this.$initialize();
-            if (!message) {
-                message = "Index was outside the bounds of the array.";
-            }
-
-            System.SystemException.$constructor.call(this, message, innerException);
-        }
-    });
-
     Bridge.define("System.Reflection.AmbiguousMatchException", {
         inherits: [System.Exception],
 
@@ -4296,7 +4291,7 @@
         }
     });
 
-// @source @Globalization.js
+    // @source Globalization.js
 
     Bridge.define("System.Globalization.DateTimeFormatInfo", {
         inherits: [System.IFormatProvider, System.ICloneable],
@@ -4661,7 +4656,7 @@
         }
     });
 
-// @source @Math.js
+    // @source Math.js
 
     Bridge.Math = {
         divRem: function (a, b, result) {
@@ -4708,7 +4703,7 @@
         }
     };
 
-// @source @Bool.js
+    // @source Bool.js
 
     var _boolean = {
         trueString: "True",
@@ -4806,7 +4801,7 @@
 
     System.Boolean = _boolean;
 
-// @source @Integer.js
+    // @source Integer.js
 
     (function () {
         var createIntType = function (name, min, max, precision) {
@@ -5591,7 +5586,7 @@
 
     Bridge.Class.addExtend(System.Single, [System.IComparable$1(System.Single), System.IEquatable$1(System.Single)]);
 
-// @source @Long.js
+    // @source Long.js
 
 /* long.js https://github.com/dcodeIO/long.js/blob/master/LICENSE */
 (function (b) {
@@ -6383,7 +6378,7 @@
     System.UInt64.MaxValue = System.UInt64(Bridge.$Long.MAX_UNSIGNED_VALUE);
     System.UInt64.precision = 20;
 
-// @source @Decimal.js
+    // @source Decimal.js
 
     /* decimal.js v5.0.7 https://github.com/MikeMcl/decimal.js/LICENCE */
 
@@ -6857,7 +6852,7 @@
     System.Decimal.MaxValue = System.Decimal("79228162514264337593543950335");
     System.Decimal.precision = 29;
 
-// @source @Date.js
+    // @source Date.js
 
     Bridge.define("System.DayOfWeek", {
         $kind: "enum",
@@ -7668,7 +7663,7 @@
 
     Bridge.Date = date;
 
-// @source @TimeSpan.js
+    // @source TimeSpan.js
 
     Bridge.define("System.TimeSpan", {
         inherits: [System.IComparable],
@@ -7919,7 +7914,7 @@
 
     Bridge.Class.addExtend(System.TimeSpan, [System.IComparable$1(System.TimeSpan), System.IEquatable$1(System.TimeSpan)]);
 
-// @source @StringBuilder.js
+    // @source StringBuilder.js
 
     Bridge.define("System.Text.StringBuilder", {
         constructor: function () {
@@ -8139,7 +8134,7 @@
         }
     });
 
-// @source @BridgeRegex.js
+    // @source BridgeRegex.js
 
     (function () {
         var specials = [
@@ -8172,7 +8167,7 @@
         Bridge.regexpEscape = regexpEscape;
     })();
 
-// @source @Diagnostics.js
+    // @source Diagnostics.js
 
     System.Diagnostics.Debug = {
         writeln: function (text) {
@@ -8431,7 +8426,7 @@
         }
     });
 
-// @source @Array.js
+    // @source Array.js
 
     var array = {
         toIndex: function (arr, indices) {
@@ -9236,7 +9231,7 @@
 
     System.Array = array;
 
-// @source @ArraySegment.js
+    // @source ArraySegment.js
 
     Bridge.define('System.ArraySegment', {
         constructor: function (array, offset, count) {
@@ -9259,7 +9254,7 @@
         }
     });
 
-// @source @Interfaces.js
+    // @source Interfaces.js
 
     Bridge.define('System.Collections.IEnumerable', {
         $kind: "interface"
@@ -9329,7 +9324,7 @@
         };
     });
 
-// @source @CustomEnumerator.js
+    // @source CustomEnumerator.js
 
     Bridge.define('Bridge.CustomEnumerator', {
         inherits: [System.Collections.IEnumerator],
@@ -9383,7 +9378,7 @@
         }
     });
 
-// @source @ArrayEnumerator.js
+    // @source ArrayEnumerator.js
 
     Bridge.define('Bridge.ArrayEnumerator', {
         inherits: [System.Collections.IEnumerator, System.IDisposable],
@@ -9447,7 +9442,7 @@
         }
     });
 
-// @source @EqualityComparer.js
+    // @source EqualityComparer.js
 
     Bridge.define('System.Collections.Generic.EqualityComparer$1', function (T) {
         return {
@@ -9490,7 +9485,7 @@
 
     System.Collections.Generic.EqualityComparer$1.$default = new (System.Collections.Generic.EqualityComparer$1(Object))();
 
-// @source @Comparer.js
+    // @source Comparer.js
 
     Bridge.define('System.Collections.Generic.Comparer$1', function (T) {
         return {
@@ -9520,7 +9515,7 @@
         return Bridge.compare(x, y);
     });
 
-// @source @Dictionary.js
+    // @source Dictionary.js
 
     Bridge.define('System.Collections.Generic.KeyValuePair$2', function (TKey, TValue) {
         return {
@@ -9819,7 +9814,7 @@
         };
     });
 
-// @source @List.js
+    // @source List.js
 
     Bridge.define('System.Collections.Generic.List$1', function (T) {
         return {
@@ -10132,7 +10127,7 @@
         };
     });
 
-// @source @Task.js
+    // @source Task.js
 
     Bridge.define("System.Threading.Tasks.Task", {
         inherits: [System.IDisposable],
@@ -10769,7 +10764,7 @@
         }
     });
 
-// @source @Validation.js
+    // @source Validation.js
 
     var validation = {
         isNull: function (value) {
@@ -10880,7 +10875,7 @@
 
     Bridge.Validation = validation;
 
-// @source @version.js
+    // @source version.js
 
     Bridge.define('System.Version', {
         inherits: function () { return [System.ICloneable,System.IComparable$1(System.Version),System.IEquatable$1(System.Version)]; },
@@ -11286,7 +11281,7 @@
         }
     });
 
-// @source @parseFailureKind.js
+    // @source parseFailureKind.js
 
     Bridge.define('System.Version.ParseFailureKind', {
         $kind: "enum",
@@ -11298,7 +11293,7 @@
         }
     });
 
-// @source @versionResult.js
+    // @source versionResult.js
 
     Bridge.define('System.Version.VersionResult', {
         $kind: "struct",
@@ -11360,7 +11355,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1522045559;
+            hash = hash * 23 + 5139482776;
             hash = hash * 23 + (this.m_parsedVersion == null ? 0 : Bridge.getHashCode(this.m_parsedVersion));
             hash = hash * 23 + (this.m_failure == null ? 0 : Bridge.getHashCode(this.m_failure));
             hash = hash * 23 + (this.m_exceptionArgument == null ? 0 : Bridge.getHashCode(this.m_exceptionArgument));
@@ -11385,11 +11380,11 @@
         }
     });
 
-// @source @Attribute.js
+    // @source Attribute.js
 
     Bridge.define("System.Attribute");
 
-// @source @INotifyPropertyChanged.js
+    // @source INotifyPropertyChanged.js
 
     Bridge.define("System.ComponentModel.INotifyPropertyChanged", {
         $kind: "interface",
@@ -11404,7 +11399,7 @@
         }
     });
 
-// @source @Convert.js
+    // @source Convert.js
 
     var scope = {};
 
@@ -12921,7 +12916,7 @@
 
     System.Convert = scope.convert;
 
-// @source @ClientWebSocket.js
+    // @source ClientWebSocket.js
 
     Bridge.define("System.Net.WebSockets.ClientWebSocket", {
         inherits: [System.IDisposable],
@@ -13245,7 +13240,7 @@
         }
     });
 
-// @source @Uri.js
+    // @source Uri.js
 
     Bridge.define("System.Uri", {
         constructor: function (uriString) {
@@ -13258,7 +13253,7 @@
         }
     });
 
-// @source @linq.js
+    // @source linq.js
 
 /*--------------------------------------------------------------------------
  * linq.js - LINQ for JavaScript
@@ -16189,7 +16184,7 @@
     System.Linq.Enumerable = Enumerable;
 })(Bridge.global);
 
-// @source @Guid.js
+    // @source Guid.js
 
     Bridge.define("System.Guid", {
         inherits: function () {
@@ -16329,7 +16324,7 @@
         }
     });
 
-// @source @Regex.js
+    // @source Regex.js
 
     Bridge.define("System.Text.RegularExpressions.Regex", {
         statics: {
@@ -16824,7 +16819,7 @@
         }
     });
 
-// @source @RegexCapture.js
+    // @source RegexCapture.js
 
     Bridge.define("System.Text.RegularExpressions.Capture", {
         _text: "",
@@ -16867,7 +16862,7 @@
         }
     });
 
-// @source @RegexCaptureCollection.js
+    // @source RegexCaptureCollection.js
 
     Bridge.define("System.Text.RegularExpressions.CaptureCollection", {
         inherits: function () {
@@ -17017,7 +17012,7 @@
         }
     });
 
-// @source @RegexGroup.js
+    // @source RegexGroup.js
 
     Bridge.define("System.Text.RegularExpressions.Group", {
         inherits: function () {
@@ -17080,7 +17075,7 @@
         }
     });
 
-// @source @RegexGroupCollection.js
+    // @source RegexGroupCollection.js
 
     Bridge.define("System.Text.RegularExpressions.GroupCollection", {
         inherits: function () {
@@ -17269,7 +17264,7 @@
         }
     });
 
-// @source @RegexMatch.js
+    // @source RegexMatch.js
 
     Bridge.define("System.Text.RegularExpressions.Match", {
         inherits: function () {
@@ -17451,7 +17446,7 @@
         },
     });
 
-// @source @RegexMatchCollection.js
+    // @source RegexMatchCollection.js
 
     Bridge.define("System.Text.RegularExpressions.MatchCollection", {
         inherits: function () {
@@ -17631,7 +17626,7 @@
         }
     });
 
-// @source @RegexOptions.js
+    // @source RegexOptions.js
 
     Bridge.define("System.Text.RegularExpressions.RegexOptions", {
         statics: {
@@ -17651,7 +17646,7 @@
         $flags: true
     });
 
-// @source @RegexRunner.js
+    // @source RegexRunner.js
 
     Bridge.define("System.Text.RegularExpressions.RegexRunner", {
         statics: {},
@@ -17784,7 +17779,7 @@
         }
     });
 
-// @source @RegexParser.js
+    // @source RegexParser.js
 
 Bridge.define("System.Text.RegularExpressions.RegexParser", {
     statics: {
@@ -18367,7 +18362,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
     }
 });
 
-// @source @RegexNode.js
+    // @source RegexNode.js
 
     Bridge.define("System.Text.RegularExpressions.RegexNode", {
         statics: {
@@ -18522,7 +18517,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         },
     });
 
-// @source @RegexReplacement.js
+    // @source RegexReplacement.js
 
     Bridge.define("System.Text.RegularExpressions.RegexReplacement", {
         statics: {
@@ -18941,7 +18936,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     });
 
-// @source @RegexEngine.js
+    // @source RegexEngine.js
 
     Bridge.define("System.Text.RegularExpressions.RegexEngine", {
         _pattern: "",
@@ -20069,7 +20064,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     });
 
-// @source @RegexEngineBranch.js
+    // @source RegexEngineBranch.js
 
     Bridge.define("System.Text.RegularExpressions.RegexEngineBranch", {
         type: 0,
@@ -20118,7 +20113,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     });
 
-// @source @RegexEngineState.js
+    // @source RegexEngineState.js
 
     Bridge.define("System.Text.RegularExpressions.RegexEngineState", {
         txtIndex: 0, // current index
@@ -20226,7 +20221,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     });
 
-// @source @RegexEnginePass.js
+    // @source RegexEnginePass.js
 
     Bridge.define("System.Text.RegularExpressions.RegexEnginePass", {
         index: 0,
@@ -20266,7 +20261,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     });
 
-// @source @RegexEngineProbe.js
+    // @source RegexEngineProbe.js
 
     Bridge.define("System.Text.RegularExpressions.RegexEngineProbe", {
         min: 0,
@@ -20292,7 +20287,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     });
 
-// @source @RegexEngineParser.js
+    // @source RegexEngineParser.js
 
     Bridge.define("System.Text.RegularExpressions.RegexEngineParser", {
         statics: {
@@ -22146,7 +22141,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     });
 
-// @source @Console.js
+    // @source Console.js
 
     System.Console = {
         output: null,
@@ -22162,7 +22157,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     };
 
-// @source @random.js
+    // @source random.js
 
     Bridge.define('System.Random', {
         statics: {
@@ -22299,7 +22294,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     });
 
-// @source @timer.js
+    // @source timer.js
 
     Bridge.define('System.Threading.Timer', {
         inherits: [System.IDisposable],
@@ -22435,7 +22430,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     });
 
-// @source @End.js
+    // @source End.js
 
     // module export
     if (typeof define === "function" && define.amd) {
@@ -22446,7 +22441,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         module.exports = Bridge;
     }
 
-// @source @Finally.js
+    // @source Finally.js
 
 })(this);
 

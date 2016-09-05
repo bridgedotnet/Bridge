@@ -170,5 +170,7 @@ namespace Bridge.Contract
         List<AstType> GetBaseTypes(IEmitter emitter);
 
         AstType GetBaseClass(IEmitter emitter);
+
+        string GetNamespace(IEmitter emitter);
     }
 }

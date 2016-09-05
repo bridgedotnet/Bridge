@@ -9,6 +9,17 @@ namespace Bridge.Translator
 {
     public partial class Translator
     {
+
+
+        public static class ProjectProperties
+        {
+            public const string OutputType = "OutputType";
+            public const string AssemblyName = "AssemblyName";
+            public const string DefineConstants = "DefineConstants";
+            public const string RootNamespace = "RootNamespace";
+            public const string OutputPath = "OutputPath";
+        }
+
         protected virtual void ReadProjectFile()
         {
             this.Log.Info("Reading project file at " + (Location ?? "") + " ...");
@@ -18,7 +29,7 @@ namespace Bridge.Translator
             this.ValidateProject(doc);
 
             var projectType = (from n in doc.Descendants()
-                               where n.Name.LocalName == "OutputType"
+                               where n.Name.LocalName == ProjectProperties.OutputType
                                select n).ToArray();
 
             if (projectType.Length > 0 && projectType[0] != null && projectType[0].Value != Translator.SupportedProjectType)
@@ -26,6 +37,8 @@ namespace Bridge.Translator
                 Bridge.Translator.TranslatorException.Throw("Project type ({0}) is not supported, please use Library instead of {0}", projectType[0].Value);
             }
 
+            this.DefaultNamespace = this.GetDefaultNamespace(doc);
+            this.Log.Trace("#0 this.DefaultNamespace = " + this.DefaultNamespace);
             this.BuildAssemblyLocation(doc);
             this.SourceFiles = this.GetSourceFiles(doc);
             this.ParsedSourceFiles = new List<ParsedSourceFile>();
@@ -58,11 +71,11 @@ namespace Bridge.Translator
             var failList = new HashSet<string>();
             var failNodeList = new List<XElement>();
             var combined_tags = from x in doc.Descendants()
-                                where x.Name.LocalName == "RootNamespace" || x.Name.LocalName == "AssemblyName"
+                                where x.Name.LocalName == ProjectProperties.RootNamespace || x.Name.LocalName == ProjectProperties.AssemblyName
                                 select x;
 
             // Replace '\' with '/' in any occurrence of <OutputPath><path></OutputPath>
-            foreach (var ope in doc.Descendants().Where(e => e.Name.LocalName == "OutputPath" && e.Value.Contains("\\")))
+            foreach (var ope in doc.Descendants().Where(e => e.Name.LocalName == ProjectProperties.OutputPath && e.Value.Contains("\\")))
             {
                 ope.SetValue(ope.Value.Replace("\\", "/"));
             }
@@ -150,7 +163,7 @@ namespace Bridge.Translator
         protected virtual string GetOutputPath(XDocument doc, string configuration)
         {
             var nodes = from n in doc.Descendants()
-                        where n.Name.LocalName == "OutputPath" &&
+                        where n.Name.LocalName == ProjectProperties.OutputPath &&
                               n.Parent.Attribute("Condition").Value.Contains(configuration)
                         select n;
 
@@ -165,6 +178,8 @@ namespace Bridge.Translator
             {
                 path = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Location), path));
             }
+
+            path = new Bridge.Contract.ConfigHelper().ConvertPath(path);
 
             return path;
         }
@@ -228,8 +243,6 @@ namespace Bridge.Translator
         {
             this.Log.Info("Reading define constants...");
 
-            var result = new List<string>();
-
             var nodeList = doc.Descendants().Where(n =>
             {
                 if (n.Name.LocalName != "PropertyGroup")
@@ -244,7 +257,7 @@ namespace Bridge.Translator
             foreach (var node in nodeList)
             {
                 var constants = from n in node.Descendants()
-                                where n.Name.LocalName == "DefineConstants"
+                                where n.Name.LocalName == ProjectProperties.DefineConstants
                                 select n.Value;
                 foreach (var constant in constants)
                 {
@@ -263,12 +276,26 @@ namespace Bridge.Translator
         protected virtual string GetAssemblyName(XDocument doc)
         {
             var nodes = from n in doc.Descendants()
-                        where n.Name.LocalName == "AssemblyName"
+                        where n.Name.LocalName == ProjectProperties.AssemblyName
                         select n;
 
             if (nodes.Count() != 1)
             {
                 Bridge.Translator.TranslatorException.Throw("Unable to determine assembly name");
+            }
+
+            return nodes.First().Value;
+        }
+
+        protected virtual string GetDefaultNamespace(XDocument doc)
+        {
+            var nodes = from n in doc.Descendants()
+                        where n.Name.LocalName == ProjectProperties.RootNamespace
+                        select n;
+
+            if (nodes.Count() != 1)
+            {
+                return Translator.DefaultRootNamespace;
             }
 
             return nodes.First().Value;

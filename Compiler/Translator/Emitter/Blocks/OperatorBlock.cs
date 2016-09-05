@@ -44,7 +44,6 @@ namespace Bridge.Translator
             var prevNamesMap = this.BuildLocalsNamesMap();
             this.AddLocals(operatorDeclaration.Parameters, operatorDeclaration.Body);
 
-            var typeDef = this.Emitter.GetTypeDefinition();
             var overloads = OverloadsCollection.Create(this.Emitter, operatorDeclaration);
 
             if (overloads.HasOverloads)

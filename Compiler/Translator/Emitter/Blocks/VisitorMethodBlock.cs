@@ -68,7 +68,6 @@ namespace Bridge.Translator
 
             this.AddLocals(methodDeclaration.Parameters, methodDeclaration.Body);
 
-            var typeDef = this.Emitter.GetTypeDefinition();
             var overloads = OverloadsCollection.Create(this.Emitter, methodDeclaration);
             XmlToJsDoc.EmitComment(this, this.MethodDeclaration);
 

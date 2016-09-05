@@ -92,7 +92,7 @@ namespace Bridge.Translator
             this.Emitter.AsyncBlock.EmittedAsyncSteps = new List<IAsyncStep>();
             var writer = this.SaveWriter();
 
-            var bodyStep = this.Emitter.AsyncBlock.AddAsyncStep();
+            this.Emitter.AsyncBlock.AddAsyncStep();
             this.Emitter.IgnoreBlock = forStatement.EmbeddedStatement;
             var startCount = this.Emitter.AsyncBlock.Steps.Count;
             forStatement.EmbeddedStatement.AcceptVisitor(this.Emitter);

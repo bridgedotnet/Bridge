@@ -25,10 +25,10 @@
   </metadata>
   <files>
     <!--content-->
-    <file src="..\..\LICENSE" target="content\App_Readme\Bridge.NET\LICENSE" />
+    <file src="../../LICENSE" target="content/App_Readme/Bridge.NET/LICENSE" />
 
     <!--NET40-->
-    <file src="..\..\Compiler\Contract\bin\Release\Bridge.Contract.dll" target="lib\net40\Bridge.Contract.dll" />
-    <file src="..\..\Compiler\Contract\bin\Release\Bridge.Contract.pdb" target="lib\net40\pdb\Bridge.Contract.pdb" />
+    <file src="../../Compiler/Contract/bin/Release/Bridge.Contract.dll" target="lib/net40/Bridge.Contract.dll" />
+    <file src="../../Compiler/Contract/bin/Release/Bridge.Contract.pdb" target="lib/net40/pdb/Bridge.Contract.pdb" />
   </files>
 </package>

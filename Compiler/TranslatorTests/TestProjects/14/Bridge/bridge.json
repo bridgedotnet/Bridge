@@ -1,5 +1,0 @@
-{
-  "output": "Bridge\\output",
-  "cleanOutputFolderBeforeBuildPattern": "*.*",
-   "preserveMemberCase": "true"
-}

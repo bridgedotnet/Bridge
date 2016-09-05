@@ -38,7 +38,7 @@
     <NoStdLib>True</NoStdLib>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition="$(OS) != Unix">
+  <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
@@ -194,7 +194,7 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Import Project="$(SolutionDir).nuget\NuGet.targets" Condition="Exists('$(SolutionDir).nuget\NuGet.targets')" />
   <Target Name="CleanBridgeTest" BeforeTargets="Clean">
     <ItemGroup>
       <BridgeTestFilesToDelete Include="$(ProjectDir)$(OutDir)bridgeTest*.log" />

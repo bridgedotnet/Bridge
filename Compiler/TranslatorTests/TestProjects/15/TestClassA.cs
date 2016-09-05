@@ -5,7 +5,10 @@
         /// <summary>
         /// Some property
         /// </summary>
-        public int Value1 { get; set; }
+        public int Value1
+        {
+            get; set;
+        }
 
         /// <summary>
         /// GetMyValue method

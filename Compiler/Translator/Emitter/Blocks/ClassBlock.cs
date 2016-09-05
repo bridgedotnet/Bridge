@@ -455,7 +455,6 @@ namespace Bridge.Translator
                 this.IntroducePrivateVar();
 
                 var name = BridgeTypes.ToJsName(this.Emitter.TypeInfo.Type, this.Emitter, true);
-                var parts = name.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
 
                 this.WriteNewLine();
                 this.WriteNewLine();

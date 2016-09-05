@@ -36,8 +36,11 @@
     <DocumentationFile>
     </DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition="$(OS) != Unix">
+  <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(OS) == Unix">
+    <DefineConstants>$(DefineConstants);UNIX</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.framework, Version=3.4.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
@@ -86,11 +89,11 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Import Project="$(SolutionDir).nuget\NuGet.targets" Condition="Exists('$(SolutionDir).nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('$(SolutionDir).nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir).nuget\NuGet.targets'))" />
   </Target>
 </Project>
