@@ -3,8 +3,8 @@
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Choose>
     <When Condition="'$(OS)' != 'Unix'">
-      <PropertyGroup Condition="$(MSBuildToolsVersion) &gt;= 14.0">       
-         <CompilerResponseFile>AdditionalCompilerOptions.txt</CompilerResponseFile>
+      <PropertyGroup Condition="$(MSBuildToolsVersion) &gt;= 14.0">
+        <CompilerResponseFile>AdditionalCompilerOptions.txt</CompilerResponseFile>
       </PropertyGroup>
     </When>
   </Choose>
@@ -83,6 +83,7 @@
     <Compile Include="Attributes\ExternalAttribute.cs" />
     <Compile Include="Attributes\FileNameAttribute.cs" />
     <Compile Include="Attributes\ScriptAttribute.cs" />
+    <Compile Include="Bridge\Console\Console.cs" />
     <Compile Include="Bridge\Function.cs" />
     <Compile Include="Bridge\Linq\Enumerable.cs" />
     <Compile Include="Bridge\IBridgeClass.cs" />
@@ -325,6 +326,7 @@
   <ItemGroup>
     <Content Include="Resources\.auxiliary\Header.js" />
     <Content Include="Resources\.generated\bridge.js" />
+    <Content Include="Resources\.generated\bridge\console.js" />
     <Content Include="Resources\.generated\system\formattableString.js" />
     <Content Include="Resources\.generated\system\formattableStringImpl.js" />
     <Content Include="Resources\.generated\system\random.js" />

@@ -12,7 +12,6 @@
     "enableReservedNamespaces": true
     //fullName: ""
   },
-
   "resources": [
     {
       // File paths relative to project root
