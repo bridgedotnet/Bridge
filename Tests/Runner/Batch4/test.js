@@ -166,6 +166,8 @@
                 QUnit.test("IteratorBlockTests - DifferentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_IteratorBlockTests.differentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals);
                 QUnit.test("KeyValuePairTests - TheConstructorWithParametersCanBeUsed", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_KeyValuePairTests.theConstructorWithParametersCanBeUsed);
                 QUnit.test("KeyValuePairTests - TypeTestWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_KeyValuePairTests.typeTestWorks);
+                QUnit.test("KeyValuePairTests - TypeTestWorksGeneric_SPI_1556", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_KeyValuePairTests.typeTestWorksGeneric_SPI_1556);
+                QUnit.test("KeyValuePairTests - TheDefaultConstructorCanBeUsed_SPI_1556", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_KeyValuePairTests.theDefaultConstructorCanBeUsed_SPI_1556);
                 QUnit.test("KeyValuePairTests - CreatingADefaultKeyValuePairCreatesAnInstanceThatIsNotNull_SPI_1556", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_KeyValuePairTests.creatingADefaultKeyValuePairCreatesAnInstanceThatIsNotNull_SPI_1556);
                 QUnit.test("KeyValuePairTests - ActivatorCreateInstanceWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_KeyValuePairTests.activatorCreateInstanceWorks);
                 QUnit.test("ListTests - TypePropertiesAreCorrect", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_ListTests.typePropertiesAreCorrect);
@@ -2552,6 +2554,14 @@
             typeTestWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.KeyValuePairTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_KeyValuePairTests);
                 t.getFixture().typeTestWorks();
+            },
+            typeTestWorksGeneric_SPI_1556: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.KeyValuePairTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_KeyValuePairTests);
+                t.getFixture().typeTestWorksGeneric_SPI_1556();
+            },
+            theDefaultConstructorCanBeUsed_SPI_1556: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.KeyValuePairTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_KeyValuePairTests);
+                t.getFixture().theDefaultConstructorCanBeUsed_SPI_1556();
             },
             creatingADefaultKeyValuePairCreatesAnInstanceThatIsNotNull_SPI_1556: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.KeyValuePairTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_KeyValuePairTests);

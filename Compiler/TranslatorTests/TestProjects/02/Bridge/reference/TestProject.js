@@ -9515,7 +9515,23 @@
 
     Bridge.define('System.Collections.Generic.KeyValuePair$2', function (TKey, TValue) {
         return {
+            $kind: "struct",
+
+            statics: {
+                getDefaultValue: function () {
+                    return new (System.Collections.Generic.KeyValuePair$2(TKey, TValue))(Bridge.getDefaultValue(TKey), Bridge.getDefaultValue(TValue));
+                }
+            },
+
             constructor: function (key, value) {
+                if (key === undefined) {
+                    key = Bridge.getDefaultValue(TKey);
+                }
+
+                if (value === undefined) {
+                    value = Bridge.getDefaultValue(TValue);
+                }
+
                 this.$initialize();
                 this.key = key;
                 this.value = value;
