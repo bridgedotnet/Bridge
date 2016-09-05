@@ -462,6 +462,10 @@
                 return System.Boolean.is(obj, type);
             }
 
+            if (Bridge.Reflection.isInterface(type) && System.Array.contains(Bridge.Reflection.getInterfaces(Bridge.getType(obj)), type)) {
+                return true;
+            }
+
             if (!type.$$inheritors) {
                 return false;
             }
@@ -2316,9 +2320,17 @@
         },
 
         definei: function (className, gscope, prop) {
+            if ((prop === true || !prop) && gscope) {
+                gscope.$kind = "interface";
+            } else if (prop) {
+                prop.$kind = "interface";
+            } else {
+                gscope = {$kind : "interface"};
+            }
+
             var c = Bridge.define(className, gscope, prop);
             c.$kind = "interface";
-
+            
             return c;
         },
 
@@ -3195,6 +3207,14 @@
 
             if (Bridge.isFunction(baseType.isAssignableFrom)) {
                 return baseType.isAssignableFrom(type);
+            }
+
+            if (type === Array) {
+                return System.Array.is([], baseType);
+            }
+
+            if (Bridge.Reflection.isInterface(baseType) && System.Array.contains(Bridge.Reflection.getInterfaces(type), baseType)) {
+                return true;
             }
 
             var inheritors = type.$$inherits,

@@ -447,6 +447,10 @@
                 return System.Boolean.is(obj, type);
             }
 
+            if (Bridge.Reflection.isInterface(type) && System.Array.contains(Bridge.Reflection.getInterfaces(Bridge.getType(obj)), type)) {
+                return true;
+            }
+
             if (!type.$$inheritors) {
                 return false;
             }

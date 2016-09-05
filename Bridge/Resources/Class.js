@@ -70,9 +70,17 @@
         },
 
         definei: function (className, gscope, prop) {
+            if ((prop === true || !prop) && gscope) {
+                gscope.$kind = "interface";
+            } else if (prop) {
+                prop.$kind = "interface";
+            } else {
+                gscope = {$kind : "interface"};
+            }
+
             var c = Bridge.define(className, gscope, prop);
             c.$kind = "interface";
-
+            
             return c;
         },
 
