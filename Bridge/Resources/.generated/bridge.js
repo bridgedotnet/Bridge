@@ -9444,6 +9444,14 @@
         return {
             inherits: [System.Collections.Generic.IEqualityComparer$1(T)],
 
+            statics: {
+                config: {
+                    init: function () {
+                        this.def = new (System.Collections.Generic.EqualityComparer$1(T))();
+                    }
+                }
+            },
+
             config: {
                 alias: [
                     "equals2", "System$Collections$Generic$IEqualityComparer$1$" + Bridge.getTypeAlias(T) + "$equals2",
@@ -9562,7 +9570,7 @@
 
             constructor: function (obj, comparer) {
                 this.$initialize();
-                this.comparer = comparer || System.Collections.Generic.EqualityComparer$1.$default;
+                this.comparer = comparer || System.Collections.Generic.EqualityComparer$1(TKey).def;
                 this.clear();
 
                 if (Bridge.is(obj, System.Collections.Generic.Dictionary$2(TKey, TValue))) {

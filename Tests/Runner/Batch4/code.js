@@ -618,27 +618,27 @@
             Bridge.Test.Assert.areEqual$1("System.Collections.Generic.EqualityComparer$1[[Object]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.EqualityComparer$1(Object)), "FullName should be correct");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.Collections.Generic.EqualityComparer$1(Object)), "IsClass should be true");
 
-            var dict = new (System.Collections.Generic.EqualityComparer$1(Object))();
+            var dict = System.Collections.Generic.EqualityComparer$1(Object).def;
             Bridge.Test.Assert.true$1(Bridge.is(dict, System.Collections.Generic.EqualityComparer$1(Object)), "is EqualityComparer<object> should be true");
             Bridge.Test.Assert.true$1(Bridge.is(dict, System.Collections.Generic.IEqualityComparer$1(Object)), "is IEqualityComparer<object> should be true");
         },
         defaultComparerCanGetHashCodeOfNumber: function () {
-            Bridge.Test.Assert.areEqual(Bridge.getHashCode((12345)), new (System.Collections.Generic.EqualityComparer$1(Object))().getHashCode2(12345));
+            Bridge.Test.Assert.areEqual(Bridge.getHashCode((12345)), System.Collections.Generic.EqualityComparer$1(Object).def.getHashCode2(12345));
         },
         defaultComparerReturnsZeroAsHashCodeForNullAndUndefined: function () {
-            Bridge.Test.Assert.areEqual(0, new (System.Collections.Generic.EqualityComparer$1(Object))().getHashCode2(null));
-            Bridge.Test.Assert.areEqual(0, new (System.Collections.Generic.EqualityComparer$1(Object))().getHashCode2(undefined));
+            Bridge.Test.Assert.areEqual(0, System.Collections.Generic.EqualityComparer$1(Object).def.getHashCode2(null));
+            Bridge.Test.Assert.areEqual(0, System.Collections.Generic.EqualityComparer$1(Object).def.getHashCode2(undefined));
         },
         defaultComparerCanDetermineEquality: function () {
             var o1 = {  }, o2 = {  };
-            Bridge.Test.Assert.true(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(null, null));
-            Bridge.Test.Assert.false(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(null, o1));
-            Bridge.Test.Assert.false(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(o1, null));
-            Bridge.Test.Assert.true(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(o1, o1));
-            Bridge.Test.Assert.false(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(o1, o2));
+            Bridge.Test.Assert.true(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(null, null));
+            Bridge.Test.Assert.false(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(null, o1));
+            Bridge.Test.Assert.false(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(o1, null));
+            Bridge.Test.Assert.true(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(o1, o1));
+            Bridge.Test.Assert.false(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(o1, o2));
         },
         defaultComparerInvokesOverriddenGetHashCode: function () {
-            Bridge.Test.Assert.areEqual(42158, new (System.Collections.Generic.EqualityComparer$1(Object))().getHashCode2(Bridge.merge(new Bridge.ClientTest.Batch4.Collections.Generic.EqualityComparerTests.MyClass(), {
+            Bridge.Test.Assert.areEqual(42158, System.Collections.Generic.EqualityComparer$1(Object).def.getHashCode2(Bridge.merge(new Bridge.ClientTest.Batch4.Collections.Generic.EqualityComparerTests.MyClass(), {
                 hashCode: 42158
             } )));
         },
@@ -646,17 +646,17 @@
             var c = new Bridge.ClientTest.Batch4.Collections.Generic.EqualityComparerTests.MyClass();
             var other = new Bridge.ClientTest.Batch4.Collections.Generic.EqualityComparerTests.MyClass();
             c.shouldEqual = false;
-            Bridge.Test.Assert.false(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(c, other));
+            Bridge.Test.Assert.false(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(c, other));
             Bridge.Test.Assert.areStrictEqual(other, c.other);
 
             c.shouldEqual = true;
             c.other = null;
-            Bridge.Test.Assert.true(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(c, other));
+            Bridge.Test.Assert.true(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(c, other));
             Bridge.Test.Assert.areStrictEqual(other, c.other);
 
             c.shouldEqual = true;
             c.other = other;
-            Bridge.Test.Assert.false(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(c, null)); // We should not invoke our own equals so its return value does not matter.
+            Bridge.Test.Assert.false(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(c, null)); // We should not invoke our own equals so its return value does not matter.
             Bridge.Test.Assert.areEqual(other, c.other); // We should not invoke our own equals so the 'other' member should not be set.
         }
     });
@@ -690,14 +690,14 @@
             Bridge.Test.Assert.areEqual(0, d.getCount());
 
             // #1549
-            Bridge.Test.Assert.areStrictEqual(new (System.Collections.Generic.EqualityComparer$1(System.Int32))(), d.getComparer());
+            Bridge.Test.Assert.areStrictEqual(System.Collections.Generic.EqualityComparer$1(System.Int32).def, d.getComparer());
         },
         capacityConstructorWorks_SPI_1549: function () {
             var d = new (System.Collections.Generic.Dictionary$2(System.Int32, String))();
             Bridge.Test.Assert.areEqual(0, d.getCount());
 
             // #1549
-            Bridge.Test.Assert.areStrictEqual(new (System.Collections.Generic.EqualityComparer$1(System.Int32))(), d.getComparer());
+            Bridge.Test.Assert.areStrictEqual(System.Collections.Generic.EqualityComparer$1(System.Int32).def, d.getComparer());
         },
         capacityAndEqualityComparerWorks: function () {
             var c = new Bridge.ClientTest.Batch4.Collections.Generic.GenericDictionaryTests.TestEqualityComparer();
@@ -719,7 +719,7 @@
             Bridge.Test.Assert.areEqual(2, d2.get("b"));
 
             // #1549
-            Bridge.Test.Assert.areStrictEqual(new (System.Collections.Generic.EqualityComparer$1(String))(), d2.getComparer());
+            Bridge.Test.Assert.areStrictEqual(System.Collections.Generic.EqualityComparer$1(String).def, d2.getComparer());
         },
         equalityComparerOnlyConstructorWorks: function () {
             var c = new Bridge.ClientTest.Batch4.Collections.Generic.GenericDictionaryTests.TestEqualityComparer();
@@ -1686,7 +1686,7 @@
                 sb.appendLine(System.String.concat("got ", enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]()));
             }
 
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
         },
         prematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks_SPI_1555: function () {
             // #1555
@@ -1699,7 +1699,7 @@
             }
             enm.System$IDisposable$dispose();
 
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
         },
         exceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
             var sb = new System.Text.StringBuilder();
@@ -1723,7 +1723,7 @@
                 sb.appendLine("caught exception");
             }
 
-            this.assertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
+            this.assertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
         },
         typeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface_SPI_1554: function () {
             var enm = null;
@@ -1754,7 +1754,7 @@
                 sb.appendLine(System.String.concat("got ", i1));
             }
 
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n-\r\nyielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n-\nyielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
         },
         prematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks_SPI_1555: function () {
             var $t;
@@ -1770,7 +1770,7 @@
                 }
             }
 
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
         },
         exceptionInIEnumerableIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
             var sb = new System.Text.StringBuilder();
@@ -1795,7 +1795,7 @@
                 sb.appendLine("caught exception");
             }
 
-            this.assertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
+            this.assertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
         },
         enumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters: function () {
             var $t, $t1;
@@ -1813,7 +1813,7 @@
                 sb.appendLine(i1.toString());
             }
 
-            this.assertEqual(sb.toString(), "3\r\n2\r\n1\r\n3\r\n2\r\n1\r\n");
+            this.assertEqual(sb.toString(), "3\n2\n1\n3\n2\n1\n");
         },
         differentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals: function () {
             var sb = new System.Text.StringBuilder();
@@ -1828,7 +1828,7 @@
                 sb.appendLine(enm2[Bridge.geti(enm2, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]().toString());
             }
 
-            this.assertEqual(sb.toString(), "0\r\n0\r\n1\r\n1\r\n2\r\n2\r\n-1\r\n-1\r\n");
+            this.assertEqual(sb.toString(), "0\n0\n1\n1\n2\n2\n-1\n-1\n");
         }
     });
 
@@ -12822,8 +12822,6 @@
         statics: {
             canConvert: function (T, arg) {
                 try { /// The variable `x' is assigned but its value is never used
-
-
                     var x = System.Nullable.getValue(Bridge.cast(arg, T));
                     return true;
                 }

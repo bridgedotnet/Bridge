@@ -6791,8 +6791,6 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6822,7 +6820,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -14541,13 +14539,13 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 Bridge.Test.Assert.true$1(Bridge.is(c, System.Collections.Generic.IComparer$1(System.Int32)), "Comparer<T> declares it implemets IComparer<T>");
             },
             n340: function () {
-                var c = new (System.Collections.Generic.EqualityComparer$1(System.Int32))();
+                var c = System.Collections.Generic.EqualityComparer$1(System.Int32).def;
 
                 Bridge.Test.Assert.true$1(c != null, "EqualityComparer<int>.Default works");
                 Bridge.Test.Assert.true$1(c.equals2(10, 10), "EqualityComparer<int>.Default.Equals(10, 10) works");
                 Bridge.Test.Assert.false$1(c.equals2(10, 11), "EqualityComparer<int>.Default.Equals(10, 11) works");
 
-                var s = new (System.Collections.Generic.EqualityComparer$1(String))();
+                var s = System.Collections.Generic.EqualityComparer$1(String).def;
                 Bridge.Test.Assert.true$1(s != null, "EqualityComparer<string>.Default works");
                 Bridge.Test.Assert.true$1(s.equals2("a", "a"), "EqualityComparer<string>.Default.Equals(\"a\", \"a\") works");
                 Bridge.Test.Assert.false$1(s.equals2("a", "b"), "EqualityComparer<string>.Default.Equals(\"a\", \"b\") works");
@@ -14555,12 +14553,12 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             n341: function () {
                 var o11 = {  };
                 var o12 = {  };
-                var b1 = new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(o11, o12);
+                var b1 = System.Collections.Generic.EqualityComparer$1(Object).def.equals2(o11, o12);
                 Bridge.Test.Assert.false$1(b1, "EqualityComparer<object>.Default.Equals(o11, o12) works");
 
                 var o21 = new $_.$AnonymousType$16(7);
                 var o22 = new $_.$AnonymousType$16(7);
-                var b2 = new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(o21, o22);
+                var b2 = System.Collections.Generic.EqualityComparer$1(Object).def.equals2(o21, o22);
                 Bridge.Test.Assert.true$1(b2, "EqualityComparer<object>.Default.Equals(o21, o22) works");
 
                 var o31 = Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A(), {
@@ -14569,7 +14567,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 var o32 = Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A(), {
                     setStr: "String"
                 } );
-                var b3 = new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(o31, o32);
+                var b3 = System.Collections.Generic.EqualityComparer$1(Object).def.equals2(o31, o32);
                 Bridge.Test.Assert.false$1(b3, "EqualityComparer<object>.Default.Equals(o31, o32) works");
 
                 var o41 = Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge341B(), {
@@ -14578,7 +14576,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 var o42 = Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge341B(), {
                     setStr: "String"
                 } );
-                var b4 = new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(o41, o42);
+                var b4 = System.Collections.Generic.EqualityComparer$1(Object).def.equals2(o41, o42);
                 Bridge.Test.Assert.true$1(b4, "EqualityComparer<object>.Default.Equals(o41, o42) works");
             },
             n342: function () {

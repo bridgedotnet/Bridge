@@ -37,7 +37,7 @@ namespace Bridge.ClientTest.Collections.Generic
             var d = new Dictionary<int, string>();
             Assert.AreEqual(0, d.Count, "Count is 0");
             Assert.AreEqual("Bridge.CustomEnumerator", d.GetEnumerator().GetClassName(), "Enumerator should be Bridge.CustomEnumerator");
-            Assert.AreEqual("System.Collections.Generic.EqualityComparer$1[[Object]]", d.Comparer.GetClassName(), "Comparer should be Bridge.EqualityComparer$1$Object");
+            Assert.AreEqual("System.Collections.Generic.EqualityComparer$1[[System.Int32, mscorlib]]", d.Comparer.GetClassName(), "Comparer should be Bridge.EqualityComparer$1$Object");
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace Bridge.ClientTest.Collections.Generic
             var d = new Dictionary<int, string>(10);
             Assert.AreEqual(0, d.Count);
             Assert.AreEqual("Bridge.CustomEnumerator", d.GetEnumerator().GetClassName(), "Enumerator should be Bridge.CustomEnumerator");
-            Assert.AreEqual("System.Collections.Generic.EqualityComparer$1[[Object]]", d.Comparer.GetClassName(), "Comparer should be Bridge.EqualityComparer$1$Object");
+            Assert.AreEqual("System.Collections.Generic.EqualityComparer$1[[System.Int32, mscorlib]]", d.Comparer.GetClassName(), "Comparer should be Bridge.EqualityComparer$1$Object");
         }
 
         [Test]
