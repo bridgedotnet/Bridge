@@ -1,13 +1,17 @@
 using System.Collections.Generic;
 
-namespace Bridge
+namespace Bridge.Utils
 {
     /// <summary>
     ///
     /// </summary>
+    [Namespace("Bridge")]
     public class Console
     {
+        // Unfortunately we have to use dynamic types
+        // because Bridge.Html5 Assembly is not available here.
         private dynamic window = Script.Get<dynamic>("window");
+
         private dynamic document = Script.Get<dynamic>("document");
         private dynamic body = Script.Get<dynamic>("document").body;
 
@@ -47,10 +51,10 @@ namespace Bridge
                 { "bottom" , "0" },
                 { "padding-top" , "38px" },
                 { "background-color" , "#fff" },
-                { "font" , "normal normal normal 13px/1 sans-serif" }
+                { "font" , "normal normal normal 13px/1 sans-serif" },
+                { "color", "#555" }
             };
 
-            //public string Color = "#555";
             var consoleHeaderStyles = new Dictionary<string, string>
             {
                 { "position", "absolute" },
@@ -66,7 +70,6 @@ namespace Bridge
 
             var consoleBodyStyles = new Dictionary<string, string>
             {
-                { "height" ,"300px" },
                 { "overflow-x" ,"auto" },
                 { "font-family" ,"Menlo, Monaco, Consolas, 'Courier New', monospace" }
             };
@@ -97,16 +100,6 @@ namespace Bridge
             // Bridge Console Label
             var bridgeConsoleLabel = document.createElement("span");
             bridgeConsoleLabel.innerHTML = "Bridge Console";
-
-            // Separator
-            var separator = document.createElement("span");
-            separator.innerHTML = "|";
-
-            separator.style.margin = "0 7px";
-
-            // Bridge Version
-            var bridgeVersion = document.createElement("span");
-            bridgeVersion.innerHTML = "v" + this.GetBridgeVersion();
 
             // Close Button
             var closeBtn = document.createElement("span");
@@ -177,8 +170,6 @@ namespace Bridge
             // Add child elements into console header
             consoleHeader.appendChild(bridgeIcon);
             consoleHeader.appendChild(bridgeConsoleLabel);
-            consoleHeader.appendChild(separator);
-            consoleHeader.appendChild(bridgeVersion);
             consoleHeader.appendChild(closeBtn);
 
             // Console Body Wrapper
@@ -202,7 +193,7 @@ namespace Bridge
             body.appendChild(consoleWrapper);
 
             // Close console
-            closeBtn.addEventListener("click", Script.Write<string>("this.closeConsole"));
+            closeBtn.addEventListener("click", Script.Write<string>("this.close"));
 
             // Show/hide Tooltip
             closeBtn.addEventListener("mouseover", Script.Write<string>("this.showTooltip"));
@@ -234,7 +225,7 @@ namespace Bridge
         }
 
         [External]
-        [Template("Bridge.Console.log({msg})")]
+        [Template("Bridge.Console.log({value})")]
         public static void Log(object value)
         {
             LogBase(value);
@@ -245,9 +236,16 @@ namespace Bridge
             LogBase(value);
         }
 
-        public static void WriteLine(string msg)
+        public static void WriteLine(string value)
         {
-            LogBase(msg);
+            LogBase(value);
+        }
+
+        [External]
+        [Template("Bridge.Console.log({value})")]
+        public static void WriteLine(object value)
+        {
+            LogBase(value);
         }
 
         public bool Hidden = true;
@@ -314,7 +312,7 @@ namespace Bridge
         /// <summary>
         /// Close Bridge Console
         /// </summary>
-        public void CloseConsole()
+        public void Close()
         {
             var self = Instance;
             self.consoleWrapper.style.display = "none";
@@ -376,20 +374,21 @@ namespace Bridge
         /// <param name="message"></param>
         /// <param name="messageType"></param>
         /// <returns></returns>
-        public dynamic GetConsoleMessage(string message, string messageType)
+        private dynamic GetConsoleMessage(string message, string messageType)
         {
             var messageItem = document.createElement("li");
             messageItem.setAttribute("style", "padding: 5px 10px;border-bottom: 1px solid #f0f0f0;");
 
             var messageIcon = document.createElementNS(svgNS, "svg");
 
-            var items5 = new Dictionary<string, string>();
-
-            items5["xmlns"] = svgNS;
-            items5["width"] = "3.9";
-            items5["height"] = "6.7";
-            items5["viewBox"] = "0 0 3.9 6.7";
-            items5["style"] = "margin-right: 7px; vertical-align: middle;";
+            var items5 = new Dictionary<string, string>
+            {
+                { "xmlns", svgNS },
+                { "width", "3.9" },
+                { "height", "6.7" },
+                { "viewBox", "0 0 3.9 6.7" },
+                { "style", "margin-right: 7px; vertical-align: middle;" },
+            };
 
             SetAttributes(messageIcon, items5);
 
@@ -423,16 +422,6 @@ namespace Bridge
         }
 
         /// <summary>
-        /// Returns bridge version
-        /// </summary>
-        /// <returns></returns>
-        public string GetBridgeVersion()
-        {
-            // logic to return bridge version
-            return "15.0";
-        }
-
-        /// <summary>
         /// Returns console position set in bridge.json
         /// </summary>
         /// <returns></returns>
@@ -445,7 +434,7 @@ namespace Bridge
         /// <summary>
         /// Sets multiple attributes
         /// </summary>
-        public void SetAttributes(dynamic el, Dictionary<string, string> attrs)
+        private void SetAttributes(dynamic el, Dictionary<string, string> attrs)
         {
             foreach (KeyValuePair<string, string> item in attrs)
             {
@@ -456,7 +445,7 @@ namespace Bridge
         /// <summary>
         /// Converts Object to CSS styles format
         /// </summary>
-        public string Obj2Css(Dictionary<string, string> obj)
+        private string Obj2Css(Dictionary<string, string> obj)
         {
             var str = "";
 
@@ -466,11 +455,6 @@ namespace Bridge
             }
 
             return str;
-        }
-
-        [ObjectLiteral(DefaultValueMode.Initializer)]
-        internal class ConsoleBodyStyles
-        {
         }
     }
 }

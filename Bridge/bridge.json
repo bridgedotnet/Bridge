@@ -86,7 +86,7 @@
         "Resources/Console.js",
         "Resources/.generated/system/random.js",
         "Resources/.generated/system/threading/timer.js",
-        "Resources/.generated/bridge/console.js",
+        "Resources/.generated/bridge/utils/console.js",
         "Resources/.auxiliary/End.js",
         "Resources/.auxiliary/Finally.js"
       ]

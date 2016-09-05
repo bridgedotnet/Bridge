@@ -22462,8 +22462,8 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             log: function (value) {
                 Bridge.Console.logBase(value);
             },
-            writeLine: function (msg) {
-                Bridge.Console.logBase(msg);
+            writeLine: function (value) {
+                Bridge.Console.logBase(value);
             },
             hide: function () {
                 var self = Bridge.Console.getInstance();
@@ -22511,7 +22511,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         init: function () {
             var consoleWrapperStyles = $_.Bridge.Console.f1(new (System.Collections.Generic.Dictionary$2(String,String))());
 
-            //public string Color = "#555";
             var consoleHeaderStyles = $_.Bridge.Console.f2(new (System.Collections.Generic.Dictionary$2(String,String))());
 
             var consoleBodyStyles = $_.Bridge.Console.f3(new (System.Collections.Generic.Dictionary$2(String,String))());
@@ -22536,16 +22535,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             // Bridge Console Label
             var bridgeConsoleLabel = this.document.createElement("span");
             bridgeConsoleLabel.innerHTML = "Bridge Console";
-
-            // Separator
-            var separator = this.document.createElement("span");
-            separator.innerHTML = "|";
-
-            separator.style.margin = "0 7px";
-
-            // Bridge Version
-            var bridgeVersion = this.document.createElement("span");
-            bridgeVersion.innerHTML = System.String.concat("v", this.getBridgeVersion());
 
             // Close Button
             var closeBtn = this.document.createElement("span");
@@ -22602,8 +22591,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             // Add child elements into console header
             consoleHeader.appendChild(bridgeIcon);
             consoleHeader.appendChild(bridgeConsoleLabel);
-            consoleHeader.appendChild(separator);
-            consoleHeader.appendChild(bridgeVersion);
             consoleHeader.appendChild(closeBtn);
 
             // Console Body Wrapper
@@ -22627,7 +22614,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             this.body.appendChild(this.consoleWrapper);
 
             // Close console
-            closeBtn.addEventListener("click", this.closeConsole);
+            closeBtn.addEventListener("click", this.close);
 
             // Show/hide Tooltip
             closeBtn.addEventListener("mouseover", this.showTooltip);
@@ -22644,7 +22631,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             self.tooltip.style.right = "30px";
             self.tooltip.style.opacity = "0";
         },
-        closeConsole: function () {
+        close: function () {
             var self = Bridge.Console.getInstance();
             self.consoleWrapper.style.display = "none";
 
@@ -22689,13 +22676,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
             var messageIcon = this.document.createElementNS(this.svgNS, "svg");
 
-            var items5 = new (System.Collections.Generic.Dictionary$2(String,String))();
-
-            items5.set("xmlns", this.svgNS);
-            items5.set("width", "3.9");
-            items5.set("height", "6.7");
-            items5.set("viewBox", "0 0 3.9 6.7");
-            items5.set("style", "margin-right: 7px; vertical-align: middle;");
+            var items5 = Bridge.fn.bind(this, $_.Bridge.Console.f7)(new (System.Collections.Generic.Dictionary$2(String,String))());
 
             this.setAttributes(messageIcon, items5);
 
@@ -22725,10 +22706,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             messageItem.appendChild(messageContainer);
 
             return messageItem;
-        },
-        getBridgeVersion: function () {
-            // logic to return bridge version
-            return "15.0";
         },
         getConsolePosition: function () {
             // logic to get console position from bridge.json
@@ -22768,6 +22745,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             _o1.add("padding-top", "38px");
             _o1.add("background-color", "#fff");
             _o1.add("font", "normal normal normal 13px/1 sans-serif");
+            _o1.add("color", "#555");
             return _o1;
         },
         f2: function (_o2) {
@@ -22783,7 +22761,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             return _o2;
         },
         f3: function (_o3) {
-            _o3.add("height", "300px");
             _o3.add("overflow-x", "auto");
             _o3.add("font-family", "Menlo, Monaco, Consolas, 'Courier New', monospace");
             return _o3;
@@ -22808,6 +22785,14 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             _o6.add("d", "M11.4 1.4L10 0 5.7 4.3 1.4 0 0 1.4l4.3 4.3L0 10l1.4 1.4 4.3-4.3 4.3 4.3 1.4-1.4-4.3-4.3");
             _o6.add("fill", "#555");
             return _o6;
+        },
+        f7: function (_o7) {
+            _o7.add("xmlns", this.svgNS);
+            _o7.add("width", "3.9");
+            _o7.add("height", "6.7");
+            _o7.add("viewBox", "0 0 3.9 6.7");
+            _o7.add("style", "margin-right: 7px; vertical-align: middle;");
+            return _o7;
         }
     });
 
