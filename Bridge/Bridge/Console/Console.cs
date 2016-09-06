@@ -242,18 +242,6 @@ namespace Bridge.Utils
             LogBase(value);
         }
 
-        public static void WriteLine(string value)
-        {
-            LogBase(value);
-        }
-
-        [External]
-        [Template("Bridge.Console.log({value})")]
-        public static void WriteLine(object value)
-        {
-            LogBase(value);
-        }
-
         public bool Hidden = true;
 
         public static void Hide()
