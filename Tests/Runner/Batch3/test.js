@@ -2,12 +2,7 @@
     
     Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner', {
         statics: {
-            config: {
-                init: function () {
-                    Bridge.ready(this.main);
-                }
-            },
-            main: function () {
+            $main: function () {
                 QUnit.module("Issues3");
                 QUnit.test("#69 - ThisKeywordInStructConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge069.thisKeywordInStructConstructorWorks);
                 QUnit.test("#1000 - TestStaticViaChild", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1000.testStaticViaChild);
@@ -465,8 +460,7 @@
                 QUnit.test("#470", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues.n470);
                 QUnit.test("#499", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues.n499);
             }
-        },
-        $entryPoint: true
+        }
     });
 
     Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge069', {

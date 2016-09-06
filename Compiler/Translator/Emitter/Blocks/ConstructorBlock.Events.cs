@@ -44,7 +44,7 @@ namespace Bridge.Translator
                             if (method.Name == CS.Methods.AUTO_STARTUP_METHOD_NAME
                                 && method.HasModifier(Modifiers.Static)
                                 && !method.HasModifier(Modifiers.Abstract)
-                                && IsEntryPointCandidate(method))
+                                && ConstructorBlock.IsEntryPointCandidate(this.Emitter, method))
                             {
                                 if (isGenericType || isGenericMethod)
                                 {
@@ -52,10 +52,9 @@ namespace Bridge.Translator
                                 }
                                 else
                                 {
-                                    this.Emitter.AutoStartupMethods.Add(this.TypeInfo.Name + "." + method.Name);
-                                    list.Add(string.Format(JS.Funcs.BRIDGE_AUTO_STARTUP_METHOD_TEMPLATE, this.Emitter.GetEntityName(method)));
-
-                                    hasReadyAttribute = true;
+                                    //this.Emitter.AutoStartupMethods.Add(this.TypeInfo.Name + "." + method.Name);
+                                    //list.Add(string.Format(JS.Funcs.BRIDGE_AUTO_STARTUP_METHOD_TEMPLATE, this.Emitter.GetEntityName(method)));
+                                    //hasReadyAttribute = true;
                                 }
                             }
                         }
@@ -71,9 +70,9 @@ namespace Bridge.Translator
             return list;
         }
 
-        private bool IsEntryPointCandidate(MethodDeclaration methodDeclaration)
+        public static bool IsEntryPointCandidate(IEmitter emitter, MethodDeclaration methodDeclaration)
         {
-            var m_rr = this.Emitter.Resolver.ResolveNode(methodDeclaration, this.Emitter) as MemberResolveResult;
+            var m_rr = emitter.Resolver.ResolveNode(methodDeclaration, emitter) as MemberResolveResult;
 
             if (m_rr == null || !(m_rr.Member is IMethod))
             {

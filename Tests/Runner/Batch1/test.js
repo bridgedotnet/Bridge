@@ -2,12 +2,7 @@
     
     Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner', {
         statics: {
-            config: {
-                init: function () {
-                    Bridge.ready(this.main);
-                }
-            },
-            main: function () {
+            $main: function () {
                 QUnit.module("Arguments");
                 QUnit.test("LengthWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArgumentsTests.lengthWorks);
                 QUnit.test("GetArgumentWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArgumentsTests.getArgumentWorks);
@@ -2203,8 +2198,7 @@
                 QUnit.test("GetFormatWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_CultureInfoTests.getFormatWorks);
                 QUnit.test("InvariantWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_CultureInfoTests.invariantWorks);
             }
-        },
-        $entryPoint: true
+        }
     });
 
     Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArgumentsTests', {
