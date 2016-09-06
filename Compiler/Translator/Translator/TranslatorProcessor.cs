@@ -196,13 +196,27 @@ namespace Bridge.Translator
                 return true;
             }
 
-            logger.Info("Setting logger configuration parameters...");
+            logger.Info("Applying logger configuration parameters...");
 
             logger.Name = bridgeOptions.Name;
 
+            if (!string.IsNullOrEmpty(logger.Name))
+            {
+                logger.Info("Logger name: " + logger.Name);
+            }
+
+            var loggerLevel = assemblyConfig.Logging.Level ?? LoggerLevel.None;
+
+            logger.Info("Logger level: " + loggerLevel);
+
+            if (loggerLevel <= LoggerLevel.None)
+            {
+                logger.Info("To enable further logging use configuration setting \"logging\" in bridge.json. See http://bridge.net/kb/global-configuration/#logging");
+            }
+
             try
             {
-                logger.LoggerLevel = assemblyConfig.Logging.Level ?? LoggerLevel.None;
+                logger.LoggerLevel = loggerLevel;
 
                 logger.Info("Read config file: " + AssemblyConfigHelper.ConfigToString(assemblyConfig));
 
