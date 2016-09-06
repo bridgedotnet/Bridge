@@ -8167,23 +8167,7 @@
 
     System.Diagnostics.Debug = {
         writeln: function (text) {
-            var global = Bridge.global;
-
-            if (global.console) {
-                if (global.console.debug) {
-                    global.console.debug(text);
-
-                    return;
-                } else if (global.console.log) {
-                    global.console.log(text);
-
-                    return;
-                }
-            } else if (global.opera && global.opera.postError) {
-                global.opera.postError(text);
-
-                return;
-            }
+            Bridge.Console.debug(text);
         },
 
         _fail: function (message) {
@@ -22149,7 +22133,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 return;
             }
 
-            console.log(obj);
+            Bridge.Console.log(obj);
         }
     };
 
@@ -22450,19 +22434,25 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
                 var el = self.document.getElementById("bridge-console-messages");
 
-                el.appendChild(self.getConsoleMessage(value.toString(), messageType));
+                el.appendChild(self.buildConsoleMessage(value.toString(), messageType));
 
-                if (Bridge.isDefined("console")) {
-                    console.log(value);
+                if (Bridge.isDefined("Bridge.global") && Bridge.isDefined("Bridge.global.console")) {
+                    if (Bridge.referenceEquals(messageType, "debug") && Bridge.isDefined("Bridge.global.console.debug")) {
+                        Bridge.global.console.debug(value);
+                    } else {
+                        Bridge.global.console.log(value);
+                    }
+                } else if (Bridge.isDefined("Bridge.global.opera") && Bridge.isDefined("Bridge.global.opera.postError")) {
+                    Bridge.global.opera.postError(value);
                 }
             },
             error: function (value) {
                 Bridge.Console.logBase(value, "error");
             },
-            log: function (value) {
-                Bridge.Console.logBase(value);
+            debug: function (value) {
+                Bridge.Console.logBase(value, "debug");
             },
-            writeLine: function (value) {
+            log: function (value) {
                 Bridge.Console.logBase(value);
             },
             hide: function () {
@@ -22562,7 +22552,8 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             closeBtn.appendChild(this.tooltip);
 
             // Styles and other stuff based on position
-            Bridge.Console.position = ["horizontal", "vertical"].indexOf(this.getConsolePosition()) > -1 ? this.getConsolePosition() : "horizontal";
+            // Force to horizontal for now
+            Bridge.Console.position = "horizontal";
 
             if (Bridge.referenceEquals(Bridge.Console.position, "horizontal")) {
                 this.wrapBodyContent();
@@ -22670,7 +22661,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
             this.body.removeChild(bridgeBodyWrapper);
         },
-        getConsoleMessage: function (message, messageType) {
+        buildConsoleMessage: function (message, messageType) {
             var messageItem = this.document.createElement("li");
             messageItem.setAttribute("style", "padding: 5px 10px;border-bottom: 1px solid #f0f0f0;");
 
@@ -22684,6 +22675,8 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
             if (Bridge.referenceEquals(messageType, "error")) {
                 color = "#d65050";
+            } else if (Bridge.referenceEquals(messageType, "debug")) {
+                color = "#1800FF";
             }
 
             var messageIconPath = this.document.createElementNS(this.svgNS, "path");
@@ -22699,17 +22692,12 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
             var messageContainer = this.document.createElement("span");
             messageContainer.innerHTML = message;
-
             messageContainer.style.color = color;
 
             messageItem.appendChild(messageIcon);
             messageItem.appendChild(messageContainer);
 
             return messageItem;
-        },
-        getConsolePosition: function () {
-            // logic to get console position from bridge.json
-            return "horizontal";
         },
         setAttributes: function (el, attrs) {
             var $t;

@@ -212,11 +212,22 @@ namespace Bridge.Utils
 
             var el = self.document.getElementById("bridge-console-messages");
 
-            el.appendChild(self.GetConsoleMessage(value.ToString(), messageType));
+            el.appendChild(self.BuildConsoleMessage(value.ToString(), messageType));
 
-            if (Script.IsDefined("console"))
+            if (Script.IsDefined("Bridge.global") && Script.IsDefined("Bridge.global.console"))
             {
-                Script.Write("console.log(value);");
+                if (messageType == "debug" && Script.IsDefined("Bridge.global.console.debug"))
+                {
+                    Script.Write("Bridge.global.console.debug(value);");
+                }
+                else
+                {
+                    Script.Write("Bridge.global.console.log(value);");
+                }
+            }
+            else if (Script.IsDefined("Bridge.global.opera") && Script.IsDefined("Bridge.global.opera.postError"))
+            {
+                Script.Write("Bridge.global.opera.postError(value);");
             }
         }
 
@@ -368,7 +379,7 @@ namespace Bridge.Utils
         /// <param name="message"></param>
         /// <param name="messageType"></param>
         /// <returns></returns>
-        private dynamic GetConsoleMessage(string message, string messageType)
+        private dynamic BuildConsoleMessage(string message, string messageType)
         {
             var messageItem = document.createElement("li");
             messageItem.setAttribute("style", "padding: 5px 10px;border-bottom: 1px solid #f0f0f0;");
@@ -410,7 +421,6 @@ namespace Bridge.Utils
 
             var messageContainer = document.createElement("span");
             messageContainer.innerHTML = message;
-
             messageContainer.style.color = color;
 
             messageItem.appendChild(messageIcon);
