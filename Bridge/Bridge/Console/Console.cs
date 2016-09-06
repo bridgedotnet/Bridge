@@ -138,7 +138,8 @@ namespace Bridge.Utils
             closeBtn.appendChild(tooltip);
 
             // Styles and other stuff based on position
-            position = new string[] { "horizontal", "vertical" }.IndexOf(GetConsolePosition()) > -1 ? GetConsolePosition() : "horizontal";
+            // Force to horizontal for now
+            position = "horizontal";
 
             if (position == "horizontal")
             {
@@ -428,16 +429,6 @@ namespace Bridge.Utils
             messageItem.appendChild(messageContainer);
 
             return messageItem;
-        }
-
-        /// <summary>
-        /// Returns console position set in bridge.json
-        /// </summary>
-        /// <returns></returns>
-        private string GetConsolePosition()
-        {
-            // logic to get console position from bridge.json
-            return "horizontal";
         }
 
         /// <summary>
