@@ -22483,7 +22483,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         body: null,
         svgNS: "http://www.w3.org/2000/svg",
         consoleHeight: "300px",
-        consolePaddingTop: "38px",
+        consoleHeaderHeight: "35px",
         tooltip: null,
         consoleWrapper: null,
         hidden: true,
@@ -22499,7 +22499,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             this.init();
         },
         init: function () {
-            var consoleWrapperStyles = $_.Bridge.Console.f1(new (System.Collections.Generic.Dictionary$2(String,String))());
+            var consoleWrapperStyles = Bridge.fn.bind(this, $_.Bridge.Console.f1)(new (System.Collections.Generic.Dictionary$2(String,String))());
 
             var consoleHeaderStyles = $_.Bridge.Console.f2(new (System.Collections.Generic.Dictionary$2(String,String))());
 
@@ -22545,7 +22545,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             this.tooltip = this.document.createElement("div");
             this.tooltip.innerHTML = "Refresh page to open Bridge Console";
 
-            this.tooltip.setAttribute("style", "position: absolute;right: 30px;top: -6px;width: 225px;padding: 7px;border-radius: 3px;background-color: rgba(0, 0, 0, 0.75);color: #eee;text-align: center;visibility: hidden;opacity: 0;-webkit-transition: all 0.25s ease-in-out;transition: all 0.25s ease-in-out;z-index: 1;");
+            this.tooltip.setAttribute("style", "position: absolute;right: 30px;top: -6px;white-space: nowrap;padding: 7px;border-radius: 3px;background-color: rgba(0, 0, 0, 0.75);color: #eee;text-align: center;visibility: hidden;opacity: 0;-webkit-transition: all 0.25s ease-in-out;transition: all 0.25s ease-in-out;z-index: 1;");
 
             closeIcon.appendChild(closeIconPath);
             closeBtn.appendChild(closeIcon);
@@ -22649,7 +22649,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
             var div = this.document.createElement("div");
             div.id = "bridge-body-wrapper";
-            div.setAttribute("style", System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat("height: calc(100vh - ", this.consoleHeight), " - "), this.consolePaddingTop), ");"), "margin-top: calc(-1 * "), "(") + (bodyMarginTop + " + " + bodyPaddingTop) + "));" + "margin-right: calc(-1 * " + "(" + (bodyMarginRight + " + " + bodyPaddingRight) + "));" + "margin-left: calc(-1 * " + "(" + (bodyMarginLeft + " + " + bodyPaddingLeft) + "));" + "padding-top: calc(" + (bodyMarginTop + " + " + bodyPaddingTop) + ");" + "padding-right: calc(" + (bodyMarginRight + " + " + bodyPaddingRight) + ");" + "padding-bottom: calc(" + (bodyMarginBottom + " + " + bodyPaddingBottom) + ");" + "padding-left: calc(" + (bodyMarginLeft + " + " + bodyPaddingLeft) + ");" + "overflow-x: auto;" + "box-sizing: border-box !important;");
+            div.setAttribute("style", System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat("height: calc(100vh - ", this.consoleHeight), " - "), this.consoleHeaderHeight), ");"), "margin-top: calc(-1 * "), "(") + (bodyMarginTop + " + " + bodyPaddingTop) + "));" + "margin-right: calc(-1 * " + "(" + (bodyMarginRight + " + " + bodyPaddingRight) + "));" + "margin-left: calc(-1 * " + "(" + (bodyMarginLeft + " + " + bodyPaddingLeft) + "));" + "padding-top: calc(" + (bodyMarginTop + " + " + bodyPaddingTop) + ");" + "padding-right: calc(" + (bodyMarginRight + " + " + bodyPaddingRight) + ");" + "padding-bottom: calc(" + (bodyMarginBottom + " + " + bodyPaddingBottom) + ");" + "padding-left: calc(" + (bodyMarginLeft + " + " + bodyPaddingLeft) + ");" + "overflow-x: auto;" + "box-sizing: border-box !important;");
 
             while (this.body.firstChild != null) {
                 div.appendChild(this.body.firstChild);
@@ -22735,7 +22735,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             _o1.add("position", "fixed");
             _o1.add("left", "0");
             _o1.add("bottom", "0");
-            _o1.add("padding-top", "38px");
+            _o1.add("padding-top", this.consoleHeaderHeight);
             _o1.add("background-color", "#fff");
             _o1.add("font", "normal normal normal 13px/1 sans-serif");
             _o1.add("color", "#555");

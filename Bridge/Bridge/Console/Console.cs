@@ -20,8 +20,7 @@ namespace Bridge.Utils
         // for horizontal position
         private string consoleHeight = "300px";
 
-        // this is for fixed console header which is 35px actual height + 3px bottom margin.
-        private string consolePaddingTop = "38px";
+        private string consoleHeaderHeight = "35px";
 
         private dynamic tooltip;
         private dynamic consoleWrapper;
@@ -49,7 +48,7 @@ namespace Bridge.Utils
                 { "position", "fixed" },
                 { "left" , "0" },
                 { "bottom" , "0" },
-                { "padding-top" , "38px" },
+                { "padding-top" , consoleHeaderHeight },
                 { "background-color" , "#fff" },
                 { "font" , "normal normal normal 13px/1 sans-serif" },
                 { "color", "#555" }
@@ -131,7 +130,7 @@ namespace Bridge.Utils
             tooltip = document.createElement("div");
             tooltip.innerHTML = "Refresh page to open Bridge Console";
 
-            tooltip.setAttribute("style", "position: absolute;right: 30px;top: -6px;width: 225px;padding: 7px;border-radius: 3px;background-color: rgba(0, 0, 0, 0.75);color: #eee;text-align: center;visibility: hidden;opacity: 0;-webkit-transition: all 0.25s ease-in-out;transition: all 0.25s ease-in-out;z-index: 1;");
+            tooltip.setAttribute("style", "position: absolute;right: 30px;top: -6px;white-space: nowrap;padding: 7px;border-radius: 3px;background-color: rgba(0, 0, 0, 0.75);color: #eee;text-align: center;visibility: hidden;opacity: 0;-webkit-transition: all 0.25s ease-in-out;transition: all 0.25s ease-in-out;z-index: 1;");
 
             closeIcon.appendChild(closeIconPath);
             closeBtn.appendChild(closeIcon);
@@ -354,7 +353,7 @@ namespace Bridge.Utils
             var div = document.createElement("div");
             div.id = "bridge-body-wrapper";
             div.setAttribute("style",
-                "height: calc(100vh - " + consoleHeight + " - " + consolePaddingTop + ");" +
+                "height: calc(100vh - " + consoleHeight + " - " + consoleHeaderHeight + ");" +
                 "margin-top: calc(-1 * " + "(" + (bodyMarginTop + " + " + bodyPaddingTop) + "));" +
                 "margin-right: calc(-1 * " + "(" + (bodyMarginRight + " + " + bodyPaddingRight) + "));" +
                 "margin-left: calc(-1 * " + "(" + (bodyMarginLeft + " + " + bodyPaddingLeft) + "));" +
