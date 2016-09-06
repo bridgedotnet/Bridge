@@ -224,6 +224,11 @@ namespace Bridge.Utils
             LogBase(value, "error");
         }
 
+        public static void Debug(string value)
+        {
+            LogBase(value, "debug");
+        }
+
         [External]
         [Template("Bridge.Console.log({value})")]
         public static void Log(object value)
@@ -397,6 +402,10 @@ namespace Bridge.Utils
             if (messageType == "error")
             {
                 color = "#d65050";
+            }
+            else if (messageType == "debug")
+            {
+                color = "#1800FF";
             }
 
             var messageIconPath = document.createElementNS(svgNS, "path");
