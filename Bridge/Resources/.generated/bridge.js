@@ -22633,18 +22633,23 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             }
         },
         wrapBodyContent: function () {
-            // get body margin and padding and we'll deduct them from main div height
+            // get body margin and padding for proper alignment of scroll if a body margin/padding is used.
             // TODO: .CurrentStyle only supported in IE6?
             var bodyStyle = this.body.currentStyle || this.window.getComputedStyle(this.body);
+
             var bodyPaddingTop = bodyStyle.paddingTop;
+            var bodyPaddingRight = bodyStyle.paddingRight;
             var bodyPaddingBottom = bodyStyle.paddingBottom;
+            var bodyPaddingLeft = bodyStyle.paddingLeft;
+
             var bodyMarginTop = bodyStyle.marginTop;
+            var bodyMarginRight = bodyStyle.marginRight;
             var bodyMarginBottom = bodyStyle.marginBottom;
+            var bodyMarginLeft = bodyStyle.marginLeft;
 
             var div = this.document.createElement("div");
             div.id = "bridge-body-wrapper";
-
-            div.setAttribute("style", System.String.concat(System.String.concat(System.String.concat(System.String.concat("height: calc(100vh - ", this.consoleHeight), " - "), this.consolePaddingTop), " - ") + bodyPaddingTop + " - " + bodyPaddingBottom + " - " + bodyMarginTop + " - " + bodyMarginBottom + ");" + "overflow-x: auto");
+            div.setAttribute("style", System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat("height: calc(100vh - ", this.consoleHeight), " - "), this.consolePaddingTop), ");"), "margin-top: calc(-1 * "), "(") + (bodyMarginTop + " + " + bodyPaddingTop) + "));" + "margin-right: calc(-1 * " + "(" + (bodyMarginRight + " + " + bodyPaddingRight) + "));" + "margin-left: calc(-1 * " + "(" + (bodyMarginLeft + " + " + bodyPaddingLeft) + "));" + "padding-top: calc(" + (bodyMarginTop + " + " + bodyPaddingTop) + ");" + "padding-right: calc(" + (bodyMarginRight + " + " + bodyPaddingRight) + ");" + "padding-bottom: calc(" + (bodyMarginBottom + " + " + bodyPaddingBottom) + ");" + "padding-left: calc(" + (bodyMarginLeft + " + " + bodyPaddingLeft) + ");" + "overflow-x: auto;" + "box-sizing: border-box !important;");
 
             while (this.body.firstChild != null) {
                 div.appendChild(this.body.firstChild);

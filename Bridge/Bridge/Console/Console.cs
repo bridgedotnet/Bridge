@@ -337,18 +337,34 @@ namespace Bridge.Utils
         /// </summary>
         private void WrapBodyContent()
         {
-            // get body margin and padding and we'll deduct them from main div height
+            // get body margin and padding for proper alignment of scroll if a body margin/padding is used.
             // TODO: .CurrentStyle only supported in IE6?
             var bodyStyle = body.currentStyle || window.getComputedStyle(body);
+
             var bodyPaddingTop = bodyStyle.paddingTop;
+            var bodyPaddingRight = bodyStyle.paddingRight;
             var bodyPaddingBottom = bodyStyle.paddingBottom;
+            var bodyPaddingLeft = bodyStyle.paddingLeft;
+
             var bodyMarginTop = bodyStyle.marginTop;
+            var bodyMarginRight = bodyStyle.marginRight;
             var bodyMarginBottom = bodyStyle.marginBottom;
+            var bodyMarginLeft = bodyStyle.marginLeft;
 
             var div = document.createElement("div");
             div.id = "bridge-body-wrapper";
-
-            div.setAttribute("style", "height: calc(100vh - " + consoleHeight + " - " + consolePaddingTop + " - " + bodyPaddingTop + " - " + bodyPaddingBottom + " - " + bodyMarginTop + " - " + bodyMarginBottom + ");" + "overflow-x: auto");
+            div.setAttribute("style",
+                "height: calc(100vh - " + consoleHeight + " - " + consolePaddingTop + ");" +
+                "margin-top: calc(-1 * " + "(" + (bodyMarginTop + " + " + bodyPaddingTop) + "));" +
+                "margin-right: calc(-1 * " + "(" + (bodyMarginRight + " + " + bodyPaddingRight) + "));" +
+                "margin-left: calc(-1 * " + "(" + (bodyMarginLeft + " + " + bodyPaddingLeft) + "));" +
+                "padding-top: calc(" + (bodyMarginTop + " + " + bodyPaddingTop) + ");" +
+                "padding-right: calc(" + (bodyMarginRight + " + " + bodyPaddingRight) + ");" +
+                "padding-bottom: calc(" + (bodyMarginBottom + " + " + bodyPaddingBottom) + ");" +
+                "padding-left: calc(" + (bodyMarginLeft + " + " + bodyPaddingLeft) + ");" +
+                "overflow-x: auto;" +
+                "box-sizing: border-box !important;"
+            );
 
             while (body.firstChild != null)
             {
