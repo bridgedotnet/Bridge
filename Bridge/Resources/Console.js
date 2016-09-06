@@ -8,6 +8,6 @@
                 return;
             }
 
-            console.log(obj);
+            Bridge.Console.log(obj);
         }
     };
