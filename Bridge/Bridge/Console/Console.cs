@@ -252,7 +252,7 @@ namespace Bridge.Utils
             LogBase(value);
         }
 
-        public bool Hidden = true;
+        private bool Hidden = true;
 
         public static void Hide()
         {
