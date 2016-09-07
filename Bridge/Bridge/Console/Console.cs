@@ -81,6 +81,17 @@ namespace Bridge.Utils
             Error
         }
 
+        [External]
+        public static class MessageColor
+        {
+            [Template("\"#555\"")]
+            public const string Info = "#555";
+            [Template("\"#1800FF\"")]
+            public const string Debug = "#1800FF";
+            [Template("\"#d65050\"")]
+            public const string Error = "#d65050";
+        }
+
         private const string BODY_WRAPPER_ID = "bridge-body-wrapper";
         private const string CONSOLE_MESSAGES_ID = "bridge-console-messages";
 
@@ -488,15 +499,15 @@ namespace Bridge.Utils
 
             SetAttributes(messageIcon, items5);
 
-            var color = "#555";
+            var color = MessageColor.Info;
 
             if (messageType == MessageType.Error)
             {
-                color = "#d65050";
+                color = MessageColor.Error;
             }
             else if (messageType == MessageType.Debug)
             {
-                color = "#1800FF";
+                color = MessageColor.Debug;
             }
 
             var messageIconPath = Document.CreateElementNS(svgNS, "path");
