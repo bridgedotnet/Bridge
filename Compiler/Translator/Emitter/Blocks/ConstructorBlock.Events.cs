@@ -50,12 +50,6 @@ namespace Bridge.Translator
                                 {
                                     LogAutoStartupWarning(method);
                                 }
-                                else
-                                {
-                                    //this.Emitter.AutoStartupMethods.Add(this.TypeInfo.Name + "." + method.Name);
-                                    //list.Add(string.Format(JS.Funcs.BRIDGE_AUTO_STARTUP_METHOD_TEMPLATE, this.Emitter.GetEntityName(method)));
-                                    //hasReadyAttribute = true;
-                                }
                             }
                         }
                     }
@@ -72,6 +66,11 @@ namespace Bridge.Translator
 
         public static bool IsEntryPointCandidate(IEmitter emitter, MethodDeclaration methodDeclaration)
         {
+            if (methodDeclaration == null)
+            {
+                return false;
+            }
+
             var m_rr = emitter.Resolver.ResolveNode(methodDeclaration, emitter) as MemberResolveResult;
 
             if (m_rr == null || !(m_rr.Member is IMethod))

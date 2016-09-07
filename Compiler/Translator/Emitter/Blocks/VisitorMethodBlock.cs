@@ -95,7 +95,7 @@ namespace Bridge.Translator
 
                 if (!isReady)
                 {
-                    name = "$main";
+                    name = JS.Fields.MAIN;
                 }
             }
 
