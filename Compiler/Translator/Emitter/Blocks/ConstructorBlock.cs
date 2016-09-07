@@ -261,7 +261,7 @@ namespace Bridge.Translator
         {
             var ctorWrappers = this.EmitInitMembers().ToArray();
 
-            if (!this.TypeInfo.HasInstantiable && ctorWrappers.Length == 0)
+            if (!this.TypeInfo.HasRealInstantiable(this.Emitter) && ctorWrappers.Length == 0)
             {
                 return;
             }

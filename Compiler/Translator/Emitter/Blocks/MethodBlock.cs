@@ -1,9 +1,7 @@
 ﻿using Bridge.Contract;
 using Bridge.Contract.Constants;
-
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.TypeSystem;
-
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -65,6 +63,29 @@ namespace Bridge.Translator
                     else if (prop is IndexerDeclaration)
                     {
                         this.Emitter.VisitIndexerDeclaration((IndexerDeclaration)prop);
+                    }
+                }
+            }
+
+            if (!this.StaticBlock)
+            {
+                MethodDeclaration entryPoint = null;
+                if (this.TypeInfo.StaticMethods.Any(group =>
+                {
+                    return group.Value.Any(method =>
+                    {
+                        var result = Helpers.IsEntryPointMethod(this.Emitter, method);
+                        if (result)
+                        {
+                            entryPoint = method;
+                        }
+                        return result;
+                    });
+                }))
+                {
+                    if (!entryPoint.Body.IsNull)
+                    {
+                        this.Emitter.VisitMethodDeclaration(entryPoint);
                     }
                 }
             }
@@ -287,7 +308,7 @@ namespace Bridge.Translator
         {
             if (group.Count == 1)
             {
-                if (!group[0].Body.IsNull)
+                if (!group[0].Body.IsNull && (!this.StaticBlock || !Helpers.IsEntryPointMethod(this.Emitter, group[0])))
                 {
                     this.Emitter.VisitMethodDeclaration(group[0]);
                 }
@@ -302,7 +323,7 @@ namespace Bridge.Translator
 
                 foreach (var method in group)
                 {
-                    if (!method.Body.IsNull)
+                    if (!method.Body.IsNull && (!this.StaticBlock || !Helpers.IsEntryPointMethod(this.Emitter, group[0])))
                     {
                         this.Emitter.VisitMethodDeclaration(method);
                     }

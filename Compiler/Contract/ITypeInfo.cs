@@ -166,6 +166,7 @@ namespace Bridge.Contract
         }
 
         bool HasRealStatic(IEmitter emitter);
+        bool HasRealInstantiable(IEmitter emitter);
 
         List<AstType> GetBaseTypes(IEmitter emitter);
 
