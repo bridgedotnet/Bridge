@@ -2,12 +2,7 @@
     
     Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner', {
         statics: {
-            config: {
-                init: function () {
-                    Bridge.ready(this.main);
-                }
-            },
-            main: function () {
+            $main: function () {
                 QUnit.test("ActivatorTests - NonGenericCreateInstanceWithoutArgumentsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ActivatorTests.nonGenericCreateInstanceWithoutArgumentsWorks);
                 QUnit.test("ActivatorTests - NonGenericCreateInstanceWithOneArgumentWorks_SPI_1540", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ActivatorTests.nonGenericCreateInstanceWithOneArgumentWorks_SPI_1540);
                 QUnit.test("ActivatorTests - NonGenericCreateInstanceWithTwoArgumentsWorks_SPI_1541", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ActivatorTests.nonGenericCreateInstanceWithTwoArgumentsWorks_SPI_1541);
@@ -1842,8 +1837,7 @@
                 QUnit.test("UserDefinedStructTests - CloningValueTypeWithNamedDefaultConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_UserDefinedStructTests.cloningValueTypeWithNamedDefaultConstructorWorks);
                 QUnit.test("UserDefinedStructTests - CloningNullableValueTypesWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_UserDefinedStructTests.cloningNullableValueTypesWorks);
             }
-        },
-        $entryPoint: true
+        }
     });
 
     Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ActivatorTests', {

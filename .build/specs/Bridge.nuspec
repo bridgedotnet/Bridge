@@ -22,12 +22,12 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="..\..\README.md" target="README.md"/>
-    <file src="..\..\LICENSE" target="LICENSE"/>
-    
+    <file src="../../README.md" target="README.md"/>
+    <file src="../../LICENSE" target="LICENSE"/>
+
     <!--content-->
-    <file src="..\..\.build\files\bridge.json" target="content\Bridge\bridge.json"/>
-    <file src="..\..\.build\files\output_readme.txt" target="content\Bridge\output\readme.txt"/>
-    <file src="..\..\.build\files\demo.html.pp" target="content\Bridge\www\demo.html.pp"/>
+    <file src="../../.build/files/bridge.json" target="content/Bridge/bridge.json"/>
+    <file src="../../.build/files/output_readme.txt" target="content/Bridge/output/readme.txt"/>
+    <file src="../../.build/files/demo.html.pp" target="content/Bridge/www/demo.html.pp"/>
   </files>
 </package>

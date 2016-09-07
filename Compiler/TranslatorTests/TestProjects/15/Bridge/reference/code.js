@@ -1,6 +1,10 @@
 ﻿Bridge.initAssembly("TestProject", function ($asm, globals) {
     "use strict";
 
+    Bridge.define('TestProject1.ExistsIfTest1Defined');
+
+    Bridge.define('TestProject1.ExistsIfTest2Defined');
+
     Bridge.define('TestProject1.TestClassA', {
         config: {
             properties: {
@@ -38,7 +42,7 @@
          * @param   {number}    i    Number of somethng
          * @return  {string}         A good string
          */
-        getMyValue: function (i) {
+        GetMyValue: function (i) {
             return "";
         }
     });

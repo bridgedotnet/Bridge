@@ -6,11 +6,11 @@
                 var l = System.Int64(v);
                 l = System.Int64(v);
 
-                System.Console.log(System.Int64(v).toString());
-                System.Console.log(System.Int64((v)).toString());
-                System.Console.log(System.Int64(2).toString());
-                System.Console.log(System.Int64(2).toString());
-                System.Console.log(System.Int64(7).toString());
+                Bridge.Console.log(System.Int64(v).toString());
+                Bridge.Console.log(System.Int64((v)).toString());
+                Bridge.Console.log(System.Int64(2).toString());
+                Bridge.Console.log(System.Int64(2).toString());
+                Bridge.Console.log(System.Int64(7).toString());
                 TestIssue1230.Issue1230.methodLong(System.Int64(v));
                 TestIssue1230.Issue1230.methodLong(System.Int64(v));
             },
@@ -26,11 +26,11 @@
                 var l = System.Decimal(v);
                 l = System.Decimal(v);
 
-                System.Console.log(System.Decimal(v).toString());
-                System.Console.log(System.Decimal((v)).toString());
-                System.Console.log(System.Decimal(2.0).toString());
-                System.Console.log(System.Decimal(2.0).toString());
-                System.Console.log(System.Decimal(7.0).toString());
+                Bridge.Console.log(System.Decimal(v).toString());
+                Bridge.Console.log(System.Decimal((v)).toString());
+                Bridge.Console.log(System.Decimal(2.0).toString());
+                Bridge.Console.log(System.Decimal(2.0).toString());
+                Bridge.Console.log(System.Decimal(7.0).toString());
                 TestIssue1230.Issue1230.methodDecimal(System.Decimal(v));
                 TestIssue1230.Issue1230.methodDecimal(System.Decimal(v));
             },
@@ -39,11 +39,11 @@
                 var l = v;
                 l = v;
 
-                System.Console.log(v);
-                System.Console.log((v));
-                System.Console.log(2);
-                System.Console.log(2);
-                System.Console.log(7);
+                Bridge.Console.log(v);
+                Bridge.Console.log((v));
+                Bridge.Console.log(2);
+                Bridge.Console.log(2);
+                Bridge.Console.log(7);
                 TestIssue1230.Issue1230.methodInt(v);
                 TestIssue1230.Issue1230.methodInt(v);
             }

@@ -2,12 +2,7 @@
     
     Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner', {
         statics: {
-            config: {
-                init: function () {
-                    Bridge.ready(this.main);
-                }
-            },
-            main: function () {
+            $main: function () {
                 QUnit.module("Issues3");
                 QUnit.test("#69 - ThisKeywordInStructConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge069.thisKeywordInStructConstructorWorks);
                 QUnit.test("#1000 - TestStaticViaChild", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1000.testStaticViaChild);
@@ -203,6 +198,7 @@
                 QUnit.test("#1448 - TestPlainForNonAnonymous", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1448.testPlainForNonAnonymous);
                 QUnit.test("#1448 - TestObjectLiteralProperty", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1448.testObjectLiteralProperty);
                 QUnit.test("#1448 - TestToObjectLiteralAlias", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1448.testToObjectLiteralAlias);
+                QUnit.test("#1458 - TestConsoleWriteLineForLong", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1458.testConsoleWriteLineForLong);
                 QUnit.test("#1459 - TestHtmlElements", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1459.testHtmlElements);
                 QUnit.test("#1467 - TestForeachTypeChecking", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1467.testForeachTypeChecking);
                 QUnit.test("#1472 - TestMultiplyThisInTemplate", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1472.testMultiplyThisInTemplate);
@@ -464,8 +460,7 @@
                 QUnit.test("#470", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues.n470);
                 QUnit.test("#499", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues.n499);
             }
-        },
-        $entryPoint: true
+        }
     });
 
     Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge069', {
@@ -1857,6 +1852,27 @@
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1448).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1448, 7);
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1448.testToObjectLiteralAlias();
             }
+        }
+    });
+
+    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1458', {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458)],
+        statics: {
+            testConsoleWriteLineForLong: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1458, 1);
+                try {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458.testConsoleWriteLineForLong();
+                }
+                finally {
+                    t.tearDown();
+                }
+            }
+        },
+        setUp: function () {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458.clearOutput();
+        },
+        tearDown: function () {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458.resetOutput();
         }
     });
 

@@ -7,7 +7,7 @@
   "logging": {
     "level": "None"
   },
-    "resources": [
+  "resources": [
     {
       "name": "bridge.js",
       "extract": false

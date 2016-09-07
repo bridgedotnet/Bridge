@@ -13,7 +13,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -250097448;
+            hash = hash * 23 + 6481214800;
             hash = hash * 23 + (this.Data == null ? 0 : Bridge.getHashCode(this.Data));
             return hash;
         },

@@ -372,8 +372,6 @@ namespace Bridge.Contract
             this.Type = this.Member.DeclaringType;
             this.IsSetter = isSetter;
             this.InitMembers();
-            string key = (member.MemberDefinition != null ? member.MemberDefinition.GetHashCode().ToString() : member.GetHashCode().ToString()) + isSetter.GetHashCode().ToString();
-            //this.Emitter.OverloadsCache[key] = this;
         }
 
         public List<IMethod> Methods

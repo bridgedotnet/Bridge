@@ -21,30 +21,30 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="..\..\README.md" target="README.md"/>
-    <file src="..\..\LICENSE" target="LICENSE"/>
+    <file src="../../README.md" target="README.md"/>
+    <file src="../../LICENSE" target="LICENSE"/>
     
     <!--build-->
-    <file src="..\..\.build\files\Bridge.Min.targets" target="build\Bridge.Min.targets"/>
+    <file src="../../.build/files/Bridge.Min.targets" target="build/Bridge.Min.targets"/>
 
     <!--tools-->
-    <file src="..\..\Compiler\Build\bin\Release\Bridge.Build.dll" target="tools\Bridge.Builder.dll"/>
-    <file src="..\..\Compiler\Build\bin\Release\Bridge.Contract.dll" target="tools\Bridge.Contract.dll"/>
-    <file src="..\..\Compiler\Build\bin\Release\Bridge.Translator.dll" target="tools\Bridge.Translator.dll"/>
-    <file src="..\..\Compiler\Build\bin\Release\AjaxMin.dll" target="tools\AjaxMin.dll"/>
-    <file src="..\..\Compiler\Build\bin\Release\ICSharpCode.NRefactory.Cecil.dll" target="tools\ICSharpCode.NRefactory.Cecil.dll"/>
-    <file src="..\..\Compiler\Build\bin\Release\ICSharpCode.NRefactory.CSharp.dll" target="tools\ICSharpCode.NRefactory.CSharp.dll"/>
-    <file src="..\..\Compiler\Build\bin\Release\ICSharpCode.NRefactory.dll" target="tools\ICSharpCode.NRefactory.dll"/>
-    <file src="..\..\Compiler\Build\bin\Release\Microsoft.CodeAnalysis.CSharp.dll" target="tools\Microsoft.CodeAnalysis.CSharp.dll"/>
-    <file src="..\..\Compiler\Build\bin\Release\Microsoft.CodeAnalysis.dll" target="tools\Microsoft.CodeAnalysis.dll"/>
-    <file src="..\..\Compiler\Build\bin\Release\Mono.Cecil.dll" target="tools\Mono.Cecil.dll"/>
-    <file src="..\..\Compiler\Contract\bin\Release\Mono.Cecil.Mdb.dll" target="tools\Mono.Cecil.Mdb.dll"/>
-    <file src="..\..\Compiler\Contract\bin\Release\Mono.Cecil.Pdb.dll" target="tools\Mono.Cecil.Pdb.dll"/>
-    <file src="..\..\Compiler\Contract\bin\Release\Mono.Cecil.Rocks.dll" target="tools\Mono.Cecil.Rocks.dll"/>    
-    <file src="..\..\Compiler\Build\bin\Release\Newtonsoft.Json.dll" target="tools\Newtonsoft.Json.dll"/>
-    <file src="..\..\Compiler\Build\bin\Release\Object.Net.Utilities.dll" target="tools\Object.Net.Utilities.dll"/>
-    <file src="..\..\Compiler\Build\bin\Release\System.Collections.Immutable.dll" target="tools\System.Collections.Immutable.dll"/>
-    <file src="..\..\Compiler\Build\bin\Release\System.Reflection.Metadata.dll" target="tools\System.Reflection.Metadata.dll"/>
-    <file src="..\..\Compiler\Build\bin\Release\TopologicalSorting.dll" target="tools\TopologicalSorting.dll"/>
+    <file src="../../Compiler/Build/bin/Release/Bridge.Build.dll" target="tools/Bridge.Builder.dll"/>
+    <file src="../../Compiler/Build/bin/Release/Bridge.Contract.dll" target="tools/Bridge.Contract.dll"/>
+    <file src="../../Compiler/Build/bin/Release/Bridge.Translator.dll" target="tools/Bridge.Translator.dll"/>
+    <file src="../../Compiler/Build/bin/Release/AjaxMin.dll" target="tools/AjaxMin.dll"/>
+    <file src="../../Compiler/Build/bin/Release/ICSharpCode.NRefactory.Cecil.dll" target="tools/ICSharpCode.NRefactory.Cecil.dll"/>
+    <file src="../../Compiler/Build/bin/Release/ICSharpCode.NRefactory.CSharp.dll" target="tools/ICSharpCode.NRefactory.CSharp.dll"/>
+    <file src="../../Compiler/Build/bin/Release/ICSharpCode.NRefactory.dll" target="tools/ICSharpCode.NRefactory.dll"/>
+    <file src="../../Compiler/Build/bin/Release/Microsoft.CodeAnalysis.CSharp.dll" target="tools/Microsoft.CodeAnalysis.CSharp.dll"/>
+    <file src="../../Compiler/Build/bin/Release/Microsoft.CodeAnalysis.dll" target="tools/Microsoft.CodeAnalysis.dll"/>
+    <file src="../../Compiler/Build/bin/Release/Mono.Cecil.dll" target="tools/Mono.Cecil.dll"/>
+    <file src="../../Compiler/Contract/bin/Release/Mono.Cecil.Mdb.dll" target="tools/Mono.Cecil.Mdb.dll"/>
+    <file src="../../Compiler/Contract/bin/Release/Mono.Cecil.Pdb.dll" target="tools/Mono.Cecil.Pdb.dll"/>
+    <file src="../../Compiler/Contract/bin/Release/Mono.Cecil.Rocks.dll" target="tools/Mono.Cecil.Rocks.dll"/>    
+    <file src="../../Compiler/Build/bin/Release/Newtonsoft.Json.dll" target="tools/Newtonsoft.Json.dll"/>
+    <file src="../../Compiler/Build/bin/Release/Object.Net.Utilities.dll" target="tools/Object.Net.Utilities.dll"/>
+    <file src="../../Compiler/Build/bin/Release/System.Collections.Immutable.dll" target="tools/System.Collections.Immutable.dll"/>
+    <file src="../../Compiler/Build/bin/Release/System.Reflection.Metadata.dll" target="tools/System.Reflection.Metadata.dll"/>
+    <file src="../../Compiler/Build/bin/Release/TopologicalSorting.dll" target="tools/TopologicalSorting.dll"/>
   </files>
 </package>

@@ -3,5 +3,11 @@
   "cleanOutputFolderBeforeBuild": true,
   "outputBy": "Namespace",
   "generateTypeScript": "true",
-  "outputFormatting": "Formatted"
+  "outputFormatting": "Formatted",
+  "resources": [
+    {
+      "name": "bridge.js",
+      "extract": false
+    }
+  ]
 }
