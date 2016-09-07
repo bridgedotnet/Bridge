@@ -10,7 +10,6 @@ namespace Bridge.Utils
     {
         // Unfortunately we have to use dynamic types
         // because Bridge.Html5 Assembly is not available here.
-        private dynamic window = Script.Get<dynamic>("window");
 
         private dynamic document = Script.Get<dynamic>("document");
         private dynamic body = Script.Get<dynamic>("document").body;
@@ -346,7 +345,7 @@ namespace Bridge.Utils
         {
             // get body margin and padding for proper alignment of scroll if a body margin/padding is used.
             // TODO: .CurrentStyle only supported in IE6?
-            var bodyStyle = body.currentStyle || window.getComputedStyle(body);
+            var bodyStyle = body.currentStyle || document.defaultView.getComputedStyle(body, null);
 
             var bodyPaddingTop = bodyStyle.paddingTop;
             var bodyPaddingRight = bodyStyle.paddingRight;

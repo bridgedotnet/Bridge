@@ -69,7 +69,6 @@
                 }
             }
         },
-        window: null,
         document: null,
         body: null,
         svgNS: "http://www.w3.org/2000/svg",
@@ -81,7 +80,6 @@
         hidden: true,
         config: {
             init: function () {
-                this.window = window;
                 this.document = document;
                 this.body = document.body;
             }
@@ -227,7 +225,7 @@
         wrapBodyContent: function () {
             // get body margin and padding for proper alignment of scroll if a body margin/padding is used.
             // TODO: .CurrentStyle only supported in IE6?
-            var bodyStyle = this.body.currentStyle || this.window.getComputedStyle(this.body);
+            var bodyStyle = this.body.currentStyle || this.document.defaultView.getComputedStyle(this.body, null);
 
             var bodyPaddingTop = bodyStyle.paddingTop;
             var bodyPaddingRight = bodyStyle.paddingRight;
