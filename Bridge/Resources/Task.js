@@ -7,7 +7,7 @@
             ]
         },
 
-        constructor: function (action, state) {
+        ctor: function (action, state) {
             this.$initialize();
             this.action = action;
             this.state = state;
@@ -366,7 +366,7 @@
     });
 
     Bridge.define("System.Threading.Tasks.TaskCompletionSource", {
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
             this.task = new System.Threading.Tasks.Task();
             this.task.status = System.Threading.Tasks.TaskStatus.running;
@@ -410,7 +410,7 @@
     Bridge.define("System.Threading.CancellationToken", {
          $kind: "struct",
 
-        constructor: function (source) {
+        ctor: function (source) {
             this.$initialize();
             if (!Bridge.is(source, System.Threading.CancellationTokenSource)) {
                 source = source ? System.Threading.CancellationToken.sourceTrue : System.Threading.CancellationToken.sourceFalse;
@@ -486,7 +486,7 @@
             ]
         },
 
-        constructor: function (cts, o) {
+        ctor: function (cts, o) {
             this.$initialize();
             this.cts = cts;
             this.o = o;
@@ -523,7 +523,7 @@
             ]
         },
 
-        constructor: function (delay) {
+        ctor: function (delay) {
             this.$initialize();
             this.timeout = typeof delay === "number" && delay >= 0 ? setTimeout(Bridge.fn.bind(this, this.cancel), delay, -1) : null;
             this.isCancellationRequested = false;

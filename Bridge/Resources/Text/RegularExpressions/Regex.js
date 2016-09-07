@@ -43,7 +43,7 @@
             },
 
             isMatch$2: function (input, pattern, options, matchTimeout) {
-                var regex = new System.Text.RegularExpressions.Regex.$constructor3(pattern, options, matchTimeout, true);
+                var regex = new System.Text.RegularExpressions.Regex.$ctor3(pattern, options, matchTimeout, true);
                 return regex.isMatch(input);
             },
 
@@ -58,7 +58,7 @@
             },
 
             match$2: function (input, pattern, options, matchTimeout) {
-                var regex = new System.Text.RegularExpressions.Regex.$constructor3(pattern, options, matchTimeout, true);
+                var regex = new System.Text.RegularExpressions.Regex.$ctor3(pattern, options, matchTimeout, true);
                 return regex.match(input);
             },
 
@@ -73,7 +73,7 @@
             },
 
             matches$2: function (input, pattern, options, matchTimeout) {
-                var regex = new System.Text.RegularExpressions.Regex.$constructor3(pattern, options, matchTimeout, true);
+                var regex = new System.Text.RegularExpressions.Regex.$ctor3(pattern, options, matchTimeout, true);
                 return regex.matches(input);
             },
 
@@ -88,7 +88,7 @@
             },
 
             replace$2: function (input, pattern, replacement, options, matchTimeout) {
-                var regex = new System.Text.RegularExpressions.Regex.$constructor3(pattern, options, matchTimeout, true);
+                var regex = new System.Text.RegularExpressions.Regex.$ctor3(pattern, options, matchTimeout, true);
                 return regex.replace(input, replacement);
             },
 
@@ -103,7 +103,7 @@
             },
 
             replace$5: function (input, pattern, evaluator, options, matchTimeout) {
-                var regex = new System.Text.RegularExpressions.Regex.$constructor3(pattern, options, matchTimeout, true);
+                var regex = new System.Text.RegularExpressions.Regex.$ctor3(pattern, options, matchTimeout, true);
                 return regex.replace$3(input, evaluator);
             },
 
@@ -118,7 +118,7 @@
             },
 
             split$2: function (input, pattern, options, matchTimeout) {
-                var regex = new System.Text.RegularExpressions.Regex.$constructor3(pattern, options, matchTimeout, true);
+                var regex = new System.Text.RegularExpressions.Regex.$ctor3(pattern, options, matchTimeout, true);
                 return regex.split(input);
             }
         },
@@ -137,19 +137,19 @@
             }
         },
 
-        constructor: function (pattern) {
-            this.$constructor1(pattern, System.Text.RegularExpressions.RegexOptions.None);
+        ctor: function (pattern) {
+            this.$ctor1(pattern, System.Text.RegularExpressions.RegexOptions.None);
         },
 
-        $constructor1: function (pattern, options) {
-            this.$constructor2(pattern, options, System.TimeSpan.fromMilliseconds(-1));
+        $ctor1: function (pattern, options) {
+            this.$ctor2(pattern, options, System.TimeSpan.fromMilliseconds(-1));
         },
 
-        $constructor2: function (pattern, options, matchTimeout) {
-            this.$constructor3(pattern, options, matchTimeout, false);
+        $ctor2: function (pattern, options, matchTimeout) {
+            this.$ctor3(pattern, options, matchTimeout, false);
         },
 
-        $constructor3: function (pattern, options, matchTimeout, useCache) {
+        $ctor3: function (pattern, options, matchTimeout, useCache) {
             this.$initialize();
             var scope = System.Text.RegularExpressions;
 

@@ -5,7 +5,7 @@
         passes: null,
         groups: null, // captured groups
 
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
 
             this.passes = [];

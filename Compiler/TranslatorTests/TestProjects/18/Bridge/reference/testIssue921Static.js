@@ -1,6 +1,6 @@
 ﻿    Bridge.define('TestIssue921Static.Issue921Static', {
         statics: {
-            constructor: function () {
+            ctor: function () {
                 TestIssue921Static.Issue921Static._offset = 10;
             },
             _offset: 0,

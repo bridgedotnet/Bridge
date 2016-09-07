@@ -201,7 +201,7 @@
         _strings: [], // table of string constants
         _rules: [], // negative -> group #, positive -> string #
 
-        constructor: function (rep, concat, caps) {
+        ctor: function (rep, concat, caps) {
             this.$initialize();
             this._rep = rep;
 

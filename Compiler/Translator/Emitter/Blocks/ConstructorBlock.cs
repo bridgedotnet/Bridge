@@ -512,11 +512,6 @@ namespace Bridge.Translator
                     }
                 }
 
-                if (baseName == JS.Funcs.CONSTRUCTOR)
-                {
-                    baseName = JS.Funcs.DCONSTRUCTOR;
-                }
-
                 string name = null;
 
                 if (this.TypeInfo.GetBaseTypes(this.Emitter).Any())
@@ -546,11 +541,6 @@ namespace Bridge.Translator
                 if (overloads.HasOverloads)
                 {
                     baseName = overloads.GetOverloadName();
-                }
-
-                if (baseName == JS.Funcs.CONSTRUCTOR)
-                {
-                    baseName = JS.Funcs.DCONSTRUCTOR;
                 }
 
                 this.Write(baseName);

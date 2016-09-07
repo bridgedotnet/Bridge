@@ -163,16 +163,16 @@
             }
 
             var Class,
-                cls = prop.hasOwnProperty("constructor") && prop.constructor || prop.$constructor;
+                cls = prop.hasOwnProperty("ctor") && prop.ctor;
 
             if (!cls) {
                 Class = function () {
                     this.$initialize();
                     if (Class.$base) {
-                        Class.$base.$constructor.call(this);
+                        Class.$base.ctor.call(this);
                     }
                 };
-                prop.constructor = Class;
+                prop.ctor = Class;
             } else {
                 Class = cls;
             }
@@ -287,10 +287,10 @@
                 name = keys[i];
 
                 v = prop[name];
-                isCtor = name === "constructor";
-                ctorName = isCtor ? "$constructor" : name;
+                isCtor = name === "ctor";
+                ctorName = name;
 
-                if (Bridge.isFunction(v) && (isCtor || name.match("^\\$constructor") !== null)) {
+                if (Bridge.isFunction(v) && (isCtor || name.match("^\\$ctor") !== null)) {
                     isCtor = true;
                 }
 
@@ -308,7 +308,11 @@
 
             if (statics) {
                 for (name in statics) {
-                    Class[name] = statics[name];
+                    if (name === "ctor") {
+                        Class["$ctor"] = statics[name];
+                    } else {
+                        Class[name] = statics[name];
+                    }
                 }
             }
 
@@ -336,8 +340,8 @@
                         Class.$initMembers();
                     }
 
-                    if (Class.constructor) {
-                        Class.constructor();
+                    if (Class.$ctor) {
+                        Class.$ctor();
                     }
                 }
             };

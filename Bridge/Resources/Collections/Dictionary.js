@@ -1,6 +1,6 @@
 ﻿    Bridge.define('System.Collections.Generic.KeyValuePair$2', function (TKey, TValue) {
         return {
-            constructor: function (key, value) {
+            ctor: function (key, value) {
                 this.$initialize();
                 this.key = key;
                 this.value = value;
@@ -45,7 +45,7 @@
                 ]
             },
 
-            constructor: function (obj, comparer) {
+            ctor: function (obj, comparer) {
                 this.$initialize();
                 this.comparer = comparer || System.Collections.Generic.EqualityComparer$1.$default;
                 this.clear();
@@ -259,7 +259,7 @@
                 ]
             },
 
-            constructor: function (dictionary, keys) {
+            ctor: function (dictionary, keys) {
                 this.$initialize();
                 this.dictionary = dictionary;
                 this.keys = keys;

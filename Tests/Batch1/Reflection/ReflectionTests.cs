@@ -807,9 +807,9 @@ namespace Bridge.ClientTest.Reflection
             var c11 = typeof(C11).GetMembers();
             var c19 = typeof(C19).GetMembers();
             var c20 = typeof(C20).GetMembers();
-            Assert.True(((ConstructorInfo)c10[0]).ScriptName == "$constructor", "Unnamed");
-            Assert.AreEqual(((ConstructorInfo)c10[1]).ScriptName, "$constructor1", "Named");
-            Assert.AreEqual(((ConstructorInfo)c11[0]).ScriptName, "$constructor", "Static method");
+            Assert.True(((ConstructorInfo)c10[0]).ScriptName == "ctor", "Unnamed");
+            Assert.AreEqual(((ConstructorInfo)c10[1]).ScriptName, "$ctor1", "Named");
+            Assert.AreEqual(((ConstructorInfo)c11[0]).ScriptName, "ctor", "Static method");
             Assert.True(((ConstructorInfo)c19[0]).ScriptName == null, "Object literal");
             Assert.True(((ConstructorInfo)c20[0]).ScriptName == null, "Inline code");
         }

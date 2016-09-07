@@ -4,10 +4,10 @@
 
 QUnit.module("TypeScript - Classes");
 QUnit.test("Inheritance", function (assert) {
-    var animal = new Classes.Animal.$constructor();
+    var animal = new Classes.Animal.ctor();
     assert.deepEqual(animal.getName(), "Animal", "Animal name parameterless constructor");
 
-    animal = new Classes.Animal.$constructor1("A");
+    animal = new Classes.Animal.$ctor1("A");
     assert.deepEqual(animal.getName(), "A", "Animal name");
     // TODO #292 Should not require optional parameters
     assert.deepEqual(animal.move(), 1, "Animal move");
@@ -45,7 +45,7 @@ QUnit.test("Inheritance", function (assert) {
 });
 
 QUnit.test("Static", function (assert) {
-    var point1: Classes.Point = new Classes.Point.$constructor1(10, 20);
+    var point1: Classes.Point = new Classes.Point.$ctor1(10, 20);
     assert.deepEqual(point1.x, 10, "Point x field");
     assert.deepEqual(point1.y, 20, "Point y field");
 

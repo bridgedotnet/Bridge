@@ -750,11 +750,6 @@ namespace Bridge.Contract
 
         public static string ChangeReservedWord(string name)
         {
-            if (name == JS.Funcs.CONSTRUCTOR)
-            {
-                return JS.Funcs.DCONSTRUCTOR + JS.Vars.D;
-            }
-
             return Helpers.PrefixDollar(name);
         }
 

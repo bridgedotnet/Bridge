@@ -18,7 +18,7 @@
                 ]
             },
 
-            constructor: function (obj) {
+            ctor: function (obj) {
                 this.$initialize();
                 if (Object.prototype.toString.call(obj) === '[object Array]') {
                     this.items = System.Array.clone(obj);
@@ -297,13 +297,13 @@
     Bridge.define('System.Collections.ObjectModel.ReadOnlyCollection$1', function (T) {
         return {
             inherits: [System.Collections.Generic.List$1(T)],
-            constructor: function (list) {
+            ctor: function (list) {
                 this.$initialize();
                 if (list == null) {
                     throw new System.ArgumentNullException("list");
                 }
 
-                System.Collections.Generic.List$1(T).$constructor.call(this, list);
+                System.Collections.Generic.List$1(T).ctor.call(this, list);
                 this.readOnly = true;
             }
         };

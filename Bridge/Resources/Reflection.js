@@ -26,7 +26,7 @@
             assemblies: {}
         },
 
-        constructor: function (name, res) {
+        ctor: function (name, res) {
             this.$initialize();
             this.name = name;
             this.res = res || {};
