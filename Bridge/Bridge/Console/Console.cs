@@ -72,6 +72,15 @@ namespace Bridge.Utils
 
         #endregion HTML Wrappers
 
+        [External]
+        [Enum(Emit.Value)]
+        private enum MessageType
+        {
+            Info,
+            Debug,
+            Error
+        }
+
         private string svgNS = "http://www.w3.org/2000/svg";
 
         // for horizontal position
@@ -259,7 +268,7 @@ namespace Bridge.Utils
             closeBtn.AddEventListener("mouseout", (Action)this.HideTooltip);
         }
 
-        private static void LogBase(object value, string messageType = "info")
+        private static void LogBase(object value, MessageType messageType = MessageType.Info)
         {
             var self = Instance;
 
@@ -280,7 +289,7 @@ namespace Bridge.Utils
 
             if (Script.IsDefined("Bridge.global") && Script.IsDefined("Bridge.global.console"))
             {
-                if (messageType == "debug" && Script.IsDefined("Bridge.global.console.debug"))
+                if (messageType == MessageType.Debug && Script.IsDefined("Bridge.global.console.debug"))
                 {
                     Script.Write("Bridge.global.console.debug(value);");
                 }
@@ -297,12 +306,12 @@ namespace Bridge.Utils
 
         public static void Error(string value)
         {
-            LogBase(value, "error");
+            LogBase(value, MessageType.Error);
         }
 
         public static void Debug(string value)
         {
-            LogBase(value, "debug");
+            LogBase(value, MessageType.Debug);
         }
 
         [External]
@@ -458,7 +467,7 @@ namespace Bridge.Utils
         /// <param name="message"></param>
         /// <param name="messageType"></param>
         /// <returns></returns>
-        private Element BuildConsoleMessage(string message, string messageType)
+        private Element BuildConsoleMessage(string message, MessageType messageType)
         {
             var messageItem = Document.CreateElement("li");
             messageItem.SetAttribute("style", "padding: 5px 10px;border-bottom: 1px solid #f0f0f0;");
@@ -478,11 +487,11 @@ namespace Bridge.Utils
 
             var color = "#555";
 
-            if (messageType == "error")
+            if (messageType == MessageType.Error)
             {
                 color = "#d65050";
             }
-            else if (messageType == "debug")
+            else if (messageType == MessageType.Debug)
             {
                 color = "#1800FF";
             }

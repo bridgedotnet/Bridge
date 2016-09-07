@@ -22413,7 +22413,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 return Bridge.Console.instance;
             },
             logBase: function (value, messageType) {
-                if (messageType === void 0) { messageType = "info"; }
+                if (messageType === void 0) { messageType = 0; }
                 var self = Bridge.Console.getInstance();
 
                 if (self.debugOutput != null) {
@@ -22430,7 +22430,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 el.appendChild(self.buildConsoleMessage(value.toString(), messageType));
 
                 if (Bridge.isDefined("Bridge.global") && Bridge.isDefined("Bridge.global.console")) {
-                    if (Bridge.referenceEquals(messageType, "debug") && Bridge.isDefined("Bridge.global.console.debug")) {
+                    if (messageType === 1 && Bridge.isDefined("Bridge.global.console.debug")) {
                         Bridge.global.console.debug(value);
                     } else {
                         Bridge.global.console.log(value);
@@ -22440,10 +22440,10 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 }
             },
             error: function (value) {
-                Bridge.Console.logBase(value, "error");
+                Bridge.Console.logBase(value, 2);
             },
             debug: function (value) {
-                Bridge.Console.logBase(value, "debug");
+                Bridge.Console.logBase(value, 1);
             },
             log: function (value) {
                 Bridge.Console.logBase(value);
@@ -22661,9 +22661,9 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
             var color = "#555";
 
-            if (Bridge.referenceEquals(messageType, "error")) {
+            if (messageType === 2) {
                 color = "#d65050";
-            } else if (Bridge.referenceEquals(messageType, "debug")) {
+            } else if (messageType === 1) {
                 color = "#1800FF";
             }
 
