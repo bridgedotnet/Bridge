@@ -3588,52 +3588,57 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304', {
         statics: {
-            output: null,
+            getOutput: function () {
+                return Bridge.Console.getInstance().debugOutput;
+            },
+            setOutput: function (value) {
+                Bridge.Console.getInstance().debugOutput = value;
+            },
             clearOutput: function () {
-                System.Console.output = "";
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.setOutput("");
             },
             resetOutput: function () {
-                System.Console.output = null;
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.setOutput(null);
             },
             testWriteFormatString: function () {
                 Bridge.Console.log(System.String.format("{0}", 1));
-                Bridge.Test.Assert.areEqual("1", System.Console.output);
+                Bridge.Test.Assert.areEqual("1", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.getOutput());
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.clearOutput();
 
                 Bridge.Console.log(System.String.format("{0} {1}", 1, 2));
-                Bridge.Test.Assert.areEqual("1 2", System.Console.output);
+                Bridge.Test.Assert.areEqual("1 2", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.getOutput());
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.clearOutput();
 
                 Bridge.Console.log(System.String.format("{0} {1} {2}", 1, 2, 3));
-                Bridge.Test.Assert.areEqual("1 2 3", System.Console.output);
+                Bridge.Test.Assert.areEqual("1 2 3", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.getOutput());
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.clearOutput();
 
                 Bridge.Console.log(System.String.format("{0} {1} {2} {3}", 1, 2, 3, 4));
-                Bridge.Test.Assert.areEqual("1 2 3 4", System.Console.output);
+                Bridge.Test.Assert.areEqual("1 2 3 4", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.getOutput());
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.clearOutput();
 
                 Bridge.Console.log(System.String.format("{0} {1} {2} {3} {4}", 1, 2, 3, 4, "5"));
-                Bridge.Test.Assert.areEqual("1 2 3 4 5", System.Console.output);
+                Bridge.Test.Assert.areEqual("1 2 3 4 5", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.getOutput());
             },
             testWriteLineFormatString: function () {
                 Bridge.Console.log(System.String.format("{0}", 1));
-                Bridge.Test.Assert.areEqual("1", System.Console.output);
+                Bridge.Test.Assert.areEqual("1", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.getOutput());
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.clearOutput();
 
                 Bridge.Console.log(System.String.format("{0} {1}", 1, 2));
-                Bridge.Test.Assert.areEqual("1 2", System.Console.output);
+                Bridge.Test.Assert.areEqual("1 2", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.getOutput());
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.clearOutput();
 
                 Bridge.Console.log(System.String.format("{0} {1} {2}", 1, 2, 3));
-                Bridge.Test.Assert.areEqual("1 2 3", System.Console.output);
+                Bridge.Test.Assert.areEqual("1 2 3", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.getOutput());
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.clearOutput();
 
                 Bridge.Console.log(System.String.format("{0} {1} {2} {3}", 1, 2, 3, 4));
-                Bridge.Test.Assert.areEqual("1 2 3 4", System.Console.output);
+                Bridge.Test.Assert.areEqual("1 2 3 4", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.getOutput());
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.clearOutput();
 
                 Bridge.Console.log(System.String.format("{0} {1} {2} {3} {4}", 1, 2, 3, 4, "5"));
-                Bridge.Test.Assert.areEqual("1 2 3 4 5", System.Console.output);
+                Bridge.Test.Assert.areEqual("1 2 3 4 5", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.getOutput());
             }
         }
     });
@@ -6012,18 +6017,23 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458', {
         statics: {
-            output: null,
+            getOutput: function () {
+                return Bridge.Console.getInstance().debugOutput;
+            },
+            setOutput: function (value) {
+                Bridge.Console.getInstance().debugOutput = value;
+            },
             clearOutput: function () {
-                System.Console.output = "";
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458.setOutput("");
             },
             resetOutput: function () {
-                System.Console.output = null;
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458.setOutput(null);
             },
             testConsoleWriteLineForLong: function () {
                 var v = System.Int64(1);
 
                 Bridge.Console.log(v);
-                Bridge.Test.Assert.areEqual("1", System.Console.output);
+                Bridge.Test.Assert.areEqual("1", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458.getOutput());
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458.clearOutput();
             }
         }
@@ -7127,6 +7137,20 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     });
 
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1698', {
+        statics: {
+            getOutput: function () {
+                return Bridge.Console.getInstance().debugOutput;
+            },
+            setOutput: function (value) {
+                Bridge.Console.getInstance().debugOutput = value;
+            },
+            clearOutput: function () {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1698.setOutput("");
+            },
+            resetOutput: function () {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1698.setOutput(null);
+            }
+        },
         testReflectionForNativeTypes: function () {
             var t = Bridge.Reflection.getMembers(console, 8, 284, "WriteLine", [String]);
 
@@ -7147,7 +7171,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             Bridge.Test.Assert.false$1((parameters[0].isOptional || false), "parameters[0] IsOptional");
 
             try {
-                Bridge.Reflection.midel(t, null).apply(null, ["Hello"]);
+                Bridge.Reflection.midel(t, null).apply(null, ["Test #1698"]);
                 Bridge.Test.Assert.true$1(true, "Method executed");
             }
             catch (ex) {

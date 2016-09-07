@@ -9,6 +9,31 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#1698 - {0}")]
     public class Bridge1698
     {
+        private static string Output
+        {
+            get
+            {
+                return Bridge.Utils.Console.Instance.DebugOutput;
+            }
+
+            set
+            {
+                Bridge.Utils.Console.Instance.DebugOutput = value;
+            }
+        }
+
+        [SetUp]
+        public static void ClearOutput()
+        {
+            Output = "";
+        }
+
+        [TearDown]
+        public static void ResetOutput()
+        {
+            Output = null;
+        }
+
         [Test(ExpectedCount = 14)]
         public void TestReflectionForNativeTypes()
         {
@@ -32,7 +57,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             try
             {
-                t.Invoke(null, new[] { "Hello" });
+                t.Invoke(null, new[] { "Test #1698" });
                 Assert.True(true, "Method executed");
             }
             catch (Exception ex)

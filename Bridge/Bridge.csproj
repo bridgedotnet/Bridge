@@ -765,7 +765,6 @@
     <Content Include="Resources\.lib\LongLib.js" />
     <Content Include="Resources\Long.js" />
     <Content Include="Resources\Math.js" />
-    <Content Include="Resources\Console.js" />
     <Content Include="Resources\Text\RegularExpressions\Regex.js" />
     <Content Include="Resources\Text\RegularExpressions\RegexEngineBranch.js" />
     <Content Include="Resources\Text\RegularExpressions\RegexEnginePass.js" />

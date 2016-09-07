@@ -42,6 +42,8 @@ namespace Bridge.Utils
             }
         }
 
+        public string DebugOutput;
+
         public void Init()
         {
             var consoleWrapperStyles = new Dictionary<string, string> {
@@ -203,6 +205,12 @@ namespace Bridge.Utils
         private static void LogBase(object value, string messageType = "info")
         {
             var self = Instance;
+
+            if (self.DebugOutput != null)
+            {
+                self.DebugOutput += value.ToString();
+                return;
+            }
 
             if (self.Hidden)
             {

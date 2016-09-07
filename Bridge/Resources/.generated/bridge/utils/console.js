@@ -14,6 +14,11 @@
                 if (messageType === void 0) { messageType = "info"; }
                 var self = Bridge.Console.getInstance();
 
+                if (self.debugOutput != null) {
+                    self.debugOutput = System.String.concat(self.debugOutput, (value.toString()));
+                    return;
+                }
+
                 if (self.hidden) {
                     Bridge.Console.show();
                 }
@@ -72,6 +77,7 @@
         consoleHeaderHeight: "35px",
         tooltip: null,
         consoleWrapper: null,
+        debugOutput: null,
         hidden: true,
         config: {
             init: function () {

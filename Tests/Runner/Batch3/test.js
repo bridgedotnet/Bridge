@@ -2251,8 +2251,19 @@
         statics: {
             testReflectionForNativeTypes: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1698).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1698, 14);
-                t.getFixture().testReflectionForNativeTypes();
+                try {
+                    t.getFixture().testReflectionForNativeTypes();
+                }
+                finally {
+                    t.tearDown();
+                }
             }
+        },
+        setUp: function () {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1698.clearOutput();
+        },
+        tearDown: function () {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1698.resetOutput();
         }
     });
 

@@ -22125,22 +22125,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     });
 
-    // @source Console.js
-
-    System.Console = {
-        output: null,
-
-        log: function (obj) {
-            if (System.Console.output != null) {
-                System.Console.output += obj;
-
-                return;
-            }
-
-            Bridge.Console.log(obj);
-        }
-    };
-
     // @source random.js
 
     Bridge.define('System.Random', {
@@ -22432,6 +22416,11 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 if (messageType === void 0) { messageType = "info"; }
                 var self = Bridge.Console.getInstance();
 
+                if (self.debugOutput != null) {
+                    self.debugOutput = System.String.concat(self.debugOutput, (value.toString()));
+                    return;
+                }
+
                 if (self.hidden) {
                     Bridge.Console.show();
                 }
@@ -22490,6 +22479,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         consoleHeaderHeight: "35px",
         tooltip: null,
         consoleWrapper: null,
+        debugOutput: null,
         hidden: true,
         config: {
             init: function () {

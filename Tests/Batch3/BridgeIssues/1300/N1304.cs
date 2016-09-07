@@ -7,8 +7,18 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#1304 - {0}")]
     public class Bridge1304
     {
-        [Template("System.Console.output")]
-        private static string Output;
+        private static string Output
+        {
+            get
+            {
+                return Bridge.Utils.Console.Instance.DebugOutput;
+            }
+
+            set
+            {
+                Bridge.Utils.Console.Instance.DebugOutput = value;
+            }
+        }
 
         [Bridge.Test.SetUp]
         public static void ClearOutput()
