@@ -224,8 +224,7 @@
         },
         wrapBodyContent: function () {
             // get body margin and padding for proper alignment of scroll if a body margin/padding is used.
-            // TODO: .CurrentStyle only supported in IE6?
-            var bodyStyle = this.body.currentStyle || this.document.defaultView.getComputedStyle(this.body, null);
+            var bodyStyle = this.document.defaultView.getComputedStyle(this.body, null);
 
             var bodyPaddingTop = bodyStyle.paddingTop;
             var bodyPaddingRight = bodyStyle.paddingRight;

@@ -344,8 +344,7 @@ namespace Bridge.Utils
         private void WrapBodyContent()
         {
             // get body margin and padding for proper alignment of scroll if a body margin/padding is used.
-            // TODO: .CurrentStyle only supported in IE6?
-            var bodyStyle = body.currentStyle || document.defaultView.getComputedStyle(body, null);
+            var bodyStyle = document.defaultView.getComputedStyle(body, null);
 
             var bodyPaddingTop = bodyStyle.paddingTop;
             var bodyPaddingRight = bodyStyle.paddingRight;
