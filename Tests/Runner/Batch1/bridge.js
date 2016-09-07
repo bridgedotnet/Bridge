@@ -22425,7 +22425,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     Bridge.Console.show();
                 }
 
-                var el = self.document.getElementById("bridge-console-messages");
+                var el = document.getElementById("bridge-console-messages");
 
                 el.appendChild(self.buildConsoleMessage(value.toString(), messageType));
 
@@ -22457,7 +22457,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 if (Bridge.referenceEquals(Bridge.Console.position, "horizontal")) {
                     self.unwrapBodyContent();
                 } else if (Bridge.referenceEquals(Bridge.Console.position, "vertical")) {
-                    self.body.removeAttribute("style");
+                    document.body.removeAttribute("style");
                 }
             },
             show: function () {
@@ -22471,8 +22471,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 }
             }
         },
-        document: null,
-        body: null,
         svgNS: "http://www.w3.org/2000/svg",
         consoleHeight: "300px",
         consoleHeaderHeight: "35px",
@@ -22480,12 +22478,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         consoleWrapper: null,
         debugOutput: null,
         hidden: true,
-        config: {
-            init: function () {
-                this.document = document;
-                this.body = document.body;
-            }
-        },
         constructor: function () {
             this.$initialize();
             this.init();
@@ -22498,13 +22490,13 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             var consoleBodyStyles = $_.Bridge.Console.f3(new (System.Collections.Generic.Dictionary$2(String,String))());
 
             // Bridge Icon
-            var bridgeIcon = this.document.createElementNS(this.svgNS, "svg");
+            var bridgeIcon = document.createElementNS(this.svgNS, "svg");
 
             var items = Bridge.fn.bind(this, $_.Bridge.Console.f4)(new (System.Collections.Generic.Dictionary$2(String,String))());
 
             this.setAttributes(bridgeIcon, items);
 
-            var bridgeIconPath = this.document.createElementNS(this.svgNS, "path");
+            var bridgeIconPath = document.createElementNS(this.svgNS, "path");
 
             var items2 = new (System.Collections.Generic.Dictionary$2(String,String))();
             items2.set("d", "M19 14.4h2.2V9.6L19 7.1v7.3zm4.3-2.5v2.5h2.2l-2.2-2.5zm-8.5 2.5H17V4.8l-2.2-2.5v12.1zM0 14.4h3l7.5-8.5v8.5h2.2V0L0 14.4z");
@@ -22515,26 +22507,26 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             bridgeIcon.appendChild(bridgeIconPath);
 
             // Bridge Console Label
-            var bridgeConsoleLabel = this.document.createElement("span");
+            var bridgeConsoleLabel = document.createElement("span");
             bridgeConsoleLabel.innerHTML = "Bridge Console";
 
             // Close Button
-            var closeBtn = this.document.createElement("span");
+            var closeBtn = document.createElement("span");
             closeBtn.setAttribute("style", "position: relative;display: inline-block;float: right;cursor: pointer");
 
-            var closeIcon = this.document.createElementNS(this.svgNS, "svg");
+            var closeIcon = document.createElementNS(this.svgNS, "svg");
 
             var items3 = Bridge.fn.bind(this, $_.Bridge.Console.f5)(new (System.Collections.Generic.Dictionary$2(String,String))());
 
             this.setAttributes(closeIcon, items3);
 
-            var closeIconPath = this.document.createElementNS(this.svgNS, "path");
+            var closeIconPath = document.createElementNS(this.svgNS, "path");
 
             var items4 = $_.Bridge.Console.f6(new (System.Collections.Generic.Dictionary$2(String,String))());
 
             this.setAttributes(closeIconPath, items4);
 
-            this.tooltip = this.document.createElement("div");
+            this.tooltip = document.createElement("div");
             this.tooltip.innerHTML = "Refresh page to open Bridge Console";
 
             this.tooltip.setAttribute("style", "position: absolute;right: 30px;top: -6px;white-space: nowrap;padding: 7px;border-radius: 3px;background-color: rgba(0, 0, 0, 0.75);color: #eee;text-align: center;visibility: hidden;opacity: 0;-webkit-transition: all 0.25s ease-in-out;transition: all 0.25s ease-in-out;z-index: 1;");
@@ -22555,7 +22547,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 consoleBodyStyles.set("height", this.consoleHeight);
             } else if (Bridge.referenceEquals(Bridge.Console.position, "vertical")) {
                 var consoleWidth = "400px";
-                this.body.style.MarginLeft = consoleWidth;
+                document.body.style.marginLeft = consoleWidth;
 
                 consoleWrapperStyles.set("top", "0");
                 consoleWrapperStyles.set("width", consoleWidth);
@@ -22564,11 +22556,11 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             }
 
             // Console wrapper
-            this.consoleWrapper = this.document.createElement("div");
+            this.consoleWrapper = document.createElement("div");
             this.consoleWrapper.setAttribute("style", this.obj2Css(consoleWrapperStyles));
 
             // Console Header
-            var consoleHeader = this.document.createElement("div");
+            var consoleHeader = document.createElement("div");
             consoleHeader.setAttribute("style", this.obj2Css(consoleHeaderStyles));
 
             // Add child elements into console header
@@ -22577,11 +22569,11 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             consoleHeader.appendChild(closeBtn);
 
             // Console Body Wrapper
-            var consoleBody = this.document.createElement("div");
+            var consoleBody = document.createElement("div");
             consoleBody.setAttribute("style", this.obj2Css(consoleBodyStyles));
 
             // Console Messages Unordered List Element
-            var consoleMessages = this.document.createElement("ul");
+            var consoleMessages = document.createElement("ul");
             consoleMessages.id = "bridge-console-messages";
 
             consoleMessages.setAttribute("style", "margin: 0;padding: 0;list-style: none;");
@@ -22594,14 +22586,14 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             this.consoleWrapper.appendChild(consoleBody);
 
             // Finally add console to body
-            this.body.appendChild(this.consoleWrapper);
+            document.body.appendChild(this.consoleWrapper);
 
             // Close console
-            closeBtn.addEventListener("click", this.close);
+            closeBtn.addEventListener("click", Bridge.fn.bind(this, this.close));
 
             // Show/hide Tooltip
-            closeBtn.addEventListener("mouseover", this.showTooltip);
-            closeBtn.addEventListener("mouseout", this.hideTooltip);
+            closeBtn.addEventListener("mouseover", Bridge.fn.bind(this, this.showTooltip));
+            closeBtn.addEventListener("mouseout", Bridge.fn.bind(this, this.hideTooltip));
         },
         showTooltip: function () {
             var self = Bridge.Console.getInstance();
@@ -22621,12 +22613,12 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             if (Bridge.referenceEquals(Bridge.Console.position, "horizontal")) {
                 self.unwrapBodyContent();
             } else if (Bridge.referenceEquals(Bridge.Console.position, "vertical")) {
-                this.body.removeAttribute("style");
+                document.body.removeAttribute("style");
             }
         },
         wrapBodyContent: function () {
             // get body margin and padding for proper alignment of scroll if a body margin/padding is used.
-            var bodyStyle = this.document.defaultView.getComputedStyle(this.body, null);
+            var bodyStyle = document.defaultView.getComputedStyle(document.body, null);
 
             var bodyPaddingTop = bodyStyle.paddingTop;
             var bodyPaddingRight = bodyStyle.paddingRight;
@@ -22638,30 +22630,30 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             var bodyMarginBottom = bodyStyle.marginBottom;
             var bodyMarginLeft = bodyStyle.marginLeft;
 
-            var div = this.document.createElement("div");
+            var div = document.createElement("div");
             div.id = "bridge-body-wrapper";
-            div.setAttribute("style", System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat("height: calc(100vh - ", this.consoleHeight), " - "), this.consoleHeaderHeight), ");"), "margin-top: calc(-1 * "), "(") + (bodyMarginTop + " + " + bodyPaddingTop) + "));" + "margin-right: calc(-1 * " + "(" + (bodyMarginRight + " + " + bodyPaddingRight) + "));" + "margin-left: calc(-1 * " + "(" + (bodyMarginLeft + " + " + bodyPaddingLeft) + "));" + "padding-top: calc(" + (bodyMarginTop + " + " + bodyPaddingTop) + ");" + "padding-right: calc(" + (bodyMarginRight + " + " + bodyPaddingRight) + ");" + "padding-bottom: calc(" + (bodyMarginBottom + " + " + bodyPaddingBottom) + ");" + "padding-left: calc(" + (bodyMarginLeft + " + " + bodyPaddingLeft) + ");" + "overflow-x: auto;" + "box-sizing: border-box !important;");
+            div.setAttribute("style", System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat("height: calc(100vh - ", this.consoleHeight), " - "), this.consoleHeaderHeight), ");"), "margin-top: calc(-1 * "), "("), (System.String.concat(System.String.concat(bodyMarginTop, " + "), bodyPaddingTop))), "));"), "margin-right: calc(-1 * "), "("), (System.String.concat(System.String.concat(bodyMarginRight, " + "), bodyPaddingRight))), "));"), "margin-left: calc(-1 * "), "("), (System.String.concat(System.String.concat(bodyMarginLeft, " + "), bodyPaddingLeft))), "));"), "padding-top: calc("), (System.String.concat(System.String.concat(bodyMarginTop, " + "), bodyPaddingTop))), ");"), "padding-right: calc("), (System.String.concat(System.String.concat(bodyMarginRight, " + "), bodyPaddingRight))), ");"), "padding-bottom: calc("), (System.String.concat(System.String.concat(bodyMarginBottom, " + "), bodyPaddingBottom))), ");"), "padding-left: calc("), (System.String.concat(System.String.concat(bodyMarginLeft, " + "), bodyPaddingLeft))), ");"), "overflow-x: auto;"), "box-sizing: border-box !important;"));
 
-            while (this.body.firstChild != null) {
-                div.appendChild(this.body.firstChild);
+            while (document.body.firstChild != null) {
+                div.appendChild(document.body.firstChild);
             }
 
-            this.body.appendChild(div);
+            document.body.appendChild(div);
         },
         unwrapBodyContent: function () {
-            var bridgeBodyWrapper = this.document.getElementById("bridge-body-wrapper");
+            var bridgeBodyWrapper = document.getElementById("bridge-body-wrapper");
 
             while (bridgeBodyWrapper.firstChild != null) {
-                this.body.insertBefore(bridgeBodyWrapper.firstChild, bridgeBodyWrapper);
+                document.body.insertBefore(bridgeBodyWrapper.firstChild, bridgeBodyWrapper);
             }
 
-            this.body.removeChild(bridgeBodyWrapper);
+            document.body.removeChild(bridgeBodyWrapper);
         },
         buildConsoleMessage: function (message, messageType) {
-            var messageItem = this.document.createElement("li");
+            var messageItem = document.createElement("li");
             messageItem.setAttribute("style", "padding: 5px 10px;border-bottom: 1px solid #f0f0f0;");
 
-            var messageIcon = this.document.createElementNS(this.svgNS, "svg");
+            var messageIcon = document.createElementNS(this.svgNS, "svg");
 
             var items5 = Bridge.fn.bind(this, $_.Bridge.Console.f7)(new (System.Collections.Generic.Dictionary$2(String,String))());
 
@@ -22675,7 +22667,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 color = "#1800FF";
             }
 
-            var messageIconPath = this.document.createElementNS(this.svgNS, "path");
+            var messageIconPath = document.createElementNS(this.svgNS, "path");
 
             var items6 = new (System.Collections.Generic.Dictionary$2(String,String))();
 
@@ -22686,7 +22678,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
             messageIcon.appendChild(messageIconPath);
 
-            var messageContainer = this.document.createElement("span");
+            var messageContainer = document.createElement("span");
             messageContainer.innerHTML = message;
             messageContainer.style.color = color;
 

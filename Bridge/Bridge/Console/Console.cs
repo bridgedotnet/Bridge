@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Bridge.Utils
@@ -8,11 +9,68 @@ namespace Bridge.Utils
     [Namespace("Bridge")]
     public class Console
     {
-        // Unfortunately we have to use dynamic types
-        // because Bridge.Html5 Assembly is not available here.
+        #region HTML Wrappers to avoid dynamic
 
-        private dynamic document = Script.Get<dynamic>("document");
-        private dynamic body = Script.Get<dynamic>("document").body;
+        [External]
+        [Name("document")]
+        private static class Document
+        {
+            public static extern Element CreateElementNS(string namespaceURI, string qualifiedName);
+            public static extern Element CreateElement(string tagName);
+            public static extern Element GetElementById(string id);
+
+#pragma warning disable 649 // CS0649  Field 'Console.Document.DefaultView' is never assigned to, and will always have its default value null
+            public static readonly Element DefaultView;
+            public static readonly Element Body;
+#pragma warning restore 649 // CS0649  Field 'Console.Document.DefaultView' is never assigned to, and will always have its default value null
+        }
+
+        [External]
+        private class Element
+        {
+            private extern Element();
+
+            public extern Element AppendChild(Element child);
+            public extern void AddEventListener(string type, Action listener);
+            public extern Element InsertBefore(Element newElement, Element referenceElement);
+            public extern void RemoveAttribute(string attrName);
+            public  extern Element RemoveChild(Element child);
+            public extern void SetAttribute(string name, string value);
+
+            // window's method
+            public extern CssStyle GetComputedStyle(object element, object pseudoElt);
+
+#pragma warning disable 649 // CS0649  Field 'Console.Document.DefaultView' is never assigned to, and will always have its default value null
+            public string Id;
+            public string InnerHTML;
+            public readonly Element FirstChild;
+            public readonly CssStyle Style;
+#pragma warning restore 649 // CS0649  Field 'Console.Document.DefaultView' is never assigned to, and will always have its default value null
+        }
+
+        [External]
+        private class CssStyle
+        {
+            private extern CssStyle();
+
+#pragma warning disable 649 // CS0649  Field 'Console.Document.DefaultView' is never assigned to, and will always have its default value null
+            public string Color;
+            public string Display;
+            public string MarginLeft;
+            public string Opacity;
+            public string PaddingTop;
+            public string PaddingRight;
+            public string PaddingBottom;
+            public string PaddingLeft;
+            public string MarginTop;
+            public string MarginRight;
+            public string MarginBottom;
+            public string Right;
+            public string Visibility;
+#pragma warning restore 649 // CS0649  Field 'Console.Document.DefaultView' is never assigned to, and will always have its default value null
+        }
+
+        #endregion HTML Wrappers
 
         private string svgNS = "http://www.w3.org/2000/svg";
 
@@ -21,8 +79,8 @@ namespace Bridge.Utils
 
         private string consoleHeaderHeight = "35px";
 
-        private dynamic tooltip;
-        private dynamic consoleWrapper;
+        private Element tooltip;
+        private Element consoleWrapper;
 
         private static string position = "horizontal";
 
@@ -75,7 +133,7 @@ namespace Bridge.Utils
             };
 
             // Bridge Icon
-            var bridgeIcon = document.createElementNS(svgNS, "svg");
+            var bridgeIcon = Document.CreateElementNS(svgNS, "svg");
 
             var items = new Dictionary<string, string> {
                 { "xmlns", svgNS },
@@ -87,7 +145,7 @@ namespace Bridge.Utils
 
             SetAttributes(bridgeIcon, items);
 
-            var bridgeIconPath = document.createElementNS(svgNS, "path");
+            var bridgeIconPath = Document.CreateElementNS(svgNS, "path");
 
             var items2 = new Dictionary<string, string>();
             items2["d"] = "M19 14.4h2.2V9.6L19 7.1v7.3zm4.3-2.5v2.5h2.2l-2.2-2.5zm-8.5 2.5H17V4.8l-2.2-2.5v12.1zM0 14.4h3l7.5-8.5v8.5h2.2V0L0 14.4z";
@@ -95,17 +153,17 @@ namespace Bridge.Utils
 
             SetAttributes(bridgeIconPath, items2);
 
-            bridgeIcon.appendChild(bridgeIconPath);
+            bridgeIcon.AppendChild(bridgeIconPath);
 
             // Bridge Console Label
-            var bridgeConsoleLabel = document.createElement("span");
-            bridgeConsoleLabel.innerHTML = "Bridge Console";
+            var bridgeConsoleLabel = Document.CreateElement("span");
+            bridgeConsoleLabel.InnerHTML = "Bridge Console";
 
             // Close Button
-            var closeBtn = document.createElement("span");
-            closeBtn.setAttribute("style", "position: relative;display: inline-block;float: right;cursor: pointer");
+            var closeBtn = Document.CreateElement("span");
+            closeBtn.SetAttribute("style", "position: relative;display: inline-block;float: right;cursor: pointer");
 
-            var closeIcon = document.createElementNS(svgNS, "svg");
+            var closeIcon = Document.CreateElementNS(svgNS, "svg");
 
             var items3 = new Dictionary<string, string>
             {
@@ -118,7 +176,7 @@ namespace Bridge.Utils
 
             SetAttributes(closeIcon, items3);
 
-            var closeIconPath = document.createElementNS(svgNS, "path");
+            var closeIconPath = Document.CreateElementNS(svgNS, "path");
 
             var items4 = new Dictionary<string, string>
             {
@@ -128,14 +186,14 @@ namespace Bridge.Utils
 
             SetAttributes(closeIconPath, items4);
 
-            tooltip = document.createElement("div");
-            tooltip.innerHTML = "Refresh page to open Bridge Console";
+            tooltip = Document.CreateElement("div");
+            tooltip.InnerHTML = "Refresh page to open Bridge Console";
 
-            tooltip.setAttribute("style", "position: absolute;right: 30px;top: -6px;white-space: nowrap;padding: 7px;border-radius: 3px;background-color: rgba(0, 0, 0, 0.75);color: #eee;text-align: center;visibility: hidden;opacity: 0;-webkit-transition: all 0.25s ease-in-out;transition: all 0.25s ease-in-out;z-index: 1;");
+            tooltip.SetAttribute("style", "position: absolute;right: 30px;top: -6px;white-space: nowrap;padding: 7px;border-radius: 3px;background-color: rgba(0, 0, 0, 0.75);color: #eee;text-align: center;visibility: hidden;opacity: 0;-webkit-transition: all 0.25s ease-in-out;transition: all 0.25s ease-in-out;z-index: 1;");
 
-            closeIcon.appendChild(closeIconPath);
-            closeBtn.appendChild(closeIcon);
-            closeBtn.appendChild(tooltip);
+            closeIcon.AppendChild(closeIconPath);
+            closeBtn.AppendChild(closeIcon);
+            closeBtn.AppendChild(tooltip);
 
             // Styles and other stuff based on position
             // Force to horizontal for now
@@ -152,7 +210,7 @@ namespace Bridge.Utils
             else if (position == "vertical")
             {
                 var consoleWidth = "400px";
-                body.style.MarginLeft = consoleWidth;
+                Document.Body.Style.MarginLeft = consoleWidth;
 
                 consoleWrapperStyles["top"] = "0";
                 consoleWrapperStyles["width"] = consoleWidth;
@@ -161,44 +219,44 @@ namespace Bridge.Utils
             }
 
             // Console wrapper
-            consoleWrapper = document.createElement("div");
-            consoleWrapper.setAttribute("style", Obj2Css(consoleWrapperStyles));
+            consoleWrapper = Document.CreateElement("div");
+            consoleWrapper.SetAttribute("style", Obj2Css(consoleWrapperStyles));
 
             // Console Header
-            var consoleHeader = document.createElement("div");
-            consoleHeader.setAttribute("style", Obj2Css(consoleHeaderStyles));
+            var consoleHeader = Document.CreateElement("div");
+            consoleHeader.SetAttribute("style", Obj2Css(consoleHeaderStyles));
 
             // Add child elements into console header
-            consoleHeader.appendChild(bridgeIcon);
-            consoleHeader.appendChild(bridgeConsoleLabel);
-            consoleHeader.appendChild(closeBtn);
+            consoleHeader.AppendChild(bridgeIcon);
+            consoleHeader.AppendChild(bridgeConsoleLabel);
+            consoleHeader.AppendChild(closeBtn);
 
             // Console Body Wrapper
-            var consoleBody = document.createElement("div");
-            consoleBody.setAttribute("style", Obj2Css(consoleBodyStyles));
+            var consoleBody = Document.CreateElement("div");
+            consoleBody.SetAttribute("style", Obj2Css(consoleBodyStyles));
 
             // Console Messages Unordered List Element
-            var consoleMessages = document.createElement("ul");
-            consoleMessages.id = "bridge-console-messages";
+            var consoleMessages = Document.CreateElement("ul");
+            consoleMessages.Id = "bridge-console-messages";
 
-            consoleMessages.setAttribute("style", "margin: 0;padding: 0;list-style: none;");
+            consoleMessages.SetAttribute("style", "margin: 0;padding: 0;list-style: none;");
 
             // Add messages to console body
-            consoleBody.appendChild(consoleMessages);
+            consoleBody.AppendChild(consoleMessages);
 
             // Add console header and console body into console wrapper
-            consoleWrapper.appendChild(consoleHeader);
-            consoleWrapper.appendChild(consoleBody);
+            consoleWrapper.AppendChild(consoleHeader);
+            consoleWrapper.AppendChild(consoleBody);
 
             // Finally add console to body
-            body.appendChild(consoleWrapper);
+            Document.Body.AppendChild(consoleWrapper);
 
             // Close console
-            closeBtn.addEventListener("click", Script.Write<string>("this.close"));
+            closeBtn.AddEventListener("click", (Action)this.Close);
 
             // Show/hide Tooltip
-            closeBtn.addEventListener("mouseover", Script.Write<string>("this.showTooltip"));
-            closeBtn.addEventListener("mouseout", Script.Write<string>("this.hideTooltip"));
+            closeBtn.AddEventListener("mouseover", (Action)this.ShowTooltip);
+            closeBtn.AddEventListener("mouseout", (Action)this.HideTooltip);
         }
 
         private static void LogBase(object value, string messageType = "info")
@@ -216,9 +274,9 @@ namespace Bridge.Utils
                 Show();
             }
 
-            var el = self.document.getElementById("bridge-console-messages");
+            var el = Document.GetElementById("bridge-console-messages");
 
-            el.appendChild(self.BuildConsoleMessage(value.ToString(), messageType));
+            el.AppendChild(self.BuildConsoleMessage(value.ToString(), messageType));
 
             if (Script.IsDefined("Bridge.global") && Script.IsDefined("Bridge.global.console"))
             {
@@ -266,7 +324,7 @@ namespace Bridge.Utils
             var self = Instance;
             self.Hidden = true;
 
-            self.consoleWrapper.style.display = "none";
+            self.consoleWrapper.Style.Display = "none";
 
             if (position == "horizontal")
             {
@@ -274,7 +332,7 @@ namespace Bridge.Utils
             }
             else if (position == "vertical")
             {
-                self.body.removeAttribute("style");
+                Document.Body.RemoveAttribute("style");
             }
         }
 
@@ -305,9 +363,9 @@ namespace Bridge.Utils
         public void ShowTooltip()
         {
             var self = Instance;
-            self.tooltip.style.right = "20px";
-            self.tooltip.style.visibility = "visible";
-            self.tooltip.style.opacity = "1";
+            self.tooltip.Style.Right = "20px";
+            self.tooltip.Style.Visibility = "visible";
+            self.tooltip.Style.Opacity = "1";
         }
 
         /// <summary>
@@ -316,8 +374,8 @@ namespace Bridge.Utils
         public void HideTooltip()
         {
             var self = Instance;
-            self.tooltip.style.right = "30px";
-            self.tooltip.style.opacity = "0";
+            self.tooltip.Style.Right = "30px";
+            self.tooltip.Style.Opacity = "0";
         }
 
         /// <summary>
@@ -326,7 +384,7 @@ namespace Bridge.Utils
         public void Close()
         {
             var self = Instance;
-            self.consoleWrapper.style.display = "none";
+            self.consoleWrapper.Style.Display = "none";
 
             if (position == "horizontal")
             {
@@ -334,7 +392,7 @@ namespace Bridge.Utils
             }
             else if (position == "vertical")
             {
-                body.removeAttribute("style");
+                Document.Body.RemoveAttribute("style");
             }
         }
 
@@ -344,21 +402,21 @@ namespace Bridge.Utils
         private void WrapBodyContent()
         {
             // get body margin and padding for proper alignment of scroll if a body margin/padding is used.
-            var bodyStyle = document.defaultView.getComputedStyle(body, null);
+            var bodyStyle = Document.DefaultView.GetComputedStyle(Document.Body, null);
 
-            var bodyPaddingTop = bodyStyle.paddingTop;
-            var bodyPaddingRight = bodyStyle.paddingRight;
-            var bodyPaddingBottom = bodyStyle.paddingBottom;
-            var bodyPaddingLeft = bodyStyle.paddingLeft;
+            var bodyPaddingTop = bodyStyle.PaddingTop;
+            var bodyPaddingRight = bodyStyle.PaddingRight;
+            var bodyPaddingBottom = bodyStyle.PaddingBottom;
+            var bodyPaddingLeft = bodyStyle.PaddingLeft;
 
-            var bodyMarginTop = bodyStyle.marginTop;
-            var bodyMarginRight = bodyStyle.marginRight;
-            var bodyMarginBottom = bodyStyle.marginBottom;
-            var bodyMarginLeft = bodyStyle.marginLeft;
+            var bodyMarginTop = bodyStyle.MarginTop;
+            var bodyMarginRight = bodyStyle.MarginRight;
+            var bodyMarginBottom = bodyStyle.MarginBottom;
+            var bodyMarginLeft = bodyStyle.MarginLeft;
 
-            var div = document.createElement("div");
-            div.id = "bridge-body-wrapper";
-            div.setAttribute("style",
+            var div = Document.CreateElement("div");
+            div.Id = "bridge-body-wrapper";
+            div.SetAttribute("style",
                 "height: calc(100vh - " + consoleHeight + " - " + consoleHeaderHeight + ");" +
                 "margin-top: calc(-1 * " + "(" + (bodyMarginTop + " + " + bodyPaddingTop) + "));" +
                 "margin-right: calc(-1 * " + "(" + (bodyMarginRight + " + " + bodyPaddingRight) + "));" +
@@ -371,12 +429,12 @@ namespace Bridge.Utils
                 "box-sizing: border-box !important;"
             );
 
-            while (body.firstChild != null)
+            while (Document.Body.FirstChild != null)
             {
-                div.appendChild(body.firstChild);
+                div.AppendChild(Document.Body.FirstChild);
             }
 
-            body.appendChild(div);
+            Document.Body.AppendChild(div);
         }
 
         /// <summary>
@@ -384,14 +442,14 @@ namespace Bridge.Utils
         /// </summary>
         private void UnwrapBodyContent()
         {
-            var bridgeBodyWrapper = document.getElementById("bridge-body-wrapper");
+            var bridgeBodyWrapper = Document.GetElementById("bridge-body-wrapper");
 
-            while (bridgeBodyWrapper.firstChild != null)
+            while (bridgeBodyWrapper.FirstChild != null)
             {
-                body.insertBefore(bridgeBodyWrapper.firstChild, bridgeBodyWrapper);
+                Document.Body.InsertBefore(bridgeBodyWrapper.FirstChild, bridgeBodyWrapper);
             }
 
-            body.removeChild(bridgeBodyWrapper);
+            Document.Body.RemoveChild(bridgeBodyWrapper);
         }
 
         /// <summary>
@@ -400,12 +458,12 @@ namespace Bridge.Utils
         /// <param name="message"></param>
         /// <param name="messageType"></param>
         /// <returns></returns>
-        private dynamic BuildConsoleMessage(string message, string messageType)
+        private Element BuildConsoleMessage(string message, string messageType)
         {
-            var messageItem = document.createElement("li");
-            messageItem.setAttribute("style", "padding: 5px 10px;border-bottom: 1px solid #f0f0f0;");
+            var messageItem = Document.CreateElement("li");
+            messageItem.SetAttribute("style", "padding: 5px 10px;border-bottom: 1px solid #f0f0f0;");
 
-            var messageIcon = document.createElementNS(svgNS, "svg");
+            var messageIcon = Document.CreateElementNS(svgNS, "svg");
 
             var items5 = new Dictionary<string, string>
             {
@@ -429,7 +487,7 @@ namespace Bridge.Utils
                 color = "#1800FF";
             }
 
-            var messageIconPath = document.createElementNS(svgNS, "path");
+            var messageIconPath = Document.CreateElementNS(svgNS, "path");
 
             var items6 = new Dictionary<string, string>();
 
@@ -438,14 +496,14 @@ namespace Bridge.Utils
 
             SetAttributes(messageIconPath, items6);
 
-            messageIcon.appendChild(messageIconPath);
+            messageIcon.AppendChild(messageIconPath);
 
-            var messageContainer = document.createElement("span");
-            messageContainer.innerHTML = message;
-            messageContainer.style.color = color;
+            var messageContainer = Document.CreateElement("span");
+            messageContainer.InnerHTML = message;
+            messageContainer.Style.Color = color;
 
-            messageItem.appendChild(messageIcon);
-            messageItem.appendChild(messageContainer);
+            messageItem.AppendChild(messageIcon);
+            messageItem.AppendChild(messageContainer);
 
             return messageItem;
         }
@@ -453,11 +511,11 @@ namespace Bridge.Utils
         /// <summary>
         /// Sets multiple attributes
         /// </summary>
-        private void SetAttributes(dynamic el, Dictionary<string, string> attrs)
+        private void SetAttributes(Element el, Dictionary<string, string> attrs)
         {
             foreach (KeyValuePair<string, string> item in attrs)
             {
-                el.setAttribute(item.Key, item.Value);
+                el.SetAttribute(item.Key, item.Value);
             }
         }
 
