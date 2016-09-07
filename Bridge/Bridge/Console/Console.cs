@@ -81,6 +81,9 @@ namespace Bridge.Utils
             Error
         }
 
+        private const string BODY_WRAPPER_ID = "bridge-body-wrapper";
+        private const string CONSOLE_MESSAGES_ID = "bridge-console-messages";
+
         private string svgNS = "http://www.w3.org/2000/svg";
 
         // for horizontal position
@@ -246,7 +249,7 @@ namespace Bridge.Utils
 
             // Console Messages Unordered List Element
             var consoleMessages = Document.CreateElement("ul");
-            consoleMessages.Id = "bridge-console-messages";
+            consoleMessages.Id = CONSOLE_MESSAGES_ID;
 
             consoleMessages.SetAttribute("style", "margin: 0;padding: 0;list-style: none;");
 
@@ -283,7 +286,7 @@ namespace Bridge.Utils
                 Show();
             }
 
-            var el = Document.GetElementById("bridge-console-messages");
+            var el = Document.GetElementById(CONSOLE_MESSAGES_ID);
 
             el.AppendChild(self.BuildConsoleMessage(value.ToString(), messageType));
 
@@ -424,7 +427,7 @@ namespace Bridge.Utils
             var bodyMarginLeft = bodyStyle.MarginLeft;
 
             var div = Document.CreateElement("div");
-            div.Id = "bridge-body-wrapper";
+            div.Id = BODY_WRAPPER_ID;
             div.SetAttribute("style",
                 "height: calc(100vh - " + consoleHeight + " - " + consoleHeaderHeight + ");" +
                 "margin-top: calc(-1 * " + "(" + (bodyMarginTop + " + " + bodyPaddingTop) + "));" +
@@ -451,7 +454,7 @@ namespace Bridge.Utils
         /// </summary>
         private void UnwrapBodyContent()
         {
-            var bridgeBodyWrapper = Document.GetElementById("bridge-body-wrapper");
+            var bridgeBodyWrapper = Document.GetElementById(BODY_WRAPPER_ID);
 
             while (bridgeBodyWrapper.FirstChild != null)
             {

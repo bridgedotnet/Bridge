@@ -1,5 +1,7 @@
 ﻿    Bridge.define('Bridge.Console', {
         statics: {
+            BODY_WRAPPER_ID: "bridge-body-wrapper",
+            CONSOLE_MESSAGES_ID: "bridge-console-messages",
             position: "horizontal",
             instance: null,
             config: {
@@ -23,7 +25,7 @@
                     Bridge.Console.show();
                 }
 
-                var el = document.getElementById("bridge-console-messages");
+                var el = document.getElementById(Bridge.Console.CONSOLE_MESSAGES_ID);
 
                 el.appendChild(self.buildConsoleMessage(value.toString(), messageType));
 
@@ -172,7 +174,7 @@
 
             // Console Messages Unordered List Element
             var consoleMessages = document.createElement("ul");
-            consoleMessages.id = "bridge-console-messages";
+            consoleMessages.id = Bridge.Console.CONSOLE_MESSAGES_ID;
 
             consoleMessages.setAttribute("style", "margin: 0;padding: 0;list-style: none;");
 
@@ -229,7 +231,7 @@
             var bodyMarginLeft = bodyStyle.marginLeft;
 
             var div = document.createElement("div");
-            div.id = "bridge-body-wrapper";
+            div.id = Bridge.Console.BODY_WRAPPER_ID;
             div.setAttribute("style", System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat("height: calc(100vh - ", this.consoleHeight), " - "), this.consoleHeaderHeight), ");"), "margin-top: calc(-1 * "), "("), (System.String.concat(System.String.concat(bodyMarginTop, " + "), bodyPaddingTop))), "));"), "margin-right: calc(-1 * "), "("), (System.String.concat(System.String.concat(bodyMarginRight, " + "), bodyPaddingRight))), "));"), "margin-left: calc(-1 * "), "("), (System.String.concat(System.String.concat(bodyMarginLeft, " + "), bodyPaddingLeft))), "));"), "padding-top: calc("), (System.String.concat(System.String.concat(bodyMarginTop, " + "), bodyPaddingTop))), ");"), "padding-right: calc("), (System.String.concat(System.String.concat(bodyMarginRight, " + "), bodyPaddingRight))), ");"), "padding-bottom: calc("), (System.String.concat(System.String.concat(bodyMarginBottom, " + "), bodyPaddingBottom))), ");"), "padding-left: calc("), (System.String.concat(System.String.concat(bodyMarginLeft, " + "), bodyPaddingLeft))), ");"), "overflow-x: auto;"), "box-sizing: border-box !important;"));
 
             while (document.body.firstChild != null) {
@@ -239,7 +241,7 @@
             document.body.appendChild(div);
         },
         unwrapBodyContent: function () {
-            var bridgeBodyWrapper = document.getElementById("bridge-body-wrapper");
+            var bridgeBodyWrapper = document.getElementById(Bridge.Console.BODY_WRAPPER_ID);
 
             while (bridgeBodyWrapper.firstChild != null) {
                 document.body.insertBefore(bridgeBodyWrapper.firstChild, bridgeBodyWrapper);
