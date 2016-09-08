@@ -12,7 +12,7 @@ namespace Bridge.ClientTest.Exceptions
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.ArgumentException", typeof(ArgumentException).GetClassName(), "Name");
+            Assert.AreEqual("System.ArgumentException", typeof(ArgumentException).FullName, "Name");
             object d = new ArgumentException();
             Assert.True(d is ArgumentException);
             Assert.True(d is Exception);

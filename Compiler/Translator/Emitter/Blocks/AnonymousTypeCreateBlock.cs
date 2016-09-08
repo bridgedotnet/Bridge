@@ -252,6 +252,8 @@ namespace Bridge.Translator
             this.Emitter.Comma = true;
         }
 
+
+
         private void GenerateHashCode(IAnonymousTypeConfig config)
         {
             this.EnsureComma();
@@ -260,7 +262,10 @@ namespace Bridge.Translator
             this.Write("var hash = 17;");
 
             this.WriteNewLine();
-            this.Write("hash = hash * 23 + " + config.Name.GetHashCode() + ";");
+
+            var nameHashValue = new HashHelper().GetDeterministicHash(config.Name);
+
+            this.Write("hash = hash * 23" + nameHashValue + ";");
 
             foreach (var property in config.Type.Properties)
             {

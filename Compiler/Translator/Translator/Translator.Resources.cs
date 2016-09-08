@@ -62,8 +62,6 @@ namespace Bridge.Translator
                 // Find all items and put in the order
                 this.Log.Trace("Preparing resources specified in config...");
 
-                var resourceItems = new Dictionary<string, string>();
-
                 foreach (var resource in this.AssemblyInfo.Resources.EmbedItems)
                 {
                     this.Log.Trace("Preparing resource " + resource.Name);
@@ -560,10 +558,14 @@ namespace Bridge.Translator
             {
                 this.Log.Trace("Inserting resource file remark");
 
+
+                var fileName = this.MakeStandardPath(file.Name);
+                var filePath = this.MakeStandardPath(Path.Combine(dirPathInFileName, fileName));
+
                 var remarkInfo = new Dictionary<string, string>()
                 {
-                    ["name"] = file.Name,
-                    ["path"] = dirPathInFileName + "\\" + file.Name
+                    ["name"] = fileName,
+                    ["path"] = filePath
                 };
 
                 var remarkBuffer = ApplyTokens(item.Remark, remarkInfo);
@@ -737,6 +739,21 @@ namespace Bridge.Translator
             }
 
             return r;
+        }
+
+        /// <summary>
+        /// Replaces platform specific dir separators to just /
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns>A path with replaced '\' -> '/'</returns>
+        private string MakeStandardPath(string path)
+        {
+            if (path == null)
+            {
+                return path;
+            }
+
+            return path.Replace('\\', '/');
         }
     }
 }

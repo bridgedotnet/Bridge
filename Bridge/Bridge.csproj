@@ -3,8 +3,8 @@
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Choose>
     <When Condition="'$(OS)' != 'Unix'">
-      <PropertyGroup Condition="$(MSBuildToolsVersion) &gt;= 14.0">       
-         <CompilerResponseFile>AdditionalCompilerOptions.txt</CompilerResponseFile>
+      <PropertyGroup Condition="$(MSBuildToolsVersion) &gt;= 14.0">
+        <CompilerResponseFile>AdditionalCompilerOptions.txt</CompilerResponseFile>
       </PropertyGroup>
     </When>
   </Choose>
@@ -48,7 +48,7 @@
     <NoWarn>1591, 0626, 0824, 0660, 0661</NoWarn>
     <DocumentationFile>bin\Release\Bridge.xml</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition="$(OS) != Unix">
+  <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
@@ -83,6 +83,7 @@
     <Compile Include="Attributes\ExternalAttribute.cs" />
     <Compile Include="Attributes\FileNameAttribute.cs" />
     <Compile Include="Attributes\ScriptAttribute.cs" />
+    <Compile Include="Bridge\Console\Console.cs" />
     <Compile Include="Bridge\Function.cs" />
     <Compile Include="Bridge\Linq\Enumerable.cs" />
     <Compile Include="Bridge\IBridgeClass.cs" />
@@ -325,6 +326,7 @@
   <ItemGroup>
     <Content Include="Resources\.auxiliary\Header.js" />
     <Content Include="Resources\.generated\bridge.js" />
+    <Content Include="Resources\.generated\bridge\utils\console.js" />
     <Content Include="Resources\.generated\system\formattableString.js" />
     <Content Include="Resources\.generated\system\formattableStringImpl.js" />
     <Content Include="Resources\.generated\system\random.js" />
@@ -763,7 +765,6 @@
     <Content Include="Resources\.lib\LongLib.js" />
     <Content Include="Resources\Long.js" />
     <Content Include="Resources\Math.js" />
-    <Content Include="Resources\Console.js" />
     <Content Include="Resources\Text\RegularExpressions\Regex.js" />
     <Content Include="Resources\Text\RegularExpressions\RegexEngineBranch.js" />
     <Content Include="Resources\Text\RegularExpressions\RegexEnginePass.js" />
@@ -826,11 +827,11 @@
     <Content Include="Resources\.typescript\header.d.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Import Project="$(SolutionDir).nuget\NuGet.targets" Condition="Exists('$(SolutionDir).nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('$(SolutionDir).nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir).nuget\NuGet.targets'))" />
   </Target>
 </Project>

@@ -2,5 +2,6 @@
   "output": "Bridge\\output",
   "cleanOutputFolderBeforeBuildPattern": "*.*",
   "fileName": "code.js",
-  "outputBy":  "project"
+  "outputBy": "project",
+  "preserveMemberCase": "true"
 }

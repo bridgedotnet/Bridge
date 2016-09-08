@@ -75,7 +75,6 @@ namespace Bridge.Translator.TypeScript
 
         protected virtual void EmitClassHeader()
         {
-            TypeDefinition baseType = this.Emitter.GetBaseTypeDefinition();
             var typeDef = this.Emitter.GetTypeDefinition();
             string name = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter);
             this.IsGeneric = typeDef.GenericParameters.Count > 0;

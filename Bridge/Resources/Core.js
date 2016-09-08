@@ -339,9 +339,11 @@
             }
 
             if (Bridge.isNumber(value)) {
-                value = value.toExponential();
+                if (Math.floor(value, 0) === value) {
+                    return value;
+                }
 
-                return parseInt(value.substr(0, value.indexOf("e")).replace(".", ""), 10) & 0xFFFFFFFF;
+                value = value.toExponential();
             }
 
             if (Bridge.isString(value)) {

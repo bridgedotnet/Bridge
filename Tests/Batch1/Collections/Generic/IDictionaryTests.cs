@@ -80,7 +80,7 @@ namespace Bridge.ClientTest.Collections.Generic
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.Collections.Generic.IDictionary$2[[Object],[Object]]", typeof(IDictionary<object, object>).GetClassName(), "FullName should be correct");
+            Assert.AreEqual("System.Collections.Generic.IDictionary$2[[Object],[Object]]", typeof(IDictionary<object, object>).FullName, "FullName should be correct");
         }
 
         [Test]

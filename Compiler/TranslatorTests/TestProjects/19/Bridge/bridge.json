@@ -1,0 +1,8 @@
+{
+  "output": "Bridge\\output",
+  "cleanOutputFolderBeforeBuildPattern": "*.*",
+  "outputFormatting": "Formatted",
+  "logging": {
+    "level": "None"
+  }
+}

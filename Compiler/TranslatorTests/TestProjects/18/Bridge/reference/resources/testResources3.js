@@ -1,7 +1,7 @@
 // Content header: 1.0.0-beta Copyright 2008-2015 Object.NET, Inc. {notdate} 2016 Object.NET, Inc.
 
 // ---
-// Content remark: Path: Bridge\output\testIssue434.js; name: testIssue434.js
+// Content remark: Path: Bridge/output/testIssue434.js; name: testIssue434.js
 // ---
 
 // Top
@@ -22,7 +22,7 @@
                 TestIssue434.Issue434A.doSomething(4);
             },
             doSomething: function (i) {
-                System.Console.log(i);
+                Bridge.Console.log(i);
             }
         }
     });
@@ -47,7 +47,7 @@
                 TestIssue434.Issue434B.doSomething(4);
             },
             doSomething: function (i) {
-                System.Console.log(i);
+                Bridge.Console.log(i);
             }
         }
     });
@@ -65,7 +65,7 @@
 // Bottom
 
 // ---
-// Content remark: Path: Bridge\output\testIssue461.js; name: testIssue461.js
+// Content remark: Path: Bridge/output/testIssue461.js; name: testIssue461.js
 // ---
 
     Bridge.define('TestIssue461.Issue461', {
@@ -98,13 +98,13 @@
     Bridge.apply($_.TestIssue461.Issue461, {
         f1: function (ev) {
             // Tests if ev.CurrentTarget.Value compiles
-            System.Console.log(System.String.concat("ev.CurrentTarget.Value: ", ev.currentTarget.value));
+            Bridge.Console.log(System.String.concat("ev.CurrentTarget.Value: ", ev.currentTarget.value));
 
             // Tests if ev.IsMouseEvent() compiles
-            System.Console.log(System.String.concat("IsMouseEvent: ", System.Boolean.toString(Bridge.is(ev, MouseEvent))));
+            Bridge.Console.log(System.String.concat("IsMouseEvent: ", System.Boolean.toString(Bridge.is(ev, MouseEvent))));
         },
         f2: function (ev) {
             // Tests if ev.CurrentTarget.Href compiles
-            System.Console.log(System.String.concat("ev.CurrentTarget.Href: ", ev.currentTarget.href));
+            Bridge.Console.log(System.String.concat("ev.CurrentTarget.Href: ", ev.currentTarget.href));
         }
     });

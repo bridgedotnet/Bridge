@@ -1,5 +1,6 @@
 {
   "output": "Bridge\\output",
   "cleanOutputFolderBeforeBuildPattern": "*.*",
-  "fileNameCasing": "None"
+  "fileNameCasing": "None",
+  "generateDocumentation": "Basic"
 }

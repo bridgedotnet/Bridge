@@ -26,6 +26,7 @@ namespace Bridge.Translator
         public string PreProcess()
         {
             //System.Diagnostics.Debugger.Launch();
+            this.AdjustBridgeOptions();
 
             this.TranslatorConfiguration = this.ReadConfiguration();
 
@@ -47,6 +48,20 @@ namespace Bridge.Translator
             }
 
             return null;
+        }
+
+        private void AdjustBridgeOptions()
+        {
+            var pathHelper = new ConfigHelper();
+            var bridgeOptions = this.BridgeOptions;
+
+            bridgeOptions.BridgeLocation = pathHelper.ConvertPath(bridgeOptions.BridgeLocation);
+            bridgeOptions.DefaultFileName = pathHelper.ConvertPath(bridgeOptions.DefaultFileName);
+            bridgeOptions.Folder = pathHelper.ConvertPath(bridgeOptions.Folder);
+            bridgeOptions.Lib = pathHelper.ConvertPath(bridgeOptions.Lib);
+            bridgeOptions.OutputLocation = pathHelper.ConvertPath(bridgeOptions.OutputLocation);
+            bridgeOptions.ProjectLocation = pathHelper.ConvertPath(bridgeOptions.ProjectLocation);
+            bridgeOptions.Source = pathHelper.ConvertPath(bridgeOptions.Source);
         }
 
         public void Process()
@@ -108,7 +123,7 @@ namespace Bridge.Translator
 
             if (basePathOnly)
             {
-                return basePath;
+                return new ConfigHelper().ConvertPath(basePath);
             }
 
             string assemblyOutput = string.Empty;
@@ -142,6 +157,8 @@ namespace Bridge.Translator
             //translator.SaveTo(outputPath, fileName);
             //translator.Flush(outputPath, fileName);
             //translator.Plugins.AfterOutput(translator, outputPath, this.NoCore);
+
+            outputPath = new ConfigHelper().ConvertPath(outputPath);
 
             return outputPath;
         }
@@ -179,13 +196,27 @@ namespace Bridge.Translator
                 return true;
             }
 
-            logger.Info("Setting logger configuration parameters...");
+            logger.Info("Applying logger configuration parameters...");
 
             logger.Name = bridgeOptions.Name;
 
+            if (!string.IsNullOrEmpty(logger.Name))
+            {
+                logger.Info("Logger name: " + logger.Name);
+            }
+
+            var loggerLevel = assemblyConfig.Logging.Level ?? LoggerLevel.None;
+
+            logger.Info("Logger level: " + loggerLevel);
+
+            if (loggerLevel <= LoggerLevel.None)
+            {
+                logger.Info("To enable further logging use configuration setting \"logging\" in bridge.json. See http://bridge.net/kb/global-configuration/#logging");
+            }
+
             try
             {
-                logger.LoggerLevel = assemblyConfig.Logging.Level ?? LoggerLevel.None;
+                logger.LoggerLevel = loggerLevel;
 
                 logger.Info("Read config file: " + AssemblyConfigHelper.ConfigToString(assemblyConfig));
 

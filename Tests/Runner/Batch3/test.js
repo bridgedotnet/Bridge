@@ -2,12 +2,7 @@
     
     Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner', {
         statics: {
-            config: {
-                init: function () {
-                    Bridge.ready(this.main);
-                }
-            },
-            main: function () {
+            $main: function () {
                 QUnit.module("Issues3");
                 QUnit.test("#69 - ThisKeywordInStructConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge069.thisKeywordInStructConstructorWorks);
                 QUnit.test("#1000 - TestStaticViaChild", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1000.testStaticViaChild);
@@ -203,6 +198,7 @@
                 QUnit.test("#1448 - TestPlainForNonAnonymous", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1448.testPlainForNonAnonymous);
                 QUnit.test("#1448 - TestObjectLiteralProperty", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1448.testObjectLiteralProperty);
                 QUnit.test("#1448 - TestToObjectLiteralAlias", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1448.testToObjectLiteralAlias);
+                QUnit.test("#1458 - TestConsoleWriteLineForLong", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1458.testConsoleWriteLineForLong);
                 QUnit.test("#1459 - TestHtmlElements", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1459.testHtmlElements);
                 QUnit.test("#1467 - TestForeachTypeChecking", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1467.testForeachTypeChecking);
                 QUnit.test("#1472 - TestMultiplyThisInTemplate", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1472.testMultiplyThisInTemplate);
@@ -260,6 +256,11 @@
                 QUnit.test("#1713 - TestOverloadResolutionMSDN1", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1713MSDN.testOverloadResolutionMSDN1);
                 QUnit.test("#1713 - TestOverloadResolutionMSDN2", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1713MSDN.testOverloadResolutionMSDN2);
                 QUnit.test("#1715 - TestCollectionInitializerWithAdd", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1715.testCollectionInitializerWithAdd);
+                QUnit.test("#1735 - TestTryGetValueOutDelegateParameter", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1735.testTryGetValueOutDelegateParameter);
+                QUnit.test("#1735 - TestOutDelegateParameter", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1735.testOutDelegateParameter);
+                QUnit.test("#1735 - TestReferenceDelegateParameter", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1735.testReferenceDelegateParameter);
+                QUnit.test("#1737 - TestGetClassName_FullName", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1737.testGetClassName_FullName);
+                QUnit.test("#1741 - TestNumbersHashCode", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1741.testNumbersHashCode);
                 QUnit.test("#381 - TestUseCase", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge381.testUseCase);
                 QUnit.test("#447 - CheckInlineExpression", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge447.checkInlineExpression);
                 QUnit.test("#447 - CheckInlineCalls", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge447.checkInlineCalls);
@@ -464,8 +465,7 @@
                 QUnit.test("#470", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues.n470);
                 QUnit.test("#499", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues.n499);
             }
-        },
-        $entryPoint: true
+        }
     });
 
     Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge069', {
@@ -1860,6 +1860,27 @@
         }
     });
 
+    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1458', {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458)],
+        statics: {
+            testConsoleWriteLineForLong: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1458, 1);
+                try {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458.testConsoleWriteLineForLong();
+                }
+                finally {
+                    t.tearDown();
+                }
+            }
+        },
+        setUp: function () {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458.clearOutput();
+        },
+        tearDown: function () {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458.resetOutput();
+        }
+    });
+
     Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1459', {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1459)],
         statics: {
@@ -2235,8 +2256,19 @@
         statics: {
             testReflectionForNativeTypes: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1698).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1698, 14);
-                t.getFixture().testReflectionForNativeTypes();
+                try {
+                    t.getFixture().testReflectionForNativeTypes();
+                }
+                finally {
+                    t.tearDown();
+                }
             }
+        },
+        setUp: function () {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1698.clearOutput();
+        },
+        tearDown: function () {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1698.resetOutput();
         }
     });
 
@@ -2342,6 +2374,44 @@
             testCollectionInitializerWithAdd: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1715).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1715);
                 t.getFixture().testCollectionInitializerWithAdd();
+            }
+        }
+    });
+
+    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1735', {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1735)],
+        statics: {
+            testTryGetValueOutDelegateParameter: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1735).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1735);
+                t.getFixture().testTryGetValueOutDelegateParameter();
+            },
+            testOutDelegateParameter: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1735).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1735);
+                t.getFixture().testOutDelegateParameter();
+            },
+            testReferenceDelegateParameter: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1735).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1735);
+                t.getFixture().testReferenceDelegateParameter();
+            }
+        }
+    });
+
+    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1737', {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1737)],
+        statics: {
+            testGetClassName_FullName: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1737).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1737);
+                t.getFixture().testGetClassName_FullName();
+            }
+        }
+    });
+
+    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1741', {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1741)],
+        statics: {
+            testNumbersHashCode: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1741).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1741);
+                t.getFixture().testNumbersHashCode();
             }
         }
     });

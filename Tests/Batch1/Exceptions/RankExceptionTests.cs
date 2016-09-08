@@ -12,7 +12,7 @@ namespace Bridge.ClientTest.Exceptions
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.RankException", typeof(RankException).GetClassName(), "Name");
+            Assert.AreEqual("System.RankException", typeof(RankException).FullName, "Name");
             object d = new RankException();
             Assert.True(d is RankException);
             Assert.True(d is Exception);

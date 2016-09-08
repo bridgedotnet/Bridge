@@ -12,7 +12,7 @@ namespace Bridge.ClientTest.Format
         public void TypePropertiesAreCorrect()
         {
             var format = NumberFormatInfo.InvariantInfo;
-            Assert.AreEqual("System.Globalization.NumberFormatInfo", typeof(NumberFormatInfo).GetClassName());
+            Assert.AreEqual("System.Globalization.NumberFormatInfo", typeof(NumberFormatInfo).FullName);
             Assert.True(format is NumberFormatInfo);
         }
 

@@ -19,7 +19,7 @@ namespace Bridge.Html5.TypedArray
     [Namespace(false)]
     public abstract class Prototype<TypedArray, TypedElement> : IList<TypedElement>
     {
-		#region Properties
+        #region Properties
 
         //TODO: Identify how to represent the Func<x,TypedArray> ctor.
         // <summary>

@@ -690,7 +690,7 @@ namespace Bridge.ClientTest.ConvertTests
             {
                 if (formatProvider != null)
                 {
-                    return string.Format("{0}: {1}", formatProvider.GetClassName(), _value);
+                    return string.Format("{0}: {1}", formatProvider.GetType().FullName, _value);
                 }
                 else
                 {
