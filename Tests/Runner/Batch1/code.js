@@ -1688,7 +1688,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 372029403;
+            hash = hash * 23 + 71;
             hash = hash * 23 + (this.x == null ? 0 : Bridge.getHashCode(this.x));
             hash = hash * 23 + (this.s == null ? 0 : Bridge.getHashCode(this.s));
             hash = hash * 23 + (this.z == null ? 0 : Bridge.getHashCode(this.z));
@@ -1759,7 +1759,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 372029423;
+            hash = hash * 23 + 83;
             hash = hash * 23 + (this.x == null ? 0 : Bridge.getHashCode(this.x));
             return hash;
         },
@@ -2000,7 +2000,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1554797180;
+            hash = hash * 23 + 1852403652;
             hash = hash * 23 + (this.x == null ? 0 : Bridge.getHashCode(this.x));
             hash = hash * 23 + (this.y == null ? 0 : Bridge.getHashCode(this.y));
             return hash;
@@ -2050,7 +2050,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 2001675717;
+            hash = hash * 23 + 3771388952;
             hash = hash * 23 + (this.l == null ? 0 : Bridge.getHashCode(this.l));
             hash = hash * 23 + (this.t == null ? 0 : Bridge.getHashCode(this.t));
             return hash;
@@ -3426,6 +3426,192 @@
     Bridge.define('Bridge.ClientTest.Batch1.Reflection.AssemblyTests.G$2', function (T1, T2) { return {
 
     }; });
+
+    Bridge.define('Bridge.ClientTest.BridgeConsoleTests', {
+        testLogMessageObject: function () {
+            this.assertLogMessageObject("#0 - ", "Test Bridge Console Log Message Object", "Test Bridge Console Log Message Object");
+            this.assertLogMessageObject("#1 - ", true, "true");
+            this.assertLogMessageObject("#2 - ", false, "false");
+            this.assertLogMessageObject("#3 - ", -1, "-1");
+            this.assertLogMessageObject("#4 - ", 1, "1");
+            this.assertLogMessageObject("#5 - ", -12345678, "-12345678");
+            this.assertLogMessageObject("#6 - ", 12345678, "12345678");
+            this.assertLogMessageObject("#7 - ", System.Int64(-1), "-1");
+            this.assertLogMessageObject("#8 - ", System.Int64(1), "1");
+            this.assertLogMessageObject("#9 - ", System.Int64(-12345678), "-12345678");
+            this.assertLogMessageObject("#10 - ", System.Int64(12345678), "12345678");
+            this.assertLogMessageObject("#11 - ", System.UInt64(1), "1");
+            this.assertLogMessageObject("#12 - ", System.UInt64(12345678), "12345678");
+            this.assertLogMessageObject("#13 - ", -1.0, "-1");
+            this.assertLogMessageObject("#14 - ", 1.0, "1");
+            this.assertLogMessageObject("#15 - ", -12345678.0, "-12345678");
+            this.assertLogMessageObject("#16 - ", 12345678.0, "12345678");
+            this.assertLogMessageObject("#17 - ", -1.12345678, "-1.12345678");
+            this.assertLogMessageObject("#18 - ", 1.12345678, "1.12345678");
+            this.assertLogMessageObject("#19 - ", -12345678.12345678, "-12345678.12345678");
+            this.assertLogMessageObject("#20 - ", 12345678.12345678, "12345678.12345678");
+            this.assertLogMessageObject("#21 - ", System.Decimal(-1.0), "-1");
+            this.assertLogMessageObject("#22 - ", System.Decimal(1.0), "1");
+            this.assertLogMessageObject("#23 - ", System.Decimal(-12345678.0), "-12345678");
+            this.assertLogMessageObject("#24 - ", System.Decimal(12345678.0), "12345678");
+            this.assertLogMessageObject("#25 - ", System.Decimal(-1.12345678), "-1.12345678");
+            this.assertLogMessageObject("#26 - ", System.Decimal(1.12345678), "1.12345678");
+            this.assertLogMessageObject("#27 - ", System.Decimal("-12345678.12345678"), "-12345678.12345678");
+            this.assertLogMessageObject("#28 - ", System.Decimal("12345678.12345678"), "12345678.12345678");
+            this.assertLogMessageObject("#29 - ", null, "null");
+            this.assertLogMessageObject("#30 - ", {  }, "[object Object]");
+            this.assertLogMessageObject("#31 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassA(), "I'm ClassA");
+            this.assertLogMessageObject("#32 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassB(), "[object Object]");
+        },
+        testLogMessageString: function () {
+            this.assertLogMessageObject("#1 - ", "Test Bridge Console Log Message String", "Test Bridge Console Log Message String");
+            this.assertLogMessageObject("#2 - ", null, "null");
+        },
+        testDebugMessageString: function () {
+            this.assertDebugMessageString("#1 - ", "Test Bridge Console Debug Message String", "Test Bridge Console Debug Message String");
+            this.assertDebugMessageString("#2 - ", null, "null");
+        },
+        testErrorMessageString: function () {
+            this.assertErrorMessageString("#1 - ", "Test Bridge Console Error Message String", "Test Bridge Console Error Message String");
+            this.assertErrorMessageString("#2 - ", null, "null");
+        },
+        testToggling: function () {
+            Bridge.Console.hide();
+            Bridge.Console.log("Hide/Log");
+            this.assertMessage("#1 - ", "Hide/Log");
+
+            Bridge.Console.getInstance().close();
+            Bridge.Console.getInstance().close();
+            Bridge.Console.hide();
+            Bridge.Console.log("Close/Close/Hide/Log");
+            this.assertMessage("#2 - ", "Close/Close/Hide/Log");
+
+            Bridge.Console.getInstance().close();
+            Bridge.Console.hide();
+            Bridge.Console.hide();
+            Bridge.Console.log("Close/Hide/Hide/Log");
+            this.assertMessage("#3 - ", "Close/Hide/Hide/Log");
+
+            Bridge.Console.getInstance().close();
+            Bridge.Console.hide();
+            Bridge.Console.show();
+            Bridge.Console.show();
+            Bridge.Console.log("Close/Hide/Show/Show/Log");
+            this.assertMessage("#4 - ", "Close/Hide/Show/Show/Log");
+
+            Bridge.Console.hide();
+            Bridge.Console.show();
+            this.assertMessage("#5 Messages preserved after - ", "Close/Hide/Show/Show/Log");
+            Bridge.Console.hide();
+            Bridge.Console.show();
+            Bridge.Console.log("Hide/Show/Hide/Show/Log");
+            this.assertMessage("#6 - ", "Hide/Show/Hide/Show/Log");
+        },
+        assertLogMessageObject: function (description, message, expected) {
+            Bridge.Console.log(message);
+            this.assertMessage(description, expected);
+        },
+        assertLogMessageString: function (description, message, expected) {
+            Bridge.Console.log(message);
+            this.assertMessage(description, expected);
+        },
+        assertDebugMessageString: function (description, message, expected) {
+            Bridge.Console.debug(message);
+            this.assertMessage(description, expected, "#1800FF");
+        },
+        assertErrorMessageString: function (description, message, expected) {
+            Bridge.Console.error(message);
+            this.assertMessage(description, expected, "#d65050");
+        },
+        assertMessage: function (description, expected, color) {
+            if (color === void 0) { color = "#555"; }
+            var el = Bridge.as(Bridge.Console.getInstance().currentMessageElement, HTMLLIElement);
+
+            if (el == null) {
+                Bridge.Test.Assert.fail$1(System.String.concat(description, "Could not get current message as HTMLLIElement"));
+                return;
+            }
+
+            Bridge.Test.Assert.true$1(true, System.String.concat(description, "Message <li> element exists"));
+
+            var span = System.Linq.Enumerable.from(el.getElementsByTagName("span")).firstOrDefault(null, null);
+
+            if (span == null) {
+                Bridge.Test.Assert.fail$1(System.String.concat(description, "Could not get message span element"));
+                return;
+            }
+
+            Bridge.Test.Assert.true$1(true, System.String.concat(description, "Message <span> element exists"));
+            Bridge.Test.Assert.areEqual$1(expected, span.innerHTML, System.String.concat(description, "Message is correct"));
+            Bridge.Test.Assert.areEqual$1(this.normalizeHexStyleColor(color), this.convertStyleColor(span.style.color), System.String.concat(System.String.concat(System.String.concat(System.String.concat(description, "Message <span> color ("), span.style.color), ") should be "), color));
+        },
+        convertStyleColor: function (styleColor) {
+            var r = new RegExp("^rgb\\((\\d+),\\s*(\\d+),\\s*(\\d+)\\)$");
+
+            var items = r.exec(styleColor);
+
+            if (items != null && items.length >= 4) {
+                styleColor = this.rgbToHex(items[1], items[2], items[3]);
+            }
+
+            return this.normalizeHexStyleColor(styleColor);
+        },
+        normalizeHexStyleColor: function (styleColor) {
+            if (System.String.isNullOrEmpty(styleColor) || !System.String.startsWith(styleColor, "#")) {
+                return styleColor;
+            }
+
+            var subColor = styleColor.substr(1);
+            if (subColor.length < 1) {
+                return styleColor;
+            } else if (subColor.length === 3) {
+                subColor = this.duplicate$1(subColor);
+            }
+
+            if (subColor.length < 6) {
+                var toAdd = ("000000").substr(0, ((6 - subColor.length) | 0));
+                subColor = System.String.concat(toAdd, subColor);
+            }
+
+            styleColor = (System.String.concat(String.fromCharCode(styleColor.charCodeAt(0)), subColor)).toUpperCase();
+
+            return styleColor;
+        },
+        duplicate: function (c) {
+            return System.String.concat(String.fromCharCode(c), String.fromCharCode(c));
+        },
+        duplicate$1: function (s) {
+            if (s == null) {
+                return null;
+            }
+
+            var r = "";
+            for (var i = 0; i < s.length; i = (i + 1) | 0) {
+                r = System.String.concat(r, (this.duplicate(s.charCodeAt(i))));
+            }
+
+            return r;
+        },
+        rgbToHex: function (r, g, b) {
+            return System.String.concat(System.String.concat(System.String.concat("#", this.toHexNumber(r)), this.toHexNumber(g)), this.toHexNumber(b));
+        },
+        toHexNumber: function (n) {
+            var i = { v : 0 };
+            System.Int32.tryParse(n, i);
+
+            var r = System.Int32.format(i.v, "X2");
+
+            return r;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.BridgeConsoleTests.ClassA', {
+        toString: function () {
+            return "I'm ClassA";
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.BridgeConsoleTests.ClassB');
 
     Bridge.define('Bridge.ClientTest.CheckedUncheckedTests', {
         statics: {
@@ -6546,6 +6732,7 @@
             MODULE_REFLECTION: "Reflection",
             MODULE_ARGUMENTS: "Arguments",
             MODULE_MIXIN: "Mixin",
+            MODULE_BRIDGECONSOLE: "Bridge Console",
             IGNORE_DATE: null
         }
     });
@@ -6881,7 +7068,7 @@
                     if (useTrue) {
                         Bridge.Test.Assert.true$1(Bridge.equals(expected, result), System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat("Test: ", testValue), " Expected: "), expected.toString()), " Result: "), result.toString()));
                     } else {
-                        Bridge.Test.Assert.areEqual(expected, result);
+                        Bridge.Test.Assert.areEqual$1(expected, result, System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat("Test: ", testValue), " Expected: "), expected.toString()), " Result: "), result.toString()));
                     }
                 }
                 catch (ex) {
@@ -8663,7 +8850,7 @@
             sb.appendLine();
             sb.append("};");
 
-            System.Console.log(sb.toString());
+            Bridge.Console.log(sb.toString());
         }
     });
 
@@ -12459,7 +12646,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1276122535;
+            hash = hash * 23 + 6320272310;
             hash = hash * 23 + (this.a == null ? 0 : Bridge.getHashCode(this.a));
             hash = hash * 23 + (this.b == null ? 0 : Bridge.getHashCode(this.b));
             return hash;
@@ -12492,7 +12679,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1276122536;
+            hash = hash * 23 + 6320337846;
             hash = hash * 23 + (this.a == null ? 0 : Bridge.getHashCode(this.a));
             hash = hash * 23 + (this.b == null ? 0 : Bridge.getHashCode(this.b));
             return hash;
@@ -13016,7 +13203,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1276122537;
+            hash = hash * 23 + 6320403382;
             hash = hash * 23 + (this.group == null ? 0 : Bridge.getHashCode(this.group));
             hash = hash * 23 + (this.personCount == null ? 0 : Bridge.getHashCode(this.personCount));
             return hash;
@@ -13049,7 +13236,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1276122538;
+            hash = hash * 23 + 6320468918;
             hash = hash * 23 + (this.group == null ? 0 : Bridge.getHashCode(this.group));
             hash = hash * 23 + (this.sum == null ? 0 : Bridge.getHashCode(this.sum));
             return hash;
@@ -13082,7 +13269,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1276122539;
+            hash = hash * 23 + 6320534454;
             hash = hash * 23 + (this.group == null ? 0 : Bridge.getHashCode(this.group));
             hash = hash * 23 + (this.min == null ? 0 : Bridge.getHashCode(this.min));
             return hash;
@@ -13115,7 +13302,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1276122540;
+            hash = hash * 23 + 6320599990;
             hash = hash * 23 + (this.g == null ? 0 : Bridge.getHashCode(this.g));
             hash = hash * 23 + (this.minCount == null ? 0 : Bridge.getHashCode(this.minCount));
             return hash;
@@ -13148,7 +13335,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1276122541;
+            hash = hash * 23 + 6320665526;
             hash = hash * 23 + (this.group == null ? 0 : Bridge.getHashCode(this.group));
             hash = hash * 23 + (this.name == null ? 0 : Bridge.getHashCode(this.name));
             return hash;
@@ -13181,7 +13368,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1276122526;
+            hash = hash * 23 + 6320731062;
             hash = hash * 23 + (this.group == null ? 0 : Bridge.getHashCode(this.group));
             hash = hash * 23 + (this.max == null ? 0 : Bridge.getHashCode(this.max));
             return hash;
@@ -13214,7 +13401,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1276122527;
+            hash = hash * 23 + 6320796598;
             hash = hash * 23 + (this.g == null ? 0 : Bridge.getHashCode(this.g));
             hash = hash * 23 + (this.maxCount == null ? 0 : Bridge.getHashCode(this.maxCount));
             return hash;
@@ -13586,7 +13773,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 784520983;
+            hash = hash * 23 + 7125578678;
             hash = hash * 23 + (this.number == null ? 0 : Bridge.getHashCode(this.number));
             hash = hash * 23 + (this.isOdd == null ? 0 : Bridge.getHashCode(this.isOdd));
             return hash;
@@ -13692,7 +13879,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -1944362372;
+            hash = hash * 23 + 7142355894;
             hash = hash * 23 + (this.remainder == null ? 0 : Bridge.getHashCode(this.remainder));
             hash = hash * 23 + (this.numbers == null ? 0 : Bridge.getHashCode(this.numbers));
             return hash;
@@ -13725,7 +13912,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1947320397;
+            hash = hash * 23 + 7159133110;
             hash = hash * 23 + (this.firstLetter == null ? 0 : Bridge.getHashCode(this.firstLetter));
             hash = hash * 23 + (this.words == null ? 0 : Bridge.getHashCode(this.words));
             return hash;
@@ -13758,7 +13945,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -781562958;
+            hash = hash * 23 + 7175910326;
             hash = hash * 23 + (this.group == null ? 0 : Bridge.getHashCode(this.group));
             hash = hash * 23 + (this.persons == null ? 0 : Bridge.getHashCode(this.persons));
             return hash;
@@ -13791,7 +13978,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -1184847485;
+            hash = hash * 23 + 7192687542;
             hash = hash * 23 + (this.key == null ? 0 : Bridge.getHashCode(this.key));
             hash = hash * 23 + (this.words == null ? 0 : Bridge.getHashCode(this.words));
             return hash;
@@ -13909,7 +14096,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 381236456;
+            hash = hash * 23 + 7209464758;
             hash = hash * 23 + (this.name == null ? 0 : Bridge.getHashCode(this.name));
             hash = hash * 23 + (this.limit == null ? 0 : Bridge.getHashCode(this.limit));
             return hash;
@@ -13942,7 +14129,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -22048071;
+            hash = hash * 23 + 7226241974;
             hash = hash * 23 + (this.g == null ? 0 : Bridge.getHashCode(this.g));
             hash = hash * 23 + (this.pg == null ? 0 : Bridge.getHashCode(this.pg));
             return hash;
@@ -13975,7 +14162,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1544035870;
+            hash = hash * 23 + 7243019190;
             hash = hash * 23 + (this.groupName == null ? 0 : Bridge.getHashCode(this.groupName));
             hash = hash * 23 + (this.personName == null ? 0 : Bridge.getHashCode(this.personName));
             return hash;
@@ -14008,7 +14195,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 428290623;
+            hash = hash * 23 + 7259796406;
             hash = hash * 23 + (this.name == null ? 0 : Bridge.getHashCode(this.name));
             hash = hash * 23 + (this.digit == null ? 0 : Bridge.getHashCode(this.digit));
             return hash;
@@ -14041,7 +14228,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1994374564;
+            hash = hash * 23 + 7276573622;
             hash = hash * 23 + (this.x3 == null ? 0 : Bridge.getHashCode(this.x3));
             hash = hash * 23 + (this.ep == null ? 0 : Bridge.getHashCode(this.ep));
             return hash;
@@ -14365,7 +14552,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 784520984;
+            hash = hash * 23 + 7125644214;
             hash = hash * 23 + (this.name == null ? 0 : Bridge.getHashCode(this.name));
             return hash;
         },
@@ -14396,7 +14583,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -1944362371;
+            hash = hash * 23 + 7142421430;
             hash = hash * 23 + (this.number == null ? 0 : Bridge.getHashCode(this.number));
             hash = hash * 23 + (this.isIndex == null ? 0 : Bridge.getHashCode(this.isIndex));
             return hash;
@@ -14425,7 +14612,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1947320398;
+            hash = hash * 23 + 7159198646;
             hash = hash * 23 + (this.sum == null ? 0 : Bridge.getHashCode(this.sum));
             return hash;
         },
@@ -14460,7 +14647,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -781562957;
+            hash = hash * 23 + 7175975862;
             hash = hash * 23 + (this.a == null ? 0 : Bridge.getHashCode(this.a));
             hash = hash * 23 + (this.b == null ? 0 : Bridge.getHashCode(this.b));
             hash = hash * 23 + (this.i == null ? 0 : Bridge.getHashCode(this.i));
@@ -14558,7 +14745,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -1184847484;
+            hash = hash * 23 + 7192753078;
             hash = hash * 23 + (this.group == null ? 0 : Bridge.getHashCode(this.group));
             hash = hash * 23 + (this.names == null ? 0 : Bridge.getHashCode(this.names));
             return hash;
@@ -19805,7 +19992,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 381236457;
+            hash = hash * 23 + 7209530294;
             hash = hash * 23 + (this.x == null ? 0 : Bridge.getHashCode(this.x));
             return hash;
         },
@@ -19836,7 +20023,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -22048070;
+            hash = hash * 23 + 7226307510;
             hash = hash * 23 + (this.x == null ? 0 : Bridge.getHashCode(this.x));
             hash = hash * 23 + (this.y == null ? 0 : Bridge.getHashCode(this.y));
             return hash;
@@ -29003,6 +29190,11 @@
         },
         fromString: function () {
             var expectedValues = [new Date(1999, 12 - 1, 31, 23, 59, 59), new Date(100, 1 - 1, 1, 0, 0, 0), new Date(2216, 2 - 1, 29, 0, 0, 0), new Date(1, 1 - 1, 1, 0, 0, 0)];
+
+            if (Bridge.ClientTest.Utilities.BrowserHelper.isPhantomJs()) {
+                // AppVeyor Chutzpah engine adjustment
+                expectedValues[1] = new Date(1950, 2 - 1, 2, 4, 10, 50);
+            }
 
             var dateTimeFormat = System.Globalization.CultureInfo.getCurrentCulture().dateTimeFormat;
             var pattern = System.String.concat(System.String.concat(dateTimeFormat.longDatePattern, String.fromCharCode(32)), dateTimeFormat.longTimePattern);

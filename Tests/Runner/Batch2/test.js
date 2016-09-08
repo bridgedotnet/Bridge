@@ -2,12 +2,7 @@
     
     Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner', {
         statics: {
-            config: {
-                init: function () {
-                    Bridge.ready(this.main);
-                }
-            },
-            main: function () {
+            $main: function () {
                 QUnit.module("Checked/Unckecked");
                 QUnit.test("CheckedInsideUnchecked - Batch2 TestInt32", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests.testInt32);
                 QUnit.test("CheckedInsideUnchecked - Batch2 TestUInt32", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests.testUInt32);
@@ -86,8 +81,7 @@
                 QUnit.test("#772 - Batch2 IssueSpecific", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.issueSpecific);
                 QUnit.test("#772 - Batch2 TestUseCase", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.testUseCase);
             }
-        },
-        $entryPoint: true
+        }
     });
 
     Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_Bridge1385', {

@@ -128,7 +128,7 @@ namespace Bridge.ClientTest.ConvertTests
                     }
                     else
                     {
-                        Assert.AreEqual(expected, result);
+                        Assert.AreEqual(expected, result, "Test: " + testValue + " Expected: " + expected.ToString() + " Result: " + result.ToString());
                     }
                 }
                 catch (Exception ex)

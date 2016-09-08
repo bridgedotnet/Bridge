@@ -179,6 +179,8 @@ namespace Bridge.Translator
                 path = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Location), path));
             }
 
+            path = new Bridge.Contract.ConfigHelper().ConvertPath(path);
+
             return path;
         }
 
@@ -240,8 +242,6 @@ namespace Bridge.Translator
         protected virtual void ReadDefineConstants(XDocument doc)
         {
             this.Log.Info("Reading define constants...");
-
-            var result = new List<string>();
 
             var nodeList = doc.Descendants().Where(n =>
             {

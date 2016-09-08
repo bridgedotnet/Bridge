@@ -82,7 +82,6 @@ namespace Bridge.Translator
             }
             catch (Exception)
             {
-                
             }
 
             return value;
@@ -362,7 +361,6 @@ namespace Bridge.Translator
             else if (member is PropertyDefinition)
             {
                 var prop = (PropertyDefinition)member;
-                var accessor = prop.GetMethod ?? prop.SetMethod;
                 isStatic = prop.GetMethod != null ? prop.GetMethod.IsStatic : false;
             }
             else if (member is EventDefinition)
@@ -684,7 +682,7 @@ namespace Bridge.Translator
                         value = rr.ConstantValue.ToString();
                     }
                 }
-                
+
                 result.Add(value);
             }
 

@@ -1,6 +1,9 @@
 using Bridge.Contract;
 using ICSharpCode.NRefactory.CSharp;
 using System.Linq;
+using Bridge.Contract.Constants;
+using ICSharpCode.NRefactory.Semantics;
+using ICSharpCode.NRefactory.TypeSystem;
 
 namespace Bridge.Translator
 {
@@ -68,11 +71,34 @@ namespace Bridge.Translator
 
             this.AddLocals(methodDeclaration.Parameters, methodDeclaration.Body);
 
-            var typeDef = this.Emitter.GetTypeDefinition();
             var overloads = OverloadsCollection.Create(this.Emitter, methodDeclaration);
             XmlToJsDoc.EmitComment(this, this.MethodDeclaration);
 
             string name = overloads.GetOverloadName(false, null, true);
+            var member_rr = this.Emitter.Resolver.ResolveNode(methodDeclaration, this.Emitter) as MemberResolveResult;
+            var method = member_rr != null ? member_rr.Member : null;
+
+            if (method != null && method.Name == CS.Methods.AUTO_STARTUP_METHOD_NAME &&
+                method.IsStatic &&
+                !method.IsAbstract &&
+                ConstructorBlock.IsEntryPointCandidate(this.Emitter, methodDeclaration))
+            {
+                bool isReady = false;
+                foreach (var attr in method.Attributes)
+                {
+                    if (attr.AttributeType.FullName == CS.Attributes.READY_ATTRIBUTE_NAME)
+                    {
+                        isReady = true;
+                        break;
+                    }
+                }
+
+                if (!isReady)
+                {
+                    name = JS.Fields.MAIN;
+                }
+            }
+
             this.Write(name);
 
             this.WriteColon();
