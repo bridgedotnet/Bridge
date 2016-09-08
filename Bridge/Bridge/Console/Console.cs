@@ -146,7 +146,7 @@ namespace Bridge.Utils
 
         private static string position = "horizontal";
 
-        private static readonly Console instance = new Console { };
+        private static Console instance = null;
 
         private Console()
         {
@@ -157,11 +157,16 @@ namespace Bridge.Utils
         {
             get
             {
+                if (instance == null)
+                {
+                    instance = new Console();
+                }
+
                 return instance;
             }
         }
 
-        public void Init()
+        private void Init()
         {
             var consoleWrapperStyles = new Dictionary<string, string> {
                 { "position", "fixed" },
@@ -380,14 +385,30 @@ namespace Bridge.Utils
 
         public static void Hide()
         {
+            if (instance == null)
+            {
+                return;
+            }
+
             var self = Instance;
-            self.Hidden = true;
+
+            if (self.Hidden)
+            {
+                return;
+            }
 
             self.Close();
         }
 
         public static void Show()
         {
+            var self = Instance;
+
+            if (!self.Hidden)
+            {
+                return;
+            }
+
             Instance.Hidden = false;
         }
 
@@ -433,6 +454,8 @@ namespace Bridge.Utils
         /// </summary>
         public void Close()
         {
+            Hidden = true;
+
             ConsoleWrapper.Style.Display = "none";
 
             if (position == "horizontal")
