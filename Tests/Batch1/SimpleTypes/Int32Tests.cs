@@ -16,7 +16,7 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.False((object)0.5 is int);
             Assert.False((object)-2147483649 is int);
             Assert.False((object)2147483648 is int);
-            Assert.AreEqual("System.Int32", typeof(int).GetClassName());
+            Assert.AreEqual("System.Int32", typeof(int).FullName);
 
             object i = (int)0;
             Assert.True(i is int);

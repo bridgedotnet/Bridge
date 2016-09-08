@@ -23,7 +23,7 @@ namespace Bridge.Translator
         {
             var elements = this.ArrayInitializerExpression.Elements;
             var first = elements.Count > 0 ? elements.First() : null;
-            var isCollectionInitializer = first is ArrayInitializerExpression;
+
             var isObjectInitializer = first is NamedExpression || first is NamedArgumentExpression;
 
             if (!isObjectInitializer || this.ArrayInitializerExpression.IsSingleElement)

@@ -35,7 +35,7 @@
       "name": "testResources1.js",
       "extract": true,
       "files": [
-        "Bridge\\output/linkedFiles.js",
+        "Bridge\\output/testIssue1035.js",
         "Bridge\\output/testIssue379.js"
       ]
     },
@@ -44,7 +44,7 @@
     {
       "name": "testResources2.js",
       "files": [
-        "Bridge\\output/linkedFiles.js"
+        "Bridge\\output/testIssue1230.js"
       ]
     },
     // Check two files embedded and extracted into Bridge\output\resources folder

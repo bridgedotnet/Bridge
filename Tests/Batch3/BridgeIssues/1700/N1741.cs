@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using Bridge.Test;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
@@ -11,9 +9,11 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test]
         public void TestNumbersHashCode()
         {
-            Assert.AreEqual(10, 10.GetHashCode());
-            Assert.AreNotEqual(10.GetHashCode(), 100.GetHashCode());
-            Assert.AreNotEqual(100.1.GetHashCode(), 100.2.GetHashCode());
+            Assert.AreEqual(10, 10.GetHashCode(), "10/10");
+            Assert.AreNotEqual(10.GetHashCode(), 100.GetHashCode(), "10/100");
+
+            Assert.AreEqual(100.1.GetHashCode(), 100.1.GetHashCode(), "100.1/100.1");
+            Assert.AreNotEqual(100.1.GetHashCode(), 100.2.GetHashCode(), "100.1/100.2");
         }
     }
 }

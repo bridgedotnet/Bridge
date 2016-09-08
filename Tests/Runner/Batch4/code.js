@@ -8409,7 +8409,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1276122535;
+            hash = hash * 23 + 6320272310;
             hash = hash * 23 + (this.a == null ? 0 : Bridge.getHashCode(this.a));
             hash = hash * 23 + (this.b == null ? 0 : Bridge.getHashCode(this.b));
             return hash;
@@ -8442,7 +8442,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1276122536;
+            hash = hash * 23 + 6320337846;
             hash = hash * 23 + (this.a == null ? 0 : Bridge.getHashCode(this.a));
             hash = hash * 23 + (this.b == null ? 0 : Bridge.getHashCode(this.b));
             return hash;
@@ -9677,7 +9677,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -985419156;
+            hash = hash * 23 + 2035605181;
             hash = hash * 23 + (this.v == null ? 0 : Bridge.getHashCode(this.v));
             return hash;
         },
@@ -14044,7 +14044,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1276122537;
+            hash = hash * 23 + 6320403382;
             hash = hash * 23 + (this.x == null ? 0 : Bridge.getHashCode(this.x));
             return hash;
         },
@@ -14075,7 +14075,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1276122538;
+            hash = hash * 23 + 6320468918;
             hash = hash * 23 + (this.x == null ? 0 : Bridge.getHashCode(this.x));
             hash = hash * 23 + (this.y == null ? 0 : Bridge.getHashCode(this.y));
             return hash;
@@ -14448,7 +14448,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 372029423;
+            hash = hash * 23 + 83;
             hash = hash * 23 + (this.i == null ? 0 : Bridge.getHashCode(this.i));
             hash = hash * 23 + (this.j == null ? 0 : Bridge.getHashCode(this.j));
             return hash;
@@ -14569,7 +14569,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1276122539;
+            hash = hash * 23 + 6320534454;
             return hash;
         },
         toJSON: function () {
@@ -21039,20 +21039,20 @@
 
     Bridge.define('Bridge.ClientTest.Batch4.Threading.CancellationTokenTests', {
         typePropertiesForCancellationTokenSourceAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Threading.CancellationTokenSource", Bridge.getTypeName(System.Threading.CancellationTokenSource), "FullName");
+            Bridge.Test.Assert.areEqual$1("System.Threading.CancellationTokenSource", Bridge.Reflection.getTypeFullName(System.Threading.CancellationTokenSource), "FullName");
             var cts = new System.Threading.CancellationTokenSource();
             Bridge.Test.Assert.true(Bridge.is(cts, System.Threading.CancellationTokenSource));
             Bridge.Test.Assert.true(Bridge.is(cts, System.IDisposable));
         },
         typePropertiesForCancellationTokenAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Threading.CancellationToken", Bridge.getTypeName(System.Threading.CancellationToken), "FullName");
+            Bridge.Test.Assert.areEqual$1("System.Threading.CancellationToken", Bridge.Reflection.getTypeFullName(System.Threading.CancellationToken), "FullName");
 
             Bridge.Test.Assert.true(Bridge.hasValue(new System.Threading.CancellationToken()));
             Bridge.Test.Assert.true(Bridge.hasValue(System.Threading.CancellationToken.none));
             Bridge.Test.Assert.true(Bridge.hasValue(new System.Threading.CancellationTokenSource().token));
         },
         typePropertiesForCancellationTokenRegistrationAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Threading.CancellationTokenRegistration", Bridge.getTypeName(System.Threading.CancellationTokenRegistration), "FullName");
+            Bridge.Test.Assert.areEqual$1("System.Threading.CancellationTokenRegistration", Bridge.Reflection.getTypeFullName(System.Threading.CancellationTokenRegistration), "FullName");
 
             var ctr = new System.Threading.CancellationTokenRegistration();
             Bridge.Test.Assert.true$1(Bridge.is(ctr, System.Threading.CancellationTokenRegistration), "CancellationTokenRegistration");
@@ -21660,7 +21660,7 @@
                                     continue;
                                 }
                                 case 4: {
-                                    Bridge.Test.Assert.fail$1(System.String.concat("Thrown exception should have been an AggregateException, was ", Bridge.getTypeName(ex1)));
+                                    Bridge.Test.Assert.fail$1(System.String.concat("Thrown exception should have been an AggregateException, was ", Bridge.Reflection.getTypeFullName(Bridge.getType(ex1))));
                                     $async_e = null;
                                     $step = 5;
                                     continue;
@@ -21884,13 +21884,13 @@
             return System.Array.toEnumerable($yield);
         },
         taskCompletionSourceTypePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Threading.Tasks.TaskCompletionSource", Bridge.getTypeName(System.Threading.Tasks.TaskCompletionSource), "FullName should be correct");
+            Bridge.Test.Assert.areEqual$1("System.Threading.Tasks.TaskCompletionSource", Bridge.Reflection.getTypeFullName(System.Threading.Tasks.TaskCompletionSource), "FullName should be correct");
             var tcs = new System.Threading.Tasks.TaskCompletionSource();
             Bridge.Test.Assert.true(Bridge.hasValue(tcs));
         },
         taskTypePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Threading.Tasks.Task", Bridge.getTypeName(System.Threading.Tasks.Task), "FullName for non-generic task should be correct");
-            Bridge.Test.Assert.areEqual$1("System.Threading.Tasks.Task", Bridge.getTypeName(System.Threading.Tasks.Task), "FullName for generic task should be correct");
+            Bridge.Test.Assert.areEqual$1("System.Threading.Tasks.Task", Bridge.Reflection.getTypeFullName(System.Threading.Tasks.Task), "FullName for non-generic task should be correct");
+            Bridge.Test.Assert.areEqual$1("System.Threading.Tasks.Task", Bridge.Reflection.getTypeFullName(System.Threading.Tasks.Task), "FullName for generic task should be correct");
 
             var task = new System.Threading.Tasks.TaskCompletionSource().task;
             Bridge.Test.Assert.true(Bridge.hasValue(task));
@@ -23529,7 +23529,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1690816231;
+            hash = hash * 23 + 3232589;
             hash = hash * 23 + (this.i == null ? 0 : Bridge.getHashCode(this.i));
             hash = hash * 23 + (this.p2 == null ? 0 : Bridge.getHashCode(this.p2));
             hash = hash * 23 + (this.n == null ? 0 : Bridge.getHashCode(this.n));
@@ -23563,7 +23563,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1690816232;
+            hash = hash * 23 + 3298125;
             hash = hash * 23 + (this.i == null ? 0 : Bridge.getHashCode(this.i));
             return hash;
         },
@@ -23591,7 +23591,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1690816233;
+            hash = hash * 23 + 3363661;
             hash = hash * 23 + (this.t == null ? 0 : Bridge.getHashCode(this.t));
             return hash;
         },
@@ -23622,7 +23622,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1690816234;
+            hash = hash * 23 + 3429197;
             hash = hash * 23 + (this.i == null ? 0 : Bridge.getHashCode(this.i));
             return hash;
         },
@@ -23654,7 +23654,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -1467239078;
+            hash = hash * 23 + 12627;
             hash = hash * 23 + (this.i == null ? 0 : Bridge.getHashCode(this.i));
             return hash;
         },
@@ -23686,7 +23686,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -1063954551;
+            hash = hash * 23 + 12883;
             hash = hash * 23 + (this.i == null ? 0 : Bridge.getHashCode(this.i));
             hash = hash * 23 + (this.d == null ? 0 : Bridge.getHashCode(this.d));
             hash = hash * 23 + (this.dT == null ? 0 : Bridge.getHashCode(this.dT));
@@ -23722,7 +23722,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -1058269564;
+            hash = hash * 23 + 4665939;
             hash = hash * 23 + (this.i == null ? 0 : Bridge.getHashCode(this.i));
             hash = hash * 23 + (this.d == null ? 0 : Bridge.getHashCode(this.d));
             hash = hash * 23 + (this.dT == null ? 0 : Bridge.getHashCode(this.dT));
@@ -23757,7 +23757,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1664928804;
+            hash = hash * 23 + 13139;
             hash = hash * 23 + (this.i1 == null ? 0 : Bridge.getHashCode(this.i1));
             hash = hash * 23 + (this.i2 == null ? 0 : Bridge.getHashCode(this.i2));
             return hash;
@@ -23793,7 +23793,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -1870523605;
+            hash = hash * 23 + 13395;
             hash = hash * 23 + (this.i1 == null ? 0 : Bridge.getHashCode(this.i1));
             hash = hash * 23 + (this.i2 == null ? 0 : Bridge.getHashCode(this.i2));
             return hash;
@@ -23840,7 +23840,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1261644277;
+            hash = hash * 23 + 13907;
             hash = hash * 23 + (this.i == null ? 0 : Bridge.getHashCode(this.i));
             return hash;
         },
@@ -23864,7 +23864,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1267329264;
+            hash = hash * 23 + 4666963;
             hash = hash * 23 + (this.i == null ? 0 : Bridge.getHashCode(this.i));
             return hash;
         },
@@ -23901,7 +23901,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + -304439664;
+            hash = hash * 23 + 14163;
             hash = hash * 23 + (this.i == null ? 0 : Bridge.getHashCode(this.i));
             return hash;
         },
