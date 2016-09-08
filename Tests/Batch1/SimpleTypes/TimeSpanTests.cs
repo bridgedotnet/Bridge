@@ -10,7 +10,7 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.TimeSpan", typeof(TimeSpan).GetClassName());
+            Assert.AreEqual("System.TimeSpan", typeof(TimeSpan).FullName);
             object d = new TimeSpan();
             Assert.True(d is TimeSpan, "d is TimeSpan");
             Assert.True(d is IComparable<TimeSpan>, "d is IComparable<TimeSpan>");

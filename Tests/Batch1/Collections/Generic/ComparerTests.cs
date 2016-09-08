@@ -26,7 +26,7 @@ namespace Bridge.ClientTest.Collections.Generic
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.Collections.Generic.Comparer$1[[Object]]", typeof(Comparer<object>).GetClassName(), "GetClassName()");
+            Assert.AreEqual("System.Collections.Generic.Comparer$1[[Object]]", typeof(Comparer<object>).FullName, "FullName");
 
             var comparer = Comparer<object>.Default;
             Assert.True(comparer is Comparer<object>, "is Comparer<object> should be true");

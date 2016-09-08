@@ -15,7 +15,7 @@ namespace Bridge.ClientTest.Threading
         [Test]
         public void TypePropertiesForCancellationTokenSourceAreCorrect()
         {
-            Assert.AreEqual("System.Threading.CancellationTokenSource", typeof(CancellationTokenSource).GetClassName(), "FullName");
+            Assert.AreEqual("System.Threading.CancellationTokenSource", typeof(CancellationTokenSource).FullName, "FullName");
             object cts = new CancellationTokenSource();
             Assert.True(cts is CancellationTokenSource);
             Assert.True(cts is IDisposable);
@@ -24,7 +24,7 @@ namespace Bridge.ClientTest.Threading
         [Test]
         public void TypePropertiesForCancellationTokenAreCorrect()
         {
-            Assert.AreEqual("System.Threading.CancellationToken", typeof(CancellationToken).GetClassName(), "FullName");
+            Assert.AreEqual("System.Threading.CancellationToken", typeof(CancellationToken).FullName, "FullName");
 
             Assert.True(new CancellationToken() is CancellationToken);
             Assert.True(CancellationToken.None is CancellationToken);
@@ -34,7 +34,7 @@ namespace Bridge.ClientTest.Threading
         [Test]
         public void TypePropertiesForCancellationTokenRegistrationAreCorrect()
         {
-            Assert.AreEqual("System.Threading.CancellationTokenRegistration", typeof(CancellationTokenRegistration).GetClassName(), "FullName");
+            Assert.AreEqual("System.Threading.CancellationTokenRegistration", typeof(CancellationTokenRegistration).FullName, "FullName");
 
             object ctr = new CancellationTokenRegistration();
             Assert.True(ctr is CancellationTokenRegistration, "CancellationTokenRegistration");

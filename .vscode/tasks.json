@@ -27,5 +27,10 @@
 	"showOutput": "silent",
 
 	// args is the solution file name.
-	"args": [ "Bridge.NoTest.sln" ]
+
+    // Release Build
+	"args": [ "/p:Configuration=Release", "Bridge.NoTest.sln" ]
+	
+    // Debug Build
+    // "args": [ "Bridge.NoTest.sln" ]
 }

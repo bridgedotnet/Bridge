@@ -38,7 +38,7 @@
     <NoStdLib>True</NoStdLib>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition="$(OS) != Unix">
+  <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
@@ -278,6 +278,7 @@
     <Compile Include="BridgeIssues\1400\N1428.cs" />
     <Compile Include="BridgeIssues\1400\N1429.cs" />
     <Compile Include="BridgeIssues\1400\N1438.cs" />
+    <Compile Include="BridgeIssues\1400\N1458.cs" />
     <Compile Include="BridgeIssues\1400\N1448.cs" />
     <Compile Include="BridgeIssues\1400\N1459.cs" />
     <Compile Include="BridgeIssues\1400\N1467.cs" />
@@ -314,13 +315,15 @@
     <Compile Include="BridgeIssues\1600\N1684.cs" />
     <Compile Include="BridgeIssues\1600\N1698.cs" />
     <Compile Include="BridgeIssues\1700\N1700.cs" />
-    <Compile Include="BridgeIssues\1700\N1711.cs" />
-    <Compile Include="BridgeIssues\1700\N1715.cs" />
-    <Compile Include="BridgeIssues\1700\N1713.cs" />
-    <Compile Include="BridgeIssues\1700\N1712.cs" />
-    <Compile Include="BridgeIssues\1700\N1709.cs" />
-    <Compile Include="BridgeIssues\1700\N1704.cs" />
     <Compile Include="BridgeIssues\1700\N1702.cs" />
+    <Compile Include="BridgeIssues\1700\N1704.cs" />
+    <Compile Include="BridgeIssues\1700\N1709.cs" />
+    <Compile Include="BridgeIssues\1700\N1711.cs" />
+    <Compile Include="BridgeIssues\1700\N1712.cs" />
+    <Compile Include="BridgeIssues\1700\N1713.cs" />
+    <Compile Include="BridgeIssues\1700\N1715.cs" />
+    <Compile Include="BridgeIssues\1700\N1735.cs" />
+    <Compile Include="BridgeIssues\1700\N1737.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
     <Compile Include="Utilities\DecimalHelper.cs" />
@@ -362,7 +365,7 @@
     <Folder Include="BridgeIssues\0200\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Import Project="$(SolutionDir).nuget\NuGet.targets" Condition="Exists('$(SolutionDir).nuget\NuGet.targets')" />
   <Target Name="CleanBridgeTest" BeforeTargets="Clean">
     <ItemGroup>
       <BridgeTestFilesToDelete Include="$(ProjectDir)$(OutDir)bridgeTest*.log" />

@@ -78,7 +78,7 @@
                 }
                 catch (ex) {
                     ex = System.Exception.create(ex);
-                    actual = Bridge.getTypeName(ex);
+                    actual = Bridge.getTypeName(Bridge.getType(ex));
                 }
 
                 if (!Bridge.referenceEquals(actual, expected)) {

@@ -220,7 +220,7 @@ namespace Bridge.Translator
                     pType = ((IArrayTypeSymbol)parameter.Type).ElementType;
                 }
 
-                if (node.Expression is CastExpressionSyntax && type.Equals(pType))
+                if (node.Expression is CastExpressionSyntax && type.Equals(pType) || parameter.RefKind != RefKind.None)
                 {
                     return node;
                 }

@@ -193,6 +193,8 @@
                 result += ']';
 
                 Class.$$fullname = result;
+            } else {
+                Class.$$fullname = Class.$$name;
             }
 
             if (extend && Bridge.isFunction(extend)) {
@@ -234,10 +236,7 @@
             Class.$$initCtor = function () {};
             Class.$$initCtor.prototype = prototype;
             Class.$$initCtor.prototype.constructor = Class;
-
-            if (Class.$$fullname) {
-                Class.$$initCtor.prototype.$$fullname = Class.$$fullname;
-            }
+            Class.$$initCtor.prototype.$$fullname = gCfg && isGenericInstance ? Class.$$fullname : Class.$$name;
 
             if (statics) {
                 var staticsConfig = statics.$config || statics.config;
@@ -336,7 +335,7 @@
                 }
             };
 
-            if (isEntryPoint) {
+            if (isEntryPoint || Bridge.isFunction(Class["$main"])) {
                 Bridge.Class.$queueEntry.push(Class);
             }
 
@@ -571,6 +570,10 @@
 
                 if (t.$staticInit) {
                     t.$staticInit();
+                }
+
+                if (t["$main"]) {
+                    Bridge.ready(t.$main);
                 }
             }
             Bridge.Class.$queue.length = 0;

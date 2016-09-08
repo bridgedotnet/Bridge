@@ -78,7 +78,7 @@ namespace Bridge.Translator
                             if (!string.IsNullOrEmpty(asmName))
                             {
                                 tmp.Append("\"");
-                                tmp.Append(this.Translator.AssemblyName);
+                                tmp.Append(asmName);
                                 tmp.Append("\"");
                             }
                             else
