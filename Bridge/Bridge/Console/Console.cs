@@ -373,14 +373,7 @@ namespace Bridge.Utils
             LogBase(value, MessageType.Debug);
         }
 
-        [External]
-        [Template("Bridge.Console.log({value})")]
         public static void Log(object value)
-        {
-            LogBase(value);
-        }
-
-        public static void Log(string value)
         {
             LogBase(value);
         }
