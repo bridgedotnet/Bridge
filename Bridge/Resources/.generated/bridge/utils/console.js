@@ -16,8 +16,10 @@
                 if (messageType === void 0) { messageType = 0; }
                 var self = Bridge.Console.getInstance();
 
+                var v = value != null ? value.toString() : "null";
+
                 if (self.debugOutput != null) {
-                    self.debugOutput = System.String.concat(self.debugOutput, (value.toString()));
+                    self.debugOutput = System.String.concat(self.debugOutput, (v.toString()));
                     return;
                 }
 
@@ -25,17 +27,17 @@
                     Bridge.Console.show();
                 }
 
-                var m = self.buildConsoleMessage(value.toString(), messageType);
+                var m = self.buildConsoleMessage(v.toString(), messageType);
                 self.consoleMessages.appendChild(m);
 
                 if (self.consoleDefined) {
                     if (messageType === 1 && self.consoleDebugDefined) {
-                        Bridge.global.console.debug(value);
+                        Bridge.global.console.debug(v);
                     } else {
-                        Bridge.global.console.log(value);
+                        Bridge.global.console.log(v);
                     }
                 } else if (self.operaPostErrorDefined) {
-                    Bridge.global.opera.postError(value);
+                    Bridge.global.opera.postError(v);
                 }
             },
             error: function (value) {

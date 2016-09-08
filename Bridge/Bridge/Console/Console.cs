@@ -34,7 +34,7 @@ namespace Bridge.Utils
             public extern void AddEventListener(string type, Action listener);
             public extern Element InsertBefore(Element newElement, Element referenceElement);
             public extern void RemoveAttribute(string attrName);
-            public  extern Element RemoveChild(Element child);
+            public extern Element RemoveChild(Element child);
             public extern void SetAttribute(string name, string value);
 
             // window's method
@@ -297,9 +297,11 @@ namespace Bridge.Utils
         {
             var self = Instance;
 
+            var v = value != null ? value.ToString() : "null";
+
             if (self.DebugOutput != null)
             {
-                self.DebugOutput += value.ToString();
+                self.DebugOutput += v.ToString();
                 return;
             }
 
@@ -308,23 +310,23 @@ namespace Bridge.Utils
                 Show();
             }
 
-            var m = self.BuildConsoleMessage(value.ToString(), messageType);
+            var m = self.BuildConsoleMessage(v.ToString(), messageType);
             self.ConsoleMessages.AppendChild(m);
 
             if (self.ConsoleDefined)
             {
                 if (messageType == MessageType.Debug && self.ConsoleDebugDefined)
                 {
-                    Script.Write("Bridge.global.console.debug(value);");
+                    Script.Write("Bridge.global.console.debug(v);");
                 }
                 else
                 {
-                    Script.Write("Bridge.global.console.log(value);");
+                    Script.Write("Bridge.global.console.log(v);");
                 }
             }
             else if (self.OperaPostErrorDefined)
             {
-                Script.Write("Bridge.global.opera.postError(value);");
+                Script.Write("Bridge.global.opera.postError(v);");
             }
         }
 
