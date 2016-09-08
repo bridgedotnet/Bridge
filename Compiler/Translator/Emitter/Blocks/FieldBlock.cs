@@ -390,7 +390,7 @@ namespace Bridge.Translator
                 {
                     nonEmpty = true;
                     this.EnsureComma();
-                    this.WriteScript(Helpers.GetPropertyRef(member, this.Emitter, false, false, true, true));
+                    this.WriteScript(Helpers.GetPropertyRef(member, this.Emitter, false, false, false, true));
                     this.WriteComma();
                     var alias = Helpers.GetPropertyRef(interfaceMember, this.Emitter, false, false, false);
 
@@ -410,7 +410,7 @@ namespace Bridge.Translator
                 {
                     nonEmpty = true;
                     this.EnsureComma();
-                    this.WriteScript(Helpers.GetPropertyRef(member, this.Emitter, true, false, true, true));
+                    this.WriteScript(Helpers.GetPropertyRef(member, this.Emitter, true, false, false, true));
                     this.WriteComma();
                     var alias = Helpers.GetPropertyRef(interfaceMember, this.Emitter, true, false, false);
 
@@ -433,7 +433,7 @@ namespace Bridge.Translator
                 {
                     nonEmpty = true;
                     this.EnsureComma();
-                    this.WriteScript(Helpers.GetEventRef(member, this.Emitter, false, false, true, true));
+                    this.WriteScript(Helpers.GetEventRef(member, this.Emitter, false, false, false, true));
                     this.WriteComma();
                     var alias = Helpers.GetEventRef(interfaceMember, this.Emitter, false, false, false);
 
@@ -453,7 +453,7 @@ namespace Bridge.Translator
                 {
                     nonEmpty = true;
                     this.EnsureComma();
-                    this.WriteScript(Helpers.GetEventRef(member, this.Emitter, true, false, true, true));
+                    this.WriteScript(Helpers.GetEventRef(member, this.Emitter, true, false, false, true));
                     this.WriteComma();
                     var alias = Helpers.GetEventRef(interfaceMember, this.Emitter, true, false, false);
 

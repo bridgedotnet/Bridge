@@ -6791,8 +6791,6 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6822,7 +6820,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -7594,6 +7592,158 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             throw new System.Exception();
         }
     });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768', {
+        testImplicitImplementation: function () {
+            var c2 = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.C2$1(System.Int32))();
+            Bridge.Test.Assert.areEqual(0, c2.Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$System$Int32$getItem(0));
+            Bridge.Test.Assert.areEqual(2, c2.Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$System$Int32$add(0));
+            Bridge.Test.Assert.areEqual(1, c2.Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$System$Int32$getCount());
+        },
+        testExplicitImplementation: function () {
+            var c1 = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.C1$1(System.Int32))();
+            Bridge.Test.Assert.areEqual(0, c1.getItem(0));
+            Bridge.Test.Assert.areEqual(2, c1.add(0));
+            Bridge.Test.Assert.areEqual(1, c1.getCount());
+
+            var i1 = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.C1$1(System.Int32))();
+            Bridge.Test.Assert.areEqual(0, i1.getItem(0));
+            Bridge.Test.Assert.areEqual(2, i1.add(0));
+            Bridge.Test.Assert.areEqual(1, i1.getCount());
+        },
+        testListImplicitImplementation: function () {
+            var list = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.List1$1(System.Int32))();
+            Bridge.Test.Assert.areEqual(0, System.Array.getItem(list, 0, System.Int32));
+            Bridge.Test.Assert.true(System.Array.contains(list, 0, System.Int32));
+            Bridge.Test.Assert.areEqual(1, System.Array.getCount(list, System.Int32));
+            Bridge.Test.Assert.null(Bridge.getEnumerator(list, "$1", System.Int32));
+            Bridge.Test.Assert.areEqual(2, System.Array.indexOf(list, 0, 0, null, System.Int32));
+            Bridge.Test.Assert.true(System.Array.remove(list, 0, System.Int32));
+        },
+        testListExplicitImplementation: function () {
+            var list = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.List2$1(System.Int32))();
+            Bridge.Test.Assert.areEqual(0, list.getItem(0));
+            Bridge.Test.Assert.true(list.contains(0));
+            Bridge.Test.Assert.areEqual(1, list.getCount());
+            Bridge.Test.Assert.null(list.getEnumerator());
+            Bridge.Test.Assert.areEqual(2, list.indexOf(0));
+            Bridge.Test.Assert.true(list.remove(0));
+
+            var list2 = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.List2$1(System.Int32))();
+            Bridge.Test.Assert.areEqual(0, System.Array.getItem(list2, 0, System.Int32));
+            Bridge.Test.Assert.true(System.Array.contains(list2, 0, System.Int32));
+            Bridge.Test.Assert.areEqual(1, System.Array.getCount(list2, System.Int32));
+            Bridge.Test.Assert.null(Bridge.getEnumerator(list2, "$1", System.Int32));
+            Bridge.Test.Assert.areEqual(2, System.Array.indexOf(list2, 0, 0, null, System.Int32));
+            Bridge.Test.Assert.true(System.Array.remove(list2, 0, System.Int32));
+        }
+    });
+
+    Bridge.definei('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.I1$1', function (T) { return {
+        $kind: "interface"
+    }; });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.List1$1', function (T) { return {
+        inherits: [System.Collections.Generic.IList$1(T)],
+        config: {
+            alias: [
+            "System$Collections$Generic$IList$1$T$getItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem",
+            "System$Collections$Generic$IList$1$T$setItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem",
+            "System$Collections$Generic$ICollection$1$T$getCount", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getCount",
+            "System$Collections$Generic$ICollection$1$T$add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
+            "System$Collections$Generic$ICollection$1$T$clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
+            "System$Collections$Generic$ICollection$1$T$contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
+            "System$Collections$Generic$IEnumerable$1$T$getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
+            "System$Collections$Generic$IList$1$T$indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
+            "System$Collections$Generic$IList$1$T$insert", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert",
+            "System$Collections$Generic$ICollection$1$T$remove", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$remove",
+            "System$Collections$Generic$IList$1$T$removeAt", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt"
+            ]
+        },
+        System$Collections$Generic$IList$1$T$getItem: function (index) {
+            return Bridge.getDefaultValue(T);
+        },
+        System$Collections$Generic$IList$1$T$setItem: function (index, value) {
+
+        },
+        System$Collections$Generic$ICollection$1$T$getCount: function () {
+            return 1;
+        },
+        System$Collections$Generic$ICollection$1$T$add: function (item) {
+        },
+        System$Collections$Generic$ICollection$1$T$clear: function () {
+        },
+        System$Collections$Generic$ICollection$1$T$contains: function (item) {
+            return true;
+        },
+        System$Collections$IEnumerable$getEnumerator: function () {
+            return null;
+        },
+        System$Collections$Generic$IEnumerable$1$T$getEnumerator: function () {
+            return null;
+        },
+        System$Collections$Generic$IList$1$T$indexOf: function (item) {
+            return 2;
+        },
+        System$Collections$Generic$IList$1$T$insert: function (index, item) {
+        },
+        System$Collections$Generic$ICollection$1$T$remove: function (item) {
+            return true;
+        },
+        System$Collections$Generic$IList$1$T$removeAt: function (index) {
+        }
+    }; });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.List2$1', function (T) { return {
+        inherits: [System.Collections.Generic.IList$1(T)],
+        config: {
+            alias: [
+            "getItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem",
+            "setItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem",
+            "getCount", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getCount",
+            "add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
+            "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
+            "contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
+            "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
+            "indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
+            "insert", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert",
+            "remove", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$remove",
+            "removeAt", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt"
+            ]
+        },
+        getItem: function (index) {
+            return Bridge.getDefaultValue(T);
+        },
+        setItem: function (index, value) {
+
+        },
+        getCount: function () {
+            return 1;
+        },
+        add: function (item) {
+        },
+        clear: function () {
+        },
+        contains: function (item) {
+            return true;
+        },
+        System$Collections$IEnumerable$getEnumerator: function () {
+            return null;
+        },
+        getEnumerator: function () {
+            return null;
+        },
+        indexOf: function (item) {
+            return 2;
+        },
+        insert: function (index, item) {
+        },
+        remove: function (item) {
+            return true;
+        },
+        removeAt: function (index) {
+        }
+    }; });
 
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A', {
         config: {
@@ -15499,6 +15649,52 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             return Bridge.ClientTest.Batch3.BridgeIssues.Bridge1704.Base.prototype.show.call(this);
         }
     });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.C1$1', function (T) { return {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.I1$1(T)],
+        config: {
+            alias: [
+            "getItem", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$getItem",
+            "setItem", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$setItem",
+            "add", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$add",
+            "getCount", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$getCount"
+            ]
+        },
+        getItem: function (index) {
+            return Bridge.getDefaultValue(T);
+        },
+        setItem: function (index, value) {
+        },
+        getCount: function () {
+            return 1;
+        },
+        add: function (item) {
+            return 2;
+        }
+    }; });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.C2$1', function (T) { return {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.I1$1(T)],
+        config: {
+            alias: [
+            "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$getItem", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$getItem",
+            "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$setItem", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$setItem",
+            "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$add", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$add",
+            "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$getCount", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$getCount"
+            ]
+        },
+        Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$getItem: function (index) {
+            return Bridge.getDefaultValue(T);
+        },
+        Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$setItem: function (index, value) {
+        },
+        Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$getCount: function () {
+            return 1;
+        },
+        Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$add: function (item) {
+            return 2;
+        }
+    }; });
 
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge240B', {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A],
