@@ -67,6 +67,41 @@ namespace Bridge.ClientTest
             AssertErrorMessageString("#2 - ", null, "null");
         }
 
+        [Test]
+        public void TestToggling()
+        {
+            Bridge.Utils.Console.Hide();
+            Bridge.Utils.Console.Log("Hide/Log");
+            AssertMessage("#1 - ", "Hide/Log");
+
+            Bridge.Utils.Console.Instance.Close();
+            Bridge.Utils.Console.Instance.Close();
+            Bridge.Utils.Console.Hide();
+            Bridge.Utils.Console.Log("Close/Close/Hide/Log");
+            AssertMessage("#2 - ", "Close/Close/Hide/Log");
+
+            Bridge.Utils.Console.Instance.Close();
+            Bridge.Utils.Console.Hide();
+            Bridge.Utils.Console.Hide();
+            Bridge.Utils.Console.Log("Close/Hide/Hide/Log");
+            AssertMessage("#3 - ", "Close/Hide/Hide/Log");
+
+            Bridge.Utils.Console.Instance.Close();
+            Bridge.Utils.Console.Hide();
+            Bridge.Utils.Console.Show();
+            Bridge.Utils.Console.Show();
+            Bridge.Utils.Console.Log("Close/Hide/Show/Show/Log");
+            AssertMessage("#4 - ", "Close/Hide/Show/Show/Log");
+
+            Bridge.Utils.Console.Hide();
+            Bridge.Utils.Console.Show();
+            AssertMessage("#5 Messages preserved after - ", "Close/Hide/Show/Show/Log");
+            Bridge.Utils.Console.Hide();
+            Bridge.Utils.Console.Show();
+            Bridge.Utils.Console.Log("Hide/Show/Hide/Show/Log");
+            AssertMessage("#6 - ", "Hide/Show/Hide/Show/Log");
+        }
+
         private class ClassA
         {
             public override string ToString()
@@ -82,13 +117,13 @@ namespace Bridge.ClientTest
         private void AssertLogMessageObject(string description, object message, string expected)
         {
             Bridge.Utils.Console.Log(message);
-            AssertMessage(description, expected, Bridge.Utils.Console.MessageColor.Info);
+            AssertMessage(description, expected);
         }
 
         private void AssertLogMessageString(string description, string message, string expected)
         {
             Bridge.Utils.Console.Log(message);
-            AssertMessage(description, expected, Bridge.Utils.Console.MessageColor.Info);
+            AssertMessage(description, expected);
         }
 
         private void AssertDebugMessageString(string description, string message, string expected)
@@ -103,7 +138,7 @@ namespace Bridge.ClientTest
             AssertMessage(description, expected, Bridge.Utils.Console.MessageColor.Error);
         }
 
-        private void AssertMessage(string description, string expected, string color)
+        private void AssertMessage(string description, string expected, string color = Bridge.Utils.Console.MessageColor.Info)
         {
             var el = Bridge.Utils.Console.Instance.CurrentMessageElement as Html5.HTMLLIElement;
 

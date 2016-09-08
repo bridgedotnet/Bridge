@@ -3475,13 +3475,45 @@
             this.assertErrorMessageString("#1 - ", "Test Bridge Console Error Message String", "Test Bridge Console Error Message String");
             this.assertErrorMessageString("#2 - ", null, "null");
         },
+        testToggling: function () {
+            Bridge.Console.hide();
+            Bridge.Console.log("Hide/Log");
+            this.assertMessage("#1 - ", "Hide/Log");
+
+            Bridge.Console.getInstance().close();
+            Bridge.Console.getInstance().close();
+            Bridge.Console.hide();
+            Bridge.Console.log("Close/Close/Hide/Log");
+            this.assertMessage("#2 - ", "Close/Close/Hide/Log");
+
+            Bridge.Console.getInstance().close();
+            Bridge.Console.hide();
+            Bridge.Console.hide();
+            Bridge.Console.log("Close/Hide/Hide/Log");
+            this.assertMessage("#3 - ", "Close/Hide/Hide/Log");
+
+            Bridge.Console.getInstance().close();
+            Bridge.Console.hide();
+            Bridge.Console.show();
+            Bridge.Console.show();
+            Bridge.Console.log("Close/Hide/Show/Show/Log");
+            this.assertMessage("#4 - ", "Close/Hide/Show/Show/Log");
+
+            Bridge.Console.hide();
+            Bridge.Console.show();
+            this.assertMessage("#5 Messages preserved after - ", "Close/Hide/Show/Show/Log");
+            Bridge.Console.hide();
+            Bridge.Console.show();
+            Bridge.Console.log("Hide/Show/Hide/Show/Log");
+            this.assertMessage("#6 - ", "Hide/Show/Hide/Show/Log");
+        },
         assertLogMessageObject: function (description, message, expected) {
             Bridge.Console.log(message);
-            this.assertMessage(description, expected, "#555");
+            this.assertMessage(description, expected);
         },
         assertLogMessageString: function (description, message, expected) {
             Bridge.Console.log(message);
-            this.assertMessage(description, expected, "#555");
+            this.assertMessage(description, expected);
         },
         assertDebugMessageString: function (description, message, expected) {
             Bridge.Console.debug(message);
@@ -3492,6 +3524,7 @@
             this.assertMessage(description, expected, "#d65050");
         },
         assertMessage: function (description, expected, color) {
+            if (color === void 0) { color = "#555"; }
             var el = Bridge.as(Bridge.Console.getInstance().currentMessageElement, HTMLLIElement);
 
             if (el == null) {

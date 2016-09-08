@@ -15,6 +15,7 @@
                 QUnit.test("TestLogMessageString", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_BridgeConsoleTests.testLogMessageString);
                 QUnit.test("TestDebugMessageString", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_BridgeConsoleTests.testDebugMessageString);
                 QUnit.test("TestErrorMessageString", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_BridgeConsoleTests.testErrorMessageString);
+                QUnit.test("TestToggling", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_BridgeConsoleTests.testToggling);
                 QUnit.module("C#");
                 QUnit.test("Abstract types - TestB", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_BasicCSharp_TestAbstractClass.testB);
                 QUnit.test("Abstract types - TestC", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_BasicCSharp_TestAbstractClass.testC);
@@ -2832,6 +2833,10 @@
             testErrorMessageString: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_BridgeConsoleTests);
                 t.getFixture().testErrorMessageString();
+            },
+            testToggling: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_BridgeConsoleTests);
+                t.getFixture().testToggling();
             }
         }
     });
