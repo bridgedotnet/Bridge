@@ -2,6 +2,9 @@
 {
     class TestClassB
     {
-        public int Value1 { get; set; }
+        public int Value1
+        {
+            get; set;
+        }
     }
 }

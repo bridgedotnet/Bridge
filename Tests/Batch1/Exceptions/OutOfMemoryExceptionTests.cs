@@ -13,7 +13,7 @@ namespace Bridge.ClientTest.Exceptions
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.OutOfMemoryException", typeof(OutOfMemoryException).GetClassName(), "Name");
+            Assert.AreEqual("System.OutOfMemoryException", typeof(OutOfMemoryException).FullName, "Name");
             object d = new OutOfMemoryException();
             Assert.True(d is OutOfMemoryException, "is OutOfMemoryException");
             Assert.True(d is SystemException, "is SystemException");

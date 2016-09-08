@@ -12,7 +12,7 @@ namespace Bridge.ClientTest.Format
         public void TypePropertiesAreCorrect()
         {
             var format = DateTimeFormatInfo.InvariantInfo;
-            Assert.AreEqual("System.Globalization.DateTimeFormatInfo", typeof(DateTimeFormatInfo).GetClassName());
+            Assert.AreEqual("System.Globalization.DateTimeFormatInfo", typeof(DateTimeFormatInfo).FullName);
             Assert.True(format is DateTimeFormatInfo);
         }
 

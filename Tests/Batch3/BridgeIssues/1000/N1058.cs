@@ -9,17 +9,17 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test]
         public static void TestNameTrue()
         {
-            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058.overlayType", typeof(OverlayType).GetClassName());
-            Assert.AreEqual("$Bridge1058.Bridge1058.class1", typeof(Class1).GetClassName());
-            Assert.AreEqual("Bridge1058.class2", typeof(Class2).GetClassName());
+            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058.overlayType", typeof(OverlayType).FullName);
+            Assert.AreEqual("$Bridge1058.Bridge1058.class1", typeof(Class1).FullName);
+            Assert.AreEqual("Bridge1058.class2", typeof(Class2).FullName);
         }
 
         [Test]
         public static void TestNameFales()
         {
-            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058.OverlayType_B", typeof(OverlayType_B).GetClassName());
-            Assert.AreEqual("$Bridge1058.Bridge1058.Class1_B", typeof(Class1_B).GetClassName());
-            Assert.AreEqual("Bridge1058.Class2_B", typeof(Class2_B).GetClassName());
+            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058.OverlayType_B", typeof(OverlayType_B).FullName);
+            Assert.AreEqual("$Bridge1058.Bridge1058.Class1_B", typeof(Class1_B).FullName);
+            Assert.AreEqual("Bridge1058.Class2_B", typeof(Class2_B).FullName);
         }
 
         [Name(true)]

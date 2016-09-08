@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
+    <!--This value will be used if NuGetUseExplicitVersion != true and the target is not able to read version automatically-->
+    <DefaultPackageVersion>15.0.0</DefaultPackageVersion>
+    <OnWin>true</OnWin>
+    <OnWin Condition="'$(OS)' != 'Windows_NT'">false</OnWin>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
 
-    <!-- Download NuGet.exe if it does not already exist -->
+    <!-- Download nuget.exe if it does not already exist -->
     <DownloadNuGetExe Condition=" '$(DownloadNuGetExe)' == '' ">false</DownloadNuGetExe>
   </PropertyGroup>
 
@@ -20,17 +24,17 @@
 
   <PropertyGroup>
     <!-- NuGet command -->
-    <NuGetExePath Condition=" '$(NuGetExePath)' == '' ">$(NuGetToolsPath)\NuGet.exe</NuGetExePath>
+    <NuGetExePath Condition=" '$(NuGetExePath)' == ''">$(NuGetToolsPath)\nuget.exe</NuGetExePath>
 
     <NuGetCommand Condition=" '$(OS)' == 'Windows_NT'">"$(NuGetExePath)"</NuGetCommand>
-    <NuGetCommand Condition=" '$(OS)' != 'Windows_NT' ">mono --runtime=v4.0.30319 "$(NuGetExePath)"</NuGetCommand>
+    <NuGetCommand Condition=" '$(OS)' != 'Windows_NT'">mono --runtime=v4.0.30319 "$(NuGetExePath)"</NuGetCommand>
 
 
     <RequireConsentSwitch Condition=" $(RequireRestoreConsent) == 'true' ">-RequireConsent</RequireConsentSwitch>
     <NonInteractiveSwitch Condition=" '$(VisualStudioVersion)' != '' AND '$(OS)' == 'Windows_NT' ">-NonInteractive</NonInteractiveSwitch>
 
-    <PaddedSolutionDir Condition=" '$(OS)' == 'Windows_NT'">"$(SolutionDir) "</PaddedSolutionDir>
-    <PaddedSolutionDir Condition=" '$(OS)' != 'Windows_NT' ">"$(SolutionDir)"</PaddedSolutionDir>
+    <PaddedSolutionDir Condition="'$(OS)' == 'Windows_NT'">"$(SolutionDir) "</PaddedSolutionDir>
+    <PaddedSolutionDir Condition="'$(OS)' != 'Windows_NT' ">"$(SolutionDir)"</PaddedSolutionDir>
 
     <!-- Make the build depend on restore packages -->
     <BuildDependsOn Condition="$(NuGetBuildPackage) == 'true'">
@@ -60,42 +64,92 @@
       <!-- Set default NuGetPackageOutputDir if not defined-->
       <!-- NuGetPackageOutputDir == true means package version will be taken from nuspec-->
       <!-- NuGetPackageOutputDir == false means package version will be taken from $(SolutionDir).build\common\CommonAssemblyInfo.cs or project's output assembly version-->
-      <NuGetPackageOutputDir Condition="$(NuGetPackageOutputDir) == '' Or $(NuGetPackageOutputDir) == '*Undefined*'">$(ProjectDir)$(OutDir)</NuGetPackageOutputDir>
+      <NuGetPackageOutputDir Condition="'$(OS)' == 'Windows_NT' AND ($(NuGetPackageOutputDir) == '' Or $(NuGetPackageOutputDir) == '*Undefined*')">$(ProjectDir)$(OutDir)</NuGetPackageOutputDir>
+      <NuGetPackageOutputDir Condition="'$(OS)' != 'Windows_NT' AND ($(NuGetPackageOutputDir) == '' Or $(NuGetPackageOutputDir) == '*Undefined*')">$(OutDir)</NuGetPackageOutputDir>
       <NuGetPackageOutputDir>$(NuGetPackageOutputDir.Trim('\\'))</NuGetPackageOutputDir>
+      <NuGetPackageOutputDir>$(NuGetPackageOutputDir.Trim('/'))</NuGetPackageOutputDir>
     </PropertyGroup>
 
-    <GetAssemblyVersionFromTextFile Condition="$(NuGetUseExplicitVersion) == 'false'" Filename="$(SolutionDir).build\common\CommonAssemblyInfo.cs">
+    <!--Inline tasks not supported in xbuild-->
+    <!--So we will use SmallApplicationVersion matched from AssemblyIdentityInfo in non Windows-->
+    <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
+      <Output TaskParameter="Assemblies" ItemName="AssemblyIdentityInfo"/>
+    </GetAssemblyIdentity>
+
+    <PropertyGroup>
+      <FirstSymbolIfPercentNotSupported>%25</FirstSymbolIfPercentNotSupported>
+      <ApplicationVersion>%(AssemblyIdentityInfo.Version)</ApplicationVersion>
+      <CouldNotGetApplicationVersion Condition="'$(ApplicationVersion)' == '' OR '$(ApplicationVersion.StartsWith($(FirstSymbolIfPercentNotSupported)))' == 'true'">true</CouldNotGetApplicationVersion>
+      <ApplicationVersion Condition="'$(CouldNotGetApplicationVersion)' == 'true'">$(DefaultPackageVersion)</ApplicationVersion>
+    </PropertyGroup>
+
+    <Message Text="DefaultPackageVersion: $(DefaultPackageVersion)" Importance="high" />
+    <Message Condition="'$(CouldNotGetApplicationVersion)' == 'true'" Text="Could not get ApplicationVersion by GetAssemblyIdentity. Using DefaultPackageVersion if not be able to get it automatically." Importance="high" />
+    <Message Condition="'$(CouldNotGetApplicationVersion)' != 'true'" Text="ApplicationVersion by GetAssemblyIdentity: $(ApplicationVersion)" Importance="high" />
+
+    <!--<PropertyGroup> xbuild does not support $([System.Text.RegularExpressions.Regex]::Match($(ApplicationVersion)
+      <SmallApplicationVersion>$([System.Text.RegularExpressions.Regex]::Match($(ApplicationVersion), '(\d+)\.(\d+)\.(\d+)'))</SmallApplicationVersion>
+      <SmallApplicationVersion Condition="$(SmallApplicationVersion) == '' Or $(SmallApplicationVersion) == '*Undefined*'">ApplicationVersion</SmallApplicationVersion>
+    </PropertyGroup>
+
+    <Message Text="SmallApplicationVersion by matching ApplicationVersion: $(SmallApplicationVersion)" Importance="high" />-->
+
+    <GetAssemblyVersionFromTextFile Condition="'$(OS)' == 'Windows_NT' AND $(NuGetUseExplicitVersion) == 'false'" Filename="$(SolutionDir).build\common\CommonAssemblyInfo.cs">
       <Output TaskParameter="Version" ItemName="AssemblyInformationalVersion"/>
     </GetAssemblyVersionFromTextFile>
 
-    <GetAssemblyVersionFromDll Condition="$(NuGetUseExplicitVersion) == 'false' And (@(AssemblyInformationalVersion) == '' Or @(AssemblyInformationalVersion) == '*Undefined*') " Filename="$(ProjectDir)$(OutDir)$(AssemblyName).dll">
+    <Message Condition="'$(OS)' == 'Windows_NT' AND $(NuGetUseExplicitVersion) == 'false'" Text="AssemblyInformationalVersion by GetAssemblyVersionFromTextFile: @(AssemblyInformationalVersion)" Importance="high" />
+
+    <PropertyGroup>
+      <NeedGetAssemblyVersionFromDll Condition="'$(OS)' == 'Windows_NT' AND '$(NuGetUseExplicitVersion)' == 'false' AND ('@(AssemblyInformationalVersion)' == '' OR '@(AssemblyInformationalVersion)' == '*Undefined*')">true</NeedGetAssemblyVersionFromDll>
+    </PropertyGroup>
+
+    <GetAssemblyVersionFromDll Condition="'$(NeedGetAssemblyVersionFromDll)' == 'true'" Filename="$(ProjectDir)$(OutDir)$(AssemblyName).dll">
       <Output TaskParameter="Version" ItemName="AssemblyInformationalVersion"/>
     </GetAssemblyVersionFromDll>
+
+    <Message Condition="'$(NeedGetAssemblyVersionFromDll)' == 'true'" Text="AssemblyInformationalVersion by GetAssemblyVersionFromDll: @(AssemblyInformationalVersion)" Importance="high" />
 
     <Message Condition="$(NuGetUseExplicitVersion) == 'true'" Text="Will use package version from nuspec" Importance="high" />
 
     <PropertyGroup>
       <!--For $(NuGetUseExplicitVersion) == 'false' scenario, define nuget.exe Version parameter into NuGetPackageVersion as "-Version " + @(AssemblyInformationalVersion)-->
-      <NuGetPackageVersion Condition=" '@(AssemblyInformationalVersion)' != '*Undefined*' "> -Version "@(AssemblyInformationalVersion)"</NuGetPackageVersion>
-      <NuGetPackageVersion Condition=" '@(AssemblyInformationalVersion)' == '*Undefined*' "></NuGetPackageVersion>
+      <NuGetPackageVersion Condition="'@(AssemblyInformationalVersion)' != '' AND '@(AssemblyInformationalVersion)' != '*Undefined*' "> -Version "@(AssemblyInformationalVersion)"</NuGetPackageVersion>
+      <NuGetPackageVersion Condition="'@(AssemblyInformationalVersion)' == '' OR '@(AssemblyInformationalVersion)' == '*Undefined*' "></NuGetPackageVersion>
+      <NuGetPackageVersion Condition="$(NuGetUseExplicitVersion) == 'false' AND ($(NuGetPackageVersion) == '' Or $(NuGetPackageVersion) == '*Undefined*')"> -Version "$(ApplicationVersion)"</NuGetPackageVersion>
     </PropertyGroup>
 
     <Message Condition="$(NuGetUseExplicitVersion) == 'false'" Text="Applying $(NuGetPackageVersion) for NuGet package %(NuGetPackageSourcePath.Path)" Importance="high" />
 
-    <Exec Command="$(NuGetCommand) pack  &quot;%(NuGetPackageSourcePath.Path)&quot;$(NuGetPackageVersion) -Properties &quot;Configuration=$(Configuration);Platform=$(Platform)&quot; $(NonInteractiveSwitch) -OutputDirectory &quot;$(NuGetPackageOutputDir)&quot; -NoDefaultExcludes"
-          Condition=" '$(OS)' != 'Windows_NT' " />
+    <Message Text="NuGetCommand before trim: $(NuGetCommand)" Importance="high" />
+
+    <PropertyGroup>
+      <NuGetCommand>$(NuGetCommand.Replace("\\", "\"))</NuGetCommand>
+      <NuGetCommand>$(NuGetCommand.Trim('\'))</NuGetCommand>
+      <NuGetCommand>$(NuGetCommand.Replace("//", "/"))</NuGetCommand>
+      <NuGetCommand>$(NuGetCommand.Trim('/'))</NuGetCommand>
+      <NuGetCommand Condition="'$(OS)' == 'Windows_NT'">$(NuGetCommand.Replace('/', '\'))</NuGetCommand>
+      <NuGetCommand Condition="'$(OS)' != 'Windows_NT'">$(NuGetCommand.Replace('\', '/'))</NuGetCommand>
+    </PropertyGroup>
+
+    <Message Text="NuGetCommand  after trim: $(NuGetCommand)" Importance="high" />
+
+    <!--The exec commands (bot for Win and Unix) should use %(NuGetPackageSourcePath.Path) inside the Command attribute
+    It allows multiple packages created-->
+    <Exec Command="$(NuGetCommand) pack &quot;%(NuGetPackageSourcePath.Path)&quot;$(NuGetPackageVersion) -Properties &quot;Configuration=$(Configuration);Platform=$(Platform)&quot; $(NonInteractiveSwitch) -OutputDirectory &quot;$(NuGetPackageOutputDir)&quot; -NoDefaultExcludes"
+      LogStandardErrorAsError="true"
+      Condition="'$(OS)' == 'Windows_NT'" />
 
     <Exec Command="$(NuGetCommand) pack  &quot;%(NuGetPackageSourcePath.Path)&quot;$(NuGetPackageVersion) -Properties &quot;Configuration=$(Configuration);Platform=$(Platform)&quot; $(NonInteractiveSwitch) -OutputDirectory &quot;$(NuGetPackageOutputDir)&quot; -NoDefaultExcludes"
-          LogStandardErrorAsError="true"
-          Condition=" '$(OS)' == 'Windows_NT' " />
+      Condition=" '$(OS)' != 'Windows_NT' " />
 
     <ItemGroup>
-      <NuGetPAckageOutputDirFiles Include="$(NuGetPackageOutputDir)\*.nupkg"/>
+      <NuGetPackageOutputDirFiles Include="$(NuGetPackageOutputDir)\*.nupkg"/>
     </ItemGroup>
 
     <Copy
       Condition="$(NuGetPackageCommonDir) != '' And $(NuGetPackageCommonDir) != '*Undefined*'"
-      SourceFiles="@(NuGetPAckageOutputDirFiles)"
+      SourceFiles="@(NuGetPackageOutputDirFiles)"
       DestinationFolder="$(NuGetPackageCommonDir)"
       ContinueOnError="true"
       />
@@ -117,7 +171,7 @@
                 try {
                     OutputFilename = Path.GetFullPath(OutputFilename);
 
-                    Log.LogMessage("Downloading latest version of NuGet.exe...");
+                    Log.LogMessage("Downloading latest version of nuget.exe...");
                     WebClient webClient = new WebClient();
                     webClient.DownloadFile("https://www.nuget.org/nuget.exe", OutputFilename);
 
@@ -148,14 +202,14 @@
                 {
                     Log.LogMessage(Microsoft.Build.Framework.MessageImportance.High, "Searching " + (Filename ?? string.Empty) + " for version...");
                     Version = null;
-                    
+
                     if (string.IsNullOrWhiteSpace(Filename))
                     {
                         Log.LogMessage(Microsoft.Build.Framework.MessageImportance.High, "Filename " + (Filename ?? string.Empty) + " is empty.");
                         return true;
                     }
-                    
-                    Filename = Path.GetFullPath(Filename);                   
+
+                    Filename = Path.GetFullPath(Filename);
                     if (!File.Exists(Filename))
                     {
                         Log.LogMessage(Microsoft.Build.Framework.MessageImportance.High, "Filename " + (Filename ?? string.Empty) + " does not exist.");
@@ -164,22 +218,22 @@
 
                     string fileContent = File.ReadAllText(Filename);
                     Log.LogMessage(Microsoft.Build.Framework.MessageImportance.High, "Read " + fileContent.Length + " symbols");
-                    
+
                     var attributeName = "AssemblyInformationalVersion";
                     var options = RegexOptions.IgnoreCase | RegexOptions.Compiled;
                     var regex = new Regex("\\[assembly: " + attributeName + "\\(\"(.*)\"\\)\\]", options);
-                    
+
                     var match = regex.Match(fileContent);
 
                     if (!match.Success)
                     {
                         Log.LogMessage(Microsoft.Build.Framework.MessageImportance.High, "Did not find " + attributeName + " in " + (Filename ?? string.Empty));
                         return true;
-                    }                    
-               
+                    }
+
                     Version = match.Groups[1].Value;
                     Log.LogMessage(Microsoft.Build.Framework.MessageImportance.High, "Found " + attributeName + " " + (Version ?? string.Empty) + " in " + (Filename ?? string.Empty));
-                    
+
                     return true;
                 }
                 catch (Exception ex) {
@@ -207,25 +261,25 @@
                 {
                     Log.LogMessage(Microsoft.Build.Framework.MessageImportance.High, "Searching " + (Filename ?? string.Empty) + " for version...");
                     Version = null;
-                    
+
                     if (string.IsNullOrWhiteSpace(Filename))
                     {
                         Log.LogMessage(Microsoft.Build.Framework.MessageImportance.High, "Filename " + (Filename ?? string.Empty) + " is empty.");
                         return false;
                     }
-                    
-                    Filename = Path.GetFullPath(Filename);                   
+
+                    Filename = Path.GetFullPath(Filename);
                     if (!File.Exists(Filename))
                     {
                         Log.LogMessage(Microsoft.Build.Framework.MessageImportance.High, "Filename " + (Filename ?? string.Empty) + " does not exist.");
                         return false;
                     }
-                    
+
                     var fileVersionInfo = FileVersionInfo.GetVersionInfo(Filename);
                     Version = fileVersionInfo.ProductVersion;
-               
+
                     Log.LogMessage(Microsoft.Build.Framework.MessageImportance.High, "Found ProductVersion " + (Version ?? string.Empty) + " in " + (Filename ?? string.Empty));
-                    
+
                     return true;
                 }
                 catch (Exception ex) {

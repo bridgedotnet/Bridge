@@ -1,9 +1,9 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Bridge.Build")]
-[assembly: AssemblyProduct("Bridge.Build")]
-[assembly: AssemblyDescription("Bridge Build library.")]
+[assembly: AssemblyTitle("Bridge.PostBuild")]
+[assembly: AssemblyProduct("Bridge.PostBuild")]
+[assembly: AssemblyDescription("The project is a trigger to run Bridge Compiler on Bridge project to build Bridge core javascript")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

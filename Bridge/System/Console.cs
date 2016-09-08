@@ -47,63 +47,63 @@ namespace System
         /// Writes the text representation of the specified Boolean value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log({value})")]
+        [Template("Bridge.Console.log({value})")]
         public static extern void Write(Boolean value);
 
         /// <summary>
         /// Writes the specified Unicode character value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log(String.fromCharCode({value}))")]
+        [Template("Bridge.Console.log(String.fromCharCode({value}))")]
         public static extern void Write(Char value);
 
         /// <summary>
         /// Writes the text representation of the specified Decimal value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log({value}.toString())")]
+        [Template("Bridge.Console.log({value}.toString())")]
         public static extern void Write(Decimal value);
 
         /// <summary>
         /// Writes the text representation of the specified double-precision floating-point value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log({value})")]
+        [Template("Bridge.Console.log({value})")]
         public static extern void Write(Double value);
 
         /// <summary>
         /// Writes the text representation of the specified 32-bit signed integer value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log({value})")]
+        [Template("Bridge.Console.log({value})")]
         public static extern void Write(Int32 value);
 
         /// <summary>
         /// Writes the text representation of the specified 64-bit signed integer value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log({value}.toString())")]
+        [Template("Bridge.Console.log({value}.toString())")]
         public static extern void Write(Int64 value);
 
         /// <summary>
         /// Writes the text representation of the specified object to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log({value})")]
+        [Template("Bridge.Console.log({value})")]
         public static extern void Write(Object value);
 
         /// <summary>
         /// Writes the text representation of the specified single-precision floating-point value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log({value})")]
+        [Template("Bridge.Console.log({value})")]
         public static extern void Write(Single value);
 
         /// <summary>
         /// Writes the specified string value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log({value})")]
+        [Template("Bridge.Console.log({value})")]
         public static extern void Write(String value);
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace System
         /// </summary>
         /// <param name="format">A composite format string.</param>
         /// <param name="arg0">The first object to write using format.</param>
-        [Template("System.Console.log(System.String.format({format}, {arg0}))")]
+        [Template("Bridge.Console.log(System.String.format({format}, {arg0}))")]
         public static extern void Write(String format, Object arg0);
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace System
         /// <param name="format">A composite format string.</param>
         /// <param name="arg0">The first object to write using format.</param>
         /// <param name="arg1">The second object to write using format.</param>
-        [Template("System.Console.log(System.String.format({format}, {arg0}, {arg1}))")]
+        [Template("Bridge.Console.log(System.String.format({format}, {arg0}, {arg1}))")]
         public static extern void Write(String format, Object arg0, Object arg1);
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace System
         /// <param name="arg0">The first object to write using format.</param>
         /// <param name="arg1">The second object to write using format.</param>
         /// <param name="arg2">The third object to write using format.</param>
-        [Template("System.Console.log(System.String.format({format}, {arg0}, {arg1}, {arg2}))")]
+        [Template("Bridge.Console.log(System.String.format({format}, {arg0}, {arg1}, {arg2}))")]
         public static extern void Write(String format, Object arg0, Object arg1, Object arg2);
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace System
         /// <param name="arg1">The second object to write using format.</param>
         /// <param name="arg2">The third object to write using format.</param>
         /// <param name="arg3">The fourth object to write using format.</param>
-        [Template("System.Console.log(System.String.format({format}, {arg0}, {arg1}, {arg2}, {arg3}))")]
+        [Template("Bridge.Console.log(System.String.format({format}, {arg0}, {arg1}, {arg2}, {arg3}))")]
         public static extern void Write(String format, Object arg0, Object arg1, Object arg2, Object arg3);
 
         /// <summary>
@@ -149,21 +149,21 @@ namespace System
         /// </summary>
         /// <param name="format">A composite format string.</param>
         /// <param name="arg">An array of objects to write using format.</param>
-        [Template("System.Console.log(System.String.format({format}, {arg}))")]
+        [Template("Bridge.Console.log(System.String.format({format}, {arg}))")]
         public static extern void Write(String format, params Object[] arg);
 
         /// <summary>
         /// Writes the text representation of the specified 32-bit unsigned integer value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log({value})")]
+        [Template("Bridge.Console.log({value})")]
         public static extern void Write(UInt32 value);
 
         /// <summary>
         /// Writes the text representation of the specified 64-bit unsigned integer value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log({value}.toString())")]
+        [Template("Bridge.Console.log({value}.toString())")]
         public static extern void Write(UInt64 value);
 
         /// <summary>
@@ -179,70 +179,70 @@ namespace System
         /// <summary>
         /// Writes the current line terminator to the standard output stream.
         /// </summary>
-        [Template("System.Console.log()")]
+        [Template("Bridge.Console.log()")]
         public static extern void WriteLine();
 
         /// <summary>
         /// Writes the text representation of the specified Boolean value, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log({value})")]
+        [Template("Bridge.Console.log({value})")]
         public static extern void WriteLine(Boolean value);
 
         /// <summary>
         /// Writes the specified Unicode character, followed by the current line terminator, value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log(String.fromCharCode({value}))")]
+        [Template("Bridge.Console.log(String.fromCharCode({value}))")]
         public static extern void WriteLine(Char value);
 
         /// <summary>
         /// Writes the text representation of the specified Decimal value, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log({value}.toString())")]
+        [Template("Bridge.Console.log({value}.toString())")]
         public static extern void WriteLine(Decimal value);
 
         /// <summary>
         /// Writes the text representation of the specified double-precision floating-point value, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log(System.Double.format({value}))")]
+        [Template("Bridge.Console.log(System.Double.format({value}))")]
         public static extern void WriteLine(double value);
 
         /// <summary>
         /// Writes the text representation of the specified 32-bit signed integer value, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log({value})")]
+        [Template("Bridge.Console.log({value})")]
         public static extern void WriteLine(Int32 value);
 
         /// <summary>
         /// Writes the text representation of the specified 64-bit signed integer value, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log({value}.toString())")]
+        [Template("Bridge.Console.log({value}.toString())")]
         public static extern void WriteLine(Int64 value);
 
         /// <summary>
         /// Writes the text representation of the specified object, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log({value})")]
+        [Template("Bridge.Console.log({value})")]
         public static extern void WriteLine(Object value);
 
         /// <summary>
         /// Writes the text representation of the specified single-precision floating-point value, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log(System.Single.format({value}))")]
+        [Template("Bridge.Console.log(System.Single.format({value}))")]
         public static extern void WriteLine(Single value);
 
         /// <summary>
         /// Writes the specified string value, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log({value})")]
+        [Template("Bridge.Console.log({value})")]
         public static extern void WriteLine(String value);
 
         /// <summary>
@@ -250,7 +250,7 @@ namespace System
         /// </summary>
         /// <param name="format">A composite format string.</param>
         /// <param name="arg0">The first object to write using format.</param>
-        [Template("System.Console.log(System.String.format({format}, {arg0}))")]
+        [Template("Bridge.Console.log(System.String.format({format}, {arg0}))")]
         public static extern void WriteLine(String format, object arg0);
 
         /// <summary>
@@ -259,7 +259,7 @@ namespace System
         /// <param name="format">A composite format string.</param>
         /// <param name="arg0">The first object to write using format.</param>
         /// <param name="arg1">The second object to write using format.</param>
-        [Template("System.Console.log(System.String.format({format}, {arg0}, {arg1}))")]
+        [Template("Bridge.Console.log(System.String.format({format}, {arg0}, {arg1}))")]
         public static extern void WriteLine(String format, Object arg0, Object arg1);
 
         /// <summary>
@@ -269,7 +269,7 @@ namespace System
         /// <param name="arg0">The first object to write using format.</param>
         /// <param name="arg1">The second object to write using format.</param>
         /// <param name="arg2">The third object to write using format.</param>
-        [Template("System.Console.log(System.String.format({format}, {arg0}, {arg1}, {arg2}))")]
+        [Template("Bridge.Console.log(System.String.format({format}, {arg0}, {arg1}, {arg2}))")]
         public static extern void WriteLine(String format, Object arg0, Object arg1, Object arg2);
 
         /// <summary>
@@ -280,7 +280,7 @@ namespace System
         /// <param name="arg1">The second object to write using format.</param>
         /// <param name="arg2">The third object to write using format.</param>
         /// <param name="arg3">The fourth object to write using format.</param>
-        [Template("System.Console.log(System.String.format({format}, {arg0}, {arg1}, {arg2}, {arg3}))")]
+        [Template("Bridge.Console.log(System.String.format({format}, {arg0}, {arg1}, {arg2}, {arg3}))")]
         public static extern void WriteLine(String format, Object arg0, Object arg1, Object arg2, Object arg3);
 
         /// <summary>
@@ -288,21 +288,21 @@ namespace System
         /// </summary>
         /// <param name="format">A composite format string.</param>
         /// <param name="arg">An array of objects to write using format.</param>
-        [Template("System.Console.log(System.String.format({format}, {arg}))")]
+        [Template("Bridge.Console.log(System.String.format({format}, {arg}))")]
         public static extern void WriteLine(String format, params Object[] arg);
 
         /// <summary>
         /// Writes the text representation of the specified 32-bit unsigned integer value, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log({value})")]
+        [Template("Bridge.Console.log({value})")]
         public static extern void WriteLine(UInt32 value);
 
         /// <summary>
         /// Writes the text representation of the specified 64-bit unsigned integer value, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log({value}.toString())")]
+        [Template("Bridge.Console.log({value}.toString())")]
         public static extern void WriteLine(UInt64 value);
 
         /// <summary>
@@ -315,28 +315,28 @@ namespace System
         /// Writes the text representation of the specified enum value, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log(System.Enum.toString({value:type}, {value}))")]
+        [Template("Bridge.Console.log(System.Enum.toString({value:type}, {value}))")]
         public static extern void WriteLine(Enum value);
 
         /// <summary>
         /// Writes the text representation of the specified nullable decimal, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log({value} && {value}.toString())")]
+        [Template("Bridge.Console.log({value} && {value}.toString())")]
         public static extern void WriteLine(decimal? value);
 
         /// <summary>
         /// Writes the text representation of the specified nullable 64-bit signed integer, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log({value} && {value}.toString())")]
+        [Template("Bridge.Console.log({value} && {value}.toString())")]
         public static extern void WriteLine(long? value);
 
         /// <summary>
         /// Writes the text representation of the specified nullable 64-bit unsigned integer, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.log({value} && {value}.toString())")]
+        [Template("Bridge.Console.log({value} && {value}.toString())")]
         public static extern void WriteLine(ulong? value);
 
         #endregion WriteLine

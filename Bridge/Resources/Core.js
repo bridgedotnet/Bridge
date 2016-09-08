@@ -339,9 +339,11 @@
             }
 
             if (Bridge.isNumber(value)) {
-                value = value.toExponential();
+                if (Math.floor(value, 0) === value) {
+                    return value;
+                }
 
-                return parseInt(value.substr(0, value.indexOf("e")).replace(".", ""), 10) & 0xFFFFFFFF;
+                value = value.toExponential();
             }
 
             if (Bridge.isString(value)) {
@@ -669,6 +671,7 @@
             var c = obj.constructor;
             return c === Array ||
                 c === Uint8Array ||
+                c === Uint8ClampedArray ||
                 c === Int8Array ||
                 c === Int16Array ||
                 c === Uint16Array ||

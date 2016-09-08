@@ -107,7 +107,8 @@ namespace Bridge.Translator
 
             try
             {
-                var rr = block.Emitter.Resolver.ResolveNode(expression, null);
+                // The resolveNode call required to get GetConversion not fail
+                block.Emitter.Resolver.ResolveNode(expression, null);
                 conversion = block.Emitter.Resolver.Resolver.GetConversion(expression);
 
                 if (conversion == null)
