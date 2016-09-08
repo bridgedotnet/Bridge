@@ -3427,6 +3427,159 @@
 
     }; });
 
+    Bridge.define('Bridge.ClientTest.BridgeConsoleTests', {
+        testLogMessageObject: function () {
+            this.assertLogMessageObject("#0 - ", "Test Bridge Console Log Message Object", "Test Bridge Console Log Message Object");
+            this.assertLogMessageObject("#1 - ", true, "true");
+            this.assertLogMessageObject("#2 - ", false, "false");
+            this.assertLogMessageObject("#3 - ", -1, "-1");
+            this.assertLogMessageObject("#4 - ", 1, "1");
+            this.assertLogMessageObject("#5 - ", -12345678, "-12345678");
+            this.assertLogMessageObject("#6 - ", 12345678, "12345678");
+            this.assertLogMessageObject("#7 - ", System.Int64(-1), "-1");
+            this.assertLogMessageObject("#8 - ", System.Int64(1), "1");
+            this.assertLogMessageObject("#9 - ", System.Int64(-12345678), "-12345678");
+            this.assertLogMessageObject("#10 - ", System.Int64(12345678), "12345678");
+            this.assertLogMessageObject("#11 - ", System.UInt64(1), "1");
+            this.assertLogMessageObject("#12 - ", System.UInt64(12345678), "12345678");
+            this.assertLogMessageObject("#13 - ", -1.0, "-1");
+            this.assertLogMessageObject("#14 - ", 1.0, "1");
+            this.assertLogMessageObject("#15 - ", -12345678.0, "-12345678");
+            this.assertLogMessageObject("#16 - ", 12345678.0, "12345678");
+            this.assertLogMessageObject("#17 - ", -1.12345678, "-1.12345678");
+            this.assertLogMessageObject("#18 - ", 1.12345678, "1.12345678");
+            this.assertLogMessageObject("#19 - ", -12345678.12345678, "-12345678.12345678");
+            this.assertLogMessageObject("#20 - ", 12345678.12345678, "12345678.12345678");
+            this.assertLogMessageObject("#21 - ", System.Decimal(-1.0), "-1");
+            this.assertLogMessageObject("#22 - ", System.Decimal(1.0), "1");
+            this.assertLogMessageObject("#23 - ", System.Decimal(-12345678.0), "-12345678");
+            this.assertLogMessageObject("#24 - ", System.Decimal(12345678.0), "12345678");
+            this.assertLogMessageObject("#25 - ", System.Decimal(-1.12345678), "-1.12345678");
+            this.assertLogMessageObject("#26 - ", System.Decimal(1.12345678), "1.12345678");
+            this.assertLogMessageObject("#27 - ", System.Decimal("-12345678.12345678"), "-12345678.12345678");
+            this.assertLogMessageObject("#28 - ", System.Decimal("12345678.12345678"), "12345678.12345678");
+            this.assertLogMessageObject("#29 - ", null, "null");
+            this.assertLogMessageObject("#30 - ", {  }, "[object Object]");
+            this.assertLogMessageObject("#31 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassA(), "I'm ClassA");
+            this.assertLogMessageObject("#32 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassB(), "[object Object]");
+        },
+        testLogMessageString: function () {
+            this.assertLogMessageObject("#1 - ", "Test Bridge Console Log Message String", "Test Bridge Console Log Message String");
+            this.assertLogMessageObject("#2 - ", null, "null");
+        },
+        testDebugMessageString: function () {
+            this.assertDebugMessageString("#1 - ", "Test Bridge Console Debug Message String", "Test Bridge Console Debug Message String");
+            this.assertDebugMessageString("#2 - ", null, "null");
+        },
+        testErrorMessageString: function () {
+            this.assertErrorMessageString("#1 - ", "Test Bridge Console Error Message String", "Test Bridge Console Error Message String");
+            this.assertErrorMessageString("#2 - ", null, "null");
+        },
+        assertLogMessageObject: function (description, message, expected) {
+            Bridge.Console.log(message);
+            this.assertMessage(description, expected, "#555");
+        },
+        assertLogMessageString: function (description, message, expected) {
+            Bridge.Console.log(message);
+            this.assertMessage(description, expected, "#555");
+        },
+        assertDebugMessageString: function (description, message, expected) {
+            Bridge.Console.debug(message);
+            this.assertMessage(description, expected, "#1800FF");
+        },
+        assertErrorMessageString: function (description, message, expected) {
+            Bridge.Console.error(message);
+            this.assertMessage(description, expected, "#d65050");
+        },
+        assertMessage: function (description, expected, color) {
+            var el = Bridge.as(Bridge.Console.getInstance().currentMessageElement, HTMLLIElement);
+
+            if (el == null) {
+                Bridge.Test.Assert.fail$1(System.String.concat(description, "Could not get current message as HTMLLIElement"));
+                return;
+            }
+
+            Bridge.Test.Assert.true$1(true, System.String.concat(description, "Message <li> element exists"));
+
+            var span = System.Linq.Enumerable.from(el.getElementsByTagName("span")).firstOrDefault(null, null);
+
+            if (span == null) {
+                Bridge.Test.Assert.fail$1(System.String.concat(description, "Could not get message span element"));
+                return;
+            }
+
+            Bridge.Test.Assert.true$1(true, System.String.concat(description, "Message <span> element exists"));
+            Bridge.Test.Assert.areEqual$1(expected, span.innerHTML, System.String.concat(description, "Message is correct"));
+            Bridge.Test.Assert.areEqual$1(this.normalizeHexStyleColor(color), this.convertStyleColor(span.style.color), System.String.concat(System.String.concat(System.String.concat(System.String.concat(description, "Message <span> color ("), span.style.color), ") should be "), color));
+        },
+        convertStyleColor: function (styleColor) {
+            var r = new RegExp("^rgb\\((\\d+),\\s*(\\d+),\\s*(\\d+)\\)$");
+
+            var items = r.exec(styleColor);
+
+            if (items != null && items.length >= 4) {
+                styleColor = this.rgbToHex(items[1], items[2], items[3]);
+            }
+
+            return this.normalizeHexStyleColor(styleColor);
+        },
+        normalizeHexStyleColor: function (styleColor) {
+            if (System.String.isNullOrEmpty(styleColor) || !System.String.startsWith(styleColor, "#")) {
+                return styleColor;
+            }
+
+            var subColor = styleColor.substr(1);
+            if (subColor.length < 1) {
+                return styleColor;
+            } else if (subColor.length === 3) {
+                subColor = this.duplicate$1(subColor);
+            }
+
+            if (subColor.length < 6) {
+                var toAdd = ("000000").substr(0, ((6 - subColor.length) | 0));
+                subColor = System.String.concat(toAdd, subColor);
+            }
+
+            styleColor = (System.String.concat(String.fromCharCode(styleColor.charCodeAt(0)), subColor)).toUpperCase();
+
+            return styleColor;
+        },
+        duplicate: function (c) {
+            return System.String.concat(String.fromCharCode(c), String.fromCharCode(c));
+        },
+        duplicate$1: function (s) {
+            if (s == null) {
+                return null;
+            }
+
+            var r = "";
+            for (var i = 0; i < s.length; i = (i + 1) | 0) {
+                r = System.String.concat(r, (this.duplicate(s.charCodeAt(i))));
+            }
+
+            return r;
+        },
+        rgbToHex: function (r, g, b) {
+            return System.String.concat(System.String.concat(System.String.concat("#", this.toHexNumber(r)), this.toHexNumber(g)), this.toHexNumber(b));
+        },
+        toHexNumber: function (n) {
+            var i = { v : 0 };
+            System.Int32.tryParse(n, i);
+
+            var r = System.Int32.format(i.v, "X2");
+
+            return r;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.BridgeConsoleTests.ClassA', {
+        toString: function () {
+            return "I'm ClassA";
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.BridgeConsoleTests.ClassB');
+
     Bridge.define('Bridge.ClientTest.CheckedUncheckedTests', {
         statics: {
             assertEqual: function (expected, actual, message) {
@@ -6546,6 +6699,7 @@
             MODULE_REFLECTION: "Reflection",
             MODULE_ARGUMENTS: "Arguments",
             MODULE_MIXIN: "Mixin",
+            MODULE_BRIDGECONSOLE: "Bridge Console",
             IGNORE_DATE: null
         }
     });

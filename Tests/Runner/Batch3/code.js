@@ -3589,10 +3589,10 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304', {
         statics: {
             getOutput: function () {
-                return Bridge.Console.getInstance().debugOutput;
+                return Bridge.Console.getInstance().bufferedOutput;
             },
             setOutput: function (value) {
-                Bridge.Console.getInstance().debugOutput = value;
+                Bridge.Console.getInstance().bufferedOutput = value;
             },
             clearOutput: function () {
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.setOutput("");
@@ -6018,10 +6018,10 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458', {
         statics: {
             getOutput: function () {
-                return Bridge.Console.getInstance().debugOutput;
+                return Bridge.Console.getInstance().bufferedOutput;
             },
             setOutput: function (value) {
-                Bridge.Console.getInstance().debugOutput = value;
+                Bridge.Console.getInstance().bufferedOutput = value;
             },
             clearOutput: function () {
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458.setOutput("");
@@ -7139,10 +7139,10 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1698', {
         statics: {
             getOutput: function () {
-                return Bridge.Console.getInstance().debugOutput;
+                return Bridge.Console.getInstance().bufferedOutput;
             },
             setOutput: function (value) {
-                Bridge.Console.getInstance().debugOutput = value;
+                Bridge.Console.getInstance().bufferedOutput = value;
             },
             clearOutput: function () {
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1698.setOutput("");

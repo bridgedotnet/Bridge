@@ -13,12 +13,12 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             get
             {
-                return Bridge.Utils.Console.Instance.DebugOutput;
+                return Bridge.Utils.Console.Instance.BufferedOutput;
             }
 
             set
             {
-                Bridge.Utils.Console.Instance.DebugOutput = value;
+                Bridge.Utils.Console.Instance.BufferedOutput = value;
             }
         }
 

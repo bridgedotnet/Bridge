@@ -22418,8 +22418,10 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 if (messageType === void 0) { messageType = 0; }
                 var self = Bridge.Console.getInstance();
 
-                if (self.debugOutput != null) {
-                    self.debugOutput = System.String.concat(self.debugOutput, (value.toString()));
+                var v = value != null ? value.toString() : "null";
+
+                if (self.bufferedOutput != null) {
+                    self.bufferedOutput = System.String.concat(self.bufferedOutput, v);
                     return;
                 }
 
@@ -22427,18 +22429,19 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     Bridge.Console.show();
                 }
 
-                var el = document.getElementById(Bridge.Console.CONSOLE_MESSAGES_ID);
+                var m = self.buildConsoleMessage(v, messageType);
+                self.consoleMessages.appendChild(m);
 
-                el.appendChild(self.buildConsoleMessage(value.toString(), messageType));
+                self.currentMessageElement = m;
 
-                if (Bridge.isDefined("Bridge.global") && Bridge.isDefined("Bridge.global.console")) {
-                    if (messageType === 1 && Bridge.isDefined("Bridge.global.console.debug")) {
-                        Bridge.global.console.debug(value);
+                if (self.consoleDefined) {
+                    if (messageType === 1 && self.consoleDebugDefined) {
+                        Bridge.global.console.debug(v);
                     } else {
-                        Bridge.global.console.log(value);
+                        Bridge.global.console.log(v);
                     }
-                } else if (Bridge.isDefined("Bridge.global.opera") && Bridge.isDefined("Bridge.global.opera.postError")) {
-                    Bridge.global.opera.postError(value);
+                } else if (self.operaPostErrorDefined) {
+                    Bridge.global.opera.postError(v);
                 }
             },
             error: function (value) {
@@ -22454,13 +22457,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 var self = Bridge.Console.getInstance();
                 self.hidden = true;
 
-                self.consoleWrapper.style.display = "none";
-
-                if (Bridge.referenceEquals(Bridge.Console.position, "horizontal")) {
-                    self.unwrapBodyContent();
-                } else if (Bridge.referenceEquals(Bridge.Console.position, "vertical")) {
-                    document.body.removeAttribute("style");
-                }
+                self.close();
             },
             show: function () {
                 Bridge.Console.getInstance().hidden = false;
@@ -22478,8 +22475,13 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         consoleHeaderHeight: "35px",
         tooltip: null,
         consoleWrapper: null,
-        debugOutput: null,
+        consoleMessages: null,
         hidden: true,
+        consoleDefined: false,
+        consoleDebugDefined: false,
+        operaPostErrorDefined: false,
+        currentMessageElement: null,
+        bufferedOutput: null,
         constructor: function () {
             this.$initialize();
             this.init();
@@ -22575,13 +22577,14 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             consoleBody.setAttribute("style", this.obj2Css(consoleBodyStyles));
 
             // Console Messages Unordered List Element
-            var consoleMessages = document.createElement("ul");
-            consoleMessages.id = Bridge.Console.CONSOLE_MESSAGES_ID;
+            var cm = document.createElement("ul");
+            this.consoleMessages = cm;
+            cm.id = Bridge.Console.CONSOLE_MESSAGES_ID;
 
-            consoleMessages.setAttribute("style", "margin: 0;padding: 0;list-style: none;");
+            cm.setAttribute("style", "margin: 0;padding: 0;list-style: none;");
 
             // Add messages to console body
-            consoleBody.appendChild(consoleMessages);
+            consoleBody.appendChild(cm);
 
             // Add console header and console body into console wrapper
             this.consoleWrapper.appendChild(consoleHeader);
@@ -22596,6 +22599,10 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             // Show/hide Tooltip
             closeBtn.addEventListener("mouseover", Bridge.fn.bind(this, this.showTooltip));
             closeBtn.addEventListener("mouseout", Bridge.fn.bind(this, this.hideTooltip));
+
+            this.consoleDefined = Bridge.isDefined(Bridge.global) && Bridge.isDefined(Bridge.global.console);
+            this.consoleDebugDefined = this.consoleDefined && Bridge.isDefined(Bridge.global.console.debug);
+            this.operaPostErrorDefined = Bridge.isDefined(Bridge.global.opera) && Bridge.isDefined(Bridge.global.opera.postError);
         },
         showTooltip: function () {
             var self = Bridge.Console.getInstance();
@@ -22609,11 +22616,10 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             self.tooltip.style.opacity = "0";
         },
         close: function () {
-            var self = Bridge.Console.getInstance();
-            self.consoleWrapper.style.display = "none";
+            this.consoleWrapper.style.display = "none";
 
             if (Bridge.referenceEquals(Bridge.Console.position, "horizontal")) {
-                self.unwrapBodyContent();
+                this.unwrapBodyContent();
             } else if (Bridge.referenceEquals(Bridge.Console.position, "vertical")) {
                 document.body.removeAttribute("style");
             }

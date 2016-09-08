@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Bridge.Utils
 {
     /// <summary>
-    ///
+    /// Outputs log messages into a formatted div element on the page
     /// </summary>
     [Namespace("Bridge")]
     public class Console
@@ -135,13 +135,14 @@ namespace Bridge.Utils
         private Element Tooltip;
         private Element ConsoleWrapper;
         private Element ConsoleMessages;
-        private bool Hidden;
+        private bool Hidden = true;
 
         private bool ConsoleDefined;
         private bool ConsoleDebugDefined;
         private bool OperaPostErrorDefined;
 
-        public string DebugOutput;
+        public object CurrentMessageElement;
+        public string BufferedOutput;
 
         private static string position = "horizontal";
 
@@ -329,9 +330,9 @@ namespace Bridge.Utils
 
             var v = value != null ? value.ToString() : "null";
 
-            if (self.DebugOutput != null)
+            if (self.BufferedOutput != null)
             {
-                self.DebugOutput += v.ToString();
+                self.BufferedOutput += v;
                 return;
             }
 
@@ -340,8 +341,10 @@ namespace Bridge.Utils
                 Show();
             }
 
-            var m = self.BuildConsoleMessage(v.ToString(), messageType);
+            var m = self.BuildConsoleMessage(v, messageType);
             self.ConsoleMessages.AppendChild(m);
+
+            self.CurrentMessageElement = m;
 
             if (self.ConsoleDefined)
             {

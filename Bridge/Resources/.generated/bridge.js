@@ -22420,8 +22420,8 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
                 var v = value != null ? value.toString() : "null";
 
-                if (self.debugOutput != null) {
-                    self.debugOutput = System.String.concat(self.debugOutput, (v.toString()));
+                if (self.bufferedOutput != null) {
+                    self.bufferedOutput = System.String.concat(self.bufferedOutput, v);
                     return;
                 }
 
@@ -22429,8 +22429,10 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     Bridge.Console.show();
                 }
 
-                var m = self.buildConsoleMessage(v.toString(), messageType);
+                var m = self.buildConsoleMessage(v, messageType);
                 self.consoleMessages.appendChild(m);
+
+                self.currentMessageElement = m;
 
                 if (self.consoleDefined) {
                     if (messageType === 1 && self.consoleDebugDefined) {
@@ -22474,11 +22476,12 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         tooltip: null,
         consoleWrapper: null,
         consoleMessages: null,
-        hidden: false,
+        hidden: true,
         consoleDefined: false,
         consoleDebugDefined: false,
         operaPostErrorDefined: false,
-        debugOutput: null,
+        currentMessageElement: null,
+        bufferedOutput: null,
         constructor: function () {
             this.$initialize();
             this.init();
