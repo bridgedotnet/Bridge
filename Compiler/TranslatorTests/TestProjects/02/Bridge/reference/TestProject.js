@@ -22406,12 +22406,11 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             CONSOLE_MESSAGES_ID: "bridge-console-messages",
             position: "horizontal",
             instance: null,
-            config: {
-                init: function () {
-                    this.instance = new Bridge.Console();
-                }
-            },
             getInstance: function () {
+                if (Bridge.Console.instance == null) {
+                    Bridge.Console.instance = new Bridge.Console();
+                }
+
                 return Bridge.Console.instance;
             },
             logBase: function (value, messageType) {
@@ -22425,9 +22424,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     return;
                 }
 
-                if (self.hidden) {
-                    Bridge.Console.show();
-                }
+                Bridge.Console.show();
 
                 var m = self.buildConsoleMessage(v, messageType);
                 self.consoleMessages.appendChild(m);
@@ -22454,13 +22451,26 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 Bridge.Console.logBase(value);
             },
             hide: function () {
+                if (Bridge.Console.instance == null) {
+                    return;
+                }
+
                 var self = Bridge.Console.getInstance();
-                self.hidden = true;
+
+                if (self.hidden) {
+                    return;
+                }
 
                 self.close();
             },
             show: function () {
-                Bridge.Console.getInstance().hidden = false;
+                var self = Bridge.Console.getInstance();
+
+                if (!self.hidden) {
+                    return;
+                }
+
+                self.init(true);
             },
             toggle: function () {
                 if (Bridge.Console.getInstance().hidden) {
@@ -22476,6 +22486,14 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         tooltip: null,
         consoleWrapper: null,
         consoleMessages: null,
+        bridgeIcon: null,
+        bridgeIconPath: null,
+        bridgeConsoleLabel: null,
+        closeBtn: null,
+        closeIcon: null,
+        closeIconPath: null,
+        consoleHeader: null,
+        consoleBody: null,
         hidden: true,
         consoleDefined: false,
         consoleDebugDefined: false,
@@ -22486,7 +22504,10 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             this.$initialize();
             this.init();
         },
-        init: function () {
+        init: function (reinit) {
+            if (reinit === void 0) { reinit = false; }
+            this.hidden = false;
+
             var consoleWrapperStyles = Bridge.fn.bind(this, $_.Bridge.Console.f1)(new (System.Collections.Generic.Dictionary$2(String,String))());
 
             var consoleHeaderStyles = $_.Bridge.Console.f2(new (System.Collections.Generic.Dictionary$2(String,String))());
@@ -22494,50 +22515,44 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             var consoleBodyStyles = $_.Bridge.Console.f3(new (System.Collections.Generic.Dictionary$2(String,String))());
 
             // Bridge Icon
-            var bridgeIcon = document.createElementNS(this.svgNS, "svg");
+            this.bridgeIcon = this.bridgeIcon || document.createElementNS(this.svgNS, "svg");
 
             var items = Bridge.fn.bind(this, $_.Bridge.Console.f4)(new (System.Collections.Generic.Dictionary$2(String,String))());
 
-            this.setAttributes(bridgeIcon, items);
+            this.setAttributes(this.bridgeIcon, items);
 
-            var bridgeIconPath = document.createElementNS(this.svgNS, "path");
+            this.bridgeIconPath = this.bridgeIconPath || document.createElementNS(this.svgNS, "path");
 
             var items2 = new (System.Collections.Generic.Dictionary$2(String,String))();
             items2.set("d", "M19 14.4h2.2V9.6L19 7.1v7.3zm4.3-2.5v2.5h2.2l-2.2-2.5zm-8.5 2.5H17V4.8l-2.2-2.5v12.1zM0 14.4h3l7.5-8.5v8.5h2.2V0L0 14.4z");
             items2.set("fill", "#555");
 
-            this.setAttributes(bridgeIconPath, items2);
-
-            bridgeIcon.appendChild(bridgeIconPath);
+            this.setAttributes(this.bridgeIconPath, items2);
 
             // Bridge Console Label
-            var bridgeConsoleLabel = document.createElement("span");
-            bridgeConsoleLabel.innerHTML = "Bridge Console";
+            this.bridgeConsoleLabel = this.bridgeConsoleLabel || document.createElement("span");
+            this.bridgeConsoleLabel.innerHTML = "Bridge Console";
 
             // Close Button
-            var closeBtn = document.createElement("span");
-            closeBtn.setAttribute("style", "position: relative;display: inline-block;float: right;cursor: pointer");
+            this.closeBtn = this.closeBtn || document.createElement("span");
+            this.closeBtn.setAttribute("style", "position: relative;display: inline-block;float: right;cursor: pointer");
 
-            var closeIcon = document.createElementNS(this.svgNS, "svg");
+            this.closeIcon = this.closeIcon || document.createElementNS(this.svgNS, "svg");
 
             var items3 = Bridge.fn.bind(this, $_.Bridge.Console.f5)(new (System.Collections.Generic.Dictionary$2(String,String))());
 
-            this.setAttributes(closeIcon, items3);
+            this.setAttributes(this.closeIcon, items3);
 
-            var closeIconPath = document.createElementNS(this.svgNS, "path");
+            this.closeIconPath = this.closeIconPath || document.createElementNS(this.svgNS, "path");
 
             var items4 = $_.Bridge.Console.f6(new (System.Collections.Generic.Dictionary$2(String,String))());
 
-            this.setAttributes(closeIconPath, items4);
+            this.setAttributes(this.closeIconPath, items4);
 
-            this.tooltip = document.createElement("div");
+            this.tooltip = this.tooltip || document.createElement("div");
             this.tooltip.innerHTML = "Refresh page to open Bridge Console";
 
             this.tooltip.setAttribute("style", "position: absolute;right: 30px;top: -6px;white-space: nowrap;padding: 7px;border-radius: 3px;background-color: rgba(0, 0, 0, 0.75);color: #eee;text-align: center;visibility: hidden;opacity: 0;-webkit-transition: all 0.25s ease-in-out;transition: all 0.25s ease-in-out;z-index: 1;");
-
-            closeIcon.appendChild(closeIconPath);
-            closeBtn.appendChild(closeIcon);
-            closeBtn.appendChild(this.tooltip);
 
             // Styles and other stuff based on position
             // Force to horizontal for now
@@ -22560,49 +22575,56 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             }
 
             // Console wrapper
-            this.consoleWrapper = document.createElement("div");
+            this.consoleWrapper = this.consoleWrapper || document.createElement("div");
             this.consoleWrapper.setAttribute("style", this.obj2Css(consoleWrapperStyles));
 
             // Console Header
-            var consoleHeader = document.createElement("div");
-            consoleHeader.setAttribute("style", this.obj2Css(consoleHeaderStyles));
-
-            // Add child elements into console header
-            consoleHeader.appendChild(bridgeIcon);
-            consoleHeader.appendChild(bridgeConsoleLabel);
-            consoleHeader.appendChild(closeBtn);
+            this.consoleHeader = this.consoleHeader || document.createElement("div");
+            this.consoleHeader.setAttribute("style", this.obj2Css(consoleHeaderStyles));
 
             // Console Body Wrapper
-            var consoleBody = document.createElement("div");
-            consoleBody.setAttribute("style", this.obj2Css(consoleBodyStyles));
+            this.consoleBody = this.consoleBody || document.createElement("div");
+            this.consoleBody.setAttribute("style", this.obj2Css(consoleBodyStyles));
 
             // Console Messages Unordered List Element
-            var cm = document.createElement("ul");
-            this.consoleMessages = cm;
+            this.consoleMessages = this.consoleMessages || document.createElement("ul");
+            var cm = this.consoleMessages;
             cm.id = Bridge.Console.CONSOLE_MESSAGES_ID;
 
             cm.setAttribute("style", "margin: 0;padding: 0;list-style: none;");
 
-            // Add messages to console body
-            consoleBody.appendChild(cm);
+            if (!reinit) {
+                this.bridgeIcon.appendChild(this.bridgeIconPath);
+                this.closeIcon.appendChild(this.closeIconPath);
+                this.closeBtn.appendChild(this.closeIcon);
+                this.closeBtn.appendChild(this.tooltip);
 
-            // Add console header and console body into console wrapper
-            this.consoleWrapper.appendChild(consoleHeader);
-            this.consoleWrapper.appendChild(consoleBody);
+                // Add child elements into console header
+                this.consoleHeader.appendChild(this.bridgeIcon);
+                this.consoleHeader.appendChild(this.bridgeConsoleLabel);
+                this.consoleHeader.appendChild(this.closeBtn);
 
-            // Finally add console to body
-            document.body.appendChild(this.consoleWrapper);
+                // Add messages to console body
+                this.consoleBody.appendChild(cm);
 
-            // Close console
-            closeBtn.addEventListener("click", Bridge.fn.bind(this, this.close));
+                // Add console header and console body into console wrapper
+                this.consoleWrapper.appendChild(this.consoleHeader);
+                this.consoleWrapper.appendChild(this.consoleBody);
 
-            // Show/hide Tooltip
-            closeBtn.addEventListener("mouseover", Bridge.fn.bind(this, this.showTooltip));
-            closeBtn.addEventListener("mouseout", Bridge.fn.bind(this, this.hideTooltip));
+                // Finally add console to body
+                document.body.appendChild(this.consoleWrapper);
 
-            this.consoleDefined = Bridge.isDefined(Bridge.global) && Bridge.isDefined(Bridge.global.console);
-            this.consoleDebugDefined = this.consoleDefined && Bridge.isDefined(Bridge.global.console.debug);
-            this.operaPostErrorDefined = Bridge.isDefined(Bridge.global.opera) && Bridge.isDefined(Bridge.global.opera.postError);
+                // Close console
+                this.closeBtn.addEventListener("click", Bridge.fn.bind(this, this.close));
+
+                // Show/hide Tooltip
+                this.closeBtn.addEventListener("mouseover", Bridge.fn.bind(this, this.showTooltip));
+                this.closeBtn.addEventListener("mouseout", Bridge.fn.bind(this, this.hideTooltip));
+
+                this.consoleDefined = Bridge.isDefined(Bridge.global) && Bridge.isDefined(Bridge.global.console);
+                this.consoleDebugDefined = this.consoleDefined && Bridge.isDefined(Bridge.global.console.debug);
+                this.operaPostErrorDefined = Bridge.isDefined(Bridge.global.opera) && Bridge.isDefined(Bridge.global.opera.postError);
+            }
         },
         showTooltip: function () {
             var self = Bridge.Console.getInstance();
@@ -22616,6 +22638,8 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             self.tooltip.style.opacity = "0";
         },
         close: function () {
+            this.hidden = true;
+
             this.consoleWrapper.style.display = "none";
 
             if (Bridge.referenceEquals(Bridge.Console.position, "horizontal")) {
@@ -22625,6 +22649,10 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             }
         },
         wrapBodyContent: function () {
+            if (document.body == null) {
+                return;
+            }
+
             // get body margin and padding for proper alignment of scroll if a body margin/padding is used.
             var bodyStyle = document.defaultView.getComputedStyle(document.body, null);
 
@@ -22650,6 +22678,10 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         },
         unwrapBodyContent: function () {
             var bridgeBodyWrapper = document.getElementById(Bridge.Console.BODY_WRAPPER_ID);
+
+            if (bridgeBodyWrapper == null) {
+                return;
+            }
 
             while (bridgeBodyWrapper.firstChild != null) {
                 document.body.insertBefore(bridgeBodyWrapper.firstChild, bridgeBodyWrapper);
