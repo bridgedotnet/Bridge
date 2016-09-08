@@ -1,3 +1,4 @@
+using System.Linq;
 using Bridge.Contract;
 using Bridge.Contract.Constants;
 
@@ -63,7 +64,15 @@ namespace Bridge.Translator
             if (proto)
             {
                 var baseType = this.Emitter.GetBaseTypeDefinition();
-                this.Write(BridgeTypes.ToJsName(baseType, this.Emitter), "." + JS.Fields.PROTOTYPE);
+
+                if (this.Emitter.TypeInfo.GetBaseTypes(this.Emitter).Any())
+                {
+                    this.Write(BridgeTypes.ToJsName(this.Emitter.TypeInfo.GetBaseClass(this.Emitter), this.Emitter), "." + JS.Fields.PROTOTYPE);
+                }
+                else
+                {
+                    this.Write(BridgeTypes.ToJsName(baseType, this.Emitter), "." + JS.Fields.PROTOTYPE);
+                }
             }
             else
             {
