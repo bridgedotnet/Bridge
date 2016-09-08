@@ -55,6 +55,7 @@ namespace System
         [Template("{this}")]
         public virtual extern dynamic ToDynamic();
 
+        [Obsolete]
         [Template("Bridge.getTypeName(Bridge.getType({this}))")]
         public virtual extern string GetClassName();
     }

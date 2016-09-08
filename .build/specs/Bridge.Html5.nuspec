@@ -21,12 +21,12 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="..\..\README.md" target="README.md"/>
-    <file src="..\..\LICENSE" target="LICENSE"/>
+    <file src="../../README.md" target="README.md"/>
+    <file src="../../LICENSE" target="LICENSE"/>
 
     <!--NET40-->
-    <file src="..\..\Html5\bin\Release\Bridge.Html5.dll" target="lib\net40\Bridge.Html5.dll"/>
-    <file src="..\..\Html5\bin\Release\Bridge.Html5.xml" target="lib\net40\Bridge.Html5.xml"/>
-    <file src="..\..\Html5\bin\Release\Bridge.Html5.pdb" target="lib\net40\pdb\Bridge.Html5.pdb"/>
+    <file src="../../Html5/bin/Release/Bridge.Html5.dll" target="lib/net40/Bridge.Html5.dll"/>
+    <file src="../../Html5/bin/Release/Bridge.Html5.xml" target="lib/net40/Bridge.Html5.xml"/>
+    <!--<file src="../../Html5/bin/Release/Bridge.Html5.pdb" target="lib/net40/pdb/Bridge.Html5.pdb"/>-->
   </files>
 </package>

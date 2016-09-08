@@ -10,7 +10,7 @@ namespace Bridge.ClientTest.Exceptions
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.NotImplementedException", typeof(NotImplementedException).GetClassName(), "Name");
+            Assert.AreEqual("System.NotImplementedException", typeof(NotImplementedException).FullName, "Name");
             object d = new NotImplementedException();
             Assert.True(d is NotImplementedException, "is NotImplementedException");
             Assert.True(d is Exception, "is Exception");

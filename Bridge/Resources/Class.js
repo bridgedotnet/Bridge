@@ -341,7 +341,7 @@
                 }
             };
 
-            if (isEntryPoint) {
+            if (isEntryPoint || Bridge.isFunction(Class["$main"])) {
                 Bridge.Class.$queueEntry.push(Class);
             }
 
@@ -548,6 +548,10 @@
 
                 if (t.$staticInit) {
                     t.$staticInit();
+                }
+
+                if (t["$main"]) {
+                    Bridge.ready(t.$main);
                 }
             }
             Bridge.Class.$queue.length = 0;

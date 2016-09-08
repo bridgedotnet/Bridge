@@ -14,7 +14,7 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.False((object)0.5 is char);
             Assert.False((object)-1 is char);
             Assert.False((object)65536 is char);
-            Assert.AreEqual("System.Char", typeof(char).GetClassName());
+            Assert.AreEqual("System.Char", typeof(char).FullName);
         }
 
         [Test]

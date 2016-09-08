@@ -55,7 +55,7 @@
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 1554797180;
+            hash = hash * 23 + 1852403652;
             hash = hash * 23 + (this.x == null ? 0 : Bridge.getHashCode(this.x));
             hash = hash * 23 + (this.y == null ? 0 : Bridge.getHashCode(this.y));
             return hash;

@@ -13,11 +13,11 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public class SomethingOfSomethingElse : Something<SomethingElse> { }
 
         [Test]
-        public void TestGetClassName()
+        public void TestGetClassName_FullName()
         {
             var x = new SomethingOfSomethingElse();
-            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1737.SomethingOfSomethingElse", x.GetClassName());
-            Assert.True(x.GetType().FullName == x.GetClassName());
+            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1737.SomethingOfSomethingElse", x.GetType().FullName);
+            Assert.True(x.GetType().FullName == x.GetType().FullName);
         }
     }
 }

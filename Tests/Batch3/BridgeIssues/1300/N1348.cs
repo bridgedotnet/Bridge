@@ -12,7 +12,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             var value = typeof(void);
             Assert.AreEqual("Object", value.FullName);
-            Assert.AreEqual("Object", value.GetClassName());
+            Assert.AreEqual("Object", value.FullName);
             Assert.AreEqual("Function", value.GetType().FullName);
         }
     }

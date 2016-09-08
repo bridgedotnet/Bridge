@@ -90,7 +90,7 @@
     <TypeScriptOutDir>..\..\Runner\TypeScriptBatch1</TypeScriptOutDir>
     <NoWarn>2008</NoWarn>
   </PropertyGroup>
-  <PropertyGroup Condition="$(OS) != Unix">
+  <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
