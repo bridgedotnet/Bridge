@@ -18,7 +18,7 @@ SET output="%root%Bridge\.build\packages\"
 :: Bridge
 ::------------------------------------------------------------------------------------------::
 
-:: Bridge.Transpiled
+:: Bridge.PostBuild
 echo f | xcopy /f /y "%root%Bridge\PostBuild\bin\%build%\*.nupkg"                   %output%
 
 :: Bridge.Html5
