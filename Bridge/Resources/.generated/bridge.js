@@ -22597,9 +22597,9 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             closeBtn.addEventListener("mouseover", Bridge.fn.bind(this, this.showTooltip));
             closeBtn.addEventListener("mouseout", Bridge.fn.bind(this, this.hideTooltip));
 
-            this.consoleDefined = Bridge.isDefined("Bridge.global") && Bridge.isDefined("Bridge.global.console");
-            this.consoleDebugDefined = this.consoleDefined && Bridge.isDefined("Bridge.global.console.debug");
-            this.operaPostErrorDefined = Bridge.isDefined("Bridge.global.opera") && Bridge.isDefined("Bridge.global.opera.postError");
+            this.consoleDefined = Bridge.isDefined(Bridge.global) && Bridge.isDefined(Bridge.global.console);
+            this.consoleDebugDefined = this.consoleDefined && Bridge.isDefined(Bridge.global.console.debug);
+            this.operaPostErrorDefined = Bridge.isDefined(Bridge.global.opera) && Bridge.isDefined(Bridge.global.opera.postError);
         },
         showTooltip: function () {
             var self = Bridge.Console.getInstance();

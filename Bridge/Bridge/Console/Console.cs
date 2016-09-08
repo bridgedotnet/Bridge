@@ -10,6 +10,42 @@ namespace Bridge.Utils
     public class Console
     {
         #region HTML Wrappers to avoid dynamic
+#pragma warning disable 649 // CS0649  Field is never assigned to, and will always have its default value null
+        [External]
+        [Name("Bridge")]
+        private static class BridgeWrapper
+        {
+            [External]
+            [Name("global")]
+            public class GlobalWraper
+            {
+                [External]
+                [Name("console")]
+                public class ConsoleWraper
+                {
+                    [Name("debug")]
+                    public object DebugInstance;
+                    public extern void Debug(object value);
+                    public extern void Log(object value);
+                }
+
+                [External]
+                [Name("opera")]
+                public class OperaWraper
+                {
+                    [Name("postError")]
+                    public object PostErrorInstance;
+                    public extern void PostError(object value);
+                }
+
+                private extern GlobalWraper();
+
+                public ConsoleWraper Console;
+                public OperaWraper Opera;
+            }
+
+            public static GlobalWraper Global;
+        }
 
         [External]
         [Name("document")]
@@ -19,10 +55,8 @@ namespace Bridge.Utils
             public static extern Element CreateElement(string tagName);
             public static extern Element GetElementById(string id);
 
-#pragma warning disable 649 // CS0649  Field 'Console.Document.DefaultView' is never assigned to, and will always have its default value null
             public static readonly Element DefaultView;
             public static readonly Element Body;
-#pragma warning restore 649 // CS0649  Field 'Console.Document.DefaultView' is never assigned to, and will always have its default value null
         }
 
         [External]
@@ -40,12 +74,10 @@ namespace Bridge.Utils
             // window's method
             public extern CssStyle GetComputedStyle(object element, object pseudoElt);
 
-#pragma warning disable 649 // CS0649  Field 'Console.Document.DefaultView' is never assigned to, and will always have its default value null
             public string Id;
             public string InnerHTML;
             public readonly Element FirstChild;
             public readonly CssStyle Style;
-#pragma warning restore 649 // CS0649  Field 'Console.Document.DefaultView' is never assigned to, and will always have its default value null
         }
 
         [External]
@@ -53,7 +85,6 @@ namespace Bridge.Utils
         {
             private extern CssStyle();
 
-#pragma warning disable 649 // CS0649  Field 'Console.Document.DefaultView' is never assigned to, and will always have its default value null
             public string Color;
             public string Display;
             public string MarginLeft;
@@ -67,9 +98,8 @@ namespace Bridge.Utils
             public string MarginBottom;
             public string Right;
             public string Visibility;
-#pragma warning restore 649 // CS0649  Field 'Console.Document.DefaultView' is never assigned to, and will always have its default value null
         }
-
+#pragma warning restore 649 // CS0649  Field is never assigned to, and will always have its default value null
         #endregion HTML Wrappers
 
         [External]
@@ -282,15 +312,15 @@ namespace Bridge.Utils
             Document.Body.AppendChild(ConsoleWrapper);
 
             // Close console
-            closeBtn.AddEventListener("click", (Action)this.Close);
+            closeBtn.AddEventListener("click", this.Close);
 
             // Show/hide Tooltip
-            closeBtn.AddEventListener("mouseover", (Action)this.ShowTooltip);
-            closeBtn.AddEventListener("mouseout", (Action)this.HideTooltip);
+            closeBtn.AddEventListener("mouseover", this.ShowTooltip);
+            closeBtn.AddEventListener("mouseout", this.HideTooltip);
 
-            ConsoleDefined = Script.IsDefined("Bridge.global") && Script.IsDefined("Bridge.global.console");
-            ConsoleDebugDefined = ConsoleDefined && Script.IsDefined("Bridge.global.console.debug");
-            OperaPostErrorDefined = Script.IsDefined("Bridge.global.opera") && Script.IsDefined("Bridge.global.opera.postError");
+            ConsoleDefined = Script.IsDefined(BridgeWrapper.Global) && Script.IsDefined(BridgeWrapper.Global.Console);
+            ConsoleDebugDefined = ConsoleDefined && Script.IsDefined(BridgeWrapper.Global.Console.DebugInstance);
+            OperaPostErrorDefined = Script.IsDefined(BridgeWrapper.Global.Opera) && Script.IsDefined(BridgeWrapper.Global.Opera.PostErrorInstance);
         }
 
         private static void LogBase(object value, MessageType messageType = MessageType.Info)
@@ -317,16 +347,16 @@ namespace Bridge.Utils
             {
                 if (messageType == MessageType.Debug && self.ConsoleDebugDefined)
                 {
-                    Script.Write("Bridge.global.console.debug(v);");
+                    BridgeWrapper.Global.Console.Debug(v);
                 }
                 else
                 {
-                    Script.Write("Bridge.global.console.log(v);");
+                    BridgeWrapper.Global.Console.Log(v);
                 }
             }
             else if (self.OperaPostErrorDefined)
             {
-                Script.Write("Bridge.global.opera.postError(v);");
+                BridgeWrapper.Global.Opera.PostError(v);
             }
         }
 
