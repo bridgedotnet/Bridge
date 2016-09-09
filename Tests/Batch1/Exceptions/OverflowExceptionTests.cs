@@ -10,7 +10,7 @@ namespace Bridge.ClientTest.Exceptions
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.OverflowException", typeof(OverflowException).GetClassName(), "Name");
+            Assert.AreEqual("System.OverflowException", typeof(OverflowException).FullName, "Name");
             object d = new OverflowException();
             Assert.True(d is OverflowException, "is OverflowException");
             Assert.True(d is Exception, "is Exception");

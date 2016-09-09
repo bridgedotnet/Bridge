@@ -95,13 +95,33 @@ namespace Bridge.Translator
                 else
                 {
                     string structName = BridgeTypes.ToJsName(this.TypeInfo.Type, this.Emitter);
-                    if (this.TypeInfo.Type.TypeArguments.Count > 0 && !Helpers.IsIgnoreGeneric(this.TypeInfo.Type, this.Emitter))
+                    if (this.TypeInfo.Type.TypeArguments.Count > 0 &&
+                        !Helpers.IsIgnoreGeneric(this.TypeInfo.Type, this.Emitter))
                     {
                         structName = "(" + structName + ")";
                     }
 
                     this.EnsureComma();
                     this.Write(JS.Funcs.GETDEFAULTVALUE + ": function () { return new " + structName + "(); }");
+                    this.Emitter.Comma = true;
+                }
+            }
+            else if(this.StaticBlock)
+            {
+                var ctor = this.TypeInfo.Type.GetConstructors().FirstOrDefault(c => c.Parameters.Count == 0 && this.Emitter.GetInline(c) != null);
+
+                if (ctor != null)
+                {
+                    var code = this.Emitter.GetInline(ctor);
+                    this.EnsureComma();
+                    this.Write(JS.Funcs.GETDEFAULTVALUE + ": function () ");
+                    this.BeginBlock();
+                    this.Write("return ");
+                    var argsInfo = new ArgumentsInfo(this.Emitter, ctor);
+                    new InlineArgumentsBlock(this.Emitter, argsInfo, code).Emit();
+                    this.Write(";");
+                    this.WriteNewLine();
+                    this.EndBlock();
                     this.Emitter.Comma = true;
                 }
             }

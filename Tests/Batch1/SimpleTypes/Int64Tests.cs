@@ -16,7 +16,7 @@ namespace Bridge.ClientTest.SimpleTypes
             }
 
             var typeMessage = message + "Type is " + checkedType;
-            Assert.AreEqual(checkedType, actual.GetType().GetClassName(), typeMessage);
+            Assert.AreEqual(checkedType, actual.GetType().FullName, typeMessage);
 
             Assert.AreEqual(expected.ToString(), actual.ToString(), message);
         }
@@ -27,7 +27,7 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.True((object)(long)0 is long);
             Assert.False((object)0.5 is long);
             Assert.False((object)1e100 is long);
-            Assert.AreEqual("System.Int64", typeof(long).GetClassName());
+            Assert.AreEqual("System.Int64", typeof(long).FullName);
 
             object l = (long)0;
             Assert.True(l is long);
