@@ -14,7 +14,7 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.False((object)0.5 is uint);
             Assert.False((object)-1 is uint);
             Assert.False((object)4294967296 is uint);
-            Assert.AreEqual("System.UInt32", typeof(uint).GetClassName());
+            Assert.AreEqual("System.UInt32", typeof(uint).FullName);
             object i = (uint)0;
             Assert.True(i is uint);
             Assert.True(i is IComparable<uint>);

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
+using ArrayType = ICSharpCode.NRefactory.TypeSystem.ArrayType;
 
 namespace Bridge.Contract
 {
@@ -750,11 +751,6 @@ namespace Bridge.Contract
 
         public static string ChangeReservedWord(string name)
         {
-            if (name == JS.Funcs.CONSTRUCTOR)
-            {
-                return JS.Funcs.DCONSTRUCTOR + JS.Vars.D;
-            }
-
             return Helpers.PrefixDollar(name);
         }
 
@@ -1124,6 +1120,66 @@ namespace Bridge.Contract
         public static bool IsNonScriptable(IEntity entity)
         {
             return Helpers.GetInheritedAttribute(entity, "Bridge.NonScriptableAttribute") != null;
+        }
+
+        public static bool IsEntryPointMethod(IEmitter emitter, MethodDeclaration methodDeclaration)
+        {
+            var member_rr = emitter.Resolver.ResolveNode(methodDeclaration, emitter) as MemberResolveResult;
+            var method = member_rr != null ? member_rr.Member : null;
+
+            if (method != null && method.Name == CS.Methods.AUTO_STARTUP_METHOD_NAME &&
+                method.IsStatic &&
+                !method.IsAbstract &&
+                Helpers.IsEntryPointCandidate(emitter, methodDeclaration))
+            {
+                bool isReady = false;
+                foreach (var attr in method.Attributes)
+                {
+                    if (attr.AttributeType.FullName == CS.Attributes.READY_ATTRIBUTE_NAME)
+                    {
+                        isReady = true;
+                        break;
+                    }
+                }
+
+                if (!isReady)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static bool IsEntryPointCandidate(IEmitter emitter, MethodDeclaration methodDeclaration)
+        {
+            if (methodDeclaration == null)
+            {
+                return false;
+            }
+
+            var m_rr = emitter.Resolver.ResolveNode(methodDeclaration, emitter) as MemberResolveResult;
+
+            if (m_rr == null || !(m_rr.Member is IMethod))
+            {
+                return false;
+            }
+
+            var m = (IMethod)m_rr.Member;
+
+            if (m.Name != CS.Methods.AUTO_STARTUP_METHOD_NAME || !m.IsStatic || m.DeclaringTypeDefinition.TypeParameterCount > 0 || m.TypeParameters.Count > 0)  // Must be a static, non-generic Main
+                return false;
+            if (!m.ReturnType.IsKnownType(KnownTypeCode.Void) && !m.ReturnType.IsKnownType(KnownTypeCode.Int32))    // Must return void or int.
+                return false;
+            if (m.Parameters.Count == 0)    // Can have 0 parameters.
+                return true;
+            if (m.Parameters.Count > 1) // May not have more than 1 parameter.
+                return false;
+            if (m.Parameters[0].IsRef || m.Parameters[0].IsOut) // The single parameter must not be ref or out.
+                return false;
+
+            var at = m.Parameters[0].Type as ArrayType;
+            return at != null && at.Dimensions == 1 && at.ElementType.IsKnownType(KnownTypeCode.String);    // The single parameter must be a one-dimensional array of strings.
         }
     }
 }

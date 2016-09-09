@@ -5,7 +5,7 @@
         isLazy: false,
         forced: false,
 
-        constructor: function (min, max, value, isLazy) {
+        ctor: function (min, max, value, isLazy) {
             this.$initialize();
 
             this.min = min;

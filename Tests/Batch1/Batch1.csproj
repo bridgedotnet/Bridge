@@ -45,6 +45,7 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BridgeConsoleTests.cs" />
     <Compile Include="MixinTests.cs" />
     <Compile Include="ArgumentsTests.cs" />
     <Compile Include="BasicCSharp\TestMethodParametersClass.cs" />
@@ -161,7 +162,6 @@
     <Compile Include="Threading\Tasks\TaskTests.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
     <Compile Include="Utilities\DecimalHelper.cs" />
-    <Compile Include="Utilities\TypeHelper.cs" />
     <Compile Include="Utilities\TestData.cs" />
   </ItemGroup>
   <ItemGroup>

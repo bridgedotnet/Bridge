@@ -10,7 +10,7 @@ namespace Bridge.ClientTest.Exceptions
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.ArgumentOutOfRangeException", typeof(ArgumentOutOfRangeException).GetClassName(), "Name");
+            Assert.AreEqual("System.ArgumentOutOfRangeException", typeof(ArgumentOutOfRangeException).FullName, "Name");
             object d = new ArgumentOutOfRangeException();
             Assert.True(d is ArgumentOutOfRangeException, "is ArgumentOutOfRangeException");
             Assert.True(d is ArgumentException, "is ArgumentException");

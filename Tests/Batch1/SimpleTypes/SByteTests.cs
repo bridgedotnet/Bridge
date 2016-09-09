@@ -14,7 +14,7 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.False((object)0.5 is sbyte);
             Assert.False((object)-129 is sbyte);
             Assert.False((object)128 is sbyte);
-            Assert.AreEqual("System.SByte", typeof(sbyte).GetClassName());
+            Assert.AreEqual("System.SByte", typeof(sbyte).FullName);
 
             object b = (sbyte)0;
             Assert.True(b is sbyte);

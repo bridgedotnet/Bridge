@@ -11,7 +11,7 @@ namespace Bridge.ClientTest.Exceptions
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("Bridge.PromiseException", typeof(PromiseException).GetClassName(), "Name");
+            Assert.AreEqual("Bridge.PromiseException", typeof(PromiseException).FullName, "Name");
             object d = new PromiseException(new object[0]);
             Assert.True(d is PromiseException, "is PromiseException");
             Assert.True(d is Exception, "is Exception");

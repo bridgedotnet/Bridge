@@ -11,10 +11,10 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public static void TestDecimalLongWithDictionary()
         {
             var decimalDict = new Dictionary<long, decimal> { { 0, 5 } };
-            Assert.AreEqual("System.Decimal", decimalDict[0].GetClassName());
+            Assert.AreEqual("System.Decimal", decimalDict[0].GetType().FullName);
             Assert.AreEqual("5", decimalDict[0].ToString());
             decimalDict[0] = 1;
-            Assert.AreEqual("System.Decimal", decimalDict[0].GetClassName());
+            Assert.AreEqual("System.Decimal", decimalDict[0].GetType().FullName);
             Assert.AreEqual("1", decimalDict[0].ToString());
         }
     }

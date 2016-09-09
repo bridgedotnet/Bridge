@@ -69,13 +69,13 @@ QUnit.test("Create generic instances", function (assert) {
     assert.deepEqual(c11.getSomething(namedEntity).getName$1(), name, "SimpleGeneric$1(Generics.NamedEntity) getSomething");
     assert.deepEqual(c11.instance, namedEntity, "SimpleGeneric$1(Generics.NamedEntity) instance");
 
-    var c20 = new (Generics.SimpleDoubleGeneric$2(Object, Number).$constructor1)("I'm object", 35);
+    var c20 = new (Generics.SimpleDoubleGeneric$2(Object, Number).$ctor1)("I'm object", 35);
     assert.deepEqual(c20.getSomething(5), 5, "SimpleDoubleGeneric$2(Object, Number) getSomething");
     assert.deepEqual(c20.getSomethingMore(25), 25, "SimpleDoubleGeneric$2(Object, Number) getSomethingMore");
     assert.deepEqual(c20.instanceT, "I'm object", "SimpleDoubleGeneric$2(Object, Number) instanceT");
     assert.deepEqual(c20.instanceK, 35, "SimpleDoubleGeneric$2(Object, Number) instanceK");
 
-    var c21 = new (Generics.SimpleDoubleGeneric$2(Object, Number).$constructor)();
+    var c21 = new (Generics.SimpleDoubleGeneric$2(Object, Number).ctor)();
     assert.deepEqual(c21.getSomething(7), 7, "SimpleDoubleGeneric$2(Object, Number) parameterless constructor getSomething");
     assert.deepEqual(c21.getSomethingMore(35), 35, "SimpleDoubleGeneric$2(Object, Number) parameterless constructor getSomethingMore");
     assert.deepEqual(c21.instanceT, null, "SimpleDoubleGeneric$2(Object, Number) instanceT");

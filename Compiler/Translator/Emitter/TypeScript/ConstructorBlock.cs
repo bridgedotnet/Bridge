@@ -74,7 +74,7 @@ namespace Bridge.Translator.TypeScript
                         continue;
                     }
                     XmlToJsDoc.EmitComment(this, ctor);
-                    var ctorName = JS.Funcs.DCONSTRUCTOR;
+                    var ctorName = JS.Funcs.CONSTRUCTOR;
 
                     if (this.TypeInfo.Ctors.Count > 1 && ctor.Parameters.Count > 0)
                     {

@@ -6,10 +6,10 @@ namespace System
     [Name("Object")]
     public static class Activator
     {
-        [Template("new ({type})({*arguments})")]
+        [Template("new ({type})({*arguments})", "Bridge.Reflection.applyConstructor({type}, {arguments:array})")]
         public static extern object CreateInstance(Type type, params object[] arguments);
 
-        [Template("new ({T})({*arguments})")]
+        [Template("new ({T})({*arguments})", "Bridge.Reflection.applyConstructor({T}, {arguments:array})")]
         public static extern T CreateInstance<T>(params object[] arguments);
 
         [Template("Bridge.createInstance({type})")]

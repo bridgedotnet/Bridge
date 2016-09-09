@@ -14,7 +14,7 @@
         _capcount: 0,
         _captures: null,
 
-        constructor: function (group) {
+        ctor: function (group) {
             this.$initialize();
             this._group = group;
             this._capcount = group._capcount;
@@ -112,7 +112,7 @@
         _captureColl: null,
         _curindex: 0,
 
-        constructor: function (captureColl) {
+        ctor: function (captureColl) {
             this.$initialize();
             this._curindex = -1;
             this._captureColl = captureColl;

@@ -68,13 +68,13 @@
                         if (!System.Version.tryParseComponent(parsedComponents[3], "revision", result, revision)) {
                             return false;
                         } else {
-                            result.v.m_parsedVersion = new System.Version.$constructor3(major.v, minor.v, build.v, revision.v);
+                            result.v.m_parsedVersion = new System.Version.$ctor3(major.v, minor.v, build.v, revision.v);
                         }
                     } else {
-                        result.v.m_parsedVersion = new System.Version.$constructor2(major.v, minor.v, build.v);
+                        result.v.m_parsedVersion = new System.Version.$ctor2(major.v, minor.v, build.v);
                     }
                 } else {
-                    result.v.m_parsedVersion = new System.Version.$constructor1(major.v, minor.v);
+                    result.v.m_parsedVersion = new System.Version.$ctor1(major.v, minor.v);
                 }
 
                 return true;
@@ -134,7 +134,7 @@
             "equalsT", "System$IEquatable$1$System$Version$equalsT"
             ]
         },
-        $constructor3: function (major, minor, build, revision) {
+        $ctor3: function (major, minor, build, revision) {
             this.$initialize();
             if (major < 0) {
                 throw new System.ArgumentOutOfRangeException("major", "Cannot be < 0");
@@ -157,7 +157,7 @@
             this._Build = build;
             this._Revision = revision;
         },
-        $constructor2: function (major, minor, build) {
+        $ctor2: function (major, minor, build) {
             this.$initialize();
             if (major < 0) {
                 throw new System.ArgumentOutOfRangeException("major", "Cannot be < 0");
@@ -175,7 +175,7 @@
             this._Minor = minor;
             this._Build = build;
         },
-        $constructor1: function (major, minor) {
+        $ctor1: function (major, minor) {
             this.$initialize();
             if (major < 0) {
                 throw new System.ArgumentOutOfRangeException("major", "Cannot be < 0");
@@ -188,7 +188,7 @@
             this._Major = major;
             this._Minor = minor;
         },
-        $constructor4: function (version) {
+        $ctor4: function (version) {
             this.$initialize();
             var v = System.Version.parse(version);
             this._Major = v.getMajor();
@@ -196,7 +196,7 @@
             this._Build = v.getBuild();
             this._Revision = v.getRevision();
         },
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
             this._Major = 0;
             this._Minor = 0;
@@ -220,7 +220,7 @@
             return Bridge.Int.sxs(((this._Revision & 65535)) & 65535);
         },
         clone: function () {
-            var v = new System.Version.$constructor();
+            var v = new System.Version.ctor();
             v._Major = this._Major;
             v._Minor = this._Minor;
             v._Build = this._Build;

@@ -18,7 +18,7 @@
                 ]
             },
 
-            constructor: function (obj) {
+            ctor: function (obj) {
                 this.$initialize();
                 if (Object.prototype.toString.call(obj) === '[object Array]') {
                     this.items = System.Array.clone(obj);
@@ -223,7 +223,9 @@
             slice: function (start, end) {
                 this.checkReadOnly();
 
-                return new (System.Collections.Generic.List$1(this.$$name.substr(this.$$name.lastIndexOf('$')+1)))(this.items.slice(start, end));
+                var gName = this.$$name.substr(this.$$name.lastIndexOf('$') + 1);
+
+                return new (System.Collections.Generic.List$1(Bridge.unroll(gName)))(this.items.slice(start, end));
             },
 
             sort: function (comparison) {
@@ -297,13 +299,13 @@
     Bridge.define('System.Collections.ObjectModel.ReadOnlyCollection$1', function (T) {
         return {
             inherits: [System.Collections.Generic.List$1(T)],
-            constructor: function (list) {
+            ctor: function (list) {
                 this.$initialize();
                 if (list == null) {
                     throw new System.ArgumentNullException("list");
                 }
 
-                System.Collections.Generic.List$1(T).$constructor.call(this, list);
+                System.Collections.Generic.List$1(T).ctor.call(this, list);
                 this.readOnly = true;
             }
         };

@@ -243,11 +243,11 @@ namespace Bridge.ClientTest.ConvertTests
             {
                 try
                 {
-                    Assert.Throws(() => convert(testValues[i], testBases[i]), err => err.GetClassName() == typeof(TException).GetClassName(), "Value " + testValues[i] + " base " + testBases[i]);
+                    Assert.Throws(() => convert(testValues[i], testBases[i]), err => err.GetType().FullName == typeof(TException).FullName, "Value " + testValues[i] + " base " + testBases[i]);
                 }
                 catch (Exception e)
                 {
-                    string message = string.Format("Expected {0} converting '{1}' (base {2}) to '{3}'", typeof(TException).GetClassName(), testValues[i], testBases[i], typeof(TOutput).GetClassName());
+                    string message = string.Format("Expected {0} converting '{1}' (base {2}) to '{3}'", typeof(TException).FullName, testValues[i], testBases[i], typeof(TOutput).FullName);
                     throw new AggregateException(message, e);
                 }
             }
@@ -263,11 +263,11 @@ namespace Bridge.ClientTest.ConvertTests
             {
                 try
                 {
-                    Assert.Throws(() => convert(testValues[i]), err => err.GetClassName() == typeof(TException).GetClassName(), "Value " + testValues[i]);
+                    Assert.Throws(() => convert(testValues[i]), err => err.GetType().FullName == typeof(TException).FullName, "Value " + testValues[i]);
                 }
                 catch (Exception e)
                 {
-                    string message = string.Format("Expected {0} converting '{1}' ({2}) to {3}", typeof(TException).GetClassName(), testValues[i], typeof(TInput).GetClassName(), typeof(TOutput).GetClassName());
+                    string message = string.Format("Expected {0} converting '{1}' ({2}) to {3}", typeof(TException).FullName, testValues[i], typeof(TInput).FullName, typeof(TOutput).FullName);
                     throw new AggregateException(message, e);
                 }
             }
@@ -284,11 +284,11 @@ namespace Bridge.ClientTest.ConvertTests
             {
                 try
                 {
-                    Assert.Throws(() => convert(testValues[i]), err => err.GetClassName() == typeof(TException).GetClassName(), "Value " + testValues[i]);
+                    Assert.Throws(() => convert(testValues[i]), err => err.GetType().FullName == typeof(TException).FullName, "Value " + testValues[i]);
                 }
                 catch (Exception e)
                 {
-                    string message = string.Format("Expected {0} converting '{1}' ({2}) to {3}", typeof(TException).GetClassName(), testValues[i], typeof(TInput).GetClassName(), typeof(TOutput).GetClassName());
+                    string message = string.Format("Expected {0} converting '{1}' ({2}) to {3}", typeof(TException).FullName, testValues[i], typeof(TInput).FullName, typeof(TOutput).FullName);
                     throw new AggregateException(message, e);
                 }
             }
