@@ -16,7 +16,7 @@
     var core = {
         global: globals,
 
-        emptyFn: function () {},
+        emptyFn: function () { },
 
         identity: function (x) {
             return x;
@@ -988,90 +988,90 @@
 
             makeFn: function (fn, length) {
                 switch (length) {
-                case 0:
-                    return function () {
-                        return fn.apply(this, arguments);
-                    };
-                case 1:
-                    return function (a) {
-                        return fn.apply(this, arguments);
-                    };
-                case 2:
-                    return function (a, b) {
-                        return fn.apply(this, arguments);
-                    };
-                case 3:
-                    return function (a, b, c) {
-                        return fn.apply(this, arguments);
-                    };
-                case 4:
-                    return function (a, b, c, d) {
-                        return fn.apply(this, arguments);
-                    };
-                case 5:
-                    return function (a, b, c, d, e) {
-                        return fn.apply(this, arguments);
-                    };
-                case 6:
-                    return function (a, b, c, d, e, f) {
-                        return fn.apply(this, arguments);
-                    };
-                case 7:
-                    return function (a, b, c, d, e, f, g) {
-                        return fn.apply(this, arguments);
-                    };
-                case 8:
-                    return function (a, b, c, d, e, f, g, h) {
-                        return fn.apply(this, arguments);
-                    };
-                case 9:
-                    return function (a, b, c, d, e, f, g, h, i) {
-                        return fn.apply(this, arguments);
-                    };
-                case 10:
-                    return function (a, b, c, d, e, f, g, h, i, j) {
-                        return fn.apply(this, arguments);
-                    };
-                case 11:
-                    return function (a, b, c, d, e, f, g, h, i, j, k) {
-                        return fn.apply(this, arguments);
-                    };
-                case 12:
-                    return function (a, b, c, d, e, f, g, h, i, j, k, l) {
-                        return fn.apply(this, arguments);
-                    };
-                case 13:
-                    return function (a, b, c, d, e, f, g, h, i, j, k, l, m) {
-                        return fn.apply(this, arguments);
-                    };
-                case 14:
-                    return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n) {
-                        return fn.apply(this, arguments);
-                    };
-                case 15:
-                    return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) {
-                        return fn.apply(this, arguments);
-                    };
-                case 16:
-                    return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
-                        return fn.apply(this, arguments);
-                    };
-                case 17:
-                    return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q) {
-                        return fn.apply(this, arguments);
-                    };
-                case 18:
-                    return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r) {
-                        return fn.apply(this, arguments);
-                    };
-                case 19:
-                    return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s) {
-                        return fn.apply(this, arguments);
-                    };
-                default:
-                    return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t) {
-                        return fn.apply(this, arguments);
-                    };
+                    case 0:
+                        return function () {
+                            return fn.apply(this, arguments);
+                        };
+                    case 1:
+                        return function (a) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 2:
+                        return function (a, b) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 3:
+                        return function (a, b, c) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 4:
+                        return function (a, b, c, d) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 5:
+                        return function (a, b, c, d, e) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 6:
+                        return function (a, b, c, d, e, f) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 7:
+                        return function (a, b, c, d, e, f, g) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 8:
+                        return function (a, b, c, d, e, f, g, h) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 9:
+                        return function (a, b, c, d, e, f, g, h, i) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 10:
+                        return function (a, b, c, d, e, f, g, h, i, j) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 11:
+                        return function (a, b, c, d, e, f, g, h, i, j, k) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 12:
+                        return function (a, b, c, d, e, f, g, h, i, j, k, l) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 13:
+                        return function (a, b, c, d, e, f, g, h, i, j, k, l, m) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 14:
+                        return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 15:
+                        return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 16:
+                        return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 17:
+                        return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 18:
+                        return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 19:
+                        return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s) {
+                            return fn.apply(this, arguments);
+                        };
+                    default:
+                        return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t) {
+                            return fn.apply(this, arguments);
+                        };
                 }
             },
 
@@ -2326,12 +2326,12 @@
             } else if (prop) {
                 prop.$kind = "interface";
             } else {
-                gscope = {$kind : "interface"};
+                gscope = { $kind: "interface" };
             }
 
             var c = Bridge.define(className, gscope, prop);
             c.$kind = "interface";
-            
+
             return c;
         },
 
@@ -2435,7 +2435,7 @@
             scope = Bridge.Class.set(scope, className, Class);
 
             if (gCfg) {
-                gCfg.fn.$cache.push({type: Class, args: gCfg.args});
+                gCfg.fn.$cache.push({ type: Class, args: gCfg.args });
             }
 
             Class.$$name = className;
@@ -2494,7 +2494,7 @@
             Class.$base = base;
             prototype = extend ? (extend[0].$$initCtor ? new extend[0].$$initCtor() : new extend[0]()) : new Object();
 
-            Class.$$initCtor = function () {};
+            Class.$$initCtor = function () { };
             Class.$$initCtor.prototype = prototype;
             Class.$$initCtor.prototype.constructor = Class;
             Class.$$initCtor.prototype.$$fullname = gCfg && isGenericInstance ? Class.$$fullname : Class.$$name;
@@ -2611,16 +2611,16 @@
 
             if (Class.$kind === "enum") {
                 Class.instanceOf = function (instance) {
-                     var utype = Class.prototype.$utype;
-                     if (utype === System.String) {
-                         return typeof (instance) == "string";
-                     }
+                    var utype = Class.prototype.$utype;
+                    if (utype === System.String) {
+                        return typeof (instance) == "string";
+                    }
 
-                     if (utype && utype.instanceOf) {
-                         return utype.instanceOf(instance);
-                     }
+                    if (utype && utype.instanceOf) {
+                        return utype.instanceOf(instance);
+                    }
 
-                     return typeof (instance) == "number";
+                    return typeof (instance) == "number";
                 };
             }
 
@@ -2660,7 +2660,7 @@
             return false;
         },
 
-        registerType : function (className, cls) {
+        registerType: function (className, cls) {
             if (Bridge.$currentAssembly) {
                 Bridge.$currentAssembly.$types[className] = cls;
                 cls.$assembly = Bridge.$currentAssembly;
@@ -2691,7 +2691,7 @@
                 exists,
                 i;
 
-            for (i = 0; i < (nameParts.length - 1); i++) {
+            for (i = 0; i < (nameParts.length - 1) ; i++) {
                 if (typeof scope[nameParts[i]] == "undefined") {
                     scope[nameParts[i]] = {};
                 }
@@ -2781,7 +2781,7 @@
             return gName;
         },
 
-        getCachedType: function(fn, args) {
+        getCachedType: function (fn, args) {
             var arr = fn.$cache,
                 len = arr.length,
                 key,

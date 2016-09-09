@@ -1,7 +1,7 @@
     var core = {
         global: globals,
 
-        emptyFn: function () {},
+        emptyFn: function () { },
 
         identity: function (x) {
             return x;
@@ -973,90 +973,90 @@
 
             makeFn: function (fn, length) {
                 switch (length) {
-                case 0:
-                    return function () {
-                        return fn.apply(this, arguments);
-                    };
-                case 1:
-                    return function (a) {
-                        return fn.apply(this, arguments);
-                    };
-                case 2:
-                    return function (a, b) {
-                        return fn.apply(this, arguments);
-                    };
-                case 3:
-                    return function (a, b, c) {
-                        return fn.apply(this, arguments);
-                    };
-                case 4:
-                    return function (a, b, c, d) {
-                        return fn.apply(this, arguments);
-                    };
-                case 5:
-                    return function (a, b, c, d, e) {
-                        return fn.apply(this, arguments);
-                    };
-                case 6:
-                    return function (a, b, c, d, e, f) {
-                        return fn.apply(this, arguments);
-                    };
-                case 7:
-                    return function (a, b, c, d, e, f, g) {
-                        return fn.apply(this, arguments);
-                    };
-                case 8:
-                    return function (a, b, c, d, e, f, g, h) {
-                        return fn.apply(this, arguments);
-                    };
-                case 9:
-                    return function (a, b, c, d, e, f, g, h, i) {
-                        return fn.apply(this, arguments);
-                    };
-                case 10:
-                    return function (a, b, c, d, e, f, g, h, i, j) {
-                        return fn.apply(this, arguments);
-                    };
-                case 11:
-                    return function (a, b, c, d, e, f, g, h, i, j, k) {
-                        return fn.apply(this, arguments);
-                    };
-                case 12:
-                    return function (a, b, c, d, e, f, g, h, i, j, k, l) {
-                        return fn.apply(this, arguments);
-                    };
-                case 13:
-                    return function (a, b, c, d, e, f, g, h, i, j, k, l, m) {
-                        return fn.apply(this, arguments);
-                    };
-                case 14:
-                    return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n) {
-                        return fn.apply(this, arguments);
-                    };
-                case 15:
-                    return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) {
-                        return fn.apply(this, arguments);
-                    };
-                case 16:
-                    return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
-                        return fn.apply(this, arguments);
-                    };
-                case 17:
-                    return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q) {
-                        return fn.apply(this, arguments);
-                    };
-                case 18:
-                    return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r) {
-                        return fn.apply(this, arguments);
-                    };
-                case 19:
-                    return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s) {
-                        return fn.apply(this, arguments);
-                    };
-                default:
-                    return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t) {
-                        return fn.apply(this, arguments);
-                    };
+                    case 0:
+                        return function () {
+                            return fn.apply(this, arguments);
+                        };
+                    case 1:
+                        return function (a) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 2:
+                        return function (a, b) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 3:
+                        return function (a, b, c) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 4:
+                        return function (a, b, c, d) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 5:
+                        return function (a, b, c, d, e) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 6:
+                        return function (a, b, c, d, e, f) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 7:
+                        return function (a, b, c, d, e, f, g) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 8:
+                        return function (a, b, c, d, e, f, g, h) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 9:
+                        return function (a, b, c, d, e, f, g, h, i) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 10:
+                        return function (a, b, c, d, e, f, g, h, i, j) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 11:
+                        return function (a, b, c, d, e, f, g, h, i, j, k) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 12:
+                        return function (a, b, c, d, e, f, g, h, i, j, k, l) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 13:
+                        return function (a, b, c, d, e, f, g, h, i, j, k, l, m) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 14:
+                        return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 15:
+                        return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 16:
+                        return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 17:
+                        return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 18:
+                        return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r) {
+                            return fn.apply(this, arguments);
+                        };
+                    case 19:
+                        return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s) {
+                            return fn.apply(this, arguments);
+                        };
+                    default:
+                        return function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t) {
+                            return fn.apply(this, arguments);
+                        };
                 }
             },
 
