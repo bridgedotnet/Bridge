@@ -902,7 +902,7 @@ namespace Bridge.Html5
         /// <summary>
         /// Returns the body or frameset node of the current document, or null if no such element exists.
         /// </summary>
-        public static HTMLElement Body;
+        public static HTMLBodyElement Body;
 
         /// <summary>
         /// Get and set the cookies associated with the current document.
