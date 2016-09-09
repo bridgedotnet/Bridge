@@ -120,10 +120,10 @@ namespace Bridge.ClientTest.Text.RegularExpressions.Entities
             }
 
             Assert.Throws(() => { groups.CopyTo(null, 0); },
-                err => err.GetClassName() == typeof(ArgumentNullException).GetClassName(),
+                err => err.GetType().FullName == typeof(ArgumentNullException).FullName,
                 "Exception: Array is not null.");
             Assert.Throws(() => { groups.CopyTo(dstArray, 1); },
-                err => err.GetClassName() == typeof(IndexOutOfRangeException).GetClassName(),
+                err => err.GetType().FullName == typeof(IndexOutOfRangeException).FullName,
                 "Exception: Out of range.");
         }
     }

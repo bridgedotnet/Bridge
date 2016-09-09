@@ -14,7 +14,7 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.False((object)0.5 is byte);
             Assert.False((object)-1 is byte);
             Assert.False((object)256 is byte);
-            Assert.AreEqual("System.Byte", typeof(byte).GetClassName());
+            Assert.AreEqual("System.Byte", typeof(byte).FullName);
             object b = (byte)0;
             Assert.True(b is byte);
             Assert.True(b is IComparable<byte>);

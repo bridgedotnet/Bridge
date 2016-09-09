@@ -12,7 +12,7 @@ namespace Bridge.ClientTest.Exceptions
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.Threading.Tasks.TaskCanceledException", typeof(TaskCanceledException).GetClassName(), "Name");
+            Assert.AreEqual("System.Threading.Tasks.TaskCanceledException", typeof(TaskCanceledException).FullName, "Name");
             object d = new TaskCanceledException();
             Assert.True(d is TaskCanceledException, "is TaskCanceledException");
             Assert.True(d is OperationCanceledException, "is OperationCanceledException");

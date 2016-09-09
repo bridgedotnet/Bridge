@@ -20,7 +20,7 @@ namespace Bridge.ClientTest.Exceptions
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.AggregateException", typeof(AggregateException).GetClassName(), "Name");
+            Assert.AreEqual("System.AggregateException", typeof(AggregateException).FullName, "Name");
             object d = new AggregateException();
             Assert.True(d is AggregateException);
             Assert.True(d is Exception);

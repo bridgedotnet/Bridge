@@ -14,15 +14,8 @@ namespace Bridge.Contract
                 return null;
             }
 
-            if (Path.DirectorySeparatorChar != '/')
-            {
-                path = path.Replace('/', Path.DirectorySeparatorChar);
-            }
-
-            if (Path.DirectorySeparatorChar != '\\')
-            {
-                path.Replace('\\', Path.DirectorySeparatorChar);
-            }
+            path = path.Replace('/', Path.DirectorySeparatorChar);
+            path = path.Replace('\\', Path.DirectorySeparatorChar);
 
             return path;
         }
@@ -113,7 +106,7 @@ namespace Bridge.Contract
 
         public string GetConfigPath(string configFileName, bool folderMode, string location)
         {
-            this.Logger.Info("Getting configuration file path " + (configFileName ?? "") + " at " + (location ?? "") + " ...");
+            this.Logger.Info("Getting configuration by file path " + (configFileName ?? "") + " at " + (location ?? "") + " ...");
 
             var folder = folderMode ? location : Path.GetDirectoryName(location);
             var path = folder + Path.DirectorySeparatorChar + "Bridge" + Path.DirectorySeparatorChar + configFileName;
@@ -130,11 +123,11 @@ namespace Bridge.Contract
 
             if (!File.Exists(path))
             {
-                this.Logger.Info("Path is not found. Returning null path.");
+                this.Logger.Info("Skipping " + configFileName + " (not found)");
                 return null;
             }
 
-            this.Logger.Info("Getting configuration file path done - " + (path ?? ""));
+            this.Logger.Info("Found configuration file " + (path ?? ""));
 
             return path;
         }

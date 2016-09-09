@@ -60,7 +60,7 @@ namespace Bridge.ClientTest.Batch4
             [Name(false)]
             public int i;
 
-            [Template("{{ i: 42 }}")]
+            [Template("{ i: 42 }")]
             public C5()
             {
             }

@@ -18,7 +18,7 @@ namespace Bridge.ClientTest.Batch4.Threading
         [Test(ExpectedCount = 2)]
         public void TaskCompletionSourceTypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.Threading.Tasks.TaskCompletionSource", typeof(TaskCompletionSource<int>).GetClassName(), "FullName should be correct");
+            Assert.AreEqual("System.Threading.Tasks.TaskCompletionSource", typeof(TaskCompletionSource<int>).FullName, "FullName should be correct");
             var tcs = new TaskCompletionSource<int>();
             Assert.True(tcs is TaskCompletionSource<int>);
         }
@@ -26,8 +26,8 @@ namespace Bridge.ClientTest.Batch4.Threading
         [Test(ExpectedCount = 5)]
         public void TaskTypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.Threading.Tasks.Task", typeof(Task).GetClassName(), "FullName for non-generic task should be correct");
-            Assert.AreEqual("System.Threading.Tasks.Task", typeof(Task<int>).GetClassName(), "FullName for generic task should be correct");
+            Assert.AreEqual("System.Threading.Tasks.Task", typeof(Task).FullName, "FullName for non-generic task should be correct");
+            Assert.AreEqual("System.Threading.Tasks.Task", typeof(Task<int>).FullName, "FullName for generic task should be correct");
 
             var task = new TaskCompletionSource<int>().Task;
             Assert.True(task is Task<int>);

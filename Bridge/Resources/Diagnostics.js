@@ -1,22 +1,6 @@
     System.Diagnostics.Debug = {
         writeln: function (text) {
-            var global = Bridge.global;
-
-            if (global.console) {
-                if (global.console.debug) {
-                    global.console.debug(text);
-
-                    return;
-                } else if (global.console.log) {
-                    global.console.log(text);
-
-                    return;
-                }
-            } else if (global.opera && global.opera.postError) {
-                global.opera.postError(text);
-
-                return;
-            }
+            Bridge.Console.debug(text);
         },
 
         _fail: function (message) {

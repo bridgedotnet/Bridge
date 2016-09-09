@@ -103,6 +103,7 @@ namespace Bridge.Translator
             this.Emitter = emitter;
             this.Expression = null;
             this.Method = method;
+            this.BuildTypedArguments(method);
         }
 
         public ArgumentsInfo(IEmitter emitter, IAttribute attr)
@@ -131,7 +132,6 @@ namespace Bridge.Translator
             if (this.ResolveResult != null)
             {
                 this.HasTypeArguments = ((IMethod)this.ResolveResult.Member).TypeArguments.Count > 0;
-                //this.BuildTypedArguments(initializer.);
             }
         }
 

@@ -55,18 +55,18 @@ namespace Bridge.Translator.Tests
         private void GetPaths(string folder)
         {
             ProjectFileName = "test" + ".csproj";
-            ProjectFolder = FileHelper.GetRelativeToCurrentDirPath(@"\..\..\TestProjects", folder);
+            ProjectFolder = FileHelper.GetRelativeToCurrentDirPath(Path.Combine("..", "..", "TestProjects"), folder);
 
             ProjectFilePath = Path.Combine(ProjectFolder, ProjectFileName);
 
-            OutputFolder = Path.Combine(ProjectFolder, @"Bridge\Output");
-            ReferenceFolder = Path.Combine(ProjectFolder, @"Bridge\Reference");
+            OutputFolder = Path.Combine(ProjectFolder, "Bridge", "output");
+            ReferenceFolder = Path.Combine(ProjectFolder, "Bridge", "reference");
         }
 
         [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
-            var currentFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            var currentFolder = Path.GetDirectoryName(FileHelper.GetExecutingAssemblyPath());
 
             Directory.SetCurrentDirectory(currentFolder);
 
@@ -78,31 +78,33 @@ namespace Bridge.Translator.Tests
             }
         }
 
-        [TestCase("01", true, false, TestName = "OutputTest 01 - Bridge.json Default")]
         [TestCase("02", false, true, TestName = "OutputTest 02 - using GenerateScript Task Bridge.json outputFormatting Formatted, autoPropertyToField, combineScripts")]
         [TestCase("03", true, true, TestName = "OutputTest 03 - Bridge.json outputFormatting Minified")]
-        [TestCase("04", true, true, TestName = "OutputTest 04 - Bridge.json outputBy Class ignoreCast")]
-        [TestCase("05", true, true, TestName = "OutputTest 05 - Bridge.json outputBy Namespace ignoreCast default useTypedArrays default")]
+        [TestCase("04", true, true, TestName = "OutputTest 04 - Bridge.json outputBy Class ignoreCast fileNameCasing Lowercase")]
+        [TestCase("05", true, true, TestName = "OutputTest 05 - Bridge.json outputBy Namespace ignoreCast default useTypedArrays default fileNameCasing CamelCase")]
         [TestCase("06", true, true, TestName = "OutputTest 06 - Bridge.json outputBy Project useTypedArrays CheckForOverflowUnderflow")]
-        [TestCase("07", true, true, TestName = "OutputTest 07 - Bridge.json module")]
-        [TestCase("08", true, true, TestName = "OutputTest 08 - Bridge.json fileNameCasing Lowercase")]
-        [TestCase("09", true, true, TestName = "OutputTest 09 - Bridge.json fileNameCasing CamelCase")]
-        [TestCase("10", true, true, TestName = "OutputTest 10 - Bridge.json fileNameCasing None")]
+        [TestCase("07", true, true, TestName = "OutputTest 07 - Bridge.json module generateDocumentation Full")]
+        [TestCase("10", true, true, TestName = "OutputTest 10 - Bridge.json fileNameCasing None generateDocumentation Basic")]
+#if UNIX
+        [TestCase("11", true, true, TestName = "OutputTest 11 - Bridge.json generateTypeScript", Ignore = "Bridge issue #1731")]
+#else
         [TestCase("11", true, true, TestName = "OutputTest 11 - Bridge.json generateTypeScript")]
-        [TestCase("12", true, true, TestName = "OutputTest 12 - Bridge.json generateDocumentation Full")]
-        [TestCase("13", true, true, TestName = "OutputTest 13 - Bridge.json generateDocumentation Basic")]
-        [TestCase("14", true, true, TestName = "OutputTest 14 - Bridge.json preserveMemberCase")]
-        [TestCase("15", true, true, TestName = "OutputTest 15 - Bridge.json filename")]
+#endif
+        [TestCase("15", true, true, TestName = "OutputTest 15 - Bridge.json filename Define project constant #375")]
         [TestCase("16", true, true, TestName = "OutputTest 16 - Issues")]
-        [TestCase("17", true, true, TestName = "OutputTest 17 - Define project constant #375")]
         [TestCase("18", true, true, TestName = "OutputTest 18 - Features")]
+#if UNIX
+        [TestCase("19", true, true, TestName = "OutputTest 19 - Linked files feature #531 #562", Ignore = "It is not supported in Mono (Mono issue logged as #38224 at Mono's official BugZilla)")]
+#else
+        [TestCase("19", true, true, TestName = "OutputTest 19 - Linked files feature #531 #562")]
+#endif
         public void Test(string folder, bool isToTranslate, bool useSpecialFileCompare)
         {
-            var logDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            var logDir = Path.GetDirectoryName(FileHelper.GetExecutingAssemblyPath());
 
             Directory.SetCurrentDirectory(logDir);
 
-            var logger = new Logger(null, true, Contract.LoggerLevel.Info, false, new FileLoggerWriter(logDir), new ConsoleLoggerWriter());
+            var logger = new Logger(null, true, Contract.LoggerLevel.Warning, false, new FileLoggerWriter(logDir), new ConsoleLoggerWriter());
 
             logger.Info("Executing Bridge.Test.Runner...");
 
@@ -117,6 +119,7 @@ namespace Bridge.Translator.Tests
 
             logger.Info("\tOutputFolder " + OutputFolder);
             logger.Info("\tReferenceFolder " + ReferenceFolder);
+            logger.Info("\tExecutingAssemblyPath " + FileHelper.GetExecutingAssemblyPath());
 
             try
             {
