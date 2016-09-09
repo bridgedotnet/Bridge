@@ -30,7 +30,7 @@
 
     Bridge.define('Test.BridgeIssues.N475A.Test', {
         statics: {
-            n475: function () {
+            N475: function () {
                 var b = new Test.BridgeIssues.N475A.Bridge475();
 
                 // This class also tests a case for CSharp6 rewriter when the extension is applied
