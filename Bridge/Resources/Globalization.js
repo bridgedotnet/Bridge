@@ -31,7 +31,7 @@
                 "Y": "yearMonthPattern"
             },
 
-            constructor: function () {
+            ctor: function () {
                 this.invariantInfo = Bridge.merge(new System.Globalization.DateTimeFormatInfo(), {
                     abbreviatedDayNames: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
                     abbreviatedMonthGenitiveNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", ""],
@@ -186,7 +186,7 @@
         },
 
         statics: {
-            constructor: function () {
+            ctor: function () {
                 this.numberNegativePatterns = ["(n)", "-n", "- n", "n-", "n -"];
                 this.currencyNegativePatterns = ["($n)", "-$n", "$-n", "$n-", "(n$)", "-n$", "n-$", "n$-", "-n $", "-$ n", "n $-", "$ n-", "$ -n", "n- $", "($ n)", "(n $)"];
                 this.currencyPositivePatterns = ["$n", "n$", "$ n", "n $"];
@@ -276,7 +276,7 @@
         $entryPoint: true,
 
         statics: {
-            constructor: function () {
+            ctor: function () {
                 this.cultures = this.cultures || {};
 
                 this.invariantCulture = Bridge.merge(new System.Globalization.CultureInfo("iv", true), {
@@ -321,7 +321,7 @@
             }
         },
 
-        constructor: function (name, create) {
+        ctor: function (name, create) {
             this.$initialize();
             this.name = name;
 

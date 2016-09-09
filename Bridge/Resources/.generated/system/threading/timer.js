@@ -17,26 +17,26 @@
             "dispose", "System$IDisposable$dispose"
             ]
         },
-        $constructor1: function (callback, state, dueTime, period) {
+        $ctor1: function (callback, state, dueTime, period) {
             this.$initialize();
             this.timerSetup(callback, state, System.Int64(dueTime), System.Int64(period));
         },
-        $constructor3: function (callback, state, dueTime, period) {
+        $ctor3: function (callback, state, dueTime, period) {
             this.$initialize();
             var dueTm = Bridge.Int.clip64(dueTime.getTotalMilliseconds());
             var periodTm = Bridge.Int.clip64(period.getTotalMilliseconds());
 
             this.timerSetup(callback, state, dueTm, periodTm);
         },
-        $constructor4: function (callback, state, dueTime, period) {
+        $ctor4: function (callback, state, dueTime, period) {
             this.$initialize();
             this.timerSetup(callback, state, System.Int64(dueTime), System.Int64(period));
         },
-        $constructor2: function (callback, state, dueTime, period) {
+        $ctor2: function (callback, state, dueTime, period) {
             this.$initialize();
             this.timerSetup(callback, state, dueTime, period);
         },
-        constructor: function (callback) {
+        ctor: function (callback) {
             this.$initialize();
             var dueTime = -1; // we want timer to be registered, but not activated.  Requires caller to call
             var period = -1; // Change after a timer instance is created.  This is to avoid the potential

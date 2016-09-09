@@ -46,7 +46,7 @@
                 Name: null
             }
         },
-        constructor: function (name) {
+        ctor: function (name) {
             this.$initialize();
             this.setName(name);
         }
@@ -59,7 +59,7 @@
                 Value: null
             }
         },
-        constructor: function (value) {
+        ctor: function (value) {
             this.$initialize();
             this.setValue(value);
         }

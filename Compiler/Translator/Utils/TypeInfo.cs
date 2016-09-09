@@ -161,6 +161,11 @@ namespace Bridge.Translator
             {
                 foreach (var method in group.Value)
                 {
+                    if (Helpers.IsEntryPointMethod(emitter, method))
+                    {
+                        return false;
+                    }
+
                     if (method.Attributes.Count == 0)
                     {
                         return true;
@@ -208,6 +213,24 @@ namespace Bridge.Translator
             }
 
             if (this.Type.GetConstructors().Any(c => c.Parameters.Count == 0 && emitter.GetInline(c) != null))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool HasRealInstantiable(IEmitter emitter)
+        {
+            if (this.HasInstantiable)
+            {
+                return true;
+            }
+
+            if (this.StaticMethods.Any(group =>
+            {
+                return group.Value.Any(method => Helpers.IsEntryPointMethod(emitter, method));
+            }))
             {
                 return true;
             }

@@ -80,7 +80,7 @@
                 this.doWithNumbers = $_.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f4;
             }
         },
-        constructor: function (offset) {
+        ctor: function (offset) {
             this.$initialize();
             this._offset = offset;
             TestIssue921Nested.Issue921NestedOuter.Issue921Nested.setNameStatic("Static");

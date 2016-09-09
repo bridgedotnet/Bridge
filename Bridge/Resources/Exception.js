@@ -1,5 +1,5 @@
 ﻿    Bridge.define("System.Exception", {
-        constructor: function (message, innerException) {
+        ctor: function (message, innerException) {
             this.$initialize();
             this.message = message ? message : ("Exception of type '" + Bridge.getTypeName(this) + "' was thrown.");
             this.innerException = innerException ? innerException : null;
@@ -49,48 +49,48 @@
     Bridge.define("System.SystemException", {
         inherits: [System.Exception],
 
-        constructor: function (message, innerException) {
+        ctor: function (message, innerException) {
             this.$initialize();
-            System.Exception.$constructor.call(this, message || "System error.", innerException);
+            System.Exception.ctor.call(this, message || "System error.", innerException);
         }
     });
 
     Bridge.define("System.OutOfMemoryException", {
         inherits: [System.SystemException],
 
-        constructor: function (message, innerException) {
+        ctor: function (message, innerException) {
             this.$initialize();
             if (!message) {
                 message = "Insufficient memory to continue the execution of the program.";
             }
 
-            System.SystemException.$constructor.call(this, message, innerException);
+            System.SystemException.ctor.call(this, message, innerException);
         }
     });
 
     Bridge.define("System.IndexOutOfRangeException", {
         inherits: [System.SystemException],
 
-        constructor: function (message, innerException) {
+        ctor: function (message, innerException) {
             this.$initialize();
             if (!message) {
                 message = "Index was outside the bounds of the array.";
             }
 
-            System.SystemException.$constructor.call(this, message, innerException);
+            System.SystemException.ctor.call(this, message, innerException);
         }
     });
 
     Bridge.define("System.TimeoutException", {
         inherits: [System.SystemException],
 
-        constructor: function (message, innerException) {
+        ctor: function (message, innerException) {
             this.$initialize();
             if (!message) {
                 message = "The operation has timed out.";
             }
 
-            System.SystemException.$constructor.call(this, message, innerException);
+            System.SystemException.ctor.call(this, message, innerException);
         }
     });
 
@@ -106,29 +106,29 @@
             }
         },
 
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
-            System.TimeoutException.$constructor.call(this);
+            System.TimeoutException.ctor.call(this);
         },
 
-        $constructor1: function (message) {
+        $ctor1: function (message) {
             this.$initialize();
-            System.TimeoutException.$constructor.call(this, message);
+            System.TimeoutException.ctor.call(this, message);
         },
 
-        $constructor2: function (message, innerException) {
+        $ctor2: function (message, innerException) {
             this.$initialize();
-            System.TimeoutException.$constructor.call(this, message, innerException);
+            System.TimeoutException.ctor.call(this, message, innerException);
         },
 
-        $constructor3: function (regexInput, regexPattern, matchTimeout) {
+        $ctor3: function (regexInput, regexPattern, matchTimeout) {
             this.$initialize();
             this._regexInput = regexInput;
             this._regexPattern = regexPattern;
             this._matchTimeout = matchTimeout;
 
             var message = "The RegEx engine has timed out while trying to match a pattern to an input string. This can occur for many reasons, including very large inputs or excessive backtracking caused by nested quantifiers, back-references and other factors.";
-            this.$constructor1(message);
+            this.$ctor1(message);
         },
 
         getPattern: function () {
@@ -147,9 +147,9 @@
     Bridge.define("Bridge.ErrorException", {
         inherits: [System.Exception],
 
-        constructor: function (error) {
+        ctor: function (error) {
             this.$initialize();
-            System.Exception.$constructor.call(this, error.message);
+            System.Exception.ctor.call(this, error.message);
             this.errorStack = error;
             this.error = error;
         },
@@ -162,9 +162,9 @@
     Bridge.define("System.ArgumentException", {
         inherits: [System.Exception],
 
-        constructor: function (message, paramName, innerException) {
+        ctor: function (message, paramName, innerException) {
             this.$initialize();
-            System.Exception.$constructor.call(this, message || "Value does not fall within the expected range.", innerException);
+            System.Exception.ctor.call(this, message || "Value does not fall within the expected range.", innerException);
             this.paramName = paramName ? paramName : null;
         },
 
@@ -176,7 +176,7 @@
     Bridge.define("System.ArgumentNullException", {
         inherits: [System.ArgumentException],
 
-        constructor: function (paramName, message, innerException) {
+        ctor: function (paramName, message, innerException) {
             this.$initialize();
             if (!message) {
                 message = "Value cannot be null.";
@@ -186,14 +186,14 @@
                 }
             }
 
-            System.ArgumentException.$constructor.call(this, message, paramName, innerException);
+            System.ArgumentException.ctor.call(this, message, paramName, innerException);
         }
     });
 
     Bridge.define("System.ArgumentOutOfRangeException", {
         inherits: [System.ArgumentException],
 
-        constructor: function (paramName, message, innerException, actualValue) {
+        ctor: function (paramName, message, innerException, actualValue) {
             this.$initialize();
             if (!message) {
                 message = "Value is out of range.";
@@ -203,7 +203,7 @@
                 }
             }
 
-            System.ArgumentException.$constructor.call(this, message, paramName, innerException);
+            System.ArgumentException.ctor.call(this, message, paramName, innerException);
 
             this.actualValue = actualValue ? actualValue : null;
         },
@@ -216,7 +216,7 @@
     Bridge.define("System.Globalization.CultureNotFoundException", {
         inherits: [System.ArgumentException],
 
-        constructor: function (paramName, invalidCultureName, message, innerException, invalidCultureId) {
+        ctor: function (paramName, invalidCultureName, message, innerException, invalidCultureId) {
             this.$initialize();
             if (!message) {
                 message = "Culture is not supported.";
@@ -230,7 +230,7 @@
                 }
             }
 
-            System.ArgumentException.$constructor.call(this, message, paramName, innerException);
+            System.ArgumentException.ctor.call(this, message, paramName, innerException);
 
             this.invalidCultureName = invalidCultureName ? invalidCultureName : null;
             this.invalidCultureId = invalidCultureId ? invalidCultureId : null;
@@ -248,106 +248,106 @@
     Bridge.define("System.Collections.Generic.KeyNotFoundException", {
         inherits: [System.Exception],
 
-        constructor: function (message, innerException) {
+        ctor: function (message, innerException) {
             this.$initialize();
-            System.Exception.$constructor.call(this, message || "Key not found.", innerException);
+            System.Exception.ctor.call(this, message || "Key not found.", innerException);
         }
     });
 
     Bridge.define("System.ArithmeticException", {
         inherits: [System.Exception],
 
-        constructor: function (message, innerException) {
+        ctor: function (message, innerException) {
             this.$initialize();
-            System.Exception.$constructor.call(this, message || "Overflow or underflow in the arithmetic operation.", innerException);
+            System.Exception.ctor.call(this, message || "Overflow or underflow in the arithmetic operation.", innerException);
         }
     });
 
     Bridge.define("System.DivideByZeroException", {
         inherits: [System.ArithmeticException],
 
-        constructor: function (message, innerException) {
+        ctor: function (message, innerException) {
             this.$initialize();
-            System.ArithmeticException.$constructor.call(this, message || "Division by 0.", innerException);
+            System.ArithmeticException.ctor.call(this, message || "Division by 0.", innerException);
         }
     });
 
     Bridge.define("System.OverflowException", {
         inherits: [System.ArithmeticException],
 
-        constructor: function (message, innerException) {
+        ctor: function (message, innerException) {
             this.$initialize();
-            System.ArithmeticException.$constructor.call(this, message || "Arithmetic operation resulted in an overflow.", innerException);
+            System.ArithmeticException.ctor.call(this, message || "Arithmetic operation resulted in an overflow.", innerException);
         }
     });
 
     Bridge.define("System.FormatException", {
         inherits: [System.Exception],
 
-        constructor: function (message, innerException) {
+        ctor: function (message, innerException) {
             this.$initialize();
-            System.Exception.$constructor.call(this, message || "Invalid format.", innerException);
+            System.Exception.ctor.call(this, message || "Invalid format.", innerException);
         }
     });
 
     Bridge.define("System.InvalidCastException", {
         inherits: [System.Exception],
 
-        constructor: function (message, innerException) {
+        ctor: function (message, innerException) {
             this.$initialize();
-            System.Exception.$constructor.call(this, message || "The cast is not valid.", innerException);
+            System.Exception.ctor.call(this, message || "The cast is not valid.", innerException);
         }
     });
 
     Bridge.define("System.InvalidOperationException", {
         inherits: [System.Exception],
 
-        constructor: function (message, innerException) {
+        ctor: function (message, innerException) {
             this.$initialize();
-            System.Exception.$constructor.call(this, message || "Operation is not valid due to the current state of the object.", innerException);
+            System.Exception.ctor.call(this, message || "Operation is not valid due to the current state of the object.", innerException);
         }
     });
 
     Bridge.define("System.NotImplementedException", {
         inherits: [System.Exception],
 
-        constructor: function (message, innerException) {
+        ctor: function (message, innerException) {
             this.$initialize();
-            System.Exception.$constructor.call(this, message || "The method or operation is not implemented.", innerException);
+            System.Exception.ctor.call(this, message || "The method or operation is not implemented.", innerException);
         }
     });
 
     Bridge.define("System.NotSupportedException", {
         inherits: [System.Exception],
 
-        constructor: function (message, innerException) {
+        ctor: function (message, innerException) {
             this.$initialize();
-            System.Exception.$constructor.call(this, message || "Specified method is not supported.", innerException);
+            System.Exception.ctor.call(this, message || "Specified method is not supported.", innerException);
         }
     });
 
     Bridge.define("System.NullReferenceException", {
         inherits: [System.Exception],
 
-        constructor: function (message, innerException) {
+        ctor: function (message, innerException) {
             this.$initialize();
-            System.Exception.$constructor.call(this, message || "Object is null.", innerException);
+            System.Exception.ctor.call(this, message || "Object is null.", innerException);
         }
     });
 
     Bridge.define("System.RankException", {
         inherits: [System.Exception],
 
-        constructor: function (message, innerException) {
+        ctor: function (message, innerException) {
             this.$initialize();
-            System.Exception.$constructor.call(this, message || "Attempted to operate on an array with the incorrect number of dimensions.", innerException);
+            System.Exception.ctor.call(this, message || "Attempted to operate on an array with the incorrect number of dimensions.", innerException);
         }
     });
 
     Bridge.define("Bridge.PromiseException", {
         inherits: [System.Exception],
 
-        constructor: function (args, message, innerException) {
+        ctor: function (args, message, innerException) {
             this.$initialize();
             this.arguments = System.Array.clone(args);
 
@@ -357,7 +357,7 @@
                 message += "]";
             }
 
-            System.Exception.$constructor.call(this, message, innerException);
+            System.Exception.ctor.call(this, message, innerException);
         },
 
         getArguments: function () {
@@ -368,9 +368,9 @@
     Bridge.define("System.OperationCanceledException", {
         inherits: [System.Exception],
 
-        constructor: function (message, token, innerException) {
+        ctor: function (message, token, innerException) {
             this.$initialize();
-            System.Exception.$constructor.call(this, message || "Operation was canceled.", innerException);
+            System.Exception.ctor.call(this, message || "Operation was canceled.", innerException);
             this.cancellationToken = token || System.Threading.CancellationToken.none;
         }
     });
@@ -378,9 +378,9 @@
     Bridge.define("System.Threading.Tasks.TaskCanceledException", {
         inherits: [System.OperationCanceledException],
 
-        constructor: function (message, task, innerException) {
+        ctor: function (message, task, innerException) {
             this.$initialize();
-            System.OperationCanceledException.$constructor.call(this, message || "A task was canceled.", null, innerException);
+            System.OperationCanceledException.ctor.call(this, message || "A task was canceled.", null, innerException);
             this.task = task || null;
         }
     });
@@ -388,10 +388,10 @@
     Bridge.define("System.AggregateException", {
         inherits: [System.Exception],
 
-        constructor: function (message, innerExceptions) {
+        ctor: function (message, innerExceptions) {
             this.$initialize();
             this.innerExceptions = new(System.Collections.ObjectModel.ReadOnlyCollection$1(System.Exception))(Bridge.hasValue(innerExceptions) ? Bridge.toArray(innerExceptions) : []);
-            System.Exception.$constructor.call(this, message || 'One or more errors occurred.', this.innerExceptions.items.length ? this.innerExceptions.items[0] : null);
+            System.Exception.ctor.call(this, message || 'One or more errors occurred.', this.innerExceptions.items.length ? this.innerExceptions.items[0] : null);
         },
 
         handle: function (predicate) {
@@ -453,8 +453,8 @@
     Bridge.define("System.Reflection.AmbiguousMatchException", {
         inherits: [System.Exception],
 
-        constructor: function (message, innerException) {
+        ctor: function (message, innerException) {
             this.$initialize();
-            System.Exception.$constructor.call(this, message || "Ambiguous match.", innerException);
+            System.Exception.ctor.call(this, message || "Ambiguous match.", innerException);
         }
     });

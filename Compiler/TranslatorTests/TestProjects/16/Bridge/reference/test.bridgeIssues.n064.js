@@ -2,15 +2,15 @@
     "use strict";
 
     Bridge.define('Test.BridgeIssues.N064.Class64', {
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
         },
-        $constructor1: function (related) {
+        $ctor1: function (related) {
             this.$initialize();
         },
         test: function () {
             var aux = new Test.BridgeIssues.N064.Class64.Aux1();
-            new Test.BridgeIssues.N064.Class64.$constructor1(aux);
+            new Test.BridgeIssues.N064.Class64.$ctor1(aux);
         }
     });
 

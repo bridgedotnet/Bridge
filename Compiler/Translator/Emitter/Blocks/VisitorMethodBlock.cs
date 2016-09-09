@@ -75,28 +75,10 @@ namespace Bridge.Translator
             XmlToJsDoc.EmitComment(this, this.MethodDeclaration);
 
             string name = overloads.GetOverloadName(false, null, true);
-            var member_rr = this.Emitter.Resolver.ResolveNode(methodDeclaration, this.Emitter) as MemberResolveResult;
-            var method = member_rr != null ? member_rr.Member : null;
 
-            if (method != null && method.Name == CS.Methods.AUTO_STARTUP_METHOD_NAME &&
-                method.IsStatic &&
-                !method.IsAbstract &&
-                ConstructorBlock.IsEntryPointCandidate(this.Emitter, methodDeclaration))
+            if (Helpers.IsEntryPointMethod(this.Emitter, methodDeclaration))
             {
-                bool isReady = false;
-                foreach (var attr in method.Attributes)
-                {
-                    if (attr.AttributeType.FullName == CS.Attributes.READY_ATTRIBUTE_NAME)
-                    {
-                        isReady = true;
-                        break;
-                    }
-                }
-
-                if (!isReady)
-                {
-                    name = JS.Fields.MAIN;
-                }
+                name = JS.Fields.MAIN;
             }
 
             this.Write(name);

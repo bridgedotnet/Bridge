@@ -9,7 +9,7 @@
 
         state: null,
 
-        constructor: function (branchType, currVal, minVal, maxVal, parentState) {
+        ctor: function (branchType, currVal, minVal, maxVal, parentState) {
             this.$initialize();
 
             this.type = branchType;

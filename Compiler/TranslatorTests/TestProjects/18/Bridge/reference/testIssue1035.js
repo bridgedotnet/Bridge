@@ -8,7 +8,7 @@
                 Data: 0
             }
         },
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
         },
         getHashCode: function () {

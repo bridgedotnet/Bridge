@@ -9,7 +9,7 @@
 
         settings: null,
 
-        constructor: function (index, tokens, settings) {
+        ctor: function (index, tokens, settings) {
             this.$initialize();
 
             this.index = index;
