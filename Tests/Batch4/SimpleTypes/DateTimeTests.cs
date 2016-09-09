@@ -27,7 +27,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
             Assert.True(d is IFormattable);
 
             var interfaces = typeof(DateTime).GetInterfaces();
-            Assert.AreEqual(3, interfaces.Length);
+            Assert.AreEqual(4, interfaces.Length);
             Assert.True(interfaces.Contains(typeof(IComparable<DateTime>)));
             Assert.True(interfaces.Contains(typeof(IEquatable<DateTime>)));
             Assert.True(interfaces.Contains(typeof(IFormattable)));

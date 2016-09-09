@@ -1,6 +1,4 @@
 ﻿    var base = {
-        cache: {},
-
         initialize: function () {
             if (this.$initialized) {
                 return;
@@ -70,6 +68,14 @@
         },
 
         definei: function (className, gscope, prop) {
+            if ((prop === true || !prop) && gscope) {
+                gscope.$kind = "interface";
+            } else if (prop) {
+                prop.$kind = "interface";
+            } else {
+                gscope = { $kind: "interface" };
+            }
+
             var c = Bridge.define(className, gscope, prop);
             c.$kind = "interface";
 
@@ -93,21 +99,20 @@
 
             if (Bridge.isFunction(prop)) {
                 fn = function () {
-                    var args = Array.prototype.slice.call(arguments),
-                        name,
+                    var args,
+                        key,
                         obj,
                         c;
 
-                    name = Bridge.Class.genericName(className, args);
-                    c = Bridge.Class.cache[name];
+                    key = Bridge.Class.getCachedType(fn, arguments);
 
-                    if (c) {
-                        return c;
+                    if (key) {
+                        return key.type;
                     }
 
+                    args = Array.prototype.slice.call(arguments);
                     obj = prop.apply(null, args);
-                    obj.$cacheName = name;
-                    c = Bridge.define(name, obj, true, { fn: fn, args: args });
+                    c = Bridge.define(Bridge.Class.genericName(className, args), obj, true, { fn: fn, args: args });
 
                     if (!Bridge.Class.staticInitAllow) {
                         Bridge.Class.$queue.push(c);
@@ -115,6 +120,8 @@
 
                     return Bridge.get(c);
                 };
+
+                fn.$cache = [];
 
                 return Bridge.Class.generic(className, gscope, fn, prop.length);
             }
@@ -129,7 +136,6 @@
                 statics = prop.$statics || prop.statics,
                 isEntryPoint = prop.$entryPoint,
                 base,
-                cacheName = prop.$cacheName,
                 prototype,
                 scope = prop.$scope || gscope || Bridge.global,
                 i,
@@ -158,10 +164,6 @@
                 delete prop.statics;
             }
 
-            if (prop.$cacheName) {
-                delete prop.$cacheName;
-            }
-
             var Class,
                 cls = prop.hasOwnProperty("constructor") && prop.constructor || prop.$constructor;
 
@@ -179,8 +181,8 @@
 
             scope = Bridge.Class.set(scope, className, Class);
 
-            if (cacheName) {
-                Bridge.Class.cache[cacheName] = Class;
+            if (gCfg) {
+                gCfg.fn.$cache.push({ type: Class, args: gCfg.args });
             }
 
             Class.$$name = className;
@@ -199,6 +201,8 @@
                 result += ']';
 
                 Class.$$fullname = result;
+            } else {
+                Class.$$fullname = Class.$$name;
             }
 
             if (extend && Bridge.isFunction(extend)) {
@@ -237,13 +241,10 @@
             Class.$base = base;
             prototype = extend ? (extend[0].$$initCtor ? new extend[0].$$initCtor() : new extend[0]()) : new Object();
 
-            Class.$$initCtor = function () {};
+            Class.$$initCtor = function () { };
             Class.$$initCtor.prototype = prototype;
             Class.$$initCtor.prototype.constructor = Class;
-
-            if (Class.$$fullname) {
-                Class.$$initCtor.prototype.$$fullname = Class.$$fullname;
-            }
+            Class.$$initCtor.prototype.$$fullname = gCfg && isGenericInstance ? Class.$$fullname : Class.$$name;
 
             if (statics) {
                 var staticsConfig = statics.$config || statics.config;
@@ -342,7 +343,7 @@
                 }
             };
 
-            if (isEntryPoint) {
+            if (isEntryPoint || Bridge.isFunction(Class["$main"])) {
                 Bridge.Class.$queueEntry.push(Class);
             }
 
@@ -357,16 +358,16 @@
 
             if (Class.$kind === "enum") {
                 Class.instanceOf = function (instance) {
-                     var utype = Class.prototype.$utype;
-                     if (utype === System.String) {
-                         return typeof (instance) == "string";
-                     }
+                    var utype = Class.prototype.$utype;
+                    if (utype === System.String) {
+                        return typeof (instance) == "string";
+                    }
 
-                     if (utype && utype.instanceOf) {
-                         return utype.instanceOf(instance);
-                     }
+                    if (utype && utype.instanceOf) {
+                        return utype.instanceOf(instance);
+                    }
 
-                     return typeof (instance) == "number";
+                    return typeof (instance) == "number";
                 };
             }
 
@@ -406,7 +407,7 @@
             return false;
         },
 
-        registerType : function (className, cls) {
+        registerType: function (className, cls) {
             if (Bridge.$currentAssembly) {
                 Bridge.$currentAssembly.$types[className] = cls;
                 cls.$assembly = Bridge.$currentAssembly;
@@ -437,7 +438,7 @@
                 exists,
                 i;
 
-            for (i = 0; i < (nameParts.length - 1); i++) {
+            for (i = 0; i < (nameParts.length - 1) ; i++) {
                 if (typeof scope[nameParts[i]] == "undefined") {
                     scope[nameParts[i]] = {};
                 }
@@ -527,6 +528,34 @@
             return gName;
         },
 
+        getCachedType: function (fn, args) {
+            var arr = fn.$cache,
+                len = arr.length,
+                key,
+                found,
+                i, g;
+
+            for (i = 0; i < len; i++) {
+                key = arr[i];
+
+                if (key.args.length === args.length) {
+                    found = true;
+                    for (g = 0; g < key.args.length; g++) {
+                        if (key.args[g] !== args[g]) {
+                            found = false;
+                            break;
+                        }
+                    }
+
+                    if (found) {
+                        return key;
+                    }
+                }
+            }
+
+            return null;
+        },
+
         generic: function (className, scope, fn, length) {
             fn.$$name = className;
             fn.$kind = "class";
@@ -549,6 +578,10 @@
 
                 if (t.$staticInit) {
                     t.$staticInit();
+                }
+
+                if (t["$main"]) {
+                    Bridge.ready(t.$main);
                 }
             }
             Bridge.Class.$queue.length = 0;

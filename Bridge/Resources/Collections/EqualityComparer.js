@@ -2,6 +2,14 @@
         return {
             inherits: [System.Collections.Generic.IEqualityComparer$1(T)],
 
+            statics: {
+                config: {
+                    init: function () {
+                        this.def = new (System.Collections.Generic.EqualityComparer$1(T))();
+                    }
+                }
+            },
+
             config: {
                 alias: [
                     "equals2", "System$Collections$Generic$IEqualityComparer$1$" + Bridge.getTypeAlias(T) + "$equals2",

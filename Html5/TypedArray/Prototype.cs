@@ -2,6 +2,8 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/prototype
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 // This class has its usage limited drastically as it is not supposed to be used by users, unless when
 // extending a new TypedArray object that might come into existence.
@@ -15,7 +17,7 @@ namespace Bridge.Html5.TypedArray
     /// </summary>
     [External]
     [Namespace(false)]
-    public abstract class Prototype<TypedArray, TypedElement>
+    public abstract class Prototype<TypedArray, TypedElement> : IList<TypedElement>
     {
         #region Properties
 
@@ -176,23 +178,6 @@ namespace Bridge.Html5.TypedArray
             TypedArray thisArg = default(TypedArray))
         {
             return;
-        }
-
-        // includes() pertains to ECMAScript 7 proposal and should not be used in production environment.
-
-        /// <summary>
-        /// Returns the first (least) index of an element within the array equal to the specified
-        /// value, or -1 if none is found.
-        /// </summary>
-        /// <param name="searchElement">Element to locate in the typed array.</param>
-        /// <returns>
-        /// The first index at which a given element can be found in the typed array, or -1 if it is
-        /// not present.
-        /// </returns>
-        /// <remarks>Most browsers do not support this yet.</remarks>
-        public int IndexOf(TypedElement searchElement)
-        {
-            return default(int);
         }
 
         /// <summary>
@@ -599,5 +584,41 @@ namespace Bridge.Html5.TypedArray
         // production environment.
 
         #endregion Methods
+
+        #region IList
+        extern TypedElement IList<TypedElement>.this[int index]
+        {
+            get;
+            set;
+        }
+
+        extern int ICollection<TypedElement>.Count
+        {
+            get;
+        }
+
+        extern void ICollection<TypedElement>.Add(TypedElement item);
+
+        extern void ICollection<TypedElement>.Clear();
+
+        [Template("System.Array.contains({this}, {item})")]
+        public extern bool Contains(TypedElement item);
+
+        extern bool ICollection<TypedElement>.Contains(TypedElement item);
+
+        [Template("Bridge.getEnumerator({this})")]
+        public extern IEnumerator<TypedElement> GetEnumerator();
+
+        [Template("System.Array.indexOf({this}, {item})")]
+        public extern int IndexOf(TypedElement item);
+
+        extern void IList<TypedElement>.Insert(int index, TypedElement item);
+
+        extern bool ICollection<TypedElement>.Remove(TypedElement item);
+
+        extern void IList<TypedElement>.RemoveAt(int index);
+
+        extern IEnumerator IEnumerable.GetEnumerator();
+        #endregion IList
     }
 }

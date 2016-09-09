@@ -56,7 +56,7 @@ namespace Bridge.Translator
         }
 
         private static Regex _formatArg = new Regex(@"\{(\*?)(\w+)(\:(\w+))?\}");
-        private static Regex _inlineMethod = new Regex(@"([$\w\.\{\}]+)\(\s*(.*)\)");
+        private static Regex _inlineMethod = new Regex(@"([$\w\.\{\}\(\)]+)\(\s*(.*)\)");
 
         protected virtual IList<Expression> GetExpressionsByKey(IEnumerable<NamedParamExpression> expressions, string key)
         {

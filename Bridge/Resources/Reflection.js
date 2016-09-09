@@ -380,6 +380,14 @@
                 return baseType.isAssignableFrom(type);
             }
 
+            if (type === Array) {
+                return System.Array.is([], baseType);
+            }
+
+            if (Bridge.Reflection.isInterface(baseType) && System.Array.contains(Bridge.Reflection.getInterfaces(type), baseType)) {
+                return true;
+            }
+
             var inheritors = type.$$inherits,
                 i,
                 r;

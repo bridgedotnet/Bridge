@@ -11,17 +11,17 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         {
             Assert.AreEqual("Date", typeof(Date).FullName);
             //Assert.True(typeof(Date).IsClass);
-            Assert.False(typeof(IComparable<Date>).IsAssignableFrom(typeof(Date)));
-            Assert.False(typeof(IEquatable<Date>).IsAssignableFrom(typeof(Date)));
+            Assert.True(typeof(IComparable<Date>).IsAssignableFrom(typeof(Date)));
+            Assert.True(typeof(IEquatable<Date>).IsAssignableFrom(typeof(Date)));
             object o = new Date();
             Assert.True(o is Date);
-            Assert.False(o is IComparable<Date>);
-            Assert.False(o is IEquatable<Date>);
+            Assert.True(o is IComparable<Date>);
+            Assert.True(o is IEquatable<Date>);
 
             var interfaces = typeof(Date).GetInterfaces();
-            Assert.AreEqual(0, interfaces.Length);
-            Assert.False(interfaces.Contains(typeof(IComparable<Date>)));
-            Assert.False(interfaces.Contains(typeof(IEquatable<Date>)));
+            Assert.AreEqual(4, interfaces.Length);
+            Assert.True(interfaces.Contains(typeof(IComparable<Date>)));
+            Assert.True(interfaces.Contains(typeof(IEquatable<Date>)));
         }
 
         [Test]

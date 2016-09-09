@@ -223,7 +223,9 @@
             slice: function (start, end) {
                 this.checkReadOnly();
 
-                return new (System.Collections.Generic.List$1(this.$$name.substr(this.$$name.lastIndexOf('$')+1)))(this.items.slice(start, end));
+                var gName = this.$$name.substr(this.$$name.lastIndexOf('$') + 1);
+
+                return new (System.Collections.Generic.List$1(Bridge.unroll(gName)))(this.items.slice(start, end));
             },
 
             sort: function (comparison) {

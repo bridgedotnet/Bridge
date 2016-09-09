@@ -11,7 +11,7 @@ namespace Bridge.ClientTest.Text.RegularExpressions.JavaScript
         public void TypePropertiesAreCorrect()
         {
             var re = new Regex("");
-            Assert.AreEqual("RegExp", typeof(Regex).GetClassName());
+            Assert.AreEqual("RegExp", typeof(Regex).FullName);
             Assert.True(re is Regex);
         }
 
