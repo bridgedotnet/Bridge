@@ -568,22 +568,13 @@ namespace Bridge.Translator
             if (string.IsNullOrEmpty(inline) && customCtor == null)
             {
                 string sname;
-                if (constructor.IsStatic)
+                if (constructor.IsStatic || constructor.DeclaringType.Kind == TypeKind.Anonymous)
                 {
-                    sname = "constructor";
-                }
-                else if (constructor.DeclaringType.Kind == TypeKind.Anonymous)
-                {
-                    sname = "$constructor";
+                    sname = JS.Funcs.CONSTRUCTOR;
                 }
                 else
                 {
                     sname = OverloadsCollection.Create(emitter, constructor).GetOverloadName();
-
-                    if (sname == "constructor")
-                    {
-                        sname = "$constructor";
-                    }
                 }
 
                 properties.Add("sname", sname);

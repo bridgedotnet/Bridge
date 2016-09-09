@@ -222,42 +222,42 @@ namespace Bridge.ClientTest.Batch4.Collections.TypedArrays
         }
 
         // Not JS API
-        //[Test]
-        //public void ContainsWorks()
-        //{
-        //    var arr = new Int8Array(new sbyte[] { 3, 6, 2, 9, 5 });
-        //    Assert.True(arr.Contains(9), "9");
-        //    Assert.False(arr.Contains(1), "1");
-        //}
+        [Test]
+        public void ContainsWorks()
+        {
+            var arr = new Int8Array(new sbyte[] { 3, 6, 2, 9, 5 });
+            Assert.True(arr.Contains(9), "9");
+            Assert.False(arr.Contains(1), "1");
+        }
 
         // #SPI
-        //[Test]
-        //public void ForeachWorks_SPI_1401()
-        //{
-        //    var arr = new Int8Array(new sbyte[] { 3, 6, 2, 9, 5 });
-        //    var l = new List<int>();
-        //    // #1401
-        //    foreach (var i in arr)
-        //    {
-        //        l.Add(i);
-        //    }
-        //    Assert.AreEqual(l.ToArray(), new[] { 3, 6, 2, 9, 5 });
-        //}
+        [Test]
+        public void ForeachWorks_SPI_1401()
+        {
+            var arr = new Int8Array(new sbyte[] { 3, 6, 2, 9, 5 });
+            var l = new List<int>();
+            // #1401
+            foreach (var i in arr)
+            {
+                l.Add(i);
+            }
+            Assert.AreEqual(l.ToArray(), new[] { 3, 6, 2, 9, 5 });
+        }
 
         // #SPI
-        //[Test]
-        //public void GetEnumeratorWorks_SPI_1401()
-        //{
-        //    var arr = new Int8Array(new sbyte[] { 3, 6, 2, 9, 5 });
-        //    var l = new List<int>();
-        //    // #1401
-        //    var enm = arr.GetEnumerator();
-        //    while (enm.MoveNext())
-        //    {
-        //        l.Add(enm.Current);
-        //    }
-        //    Assert.AreEqual(l.ToArray(), new[] { 3, 6, 2, 9, 5 });
-        //}
+        [Test]
+        public void GetEnumeratorWorks_SPI_1401()
+        {
+            var arr = new Int8Array(new sbyte[] { 3, 6, 2, 9, 5 });
+            var l = new List<int>();
+            // #1401
+            var enm = arr.GetEnumerator();
+            while (enm.MoveNext())
+            {
+                l.Add(enm.Current);
+            }
+            Assert.AreEqual(l.ToArray(), new[] { 3, 6, 2, 9, 5 });
+        }
 
         [Test]
         public void IEnumerableGetEnumeratorWorks()

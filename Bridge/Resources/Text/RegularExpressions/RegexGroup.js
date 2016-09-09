@@ -34,13 +34,13 @@
         _capcount: 0,
         _capColl: null,
 
-        constructor: function (text, caps, capcount) {
+        ctor: function (text, caps, capcount) {
             this.$initialize();
             var scope = System.Text.RegularExpressions;
             var index = capcount === 0 ? 0 : caps[(capcount - 1) * 2];
             var length = capcount === 0 ? 0 : caps[(capcount * 2) - 1];
 
-            scope.Capture.$constructor.call(this, text, index, length);
+            scope.Capture.ctor.call(this, text, index, length);
 
             this._caps = caps;
             this._capcount = capcount;

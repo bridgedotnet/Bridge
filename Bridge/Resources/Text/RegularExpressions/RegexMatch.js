@@ -43,12 +43,12 @@
         _groupColl: null,
         _textpos: 0,
 
-        constructor: function (regex, capcount, text, begpos, len, startpos) {
+        ctor: function (regex, capcount, text, begpos, len, startpos) {
             this.$initialize();
             var scope = System.Text.RegularExpressions;
             var caps = [0, 0];
 
-            scope.Group.$constructor.call(this, text, caps, 0);
+            scope.Group.ctor.call(this, text, caps, 0);
 
             this._regex = regex;
 
@@ -162,10 +162,10 @@
 
         _caps: null,
 
-        constructor: function (regex, caps, capcount, text, begpos, len, startpos) {
+        ctor: function (regex, caps, capcount, text, begpos, len, startpos) {
             this.$initialize();
             var scope = System.Text.RegularExpressions;
-            scope.Match.$constructor.call(this, regex, capcount, text, begpos, len, startpos);
+            scope.Match.ctor.call(this, regex, capcount, text, begpos, len, startpos);
 
             this._caps = caps;
         },

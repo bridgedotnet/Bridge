@@ -19,7 +19,7 @@
         _matches: null,
         _done: false,
 
-        constructor: function (regex, input, beginning, length, startat) {
+        ctor: function (regex, input, beginning, length, startat) {
             this.$initialize();
             if (startat < 0 || startat > input.Length) {
                 throw new System.ArgumentOutOfRangeException("startat");
@@ -139,7 +139,7 @@
         _curindex: 0,
         _done: false,
 
-        constructor: function (matchColl) {
+        ctor: function (matchColl) {
             this.$initialize();
             this._matchcoll = matchColl;
         },

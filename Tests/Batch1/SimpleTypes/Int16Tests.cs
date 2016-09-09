@@ -14,7 +14,7 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.False((object)0.5 is short);
             Assert.False((object)-32769 is short);
             Assert.False((object)32768 is short);
-            Assert.AreEqual("System.Int16", typeof(short).GetClassName());
+            Assert.AreEqual("System.Int16", typeof(short).FullName);
 
             object s = (short)0;
             Assert.True(s is short);

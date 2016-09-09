@@ -2,11 +2,11 @@
         inherits: [System.FormattableString],
         args: null,
         format$1: null,
-        constructor: function (format, args) {
+        ctor: function (format, args) {
             if (args === void 0) { args = []; }
 
             this.$initialize();
-            System.FormattableString.$constructor.call(this);
+            System.FormattableString.ctor.call(this);
             this.format$1 = format;
             this.args = args;
         },

@@ -13,8 +13,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             var d = new Bridge634D();
             var d1 = new Bridge634D.Nested();
 
-            Assert.AreEqual("Bridge634D", d.GetClassName(), "Bridge634 D d");
-            Assert.AreEqual("Bridge634D.Nested", d1.GetClassName(), "Bridge634 D d1");
+            Assert.AreEqual("Bridge634D", d.GetType().FullName, "Bridge634 D d");
+            Assert.AreEqual("Bridge634D.Nested", d1.GetType().FullName, "Bridge634 D d1");
         }
     }
 }

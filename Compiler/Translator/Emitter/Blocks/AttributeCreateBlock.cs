@@ -88,10 +88,6 @@ namespace Bridge.Translator
                     {
                         this.WriteDot();
                         var name = OverloadsCollection.Create(this.Emitter, attribute.Constructor).GetOverloadName();
-                        if (name == JS.Funcs.CONSTRUCTOR)
-                        {
-                            name = JS.Funcs.DCONSTRUCTOR;
-                        }
                         this.Write(name);
                     }
 

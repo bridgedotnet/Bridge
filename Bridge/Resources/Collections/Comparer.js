@@ -8,7 +8,7 @@
                 ]
             },
 
-            constructor: function (fn) {
+            ctor: function (fn) {
                 this.$initialize();
                 this.fn = fn;
                 this.compare = fn;

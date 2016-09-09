@@ -147,7 +147,7 @@
         }
     },
 
-    constructor: function (culture) {
+    ctor: function (culture) {
 		this.$initialize();
         this._culture = culture;
         this._caps = {};

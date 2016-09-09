@@ -192,7 +192,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     {
         public static string New<TComponent>(TProps props) where TComponent : Bridge306Component<TProps>
         {
-            return props.GetClassName() + ":" + props;
+            return props.GetType().FullName + ":" + props;
         }
     }
 
@@ -1173,7 +1173,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             List<int> magic = new List<int>() { 0, 1, 2, 3, 4 };
             List<int> epic = magic.GetRange(0, 3);
-            Assert.AreEqual("System.Collections.Generic.List$1[[System.Int32, mscorlib]]", epic.GetType().GetClassName(), "epic.GetType().GetClassName()");
+            Assert.AreEqual("System.Collections.Generic.List$1[[System.Int32, mscorlib]]", epic.GetType().FullName, "epic.GetType().FullName");
         }
 
         // Bridge[#439]
@@ -1324,7 +1324,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public static void N499()
         {
             var v1 = new Version();
-            Assert.AreEqual("System.Version", v1.GetClassName(), "#499 Version type name");
+            Assert.AreEqual("System.Version", v1.GetType().FullName, "#499 Version type name");
         }
     }
 }

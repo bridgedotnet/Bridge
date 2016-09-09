@@ -11,11 +11,11 @@
                 Value: Bridge.getDefaultValue(T)
             }
         },
-        $constructor1: function (value) {
-            Test.BridgeIssues.N1023.Optional$1(T).$constructor.call(this);
+        $ctor1: function (value) {
+            Test.BridgeIssues.N1023.Optional$1(T).ctor.call(this);
             this.setValue(value);
         },
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
         },
         getHashCode: function () {
@@ -46,7 +46,7 @@
                 this.Name = new (Test.BridgeIssues.N1023.Optional$1(String))();
             }
         },
-        constructor: function (name) {
+        ctor: function (name) {
             this.$initialize();
             this.setName(name.$clone());
         }

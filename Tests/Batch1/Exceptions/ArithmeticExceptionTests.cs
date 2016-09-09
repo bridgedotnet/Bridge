@@ -10,7 +10,7 @@ namespace Bridge.ClientTest.Exceptions
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.ArithmeticException", typeof(ArithmeticException).GetClassName(), "Name");
+            Assert.AreEqual("System.ArithmeticException", typeof(ArithmeticException).FullName, "Name");
             object d = new ArithmeticException();
             Assert.True(d is ArithmeticException, "is DivideByZeroException");
             Assert.True(d is Exception, "is Exception");

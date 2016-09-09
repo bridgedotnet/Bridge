@@ -3,7 +3,7 @@
         _index: 0,
         _length: 0,
 
-        constructor: function (text, i, l) {
+        ctor: function (text, i, l) {
             this.$initialize();
             this._text = text;
             this._index = i;

@@ -212,6 +212,11 @@ namespace Bridge.Translator
                 return true;
             }
 
+            if (this.Type.GetConstructors().Any(c => c.Parameters.Count == 0 && emitter.GetInline(c) != null))
+            {
+                return true;
+            }
+
             return false;
         }
 

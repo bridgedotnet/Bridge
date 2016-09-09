@@ -1,22 +1,6 @@
     System.Diagnostics.Debug = {
         writeln: function (text) {
-            var global = Bridge.global;
-
-            if (global.console) {
-                if (global.console.debug) {
-                    global.console.debug(text);
-
-                    return;
-                } else if (global.console.log) {
-                    global.console.log(text);
-
-                    return;
-                }
-            } else if (global.opera && global.opera.postError) {
-                global.opera.postError(text);
-
-                return;
-            }
+            Bridge.Console.debug(text);
         },
 
         _fail: function (message) {
@@ -40,7 +24,7 @@
     }
 
     Bridge.define("System.Diagnostics.Stopwatch", {
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
             this._stopTime = System.Int64.Zero;
             this._startTime = System.Int64.Zero;
@@ -232,9 +216,9 @@
     Bridge.define("System.Diagnostics.Contracts.ContractException", {
         inherits: [System.Exception],
 
-        constructor: function (failureKind, failureMessage, userMessage, condition, innerException) {
+        ctor: function (failureKind, failureMessage, userMessage, condition, innerException) {
             this.$initialize();
-            System.Exception.$constructor.call(this, failureMessage, innerException);
+            System.Exception.ctor.call(this, failureMessage, innerException);
             this._kind = failureKind;
             this._failureMessage = failureMessage || null;
             this._userMessage = userMessage || null;

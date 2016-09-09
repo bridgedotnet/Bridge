@@ -2,7 +2,7 @@
     "use strict";
 
     Bridge.define('Test.BridgeIssues.N1151.renderTarget', {
-        constructor: function (gl, w, h, nCmp) {
+        ctor: function (gl, w, h, nCmp) {
             this.$initialize();
             /* **************************************************************************/
             /*  ACCORDING TO SOME EXAMPLES, WE DONT NEED RENDERBUFFER STORAGE FOR RENDER

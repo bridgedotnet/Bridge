@@ -6,14 +6,14 @@
         statics: {
             getDefaultValue: function () { return new Test.BridgeIssues.N066.Rectangle66(); }
         },
-        $constructor1: function (x1) {
+        $ctor1: function (x1) {
             this.$initialize();
-            (new Test.BridgeIssues.N066.Rectangle66.$constructor()).$clone(this);
+            (new Test.BridgeIssues.N066.Rectangle66.ctor()).$clone(this);
         },
-        $constructor2: function (x1, x2) {
+        $ctor2: function (x1, x2) {
             this.$initialize();
         },
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
         },
         $clone: function (to) { return this; }

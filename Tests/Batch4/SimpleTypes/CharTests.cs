@@ -20,7 +20,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
             // #1603
             Assert.False(typeof(IFormattable).IsAssignableFrom(typeof(char)));
             var interfaces = typeof(char).GetInterfaces();
-            Assert.AreEqual(3, interfaces.Length);
+            Assert.AreEqual(5, interfaces.Length);
             Assert.True(interfaces.Contains(typeof(IComparable<char>)));
             Assert.True(interfaces.Contains(typeof(IEquatable<char>)));
             Assert.False(interfaces.Contains(typeof(IFormattable)));

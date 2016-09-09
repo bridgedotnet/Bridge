@@ -12,7 +12,7 @@ namespace Bridge.ClientTest.Exceptions
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.TimeoutException", typeof(TimeoutException).GetClassName(), "Name");
+            Assert.AreEqual("System.TimeoutException", typeof(TimeoutException).FullName, "Name");
             object d = new TimeoutException();
             Assert.True(d is TimeoutException, "is TimeoutException");
             Assert.True(d is SystemException, "is SystemException");
