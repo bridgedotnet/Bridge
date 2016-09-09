@@ -71,14 +71,14 @@
             },
             throws$7: function (T, block, message) {
                 var actual = null;
-                var expected = Bridge.Reflection.getTypeFullName(T);
+                var expected = Bridge.getTypeName(T);
 
                 try {
                     block();
                 }
                 catch (ex) {
                     ex = System.Exception.create(ex);
-                    actual = Bridge.Reflection.getTypeFullName(Bridge.getType(ex));
+                    actual = Bridge.getTypeName(Bridge.getType(ex));
                 }
 
                 if (!Bridge.referenceEquals(actual, expected)) {
