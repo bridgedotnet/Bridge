@@ -72,7 +72,7 @@ namespace Bridge.Translator.Tests
 
         private string WrapBuildArguments(string configuration)
         {
-            return this.BuildArguments + @" /p:Platform=AnyCPU /p:OutDir=bin" + Path.DirectorySeparatorChar + configuration + Path.DirectorySeparatorChar;
+            return this.BuildArguments + @" /p:Platform=AnyCPU /p:OutDir=bin" + Path.DirectorySeparatorChar + configuration;
         }
 
         public void Translate(bool byBuilding = false)
