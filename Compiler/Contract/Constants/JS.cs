@@ -12,6 +12,7 @@
         public class Fields
         {
             public const string ENTRY_POINT = "$entryPoint";
+            public const string MAIN = "$main";
             public const string KIND = "$kind";
             public const string VARIANCE = "$variance";
             public const string FLAGS = "$flags";

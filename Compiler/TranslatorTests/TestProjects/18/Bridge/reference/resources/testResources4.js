@@ -18,7 +18,7 @@ alert("I'm header 1.0.0-beta");
                 }
             },
             main1: function () {
-                System.Console.log(new TestIssue599.Issue599()._something);
+                Bridge.Console.log(new TestIssue599.Issue599()._something);
             }
         },
         $entryPoint: true,

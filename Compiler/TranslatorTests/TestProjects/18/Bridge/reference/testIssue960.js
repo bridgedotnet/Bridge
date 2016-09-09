@@ -18,7 +18,7 @@
             go: function () {
                 var x = new TestIssue960.Named("Test");
                 // Should not contain generic type parameter
-                System.Console.log(new TestIssue960.Example().getName(x));
+                Bridge.Console.log(new TestIssue960.Example().getName(x));
             }
         },
         $entryPoint: true

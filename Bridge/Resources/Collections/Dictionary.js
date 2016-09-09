@@ -1,6 +1,22 @@
 ﻿    Bridge.define('System.Collections.Generic.KeyValuePair$2', function (TKey, TValue) {
         return {
+            $kind: "struct",
+
+            statics: {
+                getDefaultValue: function () {
+                    return new (System.Collections.Generic.KeyValuePair$2(TKey, TValue))(Bridge.getDefaultValue(TKey), Bridge.getDefaultValue(TValue));
+                }
+            },
+
             ctor: function (key, value) {
+                if (key === undefined) {
+                    key = Bridge.getDefaultValue(TKey);
+                }
+
+                if (value === undefined) {
+                    value = Bridge.getDefaultValue(TValue);
+                }
+
                 this.$initialize();
                 this.key = key;
                 this.value = value;
@@ -47,7 +63,7 @@
 
             ctor: function (obj, comparer) {
                 this.$initialize();
-                this.comparer = comparer || System.Collections.Generic.EqualityComparer$1.$default;
+                this.comparer = comparer || System.Collections.Generic.EqualityComparer$1(TKey).def;
                 this.clear();
 
                 if (Bridge.is(obj, System.Collections.Generic.Dictionary$2(TKey, TValue))) {

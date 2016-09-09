@@ -3427,6 +3427,192 @@
 
     }; });
 
+    Bridge.define('Bridge.ClientTest.BridgeConsoleTests', {
+        testLogMessageObject: function () {
+            this.assertLogMessageObject("#0 - ", "Test Bridge Console Log Message Object", "Test Bridge Console Log Message Object");
+            this.assertLogMessageObject("#1 - ", true, "true");
+            this.assertLogMessageObject("#2 - ", false, "false");
+            this.assertLogMessageObject("#3 - ", -1, "-1");
+            this.assertLogMessageObject("#4 - ", 1, "1");
+            this.assertLogMessageObject("#5 - ", -12345678, "-12345678");
+            this.assertLogMessageObject("#6 - ", 12345678, "12345678");
+            this.assertLogMessageObject("#7 - ", System.Int64(-1), "-1");
+            this.assertLogMessageObject("#8 - ", System.Int64(1), "1");
+            this.assertLogMessageObject("#9 - ", System.Int64(-12345678), "-12345678");
+            this.assertLogMessageObject("#10 - ", System.Int64(12345678), "12345678");
+            this.assertLogMessageObject("#11 - ", System.UInt64(1), "1");
+            this.assertLogMessageObject("#12 - ", System.UInt64(12345678), "12345678");
+            this.assertLogMessageObject("#13 - ", -1.0, "-1");
+            this.assertLogMessageObject("#14 - ", 1.0, "1");
+            this.assertLogMessageObject("#15 - ", -12345678.0, "-12345678");
+            this.assertLogMessageObject("#16 - ", 12345678.0, "12345678");
+            this.assertLogMessageObject("#17 - ", -1.12345678, "-1.12345678");
+            this.assertLogMessageObject("#18 - ", 1.12345678, "1.12345678");
+            this.assertLogMessageObject("#19 - ", -12345678.12345678, "-12345678.12345678");
+            this.assertLogMessageObject("#20 - ", 12345678.12345678, "12345678.12345678");
+            this.assertLogMessageObject("#21 - ", System.Decimal(-1.0), "-1");
+            this.assertLogMessageObject("#22 - ", System.Decimal(1.0), "1");
+            this.assertLogMessageObject("#23 - ", System.Decimal(-12345678.0), "-12345678");
+            this.assertLogMessageObject("#24 - ", System.Decimal(12345678.0), "12345678");
+            this.assertLogMessageObject("#25 - ", System.Decimal(-1.12345678), "-1.12345678");
+            this.assertLogMessageObject("#26 - ", System.Decimal(1.12345678), "1.12345678");
+            this.assertLogMessageObject("#27 - ", System.Decimal("-12345678.12345678"), "-12345678.12345678");
+            this.assertLogMessageObject("#28 - ", System.Decimal("12345678.12345678"), "12345678.12345678");
+            this.assertLogMessageObject("#29 - ", null, "null");
+            this.assertLogMessageObject("#30 - ", {  }, "[object Object]");
+            this.assertLogMessageObject("#31 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassA(), "I'm ClassA");
+            this.assertLogMessageObject("#32 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassB(), "[object Object]");
+        },
+        testLogMessageString: function () {
+            this.assertLogMessageObject("#1 - ", "Test Bridge Console Log Message String", "Test Bridge Console Log Message String");
+            this.assertLogMessageObject("#2 - ", null, "null");
+        },
+        testDebugMessageString: function () {
+            this.assertDebugMessageString("#1 - ", "Test Bridge Console Debug Message String", "Test Bridge Console Debug Message String");
+            this.assertDebugMessageString("#2 - ", null, "null");
+        },
+        testErrorMessageString: function () {
+            this.assertErrorMessageString("#1 - ", "Test Bridge Console Error Message String", "Test Bridge Console Error Message String");
+            this.assertErrorMessageString("#2 - ", null, "null");
+        },
+        testToggling: function () {
+            Bridge.Console.hide();
+            Bridge.Console.log("Hide/Log");
+            this.assertMessage("#1 - ", "Hide/Log");
+
+            Bridge.Console.getInstance().close();
+            Bridge.Console.getInstance().close();
+            Bridge.Console.hide();
+            Bridge.Console.log("Close/Close/Hide/Log");
+            this.assertMessage("#2 - ", "Close/Close/Hide/Log");
+
+            Bridge.Console.getInstance().close();
+            Bridge.Console.hide();
+            Bridge.Console.hide();
+            Bridge.Console.log("Close/Hide/Hide/Log");
+            this.assertMessage("#3 - ", "Close/Hide/Hide/Log");
+
+            Bridge.Console.getInstance().close();
+            Bridge.Console.hide();
+            Bridge.Console.show();
+            Bridge.Console.show();
+            Bridge.Console.log("Close/Hide/Show/Show/Log");
+            this.assertMessage("#4 - ", "Close/Hide/Show/Show/Log");
+
+            Bridge.Console.hide();
+            Bridge.Console.show();
+            this.assertMessage("#5 Messages preserved after - ", "Close/Hide/Show/Show/Log");
+            Bridge.Console.hide();
+            Bridge.Console.show();
+            Bridge.Console.log("Hide/Show/Hide/Show/Log");
+            this.assertMessage("#6 - ", "Hide/Show/Hide/Show/Log");
+        },
+        assertLogMessageObject: function (description, message, expected) {
+            Bridge.Console.log(message);
+            this.assertMessage(description, expected);
+        },
+        assertLogMessageString: function (description, message, expected) {
+            Bridge.Console.log(message);
+            this.assertMessage(description, expected);
+        },
+        assertDebugMessageString: function (description, message, expected) {
+            Bridge.Console.debug(message);
+            this.assertMessage(description, expected, "#1800FF");
+        },
+        assertErrorMessageString: function (description, message, expected) {
+            Bridge.Console.error(message);
+            this.assertMessage(description, expected, "#d65050");
+        },
+        assertMessage: function (description, expected, color) {
+            if (color === void 0) { color = "#555"; }
+            var el = Bridge.as(Bridge.Console.getInstance().currentMessageElement, HTMLLIElement);
+
+            if (el == null) {
+                Bridge.Test.Assert.fail$1(System.String.concat(description, "Could not get current message as HTMLLIElement"));
+                return;
+            }
+
+            Bridge.Test.Assert.true$1(true, System.String.concat(description, "Message <li> element exists"));
+
+            var span = System.Linq.Enumerable.from(el.getElementsByTagName("span")).firstOrDefault(null, null);
+
+            if (span == null) {
+                Bridge.Test.Assert.fail$1(System.String.concat(description, "Could not get message span element"));
+                return;
+            }
+
+            Bridge.Test.Assert.true$1(true, System.String.concat(description, "Message <span> element exists"));
+            Bridge.Test.Assert.areEqual$1(expected, span.innerHTML, System.String.concat(description, "Message is correct"));
+            Bridge.Test.Assert.areEqual$1(this.normalizeHexStyleColor(color), this.convertStyleColor(span.style.color), System.String.concat(System.String.concat(System.String.concat(System.String.concat(description, "Message <span> color ("), span.style.color), ") should be "), color));
+        },
+        convertStyleColor: function (styleColor) {
+            var r = new RegExp("^rgb\\((\\d+),\\s*(\\d+),\\s*(\\d+)\\)$");
+
+            var items = r.exec(styleColor);
+
+            if (items != null && items.length >= 4) {
+                styleColor = this.rgbToHex(items[1], items[2], items[3]);
+            }
+
+            return this.normalizeHexStyleColor(styleColor);
+        },
+        normalizeHexStyleColor: function (styleColor) {
+            if (System.String.isNullOrEmpty(styleColor) || !System.String.startsWith(styleColor, "#")) {
+                return styleColor;
+            }
+
+            var subColor = styleColor.substr(1);
+            if (subColor.length < 1) {
+                return styleColor;
+            } else if (subColor.length === 3) {
+                subColor = this.duplicate$1(subColor);
+            }
+
+            if (subColor.length < 6) {
+                var toAdd = ("000000").substr(0, ((6 - subColor.length) | 0));
+                subColor = System.String.concat(toAdd, subColor);
+            }
+
+            styleColor = (System.String.concat(String.fromCharCode(styleColor.charCodeAt(0)), subColor)).toUpperCase();
+
+            return styleColor;
+        },
+        duplicate: function (c) {
+            return System.String.concat(String.fromCharCode(c), String.fromCharCode(c));
+        },
+        duplicate$1: function (s) {
+            if (s == null) {
+                return null;
+            }
+
+            var r = "";
+            for (var i = 0; i < s.length; i = (i + 1) | 0) {
+                r = System.String.concat(r, (this.duplicate(s.charCodeAt(i))));
+            }
+
+            return r;
+        },
+        rgbToHex: function (r, g, b) {
+            return System.String.concat(System.String.concat(System.String.concat("#", this.toHexNumber(r)), this.toHexNumber(g)), this.toHexNumber(b));
+        },
+        toHexNumber: function (n) {
+            var i = { v : 0 };
+            System.Int32.tryParse(n, i);
+
+            var r = System.Int32.format(i.v, "X2");
+
+            return r;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.BridgeConsoleTests.ClassA', {
+        toString: function () {
+            return "I'm ClassA";
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.BridgeConsoleTests.ClassB');
+
     Bridge.define('Bridge.ClientTest.CheckedUncheckedTests', {
         statics: {
             assertEqual: function (expected, actual, message) {
@@ -4507,7 +4693,7 @@
 
     Bridge.define('Bridge.ClientTest.Collections.Generic.ComparerTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.Comparer$1[[Object]]", Bridge.getTypeName(System.Collections.Generic.Comparer$1(Object)), "GetClassName()");
+            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.Comparer$1[[Object]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.Comparer$1(Object)), "FullName");
 
             var comparer = new (System.Collections.Generic.Comparer$1(Object))(System.Collections.Generic.Comparer$1.$default.fn);
             Bridge.Test.Assert.true$1(Bridge.hasValue(comparer), "is Comparer<object> should be true");
@@ -4567,29 +4753,29 @@
 
     Bridge.define('Bridge.ClientTest.Collections.Generic.EqualityComparerTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.EqualityComparer$1[[Object]]", Bridge.getTypeName(System.Collections.Generic.EqualityComparer$1(Object)), "FullName should be correct");
-            var dict = new (System.Collections.Generic.EqualityComparer$1(Object))();
+            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.EqualityComparer$1[[Object]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.EqualityComparer$1(Object)), "FullName should be correct");
+            var dict = System.Collections.Generic.EqualityComparer$1(Object).def;
             Bridge.Test.Assert.true$1(Bridge.is(dict, System.Collections.Generic.EqualityComparer$1(Object)), "is EqualityComparer<object> should be true");
             Bridge.Test.Assert.true$1(Bridge.is(dict, System.Collections.Generic.IEqualityComparer$1(Object)), "is IEqualityComparer<object> should be true");
         },
         defaultComparerCanGetHashCodeOfNumber: function () {
-            Bridge.Test.Assert.areEqual(Bridge.getHashCode((12345)), new (System.Collections.Generic.EqualityComparer$1(Object))().getHashCode2(12345));
+            Bridge.Test.Assert.areEqual(Bridge.getHashCode((12345)), System.Collections.Generic.EqualityComparer$1(Object).def.getHashCode2(12345));
         },
         defaultComparerReturnsZeroAsHashCodeForNullAndUndefined: function () {
-            Bridge.Test.Assert.areEqual(0, new (System.Collections.Generic.EqualityComparer$1(Object))().getHashCode2(null));
-            Bridge.Test.Assert.areEqual(0, new (System.Collections.Generic.EqualityComparer$1(Object))().getHashCode2(undefined));
+            Bridge.Test.Assert.areEqual(0, System.Collections.Generic.EqualityComparer$1(Object).def.getHashCode2(null));
+            Bridge.Test.Assert.areEqual(0, System.Collections.Generic.EqualityComparer$1(Object).def.getHashCode2(undefined));
         },
         defaultComparerCanDetermineEquality: function () {
             var o1 = {  }, o2 = {  };
 
-            Bridge.Test.Assert.true$1(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(null, null), "null, null");
-            Bridge.Test.Assert.false$1(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(null, o1), "null, o1");
-            Bridge.Test.Assert.false$1(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(o1, null), "o1, null");
-            Bridge.Test.Assert.true$1(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(o1, o1), "o1, o1");
-            Bridge.Test.Assert.false$1(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(o1, o2), "o1, o2");
+            Bridge.Test.Assert.true$1(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(null, null), "null, null");
+            Bridge.Test.Assert.false$1(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(null, o1), "null, o1");
+            Bridge.Test.Assert.false$1(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(o1, null), "o1, null");
+            Bridge.Test.Assert.true$1(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(o1, o1), "o1, o1");
+            Bridge.Test.Assert.false$1(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(o1, o2), "o1, o2");
         },
         defaultComparerInvokesOverriddenGetHashCode: function () {
-            Bridge.Test.Assert.areEqual(42158, new (System.Collections.Generic.EqualityComparer$1(Object))().getHashCode2(Bridge.merge(new Bridge.ClientTest.Collections.Generic.EqualityComparerTests.MyClass(), {
+            Bridge.Test.Assert.areEqual(42158, System.Collections.Generic.EqualityComparer$1(Object).def.getHashCode2(Bridge.merge(new Bridge.ClientTest.Collections.Generic.EqualityComparerTests.MyClass(), {
                 hashCode: 42158
             } )));
         },
@@ -4597,17 +4783,17 @@
             var c = new Bridge.ClientTest.Collections.Generic.EqualityComparerTests.MyClass();
             var other = new Bridge.ClientTest.Collections.Generic.EqualityComparerTests.MyClass();
             c.shouldEqual = false;
-            Bridge.Test.Assert.false(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(c, other));
+            Bridge.Test.Assert.false(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(c, other));
             Bridge.Test.Assert.areStrictEqual(other, c.other);
 
             c.shouldEqual = true;
             c.other = null;
-            Bridge.Test.Assert.true(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(c, other));
+            Bridge.Test.Assert.true(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(c, other));
             Bridge.Test.Assert.areStrictEqual(other, c.other);
 
             c.shouldEqual = true;
             c.other = other;
-            Bridge.Test.Assert.false(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(c, null)); // We should not invoke our own equals so its return value does not matter.
+            Bridge.Test.Assert.false(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(c, null)); // We should not invoke our own equals so its return value does not matter.
             Bridge.Test.Assert.areEqual(other, c.other); // We should not invoke our own equals so the 'other' member should not be set.
         }
     });
@@ -4627,7 +4813,7 @@
 
     Bridge.define('Bridge.ClientTest.Collections.Generic.GenericDictionaryTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.Dictionary$2[[System.Int32, mscorlib],[String]]", Bridge.getTypeName(System.Collections.Generic.Dictionary$2(System.Int32,String)), "FullName should be correct");
+            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.Dictionary$2[[System.Int32, mscorlib],[String]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.Dictionary$2(System.Int32,String)), "FullName should be correct");
             var dict = new (System.Collections.Generic.Dictionary$2(System.Int32,String))();
             Bridge.Test.Assert.true$1(Bridge.is(dict, System.Collections.Generic.Dictionary$2(System.Int32,String)), "is Dictionary<int,string> should be true");
             Bridge.Test.Assert.true$1(Bridge.is(dict, System.Collections.Generic.IDictionary$2(System.Int32,String)), "is IDictionary<int,string> should be true");
@@ -4636,14 +4822,14 @@
         defaultConstructorWorks: function () {
             var d = new (System.Collections.Generic.Dictionary$2(System.Int32,String))();
             Bridge.Test.Assert.areEqual$1(0, d.getCount(), "Count is 0");
-            Bridge.Test.Assert.areEqual$1("Bridge.CustomEnumerator", Bridge.getTypeName(d.getEnumerator()), "Enumerator should be Bridge.CustomEnumerator");
-            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.EqualityComparer$1[[Object]]", Bridge.getTypeName(d.getComparer()), "Comparer should be Bridge.EqualityComparer$1$Object");
+            Bridge.Test.Assert.areEqual$1("Bridge.CustomEnumerator", Bridge.Reflection.getTypeFullName(Bridge.getType(d.getEnumerator())), "Enumerator");
+            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.EqualityComparer$1[[System.Int32, mscorlib]]", Bridge.Reflection.getTypeFullName(Bridge.getType(d.getComparer())), "Comparer");
         },
         capacityConstructorWorks: function () {
             var d = new (System.Collections.Generic.Dictionary$2(System.Int32, String))();
             Bridge.Test.Assert.areEqual(0, d.getCount());
-            Bridge.Test.Assert.areEqual$1("Bridge.CustomEnumerator", Bridge.getTypeName(d.getEnumerator()), "Enumerator should be Bridge.CustomEnumerator");
-            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.EqualityComparer$1[[Object]]", Bridge.getTypeName(d.getComparer()), "Comparer should be Bridge.EqualityComparer$1$Object");
+            Bridge.Test.Assert.areEqual$1("Bridge.CustomEnumerator", Bridge.Reflection.getTypeFullName(Bridge.getType(d.getEnumerator())), "Enumerator");
+            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.EqualityComparer$1[[System.Int32, mscorlib]]", Bridge.Reflection.getTypeFullName(Bridge.getType(d.getComparer())), "Comparer");
         },
         capacityAndEqualityComparerWorks: function () {
             var c = new Bridge.ClientTest.Collections.Generic.GenericDictionaryTests.TestEqualityComparer();
@@ -5037,7 +5223,7 @@
 
     Bridge.define('Bridge.ClientTest.Collections.Generic.IDictionaryTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.IDictionary$2[[Object],[Object]]", Bridge.getTypeName(System.Collections.Generic.IDictionary$2(Object,Object)), "FullName should be correct");
+            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.IDictionary$2[[Object],[Object]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.IDictionary$2(Object,Object)), "FullName should be correct");
         },
         classImplementsInterfaces: function () {
             Bridge.Test.Assert.true(Bridge.is(new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.ctor(), System.Collections.Generic.IDictionary$2(System.Int32,String)));
@@ -5393,7 +5579,7 @@
 
     Bridge.define('Bridge.ClientTest.Collections.Generic.IListTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.IList$1[[Object]]", Bridge.getTypeName(System.Collections.Generic.IList$1(Object)), "FullName should be correct");
+            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.IList$1[[Object]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.IList$1(Object)), "FullName should be correct");
 
             var iList = new (System.Collections.Generic.List$1(Object))();
 
@@ -5791,7 +5977,7 @@
 
     Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.List$1[[System.Int32, mscorlib]]", Bridge.getTypeName(System.Collections.Generic.List$1(System.Int32)), "GetClassName()");
+            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.List$1[[System.Int32, mscorlib]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.List$1(System.Int32)), "FullName");
             var list = new (System.Collections.Generic.List$1(System.Int32))();
             Bridge.Test.Assert.true$1(Bridge.is(list, System.Collections.Generic.List$1(System.Int32)), "is int[] should be true");
             Bridge.Test.Assert.true$1(Bridge.is(list, System.Collections.Generic.IList$1(System.Int32)), "is IList<int> should be true");
@@ -6546,6 +6732,7 @@
             MODULE_REFLECTION: "Reflection",
             MODULE_ARGUMENTS: "Arguments",
             MODULE_MIXIN: "Mixin",
+            MODULE_BRIDGECONSOLE: "Bridge Console",
             IGNORE_DATE: null
         }
     });
@@ -7033,12 +7220,12 @@
                         Bridge.Test.Assert.throws$2(function () {
                             convert(testValues[i], testBases[i]);
                         }, function (err) {
-                            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(TException));
+                            return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(TException));
                         }, System.String.concat(System.String.concat(System.String.concat("Value ", testValues[i]), " base "), testBases[i]));
                     }
                     catch (e) {
                         e = System.Exception.create(e);
-                        var message = System.String.format("Expected {0} converting '{1}' (base {2}) to '{3}'", Bridge.getTypeName(TException), testValues[i], testBases[i], Bridge.getTypeName(TOutput));
+                        var message = System.String.format("Expected {0} converting '{1}' (base {2}) to '{3}'", Bridge.Reflection.getTypeFullName(TException), testValues[i], testBases[i], Bridge.Reflection.getTypeFullName(TOutput));
                         throw new System.AggregateException(message, [e]);
                     }
                 }).call(this);
@@ -7064,12 +7251,12 @@
                         Bridge.Test.Assert.throws$2(function () {
                             convert(testValues[i]);
                         }, function (err) {
-                            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(TException));
+                            return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(TException));
                         }, System.String.concat("Value ", testValues[i]));
                     }
                     catch (e) {
                         e = System.Exception.create(e);
-                        var message = System.String.format("Expected {0} converting '{1}' ({2}) to {3}", Bridge.getTypeName(TException), testValues[i], Bridge.getTypeName(TInput), Bridge.getTypeName(TOutput));
+                        var message = System.String.format("Expected {0} converting '{1}' ({2}) to {3}", Bridge.Reflection.getTypeFullName(TException), testValues[i], Bridge.Reflection.getTypeFullName(TInput), Bridge.Reflection.getTypeFullName(TOutput));
                         throw new System.AggregateException(message, [e]);
                     }
                 }).call(this);
@@ -7096,12 +7283,12 @@
                         Bridge.Test.Assert.throws$2(function () {
                             convert(testValues[i]);
                         }, function (err) {
-                            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(TException));
+                            return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(TException));
                         }, System.String.concat("Value ", testValues[i]));
                     }
                     catch (e) {
                         e = System.Exception.create(e);
-                        var message = System.String.format("Expected {0} converting '{1}' ({2}) to {3}", Bridge.getTypeName(TException), testValues[i], Bridge.getTypeName(TInput), Bridge.getTypeName(TOutput));
+                        var message = System.String.format("Expected {0} converting '{1}' ({2}) to {3}", Bridge.Reflection.getTypeFullName(TException), testValues[i], Bridge.Reflection.getTypeFullName(TInput), Bridge.Reflection.getTypeFullName(TOutput));
                         throw new System.AggregateException(message, [e]);
                     }
                 }).call(this);
@@ -7763,7 +7950,7 @@
         },
         toString$1: function (format, formatProvider) {
             if (formatProvider != null) {
-                return System.String.format("{0}: {1}", Bridge.getTypeName(formatProvider), this._value);
+                return System.String.format("{0}: {1}", Bridge.Reflection.getTypeFullName(Bridge.getType(formatProvider)), this._value);
             } else {
                 return System.String.format("FooFormattable: {0}", (this._value));
             }
@@ -8362,7 +8549,7 @@
     Bridge.define('Bridge.ClientTest.CultureInfoTests', {
         typePropertiesAreCorrect: function () {
             var culture = System.Globalization.CultureInfo.invariantCulture;
-            Bridge.Test.Assert.areEqual("System.Globalization.CultureInfo", Bridge.getTypeName(System.Globalization.CultureInfo));
+            Bridge.Test.Assert.areEqual("System.Globalization.CultureInfo", Bridge.Reflection.getTypeFullName(System.Globalization.CultureInfo));
             Bridge.Test.Assert.true(Bridge.hasValue(culture));
         },
         getFormatWorks: function () {
@@ -8663,7 +8850,7 @@
             sb.appendLine();
             sb.append("};");
 
-            System.Console.log(sb.toString());
+            Bridge.Console.log(sb.toString());
         }
     });
 
@@ -8941,7 +9128,7 @@
             return System.Array.toEnumerable($yield);
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.AggregateException", Bridge.getTypeName(System.AggregateException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.AggregateException", Bridge.Reflection.getTypeFullName(System.AggregateException), "Name");
             var d = new System.AggregateException();
             Bridge.Test.Assert.true(Bridge.is(d, System.AggregateException));
             Bridge.Test.Assert.true(Bridge.is(d, System.Exception));
@@ -9099,7 +9286,7 @@
             DefaultMessage: "Value does not fall within the expected range."
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.ArgumentException", Bridge.getTypeName(System.ArgumentException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.ArgumentException", Bridge.Reflection.getTypeFullName(System.ArgumentException), "Name");
             var d = new System.ArgumentException();
             Bridge.Test.Assert.true(Bridge.is(d, System.ArgumentException));
             Bridge.Test.Assert.true(Bridge.is(d, System.Exception));
@@ -9146,7 +9333,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.ArgumentNullExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.ArgumentNullException", Bridge.getTypeName(System.ArgumentNullException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.ArgumentNullException", Bridge.Reflection.getTypeFullName(System.ArgumentNullException), "Name");
             var d = new System.ArgumentNullException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.ArgumentNullException), "is ArgumentNullException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.ArgumentException), "is ArgumentException");
@@ -9185,7 +9372,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.ArgumentOutOfRangeExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.ArgumentOutOfRangeException", Bridge.getTypeName(System.ArgumentOutOfRangeException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.ArgumentOutOfRangeException", Bridge.Reflection.getTypeFullName(System.ArgumentOutOfRangeException), "Name");
             var d = new System.ArgumentOutOfRangeException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.ArgumentOutOfRangeException), "is ArgumentOutOfRangeException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.ArgumentException), "is ArgumentException");
@@ -9255,7 +9442,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.ArithmeticExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.ArithmeticException", Bridge.getTypeName(System.ArithmeticException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.ArithmeticException", Bridge.Reflection.getTypeFullName(System.ArithmeticException), "Name");
             var d = new System.ArithmeticException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.ArithmeticException), "is DivideByZeroException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9387,7 +9574,7 @@
             DefaultMessage: "Culture is not supported."
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Globalization.CultureNotFoundException", Bridge.getTypeName(System.Globalization.CultureNotFoundException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.Globalization.CultureNotFoundException", Bridge.Reflection.getTypeFullName(System.Globalization.CultureNotFoundException), "Name");
             var d = new System.Globalization.CultureNotFoundException();
             Bridge.Test.Assert.true(Bridge.is(d, System.Globalization.CultureNotFoundException));
             Bridge.Test.Assert.true(Bridge.is(d, System.Exception));
@@ -9471,7 +9658,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.DivideByZeroExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.DivideByZeroException", Bridge.getTypeName(System.DivideByZeroException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.DivideByZeroException", Bridge.Reflection.getTypeFullName(System.DivideByZeroException), "Name");
             var d = new System.DivideByZeroException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.DivideByZeroException), "is DivideByZeroException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9499,7 +9686,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.ExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Exception", Bridge.getTypeName(System.Exception), "Name");
+            Bridge.Test.Assert.areEqual$1("System.Exception", Bridge.Reflection.getTypeFullName(System.Exception), "Name");
             var d = new System.Exception();
             Bridge.Test.Assert.true(Bridge.is(d, System.Exception));
         },
@@ -9553,7 +9740,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.FormatExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.FormatException", Bridge.getTypeName(System.FormatException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.FormatException", Bridge.Reflection.getTypeFullName(System.FormatException), "Name");
             var d = new System.FormatException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.FormatException), "is FormatException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9584,7 +9771,7 @@
             DefaultMessage: "Index was outside the bounds of the array."
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.IndexOutOfRangeException", Bridge.getTypeName(System.IndexOutOfRangeException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.IndexOutOfRangeException", Bridge.Reflection.getTypeFullName(System.IndexOutOfRangeException), "Name");
             var d = new System.IndexOutOfRangeException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.IndexOutOfRangeException), "is IndexOutOfRangeException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.SystemException), "is SystemException");
@@ -9613,7 +9800,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.InvalidCastExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.InvalidCastException", Bridge.getTypeName(System.InvalidCastException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.InvalidCastException", Bridge.Reflection.getTypeFullName(System.InvalidCastException), "Name");
             var d = new System.InvalidCastException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.InvalidCastException), "is InvalidCastException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9641,7 +9828,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.InvalidOperationExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.InvalidOperationException", Bridge.getTypeName(System.InvalidOperationException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.InvalidOperationException", Bridge.Reflection.getTypeFullName(System.InvalidOperationException), "Name");
             var d = new System.InvalidOperationException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.InvalidOperationException), "is InvalidOperationException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9669,7 +9856,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.KeyNotFoundExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.KeyNotFoundException", Bridge.getTypeName(System.Collections.Generic.KeyNotFoundException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.KeyNotFoundException", Bridge.Reflection.getTypeFullName(System.Collections.Generic.KeyNotFoundException), "Name");
             var d = new System.Collections.Generic.KeyNotFoundException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Collections.Generic.KeyNotFoundException), "is KeyNotFoundException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9697,7 +9884,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.NotImplementedExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.NotImplementedException", Bridge.getTypeName(System.NotImplementedException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.NotImplementedException", Bridge.Reflection.getTypeFullName(System.NotImplementedException), "Name");
             var d = new System.NotImplementedException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.NotImplementedException), "is NotImplementedException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9725,7 +9912,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.NotSupportedExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.NotSupportedException", Bridge.getTypeName(System.NotSupportedException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.NotSupportedException", Bridge.Reflection.getTypeFullName(System.NotSupportedException), "Name");
             var d = new System.NotSupportedException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.NotSupportedException), "is NotSupportedException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9753,7 +9940,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.NullReferenceExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.NullReferenceException", Bridge.getTypeName(System.NullReferenceException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.NullReferenceException", Bridge.Reflection.getTypeFullName(System.NullReferenceException), "Name");
             var d = new System.NullReferenceException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.NullReferenceException), "is NullReferenceException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9800,7 +9987,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.OperationCanceledExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.OperationCanceledException", Bridge.getTypeName(System.OperationCanceledException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.OperationCanceledException", Bridge.Reflection.getTypeFullName(System.OperationCanceledException), "Name");
             var d = new System.OperationCanceledException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.OperationCanceledException), "is OperationCanceledException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9859,7 +10046,7 @@
             DefaultMessage: "Insufficient memory to continue the execution of the program."
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.OutOfMemoryException", Bridge.getTypeName(System.OutOfMemoryException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.OutOfMemoryException", Bridge.Reflection.getTypeFullName(System.OutOfMemoryException), "Name");
             var d = new System.OutOfMemoryException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.OutOfMemoryException), "is OutOfMemoryException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.SystemException), "is SystemException");
@@ -9888,7 +10075,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.OverflowExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.OverflowException", Bridge.getTypeName(System.OverflowException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.OverflowException", Bridge.Reflection.getTypeFullName(System.OverflowException), "Name");
             var d = new System.OverflowException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.OverflowException), "is OverflowException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9916,7 +10103,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.PromiseExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("Bridge.PromiseException", Bridge.getTypeName(Bridge.PromiseException), "Name");
+            Bridge.Test.Assert.areEqual$1("Bridge.PromiseException", Bridge.Reflection.getTypeFullName(Bridge.PromiseException), "Name");
             var d = new Bridge.PromiseException(System.Array.init(0, null));
             Bridge.Test.Assert.true$1(Bridge.is(d, Bridge.PromiseException), "is PromiseException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9954,7 +10141,7 @@
             DefaultMessage: "Attempted to operate on an array with the incorrect number of dimensions."
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.RankException", Bridge.getTypeName(System.RankException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.RankException", Bridge.Reflection.getTypeFullName(System.RankException), "Name");
             var d = new System.RankException();
             Bridge.Test.Assert.true(Bridge.is(d, System.RankException));
             Bridge.Test.Assert.true(Bridge.is(d, System.Exception));
@@ -9979,7 +10166,7 @@
             DefaultMessage2: "The RegEx engine has timed out while trying to match a pattern to an input string. This can occur for many reasons, including very large inputs or excessive backtracking caused by nested quantifiers, back-references and other factors."
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.RegexMatchTimeoutException", Bridge.getTypeName(System.RegexMatchTimeoutException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.RegexMatchTimeoutException", Bridge.Reflection.getTypeFullName(System.RegexMatchTimeoutException), "Name");
             var d = new System.RegexMatchTimeoutException.ctor();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.RegexMatchTimeoutException), "is RegexMatchTimeoutException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.TimeoutException), "is TimeoutException");
@@ -10021,7 +10208,7 @@
             DefaultMessage: "System error."
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.SystemException", Bridge.getTypeName(System.SystemException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.SystemException", Bridge.Reflection.getTypeFullName(System.SystemException), "Name");
             var d = new System.SystemException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.SystemException), "is SystemException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -10049,7 +10236,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.TaskCanceledExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Threading.Tasks.TaskCanceledException", Bridge.getTypeName(System.Threading.Tasks.TaskCanceledException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.Threading.Tasks.TaskCanceledException", Bridge.Reflection.getTypeFullName(System.Threading.Tasks.TaskCanceledException), "Name");
             var d = new System.Threading.Tasks.TaskCanceledException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Threading.Tasks.TaskCanceledException), "is TaskCanceledException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.OperationCanceledException), "is OperationCanceledException");
@@ -10096,7 +10283,7 @@
             DefaultMessage: "The operation has timed out."
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.TimeoutException", Bridge.getTypeName(System.TimeoutException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.TimeoutException", Bridge.Reflection.getTypeFullName(System.TimeoutException), "Name");
             var d = new System.TimeoutException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.TimeoutException), "is TimeoutException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.SystemException), "is SystemException");
@@ -10126,7 +10313,7 @@
     Bridge.define('Bridge.ClientTest.Format.DateTimeFormatInfoTests', {
         typePropertiesAreCorrect: function () {
             var format = System.Globalization.DateTimeFormatInfo.invariantInfo;
-            Bridge.Test.Assert.areEqual("System.Globalization.DateTimeFormatInfo", Bridge.getTypeName(System.Globalization.DateTimeFormatInfo));
+            Bridge.Test.Assert.areEqual("System.Globalization.DateTimeFormatInfo", Bridge.Reflection.getTypeFullName(System.Globalization.DateTimeFormatInfo));
             Bridge.Test.Assert.true(Bridge.hasValue(format));
         },
         getFormatWorks: function () {
@@ -10163,7 +10350,7 @@
     Bridge.define('Bridge.ClientTest.Format.NumberFormatInfoTests', {
         typePropertiesAreCorrect: function () {
             var format = System.Globalization.NumberFormatInfo.invariantInfo;
-            Bridge.Test.Assert.areEqual("System.Globalization.NumberFormatInfo", Bridge.getTypeName(System.Globalization.NumberFormatInfo));
+            Bridge.Test.Assert.areEqual("System.Globalization.NumberFormatInfo", Bridge.Reflection.getTypeFullName(System.Globalization.NumberFormatInfo));
             Bridge.Test.Assert.true(Bridge.hasValue(format));
         },
         getFormatWorks: function () {
@@ -13311,14 +13498,14 @@
                 var wordList1 = System.Linq.Enumerable.from((System.Linq.Enumerable.from(words).orderByDescending($_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f2))).toList(String);
                 var wordListExpected1 = new (System.Collections.Generic.List$1(String))(["3.three", "2.two", "1.one"]);
 
-                Bridge.Test.Assert.areEqual$1("System.Collections.Generic.List$1[[String]]", Bridge.ClientTest.Utilities.TypeHelper.getTypeName(wordList1), "ToList() conversion with explicit String type for string - check type name");
+                Bridge.Test.Assert.areEqual$1("System.Collections.Generic.List$1[[String]]", Bridge.Reflection.getTypeFullName(Bridge.getType(wordList1)), "ToList() conversion with explicit String type for string - check type name");
                 Bridge.Test.Assert.areDeepEqual$1(wordListExpected1, wordList1, "ToList() conversion for strings with explicit String type - check content");
 
                 // TEST
                 var wordList2 = (System.Linq.Enumerable.from(words).orderByDescending($_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f2)).toList(String);
                 var wordListExpected2 = new (System.Collections.Generic.List$1(String))(["3.three", "2.two", "1.one"]);
 
-                Bridge.Test.Assert.areEqual$1("System.Collections.Generic.List$1[[String]]", Bridge.ClientTest.Utilities.TypeHelper.getTypeName(wordList2), "ToList() conversion for string - check type name");
+                Bridge.Test.Assert.areEqual$1("System.Collections.Generic.List$1[[String]]", Bridge.Reflection.getTypeFullName(Bridge.getType(wordList2)), "ToList() conversion for string - check type name");
                 Bridge.Test.Assert.areDeepEqual$1(wordListExpected2, wordList2, "ToList() conversion for strings - check content");
 
                 // TEST
@@ -13342,7 +13529,7 @@
                     setName: "D",
                     setLimit: 200
                 } ));
-                Bridge.Test.Assert.areEqual$1("System.Collections.Generic.Dictionary$2[[String],[Bridge.ClientTest.Utilities.Group, Bridge.ClientTest]]", Bridge.ClientTest.Utilities.TypeHelper.getTypeName(groupDictionary1), "ToDictionary(keySelector, elementSelector) conversion for <string, Group> - check type name");
+                Bridge.Test.Assert.areEqual$1("System.Collections.Generic.Dictionary$2[[String],[Bridge.ClientTest.Utilities.Group, Bridge.ClientTest]]", Bridge.Reflection.getTypeFullName(Bridge.getType(groupDictionary1)), "ToDictionary(keySelector, elementSelector) conversion for <string, Group> - check type name");
                 Bridge.Test.Assert.areDeepEqual$1(expectedGroupDictionary1, groupDictionary1, "ToDictionary(keySelector, elementSelector) conversion for <string, Group> - check content");
 
                 // TEST
@@ -13368,13 +13555,13 @@
 
                 var groupDictionary2 = (System.Linq.Enumerable.from(groups).select($_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f3)).toDictionary($_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f4, $_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f3, String, Bridge.ClientTest.Utilities.Group, comparer);
 
-                Bridge.Test.Assert.areEqual$1("System.Collections.Generic.Dictionary$2[[String],[Bridge.ClientTest.Utilities.Group, Bridge.ClientTest]]", Bridge.ClientTest.Utilities.TypeHelper.getTypeName(groupDictionary2), "ToDictionary(keySelector, elementSelector, IEqualityComparer) conversion for <string, Group> - check type name");
+                Bridge.Test.Assert.areEqual$1("System.Collections.Generic.Dictionary$2[[String],[Bridge.ClientTest.Utilities.Group, Bridge.ClientTest]]", Bridge.Reflection.getTypeFullName(Bridge.getType(groupDictionary2)), "ToDictionary(keySelector, elementSelector, IEqualityComparer) conversion for <string, Group> - check type name");
                 Bridge.Test.Assert.areDeepEqual$1(expectedGroupDictionary2, groupDictionary2, "ToDictionary(keySelector, elementSelector, IEqualityComparer) conversion for <string, Group> - check content");
 
                 // TEST
                 var groupDictionary3 = (System.Linq.Enumerable.from(groups).select($_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f3)).toDictionary($_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f4, null, String, Bridge.ClientTest.Utilities.Group);
 
-                Bridge.Test.Assert.areEqual$1("System.Collections.Generic.Dictionary$2[[String],[Bridge.ClientTest.Utilities.Group, Bridge.ClientTest]]", Bridge.ClientTest.Utilities.TypeHelper.getTypeName(groupDictionary3), "ToDictionary(keySelector) conversion for <string, Group> - check type name");
+                Bridge.Test.Assert.areEqual$1("System.Collections.Generic.Dictionary$2[[String],[Bridge.ClientTest.Utilities.Group, Bridge.ClientTest]]", Bridge.Reflection.getTypeFullName(Bridge.getType(groupDictionary3)), "ToDictionary(keySelector) conversion for <string, Group> - check type name");
                 Bridge.Test.Assert.areDeepEqual$1(expectedGroupDictionary1, groupDictionary3, "ToDictionary(keySelector) conversion for <string, Group> - check content");
 
                 // TEST
@@ -15297,7 +15484,7 @@
 
     Bridge.define('Bridge.ClientTest.MultidimArrayTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("Array", Bridge.getTypeName(Array), "FullName should be Array");
+            Bridge.Test.Assert.areEqual$1("Array", Bridge.Reflection.getTypeFullName(Array), "FullName should be Array");
             var arr = System.Array.create(0, null, 1, 1);
             Bridge.Test.Assert.true$1(Bridge.is(arr, Array), "is Array should be true");
             Bridge.Test.Assert.true$1(Bridge.is(arr, Array), "is int[,] should be true");
@@ -15459,8 +15646,8 @@
         },
         typePropertiesAreCorrect: function () {
             var a = 3, b = null;
-            Bridge.Test.Assert.areEqual$1("Boolean", Bridge.getTypeName(Boolean), "Open FullName");
-            Bridge.Test.Assert.areEqual$1("System.Int32", Bridge.getTypeName(System.Int32), "Instantiated FullName");
+            Bridge.Test.Assert.areEqual$1("Boolean", Bridge.Reflection.getTypeFullName(Boolean), "Open FullName");
+            Bridge.Test.Assert.areEqual$1("System.Int32", Bridge.Reflection.getTypeFullName(System.Int32), "Instantiated FullName");
             Bridge.Test.Assert.true$1(Bridge.is(a, System.Int32), "is int? #1");
             Bridge.Test.Assert.false$1(Bridge.is(b, System.Int32), "is int? #2");
 
@@ -20077,7 +20264,7 @@
     Bridge.define('Bridge.ClientTest.SimpleTypes.BooleanTests', {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.true(Bridge.is(true, Boolean));
-            Bridge.Test.Assert.areEqual("Boolean", Bridge.getTypeName(Boolean));
+            Bridge.Test.Assert.areEqual("Boolean", Bridge.Reflection.getTypeFullName(Boolean));
         },
         getDefaultValue: function (T) {
             return Bridge.getDefaultValue(T);
@@ -20376,7 +20563,7 @@
             Bridge.Test.Assert.false(Bridge.is(0.5, System.Byte));
             Bridge.Test.Assert.false(Bridge.is(-1, System.Byte));
             Bridge.Test.Assert.false(Bridge.is(256, System.Byte));
-            Bridge.Test.Assert.areEqual("System.Byte", Bridge.getTypeName(System.Byte));
+            Bridge.Test.Assert.areEqual("System.Byte", Bridge.Reflection.getTypeFullName(System.Byte));
             var b = 0;
             Bridge.Test.Assert.true(Bridge.is(b, System.Byte));
             Bridge.Test.Assert.true(Bridge.is(b, System.IComparable$1(System.Byte)));
@@ -20555,7 +20742,7 @@
             Bridge.Test.Assert.false(Bridge.is(0.5, System.Char));
             Bridge.Test.Assert.false(Bridge.is(-1, System.Char));
             Bridge.Test.Assert.false(Bridge.is(65536, System.Char));
-            Bridge.Test.Assert.areEqual("System.Char", Bridge.getTypeName(System.Char));
+            Bridge.Test.Assert.areEqual("System.Char", Bridge.Reflection.getTypeFullName(System.Char));
         },
         castsWork: function () {
             var i1 = -1, i2 = 0, i3 = 234, i4 = 65535, i5 = 65536;
@@ -20733,7 +20920,7 @@
         },
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.true(Bridge.is(System.Decimal(0.5), System.Decimal));
-            Bridge.Test.Assert.areEqual("System.Decimal", Bridge.getTypeName(System.Decimal));
+            Bridge.Test.Assert.areEqual("System.Decimal", Bridge.Reflection.getTypeFullName(System.Decimal));
             var d = System.Decimal(0.0);
             Bridge.Test.Assert.true(Bridge.is(d, System.Decimal));
             Bridge.Test.Assert.true(Bridge.is(d, System.IFormattable));
@@ -20984,7 +21171,7 @@
     Bridge.define('Bridge.ClientTest.SimpleTypes.DoubleTests', {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.true(Bridge.is(0.5, System.Double));
-            Bridge.Test.Assert.areEqual("System.Double", Bridge.getTypeName(System.Double));
+            Bridge.Test.Assert.areEqual("System.Double", Bridge.Reflection.getTypeFullName(System.Double));
             var d = 0.0;
             Bridge.Test.Assert.true(Bridge.is(d, System.Double));
             Bridge.Test.Assert.true(Bridge.is(d, System.IFormattable));
@@ -21102,8 +21289,8 @@
 
     Bridge.define('Bridge.ClientTest.SimpleTypes.EnumTests', {
         typePropertiesAreCorrect: function () {
-            //Assert.AreEqual("System.Enum", typeof(Enum).GetClassName());
-            Bridge.Test.Assert.areEqual("Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum", Bridge.getTypeName(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum));
+            //Assert.AreEqual("System.Enum", typeof(Enum).FullName);
+            Bridge.Test.Assert.areEqual("Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum));
             Bridge.Test.Assert.true(Bridge.is(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.FirstValue, System.Int32));
         },
         getDefaultValue: function (T) {
@@ -21163,7 +21350,7 @@
             Bridge.Test.Assert.false(Bridge.is(0.5, System.Int16));
             Bridge.Test.Assert.false(Bridge.is(-32769, System.Int16));
             Bridge.Test.Assert.false(Bridge.is(32768, System.Int16));
-            Bridge.Test.Assert.areEqual("System.Int16", Bridge.getTypeName(System.Int16));
+            Bridge.Test.Assert.areEqual("System.Int16", Bridge.Reflection.getTypeFullName(System.Int16));
 
             var s = 0;
             Bridge.Test.Assert.true(Bridge.is(s, System.Int16));
@@ -21343,7 +21530,7 @@
             Bridge.Test.Assert.false(Bridge.is(0.5, System.Int32));
             Bridge.Test.Assert.false(Bridge.is(System.Int64([2147483647,-1]), System.Int32));
             Bridge.Test.Assert.false(Bridge.is(2147483648, System.Int32));
-            Bridge.Test.Assert.areEqual("System.Int32", Bridge.getTypeName(System.Int32));
+            Bridge.Test.Assert.areEqual("System.Int32", Bridge.Reflection.getTypeFullName(System.Int32));
 
             var i = 0;
             Bridge.Test.Assert.true(Bridge.is(i, System.Int32));
@@ -21586,7 +21773,7 @@
             }
 
             var typeMessage = System.String.concat(System.String.concat(message, "Type is "), checkedType);
-            Bridge.Test.Assert.areEqual$1(checkedType, Bridge.getTypeName(Bridge.getType(actual)), typeMessage);
+            Bridge.Test.Assert.areEqual$1(checkedType, Bridge.Reflection.getTypeFullName(Bridge.getType(actual)), typeMessage);
 
             Bridge.Test.Assert.areEqual$1(expected.toString(), actual.toString(), message);
         },
@@ -21594,7 +21781,7 @@
             Bridge.Test.Assert.true(Bridge.is(System.Int64(0), System.Int64));
             Bridge.Test.Assert.false(Bridge.is(0.5, System.Int64));
             Bridge.Test.Assert.false(Bridge.is(1E+100, System.Int64));
-            Bridge.Test.Assert.areEqual("System.Int64", Bridge.getTypeName(System.Int64));
+            Bridge.Test.Assert.areEqual("System.Int64", Bridge.Reflection.getTypeFullName(System.Int64));
 
             var l = System.Int64(0);
             Bridge.Test.Assert.true(Bridge.is(l, System.Int64));
@@ -21890,7 +22077,7 @@
             }
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual("Date", Bridge.getTypeName(Date));
+            Bridge.Test.Assert.areEqual("Date", Bridge.Reflection.getTypeFullName(Date));
             var o = new Date();
             Bridge.Test.Assert.true$1(Bridge.is(o, Date), "o is DateTime");
         },
@@ -22222,7 +22409,7 @@
     Bridge.define('Bridge.ClientTest.SimpleTypes.ObjectTests', {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.true(Bridge.hasValue({  }));
-            Bridge.Test.Assert.areEqual("Object", Bridge.getTypeName(Object));
+            Bridge.Test.Assert.areEqual("Object", Bridge.Reflection.getTypeFullName(Object));
         },
         canGetHashCodeForObject: function () {
             var o = {  };
@@ -22276,7 +22463,7 @@
             Bridge.Test.Assert.false(Bridge.is(0.5, System.SByte));
             Bridge.Test.Assert.false(Bridge.is(-129, System.SByte));
             Bridge.Test.Assert.false(Bridge.is(128, System.SByte));
-            Bridge.Test.Assert.areEqual("System.SByte", Bridge.getTypeName(System.SByte));
+            Bridge.Test.Assert.areEqual("System.SByte", Bridge.Reflection.getTypeFullName(System.SByte));
 
             var b = 0;
             Bridge.Test.Assert.true(Bridge.is(b, System.SByte));
@@ -22448,7 +22635,7 @@
     Bridge.define('Bridge.ClientTest.SimpleTypes.SingleTests', {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.true(Bridge.is(0.5, System.Single));
-            Bridge.Test.Assert.areEqual("System.Single", Bridge.getTypeName(System.Single));
+            Bridge.Test.Assert.areEqual("System.Single", Bridge.Reflection.getTypeFullName(System.Single));
 
             var f = 0.0;
             Bridge.Test.Assert.true(Bridge.is(f, System.Single));
@@ -22730,7 +22917,7 @@
             }
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual("String", Bridge.getTypeName(String));
+            Bridge.Test.Assert.areEqual("String", Bridge.Reflection.getTypeFullName(String));
             var s = "X";
             Bridge.Test.Assert.true(Bridge.is(s, String));
         },
@@ -23575,7 +23762,7 @@
 
     Bridge.define('Bridge.ClientTest.SimpleTypes.TimeSpanTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual("System.TimeSpan", Bridge.getTypeName(System.TimeSpan));
+            Bridge.Test.Assert.areEqual("System.TimeSpan", Bridge.Reflection.getTypeFullName(System.TimeSpan));
             var d = new System.TimeSpan();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.TimeSpan), "d is TimeSpan");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.IComparable$1(System.TimeSpan)), "d is IComparable<TimeSpan>");
@@ -23888,7 +24075,7 @@
             Bridge.Test.Assert.false(Bridge.is(0.5, System.UInt16));
             Bridge.Test.Assert.false(Bridge.is(-1, System.UInt16));
             Bridge.Test.Assert.false(Bridge.is(65536, System.UInt16));
-            Bridge.Test.Assert.areEqual("System.UInt16", Bridge.getTypeName(System.UInt16));
+            Bridge.Test.Assert.areEqual("System.UInt16", Bridge.Reflection.getTypeFullName(System.UInt16));
 
             var s = 0;
             Bridge.Test.Assert.true(Bridge.is(s, System.UInt16));
@@ -24068,7 +24255,7 @@
             Bridge.Test.Assert.false(Bridge.is(0.5, System.UInt32));
             Bridge.Test.Assert.false(Bridge.is(-1, System.UInt32));
             Bridge.Test.Assert.false(Bridge.is(System.Int64([0,1]), System.UInt32));
-            Bridge.Test.Assert.areEqual("System.UInt32", Bridge.getTypeName(System.UInt32));
+            Bridge.Test.Assert.areEqual("System.UInt32", Bridge.Reflection.getTypeFullName(System.UInt32));
             var i = 0;
             Bridge.Test.Assert.true(Bridge.is(i, System.UInt32));
             Bridge.Test.Assert.true(Bridge.is(i, System.IComparable$1(System.UInt32)));
@@ -24246,14 +24433,14 @@
             }
 
             var typeMessage = System.String.concat(System.String.concat(message, "Type is "), checkedType);
-            Bridge.Test.Assert.areEqual$1(checkedType, Bridge.getTypeName(Bridge.getType(actual)), typeMessage);
+            Bridge.Test.Assert.areEqual$1(checkedType, Bridge.Reflection.getTypeFullName(Bridge.getType(actual)), typeMessage);
 
             Bridge.Test.Assert.areEqual$1(expected.toString(), actual.toString(), message);
         },
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.true(Bridge.is(System.UInt64(0), System.UInt64));
             Bridge.Test.Assert.false(Bridge.is(0.5, System.UInt64));
-            Bridge.Test.Assert.areEqual("System.UInt64", Bridge.getTypeName(System.UInt64));
+            Bridge.Test.Assert.areEqual("System.UInt64", Bridge.Reflection.getTypeFullName(System.UInt64));
             var l = System.UInt64(0);
             Bridge.Test.Assert.true(Bridge.is(l, System.UInt64));
             Bridge.Test.Assert.true(Bridge.is(l, System.IComparable$1(System.UInt64)));
@@ -24612,7 +24799,7 @@
         },
         typePropertiesAreCorrect: function () {
             var re = new RegExp("");
-            Bridge.Test.Assert.areEqual("RegExp", Bridge.getTypeName(RegExp));
+            Bridge.Test.Assert.areEqual("RegExp", Bridge.Reflection.getTypeFullName(RegExp));
             Bridge.Test.Assert.true(Bridge.hasValue(re));
         },
         stringOnlyConstructorWorks: function () {
@@ -25185,7 +25372,7 @@
         },
         typePropertiesAreCorrect: function () {
             var sb = new System.Text.StringBuilder();
-            Bridge.Test.Assert.areEqual("System.Text.StringBuilder", Bridge.getTypeName(System.Text.StringBuilder));
+            Bridge.Test.Assert.areEqual("System.Text.StringBuilder", Bridge.Reflection.getTypeFullName(System.Text.StringBuilder));
             Bridge.Test.Assert.true(Bridge.hasValue(sb));
         },
         defaultConstructorWorks: function () {
@@ -25688,20 +25875,20 @@
 
     Bridge.define('Bridge.ClientTest.Threading.CancellationTokenTests', {
         typePropertiesForCancellationTokenSourceAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Threading.CancellationTokenSource", Bridge.getTypeName(System.Threading.CancellationTokenSource), "FullName");
+            Bridge.Test.Assert.areEqual$1("System.Threading.CancellationTokenSource", Bridge.Reflection.getTypeFullName(System.Threading.CancellationTokenSource), "FullName");
             var cts = new System.Threading.CancellationTokenSource();
             Bridge.Test.Assert.true(Bridge.is(cts, System.Threading.CancellationTokenSource));
             Bridge.Test.Assert.true(Bridge.is(cts, System.IDisposable));
         },
         typePropertiesForCancellationTokenAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Threading.CancellationToken", Bridge.getTypeName(System.Threading.CancellationToken), "FullName");
+            Bridge.Test.Assert.areEqual$1("System.Threading.CancellationToken", Bridge.Reflection.getTypeFullName(System.Threading.CancellationToken), "FullName");
 
             Bridge.Test.Assert.true(Bridge.hasValue(new System.Threading.CancellationToken()));
             Bridge.Test.Assert.true(Bridge.hasValue(System.Threading.CancellationToken.none));
             Bridge.Test.Assert.true(Bridge.hasValue(new System.Threading.CancellationTokenSource().token));
         },
         typePropertiesForCancellationTokenRegistrationAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Threading.CancellationTokenRegistration", Bridge.getTypeName(System.Threading.CancellationTokenRegistration), "FullName");
+            Bridge.Test.Assert.areEqual$1("System.Threading.CancellationTokenRegistration", Bridge.Reflection.getTypeFullName(System.Threading.CancellationTokenRegistration), "FullName");
 
             var ctr = new System.Threading.CancellationTokenRegistration();
             Bridge.Test.Assert.true$1(Bridge.is(ctr, System.Threading.CancellationTokenRegistration), "CancellationTokenRegistration");
@@ -26309,7 +26496,7 @@
                                     continue;
                                 }
                                 case 4: {
-                                    Bridge.Test.Assert.fail$1(System.String.concat("Thrown exception should have been an AggregateException, was ", Bridge.getTypeName(ex1)));
+                                    Bridge.Test.Assert.fail$1(System.String.concat("Thrown exception should have been an AggregateException, was ", Bridge.Reflection.getTypeFullName(Bridge.getType(ex1))));
                                     $async_e = null;
                                     $step = 5;
                                     continue;
@@ -26533,13 +26720,13 @@
             return System.Array.toEnumerable($yield);
         },
         taskCompletionSourceTypePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Threading.Tasks.TaskCompletionSource", Bridge.getTypeName(System.Threading.Tasks.TaskCompletionSource), "FullName should be correct");
+            Bridge.Test.Assert.areEqual$1("System.Threading.Tasks.TaskCompletionSource", Bridge.Reflection.getTypeFullName(System.Threading.Tasks.TaskCompletionSource), "FullName should be correct");
             var tcs = new System.Threading.Tasks.TaskCompletionSource();
             Bridge.Test.Assert.true(Bridge.hasValue(tcs));
         },
         taskTypePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Threading.Tasks.Task", Bridge.getTypeName(System.Threading.Tasks.Task), "FullName for non-generic task should be correct");
-            Bridge.Test.Assert.areEqual$1("System.Threading.Tasks.Task", Bridge.getTypeName(System.Threading.Tasks.Task), "FullName for generic task should be correct");
+            Bridge.Test.Assert.areEqual$1("System.Threading.Tasks.Task", Bridge.Reflection.getTypeFullName(System.Threading.Tasks.Task), "FullName for non-generic task should be correct");
+            Bridge.Test.Assert.areEqual$1("System.Threading.Tasks.Task", Bridge.Reflection.getTypeFullName(System.Threading.Tasks.Task), "FullName for generic task should be correct");
 
             var task = new System.Threading.Tasks.TaskCompletionSource().task;
             Bridge.Test.Assert.true(Bridge.hasValue(task));
@@ -28534,15 +28721,6 @@
                 City: null,
                 Count: 0,
                 Group: null
-            }
-        }
-    });
-
-    Bridge.define('Bridge.ClientTest.Utilities.TypeHelper', {
-        statics: {
-            getTypeName: function (o) {
-                return Bridge.getTypeName(o);
-                // return Script.Get<string>("o.__proto__.$$name");
             }
         }
     });
@@ -30911,10 +31089,10 @@
 
     Bridge.apply($_.Bridge.ClientTest.Text.RegularExpressions.Entities.RegexCaptureCollectionTests, {
         f1: function (err) {
-            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(System.ArgumentNullException));
+            return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(System.ArgumentNullException));
         },
         f2: function (err) {
-            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(System.IndexOutOfRangeException));
+            return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(System.IndexOutOfRangeException));
         }
     });
 
@@ -31464,10 +31642,10 @@
 
     Bridge.apply($_.Bridge.ClientTest.Text.RegularExpressions.Entities.RegexGroupCollectionTests, {
         f1: function (err) {
-            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(System.ArgumentNullException));
+            return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(System.ArgumentNullException));
         },
         f2: function (err) {
-            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(System.IndexOutOfRangeException));
+            return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(System.IndexOutOfRangeException));
         }
     });
 
@@ -31610,10 +31788,10 @@
 
     Bridge.apply($_.Bridge.ClientTest.Text.RegularExpressions.Entities.RegexMatchCollectionTests, {
         f1: function (err) {
-            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(System.ArgumentNullException));
+            return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(System.ArgumentNullException));
         },
         f2: function (err) {
-            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(System.IndexOutOfRangeException));
+            return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(System.IndexOutOfRangeException));
         }
     });
 
