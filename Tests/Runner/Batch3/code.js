@@ -7762,10 +7762,28 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1754', {
         testAllUpperCaseNames: function () {
             var app = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1754.App();
+
             app.setPROP1("PROP1");
+            app.addSOME_EVENT($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1754.f1);
+            app.addANOTHER_EVENt($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1754.f1);
+
             Bridge.Test.Assert.areEqual("ID", app.ID);
             Bridge.Test.Assert.areEqual("x", app.x);
             Bridge.Test.Assert.areEqual("PROP1", app.getPROP1());
+            Bridge.Test.Assert.notNull$1(app.FOO, "FOO");
+            Bridge.Test.Assert.notNull$1(app.m, "m");
+            Bridge.Test.Assert.notNull$1(app.m$1, "m$1");
+            Bridge.Test.Assert.notNull$1(app.AB, "AB");
+            // We do not change event name case
+            Bridge.Test.Assert.notNull$1(app.SOME_EVENT, "SOME_EVENT");
+            Bridge.Test.Assert.notNull$1(app.ANOTHER_EVENt, "ANOTHER_EVENt");
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1754", $_);
+
+    Bridge.apply($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1754, {
+        f1: function (sender, e) {
         }
     });
 
@@ -7774,11 +7792,32 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         x: "x",
         CONFIG_VAL1: "CONFIG_VAL1",
         config: {
+            events: {
+                SOME_EVENT: null,
+                ANOTHER_EVENt: null
+            },
             properties: {
                 PROP1: null
             }
         },
         FOO: function () {
+        },
+        m: function (i) {
+        },
+        m$1: function (s) {
+        },
+        AB: function (i) {
+        },
+        AB$1: function (s) {
+        },
+        useEvents: function () {
+            if (!Bridge.staticEquals(this.SOME_EVENT, null)) {
+                this.SOME_EVENT(null, null);
+            }
+
+            if (!Bridge.staticEquals(this.ANOTHER_EVENt, null)) {
+                this.ANOTHER_EVENt(null, null);
+            }
         }
     });
 
