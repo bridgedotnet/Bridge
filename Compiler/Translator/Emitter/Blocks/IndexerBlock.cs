@@ -715,7 +715,7 @@ namespace Bridge.Translator
                     {
                         this.WriteOpenParentheses();
                     }
-                    
+
                     new ExpressionListBlock(this.Emitter, argsExpressions, paramsArg, null, 0).Emit();
                     this.WriteCloseParentheses();
                 }
@@ -777,7 +777,7 @@ namespace Bridge.Translator
                             ", ",
                             targetVar,
                             getterMember,
-                            isBase ? ".call" : "",
+                            isBase ? "." + JS.Funcs.CALL : "",
                             "(",
                             isBase ? "this, " : "",
                             paramsStr,
@@ -806,7 +806,7 @@ namespace Bridge.Translator
                             ", ",
                             trg,
                             getterMember,
-                            isBase ? ".call" : "",
+                            isBase ? "." + JS.Funcs.CALL : "",
                             "(",
                             isBase ? "this, " : "",
                             paramsStr,
