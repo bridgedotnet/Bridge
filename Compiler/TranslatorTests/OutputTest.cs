@@ -85,11 +85,7 @@ namespace Bridge.Translator.Tests
         [TestCase("06", true, true, TestName = "OutputTest 06 - Bridge.json outputBy Project useTypedArrays CheckForOverflowUnderflow")]
         [TestCase("07", true, true, TestName = "OutputTest 07 - Bridge.json module generateDocumentation Full")]
         [TestCase("10", true, true, TestName = "OutputTest 10 - Bridge.json fileNameCasing None generateDocumentation Basic")]
-#if UNIX
-        [TestCase("11", true, true, TestName = "OutputTest 11 - Bridge.json generateTypeScript", Ignore = "Bridge issue #1731")]
-#else
         [TestCase("11", true, true, TestName = "OutputTest 11 - Bridge.json generateTypeScript")]
-#endif
         [TestCase("15", true, true, TestName = "OutputTest 15 - Bridge.json filename Define project constant #375")]
         [TestCase("16", true, true, TestName = "OutputTest 16 - Issues")]
         [TestCase("18", true, true, TestName = "OutputTest 18 - Features")]
