@@ -4,7 +4,7 @@ namespace Test.BridgeIssues.N524
 {
     internal class Bridge524
     {
-        [Ignore]
+        [External]
         public class ImmutableList<T>
         {
             /// <summary>
@@ -24,10 +24,10 @@ namespace Test.BridgeIssues.N524
                 get;
             }
 
-            [Ignore]
+            [External]
             public extern ImmutableList<T> push(params T[] values);
 
-            [Ignore]
+            [External]
             public extern T[] ToArray();
         }
 

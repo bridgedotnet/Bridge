@@ -3,7 +3,7 @@ using System;
 
 namespace Test.BridgeIssues.N475B
 {
-    [Ignore]
+    [External]
     public static class Bridge475Extension2
     {
         public static Bridge475 KeyDown<T>(this Bridge475 entity, string handler)
@@ -12,7 +12,7 @@ namespace Test.BridgeIssues.N475B
         }
     }
 
-    [Ignore]
+    [External]
     public static class Bridge475Extension1
     {
         public static Bridge475 KeyDown<T>(this Bridge475 entity, Action<T> handler)
@@ -21,7 +21,7 @@ namespace Test.BridgeIssues.N475B
         }
     }
 
-    [Ignore]
+    [External]
     public class Bridge475
     {
         public Bridge475 KeyDown<T>(int i)
