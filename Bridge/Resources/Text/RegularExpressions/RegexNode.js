@@ -19,7 +19,7 @@
             }
         },
 
-        constructor: function (type, options, arg) {
+        ctor: function (type, options, arg) {
             this.$initialize();
             this._type = type;
             this._options = options;

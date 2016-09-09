@@ -98,7 +98,7 @@
         operaPostErrorDefined: false,
         currentMessageElement: null,
         bufferedOutput: null,
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
             this.init();
         },

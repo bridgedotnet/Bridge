@@ -25,7 +25,7 @@ namespace Bridge.ClientTest.Exceptions
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.Exception", typeof(Exception).GetClassName(), "Name");
+            Assert.AreEqual("System.Exception", typeof(Exception).FullName, "Name");
             object d = new Exception();
             Assert.True(d is Exception);
         }

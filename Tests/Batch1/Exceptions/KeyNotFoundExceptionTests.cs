@@ -11,7 +11,7 @@ namespace Bridge.ClientTest.Exceptions
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.Collections.Generic.KeyNotFoundException", typeof(KeyNotFoundException).GetClassName(), "Name");
+            Assert.AreEqual("System.Collections.Generic.KeyNotFoundException", typeof(KeyNotFoundException).FullName, "Name");
             object d = new KeyNotFoundException();
             Assert.True(d is KeyNotFoundException, "is KeyNotFoundException");
             Assert.True(d is Exception, "is Exception");

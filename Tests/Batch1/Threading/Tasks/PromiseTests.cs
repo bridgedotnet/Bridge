@@ -286,7 +286,7 @@ namespace Bridge.ClientTest.Threading
             }
             catch (Exception ex)
             {
-                Assert.Fail("Thrown exception should have been an AggregateException, was " + ex.GetClassName());
+                Assert.Fail("Thrown exception should have been an AggregateException, was " + ex.GetType().FullName);
             }
 
             Assert.True(continuationRun, "Continuation should have been run after promise was rejected.");

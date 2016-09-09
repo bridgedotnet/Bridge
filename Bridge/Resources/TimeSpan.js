@@ -33,7 +33,7 @@
                 return new System.TimeSpan(value);
             },
 
-            constructor: function () {
+            ctor: function () {
                 this.zero = new System.TimeSpan(System.Int64.Zero);
                 this.maxValue = new System.TimeSpan(System.Int64.MaxValue);
                 this.minValue = new System.TimeSpan(System.Int64.MinValue);
@@ -84,7 +84,7 @@
             }
         },
 
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
             this.ticks = System.Int64.Zero;
 

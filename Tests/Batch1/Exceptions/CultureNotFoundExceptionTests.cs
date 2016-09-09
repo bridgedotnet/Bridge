@@ -14,7 +14,7 @@ namespace Bridge.ClientTest.Exceptions
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.Globalization.CultureNotFoundException", typeof(CultureNotFoundException).GetClassName(), "Name");
+            Assert.AreEqual("System.Globalization.CultureNotFoundException", typeof(CultureNotFoundException).FullName, "Name");
             object d = new CultureNotFoundException();
             Assert.True(d is CultureNotFoundException);
             Assert.True(d is Exception);

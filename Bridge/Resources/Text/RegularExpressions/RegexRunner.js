@@ -13,7 +13,7 @@
         _quick: false, // true value means IsMatch method call
         _prevlen: 0,
 
-        constructor: function (regex) {
+        ctor: function (regex) {
             this.$initialize();
             if (regex == null) {
                 throw new System.ArgumentNullException("regex");

@@ -3,11 +3,11 @@
 
     Bridge.define('Classes.Animal', {
         name: null,
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
             this.name = "Animal";
         },
-        $constructor1: function (name) {
+        $ctor1: function (name) {
             this.$initialize();
             this.name = name;
         },
@@ -45,12 +45,12 @@
         },
         x: 0,
         y: 0,
-        $constructor1: function (x, y) {
+        $ctor1: function (x, y) {
             this.$initialize();
             this.x = x;
             this.y = y;
         },
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
         },
         getHashCode: function () {
@@ -77,16 +77,16 @@
     Bridge.define('Classes.StaticClass', {
         statics: {
             move: function (p, dx, dy) {
-                return new Classes.Point.$constructor1(((p.x + dx) | 0), ((p.y + dy) | 0));
+                return new Classes.Point.$ctor1(((p.x + dx) | 0), ((p.y + dy) | 0));
             }
         }
     });
 
     Bridge.define('Classes.Dog', {
         inherits: [Classes.Animal],
-        constructor: function (name) {
+        ctor: function (name) {
             this.$initialize();
-            Classes.Animal.$constructor1.call(this, name);
+            Classes.Animal.$ctor1.call(this, name);
         },
         move$1: function () {
             return 20;
@@ -97,9 +97,9 @@
         inherits: [Classes.Animal],
         name$1: null,
         id: 0,
-        constructor: function (name, id) {
+        ctor: function (name, id) {
             this.$initialize();
-            Classes.Animal.$constructor1.call(this, name);
+            Classes.Animal.$ctor1.call(this, name);
             this.name$1 = name;
             this.id = id;
         }
@@ -107,9 +107,9 @@
 
     Bridge.define('Classes.Snake', {
         inherits: [Classes.Animal],
-        constructor: function (name) {
+        ctor: function (name) {
             this.$initialize();
-            Classes.Animal.$constructor1.call(this, name);
+            Classes.Animal.$ctor1.call(this, name);
         },
         move: function () {
             return 5;

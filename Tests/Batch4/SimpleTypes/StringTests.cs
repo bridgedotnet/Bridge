@@ -60,7 +60,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
             Assert.True(s is IEquatable<string>);
 
             var interfaces = typeof(string).GetInterfaces();
-            Assert.AreEqual(2, interfaces.Length);
+            Assert.AreEqual(6, interfaces.Length);
             Assert.True(interfaces.Contains(typeof(IComparable<string>)));
             Assert.True(interfaces.Contains(typeof(IEquatable<string>)));
         }

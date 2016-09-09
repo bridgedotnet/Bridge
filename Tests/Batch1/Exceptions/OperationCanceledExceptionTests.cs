@@ -11,7 +11,7 @@ namespace Bridge.ClientTest.Exceptions
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.OperationCanceledException", typeof(OperationCanceledException).GetClassName(), "Name");
+            Assert.AreEqual("System.OperationCanceledException", typeof(OperationCanceledException).FullName, "Name");
             object d = new OperationCanceledException();
             Assert.True(d is OperationCanceledException, "is OperationCanceledException");
             Assert.True(d is Exception, "is Exception");

@@ -960,9 +960,9 @@ namespace Bridge.ClientTest.Batch4.Reflection
             var c11 = typeof(C11).GetMembers();
             var c19 = typeof(C19).GetMembers();
             var c20 = typeof(C20).GetMembers();
-            Assert.True(((ConstructorInfo)c10[0]).ScriptName == "$constructor", "Unnamed");
-            Assert.AreEqual("$constructor1", ((ConstructorInfo)c10[1]).ScriptName, "Named");
-            Assert.AreEqual("$constructor", ((ConstructorInfo)c11[0]).ScriptName, "Static method");
+            Assert.True(((ConstructorInfo)c10[0]).ScriptName == "ctor", "Unnamed");
+            Assert.AreEqual("$ctor1", ((ConstructorInfo)c10[1]).ScriptName, "Named");
+            Assert.AreEqual("ctor", ((ConstructorInfo)c11[0]).ScriptName, "Static method");
             Assert.True(((ConstructorInfo)c19[0]).ScriptName == null, "Object literal");
             Assert.True(((ConstructorInfo)c20[0]).ScriptName == null, "Inline code");
         }

@@ -28,8 +28,8 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            //Assert.AreEqual("System.Enum", typeof(Enum).GetClassName());
-            Assert.AreEqual("Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum", typeof(TestEnum).GetClassName());
+            //Assert.AreEqual("System.Enum", typeof(Enum).FullName);
+            Assert.AreEqual("Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum", typeof(TestEnum).FullName);
             Assert.True((object)TestEnum.FirstValue is TestEnum);
         }
 

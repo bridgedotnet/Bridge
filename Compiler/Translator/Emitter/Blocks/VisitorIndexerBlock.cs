@@ -71,7 +71,7 @@ namespace Bridge.Translator
                     if (string.IsNullOrEmpty(accName))
                     {
                         var overloads = OverloadsCollection.Create(this.Emitter, indexerDeclaration, setter);
-                        accName = Helpers.GetSetOrGet(setter) + overloads.GetOverloadName();
+                        accName = overloads.GetOverloadName(false, Helpers.GetSetOrGet(setter), true);
                     }
                 }
 

@@ -22,7 +22,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
             Assert.True(b is IEquatable<bool>);
 
             var interfaces = typeof(bool).GetInterfaces();
-            Assert.AreEqual(2, interfaces.Length);
+            Assert.AreEqual(3, interfaces.Length);
             Assert.True(interfaces.Contains(typeof(IComparable<bool>)));
             Assert.True(interfaces.Contains(typeof(IEquatable<bool>)));
         }

@@ -35,7 +35,7 @@
             "setName", "TestIssue960$IHaveNamed$setName"
             ]
         },
-        constructor: function (name) {
+        ctor: function (name) {
             this.$initialize();
             this.setName(name);
         }

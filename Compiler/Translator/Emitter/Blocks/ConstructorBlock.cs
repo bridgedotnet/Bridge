@@ -261,7 +261,7 @@ namespace Bridge.Translator
         {
             var ctorWrappers = this.EmitInitMembers().ToArray();
 
-            if (!this.TypeInfo.HasInstantiable && ctorWrappers.Length == 0)
+            if (!this.TypeInfo.HasRealInstantiable(this.Emitter) && ctorWrappers.Length == 0)
             {
                 return;
             }
@@ -512,11 +512,6 @@ namespace Bridge.Translator
                     }
                 }
 
-                if (baseName == JS.Funcs.CONSTRUCTOR)
-                {
-                    baseName = JS.Funcs.DCONSTRUCTOR;
-                }
-
                 string name = null;
 
                 if (this.TypeInfo.GetBaseTypes(this.Emitter).Any())
@@ -546,11 +541,6 @@ namespace Bridge.Translator
                 if (overloads.HasOverloads)
                 {
                     baseName = overloads.GetOverloadName();
-                }
-
-                if (baseName == JS.Funcs.CONSTRUCTOR)
-                {
-                    baseName = JS.Funcs.DCONSTRUCTOR;
                 }
 
                 this.Write(baseName);
