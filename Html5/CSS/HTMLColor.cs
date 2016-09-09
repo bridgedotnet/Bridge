@@ -49,6 +49,12 @@ namespace Bridge.Html5
         public const string Purple = "purple";
 
         /// <summary>
+        /// rgb(102, 51, 153)
+        /// </summary>
+        [InlineConst]
+        public const string RebeccaPurple = "rebeccapurple";
+
+        /// <summary>
         /// rgb(255,   0, 255)
         /// </summary>
         [InlineConst]
@@ -211,6 +217,12 @@ namespace Bridge.Html5
         public const string Crimson = "crimson";
 
         /// <summary>
+        /// rgb(0, 255, 255)
+        /// </summary>
+        [InlineConst]
+        public const string Cyan = "cyan";
+
+        /// <summary>
         /// rgb(  0,   0, 139)
         /// </summary>
         [InlineConst]
@@ -307,6 +319,12 @@ namespace Bridge.Html5
         public const string DarkSlateGray = "darkslategray";
 
         /// <summary>
+        /// rgb( 47,  79,  79)
+        /// </summary>
+        [InlineConst]
+        public const string DarkSlateGrey = "darkslategrey";
+
+        /// <summary>
         /// rgb(  0, 206, 209)
         /// </summary>
         [InlineConst]
@@ -335,6 +353,12 @@ namespace Bridge.Html5
         /// </summary>
         [InlineConst]
         public const string DimGray = "dimgray";
+
+        /// <summary>
+        /// rgb(105, 105, 105)
+        /// </summary>
+        [InlineConst]
+        public const string DimGrey = "dimgrey";
 
         /// <summary>
         /// rgb( 30, 144, 255)
@@ -487,6 +511,12 @@ namespace Bridge.Html5
         public const string LightGray = "lightgray";
 
         /// <summary>
+        /// rgb(211, 211, 211)
+        /// </summary>
+        [InlineConst]
+        public const string LightGrey = "lightgrey";
+
+        /// <summary>
         /// rgb(144, 238, 144)
         /// </summary>
         [InlineConst]
@@ -551,6 +581,12 @@ namespace Bridge.Html5
         /// </summary>
         [InlineConst]
         public const string Linen = "linen";
+
+        /// <summary>
+        /// rgb(255, 0, 255)
+        /// </summary>
+        [InlineConst]
+        public const string Magenta = "magenta";
 
         /// <summary>
         /// rgb(102, 205, 170)
