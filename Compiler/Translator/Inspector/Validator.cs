@@ -49,23 +49,20 @@ namespace Bridge.Translator
 
         public virtual bool IsIgnoreType(ICustomAttributeProvider type, bool ignoreLiteral = false)
         {
-            string ignoreAttr = Translator.Bridge_ASSEMBLY + ".IgnoreAttribute";
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
             string objectLiteralAttr = Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute";
             string nonScriptableAttr = Translator.Bridge_ASSEMBLY + ".NonScriptableAttribute";
 
-            return this.HasAttribute(type.CustomAttributes, ignoreAttr) || this.HasAttribute(type.CustomAttributes, externalAttr) || (!ignoreLiteral && this.HasAttribute(type.CustomAttributes, objectLiteralAttr)) || this.HasAttribute(type.CustomAttributes, nonScriptableAttr);
+            return this.HasAttribute(type.CustomAttributes, externalAttr) || (!ignoreLiteral && this.HasAttribute(type.CustomAttributes, objectLiteralAttr)) || this.HasAttribute(type.CustomAttributes, nonScriptableAttr);
         }
 
         public virtual bool IsIgnoreType(IEntity enity, bool ignoreLiteral = false)
         {
-            string ignoreAttr = Translator.Bridge_ASSEMBLY + ".IgnoreAttribute";
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
             string objectLiteralAttr = Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute";
             string nonScriptableAttr = Translator.Bridge_ASSEMBLY + ".NonScriptableAttribute";
 
-            return this.HasAttribute(enity.Attributes, ignoreAttr)
-                   || this.HasAttribute(enity.Attributes, externalAttr)
+            return this.HasAttribute(enity.Attributes, externalAttr)
                    || (!ignoreLiteral && this.HasAttribute(enity.Attributes, objectLiteralAttr))
                    || this.HasAttribute(enity.Attributes, nonScriptableAttr);
         }
@@ -85,11 +82,10 @@ namespace Bridge.Translator
 
         public virtual bool IsIgnoreType(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition, bool ignoreLiteral = false)
         {
-            string ignoreAttr = Translator.Bridge_ASSEMBLY + ".IgnoreAttribute";
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
             string objectLiteralAttr = Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute";
 
-            return typeDefinition.Attributes.Any(attr => attr.Constructor != null && ((attr.Constructor.DeclaringType.FullName == ignoreAttr) || (attr.Constructor.DeclaringType.FullName == externalAttr) || (!ignoreLiteral && attr.Constructor.DeclaringType.FullName == objectLiteralAttr)));
+            return typeDefinition.Attributes.Any(attr => attr.Constructor != null && ((attr.Constructor.DeclaringType.FullName == externalAttr) || (!ignoreLiteral && attr.Constructor.DeclaringType.FullName == objectLiteralAttr)));
         }
 
         public virtual bool IsExternalInterface(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition)

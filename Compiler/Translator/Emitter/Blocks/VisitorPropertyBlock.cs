@@ -37,7 +37,6 @@ namespace Bridge.Translator
 
             if (memberResult != null &&
                 (memberResult.Member.Attributes.Any(a => a.AttributeType.FullName == "Bridge.FieldPropertyAttribute" ||
-                    a.AttributeType.FullName == "Bridge.IgnoreAttribute" ||
                     a.AttributeType.FullName == "Bridge.ExternalAttribute") ||
                 (propertyDeclaration.Getter.IsNull && propertyDeclaration.Setter.IsNull)))
             {

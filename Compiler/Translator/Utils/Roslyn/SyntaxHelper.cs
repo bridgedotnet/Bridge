@@ -539,12 +539,10 @@ namespace Bridge.Translator
 
         private static bool IsIgnoreType(ISymbol symbol)
         {
-            string ignoreAttr = Translator.Bridge_ASSEMBLY + ".IgnoreAttribute";
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
             string objectLiteralAttr = Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute";
 
-            return SyntaxHelper.HasAttribute(symbol.GetAttributes(), ignoreAttr)
-                   || SyntaxHelper.HasAttribute(symbol.GetAttributes(), externalAttr)
+            return SyntaxHelper.HasAttribute(symbol.GetAttributes(), externalAttr)
                    || SyntaxHelper.HasAttribute(symbol.GetAttributes(), objectLiteralAttr);
         }
 
