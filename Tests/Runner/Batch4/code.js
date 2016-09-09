@@ -1691,7 +1691,7 @@
                 sb.appendLine(System.String.concat("got ", enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]()));
             }
 
-            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
+            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
         },
         prematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks_SPI_1555: function () {
             // #1555
@@ -1704,7 +1704,7 @@
             }
             enm.System$IDisposable$dispose();
 
-            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
+            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
         },
         exceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
             var sb = new System.Text.StringBuilder();
@@ -1728,7 +1728,7 @@
                 sb.appendLine("caught exception");
             }
 
-            this.assertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
+            this.assertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
         },
         typeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface_SPI_1554: function () {
             var enm = null;
@@ -1759,7 +1759,7 @@
                 sb.appendLine(System.String.concat("got ", i1));
             }
 
-            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n-\nyielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
+            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n-\r\nyielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
         },
         prematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks_SPI_1555: function () {
             var $t;
@@ -1775,7 +1775,7 @@
                 }
             }
 
-            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
+            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
         },
         exceptionInIEnumerableIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
             var sb = new System.Text.StringBuilder();
@@ -1800,7 +1800,7 @@
                 sb.appendLine("caught exception");
             }
 
-            this.assertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
+            this.assertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
         },
         enumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters: function () {
             var $t, $t1;
@@ -1818,7 +1818,7 @@
                 sb.appendLine(i1.toString());
             }
 
-            this.assertEqual(sb.toString(), "3\n2\n1\n3\n2\n1\n");
+            this.assertEqual(sb.toString(), "3\r\n2\r\n1\r\n3\r\n2\r\n1\r\n");
         },
         differentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals: function () {
             var sb = new System.Text.StringBuilder();
@@ -1833,7 +1833,7 @@
                 sb.appendLine(enm2[Bridge.geti(enm2, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]().toString());
             }
 
-            this.assertEqual(sb.toString(), "0\n0\n1\n1\n2\n2\n-1\n-1\n");
+            this.assertEqual(sb.toString(), "0\r\n0\r\n1\r\n1\r\n2\r\n2\r\n-1\r\n-1\r\n");
         }
     });
 
@@ -11535,7 +11535,7 @@
         scriptNameWorksForAllKindsOfMethods: function () {
             Bridge.Test.Assert.areEqual$1("m$1", Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C4, 8, 284, "M", [System.Int32]).sname, "C4.M");
             Bridge.Test.Assert.true$1(Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C21, 8, 284, "M1").sname == null, "C21.M1");
-            Bridge.Test.Assert.areEqual$1("m1", Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C7, 8, 284, "M1").sname, "C7.m1");
+            Bridge.Test.Assert.areEqual$1("M1", Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C7, 8, 284, "M1").sname, "C7.M1");
         },
         specialImplementationExistsOnlyForMethodsImplementedAsInlineCode: function () {
             Bridge.Test.Assert.true$1(Bridge.staticEquals(Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C4, 8, 284, "M", [System.Int32]).def, null), "C4.M");
@@ -11814,7 +11814,7 @@
             Bridge.Test.Assert.areEqual$1(String, Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C12, 4, 284, "F3").returnType, "Static");
         },
         scriptNameIsCorrectForField: function () {
-            Bridge.Test.Assert.areEqual$1("f1", Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C12, 4, 284, "F1").sname, "f1");
+            Bridge.Test.Assert.areEqual$1("F1", Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C12, 4, 284, "F1").sname, "F1");
             Bridge.Test.Assert.areEqual$1("renamedF2", Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C12, 4, 284, "F2").sname, "f2");
         },
         getValueWorksForInstanceField: function () {
@@ -12026,7 +12026,7 @@
         },
         scriptFieldNameIsCorrectForPropertiesImplementedAsFieldAndNullForOtherProperties: function () {
             Bridge.Test.Assert.true$1(Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C14, 16, 284, "P1").fname == null, "P1");
-            Bridge.Test.Assert.areEqual$1("p2", Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C14, 16, 284, "P2").fname, "P2");
+            Bridge.Test.Assert.areEqual$1("P2", Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C14, 16, 284, "P2").fname, "P2");
         },
         memberTypeIsPropertyForIndexer: function () {
             Bridge.Test.Assert.areEqual(16, Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C15, 16, 284, "Item").type);
@@ -13071,6 +13071,8 @@
         statics: {
             canConvert: function (T, arg) {
                 try { /// The variable `x' is assigned but its value is never used
+
+
                     var x = System.Nullable.getValue(Bridge.cast(arg, T));
                     return true;
                 }

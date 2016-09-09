@@ -1110,7 +1110,7 @@ namespace Bridge.ClientTest.Batch4.Reflection
         {
             Assert.AreEqual("m$1", typeof(C4).GetMethod("M", new[] { typeof(int) }).ScriptName, "C4.M");
             Assert.True(typeof(C21).GetMethod("M1").ScriptName == null, "C21.M1");
-            Assert.AreEqual("m1", typeof(C7).GetMethod("M1").ScriptName, "C7.m1");
+            Assert.AreEqual("M1", typeof(C7).GetMethod("M1").ScriptName, "C7.M1");
         }
 
         /*[Test]
@@ -1390,7 +1390,7 @@ namespace Bridge.ClientTest.Batch4.Reflection
         [Test]
         public void ScriptNameIsCorrectForField()
         {
-            Assert.AreEqual("f1", typeof(C12).GetField("F1").ScriptName, "f1");
+            Assert.AreEqual("F1", typeof(C12).GetField("F1").ScriptName, "F1");
             Assert.AreEqual("renamedF2", typeof(C12).GetField("F2").ScriptName, "f2");
         }
 
@@ -1636,7 +1636,7 @@ namespace Bridge.ClientTest.Batch4.Reflection
         public void ScriptFieldNameIsCorrectForPropertiesImplementedAsFieldAndNullForOtherProperties()
         {
             Assert.True(typeof(C14).GetProperty("P1").ScriptFieldName == null, "P1");
-            Assert.AreEqual("p2", typeof(C14).GetProperty("P2").ScriptFieldName, "P2");
+            Assert.AreEqual("P2", typeof(C14).GetProperty("P2").ScriptFieldName, "P2");
         }
 
         [Test]
