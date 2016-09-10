@@ -6539,6 +6539,45 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1511', {
+        testOverloadedConstructorCallWithOptionalParameters: function () {
+            var o1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1511.SomeClass1.$ctor1();
+            Bridge.Test.Assert.areEqual$1(o1.value, 130, "#1");
+
+            var o2 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1511.SomeClass2.$ctor1();
+            Bridge.Test.Assert.areEqual$1(o2.value, 135, "#2");
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1511.SomeClass1', {
+        value: 0,
+        ctor: function (b) {
+            this.$initialize();
+            this.value = 7;
+        },
+        $ctor1: function (a, b) {
+            if (a === void 0) { a = 0; }
+            if (b === void 0) { b = 0; }
+
+            this.$initialize();
+            this.value = 130;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1511.SomeClass2', {
+        value: 0,
+        ctor: function (b) {
+            this.$initialize();
+            this.value = 9;
+        },
+        $ctor1: function (a) {
+            if (a === void 0) { a = []; }
+
+            this.$initialize();
+            this.value = 135;
+        }
+    });
+
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1512', {
         statics: {
             methodParams: function ($arguments) {
