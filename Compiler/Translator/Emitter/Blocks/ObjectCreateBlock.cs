@@ -126,6 +126,10 @@ namespace Bridge.Translator
             }
 
             var isPlainObjectCtor = Regex.Match(customCtor, @"\s*\{\s*\}\s*").Success;
+            if (this.Emitter.Validator.GetObjectCreateMode(type) == 1)
+            {
+                isSynthetic = true;
+            }
 
             if (isSynthetic && isObjectLiteral && isPlainObjectCtor)
             {
@@ -533,7 +537,7 @@ namespace Bridge.Translator
                 if (rr != null)
                 {
                     if (rr.Member.Parameters.Count == 1 &&
-                        rr.Member.Parameters.First().Type.FullName == "Bridge.DefaultValueMode")
+                        rr.Member.Parameters.First().Type.FullName == "Bridge.ObjectInitializationMode")
                     {
                         var arg = rr.Arguments.FirstOrDefault();
                         if (arg != null && arg.ConstantValue != null)
@@ -556,7 +560,7 @@ namespace Bridge.Translator
                     }
                 }
 
-                if (mode != 0)
+                if (mode != 2)
                 {
                     var members = tinfo.InstanceConfig.Fields.Concat(tinfo.InstanceConfig.Properties);
 

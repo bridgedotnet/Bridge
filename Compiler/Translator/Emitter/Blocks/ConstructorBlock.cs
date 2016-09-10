@@ -270,7 +270,7 @@ namespace Bridge.Translator
                 return;
             }
 
-            bool forceDefCtor = isObjectLiteral && this.TypeInfo.Ctors.Count == 0;
+            bool forceDefCtor = isObjectLiteral && this.Emitter.Validator.GetObjectCreateMode(typeDef) == 0 && this.TypeInfo.Ctors.Count == 0;
 
             if (typeDef.IsValueType || forceDefCtor || (this.TypeInfo.Ctors.Count == 0 && ctorWrappers.Length > 0))
             {

@@ -57,7 +57,9 @@ namespace Bridge.Translator
                 {
                     TranslatorException.Throw("ObjectLiteral interface doesn't support any contract members: {0}", type);
                 }
-                
+
+                var objectCreateMode = this.GetObjectCreateMode(type);
+
                 if (type.BaseType != null)
                 {
                     TypeDefinition baseType = null;
@@ -73,6 +75,16 @@ namespace Bridge.Translator
                     if (baseType != null && baseType.FullName != "System.Object" && !this.IsObjectLiteral(baseType))
                     {
                         TranslatorException.Throw("[ObjectLiteral] base type must be object literal also: {0}", type);
+                    }
+
+                    if (baseType != null && baseType.FullName != "System.Object" && objectCreateMode == 1)
+                    {
+                        TranslatorException.Throw("[ObjectLiteral] with ObjectCreateMode.Plain cannot be subclass of another type: {0}", type);
+                    }
+
+                    if (baseType != null && baseType.FullName != "System.Object" && this.GetObjectCreateMode(baseType) == 1)
+                    {
+                        TranslatorException.Throw("[ObjectLiteral]cannot be inherited from class with ObjectCreateMode.Plain: {0}", type);
                     }
                 }
 
@@ -264,6 +276,62 @@ namespace Bridge.Translator
         public virtual bool IsObjectLiteral(TypeDefinition type)
         {
             return this.HasAttribute(type.CustomAttributes, Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute");
+        }
+
+        public int GetObjectInitializationMode(TypeDefinition type)
+        {
+            var attr = type.CustomAttributes.FirstOrDefault(a => a.AttributeType.FullName == Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute");
+
+            if (attr != null)
+            {
+                var args = attr.ConstructorArguments;
+
+                if (args.Count > 0)
+                {
+                    if (args[0].Type.FullName == Translator.Bridge_ASSEMBLY + ".ObjectInitializationMode")
+                    {
+                        return (int) args[0].Value;
+                    }
+                    else if (args[0].Type.FullName == Translator.Bridge_ASSEMBLY + ".DefaultValueMode")
+                    {
+                        var result = (int)args[0].Value;
+
+                        if (result == 0)
+                        {
+                            return 2;
+                        }
+
+                        if (result == 2)
+                        {
+                            return 0;
+                        }
+
+                        return result;
+                    }
+                }
+            }
+
+            return 0;
+        }
+
+        public int GetObjectCreateMode(TypeDefinition type)
+        {
+            var attr = type.CustomAttributes.FirstOrDefault(a => a.AttributeType.FullName == Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute");
+
+            if (attr != null)
+            {
+                var args = attr.ConstructorArguments;
+
+                if (args.Count > 1)
+                {
+                    if (args[1].Type.FullName == Translator.Bridge_ASSEMBLY + ".ObjectCreateMode")
+                    {
+                        return (int)args[1].Value;
+                    }
+                }
+            }
+
+            return 0;
         }
 
         public virtual bool IsObjectLiteral(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition type)
