@@ -16,5 +16,4 @@
 
     Bridge.define('Test.BridgeIssues.N384.Person');
 
-    Bridge.init();
 });

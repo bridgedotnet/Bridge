@@ -11,7 +11,6 @@ Bridge.initAssembly("TestProject", function ($asm, globals) {
         }
     });
 
-    Bridge.init();
 });
 
 /* 

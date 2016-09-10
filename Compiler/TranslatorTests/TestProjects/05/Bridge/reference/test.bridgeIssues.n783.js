@@ -26,5 +26,4 @@
         inherits: [Test.BridgeIssues.N783.Base]
     });
 
-    Bridge.init();
 });

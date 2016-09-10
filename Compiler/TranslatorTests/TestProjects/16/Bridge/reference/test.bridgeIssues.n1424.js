@@ -9,5 +9,4 @@
 
     Bridge.define('Test.BridgeIssues.N1424.B');
 
-    Bridge.init();
 });

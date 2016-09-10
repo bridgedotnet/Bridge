@@ -2880,6 +2880,8 @@
         if (callback) {
             callback.call(Bridge.global, asm, Bridge.global);
         }
+
+        Bridge.init();
     };
 
     Bridge.define("System.Reflection.Assembly", {

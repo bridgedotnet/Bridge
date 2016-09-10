@@ -16,5 +16,4 @@
 
     Bridge.define('Test.BridgeIssues.N064.Class64.Aux1');
 
-    Bridge.init();
 });

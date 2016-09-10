@@ -5,5 +5,4 @@
 
     Bridge.define('Test.BridgeIssues.N062.CI2');
 
-    Bridge.init();
 });

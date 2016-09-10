@@ -101,5 +101,4 @@
         of: "of"
     });
 
-    Bridge.init();
 });
