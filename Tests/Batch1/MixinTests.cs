@@ -4,7 +4,7 @@
 
 namespace Bridge.ClientTest
 {
-    [Category(Constants.MODULE_ARGUMENTS)]
+    [Category(Constants.MODULE_FUNCTIONS)]
     [TestFixture(TestNameFormat = "Mixin - {0}")]
     public class MixinTests
     {

@@ -2,8 +2,8 @@
 
 namespace Bridge.ClientTest
 {
-    [Category(Constants.MODULE_ARGUMENTS)]
-    [TestFixture]
+    [Category(Constants.MODULE_FUNCTIONS)]
+    [TestFixture(TestNameFormat = "Arguments - {0}")]
     public class ArgumentsTests
     {
         [ExpandParams]

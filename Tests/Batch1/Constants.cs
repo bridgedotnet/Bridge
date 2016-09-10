@@ -89,7 +89,7 @@
         public const string MODULE_CHECKED_UNCKECKED = "Checked/Unckecked";
         public const string MODULE_TYPE_SYSTEM = "Type system";
         public const string MODULE_REFLECTION = "Reflection";
-        public const string MODULE_ARGUMENTS = "Arguments";
+        public const string MODULE_FUNCTIONS = "Functions";
         public const string MODULE_MIXIN = "Mixin";
         public const string MODULE_BRIDGECONSOLE = "Bridge Console";
 

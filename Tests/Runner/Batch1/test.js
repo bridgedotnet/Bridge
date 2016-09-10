@@ -2,13 +2,6 @@
     
     Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner', {
         $main: function () {
-            QUnit.module("Arguments");
-            QUnit.test("LengthWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArgumentsTests.lengthWorks);
-            QUnit.test("GetArgumentWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArgumentsTests.getArgumentWorks);
-            QUnit.test("ToArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArgumentsTests.toArrayWorks);
-            QUnit.test("ToArrayOfTWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArgumentsTests.toArrayOfTWorks);
-            QUnit.test("Mixin - TestGlobalMethods", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_MixinTests.testGlobalMethods);
-            QUnit.test("Mixin - TestMixin", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_MixinTests.testMixin);
             QUnit.module("Bridge Console");
             QUnit.test("TestLogMessageObject", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_BridgeConsoleTests.testLogMessageObject);
             QUnit.test("TestLogMessageString", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_BridgeConsoleTests.testLogMessageString);
@@ -862,6 +855,16 @@
             QUnit.test("TimeoutException - DefaultConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Exceptions_TimeoutExceptionTests.defaultConstructorWorks);
             QUnit.test("TimeoutException - ConstructorWithMessageWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Exceptions_TimeoutExceptionTests.constructorWithMessageWorks);
             QUnit.test("TimeoutException - ConstructorWithMessageAndInnerExceptionWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Exceptions_TimeoutExceptionTests.constructorWithMessageAndInnerExceptionWorks);
+            QUnit.module("Functions");
+            QUnit.test("Arguments - LengthWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArgumentsTests.lengthWorks);
+            QUnit.test("Arguments - GetArgumentWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArgumentsTests.getArgumentWorks);
+            QUnit.test("Arguments - ToArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArgumentsTests.toArrayWorks);
+            QUnit.test("Arguments - ToArrayOfTWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArgumentsTests.toArrayOfTWorks);
+            QUnit.test("Function - TestConstructorArgumentsBodyInOneParameter", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FunctionTests.testConstructorArgumentsBodyInOneParameter);
+            QUnit.test("Function - TestConstructorArgumentsBodyInTwoParameters", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FunctionTests.testConstructorArgumentsBodyInTwoParameters);
+            QUnit.test("Function - TestConstructorArgumentsInArray", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FunctionTests.testConstructorArgumentsInArray);
+            QUnit.test("Mixin - TestGlobalMethods", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_MixinTests.testGlobalMethods);
+            QUnit.test("Mixin - TestMixin", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_MixinTests.testMixin);
             QUnit.module("Guid");
             QUnit.test("Guid - TypePropertiesAreCorrect", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_GuidTests.typePropertiesAreCorrect);
             QUnit.test("Guid - DefaultValueWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_GuidTests.defaultValueWorks);
@@ -5925,6 +5928,24 @@
             invariantWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.FormattableStringTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FormattableStringTests);
                 t.getFixture().invariantWorks();
+            }
+        }
+    });
+
+    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FunctionTests', {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.FunctionTests)],
+        statics: {
+            testConstructorArgumentsBodyInOneParameter: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.FunctionTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FunctionTests);
+                t.getFixture().testConstructorArgumentsBodyInOneParameter();
+            },
+            testConstructorArgumentsBodyInTwoParameters: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.FunctionTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FunctionTests);
+                t.getFixture().testConstructorArgumentsBodyInTwoParameters();
+            },
+            testConstructorArgumentsInArray: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.FunctionTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FunctionTests);
+                t.getFixture().testConstructorArgumentsInArray();
             }
         }
     });
