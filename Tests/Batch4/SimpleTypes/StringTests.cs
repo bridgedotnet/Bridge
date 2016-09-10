@@ -12,7 +12,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
     {
         private class MyFormattable : IFormattable
         {
-            public string Format(string format, IFormatProvider formatProvider)
+            public string ToString(string format, IFormatProvider formatProvider)
             {
                 return "Formatted: " + format + ", " + (formatProvider == null ? "null formatProvider" : formatProvider.GetType().FullName);
             }

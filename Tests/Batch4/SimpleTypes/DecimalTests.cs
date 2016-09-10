@@ -118,7 +118,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         [Test]
         public void IFormattableToStringWorks()
         {
-            Assert.AreEqual("291", ((IFormattable)291m).Format("", CultureInfo.InvariantCulture));
+            Assert.AreEqual("291", ((IFormattable)291m).ToString("", CultureInfo.InvariantCulture));
         }
 
         // Not C# API

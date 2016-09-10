@@ -62,6 +62,6 @@ namespace System
         public static extern bool operator !=(Guid a, Guid b);
 
         [Template("System.Guid.format({this}, {format})")]
-        public extern string Format(string format, IFormatProvider formatProvider);
+        public extern string ToString(string format, IFormatProvider formatProvider);
     }
 }

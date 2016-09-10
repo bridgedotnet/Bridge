@@ -16,7 +16,7 @@ namespace Bridge.ClientTest.Batch4
 
         private class MyFormattable : IFormattable
         {
-            public string Format(string format, IFormatProvider provider)
+            public string ToString(string format, IFormatProvider provider)
             {
                 return format + " success, " + provider.GetFormat(typeof(object));
             }
@@ -33,9 +33,9 @@ namespace Bridge.ClientTest.Batch4
         public void CallingMethodThroughIFormattableInterfaceInvokesImplementingMethod_SPI_1565_1633()
         {
             // #1633
-            Assert.AreEqual("real success, The provider", new MyFormattable().Format("real", new MyFormatProvider()), "Non-interface call should succeed");
+            Assert.AreEqual("real success, The provider", new MyFormattable().ToString("real", new MyFormatProvider()), "Non-interface call should succeed");
             // #1565
-            Assert.AreEqual("real success, The provider", ((IFormattable)new MyFormattable()).Format("real", new MyFormatProvider()), "Interface call should succeed");
+            Assert.AreEqual("real success, The provider", ((IFormattable)new MyFormattable()).ToString("real", new MyFormatProvider()), "Interface call should succeed");
         }
     }
 }

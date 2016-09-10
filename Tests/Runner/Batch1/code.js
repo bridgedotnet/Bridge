@@ -7808,7 +7808,7 @@
                     var result = System.Convert.toString(testValues[i]);
                     Bridge.Test.Assert.areEqual(testValues[i].toString(), result);
                     result = System.Convert.toString(testValues[i], System.Globalization.NumberFormatInfo.currentInfo);
-                    Bridge.Test.Assert.areEqual(testValues[i].toString(null, System.Globalization.NumberFormatInfo.currentInfo), result);
+                    Bridge.Test.Assert.areEqual(testValues[i].format(null, System.Globalization.NumberFormatInfo.currentInfo), result);
                 }
             },
             fromUInt64Array: function () {
@@ -7818,7 +7818,7 @@
                     var result = System.Convert.toString(testValues[i]);
                     Bridge.Test.Assert.areEqual(testValues[i].toString(), result);
                     result = System.Convert.toString(testValues[i], System.Globalization.NumberFormatInfo.currentInfo);
-                    Bridge.Test.Assert.areEqual(testValues[i].toString(null, System.Globalization.NumberFormatInfo.currentInfo), result);
+                    Bridge.Test.Assert.areEqual(testValues[i].format(null, System.Globalization.NumberFormatInfo.currentInfo), result);
                 }
             },
             fromSingleArray: function () {
@@ -7948,15 +7948,15 @@
             this.$initialize();
             this._value = value;
         },
-        toString$1: function (format, formatProvider) {
+        format: function (format, formatProvider) {
             if (formatProvider != null) {
                 return System.String.format("{0}: {1}", Bridge.Reflection.getTypeFullName(Bridge.getType(formatProvider)), this._value);
             } else {
                 return System.String.format("FooFormattable: {0}", (this._value));
             }
         },
-        format: function (format, formatProvider) {
-            return this.toString$1(format, formatProvider);
+        format$1: function (format, formatProvider) {
+            return this.format(format, formatProvider);
         }
     });
 
