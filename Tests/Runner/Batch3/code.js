@@ -6821,7 +6821,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             },
             create: function (i, s) {
                 return Bridge.merge(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1529.BS.$constructor(), {
-                    field1: i, field2: s
+                    field1: i, field2: s, prop1: 0, prop2: null
                 } );
             }
         },
@@ -14738,7 +14738,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 Bridge.Test.Assert.areEqual$1(22, date.v.getDate(), "TryParse works Day");
             },
             n377: function () {
-                var objectLiteralInstance = { field1: "field1 value", field3: 7 };
+                var objectLiteralInstance = { field1: "field1 value", field3: 7, field2: null, field4: 0 };
 
                 Bridge.Test.Assert.areEqual$1(true, objectLiteralInstance.hasOwnProperty("field1"), "ObjectLiteral's field with an explicit value is emitted");
                 Bridge.Test.Assert.areEqual$1("field1 value", objectLiteralInstance.field1, "ObjectLiteral's field with an explicit value is emitted correctly");
