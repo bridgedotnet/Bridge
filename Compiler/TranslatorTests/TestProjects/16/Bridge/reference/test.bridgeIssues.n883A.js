@@ -27,5 +27,4 @@
         inherits: [Test.BridgeIssues.N883A.Control]
     });
 
-    Bridge.init();
 });

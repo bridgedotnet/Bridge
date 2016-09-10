@@ -14,7 +14,7 @@
         _captureMap: null,
         _groups: null,
 
-        constructor: function (match, caps) {
+        ctor: function (match, caps) {
             this.$initialize();
             this._match = match;
             this._captureMap = caps;
@@ -150,7 +150,7 @@
         _groupColl: null,
         _curindex: 0,
 
-        constructor: function (groupColl) {
+        ctor: function (groupColl) {
             this.$initialize();
             this._curindex = -1;
             this._groupColl = groupColl;

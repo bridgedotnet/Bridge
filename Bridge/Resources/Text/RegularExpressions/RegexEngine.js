@@ -26,7 +26,7 @@
         // ============================================================================================
         // Public functions
         // ============================================================================================
-        constructor: function (pattern, isCaseInsensitive, isMultiLine, isSingleline, isIgnoreWhitespace, isExplicitCapture, timeoutMs) {
+        ctor: function (pattern, isCaseInsensitive, isMultiLine, isSingleline, isIgnoreWhitespace, isExplicitCapture, timeoutMs) {
             this.$initialize();
 
             if (pattern == null) {

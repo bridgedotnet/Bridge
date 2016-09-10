@@ -10,7 +10,7 @@
             ]
         },
 
-        constructor: function (array, T) {
+        ctor: function (array, T) {
             this.$initialize();
             this.array = array;
             this.reset();
@@ -50,7 +50,7 @@
             ]
         },
 
-        constructor: function (array) {
+        ctor: function (array) {
             this.$initialize();
             this.array = array;
         },

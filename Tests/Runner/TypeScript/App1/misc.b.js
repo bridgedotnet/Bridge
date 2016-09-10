@@ -5,5 +5,4 @@
         inherits: [Misc.A.Class1]
     });
 
-    Bridge.init();
 });

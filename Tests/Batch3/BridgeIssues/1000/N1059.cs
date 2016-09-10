@@ -39,7 +39,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public static void TestEnumNameModes()
         {
             var t1 = typeof(OverlayType1);
-            Assert.AreEqual(OverlayType1.CIRCLE, t1["cIRCLE"]);
+            Assert.AreEqual(OverlayType1.CIRCLE, t1["CIRCLE"]);
             Assert.AreEqual(OverlayType1.marker, t1["marker"]);
 
             var t2 = typeof(OverlayType2);

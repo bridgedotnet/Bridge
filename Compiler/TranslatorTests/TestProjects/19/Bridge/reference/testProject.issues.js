@@ -3,5 +3,4 @@
 
     Bridge.define('TestProject.Issues.JustClass');
 
-    Bridge.init();
 });

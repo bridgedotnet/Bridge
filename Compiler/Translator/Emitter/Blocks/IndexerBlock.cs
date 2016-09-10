@@ -402,6 +402,8 @@ namespace Bridge.Translator
                 this.WriteDot();
             }
 
+            bool isBase = indexerExpression.Target is BaseReferenceExpression;
+
             var argsInfo = new ArgumentsInfo(this.Emitter, indexerExpression);
             var argsExpressions = argsInfo.ArgumentsExpressions;
             var paramsArg = argsInfo.ParamsExpression;
@@ -702,7 +704,18 @@ namespace Bridge.Translator
                         this.WriteInterfaceMember(targetVar, memberResolveResult, this.Emitter.IsAssignment, Helpers.GetSetOrGet(this.Emitter.IsAssignment));
                     }
 
-                    this.WriteOpenParentheses();
+                    if (isBase)
+                    {
+                        this.WriteCall();
+                        this.WriteOpenParentheses();
+                        this.WriteThis();
+                        this.WriteComma(false);
+                    }
+                    else
+                    {
+                        this.WriteOpenParentheses();
+                    }
+
                     new ExpressionListBlock(this.Emitter, argsExpressions, paramsArg, null, 0).Emit();
                     this.WriteCloseParentheses();
                 }
@@ -764,7 +777,9 @@ namespace Bridge.Translator
                             ", ",
                             targetVar,
                             getterMember,
+                            isBase ? "." + JS.Funcs.CALL : "",
                             "(",
+                            isBase ? "this, " : "",
                             paramsStr,
                             "){0})"));
 
@@ -791,7 +806,9 @@ namespace Bridge.Translator
                             ", ",
                             trg,
                             getterMember,
+                            isBase ? "." + JS.Funcs.CALL : "",
                             "(",
+                            isBase ? "this, " : "",
                             paramsStr,
                             "){0})"));
                     }
@@ -807,7 +824,18 @@ namespace Bridge.Translator
                         this.WriteInterfaceMember(targetVar, memberResolveResult, this.Emitter.IsAssignment, Helpers.GetSetOrGet(this.Emitter.IsAssignment));
                     }
 
-                    this.WriteOpenParentheses();
+                    if (isBase)
+                    {
+                        this.WriteCall();
+                        this.WriteOpenParentheses();
+                        this.WriteThis();
+                        this.WriteComma(false);
+                    }
+                    else
+                    {
+                        this.WriteOpenParentheses();
+                    }
+
                     this.Emitter.IsAssignment = false;
                     this.Emitter.IsUnaryAccessor = false;
                     new ExpressionListBlock(this.Emitter, argsExpressions, paramsArg, null, 0).Emit();

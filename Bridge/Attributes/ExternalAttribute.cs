@@ -13,14 +13,6 @@ namespace Bridge
     {
     }
 
-    [External]
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum | AttributeTargets.Delegate | AttributeTargets.Interface | AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = true)]
-    [Obsolete("Use ExternalAttribute instead IgnoreAttribute")]
-    [NonScriptable]
-    public sealed class IgnoreAttribute : Attribute
-    {
-    }
-
     /// <summary>
     /// Applies to interface if it's implementation is done outside Bridge type system (class implementation doesn't provide aliases for interface members implementations)
     /// </summary>

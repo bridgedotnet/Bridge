@@ -4,7 +4,7 @@ namespace Test.BridgeIssues.N384
 {
     public class Person { }
 
-    [Ignore]
+    [External]
     public static class MyExtensions
     {
         public static string DoSomething(this Person Person)

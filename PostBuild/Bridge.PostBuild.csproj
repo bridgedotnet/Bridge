@@ -7,8 +7,8 @@
     <ProjectGuid>{8DAF3989-FF37-470C-A55D-3E7868613AA5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Transpiled</RootNamespace>
-    <AssemblyName>Bridge.Transpiled</AssemblyName>
+    <RootNamespace>PostBuild</RootNamespace>
+    <AssemblyName>Bridge.PostBuild</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

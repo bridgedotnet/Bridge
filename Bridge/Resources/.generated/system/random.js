@@ -12,10 +12,10 @@
                 this.seedArray = System.Array.init(56, 0);
             }
         },
-        constructor: function () {
-            System.Random.$constructor1.call(this, System.Int64.clip32(System.Int64((new Date()).getTime()).mul(10000)));
+        ctor: function () {
+            System.Random.$ctor1.call(this, System.Int64.clip32(System.Int64((new Date()).getTime()).mul(10000)));
         },
-        $constructor1: function (seed) {
+        $ctor1: function (seed) {
             this.$initialize();
             var ii;
             var mj, mk;

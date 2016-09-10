@@ -22,7 +22,7 @@ namespace Test.BridgeIssues.N475A
         }
     }
 
-    [Ignore]
+    [External]
     public class Bridge475
     {
         public Bridge475 KeyDown<T>(int i)

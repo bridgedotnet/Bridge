@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Issues\Issue1050.cs" />
     <Compile Include="Issues\Issue1230.cs" />
+    <Compile Include="Issues\Issue1754.cs" />
     <Compile Include="Issues\Issue921Generic.cs" />
     <Compile Include="Issues\Issue921Nested.cs" />
     <Compile Include="Issues\Issue1035.cs" />
@@ -74,7 +75,6 @@
     <None Include="Bridge\bridge.Debug.json" />
     <None Include="Bridge\bridge.json" />
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="Bridge\build\" />
     <Folder Include="Bridge\output\" />
@@ -87,7 +87,7 @@
   <PropertyGroup Condition="$(UseBridgeTask) != true">
     <PostBuildEvent Condition="$(OS) != Unix">"$(ProjectDir)..\..\..\Builder\$(OutDir)Bridge.Builder.exe" -p "$(ProjectPath)" -b "$(ProjectDir)$(OutDir)Bridge.dll" -cfg "$(Configuration)"</PostBuildEvent>
     <PostBuildEvent Condition="$(OS) == Unix">mono "$(ProjectDir)../../../Builder/$(OutDir)Bridge.Builder.exe" -p "$(ProjectDir)/$(MSBuildProjectFile)" -b "$(ProjectDir)$(OutDir)Bridge.dll"  -cfg "$(Configuration)"</PostBuildEvent>
-  </PropertyGroup>  
+  </PropertyGroup>
   <UsingTask Condition="$(UseBridgeTask) == true" TaskName="GenerateScript" AssemblyFile="$(ProjectDir)..\..\..\Build\$(OutDir)Bridge.Build.dll" />
   <Target Condition="$(UseBridgeTask) == true" Name="AfterBuild">
     <Message Text="Using Bridge Task" Importance="high" />

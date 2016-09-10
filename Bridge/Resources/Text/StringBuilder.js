@@ -1,5 +1,5 @@
     Bridge.define("System.Text.StringBuilder", {
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
             this.buffer = [],
             this.capacity = 16;

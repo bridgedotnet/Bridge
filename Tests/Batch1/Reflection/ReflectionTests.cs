@@ -807,9 +807,9 @@ namespace Bridge.ClientTest.Reflection
             var c11 = typeof(C11).GetMembers();
             var c19 = typeof(C19).GetMembers();
             var c20 = typeof(C20).GetMembers();
-            Assert.True(((ConstructorInfo)c10[0]).ScriptName == "$constructor", "Unnamed");
-            Assert.AreEqual(((ConstructorInfo)c10[1]).ScriptName, "$constructor1", "Named");
-            Assert.AreEqual(((ConstructorInfo)c11[0]).ScriptName, "$constructor", "Static method");
+            Assert.True(((ConstructorInfo)c10[0]).ScriptName == "ctor", "Unnamed");
+            Assert.AreEqual(((ConstructorInfo)c10[1]).ScriptName, "$ctor1", "Named");
+            Assert.AreEqual(((ConstructorInfo)c11[0]).ScriptName, "ctor", "Static method");
             Assert.True(((ConstructorInfo)c19[0]).ScriptName == null, "Object literal");
             Assert.True(((ConstructorInfo)c20[0]).ScriptName == null, "Inline code");
         }
@@ -957,7 +957,7 @@ namespace Bridge.ClientTest.Reflection
         {
             Assert.AreEqual(typeof(C4).GetMethod("M", new[] { typeof(int) }).ScriptName, "m$1", "C4.M");
             Assert.True(typeof(C21).GetMethod("M1").ScriptName == null, "C21.M1");
-            Assert.AreEqual(typeof(C7).GetMethod("M1").ScriptName, "m1", "C7.m1");
+            Assert.AreEqual(typeof(C7).GetMethod("M1").ScriptName, "M1", "C7.m1");
         }
 
         /*[Test]
@@ -1237,7 +1237,7 @@ namespace Bridge.ClientTest.Reflection
         [Test]
         public void ScriptNameIsCorrectForField()
         {
-            Assert.AreEqual(typeof(C12).GetField("F1").ScriptName, "f1", "f1");
+            Assert.AreEqual(typeof(C12).GetField("F1").ScriptName, "F1", "f1");
             Assert.AreEqual(typeof(C12).GetField("F2").ScriptName, "renamedF2", "f2");
         }
 
@@ -1483,7 +1483,7 @@ namespace Bridge.ClientTest.Reflection
         public void ScriptFieldNameIsCorrectForPropertiesImplementedAsFieldAndNullForOtherProperties()
         {
             Assert.True(typeof(C14).GetProperty("P1").ScriptFieldName == null, "P1");
-            Assert.AreEqual(typeof(C14).GetProperty("P2").ScriptFieldName, "p2", "P2");
+            Assert.AreEqual(typeof(C14).GetProperty("P2").ScriptFieldName, "P2", "P2");
         }
 
         [Test]

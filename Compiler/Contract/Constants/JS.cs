@@ -12,6 +12,7 @@
         public class Fields
         {
             public const string ENTRY_POINT = "$entryPoint";
+            public const string MAIN = "$main";
             public const string KIND = "$kind";
             public const string LITERAL = "$literal";
             public const string VARIANCE = "$variance";
@@ -57,7 +58,6 @@
             public const string BRIDGE_TOPLAIN = "Bridge.toPlain";
             public const string BRIDGE_HASVALUE = "Bridge.hasValue";
 
-            public const string DCONSTRUCTOR = "$constructor";
             public const string INITIALIZE = "$initialize";
             public const string INIT = "init";
             public const string CLONE = "$clone";
@@ -78,7 +78,7 @@
             public const string SET_RESULT = "setResult";
             public const string SET_EXCEPTION = "setException";
 
-            public const string CONSTRUCTOR = "constructor";
+            public const string CONSTRUCTOR = "ctor";
             public const string APPLY = "apply";
             public const string CALL = "call";
             public const string DEFINE = "define";

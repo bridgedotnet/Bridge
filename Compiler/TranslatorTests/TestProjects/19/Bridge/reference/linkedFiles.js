@@ -9,5 +9,4 @@
 
     Bridge.define('LinkedFiles.Issue531Link4');
 
-    Bridge.init();
 });

@@ -8,7 +8,7 @@
         m_exceptionArgument: null,
         m_argumentName: null,
         m_canThrow: false,
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
         },
         init: function (argumentName, canThrow) {

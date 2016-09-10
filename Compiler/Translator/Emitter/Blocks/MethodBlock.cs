@@ -1,9 +1,7 @@
 ﻿using Bridge.Contract;
 using Bridge.Contract.Constants;
-
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.TypeSystem;
-
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -69,6 +67,29 @@ namespace Bridge.Translator
                 }
             }
 
+            if (!this.StaticBlock)
+            {
+                MethodDeclaration entryPoint = null;
+                if (this.TypeInfo.StaticMethods.Any(group =>
+                {
+                    return group.Value.Any(method =>
+                    {
+                        var result = Helpers.IsEntryPointMethod(this.Emitter, method);
+                        if (result)
+                        {
+                            entryPoint = method;
+                        }
+                        return result;
+                    });
+                }))
+                {
+                    if (!entryPoint.Body.IsNull)
+                    {
+                        this.Emitter.VisitMethodDeclaration(entryPoint);
+                    }
+                }
+            }
+
             names = new List<string>(methods.Keys);
 
             foreach (var name in names)
@@ -95,13 +116,33 @@ namespace Bridge.Translator
                 else
                 {
                     string structName = BridgeTypes.ToJsName(this.TypeInfo.Type, this.Emitter);
-                    if (this.TypeInfo.Type.TypeArguments.Count > 0 && !Helpers.IsIgnoreGeneric(this.TypeInfo.Type, this.Emitter))
+                    if (this.TypeInfo.Type.TypeArguments.Count > 0 &&
+                        !Helpers.IsIgnoreGeneric(this.TypeInfo.Type, this.Emitter))
                     {
                         structName = "(" + structName + ")";
                     }
 
                     this.EnsureComma();
                     this.Write(JS.Funcs.GETDEFAULTVALUE + ": function () { return new " + structName + "(); }");
+                    this.Emitter.Comma = true;
+                }
+            }
+            else if(this.StaticBlock)
+            {
+                var ctor = this.TypeInfo.Type.GetConstructors().FirstOrDefault(c => c.Parameters.Count == 0 && this.Emitter.GetInline(c) != null);
+
+                if (ctor != null)
+                {
+                    var code = this.Emitter.GetInline(ctor);
+                    this.EnsureComma();
+                    this.Write(JS.Funcs.GETDEFAULTVALUE + ": function () ");
+                    this.BeginBlock();
+                    this.Write("return ");
+                    var argsInfo = new ArgumentsInfo(this.Emitter, ctor);
+                    new InlineArgumentsBlock(this.Emitter, argsInfo, code).Emit();
+                    this.Write(";");
+                    this.WriteNewLine();
+                    this.EndBlock();
                     this.Emitter.Comma = true;
                 }
             }
@@ -287,7 +328,7 @@ namespace Bridge.Translator
         {
             if (group.Count == 1)
             {
-                if (!group[0].Body.IsNull)
+                if (!group[0].Body.IsNull && (!this.StaticBlock || !Helpers.IsEntryPointMethod(this.Emitter, group[0])))
                 {
                     this.Emitter.VisitMethodDeclaration(group[0]);
                 }
@@ -302,7 +343,7 @@ namespace Bridge.Translator
 
                 foreach (var method in group)
                 {
-                    if (!method.Body.IsNull)
+                    if (!method.Body.IsNull && (!this.StaticBlock || !Helpers.IsEntryPointMethod(this.Emitter, group[0])))
                     {
                         this.Emitter.VisitMethodDeclaration(method);
                     }

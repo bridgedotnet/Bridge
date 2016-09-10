@@ -113,22 +113,22 @@ namespace Bridge.Translator
 
         public virtual bool IsIgnoreType(ICustomAttributeProvider type, bool ignoreLiteral = false)
         {
-            string ignoreAttr = Translator.Bridge_ASSEMBLY + ".IgnoreAttribute";
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
             string nonScriptableAttr = Translator.Bridge_ASSEMBLY + ".NonScriptableAttribute";
 
-            return this.HasAttribute(type.CustomAttributes, ignoreAttr) || this.HasAttribute(type.CustomAttributes, externalAttr) || this.HasAttribute(type.CustomAttributes, nonScriptableAttr);
+            return
+                this.HasAttribute(type.CustomAttributes, externalAttr)
+                || this.HasAttribute(type.CustomAttributes, nonScriptableAttr);
         }
 
         public virtual bool IsIgnoreType(IEntity enity, bool ignoreLiteral = false)
         {
-            string ignoreAttr = Translator.Bridge_ASSEMBLY + ".IgnoreAttribute";
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
             string nonScriptableAttr = Translator.Bridge_ASSEMBLY + ".NonScriptableAttribute";
 
-            return this.HasAttribute(enity.Attributes, ignoreAttr)
-                   || this.HasAttribute(enity.Attributes, externalAttr)
-                   || this.HasAttribute(enity.Attributes, nonScriptableAttr);
+            return
+                this.HasAttribute(enity.Attributes, externalAttr)
+                || this.HasAttribute(enity.Attributes, nonScriptableAttr);
         }
 
         public virtual bool IsBridgeClass(TypeDefinition type)
@@ -146,12 +146,9 @@ namespace Bridge.Translator
 
         public virtual bool IsIgnoreType(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition, bool ignoreLiteral = false)
         {
-            string ignoreAttr = Translator.Bridge_ASSEMBLY + ".IgnoreAttribute";
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
 
-            return typeDefinition.Attributes.Any(attr => attr.Constructor != null && (
-            (attr.Constructor.DeclaringType.FullName == ignoreAttr) || 
-            (attr.Constructor.DeclaringType.FullName == externalAttr)));
+            return typeDefinition.Attributes.Any(attr => attr.Constructor != null && attr.Constructor.DeclaringType.FullName == externalAttr);
         }
 
         public virtual bool IsExternalInterface(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition)

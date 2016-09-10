@@ -11,7 +11,7 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("Date", typeof(DateTime).GetClassName());
+            Assert.AreEqual("Date", typeof(DateTime).FullName);
             object o = new DateTime();
             Assert.True(o is DateTime, "o is DateTime");
         }

@@ -1,6 +1,9 @@
 using Bridge.Contract;
 using ICSharpCode.NRefactory.CSharp;
 using System.Linq;
+using Bridge.Contract.Constants;
+using ICSharpCode.NRefactory.Semantics;
+using ICSharpCode.NRefactory.TypeSystem;
 
 namespace Bridge.Translator
 {
@@ -31,7 +34,7 @@ namespace Bridge.Translator
                 foreach (var attr in attrSection.Attributes)
                 {
                     var rr = this.Emitter.Resolver.ResolveNode(attr.Type, this.Emitter);
-                    if (rr.Type.FullName == "Bridge.ExternalAttribute" || rr.Type.FullName == "Bridge.IgnoreAttribute")
+                    if (rr.Type.FullName == "Bridge.ExternalAttribute")
                     {
                         return;
                     }
@@ -72,6 +75,12 @@ namespace Bridge.Translator
             XmlToJsDoc.EmitComment(this, this.MethodDeclaration);
 
             string name = overloads.GetOverloadName(false, null, true);
+
+            if (Helpers.IsEntryPointMethod(this.Emitter, methodDeclaration))
+            {
+                name = JS.Fields.MAIN;
+            }
+
             this.Write(name);
 
             this.WriteColon();

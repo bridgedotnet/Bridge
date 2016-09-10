@@ -9,5 +9,4 @@
         inherits: [Test.BridgeIssues.N065.Class65_1.Nested]
     });
 
-    Bridge.init();
 });

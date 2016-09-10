@@ -44,18 +44,11 @@ namespace Bridge.Translator
                             if (method.Name == CS.Methods.AUTO_STARTUP_METHOD_NAME
                                 && method.HasModifier(Modifiers.Static)
                                 && !method.HasModifier(Modifiers.Abstract)
-                                && IsEntryPointCandidate(method))
+                                && Helpers.IsEntryPointCandidate(this.Emitter, method))
                             {
                                 if (isGenericType || isGenericMethod)
                                 {
                                     LogAutoStartupWarning(method);
-                                }
-                                else
-                                {
-                                    this.Emitter.AutoStartupMethods.Add(this.TypeInfo.Name + "." + method.Name);
-                                    list.Add(string.Format(JS.Funcs.BRIDGE_AUTO_STARTUP_METHOD_TEMPLATE, this.Emitter.GetEntityName(method)));
-
-                                    hasReadyAttribute = true;
                                 }
                             }
                         }
@@ -69,32 +62,6 @@ namespace Bridge.Translator
             }
 
             return list;
-        }
-
-        private bool IsEntryPointCandidate(MethodDeclaration methodDeclaration)
-        {
-            var m_rr = this.Emitter.Resolver.ResolveNode(methodDeclaration, this.Emitter) as MemberResolveResult;
-
-            if (m_rr == null || !(m_rr.Member is IMethod))
-            {
-                return false;
-            }
-
-            var m = (IMethod)m_rr.Member;
-
-            if (m.Name != CS.Methods.AUTO_STARTUP_METHOD_NAME || !m.IsStatic || m.DeclaringTypeDefinition.TypeParameterCount > 0 || m.TypeParameters.Count > 0)  // Must be a static, non-generic Main
-                return false;
-            if (!m.ReturnType.IsKnownType(KnownTypeCode.Void) && !m.ReturnType.IsKnownType(KnownTypeCode.Int32))    // Must return void or int.
-                return false;
-            if (m.Parameters.Count == 0)    // Can have 0 parameters.
-                return true;
-            if (m.Parameters.Count > 1) // May not have more than 1 parameter.
-                return false;
-            if (m.Parameters[0].IsRef || m.Parameters[0].IsOut) // The single parameter must not be ref or out.
-                return false;
-
-            var at = m.Parameters[0].Type as ArrayType;
-            return at != null && at.Dimensions == 1 && at.ElementType.IsKnownType(KnownTypeCode.String);    // The single parameter must be a one-dimensional array of strings.
         }
 
         private void HandleAttributes(List<string> list, KeyValuePair<string, List<MethodDeclaration>> methodGroup, MethodDeclaration method, out bool hasReadyAttribute)

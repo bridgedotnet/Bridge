@@ -657,9 +657,9 @@ namespace Bridge.Contract
 
                     var name = this.Emitter.GetEntityName(m, false, true);
                     if ((name == this.JsName || name == this.AltJsName || name == this.FieldJsName) && m.IsStatic == this.Static &&
-                        ((m.IsConstructor && this.JsName == JS.Funcs.DCONSTRUCTOR) || m.IsConstructor == this.Constructor))
+                        ((m.IsConstructor && this.JsName == JS.Funcs.CONSTRUCTOR) || m.IsConstructor == this.Constructor))
                     {
-                        if (m.IsConstructor != this.Constructor)
+                        if (m.IsConstructor != this.Constructor && (m.Parameters.Count > 0 || m.DeclaringTypeDefinition != this.TypeDefinition))
                         {
                             return false;
                         }

@@ -2,7 +2,7 @@
     "use strict";
 
     Bridge.define('Test.BridgeIssues.N882.Bridge882_Instance', {
-        constructor: function () {
+        ctor: function () {
             this.$initialize();        var $t;
 
             var a = [1, 2, 3];
@@ -16,7 +16,7 @@
     });
 
     Bridge.define('Test.BridgeIssues.N882.Bridge882_Instance.Bridge882_A_Instance', {
-        constructor: function () {
+        ctor: function () {
             this.$initialize();        var $t;
 
             var a = [5, 6, 7];
@@ -31,7 +31,7 @@
 
     Bridge.define('Test.BridgeIssues.N882.Bridge882_Static', {
         statics: {
-            constructor: function () {
+            ctor: function () {
                 var $t;
                 var a = [1, 2, 3];
 
@@ -46,7 +46,7 @@
 
     Bridge.define('Test.BridgeIssues.N882.Bridge882_Static.Bridge882_A_Static', {
         statics: {
-            constructor: function () {
+            ctor: function () {
                 var $t;
                 var a = [5, 6, 7];
 
@@ -59,5 +59,4 @@
     }
     });
 
-    Bridge.init();
 });

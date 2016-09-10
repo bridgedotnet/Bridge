@@ -35,7 +35,7 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("String", typeof(string).GetClassName());
+            Assert.AreEqual("String", typeof(string).FullName);
             object s = "X";
             Assert.True(s is string);
         }

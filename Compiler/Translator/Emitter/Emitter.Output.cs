@@ -109,8 +109,8 @@ namespace Bridge.Translator
                         }
                     }
 
-                    var afterOutput = (isJs && !disableAsm ? "\nBridge.init();" : "");
-                    var code = output.NonModuletOutput.ToString() + afterOutput;
+                    //var afterOutput = (isJs && !disableAsm ? "\nBridge.init();" : "");
+                    var code = output.NonModuletOutput.ToString();// + afterOutput;
 
                     if (isJs)
                     {

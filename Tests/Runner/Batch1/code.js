@@ -358,7 +358,7 @@
 
     Bridge.define('Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C', {
         i: 0,
-        constructor: function (i) {
+        ctor: function (i) {
             this.$initialize();
             this.i = i;
         },
@@ -1683,7 +1683,7 @@
         x: 0,
         s: null,
         z: 0,
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
         },
         getHashCode: function () {
@@ -1754,7 +1754,7 @@
             getDefaultValue: function () { return new Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.S(); }
         },
         x: 0,
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
         },
         getHashCode: function () {
@@ -1810,7 +1810,7 @@
 
     Bridge.define('Bridge.ClientTest.BasicCSharp.ClassA', {
         statics: {
-            constructor: function () {
+            ctor: function () {
                 Bridge.ClientTest.BasicCSharp.ClassA.staticString = "Defined string";
                 Bridge.ClientTest.BasicCSharp.ClassA.staticInt = -340;
             },
@@ -1824,7 +1824,7 @@
                 Bridge.ClientTest.BasicCSharp.ClassA.statitIntNotInitialized = i;
                 Bridge.ClientTest.BasicCSharp.ClassA.statitStringNotInitialized = s;
 
-                return Bridge.merge(new Bridge.ClientTest.BasicCSharp.ClassA.$constructor(), {
+                return Bridge.merge(new Bridge.ClientTest.BasicCSharp.ClassA.ctor(), {
                     setDoubleA: d
                 } );
             },
@@ -1855,7 +1855,7 @@
                 DecimalA: System.Decimal(0.0)
             }
         },
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
             this.setNumberA(10);
             this.setStringA("Str");
@@ -1866,18 +1866,18 @@
                 setNumber: 700
             } ));
         },
-        $constructor1: function (d) {
-            Bridge.ClientTest.BasicCSharp.ClassA.$constructor.call(this);
+        $ctor1: function (d) {
+            Bridge.ClientTest.BasicCSharp.ClassA.ctor.call(this);
             if (d == null) {
                 throw new System.Exception("Related should not be null");
             }
 
             this.setData(d);
         },
-        $constructor2: function (p) {
+        $ctor2: function (p) {
             if (p === void 0) { p = []; }
 
-            Bridge.ClientTest.BasicCSharp.ClassA.$constructor.call(this);
+            Bridge.ClientTest.BasicCSharp.ClassA.ctor.call(this);
             if (p == null || p.length < 6) {
                 throw new System.Exception("Should pass six parameters");
             }
@@ -1970,7 +1970,7 @@
     Bridge.define('Bridge.ClientTest.BasicCSharp.Point', {
         $kind: "struct",
         statics: {
-            constructor: function () {
+            ctor: function () {
                 Bridge.ClientTest.BasicCSharp.Point.staticInt = 500;
                 Bridge.ClientTest.BasicCSharp.Point.staticString = "Initialized";
             },
@@ -1986,7 +1986,7 @@
         },
         x: 0,
         y: 0,
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
         },
         test1: function () {
@@ -2030,22 +2030,22 @@
                 this.t = new Bridge.ClientTest.BasicCSharp.Point();
             }
         },
-        $constructor1: function (x, y) {
+        $ctor1: function (x, y) {
             this.$initialize();
             // [#69]
-            (new Bridge.ClientTest.BasicCSharp.Rectangle.$constructor()).$clone(this);
+            (new Bridge.ClientTest.BasicCSharp.Rectangle.ctor()).$clone(this);
 
             this.l.x = x;
             this.l.y = y;
         },
-        $constructor2: function (x1, y1, x2, y2) {
+        $ctor2: function (x1, y1, x2, y2) {
             this.$initialize();
             this.l.x = x1;
             this.l.y = y1;
             this.t.x = x2;
             this.t.y = y2;
         },
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
         },
         getHashCode: function () {
@@ -2302,7 +2302,7 @@
                 X: 0
             }
         },
-        constructor: function (x) {
+        ctor: function (x) {
             this.$initialize();
             this.setX(x);
         },
@@ -2547,7 +2547,7 @@
         statics: {
             testInstanceConstructorsAndMethods: function () {
                 // Check parameterless constructor
-                var a = new Bridge.ClientTest.BasicCSharp.ClassA.$constructor();
+                var a = new Bridge.ClientTest.BasicCSharp.ClassA.ctor();
 
                 // TEST
                 Bridge.Test.Assert.areEqual$1(10, a.getNumberA(), "NumberA 10");
@@ -2566,7 +2566,7 @@
                 // Check constructor with parameter
                 Bridge.Test.Assert.throws$7(System.Exception, Bridge.ClientTest.BasicCSharp.TestSet1FailureHelper.testConstructor2Failure, "Should pass six parameters");
 
-                a = new Bridge.ClientTest.BasicCSharp.ClassA.$constructor2([150, "151", true, 1.53, System.Decimal(1.54), Bridge.merge(new Bridge.ClientTest.BasicCSharp.ClassA.Aux1(), {
+                a = new Bridge.ClientTest.BasicCSharp.ClassA.$ctor2([150, "151", true, 1.53, System.Decimal(1.54), Bridge.merge(new Bridge.ClientTest.BasicCSharp.ClassA.Aux1(), {
                     setNumber: 155
                 } )]);
 
@@ -2636,7 +2636,7 @@
             },
             testMethodParameters: function () {
                 // Check default parameters
-                var ra = new Bridge.ClientTest.BasicCSharp.ClassA.$constructor();
+                var ra = new Bridge.ClientTest.BasicCSharp.ClassA.ctor();
                 var r = ra.method5(5);
 
                 Bridge.Test.Assert.areEqual$1(5, r, "r 5");
@@ -2648,7 +2648,7 @@
                 Bridge.Test.Assert.areEqual$1(-44, r, "r -44");
 
                 // Check referencing did not change data
-                var a = new Bridge.ClientTest.BasicCSharp.ClassA.$constructor();
+                var a = new Bridge.ClientTest.BasicCSharp.ClassA.ctor();
                 var b = a.method1();
                 var c = b.getRelated();
 
@@ -2689,10 +2689,10 @@
     Bridge.define('Bridge.ClientTest.BasicCSharp.TestSet1FailureHelper', {
         statics: {
             testConstructor1Failure: function () {
-                new Bridge.ClientTest.BasicCSharp.ClassA.$constructor1(null);
+                new Bridge.ClientTest.BasicCSharp.ClassA.$ctor1(null);
             },
             testConstructor2Failure: function () {
-                var t = new Bridge.ClientTest.BasicCSharp.ClassA.$constructor2(System.Array.init(2, null));
+                var t = new Bridge.ClientTest.BasicCSharp.ClassA.$ctor2(System.Array.init(2, null));
             },
             staticMethod2Failure: function () {
                 Bridge.ClientTest.BasicCSharp.ClassA.staticMethod2(["1", "some string", "345.345435"]);
@@ -3144,21 +3144,21 @@
                 Bridge.Test.Assert.areEqual$1(0, a.x, "x 0");
                 Bridge.Test.Assert.areEqual$1(0, a.y, "y 0");
 
-                var r = new Bridge.ClientTest.BasicCSharp.Rectangle.$constructor();
+                var r = new Bridge.ClientTest.BasicCSharp.Rectangle.ctor();
 
                 Bridge.Test.Assert.areEqual$1(0, r.l.x, "r.l.x 0");
                 Bridge.Test.Assert.areEqual$1(0, r.l.y, "r.l.y 0");
                 Bridge.Test.Assert.areEqual$1(0, r.t.x, "r.t.x 0");
                 Bridge.Test.Assert.areEqual$1(0, r.t.y, "r.t.y 0");
 
-                r = new Bridge.ClientTest.BasicCSharp.Rectangle.$constructor1(10, 20);
+                r = new Bridge.ClientTest.BasicCSharp.Rectangle.$ctor1(10, 20);
 
                 Bridge.Test.Assert.areEqual$1(10, r.l.x, "r.l.x 10");
                 Bridge.Test.Assert.areEqual$1(20, r.l.y, "r.l.y 20");
                 Bridge.Test.Assert.areEqual$1(0, r.t.x, "r.t.x 0");
                 Bridge.Test.Assert.areEqual$1(0, r.t.y, "r.t.y 0");
 
-                r = new Bridge.ClientTest.BasicCSharp.Rectangle.$constructor2(30, 40, 50, 60);
+                r = new Bridge.ClientTest.BasicCSharp.Rectangle.$ctor2(30, 40, 50, 60);
 
                 Bridge.Test.Assert.areEqual$1(30, r.l.x, "r.l.x 30");
                 Bridge.Test.Assert.areEqual$1(40, r.l.y, "r.l.y 40");
@@ -3391,13 +3391,13 @@
                 P: 0
             }
         },
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
-            System.Attribute.$constructor.call(this);
+            System.Attribute.ctor.call(this);
         },
-        $constructor1: function (x) {
+        $ctor1: function (x) {
             this.$initialize();
-            System.Attribute.$constructor.call(this);
+            System.Attribute.ctor.call(this);
             this.setX(x);
         }
     });
@@ -3410,13 +3410,13 @@
                 P: 0
             }
         },
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
-            System.Attribute.$constructor.call(this);
+            System.Attribute.ctor.call(this);
         },
-        $constructor1: function (x) {
+        $ctor1: function (x) {
             this.$initialize();
-            System.Attribute.$constructor.call(this);
+            System.Attribute.ctor.call(this);
             this.setX(x);
         }
     });
@@ -3426,6 +3426,192 @@
     Bridge.define('Bridge.ClientTest.Batch1.Reflection.AssemblyTests.G$2', function (T1, T2) { return {
 
     }; });
+
+    Bridge.define('Bridge.ClientTest.BridgeConsoleTests', {
+        testLogMessageObject: function () {
+            this.assertLogMessageObject("#0 - ", "Test Bridge Console Log Message Object", "Test Bridge Console Log Message Object");
+            this.assertLogMessageObject("#1 - ", true, "true");
+            this.assertLogMessageObject("#2 - ", false, "false");
+            this.assertLogMessageObject("#3 - ", -1, "-1");
+            this.assertLogMessageObject("#4 - ", 1, "1");
+            this.assertLogMessageObject("#5 - ", -12345678, "-12345678");
+            this.assertLogMessageObject("#6 - ", 12345678, "12345678");
+            this.assertLogMessageObject("#7 - ", System.Int64(-1), "-1");
+            this.assertLogMessageObject("#8 - ", System.Int64(1), "1");
+            this.assertLogMessageObject("#9 - ", System.Int64(-12345678), "-12345678");
+            this.assertLogMessageObject("#10 - ", System.Int64(12345678), "12345678");
+            this.assertLogMessageObject("#11 - ", System.UInt64(1), "1");
+            this.assertLogMessageObject("#12 - ", System.UInt64(12345678), "12345678");
+            this.assertLogMessageObject("#13 - ", -1.0, "-1");
+            this.assertLogMessageObject("#14 - ", 1.0, "1");
+            this.assertLogMessageObject("#15 - ", -12345678.0, "-12345678");
+            this.assertLogMessageObject("#16 - ", 12345678.0, "12345678");
+            this.assertLogMessageObject("#17 - ", -1.12345678, "-1.12345678");
+            this.assertLogMessageObject("#18 - ", 1.12345678, "1.12345678");
+            this.assertLogMessageObject("#19 - ", -12345678.12345678, "-12345678.12345678");
+            this.assertLogMessageObject("#20 - ", 12345678.12345678, "12345678.12345678");
+            this.assertLogMessageObject("#21 - ", System.Decimal(-1.0), "-1");
+            this.assertLogMessageObject("#22 - ", System.Decimal(1.0), "1");
+            this.assertLogMessageObject("#23 - ", System.Decimal(-12345678.0), "-12345678");
+            this.assertLogMessageObject("#24 - ", System.Decimal(12345678.0), "12345678");
+            this.assertLogMessageObject("#25 - ", System.Decimal(-1.12345678), "-1.12345678");
+            this.assertLogMessageObject("#26 - ", System.Decimal(1.12345678), "1.12345678");
+            this.assertLogMessageObject("#27 - ", System.Decimal("-12345678.12345678"), "-12345678.12345678");
+            this.assertLogMessageObject("#28 - ", System.Decimal("12345678.12345678"), "12345678.12345678");
+            this.assertLogMessageObject("#29 - ", null, "null");
+            this.assertLogMessageObject("#30 - ", {  }, "[object Object]");
+            this.assertLogMessageObject("#31 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassA(), "I'm ClassA");
+            this.assertLogMessageObject("#32 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassB(), "[object Object]");
+        },
+        testLogMessageString: function () {
+            this.assertLogMessageObject("#1 - ", "Test Bridge Console Log Message String", "Test Bridge Console Log Message String");
+            this.assertLogMessageObject("#2 - ", null, "null");
+        },
+        testDebugMessageString: function () {
+            this.assertDebugMessageString("#1 - ", "Test Bridge Console Debug Message String", "Test Bridge Console Debug Message String");
+            this.assertDebugMessageString("#2 - ", null, "null");
+        },
+        testErrorMessageString: function () {
+            this.assertErrorMessageString("#1 - ", "Test Bridge Console Error Message String", "Test Bridge Console Error Message String");
+            this.assertErrorMessageString("#2 - ", null, "null");
+        },
+        testToggling: function () {
+            Bridge.Console.hide();
+            Bridge.Console.log("Hide/Log");
+            this.assertMessage("#1 - ", "Hide/Log");
+
+            Bridge.Console.getInstance().close();
+            Bridge.Console.getInstance().close();
+            Bridge.Console.hide();
+            Bridge.Console.log("Close/Close/Hide/Log");
+            this.assertMessage("#2 - ", "Close/Close/Hide/Log");
+
+            Bridge.Console.getInstance().close();
+            Bridge.Console.hide();
+            Bridge.Console.hide();
+            Bridge.Console.log("Close/Hide/Hide/Log");
+            this.assertMessage("#3 - ", "Close/Hide/Hide/Log");
+
+            Bridge.Console.getInstance().close();
+            Bridge.Console.hide();
+            Bridge.Console.show();
+            Bridge.Console.show();
+            Bridge.Console.log("Close/Hide/Show/Show/Log");
+            this.assertMessage("#4 - ", "Close/Hide/Show/Show/Log");
+
+            Bridge.Console.hide();
+            Bridge.Console.show();
+            this.assertMessage("#5 Messages preserved after - ", "Close/Hide/Show/Show/Log");
+            Bridge.Console.hide();
+            Bridge.Console.show();
+            Bridge.Console.log("Hide/Show/Hide/Show/Log");
+            this.assertMessage("#6 - ", "Hide/Show/Hide/Show/Log");
+        },
+        assertLogMessageObject: function (description, message, expected) {
+            Bridge.Console.log(message);
+            this.assertMessage(description, expected);
+        },
+        assertLogMessageString: function (description, message, expected) {
+            Bridge.Console.log(message);
+            this.assertMessage(description, expected);
+        },
+        assertDebugMessageString: function (description, message, expected) {
+            Bridge.Console.debug(message);
+            this.assertMessage(description, expected, "#1800FF");
+        },
+        assertErrorMessageString: function (description, message, expected) {
+            Bridge.Console.error(message);
+            this.assertMessage(description, expected, "#d65050");
+        },
+        assertMessage: function (description, expected, color) {
+            if (color === void 0) { color = "#555"; }
+            var el = Bridge.as(Bridge.Console.getInstance().currentMessageElement, HTMLLIElement);
+
+            if (el == null) {
+                Bridge.Test.Assert.fail$1(System.String.concat(description, "Could not get current message as HTMLLIElement"));
+                return;
+            }
+
+            Bridge.Test.Assert.true$1(true, System.String.concat(description, "Message <li> element exists"));
+
+            var span = System.Linq.Enumerable.from(el.getElementsByTagName("span")).firstOrDefault(null, null);
+
+            if (span == null) {
+                Bridge.Test.Assert.fail$1(System.String.concat(description, "Could not get message span element"));
+                return;
+            }
+
+            Bridge.Test.Assert.true$1(true, System.String.concat(description, "Message <span> element exists"));
+            Bridge.Test.Assert.areEqual$1(expected, span.innerHTML, System.String.concat(description, "Message is correct"));
+            Bridge.Test.Assert.areEqual$1(this.normalizeHexStyleColor(color), this.convertStyleColor(span.style.color), System.String.concat(System.String.concat(System.String.concat(System.String.concat(description, "Message <span> color ("), span.style.color), ") should be "), color));
+        },
+        convertStyleColor: function (styleColor) {
+            var r = new RegExp("^rgb\\((\\d+),\\s*(\\d+),\\s*(\\d+)\\)$");
+
+            var items = r.exec(styleColor);
+
+            if (items != null && items.length >= 4) {
+                styleColor = this.rgbToHex(items[1], items[2], items[3]);
+            }
+
+            return this.normalizeHexStyleColor(styleColor);
+        },
+        normalizeHexStyleColor: function (styleColor) {
+            if (System.String.isNullOrEmpty(styleColor) || !System.String.startsWith(styleColor, "#")) {
+                return styleColor;
+            }
+
+            var subColor = styleColor.substr(1);
+            if (subColor.length < 1) {
+                return styleColor;
+            } else if (subColor.length === 3) {
+                subColor = this.duplicate$1(subColor);
+            }
+
+            if (subColor.length < 6) {
+                var toAdd = ("000000").substr(0, ((6 - subColor.length) | 0));
+                subColor = System.String.concat(toAdd, subColor);
+            }
+
+            styleColor = (System.String.concat(String.fromCharCode(styleColor.charCodeAt(0)), subColor)).toUpperCase();
+
+            return styleColor;
+        },
+        duplicate: function (c) {
+            return System.String.concat(String.fromCharCode(c), String.fromCharCode(c));
+        },
+        duplicate$1: function (s) {
+            if (s == null) {
+                return null;
+            }
+
+            var r = "";
+            for (var i = 0; i < s.length; i = (i + 1) | 0) {
+                r = System.String.concat(r, (this.duplicate(s.charCodeAt(i))));
+            }
+
+            return r;
+        },
+        rgbToHex: function (r, g, b) {
+            return System.String.concat(System.String.concat(System.String.concat("#", this.toHexNumber(r)), this.toHexNumber(g)), this.toHexNumber(b));
+        },
+        toHexNumber: function (n) {
+            var i = { v : 0 };
+            System.Int32.tryParse(n, i);
+
+            var r = System.Int32.format(i.v, "X2");
+
+            return r;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.BridgeConsoleTests.ClassA', {
+        toString: function () {
+            return "I'm ClassA";
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.BridgeConsoleTests.ClassB');
 
     Bridge.define('Bridge.ClientTest.CheckedUncheckedTests', {
         statics: {
@@ -4507,7 +4693,7 @@
 
     Bridge.define('Bridge.ClientTest.Collections.Generic.ComparerTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.Comparer$1[[Object]]", Bridge.getTypeName(System.Collections.Generic.Comparer$1(Object)), "GetClassName()");
+            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.Comparer$1[[Object]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.Comparer$1(Object)), "FullName");
 
             var comparer = new (System.Collections.Generic.Comparer$1(Object))(System.Collections.Generic.Comparer$1.$default.fn);
             Bridge.Test.Assert.true$1(Bridge.hasValue(comparer), "is Comparer<object> should be true");
@@ -4556,7 +4742,7 @@
             "compareTo", "System$IComparable$1$Bridge$ClientTest$Collections$Generic$ComparerTests$C$compareTo"
             ]
         },
-        constructor: function (value) {
+        ctor: function (value) {
             this.$initialize();
             this.value = value;
         },
@@ -4567,29 +4753,29 @@
 
     Bridge.define('Bridge.ClientTest.Collections.Generic.EqualityComparerTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.EqualityComparer$1[[Object]]", Bridge.getTypeName(System.Collections.Generic.EqualityComparer$1(Object)), "FullName should be correct");
-            var dict = new (System.Collections.Generic.EqualityComparer$1(Object))();
+            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.EqualityComparer$1[[Object]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.EqualityComparer$1(Object)), "FullName should be correct");
+            var dict = System.Collections.Generic.EqualityComparer$1(Object).def;
             Bridge.Test.Assert.true$1(Bridge.is(dict, System.Collections.Generic.EqualityComparer$1(Object)), "is EqualityComparer<object> should be true");
             Bridge.Test.Assert.true$1(Bridge.is(dict, System.Collections.Generic.IEqualityComparer$1(Object)), "is IEqualityComparer<object> should be true");
         },
         defaultComparerCanGetHashCodeOfNumber: function () {
-            Bridge.Test.Assert.areEqual(Bridge.getHashCode((12345)), new (System.Collections.Generic.EqualityComparer$1(Object))().getHashCode2(12345));
+            Bridge.Test.Assert.areEqual(Bridge.getHashCode((12345)), System.Collections.Generic.EqualityComparer$1(Object).def.getHashCode2(12345));
         },
         defaultComparerReturnsZeroAsHashCodeForNullAndUndefined: function () {
-            Bridge.Test.Assert.areEqual(0, new (System.Collections.Generic.EqualityComparer$1(Object))().getHashCode2(null));
-            Bridge.Test.Assert.areEqual(0, new (System.Collections.Generic.EqualityComparer$1(Object))().getHashCode2(undefined));
+            Bridge.Test.Assert.areEqual(0, System.Collections.Generic.EqualityComparer$1(Object).def.getHashCode2(null));
+            Bridge.Test.Assert.areEqual(0, System.Collections.Generic.EqualityComparer$1(Object).def.getHashCode2(undefined));
         },
         defaultComparerCanDetermineEquality: function () {
             var o1 = {  }, o2 = {  };
 
-            Bridge.Test.Assert.true$1(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(null, null), "null, null");
-            Bridge.Test.Assert.false$1(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(null, o1), "null, o1");
-            Bridge.Test.Assert.false$1(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(o1, null), "o1, null");
-            Bridge.Test.Assert.true$1(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(o1, o1), "o1, o1");
-            Bridge.Test.Assert.false$1(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(o1, o2), "o1, o2");
+            Bridge.Test.Assert.true$1(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(null, null), "null, null");
+            Bridge.Test.Assert.false$1(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(null, o1), "null, o1");
+            Bridge.Test.Assert.false$1(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(o1, null), "o1, null");
+            Bridge.Test.Assert.true$1(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(o1, o1), "o1, o1");
+            Bridge.Test.Assert.false$1(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(o1, o2), "o1, o2");
         },
         defaultComparerInvokesOverriddenGetHashCode: function () {
-            Bridge.Test.Assert.areEqual(42158, new (System.Collections.Generic.EqualityComparer$1(Object))().getHashCode2(Bridge.merge(new Bridge.ClientTest.Collections.Generic.EqualityComparerTests.MyClass(), {
+            Bridge.Test.Assert.areEqual(42158, System.Collections.Generic.EqualityComparer$1(Object).def.getHashCode2(Bridge.merge(new Bridge.ClientTest.Collections.Generic.EqualityComparerTests.MyClass(), {
                 hashCode: 42158
             } )));
         },
@@ -4597,17 +4783,17 @@
             var c = new Bridge.ClientTest.Collections.Generic.EqualityComparerTests.MyClass();
             var other = new Bridge.ClientTest.Collections.Generic.EqualityComparerTests.MyClass();
             c.shouldEqual = false;
-            Bridge.Test.Assert.false(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(c, other));
+            Bridge.Test.Assert.false(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(c, other));
             Bridge.Test.Assert.areStrictEqual(other, c.other);
 
             c.shouldEqual = true;
             c.other = null;
-            Bridge.Test.Assert.true(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(c, other));
+            Bridge.Test.Assert.true(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(c, other));
             Bridge.Test.Assert.areStrictEqual(other, c.other);
 
             c.shouldEqual = true;
             c.other = other;
-            Bridge.Test.Assert.false(new (System.Collections.Generic.EqualityComparer$1(Object))().equals2(c, null)); // We should not invoke our own equals so its return value does not matter.
+            Bridge.Test.Assert.false(System.Collections.Generic.EqualityComparer$1(Object).def.equals2(c, null)); // We should not invoke our own equals so its return value does not matter.
             Bridge.Test.Assert.areEqual(other, c.other); // We should not invoke our own equals so the 'other' member should not be set.
         }
     });
@@ -4627,7 +4813,7 @@
 
     Bridge.define('Bridge.ClientTest.Collections.Generic.GenericDictionaryTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.Dictionary$2[[System.Int32, mscorlib],[String]]", Bridge.getTypeName(System.Collections.Generic.Dictionary$2(System.Int32,String)), "FullName should be correct");
+            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.Dictionary$2[[System.Int32, mscorlib],[String]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.Dictionary$2(System.Int32,String)), "FullName should be correct");
             var dict = new (System.Collections.Generic.Dictionary$2(System.Int32,String))();
             Bridge.Test.Assert.true$1(Bridge.is(dict, System.Collections.Generic.Dictionary$2(System.Int32,String)), "is Dictionary<int,string> should be true");
             Bridge.Test.Assert.true$1(Bridge.is(dict, System.Collections.Generic.IDictionary$2(System.Int32,String)), "is IDictionary<int,string> should be true");
@@ -4636,14 +4822,14 @@
         defaultConstructorWorks: function () {
             var d = new (System.Collections.Generic.Dictionary$2(System.Int32,String))();
             Bridge.Test.Assert.areEqual$1(0, d.getCount(), "Count is 0");
-            Bridge.Test.Assert.areEqual$1("Bridge.CustomEnumerator", Bridge.getTypeName(d.getEnumerator()), "Enumerator should be Bridge.CustomEnumerator");
-            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.EqualityComparer$1[[Object]]", Bridge.getTypeName(d.getComparer()), "Comparer should be Bridge.EqualityComparer$1$Object");
+            Bridge.Test.Assert.areEqual$1("Bridge.CustomEnumerator", Bridge.Reflection.getTypeFullName(Bridge.getType(d.getEnumerator())), "Enumerator");
+            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.EqualityComparer$1[[System.Int32, mscorlib]]", Bridge.Reflection.getTypeFullName(Bridge.getType(d.getComparer())), "Comparer");
         },
         capacityConstructorWorks: function () {
             var d = new (System.Collections.Generic.Dictionary$2(System.Int32, String))();
             Bridge.Test.Assert.areEqual(0, d.getCount());
-            Bridge.Test.Assert.areEqual$1("Bridge.CustomEnumerator", Bridge.getTypeName(d.getEnumerator()), "Enumerator should be Bridge.CustomEnumerator");
-            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.EqualityComparer$1[[Object]]", Bridge.getTypeName(d.getComparer()), "Comparer should be Bridge.EqualityComparer$1$Object");
+            Bridge.Test.Assert.areEqual$1("Bridge.CustomEnumerator", Bridge.Reflection.getTypeFullName(Bridge.getType(d.getEnumerator())), "Enumerator");
+            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.EqualityComparer$1[[System.Int32, mscorlib]]", Bridge.Reflection.getTypeFullName(Bridge.getType(d.getComparer())), "Comparer");
         },
         capacityAndEqualityComparerWorks: function () {
             var c = new Bridge.ClientTest.Collections.Generic.GenericDictionaryTests.TestEqualityComparer();
@@ -4981,7 +5167,7 @@
 
     Bridge.define('Bridge.ClientTest.Collections.Generic.ICollectionTests.C', {
         _i: 0,
-        constructor: function (i) {
+        ctor: function (i) {
             this.$initialize();
             this._i = i;
         },
@@ -5008,7 +5194,7 @@
             "remove", "System$Collections$Generic$ICollection$1$String$remove"
             ]
         },
-        constructor: function (items) {
+        ctor: function (items) {
             this.$initialize();
             this.setItems(new (System.Collections.Generic.List$1(String))(items));
         },
@@ -5037,25 +5223,25 @@
 
     Bridge.define('Bridge.ClientTest.Collections.Generic.IDictionaryTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.IDictionary$2[[Object],[Object]]", Bridge.getTypeName(System.Collections.Generic.IDictionary$2(Object,Object)), "FullName should be correct");
+            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.IDictionary$2[[Object],[Object]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.IDictionary$2(Object,Object)), "FullName should be correct");
         },
         classImplementsInterfaces: function () {
-            Bridge.Test.Assert.true(Bridge.is(new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$constructor(), System.Collections.Generic.IDictionary$2(System.Int32,String)));
+            Bridge.Test.Assert.true(Bridge.is(new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.ctor(), System.Collections.Generic.IDictionary$2(System.Int32,String)));
         },
         countWorks: function () {
-            var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$constructor();
+            var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.ctor();
             Bridge.Test.Assert.areEqual(0, d.getCount());
 
-            var d2 = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$constructor1($_.Bridge.ClientTest.Collections.Generic.IDictionaryTests.f1(new (System.Collections.Generic.Dictionary$2(System.Int32,String))()));
+            var d2 = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$ctor1($_.Bridge.ClientTest.Collections.Generic.IDictionaryTests.f1(new (System.Collections.Generic.Dictionary$2(System.Int32,String))()));
             Bridge.Test.Assert.areEqual(1, d2.getCount());
 
-            var d3 = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$constructor();
+            var d3 = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.ctor();
             Bridge.Test.Assert.areEqual(0, d3.getCount());
         },
         keysWorks: function () {
             var $t;
             var actualKeys = [3, 6, 9];
-            var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$constructor1($_.Bridge.ClientTest.Collections.Generic.IDictionaryTests.f2(new (System.Collections.Generic.Dictionary$2(System.Int32,String))()));
+            var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$ctor1($_.Bridge.ClientTest.Collections.Generic.IDictionaryTests.f2(new (System.Collections.Generic.Dictionary$2(System.Int32,String))()));
             var keys = d.getKeys();
             Bridge.Test.Assert.true$1(Bridge.is(keys, System.Collections.Generic.IEnumerable$1(System.Int32)), "IEnumerable<int>");
             Bridge.Test.Assert.true$1(Bridge.hasValue(keys), "ICollection<int>");
@@ -5070,7 +5256,7 @@
             Bridge.Test.Assert.areEqual(actualKeys.length, i);
         },
         getItemWorks: function () {
-            var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$constructor1($_.Bridge.ClientTest.Collections.Generic.IDictionaryTests.f3(new (System.Collections.Generic.Dictionary$2(System.Int32,String))()));
+            var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$ctor1($_.Bridge.ClientTest.Collections.Generic.IDictionaryTests.f3(new (System.Collections.Generic.Dictionary$2(System.Int32,String))()));
 
             var di2 = Bridge.cast(d, System.Collections.Generic.IDictionary$2(System.Int32,String));
 
@@ -5096,7 +5282,7 @@
         valuesWorks: function () {
             var $t;
             var actualValues = ["b", "z", "x"];
-            var d2 = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$constructor1($_.Bridge.ClientTest.Collections.Generic.IDictionaryTests.f4(new (System.Collections.Generic.Dictionary$2(System.Int32,String))()));
+            var d2 = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$ctor1($_.Bridge.ClientTest.Collections.Generic.IDictionaryTests.f4(new (System.Collections.Generic.Dictionary$2(System.Int32,String))()));
             var values = d2.getValues();
             Bridge.Test.Assert.true(Bridge.is(values, System.Collections.Generic.IEnumerable$1(String)));
 
@@ -5111,7 +5297,7 @@
             Bridge.Test.Assert.areEqual(actualValues.length, i);
         },
         containsKeyWorks: function () {
-            var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$constructor1($_.Bridge.ClientTest.Collections.Generic.IDictionaryTests.f5(new (System.Collections.Generic.Dictionary$2(System.Int32,String))()));
+            var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$ctor1($_.Bridge.ClientTest.Collections.Generic.IDictionaryTests.f5(new (System.Collections.Generic.Dictionary$2(System.Int32,String))()));
             var di2 = Bridge.cast(d, System.Collections.Generic.IDictionary$2(System.Int32,String));
 
             Bridge.Test.Assert.true(d.containsKey(9));
@@ -5121,7 +5307,7 @@
             Bridge.Test.Assert.false(di2.System$Collections$Generic$IDictionary$2$System$Int32$String$containsKey(353));
         },
         tryGetValueWorks: function () {
-            var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$constructor1($_.Bridge.ClientTest.Collections.Generic.IDictionaryTests.f6(new (System.Collections.Generic.Dictionary$2(System.Int32,String))()));
+            var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$ctor1($_.Bridge.ClientTest.Collections.Generic.IDictionaryTests.f6(new (System.Collections.Generic.Dictionary$2(System.Int32,String))()));
             var di2 = Bridge.cast(d, System.Collections.Generic.IDictionary$2(System.Int32,String));
 
             var outVal = { };
@@ -5141,7 +5327,7 @@
             Bridge.Test.Assert.areEqual(null, outVal.v);
         },
         addWorks: function () {
-            var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$constructor();
+            var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.ctor();
             var di = Bridge.cast(d, System.Collections.Generic.IDictionary$2(System.Int32,String));
 
             d.add(5, "aa");
@@ -5165,14 +5351,14 @@
             }
         },
         clearWorks: function () {
-            var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$constructor1($_.Bridge.ClientTest.Collections.Generic.IDictionaryTests.f7(new (System.Collections.Generic.Dictionary$2(System.Int32,String))()));
+            var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$ctor1($_.Bridge.ClientTest.Collections.Generic.IDictionaryTests.f7(new (System.Collections.Generic.Dictionary$2(System.Int32,String))()));
 
             Bridge.Test.Assert.areEqual(3, d.getCount());
             d.clear();
             Bridge.Test.Assert.areEqual(0, d.getCount());
         },
         removeWorks: function () {
-            var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$constructor1($_.Bridge.ClientTest.Collections.Generic.IDictionaryTests.f8(new (System.Collections.Generic.Dictionary$2(System.Int32,String))()));
+            var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$ctor1($_.Bridge.ClientTest.Collections.Generic.IDictionaryTests.f8(new (System.Collections.Generic.Dictionary$2(System.Int32,String))()));
             var di = Bridge.cast(d, System.Collections.Generic.IDictionary$2(System.Int32,String));
 
             Bridge.Test.Assert.areStrictEqual(true, d.remove(6));
@@ -5186,7 +5372,7 @@
             Bridge.Test.Assert.true(di.System$Collections$Generic$IDictionary$2$System$Int32$String$containsKey(13));
         },
         setItemWorks: function () {
-            var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$constructor1($_.Bridge.ClientTest.Collections.Generic.IDictionaryTests.f9(new (System.Collections.Generic.Dictionary$2(System.Int32,String))()));
+            var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$ctor1($_.Bridge.ClientTest.Collections.Generic.IDictionaryTests.f9(new (System.Collections.Generic.Dictionary$2(System.Int32,String))()));
             var di = Bridge.cast(d, System.Collections.Generic.IDictionary$2(System.Int32,String));
 
             d.setItem(3, "check");
@@ -5275,10 +5461,10 @@
             "tryGetValue", "System$Collections$Generic$IDictionary$2$System$Int32$String$tryGetValue"
             ]
         },
-        constructor: function () {
-            Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$constructor1.call(this, new (System.Collections.Generic.Dictionary$2(System.Int32,String))());
+        ctor: function () {
+            Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$ctor1.call(this, new (System.Collections.Generic.Dictionary$2(System.Int32,String))());
         },
-        $constructor1: function (initialValues) {
+        $ctor1: function (initialValues) {
             this.$initialize();
             this._backingDictionary = initialValues;
         },
@@ -5393,7 +5579,7 @@
 
     Bridge.define('Bridge.ClientTest.Collections.Generic.IListTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.IList$1[[Object]]", Bridge.getTypeName(System.Collections.Generic.IList$1(Object)), "FullName should be correct");
+            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.IList$1[[Object]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.IList$1(Object)), "FullName should be correct");
 
             var iList = new (System.Collections.Generic.List$1(Object))();
 
@@ -5472,7 +5658,7 @@
 
     Bridge.define('Bridge.ClientTest.Collections.Generic.IListTests.C', {
         _i: 0,
-        constructor: function (i) {
+        ctor: function (i) {
             this.$initialize();
             this._i = i;
         },
@@ -5504,7 +5690,7 @@
             "removeAt", "System$Collections$Generic$IList$1$String$removeAt"
             ]
         },
-        constructor: function (items) {
+        ctor: function (items) {
             this.$initialize();
             this.setItems(new (System.Collections.Generic.List$1(String))(items));
         },
@@ -5703,7 +5889,7 @@
 
     Bridge.define('Bridge.ClientTest.Collections.Generic.IteratorBlockTests.C', {
         _sb: null,
-        constructor: function (sb) {
+        ctor: function (sb) {
             this.$initialize();
             this._sb = sb;
         },
@@ -5791,7 +5977,7 @@
 
     Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.List$1[[System.Int32, mscorlib]]", Bridge.getTypeName(System.Collections.Generic.List$1(System.Int32)), "GetClassName()");
+            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.List$1[[System.Int32, mscorlib]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.List$1(System.Int32)), "FullName");
             var list = new (System.Collections.Generic.List$1(System.Int32))();
             Bridge.Test.Assert.true$1(Bridge.is(list, System.Collections.Generic.List$1(System.Int32)), "is int[] should be true");
             Bridge.Test.Assert.true$1(Bridge.is(list, System.Collections.Generic.IList$1(System.Int32)), "is IList<int> should be true");
@@ -6442,7 +6628,7 @@
 
     Bridge.define('Bridge.ClientTest.Collections.Generic.ListTests.C', {
         i: 0,
-        constructor: function (i) {
+        ctor: function (i) {
             this.$initialize();
             this.i = i;
         },
@@ -6547,6 +6733,7 @@
             MODULE_ARGUMENTS: "Arguments",
             MODULE_MIXIN: "Mixin",
             MODULE_SERIALIZATION: "Serialization",
+            MODULE_BRIDGECONSOLE: "Bridge Console",
             IGNORE_DATE: null
         }
     });
@@ -7034,12 +7221,12 @@
                         Bridge.Test.Assert.throws$2(function () {
                             convert(testValues[i], testBases[i]);
                         }, function (err) {
-                            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(TException));
+                            return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(TException));
                         }, System.String.concat(System.String.concat(System.String.concat("Value ", testValues[i]), " base "), testBases[i]));
                     }
                     catch (e) {
                         e = System.Exception.create(e);
-                        var message = System.String.format("Expected {0} converting '{1}' (base {2}) to '{3}'", Bridge.getTypeName(TException), testValues[i], testBases[i], Bridge.getTypeName(TOutput));
+                        var message = System.String.format("Expected {0} converting '{1}' (base {2}) to '{3}'", Bridge.Reflection.getTypeFullName(TException), testValues[i], testBases[i], Bridge.Reflection.getTypeFullName(TOutput));
                         throw new System.AggregateException(message, [e]);
                     }
                 }).call(this);
@@ -7065,12 +7252,12 @@
                         Bridge.Test.Assert.throws$2(function () {
                             convert(testValues[i]);
                         }, function (err) {
-                            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(TException));
+                            return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(TException));
                         }, System.String.concat("Value ", testValues[i]));
                     }
                     catch (e) {
                         e = System.Exception.create(e);
-                        var message = System.String.format("Expected {0} converting '{1}' ({2}) to {3}", Bridge.getTypeName(TException), testValues[i], Bridge.getTypeName(TInput), Bridge.getTypeName(TOutput));
+                        var message = System.String.format("Expected {0} converting '{1}' ({2}) to {3}", Bridge.Reflection.getTypeFullName(TException), testValues[i], Bridge.Reflection.getTypeFullName(TInput), Bridge.Reflection.getTypeFullName(TOutput));
                         throw new System.AggregateException(message, [e]);
                     }
                 }).call(this);
@@ -7097,12 +7284,12 @@
                         Bridge.Test.Assert.throws$2(function () {
                             convert(testValues[i]);
                         }, function (err) {
-                            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(TException));
+                            return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(TException));
                         }, System.String.concat("Value ", testValues[i]));
                     }
                     catch (e) {
                         e = System.Exception.create(e);
-                        var message = System.String.format("Expected {0} converting '{1}' ({2}) to {3}", Bridge.getTypeName(TException), testValues[i], Bridge.getTypeName(TInput), Bridge.getTypeName(TOutput));
+                        var message = System.String.format("Expected {0} converting '{1}' ({2}) to {3}", Bridge.Reflection.getTypeFullName(TException), testValues[i], Bridge.Reflection.getTypeFullName(TInput), Bridge.Reflection.getTypeFullName(TOutput));
                         throw new System.AggregateException(message, [e]);
                     }
                 }).call(this);
@@ -7172,7 +7359,7 @@
             "getFormat", "System$IFormatProvider$getFormat"
             ]
         },
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
         },
         getFormat: function (formatType) {
@@ -7737,7 +7924,7 @@
 
     Bridge.define('Bridge.ClientTest.ConvertTests.ConvertToStringTests.Foo', {
         _value: 0,
-        constructor: function (value) {
+        ctor: function (value) {
             this.$initialize();
             this._value = value;
         },
@@ -7758,13 +7945,13 @@
             "format", "System$IFormattable$format"
             ]
         },
-        constructor: function (value) {
+        ctor: function (value) {
             this.$initialize();
             this._value = value;
         },
         toString$1: function (format, formatProvider) {
             if (formatProvider != null) {
-                return System.String.format("{0}: {1}", Bridge.getTypeName(formatProvider), this._value);
+                return System.String.format("{0}: {1}", Bridge.Reflection.getTypeFullName(Bridge.getType(formatProvider)), this._value);
             } else {
                 return System.String.format("FooFormattable: {0}", (this._value));
             }
@@ -7805,7 +7992,7 @@
                 Bridge.property(this, "Prop2", System.String.concat(Bridge.ClientTest.CSharp6.TestAutoProps.Customer.staticField, "2"));
             }
         },
-        constructor: function (first, last) {
+        ctor: function (first, last) {
             this.$initialize();
             this.setName(System.String.concat(System.String.concat(first, " "), last));
         }
@@ -8014,7 +8201,7 @@
                 Orders: null
             }
         },
-        constructor: function (values) {
+        ctor: function (values) {
             this.$initialize();
             this.fields = values;
             this.setOrders(values);
@@ -8128,7 +8315,7 @@
             }
         },
         v: 0,
-        constructor: function (v) {
+        ctor: function (v) {
             this.$initialize();
             this.v = v;
         },
@@ -8160,7 +8347,7 @@
     Bridge.define('Bridge.ClientTest.CSharp6.TestExpressionBodyFunction.Point', {
         v1: 0,
         v2: 0,
-        constructor: function (v1, v2) {
+        ctor: function (v1, v2) {
             this.$initialize();
             this.v1 = v1;
             this.v2 = v2;
@@ -8252,13 +8439,13 @@
                     P: 0
                 }
             },
-            f1: function () {
+            F1: function () {
                 return 0;
             },
-            f2: function () {
+            F2: function () {
                 return 0;
             },
-            f3: function () {
+            F3: function () {
                 return 0;
             },
             testBasic: function () {
@@ -8276,7 +8463,7 @@
                 Bridge.Test.Assert.areEqual("i = 0, j = 1", System.String.format("i = {0}, j = {1}", i, j));
                 Bridge.Test.Assert.areEqual("{0, 1}", System.String.format("{{{0}, {1}}}", i, j));
                 Bridge.Test.Assert.areEqual("i = 00, j = 1, k =            2", System.String.format("i = {0:00}, j = {1:##}, k = {2,12:#0}", i, j, k));
-                Bridge.Test.Assert.areEqual("0, 0, 0", System.String.format("{0}, {1}, {2}", Bridge.ClientTest.CSharp6.TestInterpolatedStrings.f1(), ($t = Bridge.ClientTest.CSharp6.TestInterpolatedStrings.f2(), Bridge.ClientTest.CSharp6.TestInterpolatedStrings.setP($t), $t), Bridge.ClientTest.CSharp6.TestInterpolatedStrings.f3()));
+                Bridge.Test.Assert.areEqual("0, 0, 0", System.String.format("{0}, {1}, {2}", Bridge.ClientTest.CSharp6.TestInterpolatedStrings.F1(), ($t = Bridge.ClientTest.CSharp6.TestInterpolatedStrings.F2(), Bridge.ClientTest.CSharp6.TestInterpolatedStrings.setP($t), $t), Bridge.ClientTest.CSharp6.TestInterpolatedStrings.F3()));
 
                 var f1 = System.Runtime.CompilerServices.FormattableStringFactory.create("i = {0}, j = {1}", [i, j]);
                 var f2 = System.Runtime.CompilerServices.FormattableStringFactory.create("i = {0}, j = {1}", [i, j]);
@@ -8363,7 +8550,7 @@
     Bridge.define('Bridge.ClientTest.CultureInfoTests', {
         typePropertiesAreCorrect: function () {
             var culture = System.Globalization.CultureInfo.invariantCulture;
-            Bridge.Test.Assert.areEqual("System.Globalization.CultureInfo", Bridge.getTypeName(System.Globalization.CultureInfo));
+            Bridge.Test.Assert.areEqual("System.Globalization.CultureInfo", Bridge.Reflection.getTypeFullName(System.Globalization.CultureInfo));
             Bridge.Test.Assert.true(Bridge.hasValue(culture));
         },
         getFormatWorks: function () {
@@ -8610,7 +8797,7 @@
                 Text: null
             }
         },
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
             if (Bridge.ClientTest.DecimalMathTests.useLogging) {
                 this.setText(new System.Text.StringBuilder());
@@ -8664,7 +8851,7 @@
             sb.appendLine();
             sb.append("};");
 
-            System.Console.log(sb.toString());
+            Bridge.Console.log(sb.toString());
         }
     });
 
@@ -8942,7 +9129,7 @@
             return System.Array.toEnumerable($yield);
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.AggregateException", Bridge.getTypeName(System.AggregateException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.AggregateException", Bridge.Reflection.getTypeFullName(System.AggregateException), "Name");
             var d = new System.AggregateException();
             Bridge.Test.Assert.true(Bridge.is(d, System.AggregateException));
             Bridge.Test.Assert.true(Bridge.is(d, System.Exception));
@@ -9100,7 +9287,7 @@
             DefaultMessage: "Value does not fall within the expected range."
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.ArgumentException", Bridge.getTypeName(System.ArgumentException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.ArgumentException", Bridge.Reflection.getTypeFullName(System.ArgumentException), "Name");
             var d = new System.ArgumentException();
             Bridge.Test.Assert.true(Bridge.is(d, System.ArgumentException));
             Bridge.Test.Assert.true(Bridge.is(d, System.Exception));
@@ -9147,7 +9334,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.ArgumentNullExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.ArgumentNullException", Bridge.getTypeName(System.ArgumentNullException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.ArgumentNullException", Bridge.Reflection.getTypeFullName(System.ArgumentNullException), "Name");
             var d = new System.ArgumentNullException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.ArgumentNullException), "is ArgumentNullException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.ArgumentException), "is ArgumentException");
@@ -9186,7 +9373,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.ArgumentOutOfRangeExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.ArgumentOutOfRangeException", Bridge.getTypeName(System.ArgumentOutOfRangeException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.ArgumentOutOfRangeException", Bridge.Reflection.getTypeFullName(System.ArgumentOutOfRangeException), "Name");
             var d = new System.ArgumentOutOfRangeException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.ArgumentOutOfRangeException), "is ArgumentOutOfRangeException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.ArgumentException), "is ArgumentException");
@@ -9256,7 +9443,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.ArithmeticExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.ArithmeticException", Bridge.getTypeName(System.ArithmeticException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.ArithmeticException", Bridge.Reflection.getTypeFullName(System.ArithmeticException), "Name");
             var d = new System.ArithmeticException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.ArithmeticException), "is DivideByZeroException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9377,9 +9564,9 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.CommonExceptionTests.E1', {
         inherits: [System.Exception],
-        constructor: function (message) {
+        ctor: function (message) {
             this.$initialize();
-            System.Exception.$constructor.call(this, message);
+            System.Exception.ctor.call(this, message);
         }
     });
 
@@ -9388,7 +9575,7 @@
             DefaultMessage: "Culture is not supported."
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Globalization.CultureNotFoundException", Bridge.getTypeName(System.Globalization.CultureNotFoundException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.Globalization.CultureNotFoundException", Bridge.Reflection.getTypeFullName(System.Globalization.CultureNotFoundException), "Name");
             var d = new System.Globalization.CultureNotFoundException();
             Bridge.Test.Assert.true(Bridge.is(d, System.Globalization.CultureNotFoundException));
             Bridge.Test.Assert.true(Bridge.is(d, System.Exception));
@@ -9472,7 +9659,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.DivideByZeroExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.DivideByZeroException", Bridge.getTypeName(System.DivideByZeroException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.DivideByZeroException", Bridge.Reflection.getTypeFullName(System.DivideByZeroException), "Name");
             var d = new System.DivideByZeroException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.DivideByZeroException), "is DivideByZeroException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9500,7 +9687,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.ExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Exception", Bridge.getTypeName(System.Exception), "Name");
+            Bridge.Test.Assert.areEqual$1("System.Exception", Bridge.Reflection.getTypeFullName(System.Exception), "Name");
             var d = new System.Exception();
             Bridge.Test.Assert.true(Bridge.is(d, System.Exception));
         },
@@ -9538,9 +9725,9 @@
         inherits: [System.Exception],
         _message: null,
         _innerException: null,
-        constructor: function (message, innerException) {
+        ctor: function (message, innerException) {
             this.$initialize();
-            System.Exception.$constructor.call(this);
+            System.Exception.ctor.call(this);
             this._message = message;
             this._innerException = innerException;
         },
@@ -9554,7 +9741,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.FormatExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.FormatException", Bridge.getTypeName(System.FormatException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.FormatException", Bridge.Reflection.getTypeFullName(System.FormatException), "Name");
             var d = new System.FormatException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.FormatException), "is FormatException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9585,7 +9772,7 @@
             DefaultMessage: "Index was outside the bounds of the array."
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.IndexOutOfRangeException", Bridge.getTypeName(System.IndexOutOfRangeException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.IndexOutOfRangeException", Bridge.Reflection.getTypeFullName(System.IndexOutOfRangeException), "Name");
             var d = new System.IndexOutOfRangeException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.IndexOutOfRangeException), "is IndexOutOfRangeException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.SystemException), "is SystemException");
@@ -9614,7 +9801,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.InvalidCastExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.InvalidCastException", Bridge.getTypeName(System.InvalidCastException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.InvalidCastException", Bridge.Reflection.getTypeFullName(System.InvalidCastException), "Name");
             var d = new System.InvalidCastException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.InvalidCastException), "is InvalidCastException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9642,7 +9829,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.InvalidOperationExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.InvalidOperationException", Bridge.getTypeName(System.InvalidOperationException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.InvalidOperationException", Bridge.Reflection.getTypeFullName(System.InvalidOperationException), "Name");
             var d = new System.InvalidOperationException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.InvalidOperationException), "is InvalidOperationException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9670,7 +9857,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.KeyNotFoundExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.KeyNotFoundException", Bridge.getTypeName(System.Collections.Generic.KeyNotFoundException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.Collections.Generic.KeyNotFoundException", Bridge.Reflection.getTypeFullName(System.Collections.Generic.KeyNotFoundException), "Name");
             var d = new System.Collections.Generic.KeyNotFoundException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Collections.Generic.KeyNotFoundException), "is KeyNotFoundException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9698,7 +9885,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.NotImplementedExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.NotImplementedException", Bridge.getTypeName(System.NotImplementedException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.NotImplementedException", Bridge.Reflection.getTypeFullName(System.NotImplementedException), "Name");
             var d = new System.NotImplementedException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.NotImplementedException), "is NotImplementedException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9726,7 +9913,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.NotSupportedExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.NotSupportedException", Bridge.getTypeName(System.NotSupportedException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.NotSupportedException", Bridge.Reflection.getTypeFullName(System.NotSupportedException), "Name");
             var d = new System.NotSupportedException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.NotSupportedException), "is NotSupportedException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9754,7 +9941,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.NullReferenceExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.NullReferenceException", Bridge.getTypeName(System.NullReferenceException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.NullReferenceException", Bridge.Reflection.getTypeFullName(System.NullReferenceException), "Name");
             var d = new System.NullReferenceException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.NullReferenceException), "is NullReferenceException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9801,7 +9988,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.OperationCanceledExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.OperationCanceledException", Bridge.getTypeName(System.OperationCanceledException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.OperationCanceledException", Bridge.Reflection.getTypeFullName(System.OperationCanceledException), "Name");
             var d = new System.OperationCanceledException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.OperationCanceledException), "is OperationCanceledException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9860,7 +10047,7 @@
             DefaultMessage: "Insufficient memory to continue the execution of the program."
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.OutOfMemoryException", Bridge.getTypeName(System.OutOfMemoryException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.OutOfMemoryException", Bridge.Reflection.getTypeFullName(System.OutOfMemoryException), "Name");
             var d = new System.OutOfMemoryException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.OutOfMemoryException), "is OutOfMemoryException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.SystemException), "is SystemException");
@@ -9889,7 +10076,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.OverflowExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.OverflowException", Bridge.getTypeName(System.OverflowException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.OverflowException", Bridge.Reflection.getTypeFullName(System.OverflowException), "Name");
             var d = new System.OverflowException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.OverflowException), "is OverflowException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9917,7 +10104,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.PromiseExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("Bridge.PromiseException", Bridge.getTypeName(Bridge.PromiseException), "Name");
+            Bridge.Test.Assert.areEqual$1("Bridge.PromiseException", Bridge.Reflection.getTypeFullName(Bridge.PromiseException), "Name");
             var d = new Bridge.PromiseException(System.Array.init(0, null));
             Bridge.Test.Assert.true$1(Bridge.is(d, Bridge.PromiseException), "is PromiseException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -9955,7 +10142,7 @@
             DefaultMessage: "Attempted to operate on an array with the incorrect number of dimensions."
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.RankException", Bridge.getTypeName(System.RankException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.RankException", Bridge.Reflection.getTypeFullName(System.RankException), "Name");
             var d = new System.RankException();
             Bridge.Test.Assert.true(Bridge.is(d, System.RankException));
             Bridge.Test.Assert.true(Bridge.is(d, System.Exception));
@@ -9980,34 +10167,34 @@
             DefaultMessage2: "The RegEx engine has timed out while trying to match a pattern to an input string. This can occur for many reasons, including very large inputs or excessive backtracking caused by nested quantifiers, back-references and other factors."
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.RegexMatchTimeoutException", Bridge.getTypeName(System.RegexMatchTimeoutException), "Name");
-            var d = new System.RegexMatchTimeoutException.$constructor();
+            Bridge.Test.Assert.areEqual$1("System.RegexMatchTimeoutException", Bridge.Reflection.getTypeFullName(System.RegexMatchTimeoutException), "Name");
+            var d = new System.RegexMatchTimeoutException.ctor();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.RegexMatchTimeoutException), "is RegexMatchTimeoutException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.TimeoutException), "is TimeoutException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.SystemException), "is SystemException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
         },
         defaultConstructorWorks: function () {
-            var ex = new System.RegexMatchTimeoutException.$constructor();
+            var ex = new System.RegexMatchTimeoutException.ctor();
             Bridge.Test.Assert.true$1(Bridge.is(ex, System.RegexMatchTimeoutException), "is RegexMatchTimeoutException");
             Bridge.Test.Assert.areEqual$1(null, ex.getInnerException(), "InnerException");
             Bridge.Test.Assert.areEqual(Bridge.ClientTest.Exceptions.RegexMatchTimeoutExceptionTests.DefaultMessage1, ex.getMessage());
         },
         constructorWithMessageWorks: function () {
-            var ex = new System.RegexMatchTimeoutException.$constructor1("The message");
+            var ex = new System.RegexMatchTimeoutException.$ctor1("The message");
             Bridge.Test.Assert.true$1(Bridge.is(ex, System.RegexMatchTimeoutException), "is RegexMatchTimeoutException");
             Bridge.Test.Assert.areEqual$1(null, ex.getInnerException(), "InnerException");
             Bridge.Test.Assert.areEqual("The message", ex.getMessage());
         },
         constructorWithMessageAndInnerExceptionWorks: function () {
             var inner = new System.Exception("a");
-            var ex = new System.RegexMatchTimeoutException.$constructor2("The message", inner);
+            var ex = new System.RegexMatchTimeoutException.$ctor2("The message", inner);
             Bridge.Test.Assert.true$1(Bridge.is(ex, System.RegexMatchTimeoutException), "is RegexMatchTimeoutException");
             Bridge.Test.Assert.true$1(Bridge.referenceEquals(ex.getInnerException(), inner), "InnerException");
             Bridge.Test.Assert.areEqual("The message", ex.getMessage());
         },
         constructorWithExceptionDetailsWorks: function () {
-            var ex = new System.RegexMatchTimeoutException.$constructor3("testInput", "testPattern", System.TimeSpan.fromSeconds(77));
+            var ex = new System.RegexMatchTimeoutException.$ctor3("testInput", "testPattern", System.TimeSpan.fromSeconds(77));
             Bridge.Test.Assert.true$1(Bridge.is(ex, System.RegexMatchTimeoutException), "is RegexMatchTimeoutException");
             Bridge.Test.Assert.areEqual$1(null, ex.getInnerException(), "InnerException");
             Bridge.Test.Assert.areEqual$1("testInput", ex.getInput(), "Input");
@@ -10022,7 +10209,7 @@
             DefaultMessage: "System error."
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.SystemException", Bridge.getTypeName(System.SystemException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.SystemException", Bridge.Reflection.getTypeFullName(System.SystemException), "Name");
             var d = new System.SystemException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.SystemException), "is SystemException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
@@ -10050,7 +10237,7 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.TaskCanceledExceptionTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Threading.Tasks.TaskCanceledException", Bridge.getTypeName(System.Threading.Tasks.TaskCanceledException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.Threading.Tasks.TaskCanceledException", Bridge.Reflection.getTypeFullName(System.Threading.Tasks.TaskCanceledException), "Name");
             var d = new System.Threading.Tasks.TaskCanceledException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.Threading.Tasks.TaskCanceledException), "is TaskCanceledException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.OperationCanceledException), "is OperationCanceledException");
@@ -10097,7 +10284,7 @@
             DefaultMessage: "The operation has timed out."
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.TimeoutException", Bridge.getTypeName(System.TimeoutException), "Name");
+            Bridge.Test.Assert.areEqual$1("System.TimeoutException", Bridge.Reflection.getTypeFullName(System.TimeoutException), "Name");
             var d = new System.TimeoutException();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.TimeoutException), "is TimeoutException");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.SystemException), "is SystemException");
@@ -10127,7 +10314,7 @@
     Bridge.define('Bridge.ClientTest.Format.DateTimeFormatInfoTests', {
         typePropertiesAreCorrect: function () {
             var format = System.Globalization.DateTimeFormatInfo.invariantInfo;
-            Bridge.Test.Assert.areEqual("System.Globalization.DateTimeFormatInfo", Bridge.getTypeName(System.Globalization.DateTimeFormatInfo));
+            Bridge.Test.Assert.areEqual("System.Globalization.DateTimeFormatInfo", Bridge.Reflection.getTypeFullName(System.Globalization.DateTimeFormatInfo));
             Bridge.Test.Assert.true(Bridge.hasValue(format));
         },
         getFormatWorks: function () {
@@ -10164,7 +10351,7 @@
     Bridge.define('Bridge.ClientTest.Format.NumberFormatInfoTests', {
         typePropertiesAreCorrect: function () {
             var format = System.Globalization.NumberFormatInfo.invariantInfo;
-            Bridge.Test.Assert.areEqual("System.Globalization.NumberFormatInfo", Bridge.getTypeName(System.Globalization.NumberFormatInfo));
+            Bridge.Test.Assert.areEqual("System.Globalization.NumberFormatInfo", Bridge.Reflection.getTypeFullName(System.Globalization.NumberFormatInfo));
             Bridge.Test.Assert.true(Bridge.hasValue(format));
         },
         getFormatWorks: function () {
@@ -10863,7 +11050,7 @@
 
     Bridge.define('Bridge.ClientTest.JsonTests.TestClass1', {
         $literal: true,
-        constructor: function () {
+        ctor: function () {
             var $this = {};
             (function(){
                 this.i = 0;
@@ -10874,7 +11061,7 @@
 
     Bridge.define('Bridge.ClientTest.JsonTests.TestClass2', {
         $literal: true,
-        constructor: function () {
+        ctor: function () {
             var $this = {};
             (function(){
                 this.i = 0;
@@ -11487,7 +11674,7 @@
             var e7 = ($t13=Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 8, 284, "M2"), { ntype: 6, type: $t13.returnType, method: $t13, args: Bridge.toList([{ ntype: 38, type: System.Int32, name: "a" }, { ntype: 38, type: String, name: "b" }]) });
             var e8 = ($t14=Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 8, 284, "M2"), { ntype: 6, type: $t14.returnType, method: $t14, args: Bridge.toList(new (Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyEnumerable$1(Object))([{ ntype: 38, type: System.Int32, name: "a" }, { ntype: 38, type: String, name: "b" }])) });
             var e9 = ($t15 = { ntype: 38, type: Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, name: "a" }, ($t17=($t16=Bridge.getMetadata(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C).members[2], { ntype: 6, type: $t16.returnType, obj: $t15, method: $t16, args: Bridge.toList([{ ntype: 9, type: System.Int32, value: 0 },{ ntype: 9, type: String, value: null }]) }), { ntype: 18, type: Function, returnType: $t17.type, body: $t17, params: Bridge.toList([$t15]) }));
-            var e10 = ($t18 = { ntype: 38, type: Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, name: "a" }, ($t20=($t19={"typeDef":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"accessibility":2,"name":"M3","type":8,"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0}],"sname":"m3","returnType":System.Int32,"params":[System.Int32]}, { ntype: 6, type: $t19.returnType, obj: $t18, method: $t19, args: Bridge.toList([{ ntype: 9, type: System.Int32, value: 0 }]) }), { ntype: 18, type: Function, returnType: $t20.type, body: $t20, params: Bridge.toList([$t18]) }));
+            var e10 = ($t18 = { ntype: 38, type: Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, name: "a" }, ($t20=($t19={"typeDef":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"accessibility":2,"name":"M3","type":8,"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0}],"sname":"M3","returnType":System.Int32,"params":[System.Int32]}, { ntype: 6, type: $t19.returnType, obj: $t18, method: $t19, args: Bridge.toList([{ ntype: 9, type: System.Int32, value: 0 }]) }), { ntype: 18, type: Function, returnType: $t20.type, body: $t20, params: Bridge.toList([$t18]) }));
 
             asserter(e1.body, "M1", false, "e1");
             asserter(e2.body, "M2", true, "e2");
@@ -11500,7 +11687,7 @@
 
             Bridge.Test.Assert.true$1(Bridge.referenceEquals(($t21 = e9.body, Bridge.cast($t21, Bridge.hasValue($t21) && ($t21.ntype === 6))).method, Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 8, 284, "M1")), "e9 member");
             Bridge.Test.Assert.areEqual$1(($t21 = e10.body, Bridge.cast($t21, Bridge.hasValue($t21) && ($t21.ntype === 6))).method.name, "M3", "e10 member name");
-            Bridge.Test.Assert.areEqual$1(Bridge.Reflection.midel(($t21 = e10.body, Bridge.cast($t21, Bridge.hasValue($t21) && ($t21.ntype === 6))).method, new Bridge.ClientTest.Linq.Expressions.ExpressionTests.C.$constructor())(39), 73, "e10 member result");
+            Bridge.Test.Assert.areEqual$1(Bridge.Reflection.midel(($t21 = e10.body, Bridge.cast($t21, Bridge.hasValue($t21) && ($t21.ntype === 6))).method, new Bridge.ClientTest.Linq.Expressions.ExpressionTests.C.ctor())(39), 73, "e10 member result");
 
             Bridge.Test.Assert.false$1(($t21 = { ntype: 9, type: Object, value: null }, Bridge.is($t21, Bridge.hasValue($t21) && ($t21.ntype === 6))), "Constant should not be MethodCallExpression");
         },
@@ -11601,7 +11788,7 @@
         propertiesAndFieldsWork: function () {
             var $t, $t1, $t2, $t3, $t4, $t5, $t6, $t7, $t8, $t9, $t10, $t11, $t12, $t13, $t14, $t15, $t16, $t17, $t18, $t19, $t20, $t21, $t22;
             var e1 = ($t = { ntype: 38, type: Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, name: "a" }, ($t2=($t1=Bridge.getMetadata(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C).members[36], { ntype: 23, type: $t1.returnType, expression: $t, member: $t1 }), { ntype: 18, type: Function, returnType: $t2.type, body: $t2, params: Bridge.toList([$t]) }));
-            var e2 = ($t3 = { ntype: 38, type: Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, name: "a" }, ($t5=($t4={"typeDef":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"accessibility":2,"name":"F2","type":4,"returnType":System.Int32,"sname":"f2","isReadOnly":false}, { ntype: 23, type: $t4.returnType, expression: $t3, member: $t4 }), { ntype: 18, type: Function, returnType: $t5.type, body: $t5, params: Bridge.toList([$t3]) }));
+            var e2 = ($t3 = { ntype: 38, type: Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, name: "a" }, ($t5=($t4={"typeDef":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"accessibility":2,"name":"F2","type":4,"returnType":System.Int32,"sname":"F2","isReadOnly":false}, { ntype: 23, type: $t4.returnType, expression: $t3, member: $t4 }), { ntype: 18, type: Function, returnType: $t5.type, body: $t5, params: Bridge.toList([$t3]) }));
             var e3 = ($t6 = { ntype: 38, type: Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, name: "a" }, ($t8=($t7=Bridge.getMetadata(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C).members[34], { ntype: 23, type: $t7.returnType, expression: $t6, member: $t7 }), { ntype: 18, type: Function, returnType: $t8.type, body: $t8, params: Bridge.toList([$t6]) }));
             var e4 = ($t9 = { ntype: 38, type: Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, name: "a" }, ($t11=($t10={"typeDef":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"accessibility":2,"name":"P2","type":16,"returnType":System.Int32,"getter":{"typeDef":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"accessibility":2,"name":"get_P2","type":8,"sname":"getP2","returnType":System.Int32},"setter":{"typeDef":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"accessibility":2,"name":"set_P2","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setP2","returnType":Object,"params":[System.Int32]}}, { ntype: 23, type: $t10.returnType, expression: $t9, member: $t10 }), { ntype: 18, type: Function, returnType: $t11.type, body: $t11, params: Bridge.toList([$t9]) }));
             var e5 = ($t12=Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 4, 284, "F1"), { ntype: 23, type: $t12.returnType, expression: { ntype: 38, type: Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, name: "a" }, member: $t12 });
@@ -11677,7 +11864,7 @@
 
             var e1 = ($t1=($t=Bridge.getMetadata(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C).members[0], { ntype: 31, type: $t.typeDef, constructor: $t, arguments: Bridge.toList([]) }), { ntype: 18, type: Function, returnType: $t1.type, body: $t1, params: Bridge.toList([]) });
             var e2 = ($t2 = { ntype: 38, type: System.Int32, name: "a" }, $t3 = { ntype: 38, type: System.Int32, name: "b" }, ($t5=($t4=Bridge.getMetadata(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C).members[1], { ntype: 31, type: $t4.typeDef, constructor: $t4, arguments: Bridge.toList([$t2,$t3]) }), { ntype: 18, type: Function, returnType: $t5.type, body: $t5, params: Bridge.toList([$t2,$t3]) }));
-            var e3 = ($t6 = { ntype: 38, type: System.Int32, name: "a" }, $t7 = { ntype: 38, type: String, name: "b" }, ($t9=($t8={"typeDef":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"accessibility":2,"name":".ctor","type":1,"params":[System.Int32,String],"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","parameterType":String,"position":1}],"sname":"$constructor2"}, { ntype: 31, type: $t8.typeDef, constructor: $t8, arguments: Bridge.toList([$t6,$t7]) }), { ntype: 18, type: Function, returnType: $t9.type, body: $t9, params: Bridge.toList([$t6,$t7]) }));
+            var e3 = ($t6 = { ntype: 38, type: System.Int32, name: "a" }, $t7 = { ntype: 38, type: String, name: "b" }, ($t9=($t8={"typeDef":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"accessibility":2,"name":".ctor","type":1,"params":[System.Int32,String],"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","parameterType":String,"position":1}],"sname":"$ctor2"}, { ntype: 31, type: $t8.typeDef, constructor: $t8, arguments: Bridge.toList([$t6,$t7]) }), { ntype: 18, type: Function, returnType: $t9.type, body: $t9, params: Bridge.toList([$t6,$t7]) }));
             var e4 = ($t10=Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 1, 284, null, [System.Int32, System.Int32]), { ntype: 31, type: $t10.typeDef, constructor: $t10, arguments: Bridge.toList([{ ntype: 38, type: System.Int32, name: "a" }, { ntype: 38, type: System.Int32, name: "b" }]) });
             var e5 = ($t11=Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 1, 284, null, [System.Int32, System.Int32]), { ntype: 31, type: $t11.typeDef, constructor: $t11, arguments: Bridge.toList(new (Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyEnumerable$1(Object))([{ ntype: 38, type: System.Int32, name: "a" }, { ntype: 38, type: System.Int32, name: "b" }])) });
             var e6 = ($t12=Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, { ntype: 31, type: $t12, constructor: Bridge.Reflection.getMembers($t12, 1, 284, null, []), arguments: Bridge.toList([]) });
@@ -11693,7 +11880,7 @@
         },
         anonymousTypeConstructionWorks: function () {
             var $t, $t1, $t2, $t3, $t4;
-            var e = ($t = { ntype: 38, type: System.Int32, name: "a" }, $t1 = { ntype: 38, type: System.Int32, name: "b" }, ($t3={ ntype: 10, type: Object, operand: ($t2={"typeDef":$_.$AnonymousType$1,"accessibility":2,"isSynthetic":true,"name":".ctor","type":1,"sname":"$constructor"}, { ntype: 31, type: $t2.typeDef, constructor: $t2, arguments: Bridge.toList([$t,$t1]), members: Bridge.toList([{"typeDef":$_.$AnonymousType$1,"accessibility":2,"name":"A","type":16,"returnType":System.Int32,"getter":{"typeDef":$_.$AnonymousType$1,"accessibility":2,"name":"get_A","type":8,"sname":"getA","returnType":System.Int32}},{"typeDef":$_.$AnonymousType$1,"accessibility":2,"name":"B","type":16,"returnType":System.Int32,"getter":{"typeDef":$_.$AnonymousType$1,"accessibility":2,"name":"get_B","type":8,"sname":"getB","returnType":System.Int32}}]) }) }, { ntype: 18, type: Function, returnType: $t3.type, body: $t3, params: Bridge.toList([$t,$t1]) }));
+            var e = ($t = { ntype: 38, type: System.Int32, name: "a" }, $t1 = { ntype: 38, type: System.Int32, name: "b" }, ($t3={ ntype: 10, type: Object, operand: ($t2={"typeDef":$_.$AnonymousType$1,"accessibility":2,"isSynthetic":true,"name":".ctor","type":1,"sname":"ctor"}, { ntype: 31, type: $t2.typeDef, constructor: $t2, arguments: Bridge.toList([$t,$t1]), members: Bridge.toList([{"typeDef":$_.$AnonymousType$1,"accessibility":2,"name":"A","type":16,"returnType":System.Int32,"getter":{"typeDef":$_.$AnonymousType$1,"accessibility":2,"name":"get_A","type":8,"sname":"getA","returnType":System.Int32}},{"typeDef":$_.$AnonymousType$1,"accessibility":2,"name":"B","type":16,"returnType":System.Int32,"getter":{"typeDef":$_.$AnonymousType$1,"accessibility":2,"name":"get_B","type":8,"sname":"getB","returnType":System.Int32}}]) }) }, { ntype: 18, type: Function, returnType: $t3.type, body: $t3, params: Bridge.toList([$t,$t1]) }));
             Bridge.Test.Assert.areEqual(e.body.ntype, 10);
 
             var ne = ($t4 = ($t4 = e.body, Bridge.cast($t4, Bridge.hasValue($t4) && ([4,10,11,28,29,30,34,40,44,49,54,60,62,77,78,79,80,82,83,84].indexOf($t4.ntype) >= 0))).operand, Bridge.as($t4, Bridge.hasValue($t4) && ($t4.ntype === 31)));
@@ -11720,7 +11907,7 @@
         transparentIdentifiersWork: function () {
             var $t, $t1, $t2, $t3, $t4, $t5, $t6, $t7, $t8, $t9, $t10;
             var c = new (Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32))(42);
-            var f = ($t9=($t8={"typeDef":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1($_.$AnonymousType$2),"accessibility":2,"name":"Select","type":8,"paramsInfo":[{"name":"f","parameterType":Function,"position":0}],"tpcount":1,"sname":"select","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"params":[Function]}, { ntype: 6, type: $t8.returnType, obj: ($t3={"typeDef":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"accessibility":2,"name":"Select","type":8,"paramsInfo":[{"name":"f","parameterType":Function,"position":0}],"tpcount":1,"sname":"select","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(Object),"params":[Function]}, { ntype: 6, type: $t3.returnType, obj: {"ntype":23,"type":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"expression":{"ntype":9,"type":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"value":{}},"member":{"typeDef":Object,"name":"c","type":16,"returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"getter":{"typeDef":Object,"name":"getc","type":8,"returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"params":[],"def":function(){ return c}},"setter":{"typeDef":Object,"name":"setc","type":8,"returnType":Object,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32)],"def":function($){ c = $; }}}}, method: $t3, args: Bridge.toList([($t = { ntype: 38, type: System.Int32, name: "a" }, ($t2=($t1={"typeDef":$_.$AnonymousType$2,"accessibility":2,"isSynthetic":true,"name":".ctor","type":1,"sname":"$constructor"}, { ntype: 31, type: $t1.typeDef, constructor: $t1, arguments: Bridge.toList([$t,{ ntype: 0, type: System.Int32, left: $t, right: { ntype: 9, type: System.Int32, value: 1 } }]), members: Bridge.toList([{"typeDef":$_.$AnonymousType$2,"accessibility":2,"name":"a","type":16,"returnType":System.Int32,"getter":{"typeDef":$_.$AnonymousType$2,"accessibility":2,"name":"get_a","type":8,"sname":"geta","returnType":System.Int32}},{"typeDef":$_.$AnonymousType$2,"accessibility":2,"name":"b","type":16,"returnType":System.Int32,"getter":{"typeDef":$_.$AnonymousType$2,"accessibility":2,"name":"get_b","type":8,"sname":"getb","returnType":System.Int32}}]) }), { ntype: 18, type: Function, returnType: $t2.type, body: $t2, params: Bridge.toList([$t]) }))]) }), method: $t8, args: Bridge.toList([($t4 = { ntype: 38, type: $_.$AnonymousType$2, name: "x0" }, ($t7={ ntype: 0, type: System.Int32, left: ($t5={"typeDef":$_.$AnonymousType$2,"accessibility":2,"name":"a","type":16,"returnType":System.Int32,"getter":{"typeDef":$_.$AnonymousType$2,"accessibility":2,"name":"get_a","type":8,"sname":"geta","returnType":System.Int32}}, { ntype: 23, type: $t5.returnType, expression: $t4, member: $t5 }), right: ($t6={"typeDef":$_.$AnonymousType$2,"accessibility":2,"name":"b","type":16,"returnType":System.Int32,"getter":{"typeDef":$_.$AnonymousType$2,"accessibility":2,"name":"get_b","type":8,"sname":"getb","returnType":System.Int32}}, { ntype: 23, type: $t6.returnType, expression: $t4, member: $t6 }) }, { ntype: 18, type: Function, returnType: $t7.type, body: $t7, params: Bridge.toList([$t4]) }))]) }), { ntype: 18, type: Function, returnType: $t9.type, body: $t9, params: Bridge.toList([]) });
+            var f = ($t9=($t8={"typeDef":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1($_.$AnonymousType$2),"accessibility":2,"name":"Select","type":8,"paramsInfo":[{"name":"f","parameterType":Function,"position":0}],"tpcount":1,"sname":"select","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"params":[Function]}, { ntype: 6, type: $t8.returnType, obj: ($t3={"typeDef":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"accessibility":2,"name":"Select","type":8,"paramsInfo":[{"name":"f","parameterType":Function,"position":0}],"tpcount":1,"sname":"select","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(Object),"params":[Function]}, { ntype: 6, type: $t3.returnType, obj: {"ntype":23,"type":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"expression":{"ntype":9,"type":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"value":{}},"member":{"typeDef":Object,"name":"c","type":16,"returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"getter":{"typeDef":Object,"name":"getc","type":8,"returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"params":[],"def":function(){ return c}},"setter":{"typeDef":Object,"name":"setc","type":8,"returnType":Object,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32)],"def":function($){ c = $; }}}}, method: $t3, args: Bridge.toList([($t = { ntype: 38, type: System.Int32, name: "a" }, ($t2=($t1={"typeDef":$_.$AnonymousType$2,"accessibility":2,"isSynthetic":true,"name":".ctor","type":1,"sname":"ctor"}, { ntype: 31, type: $t1.typeDef, constructor: $t1, arguments: Bridge.toList([$t,{ ntype: 0, type: System.Int32, left: $t, right: { ntype: 9, type: System.Int32, value: 1 } }]), members: Bridge.toList([{"typeDef":$_.$AnonymousType$2,"accessibility":2,"name":"a","type":16,"returnType":System.Int32,"getter":{"typeDef":$_.$AnonymousType$2,"accessibility":2,"name":"get_a","type":8,"sname":"geta","returnType":System.Int32}},{"typeDef":$_.$AnonymousType$2,"accessibility":2,"name":"b","type":16,"returnType":System.Int32,"getter":{"typeDef":$_.$AnonymousType$2,"accessibility":2,"name":"get_b","type":8,"sname":"getb","returnType":System.Int32}}]) }), { ntype: 18, type: Function, returnType: $t2.type, body: $t2, params: Bridge.toList([$t]) }))]) }), method: $t8, args: Bridge.toList([($t4 = { ntype: 38, type: $_.$AnonymousType$2, name: "x0" }, ($t7={ ntype: 0, type: System.Int32, left: ($t5={"typeDef":$_.$AnonymousType$2,"accessibility":2,"name":"a","type":16,"returnType":System.Int32,"getter":{"typeDef":$_.$AnonymousType$2,"accessibility":2,"name":"get_a","type":8,"sname":"geta","returnType":System.Int32}}, { ntype: 23, type: $t5.returnType, expression: $t4, member: $t5 }), right: ($t6={"typeDef":$_.$AnonymousType$2,"accessibility":2,"name":"b","type":16,"returnType":System.Int32,"getter":{"typeDef":$_.$AnonymousType$2,"accessibility":2,"name":"get_b","type":8,"sname":"getb","returnType":System.Int32}}, { ntype: 23, type: $t6.returnType, expression: $t4, member: $t6 }) }, { ntype: 18, type: Function, returnType: $t7.type, body: $t7, params: Bridge.toList([$t4]) }))]) }), { ntype: 18, type: Function, returnType: $t9.type, body: $t9, params: Bridge.toList([]) });
             var outer = ($t10 = f.body, Bridge.cast($t10, Bridge.hasValue($t10) && ($t10.ntype === 6)));
             //var outerLambda = (LambdaExpression)outer.Arguments[0];
             var inner = ($t10 = outer.obj, Bridge.cast($t10, Bridge.hasValue($t10) && ($t10.ntype === 6)));
@@ -12363,11 +12550,11 @@
             var $t, $t1, $t2, $t3;
             var c1 = { ntype: 9, type: System.Int32, value: 1 };
             var d = { ntype: 9, type: String, value: "T" };
-            var c2 = { ntype: 9, type: Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, value: new Bridge.ClientTest.Linq.Expressions.ExpressionTests.C.$constructor() };
+            var c2 = { ntype: 9, type: Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, value: new Bridge.ClientTest.Linq.Expressions.ExpressionTests.C.ctor() };
             var sc1 = { body: { ntype: 9, type: String, value: "X" }, testValues: Bridge.toList([{ ntype: 9, type: System.Int32, value: 1 }]) };
             var sc2 = { body: { ntype: 9, type: String, value: "Y" }, testValues: Bridge.toList([{ ntype: 9, type: System.Int32, value: 2 }]) };
-            var sc3 = { body: { ntype: 9, type: String, value: "X" }, testValues: Bridge.toList([{ ntype: 9, type: Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, value: new Bridge.ClientTest.Linq.Expressions.ExpressionTests.C.$constructor() }]) };
-            var sc4 = { body: { ntype: 9, type: String, value: "Y" }, testValues: Bridge.toList([{ ntype: 9, type: Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, value: new Bridge.ClientTest.Linq.Expressions.ExpressionTests.C.$constructor() }]) };
+            var sc3 = { body: { ntype: 9, type: String, value: "X" }, testValues: Bridge.toList([{ ntype: 9, type: Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, value: new Bridge.ClientTest.Linq.Expressions.ExpressionTests.C.ctor() }]) };
+            var sc4 = { body: { ntype: 9, type: String, value: "Y" }, testValues: Bridge.toList([{ ntype: 9, type: Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, value: new Bridge.ClientTest.Linq.Expressions.ExpressionTests.C.ctor() }]) };
             var op = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 8, 284, "op_Equality");
 
             var e1 = ($t=[sc1, sc2], { ntype: 59, type: $t[0].body.type, switchValue: c1, cases: Bridge.toList($t) });
@@ -12523,7 +12710,7 @@
 
     Bridge.define("$AnonymousType$1", $_, {
         $kind: "anonymous",
-        constructor: function (a, b) {
+        ctor: function (a, b) {
             this.a = a;
             this.b = b;
         },
@@ -12556,7 +12743,7 @@
 
     Bridge.define("$AnonymousType$2", $_, {
         $kind: "anonymous",
-        constructor: function (a, b) {
+        ctor: function (a, b) {
             this.a = a;
             this.b = b;
         },
@@ -12677,7 +12864,7 @@
                 Bridge.Test.Assert.areEqual$1(me.member.type, System.String.startsWith(memberName, "F") ? 4 : 16, System.String.concat(title, " member type"));
                 Bridge.Test.Assert.areEqual$1(me.member.name, memberName, System.String.concat(title, " name"));
             }
-            Bridge.Test.Assert.areEqual$1(Bridge.is(me.member, System.Reflection.FieldInfo) ? Bridge.Reflection.fieldAccess(Bridge.cast(me.member, System.Reflection.FieldInfo), new Bridge.ClientTest.Linq.Expressions.ExpressionTests.C.$constructor()) : Bridge.Reflection.midel(Bridge.cast(me.member, System.Reflection.PropertyInfo).getter, new Bridge.ClientTest.Linq.Expressions.ExpressionTests.C.$constructor())(null), result, System.String.concat(title, " member result"));
+            Bridge.Test.Assert.areEqual$1(Bridge.is(me.member, System.Reflection.FieldInfo) ? Bridge.Reflection.fieldAccess(Bridge.cast(me.member, System.Reflection.FieldInfo), new Bridge.ClientTest.Linq.Expressions.ExpressionTests.C.ctor()) : Bridge.Reflection.midel(Bridge.cast(me.member, System.Reflection.PropertyInfo).getter, new Bridge.ClientTest.Linq.Expressions.ExpressionTests.C.ctor())(null), result, System.String.concat(title, " member result"));
         },
         f7: function (expr, member, type, title) {
             var $t;
@@ -12767,7 +12954,7 @@
             op_Power: function (a, b) {
                 return null;
             },
-            m2: function (a, b) {
+            M2: function (a, b) {
                 return 0;
             },
             op_Multiply: function (a, b) {
@@ -12846,10 +13033,10 @@
                 return 0;
             }
         },
-        f1: 0,
-        f2: 0,
-        lF: null,
-        cF: null,
+        F1: 0,
+        F2: 0,
+        LF: null,
+        CF: null,
         config: {
             properties: {
                 P1: 0,
@@ -12858,29 +13045,29 @@
                 CP: null
             }
         },
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
-            this.f1 = 234;
-            this.f2 = 24;
+            this.F1 = 234;
+            this.F2 = 24;
             this.setP1(42);
             this.setP2(17);
         },
-        $constructor1: function (a, b) {
+        $ctor1: function (a, b) {
             this.$initialize();
         },
-        $constructor2: function (a, b) {
+        $ctor2: function (a, b) {
             this.$initialize();
         },
         getItem: function (a, b) {
-            return System.String.concat(System.String.concat(System.String.concat(System.String.concat(this.f1, " "), a), " "), b);
+            return System.String.concat(System.String.concat(System.String.concat(System.String.concat(this.F1, " "), a), " "), b);
         },
-        m1: function (a, b) {
+        M1: function (a, b) {
             return 0;
         },
-        m3: function (a) {
+        M3: function (a) {
             return ((a + 34) | 0);
         },
-        m4: function (a) {
+        M4: function (a) {
             return ((a + 34) | 0);
         },
         equals: function (o) {
@@ -12893,7 +13080,7 @@
 
     Bridge.define('Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1', function (T) { return {
         data: Bridge.getDefaultValue(T),
-        constructor: function (data) {
+        ctor: function (data) {
             this.$initialize();
             this.data = data;
         },
@@ -12911,7 +13098,7 @@
             "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"
             ]
         },
-        constructor: function (items) {
+        ctor: function (items) {
             this.$initialize();
             this._items = items;
         },
@@ -12928,7 +13115,7 @@
     }; });
 
     Bridge.define('Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyExpression', {
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
             Bridge.merge(this, { ntype: 9999, type: String });
         }
@@ -12941,7 +13128,7 @@
             "getEnumerator", "System$Collections$IEnumerable$getEnumerator"
             ]
         },
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
         },
         add: function (i) {
@@ -13080,7 +13267,7 @@
 
     Bridge.define("$AnonymousType$3", $_, {
         $kind: "anonymous",
-        constructor: function (group, personCount) {
+        ctor: function (group, personCount) {
             this.group = group;
             this.personCount = personCount;
         },
@@ -13113,7 +13300,7 @@
 
     Bridge.define("$AnonymousType$4", $_, {
         $kind: "anonymous",
-        constructor: function (group, sum) {
+        ctor: function (group, sum) {
             this.group = group;
             this.sum = sum;
         },
@@ -13146,7 +13333,7 @@
 
     Bridge.define("$AnonymousType$5", $_, {
         $kind: "anonymous",
-        constructor: function (group, min) {
+        ctor: function (group, min) {
             this.group = group;
             this.min = min;
         },
@@ -13179,7 +13366,7 @@
 
     Bridge.define("$AnonymousType$6", $_, {
         $kind: "anonymous",
-        constructor: function (g, minCount) {
+        ctor: function (g, minCount) {
             this.g = g;
             this.minCount = minCount;
         },
@@ -13212,7 +13399,7 @@
 
     Bridge.define("$AnonymousType$7", $_, {
         $kind: "anonymous",
-        constructor: function (group, name) {
+        ctor: function (group, name) {
             this.group = group;
             this.name = name;
         },
@@ -13245,7 +13432,7 @@
 
     Bridge.define("$AnonymousType$8", $_, {
         $kind: "anonymous",
-        constructor: function (group, max) {
+        ctor: function (group, max) {
             this.group = group;
             this.max = max;
         },
@@ -13278,7 +13465,7 @@
 
     Bridge.define("$AnonymousType$9", $_, {
         $kind: "anonymous",
-        constructor: function (g, maxCount) {
+        ctor: function (g, maxCount) {
             this.g = g;
             this.maxCount = maxCount;
         },
@@ -13393,14 +13580,14 @@
                 var wordList1 = System.Linq.Enumerable.from((System.Linq.Enumerable.from(words).orderByDescending($_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f2))).toList(String);
                 var wordListExpected1 = new (System.Collections.Generic.List$1(String))(["3.three", "2.two", "1.one"]);
 
-                Bridge.Test.Assert.areEqual$1("System.Collections.Generic.List$1[[String]]", Bridge.ClientTest.Utilities.TypeHelper.getTypeName(wordList1), "ToList() conversion with explicit String type for string - check type name");
+                Bridge.Test.Assert.areEqual$1("System.Collections.Generic.List$1[[String]]", Bridge.Reflection.getTypeFullName(Bridge.getType(wordList1)), "ToList() conversion with explicit String type for string - check type name");
                 Bridge.Test.Assert.areDeepEqual$1(wordListExpected1, wordList1, "ToList() conversion for strings with explicit String type - check content");
 
                 // TEST
                 var wordList2 = (System.Linq.Enumerable.from(words).orderByDescending($_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f2)).toList(String);
                 var wordListExpected2 = new (System.Collections.Generic.List$1(String))(["3.three", "2.two", "1.one"]);
 
-                Bridge.Test.Assert.areEqual$1("System.Collections.Generic.List$1[[String]]", Bridge.ClientTest.Utilities.TypeHelper.getTypeName(wordList2), "ToList() conversion for string - check type name");
+                Bridge.Test.Assert.areEqual$1("System.Collections.Generic.List$1[[String]]", Bridge.Reflection.getTypeFullName(Bridge.getType(wordList2)), "ToList() conversion for string - check type name");
                 Bridge.Test.Assert.areDeepEqual$1(wordListExpected2, wordList2, "ToList() conversion for strings - check content");
 
                 // TEST
@@ -13424,7 +13611,7 @@
                     setName: "D",
                     setLimit: 200
                 } ));
-                Bridge.Test.Assert.areEqual$1("System.Collections.Generic.Dictionary$2[[String],[Bridge.ClientTest.Utilities.Group, Bridge.ClientTest]]", Bridge.ClientTest.Utilities.TypeHelper.getTypeName(groupDictionary1), "ToDictionary(keySelector, elementSelector) conversion for <string, Group> - check type name");
+                Bridge.Test.Assert.areEqual$1("System.Collections.Generic.Dictionary$2[[String],[Bridge.ClientTest.Utilities.Group, Bridge.ClientTest]]", Bridge.Reflection.getTypeFullName(Bridge.getType(groupDictionary1)), "ToDictionary(keySelector, elementSelector) conversion for <string, Group> - check type name");
                 Bridge.Test.Assert.areDeepEqual$1(expectedGroupDictionary1, groupDictionary1, "ToDictionary(keySelector, elementSelector) conversion for <string, Group> - check content");
 
                 // TEST
@@ -13450,13 +13637,13 @@
 
                 var groupDictionary2 = (System.Linq.Enumerable.from(groups).select($_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f3)).toDictionary($_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f4, $_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f3, String, Bridge.ClientTest.Utilities.Group, comparer);
 
-                Bridge.Test.Assert.areEqual$1("System.Collections.Generic.Dictionary$2[[String],[Bridge.ClientTest.Utilities.Group, Bridge.ClientTest]]", Bridge.ClientTest.Utilities.TypeHelper.getTypeName(groupDictionary2), "ToDictionary(keySelector, elementSelector, IEqualityComparer) conversion for <string, Group> - check type name");
+                Bridge.Test.Assert.areEqual$1("System.Collections.Generic.Dictionary$2[[String],[Bridge.ClientTest.Utilities.Group, Bridge.ClientTest]]", Bridge.Reflection.getTypeFullName(Bridge.getType(groupDictionary2)), "ToDictionary(keySelector, elementSelector, IEqualityComparer) conversion for <string, Group> - check type name");
                 Bridge.Test.Assert.areDeepEqual$1(expectedGroupDictionary2, groupDictionary2, "ToDictionary(keySelector, elementSelector, IEqualityComparer) conversion for <string, Group> - check content");
 
                 // TEST
                 var groupDictionary3 = (System.Linq.Enumerable.from(groups).select($_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f3)).toDictionary($_.Bridge.ClientTest.Linq.TestLinqConversionOperators.f4, null, String, Bridge.ClientTest.Utilities.Group);
 
-                Bridge.Test.Assert.areEqual$1("System.Collections.Generic.Dictionary$2[[String],[Bridge.ClientTest.Utilities.Group, Bridge.ClientTest]]", Bridge.ClientTest.Utilities.TypeHelper.getTypeName(groupDictionary3), "ToDictionary(keySelector) conversion for <string, Group> - check type name");
+                Bridge.Test.Assert.areEqual$1("System.Collections.Generic.Dictionary$2[[String],[Bridge.ClientTest.Utilities.Group, Bridge.ClientTest]]", Bridge.Reflection.getTypeFullName(Bridge.getType(groupDictionary3)), "ToDictionary(keySelector) conversion for <string, Group> - check type name");
                 Bridge.Test.Assert.areDeepEqual$1(expectedGroupDictionary1, groupDictionary3, "ToDictionary(keySelector) conversion for <string, Group> - check content");
 
                 // TEST
@@ -13650,7 +13837,7 @@
 
     Bridge.define("$AnonymousType$10", $_, {
         $kind: "anonymous",
-        constructor: function (number, isOdd) {
+        ctor: function (number, isOdd) {
             this.number = number;
             this.isOdd = isOdd;
         },
@@ -13756,7 +13943,7 @@
 
     Bridge.define("$AnonymousType$11", $_, {
         $kind: "anonymous",
-        constructor: function (remainder, numbers) {
+        ctor: function (remainder, numbers) {
             this.remainder = remainder;
             this.numbers = numbers;
         },
@@ -13789,7 +13976,7 @@
 
     Bridge.define("$AnonymousType$12", $_, {
         $kind: "anonymous",
-        constructor: function (firstLetter, words) {
+        ctor: function (firstLetter, words) {
             this.firstLetter = firstLetter;
             this.words = words;
         },
@@ -13822,7 +14009,7 @@
 
     Bridge.define("$AnonymousType$13", $_, {
         $kind: "anonymous",
-        constructor: function (group, persons) {
+        ctor: function (group, persons) {
             this.group = group;
             this.persons = persons;
         },
@@ -13855,7 +14042,7 @@
 
     Bridge.define("$AnonymousType$14", $_, {
         $kind: "anonymous",
-        constructor: function (key, words) {
+        ctor: function (key, words) {
             this.key = key;
             this.words = words;
         },
@@ -13973,7 +14160,7 @@
 
     Bridge.define("$AnonymousType$15", $_, {
         $kind: "anonymous",
-        constructor: function (name, limit) {
+        ctor: function (name, limit) {
             this.name = name;
             this.limit = limit;
         },
@@ -14006,7 +14193,7 @@
 
     Bridge.define("$AnonymousType$16", $_, {
         $kind: "anonymous",
-        constructor: function (g, pg) {
+        ctor: function (g, pg) {
             this.g = g;
             this.pg = pg;
         },
@@ -14039,7 +14226,7 @@
 
     Bridge.define("$AnonymousType$17", $_, {
         $kind: "anonymous",
-        constructor: function (groupName, personName) {
+        ctor: function (groupName, personName) {
             this.groupName = groupName;
             this.personName = personName;
         },
@@ -14072,7 +14259,7 @@
 
     Bridge.define("$AnonymousType$18", $_, {
         $kind: "anonymous",
-        constructor: function (name, digit) {
+        ctor: function (name, digit) {
             this.name = name;
             this.digit = digit;
         },
@@ -14105,7 +14292,7 @@
 
     Bridge.define("$AnonymousType$19", $_, {
         $kind: "anonymous",
-        constructor: function (x3, ep) {
+        ctor: function (x3, ep) {
             this.x3 = x3;
             this.ep = ep;
         },
@@ -14433,7 +14620,7 @@
 
     Bridge.define("$AnonymousType$20", $_, {
         $kind: "anonymous",
-        constructor: function (name) {
+        ctor: function (name) {
             this.name = name;
         },
         getName : function () {
@@ -14460,7 +14647,7 @@
 
     Bridge.define("$AnonymousType$21", $_, {
         $kind: "anonymous",
-        constructor: function (number, isIndex) {
+        ctor: function (number, isIndex) {
             this.number = number;
             this.isIndex = isIndex;
         },
@@ -14493,7 +14680,7 @@
 
     Bridge.define("$AnonymousType$22", $_, {
         $kind: "anonymous",
-        constructor: function (sum) {
+        ctor: function (sum) {
             this.sum = sum;
         },
         getSum : function () {
@@ -14520,7 +14707,7 @@
 
     Bridge.define("$AnonymousType$23", $_, {
         $kind: "anonymous",
-        constructor: function (a, b, i) {
+        ctor: function (a, b, i) {
             this.a = a;
             this.b = b;
             this.i = i;
@@ -14622,7 +14809,7 @@
 
     Bridge.define("$AnonymousType$24", $_, {
         $kind: "anonymous",
-        constructor: function (group, names) {
+        ctor: function (group, names) {
             this.group = group;
             this.names = names;
         },
@@ -15379,7 +15566,7 @@
 
     Bridge.define('Bridge.ClientTest.MultidimArrayTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("Array", Bridge.getTypeName(Array), "FullName should be Array");
+            Bridge.Test.Assert.areEqual$1("Array", Bridge.Reflection.getTypeFullName(Array), "FullName should be Array");
             var arr = System.Array.create(0, null, 1, 1);
             Bridge.Test.Assert.true$1(Bridge.is(arr, Array), "is Array should be true");
             Bridge.Test.Assert.true$1(Bridge.is(arr, Array), "is int[,] should be true");
@@ -15541,8 +15728,8 @@
         },
         typePropertiesAreCorrect: function () {
             var a = 3, b = null;
-            Bridge.Test.Assert.areEqual$1("Boolean", Bridge.getTypeName(Boolean), "Open FullName");
-            Bridge.Test.Assert.areEqual$1("System.Int32", Bridge.getTypeName(System.Int32), "Instantiated FullName");
+            Bridge.Test.Assert.areEqual$1("Boolean", Bridge.Reflection.getTypeFullName(Boolean), "Open FullName");
+            Bridge.Test.Assert.areEqual$1("System.Int32", Bridge.Reflection.getTypeFullName(System.Int32), "Instantiated FullName");
             Bridge.Test.Assert.true$1(Bridge.is(a, System.Int32), "is int? #1");
             Bridge.Test.Assert.false$1(Bridge.is(b, System.Int32), "is int? #2");
 
@@ -15779,193 +15966,193 @@
             var c = new Bridge.ClientTest.PropertyAccessorTests.C1();
 
             c.setP1(42);
-            Bridge.Test.Assert.areEqual$1(41, c.f1, "F1 value");
+            Bridge.Test.Assert.areEqual$1(41, c.F1, "F1 value");
 
-            c.f1 = 15;
+            c.F1 = 15;
             Bridge.Test.Assert.areEqual$1(16, c.getP1(), "P1 value");
 
-            c.f2 = 17;
+            c.F2 = 17;
             Bridge.Test.Assert.areEqual$1(18, c.getP2(), "P2 value");
 
             c.setP3(12);
-            Bridge.Test.Assert.areEqual$1(11, c.f3, "F3 value");
+            Bridge.Test.Assert.areEqual$1(11, c.F3, "F3 value");
         },
         accessorsCanBeInvokedStatic: function () {
             Bridge.ClientTest.PropertyAccessorTests.C1.setPS1(42);
-            Bridge.Test.Assert.areEqual$1(41, Bridge.ClientTest.PropertyAccessorTests.C1.fS1, "FS1 value");
+            Bridge.Test.Assert.areEqual$1(41, Bridge.ClientTest.PropertyAccessorTests.C1.FS1, "FS1 value");
 
-            Bridge.ClientTest.PropertyAccessorTests.C1.fS1 = 15;
+            Bridge.ClientTest.PropertyAccessorTests.C1.FS1 = 15;
             Bridge.Test.Assert.areEqual$1(16, Bridge.ClientTest.PropertyAccessorTests.C1.getPS1(), "PS1 value");
 
-            Bridge.ClientTest.PropertyAccessorTests.C1.fS2 = 17;
+            Bridge.ClientTest.PropertyAccessorTests.C1.FS2 = 17;
             Bridge.Test.Assert.areEqual$1(18, Bridge.ClientTest.PropertyAccessorTests.C1.getPS2(), "PS2 value");
 
             Bridge.ClientTest.PropertyAccessorTests.C1.setPS3(12);
-            Bridge.Test.Assert.areEqual$1(11, Bridge.ClientTest.PropertyAccessorTests.C1.fS3, "FS3 value");
+            Bridge.Test.Assert.areEqual$1(11, Bridge.ClientTest.PropertyAccessorTests.C1.FS3, "FS3 value");
         },
         accessorsCanBeInvokedGeneric: function () {
             var c = new (Bridge.ClientTest.PropertyAccessorTests.C2$1(System.Int32))();
 
             c.setP1(42);
-            Bridge.Test.Assert.areEqual$1(41, c.f1, "F1 value");
+            Bridge.Test.Assert.areEqual$1(41, c.F1, "F1 value");
 
-            c.f1 = 15;
+            c.F1 = 15;
             Bridge.Test.Assert.areEqual$1(16, c.getP1(), "P1 value");
 
-            c.f2 = 17;
+            c.F2 = 17;
             Bridge.Test.Assert.areEqual$1(18, c.getP2(), "P2 value");
 
             c.setP3(12);
-            Bridge.Test.Assert.areEqual$1(11, c.f3, "F3 value");
+            Bridge.Test.Assert.areEqual$1(11, c.F3, "F3 value");
         },
         accessorsCanBeInvokedGenericStatic: function () {
             Bridge.ClientTest.PropertyAccessorTests.C2$1(System.Int32).setPS1(42);
-            Bridge.Test.Assert.areEqual$1(41, Bridge.ClientTest.PropertyAccessorTests.C2$1(System.Int32).fS1, "FS1 value");
+            Bridge.Test.Assert.areEqual$1(41, Bridge.ClientTest.PropertyAccessorTests.C2$1(System.Int32).FS1, "FS1 value");
 
-            Bridge.ClientTest.PropertyAccessorTests.C2$1(System.Int32).fS1 = 15;
+            Bridge.ClientTest.PropertyAccessorTests.C2$1(System.Int32).FS1 = 15;
             Bridge.Test.Assert.areEqual$1(16, Bridge.ClientTest.PropertyAccessorTests.C2$1(System.Int32).getPS1(), "PS1 value");
 
-            Bridge.ClientTest.PropertyAccessorTests.C2$1(System.Int32).fS2 = 17;
+            Bridge.ClientTest.PropertyAccessorTests.C2$1(System.Int32).FS2 = 17;
             Bridge.Test.Assert.areEqual$1(18, Bridge.ClientTest.PropertyAccessorTests.C2$1(System.Int32).getPS2(), "PS2 value");
 
             Bridge.ClientTest.PropertyAccessorTests.C2$1(System.Int32).setPS3(12);
-            Bridge.Test.Assert.areEqual$1(11, Bridge.ClientTest.PropertyAccessorTests.C2$1(System.Int32).fS3, "FS3 value");
+            Bridge.Test.Assert.areEqual$1(11, Bridge.ClientTest.PropertyAccessorTests.C2$1(System.Int32).FS3, "FS3 value");
         },
         baseAccessorsCanBeInvoked: function () {
             var d = new Bridge.ClientTest.PropertyAccessorTests.D3();
 
             d.setP1(42);
-            Bridge.Test.Assert.areEqual$1(41, d.f1, "F1 value");
+            Bridge.Test.Assert.areEqual$1(41, d.F1, "F1 value");
 
-            d.f1 = 15;
+            d.F1 = 15;
             Bridge.Test.Assert.areEqual$1(16, d.getP1(), "P1 value");
 
-            d.f2 = 17;
+            d.F2 = 17;
             Bridge.Test.Assert.areEqual$1(18, d.getP2(), "P2 value");
 
             d.setP3(12);
-            Bridge.Test.Assert.areEqual$1(11, d.f3, "F3 value");
+            Bridge.Test.Assert.areEqual$1(11, d.F3, "F3 value");
         },
         baseAccessorsCanBeInvokedGeneric: function () {
             var d = new (Bridge.ClientTest.PropertyAccessorTests.D4$1(System.Int32))();
 
             d.setP1(42);
-            Bridge.Test.Assert.areEqual$1(41, d.f1, "F1 value");
+            Bridge.Test.Assert.areEqual$1(41, d.F1, "F1 value");
 
-            d.f1 = 15;
+            d.F1 = 15;
             Bridge.Test.Assert.areEqual$1(16, d.getP1(), "P1 value");
 
-            d.f2 = 17;
+            d.F2 = 17;
             Bridge.Test.Assert.areEqual$1(18, d.getP2(), "P2 value");
 
             d.setP3(12);
-            Bridge.Test.Assert.areEqual$1(11, d.f3, "F3 value");
+            Bridge.Test.Assert.areEqual$1(11, d.F3, "F3 value");
         }
     });
 
     Bridge.define('Bridge.ClientTest.PropertyAccessorTests.B3', {
-        f1: 0,
-        f2: 0,
-        f3: 0,
+        F1: 0,
+        F2: 0,
+        F3: 0,
         getP1: function () {
-            return this.f1;
+            return this.F1;
         },
         setP1: function (value) {
-            this.f1 = value;
+            this.F1 = value;
         },
         getP2: function () {
-            return this.f2;
+            return this.F2;
         },
         setP3: function (value) {
-            this.f3 = value;
+            this.F3 = value;
         }
     });
 
     Bridge.define('Bridge.ClientTest.PropertyAccessorTests.B4$1', function (T) { return {
-        f1: Bridge.getDefaultValue(T),
-        f2: Bridge.getDefaultValue(T),
-        f3: Bridge.getDefaultValue(T),
+        F1: Bridge.getDefaultValue(T),
+        F2: Bridge.getDefaultValue(T),
+        F3: Bridge.getDefaultValue(T),
         getP1: function () {
-            return this.f1;
+            return this.F1;
         },
         setP1: function (value) {
-            this.f1 = value;
+            this.F1 = value;
         },
         getP2: function () {
-            return this.f2;
+            return this.F2;
         },
         setP3: function (value) {
-            this.f3 = value;
+            this.F3 = value;
         }
     }; });
 
     Bridge.define('Bridge.ClientTest.PropertyAccessorTests.C1', {
         statics: {
-            fS1: 0,
-            fS2: 0,
-            fS3: 0,
+            FS1: 0,
+            FS2: 0,
+            FS3: 0,
             getPS1: function () {
-                return ((Bridge.ClientTest.PropertyAccessorTests.C1.fS1 + 1) | 0);
+                return ((Bridge.ClientTest.PropertyAccessorTests.C1.FS1 + 1) | 0);
             },
             setPS1: function (value) {
-                Bridge.ClientTest.PropertyAccessorTests.C1.fS1 = (value - 1) | 0;
+                Bridge.ClientTest.PropertyAccessorTests.C1.FS1 = (value - 1) | 0;
             },
             getPS2: function () {
-                return ((Bridge.ClientTest.PropertyAccessorTests.C1.fS2 + 1) | 0);
+                return ((Bridge.ClientTest.PropertyAccessorTests.C1.FS2 + 1) | 0);
             },
             setPS3: function (value) {
-                Bridge.ClientTest.PropertyAccessorTests.C1.fS3 = (value - 1) | 0;
+                Bridge.ClientTest.PropertyAccessorTests.C1.FS3 = (value - 1) | 0;
             }
         },
-        f1: 0,
-        f2: 0,
-        f3: 0,
+        F1: 0,
+        F2: 0,
+        F3: 0,
         getP1: function () {
-            return ((this.f1 + 1) | 0);
+            return ((this.F1 + 1) | 0);
         },
         setP1: function (value) {
-            this.f1 = (value - 1) | 0;
+            this.F1 = (value - 1) | 0;
         },
         getP2: function () {
-            return ((this.f2 + 1) | 0);
+            return ((this.F2 + 1) | 0);
         },
         setP3: function (value) {
-            this.f3 = (value - 1) | 0;
+            this.F3 = (value - 1) | 0;
         }
     });
 
     Bridge.define('Bridge.ClientTest.PropertyAccessorTests.C2$1', function (T) { return {
         statics: {
-            fS1: Bridge.getDefaultValue(T),
-            fS2: Bridge.getDefaultValue(T),
-            fS3: Bridge.getDefaultValue(T),
+            FS1: Bridge.getDefaultValue(T),
+            FS2: Bridge.getDefaultValue(T),
+            FS3: Bridge.getDefaultValue(T),
             getPS1: function () {
-                return ((Bridge.ClientTest.PropertyAccessorTests.C2$1(T).fS1 + 1) | 0);
+                return ((Bridge.ClientTest.PropertyAccessorTests.C2$1(T).FS1 + 1) | 0);
             },
             setPS1: function (value) {
-                Bridge.ClientTest.PropertyAccessorTests.C2$1(T).fS1 = value - 1;
+                Bridge.ClientTest.PropertyAccessorTests.C2$1(T).FS1 = value - 1;
             },
             getPS2: function () {
-                return ((Bridge.ClientTest.PropertyAccessorTests.C2$1(T).fS2 + 1) | 0);
+                return ((Bridge.ClientTest.PropertyAccessorTests.C2$1(T).FS2 + 1) | 0);
             },
             setPS3: function (value) {
-                Bridge.ClientTest.PropertyAccessorTests.C2$1(T).fS3 = value - 1;
+                Bridge.ClientTest.PropertyAccessorTests.C2$1(T).FS3 = value - 1;
             }
         },
-        f1: Bridge.getDefaultValue(T),
-        f2: Bridge.getDefaultValue(T),
-        f3: Bridge.getDefaultValue(T),
+        F1: Bridge.getDefaultValue(T),
+        F2: Bridge.getDefaultValue(T),
+        F3: Bridge.getDefaultValue(T),
         getP1: function () {
-            return ((this.f1 + 1) | 0);
+            return ((this.F1 + 1) | 0);
         },
         setP1: function (value) {
-            this.f1 = value - 1;
+            this.F1 = value - 1;
         },
         getP2: function () {
-            return ((this.f2 + 1) | 0);
+            return ((this.F2 + 1) | 0);
         },
         setP3: function (value) {
-            this.f3 = value - 1;
+            this.F3 = value - 1;
         }
     }; });
 
@@ -15973,7 +16160,7 @@
         statics: {
             ITERATIONS: 100,
             unseeded: function () {
-                var r = new System.Random.$constructor();
+                var r = new System.Random.ctor();
 
                 for (var i = 0; i < Bridge.ClientTest.RandomTests.ITERATIONS; i = (i + 1) | 0) {
                     var x = r.next$1(20);
@@ -15993,8 +16180,8 @@
             seeded: function () {
                 var seed = System.Int64.clip32(System.Int64((new Date()).getTime()).mul(10000));
 
-                var r1 = new System.Random.$constructor1(seed);
-                var r2 = new System.Random.$constructor1(seed);
+                var r1 = new System.Random.$ctor1(seed);
+                var r2 = new System.Random.$ctor1(seed);
 
                 var b1 = System.Array.init(Bridge.ClientTest.RandomTests.ITERATIONS, 0);
                 r1.nextBytes(b1);
@@ -16172,7 +16359,7 @@
         },
         propertiesImplementedAsFieldsCanBeAssignedInAttributeDeclaration: function () {
             var a = Bridge.cast(Bridge.Reflection.getAttributes(Bridge.ClientTest.Reflection.AttributeTests.C16, null, false)[0], Bridge.ClientTest.Reflection.AttributeTests.A9Attribute);
-            Bridge.Test.Assert.areEqual(a.p3, 43);
+            Bridge.Test.Assert.areEqual(a.P3, 43);
         },
         fieldsCanBeAssignedInAttributeDeclaration: function () {
             var a = Bridge.cast(Bridge.Reflection.getAttributes(Bridge.ClientTest.Reflection.AttributeTests.C18, null, false)[0], Bridge.ClientTest.Reflection.AttributeTests.A9Attribute);
@@ -16210,13 +16397,13 @@
     Bridge.define('Bridge.ClientTest.Reflection.AttributeTests.A11Attribute', {
         inherits: [System.Attribute],
         i: 0,
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
-            System.Attribute.$constructor.call(this);
+            System.Attribute.ctor.call(this);
         },
-        $constructor1: function (i) {
+        $ctor1: function (i) {
             this.$initialize();
-            System.Attribute.$constructor.call(this);
+            System.Attribute.ctor.call(this);
             this.i = i;
         }
     });
@@ -16240,9 +16427,9 @@
                 V: 0
             }
         },
-        constructor: function (v) {
+        ctor: function (v) {
             this.$initialize();
-            System.Attribute.$constructor.call(this);
+            System.Attribute.ctor.call(this);
             this.setV(v);
         }
     });
@@ -16254,9 +16441,9 @@
                 V: 0
             }
         },
-        constructor: function (v) {
+        ctor: function (v) {
             this.$initialize();
-            System.Attribute.$constructor.call(this);
+            System.Attribute.ctor.call(this);
             this.setV(v);
         }
     });
@@ -16268,9 +16455,9 @@
                 V: 0
             }
         },
-        constructor: function (v) {
+        ctor: function (v) {
             this.$initialize();
-            System.Attribute.$constructor.call(this);
+            System.Attribute.ctor.call(this);
             this.setV(v);
         }
     });
@@ -16282,9 +16469,9 @@
                 V: 0
             }
         },
-        constructor: function (v) {
+        ctor: function (v) {
             this.$initialize();
-            System.Attribute.$constructor.call(this);
+            System.Attribute.ctor.call(this);
             this.setV(v);
         }
     });
@@ -16314,9 +16501,9 @@
                 this.C = new System.Char();
             }
         },
-        constructor: function (b, y, c, d, f, i, l, h, e, s, o, t) {
+        ctor: function (b, y, c, d, f, i, l, h, e, s, o, t) {
             this.$initialize();
-            System.Attribute.$constructor.call(this);
+            System.Attribute.ctor.call(this);
             this.setB(b);
             this.setY(y);
             this.setC(c);
@@ -16340,9 +16527,9 @@
                 S: null
             }
         },
-        constructor: function (i, s) {
+        ctor: function (i, s) {
             this.$initialize();
-            System.Attribute.$constructor.call(this);
+            System.Attribute.ctor.call(this);
             this.setI(i);
             this.setS(s);
         }
@@ -16355,16 +16542,16 @@
                 E: 0
             }
         },
-        constructor: function (e) {
+        ctor: function (e) {
             this.$initialize();
-            System.Attribute.$constructor.call(this);
+            System.Attribute.ctor.call(this);
             this.setE(e);
         }
     });
 
     Bridge.define('Bridge.ClientTest.Reflection.AttributeTests.A9Attribute', {
         inherits: [System.Attribute],
-        p3: 0,
+        P3: 0,
         config: {
             properties: {
                 P1: 0,
@@ -16423,8 +16610,8 @@
     Bridge.define('Bridge.ClientTest.Reflection.AttributeTests.E2', {
         $kind: "enum",
         statics: {
-            v1: "v1",
-            v2: "v2"
+            V1: "v1",
+            V2: "v2"
         },
         $utype: System.String
     });
@@ -16782,17 +16969,17 @@
                 I: 0
             }
         },
-        constructor: function (i) {
+        ctor: function (i) {
             this.$initialize();
-            System.Attribute.$constructor.call(this);
+            System.Attribute.ctor.call(this);
             this.setI(i);
         }
     });
 
     Bridge.define('Bridge.ClientTest.Reflection.GetMembersTests.B1', {
         statics: {
-            fBS1: 0,
-            fBS2: 0,
+            FBS1: 0,
+            FBS2: 0,
             config: {
                 properties: {
                     PBS1: 0,
@@ -16807,30 +16994,30 @@
             },
             removeEBS2: function (value) {
             },
-            mBS: function () {
+            MBS: function () {
             },
-            mBS$1: function (x) {
+            MBS$1: function (x) {
             },
-            mBS$2: function (x, y) {
+            MBS$2: function (x, y) {
             },
-            mBS2: function (x, y) {
+            MBS2: function (x, y) {
             }
         },
-        fB1: 0,
-        fB2: 0,
+        FB1: 0,
+        FB2: 0,
         config: {
             properties: {
                 PB1: 0,
                 PB2: 0
             }
         },
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
         },
-        $constructor1: function (x) {
+        $ctor1: function (x) {
             this.$initialize();
         },
-        $constructor2: function (x, y) {
+        $ctor2: function (x, y) {
             this.$initialize();
         },
         getItem: function (x) {
@@ -16846,20 +17033,20 @@
         },
         removeEB2: function (value) {
         },
-        mB: function () {
+        MB: function () {
         },
-        mB$1: function (x) {
+        MB$1: function (x) {
         },
-        mB$2: function (x, y) {
+        MB$2: function (x, y) {
         },
-        mB2: function (x, y) {
+        MB2: function (x, y) {
         }
     });
 
     Bridge.define('Bridge.ClientTest.Reflection.GetMembersTests.B2', {
         statics: {
-            fS: 0,
-            fBS: 0,
+            FS: 0,
+            FBS: 0,
             config: {
                 events: {
                     ES: null,
@@ -16870,23 +17057,23 @@
                     PBS: 0
                 }
             },
-            mS: function () {
+            MS: function () {
             },
-            mBS: function () {
+            MBS: function () {
             },
-            m2S: function (x) {
+            M2S: function (x) {
             },
-            m2S$1: function (x) {
+            M2S$1: function (x) {
             },
-            m2BS: function (x) {
+            M2BS: function (x) {
             },
-            m2BS$1: function (x) {
+            M2BS$1: function (x) {
             },
-            m3S: function (x) {
+            M3S: function (x) {
             }
         },
         f: 0,
-        fB: 0,
+        FB: 0,
         config: {
             events: {
                 E: null,
@@ -16909,17 +17096,17 @@
         },
         m: function () {
         },
-        mB: function () {
+        MB: function () {
         },
-        m2: function (x) {
+        M2: function (x) {
         },
-        m2$1: function (x) {
+        M2$1: function (x) {
         },
-        m2B: function (x) {
+        M2B: function (x) {
         },
-        m2B$1: function (x) {
+        M2B$1: function (x) {
         },
-        m3: function (x) {
+        M3: function (x) {
         }
     });
 
@@ -17020,9 +17207,9 @@
             var c11 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C11, 31, 28);
             var c19 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C19, 31, 28);
             var c20 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C20, 31, 28);
-            Bridge.Test.Assert.true$1(Bridge.referenceEquals(Bridge.cast(c10[0], System.Reflection.ConstructorInfo).sname, "$constructor"), "Unnamed");
-            Bridge.Test.Assert.areEqual$1(Bridge.cast(c10[1], System.Reflection.ConstructorInfo).sname, "$constructor1", "Named");
-            Bridge.Test.Assert.areEqual$1(Bridge.cast(c11[0], System.Reflection.ConstructorInfo).sname, "$constructor", "Static method");
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(Bridge.cast(c10[0], System.Reflection.ConstructorInfo).sname, "ctor"), "Unnamed");
+            Bridge.Test.Assert.areEqual$1(Bridge.cast(c10[1], System.Reflection.ConstructorInfo).sname, "$ctor1", "Named");
+            Bridge.Test.Assert.areEqual$1(Bridge.cast(c11[0], System.Reflection.ConstructorInfo).sname, "ctor", "Static method");
             Bridge.Test.Assert.true$1(Bridge.cast(c19[0], System.Reflection.ConstructorInfo).sname == null, "Object literal");
             Bridge.Test.Assert.true$1(Bridge.cast(c20[0], System.Reflection.ConstructorInfo).sname == null, "Inline code");
         },
@@ -17131,7 +17318,7 @@
         scriptNameWorksForAllKindsOfMethods: function () {
             Bridge.Test.Assert.areEqual$1(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C4, 8, 284, "M", [System.Int32]).sname, "m$1", "C4.M");
             Bridge.Test.Assert.true$1(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C21, 8, 284, "M1").sname == null, "C21.M1");
-            Bridge.Test.Assert.areEqual$1(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C7, 8, 284, "M1").sname, "m1", "C7.m1");
+            Bridge.Test.Assert.areEqual$1(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C7, 8, 284, "M1").sname, "M1", "C7.m1");
         },
         specialImplementationExistsOnlyForMethodsImplementedAsInlineCode: function () {
             Bridge.Test.Assert.true$1(Bridge.staticEquals(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C4, 8, 284, "M", [System.Int32]).def, null), "C4.M");
@@ -17346,11 +17533,11 @@
         },
         invokeWorksForExpandParamsMethods: function () {
             var m1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C22, 8, 284, "M2");
-            var r1 = Bridge.cast(Bridge.Reflection.midel(m1, new Bridge.ClientTest.Reflection.ReflectionTests.C22.$constructor(0, null)).apply(null, [2, [17, 31]]), Array);
+            var r1 = Bridge.cast(Bridge.Reflection.midel(m1, new Bridge.ClientTest.Reflection.ReflectionTests.C22.ctor(0, null)).apply(null, [2, [17, 31]]), Array);
             Bridge.Test.Assert.areEqual(r1, [2, [17, 31]]);
 
             var m2 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C23, 8, 284, "M2");
-            var r2 = Bridge.cast(Bridge.Reflection.midel(m2, new Bridge.ClientTest.Reflection.ReflectionTests.C23.$constructor(0, null)).apply(null, [2, [17, 32]]), Array);
+            var r2 = Bridge.cast(Bridge.Reflection.midel(m2, new Bridge.ClientTest.Reflection.ReflectionTests.C23.ctor(0, null)).apply(null, [2, [17, 32]]), Array);
             Bridge.Test.Assert.areEqual(r2, [2, [17, 32]]);
         },
         invokeWorksForAllKindsOfConstructors: function () {
@@ -17410,27 +17597,27 @@
             Bridge.Test.Assert.areEqual$1(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C12, 4, 284, "F3").returnType, String, "Static");
         },
         scriptNameIsCorrectForField: function () {
-            Bridge.Test.Assert.areEqual$1(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C12, 4, 284, "F1").sname, "f1", "f1");
+            Bridge.Test.Assert.areEqual$1(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C12, 4, 284, "F1").sname, "F1", "f1");
             Bridge.Test.Assert.areEqual$1(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C12, 4, 284, "F2").sname, "renamedF2", "f2");
         },
         getValueWorksForInstanceField: function () {
             var c = Bridge.merge(new Bridge.ClientTest.Reflection.ReflectionTests.C12(), {
-                f1: 42
+                F1: 42
             } );
             Bridge.Test.Assert.areEqual(Bridge.Reflection.fieldAccess(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C12, 4, 284, "F1"), c), 42);
         },
         getValueWorksForStaticField: function () {
-            Bridge.ClientTest.Reflection.ReflectionTests.C12.f3 = "X_Test";
+            Bridge.ClientTest.Reflection.ReflectionTests.C12.F3 = "X_Test";
             Bridge.Test.Assert.areEqual(Bridge.Reflection.fieldAccess(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C12, 4, 284, "F3"), null), "X_Test");
         },
         setValueWorksForInstanceField: function () {
             var c = new Bridge.ClientTest.Reflection.ReflectionTests.C12();
             Bridge.Reflection.fieldAccess(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C12, 4, 284, "F1"), c, 14);
-            Bridge.Test.Assert.areEqual(c.f1, 14);
+            Bridge.Test.Assert.areEqual(c.F1, 14);
         },
         setValueWorksForStaticField: function () {
             Bridge.Reflection.fieldAccess(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C12, 4, 284, "F3"), null, "Hello, world");
-            Bridge.Test.Assert.areEqual(Bridge.ClientTest.Reflection.ReflectionTests.C12.f3, "Hello, world");
+            Bridge.Test.Assert.areEqual(Bridge.ClientTest.Reflection.ReflectionTests.C12.F3, "Hello, world");
         },
         memberTypeIsEventForEvent: function () {
             Bridge.Test.Assert.areEqual$1(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C13, 2, 284, "E1").type, 2, "Instance");
@@ -17622,7 +17809,7 @@
         },
         scriptFieldNameIsCorrectForPropertiesImplementedAsFieldAndNullForOtherProperties: function () {
             Bridge.Test.Assert.true$1(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C14, 16, 284, "P1").fname == null, "P1");
-            Bridge.Test.Assert.areEqual$1(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C14, 16, 284, "P2").fname, "p2", "P2");
+            Bridge.Test.Assert.areEqual$1(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C14, 16, 284, "P2").fname, "P2", "P2");
         },
         memberTypeIsPropertyForIndexer: function () {
             Bridge.Test.Assert.areEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C15, 16, 284, "Item").type, 16);
@@ -17806,12 +17993,12 @@
             Bridge.Test.Assert.areEqual$1((!!m2.tpcount), false, "m2.IsGenericMethodDefinition");
 
             var c = Bridge.merge(new Bridge.ClientTest.Reflection.ReflectionTests.C14(), {
-                p2: "Hello, world"
+                P2: "Hello, world"
             } );
             var p1 = Bridge.Reflection.midel(m1, c)(null);
             Bridge.Test.Assert.areEqual$1(p1, "Hello, world", "m1.Invoke");
 
-            Bridge.ClientTest.Reflection.ReflectionTests.C14.p4 = 3.5;
+            Bridge.ClientTest.Reflection.ReflectionTests.C14.P4 = 3.5;
             var p2 = Bridge.Reflection.midel(m2, null)(null);
             Bridge.Test.Assert.areEqual$1(p2, 3.5, "m2.Invoke");
         },
@@ -17840,11 +18027,11 @@
 
             var c = new Bridge.ClientTest.Reflection.ReflectionTests.C14();
             Bridge.Reflection.midel(m1, c)("Something");
-            Bridge.Test.Assert.areEqual$1(c.p2, "Something", "m1.Invoke");
+            Bridge.Test.Assert.areEqual$1(c.P2, "Something", "m1.Invoke");
 
-            Bridge.ClientTest.Reflection.ReflectionTests.C14.p4 = 7.5;
+            Bridge.ClientTest.Reflection.ReflectionTests.C14.P4 = 7.5;
             Bridge.Reflection.midel(m2, null)(2.5);
-            Bridge.Test.Assert.areEqual$1(Bridge.ClientTest.Reflection.ReflectionTests.C14.p4, 2.5, "m2.Invoke");
+            Bridge.Test.Assert.areEqual$1(Bridge.ClientTest.Reflection.ReflectionTests.C14.P4, 2.5, "m2.Invoke");
         },
         propertiesForGetMethodAreCorrectForIndexer: function () {
             var m1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C15, 16, 284, "Item").getter;
@@ -17993,10 +18180,10 @@
 
             var c14 = Bridge.merge(new Bridge.ClientTest.Reflection.ReflectionTests.C14(), {
                 setP1: 42,
-                p2: "Hello, world!"
+                P2: "Hello, world!"
             } );
             Bridge.ClientTest.Reflection.ReflectionTests.C14.setP3(new Date(2013, 3 - 1, 5));
-            Bridge.ClientTest.Reflection.ReflectionTests.C14.p4 = 7.5;
+            Bridge.ClientTest.Reflection.ReflectionTests.C14.P4 = 7.5;
             Bridge.Test.Assert.areEqual$1(Bridge.Reflection.midel(p1.getter, c14)(), 42, "P1.GetValue");
             Bridge.Test.Assert.areEqual$1(Bridge.Reflection.midel(p2.getter, c14)(), "Hello, world!", "P2.GetValue");
             Bridge.Test.Assert.areEqual$1(Bridge.Reflection.midel(p3.getter, null)(), new Date(2013, 3 - 1, 5), "P3.GetValue");
@@ -18021,9 +18208,9 @@
             Bridge.Reflection.midel(p4.setter, null)(7.5);
 
             Bridge.Test.Assert.areEqual$1(c14.getP1(), 42, "P1.SetValue");
-            Bridge.Test.Assert.areEqual$1(c14.p2, "Hello, world!", "P2.SetValue");
+            Bridge.Test.Assert.areEqual$1(c14.P2, "Hello, world!", "P2.SetValue");
             Bridge.Test.Assert.areEqual$1(Bridge.ClientTest.Reflection.ReflectionTests.C14.getP3(), new Date(2013, 3 - 1, 5), "P3.SetValue");
-            Bridge.Test.Assert.areEqual$1(Bridge.ClientTest.Reflection.ReflectionTests.C14.p4, 7.5, "P4.SetValue");
+            Bridge.Test.Assert.areEqual$1(Bridge.ClientTest.Reflection.ReflectionTests.C14.P4, 7.5, "P4.SetValue");
 
             var c15 = Bridge.merge(new Bridge.ClientTest.Reflection.ReflectionTests.C15(), {
                 v: "X"
@@ -18185,13 +18372,13 @@
                 X: 0
             }
         },
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
-            System.Attribute.$constructor.call(this);
+            System.Attribute.ctor.call(this);
         },
-        $constructor1: function (x) {
+        $ctor1: function (x) {
             this.$initialize();
-            System.Attribute.$constructor.call(this);
+            System.Attribute.ctor.call(this);
             this.setX(x);
         }
     });
@@ -18205,25 +18392,25 @@
     });
 
     Bridge.define('Bridge.ClientTest.Reflection.ReflectionTests.C1', {
-        m1: function () {
+        M1: function () {
         },
-        m2: function () {
+        M2: function () {
         },
-        m3: function () {
+        M3: function () {
         },
-        m4: function () {
+        M4: function () {
         }
     });
 
     Bridge.define('Bridge.ClientTest.Reflection.ReflectionTests.C10', {
         x: 0,
         s: null,
-        constructor: function (x) {
+        ctor: function (x) {
             this.$initialize();
             this.x = x;
             this.s = "X";
         },
-        $constructor1: function (x, s) {
+        $ctor1: function (x, s) {
             this.$initialize();
             this.x = x;
             this.s = s;
@@ -18236,7 +18423,7 @@
                 this.D = new Date(-864e13);
             }
         },
-        constructor: function (dt) {
+        ctor: function (dt) {
             this.$initialize();
             this.D = dt;
         }
@@ -18244,9 +18431,9 @@
 
     Bridge.define('Bridge.ClientTest.Reflection.ReflectionTests.C12', {
         statics: {
-            f3: null
+            F3: null
         },
-        f1: 0,
+        F1: 0,
         config: {
             init: function () {
                 this.renamedF2 = new Date(-864e13);
@@ -18294,9 +18481,9 @@
     Bridge.define('Bridge.ClientTest.Reflection.ReflectionTests.C14', {
         statics: {
             p14Field: 0,
-            p4: 0,
-            p8: 0,
-            p12: 0,
+            P4: 0,
+            P8: 0,
+            P12: 0,
             config: {
                 properties: {
                     P3: null
@@ -18312,9 +18499,9 @@
             }
         },
         p13Field: 0,
-        p2: null,
-        p6: null,
-        p10: null,
+        P2: null,
+        P6: null,
+        P10: null,
         config: {
             properties: {
                 P1: 0
@@ -18359,7 +18546,7 @@
                 P: 0
             }
         },
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
         },
         addE: function (value) {
@@ -18373,17 +18560,17 @@
     Bridge.define('Bridge.ClientTest.Reflection.ReflectionTests.C19', {
         A: 0,
         B: null,
-        constructor: function (a, b) {
+        ctor: function (a, b) {
             this.$initialize();
         }
     });
 
     Bridge.define('Bridge.ClientTest.Reflection.ReflectionTests.C2', {
         statics: {
-            m2: function () {
+            M2: function () {
             }
         },
-        m1: function () {
+        M1: function () {
         }
     });
 
@@ -18394,7 +18581,7 @@
 
     Bridge.define('Bridge.ClientTest.Reflection.ReflectionTests.C21', {
         X: 0,
-        constructor: function (x) {
+        ctor: function (x) {
             this.$initialize();
             this.X = x;
         }
@@ -18403,25 +18590,25 @@
     Bridge.define('Bridge.ClientTest.Reflection.ReflectionTests.C22', {
         a: null,
         b: null,
-        constructor: function (a, b) {
+        ctor: function (a, b) {
             if (b === void 0) { b = []; }
 
             this.$initialize();
             this.a = a;
             this.b = b;
         },
-        $constructor1: function (a, b) {
+        $ctor1: function (a, b) {
             b = Array.prototype.slice.call(arguments, 1);
 
             this.$initialize();
             this.a = a;
             this.b = b;
         },
-        m1: function (a, b) {
+        M1: function (a, b) {
             if (b === void 0) { b = []; }
             return [a, b];
         },
-        m2: function (a, b) {
+        M2: function (a, b) {
             b = Array.prototype.slice.call(arguments, 1);
             return [a, b];
         }
@@ -18430,25 +18617,25 @@
     Bridge.define('Bridge.ClientTest.Reflection.ReflectionTests.C23', {
         a: null,
         b: null,
-        constructor: function (a, b) {
+        ctor: function (a, b) {
             if (b === void 0) { b = []; }
 
             this.$initialize();
             this.a = a;
             this.b = b;
         },
-        $constructor1: function (a, b) {
+        $ctor1: function (a, b) {
             b = Array.prototype.slice.call(arguments, 1);
 
             this.$initialize();
             this.a = a;
             this.b = b;
         },
-        m1: function (a, b) {
+        M1: function (a, b) {
             if (b === void 0) { b = []; }
             return [a, b];
         },
-        m2: function (a, b) {
+        M2: function (a, b) {
             b = Array.prototype.slice.call(arguments, 1);
             return [a, b];
         }
@@ -18466,108 +18653,108 @@
     });
 
     Bridge.define('Bridge.ClientTest.Reflection.ReflectionTests.C25', {
-        a1: 0,
-        b1: 0,
-        c1: 0,
-        d1: 0,
-        a2: 0,
-        b2: 0,
-        c2: 0,
-        d2: 0,
-        a3: 0,
-        b3: 0,
-        c3: 0,
-        d3: 0,
-        a4: 0,
-        b4: 0,
-        c4: 0,
-        d4: 0,
-        a5: 0,
-        b5: 0,
-        c5: 0,
-        d5: 0
+        A1: 0,
+        B1: 0,
+        C1: 0,
+        D1: 0,
+        A2: 0,
+        B2: 0,
+        C2: 0,
+        D2: 0,
+        A3: 0,
+        B3: 0,
+        C3: 0,
+        D3: 0,
+        A4: 0,
+        B4: 0,
+        C4: 0,
+        D4: 0,
+        A5: 0,
+        B5: 0,
+        C5: 0,
+        D5: 0
     });
 
     Bridge.define('Bridge.ClientTest.Reflection.ReflectionTests.C26', {
-        a1: 0,
-        b1: 0,
-        c1: 0,
-        d1: 0,
-        a2: 0,
-        b2: 0,
-        c2: 0,
-        d2: 0,
-        a3: 0,
-        b3: 0,
-        c3: 0,
-        d3: 0,
-        a4: 0,
-        b4: 0,
-        c4: 0,
-        d4: 0,
-        a5: 0,
-        b5: 0,
-        c5: 0,
-        d5: 0
+        A1: 0,
+        B1: 0,
+        C1: 0,
+        D1: 0,
+        A2: 0,
+        B2: 0,
+        C2: 0,
+        D2: 0,
+        A3: 0,
+        B3: 0,
+        C3: 0,
+        D3: 0,
+        A4: 0,
+        B4: 0,
+        C4: 0,
+        D4: 0,
+        A5: 0,
+        B5: 0,
+        C5: 0,
+        D5: 0
     });
 
     Bridge.define('Bridge.ClientTest.Reflection.ReflectionTests.C27', {
-        a1: 0,
-        b1: 0,
-        c1: 0,
-        d1: 0,
-        a2: 0,
-        b2: 0,
-        c2: 0,
-        d2: 0,
-        a3: 0,
-        b3: 0,
-        c3: 0,
-        d3: 0,
-        a4: 0,
-        b4: 0,
-        c4: 0,
-        d4: 0,
-        a5: 0,
-        b5: 0,
-        c5: 0,
-        d5: 0
+        A1: 0,
+        B1: 0,
+        C1: 0,
+        D1: 0,
+        A2: 0,
+        B2: 0,
+        C2: 0,
+        D2: 0,
+        A3: 0,
+        B3: 0,
+        C3: 0,
+        D3: 0,
+        A4: 0,
+        B4: 0,
+        C4: 0,
+        D4: 0,
+        A5: 0,
+        B5: 0,
+        C5: 0,
+        D5: 0
     });
 
     Bridge.define('Bridge.ClientTest.Reflection.ReflectionTests.C28', {
-        a1: 0,
-        b1: 0,
-        c1: 0,
-        d1: 0,
-        a2: 0,
-        b2: 0,
-        c2: 0,
-        d2: 0,
-        a3: 0,
-        b3: 0,
-        c3: 0,
-        d3: 0,
-        a4: 0,
-        b4: 0,
-        c4: 0,
-        d4: 0,
-        a5: 0,
-        b5: 0,
-        c5: 0,
-        d5: 0
+        A1: 0,
+        B1: 0,
+        C1: 0,
+        D1: 0,
+        A2: 0,
+        B2: 0,
+        C2: 0,
+        D2: 0,
+        A3: 0,
+        B3: 0,
+        C3: 0,
+        D3: 0,
+        A4: 0,
+        B4: 0,
+        C4: 0,
+        D4: 0,
+        A5: 0,
+        B5: 0,
+        C5: 0,
+        D5: 0
     });
 
     Bridge.define('Bridge.ClientTest.Reflection.ReflectionTests.C3', {
-        m1: function () {
+        M1: function () {
             return 0;
         },
-        m2: function (x) {
+        M2: function (x) {
             return 0;
         },
-        m3: function (x, y) {
+        M3: function (x, y) {
             return 0;
         },
-        m4: function () {
+        M4: function () {
         }
     });
 
@@ -18584,54 +18771,54 @@
         m: function (t2, s) {
             return Bridge.getDefaultValue(T1);
         },
-        m2: function () {
+        M2: function () {
             return null;
         }
     }; });
 
     Bridge.define('Bridge.ClientTest.Reflection.ReflectionTests.C6', {
-        m1: function (T1, T2, t2, s) {
+        M1: function (T1, T2, t2, s) {
             return Bridge.getDefaultValue(T1);
         },
-        m2: function (T1, s) {
+        M2: function (T1, s) {
             return Bridge.getDefaultValue(T1);
         },
-        m3: function (s) {
+        M3: function (s) {
         }
     });
 
     Bridge.define('Bridge.ClientTest.Reflection.ReflectionTests.C7', {
         statics: {
-            m2: function (x) {
+            M2: function (x) {
             }
         },
         x: 0,
-        m1: function (x) {
+        M1: function (x) {
             return ((this.x + x) | 0);
         },
-        m3: function (T1, T2, s) {
+        M3: function (T1, T2, s) {
             return System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(this.x.toString(), " "), Bridge.Reflection.getTypeFullName(T1)), " "), Bridge.Reflection.getTypeFullName(T2)), " "), s);
         }
     });
 
     Bridge.define('Bridge.ClientTest.Reflection.ReflectionTests.C8', {
         statics: {
-            m2: function (a, b) {
+            M2: function (a, b) {
                 return System.String.concat(System.String.concat(a, " "), b);
             },
-            m4: function (T1, T2, a) {
+            M4: function (T1, T2, a) {
                 return System.String.concat(System.String.concat(System.String.concat(System.String.concat(Bridge.Reflection.getTypeFullName(T1), " "), Bridge.Reflection.getTypeFullName(T2)), " "), a);
             }
         },
         s: null,
-        constructor: function (s) {
+        ctor: function (s) {
             this.$initialize();
             this.s = s;
         },
-        m1: function (a, b) {
+        M1: function (a, b) {
             return System.String.concat(System.String.concat(System.String.concat(System.String.concat(this.s, " "), a), " "), b);
         },
-        m3: function (T1, T2, a) {
+        M3: function (T1, T2, a) {
             return System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(this.s, " "), Bridge.Reflection.getTypeFullName(T1)), " "), Bridge.Reflection.getTypeFullName(T2)), " "), a);
         }
     });
@@ -18649,16 +18836,16 @@
         statics: {
             getDefaultValue: function () { return new Bridge.ClientTest.Reflection.ReflectionTests.S1(); }
         },
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
         },
-        m1: function () {
+        M1: function () {
         },
-        m2: function () {
+        M2: function () {
         },
-        m3: function () {
+        M3: function () {
         },
-        m4: function () {
+        M4: function () {
         },
         $clone: function (to) { return this; }
     });
@@ -19138,7 +19325,7 @@
 
     Bridge.define('Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.BS', {
         X: 0,
-        constructor: function (x) {
+        ctor: function (x) {
             this.$initialize();
             this.X = x;
         }
@@ -19877,7 +20064,7 @@
 
     Bridge.define("$AnonymousType$25", $_, {
         $kind: "anonymous",
-        constructor: function (x) {
+        ctor: function (x) {
             this.x = x;
         },
         getx : function () {
@@ -19904,7 +20091,7 @@
 
     Bridge.define("$AnonymousType$26", $_, {
         $kind: "anonymous",
-        constructor: function (x, y) {
+        ctor: function (x, y) {
             this.x = x;
             this.y = y;
         },
@@ -19971,7 +20158,7 @@
 
     Bridge.define('Bridge.ClientTest.Reflection.TypeSystemTests.BaseNamedConstructorWithArgumentsTypes.B', {
         messageB: null,
-        constructor: function (x, y) {
+        ctor: function (x, y) {
             this.$initialize();
             this.messageB = System.String.concat(System.String.concat(x, " "), y);
         }
@@ -19981,7 +20168,7 @@
 
     Bridge.define('Bridge.ClientTest.Reflection.TypeSystemTests.BaseNamedConstructorWithoutArgumentsTypes.B', {
         messageB: null,
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
             this.messageB = "X";
         }
@@ -19991,7 +20178,7 @@
 
     Bridge.define('Bridge.ClientTest.Reflection.TypeSystemTests.BaseUnnamedConstructorWithArgumentsTypes.B', {
         messageB: null,
-        constructor: function (x, y) {
+        ctor: function (x, y) {
             this.$initialize();
             this.messageB = System.String.concat(System.String.concat(x, " "), y);
         }
@@ -20001,7 +20188,7 @@
 
     Bridge.define('Bridge.ClientTest.Reflection.TypeSystemTests.BaseUnnamedConstructorWithoutArgumentsTypes.B', {
         messageB: null,
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
             this.messageB = "X";
         }
@@ -20009,7 +20196,7 @@
 
     Bridge.define('Bridge.ClientTest.Reflection.TypeSystemTests.BS', {
         X: 0,
-        constructor: function (x) {
+        ctor: function (x) {
             this.$initialize();
             this.X = x;
         }
@@ -20025,7 +20212,7 @@
 
     Bridge.define('Bridge.ClientTest.Reflection.TypeSystemTests.ClassWithExpandParamsCtor', {
         ctorArgs: null,
-        constructor: function (args) {
+        ctor: function (args) {
             args = Array.prototype.slice.call(arguments, 0);
 
             this.$initialize();
@@ -20037,7 +20224,7 @@
 
     Bridge.define('Bridge.ClientTest.Reflection.TypeSystemTests.ConstructingInstanceWithNamedConstructorTypes.D', {
         f: null,
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
             this.f = "from ctor";
         },
@@ -20119,7 +20306,7 @@
 
     Bridge.define('Bridge.ClientTest.Reflection.TypeSystemTests.MethodGroupConversionTypes.B', {
         m: 0,
-        constructor: function (m) {
+        ctor: function (m) {
             this.$initialize();
             this.m = m;
         },
@@ -20133,7 +20320,7 @@
 
     Bridge.define('Bridge.ClientTest.Reflection.TypeSystemTests.MethodGroupConversionTypes.C', {
         m: 0,
-        constructor: function (m) {
+        ctor: function (m) {
             this.$initialize();
             this.m = m;
         },
@@ -20163,7 +20350,7 @@
     Bridge.define('Bridge.ClientTest.SimpleTypes.BooleanTests', {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.true(Bridge.is(true, Boolean));
-            Bridge.Test.Assert.areEqual("Boolean", Bridge.getTypeName(Boolean));
+            Bridge.Test.Assert.areEqual("Boolean", Bridge.Reflection.getTypeFullName(Boolean));
         },
         getDefaultValue: function (T) {
             return Bridge.getDefaultValue(T);
@@ -20462,7 +20649,7 @@
             Bridge.Test.Assert.false(Bridge.is(0.5, System.Byte));
             Bridge.Test.Assert.false(Bridge.is(-1, System.Byte));
             Bridge.Test.Assert.false(Bridge.is(256, System.Byte));
-            Bridge.Test.Assert.areEqual("System.Byte", Bridge.getTypeName(System.Byte));
+            Bridge.Test.Assert.areEqual("System.Byte", Bridge.Reflection.getTypeFullName(System.Byte));
             var b = 0;
             Bridge.Test.Assert.true(Bridge.is(b, System.Byte));
             Bridge.Test.Assert.true(Bridge.is(b, System.IComparable$1(System.Byte)));
@@ -20641,7 +20828,7 @@
             Bridge.Test.Assert.false(Bridge.is(0.5, System.Char));
             Bridge.Test.Assert.false(Bridge.is(-1, System.Char));
             Bridge.Test.Assert.false(Bridge.is(65536, System.Char));
-            Bridge.Test.Assert.areEqual("System.Char", Bridge.getTypeName(System.Char));
+            Bridge.Test.Assert.areEqual("System.Char", Bridge.Reflection.getTypeFullName(System.Char));
         },
         castsWork: function () {
             var i1 = -1, i2 = 0, i3 = 234, i4 = 65535, i5 = 65536;
@@ -20819,7 +21006,7 @@
         },
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.true(Bridge.is(System.Decimal(0.5), System.Decimal));
-            Bridge.Test.Assert.areEqual("System.Decimal", Bridge.getTypeName(System.Decimal));
+            Bridge.Test.Assert.areEqual("System.Decimal", Bridge.Reflection.getTypeFullName(System.Decimal));
             var d = System.Decimal(0.0);
             Bridge.Test.Assert.true(Bridge.is(d, System.Decimal));
             Bridge.Test.Assert.true(Bridge.is(d, System.IFormattable));
@@ -21070,7 +21257,7 @@
     Bridge.define('Bridge.ClientTest.SimpleTypes.DoubleTests', {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.true(Bridge.is(0.5, System.Double));
-            Bridge.Test.Assert.areEqual("System.Double", Bridge.getTypeName(System.Double));
+            Bridge.Test.Assert.areEqual("System.Double", Bridge.Reflection.getTypeFullName(System.Double));
             var d = 0.0;
             Bridge.Test.Assert.true(Bridge.is(d, System.Double));
             Bridge.Test.Assert.true(Bridge.is(d, System.IFormattable));
@@ -21188,8 +21375,8 @@
 
     Bridge.define('Bridge.ClientTest.SimpleTypes.EnumTests', {
         typePropertiesAreCorrect: function () {
-            //Assert.AreEqual("System.Enum", typeof(Enum).GetClassName());
-            Bridge.Test.Assert.areEqual("Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum", Bridge.getTypeName(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum));
+            //Assert.AreEqual("System.Enum", typeof(Enum).FullName);
+            Bridge.Test.Assert.areEqual("Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum));
             Bridge.Test.Assert.true(Bridge.is(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.FirstValue, System.Int32));
         },
         getDefaultValue: function (T) {
@@ -21249,7 +21436,7 @@
             Bridge.Test.Assert.false(Bridge.is(0.5, System.Int16));
             Bridge.Test.Assert.false(Bridge.is(-32769, System.Int16));
             Bridge.Test.Assert.false(Bridge.is(32768, System.Int16));
-            Bridge.Test.Assert.areEqual("System.Int16", Bridge.getTypeName(System.Int16));
+            Bridge.Test.Assert.areEqual("System.Int16", Bridge.Reflection.getTypeFullName(System.Int16));
 
             var s = 0;
             Bridge.Test.Assert.true(Bridge.is(s, System.Int16));
@@ -21429,7 +21616,7 @@
             Bridge.Test.Assert.false(Bridge.is(0.5, System.Int32));
             Bridge.Test.Assert.false(Bridge.is(System.Int64([2147483647,-1]), System.Int32));
             Bridge.Test.Assert.false(Bridge.is(2147483648, System.Int32));
-            Bridge.Test.Assert.areEqual("System.Int32", Bridge.getTypeName(System.Int32));
+            Bridge.Test.Assert.areEqual("System.Int32", Bridge.Reflection.getTypeFullName(System.Int32));
 
             var i = 0;
             Bridge.Test.Assert.true(Bridge.is(i, System.Int32));
@@ -21672,7 +21859,7 @@
             }
 
             var typeMessage = System.String.concat(System.String.concat(message, "Type is "), checkedType);
-            Bridge.Test.Assert.areEqual$1(checkedType, Bridge.getTypeName(Bridge.getType(actual)), typeMessage);
+            Bridge.Test.Assert.areEqual$1(checkedType, Bridge.Reflection.getTypeFullName(Bridge.getType(actual)), typeMessage);
 
             Bridge.Test.Assert.areEqual$1(expected.toString(), actual.toString(), message);
         },
@@ -21680,7 +21867,7 @@
             Bridge.Test.Assert.true(Bridge.is(System.Int64(0), System.Int64));
             Bridge.Test.Assert.false(Bridge.is(0.5, System.Int64));
             Bridge.Test.Assert.false(Bridge.is(1E+100, System.Int64));
-            Bridge.Test.Assert.areEqual("System.Int64", Bridge.getTypeName(System.Int64));
+            Bridge.Test.Assert.areEqual("System.Int64", Bridge.Reflection.getTypeFullName(System.Int64));
 
             var l = System.Int64(0);
             Bridge.Test.Assert.true(Bridge.is(l, System.Int64));
@@ -21976,7 +22163,7 @@
             }
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual("Date", Bridge.getTypeName(Date));
+            Bridge.Test.Assert.areEqual("Date", Bridge.Reflection.getTypeFullName(Date));
             var o = new Date();
             Bridge.Test.Assert.true$1(Bridge.is(o, Date), "o is DateTime");
         },
@@ -22308,7 +22495,7 @@
     Bridge.define('Bridge.ClientTest.SimpleTypes.ObjectTests', {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.true(Bridge.hasValue({  }));
-            Bridge.Test.Assert.areEqual("Object", Bridge.getTypeName(Object));
+            Bridge.Test.Assert.areEqual("Object", Bridge.Reflection.getTypeFullName(Object));
         },
         canGetHashCodeForObject: function () {
             var o = {  };
@@ -22362,7 +22549,7 @@
             Bridge.Test.Assert.false(Bridge.is(0.5, System.SByte));
             Bridge.Test.Assert.false(Bridge.is(-129, System.SByte));
             Bridge.Test.Assert.false(Bridge.is(128, System.SByte));
-            Bridge.Test.Assert.areEqual("System.SByte", Bridge.getTypeName(System.SByte));
+            Bridge.Test.Assert.areEqual("System.SByte", Bridge.Reflection.getTypeFullName(System.SByte));
 
             var b = 0;
             Bridge.Test.Assert.true(Bridge.is(b, System.SByte));
@@ -22534,7 +22721,7 @@
     Bridge.define('Bridge.ClientTest.SimpleTypes.SingleTests', {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.true(Bridge.is(0.5, System.Single));
-            Bridge.Test.Assert.areEqual("System.Single", Bridge.getTypeName(System.Single));
+            Bridge.Test.Assert.areEqual("System.Single", Bridge.Reflection.getTypeFullName(System.Single));
 
             var f = 0.0;
             Bridge.Test.Assert.true(Bridge.is(f, System.Single));
@@ -22816,7 +23003,7 @@
             }
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual("String", Bridge.getTypeName(String));
+            Bridge.Test.Assert.areEqual("String", Bridge.Reflection.getTypeFullName(String));
             var s = "X";
             Bridge.Test.Assert.true(Bridge.is(s, String));
         },
@@ -23432,7 +23619,7 @@
             "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"
             ]
         },
-        constructor: function (items) {
+        ctor: function (items) {
             this.$initialize();
             this._items = items;
         },
@@ -23447,7 +23634,7 @@
     Bridge.define('Bridge.ClientTest.SimpleTypes.TestVersion', {
         statics: {
             testConstructors: function () {
-                var v1 = new System.Version.$constructor();
+                var v1 = new System.Version.ctor();
 
                 Bridge.Test.Assert.true$1(System.Version.op_Inequality(v1, null), "v1 created");
                 Bridge.Test.Assert.areEqual$1(0, v1.getMajor(), "v1.Major 0");
@@ -23457,7 +23644,7 @@
                 Bridge.Test.Assert.areEqual$1(-1, v1.getMajorRevision(), "v1.MajorRevision -1");
                 Bridge.Test.Assert.areEqual$1(-1, v1.getMinorRevision(), "v1.MinorRevision -1");
 
-                var v2 = new System.Version.$constructor4("2.4.1128.2");
+                var v2 = new System.Version.$ctor4("2.4.1128.2");
                 Bridge.Test.Assert.true$1(System.Version.op_Inequality(v2, null), "v2 created");
                 Bridge.Test.Assert.areEqual$1(2, v2.getMajor(), "v2.Major 2");
                 Bridge.Test.Assert.areEqual$1(4, v2.getMinor(), "v2.Minor 4");
@@ -23466,7 +23653,7 @@
                 Bridge.Test.Assert.areEqual$1(0, v2.getMajorRevision(), "v2.MajorRevision 0");
                 Bridge.Test.Assert.areEqual$1(2, v2.getMinorRevision(), "v2.MinorRevision 2");
 
-                var v3 = new System.Version.$constructor4("2.4.1128.65537");
+                var v3 = new System.Version.$ctor4("2.4.1128.65537");
                 Bridge.Test.Assert.true$1(System.Version.op_Inequality(v3, null), "v3 created");
                 Bridge.Test.Assert.areEqual$1(2, v3.getMajor(), "v3.Major 2");
                 Bridge.Test.Assert.areEqual$1(4, v3.getMinor(), "v3.Minor 4");
@@ -23475,7 +23662,7 @@
                 Bridge.Test.Assert.areEqual$1(1, v3.getMajorRevision(), "v3.MajorRevision 1");
                 Bridge.Test.Assert.areEqual$1(1, v3.getMinorRevision(), "v3.MinorRevision 1");
 
-                var v4 = new System.Version.$constructor1(20, 10);
+                var v4 = new System.Version.$ctor1(20, 10);
                 Bridge.Test.Assert.true$1(System.Version.op_Inequality(v4, null), "v4 created");
                 Bridge.Test.Assert.areEqual$1(20, v4.getMajor(), "v4.Major 20");
                 Bridge.Test.Assert.areEqual$1(10, v4.getMinor(), "v4.Minor 10");
@@ -23484,7 +23671,7 @@
                 Bridge.Test.Assert.areEqual$1(-1, v4.getMajorRevision(), "v4.MajorRevision -1");
                 Bridge.Test.Assert.areEqual$1(-1, v4.getMinorRevision(), "v4.MinorRevision -1");
 
-                var v5 = new System.Version.$constructor2(200, 100, 300);
+                var v5 = new System.Version.$ctor2(200, 100, 300);
                 Bridge.Test.Assert.true$1(System.Version.op_Inequality(v5, null), "v5 created");
                 Bridge.Test.Assert.areEqual$1(200, v5.getMajor(), "v5.Major 200");
                 Bridge.Test.Assert.areEqual$1(100, v5.getMinor(), "v5.Minor 100");
@@ -23493,7 +23680,7 @@
                 Bridge.Test.Assert.areEqual$1(-1, v5.getMajorRevision(), "v5.MajorRevision -1");
                 Bridge.Test.Assert.areEqual$1(-1, v5.getMinorRevision(), "v5.MinorRevision -1");
 
-                var v6 = new System.Version.$constructor3(2000, 1000, 3000, 22613920);
+                var v6 = new System.Version.$ctor3(2000, 1000, 3000, 22613920);
                 Bridge.Test.Assert.true$1(System.Version.op_Inequality(v6, null), "v6 created");
                 Bridge.Test.Assert.areEqual$1(2000, v6.getMajor(), "v6.Major 2000");
                 Bridge.Test.Assert.areEqual$1(1000, v6.getMinor(), "v6.Minor 1000");
@@ -23503,7 +23690,7 @@
                 Bridge.Test.Assert.areEqual$1(4000, v6.getMinorRevision(), "v6.MinorRevision 4");
             },
             testCloneCompare: function () {
-                var v1 = new System.Version.$constructor3(1, 2, 3, 262149);
+                var v1 = new System.Version.$ctor3(1, 2, 3, 262149);
 
                 var o = v1.clone();
                 Bridge.Test.Assert.true$1(o != null, "v1 Cloned");
@@ -23518,10 +23705,10 @@
                 Bridge.Test.Assert.areEqual$1(4, v2.getMajorRevision(), "v2.MajorRevision 4");
                 Bridge.Test.Assert.areEqual$1(5, v2.getMinorRevision(), "v2.MinorRevision 5");
 
-                var v3 = new System.Version.$constructor3(1, 2, 2, 262149);
+                var v3 = new System.Version.$ctor3(1, 2, 2, 262149);
                 Bridge.Test.Assert.areEqual$1(1, v1.compareTo(v3), "v1.CompareTo(v3)");
 
-                var v4 = new System.Version.$constructor3(1, 3, 3, 262149);
+                var v4 = new System.Version.$ctor3(1, 3, 3, 262149);
                 Bridge.Test.Assert.areEqual$1(-1, v1.compareTo(v4), "v1.CompareTo(v4)");
 
                 Bridge.Test.Assert.areEqual$1(0, v1.compareTo$1(o), "v1.CompareTo(o)");
@@ -23529,9 +23716,9 @@
                 Bridge.Test.Assert.areNotEqual$1(0, v1.compareTo(null), "v1.CompareTo(null)");
             },
             testEqualsGetHashCode: function () {
-                var v1 = new System.Version.$constructor3(100, 200, 300, 26214900);
-                var v2 = new System.Version.$constructor3(100, 200, 300, 26214900);
-                var v3 = new System.Version.$constructor3(101, 200, 300, 26214900);
+                var v1 = new System.Version.$ctor3(100, 200, 300, 26214900);
+                var v2 = new System.Version.$ctor3(100, 200, 300, 26214900);
+                var v3 = new System.Version.$ctor3(101, 200, 300, 26214900);
                 var o = {  };
                 var o2 = v2;
 
@@ -23547,11 +23734,11 @@
                 Bridge.Test.Assert.areEqual$1(1552073204, v3.getHashCode(), "v3.GetHashCode()");
             },
             testToString: function () {
-                var v1 = new System.Version.$constructor4("2.4.1128.65537");
-                var v2 = new System.Version.$constructor3(100, 200, 300, 26214900);
-                var v3 = new System.Version.$constructor2(100, 200, 300);
-                var v4 = new System.Version.$constructor1(100, 200);
-                var v5 = new System.Version.$constructor();
+                var v1 = new System.Version.$ctor4("2.4.1128.65537");
+                var v2 = new System.Version.$ctor3(100, 200, 300, 26214900);
+                var v3 = new System.Version.$ctor2(100, 200, 300);
+                var v4 = new System.Version.$ctor1(100, 200);
+                var v5 = new System.Version.ctor();
 
                 Bridge.Test.Assert.areEqual$1("2.4.1128.65537", v1.toString(), "c1.ToString()");
                 Bridge.Test.Assert.areEqual$1("100.200.300.26214900", v2.toString(), "c2.ToString()");
@@ -23569,12 +23756,12 @@
             },
             testParse: function () {
                 var s1 = "105.1.1128.65547";
-                var v1 = new System.Version.$constructor4(s1);
+                var v1 = new System.Version.$ctor4(s1);
 
                 Bridge.Test.Assert.areEqual$1(v1.toString(), System.Version.parse(s1).toString(), "Version.Parse(s1)");
 
                 var s2 = "105.1";
-                var v2 = new System.Version.$constructor4(s2);
+                var v2 = new System.Version.$ctor4(s2);
 
                 Bridge.Test.Assert.areEqual$1(v2.toString(), System.Version.parse(s2).toString(), "Version.Parse(s2)");
 
@@ -23590,9 +23777,9 @@
                 Bridge.Test.Assert.areEqual$1("12.3.2.1", vp2.v.toString(), "vp2.ToString()");
             },
             testOperators: function () {
-                var v1 = new System.Version.$constructor3(1, 2, 3, 262149);
-                var v2 = new System.Version.$constructor3(1, 2, 3, 262149);
-                var v3 = new System.Version.$constructor3(1, 3, 3, 262149);
+                var v1 = new System.Version.$ctor3(1, 2, 3, 262149);
+                var v2 = new System.Version.$ctor3(1, 2, 3, 262149);
+                var v3 = new System.Version.$ctor3(1, 3, 3, 262149);
 
                 Bridge.Test.Assert.true$1(System.Version.op_Equality(v1, v2), "v1 == v2");
                 Bridge.Test.Assert.false$1(System.Version.op_Inequality(v1, v2), "v1 != v2");
@@ -23661,7 +23848,7 @@
 
     Bridge.define('Bridge.ClientTest.SimpleTypes.TimeSpanTests', {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual("System.TimeSpan", Bridge.getTypeName(System.TimeSpan));
+            Bridge.Test.Assert.areEqual("System.TimeSpan", Bridge.Reflection.getTypeFullName(System.TimeSpan));
             var d = new System.TimeSpan();
             Bridge.Test.Assert.true$1(Bridge.is(d, System.TimeSpan), "d is TimeSpan");
             Bridge.Test.Assert.true$1(Bridge.is(d, System.IComparable$1(System.TimeSpan)), "d is IComparable<TimeSpan>");
@@ -23974,7 +24161,7 @@
             Bridge.Test.Assert.false(Bridge.is(0.5, System.UInt16));
             Bridge.Test.Assert.false(Bridge.is(-1, System.UInt16));
             Bridge.Test.Assert.false(Bridge.is(65536, System.UInt16));
-            Bridge.Test.Assert.areEqual("System.UInt16", Bridge.getTypeName(System.UInt16));
+            Bridge.Test.Assert.areEqual("System.UInt16", Bridge.Reflection.getTypeFullName(System.UInt16));
 
             var s = 0;
             Bridge.Test.Assert.true(Bridge.is(s, System.UInt16));
@@ -24154,7 +24341,7 @@
             Bridge.Test.Assert.false(Bridge.is(0.5, System.UInt32));
             Bridge.Test.Assert.false(Bridge.is(-1, System.UInt32));
             Bridge.Test.Assert.false(Bridge.is(System.Int64([0,1]), System.UInt32));
-            Bridge.Test.Assert.areEqual("System.UInt32", Bridge.getTypeName(System.UInt32));
+            Bridge.Test.Assert.areEqual("System.UInt32", Bridge.Reflection.getTypeFullName(System.UInt32));
             var i = 0;
             Bridge.Test.Assert.true(Bridge.is(i, System.UInt32));
             Bridge.Test.Assert.true(Bridge.is(i, System.IComparable$1(System.UInt32)));
@@ -24332,14 +24519,14 @@
             }
 
             var typeMessage = System.String.concat(System.String.concat(message, "Type is "), checkedType);
-            Bridge.Test.Assert.areEqual$1(checkedType, Bridge.getTypeName(Bridge.getType(actual)), typeMessage);
+            Bridge.Test.Assert.areEqual$1(checkedType, Bridge.Reflection.getTypeFullName(Bridge.getType(actual)), typeMessage);
 
             Bridge.Test.Assert.areEqual$1(expected.toString(), actual.toString(), message);
         },
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.true(Bridge.is(System.UInt64(0), System.UInt64));
             Bridge.Test.Assert.false(Bridge.is(0.5, System.UInt64));
-            Bridge.Test.Assert.areEqual("System.UInt64", Bridge.getTypeName(System.UInt64));
+            Bridge.Test.Assert.areEqual("System.UInt64", Bridge.Reflection.getTypeFullName(System.UInt64));
             var l = System.UInt64(0);
             Bridge.Test.Assert.true(Bridge.is(l, System.UInt64));
             Bridge.Test.Assert.true(Bridge.is(l, System.IComparable$1(System.UInt64)));
@@ -24698,7 +24885,7 @@
         },
         typePropertiesAreCorrect: function () {
             var re = new RegExp("");
-            Bridge.Test.Assert.areEqual("RegExp", Bridge.getTypeName(RegExp));
+            Bridge.Test.Assert.areEqual("RegExp", Bridge.Reflection.getTypeFullName(RegExp));
             Bridge.Test.Assert.true(Bridge.hasValue(re));
         },
         stringOnlyConstructorWorks: function () {
@@ -24757,7 +24944,7 @@
             }
         },
         isMatchTest: function () {
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor("^[a-zA-Z0-9]\\d{2}[a-zA-Z0-9](-\\d{3}){2}[A-Za-z0-9]$");
+            var rgx = new System.Text.RegularExpressions.Regex.ctor("^[a-zA-Z0-9]\\d{2}[a-zA-Z0-9](-\\d{3}){2}[A-Za-z0-9]$");
             for (var i = 0; i < this._isMatchTestData.getCount(); i = (i + 1) | 0) {
                 var testValue = this._isMatchTestData.getItem(i).item1;
                 var exptected = this._isMatchTestData.getItem(i).item2;
@@ -24767,7 +24954,7 @@
             }
         },
         isMatchWithOffsetTest: function () {
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor("[a-zA-Z0-9]\\d{2}[a-zA-Z0-9](-\\d{3}){2}[A-Za-z0-9]");
+            var rgx = new System.Text.RegularExpressions.Regex.ctor("[a-zA-Z0-9]\\d{2}[a-zA-Z0-9](-\\d{3}){2}[A-Za-z0-9]");
             for (var i = 0; i < this._isMatchWithOffsetTestData.getCount(); i = (i + 1) | 0) {
                 var testValue = this._isMatchWithOffsetTestData.getItem(i).item1;
                 var exptected = this._isMatchWithOffsetTestData.getItem(i).item2;
@@ -24864,7 +25051,7 @@
             var input = "This is   text with   far  too   much   whitespace.";
             var pattern = "\\s+";
             var replacement = " ";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var result = rgx.replace(input, replacement);
 
             Bridge.Test.Assert.areEqual(expected, result);
@@ -24875,7 +25062,7 @@
             var str = "aabccdeefgghiijkklmm";
             var pattern = "(\\w)\\1";
             var replacement = "$1";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
 
             var result = rgx.replace$1(str, replacement, 5);
             Bridge.Test.Assert.areEqual(expected, result);
@@ -24886,7 +25073,7 @@
             var input = "Instantiating a New Type\nGenerally, there are two ways that an\ninstance of a class or structure can\nbe instantiated. ";
             var pattern = "^.*$";
             var replacement = "\n$&";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 2);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 2);
 
             var match = rgx.match(input);
 
@@ -24896,7 +25083,7 @@
         replaceWithEvaluatorTest: function () {
             var expected = "Four Score And Seven Years Ago";
             var text = "four score and seven years ago";
-            var rx = new System.Text.RegularExpressions.Regex.$constructor("\\w+");
+            var rx = new System.Text.RegularExpressions.Regex.ctor("\\w+");
             var result = rx.replace$3(text, Bridge.ClientTest.Text.RegularExpressions.Methods.RegexReplaceTests.capText);
             Bridge.Test.Assert.areEqual(expected, result);
         },
@@ -24904,7 +25091,7 @@
             var expected = "decieve releive acheive belief fierce receive";
             var input = "deceive relieve achieve belief fierce receive";
             var pattern = "\\w*(ie|ei)\\w*";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 1);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 1);
 
             var result = rgx.replace$4(input, Bridge.ClientTest.Text.RegularExpressions.Methods.RegexReplaceTests.reverseLetter, ((Bridge.Int.div(input.split(String.fromCharCode(32)).length, 2)) | 0));
             Bridge.Test.Assert.areEqual(expected, result);
@@ -24913,7 +25100,7 @@
             var expected = "deceive releive acheive belief fierce receive";
             var input = "deceive relieve achieve belief fierce receive";
             var pattern = "\\w*(ie|ei)\\w*";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 1);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 1);
 
             var result = rgx.replace$5(input, Bridge.ClientTest.Text.RegularExpressions.Methods.RegexReplaceTests.reverseLetter, ((((Bridge.Int.div(input.split(String.fromCharCode(32)).length, 2)) | 0) - 1) | 0), 7);
             Bridge.Test.Assert.areEqual(expected, result);
@@ -25010,7 +25197,7 @@
         splitTest1: function () {
             var expected = ["plum", "", "pear"];
 
-            var regex = new System.Text.RegularExpressions.Regex.$constructor("-"); // Split on hyphens.
+            var regex = new System.Text.RegularExpressions.Regex.ctor("-"); // Split on hyphens.
             var substrings = regex.split("plum--pear");
 
             this.validateResult(expected, substrings);
@@ -25019,7 +25206,7 @@
             var expected = ["", "ABCDE", "FGHIJKL", "MNOPQ", ""];
 
             var pattern = "\\d+";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var input = "123ABCDE456FGHIJKL789MNOPQ012";
             var substrings = rgx.split(input);
 
@@ -25028,7 +25215,7 @@
         splitTest3: function () {
             var expected = ["plum", "-", "pear"];
 
-            var regex = new System.Text.RegularExpressions.Regex.$constructor("(-)"); // Split on hyphens.
+            var regex = new System.Text.RegularExpressions.Regex.ctor("(-)"); // Split on hyphens.
             var substrings = regex.split("plum-pear");
 
             this.validateResult(expected, substrings);
@@ -25038,7 +25225,7 @@
 
             var input = "07/14/2007";
             var pattern = "(-)|(/)";
-            var regex = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var regex = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var substrings = regex.split(input);
 
             this.validateResult(expected, substrings);
@@ -25047,7 +25234,7 @@
             var expected = ["", "c", "h", "a", "r", "a", "c", "t", "e", "r", "s", ""];
 
             var input = "characters";
-            var regex = new System.Text.RegularExpressions.Regex.$constructor("");
+            var regex = new System.Text.RegularExpressions.Regex.ctor("");
             var substrings = regex.split(input);
 
             this.validateResult(expected, substrings);
@@ -25056,7 +25243,7 @@
             var expected = ["", "ABCDE", "FGHIJKL789MNOPQ012"];
 
             var pattern = "\\d+";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var input = "123ABCDE456FGHIJKL789MNOPQ012";
             var substrings = rgx.split$1(input, 3);
 
@@ -25067,7 +25254,7 @@
 
             var pattern = "(-)";
             var input = "apple-apricot-plum-pear-banana";
-            var regex = new System.Text.RegularExpressions.Regex.$constructor(pattern); // Split on hyphens.
+            var regex = new System.Text.RegularExpressions.Regex.ctor(pattern); // Split on hyphens.
             var substrings = regex.split$1(input, 4);
 
             this.validateResult(expected, substrings);
@@ -25077,7 +25264,7 @@
 
             var input = "07/14/2007";
             var pattern = "(-)|(/)";
-            var regex = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var regex = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var substrings = regex.split$1(input, 2);
 
             this.validateResult(expected, substrings);
@@ -25086,7 +25273,7 @@
             var expected = ["", "c", "h", "a", "r", "a", "c", "t", "e", "rs"];
 
             var input = "characters";
-            var regex = new System.Text.RegularExpressions.Regex.$constructor("");
+            var regex = new System.Text.RegularExpressions.Regex.ctor("");
             var substrings = regex.split$1(input, input.length);
 
             this.validateResult(expected, substrings);
@@ -25095,7 +25282,7 @@
             var expected = ["", "ABCDE", "FGHIJ789KLMNO012PQRST"];
 
             var pattern = "\\d+";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var input = "123ABCDE456FGHIJ789KLMNO012PQRST";
             var m = rgx.match(input);
             if (m.getSuccess()) {
@@ -25111,7 +25298,7 @@
             var pattern = "(-)";
             var input = "apple-apricot-plum-pear-pomegranate-pineapple-peach";
 
-            var regex = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var regex = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var substrings = regex.split$2(input, 4, 15); // Split on hyphens from 15th character on
 
             this.validateResult(expected, substrings);
@@ -25121,7 +25308,7 @@
 
             var pattern = "(-)|([|])"; // possible delimiters found in string
             var input = "apple|apricot|plum|pear|pomegranate|pineapple|peach";
-            var regex = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var regex = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var substrings = regex.split$2(input, 4, 15); // Split on delimiters from 15th character on
 
             this.validateResult(expected, substrings);
@@ -25130,7 +25317,7 @@
             var expected = ["ch", "a", "r", "a", "c", "t", "e", "r", "s", ""];
 
             var input = "characters";
-            var regex = new System.Text.RegularExpressions.Regex.$constructor("");
+            var regex = new System.Text.RegularExpressions.Regex.ctor("");
             var substrings = regex.split$2(input, input.length, System.String.indexOf(input, "a"));
 
             this.validateResult(expected, substrings);
@@ -25271,7 +25458,7 @@
         },
         typePropertiesAreCorrect: function () {
             var sb = new System.Text.StringBuilder();
-            Bridge.Test.Assert.areEqual("System.Text.StringBuilder", Bridge.getTypeName(System.Text.StringBuilder));
+            Bridge.Test.Assert.areEqual("System.Text.StringBuilder", Bridge.Reflection.getTypeFullName(System.Text.StringBuilder));
             Bridge.Test.Assert.true(Bridge.hasValue(sb));
         },
         defaultConstructorWorks: function () {
@@ -25774,20 +25961,20 @@
 
     Bridge.define('Bridge.ClientTest.Threading.CancellationTokenTests', {
         typePropertiesForCancellationTokenSourceAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Threading.CancellationTokenSource", Bridge.getTypeName(System.Threading.CancellationTokenSource), "FullName");
+            Bridge.Test.Assert.areEqual$1("System.Threading.CancellationTokenSource", Bridge.Reflection.getTypeFullName(System.Threading.CancellationTokenSource), "FullName");
             var cts = new System.Threading.CancellationTokenSource();
             Bridge.Test.Assert.true(Bridge.is(cts, System.Threading.CancellationTokenSource));
             Bridge.Test.Assert.true(Bridge.is(cts, System.IDisposable));
         },
         typePropertiesForCancellationTokenAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Threading.CancellationToken", Bridge.getTypeName(System.Threading.CancellationToken), "FullName");
+            Bridge.Test.Assert.areEqual$1("System.Threading.CancellationToken", Bridge.Reflection.getTypeFullName(System.Threading.CancellationToken), "FullName");
 
             Bridge.Test.Assert.true(Bridge.hasValue(new System.Threading.CancellationToken()));
             Bridge.Test.Assert.true(Bridge.hasValue(System.Threading.CancellationToken.none));
             Bridge.Test.Assert.true(Bridge.hasValue(new System.Threading.CancellationTokenSource().token));
         },
         typePropertiesForCancellationTokenRegistrationAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Threading.CancellationTokenRegistration", Bridge.getTypeName(System.Threading.CancellationTokenRegistration), "FullName");
+            Bridge.Test.Assert.areEqual$1("System.Threading.CancellationTokenRegistration", Bridge.Reflection.getTypeFullName(System.Threading.CancellationTokenRegistration), "FullName");
 
             var ctr = new System.Threading.CancellationTokenRegistration();
             Bridge.Test.Assert.true$1(Bridge.is(ctr, System.Threading.CancellationTokenRegistration), "CancellationTokenRegistration");
@@ -26395,7 +26582,7 @@
                                     continue;
                                 }
                                 case 4: {
-                                    Bridge.Test.Assert.fail$1(System.String.concat("Thrown exception should have been an AggregateException, was ", Bridge.getTypeName(ex1)));
+                                    Bridge.Test.Assert.fail$1(System.String.concat("Thrown exception should have been an AggregateException, was ", Bridge.Reflection.getTypeFullName(Bridge.getType(ex1))));
                                     $async_e = null;
                                     $step = 5;
                                     continue;
@@ -26498,7 +26685,7 @@
             "then", "Bridge$IPromise$then"
             ]
         },
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
             this.setThens(new (System.Collections.Generic.List$1(Bridge.ClientTest.Threading.PromiseTests.SimplePromise.A))());
 
@@ -26619,13 +26806,13 @@
             return System.Array.toEnumerable($yield);
         },
         taskCompletionSourceTypePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Threading.Tasks.TaskCompletionSource", Bridge.getTypeName(System.Threading.Tasks.TaskCompletionSource), "FullName should be correct");
+            Bridge.Test.Assert.areEqual$1("System.Threading.Tasks.TaskCompletionSource", Bridge.Reflection.getTypeFullName(System.Threading.Tasks.TaskCompletionSource), "FullName should be correct");
             var tcs = new System.Threading.Tasks.TaskCompletionSource();
             Bridge.Test.Assert.true(Bridge.hasValue(tcs));
         },
         taskTypePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("System.Threading.Tasks.Task", Bridge.getTypeName(System.Threading.Tasks.Task), "FullName for non-generic task should be correct");
-            Bridge.Test.Assert.areEqual$1("System.Threading.Tasks.Task", Bridge.getTypeName(System.Threading.Tasks.Task), "FullName for generic task should be correct");
+            Bridge.Test.Assert.areEqual$1("System.Threading.Tasks.Task", Bridge.Reflection.getTypeFullName(System.Threading.Tasks.Task), "FullName for non-generic task should be correct");
+            Bridge.Test.Assert.areEqual$1("System.Threading.Tasks.Task", Bridge.Reflection.getTypeFullName(System.Threading.Tasks.Task), "FullName for generic task should be correct");
 
             var task = new System.Threading.Tasks.TaskCompletionSource().task;
             Bridge.Test.Assert.true(Bridge.hasValue(task));
@@ -28028,7 +28215,7 @@
                                     Bridge.ClientTest.Threading.TimerTests.setStaticCounter(0);
                                     Bridge.ClientTest.Threading.TimerTests.setStaticData(null);
 
-                                    timer = new System.Threading.Timer.$constructor1(Bridge.ClientTest.Threading.TimerTests.staticHandleTimer, "SomeState", 1, 1);
+                                    timer = new System.Threading.Timer.$ctor1(Bridge.ClientTest.Threading.TimerTests.staticHandleTimer, "SomeState", 1, 1);
 
                                     $task1 = System.Threading.Tasks.Task.delay(200);
                                     $step = 1;
@@ -28086,7 +28273,7 @@
                                     done = Bridge.Test.Assert.async();
 
                                     ts = new Bridge.ClientTest.Threading.TimerTests.TimerState();
-                                    timer = new System.Threading.Timer.$constructor1(Bridge.fn.bind(ts, ts.handleTimer), "SomeState", 1, 1);
+                                    timer = new System.Threading.Timer.$ctor1(Bridge.fn.bind(ts, ts.handleTimer), "SomeState", 1, 1);
 
                                     $task1 = System.Threading.Tasks.Task.delay(200);
                                     $step = 1;
@@ -28142,36 +28329,36 @@
             Bridge.Test.Assert.throws$7(System.ArgumentNullException, $_.Bridge.ClientTest.Threading.TimerTests.f1, "Null callback");
 
             Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
-                new System.Threading.Timer.$constructor1(tc, null, small, 1);
+                new System.Threading.Timer.$ctor1(tc, null, small, 1);
             }, "Small due int");
             Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
-                new System.Threading.Timer.$constructor1(tc, null, 1, small);
+                new System.Threading.Timer.$ctor1(tc, null, 1, small);
             }, "Small period int ");
 
             Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
-                new System.Threading.Timer.$constructor2(tc, null, System.Int64(small), System.Int64(1));
+                new System.Threading.Timer.$ctor2(tc, null, System.Int64(small), System.Int64(1));
             }, "Small due long");
             Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
-                new System.Threading.Timer.$constructor2(tc, null, System.Int64(1), System.Int64(small));
+                new System.Threading.Timer.$ctor2(tc, null, System.Int64(1), System.Int64(small));
             }, "Small period long");
             Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
-                new System.Threading.Timer.$constructor2(tc, null, big, System.Int64(1));
+                new System.Threading.Timer.$ctor2(tc, null, big, System.Int64(1));
             }, "Big due long");
             Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
-                new System.Threading.Timer.$constructor2(tc, null, System.Int64(1), big);
+                new System.Threading.Timer.$ctor2(tc, null, System.Int64(1), big);
             }, "Big period long");
 
             Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
-                new System.Threading.Timer.$constructor3(tc, null, smallSpan, okSpan);
+                new System.Threading.Timer.$ctor3(tc, null, smallSpan, okSpan);
             }, "Small due TimeSpan");
             Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
-                new System.Threading.Timer.$constructor3(tc, null, okSpan, smallSpan);
+                new System.Threading.Timer.$ctor3(tc, null, okSpan, smallSpan);
             }, "Small period TimeSpan");
             Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
-                new System.Threading.Timer.$constructor3(tc, null, bigSpan, okSpan);
+                new System.Threading.Timer.$ctor3(tc, null, bigSpan, okSpan);
             }, "Big due TimeSpan");
             Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
-                new System.Threading.Timer.$constructor3(tc, null, okSpan, bigSpan);
+                new System.Threading.Timer.$ctor3(tc, null, okSpan, bigSpan);
             }, "Big period TimeSpan");
         },
         testStaticCallbackWithChange: function () {
@@ -28195,7 +28382,7 @@
 
                                 copy = null;
 
-                                timer = new System.Threading.Timer.$constructor1(Bridge.ClientTest.Threading.TimerTests.staticHandleTimer, "SomeState", 1, 1);
+                                timer = new System.Threading.Timer.$ctor1(Bridge.ClientTest.Threading.TimerTests.staticHandleTimer, "SomeState", 1, 1);
 
                                 copy = timer;
 
@@ -28262,7 +28449,7 @@
 
                                 copy = null;
 
-                                timer = new System.Threading.Timer.$constructor1(Bridge.fn.bind(ts, ts.handleTimer), "SomeState", 1, 1);
+                                timer = new System.Threading.Timer.$ctor1(Bridge.fn.bind(ts, ts.handleTimer), "SomeState", 1, 1);
 
                                 copy = timer;
 
@@ -28325,7 +28512,7 @@
 
                                 ts = new Bridge.ClientTest.Threading.TimerTests.TimerState();
 
-                                timer = new System.Threading.Timer.$constructor1(Bridge.fn.bind(ts, ts.handleTimer), null, -1, 1);
+                                timer = new System.Threading.Timer.$ctor1(Bridge.fn.bind(ts, ts.handleTimer), null, -1, 1);
                                 $task1 = System.Threading.Tasks.Task.delay(200);
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -28363,7 +28550,7 @@
 
     Bridge.apply($_.Bridge.ClientTest.Threading.TimerTests, {
         f1: function () {
-            new System.Threading.Timer.$constructor1(null, null, 1, 1);
+            new System.Threading.Timer.$ctor1(null, null, 1, 1);
         }
     });
 
@@ -28624,15 +28811,6 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Utilities.TypeHelper', {
-        statics: {
-            getTypeName: function (o) {
-                return Bridge.getTypeName(o);
-                // return Script.Get<string>("o.__proto__.$$name");
-            }
-        }
-    });
-
     Bridge.define('Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.D1', {
         inherits: [Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.B1]
     });
@@ -28656,9 +28834,9 @@
                 Y: 0
             }
         },
-        constructor: function (x, y) {
+        ctor: function (x, y) {
             this.$initialize();
-            Bridge.ClientTest.BasicCSharp.TestInheritance.A.$constructor.call(this, x);
+            Bridge.ClientTest.BasicCSharp.TestInheritance.A.ctor.call(this, x);
             this.setY(y);
         },
         handleNumber$1: function (i) {
@@ -28678,7 +28856,7 @@
             "getString", "Bridge$ClientTest$BasicCSharp$TestInterfaces$ISimple$getString"
             ]
         },
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
             this.setData(1);
         },
@@ -28690,7 +28868,7 @@
     Bridge.define('Bridge.ClientTest.BasicCSharp.TestInterfaces.B', {
         inherits: [Bridge.ClientTest.BasicCSharp.TestInterfaces.ISimple],
         data: 0,
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
             this.data = 2;
         },
@@ -28716,7 +28894,7 @@
             "getStringAsWell", "Bridge$ClientTest$BasicCSharp$TestInterfaces$ISimpleAsWell$getStringAsWell"
             ]
         },
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
             this.data = 3;
             this.dataAsWell = 4;
@@ -30444,9 +30622,9 @@
 
     Bridge.define('Bridge.ClientTest.Exceptions.CommonExceptionTests.E2', {
         inherits: [Bridge.ClientTest.Exceptions.CommonExceptionTests.E1],
-        constructor: function (message) {
+        ctor: function (message) {
             this.$initialize();
-            Bridge.ClientTest.Exceptions.CommonExceptionTests.E1.$constructor.call(this, message);
+            Bridge.ClientTest.Exceptions.CommonExceptionTests.E1.ctor.call(this, message);
         }
     });
 
@@ -30501,8 +30679,8 @@
     Bridge.define('Bridge.ClientTest.Reflection.GetMembersTests.C1', {
         inherits: [Bridge.ClientTest.Reflection.GetMembersTests.B1],
         statics: {
-            fCS1: 0,
-            fCS2: 0,
+            FCS1: 0,
+            FCS2: 0,
             config: {
                 properties: {
                     PCS1: 0,
@@ -30517,34 +30695,34 @@
             },
             removeECS2: function (value) {
             },
-            mCS: function () {
+            MCS: function () {
             },
-            mCS$1: function (x) {
+            MCS$1: function (x) {
             },
-            mCS$2: function (x, y) {
+            MCS$2: function (x, y) {
             },
-            mCS2: function (x, y) {
+            MCS2: function (x, y) {
             }
         },
-        fC1: 0,
-        fC2: 0,
+        FC1: 0,
+        FC2: 0,
         config: {
             properties: {
                 PC1: 0,
                 PC2: 0
             }
         },
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
-            Bridge.ClientTest.Reflection.GetMembersTests.B1.$constructor.call(this);
+            Bridge.ClientTest.Reflection.GetMembersTests.B1.ctor.call(this);
         },
-        $constructor1: function (x) {
+        $ctor1: function (x) {
             this.$initialize();
-            Bridge.ClientTest.Reflection.GetMembersTests.B1.$constructor.call(this);
+            Bridge.ClientTest.Reflection.GetMembersTests.B1.ctor.call(this);
         },
-        $constructor2: function (x, y) {
+        $ctor2: function (x, y) {
             this.$initialize();
-            Bridge.ClientTest.Reflection.GetMembersTests.B1.$constructor.call(this);
+            Bridge.ClientTest.Reflection.GetMembersTests.B1.ctor.call(this);
         },
         getItem$1: function (x) {
             return 0;
@@ -30559,21 +30737,21 @@
         },
         removeEC2: function (value) {
         },
-        mC: function () {
+        MC: function () {
         },
-        mC$1: function (x) {
+        MC$1: function (x) {
         },
-        mC$2: function (x, y) {
+        MC$2: function (x, y) {
         },
-        mC2: function (x, y) {
+        MC2: function (x, y) {
         }
     });
 
     Bridge.define('Bridge.ClientTest.Reflection.GetMembersTests.C2', {
         inherits: [Bridge.ClientTest.Reflection.GetMembersTests.B2],
         statics: {
-            fS: 0,
-            fCS: 0,
+            FS: 0,
+            FCS: 0,
             config: {
                 events: {
                     ES: null,
@@ -30584,23 +30762,23 @@
                     PCS: 0
                 }
             },
-            mS: function () {
+            MS: function () {
             },
-            mCS: function () {
+            MCS: function () {
             },
-            m2S: function (x) {
+            M2S: function (x) {
             },
-            m2S$1: function (x) {
+            M2S$1: function (x) {
             },
-            m2CS: function (x) {
+            M2CS: function (x) {
             },
-            m2CS$1: function (x) {
+            M2CS$1: function (x) {
             },
-            m3S: function (x) {
+            M3S: function (x) {
             }
         },
         f$1: 0,
-        fC: 0,
+        FC: 0,
         config: {
             events: {
                 E$1: null,
@@ -30623,17 +30801,17 @@
         },
         m$1: function () {
         },
-        mC: function () {
+        MC: function () {
         },
-        m2$2: function (x) {
+        M2$2: function (x) {
         },
-        m2$3: function (x) {
+        M2$3: function (x) {
         },
-        m2C: function (x) {
+        M2C: function (x) {
         },
-        m2C$1: function (x) {
+        M2C$1: function (x) {
         },
-        m3$1: function (x) {
+        M3$1: function (x) {
         }
     });
 
@@ -30665,9 +30843,9 @@
 
     Bridge.define('Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.DS', {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.BS],
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
-            Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.BS.$constructor.call(this, 0);
+            Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.BS.ctor.call(this, 0);
         }
     });
 
@@ -30722,9 +30900,9 @@
     Bridge.define('Bridge.ClientTest.Reflection.TypeSystemTests.BaseNamedConstructorWithArgumentsTypes.D', {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.BaseNamedConstructorWithArgumentsTypes.B],
         messageD: null,
-        constructor: function (x, y) {
+        ctor: function (x, y) {
             this.$initialize();
-            Bridge.ClientTest.Reflection.TypeSystemTests.BaseNamedConstructorWithArgumentsTypes.B.$constructor.call(this, ((x + 1) | 0), ((y + 1) | 0));
+            Bridge.ClientTest.Reflection.TypeSystemTests.BaseNamedConstructorWithArgumentsTypes.B.ctor.call(this, ((x + 1) | 0), ((y + 1) | 0));
             this.messageD = System.String.concat(System.String.concat(x, " "), y);
         }
     });
@@ -30732,9 +30910,9 @@
     Bridge.define('Bridge.ClientTest.Reflection.TypeSystemTests.BaseNamedConstructorWithoutArgumentsTypes.D', {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.BaseNamedConstructorWithoutArgumentsTypes.B],
         messageD: null,
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
-            Bridge.ClientTest.Reflection.TypeSystemTests.BaseNamedConstructorWithoutArgumentsTypes.B.$constructor.call(this);
+            Bridge.ClientTest.Reflection.TypeSystemTests.BaseNamedConstructorWithoutArgumentsTypes.B.ctor.call(this);
             this.messageD = "Y";
         }
     });
@@ -30742,9 +30920,9 @@
     Bridge.define('Bridge.ClientTest.Reflection.TypeSystemTests.BaseUnnamedConstructorWithArgumentsTypes.D', {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.BaseUnnamedConstructorWithArgumentsTypes.B],
         messageD: null,
-        constructor: function (x, y) {
+        ctor: function (x, y) {
             this.$initialize();
-            Bridge.ClientTest.Reflection.TypeSystemTests.BaseUnnamedConstructorWithArgumentsTypes.B.$constructor.call(this, ((x + 1) | 0), ((y + 1) | 0));
+            Bridge.ClientTest.Reflection.TypeSystemTests.BaseUnnamedConstructorWithArgumentsTypes.B.ctor.call(this, ((x + 1) | 0), ((y + 1) | 0));
             this.messageD = System.String.concat(System.String.concat(x, " "), y);
         }
     });
@@ -30752,9 +30930,9 @@
     Bridge.define('Bridge.ClientTest.Reflection.TypeSystemTests.BaseUnnamedConstructorWithoutArgumentsTypes.D', {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.BaseUnnamedConstructorWithoutArgumentsTypes.B],
         messageD: null,
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
-            Bridge.ClientTest.Reflection.TypeSystemTests.BaseUnnamedConstructorWithoutArgumentsTypes.B.$constructor.call(this);
+            Bridge.ClientTest.Reflection.TypeSystemTests.BaseUnnamedConstructorWithoutArgumentsTypes.B.ctor.call(this);
             this.messageD = "Y";
         }
     });
@@ -30767,9 +30945,9 @@
     Bridge.define('Bridge.ClientTest.Reflection.TypeSystemTests.ConstructingInstanceWithNamedConstructorTypes.E', {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.ConstructingInstanceWithNamedConstructorTypes.D],
         g: null,
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
-            Bridge.ClientTest.Reflection.TypeSystemTests.ConstructingInstanceWithNamedConstructorTypes.D.$constructor.call(this);
+            Bridge.ClientTest.Reflection.TypeSystemTests.ConstructingInstanceWithNamedConstructorTypes.D.ctor.call(this);
             this.g = " and derived ctor";
         },
         getMessage: function () {
@@ -30779,9 +30957,9 @@
 
     Bridge.define('Bridge.ClientTest.Reflection.TypeSystemTests.DS', {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.BS],
-        constructor: function (x) {
+        ctor: function (x) {
             this.$initialize();
-            Bridge.ClientTest.Reflection.TypeSystemTests.BS.$constructor.call(this, x);
+            Bridge.ClientTest.Reflection.TypeSystemTests.BS.ctor.call(this, x);
         },
         getX: function () {
             return this.X;
@@ -30790,16 +30968,16 @@
 
     Bridge.define('Bridge.ClientTest.Reflection.TypeSystemTests.DS2', {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.BS],
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
-            Bridge.ClientTest.Reflection.TypeSystemTests.BS.$constructor.call(this, 0);
+            Bridge.ClientTest.Reflection.TypeSystemTests.BS.ctor.call(this, 0);
         }
     });
 
     Bridge.define('Bridge.ClientTest.Reflection.TypeSystemTests.G$2', function (T1, T2) { return {
         inherits: function () { return [Bridge.ClientTest.Reflection.TypeSystemTests.BX$1(Bridge.ClientTest.Reflection.TypeSystemTests.G$2(T1,Bridge.ClientTest.Reflection.TypeSystemTests.C)),Bridge.ClientTest.Reflection.TypeSystemTests.IG$1(Bridge.ClientTest.Reflection.TypeSystemTests.G$2(T2,String))]; },
         statics: {
-            constructor: function () {
+            ctor: function () {
                 Bridge.ClientTest.Reflection.TypeSystemTests.G$2(T1,T2).field = System.String.concat(System.String.concat(Bridge.Reflection.getTypeFullName(T1), " "), Bridge.Reflection.getTypeFullName(T2));
             },
             field: null
@@ -30864,9 +31042,9 @@
 
     Bridge.define('Bridge.ClientTest.Reflection.TypeSystemTests.MethodGroupConversionTypes.D', {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.MethodGroupConversionTypes.B],
-        constructor: function (m) {
+        ctor: function (m) {
             this.$initialize();
-            Bridge.ClientTest.Reflection.TypeSystemTests.MethodGroupConversionTypes.B.$constructor.call(this, m);
+            Bridge.ClientTest.Reflection.TypeSystemTests.MethodGroupConversionTypes.B.ctor.call(this, m);
         },
         f: function (x, y) {
             return ((((x - y) | 0) - this.m) | 0);
@@ -30893,7 +31071,7 @@
             Text: "This is a sentance. This is another sentance.",
             getTestDataMatch: function (matchIndex) {
                 if (matchIndex === void 0) { matchIndex = 1; }
-                var rgx = new System.Text.RegularExpressions.Regex.$constructor(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexCaptureCollectionTests.Pattern);
+                var rgx = new System.Text.RegularExpressions.Regex.ctor(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexCaptureCollectionTests.Pattern);
                 var m = rgx.match(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexCaptureCollectionTests.Text);
                 for (var i = 1; i < matchIndex; i = (i + 1) | 0) {
                     m = rgx.match$1(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexCaptureCollectionTests.Text, ((m.getIndex() + m.getLength()) | 0));
@@ -30997,10 +31175,10 @@
 
     Bridge.apply($_.Bridge.ClientTest.Text.RegularExpressions.Entities.RegexCaptureCollectionTests, {
         f1: function (err) {
-            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(System.ArgumentNullException));
+            return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(System.ArgumentNullException));
         },
         f2: function (err) {
-            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(System.IndexOutOfRangeException));
+            return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(System.IndexOutOfRangeException));
         }
     });
 
@@ -31011,7 +31189,7 @@
             Text: "This is a sentance. This is another sentance.",
             getTestDataMatch: function (matchIndex) {
                 if (matchIndex === void 0) { matchIndex = 1; }
-                var rgx = new System.Text.RegularExpressions.Regex.$constructor(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexEntityTests.Pattern);
+                var rgx = new System.Text.RegularExpressions.Regex.ctor(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexEntityTests.Pattern);
                 var m = rgx.match(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexEntityTests.Text);
                 for (var i = 1; i < matchIndex; i = (i + 1) | 0) {
                     m = rgx.match$1(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexEntityTests.Text, ((m.getIndex() + m.getLength()) | 0));
@@ -31048,112 +31226,112 @@
             this.validateCapture(m2, 1, 3, 36, 9, "sentance.");
         },
         getGroupNamesTest: function () {
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor("");
+            var rgx = new System.Text.RegularExpressions.Regex.ctor("");
             var names = rgx.getGroupNames();
             this.validateCollection(String, ["0"], names, "EmptyRegex");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("()");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("()");
             names = rgx.getGroupNames();
             this.validateCollection(String, ["0", "1"], names, "EmptyGroup");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(group1)");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(group1)");
             names = rgx.getGroupNames();
             this.validateCollection(String, ["0", "1"], names, "Group1");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(group1)(group2)");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(group1)(group2)");
             names = rgx.getGroupNames();
             this.validateCollection(String, ["0", "1", "2"], names, "Group2");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(group1())(group2)");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(group1())(group2)");
             names = rgx.getGroupNames();
             this.validateCollection(String, ["0", "1", "2", "3"], names, "Group3");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(?<name1>)");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(?<name1>)");
             names = rgx.getGroupNames();
             this.validateCollection(String, ["0", "name1"], names, "NameGroup1");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(?<name1>)(?'name2')");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(?<name1>)(?'name2')");
             names = rgx.getGroupNames();
             this.validateCollection(String, ["0", "name1", "name2"], names, "NameGroup2");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(?<name1>(?'inner1'))(?'name2')");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(?<name1>(?'inner1'))(?'name2')");
             names = rgx.getGroupNames();
             this.validateCollection(String, ["0", "name1", "inner1", "name2"], names, "NameGroup3");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(?<test>)()");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(?<test>)()");
             names = rgx.getGroupNames();
             this.validateCollection(String, ["0", "1", "test"], names, "NameGroupAndNoname1");
         },
         getGroupNumbersTest: function () {
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor("");
+            var rgx = new System.Text.RegularExpressions.Regex.ctor("");
             var numbers = rgx.getGroupNumbers();
             this.validateCollection(System.Int32, [0], numbers, "EmptyRegex");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("()");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("()");
             numbers = rgx.getGroupNumbers();
             this.validateCollection(System.Int32, [0, 1], numbers, "EmptyGroup");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(group1)");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(group1)");
             numbers = rgx.getGroupNumbers();
             this.validateCollection(System.Int32, [0, 1], numbers, "Group1");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(group1)(group2)");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(group1)(group2)");
             numbers = rgx.getGroupNumbers();
             this.validateCollection(System.Int32, [0, 1, 2], numbers, "Group2");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(group1())(group2)");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(group1())(group2)");
             numbers = rgx.getGroupNumbers();
             this.validateCollection(System.Int32, [0, 1, 2, 3], numbers, "Group3");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(?<name1>)");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(?<name1>)");
             numbers = rgx.getGroupNumbers();
             this.validateCollection(System.Int32, [0, 1], numbers, "NameGroup1");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(?<name1>)(?'name2')");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(?<name1>)(?'name2')");
             numbers = rgx.getGroupNumbers();
             this.validateCollection(System.Int32, [0, 1, 2], numbers, "NameGroup2");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(?<name1>(?'inner1'))(?'name2')");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(?<name1>(?'inner1'))(?'name2')");
             numbers = rgx.getGroupNumbers();
             this.validateCollection(System.Int32, [0, 1, 2, 3], numbers, "NameGroup3");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(?<test>)()");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(?<test>)()");
             numbers = rgx.getGroupNumbers();
             this.validateCollection(System.Int32, [0, 1, 2], numbers, "NameGroupAndNoname1");
         },
         groupNameFromNumberTest: function () {
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor("");
+            var rgx = new System.Text.RegularExpressions.Regex.ctor("");
             Bridge.Test.Assert.areEqual$1("0", rgx.groupNameFromNumber(0), "EmptyRegex.GroupNameFromNumber(0)");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("()");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("()");
             Bridge.Test.Assert.areEqual$1("0", rgx.groupNameFromNumber(0), "EmptyGroup.GroupNameFromNumber(0)");
             Bridge.Test.Assert.areEqual$1("1", rgx.groupNameFromNumber(1), "EmptyGroup.GroupNameFromNumber(1)");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(group1)");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(group1)");
             Bridge.Test.Assert.areEqual$1("0", rgx.groupNameFromNumber(0), "Group1.GroupNameFromNumber(0)");
             Bridge.Test.Assert.areEqual$1("1", rgx.groupNameFromNumber(1), "Group1.GroupNameFromNumber(1)");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(group1)(group2)");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(group1)(group2)");
             Bridge.Test.Assert.areEqual$1("0", rgx.groupNameFromNumber(0), "Group2.GroupNameFromNumber(0)");
             Bridge.Test.Assert.areEqual$1("1", rgx.groupNameFromNumber(1), "Group2.GroupNameFromNumber(1)");
             Bridge.Test.Assert.areEqual$1("2", rgx.groupNameFromNumber(2), "Group2.GroupNameFromNumber(2)");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(group1())(group2)");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(group1())(group2)");
             Bridge.Test.Assert.areEqual$1("0", rgx.groupNameFromNumber(0), "Group3.GroupNameFromNumber(0)");
             Bridge.Test.Assert.areEqual$1("1", rgx.groupNameFromNumber(1), "Group3.GroupNameFromNumber(1)");
             Bridge.Test.Assert.areEqual$1("2", rgx.groupNameFromNumber(2), "Group3.GroupNameFromNumber(2)");
             Bridge.Test.Assert.areEqual$1("3", rgx.groupNameFromNumber(3), "Group3.GroupNameFromNumber(3)");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(?<name1>)");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(?<name1>)");
             Bridge.Test.Assert.areEqual$1("0", rgx.groupNameFromNumber(0), "NameGroup1.GroupNameFromNumber(0)");
             Bridge.Test.Assert.areEqual$1("name1", rgx.groupNameFromNumber(1), "NameGroup1.GroupNameFromNumber(1)");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(?<name1>)(?'name2')");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(?<name1>)(?'name2')");
             Bridge.Test.Assert.areEqual$1("0", rgx.groupNameFromNumber(0), "NameGroup2.GroupNameFromNumber(0)");
             Bridge.Test.Assert.areEqual$1("name1", rgx.groupNameFromNumber(1), "NameGroup2.GroupNameFromNumber(1)");
             Bridge.Test.Assert.areEqual$1("name2", rgx.groupNameFromNumber(2), "NameGroup2.GroupNameFromNumber(2)");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(?<name1>(?'inner1'))(?'name2')");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(?<name1>(?'inner1'))(?'name2')");
             Bridge.Test.Assert.areEqual$1("0", rgx.groupNameFromNumber(0), "NameGroup3.GroupNameFromNumber(0)");
             Bridge.Test.Assert.areEqual$1("name1", rgx.groupNameFromNumber(1), "NameGroup3.GroupNameFromNumber(1)");
             Bridge.Test.Assert.areEqual$1("inner1", rgx.groupNameFromNumber(2), "NameGroup3.GroupNameFromNumber(2)");
@@ -31161,44 +31339,44 @@
 
             Bridge.Test.Assert.areEqual$1("", rgx.groupNameFromNumber(999), "NameGroup3.GroupNameFromNumber(999)");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(?<test>)()");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(?<test>)()");
             Bridge.Test.Assert.areEqual$1("0", rgx.groupNameFromNumber(0), "NameGroupAndNoname1.GroupNameFromNumber(0)");
             Bridge.Test.Assert.areEqual$1("1", rgx.groupNameFromNumber(1), "NameGroupAndNoname1.GroupNameFromNumber(1)");
             Bridge.Test.Assert.areEqual$1("test", rgx.groupNameFromNumber(2), "NameGroupAndNoname1.GroupNameFromNumber(2)");
         },
         groupNumberFromNameTest: function () {
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor("");
+            var rgx = new System.Text.RegularExpressions.Regex.ctor("");
             Bridge.Test.Assert.areEqual$1(0, rgx.groupNumberFromName("0"), "EmptyRegex.GroupNumberFromName(\"0\")");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("()");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("()");
             Bridge.Test.Assert.areEqual$1(0, rgx.groupNumberFromName("0"), "EmptyGroup.GroupNumberFromName(\"0\")");
             Bridge.Test.Assert.areEqual$1(1, rgx.groupNumberFromName("1"), "EmptyGroup.GroupNumberFromName(\"1\")");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(group1)");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(group1)");
             Bridge.Test.Assert.areEqual$1(0, rgx.groupNumberFromName("0"), "Group1.GroupNumberFromName(\"0\")");
             Bridge.Test.Assert.areEqual$1(1, rgx.groupNumberFromName("1"), "Group1.GroupNumberFromName(\"1\")");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(group1)(group2)");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(group1)(group2)");
             Bridge.Test.Assert.areEqual$1("0", rgx.groupNameFromNumber(0), "Group2.GroupNameFromNumber(0)");
             Bridge.Test.Assert.areEqual$1("1", rgx.groupNameFromNumber(1), "Group2.GroupNameFromNumber(1)");
             Bridge.Test.Assert.areEqual$1("2", rgx.groupNameFromNumber(2), "Group2.GroupNameFromNumber(2)");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(group1())(group2)");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(group1())(group2)");
             Bridge.Test.Assert.areEqual$1(0, rgx.groupNumberFromName("0"), "Group3.GroupNumberFromName(\"0\")");
             Bridge.Test.Assert.areEqual$1(1, rgx.groupNumberFromName("1"), "Group3.GroupNumberFromName(\"1\")");
             Bridge.Test.Assert.areEqual$1(2, rgx.groupNumberFromName("2"), "Group3.GroupNumberFromName(\"2\")");
             Bridge.Test.Assert.areEqual$1(3, rgx.groupNumberFromName("3"), "Group3.GroupNumberFromName(\"3\")");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(?<name1>)");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(?<name1>)");
             Bridge.Test.Assert.areEqual$1(0, rgx.groupNumberFromName("0"), "NameGroup1.GroupNumberFromName(\"0\")");
             Bridge.Test.Assert.areEqual$1(1, rgx.groupNumberFromName("name1"), "NameGroup1.GroupNumberFromName(\"name1\")");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(?<name1>)(?'name2')");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(?<name1>)(?'name2')");
             Bridge.Test.Assert.areEqual$1(0, rgx.groupNumberFromName("0"), "NameGroup2.GroupNumberFromName(\"0\")");
             Bridge.Test.Assert.areEqual$1(1, rgx.groupNumberFromName("name1"), "NameGroup2.GroupNumberFromName(\"name1\")");
             Bridge.Test.Assert.areEqual$1(2, rgx.groupNumberFromName("name2"), "NameGroup2.GroupNumberFromName(\"name2\")");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(?<name1>(?'inner1'))(?'name2')");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(?<name1>(?'inner1'))(?'name2')");
             Bridge.Test.Assert.areEqual$1(0, rgx.groupNumberFromName("0"), "NameGroup3.GroupNumberFromName(\"0\")");
             Bridge.Test.Assert.areEqual$1(1, rgx.groupNumberFromName("name1"), "NameGroup3.GroupNumberFromName(\"name1\")");
             Bridge.Test.Assert.areEqual$1(2, rgx.groupNumberFromName("inner1"), "NameGroup3.GroupNumberFromName(\"inner1\")");
@@ -31206,7 +31384,7 @@
 
             Bridge.Test.Assert.areEqual$1(-1, rgx.groupNumberFromName("Fake"), "NameGroup3.GroupNumberFromName(\"Fake\")");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor("(?<test>)()");
+            rgx = new System.Text.RegularExpressions.Regex.ctor("(?<test>)()");
             Bridge.Test.Assert.areEqual$1(0, rgx.groupNumberFromName("0"), "NameGroupAndNoname1.GroupNumberFromName(\"0\")");
             Bridge.Test.Assert.areEqual$1(1, rgx.groupNumberFromName("1"), "NameGroupAndNoname1.GroupNumberFromName(\"1\")");
             Bridge.Test.Assert.areEqual$1(2, rgx.groupNumberFromName("test"), "NameGroupAndNoname1.GroupNumberFromName(\"test\")");
@@ -31220,10 +31398,10 @@
                 (function () {
                     var supportedOption = $t.getCurrent();
                     if (supportedOption.value) {
-                        var rgx = new System.Text.RegularExpressions.Regex.$constructor1(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexEntityTests.Pattern, supportedOption.key);
+                        var rgx = new System.Text.RegularExpressions.Regex.$ctor1(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexEntityTests.Pattern, supportedOption.key);
                     } else {
                         Bridge.Test.Assert.throws$6(System.NotSupportedException, function () {
-                            new System.Text.RegularExpressions.Regex.$constructor1(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexEntityTests.Pattern, supportedOption.key);
+                            new System.Text.RegularExpressions.Regex.$ctor1(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexEntityTests.Pattern, supportedOption.key);
                         });
                     }
                 }).call(this);
@@ -31232,7 +31410,7 @@
         matchNamedGroupTest: function () {
             var pattern = "(?<test>A)(B)";
             var text = "AB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 2, "AB", 3, true);
@@ -31251,7 +31429,7 @@
         matchInnerNamedGroupTest1: function () {
             var pattern = "((?<test>A)(B))";
             var text = "AB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 2, "AB", 4, true);
@@ -31273,7 +31451,7 @@
         matchInnerNamedGroupTest2: function () {
             var pattern = "(?<outer>(C)(?<inner1>(?<inner2>A)+)(B))";
             var text = "CAAAB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 5, "CAAAB", 6, true);
@@ -31304,7 +31482,7 @@
             var $t;
             var pattern = "(C)(?<group1>A)+(B)";
             var text = "CAAAB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 5, "CAAAB", 4, true);
@@ -31340,7 +31518,7 @@
         repeatingGroupTest: function () {
             var pattern = "((A(\\d)*A)x(B(\\d)*B)+)";
             var text = "A123AxBBB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 8, "A123AxBB", 6, true);
@@ -31368,7 +31546,7 @@
             // Case 1:
             var pattern = "()";
             var text = "ABC";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 2, true);
@@ -31382,7 +31560,7 @@
             // Case 2:
             pattern = "(B?)";
             text = "ABC";
-            rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 2, true);
@@ -31396,7 +31574,7 @@
             // Case 3:
             pattern = "(B)?";
             text = "ABC";
-            rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 2, true);
@@ -31409,7 +31587,7 @@
         nonCapturingGroupsTest: function () {
             var pattern = "(?:Q(?<noncapInner>A)Z)(B)(?:C)";
             var text = "QAZBC";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 5, "QAZBC", 3, true);
@@ -31450,7 +31628,7 @@
             Text: "This is a sentance. This is another sentance.",
             getTestDataMatch: function (matchIndex) {
                 if (matchIndex === void 0) { matchIndex = 1; }
-                var rgx = new System.Text.RegularExpressions.Regex.$constructor(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexGroupCollectionTests.Pattern);
+                var rgx = new System.Text.RegularExpressions.Regex.ctor(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexGroupCollectionTests.Pattern);
                 var m = rgx.match(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexGroupCollectionTests.Text);
                 for (var i = 1; i < matchIndex; i = (i + 1) | 0) {
                     m = rgx.match$1(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexGroupCollectionTests.Text, ((m.getIndex() + m.getLength()) | 0));
@@ -31550,10 +31728,10 @@
 
     Bridge.apply($_.Bridge.ClientTest.Text.RegularExpressions.Entities.RegexGroupCollectionTests, {
         f1: function (err) {
-            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(System.ArgumentNullException));
+            return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(System.ArgumentNullException));
         },
         f2: function (err) {
-            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(System.IndexOutOfRangeException));
+            return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(System.IndexOutOfRangeException));
         }
     });
 
@@ -31564,7 +31742,7 @@
             Text: "This is a sentance. This is another sentance.",
             getTestDataMatch: function (matchIndex) {
                 if (matchIndex === void 0) { matchIndex = 1; }
-                var rgx = new System.Text.RegularExpressions.Regex.$constructor(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexMatchCollectionTests.Pattern);
+                var rgx = new System.Text.RegularExpressions.Regex.ctor(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexMatchCollectionTests.Pattern);
                 var m = rgx.match(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexMatchCollectionTests.Text);
                 for (var i = 1; i < matchIndex; i = (i + 1) | 0) {
                     m = rgx.match$1(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexMatchCollectionTests.Text, ((m.getIndex() + m.getLength()) | 0));
@@ -31573,7 +31751,7 @@
                 return m;
             },
             getTestDataMatches: function () {
-                var rgx = new System.Text.RegularExpressions.Regex.$constructor(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexMatchCollectionTests.Pattern);
+                var rgx = new System.Text.RegularExpressions.Regex.ctor(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexMatchCollectionTests.Pattern);
                 var m = rgx.matches(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexMatchCollectionTests.Text);
                 return m;
             }
@@ -31681,7 +31859,7 @@
             var pattern = "";
             var tstText = "characters";
 
-            var rx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var matches = rx.matches(tstText);
 
             Bridge.Test.Assert.areEqual(((tstText.length + 1) | 0), matches.getCount());
@@ -31696,10 +31874,10 @@
 
     Bridge.apply($_.Bridge.ClientTest.Text.RegularExpressions.Entities.RegexMatchCollectionTests, {
         f1: function (err) {
-            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(System.ArgumentNullException));
+            return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(System.ArgumentNullException));
         },
         f2: function (err) {
-            return Bridge.referenceEquals(Bridge.getTypeName(err), Bridge.getTypeName(System.IndexOutOfRangeException));
+            return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(System.IndexOutOfRangeException));
         }
     });
 
@@ -31710,7 +31888,7 @@
             Text: "This is a sentance. This is another sentance.",
             getTestDataMatch: function (matchIndex) {
                 if (matchIndex === void 0) { matchIndex = 1; }
-                var rgx = new System.Text.RegularExpressions.Regex.$constructor(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexMatchEntityTests.Pattern);
+                var rgx = new System.Text.RegularExpressions.Regex.ctor(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexMatchEntityTests.Pattern);
                 var m = rgx.match(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexMatchEntityTests.Text);
                 for (var i = 1; i < matchIndex; i = (i + 1) | 0) {
                     m = rgx.match$1(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexMatchEntityTests.Text, ((m.getIndex() + m.getLength()) | 0));
@@ -31750,7 +31928,7 @@
             var pattern = "";
             var tstText = "characters";
 
-            var rx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rx.match(tstText);
 
             this.validateMatch(m, 0, 0, "", 1, true);
@@ -31776,7 +31954,7 @@
             var pattern = "";
             var tstText = "characters";
 
-            var rx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rx.match(tstText);
             this.validateMatch(m, 0, 0, "", 1, true);
 
@@ -31811,7 +31989,7 @@
             var pattern = System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat("(?<", groupNames[0]), ">\\d+)(?'"), groupNames[1]), "'ZZ)(?<"), groupNames[2]), ">\\s+)");
             var tstText = "Number123ZZ   ";
 
-            var rx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rx.match(tstText);
 
             for (var i = 1; i < 4; i = (i + 1) | 0) {
@@ -31827,7 +32005,7 @@
         groupOrderingTest1: function () {
             var pattern = "(a)(b)(?<name>c)(d)";
             var text = "abcd";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 4, "abcd", 5, true);
@@ -31850,7 +32028,7 @@
         groupOrderingTest2: function () {
             var pattern = "(a)(b)(?<4>c)(?<name>d)(e)";
             var text = "abcde";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 5, "abcde", 6, true);
@@ -31876,7 +32054,7 @@
         groupOrderingTest3: function () {
             var pattern = "(a)(b)(?<5>c)(?<name>d)(e)";
             var text = "abcde";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 5, "abcde", 6, true);
@@ -31902,7 +32080,7 @@
         sparseOrderingTest: function () {
             var pattern = "(?<60>n)(?<50>a)(b)(?<3>c)(?<name>d)(?<70>e)(f)";
             var text = "nabcdef";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 7, "nabcdef", 8, true);
@@ -31934,7 +32112,7 @@
         groupCapturesMergeTest: function () {
             var pattern = "(a)(b)(?<2>c)(?<name>d)(e)";
             var text = "abcde";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 5, "abcde", 5, true);
@@ -32002,7 +32180,7 @@
             while ($t.moveNext()) {
                 var ch = $t.getCurrent();
                 try {
-                    var rgx = new System.Text.RegularExpressions.Regex.$constructor(System.String.concat("\\", String.fromCharCode(ch)));
+                    var rgx = new System.Text.RegularExpressions.Regex.ctor(System.String.concat("\\", String.fromCharCode(ch)));
                     rgx.match(System.String.concat("", String.fromCharCode(ch)));
                 }
                 catch ($e1) {
@@ -32019,7 +32197,7 @@
                 (function () {
                     var ch = $t.getCurrent();
                     Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
-                        var rgx = new System.Text.RegularExpressions.Regex.$constructor(System.String.concat("\\", String.fromCharCode(ch)));
+                        var rgx = new System.Text.RegularExpressions.Regex.ctor(System.String.concat("\\", String.fromCharCode(ch)));
                         rgx.match(System.String.concat("", String.fromCharCode(ch)));
                     }, System.String.concat("Char must not be escapable: ", String.fromCharCode(ch)));
                 }).call(this);
@@ -32040,7 +32218,7 @@
             var pattern = "\\b\\w+es\\b";
             var sentence = "Who writes these notes?";
 
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
 
             $t = Bridge.getEnumerator(rgx.matches(sentence));
             while ($t.moveNext()) {
@@ -32063,7 +32241,7 @@
             var pattern = "\\b\\w+es\\b";
             var sentence = "Who writes these notes and uses our paper?";
 
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
 
             var match = rgx.match(sentence);
             actualMatchValues.add(match.getValue());
@@ -32189,7 +32367,7 @@
             var pat = "(\\w+)\\s+(car)";
 
             // Instantiate the regular expression object.
-            var r = new System.Text.RegularExpressions.Regex.$constructor1(pat, 1);
+            var r = new System.Text.RegularExpressions.Regex.$ctor1(pat, 1);
 
             // Match the regular expression pattern against a text string.
             var m = r.match(text);
@@ -32225,7 +32403,7 @@
             var pat = "(\\w+)\\s+(car)";
 
             // Instantiate the regular expression object.
-            var r = new System.Text.RegularExpressions.Regex.$constructor1(pat, 1);
+            var r = new System.Text.RegularExpressions.Regex.$ctor1(pat, 1);
 
             // Match the regular expression pattern against a text string.
             var m = r.match$1(text, 3);
@@ -32261,7 +32439,7 @@
             var pat = "(\\w+)\\s+(car)";
 
             // Instantiate the regular expression object.
-            var r = new System.Text.RegularExpressions.Regex.$constructor1(pat, 1);
+            var r = new System.Text.RegularExpressions.Regex.$ctor1(pat, 1);
 
             // Match the regular expression pattern against a text string.
             var m = r.match$2(text, 3, 15);
@@ -32356,14 +32534,14 @@
             var expected = ["the", "this"];
 
             var pattern = "th(e|is|at)";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
 
             this.validateMatchResults(rgx, inputs, expected);
         },
         msdnSimpleAlternationTest2: function () {
             var pattern = "\\bgr[ae]y\\b";
             var text = "The gray wolf blended in among the grey rocks.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -32385,7 +32563,7 @@
         msdnSimpleAlternationTest3: function () {
             var pattern = "\\bgr(a|e)y\\b";
             var text = "The gray wolf blended in among the grey rocks.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -32413,7 +32591,7 @@
         msdnAlternationExprTest1: function () {
             var pattern = "(?(A)A\\d{2}\\b|\\b\\d{3}\\b)";
             var text = "A10 C103 910";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -32435,7 +32613,7 @@
         msdnAlternationExprTest2: function () {
             var pattern = "\\b(?(\\d{2}-)\\d{2}-\\d{7}|\\d{3}-\\d{2}-\\d{4})\\b";
             var text = "01-9999999 020-333333 777-88-9999";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -32457,7 +32635,7 @@
         msdnAlternationGroupNameExprTest1: function () {
             var pattern = "(?<quoted>\")?(?(quoted).+?\"|\\S+\\s)";
             var text = "Dogs.jpg \"Yiska playing.jpg\"";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -32484,7 +32662,7 @@
         msdnAlternationGroupNameExprTest2: function () {
             var pattern = "\\b(?<n2>\\d{2}-)*(?(n2)\\d{7}|\\d{3}-\\d{2}-\\d{4})\\b";
             var text = "01-9999999 020-333333 777-88-9999";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -32511,7 +32689,7 @@
         msdnAlternationGroupNumberExprTest: function () {
             var pattern = "\\b(\\d{2}-)*(?(1)\\d{7}|\\d{3}-\\d{2}-\\d{4})\\b";
             var text = "01-9999999 020-333333 777-88-9999";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -32538,7 +32716,7 @@
         simpleAlternationTest: function () {
             var pattern = "(A|B|C).";
             var text = "AXBYCZ";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(3, ms.getCount(), "Matches count is correct.");
@@ -32576,7 +32754,7 @@
         simpleAlternationTest2: function () {
             var pattern = "(A|B)+";
             var text = "ABA";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 3, "ABA", 2, true);
@@ -32592,7 +32770,7 @@
         simpleAlternationTest3: function () {
             var pattern = "(((A|B)+(C|D)+)|X)+";
             var text = "AAXABCADDCABBADXAA";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 2, 14, "XABCADDCABBADX", 5, true);
@@ -32631,7 +32809,7 @@
         alternationWithGroupTest: function () {
             var pattern = "((A)|X)+";
             var text = "AAX";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 3, "AAX", 3, true);
@@ -32651,7 +32829,7 @@
         alternationGroupTest: function () {
             var pattern = "(?(A)AB|BC)";
             var text = "AB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 2, "AB", 1, true);
@@ -32662,7 +32840,7 @@
         alternationGroupNonCapturingTest: function () {
             var pattern = "(?(?:A)AB|BC)";
             var text = "AAB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 1, 2, "AB", 1, true);
@@ -32673,7 +32851,7 @@
         alternationGroupPositiveLookaheadTest: function () {
             var pattern = "(?(?=A)AB|BC)";
             var text = "AAB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 1, 2, "AB", 1, true);
@@ -32684,7 +32862,7 @@
         alternationGroupNegativeLookaheadTest1: function () {
             var pattern = "(?(?!D)AB|BC)";
             var text = "AAB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 1, 2, "AB", 1, true);
@@ -32695,7 +32873,7 @@
         alternationGroupNegativeLookaheadTest2: function () {
             var pattern = "(?(?!A)AB|BC)";
             var text = "AAB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 1, false);
@@ -32705,7 +32883,7 @@
         alternationGroupPositiveLookbehindTest: function () {
             var pattern = "(?(?<=A)AB|BC)";
             var text = "AAB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 1, 2, "AB", 1, true);
@@ -32716,7 +32894,7 @@
         alternationGroupNegativeLookbehindTest1: function () {
             var pattern = "(?(?<!D)AB|BC)";
             var text = "AAB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 1, 2, "AB", 1, true);
@@ -32727,7 +32905,7 @@
         alternationGroupNegativeLookbehindTest2: function () {
             var pattern = "(?(?<!A)AB|BC)";
             var text = "AABZAB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 4, 2, "AB", 1, true);
@@ -32738,7 +32916,7 @@
         alternationGroupNonBacktrackingTest: function () {
             var pattern = "(?(?>A)AB|BC)";
             var text = "AAB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 1, 2, "AB", 1, true);
@@ -32761,7 +32939,7 @@
         alternationGroupWithImnsxTest1: function () {
             var pattern = "(?(?i:a)AB|BC)";
             var text = "AAB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 1, 2, "AB", 1, true);
@@ -32772,7 +32950,7 @@
         alternationGroupWithImnsxTest2: function () {
             var pattern = "(?(?i:a)AB|BC)";
             var text = "AaB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 1, false);
@@ -32782,7 +32960,7 @@
         alternationGroupWithImnsxTest3: function () {
             var pattern = "(?(i)iAB|BC)";
             var text = "iAB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 3, "iAB", 1, true);
@@ -32793,7 +32971,7 @@
         alternationConditionWithGroupTest1: function () {
             var pattern = "(?(A(B))AB|BC)";
             var text = "zAB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 1, 2, "AB", 2, true);
@@ -32807,7 +32985,7 @@
         alternationConditionWithGroupTest2: function () {
             var pattern = "(?(A(?:B(C)))ABCD|XYZ)";
             var text = "zABCD";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 1, 4, "ABCD", 2, true);
@@ -32821,7 +32999,7 @@
         alternationConditionWithGroupTest3: function () {
             var pattern = "(?(?:A(B(C)))ABCD|XYZ)";
             var text = "zABCD";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 1, 4, "ABCD", 3, true);
@@ -32837,7 +33015,7 @@
         alternationConditionWithGroupTest4: function () {
             var pattern = "(?(?=(A)(B))ABCD|XYZ)";
             var text = "xyzABCD";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 3, 4, "ABCD", 3, true);
@@ -32853,7 +33031,7 @@
         alternationConditionWithGroupTest5: function () {
             var pattern = "(?(?=(?:A(B))(C)(D))ABCD|XYZ)";
             var text = "xyzABCD";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 3, 4, "ABCD", 4, true);
@@ -32872,7 +33050,7 @@
         alternationGroupNonCapturingWithGroupTest: function () {
             var pattern = "(?(?:A(B))AB|BC)";
             var text = "AAB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 1, 2, "AB", 2, true);
@@ -32885,7 +33063,7 @@
         alternationGroupPositiveLookaheadWithGroupTest: function () {
             var pattern = "(?(?=A(B))AB|BC)";
             var text = "AAB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 1, 2, "AB", 2, true);
@@ -32898,7 +33076,7 @@
         alternationGroupNegativeLookaheadWithGroupTest: function () {
             var pattern = "(?(?!(A))AB|BC)";
             var text = "AAB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 1, false);
@@ -32910,7 +33088,7 @@
         alternationGroupPositiveLookbehindWithGroupTest: function () {
             var pattern = "(?(?<=(A))AB|BC)";
             var text = "AAB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 1, 2, "AB", 2, true);
@@ -32923,7 +33101,7 @@
         alternationGroupNegativeLookbehindWithGroupTest: function () {
             var pattern = "(?(?<!(A))AB|BC)";
             var text = "AABZAB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 4, 2, "AB", 2, true);
@@ -32936,7 +33114,7 @@
         alternationGroupNonBacktrackingWithGroupTest: function () {
             var pattern = "(?(?>A(B))AB|BC)";
             var text = "AAB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 1, 2, "AB", 2, true);
@@ -32949,7 +33127,7 @@
         alternationGroupWithImnsxAndGroupTest: function () {
             var pattern = "(?(?i:(a))AB|BC)";
             var text = "AAB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 1, 2, "AB", 2, true);
@@ -32962,7 +33140,7 @@
         alternationGroupWithoutAlternativeBranchTest1: function () {
             var pattern = "(?<gr1>test)?(?(gr1)(ab)|)";
             var text = "testab";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -32994,7 +33172,7 @@
         alternationGroupWithoutAlternativeBranchTest2: function () {
             var pattern = "(?<gr1>test)?(?(gr1)(ab)|)";
             var text = "tesab";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(6, ms.getCount(), "Matches count is correct.");
@@ -33076,31 +33254,31 @@
         f1: function () {
             var pattern = "(?(?#A)AB|BC)";
             var text = "AAB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             rgx.match(text);
         },
         f2: function () {
             var pattern = "(?(?<name>A)AB|BC)";
             var text = "AAB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             rgx.match(text);
         },
         f3: function () {
             var pattern = "(?(?<5>A)AB|BC)";
             var text = "AAB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             rgx.match(text);
         },
         f4: function () {
             var pattern = "(?(5A)5AB|BC)";
             var text = "5AB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             rgx.match(text);
         },
         f5: function () {
             var pattern = "(?<gr1>test)?(?(gr1)(ab))";
             var text = "tesab";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             rgx.matches(text);
         }
     });
@@ -33445,7 +33623,7 @@
         startAndEndOfStringCustomTest1: function () {
             var pattern = "^.*$";
             var text = "abc\ndef";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 2);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 2);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -33467,7 +33645,7 @@
         startAndEndOfStringCustomTest2: function () {
             var pattern = ".*$";
             var text = "abc\ndef";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 2);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 2);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(4, ms.getCount(), "Matches count is correct.");
@@ -33622,7 +33800,7 @@
         msdnNumberedBackrefTest: function () {
             var pattern = "(\\w)\\1";
             var text = "trellis llama webbing dresser swagger";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(5, ms.getCount(), "Matches count is correct.");
@@ -33675,7 +33853,7 @@
         msdnNamedBackrefTest: function () {
             var pattern = "(?<char>\\w)\\k<char>";
             var text = "trellis llama webbing dresser swagger";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(5, ms.getCount(), "Matches count is correct.");
@@ -33728,7 +33906,7 @@
         msdnNamedBackrefWithNumberAsNameTest: function () {
             var pattern = "(?<2>\\w)\\k<2>";
             var text = "trellis llama webbing dresser swagger";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(5, ms.getCount(), "Matches count is correct.");
@@ -33786,7 +33964,7 @@
         msdnNamedBackrefWithRedefinedGroupTest: function () {
             var pattern = "(?<1>a)(?<1>\\1b)*";
             var text = "aababb";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 6, "aababb", 2, true);
@@ -33802,7 +33980,7 @@
         msdnNamedBackrefWithEmptyCaptureTest1: function () {
             var pattern = "\\b([A-Z]{2})(\\d{2})?([A-Z]{2})\\b";
             var text = "AA22ZZ";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 6, "AA22ZZ", 4, true);
@@ -33822,7 +34000,7 @@
         msdnNamedBackrefWithEmptyCaptureTest2: function () {
             var pattern = "\\b([A-Z]{2})(\\d{2})?([A-Z]{2})\\b";
             var text = "AABB";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 4, "AABB", 4, true);
@@ -33841,7 +34019,7 @@
         namedBackrefToUnreachableGroupTest: function () {
             var pattern = "(a)\\2(b)";
             var text = "abb";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 1, false);
@@ -33855,7 +34033,7 @@
         namedBackrefToSelfGroupTest: function () {
             var pattern = "(?<gr1>a\\k<gr1>)";
             var text = "aaa";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 1, false);
@@ -33867,7 +34045,7 @@
         namedBackrefToParentGroupTest: function () {
             var pattern = "(?<parent>a(?<child>b\\k<parent>))";
             var text = "aabb";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 1, false);
@@ -33881,7 +34059,7 @@
         numberedBackrefTest: function () {
             var pattern = "((abc)def)\\2";
             var text = "abcdefabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 9, "abcdefabc", 3, true);
@@ -33898,7 +34076,7 @@
         numberedBackrefInGroupTest: function () {
             var pattern = "((abc)def)(\\2)";
             var text = "abcdefabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 9, "abcdefabc", 4, true);
@@ -33918,7 +34096,7 @@
         namedBackrefInGroupTest: function () {
             var pattern = "((?<name>abc)def)(\\k<name>)";
             var text = "abcdefabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 9, "abcdefabc", 4, true);
@@ -33938,7 +34116,7 @@
         numberedBackrefRecursiveGroupTest: function () {
             var pattern = "(a)(?<1>\\1b)+";
             var text = "aababbabbb";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 10, "aababbabbb", 2, true);
@@ -33955,7 +34133,7 @@
         namedBackrefRecursiveGroupTest: function () {
             var pattern = "(?<gr>a)(?<gr>\\k<gr>b)+";
             var text = "aababbabbb";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 10, "aababbabbb", 2, true);
@@ -33972,7 +34150,7 @@
         complexBackrefTest1: function () {
             var pattern = "((a)(\\2b))((\\1)(\\2))(\\3(\\4))";
             var text = "aabaabaabaaba";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 13, "aabaabaabaaba", 9, true);
@@ -34011,7 +34189,7 @@
         msdnBalancingGroupTest1: function () {
             var pattern = "^[^<>]*(((?'Open'<)[^<>]*)+((?'Close-Open'>)[^<>]*)+)*(?(Open)(?!)|)$";
             var text = "<abc><mno<xyz>>";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 15, "<abc><mno<xyz>>", 6, true);
@@ -34043,7 +34221,7 @@
         msdnBalancingGroupTest2: function () {
             var pattern = "(((?'Open'\\()[^\\(\\)]*)+((?'Close-Open'\\))[^\\(\\)]*)+)*(?(Open)(?!)|)$";
             var text = "3+2^((1-3)*(3-1))";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -34096,7 +34274,7 @@
         balancingGroupTest: function () {
             var pattern = "(?<g1>a)b(?<g2-g1>c)?";
             var text = "abc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 3, "abc", 3, true);
@@ -34112,7 +34290,7 @@
         balancingGroupWithoutName1Test: function () {
             var pattern = "(?<g1>a)+b(?<-g1>c)?";
             var text = "aaabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 5, "aaabc", 2, true);
@@ -34127,7 +34305,7 @@
         balancingGroupWithQuantifierTest: function () {
             var pattern = "(?<g1>a)+b(?<g2-g1>c)?";
             var text = "aaabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 5, "aaabc", 3, true);
@@ -34145,7 +34323,7 @@
         balancingGroupWithEmptyIntervalTest: function () {
             var pattern = "(?<g1>a)+(?<g2-g1>c)";
             var text = "aaabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 1, false);
@@ -34159,7 +34337,7 @@
         balancingGroupStackApproachTest: function () {
             var pattern = "(?:[^{}]|(?<Open>{)|(?<Content-Open>}))+(?(Open)(?!)|)";
             var text = "0 {1 2 {3} {4 5 {6}} 7} 8";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 25, "0 {1 2 {3} {4 5 {6}} 7} 8", 3, true);
@@ -34178,7 +34356,7 @@
         balancingGroupWithNumberReferenceTest1: function () {
             var pattern = "(a)+b(?<-1>c)?";
             var text = "aaabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 5, "aaabc", 2, true);
@@ -34193,7 +34371,7 @@
         balancingGroupWithNumberReferenceTest2: function () {
             var pattern = "(a)+b(?<5-1>c)?";
             var text = "aaabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 5, "aaabc", 3, true);
@@ -34222,13 +34400,13 @@
         f1: function () {
             var pattern = "(?<gr1>a)b(?<gr2-gr55>c)";
             var text = "abc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             rgx.match(text);
         },
         f2: function () {
             var pattern = "(?<gr1>a)b(?<gr2-55>c)";
             var text = "abc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             rgx.match(text);
         }
     });
@@ -34238,7 +34416,7 @@
         msdnCharGroupTest1: function () {
             var pattern = "[ae]";
             var text = "lane";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -34260,7 +34438,7 @@
         msdnCharGroupTest3: function () {
             var pattern = "\\b[A-Z]\\w*\\b";
             var text = "A city Albany Zulu maritime Marseilles";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(4, ms.getCount(), "Matches count is correct.");
@@ -34296,7 +34474,7 @@
         msdnNegativeCharGroupTest1: function () {
             var pattern = "[^aei]";
             var text = "reign";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(3, ms.getCount(), "Matches count is correct.");
@@ -34325,7 +34503,7 @@
         msdnNegativeCharGroupTest2: function () {
             var pattern = "\\bth[^o]\\w+\\b";
             var text = "thought thing though them through thus thorough this";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(5, ms.getCount(), "Matches count is correct.");
@@ -34368,7 +34546,7 @@
         msdnDotCharTest1: function () {
             var pattern = "a.e";
             var text = "water";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 1, 3, "ate", 1, true);
@@ -34379,7 +34557,7 @@
         msdnDotCharTest2: function () {
             var pattern = "^.+";
             var text = "This is one line and\r\nthis is the second.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 21, "This is one line and\r", 1, true);
@@ -34390,7 +34568,7 @@
         msdnDotCharTest3: function () {
             var pattern = "^.+";
             var text = "This is one line and\r\nthis is the second.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 16);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 16);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 41, "This is one line and\r\nthis is the second.", 1, true);
@@ -34401,7 +34579,7 @@
         msdnCharRangeInGroupTest: function () {
             var pattern = "[A-Z]";
             var text = "AB123";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -34423,7 +34601,7 @@
         msdnWordCharTest1: function () {
             var pattern = "\\w";
             var text = "ID A1.3";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(5, ms.getCount(), "Matches count is correct.");
@@ -34466,7 +34644,7 @@
         msdnWordCharTest2: function () {
             var pattern = "(\\w)\\1";
             var text = "summer";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 2, 2, "mm", 2, true);
@@ -34480,7 +34658,7 @@
         msdnNonWordCharTest1: function () {
             var pattern = "\\W";
             var text = "ID A1.3";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -34502,7 +34680,7 @@
         msdnNonWordCharTest2: function () {
             var pattern = "\\b(\\w+)(\\W){1,2}";
             var text = "The old, grey mare slowly walked across the narrow, green pasture.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(11, ms.getCount(), "Matches count is correct.");
@@ -34655,7 +34833,7 @@
         msdnSpaceCharTest1: function () {
             var pattern = "\\w\\s";
             var text = "ID A1.3";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 1, 2, "D ", 1, true);
@@ -34666,7 +34844,7 @@
         msdnSpaceCharTest2: function () {
             var pattern = "\\b\\w+(e)?s(\\s|$)";
             var text = "matches stores stops leave leaves";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(4, ms.getCount(), "Matches count is correct.");
@@ -34722,7 +34900,7 @@
         msdnNonSpaceCharTest1: function () {
             var pattern = "\\s\\S";
             var text = "int __ctr";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 3, 2, " _", 1, true);
@@ -34733,7 +34911,7 @@
         msdnNonSpaceCharTest2: function () {
             var pattern = "\\b(\\S+)\\s?";
             var text = "This is the first sentence of the first paragraph. This is the second sentence.\nThis is the only sentence of the second paragraph.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(23, ms.getCount(), "Matches count is correct.");
@@ -34971,7 +35149,7 @@
         msdnDigitCharTest1: function () {
             var pattern = "\\d";
             var text = "4 = IV";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 1, "4", 1, true);
@@ -34982,7 +35160,7 @@
         msdnDigitCharTest2: function () {
             var pattern = "^(\\(?\\d{3}\\)?[\\s-])?\\d{3}-\\d{4}$";
             var text = "(212) 111-1111";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 14, "(212) 111-1111", 2, true);
@@ -34996,7 +35174,7 @@
         msdnDigitCharTest3: function () {
             var pattern = "^(\\(?\\d{3}\\)?[\\s-])?\\d{3}-\\d{4}$";
             var text = "01 999-9999";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 1, false);
@@ -35008,7 +35186,7 @@
         msdnNonDigitCharTest1: function () {
             var pattern = "\\D";
             var text = "4 = IV";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(5, ms.getCount(), "Matches count is correct.");
@@ -35051,7 +35229,7 @@
         msdnNonDigitCharTest2: function () {
             var pattern = "^\\D\\d{1,5}\\D*$";
             var text = "A1039C";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 6, "A1039C", 1, true);
@@ -35062,7 +35240,7 @@
         msdnNonDigitCharTest3: function () {
             var pattern = "^\\D\\d{1,5}\\D*$";
             var text = "Y938518";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 1, false);
@@ -35072,7 +35250,7 @@
         msdnSubstactGroupTest1: function () {
             var pattern = "^[0-9-[2468]]+$";
             var text = "123";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 1, false);
@@ -35082,7 +35260,7 @@
         msdnSubstactGroupTest2: function () {
             var pattern = "^[0-9-[2468]]+$";
             var text = "13579753";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 8, "13579753", 1, true);
@@ -35093,7 +35271,7 @@
         msdnSubstactGroupTest3: function () {
             var pattern = "^[0-9-[2468]]+$";
             var text = "3557798";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 1, false);
@@ -35103,7 +35281,7 @@
         msdnSubstactGroupTest4: function () {
             var pattern = "^[0-9-[2468]]+$";
             var text = "335599901";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 9, "335599901", 1, true);
@@ -35114,7 +35292,7 @@
         charClassesInCharGroupTest: function () {
             var pattern = "([ABC\\s]+)";
             var text = "AC  D AA";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -35142,7 +35320,7 @@
         caretSymbolInCharGroupTest: function () {
             var pattern = "([abc^d]+)";
             var text = "abc d^a";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -35170,7 +35348,7 @@
         negativeCharGroupTest: function () {
             var pattern = "([^abc]+)";
             var text = "def aaa fff";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -35198,7 +35376,7 @@
         combiningCharRangesTest: function () {
             var pattern = "([e-gda-ce]+)";
             var text = "fb";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 2, "fb", 2, true);
@@ -35212,7 +35390,7 @@
         substractGroupTest1: function () {
             var pattern = "[a-c-[^b-c]]";
             var text = "b";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 1, "b", 1, true);
@@ -35223,7 +35401,7 @@
         substractGroupTest2: function () {
             var pattern = "[a-c-[b-c]]";
             var text = "b";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 1, false);
@@ -35233,7 +35411,7 @@
         substractGroupTest3: function () {
             var pattern = "[a-c-[b-c]]";
             var text = "a";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 1, "a", 1, true);
@@ -35244,7 +35422,7 @@
         substractNegativeGroupTest1: function () {
             var pattern = "[^a-f-[a-c]]";
             var text = "abcdefg";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 6, 1, "g", 1, true);
@@ -35255,7 +35433,7 @@
         substractNegativeGroupTest2: function () {
             var pattern = "[^a-f-[^a-c]]";
             var text = "abcdefg";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 1, false);
@@ -35265,7 +35443,7 @@
         substractNegativeGroupTest3: function () {
             var pattern = "[^a-f-[^a-g]]";
             var text = "abcdefg";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 6, 1, "g", 1, true);
@@ -35276,7 +35454,7 @@
         substractNestedGroupsTest1: function () {
             var pattern = "[a-z-[d-z-[d-e]]]";
             var text = "abcdefg";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(5, ms.getCount(), "Matches count is correct.");
@@ -35319,7 +35497,7 @@
         substractNestedGroupsTest2: function () {
             var pattern = "[a-e-[^a-c-[^a-[ace]]]]";
             var text = "abcdefghij";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(4, ms.getCount(), "Matches count is correct.");
@@ -35364,7 +35542,7 @@
             var pattern = "[a-b-[c-d]e]";
             var text = "abcdefghij";
 
-            var rx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             rx.matches(text);
         }
     });
@@ -35374,7 +35552,7 @@
         msdnBellCharTest: function () {
             var pattern = "\\a";
             var text = "Error!\u0007";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 6, 1, "\u0007", 1, true);
@@ -35385,7 +35563,7 @@
         msdnBackspaceCharTest: function () {
             var pattern = "[\\b]{3,}";
             var text = "\b\b\b\b";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 4, "\b\b\b\b", 1, true);
@@ -35396,7 +35574,7 @@
         msdnTabCharTest: function () {
             var pattern = "(\\w+)\\t";
             var text = "item1\titem2\t";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -35424,7 +35602,7 @@
         msdnCarriageRetCharTest: function () {
             var pattern = "\\r\\n(\\w+)";
             var text = "\r\nThese are\ntwo lines.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 7, "\r\nThese", 2, true);
@@ -35438,7 +35616,7 @@
         msdnVerticalTabCharTest: function () {
             var pattern = "[\\v]{2,}";
             var text = "\u000b\u000b\u000b";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 3, "\u000b\u000b\u000b", 1, true);
@@ -35449,7 +35627,7 @@
         msdnFormFeedCharTest: function () {
             var pattern = "[\\f]{2,}";
             var text = "\f\f\f";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 3, "\f\f\f", 1, true);
@@ -35460,7 +35638,7 @@
         msdnNewLineCharTest: function () {
             var pattern = "\\r\\n(\\w+)";
             var text = "\r\nThese are\ntwo lines.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 7, "\r\nThese", 2, true);
@@ -35474,7 +35652,7 @@
         msdnEscapeCharTest: function () {
             var pattern = "\\e";
             var text = "\u001b";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 1, "\u001b", 1, true);
@@ -35485,7 +35663,7 @@
         msdnOctalEscapeTest: function () {
             var pattern = "\\w\\040\\w";
             var text = "a bc d";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -35507,7 +35685,7 @@
         msdnHexEscapeTest: function () {
             var pattern = "\\w\\x20\\w";
             var text = "a bc d";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -35529,7 +35707,7 @@
         msdnAsciiEscapeTest: function () {
             var pattern = "\\cC";
             var text = "Test\u0003";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 4, 1, "\u0003", 1, true);
@@ -35540,7 +35718,7 @@
         msdnUnicodeEscapeTest: function () {
             var pattern = "\\w\\u0020\\w";
             var text = "a bc d";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -35562,7 +35740,7 @@
         msdnSpecialEscapesTest: function () {
             var pattern = "\\d+[\\+-x\\*]\\d+";
             var text = "(2+2) * 3*9";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -35584,7 +35762,7 @@
         msdnCharEscapesExampleTest: function () {
             var pattern = "\\G(.+)[\\t\\u007c](.+)\\r?\\n";
             var text = "Mumbai, India|13,922,125\t\nShanghai, China\t13,831,900\nKarachi, Pakistan|12,991,000\nDelhi, India\t12,259,230\nIstanbul, Turkey|11,372,613\n";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(5, ms.getCount(), "Matches count is correct.");
@@ -35659,7 +35837,7 @@
 
             var pattern = "(\\a|\\t|\\r|\\v|\\f|\\n|\\e|\\115|\\x4e|\\cC|\\u004b)+";
             var text = "\u0007, \t, \r, \u000b, \f, \n, \u001b, N, M, \u0003, K";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(11, ms.getCount(), "Matches count is correct.");
@@ -35777,7 +35955,7 @@
         rangeWithCharEscapesTest: function () {
             var pattern = "([\\a\\b\\t\\r\\v\\f\\n\\e\\115\\x4e\\cC\\u004b])+";
             var text = "\u0007, \b, \t, \r, \u000b, \f, \n, \u001b, N, M, \u0003, K";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(12, ms.getCount(), "Matches count is correct.");
@@ -35905,7 +36083,7 @@
         controlCharsTestUpperTest: function () {
             var pattern = "[\\c@\\cA\\cB\\cC\\cD\\cE\\cF\\cG\\cH\\cI\\cJ\\cK\\cL\\cM\\cN\\cO\\cP\\cQ\\cR\\cS\\cT\\cU\\cV\\cW\\cX\\cY\\cZ\\c[\\c\\\\c]\\c^\\c_]";
             var text = "\u0000, \u0001, \u0002, \u0003, \u0004, \u0005, \u0006, \u0007, \b, \t, \n, \u000b, \f, \r, \u000e, \u000f, \u0010, \u0011, \u0012, \u0013, \u0014, \u0015, \u0016, \u0017, \u0018, \u0019, \u001a, \u001b, \u001c, \u001d, \u001e, \u001f";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(32, ms.getCount(), "Matches count is correct.");
@@ -36137,7 +36315,7 @@
         controlCharsTestLowerTest: function () {
             var pattern = "[\\c@\\ca\\cb\\cc\\cd\\ce\\cf\\cg\\ch\\ci\\cj\\ck\\cl\\cm\\cn\\co\\cp\\cq\\cr\\cs\\ct\\cu\\cv\\cw\\cx\\cy\\cz\\c[\\c\\\\c]\\c^\\c_]";
             var text = "\u0000, \u0001, \u0002, \u0003, \u0004, \u0005, \u0006, \u0007, \b, \t, \n, \u000b, \f, \r, \u000e, \u000f, \u0010, \u0011, \u0012, \u0013, \u0014, \u0015, \u0016, \u0017, \u0018, \u0019, \u001a, \u001b, \u001c, \u001d, \u001e, \u001f";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(32, ms.getCount(), "Matches count is correct.");
@@ -36373,7 +36551,7 @@
         emailParseTest: function () {
             var pattern = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
             var text = "user@bridge.net";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 15, "user@bridge.net", 1, true);
@@ -36384,7 +36562,7 @@
         phoneParseTest: function () {
             var pattern = "\\+?\\d{1,4}?[-.\\s]?\\(?\\d{1,3}?\\)?[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,9}";
             var text = "+7-999-111-1111";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 15, "+7-999-111-1111", 1, true);
@@ -36395,7 +36573,7 @@
         passwordValidationTest: function () {
             var pattern = "^((?=\\S*?[A-Z])(?=\\S*?[a-z])(?=\\S*?[0-9]).{6,})\\S$";
             var text = "P@ssw0rd";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 8, "P@ssw0rd", 2, true);
@@ -36409,7 +36587,7 @@
         wordSlplittingTest: function () {
             var pattern = "([+-]?(?:'.+?'|\".+? \"|[^+\\- ]{1}[^ ]*))";
             var text = "It's time to say: 'Hello world!'";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(5, ms.getCount(), "Matches count is correct.");
@@ -36467,7 +36645,7 @@
         ipAddressValidationTest: function () {
             var pattern = "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
             var text = "192.168.1.1";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 11, "192.168.1.1", 5, true);
@@ -36490,7 +36668,7 @@
         escapeQuotedWordsTest: function () {
             var pattern = "([\"'])((?:(?=(?:\\\\)*)\\.|.)*?)\\1";
             var text = "Another 'te\\st' for several 'quo\"uted' words.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -36524,7 +36702,7 @@
         creditCardExpirationParsingTest: function () {
             var pattern = "^(0[1-9]|1[0-2])(\\/|-)([0-9]{4})$";
             var text = "09/2222";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 7, "09/2222", 4, true);
@@ -36544,7 +36722,7 @@
         urlParsingTest: function () {
             var pattern = "^((https?:)(\\/\\/\\/?)([\\w]*(?::[\\w]*)?@)?([\\d\\w\\.-]+)(?::(\\d+))?)?([\\/\\\\\\w\\.()-]*)?(?:([?][^#]*)?(#.*)?)*";
             var text = "http://bridge.net/download/";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 27, "http://bridge.net/download/", 10, true);
@@ -36582,7 +36760,7 @@
         msdnInlineOptionsTest: function () {
             var pattern = "\\b((?# case sensitive comparison)D\\w+)\\s(?ixn)((?#case insensitive comparison)d\\w+)\\b";
             var text = "double dare double Double a Drooling dog The Dreaded Deep";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -36610,7 +36788,7 @@
         msdnIgnoreCaseTest: function () {
             var pattern = "\\b(?i:t)he\\w*\\b";
             var text = "The man then told them about that event.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 1);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 1);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(3, ms.getCount(), "Matches count is correct.");
@@ -36640,7 +36818,7 @@
             var pattern = "(?m)^(\\w+)\\s(\\d+)\\r*$";
             var text = "Joe 164\nSam 208\nAllison 211\nGwen 171\n";
 
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(4, ms.getCount(), "Matches count is correct.");
@@ -36700,7 +36878,7 @@
         msdnSinglelineInlineOptionTest: function () {
             var pattern = "(?s)^.+";
             var text = "This is one line and\r\nthis is the second.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 41, "This is one line and\r\nthis is the second.", 1, true);
@@ -36711,7 +36889,7 @@
         msdnIngoreWhitespaceInlineOptionTest1: function () {
             var pattern = "\\b(D\\w+)(?x) \\s (d\\w+) \\b";
             var text = "double dare double Double a Drooling dog The Dreaded Deep";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 28, 12, "Drooling dog", 3, true);
@@ -36728,7 +36906,7 @@
         msdnIngoreWhitespaceInlineOptionTest2: function () {
             var pattern = "\\{\\d+(,-*\\d+)*(\\:\\w{1,4}?)*\\}(?x) # Looks for a composite format item.";
             var text = "{0,-3:F}";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 8, "{0,-3:F}", 3, true);
@@ -36745,7 +36923,7 @@
         msdnIngoreWhitespaceInlineOptionTest3: function () {
             var pattern = "(?x)\\b \\(? ( (?:\\w+) ,?\\s? )+  [\\.!?] \\)? # Matches an entire sentence.";
             var text = "This is the first sentence. Is it the beginning of a literary masterpiece? I think not. Instead, it is a nonsensical paragraph.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(4, ms.getCount(), "Matches count is correct.");
@@ -36811,7 +36989,7 @@
         msdnExplicitCaptureInlineOptionTest1: function () {
             var pattern = "(?n)\\b\\(?((?>\\w+),?\\s?)+[\\.!?]\\)?";
             var text = "This is the first sentence. Is it the beginning of a literary masterpiece? I think not. Instead, it is a nonsensical paragraph.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(4, ms.getCount(), "Matches count is correct.");
@@ -36847,7 +37025,7 @@
         msdnExplicitCaptureInlineOptionTest2: function () {
             var pattern = "\\b\\(?(?n:(?>\\w+),?\\s?)+[\\.!?]\\)?";
             var text = "This is the first sentence. Is it the beginning of a literary masterpiece? I think not. Instead, it is a nonsensical paragraph.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(4, ms.getCount(), "Matches count is correct.");
@@ -36881,34 +37059,34 @@
             this.validateCapture(ms.get(3), 0, 0, 88, 39, "Instead, it is a nonsensical paragraph.");
         },
         ignoreCaseInlineOptionTest1: function () {
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor("(?i)Case Is Ignored");
+            var rgx = new System.Text.RegularExpressions.Regex.ctor("(?i)Case Is Ignored");
             var res = rgx.isMatch("case is ignored");
             Bridge.Test.Assert.true(res);
         },
         ignoreCaseInlineOptionTest2: function () {
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor("Case Is (?i)Ignored Partially");
+            var rgx = new System.Text.RegularExpressions.Regex.ctor("Case Is (?i)Ignored Partially");
             var res = rgx.isMatch("Case Is ignored partially");
             Bridge.Test.Assert.true(res);
         },
         ignoreCaseInlineOptionTest3: function () {
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1("(?-i)Case Sensitive", 1);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1("(?-i)Case Sensitive", 1);
             var res = rgx.isMatch("case sensitive");
             Bridge.Test.Assert.false(res);
         },
         ignoreCaseInlineOptionTest4: function () {
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1("Case Sensitive (?-i)Partially", 1);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1("Case Sensitive (?-i)Partially", 1);
             var res = rgx.isMatch("case sensitive Partially");
             Bridge.Test.Assert.true(res);
         },
         ignoreCaseInlineOptionTest5: function () {
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1("Case Sensitive (?-i)Partially", 1);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1("Case Sensitive (?-i)Partially", 1);
             var res = rgx.isMatch("case sensitive partially");
             Bridge.Test.Assert.false(res);
         },
         multilineInlineOptionTest1: function () {
             var pattern = "(?-m)^abc$";
             var text = "abc\nabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 1, false);
@@ -36918,7 +37096,7 @@
         multilineInlineOptionTest2: function () {
             var pattern = "(?m)^abc$";
             var text = "abc\nabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -36940,7 +37118,7 @@
         multilineInlineOptionTest3: function () {
             var pattern = "(?m)^abc(?-m)$";
             var text = "abc\nabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 4, 3, "abc", 1, true);
@@ -36951,7 +37129,7 @@
         multilineInlineOptionTest4: function () {
             var pattern = "^abc(?-m)$";
             var text = "abc\nabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 2);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 2);
             var m = rgx.match(text);
 
             this.validateMatch(m, 4, 3, "abc", 1, true);
@@ -36962,7 +37140,7 @@
         multilineInlineOptionTest5: function () {
             var pattern = "(?m:^ab(c(?-m)$))";
             var text = "abc\nabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 4, 3, "abc", 2, true);
@@ -36976,7 +37154,7 @@
         multilineInlineOptionTest6: function () {
             var pattern = "(?m:^(.*)$)";
             var text = "abc\r\ndef\r\nhij";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 2);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 2);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(3, ms.getCount(), "Matches count is correct.");
@@ -37014,7 +37192,7 @@
         multilineInlineOptionTest7: function () {
             var pattern = "(?m:^(.*)(?-m)$)";
             var text = "abc\r\nabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 5, 3, "abc", 2, true);
@@ -37028,7 +37206,7 @@
         singlelineInlineOptionTest1: function () {
             var pattern = "(?s).+";
             var text = "abc\r\nabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 8, "abc\r\nabc", 1, true);
@@ -37039,7 +37217,7 @@
         singlelineInlineOptionTest2: function () {
             var pattern = "(?s).+def(?-s)(.+hij)?";
             var text = "abc\r\ndef\r\nhij";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 8, "abc\r\ndef", 2, true);
@@ -37052,7 +37230,7 @@
         singlelineInlineOptionTest3: function () {
             var pattern = "abc(.+)((?-s:.+))(.+)xyz";
             var text = "abc\r\n123\r\nxyz";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 16);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 16);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 13, "abc\r\n123\r\nxyz", 4, true);
@@ -37072,7 +37250,7 @@
         ingoreWhitespaceInlineOptionTest1: function () {
             var pattern = "(?x)abc def";
             var text = "abc def";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 1, false);
@@ -37082,7 +37260,7 @@
         ingoreWhitespaceInlineOptionTest2: function () {
             var pattern = "(?x)abc def";
             var text = "abcdef";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 6, "abcdef", 1, true);
@@ -37093,7 +37271,7 @@
         ingoreWhitespaceInlineOptionTest3: function () {
             var pattern = "(?x)abc def(?-x) hij";
             var text = "abcdef hij";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 10, "abcdef hij", 1, true);
@@ -37104,7 +37282,7 @@
         ingoreWhitespaceInlineOptionTest4: function () {
             var pattern = "(?-x)abc\tdef";
             var text = "abc\tdef";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 32);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 32);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 7, "abc\tdef", 1, true);
@@ -37115,7 +37293,7 @@
         ingoreWhitespaceInlineOptionTest5: function () {
             var pattern = "(?x)[abc ]{3}";
             var text = "ab ";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 3, "ab ", 1, true);
@@ -37126,7 +37304,7 @@
         ingoreWhitespaceInlineOptionTest6: function () {
             var pattern = "(?x)abc\\ \\sdef";
             var text = "abc  def";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 8, "abc  def", 1, true);
@@ -37137,7 +37315,7 @@
         ingoreWhitespaceInlineOptionTest7: function () {
             var pattern = "(?x)abc#def";
             var text = "abcdef";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 3, "abc", 1, true);
@@ -37148,7 +37326,7 @@
         ingoreWhitespaceInlineOptionTest8: function () {
             var pattern = "abc(?x: def) hij";
             var text = "abcdef hij";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 10, "abcdef hij", 1, true);
@@ -37159,7 +37337,7 @@
         ingoreWhitespaceInlineOptionTest9: function () {
             var pattern = "(?x)abc #CommentToEOL\ndef";
             var text = "abcdef";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 0);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 0);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 6, "abcdef", 1, true);
@@ -37170,7 +37348,7 @@
         inlineCommentTest1: function () {
             var pattern = "abc(?# comment )";
             var text = "abc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 0);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 0);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 3, "abc", 1, true);
@@ -37181,7 +37359,7 @@
         explicitCaptureInlineOptionTest1: function () {
             var pattern = "(?n)(a)(?<name1>b)(c)(?<55>d)";
             var text = "abcd";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 4, "abcd", 3, true);
@@ -37198,7 +37376,7 @@
         explicitCaptureInlineOptionTest2: function () {
             var pattern = "(?n)(a)(?<name1>b)(?-n)(c)(?<55>d)";
             var text = "abcd";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 4, "abcd", 4, true);
@@ -37218,7 +37396,7 @@
         explicitCaptureInlineOptionTest3: function () {
             var pattern = "(?n:a)(?<name1>b)(c)(?<55>d)";
             var text = "abcd";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 4, "abcd", 4, true);
@@ -37238,7 +37416,7 @@
         explicitCaptureInlineOptionTest4: function () {
             var pattern = "(?n:(a)(?<name1>b)(?-n:(c))(?<55>d))";
             var text = "abcd";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 4, "abcd", 4, true);
@@ -37264,14 +37442,14 @@
             var expected = ["dog", null, null, "Sunday"];
 
             var pattern = "\\b\\w+(?=\\sis\\b)";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
 
             this.validateMatchResults(rgx, inputs, expected);
         },
         msdnNegativeLookaheadTest: function () {
             var pattern = "\\b(?!un)\\w+\\b";
             var text = "unite one unethical ethics use untie ultimate";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(4, ms.getCount(), "Matches count is correct.");
@@ -37307,7 +37485,7 @@
         positiveLookaheadTest1: function () {
             var pattern = "abc(?=def)de";
             var text = "abcde";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 1, false);
@@ -37317,7 +37495,7 @@
         positiveLookaheadTest2: function () {
             var pattern = "abc(?=de)def";
             var text = "abcdef";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 6, "abcdef", 1, true);
@@ -37328,7 +37506,7 @@
         negativeLookaheadTest1: function () {
             var pattern = "ab(?![\\\\d\\\\D])";
             var text = "ab";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 2, "ab", 1, true);
@@ -37339,7 +37517,7 @@
         negativeLookaheadTest2: function () {
             var pattern = "ab(?!\\D)";
             var text = "abc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 1, false);
@@ -37349,7 +37527,7 @@
         positiveLookaheadWithGroupTest: function () {
             var pattern = "(ab)(?=(d)e)(def)";
             var text = "abdef";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 5, "abdef", 4, true);
@@ -37369,7 +37547,7 @@
         negativeLookaheadWithGroupTest: function () {
             var pattern = "(abc)(?!(d)x)(def)";
             var text = "abcdef";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 6, "abcdef", 4, true);
@@ -37388,7 +37566,7 @@
         positiveLookaheadWithOffsetTest: function () {
             var pattern = "(?=cd)(.{3})";
             var text = "abcdefgh";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 2, 3, "cde", 2, true);
@@ -37402,7 +37580,7 @@
         negativeLookaheadWithOffsetTest: function () {
             var pattern = "(?!cd)(.)";
             var text = "abcdef";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(5, ms.getCount(), "Matches count is correct.");
@@ -37460,7 +37638,7 @@
         positiveLookaheadGroupCombineTest: function () {
             var pattern = "(abc)(?=def)(def)";
             var text = "abcdef";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 6, "abcdef", 3, true);
@@ -37481,7 +37659,7 @@
         msdnPositiveLookbehindTest: function () {
             var pattern = "(?<=\\b20)\\d{2}\\b";
             var text = "2010 1999 1861 2140 2009";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -37505,14 +37683,14 @@
             var expected = ["February 1, 2010", "February 3, 2010", null, null, "February 8, 2010"];
 
             var pattern = "(?<!(Saturday|Sunday) )\\b\\w+ \\d{1,2}, \\d{4}\\b";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
 
             this.validateMatchResults(rgx, inputs, expected);
         },
         positiveLookbehindTest1: function () {
             var pattern = "abc(?<=bc)def";
             var text = "abcdef";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 6, "abcdef", 1, true);
@@ -37523,7 +37701,7 @@
         positiveLookbehindTest2: function () {
             var pattern = "abc(?<=bx)def";
             var text = "abcdef";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 1, false);
@@ -37533,7 +37711,7 @@
         positiveLookbehindTest3: function () {
             var pattern = "bc(?<=abc)def";
             var text = "abcdef";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 1, 5, "bcdef", 1, true);
@@ -37544,7 +37722,7 @@
         positiveLookbehindWithMatchOffsetTest: function () {
             var pattern = "bc(?<=abc)def";
             var text = "abcdef";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match$1(text, 1);
 
             this.validateMatch(m, 1, 5, "bcdef", 1, true);
@@ -37555,7 +37733,7 @@
         negativeLookbehindTest1: function () {
             var pattern = "abc(?<!bc)def";
             var text = "abcdef";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 1, false);
@@ -37565,7 +37743,7 @@
         negativeLookbehindTest2: function () {
             var pattern = "abc(?<!bx)def";
             var text = "abcdef";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 6, "abcdef", 1, true);
@@ -37576,7 +37754,7 @@
         positiveLookbehindWithGroupTest: function () {
             var pattern = "(abc)(?<=(b)c)(def)";
             var text = "abcdef";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 6, "abcdef", 4, true);
@@ -37596,7 +37774,7 @@
         negativeLookbehindWithGroupTest: function () {
             var pattern = "(abc)(?<!(b)x)(def)";
             var text = "abcdef";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 6, "abcdef", 4, true);
@@ -37615,7 +37793,7 @@
         positiveLookbehindWithOffsetTest: function () {
             var pattern = "(?<=cd)(.)";
             var text = "abcdef";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 4, 1, "e", 2, true);
@@ -37629,7 +37807,7 @@
         negativeLookbehindWithOffsetTest: function () {
             var pattern = "(?<!cd)(.)";
             var text = "abcdef";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(5, ms.getCount(), "Matches count is correct.");
@@ -37693,7 +37871,7 @@
             var expected = ["cccd", "aaad", "aaaa"];
 
             var pattern = "(\\w)\\1+.\\b";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
 
             this.validateMatchResults(rgx, inputs, expected);
         },
@@ -37702,14 +37880,14 @@
             var expected = ["cccd", "aaad", null];
 
             var pattern = "(?>(\\w)\\1+).\\b";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
 
             this.validateMatchResults(rgx, inputs, expected);
         },
         nonBacktrackingTest1: function () {
             var pattern = "f*(?>fa+)(a*)bc";
             var text = "faaaabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 7, "faaaabc", 2, true);
@@ -37725,7 +37903,7 @@
             var expected = ["abcc", "abc"];
 
             var pattern = "a(bc|b)c";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
 
             this.validateMatchResults(rgx, inputs, expected);
         },
@@ -37734,14 +37912,14 @@
             var expected = ["abcc", null];
 
             var pattern = "a(?>bc|b)c";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
 
             this.validateMatchResults(rgx, inputs, expected);
         },
         nonBacktrackingTest4: function () {
             var pattern = "a(?>bc|b)c";
             var text = "abcabcc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 3, 4, "abcc", 1, true);
@@ -37752,7 +37930,7 @@
         nonBacktrackingTest5: function () {
             var pattern = "a(?>bc|b)c";
             var text = "abccabcc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
@@ -37774,7 +37952,7 @@
         nonBacktrackingWithOffsetTest: function () {
             var pattern = "a(?>bc|b)c";
             var text = "abcabcc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 3, 4, "abcc", 1, true);
@@ -37789,7 +37967,7 @@
         msdnIgnoreCaseOptionTest: function () {
             var pattern = "\\bthe\\w*\\b";
             var text = "The man then told them about that event.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 1);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 1);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(3, ms.getCount(), "Matches count is correct.");
@@ -37819,7 +37997,7 @@
             var pattern = "^(\\w+)\\s(\\d+)$";
             var text = "Joe 164\nSam 208\nAllison 211\nGwen 171\n";
 
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 0);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 0);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 1, false);
@@ -37834,7 +38012,7 @@
             var pattern = "^(\\w+)\\s(\\d+)\\r*$";
             var text = "Joe 164\nSam 208\nAllison 211\nGwen 171\n";
 
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 2);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 2);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(4, ms.getCount(), "Matches count is correct.");
@@ -37894,7 +38072,7 @@
         msdnSinglelineOptionTest: function () {
             var pattern = "^.+";
             var text = "This is one line and\r\nthis is the second.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 16);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 16);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 41, "This is one line and\r\nthis is the second.", 1, true);
@@ -37905,7 +38083,7 @@
         msdnIgnoreWhitespaceOptionTest: function () {
             var pattern = " \\b \\(? ( (?:\\w+) ,?\\s? )+  [\\.!?] \\)? # Matches an entire sentence.";
             var text = "This is the first sentence. Is it the beginning of a literary masterpiece? I think not. Instead, it is a nonsensical paragraph.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 32);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 32);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(4, ms.getCount(), "Matches count is correct.");
@@ -37971,7 +38149,7 @@
         msdnExplicitCaptureOptionTest1: function () {
             var pattern = "\\b\\(?((?>\\w+),?\\s?)+[\\.!?]\\)?";
             var text = "This is the first sentence. Is it the beginning of a literary masterpiece? I think not. Instead, it is a nonsensical paragraph.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(4, ms.getCount(), "Matches count is correct.");
@@ -38037,7 +38215,7 @@
         msdnExplicitCaptureOptionTest2: function () {
             var pattern = "\\b\\(?((?>\\w+),?\\s?)+[\\.!?]\\)?";
             var text = "This is the first sentence. Is it the beginning of a literary masterpiece? I think not. Instead, it is a nonsensical paragraph.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 4);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 4);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(4, ms.getCount(), "Matches count is correct.");
@@ -38073,7 +38251,7 @@
         ignoreCaseOptionTest1: function () {
             var pattern = "ABcd";
             var text = "abcd";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 0);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 0);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 1, false);
@@ -38083,7 +38261,7 @@
         ignoreCaseOptionTest2: function () {
             var pattern = "ABcd";
             var text = "abcd";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 1);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 1);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 4, "abcd", 1, true);
@@ -38094,7 +38272,7 @@
         ignoreCaseOptionTest3: function () {
             var pattern = "[AB]+cd";
             var text = "abcd";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 1);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 1);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 4, "abcd", 1, true);
@@ -38105,7 +38283,7 @@
         defaultLineOptionsTest1: function () {
             var pattern = "^.*";
             var text = "The first line.\r\nThe second line.\r\nThe third line.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 16, "The first line.\r", 1, true);
@@ -38116,7 +38294,7 @@
         defaultLineOptionsTest2: function () {
             var pattern = ".+$";
             var text = "The first line.\r\nThe second line.\r\nThe third line.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 35, 15, "The third line.", 1, true);
@@ -38127,7 +38305,7 @@
         multilineOptionTest1: function () {
             var pattern = ".*";
             var text = "The first line.\r\nThe second line.\r\nThe third line.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 2);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 2);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(6, ms.getCount(), "Matches count is correct.");
@@ -38177,7 +38355,7 @@
         multilineOptionTest2: function () {
             var pattern = ".+$";
             var text = "The first line.\r\nThe second line.\r\nThe third line.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 2);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 2);
             var ms = rgx.matches(text);
 
             Bridge.Test.Assert.areEqual$1(3, ms.getCount(), "Matches count is correct.");
@@ -38206,7 +38384,7 @@
         singlelineOptionTest: function () {
             var pattern = "^.*";
             var text = "The first line.\r\nThe second line.\r\nThe third line.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 16);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 16);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 50, "The first line.\r\nThe second line.\r\nThe third line.", 1, true);
@@ -38217,7 +38395,7 @@
         singlelineDotCharTest: function () {
             var pattern = "[.]+$";
             var text = "The first line.\r\nThe second line.\r\nThe third line.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 49, 1, ".", 1, true);
@@ -38228,7 +38406,7 @@
         multilineAndSinglelineOptionsTest: function () {
             var pattern = ".+$";
             var text = "The first line.\r\nThe second line.\r\nThe third line.";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor1(pattern, 18);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(pattern, 18);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 50, "The first line.\r\nThe second line.\r\nThe third line.", 1, true);
@@ -38245,7 +38423,7 @@
             var expected = [".0", "19.9", "219.9", null, null];
 
             var pattern = "\\d*\\.\\d";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
 
             this.validateMatchResults(rgx, inputs, expected);
         },
@@ -38254,7 +38432,7 @@
             var expected = ["bee", "be", null, "beee", "be"];
 
             var pattern = "be+";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
 
             this.validateMatchResults(rgx, inputs, expected);
         },
@@ -38263,7 +38441,7 @@
             var expected = ["rain", "ran", null];
 
             var pattern = "rai?n";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
 
             this.validateMatchResults(rgx, inputs, expected);
         },
@@ -38272,7 +38450,7 @@
             var expected = [",043", ",876", ",543", ",876"];
 
             var pattern = ",\\d{3}";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
 
             this.validateMatchResults(rgx, inputs, expected);
         },
@@ -38281,7 +38459,7 @@
             var expected = [null, ",876", ",543", ",210"];
 
             var pattern = ",\\d{3}$";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
 
             this.validateMatchResults(rgx, inputs, expected);
         },
@@ -38290,7 +38468,7 @@
             var expected = ["166", "29", "1930", null];
 
             var pattern = "\\d{2,}";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
 
             this.validateMatchResults(rgx, inputs, expected);
         },
@@ -38299,7 +38477,7 @@
             var expected = ["166", "17668", "19302", null];
 
             var pattern = "\\d{3,5}";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
 
             this.validateMatchResults(rgx, inputs, expected);
         },
@@ -38308,7 +38486,7 @@
             var expected = [".0", "19.9", "219.9", null, null];
 
             var pattern = "\\d*?\\.\\d";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
 
             this.validateMatchResults(rgx, inputs, expected);
         },
@@ -38317,7 +38495,7 @@
             var expected = ["be", "be", null, "be", "be"];
 
             var pattern = "be+?";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
 
             this.validateMatchResults(rgx, inputs, expected);
         },
@@ -38326,7 +38504,7 @@
             var expected = ["rain", "ran", null];
 
             var pattern = "rai??n";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
 
             this.validateMatchResults(rgx, inputs, expected);
         },
@@ -38335,7 +38513,7 @@
             var expected = [",043", ",876", ",543", ",876", null];
 
             var pattern = ",\\d{3}?";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
 
             this.validateMatchResults(rgx, inputs, expected);
         },
@@ -38344,7 +38522,7 @@
             var expected = ["16", "29", "19", null];
 
             var pattern = "\\d{2,}?";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
 
             this.validateMatchResults(rgx, inputs, expected);
         },
@@ -38353,14 +38531,14 @@
             var expected = ["166", "176", "193", null];
 
             var pattern = "\\d{3,5}?";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
 
             this.validateMatchResults(rgx, inputs, expected);
         },
         zeroOrMoreTimesTest: function () {
             var pattern = "(a*)(abc)";
             var text = "aaabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 5, "aaabc", 3, true);
@@ -38377,7 +38555,7 @@
         oneOrMoreTimesTest1: function () {
             var pattern = "(a+)(abc)";
             var text = "aaabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 5, "aaabc", 3, true);
@@ -38394,7 +38572,7 @@
         oneOrMoreTimesTest2: function () {
             var pattern = "(a+)(abc)";
             var text = "abc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 0, "", 1, false);
@@ -38408,7 +38586,7 @@
         oneOrMoreTimesTest3: function () {
             var pattern = "(a+)(a{2}bc)";
             var text = "aaabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 5, "aaabc", 3, true);
@@ -38425,7 +38603,7 @@
         zeroOrOneTimeTest: function () {
             var pattern = "(a?)(abc)";
             var text = "abc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 3, "abc", 3, true);
@@ -38442,7 +38620,7 @@
         lazyZeroOrMoreTimesTest1: function () {
             var pattern = "(a*?)((?:aa)*bc)";
             var text = "aaaaabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 7, "aaaaabc", 3, true);
@@ -38459,7 +38637,7 @@
         lazyZeroOrMoreTimesTest2: function () {
             var pattern = "(a*?)((?:aa)*bc)";
             var text = "aaaabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 6, "aaaabc", 3, true);
@@ -38476,7 +38654,7 @@
         lazyOneOrMoreTimesTest1: function () {
             var pattern = "(a+?)((?:aa)*bc)";
             var text = "aaaaabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 7, "aaaaabc", 3, true);
@@ -38493,7 +38671,7 @@
         lazyOneOrMoreTimesTest2: function () {
             var pattern = "(a+?)((?:aa)*bc)";
             var text = "aaaaaabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 8, "aaaaaabc", 3, true);
@@ -38510,7 +38688,7 @@
         lazyZeroOrOneTimeTest1: function () {
             var pattern = "(a??)((?:aa)*bc)";
             var text = "aaabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 5, "aaabc", 3, true);
@@ -38527,7 +38705,7 @@
         lazyZeroOrOneTimeTest2: function () {
             var pattern = "(a??)((?:aa)*bc)";
             var text = "aaaabc";
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor(pattern);
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             var m = rgx.match(text);
 
             this.validateMatch(m, 0, 6, "aaaabc", 3, true);
@@ -38546,7 +38724,7 @@
     Bridge.define('Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests', {
         inherits: [Bridge.ClientTest.Text.RegularExpressions.RegexTestBase],
         statics: {
-            constructor: function () {
+            ctor: function () {
                 Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.longText = "";
                 for (var i = 0; i < 10000; i = (i + 1) | 0) {
                     Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.longText = System.String.concat(Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.longText, "TestStringForTimeout");
@@ -38568,41 +38746,41 @@
             }
         },
         regexTimeoutValidationWorks: function () {
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor("fakePattern");
+            var rgx = new System.Text.RegularExpressions.Regex.ctor("fakePattern");
             Bridge.Test.Assert.areEqual$1(System.TimeSpan.fromMilliseconds(-1), rgx.getMatchTimeout(), "Default Timeout #1");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor1("fakePattern", 0);
+            rgx = new System.Text.RegularExpressions.Regex.$ctor1("fakePattern", 0);
             Bridge.Test.Assert.areEqual$1(System.TimeSpan.fromMilliseconds(-1), rgx.getMatchTimeout(), "Default Timeout #2");
 
-            rgx = new System.Text.RegularExpressions.Regex.$constructor2("fakePattern", 0, System.TimeSpan.fromSeconds(123));
+            rgx = new System.Text.RegularExpressions.Regex.$ctor2("fakePattern", 0, System.TimeSpan.fromSeconds(123));
             Bridge.Test.Assert.areEqual$1(System.TimeSpan.fromSeconds(123), rgx.getMatchTimeout(), "Specified Timeout");
 
             Bridge.Test.Assert.throws$6(System.ArgumentOutOfRangeException, $_.Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.f1);
         },
         regexIsMatchWorksWithShortTimeout: function () {
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor2(Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.pattern, 0, Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.shortTimeoutMs);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor2(Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.pattern, 0, Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.shortTimeoutMs);
             Bridge.Test.Assert.throws$6(System.RegexMatchTimeoutException, function () {
                 rgx.isMatch(Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.longText);
             });
         },
         regexIsMatchWorksWithLongTimeout: function () {
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor2(Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.pattern, 0, Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.longTimeoutMs);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor2(Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.pattern, 0, Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.longTimeoutMs);
             rgx.isMatch(Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.shortText);
             Bridge.Test.Assert.true(rgx != null);
         },
         regexMatchWorksWithShortTimeout: function () {
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor2(Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.pattern, 0, Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.shortTimeoutMs);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor2(Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.pattern, 0, Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.shortTimeoutMs);
             Bridge.Test.Assert.throws$6(System.RegexMatchTimeoutException, function () {
                 rgx.match(Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.longText);
             });
         },
         regexMatchWorksWithLongTimeout: function () {
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor2(Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.pattern, 0, Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.longTimeoutMs);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor2(Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.pattern, 0, Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.longTimeoutMs);
             rgx.match(Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.shortText);
             Bridge.Test.Assert.true(rgx != null);
         },
         regexNextMatchWorksWithShortTimeout: function () {
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor2(System.String.concat("%%|", Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.pattern), 0, Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.shortTimeoutMs);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor2(System.String.concat("%%|", Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.pattern), 0, Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.shortTimeoutMs);
 
             Bridge.Test.Assert.throws$6(System.RegexMatchTimeoutException, function () {
                 var result = rgx.match(System.String.concat("%%", Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.longText));
@@ -38610,7 +38788,7 @@
             });
         },
         regexNextMatchWorksWithLongTimeout: function () {
-            var rgx = new System.Text.RegularExpressions.Regex.$constructor2(System.String.concat("%%| ", Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.pattern), 0, Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.longTimeoutMs);
+            var rgx = new System.Text.RegularExpressions.Regex.$ctor2(System.String.concat("%%| ", Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.pattern), 0, Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.longTimeoutMs);
 
             var result = rgx.match(System.String.concat("%%", Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.shortText));
             result.nextMatch();
@@ -38644,7 +38822,7 @@
 
     Bridge.apply($_.Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests, {
         f1: function () {
-            new System.Text.RegularExpressions.Regex.$constructor2("fakePattern", 0, System.TimeSpan.fromMilliseconds(-5));
+            new System.Text.RegularExpressions.Regex.$ctor2("fakePattern", 0, System.TimeSpan.fromMilliseconds(-5));
         },
         f2: function () {
             System.Text.RegularExpressions.Regex.replace$2(Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.longText, Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.pattern, "fakeReplacement", 0, Bridge.ClientTest.Text.RegularExpressions.RegexTimeoutTests.shortTimeoutMs);
@@ -38717,8 +38895,8 @@
     Bridge.define('Bridge.ClientTest.Reflection.GetMembersTests.D1', {
         inherits: [Bridge.ClientTest.Reflection.GetMembersTests.C1,Bridge.ClientTest.Reflection.GetMembersTests.I1],
         statics: {
-            fDS1: 0,
-            fDS2: 0,
+            FDS1: 0,
+            FDS2: 0,
             config: {
                 properties: {
                     PDS1: 0,
@@ -38733,34 +38911,34 @@
             },
             removeEDS2: function (value) {
             },
-            mDS: function () {
+            MDS: function () {
             },
-            mDS$1: function (x) {
+            MDS$1: function (x) {
             },
-            mDS$2: function (x, y) {
+            MDS$2: function (x, y) {
             },
-            mDS2: function (x, y) {
+            MDS2: function (x, y) {
             }
         },
-        fD1: 0,
-        fD2: 0,
+        FD1: 0,
+        FD2: 0,
         config: {
             properties: {
                 PD1: 0,
                 PD2: 0
             }
         },
-        constructor: function () {
+        ctor: function () {
             this.$initialize();
-            Bridge.ClientTest.Reflection.GetMembersTests.C1.$constructor.call(this);
+            Bridge.ClientTest.Reflection.GetMembersTests.C1.ctor.call(this);
         },
-        $constructor1: function (x) {
+        $ctor1: function (x) {
             this.$initialize();
-            Bridge.ClientTest.Reflection.GetMembersTests.C1.$constructor.call(this);
+            Bridge.ClientTest.Reflection.GetMembersTests.C1.ctor.call(this);
         },
-        $constructor2: function (x, y) {
+        $ctor2: function (x, y) {
             this.$initialize();
-            Bridge.ClientTest.Reflection.GetMembersTests.C1.$constructor.call(this);
+            Bridge.ClientTest.Reflection.GetMembersTests.C1.ctor.call(this);
         },
         getItem$2: function (x) {
             return 0;
@@ -38804,24 +38982,24 @@
         Bridge$ClientTest$Reflection$GetMembersTests$I1$removeEI12: function (value) {
             throw new System.NotImplementedException();
         },
-        mD: function () {
+        MD: function () {
         },
-        mD$1: function (x) {
+        MD$1: function (x) {
         },
-        mD$2: function (x, y) {
+        MD$2: function (x, y) {
         },
-        mD2: function (x, y) {
+        MD2: function (x, y) {
         },
-        Bridge$ClientTest$Reflection$GetMembersTests$I1$mI1: function () {
+        Bridge$ClientTest$Reflection$GetMembersTests$I1$MI1: function () {
             throw new System.NotImplementedException();
         },
-        Bridge$ClientTest$Reflection$GetMembersTests$I1$mI1$1: function (x) {
+        Bridge$ClientTest$Reflection$GetMembersTests$I1$MI1$1: function (x) {
             throw new System.NotImplementedException();
         },
-        Bridge$ClientTest$Reflection$GetMembersTests$I1$mI1$2: function (x, y) {
+        Bridge$ClientTest$Reflection$GetMembersTests$I1$MI1$2: function (x, y) {
             throw new System.NotImplementedException();
         },
-        Bridge$ClientTest$Reflection$GetMembersTests$I1$mI12: function (x, y) {
+        Bridge$ClientTest$Reflection$GetMembersTests$I1$MI12: function (x, y) {
             throw new System.NotImplementedException();
         }
     });
@@ -38829,8 +39007,8 @@
     Bridge.define('Bridge.ClientTest.Reflection.GetMembersTests.D2', {
         inherits: [Bridge.ClientTest.Reflection.GetMembersTests.C2],
         statics: {
-            fS: 0,
-            fDS: 0,
+            FS: 0,
+            FDS: 0,
             config: {
                 events: {
                     ES: null,
@@ -38841,23 +39019,23 @@
                     PDS: 0
                 }
             },
-            mS: function () {
+            MS: function () {
             },
-            mDS: function () {
+            MDS: function () {
             },
-            m2S: function (x) {
+            M2S: function (x) {
             },
-            m2S$1: function (x) {
+            M2S$1: function (x) {
             },
-            m2DS: function (x) {
+            M2DS: function (x) {
             },
-            m2DS$1: function (x) {
+            M2DS$1: function (x) {
             },
-            m3S: function (x) {
+            M3S: function (x) {
             }
         },
         f$2: 0,
-        fD: 0,
+        FD: 0,
         config: {
             events: {
                 E$2: null,
@@ -38880,17 +39058,17 @@
         },
         m$2: function () {
         },
-        mD: function () {
+        MD: function () {
         },
-        m2$4: function (x) {
+        M2$4: function (x) {
         },
-        m2$5: function (x) {
+        M2$5: function (x) {
         },
-        m2D: function (x) {
+        M2D: function (x) {
         },
-        m2D$1: function (x) {
+        M2D$1: function (x) {
         },
-        m3$2: function (x) {
+        M3$2: function (x) {
         }
     });
 
@@ -39048,8 +39226,8 @@
         inherits: [Bridge.ClientTest.TypeSystemTests.B,Bridge.ClientTest.TypeSystemTests.I4]
     });
 
-    Bridge.setMetadata(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, function () { return {"members":[{"accessibility":2,"name":".ctor","type":1,"sname":"$constructor"},{"accessibility":2,"name":".ctor","type":1,"params":[System.Int32,System.Int32],"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","parameterType":System.Int32,"position":1}],"sname":"$constructor1"},{"accessibility":2,"name":"M1","type":8,"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","parameterType":String,"position":1}],"sname":"m1","returnType":System.Int32,"params":[System.Int32,String]},{"accessibility":2,"name":"M2","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","parameterType":String,"position":1}],"sname":"m2","returnType":System.Int32,"params":[System.Int32,String]},{"accessibility":2,"name":"M4","type":8,"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0}],"sname":"m4","returnType":System.Int32,"params":[System.Int32]},{"accessibility":2,"name":"op_Addition","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_Addition","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_BitwiseAnd","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_BitwiseAnd","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_BitwiseOr","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_BitwiseOr","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_Decrement","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0}],"sname":"op_Decrement","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_Division","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_Division","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_Equality","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_Equality","returnType":Boolean,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_ExclusiveOr","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_ExclusiveOr","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_Explicit","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0}],"sname":"op_Explicit","returnType":System.Int32,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_False","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0}],"sname":"op_False","returnType":Boolean,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_GreaterThan","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_GreaterThan","returnType":Boolean,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_GreaterThanOrEqual","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_GreaterThanOrEqual","returnType":Boolean,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_Increment","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0}],"sname":"op_Increment","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_Inequality","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_Inequality","returnType":Boolean,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_LeftShift","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":System.Int32,"position":1}],"sname":"op_LeftShift","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,System.Int32]},{"accessibility":2,"name":"op_LessThan","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_LessThan","returnType":Boolean,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_LessThanOrEqual","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_LessThanOrEqual","returnType":Boolean,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_LogicalNot","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0}],"sname":"op_LogicalNot","returnType":Boolean,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_Modulus","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_Modulus","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_Multiply","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_Multiply","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_OnesComplement","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0}],"sname":"op_OnesComplement","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_Power","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_Power","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_RightShift","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":System.Int32,"position":1}],"sname":"op_RightShift","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,System.Int32]},{"accessibility":2,"name":"op_Subtraction","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_Subtraction","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_True","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0}],"sname":"op_True","returnType":Boolean,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_UnaryNegation","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0}],"sname":"op_UnaryNegation","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_UnaryPlus","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0}],"sname":"op_UnaryPlus","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"CP","type":16,"returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"getter":{"accessibility":2,"name":"get_CP","type":8,"sname":"getCP","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C},"setter":{"accessibility":2,"name":"set_CP","type":8,"paramsInfo":[{"name":"value","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0}],"sname":"setCP","returnType":Object,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]}},{"accessibility":2,"name":"Item","type":16,"returnType":String,"params":[System.Int32,String],"isIndexer":true,"indexParamsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","parameterType":String,"position":1}],"getter":{"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","parameterType":String,"position":1}],"sname":"getItem","returnType":String,"params":[System.Int32,String]}},{"accessibility":2,"name":"LP","type":16,"returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList,"getter":{"accessibility":2,"name":"get_LP","type":8,"sname":"getLP","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList},"setter":{"accessibility":2,"name":"set_LP","type":8,"paramsInfo":[{"name":"value","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList,"position":0}],"sname":"setLP","returnType":Object,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList]}},{"accessibility":2,"name":"P1","type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_P1","type":8,"sname":"getP1","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_P1","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setP1","returnType":Object,"params":[System.Int32]}},{"accessibility":2,"name":"CF","type":4,"returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"sname":"cF","isReadOnly":false},{"accessibility":2,"name":"F1","type":4,"returnType":System.Int32,"sname":"f1","isReadOnly":false},{"accessibility":2,"name":"LF","type":4,"returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList,"sname":"lF","isReadOnly":false}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList, function () { return {"members":[{"accessibility":2,"name":".ctor","type":1,"sname":"$constructor"},{"accessibility":2,"name":"Add","type":8,"paramsInfo":[{"name":"i","parameterType":System.Int32,"position":0}],"sname":"add","returnType":Object,"params":[System.Int32]},{"accessibility":2,"name":"Add","type":8,"paramsInfo":[{"name":"i","parameterType":System.Int32,"position":0},{"name":"j","parameterType":System.Int32,"position":1}],"sname":"add$1","returnType":Object,"params":[System.Int32,System.Int32]}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, function () { return {"members":[{"accessibility":2,"name":".ctor","type":1,"sname":"ctor"},{"accessibility":2,"name":".ctor","type":1,"params":[System.Int32,System.Int32],"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","parameterType":System.Int32,"position":1}],"sname":"$ctor1"},{"accessibility":2,"name":"M1","type":8,"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","parameterType":String,"position":1}],"sname":"M1","returnType":System.Int32,"params":[System.Int32,String]},{"accessibility":2,"name":"M2","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","parameterType":String,"position":1}],"sname":"M2","returnType":System.Int32,"params":[System.Int32,String]},{"accessibility":2,"name":"M4","type":8,"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0}],"sname":"M4","returnType":System.Int32,"params":[System.Int32]},{"accessibility":2,"name":"op_Addition","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_Addition","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_BitwiseAnd","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_BitwiseAnd","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_BitwiseOr","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_BitwiseOr","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_Decrement","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0}],"sname":"op_Decrement","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_Division","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_Division","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_Equality","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_Equality","returnType":Boolean,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_ExclusiveOr","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_ExclusiveOr","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_Explicit","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0}],"sname":"op_Explicit","returnType":System.Int32,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_False","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0}],"sname":"op_False","returnType":Boolean,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_GreaterThan","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_GreaterThan","returnType":Boolean,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_GreaterThanOrEqual","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_GreaterThanOrEqual","returnType":Boolean,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_Increment","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0}],"sname":"op_Increment","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_Inequality","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_Inequality","returnType":Boolean,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_LeftShift","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":System.Int32,"position":1}],"sname":"op_LeftShift","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,System.Int32]},{"accessibility":2,"name":"op_LessThan","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_LessThan","returnType":Boolean,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_LessThanOrEqual","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_LessThanOrEqual","returnType":Boolean,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_LogicalNot","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0}],"sname":"op_LogicalNot","returnType":Boolean,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_Modulus","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_Modulus","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_Multiply","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_Multiply","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_OnesComplement","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0}],"sname":"op_OnesComplement","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_Power","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_Power","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_RightShift","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":System.Int32,"position":1}],"sname":"op_RightShift","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,System.Int32]},{"accessibility":2,"name":"op_Subtraction","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0},{"name":"b","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":1}],"sname":"op_Subtraction","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_True","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0}],"sname":"op_True","returnType":Boolean,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_UnaryNegation","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0}],"sname":"op_UnaryNegation","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"op_UnaryPlus","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0}],"sname":"op_UnaryPlus","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]},{"accessibility":2,"name":"CP","type":16,"returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"getter":{"accessibility":2,"name":"get_CP","type":8,"sname":"getCP","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C},"setter":{"accessibility":2,"name":"set_CP","type":8,"paramsInfo":[{"name":"value","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"position":0}],"sname":"setCP","returnType":Object,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.C]}},{"accessibility":2,"name":"Item","type":16,"returnType":String,"params":[System.Int32,String],"isIndexer":true,"indexParamsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","parameterType":String,"position":1}],"getter":{"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","parameterType":String,"position":1}],"sname":"getItem","returnType":String,"params":[System.Int32,String]}},{"accessibility":2,"name":"LP","type":16,"returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList,"getter":{"accessibility":2,"name":"get_LP","type":8,"sname":"getLP","returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList},"setter":{"accessibility":2,"name":"set_LP","type":8,"paramsInfo":[{"name":"value","parameterType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList,"position":0}],"sname":"setLP","returnType":Object,"params":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList]}},{"accessibility":2,"name":"P1","type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_P1","type":8,"sname":"getP1","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_P1","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setP1","returnType":Object,"params":[System.Int32]}},{"accessibility":2,"name":"CF","type":4,"returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"sname":"CF","isReadOnly":false},{"accessibility":2,"name":"F1","type":4,"returnType":System.Int32,"sname":"F1","isReadOnly":false},{"accessibility":2,"name":"LF","type":4,"returnType":Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList,"sname":"LF","isReadOnly":false}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList, function () { return {"members":[{"accessibility":2,"name":".ctor","type":1,"sname":"ctor"},{"accessibility":2,"name":"Add","type":8,"paramsInfo":[{"name":"i","parameterType":System.Int32,"position":0}],"sname":"add","returnType":Object,"params":[System.Int32]},{"accessibility":2,"name":"Add","type":8,"paramsInfo":[{"name":"i","parameterType":System.Int32,"position":0},{"name":"j","parameterType":System.Int32,"position":1}],"sname":"add$1","returnType":Object,"params":[System.Int32,System.Int32]}]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.AttributeTests.A2Attribute, function () { return {"attrAllowMultiple":true}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.AttributeTests.A5Attribute, function () { return {"attrNoInherit":true}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.AttributeTests.C10$2, function (T1, T2) { return {"attr":[new Bridge.ClientTest.Reflection.AttributeTests.A1Attribute(11)]}; });
@@ -39065,14 +39243,14 @@
         this.$$XX$$ = 18;
     } )]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.AttributeTests.C16, function () { return {"attr":[Bridge.merge(new Bridge.ClientTest.Reflection.AttributeTests.A9Attribute(), {
-        p3: 43
+        P3: 43
     } )]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.AttributeTests.C18, function () { return {"attr":[Bridge.merge(new Bridge.ClientTest.Reflection.AttributeTests.A9Attribute(), {
         setF1: 13
     } )]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.AttributeTests.C19, function () { return {"attr":[new Bridge.ClientTest.Reflection.AttributeTests.A1Attribute(12)]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.AttributeTests.C2, function () { return {"attr":[new Bridge.ClientTest.Reflection.AttributeTests.A1Attribute(1),new Bridge.ClientTest.Reflection.AttributeTests.A2Attribute(2)]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.AttributeTests.C20, function () { return {"attr":[new Bridge.ClientTest.Reflection.AttributeTests.A11Attribute.$constructor1(42)]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.AttributeTests.C20, function () { return {"attr":[new Bridge.ClientTest.Reflection.AttributeTests.A11Attribute.$ctor1(42)]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.AttributeTests.C21, function () { return {"attr":[{ i: 18 }]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.AttributeTests.C22, function () { return {"attr":[new Bridge.ClientTest.Reflection.AttributeTests.A12Attribute(),new Bridge.ClientTest.Reflection.AttributeTests.A13Attribute()],"members":[{"attr":[new Bridge.ClientTest.Reflection.AttributeTests.A12Attribute(),new Bridge.ClientTest.Reflection.AttributeTests.A13Attribute()],"accessibility":2,"name":"M","type":8,"sname":"m","returnType":Object}]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.AttributeTests.C7, function () { return {"attr":[new Bridge.ClientTest.Reflection.AttributeTests.A5Attribute()]}; });
@@ -39080,35 +39258,35 @@
     Bridge.setMetadata(Bridge.ClientTest.Reflection.AttributeTests.E1, function () { return {"attr":[new Bridge.ClientTest.Reflection.AttributeTests.A1Attribute(1),new Bridge.ClientTest.Reflection.AttributeTests.A2Attribute(2)]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.AttributeTests.I1, function () { return {"attr":[new Bridge.ClientTest.Reflection.AttributeTests.A1Attribute(1),new Bridge.ClientTest.Reflection.AttributeTests.A2Attribute(2)]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.AttributeTests.I2$2, function (T1, T2) { return {"attr":[new Bridge.ClientTest.Reflection.AttributeTests.A1Attribute(12)]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.GetMembersTests.B1, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(101)],"accessibility":2,"name":".ctor","type":1,"sname":"$constructor"},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(102)],"accessibility":2,"name":".ctor","type":1,"params":[System.Int32],"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"$constructor1"},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(103)],"accessibility":2,"name":".ctor","type":1,"params":[System.Int32,String],"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"$constructor2"},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(111)],"accessibility":2,"name":"MB","type":8,"sname":"mB","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(112)],"accessibility":2,"name":"MB","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"mB$1","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(113)],"accessibility":2,"name":"MB","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"mB$2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(114)],"accessibility":2,"name":"MB2","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"mB2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(121)],"accessibility":2,"name":"MBS","isStatic":true,"type":8,"sname":"mBS","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(122)],"accessibility":2,"name":"MBS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"mBS$1","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(123)],"accessibility":2,"name":"MBS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"mBS$2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(124)],"accessibility":2,"name":"MBS2","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"mBS2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(157)],"accessibility":2,"name":"Item","type":16,"returnType":System.Int32,"params":[System.Int32],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(158)],"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"getItem","returnType":System.Int32,"params":[System.Int32]},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(159)],"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"value","parameterType":System.Int32,"position":1}],"sname":"setItem","returnType":Object,"params":[System.Int32,System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(151)],"accessibility":2,"name":"PB1","type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(152)],"accessibility":2,"name":"get_PB1","type":8,"sname":"getPB1","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(153)],"accessibility":2,"name":"set_PB1","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPB1","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(154)],"accessibility":2,"name":"PB2","type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(155)],"accessibility":2,"name":"get_PB2","type":8,"sname":"getPB2","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(156)],"accessibility":2,"name":"set_PB2","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPB2","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(161)],"accessibility":2,"name":"PBS1","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(162)],"accessibility":2,"name":"get_PBS1","isStatic":true,"type":8,"sname":"getPBS1","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(163)],"accessibility":2,"name":"set_PBS1","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPBS1","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(164)],"accessibility":2,"name":"PBS2","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(165)],"accessibility":2,"name":"get_PBS2","isStatic":true,"type":8,"sname":"getPBS2","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(166)],"accessibility":2,"name":"set_PBS2","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPBS2","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(131)],"accessibility":2,"name":"FB1","type":4,"returnType":System.Int32,"sname":"fB1","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(132)],"accessibility":2,"name":"FB2","type":4,"returnType":System.Int32,"sname":"fB2","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(141)],"accessibility":2,"name":"FBS1","isStatic":true,"type":4,"returnType":System.Int32,"sname":"fBS1","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(142)],"accessibility":2,"name":"FBS2","isStatic":true,"type":4,"returnType":System.Int32,"sname":"fBS2","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(171)],"accessibility":2,"name":"EB1","type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(172)],"accessibility":2,"name":"add_EB1","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEB1","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(173)],"accessibility":2,"name":"remove_EB1","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEB1","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(174)],"accessibility":2,"name":"EB2","type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(175)],"accessibility":2,"name":"add_EB2","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEB2","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(176)],"accessibility":2,"name":"remove_EB2","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEB2","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(181)],"accessibility":2,"name":"EBS1","isStatic":true,"type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(182)],"accessibility":2,"name":"add_EBS1","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEBS1","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(183)],"accessibility":2,"name":"remove_EBS1","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEBS1","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(184)],"accessibility":2,"name":"EBS2","isStatic":true,"type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(185)],"accessibility":2,"name":"add_EBS2","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEBS2","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(186)],"accessibility":2,"name":"remove_EBS2","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEBS2","returnType":Object,"params":[Function]}}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.GetMembersTests.B2, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(111)],"accessibility":2,"name":"M","type":8,"sname":"m","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(113)],"accessibility":2,"name":"M2","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"m2","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(114)],"accessibility":2,"name":"M2","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"m2$1","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(115)],"accessibility":2,"name":"M2B","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"m2B","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(116)],"accessibility":2,"name":"M2B","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"m2B$1","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(125)],"accessibility":2,"name":"M2BS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"m2BS","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(126)],"accessibility":2,"name":"M2BS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"m2BS$1","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(123)],"accessibility":2,"name":"M2S","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"m2S","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(124)],"accessibility":2,"name":"M2S","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"m2S$1","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(117)],"accessibility":2,"name":"M3","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"m3","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(127)],"accessibility":2,"name":"M3S","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"m3S","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(112)],"accessibility":2,"name":"MB","type":8,"sname":"mB","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(122)],"accessibility":2,"name":"MBS","isStatic":true,"type":8,"sname":"mBS","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(121)],"accessibility":2,"name":"MS","isStatic":true,"type":8,"sname":"mS","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(153)],"accessibility":2,"name":"Item","type":16,"returnType":System.Int32,"params":[System.Int32],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"getter":{"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"getItem","returnType":System.Int32,"params":[System.Int32]},"setter":{"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"value","parameterType":System.Int32,"position":1}],"sname":"setItem","returnType":Object,"params":[System.Int32,System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(154)],"accessibility":2,"name":"Item","type":16,"returnType":System.Int32,"params":[String],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":String,"position":0}],"getter":{"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"getItem$1","returnType":System.Int32,"params":[String]},"setter":{"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0},{"name":"value","parameterType":System.Int32,"position":1}],"sname":"setItem$1","returnType":Object,"params":[String,System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(151)],"accessibility":2,"name":"P","type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_P","type":8,"sname":"getP","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_P","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setP","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(152)],"accessibility":2,"name":"PB","type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_PB","type":8,"sname":"getPB","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_PB","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPB","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(162)],"accessibility":2,"name":"PBS","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_PBS","isStatic":true,"type":8,"sname":"getPBS","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_PBS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPBS","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(161)],"accessibility":2,"name":"PS","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_PS","isStatic":true,"type":8,"sname":"getPS","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_PS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPS","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(131)],"accessibility":2,"name":"F","type":4,"returnType":System.Int32,"sname":"f","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(132)],"accessibility":2,"name":"FB","type":4,"returnType":System.Int32,"sname":"fB","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(142)],"accessibility":2,"name":"FBS","isStatic":true,"type":4,"returnType":System.Int32,"sname":"fBS","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(141)],"accessibility":2,"name":"FS","isStatic":true,"type":4,"returnType":System.Int32,"sname":"fS","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(171)],"accessibility":2,"name":"E","type":2,"adder":{"accessibility":2,"name":"add_E","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addE","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_E","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeE","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(172)],"accessibility":2,"name":"EB","type":2,"adder":{"accessibility":2,"name":"add_EB","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEB","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_EB","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEB","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(182)],"accessibility":2,"name":"EBS","isStatic":true,"type":2,"adder":{"accessibility":2,"name":"add_EBS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEBS","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_EBS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEBS","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(181)],"accessibility":2,"name":"ES","isStatic":true,"type":2,"adder":{"accessibility":2,"name":"add_ES","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addES","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_ES","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeES","returnType":Object,"params":[Function]}}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.GetMembersTests.B1, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(101)],"accessibility":2,"name":".ctor","type":1,"sname":"ctor"},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(102)],"accessibility":2,"name":".ctor","type":1,"params":[System.Int32],"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"$ctor1"},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(103)],"accessibility":2,"name":".ctor","type":1,"params":[System.Int32,String],"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"$ctor2"},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(111)],"accessibility":2,"name":"MB","type":8,"sname":"MB","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(112)],"accessibility":2,"name":"MB","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"MB$1","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(113)],"accessibility":2,"name":"MB","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"MB$2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(114)],"accessibility":2,"name":"MB2","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"MB2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(121)],"accessibility":2,"name":"MBS","isStatic":true,"type":8,"sname":"MBS","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(122)],"accessibility":2,"name":"MBS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"MBS$1","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(123)],"accessibility":2,"name":"MBS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"MBS$2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(124)],"accessibility":2,"name":"MBS2","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"MBS2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(157)],"accessibility":2,"name":"Item","type":16,"returnType":System.Int32,"params":[System.Int32],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(158)],"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"getItem","returnType":System.Int32,"params":[System.Int32]},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(159)],"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"value","parameterType":System.Int32,"position":1}],"sname":"setItem","returnType":Object,"params":[System.Int32,System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(151)],"accessibility":2,"name":"PB1","type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(152)],"accessibility":2,"name":"get_PB1","type":8,"sname":"getPB1","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(153)],"accessibility":2,"name":"set_PB1","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPB1","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(154)],"accessibility":2,"name":"PB2","type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(155)],"accessibility":2,"name":"get_PB2","type":8,"sname":"getPB2","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(156)],"accessibility":2,"name":"set_PB2","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPB2","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(161)],"accessibility":2,"name":"PBS1","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(162)],"accessibility":2,"name":"get_PBS1","isStatic":true,"type":8,"sname":"getPBS1","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(163)],"accessibility":2,"name":"set_PBS1","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPBS1","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(164)],"accessibility":2,"name":"PBS2","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(165)],"accessibility":2,"name":"get_PBS2","isStatic":true,"type":8,"sname":"getPBS2","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(166)],"accessibility":2,"name":"set_PBS2","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPBS2","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(131)],"accessibility":2,"name":"FB1","type":4,"returnType":System.Int32,"sname":"FB1","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(132)],"accessibility":2,"name":"FB2","type":4,"returnType":System.Int32,"sname":"FB2","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(141)],"accessibility":2,"name":"FBS1","isStatic":true,"type":4,"returnType":System.Int32,"sname":"FBS1","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(142)],"accessibility":2,"name":"FBS2","isStatic":true,"type":4,"returnType":System.Int32,"sname":"FBS2","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(171)],"accessibility":2,"name":"EB1","type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(172)],"accessibility":2,"name":"add_EB1","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEB1","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(173)],"accessibility":2,"name":"remove_EB1","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEB1","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(174)],"accessibility":2,"name":"EB2","type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(175)],"accessibility":2,"name":"add_EB2","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEB2","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(176)],"accessibility":2,"name":"remove_EB2","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEB2","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(181)],"accessibility":2,"name":"EBS1","isStatic":true,"type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(182)],"accessibility":2,"name":"add_EBS1","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEBS1","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(183)],"accessibility":2,"name":"remove_EBS1","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEBS1","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(184)],"accessibility":2,"name":"EBS2","isStatic":true,"type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(185)],"accessibility":2,"name":"add_EBS2","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEBS2","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(186)],"accessibility":2,"name":"remove_EBS2","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEBS2","returnType":Object,"params":[Function]}}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.GetMembersTests.B2, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(111)],"accessibility":2,"name":"M","type":8,"sname":"m","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(113)],"accessibility":2,"name":"M2","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"M2","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(114)],"accessibility":2,"name":"M2","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"M2$1","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(115)],"accessibility":2,"name":"M2B","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"M2B","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(116)],"accessibility":2,"name":"M2B","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"M2B$1","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(125)],"accessibility":2,"name":"M2BS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"M2BS","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(126)],"accessibility":2,"name":"M2BS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"M2BS$1","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(123)],"accessibility":2,"name":"M2S","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"M2S","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(124)],"accessibility":2,"name":"M2S","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"M2S$1","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(117)],"accessibility":2,"name":"M3","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"M3","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(127)],"accessibility":2,"name":"M3S","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"M3S","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(112)],"accessibility":2,"name":"MB","type":8,"sname":"MB","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(122)],"accessibility":2,"name":"MBS","isStatic":true,"type":8,"sname":"MBS","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(121)],"accessibility":2,"name":"MS","isStatic":true,"type":8,"sname":"MS","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(153)],"accessibility":2,"name":"Item","type":16,"returnType":System.Int32,"params":[System.Int32],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"getter":{"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"getItem","returnType":System.Int32,"params":[System.Int32]},"setter":{"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"value","parameterType":System.Int32,"position":1}],"sname":"setItem","returnType":Object,"params":[System.Int32,System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(154)],"accessibility":2,"name":"Item","type":16,"returnType":System.Int32,"params":[String],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":String,"position":0}],"getter":{"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"getItem$1","returnType":System.Int32,"params":[String]},"setter":{"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0},{"name":"value","parameterType":System.Int32,"position":1}],"sname":"setItem$1","returnType":Object,"params":[String,System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(151)],"accessibility":2,"name":"P","type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_P","type":8,"sname":"getP","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_P","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setP","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(152)],"accessibility":2,"name":"PB","type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_PB","type":8,"sname":"getPB","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_PB","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPB","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(162)],"accessibility":2,"name":"PBS","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_PBS","isStatic":true,"type":8,"sname":"getPBS","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_PBS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPBS","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(161)],"accessibility":2,"name":"PS","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_PS","isStatic":true,"type":8,"sname":"getPS","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_PS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPS","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(131)],"accessibility":2,"name":"F","type":4,"returnType":System.Int32,"sname":"f","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(132)],"accessibility":2,"name":"FB","type":4,"returnType":System.Int32,"sname":"FB","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(142)],"accessibility":2,"name":"FBS","isStatic":true,"type":4,"returnType":System.Int32,"sname":"FBS","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(141)],"accessibility":2,"name":"FS","isStatic":true,"type":4,"returnType":System.Int32,"sname":"FS","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(171)],"accessibility":2,"name":"E","type":2,"adder":{"accessibility":2,"name":"add_E","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addE","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_E","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeE","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(172)],"accessibility":2,"name":"EB","type":2,"adder":{"accessibility":2,"name":"add_EB","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEB","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_EB","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEB","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(182)],"accessibility":2,"name":"EBS","isStatic":true,"type":2,"adder":{"accessibility":2,"name":"add_EBS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEBS","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_EBS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEBS","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(181)],"accessibility":2,"name":"ES","isStatic":true,"type":2,"adder":{"accessibility":2,"name":"add_ES","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addES","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_ES","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeES","returnType":Object,"params":[Function]}}]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.GetMembersTests.C3, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(1)],"accessibility":2,"name":"Item","type":16,"returnType":System.Int32,"params":[System.Int32],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"getter":{"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"getItem","returnType":System.Int32,"params":[System.Int32]},"setter":{"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"value","parameterType":System.Int32,"position":1}],"sname":"setItem","returnType":Object,"params":[System.Int32,System.Int32]}}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.GetMembersTests.I1, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(411)],"isAbstract":true,"accessibility":2,"name":"MI1","type":8,"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$mI1","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(412)],"isAbstract":true,"accessibility":2,"name":"MI1","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$mI1$1","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(413)],"isAbstract":true,"accessibility":2,"name":"MI1","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$mI1$2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(414)],"isAbstract":true,"accessibility":2,"name":"MI12","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$mI12","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(457)],"isAbstract":true,"accessibility":2,"name":"Item","type":16,"returnType":System.Int32,"params":[System.Int32],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(458)],"isAbstract":true,"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$get_i1item","returnType":System.Int32,"params":[System.Int32]},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(459)],"isAbstract":true,"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"value","parameterType":System.Int32,"position":1}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$set_i1item","returnType":Object,"params":[System.Int32,System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(451)],"isAbstract":true,"accessibility":2,"name":"PI11","type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(452)],"isAbstract":true,"accessibility":2,"name":"get_PI11","type":8,"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$getPI11","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(453)],"isAbstract":true,"accessibility":2,"name":"set_PI11","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$setPI11","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(454)],"isAbstract":true,"accessibility":2,"name":"PI12","type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(455)],"isAbstract":true,"accessibility":2,"name":"get_PI12","type":8,"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$getPI12","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(456)],"isAbstract":true,"accessibility":2,"name":"set_PI12","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$setPI12","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(471)],"isAbstract":true,"accessibility":2,"name":"EI11","type":2,"adder":{"isAbstract":true,"accessibility":2,"name":"add_EI11","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$addEI11","returnType":Object,"params":[Function]},"remover":{"isAbstract":true,"accessibility":2,"name":"remove_EI11","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$removeEI11","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(474)],"isAbstract":true,"accessibility":2,"name":"EI12","type":2,"adder":{"isAbstract":true,"accessibility":2,"name":"add_EI12","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$addEI12","returnType":Object,"params":[Function]},"remover":{"isAbstract":true,"accessibility":2,"name":"remove_EI12","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$removeEI12","returnType":Object,"params":[Function]}}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C1, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$constructor()],"accessibility":2,"name":"M2","type":8,"sname":"m2","returnType":Object},{"accessibility":2,"name":"M3","type":8,"sname":"m3","returnType":Object}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C10, function () { return {"members":[{"accessibility":2,"name":".ctor","type":1,"params":[System.Int32],"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"$constructor"},{"accessibility":2,"name":".ctor","type":1,"params":[System.Int32,String],"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"s","parameterType":String,"position":1}],"sname":"$constructor1"}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C11, function () { return {"members":[{"accessibility":2,"name":".ctor","type":1,"params":[Date],"paramsInfo":[{"name":"dt","parameterType":Date,"position":0}],"sname":"$constructor"}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C12, function () { return {"members":[{"accessibility":2,"name":"F1","type":4,"returnType":System.Int32,"sname":"f1","isReadOnly":false},{"accessibility":2,"name":"F2","type":4,"returnType":Date,"sname":"renamedF2","isReadOnly":false},{"accessibility":2,"name":"F3","isStatic":true,"type":4,"returnType":String,"sname":"f3","isReadOnly":false}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.GetMembersTests.I1, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(411)],"isAbstract":true,"accessibility":2,"name":"MI1","type":8,"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$MI1","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(412)],"isAbstract":true,"accessibility":2,"name":"MI1","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$MI1$1","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(413)],"isAbstract":true,"accessibility":2,"name":"MI1","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$MI1$2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(414)],"isAbstract":true,"accessibility":2,"name":"MI12","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$MI12","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(457)],"isAbstract":true,"accessibility":2,"name":"Item","type":16,"returnType":System.Int32,"params":[System.Int32],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(458)],"isAbstract":true,"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$get_i1item","returnType":System.Int32,"params":[System.Int32]},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(459)],"isAbstract":true,"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"value","parameterType":System.Int32,"position":1}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$set_i1item","returnType":Object,"params":[System.Int32,System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(451)],"isAbstract":true,"accessibility":2,"name":"PI11","type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(452)],"isAbstract":true,"accessibility":2,"name":"get_PI11","type":8,"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$getPI11","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(453)],"isAbstract":true,"accessibility":2,"name":"set_PI11","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$setPI11","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(454)],"isAbstract":true,"accessibility":2,"name":"PI12","type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(455)],"isAbstract":true,"accessibility":2,"name":"get_PI12","type":8,"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$getPI12","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(456)],"isAbstract":true,"accessibility":2,"name":"set_PI12","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$setPI12","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(471)],"isAbstract":true,"accessibility":2,"name":"EI11","type":2,"adder":{"isAbstract":true,"accessibility":2,"name":"add_EI11","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$addEI11","returnType":Object,"params":[Function]},"remover":{"isAbstract":true,"accessibility":2,"name":"remove_EI11","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$removeEI11","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(474)],"isAbstract":true,"accessibility":2,"name":"EI12","type":2,"adder":{"isAbstract":true,"accessibility":2,"name":"add_EI12","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$addEI12","returnType":Object,"params":[Function]},"remover":{"isAbstract":true,"accessibility":2,"name":"remove_EI12","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I1$removeEI12","returnType":Object,"params":[Function]}}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C1, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.ctor()],"accessibility":2,"name":"M2","type":8,"sname":"M2","returnType":Object},{"accessibility":2,"name":"M3","type":8,"sname":"M3","returnType":Object}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C10, function () { return {"members":[{"accessibility":2,"name":".ctor","type":1,"params":[System.Int32],"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"ctor"},{"accessibility":2,"name":".ctor","type":1,"params":[System.Int32,String],"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"s","parameterType":String,"position":1}],"sname":"$ctor1"}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C11, function () { return {"members":[{"accessibility":2,"name":".ctor","type":1,"params":[Date],"paramsInfo":[{"name":"dt","parameterType":Date,"position":0}],"sname":"ctor"}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C12, function () { return {"members":[{"accessibility":2,"name":"F1","type":4,"returnType":System.Int32,"sname":"F1","isReadOnly":false},{"accessibility":2,"name":"F2","type":4,"returnType":Date,"sname":"renamedF2","isReadOnly":false},{"accessibility":2,"name":"F3","isStatic":true,"type":4,"returnType":String,"sname":"F3","isReadOnly":false}]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C13, function () { return {"members":[{"accessibility":2,"name":"E1","type":2,"adder":{"accessibility":2,"name":"add_E1","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addE1","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_E1","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeE1","returnType":Object,"params":[Function]}},{"accessibility":2,"name":"E2","isStatic":true,"type":2,"adder":{"accessibility":2,"name":"add_E2","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addE2","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_E2","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeE2","returnType":Object,"params":[Function]}},{"accessibility":2,"name":"E3","type":2,"adder":{"accessibility":2,"name":"add_E3","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"tpcount":0,"def":function (value) { return this.addedE3Handler = value; },"returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_E3","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"tpcount":0,"def":function (value) { return this.removedE3Handler = value; },"returnType":Object,"params":[Function]}},{"accessibility":2,"name":"E4","isStatic":true,"type":2,"adder":{"accessibility":2,"name":"add_E4","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"tpcount":0,"def":function (value) { return Bridge.ClientTest.Reflection.ReflectionTests.C13.addedE4Handler = value; },"returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_E4","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"tpcount":0,"def":function (value) { return Bridge.ClientTest.Reflection.ReflectionTests.C13.removedE4Handler = value; },"returnType":Object,"params":[Function]}}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C14, function () { return {"members":[{"accessibility":2,"name":"P1","type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_P1","type":8,"sname":"getP1","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_P1","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setP1","returnType":Object,"params":[System.Int32]}},{"accessibility":2,"name":"P10","type":16,"returnType":String,"getter":{"accessibility":2,"name":"get_P10","type":8,"returnType":String,"fget":"p10"},"setter":{"accessibility":2,"name":"set_P10","type":8,"params":[String],"returnType":Object,"fset":"p10"},"fname":"p10"},{"accessibility":2,"name":"P11","isStatic":true,"type":16,"returnType":Date,"setter":{"accessibility":2,"name":"set_P11","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Date,"position":0}],"sname":"setP11","returnType":Object,"params":[Date]}},{"accessibility":2,"name":"P12","isStatic":true,"type":16,"returnType":System.Double,"getter":{"accessibility":2,"name":"get_P12","type":8,"returnType":System.Double,"fget":"p12","isStatic":true},"setter":{"accessibility":2,"name":"set_P12","type":8,"params":[System.Double],"returnType":Object,"fset":"p12","isStatic":true},"fname":"p12"},{"accessibility":2,"name":"P13","type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_P13","type":8,"tpcount":0,"def":function () { return this.p13Field; },"returnType":System.Int32},"setter":{"accessibility":2,"name":"set_P13","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"tpcount":0,"def":function (value) { return this.p13Field = value; },"returnType":Object,"params":[System.Int32]}},{"accessibility":2,"name":"P14","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_P14","isStatic":true,"type":8,"tpcount":0,"def":function () { return Bridge.ClientTest.Reflection.ReflectionTests.C14.p14Field; },"returnType":System.Int32},"setter":{"accessibility":2,"name":"set_P14","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"tpcount":0,"def":function (value) { return Bridge.ClientTest.Reflection.ReflectionTests.C14.p14Field = value; },"returnType":Object,"params":[System.Int32]}},{"accessibility":2,"name":"P2","type":16,"returnType":String,"getter":{"accessibility":2,"name":"get_P2","type":8,"returnType":String,"fget":"p2"},"setter":{"accessibility":2,"name":"set_P2","type":8,"params":[String],"returnType":Object,"fset":"p2"},"fname":"p2"},{"accessibility":2,"name":"P3","isStatic":true,"type":16,"returnType":Date,"getter":{"accessibility":2,"name":"get_P3","isStatic":true,"type":8,"sname":"getP3","returnType":Date},"setter":{"accessibility":2,"name":"set_P3","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Date,"position":0}],"sname":"setP3","returnType":Object,"params":[Date]}},{"accessibility":2,"name":"P4","isStatic":true,"type":16,"returnType":System.Double,"getter":{"accessibility":2,"name":"get_P4","type":8,"returnType":System.Double,"fget":"p4","isStatic":true},"setter":{"accessibility":2,"name":"set_P4","type":8,"params":[System.Double],"returnType":Object,"fset":"p4","isStatic":true},"fname":"p4"},{"accessibility":2,"name":"P5","type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_P5","type":8,"sname":"getP5","returnType":System.Int32}},{"accessibility":2,"name":"P6","type":16,"returnType":String,"getter":{"accessibility":2,"name":"get_P6","type":8,"returnType":String,"fget":"p6"},"setter":{"accessibility":2,"name":"set_P6","type":8,"params":[String],"returnType":Object,"fset":"p6"},"fname":"p6"},{"accessibility":2,"name":"P7","isStatic":true,"type":16,"returnType":Date,"getter":{"accessibility":2,"name":"get_P7","isStatic":true,"type":8,"sname":"getP7","returnType":Date}},{"accessibility":2,"name":"P8","isStatic":true,"type":16,"returnType":System.Double,"getter":{"accessibility":2,"name":"get_P8","type":8,"returnType":System.Double,"fget":"p8","isStatic":true},"setter":{"accessibility":2,"name":"set_P8","type":8,"params":[System.Double],"returnType":Object,"fset":"p8","isStatic":true},"fname":"p8"},{"accessibility":2,"name":"P9","type":16,"returnType":System.Int32,"setter":{"accessibility":2,"name":"set_P9","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setP9","returnType":Object,"params":[System.Int32]}}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C14, function () { return {"members":[{"accessibility":2,"name":"P1","type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_P1","type":8,"sname":"getP1","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_P1","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setP1","returnType":Object,"params":[System.Int32]}},{"accessibility":2,"name":"P10","type":16,"returnType":String,"getter":{"accessibility":2,"name":"get_P10","type":8,"returnType":String,"fget":"P10"},"setter":{"accessibility":2,"name":"set_P10","type":8,"params":[String],"returnType":Object,"fset":"P10"},"fname":"P10"},{"accessibility":2,"name":"P11","isStatic":true,"type":16,"returnType":Date,"setter":{"accessibility":2,"name":"set_P11","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Date,"position":0}],"sname":"setP11","returnType":Object,"params":[Date]}},{"accessibility":2,"name":"P12","isStatic":true,"type":16,"returnType":System.Double,"getter":{"accessibility":2,"name":"get_P12","type":8,"returnType":System.Double,"fget":"P12","isStatic":true},"setter":{"accessibility":2,"name":"set_P12","type":8,"params":[System.Double],"returnType":Object,"fset":"P12","isStatic":true},"fname":"P12"},{"accessibility":2,"name":"P13","type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_P13","type":8,"tpcount":0,"def":function () { return this.p13Field; },"returnType":System.Int32},"setter":{"accessibility":2,"name":"set_P13","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"tpcount":0,"def":function (value) { return this.p13Field = value; },"returnType":Object,"params":[System.Int32]}},{"accessibility":2,"name":"P14","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_P14","isStatic":true,"type":8,"tpcount":0,"def":function () { return Bridge.ClientTest.Reflection.ReflectionTests.C14.p14Field; },"returnType":System.Int32},"setter":{"accessibility":2,"name":"set_P14","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"tpcount":0,"def":function (value) { return Bridge.ClientTest.Reflection.ReflectionTests.C14.p14Field = value; },"returnType":Object,"params":[System.Int32]}},{"accessibility":2,"name":"P2","type":16,"returnType":String,"getter":{"accessibility":2,"name":"get_P2","type":8,"returnType":String,"fget":"P2"},"setter":{"accessibility":2,"name":"set_P2","type":8,"params":[String],"returnType":Object,"fset":"P2"},"fname":"P2"},{"accessibility":2,"name":"P3","isStatic":true,"type":16,"returnType":Date,"getter":{"accessibility":2,"name":"get_P3","isStatic":true,"type":8,"sname":"getP3","returnType":Date},"setter":{"accessibility":2,"name":"set_P3","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Date,"position":0}],"sname":"setP3","returnType":Object,"params":[Date]}},{"accessibility":2,"name":"P4","isStatic":true,"type":16,"returnType":System.Double,"getter":{"accessibility":2,"name":"get_P4","type":8,"returnType":System.Double,"fget":"P4","isStatic":true},"setter":{"accessibility":2,"name":"set_P4","type":8,"params":[System.Double],"returnType":Object,"fset":"P4","isStatic":true},"fname":"P4"},{"accessibility":2,"name":"P5","type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_P5","type":8,"sname":"getP5","returnType":System.Int32}},{"accessibility":2,"name":"P6","type":16,"returnType":String,"getter":{"accessibility":2,"name":"get_P6","type":8,"returnType":String,"fget":"P6"},"setter":{"accessibility":2,"name":"set_P6","type":8,"params":[String],"returnType":Object,"fset":"P6"},"fname":"P6"},{"accessibility":2,"name":"P7","isStatic":true,"type":16,"returnType":Date,"getter":{"accessibility":2,"name":"get_P7","isStatic":true,"type":8,"sname":"getP7","returnType":Date}},{"accessibility":2,"name":"P8","isStatic":true,"type":16,"returnType":System.Double,"getter":{"accessibility":2,"name":"get_P8","type":8,"returnType":System.Double,"fget":"P8","isStatic":true},"setter":{"accessibility":2,"name":"set_P8","type":8,"params":[System.Double],"returnType":Object,"fset":"P8","isStatic":true},"fname":"P8"},{"accessibility":2,"name":"P9","type":16,"returnType":System.Int32,"setter":{"accessibility":2,"name":"set_P9","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setP9","returnType":Object,"params":[System.Int32]}}]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C15, function () { return {"members":[{"accessibility":2,"name":"Item","type":16,"returnType":String,"params":[System.Int32,String],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"s","parameterType":String,"position":1}],"getter":{"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"s","parameterType":String,"position":1}],"sname":"getItem","returnType":String,"params":[System.Int32,String]},"setter":{"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"s","parameterType":String,"position":1},{"name":"value","parameterType":String,"position":2}],"sname":"setItem","returnType":Object,"params":[System.Int32,String,String]}}]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C16, function () { return {"members":[{"accessibility":2,"name":"Item","type":16,"returnType":String,"params":[System.Int32,String],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"s","parameterType":String,"position":1}],"getter":{"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"s","parameterType":String,"position":1}],"sname":"getItem","returnType":String,"params":[System.Int32,String]}}]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C17, function () { return {"members":[{"accessibility":2,"name":"Item","type":16,"returnType":String,"params":[System.Int32,String],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"s","parameterType":String,"position":1}],"setter":{"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"s","parameterType":String,"position":1},{"name":"value","parameterType":String,"position":2}],"sname":"setItem","returnType":Object,"params":[System.Int32,String,String]}}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C18, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$constructor1(1),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"accessibility":2,"name":".ctor","type":1,"sname":"$constructor"},{"attr":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$constructor1(2),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"accessibility":2,"name":"M","type":8,"sname":"m","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$constructor1(4),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"accessibility":2,"name":"P","type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$constructor1(5),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"accessibility":2,"name":"get_P","type":8,"sname":"getP","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$constructor1(6),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"accessibility":2,"name":"set_P","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setP","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$constructor1(3),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"accessibility":2,"name":"F","type":4,"returnType":System.Int32,"sname":"f","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$constructor1(7),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"accessibility":2,"name":"E","type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$constructor1(8),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"accessibility":2,"name":"add_E","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addE","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$constructor1(9),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"accessibility":2,"name":"remove_E","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeE","returnType":Object,"params":[Function]}}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C18, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$ctor1(1),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"accessibility":2,"name":".ctor","type":1,"sname":"ctor"},{"attr":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$ctor1(2),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"accessibility":2,"name":"M","type":8,"sname":"m","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$ctor1(4),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"accessibility":2,"name":"P","type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$ctor1(5),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"accessibility":2,"name":"get_P","type":8,"sname":"getP","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$ctor1(6),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"accessibility":2,"name":"set_P","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setP","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$ctor1(3),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"accessibility":2,"name":"F","type":4,"returnType":System.Int32,"sname":"f","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$ctor1(7),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"accessibility":2,"name":"E","type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$ctor1(8),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"accessibility":2,"name":"add_E","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addE","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$ctor1(9),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"accessibility":2,"name":"remove_E","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeE","returnType":Object,"params":[Function]}}]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C19, function () { return {"members":[{"accessibility":2,"name":".ctor","type":1,"params":[System.Int32,String],"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","parameterType":String,"position":1}],"def":function(a, b) { return {a: a, b: b};}}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C2, function () { return {"members":[{"accessibility":2,"name":"M1","type":8,"sname":"m1","returnType":Object},{"accessibility":2,"name":"M2","isStatic":true,"type":8,"sname":"m2","returnType":Object}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C2, function () { return {"members":[{"accessibility":2,"name":"M1","type":8,"sname":"M1","returnType":Object},{"accessibility":2,"name":"M2","isStatic":true,"type":8,"sname":"M2","returnType":Object}]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C20, function () { return {"members":[{"accessibility":2,"name":".ctor","type":1,"params":[System.Int32,String],"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","parameterType":String,"position":1}],"def":function (a, b) { return { a: a, b: b }; }}]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C21, function () { return {"members":[{"accessibility":2,"name":"M1","type":8,"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","parameterType":System.Int32,"position":1}],"tpcount":0,"def":function (a, b) { return this.X + a + b; },"returnType":System.Int32,"params":[System.Int32,System.Int32]},{"accessibility":2,"name":"M2","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","parameterType":System.Int32,"position":1}],"tpcount":0,"def":function (a, b) { return a + b; },"returnType":System.Int32,"params":[System.Int32,System.Int32]},{"accessibility":2,"name":"M3","type":8,"paramsInfo":[{"name":"s","parameterType":String,"position":0}],"tpcount":1,"def":function (T, s) { return this.X + Bridge.Reflection.getTypeFullName(T) + s; },"returnType":String,"params":[String]}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C22, function () { return {"members":[{"accessibility":2,"name":".ctor","type":1,"params":[System.Int32,Array],"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","isParams":true,"parameterType":Array,"position":1}],"sname":"$constructor"},{"accessibility":2,"name":".ctor","type":1,"params":[String,Array],"paramsInfo":[{"name":"a","parameterType":String,"position":0},{"name":"b","isParams":true,"parameterType":Array,"position":1}],"sname":"$constructor1","exp":true},{"accessibility":2,"name":"M1","type":8,"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","isParams":true,"parameterType":Array,"position":1}],"sname":"m1","returnType":Array,"params":[System.Int32,Array]},{"accessibility":2,"name":"M2","exp":true,"type":8,"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","isParams":true,"parameterType":Array,"position":1}],"sname":"m2","returnType":Array,"params":[System.Int32,Array]}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C23, function () { return {"members":[{"accessibility":2,"name":".ctor","type":1,"params":[System.Int32,Array],"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","isParams":true,"parameterType":Array,"position":1}],"sname":"$constructor"},{"accessibility":2,"name":".ctor","type":1,"params":[String,Array],"paramsInfo":[{"name":"a","parameterType":String,"position":0},{"name":"b","isParams":true,"parameterType":Array,"position":1}],"sname":"$constructor1","exp":true},{"accessibility":2,"name":"M1","type":8,"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","isParams":true,"parameterType":Array,"position":1}],"sname":"m1","returnType":Array,"params":[System.Int32,Array]},{"accessibility":2,"name":"M2","exp":true,"type":8,"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","isParams":true,"parameterType":Array,"position":1}],"sname":"m2","returnType":Array,"params":[System.Int32,Array]}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C22, function () { return {"members":[{"accessibility":2,"name":".ctor","type":1,"params":[System.Int32,Array],"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","isParams":true,"parameterType":Array,"position":1}],"sname":"ctor"},{"accessibility":2,"name":".ctor","type":1,"params":[String,Array],"paramsInfo":[{"name":"a","parameterType":String,"position":0},{"name":"b","isParams":true,"parameterType":Array,"position":1}],"sname":"$ctor1","exp":true},{"accessibility":2,"name":"M1","type":8,"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","isParams":true,"parameterType":Array,"position":1}],"sname":"M1","returnType":Array,"params":[System.Int32,Array]},{"accessibility":2,"name":"M2","exp":true,"type":8,"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","isParams":true,"parameterType":Array,"position":1}],"sname":"M2","returnType":Array,"params":[System.Int32,Array]}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C23, function () { return {"members":[{"accessibility":2,"name":".ctor","type":1,"params":[System.Int32,Array],"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","isParams":true,"parameterType":Array,"position":1}],"sname":"ctor"},{"accessibility":2,"name":".ctor","type":1,"params":[String,Array],"paramsInfo":[{"name":"a","parameterType":String,"position":0},{"name":"b","isParams":true,"parameterType":Array,"position":1}],"sname":"$ctor1","exp":true},{"accessibility":2,"name":"M1","type":8,"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","isParams":true,"parameterType":Array,"position":1}],"sname":"M1","returnType":Array,"params":[System.Int32,Array]},{"accessibility":2,"name":"M2","exp":true,"type":8,"paramsInfo":[{"name":"a","parameterType":System.Int32,"position":0},{"name":"b","isParams":true,"parameterType":Array,"position":1}],"sname":"M2","returnType":Array,"params":[System.Int32,Array]}]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C24, function () { return {"members":[{"accessibility":2,"name":"Item","type":16,"returnType":String,"params":[System.Int32,String],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"s","parameterType":String,"position":1}],"getter":{"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"s","parameterType":String,"position":1}],"tpcount":0,"def":function (x, s) { return this.v + ' ' + x + ' ' + s; },"returnType":String,"params":[System.Int32,String]},"setter":{"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"s","parameterType":String,"position":1},{"name":"value","parameterType":String,"position":2}],"tpcount":0,"def":function (x, s, value) { return (function(t, x, s) { t.x = x; t.s = s; t.v = value; })(this, x, s); },"returnType":Object,"params":[System.Int32,String,String]}}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C3, function () { return {"members":[{"accessibility":2,"name":"M1","type":8,"sname":"m1","returnType":System.Int32},{"accessibility":2,"name":"M2","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"m2","returnType":System.Int32,"params":[String]},{"accessibility":2,"name":"M3","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0},{"name":"y","parameterType":System.Int32,"position":1}],"sname":"m3","returnType":System.Int32,"params":[String,System.Int32]},{"accessibility":2,"name":"M4","type":8,"sname":"m4","returnType":Object}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C3, function () { return {"members":[{"accessibility":2,"name":"M1","type":8,"sname":"M1","returnType":System.Int32},{"accessibility":2,"name":"M2","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"M2","returnType":System.Int32,"params":[String]},{"accessibility":2,"name":"M3","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0},{"name":"y","parameterType":System.Int32,"position":1}],"sname":"M3","returnType":System.Int32,"params":[String,System.Int32]},{"accessibility":2,"name":"M4","type":8,"sname":"M4","returnType":Object}]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C4, function () { return {"members":[{"accessibility":2,"name":"M","type":8,"sname":"m","returnType":Object},{"accessibility":2,"name":"M","type":8,"paramsInfo":[{"name":"i","parameterType":System.Int32,"position":0}],"sname":"m$1","returnType":Object,"params":[System.Int32]},{"accessibility":2,"name":"M","type":8,"paramsInfo":[{"name":"i","parameterType":System.Int32,"position":0},{"name":"s","parameterType":String,"position":1}],"sname":"x","returnType":Object,"params":[System.Int32,String]}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C5$2, function (T1, T2) { return {"members":[{"accessibility":2,"name":"M","type":8,"paramsInfo":[{"name":"t2","parameterType":T2,"position":0},{"name":"s","parameterType":String,"position":1}],"sname":"m","returnType":T1,"params":[T2,String]},{"accessibility":2,"name":"M2","type":8,"sname":"m2","returnType":Object}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C6, function () { return {"members":[{"accessibility":2,"name":"M1","type":8,"paramsInfo":[{"name":"t2","parameterType":Object,"position":0},{"name":"s","parameterType":String,"position":1}],"tpcount":2,"sname":"m1","returnType":Object,"params":[Object,String]},{"accessibility":2,"name":"M2","type":8,"paramsInfo":[{"name":"s","parameterType":String,"position":0}],"tpcount":1,"sname":"m2","returnType":Object,"params":[String]},{"accessibility":2,"name":"M3","type":8,"paramsInfo":[{"name":"s","parameterType":String,"position":0}],"sname":"m3","returnType":Object,"params":[String]}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C7, function () { return {"members":[{"accessibility":2,"name":"M1","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"m1","returnType":System.Int32,"params":[System.Int32]},{"accessibility":2,"name":"M2","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"m2","returnType":Object,"params":[String]},{"accessibility":2,"name":"M3","type":8,"paramsInfo":[{"name":"s","parameterType":String,"position":0}],"tpcount":2,"sname":"m3","returnType":String,"params":[String]}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C8, function () { return {"members":[{"accessibility":2,"name":"M1","type":8,"paramsInfo":[{"name":"a","parameterType":String,"position":0},{"name":"b","parameterType":String,"position":1}],"sname":"m1","returnType":String,"params":[String,String]},{"accessibility":2,"name":"M2","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":String,"position":0},{"name":"b","parameterType":String,"position":1}],"sname":"m2","returnType":String,"params":[String,String]},{"accessibility":2,"name":"M3","type":8,"paramsInfo":[{"name":"a","parameterType":String,"position":0}],"tpcount":2,"sname":"m3","returnType":String,"params":[String]},{"accessibility":2,"name":"M4","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":String,"position":0}],"tpcount":2,"sname":"m4","returnType":String,"params":[String]}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C5$2, function (T1, T2) { return {"members":[{"accessibility":2,"name":"M","type":8,"paramsInfo":[{"name":"t2","parameterType":T2,"position":0},{"name":"s","parameterType":String,"position":1}],"sname":"m","returnType":T1,"params":[T2,String]},{"accessibility":2,"name":"M2","type":8,"sname":"M2","returnType":Object}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C6, function () { return {"members":[{"accessibility":2,"name":"M1","type":8,"paramsInfo":[{"name":"t2","parameterType":Object,"position":0},{"name":"s","parameterType":String,"position":1}],"tpcount":2,"sname":"M1","returnType":Object,"params":[Object,String]},{"accessibility":2,"name":"M2","type":8,"paramsInfo":[{"name":"s","parameterType":String,"position":0}],"tpcount":1,"sname":"M2","returnType":Object,"params":[String]},{"accessibility":2,"name":"M3","type":8,"paramsInfo":[{"name":"s","parameterType":String,"position":0}],"sname":"M3","returnType":Object,"params":[String]}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C7, function () { return {"members":[{"accessibility":2,"name":"M1","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"M1","returnType":System.Int32,"params":[System.Int32]},{"accessibility":2,"name":"M2","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"M2","returnType":Object,"params":[String]},{"accessibility":2,"name":"M3","type":8,"paramsInfo":[{"name":"s","parameterType":String,"position":0}],"tpcount":2,"sname":"M3","returnType":String,"params":[String]}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C8, function () { return {"members":[{"accessibility":2,"name":"M1","type":8,"paramsInfo":[{"name":"a","parameterType":String,"position":0},{"name":"b","parameterType":String,"position":1}],"sname":"M1","returnType":String,"params":[String,String]},{"accessibility":2,"name":"M2","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":String,"position":0},{"name":"b","parameterType":String,"position":1}],"sname":"M2","returnType":String,"params":[String,String]},{"accessibility":2,"name":"M3","type":8,"paramsInfo":[{"name":"a","parameterType":String,"position":0}],"tpcount":2,"sname":"M3","returnType":String,"params":[String]},{"accessibility":2,"name":"M4","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":String,"position":0}],"tpcount":2,"sname":"M4","returnType":String,"params":[String]}]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C9$2, function (T1, T2) { return {"members":[{"accessibility":2,"name":"M","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":String,"position":0}],"sname":"m","returnType":String,"params":[String]}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.S1, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$constructor()],"accessibility":2,"name":"M2","type":8,"sname":"m2","returnType":Object},{"accessibility":2,"name":"M3","type":8,"sname":"m3","returnType":Object}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.S1, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.ctor()],"accessibility":2,"name":"M2","type":8,"sname":"M2","returnType":Object},{"accessibility":2,"name":"M3","type":8,"sname":"M3","returnType":Object}]}; });
     Bridge.setMetadata(Bridge.ClientTest.SimpleTypes.EnumTests, function () { return {"members":[{"attr":[Bridge.merge(new Bridge.Test.IgnoreTest(), {
         setUntil: null
     } )],"accessibility":2,"name":"CreatingInstanceOfEnumTypeReturnsZero","type":8,"sname":"creatingInstanceOfEnumTypeReturnsZero","returnType":Object},{"attr":[Bridge.merge(new Bridge.Test.IgnoreTest(), {
@@ -39128,21 +39306,20 @@
     Bridge.setMetadata(Bridge.ClientTest.Reflection.AttributeTests.C3, function () { return {"attr":[new Bridge.ClientTest.Reflection.AttributeTests.A3Attribute(3)]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.AttributeTests.C5, function () { return {"attr":[new Bridge.ClientTest.Reflection.AttributeTests.A1Attribute(5)]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.AttributeTests.C6, function () { return {"attr":[new Bridge.ClientTest.Reflection.AttributeTests.A2Attribute(6)]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.GetMembersTests.C1, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(201)],"accessibility":2,"name":".ctor","type":1,"sname":"$constructor"},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(202)],"accessibility":2,"name":".ctor","type":1,"params":[System.Int32],"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"$constructor1"},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(203)],"accessibility":2,"name":".ctor","type":1,"params":[System.Int32,String],"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"$constructor2"},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(211)],"accessibility":2,"name":"MC","type":8,"sname":"mC","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(212)],"accessibility":2,"name":"MC","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"mC$1","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(213)],"accessibility":2,"name":"MC","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"mC$2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(214)],"accessibility":2,"name":"MC2","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"mC2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(221)],"accessibility":2,"name":"MCS","isStatic":true,"type":8,"sname":"mCS","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(222)],"accessibility":2,"name":"MCS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"mCS$1","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(223)],"accessibility":2,"name":"MCS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"mCS$2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(224)],"accessibility":2,"name":"MCS2","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"mCS2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(257)],"accessibility":2,"name":"Item","type":16,"returnType":System.Int32,"params":[String],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":String,"position":0}],"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(258)],"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"getItem$1","returnType":System.Int32,"params":[String]},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(259)],"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0},{"name":"value","parameterType":System.Int32,"position":1}],"sname":"setItem$1","returnType":Object,"params":[String,System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(251)],"accessibility":2,"name":"PC1","type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(252)],"accessibility":2,"name":"get_PC1","type":8,"sname":"getPC1","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(253)],"accessibility":2,"name":"set_PC1","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPC1","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(254)],"accessibility":2,"name":"PC2","type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(255)],"accessibility":2,"name":"get_PC2","type":8,"sname":"getPC2","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(256)],"accessibility":2,"name":"set_PC2","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPC2","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(261)],"accessibility":2,"name":"PCS1","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(262)],"accessibility":2,"name":"get_PCS1","isStatic":true,"type":8,"sname":"getPCS1","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(263)],"accessibility":2,"name":"set_PCS1","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPCS1","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(264)],"accessibility":2,"name":"PCS2","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(265)],"accessibility":2,"name":"get_PCS2","isStatic":true,"type":8,"sname":"getPCS2","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(266)],"accessibility":2,"name":"set_PCS2","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPCS2","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(231)],"accessibility":2,"name":"FC1","type":4,"returnType":System.Int32,"sname":"fC1","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(232)],"accessibility":2,"name":"FC2","type":4,"returnType":System.Int32,"sname":"fC2","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(241)],"accessibility":2,"name":"FCS1","isStatic":true,"type":4,"returnType":System.Int32,"sname":"fCS1","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(242)],"accessibility":2,"name":"FCS2","isStatic":true,"type":4,"returnType":System.Int32,"sname":"fCS2","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(271)],"accessibility":2,"name":"EC1","type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(272)],"accessibility":2,"name":"add_EC1","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEC1","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(273)],"accessibility":2,"name":"remove_EC1","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEC1","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(274)],"accessibility":2,"name":"EC2","type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(275)],"accessibility":2,"name":"add_EC2","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEC2","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(276)],"accessibility":2,"name":"remove_EC2","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEC2","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(281)],"accessibility":2,"name":"ECS1","isStatic":true,"type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(282)],"accessibility":2,"name":"add_ECS1","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addECS1","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(283)],"accessibility":2,"name":"remove_ECS1","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeECS1","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(284)],"accessibility":2,"name":"ECS2","isStatic":true,"type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(285)],"accessibility":2,"name":"add_ECS2","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addECS2","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(286)],"accessibility":2,"name":"remove_ECS2","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeECS2","returnType":Object,"params":[Function]}}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.GetMembersTests.C2, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(211)],"accessibility":2,"name":"M","type":8,"sname":"m$1","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(213)],"accessibility":2,"name":"M2","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"m2$2","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(214)],"accessibility":2,"name":"M2","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"m2$3","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(215)],"accessibility":2,"name":"M2C","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"m2C","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(216)],"accessibility":2,"name":"M2C","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"m2C$1","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(225)],"accessibility":2,"name":"M2CS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"m2CS","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(226)],"accessibility":2,"name":"M2CS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"m2CS$1","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(223)],"accessibility":2,"name":"M2S","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"m2S","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(224)],"accessibility":2,"name":"M2S","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"m2S$1","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(217)],"accessibility":2,"name":"M3","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"m3$1","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(227)],"accessibility":2,"name":"M3S","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"m3S","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(212)],"accessibility":2,"name":"MC","type":8,"sname":"mC","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(222)],"accessibility":2,"name":"MCS","isStatic":true,"type":8,"sname":"mCS","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(221)],"accessibility":2,"name":"MS","isStatic":true,"type":8,"sname":"mS","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(253)],"accessibility":2,"name":"Item","type":16,"returnType":System.Int32,"params":[System.Int32],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"getter":{"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"getItem$2","returnType":System.Int32,"params":[System.Int32]},"setter":{"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"value","parameterType":System.Int32,"position":1}],"sname":"setItem$2","returnType":Object,"params":[System.Int32,System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(254)],"accessibility":2,"name":"Item","type":16,"returnType":System.Int32,"params":[System.Double],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":System.Double,"position":0}],"getter":{"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Double,"position":0}],"sname":"getItem$3","returnType":System.Int32,"params":[System.Double]},"setter":{"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Double,"position":0},{"name":"value","parameterType":System.Int32,"position":1}],"sname":"setItem$3","returnType":Object,"params":[System.Double,System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(251)],"accessibility":2,"name":"P","type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_P","type":8,"sname":"getP$1","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_P","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setP$1","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(252)],"accessibility":2,"name":"PC","type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_PC","type":8,"sname":"getPC","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_PC","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPC","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(262)],"accessibility":2,"name":"PCS","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_PCS","isStatic":true,"type":8,"sname":"getPCS","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_PCS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPCS","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(261)],"accessibility":2,"name":"PS","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_PS","isStatic":true,"type":8,"sname":"getPS","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_PS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPS","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(231)],"accessibility":2,"name":"F","type":4,"returnType":System.Int32,"sname":"f$1","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(232)],"accessibility":2,"name":"FC","type":4,"returnType":System.Int32,"sname":"fC","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(242)],"accessibility":2,"name":"FCS","isStatic":true,"type":4,"returnType":System.Int32,"sname":"fCS","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(241)],"accessibility":2,"name":"FS","isStatic":true,"type":4,"returnType":System.Int32,"sname":"fS","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(271)],"accessibility":2,"name":"E","type":2,"adder":{"accessibility":2,"name":"add_E","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addE$1","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_E","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeE$1","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(272)],"accessibility":2,"name":"EC","type":2,"adder":{"accessibility":2,"name":"add_EC","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEC","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_EC","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEC","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(282)],"accessibility":2,"name":"ECS","isStatic":true,"type":2,"adder":{"accessibility":2,"name":"add_ECS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addECS","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_ECS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeECS","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(281)],"accessibility":2,"name":"ES","isStatic":true,"type":2,"adder":{"accessibility":2,"name":"add_ES","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addES","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_ES","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeES","returnType":Object,"params":[Function]}}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.GetMembersTests.I2, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(511)],"isAbstract":true,"accessibility":2,"name":"MI2","type":8,"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$mI2","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(512)],"isAbstract":true,"accessibility":2,"name":"MI2","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$mI2$1","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(513)],"isAbstract":true,"accessibility":2,"name":"MI2","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$mI2$2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(514)],"isAbstract":true,"accessibility":2,"name":"MI22","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$mI22","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(557)],"isAbstract":true,"accessibility":2,"name":"Item","type":16,"returnType":System.Int32,"params":[String],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":String,"position":0}],"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(558)],"isAbstract":true,"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$get_item2","returnType":System.Int32,"params":[String]},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(559)],"isAbstract":true,"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0},{"name":"value","parameterType":System.Int32,"position":1}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$set_item2","returnType":Object,"params":[String,System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(551)],"isAbstract":true,"accessibility":2,"name":"PI21","type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(552)],"isAbstract":true,"accessibility":2,"name":"get_PI21","type":8,"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$getPI21","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(553)],"isAbstract":true,"accessibility":2,"name":"set_PI21","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$setPI21","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(554)],"isAbstract":true,"accessibility":2,"name":"PI22","type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(555)],"isAbstract":true,"accessibility":2,"name":"get_PI22","type":8,"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$getPI22","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(556)],"isAbstract":true,"accessibility":2,"name":"set_PI22","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$setPI22","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(571)],"isAbstract":true,"accessibility":2,"name":"EI21","type":2,"adder":{"isAbstract":true,"accessibility":2,"name":"add_EI21","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$addEI21","returnType":Object,"params":[Function]},"remover":{"isAbstract":true,"accessibility":2,"name":"remove_EI21","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$removeEI21","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(574)],"isAbstract":true,"accessibility":2,"name":"EI22","type":2,"adder":{"isAbstract":true,"accessibility":2,"name":"add_EI22","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$addEI22","returnType":Object,"params":[Function]},"remover":{"isAbstract":true,"accessibility":2,"name":"remove_EI22","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$removeEI22","returnType":Object,"params":[Function]}}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.GetMembersTests.C1, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(201)],"accessibility":2,"name":".ctor","type":1,"sname":"ctor"},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(202)],"accessibility":2,"name":".ctor","type":1,"params":[System.Int32],"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"$ctor1"},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(203)],"accessibility":2,"name":".ctor","type":1,"params":[System.Int32,String],"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"$ctor2"},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(211)],"accessibility":2,"name":"MC","type":8,"sname":"MC","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(212)],"accessibility":2,"name":"MC","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"MC$1","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(213)],"accessibility":2,"name":"MC","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"MC$2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(214)],"accessibility":2,"name":"MC2","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"MC2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(221)],"accessibility":2,"name":"MCS","isStatic":true,"type":8,"sname":"MCS","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(222)],"accessibility":2,"name":"MCS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"MCS$1","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(223)],"accessibility":2,"name":"MCS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"MCS$2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(224)],"accessibility":2,"name":"MCS2","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"MCS2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(257)],"accessibility":2,"name":"Item","type":16,"returnType":System.Int32,"params":[String],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":String,"position":0}],"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(258)],"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"getItem$1","returnType":System.Int32,"params":[String]},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(259)],"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0},{"name":"value","parameterType":System.Int32,"position":1}],"sname":"setItem$1","returnType":Object,"params":[String,System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(251)],"accessibility":2,"name":"PC1","type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(252)],"accessibility":2,"name":"get_PC1","type":8,"sname":"getPC1","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(253)],"accessibility":2,"name":"set_PC1","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPC1","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(254)],"accessibility":2,"name":"PC2","type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(255)],"accessibility":2,"name":"get_PC2","type":8,"sname":"getPC2","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(256)],"accessibility":2,"name":"set_PC2","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPC2","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(261)],"accessibility":2,"name":"PCS1","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(262)],"accessibility":2,"name":"get_PCS1","isStatic":true,"type":8,"sname":"getPCS1","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(263)],"accessibility":2,"name":"set_PCS1","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPCS1","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(264)],"accessibility":2,"name":"PCS2","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(265)],"accessibility":2,"name":"get_PCS2","isStatic":true,"type":8,"sname":"getPCS2","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(266)],"accessibility":2,"name":"set_PCS2","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPCS2","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(231)],"accessibility":2,"name":"FC1","type":4,"returnType":System.Int32,"sname":"FC1","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(232)],"accessibility":2,"name":"FC2","type":4,"returnType":System.Int32,"sname":"FC2","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(241)],"accessibility":2,"name":"FCS1","isStatic":true,"type":4,"returnType":System.Int32,"sname":"FCS1","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(242)],"accessibility":2,"name":"FCS2","isStatic":true,"type":4,"returnType":System.Int32,"sname":"FCS2","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(271)],"accessibility":2,"name":"EC1","type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(272)],"accessibility":2,"name":"add_EC1","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEC1","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(273)],"accessibility":2,"name":"remove_EC1","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEC1","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(274)],"accessibility":2,"name":"EC2","type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(275)],"accessibility":2,"name":"add_EC2","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEC2","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(276)],"accessibility":2,"name":"remove_EC2","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEC2","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(281)],"accessibility":2,"name":"ECS1","isStatic":true,"type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(282)],"accessibility":2,"name":"add_ECS1","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addECS1","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(283)],"accessibility":2,"name":"remove_ECS1","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeECS1","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(284)],"accessibility":2,"name":"ECS2","isStatic":true,"type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(285)],"accessibility":2,"name":"add_ECS2","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addECS2","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(286)],"accessibility":2,"name":"remove_ECS2","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeECS2","returnType":Object,"params":[Function]}}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.GetMembersTests.C2, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(211)],"accessibility":2,"name":"M","type":8,"sname":"m$1","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(213)],"accessibility":2,"name":"M2","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"M2$2","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(214)],"accessibility":2,"name":"M2","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"M2$3","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(215)],"accessibility":2,"name":"M2C","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"M2C","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(216)],"accessibility":2,"name":"M2C","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"M2C$1","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(225)],"accessibility":2,"name":"M2CS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"M2CS","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(226)],"accessibility":2,"name":"M2CS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"M2CS$1","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(223)],"accessibility":2,"name":"M2S","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"M2S","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(224)],"accessibility":2,"name":"M2S","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"M2S$1","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(217)],"accessibility":2,"name":"M3","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"M3$1","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(227)],"accessibility":2,"name":"M3S","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"M3S","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(212)],"accessibility":2,"name":"MC","type":8,"sname":"MC","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(222)],"accessibility":2,"name":"MCS","isStatic":true,"type":8,"sname":"MCS","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(221)],"accessibility":2,"name":"MS","isStatic":true,"type":8,"sname":"MS","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(253)],"accessibility":2,"name":"Item","type":16,"returnType":System.Int32,"params":[System.Int32],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"getter":{"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"getItem$2","returnType":System.Int32,"params":[System.Int32]},"setter":{"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"value","parameterType":System.Int32,"position":1}],"sname":"setItem$2","returnType":Object,"params":[System.Int32,System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(254)],"accessibility":2,"name":"Item","type":16,"returnType":System.Int32,"params":[System.Double],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":System.Double,"position":0}],"getter":{"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Double,"position":0}],"sname":"getItem$3","returnType":System.Int32,"params":[System.Double]},"setter":{"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Double,"position":0},{"name":"value","parameterType":System.Int32,"position":1}],"sname":"setItem$3","returnType":Object,"params":[System.Double,System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(251)],"accessibility":2,"name":"P","type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_P","type":8,"sname":"getP$1","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_P","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setP$1","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(252)],"accessibility":2,"name":"PC","type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_PC","type":8,"sname":"getPC","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_PC","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPC","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(262)],"accessibility":2,"name":"PCS","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_PCS","isStatic":true,"type":8,"sname":"getPCS","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_PCS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPCS","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(261)],"accessibility":2,"name":"PS","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_PS","isStatic":true,"type":8,"sname":"getPS","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_PS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPS","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(231)],"accessibility":2,"name":"F","type":4,"returnType":System.Int32,"sname":"f$1","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(232)],"accessibility":2,"name":"FC","type":4,"returnType":System.Int32,"sname":"FC","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(242)],"accessibility":2,"name":"FCS","isStatic":true,"type":4,"returnType":System.Int32,"sname":"FCS","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(241)],"accessibility":2,"name":"FS","isStatic":true,"type":4,"returnType":System.Int32,"sname":"FS","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(271)],"accessibility":2,"name":"E","type":2,"adder":{"accessibility":2,"name":"add_E","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addE$1","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_E","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeE$1","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(272)],"accessibility":2,"name":"EC","type":2,"adder":{"accessibility":2,"name":"add_EC","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEC","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_EC","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEC","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(282)],"accessibility":2,"name":"ECS","isStatic":true,"type":2,"adder":{"accessibility":2,"name":"add_ECS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addECS","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_ECS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeECS","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(281)],"accessibility":2,"name":"ES","isStatic":true,"type":2,"adder":{"accessibility":2,"name":"add_ES","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addES","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_ES","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeES","returnType":Object,"params":[Function]}}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.GetMembersTests.I2, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(511)],"isAbstract":true,"accessibility":2,"name":"MI2","type":8,"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$MI2","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(512)],"isAbstract":true,"accessibility":2,"name":"MI2","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$MI2$1","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(513)],"isAbstract":true,"accessibility":2,"name":"MI2","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$MI2$2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(514)],"isAbstract":true,"accessibility":2,"name":"MI22","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$MI22","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(557)],"isAbstract":true,"accessibility":2,"name":"Item","type":16,"returnType":System.Int32,"params":[String],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":String,"position":0}],"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(558)],"isAbstract":true,"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$get_item2","returnType":System.Int32,"params":[String]},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(559)],"isAbstract":true,"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0},{"name":"value","parameterType":System.Int32,"position":1}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$set_item2","returnType":Object,"params":[String,System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(551)],"isAbstract":true,"accessibility":2,"name":"PI21","type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(552)],"isAbstract":true,"accessibility":2,"name":"get_PI21","type":8,"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$getPI21","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(553)],"isAbstract":true,"accessibility":2,"name":"set_PI21","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$setPI21","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(554)],"isAbstract":true,"accessibility":2,"name":"PI22","type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(555)],"isAbstract":true,"accessibility":2,"name":"get_PI22","type":8,"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$getPI22","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(556)],"isAbstract":true,"accessibility":2,"name":"set_PI22","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$setPI22","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(571)],"isAbstract":true,"accessibility":2,"name":"EI21","type":2,"adder":{"isAbstract":true,"accessibility":2,"name":"add_EI21","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$addEI21","returnType":Object,"params":[Function]},"remover":{"isAbstract":true,"accessibility":2,"name":"remove_EI21","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$removeEI21","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(574)],"isAbstract":true,"accessibility":2,"name":"EI22","type":2,"adder":{"isAbstract":true,"accessibility":2,"name":"add_EI22","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$addEI22","returnType":Object,"params":[Function]},"remover":{"isAbstract":true,"accessibility":2,"name":"remove_EI22","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"Bridge$ClientTest$Reflection$GetMembersTests$I2$removeEI22","returnType":Object,"params":[Function]}}]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.AttributeTests.C4, function () { return {"attr":[new Bridge.ClientTest.Reflection.AttributeTests.A4Attribute(4)]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.GetMembersTests.D1, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(301)],"accessibility":2,"name":".ctor","type":1,"sname":"$constructor"},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(302)],"accessibility":2,"name":".ctor","type":1,"params":[System.Int32],"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"$constructor1"},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(303)],"accessibility":2,"name":".ctor","type":1,"params":[System.Int32,String],"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"$constructor2"},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(311)],"accessibility":2,"name":"MD","type":8,"sname":"mD","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(312)],"accessibility":2,"name":"MD","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"mD$1","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(313)],"accessibility":2,"name":"MD","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"mD$2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(314)],"accessibility":2,"name":"MD2","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"mD2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(321)],"accessibility":2,"name":"MDS","isStatic":true,"type":8,"sname":"mDS","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(322)],"accessibility":2,"name":"MDS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"mDS$1","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(323)],"accessibility":2,"name":"MDS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"mDS$2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(324)],"accessibility":2,"name":"MDS2","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"mDS2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(357)],"accessibility":2,"name":"Item","type":16,"returnType":System.Int32,"params":[System.Double],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":System.Double,"position":0}],"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(358)],"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Double,"position":0}],"sname":"getItem$2","returnType":System.Int32,"params":[System.Double]},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(359)],"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Double,"position":0},{"name":"value","parameterType":System.Int32,"position":1}],"sname":"setItem$2","returnType":Object,"params":[System.Double,System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(351)],"accessibility":2,"name":"PD1","type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(352)],"accessibility":2,"name":"get_PD1","type":8,"sname":"getPD1","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(353)],"accessibility":2,"name":"set_PD1","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPD1","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(354)],"accessibility":2,"name":"PD2","type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(355)],"accessibility":2,"name":"get_PD2","type":8,"sname":"getPD2","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(356)],"accessibility":2,"name":"set_PD2","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPD2","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(361)],"accessibility":2,"name":"PDS1","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(362)],"accessibility":2,"name":"get_PDS1","isStatic":true,"type":8,"sname":"getPDS1","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(363)],"accessibility":2,"name":"set_PDS1","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPDS1","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(364)],"accessibility":2,"name":"PDS2","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(365)],"accessibility":2,"name":"get_PDS2","isStatic":true,"type":8,"sname":"getPDS2","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(366)],"accessibility":2,"name":"set_PDS2","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPDS2","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(331)],"accessibility":2,"name":"FD1","type":4,"returnType":System.Int32,"sname":"fD1","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(332)],"accessibility":2,"name":"FD2","type":4,"returnType":System.Int32,"sname":"fD2","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(341)],"accessibility":2,"name":"FDS1","isStatic":true,"type":4,"returnType":System.Int32,"sname":"fDS1","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(342)],"accessibility":2,"name":"FDS2","isStatic":true,"type":4,"returnType":System.Int32,"sname":"fDS2","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(371)],"accessibility":2,"name":"ED1","type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(372)],"accessibility":2,"name":"add_ED1","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addED1","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(373)],"accessibility":2,"name":"remove_ED1","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeED1","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(374)],"accessibility":2,"name":"ED2","type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(375)],"accessibility":2,"name":"add_ED2","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addED2","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(376)],"accessibility":2,"name":"remove_ED2","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeED2","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(381)],"accessibility":2,"name":"EDS1","isStatic":true,"type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(382)],"accessibility":2,"name":"add_EDS1","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEDS1","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(383)],"accessibility":2,"name":"remove_EDS1","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEDS1","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(384)],"accessibility":2,"name":"EDS2","isStatic":true,"type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(385)],"accessibility":2,"name":"add_EDS2","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEDS2","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(386)],"accessibility":2,"name":"remove_EDS2","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEDS2","returnType":Object,"params":[Function]}}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.GetMembersTests.D2, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(311)],"accessibility":2,"name":"M","type":8,"sname":"m$2","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(313)],"accessibility":2,"name":"M2","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"m2$4","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(314)],"accessibility":2,"name":"M2","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"m2$5","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(315)],"accessibility":2,"name":"M2D","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"m2D","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(316)],"accessibility":2,"name":"M2D","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"m2D$1","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(325)],"accessibility":2,"name":"M2DS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"m2DS","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(326)],"accessibility":2,"name":"M2DS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"m2DS$1","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(323)],"accessibility":2,"name":"M2S","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"m2S","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(324)],"accessibility":2,"name":"M2S","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"m2S$1","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(317)],"accessibility":2,"name":"M3","type":8,"paramsInfo":[{"name":"x","parameterType":Date,"position":0}],"sname":"m3$2","returnType":Object,"params":[Date]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(327)],"accessibility":2,"name":"M3S","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":Date,"position":0}],"sname":"m3S","returnType":Object,"params":[Date]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(312)],"accessibility":2,"name":"MD","type":8,"sname":"mD","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(322)],"accessibility":2,"name":"MDS","isStatic":true,"type":8,"sname":"mDS","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(321)],"accessibility":2,"name":"MS","isStatic":true,"type":8,"sname":"mS","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(353)],"accessibility":2,"name":"Item","type":16,"returnType":System.Int32,"params":[System.Int32],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"getter":{"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"getItem$4","returnType":System.Int32,"params":[System.Int32]},"setter":{"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"value","parameterType":System.Int32,"position":1}],"sname":"setItem$4","returnType":Object,"params":[System.Int32,System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(354)],"accessibility":2,"name":"Item","type":16,"returnType":System.Int32,"params":[Date],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":Date,"position":0}],"getter":{"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":Date,"position":0}],"sname":"getItem$5","returnType":System.Int32,"params":[Date]},"setter":{"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":Date,"position":0},{"name":"value","parameterType":System.Int32,"position":1}],"sname":"setItem$5","returnType":Object,"params":[Date,System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(351)],"accessibility":2,"name":"P","type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_P","type":8,"sname":"getP$2","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_P","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setP$2","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(352)],"accessibility":2,"name":"PD","type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_PD","type":8,"sname":"getPD","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_PD","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPD","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(362)],"accessibility":2,"name":"PDS","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_PDS","isStatic":true,"type":8,"sname":"getPDS","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_PDS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPDS","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(361)],"accessibility":2,"name":"PS","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_PS","isStatic":true,"type":8,"sname":"getPS","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_PS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPS","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(331)],"accessibility":2,"name":"F","type":4,"returnType":System.Int32,"sname":"f$2","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(332)],"accessibility":2,"name":"FD","type":4,"returnType":System.Int32,"sname":"fD","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(342)],"accessibility":2,"name":"FDS","isStatic":true,"type":4,"returnType":System.Int32,"sname":"fDS","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(341)],"accessibility":2,"name":"FS","isStatic":true,"type":4,"returnType":System.Int32,"sname":"fS","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(371)],"accessibility":2,"name":"E","type":2,"adder":{"accessibility":2,"name":"add_E","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addE$2","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_E","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeE$2","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(372)],"accessibility":2,"name":"ED","type":2,"adder":{"accessibility":2,"name":"add_ED","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addED","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_ED","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeED","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(382)],"accessibility":2,"name":"EDS","isStatic":true,"type":2,"adder":{"accessibility":2,"name":"add_EDS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEDS","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_EDS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEDS","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(381)],"accessibility":2,"name":"ES","isStatic":true,"type":2,"adder":{"accessibility":2,"name":"add_ES","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addES","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_ES","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeES","returnType":Object,"params":[Function]}}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C25, function () { return {"members":[{"accessibility":2,"name":"B1","type":4,"returnType":System.Int32,"sname":"b1","isReadOnly":false},{"accessibility":4,"name":"B2","type":4,"returnType":System.Int32,"sname":"b2","isReadOnly":false},{"accessibility":3,"name":"B3","type":4,"returnType":System.Int32,"sname":"b3","isReadOnly":false},{"accessibility":5,"name":"B4","type":4,"returnType":System.Int32,"sname":"b4","isReadOnly":false},{"accessibility":1,"name":"B5","type":4,"returnType":System.Int32,"sname":"b5","isReadOnly":false},{"accessibility":2,"name":"C1","type":4,"returnType":System.Int32,"sname":"c1","isReadOnly":false},{"accessibility":4,"name":"C2","type":4,"returnType":System.Int32,"sname":"c2","isReadOnly":false},{"accessibility":3,"name":"C3","type":4,"returnType":System.Int32,"sname":"c3","isReadOnly":false},{"accessibility":5,"name":"C4","type":4,"returnType":System.Int32,"sname":"c4","isReadOnly":false},{"accessibility":1,"name":"C5","type":4,"returnType":System.Int32,"sname":"c5","isReadOnly":false}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C26, function () { return {"members":[{"accessibility":2,"isSynthetic":true,"name":".ctor","type":1,"sname":"$constructor"},{"accessibility":2,"name":"A1","type":4,"returnType":System.Int32,"sname":"a1","isReadOnly":false},{"accessibility":3,"name":"A3","type":4,"returnType":System.Int32,"sname":"a3","isReadOnly":false},{"accessibility":5,"name":"A4","type":4,"returnType":System.Int32,"sname":"a4","isReadOnly":false},{"accessibility":2,"name":"B1","type":4,"returnType":System.Int32,"sname":"b1","isReadOnly":false},{"accessibility":4,"name":"B2","type":4,"returnType":System.Int32,"sname":"b2","isReadOnly":false},{"accessibility":3,"name":"B3","type":4,"returnType":System.Int32,"sname":"b3","isReadOnly":false},{"accessibility":5,"name":"B4","type":4,"returnType":System.Int32,"sname":"b4","isReadOnly":false},{"accessibility":1,"name":"B5","type":4,"returnType":System.Int32,"sname":"b5","isReadOnly":false},{"accessibility":2,"name":"C1","type":4,"returnType":System.Int32,"sname":"c1","isReadOnly":false},{"accessibility":4,"name":"C2","type":4,"returnType":System.Int32,"sname":"c2","isReadOnly":false},{"accessibility":3,"name":"C3","type":4,"returnType":System.Int32,"sname":"c3","isReadOnly":false},{"accessibility":5,"name":"C4","type":4,"returnType":System.Int32,"sname":"c4","isReadOnly":false},{"accessibility":1,"name":"C5","type":4,"returnType":System.Int32,"sname":"c5","isReadOnly":false}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C27, function () { return {"members":[{"accessibility":2,"isSynthetic":true,"name":".ctor","type":1,"sname":"$constructor"},{"accessibility":2,"name":"A1","type":4,"returnType":System.Int32,"sname":"a1","isReadOnly":false},{"accessibility":4,"name":"A2","type":4,"returnType":System.Int32,"sname":"a2","isReadOnly":false},{"accessibility":3,"name":"A3","type":4,"returnType":System.Int32,"sname":"a3","isReadOnly":false},{"accessibility":5,"name":"A4","type":4,"returnType":System.Int32,"sname":"a4","isReadOnly":false},{"accessibility":2,"name":"B1","type":4,"returnType":System.Int32,"sname":"b1","isReadOnly":false},{"accessibility":4,"name":"B2","type":4,"returnType":System.Int32,"sname":"b2","isReadOnly":false},{"accessibility":3,"name":"B3","type":4,"returnType":System.Int32,"sname":"b3","isReadOnly":false},{"accessibility":5,"name":"B4","type":4,"returnType":System.Int32,"sname":"b4","isReadOnly":false},{"accessibility":1,"name":"B5","type":4,"returnType":System.Int32,"sname":"b5","isReadOnly":false},{"accessibility":2,"name":"C1","type":4,"returnType":System.Int32,"sname":"c1","isReadOnly":false},{"accessibility":4,"name":"C2","type":4,"returnType":System.Int32,"sname":"c2","isReadOnly":false},{"accessibility":3,"name":"C3","type":4,"returnType":System.Int32,"sname":"c3","isReadOnly":false},{"accessibility":5,"name":"C4","type":4,"returnType":System.Int32,"sname":"c4","isReadOnly":false},{"accessibility":1,"name":"C5","type":4,"returnType":System.Int32,"sname":"c5","isReadOnly":false}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C28, function () { return {"members":[{"accessibility":2,"isSynthetic":true,"name":".ctor","type":1,"sname":"$constructor"},{"accessibility":2,"name":"A1","type":4,"returnType":System.Int32,"sname":"a1","isReadOnly":false},{"accessibility":4,"name":"A2","type":4,"returnType":System.Int32,"sname":"a2","isReadOnly":false},{"accessibility":3,"name":"A3","type":4,"returnType":System.Int32,"sname":"a3","isReadOnly":false},{"accessibility":5,"name":"A4","type":4,"returnType":System.Int32,"sname":"a4","isReadOnly":false},{"accessibility":1,"name":"A5","type":4,"returnType":System.Int32,"sname":"a5","isReadOnly":false},{"accessibility":2,"name":"B1","type":4,"returnType":System.Int32,"sname":"b1","isReadOnly":false},{"accessibility":4,"name":"B2","type":4,"returnType":System.Int32,"sname":"b2","isReadOnly":false},{"accessibility":3,"name":"B3","type":4,"returnType":System.Int32,"sname":"b3","isReadOnly":false},{"accessibility":5,"name":"B4","type":4,"returnType":System.Int32,"sname":"b4","isReadOnly":false},{"accessibility":1,"name":"B5","type":4,"returnType":System.Int32,"sname":"b5","isReadOnly":false},{"accessibility":2,"name":"C1","type":4,"returnType":System.Int32,"sname":"c1","isReadOnly":false},{"accessibility":4,"name":"C2","type":4,"returnType":System.Int32,"sname":"c2","isReadOnly":false},{"accessibility":3,"name":"C3","type":4,"returnType":System.Int32,"sname":"c3","isReadOnly":false},{"accessibility":5,"name":"C4","type":4,"returnType":System.Int32,"sname":"c4","isReadOnly":false},{"accessibility":1,"name":"C5","type":4,"returnType":System.Int32,"sname":"c5","isReadOnly":false}]}; });
-    $asm.attr= [Bridge.merge(new Bridge.ClientTest.Batch1.Reflection.AssemblyTests.A2Attribute.$constructor1(64), {
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.GetMembersTests.D1, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(301)],"accessibility":2,"name":".ctor","type":1,"sname":"ctor"},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(302)],"accessibility":2,"name":".ctor","type":1,"params":[System.Int32],"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"$ctor1"},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(303)],"accessibility":2,"name":".ctor","type":1,"params":[System.Int32,String],"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"$ctor2"},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(311)],"accessibility":2,"name":"MD","type":8,"sname":"MD","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(312)],"accessibility":2,"name":"MD","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"MD$1","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(313)],"accessibility":2,"name":"MD","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"MD$2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(314)],"accessibility":2,"name":"MD2","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"MD2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(321)],"accessibility":2,"name":"MDS","isStatic":true,"type":8,"sname":"MDS","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(322)],"accessibility":2,"name":"MDS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"MDS$1","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(323)],"accessibility":2,"name":"MDS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"MDS$2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(324)],"accessibility":2,"name":"MDS2","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"y","parameterType":String,"position":1}],"sname":"MDS2","returnType":Object,"params":[System.Int32,String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(357)],"accessibility":2,"name":"Item","type":16,"returnType":System.Int32,"params":[System.Double],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":System.Double,"position":0}],"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(358)],"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Double,"position":0}],"sname":"getItem$2","returnType":System.Int32,"params":[System.Double]},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(359)],"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Double,"position":0},{"name":"value","parameterType":System.Int32,"position":1}],"sname":"setItem$2","returnType":Object,"params":[System.Double,System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(351)],"accessibility":2,"name":"PD1","type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(352)],"accessibility":2,"name":"get_PD1","type":8,"sname":"getPD1","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(353)],"accessibility":2,"name":"set_PD1","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPD1","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(354)],"accessibility":2,"name":"PD2","type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(355)],"accessibility":2,"name":"get_PD2","type":8,"sname":"getPD2","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(356)],"accessibility":2,"name":"set_PD2","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPD2","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(361)],"accessibility":2,"name":"PDS1","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(362)],"accessibility":2,"name":"get_PDS1","isStatic":true,"type":8,"sname":"getPDS1","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(363)],"accessibility":2,"name":"set_PDS1","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPDS1","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(364)],"accessibility":2,"name":"PDS2","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(365)],"accessibility":2,"name":"get_PDS2","isStatic":true,"type":8,"sname":"getPDS2","returnType":System.Int32},"setter":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(366)],"accessibility":2,"name":"set_PDS2","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPDS2","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(331)],"accessibility":2,"name":"FD1","type":4,"returnType":System.Int32,"sname":"FD1","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(332)],"accessibility":2,"name":"FD2","type":4,"returnType":System.Int32,"sname":"FD2","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(341)],"accessibility":2,"name":"FDS1","isStatic":true,"type":4,"returnType":System.Int32,"sname":"FDS1","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(342)],"accessibility":2,"name":"FDS2","isStatic":true,"type":4,"returnType":System.Int32,"sname":"FDS2","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(371)],"accessibility":2,"name":"ED1","type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(372)],"accessibility":2,"name":"add_ED1","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addED1","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(373)],"accessibility":2,"name":"remove_ED1","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeED1","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(374)],"accessibility":2,"name":"ED2","type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(375)],"accessibility":2,"name":"add_ED2","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addED2","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(376)],"accessibility":2,"name":"remove_ED2","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeED2","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(381)],"accessibility":2,"name":"EDS1","isStatic":true,"type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(382)],"accessibility":2,"name":"add_EDS1","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEDS1","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(383)],"accessibility":2,"name":"remove_EDS1","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEDS1","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(384)],"accessibility":2,"name":"EDS2","isStatic":true,"type":2,"adder":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(385)],"accessibility":2,"name":"add_EDS2","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEDS2","returnType":Object,"params":[Function]},"remover":{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(386)],"accessibility":2,"name":"remove_EDS2","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEDS2","returnType":Object,"params":[Function]}}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.GetMembersTests.D2, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(311)],"accessibility":2,"name":"M","type":8,"sname":"m$2","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(313)],"accessibility":2,"name":"M2","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"M2$4","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(314)],"accessibility":2,"name":"M2","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"M2$5","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(315)],"accessibility":2,"name":"M2D","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"M2D","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(316)],"accessibility":2,"name":"M2D","type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"M2D$1","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(325)],"accessibility":2,"name":"M2DS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"M2DS","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(326)],"accessibility":2,"name":"M2DS","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"M2DS$1","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(323)],"accessibility":2,"name":"M2S","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"M2S","returnType":Object,"params":[System.Int32]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(324)],"accessibility":2,"name":"M2S","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":String,"position":0}],"sname":"M2S$1","returnType":Object,"params":[String]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(317)],"accessibility":2,"name":"M3","type":8,"paramsInfo":[{"name":"x","parameterType":Date,"position":0}],"sname":"M3$2","returnType":Object,"params":[Date]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(327)],"accessibility":2,"name":"M3S","isStatic":true,"type":8,"paramsInfo":[{"name":"x","parameterType":Date,"position":0}],"sname":"M3S","returnType":Object,"params":[Date]},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(312)],"accessibility":2,"name":"MD","type":8,"sname":"MD","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(322)],"accessibility":2,"name":"MDS","isStatic":true,"type":8,"sname":"MDS","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(321)],"accessibility":2,"name":"MS","isStatic":true,"type":8,"sname":"MS","returnType":Object},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(353)],"accessibility":2,"name":"Item","type":16,"returnType":System.Int32,"params":[System.Int32],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"getter":{"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0}],"sname":"getItem$4","returnType":System.Int32,"params":[System.Int32]},"setter":{"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":System.Int32,"position":0},{"name":"value","parameterType":System.Int32,"position":1}],"sname":"setItem$4","returnType":Object,"params":[System.Int32,System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(354)],"accessibility":2,"name":"Item","type":16,"returnType":System.Int32,"params":[Date],"isIndexer":true,"indexParamsInfo":[{"name":"x","parameterType":Date,"position":0}],"getter":{"accessibility":2,"name":"get_Item","type":8,"paramsInfo":[{"name":"x","parameterType":Date,"position":0}],"sname":"getItem$5","returnType":System.Int32,"params":[Date]},"setter":{"accessibility":2,"name":"set_Item","type":8,"paramsInfo":[{"name":"x","parameterType":Date,"position":0},{"name":"value","parameterType":System.Int32,"position":1}],"sname":"setItem$5","returnType":Object,"params":[Date,System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(351)],"accessibility":2,"name":"P","type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_P","type":8,"sname":"getP$2","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_P","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setP$2","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(352)],"accessibility":2,"name":"PD","type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_PD","type":8,"sname":"getPD","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_PD","type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPD","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(362)],"accessibility":2,"name":"PDS","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_PDS","isStatic":true,"type":8,"sname":"getPDS","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_PDS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPDS","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(361)],"accessibility":2,"name":"PS","isStatic":true,"type":16,"returnType":System.Int32,"getter":{"accessibility":2,"name":"get_PS","isStatic":true,"type":8,"sname":"getPS","returnType":System.Int32},"setter":{"accessibility":2,"name":"set_PS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":System.Int32,"position":0}],"sname":"setPS","returnType":Object,"params":[System.Int32]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(331)],"accessibility":2,"name":"F","type":4,"returnType":System.Int32,"sname":"f$2","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(332)],"accessibility":2,"name":"FD","type":4,"returnType":System.Int32,"sname":"FD","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(342)],"accessibility":2,"name":"FDS","isStatic":true,"type":4,"returnType":System.Int32,"sname":"FDS","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(341)],"accessibility":2,"name":"FS","isStatic":true,"type":4,"returnType":System.Int32,"sname":"FS","isReadOnly":false},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(371)],"accessibility":2,"name":"E","type":2,"adder":{"accessibility":2,"name":"add_E","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addE$2","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_E","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeE$2","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(372)],"accessibility":2,"name":"ED","type":2,"adder":{"accessibility":2,"name":"add_ED","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addED","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_ED","type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeED","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(382)],"accessibility":2,"name":"EDS","isStatic":true,"type":2,"adder":{"accessibility":2,"name":"add_EDS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addEDS","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_EDS","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeEDS","returnType":Object,"params":[Function]}},{"attr":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(381)],"accessibility":2,"name":"ES","isStatic":true,"type":2,"adder":{"accessibility":2,"name":"add_ES","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"addES","returnType":Object,"params":[Function]},"remover":{"accessibility":2,"name":"remove_ES","isStatic":true,"type":8,"paramsInfo":[{"name":"value","parameterType":Function,"position":0}],"sname":"removeES","returnType":Object,"params":[Function]}}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C25, function () { return {"members":[{"accessibility":2,"name":"B1","type":4,"returnType":System.Int32,"sname":"B1","isReadOnly":false},{"accessibility":4,"name":"B2","type":4,"returnType":System.Int32,"sname":"B2","isReadOnly":false},{"accessibility":3,"name":"B3","type":4,"returnType":System.Int32,"sname":"B3","isReadOnly":false},{"accessibility":5,"name":"B4","type":4,"returnType":System.Int32,"sname":"B4","isReadOnly":false},{"accessibility":1,"name":"B5","type":4,"returnType":System.Int32,"sname":"B5","isReadOnly":false},{"accessibility":2,"name":"C1","type":4,"returnType":System.Int32,"sname":"C1","isReadOnly":false},{"accessibility":4,"name":"C2","type":4,"returnType":System.Int32,"sname":"C2","isReadOnly":false},{"accessibility":3,"name":"C3","type":4,"returnType":System.Int32,"sname":"C3","isReadOnly":false},{"accessibility":5,"name":"C4","type":4,"returnType":System.Int32,"sname":"C4","isReadOnly":false},{"accessibility":1,"name":"C5","type":4,"returnType":System.Int32,"sname":"C5","isReadOnly":false}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C26, function () { return {"members":[{"accessibility":2,"isSynthetic":true,"name":".ctor","type":1,"sname":"ctor"},{"accessibility":2,"name":"A1","type":4,"returnType":System.Int32,"sname":"A1","isReadOnly":false},{"accessibility":3,"name":"A3","type":4,"returnType":System.Int32,"sname":"A3","isReadOnly":false},{"accessibility":5,"name":"A4","type":4,"returnType":System.Int32,"sname":"A4","isReadOnly":false},{"accessibility":2,"name":"B1","type":4,"returnType":System.Int32,"sname":"B1","isReadOnly":false},{"accessibility":4,"name":"B2","type":4,"returnType":System.Int32,"sname":"B2","isReadOnly":false},{"accessibility":3,"name":"B3","type":4,"returnType":System.Int32,"sname":"B3","isReadOnly":false},{"accessibility":5,"name":"B4","type":4,"returnType":System.Int32,"sname":"B4","isReadOnly":false},{"accessibility":1,"name":"B5","type":4,"returnType":System.Int32,"sname":"B5","isReadOnly":false},{"accessibility":2,"name":"C1","type":4,"returnType":System.Int32,"sname":"C1","isReadOnly":false},{"accessibility":4,"name":"C2","type":4,"returnType":System.Int32,"sname":"C2","isReadOnly":false},{"accessibility":3,"name":"C3","type":4,"returnType":System.Int32,"sname":"C3","isReadOnly":false},{"accessibility":5,"name":"C4","type":4,"returnType":System.Int32,"sname":"C4","isReadOnly":false},{"accessibility":1,"name":"C5","type":4,"returnType":System.Int32,"sname":"C5","isReadOnly":false}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C27, function () { return {"members":[{"accessibility":2,"isSynthetic":true,"name":".ctor","type":1,"sname":"ctor"},{"accessibility":2,"name":"A1","type":4,"returnType":System.Int32,"sname":"A1","isReadOnly":false},{"accessibility":4,"name":"A2","type":4,"returnType":System.Int32,"sname":"A2","isReadOnly":false},{"accessibility":3,"name":"A3","type":4,"returnType":System.Int32,"sname":"A3","isReadOnly":false},{"accessibility":5,"name":"A4","type":4,"returnType":System.Int32,"sname":"A4","isReadOnly":false},{"accessibility":2,"name":"B1","type":4,"returnType":System.Int32,"sname":"B1","isReadOnly":false},{"accessibility":4,"name":"B2","type":4,"returnType":System.Int32,"sname":"B2","isReadOnly":false},{"accessibility":3,"name":"B3","type":4,"returnType":System.Int32,"sname":"B3","isReadOnly":false},{"accessibility":5,"name":"B4","type":4,"returnType":System.Int32,"sname":"B4","isReadOnly":false},{"accessibility":1,"name":"B5","type":4,"returnType":System.Int32,"sname":"B5","isReadOnly":false},{"accessibility":2,"name":"C1","type":4,"returnType":System.Int32,"sname":"C1","isReadOnly":false},{"accessibility":4,"name":"C2","type":4,"returnType":System.Int32,"sname":"C2","isReadOnly":false},{"accessibility":3,"name":"C3","type":4,"returnType":System.Int32,"sname":"C3","isReadOnly":false},{"accessibility":5,"name":"C4","type":4,"returnType":System.Int32,"sname":"C4","isReadOnly":false},{"accessibility":1,"name":"C5","type":4,"returnType":System.Int32,"sname":"C5","isReadOnly":false}]}; });
+    Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C28, function () { return {"members":[{"accessibility":2,"isSynthetic":true,"name":".ctor","type":1,"sname":"ctor"},{"accessibility":2,"name":"A1","type":4,"returnType":System.Int32,"sname":"A1","isReadOnly":false},{"accessibility":4,"name":"A2","type":4,"returnType":System.Int32,"sname":"A2","isReadOnly":false},{"accessibility":3,"name":"A3","type":4,"returnType":System.Int32,"sname":"A3","isReadOnly":false},{"accessibility":5,"name":"A4","type":4,"returnType":System.Int32,"sname":"A4","isReadOnly":false},{"accessibility":1,"name":"A5","type":4,"returnType":System.Int32,"sname":"A5","isReadOnly":false},{"accessibility":2,"name":"B1","type":4,"returnType":System.Int32,"sname":"B1","isReadOnly":false},{"accessibility":4,"name":"B2","type":4,"returnType":System.Int32,"sname":"B2","isReadOnly":false},{"accessibility":3,"name":"B3","type":4,"returnType":System.Int32,"sname":"B3","isReadOnly":false},{"accessibility":5,"name":"B4","type":4,"returnType":System.Int32,"sname":"B4","isReadOnly":false},{"accessibility":1,"name":"B5","type":4,"returnType":System.Int32,"sname":"B5","isReadOnly":false},{"accessibility":2,"name":"C1","type":4,"returnType":System.Int32,"sname":"C1","isReadOnly":false},{"accessibility":4,"name":"C2","type":4,"returnType":System.Int32,"sname":"C2","isReadOnly":false},{"accessibility":3,"name":"C3","type":4,"returnType":System.Int32,"sname":"C3","isReadOnly":false},{"accessibility":5,"name":"C4","type":4,"returnType":System.Int32,"sname":"C4","isReadOnly":false},{"accessibility":1,"name":"C5","type":4,"returnType":System.Int32,"sname":"C5","isReadOnly":false}]}; });
+    $asm.attr= [Bridge.merge(new Bridge.ClientTest.Batch1.Reflection.AssemblyTests.A2Attribute.$ctor1(64), {
         setP: 23
-    } ),Bridge.merge(new Bridge.ClientTest.Batch1.Reflection.AssemblyTests.A3Attribute.$constructor1(15), {
+    } ),Bridge.merge(new Bridge.ClientTest.Batch1.Reflection.AssemblyTests.A3Attribute.$ctor1(15), {
         setP: 45
     } )];
 
-    Bridge.init();
 });

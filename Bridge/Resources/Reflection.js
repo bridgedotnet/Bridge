@@ -19,6 +19,8 @@
         if (callback) {
             callback.call(Bridge.global, asm, Bridge.global);
         }
+
+        Bridge.init();
     };
 
     Bridge.define("System.Reflection.Assembly", {
@@ -26,7 +28,7 @@
             assemblies: {}
         },
 
-        constructor: function (name, res) {
+        ctor: function (name, res) {
             this.$initialize();
             this.name = name;
             this.res = res || {};
@@ -378,6 +380,14 @@
 
             if (Bridge.isFunction(baseType.isAssignableFrom)) {
                 return baseType.isAssignableFrom(type);
+            }
+
+            if (type === Array) {
+                return System.Array.is([], baseType);
+            }
+
+            if (Bridge.Reflection.isInterface(baseType) && System.Array.contains(Bridge.Reflection.getInterfaces(type), baseType)) {
+                return true;
             }
 
             var inheritors = type.$$inherits,

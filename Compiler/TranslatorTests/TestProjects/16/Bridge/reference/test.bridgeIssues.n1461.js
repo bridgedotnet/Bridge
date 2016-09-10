@@ -12,7 +12,7 @@
 
     Bridge.define("$AnonymousType$1", $_, {
         $kind: "anonymous",
-        constructor: function (a) {
+        ctor: function (a) {
             this.a = a;
         },
         getA : function () {
@@ -37,5 +37,4 @@
         }
     });
 
-    Bridge.init();
 });

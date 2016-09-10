@@ -390,6 +390,12 @@ namespace Bridge.Translator
             {
                 name = Object.Net.Utilities.StringUtils.RightOfRightmostOf(name, '.');
             }
+
+            if (name.Length > 1 && name.ToUpperInvariant() == name)
+            {
+                preserveMemberCase = true;
+            }
+
             name = preserveMemberCase ? name : Object.Net.Utilities.StringUtils.ToLowerCamelCase(name);
             if (!isIgnore &&
                 ((isStatic && Emitter.IsReservedStaticName(name)) /*||
@@ -480,6 +486,11 @@ namespace Bridge.Translator
 
                 preserveMemberChange = !(bool)value;
                 enumMode = -1;
+            }
+
+            if (name.Length > 1 && name.ToUpperInvariant() == name)
+            {
+                preserveMemberChange = true;
             }
 
             if (enumMode > 6)

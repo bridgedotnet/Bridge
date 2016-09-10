@@ -1,93 +1,85 @@
 ﻿Bridge.initAssembly("Bridge_ClientTest_Batch2_Tests", function ($asm, globals) {
     
     Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner', {
-        statics: {
-            config: {
-                init: function () {
-                    Bridge.ready(this.main);
-                }
-            },
-            main: function () {
-                QUnit.module("Checked/Unckecked");
-                QUnit.test("CheckedInsideUnchecked - Batch2 TestInt32", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests.testInt32);
-                QUnit.test("CheckedInsideUnchecked - Batch2 TestUInt32", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests.testUInt32);
-                QUnit.test("CheckedInsideUnchecked - Batch2 TestLong", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests.testLong);
-                QUnit.test("CheckedInsideUnchecked - Batch2 TestULong", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests.testULong);
-                QUnit.test("Checked - Batch2 TestInt32", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedTests.testInt32);
-                QUnit.test("Checked - Batch2 TestUInt32", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedTests.testUInt32);
-                QUnit.test("Checked - Batch2 TestLong", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedTests.testLong);
-                QUnit.test("Checked - Batch2 TestULong", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedTests.testULong);
-                QUnit.test("UncheckedInsideChecked - Batch2 TestInt32", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedInsideCheckedTests.testInt32);
-                QUnit.test("UncheckedInsideChecked - Batch2 TestUInt32", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedInsideCheckedTests.testUInt32);
-                QUnit.test("UncheckedInsideChecked - Batch2 TestLong", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedInsideCheckedTests.testLong);
-                QUnit.test("UncheckedInsideChecked - Batch2 TestULong", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedInsideCheckedTests.testULong);
-                QUnit.test("Unchecked - Batch2 TestInt32", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedTests.testInt32);
-                QUnit.test("Unchecked - Batch2 TestUInt32", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedTests.testUInt32);
-                QUnit.test("Unchecked - Batch2 TestLong", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedTests.testLong);
-                QUnit.test("Unchecked - Batch2 TestULong", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedTests.testULong);
-                QUnit.test("WithNoUncheckedKeyword - Batch2 TestInt32", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_WithNoUncheckedKeywordTests.testInt32);
-                QUnit.test("WithNoUncheckedKeyword - Batch2 TestUInt32", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_WithNoUncheckedKeywordTests.testUInt32);
-                QUnit.test("WithNoUncheckedKeyword - Batch2 TestLong", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_WithNoUncheckedKeywordTests.testLong);
-                QUnit.test("WithNoUncheckedKeyword - Batch2 TestULong", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_WithNoUncheckedKeywordTests.testULong);
-                QUnit.module("Issues2");
-                QUnit.test("#1385 - Batch2 TestIsTypedArrayForByte", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_Bridge1385.testIsTypedArrayForByte);
-                QUnit.test("#1499 - Batch2 TestObjectStringCoalesceWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_Bridge1499.testObjectStringCoalesceWorks);
-                QUnit.test("#1122 - Batch2 TestClippingInJavaScriptOverflowMode", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N1122.testClippingInJavaScriptOverflowMode);
-                QUnit.test("#1122 - Batch2 TestIntegerDivisionInJavaScriptOverflowMode", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N1122.testIntegerDivisionInJavaScriptOverflowMode);
-                QUnit.test("#1204 - Batch2 TestStrictNullChecksOptionForNulls", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N1204.testStrictNullChecksOptionForNulls);
-                QUnit.test("#772 - Batch2 TypePropertiesAreCorrect", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.typePropertiesAreCorrect);
-                QUnit.test("#772 - Batch2 LengthWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.lengthWorks);
-                QUnit.test("#772 - Batch2 RankIsOne", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.rankIsOne);
-                QUnit.test("#772 - Batch2 GetLengthWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.getLengthWorks);
-                QUnit.test("#772 - Batch2 GetLowerBound", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.getLowerBound);
-                QUnit.test("#772 - Batch2 GetUpperBoundWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.getUpperBoundWorks);
-                QUnit.test("#772 - Batch2 GettingValueByIndexWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.gettingValueByIndexWorks);
-                QUnit.test("#772 - Batch2 GetValueWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.getValueWorks);
-                QUnit.test("#772 - Batch2 SettingValueByIndexWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.settingValueByIndexWorks);
-                QUnit.test("#772 - Batch2 SetValueWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.setValueWorks);
-                QUnit.test("#772 - Batch2 ForeachWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.foreachWorks);
-                QUnit.test("#772 - Batch2 CloneWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.cloneWorks);
-                QUnit.test("#772 - Batch2 ConcatWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.concatWorks);
-                QUnit.test("#772 - Batch2 ContainsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.containsWorks);
-                QUnit.test("#772 - Batch2 ContainsUsesEqualsMethod", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.containsUsesEqualsMethod);
-                QUnit.test("#772 - Batch2 AllWithArrayItemFilterCallbackWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.allWithArrayItemFilterCallbackWorks);
-                QUnit.test("#772 - Batch2 SliceWithoutEndWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.sliceWithoutEndWorks);
-                QUnit.test("#772 - Batch2 ForeachWithArrayItemCallbackWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.foreachWithArrayItemCallbackWorks);
-                QUnit.test("#772 - Batch2 ForeachWithArrayCallbackWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.foreachWithArrayCallbackWorks);
-                QUnit.test("#772 - Batch2 IndexOfWithoutStartIndexWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.indexOfWithoutStartIndexWorks);
-                QUnit.test("#772 - Batch2 IndexOfWithoutStartIndexUsesEqualsMethod", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.indexOfWithoutStartIndexUsesEqualsMethod);
-                QUnit.test("#772 - Batch2 IndexOfWithStartIndexWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.indexOfWithStartIndexWorks);
-                QUnit.test("#772 - Batch2 JoinWithoutDelimiterWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.joinWithoutDelimiterWorks);
-                QUnit.test("#772 - Batch2 ReverseWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.reverseWorks);
-                QUnit.test("#772 - Batch2 AnyWithArrayItemFilterCallbackWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.anyWithArrayItemFilterCallbackWorks);
-                QUnit.test("#772 - Batch2 BinarySearch1Works", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.binarySearch1Works);
-                QUnit.test("#772 - Batch2 BinarySearch2Works", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.binarySearch2Works);
-                QUnit.test("#772 - Batch2 BinarySearch3Works", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.binarySearch3Works);
-                QUnit.test("#772 - Batch2 BinarySearch4Works", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.binarySearch4Works);
-                QUnit.test("#772 - Batch2 BinarySearchExceptionsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.binarySearchExceptionsWorks);
-                QUnit.test("#772 - Batch2 SortWithDefaultCompareWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.sortWithDefaultCompareWorks);
-                QUnit.test("#772 - Batch2 Sort1Works", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.sort1Works);
-                QUnit.test("#772 - Batch2 Sort2Works", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.sort2Works);
-                QUnit.test("#772 - Batch2 Sort3Works", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.sort3Works);
-                QUnit.test("#772 - Batch2 Sort4Works", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.sort4Works);
-                QUnit.test("#772 - Batch2 SortExceptionsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.sortExceptionsWorks);
-                QUnit.test("#772 - Batch2 ForeachWhenCastToIListWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.foreachWhenCastToIListWorks);
-                QUnit.test("#772 - Batch2 ICollectionCountWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.iCollectionCountWorks);
-                QUnit.test("#772 - Batch2 ICollectionAddWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.iCollectionAddWorks);
-                QUnit.test("#772 - Batch2 ICollectionClearWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.iCollectionClearWorks);
-                QUnit.test("#772 - Batch2 ICollectionContainsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.iCollectionContainsWorks);
-                QUnit.test("#772 - Batch2 ICollectionContainsUsesEqualsMethod", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.iCollectionContainsUsesEqualsMethod);
-                QUnit.test("#772 - Batch2 ICollectionRemoveWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.iCollectionRemoveWorks);
-                QUnit.test("#772 - Batch2 IListIndexingWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.iListIndexingWorks);
-                QUnit.test("#772 - Batch2 IListIndexOfWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.iListIndexOfWorks);
-                QUnit.test("#772 - Batch2 IListIndexOfUsesEqualsMethod", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.iListIndexOfUsesEqualsMethod);
-                QUnit.test("#772 - Batch2 IListInsertWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.iListInsertWorks);
-                QUnit.test("#772 - Batch2 IListRemoveAtWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.iListRemoveAtWorks);
-                QUnit.test("#772 - Batch2 IssueSpecific", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.issueSpecific);
-                QUnit.test("#772 - Batch2 TestUseCase", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.testUseCase);
-            }
-        },
-        $entryPoint: true
+        $main: function () {
+            QUnit.module("Checked/Unckecked");
+            QUnit.test("CheckedInsideUnchecked - Batch2 TestInt32", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests.testInt32);
+            QUnit.test("CheckedInsideUnchecked - Batch2 TestUInt32", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests.testUInt32);
+            QUnit.test("CheckedInsideUnchecked - Batch2 TestLong", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests.testLong);
+            QUnit.test("CheckedInsideUnchecked - Batch2 TestULong", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests.testULong);
+            QUnit.test("Checked - Batch2 TestInt32", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedTests.testInt32);
+            QUnit.test("Checked - Batch2 TestUInt32", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedTests.testUInt32);
+            QUnit.test("Checked - Batch2 TestLong", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedTests.testLong);
+            QUnit.test("Checked - Batch2 TestULong", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedTests.testULong);
+            QUnit.test("UncheckedInsideChecked - Batch2 TestInt32", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedInsideCheckedTests.testInt32);
+            QUnit.test("UncheckedInsideChecked - Batch2 TestUInt32", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedInsideCheckedTests.testUInt32);
+            QUnit.test("UncheckedInsideChecked - Batch2 TestLong", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedInsideCheckedTests.testLong);
+            QUnit.test("UncheckedInsideChecked - Batch2 TestULong", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedInsideCheckedTests.testULong);
+            QUnit.test("Unchecked - Batch2 TestInt32", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedTests.testInt32);
+            QUnit.test("Unchecked - Batch2 TestUInt32", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedTests.testUInt32);
+            QUnit.test("Unchecked - Batch2 TestLong", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedTests.testLong);
+            QUnit.test("Unchecked - Batch2 TestULong", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedTests.testULong);
+            QUnit.test("WithNoUncheckedKeyword - Batch2 TestInt32", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_WithNoUncheckedKeywordTests.testInt32);
+            QUnit.test("WithNoUncheckedKeyword - Batch2 TestUInt32", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_WithNoUncheckedKeywordTests.testUInt32);
+            QUnit.test("WithNoUncheckedKeyword - Batch2 TestLong", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_WithNoUncheckedKeywordTests.testLong);
+            QUnit.test("WithNoUncheckedKeyword - Batch2 TestULong", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_WithNoUncheckedKeywordTests.testULong);
+            QUnit.module("Issues2");
+            QUnit.test("#1385 - Batch2 TestIsTypedArrayForByte", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_Bridge1385.testIsTypedArrayForByte);
+            QUnit.test("#1499 - Batch2 TestObjectStringCoalesceWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_Bridge1499.testObjectStringCoalesceWorks);
+            QUnit.test("#1122 - Batch2 TestClippingInJavaScriptOverflowMode", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N1122.testClippingInJavaScriptOverflowMode);
+            QUnit.test("#1122 - Batch2 TestIntegerDivisionInJavaScriptOverflowMode", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N1122.testIntegerDivisionInJavaScriptOverflowMode);
+            QUnit.test("#1204 - Batch2 TestStrictNullChecksOptionForNulls", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N1204.testStrictNullChecksOptionForNulls);
+            QUnit.test("#772 - Batch2 TypePropertiesAreCorrect", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.typePropertiesAreCorrect);
+            QUnit.test("#772 - Batch2 LengthWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.lengthWorks);
+            QUnit.test("#772 - Batch2 RankIsOne", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.rankIsOne);
+            QUnit.test("#772 - Batch2 GetLengthWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.getLengthWorks);
+            QUnit.test("#772 - Batch2 GetLowerBound", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.getLowerBound);
+            QUnit.test("#772 - Batch2 GetUpperBoundWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.getUpperBoundWorks);
+            QUnit.test("#772 - Batch2 GettingValueByIndexWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.gettingValueByIndexWorks);
+            QUnit.test("#772 - Batch2 GetValueWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.getValueWorks);
+            QUnit.test("#772 - Batch2 SettingValueByIndexWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.settingValueByIndexWorks);
+            QUnit.test("#772 - Batch2 SetValueWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.setValueWorks);
+            QUnit.test("#772 - Batch2 ForeachWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.foreachWorks);
+            QUnit.test("#772 - Batch2 CloneWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.cloneWorks);
+            QUnit.test("#772 - Batch2 ConcatWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.concatWorks);
+            QUnit.test("#772 - Batch2 ContainsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.containsWorks);
+            QUnit.test("#772 - Batch2 ContainsUsesEqualsMethod", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.containsUsesEqualsMethod);
+            QUnit.test("#772 - Batch2 AllWithArrayItemFilterCallbackWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.allWithArrayItemFilterCallbackWorks);
+            QUnit.test("#772 - Batch2 SliceWithoutEndWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.sliceWithoutEndWorks);
+            QUnit.test("#772 - Batch2 ForeachWithArrayItemCallbackWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.foreachWithArrayItemCallbackWorks);
+            QUnit.test("#772 - Batch2 ForeachWithArrayCallbackWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.foreachWithArrayCallbackWorks);
+            QUnit.test("#772 - Batch2 IndexOfWithoutStartIndexWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.indexOfWithoutStartIndexWorks);
+            QUnit.test("#772 - Batch2 IndexOfWithoutStartIndexUsesEqualsMethod", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.indexOfWithoutStartIndexUsesEqualsMethod);
+            QUnit.test("#772 - Batch2 IndexOfWithStartIndexWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.indexOfWithStartIndexWorks);
+            QUnit.test("#772 - Batch2 JoinWithoutDelimiterWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.joinWithoutDelimiterWorks);
+            QUnit.test("#772 - Batch2 ReverseWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.reverseWorks);
+            QUnit.test("#772 - Batch2 AnyWithArrayItemFilterCallbackWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.anyWithArrayItemFilterCallbackWorks);
+            QUnit.test("#772 - Batch2 BinarySearch1Works", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.binarySearch1Works);
+            QUnit.test("#772 - Batch2 BinarySearch2Works", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.binarySearch2Works);
+            QUnit.test("#772 - Batch2 BinarySearch3Works", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.binarySearch3Works);
+            QUnit.test("#772 - Batch2 BinarySearch4Works", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.binarySearch4Works);
+            QUnit.test("#772 - Batch2 BinarySearchExceptionsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.binarySearchExceptionsWorks);
+            QUnit.test("#772 - Batch2 SortWithDefaultCompareWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.sortWithDefaultCompareWorks);
+            QUnit.test("#772 - Batch2 Sort1Works", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.sort1Works);
+            QUnit.test("#772 - Batch2 Sort2Works", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.sort2Works);
+            QUnit.test("#772 - Batch2 Sort3Works", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.sort3Works);
+            QUnit.test("#772 - Batch2 Sort4Works", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.sort4Works);
+            QUnit.test("#772 - Batch2 SortExceptionsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.sortExceptionsWorks);
+            QUnit.test("#772 - Batch2 ForeachWhenCastToIListWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.foreachWhenCastToIListWorks);
+            QUnit.test("#772 - Batch2 ICollectionCountWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.iCollectionCountWorks);
+            QUnit.test("#772 - Batch2 ICollectionAddWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.iCollectionAddWorks);
+            QUnit.test("#772 - Batch2 ICollectionClearWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.iCollectionClearWorks);
+            QUnit.test("#772 - Batch2 ICollectionContainsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.iCollectionContainsWorks);
+            QUnit.test("#772 - Batch2 ICollectionContainsUsesEqualsMethod", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.iCollectionContainsUsesEqualsMethod);
+            QUnit.test("#772 - Batch2 ICollectionRemoveWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.iCollectionRemoveWorks);
+            QUnit.test("#772 - Batch2 IListIndexingWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.iListIndexingWorks);
+            QUnit.test("#772 - Batch2 IListIndexOfWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.iListIndexOfWorks);
+            QUnit.test("#772 - Batch2 IListIndexOfUsesEqualsMethod", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.iListIndexOfUsesEqualsMethod);
+            QUnit.test("#772 - Batch2 IListInsertWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.iListInsertWorks);
+            QUnit.test("#772 - Batch2 IListRemoveAtWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.iListRemoveAtWorks);
+            QUnit.test("#772 - Batch2 IssueSpecific", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.issueSpecific);
+            QUnit.test("#772 - Batch2 TestUseCase", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772.testUseCase);
+        }
     });
 
     Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_Bridge1385', {
@@ -450,5 +442,4 @@
         }
     });
 
-    Bridge.init();
 });

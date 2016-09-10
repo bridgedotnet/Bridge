@@ -13,5 +13,4 @@
         inherits: [Test.BridgeIssues.N883.Class2]
     });
 
-    Bridge.init();
 });

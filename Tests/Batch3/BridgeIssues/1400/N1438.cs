@@ -27,7 +27,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             var result = JSON.Parse<Foo>(serialized);
 
             Assert.NotNull(result, " result should not be null");
-            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo", result.GetClassName(), "Check result type name");
+            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo", result.GetType().FullName, "Check result type name");
             Assert.AreEqual(100, result.Value, "result.Value = 100");
         }
 
@@ -41,10 +41,10 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             var result = JSON.ParseAsArray<Foo>(serialized);
 
             Assert.NotNull(result, " result should not be null");
-            Assert.AreEqual("Array", result.GetClassName(), "Check result type name");
+            Assert.AreEqual("Array", result.GetType().FullName, "Check result type name");
             Assert.AreEqual(1, result.Length, "Check result length");
             Assert.NotNull(result[0], " result[0] should not be null");
-            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo", result[0].GetClassName(), "Check result[0] type name");
+            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo", result[0].GetType().FullName, "Check result[0] type name");
             Assert.AreEqual(101, result[0].Value, "result[0].Value = 101");
         }
     }

@@ -21,17 +21,16 @@
             config: {
                 init: function () {
                     Bridge.ready(this.notMain);
-                    Bridge.ready(this.main);
                 }
             },
             notMain: function () {
                 //Should be in config.init
-            },
-            main: function () {
-                //Should be in config.init
             }
         },
-        $entryPoint: true
+        $entryPoint: true,
+        $main: function () {
+            //Should be in config.init
+        }
     });
 
     Bridge.define('TestIssue1303.App2', {
