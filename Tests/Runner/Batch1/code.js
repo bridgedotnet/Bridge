@@ -9281,6 +9281,39 @@
         }
     });
 
+    Bridge.define('Bridge.ClientTest.Exceptions.AmbiguousMatchExceptionTests', {
+        typePropertiesAreCorrect: function () {
+            Bridge.Test.Assert.areEqual$1("System.Reflection.AmbiguousMatchException", Bridge.Reflection.getTypeFullName(System.Reflection.AmbiguousMatchException), "Name");
+            Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.Reflection.AmbiguousMatchException), "IsClass");
+            Bridge.Test.Assert.areEqual$1(System.Exception, Bridge.Reflection.getBaseType(System.Reflection.AmbiguousMatchException), "BaseType");
+            var d = new System.Reflection.AmbiguousMatchException();
+            Bridge.Test.Assert.true$1(Bridge.is(d, System.Reflection.AmbiguousMatchException), "is AmbiguousMatchException");
+            Bridge.Test.Assert.true$1(Bridge.is(d, System.Exception), "is Exception");
+
+            var interfaces = Bridge.Reflection.getInterfaces(System.Reflection.AmbiguousMatchException);
+            Bridge.Test.Assert.areEqual$1(0, interfaces.length, "Interfaces length");
+        },
+        defaultConstructorWorks: function () {
+            var ex = new System.Reflection.AmbiguousMatchException();
+            Bridge.Test.Assert.true$1(Bridge.is(ex, System.Reflection.AmbiguousMatchException), "is AmbiguousMatchException");
+            Bridge.Test.Assert.true$1(ex.getInnerException() == null, "InnerException");
+            Bridge.Test.Assert.areEqual("Ambiguous match.", ex.getMessage());
+        },
+        constructorWithMessageWorks: function () {
+            var ex = new System.Reflection.AmbiguousMatchException("The message");
+            Bridge.Test.Assert.true$1(Bridge.is(ex, System.Reflection.AmbiguousMatchException), "is AmbiguousMatchException");
+            Bridge.Test.Assert.true$1(ex.getInnerException() == null, "InnerException");
+            Bridge.Test.Assert.areEqual("The message", ex.getMessage());
+        },
+        constructorWithMessageAndInnerExceptionWorks: function () {
+            var inner = new System.Exception("a");
+            var ex = new System.Reflection.AmbiguousMatchException("The message", inner);
+            Bridge.Test.Assert.true$1(Bridge.is(ex, System.Reflection.AmbiguousMatchException), "is AmbiguousMatchException");
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(ex.getInnerException(), inner), "InnerException");
+            Bridge.Test.Assert.areEqual("The message", ex.getMessage());
+        }
+    });
+
     Bridge.define('Bridge.ClientTest.Exceptions.ArgumentExceptionTests', {
         statics: {
             DefaultMessage: "Value does not fall within the expected range."

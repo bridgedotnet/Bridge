@@ -739,6 +739,10 @@
             QUnit.test("AggregateException - ConstructorWithMessageAndIEnumerableInnerExceptionsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Exceptions_AggregateExceptionTests.constructorWithMessageAndIEnumerableInnerExceptionsWorks);
             QUnit.test("AggregateException - ConstructorWithMessageAndInnerExceptionArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Exceptions_AggregateExceptionTests.constructorWithMessageAndInnerExceptionArrayWorks);
             QUnit.test("AggregateException - FlattenWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Exceptions_AggregateExceptionTests.flattenWorks);
+            QUnit.test("AmbiguousMatchException - TypePropertiesAreCorrect", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Exceptions_AmbiguousMatchExceptionTests.typePropertiesAreCorrect);
+            QUnit.test("AmbiguousMatchException - DefaultConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Exceptions_AmbiguousMatchExceptionTests.defaultConstructorWorks);
+            QUnit.test("AmbiguousMatchException - ConstructorWithMessageWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Exceptions_AmbiguousMatchExceptionTests.constructorWithMessageWorks);
+            QUnit.test("AmbiguousMatchException - ConstructorWithMessageAndInnerExceptionWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Exceptions_AmbiguousMatchExceptionTests.constructorWithMessageAndInnerExceptionWorks);
             QUnit.test("ArgumentException - TypePropertiesAreCorrect", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Exceptions_ArgumentExceptionTests.typePropertiesAreCorrect);
             QUnit.test("ArgumentException - DefaultConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Exceptions_ArgumentExceptionTests.defaultConstructorWorks);
             QUnit.test("ArgumentException - ConstructorWithMessageWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Exceptions_ArgumentExceptionTests.constructorWithMessageWorks);
@@ -5087,6 +5091,28 @@
             flattenWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Exceptions.AggregateExceptionTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Exceptions_AggregateExceptionTests);
                 t.getFixture().flattenWorks();
+            }
+        }
+    });
+
+    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Exceptions_AmbiguousMatchExceptionTests', {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Exceptions.AmbiguousMatchExceptionTests)],
+        statics: {
+            typePropertiesAreCorrect: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Exceptions.AmbiguousMatchExceptionTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Exceptions_AmbiguousMatchExceptionTests);
+                t.getFixture().typePropertiesAreCorrect();
+            },
+            defaultConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Exceptions.AmbiguousMatchExceptionTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Exceptions_AmbiguousMatchExceptionTests);
+                t.getFixture().defaultConstructorWorks();
+            },
+            constructorWithMessageWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Exceptions.AmbiguousMatchExceptionTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Exceptions_AmbiguousMatchExceptionTests);
+                t.getFixture().constructorWithMessageWorks();
+            },
+            constructorWithMessageAndInnerExceptionWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Exceptions.AmbiguousMatchExceptionTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Exceptions_AmbiguousMatchExceptionTests);
+                t.getFixture().constructorWithMessageAndInnerExceptionWorks();
             }
         }
     });
