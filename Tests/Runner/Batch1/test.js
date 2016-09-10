@@ -1984,6 +1984,14 @@
             QUnit.test("StringFormatTests - PadIntegerWithSpecificNumberLeadingZeros", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Format_StringFormatTests.padIntegerWithSpecificNumberLeadingZeros);
             QUnit.test("StringFormatTests - PadNumericWithLeadingZerosToLength", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Format_StringFormatTests.padNumericWithLeadingZerosToLength);
             QUnit.test("StringFormatTests - PadNumericWithSpecificNumberOfLeadingZeros", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Format_StringFormatTests.padNumericWithSpecificNumberOfLeadingZeros);
+            QUnit.test("FormattableString - TypePropertiesAreCorrect", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FormattableStringTests.typePropertiesAreCorrect);
+            QUnit.test("FormattableString - ArgumentCountWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FormattableStringTests.argumentCountWorks);
+            QUnit.test("FormattableString - FormatWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FormattableStringTests.formatWorks);
+            QUnit.test("FormattableString - GetArgumentWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FormattableStringTests.getArgumentWorks);
+            QUnit.test("FormattableString - GetArgumentsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FormattableStringTests.getArgumentsWorks);
+            QUnit.test("FormattableString - ArrayReturnedByGetArgumentsCanBeModified", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FormattableStringTests.arrayReturnedByGetArgumentsCanBeModified);
+            QUnit.test("FormattableString - ToStringWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FormattableStringTests.toStringWorks);
+            QUnit.test("FormattableString - InvariantWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FormattableStringTests.invariantWorks);
             QUnit.test("String - TypePropertiesAreCorrect", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_StringTests.typePropertiesAreCorrect);
             QUnit.test("String - StringInterfaces", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_StringTests.stringInterfaces);
             QUnit.test("String - DefaultConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_StringTests.defaultConstructorWorks);
@@ -5853,6 +5861,44 @@
             padNumericWithSpecificNumberOfLeadingZeros: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Format.StringFormatTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Format_StringFormatTests);
                 t.getFixture().padNumericWithSpecificNumberOfLeadingZeros();
+            }
+        }
+    });
+
+    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FormattableStringTests', {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.FormattableStringTests)],
+        statics: {
+            typePropertiesAreCorrect: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.FormattableStringTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FormattableStringTests);
+                t.getFixture().typePropertiesAreCorrect();
+            },
+            argumentCountWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.FormattableStringTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FormattableStringTests);
+                t.getFixture().argumentCountWorks();
+            },
+            formatWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.FormattableStringTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FormattableStringTests);
+                t.getFixture().formatWorks();
+            },
+            getArgumentWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.FormattableStringTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FormattableStringTests);
+                t.getFixture().getArgumentWorks();
+            },
+            getArgumentsWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.FormattableStringTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FormattableStringTests);
+                t.getFixture().getArgumentsWorks();
+            },
+            arrayReturnedByGetArgumentsCanBeModified: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.FormattableStringTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FormattableStringTests);
+                t.getFixture().arrayReturnedByGetArgumentsCanBeModified();
+            },
+            toStringWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.FormattableStringTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FormattableStringTests);
+                t.getFixture().toStringWorks();
+            },
+            invariantWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.FormattableStringTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_FormattableStringTests);
+                t.getFixture().invariantWorks();
             }
         }
     });

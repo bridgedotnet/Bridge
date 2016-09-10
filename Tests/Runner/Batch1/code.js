@@ -10672,6 +10672,82 @@
         }
     });
 
+    Bridge.define('Bridge.ClientTest.FormattableStringTests', {
+        typePropertiesAreCorrect: function () {
+            var s = System.Runtime.CompilerServices.FormattableStringFactory.create("s");
+            Bridge.Test.Assert.true$1(Bridge.is(s, System.FormattableString), "is FormattableString");
+            Bridge.Test.Assert.true$1(Bridge.is(s, System.IFormattable), "is IFormattable");
+
+            Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.FormattableString), "IsClass");
+            Bridge.Test.Assert.true$1(Bridge.Reflection.isAssignableFrom(System.IFormattable, System.FormattableString), "IFormattable.IsAssignableFrom");
+            var interfaces = Bridge.Reflection.getInterfaces(System.FormattableString);
+            Bridge.Test.Assert.areEqual$1(1, interfaces.length, "interfaces length");
+            Bridge.Test.Assert.true$1(System.Array.contains(interfaces, System.IFormattable, Function), "interfaces contains IFormattable");
+        },
+        argumentCountWorks: function () {
+            var s1 = System.Runtime.CompilerServices.FormattableStringFactory.create("{0}", ["x"]);
+            Bridge.Test.Assert.areEqual$1(1, s1.getArgumentCount(), "#1");
+            var s2 = System.Runtime.CompilerServices.FormattableStringFactory.create("{0}, {1}", ["x", "y"]);
+            Bridge.Test.Assert.areEqual$1(2, s2.getArgumentCount(), "#2");
+        },
+        formatWorks: function () {
+            var s = System.Runtime.CompilerServices.FormattableStringFactory.create("x = {0}, y = {1}", ["x", "y"]);
+            Bridge.Test.Assert.areEqual("x = {0}, y = {1}", s.getFormat());
+        },
+        getArgumentWorks: function () {
+            var s = System.Runtime.CompilerServices.FormattableStringFactory.create("x = {0}, y = {1}", ["x", "y"]);
+            Bridge.Test.Assert.areEqual$1("x", s.getArgument(0), "0");
+            Bridge.Test.Assert.areEqual$1("y", s.getArgument(1), "1");
+        },
+        getArgumentsWorks: function () {
+            var s = System.Runtime.CompilerServices.FormattableStringFactory.create("x = {0}, y = {1}", ["x", "y"]);
+            var args = s.getArguments();
+            Bridge.Test.Assert.areEqual$1("x", args[0], "0");
+            Bridge.Test.Assert.areEqual$1("y", args[1], "1");
+        },
+        arrayReturnedByGetArgumentsCanBeModified: function () {
+            var s = System.Runtime.CompilerServices.FormattableStringFactory.create("x = {0}, y = {1}", ["x", "y"]);
+            var args = s.getArguments();
+            Bridge.Test.Assert.areEqual$1("x", args[0], "#1");
+            args[0] = "z";
+            var args2 = s.getArguments();
+            Bridge.Test.Assert.areEqual$1("z", args2[0], "#2");
+            Bridge.Test.Assert.areEqual$1("x = z, y = y", s.toString(), "#3");
+        },
+        toStringWorks: function () {
+            var s = System.Runtime.CompilerServices.FormattableStringFactory.create("x = {0}, y = {1:x}", ["x", 291]);
+            Bridge.Test.Assert.areEqual("x = x, y = 123", s.toString());
+        },
+        invariantWorks: function () {
+            var s = System.Runtime.CompilerServices.FormattableStringFactory.create("x = {0}, y = {1:x}", ["x", 291]);
+            Bridge.Test.Assert.areEqual("x = x, y = 123", System.FormattableString.invariant(s));
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.FormattableStringTests.MyFormatProvider', {
+        inherits: [System.IFormatProvider],
+        config: {
+            alias: [
+            "getFormat", "System$IFormatProvider$getFormat"
+            ]
+        },
+        getFormat: function (type) {
+            return System.Globalization.CultureInfo.invariantCulture.getFormat(type);
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.FormattableStringTests.MyFormattable', {
+        inherits: [System.IFormattable],
+        config: {
+            alias: [
+            "format", "System$IFormattable$format"
+            ]
+        },
+        format: function (format, formatProvider) {
+            return System.String.concat(System.String.concat("Formatted: ", (!System.String.isNullOrEmpty(format) ? System.String.concat(format, ", ") : "")), Bridge.Reflection.getTypeName(Bridge.getType(formatProvider)));
+        }
+    });
+
     Bridge.define('Bridge.ClientTest.GuidTests', {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeFullName(System.Guid), "System.Guid");
