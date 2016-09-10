@@ -18,5 +18,4 @@
 
     Bridge.define('Test.BridgeIssues.N1537.PlaceMeToTheEnd');
 
-    Bridge.init();
 });

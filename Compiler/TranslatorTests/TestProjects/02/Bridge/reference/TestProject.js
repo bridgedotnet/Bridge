@@ -2880,6 +2880,8 @@
         if (callback) {
             callback.call(Bridge.global, asm, Bridge.global);
         }
+
+        Bridge.init();
     };
 
     Bridge.define("System.Reflection.Assembly", {
@@ -22918,7 +22920,6 @@ Bridge.initAssembly("TestProject", function ($asm, globals) {
         }
     });
 
-    Bridge.init();
 });
 
 Bridge.initAssembly("TestProject", function ($asm, globals) {
@@ -22939,7 +22940,6 @@ Bridge.initAssembly("TestProject", function ($asm, globals) {
         }
     });
 
-    Bridge.init();
 });
 
 Bridge.initAssembly("TestProject", function ($asm, globals) {
@@ -22949,7 +22949,6 @@ Bridge.initAssembly("TestProject", function ($asm, globals) {
         value1: 0
     });
 
-    Bridge.init();
 });
 
 Bridge.initAssembly("TestProject", function ($asm, globals) {
@@ -22959,6 +22958,5 @@ Bridge.initAssembly("TestProject", function ($asm, globals) {
         value1: 0
     });
 
-    Bridge.init();
 });
 
