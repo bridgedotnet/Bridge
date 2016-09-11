@@ -6542,10 +6542,34 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1511', {
         testOverloadedConstructorCallWithOptionalParameters: function () {
             var o1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1511.SomeClass1.$ctor1();
-            Bridge.Test.Assert.areEqual$1(o1.value, 130, "#1");
+            Bridge.Test.Assert.areEqual$1(130, o1.value, "o1 #1");
+
+            var o12 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1511.SomeClass1.$ctor1(1);
+            Bridge.Test.Assert.areEqual$1(131, o12.value, "o1 #2");
+
+            var o13 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1511.SomeClass1.$ctor1(1, 2);
+            Bridge.Test.Assert.areEqual$1(133, o13.value, "o1 #3");
+
+            var o14 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1511.SomeClass1.$ctor1(2, 0);
+            Bridge.Test.Assert.areEqual$1(132, o14.value, "o1 #4");
+
+            var o15 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1511.SomeClass1.$ctor1(2, 3);
+            Bridge.Test.Assert.areEqual$1(135, o15.value, "o1 #5");
+
+            var o16 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1511.SomeClass1.$ctor1(4, 3);
+            Bridge.Test.Assert.areEqual$1(137, o16.value, "o1 #6");
 
             var o2 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1511.SomeClass2.$ctor1();
-            Bridge.Test.Assert.areEqual$1(o2.value, 135, "#2");
+            Bridge.Test.Assert.areEqual$1(1130, o2.value, "o2 #1");
+
+            var o22 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1511.SomeClass2.$ctor1([1]);
+            Bridge.Test.Assert.areEqual$1(1131, o22.value, "o2 #2");
+
+            var o23 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1511.SomeClass2.$ctor1([1, 2]);
+            Bridge.Test.Assert.areEqual$1(1133, o23.value, "o2 #3");
+
+            var o24 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1511.SomeClass2.$ctor1(2);
+            Bridge.Test.Assert.areEqual$1(1132, o24.value, "o2 #4");
         }
     });
 
@@ -6560,7 +6584,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             if (b === void 0) { b = 0; }
 
             this.$initialize();
-            this.value = 130;
+            this.value = (((130 + a) | 0) + b) | 0;
         }
     });
 
@@ -6568,13 +6592,19 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         value: 0,
         ctor: function (b) {
             this.$initialize();
-            this.value = 9;
+            this.value = 1007;
         },
         $ctor1: function (a) {
             if (a === void 0) { a = []; }
 
             this.$initialize();
-            this.value = 135;
+            this.value = 1130;
+
+            if (a != null) {
+                for (var i = 0; i < a.length; i = (i + 1) | 0) {
+                    this.value = (this.value + a[i]) | 0;
+                }
+            }
         }
     });
 
