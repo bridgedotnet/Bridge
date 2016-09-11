@@ -6731,9 +6731,9 @@
             MODULE_TYPE_SYSTEM: "Type system",
             MODULE_REFLECTION: "Reflection",
             MODULE_FUNCTIONS: "Functions",
-            MODULE_MIXIN: "Mixin",
             MODULE_SERIALIZATION: "Serialization",
             MODULE_BRIDGECONSOLE: "Bridge Console",
+            MODULE_OBJECTLITERAL: "[ObjectLiteral]",
             IGNORE_DATE: null
         }
     });
@@ -16322,6 +16322,67 @@
         f1: function () {
             var o = "x";
             var x = System.Nullable.getValue(Bridge.cast(o, System.Int32));
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests');
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.ObjectInitializationMode', {
+        test: function () {
+            var config1 = Bridge.ClientTest.ObjectLiteralTests.ObjectInitializationMode.Config1.ctor();
+            Bridge.Test.Assert.notNull$1(config1, "Default Mode config1 created");
+            Bridge.Test.Assert.areEqual$1(1, config1.val1, "config1 Val1");
+            Bridge.Test.Assert.areEqual$1(11, config1.val2, "config1 Val2");
+
+            var config2 = Bridge.ClientTest.ObjectLiteralTests.ObjectInitializationMode.Config2.ctor();
+            Bridge.Test.Assert.notNull$1(config2, "Constructor Mode config2 created");
+            Bridge.Test.Assert.areEqual$1(2, config2.val1, "config2 Val1");
+            Bridge.Test.Assert.areEqual$1(12, config2.val2, "config2 Val2");
+
+            var config3 = Bridge.ClientTest.ObjectLiteralTests.ObjectInitializationMode.Config3.ctor();
+            Bridge.Test.Assert.notNull$1(config3, "Plain Mode config3 created");
+            Bridge.Test.Assert.areEqual$1(3, config3.val1, "config3 Val1");
+            Bridge.Test.Assert.areEqual$1(0, config3.val2, "config3 Val2");
+
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.ObjectInitializationMode.Config1', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 1;
+                this.val2 = 0;
+                this.val2 = 11;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.ObjectInitializationMode.Config2', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 2;
+                this.val2 = 0;
+                this.val2 = 12;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.ObjectInitializationMode.Config3', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 3;
+                this.val2 = 0;
+                this.val2 = 13;
+            }).call($this);
+            return $this;
         }
     });
 

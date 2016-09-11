@@ -2,6 +2,8 @@
     
     Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner', {
         $main: function () {
+            QUnit.module("[ObjectLiteral]");
+            QUnit.test("ObjectInitializationMode - Test", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ObjectInitializationMode.test);
             QUnit.module("Bridge Console");
             QUnit.test("TestLogMessageObject", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_BridgeConsoleTests.testLogMessageObject);
             QUnit.test("TestLogMessageString", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_BridgeConsoleTests.testLogMessageString);
@@ -6908,6 +6910,16 @@
             coalesceWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.NullableTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_NullableTests);
                 t.getFixture().coalesceWorks();
+            }
+        }
+    });
+
+    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ObjectInitializationMode', {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.ObjectLiteralTests.ObjectInitializationMode)],
+        statics: {
+            test: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.ObjectLiteralTests.ObjectInitializationMode).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ObjectInitializationMode);
+                t.getFixture().test();
             }
         }
     });
