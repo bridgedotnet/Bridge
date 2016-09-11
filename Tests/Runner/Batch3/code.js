@@ -7855,6 +7855,23 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1744', {
+        statics: {
+            invoke: function (args) {
+                if (args === void 0) { args = []; }
+                if (args == null) {
+                    return -1;
+                }
+
+                return args.length;
+            }
+        },
+        testMethodInvocationWithParams: function () {
+            Bridge.Test.Assert.areEqual$1(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1744.invoke(), "Invoke()");
+            Bridge.Test.Assert.areEqual$1(-1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1744.invoke(null), "Invoke(null)");
+        }
+    });
+
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1754', {
         testAllUpperCaseNames: function () {
             var app = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1754.App();
