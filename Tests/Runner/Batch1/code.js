@@ -16560,15 +16560,15 @@
             Bridge.Test.Assert.areEqual$1(2, config2.val1, "config2 Val1");
             Bridge.Test.Assert.areEqual$1(12, config2.val2, "config2 Val2");
 
-            var config3 = Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config3.ctor();
+            var config3 = {  };
             Bridge.Test.Assert.notNull$1(config3, "Plain Mode config3 created");
-            Bridge.Test.Assert.areEqual$1(3, config3.val1, "config3 Val1");
-            Bridge.Test.Assert.areEqual$1(0, config3.val2, "config3 Val2");
+            Bridge.Test.Assert.null$1(config3.val1, "config3 Val1");
+            Bridge.Test.Assert.null$1(config3.val2, "config3 Val2");
 
-            var config4 = Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config4.ctor();
+            var config4 = {  };
             Bridge.Test.Assert.notNull$1(config4, "Plain Mode config4 created");
-            Bridge.Test.Assert.areEqual$1(4, config4.val1, "config4 Val1");
-            Bridge.Test.Assert.areEqual$1(104, config4.val2, "config4 Val2");
+            Bridge.Test.Assert.null$1(config4.val1, "config4 Val1");
+            Bridge.Test.Assert.null$1(config4.val2, "config4 Val2");
         }
     });
 
