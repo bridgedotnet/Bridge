@@ -337,6 +337,10 @@
                 throw new System.InvalidOperationException("HashCode cannot be calculated for empty value");
             }
 
+            if (deep !== false && value.hasOwnProperty("item1") && Bridge.isPlainObject(value)) {
+                deep = true;
+            }
+
             if (value.getHashCode && Bridge.isFunction(value.getHashCode) && !value.__insideHashCode && value.getHashCode.length === 0) {
                 value.__insideHashCode = true;
                 var r = value.getHashCode();
@@ -775,6 +779,10 @@
 
             if (!eq && typeof a === "object" && typeof b === "object" && a !== null && b !== null && a.$kind === "struct" && b.$kind === "struct" && a.$$name === b.$$name) {
                 return Bridge.getHashCode(a) === Bridge.getHashCode(b) && Bridge.objectEquals(a, b);
+            }
+
+            if (!eq && a && b && a.hasOwnProperty("item1") && Bridge.isPlainObject(a) && b.hasOwnProperty("item1") && Bridge.isPlainObject(b)) {
+                return Bridge.objectEquals(a, b);
             }
 
             return eq;
