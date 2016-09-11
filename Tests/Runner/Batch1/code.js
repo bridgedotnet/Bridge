@@ -16327,27 +16327,41 @@
 
     Bridge.define('Bridge.ClientTest.ObjectLiteralTests');
 
-    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.ObjectInitializationMode', {
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests', {
         test: function () {
-            var config1 = Bridge.ClientTest.ObjectLiteralTests.ObjectInitializationMode.Config1.ctor();
-            Bridge.Test.Assert.notNull$1(config1, "Default Mode config1 created");
+            var config1 = Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config1.ctor();
+            Bridge.Test.Assert.notNull$1(config1, "DefaultValue and Construtor Modes config1 created");
             Bridge.Test.Assert.areEqual$1(1, config1.val1, "config1 Val1");
             Bridge.Test.Assert.areEqual$1(11, config1.val2, "config1 Val2");
 
-            var config2 = Bridge.ClientTest.ObjectLiteralTests.ObjectInitializationMode.Config2.ctor();
-            Bridge.Test.Assert.notNull$1(config2, "Constructor Mode config2 created");
+            var config2 = { val1: 2, val2: 0 };
+            Bridge.Test.Assert.notNull$1(config2, "DefaultValue and Plain Modes config2 created");
             Bridge.Test.Assert.areEqual$1(2, config2.val1, "config2 Val1");
-            Bridge.Test.Assert.areEqual$1(12, config2.val2, "config2 Val2");
+            Bridge.Test.Assert.areEqual$1(0, config2.val2, "config2 Val2");
 
-            var config3 = Bridge.ClientTest.ObjectLiteralTests.ObjectInitializationMode.Config3.ctor();
-            Bridge.Test.Assert.notNull$1(config3, "Plain Mode config3 created");
+            var config3 = Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config3.ctor();
+            Bridge.Test.Assert.notNull$1(config3, "Ignore and Construtor Modes config3 created");
             Bridge.Test.Assert.areEqual$1(3, config3.val1, "config3 Val1");
-            Bridge.Test.Assert.areEqual$1(0, config3.val2, "config3 Val2");
+            Bridge.Test.Assert.areEqual$1(13, config3.val2, "config3 Val2");
 
+            var config4 = {  };
+            Bridge.Test.Assert.notNull$1(config4, "Ignore and Plain Modes config4 created");
+            Bridge.Test.Assert.null$1(config4.val1, "config4 Val1");
+            Bridge.Test.Assert.null$1(config4.val2, "config4 Val2");
+
+            var config5 = Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config5.ctor();
+            Bridge.Test.Assert.notNull$1(config5, "Initializer and Construtor Modes config5 created");
+            Bridge.Test.Assert.areEqual$1(5, config5.val1, "config5 Val1");
+            Bridge.Test.Assert.areEqual$1(15, config5.val2, "config5 Val2");
+
+            var config6 = { val1: 6 };
+            Bridge.Test.Assert.notNull$1(config6, "Initializer and Plain Modes config6 created");
+            Bridge.Test.Assert.areEqual$1(6, config6.val1, "config6 Val1");
+            Bridge.Test.Assert.null$1(config6.val2, "config6 Val2");
         }
     });
 
-    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.ObjectInitializationMode.Config1', {
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config1', {
         $literal: true,
         ctor: function () {
             var $this = {};
@@ -16360,7 +16374,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.ObjectInitializationMode.Config2', {
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config2', {
         $literal: true,
         ctor: function () {
             var $this = {};
@@ -16373,7 +16387,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.ObjectInitializationMode.Config3', {
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config3', {
         $literal: true,
         ctor: function () {
             var $this = {};
@@ -16381,6 +16395,193 @@
                 this.val1 = 3;
                 this.val2 = 0;
                 this.val2 = 13;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config4', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 4;
+                this.val2 = 0;
+                this.val2 = 14;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config5', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 5;
+                this.val2 = 0;
+                this.val2 = 15;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config6', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 6;
+                this.val2 = 0;
+                this.val2 = 16;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateModeTests', {
+        test: function () {
+            var config1 = Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config1.ctor();
+            Bridge.Test.Assert.notNull$1(config1, "Default Mode config1 created");
+            Bridge.Test.Assert.areEqual$1(1, config1.val1, "config1 Val1");
+            Bridge.Test.Assert.areEqual$1(11, config1.val2, "config1 Val2");
+
+            var config2 = Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config2.ctor();
+            Bridge.Test.Assert.notNull$1(config2, "Constructor Mode config2 created");
+            Bridge.Test.Assert.areEqual$1(2, config2.val1, "config2 Val1");
+            Bridge.Test.Assert.areEqual$1(12, config2.val2, "config2 Val2");
+
+            var config3 = Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config3.ctor();
+            Bridge.Test.Assert.notNull$1(config3, "Plain Mode config3 created");
+            Bridge.Test.Assert.areEqual$1(3, config3.val1, "config3 Val1");
+            Bridge.Test.Assert.areEqual$1(0, config3.val2, "config3 Val2");
+
+            var config4 = Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config4.ctor();
+            Bridge.Test.Assert.notNull$1(config4, "Plain Mode config4 created");
+            Bridge.Test.Assert.areEqual$1(4, config4.val1, "config4 Val1");
+            Bridge.Test.Assert.areEqual$1(104, config4.val2, "config4 Val2");
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config1', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 1;
+                this.val2 = 0;
+                this.val2 = 11;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config2', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 2;
+                this.val2 = 0;
+                this.val2 = 12;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config3', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 3;
+                this.val2 = 0;
+                this.val2 = 13;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config4', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 4;
+                this.val2 = 104;
+                this.val2 = 14;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests', {
+        test: function () {
+            var config1 = {  };
+            Bridge.Test.Assert.notNull$1(config1, "Default Mode config1 created");
+            Bridge.Test.Assert.null$1(config1.val1, "config1 Val1");
+            Bridge.Test.Assert.null$1(config1.val2, "config1 Val2");
+
+            var config2 = { val1: 2, val2: 0 };
+            Bridge.Test.Assert.notNull$1(config2, "DefaultValue Mode config2 created");
+            Bridge.Test.Assert.areEqual$1(2, config2.val1, "config2 Val1");
+            Bridge.Test.Assert.areEqual$1(0, config2.val2, "config2 Val2");
+
+            var config3 = { val1: 3 };
+            Bridge.Test.Assert.notNull$1(config3, "Initializer Mode config3 created");
+            Bridge.Test.Assert.areEqual$1(3, config3.val1, "config3 Val1");
+            Bridge.Test.Assert.null$1(config3.val2, "config3 Val2");
+
+            var config4 = {  };
+            Bridge.Test.Assert.notNull$1(config4, "Ignore Mode config4 created");
+            Bridge.Test.Assert.null$1(config4.val1, "config4 Val1");
+            Bridge.Test.Assert.null$1(config4.val2, "config4 Val2");
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config1', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 1;
+                this.val2 = 0;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config2', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 2;
+                this.val2 = 0;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config3', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 3;
+                this.val2 = 0;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config4', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 4;
+                this.val2 = 0;
             }).call($this);
             return $this;
         }
