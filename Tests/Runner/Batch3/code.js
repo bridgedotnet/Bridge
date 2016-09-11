@@ -6909,8 +6909,6 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6940,7 +6938,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -8085,6 +8083,24 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         removeAt: function (index) {
         }
     }; });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1776', {
+        testTupleHashCode: function () {
+            var output = { };
+            var key1 = { item1: 1, item2: 2 };
+            var key2 = { item1: 1, item2: 2 };
+            Bridge.Test.Assert.true(Bridge.objectEquals(key1, key2));
+
+            var dic = new (System.Collections.Generic.Dictionary$2(Object,System.Int32))();
+            dic.add(key1, 1);
+
+            dic.tryGetValue(key1, output);
+            Bridge.Test.Assert.areEqual(1, output.v);
+            dic.tryGetValue(key2, output);
+            Bridge.Test.Assert.areEqual(1, output.v);
+            Bridge.Test.Assert.areEqual(Bridge.getHashCode(key1, false, true), Bridge.getHashCode(key2, false, true));
+        }
+    });
 
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A', {
         config: {
