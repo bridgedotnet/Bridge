@@ -210,7 +210,7 @@ namespace System.Linq
         /// The sum of the elements in the sequence is larger than System.Decimal.MaxValue.
         /// </exception>
         /// <remarks>Bridge.NET has no mapping for this in JavaScript.</remarks>
-        [Template("{this}.nullableAverage()")]
+        [Template("{this}.nullableAverage(System.Decimal.Zero)")]
         public static extern decimal? Average(this EnumerableInstance<decimal?> source);
 
         /// <summary>
@@ -230,7 +230,7 @@ namespace System.Linq
         /// The sum of the elements in the sequence is larger than System.Decimal.MaxValue.
         /// </exception>
         /// <remarks>Bridge.NET has no mapping for this in JavaScript.</remarks>
-        [Template("System.Linq.Enumerable.from({source}).nullableAverage()")]
+        [Template("System.Linq.Enumerable.from({source}).nullableAverage(System.Decimal.Zero)")]
         public static extern decimal? Average(this IEnumerable<decimal?> source);
 
         /// <summary>
@@ -248,7 +248,7 @@ namespace System.Linq
         /// <exception cref="System.InvalidOperationException">
         /// source contains no elements.
         /// </exception>
-        [Template("{this}.average()")]
+        [Template("{this}.average(System.Decimal.Zero)")]
         public static extern decimal Average(this EnumerableInstance<decimal> source);
 
         /// <summary>
@@ -266,7 +266,7 @@ namespace System.Linq
         /// <exception cref="System.InvalidOperationException">
         /// source contains no elements.
         /// </exception>
-        [Template("System.Linq.Enumerable.from({source}).average()")]
+        [Template("System.Linq.Enumerable.from({source}).average(System.Decimal.Zero)")]
         public static extern decimal Average(this IEnumerable<decimal> source);
 
         /// <summary>
@@ -586,7 +586,7 @@ namespace System.Linq
         /// The sum of the elements in the sequence is larger than System.Decimal.MaxValue.
         /// </exception>
         /// <remarks>Bridge.NET has no mapping for this in JavaScript.</remarks>
-        [Template("System.Linq.Enumerable.from({source}).nullableAverage({selector})")]
+        [Template("System.Linq.Enumerable.from({source}).nullableAverage({selector}, System.Decimal.Zero)")]
         public static extern decimal? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal?> selector);
 
         /// <summary>
@@ -614,7 +614,7 @@ namespace System.Linq
         /// <exception cref="System.OverflowException">
         /// The sum of the elements in the sequence is larger than System.Decimal.MaxValue.
         /// </exception>
-        [Template("System.Linq.Enumerable.from({source}).average({selector})")]
+        [Template("System.Linq.Enumerable.from({source}).average({selector}, System.Decimal.Zero)")]
         public static extern decimal Average<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal> selector);
 
         /// <summary>
@@ -3840,7 +3840,7 @@ namespace System.Linq
         /// The sum is larger than System.Decimal.MaxValue.
         /// </exception>
         /// <remarks>Bridge.NET has no mapping for this in JavaScript.</remarks>
-        [Template("{this}.nullableSum()")]
+        [Template("{this}.nullableSum(System.Decimal.Zero)")]
         public static extern decimal? Sum(this EnumerableInstance<decimal?> source);
 
         /// <summary>
@@ -3859,7 +3859,7 @@ namespace System.Linq
         /// The sum is larger than System.Decimal.MaxValue.
         /// </exception>
         /// <remarks>Bridge.NET has no mapping for this in JavaScript.</remarks>
-        [Template("System.Linq.Enumerable.from({source}).nullableSum()")]
+        [Template("System.Linq.Enumerable.from({source}).nullableSum(System.Decimal.Zero)")]
         public static extern decimal? Sum(this IEnumerable<decimal?> source);
 
         /// <summary>
@@ -3877,7 +3877,7 @@ namespace System.Linq
         /// <exception cref="System.OverflowException">
         /// The sum is larger than System.Decimal.MaxValue.
         /// </exception>
-        [Template("{this}.sum()")]
+        [Template("{this}.sum(System.Decimal.Zero)")]
         public static extern decimal Sum(this EnumerableInstance<decimal> source);
 
         /// <summary>
@@ -3895,7 +3895,7 @@ namespace System.Linq
         /// <exception cref="System.OverflowException">
         /// The sum is larger than System.Decimal.MaxValue.
         /// </exception>
-        [Template("System.Linq.Enumerable.from({source}).sum()")]
+        [Template("System.Linq.Enumerable.from({source}).sum(System.Decimal.Zero)")]
         public static extern decimal Sum(this IEnumerable<decimal> source);
 
         /// <summary>
@@ -4112,7 +4112,7 @@ namespace System.Linq
         /// The sum is larger than System.Int64.MaxValue.
         /// </exception>
         /// <remarks>Bridge.NET has no mapping for this in JavaScript.</remarks>
-        [Template("{this}.nullableSum()")]
+        [Template("{this}.nullableSum(System.Long.Zero)")]
         public static extern long? Sum(this EnumerableInstance<long?> source);
 
         /// <summary>
@@ -4131,7 +4131,7 @@ namespace System.Linq
         /// The sum is larger than System.Int64.MaxValue.
         /// </exception>
         /// <remarks>Bridge.NET has no mapping for this in JavaScript.</remarks>
-        [Template("System.Linq.Enumerable.from({source}).nullableSum()")]
+        [Template("System.Linq.Enumerable.from({source}).nullableSum(System.Long.Zero)")]
         public static extern long? Sum(this IEnumerable<long?> source);
 
         /// <summary>
@@ -4149,7 +4149,7 @@ namespace System.Linq
         /// <exception cref="System.OverflowException">
         /// The sum is larger than System.Int64.MaxValue.
         /// </exception>
-        [Template("{this}.sum()")]
+        [Template("{this}.sum(System.Long.Zero)")]
         public static extern long Sum(this EnumerableInstance<long> source);
 
         /// <summary>
@@ -4167,7 +4167,7 @@ namespace System.Linq
         /// <exception cref="System.OverflowException">
         /// The sum is larger than System.Int64.MaxValue.
         /// </exception>
-        [Template("System.Linq.Enumerable.from({source}).sum()")]
+        [Template("System.Linq.Enumerable.from({source}).sum(System.Long.Zero)")]
         public static extern long Sum(this IEnumerable<long> source);
 
         /// <summary>
@@ -4193,7 +4193,7 @@ namespace System.Linq
         /// The sum is larger than System.Decimal.MaxValue.
         /// </exception>
         /// <remarks>Bridge.NET has no mapping for this in JavaScript.</remarks>
-        [Template("System.Linq.Enumerable.from({source}).nullableSum({selector})")]
+        [Template("System.Linq.Enumerable.from({source}).nullableSum({selector}, System.Decimal.Zero)")]
         public static extern decimal? Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal?> selector);
 
         /// <summary>
@@ -4218,7 +4218,7 @@ namespace System.Linq
         /// <exception cref="System.OverflowException">
         /// The sum is larger than System.Decimal.MaxValue.
         /// </exception>
-        [Template("System.Linq.Enumerable.from({source}).sum({selector})")]
+        [Template("System.Linq.Enumerable.from({source}).sum({selector}, System.Long.Zero)")]
         public static extern decimal Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal> selector);
 
         /// <summary>
@@ -4385,7 +4385,7 @@ namespace System.Linq
         /// The sum is larger than System.Int64.MaxValue.
         /// </exception>
         /// <remarks>Bridge.NET has no mapping for this in JavaScript.</remarks>
-        [Template("System.Linq.Enumerable.from({source}).nullableSum({selector})")]
+        [Template("System.Linq.Enumerable.from({source}).nullableSum({selector}, System.Long.Zero)")]
         public static extern long? Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, long?> selector);
 
         /// <summary>
@@ -4410,7 +4410,7 @@ namespace System.Linq
         /// <exception cref="System.OverflowException">
         /// The sum is larger than System.Int64.MaxValue.
         /// </exception>
-        [Template("System.Linq.Enumerable.from({source}).sum({selector})")]
+        [Template("System.Linq.Enumerable.from({source}).sum({selector}, System.Long.Zero)")]
         public static extern long Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, long> selector);
 
         /// <summary>

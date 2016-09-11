@@ -6909,8 +6909,6 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6940,7 +6938,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -8085,6 +8083,17 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         removeAt: function (index) {
         }
     }; });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1775', {
+        testSumForEmpty: function () {
+            var decimalList = new (System.Collections.Generic.List$1(System.Decimal))();
+            var decimalSum = System.Linq.Enumerable.from(decimalList).sum(System.Decimal.Zero);
+            var lessThanOne = decimalSum.lt(System.Decimal(1));
+            Bridge.Test.Assert.true(Bridge.is(decimalSum, System.Decimal));
+            Bridge.Test.Assert.true(decimalSum.equalsT(System.Decimal(0)));
+            Bridge.Test.Assert.true(lessThanOne);
+        }
+    });
 
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A', {
         config: {
@@ -14057,8 +14066,8 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             testLinqDecimal: function () {
                 var a = [System.Decimal(1.0), System.Decimal(2.0), System.Decimal(3.0)];
 
-                Bridge.Test.Assert.true(System.Linq.Enumerable.from(a).average().equalsT(System.Decimal(2)));
-                Bridge.Test.Assert.true(System.Linq.Enumerable.from(a).sum().equalsT(System.Decimal(6)));
+                Bridge.Test.Assert.true(System.Linq.Enumerable.from(a).average(System.Decimal.Zero).equalsT(System.Decimal(2)));
+                Bridge.Test.Assert.true(System.Linq.Enumerable.from(a).sum(System.Decimal.Zero).equalsT(System.Decimal(6)));
             }
         }
     });
