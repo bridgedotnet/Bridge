@@ -330,6 +330,7 @@
     <Compile Include="BridgeIssues\1700\N1741.cs" />
     <Compile Include="BridgeIssues\1700\N1767.cs" />
     <Compile Include="BridgeIssues\1700\N1754.cs" />
+    <Compile Include="BridgeIssues\1700\N1787.cs" />
     <Compile Include="BridgeIssues\1700\N1768.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />

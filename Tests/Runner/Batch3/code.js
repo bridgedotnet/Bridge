@@ -6909,8 +6909,6 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6940,7 +6938,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -8085,6 +8083,52 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         removeAt: function (index) {
         }
     }; });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1787', {
+        testNamedParams: function () {
+            var p = 7;
+            var expected = 7;
+            var actual;
+
+            actual = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1787.SomeClass2([p]).value;
+            Bridge.Test.Assert.areEqual(expected, actual);
+
+            actual = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1787.SomeClass2([p]).value;
+            Bridge.Test.Assert.areEqual(expected, actual);
+
+            actual = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1787.SomeClass2().sumOfArray([p]);
+            Bridge.Test.Assert.areEqual(expected, actual);
+
+            actual = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1787.SomeClass2().sumOfArray([p]);
+            Bridge.Test.Assert.areEqual(expected, actual);
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1787.SomeClass2', {
+        value: 0,
+        ctor: function (a) {
+            if (a === void 0) { a = []; }
+
+            this.$initialize();
+            if (a != null) {
+                for (var i = 0; i < a.length; i = (i + 1) | 0) {
+                    this.value = (this.value + a[i]) | 0;
+                }
+            }
+        },
+        sumOfArray: function (a) {
+            if (a === void 0) { a = []; }
+            var r = 0;
+
+            if (a != null) {
+                for (var i = 0; i < a.length; i = (i + 1) | 0) {
+                    r = (r + a[i]) | 0;
+                }
+            }
+
+            return r;
+        }
+    });
 
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A', {
         config: {

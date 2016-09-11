@@ -419,6 +419,16 @@ namespace Bridge.Translator
                         result[index] = namedArg.Expression;
                         names[index] = namedArg.Name;
                         named = true;
+
+                        if (paramsArg == null && (parameters.Count > (i + shift)) && parameters[i + shift].IsParams)
+                        {
+                            if (resolveResult.Member.DeclaringTypeDefinition == null || !this.Emitter.Validator.IsIgnoreType(resolveResult.Member.DeclaringTypeDefinition))
+                            {
+                                paramsArg = namedArg.Expression;
+                            }
+
+                            paramArgName = namedArg.Name;
+                        }
                     }
                     else
                     {
