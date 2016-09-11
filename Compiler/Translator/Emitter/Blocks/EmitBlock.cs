@@ -240,6 +240,12 @@ namespace Bridge.Translator
 
                 this.Emitter.Translator.EmitNode = type.TypeDeclaration;
 
+                if (type.IsObjectLiteral && this.Emitter.Validator.IsIgnoreType(type.Type.GetDefinition()))
+                {
+                    this.Emitter.Translator.Plugins.AfterTypeEmit(this.Emitter, type);
+                    continue;
+                }
+
                 this.Emitter.InitEmitter();
 
                 ITypeInfo typeInfo;

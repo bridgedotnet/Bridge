@@ -291,19 +291,7 @@ namespace Bridge.Translator
                     }
                     else if (args[0].Type.FullName == Translator.Bridge_ASSEMBLY + ".DefaultValueMode")
                     {
-                        var result = (int)args[0].Value;
-
-                        if (result == 0)
-                        {
-                            return 2;
-                        }
-
-                        if (result == 2)
-                        {
-                            return 0;
-                        }
-
-                        return result;
+                        return (int)args[0].Value;
                     }
                 }
             }

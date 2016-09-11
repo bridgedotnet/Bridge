@@ -556,7 +556,7 @@ namespace Bridge.Translator
                     }
                 }
 
-                if (mode != 2)
+                if (mode != 0)
                 {
                     var members = tinfo.InstanceConfig.Fields.Concat(tinfo.InstanceConfig.Properties);
 

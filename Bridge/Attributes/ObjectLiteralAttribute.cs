@@ -44,7 +44,7 @@ namespace Bridge
         /// <summary>
         /// Emit default values for all
         /// </summary>
-        DefaultValue = 0,
+        DefaultValue = 2,
 
         /// <summary>
         /// Emit only values that have been explicitly initialized
@@ -54,7 +54,7 @@ namespace Bridge
         /// <summary>
         /// Ignore default value. Emits an empty object literal
         /// </summary>
-        Ignore = 2
+        Ignore = 0
     }
 
     [External]

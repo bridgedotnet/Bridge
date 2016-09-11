@@ -3,7 +3,7 @@ using Bridge.Test;
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
     [External]
-    [ObjectLiteral(ObjectInitializationMode.Ignore)]
+    [ObjectLiteral]
     public class Bridge647A
     {
         [Name("bar")]
@@ -11,7 +11,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     }
 
     [External]
-    [ObjectLiteral]
+    [ObjectLiteral(ObjectInitializationMode.DefaultValue)]
     public class Bridge647B
     {
         [Name("bar")]

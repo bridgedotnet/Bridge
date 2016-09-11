@@ -6843,7 +6843,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             },
             create: function (i, s) {
                 return Bridge.merge(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1529.BS.ctor(), {
-                    field1: i, field2: s, prop1: 0, prop2: null
+                    field1: i, field2: s
                 } );
             }
         },
@@ -6933,8 +6933,6 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6964,7 +6962,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -11036,7 +11034,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 var a = { bar: 1 };
                 Bridge.Test.Assert.areEqual$1(1, a.bar, "Bridge647 A");
 
-                var b = { bar: 1 };
+                var b = { bar: 1, bar1: 12 };
                 Bridge.Test.Assert.areEqual$1(1, b.bar, "Bridge647 B bar");
                 Bridge.Test.Assert.areEqual$1(12, b.bar1, "Bridge647 B bar1");
             }
@@ -15133,7 +15131,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 Bridge.Test.Assert.areEqual$1(22, date.v.getDate(), "TryParse works Day");
             },
             N377: function () {
-                var objectLiteralInstance = { field1: "field1 value", field3: 7, field2: null, field4: 0 };
+                var objectLiteralInstance = { field1: "field1 value", field3: 7 };
 
                 Bridge.Test.Assert.areEqual$1(true, objectLiteralInstance.hasOwnProperty("field1"), "ObjectLiteral's field with an explicit value is emitted");
                 Bridge.Test.Assert.areEqual$1("field1 value", objectLiteralInstance.field1, "ObjectLiteral's field with an explicit value is emitted correctly");
