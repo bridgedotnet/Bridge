@@ -16,9 +16,10 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             var decimalList = new List<Decimal>();
             var decimalSum = decimalList.Sum();
             var lessThanOne = decimalSum < 1;
-            Assert.True((Object)decimalSum is decimal);
-            Assert.True(decimalSum == 0);
-            Assert.True(lessThanOne);
+
+            Assert.True((Object)decimalSum is decimal, "is decimal");
+            Assert.True(decimalSum == 0, "== 0");
+            Assert.True(lessThanOne, "less than one");
         }
     }
 }

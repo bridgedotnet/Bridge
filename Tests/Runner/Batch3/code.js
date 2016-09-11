@@ -6909,6 +6909,8 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
+
+
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6938,7 +6940,7 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                }; /// Async method lacks 'await' operators and will run synchronously
+                                };
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -8089,9 +8091,78 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             var decimalList = new (System.Collections.Generic.List$1(System.Decimal))();
             var decimalSum = System.Linq.Enumerable.from(decimalList).sum(System.Decimal.Zero);
             var lessThanOne = decimalSum.lt(System.Decimal(1));
-            Bridge.Test.Assert.true(Bridge.is(decimalSum, System.Decimal));
-            Bridge.Test.Assert.true(decimalSum.equalsT(System.Decimal(0)));
-            Bridge.Test.Assert.true(lessThanOne);
+
+            Bridge.Test.Assert.true$1(Bridge.is(decimalSum, System.Decimal), "is decimal");
+            Bridge.Test.Assert.true$1(decimalSum.equalsT(System.Decimal(0)), "== 0");
+            Bridge.Test.Assert.true$1(lessThanOne, "less than one");
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1776', {
+        testTupleHashCode: function () {
+            var key1 = { item1: 1, item2: 2 };
+            var key2 = { item1: 1, item2: 2 };
+
+            Bridge.Test.Assert.true$1(Bridge.objectEquals(key1, key2), "Equals works");
+
+            var dic = new (System.Collections.Generic.Dictionary$2(Object,System.Int32))();
+            dic.add(key1, 1);
+
+            var output1 = { };
+            dic.tryGetValue(key1, output1);
+            Bridge.Test.Assert.areEqual$1(1, output1.v, "TryGetValue for key1");
+
+            var output2 = { };
+            dic.tryGetValue(key2, output2);
+            Bridge.Test.Assert.areEqual$1(1, output2.v, "TryGetValue for key2");
+
+            Bridge.Test.Assert.areEqual$1(Bridge.getHashCode(key1, false, true), Bridge.getHashCode(key2, false, true), "Same GetHashCode");
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1787', {
+        testNamedParams: function () {
+            var p = 7;
+            var expected = 7;
+            var actual;
+
+            actual = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1787.SomeClass2([p]).value;
+            Bridge.Test.Assert.areEqual(expected, actual);
+
+            actual = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1787.SomeClass2([p]).value;
+            Bridge.Test.Assert.areEqual(expected, actual);
+
+            actual = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1787.SomeClass2().sumOfArray([p]);
+            Bridge.Test.Assert.areEqual(expected, actual);
+
+            actual = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1787.SomeClass2().sumOfArray([p]);
+            Bridge.Test.Assert.areEqual(expected, actual);
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1787.SomeClass2', {
+        value: 0,
+        ctor: function (a) {
+            if (a === void 0) { a = []; }
+
+            this.$initialize();
+            if (a != null) {
+                for (var i = 0; i < a.length; i = (i + 1) | 0) {
+                    this.value = (this.value + a[i]) | 0;
+                }
+            }
+        },
+        sumOfArray: function (a) {
+            if (a === void 0) { a = []; }
+            var r = 0;
+
+            if (a != null) {
+                for (var i = 0; i < a.length; i = (i + 1) | 0) {
+                    r = (r + a[i]) | 0;
+                }
+            }
+
+            return r;
         }
     });
 
