@@ -20,6 +20,7 @@
             public const string UNDERLYINGTYPE = "$utype";
             public const string ENUM = "$enum";
             public const string INHERITS = "inherits";
+            public const string ENUMERABLE = "enumerable";
             public const string STRUCT = "$struct";
             public const string CONFIG = "config";
             public const string EVENTS = "events";
@@ -150,7 +151,6 @@
 
             public const string BOOLEAN = "Boolean";
             public const string ARRAY = "Array";
-            public const string OBJECT = "Object";
             public const string FUNCTION = "Function";
             public const string Uint8Array = "Uint8Array";
             public const string Int8Array = "Int8Array";
@@ -166,6 +166,14 @@
                 public const string NaN = "NaN";
                 public const string Infinity = "Infinity";
                 public const string InfinityNegative = "-Infinity";
+            }
+
+            public class Object
+            {
+                public const string NAME = "Object";
+                private const string DOTNAME = NAME + ".";
+
+                public const string DEFINEPROPERTY = DOTNAME + "defineProperty";
             }
 
             public class System

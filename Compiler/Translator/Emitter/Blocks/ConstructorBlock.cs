@@ -387,7 +387,9 @@ namespace Bridge.Translator
                                         continue;
                                     }
 
-                                    this.Write("Object.defineProperty(this, ");
+                                    this.Write(JS.Types.Object.DEFINEPROPERTY);
+                                    this.WriteOpenParentheses();
+                                    this.Write("this, ");
                                     this.WriteScript(OverloadsCollection.Create(this.Emitter, p).GetOverloadName());
                                     this.WriteComma();
                                     this.Emitter.Comma = false;
@@ -396,10 +398,11 @@ namespace Bridge.Translator
                                     block.EmitPropertyMethod(p, p.Getter, false, true);
                                     block.EmitPropertyMethod(p, p.Setter, true, true);
                                     this.EnsureComma(true);
-                                    this.Write("enumerable: true");
+                                    this.Write(JS.Fields.ENUMERABLE + ": true");
                                     this.WriteNewLine();
                                     this.EndBlock();
-                                    this.Write(");");
+                                    this.WriteCloseParentheses();
+                                    this.Write(";");
                                     this.WriteNewLine();
                                 }
                             }
