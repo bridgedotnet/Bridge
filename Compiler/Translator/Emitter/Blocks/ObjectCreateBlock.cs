@@ -126,10 +126,41 @@ namespace Bridge.Translator
             }
 
             var isPlainObjectCtor = Regex.Match(customCtor, @"\s*\{\s*\}\s*").Success;
-            if (this.Emitter.Validator.GetObjectCreateMode(type) == 1)
+
+            if (isObjectLiteral)
             {
-                isSynthetic = true;
+                if (this.Emitter.Validator.GetObjectCreateMode(type) == 1)
+                {
+                    isSynthetic = true;
+                }
+                else if (invocationResolveResult != null)
+                {
+                    if (invocationResolveResult.Member.Parameters.Count > 0)
+                    {
+                        var prm = invocationResolveResult.Member.Parameters.FirstOrDefault(p => p.Type.FullName == "Bridge.ObjectCreateMode");
+
+                        if (prm != null)
+                        {
+                            var prmIndex = invocationResolveResult.Member.Parameters.IndexOf(prm);
+                            var arg = invocationResolveResult.Arguments.FirstOrDefault(a =>
+                            {
+                                if (a is NamedArgumentResolveResult)
+                                {
+                                    return ((NamedArgumentResolveResult) a).ParameterName == prm.Name;
+                                }
+                                
+                                return prmIndex == invocationResolveResult.Arguments.IndexOf(a);
+                            });
+
+                            if (arg != null && arg.ConstantValue != null && (int)arg.ConstantValue == 1)
+                            {
+                                isSynthetic = true;
+                            }
+                        }
+                    }
+                }
             }
+            
 
             if (isSynthetic && isObjectLiteral && isPlainObjectCtor)
             {
@@ -532,27 +563,32 @@ namespace Bridge.Translator
                 var mode = 0;
                 if (rr != null)
                 {
-                    if (rr.Member.Parameters.Count == 1 &&
-                        rr.Member.Parameters.First().Type.FullName == "Bridge.ObjectInitializationMode")
+                    if (rr.Member.Parameters.Count > 0)
                     {
-                        var arg = rr.Arguments.FirstOrDefault();
-                        if (arg != null && arg.ConstantValue != null)
+                        var prm = rr.Member.Parameters.FirstOrDefault(p => p.Type.FullName == "Bridge.ObjectInitializationMode");
+
+                        if (prm != null)
                         {
-                            mode = (int)arg.ConstantValue;
+                            var prmIndex = rr.Member.Parameters.IndexOf(prm);
+                            var arg = rr.Arguments.FirstOrDefault(a =>
+                            {
+                                if (a is NamedArgumentResolveResult)
+                                {
+                                    return ((NamedArgumentResolveResult)a).ParameterName == prm.Name;
+                                }
+
+                                return prmIndex == rr.Arguments.IndexOf(a);
+                            });
+
+                            if (arg != null && arg.ConstantValue != null && (int)arg.ConstantValue == 1)
+                            {
+                                mode = (int)arg.ConstantValue;
+                            }
                         }
                     }
                     else if (itype != null)
                     {
-                        var attr = this.Emitter.Validator.GetAttribute(itype.Attributes, Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute");
-                        if (attr.PositionalArguments.Count > 0)
-                        {
-                            var value = attr.PositionalArguments.First().ConstantValue;
-
-                            if (value != null && value is int)
-                            {
-                                mode = (int)value;
-                            }
-                        }
+                        mode = this.Emitter.Validator.GetObjectInitializationMode(type);
                     }
                 }
 

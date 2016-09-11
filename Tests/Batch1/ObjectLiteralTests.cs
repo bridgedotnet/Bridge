@@ -60,8 +60,8 @@ namespace Bridge.ClientTest
 
                 var config3 = new Config3 { };
                 Assert.NotNull(config3, "Plain Mode config3 created");
-                Assert.AreEqual(3, config3.Val1, "config3 Val1");
-                Assert.AreEqual(0, config3.Val2, "config3 Val2");
+                Assert.Null(config3.Val1, "config3 Val1");
+                Assert.Null(config3.Val2, "config3 Val2");
 
             }
         }

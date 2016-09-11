@@ -307,11 +307,14 @@ namespace Bridge.Translator
             {
                 var args = attr.ConstructorArguments;
 
-                if (args.Count > 1)
+                if (args.Count > 0)
                 {
-                    if (args[1].Type.FullName == Translator.Bridge_ASSEMBLY + ".ObjectCreateMode")
+                    for (int i = 0; i < args.Count; i++)
                     {
-                        return (int)args[1].Value;
+                        if (args[i].Type.FullName == Translator.Bridge_ASSEMBLY + ".ObjectCreateMode")
+                        {
+                            return (int)args[i].Value;
+                        }
                     }
                 }
             }

@@ -16339,10 +16339,10 @@
             Bridge.Test.Assert.areEqual$1(2, config2.val1, "config2 Val1");
             Bridge.Test.Assert.areEqual$1(12, config2.val2, "config2 Val2");
 
-            var config3 = Bridge.ClientTest.ObjectLiteralTests.ObjectInitializationMode.Config3.ctor();
+            var config3 = {  };
             Bridge.Test.Assert.notNull$1(config3, "Plain Mode config3 created");
-            Bridge.Test.Assert.areEqual$1(3, config3.val1, "config3 Val1");
-            Bridge.Test.Assert.areEqual$1(0, config3.val2, "config3 Val2");
+            Bridge.Test.Assert.null$1(config3.val1, "config3 Val1");
+            Bridge.Test.Assert.null$1(config3.val2, "config3 Val2");
 
         }
     });
