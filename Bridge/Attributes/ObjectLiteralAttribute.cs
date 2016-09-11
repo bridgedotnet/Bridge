@@ -20,6 +20,10 @@ namespace Bridge
         {
         }
 
+        public ObjectLiteralAttribute(ObjectCreateMode createMode)
+        {
+        }
+
         public ObjectLiteralAttribute(ObjectInitializationMode initializationMode, ObjectCreateMode createMode)
         {
         }
