@@ -41,6 +41,21 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                     }
                 }
             }
+
+            public int SumOfArray(params int[] a)
+            {
+                var r = 1130;
+
+                if (a != null)
+                {
+                    for (int i = 0; i < a.Length; i++)
+                    {
+                        r += a[i];
+                    }
+                }
+
+                return r;
+            }
         }
 
         [Test]
@@ -72,9 +87,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             var o23 = new SomeClass2(1, 2);
             Assert.AreEqual(1133, o23.Value, "o2 #3");
-
-            var o24 = new SomeClass2(a: 2);
-            Assert.AreEqual(1132, o24.Value, "o2 #4");
         }
     }
 }

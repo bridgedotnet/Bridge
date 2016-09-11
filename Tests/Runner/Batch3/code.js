@@ -6567,9 +6567,6 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
             var o23 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1511.SomeClass2.$ctor1([1, 2]);
             Bridge.Test.Assert.areEqual$1(1133, o23.value, "o2 #3");
-
-            var o24 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1511.SomeClass2.$ctor1(2);
-            Bridge.Test.Assert.areEqual$1(1132, o24.value, "o2 #4");
         }
     });
 
@@ -6605,6 +6602,18 @@ Bridge.initAssembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                     this.value = (this.value + a[i]) | 0;
                 }
             }
+        },
+        sumOfArray: function (a) {
+            if (a === void 0) { a = []; }
+            var r = 1130;
+
+            if (a != null) {
+                for (var i = 0; i < a.length; i = (i + 1) | 0) {
+                    r = (r + a[i]) | 0;
+                }
+            }
+
+            return r;
         }
     });
 
