@@ -25,7 +25,7 @@ namespace System
 
         public abstract string ToString(IFormatProvider formatProvider);
 
-        string IFormattable.Format(string format, IFormatProvider formatProvider)
+        string IFormattable.ToString(string format, IFormatProvider formatProvider)
         {
             return this.ToString(formatProvider);
         }

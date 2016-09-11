@@ -209,7 +209,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         public void IFormattableToStringWorks()
         {
             var dt = new DateTime(2011, 7, 12);
-            Assert.AreEqual("2011-07-12", ((IFormattable)dt).Format("yyyy-MM-dd", CultureInfo.InvariantCulture));
+            Assert.AreEqual("2011-07-12", ((IFormattable)dt).ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
         }
 
         // Not C# API

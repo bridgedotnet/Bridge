@@ -30,7 +30,7 @@
 
         public const string MODULE_DATETIME = "Date and time"; // "DateTime, TimeSpan";
         public const string MODULE_NULLABLE = "Nullable";
-        public const string MODULE_STRING = "String";// "String, StringBuilder"
+        public const string MODULE_STRING = "String";// "String, StringBuilder, FormattableString"
         public const string MODULE_REGEX = "Regex";
         public const string MODULE_REGEX_JS = "RegexJS";
         public const string MODULE_ENUM = "Enum";
@@ -89,7 +89,7 @@
         public const string MODULE_CHECKED_UNCKECKED = "Checked/Unckecked";
         public const string MODULE_TYPE_SYSTEM = "Type system";
         public const string MODULE_REFLECTION = "Reflection";
-        public const string MODULE_ARGUMENTS = "Arguments";
+        public const string MODULE_FUNCTIONS = "Functions";
         public const string MODULE_MIXIN = "Mixin";
         public const string MODULE_SERIALIZATION = "Serialization";
         public const string MODULE_BRIDGECONSOLE = "Bridge Console";

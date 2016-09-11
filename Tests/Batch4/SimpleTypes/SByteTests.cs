@@ -134,7 +134,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         [Test]
         public void IFormattableToStringWorks()
         {
-            Assert.AreEqual("12", ((IFormattable)((sbyte)0x12)).Format("x", CultureInfo.InvariantCulture));
+            Assert.AreEqual("12", ((IFormattable)((sbyte)0x12)).ToString("x", CultureInfo.InvariantCulture));
         }
 
         // Not C# API

@@ -52,6 +52,7 @@ namespace Bridge
         /// <param name="instance">The object used as the value of 'this' within the function.</param>
         /// <param name="arguments">The set of arguments to pass in into the function.</param>
         /// <returns>Any return value returned from the function.</returns>
+        [Template("{this}.apply({instance}, [{*arguments}])")]
         public extern object Apply(object instance, params object[] arguments);
 
         /// <summary>

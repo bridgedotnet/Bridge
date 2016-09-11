@@ -18691,7 +18691,7 @@
             Bridge.Test.Assert.areEqual("123", (System.Int64(291)).toString("x"));
         },
         toStringWithFormatAndProviderWorks: function () {
-            Bridge.Test.Assert.areEqual("123", (System.Int64(291)).toString("x", System.Globalization.CultureInfo.invariantCulture));
+            Bridge.Test.Assert.areEqual("123", (System.Int64(291)).format("x", System.Globalization.CultureInfo.invariantCulture));
         },
         iFormattableToStringWorks: function () {
             Bridge.Test.Assert.areEqual("123", Bridge.format(System.Int64(291), "x", System.Globalization.CultureInfo.invariantCulture));
@@ -20517,7 +20517,7 @@
             Bridge.Test.Assert.areEqual("123", (System.UInt64(291)).toString("x"));
         },
         toStringWithFormatAndProviderWorks: function () {
-            Bridge.Test.Assert.areEqual("123", (System.UInt64(291)).toString("x", System.Globalization.CultureInfo.invariantCulture));
+            Bridge.Test.Assert.areEqual("123", (System.UInt64(291)).format("x", System.Globalization.CultureInfo.invariantCulture));
         },
         iFormattableToStringWorks: function () {
             Bridge.Test.Assert.areEqual("123", Bridge.format(System.UInt64(291), "x", System.Globalization.CultureInfo.invariantCulture));
