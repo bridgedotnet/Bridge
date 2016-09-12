@@ -1,4 +1,4 @@
-﻿Bridge.initAssembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflection.Resource2.bin":"EBESExQV","Bridge.ClientTest.Batch4.Reflection.Resource1.bin":"AAECAwQFBgc="}, function ($asm, globals) {
+﻿Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflection.Resource2.bin":"EBESExQV","Bridge.ClientTest.Batch4.Reflection.Resource1.bin":"AAECAwQFBgc="}, function ($asm, globals) {
     "use strict";
 
     Bridge.define('Bridge.ClientTest.Batch4.ActivatorTests', {
@@ -107,9 +107,9 @@
             Bridge.Test.Assert.areEqual(42, c3.i);
         },
         createInstanceWithNoArgumentsWorksForClassWithJsonDefaultConstructor: function () {
-            var c1 = Bridge.createInstance(Object);
-            var c2 = Bridge.createInstance(Object);
-            var c3 = this.instantiate(Object);
+            var c1 = Bridge.createInstance(Bridge.ClientTest.Batch4.ActivatorTests.C7);
+            var c2 = Bridge.createInstance(Bridge.ClientTest.Batch4.ActivatorTests.C7);
+            var c3 = this.instantiate(Bridge.ClientTest.Batch4.ActivatorTests.C7);
 
             Bridge.Test.Assert.areEqual(Object, c1.constructor);
             Bridge.Test.Assert.areEqual(Object, c2.constructor);
@@ -181,6 +181,16 @@
         ctor: function () {
             this.$initialize();
             this.i = 42;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.Batch4.ActivatorTests.C7', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+            }).call($this);
+            return $this;
         }
     });
 
@@ -13519,7 +13529,7 @@
         },
         castOperatorForSerializableTypeWithoutTypeCheckCodeAlwaysSucceedsGeneric: function () {
             var o = {  };
-            var b = this.cast(Object, o);
+            var b = this.cast(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.OL, o);
             Bridge.Test.Assert.true(Bridge.referenceEquals(o, b));
         },
         typeCheckForSubTypeOfGenericType: function () {
@@ -13592,6 +13602,10 @@
         $kind: "interface",
         $variance: [0,1]
     }; });
+
+    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.OL', {
+        $literal: true
+    });
 
     Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests', {
         fullNamePropertyReturnsTheNameWithTheNamespace: function () {

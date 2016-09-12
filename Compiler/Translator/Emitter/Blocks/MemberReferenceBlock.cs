@@ -834,7 +834,7 @@ namespace Bridge.Translator
                         this.Write(inline);
                     }
                 }
-                else if (member.Member.SymbolKind == SymbolKind.Property && member.TargetResult.Type.Kind != TypeKind.Anonymous && !this.Emitter.Validator.IsObjectLiteral(member.Member.DeclaringTypeDefinition))
+                else if (member.Member.SymbolKind == SymbolKind.Property && member.TargetResult.Type.Kind != TypeKind.Anonymous && (!this.Emitter.Validator.IsObjectLiteral(member.Member.DeclaringTypeDefinition) || member.Member.IsStatic))
                 {
                     var proto = false;
                     if (this.MemberReferenceExpression.Target is BaseReferenceExpression && member != null)

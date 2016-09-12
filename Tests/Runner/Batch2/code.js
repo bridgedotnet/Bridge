@@ -1,4 +1,4 @@
-﻿Bridge.initAssembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
+﻿Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
     "use strict";
 
     Bridge.define('Bridge.ClientTest.Batch2.BridgeIssues.Bridge1385', {

@@ -1,4 +1,4 @@
-﻿Bridge.initAssembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
+﻿Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
     
     Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner', {
         $main: function () {

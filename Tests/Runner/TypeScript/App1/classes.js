@@ -1,4 +1,4 @@
-﻿Bridge.initAssembly("TypeScriptTest", function ($asm, globals) {
+﻿Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     "use strict";
 
     Bridge.define('Classes.Animal', {

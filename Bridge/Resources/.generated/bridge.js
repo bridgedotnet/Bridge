@@ -426,6 +426,10 @@
         },
 
         is: function (obj, type, ignoreFn, allowNull) {
+            if (type && type.prototype && type.prototype.$literal && Bridge.isPlainObject(obj)) {
+                return true;
+            }
+
             if (typeof type === "boolean") {
                 return type;
             }
@@ -2271,7 +2275,7 @@
     // @source Class.js
 
     var base = {
-        initialize: function () {
+        _initialize: function () {
             if (this.$initialized) {
                 return;
             }
@@ -2548,7 +2552,7 @@
                 };
             }
 
-            prop.$initialize = Bridge.Class.initialize;
+            prop.$initialize = Bridge.Class._initialize;
 
             var keys = [];
 
@@ -2714,7 +2718,7 @@
                 exists,
                 i;
 
-            for (i = 0; i < (nameParts.length - 1) ; i++) {
+            for (i = 0; i < (nameParts.length - 1); i++) {
                 if (typeof scope[nameParts[i]] == "undefined") {
                     scope[nameParts[i]] = {};
                 }
@@ -2878,7 +2882,7 @@
 
     // @source Reflection.js
 
-    Bridge.initAssembly = function (assemblyName, res, callback) {
+    Bridge.assembly = function (assemblyName, res, callback) {
         if (!callback) {
             callback = res;
             res = {};

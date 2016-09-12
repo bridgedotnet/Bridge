@@ -119,7 +119,7 @@ namespace Bridge.Translator
                         }
 
                         var pos = this.OpenBracketPosition;
-                        this.Emitter.Output.Insert(pos, ".apply");
+                        this.Emitter.Output.Insert(pos, "." + JS.Funcs.APPLY);
                         pos += 7;
 
                         this.Emitter.Output.Insert(pos, scope + ", " + (needConcat ? "[" : ""));

@@ -1,11 +1,9 @@
 using Bridge.Contract;
 using Bridge.Contract.Constants;
-
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.CSharp.Resolver;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,6 +51,10 @@ namespace Bridge.Translator
                 if (expression != null)
                 {
                     expression.AcceptVisitor(this.Emitter);
+                }
+                else
+                {
+                    this.WriteThis();
                 }
             }
         }
@@ -121,6 +123,7 @@ namespace Bridge.Translator
             var targetResolve = this.Emitter.Resolver.ResolveNode(invocationExpression, this.Emitter);
             var csharpInvocation = targetResolve as CSharpInvocationResolveResult;
             MemberReferenceExpression targetMember = invocationExpression.Target as MemberReferenceExpression;
+            bool isObjectLiteral = csharpInvocation != null && csharpInvocation.Member.DeclaringTypeDefinition != null ? this.Emitter.Validator.IsObjectLiteral(csharpInvocation.Member.DeclaringTypeDefinition) : false;
 
             var interceptor = this.Emitter.Plugins.OnInvocation(this, this.InvocationExpression, targetResolve as InvocationResolveResult);
 
@@ -215,11 +218,9 @@ namespace Bridge.Translator
                 }
             }
 
-            if (targetMember != null)
+            if (targetMember != null || isObjectLiteral)
             {
-                var member = this.Emitter.Resolver.ResolveNode(targetMember.Target, this.Emitter);
-
-                //var targetResolve = this.Emitter.Resolver.ResolveNode(targetMember, this.Emitter);
+                var member = targetMember != null ? this.Emitter.Resolver.ResolveNode(targetMember.Target, this.Emitter) : null;
 
                 if (targetResolve != null)
                 {
@@ -285,12 +286,12 @@ namespace Bridge.Translator
                     {
                         var resolvedMethod = invocationResult.Member as IMethod;
 
-                        if (resolvedMethod != null && resolvedMethod.IsExtensionMethod)
+                        if (resolvedMethod != null && (resolvedMethod.IsExtensionMethod || isObjectLiteral))
                         {
                             string inline = this.Emitter.GetInline(resolvedMethod);
                             bool isNative = this.IsNativeMethod(resolvedMethod);
 
-                            if (isExtensionMethodInvocation)
+                            if (isExtensionMethodInvocation || isObjectLiteral)
                             {
                                 if (!string.IsNullOrWhiteSpace(inline))
                                 {
@@ -305,7 +306,26 @@ namespace Bridge.Translator
                                 else if (!isNative)
                                 {
                                     var overloads = OverloadsCollection.Create(this.Emitter, resolvedMethod);
-                                    string name = BridgeTypes.ToJsName(resolvedMethod.DeclaringType, this.Emitter) + "." + overloads.GetOverloadName();
+                                    string name = BridgeTypes.ToJsName(resolvedMethod.DeclaringType, this.Emitter) + ".";
+
+                                    if (isObjectLiteral && !resolvedMethod.IsStatic)
+                                    {
+                                        name += JS.Fields.PROTOTYPE + "." + overloads.GetOverloadName() + ".";
+
+                                        if (resolvedMethod.Parameters.Count > 0)
+                                        {
+                                            name += JS.Funcs.APPLY;
+                                        }
+                                        else
+                                        {
+                                            name += JS.Funcs.CALL;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        name += overloads.GetOverloadName();
+                                    }
+
                                     var isIgnoreClass = resolvedMethod.DeclaringTypeDefinition != null && this.Emitter.Validator.IsIgnoreType(resolvedMethod.DeclaringTypeDefinition);
 
                                     this.Write(name);
@@ -321,11 +341,14 @@ namespace Bridge.Translator
 
                                     this.EnsureComma(false);
 
-                                    this.WriteThisExtension(invocationExpression.Target);
-
-                                    if (invocationExpression.Arguments.Count > 0)
+                                    if (!isObjectLiteral || !resolvedMethod.IsStatic)
                                     {
-                                        this.WriteComma();
+                                        this.WriteThisExtension(invocationExpression.Target);
+
+                                        if (invocationExpression.Arguments.Count > 0)
+                                        {
+                                            this.WriteComma();
+                                        }
                                     }
 
                                     new ExpressionListBlock(this.Emitter, argsExpressions, paramsArg, invocationExpression, openPos).Emit();

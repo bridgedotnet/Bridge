@@ -1,4 +1,4 @@
-﻿Bridge.initAssembly("Bridge_ClientTest_Tests", function ($asm, globals) {
+﻿Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
     
     Bridge.define('Bridge.Test.Assert', {
         statics: {

@@ -62,6 +62,8 @@ namespace Bridge.Translator
             }
 
             var type = isTypeParam ? null : this.Emitter.GetTypeDefinition(objectCreateExpression.Type);
+            var isObjectLiteral = type != null && this.Emitter.Validator.IsObjectLiteral(type);
+            var isSynthetic = invocationResolveResult == null || invocationResolveResult.Member.IsSynthetic;
 
             if (type != null && type.BaseType != null && type.BaseType.FullName == "System.MulticastDelegate")
             {
@@ -123,12 +125,70 @@ namespace Bridge.Translator
                 isCollectionInitializer = elements.Count > 0 && elements.First() is ArrayInitializerExpression;
             }
 
-            if (inlineCode == null && Regex.Match(customCtor, @"\s*\{\s*\}\s*").Success)
+            var isPlainObjectCtor = Regex.Match(customCtor, @"\s*\{\s*\}\s*").Success;
+
+            if (isObjectLiteral)
+            {
+                if (this.Emitter.Validator.GetObjectCreateMode(type) == 1)
+                {
+                    isSynthetic = true;
+                }
+                else if (invocationResolveResult != null)
+                {
+                    if (invocationResolveResult.Member.Parameters.Count > 0)
+                    {
+                        var prm = invocationResolveResult.Member.Parameters.FirstOrDefault(p => p.Type.FullName == "Bridge.ObjectCreateMode");
+
+                        if (prm != null)
+                        {
+                            var prmIndex = invocationResolveResult.Member.Parameters.IndexOf(prm);
+                            var arg = invocationResolveResult.Arguments.FirstOrDefault(a =>
+                            {
+                                if (a is NamedArgumentResolveResult)
+                                {
+                                    return ((NamedArgumentResolveResult) a).ParameterName == prm.Name;
+                                }
+                                
+                                return prmIndex == invocationResolveResult.Arguments.IndexOf(a);
+                            });
+
+                            if (arg != null && arg.ConstantValue != null && (int)arg.ConstantValue == 1)
+                            {
+                                isSynthetic = true;
+                            }
+                        }
+                    }
+                }
+            }
+            
+
+            if (isSynthetic && isObjectLiteral && isPlainObjectCtor)
+            {
+                var baseType = this.Emitter.GetBaseTypeDefinition(type);
+                if (baseType != null && (!this.Emitter.Validator.IsIgnoreType(baseType) || this.Emitter.Validator.IsBridgeClass(baseType)))
+                {
+                    isSynthetic = false;
+                }
+
+                if (isSynthetic)
+                {
+                    foreach (var propertyDefinition in type.Properties)
+                    {
+                        if (!Helpers.IsAutoProperty(propertyDefinition))
+                        {
+                            isSynthetic = false;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (inlineCode == null && isPlainObjectCtor && (!isObjectLiteral || isSynthetic))
             {
                 this.WriteOpenBrace();
                 this.WriteSpace();
 
-                this.WriteObjectInitializer(objectCreateExpression.Initializer.Elements, this.Emitter.AssemblyInfo.PreserveMemberCase, type, invocationResolveResult);
+                this.WriteObjectInitializer(objectCreateExpression.Initializer.Elements, type, invocationResolveResult, false);
                 this.WriteSpace();
 
                 this.WriteCloseBrace();
@@ -157,14 +217,14 @@ namespace Bridge.Translator
 
                         if (ctor_rr.Type.Kind == TypeKind.Array && !(paramsArg is ArrayCreateExpression) && objectCreateExpression.Arguments.Last() == paramsArg)
                         {
-                            this.Write("Bridge.Reflection.applyConstructor(");
+                            this.Write(JS.Types.Bridge.Reflection.APPLYCONSTRUCTOR + "(");
                             applyCtor = true;
                         }
                     }
 
-                    if (String.IsNullOrEmpty(customCtor))
+                    if (String.IsNullOrEmpty(customCtor) || (isObjectLiteral && isPlainObjectCtor))
                     {
-                        if (!applyCtor)
+                        if (!applyCtor && !isObjectLiteral)
                         {
                             this.WriteNew();
                         }
@@ -189,7 +249,7 @@ namespace Bridge.Translator
                         this.Write(customCtor);
                     }
 
-                    if (!isTypeParam && !this.Emitter.Validator.IsIgnoreType(type) && type.Methods.Count(m => m.IsConstructor && !m.IsStatic) > (type.IsValueType ? 0 : 1))
+                    if (!isTypeParam && !this.Emitter.Validator.IsIgnoreType(type) && type.Methods.Count(m => m.IsConstructor && !m.IsStatic) > (type.IsValueType || isObjectLiteral ? 0 : 1))
                     {
                         this.WriteDot();
                         var name = OverloadsCollection.Create(this.Emitter, ((InvocationResolveResult)this.Emitter.Resolver.ResolveNode(objectCreateExpression, this.Emitter)).Member).GetOverloadName();
@@ -215,7 +275,7 @@ namespace Bridge.Translator
 
                     bool needComma = false;
 
-                    if (isCollectionInitializer)
+                    if (isCollectionInitializer && !isObjectLiteral)
                     {
                         this.Write("[");
                         this.WriteNewLine();
@@ -225,57 +285,66 @@ namespace Bridge.Translator
                     {
                         this.BeginBlock();
                     }
+
                     List<string> inlineInit = new List<string>();
-                    foreach (Expression item in elements)
+
+                    if (isObjectLiteral)
                     {
-                        if (needComma)
+                        this.WriteObjectInitializer(objectCreateExpression.Initializer.Elements, type, invocationResolveResult, true);
+                    }
+                    else
+                    {
+                        foreach (Expression item in elements)
                         {
-                            this.WriteComma(true);
-                        }
-
-                        needComma = true;
-
-                        inlineCode = ObjectCreateBlock.GetInlineInit(item, this);
-
-                        if (inlineCode != null)
-                        {
-                            inlineInit.Add(inlineCode);
-                        }
-                        else if (item is NamedExpression)
-                        {
-                            var namedExpression = (NamedExpression)item;
-                            new NameBlock(this.Emitter, namedExpression.Name, namedExpression, namedExpression.Expression, true).Emit();
-                        }
-                        else if (item is NamedArgumentExpression)
-                        {
-                            var namedArgumentExpression = (NamedArgumentExpression)item;
-                            new NameBlock(this.Emitter, namedArgumentExpression.Name, namedArgumentExpression, namedArgumentExpression.Expression, true).Emit();
-                        }
-                        else if (item is ArrayInitializerExpression)
-                        {
-                            var arrayInitializer = (ArrayInitializerExpression)item;
-                            this.Write("[");
-
-                            foreach (var el in arrayInitializer.Elements)
+                            if (needComma)
                             {
-                                this.EnsureComma(false);
-                                el.AcceptVisitor(this.Emitter);
-                                this.Emitter.Comma = true;
+                                this.WriteComma(true);
                             }
 
-                            this.Write("]");
-                            this.Emitter.Comma = false;
-                        }
-                        else if (item is IdentifierExpression)
-                        {
-                            var identifierExpression = (IdentifierExpression)item;
-                            new IdentifierBlock(this.Emitter, identifierExpression).Emit();
+                            needComma = true;
+
+                            inlineCode = ObjectCreateBlock.GetInlineInit(item, this);
+
+                            if (inlineCode != null)
+                            {
+                                inlineInit.Add(inlineCode);
+                            }
+                            else if (item is NamedExpression)
+                            {
+                                var namedExpression = (NamedExpression)item;
+                                new NameBlock(this.Emitter, namedExpression.Name, namedExpression, namedExpression.Expression, true).Emit();
+                            }
+                            else if (item is NamedArgumentExpression)
+                            {
+                                var namedArgumentExpression = (NamedArgumentExpression)item;
+                                new NameBlock(this.Emitter, namedArgumentExpression.Name, namedArgumentExpression, namedArgumentExpression.Expression, true).Emit();
+                            }
+                            else if (item is ArrayInitializerExpression)
+                            {
+                                var arrayInitializer = (ArrayInitializerExpression)item;
+                                this.Write("[");
+
+                                foreach (var el in arrayInitializer.Elements)
+                                {
+                                    this.EnsureComma(false);
+                                    el.AcceptVisitor(this.Emitter);
+                                    this.Emitter.Comma = true;
+                                }
+
+                                this.Write("]");
+                                this.Emitter.Comma = false;
+                            }
+                            else if (item is IdentifierExpression)
+                            {
+                                var identifierExpression = (IdentifierExpression)item;
+                                new IdentifierBlock(this.Emitter, identifierExpression).Emit();
+                            }
                         }
                     }
 
                     this.WriteNewLine();
 
-                    if (isCollectionInitializer)
+                    if (isCollectionInitializer && !isObjectLiteral)
                     {
                         this.Outdent();
                         this.Write("]");
@@ -408,12 +477,13 @@ namespace Bridge.Translator
             return inlineCode;
         }
 
-        protected virtual void WriteObjectInitializer(IEnumerable<Expression> expressions, bool preserveMemberCase, TypeDefinition type, InvocationResolveResult rr)
+        protected virtual void WriteObjectInitializer(IEnumerable<Expression> expressions, TypeDefinition type, InvocationResolveResult rr, bool withCtor)
         {
             bool needComma = false;
             List<string> names = new List<string>();
+            var isObjectLiteral = this.Emitter.Validator.IsObjectLiteral(type);
 
-            if (rr != null && this.ObjectCreateExpression.Arguments.Count > 0)
+            if (!withCtor && rr != null && this.ObjectCreateExpression.Arguments.Count > 0)
             {
                 var args = this.ObjectCreateExpression.Arguments.ToList();
                 var arrIsOpen = false;
@@ -456,16 +526,10 @@ namespace Bridge.Translator
                     NamedArgumentExpression namedArgumentExpression = item as NamedArgumentExpression;
                     string name = namedExression != null ? namedExression.Name : namedArgumentExpression.Name;
 
-                    if (!preserveMemberCase)
-                    {
-                        name = Object.Net.Utilities.StringUtils.ToLowerCamelCase(name);
-                    }
-
                     var itemrr = this.Emitter.Resolver.ResolveNode(item, this.Emitter) as MemberResolveResult;
                     if (itemrr != null)
                     {
                         var oc = OverloadsCollection.Create(this.Emitter, itemrr.Member);
-                        oc.CancelChangeCase = this.Emitter.IsNativeMember(itemrr.Member.FullName) ? false : preserveMemberCase;
                         name = oc.GetOverloadName();
                     }
 
@@ -485,7 +549,7 @@ namespace Bridge.Translator
                 }
             }
 
-            if (this.Emitter.Validator.IsObjectLiteral(type))
+            if (isObjectLiteral)
             {
                 var key = BridgeTypes.GetTypeDefinitionKey(type);
                 var tinfo = this.Emitter.Types.FirstOrDefault(t => t.Key == key);
@@ -499,27 +563,32 @@ namespace Bridge.Translator
                 var mode = 0;
                 if (rr != null)
                 {
-                    if (rr.Member.Parameters.Count == 1 &&
-                        rr.Member.Parameters.First().Type.FullName == "Bridge.DefaultValueMode")
+                    if (rr.Member.Parameters.Count > 0)
                     {
-                        var arg = rr.Arguments.FirstOrDefault();
-                        if (arg != null && arg.ConstantValue != null)
+                        var prm = rr.Member.Parameters.FirstOrDefault(p => p.Type.FullName == "Bridge.ObjectInitializationMode");
+
+                        if (prm != null)
                         {
-                            mode = (int)arg.ConstantValue;
+                            var prmIndex = rr.Member.Parameters.IndexOf(prm);
+                            var arg = rr.Arguments.FirstOrDefault(a =>
+                            {
+                                if (a is NamedArgumentResolveResult)
+                                {
+                                    return ((NamedArgumentResolveResult)a).ParameterName == prm.Name;
+                                }
+
+                                return prmIndex == rr.Arguments.IndexOf(a);
+                            });
+
+                            if (arg != null && arg.ConstantValue != null && (int)arg.ConstantValue == 1)
+                            {
+                                mode = (int)arg.ConstantValue;
+                            }
                         }
                     }
                     else if (itype != null)
                     {
-                        var attr = this.Emitter.Validator.GetAttribute(itype.Attributes, Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute");
-                        if (attr.PositionalArguments.Count > 0)
-                        {
-                            var value = attr.PositionalArguments.First().ConstantValue;
-
-                            if (value != null && value is int)
-                            {
-                                mode = (int)value;
-                            }
-                        }
+                        mode = this.Emitter.Validator.GetObjectInitializationMode(type);
                     }
                 }
 
@@ -537,11 +606,6 @@ namespace Bridge.Translator
                             }
 
                             var name = member.GetName(this.Emitter);
-
-                            if (!preserveMemberCase)
-                            {
-                                name = Object.Net.Utilities.StringUtils.ToLowerCamelCase(name);
-                            }
 
                             if (names.Contains(name))
                             {
