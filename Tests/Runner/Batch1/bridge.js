@@ -2867,7 +2867,7 @@
 
     // @source Reflection.js
 
-    Bridge.initAssembly = function (assemblyName, res, callback) {
+    Bridge.assembly = function (assemblyName, res, callback) {
         if (!callback) {
             callback = res;
             res = {};

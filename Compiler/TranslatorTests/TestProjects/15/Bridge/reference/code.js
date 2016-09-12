@@ -1,4 +1,4 @@
-﻿Bridge.initAssembly("TestProject", function ($asm, globals) {
+﻿Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
     Bridge.define('TestProject1.ExistsIfTest1Defined');

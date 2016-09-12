@@ -1,4 +1,4 @@
-﻿Bridge.initAssembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resource1.bin":"AAECAwQFBgc=","Bridge.ClientTest.Batch1.Reflection.Resource2.bin":"EBESExQV"}, function ($asm, globals) {
+﻿Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resource1.bin":"AAECAwQFBgc=","Bridge.ClientTest.Batch1.Reflection.Resource2.bin":"EBESExQV"}, function ($asm, globals) {
     "use strict";
 
     /** @namespace System */

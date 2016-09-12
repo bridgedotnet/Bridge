@@ -2867,7 +2867,7 @@
 
     // @source Reflection.js
 
-    Bridge.initAssembly = function (assemblyName, res, callback) {
+    Bridge.assembly = function (assemblyName, res, callback) {
         if (!callback) {
             callback = res;
             res = {};
@@ -22911,7 +22911,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
 })(this);
 
-Bridge.initAssembly("TestProject", function ($asm, globals) {
+Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
     Bridge.define('Test.BridgeIssues.N1424.A');
@@ -22930,7 +22930,7 @@ Bridge.initAssembly("TestProject", function ($asm, globals) {
 
 });
 
-Bridge.initAssembly("TestProject", function ($asm, globals) {
+Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
     Bridge.define('Test.BridgeIssues.N770.IBase', {
@@ -22950,7 +22950,7 @@ Bridge.initAssembly("TestProject", function ($asm, globals) {
 
 });
 
-Bridge.initAssembly("TestProject", function ($asm, globals) {
+Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
     Bridge.define('TestProject1.TestClassA', {
@@ -22959,7 +22959,7 @@ Bridge.initAssembly("TestProject", function ($asm, globals) {
 
 });
 
-Bridge.initAssembly("TestProject", function ($asm, globals) {
+Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
     Bridge.define('TestProject2.TestClassB', {

@@ -1,4 +1,4 @@
-﻿Bridge.initAssembly("TestProject", function ($asm, globals) {
+﻿Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
     define("Bridge528_A", ["bridge","dep1"], function (_, dep1) {
