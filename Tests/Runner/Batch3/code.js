@@ -6025,6 +6025,17 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1448.Literal', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.v = null;
+            }).call($this);
+            return $this;
+        }
+    });
+
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1448.Plainer');
 
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458', {
@@ -7853,6 +7864,23 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1744', {
+        statics: {
+            invoke: function (args) {
+                if (args === void 0) { args = []; }
+                if (args == null) {
+                    return -1;
+                }
+
+                return args.length;
+            }
+        },
+        testMethodInvocationWithParams: function () {
+            Bridge.Test.Assert.areEqual$1(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1744.invoke(), "Invoke()");
+            Bridge.Test.Assert.areEqual$1(-1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1744.invoke(null), "Invoke(null)");
+        }
+    });
+
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1754', {
         testAllUpperCaseNames: function () {
             var app = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1754.App();
@@ -8083,6 +8111,18 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         removeAt: function (index) {
         }
     }; });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1775', {
+        testSumForEmpty: function () {
+            var decimalList = new (System.Collections.Generic.List$1(System.Decimal))();
+            var decimalSum = System.Linq.Enumerable.from(decimalList).sum(System.Decimal.Zero);
+            var lessThanOne = decimalSum.lt(System.Decimal(1));
+
+            Bridge.Test.Assert.true$1(Bridge.is(decimalSum, System.Decimal), "is decimal");
+            Bridge.Test.Assert.true$1(decimalSum.equalsT(System.Decimal(0)), "== 0");
+            Bridge.Test.Assert.true$1(lessThanOne, "less than one");
+        }
+    });
 
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1776', {
         testTupleHashCode: function () {
@@ -8353,6 +8393,20 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         clear: function () {
             this._backingDictionary.clear();
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge377', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.field1 = null;
+                this.field2 = null;
+                this.field3 = 0;
+                this.field4 = 0;
+            }).call($this);
+            return $this;
         }
     });
 
@@ -14123,8 +14177,8 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             testLinqDecimal: function () {
                 var a = [System.Decimal(1.0), System.Decimal(2.0), System.Decimal(3.0)];
 
-                Bridge.Test.Assert.true(System.Linq.Enumerable.from(a).average().equalsT(System.Decimal(2)));
-                Bridge.Test.Assert.true(System.Linq.Enumerable.from(a).sum().equalsT(System.Decimal(6)));
+                Bridge.Test.Assert.true(System.Linq.Enumerable.from(a).average(System.Decimal.Zero).equalsT(System.Decimal(2)));
+                Bridge.Test.Assert.true(System.Linq.Enumerable.from(a).sum(System.Decimal.Zero).equalsT(System.Decimal(6)));
             }
         }
     });

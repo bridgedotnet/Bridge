@@ -485,6 +485,14 @@ namespace Bridge.Contract
 
         public static bool IsFieldProperty(IMember propertyMember, IAssemblyInfo assemblyInfo)
         {
+            if (propertyMember is IProperty &&
+                !propertyMember.IsStatic &&
+                propertyMember.DeclaringTypeDefinition != null &&
+                propertyMember.DeclaringTypeDefinition.Attributes.Any(a => a.AttributeType.FullName == "Bridge.ObjectLiteralAttribute"))
+            {
+                return true;
+            }
+
             bool isAuto = propertyMember.Attributes.Any(a => a.AttributeType.FullName == "Bridge.FieldPropertyAttribute");
             if (!isAuto && assemblyInfo.AutoPropertyToField && propertyMember is IProperty)
             {
@@ -501,6 +509,14 @@ namespace Bridge.Contract
 
         public static bool IsFieldProperty(IMember propertyMember, IEmitter emitter)
         {
+            if (propertyMember is IProperty &&
+                !propertyMember.IsStatic &&
+                propertyMember.DeclaringTypeDefinition != null &&
+                propertyMember.DeclaringTypeDefinition.Attributes.Any(a => a.AttributeType.FullName == "Bridge.ObjectLiteralAttribute"))
+            {
+                return true;
+            }
+
             bool isAuto = propertyMember.Attributes.Any(a => a.AttributeType.FullName == "Bridge.FieldPropertyAttribute");
             if (!isAuto && emitter.AssemblyInfo.AutoPropertyToField)
             {
@@ -517,6 +533,16 @@ namespace Bridge.Contract
 
         public static bool IsFieldProperty(IMemberDefinition property, IEmitter emitter)
         {
+            var p = property as PropertyDefinition;
+            if (p != null &&
+                p.GetMethod != null &&
+                !p.GetMethod.IsStatic &&
+                property.DeclaringType != null &&
+                property.DeclaringType.CustomAttributes.Any(a => a.AttributeType.FullName == "Bridge.ObjectLiteralAttribute"))
+            {
+                return true;
+            }
+
             bool isAuto = property.CustomAttributes.Any(a => a.AttributeType.FullName == "Bridge.FieldPropertyAttribute");
             if (!isAuto && emitter.AssemblyInfo.AutoPropertyToField)
             {
@@ -535,7 +561,7 @@ namespace Bridge.Contract
             ResolveResult resolveResult = emitter.Resolver.ResolveNode(property, emitter) as MemberResolveResult;
             if (resolveResult != null && ((MemberResolveResult)resolveResult).Member != null)
             {
-                return IsFieldProperty(((MemberResolveResult)resolveResult).Member, emitter);
+                return Helpers.IsFieldProperty(((MemberResolveResult)resolveResult).Member, emitter);
             }
 
             string name = "Bridge.FieldProperty";

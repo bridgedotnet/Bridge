@@ -426,6 +426,10 @@
         },
 
         is: function (obj, type, ignoreFn, allowNull) {
+            if (type && type.prototype && type.prototype.$literal && Bridge.isPlainObject(obj)) {
+                return true;
+            }
+
             if (typeof type === "boolean") {
                 return type;
             }
@@ -2260,7 +2264,7 @@
     // @source Class.js
 
     var base = {
-        initialize: function () {
+        _initialize: function () {
             if (this.$initialized) {
                 return;
             }
@@ -2537,7 +2541,7 @@
                 };
             }
 
-            prop.$initialize = Bridge.Class.initialize;
+            prop.$initialize = Bridge.Class._initialize;
 
             var keys = [];
 
@@ -2703,7 +2707,7 @@
                 exists,
                 i;
 
-            for (i = 0; i < (nameParts.length - 1) ; i++) {
+            for (i = 0; i < (nameParts.length - 1); i++) {
                 if (typeof scope[nameParts[i]] == "undefined") {
                     scope[nameParts[i]] = {};
                 }
@@ -15103,10 +15107,15 @@
 
     // Overload:function ()
     // Overload:function (selector)
-    Enumerable.prototype.average = function (selector) {
+    Enumerable.prototype.average = function (selector, def) {
+        if (selector && !def && !Bridge.isFunction(selector)) {
+            def = selector;
+            selector = null;
+        }
+
         selector = Utils.createLambda(selector);
 
-        var sum = 0;
+        var sum = def || 0;
         var count = 0;
         this.forEach(function (x) {
             x = selector(x);
@@ -15123,15 +15132,19 @@
             ++count;
         });
 
+        if (count === 0) {
+            throw new System.InvalidOperationException("Sequence contains no elements");
+        }
+
         return (sum instanceof System.Decimal || System.Int64.is64Bit(sum)) ? sum.div(count) : (sum / count);
     };
 
-    Enumerable.prototype.nullableAverage = function (selector) {
+    Enumerable.prototype.nullableAverage = function (selector, def) {
         if (this.any(Bridge.isNull)) {
             return null;
         }
 
-        return this.average(selector);
+        return this.average(selector, def);
     };
 
     // Overload:function ()
@@ -15196,9 +15209,14 @@
 
     // Overload:function ()
     // Overload:function (selector)
-    Enumerable.prototype.sum = function (selector) {
+    Enumerable.prototype.sum = function (selector, def) {
+        if (selector && !def && !Bridge.isFunction(selector)) {
+            def = selector;
+            selector = null;
+        }
+
         if (selector == null) selector = Functions.Identity;
-        return this.select(selector).aggregate(0, function (a, b) {
+        var s = this.select(selector).aggregate(0, function (a, b) {
              if (a instanceof System.Decimal || System.Int64.is64Bit(a)) {
                  return a.add(b);
              }
@@ -15207,14 +15225,20 @@
              }
              return a + b;
         });
+
+        if (s === 0 && def) {
+            return def;
+        }
+
+        return s;
     };
 
-    Enumerable.prototype.nullableSum = function (selector) {
+    Enumerable.prototype.nullableSum = function (selector, def) {
         if (this.any(Bridge.isNull)) {
             return null;
         }
 
-        return this.sum(selector);
+        return this.sum(selector, def);
     };
 
     /* Paging Methods */

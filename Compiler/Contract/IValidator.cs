@@ -78,5 +78,9 @@ namespace Bridge.Contract
         bool IsValueEnum(ICSharpCode.NRefactory.TypeSystem.Implementation.DefaultResolvedTypeDefinition type);
 
         bool IsAccessorsIndexer(IEntity enity);
+
+        int GetObjectInitializationMode(TypeDefinition type);
+
+        int GetObjectCreateMode(TypeDefinition type);
     }
 }

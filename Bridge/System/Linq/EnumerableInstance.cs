@@ -37,6 +37,7 @@ namespace System.Linq
 
         public extern double Average(Func<TElement, double> selector);
 
+        [Template("{this}.average({selector}, System.Decimal.Zero)")]
         public extern decimal Average(Func<TElement, decimal> selector);
 
         public extern EnumerableInstance<TElement[]> Buffer(int count);
@@ -359,12 +360,14 @@ namespace System.Linq
 
         public extern int Sum(Func<TElement, int> selector);
 
+        [Template("{this}.sum({selector}, System.Long.Zero)")]
         public extern long Sum(Func<TElement, long> selector);
 
         public extern float Sum(Func<TElement, float> selector);
 
         public extern double Sum(Func<TElement, double> selector);
 
+        [Template("{this}.sum({selector}, System.Decimal.Zero)")]
         public extern decimal Sum(Func<TElement, decimal> selector);
 
         public extern EnumerableInstance<TElement> Take(int count);

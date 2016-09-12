@@ -293,7 +293,7 @@ namespace Bridge.Contract
 
             if (type.Kind == TypeKind.Dynamic)
             {
-                return JS.Types.OBJECT;
+                return JS.Types.Object.NAME;
             }
 
             if (NullableType.IsNullable(type))
@@ -482,7 +482,7 @@ namespace Bridge.Contract
 
             if (simpleType != null && simpleType.Identifier == "dynamic")
             {
-                return JS.Types.OBJECT;
+                return JS.Types.Object.NAME;
             }
 
             var resolveResult = emitter.Resolver.ResolveNode(astType, emitter);

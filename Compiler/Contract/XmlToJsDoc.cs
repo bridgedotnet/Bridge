@@ -538,7 +538,7 @@ namespace Bridge.Contract
                 list.Add(name);
             }
 
-            if (list.Count > 0 && list[0] == JS.Types.OBJECT)
+            if (list.Count > 0 && list[0] == JS.Types.Object.NAME)
             {
                 list.RemoveAt(0);
             }

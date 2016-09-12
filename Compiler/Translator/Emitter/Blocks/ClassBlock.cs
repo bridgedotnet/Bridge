@@ -59,7 +59,8 @@ namespace Bridge.Translator
                 this.Emitter.NamedFunctions = new Dictionary<string, string>();
                 this.WriteTopInitMethods();
 
-                this.Write("Bridge.apply(");
+                this.Write(JS.Types.Bridge.APPLY);
+                this.WriteOpenParentheses();
                 this.Write(globalTarget);
                 this.Write(", ");
                 this.BeginBlock();
@@ -193,6 +194,7 @@ namespace Bridge.Translator
             }
 
             this.WriteKind();
+            this.WriteObjectLiteral();
 
             if (this.TypeInfo.Module != null)
             {
@@ -282,6 +284,18 @@ namespace Bridge.Translator
                 this.Write(JS.Fields.KIND);
                 this.WriteColon();
                 this.WriteScript(this.TypeInfo.Type.Kind.ToString().ToLowerInvariant());
+                this.Emitter.Comma = true;
+            }
+        }
+
+        protected virtual void WriteObjectLiteral()
+        {
+            if (this.TypeInfo.IsObjectLiteral)
+            {
+                this.EnsureComma();
+                this.Write(JS.Fields.LITERAL);
+                this.WriteColon();
+                this.WriteScript(true);
                 this.Emitter.Comma = true;
             }
         }
@@ -453,7 +467,7 @@ namespace Bridge.Translator
 
                 this.WriteNewLine();
                 this.WriteNewLine();
-                this.Write(JS.Funcs.BRIDGE_APPLY + "(" + JS.Vars.D_ + ".");
+                this.Write(JS.Types.Bridge.APPLY + "(" + JS.Vars.D_ + ".");
                 this.Write(name);
                 this.Write(", ");
                 this.BeginBlock();

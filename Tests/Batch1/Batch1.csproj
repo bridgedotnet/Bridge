@@ -120,12 +120,14 @@
     <Compile Include="Linq\TestLinqQueryExecution.cs" />
     <Compile Include="Linq\TestLinqRestrictionOperators.cs" />
     <Compile Include="Linq\TestLinqSetOperators.cs" />
+    <Compile Include="ObjectLiteralTests.cs" />
     <Compile Include="Reflection\AssemblyTests.cs" />
     <Compile Include="Reflection\AttributeTests.cs" />
     <Compile Include="Reflection\GetMembersTests.cs" />
     <Compile Include="Reflection\ReflectionTests.cs" />
     <Compile Include="Reflection\TypeSystemLanguageSupportTests.cs" />
     <Compile Include="Reflection\TypeSystemTests.cs" />
+    <Compile Include="Serialization\JsonTests.cs" />
     <Compile Include="Text\RegularExpressions\RegexAlternationTests.cs" />
     <Compile Include="Text\RegularExpressions\RegexBalancingGroupsTests.cs" />
     <Compile Include="Text\RegularExpressions\RegexCharClassesTests.cs" />

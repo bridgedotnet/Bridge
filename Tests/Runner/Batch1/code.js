@@ -6731,8 +6731,9 @@
             MODULE_TYPE_SYSTEM: "Type system",
             MODULE_REFLECTION: "Reflection",
             MODULE_FUNCTIONS: "Functions",
-            MODULE_MIXIN: "Mixin",
+            MODULE_SERIALIZATION: "Serialization",
             MODULE_BRIDGECONSOLE: "Bridge Console",
+            MODULE_OBJECTLITERAL: "[ObjectLiteral]",
             IGNORE_DATE: null
         }
     });
@@ -11350,6 +11351,87 @@
         equalsT: function (other) {
             this.other = other;
             return this.result;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.JsonTests', {
+        nonGenericParseWorks: function () {
+            var o = JSON.parse("{ \"i\": 3, \"s\": \"test\" }");
+            Bridge.Test.Assert.areEqual(o.i, 3);
+            Bridge.Test.Assert.areEqual(o.s, "test");
+        },
+        genericParseWorks: function () {
+            var o = Bridge.merge(new Bridge.ClientTest.JsonTests.TestClass2(), JSON.parse("{ \"i\": 3, \"s\": \"test\" }"));
+            Bridge.Test.Assert.areEqual(o.i, 3);
+            Bridge.Test.Assert.areEqual(o.s, "test");
+        },
+        nonGenericParseWithCallbackWorks: function () {
+            var o = JSON.parse("{ \"i\": 3, \"s\": \"test\" }", $_.Bridge.ClientTest.JsonTests.f1);
+            Bridge.Test.Assert.areEqual(o.i, 100);
+            Bridge.Test.Assert.areEqual(o.s, "test");
+        },
+        genericParseWithCallbackWorks: function () {
+            var o = Bridge.merge(new Bridge.ClientTest.JsonTests.TestClass2(), JSON.parse("{ \"i\": 3, \"s\": \"test\" }", $_.Bridge.ClientTest.JsonTests.f1));
+            Bridge.Test.Assert.areEqual(o.i, 100);
+            Bridge.Test.Assert.areEqual(o.s, "test");
+        },
+        stringifyWorks: function () {
+            Bridge.Test.Assert.areEqual(JSON.stringify({ i: 3 }), "{\"i\":3}");
+        },
+        stringifyWithSerializableMembersArrayWorks: function () {
+            Bridge.Test.Assert.areEqual(JSON.stringify({ i: 3, s: "test" }, ["i"]), "{\"i\":3}");
+        },
+        stringifyWithSerializableMembersArrayAndIntentCountWorks: function () {
+            Bridge.Test.Assert.areEqual(JSON.stringify({ i: 3, s: "test" }, ["i"], 4), "{\n    \"i\": 3\n}");
+        },
+        stringifyWithSerializableMembersArrayAndIntentTextWorks: function () {
+            Bridge.Test.Assert.areEqual(JSON.stringify({ i: 3, s: "test" }, ["i"], "    "), "{\n    \"i\": 3\n}");
+        },
+        stringifyWithCallbackWorks: function () {
+            Bridge.Test.Assert.areEqual(JSON.stringify({ i: 3, s: "test" }, $_.Bridge.ClientTest.JsonTests.f2), "{\"i\":3}");
+        },
+        stringifyWithCallbackAndIndentCountWorks: function () {
+            Bridge.Test.Assert.areEqual(JSON.stringify({ i: 3, s: "test" }, $_.Bridge.ClientTest.JsonTests.f2, 4), "{\n    \"i\": 3\n}");
+        },
+        stringifyWithCallbackAndIndentTextWorks: function () {
+            Bridge.Test.Assert.areEqual(JSON.stringify({ i: 3, s: "test" }, $_.Bridge.ClientTest.JsonTests.f2, "    "), "{\n    \"i\": 3\n}");
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.JsonTests", $_);
+
+    Bridge.apply($_.Bridge.ClientTest.JsonTests, {
+        f1: function (s, x) {
+            if (Bridge.referenceEquals(s, "i")) {
+                return 100;
+            }
+            return x;
+        },
+        f2: function (key, value) {
+            return Bridge.referenceEquals(key, "s") ? undefined : value;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.JsonTests.TestClass1', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.i = 0;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.JsonTests.TestClass2', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.i = 0;
+                this.s = null;
+            }).call($this);
+            return $this;
         }
     });
 
@@ -16243,6 +16325,377 @@
         }
     });
 
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests');
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.Bridge1529', {
+        testObjectLiteral: function () {
+            var bs = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.ctor();
+            Bridge.Test.Assert.true(Bridge.isPlainObject(bs));
+            Bridge.Test.Assert.areEqual(10, bs.field1);
+            Bridge.Test.Assert.areEqual("test", bs.field2);
+            Bridge.Test.Assert.areEqual(10, Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.prototype.getField1.call(bs));
+            Bridge.Test.Assert.areEqual("test", Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.prototype.getField2.call(bs));
+            Bridge.Test.Assert.areEqual(0, bs.prop1);
+            Bridge.Test.Assert.areEqual(10, bs.proxyField1);
+            Bridge.Test.Assert.areEqual("test", bs.proxyField2);
+            Bridge.Test.Assert.areEqual(0, bs.prop1);
+            Bridge.Test.Assert.null(bs.prop2);
+            Bridge.Test.Assert.areEqual(11, Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.getStaticProp());
+
+            var bs1 = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.create(3, "test3");
+            Bridge.Test.Assert.true(Bridge.isPlainObject(bs1));
+            Bridge.Test.Assert.areEqual(3, bs1.field1);
+            Bridge.Test.Assert.areEqual("test3", bs1.field2);
+
+            var bs2 = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.$ctor1(5);
+            Bridge.Test.Assert.true(Bridge.isPlainObject(bs2));
+            Bridge.Test.Assert.areEqual(5, bs2.field1);
+            Bridge.Test.Assert.areEqual("test", bs2.field2);
+
+            var bs3 = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.$ctor2("test5");
+            Bridge.Test.Assert.true(Bridge.isPlainObject(bs3));
+            Bridge.Test.Assert.areEqual(10, bs3.field1);
+            Bridge.Test.Assert.areEqual("test5", bs3.field2);
+
+            var ds1 = Bridge.merge(Bridge.ClientTest.ObjectLiteralTests.Bridge1529.DS.ctor(), {
+                field: 9
+            } );
+            Bridge.Test.Assert.true(Bridge.isPlainObject(ds1));
+            Bridge.Test.Assert.areEqual(9, ds1.field);
+            Bridge.Test.Assert.areEqual(10, ds1.field1);
+            Bridge.Test.Assert.areEqual("test", ds1.field2);
+            Bridge.Test.Assert.areEqual(0, ds1.prop1);
+
+            var ts = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.TS.ctor();
+            Bridge.Test.Assert.true(Bridge.isPlainObject(ts));
+            Bridge.Test.Assert.areEqual(8, ts.field1);
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS', {
+        $literal: true,
+        statics: {
+            getStaticProp: function () {
+                return 11;
+            },
+            create: function (i, s) {
+                return Bridge.merge(Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.ctor(), {
+                    field1: i, field2: s
+                } );
+            }
+        },
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.field1 = 0;
+                this.field2 = null;
+                this.prop1 = 0;
+                this.prop2 = null;
+                Object.defineProperty(this, "proxyField1", {
+                    get: function () {
+                        return this.field1;
+                    },
+                    set: function (value) {
+                        this.field1 = value;
+                    },
+                    enumerable: true
+                });
+                Object.defineProperty(this, "proxyField2", {
+                    get: function () {
+                        return this.field2;
+                    },
+                    set: function (value) {
+                        this.field2 = value;
+                    },
+                    enumerable: true
+                });
+                this.field1 = 10;
+                this.field2 = "test";
+            }).call($this);
+            return $this;
+        },
+        $ctor1: function (i) {
+            var $this = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.ctor();
+            (function(){
+                this.field1 = i;
+            }).call($this);
+            return $this;
+        },
+        $ctor2: function (s) {
+            var $this = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.ctor();
+            (function(){
+                this.field2 = s;
+            }).call($this);
+            return $this;
+        },
+        getField1: function () {
+            return this.field1;
+        },
+        getField2: function () {
+            return this.field2;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests', {
+        test: function () {
+            var config1 = Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config1.ctor();
+            Bridge.Test.Assert.notNull$1(config1, "DefaultValue and Construtor Modes config1 created");
+            Bridge.Test.Assert.areEqual$1(1, config1.val1, "config1 Val1");
+            Bridge.Test.Assert.areEqual$1(11, config1.val2, "config1 Val2");
+
+            var config2 = { val1: 2, val2: 0 };
+            Bridge.Test.Assert.notNull$1(config2, "DefaultValue and Plain Modes config2 created");
+            Bridge.Test.Assert.areEqual$1(2, config2.val1, "config2 Val1");
+            Bridge.Test.Assert.areEqual$1(0, config2.val2, "config2 Val2");
+
+            var config3 = Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config3.ctor();
+            Bridge.Test.Assert.notNull$1(config3, "Ignore and Construtor Modes config3 created");
+            Bridge.Test.Assert.areEqual$1(3, config3.val1, "config3 Val1");
+            Bridge.Test.Assert.areEqual$1(13, config3.val2, "config3 Val2");
+
+            var config4 = {  };
+            Bridge.Test.Assert.notNull$1(config4, "Ignore and Plain Modes config4 created");
+            Bridge.Test.Assert.null$1(config4.val1, "config4 Val1");
+            Bridge.Test.Assert.null$1(config4.val2, "config4 Val2");
+
+            var config5 = Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config5.ctor();
+            Bridge.Test.Assert.notNull$1(config5, "Initializer and Construtor Modes config5 created");
+            Bridge.Test.Assert.areEqual$1(5, config5.val1, "config5 Val1");
+            Bridge.Test.Assert.areEqual$1(15, config5.val2, "config5 Val2");
+
+            var config6 = { val1: 6 };
+            Bridge.Test.Assert.notNull$1(config6, "Initializer and Plain Modes config6 created");
+            Bridge.Test.Assert.areEqual$1(6, config6.val1, "config6 Val1");
+            Bridge.Test.Assert.null$1(config6.val2, "config6 Val2");
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config1', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 1;
+                this.val2 = 0;
+                this.val2 = 11;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config2', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 2;
+                this.val2 = 0;
+                this.val2 = 12;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config3', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 3;
+                this.val2 = 0;
+                this.val2 = 13;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config4', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 4;
+                this.val2 = 0;
+                this.val2 = 14;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config5', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 5;
+                this.val2 = 0;
+                this.val2 = 15;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config6', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 6;
+                this.val2 = 0;
+                this.val2 = 16;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateModeTests', {
+        test: function () {
+            var config1 = Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config1.ctor();
+            Bridge.Test.Assert.notNull$1(config1, "Default Mode config1 created");
+            Bridge.Test.Assert.areEqual$1(1, config1.val1, "config1 Val1");
+            Bridge.Test.Assert.areEqual$1(11, config1.val2, "config1 Val2");
+
+            var config2 = Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config2.ctor();
+            Bridge.Test.Assert.notNull$1(config2, "Constructor Mode config2 created");
+            Bridge.Test.Assert.areEqual$1(2, config2.val1, "config2 Val1");
+            Bridge.Test.Assert.areEqual$1(12, config2.val2, "config2 Val2");
+
+            var config3 = {  };
+            Bridge.Test.Assert.notNull$1(config3, "Plain Mode config3 created");
+            Bridge.Test.Assert.null$1(config3.val1, "config3 Val1");
+            Bridge.Test.Assert.null$1(config3.val2, "config3 Val2");
+
+            var config4 = {  };
+            Bridge.Test.Assert.notNull$1(config4, "Plain Mode config4 created");
+            Bridge.Test.Assert.null$1(config4.val1, "config4 Val1");
+            Bridge.Test.Assert.null$1(config4.val2, "config4 Val2");
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config1', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 1;
+                this.val2 = 0;
+                this.val2 = 11;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config2', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 2;
+                this.val2 = 0;
+                this.val2 = 12;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config3', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 3;
+                this.val2 = 0;
+                this.val2 = 13;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config4', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 4;
+                this.val2 = 104;
+                this.val2 = 14;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests', {
+        test: function () {
+            var config1 = {  };
+            Bridge.Test.Assert.notNull$1(config1, "Default Mode config1 created");
+            Bridge.Test.Assert.null$1(config1.val1, "config1 Val1");
+            Bridge.Test.Assert.null$1(config1.val2, "config1 Val2");
+
+            var config2 = { val1: 2, val2: 0 };
+            Bridge.Test.Assert.notNull$1(config2, "DefaultValue Mode config2 created");
+            Bridge.Test.Assert.areEqual$1(2, config2.val1, "config2 Val1");
+            Bridge.Test.Assert.areEqual$1(0, config2.val2, "config2 Val2");
+
+            var config3 = { val1: 3 };
+            Bridge.Test.Assert.notNull$1(config3, "Initializer Mode config3 created");
+            Bridge.Test.Assert.areEqual$1(3, config3.val1, "config3 Val1");
+            Bridge.Test.Assert.null$1(config3.val2, "config3 Val2");
+
+            var config4 = {  };
+            Bridge.Test.Assert.notNull$1(config4, "Ignore Mode config4 created");
+            Bridge.Test.Assert.null$1(config4.val1, "config4 Val1");
+            Bridge.Test.Assert.null$1(config4.val2, "config4 Val2");
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config1', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 1;
+                this.val2 = 0;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config2', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 2;
+                this.val2 = 0;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config3', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 3;
+                this.val2 = 0;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config4', {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.val1 = 4;
+                this.val2 = 0;
+            }).call($this);
+            return $this;
+        }
+    });
+
     Bridge.define('Bridge.ClientTest.PropertyAccessorTests', {
         accessorsCanBeInvokedInstance: function () {
             var c = new Bridge.ClientTest.PropertyAccessorTests.C1();
@@ -19584,7 +20037,7 @@
         },
         castOperatorForSerializableTypeWithoutTypeCheckCodeAlwaysSucceedsGeneric: function () {
             var o = {  };
-            var b = this.cast(Object, o);
+            var b = this.cast(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.OL, o);
             Bridge.Test.Assert.true(Bridge.referenceEquals(o, b));
         },
         typeCheckForSubTypeOfGenericType: function () {
@@ -19657,6 +20110,10 @@
         $kind: "interface",
         $variance: [0,1]
     }; });
+
+    Bridge.define('Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.OL', {
+        $literal: true
+    });
 
     Bridge.define('Bridge.ClientTest.Reflection.TypeSystemTests', {
         fullNamePropertyReturnsTheNameWithTheNamespace: function () {
@@ -30903,6 +31360,30 @@
         ctor: function (message) {
             this.$initialize();
             Bridge.ClientTest.Exceptions.CommonExceptionTests.E1.ctor.call(this, message);
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.Bridge1529.DS', {
+        inherits: [Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS],
+        $literal: true,
+        ctor: function () {
+            var $this = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.ctor();
+            (function(){
+                this.field = 0;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.Bridge1529.TS', {
+        inherits: [Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS],
+        $literal: true,
+        ctor: function () {
+            var $this = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.$ctor1(8);
+            (function(){
+
+            }).call($this);
+            return $this;
         }
     });
 
