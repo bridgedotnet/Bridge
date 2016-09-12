@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Test.BridgeIssues.N066.Rectangle66', {
+    Bridge.define("Test.BridgeIssues.N066.Rectangle66", {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new Test.BridgeIssues.N066.Rectangle66(); }
@@ -18,5 +18,4 @@
         },
         $clone: function (to) { return this; }
     });
-
 });

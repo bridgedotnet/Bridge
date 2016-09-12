@@ -10,7 +10,7 @@
         TestIssue434.Issue434A.doSomething(2);
     })();
 
-    Bridge.define('TestIssue434.Issue434A', {
+    Bridge.define("TestIssue434.Issue434A", {
         statics: {
             method1: function () {
                 TestIssue434.Issue434A.doSomething(1);
@@ -35,7 +35,7 @@
         TestIssue434.Issue434B.doSomething(2);
     })();
 
-    Bridge.define('TestIssue434.Issue434B', {
+    Bridge.define("TestIssue434.Issue434B", {
         statics: {
             method1: function () {
                 TestIssue434.Issue434B.doSomething(1);
@@ -56,7 +56,7 @@
     TestIssue434.Issue434B.method3();
     TestIssue434.Issue434B.method4();
 
-    Bridge.define('TestIssue434.Issue434C', {
+    Bridge.define("TestIssue434.Issue434C", {
         statics: {
 
         }
@@ -68,7 +68,7 @@
 // Content remark: Path: Bridge/output/testIssue461.js; name: testIssue461.js
 // ---
 
-    Bridge.define('TestIssue461.Issue461', {
+    Bridge.define("TestIssue461.Issue461", {
         statics: {
             test: function () {
                 var input = document.createElement('input');

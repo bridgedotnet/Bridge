@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Test.BridgeIssues.N694.Bridge694', {
+    Bridge.define("Test.BridgeIssues.N694.Bridge694", {
         statics: {
             test1: function () {
                 var fruits = System.Array.init(3, null);
@@ -23,5 +23,4 @@
             return fruit;
         }
     });
-
 });

@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Classes.Animal', {
+    Bridge.define("Classes.Animal", {
         name: null,
         ctor: function () {
             this.$initialize();
@@ -19,7 +19,7 @@
         }
     });
 
-    Bridge.define('Classes.MovePoint', {
+    Bridge.define("Classes.MovePoint", {
         statics: {
             move: function (p, dx, dy) {
                 return Classes.StaticClass.move(p.$clone(), dx, dy);
@@ -38,7 +38,7 @@
         }
     });
 
-    Bridge.define('Classes.Point', {
+    Bridge.define("Classes.Point", {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new Classes.Point(); }
@@ -74,7 +74,7 @@
         }
     });
 
-    Bridge.define('Classes.StaticClass', {
+    Bridge.define("Classes.StaticClass", {
         statics: {
             move: function (p, dx, dy) {
                 return new Classes.Point.$ctor1(((p.x + dx) | 0), ((p.y + dy) | 0));
@@ -82,7 +82,7 @@
         }
     });
 
-    Bridge.define('Classes.Dog', {
+    Bridge.define("Classes.Dog", {
         inherits: [Classes.Animal],
         ctor: function (name) {
             this.$initialize();
@@ -93,7 +93,7 @@
         }
     });
 
-    Bridge.define('Classes.Employee', {
+    Bridge.define("Classes.Employee", {
         inherits: [Classes.Animal],
         name$1: null,
         id: 0,
@@ -105,7 +105,7 @@
         }
     });
 
-    Bridge.define('Classes.Snake', {
+    Bridge.define("Classes.Snake", {
         inherits: [Classes.Animal],
         ctor: function (name) {
             this.$initialize();
@@ -115,5 +115,4 @@
             return 5;
         }
     });
-
 });

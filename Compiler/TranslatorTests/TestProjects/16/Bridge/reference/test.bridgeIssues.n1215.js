@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Test.BridgeIssues.N1215.TestExtraBrackets', {
+    Bridge.define("Test.BridgeIssues.N1215.TestExtraBrackets", {
         testDouble: function () {
             var v = 0;
             v = --v;
@@ -23,5 +23,4 @@
             v = (v = v.inc());
         }
     });
-
 });

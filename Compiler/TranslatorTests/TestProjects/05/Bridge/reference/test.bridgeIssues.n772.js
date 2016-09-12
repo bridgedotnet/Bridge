@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Test.BridgeIssues.N772.App', {
+    Bridge.define("Test.BridgeIssues.N772.App", {
         statics: {
             main1: function () {
                 //These arrays depend on "useTypedArray" bridge.json option
@@ -32,5 +32,4 @@
             }
         }
     });
-
 });

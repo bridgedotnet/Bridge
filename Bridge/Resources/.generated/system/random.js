@@ -1,4 +1,4 @@
-﻿    Bridge.define('System.Random', {
+﻿    Bridge.define("System.Random", {
         statics: {
             MBIG: 2147483647,
             MSEED: 161803398,

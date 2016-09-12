@@ -1,4 +1,4 @@
-﻿    Bridge.define('TestIssue921Nested.Issue921NestedOuter', {
+﻿    Bridge.define("TestIssue921Nested.Issue921NestedOuter", {
         useAField1: function () {
             var n = new TestIssue921Nested.Issue921NestedOuter.Issue921Nested(100);
 
@@ -53,7 +53,7 @@
         }
     });
 
-    Bridge.define('TestIssue921Nested.Issue921NestedOuter.Issue921Nested', {
+    Bridge.define("TestIssue921Nested.Issue921NestedOuter.Issue921Nested", {
         statics: {
             computeNumberStatic: null,
             config: {

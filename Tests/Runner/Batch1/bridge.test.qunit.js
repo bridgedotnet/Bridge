@@ -1,6 +1,6 @@
 ﻿Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
     
-    Bridge.define('Bridge.Test.Assert', {
+    Bridge.define("Bridge.Test.Assert", {
         statics: {
             assert: null,
             async: function () {
@@ -114,7 +114,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.TestFixture$1', function (T) { return {
+    Bridge.define("Bridge.Test.QUnit.TestFixture$1", function (T) { return {
         statics: {
             instanceFabric: null,
             fixtureFabric: Bridge.getDefaultValue(T),
@@ -169,5 +169,4 @@
         tearDown: function () {
         }
     }; });
-
 });

@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Test.BridgeIssues.N1461.CreateAnonymous', {
+    Bridge.define("Test.BridgeIssues.N1461.CreateAnonymous", {
         create: function () {
             // The anonymous type name should be  like `$_.$AnonymousType$1` not containig Bridge like `Bridge.$AnonymousType$1`
             var o1 = new $_.$AnonymousType$1(1);
@@ -36,5 +36,4 @@
             };
         }
     });
-
 });

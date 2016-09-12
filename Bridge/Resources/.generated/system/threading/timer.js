@@ -1,4 +1,4 @@
-﻿    Bridge.define('System.Threading.Timer', {
+﻿    Bridge.define("System.Threading.Timer", {
         inherits: [System.IDisposable],
         statics: {
             MAX_SUPPORTED_TIMEOUT: 4294967294,

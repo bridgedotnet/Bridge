@@ -3,7 +3,7 @@
 
     define("Bridge527_A", ["bridge","Bridge527_B"], function (_, Bridge527_B) {
         var exports = { };
-        Bridge.define('Test.BridgeIssues.N527.Bridge527_A', {
+        Bridge.define("Test.BridgeIssues.N527.Bridge527_A", {
             $scope: exports,
             getName: function () {
                 var c = new Bridge527_B.Test.BridgeIssues.N527.Bridge527_B();
@@ -15,11 +15,10 @@
 
     define("Bridge527_B", ["bridge"], function (_) {
         var exports = { };
-        Bridge.define('Test.BridgeIssues.N527.Bridge527_B', {
+        Bridge.define("Test.BridgeIssues.N527.Bridge527_B", {
             $scope: exports
         });
         return exports;
     });
-
 
 });

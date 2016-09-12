@@ -1,4 +1,4 @@
-﻿    Bridge.define('System.RegexMatchTimeoutException', {
+﻿    Bridge.define("System.RegexMatchTimeoutException", {
         inherits: [System.TimeoutException],
         config: {
             properties: {

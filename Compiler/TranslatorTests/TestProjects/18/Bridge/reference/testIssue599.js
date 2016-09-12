@@ -1,4 +1,4 @@
-﻿    Bridge.define('TestIssue599.Issue599', {
+﻿    Bridge.define("TestIssue599.Issue599", {
         statics: {
             config: {
                 init: function () {

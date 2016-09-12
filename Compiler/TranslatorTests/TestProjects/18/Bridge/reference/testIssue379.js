@@ -1,4 +1,4 @@
-﻿    Bridge.define('TestIssue379.DataDefaultValue', {
+﻿    Bridge.define("TestIssue379.DataDefaultValue", {
         $literal: true,
         ctor: function () {
             var $this = {};
@@ -31,7 +31,7 @@
         }
     });
 
-    Bridge.define('TestIssue379.DataIgnore', {
+    Bridge.define("TestIssue379.DataIgnore", {
         $literal: true,
         ctor: function () {
             var $this = {};
@@ -64,7 +64,7 @@
         }
     });
 
-    Bridge.define('TestIssue379.DataInitializer', {
+    Bridge.define("TestIssue379.DataInitializer", {
         $literal: true,
         ctor: function () {
             var $this = {};
@@ -97,7 +97,7 @@
         }
     });
 
-    Bridge.define('TestIssue379.Tests', {
+    Bridge.define("TestIssue379.Tests", {
         testDataIgnore: function () {
             var d1 = TestIssue379.DataIgnore.ctor();
             var d2 = Bridge.merge(TestIssue379.DataIgnore.ctor(), {

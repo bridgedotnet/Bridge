@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Generics.GenericClass$1', function (T) { return {
+    Bridge.define("Generics.GenericClass$1", function (T) { return {
         instance: Bridge.getDefaultValue(T),
         ctor: function (instance) {
             this.$initialize();
@@ -12,7 +12,7 @@
         }
     }; });
 
-    Bridge.define('Generics.INamedEntity', {
+    Bridge.define("Generics.INamedEntity", {
         config: {
             properties: {
                 Name: null
@@ -20,7 +20,7 @@
         }
     });
 
-    Bridge.define('Generics.GenericNew$1', function (T) { return {
+    Bridge.define("Generics.GenericNew$1", function (T) { return {
         instance: Bridge.getDefaultValue(T),
         ctor: function (instance) {
             this.$initialize();
@@ -31,7 +31,7 @@
         }
     }; });
 
-    Bridge.define('Generics.GenericNewAndClass$1', function (T) { return {
+    Bridge.define("Generics.GenericNewAndClass$1", function (T) { return {
         instance: Bridge.getDefaultValue(T),
         ctor: function (instance) {
             this.$initialize();
@@ -42,7 +42,7 @@
         }
     }; });
 
-    Bridge.define('Generics.GenericStruct$1', function (T) { return {
+    Bridge.define("Generics.GenericStruct$1", function (T) { return {
         instance: Bridge.getDefaultValue(T),
         ctor: function (instance) {
             this.$initialize();
@@ -53,7 +53,7 @@
         }
     }; });
 
-    Bridge.define('Generics.implementation', {
+    Bridge.define("Generics.implementation", {
         statics: {
             simpleGenericInt: null,
             simpleDoubleGenericIntString: null,
@@ -78,7 +78,7 @@
         }
     });
 
-    Bridge.define('Generics.NewClass', {
+    Bridge.define("Generics.NewClass", {
         data: 0,
         ctor: function () {
             this.$initialize();
@@ -86,7 +86,7 @@
         }
     });
 
-    Bridge.define('Generics.SimpleDoubleGeneric$2', function (T, K) { return {
+    Bridge.define("Generics.SimpleDoubleGeneric$2", function (T, K) { return {
         instanceT: Bridge.getDefaultValue(T),
         instanceK: Bridge.getDefaultValue(K),
         ctor: function () {
@@ -105,7 +105,7 @@
         }
     }; });
 
-    Bridge.define('Generics.SimpleGeneric$1', function (T) { return {
+    Bridge.define("Generics.SimpleGeneric$1", function (T) { return {
         instance: Bridge.getDefaultValue(T),
         ctor: function (instance) {
             this.$initialize();
@@ -116,7 +116,7 @@
         }
     }; });
 
-    Bridge.define('Generics.GenericINamedEntity$1', function (T) { return {
+    Bridge.define("Generics.GenericINamedEntity$1", function (T) { return {
         instance: Bridge.getDefaultValue(T),
         ctor: function (instance) {
             this.$initialize();
@@ -127,7 +127,7 @@
         }
     }; });
 
-    Bridge.define('Generics.NamedEntity', {
+    Bridge.define("Generics.NamedEntity", {
         inherits: [Generics.INamedEntity],
         config: {
             properties: {
@@ -136,7 +136,7 @@
         }
     });
 
-    Bridge.define('Generics.GenericNamedEntity$1', function (T) { return {
+    Bridge.define("Generics.GenericNamedEntity$1", function (T) { return {
         instance: Bridge.getDefaultValue(T),
         ctor: function (instance) {
             this.$initialize();
@@ -146,5 +146,4 @@
             return input;
         }
     }; });
-
 });

@@ -1,6 +1,6 @@
 ﻿Bridge.assembly("Bridge_ClientTest_Batch4_Tests", function ($asm, globals) {
     
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner", {
         $main: function () {
             QUnit.test("ActivatorTests - NonGenericCreateInstanceWithoutArgumentsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ActivatorTests.nonGenericCreateInstanceWithoutArgumentsWorks);
             QUnit.test("ActivatorTests - NonGenericCreateInstanceWithOneArgumentWorks_SPI_1540", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ActivatorTests.nonGenericCreateInstanceWithOneArgumentWorks_SPI_1540);
@@ -1867,7 +1867,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ActivatorTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ActivatorTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ActivatorTests)],
         statics: {
             nonGenericCreateInstanceWithoutArgumentsWorks: function (assert) {
@@ -1925,7 +1925,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_AppDomainTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_AppDomainTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.AppDomainTests)],
         statics: {
             getAssembliesWorks_SPI_1646: function (assert) {
@@ -1935,7 +1935,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArgumentsTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArgumentsTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArgumentsTests)],
         statics: {
             lengthWorks: function (assert) {
@@ -1957,7 +1957,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1546: function (assert) {
@@ -2143,7 +2143,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_ComparerTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_ComparerTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.ComparerTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1546: function (assert) {
@@ -2173,7 +2173,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_EqualityComparerTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_EqualityComparerTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.EqualityComparerTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1546: function (assert) {
@@ -2207,7 +2207,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_GenericDictionaryTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_GenericDictionaryTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.GenericDictionaryTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -2301,7 +2301,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_ICollectionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_ICollectionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.ICollectionTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -2367,7 +2367,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_IDictionaryTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_IDictionaryTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.IDictionaryTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -2417,7 +2417,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_IEnumerableTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_IEnumerableTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.IEnumerableTests)],
         statics: {
             arrayImplementsIEnumerable: function (assert) {
@@ -2447,7 +2447,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_IListTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_IListTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.IListTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -2517,7 +2517,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_IteratorBlockTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_IteratorBlockTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests)],
         statics: {
             typeReturnedByIteratorBlockReturningIEnumeratorImplementsThatInterfaceAndIDisposable_SPI_1554: function (assert) {
@@ -2563,7 +2563,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_KeyValuePairTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_KeyValuePairTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.KeyValuePairTests)],
         statics: {
             theConstructorWithParametersCanBeUsed: function (assert) {
@@ -2593,7 +2593,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_ListTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_ListTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.ListTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -2807,7 +2807,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_ObjectModel_ReadOnlyCollectionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_ObjectModel_ReadOnlyCollectionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.ObjectModel.ReadOnlyCollectionTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -2881,7 +2881,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_TypedArrays_ArrayBufferTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_TypedArrays_ArrayBufferTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.TypedArrays.ArrayBufferTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -2899,7 +2899,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_TypedArrays_DataViewTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_TypedArrays_DataViewTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.TypedArrays.DataViewTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -2985,7 +2985,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_TypedArrays_Float32ArrayTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_TypedArrays_Float32ArrayTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.TypedArrays.Float32ArrayTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1559: function (assert) {
@@ -3095,7 +3095,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_TypedArrays_Float64ArrayTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_TypedArrays_Float64ArrayTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.TypedArrays.Float64ArrayTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1559: function (assert) {
@@ -3205,7 +3205,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_TypedArrays_Int16ArrayTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_TypedArrays_Int16ArrayTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.TypedArrays.Int16ArrayTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1559: function (assert) {
@@ -3315,7 +3315,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_TypedArrays_Int32ArrayTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_TypedArrays_Int32ArrayTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.TypedArrays.Int32ArrayTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1559: function (assert) {
@@ -3425,7 +3425,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_TypedArrays_Int8ArrayTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_TypedArrays_Int8ArrayTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.TypedArrays.Int8ArrayTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1559: function (assert) {
@@ -3535,7 +3535,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_TypedArrays_Uint16ArrayTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_TypedArrays_Uint16ArrayTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint16ArrayTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1559: function (assert) {
@@ -3645,7 +3645,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_TypedArrays_Uint32ArrayTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_TypedArrays_Uint32ArrayTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint32ArrayTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1559: function (assert) {
@@ -3755,7 +3755,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_TypedArrays_Uint8ArrayTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_TypedArrays_Uint8ArrayTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint8ArrayTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1559: function (assert) {
@@ -3865,7 +3865,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_TypedArrays_Uint8ClampedArrayTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_TypedArrays_Uint8ClampedArrayTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint8ClampedArrayTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1560: function (assert) {
@@ -3983,7 +3983,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ConvertTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ConvertTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ConvertTests)],
         statics: {
             toBase64StringWithOnlyArrayWorks: function (assert) {
@@ -4009,7 +4009,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_CultureInfoTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_CultureInfoTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.CultureInfoTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4027,7 +4027,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_DateTimeFormatInfoTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_DateTimeFormatInfoTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.DateTimeFormatInfoTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4045,7 +4045,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_DelegateTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_DelegateTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.DelegateTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4131,7 +4131,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Diagnostics_Contracts_ContractTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Diagnostics_Contracts_ContractTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Diagnostics.Contracts.ContractTests)],
         statics: {
             assume: function (assert) {
@@ -4185,7 +4185,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_EnvironmentTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_EnvironmentTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.EnvironmentTests)],
         statics: {
             newLineIsAStringContainingOnlyTheNewLineChar: function (assert) {
@@ -4195,7 +4195,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_AggregateExceptionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_AggregateExceptionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.AggregateExceptionTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4233,7 +4233,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_AmbiguousMatchExceptionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_AmbiguousMatchExceptionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.AmbiguousMatchExceptionTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4255,7 +4255,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_ArgumentExceptionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_ArgumentExceptionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.ArgumentExceptionTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4285,7 +4285,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_ArgumentNullExceptionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_ArgumentNullExceptionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.ArgumentNullExceptionTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4311,7 +4311,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_ArgumentOutOfRangeExceptionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_ArgumentOutOfRangeExceptionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.ArgumentOutOfRangeExceptionTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4345,7 +4345,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_ArithmeticExceptionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_ArithmeticExceptionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.ArithmeticExceptionTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4367,7 +4367,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_ContractExceptionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_ContractExceptionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.ContractExceptionTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4381,7 +4381,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_DivideByZeroExceptionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_DivideByZeroExceptionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.DivideByZeroExceptionTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4403,7 +4403,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_ErrorExceptionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_ErrorExceptionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.ErrorExceptionTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1564: function (assert) {
@@ -4421,7 +4421,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_ExceptionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_ExceptionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.ExceptionTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4451,7 +4451,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_FormatExceptionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_FormatExceptionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.FormatExceptionTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4473,7 +4473,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_InvalidCastExceptionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_InvalidCastExceptionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.InvalidCastExceptionTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4495,7 +4495,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_InvalidOperationExceptionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_InvalidOperationExceptionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.InvalidOperationExceptionTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4517,7 +4517,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_KeyNotFoundExceptionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_KeyNotFoundExceptionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.KeyNotFoundExceptionTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4539,7 +4539,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_NotImplementedExceptionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_NotImplementedExceptionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.NotImplementedExceptionTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4561,7 +4561,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_NotSupportedExceptionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_NotSupportedExceptionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.NotSupportedExceptionTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4583,7 +4583,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_NullReferenceExceptionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_NullReferenceExceptionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.NullReferenceExceptionTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4609,7 +4609,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_OperationCanceledExceptionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_OperationCanceledExceptionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.OperationCanceledExceptionTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4643,7 +4643,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_OverflowExceptionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_OverflowExceptionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.OverflowExceptionTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4665,7 +4665,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_PromiseExceptionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_PromiseExceptionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.PromiseExceptionTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4687,7 +4687,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_TaskCanceledExceptionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_TaskCanceledExceptionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.TaskCanceledExceptionTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4713,7 +4713,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ExceptionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ExceptionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ExceptionTests)],
         statics: {
             throwingAndCatchingExceptionsWorks: function (assert) {
@@ -4739,7 +4739,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_FormattableStringTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_FormattableStringTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.FormattableStringTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4785,7 +4785,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_GuidTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_GuidTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.GuidTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -4895,7 +4895,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_IComparableTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_IComparableTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.IComparableTests)],
         statics: {
             callingMethodThroughIComparableInterfaceInvokesImplementingMethod: function (assert) {
@@ -4905,7 +4905,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_IEquatableTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_IEquatableTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.IEquatableTests)],
         statics: {
             callingMethodThroughIComparableInterfaceInvokesImplementingMethod: function (assert) {
@@ -4915,7 +4915,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_IFormattableTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_IFormattableTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.IFormattableTests)],
         statics: {
             iFormattableIsRecordedInInterfaceList: function (assert) {
@@ -4929,7 +4929,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Linq_Expressions_ExpressionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Linq_Expressions_ExpressionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests)],
         statics: {
             expressionProtectedConstructorWorks: function (assert) {
@@ -5115,7 +5115,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_MathTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_MathTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.MathTests)],
         statics: {
             constantsWork: function (assert) {
@@ -5385,7 +5385,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_MultidimArrayTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_MultidimArrayTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.MultidimArrayTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -5451,7 +5451,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_NullableTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_NullableTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.NullableTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1567: function (assert) {
@@ -5621,7 +5621,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_NumberFormatInfoTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_NumberFormatInfoTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.NumberFormatInfoTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -5639,7 +5639,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_PropertyAccessorTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_PropertyAccessorTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.PropertyAccessorTests)],
         statics: {
             accessorsCanBeInvokedInstance: function (assert) {
@@ -5669,7 +5669,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_RandomTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_RandomTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.RandomTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -5707,7 +5707,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Reflection_AssemblyTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Reflection_AssemblyTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.AssemblyTests)],
         statics: {
             getExecutingAssemblyWorks: function (assert) {
@@ -5785,7 +5785,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Reflection_AttributeTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Reflection_AttributeTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.AttributeTests)],
         statics: {
             canGetCustomTypeAttributesForTypeWithNoAttributes: function (assert) {
@@ -5891,7 +5891,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Reflection_GetMembersTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Reflection_GetMembersTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.GetMembersTests)],
         statics: {
             getMembersWithoutBindingFlagsWorks: function (assert) {
@@ -6009,7 +6009,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Reflection_ReflectionTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Reflection_ReflectionTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests)],
         statics: {
             getMembersReturnsMethodsWithAnyScriptableAttributeOrReflectableAttribute: function (assert) {
@@ -6383,7 +6383,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Reflection_TypeSystemLanguageSupportTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Reflection_TypeSystemLanguageSupportTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests)],
         statics: {
             typeIsWorksForReferenceTypes: function (assert) {
@@ -6417,7 +6417,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Reflection_TypeSystemTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Reflection_TypeSystemTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests)],
         statics: {
             fullNamePropertyReturnsTheNameWithTheNamespace: function (assert) {
@@ -6631,7 +6631,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_RefParameterTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_RefParameterTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.RefParameterTests)],
         statics: {
             canUseReferenceToLocalVariables: function (assert) {
@@ -6657,7 +6657,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Runtime_CompilerServices_RuntimeHelpersTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Runtime_CompilerServices_RuntimeHelpersTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Runtime.CompilerServices.RuntimeHelpersTests)],
         statics: {
             getHashCodeWoksForObject_SPI_1570: function (assert) {
@@ -6671,7 +6671,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ScriptTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ScriptTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ScriptTests)],
         statics: {
             evalWorks: function (assert) {
@@ -6697,7 +6697,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Serialization_JsonTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Serialization_JsonTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Serialization.JsonTests)],
         statics: {
             nonGenericParseWorks_SPI_1574: function (assert) {
@@ -6747,7 +6747,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_BooleanTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_BooleanTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.BooleanTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1575: function (assert) {
@@ -6793,7 +6793,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_ByteTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_ByteTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.ByteTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -6875,7 +6875,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_CharTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_CharTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.CharTests)],
         statics: {
             typePropertiesAreInt32_SPI_1603: function (assert) {
@@ -6973,7 +6973,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_DateTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_DateTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1608_1609: function (assert) {
@@ -7231,7 +7231,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_DateTimeTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_DateTimeTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTimeTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1607_1608_1609: function (assert) {
@@ -7609,7 +7609,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_DecimalTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_DecimalTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DecimalTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -7859,7 +7859,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_DoubleTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_DoubleTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DoubleTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -7969,7 +7969,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_EnumTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_EnumTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -8023,7 +8023,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_Int16Tests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_Int16Tests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.Int16Tests)],
         statics: {
             typePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -8105,7 +8105,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_Int32Tests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_Int32Tests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.Int32Tests)],
         statics: {
             typePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -8215,7 +8215,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_Int64Tests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_Int64Tests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.Int64Tests)],
         statics: {
             typePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -8301,7 +8301,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_ObjectTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_ObjectTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.ObjectTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -8339,7 +8339,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_SByteTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_SByteTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.SByteTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -8421,7 +8421,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_SingleTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_SingleTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.SingleTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -8531,7 +8531,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_StringTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_StringTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.StringTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1597: function (assert) {
@@ -8889,7 +8889,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_TimeSpanTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_TimeSpanTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.TimeSpanTests)],
         statics: {
             typePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -8987,7 +8987,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_TupleTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_TupleTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.TupleTests)],
         statics: {
             tuple1Works: function (assert) {
@@ -9025,7 +9025,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_UInt16Tests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_UInt16Tests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.UInt16Tests)],
         statics: {
             typePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -9107,7 +9107,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_UInt32Tests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_UInt32Tests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.UInt32Tests)],
         statics: {
             typePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -9189,7 +9189,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_UInt64Tests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_UInt64Tests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.UInt64Tests)],
         statics: {
             typePropertiesAreCorrect_SPI_1717: function (assert) {
@@ -9279,7 +9279,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_StopwatchTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_StopwatchTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.StopwatchTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -9313,7 +9313,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Text_RegularExpressions_RegexTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Text_RegularExpressions_RegexTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Text.RegularExpressions.RegexTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -9367,7 +9367,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Text_StringBuilderTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Text_StringBuilderTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Text.StringBuilderTests)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -9457,7 +9457,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Threading_AsyncTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Threading_AsyncTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Threading.AsyncTests)],
         statics: {
             asyncVoid: function (assert) {
@@ -9487,7 +9487,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Threading_CancellationTokenTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Threading_CancellationTokenTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Threading.CancellationTokenTests)],
         statics: {
             typePropertiesForCancellationTokenSourceAreCorrect: function (assert) {
@@ -9605,7 +9605,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Threading_PromiseTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Threading_PromiseTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Threading.PromiseTests)],
         statics: {
             taskFromPromiseWithoutResultFactoryWorksWhenPromiseCompletes: function (assert) {
@@ -9635,7 +9635,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Threading_TaskTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Threading_TaskTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Threading.TaskTests)],
         statics: {
             taskCompletionSourceTypePropertiesAreCorrect: function (assert) {
@@ -9821,7 +9821,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_UserDefinedStructTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_UserDefinedStructTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.UserDefinedStructTests)],
         statics: {
             isClassIsFalse: function (assert) {
@@ -9944,5 +9944,4 @@
     Bridge.setMetadata(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C26, function () { return {"members":[{"accessibility":2,"name":".ctor","type":1,"sname":"ctor"},{"accessibility":2,"name":"A1","type":4,"returnType":System.Int32,"sname":"A1","isReadOnly":false},{"accessibility":3,"name":"A3","type":4,"returnType":System.Int32,"sname":"A3","isReadOnly":false},{"accessibility":5,"name":"A4","type":4,"returnType":System.Int32,"sname":"A4","isReadOnly":false},{"accessibility":2,"name":"B1","type":4,"returnType":System.Int32,"sname":"B1","isReadOnly":false},{"accessibility":4,"name":"B2","type":4,"returnType":System.Int32,"sname":"B2","isReadOnly":false},{"accessibility":3,"name":"B3","type":4,"returnType":System.Int32,"sname":"B3","isReadOnly":false},{"accessibility":5,"name":"B4","type":4,"returnType":System.Int32,"sname":"B4","isReadOnly":false},{"accessibility":1,"name":"B5","type":4,"returnType":System.Int32,"sname":"B5","isReadOnly":false},{"accessibility":2,"name":"C1","type":4,"returnType":System.Int32,"sname":"C1","isReadOnly":false},{"accessibility":4,"name":"C2","type":4,"returnType":System.Int32,"sname":"C2","isReadOnly":false},{"accessibility":3,"name":"C3","type":4,"returnType":System.Int32,"sname":"C3","isReadOnly":false},{"accessibility":5,"name":"C4","type":4,"returnType":System.Int32,"sname":"C4","isReadOnly":false},{"accessibility":1,"name":"C5","type":4,"returnType":System.Int32,"sname":"C5","isReadOnly":false}]}; });
     Bridge.setMetadata(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C27, function () { return {"members":[{"accessibility":2,"name":".ctor","type":1,"sname":"ctor"},{"accessibility":2,"name":"A1","type":4,"returnType":System.Int32,"sname":"A1","isReadOnly":false},{"accessibility":4,"name":"A2","type":4,"returnType":System.Int32,"sname":"A2","isReadOnly":false},{"accessibility":3,"name":"A3","type":4,"returnType":System.Int32,"sname":"A3","isReadOnly":false},{"accessibility":5,"name":"A4","type":4,"returnType":System.Int32,"sname":"A4","isReadOnly":false},{"accessibility":2,"name":"B1","type":4,"returnType":System.Int32,"sname":"B1","isReadOnly":false},{"accessibility":4,"name":"B2","type":4,"returnType":System.Int32,"sname":"B2","isReadOnly":false},{"accessibility":3,"name":"B3","type":4,"returnType":System.Int32,"sname":"B3","isReadOnly":false},{"accessibility":5,"name":"B4","type":4,"returnType":System.Int32,"sname":"B4","isReadOnly":false},{"accessibility":1,"name":"B5","type":4,"returnType":System.Int32,"sname":"B5","isReadOnly":false},{"accessibility":2,"name":"C1","type":4,"returnType":System.Int32,"sname":"C1","isReadOnly":false},{"accessibility":4,"name":"C2","type":4,"returnType":System.Int32,"sname":"C2","isReadOnly":false},{"accessibility":3,"name":"C3","type":4,"returnType":System.Int32,"sname":"C3","isReadOnly":false},{"accessibility":5,"name":"C4","type":4,"returnType":System.Int32,"sname":"C4","isReadOnly":false},{"accessibility":1,"name":"C5","type":4,"returnType":System.Int32,"sname":"C5","isReadOnly":false}]}; });
     Bridge.setMetadata(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C28, function () { return {"members":[{"accessibility":2,"name":".ctor","type":1,"sname":"ctor"},{"accessibility":2,"name":"A1","type":4,"returnType":System.Int32,"sname":"A1","isReadOnly":false},{"accessibility":4,"name":"A2","type":4,"returnType":System.Int32,"sname":"A2","isReadOnly":false},{"accessibility":3,"name":"A3","type":4,"returnType":System.Int32,"sname":"A3","isReadOnly":false},{"accessibility":5,"name":"A4","type":4,"returnType":System.Int32,"sname":"A4","isReadOnly":false},{"accessibility":1,"name":"A5","type":4,"returnType":System.Int32,"sname":"A5","isReadOnly":false},{"accessibility":2,"name":"B1","type":4,"returnType":System.Int32,"sname":"B1","isReadOnly":false},{"accessibility":4,"name":"B2","type":4,"returnType":System.Int32,"sname":"B2","isReadOnly":false},{"accessibility":3,"name":"B3","type":4,"returnType":System.Int32,"sname":"B3","isReadOnly":false},{"accessibility":5,"name":"B4","type":4,"returnType":System.Int32,"sname":"B4","isReadOnly":false},{"accessibility":1,"name":"B5","type":4,"returnType":System.Int32,"sname":"B5","isReadOnly":false},{"accessibility":2,"name":"C1","type":4,"returnType":System.Int32,"sname":"C1","isReadOnly":false},{"accessibility":4,"name":"C2","type":4,"returnType":System.Int32,"sname":"C2","isReadOnly":false},{"accessibility":3,"name":"C3","type":4,"returnType":System.Int32,"sname":"C3","isReadOnly":false},{"accessibility":5,"name":"C4","type":4,"returnType":System.Int32,"sname":"C4","isReadOnly":false},{"accessibility":1,"name":"C5","type":4,"returnType":System.Int32,"sname":"C5","isReadOnly":false}]}; });
-
 });

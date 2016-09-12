@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Test.BridgeIssues.N1412.SimpleTimeScaleController', {
+    Bridge.define("Test.BridgeIssues.N1412.SimpleTimeScaleController", {
         getComponent: function (T) {
             return null;
         },
@@ -19,5 +19,4 @@
             }
         }
     });
-
 });

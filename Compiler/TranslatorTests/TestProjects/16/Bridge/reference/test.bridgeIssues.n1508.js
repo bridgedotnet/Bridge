@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Test.BridgeIssues.N1508.App', {
+    Bridge.define("Test.BridgeIssues.N1508.App", {
         statics: {
             upTo: function (value) {
                 return [value];
@@ -33,5 +33,4 @@
             }
         }
     });
-
 });

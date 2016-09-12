@@ -1,4 +1,4 @@
-﻿    Bridge.define('TestIssue948.Issue948', {
+﻿    Bridge.define("TestIssue948.Issue948", {
         statics: {
             test: function () {
                 // A comment

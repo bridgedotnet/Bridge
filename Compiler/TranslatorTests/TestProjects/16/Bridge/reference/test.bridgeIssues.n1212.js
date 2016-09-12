@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Test.BridgeIssues.N1212.TestIncrementDecrement', {
+    Bridge.define("Test.BridgeIssues.N1212.TestIncrementDecrement", {
         testDouble: function () {
             var v = 0;
             v++;
@@ -57,5 +57,4 @@
             var v4 = (v = v.dec());
         }
     });
-
 });

@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflection.Resource2.bin":"EBESExQV","Bridge.ClientTest.Batch4.Reflection.Resource1.bin":"AAECAwQFBgc="}, function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Bridge.ClientTest.Batch4.ActivatorTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.ActivatorTests", {
         nonGenericCreateInstanceWithoutArgumentsWorks: function () {
             var c = Bridge.cast(Bridge.createInstance(Bridge.ClientTest.Batch4.ActivatorTests.C1), Bridge.ClientTest.Batch4.ActivatorTests.C1);
             Bridge.Test.Assert.areNotEqual(null, c);
@@ -129,7 +129,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.ActivatorTests.C1', {
+    Bridge.define("Bridge.ClientTest.Batch4.ActivatorTests.C1", {
         i: 0,
         ctor: function () {
             this.$initialize();
@@ -137,7 +137,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.ActivatorTests.C2', {
+    Bridge.define("Bridge.ClientTest.Batch4.ActivatorTests.C2", {
         i: 0,
         ctor: function (i) {
             this.$initialize();
@@ -145,7 +145,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.ActivatorTests.C3', {
+    Bridge.define("Bridge.ClientTest.Batch4.ActivatorTests.C3", {
         i: 0,
         j: 0,
         ctor: function (i, j) {
@@ -155,7 +155,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.ActivatorTests.C4', {
+    Bridge.define("Bridge.ClientTest.Batch4.ActivatorTests.C4", {
         i: 0,
         ctor: function () {
             this.$initialize();
@@ -167,7 +167,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.ActivatorTests.C5', {
+    Bridge.define("Bridge.ClientTest.Batch4.ActivatorTests.C5", {
         statics: {
             getDefaultValue: function () {
                 return { i: 42 };
@@ -176,7 +176,7 @@
         i: 0
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.ActivatorTests.C6', {
+    Bridge.define("Bridge.ClientTest.Batch4.ActivatorTests.C6", {
         i: 0,
         ctor: function () {
             this.$initialize();
@@ -184,7 +184,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.ActivatorTests.C7', {
+    Bridge.define("Bridge.ClientTest.Batch4.ActivatorTests.C7", {
         $literal: true,
         ctor: function () {
             var $this = {};
@@ -194,7 +194,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.ActivatorTests.C8$1', function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.ActivatorTests.C8$1", function (T) { return {
         i: 0,
         ctor: function () {
             this.$initialize();
@@ -206,7 +206,7 @@
         }
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.AppDomainTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.AppDomainTests", {
         getAssembliesWorks_SPI_1646: function () {
             // #1646
             //var arr = AppDomain.CurrentDomain.GetAssemblies();
@@ -220,7 +220,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.ArgumentsTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.ArgumentsTests", {
         lengthHelper0: function (args) {
             args = Array.prototype.slice.call(arguments, 0);
             Bridge.Test.Assert.areEqual(0, arguments.length);
@@ -267,7 +267,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.ArrayTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.ArrayTests", {
         typePropertiesAreCorrect_SPI_1546: function () {
             // #1546
             Bridge.Test.Assert.areEqual$1(Object, Bridge.Reflection.getBaseType(Array), "BaseType of Array should be object");
@@ -549,7 +549,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.ArrayTests.C', {
+    Bridge.define("Bridge.ClientTest.Batch4.ArrayTests.C", {
         i: 0,
         ctor: function (i) {
             this.$initialize();
@@ -563,7 +563,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.Generic.ComparerTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.ComparerTests", {
         typePropertiesAreCorrect_SPI_1546: function () {
             // #1546
             Bridge.Test.Assert.areStrictEqual$1(Object, Bridge.Reflection.getBaseType(System.Collections.Generic.Comparer$1(Object)), "BaseType should be correct");
@@ -607,7 +607,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.Generic.ComparerTests.C', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.ComparerTests.C", {
         inherits: function () { return [System.IComparable$1(Bridge.ClientTest.Batch4.Collections.Generic.ComparerTests.C)]; },
         value: 0,
         config: {
@@ -624,7 +624,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.Generic.EqualityComparerTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.EqualityComparerTests", {
         typePropertiesAreCorrect_SPI_1546: function () {
             // #1546
             Bridge.Test.Assert.areStrictEqual$1(Object, Bridge.Reflection.getBaseType(System.Collections.Generic.EqualityComparer$1(Object)), "BaseType should be correct");
@@ -676,7 +676,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.Generic.EqualityComparerTests.MyClass', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.EqualityComparerTests.MyClass", {
         hashCode: 0,
         other: null,
         shouldEqual: false,
@@ -689,7 +689,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.Generic.GenericDictionaryTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.GenericDictionaryTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.Collections.Generic.Dictionary$2[[System.Int32, mscorlib],[String]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.Dictionary$2(System.Int32,String)), "FullName should be correct");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.Collections.Generic.Dictionary$2(System.Int32,String)), "IsClass should be true");
@@ -993,7 +993,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.Generic.GenericDictionaryTests.TestEqualityComparer', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.GenericDictionaryTests.TestEqualityComparer", {
         inherits: [System.Collections.Generic.EqualityComparer$1(String)],
         config: {
             alias: [
@@ -1009,7 +1009,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.Generic.ICollectionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.ICollectionTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.Collections.Generic.ICollection$1[[Object]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.ICollection$1(Object)), "FullName should be correct");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isInterface(System.Collections.Generic.ICollection$1(Object)), "IsInterface should be true");
@@ -1086,7 +1086,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.Generic.ICollectionTests.C', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.ICollectionTests.C", {
         _i: 0,
         ctor: function (i) {
             this.$initialize();
@@ -1100,7 +1100,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.Generic.ICollectionTests.MyCollection', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.ICollectionTests.MyCollection", {
         inherits: [System.Collections.Generic.ICollection$1(String)],
         config: {
             properties: {
@@ -1142,7 +1142,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.Generic.IDictionaryTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.IDictionaryTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.Collections.Generic.IDictionary$2[[Object],[Object]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.IDictionary$2(Object,Object)), "FullName should be correct");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isInterface(System.Collections.Generic.IDictionary$2(Object,Object)), "IsInterface should be true");
@@ -1386,7 +1386,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.Generic.IDictionaryTests.MyDictionary', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.IDictionaryTests.MyDictionary", {
         inherits: [System.Collections.Generic.IDictionary$2(System.Int32,String)],
         _backingDictionary: null,
         config: {
@@ -1448,7 +1448,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.Generic.IEnumerableTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.IEnumerableTests", {
         arrayImplementsIEnumerable: function () {
             Bridge.Test.Assert.true(Bridge.is(System.Array.init(1, 0), System.Collections.Generic.IEnumerable$1(System.Int32)));
         },
@@ -1500,7 +1500,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.Generic.IEnumerableTests.MyEnumerable', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.IEnumerableTests.MyEnumerable", {
         inherits: [System.Collections.Generic.IEnumerable$1(String)],
         config: {
             alias: [
@@ -1519,7 +1519,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.Generic.IListTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.IListTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.Collections.Generic.IList$1[[Object]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.IList$1(Object)), "FullName should be correct");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isInterface(System.Collections.Generic.IList$1(Object)), "IsInterface should be true");
@@ -1599,7 +1599,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.Generic.IListTests.C', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.IListTests.C", {
         _i: 0,
         ctor: function (i) {
             this.$initialize();
@@ -1613,7 +1613,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.Generic.IListTests.MyList', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.IListTests.MyList", {
         inherits: [System.Collections.Generic.IList$1(String)],
         config: {
             properties: {
@@ -1675,7 +1675,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests", {
         assertEqual: function (actual, expected, message) {
             if (message === void 0) { message = null; }
             Bridge.Test.Assert.areEqual$1(System.String.replaceAll(expected, "\r\n", "\n"), System.String.replaceAll(actual, "\r\n", "\n"), message);
@@ -1701,7 +1701,7 @@
                 sb.appendLine(System.String.concat("got ", enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]()));
             }
 
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
         },
         prematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks_SPI_1555: function () {
             // #1555
@@ -1714,7 +1714,7 @@
             }
             enm.System$IDisposable$dispose();
 
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
         },
         exceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
             var sb = new System.Text.StringBuilder();
@@ -1738,7 +1738,7 @@
                 sb.appendLine("caught exception");
             }
 
-            this.assertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
+            this.assertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
         },
         typeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface_SPI_1554: function () {
             var enm = null;
@@ -1769,7 +1769,7 @@
                 sb.appendLine(System.String.concat("got ", i1));
             }
 
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n-\r\nyielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n-\nyielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
         },
         prematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks_SPI_1555: function () {
             var $t;
@@ -1785,7 +1785,7 @@
                 }
             }
 
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
         },
         exceptionInIEnumerableIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
             var sb = new System.Text.StringBuilder();
@@ -1810,7 +1810,7 @@
                 sb.appendLine("caught exception");
             }
 
-            this.assertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
+            this.assertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
         },
         enumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters: function () {
             var $t, $t1;
@@ -1828,7 +1828,7 @@
                 sb.appendLine(i1.toString());
             }
 
-            this.assertEqual(sb.toString(), "3\r\n2\r\n1\r\n3\r\n2\r\n1\r\n");
+            this.assertEqual(sb.toString(), "3\n2\n1\n3\n2\n1\n");
         },
         differentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals: function () {
             var sb = new System.Text.StringBuilder();
@@ -1843,11 +1843,11 @@
                 sb.appendLine(enm2[Bridge.geti(enm2, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]().toString());
             }
 
-            this.assertEqual(sb.toString(), "0\r\n0\r\n1\r\n1\r\n2\r\n2\r\n-1\r\n-1\r\n");
+            this.assertEqual(sb.toString(), "0\n0\n1\n1\n2\n2\n-1\n-1\n");
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests.C', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests.C", {
         _sb: null,
         ctor: function (sb) {
             this.$initialize();
@@ -1935,7 +1935,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.Generic.KeyValuePairTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.KeyValuePairTests", {
         theConstructorWithParametersCanBeUsed: function () {
             var v = new (System.Collections.Generic.KeyValuePair$2(String,System.Int32))("Hello", 42);
             Bridge.Test.Assert.true$1(Bridge.hasValue(v), "is KeyValuePair");
@@ -1979,7 +1979,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.Generic.ListTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.ListTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.Collections.Generic.List$1[[System.Int32, mscorlib]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.List$1(System.Int32)), "FullName should be Array");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.Collections.Generic.List$1(System.Int32)), "IsClass should be true");
@@ -2566,7 +2566,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.Generic.ListTests.C', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.ListTests.C", {
         i: 0,
         ctor: function (i) {
             this.$initialize();
@@ -2580,7 +2580,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.Generic.ListTests.TestReverseComparer', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.ListTests.TestReverseComparer", {
         inherits: [System.Collections.Generic.IComparer$1(System.Int32)],
         config: {
             alias: [
@@ -2593,7 +2593,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.ObjectModel.ReadOnlyCollectionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.ObjectModel.ReadOnlyCollectionTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.Collections.ObjectModel.ReadOnlyCollection$1[[System.Int32, mscorlib]]", Bridge.Reflection.getTypeFullName(System.Collections.ObjectModel.ReadOnlyCollection$1(System.Int32)), "FullName should be Array");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.Collections.ObjectModel.ReadOnlyCollection$1(System.Int32)), "IsClass should be true");
@@ -2702,7 +2702,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.ObjectModel.ReadOnlyCollectionTests.C', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.ObjectModel.ReadOnlyCollectionTests.C", {
         i: 0,
         ctor: function (i) {
             this.$initialize();
@@ -2716,7 +2716,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.TypedArrays.ArrayBufferTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.ArrayBufferTests", {
         getArray: function (b) {
             var result = System.Array.init(b.byteLength, 0);
             var a = new Uint8Array(b);
@@ -2742,7 +2742,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.TypedArrays.DataViewTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.DataViewTests", {
         getView: function (content) {
             var result = new Uint8Array(content.length);
             for (var i = 0; i < content.length; i = (i + 1) | 0) {
@@ -2940,7 +2940,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.TypedArrays.Float32ArrayTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Float32ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
                 Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
@@ -3153,7 +3153,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.TypedArrays.Float64ArrayTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Float64ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
                 Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
@@ -3367,7 +3367,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.TypedArrays.Int16ArrayTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Int16ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
                 Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
@@ -3580,7 +3580,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.TypedArrays.Int32ArrayTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Int32ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
                 Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
@@ -3792,7 +3792,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.TypedArrays.Int8ArrayTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Int8ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
                 Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
@@ -4004,7 +4004,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint16ArrayTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint16ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
                 Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
@@ -4216,7 +4216,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint32ArrayTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint32ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
                 Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
@@ -4428,7 +4428,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint8ArrayTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint8ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
                 Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
@@ -4640,7 +4640,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint8ClampedArrayTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint8ClampedArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
                 Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
@@ -4869,7 +4869,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.ConvertTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.ConvertTests", {
         getTestArr: function () {
             var result = System.Array.init(192, 0);
             for (var i = 0; i < 64; i = (i + 1) | 0) {
@@ -4916,7 +4916,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.CultureInfoTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.CultureInfoTests", {
         typePropertiesAreCorrect: function () {
             var culture = System.Globalization.CultureInfo.invariantCulture;
             Bridge.Test.Assert.areEqual("System.Globalization.CultureInfo", Bridge.Reflection.getTypeFullName(System.Globalization.CultureInfo));
@@ -4938,7 +4938,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.DateTimeFormatInfoTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.DateTimeFormatInfoTests", {
         typePropertiesAreCorrect: function () {
             var format = System.Globalization.DateTimeFormatInfo.invariantInfo;
             Bridge.Test.Assert.areEqual("System.Globalization.DateTimeFormatInfo", Bridge.Reflection.getTypeFullName(System.Globalization.DateTimeFormatInfo));
@@ -4983,7 +4983,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.DelegateTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.DelegateTests", {
         testField: 12,
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual("Function", Bridge.Reflection.getTypeFullName(Function));
@@ -5264,14 +5264,14 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.DelegateTests.C', {
+    Bridge.define("Bridge.ClientTest.Batch4.DelegateTests.C", {
         F1: function () {
         },
         F2: function () {
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Diagnostics.Contracts.ContractTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Diagnostics.Contracts.ContractTests", {
         assertNoExceptions: function (block) {
             try {
                 block();
@@ -5462,13 +5462,13 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.EnvironmentTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.EnvironmentTests", {
         newLineIsAStringContainingOnlyTheNewLineChar: function () {
             Bridge.Test.Assert.areEqual("\n", '\n');
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Exceptions.AggregateExceptionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Exceptions.AggregateExceptionTests", {
         statics: {
             DefaultMessage: "One or more errors occurred."
         },
@@ -5640,7 +5640,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Exceptions.AmbiguousMatchExceptionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Exceptions.AmbiguousMatchExceptionTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.Reflection.AmbiguousMatchException", Bridge.Reflection.getTypeFullName(System.Reflection.AmbiguousMatchException), "Name");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.Reflection.AmbiguousMatchException), "IsClass");
@@ -5673,7 +5673,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Exceptions.ArgumentExceptionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Exceptions.ArgumentExceptionTests", {
         statics: {
             DefaultMessage: "Value does not fall within the expected range."
         },
@@ -5727,7 +5727,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Exceptions.ArgumentNullExceptionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Exceptions.ArgumentNullExceptionTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.ArgumentNullException", Bridge.Reflection.getTypeFullName(System.ArgumentNullException), "Name");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.ArgumentNullException), "IsClass");
@@ -5771,7 +5771,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Exceptions.ArgumentOutOfRangeExceptionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Exceptions.ArgumentOutOfRangeExceptionTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.ArgumentOutOfRangeException", Bridge.Reflection.getTypeFullName(System.ArgumentOutOfRangeException), "Name");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.ArgumentOutOfRangeException), "IsClass");
@@ -5847,7 +5847,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Exceptions.ArithmeticExceptionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Exceptions.ArithmeticExceptionTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.ArithmeticException", Bridge.Reflection.getTypeFullName(System.ArithmeticException), "Name");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.ArithmeticException), "IsClass");
@@ -5880,7 +5880,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Exceptions.ContractExceptionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Exceptions.ContractExceptionTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.Diagnostics.Contracts.ContractException", Bridge.Reflection.getTypeFullName(System.Diagnostics.Contracts.ContractException), "Name");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.Diagnostics.Contracts.ContractException), "IsClass");
@@ -5903,7 +5903,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Exceptions.DivideByZeroExceptionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Exceptions.DivideByZeroExceptionTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.DivideByZeroException", Bridge.Reflection.getTypeFullName(System.DivideByZeroException), "Name");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.DivideByZeroException), "IsClass");
@@ -5936,7 +5936,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Exceptions.ErrorExceptionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Exceptions.ErrorExceptionTests", {
         typePropertiesAreCorrect_SPI_1564: function () {
             Bridge.Test.Assert.areEqual$1("Bridge.ErrorException", Bridge.Reflection.getTypeFullName(Bridge.ErrorException), "Name");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(Bridge.ErrorException), "IsClass");
@@ -5992,7 +5992,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Exceptions.ExceptionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Exceptions.ExceptionTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.Exception", Bridge.Reflection.getTypeFullName(System.Exception), "Name");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.Exception), "IsClass");
@@ -6037,7 +6037,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Exceptions.ExceptionTests.MyException', {
+    Bridge.define("Bridge.ClientTest.Batch4.Exceptions.ExceptionTests.MyException", {
         inherits: [System.Exception],
         _message: null,
         _innerException: null,
@@ -6055,7 +6055,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Exceptions.FormatExceptionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Exceptions.FormatExceptionTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.FormatException", Bridge.Reflection.getTypeFullName(System.FormatException), "Name");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.FormatException), "IsClass");
@@ -6088,7 +6088,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Exceptions.InvalidCastExceptionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Exceptions.InvalidCastExceptionTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.InvalidCastException", Bridge.Reflection.getTypeFullName(System.InvalidCastException), "Name");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.InvalidCastException), "IsClass");
@@ -6121,7 +6121,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Exceptions.InvalidOperationExceptionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Exceptions.InvalidOperationExceptionTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.InvalidOperationException", Bridge.Reflection.getTypeFullName(System.InvalidOperationException), "Name");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.InvalidOperationException), "IsClass");
@@ -6154,7 +6154,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Exceptions.KeyNotFoundExceptionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Exceptions.KeyNotFoundExceptionTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.Collections.Generic.KeyNotFoundException", Bridge.Reflection.getTypeFullName(System.Collections.Generic.KeyNotFoundException), "Name");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.Collections.Generic.KeyNotFoundException), "IsClass");
@@ -6187,7 +6187,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Exceptions.NotImplementedExceptionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Exceptions.NotImplementedExceptionTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.NotImplementedException", Bridge.Reflection.getTypeFullName(System.NotImplementedException), "Name");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.NotImplementedException), "IsClass");
@@ -6220,7 +6220,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Exceptions.NotSupportedExceptionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Exceptions.NotSupportedExceptionTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.NotSupportedException", Bridge.Reflection.getTypeFullName(System.NotSupportedException), "Name");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.NotSupportedException), "IsClass");
@@ -6253,7 +6253,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Exceptions.NullReferenceExceptionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Exceptions.NullReferenceExceptionTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.NullReferenceException", Bridge.Reflection.getTypeFullName(System.NullReferenceException), "Name");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.NullReferenceException), "IsClass");
@@ -6306,7 +6306,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Exceptions.OperationCanceledExceptionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Exceptions.OperationCanceledExceptionTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.OperationCanceledException", Bridge.Reflection.getTypeFullName(System.OperationCanceledException), "Name");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.OperationCanceledException), "IsClass");
@@ -6367,7 +6367,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Exceptions.OverflowExceptionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Exceptions.OverflowExceptionTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.OverflowException", Bridge.Reflection.getTypeFullName(System.OverflowException), "Name");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.OverflowException), "IsClass");
@@ -6400,7 +6400,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Exceptions.PromiseExceptionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Exceptions.PromiseExceptionTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("Bridge.PromiseException", Bridge.Reflection.getTypeFullName(Bridge.PromiseException), "Name");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(Bridge.PromiseException), "IsClass");
@@ -6440,7 +6440,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Exceptions.TaskCanceledExceptionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Exceptions.TaskCanceledExceptionTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.Threading.Tasks.TaskCanceledException", Bridge.Reflection.getTypeFullName(System.Threading.Tasks.TaskCanceledException), "Name");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.Threading.Tasks.TaskCanceledException), "IsClass");
@@ -6489,7 +6489,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.ExceptionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.ExceptionTests", {
         throwingAndCatchingExceptionsWorks: function () {
             try {
                 throw new Bridge.ClientTest.Batch4.ExceptionTests.E2("The message");
@@ -6581,7 +6581,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.ExceptionTests.E1', {
+    Bridge.define("Bridge.ClientTest.Batch4.ExceptionTests.E1", {
         inherits: [System.Exception],
         ctor: function (message) {
             this.$initialize();
@@ -6589,7 +6589,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.FormattableStringTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.FormattableStringTests", {
         typePropertiesAreCorrect: function () {
             var s = System.Runtime.CompilerServices.FormattableStringFactory.create("s");
             Bridge.Test.Assert.true$1(Bridge.is(s, System.FormattableString), "is FormattableString");
@@ -6652,7 +6652,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.FormattableStringTests.MyFormatProvider', {
+    Bridge.define("Bridge.ClientTest.Batch4.FormattableStringTests.MyFormatProvider", {
         inherits: [System.IFormatProvider],
         config: {
             alias: [
@@ -6664,7 +6664,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.FormattableStringTests.MyFormattable', {
+    Bridge.define("Bridge.ClientTest.Batch4.FormattableStringTests.MyFormattable", {
         inherits: [System.IFormattable],
         config: {
             alias: [
@@ -6676,7 +6676,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.GuidTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.GuidTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual("System.Guid", Bridge.Reflection.getTypeFullName(System.Guid));
             Bridge.Test.Assert.false(Bridge.Reflection.isClass(System.Guid));
@@ -6920,7 +6920,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.IComparableTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.IComparableTests", {
         callingMethodThroughIComparableInterfaceInvokesImplementingMethod: function () {
             var a = new Bridge.ClientTest.Batch4.IComparableTests.MyComparable(), b = new Bridge.ClientTest.Batch4.IComparableTests.MyComparable();
             a.result = 534;
@@ -6941,7 +6941,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.IComparableTests.MyComparable', {
+    Bridge.define("Bridge.ClientTest.Batch4.IComparableTests.MyComparable", {
         inherits: function () { return [System.IComparable$1(Bridge.ClientTest.Batch4.IComparableTests.MyComparable)]; },
         result: 0,
         other: null,
@@ -6956,7 +6956,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.IEquatableTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.IEquatableTests", {
         callingMethodThroughIComparableInterfaceInvokesImplementingMethod: function () {
             var a = new Bridge.ClientTest.Batch4.IEquatableTests.MyEquatable(), b = new Bridge.ClientTest.Batch4.IEquatableTests.MyEquatable();
             a.result = true;
@@ -6985,7 +6985,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.IEquatableTests.MyEquatable', {
+    Bridge.define("Bridge.ClientTest.Batch4.IEquatableTests.MyEquatable", {
         inherits: function () { return [System.IEquatable$1(Bridge.ClientTest.Batch4.IEquatableTests.MyEquatable)]; },
         result: false,
         other: null,
@@ -7000,7 +7000,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.IFormattableTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.IFormattableTests", {
         iFormattableIsRecordedInInterfaceList: function () {
             Bridge.Test.Assert.true(Bridge.Reflection.isAssignableFrom(System.IFormattable, Bridge.ClientTest.Batch4.IFormattableTests.MyFormattable));
             Bridge.Test.Assert.true(Bridge.is(new Bridge.ClientTest.Batch4.IFormattableTests.MyFormattable(), System.IFormattable));
@@ -7013,7 +7013,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.IFormattableTests.MyFormatProvider', {
+    Bridge.define("Bridge.ClientTest.Batch4.IFormattableTests.MyFormatProvider", {
         inherits: [System.IFormatProvider],
         config: {
             alias: [
@@ -7025,7 +7025,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.IFormattableTests.MyFormattable', {
+    Bridge.define("Bridge.ClientTest.Batch4.IFormattableTests.MyFormattable", {
         inherits: [System.IFormattable],
         config: {
             alias: [
@@ -7037,7 +7037,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests", {
         statics: {
             f: function (f) {
                 return 0;
@@ -8889,7 +8889,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests.C', {
+    Bridge.define("Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests.C", {
         statics: {
             op_Power: function (a, b) {
                 return null;
@@ -9018,7 +9018,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1', function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1", function (T) { return {
         data: Bridge.getDefaultValue(T),
         ctor: function (data) {
             this.$initialize();
@@ -9029,7 +9029,7 @@
         }
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests.MyEnumerable$1', function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests.MyEnumerable$1", function (T) { return {
         inherits: [System.Collections.Generic.IEnumerable$1(T)],
         _hasEnumerated: false,
         _items: null,
@@ -9054,14 +9054,14 @@
         }
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests.MyExpression', {
+    Bridge.define("Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests.MyExpression", {
         ctor: function () {
             this.$initialize();
             Bridge.merge(this, { ntype: 9999, type: String });
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests.MyList', {
+    Bridge.define("Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests.MyList", {
         inherits: [System.Collections.IEnumerable],
         config: {
             alias: [
@@ -9080,7 +9080,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.MathTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.MathTests", {
         assertAlmostEqual: function (d1, d2) {
             var diff = d2 - d1;
             if (diff < 0) {
@@ -9429,7 +9429,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.MultidimArrayTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.MultidimArrayTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("Array", Bridge.Reflection.getTypeFullName(Array), "FullName should be Array");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(Array), "IsClass should be true");
@@ -9576,7 +9576,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.NullableTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.NullableTests", {
         isOfType: function (T, value) {
             return Bridge.is(value, T);
         },
@@ -9894,7 +9894,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.NullableTests.MyType', {
+    Bridge.define("Bridge.ClientTest.Batch4.NullableTests.MyType", {
         $kind: "struct",
         statics: {
             op_Implicit: function (i) {
@@ -9949,7 +9949,7 @@
         $clone: function (to) { return this; }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.NumberFormatInfoTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.NumberFormatInfoTests", {
         typePropertiesAreCorrect: function () {
             var format = System.Globalization.NumberFormatInfo.invariantInfo;
             Bridge.Test.Assert.areEqual("System.Globalization.NumberFormatInfo", Bridge.Reflection.getTypeFullName(System.Globalization.NumberFormatInfo));
@@ -9994,7 +9994,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.PropertyAccessorTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.PropertyAccessorTests", {
         accessorsCanBeInvokedInstance: function () {
             var c = new Bridge.ClientTest.Batch4.PropertyAccessorTests.C1();
 
@@ -10083,7 +10083,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.PropertyAccessorTests.B3', {
+    Bridge.define("Bridge.ClientTest.Batch4.PropertyAccessorTests.B3", {
         F1: 0,
         F2: 0,
         F3: 0,
@@ -10101,7 +10101,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.PropertyAccessorTests.B4$1', function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.PropertyAccessorTests.B4$1", function (T) { return {
         F1: Bridge.getDefaultValue(T),
         F2: Bridge.getDefaultValue(T),
         F3: Bridge.getDefaultValue(T),
@@ -10119,7 +10119,7 @@
         }
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.PropertyAccessorTests.C1', {
+    Bridge.define("Bridge.ClientTest.Batch4.PropertyAccessorTests.C1", {
         statics: {
             FS1: 0,
             FS2: 0,
@@ -10154,7 +10154,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.PropertyAccessorTests.C2$1', function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.PropertyAccessorTests.C2$1", function (T) { return {
         statics: {
             FS1: Bridge.getDefaultValue(T),
             FS2: Bridge.getDefaultValue(T),
@@ -10189,7 +10189,7 @@
         }
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.RandomTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.RandomTests", {
         typePropertiesAreCorrect: function () {
             var rand = new System.Random.ctor();
             Bridge.Test.Assert.areEqual("System.Random", Bridge.Reflection.getTypeFullName(System.Random));
@@ -10245,7 +10245,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AssemblyTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AssemblyTests", {
         getImportedModuleTestCase: function () {
         
     	var x = {
@@ -10401,7 +10401,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AssemblyTests.A2Attribute', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AssemblyTests.A2Attribute", {
         inherits: [System.Attribute],
         config: {
             properties: {
@@ -10420,7 +10420,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AssemblyTests.A3Attribute', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AssemblyTests.A3Attribute", {
         inherits: [System.Attribute],
         config: {
             properties: {
@@ -10439,13 +10439,13 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AssemblyTests.C');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AssemblyTests.C");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AssemblyTests.G$2', function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AssemblyTests.G$2", function (T1, T2) { return {
 
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests", {
         canGetCustomTypeAttributesForTypeWithNoAttributes: function () {
             var arr = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C1, null, false);
             Bridge.Test.Assert.areEqual$1(0, arr.length, "Should have no attributes");
@@ -10621,7 +10621,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.A11Attribute', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.A11Attribute", {
         inherits: [System.Attribute],
         i: 0,
         ctor: function () {
@@ -10635,19 +10635,19 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.A12Attribute', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.A12Attribute", {
         inherits: [System.Attribute]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.A13Attribute', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.A13Attribute", {
         inherits: [System.Attribute]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.A14Attribute', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.A14Attribute", {
         inherits: [System.Attribute]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute", {
         inherits: [System.Attribute],
         config: {
             properties: {
@@ -10661,7 +10661,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute", {
         inherits: [System.Attribute],
         config: {
             properties: {
@@ -10675,7 +10675,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.A3Attribute', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.A3Attribute", {
         inherits: [System.Attribute],
         config: {
             properties: {
@@ -10689,7 +10689,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.A4Attribute', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.A4Attribute", {
         inherits: [System.Attribute],
         config: {
             properties: {
@@ -10703,11 +10703,11 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.A5Attribute', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.A5Attribute", {
         inherits: [System.Attribute]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.A6Attribute', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.A6Attribute", {
         inherits: [System.Attribute],
         config: {
             properties: {
@@ -10746,7 +10746,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.A7Attribute', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.A7Attribute", {
         inherits: [System.Attribute],
         config: {
             properties: {
@@ -10762,7 +10762,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.A8Attribute', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.A8Attribute", {
         inherits: [System.Attribute],
         config: {
             properties: {
@@ -10776,7 +10776,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.A9Attribute', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.A9Attribute", {
         inherits: [System.Attribute],
         P3: 0,
         config: {
@@ -10789,44 +10789,44 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.C1');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C1");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.C10$2', function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C10$2", function (T1, T2) { return {
 
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.C11');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C11");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.C12');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C12");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.C13');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C13");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.C14');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C14");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.C15');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C15");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.C16');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C16");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.C18');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C18");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.C19');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C19");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.C2');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C2");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.C20');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C20");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.C21');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C21");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.C22', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C22", {
         m: function () {
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.C7');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C7");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.C9');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C9");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.E1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.E1", {
         $kind: "enum",
         statics: {
             V1: 1,
@@ -10834,7 +10834,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.E2', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.E2", {
         $kind: "enum",
         statics: {
             V1: "v1",
@@ -10843,15 +10843,15 @@
         $utype: System.String
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.I1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.I1", {
         $kind: "interface"
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.I2$2', function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.I2$2", function (T1, T2) { return {
 
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.GetMembersTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.GetMembersTests", {
         assertEquivalent: function (actual, expected) {
             var actualValues = actual.filter($_.Bridge.ClientTest.Batch4.Reflection.GetMembersTests.f1).map($_.Bridge.ClientTest.Batch4.Reflection.GetMembersTests.f2).filter($_.Bridge.ClientTest.Batch4.Reflection.GetMembersTests.f3);
             actualValues.sort();
@@ -11189,7 +11189,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.GetMembersTests.A1Attribute', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.GetMembersTests.A1Attribute", {
         inherits: [System.Attribute],
         config: {
             properties: {
@@ -11203,7 +11203,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.GetMembersTests.B1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.GetMembersTests.B1", {
         statics: {
             FBS1: 0,
             FBS2: 0,
@@ -11270,7 +11270,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.GetMembersTests.B2', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.GetMembersTests.B2", {
         statics: {
             FS: 0,
             FBS: 0,
@@ -11337,7 +11337,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.GetMembersTests.C3', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.GetMembersTests.C3", {
         getItem: function (x) {
             return 0;
         },
@@ -11345,11 +11345,11 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.GetMembersTests.I1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.GetMembersTests.I1", {
         $kind: "interface"
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests", {
         getMembersReturnsMethodsWithAnyScriptableAttributeOrReflectableAttribute: function () {
             var methods = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C1, 31, 28);
             Bridge.Test.Assert.areEqual$1(2, methods.length, "Should be two methods");
@@ -12592,7 +12592,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute", {
         inherits: [System.Attribute],
         config: {
             properties: {
@@ -12610,15 +12610,15 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A3Attribute', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A3Attribute", {
         inherits: [System.Attribute]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A4Attribute', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A4Attribute", {
         inherits: [System.Attribute]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C1", {
         M1: function () {
         },
         M2: function () {
@@ -12629,7 +12629,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10", {
         x: 0,
         s: null,
         ctor: function (x) {
@@ -12644,7 +12644,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C11', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C11", {
         config: {
             init: function () {
                 this.D = new Date(-864e13);
@@ -12656,7 +12656,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C12', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C12", {
         statics: {
             F3: null
         },
@@ -12668,7 +12668,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C13', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C13", {
         statics: {
             addedE4Handler: null,
             removedE4Handler: null,
@@ -12705,7 +12705,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C14', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C14", {
         statics: {
             p14Field: 0,
             P4: 0,
@@ -12741,7 +12741,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C15', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C15", {
         x: 0,
         s: null,
         v: null,
@@ -12755,18 +12755,18 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C16', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C16", {
         getItem: function (x, s) {
             return null;
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C17', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C17", {
         setItem: function (x, s, value) {
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C18', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C18", {
         f: 0,
         config: {
             properties: {
@@ -12784,7 +12784,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C19', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C19", {
         A: 0,
         B: null,
         ctor: function (a, b) {
@@ -12792,7 +12792,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C2', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C2", {
         statics: {
             M2: function () {
             }
@@ -12801,12 +12801,12 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C20', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C20", {
         A: 0,
         B: null
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C21', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C21", {
         X: 0,
         ctor: function (x) {
             this.$initialize();
@@ -12814,7 +12814,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C22', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C22", {
         a: null,
         b: null,
         ctor: function (a, b) {
@@ -12841,7 +12841,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C23', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C23", {
         a: null,
         b: null,
         ctor: function (a, b) {
@@ -12868,7 +12868,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C24', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C24", {
         x: 0,
         s: null,
         v: null,
@@ -12879,7 +12879,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C25', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C25", {
         A1: 0,
         B1: 0,
         C1: 0,
@@ -12902,7 +12902,7 @@
         D5: 0
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C26', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C26", {
         A1: 0,
         B1: 0,
         C1: 0,
@@ -12925,7 +12925,7 @@
         D5: 0
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C27', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C27", {
         A1: 0,
         B1: 0,
         C1: 0,
@@ -12948,7 +12948,7 @@
         D5: 0
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C28', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C28", {
         A1: 0,
         B1: 0,
         C1: 0,
@@ -12971,7 +12971,7 @@
         D5: 0
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C3', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C3", {
         M1: function () {
             return 0;
         },
@@ -12985,7 +12985,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C4', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C4", {
         m: function () {
         },
         m$1: function (i) {
@@ -12994,7 +12994,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C5$2', function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C5$2", function (T1, T2) { return {
         m: function (t2, s) {
             return Bridge.getDefaultValue(T1);
         },
@@ -13003,7 +13003,7 @@
         }
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C6', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C6", {
         M1: function (T1, T2, t2, s) {
             return Bridge.getDefaultValue(T1);
         },
@@ -13014,7 +13014,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C7', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C7", {
         statics: {
             M2: function (x) {
             }
@@ -13028,7 +13028,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C8', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C8", {
         statics: {
             M2: function (a, b) {
                 return System.String.concat(System.String.concat(a, " "), b);
@@ -13050,7 +13050,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C9$2', function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C9$2", function (T1, T2) { return {
         statics: {
             m: function (a) {
                 return System.String.concat(System.String.concat(System.String.concat(System.String.concat(Bridge.Reflection.getTypeFullName(T1), " "), Bridge.Reflection.getTypeFullName(T2)), " "), a);
@@ -13058,7 +13058,7 @@
         }
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.ReflectionTests.S1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.S1", {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new Bridge.ClientTest.Batch4.Reflection.ReflectionTests.S1(); }
@@ -13077,12 +13077,10 @@
         $clone: function (to) { return this; }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests", {
         statics: {
             canConvert: function (T, arg) {
                 try { /// The variable `x' is assigned but its value is never used
-
-
                     var x = System.Nullable.getValue(Bridge.cast(arg, T));
                     return true;
                 }
@@ -13552,7 +13550,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.BS', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.BS", {
         X: 0,
         ctor: function (x) {
             this.$initialize();
@@ -13560,56 +13558,56 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C1');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C1");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.K');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.K");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C2$1', function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C2$1", function (T) { return {
 
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.CI');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.CI");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I1", {
         $kind: "interface"
     });
 
-    Bridge.definei('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I2$1', function (T1) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I2$1", function (T1) { return {
         $kind: "interface"
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I4', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I4", {
         $kind: "interface"
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.E1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.E1", {
         $kind: "enum"
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.E2', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.E2", {
         $kind: "enum"
     });
 
-    Bridge.definei('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I7$1', function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I7$1", function (T) { return {
         $kind: "interface",
         $variance: [2]
     }; });
 
-    Bridge.definei('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I6$1', function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I6$1", function (T) { return {
         $kind: "interface",
         $variance: [1]
     }; });
 
-    Bridge.definei('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I9$2', function (T1, T2) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I9$2", function (T1, T2) { return {
         $kind: "interface",
         $variance: [0,1]
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.OL', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.OL", {
         $literal: true
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests", {
         fullNamePropertyReturnsTheNameWithTheNamespace: function () {
             Bridge.Test.Assert.areEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests));
         },
@@ -14368,13 +14366,13 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.I1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.I1", {
         $kind: "interface"
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseMethodInvocationTypes');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseMethodInvocationTypes");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseMethodInvocationTypes.B', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseMethodInvocationTypes.B", {
         f: function (x, y) {
             return ((x - y) | 0);
         },
@@ -14383,9 +14381,9 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseNamedConstructorWithArgumentsTypes');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseNamedConstructorWithArgumentsTypes");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseNamedConstructorWithArgumentsTypes.B', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseNamedConstructorWithArgumentsTypes.B", {
         messageB: null,
         ctor: function (x, y) {
             this.$initialize();
@@ -14393,9 +14391,9 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseNamedConstructorWithoutArgumentsTypes');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseNamedConstructorWithoutArgumentsTypes");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseNamedConstructorWithoutArgumentsTypes.B', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseNamedConstructorWithoutArgumentsTypes.B", {
         messageB: null,
         ctor: function () {
             this.$initialize();
@@ -14403,9 +14401,9 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseUnnamedConstructorWithArgumentsTypes');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseUnnamedConstructorWithArgumentsTypes");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseUnnamedConstructorWithArgumentsTypes.B', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseUnnamedConstructorWithArgumentsTypes.B", {
         messageB: null,
         ctor: function (x, y) {
             this.$initialize();
@@ -14413,9 +14411,9 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseUnnamedConstructorWithoutArgumentsTypes');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseUnnamedConstructorWithoutArgumentsTypes");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseUnnamedConstructorWithoutArgumentsTypes.B', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseUnnamedConstructorWithoutArgumentsTypes.B", {
         messageB: null,
         ctor: function () {
             this.$initialize();
@@ -14423,7 +14421,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BS', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BS", {
         X: 0,
         ctor: function (x) {
             this.$initialize();
@@ -14431,15 +14429,15 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BX$1', function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BX$1", function (T) { return {
 
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.I3', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.I3", {
         $kind: "interface"
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.ClassWithExpandParamsCtor', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.ClassWithExpandParamsCtor", {
         ctorArgs: null,
         ctor: function (args) {
             args = Array.prototype.slice.call(arguments, 0);
@@ -14449,9 +14447,9 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.ConstructingInstanceWithNamedConstructorTypes');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.ConstructingInstanceWithNamedConstructorTypes");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.ConstructingInstanceWithNamedConstructorTypes.D', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.ConstructingInstanceWithNamedConstructorTypes.D", {
         f: null,
         ctor: function () {
             this.$initialize();
@@ -14462,24 +14460,24 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.CS2', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.CS2", {
         x: 0
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1", {
         $kind: "enum"
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E2', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E2", {
         $kind: "enum",
         $flags: true
     });
 
-    Bridge.definei('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1', function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1", function (T) { return {
         $kind: "interface"
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.ImportedNamedValuesEnum', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.ImportedNamedValuesEnum", {
         $kind: "enum",
         statics: {
             firstValue: "firstValue",
@@ -14488,52 +14486,52 @@
         $utype: System.String
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.C1');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.C1");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.C2$1', function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.C2$1", function (T) { return {
 
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I1", {
         $kind: "interface"
     });
 
-    Bridge.definei('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I2$1', function (T1) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I2$1", function (T1) { return {
         $kind: "interface"
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I4', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I4", {
         $kind: "interface"
     });
 
-    Bridge.definei('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I7$1', function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I7$1", function (T) { return {
         $kind: "interface",
         $variance: [2]
     }; });
 
-    Bridge.definei('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I6$1', function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I6$1", function (T) { return {
         $kind: "interface",
         $variance: [1]
     }; });
 
-    Bridge.definei('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I9$2', function (T1, T2) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I9$2", function (T1, T2) { return {
         $kind: "interface",
         $variance: [0,1]
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsSubclassOfTypes');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsSubclassOfTypes");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsSubclassOfTypes.C1');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsSubclassOfTypes.C1");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1', function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1", function (T) { return {
 
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.MethodGroupConversionTypes');
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.MethodGroupConversionTypes");
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.MethodGroupConversionTypes.B', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.MethodGroupConversionTypes.B", {
         m: 0,
         ctor: function (m) {
             this.$initialize();
@@ -14547,7 +14545,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.MethodGroupConversionTypes.C', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.MethodGroupConversionTypes.C", {
         m: 0,
         ctor: function (m) {
             this.$initialize();
@@ -14567,7 +14565,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.NamedValuesEnum', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.NamedValuesEnum", {
         $kind: "enum",
         statics: {
             firstValue: "firstValue",
@@ -14576,7 +14574,7 @@
         $utype: System.String
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.RefParameterTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.RefParameterTests", {
         refTestMethod: function (r, expectBefore, write, expectAfter, writeAfter, a) {
             Bridge.Test.Assert.areEqual(expectBefore, r.v);
             r.v = write;
@@ -14636,11 +14634,11 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.RefParameterTests.C', {
+    Bridge.define("Bridge.ClientTest.Batch4.RefParameterTests.C", {
         i: 0
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.RefParameterTests.S', {
+    Bridge.define("Bridge.ClientTest.Batch4.RefParameterTests.S", {
         $kind: "struct",
         statics: {
             m: function (s) {
@@ -14730,7 +14728,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Runtime.CompilerServices.RuntimeHelpersTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Runtime.CompilerServices.RuntimeHelpersTests", {
         getHashCodeWoksForObject_SPI_1570: function () {
             // #1570
             var o1 = {  }, o2 = {  };
@@ -14752,13 +14750,13 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Runtime.CompilerServices.RuntimeHelpersTests.C', {
+    Bridge.define("Bridge.ClientTest.Batch4.Runtime.CompilerServices.RuntimeHelpersTests.C", {
         getHashCode: function () {
             return 0;
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.ScriptTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.ScriptTests", {
         statics: {
             getUndefined: function () {
                 return null;
@@ -14842,7 +14840,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.ScriptTests.TestType', {
+    Bridge.define("Bridge.ClientTest.Batch4.ScriptTests.TestType", {
         statics: {
             StaticMethod: function () {
             }
@@ -14884,7 +14882,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Serialization.JsonTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Serialization.JsonTests", {
         nonGenericParseWorks_SPI_1574: function () {
             // #1574
             // Test restructure to keep assertion count correct (prevent uncaught test exception)
@@ -15007,16 +15005,16 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Serialization.JsonTests.TestClass1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Serialization.JsonTests.TestClass1", {
         i: 0
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Serialization.JsonTests.TestClass2', {
+    Bridge.define("Bridge.ClientTest.Batch4.Serialization.JsonTests.TestClass2", {
         i: 0,
         s: null
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.BooleanTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.BooleanTests", {
         typePropertiesAreCorrect_SPI_1575: function () {
             Bridge.Test.Assert.true(Bridge.is(true, Boolean));
             Bridge.Test.Assert.areEqual("Boolean", Bridge.Reflection.getTypeFullName(Boolean));
@@ -15095,7 +15093,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.ByteTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.ByteTests", {
         typePropertiesAreCorrect_SPI_1717: function () {
             Bridge.Test.Assert.true(Bridge.is(0, System.Byte));
             Bridge.Test.Assert.false(Bridge.is(0.5, System.Byte));
@@ -15289,7 +15287,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.CharTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.CharTests", {
         typePropertiesAreInt32_SPI_1603: function () {
             Bridge.Test.Assert.true(Bridge.is(0, System.Char));
             Bridge.Test.Assert.false(Bridge.is(0.5, System.Char));
@@ -15472,7 +15470,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.DateTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.DateTests", {
         statics: {
             addTimezoneMinutesOffset: function (dt) {
                 return new Date(dt.getTime() - ((dt.getTimezoneOffset() * 60000) | 0));
@@ -15824,7 +15822,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.DateTimeTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.DateTimeTests", {
         typePropertiesAreCorrect_SPI_1607_1608_1609: function () {
             Bridge.Test.Assert.areEqual("Date", Bridge.Reflection.getTypeFullName(Date));
             Bridge.Test.Assert.false(Bridge.Reflection.isClass(Date));
@@ -16365,7 +16363,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.DecimalTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.DecimalTests", {
         typePropertiesAreCorrect_SPI_1717: function () {
             Bridge.Test.Assert.true(Bridge.is(System.Decimal(0.5), System.Decimal));
             Bridge.Test.Assert.areEqual("System.Decimal", Bridge.Reflection.getTypeFullName(System.Decimal));
@@ -17927,7 +17925,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.DoubleTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.DoubleTests", {
         typePropertiesAreCorrect_SPI_1717: function () {
             Bridge.Test.Assert.true(Bridge.is(0.5, System.Double));
             Bridge.Test.Assert.areEqual("System.Double", Bridge.Reflection.getTypeFullName(System.Double));
@@ -18075,7 +18073,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.EnumTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.EnumTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual("Object", Bridge.Reflection.getTypeFullName(System.Enum));
             Bridge.Test.Assert.areEqual("Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.TestEnum", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.TestEnum));
@@ -18155,7 +18153,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.FlagsEnum', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.FlagsEnum", {
         $kind: "enum",
         statics: {
             None: 0,
@@ -18166,7 +18164,7 @@
         $flags: true
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.TestEnum', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.TestEnum", {
         $kind: "enum",
         statics: {
             FirstValue: 0,
@@ -18175,7 +18173,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.Int16Tests', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.Int16Tests", {
         typePropertiesAreCorrect_SPI_1717: function () {
             Bridge.Test.Assert.true(Bridge.is(0, System.Int16));
             Bridge.Test.Assert.false(Bridge.is(0.5, System.Int16));
@@ -18369,7 +18367,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.Int32Tests', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.Int32Tests", {
         typePropertiesAreCorrect_SPI_1717: function () {
             Bridge.Test.Assert.true(Bridge.is(0, System.Int32));
             Bridge.Test.Assert.false(Bridge.is(0.5, System.Int32));
@@ -18624,7 +18622,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.Int64Tests', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.Int64Tests", {
         typePropertiesAreCorrect_SPI_1717: function () {
             Bridge.Test.Assert.true(Bridge.is(System.Int64(0), System.Int64));
             Bridge.Test.Assert.false(Bridge.is(0.5, System.Int64));
@@ -18815,7 +18813,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.ObjectTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.ObjectTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.true(Bridge.hasValue({  }));
             Bridge.Test.Assert.areEqual("Object", Bridge.Reflection.getTypeFullName(Object));
@@ -18861,13 +18859,13 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.ObjectTests.C1', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.ObjectTests.C1", {
         toString: function () {
             return "test";
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.SByteTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.SByteTests", {
         typePropertiesAreCorrect_SPI_1717: function () {
             Bridge.Test.Assert.true(Bridge.is(0, System.SByte));
             Bridge.Test.Assert.false(Bridge.is(0.5, System.SByte));
@@ -19057,7 +19055,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.SingleTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.SingleTests", {
         typePropertiesAreCorrect_SPI_1717: function () {
             Bridge.Test.Assert.true(Bridge.is(0.5, System.Single));
             Bridge.Test.Assert.areEqual("System.Single", Bridge.Reflection.getTypeFullName(System.Single));
@@ -19203,7 +19201,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.StringTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.StringTests", {
         typePropertiesAreCorrect_SPI_1597: function () {
             Bridge.Test.Assert.areEqual("String", Bridge.Reflection.getTypeFullName(String));
             Bridge.Test.Assert.true(Bridge.Reflection.isClass(String));
@@ -19701,7 +19699,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.StringTests.MyEnumerable$1', function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.StringTests.MyEnumerable$1", function (T) { return {
         inherits: [System.Collections.Generic.IEnumerable$1(T)],
         _items: null,
         config: {
@@ -19721,7 +19719,7 @@
         }
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.StringTests.MyFormatProvider', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.StringTests.MyFormatProvider", {
         inherits: [System.IFormatProvider],
         config: {
             alias: [
@@ -19733,7 +19731,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.StringTests.MyFormattable', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.StringTests.MyFormattable", {
         inherits: [System.IFormattable],
         config: {
             alias: [
@@ -19745,7 +19743,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.TimeSpanTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.TimeSpanTests", {
         typePropertiesAreCorrect_SPI_1717: function () {
             Bridge.Test.Assert.areEqual("System.TimeSpan", Bridge.Reflection.getTypeFullName(System.TimeSpan));
             Bridge.Test.Assert.false(Bridge.Reflection.isClass(System.TimeSpan));
@@ -19983,7 +19981,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.TupleTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.TupleTests", {
         tuple1Works: function () {
             for (var i = 0; i <= 1; i = (i + 1) | 0) {
                 var t = i === 0 ? { item1: "a" } : { item1: "a" };
@@ -20062,7 +20060,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.UInt16Tests', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.UInt16Tests", {
         typePropertiesAreCorrect_SPI_1717: function () {
             Bridge.Test.Assert.true(Bridge.is(0, System.UInt16));
             Bridge.Test.Assert.false(Bridge.is(0.5, System.UInt16));
@@ -20255,7 +20253,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.UInt32Tests', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.UInt32Tests", {
         typePropertiesAreCorrect_SPI_1717: function () {
             Bridge.Test.Assert.true(Bridge.is(0, System.UInt32));
             Bridge.Test.Assert.false(Bridge.is(0.5, System.UInt32));
@@ -20444,7 +20442,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.UInt64Tests', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.UInt64Tests", {
         typePropertiesAreCorrect_SPI_1717: function () {
             Bridge.Test.Assert.true(Bridge.is(System.UInt64(0), System.UInt64));
             Bridge.Test.Assert.false(Bridge.is(0.5, System.UInt64));
@@ -20635,7 +20633,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.StopwatchTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.StopwatchTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.Diagnostics.Stopwatch", Bridge.Reflection.getTypeFullName(System.Diagnostics.Stopwatch), "Class name");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.Diagnostics.Stopwatch), "IsClass");
@@ -20698,7 +20696,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.TestHelper', {
+    Bridge.define("Bridge.ClientTest.Batch4.TestHelper", {
         statics: {
             safe: function (a) {
                 try {
@@ -20711,7 +20709,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Text.RegularExpressions.RegexTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Text.RegularExpressions.RegexTests", {
         statics: {
             escapeWorks: function () {
                 var escaped = Bridge.regexpEscape("[-/\\^$*+?.()|[]{}]");
@@ -20770,7 +20768,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Text.StringBuilderTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Text.StringBuilderTests", {
         typePropertiesAreCorrect: function () {
             var sb = new System.Text.StringBuilder();
             Bridge.Test.Assert.areEqual("System.Text.StringBuilder", Bridge.Reflection.getTypeFullName(System.Text.StringBuilder));
@@ -20893,13 +20891,13 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Text.StringBuilderTests.SomeClass', {
+    Bridge.define("Bridge.ClientTest.Batch4.Text.StringBuilderTests.SomeClass", {
         toString: function () {
             return "some text";
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Threading.AsyncTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Threading.AsyncTests", {
         asyncVoid: function () {
             var done = Bridge.Test.Assert.async();
 
@@ -21300,7 +21298,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Threading.CancellationTokenTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Threading.CancellationTokenTests", {
         typePropertiesForCancellationTokenSourceAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.Threading.CancellationTokenSource", Bridge.Reflection.getTypeFullName(System.Threading.CancellationTokenSource), "FullName");
             var cts = new System.Threading.CancellationTokenSource();
@@ -21721,7 +21719,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Threading.PromiseTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Threading.PromiseTests", {
         config: {
             properties: {
                 PromiseProgress: 0
@@ -22015,7 +22013,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Threading.PromiseTests.SimplePromise', {
+    Bridge.define("Bridge.ClientTest.Batch4.Threading.PromiseTests.SimplePromise", {
         inherits: [Bridge.IPromise],
         doThen: null,
         config: {
@@ -22106,7 +22104,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Threading.PromiseTests.SimplePromise.A', {
+    Bridge.define("Bridge.ClientTest.Batch4.Threading.PromiseTests.SimplePromise.A", {
         config: {
             properties: {
                 Filled: null,
@@ -22116,7 +22114,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Threading.PromiseTests.SimplePromise.Which', {
+    Bridge.define("Bridge.ClientTest.Batch4.Threading.PromiseTests.SimplePromise.Which", {
         $kind: "enum",
         statics: {
             Resolve: 0,
@@ -22124,7 +22122,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Threading.PromiseTests.TaskResult', {
+    Bridge.define("Bridge.ClientTest.Batch4.Threading.PromiseTests.TaskResult", {
         config: {
             properties: {
                 I: 0,
@@ -22134,7 +22132,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Threading.TaskTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.Threading.TaskTests", {
         makeEnumerable: function (T, args) {
             var $t;
             if (args === void 0) { args = []; }
@@ -23526,7 +23524,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.UserDefinedStructTests', {
+    Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests", {
         create: function (T) {
             return Bridge.createInstance(T);
         },
@@ -23766,7 +23764,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.UserDefinedStructTests.MS1', {
+    Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.MS1", {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new Bridge.ClientTest.Batch4.UserDefinedStructTests.MS1(); }
@@ -23815,7 +23813,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.UserDefinedStructTests.MS2', {
+    Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.MS2", {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new Bridge.ClientTest.Batch4.UserDefinedStructTests.MS2(); }
@@ -23843,7 +23841,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.UserDefinedStructTests.MS3$1', function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.MS3$1", function (T) { return {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new (Bridge.ClientTest.Batch4.UserDefinedStructTests.MS3$1(T))(); }
@@ -23871,7 +23869,7 @@
         }
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.UserDefinedStructTests.MS4', {
+    Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.MS4", {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new Bridge.ClientTest.Batch4.UserDefinedStructTests.MS4(); }
@@ -23902,7 +23900,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.UserDefinedStructTests.S1', {
+    Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.S1", {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new Bridge.ClientTest.Batch4.UserDefinedStructTests.S1(); }
@@ -23930,7 +23928,7 @@
         $clone: function (to) { return this; }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.UserDefinedStructTests.S2', {
+    Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.S2", {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new Bridge.ClientTest.Batch4.UserDefinedStructTests.S2(); }
@@ -23966,7 +23964,7 @@
         $clone: function (to) { return this; }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.UserDefinedStructTests.S2G$1', function (TT) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.S2G$1", function (TT) { return {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new (Bridge.ClientTest.Batch4.UserDefinedStructTests.S2G$1(TT))(); }
@@ -24002,7 +24000,7 @@
         $clone: function (to) { return this; }
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.UserDefinedStructTests.S3', {
+    Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.S3", {
         $kind: "struct",
         statics: {
             staticField: 0,
@@ -24039,7 +24037,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.UserDefinedStructTests.S4', {
+    Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.S4", {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new Bridge.ClientTest.Batch4.UserDefinedStructTests.S4(); }
@@ -24070,7 +24068,7 @@
         $clone: function (to) { return this; }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.UserDefinedStructTests.S5', {
+    Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.S5", {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new Bridge.ClientTest.Batch4.UserDefinedStructTests.S5(); }
@@ -24092,7 +24090,7 @@
         $clone: function (to) { return this; }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.UserDefinedStructTests.S6', {
+    Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.S6", {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new Bridge.ClientTest.Batch4.UserDefinedStructTests.S6(); }
@@ -24116,7 +24114,7 @@
         $clone: function (to) { return this; }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.UserDefinedStructTests.S6G$1', function (TT) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.S6G$1", function (TT) { return {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new (Bridge.ClientTest.Batch4.UserDefinedStructTests.S6G$1(TT))(); }
@@ -24140,7 +24138,7 @@
         $clone: function (to) { return this; }
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.UserDefinedStructTests.S7', {
+    Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.S7", {
         $kind: "struct",
         statics: {
             op_Addition: function (a, b) {
@@ -24177,7 +24175,7 @@
         $clone: function (to) { return this; }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.ExceptionTests.E2', {
+    Bridge.define("Bridge.ClientTest.Batch4.ExceptionTests.E2", {
         inherits: [Bridge.ClientTest.Batch4.ExceptionTests.E1],
         ctor: function (message) {
             this.$initialize();
@@ -24185,7 +24183,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.PropertyAccessorTests.D3', {
+    Bridge.define("Bridge.ClientTest.Batch4.PropertyAccessorTests.D3", {
         inherits: [Bridge.ClientTest.Batch4.PropertyAccessorTests.B3],
         getP1: function () {
             return ((Bridge.ClientTest.Batch4.PropertyAccessorTests.B3.prototype.getP1.call(this) + 1) | 0);
@@ -24201,7 +24199,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.PropertyAccessorTests.D4$1', function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.PropertyAccessorTests.D4$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch4.PropertyAccessorTests.B4$1(T)],
         getP1: function () {
             return Bridge.ClientTest.Batch4.PropertyAccessorTests.B4$1(T).prototype.getP1.call(this) + 1;
@@ -24217,23 +24215,23 @@
         }
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.C3', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C3", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.AttributeTests.C2]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.C5', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C5", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.AttributeTests.C2]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.C6', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C6", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.AttributeTests.C2]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.C8', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C8", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.AttributeTests.C7]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.GetMembersTests.C1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.GetMembersTests.C1", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.GetMembersTests.B1],
         statics: {
             FCS1: 0,
@@ -24304,7 +24302,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.GetMembersTests.C2', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.GetMembersTests.C2", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.GetMembersTests.B2],
         statics: {
             FS: 0,
@@ -24372,33 +24370,33 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.GetMembersTests.I2', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.GetMembersTests.I2", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.GetMembersTests.I1],
         $kind: "interface"
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C10$1', function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C10$1", function (T) { return {
 
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.D1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.D1", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C1,Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I1]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.D2$1', function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.D2$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C2$1(T),Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I2$1(T),Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I1]
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.D3', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.D3", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C2$1(System.Int32),Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I2$1(String)]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I3', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I3", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I1],
         $kind: "interface"
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.DS', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.DS", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.BS],
         ctor: function () {
             this.$initialize();
@@ -24406,39 +24404,39 @@
         }
     });
 
-    Bridge.definei('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I8$2', function (T1, T2) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I8$2", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I6$1(T1),Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I7$1(T2)],
         $kind: "interface",
         $variance: [1,2]
     }; });
 
-    Bridge.definei('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I5$1', function (T1) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I5$1", function (T1) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I2$1(T1)],
         $kind: "interface"
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.X1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.X1", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I1]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y1$1', function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y1$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I6$1(T)]
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y2$1', function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y2$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I7$1(T)]
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y4$2', function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y4$2", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I9$2(T1,T2)]
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.I2', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.I2", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.I1],
         $kind: "interface"
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseMethodInvocationTypes.D', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseMethodInvocationTypes.D", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseMethodInvocationTypes.B],
         f: function (x, y) {
             return ((x + y) | 0);
@@ -24454,7 +24452,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseNamedConstructorWithArgumentsTypes.D', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseNamedConstructorWithArgumentsTypes.D", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseNamedConstructorWithArgumentsTypes.B],
         messageD: null,
         ctor: function (x, y) {
@@ -24464,7 +24462,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseNamedConstructorWithoutArgumentsTypes.D', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseNamedConstructorWithoutArgumentsTypes.D", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseNamedConstructorWithoutArgumentsTypes.B],
         messageD: null,
         ctor: function () {
@@ -24474,7 +24472,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseUnnamedConstructorWithArgumentsTypes.D', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseUnnamedConstructorWithArgumentsTypes.D", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseUnnamedConstructorWithArgumentsTypes.B],
         messageD: null,
         ctor: function (x, y) {
@@ -24484,7 +24482,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseUnnamedConstructorWithoutArgumentsTypes.D', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseUnnamedConstructorWithoutArgumentsTypes.D", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseUnnamedConstructorWithoutArgumentsTypes.B],
         messageD: null,
         ctor: function () {
@@ -24494,12 +24492,12 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.I4', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.I4", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.I3],
         $kind: "interface"
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.ConstructingInstanceWithNamedConstructorTypes.E', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.ConstructingInstanceWithNamedConstructorTypes.E", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.ConstructingInstanceWithNamedConstructorTypes.D],
         g: null,
         ctor: function () {
@@ -24512,7 +24510,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.DS', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.DS", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BS],
         ctor: function (x) {
             this.$initialize();
@@ -24523,7 +24521,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.DS2', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.DS2", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BS],
         ctor: function () {
             this.$initialize();
@@ -24531,7 +24529,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2', function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2", function (T1, T2) { return {
         inherits: function () { return [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BX$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(T1,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C)),Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(T2,String))]; },
         statics: {
             ctor: function () {
@@ -24541,63 +24539,63 @@
         }
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.D1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.D1", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.C1,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I1]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.D2$1', function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.D2$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.C2$1(T),Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I2$1(T),Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I1]
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.D3', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.D3", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.C2$1(System.Int32),Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I2$1(String)]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I3', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I3", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I1],
         $kind: "interface"
     });
 
-    Bridge.definei('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I8$2', function (T1, T2) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I8$2", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I6$1(T1),Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I7$1(T2)],
         $kind: "interface",
         $variance: [1,2]
     }; });
 
-    Bridge.definei('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I5$1', function (T1) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I5$1", function (T1) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I2$1(T1)],
         $kind: "interface"
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.X1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.X1", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I1]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y1$1', function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y1$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I6$1(T)]
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2$1', function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I7$1(T)]
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y4$2', function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y4$2", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I9$2(T1,T2)]
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsSubclassOfTypes.D1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsSubclassOfTypes.D1", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsSubclassOfTypes.C1]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsSubclassOfTypes.D2$1', function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsSubclassOfTypes.D2$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1(T)]
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsSubclassOfTypes.D3', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsSubclassOfTypes.D3", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1(System.Int32)]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.MethodGroupConversionTypes.D', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.MethodGroupConversionTypes.D", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.MethodGroupConversionTypes.B],
         ctor: function (m) {
             this.$initialize();
@@ -24617,15 +24615,15 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.SimpleTypes.ObjectTests.C2', {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.ObjectTests.C2", {
         inherits: [Bridge.ClientTest.Batch4.SimpleTypes.ObjectTests.C1]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.AttributeTests.C4', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C4", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.AttributeTests.C3]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.GetMembersTests.D1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.GetMembersTests.D1", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.GetMembersTests.C1,Bridge.ClientTest.Batch4.Reflection.GetMembersTests.I1],
         statics: {
             FDS1: 0,
@@ -24737,7 +24735,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.GetMembersTests.D2', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.GetMembersTests.D2", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.GetMembersTests.C2],
         statics: {
             FS: 0,
@@ -24805,135 +24803,135 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C11$1', function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C11$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C10$1(T)]
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.D4', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.D4", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I3,Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I4]
     });
 
-    Bridge.definei('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I10$2', function (T1, T2) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I10$2", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I8$2(T1,T2)],
         $kind: "interface",
         $variance: [1,2]
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.X2', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.X2", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.X1]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y1X1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y1X1", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y1$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.X1)]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y2X1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y2X1", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y2$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.X1)]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y3$2', function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y3$2", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I8$2(T1,T2)]
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y5$2', function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y5$2", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I6$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I8$2(T1,T2))]
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y6$2', function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y6$2", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I7$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I8$2(T1,T2))]
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.B', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.B", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.I2]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.D4', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.D4", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I3,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I4]
     });
 
-    Bridge.definei('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I10$2', function (T1, T2) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I10$2", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I8$2(T1,T2)],
         $kind: "interface",
         $variance: [1,2]
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.X2', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.X2", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.X1]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y1X1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y1X1", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y1$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.X1)]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2X1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2X1", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.X1)]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y3$2', function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y3$2", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I8$2(T1,T2)]
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y5$2', function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y5$2", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I6$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I8$2(T1,T2))]
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y6$2', function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y6$2", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I7$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I8$2(T1,T2))]
     }; });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C12', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C12", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C11$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.K)]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y1X2', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y1X2", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y1$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.X2)]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y2X2', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y2X2", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y2$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.X2)]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y3X1X1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y3X1X1", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y3$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.X1,Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.X1)]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y3X1X2', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y3X1X2", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y3$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.X1,Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.X2)]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y3X2X1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y3X2X1", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y3$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.X2,Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.X1)]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y3X2X2', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y3X2X2", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y3$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.X2,Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.X2)]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.B,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.I4]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y1X2', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y1X2", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y1$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.X2)]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2X2', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2X2", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.X2)]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y3X1X1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y3X1X1", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y3$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.X1,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.X1)]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y3X1X2', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y3X1X2", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y3$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.X1,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.X2)]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y3X2X1', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y3X2X1", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y3$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.X2,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.X1)]
     });
 
-    Bridge.define('Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y3X2X2', {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y3X2X2", {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y3$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.X2,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.X2)]
     });
 
@@ -25017,5 +25015,4 @@
     } ),Bridge.merge(new Bridge.ClientTest.Batch4.Reflection.AssemblyTests.A3Attribute.$ctor1(15), {
         setP: 45
     } )];
-
 });

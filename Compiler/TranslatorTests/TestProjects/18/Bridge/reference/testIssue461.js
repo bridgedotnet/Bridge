@@ -1,4 +1,4 @@
-﻿    Bridge.define('TestIssue461.Issue461', {
+﻿    Bridge.define("TestIssue461.Issue461", {
         statics: {
             test: function () {
                 var input = document.createElement('input');
