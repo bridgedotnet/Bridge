@@ -577,6 +577,15 @@ namespace Bridge.Translator
                 }
             }
 
+            List<ISymbol> initSymbols = new List<ISymbol>();
+            if (node.Initializer != null)
+            {
+                foreach (var init in node.Initializer.Expressions)
+                {
+                    initSymbols.Add(this.semanticModel.GetCollectionInitializerSymbolInfo(init).Symbol);
+                }
+            }
+
             node = (ObjectCreationExpressionSyntax)base.VisitObjectCreationExpression(node);
             bool isImplicitElementAccessSyntax = false;
             if (node.Initializer != null && (method != null || node.Initializer.Expressions.Any(init =>
@@ -640,10 +649,10 @@ namespace Bridge.Translator
                         instance = "_o" + ++indexInstance;
                     }
                 }
-
+                int idx = 0;
                 foreach (var init in initializers)
                 {
-                    var collectionInitializer = this.semanticModel.GetCollectionInitializerSymbolInfo(init).Symbol;
+                    var collectionInitializer = initSymbols[idx++];
                     var mInfo = collectionInitializer != null ? collectionInitializer as IMethodSymbol : null;
                     if (mInfo != null)
                     {

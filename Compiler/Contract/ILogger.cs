@@ -2,6 +2,8 @@ namespace Bridge.Contract
 {
     public interface ILogger
     {
+        bool AlwaysLogErrors { get; }
+
         bool BufferedMode { get; set; }
 
         void Flush();

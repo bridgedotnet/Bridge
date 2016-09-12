@@ -5,6 +5,8 @@ namespace Bridge.Translator.Logging
 {
     public class ConsoleLoggerWriter : ILogger
     {
+        public bool AlwaysLogErrors { get { return true; } }
+
         public bool BufferedMode { get; set; }
 
         public LoggerLevel LoggerLevel { get; set; }
@@ -47,7 +49,7 @@ namespace Bridge.Translator.Logging
 
         private bool CheckLoggerLevel(LoggerLevel level)
         {
-            return level <= LoggerLevel;
+            return (level <= this.LoggerLevel) || (level == LoggerLevel.Error && this.AlwaysLogErrors);
         }
     }
 }

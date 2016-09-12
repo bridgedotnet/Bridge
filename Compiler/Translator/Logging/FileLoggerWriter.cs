@@ -24,6 +24,7 @@ namespace Bridge.Translator.Logging
         private int InitializationCount { get; set; }
         private Queue<BufferedMessage> Buffer { get; set; }
 
+        public bool AlwaysLogErrors { get { return false; } }
         public string BaseDirectory { get; private set; }
         public string FullName { get; private set; }
         public string FileName { get; private set; }

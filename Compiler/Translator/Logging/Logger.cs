@@ -7,6 +7,7 @@ namespace Bridge.Translator.Logging
 {
     public class Logger : ILogger
     {
+        public bool AlwaysLogErrors { get { return false; } }
         public string Name { get; set; }
         public List<ILogger> LoggerWriters { get; private set; }
         public bool UseTimeStamp { get; set; }
@@ -71,13 +72,16 @@ namespace Bridge.Translator.Logging
         {
             string wrappedMessage;
 
-            if ((wrappedMessage = CheckIfCanLog(message, LoggerLevel.Error)) != null)
+            foreach (var logger in this.LoggerWriters)
             {
-                foreach (var logger in this.LoggerWriters)
+                var alwaysLogErrors = logger.AlwaysLogErrors;
+
+                if ((wrappedMessage = CheckIfCanLog(message, LoggerLevel.Error, alwaysLogErrors)) != null)
                 {
                     logger.Error(wrappedMessage);
                 }
             }
+
         }
 
         public void Warn(string message)
@@ -119,19 +123,20 @@ namespace Bridge.Translator.Logging
             }
         }
 
-        private string CheckIfCanLog(string message, LoggerLevel level)
+        private string CheckIfCanLog(string message, LoggerLevel level, bool alwaysLogErrors = false)
         {
             //if (this.LoggerLevel >= level)
             //{
             //    return null;
             //}
 
-            return this.WrapMessage(message, level);
+            return this.WrapMessage(message, level, alwaysLogErrors);
         }
 
-        private string WrapMessage(string message, LoggerLevel logLevel)
+        private string WrapMessage(string message, LoggerLevel logLevel, bool alwaysLogErrors)
         {
-            if (this.LoggerLevel <= 0 || string.IsNullOrEmpty(message))
+            if ((this.LoggerLevel <= 0 && !alwaysLogErrors)
+                || string.IsNullOrEmpty(message))
             {
                 return null;
             }
