@@ -8,7 +8,7 @@ namespace Bridge.Build
 {
     public class VSLoggerWriter : ILogger
     {
-        public bool AlwaysLogErrors { get { return false; } }
+        public bool AlwaysLogErrors { get { return true; } }
 
         public bool BufferedMode { get; set; }
 
@@ -60,7 +60,7 @@ namespace Bridge.Build
 
         private bool CheckLoggerLevel(LoggerLevel level)
         {
-            return level <= this.LoggerLevel;
+            return (level <= this.LoggerLevel) || (level == LoggerLevel.Error && this.AlwaysLogErrors);
         }
     }
 }
