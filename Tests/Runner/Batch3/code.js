@@ -6914,6 +6914,8 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
+
+
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6943,7 +6945,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                }; /// Async method lacks 'await' operators and will run synchronously
+                                };
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -8204,13 +8206,469 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802", {
         statics: {
-            new: function () {
+            bool: function () {
                 return 1;
+            },
+            byte: function () {
+                return 2;
+            },
+            sbyte: function () {
+                return 3;
+            },
+            short: function () {
+                return 4;
+            },
+            ushort: function () {
+                return 5;
+            },
+            int: function () {
+                return 6;
+            },
+            uint: function () {
+                return 7;
+            },
+            long: function () {
+                return 8;
+            },
+            ulong: function () {
+                return 9;
+            },
+            double: function () {
+                return 10;
+            },
+            float: function () {
+                return 11;
+            },
+            decimal: function () {
+                return 12;
+            },
+            string: function () {
+                return 13;
+            },
+            char: function () {
+                return 14;
+            },
+            object: function () {
+                return 15;
+            },
+            typeof: function () {
+                return 16;
+            },
+            sizeof: function () {
+                return 17;
+            },
+            null: function () {
+                return 18;
+            },
+            true: function () {
+                return 19;
+            },
+            false: function () {
+                return 20;
+            },
+            if: function () {
+                return 21;
+            },
+            else: function () {
+                return 22;
+            },
+            while: function () {
+                return 23;
+            },
+            for: function () {
+                return 24;
+            },
+            foreach: function () {
+                return 25;
+            },
+            do: function () {
+                return 26;
+            },
+            switch: function () {
+                return 27;
+            },
+            case: function () {
+                return 28;
+            },
+            default: function () {
+                return 29;
+            },
+            lock: function () {
+                return 30;
+            },
+            try: function () {
+                return 31;
+            },
+            throw: function () {
+                return 32;
+            },
+            catch: function () {
+                return 33;
+            },
+            finally: function () {
+                return 34;
+            },
+            goto: function () {
+                return 35;
+            },
+            break: function () {
+                return 36;
+            },
+            continue: function () {
+                return 37;
+            },
+            return: function () {
+                return 38;
+            },
+            public: function () {
+                return 39;
+            },
+            private: function () {
+                return 40;
+            },
+            internal: function () {
+                return 41;
+            },
+            protected: function () {
+                return 42;
+            },
+            static: function () {
+                return 43;
+            },
+            readonly: function () {
+                return 44;
+            },
+            sealed: function () {
+                return 45;
+            },
+            const: function () {
+                return 46;
+            },
+            new: function () {
+                return 47;
+            },
+            override: function () {
+                return 48;
+            },
+            abstract: function () {
+                return 49;
+            },
+            virtual: function () {
+                return 50;
+            },
+            partial: function () {
+                return 51;
+            },
+            ref: function () {
+                return 52;
+            },
+            out: function () {
+                return 53;
+            },
+            in: function () {
+                return 54;
+            },
+            where: function () {
+                return 55;
+            },
+            params: function () {
+                return 56;
+            },
+            this: function () {
+                return 57;
+            },
+            base: function () {
+                return 58;
+            },
+            namespace: function () {
+                return 59;
+            },
+            using: function () {
+                return 60;
+            },
+            class: function () {
+                return 61;
+            },
+            struct: function () {
+                return 62;
+            },
+            interface: function () {
+                return 63;
+            },
+            delegate: function () {
+                return 64;
+            },
+            checked: function () {
+                return 65;
+            },
+            get: function () {
+                return 66;
+            },
+            set: function () {
+                return 67;
+            },
+            add: function () {
+                return 68;
+            },
+            remove: function () {
+                return 69;
+            },
+            operator: function () {
+                return 70;
+            },
+            implicit: function () {
+                return 71;
+            },
+            explicit: function () {
+                return 72;
+            },
+            fixed: function () {
+                return 73;
+            },
+            extern: function () {
+                return 74;
+            },
+            event: function () {
+                return 75;
+            },
+            enum: function () {
+                return 76;
+            },
+            unsafe: function () {
+                return 77;
             }
         },
         testReservedWordsAsMethodName: function () {
-            Bridge.Test.Assert.areEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.new());
-            Bridge.Test.Assert.areEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.new());
+            Bridge.Test.Assert.areEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.bool());
+            Bridge.Test.Assert.areEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.bool());
+
+            Bridge.Test.Assert.areEqual(2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.byte());
+            Bridge.Test.Assert.areEqual(2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.byte());
+
+            Bridge.Test.Assert.areEqual(3, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.sbyte());
+            Bridge.Test.Assert.areEqual(3, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.sbyte());
+
+            Bridge.Test.Assert.areEqual(4, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.short());
+            Bridge.Test.Assert.areEqual(4, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.short());
+
+            Bridge.Test.Assert.areEqual(5, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.ushort());
+            Bridge.Test.Assert.areEqual(5, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.ushort());
+
+            Bridge.Test.Assert.areEqual(6, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.int());
+            Bridge.Test.Assert.areEqual(6, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.int());
+
+            Bridge.Test.Assert.areEqual(7, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.uint());
+            Bridge.Test.Assert.areEqual(7, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.uint());
+
+            Bridge.Test.Assert.areEqual(8, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.long());
+            Bridge.Test.Assert.areEqual(8, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.long());
+
+            Bridge.Test.Assert.areEqual(9, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.ulong());
+            Bridge.Test.Assert.areEqual(9, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.ulong());
+
+            Bridge.Test.Assert.areEqual(10, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.double());
+            Bridge.Test.Assert.areEqual(10, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.double());
+
+            Bridge.Test.Assert.areEqual(11, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.float());
+            Bridge.Test.Assert.areEqual(11, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.float());
+
+            Bridge.Test.Assert.areEqual(12, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.decimal());
+            Bridge.Test.Assert.areEqual(12, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.decimal());
+
+            Bridge.Test.Assert.areEqual(13, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.string());
+            Bridge.Test.Assert.areEqual(13, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.string());
+
+            Bridge.Test.Assert.areEqual(14, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.char());
+            Bridge.Test.Assert.areEqual(14, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.char());
+
+            Bridge.Test.Assert.areEqual(15, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.object());
+            Bridge.Test.Assert.areEqual(15, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.object());
+
+            Bridge.Test.Assert.areEqual(16, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.typeof());
+            Bridge.Test.Assert.areEqual(16, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.typeof());
+
+            Bridge.Test.Assert.areEqual(17, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.sizeof());
+            Bridge.Test.Assert.areEqual(17, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.sizeof());
+
+            Bridge.Test.Assert.areEqual(18, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.null());
+            Bridge.Test.Assert.areEqual(18, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.null());
+
+            Bridge.Test.Assert.areEqual(19, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.true());
+            Bridge.Test.Assert.areEqual(19, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.true());
+
+            Bridge.Test.Assert.areEqual(20, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.false());
+            Bridge.Test.Assert.areEqual(20, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.false());
+
+            Bridge.Test.Assert.areEqual(21, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.if());
+            Bridge.Test.Assert.areEqual(21, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.if());
+
+            Bridge.Test.Assert.areEqual(22, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.else());
+            Bridge.Test.Assert.areEqual(22, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.else());
+
+            Bridge.Test.Assert.areEqual(23, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.while());
+            Bridge.Test.Assert.areEqual(23, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.while());
+
+            Bridge.Test.Assert.areEqual(24, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.for());
+            Bridge.Test.Assert.areEqual(24, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.for());
+
+            Bridge.Test.Assert.areEqual(25, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.foreach());
+            Bridge.Test.Assert.areEqual(25, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.foreach());
+
+            Bridge.Test.Assert.areEqual(26, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.do());
+            Bridge.Test.Assert.areEqual(26, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.do());
+
+            Bridge.Test.Assert.areEqual(27, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.switch());
+            Bridge.Test.Assert.areEqual(27, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.switch());
+
+            Bridge.Test.Assert.areEqual(28, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.case());
+            Bridge.Test.Assert.areEqual(28, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.case());
+
+            Bridge.Test.Assert.areEqual(29, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.default());
+            Bridge.Test.Assert.areEqual(29, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.default());
+
+            Bridge.Test.Assert.areEqual(30, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.lock());
+            Bridge.Test.Assert.areEqual(30, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.lock());
+
+            Bridge.Test.Assert.areEqual(31, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.try());
+            Bridge.Test.Assert.areEqual(31, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.try());
+
+            Bridge.Test.Assert.areEqual(32, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.throw());
+            Bridge.Test.Assert.areEqual(32, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.throw());
+
+            Bridge.Test.Assert.areEqual(33, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.catch());
+            Bridge.Test.Assert.areEqual(33, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.catch());
+
+            Bridge.Test.Assert.areEqual(34, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.finally());
+            Bridge.Test.Assert.areEqual(34, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.finally());
+
+            Bridge.Test.Assert.areEqual(35, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.goto());
+            Bridge.Test.Assert.areEqual(35, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.goto());
+
+            Bridge.Test.Assert.areEqual(36, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.break());
+            Bridge.Test.Assert.areEqual(36, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.break());
+
+            Bridge.Test.Assert.areEqual(37, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.continue());
+            Bridge.Test.Assert.areEqual(37, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.continue());
+
+            Bridge.Test.Assert.areEqual(38, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.return());
+            Bridge.Test.Assert.areEqual(38, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.return());
+
+            Bridge.Test.Assert.areEqual(39, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.public());
+            Bridge.Test.Assert.areEqual(39, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.public());
+
+            Bridge.Test.Assert.areEqual(40, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.private());
+            Bridge.Test.Assert.areEqual(40, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.private());
+
+            Bridge.Test.Assert.areEqual(41, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.internal());
+            Bridge.Test.Assert.areEqual(41, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.internal());
+
+            Bridge.Test.Assert.areEqual(42, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.protected());
+            Bridge.Test.Assert.areEqual(42, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.protected());
+
+            Bridge.Test.Assert.areEqual(43, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.static());
+            Bridge.Test.Assert.areEqual(43, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.static());
+
+            Bridge.Test.Assert.areEqual(44, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.readonly());
+            Bridge.Test.Assert.areEqual(44, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.readonly());
+
+            Bridge.Test.Assert.areEqual(45, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.sealed());
+            Bridge.Test.Assert.areEqual(45, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.sealed());
+
+            Bridge.Test.Assert.areEqual(46, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.const());
+            Bridge.Test.Assert.areEqual(46, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.const());
+
+            Bridge.Test.Assert.areEqual(47, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.new());
+            Bridge.Test.Assert.areEqual(47, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.new());
+
+            Bridge.Test.Assert.areEqual(48, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.override());
+            Bridge.Test.Assert.areEqual(48, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.override());
+
+            Bridge.Test.Assert.areEqual(49, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.abstract());
+            Bridge.Test.Assert.areEqual(49, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.abstract());
+
+            Bridge.Test.Assert.areEqual(50, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.virtual());
+            Bridge.Test.Assert.areEqual(50, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.virtual());
+
+            Bridge.Test.Assert.areEqual(51, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.partial());
+            Bridge.Test.Assert.areEqual(51, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.partial());
+
+            Bridge.Test.Assert.areEqual(52, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.ref());
+            Bridge.Test.Assert.areEqual(52, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.ref());
+
+            Bridge.Test.Assert.areEqual(53, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.out());
+            Bridge.Test.Assert.areEqual(53, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.out());
+
+            Bridge.Test.Assert.areEqual(54, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.in());
+            Bridge.Test.Assert.areEqual(54, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.in());
+
+            Bridge.Test.Assert.areEqual(55, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.where());
+            Bridge.Test.Assert.areEqual(55, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.where());
+
+            Bridge.Test.Assert.areEqual(56, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.params());
+            Bridge.Test.Assert.areEqual(56, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.params());
+
+            Bridge.Test.Assert.areEqual(57, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.this());
+            Bridge.Test.Assert.areEqual(57, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.this());
+
+            Bridge.Test.Assert.areEqual(58, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.base());
+            Bridge.Test.Assert.areEqual(58, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.base());
+
+            Bridge.Test.Assert.areEqual(59, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.namespace());
+            Bridge.Test.Assert.areEqual(59, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.namespace());
+
+            Bridge.Test.Assert.areEqual(60, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.using());
+            Bridge.Test.Assert.areEqual(60, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.using());
+
+            Bridge.Test.Assert.areEqual(61, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.class());
+            Bridge.Test.Assert.areEqual(61, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.class());
+
+            Bridge.Test.Assert.areEqual(62, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.struct());
+            Bridge.Test.Assert.areEqual(62, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.struct());
+
+            Bridge.Test.Assert.areEqual(63, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.interface());
+            Bridge.Test.Assert.areEqual(63, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.interface());
+
+            Bridge.Test.Assert.areEqual(64, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.delegate());
+            Bridge.Test.Assert.areEqual(64, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.delegate());
+
+            Bridge.Test.Assert.areEqual(65, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.checked());
+            Bridge.Test.Assert.areEqual(65, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.checked());
+
+            Bridge.Test.Assert.areEqual(66, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.get());
+            Bridge.Test.Assert.areEqual(66, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.get());
+
+            Bridge.Test.Assert.areEqual(67, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.set());
+            Bridge.Test.Assert.areEqual(67, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.set());
+
+            Bridge.Test.Assert.areEqual(68, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.add());
+            Bridge.Test.Assert.areEqual(68, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.add());
+
+            Bridge.Test.Assert.areEqual(69, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.remove());
+            Bridge.Test.Assert.areEqual(69, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.remove());
+
+            Bridge.Test.Assert.areEqual(70, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.operator());
+            Bridge.Test.Assert.areEqual(70, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.operator());
+
+            Bridge.Test.Assert.areEqual(71, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.implicit());
+            Bridge.Test.Assert.areEqual(71, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.implicit());
+
+            Bridge.Test.Assert.areEqual(72, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.explicit());
+            Bridge.Test.Assert.areEqual(72, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.explicit());
+
+            Bridge.Test.Assert.areEqual(73, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.fixed());
+            Bridge.Test.Assert.areEqual(73, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.fixed());
+
+            Bridge.Test.Assert.areEqual(74, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.extern());
+            Bridge.Test.Assert.areEqual(74, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.extern());
+
+            Bridge.Test.Assert.areEqual(75, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.event());
+            Bridge.Test.Assert.areEqual(75, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.event());
+
+            Bridge.Test.Assert.areEqual(76, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.enum());
+            Bridge.Test.Assert.areEqual(76, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.enum());
+
+            Bridge.Test.Assert.areEqual(77, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.unsafe());
+            Bridge.Test.Assert.areEqual(77, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.unsafe());
         }
     });
 
