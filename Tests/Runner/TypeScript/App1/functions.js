@@ -1,19 +1,19 @@
 ﻿Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Functions.DelegateClass', {
+    Bridge.define("Functions.DelegateClass", {
         methodVoidDelegate: null,
         methodStringDelegate: null,
         methodStringDelegateIntResult: null
     });
 
-    Bridge.define('Functions.DelegateInterface', {
+    Bridge.define("Functions.DelegateInterface", {
         $kind: "interface"
     });
 
-    Bridge.define('Functions.Delegates');
+    Bridge.define("Functions.Delegates");
 
-    Bridge.define('Functions.Parameters', {
+    Bridge.define("Functions.Parameters", {
         getSomething: function (i) {
             if (i === void 0) { i = 5; }
             return i;
@@ -28,5 +28,4 @@
             return s;
         }
     });
-
 });

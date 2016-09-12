@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Test.BridgeIssues.N1472.UseDoSomething', {
+    Bridge.define("Test.BridgeIssues.N1472.UseDoSomething", {
         field: 0,
         config: {
             properties: {
@@ -39,5 +39,4 @@
             ($t=this.method(), DoSomethingTemplate($t, $t));
         }
     });
-
 });

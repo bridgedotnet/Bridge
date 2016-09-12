@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Test.BridgeIssues.N477.App1', {
+    Bridge.define("Test.BridgeIssues.N477.App1", {
         methodA: function (optionalNumber) {
             if (optionalNumber === void 0) { optionalNumber = 41; }
             var i = optionalNumber;
@@ -44,7 +44,7 @@
         }
     });
 
-    Bridge.define('Test.BridgeIssues.N477.App2', {
+    Bridge.define("Test.BridgeIssues.N477.App2", {
         inherits: [Test.BridgeIssues.N477.App1],
         methodA$2: function (optionalNumber) {
             if (optionalNumber === void 0) { optionalNumber = 401; }
@@ -67,5 +67,4 @@
             this.methodA$1("Y", 4000);
         }
     });
-
 });

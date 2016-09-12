@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Test.BridgeIssues.N084.Class84', {
+    Bridge.define("Test.BridgeIssues.N084.Class84", {
         test1: function () {
             try {
             }
@@ -10,5 +10,4 @@
             }
         }
     });
-
 });

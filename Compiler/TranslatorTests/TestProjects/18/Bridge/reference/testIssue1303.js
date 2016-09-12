@@ -1,4 +1,4 @@
-﻿    Bridge.define('TestIssue1303.App', {
+﻿    Bridge.define("TestIssue1303.App", {
         statics: {
             config: {
                 init: function () {
@@ -16,7 +16,7 @@
         $entryPoint: true
     });
 
-    Bridge.define('TestIssue1303.App1', {
+    Bridge.define("TestIssue1303.App1", {
         statics: {
             config: {
                 init: function () {
@@ -33,7 +33,7 @@
         }
     });
 
-    Bridge.define('TestIssue1303.App2', {
+    Bridge.define("TestIssue1303.App2", {
         statics: {
             config: {
                 init: function () {

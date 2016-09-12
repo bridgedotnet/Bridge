@@ -129,7 +129,7 @@ namespace Bridge.Translator
 
             if (isObjectLiteral)
             {
-                if (this.Emitter.Validator.GetObjectCreateMode(type) == 1)
+                if (this.Emitter.Validator.GetObjectCreateMode(type) == 0)
                 {
                     isSynthetic = true;
                 }

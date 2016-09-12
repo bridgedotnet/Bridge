@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('BasicTypes.BasicTypes', {
+    Bridge.define("BasicTypes.BasicTypes", {
         boolValue: true,
         integerValue: -1000,
         floatValue: 2.3,
@@ -28,7 +28,7 @@
         }
     });
 
-    Bridge.define('BasicTypes.Color', {
+    Bridge.define("BasicTypes.Color", {
         $kind: "enum",
         statics: {
             Red: 0,
@@ -37,7 +37,7 @@
         }
     });
 
-    Bridge.define('BasicTypes.Keywords', {
+    Bridge.define("BasicTypes.Keywords", {
         break: "break",
         case: "case",
         catch: "catch",
@@ -100,5 +100,4 @@
         from: "from",
         of: "of"
     });
-
 });

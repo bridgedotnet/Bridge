@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Test.BridgeIssues.N475B.Bridge475Event', {
+    Bridge.define("Test.BridgeIssues.N475B.Bridge475Event", {
         config: {
             properties: {
                 Data: 0
@@ -12,7 +12,7 @@
         }
     });
 
-    Bridge.define('Test.BridgeIssues.N475B.Test', {
+    Bridge.define("Test.BridgeIssues.N475B.Test", {
         statics: {
             N475: function () {
                 var b = new Test.BridgeIssues.N475B.Bridge475();
@@ -35,5 +35,4 @@
             ev.preventDefault();
         }
     });
-
 });

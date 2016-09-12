@@ -8,7 +8,7 @@
         /**
          * @class TestProject2.TestClassB
          */
-        Bridge.define('TestProject2.TestClassB', {
+        Bridge.define("TestProject2.TestClassB", {
             config: {
                 properties: {
                     /**
@@ -34,6 +34,5 @@
         });
         return exports;
     });
-
 
 });

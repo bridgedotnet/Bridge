@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Test.BridgeIssues.N1023.Optional$1', function (T) { return {
+    Bridge.define("Test.BridgeIssues.N1023.Optional$1", function (T) { return {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new (Test.BridgeIssues.N1023.Optional$1(T))(); }
@@ -37,7 +37,7 @@
         }
     }; });
 
-    Bridge.define('Test.BridgeIssues.N1023.PersonDetails', {
+    Bridge.define("Test.BridgeIssues.N1023.PersonDetails", {
         config: {
             properties: {
                 Name: null
@@ -51,5 +51,4 @@
             this.setName(name.$clone());
         }
     });
-
 });

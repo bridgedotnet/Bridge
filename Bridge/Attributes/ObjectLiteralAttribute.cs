@@ -69,11 +69,11 @@ namespace Bridge
         /// <summary>
         /// Create instance using constructor
         /// </summary>
-        Constructor = 0,
+        Constructor = 1,
 
         /// <summary>
         /// Create instance using plain object ({ } syntax)
         /// </summary>
-        Plain = 1
+        Plain = 0
     }
 }

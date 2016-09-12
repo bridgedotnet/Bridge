@@ -2,7 +2,7 @@
     "use strict";
 
     
-    Bridge.define('Test.BridgeIssues.N856.Bridge856', {
+    Bridge.define("Test.BridgeIssues.N856.Bridge856", {
         statics: {
         
             test1: function () {
@@ -21,5 +21,4 @@
 
         }
     });
-
 });

@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Test.BridgeIssues.N882.Bridge882_Instance', {
+    Bridge.define("Test.BridgeIssues.N882.Bridge882_Instance", {
         ctor: function () {
             this.$initialize();        var $t;
 
@@ -15,7 +15,7 @@
     }
     });
 
-    Bridge.define('Test.BridgeIssues.N882.Bridge882_Instance.Bridge882_A_Instance', {
+    Bridge.define("Test.BridgeIssues.N882.Bridge882_Instance.Bridge882_A_Instance", {
         ctor: function () {
             this.$initialize();        var $t;
 
@@ -29,7 +29,7 @@
     }
     });
 
-    Bridge.define('Test.BridgeIssues.N882.Bridge882_Static', {
+    Bridge.define("Test.BridgeIssues.N882.Bridge882_Static", {
         statics: {
             ctor: function () {
                 var $t;
@@ -44,7 +44,7 @@
     }
     });
 
-    Bridge.define('Test.BridgeIssues.N882.Bridge882_Static.Bridge882_A_Static', {
+    Bridge.define("Test.BridgeIssues.N882.Bridge882_Static.Bridge882_A_Static", {
         statics: {
             ctor: function () {
                 var $t;
@@ -58,5 +58,4 @@
         }
     }
     });
-
 });

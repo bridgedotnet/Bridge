@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Test.BridgeIssues.N1151.renderTarget', {
+    Bridge.define("Test.BridgeIssues.N1151.renderTarget", {
         ctor: function (gl, w, h, nCmp) {
             this.$initialize();
             /* **************************************************************************/
@@ -14,5 +14,4 @@
             i = (i + 1) | 0;
         }
     });
-
 });

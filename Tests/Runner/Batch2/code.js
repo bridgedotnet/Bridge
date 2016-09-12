@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Bridge.ClientTest.Batch2.BridgeIssues.Bridge1385', {
+    Bridge.define("Bridge.ClientTest.Batch2.BridgeIssues.Bridge1385", {
         statics: {
             testIsTypedArrayForByte: function () {
                 var value = new Uint8Array(3);
@@ -10,7 +10,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch2.BridgeIssues.Bridge1499', {
+    Bridge.define("Bridge.ClientTest.Batch2.BridgeIssues.Bridge1499", {
         testObjectStringCoalesceWorks: function () {
             var $t, $t1, $t2, $t3, $t4, $t5, $t6, $t7, $t8, $t9, $t10, $t11, $t12, $t13, $t14, $t15, $t16, $t17, $t18, $t19;
             var def = 1;
@@ -52,7 +52,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch2.BridgeIssues.N1122', {
+    Bridge.define("Bridge.ClientTest.Batch2.BridgeIssues.N1122", {
         statics: {
             testClippingInJavaScriptOverflowMode: function () {
                 var x = System.Double.max;
@@ -87,7 +87,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch2.BridgeIssues.N1204', {
+    Bridge.define("Bridge.ClientTest.Batch2.BridgeIssues.N1204", {
         statics: {
             testStrictNullChecksOptionForNulls: function () {
                 var temp = {  };
@@ -120,7 +120,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch2.BridgeIssues.N772', {
+    Bridge.define("Bridge.ClientTest.Batch2.BridgeIssues.N772", {
         statics: {
             testUseCase: function () {
                 //These arrays depend on "useTypedArray" bridge.json option
@@ -463,7 +463,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch2.BridgeIssues.N772.C', {
+    Bridge.define("Bridge.ClientTest.Batch2.BridgeIssues.N772.C", {
         i: 0,
         ctor: function (i) {
             this.$initialize();
@@ -477,7 +477,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch2.BridgeIssues.N772.TestReverseComparer', {
+    Bridge.define("Bridge.ClientTest.Batch2.BridgeIssues.N772.TestReverseComparer", {
         inherits: [System.Collections.Generic.IComparer$1(System.Int32)],
         config: {
             alias: [
@@ -489,7 +489,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch2.CheckedUncheckedTests', {
+    Bridge.define("Bridge.ClientTest.Batch2.CheckedUncheckedTests", {
         statics: {
             assertEqual: function (expected, actual, message) {
                 if (message === void 0) { message = null; }
@@ -501,7 +501,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests', {
+    Bridge.define("Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests", {
         statics: {
             testInt32: function () {
                 var max = 2147483647;
@@ -770,7 +770,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests', {
+    Bridge.define("Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests", {
         statics: {
             testInt32: function () {
                 var max = 2147483647;
@@ -1039,7 +1039,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests', {
+    Bridge.define("Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests", {
         statics: {
             testInt32: function () {
                 var max = 2147483647;
@@ -1215,7 +1215,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests', {
+    Bridge.define("Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests", {
         statics: {
             testInt32: function () {
                 var max = 2147483647;
@@ -1391,7 +1391,7 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests', {
+    Bridge.define("Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests", {
         statics: {
             testInt32: function () {
                 var max = 2147483647;
@@ -1567,12 +1567,11 @@
         }
     });
 
-    Bridge.define('Bridge.ClientTest.Batch2.Constants', {
+    Bridge.define("Bridge.ClientTest.Batch2.Constants", {
         statics: {
             BATCH_NAME: "Batch2",
             MODULE_ISSUES: "Issues2",
             MODULE_CHECKED_UNCKECKED: "Checked/Unckecked"
         }
     });
-
 });

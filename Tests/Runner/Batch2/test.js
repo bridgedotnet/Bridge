@@ -1,6 +1,6 @@
 ﻿Bridge.assembly("Bridge_ClientTest_Batch2_Tests", function ($asm, globals) {
     
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner", {
         $main: function () {
             QUnit.module("Checked/Unckecked");
             QUnit.test("CheckedInsideUnchecked - Batch2 TestInt32", Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests.testInt32);
@@ -82,7 +82,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_Bridge1385', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_Bridge1385", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.Bridge1385)],
         statics: {
             testIsTypedArrayForByte: function (assert) {
@@ -92,7 +92,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_Bridge1499', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_Bridge1499", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.Bridge1499)],
         statics: {
             testObjectStringCoalesceWorks: function (assert) {
@@ -102,7 +102,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N1122', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N1122", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N1122)],
         statics: {
             testClippingInJavaScriptOverflowMode: function (assert) {
@@ -116,7 +116,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N1204', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N1204", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N1204)],
         statics: {
             testStrictNullChecksOptionForNulls: function (assert) {
@@ -126,7 +126,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
@@ -332,7 +332,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests)],
         statics: {
             testInt32: function (assert) {
@@ -354,7 +354,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests)],
         statics: {
             testInt32: function (assert) {
@@ -376,7 +376,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedInsideCheckedTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedInsideCheckedTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests)],
         statics: {
             testInt32: function (assert) {
@@ -398,7 +398,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests)],
         statics: {
             testInt32: function (assert) {
@@ -420,7 +420,7 @@
         }
     });
 
-    Bridge.define('Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_WithNoUncheckedKeywordTests', {
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_WithNoUncheckedKeywordTests", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests)],
         statics: {
             testInt32: function (assert) {
@@ -441,5 +441,4 @@
             }
         }
     });
-
 });

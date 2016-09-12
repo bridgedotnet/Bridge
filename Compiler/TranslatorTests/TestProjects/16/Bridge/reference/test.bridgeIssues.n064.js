@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Test.BridgeIssues.N064.Class64', {
+    Bridge.define("Test.BridgeIssues.N064.Class64", {
         ctor: function () {
             this.$initialize();
         },
@@ -14,6 +14,5 @@
         }
     });
 
-    Bridge.define('Test.BridgeIssues.N064.Class64.Aux1');
-
+    Bridge.define("Test.BridgeIssues.N064.Class64.Aux1");
 });

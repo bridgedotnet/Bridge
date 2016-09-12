@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Test.BridgeIssues.N447.Math447', {
+    Bridge.define("Test.BridgeIssues.N447.Math447", {
         statics: {
             getSum$1: function (a, b) {
                 return ((a + b) | 0);
@@ -15,7 +15,7 @@
         }
     });
 
-    Bridge.define('Test.BridgeIssues.N447.N447', {
+    Bridge.define("Test.BridgeIssues.N447.N447", {
         statics: {
             Five: 5,
             Another: "Another",
@@ -32,5 +32,4 @@
             }
         }
     });
-
 });

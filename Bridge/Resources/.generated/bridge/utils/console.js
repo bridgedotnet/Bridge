@@ -1,4 +1,4 @@
-﻿    Bridge.define('Bridge.Console', {
+﻿    Bridge.define("Bridge.Console", {
         statics: {
             BODY_WRAPPER_ID: "bridge-body-wrapper",
             CONSOLE_MESSAGES_ID: "bridge-console-messages",

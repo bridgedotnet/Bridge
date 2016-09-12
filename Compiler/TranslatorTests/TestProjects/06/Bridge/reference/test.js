@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Test.BridgeIssues.N1092.App', {
+    Bridge.define("Test.BridgeIssues.N1092.App", {
         statics: {
             main1: function () {
                 // Should contain instruction to check data type range as cspoj contains <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
@@ -20,7 +20,7 @@
         }
     });
 
-    Bridge.define('Test.BridgeIssues.N772.App', {
+    Bridge.define("Test.BridgeIssues.N772.App", {
         statics: {
             main1: function () {
                 //These arrays depend on "useTypedArray" bridge.json option
@@ -52,7 +52,7 @@
         }
     });
 
-    Bridge.define('TestProject1.TestClassA', {
+    Bridge.define("TestProject1.TestClassA", {
         config: {
             properties: {
                 Value1: 0
@@ -60,12 +60,11 @@
         }
     });
 
-    Bridge.define('TestProject2.TestClassB', {
+    Bridge.define("TestProject2.TestClassB", {
         config: {
             properties: {
                 Value1: 0
             }
         }
     });
-
 });

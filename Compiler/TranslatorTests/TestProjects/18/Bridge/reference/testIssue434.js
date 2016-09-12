@@ -4,7 +4,7 @@
         TestIssue434.Issue434A.doSomething(2);
     })();
 
-    Bridge.define('TestIssue434.Issue434A', {
+    Bridge.define("TestIssue434.Issue434A", {
         statics: {
             method1: function () {
                 TestIssue434.Issue434A.doSomething(1);
@@ -29,7 +29,7 @@
         TestIssue434.Issue434B.doSomething(2);
     })();
 
-    Bridge.define('TestIssue434.Issue434B', {
+    Bridge.define("TestIssue434.Issue434B", {
         statics: {
             method1: function () {
                 TestIssue434.Issue434B.doSomething(1);
@@ -50,7 +50,7 @@
     TestIssue434.Issue434B.method3();
     TestIssue434.Issue434B.method4();
 
-    Bridge.define('TestIssue434.Issue434C', {
+    Bridge.define("TestIssue434.Issue434C", {
         statics: {
 
         }

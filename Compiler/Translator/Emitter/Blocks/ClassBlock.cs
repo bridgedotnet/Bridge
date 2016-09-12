@@ -138,7 +138,7 @@ namespace Bridge.Translator
 
             this.WriteOpenParentheses();
 
-            this.Write("'" + name, "'");
+            this.WriteScript(name);
             this.StartPosition = this.Emitter.Output.Length;
             this.Write(", ");
 

@@ -1,7 +1,7 @@
 ﻿Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Test.BridgeIssues.N534.Bridge534', {
+    Bridge.define("Test.BridgeIssues.N534.Bridge534", {
         statics: {
             IntValue1: 1,
             IntValue2: 2,
@@ -11,5 +11,4 @@
             DecimalValue2: System.Decimal(11.0)
         }
     });
-
 });

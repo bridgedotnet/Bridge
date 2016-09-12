@@ -1,4 +1,4 @@
-﻿    Bridge.define('System.FormattableStringImpl', {
+﻿    Bridge.define("System.FormattableStringImpl", {
         inherits: [System.FormattableString],
         args: null,
         format$1: null,

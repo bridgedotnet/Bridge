@@ -121,7 +121,7 @@ namespace Bridge.Translator
 
                     if (isJs && !disableAsm)
                     {
-                        tmp.Append("\n");
+                        //tmp.Append("\n");
                         tmp.Append("});");
                         tmp.Append("\n");
                     }

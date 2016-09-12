@@ -1,8 +1,8 @@
-﻿    Bridge.define('TestIssue958.IMessage', {
+﻿    Bridge.define("TestIssue958.IMessage", {
         $kind: "interface"
     });
 
-    Bridge.define('TestIssue958.Issue958', {
+    Bridge.define("TestIssue958.Issue958", {
         statics: {
             main1: function () {
                 var message = new TestIssue958.SetValue("Hi!");
@@ -28,7 +28,7 @@
         }
     });
 
-    Bridge.define('TestIssue958.MessageExtensions', {
+    Bridge.define("TestIssue958.MessageExtensions", {
         statics: {
             if: function (T, source, work) {
                 if (Bridge.is(source, T)) {
@@ -39,7 +39,7 @@
         }
     });
 
-    Bridge.define('TestIssue958.SetName', {
+    Bridge.define("TestIssue958.SetName", {
         inherits: [TestIssue958.IMessage],
         config: {
             properties: {
@@ -52,7 +52,7 @@
         }
     });
 
-    Bridge.define('TestIssue958.SetValue', {
+    Bridge.define("TestIssue958.SetValue", {
         inherits: [TestIssue958.IMessage],
         config: {
             properties: {

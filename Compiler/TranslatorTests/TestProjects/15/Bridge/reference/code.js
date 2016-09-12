@@ -1,11 +1,11 @@
 ﻿Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('TestProject1.ExistsIfTest1Defined');
+    Bridge.define("TestProject1.ExistsIfTest1Defined");
 
-    Bridge.define('TestProject1.ExistsIfTest2Defined');
+    Bridge.define("TestProject1.ExistsIfTest2Defined");
 
-    Bridge.define('TestProject1.TestClassA', {
+    Bridge.define("TestProject1.TestClassA", {
         config: {
             properties: {
                 /**
@@ -47,7 +47,7 @@
         }
     });
 
-    Bridge.define('TestProject2.TestClassB', {
+    Bridge.define("TestProject2.TestClassB", {
         config: {
             properties: {
                 Value1: 0
@@ -57,5 +57,4 @@
             return 0;
         }
     });
-
 });

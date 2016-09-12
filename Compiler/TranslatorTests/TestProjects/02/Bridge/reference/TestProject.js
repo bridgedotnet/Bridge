@@ -3844,7 +3844,7 @@
 
     // @source formattableString.js
 
-    Bridge.define('System.FormattableString', {
+    Bridge.define("System.FormattableString", {
         inherits: [System.IFormattable],
         statics: {
             invariant: function (formattable) {
@@ -3861,7 +3861,7 @@
 
     // @source formattableStringImpl.js
 
-    Bridge.define('System.FormattableStringImpl', {
+    Bridge.define("System.FormattableStringImpl", {
         inherits: [System.FormattableString],
         args: null,
         format$1: null,
@@ -3892,7 +3892,7 @@
 
     // @source formattableStringFactory.js
 
-    Bridge.define('System.Runtime.CompilerServices.FormattableStringFactory', {
+    Bridge.define("System.Runtime.CompilerServices.FormattableStringFactory", {
         statics: {
             create: function (format, args) {
                 if (args === void 0) { args = []; }
@@ -10960,7 +10960,7 @@
 
     // @source version.js
 
-    Bridge.define('System.Version', {
+    Bridge.define("System.Version", {
         inherits: function () { return [System.ICloneable,System.IComparable$1(System.Version),System.IEquatable$1(System.Version)]; },
         statics: {
             separatorsArray: ".",
@@ -11366,7 +11366,7 @@
 
     // @source parseFailureKind.js
 
-    Bridge.define('System.Version.ParseFailureKind', {
+    Bridge.define("System.Version.ParseFailureKind", {
         $kind: "enum",
         statics: {
             ArgumentNullException: 0,
@@ -11378,7 +11378,7 @@
 
     // @source versionResult.js
 
-    Bridge.define('System.Version.VersionResult', {
+    Bridge.define("System.Version.VersionResult", {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new System.Version.VersionResult(); }
@@ -22246,7 +22246,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
     // @source random.js
 
-    Bridge.define('System.Random', {
+    Bridge.define("System.Random", {
         statics: {
             MBIG: 2147483647,
             MSEED: 161803398,
@@ -22383,7 +22383,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
     // @source timer.js
 
-    Bridge.define('System.Threading.Timer', {
+    Bridge.define("System.Threading.Timer", {
         inherits: [System.IDisposable],
         statics: {
             MAX_SUPPORTED_TIMEOUT: 4294967294,
@@ -22519,7 +22519,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
     // @source console.js
 
-    Bridge.define('Bridge.Console', {
+    Bridge.define("Bridge.Console", {
         statics: {
             BODY_WRAPPER_ID: "bridge-body-wrapper",
             CONSOLE_MESSAGES_ID: "bridge-console-messages",
@@ -22949,30 +22949,29 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Test.BridgeIssues.N1424.A');
+    Bridge.define("Test.BridgeIssues.N1424.A");
 
-    Bridge.define('Test.BridgeIssues.N1424.Alpha', {
+    Bridge.define("Test.BridgeIssues.N1424.Alpha", {
         data: 0
     });
 
-    Bridge.define('Test.BridgeIssues.N1424.B', {
+    Bridge.define("Test.BridgeIssues.N1424.B", {
         getData: function () {
             return 8;
         },
         setData: function (value) {
         }
     });
-
 });
 
 Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('Test.BridgeIssues.N770.IBase', {
+    Bridge.define("Test.BridgeIssues.N770.IBase", {
         $kind: "interface"
     });
 
-    Bridge.define('Test.BridgeIssues.N770.Impl', {
+    Bridge.define("Test.BridgeIssues.N770.Impl", {
         inherits: [Test.BridgeIssues.N770.IBase],
         prop: 0,
         config: {
@@ -22982,24 +22981,21 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             ]
         }
     });
-
 });
 
 Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('TestProject1.TestClassA', {
+    Bridge.define("TestProject1.TestClassA", {
         value1: 0
     });
-
 });
 
 Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.define('TestProject2.TestClassB', {
+    Bridge.define("TestProject2.TestClassB", {
         value1: 0
     });
-
 });
 
