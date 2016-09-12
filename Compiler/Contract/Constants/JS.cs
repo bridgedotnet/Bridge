@@ -202,6 +202,7 @@
                 private const string DOTNAME = NS.BRIDGE + ".";
 
                 public const string APPLY = DOTNAME + "apply";
+                public const string ASSEMBLY = DOTNAME + "assembly";
 
                 public class Reflection
                 {

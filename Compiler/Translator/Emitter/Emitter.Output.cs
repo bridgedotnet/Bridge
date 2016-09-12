@@ -73,7 +73,7 @@ namespace Bridge.Translator
                     {
                         if (!disableAsm)
                         {
-                            tmp.Append("Bridge.assembly(");
+                            tmp.Append(JS.Types.Bridge.ASSEMBLY + "(");
                             string asmName = this.AssemblyInfo.Assembly.FullName ?? this.Translator.AssemblyName;
                             if (!string.IsNullOrEmpty(asmName))
                             {
