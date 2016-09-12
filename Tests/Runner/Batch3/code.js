@@ -6027,13 +6027,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1448.Literal', {
         $literal: true,
-        ctor: function () {
-            var $this = {};
-            (function(){
-                this.v = null;
-            }).call($this);
-            return $this;
-        }
+
     });
 
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1448.Plainer');
@@ -6920,8 +6914,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6951,7 +6943,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -8416,16 +8408,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge377', {
         $literal: true,
-        ctor: function () {
-            var $this = {};
-            (function(){
-                this.field1 = null;
-                this.field2 = null;
-                this.field3 = 0;
-                this.field4 = 0;
-            }).call($this);
-            return $this;
-        }
+
     });
 
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge381', {

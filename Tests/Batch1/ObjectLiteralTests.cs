@@ -8,7 +8,7 @@ namespace Bridge.ClientTest
         [TestFixture(TestNameFormat = "Methods and properties - {0}")]
         public class Bridge1529
         {
-            [ObjectLiteral]
+            [ObjectLiteral(ObjectCreateMode.Constructor)]
             public class BS
             {
                 public int field1;
@@ -91,13 +91,13 @@ namespace Bridge.ClientTest
                 }
             }
 
-            [ObjectLiteral]
+            [ObjectLiteral(ObjectCreateMode.Constructor)]
             public class DS : BS
             {
                 public int field;
             }
 
-            [ObjectLiteral]
+            [ObjectLiteral(ObjectCreateMode.Constructor)]
             public class TS : BS
             {
                 public TS() : base(8)
@@ -159,7 +159,7 @@ namespace Bridge.ClientTest
         [TestFixture(TestNameFormat = "ObjectCreateMode - {0}")]
         public class CreateModeTests
         {
-            [ObjectLiteral]
+            [ObjectLiteral(ObjectCreateMode.Constructor)]
             public class Config1
             {
                 public int Val1 = 1;
@@ -183,7 +183,7 @@ namespace Bridge.ClientTest
                 }
             }
 
-            [ObjectLiteral(ObjectCreateMode.Plain)]
+            [ObjectLiteral]
             public class Config3
             {
                 public int Val1 = 3;
