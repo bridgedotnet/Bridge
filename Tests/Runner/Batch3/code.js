@@ -6463,7 +6463,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define('Bridge.ClientTest.Batch3.BridgeIssues.Bridge1509', {
         testPreformanceNowIsDouble: function () {
             var p;
-            for (var i = 1; i < 1001; i = (i + 1) | 0) {
+            for (var i = 1; i < 10001; i = (i + 1) | 0) {
                 p = Bridge.global.performance.now();
                 if (!this.hasNoFraction(p)) {
                     Bridge.Test.Assert.true$1(true, System.String.concat(System.String.concat("Did ", i), " attempt(s) to check performance.now() returns float"));

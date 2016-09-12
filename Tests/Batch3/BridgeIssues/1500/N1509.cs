@@ -10,7 +10,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public void TestPreformanceNowIsDouble()
         {
             double p;
-            for (int i = 1; i < 1001; i++)
+            for (int i = 1; i < 10001; i++)
             {
                 p = Bridge.Html5.Global.Performance.Now();
                 if (!HasNoFraction(p))
