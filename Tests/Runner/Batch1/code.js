@@ -16316,6 +16316,13 @@
 
     Bridge.define('Bridge.ClientTest.ObjectLiteralTests.Bridge1529', {
         testObjectLiteral: function () {
+            var c = { temp: "Frank" };
+            var tempFrank = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.Config.prototype.getTmp.call({  }, c);
+            Bridge.Test.Assert.areEqual$1("1: Frank", tempFrank, "Check call works");
+
+            var options = { data: { name: c.temp } };
+            Bridge.Test.Assert.areEqual$1("Frank", options.data.name, "External referenced default ObjectLiteral works");
+
             var bs = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.ctor();
             Bridge.Test.Assert.true(Bridge.isPlainObject(bs));
             Bridge.Test.Assert.areEqual(10, bs.field1);
@@ -16420,6 +16427,13 @@
         },
         getField2: function () {
             return this.field2;
+        }
+    });
+
+    Bridge.define('Bridge.ClientTest.ObjectLiteralTests.Bridge1529.Config', {
+        $literal: true,
+        getTmp: function (config) {
+            return System.String.concat("1: ", config.temp);
         }
     });
 

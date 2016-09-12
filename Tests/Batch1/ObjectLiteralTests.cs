@@ -8,6 +8,21 @@ namespace Bridge.ClientTest
         [TestFixture(TestNameFormat = "Methods and properties - {0}")]
         public class Bridge1529
         {
+            [ObjectLiteral]
+            public class Config
+            {
+                public string Temp
+                {
+                    get;
+                    set;
+                }
+
+                public string GetTmp(Config config)
+                {
+                    return "1: " + config.Temp;
+                }
+            }
+
             [ObjectLiteral(ObjectCreateMode.Constructor)]
             public class BS
             {
@@ -114,6 +129,13 @@ namespace Bridge.ClientTest
             [Test]
             public void TestObjectLiteral()
             {
+                var c = new Config { Temp = "Frank" };
+                var tempFrank = new Config { }.GetTmp(c);
+                Assert.AreEqual("1: Frank", tempFrank, "Check call works");
+
+                var options = new Bridge.ClientTestHelper.External.AjaxOptions { Data = new { Name = c.Temp } };
+                Assert.AreEqual("Frank", options.Data["name"], "External referenced default ObjectLiteral works");
+
                 var bs = new BS();
                 Assert.True(Bridge1529.IsPlainObject(bs));
                 Assert.AreEqual(10, bs.field1);
