@@ -9,7 +9,7 @@
   },
   "assembly": {
     "disableInitAssembly": true,
-    "enableReservedNamespaces": true
+    //"enableReservedNamespaces": true
     //fullName: ""
   },
   "resources": [

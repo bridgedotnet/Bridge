@@ -8,6 +8,8 @@ namespace Bridge.Build
 {
     public class VSLoggerWriter : ILogger
     {
+        public bool AlwaysLogErrors { get { return false; } }
+
         public bool BufferedMode { get; set; }
 
         public LoggerLevel LoggerLevel { get; set; }
