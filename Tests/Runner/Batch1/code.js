@@ -2063,8 +2063,8 @@
         },
         $clone: function (to) {
             var s = to || new Bridge.ClientTest.BasicCSharp.Rectangle();
-            s.l = this.l;
-            s.t = this.t;
+            s.l = this.l.$clone();
+            s.t = this.t.$clone();
             return s;
         }
     });

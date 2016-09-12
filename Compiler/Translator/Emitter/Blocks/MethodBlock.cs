@@ -5,6 +5,7 @@ using ICSharpCode.NRefactory.TypeSystem;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ICSharpCode.NRefactory.Semantics;
 
 namespace Bridge.Translator
 {
@@ -281,8 +282,24 @@ namespace Bridge.Translator
 
                     this.Write("s.");
                     this.Write(fieldName);
-                    this.Write(" = this.");
+                    this.Write(" = ");
+
+                    int insertPosition = this.Emitter.Output.Length;
+                    this.Write("this.");
                     this.Write(fieldName);
+
+                    var rr = this.Emitter.Resolver.ResolveNode(field.Entity, this.Emitter) as MemberResolveResult;
+
+                    if (rr == null && field.VarInitializer != null)
+                    {
+                        rr = Emitter.Resolver.ResolveNode(field.VarInitializer, Emitter) as MemberResolveResult;
+                    }
+
+                    if (rr != null)
+                    {
+                        Helpers.CheckValueTypeClone(rr, null, this, insertPosition);
+                    }
+
                     this.Write(";");
                 }
 

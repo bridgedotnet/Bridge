@@ -437,7 +437,7 @@ namespace Bridge.Contract
                     expression.Parent is AssignmentExpression ||
                     expression.Parent is VariableInitializer)
                 {
-                    if (expression.Parent is InvocationExpression)
+                    if (expression != null && expression.Parent is InvocationExpression)
                     {
                         var invocationExpression = (InvocationExpression)expression.Parent;
                         if (invocationExpression.Target == expression)

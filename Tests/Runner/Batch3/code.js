@@ -4231,7 +4231,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         $clone: function (to) {
             var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1328.StructLink3();
-            s.name = this.name;
+            s.name = this.name.$clone();
             s.Url = this.Url;
             s.Text = this.Text;
             return s;
@@ -6914,8 +6914,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6945,7 +6943,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -8669,6 +8667,116 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
             Bridge.Test.Assert.areEqual(77, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.unsafe());
             Bridge.Test.Assert.areEqual(77, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802.unsafe());
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1804", {
+        testStructClone: function () {
+            var a = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1804.Struct1();
+            var b = a.$clone();
+            a.nested.field = 5;
+            a.nested.nested.field = 6;
+
+            Bridge.Test.Assert.areEqual(5, a.nested.field);
+            Bridge.Test.Assert.areEqual(6, a.nested.nested.field);
+
+            Bridge.Test.Assert.areEqual(0, b.nested.field);
+            Bridge.Test.Assert.areEqual(0, b.nested.nested.field);
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1804.Struct1", {
+        $kind: "struct",
+        statics: {
+            getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1804.Struct1(); }
+        },
+        config: {
+            init: function () {
+                this.nested = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1804.Struct2();
+            }
+        },
+        ctor: function () {
+            this.$initialize();
+        },
+        getHashCode: function () {
+            var hash = 17;
+            hash = hash * 23 + 1973676214;
+            hash = hash * 23 + (this.nested == null ? 0 : Bridge.getHashCode(this.nested));
+            return hash;
+        },
+        equals: function (o) {
+            if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1804.Struct1)) {
+                return false;
+            }
+            return Bridge.equals(this.nested, o.nested);
+        },
+        $clone: function (to) {
+            var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1804.Struct1();
+            s.nested = this.nested.$clone();
+            return s;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1804.Struct2", {
+        $kind: "struct",
+        statics: {
+            getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1804.Struct2(); }
+        },
+        field: 0,
+        config: {
+            init: function () {
+                this.nested = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1804.Struct3();
+            }
+        },
+        ctor: function () {
+            this.$initialize();
+        },
+        getHashCode: function () {
+            var hash = 17;
+            hash = hash * 23 + 1973741750;
+            hash = hash * 23 + (this.field == null ? 0 : Bridge.getHashCode(this.field));
+            hash = hash * 23 + (this.nested == null ? 0 : Bridge.getHashCode(this.nested));
+            return hash;
+        },
+        equals: function (o) {
+            if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1804.Struct2)) {
+                return false;
+            }
+            return Bridge.equals(this.field, o.field) && Bridge.equals(this.nested, o.nested);
+        },
+        $clone: function (to) {
+            var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1804.Struct2();
+            s.field = this.field;
+            s.nested = this.nested.$clone();
+            return s;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1804.Struct3", {
+        $kind: "struct",
+        statics: {
+            getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1804.Struct3(); }
+        },
+        field: 0,
+        ctor: function () {
+            this.$initialize();
+        },
+        getHashCode: function () {
+            var hash = 17;
+            hash = hash * 23 + 1973807286;
+            hash = hash * 23 + (this.field == null ? 0 : Bridge.getHashCode(this.field));
+            return hash;
+        },
+        equals: function (o) {
+            if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1804.Struct3)) {
+                return false;
+            }
+            return Bridge.equals(this.field, o.field);
+        },
+        $clone: function (to) {
+            var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1804.Struct3();
+            s.field = this.field;
+            return s;
         }
     });
 
