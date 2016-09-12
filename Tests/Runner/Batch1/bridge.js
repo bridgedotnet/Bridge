@@ -1088,6 +1088,14 @@
                     return method;
                 }
 
+                if (method.$$bind) {
+                    for (var i = 0; i < method.$$bind.length; i++) {
+                        if (method.$$bind[i].$scope === obj) {
+                            return method.$$bind[i];
+                        }
+                    }
+                }
+
                 var fn;
 
                 if (arguments.length === 2) {
@@ -1123,6 +1131,9 @@
                         return result;
                     }, method.length);
                 }
+
+                method.$$bind = method.$$bind || [];
+                method.$$bind.push(fn);
 
                 fn.$method = method;
                 fn.$scope = obj;
