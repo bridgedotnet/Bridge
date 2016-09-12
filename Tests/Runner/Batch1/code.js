@@ -11414,25 +11414,12 @@
 
     Bridge.define("Bridge.ClientTest.JsonTests.TestClass1", {
         $literal: true,
-        ctor: function () {
-            var $this = {};
-            (function(){
-                this.i = 0;
-            }).call($this);
-            return $this;
-        }
+
     });
 
     Bridge.define("Bridge.ClientTest.JsonTests.TestClass2", {
         $literal: true,
-        ctor: function () {
-            var $this = {};
-            (function(){
-                this.i = 0;
-                this.s = null;
-            }).call($this);
-            return $this;
-        }
+
     });
 
     Bridge.define("Bridge.ClientTest.Linq.AnagramEqualityComparer", {
@@ -16329,6 +16316,13 @@
 
     Bridge.define("Bridge.ClientTest.ObjectLiteralTests.Bridge1529", {
         testObjectLiteral: function () {
+            var c = { temp: "Frank" };
+            var tempFrank = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.Config.prototype.getTmp.call({  }, c);
+            Bridge.Test.Assert.areEqual$1("1: Frank", tempFrank, "Check call works");
+
+            var options = { data: { name: c.temp } };
+            Bridge.Test.Assert.areEqual$1("Frank", options.data.name, "External referenced default ObjectLiteral works");
+
             var bs = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.ctor();
             Bridge.Test.Assert.true(Bridge.isPlainObject(bs));
             Bridge.Test.Assert.areEqual(10, bs.field1);
@@ -16433,6 +16427,13 @@
         },
         getField2: function () {
             return this.field2;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.ObjectLiteralTests.Bridge1529.Config", {
+        $literal: true,
+        getTmp: function (config) {
+            return System.String.concat("1: ", config.temp);
         }
     });
 
@@ -16650,50 +16651,22 @@
 
     Bridge.define("Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config1", {
         $literal: true,
-        ctor: function () {
-            var $this = {};
-            (function(){
-                this.val1 = 1;
-                this.val2 = 0;
-            }).call($this);
-            return $this;
-        }
+
     });
 
     Bridge.define("Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config2", {
         $literal: true,
-        ctor: function () {
-            var $this = {};
-            (function(){
-                this.val1 = 2;
-                this.val2 = 0;
-            }).call($this);
-            return $this;
-        }
+
     });
 
     Bridge.define("Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config3", {
         $literal: true,
-        ctor: function () {
-            var $this = {};
-            (function(){
-                this.val1 = 3;
-                this.val2 = 0;
-            }).call($this);
-            return $this;
-        }
+
     });
 
     Bridge.define("Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config4", {
         $literal: true,
-        ctor: function () {
-            var $this = {};
-            (function(){
-                this.val1 = 4;
-                this.val2 = 0;
-            }).call($this);
-            return $this;
-        }
+
     });
 
     Bridge.define("Bridge.ClientTest.PropertyAccessorTests", {

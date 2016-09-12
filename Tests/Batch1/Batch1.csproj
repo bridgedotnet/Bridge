@@ -249,6 +249,10 @@
       <Project>{99decd28-d3e3-4ea7-acae-ab5dfc9913bd}</Project>
       <Name>Bridge.Html5</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ClientTestHelper\ClientTestHelper.csproj">
+      <Project>{847bf532-9724-44d0-96c5-9b393e698b7c}</Project>
+      <Name>ClientTestHelper</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Bridge.Test, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

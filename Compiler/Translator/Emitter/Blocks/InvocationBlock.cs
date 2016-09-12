@@ -311,15 +311,7 @@ namespace Bridge.Translator
                                     if (isObjectLiteral && !resolvedMethod.IsStatic)
                                     {
                                         name += JS.Fields.PROTOTYPE + "." + overloads.GetOverloadName() + ".";
-
-                                        if (resolvedMethod.Parameters.Count > 0)
-                                        {
-                                            name += JS.Funcs.APPLY;
-                                        }
-                                        else
-                                        {
-                                            name += JS.Funcs.CALL;
-                                        }
+                                        name += JS.Funcs.CALL;
                                     }
                                     else
                                     {

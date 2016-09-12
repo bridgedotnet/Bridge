@@ -77,12 +77,12 @@ namespace Bridge.Translator
                         TranslatorException.Throw("[ObjectLiteral] base type must be object literal also: {0}", type);
                     }
 
-                    if (baseType != null && baseType.FullName != "System.Object" && objectCreateMode == 1)
+                    if (baseType != null && baseType.FullName != "System.Object" && objectCreateMode == 0)
                     {
                         TranslatorException.Throw("[ObjectLiteral] with ObjectCreateMode.Plain cannot be subclass of another type: {0}", type);
                     }
 
-                    if (baseType != null && baseType.FullName != "System.Object" && this.GetObjectCreateMode(baseType) == 1)
+                    if (baseType != null && baseType.FullName != "System.Object" && this.GetObjectCreateMode(baseType) == 0)
                     {
                         TranslatorException.Throw("[ObjectLiteral]cannot be inherited from class with ObjectCreateMode.Plain: {0}", type);
                     }
