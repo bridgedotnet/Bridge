@@ -240,10 +240,17 @@ namespace Bridge.Translator
 
                 this.Emitter.Translator.EmitNode = type.TypeDeclaration;
 
-                if (type.IsObjectLiteral && this.Emitter.Validator.IsIgnoreType(type.Type.GetDefinition()))
+                if (type.IsObjectLiteral)
                 {
-                    this.Emitter.Translator.Plugins.AfterTypeEmit(this.Emitter, type);
-                    continue;
+                    var mode = this.Emitter.Validator.GetObjectCreateMode(this.Emitter.GetTypeDefinition(type.Type));
+
+                    var ignore = mode == 0 && !type.Type.GetMethods(null, GetMemberOptions.IgnoreInheritedMembers).Any(m => !m.IsConstructor && !m.IsAccessor);
+
+                    if (this.Emitter.Validator.IsIgnoreType(type.Type.GetDefinition()) || ignore)
+                    {
+                        this.Emitter.Translator.Plugins.AfterTypeEmit(this.Emitter, type);
+                        continue;
+                    }
                 }
 
                 this.Emitter.InitEmitter();

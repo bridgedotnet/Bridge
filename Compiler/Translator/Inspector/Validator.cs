@@ -38,7 +38,7 @@ namespace Bridge.Translator
                 return;
             }
 
-            this.CheckConstructors(type, translator);
+            this.CheckObjectLiteral(type, translator);
             this.CheckConstructors(type, translator);
             this.CheckFields(type, translator);
             this.CheckMethods(type, translator);
@@ -53,7 +53,7 @@ namespace Bridge.Translator
         {
             if (this.IsObjectLiteral(type))
             {
-                if (type.IsInterface && type.HasMethods || type.HasProperties || type.HasEvents || type.HasFields)
+                if (type.IsInterface && (type.HasMethods || type.HasProperties || type.HasEvents || type.HasFields))
                 {
                     TranslatorException.Throw("ObjectLiteral interface doesn't support any contract members: {0}", type);
                 }
@@ -72,23 +72,18 @@ namespace Bridge.Translator
 
                     }
 
-                    if (baseType != null && baseType.FullName != "System.Object" && !this.IsObjectLiteral(baseType))
+                    if (objectCreateMode == 1 && baseType != null && baseType.FullName != "System.Object" && this.GetObjectCreateMode(baseType) == 0)
                     {
-                        TranslatorException.Throw("[ObjectLiteral] base type must be object literal also: {0}", type);
+                        TranslatorException.Throw("[ObjectLiteral] with Constructor mode should be inherited from class with same options: {0}", type);
                     }
 
-                    if (baseType != null && baseType.FullName != "System.Object" && objectCreateMode == 0)
+                    if (objectCreateMode == 0 && baseType != null && this.GetObjectCreateMode(baseType) == 1)
                     {
-                        TranslatorException.Throw("[ObjectLiteral] with ObjectCreateMode.Plain cannot be subclass of another type: {0}", type);
-                    }
-
-                    if (baseType != null && baseType.FullName != "System.Object" && this.GetObjectCreateMode(baseType) == 0)
-                    {
-                        TranslatorException.Throw("[ObjectLiteral]cannot be inherited from class with ObjectCreateMode.Plain: {0}", type);
+                        TranslatorException.Throw("[ObjectLiteral] with Plain mode cannot be inherited from [ObjectLiteral] with Constructor mode: {0}", type);
                     }
                 }
 
-                if (type.Interfaces.Count > 0)
+                if (type.Interfaces.Count > 0 && objectCreateMode == 1)
                 {
                     foreach (var @interface in type.Interfaces)
                     {
@@ -411,6 +406,18 @@ namespace Bridge.Translator
                 return name;
             }
 
+            if (this.HasAttribute(type.CustomAttributes, Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute"))
+            {
+                var mode = this.GetObjectCreateMode(type);
+
+                var ignore = mode == 0 && !type.Methods.Any(m => !m.IsConstructor && !m.IsGetter && !m.IsSetter && !m.IsRemoveOn && !m.IsAddOn);
+
+                if (emitter.Validator.IsIgnoreType(type) || ignore)
+                {
+                    return "Object";
+                }
+            }
+
             return null;
         }
 
@@ -423,7 +430,7 @@ namespace Bridge.Translator
                 return ctor;
             }
 
-            if (this.HasAttribute(type.CustomAttributes, Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute"))
+            if (this.HasAttribute(type.CustomAttributes, Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute") && this.GetObjectCreateMode(type) == 0)
             {
                 return "{ }";
             }

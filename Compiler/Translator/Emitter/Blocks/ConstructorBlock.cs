@@ -336,12 +336,13 @@ namespace Bridge.Translator
 
                     this.Write("var " + JS.Vars.D_THIS + " = ");
 
-                    if (baseType != null && (!this.Emitter.Validator.IsIgnoreType(baseType) || this.Emitter.Validator.IsBridgeClass(baseType)) ||
+                    var isBaseObjectLiteral = baseType != null && this.Emitter.Validator.IsObjectLiteral(baseType);
+                    if (isBaseObjectLiteral && baseType != null && (!this.Emitter.Validator.IsIgnoreType(baseType) || this.Emitter.Validator.IsBridgeClass(baseType)) ||
                     (ctor.Initializer != null && ctor.Initializer.ConstructorInitializerType == ConstructorInitializerType.This))
                     {
                         this.EmitBaseConstructor(ctor, ctorName, true);
                     }
-                    else if (baseType != null && ctor.Initializer != null &&
+                    else if (isBaseObjectLiteral && baseType != null && ctor.Initializer != null &&
                              ctor.Initializer.ConstructorInitializerType == ConstructorInitializerType.Base)
                     {
                         this.CheckBaseCtorTemplate(ctor, ref requireNewLine);

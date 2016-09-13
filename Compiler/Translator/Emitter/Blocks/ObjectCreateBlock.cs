@@ -164,12 +164,6 @@ namespace Bridge.Translator
 
             if (isSynthetic && isObjectLiteral && isPlainObjectCtor)
             {
-                var baseType = this.Emitter.GetBaseTypeDefinition(type);
-                if (baseType != null && (!this.Emitter.Validator.IsIgnoreType(baseType) || this.Emitter.Validator.IsBridgeClass(baseType)))
-                {
-                    isSynthetic = false;
-                }
-
                 if (isSynthetic)
                 {
                     foreach (var propertyDefinition in type.Properties)

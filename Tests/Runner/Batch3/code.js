@@ -1132,13 +1132,11 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1067.MyDictionary1", {
-        inherits: [System.Collections.Generic.Dictionary$2(System.Int32,System.Int32)],
-
+        inherits: [System.Collections.Generic.Dictionary$2(System.Int32,System.Int32)]
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1067.MyDictionary2", {
-        inherits: [System.Collections.Generic.Dictionary$2(System.Int32,System.Int32)],
-
+        inherits: [System.Collections.Generic.Dictionary$2(System.Int32,System.Int32)]
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1071", {
@@ -6025,11 +6023,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1448.Literal", {
-        $literal: true,
-
-    });
-
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1448.Plainer");
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458", {
@@ -6914,8 +6907,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6945,7 +6936,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -8851,6 +8842,16 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1819", {
+        testObjectLiteralWithInheritance: function () {
+            var x = { name: "test" };
+            Bridge.Test.Assert.areEqual("test", x.name);
+            Bridge.Test.Assert.true(Bridge.isPlainObject(x));
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1819.AttributeBase");
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
@@ -9053,11 +9054,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         clear: function () {
             this._backingDictionary.clear();
         }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge377", {
-        $literal: true,
-
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge381", {
@@ -10963,8 +10959,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge586A", {
         statics: {
 
-        },
-
+        }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge588", {
