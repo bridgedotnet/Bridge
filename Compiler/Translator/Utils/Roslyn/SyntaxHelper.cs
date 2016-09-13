@@ -367,8 +367,12 @@ namespace Bridge.Translator
             {
                 return symbol.ContainingType.FullyQualifiedName() + "." + localName;
             }
-            else if (symbol.ContainingNamespace != null && !symbol.ContainingNamespace.IsGlobalNamespace)
+            else if (symbol.ContainingNamespace != null)
             {
+                if (symbol.ContainingNamespace.IsGlobalNamespace)
+                {
+                    return "global::" + localName;
+                }
                 return symbol.ContainingNamespace.FullyQualifiedName() + "." + localName;
             }
             else
@@ -559,7 +563,7 @@ namespace Bridge.Translator
 
                 if (symbol.ContainingType != null && symbol.ContainingType.TypeKind == TypeKind.Enum && symbol is IFieldSymbol)
                 {
-                    string enumAttr = Translator.Bridge_ASSEMBLY + ".EnumAttribute";
+                    string enumAttr = "global::" + Translator.Bridge_ASSEMBLY + ".EnumAttribute";
                     enumMode = 7;
 
                     foreach (var attr in symbol.ContainingType.GetAttributes())
@@ -640,6 +644,7 @@ namespace Bridge.Translator
 
         private static bool HasAttribute(ImmutableArray<AttributeData> attributes, string attrName)
         {
+            attrName = "global:" + attrName;
             foreach (var attr in attributes)
             {
                 if (attr.AttributeClass != null && attr.AttributeClass.FullyQualifiedName() == attrName)
@@ -653,9 +658,10 @@ namespace Bridge.Translator
 
         private static AttributeData GetInheritedAttribute(ISymbol symbol, string attrName)
         {
+            var name = "global::" + attrName;
             foreach (var attr in symbol.GetAttributes())
             {
-                if (attr.AttributeClass.FullyQualifiedName() == attrName)
+                if (attr.AttributeClass.FullyQualifiedName() == name)
                 {
                     return attr;
                 }
@@ -678,7 +684,7 @@ namespace Bridge.Translator
 
         public static bool IsExpressionOfT(this ITypeSymbol type)
         {
-            return type is INamedTypeSymbol && type.OriginalDefinition.MetadataName == typeof(System.Linq.Expressions.Expression<>).Name && type.ContainingNamespace.FullyQualifiedName() == typeof(System.Linq.Expressions.Expression<>).Namespace;
+            return type is INamedTypeSymbol && type.OriginalDefinition.MetadataName == typeof(System.Linq.Expressions.Expression<>).Name && type.ContainingNamespace.FullyQualifiedName() == ("global::" + typeof(System.Linq.Expressions.Expression<>).Namespace);
         }
 
     }
