@@ -22962,13 +22962,17 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         setData: function (value) {
         }
     });
-});
-
-Bridge.assembly("TestProject", function ($asm, globals) {
-    "use strict";
 
     Bridge.define("Test.BridgeIssues.N770.IBase", {
         $kind: "interface"
+    });
+
+    Bridge.define("TestProject1.TestClassA", {
+        value1: 0
+    });
+
+    Bridge.define("TestProject2.TestClassB", {
+        value1: 0
     });
 
     Bridge.define("Test.BridgeIssues.N770.Impl", {
@@ -22980,22 +22984,6 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             "prop", "prop"
             ]
         }
-    });
-});
-
-Bridge.assembly("TestProject", function ($asm, globals) {
-    "use strict";
-
-    Bridge.define("TestProject1.TestClassA", {
-        value1: 0
-    });
-});
-
-Bridge.assembly("TestProject", function ($asm, globals) {
-    "use strict";
-
-    Bridge.define("TestProject2.TestClassB", {
-        value1: 0
     });
 });
 
