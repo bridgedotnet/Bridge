@@ -6914,6 +6914,8 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
+
+
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6943,7 +6945,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                }; /// Async method lacks 'await' operators and will run synchronously
+                                };
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -8878,6 +8880,30 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         ctor: function (value) {
             this.$initialize();
             this.value = value;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1813", {
+        statics: {
+            instance_callback: function (a) {
+                if (a === void 0) { a = null; }
+            }
+        },
+        list: null,
+        config: {
+            init: function () {
+                this.list = new (System.Collections.Generic.List$1(Object))();
+            }
+        },
+        add: function (obj) {
+            if (obj === void 0) { obj = []; }
+            this.list.addRange(obj);
+        },
+        testAddStaticMethod: function () {
+            var callbacks = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1813();
+            callbacks.add([Bridge.ClientTest.Batch3.BridgeIssues.Bridge1813.instance_callback]);
+            Bridge.Test.Assert.areEqual(1, callbacks.list.getCount());
+            Bridge.Test.Assert.true(Bridge.referenceEquals(callbacks.list.getItem(0), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1813.instance_callback));
         }
     });
 
