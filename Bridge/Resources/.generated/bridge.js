@@ -2447,12 +2447,19 @@
                 cls = prop.hasOwnProperty("ctor") && prop.ctor;
 
             if (!cls) {
-                Class = function () {
-                    this.$initialize();
-                    if (Class.$base) {
-                        Class.$base.ctor.call(this);
-                    }
-                };
+                if (prop.$literal) {
+                    Class = function() {
+                        return {};
+                    };
+                } else {
+                    Class = function () {
+                        this.$initialize();
+                        if (Class.$base) {
+                            Class.$base.ctor.call(this);
+                        }
+                    };
+                }
+                
                 prop.ctor = Class;
             } else {
                 Class = cls;
