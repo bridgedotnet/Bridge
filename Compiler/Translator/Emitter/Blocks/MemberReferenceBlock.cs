@@ -367,7 +367,7 @@ namespace Bridge.Translator
 
             if (inline == null && member != null && member.Member.DeclaringTypeDefinition != null &&
                 member.Member.DeclaringTypeDefinition.Kind == TypeKind.Interface &&
-                (this.Emitter.Validator.IsExternalInterface(member.Member.DeclaringTypeDefinition) || member.Member.DeclaringType.TypeArguments.Any(arg => arg.Kind == TypeKind.TypeParameter)))
+                (this.Emitter.Validator.IsExternalInterface(member.Member.DeclaringTypeDefinition)  || member.Member.DeclaringType.TypeArguments.Any(Helpers.HasTypeParameters)))
             {
                 isInterfaceMember = true;
             }

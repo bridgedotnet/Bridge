@@ -8881,6 +8881,105 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821", {
+        testInterfaceMember1: function () {
+            var ic = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.AAnother.create(System.Int32);
+            Bridge.Test.Assert.notNull(ic);
+            Bridge.Test.Assert.true(Bridge.is(ic, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.CClass$1(System.Int32)));
+        },
+        testInterfaceMember2: function () {
+            var foo = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.Foo();
+            var x = System.Nullable.lift1("$clone", foo.getA().Bridge$ClientTest$Batch3$BridgeIssues$Bridge1821$IBar$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1821$Xxx$getValue());
+
+            Bridge.Test.Assert.notNull(System.Nullable.lift1("$clone", x));
+            Bridge.Test.Assert.areEqual(5, System.Nullable.getValue(x).field);
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.AAnother", {
+        statics: {
+            create: function (T) {
+                var x;
+                x = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.CClass$1(T))();
+                x["Bridge$ClientTest$Batch3$BridgeIssues$Bridge1821$IInterface$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1821$TT$1$" + Bridge.getTypeAlias(T) + "$act"](new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.TT$1(T))());
+
+                return x;
+            }
+        }
+    });
+
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.IBar$1", function (T) { return {
+        $kind: "interface"
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.TT$1", function (T) { return {
+        $kind: "struct",
+        statics: {
+            getDefaultValue: function () { return new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.TT$1(T))(); }
+        },
+        a: Bridge.getDefaultValue(T),
+        b: Bridge.getDefaultValue(T),
+        ctor: function () {
+            this.$initialize();
+        },
+        getHashCode: function () {
+            var hash = 17;
+            hash = hash * 23 + 21588;
+            hash = hash * 23 + (this.a == null ? 0 : Bridge.getHashCode(this.a));
+            hash = hash * 23 + (this.b == null ? 0 : Bridge.getHashCode(this.b));
+            return hash;
+        },
+        equals: function (o) {
+            if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.TT$1(T))) {
+                return false;
+            }
+            return Bridge.equals(this.a, o.a) && Bridge.equals(this.b, o.b);
+        },
+        $clone: function (to) { return this; }
+    }; });
+
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.IInterface$1", function (T) { return {
+        $kind: "interface"
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.Foo", {
+        getA: function () {
+            return new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.Bar$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.Xxx))(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.Xxx.$ctor1(5));
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.Xxx", {
+        $kind: "struct",
+        statics: {
+            getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.Xxx(); }
+        },
+        field: 0,
+        $ctor1: function (f) {
+            this.$initialize();
+            this.field = f;
+        },
+        ctor: function () {
+            this.$initialize();
+        },
+        getHashCode: function () {
+            var hash = 17;
+            hash = hash * 23 + 7895128;
+            hash = hash * 23 + (this.field == null ? 0 : Bridge.getHashCode(this.field));
+            return hash;
+        },
+        equals: function (o) {
+            if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.Xxx)) {
+                return false;
+            }
+            return Bridge.equals(this.field, o.field);
+        },
+        $clone: function (to) {
+            var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.Xxx();
+            s.field = this.field;
+            return s;
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
@@ -16851,6 +16950,28 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     }; });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.Bar$1", function (T) { return {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.IBar$1(T)],
+        v: Bridge.getDefaultValue(T),
+        config: {
+            alias: [
+            "getValue", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1821$IBar$1$" + Bridge.getTypeAlias(T) + "$getValue"
+            ]
+        },
+        ctor: function (v) {
+            this.$initialize();
+            this.v = v;
+        },
+        getValue: function () {
+            return this.v;
+        }
+    }; });
+
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.IClass$1", function (T) { return {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.IInterface$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.TT$1(T))],
+        $kind: "interface"
+    }; });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240B", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A],
         getString: function () {
@@ -17115,6 +17236,18 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.StaticDataClass2$2", function (T, K) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.StaticDataClass1$2(System.Int32,String)]
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.CClass$1", function (T) { return {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.IClass$1(T)],
+        config: {
+            alias: [
+            "act", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1821$IInterface$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1821$TT$1$" + Bridge.getTypeAlias(T) + "$act"
+            ]
+        },
+        act: function (v) {
+            return v;
+        }
     }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Third", {
