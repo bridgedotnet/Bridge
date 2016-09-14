@@ -11361,7 +11361,7 @@
             Bridge.Test.Assert.areEqual(o.s, "test");
         },
         genericParseWorks: function () {
-            var o = Bridge.merge(new Object(), JSON.parse("{ \"i\": 3, \"s\": \"test\" }"));
+            var o = Bridge.merge(Bridge.createInstance(Object), JSON.parse("{ \"i\": 3, \"s\": \"test\" }"));
             Bridge.Test.Assert.areEqual(o.i, 3);
             Bridge.Test.Assert.areEqual(o.s, "test");
         },
@@ -11371,7 +11371,7 @@
             Bridge.Test.Assert.areEqual(o.s, "test");
         },
         genericParseWithCallbackWorks: function () {
-            var o = Bridge.merge(new Object(), JSON.parse("{ \"i\": 3, \"s\": \"test\" }", $_.Bridge.ClientTest.JsonTests.f1));
+            var o = Bridge.merge(Bridge.createInstance(Object), JSON.parse("{ \"i\": 3, \"s\": \"test\" }", $_.Bridge.ClientTest.JsonTests.f1));
             Bridge.Test.Assert.areEqual(o.i, 100);
             Bridge.Test.Assert.areEqual(o.s, "test");
         },

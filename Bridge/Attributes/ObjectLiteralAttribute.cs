@@ -31,7 +31,6 @@ namespace Bridge
 
     [External]
     [Enum(Bridge.Emit.Value)]
-    [NonScriptable]
     [Obsolete("Use ObjectInitializationMode")]
     public enum DefaultValueMode
     {
@@ -42,7 +41,6 @@ namespace Bridge
 
     [External]
     [Enum(Bridge.Emit.Value)]
-    [NonScriptable]
     public enum ObjectInitializationMode
     {
         /// <summary>
@@ -63,7 +61,6 @@ namespace Bridge
 
     [External]
     [Enum(Bridge.Emit.Value)]
-    [NonScriptable]
     public enum ObjectCreateMode
     {
         /// <summary>

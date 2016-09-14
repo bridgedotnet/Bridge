@@ -63,7 +63,6 @@ namespace Bridge.Translator
 
             var type = isTypeParam ? null : this.Emitter.GetTypeDefinition(objectCreateExpression.Type);
             var isObjectLiteral = type != null && this.Emitter.Validator.IsObjectLiteral(type);
-            var isSynthetic = invocationResolveResult == null || invocationResolveResult.Member.IsSynthetic;
 
             if (type != null && type.BaseType != null && type.BaseType.FullName == "System.MulticastDelegate")
             {
@@ -126,58 +125,9 @@ namespace Bridge.Translator
             }
 
             var isPlainObjectCtor = Regex.Match(customCtor, @"\s*\{\s*\}\s*").Success;
+            var isPlainMode = this.Emitter.Validator.GetObjectCreateMode(type) == 0;
 
-            if (isObjectLiteral)
-            {
-                if (this.Emitter.Validator.GetObjectCreateMode(type) == 0)
-                {
-                    isSynthetic = true;
-                }
-                else if (invocationResolveResult != null)
-                {
-                    if (invocationResolveResult.Member.Parameters.Count > 0)
-                    {
-                        var prm = invocationResolveResult.Member.Parameters.FirstOrDefault(p => p.Type.FullName == "Bridge.ObjectCreateMode");
-
-                        if (prm != null)
-                        {
-                            var prmIndex = invocationResolveResult.Member.Parameters.IndexOf(prm);
-                            var arg = invocationResolveResult.Arguments.FirstOrDefault(a =>
-                            {
-                                if (a is NamedArgumentResolveResult)
-                                {
-                                    return ((NamedArgumentResolveResult) a).ParameterName == prm.Name;
-                                }
-                                
-                                return prmIndex == invocationResolveResult.Arguments.IndexOf(a);
-                            });
-
-                            if (arg != null && arg.ConstantValue != null && (int)arg.ConstantValue == 1)
-                            {
-                                isSynthetic = true;
-                            }
-                        }
-                    }
-                }
-            }
-            
-
-            if (isSynthetic && isObjectLiteral && isPlainObjectCtor)
-            {
-                if (isSynthetic)
-                {
-                    foreach (var propertyDefinition in type.Properties)
-                    {
-                        if (!Helpers.IsAutoProperty(propertyDefinition))
-                        {
-                            isSynthetic = false;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            if (inlineCode == null && isPlainObjectCtor && (!isObjectLiteral || isSynthetic))
+            if (inlineCode == null && isPlainObjectCtor && isPlainMode)
             {
                 this.WriteOpenBrace();
                 this.WriteSpace();
@@ -486,6 +436,13 @@ namespace Bridge.Translator
                     Expression expression = args[i];
                     var p = rr.Member.Parameters[i < rr.Member.Parameters.Count ? i : (rr.Member.Parameters.Count - 1)];
                     var name = p.Name;
+
+                    if (p.Type.FullName == "Bridge.DefaultValueMode" ||
+                        p.Type.FullName == "Bridge.ObjectInitializationMode" ||
+                        p.Type.FullName == "Bridge.ObjectCreateMode")
+                    {
+                        continue;
+                    }
 
                     if (needComma)
                     {
