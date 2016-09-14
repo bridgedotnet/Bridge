@@ -16,12 +16,17 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             public string Name { get; set; }
         }
 
+#pragma warning disable CS0626 // Method, operator, or accessor is marked external and has no attributes on it
+        [Template("Bridge.isPlainObject({o})")]
+        public static extern bool IsPlainObject(object o);
+#pragma warning restore CS0626 // Method, operator, or accessor is marked external and has no attributes on it
+
         [Test]
         public void TestObjectLiteralWithInheritance()
         {
             var x = new Attributes { Name = "test" };
             Assert.AreEqual("test", x.Name);
-            Assert.True(Script.Write<bool>("Bridge.isPlainObject(x)"));
+            Assert.True(IsPlainObject(x));
         }
     }
 }
