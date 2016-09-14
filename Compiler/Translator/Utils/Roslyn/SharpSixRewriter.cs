@@ -208,14 +208,14 @@ namespace Bridge.Translator
                     }
                 }
             }
-
+            var isParam = parameter != null && !this.IsAnonymous(parameter.Type);
+            var parent = isParam && parameter.IsParams ? (InvocationExpressionSyntax) node.Parent.Parent : null;
             node = (ArgumentSyntax)base.VisitArgument(node);
 
-            if (parameter != null && !this.IsAnonymous(parameter.Type))
+            if (isParam)
             {
                 var pType = parameter.Type;
-                if (parameter.IsParams &&
-                    IsExpandedForm(this.semanticModel, (InvocationExpressionSyntax) node.Parent.Parent, method))
+                if (parameter.IsParams && SharpSixRewriter.IsExpandedForm(this.semanticModel, parent, method))
                 {
                     pType = ((IArrayTypeSymbol)parameter.Type).ElementType;
                 }
