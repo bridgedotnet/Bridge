@@ -1207,5 +1207,26 @@ namespace Bridge.Contract
             var at = m.Parameters[0].Type as ArrayType;
             return at != null && at.Dimensions == 1 && at.ElementType.IsKnownType(KnownTypeCode.String);    // The single parameter must be a one-dimensional array of strings.
         }
+
+        public static bool HasTypeParameters(IType type)
+        {
+            if (type.Kind == TypeKind.TypeParameter)
+            {
+                return true;
+            }
+
+            if (type.TypeArguments.Count > 0)
+            {
+                foreach (var typeArgument in type.TypeArguments)
+                {
+                    if (Helpers.HasTypeParameters(typeArgument))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
     }
 }

@@ -211,7 +211,7 @@ namespace Bridge.Translator
 
             if (loggerLevel <= LoggerLevel.None)
             {
-                logger.Info("To enable further logging use configuration setting \"logging\" in bridge.json. See http://bridge.net/kb/global-configuration/#logging");
+                logger.Info("To enable further logging use configuration setting \"logging\" in bridge.json. See http://bridge.net/docs/global-configuration/#logging");
             }
 
             try

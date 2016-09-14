@@ -313,7 +313,7 @@ namespace Bridge.Translator
             var oldUnary = this.Emitter.IsUnaryAccessor;
             var isInterfaceMember = false;
             var isExternalInterface = this.Emitter.Validator.IsExternalInterface(memberResolveResult.Member.DeclaringTypeDefinition);
-            var hasTypeParemeter = memberResolveResult.Member.DeclaringType.TypeArguments.Any(arg => arg.Kind == TypeKind.TypeParameter);
+            var hasTypeParemeter = memberResolveResult.Member.DeclaringType.TypeArguments.Any(Helpers.HasTypeParameters);
 
             if (memberResolveResult != null && memberResolveResult.Member.DeclaringTypeDefinition != null &&
                 memberResolveResult.Member.DeclaringTypeDefinition.Kind == TypeKind.Interface &&

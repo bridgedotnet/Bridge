@@ -1695,6 +1695,10 @@
             QUnit.test("GenericParseWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests.genericParseWorks);
             QUnit.test("NonGenericParseWithCallbackWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests.nonGenericParseWithCallbackWorks);
             QUnit.test("GenericParseWithCallbackWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests.genericParseWithCallbackWorks);
+            QUnit.test("NonGenericParseWorks3", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests.nonGenericParseWorks3);
+            QUnit.test("GenericParseWorks3", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests.genericParseWorks3);
+            QUnit.test("NonGenericParseWithCallbackWorks3", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests.nonGenericParseWithCallbackWorks3);
+            QUnit.test("GenericParseWithCallbackWorks3", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests.genericParseWithCallbackWorks3);
             QUnit.test("StringifyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests.stringifyWorks);
             QUnit.test("StringifyWithSerializableMembersArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests.stringifyWithSerializableMembersArrayWorks);
             QUnit.test("StringifyWithSerializableMembersArrayAndIntentCountWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests.stringifyWithSerializableMembersArrayAndIntentCountWorks);
@@ -1702,6 +1706,12 @@
             QUnit.test("StringifyWithCallbackWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests.stringifyWithCallbackWorks);
             QUnit.test("StringifyWithCallbackAndIndentCountWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests.stringifyWithCallbackAndIndentCountWorks);
             QUnit.test("StringifyWithCallbackAndIndentTextWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests.stringifyWithCallbackAndIndentTextWorks);
+            QUnit.test("StringifyWithSerializableMembersArrayWorks3", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests.stringifyWithSerializableMembersArrayWorks3);
+            QUnit.test("StringifyWithSerializableMembersArrayAndIntentCountWorks3", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests.stringifyWithSerializableMembersArrayAndIntentCountWorks3);
+            QUnit.test("StringifyWithSerializableMembersArrayAndIntentTextWorks3", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests.stringifyWithSerializableMembersArrayAndIntentTextWorks3);
+            QUnit.test("StringifyWithCallbackWorks3", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests.stringifyWithCallbackWorks3);
+            QUnit.test("StringifyWithCallbackAndIndentCountWorks3", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests.stringifyWithCallbackAndIndentCountWorks3);
+            QUnit.test("StringifyWithCallbackAndIndentTextWorks3", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests.stringifyWithCallbackAndIndentTextWorks3);
             QUnit.module("Simple types");
             QUnit.test("Boolean - TypePropertiesAreCorrect", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_BooleanTests.typePropertiesAreCorrect);
             QUnit.test("Boolean - DefaultValueIsFalse", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_BooleanTests.defaultValueIsFalse);
@@ -6156,6 +6166,22 @@
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.JsonTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests);
                 t.getFixture().genericParseWithCallbackWorks();
             },
+            nonGenericParseWorks3: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.JsonTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests);
+                t.getFixture().nonGenericParseWorks3();
+            },
+            genericParseWorks3: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.JsonTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests);
+                t.getFixture().genericParseWorks3();
+            },
+            nonGenericParseWithCallbackWorks3: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.JsonTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests);
+                t.getFixture().nonGenericParseWithCallbackWorks3();
+            },
+            genericParseWithCallbackWorks3: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.JsonTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests);
+                t.getFixture().genericParseWithCallbackWorks3();
+            },
             stringifyWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.JsonTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests);
                 t.getFixture().stringifyWorks();
@@ -6183,6 +6209,30 @@
             stringifyWithCallbackAndIndentTextWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.JsonTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests);
                 t.getFixture().stringifyWithCallbackAndIndentTextWorks();
+            },
+            stringifyWithSerializableMembersArrayWorks3: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.JsonTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests);
+                t.getFixture().stringifyWithSerializableMembersArrayWorks3();
+            },
+            stringifyWithSerializableMembersArrayAndIntentCountWorks3: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.JsonTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests);
+                t.getFixture().stringifyWithSerializableMembersArrayAndIntentCountWorks3();
+            },
+            stringifyWithSerializableMembersArrayAndIntentTextWorks3: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.JsonTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests);
+                t.getFixture().stringifyWithSerializableMembersArrayAndIntentTextWorks3();
+            },
+            stringifyWithCallbackWorks3: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.JsonTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests);
+                t.getFixture().stringifyWithCallbackWorks3();
+            },
+            stringifyWithCallbackAndIndentCountWorks3: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.JsonTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests);
+                t.getFixture().stringifyWithCallbackAndIndentCountWorks3();
+            },
+            stringifyWithCallbackAndIndentTextWorks3: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.JsonTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_JsonTests);
+                t.getFixture().stringifyWithCallbackAndIndentTextWorks3();
             }
         }
     });
