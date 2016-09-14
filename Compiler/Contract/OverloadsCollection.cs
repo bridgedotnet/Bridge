@@ -970,7 +970,7 @@ namespace Bridge.Contract
                 var typeDef = explicitInterfaceMember.DeclaringTypeDefinition;
                 var type = explicitInterfaceMember.DeclaringType;
 
-                return typeDef != null && !Helpers.IsIgnoreGeneric(typeDef) && type != null && type.TypeArguments.Count > 0 && type.TypeArguments.Any(p => p.Kind == TypeKind.TypeParameter);
+                return typeDef != null && !Helpers.IsIgnoreGeneric(typeDef) && type != null && type.TypeArguments.Count > 0 && type.TypeArguments.Any(Helpers.HasTypeParameters);
             }
 
             return true;
