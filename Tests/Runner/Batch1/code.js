@@ -11359,21 +11359,25 @@
             var o = JSON.parse("{ \"i\": 3, \"s\": \"test\" }");
             Bridge.Test.Assert.areEqual(o.i, 3);
             Bridge.Test.Assert.areEqual(o.s, "test");
+            Bridge.Test.Assert.true$1(Bridge.isPlainObject(o), "IsPlainObject");
         },
         genericParseWorks: function () {
             var o = Bridge.merge(Bridge.createInstance(Object), JSON.parse("{ \"i\": 3, \"s\": \"test\" }"));
             Bridge.Test.Assert.areEqual(o.i, 3);
             Bridge.Test.Assert.areEqual(o.s, "test");
+            Bridge.Test.Assert.true$1(Bridge.isPlainObject(o), "IsPlainObject");
         },
         nonGenericParseWithCallbackWorks: function () {
             var o = JSON.parse("{ \"i\": 3, \"s\": \"test\" }", $_.Bridge.ClientTest.JsonTests.f1);
             Bridge.Test.Assert.areEqual(o.i, 100);
             Bridge.Test.Assert.areEqual(o.s, "test");
+            Bridge.Test.Assert.true$1(Bridge.isPlainObject(o), "IsPlainObject");
         },
         genericParseWithCallbackWorks: function () {
             var o = Bridge.merge(Bridge.createInstance(Object), JSON.parse("{ \"i\": 3, \"s\": \"test\" }", $_.Bridge.ClientTest.JsonTests.f1));
             Bridge.Test.Assert.areEqual(o.i, 100);
             Bridge.Test.Assert.areEqual(o.s, "test");
+            Bridge.Test.Assert.true$1(Bridge.isPlainObject(o), "IsPlainObject");
         },
         stringifyWorks: function () {
             Bridge.Test.Assert.areEqual(JSON.stringify({ i: 3 }), "{\"i\":3}");

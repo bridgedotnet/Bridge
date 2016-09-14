@@ -22,12 +22,18 @@ namespace Bridge.ClientTest
             public string s;
         }
 
+#pragma warning disable CS0626 // Method, operator, or accessor is marked external and has no attributes on it
+        [Template("Bridge.isPlainObject({o})")]
+        public static extern bool IsPlainObject(object o);
+#pragma warning restore CS0626 // Method, operator, or accessor is marked external and has no attributes on it
+
         [Test]
         public void NonGenericParseWorks()
         {
             var o = (TestClass2)JSON.Parse("{ \"i\": 3, \"s\": \"test\" }");
             Assert.AreEqual(o.i, 3);
             Assert.AreEqual(o.s, "test");
+            Assert.True(IsPlainObject(o), "IsPlainObject");
         }
 
         [Test]
@@ -36,6 +42,7 @@ namespace Bridge.ClientTest
             var o = JSON.Parse<TestClass2>("{ \"i\": 3, \"s\": \"test\" }");
             Assert.AreEqual(o.i, 3);
             Assert.AreEqual(o.s, "test");
+            Assert.True(IsPlainObject(o), "IsPlainObject");
         }
 
         [Test]
@@ -44,6 +51,7 @@ namespace Bridge.ClientTest
             var o = (TestClass2)JSON.Parse("{ \"i\": 3, \"s\": \"test\" }", (s, x) => { if (s == "i") return 100; return x; });
             Assert.AreEqual(o.i, 100);
             Assert.AreEqual(o.s, "test");
+            Assert.True(IsPlainObject(o), "IsPlainObject");
         }
 
         [Test]
@@ -52,6 +60,7 @@ namespace Bridge.ClientTest
             var o = JSON.Parse<TestClass2>("{ \"i\": 3, \"s\": \"test\" }", (s, x) => { if (s == "i") return 100; return x; });
             Assert.AreEqual(o.i, 100);
             Assert.AreEqual(o.s, "test");
+            Assert.True(IsPlainObject(o), "IsPlainObject");
         }
 
         [Test]
