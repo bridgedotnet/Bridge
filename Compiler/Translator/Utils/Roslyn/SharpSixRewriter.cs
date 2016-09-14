@@ -367,9 +367,22 @@ namespace Bridge.Translator
         public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax node)
         {
             var symbol = semanticModel.GetSymbolInfo(node).Symbol;
+
+            var parent = node.Parent;
+            while (parent != null && !(parent is ClassDeclarationSyntax))
+            {
+                parent = parent.Parent;
+            }
+
+            ITypeSymbol thisType = null;
+            if (parent is ClassDeclarationSyntax)
+            {
+                thisType = this.semanticModel.GetDeclaredSymbol(parent) as ITypeSymbol;
+            }
+
             node = (IdentifierNameSyntax)base.VisitIdentifierName(node);
 
-            if (symbol != null && symbol.IsStatic && symbol.ContainingType != null && (symbol is IMethodSymbol || symbol is IPropertySymbol || symbol is IFieldSymbol || symbol is IEventSymbol) && !(node.Parent is MemberAccessExpressionSyntax))
+            if (symbol != null && symbol.IsStatic && symbol.ContainingType != null && thisType != null && !thisType.InheritsFromOrEquals(symbol.ContainingType) && (symbol is IMethodSymbol || symbol is IPropertySymbol || symbol is IFieldSymbol || symbol is IEventSymbol) && !(node.Parent is MemberAccessExpressionSyntax))
             {
                 if (symbol is IMethodSymbol && ((IMethodSymbol) symbol).IsGenericMethod)
                 {
@@ -386,9 +399,22 @@ namespace Bridge.Translator
         public override SyntaxNode VisitMemberAccessExpression(MemberAccessExpressionSyntax node)
         {
             var symbol = semanticModel.GetSymbolInfo(node.Expression).Symbol;
+
+            var parent = node.Parent;
+            while (parent != null && !(parent is ClassDeclarationSyntax))
+            {
+                parent = parent.Parent;
+            }
+
+            ITypeSymbol thisType = null;
+            if (parent is ClassDeclarationSyntax)
+            {
+                thisType = this.semanticModel.GetDeclaredSymbol(parent) as ITypeSymbol;
+            }
+
             node = (MemberAccessExpressionSyntax)base.VisitMemberAccessExpression(node);
 
-            if (node.Expression is IdentifierNameSyntax && symbol != null && symbol.IsStatic && symbol.ContainingType != null && (symbol is IMethodSymbol || symbol is IPropertySymbol || symbol is IFieldSymbol || symbol is IEventSymbol))
+            if (node.Expression is IdentifierNameSyntax && symbol != null && symbol.IsStatic && symbol.ContainingType != null && thisType != null && !thisType.InheritsFromOrEquals(symbol.ContainingType) && (symbol is IMethodSymbol || symbol is IPropertySymbol || symbol is IFieldSymbol || symbol is IEventSymbol))
             {
                 return SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.FullyQualifiedName(), node.GetTrailingTrivia())), node.OperatorToken, node.Name);
             }
