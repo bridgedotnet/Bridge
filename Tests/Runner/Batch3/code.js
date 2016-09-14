@@ -6914,6 +6914,8 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
+
+
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6943,7 +6945,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                }; /// Async method lacks 'await' operators and will run synchronously
+                                };
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -8846,6 +8848,38 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1804.Struct3();
             s.field = this.field;
             return s;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1812", {
+        testDoubleConversion: function () {
+            var a = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1812._Object.op_Implicit(1);
+            a = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1812._Object.op_Addition(a, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1812._Object.op_Implicit(1));
+            Bridge.Test.Assert.areEqual(2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1812._Object.op_Implicit$1(a));
+            Bridge.Test.Assert.areEqual(2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1812._Object.op_Implicit$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1812._Object.identity(Bridge.identity(a, (a = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1812._Object.op_Addition(a, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1812._Object.op_Implicit(1)))))));
+            Bridge.Test.Assert.areEqual(4, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1812._Object.op_Implicit$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1812._Object.identity(((a = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1812._Object.op_Addition(a, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1812._Object.op_Implicit(1)))))));
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1812._Object", {
+        statics: {
+            identity: function (o) {
+                return o;
+            },
+            op_Implicit: function (d) {
+                return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1812._Object(d);
+            },
+            op_Implicit$1: function (d) {
+                return d.value;
+            },
+            op_Addition: function (left, right) {
+                return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1812._Object(((left.value + right.value) | 0));
+            }
+        },
+        value: 0,
+        ctor: function (value) {
+            this.$initialize();
+            this.value = value;
         }
     });
 
