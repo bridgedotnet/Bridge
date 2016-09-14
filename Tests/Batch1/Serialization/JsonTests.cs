@@ -39,6 +39,23 @@ namespace Bridge.ClientTest
             }
         }
 
+        [ObjectLiteral(ObjectCreateMode.Constructor)]
+        class TestClass4
+        {
+            public int i;
+            public string s;
+
+            public int Inc()
+            {
+                return ++i;
+            }
+
+            public static int Inc(int i)
+            {
+                return ++i;
+            }
+        }
+
 #pragma warning disable CS0626 // Method, operator, or accessor is marked external and has no attributes on it
         [Template("Bridge.isPlainObject({o})")]
         public static extern bool IsPlainObject(object o);
@@ -125,6 +142,50 @@ namespace Bridge.ClientTest
         }
 
         [Test]
+        public void NonGenericParseWorks4()
+        {
+            var o = (TestClass4)JSON.Parse("{ \"i\": 3, \"s\": \"test\" }");
+            Assert.AreEqual(3, o.i);
+            Assert.AreEqual("test", o.s);
+            Assert.AreEqual(4, o.Inc());
+            Assert.AreEqual(11, TestClass4.Inc(10));
+            Assert.True(IsPlainObject(o), "IsPlainObject");
+        }
+
+        [Test]
+        public void GenericParseWorks4()
+        {
+            var o = JSON.Parse<TestClass4>("{ \"i\": 3, \"s\": \"test\" }");
+            Assert.AreEqual(3, o.i);
+            Assert.AreEqual("test", o.s);
+            Assert.AreEqual(4, o.Inc());
+            Assert.AreEqual(11, TestClass4.Inc(10));
+            Assert.True(IsPlainObject(o), "IsPlainObject");
+        }
+
+        [Test]
+        public void NonGenericParseWithCallbackWorks4()
+        {
+            var o = (TestClass4)JSON.Parse("{ \"i\": 3, \"s\": \"test\" }", (s, x) => { if (s == "i") return 100; return x; });
+            Assert.AreEqual(100, o.i);
+            Assert.AreEqual("test", o.s);
+            Assert.AreEqual(101, o.Inc());
+            Assert.AreEqual(11, TestClass4.Inc(10));
+            Assert.True(IsPlainObject(o), "IsPlainObject");
+        }
+
+        [Test]
+        public void GenericParseWithCallbackWorks4()
+        {
+            var o = JSON.Parse<TestClass4>("{ \"i\": 3, \"s\": \"test\" }", (s, x) => { if (s == "i") return 100; return x; });
+            Assert.AreEqual(100, o.i);
+            Assert.AreEqual("test", o.s);
+            Assert.AreEqual(101, o.Inc());
+            Assert.AreEqual(11, TestClass4.Inc(10));
+            Assert.True(IsPlainObject(o), "IsPlainObject");
+        }
+
+        [Test]
         public void StringifyWorks()
         {
             Assert.AreEqual("{\"i\":3}", JSON.Stringify(new TestClass1 { i = 3 }));
@@ -200,6 +261,42 @@ namespace Bridge.ClientTest
         public void StringifyWithCallbackAndIndentTextWorks3()
         {
             Assert.AreEqual("{\n    \"i\": 3\n}", JSON.Stringify(new TestClass3 { i = 3, s = "test" }, (key, value) => key == "s" ? Script.Undefined : value, "    "));
+        }
+
+        [Test]
+        public void StringifyWithSerializableMembersArrayWorks4()
+        {
+            Assert.AreEqual("{\"i\":3}", JSON.Stringify(new TestClass4 { i = 3, s = "test" }, new[] { "i" }));
+        }
+
+        [Test]
+        public void StringifyWithSerializableMembersArrayAndIntentCountWorks4()
+        {
+            Assert.AreEqual("{\n    \"i\": 3\n}", JSON.Stringify(new TestClass4 { i = 3, s = "test" }, new[] { "i" }, 4));
+        }
+
+        [Test]
+        public void StringifyWithSerializableMembersArrayAndIntentTextWorks4()
+        {
+            Assert.AreEqual("{\n    \"i\": 3\n}", JSON.Stringify(new TestClass4 { i = 3, s = "test" }, new[] { "i" }, "    "));
+        }
+
+        [Test]
+        public void StringifyWithCallbackWorks4()
+        {
+            Assert.AreEqual("{\"i\":3}", JSON.Stringify(new TestClass4 { i = 3, s = "test" }, (key, value) => key == "s" ? Script.Undefined : value));
+        }
+
+        [Test]
+        public void StringifyWithCallbackAndIndentCountWorks4()
+        {
+            Assert.AreEqual("{\n    \"i\": 3\n}", JSON.Stringify(new TestClass4 { i = 3, s = "test" }, (key, value) => key == "s" ? Script.Undefined : value, 4));
+        }
+
+        [Test]
+        public void StringifyWithCallbackAndIndentTextWorks4()
+        {
+            Assert.AreEqual("{\n    \"i\": 3\n}", JSON.Stringify(new TestClass4 { i = 3, s = "test" }, (key, value) => key == "s" ? Script.Undefined : value, "    "));
         }
     }
 }
