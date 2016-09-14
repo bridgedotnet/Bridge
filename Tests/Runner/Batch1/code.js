@@ -11399,7 +11399,7 @@
             var o = JSON.parse("{ \"i\": 3, \"s\": \"test\" }", $_.Bridge.ClientTest.JsonTests.f1);
             Bridge.Test.Assert.areEqual(100, o.i);
             Bridge.Test.Assert.areEqual("test", o.s);
-            Bridge.Test.Assert.areEqual(4, Bridge.ClientTest.JsonTests.TestClass3.prototype.inc.call(o));
+            Bridge.Test.Assert.areEqual(101, Bridge.ClientTest.JsonTests.TestClass3.prototype.inc.call(o));
             Bridge.Test.Assert.areEqual(11, Bridge.ClientTest.JsonTests.TestClass3.inc(10));
             Bridge.Test.Assert.true$1(Bridge.isPlainObject(o), "IsPlainObject");
         },
@@ -11407,7 +11407,7 @@
             var o = Bridge.merge(Bridge.createInstance(Bridge.ClientTest.JsonTests.TestClass3), JSON.parse("{ \"i\": 3, \"s\": \"test\" }", $_.Bridge.ClientTest.JsonTests.f1));
             Bridge.Test.Assert.areEqual(100, o.i);
             Bridge.Test.Assert.areEqual("test", o.s);
-            Bridge.Test.Assert.areEqual(4, Bridge.ClientTest.JsonTests.TestClass3.prototype.inc.call(o));
+            Bridge.Test.Assert.areEqual(101, Bridge.ClientTest.JsonTests.TestClass3.prototype.inc.call(o));
             Bridge.Test.Assert.areEqual(11, Bridge.ClientTest.JsonTests.TestClass3.inc(10));
             Bridge.Test.Assert.true$1(Bridge.isPlainObject(o), "IsPlainObject");
         },
