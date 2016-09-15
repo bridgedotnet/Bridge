@@ -337,7 +337,7 @@ namespace Bridge.Translator
             if (this.Emitter.TempVariables.Count > 0)
             {
                 var newLine = this.Emitter.IsNewLine;
-                string temp = this.Emitter.Output.ToString(pos, this.Emitter.Output.Length - pos);
+                var temp = this.Emitter.Output.ToString(pos, this.Emitter.Output.Length - pos);
                 this.Emitter.Output.Length = pos;
 
                 this.Emitter.IsNewLine = true;
@@ -364,6 +364,25 @@ namespace Bridge.Translator
 
                 this.Emitter.Output.Append(temp);
                 this.Emitter.IsNewLine = newLine;
+            }
+        }
+
+        protected virtual void SimpleEmitTempVars()
+        {
+            if (this.Emitter.TempVariables.Count > 0)
+            {
+                this.WriteVar(true);
+
+                foreach (var localVar in this.Emitter.TempVariables)
+                {
+                    this.EnsureComma(false);
+                    this.Write(localVar.Key);
+                    this.Emitter.Comma = true;
+                }
+
+                this.Emitter.Comma = false;
+                this.WriteSemiColon();
+                this.WriteNewLine();
             }
         }
     }

@@ -144,6 +144,13 @@ namespace Bridge.Translator
                     this.WriteCloseParentheses();
                     this.WriteSpace();
                     this.BeginBlock();
+
+                    if (this.Emitter.TempVariables != null)
+                    {
+                        this.SimpleEmitTempVars();
+                        this.Emitter.TempVariables = new Dictionary<string, bool>();
+                    }
+
                     foreach (var fn in injectors)
                     {
                         this.Write(fn);
@@ -230,6 +237,12 @@ namespace Bridge.Translator
                 this.WriteCloseParentheses();
                 this.WriteSpace();
                 this.BeginBlock();
+
+                if (this.Emitter.TempVariables != null)
+                {
+                    this.SimpleEmitTempVars();
+                    this.Emitter.TempVariables = new Dictionary<string, bool>();
+                }
 
                 foreach (var fn in injectors)
                 {

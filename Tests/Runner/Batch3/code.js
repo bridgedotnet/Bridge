@@ -6907,8 +6907,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6938,7 +6936,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -9006,6 +9004,34 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.Xxx();
             s.field = this.field;
             return s;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1832", {
+        testInitWithTempVars: function () {
+            Bridge.Test.Assert.areEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1832.IncTest.id);
+            var inst = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1832.IncTest();
+            Bridge.Test.Assert.areEqual(2, inst.id_instance);
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1832.IncTest", {
+        statics: {
+            id_counter: 0,
+            id: 0,
+            config: {
+                init: function () {
+                    var $t;
+                    this.id = (($t = (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1832.IncTest.id_counter + 1) | 0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1832.IncTest.id_counter = $t, $t));
+                }
+            }
+        },
+        id_instance: 0,
+        config: {
+            init: function () {
+                var $t;
+                this.id_instance = (($t = (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1832.IncTest.id_counter + 1) | 0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1832.IncTest.id_counter = $t, $t));
+            }
         }
     });
 
