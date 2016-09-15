@@ -6907,8 +6907,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6938,7 +6936,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -9007,6 +9005,21 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             s.field = this.field;
             return s;
         }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1834", {
+        statics: {
+            go: function (TValues, routeDetails) {
+                return routeDetails.Bridge$ClientTest$Batch3$BridgeIssues$Bridge1834$ITest1$1$toRoute(routeDetails);
+            }
+        },
+        testIgnoreGenericInterface: function () {
+            Bridge.Test.Assert.areEqual("Test1<TValues>", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1834.go(String, new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1834.Test1$1(String))()));
+        }
+    });
+
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1834.ITest1$1", {
+        $kind: "interface"
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
@@ -16993,6 +17006,18 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.IClass$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.IInterface$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.TT$1(T))],
         $kind: "interface"
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1834.Test1$1", function (TValues) { return {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1834.ITest1$1],
+        config: {
+            alias: [
+            "toRoute", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1834$ITest1$1$toRoute"
+            ]
+        },
+        toRoute: function (ifMatched) {
+            return "Test1<TValues>";
+        }
     }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240B", {
