@@ -200,6 +200,8 @@
                 return 0;
             } else if (type === String) {
                 return '';
+            } if (type && type.prototype && type.prototype.$literal) {
+                return type.ctor();
             } else {
                 return new type();
             }
@@ -546,11 +548,12 @@
                 return new System.UInt64(from);
             }
 
-            if (to instanceof Boolean ||
-                to instanceof Number ||
-                to instanceof String ||
-                to instanceof Function ||
-                to instanceof Date ||
+            if (to instanceof Boolean || Bridge.isBoolean(to) ||
+                to instanceof Number || Bridge.isNumber(to) ||
+                to instanceof String || Bridge.isString(to) ||
+                to instanceof Function || Bridge.isFunction(to) ||
+                to instanceof Date || Bridge.isDate(to) ||
+                Bridge.isNumber(to) ||
                 to instanceof System.Double ||
                 to instanceof System.Single ||
                 to instanceof System.Byte ||
@@ -2444,12 +2447,19 @@
                 cls = prop.hasOwnProperty("ctor") && prop.ctor;
 
             if (!cls) {
-                Class = function () {
-                    this.$initialize();
-                    if (Class.$base) {
-                        Class.$base.ctor.call(this);
-                    }
-                };
+                if (prop.$literal) {
+                    Class = function() {
+                        return {};
+                    };
+                } else {
+                    Class = function () {
+                        this.$initialize();
+                        if (Class.$base) {
+                            Class.$base.ctor.call(this);
+                        }
+                    };
+                }
+                
                 prop.ctor = Class;
             } else {
                 Class = cls;

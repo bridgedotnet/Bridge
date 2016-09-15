@@ -298,7 +298,7 @@ namespace Bridge.Contract
 
             if (NullableType.IsNullable(type))
             {
-                return BridgeTypes.ToJsName(NullableType.GetUnderlyingType(type), emitter);
+                return BridgeTypes.ToJsName(NullableType.GetUnderlyingType(type), emitter, asDefinition, excludens, isAlias);
             }
 
             if (type.Kind == TypeKind.Anonymous)

@@ -65,9 +65,6 @@
   <ItemGroup>
     <Content Include="App_Readme\Bridge.NET\README.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir).nuget\NuGet.targets" Condition="Exists('$(SolutionDir).nuget\NuGet.targets')" />
   <PropertyGroup Condition="'$(OS)' != 'Unix'">

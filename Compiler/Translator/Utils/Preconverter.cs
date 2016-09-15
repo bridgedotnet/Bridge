@@ -41,11 +41,20 @@ namespace Bridge.Translator
                 unaryOperatorExpression.Operator == UnaryOperatorType.Decrement ||
                 unaryOperatorExpression.Operator == UnaryOperatorType.PostDecrement)
             {
-                var rr = (OperatorResolveResult)this.Resolver.ResolveNode(unaryOperatorExpression, null);
+                var rr = this.Resolver.ResolveNode(unaryOperatorExpression, null);
 
-                if (!Helpers.IsFloatType(rr.Type, this.Resolver) && !Helpers.Is64Type(rr.Type, this.Resolver))
+                if (rr is ErrorResolveResult)
                 {
                     this.Found = true;
+                }
+                else
+                {
+                    var orr = rr as OperatorResolveResult;
+
+                    if (orr != null && !Helpers.IsFloatType(orr.Type, this.Resolver) && !Helpers.Is64Type(orr.Type, this.Resolver))
+                    {
+                        this.Found = true;
+                    }
                 }
             }
 
@@ -289,48 +298,84 @@ namespace Bridge.Translator
                 unaryOperatorExpression.Operator == UnaryOperatorType.Decrement ||
                 unaryOperatorExpression.Operator == UnaryOperatorType.PostDecrement)
             {
-                var rr = (OperatorResolveResult)this.Resolver.ResolveNode(unaryOperatorExpression, null);
-                if (Helpers.IsFloatType(rr.Type, this.Resolver) || Helpers.Is64Type(rr.Type, this.Resolver))
-                {
-                    return base.VisitUnaryOperatorExpression(unaryOperatorExpression);
-                }
+                var rr = this.Resolver.ResolveNode(unaryOperatorExpression, null);
 
-                UnaryOperatorExpression clonUnaryOperatorExpression = (UnaryOperatorExpression)base.VisitUnaryOperatorExpression(unaryOperatorExpression);
-                if (clonUnaryOperatorExpression == null)
+                if (rr is ErrorResolveResult)
                 {
-                    clonUnaryOperatorExpression = (UnaryOperatorExpression)unaryOperatorExpression.Clone();
-                }
-
-                bool isPost = clonUnaryOperatorExpression.Operator == UnaryOperatorType.PostDecrement ||
-                              clonUnaryOperatorExpression.Operator == UnaryOperatorType.PostIncrement;
-
-                var isStatement = unaryOperatorExpression.Parent is ExpressionStatement;
-                var isIncr = clonUnaryOperatorExpression.Operator == UnaryOperatorType.Increment || clonUnaryOperatorExpression.Operator == UnaryOperatorType.PostIncrement;
-                AssignmentExpression ae;
-
-                if (rr.UserDefinedOperatorMethod != null)
-                {
-                    ae = new AssignmentExpression(clonUnaryOperatorExpression.Expression.Clone(), clonUnaryOperatorExpression);
-                }
-                else
-                {
-                    ae = new AssignmentExpression(clonUnaryOperatorExpression.Expression.Clone(),
-                             new BinaryOperatorExpression(clonUnaryOperatorExpression.Expression.Clone(), isIncr ? BinaryOperatorType.Add : BinaryOperatorType.Subtract, new PrimitiveExpression(1)));
-                }
-                    
-
-                if (isPost && !isStatement)
-                {
-                    return new InvocationExpression(new MemberReferenceExpression(new MemberReferenceExpression(new IdentifierExpression("Bridge"), "Script"), "Identity"), clonUnaryOperatorExpression.Expression.Clone(), ae);
-                }
-                else
-                {
-                    if (isStatement)
+                    UnaryOperatorExpression clonUnaryOperatorExpression = (UnaryOperatorExpression)base.VisitUnaryOperatorExpression(unaryOperatorExpression);
+                    if (clonUnaryOperatorExpression == null)
                     {
-                        return ae;
+                        clonUnaryOperatorExpression = (UnaryOperatorExpression)unaryOperatorExpression.Clone();
                     }
 
-                    return new ParenthesizedExpression(ae);
+                    bool isPost = clonUnaryOperatorExpression.Operator == UnaryOperatorType.PostDecrement ||
+                                  clonUnaryOperatorExpression.Operator == UnaryOperatorType.PostIncrement;
+
+                    var isStatement = unaryOperatorExpression.Parent is ExpressionStatement;
+                    var isIncr = clonUnaryOperatorExpression.Operator == UnaryOperatorType.Increment || clonUnaryOperatorExpression.Operator == UnaryOperatorType.PostIncrement;
+                    AssignmentExpression ae;
+
+                    ae = new AssignmentExpression(clonUnaryOperatorExpression.Expression.Clone(), new BinaryOperatorExpression(clonUnaryOperatorExpression.Expression.Clone(), isIncr ? BinaryOperatorType.Add : BinaryOperatorType.Subtract, new PrimitiveExpression(1)));
+
+                    if (isPost && !isStatement)
+                    {
+                        return new InvocationExpression(new MemberReferenceExpression(new MemberReferenceExpression(new IdentifierExpression("Bridge"), "Script"), "Identity"), clonUnaryOperatorExpression.Expression.Clone(), ae);
+                    }
+                    else
+                    {
+                        if (isStatement)
+                        {
+                            return ae;
+                        }
+
+                        return new ParenthesizedExpression(ae);
+                    }
+                }
+                else
+                {
+                    var orr = (OperatorResolveResult)rr;
+
+                    if (Helpers.IsFloatType(orr.Type, this.Resolver) || Helpers.Is64Type(orr.Type, this.Resolver))
+                    {
+                        return base.VisitUnaryOperatorExpression(unaryOperatorExpression);
+                    }
+
+                    UnaryOperatorExpression clonUnaryOperatorExpression = (UnaryOperatorExpression)base.VisitUnaryOperatorExpression(unaryOperatorExpression);
+                    if (clonUnaryOperatorExpression == null)
+                    {
+                        clonUnaryOperatorExpression = (UnaryOperatorExpression)unaryOperatorExpression.Clone();
+                    }
+
+                    bool isPost = clonUnaryOperatorExpression.Operator == UnaryOperatorType.PostDecrement ||
+                                  clonUnaryOperatorExpression.Operator == UnaryOperatorType.PostIncrement;
+
+                    var isStatement = unaryOperatorExpression.Parent is ExpressionStatement;
+                    var isIncr = clonUnaryOperatorExpression.Operator == UnaryOperatorType.Increment || clonUnaryOperatorExpression.Operator == UnaryOperatorType.PostIncrement;
+                    AssignmentExpression ae;
+
+                    if (orr.UserDefinedOperatorMethod != null)
+                    {
+                        ae = new AssignmentExpression(clonUnaryOperatorExpression.Expression.Clone(), clonUnaryOperatorExpression);
+                    }
+                    else
+                    {
+                        ae = new AssignmentExpression(clonUnaryOperatorExpression.Expression.Clone(),
+                                 new BinaryOperatorExpression(clonUnaryOperatorExpression.Expression.Clone(), isIncr ? BinaryOperatorType.Add : BinaryOperatorType.Subtract, new PrimitiveExpression(1)));
+                    }
+
+                    if (isPost && !isStatement)
+                    {
+                        return new InvocationExpression(new MemberReferenceExpression(new MemberReferenceExpression(new IdentifierExpression("Bridge"), "Script"), "Identity"), clonUnaryOperatorExpression.Expression.Clone(), ae);
+                    }
+                    else
+                    {
+                        if (isStatement)
+                        {
+                            return ae;
+                        }
+
+                        return new ParenthesizedExpression(ae);
+                    }
                 }
             }
 

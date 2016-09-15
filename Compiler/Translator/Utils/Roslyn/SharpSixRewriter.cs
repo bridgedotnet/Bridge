@@ -92,27 +92,10 @@ namespace Bridge.Translator
             }
         }
 
-        private bool IsAnonymous(ITypeSymbol type)
-        {
-            if (type.IsAnonymousType)
-            {
-                return true;
-            }
-
-            var namedType = type as INamedTypeSymbol;
-            if (namedType != null && namedType.IsGenericType)
-            {
-                return namedType.TypeArguments.Any(this.IsAnonymous);
-            }
-
-            return false;
-        }
-
         private static bool IsExpandedForm(SemanticModel semanticModel, InvocationExpressionSyntax node, IMethodSymbol method)
         {
             var parameters = method.Parameters;
             var arguments = node.ArgumentList.Arguments;
-            
 
             ExpressionSyntax target = null;
             if (method.ReducedFrom != null)
@@ -147,7 +130,7 @@ namespace Bridge.Translator
         public override SyntaxNode VisitArgument(ArgumentSyntax node)
         {
             var ti = this.semanticModel.GetTypeInfo(node.Expression);
-            
+
             ITypeSymbol type = null;
             IMethodSymbol method = null;
             IParameterSymbol parameter = null;
@@ -208,14 +191,14 @@ namespace Bridge.Translator
                     }
                 }
             }
-
+            var isParam = parameter != null && !SyntaxHelper.IsAnonymous(parameter.Type);
+            var parent = isParam && parameter.IsParams ? (InvocationExpressionSyntax) node.Parent.Parent : null;
             node = (ArgumentSyntax)base.VisitArgument(node);
 
-            if (parameter != null && !this.IsAnonymous(parameter.Type))
+            if (isParam)
             {
                 var pType = parameter.Type;
-                if (parameter.IsParams &&
-                    IsExpandedForm(this.semanticModel, (InvocationExpressionSyntax) node.Parent.Parent, method))
+                if (parameter.IsParams && SharpSixRewriter.IsExpandedForm(this.semanticModel, parent, method))
                 {
                     pType = ((IArrayTypeSymbol)parameter.Type).ElementType;
                 }
@@ -256,11 +239,11 @@ namespace Bridge.Translator
             }
             else
             {
-                if (method != null && method.IsGenericMethod && !method.TypeArguments.Any(this.IsAnonymous))
+                if (method != null && method.IsGenericMethod && !method.TypeArguments.Any(SyntaxHelper.IsAnonymous))
                 {
                     var expr = node.Expression;
                     var ma = expr as MemberAccessExpressionSyntax;
-                    
+
                     if (expr is IdentifierNameSyntax)
                     {
                         var name = (IdentifierNameSyntax) expr;

@@ -11357,44 +11357,160 @@
     Bridge.define("Bridge.ClientTest.JsonTests", {
         nonGenericParseWorks: function () {
             var o = JSON.parse("{ \"i\": 3, \"s\": \"test\" }");
-            Bridge.Test.Assert.areEqual(o.i, 3);
-            Bridge.Test.Assert.areEqual(o.s, "test");
+            Bridge.Test.Assert.areEqual(3, o.i);
+            Bridge.Test.Assert.areEqual("test", o.s);
+            Bridge.Test.Assert.true$1(Bridge.isPlainObject(o), "IsPlainObject");
         },
         genericParseWorks: function () {
-            var o = Bridge.merge(new Bridge.ClientTest.JsonTests.TestClass2(), JSON.parse("{ \"i\": 3, \"s\": \"test\" }"));
-            Bridge.Test.Assert.areEqual(o.i, 3);
-            Bridge.Test.Assert.areEqual(o.s, "test");
+            var o = Bridge.merge(Bridge.createInstance(Object), JSON.parse("{ \"i\": 3, \"s\": \"test\" }"));
+            Bridge.Test.Assert.areEqual(3, o.i);
+            Bridge.Test.Assert.areEqual("test", o.s);
+            Bridge.Test.Assert.true$1(Bridge.isPlainObject(o), "IsPlainObject");
         },
         nonGenericParseWithCallbackWorks: function () {
             var o = JSON.parse("{ \"i\": 3, \"s\": \"test\" }", $_.Bridge.ClientTest.JsonTests.f1);
-            Bridge.Test.Assert.areEqual(o.i, 100);
-            Bridge.Test.Assert.areEqual(o.s, "test");
+            Bridge.Test.Assert.areEqual(100, o.i);
+            Bridge.Test.Assert.areEqual("test", o.s);
+            Bridge.Test.Assert.true$1(Bridge.isPlainObject(o), "IsPlainObject");
         },
         genericParseWithCallbackWorks: function () {
-            var o = Bridge.merge(new Bridge.ClientTest.JsonTests.TestClass2(), JSON.parse("{ \"i\": 3, \"s\": \"test\" }", $_.Bridge.ClientTest.JsonTests.f1));
-            Bridge.Test.Assert.areEqual(o.i, 100);
-            Bridge.Test.Assert.areEqual(o.s, "test");
+            var o = Bridge.merge(Bridge.createInstance(Object), JSON.parse("{ \"i\": 3, \"s\": \"test\" }", $_.Bridge.ClientTest.JsonTests.f1));
+            Bridge.Test.Assert.areEqual(100, o.i);
+            Bridge.Test.Assert.areEqual("test", o.s);
+            Bridge.Test.Assert.true$1(Bridge.isPlainObject(o), "IsPlainObject");
+        },
+        nonGenericParseWorks3: function () {
+            var o = JSON.parse("{ \"i\": 3, \"s\": \"test\" }");
+            Bridge.Test.Assert.areEqual(3, o.i);
+            Bridge.Test.Assert.areEqual("test", o.s);
+            Bridge.Test.Assert.areEqual(4, Bridge.ClientTest.JsonTests.TestClass3.prototype.inc.call(o));
+            Bridge.Test.Assert.areEqual(11, Bridge.ClientTest.JsonTests.TestClass3.inc(10));
+            Bridge.Test.Assert.true$1(Bridge.isPlainObject(o), "IsPlainObject");
+        },
+        genericParseWorks3: function () {
+            var o = Bridge.merge(Bridge.createInstance(Bridge.ClientTest.JsonTests.TestClass3), JSON.parse("{ \"i\": 3, \"s\": \"test\" }"));
+            Bridge.Test.Assert.areEqual(3, o.i);
+            Bridge.Test.Assert.areEqual("test", o.s);
+            Bridge.Test.Assert.areEqual(4, Bridge.ClientTest.JsonTests.TestClass3.prototype.inc.call(o));
+            Bridge.Test.Assert.areEqual(11, Bridge.ClientTest.JsonTests.TestClass3.inc(10));
+            Bridge.Test.Assert.true$1(Bridge.isPlainObject(o), "IsPlainObject");
+        },
+        nonGenericParseWithCallbackWorks3: function () {
+            var o = JSON.parse("{ \"i\": 3, \"s\": \"test\" }", $_.Bridge.ClientTest.JsonTests.f1);
+            Bridge.Test.Assert.areEqual(100, o.i);
+            Bridge.Test.Assert.areEqual("test", o.s);
+            Bridge.Test.Assert.areEqual(101, Bridge.ClientTest.JsonTests.TestClass3.prototype.inc.call(o));
+            Bridge.Test.Assert.areEqual(11, Bridge.ClientTest.JsonTests.TestClass3.inc(10));
+            Bridge.Test.Assert.true$1(Bridge.isPlainObject(o), "IsPlainObject");
+        },
+        genericParseWithCallbackWorks3: function () {
+            var o = Bridge.merge(Bridge.createInstance(Bridge.ClientTest.JsonTests.TestClass3), JSON.parse("{ \"i\": 3, \"s\": \"test\" }", $_.Bridge.ClientTest.JsonTests.f1));
+            Bridge.Test.Assert.areEqual(100, o.i);
+            Bridge.Test.Assert.areEqual("test", o.s);
+            Bridge.Test.Assert.areEqual(101, Bridge.ClientTest.JsonTests.TestClass3.prototype.inc.call(o));
+            Bridge.Test.Assert.areEqual(11, Bridge.ClientTest.JsonTests.TestClass3.inc(10));
+            Bridge.Test.Assert.true$1(Bridge.isPlainObject(o), "IsPlainObject");
+        },
+        nonGenericParseWorks4: function () {
+            var o = JSON.parse("{ \"i\": 3, \"s\": \"test\" }");
+            Bridge.Test.Assert.areEqual(3, o.i);
+            Bridge.Test.Assert.areEqual("test", o.s);
+            Bridge.Test.Assert.areEqual(4, Bridge.ClientTest.JsonTests.TestClass4.prototype.inc.call(o));
+            Bridge.Test.Assert.areEqual(11, Bridge.ClientTest.JsonTests.TestClass4.inc(10));
+            Bridge.Test.Assert.true$1(Bridge.isPlainObject(o), "IsPlainObject");
+        },
+        genericParseWorks4: function () {
+            var o = Bridge.merge(Bridge.createInstance(Bridge.ClientTest.JsonTests.TestClass4), JSON.parse("{ \"i\": 3, \"s\": \"test\" }"));
+            Bridge.Test.Assert.areEqual(3, o.i);
+            Bridge.Test.Assert.areEqual("test", o.s);
+            Bridge.Test.Assert.areEqual(4, Bridge.ClientTest.JsonTests.TestClass4.prototype.inc.call(o));
+            Bridge.Test.Assert.areEqual(11, Bridge.ClientTest.JsonTests.TestClass4.inc(10));
+            Bridge.Test.Assert.true$1(Bridge.isPlainObject(o), "IsPlainObject");
+        },
+        nonGenericParseWithCallbackWorks4: function () {
+            var o = JSON.parse("{ \"i\": 3, \"s\": \"test\" }", $_.Bridge.ClientTest.JsonTests.f1);
+            Bridge.Test.Assert.areEqual(100, o.i);
+            Bridge.Test.Assert.areEqual("test", o.s);
+            Bridge.Test.Assert.areEqual(101, Bridge.ClientTest.JsonTests.TestClass4.prototype.inc.call(o));
+            Bridge.Test.Assert.areEqual(11, Bridge.ClientTest.JsonTests.TestClass4.inc(10));
+            Bridge.Test.Assert.true$1(Bridge.isPlainObject(o), "IsPlainObject");
+        },
+        genericParseWithCallbackWorks4: function () {
+            var o = Bridge.merge(Bridge.createInstance(Bridge.ClientTest.JsonTests.TestClass4), JSON.parse("{ \"i\": 3, \"s\": \"test\" }", $_.Bridge.ClientTest.JsonTests.f1));
+            Bridge.Test.Assert.areEqual(100, o.i);
+            Bridge.Test.Assert.areEqual("test", o.s);
+            Bridge.Test.Assert.areEqual(101, Bridge.ClientTest.JsonTests.TestClass4.prototype.inc.call(o));
+            Bridge.Test.Assert.areEqual(11, Bridge.ClientTest.JsonTests.TestClass4.inc(10));
+            Bridge.Test.Assert.true$1(Bridge.isPlainObject(o), "IsPlainObject");
         },
         stringifyWorks: function () {
-            Bridge.Test.Assert.areEqual(JSON.stringify({ i: 3 }), "{\"i\":3}");
+            Bridge.Test.Assert.areEqual("{\"i\":3}", JSON.stringify({ i: 3 }));
         },
         stringifyWithSerializableMembersArrayWorks: function () {
-            Bridge.Test.Assert.areEqual(JSON.stringify({ i: 3, s: "test" }, ["i"]), "{\"i\":3}");
+            Bridge.Test.Assert.areEqual("{\"i\":3}", JSON.stringify({ i: 3, s: "test" }, ["i"]));
         },
         stringifyWithSerializableMembersArrayAndIntentCountWorks: function () {
-            Bridge.Test.Assert.areEqual(JSON.stringify({ i: 3, s: "test" }, ["i"], 4), "{\n    \"i\": 3\n}");
+            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify({ i: 3, s: "test" }, ["i"], 4));
         },
         stringifyWithSerializableMembersArrayAndIntentTextWorks: function () {
-            Bridge.Test.Assert.areEqual(JSON.stringify({ i: 3, s: "test" }, ["i"], "    "), "{\n    \"i\": 3\n}");
+            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify({ i: 3, s: "test" }, ["i"], "    "));
         },
         stringifyWithCallbackWorks: function () {
-            Bridge.Test.Assert.areEqual(JSON.stringify({ i: 3, s: "test" }, $_.Bridge.ClientTest.JsonTests.f2), "{\"i\":3}");
+            Bridge.Test.Assert.areEqual("{\"i\":3}", JSON.stringify({ i: 3, s: "test" }, $_.Bridge.ClientTest.JsonTests.f2));
         },
         stringifyWithCallbackAndIndentCountWorks: function () {
-            Bridge.Test.Assert.areEqual(JSON.stringify({ i: 3, s: "test" }, $_.Bridge.ClientTest.JsonTests.f2, 4), "{\n    \"i\": 3\n}");
+            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify({ i: 3, s: "test" }, $_.Bridge.ClientTest.JsonTests.f2, 4));
         },
         stringifyWithCallbackAndIndentTextWorks: function () {
-            Bridge.Test.Assert.areEqual(JSON.stringify({ i: 3, s: "test" }, $_.Bridge.ClientTest.JsonTests.f2, "    "), "{\n    \"i\": 3\n}");
+            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify({ i: 3, s: "test" }, $_.Bridge.ClientTest.JsonTests.f2, "    "));
+        },
+        stringifyWithSerializableMembersArrayWorks3: function () {
+            Bridge.Test.Assert.areEqual("{\"i\":3}", JSON.stringify({ i: 3, s: "test" }, ["i"]));
+        },
+        stringifyWithSerializableMembersArrayAndIntentCountWorks3: function () {
+            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify({ i: 3, s: "test" }, ["i"], 4));
+        },
+        stringifyWithSerializableMembersArrayAndIntentTextWorks3: function () {
+            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify({ i: 3, s: "test" }, ["i"], "    "));
+        },
+        stringifyWithCallbackWorks3: function () {
+            Bridge.Test.Assert.areEqual("{\"i\":3}", JSON.stringify({ i: 3, s: "test" }, $_.Bridge.ClientTest.JsonTests.f2));
+        },
+        stringifyWithCallbackAndIndentCountWorks3: function () {
+            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify({ i: 3, s: "test" }, $_.Bridge.ClientTest.JsonTests.f2, 4));
+        },
+        stringifyWithCallbackAndIndentTextWorks3: function () {
+            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify({ i: 3, s: "test" }, $_.Bridge.ClientTest.JsonTests.f2, "    "));
+        },
+        stringifyWithSerializableMembersArrayWorks4: function () {
+            Bridge.Test.Assert.areEqual("{\"i\":3}", JSON.stringify(Bridge.merge(Bridge.ClientTest.JsonTests.TestClass4.ctor(), {
+                i: 3, s: "test"
+            } ), ["i"]));
+        },
+        stringifyWithSerializableMembersArrayAndIntentCountWorks4: function () {
+            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify(Bridge.merge(Bridge.ClientTest.JsonTests.TestClass4.ctor(), {
+                i: 3, s: "test"
+            } ), ["i"], 4));
+        },
+        stringifyWithSerializableMembersArrayAndIntentTextWorks4: function () {
+            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify(Bridge.merge(Bridge.ClientTest.JsonTests.TestClass4.ctor(), {
+                i: 3, s: "test"
+            } ), ["i"], "    "));
+        },
+        stringifyWithCallbackWorks4: function () {
+            Bridge.Test.Assert.areEqual("{\"i\":3}", JSON.stringify(Bridge.merge(Bridge.ClientTest.JsonTests.TestClass4.ctor(), {
+                i: 3, s: "test"
+            } ), $_.Bridge.ClientTest.JsonTests.f2));
+        },
+        stringifyWithCallbackAndIndentCountWorks4: function () {
+            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify(Bridge.merge(Bridge.ClientTest.JsonTests.TestClass4.ctor(), {
+                i: 3, s: "test"
+            } ), $_.Bridge.ClientTest.JsonTests.f2, 4));
+        },
+        stringifyWithCallbackAndIndentTextWorks4: function () {
+            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify(Bridge.merge(Bridge.ClientTest.JsonTests.TestClass4.ctor(), {
+                i: 3, s: "test"
+            } ), $_.Bridge.ClientTest.JsonTests.f2, "    "));
         }
     });
 
@@ -11412,14 +11528,36 @@
         }
     });
 
-    Bridge.define("Bridge.ClientTest.JsonTests.TestClass1", {
+    Bridge.define("Bridge.ClientTest.JsonTests.TestClass3", {
         $literal: true,
-
+        statics: {
+            inc: function (i) {
+                return ((i = (i + 1) | 0));
+            }
+        },
+        inc: function () {
+            return ((this.i = (this.i + 1) | 0));
+        }
     });
 
-    Bridge.define("Bridge.ClientTest.JsonTests.TestClass2", {
+    Bridge.define("Bridge.ClientTest.JsonTests.TestClass4", {
         $literal: true,
-
+        statics: {
+            inc: function (i) {
+                return ((i = (i + 1) | 0));
+            }
+        },
+        ctor: function () {
+            var $this = {};
+            (function(){
+                this.i = 0;
+                this.s = null;
+            }).call($this);
+            return $this;
+        },
+        inc: function () {
+            return ((this.i = (this.i + 1) | 0));
+        }
     });
 
     Bridge.define("Bridge.ClientTest.Linq.AnagramEqualityComparer", {
@@ -16484,19 +16622,6 @@
         }
     });
 
-    Bridge.define("Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config2", {
-        $literal: true,
-        ctor: function () {
-            var $this = {};
-            (function(){
-                this.val1 = 2;
-                this.val2 = 0;
-                this.val2 = 12;
-            }).call($this);
-            return $this;
-        }
-    });
-
     Bridge.define("Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config3", {
         $literal: true,
         ctor: function () {
@@ -16510,19 +16635,6 @@
         }
     });
 
-    Bridge.define("Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config4", {
-        $literal: true,
-        ctor: function () {
-            var $this = {};
-            (function(){
-                this.val1 = 4;
-                this.val2 = 0;
-                this.val2 = 14;
-            }).call($this);
-            return $this;
-        }
-    });
-
     Bridge.define("Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config5", {
         $literal: true,
         ctor: function () {
@@ -16531,19 +16643,6 @@
                 this.val1 = 5;
                 this.val2 = 0;
                 this.val2 = 15;
-            }).call($this);
-            return $this;
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config6", {
-        $literal: true,
-        ctor: function () {
-            var $this = {};
-            (function(){
-                this.val1 = 6;
-                this.val2 = 0;
-                this.val2 = 16;
             }).call($this);
             return $this;
         }
@@ -16599,32 +16698,6 @@
         }
     });
 
-    Bridge.define("Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config3", {
-        $literal: true,
-        ctor: function () {
-            var $this = {};
-            (function(){
-                this.val1 = 3;
-                this.val2 = 0;
-                this.val2 = 13;
-            }).call($this);
-            return $this;
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config4", {
-        $literal: true,
-        ctor: function () {
-            var $this = {};
-            (function(){
-                this.val1 = 4;
-                this.val2 = 104;
-                this.val2 = 14;
-            }).call($this);
-            return $this;
-        }
-    });
-
     Bridge.define("Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests", {
         test: function () {
             var config1 = {  };
@@ -16647,26 +16720,6 @@
             Bridge.Test.Assert.null$1(config4.val1, "config4 Val1");
             Bridge.Test.Assert.null$1(config4.val2, "config4 Val2");
         }
-    });
-
-    Bridge.define("Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config1", {
-        $literal: true,
-
-    });
-
-    Bridge.define("Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config2", {
-        $literal: true,
-
-    });
-
-    Bridge.define("Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config3", {
-        $literal: true,
-
-    });
-
-    Bridge.define("Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config4", {
-        $literal: true,
-
     });
 
     Bridge.define("Bridge.ClientTest.PropertyAccessorTests", {
@@ -20010,7 +20063,7 @@
         },
         castOperatorForSerializableTypeWithoutTypeCheckCodeAlwaysSucceedsGeneric: function () {
             var o = {  };
-            var b = this.cast(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.OL, o);
+            var b = this.cast(Object, o);
             Bridge.Test.Assert.true(Bridge.referenceEquals(o, b));
         },
         typeCheckForSubTypeOfGenericType: function () {
@@ -20083,10 +20136,6 @@
         $kind: "interface",
         $variance: [0,1]
     }; });
-
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.OL", {
-        $literal: true
-    });
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests", {
         fullNamePropertyReturnsTheNameWithTheNamespace: function () {

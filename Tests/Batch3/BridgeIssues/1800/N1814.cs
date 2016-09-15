@@ -29,7 +29,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge1814
     {
         [Test]
-        public void TestCase()
+        public void TestNamespaceConflictResolution()
         {
             Assert.AreEqual(".png", achievements.content.ContentAchievements.Method());
         }

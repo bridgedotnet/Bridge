@@ -383,9 +383,26 @@ namespace Bridge.Translator
             }
         }
 
+        public static bool IsAnonymous(ITypeSymbol type)
+        {
+            if (type.IsAnonymousType)
+            {
+                return true;
+            }
+
+            var namedType = type as INamedTypeSymbol;
+            if (namedType != null && namedType.IsGenericType)
+            {
+                return namedType.TypeArguments.Any(SyntaxHelper.IsAnonymous);
+            }
+
+            return false;
+        }
+
+
         private static string AppendTypeArguments(string localName, IReadOnlyCollection<ITypeSymbol> typeArguments)
         {
-            if (typeArguments.Count > 0)
+            if (typeArguments.Count > 0 && !typeArguments.Any(SyntaxHelper.IsAnonymous))
             {
                 bool first = true;
 
