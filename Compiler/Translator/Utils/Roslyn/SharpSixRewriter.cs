@@ -91,23 +91,7 @@ namespace Bridge.Translator
                 return null;
             }
         }
-
-        private bool IsAnonymous(ITypeSymbol type)
-        {
-            if (type.IsAnonymousType)
-            {
-                return true;
-            }
-
-            var namedType = type as INamedTypeSymbol;
-            if (namedType != null && namedType.IsGenericType)
-            {
-                return namedType.TypeArguments.Any(this.IsAnonymous);
-            }
-
-            return false;
-        }
-
+        
         private static bool IsExpandedForm(SemanticModel semanticModel, InvocationExpressionSyntax node, IMethodSymbol method)
         {
             var parameters = method.Parameters;
@@ -208,7 +192,7 @@ namespace Bridge.Translator
                     }
                 }
             }
-            var isParam = parameter != null && !this.IsAnonymous(parameter.Type);
+            var isParam = parameter != null && !SyntaxHelper.IsAnonymous(parameter.Type);
             var parent = isParam && parameter.IsParams ? (InvocationExpressionSyntax) node.Parent.Parent : null;
             node = (ArgumentSyntax)base.VisitArgument(node);
 
@@ -256,7 +240,7 @@ namespace Bridge.Translator
             }
             else
             {
-                if (method != null && method.IsGenericMethod && !method.TypeArguments.Any(this.IsAnonymous))
+                if (method != null && method.IsGenericMethod && !method.TypeArguments.Any(SyntaxHelper.IsAnonymous))
                 {
                     var expr = node.Expression;
                     var ma = expr as MemberAccessExpressionSyntax;
@@ -371,7 +355,7 @@ namespace Bridge.Translator
 
             if (symbol != null && symbol.IsStatic && symbol.ContainingType != null && (symbol is IMethodSymbol || symbol is IPropertySymbol || symbol is IFieldSymbol || symbol is IEventSymbol) && !(node.Parent is MemberAccessExpressionSyntax))
             {
-                if (symbol is IMethodSymbol && ((IMethodSymbol) symbol).IsGenericMethod)
+                if (symbol is IMethodSymbol && ((IMethodSymbol) symbol).IsGenericMethod && !((IMethodSymbol)symbol).TypeArguments.Any(SyntaxHelper.IsAnonymous))
                 {
                     var genericName = SyntaxHelper.GenerateGenericName(node.Identifier, ((IMethodSymbol)symbol).TypeArguments);
                     return genericName.WithLeadingTrivia(node.GetLeadingTrivia()).WithTrailingTrivia(node.GetTrailingTrivia());
