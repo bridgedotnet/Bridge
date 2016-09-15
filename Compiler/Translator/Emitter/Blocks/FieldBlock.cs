@@ -58,6 +58,10 @@ namespace Bridge.Translator
 
         protected override void DoEmit()
         {
+            if (this.Emitter.TempVariables != null)
+            {
+                this.Emitter.TempVariables = new Dictionary<string, bool>();
+            }
             this.EmitFields(this.StaticBlock ? this.TypeInfo.StaticConfig : this.TypeInfo.InstanceConfig);
         }
 

@@ -1208,6 +1208,16 @@ namespace Bridge.Contract
             return at != null && at.Dimensions == 1 && at.ElementType.IsKnownType(KnownTypeCode.String);    // The single parameter must be a one-dimensional array of strings.
         }
 
+        public static bool IsTypeParameterType(IType type)
+        {
+            var typeDef = type.GetDefinition();
+            if (typeDef != null && Helpers.IsIgnoreGeneric(typeDef))
+            {
+                return false;
+            }
+            return type.TypeArguments.Any(Helpers.HasTypeParameters);
+        }
+
         public static bool HasTypeParameters(IType type)
         {
             if (type.Kind == TypeKind.TypeParameter)
@@ -1219,6 +1229,12 @@ namespace Bridge.Contract
             {
                 foreach (var typeArgument in type.TypeArguments)
                 {
+                    var typeDef = typeArgument.GetDefinition();
+                    if (typeDef != null && Helpers.IsIgnoreGeneric(typeDef))
+                    {
+                        continue;
+                    }
+
                     if (Helpers.HasTypeParameters(typeArgument))
                     {
                         return true;

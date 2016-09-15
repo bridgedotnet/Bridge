@@ -367,7 +367,7 @@ namespace Bridge.Translator
 
             if (inline == null && member != null && member.Member.DeclaringTypeDefinition != null &&
                 member.Member.DeclaringTypeDefinition.Kind == TypeKind.Interface &&
-                (this.Emitter.Validator.IsExternalInterface(member.Member.DeclaringTypeDefinition)  || member.Member.DeclaringType.TypeArguments.Any(Helpers.HasTypeParameters)))
+                (this.Emitter.Validator.IsExternalInterface(member.Member.DeclaringTypeDefinition)  || Helpers.IsTypeParameterType(member.Member.DeclaringType)))
             {
                 isInterfaceMember = true;
             }
@@ -867,7 +867,11 @@ namespace Bridge.Translator
                         }
                     }
 
-                    if (isFieldProperty)
+                    if (member.Member is IProperty && targetrr != null && targetrr.Type.GetDefinition() != null && this.Emitter.Validator.IsObjectLiteral(targetrr.Type.GetDefinition()) &&  !this.Emitter.Validator.IsObjectLiteral(member.Member.DeclaringTypeDefinition))
+                    {
+                        this.Write(this.Emitter.GetEntityName(member.Member));
+                    }
+                    else if (isFieldProperty)
                     {
                         if (isInterfaceMember)
                         {
