@@ -867,7 +867,11 @@ namespace Bridge.Translator
                         }
                     }
 
-                    if (isFieldProperty)
+                    if (member.Member is IProperty && targetrr != null && targetrr.Type.GetDefinition() != null && this.Emitter.Validator.IsObjectLiteral(targetrr.Type.GetDefinition()) &&  !this.Emitter.Validator.IsObjectLiteral(member.Member.DeclaringTypeDefinition))
+                    {
+                        this.Write(this.Emitter.GetEntityName(member.Member));
+                    }
+                    else if (isFieldProperty)
                     {
                         if (isInterfaceMember)
                         {
