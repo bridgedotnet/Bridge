@@ -6907,8 +6907,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6938,7 +6936,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -9009,6 +9007,44 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1835", {
+        statics: {
+            go: function (TValues, message) {
+                return message;
+            }
+        },
+        testGenericMethodWithAnonTypeArg: function () {
+            Bridge.Test.Assert.notNull(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1835.go(Object, new $_.$AnonymousType$13(1)));
+        }
+    });
+
+    Bridge.define("$AnonymousType$13", $_, {
+        $kind: "anonymous",
+        ctor: function (test) {
+            this.test = test;
+        },
+        getTest : function () {
+            return this.test;
+        },
+        equals: function (o) {
+            if (!Bridge.is(o, $_.$AnonymousType$13)) {
+                return false;
+            }
+            return Bridge.equals(this.test, o.test);
+        },
+        getHashCode: function () {
+            var hash = 17;
+            hash = hash * 23 + 7175910326;
+            hash = hash * 23 + (this.test == null ? 0 : Bridge.getHashCode(this.test));
+            return hash;
+        },
+        toJSON: function () {
+            return {
+                test : this.test
+            };
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
@@ -9496,11 +9532,11 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge485", {
         statics: {
             testUseCase: function () {
-                var list = System.Linq.Enumerable.from([new $_.$AnonymousType$13("", "")]).skip(1).toList(Object);
-                list.add(new $_.$AnonymousType$13("Ruth", "Babe"));
-                list.add(new $_.$AnonymousType$13("Johnson", "Walter"));
-                list.add(new $_.$AnonymousType$13("Cobb", "Ty"));
-                list.add(new $_.$AnonymousType$13("Schmidt", "Mike"));
+                var list = System.Linq.Enumerable.from([new $_.$AnonymousType$14("", "")]).skip(1).toList(Object);
+                list.add(new $_.$AnonymousType$14("Ruth", "Babe"));
+                list.add(new $_.$AnonymousType$14("Johnson", "Walter"));
+                list.add(new $_.$AnonymousType$14("Cobb", "Ty"));
+                list.add(new $_.$AnonymousType$14("Schmidt", "Mike"));
 
                 var query = System.Linq.Enumerable.from(list).where($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge485.f1).select($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge485.f2);
 
@@ -9511,7 +9547,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
-    Bridge.define("$AnonymousType$13", $_, {
+    Bridge.define("$AnonymousType$14", $_, {
         $kind: "anonymous",
         ctor: function (lastName, firstName) {
             this.lastName = lastName;
@@ -9524,14 +9560,14 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             return this.firstName;
         },
         equals: function (o) {
-            if (!Bridge.is(o, $_.$AnonymousType$13)) {
+            if (!Bridge.is(o, $_.$AnonymousType$14)) {
                 return false;
             }
             return Bridge.equals(this.lastName, o.lastName) && Bridge.equals(this.firstName, o.firstName);
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 7175910326;
+            hash = hash * 23 + 7192687542;
             hash = hash * 23 + (this.lastName == null ? 0 : Bridge.getHashCode(this.lastName));
             hash = hash * 23 + (this.firstName == null ? 0 : Bridge.getHashCode(this.firstName));
             return hash;
@@ -9551,7 +9587,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             return p.lastName.length === 4;
         },
         f2: function (p) {
-            return new $_.$AnonymousType$13(p.lastName, p.firstName);
+            return new $_.$AnonymousType$14(p.lastName, p.firstName);
         }
     });
 
@@ -9874,7 +9910,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                     case 1: {
                                         $task1.getAwaitedResult();
                                         Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.count = (Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.count + 1) | 0;
-                                        $tcs.setResult(Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.count < 2 ? new $_.$AnonymousType$14() : null);
+                                        $tcs.setResult(Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.count < 2 ? new $_.$AnonymousType$15() : null);
                                         return;
                                     }
                                     default: {
@@ -9913,7 +9949,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                     case 1: {
                                         $task1.getAwaitedResult();
                                         Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.count = (Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.count + 1) | 0;
-                                        $tcs.setResult(Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.count < 3 ? new $_.$AnonymousType$14() : null);
+                                        $tcs.setResult(Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.count < 3 ? new $_.$AnonymousType$15() : null);
                                         return;
                                     }
                                     default: {
@@ -9933,24 +9969,24 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             },
             nextPage1: function () {
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.count = (Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.count + 1) | 0;
-                return Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.count < 4 ? new $_.$AnonymousType$14() : null;
+                return Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.count < 4 ? new $_.$AnonymousType$15() : null;
             }
         }
     });
 
-    Bridge.define("$AnonymousType$14", $_, {
+    Bridge.define("$AnonymousType$15", $_, {
         $kind: "anonymous",
         ctor: function () {
         },
         equals: function (o) {
-            if (!Bridge.is(o, $_.$AnonymousType$14)) {
+            if (!Bridge.is(o, $_.$AnonymousType$15)) {
                 return false;
             }
             return ;
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 7192687542;
+            hash = hash * 23 + 7209464758;
             return hash;
         },
         toJSON: function () {
@@ -13093,7 +13129,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 Bridge.Test.Assert.areEqual$1(3, Bridge.ClientTest.Batch3.BridgeIssues.Bridge722.M1((c1.setItem("path", 3), 3)), "Bridge722 M1 3");
                 Bridge.Test.Assert.areEqual$1(4, Bridge.ClientTest.Batch3.BridgeIssues.Bridge722.M1((asset1 = (c1.setItem("path", 4), 4))), "Bridge722 M1 4");
 
-                var c2 = new $_.$AnonymousType$14();
+                var c2 = new $_.$AnonymousType$15();
                 var asset2 = (c2.path = 5, 5);
                 Bridge.Test.Assert.areEqual$1(5, asset2, "Bridge722 asset2");
                 Bridge.Test.Assert.areEqual$1(5, c2.path, "Bridge722 c2");
@@ -13425,7 +13461,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             },
             testUseCase: function () {
                 var $t;
-                var o = new $_.$AnonymousType$14();
+                var o = new $_.$AnonymousType$15();
                 o;
                 {
                     var i = 555;
@@ -13449,7 +13485,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge782", {
         statics: {
             testUseCase: function () {
-                var o = new $_.$AnonymousType$14();
+                var o = new $_.$AnonymousType$15();
                 Bridge.Test.Assert.true$1(o.__foo == null, "Bridge782");
             }
         }
@@ -14652,7 +14688,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 case 0: {
                                     asyncComplete = Bridge.Test.Assert.async();
 
-                                    myvar = [new $_.$AnonymousType$15(1), new $_.$AnonymousType$15(2)];
+                                    myvar = [new $_.$AnonymousType$16(1), new $_.$AnonymousType$16(2)];
                                     sum = 0;
                                     $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge906.myfunc();
                                     $step = 1;
@@ -14709,7 +14745,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 case 0: {
                                     asyncComplete = Bridge.Test.Assert.async();
 
-                                    myvar = [new $_.$AnonymousType$15(-3), new $_.$AnonymousType$15(2)];
+                                    myvar = [new $_.$AnonymousType$16(-3), new $_.$AnonymousType$16(2)];
                                     sum = 0;
                                     $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge906.myfunc();
                                     $step = 1;
@@ -14754,7 +14790,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
-    Bridge.define("$AnonymousType$15", $_, {
+    Bridge.define("$AnonymousType$16", $_, {
         $kind: "anonymous",
         ctor: function (value) {
             this.value = value;
@@ -14763,14 +14799,14 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             return this.value;
         },
         equals: function (o) {
-            if (!Bridge.is(o, $_.$AnonymousType$15)) {
+            if (!Bridge.is(o, $_.$AnonymousType$16)) {
                 return false;
             }
             return Bridge.equals(this.value, o.value);
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 7209464758;
+            hash = hash * 23 + 7226241974;
             hash = hash * 23 + (this.value == null ? 0 : Bridge.getHashCode(this.value));
             return hash;
         },
@@ -15971,8 +16007,8 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 var b1 = System.Collections.Generic.EqualityComparer$1(Object).def.equals2(o11, o12);
                 Bridge.Test.Assert.false$1(b1, "EqualityComparer<object>.Default.Equals(o11, o12) works");
 
-                var o21 = new $_.$AnonymousType$16(7);
-                var o22 = new $_.$AnonymousType$16(7);
+                var o21 = new $_.$AnonymousType$17(7);
+                var o22 = new $_.$AnonymousType$17(7);
                 var b2 = System.Collections.Generic.EqualityComparer$1(Object).def.equals2(o21, o22);
                 Bridge.Test.Assert.true$1(b2, "EqualityComparer<object>.Default.Equals(o21, o22) works");
 
@@ -16449,7 +16485,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
-    Bridge.define("$AnonymousType$16", $_, {
+    Bridge.define("$AnonymousType$17", $_, {
         $kind: "anonymous",
         ctor: function (i) {
             this.i = i;
@@ -16458,14 +16494,14 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             return this.i;
         },
         equals: function (o) {
-            if (!Bridge.is(o, $_.$AnonymousType$16)) {
+            if (!Bridge.is(o, $_.$AnonymousType$17)) {
                 return false;
             }
             return Bridge.equals(this.i, o.i);
         },
         getHashCode: function () {
             var hash = 17;
-            hash = hash * 23 + 7226241974;
+            hash = hash * 23 + 7243019190;
             hash = hash * 23 + (this.i == null ? 0 : Bridge.getHashCode(this.i));
             return hash;
         },
