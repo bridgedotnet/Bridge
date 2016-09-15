@@ -241,7 +241,7 @@ namespace Bridge.Translator
 
         public override void VisitTypeOfExpression(TypeOfExpression typeOfExpression)
         {
-            typeOfExpression.Type.AcceptVisitor(this);
+            new TypeOfExpressionBlock(this, typeOfExpression).Emit();
         }
 
         public override void VisitComment(Comment comment)

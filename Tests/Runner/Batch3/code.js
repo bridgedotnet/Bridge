@@ -6907,8 +6907,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6938,7 +6936,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -9007,6 +9005,33 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             s.field = this.field;
             return s;
         }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1842", {
+        testTypeOfConversion: function () {
+            var t;
+            var $class = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1842.Class.op_Implicit(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1842);
+            t = $class;
+            Bridge.Test.Assert.true(Bridge.referenceEquals(Bridge.getType(t), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1842.Class));
+
+            $class = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1842.Class.op_Implicit(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1842);
+            t = $class;
+            Bridge.Test.Assert.true(Bridge.referenceEquals(Bridge.getType(t), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1842.Class));
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1842.Class", {
+        statics: {
+            op_Implicit: function (t) {
+                return Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1842.Class(), {
+                    type: t
+                } );
+            },
+            op_Implicit$1: function (t) {
+                return t.type;
+            }
+        },
+        type: null
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
