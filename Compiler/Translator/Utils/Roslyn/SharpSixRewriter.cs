@@ -192,7 +192,7 @@ namespace Bridge.Translator
                 }
             }
             var isParam = parameter != null && !SyntaxHelper.IsAnonymous(parameter.Type);
-            var parent = isParam && parameter.IsParams ? (InvocationExpressionSyntax) node.Parent.Parent : null;
+            var parent = isParam && parameter.IsParams ? (InvocationExpressionSyntax)node.Parent.Parent : null;
             node = (ArgumentSyntax)base.VisitArgument(node);
 
             if (isParam)
@@ -232,7 +232,7 @@ namespace Bridge.Translator
 
             node = (InvocationExpressionSyntax)base.VisitInvocationExpression(node);
             if (node.Expression is IdentifierNameSyntax &&
-                ((IdentifierNameSyntax) node.Expression).Identifier.Text == "nameof")
+                ((IdentifierNameSyntax)node.Expression).Identifier.Text == "nameof")
             {
                 string name = SyntaxHelper.GetSymbolName(node, semanticModel);
                 return SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(name));
@@ -246,7 +246,7 @@ namespace Bridge.Translator
 
                     if (expr is IdentifierNameSyntax)
                     {
-                        var name = (IdentifierNameSyntax) expr;
+                        var name = (IdentifierNameSyntax)expr;
                         var genericName = SyntaxHelper.GenerateGenericName(name.Identifier, method.TypeArguments);
                         genericName = genericName.WithLeadingTrivia(name.GetLeadingTrivia()).WithTrailingTrivia(name.GetTrailingTrivia());
                         node = node.WithExpression(genericName);
@@ -365,11 +365,21 @@ namespace Bridge.Translator
 
             node = (IdentifierNameSyntax)base.VisitIdentifierName(node);
 
-            if (symbol != null && symbol.IsStatic && symbol.ContainingType != null && thisType != null && !thisType.InheritsFromOrEquals(symbol.ContainingType) && (symbol is IMethodSymbol || symbol is IPropertySymbol || symbol is IFieldSymbol || symbol is IEventSymbol) && !(node.Parent is MemberAccessExpressionSyntax))
+            IMethodSymbol methodSymbol = null;
+
+            if (symbol != null && symbol.IsStatic && symbol.ContainingType != null
+                && thisType != null && !thisType.InheritsFromOrEquals(symbol.ContainingType)
+                && !(node.Parent is MemberAccessExpressionSyntax)
+                && (
+                    (methodSymbol = symbol as IMethodSymbol) != null
+                    || symbol is IPropertySymbol
+                    || symbol is IFieldSymbol
+                    || symbol is IEventSymbol)
+                )
             {
-                if (symbol is IMethodSymbol && ((IMethodSymbol) symbol).IsGenericMethod)
+                if (methodSymbol != null && methodSymbol.IsGenericMethod && !methodSymbol.TypeArguments.Any(SyntaxHelper.IsAnonymous))
                 {
-                    var genericName = SyntaxHelper.GenerateGenericName(node.Identifier, ((IMethodSymbol)symbol).TypeArguments);
+                    var genericName = SyntaxHelper.GenerateGenericName(node.Identifier, methodSymbol.TypeArguments);
                     return genericName.WithLeadingTrivia(node.GetLeadingTrivia()).WithTrailingTrivia(node.GetTrailingTrivia());
                 }
 
@@ -561,7 +571,10 @@ namespace Bridge.Translator
             return newNode;
         }
 
-        public bool IsExpressionOfT { get; set; }
+        public bool IsExpressionOfT
+        {
+            get; set;
+        }
         private int indexInstance;
 
         public override SyntaxNode VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
@@ -681,7 +694,7 @@ namespace Bridge.Translator
                             ArgumentSyntax[] arguments = null;
                             if (init.Kind() == SyntaxKind.ComplexElementInitializerExpression)
                             {
-                                var complexInit = (InitializerExpressionSyntax) init;
+                                var complexInit = (InitializerExpressionSyntax)init;
 
                                 arguments = new ArgumentSyntax[complexInit.Expressions.Count];
                                 for (int i = 0; i < complexInit.Expressions.Count; i++)
