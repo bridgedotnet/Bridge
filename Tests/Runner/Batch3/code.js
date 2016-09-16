@@ -955,7 +955,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 foo.bar = "1";
                 Bridge.Test.Assert.areEqual("1", foo.bar);
                 Bridge.Test.Assert.areEqual("1", foo.bar);
-                Bridge.Test.Assert.areEqual("1", car.bar);
+                Bridge.Test.Assert.areEqual("1", car[Bridge.geti(car, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1053$Car$bar", "bar")]);
                 Bridge.Test.Assert.areEqual("1", car.bar);
             }
         }
@@ -6913,8 +6913,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6944,7 +6942,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -9145,6 +9143,27 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             }
         },
         type: null
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1848", {
+        testExternalInterfaceProperty: function () {
+            window.Bridge1848_ITest = {
+                	getNewId: function () { return 123; },
+                    name: "editor"
+                };
+                window.Bridge1848_ITest2 = {
+                	Bridge1848_ITest$getNewId: function () { return 123; },
+                    Bridge1848_ITest$name: "editor"
+                };
+
+            var initialiser = window.Bridge1848_ITest;
+            Bridge.Test.Assert.areEqual(123, initialiser[Bridge.geti(initialiser, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1848$ITest$getNewId", "getNewId")]());
+            Bridge.Test.Assert.areEqual("editor", initialiser[Bridge.geti(initialiser, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1848$ITest$name", "name")]);
+
+            var initialiser2 = window.Bridge1848_ITest2;
+            Bridge.Test.Assert.areEqual(123, initialiser2.Bridge1848_ITest$getNewId());
+            Bridge.Test.Assert.areEqual("editor", initialiser2.Bridge1848_ITest$name);
+        }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {

@@ -875,11 +875,11 @@ namespace Bridge.Translator
                     {
                         if (isInterfaceMember)
                         {
-                            this.WriteInterfaceMember(interfaceTempVar ?? targetVar, member, false, JS.Funcs.Property.GET);
+                            this.WriteInterfaceMember(interfaceTempVar ?? targetVar, member, false);
                         }
                         else
                         {
-                            this.Write(Helpers.GetPropertyRef(member.Member, this.Emitter));
+                            this.Write(OverloadsCollection.Create(this.Emitter, member.Member).GetOverloadName(false));
                         }
                     }
                     else if (!this.Emitter.IsAssignment)

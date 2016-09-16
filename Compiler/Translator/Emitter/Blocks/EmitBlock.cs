@@ -239,6 +239,13 @@ namespace Bridge.Translator
                 this.Emitter.Translator.Plugins.BeforeTypeEmit(this.Emitter, type);
 
                 this.Emitter.Translator.EmitNode = type.TypeDeclaration;
+                var typeDef = type.Type.GetDefinition();
+
+                if (this.Emitter.Validator.IsExternalInterface(typeDef))
+                {
+                    this.Emitter.Translator.Plugins.AfterTypeEmit(this.Emitter, type);
+                    continue;
+                }
 
                 if (type.IsObjectLiteral)
                 {
@@ -246,7 +253,7 @@ namespace Bridge.Translator
 
                     var ignore = mode == 0 && !type.Type.GetMethods(null, GetMemberOptions.IgnoreInheritedMembers).Any(m => !m.IsConstructor && !m.IsAccessor);
 
-                    if (this.Emitter.Validator.IsIgnoreType(type.Type.GetDefinition()) || ignore)
+                    if (this.Emitter.Validator.IsIgnoreType(typeDef) || ignore)
                     {
                         this.Emitter.Translator.Plugins.AfterTypeEmit(this.Emitter, type);
                         continue;
