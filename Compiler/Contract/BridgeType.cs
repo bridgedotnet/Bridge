@@ -416,7 +416,7 @@ namespace Bridge.Contract
                         }
                     }
 
-                    if (isStr && !sb.ToString().EndsWith(")"))
+                    if (isStr && !sb.ToString().EndsWith(")") && !sb.ToString().EndsWith("\""))
                     {
                         sb.Append("\"");
                     }

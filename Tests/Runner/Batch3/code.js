@@ -6913,8 +6913,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6944,7 +6942,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -9146,6 +9144,30 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         type: null
     });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1850", {
+        testImplicitInterface: function () {
+            var l = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1850.LookupOptions$1(System.Int32))();
+            var i = l;
+            Bridge.Test.Assert.null(l.getEnumerator());
+            Bridge.Test.Assert.null(Bridge.getEnumerator(i, "$1", System.Collections.Generic.KeyValuePair$2(System.Int32,String)));
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1850.LookupOptions$1", function (T) { return {
+        inherits: [System.Collections.Generic.IEnumerable$1(System.Collections.Generic.KeyValuePair$2(T,String))],
+        config: {
+            alias: [
+            "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$Collections$Generic$KeyValuePair$2$" + Bridge.getTypeAlias(T) + "$String$getEnumerator"
+            ]
+        },
+        getEnumerator: function () {
+            return null;
+        },
+        System$Collections$IEnumerable$getEnumerator: function () {
+            return null;
+        }
+    }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
