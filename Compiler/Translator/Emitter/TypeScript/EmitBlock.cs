@@ -90,6 +90,11 @@ namespace Bridge.Translator.TypeScript
 
         private void TransformOutputs()
         {
+            if (this.Emitter.Outputs.Count == 0)
+            {
+                return;
+            }
+
             if (this.Emitter.AssemblyInfo.OutputBy == OutputBy.Project)
             {
                 var fileName = Path.GetFileNameWithoutExtension(this.Emitter.Outputs.First().Key) + ".d.ts";
