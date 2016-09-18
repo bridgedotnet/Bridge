@@ -6913,8 +6913,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6944,7 +6942,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -9146,6 +9144,81 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         type: null
     });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852", {
+        statics: {
+            doSomething: function (T, matcher, cls, cls1, aux1, aux2) {
+                var a = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852Test1$1.Aux1(String))();
+                var a1 = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852Test1$1.Aux2$1(String,System.Int32))();
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852Test1$1(String).test1Method();
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852Test1$1(String).test1Method2(String);
+
+                var c6 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852DispatcherMessageExtensions.Class1.Class2.Class3.Class4();
+                matcher.Bridge$ClientTest$Batch3$BridgeIssues$Bridge1852DispatcherMessageExtensions$IMatchDispatcherMessages$doSomething(T, null);
+                var c1 = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852Test1$1.Aux1(System.Int32))();
+                var c2 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852DispatcherMessageExtensions.Class1();
+                var c3 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852DispatcherMessageExtensions.Class1.Class2();
+                var c4 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852DispatcherMessageExtensions.Class1.Class2();
+                var c5 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852DispatcherMessageExtensions.Class1.Class2();
+
+                return 1;
+            }
+        },
+        testCase: function () {
+            Bridge.Test.Assert.areEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852.doSomething(System.Int32, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852.MatchDispatcherMessages(), null, null, null, null));
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852DispatcherMessageExtensions.IMatchDispatcherMessages", {
+        $kind: "interface"
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852DispatcherMessageExtensions", {
+        statics: {
+            cls1: null,
+            cls2: null,
+            cls3: null,
+            cls4: null,
+            cls5: null,
+            cls6: null,
+            cls7: null,
+            cls8: null
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852DispatcherMessageExtensions.Class1");
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852DispatcherMessageExtensions.Class1.Class2");
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852DispatcherMessageExtensions.Class1.Class2.Class3");
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852DispatcherMessageExtensions.Class1.Class2.Class3.Class4");
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852Test1$1", function (T) { return {
+        statics: {
+            test1Method: function () {
+            },
+            test1Method2: function (T1) {
+            }
+        },
+        field: null
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852Test1$1.Aux1", function (T) { return {
+
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852Test1$1.Aux1.Aux2$1", function (T, T1) { return {
+
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852Test1$1.Aux2$1", function (T, T1) { return {
+
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852Test1$1.Aux2$1.Aux1", function (T, T1) { return {
+
+    }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
@@ -17154,6 +17227,17 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             return "Test1<TValues>";
         }
     }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852.MatchDispatcherMessages", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852DispatcherMessageExtensions.IMatchDispatcherMessages],
+        config: {
+            alias: [
+            "doSomething", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1852DispatcherMessageExtensions$IMatchDispatcherMessages$doSomething"
+            ]
+        },
+        doSomething: function (T, name) {
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240B", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A],

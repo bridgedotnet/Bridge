@@ -3,9 +3,12 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Threading;
+using Microsoft.CodeAnalysis.Text;
 
 namespace Bridge.Translator
 {
@@ -324,7 +327,7 @@ namespace Bridge.Translator
             }
         }
 
-        public static string FullyQualifiedName(this ISymbol symbol)
+        public static string FullyQualifiedName(this ISymbol symbol, bool appenTypeArgs = true)
         {
             var at = symbol as IArrayTypeSymbol;
 
@@ -354,13 +357,16 @@ namespace Bridge.Translator
                 return localName;
             }
 
-            if (symbol is INamedTypeSymbol)
+            if (appenTypeArgs)
             {
-                localName = AppendTypeArguments(localName, ((INamedTypeSymbol)symbol).TypeArguments);
-            }
-            else if (symbol is IMethodSymbol)
-            {
-                localName = AppendTypeArguments(localName, ((IMethodSymbol)symbol).TypeArguments);
+                if (symbol is INamedTypeSymbol)
+                {
+                    localName = AppendTypeArguments(localName, ((INamedTypeSymbol)symbol).TypeArguments);
+                }
+                else if (symbol is IMethodSymbol)
+                {
+                    localName = AppendTypeArguments(localName, ((IMethodSymbol)symbol).TypeArguments);
+                }
             }
 
             if (symbol.ContainingType != null)

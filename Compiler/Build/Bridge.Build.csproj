@@ -94,6 +94,9 @@
       <Path>$(SolutionDir).build\specs\Bridge.Clean.nuspec</Path>
     </NuGetPackageSourcePath>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <Import Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " Project="$(SolutionDir).build\common\NuGet.Build.Package.targets" />
   <Target Name="CleanProjectNuGetOutput" BeforeTargets="Clean">
     <ItemGroup>
