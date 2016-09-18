@@ -442,72 +442,7 @@ namespace Bridge.Translator
             }
         }
 
-        private IMethod GetCastMethod(IType fromType, IType toType, out string template)
-        {
-            string inline = null;
-            var method = fromType.GetMethods().FirstOrDefault(m =>
-            {
-                if (m.IsOperator && (m.Name == "op_Explicit" || m.Name == "op_Implicit") &&
-                    m.Parameters.Count == 1 &&
-                    m.ReturnType.ReflectionName == toType.ReflectionName &&
-                    m.Parameters[0].Type.ReflectionName == fromType.ReflectionName
-                    )
-                {
-                    string tmpInline = this.Emitter.GetInline(m);
-
-                    if (!string.IsNullOrWhiteSpace(tmpInline))
-                    {
-                        inline = tmpInline;
-                        return true;
-                    }
-                }
-
-                return false;
-            });
-
-            if (method == null)
-            {
-                method = toType.GetMethods().FirstOrDefault(m =>
-                {
-                    if (m.IsOperator && (m.Name == "op_Explicit" || m.Name == "op_Implicit") &&
-                        m.Parameters.Count == 1 &&
-                        m.ReturnType.ReflectionName == toType.ReflectionName &&
-                        (m.Parameters[0].Type.ReflectionName == fromType.ReflectionName)
-                        )
-                    {
-                        string tmpInline = this.Emitter.GetInline(m);
-
-                        if (!string.IsNullOrWhiteSpace(tmpInline))
-                        {
-                            inline = tmpInline;
-                            return true;
-                        }
-                    }
-
-                    return false;
-                });
-            }
-
-            if (method == null && this.CastExpression != null)
-            {
-                var conversion = this.Emitter.Resolver.Resolver.GetConversion(this.CastExpression);
-
-                if (conversion.IsUserDefined)
-                {
-                    method = conversion.Method;
-
-                    string tmpInline = this.Emitter.GetInline(method);
-
-                    if (!string.IsNullOrWhiteSpace(tmpInline))
-                    {
-                        inline = tmpInline;
-                    }
-                }
-            }
-
-            template = inline;
-            return method;
-        }
+        
 
         protected virtual void EmitInlineCast(ResolveResult expressionrr, Expression expression, AstType astType, string castCode, bool isCastAttr, string method)
         {
@@ -575,6 +510,73 @@ namespace Bridge.Translator
             }
 
             this.Write(castCode);
+        }
+
+        public IMethod GetCastMethod(IType fromType, IType toType, out string template)
+        {
+            string inline = null;
+            var method = fromType.GetMethods().FirstOrDefault(m =>
+            {
+                if (m.IsOperator && (m.Name == "op_Explicit" || m.Name == "op_Implicit") &&
+                    m.Parameters.Count == 1 &&
+                    m.ReturnType.ReflectionName == toType.ReflectionName &&
+                    m.Parameters[0].Type.ReflectionName == fromType.ReflectionName
+                    )
+                {
+                    string tmpInline = this.Emitter.GetInline(m);
+
+                    if (!string.IsNullOrWhiteSpace(tmpInline))
+                    {
+                        inline = tmpInline;
+                        return true;
+                    }
+                }
+
+                return false;
+            });
+
+            if (method == null)
+            {
+                method = toType.GetMethods().FirstOrDefault(m =>
+                {
+                    if (m.IsOperator && (m.Name == "op_Explicit" || m.Name == "op_Implicit") &&
+                        m.Parameters.Count == 1 &&
+                        m.ReturnType.ReflectionName == toType.ReflectionName &&
+                        (m.Parameters[0].Type.ReflectionName == fromType.ReflectionName)
+                        )
+                    {
+                        string tmpInline = this.Emitter.GetInline(m);
+
+                        if (!string.IsNullOrWhiteSpace(tmpInline))
+                        {
+                            inline = tmpInline;
+                            return true;
+                        }
+                    }
+
+                    return false;
+                });
+            }
+
+            if (method == null && this.CastExpression != null)
+            {
+                var conversion = this.Emitter.Resolver.Resolver.GetConversion(this.CastExpression);
+
+                if (conversion.IsUserDefined)
+                {
+                    method = conversion.Method;
+
+                    string tmpInline = this.Emitter.GetInline(method);
+
+                    if (!string.IsNullOrWhiteSpace(tmpInline))
+                    {
+                        inline = tmpInline;
+                    }
+                }
+            }
+
+            template = inline;
+            return method;
         }
 
         public IMethod InlineMethod

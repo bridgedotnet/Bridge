@@ -6913,8 +6913,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6944,7 +6942,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -9145,6 +9143,30 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             }
         },
         type: null
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1846", {
+        testCase: function () {
+            var $t;
+            var arr = ["a", "b"];
+            var i = 0;
+            $t = Bridge.getEnumerator(arr);
+            while ($t.moveNext()) {
+                var o = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1846.Obj.op_Implicit($t.getCurrent());
+                Bridge.Test.Assert.areEqual(arr[Bridge.identity(i, (i = (i + 1) | 0))], o.s);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1846.Obj", {
+        statics: {
+            op_Implicit: function (str) {
+                return Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1846.Obj(), {
+                    s: str
+                } );
+            }
+        },
+        s: null
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1848", {
