@@ -13382,8 +13382,8 @@
                 Bridge.Test.Assert.areEqual$1((ne.constructor.params || [])[i1], argTypes[i1], System.String.concat(System.String.concat(title, " constructor parameter type "), i1));
             }
             if (checkReference) {
-                var ctor = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 1, 284, null, argTypes);
-                Bridge.Test.Assert.true$1(Bridge.referenceEquals(ctor, ne.constructor), System.String.concat(title, " constructor reference"));
+                var $ctor = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 1, 284, null, argTypes);
+                Bridge.Test.Assert.true$1(Bridge.referenceEquals($ctor, ne.constructor), System.String.concat(title, " constructor reference"));
             }
         },
         f9: function (expr, title) {
