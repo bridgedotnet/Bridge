@@ -59,13 +59,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             var reader = new UseReader<string>
             {
                 Reader = new SomeReader<string>("test"),
-                Reader1 = new SomeReader<string>("test")
+                Reader1 = new SomeReader<string>("test1")
             };
             var result = reader.Read();
             Assert.AreEqual("test", result);
 
             result = reader.Read1();
-            Assert.AreEqual("test", result);
+            Assert.AreEqual("test1", result);
         }
     }
 }
