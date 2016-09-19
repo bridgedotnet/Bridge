@@ -263,6 +263,19 @@
             }
         },
 
+        copyTo: function (obj, dest, index, T) {
+            var name;
+            if (Bridge.isArray(obj)) {
+                System.Array.copy(obj, 0, dest, dpos, obj.length);
+            } else if (Bridge.isFunction(obj.copyTo)) {
+                obj.copyTo(dest, index);
+            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo"])) {
+                return obj[name](dest, index);
+            } else {
+                throw new System.NotImplementedException("copyTo");
+            }
+        },
+
         indexOf: function (arr, item, startIndex, count, T) {
             var name;
             if (Bridge.isArray(arr)) {
