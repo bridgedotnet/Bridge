@@ -9217,7 +9217,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1847", {
-        testCase: function () {
+        testActivatorCreateInstanceCallProtectedConstructor: function () {
             var instance = Bridge.createInstance(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1847.CLS, [1]);
             Bridge.Test.Assert.areEqual("ok", instance.status);
         }

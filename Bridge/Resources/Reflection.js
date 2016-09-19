@@ -501,7 +501,7 @@
             return typeName ? Bridge.Reflection._getType(typeName, asm) : null;
         },
 
-        canAcceptNull: function(type) {
+        canAcceptNull: function (type) {
             if (type.$kind === "struct" ||
                 type === System.Decimal ||
                 type === System.Int64 ||
@@ -528,7 +528,7 @@
             if (!args || args.length === 0) {
                 return new constructor();
             }
-            
+
             if (constructor.$$initCtor && constructor.$kind !== "anonymous") {
                 var md = Bridge.getMetadata(constructor),
                     count = 0;
