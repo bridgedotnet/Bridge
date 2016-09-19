@@ -15,19 +15,19 @@
     <copyright>Copyright (c) 2008-2016, Object.NET, Inc. (http://object.net/). All rights reserved.</copyright>
     <tags>bridge bridge.net bridge js javascript C# csharp mobile ios asp.net aspnet mvc aspnetmvc web transpiler compiler object.net</tags>
     <dependencies>
-      <dependency id="Bridge.Min" version="15.0.0" />
-      <dependency id="Bridge.Html5" version="15.0.0" />
+      <dependency id="Bridge.Min" version="15.1.0" />
+      <dependency id="Bridge.Html5" version="15.1.0" />
     </dependencies>
     <frameworkAssemblies>
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="../../README.md" target="README.md"/>
-    <file src="../../LICENSE" target="LICENSE"/>
+    <file src="../../README.md" target="README.md" />
+    <file src="../../LICENSE" target="LICENSE" />
 
     <!--content-->
-    <file src="../../.build/files/bridge.json" target="content/Bridge/bridge.json"/>
-    <file src="../../.build/files/output_readme.txt" target="content/Bridge/output/readme.txt"/>
-    <file src="../../.build/files/demo.html.pp" target="content/Bridge/www/demo.html.pp"/>
+    <file src="../../.build/files/bridge.json" target="content/Bridge/bridge.json" />
+    <file src="../../.build/files/output_readme.txt" target="content/Bridge/output/readme.txt" />
+    <file src="../../.build/files/demo.html.pp" target="content/Bridge/www/demo.html.pp" />
   </files>
 </package>

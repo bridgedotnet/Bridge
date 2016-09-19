@@ -52,6 +52,10 @@ namespace System
 
         public readonly Type Constructor;
 
+#pragma warning disable 169
+        private readonly Type ctor;
+#pragma warning restore 169
+
         [Template("{this}")]
         public virtual extern dynamic ToDynamic();
 

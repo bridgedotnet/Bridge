@@ -20,7 +20,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 #pragma warning restore CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
 
         [Test]
-        public void TestCase()
+        public void TestContainsUseEquals()
         {
             Test t = new Test();
             List<Test> l = new List<Test> { t };
