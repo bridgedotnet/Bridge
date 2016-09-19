@@ -6913,8 +6913,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6944,7 +6942,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -9191,6 +9189,30 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             return null;
         }
     }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1853", {
+        testCase: function () {
+            var t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1853.Test();
+            var l = function (_o27) {
+                _o27.add(t);
+                return _o27;
+            }(new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1853.Test))());
+            Bridge.Test.Assert.false(l.contains(t));
+
+            var o = {  };
+            var l1 = function (_o28) {
+                _o28.add(o);
+                return _o28;
+            }(new (System.Collections.Generic.List$1(Object))());
+            Bridge.Test.Assert.true(l1.contains(o));
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1853.Test", {
+        equals: function (a) {
+            return false;
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
@@ -16662,30 +16684,30 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues", $_);
 
     Bridge.apply($_.Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues, {
-        f1: function (_o27) {
-            _o27.add(0);
-            _o27.add(1);
-            _o27.add(2);
-            _o27.add(3);
-            _o27.add(4);
-            return _o27;
-        },
-        f2: function (_o28) {
-            _o28.add(3, "b");
-            _o28.add(6, "z");
-            _o28.add(9, "x");
-            return _o28;
-        },
-        f3: function (i) {
-            return ((i * 2) | 0);
-        },
-        f4: function (_o29) {
+        f1: function (_o29) {
             _o29.add(0);
             _o29.add(1);
             _o29.add(2);
             _o29.add(3);
             _o29.add(4);
             return _o29;
+        },
+        f2: function (_o30) {
+            _o30.add(3, "b");
+            _o30.add(6, "z");
+            _o30.add(9, "x");
+            return _o30;
+        },
+        f3: function (i) {
+            return ((i * 2) | 0);
+        },
+        f4: function (_o31) {
+            _o31.add(0);
+            _o31.add(1);
+            _o31.add(2);
+            _o31.add(3);
+            _o31.add(4);
+            return _o31;
         }
     });
 

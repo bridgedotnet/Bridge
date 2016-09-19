@@ -10004,7 +10004,7 @@
                 for (i = startIndex; i < this.items.length; i++) {
                     el = this.items[i];
 
-                    if (el === item || System.Collections.Generic.EqualityComparer$1.$default.equals2(el, item)) {
+                    if (System.Collections.Generic.EqualityComparer$1.$default.equals2(el, item)) {
                         return i;
                     }
                 }
