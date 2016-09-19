@@ -416,9 +416,14 @@ namespace Bridge.Contract
                         }
                     }
 
-                    if (isStr && !sb.ToString().EndsWith(")"))
+                    if (isStr && sb.Length >= 1)
                     {
-                        sb.Append("\"");
+                        var sbEnd = sb.ToString(sb.Length - 1, 1);
+
+                        if (!sbEnd.EndsWith(")") && !sbEnd.EndsWith("\""))
+                        {
+                            sb.Append("\"");
+                        }
                     }
 
                     name = sb.ToString();

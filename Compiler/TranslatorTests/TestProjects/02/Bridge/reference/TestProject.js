@@ -1,7 +1,7 @@
 ﻿/*
- * @version   : 15.0.0 - Bridge.NET
+ * @version   : 15.1.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2016-09-12
+ * @date      : 2016-09-19
  * @copyright : Copyright 2008-2016 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE.
 */
@@ -419,7 +419,7 @@
         },
 
         getTypeAlias: function (obj) {
-            var name = Bridge.getTypeName(obj);
+            var name = obj.$$name || Bridge.getTypeName(obj);
             return name.replace(/[\.\(\)\,]/g, "$");
         },
 

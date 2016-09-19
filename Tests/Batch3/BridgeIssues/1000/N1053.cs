@@ -20,7 +20,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual("1", car["bar"]);
         }
 
-        [External]
+        [ExternalInterface]
         public interface Car
         {
             [FieldProperty]

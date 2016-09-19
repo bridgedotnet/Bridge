@@ -955,7 +955,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 foo.bar = "1";
                 Bridge.Test.Assert.areEqual("1", foo.bar);
                 Bridge.Test.Assert.areEqual("1", foo.bar);
-                Bridge.Test.Assert.areEqual("1", car.bar);
+                Bridge.Test.Assert.areEqual("1", car[Bridge.geti(car, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1053$Car$bar", "bar")]);
                 Bridge.Test.Assert.areEqual("1", car.bar);
             }
         }
@@ -9146,6 +9146,51 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         type: null
     });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1848", {
+        testExternalInterfaceProperty: function () {
+            window.Bridge1848_ITest = {
+                	getNewId: function () { return 123; },
+                    name: "editor"
+                };
+                window.Bridge1848_ITest2 = {
+                	Bridge1848_ITest$getNewId: function () { return 123; },
+                    Bridge1848_ITest$name: "editor"
+                };
+
+            var initialiser = window.Bridge1848_ITest;
+            Bridge.Test.Assert.areEqual(123, initialiser[Bridge.geti(initialiser, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1848$ITest$getNewId", "getNewId")]());
+            Bridge.Test.Assert.areEqual("editor", initialiser[Bridge.geti(initialiser, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1848$ITest$name", "name")]);
+
+            var initialiser2 = window.Bridge1848_ITest2;
+            Bridge.Test.Assert.areEqual(123, initialiser2.Bridge1848_ITest$getNewId());
+            Bridge.Test.Assert.areEqual("editor", initialiser2.Bridge1848_ITest$name);
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1850", {
+        testImplicitInterface: function () {
+            var l = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1850.LookupOptions$1(System.Int32))();
+            var i = l;
+            Bridge.Test.Assert.null(l.getEnumerator());
+            Bridge.Test.Assert.null(Bridge.getEnumerator(i, "$1", System.Collections.Generic.KeyValuePair$2(System.Int32,String)));
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1850.LookupOptions$1", function (T) { return {
+        inherits: [System.Collections.Generic.IEnumerable$1(System.Collections.Generic.KeyValuePair$2(T,String))],
+        config: {
+            alias: [
+            "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$Collections$Generic$KeyValuePair$2$" + Bridge.getTypeAlias(T) + "$String$getEnumerator"
+            ]
+        },
+        getEnumerator: function () {
+            return null;
+        },
+        System$Collections$IEnumerable$getEnumerator: function () {
+            return null;
+        }
+    }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852", {
         statics: {

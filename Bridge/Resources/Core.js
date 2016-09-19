@@ -404,7 +404,7 @@
         },
 
         getTypeAlias: function (obj) {
-            var name = Bridge.getTypeName(obj);
+            var name = obj.$$name || Bridge.getTypeName(obj);
             return name.replace(/[\.\(\)\,]/g, "$");
         },
 
