@@ -6913,8 +6913,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6944,7 +6942,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -9411,6 +9409,45 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             var $t;
             return ($t = this.getReader1())[Bridge.geti($t, "Object$" + Bridge.getTypeAlias(T) + "$read", "read")]();
         }
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856", {
+        testCase: function () {
+            var x = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.HtmlRenderElement();
+            x.getChildren().foo();
+            Bridge.Test.Assert.notNull(x.getChildren().getChanged());
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.Collection$1", function (T) { return {
+        changed: null,
+        getChanged: function () {
+            return this.changed || ((this.changed = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.Signal$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.CollectionChangeArgs$1(T)))("Collection<T>.Changed")));
+        },
+        foo: function () {
+        }
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.CollectionChangeArgs$1", function (T) { return {
+
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.HtmlRenderElement", {
+        children: null,
+        getChildren: function () {
+            if (this.children == null) {
+                this.children = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.Collection$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.HtmlRenderElement))();
+                this.children.getChanged().Bridge$ClientTest$Batch3$BridgeIssues$Bridge1856$IObservable$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1856$CollectionChangeArgs$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1856$HtmlRenderElement$observe(Bridge.fn.bind(this, this.onChildrenChanged));
+            }
+            return this.children;
+        },
+        onChildrenChanged: function (a) {
+
+        }
+    });
+
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.IObservable$1", function (T) { return {
+        $kind: "interface"
     }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
@@ -17447,6 +17484,20 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         read: function () {
             return this._param;
+        }
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.Signal$1", function (T) { return {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.IObservable$1(T)],
+        config: {
+            alias: [
+            "observe", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1856$IObservable$1$" + Bridge.getTypeAlias(T) + "$observe"
+            ]
+        },
+        ctor: function (x) {
+            this.$initialize();
+        },
+        observe: function (a) {
         }
     }; });
 
