@@ -19,7 +19,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [Test]
-        public void TestCase()
+        public void TestImplicitOperatorInForeachLoop()
         {
             var arr = new string[] { "a", "b" };
             int i = 0;
