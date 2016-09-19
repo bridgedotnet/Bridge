@@ -15,18 +15,18 @@
     <copyright>Copyright (c) 2008-2016, Object.NET, Inc. (http://object.net/). All rights reserved.</copyright>
     <tags>bridge bridge.net bridge js javascript C# csharp mobile ios asp.net aspnet mvc aspnetmvc web transpiler compiler object.net</tags>
     <dependencies>
-      <dependency id="Bridge.Core" version="15.0.0" />
+      <dependency id="Bridge.Core" version="15.1.0" />
     </dependencies>
     <frameworkAssemblies>
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="../../README.md" target="README.md"/>
-    <file src="../../LICENSE" target="LICENSE"/>
+    <file src="../../README.md" target="README.md" />
+    <file src="../../LICENSE" target="LICENSE" />
 
     <!--NET40-->
-    <file src="../../Html5/bin/Release/Bridge.Html5.dll" target="lib/net40/Bridge.Html5.dll"/>
-    <file src="../../Html5/bin/Release/Bridge.Html5.xml" target="lib/net40/Bridge.Html5.xml"/>
-    <!--<file src="../../Html5/bin/Release/Bridge.Html5.pdb" target="lib/net40/pdb/Bridge.Html5.pdb"/>-->
+    <file src="../../Html5/bin/Release/Bridge.Html5.dll" target="lib/net40/Bridge.Html5.dll" />
+    <file src="../../Html5/bin/Release/Bridge.Html5.xml" target="lib/net40/Bridge.Html5.xml" />
+    <!--<file src="../../Html5/bin/Release/Bridge.Html5.pdb" target="lib/net40/pdb/Bridge.Html5.pdb" />-->
   </files>
 </package>

@@ -62,9 +62,6 @@
       <Name>Bridge.Html5</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Readme\Bridge.NET\README.txt" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir).nuget\NuGet.targets" Condition="Exists('$(SolutionDir).nuget\NuGet.targets')" />
   <PropertyGroup Condition="'$(OS)' != 'Unix'">
