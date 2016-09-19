@@ -8,7 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using ICSharpCode.NRefactory.MonoCSharp;
 using ICSharpCode.NRefactory.Semantics;
+using ICSharpCode.NRefactory.TypeSystem;
 using EmptyStatement = ICSharpCode.NRefactory.CSharp.EmptyStatement;
+using Expression = ICSharpCode.NRefactory.CSharp.Expression;
 
 namespace Bridge.Translator
 {
@@ -25,6 +27,11 @@ namespace Bridge.Translator
         {
             get;
             set;
+        }
+
+        public IMethod CastMethod
+        {
+            get; set;
         }
 
         protected override void DoEmit()
@@ -114,15 +121,49 @@ namespace Bridge.Translator
             this.BeginBlock();
 
             this.PushLocals();
+
             var varName = this.AddLocal(foreachStatement.VariableName, foreachStatement.VariableNameToken, foreachStatement.VariableType);
 
             this.WriteVar();
-            this.Write(varName, " = ", iteratorName);
+            this.Write(varName + " = ");
 
-            this.WriteDot();
-            this.Write(JS.Funcs.GET_CURRENT);
+            var rr = this.Emitter.Resolver.ResolveNode(foreachStatement, this.Emitter) as ForEachResolveResult;
+            string castCode = this.GetCastCode(rr.ElementType, rr.ElementVariable.Type);
 
-            this.WriteOpenCloseParentheses();
+            if (castCode != null)
+            {
+                this.EmitInlineCast(iteratorName + "." + JS.Funcs.GET_CURRENT + "()", castCode);
+            }
+            else if (this.CastMethod != null)
+            {
+                this.Write(BridgeTypes.ToJsName(this.CastMethod.DeclaringType, this.Emitter));
+                this.WriteDot();
+                this.Write(OverloadsCollection.Create(this.Emitter, this.CastMethod).GetOverloadName());
+                this.WriteOpenParentheses();
+                this.Write(iteratorName + "." + JS.Funcs.GET_CURRENT + "()");
+                this.WriteCloseParentheses();
+            }
+            else
+            {
+                var needCast = rr != null && rr.ElementType != rr.ElementVariable.Type;
+                if (needCast)
+                {
+                    this.Write(JS.Funcs.BRIDGE_CAST);
+                    this.WriteOpenParentheses();
+                }
+
+                this.Write(iteratorName);
+
+                this.WriteDot();
+                this.Write(JS.Funcs.GET_CURRENT);
+                this.WriteOpenCloseParentheses();
+
+                if (needCast)
+                {
+                    this.Write(", ", BridgeTypes.ToJsName(rr.ElementVariable.Type, this.Emitter), ")");
+                }
+            }
+
             this.WriteSemiColon();
             this.WriteNewLine();
 
@@ -225,22 +266,40 @@ namespace Bridge.Translator
                 this.Write(varName + " = ");
 
                 var rr = this.Emitter.Resolver.ResolveNode(foreachStatement, this.Emitter) as ForEachResolveResult;
-                var needCast = rr != null && rr.ElementType != rr.ElementVariable.Type;
-                if (needCast)
+                string castCode = this.GetCastCode(rr.ElementType, rr.ElementVariable.Type);
+
+                if (castCode != null)
                 {
-                    this.Write(JS.Funcs.BRIDGE_CAST);
-                    this.WriteOpenParentheses();
+                    this.EmitInlineCast(iteratorName + "." + JS.Funcs.GET_CURRENT + "()", castCode);
                 }
-
-                this.Write(iteratorName);
-
-                this.WriteDot();
-                this.Write(JS.Funcs.GET_CURRENT);
-                this.WriteOpenCloseParentheses();
-
-                if (needCast)
+                else if (this.CastMethod != null)
                 {
-                    this.Write(", ", BridgeTypes.ToJsName(rr.ElementVariable.Type, this.Emitter), ")");
+                    this.Write(BridgeTypes.ToJsName(this.CastMethod.DeclaringType, this.Emitter));
+                    this.WriteDot();
+                    this.Write(OverloadsCollection.Create(this.Emitter, this.CastMethod).GetOverloadName());
+                    this.WriteOpenParentheses();
+                    this.Write(iteratorName + "." + JS.Funcs.GET_CURRENT + "()");
+                    this.WriteCloseParentheses();
+                }
+                else
+                {
+                    var needCast = rr != null && rr.ElementType != rr.ElementVariable.Type;
+                    if (needCast)
+                    {
+                        this.Write(JS.Funcs.BRIDGE_CAST);
+                        this.WriteOpenParentheses();
+                    }
+
+                    this.Write(iteratorName);
+
+                    this.WriteDot();
+                    this.Write(JS.Funcs.GET_CURRENT);
+                    this.WriteOpenCloseParentheses();
+
+                    if (needCast)
+                    {
+                        this.Write(", ", BridgeTypes.ToJsName(rr.ElementVariable.Type, this.Emitter), ")");
+                    }
                 }
 
                 this.WriteSemiColon();
@@ -271,6 +330,88 @@ namespace Bridge.Translator
 
             this.EndBlock();
             this.WriteNewLine();
+        }
+
+        protected virtual string GetCastCode(IType fromType, IType toType)
+        {
+            string inline = null;
+
+            var method = this.GetCastMethod(fromType, toType, out inline);
+
+            if (method == null && (NullableType.IsNullable(fromType) || NullableType.IsNullable(toType)))
+            {
+                method = this.GetCastMethod(NullableType.IsNullable(fromType) ? NullableType.GetUnderlyingType(fromType) : fromType,
+                                            NullableType.IsNullable(toType) ? NullableType.GetUnderlyingType(toType) : toType, out inline);
+            }
+
+            this.CastMethod = method;
+            return inline;
+        }
+
+        protected virtual void EmitInlineCast(string thisExpr, string castCode)
+        {
+            this.Write("");
+            string name;
+
+            if (this.CastMethod == null)
+            {
+                name = "{this}";
+            }
+            else
+            {
+                name = "{" + this.CastMethod.Parameters[0].Name + "}";
+                if (!castCode.Contains(name))
+                {
+                    name = "{this}";
+                }
+            }
+
+            if (castCode.Contains(name))
+            {
+                castCode = castCode.Replace(name, thisExpr);
+            }
+
+            this.Write(castCode);
+        }
+
+        public IMethod GetCastMethod(IType fromType, IType toType, out string template)
+        {
+            string inline = null;
+            var method = fromType.GetMethods().FirstOrDefault(m =>
+            {
+                if (m.IsOperator && (m.Name == "op_Explicit" || m.Name == "op_Implicit") &&
+                    m.Parameters.Count == 1 &&
+                    m.ReturnType.ReflectionName == toType.ReflectionName &&
+                    m.Parameters[0].Type.ReflectionName == fromType.ReflectionName
+                    )
+                {
+                    inline = this.Emitter.GetInline(m);
+                    return true;
+                }
+
+                return false;
+            });
+
+            if (method == null)
+            {
+                method = toType.GetMethods().FirstOrDefault(m =>
+                {
+                    if (m.IsOperator && (m.Name == "op_Explicit" || m.Name == "op_Implicit") &&
+                        m.Parameters.Count == 1 &&
+                        m.ReturnType.ReflectionName == toType.ReflectionName &&
+                        (m.Parameters[0].Type.ReflectionName == fromType.ReflectionName)
+                        )
+                    {
+                        inline = this.Emitter.GetInline(m);
+                        return true;
+                    }
+
+                    return false;
+                });
+            }
+
+            template = inline;
+            return method;
         }
     }
 }

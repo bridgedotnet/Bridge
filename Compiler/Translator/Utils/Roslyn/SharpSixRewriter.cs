@@ -347,23 +347,57 @@ namespace Bridge.Translator
             return base.VisitUsingDirective(node);
         }
 
-        public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax node)
+        public override SyntaxNode VisitGenericName(GenericNameSyntax node)
         {
             var symbol = semanticModel.GetSymbolInfo(node).Symbol;
 
             var parent = node.Parent;
-            while (parent != null && !(parent is ClassDeclarationSyntax))
+            while (parent != null && !(parent is TypeDeclarationSyntax))
             {
                 parent = parent.Parent;
             }
 
             ITypeSymbol thisType = null;
-            if (parent is ClassDeclarationSyntax)
+            if (parent is TypeDeclarationSyntax)
             {
                 thisType = this.semanticModel.GetDeclaredSymbol(parent) as ITypeSymbol;
             }
 
-            node = (IdentifierNameSyntax)base.VisitIdentifierName(node);
+            bool needHandle = !node.IsVar &&
+                              symbol is ITypeSymbol &&
+                              symbol.ContainingType != null &&
+                              thisType != null &&
+                              !thisType.InheritsFromOrEquals(symbol.ContainingType) &&
+                              !thisType.Equals(symbol);
+
+            var qns = node.Parent as QualifiedNameSyntax;
+            if (qns != null && needHandle)
+            {
+                SyntaxNode n = node;
+                do
+                {
+                    if (!qns.Left.Equals(n))
+                    {
+                        needHandle = false;
+                    }
+
+                    n = qns;
+                    qns = qns.Parent as QualifiedNameSyntax;
+                } while (qns != null && needHandle);
+            }
+
+            node = (GenericNameSyntax)base.VisitGenericName(node);
+
+            if (needHandle && !(node.Parent is MemberAccessExpressionSyntax))
+            {
+                INamedTypeSymbol namedType = symbol as INamedTypeSymbol;
+                if (namedType != null && namedType.IsGenericType && namedType.TypeArguments.Length > 0 && !namedType.TypeArguments.Any(SyntaxHelper.IsAnonymous))
+                {
+                    return SyntaxHelper.GenerateGenericName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.FullyQualifiedName(false), node.GetTrailingTrivia()), namedType.TypeArguments);
+                }
+
+                return SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.FullyQualifiedName(), node.GetTrailingTrivia()));
+            }
 
             IMethodSymbol methodSymbol = null;
 
@@ -377,7 +411,83 @@ namespace Bridge.Translator
                     || symbol is IEventSymbol)
                 )
             {
-                if (methodSymbol != null && methodSymbol.IsGenericMethod && !methodSymbol.TypeArguments.Any(SyntaxHelper.IsAnonymous))
+                if (methodSymbol != null && methodSymbol.IsGenericMethod && methodSymbol.TypeArguments.Length > 0 && !methodSymbol.TypeArguments.Any(SyntaxHelper.IsAnonymous))
+                {
+                    return SyntaxHelper.GenerateGenericName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.FullyQualifiedName(false), node.GetTrailingTrivia()), methodSymbol.TypeArguments);
+                }
+
+                return SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.FullyQualifiedName(), node.GetTrailingTrivia()));
+            }
+
+            return node;
+        }
+
+        public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax node)
+        {
+            var symbol = semanticModel.GetSymbolInfo(node).Symbol;
+
+            var parent = node.Parent;
+            while (parent != null && !(parent is TypeDeclarationSyntax))
+            {
+                parent = parent.Parent;
+            }
+            
+            ITypeSymbol thisType = null;
+            if (parent is TypeDeclarationSyntax)
+            {
+                thisType = this.semanticModel.GetDeclaredSymbol(parent) as ITypeSymbol;
+            }
+
+            bool needHandle = !node.IsVar &&
+                              symbol is ITypeSymbol &&
+                              symbol.ContainingType != null &&
+                              thisType != null &&
+                              !thisType.InheritsFromOrEquals(symbol.ContainingType) &&
+                              !thisType.Equals(symbol);
+
+            var qns = node.Parent as QualifiedNameSyntax;
+            if (qns != null && needHandle)
+            {
+                SyntaxNode n = node;
+                do
+                {
+                    if (!qns.Left.Equals(n))
+                    {
+                        needHandle = false;
+                    }
+
+                    n = qns;
+                    qns = qns.Parent as QualifiedNameSyntax;
+                } while (qns != null && needHandle);
+            }
+
+            node = (IdentifierNameSyntax)base.VisitIdentifierName(node);
+
+            if (needHandle && !(node.Parent is MemberAccessExpressionSyntax))
+            {
+                INamedTypeSymbol namedType = symbol as INamedTypeSymbol;
+                if (namedType != null && namedType.IsGenericType && namedType.TypeArguments.Length > 0 && !namedType.TypeArguments.Any(SyntaxHelper.IsAnonymous))
+                {
+                    var genericName = SyntaxHelper.GenerateGenericName(node.Identifier, namedType.TypeArguments);
+                    return genericName.WithLeadingTrivia(node.GetLeadingTrivia()).WithTrailingTrivia(node.GetTrailingTrivia());
+                }
+
+                return SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.FullyQualifiedName(), node.GetTrailingTrivia()));
+            }
+
+            IMethodSymbol methodSymbol = null;
+
+            if (symbol != null && symbol.IsStatic && symbol.ContainingType != null
+                && thisType != null && !thisType.InheritsFromOrEquals(symbol.ContainingType)
+                && !(node.Parent is MemberAccessExpressionSyntax)
+                && (
+                    (methodSymbol = symbol as IMethodSymbol) != null
+                    || symbol is IPropertySymbol
+                    || symbol is IFieldSymbol
+                    || symbol is IEventSymbol)
+                )
+            {
+                if (methodSymbol != null && methodSymbol.IsGenericMethod && methodSymbol.TypeArguments.Length > 0 && !methodSymbol.TypeArguments.Any(SyntaxHelper.IsAnonymous))
                 {
                     var genericName = SyntaxHelper.GenerateGenericName(node.Identifier, methodSymbol.TypeArguments);
                     return genericName.WithLeadingTrivia(node.GetLeadingTrivia()).WithTrailingTrivia(node.GetTrailingTrivia());
@@ -394,13 +504,13 @@ namespace Bridge.Translator
             var symbol = semanticModel.GetSymbolInfo(node.Expression).Symbol;
 
             var parent = node.Parent;
-            while (parent != null && !(parent is ClassDeclarationSyntax))
+            while (parent != null && !(parent is TypeDeclarationSyntax))
             {
                 parent = parent.Parent;
             }
 
             ITypeSymbol thisType = null;
-            if (parent is ClassDeclarationSyntax)
+            if (parent is TypeDeclarationSyntax)
             {
                 thisType = this.semanticModel.GetDeclaredSymbol(parent) as ITypeSymbol;
             }

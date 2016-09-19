@@ -43,9 +43,11 @@ namespace Bridge.Translator
             string interfaceTempVar = null;
             if (isInterfaceMember)
             {
-                bool isField = memberTargetrr != null && memberTargetrr.Member is IField && (memberTargetrr.TargetResult is ThisResolveResult || memberTargetrr.TargetResult is LocalResolveResult);
+                MemberResolveResult member = resolveResult as MemberResolveResult;
+                var externalInterface = member != null ? this.Emitter.Validator.IsExternalInterface(member.Member.DeclaringTypeDefinition) : false;
+                bool isField = externalInterface && memberTargetrr != null && memberTargetrr.Member is IField && (memberTargetrr.TargetResult is ThisResolveResult || memberTargetrr.TargetResult is LocalResolveResult);
 
-                if (!(targetrr is ThisResolveResult || targetrr is TypeResolveResult || targetrr is LocalResolveResult || isField))
+                if (externalInterface && !(targetrr is ThisResolveResult || targetrr is TypeResolveResult || targetrr is LocalResolveResult || isField))
                 {
                     if (openParentheses)
                     {
@@ -85,18 +87,22 @@ namespace Bridge.Translator
 
         private void WriteInterfaceMember(string interfaceTempVar, MemberResolveResult resolveResult, bool isSetter, string prefix = null)
         {
-            if (interfaceTempVar != null)
+            var externalInterface = this.Emitter.Validator.IsExternalInterface(resolveResult.Member.DeclaringTypeDefinition);
+
+            if (interfaceTempVar != null && !externalInterface)
             {
                 this.WriteComma();
                 this.Write(interfaceTempVar);
             }
 
-            var externalInterface = this.Emitter.Validator.IsExternalInterface(resolveResult.Member.DeclaringTypeDefinition);
-
-            this.WriteOpenBracket();
-
             if (externalInterface)
             {
+                if (interfaceTempVar != null)
+                {
+                    this.WriteCloseParentheses();
+                }
+
+                this.WriteOpenBracket();
                 this.Write(JS.Funcs.BRIDGE_GET_I);
                 this.WriteOpenParentheses();
 
@@ -126,12 +132,13 @@ namespace Bridge.Translator
                 this.WriteScript(OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(true, prefix));
 
                 this.Write(")");
-            }
-            else
-            {
-                this.Write(OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(false, prefix));
+                this.WriteCloseBracket();
+
+                return;
             }
 
+            this.WriteOpenBracket();
+            this.Write(OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(false, prefix));
             this.WriteCloseBracket();
 
             if (interfaceTempVar != null)

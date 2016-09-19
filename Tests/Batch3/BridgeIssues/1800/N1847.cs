@@ -24,7 +24,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [Test]
-        public void TestCase()
+        public void TestActivatorCreateInstanceCallProtectedConstructor()
         {
             var instance = Activator.CreateInstance<CLS>(1);
             Assert.AreEqual("ok", instance.status);
