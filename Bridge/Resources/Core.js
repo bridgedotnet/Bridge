@@ -150,7 +150,7 @@
             })(name, scope, statics);
         },
 
-        createInstance: function (type) {
+        createInstance: function (type, args) {
             if (type === System.Decimal) {
                 return System.Decimal.Zero;
             }
@@ -185,8 +185,10 @@
                 return 0;
             } else if (type === String) {
                 return '';
-            } if (type && type.prototype && type.prototype.$literal) {
+            } else if (type && type.prototype && type.prototype.$literal) {
                 return type.ctor();
+            } else if (args && args.length > 0) {
+                return Bridge.Reflection.applyConstructor(type, args);
             } else {
                 return new type();
             }
