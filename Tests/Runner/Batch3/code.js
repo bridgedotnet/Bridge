@@ -9450,6 +9450,36 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         $kind: "interface"
     }; });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1875", {
+        testCase: function () {
+            var a = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1875.ClassA();
+            a.setId(System.Int64(1));
+
+            var x = new (System.Collections.Generic.Dictionary$2(System.Int64,System.Int32))();
+            x.set(a.getId(), 2);
+            var y = { };
+            x.tryGetValue(a.getId(), y);
+            Bridge.Test.Assert.areEqual(2, y.v);
+            Bridge.Test.Assert.true(x.containsKey(a.getId()));
+
+            x.clear();
+            x.set(a.getId(), 2);
+            x.tryGetValue(a.getId(), y);
+            Bridge.Test.Assert.areEqual(2, y.v);
+            Bridge.Test.Assert.true(x.containsKey(a.getId()));
+            Bridge.Test.Assert.areEqual(2, x.get(a.getId()));
+            Bridge.Test.Assert.areEqual(2, x.get(a.getId()));
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1875.ClassA", {
+        config: {
+            properties: {
+                Id: System.Int64(0)
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
