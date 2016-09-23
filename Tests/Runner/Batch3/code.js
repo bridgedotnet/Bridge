@@ -9450,6 +9450,53 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         $kind: "interface"
     }; });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1878", {
+        testCase: function () {
+            var x = new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1878.classA))();
+            x.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1878.classA(), {
+                setDecimalNumber: System.Decimal(1),
+                setLongNumber: System.Int64(1)
+            } ));
+            x.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1878.classA(), {
+                setDecimalNumber: System.Decimal(1),
+                setLongNumber: System.Int64(1)
+            } ));
+
+            var c = System.Linq.Enumerable.from(x).sum($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1878.f1, System.Int64.Zero);
+            Bridge.Test.Assert.true(System.Int64(2).equals(c));
+
+            var b = System.Linq.Enumerable.from(x).sum($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1878.f2, System.Decimal.Zero);
+            Bridge.Test.Assert.true(System.Decimal(2).equalsT(b));
+
+            var y = new (System.Collections.Generic.List$1(System.Decimal))();
+            y.add(System.Decimal(1));
+            y.add(System.Decimal(1));
+
+            var a = System.Linq.Enumerable.from(y).sum(System.Decimal.Zero);
+            Bridge.Test.Assert.true(System.Decimal(2).equalsT(a));
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1878", $_);
+
+    Bridge.apply($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1878, {
+        f1: function (x1) {
+            return x1.getLongNumber();
+        },
+        f2: function (x1) {
+            return x1.getDecimalNumber();
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1878.classA", {
+        config: {
+            properties: {
+                DecimalNumber: System.Decimal(0.0),
+                LongNumber: System.Int64(0)
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
