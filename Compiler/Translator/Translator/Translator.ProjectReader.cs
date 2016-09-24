@@ -2,8 +2,10 @@ using Microsoft.Build.Evaluation;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
+using Bridge.Translator.Utils;
 
 namespace Bridge.Translator
 {
@@ -142,11 +144,12 @@ namespace Bridge.Translator
             if (this.AssemblyLocation == null || this.AssemblyLocation.Length == 0)
             {
                 this.Configuration = this.Configuration ?? "Debug";
-                var outputPath = this.GetOutputPath(doc, this.Configuration);
+                this.Platform = this.Platform ?? "AnyCPU";
+                var outputPath = this.GetOutputPath(doc, this.Configuration, this.Platform);
 
                 if (string.IsNullOrEmpty(outputPath))
                 {
-                    outputPath = this.GetOutputPath(doc, "Release");
+                    outputPath = this.GetOutputPath(doc, "Release", this.Platform);
                 }
 
                 this.AssemblyName = this.GetAssemblyName(doc);
@@ -154,17 +157,17 @@ namespace Bridge.Translator
 
                 if (!File.Exists(this.AssemblyLocation) && !this.Rebuild)
                 {
-                    outputPath = this.GetOutputPath(doc, "Release");
+                    outputPath = this.GetOutputPath(doc, "Release", this.Platform);
                     this.AssemblyLocation = Path.Combine(outputPath, this.AssemblyName + ".dll");
                 }
             }
         }
 
-        protected virtual string GetOutputPath(XDocument doc, string configuration)
+        protected virtual string GetOutputPath(XDocument doc, string configuration, string platform)
         {
             var nodes = from n in doc.Descendants()
                         where n.Name.LocalName == ProjectProperties.OutputPath &&
-                              n.Parent.Attribute("Condition").Value.Contains(configuration)
+                              EvaluateCondition(n.Parent.Attribute("Condition").Value)
                         select n;
 
             if (nodes.Count() != 1)
@@ -182,6 +185,16 @@ namespace Bridge.Translator
             path = new Bridge.Contract.ConfigHelper().ConvertPath(path);
 
             return path;
+        }
+
+        private bool EvaluateCondition(string condition)
+        {
+            var properties = new Dictionary<string, string>
+            {
+                ["Configuration"] = this.Configuration,
+                ["Platform"] = this.Platform
+            };
+            return MsBuildConditionEvaluator.EvaluateCondition(condition, properties);
         }
 
         public static bool IsRunningOnMono()
@@ -251,7 +264,7 @@ namespace Bridge.Translator
                 }
 
                 var attr = n.Attribute("Condition");
-                return attr == null || attr.Value.Contains(this.Configuration);
+                return attr == null || EvaluateCondition(attr.Value);
             });
 
             foreach (var node in nodeList)

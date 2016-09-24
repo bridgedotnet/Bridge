@@ -173,6 +173,12 @@ namespace Bridge.Translator
             set;
         }
 
+        public string Platform
+        {
+            get;
+            set;
+        }
+
         public List<string> DefineConstants
         {
             get;

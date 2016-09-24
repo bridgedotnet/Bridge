@@ -230,6 +230,7 @@
     <Compile Include="Utils\AssemblyConfigHelper.cs" />
     <Compile Include="Utils\BridgeOptions.cs" />
     <Compile Include="Utils\AnonymousTypeConfig.cs" />
+    <Compile Include="Utils\MsBuildConditionEvaluator.cs" />
     <Compile Include="Utils\ReflectionConfig.cs" />
     <Compile Include="Utils\MetadataUtils.cs" />
     <Compile Include="Utils\Preconverter.cs" />
