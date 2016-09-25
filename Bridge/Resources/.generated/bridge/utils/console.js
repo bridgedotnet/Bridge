@@ -329,7 +329,7 @@
             var $t;
             $t = Bridge.getEnumerator(attrs);
             while ($t.moveNext()) {
-                var item = Bridge.cast($t.getCurrent(), System.Collections.Generic.KeyValuePair$2(String,String));
+                var item = $t.getCurrent();
                 el.setAttribute(item.key, item.value);
             }
         },
@@ -339,7 +339,7 @@
 
             $t = Bridge.getEnumerator(obj);
             while ($t.moveNext()) {
-                var item = Bridge.cast($t.getCurrent(), System.Collections.Generic.KeyValuePair$2(String,String));
+                var item = $t.getCurrent();
                 str = System.String.concat(str, (System.String.concat(System.String.concat(System.String.concat(item.key.toLowerCase(), ":"), item.value), ";")));
             }
 
