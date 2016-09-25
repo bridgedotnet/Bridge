@@ -1068,6 +1068,11 @@ namespace Bridge.Translator
 
         public bool IsSimpleExpression(Expression expression)
         {
+            if (expression is PrimitiveExpression || expression is ThisReferenceExpression)
+            {
+                return true;
+            }
+
             var rr = this.Emitter.Resolver.ResolveNode(expression, this.Emitter);
             return this.IsSimpleResolveResult(rr);
         }

@@ -9450,6 +9450,21 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         $kind: "interface"
     }; });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1880", {
+        testCase: function () {
+            Bridge.Test.Assert.areEqual(10, parseInt("10", 10));
+            Bridge.Test.Assert.areEqual(8, parseInt("10", 8));
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1880.BigInteger", {
+        $kind: "struct",
+        statics: {
+            getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1880.BigInteger(); }
+        },
+        $clone: function (to) { return this; }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
