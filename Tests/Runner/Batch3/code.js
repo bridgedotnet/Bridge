@@ -9549,6 +9549,25 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
     }; });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1871", {
+        statics: {
+            /**
+             * @static
+             * @private
+             * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge1871
+             * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge1871
+             * @param   {string}    args
+             * @return  {void}
+             */
+            doSomething: function (args) {
+
+            }
+        },
+        testErrorCommentNotThrowCompilerException: function () {
+            Bridge.Test.Assert.true$1(true, "Should compile successfully");
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
