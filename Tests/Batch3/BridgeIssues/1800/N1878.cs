@@ -18,21 +18,33 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public void TestSumDefaultValue()
         {
             List<classA> x = new List<classA>();
-            x.Add(new classA() { DecimalNumber = 1, LongNumber = 1 });
-            x.Add(new classA() { DecimalNumber = 1, LongNumber = 1 });
+            x.Add(new classA() { DecimalNumber = 1, LongNumber = 2 });
+            x.Add(new classA() { DecimalNumber = 5, LongNumber = 6 });
 
-            long c = x.Sum(x1 => x1.LongNumber);
-            Assert.True(2 == c);
+            long c = x.Sum(i => i.LongNumber);
+            Assert.AreEqual(8L, c);
 
-            decimal b = x.Sum(x1 => x1.DecimalNumber);
-            Assert.True(2 == b);
+            decimal b = x.Sum(i => i.DecimalNumber);
+            Assert.AreEqual(6m, b);
+
+            var e1 = x as IEnumerable<classA>;
+
+            long c1 = e1.Sum(i => i.LongNumber);
+            Assert.AreEqual(8L, c1);
+
+            decimal b1 = e1.Sum(i => i.DecimalNumber);
+            Assert.AreEqual(6m, b1);
 
             List<decimal> y = new List<decimal>();
-            y.Add(1);
-            y.Add(1);
+            y.Add(7);
+            y.Add(8);
 
             decimal a = y.Sum();
-            Assert.True(2 == a);
+            Assert.AreEqual(15m, a);
+
+            var y1 = y as IEnumerable<decimal>;
+            decimal a1 = y1.Sum();
+            Assert.AreEqual(15m, a1);
         }
     }
 }
