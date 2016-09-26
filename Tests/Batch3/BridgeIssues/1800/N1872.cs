@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Bridge.Html5;
 using Bridge.Test;
@@ -12,7 +9,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge1872
     {
         [Test]
-        public async void TestCase()
+        public async void TestAsyncWithAnonymousDelegate()
         {
             var done = Assert.Async();
             Task task = new Task(null);
@@ -23,7 +20,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             });
 
             await task;
-            
+
             Assert.True(task.IsCompleted);
 
             done();
