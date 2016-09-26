@@ -687,53 +687,72 @@ namespace Bridge.Translator
         }
         private int indexInstance;
 
-        public override SyntaxNode VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
+        private class InitializerInfo
         {
-            IMethodSymbol method = null;
-            bool extensionMethodExists = false;
-            if (node.Initializer != null)
+            public IMethodSymbol method;
+            public List<InitializerInfo> nested;
+        }
+
+        private bool NeedRewriteInitializer(InitializerExpressionSyntax initializer, List<InitializerInfo> infos, ref bool extensionMethodExists, ref bool isImplicitElementAccessSyntax)
+        {
+            bool need = false;
+            foreach (var init in initializer.Expressions)
             {
-                foreach (var init in node.Initializer.Expressions)
+                var info = new InitializerInfo();
+                infos.Add(info);
+                var ae = init as AssignmentExpressionSyntax;
+                if (ae?.Right is InitializerExpressionSyntax)
+                {
+                    info.nested = new List<InitializerInfo>();
+                    if (NeedRewriteInitializer((InitializerExpressionSyntax) ae.Right, info.nested, ref extensionMethodExists, ref isImplicitElementAccessSyntax))
+                    {
+                        need = true;
+                    }
+                }
+                else
                 {
                     var collectionInitializer = this.semanticModel.GetCollectionInitializerSymbolInfo(init).Symbol;
                     var mInfo = collectionInitializer != null ? collectionInitializer as IMethodSymbol : null;
                     if (mInfo != null)
                     {
+                        info.method = mInfo;
                         if (mInfo.IsExtensionMethod)
                         {
                             extensionMethodExists = true;
                         }
-                        method = mInfo;
-                        break;
+                        need = true;
+                    }
+
+                    if (init.Kind() == SyntaxKind.SimpleAssignmentExpression)
+                    {
+                        var be = (AssignmentExpressionSyntax)init;
+                        if (be.Left is ImplicitElementAccessSyntax)
+                        {
+                            isImplicitElementAccessSyntax = true;
+                            need = true;
+                        }
                     }
                 }
             }
 
-            List<ISymbol> initSymbols = new List<ISymbol>();
+            return need;
+        }
+
+        public override SyntaxNode VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
+        {
+            bool needRewrite = false;
+            List<InitializerInfo> initializerInfos = null;
+            bool extensionMethodExists = false;
+            bool isImplicitElementAccessSyntax = false;
+
             if (node.Initializer != null)
             {
-                foreach (var init in node.Initializer.Expressions)
-                {
-                    initSymbols.Add(this.semanticModel.GetCollectionInitializerSymbolInfo(init).Symbol);
-                }
+                initializerInfos = new List<InitializerInfo>();
+                needRewrite = NeedRewriteInitializer(node.Initializer, initializerInfos,ref extensionMethodExists, ref isImplicitElementAccessSyntax);
             }
 
             node = (ObjectCreationExpressionSyntax)base.VisitObjectCreationExpression(node);
-            bool isImplicitElementAccessSyntax = false;
-            if (node.Initializer != null && (method != null || node.Initializer.Expressions.Any(init =>
-            {
-                if (init.Kind() == SyntaxKind.SimpleAssignmentExpression)
-                {
-                    var be = (AssignmentExpressionSyntax)init;
-                    if (be.Left is ImplicitElementAccessSyntax)
-                    {
-                        isImplicitElementAccessSyntax = true;
-                        return true;
-                    }
-                }
-
-                return false;
-            })))
+            if (needRewrite)
             {
                 if (this.IsExpressionOfT)
                 {
@@ -781,70 +800,8 @@ namespace Bridge.Translator
                         instance = "_o" + ++indexInstance;
                     }
                 }
-                int idx = 0;
-                foreach (var init in initializers)
-                {
-                    var collectionInitializer = initSymbols[idx++];
-                    var mInfo = collectionInitializer != null ? collectionInitializer as IMethodSymbol : null;
-                    if (mInfo != null)
-                    {
-                        if (mInfo.IsStatic)
-                        {
-                            var ie = SyntaxHelper.GenerateStaticMethodCall(mInfo.Name,
-                                mInfo.ContainingType.FullyQualifiedName(),
-                                new[]
-                                {
-                                    SyntaxFactory.Argument(SyntaxFactory.IdentifierName(instance)),
-                                    SyntaxFactory.Argument(init.WithoutTrivia())
-                                }, mInfo.TypeArguments.ToArray());
-                            statements.Add(ie);
-                        }
-                        else
-                        {
-                            ArgumentSyntax[] arguments = null;
-                            if (init.Kind() == SyntaxKind.ComplexElementInitializerExpression)
-                            {
-                                var complexInit = (InitializerExpressionSyntax)init;
-
-                                arguments = new ArgumentSyntax[complexInit.Expressions.Count];
-                                for (int i = 0; i < complexInit.Expressions.Count; i++)
-                                {
-                                    arguments[i] = SyntaxFactory.Argument(complexInit.Expressions[i].WithoutTrivia());
-                                }
-                            }
-                            else
-                            {
-                                arguments = new[]
-                                {
-                                    SyntaxFactory.Argument(init.WithoutTrivia())
-                                };
-                            }
-
-                            var ie = SyntaxHelper.GenerateMethodCall(mInfo.Name, instance, arguments, mInfo.TypeArguments.ToArray());
-                            statements.Add(ie);
-                        }
-                    }
-                    else
-                    {
-                        var be = (AssignmentExpressionSyntax)init;
-                        var indexerKeys = be.Left as ImplicitElementAccessSyntax;
-
-                        if (indexerKeys != null)
-                        {
-                            be = be.WithLeft(SyntaxFactory.ElementAccessExpression(SyntaxFactory.IdentifierName(instance), indexerKeys.ArgumentList.WithoutTrivia()));
-                        }
-                        else
-                        {
-                            var identifier = (IdentifierNameSyntax)be.Left;
-                            be = be.WithLeft(SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, SyntaxFactory.IdentifierName(instance), SyntaxFactory.IdentifierName(identifier.Identifier.ValueText)));
-                        }
-
-                        be = be.WithRight(be.Right.WithoutTrivia());
-                        be = be.WithoutTrivia();
-
-                        statements.Add(SyntaxFactory.ExpressionStatement(be, SyntaxFactory.Token(SyntaxKind.SemicolonToken)));
-                    }
-                }
+                
+                SharpSixRewriter.ConvertInitializers(initializers, instance, statements, initializerInfos);
 
                 statements.Add(SyntaxFactory.ReturnStatement(SyntaxFactory.IdentifierName(instance).WithLeadingTrivia(SyntaxFactory.Space)));
 
@@ -859,6 +816,102 @@ namespace Bridge.Translator
             }
 
             return node;
+        }
+
+        private static void ConvertInitializers(SeparatedSyntaxList<ExpressionSyntax> initializers, string instance, List<StatementSyntax> statements, List<InitializerInfo> infos)
+        {
+            var idx = 0;
+            foreach (var init in initializers)
+            {
+                var info = infos[idx++];
+                var mInfo = info != null && info.method != null ? info.method : null;
+                if (mInfo != null)
+                {
+                    if (mInfo.IsStatic)
+                    {
+                        var ie = SyntaxHelper.GenerateStaticMethodCall(mInfo.Name,
+                            mInfo.ContainingType.FullyQualifiedName(),
+                            new[]
+                            {
+                                SyntaxFactory.Argument(SyntaxFactory.IdentifierName(instance)),
+                                SyntaxFactory.Argument(init.WithoutTrivia())
+                            }, mInfo.TypeArguments.ToArray());
+                        statements.Add(ie);
+                    }
+                    else
+                    {
+                        ArgumentSyntax[] arguments = null;
+                        if (init.Kind() == SyntaxKind.ComplexElementInitializerExpression)
+                        {
+                            var complexInit = (InitializerExpressionSyntax) init;
+
+                            arguments = new ArgumentSyntax[complexInit.Expressions.Count];
+                            for (int i = 0; i < complexInit.Expressions.Count; i++)
+                            {
+                                arguments[i] = SyntaxFactory.Argument(complexInit.Expressions[i].WithoutTrivia());
+                            }
+                        }
+                        else
+                        {
+                            arguments = new[]
+                            {
+                                SyntaxFactory.Argument(init.WithoutTrivia())
+                            };
+                        }
+
+                        var ie = SyntaxHelper.GenerateMethodCall(mInfo.Name, instance, arguments, mInfo.TypeArguments.ToArray());
+                        statements.Add(ie);
+                    }
+                }
+                else
+                {
+                    var be = (AssignmentExpressionSyntax) init;
+
+                    if (be.Right is InitializerExpressionSyntax)
+                    {
+                        string name = null;
+                        if (be.Left is IdentifierNameSyntax)
+                        {
+                            var identifier = (IdentifierNameSyntax) be.Left;
+                            name = instance + "." + identifier.Identifier.ValueText;
+                        }
+                        else if (be.Left is ImplicitElementAccessSyntax)
+                        {
+                            name = SyntaxFactory.ElementAccessExpression(SyntaxFactory.IdentifierName(instance),
+                                    ((ImplicitElementAccessSyntax) be.Left).ArgumentList.WithoutTrivia()).ToString();
+                        }
+                        else
+                        {
+                            name = instance;
+                        }
+
+                        SharpSixRewriter.ConvertInitializers(((InitializerExpressionSyntax)be.Right).Expressions, name, statements, info.nested);
+                    }
+                    else
+                    {
+                        var indexerKeys = be.Left as ImplicitElementAccessSyntax;
+
+                        if (indexerKeys != null)
+                        {
+                            be = be.WithLeft(SyntaxFactory.ElementAccessExpression(SyntaxFactory.IdentifierName(instance),
+                                    indexerKeys.ArgumentList.WithoutTrivia()));
+                        }
+                        else
+                        {
+                            var identifier = (IdentifierNameSyntax)be.Left;
+                            be =
+                                be.WithLeft(SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
+                                    SyntaxFactory.IdentifierName(instance),
+                                    SyntaxFactory.IdentifierName(identifier.Identifier.ValueText)));
+                        }
+
+                        be = be.WithRight(be.Right.WithoutTrivia());
+                        be = be.WithoutTrivia();
+
+                        statements.Add(SyntaxFactory.ExpressionStatement(be, SyntaxFactory.Token(SyntaxKind.SemicolonToken)));
+                    }
+                }
+            }
         }
 
         public override SyntaxNode VisitTryStatement(TryStatementSyntax node)

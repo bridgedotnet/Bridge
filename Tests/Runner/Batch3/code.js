@@ -9450,6 +9450,75 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         $kind: "interface"
     }; });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1884", {
+        testCase: function () {
+            var foo = $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1884.f2(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1884.Foo());
+
+            Bridge.Test.Assert.areEqual(3, foo.getIndexed().getCount());
+            Bridge.Test.Assert.areEqual(4, foo.getItems().getCount());
+
+            Bridge.Test.Assert.areEqual(1, foo.getIndexed1().getCount());
+            Bridge.Test.Assert.areEqual(1, foo.getItems1().getCount());
+
+            Bridge.Test.Assert.areEqual(3, foo.getIndexed1().get(1).getCount());
+            Bridge.Test.Assert.areEqual(3, foo.getItems1().getItem(0).getCount());
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1884", $_);
+
+    Bridge.apply($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1884, {
+        f1: function (_o31) {
+            _o31.add("One");
+            _o31.add("Two");
+            _o31.add("Three");
+            return _o31;
+        },
+        f2: function (_o32) {
+            _o32.getItems().add("One");
+            _o32.getItems().add("Two");
+            _o32.getItems().add("Three");
+            _o32.getItems1().add($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1884.f1(new (System.Collections.Generic.List$1(String))()));
+            _o32.getIndexed().set(1, "Lorem");
+            _o32.getIndexed().set(5, "Ipsum");
+            _o32.getIndexed1().get(1).add("One");
+            _o32.getIndexed1().get(1).add("Two");
+            _o32.getIndexed1().get(1).add("Three");
+            return _o32;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1884.Foo", {
+        config: {
+            properties: {
+                Items: null,
+                Items1: null,
+                Indexed: null,
+                Indexed1: null
+            }
+        },
+        ctor: function () {
+            this.$initialize();
+            this.setItems(new (System.Collections.Generic.List$1(String))(["1"]));
+            this.setItems1(new (System.Collections.Generic.List$1(System.Collections.Generic.List$1(String)))());
+            this.setIndexed($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1884.Foo.f1(new (System.Collections.Generic.Dictionary$2(System.Int32,String))()));
+            this.setIndexed1($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1884.Foo.f2(new (System.Collections.Generic.Dictionary$2(System.Int32,System.Collections.Generic.List$1(String)))()));
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1884.Foo", $_);
+
+    Bridge.apply($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1884.Foo, {
+        f1: function (_o29) {
+            _o29.set(100, "Dolrt");
+            return _o29;
+        },
+        f2: function (_o30) {
+            _o30.set(1, new (System.Collections.Generic.List$1(String))());
+            return _o30;
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
@@ -16920,30 +16989,30 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues", $_);
 
     Bridge.apply($_.Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues, {
-        f1: function (_o29) {
-            _o29.add(0);
-            _o29.add(1);
-            _o29.add(2);
-            _o29.add(3);
-            _o29.add(4);
-            return _o29;
+        f1: function (_o33) {
+            _o33.add(0);
+            _o33.add(1);
+            _o33.add(2);
+            _o33.add(3);
+            _o33.add(4);
+            return _o33;
         },
-        f2: function (_o30) {
-            _o30.add(3, "b");
-            _o30.add(6, "z");
-            _o30.add(9, "x");
-            return _o30;
+        f2: function (_o34) {
+            _o34.add(3, "b");
+            _o34.add(6, "z");
+            _o34.add(9, "x");
+            return _o34;
         },
         f3: function (i) {
             return ((i * 2) | 0);
         },
-        f4: function (_o31) {
-            _o31.add(0);
-            _o31.add(1);
-            _o31.add(2);
-            _o31.add(3);
-            _o31.add(4);
-            return _o31;
+        f4: function (_o35) {
+            _o35.add(0);
+            _o35.add(1);
+            _o35.add(2);
+            _o35.add(3);
+            _o35.add(4);
+            return _o35;
         }
     });
 
