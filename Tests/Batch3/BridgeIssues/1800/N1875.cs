@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using Bridge.Test;
 
@@ -15,7 +13,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [Test]
-        public void TestCase()
+        public void TestDictionaryWithLongVariableAsKey()
         {
             ClassA a = new ClassA();
             a.Id = 1;
