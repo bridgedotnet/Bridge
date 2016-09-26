@@ -1,8 +1,6 @@
 using Bridge.Contract;
 using Bridge.Contract.Constants;
-
 using ICSharpCode.NRefactory.CSharp;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -145,7 +143,7 @@ namespace Bridge.Translator
             }
             else
             {
-                var needCast = rr != null && rr.ElementType != rr.ElementVariable.Type;
+                var needCast = !rr.ElementType.Equals(rr.ElementVariable.Type);
                 if (needCast)
                 {
                     this.Write(JS.Funcs.BRIDGE_CAST);
@@ -283,7 +281,7 @@ namespace Bridge.Translator
                 }
                 else
                 {
-                    var needCast = rr != null && rr.ElementType != rr.ElementVariable.Type;
+                    var needCast = !rr.ElementType.Equals(rr.ElementVariable.Type);
                     if (needCast)
                     {
                         this.Write(JS.Funcs.BRIDGE_CAST);

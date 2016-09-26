@@ -2467,7 +2467,9 @@
                 Class = cls;
             }
 
-            scope = Bridge.Class.set(scope, className, Class);
+            if (!isGenericInstance) {
+                scope = Bridge.Class.set(scope, className, Class);
+            }
 
             if (gCfg) {
                 gCfg.fn.$cache.push({ type: Class, args: gCfg.args });
@@ -22936,7 +22938,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             var $t;
             $t = Bridge.getEnumerator(attrs);
             while ($t.moveNext()) {
-                var item = Bridge.cast($t.getCurrent(), System.Collections.Generic.KeyValuePair$2(String,String));
+                var item = $t.getCurrent();
                 el.setAttribute(item.key, item.value);
             }
         },
@@ -22946,7 +22948,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
             $t = Bridge.getEnumerator(obj);
             while ($t.moveNext()) {
-                var item = Bridge.cast($t.getCurrent(), System.Collections.Generic.KeyValuePair$2(String,String));
+                var item = $t.getCurrent();
                 str = System.String.concat(str, (System.String.concat(System.String.concat(System.String.concat(item.key.toLowerCase(), ":"), item.value), ";")));
             }
 

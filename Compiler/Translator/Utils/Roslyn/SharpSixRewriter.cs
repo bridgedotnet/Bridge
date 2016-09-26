@@ -213,7 +213,7 @@ namespace Bridge.Translator
                     var name = SyntaxFactory.IdentifierName(pType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)).WithoutTrivia();
                     var expr = node.Expression;
 
-                    if (expr is LambdaExpressionSyntax)
+                    if (expr is LambdaExpressionSyntax || expr is AnonymousMethodExpressionSyntax)
                     {
                         expr = SyntaxFactory.ParenthesizedExpression(expr);
                     }

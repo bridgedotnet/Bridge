@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using Bridge.Test;
 
@@ -11,22 +9,34 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     {
         public class Foo
         {
-            public List<string> Items { get; private set; }
-            public List<List<string>> Items1 { get; private set; }
-            public Dictionary<int, string> Indexed { get; private set; }
-            public Dictionary<int, List<string>> Indexed1 { get; private set; }
+            public List<string> Items
+            {
+                get; private set;
+            }
+            public List<List<string>> Items1
+            {
+                get; private set;
+            }
+            public Dictionary<int, string> Indexed
+            {
+                get; private set;
+            }
+            public Dictionary<int, List<string>> Indexed1
+            {
+                get; private set;
+            }
 
             public Foo()
             {
                 Items = new List<string>(new[] { "1" });
                 Items1 = new List<List<string>>();
-                Indexed = new Dictionary<int, string>() { [100] = "Dolrt" };
-                Indexed1 = new Dictionary<int, List<string>>() { [1] = new List<string>() };
+                Indexed = new Dictionary<int, string>() {[100] = "Dolrt" };
+                Indexed1 = new Dictionary<int, List<string>>() {[1] = new List<string>() };
             }
         }
 
         [Test]
-        public void TestCase()
+        public void TestCollectionInitilizers()
         {
             Foo foo = new Foo
             {
