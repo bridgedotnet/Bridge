@@ -9521,14 +9521,26 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869", {
+        statics: {
+            getFoo: function (name) {
+                return window.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869[name];
+            }
+        },
         testGenericTypeDefinition: function () {
-            var foo = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869.Foo$1(Object))();
+            var foo1 = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869.Foo$1(Object))();
 
-            var n1 = window.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869.Foo$1$Object;
+            var n1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869.getFoo("Foo$1$Object");
             Bridge.Test.Assert.null$1(n1, "Foo$1$Object should not exist");
-            Bridge.Console.log(System.String.concat("Should NOT exist: ", n1));
 
-            var n2 = window.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869.Foo$1;
+            var n2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869.getFoo("Foo$1");
+            Bridge.Test.Assert.notNull$1(n2, "Foo$1 should exist");
+
+            var foo2 = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869.Foo$1(System.Int64))();
+
+            var n3 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869.getFoo("Foo$1$System.Int64");
+            Bridge.Test.Assert.null$1(n1, "Foo$1$System.Int64 should not exist");
+
+            var n4 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869.getFoo("Foo$1");
             Bridge.Test.Assert.notNull$1(n2, "Foo$1 should exist");
         }
     });
