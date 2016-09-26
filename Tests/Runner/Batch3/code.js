@@ -6913,6 +6913,8 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
+
+
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6942,7 +6944,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                }; /// Async method lacks 'await' operators and will run synchronously
+                                };
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -9450,8 +9452,221 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         $kind: "interface"
     }; });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1863", {
+        statics: {
+            sb: null
+        },
+        testTrueFalseOperators: function () {
+            var $t, $t1;
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1863.sb = new System.Text.StringBuilder();
+            var o1 = ($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1863.Obj("left"), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1863.Obj.op_True($t) ? $t : Bridge.ClientTest.Batch3.BridgeIssues.Bridge1863.Obj.op_BitwiseOr($t, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1863.Obj("right")));
+            Bridge.Test.Assert.areEqual("c:left;t:left;", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1863.sb.toString());
+            Bridge.Test.Assert.areEqual("left", o1.getv());
+
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1863.sb = new System.Text.StringBuilder();
+            o1 = ($t1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1863.Obj("left"), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1863.Obj.op_False($t1) ? $t1 : Bridge.ClientTest.Batch3.BridgeIssues.Bridge1863.Obj.op_BitwiseAnd($t1, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1863.Obj("right")));
+            Bridge.Test.Assert.areEqual("c:left;f:left;c:right;", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1863.sb.toString());
+            Bridge.Test.Assert.areEqual("right", o1.getv());
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1863.Obj", {
+        statics: {
+            op_False: function (o) {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1863.sb.append(System.String.concat(System.String.concat("f:", o.getv()), ";"));
+                return o == null;
+            },
+            op_True: function (o) {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1863.sb.append(System.String.concat(System.String.concat("t:", o.getv()), ";"));
+                return o != null;
+            },
+            op_BitwiseOr: function (left, right) {
+                if (left == null) {
+                    return right;
+                }
+
+                if (right == null) {
+                    return left;
+                }
+
+                return left;
+            },
+            op_BitwiseAnd: function (left, right) {
+                if (left == null) {
+                    return null;
+                }
+
+                if (right == null) {
+                    return null;
+                }
+
+                return right;
+            }
+        },
+        _v: null,
+        ctor: function (v) {
+            this.$initialize();
+            this.setv(v);
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1863.sb.append(System.String.concat(System.String.concat("c:", v), ";"));
+        },
+        getv: function () {
+            return this._v;
+        },
+        setv: function (value) {
+            this._v = value;
+        },
+        toString: function () {
+            return this.getv();
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869", {
+        statics: {
+            getFoo: function (name) {
+                return window.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869[name];
+            }
+        },
+        testGenericTypeDefinition: function () {
+            var foo1 = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869.Foo$1(Object))();
+
+            var n1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869.getFoo("Foo$1$Object");
+            Bridge.Test.Assert.null$1(n1, "Foo$1$Object should not exist");
+
+            var n2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869.getFoo("Foo$1");
+            Bridge.Test.Assert.notNull$1(n2, "Foo$1 should exist");
+
+            var foo2 = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869.Foo$1(System.Int64))();
+
+            var n3 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869.getFoo("Foo$1$System.Int64");
+            Bridge.Test.Assert.null$1(n1, "Foo$1$System.Int64 should not exist");
+
+            var n4 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869.getFoo("Foo$1");
+            Bridge.Test.Assert.notNull$1(n2, "Foo$1 should exist");
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869.Foo$1", function (T) { return {
+
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1871", {
+        statics: {
+            /**
+             * @static
+             * @private
+             * @this Bridge.ClientTest.Batch3.BridgeIssues.Bridge1871
+             * @memberof Bridge.ClientTest.Batch3.BridgeIssues.Bridge1871
+             * @param   {string}    args
+             * @return  {void}
+             */
+            doSomething: function (args) {
+
+            }
+        },
+        testErrorCommentNotThrowCompilerException: function () {
+            Bridge.Test.Assert.true$1(true, "Should compile successfully");
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1872", {
+        testAsyncWithAnonymousDelegate: function () {
+            var $step = 0,
+                $task1, 
+                $jumpFromFinally, 
+                done, 
+                task, 
+                $asyncBody = Bridge.fn.bind(this, function () {
+                    for (;;) {
+                        $step = System.Array.min([0,1], $step);
+                        switch ($step) {
+                            case 0: {
+                                done = Bridge.Test.Assert.async();
+                                task = new System.Threading.Tasks.Task(null);
+                                window.setTimeout(function () {
+                                    var $step = 0,
+                                        $task1, 
+                                        $jumpFromFinally, 
+                                        $asyncBody = Bridge.fn.bind(this, function () {
+                                            for (;;) {
+                                                $step = System.Array.min([0,1], $step);
+                                                switch ($step) {
+                                                    case 0: {
+                                                        $task1 = System.Threading.Tasks.Task.delay(1);
+                                                        $step = 1;
+                                                        $task1.continueWith($asyncBody, true);
+                                                        return;
+                                                    }
+                                                    case 1: {
+                                                        $task1.getAwaitedResult();
+                                                        task.complete();
+                                                        return;
+                                                    }
+                                                    default: {
+                                                        return;
+                                                    }
+                                                }
+                                            }
+                                        }, arguments);
+
+                                    $asyncBody();
+                                });
+
+                                $task1 = task;
+                                $step = 1;
+                                $task1.continueWith($asyncBody, true);
+                                return;
+                            }
+                            case 1: {
+                                $task1.getAwaitedResult();
+                            
+                                Bridge.Test.Assert.true(task.isCompleted());
+
+                                done();
+                                return;
+                            }
+                            default: {
+                                return;
+                            }
+                        }
+                    }
+                }, arguments);
+
+            $asyncBody();
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1875", {
+        testDictionaryWithLongVariableAsKey: function () {
+            var a = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1875.ClassA();
+            a.setId(System.Int64(1));
+
+            var x = new (System.Collections.Generic.Dictionary$2(System.Int64,System.Int32))();
+            x.set(a.getId(), 2);
+            var y = { };
+            x.tryGetValue(a.getId(), y);
+            Bridge.Test.Assert.areEqual(2, y.v);
+            Bridge.Test.Assert.true(x.containsKey(a.getId()));
+
+            x.clear();
+            x.set(a.getId(), 2);
+            x.tryGetValue(a.getId(), y);
+            Bridge.Test.Assert.areEqual(2, y.v);
+            Bridge.Test.Assert.true(x.containsKey(a.getId()));
+            Bridge.Test.Assert.areEqual(2, x.get(a.getId()));
+            Bridge.Test.Assert.areEqual(2, x.get(a.getId()));
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1875.ClassA", {
+        config: {
+            properties: {
+                Id: System.Int64(0)
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1878", {
-        testCase: function () {
+        testSumDefaultValue: function () {
             var x = new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1878.classA))();
             x.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1878.classA(), {
                 setDecimalNumber: System.Decimal(1),

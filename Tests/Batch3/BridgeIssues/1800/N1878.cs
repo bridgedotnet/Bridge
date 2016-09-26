@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Bridge.Test;
@@ -17,7 +15,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [Test]
-        public void TestCase()
+        public void TestSumDefaultValue()
         {
             List<classA> x = new List<classA>();
             x.Add(new classA() { DecimalNumber = 1, LongNumber = 1 });
