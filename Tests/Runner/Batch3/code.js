@@ -9520,6 +9520,23 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869", {
+        testGenericTypeDefinition: function () {
+            var foo = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869.Foo$1(Object))();
+
+            var n1 = window.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869.Foo$1$Object;
+            Bridge.Test.Assert.null$1(n1, "Foo$1$Object should not exist");
+            Bridge.Console.log(System.String.concat("Should NOT exist: ", n1));
+
+            var n2 = window.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869.Foo$1;
+            Bridge.Test.Assert.notNull$1(n2, "Foo$1 should exist");
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869.Foo$1", function (T) { return {
+
+    }; });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
