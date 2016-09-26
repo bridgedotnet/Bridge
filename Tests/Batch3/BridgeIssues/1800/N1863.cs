@@ -76,7 +76,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [Test]
-        public void TestCase()
+        public void TestTrueFalseOperators()
         {
             Bridge1863.sb = new StringBuilder();
             var o1 = new Obj("left") || new Obj("right");

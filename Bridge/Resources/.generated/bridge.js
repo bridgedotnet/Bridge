@@ -1,7 +1,7 @@
 /*
- * @version   : 15.0.0 - Bridge.NET
+ * @version   : 15.1.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2016-09-12
+ * @date      : 2016-09-19
  * @copyright : Copyright 2008-2016 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE.
 */
@@ -165,7 +165,7 @@
             })(name, scope, statics);
         },
 
-        createInstance: function (type) {
+        createInstance: function (type, args) {
             if (type === System.Decimal) {
                 return System.Decimal.Zero;
             }
@@ -200,8 +200,10 @@
                 return 0;
             } else if (type === String) {
                 return '';
-            } if (type && type.prototype && type.prototype.$literal) {
+            } else if (type && type.prototype && type.prototype.$literal) {
                 return type.ctor();
+            } else if (args && args.length > 0) {
+                return Bridge.Reflection.applyConstructor(type, args);
             } else {
                 return new type();
             }
@@ -3395,7 +3397,81 @@
             return typeName ? Bridge.Reflection._getType(typeName, asm) : null;
         },
 
+        canAcceptNull: function (type) {
+            if (type.$kind === "struct" ||
+                type === System.Decimal ||
+                type === System.Int64 ||
+                type === System.UInt64 ||
+                type === System.Double ||
+                type === System.Single ||
+                type === System.Byte ||
+                type === System.SByte ||
+                type === System.Int16 ||
+                type === System.UInt16 ||
+                type === System.Int32 ||
+                type === System.UInt32 ||
+                type === Bridge.Int ||
+                type === Boolean ||
+                type === Date ||
+                type === Number) {
+                return false;
+            }
+
+            return true;
+        },
+
         applyConstructor: function (constructor, args) {
+            if (!args || args.length === 0) {
+                return new constructor();
+            }
+
+            if (constructor.$$initCtor && constructor.$kind !== "anonymous") {
+                var md = Bridge.getMetadata(constructor),
+                    count = 0;
+                if (md) {
+                    var ctors = Bridge.Reflection.getMembers(constructor, 1, 28),
+                        found;
+
+                    for (var j = 0; j < ctors.length; j++) {
+                        var ctor = ctors[j];
+                        if (ctor.params && ctor.params.length === args.length) {
+                            found = true;
+                            for (var k = 0; k < ctor.params.length; k++) {
+                                var p = ctor.params[k];
+
+                                if (!Bridge.is(args[k], p) || args[k] == null && !Bridge.Reflection.canAcceptNull(p)) {
+                                    found = false;
+                                    break;
+                                }
+                            }
+
+                            if (found) {
+                                constructor = constructor[ctor.sname];
+                                count++;
+                            }
+                        }
+                    }
+                } else {
+                    if (Bridge.isFunction(constructor.ctor) && constructor.ctor.length === args.length) {
+                        constructor = constructor.ctor;
+                    } else {
+                        var name = "$ctor",
+                        i = 1;
+                        while (Bridge.isFunction(constructor[name + i])) {
+                            if (constructor[name + i].length === args.length) {
+                                constructor = constructor[name + i];
+                                count++;
+                            }
+                            i++;
+                        }
+                    }
+                }
+
+                if (count > 1) {
+                    throw new System.Exception("The ambiguous constructor call");
+                }
+            }
+
             var f = function () {
                 constructor.apply(this, args);
             };
@@ -10004,7 +10080,7 @@
                 for (i = startIndex; i < this.items.length; i++) {
                     el = this.items[i];
 
-                    if (el === item || System.Collections.Generic.EqualityComparer$1.$default.equals2(el, item)) {
+                    if (System.Collections.Generic.EqualityComparer$1.$default.equals2(el, item)) {
                         return i;
                     }
                 }
