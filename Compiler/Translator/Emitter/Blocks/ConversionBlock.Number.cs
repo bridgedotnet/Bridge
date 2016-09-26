@@ -46,9 +46,32 @@ namespace Bridge.Translator
             if (Helpers.Is64Type(toType, block.Emitter.Resolver) && expression.Parent is IndexerExpression &&
                 ((IndexerExpression)expression.Parent).Arguments.Contains(expression))
             {
-                block.Write(JS.Types.System.Int64.TONUMBER);
-                block.Write("(");
-                isArrayIndex = true;
+                var memberResolveResult = rr as MemberResolveResult;
+                var isIgnore = true;
+                var isAccessorsIndexer = false;
+                IProperty member = null;
+                IndexerAccessor current = null;
+
+                if (memberResolveResult != null)
+                {
+                    var resolvedMember = memberResolveResult.Member;
+                    isIgnore = block.Emitter.Validator.IsIgnoreType(resolvedMember.DeclaringTypeDefinition);
+                    isAccessorsIndexer = block.Emitter.Validator.IsAccessorsIndexer(resolvedMember);
+
+                    var property = resolvedMember as IProperty;
+                    if (property != null)
+                    {
+                        member = property;
+                        current = IndexerBlock.GetIndexerAccessor(block.Emitter, member, block.Emitter.IsAssignment);
+                    }
+                }
+
+                if (!(current != null && current.InlineAttr != null) && !(!(isIgnore || (current != null && current.IgnoreAccessor)) || isAccessorsIndexer))
+                {
+                    block.Write(JS.Types.System.Int64.TONUMBER);
+                    block.Write("(");
+                    isArrayIndex = true;
+                }
             }
 
             if ((conversion.IsNumericConversion || conversion.IsEnumerationConversion) && conversion.IsExplicit)

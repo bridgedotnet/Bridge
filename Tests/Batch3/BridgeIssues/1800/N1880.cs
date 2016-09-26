@@ -16,7 +16,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [Test]
-        public void TestCase()
+        public void TestDefaultValuesWithTemplates()
         {
             Assert.AreEqual(10, BigInteger.Parse("10"));
             Assert.AreEqual(8, BigInteger.Parse("10", 8));

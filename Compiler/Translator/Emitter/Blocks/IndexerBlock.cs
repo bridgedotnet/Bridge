@@ -101,7 +101,7 @@ namespace Bridge.Translator
                 if (property != null)
                 {
                     member = property;
-                    current = this.GetIndexerAccessor(member, this.Emitter.IsAssignment);
+                    current = IndexerBlock.GetIndexerAccessor(this.Emitter, member, this.Emitter.IsAssignment);
                 }
             }
 
@@ -184,7 +184,7 @@ namespace Bridge.Translator
             }
         }
 
-        protected virtual IndexerAccessor GetIndexerAccessor(IProperty member, bool setter)
+        public static IndexerAccessor GetIndexerAccessor(IEmitter emitter, IProperty member, bool setter)
         {
             string inlineCode = null;
             var method = setter ? member.Setter : member.Getter;
@@ -194,9 +194,9 @@ namespace Bridge.Translator
                 return null;
             }
 
-            var inlineAttr = this.Emitter.GetAttribute(method.Attributes, Translator.Bridge_ASSEMBLY + ".TemplateAttribute");
+            var inlineAttr = emitter.GetAttribute(method.Attributes, Translator.Bridge_ASSEMBLY + ".TemplateAttribute");
 
-            var ignoreAccessor = this.Emitter.Validator.IsIgnoreType(method);
+            var ignoreAccessor = emitter.Validator.IsIgnoreType(method);
 
             if (inlineAttr != null)
             {

@@ -191,3 +191,4 @@ Tests/**/App_Readme/
 /Tests/Runner/Batch2/bridge.test.qunit.js
 /Tests/Runner/Batch3/bridge.test.qunit.js
 /Tests/Runner/Batch4/bridge.test.qunit.js
+/Bridge.Sandbox.sln
