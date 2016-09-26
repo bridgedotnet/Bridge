@@ -9739,6 +9739,81 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         $clone: function (to) { return this; }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882", {
+        statics: {
+            getArray: function () {
+                return System.Array.init(1, null);
+            },
+            getArrayExternal: function () {
+                return System.Array.init(1, null);
+            },
+            getList: function () {
+                return new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.MVCArray$1(System.Int32)))(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.getArray());
+            },
+            getListExternal: function () {
+                return new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.MVCArray$1(System.Int64)))(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.getArrayExternal());
+            }
+        },
+        testGenericClassCastForArray: function () {
+            var $t, $t1, $t2, $t3;
+            $t = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.getArray());
+            while ($t.moveNext()) {
+                var i = $t.getCurrent();
+                Bridge.Test.Assert.true$1(true, "No cast for array of generic elements works");
+            }
+
+            $t1 = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.getArray());
+            while ($t1.moveNext()) {
+                var i1 = $t1.getCurrent();
+                Bridge.Test.Assert.true$1(true, "Cast for array of generic elements works");
+            }
+
+            $t2 = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.getArrayExternal());
+            while ($t2.moveNext()) {
+                var i2 = $t2.getCurrent();
+                Bridge.Test.Assert.true$1(true, "No cast for array of external generic elements works");
+            }
+
+            $t3 = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.getArrayExternal());
+            while ($t3.moveNext()) {
+                var i3 = $t3.getCurrent();
+                Bridge.Test.Assert.true$1(true, "Cast for array of external generic elements works");
+            }
+        },
+        testGenericClassCastForList: function () {
+            var $t, $t1, $t2, $t3;
+            $t = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.getList());
+            while ($t.moveNext()) {
+                var i = $t.getCurrent();
+                Bridge.Test.Assert.true$1(true, "No cast for List of generic elements works");
+            }
+
+            $t1 = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.getList());
+            while ($t1.moveNext()) {
+                var i1 = $t1.getCurrent();
+                Bridge.Test.Assert.true$1(true, "Cast for List of generic elements works");
+            }
+
+            $t2 = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.getListExternal());
+            while ($t2.moveNext()) {
+                var i2 = $t2.getCurrent();
+                Bridge.Test.Assert.true$1(true, "No cast for List of external generic elements works");
+            }
+
+            $t3 = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.getListExternal());
+            while ($t3.moveNext()) {
+                var i3 = $t3.getCurrent();
+                Bridge.Test.Assert.true$1(true, "Cast for List of external generic elements works");
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.MVCArray$1", function (T) { return {
+        ctor: function () {
+            this.$initialize();
+        }
+    }; });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
