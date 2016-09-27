@@ -358,6 +358,16 @@
     <Compile Include="BridgeIssues\1800\N1853.cs" />
     <Compile Include="BridgeIssues\1800\N1856.cs" />
     <Compile Include="BridgeIssues\1800\N1854.cs" />
+    <Compile Include="BridgeIssues\1800\N1863.cs" />
+    <Compile Include="BridgeIssues\1800\N1869.cs" />
+    <Compile Include="BridgeIssues\1800\N1871.cs" />
+    <Compile Include="BridgeIssues\1800\N1872.cs" />
+    <Compile Include="BridgeIssues\1800\N1875.cs" />
+    <Compile Include="BridgeIssues\1800\N1878.cs" />
+    <Compile Include="BridgeIssues\1800\N1880.cs" />
+    <Compile Include="BridgeIssues\1800\N1882.cs" />
+    <Compile Include="BridgeIssues\1800\N1884.cs" />
+    <Compile Include="BridgeIssues\1800\N1886.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
     <Compile Include="Utilities\DecimalHelper.cs" />

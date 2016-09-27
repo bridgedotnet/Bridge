@@ -20,7 +20,7 @@
                 v = v.replace(nfInfo.numberDecimalSeparator, ".");
             }
 
-            if (!/^\s*[+-]?(\d+|\d*\.\d+)((e|E)[+-]?\d+)?\s*$/.test(v)) {
+            if (!/^\s*[+-]?(\d+|\d+.|\d*\.\d+)((e|E)[+-]?\d+)?\s*$/.test(v)) {
                 throw new System.FormatException();
             }
 

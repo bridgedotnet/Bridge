@@ -206,13 +206,7 @@ namespace Bridge.Contract
                     var param = comment.Parameters.FirstOrDefault(p => p.Name == name);
                     if (param == null)
                     {
-                        param = new JsDocParam
-                        {
-                            Name = "[name]",
-                            Type = "[type]"
-                        };
-
-                        comment.Parameters.Add(param);
+                        continue;
                     }
 
                     attr = node.Attributes["type"];
@@ -1002,7 +996,7 @@ namespace Bridge.Contract
             tmp.AddRange(this.Returns);
             foreach (JsDocParam param in tmp)
             {
-                if (param.Type.Length > typeColumnWidth)
+                if (param.Type != null && param.Type.Length > typeColumnWidth)
                 {
                     typeColumnWidth = param.Type.Length;
                 }
@@ -1016,12 +1010,12 @@ namespace Bridge.Contract
             typeColumnWidth += 4;
             nameColumnWidth += 4;
 
-            if (this.Descriptions.Count > 0)
+            if (this.Descriptions.Count > 0 && this.Descriptions.Any(v => !string.IsNullOrWhiteSpace(v)))
             {
                 comment.Append(" * " + string.Join(newLine + " * ", this.Descriptions.ToArray()) + newLine + " *" + newLine);
             }
 
-            if (this.Remarks.Count > 0)
+            if (this.Remarks.Count > 0 && this.Remarks.Any(v=> !string.IsNullOrWhiteSpace(v)))
             {
                 comment.Append(" * " + string.Join(newLine + " * ", this.Remarks) + newLine + " *" + newLine);
             }
@@ -1168,7 +1162,7 @@ namespace Bridge.Contract
             {
                 comment.Append(" * @param   {" + param.Type + "}");
 
-                comment.Append(new String(' ', typeColumnWidth - param.Type.Length));
+                comment.Append(new String(' ', typeColumnWidth - (param.Type != null ? param.Type.Length : 0)));
                 comment.Append(param.Name);
 
                 var desc = param.Desc;
@@ -1202,7 +1196,7 @@ namespace Bridge.Contract
                 // (for last argument), then print whitespaces after param name.
                 if (++argCount < this.Returns.Count() || desc != null)
                 {
-                    comment.Append(new String(' ', typeColumnWidth - param.Type.Length));
+                    comment.Append(new String(' ', typeColumnWidth - (param.Type != null ? param.Type.Length : 0)));
                     comment.Append(new String(' ', nameColumnWidth));
                 }
 

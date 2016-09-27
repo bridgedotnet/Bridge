@@ -6652,6 +6652,51 @@
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Collections.Generic.WeakMapTests", {
+        gettingSettingAndDeletingWorks: function () {
+            // AppVeyor Chutzpah engine adjustment
+            if (Bridge.ClientTest.Utilities.BrowserHelper.isPhantomJs()) {
+                Bridge.Test.Assert.true$1(true, "Not running WeapMap tests as not supported in PhantomJS. See https://github.com/ariya/phantomjs/issues/13652");
+                return;
+            }
+
+            var someValue = Bridge.merge(new Bridge.ClientTest.Collections.Generic.WeakMapTests.SomeCustomClass(), {
+                setSomeProperty: 456
+            } );
+
+            var someKey = new Bridge.ClientTest.Collections.Generic.WeakMapTests.SomeCustomClass();
+            var someOtherKey = new Bridge.ClientTest.Collections.Generic.WeakMapTests.SomeCustomClass();
+
+            Bridge.Test.Assert.areEqual$1(someKey, someOtherKey, "Keys sanity check"); //sanity check
+
+            var amap = new WeakMap();
+            amap.set(someKey, someValue);
+
+            Bridge.Test.Assert.true$1(amap.has(someKey), "Has someKey");
+            Bridge.Test.Assert.false$1(amap.has(someOtherKey), "Does not have someOtherKey");
+            var v = amap.get(someKey);
+            Bridge.Test.Assert.notNull$1(v, "Get not null");
+            var typedV = Bridge.as(v, Bridge.ClientTest.Collections.Generic.WeakMapTests.SomeCustomClass);
+            Bridge.Test.Assert.notNull$1(typedV, "Get not null SomeCustomClass");
+            Bridge.Test.Assert.areEqual$1(typedV.getSomeProperty(), 456, "Check SomeProperty");
+            Bridge.Test.Assert.areEqual$1(someValue, v, "Check references");
+
+            Bridge.Test.Assert.true$1(amap.delete(someKey), "Delete someKey");
+            Bridge.Test.Assert.false$1(amap.delete(someKey), "Another delete someKey");
+            Bridge.Test.Assert.false$1(amap.has(someKey), "Check if has deleted someKey");
+
+            Bridge.Test.Assert.areEqual$1(undefined, amap.get(someKey), "Get deleted someKey");
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Collections.Generic.WeakMapTests.SomeCustomClass", {
+        config: {
+            properties: {
+                SomeProperty: 0
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Constants", {
         statics: {
             PREFIX_SYSTEM_CLASSES: "Simple types",
@@ -6690,6 +6735,7 @@
             MODULE_RANDOM: "Random",
             MODULE_ICOLLECTION: "Collections",
             MODULE_IDICTIONARY: "Collections",
+            MODULE_WEAKCOLLECTION: "Collections",
             MODULE_LIST: "Collections",
             MODULE_ILIST: "Collections",
             MODULE_ITERATORBLOCK: "Collections",

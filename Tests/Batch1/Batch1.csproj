@@ -63,6 +63,7 @@
     <Compile Include="BasicCSharp\TestTryCatchBlocks.cs" />
     <Compile Include="BasicCSharp\TestReferenceTypes.cs" />
     <Compile Include="BasicCSharp\TestValueTypes.cs" />
+    <Compile Include="Collections\Native\WeakMapTests.cs" />
     <Compile Include="Convert\ConvertFromBase64Tests.cs" />
     <Compile Include="Convert\ConvertTestBase.cs" />
     <Compile Include="Convert\ConvertToBase64CharArrayTests.cs" />

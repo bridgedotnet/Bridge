@@ -29,7 +29,7 @@ console.log("Hello, World!");
 * The [Attribute Reference](http://bridge.net/docs/attribute-reference/) is important
 * Licensed under [Apache License, Version 2.0](LICENSE)
 * Need Help? Bridge.NET [Forums](http://forums.bridge.net/) or GitHub [Issues](https://github.com/bridgedotnet/Bridge/issues)
-* [@bridgedotnet](twitter.com/bridgedotnet) on Twitter
+* [@bridgedotnet](https://twitter.com/bridgedotnet) on Twitter
 
 ## Getting Started
 

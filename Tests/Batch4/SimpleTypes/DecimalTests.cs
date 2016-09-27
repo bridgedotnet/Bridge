@@ -1022,7 +1022,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
 
             Assert.Throws<FormatException>(() => decimal.Parse("A123"));
             Assert.Throws<FormatException>(() => decimal.Parse("12.34.56"));
-            Assert.Throws<FormatException>(() => decimal.Parse("12."));
+            Assert.AreEqual(12d.ToString(), decimal.Parse("12.").ToString());
             //Assert.Throws<OverflowException>(() => decimal.Parse("999999999999999999999999999999"));
         }
 
@@ -1069,8 +1069,8 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
             AssertIsDecimalAndEqualTo(d, 0);
 
             b = decimal.TryParse("12.", out d);
-            Assert.False(b);
-            AssertIsDecimalAndEqualTo(d, 0);
+            Assert.True(b);
+            AssertIsDecimalAndEqualTo(d, 12);
 
             //b = decimal.TryParse("999999999999999999999999999999", out d);
             //Assert.False(b);

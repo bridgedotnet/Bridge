@@ -360,7 +360,7 @@ namespace System.Linq
 
         public extern int Sum(Func<TElement, int> selector);
 
-        [Template("{this}.sum({selector}, System.Long.Zero)")]
+        [Template("{this}.sum({selector}, System.Int64.Zero)")]
         public extern long Sum(Func<TElement, long> selector);
 
         public extern float Sum(Func<TElement, float> selector);

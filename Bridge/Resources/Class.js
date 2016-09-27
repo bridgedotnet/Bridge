@@ -186,7 +186,9 @@
                 Class = cls;
             }
 
-            scope = Bridge.Class.set(scope, className, Class);
+            if (!isGenericInstance) {
+                scope = Bridge.Class.set(scope, className, Class);
+            }
 
             if (gCfg) {
                 gCfg.fn.$cache.push({ type: Class, args: gCfg.args });

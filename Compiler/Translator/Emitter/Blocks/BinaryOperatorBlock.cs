@@ -7,7 +7,9 @@ using ICSharpCode.NRefactory.TypeSystem;
 
 using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
+using Expression = ICSharpCode.NRefactory.CSharp.Expression;
 
 namespace Bridge.Translator
 {
@@ -36,6 +38,17 @@ namespace Bridge.Translator
             this.VisitBinaryOperatorExpression();
         }
 
+        private IMethod FindOperatorTrueOrFalse(IType type, bool findTrue)
+        {
+            var isNullable = NullableType.IsNullable(type);
+            if (isNullable)
+            {
+                type = NullableType.GetUnderlyingType(type);
+            }
+
+            return (IMethod)type.GetMethods(null, GetMemberOptions.IgnoreInheritedMembers).Single(m => m.Name == (findTrue ? "op_True" : "op_False") && m.Parameters.Count == 1 && NullableType.IsNullable(m.Parameters[0].Type) == isNullable);
+        }
+
         protected bool ResolveOperator(BinaryOperatorExpression binaryOperatorExpression, OperatorResolveResult orr)
         {
             var method = orr != null ? orr.UserDefinedOperatorMethod : null;
@@ -52,6 +65,66 @@ namespace Bridge.Translator
                 }
                 else if (!this.Emitter.Validator.IsIgnoreType(method.DeclaringTypeDefinition))
                 {
+                    bool addClose = false;
+                    string leftInterfaceTempVar = null;
+
+                    if (orr.OperatorType == ExpressionType.OrElse || orr.OperatorType == ExpressionType.AndAlso)
+                    {
+                        var orElse = orr.OperatorType == ExpressionType.OrElse;
+                        var left = orr.Operands[0];
+                        var memberTargetrr = left as MemberResolveResult;
+                        bool isField = memberTargetrr != null && memberTargetrr.Member is IField &&
+                                       (memberTargetrr.TargetResult is ThisResolveResult ||
+                                        memberTargetrr.TargetResult is LocalResolveResult);
+
+                        if (!(left is ThisResolveResult || left is TypeResolveResult || left is LocalResolveResult || left is ConstantResolveResult || isField))
+                        {
+                            this.WriteOpenParentheses();
+
+                            leftInterfaceTempVar = this.GetTempVarName();
+                            this.Write(leftInterfaceTempVar);
+                            this.Write(" = ");
+
+                            binaryOperatorExpression.Left.AcceptVisitor(this.Emitter);
+
+                            this.WriteComma();
+                        }
+
+                        var m = FindOperatorTrueOrFalse(left.Type, orElse);
+
+                        this.Write(BridgeTypes.ToJsName(m.DeclaringType, this.Emitter));
+                        this.WriteDot();
+                        this.Write(OverloadsCollection.Create(this.Emitter, m).GetOverloadName());
+
+                        this.WriteOpenParentheses();
+
+                        if (leftInterfaceTempVar != null)
+                        {
+                            this.Write(leftInterfaceTempVar);
+                        }
+                        else
+                        {
+                            binaryOperatorExpression.Left.AcceptVisitor(this.Emitter);
+                        }
+
+                        this.WriteCloseParentheses();
+
+                        this.Write(" ? ");
+
+                        if (leftInterfaceTempVar != null)
+                        {
+                            this.Write(leftInterfaceTempVar);
+                        }
+                        else
+                        {
+                            binaryOperatorExpression.Left.AcceptVisitor(this.Emitter);
+                        }
+
+                        this.Write(" : ");
+
+                        addClose = true;
+                    }
+
                     if (orr.IsLiftedOperator)
                     {
                         this.Write(JS.Types.SYSTEM_NULLABLE + ".");
@@ -102,9 +175,24 @@ namespace Bridge.Translator
                         this.WriteOpenParentheses();
                     }
 
-                    new ExpressionListBlock(this.Emitter,
+                    if (leftInterfaceTempVar != null)
+                    {
+                        this.Write(leftInterfaceTempVar);
+                        this.Write(", ");
+                        binaryOperatorExpression.Right.AcceptVisitor(this.Emitter);
+                    }
+                    else
+                    {
+                        new ExpressionListBlock(this.Emitter,
                         new Expression[] { binaryOperatorExpression.Left, binaryOperatorExpression.Right }, null, null, 0).Emit();
+                    }
+                    
                     this.WriteCloseParentheses();
+
+                    if (addClose)
+                    {
+                        this.WriteCloseParentheses();
+                    }
 
                     return true;
                 }

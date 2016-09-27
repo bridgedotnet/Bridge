@@ -2,7 +2,6 @@
 .DS_Store
 
 Bridge.NET.sln.ide/*
-Bridge.NET.dev.sln
 
 # Auto-generated
 /Bridge/Resources/bridge.js
@@ -187,9 +186,9 @@ AutoTest.Net/
 FakesAssemblies/
 *.ts
 *.d.ts
-/Bridge.dev.sln
 *.nupkg
 Tests/**/App_Readme/
 /Tests/Runner/Batch2/bridge.test.qunit.js
 /Tests/Runner/Batch3/bridge.test.qunit.js
 /Tests/Runner/Batch4/bridge.test.qunit.js
+/Bridge.Sandbox.sln

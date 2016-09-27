@@ -287,6 +287,7 @@
             QUnit.test("List - IListInsertWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ListTests.iListInsertWorks);
             QUnit.test("List - IListRemoveAtWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ListTests.iListRemoveAtWorks);
             QUnit.test("List - ToArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ListTests.toArrayWorks);
+            QUnit.test("WeakMap - GettingSettingAndDeletingWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_WeakMapTests.gettingSettingAndDeletingWorks);
             QUnit.test("MultidimArray - TypePropertiesAreCorrect", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_MultidimArrayTests.typePropertiesAreCorrect);
             QUnit.test("MultidimArray - LengthWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_MultidimArrayTests.lengthWorks);
             QUnit.test("MultidimArray - GetValueWorksForUninitializedElement", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_MultidimArrayTests.getValueWorksForUninitializedElement);
@@ -3579,6 +3580,16 @@
             toArrayWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ListTests);
                 t.getFixture().toArrayWorks();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_WeakMapTests", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.WeakMapTests)],
+        statics: {
+            gettingSettingAndDeletingWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.WeakMapTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_WeakMapTests);
+                t.getFixture().gettingSettingAndDeletingWorks();
             }
         }
     });
