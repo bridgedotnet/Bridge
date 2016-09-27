@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Bridge.ClientTest
 {
-    public class ArrayTests1
+    public class ArrayTests
     {
         [Category(Constants.MODULE_ARRAY)]
         [TestFixture(TestNameFormat = "Array - Set1 {0}")]
@@ -154,6 +154,50 @@ namespace Bridge.ClientTest
                 var arr = new[] { "x", "y" };
                 Assert.True(arr.Contains("x"));
                 Assert.False(arr.Contains("z"));
+            }
+
+            [Test]
+            public void CopyToSameBoundWorks()
+            {
+                var l = new string[] { "0", "1", "2" };
+
+                var a1 = new string[3];
+                l.CopyTo(a1, 0);
+
+                Assert.AreEqual("0", a1[0], "Element 0");
+                Assert.AreEqual("1", a1[1], "Element 1");
+                Assert.AreEqual("2", a1[2], "Element 2");
+            }
+
+            [Test]
+            public void CopyToOffsetBoundWorks()
+            {
+                var l = new string[] { "0", "1", "2" };
+
+                var a2 = new string[5];
+                l.CopyTo(a2, 1);
+
+                Assert.AreEqual(null, a2[0], "Element 0");
+                Assert.AreEqual("0", a2[1], "Element 1");
+                Assert.AreEqual("1", a2[2], "Element 2");
+                Assert.AreEqual("2", a2[3], "Element 3");
+                Assert.AreEqual(null, a2[4], "Element 4");
+            }
+
+            [Test]
+            public void CopyToIllegalBoundWorks()
+            {
+                var l = new string[] { "0", "1", "2" };
+
+                Assert.Throws<ArgumentNullException>(() => { l.CopyTo(null, 0); }, "null");
+
+                var a1 = new string[2];
+                Assert.Throws<ArgumentException>(() => { l.CopyTo(a1, 0); }, "Short array");
+
+                var a2 = new string[3];
+                Assert.Throws<ArgumentException>(() => { l.CopyTo(a2, 1); }, "Start index 1");
+                Assert.Throws<ArgumentOutOfRangeException>(() => { l.CopyTo(a2, -1); }, "Negative start index");
+                Assert.Throws<ArgumentException>(() => { l.CopyTo(a2, 3); }, "Start index 3");
             }
 
             [Test]
@@ -392,6 +436,50 @@ namespace Bridge.ClientTest
                 IList<C> l = new[] { new C(1), new C(2), new C(3) };
                 Assert.True(l.Contains(new C(2)));
                 Assert.False(l.Contains(new C(4)));
+            }
+
+            [Test]
+            public void ICollectionCopyToSameBoundWorks()
+            {
+                ICollection<string> l = new string[] { "0", "1", "2" };
+
+                var a1 = new string[3];
+                l.CopyTo(a1, 0);
+
+                Assert.AreEqual("0", a1[0], "Element 0");
+                Assert.AreEqual("1", a1[1], "Element 1");
+                Assert.AreEqual("2", a1[2], "Element 2");
+            }
+
+            [Test]
+            public void ICollectionCopyToOffsetBoundWorks()
+            {
+                ICollection<string> l = new string[] { "0", "1", "2" };
+
+                var a2 = new string[5];
+                l.CopyTo(a2, 1);
+
+                Assert.AreEqual(null, a2[0], "Element 0");
+                Assert.AreEqual("0", a2[1], "Element 1");
+                Assert.AreEqual("1", a2[2], "Element 2");
+                Assert.AreEqual("2", a2[3], "Element 3");
+                Assert.AreEqual(null, a2[4], "Element 4");
+            }
+
+            [Test]
+            public void ICollectionCopyToIllegalBoundWorks()
+            {
+                ICollection<string> l = new string[] { "0", "1", "2" };
+
+                Assert.Throws<ArgumentNullException>(() => { l.CopyTo(null, 0); }, "null");
+
+                var a1 = new string[2];
+                Assert.Throws<ArgumentException>(() => { l.CopyTo(a1, 0); }, "Short array");
+
+                var a2 = new string[3];
+                Assert.Throws<ArgumentException>(() => { l.CopyTo(a2, 1); }, "Start index 1");
+                Assert.Throws<ArgumentOutOfRangeException>(() => { l.CopyTo(a2, -1); }, "Negative start index");
+                Assert.Throws<ArgumentException>(() => { l.CopyTo(a2, 3); }, "Start index 3");
             }
 
             [Test]

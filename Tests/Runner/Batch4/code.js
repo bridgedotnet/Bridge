@@ -1102,6 +1102,7 @@
             "add", "System$Collections$Generic$ICollection$1$String$add",
             "clear", "System$Collections$Generic$ICollection$1$String$clear",
             "contains", "System$Collections$Generic$ICollection$1$String$contains",
+            "copyTo", "System$Collections$Generic$ICollection$1$String$copyTo",
             "remove", "System$Collections$Generic$ICollection$1$String$remove"
             ]
         },
@@ -1126,6 +1127,9 @@
         },
         contains: function (item) {
             return this.getItems().contains(item);
+        },
+        copyTo: function (array, arrayIndex) {
+            this.getItems().copyTo(array, arrayIndex);
         },
         remove: function (item) {
             return this.getItems().remove(item);
@@ -1615,6 +1619,7 @@
             "add", "System$Collections$Generic$ICollection$1$String$add",
             "clear", "System$Collections$Generic$ICollection$1$String$clear",
             "contains", "System$Collections$Generic$ICollection$1$String$contains",
+            "copyTo", "System$Collections$Generic$ICollection$1$String$copyTo",
             "remove", "System$Collections$Generic$ICollection$1$String$remove",
             "getItem", "System$Collections$Generic$IList$1$String$getItem",
             "setItem", "System$Collections$Generic$IList$1$String$setItem",
@@ -1650,6 +1655,9 @@
         },
         contains: function (item) {
             return this.getItems().contains(item);
+        },
+        copyTo: function (array, arrayIndex) {
+            this.getItems().copyTo(array, arrayIndex);
         },
         remove: function (item) {
             return this.getItems().remove(item);

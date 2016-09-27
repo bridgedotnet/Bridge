@@ -45,6 +45,7 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Collections\ObjectModel\ReadOnlyCollectionTests.cs" />
     <Compile Include="FunctionTests.cs" />
     <Compile Include="BridgeConsoleTests.cs" />
     <Compile Include="Exceptions\AmbiguousMatchExceptionTests.cs" />

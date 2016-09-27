@@ -606,6 +606,8 @@ namespace Bridge.Html5.TypedArray
 
         extern bool ICollection<TypedElement>.Contains(TypedElement item);
 
+        extern void ICollection<TypedElement>.CopyTo(TypedElement[] array, int arrayIndex);
+
         [Template("Bridge.getEnumerator({this})")]
         public extern IEnumerator<TypedElement> GetEnumerator();
 

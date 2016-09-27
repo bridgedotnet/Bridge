@@ -37,6 +37,13 @@ namespace System.Collections.Generic
 
         public extern bool Contains(T item);
 
+        /// <summary>
+        /// Copies the entire List to a compatible one-dimensional array, starting at the specified index of the target array.
+        /// </summary>
+        /// <param name="array">The one-dimensional Array that is the destination of the elements copied from List.</param>
+        /// <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
+        public extern void CopyTo(T[] array, int arrayIndex);
+
         [Template("{this}.convertAll({TOutput}, {converter})")]
         public extern List<TOutput> ConvertAll<TOutput>(Converter<T, TOutput> converter);
 

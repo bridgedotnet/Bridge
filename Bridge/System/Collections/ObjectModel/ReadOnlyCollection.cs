@@ -38,6 +38,8 @@ namespace System.Collections.ObjectModel
 
         extern void ICollection<T>.Clear();
 
+        public extern void CopyTo(T[] array, int arrayIndex);
+
         extern void IList<T>.Insert(int index, T value);
 
         extern bool ICollection<T>.Remove(T value);

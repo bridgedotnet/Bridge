@@ -1,4 +1,5 @@
 ﻿using Bridge.Test;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -42,6 +43,11 @@ namespace Bridge.ClientTest.Collections.Generic
             public bool Contains(string item)
             {
                 return Items.Contains(item);
+            }
+
+            public void CopyTo(string[] array, int arrayIndex)
+            {
+                Items.CopyTo(array, arrayIndex);
             }
 
             public bool Remove(string item)
@@ -209,6 +215,66 @@ namespace Bridge.ClientTest.Collections.Generic
             IList<string> l = new MyList(new[] { "x", "y", "z" });
             l.RemoveAt(1);
             Assert.AreDeepEqual(new[] { "x", "z" }, ((MyList)l).Items.ToArray());
+        }
+
+        [Test]
+        public void ClassImplementingIListCopyToWorks()
+        {
+            MyList l = new MyList(new[] { "x", "y" });
+
+            var a1 = new string[2];
+            l.CopyTo(a1, 0);
+
+            Assert.AreEqual("x", a1[0], "1.Element 0");
+            Assert.AreEqual("y", a1[1], "1.Element 1");
+
+            var a2 = new string[4];
+            l.CopyTo(a2, 1);
+
+            Assert.AreEqual(null, a2[0], "2.Element 0");
+            Assert.AreEqual("x", a2[1], "2.Element 1");
+            Assert.AreEqual("y", a2[2], "2.Element 2");
+            Assert.AreEqual(null, a2[3], "2.Element 3");
+
+            Assert.Throws<ArgumentNullException>(() => { l.CopyTo(null, 0); }, "null");
+
+            var a3 = new string[1];
+            Assert.Throws<ArgumentException>(() => { l.CopyTo(a3, 0); }, "Short array");
+
+            var a4 = new string[2];
+            Assert.Throws<ArgumentException>(() => { l.CopyTo(a4, 1); }, "Start index 1");
+            Assert.Throws<ArgumentOutOfRangeException>(() => { l.CopyTo(a4, -1); }, "Negative start index");
+            Assert.Throws<ArgumentException>(() => { l.CopyTo(a4, 3); }, "Start index 3");
+        }
+
+        [Test]
+        public void ClassImplementingIListCastToIListCopyToWorks()
+        {
+            IList<string> l = new MyList(new[] { "x", "y" });
+
+            var a1 = new string[2];
+            l.CopyTo(a1, 0);
+
+            Assert.AreEqual("x", a1[0], "1.Element 0");
+            Assert.AreEqual("y", a1[1], "1.Element 1");
+
+            var a2 = new string[4];
+            l.CopyTo(a2, 1);
+
+            Assert.AreEqual(null, a2[0], "2.Element 0");
+            Assert.AreEqual("x", a2[1], "2.Element 1");
+            Assert.AreEqual("y", a2[2], "2.Element 2");
+            Assert.AreEqual(null, a2[3], "2.Element 3");
+
+            Assert.Throws<ArgumentNullException>(() => { l.CopyTo(null, 0); }, "null");
+
+            var a3 = new string[1];
+            Assert.Throws<ArgumentException>(() => { l.CopyTo(a3, 0); }, "Short array");
+
+            var a4 = new string[2];
+            Assert.Throws<ArgumentException>(() => { l.CopyTo(a4, 1); }, "Start index 1");
+            Assert.Throws<ArgumentOutOfRangeException>(() => { l.CopyTo(a4, -1); }, "Negative start index");
+            Assert.Throws<ArgumentException>(() => { l.CopyTo(a4, 3); }, "Start index 3");
         }
     }
 }

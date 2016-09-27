@@ -57,9 +57,9 @@
         }
     });
 
-    Bridge.define("Bridge.ClientTest.ArrayTests1");
+    Bridge.define("Bridge.ClientTest.ArrayTests");
 
-    Bridge.define("Bridge.ClientTest.ArrayTests1.ArrayTestsSet1", {
+    Bridge.define("Bridge.ClientTest.ArrayTests.ArrayTestsSet1", {
         typePropertiesAreCorrect: function () {
             var arr = [1, 2, 3];
             Bridge.Test.Assert.true$1(Bridge.is(arr, Array), "is Array should be true");
@@ -143,14 +143,59 @@
             Bridge.Test.Assert.true(System.Array.contains(arr, "x", String));
             Bridge.Test.Assert.false(System.Array.contains(arr, "z", String));
         },
+        copyToSameBoundWorks: function () {
+            var l = ["0", "1", "2"];
+
+            var a1 = System.Array.init(3, null);
+            System.Array.copy(l, 0, a1, 0, l.length);
+
+            Bridge.Test.Assert.areEqual$1("0", a1[0], "Element 0");
+            Bridge.Test.Assert.areEqual$1("1", a1[1], "Element 1");
+            Bridge.Test.Assert.areEqual$1("2", a1[2], "Element 2");
+        },
+        copyToOffsetBoundWorks: function () {
+            var l = ["0", "1", "2"];
+
+            var a2 = System.Array.init(5, null);
+            System.Array.copy(l, 0, a2, 1, l.length);
+
+            Bridge.Test.Assert.areEqual$1(null, a2[0], "Element 0");
+            Bridge.Test.Assert.areEqual$1("0", a2[1], "Element 1");
+            Bridge.Test.Assert.areEqual$1("1", a2[2], "Element 2");
+            Bridge.Test.Assert.areEqual$1("2", a2[3], "Element 3");
+            Bridge.Test.Assert.areEqual$1(null, a2[4], "Element 4");
+        },
+        copyToIllegalBoundWorks: function () {
+            var l = ["0", "1", "2"];
+
+            Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                System.Array.copy(l, 0, null, 0, l.length);
+            }, "null");
+
+            var a1 = System.Array.init(2, null);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copy(l, 0, a1, 0, l.length);
+            }, "Short array");
+
+            var a2 = System.Array.init(3, null);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copy(l, 0, a2, 1, l.length);
+            }, "Start index 1");
+            Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
+                System.Array.copy(l, 0, a2, -1, l.length);
+            }, "Negative start index");
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copy(l, 0, a2, 3, l.length);
+            }, "Start index 3");
+        },
         containsUsesEqualsMethod: function () {
-            var arr = [new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C(1), new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C(2), new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C(3)];
-            Bridge.Test.Assert.true(System.Array.contains(arr, new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C(2), Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C));
-            Bridge.Test.Assert.false(System.Array.contains(arr, new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C(4), Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C));
+            var arr = [new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C(1), new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C(2), new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C(3)];
+            Bridge.Test.Assert.true(System.Array.contains(arr, new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C(2), Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C));
+            Bridge.Test.Assert.false(System.Array.contains(arr, new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C(4), Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C));
         },
         allWithArrayItemFilterCallbackWorks: function () {
-            Bridge.Test.Assert.true(System.Linq.Enumerable.from([1, 2, 3]).all($_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.f1));
-            Bridge.Test.Assert.false(System.Linq.Enumerable.from([1, 2, 3]).all($_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.f2));
+            Bridge.Test.Assert.true(System.Linq.Enumerable.from([1, 2, 3]).all($_.Bridge.ClientTest.ArrayTests.ArrayTestsSet1.f1));
+            Bridge.Test.Assert.false(System.Linq.Enumerable.from([1, 2, 3]).all($_.Bridge.ClientTest.ArrayTests.ArrayTestsSet1.f2));
         },
         sliceWithoutEndWorks: function () {
             Bridge.Test.Assert.areDeepEqual(["c", "d"], ["a", "b", "c", "d"].slice(2));
@@ -174,9 +219,9 @@
             Bridge.Test.Assert.areEqual(1, ["a", "b", "c", "b"].indexOf("b"));
         },
         indexOfWithoutStartIndexUsesEqualsMethod: function () {
-            var arr = [new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C(1), new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C(2), new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C(3)];
-            Bridge.Test.Assert.areEqual(1, Bridge.Linq.Enumerable.from(arr).indexOf(new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C(2)));
-            Bridge.Test.Assert.areEqual(-1, Bridge.Linq.Enumerable.from(arr).indexOf(new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C(4)));
+            var arr = [new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C(1), new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C(2), new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C(3)];
+            Bridge.Test.Assert.areEqual(1, Bridge.Linq.Enumerable.from(arr).indexOf(new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C(2)));
+            Bridge.Test.Assert.areEqual(-1, Bridge.Linq.Enumerable.from(arr).indexOf(new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C(4)));
         },
         indexOfWithStartIndexWorks: function () {
             Bridge.Test.Assert.areEqual(3, ["a", "b", "c", "b"].indexOf("b", 2));
@@ -192,8 +237,8 @@
             Bridge.Test.Assert.areDeepEqual([2, 3, 1, 4, 3, 1], arr);
         },
         anyWithArrayItemFilterCallbackWorks: function () {
-            Bridge.Test.Assert.true(System.Linq.Enumerable.from([1, 2, 3, 4]).any($_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.f3));
-            Bridge.Test.Assert.false(System.Linq.Enumerable.from([1, 2, 3, 4]).any($_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.f4));
+            Bridge.Test.Assert.true(System.Linq.Enumerable.from([1, 2, 3, 4]).any($_.Bridge.ClientTest.ArrayTests.ArrayTestsSet1.f3));
+            Bridge.Test.Assert.false(System.Linq.Enumerable.from([1, 2, 3, 4]).any($_.Bridge.ClientTest.ArrayTests.ArrayTestsSet1.f4));
         },
         binarySearch1Works: function () {
             var arr = [1, 2, 3, 3, 4, 5];
@@ -210,14 +255,14 @@
         binarySearch3Works: function () {
             var arr = [1, 2, 3, 3, 4, 5];
 
-            Bridge.Test.Assert.areEqual(2, System.Array.binarySearch(arr, 0, arr.length, 3, new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.TestReverseComparer()));
-            Bridge.Test.Assert.areEqual(-1, System.Array.binarySearch(arr, 0, arr.length, 6, new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.TestReverseComparer()));
+            Bridge.Test.Assert.areEqual(2, System.Array.binarySearch(arr, 0, arr.length, 3, new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.TestReverseComparer()));
+            Bridge.Test.Assert.areEqual(-1, System.Array.binarySearch(arr, 0, arr.length, 6, new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.TestReverseComparer()));
         },
         binarySearch4Works: function () {
             var arr = [1, 2, 3, 3, 4, 5];
 
-            Bridge.Test.Assert.areEqual(3, System.Array.binarySearch(arr, 3, 2, 3, new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.TestReverseComparer()));
-            Bridge.Test.Assert.true(System.Array.binarySearch(arr, 3, 2, 4, new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.TestReverseComparer()) < 0);
+            Bridge.Test.Assert.areEqual(3, System.Array.binarySearch(arr, 3, 2, 3, new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.TestReverseComparer()));
+            Bridge.Test.Assert.true(System.Array.binarySearch(arr, 3, 2, 4, new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.TestReverseComparer()) < 0);
         },
         binarySearchExceptionsWorks: function () {
             var arr1 = null;
@@ -250,12 +295,12 @@
         },
         sort3Works: function () {
             var arr = [1, 2, 6, 3, 6, 7];
-            System.Array.sort(arr, 2, 3, new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.TestReverseComparer());
+            System.Array.sort(arr, 2, 3, new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.TestReverseComparer());
             Bridge.Test.Assert.areDeepEqual([1, 2, 6, 6, 3, 7], arr);
         },
         sort4Works: function () {
             var arr = [1, 6, 6, 4, 2];
-            System.Array.sort(arr, new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.TestReverseComparer());
+            System.Array.sort(arr, new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.TestReverseComparer());
             Bridge.Test.Assert.areDeepEqual([6, 6, 4, 2, 1], arr);
         },
         sortExceptionsWorks: function () {
@@ -299,9 +344,54 @@
             Bridge.Test.Assert.false(System.Array.contains(l, "a", String));
         },
         iCollectionContainsUsesEqualsMethod: function () {
-            var l = [new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C(1), new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C(2), new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C(3)];
-            Bridge.Test.Assert.true(System.Array.contains(l, new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C(2), Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C));
-            Bridge.Test.Assert.false(System.Array.contains(l, new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C(4), Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C));
+            var l = [new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C(1), new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C(2), new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C(3)];
+            Bridge.Test.Assert.true(System.Array.contains(l, new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C(2), Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C));
+            Bridge.Test.Assert.false(System.Array.contains(l, new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C(4), Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C));
+        },
+        iCollectionCopyToSameBoundWorks: function () {
+            var l = ["0", "1", "2"];
+
+            var a1 = System.Array.init(3, null);
+            System.Array.copyTo(l, a1, 0, String);
+
+            Bridge.Test.Assert.areEqual$1("0", a1[0], "Element 0");
+            Bridge.Test.Assert.areEqual$1("1", a1[1], "Element 1");
+            Bridge.Test.Assert.areEqual$1("2", a1[2], "Element 2");
+        },
+        iCollectionCopyToOffsetBoundWorks: function () {
+            var l = ["0", "1", "2"];
+
+            var a2 = System.Array.init(5, null);
+            System.Array.copyTo(l, a2, 1, String);
+
+            Bridge.Test.Assert.areEqual$1(null, a2[0], "Element 0");
+            Bridge.Test.Assert.areEqual$1("0", a2[1], "Element 1");
+            Bridge.Test.Assert.areEqual$1("1", a2[2], "Element 2");
+            Bridge.Test.Assert.areEqual$1("2", a2[3], "Element 3");
+            Bridge.Test.Assert.areEqual$1(null, a2[4], "Element 4");
+        },
+        iCollectionCopyToIllegalBoundWorks: function () {
+            var l = ["0", "1", "2"];
+
+            Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                System.Array.copyTo(l, null, 0, String);
+            }, "null");
+
+            var a1 = System.Array.init(2, null);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a1, 0, String);
+            }, "Short array");
+
+            var a2 = System.Array.init(3, null);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a2, 1, String);
+            }, "Start index 1");
+            Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
+                System.Array.copyTo(l, a2, -1, String);
+            }, "Negative start index");
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a2, 3, String);
+            }, "Start index 3");
         },
         iCollectionRemoveWorks: function () {
             var l = ["x", "y", "z"];
@@ -321,9 +411,9 @@
             Bridge.Test.Assert.areEqual(-1, System.Array.indexOf(l, "a", 0, null, String));
         },
         iListIndexOfUsesEqualsMethod: function () {
-            var arr = [new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C(1), new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C(2), new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C(3)];
-            Bridge.Test.Assert.areEqual(1, Bridge.Linq.Enumerable.from(arr).indexOf(new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C(2)));
-            Bridge.Test.Assert.areEqual(-1, Bridge.Linq.Enumerable.from(arr).indexOf(new Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C(4)));
+            var arr = [new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C(1), new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C(2), new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C(3)];
+            Bridge.Test.Assert.areEqual(1, Bridge.Linq.Enumerable.from(arr).indexOf(new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C(2)));
+            Bridge.Test.Assert.areEqual(-1, Bridge.Linq.Enumerable.from(arr).indexOf(new Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C(4)));
         },
         iListInsertWorks: function () {
             var l = ["x", "y", "z"];
@@ -339,9 +429,9 @@
 
     var $_ = {};
 
-    Bridge.ns("Bridge.ClientTest.ArrayTests1.ArrayTestsSet1", $_);
+    Bridge.ns("Bridge.ClientTest.ArrayTests.ArrayTestsSet1", $_);
 
-    Bridge.apply($_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet1, {
+    Bridge.apply($_.Bridge.ClientTest.ArrayTests.ArrayTestsSet1, {
         f1: function (x) {
             return x > 0;
         },
@@ -356,21 +446,21 @@
         }
     });
 
-    Bridge.define("Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C", {
+    Bridge.define("Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C", {
         i: 0,
         ctor: function (i) {
             this.$initialize();
             this.i = i;
         },
         equals: function (o) {
-            return Bridge.is(o, Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C) && this.i === Bridge.cast(o, Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.C).i;
+            return Bridge.is(o, Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C) && this.i === Bridge.cast(o, Bridge.ClientTest.ArrayTests.ArrayTestsSet1.C).i;
         },
         getHashCode: function () {
             return this.i;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.ArrayTests1.ArrayTestsSet1.TestReverseComparer", {
+    Bridge.define("Bridge.ClientTest.ArrayTests.ArrayTestsSet1.TestReverseComparer", {
         inherits: [System.Collections.Generic.IComparer$1(System.Int32)],
         config: {
             alias: [
@@ -382,33 +472,33 @@
         }
     });
 
-    Bridge.define("Bridge.ClientTest.ArrayTests1.ArrayTestsSet2", {
+    Bridge.define("Bridge.ClientTest.ArrayTests.ArrayTestsSet2", {
         statics: {
             getBinarySearchTestData: function () {
                 var intArray = [1, 3, 6, 6, 8, 10, 12, 16];
-                var intComparer = new Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.IntegerComparer();
-                var intGenericComparer = new Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.IntegerComparer();
+                var intComparer = new Bridge.ClientTest.ArrayTests.ArrayTestsSet2.IntegerComparer();
+                var intGenericComparer = new Bridge.ClientTest.ArrayTests.ArrayTestsSet2.IntegerComparer();
 
                 var strArray = [null, "aa", "bb", "bb", "cc", "dd", "ee"];
-                var strComparer = new Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.StringComparer();
-                var strGenericComparer = new Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.StringComparer();
+                var strComparer = new Bridge.ClientTest.ArrayTests.ArrayTestsSet2.StringComparer();
+                var strGenericComparer = new Bridge.ClientTest.ArrayTests.ArrayTestsSet2.StringComparer();
 
-                return [[intArray, 8, intComparer, intGenericComparer, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f1], [intArray, 99, intComparer, intGenericComparer, function (i) {
+                return [[intArray, 8, intComparer, intGenericComparer, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f1], [intArray, 99, intComparer, intGenericComparer, function (i) {
                     return i === ~(intArray.length);
-                }], [intArray, 6, intComparer, intGenericComparer, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f2], [strArray, "bb", strComparer, strGenericComparer, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f2], [strArray, null, strComparer, null, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f3]];
+                }], [intArray, 6, intComparer, intGenericComparer, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f2], [strArray, "bb", strComparer, strGenericComparer, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f2], [strArray, null, strComparer, null, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f3]];
             },
             getBinarySearchTestDataInRange: function () {
                 var intArray = [1, 3, 6, 6, 8, 10, 12, 16];
-                var intComparer = new Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.IntegerComparer();
-                var intGenericComparer = new Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.IntegerComparer();
+                var intComparer = new Bridge.ClientTest.ArrayTests.ArrayTestsSet2.IntegerComparer();
+                var intGenericComparer = new Bridge.ClientTest.ArrayTests.ArrayTestsSet2.IntegerComparer();
 
                 var strArray = [null, "aa", "bb", "bb", "cc", "dd", "ee"];
-                var strComparer = new Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.StringComparer();
-                var strGenericComparer = new Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.StringComparer();
+                var strComparer = new Bridge.ClientTest.ArrayTests.ArrayTestsSet2.StringComparer();
+                var strGenericComparer = new Bridge.ClientTest.ArrayTests.ArrayTestsSet2.StringComparer();
 
                 return [[intArray, 0, 8, 99, intComparer, intGenericComparer, function (i) {
                     return i === ~(intArray.length);
-                }], [intArray, 0, 8, 6, intComparer, intGenericComparer, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f2], [intArray, 1, 5, 16, intComparer, intGenericComparer, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f4], [strArray, 0, strArray.length, "bb", strComparer, strGenericComparer, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f2], [strArray, 3, 4, "bb", strComparer, strGenericComparer, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f5], [strArray, 4, 3, "bb", strComparer, strGenericComparer, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f6], [strArray, 4, 0, "bb", strComparer, strGenericComparer, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f6], [strArray, 0, 7, null, strComparer, null, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f3]];
+                }], [intArray, 0, 8, 6, intComparer, intGenericComparer, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f2], [intArray, 1, 5, 16, intComparer, intGenericComparer, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f4], [strArray, 0, strArray.length, "bb", strComparer, strGenericComparer, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f2], [strArray, 3, 4, "bb", strComparer, strGenericComparer, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f5], [strArray, 4, 3, "bb", strComparer, strGenericComparer, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f6], [strArray, 4, 0, "bb", strComparer, strGenericComparer, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f6], [strArray, 0, 7, null, strComparer, null, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f3]];
             },
             testArrayAsIListOfT: function () {
                 var sa = ["Hello", "There"];
@@ -746,7 +836,7 @@
                 //----------------------------------------------------------
                 var g;
                 g = System.Array.init(5, function (){
-                    return new Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.G();
+                    return new Bridge.ClientTest.ArrayTests.ArrayTestsSet2.G();
                 });
                 g[0].x = 7;
                 g[0].s = "Hello";
@@ -764,7 +854,7 @@
                 g[4].s = "Hello";
                 g[4].z = 8;
 
-                System.Array.fill(g, Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.G.getDefaultValue, 0, 5);
+                System.Array.fill(g, Bridge.ClientTest.ArrayTests.ArrayTestsSet2.G.getDefaultValue, 0, 5);
                 for (var i = 0; i < g.length; i = (i + 1) | 0) {
                     Bridge.Test.Assert.areEqual(g[i].x, 0);
                     Bridge.Test.Assert.null(g[i].s);
@@ -772,7 +862,7 @@
                 }
 
                 g = System.Array.init(5, function (){
-                    return new Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.G();
+                    return new Bridge.ClientTest.ArrayTests.ArrayTestsSet2.G();
                 });
                 g[0].x = 7;
                 g[0].s = "Hello";
@@ -790,7 +880,7 @@
                 g[4].s = "Hello";
                 g[4].z = 8;
 
-                System.Array.fill(g, Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.G.getDefaultValue, 2, 3);
+                System.Array.fill(g, Bridge.ClientTest.ArrayTests.ArrayTestsSet2.G.getDefaultValue, 2, 3);
                 Bridge.Test.Assert.areEqual(g[0].x, 7);
                 Bridge.Test.Assert.areEqual(g[0].s, "Hello");
                 Bridge.Test.Assert.areEqual(g[0].z, 8);
@@ -806,7 +896,7 @@
                 //----------------------------------------------------------
                 // Range-checks
                 //----------------------------------------------------------
-                Bridge.Test.Assert.throws$6(System.ArgumentNullException, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f7);
+                Bridge.Test.Assert.throws$6(System.ArgumentNullException, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f7);
 
                 Bridge.Test.Assert.throws$6(System.IndexOutOfRangeException, function () {
                     System.Array.fill(idirect, 0, -1, 1);
@@ -857,7 +947,7 @@
                 var s;
                 var d;
                 s = System.Array.init(5, function (){
-                    return new Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.G();
+                    return new Bridge.ClientTest.ArrayTests.ArrayTestsSet2.G();
                 });
                 d = System.Array.init(5, null);
 
@@ -883,8 +973,8 @@
 
                 System.Array.copy(s, 0, d, 0, 5);
                 for (var i = 0; i < d.length; i = (i + 1) | 0) {
-                    Bridge.Test.Assert.true(Bridge.is(d[i], Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.G));
-                    var g = System.Nullable.getValue(Bridge.cast((d[i]), Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.G));
+                    Bridge.Test.Assert.true(Bridge.is(d[i], Bridge.ClientTest.ArrayTests.ArrayTestsSet2.G));
+                    var g = System.Nullable.getValue(Bridge.cast((d[i]), Bridge.ClientTest.ArrayTests.ArrayTestsSet2.G));
                     Bridge.Test.Assert.areEqual(g.x, s[i].x);
                     Bridge.Test.Assert.areEqual(g.s, s[i].s);
                     Bridge.Test.Assert.areEqual(g.z, s[i].z);
@@ -896,10 +986,10 @@
                 var s;
                 var d;
                 s = System.Array.init(5, function (){
-                    return new Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.G();
+                    return new Bridge.ClientTest.ArrayTests.ArrayTestsSet2.G();
                 });
                 d = System.Array.init(5, function (){
-                    return new Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.G();
+                    return new Bridge.ClientTest.ArrayTests.ArrayTestsSet2.G();
                 });
 
                 s[0].x = 7;
@@ -988,70 +1078,70 @@
                 var b;
 
                 // Exists included here since it's a trivial wrapper around FindIndex
-                b = (System.Array.findIndex(ia, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f8) !== -1);
+                b = (System.Array.findIndex(ia, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f8) !== -1);
                 Bridge.Test.Assert.true(b);
 
-                b = (System.Array.findIndex(ia, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f9) !== -1);
+                b = (System.Array.findIndex(ia, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f9) !== -1);
                 Bridge.Test.Assert.false(b);
 
                 var results;
-                results = System.Array.findAll(ia, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f10);
+                results = System.Array.findAll(ia, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f10);
                 Bridge.Test.Assert.areEqual(results.length, 2);
-                Bridge.Test.Assert.true((System.Array.findIndex(results, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f11) !== -1));
-                Bridge.Test.Assert.true((System.Array.findIndex(results, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f12) !== -1));
+                Bridge.Test.Assert.true((System.Array.findIndex(results, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f11) !== -1));
+                Bridge.Test.Assert.true((System.Array.findIndex(results, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f12) !== -1));
 
                 var sa = ["7", "8", "88", "888", "9"];
                 var elem;
-                elem = System.Array.find(String, sa, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f13);
+                elem = System.Array.find(String, sa, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f13);
                 Bridge.Test.Assert.areEqual(elem, "8");
 
-                elem = System.Array.find(String, sa, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f14);
+                elem = System.Array.find(String, sa, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f14);
                 Bridge.Test.Assert.null(elem);
 
                 ia = [40, 41, 42, 43, 44, 45, 46, 47, 48, 49];
                 var idx;
-                idx = System.Array.findIndex(ia, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f15);
+                idx = System.Array.findIndex(ia, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f15);
                 Bridge.Test.Assert.areEqual(idx, 3);
 
-                idx = System.Array.findIndex(ia, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f16);
+                idx = System.Array.findIndex(ia, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f16);
                 Bridge.Test.Assert.areEqual(idx, -1);
 
-                idx = System.Array.findIndex(ia, 3, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f17);
+                idx = System.Array.findIndex(ia, 3, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f17);
                 Bridge.Test.Assert.areEqual(idx, 3);
 
-                idx = System.Array.findIndex(ia, 4, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f17);
+                idx = System.Array.findIndex(ia, 4, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f17);
                 Bridge.Test.Assert.areEqual(idx, -1);
 
-                idx = System.Array.findIndex(ia, 1, 3, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f17);
+                idx = System.Array.findIndex(ia, 1, 3, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f17);
                 Bridge.Test.Assert.areEqual(idx, 3);
 
-                idx = System.Array.findIndex(ia, 1, 2, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f17);
+                idx = System.Array.findIndex(ia, 1, 2, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f17);
                 Bridge.Test.Assert.areEqual(idx, -1);
 
                 sa = ["7", "8", "88", "888", "9"];
-                elem = System.Array.findLast(String, sa, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f13);
+                elem = System.Array.findLast(String, sa, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f13);
                 Bridge.Test.Assert.areEqual(elem, "888");
 
-                elem = System.Array.findLast(String, sa, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f14);
+                elem = System.Array.findLast(String, sa, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f14);
                 Bridge.Test.Assert.null(elem);
 
                 ia = [40, 41, 42, 43, 44, 45, 46, 47, 48, 49];
-                idx = System.Array.findLastIndex(ia, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f15);
+                idx = System.Array.findLastIndex(ia, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f15);
                 Bridge.Test.Assert.areEqual(idx, 9);
 
-                idx = System.Array.findLastIndex(ia, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f16);
+                idx = System.Array.findLastIndex(ia, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f16);
                 Bridge.Test.Assert.areEqual(idx, -1);
 
-                idx = System.Array.findLastIndex(ia, 3, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f17);
+                idx = System.Array.findLastIndex(ia, 3, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f17);
                 Bridge.Test.Assert.areEqual(idx, 3);
 
-                idx = System.Array.findLastIndex(ia, 2, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f17);
+                idx = System.Array.findLastIndex(ia, 2, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f17);
                 Bridge.Test.Assert.areEqual(idx, -1);
 
-                idx = System.Array.findLastIndex(ia, 5, 3, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f17);
+                idx = System.Array.findLastIndex(ia, 5, 3, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f17);
                 Bridge.Test.Assert.areEqual(idx, 3);
 
-                idx = System.Array.findLastIndex(ia, 5, 2, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f17);
+                idx = System.Array.findLastIndex(ia, 5, 2, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f17);
                 Bridge.Test.Assert.areEqual(idx, -1);
             },
             testForEach: function () {
@@ -1306,32 +1396,32 @@
                 Bridge.Test.Assert.areEqual(s[4], "3");
             },
             testSort: function () {
-                var icomparer = new Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.IntegerComparer();
+                var icomparer = new Bridge.ClientTest.ArrayTests.ArrayTestsSet2.IntegerComparer();
 
-                Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.testSortHelper(System.Int32, [], 0, 0, icomparer);
-                Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.testSortHelper(System.Int32, [5], 0, 1, icomparer);
-                Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.testSortHelper(System.Int32, [5, 2], 0, 2, icomparer);
+                Bridge.ClientTest.ArrayTests.ArrayTestsSet2.testSortHelper(System.Int32, [], 0, 0, icomparer);
+                Bridge.ClientTest.ArrayTests.ArrayTestsSet2.testSortHelper(System.Int32, [5], 0, 1, icomparer);
+                Bridge.ClientTest.ArrayTests.ArrayTestsSet2.testSortHelper(System.Int32, [5, 2], 0, 2, icomparer);
 
-                Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.testSortHelper(System.Int32, [5, 2, 9, 8, 4, 3, 2, 4, 6], 0, 9, icomparer);
-                Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.testSortHelper(System.Int32, [5, 2, 9, 8, 4, 3, 2, 4, 6], 3, 4, icomparer);
-                Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.testSortHelper(System.Int32, [5, 2, 9, 8, 4, 3, 2, 4, 6], 3, 6, icomparer);
+                Bridge.ClientTest.ArrayTests.ArrayTestsSet2.testSortHelper(System.Int32, [5, 2, 9, 8, 4, 3, 2, 4, 6], 0, 9, icomparer);
+                Bridge.ClientTest.ArrayTests.ArrayTestsSet2.testSortHelper(System.Int32, [5, 2, 9, 8, 4, 3, 2, 4, 6], 3, 4, icomparer);
+                Bridge.ClientTest.ArrayTests.ArrayTestsSet2.testSortHelper(System.Int32, [5, 2, 9, 8, 4, 3, 2, 4, 6], 3, 6, icomparer);
 
-                var scomparer = new Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.StringComparer();
-                Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.testSortHelper(String, [], 0, 0, scomparer);
-                Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.testSortHelper(String, ["5"], 0, 1, scomparer);
-                Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.testSortHelper(String, ["5", "2"], 0, 2, scomparer);
+                var scomparer = new Bridge.ClientTest.ArrayTests.ArrayTestsSet2.StringComparer();
+                Bridge.ClientTest.ArrayTests.ArrayTestsSet2.testSortHelper(String, [], 0, 0, scomparer);
+                Bridge.ClientTest.ArrayTests.ArrayTestsSet2.testSortHelper(String, ["5"], 0, 1, scomparer);
+                Bridge.ClientTest.ArrayTests.ArrayTestsSet2.testSortHelper(String, ["5", "2"], 0, 2, scomparer);
 
-                Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.testSortHelper(String, ["5", "2", null, "8", "4", "3", "2", "4", "6"], 0, 9, scomparer);
-                Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.testSortHelper(String, ["5", "2", null, "8", "4", "3", "2", "4", "6"], 3, 4, scomparer);
-                Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.testSortHelper(String, ["5", "2", null, "8", "4", "3", "2", "4", "6"], 3, 6, scomparer);
+                Bridge.ClientTest.ArrayTests.ArrayTestsSet2.testSortHelper(String, ["5", "2", null, "8", "4", "3", "2", "4", "6"], 0, 9, scomparer);
+                Bridge.ClientTest.ArrayTests.ArrayTestsSet2.testSortHelper(String, ["5", "2", null, "8", "4", "3", "2", "4", "6"], 3, 4, scomparer);
+                Bridge.ClientTest.ArrayTests.ArrayTestsSet2.testSortHelper(String, ["5", "2", null, "8", "4", "3", "2", "4", "6"], 3, 6, scomparer);
             },
             testSortHelper: function (T, array, index, length, comparer) {
-                var control = Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.simpleSort(T, array, index, length, comparer);
+                var control = Bridge.ClientTest.ArrayTests.ArrayTestsSet2.simpleSort(T, array, index, length, comparer);
 
                 {
                     var spawn2 = Bridge.cast((System.Array.clone(array)), Array);
                     System.Array.sort(spawn2, index, length, comparer);
-                    Bridge.Test.Assert.true(Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.arraysAreEqual(T, spawn2, control, comparer));
+                    Bridge.Test.Assert.true(Bridge.ClientTest.ArrayTests.ArrayTestsSet2.arraysAreEqual(T, spawn2, control, comparer));
                 }
             },
             simpleSort: function (T, a, index, length, comparer) {
@@ -1372,14 +1462,14 @@
 
                 ia = [1, 2, 3, 4, 5];
 
-                b = System.Array.trueForAll(ia, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f18);
+                b = System.Array.trueForAll(ia, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f18);
                 Bridge.Test.Assert.true(b);
 
-                b = System.Array.trueForAll(ia, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f5);
+                b = System.Array.trueForAll(ia, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f5);
                 Bridge.Test.Assert.false(b);
 
                 ia = System.Array.init(0, 0);
-                b = System.Array.trueForAll(ia, $_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.f19);
+                b = System.Array.trueForAll(ia, $_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.f19);
                 Bridge.Test.Assert.true(b);
             },
             testSetValueCasting: function () {
@@ -1387,7 +1477,7 @@
                 {
                     // null -> default(null)
                     var a = System.Array.init(3, function (){
-                        return new Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.S();
+                        return new Bridge.ClientTest.ArrayTests.ArrayTestsSet2.S();
                     });
                     a[1].x = 572662306;
                     //a.SetValue(null, indices);
@@ -1423,7 +1513,7 @@
                 {
                     // widening from enum to primitive
                     var a4 = System.Array.init(3, 0);
-                    System.Array.set.apply(System.Array, [a4, Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.E1.MinusTwo].concat(indices));
+                    System.Array.set.apply(System.Array, [a4, Bridge.ClientTest.ArrayTests.ArrayTestsSet2.E1.MinusTwo].concat(indices));
                     Bridge.Test.Assert.areEqual(a4[1], -2);
                 }
             },
@@ -1540,8 +1630,8 @@
                     for (var i4 = 0; i4 < s2.length; i4 = (i4 + 1) | 0) {
                         s2[i4] = i4;
                     }
-                    s2[1] = new Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.NotInt32();
-                    s2[5] = new Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.NotInt32();
+                    s2[1] = new Bridge.ClientTest.ArrayTests.ArrayTestsSet2.NotInt32();
+                    s2[5] = new Bridge.ClientTest.ArrayTests.ArrayTestsSet2.NotInt32();
 
                     var d2 = System.Array.init(10, 0);
                     for (var i5 = 0; i5 < d2.length; i5 = (i5 + 1) | 0) {
@@ -1601,9 +1691,9 @@
         }
     });
 
-    Bridge.ns("Bridge.ClientTest.ArrayTests1.ArrayTestsSet2", $_);
+    Bridge.ns("Bridge.ClientTest.ArrayTests.ArrayTestsSet2", $_);
 
-    Bridge.apply($_.Bridge.ClientTest.ArrayTests1.ArrayTestsSet2, {
+    Bridge.apply($_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2, {
         f1: function (i) {
             return i === 4;
         },
@@ -1663,11 +1753,11 @@
         }
     });
 
-    Bridge.define("Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.B1");
+    Bridge.define("Bridge.ClientTest.ArrayTests.ArrayTestsSet2.B1");
 
-    Bridge.define("Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.B2");
+    Bridge.define("Bridge.ClientTest.ArrayTests.ArrayTestsSet2.B2");
 
-    Bridge.define("Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.E1", {
+    Bridge.define("Bridge.ClientTest.ArrayTests.ArrayTestsSet2.E1", {
         $kind: "enum",
         statics: {
             MinusTwo: -2
@@ -1675,10 +1765,10 @@
         $utype: System.SByte
     });
 
-    Bridge.define("Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.G", {
+    Bridge.define("Bridge.ClientTest.ArrayTests.ArrayTestsSet2.G", {
         $kind: "struct",
         statics: {
-            getDefaultValue: function () { return new Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.G(); }
+            getDefaultValue: function () { return new Bridge.ClientTest.ArrayTests.ArrayTestsSet2.G(); }
         },
         x: 0,
         s: null,
@@ -1695,13 +1785,13 @@
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o, Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.G)) {
+            if (!Bridge.is(o, Bridge.ClientTest.ArrayTests.ArrayTestsSet2.G)) {
                 return false;
             }
             return Bridge.equals(this.x, o.x) && Bridge.equals(this.s, o.s) && Bridge.equals(this.z, o.z);
         },
         $clone: function (to) {
-            var s = to || new Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.G();
+            var s = to || new Bridge.ClientTest.ArrayTests.ArrayTestsSet2.G();
             s.x = this.x;
             s.s = this.s;
             s.z = this.z;
@@ -1709,15 +1799,15 @@
         }
     });
 
-    Bridge.define("Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.I1", {
+    Bridge.define("Bridge.ClientTest.ArrayTests.ArrayTestsSet2.I1", {
         $kind: "interface"
     });
 
-    Bridge.define("Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.I2", {
+    Bridge.define("Bridge.ClientTest.ArrayTests.ArrayTestsSet2.I2", {
         $kind: "interface"
     });
 
-    Bridge.define("Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.IntegerComparer", {
+    Bridge.define("Bridge.ClientTest.ArrayTests.ArrayTestsSet2.IntegerComparer", {
         inherits: [System.Collections.Generic.IComparer$1(System.Int32),System.Collections.IEqualityComparer],
         config: {
             alias: [
@@ -1736,7 +1826,7 @@
         }
     });
 
-    Bridge.define("Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.NotInt32", {
+    Bridge.define("Bridge.ClientTest.ArrayTests.ArrayTestsSet2.NotInt32", {
         inherits: [System.IEquatable$1(System.Int32)],
         config: {
             alias: [
@@ -1748,10 +1838,10 @@
         }
     });
 
-    Bridge.define("Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.S", {
+    Bridge.define("Bridge.ClientTest.ArrayTests.ArrayTestsSet2.S", {
         $kind: "struct",
         statics: {
-            getDefaultValue: function () { return new Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.S(); }
+            getDefaultValue: function () { return new Bridge.ClientTest.ArrayTests.ArrayTestsSet2.S(); }
         },
         x: 0,
         ctor: function () {
@@ -1764,19 +1854,19 @@
             return hash;
         },
         equals: function (o) {
-            if (!Bridge.is(o, Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.S)) {
+            if (!Bridge.is(o, Bridge.ClientTest.ArrayTests.ArrayTestsSet2.S)) {
                 return false;
             }
             return Bridge.equals(this.x, o.x);
         },
         $clone: function (to) {
-            var s = to || new Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.S();
+            var s = to || new Bridge.ClientTest.ArrayTests.ArrayTestsSet2.S();
             s.x = this.x;
             return s;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.StringComparer", {
+    Bridge.define("Bridge.ClientTest.ArrayTests.ArrayTestsSet2.StringComparer", {
         inherits: [System.Collections.Generic.IComparer$1(String)],
         config: {
             alias: [
@@ -5162,6 +5252,80 @@
             Bridge.Test.Assert.areEqual(1, System.Array.getCount(c, String));
             System.Array.remove(c, "y", String);
             Bridge.Test.Assert.areEqual(0, System.Array.getCount(c, String));
+        },
+        classImplementingICollectionCopyToWorks: function () {
+            var l = new Bridge.ClientTest.Collections.Generic.ICollectionTests.MyCollection(["x", "y"]);
+
+            var a1 = System.Array.init(2, null);
+            l.copyTo(a1, 0);
+
+            Bridge.Test.Assert.areEqual$1("x", a1[0], "1.Element 0");
+            Bridge.Test.Assert.areEqual$1("y", a1[1], "1.Element 1");
+
+            var a2 = System.Array.init(4, null);
+            l.copyTo(a2, 1);
+
+            Bridge.Test.Assert.areEqual$1(null, a2[0], "2.Element 0");
+            Bridge.Test.Assert.areEqual$1("x", a2[1], "2.Element 1");
+            Bridge.Test.Assert.areEqual$1("y", a2[2], "2.Element 2");
+            Bridge.Test.Assert.areEqual$1(null, a2[3], "2.Element 3");
+
+            Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                l.copyTo(null, 0);
+            }, "null");
+
+            var a3 = System.Array.init(1, null);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                l.copyTo(a3, 0);
+            }, "Short array");
+
+            var a4 = System.Array.init(2, null);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                l.copyTo(a4, 1);
+            }, "Start index 1");
+            Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
+                l.copyTo(a4, -1);
+            }, "Negative start index");
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                l.copyTo(a4, 3);
+            }, "Start index 3");
+        },
+        classImplementingICollectionCastToICollectionCopyToWorks: function () {
+            var l = new Bridge.ClientTest.Collections.Generic.ICollectionTests.MyCollection(["x", "y"]);
+
+            var a1 = System.Array.init(2, null);
+            System.Array.copyTo(l, a1, 0, String);
+
+            Bridge.Test.Assert.areEqual$1("x", a1[0], "1.Element 0");
+            Bridge.Test.Assert.areEqual$1("y", a1[1], "1.Element 1");
+
+            var a2 = System.Array.init(4, null);
+            System.Array.copyTo(l, a2, 1, String);
+
+            Bridge.Test.Assert.areEqual$1(null, a2[0], "2.Element 0");
+            Bridge.Test.Assert.areEqual$1("x", a2[1], "2.Element 1");
+            Bridge.Test.Assert.areEqual$1("y", a2[2], "2.Element 2");
+            Bridge.Test.Assert.areEqual$1(null, a2[3], "2.Element 3");
+
+            Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                System.Array.copyTo(l, null, 0, String);
+            }, "null");
+
+            var a3 = System.Array.init(1, null);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a3, 0, String);
+            }, "Short array");
+
+            var a4 = System.Array.init(2, null);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a4, 1, String);
+            }, "Start index 1");
+            Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
+                System.Array.copyTo(l, a4, -1, String);
+            }, "Negative start index");
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a4, 3, String);
+            }, "Start index 3");
         }
     });
 
@@ -5188,6 +5352,7 @@
             alias: [
             "getEnumerator", "System$Collections$Generic$IEnumerable$1$String$getEnumerator",
             "getCount", "System$Collections$Generic$ICollection$1$String$getCount",
+            "copyTo", "System$Collections$Generic$ICollection$1$String$copyTo",
             "add", "System$Collections$Generic$ICollection$1$String$add",
             "clear", "System$Collections$Generic$ICollection$1$String$clear",
             "contains", "System$Collections$Generic$ICollection$1$String$contains",
@@ -5206,6 +5371,9 @@
         },
         getEnumerator: function () {
             return this.getItems().getEnumerator();
+        },
+        copyTo: function (array, arrayIndex) {
+            this.getItems().copyTo(array, arrayIndex);
         },
         add: function (item) {
             this.getItems().add(item);
@@ -5653,6 +5821,80 @@
             var l = new Bridge.ClientTest.Collections.Generic.IListTests.MyList(["x", "y", "z"]);
             System.Array.removeAt(l, 1, String);
             Bridge.Test.Assert.areDeepEqual(["x", "z"], Bridge.cast(l, Bridge.ClientTest.Collections.Generic.IListTests.MyList).getItems().toArray());
+        },
+        classImplementingIListCopyToWorks: function () {
+            var l = new Bridge.ClientTest.Collections.Generic.IListTests.MyList(["x", "y"]);
+
+            var a1 = System.Array.init(2, null);
+            l.copyTo(a1, 0);
+
+            Bridge.Test.Assert.areEqual$1("x", a1[0], "1.Element 0");
+            Bridge.Test.Assert.areEqual$1("y", a1[1], "1.Element 1");
+
+            var a2 = System.Array.init(4, null);
+            l.copyTo(a2, 1);
+
+            Bridge.Test.Assert.areEqual$1(null, a2[0], "2.Element 0");
+            Bridge.Test.Assert.areEqual$1("x", a2[1], "2.Element 1");
+            Bridge.Test.Assert.areEqual$1("y", a2[2], "2.Element 2");
+            Bridge.Test.Assert.areEqual$1(null, a2[3], "2.Element 3");
+
+            Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                l.copyTo(null, 0);
+            }, "null");
+
+            var a3 = System.Array.init(1, null);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                l.copyTo(a3, 0);
+            }, "Short array");
+
+            var a4 = System.Array.init(2, null);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                l.copyTo(a4, 1);
+            }, "Start index 1");
+            Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
+                l.copyTo(a4, -1);
+            }, "Negative start index");
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                l.copyTo(a4, 3);
+            }, "Start index 3");
+        },
+        classImplementingIListCastToIListCopyToWorks: function () {
+            var l = new Bridge.ClientTest.Collections.Generic.IListTests.MyList(["x", "y"]);
+
+            var a1 = System.Array.init(2, null);
+            System.Array.copyTo(l, a1, 0, String);
+
+            Bridge.Test.Assert.areEqual$1("x", a1[0], "1.Element 0");
+            Bridge.Test.Assert.areEqual$1("y", a1[1], "1.Element 1");
+
+            var a2 = System.Array.init(4, null);
+            System.Array.copyTo(l, a2, 1, String);
+
+            Bridge.Test.Assert.areEqual$1(null, a2[0], "2.Element 0");
+            Bridge.Test.Assert.areEqual$1("x", a2[1], "2.Element 1");
+            Bridge.Test.Assert.areEqual$1("y", a2[2], "2.Element 2");
+            Bridge.Test.Assert.areEqual$1(null, a2[3], "2.Element 3");
+
+            Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                System.Array.copyTo(l, null, 0, String);
+            }, "null");
+
+            var a3 = System.Array.init(1, null);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a3, 0, String);
+            }, "Short array");
+
+            var a4 = System.Array.init(2, null);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a4, 1, String);
+            }, "Start index 1");
+            Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
+                System.Array.copyTo(l, a4, -1, String);
+            }, "Negative start index");
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a4, 3, String);
+            }, "Start index 3");
         }
     });
 
@@ -5682,6 +5924,7 @@
             "add", "System$Collections$Generic$ICollection$1$String$add",
             "clear", "System$Collections$Generic$ICollection$1$String$clear",
             "contains", "System$Collections$Generic$ICollection$1$String$contains",
+            "copyTo", "System$Collections$Generic$ICollection$1$String$copyTo",
             "remove", "System$Collections$Generic$ICollection$1$String$remove",
             "getItem", "System$Collections$Generic$IList$1$String$getItem",
             "setItem", "System$Collections$Generic$IList$1$String$setItem",
@@ -5717,6 +5960,9 @@
         },
         contains: function (item) {
             return this.getItems().contains(item);
+        },
+        copyTo: function (array, arrayIndex) {
+            this.getItems().copyTo(array, arrayIndex);
         },
         remove: function (item) {
             return this.getItems().remove(item);
@@ -6086,22 +6332,67 @@
             Bridge.Test.Assert.true(l.contains(new Bridge.ClientTest.Collections.Generic.ListTests.C(2)));
             Bridge.Test.Assert.false(l.contains(new Bridge.ClientTest.Collections.Generic.ListTests.C(4)));
         },
+        copyToMethodSameBound: function () {
+            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f16(new (System.Collections.Generic.List$1(String))());
+
+            var a1 = System.Array.init(3, null);
+            l.copyTo(a1, 0);
+
+            Bridge.Test.Assert.areEqual$1("0", a1[0], "Element 0");
+            Bridge.Test.Assert.areEqual$1("1", a1[1], "Element 1");
+            Bridge.Test.Assert.areEqual$1("2", a1[2], "Element 2");
+        },
+        copyToMethodOffsetBound: function () {
+            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f17(new (System.Collections.Generic.List$1(String))());
+
+            var a2 = System.Array.init(5, null);
+            l.copyTo(a2, 1);
+
+            Bridge.Test.Assert.areEqual$1(null, a2[0], "Element 0");
+            Bridge.Test.Assert.areEqual$1("0", a2[1], "Element 1");
+            Bridge.Test.Assert.areEqual$1("1", a2[2], "Element 2");
+            Bridge.Test.Assert.areEqual$1("2", a2[3], "Element 3");
+            Bridge.Test.Assert.areEqual$1(null, a2[4], "Element 4");
+        },
+        copyToMethodIllegalBound: function () {
+            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f18(new (System.Collections.Generic.List$1(String))());
+
+            Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                l.copyTo(null, 0);
+            }, "null");
+
+            var a1 = System.Array.init(2, null);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                l.copyTo(a1, 0);
+            }, "Short array");
+
+            var a2 = System.Array.init(3, null);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                l.copyTo(a2, 1);
+            }, "Start index 1");
+            Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
+                l.copyTo(a2, -1);
+            }, "Negative start index");
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                l.copyTo(a2, 3);
+            }, "Start index 3");
+        },
         sliceWithoutEndWorks: function () {
-            Bridge.Test.Assert.areDeepEqual(["c", "d"], $_.Bridge.ClientTest.Collections.Generic.ListTests.f16(new (System.Collections.Generic.List$1(String))()).slice(2).toArray());
+            Bridge.Test.Assert.areDeepEqual(["c", "d"], $_.Bridge.ClientTest.Collections.Generic.ListTests.f19(new (System.Collections.Generic.List$1(String))()).slice(2).toArray());
         },
         sliceWithEndWorks: function () {
-            Bridge.Test.Assert.areDeepEqual(["b", "c"], $_.Bridge.ClientTest.Collections.Generic.ListTests.f17(new (System.Collections.Generic.List$1(String))()).slice(1, 3).toArray());
+            Bridge.Test.Assert.areDeepEqual(["b", "c"], $_.Bridge.ClientTest.Collections.Generic.ListTests.f20(new (System.Collections.Generic.List$1(String))()).slice(1, 3).toArray());
         },
         foreachWithListItemCallbackWorks: function () {
             var result = "";
-            Bridge.Linq.Enumerable.from($_.Bridge.ClientTest.Collections.Generic.ListTests.f18(new (System.Collections.Generic.List$1(String))())).forEach(function (s) {
+            Bridge.Linq.Enumerable.from($_.Bridge.ClientTest.Collections.Generic.ListTests.f21(new (System.Collections.Generic.List$1(String))())).forEach(function (s) {
                 result = System.String.concat(result, s);
             });
             Bridge.Test.Assert.areEqual("abc", result);
         },
         foreachWithListCallbackWorks: function () {
             var result = "";
-            Bridge.Linq.Enumerable.from($_.Bridge.ClientTest.Collections.Generic.ListTests.f19(new (System.Collections.Generic.List$1(String))())).forEach(function (s, i) {
+            Bridge.Linq.Enumerable.from($_.Bridge.ClientTest.Collections.Generic.ListTests.f22(new (System.Collections.Generic.List$1(String))())).forEach(function (s, i) {
                 result = System.String.concat(result, (System.String.concat(s, i)));
             });
             Bridge.Test.Assert.areEqual("a0b1c2", result);
@@ -6110,23 +6401,23 @@
             Bridge.Test.Assert.areEqual(1, ["a", "b", "c", "b"].indexOf("b"));
         },
         indexOfWithoutStartIndexUsesEqualsMethod: function () {
-            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f20(new (System.Collections.Generic.List$1(Bridge.ClientTest.Collections.Generic.ListTests.C))());
+            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f23(new (System.Collections.Generic.List$1(Bridge.ClientTest.Collections.Generic.ListTests.C))());
             Bridge.Test.Assert.areEqual(1, l.indexOf(new Bridge.ClientTest.Collections.Generic.ListTests.C(2)));
             Bridge.Test.Assert.areEqual(-1, l.indexOf(new Bridge.ClientTest.Collections.Generic.ListTests.C(4)));
         },
         indexOfWithStartIndexWorks: function () {
-            Bridge.Test.Assert.areEqual(3, $_.Bridge.ClientTest.Collections.Generic.ListTests.f21(new (System.Collections.Generic.List$1(String))()).indexOf("b", 2));
+            Bridge.Test.Assert.areEqual(3, $_.Bridge.ClientTest.Collections.Generic.ListTests.f24(new (System.Collections.Generic.List$1(String))()).indexOf("b", 2));
         },
         indexOfWithStartIndexUsesEqualsMethod: function () {
-            Bridge.Test.Assert.areEqual(3, $_.Bridge.ClientTest.Collections.Generic.ListTests.f22(new (System.Collections.Generic.List$1(Bridge.ClientTest.Collections.Generic.ListTests.C))()).indexOf(new Bridge.ClientTest.Collections.Generic.ListTests.C(2), 2));
+            Bridge.Test.Assert.areEqual(3, $_.Bridge.ClientTest.Collections.Generic.ListTests.f25(new (System.Collections.Generic.List$1(Bridge.ClientTest.Collections.Generic.ListTests.C))()).indexOf(new Bridge.ClientTest.Collections.Generic.ListTests.C(2), 2));
         },
         insertWorks: function () {
-            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f23(new (System.Collections.Generic.List$1(String))());
+            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f26(new (System.Collections.Generic.List$1(String))());
             l.insert(1, "a");
             Bridge.Test.Assert.areDeepEqual(["x", "a", "y"], l.toArray());
         },
         insertRangeWorks: function () {
-            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f24(new (System.Collections.Generic.List$1(String))());
+            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f27(new (System.Collections.Generic.List$1(String))());
 
             l.insertRange(1, ["a", "b"]);
             Bridge.Test.Assert.areDeepEqual(["x", "a", "b", "y"], l.toArray());
@@ -6135,67 +6426,67 @@
             Bridge.Test.Assert.areDeepEqual(["q", "q", "x", "a", "b", "y"], l.toArray());
         },
         joinWithoutDelimiterWorks: function () {
-            Bridge.Test.Assert.areEqual("a,b,c,b", $_.Bridge.ClientTest.Collections.Generic.ListTests.f25(new (System.Collections.Generic.List$1(String))()).join());
+            Bridge.Test.Assert.areEqual("a,b,c,b", $_.Bridge.ClientTest.Collections.Generic.ListTests.f28(new (System.Collections.Generic.List$1(String))()).join());
         },
         joinWithDelimiterWorks: function () {
-            Bridge.Test.Assert.areEqual("a|b|c|b", $_.Bridge.ClientTest.Collections.Generic.ListTests.f26(new (System.Collections.Generic.List$1(String))()).join("|"));
+            Bridge.Test.Assert.areEqual("a|b|c|b", $_.Bridge.ClientTest.Collections.Generic.ListTests.f29(new (System.Collections.Generic.List$1(String))()).join("|"));
         },
         removeWorks: function () {
-            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f27(new (System.Collections.Generic.List$1(String))());
+            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f30(new (System.Collections.Generic.List$1(String))());
             Bridge.Test.Assert.true(list.remove("a"));
             Bridge.Test.Assert.areDeepEqual(["b", "c", "a"], list.toArray());
         },
         removeReturnsFalseIfTheElementWasNotFound: function () {
-            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f28(new (System.Collections.Generic.List$1(String))());
+            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f31(new (System.Collections.Generic.List$1(String))());
             Bridge.Test.Assert.false(list.remove("d"));
             Bridge.Test.Assert.areDeepEqual(["a", "b", "c", "a"], list.toArray());
         },
         removeCanRemoveNullItem: function () {
-            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f29(new (System.Collections.Generic.List$1(String))());
+            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f32(new (System.Collections.Generic.List$1(String))());
             Bridge.Test.Assert.true(list.remove(null));
             Bridge.Test.Assert.areDeepEqual(["a", "c", null], list.toArray());
         },
         removeUsesEqualsMethod: function () {
-            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f30(new (System.Collections.Generic.List$1(Bridge.ClientTest.Collections.Generic.ListTests.C))());
+            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f33(new (System.Collections.Generic.List$1(Bridge.ClientTest.Collections.Generic.ListTests.C))());
             list.remove(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
             Bridge.Test.Assert.areEqual(2, list.getCount());
             Bridge.Test.Assert.areEqual(1, list.getItem(0).i);
             Bridge.Test.Assert.areEqual(3, list.getItem(1).i);
         },
         removeAtWorks: function () {
-            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f31(new (System.Collections.Generic.List$1(String))());
+            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f34(new (System.Collections.Generic.List$1(String))());
             list.removeAt(1);
             Bridge.Test.Assert.areDeepEqual(["a", "c", "a"], list.toArray());
         },
         removeRangeWorks: function () {
-            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f32(new (System.Collections.Generic.List$1(String))());
+            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f35(new (System.Collections.Generic.List$1(String))());
             list.removeRange(1, 2);
             Bridge.Test.Assert.areDeepEqual(["a", "d"], list.toArray());
         },
         reverseWorks: function () {
-            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f33(new (System.Collections.Generic.List$1(System.Int32))());
+            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f36(new (System.Collections.Generic.List$1(System.Int32))());
             list.reverse();
             Bridge.Test.Assert.areDeepEqual([2, 3, 1, 4, 3, 1], list.toArray());
         },
         sortWithDefaultCompareWorks: function () {
-            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f34(new (System.Collections.Generic.List$1(System.Int32))());
+            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f37(new (System.Collections.Generic.List$1(System.Int32))());
             list.sort();
             Bridge.Test.Assert.areDeepEqual([1, 2, 4, 6, 6], list.toArray());
         },
         sortWithCompareCallbackWorks: function () {
-            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f35(new (System.Collections.Generic.List$1(System.Int32))());
-            list.sort($_.Bridge.ClientTest.Collections.Generic.ListTests.f36);
+            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f38(new (System.Collections.Generic.List$1(System.Int32))());
+            list.sort($_.Bridge.ClientTest.Collections.Generic.ListTests.f39);
             Bridge.Test.Assert.areDeepEqual([6, 6, 4, 2, 1], list.toArray());
         },
         sortWithIComparerWorks: function () {
             var $t;
-            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f37(new (System.Collections.Generic.List$1(System.Int32))());
+            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f40(new (System.Collections.Generic.List$1(System.Int32))());
             ($t=new Bridge.ClientTest.Collections.Generic.ListTests.TestReverseComparer(), list.sort(Bridge.fn.bind($t, $t.compare)));
             Bridge.Test.Assert.areDeepEqual([6, 6, 4, 2, 1], list.toArray());
         },
         foreachWhenCastToIEnumerableWorks: function () {
             var $t;
-            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f38(new (System.Collections.Generic.List$1(String))());
+            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f41(new (System.Collections.Generic.List$1(String))());
             var result = "";
             $t = Bridge.getEnumerator(list);
             while ($t.moveNext()) {
@@ -6205,7 +6496,7 @@
             Bridge.Test.Assert.areEqual("xy", result);
         },
         iEnumerableGetEnumeratorWorks: function () {
-            var l = Bridge.cast($_.Bridge.ClientTest.Collections.Generic.ListTests.f39(new (System.Collections.Generic.List$1(String))()), System.Collections.Generic.IEnumerable$1(String));
+            var l = Bridge.cast($_.Bridge.ClientTest.Collections.Generic.ListTests.f42(new (System.Collections.Generic.List$1(String))()), System.Collections.Generic.IEnumerable$1(String));
             var e = Bridge.getEnumerator(l, "$1", String);
             Bridge.Test.Assert.true(e.System$Collections$IEnumerator$moveNext());
             Bridge.Test.Assert.areEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$String$getCurrent$1", "getCurrent$1")]());
@@ -6214,31 +6505,31 @@
             Bridge.Test.Assert.false(e.System$Collections$IEnumerator$moveNext());
         },
         iCollectionCountWorks: function () {
-            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f40(new (System.Collections.Generic.List$1(String))());
+            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f43(new (System.Collections.Generic.List$1(String))());
             Bridge.Test.Assert.areEqual(3, System.Array.getCount(l, String));
         },
         iCollectionAddWorks: function () {
-            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f41(new (System.Collections.Generic.List$1(String))());
+            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f44(new (System.Collections.Generic.List$1(String))());
             System.Array.add(l, "a", String);
             Bridge.Test.Assert.areDeepEqual(["x", "y", "z", "a"], Bridge.cast(l, System.Collections.Generic.List$1(String)).toArray());
         },
         iCollectionClearWorks: function () {
-            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f42(new (System.Collections.Generic.List$1(String))());
+            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f45(new (System.Collections.Generic.List$1(String))());
             System.Array.clear(l, String);
             Bridge.Test.Assert.areDeepEqual(System.Array.init(0, null), Bridge.cast(l, System.Collections.Generic.List$1(String)).toArray());
         },
         iCollectionContainsWorks: function () {
-            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f43(new (System.Collections.Generic.List$1(String))());
+            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f46(new (System.Collections.Generic.List$1(String))());
             Bridge.Test.Assert.true(System.Array.contains(l, "y", String));
             Bridge.Test.Assert.false(System.Array.contains(l, "a", String));
         },
         iCollectionContainsUsesEqualsMethod: function () {
-            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f44(new (System.Collections.Generic.List$1(Bridge.ClientTest.Collections.Generic.ListTests.C))());
+            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f47(new (System.Collections.Generic.List$1(Bridge.ClientTest.Collections.Generic.ListTests.C))());
             Bridge.Test.Assert.true(System.Array.contains(l, new Bridge.ClientTest.Collections.Generic.ListTests.C(2), Bridge.ClientTest.Collections.Generic.ListTests.C));
             Bridge.Test.Assert.false(System.Array.contains(l, new Bridge.ClientTest.Collections.Generic.ListTests.C(4), Bridge.ClientTest.Collections.Generic.ListTests.C));
         },
         iCollectionRemoveWorks: function () {
-            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f45(new (System.Collections.Generic.List$1(String))());
+            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f48(new (System.Collections.Generic.List$1(String))());
             Bridge.Test.Assert.true(System.Array.remove(l, "y", String));
             Bridge.Test.Assert.false(System.Array.remove(l, "a", String));
 
@@ -6246,40 +6537,40 @@
             Bridge.Test.Assert.areDeepEqual(["x", "z"], ll.toArray());
         },
         iCollectionRemoveCanRemoveNullItem: function () {
-            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f46(new (System.Collections.Generic.List$1(String))());
+            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f49(new (System.Collections.Generic.List$1(String))());
             Bridge.Test.Assert.true(System.Array.remove(list, null, String));
             Bridge.Test.Assert.areDeepEqual(["a", "c", null], Bridge.cast(list, System.Collections.Generic.List$1(String)).toArray());
         },
         iCollectionRemoveUsesEqualsMethod: function () {
-            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f47(new (System.Collections.Generic.List$1(Bridge.ClientTest.Collections.Generic.ListTests.C))());
+            var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f50(new (System.Collections.Generic.List$1(Bridge.ClientTest.Collections.Generic.ListTests.C))());
             System.Array.remove(list, new Bridge.ClientTest.Collections.Generic.ListTests.C(2), Bridge.ClientTest.Collections.Generic.ListTests.C);
             Bridge.Test.Assert.areEqual(2, System.Array.getCount(list, Bridge.ClientTest.Collections.Generic.ListTests.C));
             Bridge.Test.Assert.areEqual(1, System.Array.getItem(list, 0, Bridge.ClientTest.Collections.Generic.ListTests.C).i);
             Bridge.Test.Assert.areEqual(3, System.Array.getItem(list, 1, Bridge.ClientTest.Collections.Generic.ListTests.C).i);
         },
         iListIndexingWorks: function () {
-            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f48(new (System.Collections.Generic.List$1(String))());
+            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f51(new (System.Collections.Generic.List$1(String))());
             Bridge.Test.Assert.areEqual("y", System.Array.getItem(l, 1, String));
             System.Array.setItem(l, 1, "a", String);
             Bridge.Test.Assert.areDeepEqual(["x", "a", "z"], Bridge.cast(l, System.Collections.Generic.List$1(String)).toArray());
         },
         iListIndexOfWorks: function () {
-            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f49(new (System.Collections.Generic.List$1(String))());
+            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f52(new (System.Collections.Generic.List$1(String))());
             Bridge.Test.Assert.areEqual(1, System.Array.indexOf(l, "y", 0, null, String));
             Bridge.Test.Assert.areEqual(-1, System.Array.indexOf(l, "a", 0, null, String));
         },
         iListIndexOfUsesEqualsMethod: function () {
-            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f50(new (System.Collections.Generic.List$1(Bridge.ClientTest.Collections.Generic.ListTests.C))());
+            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f53(new (System.Collections.Generic.List$1(Bridge.ClientTest.Collections.Generic.ListTests.C))());
             Bridge.Test.Assert.areEqual(1, System.Array.indexOf(l, new Bridge.ClientTest.Collections.Generic.ListTests.C(2), 0, null, Bridge.ClientTest.Collections.Generic.ListTests.C));
             Bridge.Test.Assert.areEqual(-1, System.Array.indexOf(l, new Bridge.ClientTest.Collections.Generic.ListTests.C(4), 0, null, Bridge.ClientTest.Collections.Generic.ListTests.C));
         },
         iListInsertWorks: function () {
-            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f51(new (System.Collections.Generic.List$1(String))());
+            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f54(new (System.Collections.Generic.List$1(String))());
             System.Array.insert(l, 1, "a", String);
             Bridge.Test.Assert.areDeepEqual(["x", "a", "y", "z"], Bridge.cast(l, System.Collections.Generic.List$1(String)).toArray());
         },
         iListRemoveAtWorks: function () {
-            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f52(new (System.Collections.Generic.List$1(String))());
+            var l = $_.Bridge.ClientTest.Collections.Generic.ListTests.f55(new (System.Collections.Generic.List$1(String))());
             System.Array.removeAt(l, 1, String);
             Bridge.Test.Assert.areDeepEqual(["x", "z"], Bridge.cast(l, System.Collections.Generic.List$1(String)).toArray());
         },
@@ -6389,100 +6680,98 @@
             return _o46;
         },
         f16: function (_o47) {
-            _o47.add("a");
-            _o47.add("b");
-            _o47.add("c");
-            _o47.add("d");
+            _o47.add("0");
+            _o47.add("1");
+            _o47.add("2");
             return _o47;
         },
         f17: function (_o48) {
-            _o48.add("a");
-            _o48.add("b");
-            _o48.add("c");
-            _o48.add("d");
+            _o48.add("0");
+            _o48.add("1");
+            _o48.add("2");
             return _o48;
         },
         f18: function (_o49) {
-            _o49.add("a");
-            _o49.add("b");
-            _o49.add("c");
+            _o49.add("0");
+            _o49.add("1");
+            _o49.add("2");
             return _o49;
         },
         f19: function (_o50) {
             _o50.add("a");
             _o50.add("b");
             _o50.add("c");
+            _o50.add("d");
             return _o50;
         },
         f20: function (_o51) {
-            _o51.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
-            _o51.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
-            _o51.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
+            _o51.add("a");
+            _o51.add("b");
+            _o51.add("c");
+            _o51.add("d");
             return _o51;
         },
         f21: function (_o52) {
             _o52.add("a");
             _o52.add("b");
             _o52.add("c");
-            _o52.add("b");
             return _o52;
         },
         f22: function (_o53) {
-            _o53.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
-            _o53.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
-            _o53.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
-            _o53.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
+            _o53.add("a");
+            _o53.add("b");
+            _o53.add("c");
             return _o53;
         },
         f23: function (_o54) {
-            _o54.add("x");
-            _o54.add("y");
+            _o54.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
+            _o54.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
+            _o54.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
             return _o54;
         },
         f24: function (_o55) {
-            _o55.add("x");
-            _o55.add("y");
+            _o55.add("a");
+            _o55.add("b");
+            _o55.add("c");
+            _o55.add("b");
             return _o55;
         },
         f25: function (_o56) {
-            _o56.add("a");
-            _o56.add("b");
-            _o56.add("c");
-            _o56.add("b");
+            _o56.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
+            _o56.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
+            _o56.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
+            _o56.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
             return _o56;
         },
         f26: function (_o57) {
-            _o57.add("a");
-            _o57.add("b");
-            _o57.add("c");
-            _o57.add("b");
+            _o57.add("x");
+            _o57.add("y");
             return _o57;
         },
         f27: function (_o58) {
-            _o58.add("a");
-            _o58.add("b");
-            _o58.add("c");
-            _o58.add("a");
+            _o58.add("x");
+            _o58.add("y");
             return _o58;
         },
         f28: function (_o59) {
             _o59.add("a");
             _o59.add("b");
             _o59.add("c");
-            _o59.add("a");
+            _o59.add("b");
             return _o59;
         },
         f29: function (_o60) {
             _o60.add("a");
-            _o60.add(null);
+            _o60.add("b");
             _o60.add("c");
-            _o60.add(null);
+            _o60.add("b");
             return _o60;
         },
         f30: function (_o61) {
-            _o61.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
-            _o61.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
-            _o61.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
+            _o61.add("a");
+            _o61.add("b");
+            _o61.add("c");
+            _o61.add("a");
             return _o61;
         },
         f31: function (_o62) {
@@ -6494,73 +6783,75 @@
         },
         f32: function (_o63) {
             _o63.add("a");
-            _o63.add("b");
+            _o63.add(null);
             _o63.add("c");
-            _o63.add("d");
+            _o63.add(null);
             return _o63;
         },
         f33: function (_o64) {
-            _o64.add(1);
-            _o64.add(3);
-            _o64.add(4);
-            _o64.add(1);
-            _o64.add(3);
-            _o64.add(2);
+            _o64.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
+            _o64.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
+            _o64.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
             return _o64;
         },
         f34: function (_o65) {
-            _o65.add(1);
-            _o65.add(6);
-            _o65.add(6);
-            _o65.add(4);
-            _o65.add(2);
+            _o65.add("a");
+            _o65.add("b");
+            _o65.add("c");
+            _o65.add("a");
             return _o65;
         },
         f35: function (_o66) {
-            _o66.add(1);
-            _o66.add(6);
-            _o66.add(6);
-            _o66.add(4);
-            _o66.add(2);
+            _o66.add("a");
+            _o66.add("b");
+            _o66.add("c");
+            _o66.add("d");
             return _o66;
         },
-        f36: function (x, y) {
-            return ((y - x) | 0);
-        },
-        f37: function (_o67) {
+        f36: function (_o67) {
             _o67.add(1);
-            _o67.add(6);
-            _o67.add(6);
+            _o67.add(3);
             _o67.add(4);
+            _o67.add(1);
+            _o67.add(3);
             _o67.add(2);
             return _o67;
         },
-        f38: function (_o68) {
-            _o68.add("x");
-            _o68.add("y");
+        f37: function (_o68) {
+            _o68.add(1);
+            _o68.add(6);
+            _o68.add(6);
+            _o68.add(4);
+            _o68.add(2);
             return _o68;
         },
-        f39: function (_o69) {
-            _o69.add("x");
-            _o69.add("y");
+        f38: function (_o69) {
+            _o69.add(1);
+            _o69.add(6);
+            _o69.add(6);
+            _o69.add(4);
+            _o69.add(2);
             return _o69;
         },
+        f39: function (x, y) {
+            return ((y - x) | 0);
+        },
         f40: function (_o70) {
-            _o70.add("x");
-            _o70.add("y");
-            _o70.add("z");
+            _o70.add(1);
+            _o70.add(6);
+            _o70.add(6);
+            _o70.add(4);
+            _o70.add(2);
             return _o70;
         },
         f41: function (_o71) {
             _o71.add("x");
             _o71.add("y");
-            _o71.add("z");
             return _o71;
         },
         f42: function (_o72) {
             _o72.add("x");
             _o72.add("y");
-            _o72.add("z");
             return _o72;
         },
         f43: function (_o73) {
@@ -6570,9 +6861,9 @@
             return _o73;
         },
         f44: function (_o74) {
-            _o74.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
-            _o74.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
-            _o74.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
+            _o74.add("x");
+            _o74.add("y");
+            _o74.add("z");
             return _o74;
         },
         f45: function (_o75) {
@@ -6582,10 +6873,9 @@
             return _o75;
         },
         f46: function (_o76) {
-            _o76.add("a");
-            _o76.add(null);
-            _o76.add("c");
-            _o76.add(null);
+            _o76.add("x");
+            _o76.add("y");
+            _o76.add("z");
             return _o76;
         },
         f47: function (_o77) {
@@ -6601,9 +6891,10 @@
             return _o78;
         },
         f49: function (_o79) {
-            _o79.add("x");
-            _o79.add("y");
-            _o79.add("z");
+            _o79.add("a");
+            _o79.add(null);
+            _o79.add("c");
+            _o79.add(null);
             return _o79;
         },
         f50: function (_o80) {
@@ -6623,6 +6914,24 @@
             _o82.add("y");
             _o82.add("z");
             return _o82;
+        },
+        f53: function (_o83) {
+            _o83.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
+            _o83.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
+            _o83.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
+            return _o83;
+        },
+        f54: function (_o84) {
+            _o84.add("x");
+            _o84.add("y");
+            _o84.add("z");
+            return _o84;
+        },
+        f55: function (_o85) {
+            _o85.add("x");
+            _o85.add("y");
+            _o85.add("z");
+            return _o85;
         }
     });
 
@@ -6649,6 +6958,264 @@
         },
         compare: function (x, y) {
             return x === y ? 0 : (x > y ? -1 : 1);
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests", {
+        typePropertiesAreCorrect: function () {
+            Bridge.Test.Assert.areEqual$1("System.Collections.ObjectModel.ReadOnlyCollection$1[[System.Int32, mscorlib]]", Bridge.Reflection.getTypeFullName(System.Collections.ObjectModel.ReadOnlyCollection$1(System.Int32)), "FullName should be Array");
+            Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.Collections.ObjectModel.ReadOnlyCollection$1(System.Int32)), "IsClass should be true");
+            var list = new (System.Collections.ObjectModel.ReadOnlyCollection$1(System.Int32))(System.Array.init(0, 0));
+            Bridge.Test.Assert.true$1(Bridge.is(list, System.Collections.ObjectModel.ReadOnlyCollection$1(System.Int32)), "is ReadOnlyCollection<int> should be true");
+            Bridge.Test.Assert.true$1(Bridge.is(list, System.Collections.Generic.IList$1(System.Int32)), "is IList<int> should be true");
+            Bridge.Test.Assert.true$1(Bridge.is(list, System.Collections.Generic.ICollection$1(System.Int32)), "is ICollection<int> should be true");
+            Bridge.Test.Assert.true$1(Bridge.is(list, System.Collections.Generic.IEnumerable$1(System.Int32)), "is IEnumerable<int> should be true");
+        },
+        constructorWorks: function () {
+            var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(System.Int32))([41, 42, 43]);
+            Bridge.Test.Assert.areEqual(3, l.getCount());
+            Bridge.Test.Assert.areEqual(41, l.get(0));
+            Bridge.Test.Assert.areEqual(42, l.get(1));
+            Bridge.Test.Assert.areEqual(43, l.get(2));
+        },
+        countWorks: function () {
+            Bridge.Test.Assert.areEqual(0, new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(System.Array.init(0, null)).getCount());
+            Bridge.Test.Assert.areEqual(1, new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(System.Array.init(1, null)).getCount());
+            Bridge.Test.Assert.areEqual(2, new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(System.Array.init(2, null)).getCount());
+        },
+        indexingWorks: function () {
+            var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["x", "y"]);
+            Bridge.Test.Assert.areEqual("x", l.get(0));
+            Bridge.Test.Assert.areEqual("y", l.get(1));
+        },
+        foreachWorks: function () {
+            var $t;
+            var result = "";
+            $t = Bridge.getEnumerator(new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["x", "y"]));
+            while ($t.moveNext()) {
+                var s = $t.getCurrent();
+                result = System.String.concat(result, s);
+            }
+            Bridge.Test.Assert.areEqual("xy", result);
+        },
+        getEnumeratorWorks: function () {
+            var e = new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["x", "y"]).getEnumerator();
+            Bridge.Test.Assert.true(e.System$Collections$IEnumerator$moveNext());
+            Bridge.Test.Assert.areEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$String$getCurrent$1", "getCurrent$1")]());
+            Bridge.Test.Assert.true(e.System$Collections$IEnumerator$moveNext());
+            Bridge.Test.Assert.areEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$String$getCurrent$1", "getCurrent$1")]());
+            Bridge.Test.Assert.false(e.System$Collections$IEnumerator$moveNext());
+        },
+        containsWorks: function () {
+            var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["x", "y"]);
+            Bridge.Test.Assert.true(l.contains("x"));
+            Bridge.Test.Assert.false(l.contains("z"));
+        },
+        containsUsesEqualsMethod: function () {
+            var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C))([new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(1), new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(2), new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(3)]);
+            Bridge.Test.Assert.true(l.contains(new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(2)));
+            Bridge.Test.Assert.false(l.contains(new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(4)));
+        },
+        copyToMethodSameBound: function () {
+            var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["0", "1", "2"]);
+
+            var a1 = System.Array.init(3, null);
+            l.copyTo(a1, 0);
+
+            Bridge.Test.Assert.areEqual$1("0", a1[0], "Element 0");
+            Bridge.Test.Assert.areEqual$1("1", a1[1], "Element 1");
+            Bridge.Test.Assert.areEqual$1("2", a1[2], "Element 2");
+        },
+        copyToMethodOffsetBound: function () {
+            var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["0", "1", "2"]);
+
+            var a2 = System.Array.init(5, null);
+            l.copyTo(a2, 1);
+
+            Bridge.Test.Assert.areEqual$1(null, a2[0], "Element 0");
+            Bridge.Test.Assert.areEqual$1("0", a2[1], "Element 1");
+            Bridge.Test.Assert.areEqual$1("1", a2[2], "Element 2");
+            Bridge.Test.Assert.areEqual$1("2", a2[3], "Element 3");
+            Bridge.Test.Assert.areEqual$1(null, a2[4], "Element 4");
+        },
+        copyToMethodIllegalBound: function () {
+            var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["0", "1", "2"]);
+
+            Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                l.copyTo(null, 0);
+            }, "null");
+
+            var a1 = System.Array.init(2, null);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                l.copyTo(a1, 0);
+            }, "Short array");
+
+            var a2 = System.Array.init(3, null);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                l.copyTo(a2, 1);
+            }, "Start index 1");
+            Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
+                l.copyTo(a2, -1);
+            }, "Negative start index");
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                l.copyTo(a2, 3);
+            }, "Start index 3");
+        },
+        copyToMethodWhenCastToIListSameBound: function () {
+            var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["0", "1", "2"]);
+
+            var a1 = System.Array.init(3, null);
+            System.Array.copyTo(l, a1, 0, String);
+
+            Bridge.Test.Assert.areEqual$1("0", a1[0], "Element 0");
+            Bridge.Test.Assert.areEqual$1("1", a1[1], "Element 1");
+            Bridge.Test.Assert.areEqual$1("2", a1[2], "Element 2");
+        },
+        copyToMethodWhenCastToIListOffsetBound: function () {
+            var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["0", "1", "2"]);
+
+            var a2 = System.Array.init(5, null);
+            System.Array.copyTo(l, a2, 1, String);
+
+            Bridge.Test.Assert.areEqual$1(null, a2[0], "Element 0");
+            Bridge.Test.Assert.areEqual$1("0", a2[1], "Element 1");
+            Bridge.Test.Assert.areEqual$1("1", a2[2], "Element 2");
+            Bridge.Test.Assert.areEqual$1("2", a2[3], "Element 3");
+            Bridge.Test.Assert.areEqual$1(null, a2[4], "Element 4");
+        },
+        copyToMethodWhenCastToIListIllegalBound: function () {
+            var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["0", "1", "2"]);
+
+            Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                System.Array.copyTo(l, null, 0, String);
+            }, "null");
+
+            var a1 = System.Array.init(2, null);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a1, 0, String);
+            }, "Short array");
+
+            var a2 = System.Array.init(3, null);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a2, 1, String);
+            }, "Start index 1");
+            Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
+                System.Array.copyTo(l, a2, -1, String);
+            }, "Negative start index");
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a2, 3, String);
+            }, "Start index 3");
+        },
+        copyToMethodWhenCastToICollectionSameBound: function () {
+            var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["0", "1", "2"]);
+
+            var a1 = System.Array.init(3, null);
+            System.Array.copyTo(l, a1, 0, String);
+
+            Bridge.Test.Assert.areEqual$1("0", a1[0], "Element 0");
+            Bridge.Test.Assert.areEqual$1("1", a1[1], "Element 1");
+            Bridge.Test.Assert.areEqual$1("2", a1[2], "Element 2");
+        },
+        copyToMethodWhenCastToICollectionOffsetBound: function () {
+            var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["0", "1", "2"]);
+
+            var a2 = System.Array.init(5, null);
+            System.Array.copyTo(l, a2, 1, String);
+
+            Bridge.Test.Assert.areEqual$1(null, a2[0], "Element 0");
+            Bridge.Test.Assert.areEqual$1("0", a2[1], "Element 1");
+            Bridge.Test.Assert.areEqual$1("1", a2[2], "Element 2");
+            Bridge.Test.Assert.areEqual$1("2", a2[3], "Element 3");
+            Bridge.Test.Assert.areEqual$1(null, a2[4], "Element 4");
+        },
+        copyToMethodWhenCastToICollectionIllegalBound: function () {
+            var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["0", "1", "2"]);
+
+            Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                System.Array.copyTo(l, null, 0, String);
+            }, "null");
+
+            var a1 = System.Array.init(2, null);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a1, 0, String);
+            }, "Short array");
+
+            var a2 = System.Array.init(3, null);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a2, 1, String);
+            }, "Start index 1");
+            Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
+                System.Array.copyTo(l, a2, -1, String);
+            }, "Negative start index");
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a2, 3, String);
+            }, "Start index 3");
+        },
+        indexOfWorks: function () {
+            Bridge.Test.Assert.areEqual(1, new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["a", "b", "c", "b"]).indexOf("b"));
+            Bridge.Test.Assert.areEqual(1, new (System.Collections.ObjectModel.ReadOnlyCollection$1(Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C))([new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(1), new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(2), new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(3), new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(2)]).indexOf(new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(2)));
+        },
+        foreachWhenCastToIEnumerableWorks: function () {
+            var $t;
+            var list = new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["x", "y"]);
+            var result = "";
+            $t = Bridge.getEnumerator(list);
+            while ($t.moveNext()) {
+                var s = $t.getCurrent();
+                result = System.String.concat(result, s);
+            }
+            Bridge.Test.Assert.areEqual("xy", result);
+        },
+        iEnumerableGetEnumeratorWorks: function () {
+            var l = Bridge.cast(new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["x", "y"]), System.Collections.Generic.IEnumerable$1(String));
+            var e = Bridge.getEnumerator(l, "$1", String);
+            Bridge.Test.Assert.true(e.System$Collections$IEnumerator$moveNext());
+            Bridge.Test.Assert.areEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$String$getCurrent$1", "getCurrent$1")]());
+            Bridge.Test.Assert.true(e.System$Collections$IEnumerator$moveNext());
+            Bridge.Test.Assert.areEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$String$getCurrent$1", "getCurrent$1")]());
+            Bridge.Test.Assert.false(e.System$Collections$IEnumerator$moveNext());
+        },
+        iCollectionCountWorks: function () {
+            var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["x", "y", "z"]);
+            Bridge.Test.Assert.areEqual(3, System.Array.getCount(l, String));
+        },
+        iCollectionContainsWorks: function () {
+            var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["x", "y", "z"]);
+            Bridge.Test.Assert.true(System.Array.contains(l, "y", String));
+            Bridge.Test.Assert.false(System.Array.contains(l, "a", String));
+        },
+        iCollectionContainsUsesEqualsMethod: function () {
+            var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C))([new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(1), new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(2), new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(3)]);
+            Bridge.Test.Assert.true(System.Array.contains(l, new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(2), Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C));
+            Bridge.Test.Assert.false(System.Array.contains(l, new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(4), Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C));
+        },
+        iListIndexingWorks: function () {
+            var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["x", "y", "z"]);
+            Bridge.Test.Assert.areEqual("y", System.Array.getItem(l, 1, String));
+        },
+        iListIndexOfWorks: function () {
+            var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["x", "y", "z"]);
+            Bridge.Test.Assert.areEqual(1, System.Array.indexOf(l, "y", 0, null, String));
+            Bridge.Test.Assert.areEqual(-1, System.Array.indexOf(l, "a", 0, null, String));
+        },
+        iListIndexOfUsesEqualsMethod: function () {
+            var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C))([new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(1), new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(2), new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(3)]);
+            Bridge.Test.Assert.areEqual(1, System.Array.indexOf(l, new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(2), 0, null, Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C));
+            Bridge.Test.Assert.areEqual(-1, System.Array.indexOf(l, new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(4), 0, null, Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C));
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C", {
+        i: 0,
+        ctor: function (i) {
+            this.$initialize();
+            this.i = i;
+        },
+        equals: function (o) {
+            return Bridge.is(o, Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C) && this.i === Bridge.cast(o, Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C).i;
+        },
+        getHashCode: function () {
+            return this.i;
         }
     });
 
@@ -6733,6 +7300,7 @@
             MODULE_DECIMAL_MATH: "Decimal Math",
             MODULE_CONVERT: "Convert",
             MODULE_RANDOM: "Random",
+            MODULE_TYPEDARRAYS: "Typed Arrays",
             MODULE_ICOLLECTION: "Collections",
             MODULE_IDICTIONARY: "Collections",
             MODULE_WEAKCOLLECTION: "Collections",
@@ -29614,12 +30182,12 @@
         }
     });
 
-    Bridge.define("Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.D1", {
-        inherits: [Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.B1]
+    Bridge.define("Bridge.ClientTest.ArrayTests.ArrayTestsSet2.D1", {
+        inherits: [Bridge.ClientTest.ArrayTests.ArrayTestsSet2.B1]
     });
 
-    Bridge.define("Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.D2", {
-        inherits: [Bridge.ClientTest.ArrayTests1.ArrayTestsSet2.B2]
+    Bridge.define("Bridge.ClientTest.ArrayTests.ArrayTestsSet2.D2", {
+        inherits: [Bridge.ClientTest.ArrayTests.ArrayTestsSet2.B2]
     });
 
     Bridge.define("Bridge.ClientTest.BasicCSharp.TestAbstractClass.B", {
