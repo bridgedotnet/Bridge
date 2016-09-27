@@ -7264,6 +7264,1862 @@
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Collections.Native.ArrayBufferTests", {
+        getArray: function (b) {
+            var result = System.Array.init(b.byteLength, 0);
+            var a = new Uint8Array(b);
+            for (var i = 0; i < result.length; i = (i + 1) | 0) {
+                result[i] = a[i];
+            }
+            return result;
+        },
+        typePropertiesAreCorrect: function () {
+            Bridge.Test.Assert.areEqual$1("ArrayBuffer", Bridge.Reflection.getTypeFullName(ArrayBuffer), "FullName");
+
+            var interfaces = Bridge.Reflection.getInterfaces(DataView);
+            Bridge.Test.Assert.areEqual$1(0, interfaces.length, "Interface count should be empty");
+        },
+        constructorWorks: function () {
+            var buf = new ArrayBuffer(14);
+            Bridge.Test.Assert.true$1(Bridge.is(buf, ArrayBuffer), "is ArrayBuffer");
+            Bridge.Test.Assert.areEqual$1(14, buf.byteLength, "ByteLength");
+        },
+        byteLengthPropertyWorks: function () {
+            var buf = new ArrayBuffer(10);
+            Bridge.Test.Assert.areEqual$1(10, buf.byteLength, "ByteLength");
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Collections.Native.DataViewTests", {
+        getView: function (content) {
+            var result = new Uint8Array(content.length);
+            for (var i = 0; i < content.length; i = (i + 1) | 0) {
+                result[i] = content[i];
+            }
+            return new DataView(result.buffer);
+        },
+        typePropertiesAreCorrect: function () {
+            Bridge.Test.Assert.areEqual$1("DataView", Bridge.Reflection.getTypeFullName(DataView), "FullName");
+
+            var interfaces = Bridge.Reflection.getInterfaces(DataView);
+            Bridge.Test.Assert.areEqual$1(0, interfaces.length, "Interface count should be empty");
+        },
+        arrayBufferOnlyConstructorWorks: function () {
+            var b = new Uint8Array([2, 3, 5]).buffer;
+            var view = new DataView(b);
+            Bridge.Test.Assert.true$1(Bridge.is(view, DataView), "Should be DataView");
+            Bridge.Test.Assert.areEqual$1(3, view.getInt8(1), "StartIndex should be correct");
+        },
+        arrayBufferAndByteOffsetConstructorWorks: function () {
+            var b = new Uint8Array([2, 3, 5]).buffer;
+            var view = new DataView(b, 1);
+            Bridge.Test.Assert.true$1(Bridge.is(view, DataView), "Should be DataView");
+            Bridge.Test.Assert.areEqual$1(5, view.getInt8(1), "StartIndex should be correct");
+        },
+        arrayBufferAndByteOffsetAndByteLengthConstructorWorks: function () {
+            var b = new Uint8Array([2, 3, 5, 7, 2, 0]).buffer;
+            var view = new DataView(b, 1, 3);
+            Bridge.Test.Assert.true$1(Bridge.is(view, DataView), "Should be DataView");
+            Bridge.Test.Assert.areEqual$1(5, view.getInt8(1), "StartIndex should be correct");
+            Bridge.Test.Assert.throws$5(function () {
+                view.getInt8(4);
+            }, "Length should be correct");
+        },
+        getInt8Works: function () {
+            var b = this.getView([3, 253]);
+            Bridge.Test.Assert.areEqual$1(3, b.getInt8(0), "0");
+            Bridge.Test.Assert.areEqual$1(-3, b.getInt8(1), "1");
+        },
+        getUint8Works: function () {
+            var b = this.getView([3, 253]);
+            Bridge.Test.Assert.areEqual$1(3, b.getUint8(0), "0");
+            Bridge.Test.Assert.areEqual$1(253, b.getUint8(1), "1");
+        },
+        getInt16Works: function () {
+            var b = this.getView([3, 253, 3, 4, 253, 3]);
+            Bridge.Test.Assert.areEqual$1(-765, b.getInt16(0, true), "0, true");
+            Bridge.Test.Assert.areEqual$1(1027, b.getInt16(2, true), "2, true");
+            Bridge.Test.Assert.areEqual$1(1021, b.getInt16(4, true), "4, true");
+            Bridge.Test.Assert.areEqual$1(1021, b.getInt16(0, false), "0, false");
+            Bridge.Test.Assert.areEqual$1(772, b.getInt16(2, false), "2, false");
+            Bridge.Test.Assert.areEqual$1(-765, b.getInt16(4, false), "4, false");
+            Bridge.Test.Assert.areEqual$1(1021, b.getInt16(0), "0, default");
+            Bridge.Test.Assert.areEqual$1(772, b.getInt16(2), "2, default");
+            Bridge.Test.Assert.areEqual$1(-765, b.getInt16(4), "4, default");
+        },
+        getUint16Works: function () {
+            var b = this.getView([3, 253, 3, 4, 253, 3]);
+            Bridge.Test.Assert.areEqual$1(64771, b.getUint16(0, true), "0, true");
+            Bridge.Test.Assert.areEqual$1(1027, b.getUint16(2, true), "2, true");
+            Bridge.Test.Assert.areEqual$1(1021, b.getUint16(4, true), "4, true");
+            Bridge.Test.Assert.areEqual$1(1021, b.getUint16(0, false), "0, false");
+            Bridge.Test.Assert.areEqual$1(772, b.getUint16(2, false), "2, false");
+            Bridge.Test.Assert.areEqual$1(64771, b.getUint16(4, false), "4, false");
+            Bridge.Test.Assert.areEqual$1(1021, b.getUint16(0), "0, default");
+            Bridge.Test.Assert.areEqual$1(772, b.getUint16(2), "2, default");
+            Bridge.Test.Assert.areEqual$1(64771, b.getUint16(4), "4, default");
+        },
+        getInt32Works: function () {
+            var b = this.getView([3, 0, 0, 253, 3, 0, 0, 4, 253, 0, 0, 3]);
+            Bridge.Test.Assert.areEqual$1(-50331645, b.getInt32(0, true), "0, true");
+            Bridge.Test.Assert.areEqual$1(67108867, b.getInt32(4, true), "4, true");
+            Bridge.Test.Assert.areEqual$1(50331901, b.getInt32(8, true), "8, true");
+            Bridge.Test.Assert.areEqual$1(50331901, b.getInt32(0, false), "0, false");
+            Bridge.Test.Assert.areEqual$1(50331652, b.getInt32(4, false), "4, false");
+            Bridge.Test.Assert.areEqual$1(-50331645, b.getInt32(8, false), "8, false");
+            Bridge.Test.Assert.areEqual$1(50331901, b.getInt32(0), "0, default");
+            Bridge.Test.Assert.areEqual$1(50331652, b.getInt32(4), "4, default");
+            Bridge.Test.Assert.areEqual$1(-50331645, b.getInt32(8), "8, default");
+        },
+        getUint32Works: function () {
+            var b = this.getView([3, 0, 0, 253, 3, 0, 0, 4, 253, 0, 0, 3]);
+            Bridge.Test.Assert.areEqual$1(4244635651, b.getUint32(0, true), "0, true");
+            Bridge.Test.Assert.areEqual$1(67108867, b.getUint32(4, true), "4, true");
+            Bridge.Test.Assert.areEqual$1(50331901, b.getUint32(8, true), "8, true");
+            Bridge.Test.Assert.areEqual$1(50331901, b.getUint32(0, false), "0, false");
+            Bridge.Test.Assert.areEqual$1(50331652, b.getUint32(4, false), "4, false");
+            Bridge.Test.Assert.areEqual$1(4244635651, b.getUint32(8, false), "8, false");
+            Bridge.Test.Assert.areEqual$1(50331901, b.getUint32(0), "0, default");
+            Bridge.Test.Assert.areEqual$1(50331652, b.getUint32(4), "4, default");
+            Bridge.Test.Assert.areEqual$1(4244635651, b.getUint32(8), "8, default");
+        },
+        getFloat32Works: function () {
+            var b = this.getView([255, 255, 255, 255, 0, 0, 192, 63, 63, 192, 0, 0]);
+            Bridge.Test.Assert.areEqual$1(1.5, b.getFloat32(4, true), "4, true");
+            Bridge.Test.Assert.areEqual$1(1.5, b.getFloat32(8, false), "8, false");
+            Bridge.Test.Assert.areEqual$1(1.5, b.getFloat32(8), "8, default");
+        },
+        getFloat64Works: function () {
+            var b = this.getView([255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 248, 63, 63, 248, 0, 0, 0, 0, 0, 0]);
+            Bridge.Test.Assert.areEqual$1(1.5, b.getFloat64(8, true), "8, true");
+            Bridge.Test.Assert.areEqual$1(1.5, b.getFloat64(16, false), "16, false");
+            Bridge.Test.Assert.areEqual$1(1.5, b.getFloat64(16), "16, default");
+        },
+        setTest: function (populator, expected) {
+            var b = new ArrayBuffer(expected.length);
+            var v = new DataView(b);
+            populator(v);
+            var actual = new (System.Collections.Generic.List$1(System.Byte))();
+            var ub = new Uint8Array(b);
+            for (var i = 0; i < ub.length; i = (i + 1) | 0) {
+                actual.add(ub[i]);
+            }
+
+            Bridge.Test.Assert.areEqual(expected, actual.toArray());
+        },
+        setInt8Works: function () {
+            this.setTest($_.Bridge.ClientTest.Collections.Native.DataViewTests.f1, [0, 14, 242]);
+        },
+        setUint8Works: function () {
+            this.setTest($_.Bridge.ClientTest.Collections.Native.DataViewTests.f2, [0, 14, 242]);
+        },
+        setInt16Works: function () {
+            this.setTest($_.Bridge.ClientTest.Collections.Native.DataViewTests.f3, [0, 0, 255, 252, 252, 255, 255, 252, 0, 14, 14, 0, 0, 14, 0]);
+        },
+        setUint16Works: function () {
+            this.setTest($_.Bridge.ClientTest.Collections.Native.DataViewTests.f4, [0, 0, 140, 35, 35, 140, 140, 35, 0, 14, 14, 0, 0, 14, 0]);
+        },
+        setInt32Works: function () {
+            this.setTest($_.Bridge.ClientTest.Collections.Native.DataViewTests.f5, [0, 0, 0, 0, 255, 255, 255, 252, 252, 255, 255, 255, 255, 255, 255, 252, 0, 0, 0, 14, 14, 0, 0, 0, 0, 0, 0, 14, 0, 0]);
+        },
+        setUint32Works: function () {
+            this.setTest($_.Bridge.ClientTest.Collections.Native.DataViewTests.f6, [0, 0, 0, 0, 207, 224, 18, 143, 143, 18, 224, 207, 207, 224, 18, 143, 0, 0, 0, 14, 14, 0, 0, 0, 0, 0, 0, 14, 0, 0]);
+        },
+        setFloat32Works: function () {
+            this.setTest($_.Bridge.ClientTest.Collections.Native.DataViewTests.f7, [0, 0, 0, 0, 63, 192, 0, 0, 0, 0, 192, 63, 63, 192, 0, 0]);
+        },
+        setFloat64Works: function () {
+            this.setTest($_.Bridge.ClientTest.Collections.Native.DataViewTests.f8, [0, 0, 0, 0, 0, 0, 0, 0, 63, 248, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 248, 63, 63, 248, 0, 0, 0, 0, 0, 0]);
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Collections.Native.DataViewTests", $_);
+
+    Bridge.apply($_.Bridge.ClientTest.Collections.Native.DataViewTests, {
+        f1: function (v) {
+            v.setInt8(1, 14);
+            v.setInt8(2, -14);
+        },
+        f2: function (v) {
+            v.setUint8(1, 14);
+            v.setUint8(2, 242);
+        },
+        f3: function (v) {
+            v.setInt16(2, -4, false);
+            v.setInt16(4, -4, true);
+            v.setInt16(6, -4);
+            v.setInt16(8, 14, false);
+            v.setInt16(10, 14, true);
+            v.setInt16(12, 14);
+        },
+        f4: function (v) {
+            v.setUint16(2, 35875, false);
+            v.setUint16(4, 35875, true);
+            v.setUint16(6, 35875);
+            v.setUint16(8, 14, false);
+            v.setUint16(10, 14, true);
+            v.setUint16(12, 14);
+        },
+        f5: function (v) {
+            v.setInt32(4, -4, false);
+            v.setInt32(8, -4, true);
+            v.setInt32(12, -4);
+            v.setInt32(16, 14, false);
+            v.setInt32(20, 14, true);
+            v.setInt32(24, 14);
+        },
+        f6: function (v) {
+            v.setUint32(4, 3487568527, false);
+            v.setUint32(8, 3487568527, true);
+            v.setUint32(12, 3487568527);
+            v.setUint32(16, 14, false);
+            v.setUint32(20, 14, true);
+            v.setUint32(24, 14);
+        },
+        f7: function (v) {
+            v.setFloat32(4, 1.5, false);
+            v.setFloat32(8, 1.5, true);
+            v.setFloat32(12, 1.5);
+        },
+        f8: function (v) {
+            v.setFloat64(8, 1.5, false);
+            v.setFloat64(16, 1.5, true);
+            v.setFloat64(24, 1.5);
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Collections.Native.Float32ArrayTests", {
+        assertContent: function (actual, expected, message) {
+            if (actual.length !== expected.length) {
+                Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
+                return;
+            }
+            for (var i = 0; i < expected.length; i = (i + 1) | 0) {
+                if (actual[i] !== expected[i]) {
+                    Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Position "), i), ": expected "), expected[i]), ", actual: "), System.Single.format(actual[i], 'G')));
+                    return;
+                }
+            }
+            Bridge.Test.Assert.true$1(true, message);
+        },
+        lengthConstructorWorks: function () {
+            var arr = new Float32Array(13);
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Float32Array), "is Float32Array");
+            Bridge.Test.Assert.areEqual$1(13, arr.length, "Length");
+        },
+        constructorFromIntWorks: function () {
+            var source = [3, 8, 4];
+            var arr = new Float32Array(source);
+            Bridge.Test.Assert.true$1(!Bridge.referenceEquals(arr, source), "New object");
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Float32Array), "is Float32Array");
+            this.assertContent(arr, [3, 8, 4], "content");
+        },
+        copyConstructorWorks: function () {
+            var source = new Float32Array([3, 8, 4]);
+            var arr = new Float32Array(source);
+            Bridge.Test.Assert.true$1(!Bridge.referenceEquals(arr, source), "New object");
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Float32Array), "is Float32Array");
+            this.assertContent(arr, [3, 8, 4], "content");
+        },
+        arrayBufferConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Float32Array(buf);
+            Bridge.Test.Assert.true(Bridge.is(arr, Float32Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(20, arr.length, "length");
+        },
+        arrayBufferWithOffsetConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Float32Array(buf, 16);
+            Bridge.Test.Assert.true(Bridge.is(arr, Float32Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(16, arr.length, "length");
+        },
+        arrayBufferWithOffsetAndLengthConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Float32Array(buf, 16, 12);
+            Bridge.Test.Assert.true(Bridge.is(arr, Float32Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(12, arr.length, "length");
+        },
+        staticBytesPerElementWorks: function () {
+            Bridge.Test.Assert.areEqual(4, Float32Array.BYTES_PER_ELEMENT);
+        },
+        lengthWorks: function () {
+            var arr = new Float32Array(13);
+            Bridge.Test.Assert.areEqual$1(13, arr.length, "Length");
+        },
+        indexingWorks: function () {
+            var arr = new Float32Array(3);
+            arr[1] = 42;
+            this.assertContent(arr, [0, 42, 0], "Content");
+            Bridge.Test.Assert.areEqual$1(42, arr[1], "[1]");
+        },
+        setFloat32ArrayWorks: function () {
+            var arr = new Float32Array(4);
+            arr.set(new Float32Array([3, 6, 7]));
+            this.assertContent(arr, [3, 6, 7, 0], "Content");
+        },
+        setFloat32ArrayWithOffsetWorks: function () {
+            var arr = new Float32Array(6);
+            arr.set(new Float32Array([3, 6, 7]), 2);
+            this.assertContent(arr, [0, 0, 3, 6, 7, 0], "Content");
+        },
+        setNormalArrayWorks: function () {
+            var arr = new Float32Array(4);
+            arr.set([3, 6, 7]);
+            this.assertContent(arr, [3, 6, 7, 0], "Content");
+        },
+        setNormalArrayWithOffsetWorks: function () {
+            var arr = new Float32Array(6);
+            arr.set([3, 6, 7], 2);
+            this.assertContent(arr, [0, 0, 3, 6, 7, 0], "Content");
+        },
+        subarrayWithBeginWorks: function () {
+            var source = new Float32Array(10);
+            var arr = source.subarray(3);
+            Bridge.Test.Assert.false$1(Bridge.referenceEquals(arr, source), "Should be a new array");
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, source.buffer), "Should be the same buffer");
+            Bridge.Test.Assert.areEqual$1(12, arr.byteOffset, "ByteOffset should be correct");
+        },
+        subarrayWithBeginAndEndWorks: function () {
+            var source = new Float32Array(10);
+            var arr = source.subarray(3, 7);
+            Bridge.Test.Assert.false$1(Bridge.referenceEquals(arr, source), "Should be a new array");
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, source.buffer), "Should be the same buffer");
+            Bridge.Test.Assert.areEqual$1(12, arr.byteOffset, "ByteOffset should be correct");
+            Bridge.Test.Assert.areEqual$1(4, arr.length, "Length should be correct");
+        },
+        bufferPropertyWorks: function () {
+            var buf = new ArrayBuffer(100);
+            var arr = new Float32Array(buf);
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "Should be correct");
+        },
+        byteOffsetPropertyWorks: function () {
+            var buf = new ArrayBuffer(100);
+            var arr = new Float32Array(buf, 32);
+            Bridge.Test.Assert.areEqual$1(32, arr.byteOffset, "Should be correct");
+        },
+        byteLengthPropertyWorks: function () {
+            var arr = new Float32Array(23);
+            Bridge.Test.Assert.areEqual$1(92, arr.byteLength, "Should be correct");
+        },
+        indexOfWorks: function () {
+            var arr = new Float32Array([3, 6, 2, 9, 5]);
+            Bridge.Test.Assert.areEqual$1(3, System.Array.indexOf(arr, 9), "9");
+            Bridge.Test.Assert.areEqual$1(-1, System.Array.indexOf(arr, 1), "1");
+        },
+        containsWorks: function () {
+            var arr = new Float32Array([3, 6, 2, 9, 5]);
+            Bridge.Test.Assert.true$1(System.Array.contains(arr, 9), "9");
+            Bridge.Test.Assert.false$1(System.Array.contains(arr, 1), "1");
+        },
+        foreachWorks_SPI_1401: function () {
+            var $t;
+            var arr = new Float32Array([3, 6, 2, 9, 5]);
+            var l = new (System.Collections.Generic.List$1(System.Single))();
+            // #1401
+            $t = Bridge.getEnumerator(arr);
+            while ($t.moveNext()) {
+                var i = $t.getCurrent();
+                l.add(i);
+            }
+            Bridge.Test.Assert.areEqual(l.toArray(), [3, 6, 2, 9, 5]);
+        },
+        getEnumeratorWorks_SPI_1401: function () {
+            var arr = new Float32Array([3, 6, 2, 9, 5]);
+            var l = new (System.Collections.Generic.List$1(System.Single))();
+            // #1401
+            var enm = Bridge.getEnumerator(arr);
+            while (enm.System$Collections$IEnumerator$moveNext()) {
+                l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Single$getCurrent$1", "getCurrent$1")]());
+            }
+            Bridge.Test.Assert.areEqual(l.toArray(), [3, 6, 2, 9, 5]);
+        },
+        iEnumerableGetEnumeratorWorks: function () {
+            var arr = Bridge.cast(new Float32Array([3, 6, 2, 9, 5]), System.Collections.Generic.IEnumerable$1(System.Single));
+            var l = new (System.Collections.Generic.List$1(System.Single))();
+            var enm = Bridge.getEnumerator(arr, "$1", System.Single);
+            while (enm.System$Collections$IEnumerator$moveNext()) {
+                l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Single$getCurrent$1", "getCurrent$1")]());
+            }
+            Bridge.Test.Assert.areEqual([3, 6, 2, 9, 5], l.toArray());
+        },
+        iCollectionMethodsWork_SPI_1559: function () {
+            // #1559
+            var coll = Bridge.cast(new Float32Array([3, 6, 2, 9, 5]), System.Collections.Generic.ICollection$1(System.Single));
+            Bridge.Test.Assert.areEqual$1(5, System.Array.getCount(coll, System.Single), "Count");
+            Bridge.Test.Assert.true$1(System.Array.contains(coll, 6, System.Single), "Contains(6)");
+            Bridge.Test.Assert.false$1(System.Array.contains(coll, 1, System.Single), "Contains(1)");
+            //Assert.Throws<NotSupportedException>(() => coll.Add(2), "Add");
+            //Assert.Throws<NotSupportedException>(() => coll.Clear(), "Clear");
+            //Assert.Throws<NotSupportedException>(() => coll.Remove(2), "Remove");
+        },
+        iListMethodsWork_SPI_1559: function () {
+            // #1559
+            var list = Bridge.cast(new Float32Array([3, 6, 2, 9, 5]), System.Collections.Generic.IList$1(System.Single));
+            Bridge.Test.Assert.areEqual$1(1, System.Array.indexOf(list, 6, 0, null, System.Single), "IndexOf(6)");
+            Bridge.Test.Assert.areEqual$1(-1, System.Array.indexOf(list, 1, 0, null, System.Single), "IndexOf(1)");
+            Bridge.Test.Assert.areEqual$1(9, System.Array.getItem(list, 3, System.Single), "Get item");
+            System.Array.setItem(list, 3, 4, System.Single);
+            Bridge.Test.Assert.areEqual$1(4, System.Array.getItem(list, 3, System.Single), "Set item");
+
+            //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
+            //Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Collections.Native.Float64ArrayTests", {
+        assertContent: function (actual, expected, message) {
+            if (actual.length !== expected.length) {
+                Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
+                return;
+            }
+            for (var i = 0; i < expected.length; i = (i + 1) | 0) {
+                if (actual[i] !== expected[i]) {
+                    Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Position "), i), ": expected "), expected[i]), ", actual: "), System.Double.format(actual[i], 'G')));
+                    return;
+                }
+            }
+            Bridge.Test.Assert.true$1(true, message);
+        },
+        lengthConstructorWorks: function () {
+            var arr = new Float64Array(13);
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Float64Array), "is Float64Array");
+            Bridge.Test.Assert.areEqual$1(13, arr.length, "Length");
+        },
+        constructorFromIntWorks: function () {
+            var source = [3, 8, 4];
+            var arr = new Float64Array(source);
+            Bridge.Test.Assert.true$1(!Bridge.referenceEquals(arr, source), "New object");
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Float64Array), "is Float64Array");
+            this.assertContent(arr, [3, 8, 4], "content");
+        },
+        copyConstructorWorks: function () {
+            var source = new Float64Array([3, 8, 4]);
+            var arr = new Float64Array(source);
+            Bridge.Test.Assert.true$1(!Bridge.referenceEquals(arr, source), "New object");
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Float64Array), "is Float64Array");
+            this.assertContent(arr, [3, 8, 4], "content");
+        },
+        arrayBufferConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Float64Array(buf);
+            Bridge.Test.Assert.true(Bridge.is(arr, Float64Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(10, arr.length, "length");
+        },
+        arrayBufferWithOffsetConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Float64Array(buf, 8);
+            Bridge.Test.Assert.true(Bridge.is(arr, Float64Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(9, arr.length, "length");
+        },
+        arrayBufferWithOffsetAndLengthConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Float64Array(buf, 16, 6);
+            Bridge.Test.Assert.true(Bridge.is(arr, Float64Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(6, arr.length, "length");
+        },
+        staticBytesPerElementWorks: function () {
+            Bridge.Test.Assert.areEqual(8, Float64Array.BYTES_PER_ELEMENT);
+        },
+        lengthWorks: function () {
+            var arr = new Float64Array(13);
+            Bridge.Test.Assert.areEqual$1(13, arr.length, "Length");
+        },
+        indexingWorks: function () {
+            var arr = new Float64Array(3);
+            arr[1] = 42;
+            this.assertContent(arr, [0, 42, 0], "Content");
+            Bridge.Test.Assert.areEqual$1(42, arr[1], "[1]");
+        },
+        setFloat64ArrayWorks: function () {
+            var arr = new Float64Array(4);
+            arr.set(new Float64Array([3, 6, 7]));
+            this.assertContent(arr, [3, 6, 7, 0], "Content");
+        },
+        setFloat64ArrayWithOffsetWorks: function () {
+            var arr = new Float64Array(6);
+            arr.set(new Float64Array([3, 6, 7]), 2);
+            this.assertContent(arr, [0, 0, 3, 6, 7, 0], "Content");
+        },
+        setNormalArrayWorks: function () {
+            var arr = new Float64Array(4);
+            arr.set([3, 6, 7]);
+            this.assertContent(arr, [3, 6, 7, 0], "Content");
+        },
+        setNormalArrayWithOffsetWorks: function () {
+            var arr = new Float64Array(6);
+            arr.set([3, 6, 7], 2);
+            this.assertContent(arr, [0, 0, 3, 6, 7, 0], "Content");
+        },
+        subarrayWithBeginWorks: function () {
+            var source = new Float64Array(10);
+            var arr = source.subarray(3);
+            Bridge.Test.Assert.false$1(Bridge.referenceEquals(arr, source), "Should be a new array");
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, source.buffer), "Should be the same buffer");
+            Bridge.Test.Assert.areEqual$1(24, arr.byteOffset, "ByteOffset should be correct");
+        },
+        subarrayWithBeginAndEndWorks: function () {
+            var source = new Float64Array(10);
+            var arr = source.subarray(3, 7);
+            Bridge.Test.Assert.false$1(Bridge.referenceEquals(arr, source), "Should be a new array");
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, source.buffer), "Should be the same buffer");
+            Bridge.Test.Assert.areEqual$1(24, arr.byteOffset, "ByteOffset should be correct");
+            Bridge.Test.Assert.areEqual$1(4, arr.length, "Length should be correct");
+        },
+        bufferPropertyWorks: function () {
+            var buf = new ArrayBuffer(104);
+            var arr = new Float64Array(buf);
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "Should be correct");
+        },
+        byteOffsetPropertyWorks: function () {
+            var buf = new ArrayBuffer(104);
+            var arr = new Float64Array(buf, 56);
+            Bridge.Test.Assert.areEqual$1(56, arr.byteOffset, "Should be correct");
+        },
+        byteLengthPropertyWorks: function () {
+            var arr = new Float64Array(23);
+            Bridge.Test.Assert.areEqual$1(184, arr.byteLength, "Should be correct");
+        },
+        indexOfWorks: function () {
+            var arr = new Float64Array([3, 6, 2, 9, 5]);
+            Bridge.Test.Assert.areEqual$1(3, System.Array.indexOf(arr, 9), "9");
+            Bridge.Test.Assert.areEqual$1(-1, System.Array.indexOf(arr, 1), "1");
+        },
+        containsWorks: function () {
+            var arr = new Float64Array([3, 6, 2, 9, 5]);
+            Bridge.Test.Assert.true$1(System.Array.contains(arr, 9), "9");
+            Bridge.Test.Assert.false$1(System.Array.contains(arr, 1), "1");
+        },
+        foreachWorks_SPI_1401: function () {
+            var $t;
+            var arr = new Float64Array([3, 6, 2, 9, 5]);
+            var l = new (System.Collections.Generic.List$1(System.Double))();
+            // #1401
+            $t = Bridge.getEnumerator(arr);
+            while ($t.moveNext()) {
+                var i = $t.getCurrent();
+                l.add(i);
+            }
+            Bridge.Test.Assert.areEqual(l.toArray(), [3, 6, 2, 9, 5]);
+        },
+        getEnumeratorWorks_SPI_1401: function () {
+            var arr = new Float64Array([3, 6, 2, 9, 5]);
+            var l = new (System.Collections.Generic.List$1(System.Double))();
+            // #1401
+            var enm = Bridge.getEnumerator(arr);
+            while (enm.System$Collections$IEnumerator$moveNext()) {
+                l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Double$getCurrent$1", "getCurrent$1")]());
+            }
+            Bridge.Test.Assert.areEqual(l.toArray(), [3, 6, 2, 9, 5]);
+        },
+        iEnumerableGetEnumeratorWorks: function () {
+            var arr = Bridge.cast(new Float64Array([3, 6, 2, 9, 5]), System.Collections.Generic.IEnumerable$1(System.Double));
+            var l = new (System.Collections.Generic.List$1(System.Double))();
+            var enm = Bridge.getEnumerator(arr, "$1", System.Double);
+            while (enm.System$Collections$IEnumerator$moveNext()) {
+                l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Double$getCurrent$1", "getCurrent$1")]());
+            }
+            Bridge.Test.Assert.areEqual([3, 6, 2, 9, 5], l.toArray());
+        },
+        iCollectionMethodsWork_SPI_1559: function () {
+            // #1559
+            var coll = Bridge.cast(new Float64Array([3, 6, 2, 9, 5]), System.Collections.Generic.ICollection$1(System.Double));
+            Bridge.Test.Assert.areEqual$1(5, System.Array.getCount(coll, System.Double), "Count");
+            Bridge.Test.Assert.true$1(System.Array.contains(coll, 6, System.Double), "Contains(6)");
+            Bridge.Test.Assert.false$1(System.Array.contains(coll, 1, System.Double), "Contains(1)");
+            //Assert.Throws<NotSupportedException>(() => coll.Add(2), "Add");
+            //Assert.Throws<NotSupportedException>(() => coll.Clear(), "Clear");
+            //Assert.Throws<NotSupportedException>(() => coll.Remove(2), "Remove");
+        },
+        iListMethodsWork_SPI_1559: function () {
+            // #1559
+            var list = Bridge.cast(new Float64Array([3, 6, 2, 9, 5]), System.Collections.Generic.IList$1(System.Double));
+            Bridge.Test.Assert.areEqual$1(1, System.Array.indexOf(list, 6, 0, null, System.Double), "IndexOf(6)");
+            Bridge.Test.Assert.areEqual$1(-1, System.Array.indexOf(list, 1, 0, null, System.Double), "IndexOf(1)");
+            Bridge.Test.Assert.areEqual$1(9, System.Array.getItem(list, 3, System.Double), "Get item");
+            System.Array.setItem(list, 3, 4, System.Double);
+            Bridge.Test.Assert.areEqual$1(4, System.Array.getItem(list, 3, System.Double), "Set item");
+
+            //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
+            //Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Collections.Native.Int16ArrayTests", {
+        assertContent: function (actual, expected, message) {
+            if (actual.length !== expected.length) {
+                Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
+                return;
+            }
+            for (var i = 0; i < expected.length; i = (i + 1) | 0) {
+                if (actual[i] !== expected[i]) {
+                    Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Position "), i), ": expected "), expected[i]), ", actual: "), actual[i]));
+                    return;
+                }
+            }
+            Bridge.Test.Assert.true$1(true, message);
+        },
+        lengthConstructorWorks: function () {
+            var arr = new Int16Array(13);
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Int16Array), "is Int16Array");
+            Bridge.Test.Assert.areEqual$1(13, arr.length, "Length");
+        },
+        constructorFromIntWorks: function () {
+            var source = [3, 8, 4];
+            var arr = new Int16Array(source);
+            Bridge.Test.Assert.true$1(!Bridge.referenceEquals(arr, source), "New object");
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Int16Array), "is Int16Array");
+            this.assertContent(arr, [3, 8, 4], "content");
+        },
+        copyConstructorWorks: function () {
+            var source = new Int16Array([3, 8, 4]);
+            var arr = new Int16Array(source);
+            Bridge.Test.Assert.true$1(!Bridge.referenceEquals(arr, source), "New object");
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Int16Array), "is Int16Array");
+            this.assertContent(arr, [3, 8, 4], "content");
+        },
+        arrayBufferConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Int16Array(buf);
+            Bridge.Test.Assert.true(Bridge.is(arr, Int16Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(40, arr.length, "length");
+        },
+        arrayBufferWithOffsetConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Int16Array(buf, 16);
+            Bridge.Test.Assert.true(Bridge.is(arr, Int16Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(32, arr.length, "length");
+        },
+        arrayBufferWithOffsetAndLengthConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Int16Array(buf, 16, 12);
+            Bridge.Test.Assert.true(Bridge.is(arr, Int16Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(12, arr.length, "length");
+        },
+        staticBytesPerElementWorks: function () {
+            Bridge.Test.Assert.areEqual(2, Int16Array.BYTES_PER_ELEMENT);
+        },
+        lengthWorks: function () {
+            var arr = new Int16Array(13);
+            Bridge.Test.Assert.areEqual$1(13, arr.length, "Length");
+        },
+        indexingWorks: function () {
+            var arr = new Int16Array(3);
+            arr[1] = 42;
+            this.assertContent(arr, [0, 42, 0], "Content");
+            Bridge.Test.Assert.areEqual$1(42, arr[1], "[1]");
+        },
+        setInt16ArrayWorks: function () {
+            var arr = new Int16Array(4);
+            arr.set(new Int16Array([3, 6, 7]));
+            this.assertContent(arr, [3, 6, 7, 0], "Content");
+        },
+        setInt16ArrayWithOffsetWorks: function () {
+            var arr = new Int16Array(6);
+            arr.set(new Int16Array([3, 6, 7]), 2);
+            this.assertContent(arr, [0, 0, 3, 6, 7, 0], "Content");
+        },
+        setNormalArrayWorks: function () {
+            var arr = new Int16Array(4);
+            arr.set([3, 6, 7]);
+            this.assertContent(arr, [3, 6, 7, 0], "Content");
+        },
+        setNormalArrayWithOffsetWorks: function () {
+            var arr = new Int16Array(6);
+            arr.set([3, 6, 7], 2);
+            this.assertContent(arr, [0, 0, 3, 6, 7, 0], "Content");
+        },
+        subarrayWithBeginWorks: function () {
+            var source = new Int16Array(10);
+            var arr = source.subarray(3);
+            Bridge.Test.Assert.false$1(Bridge.referenceEquals(arr, source), "Should be a new array");
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, source.buffer), "Should be the same buffer");
+            Bridge.Test.Assert.areEqual$1(6, arr.byteOffset, "ByteOffset should be correct");
+        },
+        subarrayWithBeginAndEndWorks: function () {
+            var source = new Int16Array(10);
+            var arr = source.subarray(3, 7);
+            Bridge.Test.Assert.false$1(Bridge.referenceEquals(arr, source), "Should be a new array");
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, source.buffer), "Should be the same buffer");
+            Bridge.Test.Assert.areEqual$1(6, arr.byteOffset, "ByteOffset should be correct");
+            Bridge.Test.Assert.areEqual$1(4, arr.length, "Length should be correct");
+        },
+        bufferPropertyWorks: function () {
+            var buf = new ArrayBuffer(100);
+            var arr = new Int16Array(buf);
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "Should be correct");
+        },
+        byteOffsetPropertyWorks: function () {
+            var buf = new ArrayBuffer(100);
+            var arr = new Int16Array(buf, 32);
+            Bridge.Test.Assert.areEqual$1(32, arr.byteOffset, "Should be correct");
+        },
+        byteLengthPropertyWorks: function () {
+            var arr = new Int16Array(23);
+            Bridge.Test.Assert.areEqual$1(46, arr.byteLength, "Should be correct");
+        },
+        indexOfWorks: function () {
+            var arr = new Int16Array([3, 6, 2, 9, 5]);
+            Bridge.Test.Assert.areEqual$1(3, System.Array.indexOf(arr, 9), "9");
+            Bridge.Test.Assert.areEqual$1(-1, System.Array.indexOf(arr, 1), "1");
+        },
+        containsWorks: function () {
+            var arr = new Int16Array([3, 6, 2, 9, 5]);
+            Bridge.Test.Assert.true$1(System.Array.contains(arr, 9), "9");
+            Bridge.Test.Assert.false$1(System.Array.contains(arr, 1), "1");
+        },
+        foreachWorks_SPI_1401: function () {
+            var $t;
+            var arr = new Int16Array([3, 6, 2, 9, 5]);
+            var l = new (System.Collections.Generic.List$1(System.Int32))();
+            // #1401
+            $t = Bridge.getEnumerator(arr);
+            while ($t.moveNext()) {
+                var i = $t.getCurrent();
+                l.add(i);
+            }
+            Bridge.Test.Assert.areEqual(l.toArray(), [3, 6, 2, 9, 5]);
+        },
+        getEnumeratorWorks_SPI_1401: function () {
+            var arr = new Int16Array([3, 6, 2, 9, 5]);
+            var l = new (System.Collections.Generic.List$1(System.Int32))();
+            // #1401
+            var enm = Bridge.getEnumerator(arr);
+            while (enm.System$Collections$IEnumerator$moveNext()) {
+                l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int16$getCurrent$1", "getCurrent$1")]());
+            }
+            Bridge.Test.Assert.areEqual(l.toArray(), [3, 6, 2, 9, 5]);
+        },
+        iEnumerableGetEnumeratorWorks: function () {
+            var arr = Bridge.cast(new Int16Array([3, 6, 2, 9, 5]), System.Collections.Generic.IEnumerable$1(System.Int16));
+            var l = new (System.Collections.Generic.List$1(System.Int32))();
+            var enm = Bridge.getEnumerator(arr, "$1", System.Int16);
+            while (enm.System$Collections$IEnumerator$moveNext()) {
+                l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int16$getCurrent$1", "getCurrent$1")]());
+            }
+            Bridge.Test.Assert.areEqual([3, 6, 2, 9, 5], l.toArray());
+        },
+        iCollectionMethodsWork_SPI_1559: function () {
+            // #1559
+            var coll = Bridge.cast(new Int16Array([3, 6, 2, 9, 5]), System.Collections.Generic.ICollection$1(System.Int16));
+            Bridge.Test.Assert.areEqual$1(5, System.Array.getCount(coll, System.Int16), "Count");
+            Bridge.Test.Assert.true$1(System.Array.contains(coll, 6, System.Int16), "Contains(6)");
+            Bridge.Test.Assert.false$1(System.Array.contains(coll, 1, System.Int16), "Contains(1)");
+            //Assert.Throws<NotSupportedException>(() => coll.Add(2), "Add");
+            //Assert.Throws<NotSupportedException>(() => coll.Clear(), "Clear");
+            //Assert.Throws<NotSupportedException>(() => coll.Remove(2), "Remove");
+        },
+        iListMethodsWork_SPI_1559: function () {
+            // #1559
+            var list = Bridge.cast(new Int16Array([3, 6, 2, 9, 5]), System.Collections.Generic.IList$1(System.Int16));
+            Bridge.Test.Assert.areEqual$1(1, System.Array.indexOf(list, 6, 0, null, System.Int16), "IndexOf(6)");
+            Bridge.Test.Assert.areEqual$1(-1, System.Array.indexOf(list, 1, 0, null, System.Int16), "IndexOf(1)");
+            Bridge.Test.Assert.areEqual$1(9, System.Array.getItem(list, 3, System.Int16), "Get item");
+            System.Array.setItem(list, 3, 4, System.Int16);
+            Bridge.Test.Assert.areEqual$1(4, System.Array.getItem(list, 3, System.Int16), "Set item");
+
+            //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
+            //Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Collections.Native.Int32ArrayTests", {
+        assertContent: function (actual, expected, message) {
+            if (actual.length !== expected.length) {
+                Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
+                return;
+            }
+            for (var i = 0; i < expected.length; i = (i + 1) | 0) {
+                if (actual[i] !== expected[i]) {
+                    Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Position "), i), ": expected "), expected[i]), ", actual: "), actual[i]));
+                    return;
+                }
+            }
+            Bridge.Test.Assert.true$1(true, message);
+        },
+        lengthConstructorWorks: function () {
+            var arr = new Int32Array(13);
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Int32Array), "is Int32Array");
+            Bridge.Test.Assert.areEqual$1(13, arr.length, "Length");
+        },
+        constructorFromIntWorks: function () {
+            var source = [3, 8, 4];
+            var arr = new Int32Array(source);
+            Bridge.Test.Assert.true$1(!Bridge.referenceEquals(arr, source), "New object");
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Int32Array), "is Int32Array");
+            this.assertContent(arr, [3, 8, 4], "content");
+        },
+        copyConstructorWorks: function () {
+            var source = new Int32Array([3, 8, 4]);
+            var arr = new Int32Array(source);
+            Bridge.Test.Assert.true$1(!Bridge.referenceEquals(arr, source), "New object");
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Int32Array), "is Int32Array");
+            this.assertContent(arr, [3, 8, 4], "content");
+        },
+        arrayBufferConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Int32Array(buf);
+            Bridge.Test.Assert.true(Bridge.is(arr, Int32Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(20, arr.length, "length");
+        },
+        arrayBufferWithOffsetConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Int32Array(buf, 16);
+            Bridge.Test.Assert.true(Bridge.is(arr, Int32Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(16, arr.length, "length");
+        },
+        arrayBufferWithOffsetAndLengthConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Int32Array(buf, 16, 12);
+            Bridge.Test.Assert.true(Bridge.is(arr, Int32Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(12, arr.length, "length");
+        },
+        staticBytesPerElementWorks: function () {
+            Bridge.Test.Assert.areEqual(4, Int32Array.BYTES_PER_ELEMENT);
+        },
+        lengthWorks: function () {
+            var arr = new Int32Array(13);
+            Bridge.Test.Assert.areEqual$1(13, arr.length, "Length");
+        },
+        indexingWorks: function () {
+            var arr = new Int32Array(3);
+            arr[1] = 42;
+            this.assertContent(arr, [0, 42, 0], "Content");
+            Bridge.Test.Assert.areEqual$1(42, arr[1], "[1]");
+        },
+        setInt32ArrayWorks: function () {
+            var arr = new Int32Array(4);
+            arr.set(new Int32Array([3, 6, 7]));
+            this.assertContent(arr, [3, 6, 7, 0], "Content");
+        },
+        setInt32ArrayWithOffsetWorks: function () {
+            var arr = new Int32Array(6);
+            arr.set(new Int32Array([3, 6, 7]), 2);
+            this.assertContent(arr, [0, 0, 3, 6, 7, 0], "Content");
+        },
+        setNormalArrayWorks: function () {
+            var arr = new Int32Array(4);
+            arr.set([3, 6, 7]);
+            this.assertContent(arr, [3, 6, 7, 0], "Content");
+        },
+        setNormalArrayWithOffsetWorks: function () {
+            var arr = new Int32Array(6);
+            arr.set([3, 6, 7], 2);
+            this.assertContent(arr, [0, 0, 3, 6, 7, 0], "Content");
+        },
+        subarrayWithBeginWorks: function () {
+            var source = new Int32Array(10);
+            var arr = source.subarray(3);
+            Bridge.Test.Assert.false$1(Bridge.referenceEquals(arr, source), "Should be a new array");
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, source.buffer), "Should be the same buffer");
+            Bridge.Test.Assert.areEqual$1(12, arr.byteOffset, "ByteOffset should be correct");
+        },
+        subarrayWithBeginAndEndWorks: function () {
+            var source = new Int32Array(10);
+            var arr = source.subarray(3, 7);
+            Bridge.Test.Assert.false$1(Bridge.referenceEquals(arr, source), "Should be a new array");
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, source.buffer), "Should be the same buffer");
+            Bridge.Test.Assert.areEqual$1(12, arr.byteOffset, "ByteOffset should be correct");
+            Bridge.Test.Assert.areEqual$1(4, arr.length, "Length should be correct");
+        },
+        bufferPropertyWorks: function () {
+            var buf = new ArrayBuffer(100);
+            var arr = new Int32Array(buf);
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "Should be correct");
+        },
+        byteOffsetPropertyWorks: function () {
+            var buf = new ArrayBuffer(100);
+            var arr = new Int32Array(buf, 32);
+            Bridge.Test.Assert.areEqual$1(32, arr.byteOffset, "Should be correct");
+        },
+        byteLengthPropertyWorks: function () {
+            var arr = new Int32Array(23);
+            Bridge.Test.Assert.areEqual$1(92, arr.byteLength, "Should be correct");
+        },
+        indexOfWorks: function () {
+            var arr = new Int32Array([3, 6, 2, 9, 5]);
+            Bridge.Test.Assert.areEqual$1(3, System.Array.indexOf(arr, 9), "9");
+            Bridge.Test.Assert.areEqual$1(-1, System.Array.indexOf(arr, 1), "1");
+        },
+        containsWorks: function () {
+            var arr = new Int32Array([3, 6, 2, 9, 5]);
+            Bridge.Test.Assert.true$1(System.Array.contains(arr, 9), "9");
+            Bridge.Test.Assert.false$1(System.Array.contains(arr, 1), "1");
+        },
+        foreachWorks_SPI_1401: function () {
+            var $t;
+            var arr = new Int32Array([3, 6, 2, 9, 5]);
+            var l = new (System.Collections.Generic.List$1(System.Int32))();
+            // #1401
+            $t = Bridge.getEnumerator(arr);
+            while ($t.moveNext()) {
+                var i = $t.getCurrent();
+                l.add(i);
+            }
+            Bridge.Test.Assert.areEqual(l.toArray(), [3, 6, 2, 9, 5]);
+        },
+        getEnumeratorWorks_SPI_1401: function () {
+            var arr = new Int32Array([3, 6, 2, 9, 5]);
+            var l = new (System.Collections.Generic.List$1(System.Int32))();
+            // #1401
+            var enm = Bridge.getEnumerator(arr);
+            while (enm.System$Collections$IEnumerator$moveNext()) {
+                l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]());
+            }
+            Bridge.Test.Assert.areEqual(l.toArray(), [3, 6, 2, 9, 5]);
+        },
+        iEnumerableGetEnumeratorWorks: function () {
+            var arr = Bridge.cast(new Int32Array([3, 6, 2, 9, 5]), System.Collections.Generic.IEnumerable$1(System.Int32));
+            var l = new (System.Collections.Generic.List$1(System.Int32))();
+            var enm = Bridge.getEnumerator(arr, "$1", System.Int32);
+            while (enm.System$Collections$IEnumerator$moveNext()) {
+                l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]());
+            }
+            Bridge.Test.Assert.areEqual([3, 6, 2, 9, 5], l.toArray());
+        },
+        iCollectionMethodsWork_SPI_1559: function () {
+            // #1559
+            var coll = Bridge.cast(new Int32Array([3, 6, 2, 9, 5]), System.Collections.Generic.ICollection$1(System.Int32));
+            Bridge.Test.Assert.areEqual$1(5, System.Array.getCount(coll, System.Int32), "Count");
+            Bridge.Test.Assert.true$1(System.Array.contains(coll, 6, System.Int32), "Contains(6)");
+            Bridge.Test.Assert.false$1(System.Array.contains(coll, 1, System.Int32), "Contains(1)");
+            //Assert.Throws<NotSupportedException>(() => coll.Add(2), "Add");
+            //Assert.Throws<NotSupportedException>(() => coll.Clear(), "Clear");
+            //Assert.Throws<NotSupportedException>(() => coll.Remove(2), "Remove");
+        },
+        iListMethodsWork_SPI_1559: function () {
+            // #1559
+            var list = Bridge.cast(new Int32Array([3, 6, 2, 9, 5]), System.Collections.Generic.IList$1(System.Int32));
+            Bridge.Test.Assert.areEqual$1(1, System.Array.indexOf(list, 6, 0, null, System.Int32), "IndexOf(6)");
+            Bridge.Test.Assert.areEqual$1(-1, System.Array.indexOf(list, 1, 0, null, System.Int32), "IndexOf(1)");
+            Bridge.Test.Assert.areEqual$1(9, System.Array.getItem(list, 3, System.Int32), "Get item");
+            System.Array.setItem(list, 3, 4, System.Int32);
+            Bridge.Test.Assert.areEqual$1(4, System.Array.getItem(list, 3, System.Int32), "Set item");
+
+            //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
+            //Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Collections.Native.Int8ArrayTests", {
+        assertContent: function (actual, expected, message) {
+            if (actual.length !== expected.length) {
+                Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
+                return;
+            }
+            for (var i = 0; i < expected.length; i = (i + 1) | 0) {
+                if (actual[i] !== expected[i]) {
+                    Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Position "), i), ": expected "), expected[i]), ", actual: "), actual[i]));
+                    return;
+                }
+            }
+            Bridge.Test.Assert.true$1(true, message);
+        },
+        lengthConstructorWorks: function () {
+            var arr = new Int8Array(13);
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Int8Array), "is Int8Array");
+            Bridge.Test.Assert.areEqual$1(13, arr.length, "Length");
+        },
+        constructorFromIntWorks: function () {
+            var source = [3, 8, 4];
+            var arr = new Int8Array(source);
+            Bridge.Test.Assert.true$1(!Bridge.referenceEquals(arr, source), "New object");
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Int8Array), "is Int8Array");
+            this.assertContent(arr, [3, 8, 4], "content");
+        },
+        copyConstructorWorks: function () {
+            var source = new Int8Array([3, 8, 4]);
+            var arr = new Int8Array(source);
+            Bridge.Test.Assert.true$1(!Bridge.referenceEquals(arr, source), "New object");
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Int8Array), "is Int8Array");
+            this.assertContent(arr, [3, 8, 4], "content");
+        },
+        arrayBufferConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Int8Array(buf);
+            Bridge.Test.Assert.true(Bridge.is(arr, Int8Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(80, arr.length, "length");
+        },
+        arrayBufferWithOffsetConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Int8Array(buf, 16);
+            Bridge.Test.Assert.true(Bridge.is(arr, Int8Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(64, arr.length, "length");
+        },
+        arrayBufferWithOffsetAndLengthConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Int8Array(buf, 16, 12);
+            Bridge.Test.Assert.true(Bridge.is(arr, Int8Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(12, arr.length, "length");
+        },
+        staticBytesPerElementWorks: function () {
+            Bridge.Test.Assert.areEqual(1, Int8Array.BYTES_PER_ELEMENT);
+        },
+        lengthWorks: function () {
+            var arr = new Int8Array(13);
+            Bridge.Test.Assert.areEqual$1(13, arr.length, "Length");
+        },
+        indexingWorks: function () {
+            var arr = new Int8Array(3);
+            arr[1] = 42;
+            this.assertContent(arr, [0, 42, 0], "Content");
+            Bridge.Test.Assert.areEqual$1(42, arr[1], "[1]");
+        },
+        setInt8ArrayWorks: function () {
+            var arr = new Int8Array(4);
+            arr.set(new Int8Array([3, 6, 7]));
+            this.assertContent(arr, [3, 6, 7, 0], "Content");
+        },
+        setInt8ArrayWithOffsetWorks: function () {
+            var arr = new Int8Array(6);
+            arr.set(new Int8Array([3, 6, 7]), 2);
+            this.assertContent(arr, [0, 0, 3, 6, 7, 0], "Content");
+        },
+        setNormalArrayWorks: function () {
+            var arr = new Int8Array(4);
+            arr.set([3, 6, 7]);
+            this.assertContent(arr, [3, 6, 7, 0], "Content");
+        },
+        setNormalArrayWithOffsetWorks: function () {
+            var arr = new Int8Array(6);
+            arr.set([3, 6, 7], 2);
+            this.assertContent(arr, [0, 0, 3, 6, 7, 0], "Content");
+        },
+        subarrayWithBeginWorks: function () {
+            var source = new Int8Array(10);
+            var arr = source.subarray(3);
+            Bridge.Test.Assert.false$1(Bridge.referenceEquals(arr, source), "Should be a new array");
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, source.buffer), "Should be the same buffer");
+            Bridge.Test.Assert.areEqual$1(3, arr.byteOffset, "ByteOffset should be correct");
+        },
+        subarrayWithBeginAndEndWorks: function () {
+            var source = new Int8Array(10);
+            var arr = source.subarray(3, 7);
+            Bridge.Test.Assert.false$1(Bridge.referenceEquals(arr, source), "Should be a new array");
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, source.buffer), "Should be the same buffer");
+            Bridge.Test.Assert.areEqual$1(3, arr.byteOffset, "ByteOffset should be correct");
+            Bridge.Test.Assert.areEqual$1(4, arr.length, "Length should be correct");
+        },
+        bufferPropertyWorks: function () {
+            var buf = new ArrayBuffer(100);
+            var arr = new Int8Array(buf);
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "Should be correct");
+        },
+        byteOffsetPropertyWorks: function () {
+            var buf = new ArrayBuffer(100);
+            var arr = new Int8Array(buf, 32);
+            Bridge.Test.Assert.areEqual$1(32, arr.byteOffset, "Should be correct");
+        },
+        byteLengthPropertyWorks: function () {
+            var arr = new Int8Array(23);
+            Bridge.Test.Assert.areEqual$1(23, arr.byteLength, "Should be correct");
+        },
+        indexOfWorks: function () {
+            var arr = new Int8Array([3, 6, 2, 9, 5]);
+            Bridge.Test.Assert.areEqual$1(3, System.Array.indexOf(arr, 9), "9");
+            Bridge.Test.Assert.areEqual$1(-1, System.Array.indexOf(arr, 1), "1");
+        },
+        containsWorks: function () {
+            var arr = new Int8Array([3, 6, 2, 9, 5]);
+            Bridge.Test.Assert.true$1(System.Array.contains(arr, 9), "9");
+            Bridge.Test.Assert.false$1(System.Array.contains(arr, 1), "1");
+        },
+        foreachWorks_SPI_1401: function () {
+            var $t;
+            var arr = new Int8Array([3, 6, 2, 9, 5]);
+            var l = new (System.Collections.Generic.List$1(System.Int32))();
+            // #1401
+            $t = Bridge.getEnumerator(arr);
+            while ($t.moveNext()) {
+                var i = $t.getCurrent();
+                l.add(i);
+            }
+            Bridge.Test.Assert.areEqual(l.toArray(), [3, 6, 2, 9, 5]);
+        },
+        getEnumeratorWorks_SPI_1401: function () {
+            var arr = new Int8Array([3, 6, 2, 9, 5]);
+            var l = new (System.Collections.Generic.List$1(System.Int32))();
+            // #1401
+            var enm = Bridge.getEnumerator(arr);
+            while (enm.System$Collections$IEnumerator$moveNext()) {
+                l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$SByte$getCurrent$1", "getCurrent$1")]());
+            }
+            Bridge.Test.Assert.areEqual(l.toArray(), [3, 6, 2, 9, 5]);
+        },
+        iEnumerableGetEnumeratorWorks: function () {
+            var arr = Bridge.cast(new Int8Array([3, 6, 2, 9, 5]), System.Collections.Generic.IEnumerable$1(System.SByte));
+            var l = new (System.Collections.Generic.List$1(System.Int32))();
+            var enm = Bridge.getEnumerator(arr, "$1", System.SByte);
+            while (enm.System$Collections$IEnumerator$moveNext()) {
+                l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$SByte$getCurrent$1", "getCurrent$1")]());
+            }
+            Bridge.Test.Assert.areEqual([3, 6, 2, 9, 5], l.toArray());
+        },
+        iCollectionMethodsWork_SPI_1559: function () {
+            // #1559
+            var coll = Bridge.cast(new Int8Array([3, 6, 2, 9, 5]), System.Collections.Generic.ICollection$1(System.SByte));
+            Bridge.Test.Assert.areEqual$1(5, System.Array.getCount(coll, System.SByte), "Count");
+            Bridge.Test.Assert.true$1(System.Array.contains(coll, 6, System.SByte), "Contains(6)");
+            Bridge.Test.Assert.false$1(System.Array.contains(coll, 1, System.SByte), "Contains(1)");
+            //Assert.Throws<NotSupportedException>(() => coll.Add(2), "Add");
+            //Assert.Throws<NotSupportedException>(() => coll.Clear(), "Clear");
+            //Assert.Throws<NotSupportedException>(() => coll.Remove(2), "Remove");
+        },
+        iListMethodsWork_SPI_1559: function () {
+            // #1559
+            var list = Bridge.cast(new Int8Array([3, 6, 2, 9, 5]), System.Collections.Generic.IList$1(System.SByte));
+            Bridge.Test.Assert.areEqual$1(1, System.Array.indexOf(list, 6, 0, null, System.SByte), "IndexOf(6)");
+            Bridge.Test.Assert.areEqual$1(-1, System.Array.indexOf(list, 1, 0, null, System.SByte), "IndexOf(1)");
+            Bridge.Test.Assert.areEqual$1(9, System.Array.getItem(list, 3, System.SByte), "Get item");
+            System.Array.setItem(list, 3, 4, System.SByte);
+            Bridge.Test.Assert.areEqual$1(4, System.Array.getItem(list, 3, System.SByte), "Set item");
+
+            //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
+            //Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Collections.Native.Uint16ArrayTests", {
+        assertContent: function (actual, expected, message) {
+            if (actual.length !== expected.length) {
+                Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
+                return;
+            }
+            for (var i = 0; i < expected.length; i = (i + 1) | 0) {
+                if (actual[i] !== expected[i]) {
+                    Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Position "), i), ": expected "), expected[i]), ", actual: "), actual[i]));
+                    return;
+                }
+            }
+            Bridge.Test.Assert.true$1(true, message);
+        },
+        lengthConstructorWorks: function () {
+            var arr = new Uint16Array(13);
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Uint16Array), "is Uint16Array");
+            Bridge.Test.Assert.areEqual$1(13, arr.length, "Length");
+        },
+        constructorFromIntWorks: function () {
+            var source = [3, 8, 4];
+            var arr = new Uint16Array(source);
+            Bridge.Test.Assert.true$1(!Bridge.referenceEquals(arr, source), "New object");
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Uint16Array), "is Uint16Array");
+            this.assertContent(arr, [3, 8, 4], "content");
+        },
+        copyConstructorWorks: function () {
+            var source = new Uint16Array([3, 8, 4]);
+            var arr = new Uint16Array(source);
+            Bridge.Test.Assert.true$1(!Bridge.referenceEquals(arr, source), "New object");
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Uint16Array), "is Uint16Array");
+            this.assertContent(arr, [3, 8, 4], "content");
+        },
+        arrayBufferConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Uint16Array(buf);
+            Bridge.Test.Assert.true(Bridge.is(arr, Uint16Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(40, arr.length, "length");
+        },
+        arrayBufferWithOffsetConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Uint16Array(buf, 16);
+            Bridge.Test.Assert.true(Bridge.is(arr, Uint16Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(32, arr.length, "length");
+        },
+        arrayBufferWithOffsetAndLengthConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Uint16Array(buf, 16, 12);
+            Bridge.Test.Assert.true(Bridge.is(arr, Uint16Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(12, arr.length, "length");
+        },
+        staticBytesPerElementWorks: function () {
+            Bridge.Test.Assert.areEqual(2, Uint16Array.BYTES_PER_ELEMENT);
+        },
+        lengthWorks: function () {
+            var arr = new Uint16Array(13);
+            Bridge.Test.Assert.areEqual$1(13, arr.length, "Length");
+        },
+        indexingWorks: function () {
+            var arr = new Uint16Array(3);
+            arr[1] = 42;
+            this.assertContent(arr, [0, 42, 0], "Content");
+            Bridge.Test.Assert.areEqual$1(42, arr[1], "[1]");
+        },
+        setUint16ArrayWorks: function () {
+            var arr = new Uint16Array(4);
+            arr.set(new Uint16Array([3, 6, 7]));
+            this.assertContent(arr, [3, 6, 7, 0], "Content");
+        },
+        setUint16ArrayWithOffsetWorks: function () {
+            var arr = new Uint16Array(6);
+            arr.set(new Uint16Array([3, 6, 7]), 2);
+            this.assertContent(arr, [0, 0, 3, 6, 7, 0], "Content");
+        },
+        setNormalArrayWorks: function () {
+            var arr = new Uint16Array(4);
+            arr.set([3, 6, 7]);
+            this.assertContent(arr, [3, 6, 7, 0], "Content");
+        },
+        setNormalArrayWithOffsetWorks: function () {
+            var arr = new Uint16Array(6);
+            arr.set([3, 6, 7], 2);
+            this.assertContent(arr, [0, 0, 3, 6, 7, 0], "Content");
+        },
+        subarrayWithBeginWorks: function () {
+            var source = new Uint16Array(10);
+            var arr = source.subarray(3);
+            Bridge.Test.Assert.false$1(Bridge.referenceEquals(arr, source), "Should be a new array");
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, source.buffer), "Should be the same buffer");
+            Bridge.Test.Assert.areEqual$1(6, arr.byteOffset, "ByteOffset should be correct");
+        },
+        subarrayWithBeginAndEndWorks: function () {
+            var source = new Uint16Array(10);
+            var arr = source.subarray(3, 7);
+            Bridge.Test.Assert.false$1(Bridge.referenceEquals(arr, source), "Should be a new array");
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, source.buffer), "Should be the same buffer");
+            Bridge.Test.Assert.areEqual$1(6, arr.byteOffset, "ByteOffset should be correct");
+            Bridge.Test.Assert.areEqual$1(4, arr.length, "Length should be correct");
+        },
+        bufferPropertyWorks: function () {
+            var buf = new ArrayBuffer(100);
+            var arr = new Uint16Array(buf);
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "Should be correct");
+        },
+        byteOffsetPropertyWorks: function () {
+            var buf = new ArrayBuffer(100);
+            var arr = new Uint16Array(buf, 32);
+            Bridge.Test.Assert.areEqual$1(32, arr.byteOffset, "Should be correct");
+        },
+        byteLengthPropertyWorks: function () {
+            var arr = new Uint16Array(23);
+            Bridge.Test.Assert.areEqual$1(46, arr.byteLength, "Should be correct");
+        },
+        indexOfWorks: function () {
+            var arr = new Uint16Array([3, 6, 2, 9, 5]);
+            Bridge.Test.Assert.areEqual$1(3, System.Array.indexOf(arr, 9), "9");
+            Bridge.Test.Assert.areEqual$1(-1, System.Array.indexOf(arr, 1), "1");
+        },
+        containsWorks: function () {
+            var arr = new Uint16Array([3, 6, 2, 9, 5]);
+            Bridge.Test.Assert.true$1(System.Array.contains(arr, 9), "9");
+            Bridge.Test.Assert.false$1(System.Array.contains(arr, 1), "1");
+        },
+        foreachWorks_SPI_1401: function () {
+            var $t;
+            var arr = new Uint16Array([3, 6, 2, 9, 5]);
+            var l = new (System.Collections.Generic.List$1(System.Int32))();
+            // #1401
+            $t = Bridge.getEnumerator(arr);
+            while ($t.moveNext()) {
+                var i = $t.getCurrent();
+                l.add(i);
+            }
+            Bridge.Test.Assert.areEqual(l.toArray(), [3, 6, 2, 9, 5]);
+        },
+        getEnumeratorWorks_SPI_1401: function () {
+            var arr = new Uint16Array([3, 6, 2, 9, 5]);
+            var l = new (System.Collections.Generic.List$1(System.Int32))();
+            // #1401
+            var enm = Bridge.getEnumerator(arr);
+            while (enm.System$Collections$IEnumerator$moveNext()) {
+                l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$UInt16$getCurrent$1", "getCurrent$1")]());
+            }
+            Bridge.Test.Assert.areEqual(l.toArray(), [3, 6, 2, 9, 5]);
+        },
+        iEnumerableGetEnumeratorWorks: function () {
+            var arr = Bridge.cast(new Uint16Array([3, 6, 2, 9, 5]), System.Collections.Generic.IEnumerable$1(System.UInt16));
+            var l = new (System.Collections.Generic.List$1(System.Int32))();
+            var enm = Bridge.getEnumerator(arr, "$1", System.UInt16);
+            while (enm.System$Collections$IEnumerator$moveNext()) {
+                l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$UInt16$getCurrent$1", "getCurrent$1")]());
+            }
+            Bridge.Test.Assert.areEqual([3, 6, 2, 9, 5], l.toArray());
+        },
+        iCollectionMethodsWork_SPI_1559: function () {
+            // #1559
+            var coll = Bridge.cast(new Uint16Array([3, 6, 2, 9, 5]), System.Collections.Generic.ICollection$1(System.UInt16));
+            Bridge.Test.Assert.areEqual$1(5, System.Array.getCount(coll, System.UInt16), "Count");
+            Bridge.Test.Assert.true$1(System.Array.contains(coll, 6, System.UInt16), "Contains(6)");
+            Bridge.Test.Assert.false$1(System.Array.contains(coll, 1, System.UInt16), "Contains(1)");
+            //Assert.Throws<NotSupportedException>(() => coll.Add(2), "Add");
+            //Assert.Throws(() => coll.Clear(), "Clear");
+            //Assert.Throws(() => coll.Remove(2), "Remove");
+        },
+        iListMethodsWork_SPI_1559: function () {
+            // #1559
+            var list = Bridge.cast(new Uint16Array([3, 6, 2, 9, 5]), System.Collections.Generic.IList$1(System.UInt16));
+            Bridge.Test.Assert.areEqual$1(1, System.Array.indexOf(list, 6, 0, null, System.UInt16), "IndexOf(6)");
+            Bridge.Test.Assert.areEqual$1(-1, System.Array.indexOf(list, 1, 0, null, System.UInt16), "IndexOf(1)");
+            Bridge.Test.Assert.areEqual$1(9, System.Array.getItem(list, 3, System.UInt16), "Get item");
+            System.Array.setItem(list, 3, 4, System.UInt16);
+            Bridge.Test.Assert.areEqual$1(4, System.Array.getItem(list, 3, System.UInt16), "Set item");
+
+            //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
+            //Assert.Throws(() => list.RemoveAt(2), "RemoveAt");
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Collections.Native.Uint32ArrayTests", {
+        assertContent: function (actual, expected, message) {
+            if (actual.length !== expected.length) {
+                Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
+                return;
+            }
+            for (var i = 0; i < expected.length; i = (i + 1) | 0) {
+                if (System.Int64(actual[i]).ne(System.Int64(expected[i]))) {
+                    Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Position "), i), ": expected "), expected[i]), ", actual: "), actual[i]));
+                    return;
+                }
+            }
+            Bridge.Test.Assert.true$1(true, message);
+        },
+        lengthConstructorWorks: function () {
+            var arr = new Uint32Array(13);
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Uint32Array), "is Uint32Array");
+            Bridge.Test.Assert.areEqual$1(13, arr.length, "Length");
+        },
+        constructorFromIntWorks: function () {
+            var source = [3, 8, 4];
+            var arr = new Uint32Array(source);
+            Bridge.Test.Assert.true$1(!Bridge.referenceEquals(arr, source), "New object");
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Uint32Array), "is Uint32Array");
+            this.assertContent(arr, [3, 8, 4], "content");
+        },
+        copyConstructorWorks: function () {
+            var source = new Uint32Array([3, 8, 4]);
+            var arr = new Uint32Array(source);
+            Bridge.Test.Assert.true$1(!Bridge.referenceEquals(arr, source), "New object");
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Uint32Array), "is Uint32Array");
+            this.assertContent(arr, [3, 8, 4], "content");
+        },
+        arrayBufferConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Uint32Array(buf);
+            Bridge.Test.Assert.true(Bridge.is(arr, Uint32Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(20, arr.length, "length");
+        },
+        arrayBufferWithOffsetConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Uint32Array(buf, 16);
+            Bridge.Test.Assert.true(Bridge.is(arr, Uint32Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(16, arr.length, "length");
+        },
+        arrayBufferWithOffsetAndLengthConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Uint32Array(buf, 16, 12);
+            Bridge.Test.Assert.true(Bridge.is(arr, Uint32Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(12, arr.length, "length");
+        },
+        staticBytesPerElementWorks: function () {
+            Bridge.Test.Assert.areEqual(4, Uint32Array.BYTES_PER_ELEMENT);
+        },
+        lengthWorks: function () {
+            var arr = new Uint32Array(13);
+            Bridge.Test.Assert.areEqual$1(13, arr.length, "Length");
+        },
+        indexingWorks: function () {
+            var arr = new Uint32Array(3);
+            arr[1] = 42;
+            this.assertContent(arr, [0, 42, 0], "Content");
+            Bridge.Test.Assert.areEqual$1(42, arr[1], "[1]");
+        },
+        setUint32ArrayWorks: function () {
+            var arr = new Uint32Array(4);
+            arr.set(new Uint32Array([3, 6, 7]));
+            this.assertContent(arr, [3, 6, 7, 0], "Content");
+        },
+        setUint32ArrayWithOffsetWorks: function () {
+            var arr = new Uint32Array(6);
+            arr.set(new Uint32Array([3, 6, 7]), 2);
+            this.assertContent(arr, [0, 0, 3, 6, 7, 0], "Content");
+        },
+        setNormalArrayWorks: function () {
+            var arr = new Uint32Array(4);
+            arr.set([3, 6, 7]);
+            this.assertContent(arr, [3, 6, 7, 0], "Content");
+        },
+        setNormalArrayWithOffsetWorks: function () {
+            var arr = new Uint32Array(6);
+            arr.set([3, 6, 7], 2);
+            this.assertContent(arr, [0, 0, 3, 6, 7, 0], "Content");
+        },
+        subarrayWithBeginWorks: function () {
+            var source = new Uint32Array(10);
+            var arr = source.subarray(3);
+            Bridge.Test.Assert.false$1(Bridge.referenceEquals(arr, source), "Should be a new array");
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, source.buffer), "Should be the same buffer");
+            Bridge.Test.Assert.areEqual$1(12, arr.byteOffset, "ByteOffset should be correct");
+        },
+        subarrayWithBeginAndEndWorks: function () {
+            var source = new Uint32Array(10);
+            var arr = source.subarray(3, 7);
+            Bridge.Test.Assert.false$1(Bridge.referenceEquals(arr, source), "Should be a new array");
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, source.buffer), "Should be the same buffer");
+            Bridge.Test.Assert.areEqual$1(12, arr.byteOffset, "ByteOffset should be correct");
+            Bridge.Test.Assert.areEqual$1(4, arr.length, "Length should be correct");
+        },
+        bufferPropertyWorks: function () {
+            var buf = new ArrayBuffer(100);
+            var arr = new Uint32Array(buf);
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "Should be correct");
+        },
+        byteOffsetPropertyWorks: function () {
+            var buf = new ArrayBuffer(100);
+            var arr = new Uint32Array(buf, 32);
+            Bridge.Test.Assert.areEqual$1(32, arr.byteOffset, "Should be correct");
+        },
+        byteLengthPropertyWorks: function () {
+            var arr = new Uint32Array(23);
+            Bridge.Test.Assert.areEqual$1(92, arr.byteLength, "Should be correct");
+        },
+        indexOfWorks: function () {
+            var arr = new Uint32Array([3, 6, 2, 9, 5]);
+            Bridge.Test.Assert.areEqual$1(3, System.Array.indexOf(arr, 9), "9");
+            Bridge.Test.Assert.areEqual$1(-1, System.Array.indexOf(arr, 1), "1");
+        },
+        containsWorks: function () {
+            var arr = new Uint32Array([3, 6, 2, 9, 5]);
+            Bridge.Test.Assert.true$1(System.Array.contains(arr, 9), "9");
+            Bridge.Test.Assert.false$1(System.Array.contains(arr, 1), "1");
+        },
+        foreachWorks_SPI_1401: function () {
+            var $t;
+            var arr = new Uint32Array([3, 6, 2, 9, 5]);
+            var l = new (System.Collections.Generic.List$1(System.UInt32))();
+            // #1401
+            $t = Bridge.getEnumerator(arr);
+            while ($t.moveNext()) {
+                var i = $t.getCurrent();
+                l.add(i);
+            }
+            Bridge.Test.Assert.areEqual(l.toArray(), [3, 6, 2, 9, 5]);
+        },
+        getEnumeratorWorks_SPI_1401: function () {
+            var arr = new Uint32Array([3, 6, 2, 9, 5]);
+            var l = new (System.Collections.Generic.List$1(System.UInt32))();
+            // #1401
+            var enm = Bridge.getEnumerator(arr);
+            while (enm.System$Collections$IEnumerator$moveNext()) {
+                l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$UInt32$getCurrent$1", "getCurrent$1")]());
+            }
+            Bridge.Test.Assert.areEqual(l.toArray(), [3, 6, 2, 9, 5]);
+        },
+        iEnumerableGetEnumeratorWorks: function () {
+            var arr = Bridge.cast(new Uint32Array([3, 6, 2, 9, 5]), System.Collections.Generic.IEnumerable$1(System.UInt32));
+            var l = new (System.Collections.Generic.List$1(System.UInt32))();
+            var enm = Bridge.getEnumerator(arr, "$1", System.UInt32);
+            while (enm.System$Collections$IEnumerator$moveNext()) {
+                l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$UInt32$getCurrent$1", "getCurrent$1")]());
+            }
+            Bridge.Test.Assert.areEqual([3, 6, 2, 9, 5], l.toArray());
+        },
+        iCollectionMethodsWork_SPI_1559: function () {
+            // #1559
+            var coll = Bridge.cast(new Uint32Array([3, 6, 2, 9, 5]), System.Collections.Generic.ICollection$1(System.UInt32));
+            Bridge.Test.Assert.areEqual$1(5, System.Array.getCount(coll, System.UInt32), "Count");
+            Bridge.Test.Assert.true$1(System.Array.contains(coll, 6, System.UInt32), "Contains(6)");
+            Bridge.Test.Assert.false$1(System.Array.contains(coll, 1, System.UInt32), "Contains(1)");
+            //Assert.Throws<NotSupportedException>(() => coll.Add(2), "Add");
+            //Assert.Throws<NotSupportedException>(() => coll.Clear(), "Clear");
+            //Assert.Throws<NotSupportedException>(() => coll.Remove(2), "Remove");
+        },
+        iListMethodsWork_SPI_1559: function () {
+            // #1559
+            var list = Bridge.cast(new Uint32Array([3, 6, 2, 9, 5]), System.Collections.Generic.IList$1(System.UInt32));
+            Bridge.Test.Assert.areEqual$1(1, System.Array.indexOf(list, 6, 0, null, System.UInt32), "IndexOf(6)");
+            Bridge.Test.Assert.areEqual$1(-1, System.Array.indexOf(list, 1, 0, null, System.UInt32), "IndexOf(1)");
+            Bridge.Test.Assert.areEqual$1(9, System.Array.getItem(list, 3, System.UInt32), "Get item");
+            System.Array.setItem(list, 3, 4, System.UInt32);
+            Bridge.Test.Assert.areEqual$1(4, System.Array.getItem(list, 3, System.UInt32), "Set item");
+
+            //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
+            //Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Collections.Native.Uint8ArrayTests", {
+        assertContent: function (actual, expected, message) {
+            if (actual.length !== expected.length) {
+                Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
+                return;
+            }
+            for (var i = 0; i < expected.length; i = (i + 1) | 0) {
+                if (actual[i] !== expected[i]) {
+                    Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Position "), i), ": expected "), expected[i]), ", actual: "), actual[i]));
+                    return;
+                }
+            }
+            Bridge.Test.Assert.true$1(true, message);
+        },
+        lengthConstructorWorks: function () {
+            var arr = new Uint8Array(13);
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Uint8Array), "is Uint8Array");
+            Bridge.Test.Assert.areEqual$1(13, arr.length, "Length");
+        },
+        constructorFromIntWorks: function () {
+            var source = [3, 8, 4];
+            var arr = new Uint8Array(source);
+            Bridge.Test.Assert.true$1(!Bridge.referenceEquals(arr, source), "New object");
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Uint8Array), "is Uint8Array");
+            this.assertContent(arr, [3, 8, 4], "content");
+        },
+        copyConstructorWorks: function () {
+            var source = new Uint8Array([3, 8, 4]);
+            var arr = new Uint8Array(source);
+            Bridge.Test.Assert.true$1(!Bridge.referenceEquals(arr, source), "New object");
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Uint8Array), "is Uint8Array");
+            this.assertContent(arr, [3, 8, 4], "content");
+        },
+        arrayBufferConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Uint8Array(buf);
+            Bridge.Test.Assert.true(Bridge.is(arr, Uint8Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(80, arr.length, "length");
+        },
+        arrayBufferWithOffsetConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Uint8Array(buf, 16);
+            Bridge.Test.Assert.true(Bridge.is(arr, Uint8Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(64, arr.length, "length");
+        },
+        arrayBufferWithOffsetAndLengthConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Uint8Array(buf, 16, 12);
+            Bridge.Test.Assert.true(Bridge.is(arr, Uint8Array));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(12, arr.length, "length");
+        },
+        staticBytesPerElementWorks: function () {
+            Bridge.Test.Assert.areEqual(1, Uint8Array.BYTES_PER_ELEMENT);
+        },
+        lengthWorks: function () {
+            var arr = new Uint8Array(13);
+            Bridge.Test.Assert.areEqual$1(13, arr.length, "Length");
+        },
+        indexingWorks: function () {
+            var arr = new Uint8Array(3);
+            arr[1] = 42;
+            this.assertContent(arr, [0, 42, 0], "Content");
+            Bridge.Test.Assert.areEqual$1(42, arr[1], "[1]");
+        },
+        setUint8ArrayWorks: function () {
+            var arr = new Uint8Array(4);
+            arr.set(new Uint8Array([3, 6, 7]));
+            this.assertContent(arr, [3, 6, 7, 0], "Content");
+        },
+        setUint8ArrayWithOffsetWorks: function () {
+            var arr = new Uint8Array(6);
+            arr.set(new Uint8Array([3, 6, 7]), 2);
+            this.assertContent(arr, [0, 0, 3, 6, 7, 0], "Content");
+        },
+        setNormalArrayWorks: function () {
+            var arr = new Uint8Array(4);
+            arr.set([3, 6, 7]);
+            this.assertContent(arr, [3, 6, 7, 0], "Content");
+        },
+        setNormalArrayWithOffsetWorks: function () {
+            var arr = new Uint8Array(6);
+            arr.set([3, 6, 7], 2);
+            this.assertContent(arr, [0, 0, 3, 6, 7, 0], "Content");
+        },
+        subarrayWithBeginWorks: function () {
+            var source = new Uint8Array(10);
+            var arr = source.subarray(3);
+            Bridge.Test.Assert.false$1(Bridge.referenceEquals(arr, source), "Should be a new array");
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, source.buffer), "Should be the same buffer");
+            Bridge.Test.Assert.areEqual$1(3, arr.byteOffset, "ByteOffset should be correct");
+        },
+        subarrayWithBeginAndEndWorks: function () {
+            var source = new Uint8Array(10);
+            var arr = source.subarray(3, 7);
+            Bridge.Test.Assert.false$1(Bridge.referenceEquals(arr, source), "Should be a new array");
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, source.buffer), "Should be the same buffer");
+            Bridge.Test.Assert.areEqual$1(3, arr.byteOffset, "ByteOffset should be correct");
+            Bridge.Test.Assert.areEqual$1(4, arr.length, "Length should be correct");
+        },
+        bufferPropertyWorks: function () {
+            var buf = new ArrayBuffer(100);
+            var arr = new Uint8Array(buf);
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "Should be correct");
+        },
+        byteOffsetPropertyWorks: function () {
+            var buf = new ArrayBuffer(100);
+            var arr = new Uint8Array(buf, 32);
+            Bridge.Test.Assert.areEqual$1(32, arr.byteOffset, "Should be correct");
+        },
+        byteLengthPropertyWorks: function () {
+            var arr = new Uint8Array(23);
+            Bridge.Test.Assert.areEqual$1(23, arr.byteLength, "Should be correct");
+        },
+        indexOfWorks: function () {
+            var arr = new Uint8Array([3, 6, 2, 9, 5]);
+            Bridge.Test.Assert.areEqual$1(3, System.Array.indexOf(arr, 9), "9");
+            Bridge.Test.Assert.areEqual$1(-1, System.Array.indexOf(arr, 1), "1");
+        },
+        containsWorks: function () {
+            var arr = new Uint8Array([3, 6, 2, 9, 5]);
+            Bridge.Test.Assert.true$1(System.Array.contains(arr, 9), "9");
+            Bridge.Test.Assert.false$1(System.Array.contains(arr, 1), "1");
+        },
+        foreachWorks_SPI_1401: function () {
+            var $t;
+            var arr = new Uint8Array([3, 6, 2, 9, 5]);
+            var l = new (System.Collections.Generic.List$1(System.Int32))();
+            // #1401
+            $t = Bridge.getEnumerator(arr);
+            while ($t.moveNext()) {
+                var i = $t.getCurrent();
+                l.add(i);
+            }
+            Bridge.Test.Assert.areEqual(l.toArray(), [3, 6, 2, 9, 5]);
+        },
+        getEnumeratorWorks_SPI_1401: function () {
+            var arr = new Uint8Array([3, 6, 2, 9, 5]);
+            var l = new (System.Collections.Generic.List$1(System.Int32))();
+            // #1401
+            var enm = Bridge.getEnumerator(arr);
+            while (enm.System$Collections$IEnumerator$moveNext()) {
+                l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Byte$getCurrent$1", "getCurrent$1")]());
+            }
+            Bridge.Test.Assert.areEqual(l.toArray(), [3, 6, 2, 9, 5]);
+        },
+        iEnumerableGetEnumeratorWorks: function () {
+            var arr = Bridge.cast(new Uint8Array([3, 6, 2, 9, 5]), System.Collections.Generic.IEnumerable$1(System.Byte));
+            var l = new (System.Collections.Generic.List$1(System.Int32))();
+            var enm = Bridge.getEnumerator(arr, "$1", System.Byte);
+            while (enm.System$Collections$IEnumerator$moveNext()) {
+                l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Byte$getCurrent$1", "getCurrent$1")]());
+            }
+            Bridge.Test.Assert.areEqual([3, 6, 2, 9, 5], l.toArray());
+        },
+        iCollectionMethodsWork_SPI_1559: function () {
+            // #1559
+            var coll = Bridge.cast(new Uint8Array([3, 6, 2, 9, 5]), System.Collections.Generic.ICollection$1(System.SByte));
+            Bridge.Test.Assert.areEqual$1(5, System.Array.getCount(coll, System.SByte), "Count");
+            Bridge.Test.Assert.true$1(System.Array.contains(coll, 6, System.SByte), "Contains(6)");
+            Bridge.Test.Assert.false$1(System.Array.contains(coll, 1, System.SByte), "Contains(1)");
+            //Assert.Throws<NotSupportedException>(() => coll.Add(2), "Add");
+            //Assert.Throws(() => coll.Clear(), "Clear");
+            //Assert.Throws(() => coll.Remove(2), "Remove");
+        },
+        iListMethodsWork_SPI_1559: function () {
+            // #1559
+            var list = Bridge.cast(new Uint8Array([3, 6, 2, 9, 5]), System.Collections.Generic.IList$1(System.SByte));
+            Bridge.Test.Assert.areEqual$1(1, System.Array.indexOf(list, 6, 0, null, System.SByte), "IndexOf(6)");
+            Bridge.Test.Assert.areEqual$1(-1, System.Array.indexOf(list, 1, 0, null, System.SByte), "IndexOf(1)");
+            Bridge.Test.Assert.areEqual$1(9, System.Array.getItem(list, 3, System.SByte), "Get item");
+            System.Array.setItem(list, 3, 4, System.SByte);
+            Bridge.Test.Assert.areEqual$1(4, System.Array.getItem(list, 3, System.SByte), "Set item");
+
+            //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
+            //Assert.Throws(() => list.RemoveAt(2), "RemoveAt");
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests", {
+        assertContent: function (actual, expected, message) {
+            if (actual.length !== expected.length) {
+                Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
+                return;
+            }
+            for (var i = 0; i < expected.length; i = (i + 1) | 0) {
+                if (actual[i] !== expected[i]) {
+                    Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Position "), i), ": expected "), expected[i]), ", actual: "), actual[i]));
+                    return;
+                }
+            }
+            Bridge.Test.Assert.true$1(true, message);
+        },
+        typePropertiesAreCorrect_SPI_1560: function () {
+            var arr = new Uint8ClampedArray(0);
+            // #1560
+            Bridge.Test.Assert.true$1(Bridge.is(arr, System.Collections.Generic.IEnumerable$1(System.Byte)), "Is IEnumerable<byte>");
+        },
+        lengthConstructorWorks: function () {
+            var arr = new Uint8ClampedArray(13);
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Uint8ClampedArray), "is Uint8ClampedArray");
+            Bridge.Test.Assert.areEqual$1(13, arr.length, "Length");
+        },
+        constructorFromIntWorks: function () {
+            var source = [3, 8, 4];
+            var arr = new Uint8ClampedArray(source);
+            Bridge.Test.Assert.true$1(!Bridge.referenceEquals(arr, source), "New object");
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Uint8ClampedArray), "is Uint8ClampedArray");
+            this.assertContent(arr, [3, 8, 4], "content");
+        },
+        constructorFromUint8ArrayWorks_SPI_TODO: function () {
+            var source = new Uint8Array([3, 8, 4]);
+            var arr = new Uint8ClampedArray(source);
+            //Assert.True(arr != source, "New object");
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Uint8ClampedArray), "is Uint8ClampedArray");
+            this.assertContent(arr, [3, 8, 4], "content");
+        },
+        copyConstructorWorks: function () {
+            var source = new Uint8ClampedArray([3, 8, 4]);
+            var arr = new Uint8ClampedArray(source);
+            Bridge.Test.Assert.true$1(!Bridge.referenceEquals(arr, source), "New object");
+            Bridge.Test.Assert.true$1(Bridge.is(arr, Uint8ClampedArray), "is Uint8ClampedArray");
+            this.assertContent(arr, [3, 8, 4], "content");
+        },
+        arrayBufferConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Uint8ClampedArray(buf);
+            Bridge.Test.Assert.true(Bridge.is(arr, Uint8ClampedArray));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(80, arr.length, "length");
+        },
+        arrayBufferWithOffsetConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Uint8ClampedArray(buf, 16);
+            Bridge.Test.Assert.true(Bridge.is(arr, Uint8ClampedArray));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(64, arr.length, "length");
+        },
+        arrayBufferWithOffsetAndLengthConstructorWorks: function () {
+            var buf = new ArrayBuffer(80);
+            var arr = new Uint8ClampedArray(buf, 16, 12);
+            Bridge.Test.Assert.true(Bridge.is(arr, Uint8ClampedArray));
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "buffer");
+            Bridge.Test.Assert.areEqual$1(12, arr.length, "length");
+        },
+        staticBytesPerElementWorks: function () {
+            Bridge.Test.Assert.areEqual(1, Uint8ClampedArray.BYTES_PER_ELEMENT);
+        },
+        lengthWorks: function () {
+            var arr = new Uint8ClampedArray(13);
+            Bridge.Test.Assert.areEqual$1(13, arr.length, "Length");
+        },
+        indexingWorks: function () {
+            var arr = new Uint8ClampedArray(3);
+            arr[1] = 42;
+            this.assertContent(arr, [0, 42, 0], "Content");
+            Bridge.Test.Assert.areEqual$1(42, arr[1], "[1]");
+        },
+        setUint8ClampedArrayWorks: function () {
+            var arr = new Uint8ClampedArray(4);
+            arr.set(new Uint8ClampedArray([3, 6, 7]));
+            this.assertContent(arr, [3, 6, 7, 0], "Content");
+        },
+        setUint8ClampedArrayWithOffsetWorks: function () {
+            var arr = new Uint8ClampedArray(6);
+            arr.set(new Uint8ClampedArray([3, 6, 7]), 2);
+            this.assertContent(arr, [0, 0, 3, 6, 7, 0], "Content");
+        },
+        setNormalArrayWorks: function () {
+            var arr = new Uint8ClampedArray(4);
+            arr.set([3, 6, 7]);
+            this.assertContent(arr, [3, 6, 7, 0], "Content");
+        },
+        setNormalArrayWithOffsetWorks: function () {
+            var arr = new Uint8ClampedArray(6);
+            arr.set([3, 6, 7], 2);
+            this.assertContent(arr, [0, 0, 3, 6, 7, 0], "Content");
+        },
+        subarrayWithBeginWorks: function () {
+            var source = new Uint8ClampedArray(10);
+            var arr = source.subarray(3);
+            Bridge.Test.Assert.false$1(Bridge.referenceEquals(arr, source), "Should be a new array");
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, source.buffer), "Should be the same buffer");
+            Bridge.Test.Assert.areEqual$1(3, arr.byteOffset, "ByteOffset should be correct");
+        },
+        subarrayWithBeginAndEndWorks: function () {
+            var source = new Uint8ClampedArray(10);
+            var arr = source.subarray(3, 7);
+            Bridge.Test.Assert.false$1(Bridge.referenceEquals(arr, source), "Should be a new array");
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, source.buffer), "Should be the same buffer");
+            Bridge.Test.Assert.areEqual$1(3, arr.byteOffset, "ByteOffset should be correct");
+            Bridge.Test.Assert.areEqual$1(4, arr.length, "Length should be correct");
+        },
+        bufferPropertyWorks: function () {
+            var buf = new ArrayBuffer(100);
+            var arr = new Uint8ClampedArray(buf);
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(arr.buffer, buf), "Should be correct");
+        },
+        byteOffsetPropertyWorks: function () {
+            var buf = new ArrayBuffer(100);
+            var arr = new Uint8ClampedArray(buf, 32);
+            Bridge.Test.Assert.areEqual$1(32, arr.byteOffset, "Should be correct");
+        },
+        byteLengthPropertyWorks: function () {
+            var arr = new Uint8ClampedArray(23);
+            Bridge.Test.Assert.areEqual$1(23, arr.byteLength, "Should be correct");
+        },
+        indexOfWorks: function () {
+            var arr = new Uint8ClampedArray([3, 6, 2, 9, 5]);
+            Bridge.Test.Assert.areEqual$1(3, System.Array.indexOf(arr, 9), "9");
+            Bridge.Test.Assert.areEqual$1(-1, System.Array.indexOf(arr, 1), "1");
+        },
+        containsWorks: function () {
+            var arr = new Uint8ClampedArray([3, 6, 2, 9, 5]);
+            Bridge.Test.Assert.true$1(System.Array.contains(arr, 9), "9");
+            Bridge.Test.Assert.false$1(System.Array.contains(arr, 1), "1");
+        },
+        foreachWorks_SPI_1401: function () {
+            var $t;
+            var arr = new Uint8ClampedArray([3, 6, 2, 9, 5]);
+            var l = new (System.Collections.Generic.List$1(System.Int32))();
+            // #1401
+            $t = Bridge.getEnumerator(arr);
+            while ($t.moveNext()) {
+                var i = $t.getCurrent();
+                l.add(i);
+            }
+            Bridge.Test.Assert.areEqual(l.toArray(), [3, 6, 2, 9, 5]);
+        },
+        getEnumeratorWorks_SPI_1401: function () {
+            var arr = new Uint8ClampedArray([3, 6, 2, 9, 5]);
+            var l = new (System.Collections.Generic.List$1(System.Int32))();
+            // #1401
+            var enm = Bridge.getEnumerator(arr);
+            while (enm.System$Collections$IEnumerator$moveNext()) {
+                l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Byte$getCurrent$1", "getCurrent$1")]());
+            }
+            Bridge.Test.Assert.areEqual(l.toArray(), [3, 6, 2, 9, 5]);
+        },
+        iCollectionMethodsWork_SPI_1559_1560: function () {
+            // #1559 #1560
+            var coll = Bridge.cast(new Uint8ClampedArray([3, 6, 2, 9, 5]), System.Collections.Generic.ICollection$1(System.SByte));
+            Bridge.Test.Assert.areEqual$1(5, System.Array.getCount(coll, System.SByte), "Count");
+            Bridge.Test.Assert.true$1(System.Array.contains(coll, 6, System.SByte), "Contains(6)");
+            Bridge.Test.Assert.false$1(System.Array.contains(coll, 1, System.SByte), "Contains(1)");
+            //Assert.Throws<NotSupportedException>(() => coll.Add(2), "Add");
+            //Assert.Throws<NotSupportedException>(() => coll.Clear(), "Clear");
+            //Assert.Throws<NotSupportedException>(() => coll.Remove(2), "Remove");
+        },
+        iListMethodsWork_SPI_1559_1560: function () {
+            // #1559 #1560
+            var list = Bridge.cast(new Uint8ClampedArray([3, 6, 2, 9, 5]), System.Collections.Generic.IList$1(System.SByte));
+            Bridge.Test.Assert.areEqual$1(1, System.Array.indexOf(list, 6, 0, null, System.SByte), "IndexOf(6)");
+            Bridge.Test.Assert.areEqual$1(-1, System.Array.indexOf(list, 1, 0, null, System.SByte), "IndexOf(1)");
+            Bridge.Test.Assert.areEqual$1(9, System.Array.getItem(list, 3, System.SByte), "Get item");
+            System.Array.setItem(list, 3, 4, System.SByte);
+            Bridge.Test.Assert.areEqual$1(4, System.Array.getItem(list, 3, System.SByte), "Set item");
+
+            //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
+            //Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Constants", {
         statics: {
             PREFIX_SYSTEM_CLASSES: "Simple types",

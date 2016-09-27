@@ -42,6 +42,7 @@
         public const string MODULE_CONVERT = "Convert";
         public const string MODULE_RANDOM = "Random";
 
+        public const string MODULE_TYPEDARRAYS = "Typed Arrays";
         public const string MODULE_ICOLLECTION = PREFIX_COLLECTIONS; // + "ICollection";
         public const string MODULE_IDICTIONARY = PREFIX_COLLECTIONS; // + "IDictionary";
         public const string MODULE_WEAKCOLLECTION = PREFIX_COLLECTIONS;

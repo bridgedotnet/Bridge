@@ -2288,6 +2288,256 @@
             QUnit.module("Type system");
             QUnit.test("Type - GettingBaseTypeWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_TypeSystemTests.gettingBaseTypeWorks);
             QUnit.test("Type - IsAssignableFromWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_TypeSystemTests.isAssignableFromWorks);
+            QUnit.module("Typed Arrays");
+            QUnit.test("ArrayBufferTests - TypePropertiesAreCorrect", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_ArrayBufferTests.typePropertiesAreCorrect);
+            QUnit.test("ArrayBufferTests - ConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_ArrayBufferTests.constructorWorks);
+            QUnit.test("ArrayBufferTests - ByteLengthPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_ArrayBufferTests.byteLengthPropertyWorks);
+            QUnit.test("DataViewTests - TypePropertiesAreCorrect", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests.typePropertiesAreCorrect);
+            QUnit.test("DataViewTests - ArrayBufferOnlyConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests.arrayBufferOnlyConstructorWorks);
+            QUnit.test("DataViewTests - ArrayBufferAndByteOffsetConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests.arrayBufferAndByteOffsetConstructorWorks);
+            QUnit.test("DataViewTests - ArrayBufferAndByteOffsetAndByteLengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests.arrayBufferAndByteOffsetAndByteLengthConstructorWorks);
+            QUnit.test("DataViewTests - GetInt8Works", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests.getInt8Works);
+            QUnit.test("DataViewTests - GetUint8Works", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests.getUint8Works);
+            QUnit.test("DataViewTests - GetInt16Works", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests.getInt16Works);
+            QUnit.test("DataViewTests - GetUint16Works", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests.getUint16Works);
+            QUnit.test("DataViewTests - GetInt32Works", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests.getInt32Works);
+            QUnit.test("DataViewTests - GetUint32Works", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests.getUint32Works);
+            QUnit.test("DataViewTests - GetFloat32Works", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests.getFloat32Works);
+            QUnit.test("DataViewTests - GetFloat64Works", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests.getFloat64Works);
+            QUnit.test("DataViewTests - SetInt8Works", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests.setInt8Works);
+            QUnit.test("DataViewTests - SetUint8Works", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests.setUint8Works);
+            QUnit.test("DataViewTests - SetInt16Works", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests.setInt16Works);
+            QUnit.test("DataViewTests - SetUint16Works", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests.setUint16Works);
+            QUnit.test("DataViewTests - SetInt32Works", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests.setInt32Works);
+            QUnit.test("DataViewTests - SetUint32Works", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests.setUint32Works);
+            QUnit.test("DataViewTests - SetFloat32Works", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests.setFloat32Works);
+            QUnit.test("DataViewTests - SetFloat64Works", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests.setFloat64Works);
+            QUnit.test("Float32ArrayTests - LengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.lengthConstructorWorks);
+            QUnit.test("Float32ArrayTests - ConstructorFromIntWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.constructorFromIntWorks);
+            QUnit.test("Float32ArrayTests - CopyConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.copyConstructorWorks);
+            QUnit.test("Float32ArrayTests - ArrayBufferConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.arrayBufferConstructorWorks);
+            QUnit.test("Float32ArrayTests - ArrayBufferWithOffsetConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.arrayBufferWithOffsetConstructorWorks);
+            QUnit.test("Float32ArrayTests - ArrayBufferWithOffsetAndLengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.arrayBufferWithOffsetAndLengthConstructorWorks);
+            QUnit.test("Float32ArrayTests - StaticBytesPerElementWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.staticBytesPerElementWorks);
+            QUnit.test("Float32ArrayTests - LengthWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.lengthWorks);
+            QUnit.test("Float32ArrayTests - IndexingWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.indexingWorks);
+            QUnit.test("Float32ArrayTests - SetFloat32ArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.setFloat32ArrayWorks);
+            QUnit.test("Float32ArrayTests - SetFloat32ArrayWithOffsetWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.setFloat32ArrayWithOffsetWorks);
+            QUnit.test("Float32ArrayTests - SetNormalArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.setNormalArrayWorks);
+            QUnit.test("Float32ArrayTests - SetNormalArrayWithOffsetWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.setNormalArrayWithOffsetWorks);
+            QUnit.test("Float32ArrayTests - SubarrayWithBeginWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.subarrayWithBeginWorks);
+            QUnit.test("Float32ArrayTests - SubarrayWithBeginAndEndWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.subarrayWithBeginAndEndWorks);
+            QUnit.test("Float32ArrayTests - BufferPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.bufferPropertyWorks);
+            QUnit.test("Float32ArrayTests - ByteOffsetPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.byteOffsetPropertyWorks);
+            QUnit.test("Float32ArrayTests - ByteLengthPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.byteLengthPropertyWorks);
+            QUnit.test("Float32ArrayTests - IndexOfWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.indexOfWorks);
+            QUnit.test("Float32ArrayTests - ContainsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.containsWorks);
+            QUnit.test("Float32ArrayTests - ForeachWorks_SPI_1401", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.foreachWorks_SPI_1401);
+            QUnit.test("Float32ArrayTests - GetEnumeratorWorks_SPI_1401", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.getEnumeratorWorks_SPI_1401);
+            QUnit.test("Float32ArrayTests - IEnumerableGetEnumeratorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.iEnumerableGetEnumeratorWorks);
+            QUnit.test("Float32ArrayTests - ICollectionMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.iCollectionMethodsWork_SPI_1559);
+            QUnit.test("Float32ArrayTests - IListMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.iListMethodsWork_SPI_1559);
+            QUnit.test("Float64ArrayTests - LengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.lengthConstructorWorks);
+            QUnit.test("Float64ArrayTests - ConstructorFromIntWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.constructorFromIntWorks);
+            QUnit.test("Float64ArrayTests - CopyConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.copyConstructorWorks);
+            QUnit.test("Float64ArrayTests - ArrayBufferConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.arrayBufferConstructorWorks);
+            QUnit.test("Float64ArrayTests - ArrayBufferWithOffsetConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.arrayBufferWithOffsetConstructorWorks);
+            QUnit.test("Float64ArrayTests - ArrayBufferWithOffsetAndLengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.arrayBufferWithOffsetAndLengthConstructorWorks);
+            QUnit.test("Float64ArrayTests - StaticBytesPerElementWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.staticBytesPerElementWorks);
+            QUnit.test("Float64ArrayTests - LengthWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.lengthWorks);
+            QUnit.test("Float64ArrayTests - IndexingWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.indexingWorks);
+            QUnit.test("Float64ArrayTests - SetFloat64ArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.setFloat64ArrayWorks);
+            QUnit.test("Float64ArrayTests - SetFloat64ArrayWithOffsetWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.setFloat64ArrayWithOffsetWorks);
+            QUnit.test("Float64ArrayTests - SetNormalArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.setNormalArrayWorks);
+            QUnit.test("Float64ArrayTests - SetNormalArrayWithOffsetWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.setNormalArrayWithOffsetWorks);
+            QUnit.test("Float64ArrayTests - SubarrayWithBeginWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.subarrayWithBeginWorks);
+            QUnit.test("Float64ArrayTests - SubarrayWithBeginAndEndWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.subarrayWithBeginAndEndWorks);
+            QUnit.test("Float64ArrayTests - BufferPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.bufferPropertyWorks);
+            QUnit.test("Float64ArrayTests - ByteOffsetPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.byteOffsetPropertyWorks);
+            QUnit.test("Float64ArrayTests - ByteLengthPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.byteLengthPropertyWorks);
+            QUnit.test("Float64ArrayTests - IndexOfWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.indexOfWorks);
+            QUnit.test("Float64ArrayTests - ContainsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.containsWorks);
+            QUnit.test("Float64ArrayTests - ForeachWorks_SPI_1401", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.foreachWorks_SPI_1401);
+            QUnit.test("Float64ArrayTests - GetEnumeratorWorks_SPI_1401", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.getEnumeratorWorks_SPI_1401);
+            QUnit.test("Float64ArrayTests - IEnumerableGetEnumeratorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.iEnumerableGetEnumeratorWorks);
+            QUnit.test("Float64ArrayTests - ICollectionMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.iCollectionMethodsWork_SPI_1559);
+            QUnit.test("Float64ArrayTests - IListMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.iListMethodsWork_SPI_1559);
+            QUnit.test("Int16ArrayTests - LengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.lengthConstructorWorks);
+            QUnit.test("Int16ArrayTests - ConstructorFromIntWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.constructorFromIntWorks);
+            QUnit.test("Int16ArrayTests - CopyConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.copyConstructorWorks);
+            QUnit.test("Int16ArrayTests - ArrayBufferConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.arrayBufferConstructorWorks);
+            QUnit.test("Int16ArrayTests - ArrayBufferWithOffsetConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.arrayBufferWithOffsetConstructorWorks);
+            QUnit.test("Int16ArrayTests - ArrayBufferWithOffsetAndLengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.arrayBufferWithOffsetAndLengthConstructorWorks);
+            QUnit.test("Int16ArrayTests - StaticBytesPerElementWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.staticBytesPerElementWorks);
+            QUnit.test("Int16ArrayTests - LengthWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.lengthWorks);
+            QUnit.test("Int16ArrayTests - IndexingWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.indexingWorks);
+            QUnit.test("Int16ArrayTests - SetInt16ArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.setInt16ArrayWorks);
+            QUnit.test("Int16ArrayTests - SetInt16ArrayWithOffsetWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.setInt16ArrayWithOffsetWorks);
+            QUnit.test("Int16ArrayTests - SetNormalArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.setNormalArrayWorks);
+            QUnit.test("Int16ArrayTests - SetNormalArrayWithOffsetWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.setNormalArrayWithOffsetWorks);
+            QUnit.test("Int16ArrayTests - SubarrayWithBeginWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.subarrayWithBeginWorks);
+            QUnit.test("Int16ArrayTests - SubarrayWithBeginAndEndWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.subarrayWithBeginAndEndWorks);
+            QUnit.test("Int16ArrayTests - BufferPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.bufferPropertyWorks);
+            QUnit.test("Int16ArrayTests - ByteOffsetPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.byteOffsetPropertyWorks);
+            QUnit.test("Int16ArrayTests - ByteLengthPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.byteLengthPropertyWorks);
+            QUnit.test("Int16ArrayTests - IndexOfWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.indexOfWorks);
+            QUnit.test("Int16ArrayTests - ContainsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.containsWorks);
+            QUnit.test("Int16ArrayTests - ForeachWorks_SPI_1401", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.foreachWorks_SPI_1401);
+            QUnit.test("Int16ArrayTests - GetEnumeratorWorks_SPI_1401", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.getEnumeratorWorks_SPI_1401);
+            QUnit.test("Int16ArrayTests - IEnumerableGetEnumeratorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.iEnumerableGetEnumeratorWorks);
+            QUnit.test("Int16ArrayTests - ICollectionMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.iCollectionMethodsWork_SPI_1559);
+            QUnit.test("Int16ArrayTests - IListMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.iListMethodsWork_SPI_1559);
+            QUnit.test("Int32ArrayTests - LengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.lengthConstructorWorks);
+            QUnit.test("Int32ArrayTests - ConstructorFromIntWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.constructorFromIntWorks);
+            QUnit.test("Int32ArrayTests - CopyConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.copyConstructorWorks);
+            QUnit.test("Int32ArrayTests - ArrayBufferConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.arrayBufferConstructorWorks);
+            QUnit.test("Int32ArrayTests - ArrayBufferWithOffsetConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.arrayBufferWithOffsetConstructorWorks);
+            QUnit.test("Int32ArrayTests - ArrayBufferWithOffsetAndLengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.arrayBufferWithOffsetAndLengthConstructorWorks);
+            QUnit.test("Int32ArrayTests - StaticBytesPerElementWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.staticBytesPerElementWorks);
+            QUnit.test("Int32ArrayTests - LengthWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.lengthWorks);
+            QUnit.test("Int32ArrayTests - IndexingWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.indexingWorks);
+            QUnit.test("Int32ArrayTests - SetInt32ArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.setInt32ArrayWorks);
+            QUnit.test("Int32ArrayTests - SetInt32ArrayWithOffsetWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.setInt32ArrayWithOffsetWorks);
+            QUnit.test("Int32ArrayTests - SetNormalArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.setNormalArrayWorks);
+            QUnit.test("Int32ArrayTests - SetNormalArrayWithOffsetWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.setNormalArrayWithOffsetWorks);
+            QUnit.test("Int32ArrayTests - SubarrayWithBeginWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.subarrayWithBeginWorks);
+            QUnit.test("Int32ArrayTests - SubarrayWithBeginAndEndWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.subarrayWithBeginAndEndWorks);
+            QUnit.test("Int32ArrayTests - BufferPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.bufferPropertyWorks);
+            QUnit.test("Int32ArrayTests - ByteOffsetPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.byteOffsetPropertyWorks);
+            QUnit.test("Int32ArrayTests - ByteLengthPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.byteLengthPropertyWorks);
+            QUnit.test("Int32ArrayTests - IndexOfWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.indexOfWorks);
+            QUnit.test("Int32ArrayTests - ContainsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.containsWorks);
+            QUnit.test("Int32ArrayTests - ForeachWorks_SPI_1401", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.foreachWorks_SPI_1401);
+            QUnit.test("Int32ArrayTests - GetEnumeratorWorks_SPI_1401", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.getEnumeratorWorks_SPI_1401);
+            QUnit.test("Int32ArrayTests - IEnumerableGetEnumeratorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.iEnumerableGetEnumeratorWorks);
+            QUnit.test("Int32ArrayTests - ICollectionMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.iCollectionMethodsWork_SPI_1559);
+            QUnit.test("Int32ArrayTests - IListMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.iListMethodsWork_SPI_1559);
+            QUnit.test("Int8ArrayTests - LengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.lengthConstructorWorks);
+            QUnit.test("Int8ArrayTests - ConstructorFromIntWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.constructorFromIntWorks);
+            QUnit.test("Int8ArrayTests - CopyConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.copyConstructorWorks);
+            QUnit.test("Int8ArrayTests - ArrayBufferConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.arrayBufferConstructorWorks);
+            QUnit.test("Int8ArrayTests - ArrayBufferWithOffsetConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.arrayBufferWithOffsetConstructorWorks);
+            QUnit.test("Int8ArrayTests - ArrayBufferWithOffsetAndLengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.arrayBufferWithOffsetAndLengthConstructorWorks);
+            QUnit.test("Int8ArrayTests - StaticBytesPerElementWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.staticBytesPerElementWorks);
+            QUnit.test("Int8ArrayTests - LengthWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.lengthWorks);
+            QUnit.test("Int8ArrayTests - IndexingWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.indexingWorks);
+            QUnit.test("Int8ArrayTests - SetInt8ArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.setInt8ArrayWorks);
+            QUnit.test("Int8ArrayTests - SetInt8ArrayWithOffsetWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.setInt8ArrayWithOffsetWorks);
+            QUnit.test("Int8ArrayTests - SetNormalArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.setNormalArrayWorks);
+            QUnit.test("Int8ArrayTests - SetNormalArrayWithOffsetWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.setNormalArrayWithOffsetWorks);
+            QUnit.test("Int8ArrayTests - SubarrayWithBeginWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.subarrayWithBeginWorks);
+            QUnit.test("Int8ArrayTests - SubarrayWithBeginAndEndWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.subarrayWithBeginAndEndWorks);
+            QUnit.test("Int8ArrayTests - BufferPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.bufferPropertyWorks);
+            QUnit.test("Int8ArrayTests - ByteOffsetPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.byteOffsetPropertyWorks);
+            QUnit.test("Int8ArrayTests - ByteLengthPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.byteLengthPropertyWorks);
+            QUnit.test("Int8ArrayTests - IndexOfWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.indexOfWorks);
+            QUnit.test("Int8ArrayTests - ContainsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.containsWorks);
+            QUnit.test("Int8ArrayTests - ForeachWorks_SPI_1401", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.foreachWorks_SPI_1401);
+            QUnit.test("Int8ArrayTests - GetEnumeratorWorks_SPI_1401", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.getEnumeratorWorks_SPI_1401);
+            QUnit.test("Int8ArrayTests - IEnumerableGetEnumeratorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.iEnumerableGetEnumeratorWorks);
+            QUnit.test("Int8ArrayTests - ICollectionMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.iCollectionMethodsWork_SPI_1559);
+            QUnit.test("Int8ArrayTests - IListMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.iListMethodsWork_SPI_1559);
+            QUnit.test("Uint16ArrayTests - LengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.lengthConstructorWorks);
+            QUnit.test("Uint16ArrayTests - ConstructorFromIntWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.constructorFromIntWorks);
+            QUnit.test("Uint16ArrayTests - CopyConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.copyConstructorWorks);
+            QUnit.test("Uint16ArrayTests - ArrayBufferConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.arrayBufferConstructorWorks);
+            QUnit.test("Uint16ArrayTests - ArrayBufferWithOffsetConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.arrayBufferWithOffsetConstructorWorks);
+            QUnit.test("Uint16ArrayTests - ArrayBufferWithOffsetAndLengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.arrayBufferWithOffsetAndLengthConstructorWorks);
+            QUnit.test("Uint16ArrayTests - StaticBytesPerElementWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.staticBytesPerElementWorks);
+            QUnit.test("Uint16ArrayTests - LengthWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.lengthWorks);
+            QUnit.test("Uint16ArrayTests - IndexingWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.indexingWorks);
+            QUnit.test("Uint16ArrayTests - SetUint16ArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.setUint16ArrayWorks);
+            QUnit.test("Uint16ArrayTests - SetUint16ArrayWithOffsetWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.setUint16ArrayWithOffsetWorks);
+            QUnit.test("Uint16ArrayTests - SetNormalArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.setNormalArrayWorks);
+            QUnit.test("Uint16ArrayTests - SetNormalArrayWithOffsetWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.setNormalArrayWithOffsetWorks);
+            QUnit.test("Uint16ArrayTests - SubarrayWithBeginWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.subarrayWithBeginWorks);
+            QUnit.test("Uint16ArrayTests - SubarrayWithBeginAndEndWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.subarrayWithBeginAndEndWorks);
+            QUnit.test("Uint16ArrayTests - BufferPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.bufferPropertyWorks);
+            QUnit.test("Uint16ArrayTests - ByteOffsetPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.byteOffsetPropertyWorks);
+            QUnit.test("Uint16ArrayTests - ByteLengthPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.byteLengthPropertyWorks);
+            QUnit.test("Uint16ArrayTests - IndexOfWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.indexOfWorks);
+            QUnit.test("Uint16ArrayTests - ContainsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.containsWorks);
+            QUnit.test("Uint16ArrayTests - ForeachWorks_SPI_1401", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.foreachWorks_SPI_1401);
+            QUnit.test("Uint16ArrayTests - GetEnumeratorWorks_SPI_1401", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.getEnumeratorWorks_SPI_1401);
+            QUnit.test("Uint16ArrayTests - IEnumerableGetEnumeratorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.iEnumerableGetEnumeratorWorks);
+            QUnit.test("Uint16ArrayTests - ICollectionMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.iCollectionMethodsWork_SPI_1559);
+            QUnit.test("Uint16ArrayTests - IListMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.iListMethodsWork_SPI_1559);
+            QUnit.test("Uint32ArrayTests - LengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.lengthConstructorWorks);
+            QUnit.test("Uint32ArrayTests - ConstructorFromIntWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.constructorFromIntWorks);
+            QUnit.test("Uint32ArrayTests - CopyConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.copyConstructorWorks);
+            QUnit.test("Uint32ArrayTests - ArrayBufferConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.arrayBufferConstructorWorks);
+            QUnit.test("Uint32ArrayTests - ArrayBufferWithOffsetConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.arrayBufferWithOffsetConstructorWorks);
+            QUnit.test("Uint32ArrayTests - ArrayBufferWithOffsetAndLengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.arrayBufferWithOffsetAndLengthConstructorWorks);
+            QUnit.test("Uint32ArrayTests - StaticBytesPerElementWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.staticBytesPerElementWorks);
+            QUnit.test("Uint32ArrayTests - LengthWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.lengthWorks);
+            QUnit.test("Uint32ArrayTests - IndexingWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.indexingWorks);
+            QUnit.test("Uint32ArrayTests - SetUint32ArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.setUint32ArrayWorks);
+            QUnit.test("Uint32ArrayTests - SetUint32ArrayWithOffsetWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.setUint32ArrayWithOffsetWorks);
+            QUnit.test("Uint32ArrayTests - SetNormalArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.setNormalArrayWorks);
+            QUnit.test("Uint32ArrayTests - SetNormalArrayWithOffsetWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.setNormalArrayWithOffsetWorks);
+            QUnit.test("Uint32ArrayTests - SubarrayWithBeginWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.subarrayWithBeginWorks);
+            QUnit.test("Uint32ArrayTests - SubarrayWithBeginAndEndWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.subarrayWithBeginAndEndWorks);
+            QUnit.test("Uint32ArrayTests - BufferPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.bufferPropertyWorks);
+            QUnit.test("Uint32ArrayTests - ByteOffsetPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.byteOffsetPropertyWorks);
+            QUnit.test("Uint32ArrayTests - ByteLengthPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.byteLengthPropertyWorks);
+            QUnit.test("Uint32ArrayTests - IndexOfWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.indexOfWorks);
+            QUnit.test("Uint32ArrayTests - ContainsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.containsWorks);
+            QUnit.test("Uint32ArrayTests - ForeachWorks_SPI_1401", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.foreachWorks_SPI_1401);
+            QUnit.test("Uint32ArrayTests - GetEnumeratorWorks_SPI_1401", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.getEnumeratorWorks_SPI_1401);
+            QUnit.test("Uint32ArrayTests - IEnumerableGetEnumeratorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.iEnumerableGetEnumeratorWorks);
+            QUnit.test("Uint32ArrayTests - ICollectionMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.iCollectionMethodsWork_SPI_1559);
+            QUnit.test("Uint32ArrayTests - IListMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.iListMethodsWork_SPI_1559);
+            QUnit.test("Uint8ArrayTests - LengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.lengthConstructorWorks);
+            QUnit.test("Uint8ArrayTests - ConstructorFromIntWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.constructorFromIntWorks);
+            QUnit.test("Uint8ArrayTests - CopyConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.copyConstructorWorks);
+            QUnit.test("Uint8ArrayTests - ArrayBufferConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.arrayBufferConstructorWorks);
+            QUnit.test("Uint8ArrayTests - ArrayBufferWithOffsetConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.arrayBufferWithOffsetConstructorWorks);
+            QUnit.test("Uint8ArrayTests - ArrayBufferWithOffsetAndLengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.arrayBufferWithOffsetAndLengthConstructorWorks);
+            QUnit.test("Uint8ArrayTests - StaticBytesPerElementWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.staticBytesPerElementWorks);
+            QUnit.test("Uint8ArrayTests - LengthWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.lengthWorks);
+            QUnit.test("Uint8ArrayTests - IndexingWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.indexingWorks);
+            QUnit.test("Uint8ArrayTests - SetUint8ArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.setUint8ArrayWorks);
+            QUnit.test("Uint8ArrayTests - SetUint8ArrayWithOffsetWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.setUint8ArrayWithOffsetWorks);
+            QUnit.test("Uint8ArrayTests - SetNormalArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.setNormalArrayWorks);
+            QUnit.test("Uint8ArrayTests - SetNormalArrayWithOffsetWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.setNormalArrayWithOffsetWorks);
+            QUnit.test("Uint8ArrayTests - SubarrayWithBeginWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.subarrayWithBeginWorks);
+            QUnit.test("Uint8ArrayTests - SubarrayWithBeginAndEndWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.subarrayWithBeginAndEndWorks);
+            QUnit.test("Uint8ArrayTests - BufferPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.bufferPropertyWorks);
+            QUnit.test("Uint8ArrayTests - ByteOffsetPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.byteOffsetPropertyWorks);
+            QUnit.test("Uint8ArrayTests - ByteLengthPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.byteLengthPropertyWorks);
+            QUnit.test("Uint8ArrayTests - IndexOfWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.indexOfWorks);
+            QUnit.test("Uint8ArrayTests - ContainsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.containsWorks);
+            QUnit.test("Uint8ArrayTests - ForeachWorks_SPI_1401", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.foreachWorks_SPI_1401);
+            QUnit.test("Uint8ArrayTests - GetEnumeratorWorks_SPI_1401", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.getEnumeratorWorks_SPI_1401);
+            QUnit.test("Uint8ArrayTests - IEnumerableGetEnumeratorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.iEnumerableGetEnumeratorWorks);
+            QUnit.test("Uint8ArrayTests - ICollectionMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.iCollectionMethodsWork_SPI_1559);
+            QUnit.test("Uint8ArrayTests - IListMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.iListMethodsWork_SPI_1559);
+            QUnit.test("Uint8ClampedArrayTests - TypePropertiesAreCorrect_SPI_1560", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.typePropertiesAreCorrect_SPI_1560);
+            QUnit.test("Uint8ClampedArrayTests - LengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.lengthConstructorWorks);
+            QUnit.test("Uint8ClampedArrayTests - ConstructorFromIntWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.constructorFromIntWorks);
+            QUnit.test("Uint8ClampedArrayTests - ConstructorFromUint8ArrayWorks_SPI_TODO", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.constructorFromUint8ArrayWorks_SPI_TODO);
+            QUnit.test("Uint8ClampedArrayTests - CopyConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.copyConstructorWorks);
+            QUnit.test("Uint8ClampedArrayTests - ArrayBufferConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.arrayBufferConstructorWorks);
+            QUnit.test("Uint8ClampedArrayTests - ArrayBufferWithOffsetConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.arrayBufferWithOffsetConstructorWorks);
+            QUnit.test("Uint8ClampedArrayTests - ArrayBufferWithOffsetAndLengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.arrayBufferWithOffsetAndLengthConstructorWorks);
+            QUnit.test("Uint8ClampedArrayTests - StaticBytesPerElementWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.staticBytesPerElementWorks);
+            QUnit.test("Uint8ClampedArrayTests - LengthWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.lengthWorks);
+            QUnit.test("Uint8ClampedArrayTests - IndexingWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.indexingWorks);
+            QUnit.test("Uint8ClampedArrayTests - SetUint8ClampedArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.setUint8ClampedArrayWorks);
+            QUnit.test("Uint8ClampedArrayTests - SetUint8ClampedArrayWithOffsetWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.setUint8ClampedArrayWithOffsetWorks);
+            QUnit.test("Uint8ClampedArrayTests - SetNormalArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.setNormalArrayWorks);
+            QUnit.test("Uint8ClampedArrayTests - SetNormalArrayWithOffsetWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.setNormalArrayWithOffsetWorks);
+            QUnit.test("Uint8ClampedArrayTests - SubarrayWithBeginWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.subarrayWithBeginWorks);
+            QUnit.test("Uint8ClampedArrayTests - SubarrayWithBeginAndEndWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.subarrayWithBeginAndEndWorks);
+            QUnit.test("Uint8ClampedArrayTests - BufferPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.bufferPropertyWorks);
+            QUnit.test("Uint8ClampedArrayTests - ByteOffsetPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.byteOffsetPropertyWorks);
+            QUnit.test("Uint8ClampedArrayTests - ByteLengthPropertyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.byteLengthPropertyWorks);
+            QUnit.test("Uint8ClampedArrayTests - IndexOfWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.indexOfWorks);
+            QUnit.test("Uint8ClampedArrayTests - ContainsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.containsWorks);
+            QUnit.test("Uint8ClampedArrayTests - ForeachWorks_SPI_1401", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.foreachWorks_SPI_1401);
+            QUnit.test("Uint8ClampedArrayTests - GetEnumeratorWorks_SPI_1401", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.getEnumeratorWorks_SPI_1401);
+            QUnit.test("Uint8ClampedArrayTests - ICollectionMethodsWork_SPI_1559_1560", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.iCollectionMethodsWork_SPI_1559_1560);
+            QUnit.test("Uint8ClampedArrayTests - IListMethodsWork_SPI_1559_1560", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.iListMethodsWork_SPI_1559_1560);
             QUnit.module("Utilities");
             QUnit.test("Environment - NewLineIsAStringContainingOnlyTheNewLineChar", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_EnvironmentTests.newLineIsAStringContainingOnlyTheNewLineChar);
             QUnit.module("СultureInfo");
@@ -3791,6 +4041,1068 @@
             gettingSettingAndDeletingWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.WeakMapTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_WeakMapTests);
                 t.getFixture().gettingSettingAndDeletingWorks();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_ArrayBufferTests", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.ArrayBufferTests)],
+        statics: {
+            typePropertiesAreCorrect: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.ArrayBufferTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_ArrayBufferTests);
+                t.getFixture().typePropertiesAreCorrect();
+            },
+            constructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.ArrayBufferTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_ArrayBufferTests);
+                t.getFixture().constructorWorks();
+            },
+            byteLengthPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.ArrayBufferTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_ArrayBufferTests);
+                t.getFixture().byteLengthPropertyWorks();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.DataViewTests)],
+        statics: {
+            typePropertiesAreCorrect: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.DataViewTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests);
+                t.getFixture().typePropertiesAreCorrect();
+            },
+            arrayBufferOnlyConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.DataViewTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests);
+                t.getFixture().arrayBufferOnlyConstructorWorks();
+            },
+            arrayBufferAndByteOffsetConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.DataViewTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests);
+                t.getFixture().arrayBufferAndByteOffsetConstructorWorks();
+            },
+            arrayBufferAndByteOffsetAndByteLengthConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.DataViewTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests);
+                t.getFixture().arrayBufferAndByteOffsetAndByteLengthConstructorWorks();
+            },
+            getInt8Works: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.DataViewTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests);
+                t.getFixture().getInt8Works();
+            },
+            getUint8Works: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.DataViewTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests);
+                t.getFixture().getUint8Works();
+            },
+            getInt16Works: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.DataViewTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests);
+                t.getFixture().getInt16Works();
+            },
+            getUint16Works: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.DataViewTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests);
+                t.getFixture().getUint16Works();
+            },
+            getInt32Works: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.DataViewTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests);
+                t.getFixture().getInt32Works();
+            },
+            getUint32Works: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.DataViewTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests);
+                t.getFixture().getUint32Works();
+            },
+            getFloat32Works: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.DataViewTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests);
+                t.getFixture().getFloat32Works();
+            },
+            getFloat64Works: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.DataViewTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests);
+                t.getFixture().getFloat64Works();
+            },
+            setInt8Works: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.DataViewTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests);
+                t.getFixture().setInt8Works();
+            },
+            setUint8Works: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.DataViewTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests);
+                t.getFixture().setUint8Works();
+            },
+            setInt16Works: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.DataViewTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests);
+                t.getFixture().setInt16Works();
+            },
+            setUint16Works: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.DataViewTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests);
+                t.getFixture().setUint16Works();
+            },
+            setInt32Works: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.DataViewTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests);
+                t.getFixture().setInt32Works();
+            },
+            setUint32Works: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.DataViewTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests);
+                t.getFixture().setUint32Works();
+            },
+            setFloat32Works: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.DataViewTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests);
+                t.getFixture().setFloat32Works();
+            },
+            setFloat64Works: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.DataViewTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_DataViewTests);
+                t.getFixture().setFloat64Works();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests)],
+        statics: {
+            lengthConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().lengthConstructorWorks();
+            },
+            constructorFromIntWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().constructorFromIntWorks();
+            },
+            copyConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().copyConstructorWorks();
+            },
+            arrayBufferConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().arrayBufferConstructorWorks();
+            },
+            arrayBufferWithOffsetConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().arrayBufferWithOffsetConstructorWorks();
+            },
+            arrayBufferWithOffsetAndLengthConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().arrayBufferWithOffsetAndLengthConstructorWorks();
+            },
+            staticBytesPerElementWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().staticBytesPerElementWorks();
+            },
+            lengthWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().lengthWorks();
+            },
+            indexingWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().indexingWorks();
+            },
+            setFloat32ArrayWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().setFloat32ArrayWorks();
+            },
+            setFloat32ArrayWithOffsetWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().setFloat32ArrayWithOffsetWorks();
+            },
+            setNormalArrayWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().setNormalArrayWorks();
+            },
+            setNormalArrayWithOffsetWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().setNormalArrayWithOffsetWorks();
+            },
+            subarrayWithBeginWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().subarrayWithBeginWorks();
+            },
+            subarrayWithBeginAndEndWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().subarrayWithBeginAndEndWorks();
+            },
+            bufferPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().bufferPropertyWorks();
+            },
+            byteOffsetPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().byteOffsetPropertyWorks();
+            },
+            byteLengthPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().byteLengthPropertyWorks();
+            },
+            indexOfWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().indexOfWorks();
+            },
+            containsWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().containsWorks();
+            },
+            foreachWorks_SPI_1401: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().foreachWorks_SPI_1401();
+            },
+            getEnumeratorWorks_SPI_1401: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().getEnumeratorWorks_SPI_1401();
+            },
+            iEnumerableGetEnumeratorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().iEnumerableGetEnumeratorWorks();
+            },
+            iCollectionMethodsWork_SPI_1559: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().iCollectionMethodsWork_SPI_1559();
+            },
+            iListMethodsWork_SPI_1559: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().iListMethodsWork_SPI_1559();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests)],
+        statics: {
+            lengthConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().lengthConstructorWorks();
+            },
+            constructorFromIntWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().constructorFromIntWorks();
+            },
+            copyConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().copyConstructorWorks();
+            },
+            arrayBufferConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().arrayBufferConstructorWorks();
+            },
+            arrayBufferWithOffsetConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().arrayBufferWithOffsetConstructorWorks();
+            },
+            arrayBufferWithOffsetAndLengthConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().arrayBufferWithOffsetAndLengthConstructorWorks();
+            },
+            staticBytesPerElementWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().staticBytesPerElementWorks();
+            },
+            lengthWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().lengthWorks();
+            },
+            indexingWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().indexingWorks();
+            },
+            setFloat64ArrayWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().setFloat64ArrayWorks();
+            },
+            setFloat64ArrayWithOffsetWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().setFloat64ArrayWithOffsetWorks();
+            },
+            setNormalArrayWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().setNormalArrayWorks();
+            },
+            setNormalArrayWithOffsetWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().setNormalArrayWithOffsetWorks();
+            },
+            subarrayWithBeginWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().subarrayWithBeginWorks();
+            },
+            subarrayWithBeginAndEndWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().subarrayWithBeginAndEndWorks();
+            },
+            bufferPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().bufferPropertyWorks();
+            },
+            byteOffsetPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().byteOffsetPropertyWorks();
+            },
+            byteLengthPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().byteLengthPropertyWorks();
+            },
+            indexOfWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().indexOfWorks();
+            },
+            containsWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().containsWorks();
+            },
+            foreachWorks_SPI_1401: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().foreachWorks_SPI_1401();
+            },
+            getEnumeratorWorks_SPI_1401: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().getEnumeratorWorks_SPI_1401();
+            },
+            iEnumerableGetEnumeratorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().iEnumerableGetEnumeratorWorks();
+            },
+            iCollectionMethodsWork_SPI_1559: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().iCollectionMethodsWork_SPI_1559();
+            },
+            iListMethodsWork_SPI_1559: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().iListMethodsWork_SPI_1559();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests)],
+        statics: {
+            lengthConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().lengthConstructorWorks();
+            },
+            constructorFromIntWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().constructorFromIntWorks();
+            },
+            copyConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().copyConstructorWorks();
+            },
+            arrayBufferConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().arrayBufferConstructorWorks();
+            },
+            arrayBufferWithOffsetConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().arrayBufferWithOffsetConstructorWorks();
+            },
+            arrayBufferWithOffsetAndLengthConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().arrayBufferWithOffsetAndLengthConstructorWorks();
+            },
+            staticBytesPerElementWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().staticBytesPerElementWorks();
+            },
+            lengthWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().lengthWorks();
+            },
+            indexingWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().indexingWorks();
+            },
+            setInt16ArrayWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().setInt16ArrayWorks();
+            },
+            setInt16ArrayWithOffsetWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().setInt16ArrayWithOffsetWorks();
+            },
+            setNormalArrayWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().setNormalArrayWorks();
+            },
+            setNormalArrayWithOffsetWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().setNormalArrayWithOffsetWorks();
+            },
+            subarrayWithBeginWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().subarrayWithBeginWorks();
+            },
+            subarrayWithBeginAndEndWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().subarrayWithBeginAndEndWorks();
+            },
+            bufferPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().bufferPropertyWorks();
+            },
+            byteOffsetPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().byteOffsetPropertyWorks();
+            },
+            byteLengthPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().byteLengthPropertyWorks();
+            },
+            indexOfWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().indexOfWorks();
+            },
+            containsWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().containsWorks();
+            },
+            foreachWorks_SPI_1401: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().foreachWorks_SPI_1401();
+            },
+            getEnumeratorWorks_SPI_1401: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().getEnumeratorWorks_SPI_1401();
+            },
+            iEnumerableGetEnumeratorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().iEnumerableGetEnumeratorWorks();
+            },
+            iCollectionMethodsWork_SPI_1559: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().iCollectionMethodsWork_SPI_1559();
+            },
+            iListMethodsWork_SPI_1559: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().iListMethodsWork_SPI_1559();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests)],
+        statics: {
+            lengthConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().lengthConstructorWorks();
+            },
+            constructorFromIntWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().constructorFromIntWorks();
+            },
+            copyConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().copyConstructorWorks();
+            },
+            arrayBufferConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().arrayBufferConstructorWorks();
+            },
+            arrayBufferWithOffsetConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().arrayBufferWithOffsetConstructorWorks();
+            },
+            arrayBufferWithOffsetAndLengthConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().arrayBufferWithOffsetAndLengthConstructorWorks();
+            },
+            staticBytesPerElementWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().staticBytesPerElementWorks();
+            },
+            lengthWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().lengthWorks();
+            },
+            indexingWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().indexingWorks();
+            },
+            setInt32ArrayWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().setInt32ArrayWorks();
+            },
+            setInt32ArrayWithOffsetWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().setInt32ArrayWithOffsetWorks();
+            },
+            setNormalArrayWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().setNormalArrayWorks();
+            },
+            setNormalArrayWithOffsetWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().setNormalArrayWithOffsetWorks();
+            },
+            subarrayWithBeginWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().subarrayWithBeginWorks();
+            },
+            subarrayWithBeginAndEndWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().subarrayWithBeginAndEndWorks();
+            },
+            bufferPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().bufferPropertyWorks();
+            },
+            byteOffsetPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().byteOffsetPropertyWorks();
+            },
+            byteLengthPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().byteLengthPropertyWorks();
+            },
+            indexOfWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().indexOfWorks();
+            },
+            containsWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().containsWorks();
+            },
+            foreachWorks_SPI_1401: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().foreachWorks_SPI_1401();
+            },
+            getEnumeratorWorks_SPI_1401: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().getEnumeratorWorks_SPI_1401();
+            },
+            iEnumerableGetEnumeratorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().iEnumerableGetEnumeratorWorks();
+            },
+            iCollectionMethodsWork_SPI_1559: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().iCollectionMethodsWork_SPI_1559();
+            },
+            iListMethodsWork_SPI_1559: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().iListMethodsWork_SPI_1559();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests)],
+        statics: {
+            lengthConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().lengthConstructorWorks();
+            },
+            constructorFromIntWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().constructorFromIntWorks();
+            },
+            copyConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().copyConstructorWorks();
+            },
+            arrayBufferConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().arrayBufferConstructorWorks();
+            },
+            arrayBufferWithOffsetConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().arrayBufferWithOffsetConstructorWorks();
+            },
+            arrayBufferWithOffsetAndLengthConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().arrayBufferWithOffsetAndLengthConstructorWorks();
+            },
+            staticBytesPerElementWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().staticBytesPerElementWorks();
+            },
+            lengthWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().lengthWorks();
+            },
+            indexingWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().indexingWorks();
+            },
+            setInt8ArrayWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().setInt8ArrayWorks();
+            },
+            setInt8ArrayWithOffsetWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().setInt8ArrayWithOffsetWorks();
+            },
+            setNormalArrayWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().setNormalArrayWorks();
+            },
+            setNormalArrayWithOffsetWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().setNormalArrayWithOffsetWorks();
+            },
+            subarrayWithBeginWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().subarrayWithBeginWorks();
+            },
+            subarrayWithBeginAndEndWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().subarrayWithBeginAndEndWorks();
+            },
+            bufferPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().bufferPropertyWorks();
+            },
+            byteOffsetPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().byteOffsetPropertyWorks();
+            },
+            byteLengthPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().byteLengthPropertyWorks();
+            },
+            indexOfWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().indexOfWorks();
+            },
+            containsWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().containsWorks();
+            },
+            foreachWorks_SPI_1401: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().foreachWorks_SPI_1401();
+            },
+            getEnumeratorWorks_SPI_1401: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().getEnumeratorWorks_SPI_1401();
+            },
+            iEnumerableGetEnumeratorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().iEnumerableGetEnumeratorWorks();
+            },
+            iCollectionMethodsWork_SPI_1559: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().iCollectionMethodsWork_SPI_1559();
+            },
+            iListMethodsWork_SPI_1559: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().iListMethodsWork_SPI_1559();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests)],
+        statics: {
+            lengthConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().lengthConstructorWorks();
+            },
+            constructorFromIntWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().constructorFromIntWorks();
+            },
+            copyConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().copyConstructorWorks();
+            },
+            arrayBufferConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().arrayBufferConstructorWorks();
+            },
+            arrayBufferWithOffsetConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().arrayBufferWithOffsetConstructorWorks();
+            },
+            arrayBufferWithOffsetAndLengthConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().arrayBufferWithOffsetAndLengthConstructorWorks();
+            },
+            staticBytesPerElementWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().staticBytesPerElementWorks();
+            },
+            lengthWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().lengthWorks();
+            },
+            indexingWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().indexingWorks();
+            },
+            setUint16ArrayWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().setUint16ArrayWorks();
+            },
+            setUint16ArrayWithOffsetWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().setUint16ArrayWithOffsetWorks();
+            },
+            setNormalArrayWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().setNormalArrayWorks();
+            },
+            setNormalArrayWithOffsetWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().setNormalArrayWithOffsetWorks();
+            },
+            subarrayWithBeginWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().subarrayWithBeginWorks();
+            },
+            subarrayWithBeginAndEndWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().subarrayWithBeginAndEndWorks();
+            },
+            bufferPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().bufferPropertyWorks();
+            },
+            byteOffsetPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().byteOffsetPropertyWorks();
+            },
+            byteLengthPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().byteLengthPropertyWorks();
+            },
+            indexOfWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().indexOfWorks();
+            },
+            containsWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().containsWorks();
+            },
+            foreachWorks_SPI_1401: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().foreachWorks_SPI_1401();
+            },
+            getEnumeratorWorks_SPI_1401: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().getEnumeratorWorks_SPI_1401();
+            },
+            iEnumerableGetEnumeratorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().iEnumerableGetEnumeratorWorks();
+            },
+            iCollectionMethodsWork_SPI_1559: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().iCollectionMethodsWork_SPI_1559();
+            },
+            iListMethodsWork_SPI_1559: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().iListMethodsWork_SPI_1559();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests)],
+        statics: {
+            lengthConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().lengthConstructorWorks();
+            },
+            constructorFromIntWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().constructorFromIntWorks();
+            },
+            copyConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().copyConstructorWorks();
+            },
+            arrayBufferConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().arrayBufferConstructorWorks();
+            },
+            arrayBufferWithOffsetConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().arrayBufferWithOffsetConstructorWorks();
+            },
+            arrayBufferWithOffsetAndLengthConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().arrayBufferWithOffsetAndLengthConstructorWorks();
+            },
+            staticBytesPerElementWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().staticBytesPerElementWorks();
+            },
+            lengthWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().lengthWorks();
+            },
+            indexingWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().indexingWorks();
+            },
+            setUint32ArrayWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().setUint32ArrayWorks();
+            },
+            setUint32ArrayWithOffsetWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().setUint32ArrayWithOffsetWorks();
+            },
+            setNormalArrayWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().setNormalArrayWorks();
+            },
+            setNormalArrayWithOffsetWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().setNormalArrayWithOffsetWorks();
+            },
+            subarrayWithBeginWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().subarrayWithBeginWorks();
+            },
+            subarrayWithBeginAndEndWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().subarrayWithBeginAndEndWorks();
+            },
+            bufferPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().bufferPropertyWorks();
+            },
+            byteOffsetPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().byteOffsetPropertyWorks();
+            },
+            byteLengthPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().byteLengthPropertyWorks();
+            },
+            indexOfWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().indexOfWorks();
+            },
+            containsWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().containsWorks();
+            },
+            foreachWorks_SPI_1401: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().foreachWorks_SPI_1401();
+            },
+            getEnumeratorWorks_SPI_1401: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().getEnumeratorWorks_SPI_1401();
+            },
+            iEnumerableGetEnumeratorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().iEnumerableGetEnumeratorWorks();
+            },
+            iCollectionMethodsWork_SPI_1559: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().iCollectionMethodsWork_SPI_1559();
+            },
+            iListMethodsWork_SPI_1559: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().iListMethodsWork_SPI_1559();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests)],
+        statics: {
+            lengthConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().lengthConstructorWorks();
+            },
+            constructorFromIntWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().constructorFromIntWorks();
+            },
+            copyConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().copyConstructorWorks();
+            },
+            arrayBufferConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().arrayBufferConstructorWorks();
+            },
+            arrayBufferWithOffsetConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().arrayBufferWithOffsetConstructorWorks();
+            },
+            arrayBufferWithOffsetAndLengthConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().arrayBufferWithOffsetAndLengthConstructorWorks();
+            },
+            staticBytesPerElementWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().staticBytesPerElementWorks();
+            },
+            lengthWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().lengthWorks();
+            },
+            indexingWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().indexingWorks();
+            },
+            setUint8ArrayWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().setUint8ArrayWorks();
+            },
+            setUint8ArrayWithOffsetWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().setUint8ArrayWithOffsetWorks();
+            },
+            setNormalArrayWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().setNormalArrayWorks();
+            },
+            setNormalArrayWithOffsetWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().setNormalArrayWithOffsetWorks();
+            },
+            subarrayWithBeginWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().subarrayWithBeginWorks();
+            },
+            subarrayWithBeginAndEndWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().subarrayWithBeginAndEndWorks();
+            },
+            bufferPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().bufferPropertyWorks();
+            },
+            byteOffsetPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().byteOffsetPropertyWorks();
+            },
+            byteLengthPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().byteLengthPropertyWorks();
+            },
+            indexOfWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().indexOfWorks();
+            },
+            containsWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().containsWorks();
+            },
+            foreachWorks_SPI_1401: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().foreachWorks_SPI_1401();
+            },
+            getEnumeratorWorks_SPI_1401: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().getEnumeratorWorks_SPI_1401();
+            },
+            iEnumerableGetEnumeratorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().iEnumerableGetEnumeratorWorks();
+            },
+            iCollectionMethodsWork_SPI_1559: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().iCollectionMethodsWork_SPI_1559();
+            },
+            iListMethodsWork_SPI_1559: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().iListMethodsWork_SPI_1559();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests)],
+        statics: {
+            typePropertiesAreCorrect_SPI_1560: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().typePropertiesAreCorrect_SPI_1560();
+            },
+            lengthConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().lengthConstructorWorks();
+            },
+            constructorFromIntWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().constructorFromIntWorks();
+            },
+            constructorFromUint8ArrayWorks_SPI_TODO: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().constructorFromUint8ArrayWorks_SPI_TODO();
+            },
+            copyConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().copyConstructorWorks();
+            },
+            arrayBufferConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().arrayBufferConstructorWorks();
+            },
+            arrayBufferWithOffsetConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().arrayBufferWithOffsetConstructorWorks();
+            },
+            arrayBufferWithOffsetAndLengthConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().arrayBufferWithOffsetAndLengthConstructorWorks();
+            },
+            staticBytesPerElementWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().staticBytesPerElementWorks();
+            },
+            lengthWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().lengthWorks();
+            },
+            indexingWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().indexingWorks();
+            },
+            setUint8ClampedArrayWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().setUint8ClampedArrayWorks();
+            },
+            setUint8ClampedArrayWithOffsetWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().setUint8ClampedArrayWithOffsetWorks();
+            },
+            setNormalArrayWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().setNormalArrayWorks();
+            },
+            setNormalArrayWithOffsetWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().setNormalArrayWithOffsetWorks();
+            },
+            subarrayWithBeginWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().subarrayWithBeginWorks();
+            },
+            subarrayWithBeginAndEndWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().subarrayWithBeginAndEndWorks();
+            },
+            bufferPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().bufferPropertyWorks();
+            },
+            byteOffsetPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().byteOffsetPropertyWorks();
+            },
+            byteLengthPropertyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().byteLengthPropertyWorks();
+            },
+            indexOfWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().indexOfWorks();
+            },
+            containsWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().containsWorks();
+            },
+            foreachWorks_SPI_1401: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().foreachWorks_SPI_1401();
+            },
+            getEnumeratorWorks_SPI_1401: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().getEnumeratorWorks_SPI_1401();
+            },
+            iCollectionMethodsWork_SPI_1559_1560: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().iCollectionMethodsWork_SPI_1559_1560();
+            },
+            iListMethodsWork_SPI_1559_1560: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().iListMethodsWork_SPI_1559_1560();
             }
         }
     });
