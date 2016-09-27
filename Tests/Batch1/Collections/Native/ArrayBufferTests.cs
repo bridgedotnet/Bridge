@@ -19,7 +19,14 @@ namespace Bridge.ClientTest.Collections.Native
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("ArrayBuffer", typeof(ArrayBuffer).FullName, "FullName");
+            if (!Utilities.BrowserHelper.IsPhantomJs())
+            {
+                Assert.AreEqual("ArrayBuffer", typeof(ArrayBuffer).FullName, "FullName");
+            }
+            else
+            {
+                Assert.AreEqual("Object", typeof(ArrayBuffer).FullName, "FullName");
+            }
 
             var interfaces = typeof(DataView).GetInterfaces();
             Assert.AreEqual(0, interfaces.Length, "Interface count should be empty");
