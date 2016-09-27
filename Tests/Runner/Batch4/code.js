@@ -17145,7 +17145,7 @@
 
             Bridge.Test.Assert.throws$6(System.FormatException, $_.Bridge.ClientTest.Batch4.SimpleTypes.DecimalTests.f1);
             Bridge.Test.Assert.throws$6(System.FormatException, $_.Bridge.ClientTest.Batch4.SimpleTypes.DecimalTests.f2);
-            Bridge.Test.Assert.throws$6(System.FormatException, $_.Bridge.ClientTest.Batch4.SimpleTypes.DecimalTests.f3);
+            Bridge.Test.Assert.areEqual(System.Double.format((12.0), 'G'), Bridge.Int.format(System.Decimal("12."), 'G'));
             //Assert.Throws<OverflowException>(() => decimal.Parse("999999999999999999999999999999"));
         },
         tryParseWorks_SPI_1586: function () {
@@ -17189,8 +17189,8 @@
             this.assertIsDecimalAndEqualTo(d.v, 0);
 
             b = System.Decimal.tryParse("12.", null, d);
-            Bridge.Test.Assert.false(b);
-            this.assertIsDecimalAndEqualTo(d.v, 0);
+            Bridge.Test.Assert.true(b);
+            this.assertIsDecimalAndEqualTo(d.v, 12);
 
             //b = decimal.TryParse("999999999999999999999999999999", out d);
             //Assert.False(b);
@@ -17907,9 +17907,6 @@
         },
         f2: function () {
             System.Decimal("12.34.56");
-        },
-        f3: function () {
-            System.Decimal("12.");
         }
     });
 
