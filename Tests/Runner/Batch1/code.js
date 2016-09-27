@@ -7299,7 +7299,11 @@
             return new DataView(result.buffer);
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("DataView", Bridge.Reflection.getTypeFullName(DataView), "FullName");
+            if (!Bridge.ClientTest.Utilities.BrowserHelper.isPhantomJs()) {
+                Bridge.Test.Assert.areEqual$1("DataView", Bridge.Reflection.getTypeFullName(DataView), "FullName");
+            } else {
+                Bridge.Test.Assert.areEqual$1("Object", Bridge.Reflection.getTypeFullName(DataView), "FullName");
+            }
 
             var interfaces = Bridge.Reflection.getInterfaces(DataView);
             Bridge.Test.Assert.areEqual$1(0, interfaces.length, "Interface count should be empty");

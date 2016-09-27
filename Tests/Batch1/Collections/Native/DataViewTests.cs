@@ -20,7 +20,14 @@ namespace Bridge.ClientTest.Collections.Native
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("DataView", typeof(DataView).FullName, "FullName");
+            if (!Utilities.BrowserHelper.IsPhantomJs())
+            {
+                Assert.AreEqual("DataView", typeof(DataView).FullName, "FullName");
+            }
+            else
+            {
+                Assert.AreEqual("Object", typeof(DataView).FullName, "FullName");
+            }
 
             var interfaces = typeof(DataView).GetInterfaces();
             Assert.AreEqual(0, interfaces.Length, "Interface count should be empty");
