@@ -47,7 +47,7 @@ namespace Bridge.Translator
         public static ExpressionSyntax GenerateMethodIdentifier(string methodName, string targetIdentifierOrTypeName, ITypeSymbol[] typeArguments = null)
         {
             ExpressionSyntax methodIdentifier = SyntaxFactory.IdentifierName(targetIdentifierOrTypeName + "." + methodName);
-            if (typeArguments != null)
+            if (typeArguments != null && typeArguments.Length > 0)
             {
                 methodIdentifier = SyntaxFactory.GenericName(SyntaxFactory.Identifier(targetIdentifierOrTypeName + "." + methodName),
                     SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList(typeArguments.Select(GenerateTypeSyntax))));
