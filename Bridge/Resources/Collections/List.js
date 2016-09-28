@@ -10,6 +10,7 @@
                 "add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
                 "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
                 "contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
+                "copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo",
                 "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
                 "indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
                 "insert", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert",
@@ -119,6 +120,10 @@
 
             contains: function (item) {
                 return this.indexOf(item) > -1;
+            },
+
+            copyTo: function (array, arrayIndex) {
+                System.Array.copy(this.items, 0, array, arrayIndex, this.items.length);
             },
 
             getEnumerator: function () {

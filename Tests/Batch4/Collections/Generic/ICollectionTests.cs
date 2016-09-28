@@ -53,6 +53,11 @@ namespace Bridge.ClientTest.Batch4.Collections.Generic
                 return Items.Contains(item);
             }
 
+            public void CopyTo(string[] array, int arrayIndex)
+            {
+                Items.CopyTo(array, arrayIndex);
+            }
+
             public bool Remove(string item)
             {
                 return Items.Remove(item);

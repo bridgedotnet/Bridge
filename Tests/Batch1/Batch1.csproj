@@ -45,6 +45,18 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Collections\Native\ArrayBufferTests.cs" />
+    <Compile Include="Collections\Native\DataViewTests.cs" />
+    <Compile Include="Collections\Native\Float32ArrayTests.cs" />
+    <Compile Include="Collections\Native\Float64ArrayTests.cs" />
+    <Compile Include="Collections\Native\Int16ArrayTests.cs" />
+    <Compile Include="Collections\Native\Int32ArrayTests.cs" />
+    <Compile Include="Collections\Native\Int8ArrayTests.cs" />
+    <Compile Include="Collections\Native\Uint16ArrayTests.cs" />
+    <Compile Include="Collections\Native\Uint32ArrayTests.cs" />
+    <Compile Include="Collections\Native\Uint8ArrayTests.cs" />
+    <Compile Include="Collections\Native\Uint8ClampedArrayTests.cs" />
+    <Compile Include="Collections\ObjectModel\ReadOnlyCollectionTests.cs" />
     <Compile Include="FunctionTests.cs" />
     <Compile Include="BridgeConsoleTests.cs" />
     <Compile Include="Exceptions\AmbiguousMatchExceptionTests.cs" />

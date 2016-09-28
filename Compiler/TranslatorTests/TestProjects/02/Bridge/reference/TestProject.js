@@ -8818,23 +8818,44 @@
             }
         },
 
-        copy: function (src, spos, dst, dpos, len) {
+        copy: function (src, spos, dest, dpos, len) {
+            if (!dest) {
+                throw new System.ArgumentNullException("dest", "Value cannot be null");
+            }
+
+            if (!src) {
+                throw new System.ArgumentNullException("src", "Value cannot be null");
+            }
+
             if (spos < 0 || dpos < 0 || len < 0) {
-                throw new System.ArgumentOutOfRangeException();
+                throw new System.ArgumentOutOfRangeException("Number was less than the array's lower bound in the first dimension");
             }
 
-            if (len > (src.length - spos) || len > (dst.length - dpos)) {
-                throw new System.IndexOutOfRangeException();
+            if (len > (src.length - spos) || len > (dest.length - dpos)) {
+                throw new System.ArgumentException("Destination array was not long enough. Check destIndex and length, and the array's lower bounds");
             }
 
-            if (spos < dpos && src === dst) {
+            if (spos < dpos && src === dest) {
                 while (--len >= 0) {
-                    dst[dpos + len] = src[spos + len];
+                    dest[dpos + len] = src[spos + len];
                 }
             } else {
                 for (var i = 0; i < len; i++) {
-                    dst[dpos + i] = src[spos + i];
+                    dest[dpos + i] = src[spos + i];
                 }
+            }
+        },
+
+        copyTo: function (obj, dest, index, T) {
+            var name;
+            if (Bridge.isArray(obj)) {
+                System.Array.copy(obj, 0, dest, index, obj ? obj.length : 0);
+            } else if (Bridge.isFunction(obj.copyTo)) {
+                obj.copyTo(dest, index);
+            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo"])) {
+                return obj[name](dest, index);
+            } else {
+                throw new System.NotImplementedException("copyTo");
             }
         },
 
@@ -9997,6 +10018,7 @@
                 "add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
                 "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
                 "contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
+                "copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo",
                 "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
                 "indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
                 "insert", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert",
@@ -10106,6 +10128,10 @@
 
             contains: function (item) {
                 return this.indexOf(item) > -1;
+            },
+
+            copyTo: function (array, arrayIndex) {
+                System.Array.copy(this.items, 0, array, arrayIndex, this.items.length);
             },
 
             getEnumerator: function () {

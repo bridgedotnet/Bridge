@@ -7975,8 +7975,8 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         testImplicitImplementation: function () {
             var c2 = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.C2$1(System.Int32))();
             Bridge.Test.Assert.areEqual(0, c2.Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$System$Int32$getItem(0));
-            Bridge.Test.Assert.areEqual(2, c2.Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$System$Int32$add(0));
-            Bridge.Test.Assert.areEqual(1, c2.Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$System$Int32$getCount());
+            Bridge.Test.Assert.areEqual(20, c2.Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$System$Int32$add(0));
+            Bridge.Test.Assert.areEqual(10, c2.Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$System$Int32$getCount());
         },
         testExplicitImplementation: function () {
             var c1 = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.C1$1(System.Int32))();
@@ -7993,27 +7993,37 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             var list = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.List1$1(System.Int32))();
             Bridge.Test.Assert.areEqual(0, System.Array.getItem(list, 0, System.Int32));
             Bridge.Test.Assert.true(System.Array.contains(list, 0, System.Int32));
-            Bridge.Test.Assert.areEqual(1, System.Array.getCount(list, System.Int32));
+            Bridge.Test.Assert.areEqual(100, System.Array.getCount(list, System.Int32));
             Bridge.Test.Assert.null(Bridge.getEnumerator(list, "$1", System.Int32));
-            Bridge.Test.Assert.areEqual(2, System.Array.indexOf(list, 0, 0, null, System.Int32));
+            Bridge.Test.Assert.areEqual(200, System.Array.indexOf(list, 0, 0, null, System.Int32));
             Bridge.Test.Assert.true(System.Array.remove(list, 0, System.Int32));
+
+            var a = [1, 2];
+            System.Array.copyTo(list, a, 0, System.Int32);
+            Bridge.Test.Assert.areEqual(0, a[0]);
         },
         testListExplicitImplementation: function () {
             var list = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.List2$1(System.Int32))();
             Bridge.Test.Assert.areEqual(0, list.getItem(0));
             Bridge.Test.Assert.true(list.contains(0));
-            Bridge.Test.Assert.areEqual(1, list.getCount());
+            Bridge.Test.Assert.areEqual(1000, list.getCount());
             Bridge.Test.Assert.null(list.getEnumerator());
-            Bridge.Test.Assert.areEqual(2, list.indexOf(0));
+            Bridge.Test.Assert.areEqual(2000, list.indexOf(0));
             Bridge.Test.Assert.true(list.remove(0));
+            var a = [1, 2];
+            list.copyTo(a, 0);
+            Bridge.Test.Assert.areEqual(0, a[1]);
 
             var list2 = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.List2$1(System.Int32))();
             Bridge.Test.Assert.areEqual(0, System.Array.getItem(list2, 0, System.Int32));
             Bridge.Test.Assert.true(System.Array.contains(list2, 0, System.Int32));
-            Bridge.Test.Assert.areEqual(1, System.Array.getCount(list2, System.Int32));
+            Bridge.Test.Assert.areEqual(1000, System.Array.getCount(list2, System.Int32));
             Bridge.Test.Assert.null(Bridge.getEnumerator(list2, "$1", System.Int32));
-            Bridge.Test.Assert.areEqual(2, System.Array.indexOf(list2, 0, 0, null, System.Int32));
+            Bridge.Test.Assert.areEqual(2000, System.Array.indexOf(list2, 0, 0, null, System.Int32));
             Bridge.Test.Assert.true(System.Array.remove(list2, 0, System.Int32));
+            var a2 = [1, 2];
+            System.Array.copyTo(list2, a, 0, System.Int32);
+            Bridge.Test.Assert.areEqual(2, a2[1]);
         }
     });
 
@@ -8031,6 +8041,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             "System$Collections$Generic$ICollection$1$T$add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
             "System$Collections$Generic$ICollection$1$T$clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
             "System$Collections$Generic$ICollection$1$T$contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
+            "System$Collections$Generic$ICollection$1$T$copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo",
             "System$Collections$Generic$IEnumerable$1$T$getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
             "System$Collections$Generic$IList$1$T$indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
             "System$Collections$Generic$IList$1$T$insert", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert",
@@ -8045,7 +8056,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
         },
         System$Collections$Generic$ICollection$1$T$getCount: function () {
-            return 1;
+            return 100;
         },
         System$Collections$Generic$ICollection$1$T$add: function (item) {
         },
@@ -8054,6 +8065,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         System$Collections$Generic$ICollection$1$T$contains: function (item) {
             return true;
         },
+        System$Collections$Generic$ICollection$1$T$copyTo: function (array, arrayIndex) {
+            array[0] = Bridge.getDefaultValue(T);
+        },
         System$Collections$IEnumerable$getEnumerator: function () {
             return null;
         },
@@ -8061,7 +8075,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             return null;
         },
         System$Collections$Generic$IList$1$T$indexOf: function (item) {
-            return 2;
+            return 200;
         },
         System$Collections$Generic$IList$1$T$insert: function (index, item) {
         },
@@ -8082,6 +8096,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             "add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
             "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
             "contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
+            "copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo",
             "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
             "indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
             "insert", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert",
@@ -8096,7 +8111,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
         },
         getCount: function () {
-            return 1;
+            return 1000;
         },
         add: function (item) {
         },
@@ -8105,6 +8120,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         contains: function (item) {
             return true;
         },
+        copyTo: function (array, arrayIndex) {
+            array[1] = Bridge.getDefaultValue(T);
+        },
         System$Collections$IEnumerable$getEnumerator: function () {
             return null;
         },
@@ -8112,7 +8130,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             return null;
         },
         indexOf: function (item) {
-            return 2;
+            return 2000;
         },
         insert: function (index, item) {
         },
@@ -17860,10 +17878,10 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$setItem: function (index, value) {
         },
         Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$getCount: function () {
-            return 1;
+            return 10;
         },
         Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$add: function (item) {
-            return 2;
+            return 20;
         }
     }; });
 
