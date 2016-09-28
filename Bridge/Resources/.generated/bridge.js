@@ -697,20 +697,20 @@
         },
 
         isArray: function (obj) {
-            if (obj == null) {
+            var c = obj != null ? obj.constructor : null;
+            if (!c) {
                 return false;
             }
-            var c = obj.constructor;
             return c === Array ||
                 c === Uint8Array ||
-                (c && c === Bridge.global["Uint8ClampedArray"]) ||
                 c === Int8Array ||
                 c === Int16Array ||
                 c === Uint16Array ||
                 c === Int32Array ||
                 c === Uint32Array ||
                 c === Float32Array ||
-                c === Float64Array;
+                c === Float64Array ||
+                c === Bridge.global["Uint8ClampedArray"];
         },
 
         isFunction: function (obj) {
