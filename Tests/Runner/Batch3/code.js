@@ -6913,8 +6913,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6944,7 +6942,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -9908,6 +9906,83 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             Bridge.Test.Assert.true(System.Decimal(23.0).equalsT(System.Convert.toDecimal("23")));
             Bridge.Test.Assert.true(System.Decimal(0.24).equalsT(System.Convert.toDecimal(".24")));
             Bridge.Test.Assert.true(System.Decimal(2.0).equalsT(System.Convert.toDecimal("2")));
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1892", {
+        testCase: function () {
+            var $t;
+            var data = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1892.Obj();
+            data = ($t = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1892.Obj.op_False(data) ? data : Bridge.ClientTest.Batch3.BridgeIssues.Bridge1892.Obj.op_BitwiseAnd(data, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1892.Obj.op_Implicit(data.getlength() > 0)), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1892.Obj.op_False($t) ? $t : Bridge.ClientTest.Batch3.BridgeIssues.Bridge1892.Obj.op_BitwiseAnd($t, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1892.Obj.op_Implicit((Bridge.ClientTest.Batch3.BridgeIssues.Bridge1892.Obj.op_Implicit$3(data.getItem(0).getItem("key")) === 1))));
+            Bridge.Test.Assert.notNull(data);
+            var o = data;
+            Bridge.Test.Assert.true(Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1892.Obj));
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1892.Obj", {
+        statics: {
+            op_False: function (o) {
+                return o == null;
+            },
+            op_True: function (o) {
+                return o != null;
+            },
+            op_Implicit: function (v) {
+                return Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1892.Obj(), {
+                    value: v
+                } );
+            },
+            op_Implicit$2: function (v) {
+                return v.value;
+            },
+            op_Implicit$3: function (v) {
+                return v.value;
+            },
+            op_Implicit$1: function (v) {
+                return Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1892.Obj(), {
+                    value: v
+                } );
+            },
+            op_BitwiseOr: function (left, right) {
+                if (left == null) {
+                    return right;
+                }
+
+                if (right == null) {
+                    return left;
+                }
+
+                return left;
+            },
+            op_BitwiseAnd: function (left, right) {
+                if (left == null) {
+                    return null;
+                }
+
+                if (right == null) {
+                    return null;
+                }
+
+                return right;
+            }
+        },
+        value: null,
+        config: {
+            properties: {
+                length: 0
+            }
+        },
+        ctor: function () {
+            this.$initialize();
+        },
+        getItem: function (key) {
+            return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1892.Obj();
+        },
+        setItem: function (key, value) {
+        },
+        toString: function () {
+            return this.value.toString();
         }
     });
 

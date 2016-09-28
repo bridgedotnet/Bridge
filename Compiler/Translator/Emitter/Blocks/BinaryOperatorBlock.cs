@@ -88,6 +88,8 @@ namespace Bridge.Translator
                             binaryOperatorExpression.Left.AcceptVisitor(this.Emitter);
 
                             this.WriteComma();
+
+                            addClose = true;
                         }
 
                         var m = FindOperatorTrueOrFalse(left.Type, orElse);
@@ -121,8 +123,6 @@ namespace Bridge.Translator
                         }
 
                         this.Write(" : ");
-
-                        addClose = true;
                     }
 
                     if (orr.IsLiftedOperator)
