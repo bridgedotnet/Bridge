@@ -278,7 +278,7 @@
             } else if (Bridge.isFunction(obj.copyTo)) {
                 obj.copyTo(dest, index);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo"])) {
-                return obj[name](dest, index);
+                obj[name](dest, index);
             } else {
                 throw new System.NotImplementedException("copyTo");
             }
