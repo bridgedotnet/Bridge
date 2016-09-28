@@ -8780,6 +8780,21 @@
             return 0;
         },
 
+        getIsReadOnly: function (obj, T) {
+            var name;
+            if (Bridge.isArray(obj)) {
+                return T ? true : false;
+            } else if (Bridge.isFunction(obj[name = "System$Collections$ICollection$getIsReadOnly"])) {
+                return obj[name]();
+            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getIsReadOnly"])) {
+                return obj[name]();
+            } else if (Bridge.isFunction(obj.getIsReadOnly)) {
+                return obj.getIsReadOnly();
+            }
+
+            return 0;
+        },
+
         add: function (obj, item, T) {
             var name;
             if (Bridge.isArray(obj)) {
@@ -8853,7 +8868,7 @@
             } else if (Bridge.isFunction(obj.copyTo)) {
                 obj.copyTo(dest, index);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo"])) {
-                return obj[name](dest, index);
+                obj[name](dest, index);
             } else {
                 throw new System.NotImplementedException("copyTo");
             }
@@ -10015,6 +10030,7 @@
                 "getItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem",
                 "setItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem",
                 "getCount", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getCount",
+                "getIsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getIsReadOnly",
                 "add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
                 "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
                 "contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
@@ -10046,6 +10062,10 @@
 
             getCount: function () {
                 return this.items.length;
+            },
+
+            getIsReadOnly: function () {
+                return !!this.readOnly;
             },
 
             get: function (index) {

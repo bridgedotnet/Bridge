@@ -30,6 +30,14 @@ namespace Bridge.ClientTest.Collections.Generic
 
             public int Count { get { return Items.Count; } }
 
+            public bool IsReadOnly
+            {
+                get
+                {
+                    return true;
+                }
+            }
+
             public void CopyTo(string[] array, int arrayIndex)
             {
                 Items.CopyTo(array, arrayIndex);
@@ -104,6 +112,24 @@ namespace Bridge.ClientTest.Collections.Generic
         public void ClassImplementingICollectionCastToICollectionCountWorks()
         {
             Assert.AreEqual(3, ((ICollection<string>)new MyCollection(new[] { "x", "y", "z" })).Count);
+        }
+
+        [Test]
+        public void ArrayCastToICollectionIsReadOnlyWorks()
+        {
+            Assert.AreEqual(true, ((ICollection<string>)new[] { "x", "y", "z" }).IsReadOnly);
+        }
+
+        [Test]
+        public void ClassImplementingICollectionIsReadOnlyWorks()
+        {
+            Assert.AreEqual(true, new MyCollection(new[] { "x", "y" }).IsReadOnly);
+        }
+
+        [Test]
+        public void ClassImplementingICollectionCastToICollectionIsReadOnlyWorks()
+        {
+            Assert.AreEqual(true, ((ICollection<string>)new MyCollection(new[] { "x", "y", "z" })).IsReadOnly);
         }
 
         [Test]

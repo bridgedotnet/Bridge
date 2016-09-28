@@ -205,6 +205,21 @@
             return 0;
         },
 
+        getIsReadOnly: function (obj, T) {
+            var name;
+            if (Bridge.isArray(obj)) {
+                return T ? true : false;
+            } else if (Bridge.isFunction(obj[name = "System$Collections$ICollection$getIsReadOnly"])) {
+                return obj[name]();
+            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getIsReadOnly"])) {
+                return obj[name]();
+            } else if (Bridge.isFunction(obj.getIsReadOnly)) {
+                return obj.getIsReadOnly();
+            }
+
+            return 0;
+        },
+
         add: function (obj, item, T) {
             var name;
             if (Bridge.isArray(obj)) {

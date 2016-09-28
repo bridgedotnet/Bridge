@@ -15,6 +15,15 @@ namespace System.Collections.Generic
         }
 
         /// <summary>
+        /// Gets a value indicating whether the ICollection is read-only.
+        /// </summary>
+        bool IsReadOnly
+        {
+            [Template("System.Array.getIsReadOnly({this}, {T})")]
+            get;
+        }
+
+        /// <summary>
         /// Adds an item to the ICollection.
         /// </summary>
         /// <param name="item">The object to add to the ICollection</param>

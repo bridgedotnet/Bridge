@@ -30,6 +30,14 @@ namespace Bridge.ClientTest.Collections.Generic
 
             public int Count { get { return Items.Count; } }
 
+            public bool IsReadOnly
+            {
+                get
+                {
+                    return true;
+                }
+            }
+
             public void Add(string item)
             {
                 Items.Add(item);
@@ -159,6 +167,27 @@ namespace Bridge.ClientTest.Collections.Generic
             IList<string> l = new MyList(new[] { "x", "y", "z" });
             l[1] = "a";
             Assert.AreEqual("a", l[1]);
+        }
+
+        [Test]
+        public void ArrayCastToIListIsReadOnlyWorks()
+        {
+            IList<C> arr = new[] { new C(1), new C(2), new C(3) };
+            Assert.AreEqual(true, arr.IsReadOnly);
+        }
+
+        [Test]
+        public void ClassImplementingIListIsReadOnlyWorks()
+        {
+            MyList c = new MyList(new[] { "x", "y" });
+            Assert.AreEqual(true, c.IsReadOnly);
+        }
+
+        [Test]
+        public void ClassImplementingIListCastToIListIsReadOnlyWorks()
+        {
+            IList<string> l = new MyList(new[] { "x", "y" });
+            Assert.AreEqual(true, l.IsReadOnly);
         }
 
         [Test]

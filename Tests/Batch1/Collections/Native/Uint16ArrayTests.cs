@@ -294,5 +294,19 @@ namespace Bridge.ClientTest.Collections.Native
         //    var list = (IReadOnlyList<ushort>)new Uint16Array(new ushort[] { 3, 6, 2, 9, 5 });
         //    Assert.AreEqual(list[3], 9, "Get item");
         //}
+
+        [Test]
+        public void IListIsReadOnlyWorks()
+        {
+            var list = (IList<float>)new Uint16Array(new float[0]);
+            Assert.True(list.IsReadOnly);
+        }
+
+        [Test]
+        public void ICollectionIsReadOnlyWorks()
+        {
+            var list = (ICollection<float>)new Uint16Array(new float[0]);
+            Assert.True(list.IsReadOnly);
+        }
     }
 }

@@ -23,6 +23,14 @@ namespace System.Collections.Generic
             get;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the List is read-only.
+        /// </summary>
+        extern bool ICollection<T>.IsReadOnly
+        {
+            get;
+        }
+
         private extern T Items(int index);
 
         public extern T Get(int index);

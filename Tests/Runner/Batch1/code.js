@@ -325,6 +325,10 @@
             var l = ["x", "y", "z"];
             Bridge.Test.Assert.areEqual(3, System.Array.getCount(l, String));
         },
+        iCollectionIsReadOnlyWorks: function () {
+            var l = ["x", "y", "z"];
+            Bridge.Test.Assert.true(System.Array.getIsReadOnly(l, String));
+        },
         iCollectionAddWorks: function () {
             var l = ["x", "y", "z"];
             System.Array.add(l, "a", String);
@@ -398,6 +402,10 @@
             Bridge.Test.Assert.true(System.Array.remove(l, "y", String));
             Bridge.Test.Assert.false(System.Array.remove(l, "a", String));
             Bridge.Test.Assert.areDeepEqual(["x", "z"], l);
+        },
+        iListIsReadOnlyWorks: function () {
+            var l = ["x", "y", "z"];
+            Bridge.Test.Assert.true(System.Array.getIsReadOnly(l, String));
         },
         iListIndexingWorks: function () {
             var l = ["x", "y", "z"];
@@ -5202,6 +5210,15 @@
         classImplementingICollectionCastToICollectionCountWorks: function () {
             Bridge.Test.Assert.areEqual(3, System.Array.getCount(Bridge.cast(new Bridge.ClientTest.Collections.Generic.ICollectionTests.MyCollection(["x", "y", "z"]), System.Collections.Generic.ICollection$1(String)), String));
         },
+        arrayCastToICollectionIsReadOnlyWorks: function () {
+            Bridge.Test.Assert.areEqual(true, System.Array.getIsReadOnly(Bridge.cast(["x", "y", "z"], System.Collections.Generic.ICollection$1(String)), String));
+        },
+        classImplementingICollectionIsReadOnlyWorks: function () {
+            Bridge.Test.Assert.areEqual(true, new Bridge.ClientTest.Collections.Generic.ICollectionTests.MyCollection(["x", "y"]).getIsReadOnly());
+        },
+        classImplementingICollectionCastToICollectionIsReadOnlyWorks: function () {
+            Bridge.Test.Assert.areEqual(true, System.Array.getIsReadOnly(Bridge.cast(new Bridge.ClientTest.Collections.Generic.ICollectionTests.MyCollection(["x", "y", "z"]), System.Collections.Generic.ICollection$1(String)), String));
+        },
         classImplementingICollectionAddWorks: function () {
             var c = new Bridge.ClientTest.Collections.Generic.ICollectionTests.MyCollection(["x", "y"]);
             c.add("z");
@@ -5352,6 +5369,7 @@
             alias: [
             "getEnumerator", "System$Collections$Generic$IEnumerable$1$String$getEnumerator",
             "getCount", "System$Collections$Generic$ICollection$1$String$getCount",
+            "getIsReadOnly", "System$Collections$Generic$ICollection$1$String$getIsReadOnly",
             "copyTo", "System$Collections$Generic$ICollection$1$String$copyTo",
             "add", "System$Collections$Generic$ICollection$1$String$add",
             "clear", "System$Collections$Generic$ICollection$1$String$clear",
@@ -5365,6 +5383,9 @@
         },
         getCount: function () {
             return this.getItems().getCount();
+        },
+        getIsReadOnly: function () {
+            return true;
         },
         System$Collections$IEnumerable$getEnumerator: function () {
             return this.getEnumerator();
@@ -5787,6 +5808,18 @@
             System.Array.setItem(l, 1, "a", String);
             Bridge.Test.Assert.areEqual("a", System.Array.getItem(l, 1, String));
         },
+        arrayCastToIListIsReadOnlyWorks: function () {
+            var arr = [new Bridge.ClientTest.Collections.Generic.IListTests.C(1), new Bridge.ClientTest.Collections.Generic.IListTests.C(2), new Bridge.ClientTest.Collections.Generic.IListTests.C(3)];
+            Bridge.Test.Assert.areEqual(true, System.Array.getIsReadOnly(arr, Bridge.ClientTest.Collections.Generic.IListTests.C));
+        },
+        classImplementingIListIsReadOnlyWorks: function () {
+            var c = new Bridge.ClientTest.Collections.Generic.IListTests.MyList(["x", "y"]);
+            Bridge.Test.Assert.areEqual(true, c.getIsReadOnly());
+        },
+        classImplementingIListCastToIListIsReadOnlyWorks: function () {
+            var l = new Bridge.ClientTest.Collections.Generic.IListTests.MyList(["x", "y"]);
+            Bridge.Test.Assert.areEqual(true, System.Array.getIsReadOnly(l, String));
+        },
         arrayCastToIListIndexOfWorks: function () {
             var arr = [new Bridge.ClientTest.Collections.Generic.IListTests.C(1), new Bridge.ClientTest.Collections.Generic.IListTests.C(2), new Bridge.ClientTest.Collections.Generic.IListTests.C(3)];
             Bridge.Test.Assert.areEqual(1, System.Array.indexOf(arr, new Bridge.ClientTest.Collections.Generic.IListTests.C(2), 0, null, Bridge.ClientTest.Collections.Generic.IListTests.C));
@@ -5921,6 +5954,7 @@
             alias: [
             "getEnumerator", "System$Collections$Generic$IEnumerable$1$String$getEnumerator",
             "getCount", "System$Collections$Generic$ICollection$1$String$getCount",
+            "getIsReadOnly", "System$Collections$Generic$ICollection$1$String$getIsReadOnly",
             "add", "System$Collections$Generic$ICollection$1$String$add",
             "clear", "System$Collections$Generic$ICollection$1$String$clear",
             "contains", "System$Collections$Generic$ICollection$1$String$contains",
@@ -5939,6 +5973,9 @@
         },
         getCount: function () {
             return this.getItems().getCount();
+        },
+        getIsReadOnly: function () {
+            return true;
         },
         getItem: function (index) {
             return this.getItems().getItem(index);
@@ -7179,6 +7216,10 @@
             var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["x", "y", "z"]);
             Bridge.Test.Assert.areEqual(3, System.Array.getCount(l, String));
         },
+        iCollectionIsReadOnlyWorks: function () {
+            var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(System.Array.init(0, null));
+            Bridge.Test.Assert.true(System.Array.getIsReadOnly(l, String));
+        },
         iCollectionContainsWorks: function () {
             var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["x", "y", "z"]);
             Bridge.Test.Assert.true(System.Array.contains(l, "y", String));
@@ -7202,6 +7243,10 @@
             var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C))([new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(1), new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(2), new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(3)]);
             Bridge.Test.Assert.areEqual(1, System.Array.indexOf(l, new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(2), 0, null, Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C));
             Bridge.Test.Assert.areEqual(-1, System.Array.indexOf(l, new Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C(4), 0, null, Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests.C));
+        },
+        iListIsReadOnlyWorks: function () {
+            var l = new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(System.Array.init(0, null));
+            Bridge.Test.Assert.true(System.Array.getIsReadOnly(l, String));
         }
     });
 
@@ -7674,6 +7719,14 @@
 
             //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
             //Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
+        },
+        iListIsReadOnlyWorks: function () {
+            var list = Bridge.cast(new Float32Array(System.Array.init(0, 0)), System.Collections.Generic.IList$1(System.Single));
+            Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
+        },
+        iCollectionIsReadOnlyWorks: function () {
+            var list = Bridge.cast(new Float32Array(System.Array.init(0, 0)), System.Collections.Generic.ICollection$1(System.Single));
+            Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
         }
     });
 
@@ -7855,6 +7908,14 @@
 
             //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
             //Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
+        },
+        iListIsReadOnlyWorks: function () {
+            var list = Bridge.cast(new Float64Array(System.Array.init(0, 0)), System.Collections.Generic.IList$1(System.Single));
+            Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
+        },
+        iCollectionIsReadOnlyWorks: function () {
+            var list = Bridge.cast(new Float64Array(System.Array.init(0, 0)), System.Collections.Generic.ICollection$1(System.Single));
+            Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
         }
     });
 
@@ -8036,6 +8097,14 @@
 
             //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
             //Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
+        },
+        iListIsReadOnlyWorks: function () {
+            var list = Bridge.cast(new Int16Array(System.Array.init(0, 0)), System.Collections.Generic.IList$1(System.Single));
+            Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
+        },
+        iCollectionIsReadOnlyWorks: function () {
+            var list = Bridge.cast(new Int16Array(System.Array.init(0, 0)), System.Collections.Generic.ICollection$1(System.Single));
+            Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
         }
     });
 
@@ -8217,6 +8286,14 @@
 
             //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
             //Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
+        },
+        iListIsReadOnlyWorks: function () {
+            var list = Bridge.cast(new Int32Array(System.Array.init(0, 0)), System.Collections.Generic.IList$1(System.Single));
+            Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
+        },
+        iCollectionIsReadOnlyWorks: function () {
+            var list = Bridge.cast(new Int32Array(System.Array.init(0, 0)), System.Collections.Generic.ICollection$1(System.Single));
+            Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
         }
     });
 
@@ -8398,6 +8475,14 @@
 
             //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
             //Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
+        },
+        iListIsReadOnlyWorks: function () {
+            var list = Bridge.cast(new Int8Array(System.Array.init(0, 0)), System.Collections.Generic.IList$1(System.Single));
+            Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
+        },
+        iCollectionIsReadOnlyWorks: function () {
+            var list = Bridge.cast(new Int8Array(System.Array.init(0, 0)), System.Collections.Generic.ICollection$1(System.Single));
+            Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
         }
     });
 
@@ -8579,6 +8664,14 @@
 
             //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
             //Assert.Throws(() => list.RemoveAt(2), "RemoveAt");
+        },
+        iListIsReadOnlyWorks: function () {
+            var list = Bridge.cast(new Uint16Array(System.Array.init(0, 0)), System.Collections.Generic.IList$1(System.Single));
+            Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
+        },
+        iCollectionIsReadOnlyWorks: function () {
+            var list = Bridge.cast(new Uint16Array(System.Array.init(0, 0)), System.Collections.Generic.ICollection$1(System.Single));
+            Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
         }
     });
 
@@ -8760,6 +8853,14 @@
 
             //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
             //Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
+        },
+        iListIsReadOnlyWorks: function () {
+            var list = Bridge.cast(new Uint32Array(System.Array.init(0, 0)), System.Collections.Generic.IList$1(System.Single));
+            Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
+        },
+        iCollectionIsReadOnlyWorks: function () {
+            var list = Bridge.cast(new Uint32Array(System.Array.init(0, 0)), System.Collections.Generic.ICollection$1(System.Single));
+            Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
         }
     });
 
@@ -8941,6 +9042,14 @@
 
             //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
             //Assert.Throws(() => list.RemoveAt(2), "RemoveAt");
+        },
+        iListIsReadOnlyWorks: function () {
+            var list = Bridge.cast(new Uint8Array(System.Array.init(0, 0)), System.Collections.Generic.IList$1(System.Single));
+            Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
+        },
+        iCollectionIsReadOnlyWorks: function () {
+            var list = Bridge.cast(new Uint8Array(System.Array.init(0, 0)), System.Collections.Generic.ICollection$1(System.Single));
+            Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
         }
     });
 
@@ -9125,6 +9234,14 @@
 
             //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
             //Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
+        },
+        iListIsReadOnlyWorks: function () {
+            var list = Bridge.cast(new Uint8ClampedArray(System.Array.init(0, 0)), System.Collections.Generic.IList$1(System.Single));
+            Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
+        },
+        iCollectionIsReadOnlyWorks: function () {
+            var list = Bridge.cast(new Uint8ClampedArray(System.Array.init(0, 0)), System.Collections.Generic.ICollection$1(System.Single));
+            Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
         }
     });
 

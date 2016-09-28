@@ -320,5 +320,19 @@ namespace Bridge.ClientTest.Collections.Native
         //    var list = (IReadOnlyList<byte>)new Uint8ClampedArray(new byte[] { 3, 6, 2, 9, 5 });
         //    Assert.AreEqual(list[3], 9, "Get item");
         //}
+
+        [Test]
+        public void IListIsReadOnlyWorks()
+        {
+            var list = (IList<float>)new Uint8ClampedArray(new float[0]);
+            Assert.True(list.IsReadOnly);
+        }
+
+        [Test]
+        public void ICollectionIsReadOnlyWorks()
+        {
+            var list = (ICollection<float>)new Uint8ClampedArray(new float[0]);
+            Assert.True(list.IsReadOnly);
+        }
     }
 }

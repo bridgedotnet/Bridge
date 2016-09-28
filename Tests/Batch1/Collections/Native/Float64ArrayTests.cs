@@ -294,5 +294,19 @@ namespace Bridge.ClientTest.Collections.Native
         //    var list = (IReadOnlyList<double>)new Float64Array(new double[] { 3, 6, 2, 9, 5 });
         //    Assert.AreEqual(list[3], 9, "Get item");
         //}
+
+        [Test]
+        public void IListIsReadOnlyWorks()
+        {
+            var list = (IList<float>)new Float64Array(new float[0]);
+            Assert.True(list.IsReadOnly);
+        }
+
+        [Test]
+        public void ICollectionIsReadOnlyWorks()
+        {
+            var list = (ICollection<float>)new Float64Array(new float[0]);
+            Assert.True(list.IsReadOnly);
+        }
     }
 }

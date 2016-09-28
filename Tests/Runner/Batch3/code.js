@@ -7994,6 +7994,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             Bridge.Test.Assert.areEqual(0, System.Array.getItem(list, 0, System.Int32));
             Bridge.Test.Assert.true(System.Array.contains(list, 0, System.Int32));
             Bridge.Test.Assert.areEqual(100, System.Array.getCount(list, System.Int32));
+            Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Int32));
             Bridge.Test.Assert.null(Bridge.getEnumerator(list, "$1", System.Int32));
             Bridge.Test.Assert.areEqual(200, System.Array.indexOf(list, 0, 0, null, System.Int32));
             Bridge.Test.Assert.true(System.Array.remove(list, 0, System.Int32));
@@ -8007,6 +8008,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             Bridge.Test.Assert.areEqual(0, list.getItem(0));
             Bridge.Test.Assert.true(list.contains(0));
             Bridge.Test.Assert.areEqual(1000, list.getCount());
+            Bridge.Test.Assert.false(list.getIsReadOnly());
             Bridge.Test.Assert.null(list.getEnumerator());
             Bridge.Test.Assert.areEqual(2000, list.indexOf(0));
             Bridge.Test.Assert.true(list.remove(0));
@@ -8018,6 +8020,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             Bridge.Test.Assert.areEqual(0, System.Array.getItem(list2, 0, System.Int32));
             Bridge.Test.Assert.true(System.Array.contains(list2, 0, System.Int32));
             Bridge.Test.Assert.areEqual(1000, System.Array.getCount(list2, System.Int32));
+            Bridge.Test.Assert.false(list.getIsReadOnly());
             Bridge.Test.Assert.null(Bridge.getEnumerator(list2, "$1", System.Int32));
             Bridge.Test.Assert.areEqual(2000, System.Array.indexOf(list2, 0, 0, null, System.Int32));
             Bridge.Test.Assert.true(System.Array.remove(list2, 0, System.Int32));
@@ -8038,6 +8041,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             "System$Collections$Generic$IList$1$T$getItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem",
             "System$Collections$Generic$IList$1$T$setItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem",
             "System$Collections$Generic$ICollection$1$T$getCount", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getCount",
+            "getIsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getIsReadOnly",
             "System$Collections$Generic$ICollection$1$T$add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
             "System$Collections$Generic$ICollection$1$T$clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
             "System$Collections$Generic$ICollection$1$T$contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
@@ -8057,6 +8061,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         System$Collections$Generic$ICollection$1$T$getCount: function () {
             return 100;
+        },
+        getIsReadOnly: function () {
+            return true;
         },
         System$Collections$Generic$ICollection$1$T$add: function (item) {
         },
@@ -8093,6 +8100,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             "getItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem",
             "setItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem",
             "getCount", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getCount",
+            "getIsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getIsReadOnly",
             "add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
             "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
             "contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
@@ -8112,6 +8120,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         getCount: function () {
             return 1000;
+        },
+        getIsReadOnly: function () {
+            return false;
         },
         add: function (item) {
         },

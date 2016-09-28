@@ -276,6 +276,13 @@ namespace Bridge.ClientTest.Collections.Generic
         }
 
         [Test]
+        public void ICollectionIsReadOnlyWorks()
+        {
+            ICollection<string> l = new ReadOnlyCollection<string>(new string[0]);
+            Assert.True(l.IsReadOnly);
+        }
+
+        [Test]
         public void ICollectionContainsWorks()
         {
             IList<string> l = new ReadOnlyCollection<string>(new[] { "x", "y", "z" });
@@ -312,6 +319,13 @@ namespace Bridge.ClientTest.Collections.Generic
             IList<C> l = new ReadOnlyCollection<C>(new[] { new C(1), new C(2), new C(3) });
             Assert.AreEqual(1, l.IndexOf(new C(2)));
             Assert.AreEqual(-1, l.IndexOf(new C(4)));
+        }
+
+        [Test]
+        public void IListIsReadOnlyWorks()
+        {
+            IList<string> l = new ReadOnlyCollection<string>(new string[0]);
+            Assert.True(l.IsReadOnly);
         }
     }
 }

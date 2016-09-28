@@ -404,6 +404,13 @@ namespace Bridge.ClientTest
             }
 
             [Test]
+            public void ICollectionIsReadOnlyWorks()
+            {
+                ICollection<string> l = new[] { "x", "y", "z" };
+                Assert.True(l.IsReadOnly);
+            }
+
+            [Test]
             public void ICollectionAddWorks()
             {
                 IList<string> l = new[] { "x", "y", "z" };
@@ -489,6 +496,13 @@ namespace Bridge.ClientTest
                 Assert.True(l.Remove("y"));
                 Assert.False(l.Remove("a"));
                 Assert.AreDeepEqual(new[] { "x", "z" }, l);
+            }
+
+            [Test]
+            public void IListIsReadOnlyWorks()
+            {
+                IList<string> l = new[] { "x", "y", "z" };
+                Assert.True(l.IsReadOnly);
             }
 
             [Test]
