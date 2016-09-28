@@ -8879,6 +8879,83 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1810", {
+        testInterfaceIndexersAndCopyToAndIsReadOnly: function () {
+            var l = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1810.C$1(System.Int32))();
+            Bridge.Test.Assert.notNull$1(l, "IList created");
+
+            var c = Bridge.as(l, System.Collections.Generic.ICollection$1(System.Int32));
+            Bridge.Test.Assert.true$1(System.Array.getIsReadOnly(c, System.Int32), "IsReadOnly");
+
+            var a = [1, 2];
+            System.Array.copyTo(c, a, 0, System.Int32);
+            Bridge.Test.Assert.areEqual$1(0, a[0], "CopyTo()");
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1810.C$1", function (T) { return {
+        inherits: [System.Collections.Generic.IList$1(T)],
+        config: {
+            alias: [
+            "System$Collections$Generic$IList$1$T$getItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem",
+            "System$Collections$Generic$IList$1$T$setItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem",
+            "System$Collections$Generic$ICollection$1$T$getCount", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getCount",
+            "System$Collections$Generic$ICollection$1$T$getIsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getIsReadOnly",
+            "System$Collections$Generic$ICollection$1$T$add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
+            "System$Collections$Generic$ICollection$1$T$clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
+            "System$Collections$Generic$ICollection$1$T$contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
+            "System$Collections$Generic$ICollection$1$T$copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo",
+            "System$Collections$Generic$IEnumerable$1$T$getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
+            "System$Collections$Generic$IList$1$T$indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
+            "System$Collections$Generic$IList$1$T$insert", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert",
+            "System$Collections$Generic$ICollection$1$T$remove", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$remove",
+            "System$Collections$Generic$IList$1$T$removeAt", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt"
+            ]
+        },
+        System$Collections$Generic$IList$1$T$getItem: function (index) {
+            return Bridge.getDefaultValue(T);
+        },
+        System$Collections$Generic$IList$1$T$setItem: function (index, value) {
+
+        },
+        System$Collections$Generic$ICollection$1$T$getCount: function () {
+            throw new System.NotImplementedException();
+        },
+        System$Collections$Generic$ICollection$1$T$getIsReadOnly: function () {
+            return true;
+        },
+        System$Collections$Generic$ICollection$1$T$add: function (item) {
+            throw new System.NotImplementedException();
+        },
+        System$Collections$Generic$ICollection$1$T$clear: function () {
+            throw new System.NotImplementedException();
+        },
+        System$Collections$Generic$ICollection$1$T$contains: function (item) {
+            throw new System.NotImplementedException();
+        },
+        System$Collections$Generic$ICollection$1$T$copyTo: function (array, arrayIndex) {
+            array[0] = Bridge.getDefaultValue(T);
+        },
+        System$Collections$IEnumerable$getEnumerator: function () {
+            throw new System.NotImplementedException();
+        },
+        System$Collections$Generic$IEnumerable$1$T$getEnumerator: function () {
+            throw new System.NotImplementedException();
+        },
+        System$Collections$Generic$IList$1$T$indexOf: function (item) {
+            throw new System.NotImplementedException();
+        },
+        System$Collections$Generic$IList$1$T$insert: function (index, item) {
+            throw new System.NotImplementedException();
+        },
+        System$Collections$Generic$ICollection$1$T$remove: function (item) {
+            throw new System.NotImplementedException();
+        },
+        System$Collections$Generic$IList$1$T$removeAt: function (index) {
+            throw new System.NotImplementedException();
+        }
+    }; });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1812", {
         testDoubleConversion: function () {
             var a = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1812._Object.op_Implicit(1);
