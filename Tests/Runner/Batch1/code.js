@@ -7727,6 +7727,45 @@
         iCollectionIsReadOnlyWorks: function () {
             var list = Bridge.cast(new Float32Array(System.Array.init(0, 0)), System.Collections.Generic.ICollection$1(System.Single));
             Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
+        },
+        iCollectionCopyTo: function () {
+            var l = new Float32Array([0, 1, 2]);
+
+            var a1 = System.Array.init(3, 0);
+            System.Array.copyTo(l, a1, 0, System.Single);
+
+            Bridge.Test.Assert.areEqual$1(0, a1[0], "1.Element 0");
+            Bridge.Test.Assert.areEqual$1(1, a1[1], "1.Element 1");
+            Bridge.Test.Assert.areEqual$1(2, a1[2], "1.Element 2");
+
+            var a2 = System.Array.init(5, 0);
+            System.Array.copyTo(l, a2, 1, System.Single);
+
+            Bridge.Test.Assert.areEqual$1(0, a2[0], "2.Element 0");
+            Bridge.Test.Assert.areEqual$1(0, a2[1], "2.Element 1");
+            Bridge.Test.Assert.areEqual$1(1, a2[2], "2.Element 2");
+            Bridge.Test.Assert.areEqual$1(2, a2[3], "2.Element 3");
+            Bridge.Test.Assert.areEqual$1(0, a2[4], "2.Element 4");
+
+            Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                System.Array.copyTo(l, null, 0, System.Single);
+            }, "3.null");
+
+            var a3 = System.Array.init(2, 0);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a3, 0, System.Single);
+            }, "3.Short array");
+
+            var a4 = System.Array.init(3, 0);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a4, 1, System.Single);
+            }, "3.Start index 1");
+            Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
+                System.Array.copyTo(l, a4, -1, System.Single);
+            }, "3.Negative start index");
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a4, 3, System.Single);
+            }, "3.Start index 3");
         }
     });
 
@@ -7916,6 +7955,45 @@
         iCollectionIsReadOnlyWorks: function () {
             var list = Bridge.cast(new Float64Array(System.Array.init(0, 0)), System.Collections.Generic.ICollection$1(System.Single));
             Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
+        },
+        iCollectionCopyTo: function () {
+            var l = new Float64Array([0, 1, 2]);
+
+            var a1 = System.Array.init(3, 0);
+            System.Array.copyTo(l, a1, 0, System.Double);
+
+            Bridge.Test.Assert.areEqual$1(0, a1[0], "1.Element 0");
+            Bridge.Test.Assert.areEqual$1(1, a1[1], "1.Element 1");
+            Bridge.Test.Assert.areEqual$1(2, a1[2], "1.Element 2");
+
+            var a2 = System.Array.init(5, 0);
+            System.Array.copyTo(l, a2, 1, System.Double);
+
+            Bridge.Test.Assert.areEqual$1(0, a2[0], "2.Element 0");
+            Bridge.Test.Assert.areEqual$1(0, a2[1], "2.Element 1");
+            Bridge.Test.Assert.areEqual$1(1, a2[2], "2.Element 2");
+            Bridge.Test.Assert.areEqual$1(2, a2[3], "2.Element 3");
+            Bridge.Test.Assert.areEqual$1(0, a2[4], "2.Element 4");
+
+            Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                System.Array.copyTo(l, null, 0, System.Double);
+            }, "3.null");
+
+            var a3 = System.Array.init(2, 0);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a3, 0, System.Double);
+            }, "3.Short array");
+
+            var a4 = System.Array.init(3, 0);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a4, 1, System.Double);
+            }, "3.Start index 1");
+            Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
+                System.Array.copyTo(l, a4, -1, System.Double);
+            }, "3.Negative start index");
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a4, 3, System.Double);
+            }, "3.Start index 3");
         }
     });
 
@@ -8105,6 +8183,45 @@
         iCollectionIsReadOnlyWorks: function () {
             var list = Bridge.cast(new Int16Array(System.Array.init(0, 0)), System.Collections.Generic.ICollection$1(System.Single));
             Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
+        },
+        iCollectionCopyTo: function () {
+            var l = new Int16Array([0, 1, 2]);
+
+            var a1 = System.Array.init(3, 0);
+            System.Array.copyTo(l, a1, 0, System.Int16);
+
+            Bridge.Test.Assert.areEqual$1(0, a1[0], "1.Element 0");
+            Bridge.Test.Assert.areEqual$1(1, a1[1], "1.Element 1");
+            Bridge.Test.Assert.areEqual$1(2, a1[2], "1.Element 2");
+
+            var a2 = System.Array.init(5, 0);
+            System.Array.copyTo(l, a2, 1, System.Int16);
+
+            Bridge.Test.Assert.areEqual$1(0, a2[0], "2.Element 0");
+            Bridge.Test.Assert.areEqual$1(0, a2[1], "2.Element 1");
+            Bridge.Test.Assert.areEqual$1(1, a2[2], "2.Element 2");
+            Bridge.Test.Assert.areEqual$1(2, a2[3], "2.Element 3");
+            Bridge.Test.Assert.areEqual$1(0, a2[4], "2.Element 4");
+
+            Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                System.Array.copyTo(l, null, 0, System.Int16);
+            }, "3.null");
+
+            var a3 = System.Array.init(2, 0);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a3, 0, System.Int16);
+            }, "3.Short array");
+
+            var a4 = System.Array.init(3, 0);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a4, 1, System.Int16);
+            }, "3.Start index 1");
+            Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
+                System.Array.copyTo(l, a4, -1, System.Int16);
+            }, "3.Negative start index");
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a4, 3, System.Int16);
+            }, "3.Start index 3");
         }
     });
 
@@ -8294,6 +8411,45 @@
         iCollectionIsReadOnlyWorks: function () {
             var list = Bridge.cast(new Int32Array(System.Array.init(0, 0)), System.Collections.Generic.ICollection$1(System.Single));
             Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
+        },
+        iCollectionCopyTo: function () {
+            var l = new Int32Array([0, 1, 2]);
+
+            var a1 = System.Array.init(3, 0);
+            System.Array.copyTo(l, a1, 0, System.Int32);
+
+            Bridge.Test.Assert.areEqual$1(0, a1[0], "1.Element 0");
+            Bridge.Test.Assert.areEqual$1(1, a1[1], "1.Element 1");
+            Bridge.Test.Assert.areEqual$1(2, a1[2], "1.Element 2");
+
+            var a2 = System.Array.init(5, 0);
+            System.Array.copyTo(l, a2, 1, System.Int32);
+
+            Bridge.Test.Assert.areEqual$1(0, a2[0], "2.Element 0");
+            Bridge.Test.Assert.areEqual$1(0, a2[1], "2.Element 1");
+            Bridge.Test.Assert.areEqual$1(1, a2[2], "2.Element 2");
+            Bridge.Test.Assert.areEqual$1(2, a2[3], "2.Element 3");
+            Bridge.Test.Assert.areEqual$1(0, a2[4], "2.Element 4");
+
+            Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                System.Array.copyTo(l, null, 0, System.Int32);
+            }, "3.null");
+
+            var a3 = System.Array.init(2, 0);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a3, 0, System.Int32);
+            }, "3.Short array");
+
+            var a4 = System.Array.init(3, 0);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a4, 1, System.Int32);
+            }, "3.Start index 1");
+            Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
+                System.Array.copyTo(l, a4, -1, System.Int32);
+            }, "3.Negative start index");
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a4, 3, System.Int32);
+            }, "3.Start index 3");
         }
     });
 
@@ -8483,6 +8639,45 @@
         iCollectionIsReadOnlyWorks: function () {
             var list = Bridge.cast(new Int8Array(System.Array.init(0, 0)), System.Collections.Generic.ICollection$1(System.Single));
             Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
+        },
+        iCollectionCopyTo: function () {
+            var l = new Int8Array([0, 1, 2]);
+
+            var a1 = System.Array.init(3, 0);
+            System.Array.copyTo(l, a1, 0, System.SByte);
+
+            Bridge.Test.Assert.areEqual$1(0, a1[0], "1.Element 0");
+            Bridge.Test.Assert.areEqual$1(1, a1[1], "1.Element 1");
+            Bridge.Test.Assert.areEqual$1(2, a1[2], "1.Element 2");
+
+            var a2 = System.Array.init(5, 0);
+            System.Array.copyTo(l, a2, 1, System.SByte);
+
+            Bridge.Test.Assert.areEqual$1(0, a2[0], "2.Element 0");
+            Bridge.Test.Assert.areEqual$1(0, a2[1], "2.Element 1");
+            Bridge.Test.Assert.areEqual$1(1, a2[2], "2.Element 2");
+            Bridge.Test.Assert.areEqual$1(2, a2[3], "2.Element 3");
+            Bridge.Test.Assert.areEqual$1(0, a2[4], "2.Element 4");
+
+            Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                System.Array.copyTo(l, null, 0, System.SByte);
+            }, "3.null");
+
+            var a3 = System.Array.init(2, 0);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a3, 0, System.SByte);
+            }, "3.Short array");
+
+            var a4 = System.Array.init(3, 0);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a4, 1, System.SByte);
+            }, "3.Start index 1");
+            Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
+                System.Array.copyTo(l, a4, -1, System.SByte);
+            }, "3.Negative start index");
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a4, 3, System.SByte);
+            }, "3.Start index 3");
         }
     });
 
@@ -8672,6 +8867,45 @@
         iCollectionIsReadOnlyWorks: function () {
             var list = Bridge.cast(new Uint16Array(System.Array.init(0, 0)), System.Collections.Generic.ICollection$1(System.Single));
             Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
+        },
+        iCollectionCopyTo: function () {
+            var l = new Uint16Array([0, 1, 2]);
+
+            var a1 = System.Array.init(3, 0);
+            System.Array.copyTo(l, a1, 0, System.UInt16);
+
+            Bridge.Test.Assert.areEqual$1(0, a1[0], "1.Element 0");
+            Bridge.Test.Assert.areEqual$1(1, a1[1], "1.Element 1");
+            Bridge.Test.Assert.areEqual$1(2, a1[2], "1.Element 2");
+
+            var a2 = System.Array.init(5, 0);
+            System.Array.copyTo(l, a2, 1, System.UInt16);
+
+            Bridge.Test.Assert.areEqual$1(0, a2[0], "2.Element 0");
+            Bridge.Test.Assert.areEqual$1(0, a2[1], "2.Element 1");
+            Bridge.Test.Assert.areEqual$1(1, a2[2], "2.Element 2");
+            Bridge.Test.Assert.areEqual$1(2, a2[3], "2.Element 3");
+            Bridge.Test.Assert.areEqual$1(0, a2[4], "2.Element 4");
+
+            Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                System.Array.copyTo(l, null, 0, System.UInt16);
+            }, "3.null");
+
+            var a3 = System.Array.init(2, 0);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a3, 0, System.UInt16);
+            }, "3.Short array");
+
+            var a4 = System.Array.init(3, 0);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a4, 1, System.UInt16);
+            }, "3.Start index 1");
+            Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
+                System.Array.copyTo(l, a4, -1, System.UInt16);
+            }, "3.Negative start index");
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a4, 3, System.UInt16);
+            }, "3.Start index 3");
         }
     });
 
@@ -8861,6 +9095,45 @@
         iCollectionIsReadOnlyWorks: function () {
             var list = Bridge.cast(new Uint32Array(System.Array.init(0, 0)), System.Collections.Generic.ICollection$1(System.Single));
             Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
+        },
+        iCollectionCopyTo: function () {
+            var l = new Uint32Array([0, 1, 2]);
+
+            var a1 = System.Array.init(3, 0);
+            System.Array.copyTo(l, a1, 0, System.UInt32);
+
+            Bridge.Test.Assert.areEqual$1(0, a1[0], "1.Element 0");
+            Bridge.Test.Assert.areEqual$1(1, a1[1], "1.Element 1");
+            Bridge.Test.Assert.areEqual$1(2, a1[2], "1.Element 2");
+
+            var a2 = System.Array.init(5, 0);
+            System.Array.copyTo(l, a2, 1, System.UInt32);
+
+            Bridge.Test.Assert.areEqual$1(0, a2[0], "2.Element 0");
+            Bridge.Test.Assert.areEqual$1(0, a2[1], "2.Element 1");
+            Bridge.Test.Assert.areEqual$1(1, a2[2], "2.Element 2");
+            Bridge.Test.Assert.areEqual$1(2, a2[3], "2.Element 3");
+            Bridge.Test.Assert.areEqual$1(0, a2[4], "2.Element 4");
+
+            Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                System.Array.copyTo(l, null, 0, System.UInt32);
+            }, "3.null");
+
+            var a3 = System.Array.init(2, 0);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a3, 0, System.UInt32);
+            }, "3.Short array");
+
+            var a4 = System.Array.init(3, 0);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a4, 1, System.UInt32);
+            }, "3.Start index 1");
+            Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
+                System.Array.copyTo(l, a4, -1, System.UInt32);
+            }, "3.Negative start index");
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a4, 3, System.UInt32);
+            }, "3.Start index 3");
         }
     });
 
@@ -9050,6 +9323,45 @@
         iCollectionIsReadOnlyWorks: function () {
             var list = Bridge.cast(new Uint8Array(System.Array.init(0, 0)), System.Collections.Generic.ICollection$1(System.Single));
             Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
+        },
+        iCollectionCopyTo: function () {
+            var l = new Uint8Array([0, 1, 2]);
+
+            var a1 = System.Array.init(3, 0);
+            System.Array.copyTo(l, a1, 0, System.Byte);
+
+            Bridge.Test.Assert.areEqual$1(0, a1[0], "1.Element 0");
+            Bridge.Test.Assert.areEqual$1(1, a1[1], "1.Element 1");
+            Bridge.Test.Assert.areEqual$1(2, a1[2], "1.Element 2");
+
+            var a2 = System.Array.init(5, 0);
+            System.Array.copyTo(l, a2, 1, System.Byte);
+
+            Bridge.Test.Assert.areEqual$1(0, a2[0], "2.Element 0");
+            Bridge.Test.Assert.areEqual$1(0, a2[1], "2.Element 1");
+            Bridge.Test.Assert.areEqual$1(1, a2[2], "2.Element 2");
+            Bridge.Test.Assert.areEqual$1(2, a2[3], "2.Element 3");
+            Bridge.Test.Assert.areEqual$1(0, a2[4], "2.Element 4");
+
+            Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                System.Array.copyTo(l, null, 0, System.Byte);
+            }, "3.null");
+
+            var a3 = System.Array.init(2, 0);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a3, 0, System.Byte);
+            }, "3.Short array");
+
+            var a4 = System.Array.init(3, 0);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a4, 1, System.Byte);
+            }, "3.Start index 1");
+            Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
+                System.Array.copyTo(l, a4, -1, System.Byte);
+            }, "3.Negative start index");
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a4, 3, System.Byte);
+            }, "3.Start index 3");
         }
     });
 
@@ -9242,6 +9554,45 @@
         iCollectionIsReadOnlyWorks: function () {
             var list = Bridge.cast(new Uint8ClampedArray(System.Array.init(0, 0)), System.Collections.Generic.ICollection$1(System.Single));
             Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Single));
+        },
+        iCollectionCopyTo: function () {
+            var l = new Uint8ClampedArray([0, 1, 2]);
+
+            var a1 = System.Array.init(3, 0);
+            System.Array.copyTo(l, a1, 0, System.Byte);
+
+            Bridge.Test.Assert.areEqual$1(0, a1[0], "1.Element 0");
+            Bridge.Test.Assert.areEqual$1(1, a1[1], "1.Element 1");
+            Bridge.Test.Assert.areEqual$1(2, a1[2], "1.Element 2");
+
+            var a2 = System.Array.init(5, 0);
+            System.Array.copyTo(l, a2, 1, System.Byte);
+
+            Bridge.Test.Assert.areEqual$1(0, a2[0], "2.Element 0");
+            Bridge.Test.Assert.areEqual$1(0, a2[1], "2.Element 1");
+            Bridge.Test.Assert.areEqual$1(1, a2[2], "2.Element 2");
+            Bridge.Test.Assert.areEqual$1(2, a2[3], "2.Element 3");
+            Bridge.Test.Assert.areEqual$1(0, a2[4], "2.Element 4");
+
+            Bridge.Test.Assert.throws$7(System.ArgumentNullException, function () {
+                System.Array.copyTo(l, null, 0, System.Byte);
+            }, "3.null");
+
+            var a3 = System.Array.init(2, 0);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a3, 0, System.Byte);
+            }, "3.Short array");
+
+            var a4 = System.Array.init(3, 0);
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a4, 1, System.Byte);
+            }, "3.Start index 1");
+            Bridge.Test.Assert.throws$7(System.ArgumentOutOfRangeException, function () {
+                System.Array.copyTo(l, a4, -1, System.Byte);
+            }, "3.Negative start index");
+            Bridge.Test.Assert.throws$7(System.ArgumentException, function () {
+                System.Array.copyTo(l, a4, 3, System.Byte);
+            }, "3.Start index 3");
         }
     });
 
