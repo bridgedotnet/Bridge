@@ -14,6 +14,14 @@ namespace System.Collections.ObjectModel
             private set;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the ReadOnlyCollection is read-only.
+        /// </summary>
+        extern bool ICollection<T>.IsReadOnly
+        {
+            get;
+        }
+
         [AccessorsIndexer]
         public extern T this[int index]
         {

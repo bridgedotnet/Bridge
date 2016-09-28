@@ -38,6 +38,14 @@ namespace Bridge.ClientTest.Batch4.Collections.Generic
                 }
             }
 
+            public bool IsReadOnly
+            {
+                get
+                {
+                    return true;
+                }
+            }
+
             public void Add(string item)
             {
                 Items.Add(item);

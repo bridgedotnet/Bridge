@@ -294,5 +294,51 @@ namespace Bridge.ClientTest.Collections.Native
         //    var list = (IReadOnlyList<sbyte>)new Int8Array(new sbyte[] { 3, 6, 2, 9, 5 });
         //    Assert.AreEqual(list[3], 9, "Get item");
         //}
+
+        [Test]
+        public void IListIsReadOnlyWorks()
+        {
+            var list = (IList<float>)new Int8Array(new float[0]);
+            Assert.True(list.IsReadOnly);
+        }
+
+        [Test]
+        public void ICollectionIsReadOnlyWorks()
+        {
+            var list = (ICollection<float>)new Int8Array(new float[0]);
+            Assert.True(list.IsReadOnly);
+        }
+
+        [Test]
+        public void ICollectionCopyTo()
+        {
+            ICollection<sbyte> l = new Int8Array(new sbyte[] { 0, 1, 2 });
+
+            var a1 = new sbyte[3];
+            l.CopyTo(a1, 0);
+
+            Assert.AreEqual(0, a1[0], "1.Element 0");
+            Assert.AreEqual(1, a1[1], "1.Element 1");
+            Assert.AreEqual(2, a1[2], "1.Element 2");
+
+            var a2 = new sbyte[5];
+            l.CopyTo(a2, 1);
+
+            Assert.AreEqual(0, a2[0], "2.Element 0");
+            Assert.AreEqual(0, a2[1], "2.Element 1");
+            Assert.AreEqual(1, a2[2], "2.Element 2");
+            Assert.AreEqual(2, a2[3], "2.Element 3");
+            Assert.AreEqual(0, a2[4], "2.Element 4");
+
+            Assert.Throws<ArgumentNullException>(() => { l.CopyTo(null, 0); }, "3.null");
+
+            var a3 = new sbyte[2];
+            Assert.Throws<ArgumentException>(() => { l.CopyTo(a3, 0); }, "3.Short array");
+
+            var a4 = new sbyte[3];
+            Assert.Throws<ArgumentException>(() => { l.CopyTo(a4, 1); }, "3.Start index 1");
+            Assert.Throws<ArgumentOutOfRangeException>(() => { l.CopyTo(a4, -1); }, "3.Negative start index");
+            Assert.Throws<ArgumentException>(() => { l.CopyTo(a4, 3); }, "3.Start index 3");
+        }
     }
 }

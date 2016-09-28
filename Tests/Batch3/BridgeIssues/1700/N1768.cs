@@ -91,6 +91,14 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 }
             }
 
+            public bool IsReadOnly
+            {
+                get
+                {
+                    return true;
+                }
+            }
+
             void ICollection<T>.Add(T item)
             {
             }
@@ -158,6 +166,14 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 get
                 {
                     return 1000;
+                }
+            }
+
+            public bool IsReadOnly
+            {
+                get
+                {
+                    return false;
                 }
             }
 
@@ -238,6 +254,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual(0, list[0]);
             Assert.True(list.Contains(0));
             Assert.AreEqual(100, list.Count);
+            Assert.True(list.IsReadOnly);
             Assert.Null(list.GetEnumerator());
             Assert.AreEqual(200, list.IndexOf(0));
             Assert.True(list.Remove(0));
@@ -254,6 +271,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual(0, list[0]);
             Assert.True(list.Contains(0));
             Assert.AreEqual(1000, list.Count);
+            Assert.False(list.IsReadOnly);
             Assert.Null(list.GetEnumerator());
             Assert.AreEqual(2000, list.IndexOf(0));
             Assert.True(list.Remove(0));
@@ -265,6 +283,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual(0, list2[0]);
             Assert.True(list2.Contains(0));
             Assert.AreEqual(1000, list2.Count);
+            Assert.False(list.IsReadOnly);
             Assert.Null(list2.GetEnumerator());
             Assert.AreEqual(2000, list2.IndexOf(0));
             Assert.True(list2.Remove(0));

@@ -124,6 +124,7 @@
             QUnit.test("Array - Set1 SortExceptionsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArrayTestsSet1.sortExceptionsWorks);
             QUnit.test("Array - Set1 ForeachWhenCastToIListWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArrayTestsSet1.foreachWhenCastToIListWorks);
             QUnit.test("Array - Set1 ICollectionCountWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArrayTestsSet1.iCollectionCountWorks);
+            QUnit.test("Array - Set1 ICollectionIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArrayTestsSet1.iCollectionIsReadOnlyWorks);
             QUnit.test("Array - Set1 ICollectionAddWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArrayTestsSet1.iCollectionAddWorks);
             QUnit.test("Array - Set1 ICollectionClearWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArrayTestsSet1.iCollectionClearWorks);
             QUnit.test("Array - Set1 ICollectionContainsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArrayTestsSet1.iCollectionContainsWorks);
@@ -132,6 +133,7 @@
             QUnit.test("Array - Set1 ICollectionCopyToOffsetBoundWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArrayTestsSet1.iCollectionCopyToOffsetBoundWorks);
             QUnit.test("Array - Set1 ICollectionCopyToIllegalBoundWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArrayTestsSet1.iCollectionCopyToIllegalBoundWorks);
             QUnit.test("Array - Set1 ICollectionRemoveWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArrayTestsSet1.iCollectionRemoveWorks);
+            QUnit.test("Array - Set1 IListIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArrayTestsSet1.iListIsReadOnlyWorks);
             QUnit.test("Array - Set1 IListIndexingWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArrayTestsSet1.iListIndexingWorks);
             QUnit.test("Array - Set1 IListIndexOfWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArrayTestsSet1.iListIndexOfWorks);
             QUnit.test("Array - Set1 IListIndexOfUsesEqualsMethod", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArrayTestsSet1.iListIndexOfUsesEqualsMethod);
@@ -183,6 +185,9 @@
             QUnit.test("ICollection - ArrayCastToICollectionCountWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ICollectionTests.arrayCastToICollectionCountWorks);
             QUnit.test("ICollection - ClassImplementingICollectionCountWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ICollectionTests.classImplementingICollectionCountWorks);
             QUnit.test("ICollection - ClassImplementingICollectionCastToICollectionCountWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ICollectionTests.classImplementingICollectionCastToICollectionCountWorks);
+            QUnit.test("ICollection - ArrayCastToICollectionIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ICollectionTests.arrayCastToICollectionIsReadOnlyWorks);
+            QUnit.test("ICollection - ClassImplementingICollectionIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ICollectionTests.classImplementingICollectionIsReadOnlyWorks);
+            QUnit.test("ICollection - ClassImplementingICollectionCastToICollectionIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ICollectionTests.classImplementingICollectionCastToICollectionIsReadOnlyWorks);
             QUnit.test("ICollection - ClassImplementingICollectionAddWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ICollectionTests.classImplementingICollectionAddWorks);
             QUnit.test("ICollection - ClassImplementingICollectionCastToICollectionAddWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ICollectionTests.classImplementingICollectionCastToICollectionAddWorks);
             QUnit.test("ICollection - ClassImplementingICollectionClearWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ICollectionTests.classImplementingICollectionClearWorks);
@@ -221,6 +226,9 @@
             QUnit.test("IList - ArrayCastToIListSetItemWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IListTests.arrayCastToIListSetItemWorks);
             QUnit.test("IList - ClassImplementingIListSetItemWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IListTests.classImplementingIListSetItemWorks);
             QUnit.test("IList - ClassImplementingIListCastToIListSetItemWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IListTests.classImplementingIListCastToIListSetItemWorks);
+            QUnit.test("IList - ArrayCastToIListIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IListTests.arrayCastToIListIsReadOnlyWorks);
+            QUnit.test("IList - ClassImplementingIListIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IListTests.classImplementingIListIsReadOnlyWorks);
+            QUnit.test("IList - ClassImplementingIListCastToIListIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IListTests.classImplementingIListCastToIListIsReadOnlyWorks);
             QUnit.test("IList - ArrayCastToIListIndexOfWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IListTests.arrayCastToIListIndexOfWorks);
             QUnit.test("IList - ClassImplementingIListIndexOfWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IListTests.classImplementingIListIndexOfWorks);
             QUnit.test("IList - ClassImplementingIListCastToIListIndexOfWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IListTests.classImplementingIListCastToIListIndexOfWorks);
@@ -321,11 +329,13 @@
             QUnit.test("ReadOnlyCollection - ForeachWhenCastToIEnumerableWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ReadOnlyCollectionTests.foreachWhenCastToIEnumerableWorks);
             QUnit.test("ReadOnlyCollection - IEnumerableGetEnumeratorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ReadOnlyCollectionTests.iEnumerableGetEnumeratorWorks);
             QUnit.test("ReadOnlyCollection - ICollectionCountWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ReadOnlyCollectionTests.iCollectionCountWorks);
+            QUnit.test("ReadOnlyCollection - ICollectionIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ReadOnlyCollectionTests.iCollectionIsReadOnlyWorks);
             QUnit.test("ReadOnlyCollection - ICollectionContainsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ReadOnlyCollectionTests.iCollectionContainsWorks);
             QUnit.test("ReadOnlyCollection - ICollectionContainsUsesEqualsMethod", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ReadOnlyCollectionTests.iCollectionContainsUsesEqualsMethod);
             QUnit.test("ReadOnlyCollection - IListIndexingWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ReadOnlyCollectionTests.iListIndexingWorks);
             QUnit.test("ReadOnlyCollection - IListIndexOfWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ReadOnlyCollectionTests.iListIndexOfWorks);
             QUnit.test("ReadOnlyCollection - IListIndexOfUsesEqualsMethod", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ReadOnlyCollectionTests.iListIndexOfUsesEqualsMethod);
+            QUnit.test("ReadOnlyCollection - IListIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ReadOnlyCollectionTests.iListIsReadOnlyWorks);
             QUnit.test("WeakMap - GettingSettingAndDeletingWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_WeakMapTests.gettingSettingAndDeletingWorks);
             QUnit.test("MultidimArray - TypePropertiesAreCorrect", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_MultidimArrayTests.typePropertiesAreCorrect);
             QUnit.test("MultidimArray - LengthWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_MultidimArrayTests.lengthWorks);
@@ -2337,6 +2347,9 @@
             QUnit.test("Float32ArrayTests - IEnumerableGetEnumeratorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.iEnumerableGetEnumeratorWorks);
             QUnit.test("Float32ArrayTests - ICollectionMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.iCollectionMethodsWork_SPI_1559);
             QUnit.test("Float32ArrayTests - IListMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.iListMethodsWork_SPI_1559);
+            QUnit.test("Float32ArrayTests - IListIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.iListIsReadOnlyWorks);
+            QUnit.test("Float32ArrayTests - ICollectionIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.iCollectionIsReadOnlyWorks);
+            QUnit.test("Float32ArrayTests - ICollectionCopyTo", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests.iCollectionCopyTo);
             QUnit.test("Float64ArrayTests - LengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.lengthConstructorWorks);
             QUnit.test("Float64ArrayTests - ConstructorFromIntWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.constructorFromIntWorks);
             QUnit.test("Float64ArrayTests - CopyConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.copyConstructorWorks);
@@ -2362,6 +2375,9 @@
             QUnit.test("Float64ArrayTests - IEnumerableGetEnumeratorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.iEnumerableGetEnumeratorWorks);
             QUnit.test("Float64ArrayTests - ICollectionMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.iCollectionMethodsWork_SPI_1559);
             QUnit.test("Float64ArrayTests - IListMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.iListMethodsWork_SPI_1559);
+            QUnit.test("Float64ArrayTests - IListIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.iListIsReadOnlyWorks);
+            QUnit.test("Float64ArrayTests - ICollectionIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.iCollectionIsReadOnlyWorks);
+            QUnit.test("Float64ArrayTests - ICollectionCopyTo", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests.iCollectionCopyTo);
             QUnit.test("Int16ArrayTests - LengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.lengthConstructorWorks);
             QUnit.test("Int16ArrayTests - ConstructorFromIntWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.constructorFromIntWorks);
             QUnit.test("Int16ArrayTests - CopyConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.copyConstructorWorks);
@@ -2387,6 +2403,9 @@
             QUnit.test("Int16ArrayTests - IEnumerableGetEnumeratorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.iEnumerableGetEnumeratorWorks);
             QUnit.test("Int16ArrayTests - ICollectionMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.iCollectionMethodsWork_SPI_1559);
             QUnit.test("Int16ArrayTests - IListMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.iListMethodsWork_SPI_1559);
+            QUnit.test("Int16ArrayTests - IListIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.iListIsReadOnlyWorks);
+            QUnit.test("Int16ArrayTests - ICollectionIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.iCollectionIsReadOnlyWorks);
+            QUnit.test("Int16ArrayTests - ICollectionCopyTo", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests.iCollectionCopyTo);
             QUnit.test("Int32ArrayTests - LengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.lengthConstructorWorks);
             QUnit.test("Int32ArrayTests - ConstructorFromIntWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.constructorFromIntWorks);
             QUnit.test("Int32ArrayTests - CopyConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.copyConstructorWorks);
@@ -2412,6 +2431,9 @@
             QUnit.test("Int32ArrayTests - IEnumerableGetEnumeratorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.iEnumerableGetEnumeratorWorks);
             QUnit.test("Int32ArrayTests - ICollectionMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.iCollectionMethodsWork_SPI_1559);
             QUnit.test("Int32ArrayTests - IListMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.iListMethodsWork_SPI_1559);
+            QUnit.test("Int32ArrayTests - IListIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.iListIsReadOnlyWorks);
+            QUnit.test("Int32ArrayTests - ICollectionIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.iCollectionIsReadOnlyWorks);
+            QUnit.test("Int32ArrayTests - ICollectionCopyTo", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests.iCollectionCopyTo);
             QUnit.test("Int8ArrayTests - LengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.lengthConstructorWorks);
             QUnit.test("Int8ArrayTests - ConstructorFromIntWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.constructorFromIntWorks);
             QUnit.test("Int8ArrayTests - CopyConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.copyConstructorWorks);
@@ -2437,6 +2459,9 @@
             QUnit.test("Int8ArrayTests - IEnumerableGetEnumeratorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.iEnumerableGetEnumeratorWorks);
             QUnit.test("Int8ArrayTests - ICollectionMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.iCollectionMethodsWork_SPI_1559);
             QUnit.test("Int8ArrayTests - IListMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.iListMethodsWork_SPI_1559);
+            QUnit.test("Int8ArrayTests - IListIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.iListIsReadOnlyWorks);
+            QUnit.test("Int8ArrayTests - ICollectionIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.iCollectionIsReadOnlyWorks);
+            QUnit.test("Int8ArrayTests - ICollectionCopyTo", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests.iCollectionCopyTo);
             QUnit.test("Uint16ArrayTests - LengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.lengthConstructorWorks);
             QUnit.test("Uint16ArrayTests - ConstructorFromIntWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.constructorFromIntWorks);
             QUnit.test("Uint16ArrayTests - CopyConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.copyConstructorWorks);
@@ -2462,6 +2487,9 @@
             QUnit.test("Uint16ArrayTests - IEnumerableGetEnumeratorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.iEnumerableGetEnumeratorWorks);
             QUnit.test("Uint16ArrayTests - ICollectionMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.iCollectionMethodsWork_SPI_1559);
             QUnit.test("Uint16ArrayTests - IListMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.iListMethodsWork_SPI_1559);
+            QUnit.test("Uint16ArrayTests - IListIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.iListIsReadOnlyWorks);
+            QUnit.test("Uint16ArrayTests - ICollectionIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.iCollectionIsReadOnlyWorks);
+            QUnit.test("Uint16ArrayTests - ICollectionCopyTo", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests.iCollectionCopyTo);
             QUnit.test("Uint32ArrayTests - LengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.lengthConstructorWorks);
             QUnit.test("Uint32ArrayTests - ConstructorFromIntWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.constructorFromIntWorks);
             QUnit.test("Uint32ArrayTests - CopyConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.copyConstructorWorks);
@@ -2487,6 +2515,9 @@
             QUnit.test("Uint32ArrayTests - IEnumerableGetEnumeratorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.iEnumerableGetEnumeratorWorks);
             QUnit.test("Uint32ArrayTests - ICollectionMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.iCollectionMethodsWork_SPI_1559);
             QUnit.test("Uint32ArrayTests - IListMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.iListMethodsWork_SPI_1559);
+            QUnit.test("Uint32ArrayTests - IListIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.iListIsReadOnlyWorks);
+            QUnit.test("Uint32ArrayTests - ICollectionIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.iCollectionIsReadOnlyWorks);
+            QUnit.test("Uint32ArrayTests - ICollectionCopyTo", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests.iCollectionCopyTo);
             QUnit.test("Uint8ArrayTests - LengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.lengthConstructorWorks);
             QUnit.test("Uint8ArrayTests - ConstructorFromIntWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.constructorFromIntWorks);
             QUnit.test("Uint8ArrayTests - CopyConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.copyConstructorWorks);
@@ -2512,6 +2543,9 @@
             QUnit.test("Uint8ArrayTests - IEnumerableGetEnumeratorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.iEnumerableGetEnumeratorWorks);
             QUnit.test("Uint8ArrayTests - ICollectionMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.iCollectionMethodsWork_SPI_1559);
             QUnit.test("Uint8ArrayTests - IListMethodsWork_SPI_1559", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.iListMethodsWork_SPI_1559);
+            QUnit.test("Uint8ArrayTests - IListIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.iListIsReadOnlyWorks);
+            QUnit.test("Uint8ArrayTests - ICollectionIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.iCollectionIsReadOnlyWorks);
+            QUnit.test("Uint8ArrayTests - ICollectionCopyTo", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests.iCollectionCopyTo);
             QUnit.test("Uint8ClampedArrayTests - TypePropertiesAreCorrect_SPI_1560", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.typePropertiesAreCorrect_SPI_1560);
             QUnit.test("Uint8ClampedArrayTests - LengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.lengthConstructorWorks);
             QUnit.test("Uint8ClampedArrayTests - ConstructorFromIntWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.constructorFromIntWorks);
@@ -2538,6 +2572,9 @@
             QUnit.test("Uint8ClampedArrayTests - GetEnumeratorWorks_SPI_1401", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.getEnumeratorWorks_SPI_1401);
             QUnit.test("Uint8ClampedArrayTests - ICollectionMethodsWork_SPI_1559_1560", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.iCollectionMethodsWork_SPI_1559_1560);
             QUnit.test("Uint8ClampedArrayTests - IListMethodsWork_SPI_1559_1560", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.iListMethodsWork_SPI_1559_1560);
+            QUnit.test("Uint8ClampedArrayTests - IListIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.iListIsReadOnlyWorks);
+            QUnit.test("Uint8ClampedArrayTests - ICollectionIsReadOnlyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.iCollectionIsReadOnlyWorks);
+            QUnit.test("Uint8ClampedArrayTests - ICollectionCopyTo", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests.iCollectionCopyTo);
             QUnit.module("Utilities");
             QUnit.test("Environment - NewLineIsAStringContainingOnlyTheNewLineChar", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_EnvironmentTests.newLineIsAStringContainingOnlyTheNewLineChar);
             QUnit.module("СultureInfo");
@@ -2736,6 +2773,10 @@
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.ArrayTests.ArrayTestsSet1).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArrayTestsSet1);
                 t.getFixture().iCollectionCountWorks();
             },
+            iCollectionIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.ArrayTests.ArrayTestsSet1).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArrayTestsSet1);
+                t.getFixture().iCollectionIsReadOnlyWorks();
+            },
             iCollectionAddWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.ArrayTests.ArrayTestsSet1).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArrayTestsSet1);
                 t.getFixture().iCollectionAddWorks();
@@ -2767,6 +2808,10 @@
             iCollectionRemoveWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.ArrayTests.ArrayTestsSet1).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArrayTestsSet1);
                 t.getFixture().iCollectionRemoveWorks();
+            },
+            iListIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.ArrayTests.ArrayTestsSet1).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArrayTestsSet1);
+                t.getFixture().iListIsReadOnlyWorks();
             },
             iListIndexingWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.ArrayTests.ArrayTestsSet1).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_ArrayTestsSet1);
@@ -3424,6 +3469,18 @@
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.ICollectionTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ICollectionTests);
                 t.getFixture().classImplementingICollectionCastToICollectionCountWorks();
             },
+            arrayCastToICollectionIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.ICollectionTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ICollectionTests);
+                t.getFixture().arrayCastToICollectionIsReadOnlyWorks();
+            },
+            classImplementingICollectionIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.ICollectionTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ICollectionTests);
+                t.getFixture().classImplementingICollectionIsReadOnlyWorks();
+            },
+            classImplementingICollectionCastToICollectionIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.ICollectionTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ICollectionTests);
+                t.getFixture().classImplementingICollectionCastToICollectionIsReadOnlyWorks();
+            },
             classImplementingICollectionAddWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.ICollectionTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ICollectionTests);
                 t.getFixture().classImplementingICollectionAddWorks();
@@ -3593,6 +3650,18 @@
             classImplementingIListCastToIListSetItemWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.IListTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IListTests);
                 t.getFixture().classImplementingIListCastToIListSetItemWorks();
+            },
+            arrayCastToIListIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.IListTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IListTests);
+                t.getFixture().arrayCastToIListIsReadOnlyWorks();
+            },
+            classImplementingIListIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.IListTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IListTests);
+                t.getFixture().classImplementingIListIsReadOnlyWorks();
+            },
+            classImplementingIListCastToIListIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.IListTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IListTests);
+                t.getFixture().classImplementingIListCastToIListIsReadOnlyWorks();
             },
             arrayCastToIListIndexOfWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.IListTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IListTests);
@@ -4012,6 +4081,10 @@
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ReadOnlyCollectionTests);
                 t.getFixture().iCollectionCountWorks();
             },
+            iCollectionIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ReadOnlyCollectionTests);
+                t.getFixture().iCollectionIsReadOnlyWorks();
+            },
             iCollectionContainsWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ReadOnlyCollectionTests);
                 t.getFixture().iCollectionContainsWorks();
@@ -4031,6 +4104,10 @@
             iListIndexOfUsesEqualsMethod: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ReadOnlyCollectionTests);
                 t.getFixture().iListIndexOfUsesEqualsMethod();
+            },
+            iListIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.ReadOnlyCollectionTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_ReadOnlyCollectionTests);
+                t.getFixture().iListIsReadOnlyWorks();
             }
         }
     });
@@ -4251,6 +4328,18 @@
             iListMethodsWork_SPI_1559: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
                 t.getFixture().iListMethodsWork_SPI_1559();
+            },
+            iListIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().iListIsReadOnlyWorks();
+            },
+            iCollectionIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().iCollectionIsReadOnlyWorks();
+            },
+            iCollectionCopyTo: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float32ArrayTests);
+                t.getFixture().iCollectionCopyTo();
             }
         }
     });
@@ -4357,6 +4446,18 @@
             iListMethodsWork_SPI_1559: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
                 t.getFixture().iListMethodsWork_SPI_1559();
+            },
+            iListIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().iListIsReadOnlyWorks();
+            },
+            iCollectionIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().iCollectionIsReadOnlyWorks();
+            },
+            iCollectionCopyTo: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Float64ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Float64ArrayTests);
+                t.getFixture().iCollectionCopyTo();
             }
         }
     });
@@ -4463,6 +4564,18 @@
             iListMethodsWork_SPI_1559: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
                 t.getFixture().iListMethodsWork_SPI_1559();
+            },
+            iListIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().iListIsReadOnlyWorks();
+            },
+            iCollectionIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().iCollectionIsReadOnlyWorks();
+            },
+            iCollectionCopyTo: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int16ArrayTests);
+                t.getFixture().iCollectionCopyTo();
             }
         }
     });
@@ -4569,6 +4682,18 @@
             iListMethodsWork_SPI_1559: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
                 t.getFixture().iListMethodsWork_SPI_1559();
+            },
+            iListIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().iListIsReadOnlyWorks();
+            },
+            iCollectionIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().iCollectionIsReadOnlyWorks();
+            },
+            iCollectionCopyTo: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int32ArrayTests);
+                t.getFixture().iCollectionCopyTo();
             }
         }
     });
@@ -4675,6 +4800,18 @@
             iListMethodsWork_SPI_1559: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
                 t.getFixture().iListMethodsWork_SPI_1559();
+            },
+            iListIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().iListIsReadOnlyWorks();
+            },
+            iCollectionIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().iCollectionIsReadOnlyWorks();
+            },
+            iCollectionCopyTo: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Int8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Int8ArrayTests);
+                t.getFixture().iCollectionCopyTo();
             }
         }
     });
@@ -4781,6 +4918,18 @@
             iListMethodsWork_SPI_1559: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
                 t.getFixture().iListMethodsWork_SPI_1559();
+            },
+            iListIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().iListIsReadOnlyWorks();
+            },
+            iCollectionIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().iCollectionIsReadOnlyWorks();
+            },
+            iCollectionCopyTo: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint16ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint16ArrayTests);
+                t.getFixture().iCollectionCopyTo();
             }
         }
     });
@@ -4887,6 +5036,18 @@
             iListMethodsWork_SPI_1559: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
                 t.getFixture().iListMethodsWork_SPI_1559();
+            },
+            iListIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().iListIsReadOnlyWorks();
+            },
+            iCollectionIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().iCollectionIsReadOnlyWorks();
+            },
+            iCollectionCopyTo: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint32ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint32ArrayTests);
+                t.getFixture().iCollectionCopyTo();
             }
         }
     });
@@ -4993,6 +5154,18 @@
             iListMethodsWork_SPI_1559: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
                 t.getFixture().iListMethodsWork_SPI_1559();
+            },
+            iListIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().iListIsReadOnlyWorks();
+            },
+            iCollectionIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().iCollectionIsReadOnlyWorks();
+            },
+            iCollectionCopyTo: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ArrayTests);
+                t.getFixture().iCollectionCopyTo();
             }
         }
     });
@@ -5103,6 +5276,18 @@
             iListMethodsWork_SPI_1559_1560: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
                 t.getFixture().iListMethodsWork_SPI_1559_1560();
+            },
+            iListIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().iListIsReadOnlyWorks();
+            },
+            iCollectionIsReadOnlyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().iCollectionIsReadOnlyWorks();
+            },
+            iCollectionCopyTo: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Native.Uint8ClampedArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Native_Uint8ClampedArrayTests);
+                t.getFixture().iCollectionCopyTo();
             }
         }
     });

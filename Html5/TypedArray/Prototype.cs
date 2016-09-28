@@ -597,6 +597,14 @@ namespace Bridge.Html5.TypedArray
             get;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the TypedArray is read-only.
+        /// </summary>
+        extern bool ICollection<TypedElement>.IsReadOnly
+        {
+            get;
+        }
+
         extern void ICollection<TypedElement>.Add(TypedElement item);
 
         extern void ICollection<TypedElement>.Clear();

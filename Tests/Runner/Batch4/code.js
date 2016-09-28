@@ -1099,6 +1099,7 @@
             alias: [
             "getEnumerator", "System$Collections$Generic$IEnumerable$1$String$getEnumerator",
             "getCount", "System$Collections$Generic$ICollection$1$String$getCount",
+            "getIsReadOnly", "System$Collections$Generic$ICollection$1$String$getIsReadOnly",
             "add", "System$Collections$Generic$ICollection$1$String$add",
             "clear", "System$Collections$Generic$ICollection$1$String$clear",
             "contains", "System$Collections$Generic$ICollection$1$String$contains",
@@ -1112,6 +1113,9 @@
         },
         getCount: function () {
             return this.getItems().getCount();
+        },
+        getIsReadOnly: function () {
+            return true;
         },
         System$Collections$IEnumerable$getEnumerator: function () {
             return this.getEnumerator();
@@ -1616,6 +1620,7 @@
             alias: [
             "getEnumerator", "System$Collections$Generic$IEnumerable$1$String$getEnumerator",
             "getCount", "System$Collections$Generic$ICollection$1$String$getCount",
+            "getIsReadOnly", "System$Collections$Generic$ICollection$1$String$getIsReadOnly",
             "add", "System$Collections$Generic$ICollection$1$String$add",
             "clear", "System$Collections$Generic$ICollection$1$String$clear",
             "contains", "System$Collections$Generic$ICollection$1$String$contains",
@@ -1634,6 +1639,9 @@
         },
         getCount: function () {
             return this.getItems().getCount();
+        },
+        getIsReadOnly: function () {
+            return true;
         },
         getItem: function (index) {
             return this.getItems().getItem(index);
