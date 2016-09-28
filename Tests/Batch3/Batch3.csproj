@@ -368,8 +368,8 @@
     <Compile Include="BridgeIssues\1800\N1880.cs" />
     <Compile Include="BridgeIssues\1800\N1882.cs" />
     <Compile Include="BridgeIssues\1800\N1884.cs" />
-    <Compile Include="BridgeIssues\1800\N1892.cs" />
     <Compile Include="BridgeIssues\1800\N1886.cs" />
+    <Compile Include="BridgeIssues\1800\N1892.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
     <Compile Include="Utilities\DecimalHelper.cs" />

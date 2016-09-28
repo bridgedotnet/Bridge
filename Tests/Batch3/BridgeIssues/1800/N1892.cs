@@ -10,12 +10,14 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public class Obj
         {
             private object value;
-            public int length { get; set; }
+            public int length
+            {
+                get; set;
+            }
 
             public Obj()
             {
             }
-
 
             static public bool operator false(Obj o)
             {
@@ -33,12 +35,12 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 return new Obj() { value = v };
             }
 
-            static public implicit operator bool(Obj v)
+            static public implicit operator bool (Obj v)
             {
                 return v.value.As<bool>();
             }
 
-            static public implicit operator int(Obj v)
+            static public implicit operator int (Obj v)
             {
                 return v.value.As<int>();
             }
