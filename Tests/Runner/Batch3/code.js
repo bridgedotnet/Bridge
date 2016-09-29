@@ -10076,6 +10076,17 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1897", {
+        testCase: function () {
+            var pattern = "([)])";
+            var text = ")";
+
+            var rx = new System.Text.RegularExpressions.Regex.ctor(pattern);
+            var m = rx.match(text);
+            Bridge.Test.Assert.true(m.getSuccess());
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {

@@ -1578,6 +1578,15 @@
             QUnit.test("Regex: Char Classes - SubstractNestedGroupsTest1", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexCharClassesTests.substractNestedGroupsTest1);
             QUnit.test("Regex: Char Classes - SubstractNestedGroupsTest2", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexCharClassesTests.substractNestedGroupsTest2);
             QUnit.test("Regex: Char Classes - SubstractGroupIsNotLastTest", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexCharClassesTests.substractGroupIsNotLastTest);
+            QUnit.test("Regex: Char Classes - CharClassWithEscapedBracketInGroupTest", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexCharClassesTests.charClassWithEscapedBracketInGroupTest);
+            QUnit.test("Regex: Char Classes - CharClassWithEscapedSquareBracketInGroupTest", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexCharClassesTests.charClassWithEscapedSquareBracketInGroupTest);
+            QUnit.test("Regex: Char Classes - CharClassWithUnescapedBracketInGroupTest", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexCharClassesTests.charClassWithUnescapedBracketInGroupTest);
+            QUnit.test("Regex: Char Classes - CharClassWithUnescapedSquareBracketInGroupTest", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexCharClassesTests.charClassWithUnescapedSquareBracketInGroupTest);
+            QUnit.test("Regex: Char Classes - EmptyRangeTest", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexCharClassesTests.emptyRangeTest);
+            QUnit.test("Regex: Char Classes - ClosingSquareBracketTest1", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexCharClassesTests.closingSquareBracketTest1);
+            QUnit.test("Regex: Char Classes - ClosingSquareBracketTest2", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexCharClassesTests.closingSquareBracketTest2);
+            QUnit.test("Regex: Char Classes - OpeningSquareBracketTest1", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexCharClassesTests.openingSquareBracketTest1);
+            QUnit.test("Regex: Char Classes - OpeningSquareBracketTest2", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexCharClassesTests.openingSquareBracketTest2);
             QUnit.test("Regex: Escapes - MsdnBellCharTest", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexEscapesTests.msdnBellCharTest);
             QUnit.test("Regex: Escapes - MsdnBackspaceCharTest", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexEscapesTests.msdnBackspaceCharTest);
             QUnit.test("Regex: Escapes - MsdnTabCharTest", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexEscapesTests.msdnTabCharTest);
@@ -12740,6 +12749,42 @@
             substractGroupIsNotLastTest: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexCharClassesTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexCharClassesTests);
                 t.getFixture().substractGroupIsNotLastTest();
+            },
+            charClassWithEscapedBracketInGroupTest: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexCharClassesTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexCharClassesTests);
+                t.getFixture().charClassWithEscapedBracketInGroupTest();
+            },
+            charClassWithEscapedSquareBracketInGroupTest: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexCharClassesTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexCharClassesTests);
+                t.getFixture().charClassWithEscapedSquareBracketInGroupTest();
+            },
+            charClassWithUnescapedBracketInGroupTest: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexCharClassesTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexCharClassesTests);
+                t.getFixture().charClassWithUnescapedBracketInGroupTest();
+            },
+            charClassWithUnescapedSquareBracketInGroupTest: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexCharClassesTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexCharClassesTests);
+                t.getFixture().charClassWithUnescapedSquareBracketInGroupTest();
+            },
+            emptyRangeTest: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexCharClassesTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexCharClassesTests);
+                t.getFixture().emptyRangeTest();
+            },
+            closingSquareBracketTest1: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexCharClassesTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexCharClassesTests);
+                t.getFixture().closingSquareBracketTest1();
+            },
+            closingSquareBracketTest2: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexCharClassesTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexCharClassesTests);
+                t.getFixture().closingSquareBracketTest2();
+            },
+            openingSquareBracketTest1: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexCharClassesTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexCharClassesTests);
+                t.getFixture().openingSquareBracketTest1();
+            },
+            openingSquareBracketTest2: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexCharClassesTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexCharClassesTests);
+                t.getFixture().openingSquareBracketTest2();
             }
         }
     });
