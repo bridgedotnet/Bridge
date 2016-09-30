@@ -46,12 +46,17 @@ namespace Bridge.ClientTest.Diagnostics
         public void ElapsedWorks()
         {
             var watch = new Stopwatch();
+
             Assert.True(0 == watch.ElapsedTicks);
             Assert.True(0 == watch.ElapsedMilliseconds);
             Assert.AreEqual(new TimeSpan(), watch.Elapsed);
+
             watch.Start();
+
             DateTime before = DateTime.Now;
+
             bool hasIncreased = false;
+
             while ((DateTime.Now - before) < TimeSpan.FromMilliseconds(200))
             {
                 if (watch.ElapsedTicks > 0)
@@ -59,11 +64,15 @@ namespace Bridge.ClientTest.Diagnostics
                     hasIncreased = true;
                 }
             }
+
             watch.Stop();
+
             Assert.True(hasIncreased, "Times should increase inside the loop");
             Assert.True(watch.ElapsedMilliseconds > 150, "ElapsedMilliseconds > 150" + " Actual: " + watch.ElapsedMilliseconds);
             Assert.True(watch.Elapsed == new TimeSpan(0, 0, 0, 0, (int)watch.ElapsedMilliseconds), "Elapsed");
+
             var value = (double)watch.ElapsedTicks / Stopwatch.Frequency;
+
             Assert.True(value > 0.15 && value < 0.25, string.Format("value > 0.15 && value < 0.25 Actual: {0}, Ticks: {1}", value, watch.ElapsedTicks));
         }
 
@@ -71,13 +80,17 @@ namespace Bridge.ClientTest.Diagnostics
         public void GetTimestampWorks()
         {
             long t1 = Stopwatch.GetTimestamp();
+
             Assert.True((object)t1 is long, "is long");
 
             DateTime before = DateTime.Now;
+
             while ((DateTime.Now - before) < TimeSpan.FromMilliseconds(50))
             {
             }
+
             long t2 = Stopwatch.GetTimestamp();
+
             Assert.True(t2 > t1, "Should increase");
         }
     }

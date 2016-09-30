@@ -11,16 +11,15 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test(ExpectedCount = 3)]
         public static void GetTicksReturnsCorrectValue()
         {
-            var val = 946710000000;
-            var result = 9467100000000000;
+            long val = 9467100000000000;
 
             var ticks = new DateTime(val).Ticks;
             var ticksPlusOne = new DateTime(val).Ticks + 1;
             var ticksString = new DateTime(val).Ticks.ToString();
 
-            Assert.AreDeepEqual(result, ticks, "Ticks returning correct int value");
-            Assert.AreDeepEqual(result + 1, ticksPlusOne, "Adding to a Tick value is correct");
-            Assert.AreDeepEqual(result.ToString(), ticksString, "Ticks returning correct value if .ToString() called on int");
+            Assert.AreDeepEqual(val, ticks, "Ticks returning correct int value");
+            Assert.AreDeepEqual(val + 1, ticksPlusOne, "Adding to a Tick value is correct");
+            Assert.AreDeepEqual(val.ToString(), ticksString, "Ticks returning correct value if .ToString() called on int");
         }
     }
 }

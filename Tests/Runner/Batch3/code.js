@@ -15026,16 +15026,15 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge823", {
         statics: {
             getTicksReturnsCorrectValue: function () {
-                var val = System.Int64([1817194880,220]);
-                var result = System.Int64([-57829376,2204230]);
+                var val = System.Int64([-57829376,2204230]);
 
-                var ticks = System.Int64((new Date(val.toNumber())).getTime()).mul(10000);
-                var ticksPlusOne = System.Int64((new Date(val.toNumber())).getTime()).mul(10000).add(System.Int64(1));
-                var ticksString = System.Int64((new Date(val.toNumber())).getTime()).mul(10000).toString();
+                var ticks = System.Int64((new Date(val.toNumber()/10000)).getTime()).mul(10000);
+                var ticksPlusOne = System.Int64((new Date(val.toNumber()/10000)).getTime()).mul(10000).add(System.Int64(1));
+                var ticksString = System.Int64((new Date(val.toNumber()/10000)).getTime()).mul(10000).toString();
 
-                Bridge.Test.Assert.areDeepEqual$1(result, ticks, "Ticks returning correct int value");
-                Bridge.Test.Assert.areDeepEqual$1(result.add(System.Int64(1)), ticksPlusOne, "Adding to a Tick value is correct");
-                Bridge.Test.Assert.areDeepEqual$1(result.toString(), ticksString, "Ticks returning correct value if .ToString() called on int");
+                Bridge.Test.Assert.areDeepEqual$1(val, ticks, "Ticks returning correct int value");
+                Bridge.Test.Assert.areDeepEqual$1(val.add(System.Int64(1)), ticksPlusOne, "Adding to a Tick value is correct");
+                Bridge.Test.Assert.areDeepEqual$1(val.toString(), ticksString, "Ticks returning correct value if .ToString() called on int");
             }
         }
     });

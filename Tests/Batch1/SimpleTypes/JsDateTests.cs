@@ -20,13 +20,13 @@ namespace Bridge.ClientTest.SimpleTypes
         public void DefaultConstructorReturnsTodaysDate()
         {
             var dt = new DateTime();
-            Assert.True(dt.GetFullYear() > 2011);
+            Assert.True(dt.Year > 2011);
         }
 
         [Test]
         public void CreatingInstanceReturnsDateZero()
         {
-            var fullYear = Activator.CreateInstance<DateTime>().GetFullYear();
+            var fullYear = Activator.CreateInstance<DateTime>().Year;
             Assert.True(1971 >= fullYear, "1971 >= " + fullYear);
         }
 
@@ -34,70 +34,70 @@ namespace Bridge.ClientTest.SimpleTypes
         public void MillisecondSinceEpochConstructorWorks()
         {
             var dt = new DateTime(1440L * 60 * 500 * 1000);
-            Assert.AreEqual(1971, dt.GetFullYear());
+            Assert.AreEqual(1969, dt.Year);
         }
 
         [Test]
         public void StringConstructorWorks()
         {
             var dt = new DateTime("Aug 12, 2012");
-            Assert.AreEqual(2012, dt.GetFullYear());
-            Assert.AreEqual(8, dt.GetMonth());
-            Assert.AreEqual(12, dt.GetDate());
+            Assert.AreEqual(2012, dt.Year);
+            Assert.AreEqual(8, dt.Month);
+            Assert.AreEqual(12, dt.Day);
         }
 
         [Test]
         public void YMDConstructorWorks()
         {
             var dt = new DateTime(2011, 7, 12);
-            Assert.AreEqual(2011, dt.GetFullYear());
-            Assert.AreEqual(7, dt.GetMonth());
-            Assert.AreEqual(12, dt.GetDate());
+            Assert.AreEqual(2011, dt.Year);
+            Assert.AreEqual(7, dt.Month);
+            Assert.AreEqual(12, dt.Day);
         }
 
         [Test]
         public void YMDHConstructorWorks()
         {
             var dt = new DateTime(2011, 7, 12, 13);
-            Assert.AreEqual(2011, dt.GetFullYear());
-            Assert.AreEqual(7, dt.GetMonth());
-            Assert.AreEqual(12, dt.GetDate());
-            Assert.AreEqual(13, dt.GetHours());
+            Assert.AreEqual(2011, dt.Year);
+            Assert.AreEqual(7, dt.Month);
+            Assert.AreEqual(12, dt.Day);
+            Assert.AreEqual(13, dt.Hour);
         }
 
         [Test]
         public void YMDHNConstructorWorks()
         {
             var dt = new DateTime(2011, 7, 12, 13, 42);
-            Assert.AreEqual(2011, dt.GetFullYear());
-            Assert.AreEqual(7, dt.GetMonth());
-            Assert.AreEqual(12, dt.GetDate());
-            Assert.AreEqual(13, dt.GetHours());
-            Assert.AreEqual(42, dt.GetMinutes());
+            Assert.AreEqual(2011, dt.Year);
+            Assert.AreEqual(7, dt.Month);
+            Assert.AreEqual(12, dt.Day);
+            Assert.AreEqual(13, dt.Hour);
+            Assert.AreEqual(42, dt.Minute);
         }
 
         [Test]
         public void YMDHNSConstructorWorks()
         {
             var dt = new DateTime(2011, 7, 12, 13, 42, 56);
-            Assert.AreEqual(2011, dt.GetFullYear());
-            Assert.AreEqual(7, dt.GetMonth());
-            Assert.AreEqual(12, dt.GetDate());
-            Assert.AreEqual(13, dt.GetHours());
-            Assert.AreEqual(42, dt.GetMinutes());
-            Assert.AreEqual(56, dt.GetSeconds());
+            Assert.AreEqual(2011, dt.Year);
+            Assert.AreEqual(7, dt.Month);
+            Assert.AreEqual(12, dt.Day);
+            Assert.AreEqual(13, dt.Hour);
+            Assert.AreEqual(42, dt.Minute);
+            Assert.AreEqual(56, dt.Second);
         }
 
         [Test]
         public void YMDHNSUConstructorWorks()
         {
             var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345);
-            Assert.AreEqual(2011, dt.GetFullYear());
-            Assert.AreEqual(7, dt.GetMonth());
-            Assert.AreEqual(12, dt.GetDate());
-            Assert.AreEqual(13, dt.GetHours());
-            Assert.AreEqual(42, dt.GetMinutes());
-            Assert.AreEqual(56, dt.GetSeconds());
+            Assert.AreEqual(2011, dt.Year);
+            Assert.AreEqual(7, dt.Month);
+            Assert.AreEqual(12, dt.Day);
+            Assert.AreEqual(13, dt.Hour);
+            Assert.AreEqual(42, dt.Minute);
+            Assert.AreEqual(56, dt.Second);
             Assert.AreEqual(345, dt.GetMilliseconds());
         }
 
@@ -125,12 +125,12 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345);
             var UTC = dt.ToUniversalTime();
-            Assert.AreEqual(UTC.GetFullYear(), dt.GetUtcFullYear());
-            Assert.AreEqual(UTC.GetMonth(), dt.GetUtcMonth());
-            Assert.AreEqual(UTC.GetDate(), dt.GetUtcDate());
-            Assert.AreEqual(UTC.GetHours(), dt.GetUtcHours());
-            Assert.AreEqual(UTC.GetMinutes(), dt.GetUtcMinutes());
-            Assert.AreEqual(UTC.GetSeconds(), dt.GetUtcSeconds());
+            Assert.AreEqual(UTC.Year, dt.GetUtcFullYear());
+            Assert.AreEqual(UTC.Month, dt.GetUtcMonth());
+            Assert.AreEqual(UTC.Day, dt.GetUtcDate());
+            Assert.AreEqual(UTC.Hour, dt.GetUtcHours());
+            Assert.AreEqual(UTC.Minute, dt.GetUtcMinutes());
+            Assert.AreEqual(UTC.Second, dt.GetUtcSeconds());
             Assert.AreEqual(UTC.GetMilliseconds(), dt.GetUtcMilliseconds());
         }
 
@@ -139,12 +139,12 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             var UTC = new DateTime(2011, 7, 12, 13, 42, 56, 345);
             var dt = UTC.ToLocalTime();
-            Assert.AreEqual(UTC.GetFullYear(), dt.GetUtcFullYear());
-            Assert.AreEqual(UTC.GetMonth(), dt.GetUtcMonth());
-            Assert.AreEqual(UTC.GetDate(), dt.GetUtcDate());
-            Assert.AreEqual(UTC.GetHours(), dt.GetUtcHours());
-            Assert.AreEqual(UTC.GetMinutes(), dt.GetUtcMinutes());
-            Assert.AreEqual(UTC.GetSeconds(), dt.GetUtcSeconds());
+            Assert.AreEqual(UTC.Year, dt.GetUtcFullYear());
+            Assert.AreEqual(UTC.Month, dt.GetUtcMonth());
+            Assert.AreEqual(UTC.Day, dt.GetUtcDate());
+            Assert.AreEqual(UTC.Hour, dt.GetUtcHours());
+            Assert.AreEqual(UTC.Minute, dt.GetUtcMinutes());
+            Assert.AreEqual(UTC.Second, dt.GetUtcSeconds());
             Assert.AreEqual(UTC.GetMilliseconds(), dt.GetUtcMilliseconds());
         }
 
@@ -152,10 +152,10 @@ namespace Bridge.ClientTest.SimpleTypes
         public void TodayWorks()
         {
             var dt = DateTime.Today;
-            Assert.True(dt.GetFullYear() > 2011);
-            Assert.AreEqual(0, dt.GetHours());
-            Assert.AreEqual(0, dt.GetMinutes());
-            Assert.AreEqual(0, dt.GetSeconds());
+            Assert.True(dt.Year > 2011);
+            Assert.AreEqual(0, dt.Hour);
+            Assert.AreEqual(0, dt.Minute);
+            Assert.AreEqual(0, dt.Second);
             Assert.AreEqual(0, dt.GetMilliseconds());
         }
 
@@ -184,42 +184,42 @@ namespace Bridge.ClientTest.SimpleTypes
         public void GetFullYearWorks()
         {
             var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345);
-            Assert.AreEqual(2011, dt.GetFullYear());
+            Assert.AreEqual(2011, dt.Year);
         }
 
         [Test]
         public void GetMonthWorks()
         {
             var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345);
-            Assert.AreEqual(7, dt.GetMonth());
+            Assert.AreEqual(7, dt.Month);
         }
 
         [Test]
         public void GetDateWorks()
         {
             var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345);
-            Assert.AreEqual(12, dt.GetDate());
+            Assert.AreEqual(12, dt.Day);
         }
 
         [Test]
         public void GetHoursWorks()
         {
             var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345);
-            Assert.AreEqual(13, dt.GetHours());
+            Assert.AreEqual(13, dt.Hour);
         }
 
         [Test]
         public void GetMinutesWorks()
         {
             var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345);
-            Assert.AreEqual(42, dt.GetMinutes());
+            Assert.AreEqual(42, dt.Minute);
         }
 
         [Test]
         public void GetSecondsWorks()
         {
             var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345);
-            Assert.AreEqual(56, dt.GetSeconds());
+            Assert.AreEqual(56, dt.Second);
         }
 
         [Test]
@@ -317,27 +317,27 @@ namespace Bridge.ClientTest.SimpleTypes
         public void ParseWorks()
         {
             var dt = DateTime.Parse("Aug 12, 2012");
-            Assert.AreEqual(2012, dt.GetFullYear());
-            Assert.AreEqual(8, dt.GetMonth());
-            Assert.AreEqual(12, dt.GetDate());
+            Assert.AreEqual(2012, dt.Year);
+            Assert.AreEqual(8, dt.Month);
+            Assert.AreEqual(12, dt.Day);
         }
 
         [Test]
         public void ParseExactWorks()
         {
             var dt = DateTime.ParseExact("2012-12-08", "yyyy-dd-MM");
-            Assert.AreEqual(2012, dt.GetFullYear());
-            Assert.AreEqual(8, dt.GetMonth());
-            Assert.AreEqual(12, dt.GetDate());
+            Assert.AreEqual(2012, dt.Year);
+            Assert.AreEqual(8, dt.Month);
+            Assert.AreEqual(12, dt.Day);
         }
 
         [Test]
         public void ParseExactWithCultureWorks()
         {
             var dt = DateTime.ParseExact("2012-12-08", "yyyy-dd-MM", CultureInfo.InvariantCulture);
-            Assert.AreEqual(2012, dt.GetFullYear());
-            Assert.AreEqual(8, dt.GetMonth());
-            Assert.AreEqual(12, dt.GetDate());
+            Assert.AreEqual(2012, dt.Year);
+            Assert.AreEqual(8, dt.Month);
+            Assert.AreEqual(12, dt.Day);
         }
 
         [Test]
@@ -483,59 +483,59 @@ namespace Bridge.ClientTest.SimpleTypes
         //{
         //    var dt = new DateTime(2000, 0, 1);
         //    dt.SetFullYear(2021);
-        //    Assert.AreEqual(dt.GetFullYear(), 2021);
+        //    Assert.AreEqual(dt.Year, 2021);
         //}
 
         //[Test]
         //public void SetFullYearWithTwoParametersWorks() {
         //    var dt = new DateTime(2000, 0, 1);
         //    dt.SetFullYear(2021, 7);
-        //    Assert.AreEqual(dt.GetFullYear(), 2021);
-        //    Assert.AreEqual(dt.GetMonth(), 7);
+        //    Assert.AreEqual(dt.Year, 2021);
+        //    Assert.AreEqual(dt.Month, 7);
         //}
 
         //[Test]
         //public void SetFullYearWithThreeParametersWorks() {
         //    var dt = new DateTime(2000, 0, 1);
         //    dt.SetFullYear(2021, 7, 13);
-        //    Assert.AreEqual(dt.GetFullYear(), 2021);
-        //    Assert.AreEqual(dt.GetMonth(), 7);
-        //    Assert.AreEqual(dt.GetDate(), 13);
+        //    Assert.AreEqual(dt.Year, 2021);
+        //    Assert.AreEqual(dt.Month, 7);
+        //    Assert.AreEqual(dt.Day, 13);
         //}
 
         //[Test]
         //public void SetMonthWorks() {
         //    var dt = new DateTime(2000, 0, 1);
         //    dt.SetMonth(3);
-        //    Assert.AreEqual(dt.GetMonth(), 3);
+        //    Assert.AreEqual(dt.Month, 3);
         //}
 
         //[Test]
         //public void SetDateWorks() {
         //    var dt = new DateTime(2000, 0, 1);
         //    dt.SetDate(12);
-        //    Assert.AreEqual(dt.GetDate(), 12);
+        //    Assert.AreEqual(dt.Day, 12);
         //}
 
         //[Test]
         //public void SetHoursWorks() {
         //    var dt = new DateTime(2000, 0, 1);
         //    dt.SetHours(11);
-        //    Assert.AreEqual(dt.GetHours(), 11);
+        //    Assert.AreEqual(dt.Hour, 11);
         //}
 
         //[Test]
         //public void SetMinutesWorks() {
         //    var dt = new DateTime(2000, 0, 1);
         //    dt.SetMinutes(34);
-        //    Assert.AreEqual(dt.GetMinutes(), 34);
+        //    Assert.AreEqual(dt.Minute, 34);
         //}
 
         //[Test]
         //public void SetSecondsWorks() {
         //    var dt = new DateTime(2000, 0, 1);
         //    dt.SetSeconds(23);
-        //    Assert.AreEqual(dt.GetSeconds(), 23);
+        //    Assert.AreEqual(dt.Second, 23);
         //}
 
         //[Test]
@@ -622,8 +622,8 @@ namespace Bridge.ClientTest.SimpleTypes
         public void GetHashCodeWorks()
         {
             Assert.AreEqual(new DateTime(0).GetHashCode(), new DateTime(0).GetHashCode());
-            Assert.AreEqual(new DateTime(1).GetHashCode(), new DateTime(1).GetHashCode());
-            Assert.AreNotEqual(new DateTime(1).GetHashCode(), new DateTime(0).GetHashCode());
+            Assert.AreEqual(new DateTime(10000).GetHashCode(), new DateTime(10000).GetHashCode());
+            Assert.AreNotEqual(new DateTime(10000).GetHashCode(), new DateTime(0).GetHashCode());
             Assert.True((long)new DateTime(3000, 1, 1).GetHashCode() < 0xffffffffL);
         }
 
@@ -631,18 +631,18 @@ namespace Bridge.ClientTest.SimpleTypes
         public void EqualsWorks()
         {
             Assert.True(new DateTime(0).Equals((object)new DateTime(0)));
-            Assert.False(new DateTime(1).Equals((object)new DateTime(0)));
-            Assert.False(new DateTime(0).Equals((object)new DateTime(1)));
-            Assert.True(new DateTime(1).Equals((object)new DateTime(1)));
+            Assert.False(new DateTime(10000).Equals((object)new DateTime(0)));
+            Assert.False(new DateTime(0).Equals((object)new DateTime(10000)));
+            Assert.True(new DateTime(10000).Equals((object)new DateTime(10000)));
         }
 
         [Test]
         public void DateTimeEqualsWorks()
         {
             Assert.True(new DateTime(0).Equals(new DateTime(0)));
-            Assert.False(new DateTime(1).Equals(new DateTime(0)));
-            Assert.False(new DateTime(0).Equals(new DateTime(1)));
-            Assert.True(new DateTime(1).Equals(new DateTime(1)));
+            Assert.False(new DateTime(10000).Equals(new DateTime(0)));
+            Assert.False(new DateTime(0).Equals(new DateTime(10000)));
+            Assert.True(new DateTime(10000).Equals(new DateTime(10000)));
         }
 
         [IgnoreTest(Until = Constants.IGNORE_DATE)]
@@ -650,17 +650,17 @@ namespace Bridge.ClientTest.SimpleTypes
         public void IEquatableEqualsWorks()
         {
             Assert.True(((IEquatable<DateTime>)new DateTime(0)).Equals(new DateTime(0)));
-            Assert.False(((IEquatable<DateTime>)new DateTime(1)).Equals(new DateTime(0)));
-            Assert.False(((IEquatable<DateTime>)new DateTime(0)).Equals(new DateTime(1)));
-            Assert.True(((IEquatable<DateTime>)new DateTime(1)).Equals(new DateTime(1)));
+            Assert.False(((IEquatable<DateTime>)new DateTime(10000)).Equals(new DateTime(0)));
+            Assert.False(((IEquatable<DateTime>)new DateTime(0)).Equals(new DateTime(10000)));
+            Assert.True(((IEquatable<DateTime>)new DateTime(10000)).Equals(new DateTime(10000)));
         }
 
         [Test]
         public void CompareToWorks()
         {
             Assert.True(new DateTime(0).CompareTo(new DateTime(0)) == 0);
-            Assert.True(new DateTime(1).CompareTo(new DateTime(0)) > 0);
-            Assert.True(new DateTime(0).CompareTo(new DateTime(1)) < 0);
+            Assert.True(new DateTime(10000).CompareTo(new DateTime(0)) > 0);
+            Assert.True(new DateTime(0).CompareTo(new DateTime(10000)) < 0);
         }
 
         [IgnoreTest(Until = Constants.IGNORE_DATE)]
@@ -668,8 +668,8 @@ namespace Bridge.ClientTest.SimpleTypes
         public void IComparableCompareToWorks()
         {
             Assert.True(((IComparable<DateTime>)new DateTime(0)).CompareTo(new DateTime(0)) == 0);
-            Assert.True(((IComparable<DateTime>)new DateTime(1)).CompareTo(new DateTime(0)) > 0);
-            Assert.True(((IComparable<DateTime>)new DateTime(0)).CompareTo(new DateTime(1)) < 0);
+            Assert.True(((IComparable<DateTime>)new DateTime(10000)).CompareTo(new DateTime(0)) > 0);
+            Assert.True(((IComparable<DateTime>)new DateTime(0)).CompareTo(new DateTime(10000)) < 0);
         }
 
         [Test(ExpectedCount = 1)]
