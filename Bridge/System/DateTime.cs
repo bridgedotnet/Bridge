@@ -43,22 +43,22 @@ namespace System
         [Template("new Date({year}, {month} - 1, {day}, {hours}, {minutes}, {seconds}, {milliseconds})")]
         public extern DateTime(int year, int month, int day, int hours, int minutes, int seconds, int milliseconds);
 
-        [Template("System.Int64(Date.UTC({year}, {month} - 1, {day}, {hours}, {minutes}, {seconds}, {ms}))")]
+        [Template("System.Int64(Date.UTC({year}, {month} - 1, {day}, {hours}, {minutes}, {seconds}, {ms})).mul(10000)")]
         public static extern long Utc(int year, int month, int day, int hours, int minutes, int seconds, int ms);
 
-        [Template("System.Int64(Date.UTC({year}, {month} - 1, {day}, {hours}, {minutes}, {seconds}))")]
+        [Template("System.Int64(Date.UTC({year}, {month} - 1, {day}, {hours}, {minutes}, {seconds})).mul(10000)")]
         public static extern long Utc(int year, int month, int day, int hours, int minutes, int seconds);
 
-        [Template("System.Int64(Date.UTC({year}, {month} - 1, {day}, {hours}, {minutes}))")]
+        [Template("System.Int64(Date.UTC({year}, {month} - 1, {day}, {hours}, {minutes})).mul(10000)")]
         public static extern long Utc(int year, int month, int day, int hours, int minutes);
 
-        [Template("System.Int64(Date.UTC({year}, {month} - 1, {day}, {hours}))")]
+        [Template("System.Int64(Date.UTC({year}, {month} - 1, {day}, {hours})).mul(10000)")]
         public static extern long Utc(int year, int month, int day, int hours);
 
-        [Template("System.Int64(Date.UTC({year}, {month} - 1, {day}))")]
+        [Template("System.Int64(Date.UTC({year}, {month} - 1, {day})).mul(10000)")]
         public static extern long Utc(int year, int month, int day);
 
-        [Template("System.Int64(Date.UTC({year}, {month} - 1))")]
+        [Template("System.Int64(Date.UTC({year}, {month} - 1)).mul(10000)")]
         public static extern long Utc(int year, int month);
 
         public static extern DateTime Now
