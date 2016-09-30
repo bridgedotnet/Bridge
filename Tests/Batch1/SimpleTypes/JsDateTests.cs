@@ -34,7 +34,7 @@ namespace Bridge.ClientTest.SimpleTypes
         public void MillisecondSinceEpochConstructorWorks()
         {
             var dt = new DateTime(1440L * 60 * 500 * 1000);
-            Assert.AreEqual(1969, dt.Year);
+            Assert.AreEqual(1970, dt.AddDays(1).Year);
         }
 
         [Test]

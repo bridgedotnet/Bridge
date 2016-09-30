@@ -25893,7 +25893,7 @@
         },
         millisecondSinceEpochConstructorWorks: function () {
             var dt = new Date(System.Int64([250327040,10]).toNumber()/10000);
-            Bridge.Test.Assert.areEqual(1969, dt.getFullYear());
+            Bridge.Test.Assert.areEqual(1970, new Date(dt.valueOf() + Math.round((1) * 864e5)).getFullYear());
         },
         stringConstructorWorks: function () {
             var dt = new Date("Aug 12, 2012");
