@@ -13,10 +13,10 @@ namespace System
         public static readonly DateTime MinValue;
 
         /// <summary>
-        /// Double value representing the number of milliseconds since 1 January 1970 00:00:00 UTC (Unix Epoch).
+        /// Initializes a new instance of the DateTime structure to a specified number of ticks.
         /// </summary>
-        /// <param name="value">The numberof milliseconds since 1 January 1970 00:00:00 UTC (Unix Epoch)</param>
-        [Template("new Date({value}.toNumber())")]
+        /// <param name="value">A date and time expressed in the number of 100-nanosecond intervals that have elapsed since January 1, 0001 at 00:00:00.000 in the Gregorian calendar.</param>
+        [Template("new Date({value}.toNumber()/10000)")]
         public extern DateTime(long value);
 
         /// <summary>
