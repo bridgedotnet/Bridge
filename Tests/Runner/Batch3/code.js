@@ -10087,6 +10087,16 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1904", {
+        testDateTimeConstructorConvertsValueToMs: function () {
+            var d1 = new Date();
+            var tickValue = System.Int64((d1).getTime()).mul(10000);
+            var d2 = new Date(tickValue.toNumber()/10000);
+
+            Bridge.Test.Assert.true$1(Bridge.equals(d1, d2), System.String.concat(System.String.concat(System.String.concat(System.String.concat("d1 (", Bridge.Date.format(d1)), ") == d2("), Bridge.Date.format(d2)), ")"));
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
