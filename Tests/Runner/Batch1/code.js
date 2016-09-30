@@ -39272,6 +39272,214 @@
         },
         substractGroupIsNotLastTest: function () {
             Bridge.Test.Assert.throws$6(System.ArgumentException, $_.Bridge.ClientTest.Text.RegularExpressions.RegexCharClassesTests.f1);
+        },
+        charClassWithEscapedBracketInGroupTest: function () {
+            var pattern = "([\\(])|([\\)])";
+            var text = "()";
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
+            var ms = rgx.matches(text);
+
+            Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
+
+            // Match #0:
+            Bridge.Test.Assert.notNull$1(ms.get(0), "Match[0] is not null.");
+            this.validateMatch(ms.get(0), 0, 1, "(", 3, true);
+
+            this.validateGroup(ms.get(0), 0, 0, 1, true, "(", 1);
+            this.validateCapture(ms.get(0), 0, 0, 0, 1, "(");
+
+            this.validateGroup(ms.get(0), 1, 0, 1, true, "(", 1);
+            this.validateCapture(ms.get(0), 1, 0, 0, 1, "(");
+
+            this.validateGroup(ms.get(0), 2, 0, 0, false, "", 0);
+
+            // Match #1:
+            Bridge.Test.Assert.notNull$1(ms.get(1), "Match[1] is not null.");
+            this.validateMatch(ms.get(1), 1, 1, ")", 3, true);
+
+            this.validateGroup(ms.get(1), 0, 1, 1, true, ")", 1);
+            this.validateCapture(ms.get(1), 0, 0, 1, 1, ")");
+
+            this.validateGroup(ms.get(1), 1, 0, 0, false, "", 0);
+
+            this.validateGroup(ms.get(1), 2, 1, 1, true, ")", 1);
+            this.validateCapture(ms.get(1), 2, 0, 1, 1, ")");
+        },
+        charClassWithEscapedSquareBracketInGroupTest: function () {
+            var pattern = "([\\[])|([\\]])";
+            var text = "[]";
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
+            var ms = rgx.matches(text);
+
+            Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
+
+            // Match #0:
+            Bridge.Test.Assert.notNull$1(ms.get(0), "Match[0] is not null.");
+            this.validateMatch(ms.get(0), 0, 1, "[", 3, true);
+
+            this.validateGroup(ms.get(0), 0, 0, 1, true, "[", 1);
+            this.validateCapture(ms.get(0), 0, 0, 0, 1, "[");
+
+            this.validateGroup(ms.get(0), 1, 0, 1, true, "[", 1);
+            this.validateCapture(ms.get(0), 1, 0, 0, 1, "[");
+
+            this.validateGroup(ms.get(0), 2, 0, 0, false, "", 0);
+
+            // Match #1:
+            Bridge.Test.Assert.notNull$1(ms.get(1), "Match[1] is not null.");
+            this.validateMatch(ms.get(1), 1, 1, "]", 3, true);
+
+            this.validateGroup(ms.get(1), 0, 1, 1, true, "]", 1);
+            this.validateCapture(ms.get(1), 0, 0, 1, 1, "]");
+
+            this.validateGroup(ms.get(1), 1, 0, 0, false, "", 0);
+
+            this.validateGroup(ms.get(1), 2, 1, 1, true, "]", 1);
+            this.validateCapture(ms.get(1), 2, 0, 1, 1, "]");
+        },
+        charClassWithUnescapedBracketInGroupTest: function () {
+            var pattern = "([(])|([)])";
+            var text = "()";
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
+            var ms = rgx.matches(text);
+
+            Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
+
+            // Match #0:
+            Bridge.Test.Assert.notNull$1(ms.get(0), "Match[0] is not null.");
+            this.validateMatch(ms.get(0), 0, 1, "(", 3, true);
+
+            this.validateGroup(ms.get(0), 0, 0, 1, true, "(", 1);
+            this.validateCapture(ms.get(0), 0, 0, 0, 1, "(");
+
+            this.validateGroup(ms.get(0), 1, 0, 1, true, "(", 1);
+            this.validateCapture(ms.get(0), 1, 0, 0, 1, "(");
+
+            this.validateGroup(ms.get(0), 2, 0, 0, false, "", 0);
+
+            // Match #1:
+            Bridge.Test.Assert.notNull$1(ms.get(1), "Match[1] is not null.");
+            this.validateMatch(ms.get(1), 1, 1, ")", 3, true);
+
+            this.validateGroup(ms.get(1), 0, 1, 1, true, ")", 1);
+            this.validateCapture(ms.get(1), 0, 0, 1, 1, ")");
+
+            this.validateGroup(ms.get(1), 1, 0, 0, false, "", 0);
+
+            this.validateGroup(ms.get(1), 2, 1, 1, true, ")", 1);
+            this.validateCapture(ms.get(1), 2, 0, 1, 1, ")");
+        },
+        charClassWithUnescapedSquareBracketInGroupTest: function () {
+            var pattern = "([[])|([]])";
+            var text = "[]";
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
+            var ms = rgx.matches(text);
+
+            Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
+
+            // Match #0:
+            Bridge.Test.Assert.notNull$1(ms.get(0), "Match[0] is not null.");
+            this.validateMatch(ms.get(0), 0, 1, "[", 3, true);
+
+            this.validateGroup(ms.get(0), 0, 0, 1, true, "[", 1);
+            this.validateCapture(ms.get(0), 0, 0, 0, 1, "[");
+
+            this.validateGroup(ms.get(0), 1, 0, 1, true, "[", 1);
+            this.validateCapture(ms.get(0), 1, 0, 0, 1, "[");
+
+            this.validateGroup(ms.get(0), 2, 0, 0, false, "", 0);
+
+            // Match #1:
+            Bridge.Test.Assert.notNull$1(ms.get(1), "Match[1] is not null.");
+            this.validateMatch(ms.get(1), 1, 1, "]", 3, true);
+
+            this.validateGroup(ms.get(1), 0, 1, 1, true, "]", 1);
+            this.validateCapture(ms.get(1), 0, 0, 1, 1, "]");
+
+            this.validateGroup(ms.get(1), 1, 0, 0, false, "", 0);
+
+            this.validateGroup(ms.get(1), 2, 1, 1, true, "]", 1);
+            this.validateCapture(ms.get(1), 2, 0, 1, 1, "]");
+        },
+        emptyRangeTest: function () {
+            Bridge.Test.Assert.throws$6(System.ArgumentException, $_.Bridge.ClientTest.Text.RegularExpressions.RegexCharClassesTests.f2);
+        },
+        closingSquareBracketTest1: function () {
+            var pattern = "[]a]";
+            var text = "abc]";
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
+            var ms = rgx.matches(text);
+
+            Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
+
+            // Match #0:
+            Bridge.Test.Assert.notNull$1(ms.get(0), "Match[0] is not null.");
+            this.validateMatch(ms.get(0), 0, 1, "a", 1, true);
+
+            this.validateGroup(ms.get(0), 0, 0, 1, true, "a", 1);
+            this.validateCapture(ms.get(0), 0, 0, 0, 1, "a");
+
+            // Match #1:
+            Bridge.Test.Assert.notNull$1(ms.get(1), "Match[1] is not null.");
+            this.validateMatch(ms.get(1), 3, 1, "]", 1, true);
+
+            this.validateGroup(ms.get(1), 0, 3, 1, true, "]", 1);
+            this.validateCapture(ms.get(1), 0, 0, 3, 1, "]");
+        },
+        closingSquareBracketTest2: function () {
+            var pattern = "[c]]";
+            var text = "abc]";
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
+            var m = rgx.match(text);
+
+            this.validateMatch(m, 2, 2, "c]", 1, true);
+
+            this.validateGroup(m, 0, 2, 2, true, "c]", 1);
+            this.validateCapture(m, 0, 0, 2, 2, "c]");
+        },
+        openingSquareBracketTest1: function () {
+            var pattern = "[[a]";
+            var text = "[abc";
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
+            var ms = rgx.matches(text);
+
+            Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
+
+            // Match #0:
+            Bridge.Test.Assert.notNull$1(ms.get(0), "Match[0] is not null.");
+            this.validateMatch(ms.get(0), 0, 1, "[", 1, true);
+
+            this.validateGroup(ms.get(0), 0, 0, 1, true, "[", 1);
+            this.validateCapture(ms.get(0), 0, 0, 0, 1, "[");
+
+            // Match #1:
+            Bridge.Test.Assert.notNull$1(ms.get(1), "Match[1] is not null.");
+            this.validateMatch(ms.get(1), 1, 1, "a", 1, true);
+
+            this.validateGroup(ms.get(1), 0, 1, 1, true, "a", 1);
+            this.validateCapture(ms.get(1), 0, 0, 1, 1, "a");
+        },
+        openingSquareBracketTest2: function () {
+            var pattern = "[a[]";
+            var text = "[abc";
+            var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
+            var ms = rgx.matches(text);
+
+            Bridge.Test.Assert.areEqual$1(2, ms.getCount(), "Matches count is correct.");
+
+            // Match #0:
+            Bridge.Test.Assert.notNull$1(ms.get(0), "Match[0] is not null.");
+            this.validateMatch(ms.get(0), 0, 1, "[", 1, true);
+
+            this.validateGroup(ms.get(0), 0, 0, 1, true, "[", 1);
+            this.validateCapture(ms.get(0), 0, 0, 0, 1, "[");
+
+            // Match #1:
+            Bridge.Test.Assert.notNull$1(ms.get(1), "Match[1] is not null.");
+            this.validateMatch(ms.get(1), 1, 1, "a", 1, true);
+
+            this.validateGroup(ms.get(1), 0, 1, 1, true, "a", 1);
+            this.validateCapture(ms.get(1), 0, 0, 1, 1, "a");
         }
     });
 
@@ -39284,6 +39492,13 @@
 
             var rx = new System.Text.RegularExpressions.Regex.ctor(pattern);
             rx.matches(text);
+        },
+        f2: function () {
+            var pattern = "[]";
+            var text = "abc";
+
+            var rx = new System.Text.RegularExpressions.Regex.ctor(pattern);
+            var m = rx.matches(text);
         }
     });
 

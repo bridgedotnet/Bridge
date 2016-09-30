@@ -1076,6 +1076,7 @@
                     index ++;
                 }
 
+                var startIndex = index;
                 while (index < endIndex) {
                     ch = pattern[index];
 
@@ -1094,7 +1095,7 @@
                             throw new System.ArgumentException("Unrecognized escape sequence \\" + ch + ".");
                         }
                         toInc = token.length;
-                    } else if (ch === "]") {
+                    } else if (ch === "]" && index > startIndex) {
                         closeBracketIndex = index;
                         break;
                     } else {
@@ -1343,6 +1344,7 @@
                 }
 
                 var bracketLvl = 1;
+                var sqBracketCtx = false;
                 var bodyIndex = i + 1;
                 var closeBracketIndex = -1;
 
@@ -1380,20 +1382,23 @@
                 var index = bodyIndex;
                 while (index < endIndex) {
                     ch = pattern[index];
+
                     if (ch === "\\") {
-                        index += 2; // skip the escaped char
-                        continue;
-                    }
-
-                    if (ch === "(" && !isComment) {
-                        ++bracketLvl;
-                    } else if (ch === ")") {
-                        --bracketLvl;
-                    }
-
-                    if (bracketLvl === 0) {
-                        closeBracketIndex = index;
-                        break;
+                        index ++; // skip the escaped char
+                    } else if (ch === "[") {
+                        sqBracketCtx = true;
+                    } else if (ch === "]" && sqBracketCtx) {
+                        sqBracketCtx = false;
+                    } else if (!sqBracketCtx) {
+                        if (ch === "(" && !isComment) {
+                            ++bracketLvl;
+                        } else if (ch === ")") {
+                            --bracketLvl;
+                            if (bracketLvl === 0) {
+                                closeBracketIndex = index;
+                                break;
+                            }
+                        }
                     }
 
                     ++index;

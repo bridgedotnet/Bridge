@@ -1467,5 +1467,247 @@ namespace Bridge.ClientTest.Text.RegularExpressions
                 rx.Matches(text);
             });
         }
+
+        [Test]
+        public void CharClassWithEscapedBracketInGroupTest()
+        {
+            const string pattern = @"([\(])|([\)])";
+            const string text = "()";
+            var rgx = new Regex(pattern);
+            var ms = rgx.Matches(text);
+
+            Assert.AreEqual(2, ms.Count, "Matches count is correct.");
+
+            // Match #0:
+            Assert.NotNull(ms[0], "Match[0] is not null.");
+            ValidateMatch(ms[0], 0, 1, "(", 3, true);
+
+            ValidateGroup(ms[0], 0, 0, 1, true, "(", 1);
+            ValidateCapture(ms[0], 0, 0, 0, 1, "(");
+
+            ValidateGroup(ms[0], 1, 0, 1, true, "(", 1);
+            ValidateCapture(ms[0], 1, 0, 0, 1, "(");
+
+            ValidateGroup(ms[0], 2, 0, 0, false, "", 0);
+
+            // Match #1:
+            Assert.NotNull(ms[1], "Match[1] is not null.");
+            ValidateMatch(ms[1], 1, 1, ")", 3, true);
+
+            ValidateGroup(ms[1], 0, 1, 1, true, ")", 1);
+            ValidateCapture(ms[1], 0, 0, 1, 1, ")");
+
+            ValidateGroup(ms[1], 1, 0, 0, false, "", 0);
+
+            ValidateGroup(ms[1], 2, 1, 1, true, ")", 1);
+            ValidateCapture(ms[1], 2, 0, 1, 1, ")");
+        }
+
+        [Test]
+        public void CharClassWithEscapedSquareBracketInGroupTest()
+        {
+            const string pattern = @"([\[])|([\]])";
+            const string text = "[]";
+            var rgx = new Regex(pattern);
+            var ms = rgx.Matches(text);
+
+            Assert.AreEqual(2, ms.Count, "Matches count is correct.");
+
+            // Match #0:
+            Assert.NotNull(ms[0], "Match[0] is not null.");
+            ValidateMatch(ms[0], 0, 1, "[", 3, true);
+
+            ValidateGroup(ms[0], 0, 0, 1, true, "[", 1);
+            ValidateCapture(ms[0], 0, 0, 0, 1, "[");
+
+            ValidateGroup(ms[0], 1, 0, 1, true, "[", 1);
+            ValidateCapture(ms[0], 1, 0, 0, 1, "[");
+
+            ValidateGroup(ms[0], 2, 0, 0, false, "", 0);
+
+            // Match #1:
+            Assert.NotNull(ms[1], "Match[1] is not null.");
+            ValidateMatch(ms[1], 1, 1, "]", 3, true);
+
+            ValidateGroup(ms[1], 0, 1, 1, true, "]", 1);
+            ValidateCapture(ms[1], 0, 0, 1, 1, "]");
+
+            ValidateGroup(ms[1], 1, 0, 0, false, "", 0);
+
+            ValidateGroup(ms[1], 2, 1, 1, true, "]", 1);
+            ValidateCapture(ms[1], 2, 0, 1, 1, "]");
+        }
+
+        [Test]
+        public void CharClassWithUnescapedBracketInGroupTest()
+        {
+            const string pattern = @"([(])|([)])";
+            const string text = "()";
+            var rgx = new Regex(pattern);
+            var ms = rgx.Matches(text);
+
+            Assert.AreEqual(2, ms.Count, "Matches count is correct.");
+
+            // Match #0:
+            Assert.NotNull(ms[0], "Match[0] is not null.");
+            ValidateMatch(ms[0], 0, 1, "(", 3, true);
+
+            ValidateGroup(ms[0], 0, 0, 1, true, "(", 1);
+            ValidateCapture(ms[0], 0, 0, 0, 1, "(");
+
+            ValidateGroup(ms[0], 1, 0, 1, true, "(", 1);
+            ValidateCapture(ms[0], 1, 0, 0, 1, "(");
+
+            ValidateGroup(ms[0], 2, 0, 0, false, "", 0);
+
+            // Match #1:
+            Assert.NotNull(ms[1], "Match[1] is not null.");
+            ValidateMatch(ms[1], 1, 1, ")", 3, true);
+
+            ValidateGroup(ms[1], 0, 1, 1, true, ")", 1);
+            ValidateCapture(ms[1], 0, 0, 1, 1, ")");
+
+            ValidateGroup(ms[1], 1, 0, 0, false, "", 0);
+
+            ValidateGroup(ms[1], 2, 1, 1, true, ")", 1);
+            ValidateCapture(ms[1], 2, 0, 1, 1, ")");
+        }
+
+        [Test]
+        public void CharClassWithUnescapedSquareBracketInGroupTest()
+        {
+            const string pattern = @"([[])|([]])";
+            const string text = "[]";
+            var rgx = new Regex(pattern);
+            var ms = rgx.Matches(text);
+
+            Assert.AreEqual(2, ms.Count, "Matches count is correct.");
+
+            // Match #0:
+            Assert.NotNull(ms[0], "Match[0] is not null.");
+            ValidateMatch(ms[0], 0, 1, "[", 3, true);
+
+            ValidateGroup(ms[0], 0, 0, 1, true, "[", 1);
+            ValidateCapture(ms[0], 0, 0, 0, 1, "[");
+
+            ValidateGroup(ms[0], 1, 0, 1, true, "[", 1);
+            ValidateCapture(ms[0], 1, 0, 0, 1, "[");
+
+            ValidateGroup(ms[0], 2, 0, 0, false, "", 0);
+
+            // Match #1:
+            Assert.NotNull(ms[1], "Match[1] is not null.");
+            ValidateMatch(ms[1], 1, 1, "]", 3, true);
+
+            ValidateGroup(ms[1], 0, 1, 1, true, "]", 1);
+            ValidateCapture(ms[1], 0, 0, 1, 1, "]");
+
+            ValidateGroup(ms[1], 1, 0, 0, false, "", 0);
+
+            ValidateGroup(ms[1], 2, 1, 1, true, "]", 1);
+            ValidateCapture(ms[1], 2, 0, 1, 1, "]");
+        }
+
+        [Test]
+        public void EmptyRangeTest()
+        {
+            Assert.Throws<ArgumentException>(() =>
+            {
+                const string pattern = @"[]";
+                const string text = "abc";
+
+                var rx = new Regex(pattern);
+                var m = rx.Matches(text);
+            });
+        }
+
+        [Test]
+        public void ClosingSquareBracketTest1()
+        {
+            const string pattern = @"[]a]";
+            const string text = "abc]";
+            var rgx = new Regex(pattern);
+            var ms = rgx.Matches(text);
+
+            Assert.AreEqual(2, ms.Count, "Matches count is correct.");
+
+            // Match #0:
+            Assert.NotNull(ms[0], "Match[0] is not null.");
+            ValidateMatch(ms[0], 0, 1, "a", 1, true);
+
+            ValidateGroup(ms[0], 0, 0, 1, true, "a", 1);
+            ValidateCapture(ms[0], 0, 0, 0, 1, "a");
+
+            // Match #1:
+            Assert.NotNull(ms[1], "Match[1] is not null.");
+            ValidateMatch(ms[1], 3, 1, "]", 1, true);
+
+            ValidateGroup(ms[1], 0, 3, 1, true, "]", 1);
+            ValidateCapture(ms[1], 0, 0, 3, 1, "]");
+        }
+
+        [Test]
+        public void ClosingSquareBracketTest2()
+        {
+            const string pattern = @"[c]]";
+            const string text = "abc]";
+            var rgx = new Regex(pattern);
+            var m = rgx.Match(text);
+
+            ValidateMatch(m, 2, 2, "c]", 1, true);
+
+            ValidateGroup(m, 0, 2, 2, true, "c]", 1);
+            ValidateCapture(m, 0, 0, 2, 2, "c]");
+        }
+
+        [Test]
+        public void OpeningSquareBracketTest1()
+        {
+            const string pattern = @"[[a]";
+            const string text = "[abc";
+            var rgx = new Regex(pattern);
+            var ms = rgx.Matches(text);
+
+            Assert.AreEqual(2, ms.Count, "Matches count is correct.");
+
+            // Match #0:
+            Assert.NotNull(ms[0], "Match[0] is not null.");
+            ValidateMatch(ms[0], 0, 1, "[", 1, true);
+
+            ValidateGroup(ms[0], 0, 0, 1, true, "[", 1);
+            ValidateCapture(ms[0], 0, 0, 0, 1, "[");
+
+            // Match #1:
+            Assert.NotNull(ms[1], "Match[1] is not null.");
+            ValidateMatch(ms[1], 1, 1, "a", 1, true);
+
+            ValidateGroup(ms[1], 0, 1, 1, true, "a", 1);
+            ValidateCapture(ms[1], 0, 0, 1, 1, "a");
+        }
+
+        [Test]
+        public void OpeningSquareBracketTest2()
+        {
+            const string pattern = @"[a[]";
+            const string text = "[abc";
+            var rgx = new Regex(pattern);
+            var ms = rgx.Matches(text);
+
+            Assert.AreEqual(2, ms.Count, "Matches count is correct.");
+
+            // Match #0:
+            Assert.NotNull(ms[0], "Match[0] is not null.");
+            ValidateMatch(ms[0], 0, 1, "[", 1, true);
+
+            ValidateGroup(ms[0], 0, 0, 1, true, "[", 1);
+            ValidateCapture(ms[0], 0, 0, 0, 1, "[");
+
+            // Match #1:
+            Assert.NotNull(ms[1], "Match[1] is not null.");
+            ValidateMatch(ms[1], 1, 1, "a", 1, true);
+
+            ValidateGroup(ms[1], 0, 1, 1, true, "a", 1);
+            ValidateCapture(ms[1], 0, 0, 1, 1, "a");
+        }
     }
 }
