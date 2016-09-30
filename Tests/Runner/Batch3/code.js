@@ -10077,7 +10077,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1897", {
-        testCase: function () {
+        testNestedNotEscapedBracketsInRegex: function () {
             var pattern = "([)])";
             var text = ")";
 

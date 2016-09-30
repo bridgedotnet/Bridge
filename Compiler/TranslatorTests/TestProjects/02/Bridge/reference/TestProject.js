@@ -1,7 +1,7 @@
 ﻿/*
- * @version   : 15.1.0 - Bridge.NET
+ * @version   : 15.2.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2016-09-19
+ * @date      : 2016-10-03
  * @copyright : Copyright 2008-2016 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE.
 */
@@ -21604,6 +21604,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     index ++;
                 }
 
+                var startIndex = index;
                 while (index < endIndex) {
                     ch = pattern[index];
 
@@ -21622,7 +21623,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                             throw new System.ArgumentException("Unrecognized escape sequence \\" + ch + ".");
                         }
                         toInc = token.length;
-                    } else if (ch === "]") {
+                    } else if (ch === "]" && index > startIndex) {
                         closeBracketIndex = index;
                         break;
                     } else {
@@ -21871,6 +21872,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 }
 
                 var bracketLvl = 1;
+                var sqBracketCtx = false;
                 var bodyIndex = i + 1;
                 var closeBracketIndex = -1;
 
@@ -21908,20 +21910,23 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 var index = bodyIndex;
                 while (index < endIndex) {
                     ch = pattern[index];
+
                     if (ch === "\\") {
-                        index += 2; // skip the escaped char
-                        continue;
-                    }
-
-                    if (ch === "(" && !isComment) {
-                        ++bracketLvl;
-                    } else if (ch === ")") {
-                        --bracketLvl;
-                    }
-
-                    if (bracketLvl === 0) {
-                        closeBracketIndex = index;
-                        break;
+                        index ++; // skip the escaped char
+                    } else if (ch === "[") {
+                        sqBracketCtx = true;
+                    } else if (ch === "]" && sqBracketCtx) {
+                        sqBracketCtx = false;
+                    } else if (!sqBracketCtx) {
+                        if (ch === "(" && !isComment) {
+                            ++bracketLvl;
+                        } else if (ch === ")") {
+                            --bracketLvl;
+                            if (bracketLvl === 0) {
+                                closeBracketIndex = index;
+                                break;
+                            }
+                        }
                     }
 
                     ++index;

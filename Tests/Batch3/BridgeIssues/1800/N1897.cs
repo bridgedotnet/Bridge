@@ -8,7 +8,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge1897
     {
         [Test]
-        public void TestCase()
+        public void TestNestedNotEscapedBracketsInRegex()
         {
             const string pattern = @"([)])";
             const string text = ")";
