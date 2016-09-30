@@ -1,7 +1,7 @@
 ﻿/*
- * @version   : 15.1.0 - Bridge.NET
+ * @version   : 15.2.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2016-09-19
+ * @date      : 2016-10-03
  * @copyright : Copyright 2008-2016 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE.
 */
@@ -165,7 +165,7 @@
             })(name, scope, statics);
         },
 
-        createInstance: function (type) {
+        createInstance: function (type, args) {
             if (type === System.Decimal) {
                 return System.Decimal.Zero;
             }
@@ -200,8 +200,10 @@
                 return 0;
             } else if (type === String) {
                 return '';
-            } if (type && type.prototype && type.prototype.$literal) {
+            } else if (type && type.prototype && type.prototype.$literal) {
                 return type.ctor();
+            } else if (args && args.length > 0) {
+                return Bridge.Reflection.applyConstructor(type, args);
             } else {
                 return new type();
             }
@@ -695,20 +697,20 @@
         },
 
         isArray: function (obj) {
-            if (obj == null) {
+            var c = obj != null ? obj.constructor : null;
+            if (!c) {
                 return false;
             }
-            var c = obj.constructor;
             return c === Array ||
                 c === Uint8Array ||
-                c === Uint8ClampedArray ||
                 c === Int8Array ||
                 c === Int16Array ||
                 c === Uint16Array ||
                 c === Int32Array ||
                 c === Uint32Array ||
                 c === Float32Array ||
-                c === Float64Array;
+                c === Float64Array ||
+                c === Bridge.global["Uint8ClampedArray"];
         },
 
         isFunction: function (obj) {
@@ -2465,7 +2467,9 @@
                 Class = cls;
             }
 
-            scope = Bridge.Class.set(scope, className, Class);
+            if (!isGenericInstance) {
+                scope = Bridge.Class.set(scope, className, Class);
+            }
 
             if (gCfg) {
                 gCfg.fn.$cache.push({ type: Class, args: gCfg.args });
@@ -3395,7 +3399,81 @@
             return typeName ? Bridge.Reflection._getType(typeName, asm) : null;
         },
 
+        canAcceptNull: function (type) {
+            if (type.$kind === "struct" ||
+                type === System.Decimal ||
+                type === System.Int64 ||
+                type === System.UInt64 ||
+                type === System.Double ||
+                type === System.Single ||
+                type === System.Byte ||
+                type === System.SByte ||
+                type === System.Int16 ||
+                type === System.UInt16 ||
+                type === System.Int32 ||
+                type === System.UInt32 ||
+                type === Bridge.Int ||
+                type === Boolean ||
+                type === Date ||
+                type === Number) {
+                return false;
+            }
+
+            return true;
+        },
+
         applyConstructor: function (constructor, args) {
+            if (!args || args.length === 0) {
+                return new constructor();
+            }
+
+            if (constructor.$$initCtor && constructor.$kind !== "anonymous") {
+                var md = Bridge.getMetadata(constructor),
+                    count = 0;
+                if (md) {
+                    var ctors = Bridge.Reflection.getMembers(constructor, 1, 28),
+                        found;
+
+                    for (var j = 0; j < ctors.length; j++) {
+                        var ctor = ctors[j];
+                        if (ctor.params && ctor.params.length === args.length) {
+                            found = true;
+                            for (var k = 0; k < ctor.params.length; k++) {
+                                var p = ctor.params[k];
+
+                                if (!Bridge.is(args[k], p) || args[k] == null && !Bridge.Reflection.canAcceptNull(p)) {
+                                    found = false;
+                                    break;
+                                }
+                            }
+
+                            if (found) {
+                                constructor = constructor[ctor.sname];
+                                count++;
+                            }
+                        }
+                    }
+                } else {
+                    if (Bridge.isFunction(constructor.ctor) && constructor.ctor.length === args.length) {
+                        constructor = constructor.ctor;
+                    } else {
+                        var name = "$ctor",
+                        i = 1;
+                        while (Bridge.isFunction(constructor[name + i])) {
+                            if (constructor[name + i].length === args.length) {
+                                constructor = constructor[name + i];
+                                count++;
+                            }
+                            i++;
+                        }
+                    }
+                }
+
+                if (count > 1) {
+                    throw new System.Exception("The ambiguous constructor call");
+                }
+            }
+
             var f = function () {
                 constructor.apply(this, args);
             };
@@ -6485,7 +6563,7 @@
                 v = v.replace(nfInfo.numberDecimalSeparator, ".");
             }
 
-            if (!/^\s*[+-]?(\d+|\d*\.\d+)((e|E)[+-]?\d+)?\s*$/.test(v)) {
+            if (!/^\s*[+-]?(\d+|\d+.|\d*\.\d+)((e|E)[+-]?\d+)?\s*$/.test(v)) {
                 throw new System.FormatException();
             }
 
@@ -8702,6 +8780,21 @@
             return 0;
         },
 
+        getIsReadOnly: function (obj, T) {
+            var name;
+            if (Bridge.isArray(obj)) {
+                return T ? true : false;
+            } else if (Bridge.isFunction(obj[name = "System$Collections$ICollection$getIsReadOnly"])) {
+                return obj[name]();
+            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getIsReadOnly"])) {
+                return obj[name]();
+            } else if (Bridge.isFunction(obj.getIsReadOnly)) {
+                return obj.getIsReadOnly();
+            }
+
+            return 0;
+        },
+
         add: function (obj, item, T) {
             var name;
             if (Bridge.isArray(obj)) {
@@ -8740,23 +8833,44 @@
             }
         },
 
-        copy: function (src, spos, dst, dpos, len) {
+        copy: function (src, spos, dest, dpos, len) {
+            if (!dest) {
+                throw new System.ArgumentNullException("dest", "Value cannot be null");
+            }
+
+            if (!src) {
+                throw new System.ArgumentNullException("src", "Value cannot be null");
+            }
+
             if (spos < 0 || dpos < 0 || len < 0) {
-                throw new System.ArgumentOutOfRangeException();
+                throw new System.ArgumentOutOfRangeException("Number was less than the array's lower bound in the first dimension");
             }
 
-            if (len > (src.length - spos) || len > (dst.length - dpos)) {
-                throw new System.IndexOutOfRangeException();
+            if (len > (src.length - spos) || len > (dest.length - dpos)) {
+                throw new System.ArgumentException("Destination array was not long enough. Check destIndex and length, and the array's lower bounds");
             }
 
-            if (spos < dpos && src === dst) {
+            if (spos < dpos && src === dest) {
                 while (--len >= 0) {
-                    dst[dpos + len] = src[spos + len];
+                    dest[dpos + len] = src[spos + len];
                 }
             } else {
                 for (var i = 0; i < len; i++) {
-                    dst[dpos + i] = src[spos + i];
+                    dest[dpos + i] = src[spos + i];
                 }
+            }
+        },
+
+        copyTo: function (obj, dest, index, T) {
+            var name;
+            if (Bridge.isArray(obj)) {
+                System.Array.copy(obj, 0, dest, index, obj ? obj.length : 0);
+            } else if (Bridge.isFunction(obj.copyTo)) {
+                obj.copyTo(dest, index);
+            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo"])) {
+                obj[name](dest, index);
+            } else {
+                throw new System.NotImplementedException("copyTo");
             }
         },
 
@@ -9916,9 +10030,11 @@
                 "getItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem",
                 "setItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem",
                 "getCount", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getCount",
+                "getIsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getIsReadOnly",
                 "add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
                 "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
                 "contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
+                "copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo",
                 "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
                 "indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
                 "insert", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert",
@@ -9946,6 +10062,10 @@
 
             getCount: function () {
                 return this.items.length;
+            },
+
+            getIsReadOnly: function () {
+                return !!this.readOnly;
             },
 
             get: function (index) {
@@ -10004,7 +10124,7 @@
                 for (i = startIndex; i < this.items.length; i++) {
                     el = this.items[i];
 
-                    if (el === item || System.Collections.Generic.EqualityComparer$1.$default.equals2(el, item)) {
+                    if (System.Collections.Generic.EqualityComparer$1.$default.equals2(el, item)) {
                         return i;
                     }
                 }
@@ -10028,6 +10148,10 @@
 
             contains: function (item) {
                 return this.indexOf(item) > -1;
+            },
+
+            copyTo: function (array, arrayIndex) {
+                System.Array.copy(this.items, 0, array, arrayIndex, this.items.length);
             },
 
             getEnumerator: function () {
@@ -12430,7 +12554,7 @@
 
                     if (isFloating) {
                         if (typeCode === typeCodes.Decimal) {
-                            if (!/^[+-]?[0-9]+[.,]?[0-9]$/.test(value)) {
+                            if (!/^[+-]?(\d+|\d+.|\d*\.\d+)$/.test(value)) {
                                 if (!/^[+-]?[0-9]+$/.test(value)) {
                                     throw new System.FormatException("Input string was not in a correct format.");
                                 }
@@ -22860,7 +22984,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             var $t;
             $t = Bridge.getEnumerator(attrs);
             while ($t.moveNext()) {
-                var item = Bridge.cast($t.getCurrent(), System.Collections.Generic.KeyValuePair$2(String,String));
+                var item = $t.getCurrent();
                 el.setAttribute(item.key, item.value);
             }
         },
@@ -22870,7 +22994,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
             $t = Bridge.getEnumerator(obj);
             while ($t.moveNext()) {
-                var item = Bridge.cast($t.getCurrent(), System.Collections.Generic.KeyValuePair$2(String,String));
+                var item = $t.getCurrent();
                 str = System.String.concat(str, (System.String.concat(System.String.concat(System.String.concat(item.key.toLowerCase(), ":"), item.value), ";")));
             }
 
