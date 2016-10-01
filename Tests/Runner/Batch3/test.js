@@ -3319,7 +3319,7 @@
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge582.testTicks();
             },
             testSubtractTimeSpan: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge582).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge582, 4);
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge582).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge582);
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge582.testSubtractTimeSpan();
             },
             testTimeOfDay: function (assert) {
