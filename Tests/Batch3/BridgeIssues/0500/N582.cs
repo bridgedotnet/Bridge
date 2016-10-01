@@ -57,38 +57,33 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test]
         public static void TestSubtractTimeSpan()
         {
-            DateTime date1 = new DateTime(1996, 6, 3, 22, 15, 0);
-            DateTime date2 = new DateTime(1996, 12, 6, 13, 2, 0);
-            DateTime date3 = new DateTime(1996, 10, 12, 8, 42, 0);
+            DateTime date1 = new DateTime(1996, 1, 1, 1, 1, 1, 1);
+            DateTime date2 = new DateTime(1996, 2, 2, 2, 2, 2, 2);
+            DateTime date3 = new DateTime(1996, 3, 3, 3, 3, 3, 3);
 
             TimeSpan diff1 = date2.Subtract(date1);
 
-            Assert.AreEqual("something", diff1.ToString(), "Check diff1 value");
+            Assert.AreEqual(32, diff1.Days, "diff1 Days is 32");
+            Assert.AreEqual(1, diff1.Hours, "diff1 Hours is 1");
+            Assert.AreEqual(1, diff1.Minutes, "diff1 Minutes is 1");
+            Assert.AreEqual(1, diff1.Seconds, "diff1 Seconds is 1");
+            Assert.AreEqual(1, diff1.Milliseconds, "diff1 Milliseconds is 1");
 
-            Assert.AreEqual(185, diff1.Days, "diff1 Days is 185");
-            Assert.AreEqual(15, diff1.Hours, "diff1 Hours is 15");
-            Assert.AreEqual(47, diff1.Minutes, "diff1 Minutes is 47");
-            Assert.AreEqual(0, diff1.Seconds, "diff1 Seconds is 0");
-            Assert.AreEqual(0, diff1.Milliseconds, "diff1 Milliseconds is 0");
+            TimeSpan ts1 = new TimeSpan(32, 1, 1, 1, 1);
 
-            TimeSpan ts1 = new TimeSpan(185, 15, 47, 0);
-
-            Assert.AreEqual(185, ts1.Days, "ts1 Days is 185");
-            Assert.AreEqual(15, ts1.Hours, "ts1 Hours is 15");
-            Assert.AreEqual(47, ts1.Minutes, "ts1 Minutes is 47");
-            Assert.AreEqual(0, ts1.Seconds, "ts1 Seconds is 0");
-            Assert.AreEqual(0, ts1.Milliseconds, "ts1 Milliseconds is 0");
+            Assert.AreEqual(32, ts1.Days, "ts1 Days is 32");
+            Assert.AreEqual(1, ts1.Hours, "ts1 Hours is 1");
+            Assert.AreEqual(1, ts1.Minutes, "ts1 Minutes is 1");
+            Assert.AreEqual(1, ts1.Seconds, "ts1 Seconds is 1");
+            Assert.AreEqual(1, ts1.Milliseconds, "ts1 Milliseconds is 1");
 
             Assert.True(diff1.Equals(ts1), "Bridge582 TestSubtractTimeSpan diff1");
 
             DateTime date4 = date3.Subtract(diff1);
-            Assert.True(date4.Equals(new DateTime(1996, 4, 9, 16, 55, 0)), "Bridge582 TestSubtractTimeSpan date4");
+            Assert.True(date4.Equals(new DateTime(1996, 1, 31, 2, 2, 2, 2)), "Bridge582 TestSubtractTimeSpan date4");
 
-            TimeSpan diff2 = date2 - date3;
-            Assert.True(diff2.Equals(new TimeSpan(55, 5, 20, 0)), "Bridge582 TestSubtractTimeSpan diff2");
-
-            DateTime date5 = date1 - diff2;
-            Assert.True(date5.Equals(new DateTime(1996, 4, 9, 16, 55, 0)), "Bridge582 TestSubtractTimeSpan date5");
+            TimeSpan diff2 = date3 - date1;
+            Assert.True(diff2.Equals(new TimeSpan(62, 2, 2, 2, 2)), "Bridge582 TestSubtractTimeSpan diff2");
         }
 
         [Test(ExpectedCount = 6)]
