@@ -54,7 +54,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual(0, elapsedSpan.Seconds, "Bridge582 TestTicks minutes");
         }
 
-        [Test(ExpectedCount = 4)]
+        [Test]
         public static void TestSubtractTimeSpan()
         {
             DateTime date1 = new DateTime(1996, 6, 3, 22, 15, 0);
@@ -62,7 +62,24 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             DateTime date3 = new DateTime(1996, 10, 12, 8, 42, 0);
 
             TimeSpan diff1 = date2.Subtract(date1);
-            Assert.True(diff1.Equals(new TimeSpan(185, 15, 47, 0)), "Bridge582 TestSubtractTimeSpan diff1");
+
+            Assert.AreEqual(diff1.Days, 185);
+            Assert.AreEqual(diff1.Hours, 15);
+            Assert.AreEqual(diff1.Minutes, 47);
+            Assert.AreEqual(diff1.Seconds, 0);
+            Assert.AreEqual(diff1.Milliseconds, 0);
+            Assert.AreEqual(diff1.TotalMilliseconds, 16040820000);
+
+            TimeSpan ts1 = new TimeSpan(185, 15, 47, 0);
+
+            Assert.AreEqual(ts1.Days, 185);
+            Assert.AreEqual(ts1.Hours, 15);
+            Assert.AreEqual(ts1.Minutes, 47);
+            Assert.AreEqual(ts1.Seconds, 0);
+            Assert.AreEqual(ts1.Milliseconds, 0);
+            Assert.AreEqual(ts1.TotalMilliseconds, 16040820000);
+
+            Assert.True(diff1.Equals(ts1), "Bridge582 TestSubtractTimeSpan diff1");
 
             DateTime date4 = date3.Subtract(diff1);
             Assert.True(date4.Equals(new DateTime(1996, 4, 9, 16, 55, 0)), "Bridge582 TestSubtractTimeSpan date4");

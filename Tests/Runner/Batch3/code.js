@@ -12069,7 +12069,24 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 var date3 = new Date(1996, 10 - 1, 12, 8, 42, 0);
 
                 var diff1 = Bridge.Date.subdd(date2, date1);
-                Bridge.Test.Assert.true$1(diff1.equalsT(new System.TimeSpan(185, 15, 47, 0)), "Bridge582 TestSubtractTimeSpan diff1");
+
+                Bridge.Test.Assert.areEqual(diff1.getDays(), 185);
+                Bridge.Test.Assert.areEqual(diff1.getHours(), 15);
+                Bridge.Test.Assert.areEqual(diff1.getMinutes(), 47);
+                Bridge.Test.Assert.areEqual(diff1.getSeconds(), 0);
+                Bridge.Test.Assert.areEqual(diff1.getMilliseconds(), 0);
+                Bridge.Test.Assert.areEqual(diff1.getTotalMilliseconds(), System.Int64([-1139049184,3]));
+
+                var ts1 = new System.TimeSpan(185, 15, 47, 0);
+
+                Bridge.Test.Assert.areEqual(ts1.getDays(), 185);
+                Bridge.Test.Assert.areEqual(ts1.getHours(), 15);
+                Bridge.Test.Assert.areEqual(ts1.getMinutes(), 47);
+                Bridge.Test.Assert.areEqual(ts1.getSeconds(), 0);
+                Bridge.Test.Assert.areEqual(ts1.getMilliseconds(), 0);
+                Bridge.Test.Assert.areEqual(ts1.getTotalMilliseconds(), System.Int64([-1139049184,3]));
+
+                Bridge.Test.Assert.true$1(diff1.equalsT(ts1), "Bridge582 TestSubtractTimeSpan diff1");
 
                 var date4 = new Date(date3 - new Date((diff1).ticks.div(10000).toNumber()));
                 Bridge.Test.Assert.true$1(Bridge.equalsT(date4, new Date(1996, 4 - 1, 9, 16, 55, 0)), "Bridge582 TestSubtractTimeSpan date4");
