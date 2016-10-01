@@ -12070,19 +12070,21 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                 var diff1 = Bridge.Date.subdd(date2, date1);
 
-                Bridge.Test.Assert.areEqual$1(diff1.getDays(), 185, "diff1 Days is 185");
-                Bridge.Test.Assert.areEqual$1(diff1.getHours(), 15, "diff1 Hours is 15");
-                Bridge.Test.Assert.areEqual$1(diff1.getMinutes(), 47, "diff1 Minutes is 47");
-                Bridge.Test.Assert.areEqual$1(diff1.getSeconds(), 0, "diff1 Seconds is 0");
-                Bridge.Test.Assert.areEqual$1(diff1.getMilliseconds(), 0, "diff1 Milliseconds is 0");
+                Bridge.Test.Assert.areEqual$1("something", diff1.toString(), "Check diff1 value");
+
+                Bridge.Test.Assert.areEqual$1(185, diff1.getDays(), "diff1 Days is 185");
+                Bridge.Test.Assert.areEqual$1(15, diff1.getHours(), "diff1 Hours is 15");
+                Bridge.Test.Assert.areEqual$1(47, diff1.getMinutes(), "diff1 Minutes is 47");
+                Bridge.Test.Assert.areEqual$1(0, diff1.getSeconds(), "diff1 Seconds is 0");
+                Bridge.Test.Assert.areEqual$1(0, diff1.getMilliseconds(), "diff1 Milliseconds is 0");
 
                 var ts1 = new System.TimeSpan(185, 15, 47, 0);
 
-                Bridge.Test.Assert.areEqual$1(ts1.getDays(), 185, "ts1 Days is 185");
-                Bridge.Test.Assert.areEqual$1(ts1.getHours(), 15, "ts1 Hours is 15");
-                Bridge.Test.Assert.areEqual$1(ts1.getMinutes(), 47, "ts1 Minutes is 47");
-                Bridge.Test.Assert.areEqual$1(ts1.getSeconds(), 0, "ts1 Seconds is 0");
-                Bridge.Test.Assert.areEqual$1(ts1.getMilliseconds(), 0, "ts1 Milliseconds is 0");
+                Bridge.Test.Assert.areEqual$1(185, ts1.getDays(), "ts1 Days is 185");
+                Bridge.Test.Assert.areEqual$1(15, ts1.getHours(), "ts1 Hours is 15");
+                Bridge.Test.Assert.areEqual$1(47, ts1.getMinutes(), "ts1 Minutes is 47");
+                Bridge.Test.Assert.areEqual$1(0, ts1.getSeconds(), "ts1 Seconds is 0");
+                Bridge.Test.Assert.areEqual$1(0, ts1.getMilliseconds(), "ts1 Milliseconds is 0");
 
                 Bridge.Test.Assert.true$1(diff1.equalsT(ts1), "Bridge582 TestSubtractTimeSpan diff1");
 
