@@ -7774,13 +7774,6 @@
                 date.getMilliseconds()));
         },
 
-        dateDiff: function (a, b) {
-            var utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate(), a.getHours(), a.getMinutes(), a.getSeconds(), a.getMilliseconds());
-            var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate(), b.getHours(), b.getMinutes(), b.getSeconds(), b.getMilliseconds());
-
-            return utc1 - utc2;
-        },
-
         dateAddSubTimespan: function (d, t, direction) {
             var result = new Date(d.getTime());
 
@@ -7802,7 +7795,7 @@
         },
 
         subdd: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (new System.TimeSpan(Bridge.Date.dateDiff(a, b) * 10000)) : null;
+            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (new System.TimeSpan((a - b) * 10000)) : null;
         },
 
         gt: function (a, b) {
