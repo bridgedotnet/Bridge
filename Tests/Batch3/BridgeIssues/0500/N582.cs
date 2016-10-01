@@ -62,16 +62,16 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             DateTime date3 = new DateTime(1996, 10, 12, 8, 42, 0);
 
             TimeSpan diff1 = date2.Subtract(date1);
-            Assert.True(diff1.Equals(new TimeSpan(185, 14, 47, 0)), "Bridge582 TestSubtractTimeSpan diff1");
+            Assert.True(diff1.Equals(new TimeSpan(185, 15, 47, 0)), "Bridge582 TestSubtractTimeSpan diff1");
 
             DateTime date4 = date3.Subtract(diff1);
-            Assert.True(date4.Equals(new DateTime(1996, 4, 9, 17, 55, 0)), "Bridge582 TestSubtractTimeSpan date4");
+            Assert.True(date4.Equals(new DateTime(1996, 4, 9, 16, 55, 0)), "Bridge582 TestSubtractTimeSpan date4");
 
             TimeSpan diff2 = date2 - date3;
-            Assert.True(diff2.Equals(new TimeSpan(55, 4, 20, 0)), "Bridge582 TestSubtractTimeSpan diff2");
+            Assert.True(diff2.Equals(new TimeSpan(55, 5, 20, 0)), "Bridge582 TestSubtractTimeSpan diff2");
 
             DateTime date5 = date1 - diff2;
-            Assert.True(date5.Equals(new DateTime(1996, 4, 9, 17, 55, 0)), "Bridge582 TestSubtractTimeSpan date5");
+            Assert.True(date5.Equals(new DateTime(1996, 4, 9, 16, 55, 0)), "Bridge582 TestSubtractTimeSpan date5");
         }
 
         [Test(ExpectedCount = 6)]
