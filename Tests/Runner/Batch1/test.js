@@ -711,6 +711,7 @@
             QUnit.test("DateTime - DateTimeEqualsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests.dateTimeEqualsWorks);
             QUnit.test("DateTime - CompareToWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests.compareToWorks);
             QUnit.test("DateTime - DateTimes", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests.dateTimes);
+            QUnit.test("DateTime - CreateUnixTimestampAndConvertBackToDateTime", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests.createUnixTimestampAndConvertBackToDateTime);
             QUnit.test("TimeSpan - TypePropertiesAreCorrect", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_TimeSpanTests.typePropertiesAreCorrect);
             QUnit.test("TimeSpan - DefaultConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_TimeSpanTests.defaultConstructorWorks);
             QUnit.test("TimeSpan - DefaultValueWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_TimeSpanTests.defaultValueWorks);
@@ -10685,6 +10686,10 @@
             dateTimes: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests, 1);
                 Bridge.ClientTest.SimpleTypes.JsDateTimeTests.dateTimes();
+            },
+            createUnixTimestampAndConvertBackToDateTime: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests, 11);
+                t.getFixture().createUnixTimestampAndConvertBackToDateTime();
             }
         }
     });

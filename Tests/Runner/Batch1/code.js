@@ -26205,6 +26205,29 @@
             Bridge.Test.Assert.true(Bridge.compare(Bridge.cast(new Date(System.Int64(0).toNumber()/10000), System.IComparable$1(Date)), new Date(System.Int64(0).toNumber()/10000), false, Date) === 0);
             Bridge.Test.Assert.true(Bridge.compare(Bridge.cast(new Date(System.Int64(10000).toNumber()/10000), System.IComparable$1(Date)), new Date(System.Int64(0).toNumber()/10000), false, Date) > 0);
             Bridge.Test.Assert.true(Bridge.compare(Bridge.cast(new Date(System.Int64(0).toNumber()/10000), System.IComparable$1(Date)), new Date(System.Int64(10000).toNumber()/10000), false, Date) < 0);
+        },
+        createUnixTimestampAndConvertBackToDateTime: function () {
+            var now = new Date();
+            var unixNow = Bridge.Date.subdd(now, new Date(1970, 1 - 1, 1)).getTicks();
+            var parsedUnixNow = new Date(System.Int64((new Date(1970, 1 - 1, 1)).getTime()).add((unixNow).div(10000)).toNumber());
+
+            Bridge.Test.Assert.true$1(now.getFullYear() === parsedUnixNow.getFullYear(), "[#1901] Year is the same");
+            Bridge.Test.Assert.true$1((now.getMonth() + 1) === (parsedUnixNow.getMonth() + 1), "[#1901] Month is the same");
+            Bridge.Test.Assert.true$1(now.getDate() === parsedUnixNow.getDate(), "[#1901] Day is the same");
+            Bridge.Test.Assert.true$1(now.getHours() === parsedUnixNow.getHours(), "[#1901] Hour is the same");
+            Bridge.Test.Assert.true$1(now.getMinutes() === parsedUnixNow.getMinutes(), "[#1901] Minute is the same");
+            Bridge.Test.Assert.true$1(now.getSeconds() === parsedUnixNow.getSeconds(), "[#1901] Second is the same");
+            Bridge.Test.Assert.true$1(now.getMilliseconds() === parsedUnixNow.getMilliseconds(), "[#1901] Millisecond is the same");
+            Bridge.Test.Assert.true$1(System.Int64((now).getTime()).mul(10000).equals(System.Int64((parsedUnixNow).getTime()).mul(10000)), "[#1901] Ticks is the same");
+
+            Bridge.Test.Assert.true$1(Bridge.equals(now, parsedUnixNow), "[#1901] DateTime == is true");
+            Bridge.Test.Assert.true$1(Bridge.equalsT(now, parsedUnixNow), "[#1901] DateTime .Equals is true");
+
+            // Compare the DateTimes as strings
+            var result1 = Bridge.Date.format(now);
+            var result2 = Bridge.Date.format(parsedUnixNow);
+
+            Bridge.Test.Assert.true$1(Bridge.referenceEquals(result1, result2), "[#1901] DateTime to Timestamp back to DateTime is different");
         }
     });
 
