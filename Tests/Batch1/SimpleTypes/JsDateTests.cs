@@ -692,5 +692,31 @@ namespace Bridge.ClientTest.SimpleTypes
 
             //Script.Write<dynamic>("assert.deepEqual(Bridge.Date.format(bridgeDate2, format), Bridge.Date.format(jsDate, format), \"[#83] js\");");
         }
+
+        [Test(ExpectedCount = 11)]
+        public void CreateUnixTimestampAndConvertBackToDateTime()
+        {
+            var now = DateTime.Now;
+            var unixNow = (long)now.Subtract(new DateTime(1970, 1, 1)).Ticks;
+            var parsedUnixNow = new DateTime(1970, 1, 1).AddTicks(unixNow);
+
+            Assert.True(now.Year == parsedUnixNow.Year, "[#1901] Year is the same");
+            Assert.True(now.Month == parsedUnixNow.Month, "[#1901] Month is the same");
+            Assert.True(now.Day == parsedUnixNow.Day, "[#1901] Day is the same");
+            Assert.True(now.Hour == parsedUnixNow.Hour, "[#1901] Hour is the same");
+            Assert.True(now.Minute == parsedUnixNow.Minute, "[#1901] Minute is the same");
+            Assert.True(now.Second == parsedUnixNow.Second, "[#1901] Second is the same");
+            Assert.True(now.Millisecond == parsedUnixNow.Millisecond, "[#1901] Millisecond is the same");
+            Assert.True(now.Ticks == parsedUnixNow.Ticks, "[#1901] Ticks is the same");
+
+            Assert.True(now == parsedUnixNow, "[#1901] DateTime == is true");
+            Assert.True(now.Equals(parsedUnixNow), "[#1901] DateTime .Equals is true");
+
+            // Compare the DateTimes as strings
+            var result1 = now.ToString();
+            var result2 = parsedUnixNow.ToString();
+
+            Assert.True(result1 == result2, "[#1901] DateTime to Timestamp back to DateTime is different");
+        }
     }
 }
