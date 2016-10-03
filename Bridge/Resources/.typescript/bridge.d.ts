@@ -430,6 +430,26 @@ declare module System {
         toString(str: string, provider?: System.Globalization.DateTimeFormatInfo): string;
     }
 
+    export interface Random {
+        sample(): number;
+        internalSample(): number;
+        next(): number;
+        next$2(minValue: number, maxValue: number): number;
+        next$1(maxValue: number): number;
+        nextDouble(): number;
+        nextBytes(buffer: number[]): void;
+    }
+    export interface RandomFunc extends Function {
+        prototype: Random;
+        ctor: {
+            new (): Random
+        };
+        $ctor1: {
+            new (seed: number): Random
+        };
+    }
+    var Random: RandomFunc;
+
     module Collections {
         export interface IEnumerable {
             getEnumerator(): IEnumerator;

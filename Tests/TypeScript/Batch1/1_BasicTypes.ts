@@ -110,3 +110,50 @@ QUnit.test("Reserved words", function (assert) {
     assert.deepEqual(k.from, "from", "from");
     assert.deepEqual(k.of, "of", "of");
 });
+
+QUnit.test("Issue #1877", function (assert) {
+    //Unseeded
+    var r = new System.Random.ctor();
+
+    var ITERATIONS = 100;
+
+    for (var i = 0; i < ITERATIONS; i++) {
+        var x = r.next$1(20);
+        assert.ok(x >= 0 && x < 20, x + " under 20 - Next(maxValue)");
+    }
+
+    for (var i = 0; i < ITERATIONS; i++) {
+        var x = r.next$2(20, 30);
+        assert.ok(x >= 20 && x < 30, x + " between 20 and 30 - Next(minValue, maxValue)");
+    }
+
+    for (var i = 0; i < ITERATIONS; i++) {
+        var x = r.nextDouble();
+        assert.ok(x >= 0.0 && x < 1.0, x + " between 0.0 and 1.0  - NextDouble()");
+    }
+
+    //Seeded
+    var seed = Date.now();
+
+    var r1 = new System.Random.$ctor1(seed);
+    var r2 = new System.Random.$ctor1(seed);
+
+    var b1 = [];
+    r1.nextBytes(b1);
+
+    var b2 = [];
+    r2.nextBytes(b2);
+
+    for (var i = 0; i < b1.length; i++)
+    {
+        assert.equal(b1[i], b2[i], "NextBytes()");
+    }
+
+    for (var i = 0; i < b1.length; i++)
+    {
+        var x1 = r1.next();
+        var x2 = r2.next();
+
+        assert.equal(x1, x2, "Next()");
+    }
+});
