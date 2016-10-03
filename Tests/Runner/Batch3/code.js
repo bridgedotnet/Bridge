@@ -6913,6 +6913,8 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
+
+
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6942,7 +6944,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                }; /// Async method lacks 'await' operators and will run synchronously
+                                };
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -10076,8 +10078,27 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1896", {
         testHexStringToInt: function () {
-            var v = System.UInt32.parse("0xffff", 16);
-            Bridge.Test.Assert.areEqual(65535, v);
+            var radix = 16;
+
+            var v1 = System.UInt32.parse("ffff", radix);
+            Bridge.Test.Assert.areEqual(65535, v1);
+
+            Bridge.Test.Assert.throws$6(System.FormatException, function () {
+                System.UInt32.parse("0xffff", radix);
+            });
+
+            var v2 = { };
+            var b2 = System.UInt32.tryParse("1700ffff", v2, radix);
+            Bridge.Test.Assert.true$1(b2, "b2");
+            Bridge.Test.Assert.areEqual(385941503, v2.v);
+
+            var v3 = { };
+            var b3 = System.UInt32.tryParse("0x1700fffА", v3, radix);
+            Bridge.Test.Assert.false$1(b3, System.String.concat("b3: ", v3.v));
+
+            var v4 = { };
+            var b4 = System.UInt32.tryParse("1700fffg", v4, radix);
+            Bridge.Test.Assert.false$1(b4, System.String.concat("b4: ", v4.v));
         }
     });
 
