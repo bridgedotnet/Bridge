@@ -605,7 +605,8 @@
                     throw new System.ArgumentNullException("str");
                 }
 
-                if (radix <= 10 && !/^[+-]?[0-9]+$/.test(str)) {
+                if ((radix <= 10 && !/^[+-]?[0-9]+$/.test(str))
+                    || (radix == 16 && !/^[+-]?[0-9A-F]+$/gi.test(str))) {
                     throw new System.FormatException("Input string was not in a correct format.");
                 }
 
@@ -626,7 +627,8 @@
                 result.v = 0;
                 radix = radix || 10;
 
-                if (radix <= 10 && !/^[+-]?[0-9]+$/.test(str)) {
+                if ((radix <= 10 && !/^[+-]?[0-9]+$/.test(str))
+                    || (radix == 16 && !/^[+-]?[0-9A-F]+$/gi.test(str))) {
                     return false;
                 }
 

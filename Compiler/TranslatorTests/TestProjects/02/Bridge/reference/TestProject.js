@@ -5644,15 +5644,18 @@
             },
 
             parseInt: function (str, min, max, radix) {
+                radix = radix || 10;
+
                 if (str == null) {
                     throw new System.ArgumentNullException("str");
                 }
 
-                if (!/^[+-]?[0-9]+$/.test(str)) {
+                if ((radix <= 10 && !/^[+-]?[0-9]+$/.test(str))
+                    || (radix == 16 && !/^[+-]?[0-9A-F]+$/gi.test(str))) {
                     throw new System.FormatException("Input string was not in a correct format.");
                 }
 
-                var result = parseInt(str, radix || 10);
+                var result = parseInt(str, radix);
 
                 if (isNaN(result)) {
                     throw new System.FormatException("Input string was not in a correct format.");
@@ -5667,12 +5670,14 @@
 
             tryParseInt: function (str, result, min, max, radix) {
                 result.v = 0;
+                radix = radix || 10;
 
-                if (!/^[+-]?[0-9]+$/.test(str)) {
+                if ((radix <= 10 && !/^[+-]?[0-9]+$/.test(str))
+                    || (radix == 16 && !/^[+-]?[0-9A-F]+$/gi.test(str))) {
                     return false;
                 }
 
-                result.v = parseInt(str, radix || 10);
+                result.v = parseInt(str, radix);
 
                 if (result.v < min || result.v > max) {
                     return false;
