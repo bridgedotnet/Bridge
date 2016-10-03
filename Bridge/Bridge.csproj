@@ -329,6 +329,7 @@
     <Content Include="Resources\.generated\bridge\utils\console.js" />
     <Content Include="Resources\.generated\system\formattableString.js" />
     <Content Include="Resources\.generated\system\formattableStringImpl.js" />
+    <Content Include="Resources\.generated\system\guid.js" />
     <Content Include="Resources\.generated\system\random.js" />
     <Content Include="Resources\.generated\system\runtime\compilerServices\formattableStringFactory.js" />
     <Content Include="Resources\.generated\system\threading\timer.js" />
@@ -761,7 +762,6 @@
     <Content Include="Resources\Diagnostics.js" />
     <Content Include="Resources\Convert.js" />
     <Content Include="Resources\Enum.js" />
-    <Content Include="Resources\Guid.js" />
     <Content Include="Resources\.lib\LongLib.js" />
     <Content Include="Resources\Long.js" />
     <Content Include="Resources\Math.js" />

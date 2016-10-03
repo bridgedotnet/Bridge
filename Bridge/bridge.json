@@ -64,7 +64,7 @@
         "Resources/ClientWebSocket.js",
         "Resources/Uri.js",
         "Resources/linq.js",
-        "Resources/Guid.js",
+        "Resources/.generated/system/guid.js",
         "Resources/Text/RegularExpressions/Regex.js",
         "Resources/Text/RegularExpressions/RegexCapture.js",
         "Resources/Text/RegularExpressions/RegexCaptureCollection.js",
