@@ -1,42 +1,52 @@
-/// <reference path="..\..\Runner\resources\qunit\qunit.d.ts" />
+﻿/// <reference path="..\..\Runner\resources\qunit\qunit.d.ts" />
 /// <reference path="..\..\Runner\TypeScript\App1\bridge.d.ts" />
 /// <reference path="..\..\Runner\TypeScript\App1\basicTypes.d.ts" />
 QUnit.module("TypeScript - Basic Types");
 QUnit.test("Fields of basic types", function (assert) {
     var instance = new BasicTypes.BasicTypes();
+
     assert.deepEqual(instance.boolValue, true, "boolValue");
     assert.deepEqual(instance.integerValue, -1000, "integerValue");
     assert.deepEqual(instance.floatValue, 2.3, "floatValue");
     assert.deepEqual(instance.stringValue, "Some string value", "stringValue");
     assert.deepEqual(instance.integerArray, [1, 2, 3], "integerArray");
     assert.deepEqual(instance.stringArray, ["1", "2", "3"], "stringArray");
-    assert.deepEqual(instance.colorArray, [BasicTypes.Color.Blue, BasicTypes.Color.Green, BasicTypes.Color.Red], "colorArray");
-    assert.deepEqual(instance.colorValue, BasicTypes.Color.Green, "colorValue");
+    assert.deepEqual(instance.colorArray, [2 /* Blue */, 1 /* Green */, 0 /* Red */], "colorArray");
+    assert.deepEqual(instance.colorValue, 1 /* Green */, "colorValue");
     assert.deepEqual(instance.anyValueString, "AnyValueString", "anyValueString");
     assert.deepEqual(instance.anyValueInteger, 1, "anyValueInteger");
     assert.deepEqual(instance.dynamicValueInteger, 7, "dynamicValueInteger");
     assert.deepEqual(instance.voidFunction(), instance.undefinedValue, "Void and undefined values");
 });
+
 QUnit.test("Issue #430", function (assert) {
     var instance = new BasicTypes.BasicTypes();
+
     assert.deepEqual(instance.twoDimensionalArray[0][0], 1, "Getting twoDimensionalArray[0][0] = 1");
     assert.deepEqual(instance.twoDimensionalArray[0][1], 2, "Getting twoDimensionalArray[0][1] = 2");
     assert.deepEqual(instance.twoDimensionalArray[0][2], 3, "Getting twoDimensionalArray[0][2] = 3");
     assert.deepEqual(instance.twoDimensionalArray[1][0], 5, "Getting twoDimensionalArray[1][0] = 5");
     assert.deepEqual(instance.twoDimensionalArray[1][1], 8, "Getting twoDimensionalArray[1][1] = 8");
+
     instance.twoDimensionalArray[0][0] = 10;
     assert.deepEqual(instance.twoDimensionalArray[0][0], 10, "Setting twoDimensionalArray[0][0] = 10");
+
     instance.twoDimensionalArray[0][1] = 20;
     assert.deepEqual(instance.twoDimensionalArray[0][1], 20, "Setting twoDimensionalArray[0][1] = 20");
+
     instance.twoDimensionalArray[0][2] = 30;
     assert.deepEqual(instance.twoDimensionalArray[0][2], 30, "Setting twoDimensionalArray[0][2] = 30");
+
     instance.twoDimensionalArray[1][0] = 50;
     assert.deepEqual(instance.twoDimensionalArray[1][0], 50, "Setting twoDimensionalArray[1][0] = 50");
+
     instance.twoDimensionalArray[1][1] = 80;
     assert.deepEqual(instance.twoDimensionalArray[1][1], 80, "Setting twoDimensionalArray[1][1] = 80");
 });
+
 QUnit.test("Reserved words", function (assert) {
     var k = new BasicTypes.Keywords();
+
     assert.deepEqual(k.break, "break", "break");
     assert.deepEqual(k.case, "case", "case");
     assert.deepEqual(k.catch, "catch", "catch");
