@@ -110,8 +110,8 @@
             conditionText = conditionText.substring(conditionText.indexOf("return") + 7);
             conditionText = conditionText.substr(0, conditionText.lastIndexOf(";"));
 
-            var failureMessage = (conditionText) ? "Contract '" + conditionText + "' failed" : "Contract failed";
-            var displayMessage = (userMessage) ? failureMessage + ": " + userMessage : failureMessage;
+            var failureMessage = (conditionText) ? "Contract '" + conditionText + "' failed" : "Contract failed",
+                displayMessage = (userMessage) ? failureMessage + ": " + userMessage : failureMessage;
 
             if (TException) {
                 throw new TException(conditionText, userMessage);

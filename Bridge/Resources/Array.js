@@ -54,6 +54,7 @@
 
         set: function (arr, value) {
             var indices = Array.prototype.slice.call(arguments, 2);
+
             arr[System.Array.toIndex(arr, indices)] = value;
         },
 
@@ -207,6 +208,7 @@
 
         getIsReadOnly: function (obj, T) {
             var name;
+
             if (Bridge.isArray(obj)) {
                 return T ? true : false;
             } else if (Bridge.isFunction(obj[name = "System$Collections$ICollection$getIsReadOnly"])) {
@@ -222,6 +224,7 @@
 
         add: function (obj, item, T) {
             var name;
+
             if (Bridge.isArray(obj)) {
                 obj.push(item);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add"])) {
@@ -233,6 +236,7 @@
 
         clear: function (obj, T) {
             var name;
+
             if (Bridge.isArray(obj)) {
                 System.Array.fill(obj, T ? (T.getDefaultValue || Bridge.getDefaultValue(T)) : null, 0, obj.length);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear"])) {
@@ -288,6 +292,7 @@
 
         copyTo: function (obj, dest, index, T) {
             var name;
+
             if (Bridge.isArray(obj)) {
                 System.Array.copy(obj, 0, dest, index, obj ? obj.length : 0);
             } else if (Bridge.isFunction(obj.copyTo)) {
@@ -301,6 +306,7 @@
 
         indexOf: function (arr, item, startIndex, count, T) {
             var name;
+
             if (Bridge.isArray(arr)) {
                 var i,
                     el,
@@ -328,6 +334,7 @@
 
         contains: function (obj, item, T) {
             var name;
+
             if (Bridge.isArray(obj)) {
                 return System.Array.indexOf(obj, item) > -1;
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains"])) {
@@ -341,6 +348,7 @@
 
         remove: function (obj, item, T) {
             var name;
+
             if (Bridge.isArray(obj)) {
                 var index = System.Array.indexOf(obj, item);
 
@@ -360,6 +368,7 @@
 
         insert: function (obj, index, item, T) {
             var name;
+
             if (Bridge.isArray(obj)) {
                 obj.splice(index, 0, item);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert"])) {
@@ -371,6 +380,7 @@
 
         removeAt: function (obj, index, T) {
             var name;
+
             if (Bridge.isArray(obj)) {
                 obj.splice(index, 1);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt"])) {
@@ -382,6 +392,7 @@
 
         getItem: function (obj, idx, T) {
             var name;
+
             if (Bridge.isArray(obj)) {
                 return obj[idx];
             } else if (Bridge.isFunction(obj.get)) {
@@ -397,6 +408,7 @@
 
         setItem: function (obj, idx, value, T) {
             var name;
+
             if (Bridge.isArray(obj)) {
                 obj[idx] = value;
             } else if (Bridge.isFunction(obj.set)) {
@@ -562,6 +574,7 @@
                     min = arr[i];
                 }
             }
+
             return min;
         },
 

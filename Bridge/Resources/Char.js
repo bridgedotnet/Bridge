@@ -3,14 +3,17 @@
         $kind: "struct",
         statics: {
             min: 0,
+
             max: 65535,
 
             instanceOf: function (instance) {
                 return typeof (instance) === "number" && Math.round(instance, 0) == instance && instance >= System.Char.min && instance <= System.Char.max;
             },
+
             getDefaultValue: function () {
                 return 0;
             },
+
             parse: function (s) {
                 if (!Bridge.hasValue(s)) {
                     throw new System.ArgumentNullException("s");
@@ -19,8 +22,10 @@
                 if (s.length !== 1) {
                     throw new System.FormatException();
                 }
+
                 return s.charCodeAt(0);
             },
+
             tryParse: function (s, result) {
                 var b = s && s.length === 1;
 
@@ -28,6 +33,7 @@
 
                 return b;
             },
+
             format: function (number, format, provider) {
                 return Bridge.Int.format(number, format, provider);
             },

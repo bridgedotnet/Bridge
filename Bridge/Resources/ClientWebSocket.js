@@ -1,5 +1,6 @@
     Bridge.define("System.Net.WebSockets.ClientWebSocket", {
         inherits: [System.IDisposable],
+
         ctor: function () {
             this.$initialize();
             this.messageBuffer = [];
@@ -33,6 +34,7 @@
 
             this.options.setToReadOnly();
             this.state = "connecting";
+
             var tcs = new System.Threading.Tasks.TaskCompletionSource(),
                 self = this;
 
@@ -48,6 +50,7 @@
                     var data = e.data,
                         message = {},
                         i;
+
                     message.bytes = [];
 
                     if (typeof (data) === "string") {
@@ -91,6 +94,7 @@
 
         sendAsync: function (buffer, messageType, endOfMessage, cancellationToken) {
             this.throwIfNotConnected();
+
             var tcs = new System.Threading.Tasks.TaskCompletionSource();
 
             try {

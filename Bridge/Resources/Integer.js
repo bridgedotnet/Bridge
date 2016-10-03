@@ -86,6 +86,7 @@
                             if (isNaN(precision)) {
                                 precision = nf.numberDecimalDigits;
                             }
+
                             return this.defaultFormat(number, 1, precision, precision, nf, fs === "F");
                         case "G":
                         case "E":
@@ -117,6 +118,7 @@
 
                             if (fs === "G") {
                                 var noPrecision = isNaN(precision);
+
                                 if (noPrecision) {
                                     if (isDecimal) {
                                         precision = 29;
@@ -187,10 +189,13 @@
                             return this.defaultFormat(number, 1, precision, precision, nf, false, "currency");
                         case "R":
                             var r_result = isDecimal || isLong ? (number.toString()) : ("" + number);
+
                             if (decimalSeparator !== ".") {
                                 r_result = r_result.replace(".", decimalSeparator);
                             }
+
                             r_result = r_result.replace("e", "E");
+
                             return r_result;
                     }
                 }
@@ -477,6 +482,7 @@
                         f++;
                     } else if (c === "#" || c === "0") {
                         wasIntPart = true;
+
                         if (!wasSeparator && isZeroInt && c === "#") {
                             i++;
                         } else {
@@ -492,6 +498,7 @@
                                 } else if (i >= integralDigits - forcedDigits) {
                                     this.addGroup("0", groupCfg);
                                 }
+
                                 unused = 0;
                             } else if (forcedDecimals-- > 0 || i < number.length) {
                                 this.addGroup(i >= number.length ? "0" : number.charAt(i), groupCfg);
@@ -506,6 +513,7 @@
                             buffer += number.substr(0, integralDigits);
                             wasIntPart = true;
                         }
+
                         if (number.length > ++i || forcedDecimals > 0) {
                             wasSeparator = true;
                             buffer += nf[name + "DecimalSeparator"];
@@ -738,41 +746,56 @@
         inherits: [System.IComparable, System.IFormattable],
         statics: {
             min: -Number.MAX_VALUE,
+
             max: Number.MAX_VALUE,
+
             precision: 15,
+
             $number: true,
 
             instanceOf: function (instance) {
                 return typeof (instance) === "number";
             },
+
             getDefaultValue: function () {
                 return 0;
             },
+
             parse: function (s, provider) {
                 return Bridge.Int.parseFloat(s, provider);
             },
+
             tryParse: function (s, provider, result) {
                 return Bridge.Int.tryParseFloat(s, provider, result);
             },
+
             format: function (number, format, provider) {
                 return Bridge.Int.format(number, format, provider, System.Double);
             }
         }
     });
+
     Bridge.Class.addExtend(System.Double, [System.IComparable$1(System.Double), System.IEquatable$1(System.Double)]);
 
     Bridge.define("System.Single", {
         inherits: [System.IComparable, System.IFormattable],
         statics: {
             min: -3.40282346638528859e+38,
+
             max: 3.40282346638528859e+38,
+
             precision: 7,
+
             $number: true,
 
             instanceOf: System.Double.instanceOf,
+
             getDefaultValue: System.Double.getDefaultValue,
+
             parse: System.Double.parse,
+
             tryParse: System.Double.tryParse,
+
             format: function (number, format, provider) {
                 return Bridge.Int.format(number, format, provider, System.Single);
             }

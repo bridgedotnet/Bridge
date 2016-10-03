@@ -26,6 +26,7 @@
             System.Enum.checkEnumType(enumType);
 
             var intValue = {};
+
             if (System.Int32.tryParse(s, intValue)) {
                 return intValue.v;
             }
@@ -39,24 +40,26 @@
                     }
                 }
             } else {
-                var parts = s.split(',');
-                var value = 0;
-                var parsed = true;
+                var parts = s.split(','),
+                    value = 0,
+                    parsed = true;
 
                 for (var i = parts.length - 1; i >= 0; i--) {
-                    var part = parts[i].trim();
-                    var found = false;
+                    var part = parts[i].trim(),
+                        found = false;
 
                     for (var f in values) {
                         if (enumMethods.nameEquals(f, part, ignoreCase)) {
                             value |= values[f];
                             found = true;
+
                             break;
                         }
                     }
 
                     if (!found) {
                         parsed = false;
+
                         break;
                     }
                 }
@@ -113,8 +116,8 @@
         getValues: function (enumType) {
             System.Enum.checkEnumType(enumType);
 
-            var parts = [];
-            var values = enumType;
+            var parts = [],
+                values = enumType;
 
             for (var i in values) {
                 if (values.hasOwnProperty(i) && i.indexOf("$") < 0 && typeof values[i] !== "function") {
@@ -155,8 +158,8 @@
         getNames: function (enumType) {
             System.Enum.checkEnumType(enumType);
 
-            var parts = [];
-            var values = enumType;
+            var parts = [],
+                values = enumType;
 
             for (var i in values) {
                 if (values.hasOwnProperty(i) && i.indexOf("$") < 0 && typeof values[i] !== "function") {
@@ -188,8 +191,8 @@
         isDefined: function (enumType, value) {
             System.Enum.checkEnumType(enumType);
 
-            var values = enumType;
-            var isString = Bridge.isString(value);
+            var values = enumType,
+                isString = Bridge.isString(value);
 
             for (var i in values) {
                 if (isString ? enumMethods.nameEquals(i, value, false) : values[i] === value) {

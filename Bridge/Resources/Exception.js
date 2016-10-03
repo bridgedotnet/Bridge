@@ -60,6 +60,7 @@
 
         ctor: function (message, innerException) {
             this.$initialize();
+
             if (!message) {
                 message = "Insufficient memory to continue the execution of the program.";
             }
@@ -73,6 +74,7 @@
 
         ctor: function (message, innerException) {
             this.$initialize();
+
             if (!message) {
                 message = "Index was outside the bounds of the array.";
             }
@@ -86,6 +88,7 @@
 
         ctor: function (message, innerException) {
             this.$initialize();
+
             if (!message) {
                 message = "The operation has timed out.";
             }
@@ -98,8 +101,11 @@
         inherits: [System.TimeoutException],
 
         _regexInput: "",
+
         _regexPattern: "",
+
         _matchTimeout: null,
+
         config: {
             init: function () {
                 this._matchTimeout = System.TimeSpan.fromTicks(-1);
@@ -178,6 +184,7 @@
 
         ctor: function (paramName, message, innerException) {
             this.$initialize();
+
             if (!message) {
                 message = "Value cannot be null.";
 
@@ -195,6 +202,7 @@
 
         ctor: function (paramName, message, innerException, actualValue) {
             this.$initialize();
+
             if (!message) {
                 message = "Value is out of range.";
 
@@ -218,6 +226,7 @@
 
         ctor: function (paramName, invalidCultureName, message, innerException, invalidCultureId) {
             this.$initialize();
+
             if (!message) {
                 message = "Culture is not supported.";
 

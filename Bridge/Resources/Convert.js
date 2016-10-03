@@ -222,6 +222,7 @@
 
             // TODO: #822 When IConvertible is implemented, try it before throwing InvalidCastEx
             var valueTypeCode = scope.internal.suggestTypeCode(value);
+
             scope.internal.throwInvalidCastEx(valueTypeCode, scope.convert.typeCodes.DateTime);
 
             // try converting using IConvertible
@@ -229,8 +230,8 @@
         },
 
         toString: function (value, formatProvider, valueTypeCode) {
-            var typeCodes = scope.convert.typeCodes;
-            var type = typeof (value);
+            var typeCodes = scope.convert.typeCodes,
+                type = typeof (value);
 
             switch (type) {
                 case "boolean":
@@ -313,12 +314,12 @@
             // Let's process the string in lower case.
             str = str.toLowerCase();
 
-            var minValue = scope.internal.getMinValue(typeCode);
-            var maxValue = scope.internal.getMaxValue(typeCode);
+            var minValue = scope.internal.getMinValue(typeCode),
+                maxValue = scope.internal.getMaxValue(typeCode);
 
             // Calculate offset (start index)
-            var isNegative = false;
-            var startIndex = 0;
+            var isNegative = false,
+                startIndex = 0;
 
             if (str[startIndex] === "-") {
                 if (fromBase !== 10) {
@@ -363,10 +364,12 @@
                 codeValues[allowedCode] = i;
             }
 
-            var firstAllowed = allowedCodes[0];
-            var lastAllowed = allowedCodes[allowedCodes.length - 1];
-
-            var res, totalMax, code, j;
+            var firstAllowed = allowedCodes[0],
+                lastAllowed = allowedCodes[allowedCodes.length - 1],
+                res,
+                totalMax,
+                code,
+                j;
 
             if (typeCode === typeCodes.Int64 || typeCode === typeCodes.UInt64) {
                 for (j = startIndex; j < str.length; j++) {
@@ -442,9 +445,9 @@
                 throw new System.ArgumentException("Invalid Base.");
             }
 
-            var minValue = scope.internal.getMinValue(typeCode);
-            var maxValue = scope.internal.getMaxValue(typeCode);
-            var special = System.Int64.is64Bit(value);
+            var minValue = scope.internal.getMinValue(typeCode),
+                maxValue = scope.internal.getMaxValue(typeCode),
+                special = System.Int64.is64Bit(value);
 
             if (special) {
                 if (value.lt(minValue) || value.gt(maxValue)) {
@@ -488,9 +491,9 @@
             }
 
             // Fill Value-To-Char map:
-            var charByValues = {};
-            var allowedCharArr = allowedChars.split("");
-            var allowedChar;
+            var charByValues = {},
+                allowedCharArr = allowedChars.split(""),
+                allowedChar;
 
             for (var i = 0; i < allowedCharArr.length; i++) {
                 allowedChar = allowedCharArr[i];
@@ -565,8 +568,8 @@
                 return "";
             }
 
-            var insertLineBreaks = (options === 1);
-            var strArrayLen = scope.internal.toBase64_CalculateAndValidateOutputLength(length, insertLineBreaks);
+            var insertLineBreaks = (options === 1),
+                strArrayLen = scope.internal.toBase64_CalculateAndValidateOutputLength(length, insertLineBreaks);
 
             var strArray = [];
             strArray.length = strArrayLen;
@@ -614,8 +617,8 @@
                 return 0;
             }
 
-            var insertLineBreaks = options === 1;
-            var outArrayLength = outArray.length; //This is the maximally required length that must be available in the char array
+            var insertLineBreaks = options === 1,
+                outArrayLength = outArray.length; //This is the maximally required length that must be available in the char array
 
             // Length of the char buffer required
             var numElementsToCopy = scope.internal.toBase64_CalculateAndValidateOutputLength(length, insertLineBreaks);
@@ -624,8 +627,8 @@
                 throw new System.ArgumentOutOfRangeException("offsetOut", "Either offset did not refer to a position in the string, or there is an insufficient length of destination character array.");
             }
 
-            var charsArr = [];
-            var charsArrLength = scope.internal.convertToBase64Array(charsArr, inArray, offsetIn, length, insertLineBreaks);
+            var charsArr = [],
+                charsArrLength = scope.internal.convertToBase64Array(charsArr, inArray, offsetIn, length, insertLineBreaks);
 
             scope.internal.charsToCodes(charsArr, outArray, offsetOut);
 
@@ -639,8 +642,8 @@
                 throw new System.ArgumentNullException("s");
             }
 
-            var sChars = s.split("");
-            var bytes = scope.internal.fromBase64CharPtr(sChars, 0, sChars.length);
+            var sChars = s.split(""),
+                bytes = scope.internal.fromBase64CharPtr(sChars, 0, sChars.length);
 
             return bytes;
         },
@@ -662,8 +665,8 @@
                 throw new System.ArgumentOutOfRangeException("offset", "Offset and length must refer to a position in the string.");
             }
 
-            var chars = scope.internal.codesToChars(inArray);
-            var bytes = scope.internal.fromBase64CharPtr(chars, offset, length);
+            var chars = scope.internal.codesToChars(inArray),
+                bytes = scope.internal.fromBase64CharPtr(chars, offset, length);
 
             return bytes;
         },
@@ -751,8 +754,7 @@
         },
 
         suggestTypeCode: function (value) {
-            var typeCodes = scope.convert.typeCodes;
-            var type = typeof (value);
+            var typeCodes = scope.convert.typeCodes,                type = typeof (value);
 
             switch (type) {
                 case "boolean":
@@ -863,10 +865,9 @@
         },
 
         toNumber: function (value, formatProvider, typeCode, valueTypeCode) {
-            var typeCodes = scope.convert.typeCodes;
-
-            var type = typeof (value);
-            var isFloating = scope.internal.isFloatingType(typeCode);
+            var typeCodes = scope.convert.typeCodes,
+                type = typeof (value),
+                isFloating = scope.internal.isFloatingType(typeCode);
 
             if (valueTypeCode === typeCodes.String) {
                 type = "string";
@@ -910,8 +911,8 @@
                     }
 
                     if (isFloating) {
-                        var minValue = scope.internal.getMinValue(typeCode);
-                        var maxValue = scope.internal.getMaxValue(typeCode);
+                        var minValue = scope.internal.getMinValue(typeCode),
+                            maxValue = scope.internal.getMaxValue(typeCode);
 
                         if (value > maxValue) {
                             value = Infinity;
@@ -954,6 +955,7 @@
                         }
 
                         var str = value;
+
                         if (typeCode === typeCodes.Int64) {
                             value = new System.Int64(value);
 
@@ -1000,10 +1002,10 @@
         },
 
         validateNumberRange: function (value, typeCode, denyInfinity) {
-            var typeCodes = scope.convert.typeCodes;
-            var minValue = scope.internal.getMinValue(typeCode);
-            var maxValue = scope.internal.getMaxValue(typeCode);
-            var typeName = scope.internal.getTypeCodeName(typeCode);
+            var typeCodes = scope.convert.typeCodes,
+                minValue = scope.internal.getMinValue(typeCode),
+                maxValue = scope.internal.getMaxValue(typeCode),
+                typeName = scope.internal.getTypeCodeName(typeCode);
 
             if (typeCode === typeCodes.Single ||
                 typeCode === typeCodes.Double) {
@@ -1076,10 +1078,9 @@
                 intPart = -1 * Math.floor(-value);
             }
 
-            var floatPart = value - intPart;
-
-            var minValue = scope.internal.getMinValue(typeCode);
-            var maxValue = scope.internal.getMaxValue(typeCode);
+            var floatPart = value - intPart,
+                minValue = scope.internal.getMinValue(typeCode),
+                maxValue = scope.internal.getMaxValue(typeCode);
 
             if (value >= 0.0) {
                 if (value < (maxValue + 0.5)) {
@@ -1103,9 +1104,9 @@
         },
 
         toBase64_CalculateAndValidateOutputLength: function (inputLength, insertLineBreaks) {
-            var base64LineBreakPosition = scope.internal.base64LineBreakPosition;
+            var base64LineBreakPosition = scope.internal.base64LineBreakPosition,
+                outlen = ~~(inputLength / 3) * 4; // the base length - we want integer division here.
 
-            var outlen = ~~(inputLength / 3) * 4; // the base length - we want integer division here.
             outlen += ((inputLength % 3) !== 0) ? 4 : 0; // at most 4 more chars for the remainder
 
             if (outlen === 0) {
@@ -1132,12 +1133,12 @@
         },
 
         convertToBase64Array: function (outChars, inData, offset, length, insertLineBreaks) {
-            var base64Table = scope.internal.base64Table;
-            var base64LineBreakPosition = scope.internal.base64LineBreakPosition;
-            var lengthmod3 = length % 3;
-            var calcLength = offset + (length - lengthmod3);
-            var charCount = 0;
-            var j = 0;
+            var base64Table = scope.internal.base64Table,
+                base64LineBreakPosition = scope.internal.base64LineBreakPosition,
+                lengthmod3 = length % 3,
+                calcLength = offset + (length - lengthmod3),
+                charCount = 0,
+                j = 0;
 
             // Convert three bytes at a time to base64 notation.  This will consume 4 chars.
             var i;
@@ -1237,21 +1238,21 @@
             // You may find this method weird to look at. Its written for performance, not aesthetics.
             // You will find unrolled loops label jumps and bit manipulations.
 
-            var intA = "A".charCodeAt(0);
-            var inta = "a".charCodeAt(0);
-            var int0 = "0".charCodeAt(0);
-            var intEq = "=".charCodeAt(0);
-            var intPlus = "+".charCodeAt(0);
-            var intSlash = "/".charCodeAt(0);
-            var intSpace = " ".charCodeAt(0);
-            var intTab = "\t".charCodeAt(0);
-            var intNLn = "\n".charCodeAt(0);
-            var intCRt = "\r".charCodeAt(0);
-            var intAtoZ = ("Z".charCodeAt(0) - "A".charCodeAt(0)); // = ('z' - 'a')
-            var int0To9 = ("9".charCodeAt(0) - "0".charCodeAt(0));
+            var intA = "A".charCodeAt(0),
+                inta = "a".charCodeAt(0),
+                int0 = "0".charCodeAt(0),
+                intEq = "=".charCodeAt(0),
+                intPlus = "+".charCodeAt(0),
+                intSlash = "/".charCodeAt(0),
+                intSpace = " ".charCodeAt(0),
+                intTab = "\t".charCodeAt(0),
+                intNLn = "\n".charCodeAt(0),
+                intCRt = "\r".charCodeAt(0),
+                intAtoZ = ("Z".charCodeAt(0) - "A".charCodeAt(0)),
+                int0To9 = ("9".charCodeAt(0) - "0".charCodeAt(0));
 
-            var endInputIndex = inputIndex + inputLength;
-            var endDestIndex = destIndex + destLength;
+            var endInputIndex = inputIndex + inputLength,
+                endDestIndex = destIndex + destLength;
 
             // Current char code/value:
             var currCode;
@@ -1261,8 +1262,8 @@
             // The remaining byte will be FF, we use it as a marker when 4 chars have been processed.
             var currBlockCodes = 0x000000FF;
 
-            var allInputConsumed = false;
-            var equalityCharEncountered = false;
+            var allInputConsumed = false,
+                equalityCharEncountered = false;
 
             while (true) {
                 // break when done:
@@ -1416,19 +1417,20 @@
         },
 
         fromBase64_ComputeResultLength: function (input, startIndex, inputLength) {
-            var intEq = "=";
-            var intSpace = " ";
+            var intEq = "=",
+                intSpace = " ";
 
             if (inputLength < 0) {
                 throw new System.ArgumentOutOfRangeException("inputLength", "Index was out of range. Must be non-negative and less than the size of the collection.");
             }
 
-            var endIndex = startIndex + inputLength;
-            var usefulInputLength = inputLength;
-            var padding = 0;
+            var endIndex = startIndex + inputLength,
+                usefulInputLength = inputLength,
+                padding = 0;
 
             while (startIndex < endIndex) {
                 var c = input[startIndex];
+
                 startIndex++;
 
                 // We want to be as fast as possible and filter out spaces with as few comparisons as possible.
@@ -1504,8 +1506,7 @@
         },
 
         throwInvalidCastEx: function (fromTypeCode, toTypeCode) {
-            var fromType = scope.internal.getTypeCodeName(fromTypeCode);
-            var toType = scope.internal.getTypeCodeName(toTypeCode);
+            var fromType = scope.internal.getTypeCodeName(fromTypeCode),                toType = scope.internal.getTypeCodeName(toTypeCode);
 
             throw new System.InvalidCastException("Invalid cast from '" + fromType + "' to '" + toType + "'.");
         }

@@ -21,6 +21,7 @@
 
         lastIndexOf: function (s, search, startIndex, count) {
             var index = s.lastIndexOf(search, startIndex);
+
             return (index < (startIndex - count + 1)) ? -1 : index;
         },
 
@@ -245,8 +246,8 @@
             var s = str.substr(startIndex, length);
 
             for (var i = 0; i < anyOf.length; i++) {
-                var c = String.fromCharCode(anyOf[i]);
-                var index = s.indexOf(c);
+                var c = String.fromCharCode(anyOf[i]),
+                    index = s.indexOf(c);
 
                 if (index > -1) {
                     return index + startIndex;
@@ -285,8 +286,8 @@
                 throw new System.ArgumentOutOfRangeException("Index and length must refer to a location within the string");
             }
 
-            var s = str.substr(startIndex, length);
-            var index = (arguments.length === 5 && arguments[4] % 2 !== 0) ? s.toLocaleUpperCase().indexOf(value.toLocaleUpperCase()) : s.indexOf(value);
+            var s = str.substr(startIndex, length),
+                index = (arguments.length === 5 && arguments[4] % 2 !== 0) ? s.toLocaleUpperCase().indexOf(value.toLocaleUpperCase()) : s.indexOf(value);
 
             if (index > -1) {
                 if (arguments.length === 5) {
@@ -433,6 +434,7 @@
                     if (options !== 1 || m.index > i) {
                         if (res.length === limit - 1) {
                             res.push(s.substr(i));
+
                             return res;
                         } else {
                             res.push(s.substring(i, m.index));

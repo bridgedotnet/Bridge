@@ -41,6 +41,7 @@
 
             tryParse: function (uuid, format, r) {
                 var m;
+
                 r.v = System.Guid.empty;
 
                 if (!Bridge.hasValue(uuid)) {
@@ -82,6 +83,7 @@
                         return true;
                     }
                 }
+
                 return false;
             },
 
@@ -124,8 +126,8 @@
             },
 
             getBytes: function (uuid) {
-                var a = Array(16);
-                var s = uuid.replace(/-/g, '');
+                var a = Array(16),
+                    s = uuid.replace(/-/g, '');
 
                 for (var i = 0; i < 16; i++) {
                     a[i] = parseInt(s.substr(i * 2, 2), 16);

@@ -19,6 +19,7 @@
             if (typeof obj == 'object' && obj !== null) {
                 if (typeof Object.getPrototypeOf == 'function') {
                     var proto = Object.getPrototypeOf(obj);
+
                     return proto === Object.prototype || proto === null;
                 }
 
@@ -39,9 +40,11 @@
 
             if (Bridge.isArray(o)) {
                 var arr = [];
+
                 for (var i = 0; i < o.length; i++) {
                     arr.push(Bridge.toPlain(o[i]));
                 }
+
                 return arr;
             }
 
@@ -50,6 +53,7 @@
 
             for (var key in o) {
                 m = o[key];
+
                 if (!Bridge.isFunction(m)) {
                     newo[key] = m;
                 }
@@ -204,6 +208,7 @@
             }
 
             var name;
+
             if (Bridge.isFunction(obj[name = "System$ICloneable$clone"])) {
                 return obj[name]();
             }
@@ -333,6 +338,7 @@
             if (value.getHashCode && Bridge.isFunction(value.getHashCode) && !value.__insideHashCode && value.getHashCode.length === 0) {
                 value.__insideHashCode = true;
                 var r = value.getHashCode();
+
                 delete value.__insideHashCode;
 
                 return r;
@@ -382,6 +388,7 @@
 
                 if (result !== 0) {
                     value.$$hashCode = result;
+
                     return result;
                 }
             }
@@ -407,6 +414,7 @@
 
         getTypeAlias: function (obj) {
             var name = obj.$$name || Bridge.getTypeName(obj);
+
             return name.replace(/[\.\(\)\,]/g, "$");
         },
 
@@ -618,6 +626,7 @@
             }
 
             var name;
+
             if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"])) {
                 return obj[name]();
             }
@@ -683,9 +692,11 @@
 
         isArray: function (obj) {
             var c = obj != null ? obj.constructor : null;
+
             if (!c) {
                 return false;
             }
+
             return c === Array ||
                 c === Uint8Array ||
                 c === Int8Array ||
@@ -864,6 +875,7 @@
             }
 
             var name;
+
             if (T && Bridge.isFunction(a[name = "System$IComparable$1$" + Bridge.getTypeAlias(T) + "$compareTo"])) {
                 return a[name](b);
             }
@@ -905,6 +917,7 @@
             }
 
             var name;
+
             if (T && a != null && Bridge.isFunction(a[name = "System$IEquatable$1$" + Bridge.getTypeAlias(T) + "$equalsT"])) {
                 return a[name](b);
             }
@@ -924,6 +937,7 @@
             }
 
             var name;
+
             if (Bridge.isFunction(obj[name = "System$IFormattable$format"])) {
                 return obj[name](formatString, provider);
             }
@@ -1095,7 +1109,9 @@
                 if (arguments.length === 2) {
                     fn = Bridge.fn.makeFn(function () {
                         Bridge.caller.unshift(this);
+
                         var result = method.apply(obj, arguments);
+
                         Bridge.caller.shift(this);
 
                         return result;
@@ -1119,7 +1135,9 @@
                             }
                         }
                         Bridge.caller.unshift(this);
+
                         var result = method.apply(obj, callArgs);
+
                         Bridge.caller.shift(this);
 
                         return result;
@@ -1143,7 +1161,9 @@
                     callArgs.unshift.apply(callArgs, [obj]);
 
                     Bridge.caller.unshift(this);
+
                     var result = method.apply(obj, callArgs);
+
                     Bridge.caller.shift(this);
 
                     return result;

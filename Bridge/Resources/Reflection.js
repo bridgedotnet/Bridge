@@ -233,18 +233,18 @@
         },
 
         getTypeName: function (type) {
-            var fullName = Bridge.Reflection.getTypeFullName(type);
-            var bIndex = fullName.indexOf('[');
-            var nsIndex = fullName.lastIndexOf('.', bIndex >= 0 ? bIndex : fullName.length);
+            var fullName = Bridge.Reflection.getTypeFullName(type),
+                bIndex = fullName.indexOf('['),
+                nsIndex = fullName.lastIndexOf('.', bIndex >= 0 ? bIndex : fullName.length);
 
             return nsIndex > 0 ? fullName.substr(nsIndex + 1) : fullName;
         },
 
         getTypeNamespace: function (type) {
-            var fullName = Bridge.Reflection.getTypeFullName(type);
-            var bIndex = fullName.indexOf('[');
-            var nsIndex = fullName.lastIndexOf('.', bIndex >= 0 ? bIndex : fullName.length);
-            var ns = nsIndex > 0 ? fullName.substr(0, nsIndex) : '';
+            var fullName = Bridge.Reflection.getTypeFullName(type),
+                bIndex = fullName.indexOf('['),
+                nsIndex = fullName.lastIndexOf('.', bIndex >= 0 ? bIndex : fullName.length),
+                ns = nsIndex > 0 ? fullName.substr(0, nsIndex) : '';
 
             if (type.$assembly) {
                 var parentType = Bridge.Reflection._getAssemblyType(type.$assembly, ns);
@@ -532,14 +532,17 @@
             if (constructor.$$initCtor && constructor.$kind !== "anonymous") {
                 var md = Bridge.getMetadata(constructor),
                     count = 0;
+
                 if (md) {
                     var ctors = Bridge.Reflection.getMembers(constructor, 1, 28),
                         found;
 
                     for (var j = 0; j < ctors.length; j++) {
                         var ctor = ctors[j];
+
                         if (ctor.params && ctor.params.length === args.length) {
                             found = true;
+
                             for (var k = 0; k < ctor.params.length; k++) {
                                 var p = ctor.params[k];
 
@@ -560,12 +563,14 @@
                         constructor = constructor.ctor;
                     } else {
                         var name = "$ctor",
-                        i = 1;
+                            i = 1;
+
                         while (Bridge.isFunction(constructor[name + i])) {
                             if (constructor[name + i].length === args.length) {
                                 constructor = constructor[name + i];
                                 count++;
                             }
+
                             i++;
                         }
                     }
@@ -587,7 +592,11 @@
 
         getAttributes: function (type, attrType, inherit) {
             var result = [],
-                i, t, a, md, type_md;
+                i,
+                t,
+                a,
+                md,
+                type_md;
 
             if (inherit) {
                 var b = Bridge.Reflection.getBaseType(type);
@@ -656,6 +665,7 @@
                             }
                         }
                     }
+
                     result.push(m);
                 }
             };

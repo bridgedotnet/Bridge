@@ -77,6 +77,7 @@
             }
 
             var c = Bridge.define(className, gscope, prop);
+
             c.$kind = "interface";
 
             return c;
@@ -203,6 +204,7 @@
                 Class.$assembly = gCfg.fn.$assembly || Bridge.$currentAssembly;
 
                 var result = Bridge.Reflection.getTypeFullName(gCfg.fn);
+
                 for (i = 0; i < gCfg.args.length; i++) {
                     result += (i === 0 ? '[' : ',') + '[' + Bridge.Reflection.getTypeQName(gCfg.args[i]) + ']';
                 }
@@ -218,12 +220,14 @@
                 extend = extend();
             }
 
-            var interfaces = [];
-            var baseInterfaces = [];
+            var interfaces = [],
+                baseInterfaces = [];
+
             if (extend) {
                 for (var j = 0; j < extend.length; j++) {
-                    var baseType = extend[j];
-                    var baseI = (baseType.$interfaces || []).concat(baseType.$baseInterfaces || []);
+                    var baseType = extend[j],
+                        baseI = (baseType.$interfaces || []).concat(baseType.$baseInterfaces || []);
+
                     if (baseI.length > 0) {
                         for (var k = 0; k < baseI.length; k++) {
                             if (baseInterfaces.indexOf(baseI[k]) < 0) {
@@ -240,6 +244,7 @@
 
             Class.$baseInterfaces = baseInterfaces;
             Class.$interfaces = interfaces;
+
             var noBase = extend ? extend[0].$kind === "interface" : true;
 
             if (noBase) {
@@ -361,6 +366,7 @@
             }
 
             Class.$staticInit = fn;
+
             if (!isGenericInstance) {
                 Bridge.Class.registerType(className, Class);
             }
@@ -372,6 +378,7 @@
             if (Class.$kind === "enum") {
                 Class.instanceOf = function (instance) {
                     var utype = Class.prototype.$utype;
+
                     if (utype === System.String) {
                         return typeof (instance) == "string";
                     }
@@ -396,14 +403,22 @@
                 if (type.$genericTypeDefinition === target.$genericTypeDefinition && type.$typeArguments.length === target.$typeArguments.length) {
                     for (var i = 0; i < target.$typeArguments.length; i++) {
                         var v = target.prototype.$variance[i], t = target.$typeArguments[i], s = type.$typeArguments[i];
+
                         switch (v) {
-                            case 1: if (!Bridge.Reflection.isAssignableFrom(t, s)) return false; break;
-                            case 2: if (!Bridge.Reflection.isAssignableFrom(s, t)) return false; break;
-                            default: if (s !== t) return false;
+                            case 1: if (!Bridge.Reflection.isAssignableFrom(t, s))
+                                return false;
+                                break;
+                            case 2: if (!Bridge.Reflection.isAssignableFrom(s, t))
+                                return false;
+                                break;
+                            default: if (s !== t)
+                                return false;
                         }
                     }
+
                     return true;
                 }
+
                 return false;
             };
 
@@ -412,6 +427,7 @@
             }
 
             var ifs = Bridge.Reflection.getInterfaces(source);
+
             for (var i = 0; i < ifs.length; i++) {
                 if (ifs[i] === this || check(this, ifs[i])) {
                     return true;
@@ -484,10 +500,13 @@
 
                                     return o;
                                 },
+
                                 set: function (newValue) {
                                     o = newValue;
                                 },
+
                                 enumerable: true,
+
                                 configurable: true
                             });
                         })(cls, key, o);
@@ -509,10 +528,13 @@
 
                             return cls;
                         },
+
                         set: function (newValue) {
                             cls = newValue;
                         },
+
                         enumerable: true,
+
                         configurable: true
                     });
                 })(scope, name, cls);
@@ -533,8 +555,10 @@
 
         genericName: function (name, typeArguments) {
             var gName = name;
+
             for (var i = 0; i < typeArguments.length; i++) {
                 var ta = typeArguments[i];
+
                 gName += "$" + (ta.$$name || Bridge.getTypeName(ta));
             }
 
@@ -553,9 +577,11 @@
 
                 if (key.args.length === args.length) {
                     found = true;
+
                     for (g = 0; g < key.args.length; g++) {
                         if (key.args[g] !== args[g]) {
                             found = false;
+
                             break;
                         }
                     }
@@ -585,7 +611,9 @@
 
         init: function (fn) {
             Bridge.Class.staticInitAllow = true;
+
             var queue = Bridge.Class.$queue.concat(Bridge.Class.$queueEntry);
+
             for (var i = 0; i < queue.length; i++) {
                 var t = queue[i];
 
@@ -597,6 +625,7 @@
                     Bridge.ready(t.prototype.$main);
                 }
             }
+
             Bridge.Class.$queue.length = 0;
             Bridge.Class.$queueEntry.length = 0;
 

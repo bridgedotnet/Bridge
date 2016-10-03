@@ -254,8 +254,10 @@
             setTimeout(function () {
                 try {
                     var result = me.action(me.state);
+
                     delete me.action;
                     delete me.state;
+
                     me.complete(result);
                 } catch (e) {
                     me.fail(new System.AggregateException(null, [System.Exception.create(e)]));
@@ -328,6 +330,7 @@
                     return this.result;
                 case System.Threading.Tasks.TaskStatus.canceled:
                     var ex = new System.Threading.Tasks.TaskCanceledException(null, this);
+
                     throw awaiting ? ex : new System.AggregateException(null, [ex]);
                 case System.Threading.Tasks.TaskStatus.faulted:
                     throw awaiting ? (this.exception.innerExceptions.getCount() > 0 ? this.exception.innerExceptions.get(0) : null) : this.exception;
@@ -412,6 +415,7 @@
 
         ctor: function (source) {
             this.$initialize();
+
             if (!Bridge.is(source, System.Threading.CancellationTokenSource)) {
                 source = source ? System.Threading.CancellationToken.sourceTrue : System.Threading.CancellationToken.sourceFalse;
             }
@@ -537,8 +541,9 @@
             }
 
             this.isCancellationRequested = true;
-            var x = [];
-            var h = this.handlers;
+
+            var x = [],
+                h = this.handlers;
 
             this.clean();
 
