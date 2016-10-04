@@ -407,6 +407,47 @@ declare module System {
     }
     var Date: DateTime;
 
+    export interface Guid extends System.IEquatable$1<System.Guid>, System.IComparable$1<System.Guid>, System.IFormattable {
+        equalsT(o: System.Guid): boolean;
+        compareTo(value: System.Guid): number;
+        toString(): string;
+        toString$1(format: string): string;
+        format(format: string, formatProvider: System.IFormatProvider): string;
+        toByteArray(): number[];
+        getHashCode(): System.Guid;
+        $clone(to: System.Guid): System.Guid;
+    }
+    export interface GuidFunc extends Function {
+        prototype: Guid;
+        $ctor4: {
+            new (uuid: string): Guid
+        };
+        $ctor1: {
+            new (b: number[]): Guid
+        };
+        $ctor5: {
+            new (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, j: number, k: number): Guid
+        };
+        $ctor3: {
+            new (a: number, b: number, c: number, d: number[]): Guid
+        };
+        $ctor2: {
+            new (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, j: number, k: number): Guid
+        };
+        ctor: {
+            new (): Guid
+        };
+        empty: System.Guid;
+        parse(input: string): System.Guid;
+        parseExact(input: string, format: string): System.Guid;
+        tryParse(input: string, result: { v: System.Guid }): boolean;
+        tryParseExact(input: string, format: string, result: { v: System.Guid }): boolean;
+        newGuid(): System.Guid;
+        op_Equality(a: System.Guid, b: System.Guid): boolean;
+        op_Inequality(a: System.Guid, b: System.Guid): boolean;
+    }
+    var Guid: GuidFunc;
+
     export class TimeSpan implements IComparable, IComparable$1<TimeSpan>, IEquatable$1<TimeSpan> {
         static fromDays(value: number): TimeSpan;
         static fromHours(value: number): TimeSpan;
