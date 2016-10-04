@@ -18,6 +18,9 @@ namespace System
         private static readonly Bridge.Text.RegularExpressions.Regex Replace = new Bridge.Text.RegularExpressions.Regex("-", "g");
         private static readonly Random Rnd = new Random();
 
+        /// <summary>
+        /// A read-only instance of the Guid structure whose value is all zeros.
+        /// </summary>
         public static readonly Guid Empty = new Guid();
 
         private int _a;
@@ -32,6 +35,10 @@ namespace System
         private byte _j;
         private byte _k;
 
+        /// <summary>
+        /// Initializes a new instance of the Guid structure by using the value represented by the specified string.
+        /// </summary>
+        /// <param name="uuid">A string that contains a GUID</param>
         public Guid(string uuid)
         {
             this = new Guid();
@@ -39,6 +46,10 @@ namespace System
             var s = ParseInternal(uuid, null, true);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the Guid structure by using the specified array of bytes.
+        /// </summary>
+        /// <param name="b">A 16-element byte array containing values with which to initialize the GUID.</param>
         public Guid(byte[] b)
         {
             if (b == null)
@@ -64,6 +75,20 @@ namespace System
             _k = b[15];
         }
 
+        /// <summary>
+        /// Initializes a new instance of the Guid structure by using the specified unsigned integers and bytes.
+        /// </summary>
+        /// <param name="a">The first 4 bytes of the GUID.</param>
+        /// <param name="b">The next 2 bytes of the GUID.</param>
+        /// <param name="c">The next 2 bytes of the GUID.</param>
+        /// <param name="d">The next byte of the GUID.</param>
+        /// <param name="e">The next byte of the GUID.</param>
+        /// <param name="f">The next byte of the GUID.</param>
+        /// <param name="g">The next byte of the GUID.</param>
+        /// <param name="h">The next byte of the GUID.</param>
+        /// <param name="i">The next byte of the GUID.</param>
+        /// <param name="j">The next byte of the GUID.</param>
+        /// <param name="k">The next byte of the GUID.</param>
         public Guid(uint a, ushort b, ushort c, byte d, byte e, byte f, byte g, byte h, byte i, byte j, byte k)
         {
             _a = (int)a;
@@ -79,6 +104,13 @@ namespace System
             _k = k;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the Guid structure by using the specified integers and byte array.
+        /// </summary>
+        /// <param name="a">The first 4 bytes of the GUID.</param>
+        /// <param name="b">The next 2 bytes of the GUID.</param>
+        /// <param name="c">The next 2 bytes of the GUID.</param>
+        /// <param name="d">The remaining 8 bytes of the GUID.</param>
         public Guid(int a, short b, short c, byte[] d)
         {
             if (d == null)
@@ -104,6 +136,20 @@ namespace System
             _k = d[7];
         }
 
+        /// <summary>
+        /// Initializes a new instance of the Guid structure by using the specified integers and bytes.
+        /// </summary>
+        /// <param name="a">The first 4 bytes of the GUID.</param>
+        /// <param name="b">The next 2 bytes of the GUID.</param>
+        /// <param name="c">The next 2 bytes of the GUID.</param>
+        /// <param name="d">The next byte of the GUID.</param>
+        /// <param name="e">The next byte of the GUID.</param>
+        /// <param name="f">The next byte of the GUID.</param>
+        /// <param name="g">The next byte of the GUID.</param>
+        /// <param name="h">The next byte of the GUID.</param>
+        /// <param name="i">The next byte of the GUID.</param>
+        /// <param name="j">The next byte of the GUID.</param>
+        /// <param name="k">The next byte of the GUID.</param>
         public Guid(int a, short b, short c, byte d, byte e, byte f, byte g, byte h, byte i, byte j, byte k)
         {
             _a = a;
@@ -119,6 +165,11 @@ namespace System
             _k = k;
         }
 
+        /// <summary>
+        /// Returns a value indicating whether this instance and a specified Guid object represent the same value.
+        /// </summary>
+        /// <param name="o">An object to compare to this instance.</param>
+        /// <returns>true if o is equal to this instance; otherwise, false.</returns>
         public bool Equals(Guid o)
         {
             if (o == null)
@@ -134,6 +185,11 @@ namespace System
             return true;
         }
 
+        /// <summary>
+        /// Compares this instance to a specified Guid object and returns an indication of their relative values.
+        /// </summary>
+        /// <param name="value">An object to compare to this instance.</param>
+        /// <returns>A signed number indicating the relative values of this instance and value.</returns>
         public int CompareTo(Guid value)
         {
             if (value == null)
@@ -144,21 +200,40 @@ namespace System
             return this.ToString().CompareTo(value.ToString());
         }
 
+        /// <summary>
+        /// Returns a string representation of the value of this instance in registry format.
+        /// </summary>
+        /// <returns>The value of this Guid, formatted by using the "D" format specifier.</returns>
         public override string ToString()
         {
             return Format(null);
         }
 
+        /// <summary>
+        /// Returns a string representation of the value of this Guid instance, according to the provided format specifier.
+        /// </summary>
+        /// <param name="format">A single format specifier that indicates how to format the value of this Guid. The format parameter can be "N", "D", "B", "P". If format is null or an empty string (""), "D" is used.</param>
+        /// <returns>The value of this Guid, represented as a series of lowercase hexadecimal digits in the specified format.</returns>
         public string ToString(string format)
         {
             return Format(format);
         }
 
+        /// <summary>
+        /// Returns a string representation of the value of this instance of the Guid class, according to the provided format specifier and culture-specific format information.
+        /// </summary>
+        /// <param name="format">A single format specifier that indicates how to format the value of this Guid. The format parameter can be "N", "D", "B", "P". If format is null or an empty string (""), "D" is used.</param>
+        /// <param name="formatProvider">(Reserved) An object that supplies culture-specific formatting information.</param>
+        /// <returns>The value of this Guid, represented as a series of lowercase hexadecimal digits in the specified format.</returns>
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return Format(format);
         }
 
+        /// <summary>
+        /// Returns a 16-element byte array that contains the value of this instance.
+        /// </summary>
+        /// <returns>A 16-element byte array.</returns>
         public byte[] ToByteArray()
         {
             byte[] g = new byte[16];
@@ -183,11 +258,22 @@ namespace System
             return g;
         }
 
+        /// <summary>
+        /// Converts the string representation of a GUID to the equivalent Guid structure.
+        /// </summary>
+        /// <param name="input">The string to convert.</param>
+        /// <returns>A structure that contains the value that was parsed.</returns>
         public static Guid Parse(string input)
         {
             return ParseExact(input, null);
         }
 
+        /// <summary>
+        /// Converts the string representation of a GUID to the equivalent Guid structure, provided that the string is in the specified format.
+        /// </summary>
+        /// <param name="input">The GUID to convert.</param>
+        /// <param name="format">One of the following specifiers that indicates the exact format to use when interpreting input: "N", "D", "B", "P".</param>
+        /// <returns></returns>
         public static Guid ParseExact(string input, string format)
         {
             var r = new Guid();
@@ -195,17 +281,34 @@ namespace System
             return r;
         }
 
+        /// <summary>
+        /// Converts the string representation of a GUID to the equivalent Guid structure.
+        /// </summary>
+        /// <param name="input">The GUID to convert.</param>
+        /// <param name="result">The structure that will contain the parsed value. If the method returns true, result contains a valid Guid. If the method returns false, result equals Guid.Empty.</param>
+        /// <returns></returns>
         public static bool TryParse(string input, out Guid result)
         {
             return TryParseExact(input, null, out result);
         }
 
+        /// <summary>
+        /// Converts the string representation of a GUID to the equivalent Guid structure, provided that the string is in the specified format.
+        /// </summary>
+        /// <param name="input">The GUID to convert.</param>
+        /// <param name="format">One of the following specifiers that indicates the exact format to use when interpreting input: "N", "D", "B", "P".</param>
+        /// <param name="result">The structure that will contain the parsed value. If the method returns true, result contains a valid Guid. If the method returns false, result equals Guid.Empty.</param>
+        /// <returns></returns>
         public static bool TryParseExact(string input, string format, out Guid result)
         {
             result = new Guid();
             return result.ParseInternal(input, format, false);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the Guid structure.
+        /// </summary>
+        /// <returns>A new GUID object.</returns>
         public static Guid NewGuid()
         {
             var a = new byte[16];
@@ -218,6 +321,12 @@ namespace System
             return new Guid(a);
         }
 
+        /// <summary>
+        /// Indicates whether the values of two specified Guid objects are equal.
+        /// </summary>
+        /// <param name="a">The first object to compare.</param>
+        /// <param name="b">The second object to compare.</param>
+        /// <returns>true if a and b are equal; otherwise, false.</returns>
         public static bool operator ==(Guid a, Guid b)
         {
             if (Object.ReferenceEquals(a, null))
@@ -228,6 +337,12 @@ namespace System
             return a.Equals(b);
         }
 
+        /// <summary>
+        /// Indicates whether the values of two specified Guid objects are not equal.
+        /// </summary>
+        /// <param name="a">The first object to compare.</param>
+        /// <param name="b">The second object to compare.</param>
+        /// <returns>true if a and b are not equal; otherwise, false.</returns>
         public static bool operator !=(Guid a, Guid b)
         {
             return !(a == b);
