@@ -270,6 +270,19 @@ interface QUnitAssert {
     ok(state: any, message?: string): any;
 
     /**
+    * A boolean check, inverse of ok() and CommonJS's assert.ok(), and equivalent to JUnit's assertFalse().
+    * Passes if the first argument is falsy.
+    *
+    * notOk() requires just one argument. If the argument evaluates to false, the assertion passes;
+    * otherwise, it fails. If a second message argument is provided,
+    * it will be displayed in place of the result.
+    *
+    * @param state Expression being tested
+    * @param message A short description of the assertion
+    */
+    notOk(state: any, message?: string): any;
+
+    /**
     * A strict type and value comparison assertion.
     *
     * The strictEqual() assertion provides the most rigid comparison of type and value with
@@ -763,4 +776,4 @@ declare function equiv(a: any, b: any): any;
 declare var raises: any;
 
 /* QUNIT */
-declare var QUnit: QUnitStatic; 
+declare var QUnit: QUnitStatic;
