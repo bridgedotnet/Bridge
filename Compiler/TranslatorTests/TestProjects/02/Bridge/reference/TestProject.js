@@ -332,6 +332,26 @@
             }
         },
 
+        addHash: function (v, r, m) {
+            if (isNaN(r)) {
+                r = 17;
+            }
+
+            if (isNaN(m)) {
+                m = 23;
+            }
+
+            if (Bridge.isArray(v)) {
+                for (var i = 0; i < v.length; i++) {
+                    r = r + ((r * m | 0) + (v[i] == null ? 0 : Bridge.getHashCode(v[i]))) | 0;
+                }
+
+                return r;
+            }
+
+            return r = r + ((r * m | 0) + (v == null ? 0 : Bridge.getHashCode(v))) | 0;
+        },
+
         getHashCode: function (value, safe, deep) {
             // In CLR: mutable object should keep on returning same value
             // Bridge.NET goals: make it deterministic (to make testing easier) without breaking CLR contracts
@@ -3795,7 +3815,7 @@
         $kind: "interface",
         statics: {
             $is: function (obj) {
-                if (Bridge.isNumber(obj) || Bridge.isDate(obj) || System.Guid.instanceOf(obj)) {
+                if (Bridge.isNumber(obj) || Bridge.isDate(obj)) {
                     return true;
                 }
 
@@ -3832,7 +3852,7 @@
 
             statics: {
                 $is: function (obj) {
-                    if (Bridge.isNumber(obj) && T.$number && T.instanceOf(obj) || Bridge.isDate(obj) && T === Date || Bridge.isBoolean(obj) && T === Boolean || Bridge.isString(obj) && T === String || System.Guid.instanceOf(obj) && T === System.Guid) {
+                    if (Bridge.isNumber(obj) && T.$number && T.instanceOf(obj) || Bridge.isDate(obj) && T === Date || Bridge.isBoolean(obj) && T === Boolean || Bridge.isString(obj) && T === String) {
                         return true;
                     }
 
@@ -3848,7 +3868,7 @@
 
             statics: {
                 $is: function (obj) {
-                    if (Bridge.isNumber(obj) && T.$number && T.instanceOf(obj) || Bridge.isDate(obj) && T === Date || Bridge.isBoolean(obj) && T === Boolean || Bridge.isString(obj) && T === String || System.Guid.instanceOf(obj) && T === System.Guid) {
+                    if (Bridge.isNumber(obj) && T.$number && T.instanceOf(obj) || Bridge.isDate(obj) && T === Date || Bridge.isBoolean(obj) && T === Boolean || Bridge.isString(obj) && T === String) {
                         return true;
                     }
 
@@ -11689,14 +11709,8 @@
             }
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 5139482776;
-            hash = hash * 23 + (this.m_parsedVersion == null ? 0 : Bridge.getHashCode(this.m_parsedVersion));
-            hash = hash * 23 + (this.m_failure == null ? 0 : Bridge.getHashCode(this.m_failure));
-            hash = hash * 23 + (this.m_exceptionArgument == null ? 0 : Bridge.getHashCode(this.m_exceptionArgument));
-            hash = hash * 23 + (this.m_argumentName == null ? 0 : Bridge.getHashCode(this.m_argumentName));
-            hash = hash * 23 + (this.m_canThrow == null ? 0 : Bridge.getHashCode(this.m_canThrow));
-            return hash;
+            var h = Bridge.addHash([5139482776, this.m_parsedVersion, this.m_failure, this.m_exceptionArgument, this.m_argumentName, this.m_canThrow]);
+            return h;
         },
         equals: function (o) {
             if (!Bridge.is(o, System.Version.VersionResult)) {
@@ -16544,146 +16558,294 @@
     System.Linq.Enumerable = Enumerable;
 })(Bridge.global);
 
-    // @source Guid.js
+    // @source guid.js
 
     Bridge.define("System.Guid", {
-        inherits: function () {
-            return [System.IComparable$1(System.Guid), System.IEquatable$1(System.Guid), System.IFormattable];
-        },
-
+        inherits: function () { return [System.IEquatable$1(System.Guid),System.IComparable$1(System.Guid),System.IFormattable]; },
         $kind: "struct",
-
         statics: {
-            $valid: /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/ig,
-            $split: /^(.{8})(.{4})(.{4})(.{4})(.{12})$/,
-            empty: '00000000-0000-0000-0000-000000000000',
-
+            error1: "Byte array for GUID must be exactly {0} bytes long",
+            valid: null,
+            split: null,
+            nonFormat: null,
+            replace: null,
+            rnd: null,
             config: {
-                alias: [
-                    "equalsT", "System$IEquatable$1$System$Guid$equalsT",
-                    "compareTo", "System$IComparable$1$System$Guid$compareTo",
-                    "format", "System$IFormattable$format"
-                ],
                 init: function () {
-                    this.$rng = new System.Random();
+                    this.valid = new RegExp("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", "i");
+                    this.split = new RegExp("^(.{8})(.{4})(.{4})(.{4})(.{12})$");
+                    this.nonFormat = new RegExp("^[{(]?([0-9a-f]{8})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{12})[)}]?$", "i");
+                    this.replace = new RegExp("-", "g");
+                    this.rnd = new System.Random.ctor();
+                    this.empty = new System.Guid.ctor();
                 }
             },
-
-            instanceOf: function (instance) {
-                return typeof (instance) === 'string' && instance.match(System.Guid.$valid);
+            parse: function (input) {
+                return System.Guid.parseExact(input, null);
             },
-
-            getDefaultValue: function () {
-                return System.Guid.empty;
+            parseExact: function (input, format) {
+                var r = new System.Guid.ctor();
+                r.parseInternal(input, format, true);
+                return r;
             },
+            tryParse: function (input, result) {
+                return System.Guid.tryParseExact(input, null, result);
+            },
+            tryParseExact: function (input, format, result) {
+                result.v = new System.Guid.ctor();
+                return result.v.parseInternal(input, format, false);
+            },
+            newGuid: function () {
+                var a = System.Array.init(16, 0);
 
-            parse: function (uuid, format) {
-                var r = {};
+                System.Guid.rnd.nextBytes(a);
 
-                if (System.Guid.tryParse(uuid, format, r)) {
-                    return r.v;
+                a[7] = ((a[7] & 15 | 64)) & 255;
+                a[8] = ((a[8] & 191 | 128)) & 255;
+
+                return new System.Guid.$ctor1(a);
+            },
+            makeBinary: function (x) {
+                return System.Int32.format((x & 255), "x2");
+            },
+            getDefaultValue: function () { return new System.Guid(); }
+        },
+        _a: 0,
+        _b: 0,
+        _c: 0,
+        _d: 0,
+        _e: 0,
+        _f: 0,
+        _g: 0,
+        _h: 0,
+        _i: 0,
+        _j: 0,
+        _k: 0,
+        config: {
+            alias: [
+            "format", "System$IFormattable$format"
+            ]
+        },
+        $ctor4: function (uuid) {
+            this.$initialize();
+            (new System.Guid.ctor()).$clone(this);
+
+            var s = this.parseInternal(uuid, null, true);
+        },
+        $ctor1: function (b) {
+            this.$initialize();
+            if (b == null) {
+                throw new System.ArgumentNullException("b");
+            }
+
+            if (b.length !== 16) {
+                throw new System.ArgumentException(System.String.format(System.Guid.error1, 16));
+            }
+
+            this._a = (b[3] << 24) | (b[2] << 16) | (b[1] << 8) | b[0];
+            this._b = Bridge.Int.sxs((((b[5] << 8) | b[4])) & 65535);
+            this._c = Bridge.Int.sxs((((b[7] << 8) | b[6])) & 65535);
+            this._d = b[8];
+            this._e = b[9];
+            this._f = b[10];
+            this._g = b[11];
+            this._h = b[12];
+            this._i = b[13];
+            this._j = b[14];
+            this._k = b[15];
+        },
+        $ctor5: function (a, b, c, d, e, f, g, h, i, j, k) {
+            this.$initialize();
+            this._a = a | 0;
+            this._b = Bridge.Int.sxs(b & 65535);
+            this._c = Bridge.Int.sxs(c & 65535);
+            this._d = d;
+            this._e = e;
+            this._f = f;
+            this._g = g;
+            this._h = h;
+            this._i = i;
+            this._j = j;
+            this._k = k;
+        },
+        $ctor3: function (a, b, c, d) {
+            this.$initialize();
+            if (d == null) {
+                throw new System.ArgumentNullException("d");
+            }
+
+            if (d.length !== 8) {
+                throw new System.ArgumentException(System.String.format(System.Guid.error1, 8));
+            }
+
+            this._a = a;
+            this._b = b;
+            this._c = c;
+            this._d = d[0];
+            this._e = d[1];
+            this._f = d[2];
+            this._g = d[3];
+            this._h = d[4];
+            this._i = d[5];
+            this._j = d[6];
+            this._k = d[7];
+        },
+        $ctor2: function (a, b, c, d, e, f, g, h, i, j, k) {
+            this.$initialize();
+            this._a = a;
+            this._b = b;
+            this._c = c;
+            this._d = d;
+            this._e = e;
+            this._f = f;
+            this._g = g;
+            this._h = h;
+            this._i = i;
+            this._j = j;
+            this._k = k;
+        },
+        ctor: function () {
+            this.$initialize();
+        },
+        toString: function () {
+            return this.format$1(null);
+        },
+        toString$1: function (format) {
+            return this.format$1(format);
+        },
+        format: function (format, formatProvider) {
+            return this.format$1(format);
+        },
+        toByteArray: function () {
+            var g = System.Array.init(16, 0);
+
+            g[0] = (this._a) & 255;
+            g[1] = ((this._a >> 8)) & 255;
+            g[2] = ((this._a >> 16)) & 255;
+            g[3] = ((this._a >> 24)) & 255;
+            g[4] = (this._b) & 255;
+            g[5] = ((this._b >> 8)) & 255;
+            g[6] = (this._c) & 255;
+            g[7] = ((this._c >> 8)) & 255;
+            g[8] = this._d;
+            g[9] = this._e;
+            g[10] = this._f;
+            g[11] = this._g;
+            g[12] = this._h;
+            g[13] = this._i;
+            g[14] = this._j;
+            g[15] = this._k;
+
+            return g;
+        },
+        parseInternal: function (input, format, check) {
+            var r = null;
+
+            if (System.String.isNullOrEmpty(input)) {
+                throw new System.ArgumentNullException("input");
+            }
+
+            if (System.String.isNullOrEmpty(format)) {
+                var m = System.Guid.nonFormat.exec(input);
+
+                if (m != null) {
+                    r = m.slice(1).join("-").toLowerCase();
                 }
+            } else {
+                format = format.toUpperCase();
 
-                throw new System.FormatException('Unable to parse UUID');
-            },
+                var p = false;
 
-            tryParse: function (uuid, format, r) {
-                var m;
+                if (Bridge.referenceEquals(format, "N")) {
+                    var m1 = System.Guid.split.exec(input);
 
-                r.v = System.Guid.empty;
+                    if (m1 != null) {
+                        p = true;
+                        input = m1.slice(1).join("-");
+                    }
+                } else if (Bridge.referenceEquals(format, "B") || Bridge.referenceEquals(format, "P")) {
+                    var b = Bridge.referenceEquals(format, "B") ? [123, 125] : [40, 41];
 
-                if (!Bridge.hasValue(uuid)) {
-                    throw new System.ArgumentNullException('uuid');
-                }
-
-                if (!format) {
-                    m = /^[{(]?([0-9a-f]{8})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{12})[)}]?$/ig.exec(uuid);
-
-                    if (m) {
-                        r.v = m.slice(1).join('-').toLowerCase();
-
-                        return true;
+                    if ((input.charCodeAt(0) === b[0]) && (input.charCodeAt(((input.length - 1) | 0)) === b[1])) {
+                        p = true;
+                        input = input.substr(1, ((input.length - 2) | 0));
                     }
                 } else {
-                    format = format.toUpperCase();
-
-                    if (format === 'N') {
-                        m = System.Guid.$split.exec(uuid);
-
-                        if (!m) {
-                            return false;
-                        }
-
-                        uuid = m.slice(1).join('-');
-                    } else if (format === 'B' || format === 'P') {
-                        var b = format === 'B';
-
-                        if (uuid[0] !== (b ? '{' : '(') || uuid[uuid.length - 1] !== (b ? '}' : ')')) {
-                            return false;
-                        }
-
-                        uuid = uuid.substr(1, uuid.length - 2);
-                    }
-
-                    if (uuid.match(System.Guid.$valid)) {
-                        r.v = uuid.toLowerCase();
-
-                        return true;
-                    }
+                    p = true;
                 }
 
-                return false;
-            },
-
-            format: function (uuid, format) {
-                switch (format) {
-                case 'n':
-                case 'N':
-                    return uuid.replace(/-/g, '');
-                case 'b':
-                case 'B':
-                    return '{' + uuid + '}';
-                case 'p':
-                case 'P':
-                    return '(' + uuid + ')';
-                default:
-                    return uuid;
+                if (p && input.match(System.Guid.valid) != null) {
+                    r = input.toLowerCase();
                 }
-            },
-
-            fromBytes: function (b) {
-                if (!b || b.length !== 16) {
-                    throw new System.ArgumentException('b', 'Must be 16 bytes');
-                }
-
-                var s = b.map(function (x) {
-                    return Bridge.Int.format(x & 0xff, 'x2');
-                }).join('');
-
-                return System.Guid.$split.exec(s).slice(1).join('-');
-            },
-
-            newGuid: function () {
-                var a = Array(16);
-
-                System.Guid.$rng.nextBytes(a);
-                a[6] = a[6] & 0x0f | 0x40;
-                a[8] = a[8] & 0xbf | 0x80;
-
-                return System.Guid.fromBytes(a);
-            },
-
-            getBytes: function (uuid) {
-                var a = Array(16),
-                    s = uuid.replace(/-/g, '');
-
-                for (var i = 0; i < 16; i++) {
-                    a[i] = parseInt(s.substr(i * 2, 2), 16);
-                }
-
-                return a;
             }
-        }
+
+            if (r != null) {
+                this.fromString(r);
+                return true;
+            }
+
+            if (check) {
+                throw new System.FormatException("input is not in a recognized format");
+            }
+
+            return false;
+        },
+        format$1: function (format) {
+            var s = System.String.concat(System.String.concat(System.UInt32.format((this._a >>> 0), "x8"), System.UInt16.format((this._b & 65535), "x4")), System.UInt16.format((this._c & 65535), "x4"));
+            s = System.String.concat(s, ([this._d, this._e, this._f, this._g, this._h, this._i, this._j, this._k]).map(System.Guid.makeBinary).join(""));
+
+            s = System.Guid.split.exec(s).slice(1).join("-");
+
+            switch (format) {
+                case "n": 
+                case "N": 
+                    return s.replace(System.Guid.replace, "");
+                case "b": 
+                case "B": 
+                    return System.String.concat(System.String.concat(String.fromCharCode(123), s), String.fromCharCode(125));
+                case "p": 
+                case "P": 
+                    return System.String.concat(System.String.concat(String.fromCharCode(40), s), String.fromCharCode(41));
+                default: 
+                    return s;
+            }
+        },
+        fromString: function (s) {
+            if (System.String.isNullOrEmpty(s)) {
+                return;
+            }
+
+            s = s.replace(System.Guid.replace, "");
+
+            var r = System.Array.init(8, 0);
+
+            this._a = (System.UInt32.parse(s.substr(0, 8), 16)) | 0;
+            this._b = Bridge.Int.sxs((System.UInt16.parse(s.substr(8, 4), 16)) & 65535);
+            this._c = Bridge.Int.sxs((System.UInt16.parse(s.substr(12, 4), 16)) & 65535);
+            for (var i = 8; i < 16; i = (i + 1) | 0) {
+                r[((i - 8) | 0)] = System.Byte.parse(s.substr(((i * 2) | 0), 2), 16);
+            }
+
+            this._d = r[0];
+            this._e = r[1];
+            this._f = r[2];
+            this._g = r[3];
+            this._h = r[4];
+            this._i = r[5];
+            this._j = r[6];
+            this._k = r[7];
+        },
+        getHashCode: function () {
+            var h = Bridge.addHash([1684632903, this._a, this._b, this._c, this._d, this._e, this._f, this._g, this._h, this._i, this._j, this._k]);
+            return h;
+        },
+        equals: function (o) {
+            if (!Bridge.is(o, System.Guid)) {
+                return false;
+            }
+            return Bridge.equals(this._a, o._a) && Bridge.equals(this._b, o._b) && Bridge.equals(this._c, o._c) && Bridge.equals(this._d, o._d) && Bridge.equals(this._e, o._e) && Bridge.equals(this._f, o._f) && Bridge.equals(this._g, o._g) && Bridge.equals(this._h, o._h) && Bridge.equals(this._i, o._i) && Bridge.equals(this._j, o._j) && Bridge.equals(this._k, o._k);
+        },
+        $clone: function (to) { return this; }
     });
 
     // @source Regex.js

@@ -1,7 +1,7 @@
 ﻿/*
  * @version   : 15.2.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2016-06-08
+ * @date      : 2016-10-03
  * @copyright : Copyright 2008-2016 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE.
 */
@@ -437,6 +437,26 @@ declare module System {
         format(str: string, provider?: System.Globalization.DateTimeFormatInfo): string;
         toString(str: string, provider?: System.Globalization.DateTimeFormatInfo): string;
     }
+
+    export interface Random {
+        sample(): number;
+        internalSample(): number;
+        next(): number;
+        next$2(minValue: number, maxValue: number): number;
+        next$1(maxValue: number): number;
+        nextDouble(): number;
+        nextBytes(buffer: number[]): void;
+    }
+    export interface RandomFunc extends Function {
+        prototype: Random;
+        ctor: {
+            new (): Random
+        };
+        $ctor1: {
+            new (seed: number): Random
+        };
+    }
+    var Random: RandomFunc;
 
     module Collections {
         export interface IEnumerable {

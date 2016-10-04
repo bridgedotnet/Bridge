@@ -13,10 +13,8 @@
             this.$initialize();
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 6481214800;
-            hash = hash * 23 + (this.Data == null ? 0 : Bridge.getHashCode(this.Data));
-            return hash;
+            var h = Bridge.addHash([6481214800, this.Data]);
+            return h;
         },
         equals: function (o) {
             if (!Bridge.is(o, TestIssue1035.StructBridge1035)) {

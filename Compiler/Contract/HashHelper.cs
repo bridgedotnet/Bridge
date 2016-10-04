@@ -53,7 +53,7 @@ namespace Bridge.Contract
             return System.Math.Abs(sum) % m;
         }
 
-        public string GetDeterministicHash(string s, bool throwOnError = false)
+        public long GetDeterministicHash(string s, bool throwOnError = false)
         {
             var m = 0xFFFFFFFFFF;
             long nameHash;
@@ -75,10 +75,7 @@ namespace Bridge.Contract
                 }
             }
 
-            // Avoid +-value when nameHash below zero
-            string nameHashValue = nameHash > 0 ? " + " + nameHash : " - " + System.Math.Abs(nameHash);
-
-            return nameHashValue;
+            return nameHash;
         }
     }
 }

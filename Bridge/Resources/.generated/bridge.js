@@ -332,6 +332,26 @@
             }
         },
 
+        addHash: function (v, r, m) {
+            if (isNaN(r)) {
+                r = 17;
+            }
+
+            if (isNaN(m)) {
+                m = 23;
+            }
+
+            if (Bridge.isArray(v)) {
+                for (var i = 0; i < v.length; i++) {
+                    r = r + ((r * m | 0) + (v[i] == null ? 0 : Bridge.getHashCode(v[i]))) | 0;
+                }
+
+                return r;
+            }
+
+            return r = r + ((r * m | 0) + (v == null ? 0 : Bridge.getHashCode(v))) | 0;
+        },
+
         getHashCode: function (value, safe, deep) {
             // In CLR: mutable object should keep on returning same value
             // Bridge.NET goals: make it deterministic (to make testing easier) without breaking CLR contracts
@@ -11689,14 +11709,8 @@
             }
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 5139482776;
-            hash = hash * 23 + (this.m_parsedVersion == null ? 0 : Bridge.getHashCode(this.m_parsedVersion));
-            hash = hash * 23 + (this.m_failure == null ? 0 : Bridge.getHashCode(this.m_failure));
-            hash = hash * 23 + (this.m_exceptionArgument == null ? 0 : Bridge.getHashCode(this.m_exceptionArgument));
-            hash = hash * 23 + (this.m_argumentName == null ? 0 : Bridge.getHashCode(this.m_argumentName));
-            hash = hash * 23 + (this.m_canThrow == null ? 0 : Bridge.getHashCode(this.m_canThrow));
-            return hash;
+            var h = Bridge.addHash([5139482776, this.m_parsedVersion, this.m_failure, this.m_exceptionArgument, this.m_argumentName, this.m_canThrow]);
+            return h;
         },
         equals: function (o) {
             if (!Bridge.is(o, System.Version.VersionResult)) {
@@ -16822,20 +16836,8 @@
             this._k = r[7];
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 1684632903;
-            hash = hash * 23 + (this._a == null ? 0 : Bridge.getHashCode(this._a));
-            hash = hash * 23 + (this._b == null ? 0 : Bridge.getHashCode(this._b));
-            hash = hash * 23 + (this._c == null ? 0 : Bridge.getHashCode(this._c));
-            hash = hash * 23 + (this._d == null ? 0 : Bridge.getHashCode(this._d));
-            hash = hash * 23 + (this._e == null ? 0 : Bridge.getHashCode(this._e));
-            hash = hash * 23 + (this._f == null ? 0 : Bridge.getHashCode(this._f));
-            hash = hash * 23 + (this._g == null ? 0 : Bridge.getHashCode(this._g));
-            hash = hash * 23 + (this._h == null ? 0 : Bridge.getHashCode(this._h));
-            hash = hash * 23 + (this._i == null ? 0 : Bridge.getHashCode(this._i));
-            hash = hash * 23 + (this._j == null ? 0 : Bridge.getHashCode(this._j));
-            hash = hash * 23 + (this._k == null ? 0 : Bridge.getHashCode(this._k));
-            return hash;
+            var h = Bridge.addHash([1684632903, this._a, this._b, this._c, this._d, this._e, this._f, this._g, this._h, this._i, this._j, this._k]);
+            return h;
         },
         equals: function (o) {
             if (!Bridge.is(o, System.Guid)) {

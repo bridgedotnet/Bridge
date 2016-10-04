@@ -25,10 +25,8 @@
             return Bridge.equals(this.a, o.a);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 6320272310;
-            hash = hash * 23 + (this.a == null ? 0 : Bridge.getHashCode(this.a));
-            return hash;
+            var h = Bridge.addHash([6320272310, this.a]);
+            return h;
         },
         toJSON: function () {
             return {

@@ -54,11 +54,8 @@
             this.$initialize();
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 1852403652;
-            hash = hash * 23 + (this.x == null ? 0 : Bridge.getHashCode(this.x));
-            hash = hash * 23 + (this.y == null ? 0 : Bridge.getHashCode(this.y));
-            return hash;
+            var h = Bridge.addHash([1852403652, this.x, this.y]);
+            return h;
         },
         equals: function (o) {
             if (!Bridge.is(o, Classes.Point)) {

@@ -259,29 +259,21 @@ namespace Bridge.Translator
             this.EnsureComma();
             this.Write(JS.Funcs.GETHASHCODE + ": function () ");
             this.BeginBlock();
-            this.Write("var hash = 17;");
-
-            this.WriteNewLine();
+            this.Write("var h = " + JS.Funcs.BRIDGE_ADDHASH + "([");
 
             var nameHashValue = new HashHelper().GetDeterministicHash(config.Name);
-
-            this.Write("hash = hash * 23" + nameHashValue + ";");
+            this.Write(nameHashValue);
 
             foreach (var property in config.Type.Properties)
             {
                 var name = Object.Net.Utilities.StringUtils.ToLowerCamelCase(property.Name);
-
-                this.WriteNewLine();
-                this.Write("hash = hash * 23 + ");
-                this.Write("(this." + name);
-                this.Write(" == null ? 0 : ");
-                this.Write(JS.Funcs.BRIDGE_GETHASHCODE + "(");
-                this.Write("this." + name);
-                this.Write("));");
+                this.Write(", this." + name);
             }
 
+            this.Write("]);");
+
             this.WriteNewLine();
-            this.Write("return hash;");
+            this.Write("return h;");
             this.WriteNewLine();
             this.EndBlock();
             this.Emitter.Comma = true;

@@ -51,6 +51,7 @@
             public const string BRIDGE_NS = "Bridge.ns";
             public const string BRIDGE_EQUALS = "Bridge.equals";
             public const string BRIDGE_GETHASHCODE = "Bridge.getHashCode";
+            public const string BRIDGE_ADDHASH = "Bridge.addHash";
             public const string BRIDGE_REFERENCEEQUALS = "Bridge.referenceEquals";
             public const string BRIDGE_REF = "Bridge.ref";
             public const string BRIDGE_GETDEFAULTVALUE = "Bridge." + GETDEFAULTVALUE;

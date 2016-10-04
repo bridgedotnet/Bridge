@@ -317,6 +317,26 @@
             }
         },
 
+        addHash: function (v, r, m) {
+            if (isNaN(r)) {
+                r = 17;
+            }
+
+            if (isNaN(m)) {
+                m = 23;
+            }
+
+            if (Bridge.isArray(v)) {
+                for (var i = 0; i < v.length; i++) {
+                    r = r + ((r * m | 0) + (v[i] == null ? 0 : Bridge.getHashCode(v[i]))) | 0;
+                }
+
+                return r;
+            }
+
+            return r = r + ((r * m | 0) + (v == null ? 0 : Bridge.getHashCode(v))) | 0;
+        },
+
         getHashCode: function (value, safe, deep) {
             // In CLR: mutable object should keep on returning same value
             // Bridge.NET goals: make it deterministic (to make testing easier) without breaking CLR contracts

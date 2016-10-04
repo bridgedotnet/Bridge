@@ -1785,12 +1785,8 @@
             this.$initialize();
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 71;
-            hash = hash * 23 + (this.x == null ? 0 : Bridge.getHashCode(this.x));
-            hash = hash * 23 + (this.s == null ? 0 : Bridge.getHashCode(this.s));
-            hash = hash * 23 + (this.z == null ? 0 : Bridge.getHashCode(this.z));
-            return hash;
+            var h = Bridge.addHash([71, this.x, this.s, this.z]);
+            return h;
         },
         equals: function (o) {
             if (!Bridge.is(o, Bridge.ClientTest.ArrayTests.ArrayTestsSet2.G)) {
@@ -1856,10 +1852,8 @@
             this.$initialize();
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 83;
-            hash = hash * 23 + (this.x == null ? 0 : Bridge.getHashCode(this.x));
-            return hash;
+            var h = Bridge.addHash([83, this.x]);
+            return h;
         },
         equals: function (o) {
             if (!Bridge.is(o, Bridge.ClientTest.ArrayTests.ArrayTestsSet2.S)) {
@@ -2097,11 +2091,8 @@
             } );
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 1852403652;
-            hash = hash * 23 + (this.x == null ? 0 : Bridge.getHashCode(this.x));
-            hash = hash * 23 + (this.y == null ? 0 : Bridge.getHashCode(this.y));
-            return hash;
+            var h = Bridge.addHash([1852403652, this.x, this.y]);
+            return h;
         },
         equals: function (o) {
             if (!Bridge.is(o, Bridge.ClientTest.BasicCSharp.Point)) {
@@ -2147,11 +2138,8 @@
             this.$initialize();
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 3771388952;
-            hash = hash * 23 + (this.l == null ? 0 : Bridge.getHashCode(this.l));
-            hash = hash * 23 + (this.t == null ? 0 : Bridge.getHashCode(this.t));
-            return hash;
+            var h = Bridge.addHash([3771388952, this.l, this.t]);
+            return h;
         },
         equals: function (o) {
             if (!Bridge.is(o, Bridge.ClientTest.BasicCSharp.Rectangle)) {
@@ -13889,11 +13877,8 @@
             return Bridge.equals(this.v1, o.v1) && Bridge.equals(this.v2, o.v2);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 6320272310;
-            hash = hash * 23 + (this.v1 == null ? 0 : Bridge.getHashCode(this.v1));
-            hash = hash * 23 + (this.v2 == null ? 0 : Bridge.getHashCode(this.v2));
-            return hash;
+            var h = Bridge.addHash([6320272310, this.v1, this.v2]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -13918,10 +13903,8 @@
             return Bridge.equals(this.v1, o.v1);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 6320337846;
-            hash = hash * 23 + (this.v1 == null ? 0 : Bridge.getHashCode(this.v1));
-            return hash;
+            var h = Bridge.addHash([6320337846, this.v1]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -13949,11 +13932,8 @@
             return Bridge.equals(this.v1, o.v1) && Bridge.equals(this.v2, o.v2);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 6320403382;
-            hash = hash * 23 + (this.v1 == null ? 0 : Bridge.getHashCode(this.v1));
-            hash = hash * 23 + (this.v2 == null ? 0 : Bridge.getHashCode(this.v2));
-            return hash;
+            var h = Bridge.addHash([6320403382, this.v1, this.v2]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -13982,11 +13962,8 @@
             return Bridge.equals(this.sv1, o.sv1) && Bridge.equals(this.sv2, o.sv2);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 6320468918;
-            hash = hash * 23 + (this.sv1 == null ? 0 : Bridge.getHashCode(this.sv1));
-            hash = hash * 23 + (this.sv2 == null ? 0 : Bridge.getHashCode(this.sv2));
-            return hash;
+            var h = Bridge.addHash([6320468918, this.sv1, this.sv2]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -16178,11 +16155,8 @@
             return Bridge.equals(this.a, o.a) && Bridge.equals(this.b, o.b);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 6320534454;
-            hash = hash * 23 + (this.a == null ? 0 : Bridge.getHashCode(this.a));
-            hash = hash * 23 + (this.b == null ? 0 : Bridge.getHashCode(this.b));
-            return hash;
+            var h = Bridge.addHash([6320534454, this.a, this.b]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -16211,11 +16185,8 @@
             return Bridge.equals(this.a, o.a) && Bridge.equals(this.b, o.b);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 6320599990;
-            hash = hash * 23 + (this.a == null ? 0 : Bridge.getHashCode(this.a));
-            hash = hash * 23 + (this.b == null ? 0 : Bridge.getHashCode(this.b));
-            return hash;
+            var h = Bridge.addHash([6320599990, this.a, this.b]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -16735,11 +16706,8 @@
             return Bridge.equals(this.group, o.group) && Bridge.equals(this.personCount, o.personCount);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 6320665526;
-            hash = hash * 23 + (this.group == null ? 0 : Bridge.getHashCode(this.group));
-            hash = hash * 23 + (this.personCount == null ? 0 : Bridge.getHashCode(this.personCount));
-            return hash;
+            var h = Bridge.addHash([6320665526, this.group, this.personCount]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -16768,11 +16736,8 @@
             return Bridge.equals(this.group, o.group) && Bridge.equals(this.sum, o.sum);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 6320731062;
-            hash = hash * 23 + (this.group == null ? 0 : Bridge.getHashCode(this.group));
-            hash = hash * 23 + (this.sum == null ? 0 : Bridge.getHashCode(this.sum));
-            return hash;
+            var h = Bridge.addHash([6320731062, this.group, this.sum]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -16801,11 +16766,8 @@
             return Bridge.equals(this.group, o.group) && Bridge.equals(this.min, o.min);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 6320796598;
-            hash = hash * 23 + (this.group == null ? 0 : Bridge.getHashCode(this.group));
-            hash = hash * 23 + (this.min == null ? 0 : Bridge.getHashCode(this.min));
-            return hash;
+            var h = Bridge.addHash([6320796598, this.group, this.min]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -16834,11 +16796,8 @@
             return Bridge.equals(this.g, o.g) && Bridge.equals(this.minCount, o.minCount);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 7125578678;
-            hash = hash * 23 + (this.g == null ? 0 : Bridge.getHashCode(this.g));
-            hash = hash * 23 + (this.minCount == null ? 0 : Bridge.getHashCode(this.minCount));
-            return hash;
+            var h = Bridge.addHash([7125578678, this.g, this.minCount]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -16867,11 +16826,8 @@
             return Bridge.equals(this.group, o.group) && Bridge.equals(this.name, o.name);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 7142355894;
-            hash = hash * 23 + (this.group == null ? 0 : Bridge.getHashCode(this.group));
-            hash = hash * 23 + (this.name == null ? 0 : Bridge.getHashCode(this.name));
-            return hash;
+            var h = Bridge.addHash([7142355894, this.group, this.name]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -16900,11 +16856,8 @@
             return Bridge.equals(this.group, o.group) && Bridge.equals(this.max, o.max);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 7159133110;
-            hash = hash * 23 + (this.group == null ? 0 : Bridge.getHashCode(this.group));
-            hash = hash * 23 + (this.max == null ? 0 : Bridge.getHashCode(this.max));
-            return hash;
+            var h = Bridge.addHash([7159133110, this.group, this.max]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -16933,11 +16886,8 @@
             return Bridge.equals(this.g, o.g) && Bridge.equals(this.maxCount, o.maxCount);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 7175910326;
-            hash = hash * 23 + (this.g == null ? 0 : Bridge.getHashCode(this.g));
-            hash = hash * 23 + (this.maxCount == null ? 0 : Bridge.getHashCode(this.maxCount));
-            return hash;
+            var h = Bridge.addHash([7175910326, this.g, this.maxCount]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -17305,11 +17255,8 @@
             return Bridge.equals(this.number, o.number) && Bridge.equals(this.isOdd, o.isOdd);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 7192687542;
-            hash = hash * 23 + (this.number == null ? 0 : Bridge.getHashCode(this.number));
-            hash = hash * 23 + (this.isOdd == null ? 0 : Bridge.getHashCode(this.isOdd));
-            return hash;
+            var h = Bridge.addHash([7192687542, this.number, this.isOdd]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -17411,11 +17358,8 @@
             return Bridge.equals(this.remainder, o.remainder) && Bridge.equals(this.numbers, o.numbers);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 7209464758;
-            hash = hash * 23 + (this.remainder == null ? 0 : Bridge.getHashCode(this.remainder));
-            hash = hash * 23 + (this.numbers == null ? 0 : Bridge.getHashCode(this.numbers));
-            return hash;
+            var h = Bridge.addHash([7209464758, this.remainder, this.numbers]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -17444,11 +17388,8 @@
             return Bridge.equals(this.firstLetter, o.firstLetter) && Bridge.equals(this.words, o.words);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 7226241974;
-            hash = hash * 23 + (this.firstLetter == null ? 0 : Bridge.getHashCode(this.firstLetter));
-            hash = hash * 23 + (this.words == null ? 0 : Bridge.getHashCode(this.words));
-            return hash;
+            var h = Bridge.addHash([7226241974, this.firstLetter, this.words]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -17477,11 +17418,8 @@
             return Bridge.equals(this.group, o.group) && Bridge.equals(this.persons, o.persons);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 7243019190;
-            hash = hash * 23 + (this.group == null ? 0 : Bridge.getHashCode(this.group));
-            hash = hash * 23 + (this.persons == null ? 0 : Bridge.getHashCode(this.persons));
-            return hash;
+            var h = Bridge.addHash([7243019190, this.group, this.persons]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -17510,11 +17448,8 @@
             return Bridge.equals(this.key, o.key) && Bridge.equals(this.words, o.words);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 7259796406;
-            hash = hash * 23 + (this.key == null ? 0 : Bridge.getHashCode(this.key));
-            hash = hash * 23 + (this.words == null ? 0 : Bridge.getHashCode(this.words));
-            return hash;
+            var h = Bridge.addHash([7259796406, this.key, this.words]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -17628,11 +17563,8 @@
             return Bridge.equals(this.name, o.name) && Bridge.equals(this.limit, o.limit);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 7276573622;
-            hash = hash * 23 + (this.name == null ? 0 : Bridge.getHashCode(this.name));
-            hash = hash * 23 + (this.limit == null ? 0 : Bridge.getHashCode(this.limit));
-            return hash;
+            var h = Bridge.addHash([7276573622, this.name, this.limit]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -17661,11 +17593,8 @@
             return Bridge.equals(this.g, o.g) && Bridge.equals(this.pg, o.pg);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 7125644214;
-            hash = hash * 23 + (this.g == null ? 0 : Bridge.getHashCode(this.g));
-            hash = hash * 23 + (this.pg == null ? 0 : Bridge.getHashCode(this.pg));
-            return hash;
+            var h = Bridge.addHash([7125644214, this.g, this.pg]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -17694,11 +17623,8 @@
             return Bridge.equals(this.groupName, o.groupName) && Bridge.equals(this.personName, o.personName);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 7142421430;
-            hash = hash * 23 + (this.groupName == null ? 0 : Bridge.getHashCode(this.groupName));
-            hash = hash * 23 + (this.personName == null ? 0 : Bridge.getHashCode(this.personName));
-            return hash;
+            var h = Bridge.addHash([7142421430, this.groupName, this.personName]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -17727,11 +17653,8 @@
             return Bridge.equals(this.name, o.name) && Bridge.equals(this.digit, o.digit);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 7159198646;
-            hash = hash * 23 + (this.name == null ? 0 : Bridge.getHashCode(this.name));
-            hash = hash * 23 + (this.digit == null ? 0 : Bridge.getHashCode(this.digit));
-            return hash;
+            var h = Bridge.addHash([7159198646, this.name, this.digit]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -17760,11 +17683,8 @@
             return Bridge.equals(this.x3, o.x3) && Bridge.equals(this.ep, o.ep);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 7175975862;
-            hash = hash * 23 + (this.x3 == null ? 0 : Bridge.getHashCode(this.x3));
-            hash = hash * 23 + (this.ep == null ? 0 : Bridge.getHashCode(this.ep));
-            return hash;
+            var h = Bridge.addHash([7175975862, this.x3, this.ep]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -18084,10 +18004,8 @@
             return Bridge.equals(this.name, o.name);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 7192753078;
-            hash = hash * 23 + (this.name == null ? 0 : Bridge.getHashCode(this.name));
-            return hash;
+            var h = Bridge.addHash([7192753078, this.name]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -18115,11 +18033,8 @@
             return Bridge.equals(this.number, o.number) && Bridge.equals(this.isIndex, o.isIndex);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 7209530294;
-            hash = hash * 23 + (this.number == null ? 0 : Bridge.getHashCode(this.number));
-            hash = hash * 23 + (this.isIndex == null ? 0 : Bridge.getHashCode(this.isIndex));
-            return hash;
+            var h = Bridge.addHash([7209530294, this.number, this.isIndex]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -18144,10 +18059,8 @@
             return Bridge.equals(this.sum, o.sum);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 7226307510;
-            hash = hash * 23 + (this.sum == null ? 0 : Bridge.getHashCode(this.sum));
-            return hash;
+            var h = Bridge.addHash([7226307510, this.sum]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -18179,12 +18092,8 @@
             return Bridge.equals(this.a, o.a) && Bridge.equals(this.b, o.b) && Bridge.equals(this.i, o.i);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 7243084726;
-            hash = hash * 23 + (this.a == null ? 0 : Bridge.getHashCode(this.a));
-            hash = hash * 23 + (this.b == null ? 0 : Bridge.getHashCode(this.b));
-            hash = hash * 23 + (this.i == null ? 0 : Bridge.getHashCode(this.i));
-            return hash;
+            var h = Bridge.addHash([7243084726, this.a, this.b, this.i]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -18277,11 +18186,8 @@
             return Bridge.equals(this.group, o.group) && Bridge.equals(this.names, o.names);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 7259861942;
-            hash = hash * 23 + (this.group == null ? 0 : Bridge.getHashCode(this.group));
-            hash = hash * 23 + (this.names == null ? 0 : Bridge.getHashCode(this.names));
-            return hash;
+            var h = Bridge.addHash([7259861942, this.group, this.names]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -23796,10 +23702,8 @@
             return Bridge.equals(this.x, o.x);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 7276639158;
-            hash = hash * 23 + (this.x == null ? 0 : Bridge.getHashCode(this.x));
-            return hash;
+            var h = Bridge.addHash([7276639158, this.x]);
+            return h;
         },
         toJSON: function () {
             return {
@@ -23827,11 +23731,8 @@
             return Bridge.equals(this.x, o.x) && Bridge.equals(this.y, o.y);
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 7125709750;
-            hash = hash * 23 + (this.x == null ? 0 : Bridge.getHashCode(this.x));
-            hash = hash * 23 + (this.y == null ? 0 : Bridge.getHashCode(this.y));
-            return hash;
+            var h = Bridge.addHash([7125709750, this.x, this.y]);
+            return h;
         },
         toJSON: function () {
             return {

@@ -19,10 +19,8 @@
             this.$initialize();
         },
         getHashCode: function () {
-            var hash = 17;
-            hash = hash * 23 + 3587563198;
-            hash = hash * 23 + (this.Value == null ? 0 : Bridge.getHashCode(this.Value));
-            return hash;
+            var h = Bridge.addHash([3587563198, this.Value]);
+            return h;
         },
         equals: function (o) {
             if (!Bridge.is(o, Test.BridgeIssues.N1023.Optional$1(T))) {
