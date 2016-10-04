@@ -14000,7 +14000,7 @@
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeFullName(System.Guid), "System.Guid");
 
-            var o = System.Guid.empty;
+            var o = new System.Guid.ctor();
             Bridge.Test.Assert.true(Bridge.is(o, System.Guid));
             Bridge.Test.Assert.true(Bridge.is(o, System.IComparable$1(System.Guid)));
             Bridge.Test.Assert.true(Bridge.is(o, System.IEquatable$1(System.Guid)));
@@ -14015,17 +14015,17 @@
             Bridge.Test.Assert.areEqual(result.toString(), "00000000-0000-0000-0000-000000000000");
         },
         createInstanceWorks: function () {
-            var result = Bridge.createInstance(System.Guid).$clone();
+            var result = Bridge.createInstance(System.Guid);
             Bridge.Test.Assert.true(Bridge.is(result, System.Guid));
             Bridge.Test.Assert.areEqual(result.toString(), "00000000-0000-0000-0000-000000000000");
         },
         defaultConstructorWorks: function () {
-            var result = System.Guid.empty;
+            var result = new System.Guid.ctor();
             Bridge.Test.Assert.true(Bridge.is(result, System.Guid));
             Bridge.Test.Assert.areEqual(result.toString(), "00000000-0000-0000-0000-000000000000");
         },
         emptyWorks: function () {
-            Bridge.Test.Assert.areEqual(System.Guid.empty.$clone().toString(), "00000000-0000-0000-0000-000000000000");
+            Bridge.Test.Assert.areEqual(System.Guid.empty.toString(), "00000000-0000-0000-0000-000000000000");
         },
         toStringWithoutArgumentsWorks: function () {
             var guid = new System.Guid.$ctor4("223310CC-1F48-4489-B87E-88C779C77CB3");
@@ -14034,7 +14034,7 @@
         byteArrayConstructorWorks: function () {
             var g = new System.Guid.$ctor1([120, 149, 98, 168, 38, 122, 69, 97, 144, 50, 217, 26, 61, 84, 189, 104]);
             Bridge.Test.Assert.true$1(Bridge.is(g, System.Guid), "Should be Guid");
-            Bridge.Test.Assert.areEqual$1(g.toString(), "789562a8-267a-4561-9032-d91a3d54bd68", "value");
+            Bridge.Test.Assert.areEqual$1(g.toString(), "a8629578-7a26-6145-9032-d91a3d54bd68", "value");
             Bridge.Test.Assert.throws$4($_.Bridge.ClientTest.GuidTests.f1, System.ArgumentException, "Invalid array should throw");
         },
         int32Int16Int16ByteArrayConstructorWorks: function () {
@@ -14068,10 +14068,10 @@
             Bridge.Test.Assert.throws$4($_.Bridge.ClientTest.GuidTests.f2, System.FormatException, "Invalid should throw");
         },
         parseWorks: function () {
-            var g1 = System.Guid.parse("A6993C0A-A8CB-45D9-994B-90E7203E4FC6").$clone();
-            var g2 = System.Guid.parse("{A6993C0A-A8CB-45D9-994B-90E7203E4FC6}").$clone();
-            var g3 = System.Guid.parse("(A6993C0A-A8CB-45D9-994B-90E7203E4FC6)").$clone();
-            var g4 = System.Guid.parse("A6993C0AA8CB45D9994B90E7203E4FC6").$clone();
+            var g1 = System.Guid.parse("A6993C0A-A8CB-45D9-994B-90E7203E4FC6");
+            var g2 = System.Guid.parse("{A6993C0A-A8CB-45D9-994B-90E7203E4FC6}");
+            var g3 = System.Guid.parse("(A6993C0A-A8CB-45D9-994B-90E7203E4FC6)");
+            var g4 = System.Guid.parse("A6993C0AA8CB45D9994B90E7203E4FC6");
             Bridge.Test.Assert.true(Bridge.is(g1, System.Guid));
             Bridge.Test.Assert.true(Bridge.is(g2, System.Guid));
             Bridge.Test.Assert.true(Bridge.is(g3, System.Guid));
@@ -14083,10 +14083,10 @@
             Bridge.Test.Assert.throws$4($_.Bridge.ClientTest.GuidTests.f3, System.FormatException, "Invalid should throw");
         },
         parseExactWorks: function () {
-            var g1 = System.Guid.parseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "D").$clone();
-            var g2 = System.Guid.parseExact("{A6993C0A-A8CB-45D9-994B-90E7203E4FC6}", "B").$clone();
-            var g3 = System.Guid.parseExact("(A6993C0A-A8CB-45D9-994B-90E7203E4FC6)", "P").$clone();
-            var g4 = System.Guid.parseExact("A6993C0AA8CB45D9994B90E7203E4FC6", "N").$clone();
+            var g1 = System.Guid.parseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "D");
+            var g2 = System.Guid.parseExact("{A6993C0A-A8CB-45D9-994B-90E7203E4FC6}", "B");
+            var g3 = System.Guid.parseExact("(A6993C0A-A8CB-45D9-994B-90E7203E4FC6)", "P");
+            var g4 = System.Guid.parseExact("A6993C0AA8CB45D9994B90E7203E4FC6", "N");
             Bridge.Test.Assert.true(Bridge.is(g1, System.Guid));
             Bridge.Test.Assert.true(Bridge.is(g2, System.Guid));
             Bridge.Test.Assert.true(Bridge.is(g3, System.Guid));
@@ -14195,7 +14195,7 @@
         newGuidWorks: function () {
             var d = new (System.Collections.Generic.Dictionary$2(String,Object))();
             for (var i = 0; i < 1000; i = (i + 1) | 0) {
-                var g = System.Guid.newGuid().$clone();
+                var g = System.Guid.newGuid();
                 Bridge.Test.Assert.true$1(Bridge.is(g, System.Guid), "Generated Guid should be Guid");
                 var s = g.toString$1("N");
                 Bridge.Test.Assert.true$1(s.charCodeAt(16) === 56 || s.charCodeAt(16) === 57 || s.charCodeAt(16) === 97 || s.charCodeAt(16) === 98, "Should be standard guid");
@@ -14206,7 +14206,7 @@
         },
         toByteArrayWorks: function () {
             var g = new System.Guid.$ctor4("8440F854-0C0B-4355-9722-1608D62E8F87");
-            Bridge.Test.Assert.areEqual(g.toByteArray(), [132, 64, 248, 84, 12, 11, 67, 85, 151, 34, 22, 8, 214, 46, 143, 135]);
+            Bridge.Test.Assert.areEqual(g.toByteArray(), [84, 248, 64, 132, 11, 12, 85, 67, 151, 34, 22, 8, 214, 46, 143, 135]);
         }
     });
 

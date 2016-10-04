@@ -10,27 +10,27 @@
             rnd: null,
             config: {
                 init: function () {
-                    this.valid = new RegExp("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", "ig");
+                    this.valid = new RegExp("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", "i");
                     this.split = new RegExp("^(.{8})(.{4})(.{4})(.{4})(.{12})$");
-                    this.nonFormat = new RegExp("^[{(]?([0-9a-f]{8})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{12})[)}]?$", "ig");
+                    this.nonFormat = new RegExp("^[{(]?([0-9a-f]{8})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{12})[)}]?$", "i");
                     this.replace = new RegExp("-", "g");
                     this.rnd = new System.Random.ctor();
-                    this.empty = System.Guid.empty;
+                    this.empty = new System.Guid.ctor();
                 }
             },
             parse: function (input) {
                 return System.Guid.parseExact(input, null);
             },
             parseExact: function (input, format) {
-                var r = System.Guid.empty;
+                var r = new System.Guid.ctor();
                 r.parseInternal(input, format, true);
-                return r.$clone();
+                return r;
             },
             tryParse: function (input, result) {
                 return System.Guid.tryParseExact(input, null, result);
             },
             tryParseExact: function (input, format, result) {
-                result.v = System.Guid.empty;
+                result.v = new System.Guid.ctor();
                 return result.v.parseInternal(input, format, false);
             },
             newGuid: function () {
@@ -38,19 +38,10 @@
 
                 System.Guid.rnd.nextBytes(a);
 
-                a[6] = ((a[6] & 15 | 64)) & 255;
+                a[7] = ((a[7] & 15 | 64)) & 255;
                 a[8] = ((a[8] & 191 | 128)) & 255;
 
-                return System.Guid.parse(System.Guid.fromBytes(a));
-            },
-            fromBytes: function (b) {
-                if (b == null || b.length !== 16) {
-                    throw new System.ArgumentException(System.String.format(System.Guid.error1, 16));
-                }
-
-                var s = b.map(System.Guid.makeBinary).join("");
-
-                return System.Guid.split.exec(s).slice(1).join("-");
+                return new System.Guid.$ctor1(a);
             },
             makeBinary: function (x) {
                 return System.Int32.format((x & 255), "x2");
@@ -75,7 +66,7 @@
         },
         $ctor4: function (uuid) {
             this.$initialize();
-            (System.Guid.empty).$clone(this);
+            (new System.Guid.ctor()).$clone(this);
 
             var s = this.parseInternal(uuid, null, true);
         },
@@ -201,21 +192,27 @@
             } else {
                 format = format.toUpperCase();
 
+                var p = false;
+
                 if (Bridge.referenceEquals(format, "N")) {
                     var m1 = System.Guid.split.exec(input);
 
                     if (m1 != null) {
+                        p = true;
                         input = m1.slice(1).join("-");
                     }
                 } else if (Bridge.referenceEquals(format, "B") || Bridge.referenceEquals(format, "P")) {
-                    var b = Bridge.referenceEquals(format, "B") ? 123 : 40;
+                    var b = Bridge.referenceEquals(format, "B") ? [123, 125] : [40, 41];
 
-                    if ((input.charCodeAt(0) === b) && (input.charCodeAt(((input.length - 1) | 0)) === b)) {
+                    if ((input.charCodeAt(0) === b[0]) && (input.charCodeAt(((input.length - 1) | 0)) === b[1])) {
+                        p = true;
                         input = input.substr(1, ((input.length - 2) | 0));
                     }
+                } else {
+                    p = true;
                 }
 
-                if (input.match(System.Guid.valid) != null) {
+                if (p && input.match(System.Guid.valid) != null) {
                     r = input.toLowerCase();
                 }
             }
@@ -232,20 +229,23 @@
             return false;
         },
         format$1: function (format) {
-            var uuid = System.Guid.fromBytes(this.toByteArray());
+            var s = System.String.concat(System.String.concat(System.UInt32.format((this._a >>> 0), "x8"), System.UInt16.format((this._b & 65535), "x4")), System.UInt16.format((this._c & 65535), "x4"));
+            s = System.String.concat(s, ([this._d, this._e, this._f, this._g, this._h, this._i, this._j, this._k]).map(System.Guid.makeBinary).join(""));
+
+            s = System.Guid.split.exec(s).slice(1).join("-");
 
             switch (format) {
                 case "n": 
                 case "N": 
-                    return uuid.replace(System.Guid.replace, "");
+                    return s.replace(System.Guid.replace, "");
                 case "b": 
                 case "B": 
-                    return System.String.concat(System.String.concat(String.fromCharCode(123), uuid), String.fromCharCode(125));
+                    return System.String.concat(System.String.concat(String.fromCharCode(123), s), String.fromCharCode(125));
                 case "p": 
                 case "P": 
-                    return System.String.concat(System.String.concat(String.fromCharCode(40), uuid), String.fromCharCode(41));
+                    return System.String.concat(System.String.concat(String.fromCharCode(40), s), String.fromCharCode(41));
                 default: 
-                    return uuid;
+                    return s;
             }
         },
         fromString: function (s) {
@@ -255,23 +255,23 @@
 
             s = s.replace(System.Guid.replace, "");
 
-            var r = System.Array.init(16, 0);
+            var r = System.Array.init(8, 0);
 
-            for (var i = 0; i < 16; i = (i + 1) | 0) {
-                r[i] = System.Byte.parse(s.substr(((i * 2) | 0), 2), 16);
+            this._a = (System.UInt32.parse(s.substr(0, 8), 16)) | 0;
+            this._b = Bridge.Int.sxs((System.UInt16.parse(s.substr(8, 4), 16)) & 65535);
+            this._c = Bridge.Int.sxs((System.UInt16.parse(s.substr(12, 4), 16)) & 65535);
+            for (var i = 8; i < 16; i = (i + 1) | 0) {
+                r[((i - 8) | 0)] = System.Byte.parse(s.substr(((i * 2) | 0), 2), 16);
             }
 
-            this._a = (r[3] << 24) | (r[2] << 16) | (r[1] << 8) | r[0];
-            this._b = Bridge.Int.sxs((((r[5] << 8) | r[4])) & 65535);
-            this._c = Bridge.Int.sxs((((r[7] << 8) | r[6])) & 65535);
-            this._d = r[8];
-            this._e = r[9];
-            this._f = r[10];
-            this._g = r[11];
-            this._h = r[12];
-            this._i = r[13];
-            this._j = r[14];
-            this._k = r[15];
+            this._d = r[0];
+            this._e = r[1];
+            this._f = r[2];
+            this._g = r[3];
+            this._h = r[4];
+            this._i = r[5];
+            this._j = r[6];
+            this._k = r[7];
         },
         getHashCode: function () {
             var hash = 17;
@@ -295,19 +295,5 @@
             }
             return Bridge.equals(this._a, o._a) && Bridge.equals(this._b, o._b) && Bridge.equals(this._c, o._c) && Bridge.equals(this._d, o._d) && Bridge.equals(this._e, o._e) && Bridge.equals(this._f, o._f) && Bridge.equals(this._g, o._g) && Bridge.equals(this._h, o._h) && Bridge.equals(this._i, o._i) && Bridge.equals(this._j, o._j) && Bridge.equals(this._k, o._k);
         },
-        $clone: function (to) {
-            var s = to || new System.Guid();
-            s._a = this._a;
-            s._b = this._b;
-            s._c = this._c;
-            s._d = this._d;
-            s._e = this._e;
-            s._f = this._f;
-            s._g = this._g;
-            s._h = this._h;
-            s._i = this._i;
-            s._j = this._j;
-            s._k = this._k;
-            return s;
-        }
+        $clone: function (to) { return this; }
     });

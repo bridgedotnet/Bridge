@@ -7,13 +7,14 @@ namespace System
     /// <summary>
     /// The Guid data type which is mapped to the string type in Javascript.
     /// </summary>
+    [Immutable]
     public struct Guid : IEquatable<Guid>, IComparable<Guid>, IFormattable
     {
         private const string error1 = "Byte array for GUID must be exactly {0} bytes long";
 
-        private static readonly Bridge.Text.RegularExpressions.Regex Valid = new Bridge.Text.RegularExpressions.Regex("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", "ig");
+        private static readonly Bridge.Text.RegularExpressions.Regex Valid = new Bridge.Text.RegularExpressions.Regex("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", "i");
         private static readonly Bridge.Text.RegularExpressions.Regex Split = new Bridge.Text.RegularExpressions.Regex("^(.{8})(.{4})(.{4})(.{4})(.{12})$");
-        private static readonly Bridge.Text.RegularExpressions.Regex NonFormat = new Bridge.Text.RegularExpressions.Regex("^[{(]?([0-9a-f]{8})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{12})[)}]?$", "ig");
+        private static readonly Bridge.Text.RegularExpressions.Regex NonFormat = new Bridge.Text.RegularExpressions.Regex("^[{(]?([0-9a-f]{8})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{12})[)}]?$", "i");
         private static readonly Bridge.Text.RegularExpressions.Regex Replace = new Bridge.Text.RegularExpressions.Regex("-", "g");
         private static readonly Random Rnd = new Random();
 
@@ -30,9 +31,6 @@ namespace System
         private byte _i;
         private byte _j;
         private byte _k;
-
-        [Template("System.Guid.empty")]
-        private extern Guid(DummyTypeUsedToAddAttributeToDefaultValueTypeConstructor _);
 
         public Guid(string uuid)
         {
@@ -195,10 +193,10 @@ namespace System
 
             Rnd.NextBytes(a);
 
-            a[6] = (byte)(a[6] & 0x0f | 0x40);
+            a[7] = (byte)(a[7] & 0x0f | 0x40);
             a[8] = (byte)(a[8] & 0xbf | 0x80);
 
-            return Parse(FromBytes(a));
+            return new Guid(a);
         }
 
         [Template("{a} === {b}")]
@@ -229,26 +227,33 @@ namespace System
             {
                 format = format.ToUpper();
 
+                var p = false;
+
                 if (format == "N")
                 {
                     var m = Split.Exec(input);
 
                     if (m != null)
                     {
+                        p = true;
                         input = m.Slice(1).Join("-");
                     }
                 }
                 else if (format == "B" || format == "P")
                 {
-                    var b = format == "B" ? '{' : '(';
+                    var b = format == "B" ? new[] { '{', '}' } : new[] { '(', ')' };
 
-                    if ((input[0] == b) && (input[input.Length - 1] == b))
+                    if ((input[0] == b[0]) && (input[input.Length - 1] == b[1]))
                     {
+                        p = true;
                         input = input.Substr(1, input.Length - 2);
                     }
+                } else
+                {
+                    p = true;
                 }
 
-                if (input.Match(Valid) != null)
+                if (p && input.Match(Valid) != null)
                 {
                     r = input.ToLower();
                 }
@@ -270,39 +275,30 @@ namespace System
 
         private string Format(string format)
         {
-            var uuid = FromBytes(ToByteArray());
+            var s = ((uint)_a).ToString("x8") + ((ushort)_b).ToString("x4") + ((ushort)_c).ToString("x4");
+            s = s + (new[] { _d, _e, _f, _g, _h, _i, _j, _k }).Map(MakeBinary).Join("");
+
+            s = Split.Exec(s).Slice(1).Join("-");
 
             switch (format)
             {
                 case "n":
                 case "N":
-                    return uuid.Replace(Replace, "");
+                    return s.Replace(Replace, "");
                 case "b":
                 case "B":
-                    return '{' + uuid + '}';
+                    return '{' + s + '}';
                 case "p":
                 case "P":
-                    return '(' + uuid + ')';
+                    return '(' + s + ')';
                 default:
-                    return uuid;
+                    return s;
             }
-        }
-
-        private static string FromBytes(byte[] b)
-        {
-            if (b == null || b.Length != 16)
-            {
-                throw new ArgumentException(string.Format(error1, 16));
-            }
-
-            var s = b.Map(MakeBinary).Join("");
-
-            return Split.Exec(s).Slice(1).Join("-");
         }
 
         private static string MakeBinary(byte x)
         {
-            return (x & 0xff).Format("x2");
+            return (x & 0xff).ToString("x2");
         }
 
         private void FromString(string s)
@@ -314,24 +310,24 @@ namespace System
 
             s = s.Replace(Replace, "");
 
-            var r = new byte[16];
+            var r = new byte[8];
 
-            for (var i = 0; i < 16; i++)
+            _a = (int)uint.Parse(s.Substring(0, 8), 16);
+            _b = (short)ushort.Parse(s.Substring(8, 4), 16);
+            _c = (short)ushort.Parse(s.Substring(12, 4), 16);
+            for (var i = 8; i < 16; i++)
             {
-                r[i] = byte.Parse(s.Substr(i * 2, 2), 16);
+                r[i - 8] = byte.Parse(s.Substring(i * 2, 2), 16);
             }
 
-            _a = ((int)r[3] << 24) | ((int)r[2] << 16) | ((int)r[1] << 8) | r[0];
-            _b = (short)(((int)r[5] << 8) | r[4]);
-            _c = (short)(((int)r[7] << 8) | r[6]);
-            _d = r[8];
-            _e = r[9];
-            _f = r[10];
-            _g = r[11];
-            _h = r[12];
-            _i = r[13];
-            _j = r[14];
-            _k = r[15];
+            _d = r[0];
+            _e = r[1];
+            _f = r[2];
+            _g = r[3];
+            _h = r[4];
+            _i = r[5];
+            _j = r[6];
+            _k = r[7];
         }
     }
 }
