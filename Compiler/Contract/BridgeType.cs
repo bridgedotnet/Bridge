@@ -1,15 +1,14 @@
 using Bridge.Contract.Constants;
-
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.TypeSystem;
 using Mono.Cecil;
 using Object.Net.Utilities;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using ByReferenceType = ICSharpCode.NRefactory.TypeSystem.ByReferenceType;
 
 namespace Bridge.Contract
 {
@@ -159,9 +158,14 @@ namespace Bridge.Contract
                 type = ((ParameterizedTypeReference)type.ToTypeReference()).GenericType.Resolve(this.Emitter.Resolver.Resolver.TypeResolveContext);
             }
 
+            if (type is ByReferenceType)
+            {
+                type = ((ByReferenceType) type).ElementType;
+            }
+
             foreach (var item in this)
             {
-                if (item.Value.Type == type)
+                if (item.Value.Type.Equals(type))
                 {
                     return item.Value;
                 }
