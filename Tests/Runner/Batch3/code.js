@@ -6608,7 +6608,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             Bridge.Test.Assert.true$1(x.value.equalsT(System.Decimal(y)), "decimal");
 
             var g = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1518.TestClass$1(System.Guid))();
-            Bridge.Test.Assert.true$1(g.value === System.Guid.empty, "Guid");
+            Bridge.Test.Assert.true$1(System.Guid.op_Equality(g.value, System.Guid.empty), "Guid");
 
             var l = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1518.TestClass$1(System.Int64))();
             var z = 0;

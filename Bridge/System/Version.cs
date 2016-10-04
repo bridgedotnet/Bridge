@@ -214,18 +214,7 @@ namespace System
 
         public override bool Equals(Object obj)
         {
-            Version v = obj as Version;
-            if (v == null)
-                return false;
-
-            // check that major, minor, build & revision numbers match
-            if ((this._Major != v._Major) ||
-                (this._Minor != v._Minor) ||
-                (this._Build != v._Build) ||
-                (this._Revision != v._Revision))
-                return false;
-
-            return true;
+            return Equals(obj as Version);
         }
 
         public bool Equals(Version obj)

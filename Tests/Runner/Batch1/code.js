@@ -14124,8 +14124,8 @@
         },
         compareToWorks: function () {
             var g = new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C");
-            Bridge.Test.Assert.areEqual$1(Bridge.compare(g, new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C")), 0, "equal");
-            Bridge.Test.Assert.areNotEqual$1(Bridge.compare(g, new System.Guid.$ctor4("E4C221BE-9B39-4398-B82A-48BA4648CAE0")), 0, "not equal");
+            Bridge.Test.Assert.areEqual$1(g.compareTo(new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C")), 0, "equal");
+            Bridge.Test.Assert.areNotEqual$1(g.compareTo(new System.Guid.$ctor4("E4C221BE-9B39-4398-B82A-48BA4648CAE0")), 0, "not equal");
         },
         iComparableCompareToWorks: function () {
             var g = Bridge.cast(new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C"), System.IComparable$1(System.Guid));
@@ -14140,8 +14140,8 @@
         },
         equalsGuidWorks: function () {
             var g = new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C");
-            Bridge.Test.Assert.true$1(Bridge.equalsT(g, new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C")), "Equal");
-            Bridge.Test.Assert.false$1(Bridge.equalsT(g, new System.Guid.$ctor4("E4C221BE-9B39-4398-B82A-48BA4648CAE0")), "Not equal");
+            Bridge.Test.Assert.true$1(g.equalsT(new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C")), "Equal");
+            Bridge.Test.Assert.false$1(g.equalsT(new System.Guid.$ctor4("E4C221BE-9B39-4398-B82A-48BA4648CAE0")), "Not equal");
         },
         iEquatableEqualsWorks: function () {
             var g = Bridge.cast(new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C"), System.IEquatable$1(System.Guid));
@@ -14153,12 +14153,12 @@
             Bridge.Test.Assert.areNotEqual(Bridge.getHashCode(new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C")), Bridge.getHashCode(new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153D")));
         },
         equalityOperatorWorks: function () {
-            Bridge.Test.Assert.true$1(new System.Guid.$ctor4("D311FC20-D7B6-40B6-88DB-9CD92AED6628") === new System.Guid.$ctor4("D311FC20-D7B6-40B6-88DB-9CD92AED6628"), "Equal");
-            Bridge.Test.Assert.false$1(new System.Guid.$ctor4("D311FC20-D7B6-40B6-88DB-9CD92AED6628") === new System.Guid.$ctor4("A317804C-A583-4857-804F-A0D276008C82"), "Not equal");
+            Bridge.Test.Assert.true$1(System.Guid.op_Equality(new System.Guid.$ctor4("D311FC20-D7B6-40B6-88DB-9CD92AED6628"), new System.Guid.$ctor4("D311FC20-D7B6-40B6-88DB-9CD92AED6628")), "Equal");
+            Bridge.Test.Assert.false$1(System.Guid.op_Equality(new System.Guid.$ctor4("D311FC20-D7B6-40B6-88DB-9CD92AED6628"), new System.Guid.$ctor4("A317804C-A583-4857-804F-A0D276008C82")), "Not equal");
         },
         inequalityOperatorWorks: function () {
-            Bridge.Test.Assert.false$1(new System.Guid.$ctor4("D311FC20-D7B6-40B6-88DB-9CD92AED6628") !== new System.Guid.$ctor4("D311FC20-D7B6-40B6-88DB-9CD92AED6628"), "Equal");
-            Bridge.Test.Assert.true$1(new System.Guid.$ctor4("D311FC20-D7B6-40B6-88DB-9CD92AED6628") !== new System.Guid.$ctor4("A317804C-A583-4857-804F-A0D276008C82"), "Not equal");
+            Bridge.Test.Assert.false$1(System.Guid.op_Inequality(new System.Guid.$ctor4("D311FC20-D7B6-40B6-88DB-9CD92AED6628"), new System.Guid.$ctor4("D311FC20-D7B6-40B6-88DB-9CD92AED6628")), "Equal");
+            Bridge.Test.Assert.true$1(System.Guid.op_Inequality(new System.Guid.$ctor4("D311FC20-D7B6-40B6-88DB-9CD92AED6628"), new System.Guid.$ctor4("A317804C-A583-4857-804F-A0D276008C82")), "Not equal");
         },
         toStringWithFormatWorks: function () {
             var g = new System.Guid.$ctor4("DE33AC65-09CB-465C-AD7E-53124B2104E8");

@@ -311,17 +311,7 @@
             return 0;
         },
         equals: function (obj) {
-            var v = Bridge.as(obj, System.Version);
-            if (System.Version.op_Equality(v, null)) {
-                return false;
-            }
-
-            // check that major, minor, build & revision numbers match
-            if ((this._Major !== v._Major) || (this._Minor !== v._Minor) || (this._Build !== v._Build) || (this._Revision !== v._Revision)) {
-                return false;
-            }
-
-            return true;
+            return this.equalsT(Bridge.as(obj, System.Version));
         },
         equalsT: function (obj) {
             if (System.Version.op_Equality(obj, null)) {

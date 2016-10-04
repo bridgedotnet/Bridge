@@ -119,11 +119,30 @@ namespace System
             _k = k;
         }
 
-        [Template("Bridge.equalsT({this}, {other})")]
-        public extern bool Equals(Guid other);
+        public bool Equals(Guid o)
+        {
+            if (o == null)
+                return false;
 
-        [Template("Bridge.compare({this}, {other})")]
-        public extern int CompareTo(Guid other);
+            if ((this._a != o._a) || (this._b != o._b) || (this._c != o._c) || (this._d != o._d)
+                || (this._e != o._e) || (this._f != o._f) || (this._g != o._g) || (this._h != o._h)
+                || (this._i != o._i) || (this._j != o._j) || (this._k != o._k))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public int CompareTo(Guid value)
+        {
+            if (value == null)
+            {
+                return 1;
+            }
+
+            return this.ToString().CompareTo(value.ToString());
+        }
 
         public override string ToString()
         {
@@ -199,11 +218,20 @@ namespace System
             return new Guid(a);
         }
 
-        [Template("{a} === {b}")]
-        public static extern bool operator ==(Guid a, Guid b);
+        public static bool operator ==(Guid a, Guid b)
+        {
+            if (Object.ReferenceEquals(a, null))
+            {
+                return Object.ReferenceEquals(b, null);
+            }
 
-        [Template("{a} !== {b}")]
-        public static extern bool operator !=(Guid a, Guid b);
+            return a.Equals(b);
+        }
+
+        public static bool operator !=(Guid a, Guid b)
+        {
+            return !(a == b);
+        }
 
         private bool ParseInternal(string input, string format, bool check)
         {

@@ -11545,17 +11545,7 @@
             return 0;
         },
         equals: function (obj) {
-            var v = Bridge.as(obj, System.Version);
-            if (System.Version.op_Equality(v, null)) {
-                return false;
-            }
-
-            // check that major, minor, build & revision numbers match
-            if ((this._Major !== v._Major) || (this._Minor !== v._Minor) || (this._Build !== v._Build) || (this._Revision !== v._Revision)) {
-                return false;
-            }
-
-            return true;
+            return this.equalsT(Bridge.as(obj, System.Version));
         },
         equalsT: function (obj) {
             if (System.Version.op_Equality(obj, null)) {
@@ -16608,6 +16598,16 @@
             makeBinary: function (x) {
                 return System.Int32.format((x & 255), "x2");
             },
+            op_Equality: function (a, b) {
+                if (Bridge.referenceEquals(a, null)) {
+                    return Bridge.referenceEquals(b, null);
+                }
+
+                return a.equalsT(b);
+            },
+            op_Inequality: function (a, b) {
+                return !(System.Guid.op_Equality(a, b));
+            },
             getDefaultValue: function () { return new System.Guid(); }
         },
         _a: 0,
@@ -16623,6 +16623,8 @@
         _k: 0,
         config: {
             alias: [
+            "equalsT", "System$IEquatable$1$System$Guid$equalsT",
+            "compareTo", "System$IComparable$1$System$Guid$compareTo",
             "format", "System$IFormattable$format"
             ]
         },
@@ -16706,6 +16708,24 @@
         },
         ctor: function () {
             this.$initialize();
+        },
+        equalsT: function (o) {
+            if (System.Nullable.lifteq(System.Guid.op_Equality, o, null)) {
+                return false;
+            }
+
+            if ((this._a !== o._a) || (this._b !== o._b) || (this._c !== o._c) || (this._d !== o._d) || (this._e !== o._e) || (this._f !== o._f) || (this._g !== o._g) || (this._h !== o._h) || (this._i !== o._i) || (this._j !== o._j) || (this._k !== o._k)) {
+                return false;
+            }
+
+            return true;
+        },
+        compareTo: function (value) {
+            if (System.Nullable.lifteq(System.Guid.op_Equality, value, null)) {
+                return 1;
+            }
+
+            return System.String.compare(this.toString(), value.toString());
         },
         toString: function () {
             return this.format$1(null);
@@ -16838,12 +16858,6 @@
         getHashCode: function () {
             var h = Bridge.addHash([1684632903, this._a, this._b, this._c, this._d, this._e, this._f, this._g, this._h, this._i, this._j, this._k]);
             return h;
-        },
-        equals: function (o) {
-            if (!Bridge.is(o, System.Guid)) {
-                return false;
-            }
-            return Bridge.equals(this._a, o._a) && Bridge.equals(this._b, o._b) && Bridge.equals(this._c, o._c) && Bridge.equals(this._d, o._d) && Bridge.equals(this._e, o._e) && Bridge.equals(this._f, o._f) && Bridge.equals(this._g, o._g) && Bridge.equals(this._h, o._h) && Bridge.equals(this._i, o._i) && Bridge.equals(this._j, o._j) && Bridge.equals(this._k, o._k);
         },
         $clone: function (to) { return this; }
     });

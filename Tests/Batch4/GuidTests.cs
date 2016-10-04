@@ -71,7 +71,7 @@ namespace Bridge.ClientTest.Batch4
         {
             var g = new Guid(new byte[] { 0x78, 0x95, 0x62, 0xa8, 0x26, 0x7a, 0x45, 0x61, 0x90, 0x32, 0xd9, 0x1a, 0x3d, 0x54, 0xbd, 0x68 });
             Assert.True((object)g is Guid, "Should be Guid");
-            Assert.AreEqual("789562a8-267a-4561-9032-d91a3d54bd68", g.ToString(), "value");
+            Assert.AreEqual("a8629578-7a26-6145-9032-d91a3d54bd68", g.ToString(), "value");
             Assert.Throws(() => new Guid(new byte[] { 0x78, 0x95, 0x62, 0xa8, 0x26, 0x7a }), typeof(ArgumentException), "Invalid array should throw");
         }
 
