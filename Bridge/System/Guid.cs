@@ -43,7 +43,7 @@ namespace System
         {
             this = new Guid();
 
-            var s = ParseInternal(uuid, null, true);
+            ParseInternal(uuid, null, true);
         }
 
         /// <summary>
@@ -172,9 +172,6 @@ namespace System
         /// <returns>true if o is equal to this instance; otherwise, false.</returns>
         public bool Equals(Guid o)
         {
-            if (o == null)
-                return false;
-
             if ((this._a != o._a) || (this._b != o._b) || (this._c != o._c) || (this._d != o._d)
                 || (this._e != o._e) || (this._f != o._f) || (this._g != o._g) || (this._h != o._h)
                 || (this._i != o._i) || (this._j != o._j) || (this._k != o._k))
@@ -192,11 +189,6 @@ namespace System
         /// <returns>A signed number indicating the relative values of this instance and value.</returns>
         public int CompareTo(Guid value)
         {
-            if (value == null)
-            {
-                return 1;
-            }
-
             return this.ToString().CompareTo(value.ToString());
         }
 

@@ -16632,7 +16632,7 @@
             this.$initialize();
             (new System.Guid.ctor()).$clone(this);
 
-            var s = this.parseInternal(uuid, null, true);
+            this.parseInternal(uuid, null, true);
         },
         $ctor1: function (b) {
             this.$initialize();
@@ -16710,10 +16710,6 @@
             this.$initialize();
         },
         equalsT: function (o) {
-            if (System.Nullable.lifteq(System.Guid.op_Equality, o, null)) {
-                return false;
-            }
-
             if ((this._a !== o._a) || (this._b !== o._b) || (this._c !== o._c) || (this._d !== o._d) || (this._e !== o._e) || (this._f !== o._f) || (this._g !== o._g) || (this._h !== o._h) || (this._i !== o._i) || (this._j !== o._j) || (this._k !== o._k)) {
                 return false;
             }
@@ -16721,10 +16717,6 @@
             return true;
         },
         compareTo: function (value) {
-            if (System.Nullable.lifteq(System.Guid.op_Equality, value, null)) {
-                return 1;
-            }
-
             return System.String.compare(this.toString(), value.toString());
         },
         toString: function () {

@@ -4,6 +4,7 @@
   "outputFormatting": "Formatted",
   "outputBy": "ClassPath",
   "generateDocumentation": "None",
+  "generateTypeScript": true,
   "logging": {
     "level": "None"
   },
