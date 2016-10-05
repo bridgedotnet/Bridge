@@ -523,9 +523,9 @@ namespace Bridge.Contract
                 {
                     return a1.CompareTo(a2);
                 }
-
-                var v1 = m1 is IField ? 1 : (m1 is IEvent ? 2 : (m1 is IMethod ? 3 : 4));
-                var v2 = m2 is IField ? 1 : (m2 is IEvent ? 2 : (m2 is IMethod ? 3 : 4));
+                
+                var v1 = m1 is IField ? 1 : (m1 is IEvent ? 2 : (m1 is IProperty ? 3 : (m1 is IMethod ? 4 : 5)));
+                var v2 = m2 is IField ? 1 : (m2 is IEvent ? 2 : (m2 is IProperty ? 3 : (m2 is IMethod ? 4 : 5)));
 
                 if (v1 != v2)
                 {
@@ -534,11 +534,6 @@ namespace Bridge.Contract
 
                 var name1 = this.MemberToString(m1);
                 var name2 = this.MemberToString(m2);
-
-                if (name1.Length != name2.Length)
-                {
-                    //return name1.Length.CompareTo(name2.Length);
-                }
 
                 return string.Compare(name1, name2);
             });
@@ -731,10 +726,10 @@ namespace Bridge.Contract
                     bool eq = false;
                     if (p.IsStatic == this.Static)
                     {
-                        var getterIgnore = p.Getter != null && this.Emitter.Validator.IsIgnoreType(p.Getter);
-                        var setterIgnore = p.Setter != null && this.Emitter.Validator.IsIgnoreType(p.Setter);
-                        var getterName = p.Getter != null ? Helpers.GetPropertyRef(p, this.Emitter, false, true, true) : null;
-                        var setterName = p.Setter != null ? Helpers.GetPropertyRef(p, this.Emitter, true, true, true) : null;
+                        var getterIgnore = p.Getter != null && p.CanGet && this.Emitter.Validator.IsIgnoreType(p.Getter);
+                        var setterIgnore = p.Setter != null && p.CanSet && this.Emitter.Validator.IsIgnoreType(p.Setter);
+                        var getterName = p.Getter != null && p.CanGet ? Helpers.GetPropertyRef(p, this.Emitter, false, true, true) : null;
+                        var setterName = p.Setter != null && p.CanSet ? Helpers.GetPropertyRef(p, this.Emitter, true, true, true) : null;
                         var fieldName = Helpers.IsAutoProperty(p) ? this.Emitter.GetEntityName(p) : null;
 
                         if (!getterIgnore && getterName != null && (getterName == this.JsName || getterName == this.AltJsName || getterName == this.FieldJsName))
@@ -858,8 +853,8 @@ namespace Bridge.Contract
                     bool eq = false;
                     if (e.IsStatic == this.Static)
                     {
-                        var addName = e.AddAccessor != null ? Helpers.GetEventRef(e, this.Emitter, false, true, true) : null;
-                        var removeName = e.RemoveAccessor != null ? Helpers.GetEventRef(e, this.Emitter, true, true, true) : null;
+                        var addName = e.AddAccessor != null && e.CanAdd ? Helpers.GetEventRef(e, this.Emitter, false, true, true) : null;
+                        var removeName = e.RemoveAccessor != null && e.CanRemove ? Helpers.GetEventRef(e, this.Emitter, true, true, true) : null;
                         var fieldName = this.Emitter.GetEntityName(e);
                         if (addName != null && (addName == this.JsName || addName == this.AltJsName || addName == this.FieldJsName))
                         {

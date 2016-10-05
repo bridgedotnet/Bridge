@@ -371,6 +371,7 @@
     <Compile Include="BridgeIssues\1800\N1886.cs" />
     <Compile Include="BridgeIssues\1800\N1892.cs" />
     <Compile Include="BridgeIssues\1800\N1896.cs" />
+    <Compile Include="BridgeIssues\1800\N1899.cs" />
     <Compile Include="BridgeIssues\1800\N1897.cs" />
     <Compile Include="BridgeIssues\1900\N1900.cs" />
     <Compile Include="BridgeIssues\1900\N1904.cs" />
