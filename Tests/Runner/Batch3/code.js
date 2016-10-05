@@ -6847,8 +6847,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6878,7 +6876,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -10065,6 +10063,31 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             Bridge.Test.Assert.true$1(Bridge.equals(d1, d2), System.String.concat(System.String.concat(System.String.concat(System.String.concat("d1 (", Bridge.Date.format(d1)), ") == d2("), Bridge.Date.format(d2)), ")"));
         }
     });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1910", {
+        testCase: function () {
+            var item1 = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1910.Item$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1910.ItemValue))(null);
+
+            Bridge.Test.Assert.true(item1.getValue1() == null);
+            Bridge.Test.Assert.true(item1.getValue2() == null);
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1910.Item$1", function (T) { return {
+        value: null,
+        ctor: function (value) {
+            this.$initialize();
+            this.value = value;
+        },
+        getValue1: function () {
+            return Bridge.cast(this.value, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1910.ItemValue);
+        },
+        getValue2: function () {
+            return Bridge.cast(this.value, T);
+        }
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1910.ItemValue");
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
