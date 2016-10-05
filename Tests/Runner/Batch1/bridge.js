@@ -2715,6 +2715,16 @@
 
                     return typeof (instance) == "number";
                 };
+
+                Class.getDefaultValue = function () {
+                    var utype = Class.prototype.$utype;
+
+                    if (utype === System.String) {
+                        return null;
+                    }
+
+                    return 0;
+                };
             }
 
             if (Class.$kind === "interface" && Class.prototype.$variance) {
