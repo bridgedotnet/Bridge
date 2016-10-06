@@ -6847,8 +6847,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6878,7 +6876,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -10063,6 +10061,46 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             var d2 = new Date(tickValue.toNumber()/10000);
 
             Bridge.Test.Assert.true$1(Bridge.equals(d1, d2), System.String.concat(System.String.concat(System.String.concat(System.String.concat("d1 (", Bridge.Date.format(d1)), ") == d2("), Bridge.Date.format(d2)), ")"));
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1911", {
+        statics: {
+            getValue1: function (value) {
+                return value;
+            },
+            getValue2: function (value) {
+                return value;
+            }
+        },
+        testCase: function () {
+            var item = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1911_DerivedItem$1(System.Int32))();
+            Bridge.Test.Assert.areEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1911_BaseItemExtensions.getValue(System.Int32, item));
+            Bridge.Test.Assert.areEqual(3, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1911_BaseItemExtensions.getValue$1(System.Int32, item, 3));
+        },
+        testLinqCase: function () {
+            var values = [0, 1, 2];
+
+            var max1 = System.Linq.Enumerable.from(values).select(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1911.getValue1).max();
+            var max2 = System.Linq.Enumerable.from(System.Linq.Enumerable.from(values).select(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1911.getValue2)).max();
+
+            Bridge.Test.Assert.areEqual(2, max1);
+            Bridge.Test.Assert.areEqual(2, max2);
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1911_BaseItem$1", function (T) { return {
+
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1911_BaseItemExtensions", {
+        statics: {
+            getValue: function (T, item) {
+                return 1;
+            },
+            getValue$1: function (T, item, i) {
+                return i;
+            }
         }
     });
 
@@ -18085,6 +18123,15 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             this.$initialize();
         },
         observe: function (a) {
+        }
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1911_DerivedItem$1", function (T) { return {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1911_BaseItem$1(T)],
+        statics: {
+            getValue: function (T1) {
+                return 2;
+            }
         }
     }; });
 

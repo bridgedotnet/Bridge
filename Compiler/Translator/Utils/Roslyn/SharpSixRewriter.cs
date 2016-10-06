@@ -247,6 +247,7 @@ namespace Bridge.Translator
                     if (expr is IdentifierNameSyntax)
                     {
                         var name = (IdentifierNameSyntax)expr;
+
                         var genericName = SyntaxHelper.GenerateGenericName(name.Identifier, method.TypeArguments);
                         genericName = genericName.WithLeadingTrivia(name.GetLeadingTrivia()).WithTrailingTrivia(name.GetTrailingTrivia());
                         node = node.WithExpression(genericName);
@@ -257,7 +258,19 @@ namespace Bridge.Translator
                         var name = (IdentifierNameSyntax)expr;
                         var genericName = SyntaxHelper.GenerateGenericName(name.Identifier, method.TypeArguments);
                         genericName = genericName.WithLeadingTrivia(name.GetLeadingTrivia()).WithTrailingTrivia(name.GetTrailingTrivia());
-                        ma = ma.WithName(genericName);
+                        
+                        if (method.MethodKind == MethodKind.ReducedExtension && node.GetParent<ConditionalAccessExpressionSyntax>() == null)
+                        {
+                            var target = ma.Expression;
+                            ma = SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
+                                SyntaxFactory.IdentifierName(method.ContainingType.FullyQualifiedName()), genericName);
+                            node = node.WithArgumentList(node.ArgumentList.WithArguments(node.ArgumentList.Arguments.Insert(0, SyntaxFactory.Argument(target))));
+                        }
+                        else
+                        {
+                            ma = ma.WithName(genericName);
+                        }
+                        
                         node = node.WithExpression(ma);
                     }
                 }

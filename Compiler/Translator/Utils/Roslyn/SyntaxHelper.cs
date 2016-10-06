@@ -724,5 +724,17 @@ namespace Bridge.Translator
         {
             return type.GetBaseTypesAndThis().Contains(baseType);
         }
+
+        public static T GetParent<T>(this SyntaxNode node) where T : SyntaxNode
+        {
+            var p = node.Parent;
+            while (p != null && !(p is T))
+            {
+                p = p.Parent;
+            }
+
+            return p as T;
+        }
+
     }
 }
