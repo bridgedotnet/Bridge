@@ -1,5 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using Bridge.Test;
+﻿using Bridge.Test;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -9,7 +8,10 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     {
         public interface IItem
         {
-            int Value { get; }
+            int Value
+            {
+                get;
+            }
             void SetValue();
         }
 
@@ -35,7 +37,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [Test]
-        public void TestCase()
+        public void TestPropertyAndMethodNameConflict()
         {
             var item = new Item();
             Assert.AreEqual(1, item.Value);

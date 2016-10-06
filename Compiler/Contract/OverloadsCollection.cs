@@ -352,7 +352,7 @@ namespace Bridge.Contract
                 this.CancelChangeCase = !Helpers.IsFieldProperty(member, emitter);
                 this.JsName = Helpers.GetPropertyRef(member, emitter, isSetter, true, true);
                 this.AltJsName = Helpers.GetPropertyRef(member, emitter, !isSetter, true, true);
-                this.FieldJsName = Helpers.IsAutoProperty((IProperty) member) ? emitter.GetEntityName(member) : null;
+                this.FieldJsName = Helpers.IsAutoProperty((IProperty)member) ? emitter.GetEntityName(member) : null;
             }
             else if (member is IEvent)
             {
@@ -523,7 +523,7 @@ namespace Bridge.Contract
                 {
                     return a1.CompareTo(a2);
                 }
-                
+
                 var v1 = m1 is IField ? 1 : (m1 is IEvent ? 2 : (m1 is IProperty ? 3 : (m1 is IMethod ? 4 : 5)));
                 var v2 = m2 is IField ? 1 : (m2 is IEvent ? 2 : (m2 is IProperty ? 3 : (m2 is IMethod ? 4 : 5)));
 
