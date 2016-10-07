@@ -488,7 +488,7 @@
                 }
             }
 
-            if ((obj.constructor === type) || (obj instanceof type)) {
+            if ((obj.constructor === type) || (obj instanceof type) || (Bridge.getType(obj).prototype instanceof type)) {
                 return true;
             }
 

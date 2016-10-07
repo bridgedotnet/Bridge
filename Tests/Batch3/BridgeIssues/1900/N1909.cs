@@ -13,7 +13,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [Test]
-        public void TestCase()
+        public void TestActivatorEnumCreation()
         {
             var et = Activator.CreateInstance(typeof (EnumType));
             Assert.AreEqual(0, et);
