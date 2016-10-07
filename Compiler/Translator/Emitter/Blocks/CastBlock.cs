@@ -255,7 +255,7 @@ namespace Bridge.Translator
                 }
             }
 
-            bool unbox = !NullableType.IsNullable(itype) && isCast && conversion.IsUnboxingConversion;
+            bool unbox = !(itype.IsReferenceType.HasValue ? itype.IsReferenceType.Value : true) && !NullableType.IsNullable(itype) && isCast && conversion.IsUnboxingConversion;
             if (unbox)
             {
                 this.Write("System.Nullable.getValue(");

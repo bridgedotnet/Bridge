@@ -77,24 +77,24 @@
         inherits: [Interfaces.Interface6],
         config: {
             properties: {
-                Property$3: 0,
+                Property: 0,
                 MethodProperty: 0
             },
             alias: [
-            "getProperty$3", "Interfaces$Interface6$getProperty$3",
-            "setProperty$3", "Interfaces$Interface6$setProperty$3",
             "getProperty", "Interfaces$Interface6$getProperty",
-            "setProperty$1", "Interfaces$Interface6$setProperty$1",
-            "setProperty", "Interfaces$Interface6$setProperty"
+            "setProperty", "Interfaces$Interface6$setProperty",
+            "getProperty$1", "Interfaces$Interface6$getProperty$1",
+            "setProperty$2", "Interfaces$Interface6$setProperty$2",
+            "setProperty$1", "Interfaces$Interface6$setProperty$1"
             ]
         },
-        getProperty: function () {
+        getProperty$1: function () {
             return this.getMethodProperty();
         },
-        setProperty$1: function (s) {
+        setProperty$2: function (s) {
             this.setMethodProperty(s.length);
         },
-        setProperty: function (i) {
+        setProperty$1: function (i) {
             this.setMethodProperty(i);
         }
     });

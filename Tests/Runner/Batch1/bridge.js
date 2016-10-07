@@ -488,7 +488,7 @@
                 }
             }
 
-            if ((obj.constructor === type) || (obj instanceof type)) {
+            if ((obj.constructor === type) || (obj instanceof type) || (Bridge.getType(obj).prototype instanceof type)) {
                 return true;
             }
 
@@ -2714,6 +2714,16 @@
                     }
 
                     return typeof (instance) == "number";
+                };
+
+                Class.getDefaultValue = function () {
+                    var utype = Class.prototype.$utype;
+
+                    if (utype === System.String) {
+                        return null;
+                    }
+
+                    return 0;
                 };
             }
 
