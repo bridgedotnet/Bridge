@@ -373,6 +373,7 @@
     <Compile Include="BridgeIssues\1800\N1896.cs" />
     <Compile Include="BridgeIssues\1800\N1897.cs" />
     <Compile Include="BridgeIssues\1900\N1900.cs" />
+    <Compile Include="BridgeIssues\1900\N1912.cs" />
     <Compile Include="BridgeIssues\1900\N1904.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
