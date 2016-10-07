@@ -10126,13 +10126,33 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1910.ItemValue");
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1913", {
-        testActivatorEnumCreation: function () {
+        testIsSubclassOfTemplate: function () {
             var type = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1913;
 
             var result1 = !(type.prototype instanceof type);
             var result2 = !((type.prototype instanceof type));
 
             Bridge.Test.Assert.true(result1 === result2);
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1938", {
+        testIsArrayTemplate: function () {
+            var type = System.Int32;
+
+            var result1 = !(type === Array);
+            var result2 = !((type === Array));
+
+            Bridge.Test.Assert.true$1(result1, "Non array");
+            Bridge.Test.Assert.areEqual$1(result1, result2, "IsArray (for non array)");
+
+            var type2 = Bridge.getType((System.Array.init(0, 0)));
+
+            var result3 = !(type2 === Array);
+            var result4 = !((type2 === Array));
+
+            Bridge.Test.Assert.false$1(result3, "Array");
+            Bridge.Test.Assert.areEqual$1(result3, result4, "IsArray (for array)");
         }
     });
 

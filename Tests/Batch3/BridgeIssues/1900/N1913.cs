@@ -8,7 +8,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge1913
     {
         [Test]
-        public void TestActivatorEnumCreation()
+        public void TestIsSubclassOfTemplate()
         {
             Type type = typeof(Bridge1913);
 

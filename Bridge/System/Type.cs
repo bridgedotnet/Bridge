@@ -103,7 +103,7 @@ namespace System
 
         public extern bool IsArray
         {
-            [Template("{this} === Array")]
+            [Template("({this} === Array)")]
             get;
         }
 

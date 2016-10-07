@@ -13948,10 +13948,10 @@
         },
         isArrayWorks: function () {
             var array = System.Array.init(5, 0);
-            Bridge.Test.Assert.true(Bridge.getType(array) === Array);
-            Bridge.Test.Assert.true(Array === Array);
-            Bridge.Test.Assert.true(Array === Array);
-            Bridge.Test.Assert.false(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C === Array);
+            Bridge.Test.Assert.true((Bridge.getType(array) === Array));
+            Bridge.Test.Assert.true((Array === Array));
+            Bridge.Test.Assert.true((Array === Array));
+            Bridge.Test.Assert.false((Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C === Array));
             //TODO Assert.False(typeof(List<int>).IsArray);
             //TODO Assert.False(typeof(Array).IsArray);
         },
