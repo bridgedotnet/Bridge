@@ -23312,18 +23312,18 @@
             Bridge.Test.Assert.true$1(Bridge.Reflection.isAssignableFrom(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I7$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I10$2(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.X2,Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.X2)), Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y6$2(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.X2,Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.X2)), "#190");
         },
         isSubclassOfWorks: function () {
-            Bridge.Test.Assert.false$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1, "#1");
-            Bridge.Test.Assert.true$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1.prototype instanceof Object, "#2");
-            Bridge.Test.Assert.false$1(Object.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1, "#3");
-            Bridge.Test.Assert.true$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D1.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1, "#4");
-            Bridge.Test.Assert.false$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D1, "#5");
-            Bridge.Test.Assert.true$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D1.prototype instanceof Object, "#6");
-            Bridge.Test.Assert.true$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D2$1(System.Int32).prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1(System.Int32), "#7");
-            Bridge.Test.Assert.false$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D2$1(String).prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1(System.Int32), "#8");
-            Bridge.Test.Assert.false$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D3.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1(String), "#9");
-            Bridge.Test.Assert.true$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D3.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1(System.Int32), "#10");
-            Bridge.Test.Assert.false$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D2$1.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1, "#11");
-            Bridge.Test.Assert.false$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D3.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1, "#12");
+            Bridge.Test.Assert.false$1((Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1), "#1");
+            Bridge.Test.Assert.true$1((Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1.prototype instanceof Object), "#2");
+            Bridge.Test.Assert.false$1((Object.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1), "#3");
+            Bridge.Test.Assert.true$1((Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D1.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1), "#4");
+            Bridge.Test.Assert.false$1((Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D1), "#5");
+            Bridge.Test.Assert.true$1((Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D1.prototype instanceof Object), "#6");
+            Bridge.Test.Assert.true$1((Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D2$1(System.Int32).prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1(System.Int32)), "#7");
+            Bridge.Test.Assert.false$1((Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D2$1(String).prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1(System.Int32)), "#8");
+            Bridge.Test.Assert.false$1((Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D3.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1(String)), "#9");
+            Bridge.Test.Assert.true$1((Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D3.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1(System.Int32)), "#10");
+            Bridge.Test.Assert.false$1((Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D2$1.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1), "#11");
+            Bridge.Test.Assert.false$1((Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D3.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1), "#12");
         },
         isClassWorks: function () {
             Bridge.Test.Assert.false(Bridge.Reflection.isClass(Bridge.ClientTest.Reflection.TypeSystemTests.E1));
