@@ -25,12 +25,12 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [Test]
-        public void TestCase()
+        public void TestGenericTypeCasting()
         {
             var item1 = new Item<ItemValue>(null);
 
-            Assert.True(item1.Value1 == null);
-            Assert.True(item1.Value2 == null);
+            Assert.True(item1.Value1 == null, "item1.Value1");
+            Assert.True(item1.Value2 == null, "item1.Value2");
         }
     }
 }
