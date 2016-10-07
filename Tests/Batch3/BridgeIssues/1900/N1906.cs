@@ -1,5 +1,4 @@
-﻿using System;
-using Bridge.Test;
+﻿using Bridge.Test;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -8,7 +7,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge1906
     {
         [Test]
-        public void TestCase()
+        public void TestIsOperatorInaccuracy()
         {
 #pragma warning disable 183
             Assert.True(true is object);

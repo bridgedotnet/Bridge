@@ -105,18 +105,18 @@ function TestInstance4(assert: QUnitAssert, instance: Interfaces.Class4) {
 function TestInstance6(assert: QUnitAssert, instance: Interfaces.Class6) {
     var interface6: Interfaces.Interface6 = instance;
 
-    interface6.Interfaces$Interface6$setProperty$3(1);
-    assert.deepEqual(instance.getProperty$3(), 1, "Property getter and setter");
+    interface6.Interfaces$Interface6$setProperty(1);
+    assert.deepEqual(instance.getProperty(), 1, "Property getter and setter");
 
-    interface6.Interfaces$Interface6$setProperty$1("12");
+    interface6.Interfaces$Interface6$setProperty$2("12");
     assert.deepEqual(instance.getMethodProperty(), 2, "setProperty$1(string) and MethodProperty");
-    assert.deepEqual(instance.getProperty(), 2, "setPropert$1(string) and getProperty");
-    assert.notDeepEqual(instance.getProperty(), instance.getProperty$3(), "getProperty and getProperty$3");
+    assert.deepEqual(instance.getProperty$1(), 2, "setPropert$1(string) and getProperty");
+    assert.notDeepEqual(instance.getProperty(), instance.getProperty$1(), "getProperty and getProperty$3");
 
-    interface6.Interfaces$Interface6$setProperty(3);
+    interface6.Interfaces$Interface6$setProperty$1(3);
     assert.deepEqual(instance.getMethodProperty(), 3, "setProperty(int) and MethodProperty");
-    assert.deepEqual(instance.getProperty(), 3, "setPropert$1(int) and getProperty");
-    assert.notDeepEqual(instance.getProperty$3(), instance.getProperty(), "getProperty$3 and getProperty");
+    assert.deepEqual(instance.getProperty$1(), 3, "setPropert$1(int) and getProperty");
+    assert.notDeepEqual(instance.getProperty(), instance.getProperty$1(), "getProperty$3 and getProperty");
 
     //var interface61: Interfaces.Interface61 = instance;
     //var interface62: Interfaces.Interface62 = instance;
