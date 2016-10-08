@@ -65,3 +65,17 @@
             $kind: "interface"
         };
     });
+
+    Bridge.define('System.Collections.Generic.IReadOnlyCollection$1', function (T) {
+        return {
+            inherits: [System.Collections.Generic.IEnumerable$1(T)],
+            $kind: "interface"
+        };
+    });
+
+    Bridge.define('System.Collections.Generic.IReadOnlyList$1', function (T) {
+        return {
+            inherits: [System.Collections.Generic.IReadOnlyCollection$1(T)],
+            $kind: "interface"
+        };
+    });

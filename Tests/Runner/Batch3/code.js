@@ -6847,8 +6847,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6878,7 +6876,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                };
+                                }; /// Async method lacks 'await' operators and will run synchronously
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -10097,6 +10095,18 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         $kind: "enum",
         statics: {
             Item1: 0
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1914", {
+        testCase: function () {
+            var list = new (System.Collections.Generic.List$1(System.Int32))();
+            list.add(1);
+
+            var readOnlyList = new (System.Collections.ObjectModel.ReadOnlyCollection$1(System.Int32))(list);
+            list.add(2);
+
+            Bridge.Test.Assert.true(list.getCount() === readOnlyList.getCount());
         }
     });
 

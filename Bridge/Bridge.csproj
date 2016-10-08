@@ -97,6 +97,7 @@
     <Compile Include="System\Activator.cs" />
     <Compile Include="System\AppDomain.cs" />
     <Compile Include="Bridge\Arguments.cs" />
+    <Compile Include="System\Collections\Generic\IReadOnlyList.cs" />
     <Compile Include="System\CompilerServices\CallerInformationAttributes.cs" />
     <Compile Include="System\CompilerServices\FormattableStringFactory.cs" />
     <Compile Include="System\CompilerServices\RuntimeHelpers.cs" />
