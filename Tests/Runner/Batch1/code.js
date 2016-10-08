@@ -17164,32 +17164,26 @@
             },
             throwExceptionOnFirst1: function () {
                 var numbers = [3, 4];
-
                 System.Linq.Enumerable.from(numbers).first($_.Bridge.ClientTest.Linq.TestLinqElementOperators.f10);
             },
             throwExceptionOnFirst2: function () {
                 var numbers = [];
-
                 System.Linq.Enumerable.from(numbers).first();
             },
             throwExceptionOnLast1: function () {
                 var numbers = [3, 4];
-
                 System.Linq.Enumerable.from(numbers).last($_.Bridge.ClientTest.Linq.TestLinqElementOperators.f10);
             },
             throwExceptionOnLast2: function () {
                 var numbers = [];
-
                 System.Linq.Enumerable.from(numbers).last();
             },
             throwExceptionOnElementAt1: function () {
                 var numbers = [3, 4];
-
                 System.Linq.Enumerable.from(numbers).elementAt(3);
             },
             throwExceptionOnElementAt2: function () {
                 var numbers = [];
-
                 System.Linq.Enumerable.from(numbers).elementAt(1);
             }
         }
@@ -18263,8 +18257,6 @@
                 var smallNumbers = System.Linq.Enumerable.from(numbers).where($_.Bridge.ClientTest.Linq.TestLinqQueryExecution.f1);
                 var smallerEvenNumbers = smallNumbers.where($_.Bridge.ClientTest.Linq.TestLinqQueryExecution.f2);
                 Bridge.Test.Assert.areDeepEqual$1([2, 0], smallerEvenNumbers.toArray(), "Query in a query");
-
-                // TEST
                 Bridge.Linq.Enumerable.from(numbers).forEach(function (x, index) {
                     numbers[index] = (-numbers[index]) | 0;
                 });

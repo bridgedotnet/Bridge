@@ -4,14 +4,13 @@ using System.Collections.Generic;
 namespace System.Collections.ObjectModel
 {
     [External]
-    public class ReadOnlyCollection<T> : IList<T>
+    public class ReadOnlyCollection<T> : IList<T>, IReadOnlyList<T>
     {
         public extern ReadOnlyCollection(IList<T> list);
 
         public extern int Count
         {
             get;
-            private set;
         }
 
         /// <summary>

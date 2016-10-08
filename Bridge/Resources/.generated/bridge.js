@@ -9648,6 +9648,20 @@
         };
     });
 
+    Bridge.define('System.Collections.Generic.IReadOnlyCollection$1', function (T) {
+        return {
+            inherits: [System.Collections.Generic.IEnumerable$1(T)],
+            $kind: "interface"
+        };
+    });
+
+    Bridge.define('System.Collections.Generic.IReadOnlyList$1', function (T) {
+        return {
+            inherits: [System.Collections.Generic.IReadOnlyCollection$1(T)],
+            $kind: "interface"
+        };
+    });
+
     // @source CustomEnumerator.js
 
     Bridge.define('Bridge.CustomEnumerator', {
@@ -10195,6 +10209,8 @@
                 } else {
                     this.items = [];
                 }
+
+                this.clear.$clearCallbacks = [];
             },
 
             checkIndex: function (index) {
@@ -10251,6 +10267,14 @@
             clear: function () {
                 this.checkReadOnly();
                 this.items = [];
+
+                for (var i = 0; i < this.clear.$clearCallbacks.length; i++) {
+                    this.clear.$clearCallbacks[i](this);
+                }
+            },
+
+            onClear: function(callback) {
+                this.clear.$clearCallbacks.push(callback);
             },
 
             indexOf: function (item, startIndex) {
@@ -10474,15 +10498,27 @@
 
     Bridge.define('System.Collections.ObjectModel.ReadOnlyCollection$1', function (T) {
         return {
-            inherits: [System.Collections.Generic.List$1(T)],
+            inherits: [System.Collections.Generic.List$1(T), System.Collections.Generic.IReadOnlyList$1(T)],
             ctor: function (list) {
                 this.$initialize();
                 if (list == null) {
                     throw new System.ArgumentNullException("list");
                 }
 
-                System.Collections.Generic.List$1(T).ctor.call(this, list);
+                System.Collections.Generic.List$1(T).ctor.call(this, []);
                 this.readOnly = true;
+
+                if (Object.prototype.toString.call(list) === '[object Array]') {
+                    this.items = list;
+                } else if (Bridge.is(list, System.Collections.Generic.List$1(T))) {
+                    var me = this;
+                    this.items = list.items;
+                    list.onClear(function(l) {
+                        me.items = l.items;
+                    });
+                } else if (Bridge.is(list, System.Collections.IEnumerable)) {
+                    this.items = Bridge.toArray(list);
+                }
             }
         };
     });

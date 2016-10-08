@@ -11,14 +11,12 @@
         },
         useNestedFunOneInt: function () {
             var n = new TestIssue921Nested.Issue921NestedOuter.Issue921Nested(300);
-
             System.Linq.Enumerable.from([1, 2, 3]).select(function (x) {
                 return n.computeNumber(x);
             });
         },
         useNestedFuncTwoInts: function () {
             var n = new TestIssue921Nested.Issue921NestedOuter.Issue921Nested(400);
-
             System.Linq.Enumerable.from([1, 2, 3]).select(function (x, i) {
                 return n.computeTwoNumbers(x, i);
             });
@@ -35,7 +33,6 @@
         },
         useNestedFunOneIntStatic: function () {
             var n = new TestIssue921Nested.Issue921NestedOuter.Issue921Nested(500);
-
             System.Linq.Enumerable.from([1, 2, 3]).select($_.TestIssue921Nested.Issue921NestedOuter.f2);
         }
     });
