@@ -1,5 +1,4 @@
-﻿using System;
-using Bridge.Test;
+﻿using Bridge.Test;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -8,7 +7,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge1912
     {
         [Test]
-        public void TestCase()
+        public void TestExtentionMethod()
         {
             var Bridge1912_Item = new Bridge1912_Item();
             var Bridge1912_Item2 = new Bridge1912_Item();
