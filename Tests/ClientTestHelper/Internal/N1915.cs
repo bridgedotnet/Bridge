@@ -1,6 +1,4 @@
-﻿using Bridge;
-
-namespace Bridge.ClientTest
+﻿namespace Bridge.ClientTestHelper.Internal
 {
     public interface IItem
     {

@@ -411,9 +411,9 @@
       <Project>{99decd28-d3e3-4ea7-acae-ab5dfc9913bd}</Project>
       <Name>Bridge.Html5</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Batch1\Batch1.csproj">
-      <Project>{306ad788-87e9-4df9-a216-95948e024bc8}</Project>
-      <Name>Batch1</Name>
+    <ProjectReference Include="..\ClientTestHelper\ClientTestHelper.csproj">
+      <Project>{847bf532-9724-44d0-96c5-9b393e698b7c}</Project>
+      <Name>ClientTestHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

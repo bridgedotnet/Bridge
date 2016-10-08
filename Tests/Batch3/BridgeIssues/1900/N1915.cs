@@ -1,6 +1,5 @@
-﻿using System;
-using Bridge.ClientTest;
-using Bridge.Test;
+﻿using Bridge.Test;
+using Bridge.ClientTestHelper.Internal;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -29,7 +28,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [Test]
-        public void TestCase()
+        public void TestImplementingExternalInterface()
         {
             IWriteableItem item = new LocalItem();
 
