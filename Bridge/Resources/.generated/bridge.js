@@ -18764,7 +18764,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         // is simply to truncate the high bits.
         i &= 0xFF;
 
-        return i;
+        return String.fromCharCode(i);
     },
 
     _scanHex: function (c) {
@@ -18876,8 +18876,9 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             case "c":
                 return this._scanControl();
             default:
-                if (!this._useOptionE() && this._isWordChar(ch)) {
-                    throw this._makeException("Unrecognized escape sequence.");
+                var isInvalidBasicLatin = ch === '8' || ch === '9' || ch === '_';
+                if (isInvalidBasicLatin || (!this._useOptionE() && this._isWordChar(ch))) {
+                    throw this._makeException("Unrecognized escape sequence \\" + ch + ".");
                 }
                 return ch;
         }
@@ -18906,7 +18907,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
     _isWordChar: function (ch) {
         // Partial implementation,
         // see the link for more details (http://referencesource.microsoft.com/#System/regex/system/text/regularexpressions/RegexParser.cs,1156)
-        return System.Char.isLetter(ch);
+        return System.Char.isLetter(ch.charCodeAt(0));
     },
 
     _charsRight: function () {
@@ -21765,6 +21766,20 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     }
 
                     throw new System.ArgumentException("Malformed \\k<...> named back reference.");
+                }
+
+                // Temp fix (until IsWordChar is not supported):
+                // See more: https://referencesource.microsoft.com/#System/regex/system/text/regularexpressions/RegexParser.cs,1414
+                // Unescaping of any of the following ASCII characters results in the character itself
+                var code = ch.charCodeAt(0);
+                if ((code >= 0 && code < 48) ||
+                    (code > 57 && code < 65) ||
+                    (code > 90 && code < 95) ||
+                    (code === 96) ||
+                    (code > 122 && code < 128)) {
+                    var token = scope._createPatternToken(pattern, tokenTypes.escChar, i, 2);
+                    token.data = { n: code, ch: ch };
+                    return token;
                 }
 
                 // Unrecognized escape sequence:

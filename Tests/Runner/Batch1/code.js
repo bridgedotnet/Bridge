@@ -40417,6 +40417,50 @@
 
             this.validateGroup(ms.get(31), 0, 93, 1, true, "\u001f", 1);
             this.validateCapture(ms.get(31), 0, 0, 93, 1, "\u001f");
+        },
+        basicLatinEscapeTest: function () {
+            for (var i = 0; i < 128; i = (i + 1) | 0) {
+                var ch = i & 65535;
+                if (ch >= 48 && ch <= 57) {
+                    // Skip numbers - as they will be treated like references.
+                    continue;
+                }
+
+                var str = String.fromCharCode(ch);
+                var escapedStr = System.String.concat("\\", str);
+
+                try {
+                    var unescapedStr = System.Text.RegularExpressions.Regex.unescape(escapedStr);
+                    if (!Bridge.referenceEquals(unescapedStr, str)) {
+                        continue;
+                    }
+                }
+                catch ($e1) {
+                    $e1 = System.Exception.create($e1);
+                    if (Bridge.is($e1, System.ArgumentException)) {
+                        continue;
+                    } else {
+                        throw $e1;
+                    }
+                }
+
+                // Test regex with the escapedStr as pattern:
+                var rgx = new System.Text.RegularExpressions.Regex.ctor(escapedStr);
+                var m = rgx.match(str);
+                Bridge.Test.Assert.areEqual(str, m.getValue());
+            }
+        },
+        octalEscapeTest: function () {
+            for (var i = 0; i < 256; i = (i + 1) | 0) {
+                var octalStr = System.Convert.toStringInBase(i, 8, 9);
+                var escapedStr = System.String.concat("\\", octalStr);
+
+                var unescapedStr = System.Text.RegularExpressions.Regex.unescape(escapedStr);
+                var unescapedCh = unescapedStr.charCodeAt(0);
+                var unescapedCode = unescapedCh;
+
+                Bridge.Test.Assert.areEqual(i, unescapedCode);
+            }
         }
     });
 

@@ -900,6 +900,20 @@
                     throw new System.ArgumentException("Malformed \\k<...> named back reference.");
                 }
 
+                // Temp fix (until IsWordChar is not supported):
+                // See more: https://referencesource.microsoft.com/#System/regex/system/text/regularexpressions/RegexParser.cs,1414
+                // Unescaping of any of the following ASCII characters results in the character itself
+                var code = ch.charCodeAt(0);
+                if ((code >= 0 && code < 48) ||
+                    (code > 57 && code < 65) ||
+                    (code > 90 && code < 95) ||
+                    (code === 96) ||
+                    (code > 122 && code < 128)) {
+                    var token = scope._createPatternToken(pattern, tokenTypes.escChar, i, 2);
+                    token.data = { n: code, ch: ch };
+                    return token;
+                }
+
                 // Unrecognized escape sequence:
                 throw new System.ArgumentException("Unrecognized escape sequence \\" + ch + ".");
             },

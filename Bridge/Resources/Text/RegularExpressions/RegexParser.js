@@ -405,7 +405,7 @@
         // is simply to truncate the high bits.
         i &= 0xFF;
 
-        return i;
+        return String.fromCharCode(i);
     },
 
     _scanHex: function (c) {
@@ -517,8 +517,9 @@
             case "c":
                 return this._scanControl();
             default:
-                if (!this._useOptionE() && this._isWordChar(ch)) {
-                    throw this._makeException("Unrecognized escape sequence.");
+                var isInvalidBasicLatin = ch === '8' || ch === '9' || ch === '_';
+                if (isInvalidBasicLatin || (!this._useOptionE() && this._isWordChar(ch))) {
+                    throw this._makeException("Unrecognized escape sequence \\" + ch + ".");
                 }
                 return ch;
         }
@@ -547,7 +548,7 @@
     _isWordChar: function (ch) {
         // Partial implementation,
         // see the link for more details (http://referencesource.microsoft.com/#System/regex/system/text/regularexpressions/RegexParser.cs,1156)
-        return System.Char.isLetter(ch);
+        return System.Char.isLetter(ch.charCodeAt(0));
     },
 
     _charsRight: function () {

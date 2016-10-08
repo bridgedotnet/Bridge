@@ -10200,6 +10200,25 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1934", {
+        testEscapeSequencesInRegex: function () {
+            var patterns = ["\\\\", "\\@", "\\<", "\\>"];
+            var inputs = ["\\", "@", "<", ">"];
+            var expResults = [true, true, true, true];
+
+            for (var i = 0; i < patterns.length; i = (i + 1) | 0) {
+                var pattern = patterns[i];
+                var input = inputs[i];
+                var expected = expResults[i];
+
+                var rgx = new System.Text.RegularExpressions.Regex.ctor(pattern);
+                var actual = rgx.isMatch(input);
+
+                Bridge.Test.Assert.areEqual(expected, actual);
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1938", {
         testIsArrayTemplate: function () {
             var type = System.Int32;

@@ -1,4 +1,5 @@
-﻿using Bridge.Test;
+﻿using System;
+using Bridge.Test;
 using System.Text.RegularExpressions;
 
 namespace Bridge.ClientTest.Text.RegularExpressions
@@ -1058,6 +1059,57 @@ namespace Bridge.ClientTest.Text.RegularExpressions
 
             ValidateGroup(ms[31], 0, 93, 1, true, "\u001F", 1);
             ValidateCapture(ms[31], 0, 0, 93, 1, "\u001F");
+        }
+
+        [Test]
+        public void BasicLatinEscapeTest()
+        {
+            for (int i = 0; i < 128; i++)
+            {
+                var ch = (char)i;
+                if (ch >= '0' && ch <= '9')
+                {
+                    // Skip numbers - as they will be treated like references.
+                    continue;
+                }
+
+                var str = ch.ToString();
+                var escapedStr = @"\" + str;
+
+                try
+                {
+                    var unescapedStr = Regex.Unescape(escapedStr);
+                    if (unescapedStr != str)
+                    {
+                        continue;
+                    }
+                }
+                catch (ArgumentException)
+                {
+                    continue;
+                }
+                
+                // Test regex with the escapedStr as pattern:
+                var rgx = new Regex(escapedStr);
+                var m = rgx.Match(str);
+                Assert.AreEqual(str, m.Value);
+            }
+        }
+
+        [Test]
+        public void OctalEscapeTest()
+        {
+            for (int i = 0; i < 256; i++)
+            {
+                var octalStr = Convert.ToString(i, 8);
+                var escapedStr = @"\" + octalStr;
+
+                var unescapedStr = Regex.Unescape(escapedStr);
+                var unescapedCh = unescapedStr[0];
+                var unescapedCode = (int) unescapedCh;
+
+                Assert.AreEqual(i, unescapedCode);
+            }
         }
     }
 }

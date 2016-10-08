@@ -1606,6 +1606,8 @@
             QUnit.test("Regex: Escapes - RangeWithCharEscapesTest", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexEscapesTests.rangeWithCharEscapesTest);
             QUnit.test("Regex: Escapes - ControlCharsTestUpperTest", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexEscapesTests.controlCharsTestUpperTest);
             QUnit.test("Regex: Escapes - ControlCharsTestLowerTest", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexEscapesTests.controlCharsTestLowerTest);
+            QUnit.test("Regex: Escapes - BasicLatinEscapeTest", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexEscapesTests.basicLatinEscapeTest);
+            QUnit.test("Regex: Escapes - OctalEscapeTest", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexEscapesTests.octalEscapeTest);
             QUnit.test("Regex: Examples - EmailParseTest", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexExamplesTests.emailParseTest);
             QUnit.test("Regex: Examples - PhoneParseTest", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexExamplesTests.phoneParseTest);
             QUnit.test("Regex: Examples - PasswordValidationTest", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexExamplesTests.passwordValidationTest);
@@ -12868,6 +12870,14 @@
             controlCharsTestLowerTest: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexEscapesTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexEscapesTests);
                 t.getFixture().controlCharsTestLowerTest();
+            },
+            basicLatinEscapeTest: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexEscapesTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexEscapesTests);
+                t.getFixture().basicLatinEscapeTest();
+            },
+            octalEscapeTest: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Text.RegularExpressions.RegexEscapesTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Text_RegularExpressions_RegexEscapesTests);
+                t.getFixture().octalEscapeTest();
             }
         }
     });
