@@ -190,10 +190,10 @@ namespace System.Linq
         public extern int LastIndexOf(TElement item, IEqualityComparer<TElement> comparer);
 
         [Template("{this}.count()")]
-        public static extern long LongCount<TSource>();
+        public extern long LongCount<TSource>();
 
         [Template("{this}.count({predicate})")]
-        public static extern long LongCount<TSource>(Func<TSource, bool> predicate);
+        public extern long LongCount<TSource>(Func<TSource, bool> predicate);
 
         [Template("{this}.lastOrDefault(null, {TElement:default})")]
         public extern TElement LastOrDefault();
@@ -209,9 +209,9 @@ namespace System.Linq
 
         public extern EnumerableInstance<TResult> LetBind<TResult>(Func<IEnumerable<TElement>, IEnumerable<TResult>> func);
 
-        public static extern TSource Max<TSource>();
+        public extern TSource Max<TSource>();
 
-        public static extern TResult Max<TSource, TResult>(Func<TSource, TResult> selector);
+        public extern TResult Max<TSource, TResult>(Func<TSource, TResult> selector);
 
         public extern int Max(Func<TElement, int> selector);
 
@@ -235,9 +235,9 @@ namespace System.Linq
 
         public extern EnumerableInstance<TElement> Memoize();
 
-        public static extern TSource Min<TSource>();
+        public extern TSource Min<TSource>();
 
-        public static extern TResult Min<TSource, TResult>(Func<TSource, TResult> selector);
+        public extern TResult Min<TSource, TResult>(Func<TSource, TResult> selector);
 
         public extern int Min(Func<TElement, int> selector);
 
@@ -307,7 +307,7 @@ namespace System.Linq
 
         public extern EnumerableInstance<TElement> Reverse();
 
-        public static extern EnumerableInstance<T> Scan<T>(Func<T, T, T> func);
+        public extern EnumerableInstance<T> Scan<T>(Func<T, T, T> func);
 
         public extern EnumerableInstance<TAccumulate> Scan<TAccumulate>(TAccumulate seed,
             Func<TAccumulate, TElement, TAccumulate> func);

@@ -17152,32 +17152,26 @@
             },
             throwExceptionOnFirst1: function () {
                 var numbers = [3, 4];
-
                 System.Linq.Enumerable.from(numbers).first($_.Bridge.ClientTest.Linq.TestLinqElementOperators.f10);
             },
             throwExceptionOnFirst2: function () {
                 var numbers = [];
-
                 System.Linq.Enumerable.from(numbers).first();
             },
             throwExceptionOnLast1: function () {
                 var numbers = [3, 4];
-
                 System.Linq.Enumerable.from(numbers).last($_.Bridge.ClientTest.Linq.TestLinqElementOperators.f10);
             },
             throwExceptionOnLast2: function () {
                 var numbers = [];
-
                 System.Linq.Enumerable.from(numbers).last();
             },
             throwExceptionOnElementAt1: function () {
                 var numbers = [3, 4];
-
                 System.Linq.Enumerable.from(numbers).elementAt(3);
             },
             throwExceptionOnElementAt2: function () {
                 var numbers = [];
-
                 System.Linq.Enumerable.from(numbers).elementAt(1);
             }
         }
@@ -18251,8 +18245,6 @@
                 var smallNumbers = System.Linq.Enumerable.from(numbers).where($_.Bridge.ClientTest.Linq.TestLinqQueryExecution.f1);
                 var smallerEvenNumbers = smallNumbers.where($_.Bridge.ClientTest.Linq.TestLinqQueryExecution.f2);
                 Bridge.Test.Assert.areDeepEqual$1([2, 0], smallerEvenNumbers.toArray(), "Query in a query");
-
-                // TEST
                 Bridge.Linq.Enumerable.from(numbers).forEach(function (x, index) {
                     numbers[index] = (-numbers[index]) | 0;
                 });
@@ -22483,7 +22475,7 @@
         statics: {
             canConvert: function (T, arg) {
                 try {
-                    var x = System.Nullable.getValue(Bridge.cast(arg, T));
+                    var x = Bridge.cast(arg, T);
                     return x == null || x != null; // return true;
                 }
                 catch ($e1) {
@@ -22927,7 +22919,7 @@
             Bridge.Test.Assert.throws($_.Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.f2);
         },
         cast: function (T, o) {
-            return System.Nullable.getValue(Bridge.cast(o, T));
+            return Bridge.cast(o, T);
         },
         castOperatorForSerializableTypeWithoutTypeCheckCodeAlwaysSucceedsGeneric: function () {
             var o = {  };
@@ -23312,18 +23304,18 @@
             Bridge.Test.Assert.true$1(Bridge.Reflection.isAssignableFrom(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I7$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I10$2(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.X2,Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.X2)), Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y6$2(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.X2,Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.X2)), "#190");
         },
         isSubclassOfWorks: function () {
-            Bridge.Test.Assert.false$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1, "#1");
-            Bridge.Test.Assert.true$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1.prototype instanceof Object, "#2");
-            Bridge.Test.Assert.false$1(Object.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1, "#3");
-            Bridge.Test.Assert.true$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D1.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1, "#4");
-            Bridge.Test.Assert.false$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D1, "#5");
-            Bridge.Test.Assert.true$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D1.prototype instanceof Object, "#6");
-            Bridge.Test.Assert.true$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D2$1(System.Int32).prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1(System.Int32), "#7");
-            Bridge.Test.Assert.false$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D2$1(String).prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1(System.Int32), "#8");
-            Bridge.Test.Assert.false$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D3.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1(String), "#9");
-            Bridge.Test.Assert.true$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D3.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1(System.Int32), "#10");
-            Bridge.Test.Assert.false$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D2$1.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1, "#11");
-            Bridge.Test.Assert.false$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D3.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1, "#12");
+            Bridge.Test.Assert.false$1((Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1), "#1");
+            Bridge.Test.Assert.true$1((Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1.prototype instanceof Object), "#2");
+            Bridge.Test.Assert.false$1((Object.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1), "#3");
+            Bridge.Test.Assert.true$1((Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D1.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1), "#4");
+            Bridge.Test.Assert.false$1((Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D1), "#5");
+            Bridge.Test.Assert.true$1((Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D1.prototype instanceof Object), "#6");
+            Bridge.Test.Assert.true$1((Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D2$1(System.Int32).prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1(System.Int32)), "#7");
+            Bridge.Test.Assert.false$1((Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D2$1(String).prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1(System.Int32)), "#8");
+            Bridge.Test.Assert.false$1((Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D3.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1(String)), "#9");
+            Bridge.Test.Assert.true$1((Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D3.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1(System.Int32)), "#10");
+            Bridge.Test.Assert.false$1((Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D2$1.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1), "#11");
+            Bridge.Test.Assert.false$1((Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D3.prototype instanceof Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1), "#12");
         },
         isClassWorks: function () {
             Bridge.Test.Assert.false(Bridge.Reflection.isClass(Bridge.ClientTest.Reflection.TypeSystemTests.E1));
@@ -23347,10 +23339,10 @@
         },
         isArrayWorks: function () {
             var array = System.Array.init(5, 0);
-            Bridge.Test.Assert.true(Bridge.getType(array) === Array);
-            Bridge.Test.Assert.true(Array === Array);
-            Bridge.Test.Assert.true(Array === Array);
-            Bridge.Test.Assert.false(Bridge.ClientTest.Reflection.TypeSystemTests.C === Array);
+            Bridge.Test.Assert.true((Bridge.getType(array) === Array));
+            Bridge.Test.Assert.true((Array === Array));
+            Bridge.Test.Assert.true((Array === Array));
+            Bridge.Test.Assert.false((Bridge.ClientTest.Reflection.TypeSystemTests.C === Array));
             //TODO Assert.False(typeof(List<int>).IsArray);
             //TODO Assert.False(typeof(Array).IsArray);
         },
@@ -23752,10 +23744,10 @@
             return _o5;
         },
         f2: function () {
-            var x = System.Nullable.getValue(Bridge.cast("firstValue", String));
+            var x = Bridge.cast("firstValue", String);
         },
         f3: function () {
-            var x = System.Nullable.getValue(Bridge.cast(0, String));
+            var x = Bridge.cast(0, String);
         }
     });
 

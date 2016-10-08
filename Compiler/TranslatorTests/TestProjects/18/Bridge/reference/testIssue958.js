@@ -32,7 +32,7 @@
         statics: {
             if: function (T, source, work) {
                 if (Bridge.is(source, T)) {
-                    work(System.Nullable.getValue(Bridge.cast(source, T)));
+                    work(Bridge.cast(source, T));
                 }
                 return source;
             }
