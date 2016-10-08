@@ -74,7 +74,7 @@ namespace System
         [Template("Bridge.Reflection.getInterfaces({this})")]
         public extern Type[] GetInterfaces();
 
-        [Template("{this}.prototype instanceof {type}")]
+        [Template("({this}.prototype instanceof {type})")]
         public extern bool IsSubclassOf(Type type);
 
         public extern bool IsClass
@@ -103,7 +103,7 @@ namespace System
 
         public extern bool IsArray
         {
-            [Template("{this} === Array")]
+            [Template("({this} === Array)")]
             get;
         }
 
