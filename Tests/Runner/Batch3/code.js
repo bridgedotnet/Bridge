@@ -10130,7 +10130,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             var Bridge1912_Item = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1912_Item();
             var Bridge1912_Item2 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1912_Item();
 
-            Bridge.Test.Assert.true(Bridge.is(Bridge.ClientTest.Batch3.BridgeIssues.ItemExtensions.setValue(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1912_Item), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1912_Item));
+            Bridge.Test.Assert.true(Bridge.is(Bridge.ClientTest.Batch3.BridgeIssues.ItemExtensions.setValue(Bridge1912_Item), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1912_Item));
             Bridge.Test.Assert.true(Bridge.is(Bridge.ClientTest.Batch3.BridgeIssues.ItemExtensions.setValue(Bridge1912_Item2), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1912_Item));
         }
     });
