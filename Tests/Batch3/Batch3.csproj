@@ -379,6 +379,7 @@
     <Compile Include="BridgeIssues\1900\N1909.cs" />
     <Compile Include="BridgeIssues\1900\N1910.cs" />
     <Compile Include="BridgeIssues\1900\N1913.cs" />
+    <Compile Include="BridgeIssues\1900\N1915.cs" />
     <Compile Include="BridgeIssues\1900\N1938.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
@@ -405,6 +406,10 @@
     <ProjectReference Include="..\..\Html5\Bridge.Html5.csproj">
       <Project>{99decd28-d3e3-4ea7-acae-ab5dfc9913bd}</Project>
       <Name>Bridge.Html5</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Batch1\Batch1.csproj">
+      <Project>{306ad788-87e9-4df9-a216-95948e024bc8}</Project>
+      <Name>Batch1</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

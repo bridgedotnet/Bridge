@@ -61,6 +61,7 @@
     <Compile Include="BridgeConsoleTests.cs" />
     <Compile Include="Exceptions\AmbiguousMatchExceptionTests.cs" />
     <Compile Include="FormattableStringTests.cs" />
+    <Compile Include="Issue1915.cs" />
     <Compile Include="MixinTests.cs" />
     <Compile Include="ArgumentsTests.cs" />
     <Compile Include="BasicCSharp\TestMethodParametersClass.cs" />

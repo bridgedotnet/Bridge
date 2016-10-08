@@ -4777,6 +4777,14 @@
         }
     });
 
+    Bridge.define("Bridge.ClientTest.ClassLibraryTest", {
+        statics: {
+            test: function (item) {
+                item.Bridge$ClientTest$IWriteableItem$setValue(2);
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Collections.Generic.ComparerTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual$1("System.Collections.Generic.Comparer$1[[Object]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.Comparer$1(Object)), "FullName");
@@ -14291,6 +14299,10 @@
             this.other = other;
             return this.result;
         }
+    });
+
+    Bridge.define("Bridge.ClientTest.IItem", {
+        $kind: "interface"
     });
 
     Bridge.define("Bridge.ClientTest.JsonTests", {
@@ -34269,6 +34281,11 @@
             this.$initialize();
             Bridge.ClientTest.Exceptions.CommonExceptionTests.E1.ctor.call(this, message);
         }
+    });
+
+    Bridge.define("Bridge.ClientTest.IWriteableItem", {
+        inherits: [Bridge.ClientTest.IItem],
+        $kind: "interface"
     });
 
     Bridge.define("Bridge.ClientTest.ObjectLiteralTests.Bridge1529.DS", {
