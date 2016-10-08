@@ -10650,6 +10650,18 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge483", {
+        testPropertyWithNameSameAsType: function () {
+            var t = Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Test(), {
+                myType: Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.MyType(), {
+                    value: 7
+                } )
+            } );
+
+            Bridge.Test.Assert.areEqual(7, t.getMyOtherType().value);
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge485", {
         statics: {
             testUseCase: function () {
@@ -16768,6 +16780,10 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.MyOtherType", {
+        value: 0
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.N1122", {
         statics: {
             assertNumber: function (expected, actual, message) {
@@ -16950,6 +16966,13 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             properties: {
                 Name: null
             }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Test", {
+        myType: null,
+        getMyOtherType: function () {
+            return this.myType;
         }
     });
 
@@ -18425,6 +18448,10 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         statics: {
             field1: 1
         }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.MyType", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.MyOtherType]
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C15", {
