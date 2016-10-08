@@ -16,7 +16,6 @@
         statics: {
             N475: function () {
                 var b = new Test.BridgeIssues.N475B.Bridge475();
-
                 b.keyDown($_.Test.BridgeIssues.N475B.Test.f1);
 
                 b.keyDown(4);

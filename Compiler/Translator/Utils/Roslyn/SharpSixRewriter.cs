@@ -262,8 +262,8 @@ namespace Bridge.Translator
                         if (method.MethodKind == MethodKind.ReducedExtension && node.GetParent<ConditionalAccessExpressionSyntax>() == null)
                         {
                             var target = ma.Expression;
-                            ma = SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
-                                SyntaxFactory.IdentifierName(method.ContainingType.FullyQualifiedName()), genericName);
+                            var clsName = "global::" + method.ContainingType.FullyQualifiedName();
+                            ma = SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, SyntaxFactory.IdentifierName(clsName), genericName);
                             node = node.WithArgumentList(node.ArgumentList.WithArguments(node.ArgumentList.Arguments.Insert(0, SyntaxFactory.Argument(target))));
                         }
                         else
