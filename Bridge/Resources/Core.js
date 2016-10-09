@@ -442,6 +442,26 @@
             return Bridge.Reflection.getTypeFullName(obj);
         },
 
+        hasValue: function (obj) {
+            return obj != null;
+        },
+
+        hasValue$1: function () {
+            if (arguments.length === 0) {
+                return false;
+            }
+
+            var i = 0;
+
+            for (i; i < arguments.length; i++) {
+                if (arguments[i] == null) {
+                    return false;
+                }
+            }
+
+            return true;
+        },
+
         is: function (obj, type, ignoreFn, allowNull) {
             if (type && type.prototype && type.prototype.$literal && Bridge.isPlainObject(obj)) {
                 return true;

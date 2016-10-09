@@ -457,6 +457,26 @@
             return Bridge.Reflection.getTypeFullName(obj);
         },
 
+        hasValue: function (obj) {
+            return obj != null;
+        },
+
+        hasValue$1: function () {
+            if (arguments.length === 0) {
+                return false;
+            }
+
+            var i = 0;
+
+            for (i; i < arguments.length; i++) {
+                if (arguments[i] == null) {
+                    return false;
+                }
+            }
+
+            return true;
+        },
+
         is: function (obj, type, ignoreFn, allowNull) {
             if (type && type.prototype && type.prototype.$literal && Bridge.isPlainObject(obj)) {
                 return true;
@@ -1323,12 +1343,10 @@
     // @source Nullable.js
 
     var nullable = {
-        hasValue: function (obj) {
-            return (obj !== null) && (obj !== undefined);
-        },
+        hasValue: Bridge.hasValue,
 
         getValue: function (obj) {
-            if (!System.Nullable.hasValue(obj)) {
+            if (!Bridge.hasValue(obj)) {
                 throw new System.InvalidOperationException("Nullable instance doesn't have a value.");
             }
 
@@ -1336,19 +1354,19 @@
         },
 
         getValueOrDefault: function (obj, defValue) {
-            return System.Nullable.hasValue(obj) ? obj : defValue;
+            return Bridge.hasValue(obj) ? obj : defValue;
         },
 
         add: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? a + b : null;
+            return Bridge.hasValue$1(a, b) ? a + b : null;
         },
 
         band: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? a & b : null;
+            return Bridge.hasValue$1(a, b) ? a & b : null;
         },
 
         bor: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? a | b : null;
+            return Bridge.hasValue$1(a, b) ? a | b : null;
         },
 
         and: function (a, b) {
@@ -1372,7 +1390,7 @@
         },
 
         div: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? a / b : null;
+            return Bridge.hasValue$1(a, b) ? a / b : null;
         },
 
         eq: function (a, b) {
@@ -1392,15 +1410,15 @@
         },
 
         xor: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? a ^ b : null;
+            return Bridge.hasValue$1(a, b) ? a ^ b : null;
         },
 
         gt: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) && a > b;
+            return Bridge.hasValue$1(a, b) && a > b;
         },
 
         gte: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) && a >= b;
+            return Bridge.hasValue$1(a, b) && a >= b;
         },
 
         neq: function (a, b) {
@@ -1408,35 +1426,35 @@
         },
 
         lt: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) && a < b;
+            return Bridge.hasValue$1(a, b) && a < b;
         },
 
         lte: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) && a <= b;
+            return Bridge.hasValue$1(a, b) && a <= b;
         },
 
         mod: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? a % b : null;
+            return Bridge.hasValue$1(a, b) ? a % b : null;
         },
 
         mul: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? a * b : null;
+            return Bridge.hasValue$1(a, b) ? a * b : null;
         },
 
         sl: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? a << b : null;
+            return Bridge.hasValue$1(a, b) ? a << b : null;
         },
 
         sr: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? a >> b : null;
+            return Bridge.hasValue$1(a, b) ? a >> b : null;
         },
 
         srr: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? a >>> b : null;
+            return Bridge.hasValue$1(a, b) ? a >>> b : null;
         },
 
         sub: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? a - b : null;
+            return Bridge.hasValue$1(a, b) ? a - b : null;
         },
 
         bnot: function (a) {
@@ -1478,11 +1496,11 @@
         },
 
         lift2: function (f, a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (typeof f === "function" ? f.apply(null, Array.prototype.slice.call(arguments, 1)) : a[f].apply(a, Array.prototype.slice.call(arguments, 2))) : null;
+            return Bridge.hasValue$1(a, b) ? (typeof f === "function" ? f.apply(null, Array.prototype.slice.call(arguments, 1)) : a[f].apply(a, Array.prototype.slice.call(arguments, 2))) : null;
         },
 
         liftcmp: function (f, a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (typeof f === "function" ? f.apply(null, Array.prototype.slice.call(arguments, 1)) : a[f].apply(a, Array.prototype.slice.call(arguments, 2))) : false;
+            return Bridge.hasValue$1(a, b) ? (typeof f === "function" ? f.apply(null, Array.prototype.slice.call(arguments, 1)) : a[f].apply(a, Array.prototype.slice.call(arguments, 2))) : false;
         },
 
         lifteq: function (f, a, b) {
@@ -1501,8 +1519,6 @@
     };
 
     System.Nullable = nullable;
-    Bridge.hasValue = System.Nullable.hasValue;
-
     // @source String.js
 
     var string = {
@@ -7929,31 +7945,31 @@
         },
 
         subdt: function (d, t) {
-            return Bridge.hasValue(d) && Bridge.hasValue(t) ? this.dateAddSubTimespan(d, t, -1) : null;
+            return Bridge.hasValue$1(d, t) ? this.dateAddSubTimespan(d, t, -1) : null;
         },
 
         adddt: function (d, t) {
-            return Bridge.hasValue(d) && Bridge.hasValue(t) ? this.dateAddSubTimespan(d, t, 1) : null;
+            return Bridge.hasValue$1(d, t) ? this.dateAddSubTimespan(d, t, 1) : null;
         },
 
         subdd: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (new System.TimeSpan((a - b) * 10000)) : null;
+            return Bridge.hasValue$1(a, b) ? (new System.TimeSpan((a - b) * 10000)) : null;
         },
 
         gt: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a > b) : false;
+            return Bridge.hasValue$1(a, b) ? (a > b) : false;
         },
 
         gte: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a >= b) : false;
+            return Bridge.hasValue$1(a, b) ? (a >= b) : false;
         },
 
         lt: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a < b) : false;
+            return Bridge.hasValue$1(a, b) ? (a < b) : false;
         },
 
         lte: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a <= b) : false;
+            return Bridge.hasValue$1(a, b) ? (a <= b) : false;
         }
     };
 
@@ -8011,15 +8027,15 @@
             },
 
             sub: function (t1, t2) {
-                return Bridge.hasValue(t1) && Bridge.hasValue(t2) ? (new System.TimeSpan(t1.ticks.sub(t2.ticks))) : null;
+                return Bridge.hasValue$1(t1, t2) ? (new System.TimeSpan(t1.ticks.sub(t2.ticks))) : null;
             },
 
             eq: function (t1, t2) {
-                return Bridge.hasValue(t1) && Bridge.hasValue(t2) ? (t1.ticks.eq(t2.ticks)) : null;
+                return Bridge.hasValue$1(t1, t2) ? (t1.ticks.eq(t2.ticks)) : null;
             },
 
             neq: function (t1, t2) {
-                return Bridge.hasValue(t1) && Bridge.hasValue(t2) ? (t1.ticks.ne(t2.ticks)) : null;
+                return Bridge.hasValue$1(t1, t2) ? (t1.ticks.ne(t2.ticks)) : null;
             },
 
             plus: function (t) {
@@ -8027,23 +8043,23 @@
             },
 
             add: function (t1, t2) {
-                return Bridge.hasValue(t1) && Bridge.hasValue(t2) ? (new System.TimeSpan(t1.ticks.add(t2.ticks))) : null;
+                return Bridge.hasValue$1(t1, t2) ? (new System.TimeSpan(t1.ticks.add(t2.ticks))) : null;
             },
 
             gt: function (a, b) {
-                return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a.ticks.gt(b.ticks)) : false;
+                return Bridge.hasValue$1(a, b) ? (a.ticks.gt(b.ticks)) : false;
             },
 
             gte: function (a, b) {
-                return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a.ticks.gte(b.ticks)) : false;
+                return Bridge.hasValue$1(a, b) ? (a.ticks.gte(b.ticks)) : false;
             },
 
             lt: function (a, b) {
-                return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a.ticks.lt(b.ticks)) : false;
+                return Bridge.hasValue$1(a, b) ? (a.ticks.lt(b.ticks)) : false;
             },
 
             lte: function (a, b) {
-                return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a.ticks.lte(b.ticks)) : false;
+                return Bridge.hasValue$1(a, b) ? (a.ticks.lte(b.ticks)) : false;
             }
         },
 

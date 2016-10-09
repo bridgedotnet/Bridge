@@ -1,10 +1,8 @@
     var nullable = {
-        hasValue: function (obj) {
-            return (obj !== null) && (obj !== undefined);
-        },
+        hasValue: Bridge.hasValue,
 
         getValue: function (obj) {
-            if (!System.Nullable.hasValue(obj)) {
+            if (!Bridge.hasValue(obj)) {
                 throw new System.InvalidOperationException("Nullable instance doesn't have a value.");
             }
 
@@ -12,19 +10,19 @@
         },
 
         getValueOrDefault: function (obj, defValue) {
-            return System.Nullable.hasValue(obj) ? obj : defValue;
+            return Bridge.hasValue(obj) ? obj : defValue;
         },
 
         add: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? a + b : null;
+            return Bridge.hasValue$1(a, b) ? a + b : null;
         },
 
         band: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? a & b : null;
+            return Bridge.hasValue$1(a, b) ? a & b : null;
         },
 
         bor: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? a | b : null;
+            return Bridge.hasValue$1(a, b) ? a | b : null;
         },
 
         and: function (a, b) {
@@ -48,7 +46,7 @@
         },
 
         div: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? a / b : null;
+            return Bridge.hasValue$1(a, b) ? a / b : null;
         },
 
         eq: function (a, b) {
@@ -68,15 +66,15 @@
         },
 
         xor: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? a ^ b : null;
+            return Bridge.hasValue$1(a, b) ? a ^ b : null;
         },
 
         gt: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) && a > b;
+            return Bridge.hasValue$1(a, b) && a > b;
         },
 
         gte: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) && a >= b;
+            return Bridge.hasValue$1(a, b) && a >= b;
         },
 
         neq: function (a, b) {
@@ -84,35 +82,35 @@
         },
 
         lt: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) && a < b;
+            return Bridge.hasValue$1(a, b) && a < b;
         },
 
         lte: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) && a <= b;
+            return Bridge.hasValue$1(a, b) && a <= b;
         },
 
         mod: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? a % b : null;
+            return Bridge.hasValue$1(a, b) ? a % b : null;
         },
 
         mul: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? a * b : null;
+            return Bridge.hasValue$1(a, b) ? a * b : null;
         },
 
         sl: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? a << b : null;
+            return Bridge.hasValue$1(a, b) ? a << b : null;
         },
 
         sr: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? a >> b : null;
+            return Bridge.hasValue$1(a, b) ? a >> b : null;
         },
 
         srr: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? a >>> b : null;
+            return Bridge.hasValue$1(a, b) ? a >>> b : null;
         },
 
         sub: function (a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? a - b : null;
+            return Bridge.hasValue$1(a, b) ? a - b : null;
         },
 
         bnot: function (a) {
@@ -154,11 +152,11 @@
         },
 
         lift2: function (f, a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (typeof f === "function" ? f.apply(null, Array.prototype.slice.call(arguments, 1)) : a[f].apply(a, Array.prototype.slice.call(arguments, 2))) : null;
+            return Bridge.hasValue$1(a, b) ? (typeof f === "function" ? f.apply(null, Array.prototype.slice.call(arguments, 1)) : a[f].apply(a, Array.prototype.slice.call(arguments, 2))) : null;
         },
 
         liftcmp: function (f, a, b) {
-            return Bridge.hasValue(a) && Bridge.hasValue(b) ? (typeof f === "function" ? f.apply(null, Array.prototype.slice.call(arguments, 1)) : a[f].apply(a, Array.prototype.slice.call(arguments, 2))) : false;
+            return Bridge.hasValue$1(a, b) ? (typeof f === "function" ? f.apply(null, Array.prototype.slice.call(arguments, 1)) : a[f].apply(a, Array.prototype.slice.call(arguments, 2))) : false;
         },
 
         lifteq: function (f, a, b) {
@@ -177,4 +175,3 @@
     };
 
     System.Nullable = nullable;
-    Bridge.hasValue = System.Nullable.hasValue;
