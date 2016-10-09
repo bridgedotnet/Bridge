@@ -230,12 +230,12 @@ namespace Bridge.Html5
         /// <summary>
         /// Color or style to use inside shapes. Default #000 (black).
         /// </summary>
-        public string FillStyle;
+        public Any<string, CanvasGradient, CanvasPattern> FillStyle;
 
         /// <summary>
         /// Color or style to use for the lines around shapes. Default #000 (black).
         /// </summary>
-        public string StrokeStyle;
+        public Any<string, CanvasGradient, CanvasPattern> StrokeStyle;
 
         #endregion Fill and Stroke Styles
 
