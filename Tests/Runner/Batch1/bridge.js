@@ -5334,7 +5334,7 @@
                 var nf = (provider || System.Globalization.CultureInfo.getCurrentCulture()).getFormat(System.Globalization.NumberFormatInfo),
                     str,
                     decimalIndex,
-                    negPattern,
+                    pattern,
                     roundingFactor,
                     groupIndex,
                     groupSize,
@@ -5349,7 +5349,8 @@
                     buffer = "",
                     isDecimal = number instanceof System.Decimal,
                     isLong = number instanceof System.Int64 || number instanceof System.UInt64,
-                    isNeg = isDecimal || isLong ? (number.isZero() ? false : number.isNegative()) : number < 0;
+                    isNeg = isDecimal || isLong ? (number.isZero() ? false : number.isNegative()) : number < 0,
+                    isZero = false;
 
                 roundingFactor = Math.pow(10, maxDecLen);
 
@@ -5360,6 +5361,8 @@
                 } else {
                     str = "" + (+Math.abs(number).toFixed(maxDecLen));
                 }
+
+                isZero = str.split('').every(el => el === '0' || el === '.');
 
                 decimalIndex = str.indexOf(".");
 
@@ -5436,14 +5439,14 @@
                     }
                 }
 
-                if (isNeg) {
-                    negPattern = System.Globalization.NumberFormatInfo[name + "NegativePatterns"][nf[name + "NegativePattern"]];
+                if (isNeg && !isZero) {
+                    pattern = System.Globalization.NumberFormatInfo[name + "NegativePatterns"][nf[name + "NegativePattern"]];
 
-                    return negPattern.replace("-", nf.negativeSign).replace("%", nf.percentSymbol).replace("$", nf.currencySymbol).replace("n", buffer);
+                    return pattern.replace("-", nf.negativeSign).replace("%", nf.percentSymbol).replace("$", nf.currencySymbol).replace("n", buffer);
                 } else if (System.Globalization.NumberFormatInfo[name + "PositivePatterns"]) {
-                    negPattern = System.Globalization.NumberFormatInfo[name + "PositivePatterns"][nf[name + "PositivePattern"]];
+                    pattern = System.Globalization.NumberFormatInfo[name + "PositivePatterns"][nf[name + "PositivePattern"]];
 
-                    return negPattern.replace("%", nf.percentSymbol).replace("$", nf.currencySymbol).replace("n", buffer);
+                    return pattern.replace("%", nf.percentSymbol).replace("$", nf.currencySymbol).replace("n", buffer);
                 }
 
                 return buffer;
@@ -5462,6 +5465,7 @@
                     roundingFactor,
                     decimalIndex,
                     isNegative = false,
+                    isZero = false,
                     name,
                     groupCfg,
                     buffer = "",
@@ -5518,13 +5522,14 @@
                 roundingFactor = Math.pow(10, decimals);
 
                 if (isDecimal) {
-                    number = number.abs().mul(roundingFactor).round().div(roundingFactor).toString();
-                }
-                if (isLong) {
+                    number = System.Decimal.round(number.abs().mul(roundingFactor), 4).div(roundingFactor).toString();
+                } else if (isLong) {
                     number = (number.eq(System.Int64.MinValue) ? System.Int64(number.value.toUnsigned()) : number.abs()).mul(roundingFactor).div(roundingFactor).toString();
                 } else {
                     number = "" + (Math.round(Math.abs(number) * roundingFactor) / roundingFactor);
                 }
+
+                isZero = number.split('').every(el => el === '0' || el === '.');
 
                 decimalIndex = number.indexOf(".");
                 integralDigits = decimalIndex < 0 ? number.length : decimalIndex;
@@ -5598,7 +5603,7 @@
                     }
                 }
 
-                if (isNegative) {
+                if (isNegative && !isZero) {
                     buffer = "-" + buffer;
                 }
 

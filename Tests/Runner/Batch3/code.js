@@ -10237,6 +10237,45 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1933", {
+        testRounding: function () {
+            // decimal
+            var x = System.Decimal(0.25);
+            Bridge.Test.Assert.areEqual$1(".3", Bridge.Int.format(x, "##.#"), "decimal");
+            Bridge.Test.Assert.areEqual$1("0.3", Bridge.Int.format(x, "F1"), "decimal");
+
+            x = System.Decimal(-0.25);
+            Bridge.Test.Assert.areEqual$1("-.3", Bridge.Int.format(x, "##.#"), "decimal");
+            Bridge.Test.Assert.areEqual$1("-0.3", Bridge.Int.format(x, "F1"), "decimal");
+
+            x = System.Decimal(0.025);
+            Bridge.Test.Assert.areEqual$1("", Bridge.Int.format(x, "##.#"), "decimal");
+            Bridge.Test.Assert.areEqual$1("0.0", Bridge.Int.format(x, "F1"), "decimal");
+
+            x = System.Decimal(-0.025);
+            Bridge.Test.Assert.areEqual$1("", Bridge.Int.format(x, "##.#"), "decimal");
+            Bridge.Test.Assert.areEqual$1("0.0", Bridge.Int.format(x, "F1"), "decimal");
+
+
+            // double
+            var d = 0.25;
+            Bridge.Test.Assert.areEqual$1(".3", System.Double.format(d, "##.#"), "double");
+            Bridge.Test.Assert.areEqual$1("0.3", System.Double.format(d, "F1"), "double");
+
+            d = -0.25;
+            Bridge.Test.Assert.areEqual$1("-.3", System.Double.format(d, "##.#"), "double");
+            Bridge.Test.Assert.areEqual$1("-0.3", System.Double.format(d, "F1"), "double");
+
+            d = 0.025;
+            Bridge.Test.Assert.areEqual$1("", System.Double.format(d, "##.#"), "double");
+            Bridge.Test.Assert.areEqual$1("0.0", System.Double.format(d, "F1"), "double");
+
+            d = -0.025;
+            Bridge.Test.Assert.areEqual$1("", System.Double.format(d, "##.#"), "double");
+            Bridge.Test.Assert.areEqual$1("0.0", System.Double.format(d, "F1"), "double");
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1934", {
         testEscapeSequencesInRegex: function () {
             var patterns = ["\\\\", "\\@", "\\<", "\\>"];
