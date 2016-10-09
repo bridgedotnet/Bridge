@@ -5362,7 +5362,7 @@
                     str = "" + (+Math.abs(number).toFixed(maxDecLen));
                 }
 
-                isZero = str.split('').every(el => el === '0' || el === '.');
+                isZero = str.split('').every(function (s) { return s === '0' || s === '.'; });
 
                 decimalIndex = str.indexOf(".");
 
@@ -5529,7 +5529,7 @@
                     number = "" + (Math.round(Math.abs(number) * roundingFactor) / roundingFactor);
                 }
 
-                isZero = number.split('').every(el => el === '0' || el === '.');
+                isZero = number.split('').every(function (s) { return s === '0' || s === '.'; });
 
                 decimalIndex = number.indexOf(".");
                 integralDigits = decimalIndex < 0 ? number.length : decimalIndex;
