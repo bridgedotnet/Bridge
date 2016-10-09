@@ -695,6 +695,8 @@ namespace Bridge.Contract
 
             if (typeDef != null)
             {
+                var bridgeType = this.Emitter.BridgeTypes.Get(typeDef);
+                var monoTypeDef = bridgeType != null ? bridgeType.TypeDefinition : null;
                 var properties = typeDef.Properties.Where(p =>
                 {
                     if (p.IsExplicitInterfaceImplementation)
@@ -702,22 +704,35 @@ namespace Bridge.Contract
                         return false;
                     }
 
+                    var canGet = p.CanGet && p.Getter != null;
+                    var canSet = p.CanSet && p.Setter != null;
+
+                    if (monoTypeDef != null)
+                    {
+                        var monoProp = monoTypeDef.Properties.FirstOrDefault(mp => mp.Name == p.Name);
+
+                        if (monoProp != null)
+                        {
+                            canGet = monoProp.GetMethod != null;
+                            canSet = monoProp.SetMethod != null;
+                        }
+                    }
+
                     if (!this.IncludeInline)
                     {
-                        var inline = p.Getter != null ? this.Emitter.GetInline(p.Getter) : null;
+                        var inline = canGet ? this.Emitter.GetInline(p.Getter) : null;
                         if (!string.IsNullOrWhiteSpace(inline))
                         {
                             return false;
                         }
 
-                        inline = p.Setter != null ? this.Emitter.GetInline(p.Setter) : null;
+                        inline = canSet ? this.Emitter.GetInline(p.Setter) : null;
                         if (!string.IsNullOrWhiteSpace(inline))
                         {
                             return false;
                         }
 
-                        if (p.IsIndexer && p.CanGet &&
-                            p.Getter.Attributes.Any(a => a.AttributeType.FullName == "Bridge.ExternalAttribute"))
+                        if (p.IsIndexer && canGet && p.Getter.Attributes.Any(a => a.AttributeType.FullName == "Bridge.ExternalAttribute"))
                         {
                             return false;
                         }
@@ -726,10 +741,10 @@ namespace Bridge.Contract
                     bool eq = false;
                     if (p.IsStatic == this.Static)
                     {
-                        var getterIgnore = p.Getter != null && p.CanGet && this.Emitter.Validator.IsIgnoreType(p.Getter);
-                        var setterIgnore = p.Setter != null && p.CanSet && this.Emitter.Validator.IsIgnoreType(p.Setter);
-                        var getterName = p.Getter != null && p.CanGet ? Helpers.GetPropertyRef(p, this.Emitter, false, true, true) : null;
-                        var setterName = p.Setter != null && p.CanSet ? Helpers.GetPropertyRef(p, this.Emitter, true, true, true) : null;
+                        var getterIgnore = canGet && this.Emitter.Validator.IsIgnoreType(p.Getter);
+                        var setterIgnore = canSet && this.Emitter.Validator.IsIgnoreType(p.Setter);
+                        var getterName = canGet ? Helpers.GetPropertyRef(p, this.Emitter, false, true, true) : null;
+                        var setterName = canSet ? Helpers.GetPropertyRef(p, this.Emitter, true, true, true) : null;
                         var fieldName = Helpers.IsAutoProperty(p) ? this.Emitter.GetEntityName(p) : null;
 
                         if (!getterIgnore && getterName != null && (getterName == this.JsName || getterName == this.AltJsName || getterName == this.FieldJsName))

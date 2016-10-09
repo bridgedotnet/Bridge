@@ -10200,6 +10200,43 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1915", {
+        testImplementingExternalInterface: function () {
+            var item = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1915.LocalItem();
+
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1915.LocalTest.test(item);
+            Bridge.Test.Assert.areEqual(1, item.Bridge$ClientTestHelper$Internal$IItem$getValue());
+            Bridge.ClientTestHelper.Internal.ClassLibraryTest.test(item);
+            Bridge.Test.Assert.areEqual(2, item.Bridge$ClientTestHelper$Internal$IItem$getValue());
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1915.LocalItem", {
+        inherits: [Bridge.ClientTestHelper.Internal.IWriteableItem],
+        value: null,
+        config: {
+            alias: [
+            "getValue", "Bridge$ClientTestHelper$Internal$IItem$getValue",
+            "setValue", "Bridge$ClientTestHelper$Internal$IWriteableItem$setValue"
+            ]
+        },
+        getValue: function () {
+            return this.value;
+        },
+        setValue: function (value) {
+            this.value = value;
+            return true;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1915.LocalTest", {
+        statics: {
+            test: function (item) {
+                item.Bridge$ClientTestHelper$Internal$IWriteableItem$setValue(1);
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1934", {
         testEscapeSequencesInRegex: function () {
             var patterns = ["\\\\", "\\@", "\\<", "\\>"];
@@ -18297,7 +18334,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         config: {
             alias: [
             "getValue", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1899$IItem$getValue",
-            "setValue", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1899$IItem$setValue$1"
+            "setValue", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1899$IItem$setValue"
             ]
         },
         getValue: function () {
