@@ -149,15 +149,6 @@ namespace Bridge.Translator
                 ? Path.Combine(basePath, Path.GetDirectoryName(bridgeOptions.OutputLocation))
                 : Path.Combine(basePath, assemblyOutput);
 
-            // This were for Task
-            //string fileName = Path.GetFileNameWithoutExtension(this.Assembly.ItemSpec);
-            //outputPath = !string.IsNullOrWhiteSpace(translator.AssemblyInfo.Output)
-            //  ? Path.Combine(Path.GetDirectoryName(this.ProjectPath), translator.AssemblyInfo.Output)
-            //  : this.OutputPath;
-            //translator.SaveTo(outputPath, fileName);
-            //translator.Flush(outputPath, fileName);
-            //translator.Plugins.AfterOutput(translator, outputPath, this.NoCore);
-
             outputPath = new ConfigHelper().ConvertPath(outputPath);
 
             return outputPath;

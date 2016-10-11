@@ -170,7 +170,7 @@
 
             if (!cls) {
                 if (prop.$literal) {
-                    Class = function() {
+                    Class = function () {
                         return {};
                     };
                 } else {
@@ -181,7 +181,7 @@
                         }
                     };
                 }
-                
+
                 prop.ctor = Class;
             } else {
                 Class = cls;
@@ -477,7 +477,7 @@
                 exists,
                 i;
 
-            for (i = 0; i < (nameParts.length - 1); i++) {
+            for (i = 0; i < (nameParts.length - 1) ; i++) {
                 if (typeof scope[nameParts[i]] == "undefined") {
                     scope[nameParts[i]] = {};
                 }
