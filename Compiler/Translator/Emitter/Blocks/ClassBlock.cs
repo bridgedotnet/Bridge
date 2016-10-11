@@ -597,7 +597,8 @@ namespace Bridge.Translator
                                             throw new EmitterException(method, "Init method should not have parameters");
                                         }
 
-                                        if (rrMethod.ReturnType.Kind != TypeKind.Void)
+                                        if (rrMethod.ReturnType.Kind != TypeKind.Void
+                                            && !rrMethod.ReturnType.IsKnownType(KnownTypeCode.Void))
                                         {
                                             throw new EmitterException(method, "Init method should not return anything");
                                         }
