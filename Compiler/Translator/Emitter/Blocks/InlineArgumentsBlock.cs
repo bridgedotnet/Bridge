@@ -569,6 +569,48 @@ namespace Bridge.Translator
                             Write(tmpVarName);
                             isSimple = true;
                         }
+                        else if (modifier == "version")
+                        {
+                            var versionTypeExp = exprs != null && exprs.Any() ? exprs[0] : null;
+
+                            var versionType = 0;
+                            if (versionTypeExp != null)
+                            {
+                                var versionTypePrimitiveExp = versionTypeExp as PrimitiveExpression;
+                                if (versionTypePrimitiveExp != null && versionTypePrimitiveExp.Value is int)
+                                {
+                                    versionType = (int)versionTypePrimitiveExp.Value;
+                                }
+                                else
+                                {
+                                    var rr = this.Emitter.Resolver.ResolveNode(versionTypeExp, this.Emitter);
+
+                                    if (rr != null && rr.ConstantValue != null && rr.ConstantValue is int)
+                                    {
+                                        versionType = (int)rr.ConstantValue;
+                                    }
+                                }
+                            }
+
+                            System.Diagnostics.FileVersionInfo versionInfo = null;
+
+                            if (versionType == 0)
+                            {
+                                versionInfo = this.Emitter.Translator.GetAssemblyVersion();
+                            }
+                            else
+                            {
+                                versionInfo = this.Emitter.Translator.GetCompilerVersion();
+                            }
+
+                            string version = versionInfo != null && versionInfo.ProductVersion != null
+                                    ? versionInfo.ProductVersion.ToString()
+                                    : "0.0.0.0";
+
+                            Write("\"", version, "\"");
+
+                            isSimple = true;
+                        }
                         else if (modifier == "gettmp")
                         {
                             var nameExpr = exprs[0] as PrimitiveExpression;

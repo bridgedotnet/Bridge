@@ -934,7 +934,7 @@ namespace Bridge.Translator
             }
         }
 
-        public System.Diagnostics.FileVersionInfo GetExecutingAssemblyVersion()
+        public System.Diagnostics.FileVersionInfo GetCompilerVersion()
         {
             System.Diagnostics.FileVersionInfo compilerInfo = null;
             try
@@ -967,7 +967,7 @@ namespace Bridge.Translator
             return fileVerionInfo;
         }
 
-        public System.Diagnostics.FileVersionInfo GetCurrentAssemblyVersion()
+        public System.Diagnostics.FileVersionInfo GetAssemblyVersion()
         {
             var bridgeInfo = GetAssemblyVersionByPath(this.AssemblyLocation);
 
@@ -983,7 +983,7 @@ namespace Bridge.Translator
 
         private void LogProductInfo()
         {
-            var compilerInfo = this.GetExecutingAssemblyVersion();
+            var compilerInfo = this.GetCompilerVersion();
 
             var bridgeInfo = this.GetBridgeAssemblyVersion();
 

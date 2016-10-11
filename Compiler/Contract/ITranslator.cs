@@ -161,5 +161,9 @@ namespace Bridge.Contract
             get;
             set;
         }
+
+        System.Diagnostics.FileVersionInfo GetCompilerVersion();
+
+        System.Diagnostics.FileVersionInfo GetAssemblyVersion();
     }
 }

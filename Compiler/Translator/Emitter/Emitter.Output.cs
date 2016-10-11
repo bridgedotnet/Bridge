@@ -77,9 +77,32 @@ namespace Bridge.Translator
                             string asmName = this.AssemblyInfo.Assembly.FullName ?? this.Translator.AssemblyName;
                             if (!string.IsNullOrEmpty(asmName))
                             {
-                                tmp.Append("\"");
-                                tmp.Append(asmName);
-                                tmp.Append("\"");
+                                tmp.Append("{");
+                                tmp.AppendFormat(" name: \"{0}\"", asmName);
+
+                                var assemblyVersionInfo = this.Translator.GetAssemblyVersion();
+
+                                var assemblyVersion = assemblyVersionInfo != null && assemblyVersionInfo.ProductVersion != null
+                                    ? assemblyVersionInfo.ProductVersion.ToString()
+                                    : null;
+
+                                if (assemblyVersion != null)
+                                {
+                                    tmp.AppendFormat(", version: \"{0}\"", assemblyVersion);
+                                }
+
+                                var compilerVersionInfo = this.Translator.GetCompilerVersion();
+
+                                var compilerVersion = compilerVersionInfo != null && compilerVersionInfo.ProductVersion != null
+                                    ? compilerVersionInfo.ProductVersion.ToString()
+                                    : null;
+
+                                if (compilerVersion != null)
+                                {
+                                    tmp.AppendFormat(", compiler: \"{0}\"", compilerVersion);
+                                }
+
+                                tmp.Append(" }");
                             }
                             else
                             {

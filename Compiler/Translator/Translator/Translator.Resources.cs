@@ -374,7 +374,7 @@ namespace Bridge.Translator
 
         private Dictionary<string, string> PrepareResourseHeaderInfo()
         {
-            var assemblyInfo = this.GetCurrentAssemblyVersion();
+            var assemblyInfo = this.GetAssemblyVersion();
 
             var nowDate = DateTime.Now;
 
