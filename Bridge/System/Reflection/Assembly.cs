@@ -7,8 +7,6 @@ namespace System.Reflection
     {
         private extern Assembly();
 
-        [FieldProperty]
-        [Name("name")]
         public extern string FullName
         {
             get;
