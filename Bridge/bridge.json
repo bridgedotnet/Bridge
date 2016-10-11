@@ -26,6 +26,8 @@
         "Resources/Enum.js",
         "Resources/Browser.js",
         "Resources/Class.js",
+        "Resources/ReflectionAssembly.js",
+        "Resources/.generated/bridge/utils/systemAssemblyVersion.js",
         "Resources/Reflection.js",
         "Resources/Interfaces.js",
         "Resources/Char.js",

@@ -88,6 +88,7 @@
     <Compile Include="Bridge\Linq\Enumerable.cs" />
     <Compile Include="Bridge\IBridgeClass.cs" />
     <Compile Include="Bridge\ObjectLiteral.cs" />
+    <Compile Include="Bridge\Utils\SystemAssembly.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\.build\common\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
@@ -328,6 +329,7 @@
     <Content Include="Resources\.auxiliary\Header.js" />
     <Content Include="Resources\.generated\bridge.js" />
     <Content Include="Resources\.generated\bridge\utils\console.js" />
+    <Content Include="Resources\.generated\bridge\utils\systemAssemblyVersion.js" />
     <Content Include="Resources\.generated\system\formattableString.js" />
     <Content Include="Resources\.generated\system\formattableStringImpl.js" />
     <Content Include="Resources\.generated\system\guid.js" />
@@ -766,6 +768,7 @@
     <Content Include="Resources\.lib\LongLib.js" />
     <Content Include="Resources\Long.js" />
     <Content Include="Resources\Math.js" />
+    <Content Include="Resources\ReflectionAssembly.js" />
     <Content Include="Resources\Text\RegularExpressions\Regex.js" />
     <Content Include="Resources\Text\RegularExpressions\RegexEngineBranch.js" />
     <Content Include="Resources\Text\RegularExpressions\RegexEnginePass.js" />
