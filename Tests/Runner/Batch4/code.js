@@ -1,4 +1,4 @@
-﻿Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflection.Resource2.bin":"EBESExQV","Bridge.ClientTest.Batch4.Reflection.Resource1.bin":"AAECAwQFBgc="}, function ($asm, globals) {
+﻿Bridge.assembly({ name: "Bridge.ClientTest.Batch4", version: "15.2.0", compiler: "15.2.0" }, {"Bridge.ClientTest.Batch4.Reflection.Resource2.bin":"EBESExQV","Bridge.ClientTest.Batch4.Reflection.Resource1.bin":"AAECAwQFBgc="}, function ($asm, globals) {
     "use strict";
 
     Bridge.define("Bridge.ClientTest.Batch4.ActivatorTests", {
@@ -10265,20 +10265,26 @@
     	x.Foo.baz.Test = function() {};
     	return x;
         },
+        getMscorlibWithVersion: function () {
+            return System.String.concat("mscorlib, Version=", "15.2.0");
+        },
+        getAssemblyWithVersion: function () {
+            return System.String.concat("Bridge.ClientTest.Batch4, Version=", "15.2.0");
+        },
         getExecutingAssemblyWorks: function () {
-            Bridge.Test.Assert.areEqual("Bridge.ClientTest.Batch4", $asm.name);
+            Bridge.Test.Assert.areEqual(this.getAssemblyWithVersion(), $asm.getFullName());
         },
         getAssemblyForTypeWorks: function () {
-            Bridge.Test.Assert.areEqual("mscorlib", Bridge.Reflection.getTypeAssembly(System.Int32).name);
-            Bridge.Test.Assert.areEqual("Bridge.ClientTest.Batch4", Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch4.Reflection.AssemblyTests).name);
+            Bridge.Test.Assert.areEqual(this.getMscorlibWithVersion(), Bridge.Reflection.getTypeAssembly(System.Int32).getFullName());
+            Bridge.Test.Assert.areEqual(this.getAssemblyWithVersion(), Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch4.Reflection.AssemblyTests).getFullName());
         },
         fullNameWorks: function () {
-            Bridge.Test.Assert.areEqual("mscorlib", Bridge.Reflection.getTypeAssembly(System.Int32).name);
-            Bridge.Test.Assert.areEqual("Bridge.ClientTest.Batch4", Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch4.Reflection.AssemblyTests).name);
+            Bridge.Test.Assert.areEqual(this.getMscorlibWithVersion(), Bridge.Reflection.getTypeAssembly(System.Int32).getFullName());
+            Bridge.Test.Assert.areEqual(this.getAssemblyWithVersion(), Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch4.Reflection.AssemblyTests).getFullName());
         },
         toStringWorks: function () {
-            Bridge.Test.Assert.areEqual("mscorlib", Bridge.Reflection.getTypeAssembly(System.Int32).toString());
-            Bridge.Test.Assert.areEqual("Bridge.ClientTest.Batch4", Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch4.Reflection.AssemblyTests).toString());
+            Bridge.Test.Assert.areEqual(this.getMscorlibWithVersion(), Bridge.Reflection.getTypeAssembly(System.Int32).toString());
+            Bridge.Test.Assert.areEqual(this.getAssemblyWithVersion(), Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch4.Reflection.AssemblyTests).toString());
         },
         getTypesWorks: function () {
             var $t;
@@ -10316,12 +10322,12 @@
             Bridge.Test.Assert.true$1(Bridge.Reflection.getType("Foo.Bar", asm) == null, "#4");
         },
         assemblyOfBuiltInTypes: function () {
-            Bridge.Test.Assert.areEqual("mscorlib", Bridge.Reflection.getTypeAssembly(Date).name);
-            Bridge.Test.Assert.areEqual("mscorlib", Bridge.Reflection.getTypeAssembly(System.Double).name);
-            Bridge.Test.Assert.areEqual("mscorlib", Bridge.Reflection.getTypeAssembly(Boolean).name);
-            Bridge.Test.Assert.areEqual("mscorlib", Bridge.Reflection.getTypeAssembly(String).name);
-            Bridge.Test.Assert.areEqual("mscorlib", Bridge.Reflection.getTypeAssembly(Function).name);
-            Bridge.Test.Assert.areEqual("mscorlib", Bridge.Reflection.getTypeAssembly(Array).name);
+            Bridge.Test.Assert.areEqual(this.getMscorlibWithVersion(), Bridge.Reflection.getTypeAssembly(Date).getFullName());
+            Bridge.Test.Assert.areEqual(this.getMscorlibWithVersion(), Bridge.Reflection.getTypeAssembly(System.Double).getFullName());
+            Bridge.Test.Assert.areEqual(this.getMscorlibWithVersion(), Bridge.Reflection.getTypeAssembly(Boolean).getFullName());
+            Bridge.Test.Assert.areEqual(this.getMscorlibWithVersion(), Bridge.Reflection.getTypeAssembly(String).getFullName());
+            Bridge.Test.Assert.areEqual(this.getMscorlibWithVersion(), Bridge.Reflection.getTypeAssembly(Function).getFullName());
+            Bridge.Test.Assert.areEqual(this.getMscorlibWithVersion(), Bridge.Reflection.getTypeAssembly(Array).getFullName());
         },
         createInstanceWorks: function () {
             Bridge.Test.Assert.true$1(Bridge.is(Bridge.Reflection.createAssemblyInstance(Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch4.Reflection.AssemblyTests.C), Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Batch4.Reflection.AssemblyTests.C)), Bridge.ClientTest.Batch4.Reflection.AssemblyTests.C), "#1");
@@ -13607,6 +13613,9 @@
     }; });
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests", {
+        getAssemblyWithVersion: function () {
+            return System.String.concat("Bridge.ClientTest.Batch4, Version=", "15.2.0");
+        },
         fullNamePropertyReturnsTheNameWithTheNamespace: function () {
             Bridge.Test.Assert.areEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests));
         },
@@ -13616,13 +13625,13 @@
             Bridge.Test.Assert.areEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BX$1[[System.Int32, mscorlib]], Bridge.ClientTest.Batch4", Bridge.Reflection.getTypeQName(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BX$1(System.Int32)));
         },
         assemblyPropertyWorks: function () {
-            Bridge.Test.Assert.areEqual("Bridge.ClientTest.Batch4", Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.B).name);
-            Bridge.Test.Assert.areEqual("Bridge.ClientTest.Batch4", Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.I1).name);
-            Bridge.Test.Assert.areEqual("Bridge.ClientTest.Batch4", Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1).name);
-            Bridge.Test.Assert.areEqual("Bridge.ClientTest.Batch4", Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BX$1).name);
-            Bridge.Test.Assert.areEqual("Bridge.ClientTest.Batch4", Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1(System.Int32)).name);
-            Bridge.Test.Assert.areEqual("Bridge.ClientTest.Batch4", Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BX$1(System.Int32)).name);
-            Bridge.Test.Assert.areEqual("Bridge.ClientTest.Batch4", Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1).name);
+            Bridge.Test.Assert.areEqual(this.getAssemblyWithVersion(), Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.B).getFullName());
+            Bridge.Test.Assert.areEqual(this.getAssemblyWithVersion(), Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.I1).getFullName());
+            Bridge.Test.Assert.areEqual(this.getAssemblyWithVersion(), Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1).getFullName());
+            Bridge.Test.Assert.areEqual(this.getAssemblyWithVersion(), Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BX$1).getFullName());
+            Bridge.Test.Assert.areEqual(this.getAssemblyWithVersion(), Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1(System.Int32)).getFullName());
+            Bridge.Test.Assert.areEqual(this.getAssemblyWithVersion(), Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BX$1(System.Int32)).getFullName());
+            Bridge.Test.Assert.areEqual(this.getAssemblyWithVersion(), Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1).getFullName());
         },
         namespacePropertyReturnsTheNamespaceWithoutTheName: function () {
             Bridge.Test.Assert.areEqual("Bridge.ClientTest.Batch4.Reflection", Bridge.Reflection.getTypeNamespace(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests));

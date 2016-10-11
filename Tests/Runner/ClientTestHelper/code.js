@@ -1,4 +1,4 @@
-﻿Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
+﻿Bridge.assembly({ name: "Bridge.ClientTestHelper", version: "15.2.0", compiler: "15.2.0" }, function ($asm, globals) {
     "use strict";
 
     Bridge.define("Bridge.ClientTestHelper.Internal.ClassLibraryTest", {

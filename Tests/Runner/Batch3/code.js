@@ -6,7 +6,7 @@ var SomeExternalNamespace = {
 SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
 
 
-Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
+Bridge.assembly({ name: "Bridge.ClientTest.Batch3", version: "15.2.0", compiler: "15.2.0" }, function ($asm, globals) {
     "use strict";
 
     Bridge.define("content.ContentManagerBase", {

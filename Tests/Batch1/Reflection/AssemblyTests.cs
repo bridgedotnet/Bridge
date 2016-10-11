@@ -1,5 +1,6 @@
 using Bridge.ClientTest.Reflection;
 using Bridge.Test;
+using Bridge.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -112,31 +113,63 @@ namespace Bridge.ClientTest.Batch1.Reflection
         private class G<T1, T2>
         { }
 
+        private string MscorlibName
+        {
+            get
+            {
+                return "mscorlib";
+            }
+        }
+
+        private string MscorlibWithVersion
+        {
+            get
+            {
+                return MscorlibName + ", Version=" + AssemblyVersionMarker.GetVersion(AssemblyVersionMarker.VersionType.Compiler);
+            }
+        }
+
+        private string AssemblyName
+        {
+            get
+            {
+                return "Bridge.ClientTest";
+            }
+        }
+
+        private string AssemblyWithVersion
+        {
+            get
+            {
+                return AssemblyName + ", Version=" + AssemblyVersionMarker.GetVersion(AssemblyVersionMarker.VersionType.CurrentAssembly);
+            }
+        }
+
         [Test]
         public void GetExecutingAssemblyWorks()
         {
-            Assert.AreEqual(Assembly.GetExecutingAssembly().FullName, "Bridge.ClientTest");
+            Assert.AreEqual(Assembly.GetExecutingAssembly().FullName, AssemblyWithVersion);
         }
 
         [Test]
         public void GetAssemblyForTypeWorks()
         {
-            Assert.AreEqual(Assembly.GetAssembly(typeof(int)).FullName, "mscorlib");
-            Assert.AreEqual(Assembly.GetAssembly(typeof(AssemblyTests)).FullName, "Bridge.ClientTest");
+            Assert.AreEqual(Assembly.GetAssembly(typeof(int)).FullName, MscorlibWithVersion);
+            Assert.AreEqual(Assembly.GetAssembly(typeof(AssemblyTests)).FullName, AssemblyWithVersion);
         }
 
         [Test]
         public void FullNameWorks()
         {
-            Assert.AreEqual(typeof(int).Assembly.FullName, "mscorlib");
-            Assert.AreEqual(typeof(AssemblyTests).Assembly.FullName, "Bridge.ClientTest");
+            Assert.AreEqual(typeof(int).Assembly.FullName, MscorlibWithVersion);
+            Assert.AreEqual(typeof(AssemblyTests).Assembly.FullName, AssemblyWithVersion);
         }
 
         [Test]
         public void ToStringWorks()
         {
-            Assert.AreEqual(typeof(int).Assembly.ToString(), "mscorlib");
-            Assert.AreEqual(typeof(AssemblyTests).Assembly.ToString(), "Bridge.ClientTest");
+            Assert.AreEqual(typeof(int).Assembly.ToString(), MscorlibWithVersion);
+            Assert.AreEqual(typeof(AssemblyTests).Assembly.ToString(), AssemblyWithVersion);
         }
 
         [Test]
@@ -188,12 +221,12 @@ namespace Bridge.ClientTest.Batch1.Reflection
         [Test]
         public void AssemblyOfBuiltInTypes()
         {
-            Assert.AreEqual(typeof(DateTime).Assembly.FullName, "mscorlib");
-            Assert.AreEqual(typeof(double).Assembly.FullName, "mscorlib");
-            Assert.AreEqual(typeof(bool).Assembly.FullName, "mscorlib");
-            Assert.AreEqual(typeof(string).Assembly.FullName, "mscorlib");
-            Assert.AreEqual(typeof(Delegate).Assembly.FullName, "mscorlib");
-            Assert.AreEqual(typeof(int[]).Assembly.FullName, "mscorlib");
+            Assert.AreEqual(typeof(DateTime).Assembly.FullName, MscorlibWithVersion);
+            Assert.AreEqual(typeof(double).Assembly.FullName, MscorlibWithVersion);
+            Assert.AreEqual(typeof(bool).Assembly.FullName, MscorlibWithVersion);
+            Assert.AreEqual(typeof(string).Assembly.FullName, MscorlibWithVersion);
+            Assert.AreEqual(typeof(Delegate).Assembly.FullName, MscorlibWithVersion);
+            Assert.AreEqual(typeof(int[]).Assembly.FullName, MscorlibWithVersion);
         }
 
         [Test]
@@ -233,8 +266,11 @@ namespace Bridge.ClientTest.Batch1.Reflection
         [Test]
         public void LoadCanReturnReferenceToLoadedAssembly()
         {
-            Assert.True(Assembly.Load("Bridge.ClientTest") == Assembly.GetExecutingAssembly(), "ClientTest");
-            Assert.True(Assembly.Load("mscorlib") == typeof(int).Assembly, "mscorlib");
+            Assert.True(Assembly.Load(AssemblyName) == Assembly.GetExecutingAssembly(), AssemblyName);
+            Assert.True(Assembly.Load(MscorlibName) == typeof(int).Assembly, MscorlibName);
+
+            Assert.True(Assembly.Load(AssemblyWithVersion) == Assembly.GetExecutingAssembly(), AssemblyWithVersion);
+            Assert.True(Assembly.Load(MscorlibWithVersion) == typeof(int).Assembly, MscorlibWithVersion);
         }
 
         [Test]

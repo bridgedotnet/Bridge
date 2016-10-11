@@ -2512,7 +2512,7 @@
 
             if (!cls) {
                 if (prop.$literal) {
-                    Class = function() {
+                    Class = function () {
                         return {};
                     };
                 } else {
@@ -2523,7 +2523,7 @@
                         }
                     };
                 }
-                
+
                 prop.ctor = Class;
             } else {
                 Class = cls;
@@ -2819,7 +2819,7 @@
                 exists,
                 i;
 
-            for (i = 0; i < (nameParts.length - 1); i++) {
+            for (i = 0; i < (nameParts.length - 1) ; i++) {
                 if (typeof scope[nameParts[i]] == "undefined") {
                     scope[nameParts[i]] = {};
                 }
@@ -2994,20 +2994,20 @@
     Bridge.definei = Bridge.Class.definei;
     Bridge.init = Bridge.Class.init;
 
-    // @source Reflection.js
+    // @source ReflectionAssembly.js
 
-    Bridge.assembly = function (assemblyName, res, callback) {
+    Bridge.assembly = function (props, res, callback) {
         if (!callback) {
             callback = res;
             res = {};
         }
 
-        assemblyName = assemblyName || "Bridge.$Unknown";
+        props = props ? (props.name ? props : { name: props }) : { name: "Bridge.$Unknown" };
 
-        var asm = System.Reflection.Assembly.assemblies[assemblyName];
+        var asm = System.Reflection.Assembly.assemblies[props.name];
 
         if (!asm) {
-            asm = new System.Reflection.Assembly(assemblyName, res);
+            asm = new System.Reflection.Assembly(props, res);
         } else {
             Bridge.apply(asm.res, res || {});
         }
@@ -3026,17 +3026,41 @@
             assemblies: {}
         },
 
-        ctor: function (name, res) {
+        ctor: function (props, res) {
             this.$initialize();
-            this.name = name;
+            this.name = props.name ? props.name : props;
+            this.defVer("version",  props.version || "0.0.0.0");
+            this.defVer("compiler", props.compiler || "0.0.0.0");
             this.res = res || {};
             this.$types = {}
 
-            System.Reflection.Assembly.assemblies[name] = this;
+            System.Reflection.Assembly.assemblies[this.name] = this;
+        },
+
+        defVer: function(key, o) {
+            Object.defineProperty(this, key, {
+                get: function () {
+                    o = new System.Version.$ctor4(o);
+                    Bridge.Class.defineProperty(this, key, o);
+                    return o;
+                },
+
+                set: function (newValue) {
+                    o = newValue;
+                },
+
+                enumerable: true,
+
+                configurable: true
+            });
+        },
+
+        getFullName: function () {
+            return this.name + ", Version=" + this.version.toString();
         },
 
         toString: function () {
-            return this.name;
+            return this.getFullName();
         },
 
         getManifestResourceNames: function () {
@@ -3085,7 +3109,18 @@
     Bridge.$currentAssembly = new System.Reflection.Assembly("mscorlib");
     Bridge.SystemAssembly = Bridge.$currentAssembly;
     Bridge.SystemAssembly.$types["System.Reflection.Assembly"] = System.Reflection.Assembly;
-    System.Reflection.Assembly.$assembly = Bridge.SystemAssembly;
+    System.Reflection.Assembly.$assembly = Bridge.SystemAssembly;;
+
+    // @source systemAssemblyVersion.js
+
+    (function(){
+        Bridge.SystemAssembly.version = "15.2.0";
+        Bridge.SystemAssembly.compiler = "15.2.0";
+    })();
+
+    Bridge.define("Bridge.Utils.SystemAssemblyVersion");
+
+    // @source Reflection.js
 
     Bridge.Reflection = {
         setMetadata: function (type, metadata) {
@@ -3156,6 +3191,9 @@
         },
 
         load: function (name) {
+            var i;
+            if (name != null && (i = name.indexOf(',')) >= 0) name = name.substring(0, i);
+
             return System.Reflection.Assembly.assemblies[name] || require(name);
         },
 
@@ -3358,10 +3396,6 @@
         isInstanceOfType: function (instance, type) {
             return Bridge.is(instance, type);
         },
-
-        /*isAssignableFrom: function(target, type) {
-            return target === type || (typeof(target.isAssignableFrom) === 'function' && target.isAssignableFrom(type)) || type.prototype instanceof target;
-        },*/
 
         isAssignableFrom: function (baseType, type) {
             if (baseType == null) {

@@ -1,5 +1,6 @@
 // #15
 using Bridge.Test;
+using Bridge.Utils;
 using System;
 using System.Collections.Generic;
 
@@ -111,6 +112,14 @@ namespace Bridge.ClientTest.Batch4.Reflection
             }
         }
 
+        private string AssemblyWithVersion
+        {
+            get
+            {
+                return "Bridge.ClientTest.Batch4, Version=" + AssemblyVersionMarker.GetVersion(AssemblyVersionMarker.VersionType.CurrentAssembly);
+            }
+        }
+
         [Test]
         public void FullNamePropertyReturnsTheNameWithTheNamespace()
         {
@@ -128,13 +137,13 @@ namespace Bridge.ClientTest.Batch4.Reflection
         [Test]
         public void AssemblyPropertyWorks()
         {
-            Assert.AreEqual("Bridge.ClientTest.Batch4", typeof(B).Assembly.FullName);
-            Assert.AreEqual("Bridge.ClientTest.Batch4", typeof(I1).Assembly.FullName);
-            Assert.AreEqual("Bridge.ClientTest.Batch4", typeof(IG<>).Assembly.FullName);
-            Assert.AreEqual("Bridge.ClientTest.Batch4", typeof(BX<>).Assembly.FullName);
-            Assert.AreEqual("Bridge.ClientTest.Batch4", typeof(IG<int>).Assembly.FullName);
-            Assert.AreEqual("Bridge.ClientTest.Batch4", typeof(BX<int>).Assembly.FullName);
-            Assert.AreEqual("Bridge.ClientTest.Batch4", typeof(E1).Assembly.FullName);
+            Assert.AreEqual(AssemblyWithVersion, typeof(B).Assembly.FullName);
+            Assert.AreEqual(AssemblyWithVersion, typeof(I1).Assembly.FullName);
+            Assert.AreEqual(AssemblyWithVersion, typeof(IG<>).Assembly.FullName);
+            Assert.AreEqual(AssemblyWithVersion, typeof(BX<>).Assembly.FullName);
+            Assert.AreEqual(AssemblyWithVersion, typeof(IG<int>).Assembly.FullName);
+            Assert.AreEqual(AssemblyWithVersion, typeof(BX<int>).Assembly.FullName);
+            Assert.AreEqual(AssemblyWithVersion, typeof(E1).Assembly.FullName);
         }
 
         [Test]
