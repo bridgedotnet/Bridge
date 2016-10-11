@@ -1704,10 +1704,10 @@
             var enm = new Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests.C(sb).getEnumerator(2);
 
             while (enm.System$Collections$IEnumerator$moveNext()) {
-                sb.appendLine(System.String.concat("got ", enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]()));
+                sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]());
             }
 
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
         },
         prematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks_SPI_1555: function () {
             // #1555
@@ -1716,11 +1716,11 @@
 
             for (var i = 0; i < 2; i = (i + 1) | 0) {
                 enm.System$Collections$IEnumerator$moveNext();
-                sb.appendLine(System.String.concat("got ", enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]()));
+                sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]());
             }
             enm.System$IDisposable$dispose();
 
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
         },
         exceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
             var sb = new System.Text.StringBuilder();
@@ -1735,7 +1735,7 @@
             try {
                 for (var i = 0; i < 100; i = (i + 1) | 0) {
                     enm.System$Collections$IEnumerator$moveNext();
-                    sb.appendLine(System.String.concat("got ", enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]()));
+                    sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]());
                 }
                 Bridge.Test.Assert.fail$1("Should have thrown an exception in the loop");
             }
@@ -1744,7 +1744,7 @@
                 sb.appendLine("caught exception");
             }
 
-            this.assertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
+            this.assertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
         },
         typeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface_SPI_1554: function () {
             var enm = null;
@@ -1766,16 +1766,16 @@
             $t = Bridge.getEnumerator(enm);
             while ($t.moveNext()) {
                 var i = $t.getCurrent();
-                sb.appendLine(System.String.concat("got ", i));
+                sb.appendLine("got " + i);
             }
             sb.appendLine("-");
             $t1 = Bridge.getEnumerator(enm);
             while ($t1.moveNext()) {
                 var i1 = $t1.getCurrent();
-                sb.appendLine(System.String.concat("got ", i1));
+                sb.appendLine("got " + i1);
             }
 
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n-\r\nyielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n-\nyielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
         },
         prematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks_SPI_1555: function () {
             var $t;
@@ -1785,13 +1785,13 @@
             $t = Bridge.getEnumerator(new Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests.C(sb).getEnumerable(5));
             while ($t.moveNext()) {
                 var i = $t.getCurrent();
-                sb.appendLine(System.String.concat("got ", i));
+                sb.appendLine("got " + i);
                 if (((n = (n + 1) | 0)) === 2) {
                     break;
                 }
             }
 
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
         },
         exceptionInIEnumerableIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
             var sb = new System.Text.StringBuilder();
@@ -1807,7 +1807,7 @@
                 var enumerator = Bridge.getEnumerator(enumerable, "$1", System.Int32);
                 for (var i = 0; i < 100; i = (i + 1) | 0) {
                     enumerator.System$Collections$IEnumerator$moveNext();
-                    sb.appendLine(System.String.concat("got ", enumerator[Bridge.geti(enumerator, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]()));
+                    sb.appendLine("got " + enumerator[Bridge.geti(enumerator, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]());
                 }
                 Bridge.Test.Assert.fail$1("Should have thrown");
             }
@@ -1816,7 +1816,7 @@
                 sb.appendLine("caught exception");
             }
 
-            this.assertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
+            this.assertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
         },
         enumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters: function () {
             var $t, $t1;
@@ -1834,7 +1834,7 @@
                 sb.appendLine(i1.toString());
             }
 
-            this.assertEqual(sb.toString(), "3\r\n2\r\n1\r\n3\r\n2\r\n1\r\n");
+            this.assertEqual(sb.toString(), "3\n2\n1\n3\n2\n1\n");
         },
         differentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals: function () {
             var sb = new System.Text.StringBuilder();
@@ -1849,7 +1849,7 @@
                 sb.appendLine(enm2[Bridge.geti(enm2, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]().toString());
             }
 
-            this.assertEqual(sb.toString(), "0\r\n0\r\n1\r\n1\r\n2\r\n2\r\n-1\r\n-1\r\n");
+            this.assertEqual(sb.toString(), "0\n0\n1\n1\n2\n2\n-1\n-1\n");
         }
     });
 
@@ -1863,7 +1863,7 @@
             var $yield = [];
             try {
                 for (var i = 0; i < n; i = (i + 1) | 0) {
-                    this._sb.appendLine(System.String.concat("yielding ", i));
+                    this._sb.appendLine("yielding " + i);
                     $yield.push(i);
                 }
                 this._sb.appendLine("yielding -1");
@@ -1895,7 +1895,7 @@
             var $yield = [];
             try {
                 for (var i = 0; i < n; i = (i + 1) | 0) {
-                    this._sb.appendLine(System.String.concat("yielding ", i));
+                    this._sb.appendLine("yielding " + i);
                     $yield.push(i);
                 }
                 this._sb.appendLine("yielding -1");
@@ -2949,12 +2949,12 @@
     Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Float32ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
-                Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
+                Bridge.Test.Assert.fail$1(System.String.concat(message, ": Expected length ", expected.length, ", actual: ", actual.length));
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
                 if (actual[i] !== expected[i]) {
-                    Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Position "), i), ": expected "), expected[i]), ", actual: "), System.Single.format(actual[i], 'G')));
+                    Bridge.Test.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", System.Single.format(actual[i], 'G')));
                     return;
                 }
             }
@@ -3162,12 +3162,12 @@
     Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Float64ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
-                Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
+                Bridge.Test.Assert.fail$1(System.String.concat(message, ": Expected length ", expected.length, ", actual: ", actual.length));
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
                 if (actual[i] !== expected[i]) {
-                    Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Position "), i), ": expected "), expected[i]), ", actual: "), System.Double.format(actual[i], 'G')));
+                    Bridge.Test.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", System.Double.format(actual[i], 'G')));
                     return;
                 }
             }
@@ -3376,12 +3376,12 @@
     Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Int16ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
-                Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
+                Bridge.Test.Assert.fail$1(System.String.concat(message, ": Expected length ", expected.length, ", actual: ", actual.length));
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
                 if (actual[i] !== expected[i]) {
-                    Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Position "), i), ": expected "), expected[i]), ", actual: "), actual[i]));
+                    Bridge.Test.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", actual[i]));
                     return;
                 }
             }
@@ -3589,12 +3589,12 @@
     Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Int32ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
-                Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
+                Bridge.Test.Assert.fail$1(System.String.concat(message, ": Expected length ", expected.length, ", actual: ", actual.length));
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
                 if (actual[i] !== expected[i]) {
-                    Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Position "), i), ": expected "), expected[i]), ", actual: "), actual[i]));
+                    Bridge.Test.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", actual[i]));
                     return;
                 }
             }
@@ -3801,12 +3801,12 @@
     Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Int8ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
-                Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
+                Bridge.Test.Assert.fail$1(System.String.concat(message, ": Expected length ", expected.length, ", actual: ", actual.length));
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
                 if (actual[i] !== expected[i]) {
-                    Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Position "), i), ": expected "), expected[i]), ", actual: "), actual[i]));
+                    Bridge.Test.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", actual[i]));
                     return;
                 }
             }
@@ -4013,12 +4013,12 @@
     Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint16ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
-                Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
+                Bridge.Test.Assert.fail$1(System.String.concat(message, ": Expected length ", expected.length, ", actual: ", actual.length));
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
                 if (actual[i] !== expected[i]) {
-                    Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Position "), i), ": expected "), expected[i]), ", actual: "), actual[i]));
+                    Bridge.Test.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", actual[i]));
                     return;
                 }
             }
@@ -4225,12 +4225,12 @@
     Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint32ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
-                Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
+                Bridge.Test.Assert.fail$1(System.String.concat(message, ": Expected length ", expected.length, ", actual: ", actual.length));
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
                 if (System.Int64(actual[i]).ne(System.Int64(expected[i]))) {
-                    Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Position "), i), ": expected "), expected[i]), ", actual: "), actual[i]));
+                    Bridge.Test.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", actual[i]));
                     return;
                 }
             }
@@ -4437,12 +4437,12 @@
     Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint8ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
-                Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
+                Bridge.Test.Assert.fail$1(System.String.concat(message, ": Expected length ", expected.length, ", actual: ", actual.length));
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
                 if (actual[i] !== expected[i]) {
-                    Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Position "), i), ": expected "), expected[i]), ", actual: "), actual[i]));
+                    Bridge.Test.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", actual[i]));
                     return;
                 }
             }
@@ -4649,12 +4649,12 @@
     Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint8ClampedArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
-                Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Expected length "), expected.length), ", actual: "), actual.length));
+                Bridge.Test.Assert.fail$1(System.String.concat(message, ": Expected length ", expected.length, ", actual: ", actual.length));
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
                 if (actual[i] !== expected[i]) {
-                    Bridge.Test.Assert.fail$1(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(message, ": Position "), i), ": expected "), expected[i]), ", actual: "), actual[i]));
+                    Bridge.Test.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", actual[i]));
                     return;
                 }
             }
@@ -6678,7 +6678,7 @@
             ]
         },
         format: function (format, formatProvider) {
-            return System.String.concat(System.String.concat("Formatted: ", (!System.String.isNullOrEmpty(format) ? System.String.concat(format, ", ") : "")), Bridge.Reflection.getTypeName(Bridge.getType(formatProvider)));
+            return System.String.concat("Formatted: ", (!System.String.isNullOrEmpty(format) ? System.String.concat(format, ", ") : ""), Bridge.Reflection.getTypeName(Bridge.getType(formatProvider)));
         }
     });
 
@@ -7042,7 +7042,7 @@
             ]
         },
         format: function (format, provider) {
-            return System.String.concat(System.String.concat(format, " success, "), provider.System$IFormatProvider$getFormat(Object));
+            return System.String.concat(format, " success, ", provider.System$IFormatProvider$getFormat(Object));
         }
     });
 
@@ -8729,9 +8729,9 @@
             Bridge.Test.Assert.areEqual$1(returnType, expr.returnType, System.String.concat(title, " return type"));
             Bridge.Test.Assert.areEqual$1(parmTypes.length, expr.params.getCount(), System.String.concat(title, " param count"));
             for (var i = 0; i < expr.params.getCount(); i = (i + 1) | 0) {
-                Bridge.Test.Assert.areEqual$1(38, expr.params.get(i).ntype, System.String.concat(System.String.concat(System.String.concat(title, " parameter "), i), " node type"));
-                Bridge.Test.Assert.areEqual$1(parmNames[i], expr.params.get(i).name, System.String.concat(System.String.concat(System.String.concat(title, " parameter "), i), " name"));
-                Bridge.Test.Assert.areEqual$1(parmTypes[i], expr.params.get(i).type, System.String.concat(System.String.concat(System.String.concat(title, " parameter "), i), " type"));
+                Bridge.Test.Assert.areEqual$1(38, expr.params.get(i).ntype, System.String.concat(title, " parameter ", i, " node type"));
+                Bridge.Test.Assert.areEqual$1(parmNames[i], expr.params.get(i).name, System.String.concat(title, " parameter ", i, " name"));
+                Bridge.Test.Assert.areEqual$1(parmTypes[i], expr.params.get(i).type, System.String.concat(title, " parameter ", i, " type"));
             }
         },
         f2: function (expr, nodeType, type, method, title) {
@@ -8829,11 +8829,11 @@
             Bridge.Test.Assert.areEqual$1(Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests.C, ne.type, System.String.concat(title, " type"));
             Bridge.Test.Assert.areEqual$1(argTypes.length, ne.arguments.getCount(), System.String.concat(title, " argument count"));
             for (var i = 0; i < ne.arguments.getCount(); i = (i + 1) | 0) {
-                Bridge.Test.Assert.true$1(($t = ne.arguments.get(i), Bridge.is($t, Bridge.hasValue($t) && ($t.ntype === 38))) && Bridge.referenceEquals(($t = ne.arguments.get(i), Bridge.cast($t, Bridge.hasValue($t) && ($t.ntype === 38))).name, String.fromCharCode((((((97 + i) | 0))) & 65535))), System.String.concat(System.String.concat(title, " argument "), i));
+                Bridge.Test.Assert.true$1(($t = ne.arguments.get(i), Bridge.is($t, Bridge.hasValue($t) && ($t.ntype === 38))) && Bridge.referenceEquals(($t = ne.arguments.get(i), Bridge.cast($t, Bridge.hasValue($t) && ($t.ntype === 38))).name, String.fromCharCode((((((97 + i) | 0))) & 65535))), System.String.concat(title, " argument ", i));
             }
             Bridge.Test.Assert.areEqual$1(argTypes.length, (ne.constructor.params || []).length, System.String.concat(title, " constructor argument length"));
             for (var i1 = 0; i1 < (ne.constructor.params || []).length; i1 = (i1 + 1) | 0) {
-                Bridge.Test.Assert.areEqual$1(argTypes[i1], (ne.constructor.params || [])[i1], System.String.concat(System.String.concat(title, " constructor parameter type "), i1));
+                Bridge.Test.Assert.areEqual$1(argTypes[i1], (ne.constructor.params || [])[i1], System.String.concat(title, " constructor parameter type ", i1));
             }
             if (checkReference) {
                 var $ctor = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests.C, 1, 284, null, argTypes);
@@ -8887,7 +8887,7 @@
             Bridge.Test.Assert.true$1(Bridge.referenceEquals(se.defaultBody, defaultBody), System.String.concat(title, " default value"));
             Bridge.Test.Assert.areEqual$1(cases.length, se.cases.getCount(), System.String.concat(title, " cases count"));
             for (var i = 0; i < se.cases.getCount(); i = (i + 1) | 0) {
-                Bridge.Test.Assert.true$1(Bridge.referenceEquals(se.cases.get(i), cases[i]), System.String.concat(System.String.concat(title, " case "), i));
+                Bridge.Test.Assert.true$1(Bridge.referenceEquals(se.cases.get(i), cases[i]), System.String.concat(title, " case ", i));
             }
         }
     });
@@ -9002,7 +9002,7 @@
             this.$initialize();
         },
         getItem: function (a, b) {
-            return System.String.concat(System.String.concat(System.String.concat(System.String.concat(this.F1, " "), a), " "), b);
+            return System.String.concat(this.F1 + " " + a + " ", b);
         },
         M1: function (a, b) {
             return 0;
@@ -10207,32 +10207,32 @@
             var rand = new System.Random.ctor();
             for (var i = 0; i < 10; i = (i + 1) | 0) {
                 var randomNumber = rand.next();
-                Bridge.Test.Assert.true$1(randomNumber >= 0, System.String.concat(randomNumber, " is greater or equal to 0"));
-                Bridge.Test.Assert.true$1(randomNumber <= 2147483647, System.String.concat(randomNumber, " is less than or equal to int.MaxValue"));
+                Bridge.Test.Assert.true$1(randomNumber >= 0, randomNumber + " is greater or equal to 0");
+                Bridge.Test.Assert.true$1(randomNumber <= 2147483647, randomNumber + " is less than or equal to int.MaxValue");
             }
         },
         nextWithMaxWorks: function () {
             var rand = new System.Random.ctor();
             for (var i = 0; i < 10; i = (i + 1) | 0) {
                 var randomNumber = rand.next$1(5);
-                Bridge.Test.Assert.true$1(randomNumber >= 0, System.String.concat(randomNumber, " is greater or equal to 0"));
-                Bridge.Test.Assert.true$1(randomNumber < 5, System.String.concat(randomNumber, " is smaller than 5"));
+                Bridge.Test.Assert.true$1(randomNumber >= 0, randomNumber + " is greater or equal to 0");
+                Bridge.Test.Assert.true$1(randomNumber < 5, randomNumber + " is smaller than 5");
             }
         },
         nextWithMinAndMaxWorks: function () {
             var rand = new System.Random.ctor();
             for (var i = 0; i < 10; i = (i + 1) | 0) {
                 var randomNumber = rand.next$2(5, 10);
-                Bridge.Test.Assert.true$1(randomNumber >= 5, System.String.concat(randomNumber, " is greater or equal to 5"));
-                Bridge.Test.Assert.true$1(randomNumber < 10, System.String.concat(randomNumber, " is smaller than 10"));
+                Bridge.Test.Assert.true$1(randomNumber >= 5, randomNumber + " is greater or equal to 5");
+                Bridge.Test.Assert.true$1(randomNumber < 10, randomNumber + " is smaller than 10");
             }
         },
         nextDoubleWorks: function () {
             var rand = new System.Random.ctor();
             for (var i = 0; i < 10; i = (i + 1) | 0) {
                 var randomNumber = rand.nextDouble();
-                Bridge.Test.Assert.true$1(randomNumber >= 0.0, System.String.concat(System.Double.format(randomNumber, 'G'), " is greater or equal to 0.0"));
-                Bridge.Test.Assert.true$1(randomNumber < 1.0, System.String.concat(System.Double.format(randomNumber, 'G'), " is smaller than 1.0"));
+                Bridge.Test.Assert.true$1(randomNumber >= 0.0, System.Double.format(randomNumber, 'G') + " is greater or equal to 0.0");
+                Bridge.Test.Assert.true$1(randomNumber < 1.0, System.Double.format(randomNumber, 'G') + " is smaller than 1.0");
             }
         },
         nextBytesWorks: function () {
@@ -10240,8 +10240,8 @@
             var bytes = System.Array.init(150, 0);
             rand.nextBytes(bytes);
             for (var i = 0; i < bytes.length; i = (i + 1) | 0) {
-                Bridge.Test.Assert.true$1(bytes[i] >= 0, System.String.concat(System.String.concat(System.String.concat("a: ", bytes[i]), " is greater or equal to "), 0));
-                Bridge.Test.Assert.true$1(bytes[i] <= 255, System.String.concat(System.String.concat(System.String.concat("a: ", bytes[i]), " is smaller than or equal to "), 255));
+                Bridge.Test.Assert.true$1(bytes[i] >= 0, "a: " + bytes[i] + " is greater or equal to " + 0);
+                Bridge.Test.Assert.true$1(bytes[i] <= 255, "a: " + bytes[i] + " is smaller than or equal to " + 255);
             }
         }
     });
@@ -12747,7 +12747,7 @@
         s: null,
         v: null,
         getItem: function (x, s) {
-            return System.String.concat(System.String.concat(System.String.concat(System.String.concat(this.v, " "), x), " "), s);
+            return System.String.concat(this.v, " ", x, " ", s);
         },
         setItem: function (x, s, value) {
             this.x = x;
@@ -13025,17 +13025,17 @@
             return ((this.x + x) | 0);
         },
         M3: function (T1, T2, s) {
-            return System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(this.x.toString(), " "), Bridge.Reflection.getTypeFullName(T1)), " "), Bridge.Reflection.getTypeFullName(T2)), " "), s);
+            return System.String.concat(this.x.toString(), " ", Bridge.Reflection.getTypeFullName(T1), " ", Bridge.Reflection.getTypeFullName(T2), " ", s);
         }
     });
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C8", {
         statics: {
             M2: function (a, b) {
-                return System.String.concat(System.String.concat(a, " "), b);
+                return System.String.concat(a, " ", b);
             },
             M4: function (T1, T2, a) {
-                return System.String.concat(System.String.concat(System.String.concat(System.String.concat(Bridge.Reflection.getTypeFullName(T1), " "), Bridge.Reflection.getTypeFullName(T2)), " "), a);
+                return System.String.concat(Bridge.Reflection.getTypeFullName(T1), " ", Bridge.Reflection.getTypeFullName(T2), " ", a);
             }
         },
         s: null,
@@ -13044,17 +13044,17 @@
             this.s = s;
         },
         M1: function (a, b) {
-            return System.String.concat(System.String.concat(System.String.concat(System.String.concat(this.s, " "), a), " "), b);
+            return System.String.concat(this.s, " ", a, " ", b);
         },
         M3: function (T1, T2, a) {
-            return System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(this.s, " "), Bridge.Reflection.getTypeFullName(T1)), " "), Bridge.Reflection.getTypeFullName(T2)), " "), a);
+            return System.String.concat(this.s, " ", Bridge.Reflection.getTypeFullName(T1), " ", Bridge.Reflection.getTypeFullName(T2), " ", a);
         }
     });
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C9$2", function (T1, T2) { return {
         statics: {
             m: function (a) {
-                return System.String.concat(System.String.concat(System.String.concat(System.String.concat(Bridge.Reflection.getTypeFullName(T1), " "), Bridge.Reflection.getTypeFullName(T2)), " "), a);
+                return System.String.concat(Bridge.Reflection.getTypeFullName(T1), " ", Bridge.Reflection.getTypeFullName(T2), " ", a);
             }
         }
     }; });
@@ -13082,8 +13082,6 @@
         statics: {
             canConvert: function (T, arg) {
                 try { /// The variable `x' is assigned but its value is never used
-
-
                     var x = Bridge.cast(arg, T);
                     return true;
                 }
@@ -14143,19 +14141,19 @@
         },
         invokingBaseUnnamedConstructorWithoutArgumentsWorks: function () {
             var d = new Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseUnnamedConstructorWithoutArgumentsTypes.D();
-            Bridge.Test.Assert.areEqual("X|Y", System.String.concat(System.String.concat(d.messageB, "|"), d.messageD));
+            Bridge.Test.Assert.areEqual("X|Y", System.String.concat(d.messageB, "|", d.messageD));
         },
         invokingBaseUnnamedConstructorWithArgumentsWorks: function () {
             var d = new Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseUnnamedConstructorWithArgumentsTypes.D(5, 8);
-            Bridge.Test.Assert.areEqual("6 9|5 8", System.String.concat(System.String.concat(d.messageB, "|"), d.messageD));
+            Bridge.Test.Assert.areEqual("6 9|5 8", System.String.concat(d.messageB, "|", d.messageD));
         },
         invokingBaseNamedConstructorWithoutArgumentsWorks: function () {
             var d = new Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseNamedConstructorWithoutArgumentsTypes.D();
-            Bridge.Test.Assert.areEqual("X|Y", System.String.concat(System.String.concat(d.messageB, "|"), d.messageD));
+            Bridge.Test.Assert.areEqual("X|Y", System.String.concat(d.messageB, "|", d.messageD));
         },
         invokingBaseNamedConstructorWithArgumentsWorks: function () {
             var d = new Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseNamedConstructorWithArgumentsTypes.D(5, 8);
-            Bridge.Test.Assert.areEqual("6 9|5 8", System.String.concat(System.String.concat(d.messageB, "|"), d.messageD));
+            Bridge.Test.Assert.areEqual("6 9|5 8", System.String.concat(d.messageB, "|", d.messageD));
         },
         constructingInstanceWithNamedConstructorWorks: function () {
             var d = new Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.ConstructingInstanceWithNamedConstructorTypes.D();
@@ -14381,7 +14379,7 @@
         messageB: null,
         ctor: function (x, y) {
             this.$initialize();
-            this.messageB = System.String.concat(System.String.concat(x, " "), y);
+            this.messageB = x + " " + y;
         }
     });
 
@@ -14401,7 +14399,7 @@
         messageB: null,
         ctor: function (x, y) {
             this.$initialize();
-            this.messageB = System.String.concat(System.String.concat(x, " "), y);
+            this.messageB = x + " " + y;
         }
     });
 
@@ -15487,7 +15485,7 @@
         },
         creatingInstanceReturnsTodaysDate_SPI_1604: function () {
             var fullYear = Bridge.createInstance(Date).getFullYear();
-            Bridge.Test.Assert.true$1(fullYear > 2011, System.String.concat(fullYear, " > 2011"));
+            Bridge.Test.Assert.true$1(fullYear > 2011, fullYear + " > 2011");
         },
         millisecondSinceEpochConstructorWorks: function () {
             var dt = new Date(43200000000.0);
@@ -19726,7 +19724,7 @@
             ]
         },
         format: function (format, formatProvider) {
-            return System.String.concat(System.String.concat(System.String.concat("Formatted: ", format), ", "), (formatProvider == null ? "null formatProvider" : Bridge.Reflection.getTypeFullName(Bridge.getType(formatProvider))));
+            return System.String.concat("Formatted: ", format, ", ", (formatProvider == null ? "null formatProvider" : Bridge.Reflection.getTypeFullName(Bridge.getType(formatProvider))));
         }
     });
 
@@ -22645,7 +22643,7 @@
                 Bridge.Test.Assert.areEqual$1(null, task.exception, "task should not have an exception");
                 Bridge.Test.Assert.areEqual$1(System.Threading.Tasks.TaskStatus.running, continuedTask.status, "continuedTask should be running at point 2");
 
-                return System.String.concat(t.getResult(), "_");
+                return t.getResult() + "_";
             });
 
             Bridge.Test.Assert.false$1(Bridge.referenceEquals(task, continuedTask), "task and continuedTask should not be the same");
@@ -24408,7 +24406,7 @@
         ctor: function (x, y) {
             this.$initialize();
             Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseNamedConstructorWithArgumentsTypes.B.ctor.call(this, ((x + 1) | 0), ((y + 1) | 0));
-            this.messageD = System.String.concat(System.String.concat(x, " "), y);
+            this.messageD = x + " " + y;
         }
     });
 
@@ -24428,7 +24426,7 @@
         ctor: function (x, y) {
             this.$initialize();
             Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseUnnamedConstructorWithArgumentsTypes.B.ctor.call(this, ((x + 1) | 0), ((y + 1) | 0));
-            this.messageD = System.String.concat(System.String.concat(x, " "), y);
+            this.messageD = x + " " + y;
         }
     });
 
@@ -24483,7 +24481,7 @@
         inherits: function () { return [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BX$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(T1,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C)),Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(T2,String))]; },
         statics: {
             ctor: function () {
-                Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(T1,T2).field = System.String.concat(System.String.concat(Bridge.Reflection.getTypeFullName(T1), " "), Bridge.Reflection.getTypeFullName(T2));
+                Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(T1,T2).field = System.String.concat(Bridge.Reflection.getTypeFullName(T1), " ", Bridge.Reflection.getTypeFullName(T2));
             },
             field: null
         }
