@@ -288,7 +288,7 @@ namespace Bridge.Translator
         {
             if (newLineNode.PrevSibling == null || newLineNode.PrevSibling is NewLineNode || newLineNode.PrevSibling.EndLocation.Line != newLineNode.StartLocation.Line)
             {
-                this.Output.Append('\n');
+                this.Output.Append(NEW_LINE);
                 this.IsNewLine = true;
             }
         }
@@ -323,7 +323,7 @@ namespace Bridge.Translator
         {
             lockStatement.Expression.AcceptVisitor(this);
             this.Output.Append(";");
-            this.Output.Append("\n");
+            this.Output.Append(NEW_LINE);
             this.IsNewLine = true;
             lockStatement.EmbeddedStatement.AcceptVisitor(this);
         }

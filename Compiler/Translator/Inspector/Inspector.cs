@@ -299,8 +299,9 @@ namespace Bridge.Translator
                 if (Bridge.Translator.Inspector.IsConflictingNamespace(nsName))
                 {
                     throw new EmitterException(nsAt, "Custom attribute '[" + nsAt.ToString() +
-                        "]' uses reserved namespace name 'Bridge'.\n" +
-                        "This name is reserved for Bridge.NET core.");
+                        "]' uses reserved namespace name 'Bridge'."
+                        + Emitter.NEW_LINE
+                        + "This name is reserved for Bridge.NET core.");
                 }
             }
         }
@@ -314,8 +315,9 @@ namespace Bridge.Translator
             if (Bridge.Translator.Inspector.IsConflictingNamespace(nsDecl.FullName))
             {
                 throw new EmitterException(nsDecl, "Namespace '" + nsDecl.FullName +
-                    "' uses reserved name 'Bridge'.\n" +
-                    "This name is reserved for Bridge.NET core.");
+                    "' uses reserved name 'Bridge'."
+                    + Emitter.NEW_LINE
+                    + "This name is reserved for Bridge.NET core.");
             }
         }
     }

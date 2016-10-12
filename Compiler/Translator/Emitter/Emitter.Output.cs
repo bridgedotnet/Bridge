@@ -13,15 +13,21 @@ namespace Bridge.Translator
 {
     public partial class Emitter
     {
+        public const string INDENT = "    ";
+        public const string NEW_LINE = "\n";
+        public const char NEW_LINE_CHAR = '\n';
+        public const string CRLF = "\r\n";
+        public const string TAB = "\t";
+
         protected virtual void WriteNewLine(StringBuilder sb)
         {
-            sb.Append("\n");
+            sb.Append(NEW_LINE);
         }
 
         protected virtual void WriteNewLine(StringBuilder sb, string text)
         {
             sb.Append(text);
-            sb.Append("\n");
+            sb.Append(NEW_LINE);
         }
 
         protected virtual Dictionary<string, string> TransformOutputs()
@@ -64,7 +70,7 @@ namespace Bridge.Translator
                 if (output.TopOutput.Length > 0)
                 {
                     tmp.Append(output.TopOutput.ToString());
-                    tmp.Append("\n");
+                    tmp.Append(NEW_LINE);
                 }
 
                 if (output.NonModuletOutput.Length > 0)
@@ -125,34 +131,32 @@ namespace Bridge.Translator
                             }
 
                             tmp.Append("function ($asm, globals) {");
-                            tmp.Append("\n");
-                            tmp.Append("    ");
+                            tmp.Append(NEW_LINE);
+                            tmp.Append(INDENT);
                             tmp.Append(this.GetOutputHeader());
-                            tmp.Append("\n");
+                            tmp.Append(NEW_LINE);
                         }
                     }
 
-                    //var afterOutput = (isJs && !disableAsm ? "\nBridge.init();" : "");
-                    var code = output.NonModuletOutput.ToString();// + afterOutput;
+                    var code = output.NonModuletOutput.ToString();
 
                     if (isJs)
                     {
-                        code = "    " + AbstractEmitterBlock.WriteIndentToString(code, 1);
+                        code = INDENT + AbstractEmitterBlock.WriteIndentToString(code, 1);
                     }
 
                     tmp.Append(code);
 
                     if (isJs && !disableAsm)
                     {
-                        //tmp.Append("\n");
                         tmp.Append("});");
-                        tmp.Append("\n");
+                        tmp.Append(NEW_LINE);
                     }
                 }
 
                 if (output.BottomOutput.Length > 0)
                 {
-                    tmp.Append("\n");
+                    tmp.Append(NEW_LINE);
                     tmp.Append(output.BottomOutput.ToString());
                 }
 
@@ -194,7 +198,7 @@ namespace Bridge.Translator
                 return string.Empty;
             }
 
-            return "\"use strict\";\n";
+            return "\"use strict\";" + NEW_LINE;
         }
 
         protected virtual void WrapToModules()
@@ -251,12 +255,12 @@ namespace Bridge.Translator
 
                     WriteNewLine(moduleOutput, ") {");
 
-                    string indent = str.StartsWith("    ") ? "" : "    ";
-                    moduleOutput.Append("    ");
+                    string indent = str.StartsWith(INDENT) ? "" : INDENT;
+                    moduleOutput.Append(INDENT);
                     WriteNewLine(moduleOutput, "var " + JS.Vars.EXPORTS + " = { };");
-                    moduleOutput.Append(indent + str.Replace("\n", "\n" + indent));
+                    moduleOutput.Append(indent + str.Replace(NEW_LINE, NEW_LINE + indent));
 
-                    if (!str.Trim().EndsWith("\n"))
+                    if (!str.Trim().EndsWith(NEW_LINE))
                     {
                         WriteNewLine(moduleOutput);
                     }

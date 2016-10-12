@@ -33,7 +33,7 @@ namespace Bridge.Translator
 
             for (var i = 0; i < this.Emitter.Level; i++)
             {
-                this.Emitter.Output.Append("    ");
+                this.Emitter.Output.Append(Bridge.Translator.Emitter.INDENT);
             }
 
             this.Emitter.IsNewLine = false;
@@ -41,7 +41,7 @@ namespace Bridge.Translator
 
         public virtual void WriteNewLine()
         {
-            this.Emitter.Output.Append('\n');
+            this.Emitter.Output.Append(Bridge.Translator.Emitter.NEW_LINE);
             this.Emitter.IsNewLine = true;
         }
 
@@ -151,7 +151,7 @@ namespace Bridge.Translator
         {
             foreach (var line in lines)
             {
-                this.Write(line.Replace("\r\n", "\n"));
+                this.Write(line.Replace(Bridge.Translator.Emitter.CRLF, Bridge.Translator.Emitter.NEW_LINE));
                 this.WriteNewLine();
             }
         }
@@ -502,14 +502,14 @@ namespace Bridge.Translator
 
             for (var i = 0; i < level; i++)
             {
-                output.Append("    ");
+                output.Append(Bridge.Translator.Emitter.INDENT);
             }
 
             string indent = output.ToString();
 
-            return Regex.Replace(value, "\\n(?!\\s*$)(.+)", (m) =>
+            return Regex.Replace(value, Bridge.Translator.Emitter.NEW_LINE + "(?!\\s*$)(.+)", (m) =>
             {
-                return "\n" + indent + m.Groups[1].Value;
+                return Bridge.Translator.Emitter.NEW_LINE + indent + m.Groups[1].Value;
             }, RegexOptions.Multiline);
         }
 
@@ -521,7 +521,7 @@ namespace Bridge.Translator
             int level = offset / 4;
             for (var i = 0; i < level; i++)
             {
-                output.Append("\t");
+                output.Append(Bridge.Translator.Emitter.TAB);
             }
 
             var needSpaces = offset % 4;
@@ -532,8 +532,8 @@ namespace Bridge.Translator
 
             string indentTabs = output.ToString();
 
-            value = value.Replace("\n" + indentWhiteSpaces, "\n");
-            return value.Replace("\n" + indentTabs, "\n");
+            value = value.Replace(Bridge.Translator.Emitter.NEW_LINE + indentWhiteSpaces, Bridge.Translator.Emitter.NEW_LINE);
+            return value.Replace(Bridge.Translator.Emitter.NEW_LINE + indentTabs, Bridge.Translator.Emitter.NEW_LINE);
         }
 
         public virtual void EnsureComma(bool newLine = true)
@@ -614,7 +614,7 @@ namespace Bridge.Translator
                     return count;
                 }
 
-                if (c == '\n')
+                if (c == Bridge.Translator.Emitter.NEW_LINE_CHAR)
                 {
                     if (!lastNewLineFound)
                     {
@@ -651,7 +651,7 @@ namespace Bridge.Translator
                     return false;
                 }
 
-                if (c == '\n')
+                if (c == Bridge.Translator.Emitter.NEW_LINE_CHAR)
                 {
                     if (lastTwoLines)
                     {
@@ -693,7 +693,7 @@ namespace Bridge.Translator
 
                 while (Char.IsWhiteSpace(charArray[i]) && (i > -1))
                 {
-                    if (charArray[i] == '\n')
+                    if (charArray[i] == Bridge.Translator.Emitter.NEW_LINE_CHAR)
                     {
                         if (firstCR)
                         {

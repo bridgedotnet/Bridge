@@ -81,7 +81,7 @@ namespace Bridge.Translator.TypeScript
                     }
                 }
 
-                var index = sb.ToString().IndexOf("\n");
+                var index = sb.ToString().IndexOf(Bridge.Translator.Emitter.NEW_LINE);
 
                 sb.Insert(index, depSb.ToString());
                 this.Emitter.CurrentDependencies.Clear();

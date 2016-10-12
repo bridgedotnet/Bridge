@@ -418,10 +418,8 @@ namespace Bridge.Translator
 
             if (bottomDefineMethods.Any())
             {
-                //this.Emitter.EmitterOutput.BottomOutput.Append('\n');
                 foreach (var method in bottomDefineMethods)
                 {
-                    //this.Emitter.EmitterOutput.BottomOutput.Append('\n');
                     this.Emitter.EmitterOutput.BottomOutput.Append(method);
                 }
             }

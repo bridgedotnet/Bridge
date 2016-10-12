@@ -256,7 +256,7 @@ namespace Bridge.Translator
                 sb.Append(line);
             }
 
-            sb.Append("\n");
+            sb.Append(Emitter.NEW_LINE);
         }
 
         public virtual Dictionary<string, string> SaveTo(string path, string defaultFileName)
