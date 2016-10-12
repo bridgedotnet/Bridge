@@ -179,6 +179,11 @@ namespace Bridge.Contract
             get;
         }
 
+        int InitialLevel
+        {
+            get;
+        }
+
         int ResetLevel(int? level = null);
 
         System.Collections.Generic.Dictionary<string, ICSharpCode.NRefactory.CSharp.AstType> Locals
@@ -451,5 +456,7 @@ namespace Bridge.Contract
         {
             get; set;
         }
+
+        void WriteIndented(string s, int? position = null);
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Bridge.Translator.TypeScript
 {
-    public class IndexerBlock : AbstractMethodBlock
+    public class IndexerBlock : TypeScriptBlock
     {
         public IndexerBlock(IEmitter emitter, IndexerDeclaration indexerDeclaration)
             : base(emitter, indexerDeclaration)
@@ -57,7 +57,7 @@ namespace Bridge.Translator.TypeScript
             }
         }
 
-        protected override void EmitMethodParameters(IEnumerable<ParameterDeclaration> declarations, IEnumerable<TypeParameterDeclaration> typeParamsdeclarations, AstNode context, bool skipClose)
+        protected virtual void EmitMethodParameters(IEnumerable<ParameterDeclaration> declarations, IEnumerable<TypeParameterDeclaration> typeParamsdeclarations, AstNode context, bool skipClose)
         {
             this.WriteOpenParentheses();
             bool needComma = false;

@@ -1,10 +1,15 @@
-﻿Bridge.assembly({ name: "TestProject", version: "0.0.0.0", compiler: "15.2.0" }, function ($asm, globals) {
-    "use strict";
+﻿Bridge.assembly({
+        name: "TestProject",
+        version: "0.0.0.0",
+        compiler: "15.2.0"
+    },
+    function ($asm, globals) {
+        "use strict";
 
-    define("MyModule", ["bridge"], function (_) {
-        var exports = { };
+define("MyModule", ["bridge"], function (_) {
+    var exports = { };
         /** @namespace TestProject1 */
-    
+
         /**
          * @class TestProject1.TestClassA
          */
@@ -49,7 +54,8 @@
                 return "";
             }
         });
-        return exports;
-    });
-
+    return exports;
 });
+
+    }
+);

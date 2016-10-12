@@ -671,7 +671,8 @@ namespace Bridge.Contract
                     }
 
                     emitter.JsDoc.Callbacks.Add(delegateName);
-                    emitter.Output.Insert(0, comment.ToString() + newLine + newLine);
+
+                    emitter.WriteIndented(comment.ToString() + newLine + newLine, 0);
                 }
 
                 return delegateName;

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Bridge.Translator.TypeScript
 {
-    public class MethodBlock : AbstractEmitterBlock
+    public class MethodBlock : TypeScriptBlock
     {
         public MethodBlock(IEmitter emitter, MethodDeclaration methodDeclaration)
             : base(emitter, methodDeclaration)

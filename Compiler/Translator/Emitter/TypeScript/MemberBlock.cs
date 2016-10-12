@@ -4,7 +4,7 @@ using ICSharpCode.NRefactory.CSharp;
 
 namespace Bridge.Translator.TypeScript
 {
-    public class MemberBlock : AbstractEmitterBlock
+    public class MemberBlock : TypeScriptBlock
     {
         public MemberBlock(IEmitter emitter, ITypeInfo typeInfo, bool staticBlock)
             : base(emitter, typeInfo.TypeDeclaration)

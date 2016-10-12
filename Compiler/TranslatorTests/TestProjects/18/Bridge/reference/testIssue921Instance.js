@@ -54,8 +54,8 @@
             var localValue = 123;
 
             return System.Linq.Enumerable.from([1, 2, 3]).select(function (value) {
-                return addThousand(((value + 1) | 0));
-            }).select(function (value) {
+                    return addThousand(((value + 1) | 0));
+                }).select(function (value) {
                 return addThousand(((value + 1) | 0));
             }).select(function (value, index) {
                 return addThousand(((value + index) | 0));
@@ -74,8 +74,8 @@
             var localValue = 7;
 
             return System.Linq.Enumerable.from([1, 2, 3]).select(function (value) {
-                return toString(((value + 1) | 0));
-            }).select(function (value) {
+                    return toString(((value + 1) | 0));
+                }).select(function (value) {
                 return toString(value.length);
             }).select(function (value, index) {
                 return toString(((value.length + index) | 0));

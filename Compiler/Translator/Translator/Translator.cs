@@ -154,7 +154,8 @@ namespace Bridge.Translator
             emitter.SourceFiles = this.SourceFiles;
             emitter.Log = this.Log;
             emitter.Plugins = this.Plugins;
-            emitter.InitialLevel = this.AssemblyInfo.Assembly.DisableInitAssembly ? 0 : 1;
+            // Bridge.assembly() requires indent level 2
+            emitter.InitialLevel = !this.AssemblyInfo.Assembly.DisableInitAssembly ? 2 : 1;
 
             this.SortReferences();
 

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Bridge.Translator.TypeScript
 {
-    public class MethodsBlock : AbstractEmitterBlock
+    public class MethodsBlock : TypeScriptBlock
     {
         public MethodsBlock(IEmitter emitter, ITypeInfo typeInfo, bool staticBlock)
             : base(emitter, typeInfo.TypeDeclaration)

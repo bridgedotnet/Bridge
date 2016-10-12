@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Bridge.Translator.TypeScript
 {
-    public partial class ConstructorBlock : AbstractEmitterBlock
+    public partial class ConstructorBlock : TypeScriptBlock
     {
         public ConstructorBlock(IEmitter emitter, ITypeInfo typeInfo)
             : base(emitter, typeInfo.TypeDeclaration)

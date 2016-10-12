@@ -12,14 +12,14 @@
         useNestedFunOneInt: function () {
             var n = new TestIssue921Nested.Issue921NestedOuter.Issue921Nested(300);
             System.Linq.Enumerable.from([1, 2, 3]).select(function (x) {
-                return n.computeNumber(x);
-            });
+                    return n.computeNumber(x);
+                });
         },
         useNestedFuncTwoInts: function () {
             var n = new TestIssue921Nested.Issue921NestedOuter.Issue921Nested(400);
             System.Linq.Enumerable.from([1, 2, 3]).select(function (x, i) {
-                return n.computeTwoNumbers(x, i);
-            });
+                    return n.computeTwoNumbers(x, i);
+                });
         },
         useNestedActionTwoInts: function () {
             var $t;
@@ -119,8 +119,8 @@
             var localValue = 123;
 
             return System.Linq.Enumerable.from([1, 2, 3]).select(function (value) {
-                return addThousand(((value + 1) | 0));
-            }).select(function (value) {
+                    return addThousand(((value + 1) | 0));
+                }).select(function (value) {
                 return addThousand(((value + 1) | 0));
             }).select(function (value, index) {
                 return addThousand(((value + index) | 0));
@@ -139,8 +139,8 @@
             var localValue = 7;
 
             return System.Linq.Enumerable.from([1, 2, 3]).select(function (value) {
-                return toString(((value + 1) | 0));
-            }).select(function (value) {
+                    return toString(((value + 1) | 0));
+                }).select(function (value) {
                 return toString(value.length);
             }).select(function (value, index) {
                 return toString(((value.length + index) | 0));

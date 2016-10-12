@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Bridge.Translator.TypeScript
 {
-    public class OperatorBlock : AbstractEmitterBlock
+    public class OperatorBlock : TypeScriptBlock
     {
         public OperatorBlock(IEmitter emitter, OperatorDeclaration operatorDeclaration)
             : base(emitter, operatorDeclaration)

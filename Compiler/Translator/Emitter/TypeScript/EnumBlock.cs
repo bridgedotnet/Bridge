@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Bridge.Translator.TypeScript
 {
-    public class EnumBlock : AbstractEmitterBlock
+    public class EnumBlock : TypeScriptBlock
     {
         public EnumBlock(IEmitter emitter, ITypeInfo typeInfo)
             : base(emitter, typeInfo.TypeDeclaration)

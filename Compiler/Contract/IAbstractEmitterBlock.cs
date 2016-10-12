@@ -30,6 +30,11 @@ namespace Bridge.Contract
             set;
         }
 
+        int Level
+        {
+            get;
+        }
+
         void EndBlock();
 
         void EnsureComma(bool newLine = true);

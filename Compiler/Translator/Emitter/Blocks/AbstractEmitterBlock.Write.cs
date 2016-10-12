@@ -11,6 +11,14 @@ namespace Bridge.Translator
 {
     public partial class AbstractEmitterBlock
     {
+        public virtual int Level
+        {
+            get
+            {
+                return this.Emitter.Level;
+            }
+        }
+
         public virtual void Indent()
         {
             this.Emitter.ResetLevel(this.Emitter.Level + 1);
@@ -28,7 +36,7 @@ namespace Bridge.Translator
                 return;
             }
 
-            for (var i = 0; i < this.Emitter.Level; i++)
+            for (var i = 0; i < this.Level; i++)
             {
                 this.Emitter.Output.Append(Bridge.Translator.Emitter.INDENT);
             }
@@ -490,7 +498,7 @@ namespace Bridge.Translator
 
         public virtual string WriteIndentToString(string value)
         {
-            return WriteIndentToString(value, this.Emitter.Level);
+            return WriteIndentToString(value, this.Level);
         }
 
         public static string WriteIndentToString(string value, int level)

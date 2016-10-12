@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Bridge.Translator.TypeScript
 {
-    public class EmitBlock : AbstractEmitterBlock
+    public class EmitBlock : TypeScriptBlock
     {
         // This ensures a constant line separator throughout the application
         private const char newLine = Bridge.Contract.XmlToJSConstants.DEFAULT_LINE_SEPARATOR;

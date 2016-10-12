@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Bridge.Translator.TypeScript
 {
-    public class PropertyBlock : AbstractEmitterBlock
+    public class PropertyBlock : TypeScriptBlock
     {
         public PropertyBlock(IEmitter emitter, PropertyDeclaration propertyDeclaration)
             : base(emitter, propertyDeclaration)

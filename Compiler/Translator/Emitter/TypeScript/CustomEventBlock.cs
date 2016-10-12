@@ -3,7 +3,7 @@ using ICSharpCode.NRefactory.CSharp;
 
 namespace Bridge.Translator.TypeScript
 {
-    public class CustomEventBlock : AbstractEmitterBlock
+    public class CustomEventBlock : TypeScriptBlock
     {
         public CustomEventBlock(IEmitter emitter, CustomEventDeclaration customEventDeclaration)
             : base(emitter, customEventDeclaration)

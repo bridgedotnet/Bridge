@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Bridge.Translator.TypeScript
 {
-    public class ClassBlock : AbstractEmitterBlock
+    public class ClassBlock : TypeScriptBlock
     {
         public ClassBlock(IEmitter emitter, ITypeInfo typeInfo)
             : base(emitter, typeInfo.TypeDeclaration)
