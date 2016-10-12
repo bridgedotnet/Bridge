@@ -3332,11 +3332,14 @@
     	x.Foo.baz.Test = function() {};
     	return x;
         },
+        getCompilerVersion: function () {
+            return "15.2.0";
+        },
         getMscorlibName: function () {
             return "mscorlib";
         },
         getMscorlibWithVersion: function () {
-            return System.String.concat(System.String.concat(this.getMscorlibName(), ", Version="), "15.2.0");
+            return System.String.concat(System.String.concat(this.getMscorlibName(), ", Version="), this.getCompilerVersion());
         },
         getAssemblyName: function () {
             return "Bridge.ClientTest";
@@ -3354,6 +3357,10 @@
         fullNameWorks: function () {
             Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(System.Int32).getFullName(), this.getMscorlibWithVersion());
             Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch1.Reflection.AssemblyTests).getFullName(), this.getAssemblyWithVersion());
+        },
+        imageRuntimeVersionWorks: function () {
+            Bridge.Test.Assert.areEqual$1(Bridge.Reflection.getTypeAssembly(System.Int32).compiler.toString(), this.getCompilerVersion(), this.getCompilerVersion());
+            Bridge.Test.Assert.areEqual$1(Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch1.Reflection.AssemblyTests).compiler.toString(), this.getCompilerVersion(), this.getCompilerVersion());
         },
         toStringWorks: function () {
             Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(System.Int32).toString(), this.getMscorlibWithVersion());

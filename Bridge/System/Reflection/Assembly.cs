@@ -16,6 +16,16 @@ namespace System.Reflection
         }
 
         /// <summary>
+        /// Gets a string representing the version of the common language runtime (Bridge Compiler) saved in the file containing the manifest.
+        /// </summary>
+        [FieldProperty]
+        public extern virtual string ImageRuntimeVersion
+        {
+            [Template("compiler.toString()")]
+            get;
+        }
+
+        /// <summary>
         /// Creates the name of a type qualified by the display name of its assembly.
         /// </summary>
         /// <param name="assemblyName">The display name of an assembly.</param>

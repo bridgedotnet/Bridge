@@ -113,6 +113,14 @@ namespace Bridge.ClientTest.Batch1.Reflection
         private class G<T1, T2>
         { }
 
+        private string CompilerVersion
+        {
+            get
+            {
+                return AssemblyVersionMarker.GetVersion(AssemblyVersionMarker.VersionType.Compiler);
+            }
+        }
+
         private string MscorlibName
         {
             get
@@ -125,7 +133,7 @@ namespace Bridge.ClientTest.Batch1.Reflection
         {
             get
             {
-                return MscorlibName + ", Version=" + AssemblyVersionMarker.GetVersion(AssemblyVersionMarker.VersionType.Compiler);
+                return MscorlibName + ", Version=" + CompilerVersion;
             }
         }
 
@@ -163,6 +171,13 @@ namespace Bridge.ClientTest.Batch1.Reflection
         {
             Assert.AreEqual(typeof(int).Assembly.FullName, MscorlibWithVersion);
             Assert.AreEqual(typeof(AssemblyTests).Assembly.FullName, AssemblyWithVersion);
+        }
+
+        [Test]
+        public void ImageRuntimeVersionWorks()
+        {
+            Assert.AreEqual(typeof(int).Assembly.ImageRuntimeVersion, CompilerVersion, CompilerVersion);
+            Assert.AreEqual(typeof(AssemblyTests).Assembly.ImageRuntimeVersion, CompilerVersion, CompilerVersion);
         }
 
         [Test]

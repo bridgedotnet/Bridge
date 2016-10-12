@@ -1135,6 +1135,7 @@
             QUnit.test("Reflection - Assembly GetExecutingAssemblyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Batch1_Reflection_AssemblyTests.getExecutingAssemblyWorks);
             QUnit.test("Reflection - Assembly GetAssemblyForTypeWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Batch1_Reflection_AssemblyTests.getAssemblyForTypeWorks);
             QUnit.test("Reflection - Assembly FullNameWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Batch1_Reflection_AssemblyTests.fullNameWorks);
+            QUnit.test("Reflection - Assembly ImageRuntimeVersionWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Batch1_Reflection_AssemblyTests.imageRuntimeVersionWorks);
             QUnit.test("Reflection - Assembly ToStringWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Batch1_Reflection_AssemblyTests.toStringWorks);
             QUnit.test("Reflection - Assembly GetTypesWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Batch1_Reflection_AssemblyTests.getTypesWorks);
             QUnit.test("Reflection - Assembly GetTypesWithImportedModuleWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Batch1_Reflection_AssemblyTests.getTypesWithImportedModuleWorks);
@@ -3172,6 +3173,10 @@
             fullNameWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AssemblyTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Batch1_Reflection_AssemblyTests);
                 t.getFixture().fullNameWorks();
+            },
+            imageRuntimeVersionWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AssemblyTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Batch1_Reflection_AssemblyTests);
+                t.getFixture().imageRuntimeVersionWorks();
             },
             toStringWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AssemblyTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Batch1_Reflection_AssemblyTests);
