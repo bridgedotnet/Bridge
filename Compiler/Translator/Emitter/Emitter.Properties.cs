@@ -90,6 +90,37 @@ namespace Bridge.Translator
             set;
         }
 
+        public int initialLevel;
+        public int InitialLevel
+        {
+            get
+            {
+                return initialLevel;
+            }
+            set
+            {
+                this.initialLevel = value;
+                this.ResetLevel();
+            }
+        }
+
+        public int ResetLevel(int? level = null)
+        {
+            if (!level.HasValue)
+            {
+                level = InitialLevel;
+            }
+
+            if (level <= InitialLevel)
+            {
+                level = InitialLevel;
+            }
+
+            this.Level = level.Value;
+
+            return this.Level;
+        }
+
         public bool IsNewLine
         {
             get;

@@ -13,15 +13,12 @@ namespace Bridge.Translator
     {
         public virtual void Indent()
         {
-            ++this.Emitter.Level;
+            this.Emitter.ResetLevel(this.Emitter.Level + 1);
         }
 
         public virtual void Outdent()
         {
-            if (this.Emitter.Level > 0)
-            {
-                this.Emitter.Level--;
-            }
+            this.Emitter.ResetLevel(this.Emitter.Level - 1);
         }
 
         public virtual void WriteIndent()
@@ -574,7 +571,7 @@ namespace Bridge.Translator
             {
                 this.Emitter.Output = writer.Output;
                 this.Emitter.IsNewLine = writer.IsNewLine;
-                this.Emitter.Level = writer.Level;
+                this.Emitter.ResetLevel(writer.Level);
                 this.Emitter.Comma = writer.Comma;
 
                 return true;
@@ -587,7 +584,7 @@ namespace Bridge.Translator
         {
             this.Emitter.Output = new StringBuilder();
             this.Emitter.IsNewLine = false;
-            this.Emitter.Level = 0;
+            this.Emitter.ResetLevel();
             this.Emitter.Comma = false;
 
             return this.Emitter.Output;

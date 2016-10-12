@@ -177,8 +177,9 @@ namespace Bridge.Contract
         int Level
         {
             get;
-            set;
         }
+
+        int ResetLevel(int? level = null);
 
         System.Collections.Generic.Dictionary<string, ICSharpCode.NRefactory.CSharp.AstType> Locals
         {

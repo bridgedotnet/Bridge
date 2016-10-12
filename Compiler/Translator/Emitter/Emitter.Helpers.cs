@@ -748,7 +748,7 @@ namespace Bridge.Translator
             this.ThisRefCounter = 0;
             this.Writers = new Stack<IWriter>();
             this.IsAssignment = false;
-            this.Level = 0;
+            this.ResetLevel();
             this.IsNewLine = true;
             this.EnableSemicolon = true;
             this.Comma = false;

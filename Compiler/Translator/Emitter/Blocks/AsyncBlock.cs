@@ -751,7 +751,7 @@ namespace Bridge.Translator
             this.Output = new StringBuilder();
             this.Emitter.Output = this.Output;
             this.Emitter.IsNewLine = false;
-            this.Emitter.Level = 0;
+            this.Emitter.ResetLevel();
             this.Emitter.Comma = false;
 
             this.FromTaskNumber = fromTaskNumber;

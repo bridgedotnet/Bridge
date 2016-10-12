@@ -560,7 +560,8 @@ namespace Bridge.Translator
                     sb.Append(Bridge.Translator.Emitter.NEW_LINE);
                 }
 
-                ++this.Emitter.Level;
+                Indent();
+
                 for (var j = 0; j < this.Emitter.Level; j++)
                 {
                     sb.Append(Bridge.Translator.Emitter.INDENT);
@@ -577,7 +578,8 @@ namespace Bridge.Translator
             var newLine = false;
             foreach (var endPart in endParts)
             {
-                --this.Emitter.Level;
+                Outdent();
+
                 if (newLine)
                 {
                     sb.Append(Bridge.Translator.Emitter.NEW_LINE);
