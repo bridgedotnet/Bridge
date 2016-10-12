@@ -46,11 +46,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="External\AjaxOptions.cs" />
+    <Compile Include="Internal\N1193.cs" />
     <Compile Include="Internal\N1915.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="..\..\.build\common\CommonAssemblyInfo.cs">
-      <Link>Properties\CommonAssemblyInfo.cs</Link>
-    </Compile>
     <None Include="Bridge\bridge.json" />
   </ItemGroup>
   <ItemGroup>

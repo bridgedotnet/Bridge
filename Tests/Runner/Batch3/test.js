@@ -84,6 +84,7 @@
             QUnit.test("#1184 - TestGetTypeForNumberTypes", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1184.testGetTypeForNumberTypes);
             QUnit.test("#1186 - TestLambdasInField", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1186.testLambdasInField);
             QUnit.test("#1189 - TestTaskNumber", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1189.testTaskNumber);
+            QUnit.test("#1193 - TestAssemblyVersionMarker", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1193.testAssemblyVersionMarker);
             QUnit.test("#1197 - TestGetHashCodeOnDictionary", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1197.testGetHashCodeOnDictionary);
             QUnit.test("#1199 - TestEventNameCase", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1199.testEventNameCase);
             QUnit.test("#1202 - TestRefOutStaticIntField", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1202.testRefOutStaticIntField);
@@ -1167,6 +1168,16 @@
             testTaskNumber: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1189).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1189);
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1189.testTaskNumber();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1193", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1193)],
+        statics: {
+            testAssemblyVersionMarker: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1193).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1193);
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1193.testAssemblyVersionMarker();
             }
         }
     });

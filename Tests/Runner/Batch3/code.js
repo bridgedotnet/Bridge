@@ -2424,6 +2424,14 @@ Bridge.assembly({ name: "Bridge.ClientTest.Batch3", version: "15.2.0", compiler:
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1193", {
+        statics: {
+            testAssemblyVersionMarker: function () {
+                Bridge.Test.Assert.areEqual("1.2.3.4", Bridge.ClientTestHelper.Internal.N1193.getClientTestHelperAssemblyVersion());
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1197", {
         statics: {
             testGetHashCodeOnDictionary: function () {
