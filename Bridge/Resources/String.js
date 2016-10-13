@@ -462,8 +462,14 @@
             return System.String.trimStart(System.String.trimEnd(s, chars), chars);
         },
 
-        concat: function(s1, s2) {
-            return (s1 == null ? "" : s1) + (s2 == null ? "" : s2);
+        concat: function () {
+            var s = "";
+            for (var i = 0; i < arguments.length; i++) {
+                var tmp = arguments[i];
+                s += tmp == null ? "" : tmp;
+            }
+
+            return s;
         }
     };
 

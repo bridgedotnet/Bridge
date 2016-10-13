@@ -82,7 +82,7 @@
             }).select(Bridge.fn.bind(this, function (value) {
                 return System.String.concat(toString(value.length), this._offset);
             })).select(Bridge.fn.bind(this, function (value, index) {
-                return System.String.concat(System.String.concat(toString(value.length), index), this._offset);
+                return System.String.concat(toString(value.length), index, this._offset);
             })).select(function (value) {
                 return toString(((value.length + toString(localValue).length) | 0));
             });
@@ -116,10 +116,10 @@
             return System.String.concat(value, this.getName());
         },
         f8: function (value, index) {
-            return System.String.concat(System.String.concat(value, index), this.getName());
+            return System.String.concat(value, index, this.getName());
         },
         f9: function (value, index) {
-            return System.String.concat(System.String.concat(value, index), TestIssue921Instance.Issue921Instance.getNameStatic());
+            return System.String.concat(value, index, TestIssue921Instance.Issue921Instance.getNameStatic());
         },
         f10: function (value) {
             return value.add(System.Decimal(1));

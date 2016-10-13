@@ -266,7 +266,7 @@
 
             var div = document.createElement("div");
             div.id = Bridge.Console.BODY_WRAPPER_ID;
-            div.setAttribute("style", System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat("height: calc(100vh - ", this.consoleHeight), " - "), this.consoleHeaderHeight), ");"), "margin-top: calc(-1 * "), "("), (System.String.concat(System.String.concat(bodyMarginTop, " + "), bodyPaddingTop))), "));"), "margin-right: calc(-1 * "), "("), (System.String.concat(System.String.concat(bodyMarginRight, " + "), bodyPaddingRight))), "));"), "margin-left: calc(-1 * "), "("), (System.String.concat(System.String.concat(bodyMarginLeft, " + "), bodyPaddingLeft))), "));"), "padding-top: calc("), (System.String.concat(System.String.concat(bodyMarginTop, " + "), bodyPaddingTop))), ");"), "padding-right: calc("), (System.String.concat(System.String.concat(bodyMarginRight, " + "), bodyPaddingRight))), ");"), "padding-bottom: calc("), (System.String.concat(System.String.concat(bodyMarginBottom, " + "), bodyPaddingBottom))), ");"), "padding-left: calc("), (System.String.concat(System.String.concat(bodyMarginLeft, " + "), bodyPaddingLeft))), ");"), "overflow-x: auto;"), "box-sizing: border-box !important;"));
+            div.setAttribute("style", System.String.concat("height: calc(100vh - ", this.consoleHeight, " - ", this.consoleHeaderHeight, ");", "margin-top: calc(-1 * ", "(", (System.String.concat(bodyMarginTop, " + ", bodyPaddingTop)), "));", "margin-right: calc(-1 * ", "(", (System.String.concat(bodyMarginRight, " + ", bodyPaddingRight)), "));", "margin-left: calc(-1 * ", "(", (System.String.concat(bodyMarginLeft, " + ", bodyPaddingLeft)), "));", "padding-top: calc(", (System.String.concat(bodyMarginTop, " + ", bodyPaddingTop)), ");", "padding-right: calc(", (System.String.concat(bodyMarginRight, " + ", bodyPaddingRight)), ");", "padding-bottom: calc(", (System.String.concat(bodyMarginBottom, " + ", bodyPaddingBottom)), ");", "padding-left: calc(", (System.String.concat(bodyMarginLeft, " + ", bodyPaddingLeft)), ");", "overflow-x: auto;", "box-sizing: border-box !important;"));
 
             while (document.body.firstChild != null) {
                 div.appendChild(document.body.firstChild);
@@ -340,7 +340,7 @@
             $t = Bridge.getEnumerator(obj);
             while ($t.moveNext()) {
                 var item = $t.getCurrent();
-                str = System.String.concat(str, (System.String.concat(System.String.concat(System.String.concat(item.key.toLowerCase(), ":"), item.value), ";")));
+                str = System.String.concat(str, (System.String.concat(item.key.toLowerCase(), ":", item.value, ";")));
             }
 
             return str;
