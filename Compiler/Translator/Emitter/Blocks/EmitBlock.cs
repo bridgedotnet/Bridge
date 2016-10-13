@@ -241,7 +241,8 @@ namespace Bridge.Translator
                 this.Emitter.Translator.EmitNode = type.TypeDeclaration;
                 var typeDef = type.Type.GetDefinition();
 
-                if (this.Emitter.Validator.IsExternalInterface(typeDef))
+                bool isNative;
+                if (this.Emitter.Validator.IsExternalInterface(typeDef, out isNative))
                 {
                     this.Emitter.Translator.Plugins.AfterTypeEmit(this.Emitter, type);
                     continue;

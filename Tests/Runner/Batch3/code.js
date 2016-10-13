@@ -438,25 +438,24 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             testI11: function () {
                 var i11 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.getI11();
 
-                Bridge.Test.Assert.areEqual(1, i11[Bridge.geti(i11, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I11$get", "get")](""));
-                i11[Bridge.geti(i11, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I11$set", "set")](i11[1], 1);
+                Bridge.Test.Assert.areEqual(1, i11.get(""));
+                i11.set(i11[1], 1);
                 i11[1] = "";
-                Bridge.Test.Assert.areEqual(2, i11[Bridge.geti(i11, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I11$getProp1", "getProp1")]());
-                Bridge.Test.Assert.areEqual("test", i11[Bridge.geti(i11, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I11$getProp2", "getProp2")]());
-                i11[Bridge.geti(i11, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I11$setProp2", "setProp2")]("");
-                i11[Bridge.geti(i11, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I11$foo", "foo")]();
-                i11[Bridge.geti(i11, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I11$addEvent1", "addEvent1")]($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.f5);
+                Bridge.Test.Assert.areEqual(2, i11.getProp1());
+                Bridge.Test.Assert.areEqual("test", i11.getProp2());
+                i11.setProp2("");
+                i11.foo();
+                i11.addEvent1($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.f5);
             },
             testI11_1: function () {
-                var $t, $t1, $t2, $t3, $t4, $t5, $t6;
-                Bridge.Test.Assert.areEqual(1, ($t = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.getI11(), $t[Bridge.geti($t, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I11$get", "get")])(""));
-                ($t1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.getI11(), $t1[Bridge.geti($t1, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I11$set", "set")])(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.getI11()[1], 1);
+                Bridge.Test.Assert.areEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.getI11().get(""));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.getI11().set(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.getI11()[1], 1);
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.getI11()[1] = "";
-                Bridge.Test.Assert.areEqual(2, ($t2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.getI11())[Bridge.geti($t2, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I11$getProp1", "getProp1")]());
-                Bridge.Test.Assert.areEqual("test", ($t3 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.getI11())[Bridge.geti($t3, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I11$getProp2", "getProp2")]());
-                ($t4 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.getI11())[Bridge.geti($t4, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I11$setProp2", "setProp2")]("");
-                ($t5 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.getI11())[Bridge.geti($t5, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I11$foo", "foo")]();
-                ($t6 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.getI11())[Bridge.geti($t6, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I11$addEvent1", "addEvent1")]($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.f5);
+                Bridge.Test.Assert.areEqual(2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.getI11().getProp1());
+                Bridge.Test.Assert.areEqual("test", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.getI11().getProp2());
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.getI11().setProp2("");
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.getI11().foo();
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.getI11().addEvent1($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.f5);
             }
         }
     });
@@ -952,7 +951,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 foo.bar = "1";
                 Bridge.Test.Assert.areEqual("1", foo.bar);
                 Bridge.Test.Assert.areEqual("1", foo.bar);
-                Bridge.Test.Assert.areEqual("1", car[Bridge.geti(car, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1053$Car$bar", "bar")]);
+                Bridge.Test.Assert.areEqual("1", car.bar);
                 Bridge.Test.Assert.areEqual("1", car.bar);
             }
         }
@@ -9271,8 +9270,8 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 };
 
             var initialiser = window.Bridge1848_ITest;
-            Bridge.Test.Assert.areEqual(123, initialiser[Bridge.geti(initialiser, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1848$ITest$getNewId", "getNewId")]());
-            Bridge.Test.Assert.areEqual("editor", initialiser[Bridge.geti(initialiser, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1848$ITest$name", "name")]);
+            Bridge.Test.Assert.areEqual(123, initialiser.getNewId());
+            Bridge.Test.Assert.areEqual("editor", initialiser.name);
 
             var initialiser2 = window.Bridge1848_ITest2;
             Bridge.Test.Assert.areEqual(123, initialiser2.Bridge1848_ITest$getNewId());
@@ -9432,8 +9431,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             return this.getReader()["Bridge$ClientTest$Batch3$BridgeIssues$Bridge1854$IRead$1$" + Bridge.getTypeAlias(T) + "$read"]();
         },
         read1: function () {
-            var $t;
-            return ($t = this.getReader1())[Bridge.geti($t, "Object$" + Bridge.getTypeAlias(T) + "$read", "read")]();
+            return this.getReader1()["Object$" + Bridge.getTypeAlias(T) + "$read"]();
         }
     }; });
 
