@@ -180,31 +180,27 @@ namespace Bridge.Translator
         {
             string asmName = this.AssemblyInfo.Assembly.FullName ?? this.Translator.AssemblyName;
 
+            var assemblyProperties = new List<KeyValuePair<string, object>>();
+
             if (!string.IsNullOrEmpty(asmName))
             {
-                var assemblyProperties = new List<KeyValuePair<string, object>>();
-
                 assemblyProperties.Add(new KeyValuePair<string, object>(JS.Types.System.Reflection.Assembly.Config.NAME, asmName));
-
-                var assemblyVersion = this.Translator.GetAssemblyProductVersion();
-                if (!string.IsNullOrEmpty(assemblyVersion))
-                {
-                    assemblyProperties.Add(new KeyValuePair<string, object>(JS.Types.System.Reflection.Assembly.Config.VERSION, assemblyVersion));
-                }
-
-                var compilerVersion = this.Translator.GetCompilerProductVersion();
-                if (!string.IsNullOrEmpty(compilerVersion))
-                {
-                    assemblyProperties.Add(new KeyValuePair<string, object>(JS.Types.System.Reflection.Assembly.Config.COMPILER, compilerVersion));
-                }
-
-                isMultiline = this.WritePropertiesObject(tmp, level, assemblyProperties, isMultiline);
             }
-            else
+
+            var assemblyVersion = this.Translator.GetAssemblyProductVersion();
+            if (!string.IsNullOrEmpty(assemblyVersion))
             {
-                isMultiline = false;
-                tmp.Append("null");
+                assemblyProperties.Add(new KeyValuePair<string, object>(JS.Types.System.Reflection.Assembly.Config.VERSION, assemblyVersion));
             }
+
+            var compilerVersion = this.Translator.GetCompilerProductVersion();
+            if (!string.IsNullOrEmpty(compilerVersion))
+            {
+                assemblyProperties.Add(new KeyValuePair<string, object>(JS.Types.System.Reflection.Assembly.Config.COMPILER, compilerVersion));
+            }
+
+            isMultiline = this.WritePropertiesObject(tmp, level, assemblyProperties, isMultiline);
+
 
             return isMultiline.Value;
         }
