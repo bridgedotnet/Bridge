@@ -6846,6 +6846,8 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 done = Bridge.Test.Assert.async();
 
                                 foo = null; /// Async method lacks 'await' operators and will run synchronously
+
+
                                 bar = function () {
                                     var $step = 0,
                                         $jumpFromFinally, 
@@ -6875,7 +6877,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                                     $asyncBody();
                                     return $tcs.task;
-                                }; /// Async method lacks 'await' operators and will run synchronously
+                                };
                                 $task1 = bar();
                                 $step = 1;
                                 $task1.continueWith($asyncBody, true);
@@ -10450,6 +10452,34 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         getEnumerator: function () {
             this.isGeneric = false;
             return this.dic.getEnumerator();
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1951", {
+        statics: {
+            counter: 0
+        },
+        testBindFunctionNoMemoryLeaks: function () {
+            new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1951.LeakedObject();
+            Bridge.Test.Assert.areEqual$1(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1951.counter, "1");
+
+            new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1951.LeakedObject();
+            Bridge.Test.Assert.areEqual$1(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1951.counter, "2");
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1951.LeakedObject", {
+        ctor: function () {
+            this.$initialize();
+            // This is to generate Bridge.fn.bind(this, this.method);
+            var a = Bridge.fn.bind(this, this.method);
+
+            var m = this;
+            var count = m.$$bind.length;
+            //Bridge.fn.bind save "this" to the $$bind property of the function.
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1951.counter = count;
+        },
+        method: function () {
         }
     });
 
