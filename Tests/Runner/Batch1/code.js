@@ -320,7 +320,7 @@
                 var $t;
                 var list = ["x", "y"];
                 var result = "";
-                $t = Bridge.getEnumerator(list);
+                $t = Bridge.getEnumerator(list, "System$Collections$Generic$IEnumerable$1$String$getEnumerator");
                 while ($t.moveNext()) {
                     var s = $t.getCurrent();
                     result = System.String.concat(result, s);
@@ -554,7 +554,7 @@
                     System.Array.copy(ia1, 0, dst, 1, ia1.length);
                     Bridge.Test.Assert.areEqual(dst, [0, 1, 2, 3, 4, 0]);
 
-                    var e = Bridge.getEnumerator(ils, "$1", String);
+                    var e = Bridge.getEnumerator(ils, null, String);
                     b = e.System$Collections$IEnumerator$moveNext();
                     Bridge.Test.Assert.true(b);
                     s = e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$String$getCurrent$1", "getCurrent$1")]();
@@ -4977,7 +4977,7 @@
                 Bridge.Test.Assert.false(System.Array.contains(keys, "a", String));
 
                 var count = 0;
-                $t = Bridge.getEnumerator(d.getKeys());
+                $t = Bridge.getEnumerator(d.getKeys(), "System$Collections$Generic$IEnumerable$1$String$getEnumerator");
                 while ($t.moveNext()) {
                     var key = $t.getCurrent();
                     if (!Bridge.referenceEquals(key, "1") && !Bridge.referenceEquals(key, "2")) {
@@ -4999,7 +4999,7 @@
                 Bridge.Test.Assert.false(System.Array.contains(values, "1", String));
 
                 var count = 0;
-                $t = Bridge.getEnumerator(d.getValues());
+                $t = Bridge.getEnumerator(d.getValues(), "System$Collections$Generic$IEnumerable$1$String$getEnumerator");
                 while ($t.moveNext()) {
                     var value = $t.getCurrent();
                     if (!Bridge.referenceEquals(value, "a") && !Bridge.referenceEquals(value, "b")) {
@@ -5452,7 +5452,7 @@
                 Bridge.Test.Assert.true$1(Bridge.hasValue(keys), "ICollection<int>");
 
                 var i = 0;
-                $t = Bridge.getEnumerator(keys);
+                $t = Bridge.getEnumerator(keys, "System$Collections$Generic$IEnumerable$1$System$Int32$getEnumerator");
                 while ($t.moveNext()) {
                     var key = $t.getCurrent();
                     Bridge.Test.Assert.areEqual(actualKeys[i], key);
@@ -5493,7 +5493,7 @@
 
                 var i = 0;
 
-                $t = Bridge.getEnumerator(values);
+                $t = Bridge.getEnumerator(values, "System$Collections$Generic$IEnumerable$1$String$getEnumerator");
                 while ($t.moveNext()) {
                     var val = $t.getCurrent();
                     Bridge.Test.Assert.areEqual(actualValues[i], val);
@@ -5730,7 +5730,7 @@
             },
             arrayCastToIEnumerableCanBeEnumerated: function () {
                 var enm = ["x", "y", "z"];
-                var e = Bridge.getEnumerator(enm, "$1", String);
+                var e = Bridge.getEnumerator(enm, null, String);
                 Bridge.Test.Assert.true(e.System$Collections$IEnumerator$moveNext());
                 Bridge.Test.Assert.areEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$String$getCurrent$1", "getCurrent$1")]());
                 Bridge.Test.Assert.true(e.System$Collections$IEnumerator$moveNext());
@@ -5752,7 +5752,7 @@
             },
             classImplementingIEnumerableCastToIEnumerableCanBeEnumerated: function () {
                 var enm = new Bridge.ClientTest.Collections.Generic.IEnumerableTests.MyEnumerable();
-                var e = Bridge.getEnumerator(enm, "$1", String);
+                var e = Bridge.getEnumerator(enm, null, String);
                 Bridge.Test.Assert.true(e.System$Collections$IEnumerator$moveNext());
                 Bridge.Test.Assert.areEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$String$getCurrent$1", "getCurrent$1")]());
                 Bridge.Test.Assert.true(e.System$Collections$IEnumerator$moveNext());
@@ -6096,7 +6096,7 @@
                 var sb = new System.Text.StringBuilder();
                 var enm = new Bridge.ClientTest.Collections.Generic.IteratorBlockTests.C(sb).getEnumerable(2);
 
-                $t = Bridge.getEnumerator(enm);
+                $t = Bridge.getEnumerator(enm, null, System.Int32);
                 while ($t.moveNext()) {
                     var i = $t.getCurrent();
                     sb.appendLine(System.String.concat("got ", i));
@@ -6104,7 +6104,7 @@
 
                 sb.appendLine("-");
 
-                $t1 = Bridge.getEnumerator(enm);
+                $t1 = Bridge.getEnumerator(enm, null, System.Int32);
                 while ($t1.moveNext()) {
                     var i1 = $t1.getCurrent();
                     sb.appendLine(System.String.concat("got ", i1));
@@ -6118,7 +6118,7 @@
 
                 var sb = new System.Text.StringBuilder();
                 var n = 0;
-                $t = Bridge.getEnumerator(new Bridge.ClientTest.Collections.Generic.IteratorBlockTests.C(sb).getEnumerable(5));
+                $t = Bridge.getEnumerator(new Bridge.ClientTest.Collections.Generic.IteratorBlockTests.C(sb).getEnumerable(5), null, System.Int32);
                 while ($t.moveNext()) {
                     var i = $t.getCurrent();
                     sb.appendLine(System.String.concat("got ", i));
@@ -6137,7 +6137,7 @@
                 try {
                     var enumerable = new Bridge.ClientTest.Collections.Generic.IteratorBlockTests.C(sb).getEnumerableThrows(5);
 
-                    var enumerator = Bridge.getEnumerator(enumerable, "$1", System.Int32);
+                    var enumerator = Bridge.getEnumerator(enumerable, null, System.Int32);
                     for (var i = 0; i < 100; i = (i + 1) | 0) {
                         enumerator.System$Collections$IEnumerator$moveNext();
                         sb.appendLine(System.String.concat("got ", enumerator[Bridge.geti(enumerator, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]()));
@@ -6156,12 +6156,12 @@
                 var sb = new System.Text.StringBuilder();
 
                 var enm = new Bridge.ClientTest.Collections.Generic.IteratorBlockTests.C(sb).getEnumerableMutateParameter(3);
-                $t = Bridge.getEnumerator(enm);
+                $t = Bridge.getEnumerator(enm, null, System.Int32);
                 while ($t.moveNext()) {
                     var i = $t.getCurrent();
                     sb.appendLine(i.toString());
                 }
-                $t1 = Bridge.getEnumerator(enm);
+                $t1 = Bridge.getEnumerator(enm, null, System.Int32);
                 while ($t1.moveNext()) {
                     var i1 = $t1.getCurrent();
                     sb.appendLine(i1.toString());
@@ -6173,8 +6173,8 @@
                 var sb = new System.Text.StringBuilder();
 
                 var enumerable = new Bridge.ClientTest.Collections.Generic.IteratorBlockTests.C(sb).getEnumerableSimple(3);
-                var enm1 = Bridge.getEnumerator(enumerable, "$1", System.Int32);
-                var enm2 = Bridge.getEnumerator(enumerable, "$1", System.Int32);
+                var enm1 = Bridge.getEnumerator(enumerable, null, System.Int32);
+                var enm2 = Bridge.getEnumerator(enumerable, null, System.Int32);
 
                 while (enm1.System$Collections$IEnumerator$moveNext()) {
                     enm2.System$Collections$IEnumerator$moveNext();
@@ -6541,7 +6541,7 @@
                 var $t;
                 var list = $_.Bridge.ClientTest.Collections.Generic.ListTests.f41(new (System.Collections.Generic.List$1(String))());
                 var result = "";
-                $t = Bridge.getEnumerator(list);
+                $t = Bridge.getEnumerator(list, null, String);
                 while ($t.moveNext()) {
                     var s = $t.getCurrent();
                     result = System.String.concat(result, s);
@@ -6550,7 +6550,7 @@
             },
             iEnumerableGetEnumeratorWorks: function () {
                 var l = Bridge.cast($_.Bridge.ClientTest.Collections.Generic.ListTests.f42(new (System.Collections.Generic.List$1(String))()), System.Collections.Generic.IEnumerable$1(String));
-                var e = Bridge.getEnumerator(l, "$1", String);
+                var e = Bridge.getEnumerator(l, null, String);
                 Bridge.Test.Assert.true(e.System$Collections$IEnumerator$moveNext());
                 Bridge.Test.Assert.areEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$String$getCurrent$1", "getCurrent$1")]());
                 Bridge.Test.Assert.true(e.System$Collections$IEnumerator$moveNext());
@@ -7212,7 +7212,7 @@
                 var $t;
                 var list = new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["x", "y"]);
                 var result = "";
-                $t = Bridge.getEnumerator(list);
+                $t = Bridge.getEnumerator(list, null, String);
                 while ($t.moveNext()) {
                     var s = $t.getCurrent();
                     result = System.String.concat(result, s);
@@ -7221,7 +7221,7 @@
             },
             iEnumerableGetEnumeratorWorks: function () {
                 var l = Bridge.cast(new (System.Collections.ObjectModel.ReadOnlyCollection$1(String))(["x", "y"]), System.Collections.Generic.IEnumerable$1(String));
-                var e = Bridge.getEnumerator(l, "$1", String);
+                var e = Bridge.getEnumerator(l, null, String);
                 Bridge.Test.Assert.true(e.System$Collections$IEnumerator$moveNext());
                 Bridge.Test.Assert.areEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$String$getCurrent$1", "getCurrent$1")]());
                 Bridge.Test.Assert.true(e.System$Collections$IEnumerator$moveNext());
@@ -7708,7 +7708,7 @@
             iEnumerableGetEnumeratorWorks: function () {
                 var arr = Bridge.cast(new Float32Array([3, 6, 2, 9, 5]), System.Collections.Generic.IEnumerable$1(System.Single));
                 var l = new (System.Collections.Generic.List$1(System.Single))();
-                var enm = Bridge.getEnumerator(arr, "$1", System.Single);
+                var enm = Bridge.getEnumerator(arr, null, System.Single);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
                     l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Single$getCurrent$1", "getCurrent$1")]());
                 }
@@ -7936,7 +7936,7 @@
             iEnumerableGetEnumeratorWorks: function () {
                 var arr = Bridge.cast(new Float64Array([3, 6, 2, 9, 5]), System.Collections.Generic.IEnumerable$1(System.Double));
                 var l = new (System.Collections.Generic.List$1(System.Double))();
-                var enm = Bridge.getEnumerator(arr, "$1", System.Double);
+                var enm = Bridge.getEnumerator(arr, null, System.Double);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
                     l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Double$getCurrent$1", "getCurrent$1")]());
                 }
@@ -8164,7 +8164,7 @@
             iEnumerableGetEnumeratorWorks: function () {
                 var arr = Bridge.cast(new Int16Array([3, 6, 2, 9, 5]), System.Collections.Generic.IEnumerable$1(System.Int16));
                 var l = new (System.Collections.Generic.List$1(System.Int32))();
-                var enm = Bridge.getEnumerator(arr, "$1", System.Int16);
+                var enm = Bridge.getEnumerator(arr, null, System.Int16);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
                     l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int16$getCurrent$1", "getCurrent$1")]());
                 }
@@ -8392,7 +8392,7 @@
             iEnumerableGetEnumeratorWorks: function () {
                 var arr = Bridge.cast(new Int32Array([3, 6, 2, 9, 5]), System.Collections.Generic.IEnumerable$1(System.Int32));
                 var l = new (System.Collections.Generic.List$1(System.Int32))();
-                var enm = Bridge.getEnumerator(arr, "$1", System.Int32);
+                var enm = Bridge.getEnumerator(arr, null, System.Int32);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
                     l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]());
                 }
@@ -8620,7 +8620,7 @@
             iEnumerableGetEnumeratorWorks: function () {
                 var arr = Bridge.cast(new Int8Array([3, 6, 2, 9, 5]), System.Collections.Generic.IEnumerable$1(System.SByte));
                 var l = new (System.Collections.Generic.List$1(System.Int32))();
-                var enm = Bridge.getEnumerator(arr, "$1", System.SByte);
+                var enm = Bridge.getEnumerator(arr, null, System.SByte);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
                     l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$SByte$getCurrent$1", "getCurrent$1")]());
                 }
@@ -8848,7 +8848,7 @@
             iEnumerableGetEnumeratorWorks: function () {
                 var arr = Bridge.cast(new Uint16Array([3, 6, 2, 9, 5]), System.Collections.Generic.IEnumerable$1(System.UInt16));
                 var l = new (System.Collections.Generic.List$1(System.Int32))();
-                var enm = Bridge.getEnumerator(arr, "$1", System.UInt16);
+                var enm = Bridge.getEnumerator(arr, null, System.UInt16);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
                     l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$UInt16$getCurrent$1", "getCurrent$1")]());
                 }
@@ -9076,7 +9076,7 @@
             iEnumerableGetEnumeratorWorks: function () {
                 var arr = Bridge.cast(new Uint32Array([3, 6, 2, 9, 5]), System.Collections.Generic.IEnumerable$1(System.UInt32));
                 var l = new (System.Collections.Generic.List$1(System.UInt32))();
-                var enm = Bridge.getEnumerator(arr, "$1", System.UInt32);
+                var enm = Bridge.getEnumerator(arr, null, System.UInt32);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
                     l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$UInt32$getCurrent$1", "getCurrent$1")]());
                 }
@@ -9304,7 +9304,7 @@
             iEnumerableGetEnumeratorWorks: function () {
                 var arr = Bridge.cast(new Uint8Array([3, 6, 2, 9, 5]), System.Collections.Generic.IEnumerable$1(System.Byte));
                 var l = new (System.Collections.Generic.List$1(System.Int32))();
-                var enm = Bridge.getEnumerator(arr, "$1", System.Byte);
+                var enm = Bridge.getEnumerator(arr, null, System.Byte);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
                     l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Byte$getCurrent$1", "getCurrent$1")]());
                 }
@@ -16560,7 +16560,7 @@
                     throw new System.Exception("Already enumerated");
                 }
                 this._hasEnumerated = true;
-                return Bridge.getEnumerator(this._items, "$1", T);
+                return Bridge.getEnumerator(this._items, null, T);
             }
         }; });
 

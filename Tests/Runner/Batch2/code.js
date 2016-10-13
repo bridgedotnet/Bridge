@@ -376,7 +376,7 @@
                 var $t;
                 var list = ["x", "y"];
                 var result = "";
-                $t = Bridge.getEnumerator(list);
+                $t = Bridge.getEnumerator(list, "System$Collections$Generic$IEnumerable$1$String$getEnumerator");
                 while ($t.moveNext()) {
                     var s = $t.getCurrent();
                     result = System.String.concat(result, s);
