@@ -442,6 +442,26 @@
             return Bridge.Reflection.getTypeFullName(obj);
         },
 
+        hasValue: function (obj) {
+            return obj != null;
+        },
+
+        hasValue$1: function () {
+            if (arguments.length === 0) {
+                return false;
+            }
+
+            var i = 0;
+
+            for (i; i < arguments.length; i++) {
+                if (arguments[i] == null) {
+                    return false;
+                }
+            }
+
+            return true;
+        },
+
         is: function (obj, type, ignoreFn, allowNull) {
             if (type && type.prototype && type.prototype.$literal && Bridge.isPlainObject(obj)) {
                 return true;
@@ -632,16 +652,16 @@
             return to;
         },
 
-        getEnumerator: function (obj, suffix, T) {
+        getEnumerator: function (obj, fnName, T) {
             if (typeof obj === "string") {
                 obj = System.String.toCharArray(obj);
             }
 
-            if (suffix && obj && obj["getEnumerator" + suffix]) {
-                return obj["getEnumerator" + suffix].call(obj);
+            if (fnName && obj && obj[fnName]) {
+                return obj[fnName].call(obj);
             }
 
-            if (obj && obj.getEnumerator) {
+            if (!T && obj && obj.getEnumerator) {
                 return obj.getEnumerator();
             }
 
@@ -653,6 +673,10 @@
 
             if (Bridge.isFunction(obj[name = "System$Collections$IEnumerable$getEnumerator"])) {
                 return obj[name]();
+            }
+
+            if (T && obj && obj.getEnumerator) {
+                return obj.getEnumerator();
             }
 
             if ((Object.prototype.toString.call(obj) === "[object Array]") ||

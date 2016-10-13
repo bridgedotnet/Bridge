@@ -85,6 +85,9 @@ namespace Bridge.Translator
                 this.ResetLocals();
             }
 
+            var oldReplaceJump = this.Emitter.ReplaceJump;
+            this.Emitter.ReplaceJump = false;
+
             var rr = this.Emitter.Resolver.ResolveNode(this.Context, this.Emitter);
 
             if (this.Context is Expression)
@@ -138,6 +141,7 @@ namespace Bridge.Translator
             this.Emitter.ReplaceAwaiterByVar = this.ReplaceAwaiterByVar;
             this.Emitter.TempVariables = oldVars;
             this.Emitter.ParentTempVariables = oldParentVariables;
+            this.Emitter.ReplaceJump = oldReplaceJump;
         }
 
         protected virtual void EmitLambda(IEnumerable<ParameterDeclaration> parameters, AstNode body, AstNode context)

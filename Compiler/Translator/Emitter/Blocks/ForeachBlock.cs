@@ -236,11 +236,37 @@ namespace Bridge.Translator
             var iteratorVar = this.GetTempVarName();
             var iteratorName = this.AddLocal(iteratorVar, null, AstType.Null);
 
-            //this.WriteVar();
+            var rr = (ForEachResolveResult)this.Emitter.Resolver.ResolveNode(foreachStatement, this.Emitter);
+            var get_rr = rr.GetEnumeratorCall as InvocationResolveResult;
+            var in_rr = this.Emitter.Resolver.ResolveNode(foreachStatement.InExpression, this.Emitter);
+
             this.Write(iteratorName, " = ", JS.Funcs.BRIDGE_GET_ENUMERATOR);
 
             this.WriteOpenParentheses();
             foreachStatement.InExpression.AcceptVisitor(this.Emitter);
+
+            if (in_rr.Type.Kind != TypeKind.Array && !in_rr.Type.IsKnownType(KnownTypeCode.String) &&
+                !in_rr.Type.IsKnownType(KnownTypeCode.Array))
+            {
+                if (rr.CollectionType.IsParameterized &&
+                rr.CollectionType.FullName == "System.Collections.Generic.IEnumerable")
+                {
+                    this.WriteComma(false);
+                    this.Write("null, ");
+                    this.Write(BridgeTypes.ToJsName(((ParameterizedType)rr.CollectionType).TypeArguments[0], this.Emitter));
+                }
+                else if (get_rr != null)
+                {
+                    var name = OverloadsCollection.Create(this.Emitter, get_rr.Member).GetOverloadName();
+
+                    if (name != "getEnumerator" && name != "System$Collections$IEnumerable$getEnumerator")
+                    {
+                        this.WriteComma(false);
+                        this.WriteScript(name);
+                    }
+                }
+            }
+
             this.WriteCloseParentheses();
             this.WriteSemiColon();
             this.WriteNewLine();
@@ -262,8 +288,7 @@ namespace Bridge.Translator
 
                 this.WriteVar();
                 this.Write(varName + " = ");
-
-                var rr = this.Emitter.Resolver.ResolveNode(foreachStatement, this.Emitter) as ForEachResolveResult;
+                
                 string castCode = this.GetCastCode(rr.ElementType, rr.ElementVariable.Type);
 
                 if (castCode != null)

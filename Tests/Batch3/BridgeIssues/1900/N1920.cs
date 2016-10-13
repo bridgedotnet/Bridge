@@ -1,5 +1,4 @@
-﻿using System;
-using Bridge.Test;
+﻿using Bridge.Test;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -8,7 +7,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge1920
     {
         [Test]
-        public void TestCase()
+        public void TestGeneratedStringConcatenation()
         {
             var s1 = "s1";
             var s2 = "s2";

@@ -48,15 +48,15 @@
             },
 
             sub: function (t1, t2) {
-                return Bridge.hasValue(t1) && Bridge.hasValue(t2) ? (new System.TimeSpan(t1.ticks.sub(t2.ticks))) : null;
+                return Bridge.hasValue$1(t1, t2) ? (new System.TimeSpan(t1.ticks.sub(t2.ticks))) : null;
             },
 
             eq: function (t1, t2) {
-                return Bridge.hasValue(t1) && Bridge.hasValue(t2) ? (t1.ticks.eq(t2.ticks)) : null;
+                return Bridge.hasValue$1(t1, t2) ? (t1.ticks.eq(t2.ticks)) : null;
             },
 
             neq: function (t1, t2) {
-                return Bridge.hasValue(t1) && Bridge.hasValue(t2) ? (t1.ticks.ne(t2.ticks)) : null;
+                return Bridge.hasValue$1(t1, t2) ? (t1.ticks.ne(t2.ticks)) : null;
             },
 
             plus: function (t) {
@@ -64,23 +64,23 @@
             },
 
             add: function (t1, t2) {
-                return Bridge.hasValue(t1) && Bridge.hasValue(t2) ? (new System.TimeSpan(t1.ticks.add(t2.ticks))) : null;
+                return Bridge.hasValue$1(t1, t2) ? (new System.TimeSpan(t1.ticks.add(t2.ticks))) : null;
             },
 
             gt: function (a, b) {
-                return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a.ticks.gt(b.ticks)) : false;
+                return Bridge.hasValue$1(a, b) ? (a.ticks.gt(b.ticks)) : false;
             },
 
             gte: function (a, b) {
-                return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a.ticks.gte(b.ticks)) : false;
+                return Bridge.hasValue$1(a, b) ? (a.ticks.gte(b.ticks)) : false;
             },
 
             lt: function (a, b) {
-                return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a.ticks.lt(b.ticks)) : false;
+                return Bridge.hasValue$1(a, b) ? (a.ticks.lt(b.ticks)) : false;
             },
 
             lte: function (a, b) {
-                return Bridge.hasValue(a) && Bridge.hasValue(b) ? (a.ticks.lte(b.ticks)) : false;
+                return Bridge.hasValue$1(a, b) ? (a.ticks.lte(b.ticks)) : false;
             }
         },
 
