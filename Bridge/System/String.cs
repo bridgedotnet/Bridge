@@ -42,6 +42,13 @@ namespace System
         /// Constructs a string from the value indicated by a specified character repeated a specified number of times.
         /// </summary>
         /// <param name="c">A character.</param>
+        [Template("String.fromCharCode({c})")]
+        public extern String(char c);
+
+        /// <summary>
+        /// Constructs a string from the value indicated by a specified character repeated a specified number of times.
+        /// </summary>
+        /// <param name="c">A character.</param>
         /// <param name="count">The number of times the character occurs.</param>
         [Template("System.String.fromCharCount({c}, {count})")]
         public extern String(char c, int count);
