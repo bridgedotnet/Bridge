@@ -936,6 +936,35 @@ namespace Bridge.Translator
             }
         }
 
+        private string GetProductVersionFromVersionInfo(System.Diagnostics.FileVersionInfo versionInfo)
+        {
+            string version = null;
+
+            if (versionInfo != null && versionInfo.ProductVersion != null)
+            {
+                version = versionInfo.ProductVersion.Trim();
+            }
+
+            // If version contains only 0 and dots like 0.0.0.0 then set it to default string.Empty
+            // This helps get compatibility with Mono when it returns empty (whitespace) when AssemblyVersion is not set
+            if (version == null || version.All(x => x == '0' || x == '.'))
+            {
+                version = Contract.Constants.JS.Types.System.Reflection.Assembly.Config.DEFAULT_VERSION;
+            }
+
+            return version;
+        }
+
+        public string GetCompilerProductVersion()
+        {
+            return GetProductVersionFromVersionInfo(GetCompilerVersion());
+        }
+
+        public string GetAssemblyProductVersion()
+        {
+            return GetProductVersionFromVersionInfo(GetAssemblyVersion());
+        }
+
         public System.Diagnostics.FileVersionInfo GetCompilerVersion()
         {
             System.Diagnostics.FileVersionInfo compilerInfo = null;

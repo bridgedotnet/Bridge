@@ -592,20 +592,16 @@ namespace Bridge.Translator
                                 }
                             }
 
-                            System.Diagnostics.FileVersionInfo versionInfo = null;
+                            string version;
 
                             if (versionType == 0)
                             {
-                                versionInfo = this.Emitter.Translator.GetAssemblyVersion();
+                                version = this.Emitter.Translator.GetAssemblyProductVersion();
                             }
                             else
                             {
-                                versionInfo = this.Emitter.Translator.GetCompilerVersion();
+                                version= this.Emitter.Translator.GetCompilerProductVersion();
                             }
-
-                            string version = versionInfo != null && versionInfo.ProductVersion != null
-                                    ? versionInfo.ProductVersion.ToString()
-                                    : "0.0.0.0";
 
                             Write("\"", version, "\"");
 

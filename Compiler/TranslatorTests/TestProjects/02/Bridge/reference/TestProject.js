@@ -23496,7 +23496,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
 Bridge.assembly({
         name: "TestProject",
-        version: "0.0.0.0",
         compiler: "15.2.0"
     },
     function ($asm, globals) {

@@ -196,6 +196,27 @@
                     public const string TONUMBER = DOTNAME + "toNumber";
                     public const string CHECK = DOTNAME + "check";
                 }
+
+                public class Reflection
+                {
+                    public const string NAME = System.DOTNAME + "Reflection";
+                    private const string DOTNAME = NAME + ".";
+
+                    public class Assembly
+                    {
+                        public const string NAME = Reflection.DOTNAME + "Assembly";
+                        private const string DOTNAME = NAME + ".";
+
+                        public class Config
+                        {
+                            public const string NAME = "name";
+                            public const string VERSION = "version";
+                            public const string COMPILER = "compiler";
+
+                            public const string DEFAULT_VERSION = "";
+                        }
+                    }
+                }
             }
 
             public class Bridge

@@ -184,28 +184,18 @@ namespace Bridge.Translator
             {
                 var assemblyProperties = new List<KeyValuePair<string, object>>();
 
-                assemblyProperties.Add(new KeyValuePair<string, object>("name", asmName));
+                assemblyProperties.Add(new KeyValuePair<string, object>(JS.Types.System.Reflection.Assembly.Config.NAME, asmName));
 
-                var assemblyVersionInfo = this.Translator.GetAssemblyVersion();
-
-                var assemblyVersion = assemblyVersionInfo != null && assemblyVersionInfo.ProductVersion != null
-                    ? assemblyVersionInfo.ProductVersion.ToString()
-                    : null;
-
-                if (assemblyVersion != null)
+                var assemblyVersion = this.Translator.GetAssemblyProductVersion();
+                if (!string.IsNullOrEmpty(assemblyVersion))
                 {
-                    assemblyProperties.Add(new KeyValuePair<string, object>("version", assemblyVersion));
+                    assemblyProperties.Add(new KeyValuePair<string, object>(JS.Types.System.Reflection.Assembly.Config.VERSION, assemblyVersion));
                 }
 
-                var compilerVersionInfo = this.Translator.GetCompilerVersion();
-
-                var compilerVersion = compilerVersionInfo != null && compilerVersionInfo.ProductVersion != null
-                    ? compilerVersionInfo.ProductVersion.ToString()
-                    : null;
-
-                if (compilerVersion != null)
+                var compilerVersion = this.Translator.GetCompilerProductVersion();
+                if (!string.IsNullOrEmpty(compilerVersion))
                 {
-                    assemblyProperties.Add(new KeyValuePair<string, object>("compiler", compilerVersion));
+                    assemblyProperties.Add(new KeyValuePair<string, object>(JS.Types.System.Reflection.Assembly.Config.COMPILER, compilerVersion));
                 }
 
                 isMultiline = this.WritePropertiesObject(tmp, level, assemblyProperties, isMultiline);
@@ -261,7 +251,7 @@ namespace Bridge.Translator
                     sb.Append(" ");
                 }
 
-                sb.AppendFormat("{0}: \"{1}\"", item.Key, item.Value != null ? item.Value.ToString() : "null");
+                sb.AppendFormat("{0}: {1}", item.Key, item.Value != null ? ( "\"" + item.Value.ToString() + "\""): "null");
             }
 
             if (isMultiline.Value)

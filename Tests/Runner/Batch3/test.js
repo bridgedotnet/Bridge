@@ -1,6 +1,5 @@
 ﻿Bridge.assembly({
         name: "Bridge_ClientTest_Batch3_Tests",
-        version: "0.0.0.0",
         compiler: "15.2.0"
     },
     function ($asm, globals) {
@@ -4775,7 +4774,5 @@
                 }
             }
         });
-
-        Bridge.setMetadata(Bridge.ClientTestHelper.Internal.ClassLibraryTest, function () { return {"members":[{"accessibility":2,"name":"Test","isStatic":true,"type":8,"paramsInfo":[{"name":"item","parameterType":Bridge.ClientTestHelper.Internal.IWriteableItem,"position":0}],"sname":"test","returnType":Object,"params":[Bridge.ClientTestHelper.Internal.IWriteableItem]}]}; });
     }
 );
