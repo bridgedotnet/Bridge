@@ -1,7 +1,7 @@
 ﻿/**
- * @version   : 15.2.0 - Bridge.NET
+ * @version   : 15.3.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2016-10-04
+ * @date      : 2016-10-17
  * @copyright : Copyright 2008-2016 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
@@ -1155,10 +1155,10 @@
                     return method;
                 }
 
-                if (method.$$bind) {
-                    for (var i = 0; i < method.$$bind.length; i++) {
-                        if (method.$$bind[i].$scope === obj) {
-                            return method.$$bind[i];
+                if (obj && obj.$$bind) {
+                    for (var i = 0; i < obj.$$bind.length; i++) {
+                        if (obj.$$bind[i].$method === method) {
+                            return obj.$$bind[i];
                         }
                     }
                 }
@@ -1203,8 +1203,10 @@
                     }, method.length);
                 }
 
-                method.$$bind = method.$$bind || [];
-                method.$$bind.push(fn);
+                if (obj) {
+                    obj.$$bind = obj.$$bind || [];
+                    obj.$$bind.push(fn);
+                }
 
                 fn.$method = method;
                 fn.$scope = obj;
@@ -1989,8 +1991,14 @@
             return System.String.trimStart(System.String.trimEnd(s, chars), chars);
         },
 
-        concat: function(s1, s2) {
-            return (s1 == null ? "" : s1) + (s2 == null ? "" : s2);
+        concat: function () {
+            var s = "";
+            for (var i = 0; i < arguments.length; i++) {
+                var tmp = arguments[i];
+                s += tmp == null ? "" : tmp;
+            }
+
+            return s;
         }
     };
 
@@ -3118,8 +3126,8 @@
     // @source systemAssemblyVersion.js
 
     (function(){
-        Bridge.SystemAssembly.version = "15.2.0";
-        Bridge.SystemAssembly.compiler = "15.2.0";
+        Bridge.SystemAssembly.version = "15.3.0";
+        Bridge.SystemAssembly.compiler = "15.3.0";
     })();
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
@@ -16908,7 +16916,7 @@
             return false;
         },
         format$1: function (format) {
-            var s = System.String.concat(System.String.concat(System.UInt32.format((this._a >>> 0), "x8"), System.UInt16.format((this._b & 65535), "x4")), System.UInt16.format((this._c & 65535), "x4"));
+            var s = System.String.concat(System.UInt32.format((this._a >>> 0), "x8"), System.UInt16.format((this._b & 65535), "x4"), System.UInt16.format((this._c & 65535), "x4"));
             s = System.String.concat(s, ([this._d, this._e, this._f, this._g, this._h, this._i, this._j, this._k]).map(System.Guid.makeBinary).join(""));
 
             s = System.Guid.split.exec(s).slice(1).join("-");
@@ -16919,10 +16927,10 @@
                     return s.replace(System.Guid.replace, "");
                 case "b": 
                 case "B": 
-                    return System.String.concat(System.String.concat(String.fromCharCode(123), s), String.fromCharCode(125));
+                    return System.String.concat(String.fromCharCode(123), s, String.fromCharCode(125));
                 case "p": 
                 case "P": 
-                    return System.String.concat(System.String.concat(String.fromCharCode(40), s), String.fromCharCode(41));
+                    return System.String.concat(String.fromCharCode(40), s, String.fromCharCode(41));
                 default: 
                     return s;
             }
@@ -23339,7 +23347,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
             var div = document.createElement("div");
             div.id = Bridge.Console.BODY_WRAPPER_ID;
-            div.setAttribute("style", System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat(System.String.concat("height: calc(100vh - ", this.consoleHeight), " - "), this.consoleHeaderHeight), ");"), "margin-top: calc(-1 * "), "("), (System.String.concat(System.String.concat(bodyMarginTop, " + "), bodyPaddingTop))), "));"), "margin-right: calc(-1 * "), "("), (System.String.concat(System.String.concat(bodyMarginRight, " + "), bodyPaddingRight))), "));"), "margin-left: calc(-1 * "), "("), (System.String.concat(System.String.concat(bodyMarginLeft, " + "), bodyPaddingLeft))), "));"), "padding-top: calc("), (System.String.concat(System.String.concat(bodyMarginTop, " + "), bodyPaddingTop))), ");"), "padding-right: calc("), (System.String.concat(System.String.concat(bodyMarginRight, " + "), bodyPaddingRight))), ");"), "padding-bottom: calc("), (System.String.concat(System.String.concat(bodyMarginBottom, " + "), bodyPaddingBottom))), ");"), "padding-left: calc("), (System.String.concat(System.String.concat(bodyMarginLeft, " + "), bodyPaddingLeft))), ");"), "overflow-x: auto;"), "box-sizing: border-box !important;"));
+            div.setAttribute("style", System.String.concat("height: calc(100vh - ", this.consoleHeight, " - ", this.consoleHeaderHeight, ");", "margin-top: calc(-1 * ", "(", (System.String.concat(bodyMarginTop, " + ", bodyPaddingTop)), "));", "margin-right: calc(-1 * ", "(", (System.String.concat(bodyMarginRight, " + ", bodyPaddingRight)), "));", "margin-left: calc(-1 * ", "(", (System.String.concat(bodyMarginLeft, " + ", bodyPaddingLeft)), "));", "padding-top: calc(", (System.String.concat(bodyMarginTop, " + ", bodyPaddingTop)), ");", "padding-right: calc(", (System.String.concat(bodyMarginRight, " + ", bodyPaddingRight)), ");", "padding-bottom: calc(", (System.String.concat(bodyMarginBottom, " + ", bodyPaddingBottom)), ");", "padding-left: calc(", (System.String.concat(bodyMarginLeft, " + ", bodyPaddingLeft)), ");", "overflow-x: auto;", "box-sizing: border-box !important;"));
 
             while (document.body.firstChild != null) {
                 div.appendChild(document.body.firstChild);
@@ -23413,7 +23421,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             $t = Bridge.getEnumerator(obj);
             while ($t.moveNext()) {
                 var item = $t.getCurrent();
-                str = System.String.concat(str, (System.String.concat(System.String.concat(System.String.concat(item.key.toLowerCase(), ":"), item.value), ";")));
+                str = System.String.concat(str, (System.String.concat(item.key.toLowerCase(), ":", item.value, ";")));
             }
 
             return str;
@@ -23500,7 +23508,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
 Bridge.assembly({
         name: "TestProject",
-        compiler: "15.2.0"
+        compiler: "15.3.0"
     },
     function ($asm, globals) {
         "use strict";

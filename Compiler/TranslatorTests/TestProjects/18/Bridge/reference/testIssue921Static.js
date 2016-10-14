@@ -67,7 +67,7 @@
                 }).select(function (value) {
                     return System.String.concat(toString(value.length), TestIssue921Static.Issue921Static._offset);
                 }).select(function (value, index) {
-                    return System.String.concat(System.String.concat(toString(value.length), index), TestIssue921Static.Issue921Static._offset);
+                    return System.String.concat(toString(value.length), index, TestIssue921Static.Issue921Static._offset);
                 }).select(function (value) {
                     return toString(((value.length + toString(localValue).length) | 0));
                 });
@@ -102,7 +102,7 @@
             return System.String.concat(value, TestIssue921Static.Issue921Static.get$Name());
         },
         f8: function (value, index) {
-            return System.String.concat(System.String.concat(value, index), TestIssue921Static.Issue921Static.get$Name());
+            return System.String.concat(value, index, TestIssue921Static.Issue921Static.get$Name());
         },
         f9: function (value) {
             return value.add(System.Decimal(1));

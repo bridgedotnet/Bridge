@@ -1,7 +1,7 @@
 ﻿Bridge.assembly({
         name: "Bridge.ClientTest.Batch2",
-        version: "15.2.0",
-        compiler: "15.2.0"
+        version: "15.3.0",
+        compiler: "15.3.0"
     },
     function ($asm, globals) {
         "use strict";

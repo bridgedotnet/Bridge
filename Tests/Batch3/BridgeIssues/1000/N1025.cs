@@ -302,7 +302,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [External]
-        [ExternalInterface]
         public interface I11
         {
             [AccessorsIndexer]

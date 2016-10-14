@@ -1,6 +1,6 @@
 ﻿Bridge.assembly({
         name: "Bridge_ClientTest_Batch2_Tests",
-        compiler: "15.2.0"
+        compiler: "15.3.0"
     },
     function ($asm, globals) {
         

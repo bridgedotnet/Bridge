@@ -1,7 +1,7 @@
 ﻿Bridge.assembly({
         name: "Bridge.ClientTestHelper",
         version: "1.2.3.4",
-        compiler: "15.2.0"
+        compiler: "15.3.0"
     },
     function ($asm, globals) {
         "use strict";

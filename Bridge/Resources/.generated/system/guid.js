@@ -251,7 +251,7 @@
             return false;
         },
         format$1: function (format) {
-            var s = System.String.concat(System.String.concat(System.UInt32.format((this._a >>> 0), "x8"), System.UInt16.format((this._b & 65535), "x4")), System.UInt16.format((this._c & 65535), "x4"));
+            var s = System.String.concat(System.UInt32.format((this._a >>> 0), "x8"), System.UInt16.format((this._b & 65535), "x4"), System.UInt16.format((this._c & 65535), "x4"));
             s = System.String.concat(s, ([this._d, this._e, this._f, this._g, this._h, this._i, this._j, this._k]).map(System.Guid.makeBinary).join(""));
 
             s = System.Guid.split.exec(s).slice(1).join("-");
@@ -262,10 +262,10 @@
                     return s.replace(System.Guid.replace, "");
                 case "b": 
                 case "B": 
-                    return System.String.concat(System.String.concat(String.fromCharCode(123), s), String.fromCharCode(125));
+                    return System.String.concat(String.fromCharCode(123), s, String.fromCharCode(125));
                 case "p": 
                 case "P": 
-                    return System.String.concat(System.String.concat(String.fromCharCode(40), s), String.fromCharCode(41));
+                    return System.String.concat(String.fromCharCode(40), s, String.fromCharCode(41));
                 default: 
                     return s;
             }

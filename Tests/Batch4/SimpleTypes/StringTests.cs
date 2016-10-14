@@ -72,12 +72,6 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         }
 
         [Test]
-        public void CopyConstructorWorks()
-        {
-            Assert.AreEqual("abcd", new string("abcd"));
-        }
-
-        [Test]
         public void CharAndCountConstructorWorks()
         {
             Assert.AreEqual("xxxxx", new string('x', 5));

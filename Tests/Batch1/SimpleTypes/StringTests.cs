@@ -56,12 +56,6 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void CopyConstructorWorks()
-        {
-            Assert.AreEqual("abcd", new string("abcd"));
-        }
-
-        [Test]
         public void CharAndCountConstructorWorks()
         {
             Assert.AreEqual("xxxxx", new string('x', 5));
@@ -941,8 +935,6 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual("HELLO", s, "'hello'.ToLocaleUpperCase()");
 
             s = "Hello Bridge.NET";
-            // TEST String(string) constructor
-            Assert.AreEqual(s, new String(s), "new String('" + s + "')");
 
             // TEST String(char, count) constructor
             Assert.AreEqual("----", new String('-', 4), "new String('-',4)");

@@ -7,7 +7,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#1848 - {0}")]
     public class Bridge1848
     {
-        [ExternalInterface]
+        [External]
         public interface ITest
         {
             int GetNewId();
@@ -15,7 +15,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             string Name { get; }
         }
 
-        [External]
+        [ExternalInterface(true)]
         [Name("Bridge1848_ITest")]
         public interface ITest2
         {

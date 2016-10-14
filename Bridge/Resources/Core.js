@@ -1140,10 +1140,10 @@
                     return method;
                 }
 
-                if (method.$$bind) {
-                    for (var i = 0; i < method.$$bind.length; i++) {
-                        if (method.$$bind[i].$scope === obj) {
-                            return method.$$bind[i];
+                if (obj && obj.$$bind) {
+                    for (var i = 0; i < obj.$$bind.length; i++) {
+                        if (obj.$$bind[i].$method === method) {
+                            return obj.$$bind[i];
                         }
                     }
                 }
@@ -1188,8 +1188,10 @@
                     }, method.length);
                 }
 
-                method.$$bind = method.$$bind || [];
-                method.$$bind.push(fn);
+                if (obj) {
+                    obj.$$bind = obj.$$bind || [];
+                    obj.$$bind.push(fn);
+                }
 
                 fn.$method = method;
                 fn.$scope = obj;
