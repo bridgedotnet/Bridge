@@ -955,14 +955,26 @@ namespace Bridge.Translator
             return version;
         }
 
+        private string compilerProductVersion = null;
         public string GetCompilerProductVersion()
         {
-            return GetProductVersionFromVersionInfo(GetCompilerVersion());
+            if (compilerProductVersion == null)
+            {
+                compilerProductVersion = GetProductVersionFromVersionInfo(GetCompilerVersion());
+            }
+
+            return compilerProductVersion;
         }
 
+        private string assemblyProductVersion = null;
         public string GetAssemblyProductVersion()
         {
-            return GetProductVersionFromVersionInfo(GetAssemblyVersion());
+            if (assemblyProductVersion == null)
+            {
+                assemblyProductVersion = GetProductVersionFromVersionInfo(GetAssemblyVersion());
+            }
+
+            return assemblyProductVersion;
         }
 
         public System.Diagnostics.FileVersionInfo GetCompilerVersion()
