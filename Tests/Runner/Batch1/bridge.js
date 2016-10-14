@@ -3121,7 +3121,7 @@
     Bridge.$currentAssembly = new System.Reflection.Assembly("mscorlib");
     Bridge.SystemAssembly = Bridge.$currentAssembly;
     Bridge.SystemAssembly.$types["System.Reflection.Assembly"] = System.Reflection.Assembly;
-    System.Reflection.Assembly.$assembly = Bridge.SystemAssembly;;
+    System.Reflection.Assembly.$assembly = Bridge.SystemAssembly;
 
     // @source systemAssemblyVersion.js
 
