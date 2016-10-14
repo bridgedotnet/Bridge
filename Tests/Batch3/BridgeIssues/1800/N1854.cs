@@ -46,7 +46,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             string Read();
         }
 
-        [ExternalInterface]
+        [ExternalInterface(true)]
         [Name("Object")]
         public interface IRead1<T>
         {

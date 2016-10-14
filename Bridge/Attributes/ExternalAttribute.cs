@@ -21,6 +21,8 @@ namespace Bridge
     [NonScriptable]
     public sealed class ExternalInterfaceAttribute : Attribute
     {
+        public extern ExternalInterfaceAttribute();
+        public extern ExternalInterfaceAttribute(bool nativeImplementation);
     }
 
     /// <summary>
