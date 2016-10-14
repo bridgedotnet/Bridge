@@ -2101,7 +2101,6 @@
             QUnit.test("String - TypePropertiesAreCorrect", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_StringTests.typePropertiesAreCorrect);
             QUnit.test("String - StringInterfaces", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_StringTests.stringInterfaces);
             QUnit.test("String - DefaultConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_StringTests.defaultConstructorWorks);
-            QUnit.test("String - CopyConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_StringTests.copyConstructorWorks);
             QUnit.test("String - CharAndCountConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_StringTests.charAndCountConstructorWorks);
             QUnit.test("String - CharArrayConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_StringTests.charArrayConstructorWorks);
             QUnit.test("String - EmptyFieldWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_StringTests.emptyFieldWorks);
@@ -10924,10 +10923,6 @@
             defaultConstructorWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_StringTests);
                 t.getFixture().defaultConstructorWorks();
-            },
-            copyConstructorWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_StringTests);
-                t.getFixture().copyConstructorWorks();
             },
             charAndCountConstructorWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.StringTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_StringTests);

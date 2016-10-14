@@ -1535,7 +1535,6 @@
             QUnit.test("SingleTests - IComparableCompareToWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_SingleTests.iComparableCompareToWorks);
             QUnit.test("StringTests - TypePropertiesAreCorrect_SPI_1597", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_StringTests.typePropertiesAreCorrect_SPI_1597);
             QUnit.test("StringTests - DefaultConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_StringTests.defaultConstructorWorks);
-            QUnit.test("StringTests - CopyConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_StringTests.copyConstructorWorks);
             QUnit.test("StringTests - CharAndCountConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_StringTests.charAndCountConstructorWorks);
             QUnit.test("StringTests - CharArrayConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_StringTests.charArrayConstructorWorks);
             QUnit.test("StringTests - CharArrayWithStartIndexAndLengthConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_StringTests.charArrayWithStartIndexAndLengthConstructorWorks);
@@ -8541,10 +8540,6 @@
             defaultConstructorWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.StringTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_StringTests);
                 t.getFixture().defaultConstructorWorks();
-            },
-            copyConstructorWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.StringTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_StringTests);
-                t.getFixture().copyConstructorWorks();
             },
             charAndCountConstructorWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.StringTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_SimpleTypes_StringTests);

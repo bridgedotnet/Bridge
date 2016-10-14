@@ -33,19 +33,6 @@ namespace System
         public extern String();
 
         /// <summary>
-        /// The String global object is a constructor for strings, or a sequence of characters.
-        /// </summary>
-        /// <param name="thing">Anything to be converted to a string.</param>
-        public extern String(object thing);
-
-        /// <summary>
-        /// Constructs a string from the value indicated by a specified character repeated a specified number of times.
-        /// </summary>
-        /// <param name="c">A character.</param>
-        [Template("String.fromCharCode({c})")]
-        public extern String(char c);
-
-        /// <summary>
         /// Constructs a string from the value indicated by a specified character repeated a specified number of times.
         /// </summary>
         /// <param name="c">A character.</param>

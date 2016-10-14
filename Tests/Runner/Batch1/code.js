@@ -26512,8 +26512,6 @@
                 Bridge.Test.Assert.areEqual$1("HELLO", s, "'hello'.ToLocaleUpperCase()");
 
                 s = "Hello Bridge.NET";
-                // TEST String(string) constructor
-                Bridge.Test.Assert.areEqual$1(s, String(s), System.String.concat("new String('", s, "')"));
 
                 // TEST String(char, count) constructor
                 Bridge.Test.Assert.areEqual$1("----", System.String.fromCharCount(45, 4), "new String('-',4)");
@@ -26650,9 +26648,6 @@
         },
         defaultConstructorWorks: function () {
             Bridge.Test.Assert.areEqual("", String());
-        },
-        copyConstructorWorks: function () {
-            Bridge.Test.Assert.areEqual("abcd", String("abcd"));
         },
         charAndCountConstructorWorks: function () {
             Bridge.Test.Assert.areEqual("xxxxx", System.String.fromCharCount(120, 5));
