@@ -1,4 +1,4 @@
-// Content header: 1.0.0-beta Copyright 2008-2015 Object.NET, Inc. {notdate} 2016 Object.NET, Inc.
+// Content header: 0.0.0.0   {notdate} 2016 
 
 // ---
 // Content remark: Path: Bridge/output/testIssue434.js; name: testIssue434.js

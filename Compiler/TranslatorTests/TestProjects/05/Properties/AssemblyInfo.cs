@@ -4,10 +4,10 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Bridge.Translator.Tests.TestProject")]
 [assembly: AssemblyProduct("Bridge.Translator.Tests.TestProject")]
-[assembly: AssemblyDescription("Bridge Test library.")]
+//[assembly: AssemblyDescription("Bridge Test library.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Object.NET, Inc.")]
-[assembly: AssemblyCopyright("Copyright 2008-2015 Object.NET, Inc.")]
+//[assembly: AssemblyCompany("Object.NET, Inc.")]
+//[assembly: AssemblyCopyright("Copyright 2008-2015 Object.NET, Inc.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]

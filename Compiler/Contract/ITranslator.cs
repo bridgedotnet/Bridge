@@ -162,8 +162,6 @@ namespace Bridge.Contract
             set;
         }
 
-        string GetCompilerProductVersion();
-
-        string GetAssemblyProductVersion();
+        VersionContext GetVersionContext();
     }
 }
