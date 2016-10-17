@@ -117,7 +117,8 @@ namespace Bridge.ClientTest.Batch1.Reflection
         {
             get
             {
-                return AssemblyVersionMarker.GetVersion(AssemblyVersionMarker.VersionType.Compiler);
+                //return AssemblyVersionMarker.GetVersion(AssemblyVersionMarker.VersionType.Compiler);
+                return "";
             }
         }
 
@@ -133,7 +134,8 @@ namespace Bridge.ClientTest.Batch1.Reflection
         {
             get
             {
-                return MscorlibName + ", Version=" + CompilerVersion;
+                //return MscorlibName + ", Version=" + CompilerVersion;
+                return MscorlibName;
             }
         }
 
@@ -149,7 +151,8 @@ namespace Bridge.ClientTest.Batch1.Reflection
         {
             get
             {
-                return AssemblyName + ", Version=" + AssemblyVersionMarker.GetVersion(AssemblyVersionMarker.VersionType.CurrentAssembly);
+                //return AssemblyName + ", Version=" + AssemblyVersionMarker.GetVersion(AssemblyVersionMarker.VersionType.CurrentAssembly);
+                return AssemblyName;
             }
         }
 
@@ -171,13 +174,6 @@ namespace Bridge.ClientTest.Batch1.Reflection
         {
             Assert.AreEqual(typeof(int).Assembly.FullName, MscorlibWithVersion);
             Assert.AreEqual(typeof(AssemblyTests).Assembly.FullName, AssemblyWithVersion);
-        }
-
-        [Test]
-        public void ImageRuntimeVersionWorks()
-        {
-            Assert.AreEqual(typeof(int).Assembly.ImageRuntimeVersion, CompilerVersion, CompilerVersion);
-            Assert.AreEqual(typeof(AssemblyTests).Assembly.ImageRuntimeVersion, CompilerVersion, CompilerVersion);
         }
 
         [Test]

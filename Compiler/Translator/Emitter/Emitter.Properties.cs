@@ -478,5 +478,10 @@ namespace Bridge.Translator
         {
             get; set;
         }
+
+        private bool AssemblyJsDocWritten
+        {
+            get; set;
+        }
     }
 }

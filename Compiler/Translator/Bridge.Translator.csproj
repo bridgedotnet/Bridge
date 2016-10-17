@@ -222,6 +222,7 @@
     <Compile Include="Logging\FileLoggerWriter.cs" />
     <Compile Include="Translator\InvocationInterceptor.cs" />
     <Compile Include="Translator\Plugins.cs" />
+    <Compile Include="Translator\Translator.Versions.cs" />
     <Compile Include="Translator\Translator.Resources.cs" />
     <Compile Include="Translator\Translator.Config.cs" />
     <Compile Include="Translator\TranslatorProcessor.cs" />

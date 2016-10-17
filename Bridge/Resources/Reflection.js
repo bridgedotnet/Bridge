@@ -67,9 +67,6 @@
         },
 
         load: function (name) {
-            var i;
-            if (name != null && (i = name.indexOf(',')) >= 0) name = name.substring(0, i);
-
             return System.Reflection.Assembly.assemblies[name] || require(name);
         },
 

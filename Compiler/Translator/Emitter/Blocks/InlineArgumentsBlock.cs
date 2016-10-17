@@ -596,11 +596,11 @@ namespace Bridge.Translator
 
                             if (versionType == 0)
                             {
-                                version = this.Emitter.Translator.GetAssemblyProductVersion();
+                                version = this.Emitter.Translator.GetVersionContext().Assembly.Version;
                             }
                             else
                             {
-                                version= this.Emitter.Translator.GetCompilerProductVersion();
+                                version= this.Emitter.Translator.GetVersionContext().Compiler.Version;
                             }
 
                             Write("\"", version, "\"");
