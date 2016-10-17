@@ -374,7 +374,7 @@ namespace Bridge.Translator
 
         private Dictionary<string, string> PrepareResourseHeaderInfo()
         {
-            var assemblyInfo = this.GetAssemblyVersion();
+            var assemblyInfo = this.GetVersionContext().Assembly;
 
             var nowDate = DateTime.Now;
 
@@ -390,9 +390,9 @@ namespace Bridge.Translator
             }
             else
             {
-                version = assemblyInfo.ProductVersion;
-                author = assemblyInfo.CompanyName;
-                copyright = assemblyInfo.LegalCopyright;
+                version = assemblyInfo.Version;
+                author = assemblyInfo.Author;
+                copyright = assemblyInfo.Copyright;
             }
 
             var headerInfo = new Dictionary<string, string>
