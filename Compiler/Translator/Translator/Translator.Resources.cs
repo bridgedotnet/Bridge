@@ -391,7 +391,7 @@ namespace Bridge.Translator
             else
             {
                 version = assemblyInfo.Version;
-                author = assemblyInfo.Author;
+                author = assemblyInfo.CompanyName;
                 copyright = assemblyInfo.Copyright;
             }
 

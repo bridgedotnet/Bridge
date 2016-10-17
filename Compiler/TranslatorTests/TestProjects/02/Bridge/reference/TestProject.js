@@ -23512,53 +23512,50 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
  * Bridge Test library.
  * @version 1.0.0.0
  * @author Object.NET, Inc.
+ * @copyright Copyright 2008-2015 Object.NET, Inc.
+ * @compiler Bridge.NET 15.3.0
  */
-Bridge.assembly({
-        name: "TestProject",
-        version: "1.0.0.0",
-        compiler: "15.3.0"
-    },
-    function ($asm, globals) {
-        "use strict";
+Bridge.assembly("TestProject", function ($asm, globals) {
+    "use strict";
 
-        Bridge.define("Test.BridgeIssues.N1193.TopShouldbBOverAssemblyDescription");
+    Bridge.define("Test.BridgeIssues.N1193.TopShouldbBOverAssemblyDescription");
 
-        Bridge.define("Test.BridgeIssues.N1424.A");
+    Bridge.define("Test.BridgeIssues.N1424.A");
 
-        Bridge.define("Test.BridgeIssues.N1424.Alpha", {
-            data: 0
-        });
+    Bridge.define("Test.BridgeIssues.N1424.Alpha", {
+        data: 0
+    });
 
-        Bridge.define("Test.BridgeIssues.N1424.B", {
-            getData: function () {
-                return 8;
-            },
-            setData: function (value) {
-            }
-        });
+    Bridge.define("Test.BridgeIssues.N1424.B", {
+        getData: function () {
+            return 8;
+        },
+        setData: function (value) {
+        }
+    });
 
-        Bridge.define("Test.BridgeIssues.N770.IBase", {
-            $kind: "interface"
-        });
+    Bridge.define("Test.BridgeIssues.N770.IBase", {
+        $kind: "interface"
+    });
 
-        Bridge.define("TestProject1.TestClassA", {
-            value1: 0
-        });
+    Bridge.define("TestProject1.TestClassA", {
+        value1: 0
+    });
 
-        Bridge.define("TestProject2.TestClassB", {
-            value1: 0
-        });
+    Bridge.define("TestProject2.TestClassB", {
+        value1: 0
+    });
 
-        Bridge.define("Test.BridgeIssues.N770.Impl", {
-            inherits: [Test.BridgeIssues.N770.IBase],
-            prop: 0,
-            config: {
-                alias: [
-                "prop", "prop",
-                "prop", "prop"
-                ]
-            }
-        });
+    Bridge.define("Test.BridgeIssues.N770.Impl", {
+        inherits: [Test.BridgeIssues.N770.IBase],
+        prop: 0,
+        config: {
+            alias: [
+            "prop", "prop",
+            "prop", "prop"
+            ]
+        }
+    });
     }
 );
 

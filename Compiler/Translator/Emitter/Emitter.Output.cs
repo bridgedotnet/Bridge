@@ -84,6 +84,8 @@ namespace Bridge.Translator
 
             var disableAsm = this.AssemblyInfo.Assembly.DisableInitAssembly;
 
+            this.AssemblyJsDocWritten = false;
+
             foreach (var outputPair in this.Outputs)
             {
                 var fileName = outputPair.Key;
@@ -116,22 +118,26 @@ namespace Bridge.Translator
         {
             // /**
             //  * [AssemblyDescription]
-            //  * @version [AssemblyVersion]
-            //  * @author [AssemblyCopyright]
+            //  * @version 1.2.3.4
+            //  * @author [AssemblyCompany]
+            //  * @copyright [AssemblyCopyright]
+            //  * @compiler Bridge.NET 15.3.0
             //  */
+
+            if (this.AssemblyJsDocWritten)
+            {
+                return;
+            }
 
             var versionContext = this.Translator.GetVersionContext();
 
             string description = versionContext.Assembly.Description;
             string version = versionContext.Assembly.Version != null && versionContext.Assembly.Version != JS.Types.System.Reflection.Assembly.Config.DEFAULT_VERSION
-                ? versionContext.Assembly.Version
-                : null;
-            string author = versionContext.Assembly.Author;
-
-            if (string.IsNullOrWhiteSpace(description) && string.IsNullOrWhiteSpace(version) && string.IsNullOrWhiteSpace(author))
-            {
-                return;
-            }
+                                ? versionContext.Assembly.Version
+                                : null;
+            string author = versionContext.Assembly.CompanyName;
+            string copyright = versionContext.Assembly.Copyright;
+            string compiler = "Bridge.NET " + versionContext.Compiler.Version;
 
             WriteNewLine(tmp, "/**");
 
@@ -150,7 +156,16 @@ namespace Bridge.Translator
                 WriteNewLine(tmp, " * @author " + author);
             }
 
+            if (!string.IsNullOrWhiteSpace(copyright))
+            {
+                WriteNewLine(tmp, " * @copyright " + copyright);
+            }
+
+            WriteNewLine(tmp, " * @compiler " + compiler);
+
             WriteNewLine(tmp, " */");
+
+            this.AssemblyJsDocWritten = true;
         }
 
         private void OutputModule(Contract.IEmitterOutput output)
@@ -174,7 +189,7 @@ namespace Bridge.Translator
         {
             bool metaDataWritten = false;
 
-            var level = !disableAsm ? this.InitialLevel - 1 : this.InitialLevel;
+            var level = this.InitialLevel;
 
             if (output.NonModuletOutput.Length > 0)
             {
@@ -182,11 +197,13 @@ namespace Bridge.Translator
                 {
                     if (!disableAsm)
                     {
+                        string asmName = this.AssemblyInfo.Assembly.FullName ?? this.Translator.AssemblyName;
+
                         OutputAssemblyComment(tmp);
 
                         tmp.Append(JS.Types.Bridge.ASSEMBLY + "(");
 
-                        WriteAssemblyProperties(tmp, level);
+                        tmp.AppendFormat("\"{0}\"", asmName);
 
                         tmp.Append(",");
 
@@ -196,8 +213,7 @@ namespace Bridge.Translator
 
                             if (res != null)
                             {
-                                WriteNewLine(tmp);
-                                WriteIndent(tmp, level);
+                                tmp.Append(" ");
                                 tmp.Append(res);
                                 tmp.Append(",");
                             }
@@ -205,12 +221,10 @@ namespace Bridge.Translator
                             metaDataWritten = true;
                         }
 
-                        WriteNewLine(tmp);
-                        WriteIndent(tmp, level);
-
+                        tmp.Append(" ");
                         tmp.Append("function ($asm, globals) {");
                         WriteNewLine(tmp);
-                        WriteIndent(tmp, level + 1);
+                        WriteIndent(tmp, level);
                         tmp.Append(this.GetOutputHeader());
                         WriteNewLine(tmp);
                         WriteNewLine(tmp);
@@ -242,98 +256,6 @@ namespace Bridge.Translator
                 WriteNewLine(tmp);
                 tmp.Append(output.BottomOutput.ToString());
             }
-        }
-
-        private bool WriteAssemblyProperties(StringBuilder tmp, int level, bool? isMultiline = null)
-        {
-            string asmName = this.AssemblyInfo.Assembly.FullName ?? this.Translator.AssemblyName;
-
-            var assemblyProperties = new List<KeyValuePair<string, object>>();
-
-            if (!string.IsNullOrEmpty(asmName))
-            {
-                assemblyProperties.Add(new KeyValuePair<string, object>(JS.Types.System.Reflection.Assembly.Config.NAME, asmName));
-            }
-
-            var assemblyVersion = this.Translator.GetVersionContext().Assembly.Version;
-            if (!string.IsNullOrEmpty(assemblyVersion))
-            {
-                assemblyProperties.Add(new KeyValuePair<string, object>(JS.Types.System.Reflection.Assembly.Config.VERSION, assemblyVersion));
-            }
-
-            var compilerVersion = this.Translator.GetVersionContext().Compiler.Version;
-            if (!string.IsNullOrEmpty(compilerVersion))
-            {
-                assemblyProperties.Add(new KeyValuePair<string, object>(JS.Types.System.Reflection.Assembly.Config.COMPILER, compilerVersion));
-            }
-
-            isMultiline = this.WritePropertiesObject(tmp, level, assemblyProperties, isMultiline);
-
-
-            return isMultiline.Value;
-        }
-
-        protected virtual bool WritePropertiesObject(StringBuilder sb, int indentLevel, IEnumerable<KeyValuePair<string, object>> data, bool? isMultiline = null)
-        {
-            if (sb == null)
-            {
-                throw new ArgumentNullException("sb");
-            }
-
-            if (data == null)
-            {
-                throw new ArgumentNullException("data");
-            }
-
-            if (!isMultiline.HasValue)
-            {
-                isMultiline = data.Count() > 1;
-            }
-
-            sb.Append("{");
-
-            var isFirst = true;
-
-            foreach (var item in data)
-            {
-                if (isFirst)
-                {
-                    isFirst = false;
-                }
-                else
-                {
-                    sb.Append(",");
-                }
-
-                if (isMultiline.Value)
-                {
-                    WriteNewLine(sb);
-                    WriteIndent(sb, indentLevel + 1);
-                }
-                else
-                {
-                    sb.Append(" ");
-                }
-
-                sb.AppendFormat("{0}: {1}", item.Key, item.Value != null ? ( "\"" + item.Value.ToString() + "\""): "null");
-            }
-
-            if (isMultiline.Value)
-            {
-                if (!isFirst)
-                {
-                    WriteNewLine(sb);
-                    WriteIndent(sb, indentLevel);
-                }
-            }
-            else
-            {
-                sb.Append(" ");
-            }
-
-            sb.Append("}");
-
-            return isMultiline.Value;
         }
 
         private string GetIncludedResources()

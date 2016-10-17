@@ -4,7 +4,7 @@ namespace Bridge.Contract
     {
         public class AssemblyVersion
         {
-            public string Author
+            public string CompanyName
             {
                 get; set;
             }

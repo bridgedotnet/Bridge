@@ -111,7 +111,7 @@ namespace Bridge.Translator
                     ? new VersionContext.AssemblyVersion()
                     : new VersionContext.AssemblyVersion()
                     {
-                        Author = versionInfo.CompanyName != null ? versionInfo.CompanyName.Trim() : null,
+                        CompanyName = versionInfo.CompanyName != null ? versionInfo.CompanyName.Trim() : null,
                         Copyright = versionInfo.LegalCopyright != null ? versionInfo.LegalCopyright.Trim() : null,
                         Version = GetProductVersionFromVersionInfo(versionInfo),
                         Name = versionInfo.ProductName != null ? versionInfo.ProductName.Trim() : null

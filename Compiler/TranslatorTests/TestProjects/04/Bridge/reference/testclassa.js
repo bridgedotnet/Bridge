@@ -1,16 +1,12 @@
-﻿Bridge.assembly({
-        name: "TestProject",
-        compiler: "15.3.0"
-    },
-    function ($asm, globals) {
-        "use strict";
+﻿Bridge.assembly("TestProject", function ($asm, globals) {
+    "use strict";
 
-        Bridge.define("TestProject1.TestClassA", {
-            config: {
-                properties: {
-                    Value1: 0
-                }
+    Bridge.define("TestProject1.TestClassA", {
+        config: {
+            properties: {
+                Value1: 0
             }
-        });
+        }
+    });
     }
 );
