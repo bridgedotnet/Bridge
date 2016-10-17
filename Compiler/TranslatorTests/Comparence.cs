@@ -167,6 +167,10 @@ namespace Bridge.Translator.Tests
                     sb.AppendLine("DIFF for " + diff.ToString());
                     sb.AppendLine();
                     sb.AppendLine("|" + diffText + "|");
+                    sb.AppendLine("-------------------File 1 content:");
+                    sb.AppendLine(file1Content);
+                    sb.AppendLine("-------------------File 2 content:");
+                    sb.AppendLine(file2Content);
                 }
                 catch (System.Exception ex)
                 {
