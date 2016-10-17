@@ -130,6 +130,11 @@ namespace Bridge.Translator
                 assemblyDescription = assemblyDescriptionAttribute.ConstructorArguments[0].Value as string;
             }
 
+            if (assemblyDescription != null)
+            {
+                assemblyDescription = assemblyDescription.Trim();
+            }
+
             return assemblyDescription;
         }
 
