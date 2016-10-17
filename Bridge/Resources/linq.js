@@ -167,11 +167,8 @@
         this.System$Collections$IEnumerator$reset = this.reset;
     };
 
-    System.IDisposable.$$inheritors = System.IDisposable.$$inheritors || [];
-    System.IDisposable.$$inheritors.push(IEnumerator);
-
-    System.Collections.IEnumerator.$$inheritors = System.Collections.IEnumerator.$$inheritors || [];
-    System.Collections.IEnumerator.$$inheritors.push(IEnumerator);
+    IEnumerator.$$inherits = [];
+    Bridge.Class.addExtend(IEnumerator, [System.IDisposable, System.Collections.IEnumerator]);
 
     // for tryGetNext
     var Yielder = function () {
@@ -190,8 +187,9 @@
     var Enumerable = function (getEnumerator) {
         this.getEnumerator = getEnumerator;
     };
-    System.Collections.IEnumerable.$$inheritors = System.Collections.IEnumerable.$$inheritors || [];
-    System.Collections.IEnumerable.$$inheritors.push(Enumerable);
+
+    Enumerable.$$inherits = [];
+    Bridge.Class.addExtend(Enumerable, [System.Collections.IEnumerable]);
 
     // Utility
 
@@ -2920,8 +2918,8 @@
         };
     };
 
-    System.Collections.IEnumerable.$$inheritors = System.Collections.IEnumerable.$$inheritors || [];
-    System.Collections.IEnumerable.$$inheritors.push(Lookup);
+    Lookup.$$inherits = [];
+    Bridge.Class.addExtend(Lookup, [System.Collections.IEnumerable]);
 
     var Grouping = function (groupKey, elements) {
         this.key = function () {

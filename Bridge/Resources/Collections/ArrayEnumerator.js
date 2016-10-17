@@ -1,6 +1,8 @@
 ﻿    Bridge.define('Bridge.ArrayEnumerator', {
         inherits: [System.Collections.IEnumerator, System.IDisposable],
 
+        $isArrayEnumerator: true,
+
         config: {
             alias: [
                 "getCurrent", "System$Collections$IEnumerator$getCurrent",

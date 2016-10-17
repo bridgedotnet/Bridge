@@ -482,11 +482,12 @@
                 return true;
             }
 
-            if (typeof type === "boolean") {
+            var tt = typeof type;
+            if (tt === "boolean") {
                 return type;
             }
 
-            if (typeof type === "string") {
+            if (tt === "string") {
                 type = Bridge.unroll(type);
             }
 
@@ -494,51 +495,43 @@
                 return !!allowNull;
             }
 
+            if (tt === "function" && ((obj.constructor === type) || (Bridge.getType(obj).prototype instanceof type))) {
+                return true;
+            }
+            else if (type.$kind === "interface" && System.Array.contains(Bridge.Reflection.getInterfaces(Bridge.getType(obj)), type)) {
+                return true;
+            }
+
             if (ignoreFn !== true) {
-                if (Bridge.isFunction(type.$is)) {
+                if (typeof (type.$is) === "function") {
                     return type.$is(obj);
                 }
 
-                if (Bridge.isFunction(type.instanceOf)) {
+                if (typeof (type.instanceOf) === "function") {
                     return type.instanceOf(obj);
                 }
 
-                if (Bridge.isFunction(type.isAssignableFrom)) {
+                if (typeof (type.isAssignableFrom) === "function") {
                     return type.isAssignableFrom(Bridge.getType(obj));
                 }
-            }
+            }				
 
-            if ((obj.constructor === type) || (obj instanceof type) || (Bridge.getType(obj).prototype instanceof type)) {
-                return true;
-            }
-
-            if (Bridge.isArray(obj) || obj instanceof Bridge.ArrayEnumerator) {
-                return System.Array.is(obj, type);
-            }
-
-            if (Bridge.isString(obj)) {
-                return System.String.is(obj, type);
-            }
-
-            if (Bridge.isBoolean(obj)) {
-                return System.Boolean.is(obj, type);
-            }
-
-            if (Bridge.Reflection.isInterface(type) && System.Array.contains(Bridge.Reflection.getInterfaces(Bridge.getType(obj)), type)) {
-                return true;
-            }
-
-            if (!type.$$inheritors) {
-                return false;
-            }
-
-            var inheritors = type.$$inheritors,
-                i;
-
-            for (i = 0; i < inheritors.length; i++) {
-                if (Bridge.is(obj, inheritors[i])) {
-                    return true;
+            if (!(obj && obj.$kind && obj.$$name)) {
+                if (Bridge.isArray(obj)) {
+                    return System.Array.is(obj, type);
                 }
+
+                var to = typeof (obj);
+                if (to === "string") {
+                    return System.String.is(obj, type);
+                }
+
+                if (to === "boolean") {
+                    return System.Boolean.is(obj, type);
+                }    
+            }
+            else if (obj.$isArrayEnumerator) {
+                return System.Array.is(obj, type);
             }
 
             return false;
@@ -549,11 +542,11 @@
         },
 
         cast: function (obj, type, allowNull) {
-            if (obj === null || typeof (obj) === "undefined") {
+            if (obj == null) {
                 return obj;
             }
 
-            var result = Bridge.as(obj, type, allowNull);
+            var result = Bridge.is(obj, type, false, allowNull) ? obj : null;
 
             if (result === null) {
                 throw new System.InvalidCastException("Unable to cast type " + (obj ? Bridge.getTypeName(obj) : "'null'") + " to type " + Bridge.getTypeName(type));
@@ -1005,7 +998,7 @@
         },
 
         getType: function (instance) {
-            if (!Bridge.isDefined(instance, true)) {
+            if (instance == null) {
                 throw new System.NullReferenceException("instance is null");
             }
 
@@ -2590,8 +2583,8 @@
                         }
                     }
 
-                    if (extend[j].$kind === "interface") {
-                        interfaces.push(extend[j]);
+                    if (baseType.$kind === "interface") {
+                        interfaces.push(baseType);
                     }
                 }
             }
@@ -2812,6 +2805,8 @@
                 scope;
 
             Array.prototype.push.apply(cls.$$inherits, extend);
+            cls.$interfaces = cls.$interfaces || [];
+            cls.$baseInterfaces = cls.$baseInterfaces || [];
 
             for (i = 0; i < extend.length; i++) {
                 scope = extend[i];
@@ -2821,6 +2816,20 @@
                 }
 
                 scope.$$inheritors.push(cls);
+
+                var baseI = (scope.$interfaces || []).concat(scope.$baseInterfaces || []);
+
+                if (baseI.length > 0) {
+                    for (var k = 0; k < baseI.length; k++) {
+                        if (cls.$baseInterfaces.indexOf(baseI[k]) < 0) {
+                            cls.$baseInterfaces.push(baseI[k]);
+                        }
+                    }
+                }
+
+                if (scope.$kind === "interface") {
+                    cls.$interfaces.push(scope);
+                }
             }
         },
 
@@ -9788,6 +9797,8 @@
     Bridge.define('Bridge.ArrayEnumerator', {
         inherits: [System.Collections.IEnumerator, System.IDisposable],
 
+        $isArrayEnumerator: true,
+
         config: {
             alias: [
                 "getCurrent", "System$Collections$IEnumerator$getCurrent",
@@ -13881,11 +13892,8 @@
         this.System$Collections$IEnumerator$reset = this.reset;
     };
 
-    System.IDisposable.$$inheritors = System.IDisposable.$$inheritors || [];
-    System.IDisposable.$$inheritors.push(IEnumerator);
-
-    System.Collections.IEnumerator.$$inheritors = System.Collections.IEnumerator.$$inheritors || [];
-    System.Collections.IEnumerator.$$inheritors.push(IEnumerator);
+    IEnumerator.$$inherits = [];
+    Bridge.Class.addExtend(IEnumerator, [System.IDisposable, System.Collections.IEnumerator]);
 
     // for tryGetNext
     var Yielder = function () {
@@ -13904,8 +13912,9 @@
     var Enumerable = function (getEnumerator) {
         this.getEnumerator = getEnumerator;
     };
-    System.Collections.IEnumerable.$$inheritors = System.Collections.IEnumerable.$$inheritors || [];
-    System.Collections.IEnumerable.$$inheritors.push(Enumerable);
+
+    Enumerable.$$inherits = [];
+    Bridge.Class.addExtend(Enumerable, [System.Collections.IEnumerable]);
 
     // Utility
 
@@ -16634,8 +16643,8 @@
         };
     };
 
-    System.Collections.IEnumerable.$$inheritors = System.Collections.IEnumerable.$$inheritors || [];
-    System.Collections.IEnumerable.$$inheritors.push(Lookup);
+    Lookup.$$inherits = [];
+    Bridge.Class.addExtend(Lookup, [System.Collections.IEnumerable]);
 
     var Grouping = function (groupKey, elements) {
         this.key = function () {

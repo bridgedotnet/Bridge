@@ -236,8 +236,8 @@
                         }
                     }
 
-                    if (extend[j].$kind === "interface") {
-                        interfaces.push(extend[j]);
+                    if (baseType.$kind === "interface") {
+                        interfaces.push(baseType);
                     }
                 }
             }
@@ -458,6 +458,8 @@
                 scope;
 
             Array.prototype.push.apply(cls.$$inherits, extend);
+            cls.$interfaces = cls.$interfaces || [];
+            cls.$baseInterfaces = cls.$baseInterfaces || [];
 
             for (i = 0; i < extend.length; i++) {
                 scope = extend[i];
@@ -467,6 +469,20 @@
                 }
 
                 scope.$$inheritors.push(cls);
+
+                var baseI = (scope.$interfaces || []).concat(scope.$baseInterfaces || []);
+
+                if (baseI.length > 0) {
+                    for (var k = 0; k < baseI.length; k++) {
+                        if (cls.$baseInterfaces.indexOf(baseI[k]) < 0) {
+                            cls.$baseInterfaces.push(baseI[k]);
+                        }
+                    }
+                }
+
+                if (scope.$kind === "interface") {
+                    cls.$interfaces.push(scope);
+                }
             }
         },
 
