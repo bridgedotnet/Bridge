@@ -128,24 +128,24 @@ namespace Bridge.Translator
                 : null;
             string author = versionContext.Assembly.Author;
 
-            if (string.IsNullOrEmpty(description) && string.IsNullOrEmpty(version) && string.IsNullOrEmpty(author))
+            if (string.IsNullOrWhiteSpace(description) && string.IsNullOrWhiteSpace(version) && string.IsNullOrWhiteSpace(author))
             {
                 return;
             }
 
             WriteNewLine(tmp, "/**");
 
-            if (!string.IsNullOrEmpty(description))
+            if (!string.IsNullOrWhiteSpace(description))
             {
                 WriteNewLine(tmp, " * " + description);
             }
 
-            if (!string.IsNullOrEmpty(version))
+            if (!string.IsNullOrWhiteSpace(version))
             {
                 WriteNewLine(tmp, " * @version " + version);
             }
 
-            if (!string.IsNullOrEmpty(author))
+            if (!string.IsNullOrWhiteSpace(author))
             {
                 WriteNewLine(tmp, " * @author " + author);
             }
