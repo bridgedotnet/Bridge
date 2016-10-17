@@ -8,5 +8,4 @@
             Bridge.Console.log(app || new Test.BridgeIssues.N1499.App());
         }
     });
-    }
-);
+});

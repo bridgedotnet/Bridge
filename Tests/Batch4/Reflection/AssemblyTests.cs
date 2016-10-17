@@ -118,7 +118,7 @@ namespace Bridge.ClientTest.Batch4.Reflection
         {
             get
             {
-                return "mscorlib" + ", Version=" + AssemblyVersionMarker.GetVersion(AssemblyVersionMarker.VersionType.Compiler);
+                return "mscorlib";
             }
         }
 
@@ -126,7 +126,7 @@ namespace Bridge.ClientTest.Batch4.Reflection
         {
             get
             {
-                return "Bridge.ClientTest.Batch4, Version=" + AssemblyVersionMarker.GetVersion(AssemblyVersionMarker.VersionType.CurrentAssembly);
+                return "Bridge.ClientTest.Batch4";
             }
         }
 

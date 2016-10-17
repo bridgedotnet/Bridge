@@ -11,5 +11,4 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     Bridge.define("LinkedFiles.Issue531Link3");
 
     Bridge.define("LinkedFiles.Issue531Link4");
-    }
-);
+});

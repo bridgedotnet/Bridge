@@ -15,5 +15,4 @@
     });
 
     Bridge.define("Test.BridgeIssues.N384.Person");
-    }
-);
+});

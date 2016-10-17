@@ -7,5 +7,4 @@
         doSomething1: function () {
         }
     });
-    }
-);
+});

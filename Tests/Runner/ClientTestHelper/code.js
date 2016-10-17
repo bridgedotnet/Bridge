@@ -30,5 +30,4 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
         inherits: [Bridge.ClientTestHelper.Internal.IItem],
         $kind: "interface"
     });
-    }
-);
+});

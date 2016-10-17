@@ -1581,5 +1581,4 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
             MODULE_CHECKED_UNCKECKED: "Checked/Unckecked"
         }
     });
-    }
-);
+});

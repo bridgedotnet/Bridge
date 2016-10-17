@@ -237,11 +237,7 @@ namespace Bridge.Translator
 
                 if (isJs && !disableAsm)
                 {
-                    WriteIndent(tmp, level);
-                    tmp.Append("}");
-                    WriteNewLine(tmp);
-
-                    tmp.Append(");");
+                    tmp.Append("});");
                     WriteNewLine(tmp);
                 }
             }

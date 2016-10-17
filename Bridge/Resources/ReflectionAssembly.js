@@ -1,15 +1,15 @@
-    Bridge.assembly = function (props, res, callback) {
+    Bridge.assembly = function (assemblyName, res, callback) {
         if (!callback) {
             callback = res;
             res = {};
         }
 
-        props = props ? (props.name ? props : { name: props }) : { name: "Bridge.$Unknown" };
+        assemblyName = assemblyName || "Bridge.$Unknown";
 
-        var asm = System.Reflection.Assembly.assemblies[props.name];
+        var asm = System.Reflection.Assembly.assemblies[assemblyName];
 
         if (!asm) {
-            asm = new System.Reflection.Assembly(props, res);
+            asm = new System.Reflection.Assembly(assemblyName, res);
         } else {
             Bridge.apply(asm.res, res || {});
         }
@@ -28,41 +28,17 @@
             assemblies: {}
         },
 
-        ctor: function (props, res) {
+        ctor: function (name, res) {
             this.$initialize();
-            this.name = props.name ? props.name : props;
-            this.defVer("version",  props.version || "0.0.0.0");
-            this.defVer("compiler", props.compiler || "0.0.0.0");
+            this.name = name;
             this.res = res || {};
             this.$types = {}
 
-            System.Reflection.Assembly.assemblies[this.name] = this;
-        },
-
-        defVer: function(key, o) {
-            Object.defineProperty(this, key, {
-                get: function () {
-                    o = new System.Version.$ctor4(o);
-                    Bridge.Class.defineProperty(this, key, o);
-                    return o;
-                },
-
-                set: function (newValue) {
-                    o = newValue;
-                },
-
-                enumerable: true,
-
-                configurable: true
-            });
-        },
-
-        getFullName: function () {
-            return this.name + ", Version=" + this.version.toString();
+            System.Reflection.Assembly.assemblies[name] = this;
         },
 
         toString: function () {
-            return this.getFullName();
+            return this.name;
         },
 
         getManifestResourceNames: function () {

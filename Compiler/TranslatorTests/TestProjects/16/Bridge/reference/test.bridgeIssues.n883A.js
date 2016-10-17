@@ -26,5 +26,4 @@
     Bridge.define("Test.BridgeIssues.N883A.TextBox", {
         inherits: [Test.BridgeIssues.N883A.Control]
     });
-    }
-);
+});

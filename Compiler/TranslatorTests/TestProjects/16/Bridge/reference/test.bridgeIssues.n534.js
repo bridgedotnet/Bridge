@@ -11,5 +11,4 @@
             DecimalValue2: System.Decimal(11.0)
         }
     });
-    }
-);
+});

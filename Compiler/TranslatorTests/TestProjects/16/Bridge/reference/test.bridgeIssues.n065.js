@@ -8,5 +8,4 @@
     Bridge.define("Test.BridgeIssues.N065.Class65_2", {
         inherits: [Test.BridgeIssues.N065.Class65_1.Nested]
     });
-    }
-);
+});

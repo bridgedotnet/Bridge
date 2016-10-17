@@ -18,5 +18,4 @@
         },
         $clone: function (to) { return this; }
     });
-    }
-);
+});

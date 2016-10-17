@@ -50,5 +50,4 @@
             ev.preventDefault();
         }
     });
-    }
-);
+});

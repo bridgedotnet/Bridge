@@ -49,5 +49,4 @@
             this.setName(name.$clone());
         }
     });
-    }
-);
+});

@@ -173,5 +173,4 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
         tearDown: function () {
         }
     }; });
-    }
-);
+});

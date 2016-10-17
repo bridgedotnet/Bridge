@@ -35,5 +35,4 @@ define("MyModule", ["bridge"], function (_) {
     return exports;
 });
 
-    }
-);
+});

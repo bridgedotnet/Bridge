@@ -39,5 +39,4 @@
             ($t=this.method(), DoSomethingTemplate($t, $t));
         }
     });
-    }
-);
+});

@@ -14,5 +14,4 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     });
 
     Bridge.define("Test.BridgeIssues.N059.Class59.Aux1");
-    }
-);
+});

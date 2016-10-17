@@ -70,5 +70,4 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             }
         }
     });
-    }
-);
+});

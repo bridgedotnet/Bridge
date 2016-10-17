@@ -107,5 +107,4 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         from: "from",
         of: "of"
     });
-    }
-);
+});

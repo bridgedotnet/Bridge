@@ -102,7 +102,8 @@ namespace Bridge.ClientTest.Reflection
         {
             get
             {
-                return AssemblyName + ", Version=" + AssemblyVersionMarker.GetVersion(AssemblyVersionMarker.VersionType.CurrentAssembly);
+                //return AssemblyName + ", Version=" + AssemblyVersionMarker.GetVersion(AssemblyVersionMarker.VersionType.CurrentAssembly);
+                return AssemblyName;
             }
         }
 

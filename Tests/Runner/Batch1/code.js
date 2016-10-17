@@ -3340,34 +3340,33 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 	return x;
         },
         getCompilerVersion: function () {
-            return "15.3.0";
+            //return AssemblyVersionMarker.GetVersion(AssemblyVersionMarker.VersionType.Compiler);
+            return "";
         },
         getMscorlibName: function () {
             return "mscorlib";
         },
         getMscorlibWithVersion: function () {
-            return System.String.concat(this.getMscorlibName(), ", Version=", this.getCompilerVersion());
+            //return MscorlibName + ", Version=" + CompilerVersion;
+            return this.getMscorlibName();
         },
         getAssemblyName: function () {
             return "Bridge.ClientTest";
         },
         getAssemblyWithVersion: function () {
-            return System.String.concat(this.getAssemblyName(), ", Version=", "15.3.0");
+            //return AssemblyName + ", Version=" + AssemblyVersionMarker.GetVersion(AssemblyVersionMarker.VersionType.CurrentAssembly);
+            return this.getAssemblyName();
         },
         getExecutingAssemblyWorks: function () {
-            Bridge.Test.Assert.areEqual($asm.getFullName(), this.getAssemblyWithVersion());
+            Bridge.Test.Assert.areEqual($asm.name, this.getAssemblyWithVersion());
         },
         getAssemblyForTypeWorks: function () {
-            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(System.Int32).getFullName(), this.getMscorlibWithVersion());
-            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch1.Reflection.AssemblyTests).getFullName(), this.getAssemblyWithVersion());
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(System.Int32).name, this.getMscorlibWithVersion());
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch1.Reflection.AssemblyTests).name, this.getAssemblyWithVersion());
         },
         fullNameWorks: function () {
-            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(System.Int32).getFullName(), this.getMscorlibWithVersion());
-            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch1.Reflection.AssemblyTests).getFullName(), this.getAssemblyWithVersion());
-        },
-        imageRuntimeVersionWorks: function () {
-            Bridge.Test.Assert.areEqual$1(Bridge.Reflection.getTypeAssembly(System.Int32).compiler.toString(), this.getCompilerVersion(), this.getCompilerVersion());
-            Bridge.Test.Assert.areEqual$1(Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch1.Reflection.AssemblyTests).compiler.toString(), this.getCompilerVersion(), this.getCompilerVersion());
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(System.Int32).name, this.getMscorlibWithVersion());
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch1.Reflection.AssemblyTests).name, this.getAssemblyWithVersion());
         },
         toStringWorks: function () {
             Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(System.Int32).toString(), this.getMscorlibWithVersion());
@@ -3409,12 +3408,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.true$1(Bridge.Reflection.getType("Foo.Bar", asm) == null, "#4");
         },
         assemblyOfBuiltInTypes: function () {
-            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Date).getFullName(), this.getMscorlibWithVersion());
-            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(System.Double).getFullName(), this.getMscorlibWithVersion());
-            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Boolean).getFullName(), this.getMscorlibWithVersion());
-            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(String).getFullName(), this.getMscorlibWithVersion());
-            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Function).getFullName(), this.getMscorlibWithVersion());
-            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Array).getFullName(), this.getMscorlibWithVersion());
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Date).name, this.getMscorlibWithVersion());
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(System.Double).name, this.getMscorlibWithVersion());
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Boolean).name, this.getMscorlibWithVersion());
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(String).name, this.getMscorlibWithVersion());
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Function).name, this.getMscorlibWithVersion());
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Array).name, this.getMscorlibWithVersion());
         },
         createInstanceWorks: function () {
             Bridge.Test.Assert.true$1(Bridge.is(Bridge.Reflection.createAssemblyInstance(Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Batch1.Reflection.AssemblyTests.C), Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Batch1.Reflection.AssemblyTests.C)), Bridge.ClientTest.Batch1.Reflection.AssemblyTests.C), "#1");
@@ -23031,7 +23030,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             return "Bridge.ClientTest";
         },
         getAssemblyWithVersion: function () {
-            return System.String.concat(this.getAssemblyName(), ", Version=", "15.3.0");
+            //return AssemblyName + ", Version=" + AssemblyVersionMarker.GetVersion(AssemblyVersionMarker.VersionType.CurrentAssembly);
+            return this.getAssemblyName();
         },
         fullNamePropertyReturnsTheNameWithTheNamespace: function () {
             Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Reflection.TypeSystemTests), "Bridge.ClientTest.Reflection.TypeSystemTests");
@@ -23042,13 +23042,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeQName(Bridge.ClientTest.Reflection.TypeSystemTests.BX$1(System.Int32)), "Bridge.ClientTest.Reflection.TypeSystemTests.BX$1[[System.Int32, mscorlib]], Bridge.ClientTest");
         },
         assemblyPropertyWorks: function () {
-            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Reflection.TypeSystemTests.B).getFullName(), this.getAssemblyWithVersion());
-            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Reflection.TypeSystemTests.I1).getFullName(), this.getAssemblyWithVersion());
-            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1).getFullName(), this.getAssemblyWithVersion());
-            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Reflection.TypeSystemTests.BX$1).getFullName(), this.getAssemblyWithVersion());
-            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1(System.Int32)).getFullName(), this.getAssemblyWithVersion());
-            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Reflection.TypeSystemTests.BX$1(System.Int32)).getFullName(), this.getAssemblyWithVersion());
-            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Reflection.TypeSystemTests.E1).getFullName(), this.getAssemblyWithVersion());
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Reflection.TypeSystemTests.B).name, this.getAssemblyWithVersion());
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Reflection.TypeSystemTests.I1).name, this.getAssemblyWithVersion());
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1).name, this.getAssemblyWithVersion());
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Reflection.TypeSystemTests.BX$1).name, this.getAssemblyWithVersion());
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1(System.Int32)).name, this.getAssemblyWithVersion());
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Reflection.TypeSystemTests.BX$1(System.Int32)).name, this.getAssemblyWithVersion());
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeAssembly(Bridge.ClientTest.Reflection.TypeSystemTests.E1).name, this.getAssemblyWithVersion());
         },
         namespacePropertyReturnsTheNamespaceWithoutTheName: function () {
             Bridge.Test.Assert.areEqual(Bridge.Reflection.getTypeNamespace(Bridge.ClientTest.Reflection.TypeSystemTests), "Bridge.ClientTest.Reflection");
@@ -43269,5 +43269,4 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     } ),Bridge.merge(new Bridge.ClientTest.Batch1.Reflection.AssemblyTests.A3Attribute.$ctor1(15), {
         setP: 45
     } )];
-    }
-);
+});
