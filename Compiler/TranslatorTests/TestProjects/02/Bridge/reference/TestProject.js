@@ -514,7 +514,7 @@
                 if (typeof (type.isAssignableFrom) === "function") {
                     return type.isAssignableFrom(Bridge.getType(obj));
                 }
-            }				
+            }
 
             if (!(obj && obj.$kind && obj.$$name)) {
                 if (Bridge.isArray(obj)) {
@@ -528,7 +528,9 @@
 
                 if (to === "boolean") {
                     return System.Boolean.is(obj, type);
-                }    
+                }
+
+                return tt === "object" && ((obj.constructor === type) || (obj instanceof type));
             }
             else if (obj.$isArrayEnumerator) {
                 return System.Array.is(obj, type);
