@@ -1,6 +1,7 @@
 using Bridge.Test;
 using System;
 using System.Collections.Generic;
+using Bridge.Collections.Generic;
 
 namespace Bridge.ClientTest.Batch4.Collections.Generic
 {
@@ -63,40 +64,38 @@ namespace Bridge.ClientTest.Batch4.Collections.Generic
             Assert.AreStrictEqual(c, d.Comparer);
         }
 
-        // #NoSupport
-        //[Test]
-        //public void JsDictionaryConstructorWorks()
-        //{
-        //    var orig = JsDictionary<string, int>.GetDictionary(new
-        //    {
-        //        a = 1,
-        //        b = 2
-        //    });
-        //    var d = new Dictionary<string, int>(orig);
-        //    Assert.False((object)d == (object)orig);
-        //    Assert.AreEqual(d.Count, 2);
-        //    Assert.AreEqual(d["a"], 1);
-        //    Assert.AreEqual(d["b"], 2);
-        //    Assert.AreStrictEqual(d.Comparer, EqualityComparer<string>.Default);
-        //}
+        [Test]
+        public void JsDictionaryConstructorWorks()
+        {
+            var orig = JsDictionary<string, int>.GetDictionary(new
+            {
+                a = 1,
+                b = 2
+            });
+            var d = new Dictionary<string, int>(orig);
+            Assert.False((object)d == (object)orig);
+            Assert.AreEqual(d.Count, 2);
+            Assert.AreEqual(d["a"], 1);
+            Assert.AreEqual(d["b"], 2);
+            Assert.AreStrictEqual(d.Comparer, EqualityComparer<string>.Default);
+        }
 
-        // #NoSupport
-        //[Test]
-        //public void JsDictionaryAndEqualityComparerConstructorWorks()
-        //{
-        //    var c = new TestEqualityComparer();
-        //    var orig = JsDictionary<string, int>.GetDictionary(new
-        //    {
-        //        a = 1,
-        //        b = 2
-        //    });
-        //    var d = new Dictionary<string, int>(orig, c);
-        //    Assert.False((object)d == (object)orig);
-        //    Assert.AreEqual(d.Count, 2);
-        //    Assert.AreEqual(d["a"], 1);
-        //    Assert.AreEqual(d["b"], 2);
-        //    Assert.AreStrictEqual(d.Comparer, c);
-        //}
+        [Test]
+        public void JsDictionaryAndEqualityComparerConstructorWorks()
+        {
+            var c = new TestEqualityComparer();
+            var orig = JsDictionary<string, int>.GetDictionary(new
+            {
+                a = 1,
+                b = 2
+            });
+            var d = new Dictionary<string, int>(orig, c);
+            Assert.False((object)d == (object)orig);
+            Assert.AreEqual(d.Count, 2);
+            Assert.AreEqual(d["a"], 1);
+            Assert.AreEqual(d["b"], 2);
+            Assert.AreStrictEqual(d.Comparer, c);
+        }
 
         [Test]
         public void CopyConstructorWorks_SPI_1549()

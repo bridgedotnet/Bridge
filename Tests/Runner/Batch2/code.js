@@ -378,7 +378,7 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
             var $t;
             var list = ["x", "y"];
             var result = "";
-            $t = Bridge.getEnumerator(list, "System$Collections$Generic$IEnumerable$1$String$getEnumerator");
+            $t = Bridge.getEnumerator(list, null, String);
             while ($t.moveNext()) {
                 var s = $t.getCurrent();
                 result = System.String.concat(result, s);

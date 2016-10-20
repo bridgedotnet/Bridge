@@ -6655,7 +6655,7 @@ Bridge.$N1391Result =                 r;
             }
 
             var i = 0;
-            $t = Bridge.getEnumerator(dic.getValues(), "System$Collections$Generic$IEnumerable$1$System$Int32$getEnumerator");
+            $t = Bridge.getEnumerator(dic.getValues(), null, System.Int32);
             while ($t.moveNext()) {
                 var sameVal1 = $t.getCurrent();
                 Bridge.Test.Assert.areEqual$1(((i = (i + 1) | 0)), sameVal1, "Inside foreach scope");
@@ -6861,8 +6861,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -6892,7 +6890,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    };
+                                    }; /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);

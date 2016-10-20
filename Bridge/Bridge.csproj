@@ -83,6 +83,10 @@
     <Compile Include="Attributes\ExternalAttribute.cs" />
     <Compile Include="Attributes\FileNameAttribute.cs" />
     <Compile Include="Attributes\ScriptAttribute.cs" />
+    <Compile Include="Bridge\Collections\Generic\JsDictionary.cs" />
+    <Compile Include="Bridge\Collections\Generic\Queue.cs" />
+    <Compile Include="Bridge\Collections\Generic\Stack.cs" />
+    <Compile Include="Bridge\Collections\JsDictionary.cs" />
     <Compile Include="Bridge\Console\Console.cs" />
     <Compile Include="Bridge\Function.cs" />
     <Compile Include="Bridge\Linq\Enumerable.cs" />

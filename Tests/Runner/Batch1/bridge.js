@@ -9601,6 +9601,20 @@
             }
 
             return true;
+        },
+
+        peekFront: function(arr) {
+            if (arr.length) {
+                return arr[0];
+            }
+            throw new System.InvalidOperationException('Array is empty');
+        },
+
+        peekBack: function(arr) {
+            if (arr.length) {
+                return arr[arr.length - 1];
+            }
+            throw new System.InvalidOperationException('Array is empty');
         }
     };
 
@@ -9833,6 +9847,55 @@
         }
     });
 
+    Bridge.define('Bridge.ObjectEnumerator', {
+        inherits: [System.Collections.IEnumerator, System.IDisposable],
+
+        statics: {
+            clearKeys: function(d) {
+                for (var n in d) {
+                    if (d.hasOwnProperty(n))
+                        delete d[n];
+                }
+            },
+
+            mkdict: function ()
+            {
+                var a = (arguments.length !== 1 ? arguments : arguments[0]);
+                var r = {};
+                for (var i = 0; i < a.length; i += 2) {
+                    r[a[i]] = a[i + 1];
+                }
+
+                return r;
+            }
+        },
+
+        ctor: function (o) {
+            this._keys = Object.keys(o);
+            this._index = -1;
+            this._object = o;
+        },
+
+        moveNext: function () {
+            this._index++;
+            return this._index < this._keys.length;
+        },
+        reset: function () {
+            this._index = -1;
+        },
+        getCurrent$1: function () {
+            return this.getCurrent();
+        },
+        getCurrent: function() {
+            if (this._index < 0 || this._index >= this._keys.length) {
+                throw new System.InvalidOperationException('Invalid operation');
+            }
+                
+            var k = this._keys[this._index];
+            return { key: k, value: this._object[k] };
+        },
+        dispose: Bridge.emptyFn
+    });
     // @source EqualityComparer.js
 
     Bridge.define('System.Collections.Generic.EqualityComparer$1', function (T) {
@@ -9993,7 +10056,7 @@
                         this.add(c.key, c.value);
                     }
                 } else if (Object.prototype.toString.call(obj) === '[object Object]') {
-                    var names = Bridge.getPropertyNames(obj),
+                    var names = Object.keys(obj),
                         name;
 
                     for (var i = 0; i < names.length; i++) {

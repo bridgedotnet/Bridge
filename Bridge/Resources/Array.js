@@ -845,6 +845,20 @@
             }
 
             return true;
+        },
+
+        peekFront: function(arr) {
+            if (arr.length) {
+                return arr[0];
+            }
+            throw new System.InvalidOperationException('Array is empty');
+        },
+
+        peekBack: function(arr) {
+            if (arr.length) {
+                return arr[arr.length - 1];
+            }
+            throw new System.InvalidOperationException('Array is empty');
         }
     };
 

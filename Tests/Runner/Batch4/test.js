@@ -83,6 +83,8 @@
             QUnit.test("GenericDictionaryTests - DefaultConstructorWorks_SPI_1549", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_GenericDictionaryTests.defaultConstructorWorks_SPI_1549);
             QUnit.test("GenericDictionaryTests - CapacityConstructorWorks_SPI_1549", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_GenericDictionaryTests.capacityConstructorWorks_SPI_1549);
             QUnit.test("GenericDictionaryTests - CapacityAndEqualityComparerWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_GenericDictionaryTests.capacityAndEqualityComparerWorks);
+            QUnit.test("GenericDictionaryTests - JsDictionaryConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_GenericDictionaryTests.jsDictionaryConstructorWorks);
+            QUnit.test("GenericDictionaryTests - JsDictionaryAndEqualityComparerConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_GenericDictionaryTests.jsDictionaryAndEqualityComparerConstructorWorks);
             QUnit.test("GenericDictionaryTests - CopyConstructorWorks_SPI_1549", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_GenericDictionaryTests.copyConstructorWorks_SPI_1549);
             QUnit.test("GenericDictionaryTests - EqualityComparerOnlyConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_GenericDictionaryTests.equalityComparerOnlyConstructorWorks);
             QUnit.test("GenericDictionaryTests - ConstructorWithBothDictionaryAndEqualityComparerWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_GenericDictionaryTests.constructorWithBothDictionaryAndEqualityComparerWorks);
@@ -217,6 +219,33 @@
             QUnit.test("ListTests - IListInsertWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_ListTests.iListInsertWorks);
             QUnit.test("ListTests - IListRemoveAtWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_ListTests.iListRemoveAtWorks);
             QUnit.test("ListTests - ToArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_ListTests.toArrayWorks);
+            QUnit.test("QueueTests - TypePropertiesAreCorrect", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_QueueTests.typePropertiesAreCorrect);
+            QUnit.test("QueueTests - CountWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_QueueTests.countWorks);
+            QUnit.test("QueueTests - EnqueueAndDequeueWork", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_QueueTests.enqueueAndDequeueWork);
+            QUnit.test("QueueTests - PeekWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_QueueTests.peekWorks);
+            QUnit.test("QueueTests - ContainsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_QueueTests.containsWorks);
+            QUnit.test("QueueTests - ContainsUsesEqualsMethod", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_QueueTests.containsUsesEqualsMethod);
+            QUnit.test("QueueTests - ClearWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_QueueTests.clearWorks);
+            QUnit.test("StackTests - TypePropertiesAreCorrect", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_StackTests.typePropertiesAreCorrect);
+            QUnit.test("StackTests - CountWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_StackTests.countWorks);
+            QUnit.test("StackTests - PushAndPopWork", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_StackTests.pushAndPopWork);
+            QUnit.test("StackTests - PeekWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_StackTests.peekWorks);
+            QUnit.test("StackTests - ContainsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_StackTests.containsWorks);
+            QUnit.test("StackTests - ContainsUsesEqualsMethod", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_StackTests.containsUsesEqualsMethod);
+            QUnit.test("StackTests - ClearWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_StackTests.clearWorks);
+            QUnit.test("JsDictionaryTests - TypePropertiesAreCorrect", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests.typePropertiesAreCorrect);
+            QUnit.test("JsDictionaryTests - DefaultConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests.defaultConstructorWorks);
+            QUnit.test("JsDictionaryTests - NameValuePairsConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests.nameValuePairsConstructorWorks);
+            QUnit.test("JsDictionaryTests - KeysWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests.keysWorks);
+            QUnit.test("JsDictionaryTests - IndexingWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests.indexingWorks);
+            QUnit.test("JsDictionaryTests - ClearWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests.clearWorks);
+            QUnit.test("JsDictionaryTests - ContainsKeyWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests.containsKeyWorks);
+            QUnit.test("JsDictionaryTests - GetDictionaryWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests.getDictionaryWorks);
+            QUnit.test("JsDictionaryTests - GetEnumeratorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests.getEnumeratorWorks);
+            QUnit.test("JsDictionaryTests - RemoveWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests.removeWorks);
+            QUnit.test("JsDictionaryTests - ConvertingToGenericReturnsSameInstance", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests.convertingToGenericReturnsSameInstance);
+            QUnit.test("JsDictionaryTests - ConvertingFromGenericReturnsSameInstance", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests.convertingFromGenericReturnsSameInstance);
+            QUnit.test("JsDictionaryTests - CollectionInitializerWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests.collectionInitializerWorks);
             QUnit.test("ReadOnlyCollectionTests - TypePropertiesAreCorrect", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_ObjectModel_ReadOnlyCollectionTests.typePropertiesAreCorrect);
             QUnit.test("ReadOnlyCollectionTests - ConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_ObjectModel_ReadOnlyCollectionTests.constructorWorks);
             QUnit.test("ReadOnlyCollectionTests - CountWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_ObjectModel_ReadOnlyCollectionTests.countWorks);
@@ -2226,6 +2255,14 @@
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.GenericDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_GenericDictionaryTests);
                 t.getFixture().capacityAndEqualityComparerWorks();
             },
+            jsDictionaryConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.GenericDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_GenericDictionaryTests);
+                t.getFixture().jsDictionaryConstructorWorks();
+            },
+            jsDictionaryAndEqualityComparerConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.GenericDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_GenericDictionaryTests);
+                t.getFixture().jsDictionaryAndEqualityComparerConstructorWorks();
+            },
             copyConstructorWorks_SPI_1549: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.GenericDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_GenericDictionaryTests);
                 t.getFixture().copyConstructorWorks_SPI_1549();
@@ -2803,6 +2840,132 @@
             toArrayWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_ListTests);
                 t.getFixture().toArrayWorks();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_QueueTests", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.QueueTests)],
+        statics: {
+            typePropertiesAreCorrect: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.QueueTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_QueueTests);
+                t.getFixture().typePropertiesAreCorrect();
+            },
+            countWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.QueueTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_QueueTests);
+                t.getFixture().countWorks();
+            },
+            enqueueAndDequeueWork: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.QueueTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_QueueTests);
+                t.getFixture().enqueueAndDequeueWork();
+            },
+            peekWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.QueueTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_QueueTests);
+                t.getFixture().peekWorks();
+            },
+            containsWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.QueueTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_QueueTests);
+                t.getFixture().containsWorks();
+            },
+            containsUsesEqualsMethod: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.QueueTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_QueueTests);
+                t.getFixture().containsUsesEqualsMethod();
+            },
+            clearWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.QueueTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_QueueTests);
+                t.getFixture().clearWorks();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_StackTests", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.StackTests)],
+        statics: {
+            typePropertiesAreCorrect: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.StackTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_StackTests);
+                t.getFixture().typePropertiesAreCorrect();
+            },
+            countWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.StackTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_StackTests);
+                t.getFixture().countWorks();
+            },
+            pushAndPopWork: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.StackTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_StackTests);
+                t.getFixture().pushAndPopWork();
+            },
+            peekWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.StackTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_StackTests);
+                t.getFixture().peekWorks();
+            },
+            containsWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.StackTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_StackTests);
+                t.getFixture().containsWorks();
+            },
+            containsUsesEqualsMethod: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.StackTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_StackTests);
+                t.getFixture().containsUsesEqualsMethod();
+            },
+            clearWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.StackTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_Generic_StackTests);
+                t.getFixture().clearWorks();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.JsDictionaryTests)],
+        statics: {
+            typePropertiesAreCorrect: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.JsDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests);
+                t.getFixture().typePropertiesAreCorrect();
+            },
+            defaultConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.JsDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests);
+                t.getFixture().defaultConstructorWorks();
+            },
+            nameValuePairsConstructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.JsDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests);
+                t.getFixture().nameValuePairsConstructorWorks();
+            },
+            keysWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.JsDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests);
+                t.getFixture().keysWorks();
+            },
+            indexingWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.JsDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests);
+                t.getFixture().indexingWorks();
+            },
+            clearWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.JsDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests);
+                t.getFixture().clearWorks();
+            },
+            containsKeyWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.JsDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests);
+                t.getFixture().containsKeyWorks();
+            },
+            getDictionaryWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.JsDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests);
+                t.getFixture().getDictionaryWorks();
+            },
+            getEnumeratorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.JsDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests);
+                t.getFixture().getEnumeratorWorks();
+            },
+            removeWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.JsDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests);
+                t.getFixture().removeWorks();
+            },
+            convertingToGenericReturnsSameInstance: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.JsDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests);
+                t.getFixture().convertingToGenericReturnsSameInstance();
+            },
+            convertingFromGenericReturnsSameInstance: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.JsDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests);
+                t.getFixture().convertingFromGenericReturnsSameInstance();
+            },
+            collectionInitializerWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Collections.JsDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Collections_JsDictionaryTests);
+                t.getFixture().collectionInitializerWorks();
             }
         }
     });

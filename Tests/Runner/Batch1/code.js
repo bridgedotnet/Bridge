@@ -321,7 +321,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var $t;
             var list = ["x", "y"];
             var result = "";
-            $t = Bridge.getEnumerator(list, "System$Collections$Generic$IEnumerable$1$String$getEnumerator");
+            $t = Bridge.getEnumerator(list, null, String);
             while ($t.moveNext()) {
                 var s = $t.getCurrent();
                 result = System.String.concat(result, s);
@@ -4977,7 +4977,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.false(System.Array.contains(keys, "a", String));
 
             var count = 0;
-            $t = Bridge.getEnumerator(d.getKeys(), "System$Collections$Generic$IEnumerable$1$String$getEnumerator");
+            $t = Bridge.getEnumerator(d.getKeys(), null, String);
             while ($t.moveNext()) {
                 var key = $t.getCurrent();
                 if (!Bridge.referenceEquals(key, "1") && !Bridge.referenceEquals(key, "2")) {
@@ -4999,7 +4999,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.false(System.Array.contains(values, "1", String));
 
             var count = 0;
-            $t = Bridge.getEnumerator(d.getValues(), "System$Collections$Generic$IEnumerable$1$String$getEnumerator");
+            $t = Bridge.getEnumerator(d.getValues(), null, String);
             while ($t.moveNext()) {
                 var value = $t.getCurrent();
                 if (!Bridge.referenceEquals(value, "a") && !Bridge.referenceEquals(value, "b")) {
@@ -5452,7 +5452,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.true$1(Bridge.hasValue(keys), "ICollection<int>");
 
             var i = 0;
-            $t = Bridge.getEnumerator(keys, "System$Collections$Generic$IEnumerable$1$System$Int32$getEnumerator");
+            $t = Bridge.getEnumerator(keys, null, System.Int32);
             while ($t.moveNext()) {
                 var key = $t.getCurrent();
                 Bridge.Test.Assert.areEqual(actualKeys[i], key);
@@ -5493,7 +5493,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
             var i = 0;
 
-            $t = Bridge.getEnumerator(values, "System$Collections$Generic$IEnumerable$1$String$getEnumerator");
+            $t = Bridge.getEnumerator(values, null, String);
             while ($t.moveNext()) {
                 var val = $t.getCurrent();
                 Bridge.Test.Assert.areEqual(actualValues[i], val);
