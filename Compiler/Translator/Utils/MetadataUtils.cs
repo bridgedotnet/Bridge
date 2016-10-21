@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using ICSharpCode.NRefactory.Semantics;
 
 namespace Bridge.Translator
 {
@@ -199,17 +200,22 @@ namespace Bridge.Translator
 
             var memberAccessibility = emitter.AssemblyInfo.Reflection.MemberAccessibility;
 
-            if (memberAccessibility == null)
+            if (memberAccessibility == null || memberAccessibility.Length == 0)
             {
-                memberAccessibility = ifHasAttribute ? MemberAccessibility.None : MemberAccessibility.All;
+                memberAccessibility = ((AssemblyInfo)emitter.AssemblyInfo).ReflectionInternal.MemberAccessibility;
+            }
+
+            if (memberAccessibility == null || memberAccessibility.Length == 0)
+            {
+                memberAccessibility = new[] { ifHasAttribute ? MemberAccessibility.None : MemberAccessibility.All };
 
                 if (ifHasAttribute && MetadataUtils.GetScriptableAttributes(member.Attributes, emitter, tree).Any())
                 {
-                    memberAccessibility = MemberAccessibility.All;
+                    memberAccessibility = new []{ MemberAccessibility.All };
                 }
             }
 
-            return MetadataUtils.IsMemberReflectable(member, memberAccessibility.Value);
+            return MetadataUtils.IsMemberReflectable(member, memberAccessibility);
         }
 
         private static bool? ReflectableValue(IList<IAttribute> attributes, IMember member, IEmitter emitter)
@@ -223,41 +229,144 @@ namespace Bridge.Translator
                     return true;
                 }
 
-                var value = attr.PositionalArguments.First().ConstantValue;
-
-                if (value is bool)
+                if (attr.PositionalArguments.Count > 1)
                 {
-                    return (bool)attr.PositionalArguments.First().ConstantValue;
+                    var list = new List<MemberAccessibility>();
+                    for (int i = 0; i < attr.PositionalArguments.Count; i++)
+                    {
+                        object v = attr.PositionalArguments[i].ConstantValue;
+                        list.Add((MemberAccessibility) (int) v);
+                    }
+
+                    return MetadataUtils.IsMemberReflectable(member, list.ToArray());
                 }
-
-                if (value is int)
+                else
                 {
-                    return MetadataUtils.IsMemberReflectable(member, (MemberAccessibility)(int)value);
+                    var rr = attr.PositionalArguments.First();
+                    var value = rr.ConstantValue;
+
+                    if (rr is ArrayCreateResolveResult)
+                    {
+                        return MetadataUtils.IsMemberReflectable(member, ((ArrayCreateResolveResult)rr).InitializerElements.Select(ie => (int)ie.ConstantValue).Cast<MemberAccessibility>().ToArray());
+                    }
+
+                    if (value is bool)
+                    {
+                        return (bool)attr.PositionalArguments.First().ConstantValue;
+                    }
+
+                    if (value is int)
+                    {
+                        return MetadataUtils.IsMemberReflectable(member, new[] { (MemberAccessibility)(int)value });
+                    }
+
+                    if (value is int[])
+                    {
+                        return MetadataUtils.IsMemberReflectable(member, ((int[])value).Cast<MemberAccessibility>().ToArray());
+                    }
                 }
             }
 
             return null;
         }
 
-        private static bool IsMemberReflectable(IMember member, MemberAccessibility memberReflectability)
+        private static bool IsMemberReflectable(IMember member, MemberAccessibility[] memberReflectability)
         {
-            switch (memberReflectability)
+            foreach (var memberAccessibility in memberReflectability)
             {
-                case MemberAccessibility.None:
-                    return false;
-
-                case MemberAccessibility.PublicAndProtected:
-                    return !member.IsPrivate && !member.IsInternal;
-
-                case MemberAccessibility.NonPrivate:
-                    return !member.IsPrivate;
-
-                case MemberAccessibility.All:
+                if (memberAccessibility == MemberAccessibility.All)
+                {
                     return true;
+                }
 
-                default:
-                    throw new ArgumentException("reflectability");
+                if (memberAccessibility == MemberAccessibility.None)
+                {
+                    return false;
+                }
+
+                var accesibiliy = new List<string>();
+
+                if (memberAccessibility.HasFlag(MemberAccessibility.Public))
+                {
+                    accesibiliy.Add("Public");
+                }
+
+                if (memberAccessibility.HasFlag(MemberAccessibility.Private))
+                {
+                    accesibiliy.Add("Private");
+                }
+
+                if (memberAccessibility.HasFlag(MemberAccessibility.Internal))
+                {
+                    accesibiliy.Add("Internal");
+                }
+
+                if (memberAccessibility.HasFlag(MemberAccessibility.Protected))
+                {
+                    accesibiliy.Add("Protected");
+                }
+
+                if (accesibiliy.Count > 0)
+                {
+                    if (member.Accessibility == Accessibility.ProtectedOrInternal)
+                    {
+                        if (!(accesibiliy.Contains("Protected") || accesibiliy.Contains("Internal")))
+                        {
+                            continue;
+                        }
+                    }
+                    else if (!accesibiliy.Contains(member.Accessibility.ToString()))
+                    {
+                        continue;
+                    }
+                }
+                
+                if (memberAccessibility.HasFlag(MemberAccessibility.Instance) && member.IsStatic)
+                {
+                    continue;
+                }
+
+                if (memberAccessibility.HasFlag(MemberAccessibility.Static) && !member.IsStatic)
+                {
+                    continue;
+                }
+
+                var kind = new List<string>();
+
+                if (memberAccessibility.HasFlag(MemberAccessibility.Constructor))
+                {
+                    kind.Add("Constructor");
+                }
+
+                if (memberAccessibility.HasFlag(MemberAccessibility.Field))
+                {
+                    kind.Add("Field");
+                }
+
+                if (memberAccessibility.HasFlag(MemberAccessibility.Event))
+                {
+                    kind.Add("Event");
+                }
+
+                if (memberAccessibility.HasFlag(MemberAccessibility.Method))
+                {
+                    kind.Add("Method");
+                }
+
+                if (memberAccessibility.HasFlag(MemberAccessibility.Property))
+                {
+                    kind.Add("Property");
+                }
+
+                if (kind.Count > 0 && !kind.Contains(member.SymbolKind.ToString()))
+                {
+                    continue;
+                }
+
+                return true;
             }
+
+            return false;
         }
 
         private static JObject ConstructParameterInfo(IParameter p, IEmitter emitter, bool includeDeclaringType, bool isGenericSpecialization, SyntaxTree tree)
@@ -437,7 +546,10 @@ namespace Bridge.Translator
                 properties.Add("type", (int)MemberTypes.Field);
                 properties.Add("returnType", new JRaw(MetadataUtils.GetTypeName(field.ReturnType, emitter, isGenericSpecialization)));
                 properties.Add("sname", OverloadsCollection.Create(emitter, field).GetOverloadName());
-                properties.Add("isReadOnly", field.IsReadOnly);
+                if (field.IsReadOnly)
+                {
+                    properties.Add("isReadOnly", field.IsReadOnly);
+                }
             }
             else if (m is IProperty)
             {

@@ -74,6 +74,8 @@ namespace Bridge.Contract
                 this.Logger.Info("Reading base configuration at " + (configPath ?? "") + " ...");
                 var json = File.ReadAllText(configPath);
 
+                
+                
                 T config;
                 if (mergePath != null)
                 {
@@ -83,12 +85,16 @@ namespace Bridge.Contract
                     var cfgMain = JObject.Parse(json);
                     var cfgMerge = JObject.Parse(jsonMerge);
 
+                    var serializer = new JsonSerializer() {NullValueHandling = NullValueHandling.Ignore};
                     cfgMerge.Merge(cfgMain);
-                    config = cfgMerge.ToObject<T>();
+                    config = cfgMerge.ToObject<T>(serializer);
                 }
                 else
                 {
-                    config = JsonConvert.DeserializeObject<T>(json);
+                    var settings = new JsonSerializerSettings();
+                    settings.NullValueHandling = NullValueHandling.Ignore;
+
+                    config = JsonConvert.DeserializeObject<T>(json, settings);
                 }
 
                 if (config == null)

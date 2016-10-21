@@ -410,10 +410,10 @@ namespace Bridge.Translator
             string filter = !string.IsNullOrEmpty(config.Filter) ? config.Filter : (!string.IsNullOrEmpty(configInternal.Filter) ? configInternal.Filter : null);
 
             var hasSettings = !string.IsNullOrEmpty(config.Filter) ||
-                              config.MemberAccessibility.HasValue ||
+                              config.MemberAccessibility != null ||
                               config.TypeAccessibility.HasValue ||
                               !string.IsNullOrEmpty(configInternal.Filter) ||
-                              configInternal.MemberAccessibility.HasValue ||
+                              configInternal.MemberAccessibility != null ||
                               configInternal.TypeAccessibility.HasValue;
 
             if (enable.HasValue && !enable.Value)
