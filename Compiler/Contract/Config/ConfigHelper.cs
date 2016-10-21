@@ -85,16 +85,12 @@ namespace Bridge.Contract
                     var cfgMain = JObject.Parse(json);
                     var cfgMerge = JObject.Parse(jsonMerge);
 
-                    var serializer = new JsonSerializer() {NullValueHandling = NullValueHandling.Ignore};
                     cfgMerge.Merge(cfgMain);
-                    config = cfgMerge.ToObject<T>(serializer);
+                    config = cfgMerge.ToObject<T>();
                 }
                 else
                 {
-                    var settings = new JsonSerializerSettings();
-                    settings.NullValueHandling = NullValueHandling.Ignore;
-
-                    config = JsonConvert.DeserializeObject<T>(json, settings);
+                    config = JsonConvert.DeserializeObject<T>(json);
                 }
 
                 if (config == null)

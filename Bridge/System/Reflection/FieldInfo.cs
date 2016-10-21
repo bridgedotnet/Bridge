@@ -15,7 +15,7 @@ namespace System.Reflection
         }
 
         [FieldProperty]
-        [Name("isReadOnly")]
+        [Name("(isReadOnly || false)")]
         public extern bool IsInitOnly { get; }
 
         [Template("Bridge.Reflection.fieldAccess({this}, {obj})")]

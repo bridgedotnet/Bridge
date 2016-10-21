@@ -10,7 +10,7 @@ namespace Bridge.Contract
             get; set;
         }
 
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonProperty("memberAccessibility", ItemConverterType = typeof(StringEnumConverter))]
         MemberAccessibility[] MemberAccessibility
         {
             get; set;

@@ -55,6 +55,15 @@ namespace Bridge
         InternalInstanceConstructor = Internal | Instance | Constructor,
         InternalStaticConstructor = Internal | Static | Constructor,
 
+        InstanceConstructor = Instance | Constructor,
+        StaticConstructor = Static | Constructor,
+
+        PublicConstructor = Public | Constructor,
+        PrivateConstructor = Private | Constructor,
+        ProtectedConstructor = Protected | Constructor,
+        InternalConstructor = Internal | Constructor,
+
+
         PublicInstanceEvent = Public | Instance | Event,
         PublicStaticEvent = Public | Static | Event,
         PrivateInstanceEvent = Private | Instance | Event,
@@ -63,6 +72,14 @@ namespace Bridge
         ProtectedStaticEvent = Protected | Static | Event,
         InternalInstanceEvent = Internal | Instance | Event,
         InternalStaticEvent = Internal | Static | Event,
+
+        InstanceEvent = Instance | Event,
+        StaticEvent = Static | Event,
+
+        PublicEvent = Public | Event,
+        PrivateEvent = Private | Event,
+        ProtectedEvent = Protected | Event,
+        InternalEvent = Internal | Event,
 
         PublicInstanceField = Public | Instance | Field,
         PublicStaticField = Public | Static | Field,
@@ -73,6 +90,14 @@ namespace Bridge
         InternalInstanceField = Internal | Instance | Field,
         InternalStaticField = Internal | Static | Field,
 
+        InstanceField = Instance | Field,
+        StaticField = Static | Field,
+
+        PublicField = Public | Field,
+        PrivateField = Private | Field,
+        ProtectedField = Protected | Field,
+        InternalField = Internal | Field,
+
         PublicInstanceMethod = Public | Instance | Method,
         PublicStaticMethod = Public | Static | Method,
         PrivateInstanceMethod = Private | Instance | Method,
@@ -82,6 +107,14 @@ namespace Bridge
         InternalInstanceMethod = Internal | Instance | Method,
         InternalStaticMethod = Internal | Static | Method,
 
+        InstanceMethod = Instance | Method,
+        StaticMethod = Static | Method,
+
+        PublicMethod = Public | Method,
+        PrivateMethod = Private | Method,
+        ProtectedMethod = Protected | Method,
+        InternalMethod = Internal | Method,
+
         PublicInstanceProperty = Public | Instance | Property,
         PublicStaticProperty = Public | Static | Property,
         PrivateInstanceProperty = Private | Instance | Property,
@@ -90,6 +123,14 @@ namespace Bridge
         ProtectedStaticProperty = Protected | Static | Property,
         InternalInstanceProperty = Internal | Instance | Property,
         InternalStaticProperty = Internal | Static | Property,
+
+        InstanceProperty = Instance | Property,
+        StaticProperty = Static | Property,
+
+        PublicProperty = Public | Property,
+        PrivateProperty = Private | Property,
+        ProtectedProperty = Protected | Property,
+        InternalProperty = Internal | Property,
 
         // backward compatibility
         PublicAndProtected = Public | Protected,
