@@ -24,7 +24,8 @@ console.log("Hello, World!");
 * Read the [Getting Started](http://bridge.net/docs/getting-started/) Knowledge Base article
 * Try [Deck](http://deck.net/) if you want to just play
 * Installation:
-  * Add **Bridge.NET** Visual Studio extension, or 
+  * Add **Bridge.NET** Visual Studio extension
+  * Add **Bridge.NET** folder for Visual Studio Code
   * Use [NuGet](https://www.nuget.org/packages/bridge) to install into a C# Class Library project (`Install-Package Bridge`)
 * The [Attribute Reference](http://bridge.net/docs/attribute-reference/) is important
 * Licensed under [Apache License, Version 2.0](LICENSE)
