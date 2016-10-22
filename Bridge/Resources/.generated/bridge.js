@@ -1575,9 +1575,12 @@
             return -1;
         },
 
-        isNullOrWhiteSpace: function (value) {
-            //do not replace == to ===, it ichecks to undefined also
-            return value == null || value.match(/^ *$/) !== null;
+        isNullOrWhiteSpace: function (s) {
+            if (s == null) {
+                return true;
+            }
+
+            return System.Char.isWhiteSpace(s);
         },
 
         isNullOrEmpty: function (value) {
@@ -3996,8 +3999,22 @@
                 return str.charCodeAt(index);
             },
 
-            isWhiteSpace: function (value) {
-                return /\s/.test(value);
+            isWhiteSpace: function (s) {
+                for (var i = 0; i < s.length; i++) {
+                    if (!System.Char.isWhiteSpaceChar(s.charCodeAt(i))) {
+                        return false;
+                    }
+                }
+                return true;
+            },
+
+            isWhiteSpaceChar: function(c) {
+                if (c < 256) {
+                    return (((c >= 9) && (c <= 19)) || (c === 32) || (c === 160) || (c === 133));
+                }
+                else {
+                    return /\s/.test(String.fromCharCode(c));
+                }
             },
 
             isDigit: function (value) {

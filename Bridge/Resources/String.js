@@ -51,9 +51,12 @@
             return -1;
         },
 
-        isNullOrWhiteSpace: function (value) {
-            //do not replace == to ===, it ichecks to undefined also
-            return value == null || value.match(/^ *$/) !== null;
+        isNullOrWhiteSpace: function (s) {
+            if (s == null) {
+                return true;
+            }
+
+            return System.Char.isWhiteSpace(s);
         },
 
         isNullOrEmpty: function (value) {
