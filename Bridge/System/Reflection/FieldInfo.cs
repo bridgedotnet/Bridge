@@ -6,7 +6,7 @@ namespace System.Reflection
     [External]
     public class FieldInfo : MemberInfo
     {
-        [Name("returnType")]
+        [Name("rt")]
         [FieldProperty]
         public extern Type FieldType
         {
@@ -15,8 +15,11 @@ namespace System.Reflection
         }
 
         [FieldProperty]
-        [Name("(isReadOnly || false)")]
-        public extern bool IsInitOnly { get; }
+        public extern bool IsInitOnly
+        {
+            [Template("({this}.ro || false)")]
+            get;
+        }
 
         [Template("Bridge.Reflection.fieldAccess({this}, {obj})")]
         public extern object GetValue(object obj);
@@ -27,7 +30,7 @@ namespace System.Reflection
         /// <summary>
         /// Script name of the field
         /// </summary>
-        [Name("sname")]
+        [Name("sn")]
         [FieldProperty]
         public extern string ScriptName
         {

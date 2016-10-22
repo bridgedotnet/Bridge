@@ -291,6 +291,7 @@ namespace Bridge.Translator
                 this.Emitter.Translator.Plugins.AfterTypeEmit(this.Emitter, type);
             }
 
+            this.Emitter.NamespacesCache = new Dictionary<string, int>();
             foreach (var type in this.Emitter.Types)
             {
                 var typeDef = type.Type.GetDefinition();
@@ -348,49 +349,66 @@ namespace Bridge.Translator
                 this.Emitter.MetaDataOutputName = this.Emitter.EmitterOutput.FileName;
             }
             var scriptableAttributes = MetadataUtils.GetScriptableAttributes(this.Emitter.Resolver.Compilation.MainAssembly.AssemblyAttributes, this.Emitter, null).ToList();
+            bool hasMeta = metas.Count > 0 || scriptableAttributes.Count > 0;
 
-            if (metas.Count > 0 || scriptableAttributes.Count > 0)
+            if (hasMeta)
             {
                 this.WriteNewLine();
-            }
-
-            foreach (var meta in metas)
-            {
-                var metaData = meta.Value;
-                string typeArgs = "";
-
-                if (meta.Key.TypeArguments.Count > 0)
+                int pos = 0;
+                if (metas.Count > 0)
                 {
-                    StringBuilder arr_sb = new StringBuilder();
-                    var comma = false;
-                    foreach (var typeArgument in meta.Key.TypeArguments)
+                    this.Write("var $m = Bridge.setMetadata,");
+                    this.WriteNewLine();
+                    this.Write("    $n = ");
+                    pos = this.Emitter.Output.Length;
+                    this.Write(";");
+                    this.WriteNewLine();
+                }
+
+                foreach (var meta in metas)
+                {
+                    var metaData = meta.Value;
+                    string typeArgs = "";
+
+                    if (meta.Key.TypeArguments.Count > 0)
                     {
-                        if (comma)
+                        StringBuilder arr_sb = new StringBuilder();
+                        var comma = false;
+                        foreach (var typeArgument in meta.Key.TypeArguments)
                         {
-                            arr_sb.Append(", ");
+                            if (comma)
+                            {
+                                arr_sb.Append(", ");
+                            }
+
+                            arr_sb.Append(typeArgument.Name);
+                            comma = true;
                         }
 
-                        arr_sb.Append(typeArgument.Name);
-                        comma = true;
+                        typeArgs = arr_sb.ToString();
                     }
 
-                    typeArgs = arr_sb.ToString();
+                    this.Write(string.Format("$m({0}, function ({2}) {{ return {1}; }});", MetadataUtils.GetTypeName(meta.Key, this.Emitter, false, true), metaData.ToString(Formatting.None), typeArgs));
+                    this.WriteNewLine();
                 }
 
-                this.Write(string.Format("Bridge.setMetadata({0}, function ({2}) {{ return {1}; }});", BridgeTypes.ToJsName(meta.Key, this.Emitter, true), metaData.ToString(Formatting.None), typeArgs));
-                this.WriteNewLine();
-            }
-
-            if (scriptableAttributes.Count > 0)
-            {
-                JArray attrArr = new JArray();
-                foreach (var a in scriptableAttributes)
+                if (pos > 0)
                 {
-                    attrArr.Add(MetadataUtils.ConstructAttribute(a, null, this.Emitter));
+                    this.Emitter.Output.Insert(pos, this.Emitter.ToJavaScript(this.Emitter.NamespacesCache.OrderBy(key => key.Value).Select(item => new JRaw(item.Key)).ToArray()));
+                    this.Emitter.NamespacesCache = null;
                 }
 
-                this.Write(string.Format("$asm.attr= {0};", attrArr.ToString(Formatting.None)));
-                this.WriteNewLine();
+                if (scriptableAttributes.Count > 0)
+                {
+                    JArray attrArr = new JArray();
+                    foreach (var a in scriptableAttributes)
+                    {
+                        attrArr.Add(MetadataUtils.ConstructAttribute(a, null, this.Emitter));
+                    }
+
+                    this.Write(string.Format("$asm.attr= {0};", attrArr.ToString(Formatting.None)));
+                    this.WriteNewLine();
+                }
             }
 
             this.Emitter.Output = lastOutput;
@@ -448,8 +466,11 @@ namespace Bridge.Translator
 
                 if (typeDef != null)
                 {
-                    var isGlobal = typeDef.Attributes.Any(a => a.AttributeType.FullName == "Bridge.GlobalMethodsAttribute" || a.AttributeType.FullName == "Bridge.MixinAttribute");
-                    if (isGlobal)
+                    var skip = typeDef.Attributes.Any(a => 
+                            a.AttributeType.FullName == "Bridge.GlobalMethodsAttribute" ||
+                            a.AttributeType.FullName == "Bridge.NonScriptableAttribute" ||
+                            a.AttributeType.FullName == "Bridge.MixinAttribute");
+                    if (skip)
                     {
                         continue;
                     }
