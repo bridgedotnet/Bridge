@@ -300,10 +300,10 @@ namespace Bridge.Contract
                 return JS.Types.Object.NAME;
             }
 
-            if (NullableType.IsNullable(type))
+            /*if (NullableType.IsNullable(type))
             {
                 return BridgeTypes.ToJsName(NullableType.GetUnderlyingType(type), emitter, asDefinition, excludens, isAlias);
-            }
+            }*/
 
             if (type.Kind == TypeKind.Anonymous)
             {

@@ -14665,7 +14665,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var e19 = ($t54 = { ntype: 38, type: System.Int32, name: "a" }, $t55 = { ntype: 38, type: System.Int32, name: "b" }, ($t56={ ntype: 27, type: System.Int32, left: $t54, right: $t55 }, { ntype: 18, type: Function, returnType: $t56.type, body: $t56, params: Bridge.toList([$t54,$t55]) }));
             var e20 = ($t57 = { ntype: 38, type: System.Int32, name: "a" }, $t58 = { ntype: 38, type: System.Int32, name: "b" }, ($t59={ ntype: 1, type: System.Int32, left: $t57, right: $t58 }, { ntype: 18, type: Function, returnType: $t59.type, body: $t59, params: Bridge.toList([$t57,$t58]) }));
             var e21 = ($t60 = { ntype: 38, type: System.Int32, name: "a" }, $t61 = { ntype: 38, type: System.Int32, name: "b" }, ($t62={ ntype: 43, type: System.Int32, left: $t60, right: $t61 }, { ntype: 18, type: Function, returnType: $t62.type, body: $t62, params: Bridge.toList([$t60,$t61]) }));
-            var e22 = ($t63 = { ntype: 38, type: System.Int32, name: "a" }, $t64 = { ntype: 38, type: System.Int32, name: "b" }, ($t65={ ntype: 7, type: System.Int32, left: $t63, right: $t64 }, { ntype: 18, type: Function, returnType: $t65.type, body: $t65, params: Bridge.toList([$t63,$t64]) }));
+            var e22 = ($t63 = { ntype: 38, type: System.Nullable$1(System.Int32), name: "a" }, $t64 = { ntype: 38, type: System.Int32, name: "b" }, ($t65={ ntype: 7, type: System.Int32, left: $t63, right: $t64 }, { ntype: 18, type: Function, returnType: $t65.type, body: $t65, params: Bridge.toList([$t63,$t64]) }));
 
             var pa = { ntype: 38, type: System.Int32, name: "a" };
             var pb = { ntype: 38, type: System.Int32, name: "b" };
@@ -14690,7 +14690,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var e49 = { ntype: 27, type: System.Int32, left: pa, right: pb };
             var e50 = { ntype: 1, type: System.Int32, left: pa, right: pb };
             var e51 = { ntype: 43, type: System.Int32, left: pa, right: pb };
-            var e52 = { ntype: 7, type: System.Int32, left: { ntype: 38, type: System.Int32, name: "a" }, right: pb };
+            var e52 = { ntype: 7, type: System.Int32, left: { ntype: 38, type: System.Nullable$1(System.Int32), name: "a" }, right: pb };
             var e53 = { ntype: 39, type: System.Int32, left: pa, right: pb };
 
             var e61 = ($t66 = { ntype: 38, type: Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, name: "a" }, $t67 = { ntype: 38, type: Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, name: "b" }, ($t69=($t68=Bridge.getMetadata(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C).members[23], { ntype: 26, type: $t68.returnType, left: $t66, right: $t67, method: $t68 }), { ntype: 18, type: Function, returnType: $t69.type, body: $t69, params: Bridge.toList([$t66,$t67]) }));
@@ -19105,15 +19105,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         typePropertiesAreCorrect: function () {
             var a = 3, b = null;
-            Bridge.Test.Assert.areEqual$1("Boolean", Bridge.Reflection.getTypeFullName(Boolean), "Open FullName");
-            Bridge.Test.Assert.areEqual$1("System.Int32", Bridge.Reflection.getTypeFullName(System.Int32), "Instantiated FullName");
+            Bridge.Test.Assert.areEqual$1("System.Nullable$1[[Boolean]]", Bridge.Reflection.getTypeFullName(System.Nullable$1(Boolean)), "Open FullName");
+            Bridge.Test.Assert.areEqual$1("System.Nullable$1[[System.Int32, mscorlib]]", Bridge.Reflection.getTypeFullName(System.Nullable$1(System.Int32)), "Instantiated FullName");
             Bridge.Test.Assert.true$1(Bridge.is(a, System.Int32), "is int? #1");
             Bridge.Test.Assert.false$1(Bridge.is(b, System.Int32), "is int? #2");
 
-            Bridge.Test.Assert.true$1(this.isOfType(System.Int32, 3), "IsOfType #1");
-            Bridge.Test.Assert.false$1(this.isOfType(System.Int32, 3.14), "IsOfType #2");
-            Bridge.Test.Assert.true$1(this.isOfType(System.TimeSpan, new System.TimeSpan(System.Int64(1))), "IsOfType #3");
-            Bridge.Test.Assert.false$1(this.isOfType(System.TimeSpan, 3.14), "IsOfType #4");
+            Bridge.Test.Assert.true$1(this.isOfType(System.Nullable$1(System.Int32), 3), "IsOfType #1");
+            Bridge.Test.Assert.false$1(this.isOfType(System.Nullable$1(System.Int32), 3.14), "IsOfType #2");
+            Bridge.Test.Assert.true$1(this.isOfType(System.Nullable$1(System.TimeSpan), new System.TimeSpan(System.Int64(1))), "IsOfType #3");
+            Bridge.Test.Assert.false$1(this.isOfType(System.Nullable$1(System.TimeSpan), 3.14), "IsOfType #4");
         },
         convertingToNullableWorks: function () {
             var i = 3;
