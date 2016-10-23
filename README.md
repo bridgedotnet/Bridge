@@ -24,8 +24,8 @@ console.log("Hello, World!");
 * Read the [Getting Started](http://bridge.net/docs/getting-started/) Knowledge Base article
 * Try [Deck](http://deck.net/) if you want to just play
 * Installation:
-  * Add **Bridge.NET** Visual Studio extension
-  * Add **Bridge.NET** folder for Visual Studio Code
+  * Add **Bridge.NET** Visual Studio extension,
+  * Add **Bridge.NET** for Visual Studio Code, or
   * Use [NuGet](https://www.nuget.org/packages/bridge) to install into a C# Class Library project (`Install-Package Bridge`)
 * The [Attribute Reference](http://bridge.net/docs/attribute-reference/) is important
 * Licensed under [Apache License, Version 2.0](LICENSE)
@@ -82,6 +82,8 @@ From the options on the left side, be sure to select **Online**, then search for
 ![Bridge for Visual Studio](https://cloud.githubusercontent.com/assets/62210/13193692/10964c46-d73a-11e5-8350-700236c98016.png)
 
 After installation, you will have a new **Bridge.NET** project type. When creating new Bridge enabled projects, select this project type. 
+### Bridge for Visual Studio Code
+To install Bridge.NET for VS Code, first, download the Visual Studio Code .zip file from [here](http://bridge.net/download/). Then, open the folder with Visual Studio Code. You can now start coding your Bridge.NET application. When you are finished, press Ctrl + Shift + B. Look in Bridge/output for the outputted code.
 ### NuGet
 
 Another option is installation of Bridge into a new **C# Class Library** project using [NuGet](https://www.nuget.org/packages/bridge). Within the NuGet Package Manager, search for **Bridge** and click to install. 
