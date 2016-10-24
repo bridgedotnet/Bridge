@@ -17,7 +17,7 @@ namespace Bridge.Translator
     {
         public const string Bridge_ASSEMBLY = "Bridge";
         public const string BridgeResourcesPlusSeparatedFormatList = "Bridge.Resources.list";
-        public const string BridgeResourcesJsonFormatList = "Bridge.Resources.Items";
+        public const string BridgeResourcesJsonFormatList = "Bridge.Resources.json";
         public const string LocalesPrefix = "Bridge.Resources.Locales.";
         public const string SupportedProjectType = "Library";
         public const string DefaultRootNamespace = "ClassLibrary";
