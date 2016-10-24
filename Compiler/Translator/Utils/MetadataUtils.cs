@@ -704,7 +704,7 @@ namespace Bridge.Translator
                 return "Object";
             }
 
-            return BridgeTypes.ToJsName(type, emitter);
+            return BridgeTypes.ToJsName(type, emitter, skipMethodTypeParam:true);
         }
     }
 }
