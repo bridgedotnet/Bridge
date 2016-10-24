@@ -6861,8 +6861,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -6892,7 +6890,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    };
+                                    }; /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -10050,12 +10048,119 @@ Bridge.$N1391Result =                 r;
         testPropertyAndMethodNameConflict: function () {
             var item = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899.Item();
             Bridge.Test.Assert.areEqual(1, item.getValue());
-            Bridge.Test.Assert.areEqual(2, item.getValue$1());
+            Bridge.Test.Assert.areEqual(2, item.getValue$2());
+
+            var b = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899.B.ctor();
+            Bridge.Test.Assert.areEqual(1, b.getResult());
+
+            b = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899.B.$ctor1(5);
+            Bridge.Test.Assert.areEqual(15, b.getResult());
+
+            var c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899.C.ctor();
+            Bridge.Test.Assert.areEqual(1, c.getResult());
+
+            c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899.C.$ctor1(5);
+            Bridge.Test.Assert.areEqual(15, c.getResult());
+
+            var item2 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899.Item2.ctor();
+            Bridge.Test.Assert.areEqual(1, item2.getResult());
+
+            item2 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899.Item2.$ctor1(5);
+            Bridge.Test.Assert.areEqual(15, item2.getResult());
+
+            var item3 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899.Item3.ctor();
+            Bridge.Test.Assert.areEqual(1, item3.getResult(true));
+
+            item3 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899.Item3.$ctor1(5);
+            Bridge.Test.Assert.areEqual(15, item3.getResult(false));
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899.A", {
+        getValue: function () {
+            return 0;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899.C", {
+        getValue: 0,
+        ctor: function () {
+            this.$initialize();
+            this.setValue$1(1);
+        },
+        $ctor1: function (i) {
+            this.$initialize();
+            this.setValue$2(i);
+        },
+        getValue$1: function () {
+            return this.getValue;
+        },
+        setValue$1: function (value) {
+            this.getValue = value;
+        },
+        setValue$2: function (value) {
+            this.getValue = (value + 10) | 0;
+        },
+        getResult: function () {
+            return this.getValue;
         }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899.IItem", {
         $kind: "interface"
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899.Item2", {
+        value: 0,
+        ctor: function () {
+            this.$initialize();
+            this.setValue$1(1);
+        },
+        $ctor1: function (i) {
+            this.$initialize();
+            this.setValue$2(i);
+        },
+        getValue$1: function () {
+            return this.value;
+        },
+        setValue$1: function (value) {
+            this.value = value;
+        },
+        getValue: function () {
+            return this.getValue$1();
+        },
+        setValue$2: function (value) {
+            this.value = (value + 10) | 0;
+        },
+        getResult: function () {
+            return this.value;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899.Item3", {
+        value: 0,
+        config: {
+            properties: {
+                Value$1: 0
+            }
+        },
+        ctor: function () {
+            this.$initialize();
+            this.setValue$1(1);
+        },
+        $ctor1: function (i) {
+            this.$initialize();
+            this.setValue$2(i);
+        },
+        getValue: function () {
+            return this.getValue$1();
+        },
+        setValue$2: function (value) {
+            this.value = (value + 10) | 0;
+        },
+        getResult: function (prop) {
+            return prop ? this.getValue$1() : this.value;
+        }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1900", {
@@ -18530,6 +18635,34 @@ Bridge.$N1391Result =                 r;
         }
     }; });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899.B", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899.A],
+        value: 0,
+        ctor: function () {
+            this.$initialize();
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899.A.ctor.call(this);
+            this.setValue$1(1);
+        },
+        $ctor1: function (i) {
+            this.$initialize();
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899.A.ctor.call(this);
+            this.setValue$2(i);
+        },
+        getValue$1: function () {
+            return this.value;
+        },
+        setValue$1: function (value) {
+
+            this.value = value;
+        },
+        setValue$2: function (value) {
+            this.value = (value + 10) | 0;
+        },
+        getResult: function () {
+            return this.value;
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899.Item", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899.IItem],
         config: {
@@ -18541,7 +18674,7 @@ Bridge.$N1391Result =                 r;
         getValue: function () {
             return 1; // getter
         },
-        getValue$1: function () {
+        getValue$2: function () {
             return 2; // function
         },
         setValue: function () {
