@@ -16,7 +16,8 @@ namespace Bridge.Translator
     public partial class Translator : ITranslator
     {
         public const string Bridge_ASSEMBLY = "Bridge";
-        public const string BridgeResourcesList = "Bridge.Resources.list";
+        public const string BridgeResourcesPlusSeparatedFormatList = "Bridge.Resources.list";
+        public const string BridgeResourcesJsonFormatList = "Bridge.Resources.Items";
         public const string LocalesPrefix = "Bridge.Resources.Locales.";
         public const string SupportedProjectType = "Library";
         public const string DefaultRootNamespace = "ClassLibrary";
@@ -455,7 +456,7 @@ namespace Bridge.Translator
 
                     if (resourceExtractItems != null)
                     {
-                        this.Log.Trace("Found an resource option for resource name " + resourceExtractItems.Name + " and reference " + resourceExtractItems.Assembly);
+                        this.Log.Trace("Found resource option for resource name " + resourceExtractItems.Name + " and reference " + resourceExtractItems.Assembly);
 
                         if (resourceExtractItems.Extract != true)
                         {
@@ -486,7 +487,24 @@ namespace Bridge.Translator
                     }
                     else
                     {
-                        this.Log.Trace("Did not find  extract resource option for resource name " + resName + ". Will use default behavior");
+                        this.Log.Trace("Did not find extract resource option for resource name " + resName + ". Will use default embed behavior");
+
+                        if (resource.Path != null)
+                        {
+                            this.Log.Trace("resource.Path option " + resource.Path);
+
+                            this.GetResourceOutputPath(outputPath, resource.Path, resource.Name, true, ref resourceOutputFileName, ref resourceOutputDirName);
+
+                            if (resourceOutputDirName != null)
+                            {
+                                this.Log.Trace("Changing output path according to embedded resource Path setting to " + resourceOutputDirName);
+                            }
+
+                            if (resourceOutputFileName != null)
+                            {
+                                this.Log.Trace("Changing output file name according to embedded resource Path setting to " + resourceOutputFileName);
+                            }
+                        }
                     }
 
                     if (resourceOutputDirName == null)

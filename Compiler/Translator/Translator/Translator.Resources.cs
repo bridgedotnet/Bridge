@@ -70,9 +70,9 @@ namespace Bridge.Translator
             this.Log.Info("Done injecting resources");
         }
 
-        private Dictionary<string, byte[]> PrepareAndExtractResources(string outputPath, string projectPath, Dictionary<string, string> files)
+        private Dictionary<BridgeResourceInfo, byte[]> PrepareAndExtractResources(string outputPath, string projectPath, Dictionary<string, string> files)
         {
-            var resourcesToEmbed = new Dictionary<string, byte[]>();
+            var resourcesToEmbed = new Dictionary<BridgeResourceInfo, byte[]>();
 
             if (this.AssemblyInfo.Resources.HasEmbedResources())
             {
@@ -102,7 +102,14 @@ namespace Bridge.Translator
 
                         var code = OutputEncoding.GetBytes(resourceBuffer.ToString());
 
-                        resourcesToEmbed.Add(resource.Name, code);
+                        var info = new BridgeResourceInfo
+                        {
+                            Name = resource.Name,
+                            FileName = resource.Name,
+                            Path = string.IsNullOrWhiteSpace(resource.Output) ? null : resource.Output
+                        };
+
+                        resourcesToEmbed.Add(info, code);
 
                         this.ExtractResource(outputPath, projectPath, resource, code);
                     }
@@ -128,7 +135,14 @@ namespace Bridge.Translator
                         this.Log.Trace("Reading output file " + file.Value);
                         var content = File.ReadAllBytes(file.Value);
 
-                        resourcesToEmbed.Add(file.Key, content);
+                        var info = new BridgeResourceInfo
+                        {
+                            Name = file.Key,
+                            FileName = file.Key,
+                            Path = null
+                        };
+
+                        resourcesToEmbed.Add(info, content);
                         this.Log.Trace("Read " + content.Length + " bytes");
                     }
                     catch (Exception ex)
@@ -144,20 +158,17 @@ namespace Bridge.Translator
             return resourcesToEmbed;
         }
 
-        private List<BridgeResourceInfo> GetEmbeddedResourceList(AssemblyDefinition assemblyDefinition)
+        private string ReadEmbeddedResourceList(AssemblyDefinition assemblyDefinition, string listName)
         {
-            var r = new List<BridgeResourceInfo>();
+            this.Log.Trace("Checking if reference " + assemblyDefinition.FullName + " contains Bridge Resources List " + listName);
 
-            var brideResourceList = Translator.BridgeResourcesList;
-
-            this.Log.Trace("Checking if reference " + assemblyDefinition.FullName + " contains Bridge Resources List " + brideResourceList);
-
-            var listRes = assemblyDefinition.MainModule.Resources.FirstOrDefault(x => x.Name == brideResourceList);
+            var listRes = assemblyDefinition.MainModule.Resources.FirstOrDefault(x => x.Name == listName);
 
             if (listRes == null)
             {
                 this.Log.Trace("Reference " + assemblyDefinition.FullName + " does not contain Bridge Resources List");
-                return r;
+
+                return null;
             }
 
             string resourcesStr = null;
@@ -170,6 +181,41 @@ namespace Bridge.Translator
                     this.Log.Trace("Read Bridge Resources List: " + resourcesStr);
                 }
             }
+
+            return resourcesStr;
+        }
+
+        private BridgeResourceInfo[] GetEmbeddedResourceList(AssemblyDefinition assemblyDefinition)
+        {
+            // First read Json format list
+            var resourcesStr = ReadEmbeddedResourceList(assemblyDefinition, Translator.BridgeResourcesJsonFormatList);
+
+            if (resourcesStr != null)
+            {
+                return ParseBridgeResourceListInJsonFormat(resourcesStr);
+            }
+
+            // Then read old plus separated format list (by another file name)
+            resourcesStr = ReadEmbeddedResourceList(assemblyDefinition, Translator.BridgeResourcesPlusSeparatedFormatList);
+
+            if (resourcesStr != null)
+            {
+                return ParseBridgeResourceListInPlusSeparatedFormat(resourcesStr);
+            }
+
+            return new BridgeResourceInfo[0];
+        }
+
+        private static BridgeResourceInfo[] ParseBridgeResourceListInJsonFormat(string json)
+        {
+            var r = Newtonsoft.Json.JsonConvert.DeserializeObject<BridgeResourceInfo[]>(json);
+
+            return r;
+        }
+
+        private static BridgeResourceInfo[] ParseBridgeResourceListInPlusSeparatedFormat(string resourcesStr)
+        {
+            var r = new List<BridgeResourceInfo>();
 
             var resources = resourcesStr.Split('+');
 
@@ -187,28 +233,27 @@ namespace Bridge.Translator
                 });
             }
 
-            return r;
+            return r.ToArray();
         }
 
-        private void EmbeddResources(Dictionary<string, byte[]> resourcesToEmbed)
+        private void EmbeddResources(Dictionary<BridgeResourceInfo, byte[]> resourcesToEmbed)
         {
             this.Log.Trace("Embedding resources...");
 
             var assemblyDef = this.AssemblyDefinition;
             var resources = assemblyDef.MainModule.Resources;
-            var resourcesList = new List<string>();
 
             foreach (var item in resourcesToEmbed)
             {
-                var name = item.Key;
-                this.Log.Trace("Embedding resource " + name);
+                var r = item.Key;
+                this.Log.Trace("Embedding resource " + r.Name);
 
-                name = this.NormalizePath(name);
+                var name = this.NormalizePath(r.Name);
                 this.Log.Trace("Normalized resource name " + name);
 
                 var newResource = new EmbeddedResource(name, ManifestResourceAttributes.Private, item.Value);
 
-                var existingResource = resources.FirstOrDefault(r => r.Name == name);
+                var existingResource = resources.FirstOrDefault(x => x.Name == name);
                 if (existingResource != null)
                 {
                     this.Log.Trace("Removing already existed resource with the same name");
@@ -217,32 +262,22 @@ namespace Bridge.Translator
 
                 resources.Add(newResource);
 
-                var resourceListItem = item.Key + ":" + name;
-                resourcesList.Add(resourceListItem);
-
-                this.Log.Trace("Added resource " + resourceListItem);
+                this.Log.Trace("Added resource " + name);
             }
 
-            StringBuilder sb = new StringBuilder();
-            foreach (var res in resourcesList)
-            {
-                sb.Append(res).Append("+");
-            }
-            sb.Remove(sb.Length - 1, 1);
+            CheckIfResourceExistsAndRemove(resources, Translator.BridgeResourcesPlusSeparatedFormatList);
 
-            var resourceListName = Translator.BridgeResourcesList;
-            var listResources = new EmbeddedResource(resourceListName, ManifestResourceAttributes.Private, Translator.OutputEncoding.GetBytes(sb.ToString()));
+            var resourceListName = Translator.BridgeResourcesJsonFormatList;
+            CheckIfResourceExistsAndRemove(resources, resourceListName);
 
-            var existingList = resources.FirstOrDefault(r => r.Name == resourceListName);
-            if (existingList != null)
-            {
-                this.Log.Trace("Removing already existed resource list " + resourceListName);
-                resources.Remove(existingList);
-            }
+            var listArray = resourcesToEmbed.Keys.ToArray();
+            var listContent = Newtonsoft.Json.JsonConvert.SerializeObject(listArray, Newtonsoft.Json.Formatting.Indented);
+
+            var listResources = new EmbeddedResource(resourceListName, ManifestResourceAttributes.Private, Translator.OutputEncoding.GetBytes(listContent));
 
             resources.Add(listResources);
             this.Log.Trace("Added resource list " + resourceListName);
-            this.Log.Trace(sb.ToString());
+            this.Log.Trace(listContent);
 
             // Checking if mscorlib reference added and removing if added
             var mscorlib = assemblyDef.MainModule.AssemblyReferences.FirstOrDefault(r => r.Name == "mscorlib");
@@ -259,6 +294,16 @@ namespace Bridge.Translator
             this.Log.Trace("Wrote resources into " + assemblyLocation);
 
             this.Log.Trace("Done embedding resources");
+        }
+
+        private void CheckIfResourceExistsAndRemove(Mono.Collections.Generic.Collection<Resource> resources, string resourceName)
+        {
+            var existingList = resources.FirstOrDefault(r => r.Name == resourceName);
+            if (existingList != null)
+            {
+                this.Log.Trace("Removing already existed resource " + resourceName);
+                resources.Remove(existingList);
+            }
         }
 
         private void ExtractResource(string outputPath, string projectPath, ResourceConfigItem resource, byte[] code)
@@ -317,16 +362,16 @@ namespace Bridge.Translator
             }
         }
 
-        public void GetResourceOutputPath(string projectPath, ResourceConfigItem resource, ref string resourceOutputFileName, ref string resourceOutputDirName)
+        public void GetResourceOutputPath(string basePath, string output, string name, bool? silent, ref string resourceOutputFileName, ref string resourceOutputDirName)
         {
-            this.Log.Trace("Checking output path setting " + resource.Output);
+            this.Log.Trace("Checking output path setting " + output);
 
             try
             {
-                var pathParts = this.GetPathComponents(resource.Output);
+                var pathParts = this.GetPathComponents(output);
 
                 resourceOutputDirName = pathParts[0];
-                this.Log.Trace("Resource output setting directory relative to project root is " + resourceOutputDirName);
+                this.Log.Trace("Resource output setting directory relative to base path is " + resourceOutputDirName);
 
                 resourceOutputFileName = pathParts[1];
                 this.Log.Trace("Resource output setting file name is " + resourceOutputFileName);
@@ -334,19 +379,19 @@ namespace Bridge.Translator
                 if (resourceOutputDirName != null)
                 {
                     this.Log.Trace("Checking resource output directory on invalid characters");
-                    resourceOutputDirName = CheckInvalidCharacters(resource, resourceOutputDirName, this.InvalidPathChars);
+                    resourceOutputDirName = CheckInvalidCharacters(name, silent, resourceOutputDirName, this.InvalidPathChars);
                 }
 
                 if (resourceOutputDirName != null)
                 {
                     this.Log.Trace("Getting absolute resource output directory");
-                    resourceOutputDirName = Path.Combine(projectPath, resourceOutputDirName);
+                    resourceOutputDirName = Path.Combine(basePath, resourceOutputDirName);
                     this.Log.Trace("Resource output directory is " + resourceOutputDirName);
 
                     if (resourceOutputFileName != null)
                     {
                         this.Log.Trace("Checking resource output file name on invalid characters");
-                        resourceOutputFileName = CheckInvalidCharacters(resource, resourceOutputFileName, Path.GetInvalidFileNameChars());
+                        resourceOutputFileName = CheckInvalidCharacters(name, silent, resourceOutputFileName, Path.GetInvalidFileNameChars());
 
                         if (resourceOutputFileName == null)
                         {
@@ -360,15 +405,13 @@ namespace Bridge.Translator
                     this.Log.Trace("Setting resource output file name to null as directory part contains invalid characters");
                     resourceOutputFileName = null;
                 }
-
-
             }
             catch (Exception ex) when (ex is ArgumentException || ex is ArgumentNullException || ex is PathTooLongException)
             {
                 this.Log.Trace("Could not extract directory name from resource output setting");
                 this.Log.Error(ex.ToString());
 
-                if (resource.Silent != true)
+                if (silent != true)
                 {
                     throw;
                 }
@@ -378,7 +421,12 @@ namespace Bridge.Translator
             }
         }
 
-        private string CheckInvalidCharacters(ResourceConfigItem resource, string s, ICollection<char> invalidChars)
+        public void GetResourceOutputPath(string basePath, ResourceConfigItem resource, ref string resourceOutputFileName, ref string resourceOutputDirName)
+        {
+            GetResourceOutputPath(basePath, resource.Output, resource.Name, resource.Silent, ref resourceOutputFileName, ref resourceOutputDirName);
+        }
+
+        private string CheckInvalidCharacters(string name, bool? silent, string s, ICollection<char> invalidChars)
         {
             if (s == null)
             {
@@ -390,9 +438,9 @@ namespace Bridge.Translator
                 var message = "There is invalid path character contained in resource.output setting = "
                         + s
                         + " for resource "
-                        + resource.Name;
+                        + name;
 
-                if (resource.Silent != true)
+                if (silent != true)
                 {
                     throw new ArgumentException(message);
                 }
