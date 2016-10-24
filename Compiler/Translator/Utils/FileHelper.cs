@@ -19,7 +19,14 @@ namespace Bridge.Translator
                 return fileName;
             }
 
-            return fileName.ReplaceLastInstanceOf(Files.Extensions.JS, Files.Extensions.MinJS);
+            var s = fileName.ReplaceLastInstanceOf(Files.Extensions.JS, Files.Extensions.MinJS);
+
+            if (!IsMinJS(s))
+            {
+                s = fileName.ReplaceLastInstanceOf(Files.Extensions.JS.ToUpper(), Files.Extensions.MinJS);
+            }
+
+            return s;
         }
 
         public bool IsJS(string fileName)
@@ -29,7 +36,7 @@ namespace Bridge.Translator
                 return false;
             }
 
-            return fileName.EndsWith(Files.Extensions.JS);
+            return fileName.EndsWith(Files.Extensions.JS, StringComparison.InvariantCultureIgnoreCase);
         }
 
         public bool IsMinJS(string fileName)
@@ -39,7 +46,7 @@ namespace Bridge.Translator
                 return false;
             }
 
-            return fileName.EndsWith(Files.Extensions.MinJS);
+            return fileName.EndsWith(Files.Extensions.MinJS, StringComparison.InvariantCultureIgnoreCase);
         }
 
         public bool IsDTS(string fileName)
@@ -49,7 +56,7 @@ namespace Bridge.Translator
                 return false;
             }
 
-            return fileName.EndsWith(Files.Extensions.DTS);
+            return fileName.EndsWith(Files.Extensions.DTS, StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }

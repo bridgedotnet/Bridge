@@ -43,9 +43,9 @@ namespace Bridge.Translator
         private StringBuilder jsbuffer;
         private StringBuilder jsminbuffer;
         private List<string> removeList;
-        private FileHelper FileHelper
+        public FileHelper FileHelper
         {
-            get; set;
+            get; private set;
         }
 
         private static readonly CodeSettings MinifierCodeSettingsSafe = new CodeSettings
@@ -308,12 +308,12 @@ namespace Bridge.Translator
                 // If 'fileName' is an absolute path, Path.Combine will ignore the 'path' prefix.
                 string filePath = Path.Combine(path, fileName);
                 logger.Trace("Output file path changed to " + filePath);
-                string extension = Path.GetExtension(fileName);
-                bool isJs = extension == ('.' + Bridge.Translator.AssemblyInfo.JAVASCRIPT_EXTENSION);
+
+                bool isJs = FileHelper.IsJS(fileName);
 
                 // We can only have Beautified, Minified or Both, so this test has inverted logic:
                 // output beautified if not minified only == (output beautified or output both)
-                // Check by @vladsch: Output anyway if the class is not a JavaScript file.
+                // Output anyway if the class is not a JavaScript file.
                 if (this.AssemblyInfo.OutputFormatting != JavaScriptOutputType.Minified || !isJs)
                 {
                     var file = CreateFileDirectory(filePath);
@@ -323,10 +323,10 @@ namespace Bridge.Translator
                 }
 
                 // Like above test: output minified if not beautified only == (out minified or out both)
-                // Check by @vladsch: Output minified is allowed only and only if it is a JavaScript being output.
+                // Output minified is allowed only and only if it is a JavaScript being output.
                 if (this.AssemblyInfo.OutputFormatting != JavaScriptOutputType.Formatted && isJs)
                 {
-                    var fileNameMin = Path.GetFileNameWithoutExtension(filePath) + ".min" + extension;
+                    var fileNameMin = FileHelper.GetMinifiedJSFileName(Path.GetFileName(filePath));
 
                     var file = CreateFileDirectory(Path.GetDirectoryName(filePath), fileNameMin);
                     logger.Trace("Output non-formatted " + file.FullName);

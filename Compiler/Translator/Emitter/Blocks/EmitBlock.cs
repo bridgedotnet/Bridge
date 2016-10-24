@@ -14,10 +14,16 @@ namespace Bridge.Translator
 {
     public class EmitBlock : AbstractEmitterBlock
     {
+        protected FileHelper FileHelper
+        {
+            get; set;
+        }
+
         public EmitBlock(IEmitter emitter)
             : base(emitter, null)
         {
             this.Emitter = emitter;
+            this.FileHelper = new FileHelper();
         }
 
         protected virtual StringBuilder GetOutputForType(ITypeInfo typeInfo, string name)
@@ -123,9 +129,9 @@ namespace Bridge.Translator
 
             // Append '.js' extension to file name at translator.Outputs level: this aids in code grouping on files
             // when filesystem is not case sensitive.
-            if (!fileName.ToLower().EndsWith("." + Bridge.Translator.AssemblyInfo.JAVASCRIPT_EXTENSION))
+            if (!FileHelper.IsJS(fileName))
             {
-                fileName += "." + Bridge.Translator.AssemblyInfo.JAVASCRIPT_EXTENSION;
+                fileName += Contract.Constants.Files.Extensions.JS;
             }
 
             switch (this.Emitter.AssemblyInfo.FileNameCasing)
