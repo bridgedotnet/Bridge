@@ -468,7 +468,7 @@ namespace Bridge.Translator
                         {
                             this.Log.Trace("resources.output option " + resourceExtractItems.Output);
 
-                            this.GetResourceOutputPath(projectPath, resourceExtractItems, ref resourceOutputFileName, ref resourceOutputDirName);
+                            this.GetResourceOutputPath(outputPath, resourceExtractItems, ref resourceOutputFileName, ref resourceOutputDirName);
 
                             if (resourceOutputDirName != null)
                             {

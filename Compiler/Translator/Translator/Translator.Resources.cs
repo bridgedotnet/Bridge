@@ -317,7 +317,7 @@ namespace Bridge.Translator
 
                 if (resource.Output != null)
                 {
-                    this.GetResourceOutputPath(projectPath, resource, ref resourceOutputFileName, ref resourceOutputDirName);
+                    this.GetResourceOutputPath(outputPath, resource, ref resourceOutputFileName, ref resourceOutputDirName);
                 }
 
                 if (resourceOutputDirName == null)
