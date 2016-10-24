@@ -1,4 +1,5 @@
 using Bridge.Contract;
+using Bridge.Contract.Constants;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -97,7 +98,7 @@ namespace Bridge.Translator.TypeScript
 
             if (this.Emitter.AssemblyInfo.OutputBy == OutputBy.Project)
             {
-                var fileName = Path.GetFileNameWithoutExtension(this.Emitter.Outputs.First().Key) + ".d.ts";
+                var fileName = Path.GetFileNameWithoutExtension(this.Emitter.Outputs.First().Key) + Files.Extensions.DTS;
                 var e = new EmitterOutput(fileName);
 
                 foreach (var item in this.Outputs)
@@ -111,7 +112,7 @@ namespace Bridge.Translator.TypeScript
             {
                 foreach (var item in this.Outputs)
                 {
-                    var fileName = item.Key + ".d.ts";
+                    var fileName = item.Key + Files.Extensions.DTS;
                     var e = new EmitterOutput(fileName);
                     e.NonModuletOutput = item.Value;
                     this.Emitter.Outputs.Add(fileName, e);
