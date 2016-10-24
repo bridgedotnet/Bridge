@@ -390,6 +390,7 @@
     <Compile Include="BridgeIssues\1900\N1934.cs" />
     <Compile Include="BridgeIssues\1900\N1938.cs" />
     <Compile Include="BridgeIssues\1900\N1948.cs" />
+    <Compile Include="BridgeIssues\1900\N1969.cs" />
     <Compile Include="BridgeIssues\1900\N1951.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />

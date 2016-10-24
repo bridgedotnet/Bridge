@@ -6861,8 +6861,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -6892,7 +6890,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    };
+                                    }; /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -10495,6 +10493,29 @@ Bridge.$N1391Result =                 r;
             Bridge.ClientTest.Batch3.BridgeIssues.Bridge1951.counter = count;
         },
         method: function () {
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1969", {
+        statics: {
+            buffer: null
+        },
+        testCase: function () {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1969.buffer = "";
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1969.Test3.foo();
+            Bridge.Test.Assert.areEqual("Test3", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1969.buffer);
+
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1969.buffer = "";
+            var test = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1969.Test3();
+            Bridge.Test.Assert.areEqual("Test2Test1", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1969.buffer);
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1969.Test1", {
+        statics: {
+            ctor: function () {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1969.buffer = System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1969.buffer, "Test1");
+            }
         }
     });
 
@@ -18558,6 +18579,15 @@ Bridge.$N1391Result =                 r;
         }
     }; });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1969.Test2", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1969.Test1],
+        statics: {
+            ctor: function () {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1969.buffer = System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1969.buffer, "Test2");
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240B", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A],
         getString: function () {
@@ -18839,6 +18869,17 @@ Bridge.$N1391Result =                 r;
             return v;
         }
     }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1969.Test3", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1969.Test2],
+        statics: {
+            ctor: function () {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1969.buffer = System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1969.buffer, "Test3");
+            },
+            foo: function () {
+            }
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Third", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge436Second],
