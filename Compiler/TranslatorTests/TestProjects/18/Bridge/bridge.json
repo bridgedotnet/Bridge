@@ -52,7 +52,7 @@
     {
       "name": "testResources3.js",
       "extract": true,
-      "output": "Bridge\\output\\resources",
+      "output": "resources",
       "header": "// Content header: {version} {copyright} {notdate} {year} {author}",
       "remark": "// ---\n// Content remark: Path: {path}; name: {name}\r\n// ---\n",
       "files": [
@@ -65,7 +65,7 @@
     {
       "name": "testResources4.js",
       "extract": true,
-      "output": "Bridge\\output\\resources",
+      "output": "resources",
       "header": "Bridge\\res\\header.js",
       "remark": "// -- remark with no tokens\n",
       "files": [
