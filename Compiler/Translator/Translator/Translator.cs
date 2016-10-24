@@ -412,30 +412,12 @@ namespace Bridge.Translator
 
             foreach (var reference in this.References)
             {
-                var brideResourceList = Translator.BridgeResourcesList;
+                var resources = GetEmbeddedResourceList(reference);
 
-                this.Log.Trace("Checking if reference " + reference.FullName + " contains Bridge Resources List " + brideResourceList);
-
-                var listRes = reference.MainModule.Resources.FirstOrDefault(r => r.Name == brideResourceList);
-
-                if (listRes == null)
+                if (!resources.Any())
                 {
-                    this.Log.Trace("Reference " + reference.FullName + " does not contain Bridge Resources List");
                     continue;
                 }
-
-                string resourcesStr = null;
-                using (var resourcesStream = ((EmbeddedResource)listRes).GetResourceStream())
-                {
-                    using (StreamReader reader = new StreamReader(resourcesStream))
-                    {
-                        this.Log.Trace("Reading Bridge Resources List");
-                        resourcesStr = reader.ReadToEnd();
-                        this.Log.Trace("Read Bridge Resources List: " + resourcesStr);
-                    }
-                }
-
-                var resources = resourcesStr.Split('+');
 
                 var resourceOption = this.AssemblyInfo.Resources;
 
@@ -452,13 +434,12 @@ namespace Bridge.Translator
                     continue;
                 }
 
-                foreach (var resourcePair in resources)
+                foreach (var resource in resources)
                 {
-                    this.Log.Trace("Extracting item " + resourcePair);
+                    this.Log.Trace("Extracting item " + resource.Name);
 
-                    var parts = resourcePair.Split(':');
-                    var fileName = parts[0].Trim();
-                    var resName = parts[1].Trim();
+                    var fileName = resource.FileName;
+                    var resName = resource.Name;
 
                     this.Log.Trace("Resource name " + resName + " and file name: " + fileName);
 

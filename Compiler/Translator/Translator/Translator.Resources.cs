@@ -10,6 +10,24 @@ namespace Bridge.Translator
 {
     public partial class Translator
     {
+        private class BridgeResourceInfo
+        {
+            public string FileName
+            {
+                get; set;
+            }
+
+            public string Name
+            {
+                get; set;
+            }
+
+            public string Path
+            {
+                get; set;
+            }
+        }
+
         private Dictionary<string, string> resourceHeaderInfo;
         private Dictionary<string, string> ResourceHeaderInfo
         {
@@ -124,6 +142,52 @@ namespace Bridge.Translator
             }
 
             return resourcesToEmbed;
+        }
+
+        private List<BridgeResourceInfo> GetEmbeddedResourceList(AssemblyDefinition assemblyDefinition)
+        {
+            var r = new List<BridgeResourceInfo>();
+
+            var brideResourceList = Translator.BridgeResourcesList;
+
+            this.Log.Trace("Checking if reference " + assemblyDefinition.FullName + " contains Bridge Resources List " + brideResourceList);
+
+            var listRes = assemblyDefinition.MainModule.Resources.FirstOrDefault(x => x.Name == brideResourceList);
+
+            if (listRes == null)
+            {
+                this.Log.Trace("Reference " + assemblyDefinition.FullName + " does not contain Bridge Resources List");
+                return r;
+            }
+
+            string resourcesStr = null;
+            using (var resourcesStream = ((EmbeddedResource)listRes).GetResourceStream())
+            {
+                using (StreamReader reader = new StreamReader(resourcesStream))
+                {
+                    this.Log.Trace("Reading Bridge Resources List");
+                    resourcesStr = reader.ReadToEnd();
+                    this.Log.Trace("Read Bridge Resources List: " + resourcesStr);
+                }
+            }
+
+            var resources = resourcesStr.Split('+');
+
+            foreach (var resourcePair in resources)
+            {
+                var parts = resourcePair.Split(':');
+                var fileName = parts[0].Trim();
+                var resName = parts[1].Trim();
+
+                r.Add(new BridgeResourceInfo
+                {
+                    Name = resName,
+                    FileName = fileName,
+                    Path = null
+                });
+            }
+
+            return r;
         }
 
         private void EmbeddResources(Dictionary<string, byte[]> resourcesToEmbed)
