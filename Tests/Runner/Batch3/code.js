@@ -6861,8 +6861,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -6892,7 +6890,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    };
+                                    }; /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -10495,6 +10493,26 @@ Bridge.$N1391Result =                 r;
             Bridge.ClientTest.Batch3.BridgeIssues.Bridge1951.counter = count;
         },
         method: function () {
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1955", {
+        statics: {
+            scriptFunc: function () {
+                return 10;
+            }
+        },
+        i: 0,
+        ctor: function () {
+            this.$initialize();
+        },
+        $ctor1: function (i) {
+            this.$initialize();
+            this.i = i;
+        },
+        testCase: function () {
+            Bridge.Test.Assert.areEqual(10, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1955.scriptFunc());
+            Bridge.Test.Assert.areEqual(5, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1955.$ctor1(5).i);
         }
     });
 
