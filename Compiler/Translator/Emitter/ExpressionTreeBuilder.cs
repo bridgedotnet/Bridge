@@ -136,37 +136,37 @@ namespace Bridge.Translator
 
             var obj = new JObject();
             obj["ntype"] = (int)ExpressionType.MemberAccess;
-            obj["type"] = new JRaw(scriptType);
+            obj["t"] = new JRaw(scriptType);
 
             var expression = new JObject();
             expression["ntype"] = (int)ExpressionType.Constant;
-            expression["type"] = new JRaw(scriptType);
+            expression["t"] = new JRaw(scriptType);
             expression["value"] = new JObject();
             obj["expression"] = expression;
 
             var member = new JObject();
-            member["typeDef"] = new JRaw("Object");
-            member["name"] = name;
-            member["type"] = (int)MemberTypes.Property;
-            member["returnType"] = new JRaw(scriptType);
+            member["td"] = new JRaw("Object");
+            member["n"] = name;
+            member["t"] = (int)MemberTypes.Property;
+            member["rt"] = new JRaw(scriptType);
 
             var getter = new JObject();
-            getter["typeDef"] = new JRaw("Object");
-            getter["name"] = "get" + name;
-            getter["type"] = (int)MemberTypes.Method;
-            getter["returnType"] = new JRaw(scriptType);
-            getter["params"] = new JRaw("[]");
+            getter["td"] = new JRaw("Object");
+            getter["n"] = "get" + name;
+            getter["t"] = (int)MemberTypes.Method;
+            getter["rt"] = new JRaw(scriptType);
+            getter["p"] = new JRaw("[]");
             getter["def"] = new JRaw(getterDefinition);
-            member["getter"] = getter;
+            member["g"] = getter;
 
             var setter = new JObject();
-            setter["typeDef"] = new JRaw("Object");
-            setter["name"] = "set" + name;
-            setter["type"] = (int)MemberTypes.Method;
-            setter["returnType"] = new JRaw("Object");
-            setter["params"] = new JRaw("[" + scriptType + "]");
+            setter["td"] = new JRaw("Object");
+            setter["n"] = "set" + name;
+            setter["t"] = (int)MemberTypes.Method;
+            setter["rt"] = new JRaw("Object");
+            setter["p"] = new JRaw("[" + scriptType + "]");
             setter["def"] = new JRaw(setterDefinition);
-            member["setter"] = setter;
+            member["s"] = setter;
 
             obj["member"] = member;
 
@@ -560,24 +560,24 @@ namespace Bridge.Translator
             int index = FindIndexInReflectableMembers(owner ?? member);
             if (index >= 0)
             {
-                string result = string.Format("Bridge.getMetadata({0}).members[{1}]", ExpressionTreeBuilder.GetTypeName(member.DeclaringType, this._emitter), index);
+                string result = string.Format("Bridge.getMetadata({0}).m[{1}]", ExpressionTreeBuilder.GetTypeName(member.DeclaringType, this._emitter), index);
                 if (owner != null)
                 {
                     if (owner is IProperty)
                     {
                         if (ReferenceEquals(member, ((IProperty)owner).Getter))
-                            result = result + ".getter";
+                            result = result + ".g";
                         else if (ReferenceEquals(member, ((IProperty)owner).Setter))
-                            result = result + ".setter";
+                            result = result + ".s";
                         else
                             throw new ArgumentException("Invalid member " + member);
                     }
                     else if (owner is IEvent)
                     {
                         if (ReferenceEquals(member, ((IEvent)owner).AddAccessor))
-                            result = result + ".adder";
+                            result = result + ".ad";
                         else if (ReferenceEquals(member, ((IEvent)owner).RemoveAccessor))
-                            result = result + ".remover";
+                            result = result + ".r";
                         else
                             throw new ArgumentException("Invalid member " + member);
                     }

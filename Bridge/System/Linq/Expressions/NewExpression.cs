@@ -16,6 +16,7 @@ namespace System.Linq.Expressions
         public extern ReadOnlyCollection<Expression> Arguments { get; private set; }
 
         [FieldProperty]
+        [Name("m")]
         public extern ReadOnlyCollection<MemberInfo> Members { get; private set; }
 
         internal extern NewExpression();

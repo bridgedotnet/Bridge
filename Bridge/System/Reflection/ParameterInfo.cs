@@ -6,7 +6,7 @@ namespace System.Reflection
     [Name("Object")]
     public class ParameterInfo
     {
-        [Name("sname")]
+        [Name("sn")]
         [FieldProperty]
         public extern string ScriptName
         {
@@ -14,12 +14,14 @@ namespace System.Reflection
         }
 
         [FieldProperty]
+        [Name("n")]
         public extern string Name
         {
             get;
         }
 
         [FieldProperty]
+        [Name("dv")]
         public extern string DefaultValue
         {
             get;
@@ -33,35 +35,37 @@ namespace System.Reflection
 
         public extern bool IsOptional
         {
-            [Template("({this}.isOptional || false)")]
+            [Template("({this}.o || false)")]
             get;
         }
 
         public extern bool IsOut
         {
-            [Template("({this}.isOut || false)")]
+            [Template("({this}.out || false)")]
             get;
         }
 
         public extern bool IsRef
         {
-            [Template("({this}.isRef || false)")]
+            [Template("({this}.ref || false)")]
             get;
         }
 
         public extern bool IsParams
         {
-            [Template("({this}.isParams || false)")]
+            [Template("({this}.ip || false)")]
             get;
         }
 
         [FieldProperty]
+        [Name("pt")]
         public extern Type ParameterType
         {
             get;
         }
 
         [FieldProperty]
+        [Name("ps")]
         public extern int Position
         {
             get;
@@ -72,7 +76,7 @@ namespace System.Reflection
 		/// </summary>
 		/// <param name="inherit">Ignored for members. Base members will never be considered.</param>
 		/// <returns>An array that contains all the custom attributes applied to this member, or an array with zero elements if no attributes are defined. </returns>
-		[Template("({this}.attr || [])")]
+		[Template("({this}.at || [])")]
         public extern object[] GetCustomAttributes(bool inherit);
 
         /// <summary>
@@ -81,14 +85,14 @@ namespace System.Reflection
         /// <param name="attributeType">The type of attribute to search for. Only attributes that are assignable to this type are returned. </param>
         /// <param name="inherit">Ignored for members. Base members will never be considered.</param>
         /// <returns>An array that contains all the custom attributes applied to this member, or an array with zero elements if no attributes are defined.</returns>
-        [Template("({this}.attr || []).filter(function(a) { return Bridge.is(a, {attributeType}); })")]
+        [Template("({this}.at || []).filter(function(a) { return Bridge.is(a, {attributeType}); })")]
         public extern object[] GetCustomAttributes(Type attributeType, bool inherit);
 
         /// <summary>
         /// Returns an array of all custom attributes applied to this member.
         /// </summary>
         /// <returns>An array that contains all the custom attributes applied to this member, or an array with zero elements if no attributes are defined. </returns>
-        [Template("({this}.attr || [])")]
+        [Template("({this}.at || [])")]
         public extern object[] GetCustomAttributes();
 
         /// <summary>
@@ -96,7 +100,7 @@ namespace System.Reflection
         /// </summary>
         /// <param name="attributeType">The type of attribute to search for. Only attributes that are assignable to this type are returned. </param>
         /// <returns>An array that contains all the custom attributes applied to this member, or an array with zero elements if no attributes are defined.</returns>
-        [Template("({this}.attr || []).filter(function(a) { return Bridge.is(a, {attributeType}); })")]
+        [Template("({this}.at || []).filter(function(a) { return Bridge.is(a, {attributeType}); })")]
         public extern object[] GetCustomAttributes(Type attributeType);
     }
 }

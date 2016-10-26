@@ -5,7 +5,7 @@ namespace System.Reflection
     [External]
     public class PropertyInfo : MemberInfo
     {
-        [Name("returnType")]
+        [Name("rt")]
         [FieldProperty]
         public extern Type PropertyType
         {
@@ -14,62 +14,62 @@ namespace System.Reflection
 
         public extern Type[] IndexParameterTypes
         {
-            [Template("({this}.params || [])")]
+            [Template("({this}.p || [])")]
             get;
         }
 
-        [Template("({this}.indexParamsInfo || [])")]
+        [Template("({this}.ipi || [])")]
         public extern ParameterInfo[] GetIndexParameters();
 
         public extern bool CanRead
         {
-            [Template("(!!{this}.getter)")]
+            [Template("(!!{this}.g)")]
             get;
         }
 
         [FieldProperty]
         public extern bool IsIndexer
         {
-            [Template("({this}.isIndexer || false)")]
+            [Template("({this}.i || false)")]
             get;
         }
 
         public extern bool CanWrite
         {
-            [Template("(!!{this}.setter)")]
+            [Template("(!!{this}.s)")]
             get;
         }
 
-        [Name("getter")]
+        [Name("g")]
         [FieldProperty]
         public extern MethodInfo GetMethod
         {
             get;
         }
 
-        [Name("setter")]
+        [Name("s")]
         [FieldProperty]
         public extern MethodInfo SetMethod
         {
             get;
         }
 
-        [Template("Bridge.Reflection.midel({this}.getter, {obj})()")]
+        [Template("Bridge.Reflection.midel({this}.g, {obj})()")]
         public extern object GetValue(object obj);
 
-        [Template("Bridge.Reflection.midel({this}.getter, {obj}).apply(null, {index})")]
+        [Template("Bridge.Reflection.midel({this}.g, {obj}).apply(null, {index})")]
         public extern object GetValue(object obj, object[] index);
 
-        [Template("Bridge.Reflection.midel({this}.setter, {obj})({value})")]
+        [Template("Bridge.Reflection.midel({this}.s, {obj})({value})")]
         public extern void SetValue(object obj, object value);
 
-        [Template("Bridge.Reflection.midel({this}.setter, {obj}).apply(null, {index}.concat({value}))")]
+        [Template("Bridge.Reflection.midel({this}.s, {obj}).apply(null, {index}.concat({value}))")]
         public extern void SetValue(object obj, object value, object[] index);
 
         /// <summary>
         /// For properties implemented as fields, contains the name of the field. Null for properties implemented as get and set methods.
         /// </summary>
-        [Name("fname")]
+        [Name("fn")]
         [FieldProperty]
         public extern string ScriptFieldName
         {

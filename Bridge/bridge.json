@@ -20,8 +20,7 @@
       "remark": "    // @source {name}\n",
       "files": [
         "Resources/.auxiliary/Init.js",
-        "Resources/Core.js",
-        "Resources/Nullable.js",
+        "Resources/Core.js",        
         "Resources/String.js",
         "Resources/Enum.js",
         "Resources/Browser.js",
@@ -30,6 +29,7 @@
         "Resources/.generated/bridge/utils/systemAssemblyVersion.js",
         "Resources/Reflection.js",
         "Resources/Interfaces.js",
+        "Resources/Nullable.js",
         "Resources/Char.js",
         "Resources/.generated/system/formattableString.js",
         "Resources/.generated/system/formattableStringImpl.js",

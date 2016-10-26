@@ -768,34 +768,52 @@ namespace Bridge.Translator
 
                 if (attr.Arguments.Count > 0)
                 {
-                    object v = this.GetAttributeArgumentValue(attr, resolveResult, 0);
+                    if (attr.Arguments.Count > 1)
+                    {
+                        var list = new List<MemberAccessibility>();
+                        for (int i = 0; i < attr.Arguments.Count; i++)
+                        {
+                            object v = this.GetAttributeArgumentValue(attr, resolveResult, i);
+                            list.Add((MemberAccessibility)(int)v);
+                        }
 
-                    if (v is bool)
-                    {
-                        config.Enabled = (bool)v;
+                        config.MemberAccessibility = list.ToArray();
                     }
-                    else if (v is string)
+                    else
                     {
-                        if (string.IsNullOrEmpty(config.Filter))
-                        {
-                            config.Filter = v.ToString();
-                        }
-                        else
-                        {
-                            config.Filter += ";" + v.ToString();
-                        }
-                    }
-                    else if (v is int)
-                    {
-                        IType t = this.GetAttributeArgumentType(attr, resolveResult, 0);
+                        object v = this.GetAttributeArgumentValue(attr, resolveResult, 0);
 
-                        if (t.FullName == "Bridge.TypeAccessibility")
+                        if (v is bool)
                         {
-                            config.TypeAccessibility = (TypeAccessibility)(int)v;
+                            config.Enabled = (bool)v;
                         }
-                        else
+                        else if (v is string)
                         {
-                            config.MemberAccessibility = (MemberAccessibility)(int)v;
+                            if (string.IsNullOrEmpty(config.Filter))
+                            {
+                                config.Filter = v.ToString();
+                            }
+                            else
+                            {
+                                config.Filter += ";" + v.ToString();
+                            }
+                        }
+                        else if (v is int)
+                        {
+                            IType t = this.GetAttributeArgumentType(attr, resolveResult, 0);
+
+                            if (t.FullName == "Bridge.TypeAccessibility")
+                            {
+                                config.TypeAccessibility = (TypeAccessibility)(int)v;
+                            }
+                            else
+                            {
+                                config.MemberAccessibility = new[] { (MemberAccessibility)(int)v };
+                            }
+                        }
+                        else if (v is int[])
+                        {
+                            config.MemberAccessibility = ((int[])v).Cast<MemberAccessibility>().ToArray();
                         }
                     }
                 }
