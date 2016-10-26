@@ -10511,7 +10511,7 @@ Bridge.$N1391Result =                 r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1968", {
-        testCase: function () {
+        testGenericNullable: function () {
             var type1 = System.Double;
             var type2 = System.Nullable$1(System.Double);
             var value1 = Bridge.createInstance(type1);
@@ -10520,8 +10520,7 @@ Bridge.$N1391Result =                 r;
             Bridge.Test.Assert.false(Bridge.referenceEquals(type1, type2));
             Bridge.Test.Assert.false(Bridge.referenceEquals(value1, value2));
 
-            //TODO: Uncomment the following line after merge https://github.com/bridgedotnet/Bridge/pull/1981
-            //Assert.False(type1.IsClass);
+            Bridge.Test.Assert.false(Bridge.Reflection.isClass(type1));
             Bridge.Test.Assert.false(Bridge.Reflection.isClass(type2));
 
             Bridge.Test.Assert.areEqual(0, value1);
