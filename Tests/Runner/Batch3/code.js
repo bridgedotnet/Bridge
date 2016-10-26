@@ -10511,7 +10511,7 @@ Bridge.$N1391Result =                 r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1966", {
-        testCase: function () {
+        testDoubleInfinityGetHashCode: function () {
             Bridge.Test.Assert.areEqual(Bridge.getHashCode(Number.POSITIVE_INFINITY), Bridge.getHashCode(Number.POSITIVE_INFINITY));
             Bridge.Test.Assert.areEqual(Bridge.getHashCode(Number.NEGATIVE_INFINITY), Bridge.getHashCode(Number.NEGATIVE_INFINITY));
             Bridge.Test.Assert.areEqual(2146435072, Bridge.getHashCode(Number.POSITIVE_INFINITY));

@@ -8,7 +8,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge1966
     {
         [Test]
-        public void TestCase()
+        public void TestDoubleInfinityGetHashCode()
         {
             Assert.AreEqual(Double.PositiveInfinity.GetHashCode(), Double.PositiveInfinity.GetHashCode());
             Assert.AreEqual(Double.NegativeInfinity.GetHashCode(), Double.NegativeInfinity.GetHashCode());
