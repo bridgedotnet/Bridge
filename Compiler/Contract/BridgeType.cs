@@ -160,7 +160,7 @@ namespace Bridge.Contract
 
             if (type is ByReferenceType)
             {
-                type = ((ByReferenceType) type).ElementType;
+                type = ((ByReferenceType)type).ElementType;
             }
 
             foreach (var item in this)
@@ -405,7 +405,7 @@ namespace Bridge.Contract
                                 sb.Insert(0, "\"");
                                 isStr = true;
                             }
-                            sb.Append("\" + Bridge.getTypeAlias(");
+                            sb.Append("\" + " + JS.Types.Bridge.GET_TYPE_ALIAS + "(");
                         }
 
                         var typeArgName = BridgeTypes.ToJsName(typeArg, emitter, false, false, true, skipMethodTypeParam);
