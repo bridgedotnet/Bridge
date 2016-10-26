@@ -52,15 +52,15 @@
         },
 
         isNullOrWhiteSpace: function (s) {
-            if (s == null) {
+            if (!s) {
                 return true;
             }
 
             return System.Char.isWhiteSpace(s);
         },
 
-        isNullOrEmpty: function (value) {
-            return Bridge.isEmpty(value, false);
+        isNullOrEmpty: function (s) {
+            return !s;
         },
 
         fromCharCount: function (c, count) {

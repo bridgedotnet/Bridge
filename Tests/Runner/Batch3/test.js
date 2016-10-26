@@ -333,7 +333,7 @@
             QUnit.test("#1938 - TestIsArrayTemplate", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1938.testIsArrayTemplate);
             QUnit.test("#1948 - TestCollectionLikeInitialization", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1948.testCollectionLikeInitialization);
             QUnit.test("#1951 - TestBindFunctionNoMemoryLeaks", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1951.testBindFunctionNoMemoryLeaks);
-            QUnit.test("#1964 - TestCase", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1964.testCase);
+            QUnit.test("#1964 - TestStringIsNullOrWhiteSpaceCase", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1964.testStringIsNullOrWhiteSpaceCase);
             QUnit.test("#1965 - TestIsClassForNumberTypes", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1965.testIsClassForNumberTypes);
             QUnit.test("#1966 - TestDoubleInfinityGetHashCode", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1966.testDoubleInfinityGetHashCode);
             QUnit.test("#1968 - TestGenericNullable", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1968.testGenericNullable);
@@ -3173,9 +3173,9 @@
     Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1964", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1964)],
         statics: {
-            testCase: function (assert) {
+            testStringIsNullOrWhiteSpaceCase: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1964).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1964);
-                t.getFixture().testCase();
+                t.getFixture().testStringIsNullOrWhiteSpaceCase();
             }
         }
     });

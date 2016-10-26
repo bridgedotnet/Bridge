@@ -1405,15 +1405,15 @@
         },
 
         isNullOrWhiteSpace: function (s) {
-            if (s == null) {
+            if (!s) {
                 return true;
             }
 
             return System.Char.isWhiteSpace(s);
         },
 
-        isNullOrEmpty: function (value) {
-            return Bridge.isEmpty(value, false);
+        isNullOrEmpty: function (s) {
+            return !s;
         },
 
         fromCharCount: function (c, count) {
@@ -4024,21 +4024,7 @@
             },
 
             isWhiteSpace: function (s) {
-                for (var i = 0; i < s.length; i++) {
-                    if (!System.Char.isWhiteSpaceChar(s.charCodeAt(i))) {
-                        return false;
-                    }
-                }
-                return true;
-            },
-
-            isWhiteSpaceChar: function(c) {
-                if (c < 256) {
-                    return (((c >= 9) && (c <= 19)) || (c === 32) || (c === 160) || (c === 133));
-                }
-                else {
-                    return /\s/.test(String.fromCharCode(c));
-                }
+                return !/[^\s\x09-\x0D\x85\xA0]/.test(s);
             },
 
             isDigit: function (value) {

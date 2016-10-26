@@ -390,8 +390,8 @@
     <Compile Include="BridgeIssues\1900\N1934.cs" />
     <Compile Include="BridgeIssues\1900\N1938.cs" />
     <Compile Include="BridgeIssues\1900\N1948.cs" />
-    <Compile Include="BridgeIssues\1900\N1964.cs" />
     <Compile Include="BridgeIssues\1900\N1951.cs" />
+    <Compile Include="BridgeIssues\1900\N1964.cs" />
     <Compile Include="BridgeIssues\1900\N1965.cs" />
     <Compile Include="BridgeIssues\1900\N1966.cs" />
     <Compile Include="BridgeIssues\1900\N1968.cs" />

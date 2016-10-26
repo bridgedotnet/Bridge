@@ -10504,10 +10504,57 @@ Bridge.$N1391Result =                 r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1964", {
-        testCase: function () {
-            Bridge.Test.Assert.true(System.String.isNullOrWhiteSpace("\t"));
-            Bridge.Test.Assert.true(System.String.isNullOrWhiteSpace("\r"));
-            Bridge.Test.Assert.true(System.String.isNullOrWhiteSpace("\n"));
+        statics: {
+            getCharCode: function (s, isLast) {
+                if (isLast === void 0) { isLast = true; }
+                if (s == null) {
+                    return "null";
+                }
+
+                if (s.length < 1) {
+                    return "empty";
+                }
+
+                var i = isLast ? ((s.length - 1) | 0) : 0;
+
+                return System.Char.format(s.charCodeAt(i), "X");
+            }
+        },
+        testStringIsNullOrWhiteSpaceCase: function () {
+            var p = [null, "", String.fromCharCode((9)), String.fromCharCode((10)), String.fromCharCode((11)), String.fromCharCode((12)), String.fromCharCode((13)), String.fromCharCode((32)), String.fromCharCode((133)), String.fromCharCode((160)), String.fromCharCode((5760)), String.fromCharCode((8192)), String.fromCharCode((8193)), String.fromCharCode((8194)), String.fromCharCode((8195)), String.fromCharCode((8196)), String.fromCharCode((8197)), String.fromCharCode((8198)), String.fromCharCode((8199)), String.fromCharCode((8200)), String.fromCharCode((8201)), String.fromCharCode((8202)), String.fromCharCode((8239)), String.fromCharCode((8287)), String.fromCharCode((12288))];
+
+            var s;
+            var c;
+
+            for (var i = 0; i < p.length; i = (i + 1) | 0) {
+                s = p[i];
+                c = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1964.getCharCode(s);
+                Bridge.Test.Assert.true$1(System.String.isNullOrWhiteSpace(s), System.String.concat("White-spaces table 1. Index:" + i + " Char code:", c));
+            }
+
+            for (var i1 = 0; i1 < p.length; i1 = (i1 + 1) | 0) {
+                s = System.String.concat(" ", p[i1]);
+                c = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1964.getCharCode(s);
+                Bridge.Test.Assert.true$1(System.String.isNullOrWhiteSpace(s), System.String.concat("White-spaces table 2. Index:" + i1 + " Char code:", c));
+            }
+
+            for (var i2 = 0; i2 < p.length; i2 = (i2 + 1) | 0) {
+                s = System.String.concat(p[i2], " ");
+                c = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1964.getCharCode(s, false);
+                Bridge.Test.Assert.true$1(System.String.isNullOrWhiteSpace(s), System.String.concat("White-spaces table 3. Index:" + i2 + " Char code:", c));
+            }
+
+            for (var i3 = 0; i3 < p.length; i3 = (i3 + 1) | 0) {
+                s = System.String.concat("a", p[i3]);
+                c = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1964.getCharCode(s);
+                Bridge.Test.Assert.false$1(System.String.isNullOrWhiteSpace(s), System.String.concat("Non white-spaces table 1. Index:" + i3 + " Char code:", c));
+            }
+
+            for (var i4 = 0; i4 < p.length; i4 = (i4 + 1) | 0) {
+                s = System.String.concat(p[i4], "b");
+                c = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1964.getCharCode(s, false);
+                Bridge.Test.Assert.false$1(System.String.isNullOrWhiteSpace(s), System.String.concat("Non white-spaces table 2. Index:" + i4 + " Char code:", c));
+            }
         }
     });
 
