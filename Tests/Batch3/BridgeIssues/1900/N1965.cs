@@ -8,7 +8,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge1965
     {
         [Test]
-        public void TestCase()
+        public void TestIsClassForNumberTypes()
         {
             Assert.False(typeof(byte).IsClass);
             Assert.False(typeof(short).IsClass);

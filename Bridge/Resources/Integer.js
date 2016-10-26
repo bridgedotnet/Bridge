@@ -28,7 +28,6 @@
             });
 
             type.$kind = "";
-
             Bridge.Class.addExtend(type, [System.IComparable$1(type), System.IEquatable$1(type)]);
         };
 
@@ -815,5 +814,6 @@
             }
         }
     });
+
     System.Single.$kind = "";
     Bridge.Class.addExtend(System.Single, [System.IComparable$1(System.Single), System.IEquatable$1(System.Single)]);
