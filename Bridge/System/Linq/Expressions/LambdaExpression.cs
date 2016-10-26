@@ -8,7 +8,7 @@ namespace System.Linq.Expressions
     [Cast("{this}.ntype === 18")]
     public abstract class LambdaExpression : Expression
     {
-        [Name("params")]
+        [Name("p")]
         [FieldProperty]
         public extern ReadOnlyCollection<ParameterExpression> Parameters { get; private set; }
 
@@ -16,6 +16,7 @@ namespace System.Linq.Expressions
         public extern Expression Body { get; private set; }
 
         [FieldProperty]
+        [Name("rt")]
         public extern Expression ReturnType { get; private set; }
 
         internal extern LambdaExpression();

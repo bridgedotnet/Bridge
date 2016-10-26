@@ -372,6 +372,14 @@
                 return value.valueOf() & 0xFFFFFFFF;
             }
 
+            if (value === Number.POSITIVE_INFINITY) {
+                return 0x7FF00000;
+            }
+
+            if (value === Number.NEGATIVE_INFINITY) {
+                return 0xFFF00000;
+            }
+
             if (Bridge.isNumber(value)) {
                 if (Math.floor(value) === value) {
                     return value;

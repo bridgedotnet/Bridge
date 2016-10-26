@@ -8,6 +8,7 @@ namespace System.Linq.Expressions
     public sealed class ParameterExpression : Expression
     {
         [FieldProperty]
+        [Name("n")]
         public extern string Name { get; private set; }
 
         internal extern ParameterExpression();
