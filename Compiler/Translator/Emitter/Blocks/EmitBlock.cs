@@ -1,4 +1,5 @@
 using Bridge.Contract;
+using Bridge.Contract.Constants;
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.TypeSystem;
 using Newtonsoft.Json;
@@ -357,9 +358,9 @@ namespace Bridge.Translator
                 int pos = 0;
                 if (metas.Count > 0)
                 {
-                    this.Write("var $m = Bridge.setMetadata,");
+                    this.Write("var $m = " + JS.Types.Bridge.SET_METADATA + ",");
                     this.WriteNewLine();
-                    this.Write("    $n = ");
+                    this.Write(Bridge.Translator.Emitter.INDENT + "$n = ");
                     pos = this.Emitter.Output.Length;
                     this.Write(";");
                     this.WriteNewLine();
@@ -466,7 +467,7 @@ namespace Bridge.Translator
 
                 if (typeDef != null)
                 {
-                    var skip = typeDef.Attributes.Any(a => 
+                    var skip = typeDef.Attributes.Any(a =>
                             a.AttributeType.FullName == "Bridge.GlobalMethodsAttribute" ||
                             a.AttributeType.FullName == "Bridge.NonScriptableAttribute" ||
                             a.AttributeType.FullName == "Bridge.MixinAttribute");
