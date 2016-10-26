@@ -3522,7 +3522,11 @@
 
             t = Bridge.Reflection._getAssemblyType(asm, tname.trim());
 
-            return targs.length ? t.apply(null, targs) : t;
+            t = targs.length ? t.apply(null, targs) : t;
+            if (t && t.$staticInit) {
+                t.$staticInit();
+            }
+            return t;
         },
 
         getType: function (typeName, asm) {
