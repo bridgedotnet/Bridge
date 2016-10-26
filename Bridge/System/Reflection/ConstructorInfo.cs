@@ -11,7 +11,7 @@ namespace System.Reflection
         /// <summary>
         /// Script name of the constructor. Null for the unnamed constructor and for constructors with special implementations
         /// </summary>
-        [Name("sname")]
+        [Name("sn")]
         [FieldProperty]
         public extern string ScriptName
         {

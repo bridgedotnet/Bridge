@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using ICSharpCode.NRefactory.Semantics;
 
 namespace Bridge.Translator
 {
@@ -26,7 +27,7 @@ namespace Bridge.Translator
                     attrArr.Add(MetadataUtils.ConstructAttribute(a, type, emitter));
                 }
 
-                properties.Add("attr", attrArr);
+                properties.Add("at", attrArr);
             }
 
             if (type.Kind == TypeKind.Class || type.Kind == TypeKind.Struct || type.Kind == TypeKind.Interface)
@@ -37,7 +38,7 @@ namespace Bridge.Translator
                                           .ToList();
                 if (members.Count > 0)
                 {
-                    properties.Add("members", new JArray(members));
+                    properties.Add("m", new JArray(members));
                 }
 
                 var aua = type.Attributes.FirstOrDefault(a => a.AttributeType.FullName == "System.AttributeUsageAttribute");
@@ -69,12 +70,12 @@ namespace Bridge.Translator
 
                     if (!inherited)
                     {
-                        properties.Add("attrNoInherit", true);
+                        properties.Add("ni", true);
                     }
 
                     if (allowMultiple)
                     {
-                        properties.Add("attrAllowMultiple", true);
+                        properties.Add("am", true);
                     }
                 }
             }
@@ -94,7 +95,7 @@ namespace Bridge.Translator
                                           .ToList();
                 if (members.Count > 0)
                 {
-                    properties.Add("members", new JArray(members));
+                    properties.Add("m", new JArray(members));
                 }
             }
 
@@ -180,6 +181,11 @@ namespace Bridge.Translator
 
         public static bool IsReflectable(IMember member, IEmitter emitter, bool ifHasAttribute, SyntaxTree tree)
         {
+            if (member.Attributes.Any(a => a.AttributeType.FullName == "Bridge.NonScriptableAttribute"))
+            {
+                return false;
+            }
+
             bool? reflectable = MetadataUtils.ReflectableValue(member.Attributes, member, emitter);
 
             if (reflectable != null)
@@ -199,17 +205,22 @@ namespace Bridge.Translator
 
             var memberAccessibility = emitter.AssemblyInfo.Reflection.MemberAccessibility;
 
-            if (memberAccessibility == null)
+            if (memberAccessibility == null || memberAccessibility.Length == 0)
             {
-                memberAccessibility = ifHasAttribute ? MemberAccessibility.None : MemberAccessibility.All;
+                memberAccessibility = ((AssemblyInfo)emitter.AssemblyInfo).ReflectionInternal.MemberAccessibility;
+            }
+
+            if (memberAccessibility == null || memberAccessibility.Length == 0)
+            {
+                memberAccessibility = new[] { ifHasAttribute ? MemberAccessibility.None : MemberAccessibility.All };
 
                 if (ifHasAttribute && MetadataUtils.GetScriptableAttributes(member.Attributes, emitter, tree).Any())
                 {
-                    memberAccessibility = MemberAccessibility.All;
+                    memberAccessibility = new []{ MemberAccessibility.All };
                 }
             }
 
-            return MetadataUtils.IsMemberReflectable(member, memberAccessibility.Value);
+            return MetadataUtils.IsMemberReflectable(member, memberAccessibility);
         }
 
         private static bool? ReflectableValue(IList<IAttribute> attributes, IMember member, IEmitter emitter)
@@ -223,41 +234,144 @@ namespace Bridge.Translator
                     return true;
                 }
 
-                var value = attr.PositionalArguments.First().ConstantValue;
-
-                if (value is bool)
+                if (attr.PositionalArguments.Count > 1)
                 {
-                    return (bool)attr.PositionalArguments.First().ConstantValue;
+                    var list = new List<MemberAccessibility>();
+                    for (int i = 0; i < attr.PositionalArguments.Count; i++)
+                    {
+                        object v = attr.PositionalArguments[i].ConstantValue;
+                        list.Add((MemberAccessibility) (int) v);
+                    }
+
+                    return MetadataUtils.IsMemberReflectable(member, list.ToArray());
                 }
-
-                if (value is int)
+                else
                 {
-                    return MetadataUtils.IsMemberReflectable(member, (MemberAccessibility)(int)value);
+                    var rr = attr.PositionalArguments.First();
+                    var value = rr.ConstantValue;
+
+                    if (rr is ArrayCreateResolveResult)
+                    {
+                        return MetadataUtils.IsMemberReflectable(member, ((ArrayCreateResolveResult)rr).InitializerElements.Select(ie => (int)ie.ConstantValue).Cast<MemberAccessibility>().ToArray());
+                    }
+
+                    if (value is bool)
+                    {
+                        return (bool)attr.PositionalArguments.First().ConstantValue;
+                    }
+
+                    if (value is int)
+                    {
+                        return MetadataUtils.IsMemberReflectable(member, new[] { (MemberAccessibility)(int)value });
+                    }
+
+                    if (value is int[])
+                    {
+                        return MetadataUtils.IsMemberReflectable(member, ((int[])value).Cast<MemberAccessibility>().ToArray());
+                    }
                 }
             }
 
             return null;
         }
 
-        private static bool IsMemberReflectable(IMember member, MemberAccessibility memberReflectability)
+        private static bool IsMemberReflectable(IMember member, MemberAccessibility[] memberReflectability)
         {
-            switch (memberReflectability)
+            foreach (var memberAccessibility in memberReflectability)
             {
-                case MemberAccessibility.None:
-                    return false;
-
-                case MemberAccessibility.PublicAndProtected:
-                    return !member.IsPrivate && !member.IsInternal;
-
-                case MemberAccessibility.NonPrivate:
-                    return !member.IsPrivate;
-
-                case MemberAccessibility.All:
+                if (memberAccessibility == MemberAccessibility.All)
+                {
                     return true;
+                }
 
-                default:
-                    throw new ArgumentException("reflectability");
+                if (memberAccessibility == MemberAccessibility.None)
+                {
+                    return false;
+                }
+
+                var accesibiliy = new List<string>();
+
+                if (memberAccessibility.HasFlag(MemberAccessibility.Public))
+                {
+                    accesibiliy.Add("Public");
+                }
+
+                if (memberAccessibility.HasFlag(MemberAccessibility.Private))
+                {
+                    accesibiliy.Add("Private");
+                }
+
+                if (memberAccessibility.HasFlag(MemberAccessibility.Internal))
+                {
+                    accesibiliy.Add("Internal");
+                }
+
+                if (memberAccessibility.HasFlag(MemberAccessibility.Protected))
+                {
+                    accesibiliy.Add("Protected");
+                }
+
+                if (accesibiliy.Count > 0)
+                {
+                    if (member.Accessibility == Accessibility.ProtectedOrInternal)
+                    {
+                        if (!(accesibiliy.Contains("Protected") || accesibiliy.Contains("Internal")))
+                        {
+                            continue;
+                        }
+                    }
+                    else if (!accesibiliy.Contains(member.Accessibility.ToString()))
+                    {
+                        continue;
+                    }
+                }
+                
+                if (memberAccessibility.HasFlag(MemberAccessibility.Instance) && member.IsStatic)
+                {
+                    continue;
+                }
+
+                if (memberAccessibility.HasFlag(MemberAccessibility.Static) && !member.IsStatic)
+                {
+                    continue;
+                }
+
+                var kind = new List<string>();
+
+                if (memberAccessibility.HasFlag(MemberAccessibility.Constructor))
+                {
+                    kind.Add("Constructor");
+                }
+
+                if (memberAccessibility.HasFlag(MemberAccessibility.Field))
+                {
+                    kind.Add("Field");
+                }
+
+                if (memberAccessibility.HasFlag(MemberAccessibility.Event))
+                {
+                    kind.Add("Event");
+                }
+
+                if (memberAccessibility.HasFlag(MemberAccessibility.Method))
+                {
+                    kind.Add("Method");
+                }
+
+                if (memberAccessibility.HasFlag(MemberAccessibility.Property))
+                {
+                    kind.Add("Property");
+                }
+
+                if (kind.Count > 0 && !kind.Contains(member.SymbolKind.ToString()))
+                {
+                    continue;
+                }
+
+                return true;
             }
+
+            return false;
         }
 
         private static JObject ConstructParameterInfo(IParameter p, IEmitter emitter, bool includeDeclaringType, bool isGenericSpecialization, SyntaxTree tree)
@@ -273,46 +387,46 @@ namespace Bridge.Translator
                     attrArr.Add(MetadataUtils.ConstructAttribute(a, null, emitter));
                 }
 
-                result.Add("attr", attrArr);
+                result.Add("at", attrArr);
             }
 
-            result.Add("name", p.Name);
+            result.Add("n", p.Name);
 
             if (p.IsOptional)
             {
                 var typeParam = p.Type as ITypeParameter;
                 if (typeParam != null && p.ConstantValue == null)
                 {
-                    result.Add("defaultValue",
+                    result.Add("dv",
                         typeParam.OwnerType == SymbolKind.Method
                             ? new JRaw(emitter.ToJavaScript(p.ConstantValue))
                             : new JRaw(string.Format("{0}({1})", JS.Funcs.BRIDGE_GETDEFAULTVALUE, typeParam.Name)));
                 }
                 else
                 {
-                    result.Add("defaultValue", new JRaw(emitter.ToJavaScript(p.ConstantValue)));
+                    result.Add("dv", new JRaw(emitter.ToJavaScript(p.ConstantValue)));
                 }
 
-                result.Add("isOptional", true);
+                result.Add("o", true);
             }
 
             if (p.IsOut)
             {
-                result.Add("isOut", true);
+                result.Add("out", true);
             }
 
             if (p.IsRef)
             {
-                result.Add("isRef", true);
+                result.Add("ref", true);
             }
 
             if (p.IsParams)
             {
-                result.Add("isParams", true);
+                result.Add("ip", true);
             }
 
-            result.Add("parameterType", new JRaw(MetadataUtils.GetTypeName(p.Type, emitter, isGenericSpecialization)));
-            result.Add("position", p.Owner.Parameters.IndexOf(p));
+            result.Add("pt", new JRaw(MetadataUtils.GetTypeName(p.Type, emitter, isGenericSpecialization)));
+            result.Add("ps", p.Owner.Parameters.IndexOf(p));
 
             var nameAttr = p.Attributes.FirstOrDefault(a => a.AttributeType.FullName == "Bridge.NameAttribute");
             if (nameAttr != null)
@@ -326,7 +440,7 @@ namespace Bridge.Translator
                         name = Helpers.ChangeReservedWord(name);
                     }
 
-                    result.Add("sname", name);
+                    result.Add("sn", name);
                 }
             }
 
@@ -343,7 +457,7 @@ namespace Bridge.Translator
             var properties = MetadataUtils.GetCommonMemberInfoProperties(m, emitter, includeDeclaringType, isGenericSpecialization, tree);
             if (m.IsStatic)
             {
-                properties.Add("isStatic", true);
+                properties.Add("is", true);
             }
 
             if (m is IMethod)
@@ -356,12 +470,12 @@ namespace Bridge.Translator
                     properties.Add("exp", true);
                 }
 
-                properties.Add("type", (int)MemberTypes.Method);
+                properties.Add("t", (int)MemberTypes.Method);
 
                 var parametersInfo = method.Parameters.Select(p => MetadataUtils.ConstructParameterInfo(p, emitter, false, false, tree)).ToList();
                 if (parametersInfo.Count > 0)
                 {
-                    properties.Add("paramsInfo", new JArray(parametersInfo));
+                    properties.Add("pi", new JArray(parametersInfo));
                 }
 
                 if (!string.IsNullOrEmpty(inline))
@@ -378,14 +492,14 @@ namespace Bridge.Translator
                     var str = emitter.Output.ToString();
 
                     block.RestoreWriter(oldWriter);
-                    properties.Add("tpcount", method.TypeParameters.Count);
+                    properties.Add("tpc", method.TypeParameters.Count);
                     properties.Add("def", new JRaw(str));
                 }
                 else
                 {
                     if (MetadataUtils.IsJsGeneric(method, emitter))
                     {
-                        properties.Add("tpcount", method.TypeParameters.Count);
+                        properties.Add("tpc", method.TypeParameters.Count);
                     }
 
                     string sname;
@@ -409,9 +523,9 @@ namespace Bridge.Translator
                         sname = OverloadsCollection.Create(emitter, method).GetOverloadName();
                     }
 
-                    properties.Add("sname", sname);
+                    properties.Add("sn", sname);
                 }
-                properties.Add("returnType", new JRaw(MetadataUtils.GetTypeName(method.ReturnType, emitter, isGenericSpecialization)));
+                properties.Add("rt", new JRaw(MetadataUtils.GetTypeName(method.ReturnType, emitter, isGenericSpecialization)));
 
                 var attr = MetadataUtils.GetScriptableAttributes(method.ReturnTypeAttributes, emitter, tree).ToList();
                 if (attr.Count > 0)
@@ -422,36 +536,39 @@ namespace Bridge.Translator
                         attrArr.Add(MetadataUtils.ConstructAttribute(a, null, emitter));
                     }
 
-                    properties.Add("returnTypeAttributes", attrArr);
+                    properties.Add("rta", attrArr);
                 }
 
                 if (method.Parameters.Count > 0)
                 {
-                    properties.Add("params", new JArray(method.Parameters.Select(p => new JRaw(MetadataUtils.GetTypeName(p.Type, emitter, isGenericSpecialization)))));
+                    properties.Add("p", new JArray(method.Parameters.Select(p => new JRaw(MetadataUtils.GetTypeName(p.Type, emitter, isGenericSpecialization)))));
                 }
             }
             else if (m is IField)
             {
                 var field = (IField)m;
 
-                properties.Add("type", (int)MemberTypes.Field);
-                properties.Add("returnType", new JRaw(MetadataUtils.GetTypeName(field.ReturnType, emitter, isGenericSpecialization)));
-                properties.Add("sname", OverloadsCollection.Create(emitter, field).GetOverloadName());
-                properties.Add("isReadOnly", field.IsReadOnly);
+                properties.Add("t", (int)MemberTypes.Field);
+                properties.Add("rt", new JRaw(MetadataUtils.GetTypeName(field.ReturnType, emitter, isGenericSpecialization)));
+                properties.Add("sn", OverloadsCollection.Create(emitter, field).GetOverloadName());
+                if (field.IsReadOnly)
+                {
+                    properties.Add("ro", field.IsReadOnly);
+                }
             }
             else if (m is IProperty)
             {
                 var prop = (IProperty)m;
-                properties.Add("type", (int)MemberTypes.Property);
-                properties.Add("returnType", new JRaw(MetadataUtils.GetTypeName(prop.ReturnType, emitter, isGenericSpecialization)));
+                properties.Add("t", (int)MemberTypes.Property);
+                properties.Add("rt", new JRaw(MetadataUtils.GetTypeName(prop.ReturnType, emitter, isGenericSpecialization)));
                 if (prop.Parameters.Count > 0)
                 {
-                    properties.Add("params", new JArray(prop.Parameters.Select(p => new JRaw(MetadataUtils.GetTypeName(p.Type, emitter, isGenericSpecialization)))));
+                    properties.Add("p", new JArray(prop.Parameters.Select(p => new JRaw(MetadataUtils.GetTypeName(p.Type, emitter, isGenericSpecialization)))));
                 }
 
                 if (prop.IsIndexer)
                 {
-                    properties.Add("isIndexer", true);
+                    properties.Add("i", true);
                 }
 
                 if (prop.IsIndexer)
@@ -461,7 +578,7 @@ namespace Bridge.Translator
                         var parametersInfo = prop.Getter.Parameters.Select(p => MetadataUtils.ConstructParameterInfo(p, emitter, false, false, tree)).ToList();
                         if (parametersInfo.Count > 0)
                         {
-                            properties.Add("indexParamsInfo", new JArray(parametersInfo));
+                            properties.Add("ipi", new JArray(parametersInfo));
                         }
                     }
                     else if (prop.Setter != null)
@@ -469,7 +586,7 @@ namespace Bridge.Translator
                         var parametersInfo = prop.Setter.Parameters.Take(prop.Setter.Parameters.Count - 1).Select(p => MetadataUtils.ConstructParameterInfo(p, emitter, false, false, tree)).ToList();
                         if (parametersInfo.Count > 0)
                         {
-                            properties.Add("indexParamsInfo", new JArray(parametersInfo));
+                            properties.Add("ipi", new JArray(parametersInfo));
                         }
                     }
                 }
@@ -478,12 +595,12 @@ namespace Bridge.Translator
                 {
                     if (prop.CanGet)
                     {
-                        properties.Add("getter", MetadataUtils.ConstructMemberInfo(prop.Getter, emitter, includeDeclaringType, isGenericSpecialization, tree));
+                        properties.Add("g", MetadataUtils.ConstructMemberInfo(prop.Getter, emitter, includeDeclaringType, isGenericSpecialization, tree));
                     }
 
                     if (prop.CanSet)
                     {
-                        properties.Add("setter", MetadataUtils.ConstructMemberInfo(prop.Setter, emitter, includeDeclaringType, isGenericSpecialization, tree));
+                        properties.Add("s", MetadataUtils.ConstructMemberInfo(prop.Setter, emitter, includeDeclaringType, isGenericSpecialization, tree));
                     }
                 }
                 else
@@ -491,23 +608,23 @@ namespace Bridge.Translator
                     var fieldName = OverloadsCollection.Create(emitter, prop).GetOverloadName();
                     if (prop.CanGet)
                     {
-                        properties.Add("getter", MetadataUtils.ConstructFieldPropertyAccessor(prop.Getter, emitter, fieldName, true, includeDeclaringType, isGenericSpecialization, tree));
+                        properties.Add("g", MetadataUtils.ConstructFieldPropertyAccessor(prop.Getter, emitter, fieldName, true, includeDeclaringType, isGenericSpecialization, tree));
                     }
                     if (prop.CanSet)
                     {
-                        properties.Add("setter", MetadataUtils.ConstructFieldPropertyAccessor(prop.Setter, emitter, fieldName, false, includeDeclaringType, isGenericSpecialization, tree));
+                        properties.Add("s", MetadataUtils.ConstructFieldPropertyAccessor(prop.Setter, emitter, fieldName, false, includeDeclaringType, isGenericSpecialization, tree));
                     }
 
-                    properties.Add("fname", fieldName);
+                    properties.Add("fn", fieldName);
                 }
             }
             else if (m is IEvent)
             {
                 var evt = (IEvent)m;
 
-                properties.Add("type", (int)MemberTypes.Event);
-                properties.Add("adder", MetadataUtils.ConstructMemberInfo(evt.AddAccessor, emitter, includeDeclaringType, isGenericSpecialization, tree));
-                properties.Add("remover", MetadataUtils.ConstructMemberInfo(evt.RemoveAccessor, emitter, includeDeclaringType, isGenericSpecialization, tree));
+                properties.Add("t", (int)MemberTypes.Event);
+                properties.Add("ad", MetadataUtils.ConstructMemberInfo(evt.AddAccessor, emitter, includeDeclaringType, isGenericSpecialization, tree));
+                properties.Add("r", MetadataUtils.ConstructMemberInfo(evt.RemoveAccessor, emitter, includeDeclaringType, isGenericSpecialization, tree));
             }
             else
             {
@@ -520,17 +637,17 @@ namespace Bridge.Translator
         public static JObject ConstructFieldPropertyAccessor(IMethod m, IEmitter emitter, string fieldName, bool isGetter, bool includeDeclaringType, bool isGenericSpecialization, SyntaxTree tree)
         {
             var properties = MetadataUtils.GetCommonMemberInfoProperties(m, emitter, includeDeclaringType, isGenericSpecialization, tree);
-            properties.Add("type", (int)MemberTypes.Method);
+            properties.Add("t", (int)MemberTypes.Method);
             if (m.Parameters.Count > 0)
             {
-                properties.Add("params", new JArray(m.Parameters.Select(p => new JRaw(MetadataUtils.GetTypeName(p.Type, emitter, isGenericSpecialization)))));
+                properties.Add("p", new JArray(m.Parameters.Select(p => new JRaw(MetadataUtils.GetTypeName(p.Type, emitter, isGenericSpecialization)))));
             }
 
-            properties.Add("returnType", new JRaw(MetadataUtils.GetTypeName(m.ReturnType, emitter, isGenericSpecialization)));
-            properties.Add(isGetter ? "fget" : "fset", fieldName);
+            properties.Add("rt", new JRaw(MetadataUtils.GetTypeName(m.ReturnType, emitter, isGenericSpecialization)));
+            properties.Add(isGetter ? "fg" : "fs", fieldName);
             if (m.IsStatic)
             {
-                properties.Add("isStatic", true);
+                properties.Add("is", true);
             }
 
             return properties;
@@ -545,16 +662,16 @@ namespace Bridge.Translator
                 return null;
             }
 
-            properties.Add("type", (int)MemberTypes.Constructor);
+            properties.Add("t", (int)MemberTypes.Constructor);
             if (constructor.Parameters.Count > 0)
             {
-                properties.Add("params", new JArray(constructor.Parameters.Select(p => new JRaw(MetadataUtils.GetTypeName(p.Type, emitter, isGenericSpecialization)))));
+                properties.Add("p", new JArray(constructor.Parameters.Select(p => new JRaw(MetadataUtils.GetTypeName(p.Type, emitter, isGenericSpecialization)))));
             }
 
             var parametersInfo = constructor.Parameters.Select(p => MetadataUtils.ConstructParameterInfo(p, emitter, false, false, tree)).ToList();
             if (parametersInfo.Count > 0)
             {
-                properties.Add("paramsInfo", new JArray(parametersInfo));
+                properties.Add("pi", new JArray(parametersInfo));
             }
 
             var inline = emitter.GetInline(constructor);
@@ -577,7 +694,7 @@ namespace Bridge.Translator
                     sname = OverloadsCollection.Create(emitter, constructor).GetOverloadName();
                 }
 
-                properties.Add("sname", sname);
+                properties.Add("sn", sname);
             }
 
             if (constructor.IsStatic)
@@ -653,37 +770,37 @@ namespace Bridge.Translator
                     attrArr.Add(MetadataUtils.ConstructAttribute(a, m.DeclaringTypeDefinition, emitter));
                 }
 
-                result.Add("attr", attrArr);
+                result.Add("at", attrArr);
             }
 
             if (includeDeclaringType)
             {
-                result.Add("typeDef", new JRaw(MetadataUtils.GetTypeName(m.DeclaringType, emitter, isGenericSpecialization)));
+                result.Add("td", new JRaw(MetadataUtils.GetTypeName(m.DeclaringType, emitter, isGenericSpecialization)));
             }
 
             if (m.IsOverride)
             {
-                result.Add("isOverride", true);
+                result.Add("ov", true);
             }
 
             if (m.IsVirtual)
             {
-                result.Add("isVirtual", true);
+                result.Add("v", true);
             }
 
             if (m.IsAbstract)
             {
-                result.Add("isAbstract", true);
+                result.Add("ab", true);
             }
 
             if (m.Accessibility != Accessibility.None)
             {
-                result.Add("accessibility", (int)m.Accessibility);
+                result.Add("a", (int)m.Accessibility);
             }
 
             if (m.IsSealed)
             {
-                result.Add("isSealed", true);
+                result.Add("sl", true);
             }
 
             if (m.IsSynthetic)
@@ -691,12 +808,12 @@ namespace Bridge.Translator
                 result.Add("isSynthetic", true);
             }
 
-            result.Add("name", m.Name);
+            result.Add("n", m.Name);
 
             return result;
         }
 
-        private static string GetTypeName(IType type, IEmitter emitter, bool isGenericSpecialization)
+        internal static string GetTypeName(IType type, IEmitter emitter, bool isGenericSpecialization, bool asDefinition = false)
         {
             var typeParam = type as ITypeParameter;
             if (typeParam != null && typeParam.OwnerType == SymbolKind.Method)
@@ -704,7 +821,31 @@ namespace Bridge.Translator
                 return "Object";
             }
 
-            return BridgeTypes.ToJsName(type, emitter);
+            var itypeDef = type.GetDefinition();
+            if (itypeDef != null && itypeDef.Attributes.Any(a => a.AttributeType.FullName == "Bridge.NonScriptableAttribute"))
+            {
+                return "Object";
+            }
+
+            var name = BridgeTypes.ToJsName(type, emitter, asDefinition);
+
+            if (emitter.NamespacesCache != null && name.StartsWith(type.Namespace + "."))
+            {
+                int key;
+                if (emitter.NamespacesCache.ContainsKey(type.Namespace))
+                {
+                    key = emitter.NamespacesCache[type.Namespace];
+                }
+                else
+                {
+                    key = emitter.NamespacesCache.Count;
+                    emitter.NamespacesCache.Add(type.Namespace, key);
+                }
+
+                name = string.Concat("$n[", key, "]", name.Substring(type.Namespace.Length));
+            }
+
+            return name;
         }
     }
 }
