@@ -23,7 +23,10 @@ namespace Bridge.Contract
 
     public class ConfigHelper<T> : ConfigHelper
     {
-        private ILogger Logger { get; set; }
+        private ILogger Logger
+        {
+            get; set;
+        }
 
         public ConfigHelper(ILogger logger)
         {

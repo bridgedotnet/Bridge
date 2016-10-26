@@ -1,8 +1,8 @@
-﻿namespace Bridge.Contract
-{
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
+namespace Bridge.Contract
+{
     public interface IReflectionConfig
     {
         bool? Enabled
@@ -10,8 +10,8 @@
             get; set;
         }
 
-        [JsonConverter(typeof(StringEnumConverter))]
-        MemberAccessibility? MemberAccessibility
+        [JsonProperty("memberAccessibility", ItemConverterType = typeof(StringEnumConverter))]
+        MemberAccessibility[] MemberAccessibility
         {
             get; set;
         }

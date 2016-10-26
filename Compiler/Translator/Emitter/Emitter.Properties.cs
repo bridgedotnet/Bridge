@@ -479,6 +479,11 @@ namespace Bridge.Translator
             get; set;
         }
 
+        public Dictionary<string, int> NamespacesCache
+        {
+            get; set;
+        }
+
         private bool AssemblyJsDocWritten
         {
             get; set;
