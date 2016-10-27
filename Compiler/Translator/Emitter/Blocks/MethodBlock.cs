@@ -337,7 +337,7 @@ namespace Bridge.Translator
         {
             if (group.Count == 1)
             {
-                if (!group[0].Body.IsNull && (!this.StaticBlock || !Helpers.IsEntryPointMethod(this.Emitter, group[0])))
+                if ((!group[0].Body.IsNull || this.Emitter.GetScript(group[0]) != null) && (!this.StaticBlock || !Helpers.IsEntryPointMethod(this.Emitter, group[0])))
                 {
                     this.Emitter.VisitMethodDeclaration(group[0]);
                 }

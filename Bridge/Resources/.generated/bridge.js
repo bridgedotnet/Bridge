@@ -2363,6 +2363,9 @@
                     Class = function () {
                         this.$initialize();
                         if (Class.$base) {
+                            if (Class.$$inherits && Class.$$inherits.length > 0 && Class.$$inherits[0].$staticInit) {
+                                Class.$$inherits[0].$staticInit();
+                            }
                             Class.$base.ctor.call(this);
                         }
                     };
@@ -3359,7 +3362,11 @@
 
             t = Bridge.Reflection._getAssemblyType(asm, tname.trim());
 
-            return targs.length ? t.apply(null, targs) : t;
+            t = targs.length ? t.apply(null, targs) : t;
+            if (t && t.$staticInit) {
+                t.$staticInit();
+            }
+            return t;
         },
 
         getType: function (typeName, asm) {
