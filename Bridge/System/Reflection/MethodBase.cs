@@ -9,13 +9,13 @@ namespace System.Reflection
     {
         public extern Type[] ParameterTypes
         {
-            [Template("({this}.params || [])")]
+            [Template("({this}.p || [])")]
             get;
         }
 
         public extern bool IsConstructor
         {
-            [Template("({this}.type === 1)")]
+            [Template("({this}.t === 1)")]
             get;
         }
 
@@ -25,7 +25,7 @@ namespace System.Reflection
         [NonScriptable, EditorBrowsable(EditorBrowsableState.Never)]
         public static extern MethodBase GetMethodFromHandle(RuntimeMethodHandle h, RuntimeTypeHandle x);
 
-        [Template("({this}.paramsInfo || [])")]
+        [Template("({this}.pi || [])")]
         public extern ParameterInfo[] GetParameters();
 
         internal extern MethodBase();

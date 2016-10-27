@@ -51,13 +51,16 @@
             return -1;
         },
 
-        isNullOrWhiteSpace: function (value) {
-            //do not replace == to ===, it ichecks to undefined also
-            return value == null || value.match(/^ *$/) !== null;
+        isNullOrWhiteSpace: function (s) {
+            if (!s) {
+                return true;
+            }
+
+            return System.Char.isWhiteSpace(s);
         },
 
-        isNullOrEmpty: function (value) {
-            return Bridge.isEmpty(value, false);
+        isNullOrEmpty: function (s) {
+            return !s;
         },
 
         fromCharCount: function (c, count) {

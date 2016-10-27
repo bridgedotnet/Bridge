@@ -50,8 +50,8 @@
                 return str.charCodeAt(index);
             },
 
-            isWhiteSpace: function (value) {
-                return /\s/.test(value);
+            isWhiteSpace: function (s) {
+                return !/[^\s\x09-\x0D\x85\xA0]/.test(s);
             },
 
             isDigit: function (value) {

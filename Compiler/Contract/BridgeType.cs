@@ -160,7 +160,7 @@ namespace Bridge.Contract
 
             if (type is ByReferenceType)
             {
-                type = ((ByReferenceType) type).ElementType;
+                type = ((ByReferenceType)type).ElementType;
             }
 
             foreach (var item in this)
@@ -266,7 +266,7 @@ namespace Bridge.Contract
             return globalTarget;
         }
 
-        public static string ToJsName(IType type, IEmitter emitter, bool asDefinition = false, bool excludens = false, bool isAlias = false)
+        public static string ToJsName(IType type, IEmitter emitter, bool asDefinition = false, bool excludens = false, bool isAlias = false, bool skipMethodTypeParam = false)
         {
             var itypeDef = type.GetDefinition();
 
@@ -300,9 +300,14 @@ namespace Bridge.Contract
                 return JS.Types.Object.NAME;
             }
 
-            if (NullableType.IsNullable(type))
+            /*if (NullableType.IsNullable(type))
             {
-                return BridgeTypes.ToJsName(NullableType.GetUnderlyingType(type), emitter, asDefinition, excludens, isAlias);
+                return BridgeTypes.ToJsName(NullableType.GetUnderlyingType(type), emitter, asDefinition, excludens, isAlias, skipMethodTypeParam);
+            }*/
+
+            if (type is ByReferenceType)
+            {
+                return BridgeTypes.ToJsName(((ByReferenceType)type).ElementType, emitter, asDefinition, excludens, isAlias, skipMethodTypeParam);
             }
 
             if (type.Kind == TypeKind.Anonymous)
@@ -316,6 +321,12 @@ namespace Bridge.Contract
                 {
                     return "Object";
                 }
+            }
+
+            var typeParam = type as ITypeParameter;
+            if (skipMethodTypeParam && typeParam != null && typeParam.OwnerType == SymbolKind.Method)
+            {
+                return "Object";
             }
 
             BridgeType bridgeType = emitter.BridgeTypes.Get(type, true);
@@ -394,10 +405,10 @@ namespace Bridge.Contract
                                 sb.Insert(0, "\"");
                                 isStr = true;
                             }
-                            sb.Append("\" + Bridge.getTypeAlias(");
+                            sb.Append("\" + " + JS.Types.Bridge.GET_TYPE_ALIAS + "(");
                         }
 
-                        var typeArgName = BridgeTypes.ToJsName(typeArg, emitter, false, false, true);
+                        var typeArgName = BridgeTypes.ToJsName(typeArg, emitter, false, false, true, skipMethodTypeParam);
 
                         if (!needGet && typeArgName.StartsWith("\""))
                         {
@@ -446,7 +457,7 @@ namespace Bridge.Contract
 
                         needComma = true;
 
-                        sb.Append(BridgeTypes.ToJsName(typeArg, emitter));
+                        sb.Append(BridgeTypes.ToJsName(typeArg, emitter, skipMethodTypeParam: skipMethodTypeParam));
                     }
                     sb.Append(")");
                     name = sb.ToString();
@@ -550,6 +561,7 @@ namespace Bridge.Contract
                 replacements.Add("+", ".");
                 replacements.Add("[", "");
                 replacements.Add("]", "");
+                replacements.Add("&", "");
 
                 BridgeTypes.convRegex = new Regex("(\\" + String.Join("|\\", replacements.Keys.ToArray()) + ")", RegexOptions.Compiled | RegexOptions.Singleline);
             }
