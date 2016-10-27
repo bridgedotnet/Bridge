@@ -394,6 +394,7 @@
     <Compile Include="BridgeIssues\1900\N1964.cs" />
     <Compile Include="BridgeIssues\1900\N1965.cs" />
     <Compile Include="BridgeIssues\1900\N1966.cs" />
+    <Compile Include="BridgeIssues\1900\N1996.cs" />
     <Compile Include="BridgeIssues\1900\N1968.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />

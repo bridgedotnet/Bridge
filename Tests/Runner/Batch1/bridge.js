@@ -675,6 +675,11 @@
                 obj = System.String.toCharArray(obj);
             }
 
+            if (arguments.length === 2 && Bridge.isFunction(fnName)) {
+                T = fnName;
+                fnName = null;
+            }
+
             if (fnName && obj && obj[fnName]) {
                 return obj[fnName].call(obj);
             }
@@ -10024,7 +10029,7 @@
                         this.add(c.key, c.value);
                     }
                 } else if (Object.prototype.toString.call(obj) === '[object Object]') {
-                    var names = Bridge.getPropertyNames(obj),
+                    var names = Object.keys(obj),
                         name;
 
                     for (var i = 0; i < names.length; i++) {

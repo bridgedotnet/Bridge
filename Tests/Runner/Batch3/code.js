@@ -6655,7 +6655,7 @@ Bridge.$N1391Result =                 r;
             }
 
             var i = 0;
-            $t = Bridge.getEnumerator(dic.getValues(), "System$Collections$Generic$IEnumerable$1$System$Int32$getEnumerator");
+            $t = Bridge.getEnumerator(dic.getValues(), System.Int32);
             while ($t.moveNext()) {
                 var sameVal1 = $t.getCurrent();
                 Bridge.Test.Assert.areEqual$1(((i = (i + 1) | 0)), sameVal1, "Inside foreach scope");
@@ -7941,7 +7941,7 @@ Bridge.$N1391Result =                 r;
             Bridge.Test.Assert.true(System.Array.contains(list, 0, System.Int32));
             Bridge.Test.Assert.areEqual(100, System.Array.getCount(list, System.Int32));
             Bridge.Test.Assert.true(System.Array.getIsReadOnly(list, System.Int32));
-            Bridge.Test.Assert.null(Bridge.getEnumerator(list, null, System.Int32));
+            Bridge.Test.Assert.null(Bridge.getEnumerator(list, System.Int32));
             Bridge.Test.Assert.areEqual(200, System.Array.indexOf(list, 0, 0, null, System.Int32));
             Bridge.Test.Assert.true(System.Array.remove(list, 0, System.Int32));
 
@@ -7967,7 +7967,7 @@ Bridge.$N1391Result =                 r;
             Bridge.Test.Assert.true(System.Array.contains(list2, 0, System.Int32));
             Bridge.Test.Assert.areEqual(1000, System.Array.getCount(list2, System.Int32));
             Bridge.Test.Assert.false(list.getIsReadOnly());
-            Bridge.Test.Assert.null(Bridge.getEnumerator(list2, null, System.Int32));
+            Bridge.Test.Assert.null(Bridge.getEnumerator(list2, System.Int32));
             Bridge.Test.Assert.areEqual(2000, System.Array.indexOf(list2, 0, 0, null, System.Int32));
             Bridge.Test.Assert.true(System.Array.remove(list2, 0, System.Int32));
             var a2 = [1, 2];
@@ -9299,7 +9299,7 @@ Bridge.$N1391Result =                 r;
             var l = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1850.LookupOptions$1(System.Int32))();
             var i = l;
             Bridge.Test.Assert.null(l.getEnumerator());
-            Bridge.Test.Assert.null(Bridge.getEnumerator(i, null, System.Collections.Generic.KeyValuePair$2(System.Int32,String)));
+            Bridge.Test.Assert.null(Bridge.getEnumerator(i, System.Collections.Generic.KeyValuePair$2(System.Int32,String)));
         }
     });
 
@@ -10512,7 +10512,7 @@ Bridge.$N1391Result =                 r;
                     Bridge.Test.Assert.areEqual(1, newJObj1.dic.getCount());
 
                     var newJObj2 = $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.f1(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.AddObj());
-                    $t3 = Bridge.getEnumerator(newJObj2, null, System.Collections.Generic.KeyValuePair$2(String,Object));
+                    $t3 = Bridge.getEnumerator(newJObj2, System.Collections.Generic.KeyValuePair$2(String,Object));
                     while ($t3.moveNext()) {
                         var jObj1 = $t3.getCurrent();
                     }
@@ -10699,6 +10699,29 @@ Bridge.$N1391Result =                 r;
 
             Bridge.Test.Assert.areEqual(0, value1);
             Bridge.Test.Assert.null(value2);
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1996", {
+        testCase: function () {
+            var $t;
+            var holder = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1996.ArrayHolder([1, 2, 3]);
+
+            var i = 0;
+            $t = new Bridge.ArrayEnumerator(holder.array);
+            while ($t.moveNext()) {
+                var item = $t.getCurrent();
+                Bridge.Test.Assert.areEqual(((i = (i + 1) | 0)), item);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1996.ArrayHolder", {
+        inherits: [System.Collections.IEnumerable],
+        array: null,
+        ctor: function (array) {
+            this.$initialize();
+            this.array = array;
         }
     });
 
@@ -14908,7 +14931,7 @@ Bridge.$N1391Result =                 r;
             convertAllItems: function (T, T2, value, $function) {
                 var $t;
                 var result = new (System.Collections.Generic.List$1(T2))();
-                $t = Bridge.getEnumerator(value, null, T);
+                $t = Bridge.getEnumerator(value, T);
                 while ($t.moveNext()) {
                     var item = $t.getCurrent();
                     result.add($function(item));
