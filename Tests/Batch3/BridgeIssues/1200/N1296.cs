@@ -82,7 +82,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
-        private static int Test(Any<string, int> value)
+        private static int Test(Union<string, int> value)
         {
             return (int)value;
         }

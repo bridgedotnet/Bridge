@@ -27,7 +27,7 @@ namespace Bridge.Html5
         /// <summary>
         /// Returns a DOMString, Blob or an ArrayBuffer containing the data send by the emitter.
         /// </summary>
-		public readonly Any<string, Blob, ArrayBuffer> Data;
+		public readonly Union<string, Blob, ArrayBuffer> Data;
 
         public readonly string Origin;
 
@@ -44,7 +44,7 @@ namespace Bridge.Html5
         /// <summary>
         /// A DOMString, Blob or an ArrayBuffer containing the data send by the emitter.
         /// </summary>
-		public Any<string, Blob, ArrayBuffer> Data;
+		public Union<string, Blob, ArrayBuffer> Data;
 
         public string Origin;
 
