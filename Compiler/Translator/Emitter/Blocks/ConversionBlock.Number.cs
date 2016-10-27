@@ -324,6 +324,7 @@ namespace Bridge.Translator
 
             if (isChecked)
             {
+                expectedType = NullableType.IsNullable(expectedType) ? NullableType.GetUnderlyingType(expectedType) : expectedType;
                 block.Write(JS.Types.System.Int64.CHECK);
                 block.WriteOpenParentheses();
 

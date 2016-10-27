@@ -9,7 +9,7 @@ namespace Bridge.Translator
             get; set;
         }
 
-        public MemberAccessibility? MemberAccessibility
+        public MemberAccessibility[] MemberAccessibility
         {
             get; set;
         }

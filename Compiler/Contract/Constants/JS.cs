@@ -225,6 +225,8 @@
 
                 public const string APPLY = DOTNAME + "apply";
                 public const string ASSEMBLY = DOTNAME + "assembly";
+                public const string SET_METADATA = DOTNAME + "setMetadata";
+                public const string GET_TYPE_ALIAS = DOTNAME + "getTypeAlias";
 
                 public class Reflection
                 {

@@ -3,8 +3,6 @@ using Bridge;
 namespace System
 {
     [External]
-    [Constructor("")]
-    [Name("System.Nullable")]
     public struct Nullable<T> where T : struct
     {
         [Template("{0}")]
