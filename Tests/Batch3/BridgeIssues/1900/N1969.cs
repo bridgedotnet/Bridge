@@ -36,8 +36,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         private static string buffer;
+
         [Test]
-        public void TestCase()
+        public void TestStaticConstructorsForBaseClasses()
         {
             Bridge1969.buffer = "";
             Test3.Foo();

@@ -10708,7 +10708,7 @@ Bridge.$N1391Result =                 r;
         statics: {
             buffer: null
         },
-        testCase: function () {
+        testStaticConstructorsForBaseClasses: function () {
             Bridge.ClientTest.Batch3.BridgeIssues.Bridge1969.buffer = "";
             Bridge.ClientTest.Batch3.BridgeIssues.Bridge1969.Test3.foo();
             Bridge.Test.Assert.areEqual("Test3", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1969.buffer);
