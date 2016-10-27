@@ -10770,7 +10770,7 @@ Bridge.$N1391Result =                 r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1996", {
-        testCase: function () {
+        testTemplateForGetEnumerator: function () {
             var $t;
             var holder = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1996.ArrayHolder([1, 2, 3]);
 

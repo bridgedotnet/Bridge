@@ -22,7 +22,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [Test]
-        public void TestCase()
+        public void TestTemplateForGetEnumerator()
         {
             var holder = new ArrayHolder(new[] { 1, 2, 3 });
 
