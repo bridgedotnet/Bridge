@@ -10748,8 +10748,9 @@ Bridge.$N1391Result =                 r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1970", {
-        testCase: function () {
+        testRunClassConstructor: function () {
             var type1 = Bridge.Reflection.getType("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1970.Test, Bridge.ClientTest.Batch3");
+
             Bridge.Test.Assert.areEqual(true, Bridge.Reflection.fieldAccess(Bridge.Reflection.getMembers(type1, 4, 284, "IsInitialized"), null));
         }
     });

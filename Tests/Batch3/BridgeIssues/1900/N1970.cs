@@ -9,9 +9,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     {
         public class Test
         {
-            [Bridge.Reflectable(true)]
+            [Reflectable(true)]
             public static readonly bool IsInitialized = GetIsInitializedValue();
-            
+
             private static bool GetIsInitializedValue()
             {
                 return true;
@@ -19,9 +19,10 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [Test]
-        public void TestCase()
+        public void TestRunClassConstructor()
         {
             var type1 = Type.GetType("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1970.Test, Bridge.ClientTest.Batch3");
+
             Assert.AreEqual(true, type1.GetField("IsInitialized").GetValue(null));
         }
     }
