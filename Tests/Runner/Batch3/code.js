@@ -10624,7 +10624,7 @@ Bridge.$N1391Result =                 r;
             this.$initialize();
             this.i = i;
         },
-        testCase: function () {
+        testScriptAttributeForExternMethods: function () {
             Bridge.Test.Assert.areEqual(10, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1955.scriptFunc());
             Bridge.Test.Assert.areEqual(5, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1955.$ctor1(5).i);
         }

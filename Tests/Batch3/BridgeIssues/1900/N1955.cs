@@ -24,7 +24,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 #pragma warning restore 169
 
         [Test]
-        public void TestCase()
+        public void TestScriptAttributeForExternMethods()
         {
             Assert.AreEqual(10, Bridge1955.ScriptFunc());
             Assert.AreEqual(5, new Bridge1955(5).i);
