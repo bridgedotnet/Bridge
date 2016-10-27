@@ -175,3 +175,19 @@
     };
 
     System.Nullable = nullable;
+
+    Bridge.define('System.Nullable$1', function (T) {
+        return {
+            $kind: "struct",
+
+            statics: {
+                getDefaultValue: function () {
+                    return null;
+                },
+
+                instanceOf: function(obj) {
+                    return Bridge.is(obj, T);
+                }
+            }
+        };
+    });

@@ -8,6 +8,7 @@ namespace System.Linq.Expressions
     public sealed class LabelExpression : Expression
     {
         [FieldProperty]
+        [Name("dv")]
         public extern Expression DefaultValue { get; private set; }
 
         [FieldProperty]

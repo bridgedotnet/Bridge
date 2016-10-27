@@ -108,12 +108,12 @@ function TestInstance6(assert: QUnitAssert, instance: Interfaces.Class6) {
     interface6.Interfaces$Interface6$setProperty(1);
     assert.deepEqual(instance.getProperty(), 1, "Property getter and setter");
 
-    interface6.Interfaces$Interface6$setProperty$2("12");
+    interface6.Interfaces$Interface6$setProperty$3("12");
     assert.deepEqual(instance.getMethodProperty(), 2, "setProperty$1(string) and MethodProperty");
     assert.deepEqual(instance.getProperty$1(), 2, "setPropert$1(string) and getProperty");
     assert.notDeepEqual(instance.getProperty(), instance.getProperty$1(), "getProperty and getProperty$3");
 
-    interface6.Interfaces$Interface6$setProperty$1(3);
+    interface6.Interfaces$Interface6$setProperty$2(3);
     assert.deepEqual(instance.getMethodProperty(), 3, "setProperty(int) and MethodProperty");
     assert.deepEqual(instance.getProperty$1(), 3, "setPropert$1(int) and getProperty");
     assert.notDeepEqual(instance.getProperty(), instance.getProperty$1(), "getProperty$3 and getProperty");

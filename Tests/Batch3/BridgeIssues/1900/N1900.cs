@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Bridge.Test;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
@@ -23,6 +24,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [Reflectable(true)]
+        public static List<T> GetValue<T>(out T value)
+        {
+            value = default(T);
+            return null;
+        }
+
+        [Reflectable(true)]
         private static bool TestOutRef(out int value, ref string s)
         {
             value = 1;
@@ -35,6 +43,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.True(typeof(Bridge1900).GetMethod("TryGetValue1").ParameterTypes[0] == typeof(int));
             Assert.True(typeof(Bridge1900).GetMethod("TryGetValue2").ParameterTypes[1] == typeof(string));
             Assert.True(typeof(Bridge1900).GetMethod("TestOutRef").ParameterTypes[1] == typeof(string));
+            Assert.True(typeof(Bridge1900).GetMethod("GetValue").ParameterTypes[0] == typeof(object));
         }
     }
 }

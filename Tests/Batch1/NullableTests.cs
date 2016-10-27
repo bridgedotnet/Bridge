@@ -18,8 +18,8 @@ namespace Bridge.ClientTest
         public void TypePropertiesAreCorrect()
         {
             int? a = 3, b = null;
-            Assert.AreEqual("Boolean", typeof(Nullable<bool>).FullName, "Open FullName");
-            Assert.AreEqual("System.Int32", typeof(int?).FullName, "Instantiated FullName");
+            Assert.AreEqual("System.Nullable$1[[Boolean]]", typeof(Nullable<bool>).FullName, "Open FullName");
+            Assert.AreEqual("System.Nullable$1[[System.Int32, mscorlib]]", typeof(int?).FullName, "Instantiated FullName");
             Assert.True((object)a is int?, "is int? #1");
             Assert.False((object)b is int?, "is int? #2");
 
