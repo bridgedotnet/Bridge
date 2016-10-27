@@ -675,6 +675,11 @@
                 obj = System.String.toCharArray(obj);
             }
 
+            if (arguments.length === 2 && Bridge.isFunction(fnName)) {
+                T = fnName;
+                fnName = null;
+            }
+
             if (fnName && obj && obj[fnName]) {
                 return obj[fnName].call(obj);
             }
@@ -2358,6 +2363,9 @@
                     Class = function () {
                         this.$initialize();
                         if (Class.$base) {
+                            if (Class.$$inherits && Class.$$inherits.length > 0 && Class.$$inherits[0].$staticInit) {
+                                Class.$$inherits[0].$staticInit();
+                            }
                             Class.$base.ctor.call(this);
                         }
                     };
@@ -3354,7 +3362,11 @@
 
             t = Bridge.Reflection._getAssemblyType(asm, tname.trim());
 
-            return targs.length ? t.apply(null, targs) : t;
+            t = targs.length ? t.apply(null, targs) : t;
+            if (t && t.$staticInit) {
+                t.$staticInit();
+            }
+            return t;
         },
 
         getType: function (typeName, asm) {
@@ -10024,7 +10036,7 @@
                         this.add(c.key, c.value);
                     }
                 } else if (Object.prototype.toString.call(obj) === '[object Object]') {
-                    var names = Bridge.getPropertyNames(obj),
+                    var names = Object.keys(obj),
                         name;
 
                     for (var i = 0; i < names.length; i++) {

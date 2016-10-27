@@ -660,6 +660,11 @@
                 obj = System.String.toCharArray(obj);
             }
 
+            if (arguments.length === 2 && Bridge.isFunction(fnName)) {
+                T = fnName;
+                fnName = null;
+            }
+
             if (fnName && obj && obj[fnName]) {
                 return obj[fnName].call(obj);
             }

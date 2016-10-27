@@ -298,7 +298,7 @@ namespace Bridge.Translator
 
         public override void VisitConstructorDeclaration(ConstructorDeclaration constructorDeclaration)
         {
-            if (this.HasInline(constructorDeclaration) || constructorDeclaration.HasModifier(Modifiers.Extern))
+            if (this.HasInline(constructorDeclaration) || constructorDeclaration.HasModifier(Modifiers.Extern) && !this.HasScript(constructorDeclaration))
             {
                 return;
             }

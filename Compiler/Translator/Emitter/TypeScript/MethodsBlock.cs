@@ -75,7 +75,7 @@ namespace Bridge.Translator.TypeScript
 
                 foreach (var method in group)
                 {
-                    if (!method.Body.IsNull || this.Emitter.TypeInfo.TypeDeclaration.ClassType == ClassType.Interface)
+                    if ((!method.Body.IsNull || this.Emitter.GetScript(method) != null) || this.Emitter.TypeInfo.TypeDeclaration.ClassType == ClassType.Interface)
                     {
                         new MethodBlock(this.Emitter, method).Emit();
                     }
