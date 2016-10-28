@@ -49,6 +49,15 @@ namespace Bridge.Translator
             protected set;
         }
 
+        /// <summary>
+        /// Value of $(OutputPath) read from the project file
+        /// </summary>
+        public string OutputPath
+        {
+            get;
+            protected set;
+        }
+
         public string AssemblyName
         {
             get;

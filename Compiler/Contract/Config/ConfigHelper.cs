@@ -14,10 +14,32 @@ namespace Bridge.Contract
                 return null;
             }
 
+            path = path.Replace("//", Path.DirectorySeparatorChar.ToString());
             path = path.Replace('/', Path.DirectorySeparatorChar);
+            path = path.Replace("\\\\", Path.DirectorySeparatorChar.ToString());
             path = path.Replace('\\', Path.DirectorySeparatorChar);
 
             return path;
+        }
+
+        public string ApplyToken(string token, string tokenValue, string input)
+        {
+            if (string.IsNullOrEmpty(token))
+            {
+                throw new ArgumentException("token cannot be null or empty", "token");
+            }
+
+            if (input == null)
+            {
+                return null;
+            }
+
+            return input.Replace(token, tokenValue);
+        }
+
+        public string ApplyPathToken(string token, string tokenValue, string input)
+        {
+            return ConvertPath(ApplyToken(token, tokenValue, input));
         }
     }
 

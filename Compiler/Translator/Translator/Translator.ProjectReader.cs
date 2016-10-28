@@ -1,8 +1,8 @@
 using Microsoft.Build.Evaluation;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
 using Bridge.Translator.Utils;
@@ -11,15 +11,13 @@ namespace Bridge.Translator
 {
     public partial class Translator
     {
-
-
         public static class ProjectProperties
         {
-            public const string OutputType = "OutputType";
-            public const string AssemblyName = "AssemblyName";
-            public const string DefineConstants = "DefineConstants";
-            public const string RootNamespace = "RootNamespace";
-            public const string OutputPath = "OutputPath";
+            public const string OUTPUT_TYPE_PROP = "OutputType";
+            public const string ASSEMBLY_NAME_PROP = "AssemblyName";
+            public const string DEFINE_CONSTANTS_PROP = "DefineConstants";
+            public const string ROOT_NAMESPACE_PROP = "RootNamespace";
+            public const string OUTPUT_PATH_PROP = "OutputPath";
         }
 
         protected virtual void ReadProjectFile()
@@ -31,7 +29,7 @@ namespace Bridge.Translator
             this.ValidateProject(doc);
 
             var projectType = (from n in doc.Descendants()
-                               where n.Name.LocalName == ProjectProperties.OutputType
+                               where n.Name.LocalName == ProjectProperties.OUTPUT_TYPE_PROP
                                select n).ToArray();
 
             if (projectType.Length > 0 && projectType[0] != null && projectType[0].Value != Translator.SupportedProjectType)
@@ -40,7 +38,7 @@ namespace Bridge.Translator
             }
 
             this.DefaultNamespace = this.GetDefaultNamespace(doc);
-            this.Log.Trace("#0 this.DefaultNamespace = " + this.DefaultNamespace);
+            this.Log.Trace("DefaultNamespace:" + this.DefaultNamespace);
             this.BuildAssemblyLocation(doc);
             this.SourceFiles = this.GetSourceFiles(doc);
             this.ParsedSourceFiles = new List<ParsedSourceFile>();
@@ -73,11 +71,11 @@ namespace Bridge.Translator
             var failList = new HashSet<string>();
             var failNodeList = new List<XElement>();
             var combined_tags = from x in doc.Descendants()
-                                where x.Name.LocalName == ProjectProperties.RootNamespace || x.Name.LocalName == ProjectProperties.AssemblyName
+                                where x.Name.LocalName == ProjectProperties.ROOT_NAMESPACE_PROP || x.Name.LocalName == ProjectProperties.ASSEMBLY_NAME_PROP
                                 select x;
 
             // Replace '\' with '/' in any occurrence of <OutputPath><path></OutputPath>
-            foreach (var ope in doc.Descendants().Where(e => e.Name.LocalName == ProjectProperties.OutputPath && e.Value.Contains("\\")))
+            foreach (var ope in doc.Descendants().Where(e => e.Name.LocalName == ProjectProperties.OUTPUT_PATH_PROP && e.Value.Contains("\\")))
             {
                 ope.SetValue(ope.Value.Replace("\\", "/"));
             }
@@ -141,32 +139,47 @@ namespace Bridge.Translator
 
         protected virtual void BuildAssemblyLocation(XDocument doc)
         {
-            if (this.AssemblyLocation == null || this.AssemblyLocation.Length == 0)
+            this.Log.Trace("BuildAssemblyLocation...");
+
+            if (string.IsNullOrEmpty(this.AssemblyLocation))
             {
                 this.Configuration = this.Configuration ?? "Debug";
                 this.Platform = this.Platform ?? "AnyCPU";
                 var outputPath = this.GetOutputPath(doc, this.Configuration, this.Platform);
 
-                if (string.IsNullOrEmpty(outputPath))
+                if (string.IsNullOrEmpty(outputPath.Item2))
                 {
-                    outputPath = this.GetOutputPath(doc, "Release", this.Platform);
+                    this.Configuration = "Release";
+                    outputPath = this.GetOutputPath(doc, this.Configuration, this.Platform);
                 }
 
                 this.AssemblyName = this.GetAssemblyName(doc);
-                this.AssemblyLocation = Path.Combine(outputPath, this.AssemblyName + ".dll");
+                this.AssemblyLocation = Path.Combine(outputPath.Item2, this.AssemblyName + ".dll");
 
                 if (!File.Exists(this.AssemblyLocation) && !this.Rebuild)
                 {
-                    outputPath = this.GetOutputPath(doc, "Release", this.Platform);
-                    this.AssemblyLocation = Path.Combine(outputPath, this.AssemblyName + ".dll");
+                    this.Configuration = "Release";
+                    outputPath = this.GetOutputPath(doc, this.Configuration, this.Platform);
+                    this.AssemblyLocation = Path.Combine(outputPath.Item2, this.AssemblyName + ".dll");
                 }
+
+                this.OutputPath = outputPath.Item1;
             }
+
+            this.Log.Info("    Configuration:" + this.Configuration);
+            this.Log.Info("    OutputPath:" + this.OutputPath);
+            this.Log.Info("    AssemblyLocation:" + this.AssemblyLocation);
+
+            var configReader = new AssemblyConfigHelper(this.Log);
+            configReader.ApplyTokens(this.AssemblyInfo, this.OutputPath);
+
+            this.Log.Trace("BuildAssemblyLocation done");
         }
 
-        protected virtual string GetOutputPath(XDocument doc, string configuration, string platform)
+        protected virtual Tuple<string, string> GetOutputPath(XDocument doc, string configuration, string platform)
         {
             var nodes = from n in doc.Descendants()
-                        where n.Name.LocalName == ProjectProperties.OutputPath &&
+                        where n.Name.LocalName == ProjectProperties.OUTPUT_PATH_PROP &&
                               EvaluateCondition(n.Parent.Attribute("Condition").Value)
                         select n;
 
@@ -175,16 +188,20 @@ namespace Bridge.Translator
                 Bridge.Translator.TranslatorException.Throw("Unable to determine output path");
             }
 
-            var path = nodes.First().Value;
+            var projectPath = nodes.First().Value;
+            var fullPath = projectPath;
 
-            if (!Path.IsPathRooted(path))
+            if (!Path.IsPathRooted(fullPath))
             {
-                path = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Location), path));
+                fullPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Location), fullPath));
             }
 
-            path = new Bridge.Contract.ConfigHelper().ConvertPath(path);
+            var configHelper = new Bridge.Contract.ConfigHelper();
 
-            return path;
+            fullPath = configHelper.ConvertPath(fullPath);
+            projectPath = configHelper.ConvertPath(projectPath);
+
+            return new Tuple<string, string>(projectPath, fullPath);
         }
 
         private bool EvaluateCondition(string condition)
@@ -270,7 +287,7 @@ namespace Bridge.Translator
             foreach (var node in nodeList)
             {
                 var constants = from n in node.Descendants()
-                                where n.Name.LocalName == ProjectProperties.DefineConstants
+                                where n.Name.LocalName == ProjectProperties.DEFINE_CONSTANTS_PROP
                                 select n.Value;
                 foreach (var constant in constants)
                 {
@@ -289,7 +306,7 @@ namespace Bridge.Translator
         protected virtual string GetAssemblyName(XDocument doc)
         {
             var nodes = from n in doc.Descendants()
-                        where n.Name.LocalName == ProjectProperties.AssemblyName
+                        where n.Name.LocalName == ProjectProperties.ASSEMBLY_NAME_PROP
                         select n;
 
             if (nodes.Count() != 1)
@@ -303,7 +320,7 @@ namespace Bridge.Translator
         protected virtual string GetDefaultNamespace(XDocument doc)
         {
             var nodes = from n in doc.Descendants()
-                        where n.Name.LocalName == ProjectProperties.RootNamespace
+                        where n.Name.LocalName == ProjectProperties.ROOT_NAMESPACE_PROP
                         select n;
 
             if (nodes.Count() != 1)
