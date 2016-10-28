@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using Bridge.Translator.Utils;
 
 namespace Bridge.Translator.Tests
 {
@@ -32,7 +34,7 @@ namespace Bridge.Translator.Tests
             return FileHelper.GetRelativeToCurrentDirPath(Path.Combine(relativePaths));
         }
 
-        public static string ReadProjectOutputFolder(string configurationName, string projectFileFullName)
+        public static string ReadProjectOutputFolder(string configurationName, string platform, string projectFileFullName)
         {
             var doc = XDocument.Load(projectFileFullName, LoadOptions.SetLineInfo);
 
@@ -40,9 +42,15 @@ namespace Bridge.Translator.Tests
 //                          where n.Name.LocalName == "OutputPath"
 //                          select n;
 
+            var properties = new Dictionary<string, string>
+            {
+                ["Configuration"] = configurationName,
+                ["Platform"] = platform
+            };
+
             var nodes = from n in doc.Descendants()
                         where n.Name.LocalName == "OutputPath" &&
-                              n.Parent.Attribute("Condition").Value.Contains(configurationName)
+                              MsBuildConditionEvaluator.EvaluateCondition(n.Parent.Attribute("Condition").Value, properties)
                         select n;
 
             if (nodes.Count() != 1)

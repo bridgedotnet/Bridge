@@ -17,6 +17,7 @@
     <GenerateScript
       OutputPath="$(OutputPath)"
       Configuration="$(Configuration)"
+      Platform="$(Platform)"
       Assembly="@(IntermediateAssembly)"
       AssembliesPath="$(MSBuildThisFileDirectory)"
       ProjectPath="$(MSBuildProjectFullPath)"

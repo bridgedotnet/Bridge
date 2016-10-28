@@ -44,6 +44,12 @@ namespace Bridge.Build
             set;
         }
 
+        public string Platform
+        {
+            get;
+            set;
+        }
+
         public string Configuration
         {
             get;
@@ -139,6 +145,7 @@ namespace Bridge.Build
                 Rebuild = false,
                 ExtractCore = !NoCore,
                 Configuration = this.Configuration,
+                Platform = this.Platform,
                 Source = null,
                 Folder = null,
                 Recursive = false,

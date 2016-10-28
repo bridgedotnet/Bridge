@@ -20,13 +20,13 @@ namespace Bridge.Translator.Tests
             set;
         }
 
-        private string FindBridgeDllPathByConfiguration(string configurationName)
+        private string FindBridgeDllPathByConfiguration(string configurationName, string platform)
         {
             var bridgeProjectPath = FileHelper.GetRelativeToCurrentDirPath(Path.Combine("..", "..", "..", "..", "Bridge", "Bridge.csproj"));
 
             this.Logger.Info("Searching Bridge assembly in " + bridgeProjectPath);
 
-            var outputPath = FileHelper.ReadProjectOutputFolder(configurationName, bridgeProjectPath);
+            var outputPath = FileHelper.ReadProjectOutputFolder(configurationName, platform, bridgeProjectPath);
 
             this.Logger.Info("Output path " + outputPath + " in project " + bridgeProjectPath + " for configuration " + configurationName);
 
@@ -59,7 +59,7 @@ namespace Bridge.Translator.Tests
 #if DEBUG
             configuration = "Debug";
 #endif
-            var path = FindBridgeDllPathByConfiguration(configuration);
+            var path = FindBridgeDllPathByConfiguration(configuration, "AnyCPU");
 
             //if (path == null)
             //{
