@@ -457,6 +457,11 @@ namespace Bridge.Contract
             get; set;
         }
 
+        Dictionary<string, int> NamespacesCache
+        {
+            get; set;
+        } 
+
         void WriteIndented(string s, int? position = null);
     }
 }

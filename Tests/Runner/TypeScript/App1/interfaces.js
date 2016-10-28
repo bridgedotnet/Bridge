@@ -84,17 +84,17 @@
             "getProperty", "Interfaces$Interface6$getProperty",
             "setProperty", "Interfaces$Interface6$setProperty",
             "getProperty$1", "Interfaces$Interface6$getProperty$1",
-            "setProperty$2", "Interfaces$Interface6$setProperty$2",
-            "setProperty$1", "Interfaces$Interface6$setProperty$1"
+            "setProperty$3", "Interfaces$Interface6$setProperty$3",
+            "setProperty$2", "Interfaces$Interface6$setProperty$2"
             ]
         },
         getProperty$1: function () {
             return this.getMethodProperty();
         },
-        setProperty$2: function (s) {
+        setProperty$3: function (s) {
             this.setMethodProperty(s.length);
         },
-        setProperty$1: function (i) {
+        setProperty$2: function (i) {
             this.setMethodProperty(i);
         }
     });

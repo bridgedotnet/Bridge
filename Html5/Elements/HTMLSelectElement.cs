@@ -147,7 +147,7 @@ namespace Bridge.Html5
         ///     - An OptionElement, if there is exactly one match.
         ///     - null if there are no matches.
         ///     - An OptionsCollection in tree order of nodes whose name or id attributes match the specified name.</returns>
-        public virtual extern Any<HTMLOptionElement, OptionsCollection> NamedItem(string name);
+        public virtual extern Union<HTMLOptionElement, OptionsCollection> NamedItem(string name);
 
         /// <summary>
         /// Removes the element at the specified index from the options collection for this select element.

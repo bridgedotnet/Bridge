@@ -88,6 +88,7 @@
     <Compile Include="Bridge\Linq\Enumerable.cs" />
     <Compile Include="Bridge\IBridgeClass.cs" />
     <Compile Include="Bridge\ObjectLiteral.cs" />
+    <Compile Include="Bridge\Any.cs" />
     <Compile Include="Bridge\Utils\SystemAssembly.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\.build\common\CommonAssemblyInfo.cs">
@@ -321,7 +322,7 @@
     <Compile Include="Bridge\Text\RegularExpressions\Regex.cs" />
     <Compile Include="Bridge\Text\RegularExpressions\RegexMatch.cs" />
     <Compile Include="System\TimeSpan.cs" />
-    <Compile Include="Bridge\Any.cs" />
+    <Compile Include="Bridge\Union.cs" />
     <Compile Include="System\Tuple.cs" />
     <Compile Include="System\Void.cs" />
   </ItemGroup>

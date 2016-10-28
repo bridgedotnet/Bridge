@@ -18,7 +18,7 @@ namespace Bridge.Html5
         /// Creates a new Float64Array of the specified length.
         /// </summary>
         /// <param name="length">Length of array to create</param>
-        public Float64Array(Any<int, uint> length)
+        public Float64Array(Union<int, uint> length)
         {
         }
 
@@ -53,7 +53,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="i">Index position in the array.</param>
         /// <returns>The element in the specified position.</returns>
-        public double this[Any<int, uint> i]
+        public double this[Union<int, uint> i]
         {
             get
             {

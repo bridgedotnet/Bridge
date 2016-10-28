@@ -17,5 +17,8 @@ namespace System.Runtime.CompilerServices
 
         [Template("Bridge.getHashCode({obj})")]
         public static extern int GetHashCode(object obj);
+
+        [Template("{type}.$staticInit && {type}.$staticInit()")]
+        public static extern void RunClassConstructor(Type type);
     }
 }

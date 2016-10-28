@@ -16,7 +16,7 @@ namespace Bridge.Html5
         /// Creates a new Uint8Array of the specified length.
         /// </summary>
         /// <param name="length">Length of array to create</param>
-        public Uint8Array(Any<int, uint> length)
+        public Uint8Array(Union<int, uint> length)
         {
         }
 
@@ -51,7 +51,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="i">Index position in the array.</param>
         /// <returns>The element in the specified position.</returns>
-        public byte this[Any<int, uint> i]
+        public byte this[Union<int, uint> i]
         {
             get
             {

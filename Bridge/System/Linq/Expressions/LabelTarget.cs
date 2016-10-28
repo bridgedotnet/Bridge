@@ -7,9 +7,11 @@ namespace System.Linq.Expressions
     public sealed class LabelTarget
     {
         [FieldProperty]
+        [Name("n")]
         public extern string Name { get; }
 
         [FieldProperty]
+        [Name("t")]
         public extern Type Type { get; }
 
         internal extern LabelTarget();

@@ -6,20 +6,21 @@ namespace System.Reflection
     [Name("Object")]
     public class MemberInfo
     {
-        [Name("type")]
+        [Name("t")]
         [FieldProperty]
         public extern MemberTypes MemberType
         {
             get;
         }
 
+        [Name("n")]
         [FieldProperty]
         public extern string Name
         {
             get;
         }
 
-        [Name("typeDef")]
+        [Name("td")]
         [FieldProperty]
         public extern Type DeclaringType
         {
@@ -28,67 +29,67 @@ namespace System.Reflection
 
         public extern bool IsStatic
         {
-            [Template("({this}.isStatic || false)")]
+            [Template("({this}.is || false)")]
             get;
         }
 
         public extern bool IsOverride
         {
-            [Template("({this}.isOverride || false)")]
+            [Template("({this}.ov || false)")]
             get;
         }
 
         public extern bool IsVirtual
         {
-            [Template("({this}.isVirtual || false)")]
+            [Template("({this}.v || false)")]
             get;
         }
 
         public extern bool IsAbstract
         {
-            [Template("({this}.isAbstract || false)")]
+            [Template("({this}.ab || false)")]
             get;
         }
 
         public extern bool IsSealed
         {
-            [Template("({this}.isSealed || false)")]
+            [Template("({this}.sl || false)")]
             get;
         }
 
         public extern bool IsSpecialName
         {
-            [Template("({this}.isSynthetic || false)")]
+            [Template("({this}.sy || false)")]
             get;
         }
 
         public extern bool IsFamily
         {
-            [Template("({this}.accessibility === 3)")]
+            [Template("({this}.a === 3)")]
             get;
         }
 
         public extern bool IsFamilyOrAssembly
         {
-            [Template("({this}.accessibility === 5)")]
+            [Template("({this}.a === 5)")]
             get;
         }
 
         public extern bool IsPrivate
         {
-            [Template("({this}.accessibility === 1)")]
+            [Template("({this}.a === 1)")]
             get;
         }
 
         public extern bool IsPublic
         {
-            [Template("({this}.accessibility === 2)")]
+            [Template("({this}.a === 2)")]
             get;
         }
 
         public extern bool IsAssembly
         {
-            [Template("({this}.accessibility === 4)")]
+            [Template("({this}.a === 4)")]
             get;
         }
 
@@ -97,7 +98,7 @@ namespace System.Reflection
         /// </summary>
         /// <param name="inherit">Ignored for members. Base members will never be considered.</param>
         /// <returns>An array that contains all the custom attributes applied to this member, or an array with zero elements if no attributes are defined. </returns>
-        [Template("({this}.attr || [])")]
+        [Template("({this}.at || [])")]
         public extern object[] GetCustomAttributes(bool inherit);
 
         /// <summary>
@@ -106,14 +107,14 @@ namespace System.Reflection
         /// <param name="attributeType">The type of attribute to search for. Only attributes that are assignable to this type are returned. </param>
         /// <param name="inherit">Ignored for members. Base members will never be considered.</param>
         /// <returns>An array that contains all the custom attributes applied to this member, or an array with zero elements if no attributes are defined.</returns>
-        [Template("({this}.attr || []).filter(function(a) { return Bridge.is(a, {attributeType}); })")]
+        [Template("({this}.at || []).filter(function(a) { return Bridge.is(a, {attributeType}); })")]
         public extern object[] GetCustomAttributes(Type attributeType, bool inherit);
 
         /// <summary>
         /// Returns an array of all custom attributes applied to this member.
         /// </summary>
         /// <returns>An array that contains all the custom attributes applied to this member, or an array with zero elements if no attributes are defined. </returns>
-        [Template("({this}.attr || [])")]
+        [Template("({this}.at || [])")]
         public extern object[] GetCustomAttributes();
 
         /// <summary>
@@ -121,7 +122,7 @@ namespace System.Reflection
         /// </summary>
         /// <param name="attributeType">The type of attribute to search for. Only attributes that are assignable to this type are returned. </param>
         /// <returns>An array that contains all the custom attributes applied to this member, or an array with zero elements if no attributes are defined.</returns>
-        [Template("({this}.attr || []).filter(function(a) { return Bridge.is(a, {attributeType}); })")]
+        [Template("({this}.at || []).filter(function(a) { return Bridge.is(a, {attributeType}); })")]
         public extern object[] GetCustomAttributes(Type attributeType);
 
         internal extern MemberInfo();

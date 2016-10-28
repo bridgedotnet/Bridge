@@ -5,26 +5,26 @@
         },
 
         initMetaData: function (type, metadata) {
-            if (metadata.members) {
-                for (var i = 0; i < metadata.members.length; i++) {
-                    var m = metadata.members[i];
+            if (metadata.m) {
+                for (var i = 0; i < metadata.m.length; i++) {
+                    var m = metadata.m[i];
 
-                    m.typeDef = type;
+                    m.td = type;
 
-                    if (m.adder) {
-                        m.adder.typeDef = type;
+                    if (m.ad) {
+                        m.ad.td = type;
                     }
 
-                    if (m.remover) {
-                        m.remover.typeDef = type;
+                    if (m.r) {
+                        m.r.td = type;
                     }
 
-                    if (m.getter) {
-                        m.getter.typeDef = type;
+                    if (m.g) {
+                        m.g.td = type;
                     }
 
-                    if (m.setter) {
-                        m.setter.typeDef = type;
+                    if (m.s) {
+                        m.s.td = type;
                     }
                 }
             }
@@ -399,7 +399,11 @@
 
             t = Bridge.Reflection._getAssemblyType(asm, tname.trim());
 
-            return targs.length ? t.apply(null, targs) : t;
+            t = targs.length ? t.apply(null, targs) : t;
+            if (t && t.$staticInit) {
+                t.$staticInit();
+            }
+            return t;
         },
 
         getType: function (typeName, asm) {
@@ -445,11 +449,11 @@
                     for (var j = 0; j < ctors.length; j++) {
                         var ctor = ctors[j];
 
-                        if (ctor.params && ctor.params.length === args.length) {
+                        if (ctor.p && ctor.p.length === args.length) {
                             found = true;
 
-                            for (var k = 0; k < ctor.params.length; k++) {
-                                var p = ctor.params[k];
+                            for (var k = 0; k < ctor.p.length; k++) {
+                                var p = ctor.p[k];
 
                                 if (!Bridge.is(args[k], p) || args[k] == null && !Bridge.Reflection.canAcceptNull(p)) {
                                     found = false;
@@ -458,7 +462,7 @@
                             }
 
                             if (found) {
-                                constructor = constructor[ctor.sname];
+                                constructor = constructor[ctor.sn];
                                 count++;
                             }
                         }
@@ -513,7 +517,7 @@
                         t = Bridge.getType(a[i]);
                         md = Bridge.getMetadata(t);
 
-                        if (!md || !md.attrNoInherit) {
+                        if (!md || !md.ni) {
                             result.push(a[i]);
                         }
                     }
@@ -522,15 +526,15 @@
 
             type_md = Bridge.getMetadata(type);
 
-            if (type_md && type_md.attr) {
-                for (i = 0; i < type_md.attr.length; i++) {
-                    a = type_md.attr[i];
+            if (type_md && type_md.at) {
+                for (i = 0; i < type_md.at.length; i++) {
+                    a = type_md.at[i];
 
                     if (attrType == null || Bridge.Reflection.isInstanceOfType(a, attrType)) {
                         t = Bridge.getType(a);
                         md = Bridge.getMetadata(t);
 
-                        if (!md || !md.attrAllowMultiple) {
+                        if (!md || !md.am) {
                             for (var j = result.length - 1; j >= 0; j--) {
                                 if (Bridge.Reflection.isInstanceOfType(result[j], t)) {
                                     result.splice(j, 1);
@@ -558,14 +562,14 @@
             }
 
             var f = function (m) {
-                if ((memberTypes & m.type) && (((bindingAttr & 4) && !m.isStatic) || ((bindingAttr & 8) && m.isStatic)) && (!name || m.name === name)) {
+                if ((memberTypes & m.t) && (((bindingAttr & 4) && !m.is) || ((bindingAttr & 8) && m.is)) && (!name || m.n === name)) {
                     if (params) {
-                        if ((m.params || []).length !== params.length) {
+                        if ((m.p || []).length !== params.length) {
                             return;
                         }
 
                         for (var i = 0; i < params.length; i++) {
-                            if (params[i] !== m.params[i]) {
+                            if (params[i] !== m.p[i]) {
                                 return;
                             }
                         }
@@ -577,11 +581,11 @@
 
             var type_md = Bridge.getMetadata(type);
 
-            if (type_md && type_md.members) {
-                var mNames = ['getter', 'setter', 'adder', 'remover'];
+            if (type_md && type_md.m) {
+                var mNames = ['g', 's', 'ad', 'r'];
 
-                for (var i = 0; i < type_md.members.length; i++) {
-                    var m = type_md.members[i];
+                for (var i = 0; i < type_md.m.length; i++) {
+                    var m = type_md.m[i];
 
                     f(m);
 
@@ -600,7 +604,7 @@
                     var r = [];
 
                     for (var i = 0; i < result.length; i++) {
-                        if (result[i].typeDef === type) {
+                        if (result[i].td === type) {
                             r.push(result[i]);
                         }
                     }
@@ -621,22 +625,22 @@
         },
 
         midel: function (mi, target, typeArguments) {
-            if (mi.isStatic && !!target) {
+            if (mi.is && !!target) {
                 throw new System.ArgumentException('Cannot specify target for static method');
-            } else if (!mi.isStatic && !target)
+            } else if (!mi.is && !target)
                 throw new System.ArgumentException('Must specify target for instance method');
 
             var method;
 
-            if (mi.fget) {
-                method = function () { return (mi.isStatic ? mi.typeDef : this)[mi.fget]; };
-            } else if (mi.fset) {
-                method = function (v) { (mi.isStatic ? mi.typeDef : this)[mi.fset] = v; };
+            if (mi.fg) {
+                method = function () { return (mi.is ? mi.td : this)[mi.fg]; };
+            } else if (mi.fs) {
+                method = function (v) { (mi.is ? mi.td : this)[mi.fs] = v; };
             } else {
-                method = mi.def || (mi.isStatic || mi.sm ? mi.typeDef[mi.sname] : target[mi.sname]);
+                method = mi.def || (mi.is || mi.sm ? mi.td[mi.sn] : target[mi.sn]);
 
-                if (mi.tpcount) {
-                    if (!typeArguments || typeArguments.length !== mi.tpcount) {
+                if (mi.tpc) {
+                    if (!typeArguments || typeArguments.length !== mi.tpc) {
                         throw new System.ArgumentException('Wrong number of type arguments');
                     }
 
@@ -675,25 +679,25 @@
             if (ci.def) {
                 return ci.def.apply(null, args);
             } else if (ci.sm) {
-                return ci.typeDef[ci.sname].apply(null, args);
+                return ci.td[ci.sn].apply(null, args);
             } else {
-                return Bridge.Reflection.applyConstructor(ci.sname ? ci.typeDef[ci.sname] : ci.typeDef, args);
+                return Bridge.Reflection.applyConstructor(ci.sn ? ci.td[ci.sn] : ci.td, args);
             }
         },
 
         fieldAccess: function (fi, obj) {
-            if (fi.isStatic && !!obj) {
+            if (fi.is && !!obj) {
                 throw new System.ArgumentException('Cannot specify target for static field');
-            } else if (!fi.isStatic && !obj) {
+            } else if (!fi.is && !obj) {
                 throw new System.ArgumentException('Must specify target for instance field');
             }
 
-            obj = fi.isStatic ? fi.typeDef : obj;
+            obj = fi.is ? fi.td : obj;
 
             if (arguments.length === 3) {
-                obj[fi.sname] = arguments[2];
+                obj[fi.sn] = arguments[2];
             } else {
-                return obj[fi.sname];
+                return obj[fi.sn];
             }
         }
     };
@@ -702,37 +706,37 @@
 
     System.Reflection.ConstructorInfo = {
         $is: function (obj) {
-            return obj != null && obj.type === 1;
+            return obj != null && obj.t === 1;
         }
     };
 
     System.Reflection.EventInfo = {
         $is: function (obj) {
-            return obj != null && obj.type === 2;
+            return obj != null && obj.t === 2;
         }
     };
 
     System.Reflection.FieldInfo = {
         $is: function (obj) {
-            return obj != null && obj.type === 4;
+            return obj != null && obj.t === 4;
         }
     };
 
     System.Reflection.MethodBase = {
         $is: function (obj) {
-            return obj != null && (obj.type === 1 || obj.type === 8);
+            return obj != null && (obj.t === 1 || obj.t === 8);
         }
     };
 
     System.Reflection.MethodInfo = {
         $is: function (obj) {
-            return obj != null && obj.type === 8;
+            return obj != null && obj.t === 8;
         }
     };
 
     System.Reflection.PropertyInfo = {
         $is: function (obj) {
-            return obj != null && obj.type === 16;
+            return obj != null && obj.t === 16;
         }
     };
 

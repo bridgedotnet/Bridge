@@ -6,6 +6,7 @@ namespace System.Reflection
     public class MethodInfo : MethodBase
     {
         [FieldProperty]
+        [Name("rt")]
         public extern Type ReturnType
         {
             get;
@@ -17,7 +18,7 @@ namespace System.Reflection
 		/// </summary>
 		/// <param name="inherit">Ignored for members. Base members will never be considered.</param>
 		/// <returns>An array that contains all the custom attributes applied to this member, or an array with zero elements if no attributes are defined. </returns>
-		[Template("({this}.returnTypeAttributes || [])")]
+		[Template("({this}.rta || [])")]
         public extern object[] GetReturnTypeCustomAttributes(bool inherit);
 
         /// <summary>
@@ -26,14 +27,14 @@ namespace System.Reflection
         /// <param name="attributeType">The type of attribute to search for. Only attributes that are assignable to this type are returned. </param>
         /// <param name="inherit">Ignored for members. Base members will never be considered.</param>
         /// <returns>An array that contains all the custom attributes applied to this member, or an array with zero elements if no attributes are defined.</returns>
-        [Template("({this}.returnTypeAttributes || []).filter(function(a) { return Bridge.is(a, {attributeType}); })")]
+        [Template("({this}.rta || []).filter(function(a) { return Bridge.is(a, {attributeType}); })")]
         public extern object[] GetReturnTypeCustomAttributes(Type attributeType, bool inherit);
 
         /// <summary>
         /// Returns an array of all custom attributes applied to this member.
         /// </summary>
         /// <returns>An array that contains all the custom attributes applied to this member, or an array with zero elements if no attributes are defined. </returns>
-        [Template("({this}.returnTypeAttributes || [])")]
+        [Template("({this}.rta || [])")]
         public extern object[] GetReturnTypeCustomAttributes();
 
         /// <summary>
@@ -41,7 +42,7 @@ namespace System.Reflection
         /// </summary>
         /// <param name="attributeType">The type of attribute to search for. Only attributes that are assignable to this type are returned. </param>
         /// <returns>An array that contains all the custom attributes applied to this member, or an array with zero elements if no attributes are defined.</returns>
-        [Template("({this}.returnTypeAttributes || []).filter(function(a) { return Bridge.is(a, {attributeType}); })")]
+        [Template("({this}.rta || []).filter(function(a) { return Bridge.is(a, {attributeType}); })")]
         public extern object[] GetReturnTypeCustomAttributes(Type attributeType);
 
         [Template("Bridge.Reflection.midel({this})")]
@@ -64,7 +65,7 @@ namespace System.Reflection
 
         public extern int TypeParameterCount
         {
-            [Template("({this}.tpcount || 0)")]
+            [Template("({this}.tpc || 0)")]
             get;
             [Template("X")]
             private set;
@@ -72,7 +73,7 @@ namespace System.Reflection
 
         public extern bool IsGenericMethodDefinition
         {
-            [Template("(!!{this}.tpcount)")]
+            [Template("(!!{this}.tpc)")]
             get;
             [Template("X")]
             private set;
@@ -87,7 +88,7 @@ namespace System.Reflection
         /// <summary>
         /// Script name of the method. Null if the method has a special implementation.
         /// </summary>
-        [Name("sname")]
+        [Name("sn")]
         [FieldProperty]
         public extern string ScriptName
         {
