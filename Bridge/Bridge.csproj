@@ -3,7 +3,7 @@
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Choose>
     <When Condition="'$(OS)' != 'Unix'">
-      <PropertyGroup Condition="$(MSBuildToolsVersion) &gt;= 14.0">
+      <PropertyGroup>
         <CompilerResponseFile>AdditionalCompilerOptions.txt</CompilerResponseFile>
       </PropertyGroup>
     </When>
