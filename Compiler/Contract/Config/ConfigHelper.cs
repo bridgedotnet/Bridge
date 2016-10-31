@@ -7,17 +7,22 @@ namespace Bridge.Contract
 {
     public class ConfigHelper
     {
-        public string ConvertPath(string path)
+        public string ConvertPath(string path, char directorySeparator = char.MinValue)
         {
             if (path == null)
             {
                 return null;
             }
 
-            path = path.Replace("//", Path.DirectorySeparatorChar.ToString());
-            path = path.Replace('/', Path.DirectorySeparatorChar);
-            path = path.Replace("\\\\", Path.DirectorySeparatorChar.ToString());
-            path = path.Replace('\\', Path.DirectorySeparatorChar);
+            if (directorySeparator == char.MinValue)
+            {
+                directorySeparator = Path.DirectorySeparatorChar;
+            }
+
+            path = path.Replace("//", directorySeparator.ToString());
+            path = path.Replace('/', directorySeparator);
+            path = path.Replace("\\\\", directorySeparator.ToString());
+            path = path.Replace('\\', directorySeparator);
 
             return path;
         }

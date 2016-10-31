@@ -243,13 +243,20 @@ namespace Bridge.Translator
             var assemblyDef = this.AssemblyDefinition;
             var resources = assemblyDef.MainModule.Resources;
 
+            var configHelper = new ConfigHelper();
+
             foreach (var item in resourcesToEmbed)
             {
                 var r = item.Key;
                 this.Log.Trace("Embedding resource " + r.Name);
 
-                var name = this.NormalizePath(r.Name);
-                this.Log.Trace("Normalized resource name " + name);
+                // No resource name normalization
+                //var name = this.NormalizePath(r.Name);
+                //this.Log.Trace("Normalized resource name " + name);
+                var name = r.Name;
+
+                // Normalize resourse output path to always have '/' as a directory separator
+                r.Path = configHelper.ConvertPath(r.Path, '/');
 
                 var newResource = new EmbeddedResource(name, ManifestResourceAttributes.Private, item.Value);
 
@@ -867,5 +874,13 @@ namespace Bridge.Translator
 
             return path.Replace('\\', '/');
         }
+
+        //private string NormalizePath(string value)
+        //{
+        //    value = value.Replace(@"\", ".");
+        //    string path = value.LeftOfRightmostOf('.').LeftOfRightmostOf('.');
+        //    string name = value.Substring(path.Length);
+        //    return path.Replace('-', '_') + name;
+        //}
     }
 }

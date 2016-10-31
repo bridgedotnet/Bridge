@@ -370,14 +370,6 @@ namespace Bridge.Translator
             this.Log.Info("Done checking AfterBuild event...");
         }
 
-        private string NormalizePath(string value)
-        {
-            value = value.Replace(@"\", ".");
-            string path = value.LeftOfRightmostOf('.').LeftOfRightmostOf('.');
-            string name = value.Substring(path.Length);
-            return path.Replace('-', '_') + name;
-        }
-
         protected virtual Emitter CreateEmitter(IMemberResolver resolver)
         {
             this.Log.Info("Creating emitter...");
@@ -705,6 +697,11 @@ namespace Bridge.Translator
         protected virtual void ExtractResourceAndWriteToFile(string outputPath, AssemblyDefinition assembly, string resourceName, string fileName, Func<string, string> preHandler = null)
         {
             var res = assembly.MainModule.Resources.FirstOrDefault(r => r.Name == resourceName);
+
+            if (res == null)
+            {
+                throw new InvalidOperationException("Could not read resource " + resourceName + " in " + assembly.FullName);
+            }
 
             var file = CreateFileDirectory(outputPath, fileName);
 
