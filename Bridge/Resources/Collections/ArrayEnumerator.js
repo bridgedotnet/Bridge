@@ -1,7 +1,9 @@
 ﻿    Bridge.define('Bridge.ArrayEnumerator', {
         inherits: [System.Collections.IEnumerator, System.IDisposable],
 
-        $isArrayEnumerator: true,
+        statics: {
+            $isArrayEnumerator: true
+        },
 
         config: {
             alias: [

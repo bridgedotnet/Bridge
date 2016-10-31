@@ -499,8 +499,8 @@
                     return type.$is(obj);
                 }
 
-                if (Bridge.isFunction(type.instanceOf)) {
-                    return type.instanceOf(obj);
+                if (Bridge.isFunction(type.$is)) {
+                    return type.$is(obj);
                 }
 
                 if (Bridge.isFunction(type.isAssignableFrom)) {
@@ -2728,15 +2728,15 @@
             }
 
             if (Class.$kind === "enum") {
-                Class.instanceOf = function (instance) {
+                Class.$is = function (instance) {
                     var utype = Class.prototype.$utype;
 
                     if (utype === System.String) {
                         return typeof (instance) == "string";
                     }
 
-                    if (utype && utype.instanceOf) {
-                        return utype.instanceOf(instance);
+                    if (utype && utype.$is) {
+                        return utype.$is(instance);
                     }
 
                     return typeof (instance) == "number";
@@ -3888,7 +3888,7 @@
 
             statics: {
                 $is: function (obj) {
-                    if (Bridge.isNumber(obj) && T.$number && T.instanceOf(obj) || Bridge.isDate(obj) && T === Date || Bridge.isBoolean(obj) && T === Boolean || Bridge.isString(obj) && T === String) {
+                    if (Bridge.isNumber(obj) && T.$number && T.$is(obj) || Bridge.isDate(obj) && T === Date || Bridge.isBoolean(obj) && T === Boolean || Bridge.isString(obj) && T === String) {
                         return true;
                     }
 
@@ -3904,7 +3904,7 @@
 
             statics: {
                 $is: function (obj) {
-                    if (Bridge.isNumber(obj) && T.$number && T.instanceOf(obj) || Bridge.isDate(obj) && T === Date || Bridge.isBoolean(obj) && T === Boolean || Bridge.isString(obj) && T === String) {
+                    if (Bridge.isNumber(obj) && T.$number && T.$is(obj) || Bridge.isDate(obj) && T === Date || Bridge.isBoolean(obj) && T === Boolean || Bridge.isString(obj) && T === String) {
                         return true;
                     }
 
@@ -3932,7 +3932,7 @@
 
             max: 65535,
 
-            instanceOf: function (instance) {
+            $is: function (instance) {
                 return typeof (instance) === "number" && Math.round(instance, 0) == instance && instance >= System.Char.min && instance <= System.Char.max;
             },
 
@@ -5015,7 +5015,7 @@
             return false;
         },
 
-        instanceOf: function (instance) {
+        $is: function (instance) {
             return typeof (instance) === "boolean";
         },
 
@@ -5110,7 +5110,7 @@
                     max: max,
                     precision: precision,
 
-                    instanceOf: function (instance) {
+                    $is: function (instance) {
                         return typeof (instance) === "number" && Math.floor(instance, 0) === instance && instance >= min && instance <= max;
                     },
                     getDefaultValue: function () {
@@ -5144,7 +5144,7 @@
         statics: {
             $number: true,
 
-            instanceOf: function (instance) {
+            $is: function (instance) {
                 return typeof (instance) === "number" && isFinite(instance) && Math.floor(instance, 0) === instance;
             },
 
@@ -5790,7 +5790,7 @@
                     return System.Decimal.toInt(x, type);
                 }
 
-                if (Bridge.isNumber(x) && !type.instanceOf(x)) {
+                if (Bridge.isNumber(x) && !type.$is(x)) {
                     throw new System.OverflowException();
                 }
 
@@ -5864,7 +5864,7 @@
 
             $number: true,
 
-            instanceOf: function (instance) {
+            $is: function (instance) {
                 return typeof (instance) === "number";
             },
 
@@ -5899,7 +5899,7 @@
 
             $number: true,
 
-            instanceOf: System.Double.instanceOf,
+            $is: System.Double.$is,
 
             getDefaultValue: System.Double.getDefaultValue,
 
@@ -5983,7 +5983,7 @@
     System.Int64.$$inherits = [];
     Bridge.Class.addExtend(System.Int64, [System.IComparable, System.IFormattable, System.IComparable$1(System.Int64), System.IEquatable$1(System.Int64)]);
 
-    System.Int64.instanceOf = function (instance) {
+    System.Int64.$is = function (instance) {
         return instance instanceof System.Int64;
     };
 
@@ -6507,7 +6507,7 @@
     System.UInt64.$$inherits = [];
     Bridge.Class.addExtend(System.UInt64, [System.IComparable, System.IFormattable, System.IComparable$1(System.UInt64), System.IEquatable$1(System.UInt64)]);
 
-    System.UInt64.instanceOf = function (instance) {
+    System.UInt64.$is = function (instance) {
         return instance instanceof System.UInt64;
     };
 
@@ -6757,7 +6757,7 @@
     System.Decimal.$$inherits = [];
     Bridge.Class.addExtend(System.Decimal, [System.IComparable, System.IFormattable, System.IComparable$1(System.Decimal), System.IEquatable$1(System.Decimal)]);
 
-    System.Decimal.instanceOf = function (instance) {
+    System.Decimal.$is = function (instance) {
         return instance instanceof System.Decimal;
     };
 
@@ -6991,7 +6991,7 @@
 
         var i = Bridge.Int.trunc(System.Decimal.getValue(v).toNumber());
 
-        if (!Bridge.Int.instanceOf(i)) {
+        if (!Bridge.Int.$is(i)) {
             throw new System.OverflowException();
         }
 

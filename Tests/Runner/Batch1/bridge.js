@@ -486,11 +486,51 @@
         },
 
         is: function (obj, type, ignoreFn, allowNull) {
+            if (obj == null) {
+                return !!allowNull;
+            }
+
+            var ctor = obj.constructor;
+            if (type.constructor === Function && obj instanceof type || ctor === type) {
+                return true;
+            }
+
+            var hasObjKind = ctor.$kind || ctor.$$inherits,
+                hasTypeKind = type.$kind;
+            if (hasObjKind || hasTypeKind) {
+                var isInterface = type.$isInterface;
+
+                if (isInterface) {
+                    if (hasObjKind) {
+                        if (ctor.$isArrayEnumerator) {
+                            return System.Array.is(obj, type);
+                        }
+
+                        return type.isAssignableFrom ? type.isAssignableFrom(ctor) : Bridge.Reflection.getInterfaces(ctor).indexOf(type) >= 0;
+                    }
+
+                    if (Bridge.isArray(obj, ctor)) {
+                        return System.Array.is(obj, type);
+                    }
+
+                    if (ctor === String) {
+                        return System.String.is(obj, type);
+                    }
+                }
+
+                if (ignoreFn !== true && type.$is) {
+                    return type.$is(obj);
+                }
+
+                return false;
+            }
+
             if (type && type.prototype && type.prototype.$literal && Bridge.isPlainObject(obj)) {
                 return true;
             }
 
             var tt = typeof type;
+
             if (tt === "boolean") {
                 return type;
             }
@@ -499,14 +539,7 @@
                 type = Bridge.unroll(type);
             }
 
-            if (obj == null) {
-                return !!allowNull;
-            }
-
-            if (tt === "function" && ((obj.constructor === type) || (Bridge.getType(obj).prototype instanceof type))) {
-                return true;
-            }
-            else if (type.$kind === "interface" && System.Array.contains(Bridge.Reflection.getInterfaces(Bridge.getType(obj)), type)) {
+            if (tt === "function" && (Bridge.getType(obj).prototype instanceof type)) {
                 return true;
             }
 
@@ -515,36 +548,16 @@
                     return type.$is(obj);
                 }
 
-                if (typeof (type.instanceOf) === "function") {
-                    return type.instanceOf(obj);
-                }
-
                 if (typeof (type.isAssignableFrom) === "function") {
                     return type.isAssignableFrom(Bridge.getType(obj));
                 }
             }
 
-            if (!(obj && obj.$kind && obj.$$name)) {
-                if (Bridge.isArray(obj)) {
-                    return System.Array.is(obj, type);
-                }
-
-                var to = typeof (obj);
-                if (to === "string") {
-                    return System.String.is(obj, type);
-                }
-
-                if (to === "boolean") {
-                    return System.Boolean.is(obj, type);
-                }
-
-                return tt === "object" && ((obj.constructor === type) || (obj instanceof type));
-            }
-            else if (obj.$isArrayEnumerator) {
+            if (Bridge.isArray(obj)) {
                 return System.Array.is(obj, type);
             }
 
-            return false;
+            return tt === "object" && ((ctor === type) || (obj instanceof type));
         },
 
         as: function (obj, type, allowNull) {
@@ -757,8 +770,8 @@
             return new (System.Collections.Generic.List$1(T || Object))(ienumerable);
         },
 
-        isArray: function (obj) {
-            var c = obj != null ? obj.constructor : null;
+        isArray: function (obj, ctor) {
+            var c = ctor || (obj != null ? obj.constructor : null);
 
             if (!c) {
                 return false;
@@ -2265,6 +2278,7 @@
             var c = Bridge.define(className, gscope, prop);
 
             c.$kind = "interface";
+            c.$isInterface = true;
 
             return c;
         },
@@ -2433,6 +2447,7 @@
 
             Class.$baseInterfaces = baseInterfaces;
             Class.$interfaces = interfaces;
+            Class.$allInterfaces = interfaces.concat(baseInterfaces);
 
             var noBase = extend ? extend[0].$kind === "interface" : true;
 
@@ -2565,15 +2580,15 @@
             }
 
             if (Class.$kind === "enum") {
-                Class.instanceOf = function (instance) {
+                Class.$is = function (instance) {
                     var utype = Class.prototype.$utype;
 
                     if (utype === System.String) {
                         return typeof (instance) == "string";
                     }
 
-                    if (utype && utype.instanceOf) {
-                        return utype.instanceOf(instance);
+                    if (utype && utype.$is) {
+                        return utype.$is(instance);
                     }
 
                     return typeof (instance) == "number";
@@ -2590,8 +2605,12 @@
                 };
             }
 
-            if (Class.$kind === "interface" && Class.prototype.$variance) {
-                Class.isAssignableFrom = Bridge.Class.varianceAssignable;
+            if (Class.$kind === "interface") {
+                if (Class.prototype.$variance) {
+                    Class.isAssignableFrom = Bridge.Class.varianceAssignable;
+                }
+
+                Class.$isInterface = true;
             }
 
             return Class;
@@ -2673,6 +2692,8 @@
                     cls.$interfaces.push(scope);
                 }
             }
+
+            cls.$allInterfaces = cls.$interfaces.concat(cls.$baseInterfaces);
         },
 
         set: function (scope, className, cls, noDefineProp) {
@@ -3212,8 +3233,8 @@
         },
 
         getInterfaces: function (type) {
-            if (type.$interfaces || type.$baseInterfaces) {
-                return (type.$interfaces || []).concat(type.$baseInterfaces || []);
+            if (type.$allInterfaces) {
+                return type.$allInterfaces;
             } else if (type === Date) {
                 return [System.IComparable$1(Date), System.IEquatable$1(Date), System.IComparable, System.IFormattable];
             } else if (type === Number) {
@@ -3752,7 +3773,7 @@
 
             statics: {
                 $is: function (obj) {
-                    if (Bridge.isNumber(obj) && T.$number && T.instanceOf(obj) || Bridge.isDate(obj) && T === Date || Bridge.isBoolean(obj) && T === Boolean || Bridge.isString(obj) && T === String) {
+                    if (Bridge.isNumber(obj) && T.$number && T.$is(obj) || Bridge.isDate(obj) && T === Date || Bridge.isBoolean(obj) && T === Boolean || Bridge.isString(obj) && T === String) {
                         return true;
                     }
 
@@ -3768,7 +3789,7 @@
 
             statics: {
                 $is: function (obj) {
-                    if (Bridge.isNumber(obj) && T.$number && T.instanceOf(obj) || Bridge.isDate(obj) && T === Date || Bridge.isBoolean(obj) && T === Boolean || Bridge.isString(obj) && T === String) {
+                    if (Bridge.isNumber(obj) && T.$number && T.$is(obj) || Bridge.isDate(obj) && T === Date || Bridge.isBoolean(obj) && T === Boolean || Bridge.isString(obj) && T === String) {
                         return true;
                     }
 
@@ -3975,7 +3996,7 @@
                     return null;
                 },
 
-                instanceOf: function(obj) {
+                $is: function(obj) {
                     return Bridge.is(obj, T);
                 }
             }
@@ -3991,7 +4012,7 @@
 
             max: 65535,
 
-            instanceOf: function (instance) {
+            $is: function (instance) {
                 return typeof (instance) === "number" && Math.round(instance, 0) == instance && instance >= System.Char.min && instance <= System.Char.max;
             },
 
@@ -5074,7 +5095,7 @@
             return false;
         },
 
-        instanceOf: function (instance) {
+        $is: function (instance) {
             return typeof (instance) === "boolean";
         },
 
@@ -5169,7 +5190,7 @@
                     max: max,
                     precision: precision,
 
-                    instanceOf: function (instance) {
+                    $is: function (instance) {
                         return typeof (instance) === "number" && Math.floor(instance, 0) === instance && instance >= min && instance <= max;
                     },
                     getDefaultValue: function () {
@@ -5204,7 +5225,7 @@
         statics: {
             $number: true,
 
-            instanceOf: function (instance) {
+            $is: function (instance) {
                 return typeof (instance) === "number" && isFinite(instance) && Math.floor(instance, 0) === instance;
             },
 
@@ -5850,7 +5871,7 @@
                     return System.Decimal.toInt(x, type);
                 }
 
-                if (Bridge.isNumber(x) && !type.instanceOf(x)) {
+                if (Bridge.isNumber(x) && !type.$is(x)) {
                     throw new System.OverflowException();
                 }
 
@@ -5925,7 +5946,7 @@
 
             $number: true,
 
-            instanceOf: function (instance) {
+            $is: function (instance) {
                 return typeof (instance) === "number";
             },
 
@@ -5961,7 +5982,7 @@
 
             $number: true,
 
-            instanceOf: System.Double.instanceOf,
+            $is: System.Double.$is,
 
             getDefaultValue: System.Double.getDefaultValue,
 
@@ -6042,11 +6063,13 @@
 
     System.Int64.$$name = "System.Int64";
     System.Int64.prototype.$$name = "System.Int64";
+    System.Int64.$kind = "struct";
+    System.Int64.prototype.$kind = "struct";
 
     System.Int64.$$inherits = [];
     Bridge.Class.addExtend(System.Int64, [System.IComparable, System.IFormattable, System.IComparable$1(System.Int64), System.IEquatable$1(System.Int64)]);
 
-    System.Int64.instanceOf = function (instance) {
+    System.Int64.$is = function (instance) {
         return instance instanceof System.Int64;
     };
 
@@ -6567,10 +6590,12 @@
 
     System.UInt64.$$name = "System.UInt64";
     System.UInt64.prototype.$$name = "System.UInt64";
+    System.UInt64.$kind = "struct";
+    System.UInt64.prototype.$kind = "struct";
     System.UInt64.$$inherits = [];
     Bridge.Class.addExtend(System.UInt64, [System.IComparable, System.IFormattable, System.IComparable$1(System.UInt64), System.IEquatable$1(System.UInt64)]);
 
-    System.UInt64.instanceOf = function (instance) {
+    System.UInt64.$is = function (instance) {
         return instance instanceof System.UInt64;
     };
 
@@ -6816,11 +6841,12 @@
 
     System.Decimal.$$name = "System.Decimal";
     System.Decimal.prototype.$$name = "System.Decimal";
-
+    System.Decimal.$kind = "struct";
+    System.Decimal.prototype.$kind = "struct";
     System.Decimal.$$inherits = [];
     Bridge.Class.addExtend(System.Decimal, [System.IComparable, System.IFormattable, System.IComparable$1(System.Decimal), System.IEquatable$1(System.Decimal)]);
 
-    System.Decimal.instanceOf = function (instance) {
+    System.Decimal.$is = function (instance) {
         return instance instanceof System.Decimal;
     };
 
@@ -7054,7 +7080,7 @@
 
         var i = Bridge.Int.trunc(System.Decimal.getValue(v).toNumber());
 
-        if (!Bridge.Int.instanceOf(i)) {
+        if (!Bridge.Int.$is(i)) {
             throw new System.OverflowException();
         }
 
@@ -9815,7 +9841,9 @@
     Bridge.define('Bridge.ArrayEnumerator', {
         inherits: [System.Collections.IEnumerator, System.IDisposable],
 
-        $isArrayEnumerator: true,
+        statics: {
+            $isArrayEnumerator: true
+        },
 
         config: {
             alias: [
@@ -11033,114 +11061,6 @@
         }
     });
 
-    Bridge.define("System.Threading.CancellationToken", {
-         $kind: "struct",
-
-        ctor: function (source) {
-            this.$initialize();
-
-            if (!Bridge.is(source, System.Threading.CancellationTokenSource)) {
-                source = source ? System.Threading.CancellationToken.sourceTrue : System.Threading.CancellationToken.sourceFalse;
-            }
-
-            this.source = source;
-        },
-
-        getCanBeCanceled: function () {
-            return !this.source.uncancellable;
-        },
-
-        getIsCancellationRequested: function () {
-            return this.source.isCancellationRequested;
-        },
-
-        throwIfCancellationRequested: function () {
-            if (this.source.isCancellationRequested) {
-                throw new System.OperationCanceledException(this);
-            }
-        },
-
-        register: function (cb, s) {
-            return this.source.register(cb, s);
-        },
-
-        getHashCode: function () {
-            return Bridge.getHashCode(this.source);
-        },
-
-        equals: function (other) {
-            return other.source === this.source;
-        },
-
-        equalsT: function (other) {
-            return other.source === this.source;
-        },
-
-        statics: {
-            sourceTrue: {
-                isCancellationRequested: true,
-                register: function (f, s) {
-                    f(s);
-
-                    return new System.Threading.CancellationTokenRegistration();
-                }
-            },
-            sourceFalse: {
-                uncancellable: true,
-                isCancellationRequested: false,
-                register: function () {
-                    return new System.Threading.CancellationTokenRegistration();
-                }
-            },
-            getDefaultValue: function () {
-                return new System.Threading.CancellationToken();
-            }
-        }
-    });
-
-    System.Threading.CancellationToken.none = new System.Threading.CancellationToken();
-
-    Bridge.define("System.Threading.CancellationTokenRegistration", {
-        inherits: function () {
-            return [System.IDisposable, System.IEquatable$1(System.Threading.CancellationTokenRegistration)];
-        },
-
-        $kind: "struct",
-
-        config: {
-            alias: [
-                "dispose", "System$IDisposable$dispose"
-            ]
-        },
-
-        ctor: function (cts, o) {
-            this.$initialize();
-            this.cts = cts;
-            this.o = o;
-        },
-
-        dispose: function () {
-            if (this.cts) {
-                this.cts.deregister(this.o);
-                this.cts = this.o = null;
-            }
-        },
-
-        equalsT: function (o) {
-            return this === o;
-        },
-
-        equals: function (o) {
-            return this === o;
-        },
-
-        statics: {
-            getDefaultValue: function () {
-                return new System.Threading.CancellationTokenRegistration();
-            }
-        }
-    });
-
     Bridge.define("System.Threading.CancellationTokenSource", {
         inherits: [System.IDisposable],
 
@@ -11261,6 +11181,113 @@
         }
     });
 
+    Bridge.define("System.Threading.CancellationToken", {
+         $kind: "struct",
+
+        ctor: function (source) {
+            this.$initialize();
+
+            if (!Bridge.is(source, System.Threading.CancellationTokenSource)) {
+                source = source ? System.Threading.CancellationToken.sourceTrue : System.Threading.CancellationToken.sourceFalse;
+            }
+
+            this.source = source;
+        },
+
+        getCanBeCanceled: function () {
+            return !this.source.uncancellable;
+        },
+
+        getIsCancellationRequested: function () {
+            return this.source.isCancellationRequested;
+        },
+
+        throwIfCancellationRequested: function () {
+            if (this.source.isCancellationRequested) {
+                throw new System.OperationCanceledException(this);
+            }
+        },
+
+        register: function (cb, s) {
+            return this.source.register(cb, s);
+        },
+
+        getHashCode: function () {
+            return Bridge.getHashCode(this.source);
+        },
+
+        equals: function (other) {
+            return other.source === this.source;
+        },
+
+        equalsT: function (other) {
+            return other.source === this.source;
+        },
+
+        statics: {
+            sourceTrue: {
+                isCancellationRequested: true,
+                register: function (f, s) {
+                    f(s);
+
+                    return new System.Threading.CancellationTokenRegistration();
+                }
+            },
+            sourceFalse: {
+                uncancellable: true,
+                isCancellationRequested: false,
+                register: function () {
+                    return new System.Threading.CancellationTokenRegistration();
+                }
+            },
+            getDefaultValue: function () {
+                return new System.Threading.CancellationToken();
+            }
+        }
+    });
+
+    System.Threading.CancellationToken.none = new System.Threading.CancellationToken();
+
+    Bridge.define("System.Threading.CancellationTokenRegistration", {
+        inherits: function () {
+            return [System.IDisposable, System.IEquatable$1(System.Threading.CancellationTokenRegistration)];
+        },
+
+        $kind: "struct",
+
+        config: {
+            alias: [
+                "dispose", "System$IDisposable$dispose"
+            ]
+        },
+
+        ctor: function (cts, o) {
+            this.$initialize();
+            this.cts = cts;
+            this.o = o;
+        },
+
+        dispose: function () {
+            if (this.cts) {
+                this.cts.deregister(this.o);
+                this.cts = this.o = null;
+            }
+        },
+
+        equalsT: function (o) {
+            return this === o;
+        },
+
+        equals: function (o) {
+            return this === o;
+        },
+
+        statics: {
+            getDefaultValue: function () {
+                return new System.Threading.CancellationTokenRegistration();
+            }
+        }
+    });
     // @source Validation.js
 
     var validation = {
@@ -16671,6 +16698,9 @@
         ArrayEnumerable.call(this, elements);
     };
     Grouping.prototype = new ArrayEnumerable();
+
+    Grouping.$$inherits = [];
+    Bridge.Class.addExtend(Grouping, [System.Collections.IEnumerable]);
 
     // module export
     if (typeof define === Types.Function && define.amd) { // AMD

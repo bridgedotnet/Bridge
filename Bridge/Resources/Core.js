@@ -471,11 +471,51 @@
         },
 
         is: function (obj, type, ignoreFn, allowNull) {
+            if (obj == null) {
+                return !!allowNull;
+            }
+
+            var ctor = obj.constructor;
+            if (type.constructor === Function && obj instanceof type || ctor === type) {
+                return true;
+            }
+
+            var hasObjKind = ctor.$kind || ctor.$$inherits,
+                hasTypeKind = type.$kind;
+            if (hasObjKind || hasTypeKind) {
+                var isInterface = type.$isInterface;
+
+                if (isInterface) {
+                    if (hasObjKind) {
+                        if (ctor.$isArrayEnumerator) {
+                            return System.Array.is(obj, type);
+                        }
+
+                        return type.isAssignableFrom ? type.isAssignableFrom(ctor) : Bridge.Reflection.getInterfaces(ctor).indexOf(type) >= 0;
+                    }
+
+                    if (Bridge.isArray(obj, ctor)) {
+                        return System.Array.is(obj, type);
+                    }
+
+                    if (ctor === String) {
+                        return System.String.is(obj, type);
+                    }
+                }
+
+                if (ignoreFn !== true && type.$is) {
+                    return type.$is(obj);
+                }
+
+                return false;
+            }
+
             if (type && type.prototype && type.prototype.$literal && Bridge.isPlainObject(obj)) {
                 return true;
             }
 
             var tt = typeof type;
+
             if (tt === "boolean") {
                 return type;
             }
@@ -484,14 +524,7 @@
                 type = Bridge.unroll(type);
             }
 
-            if (obj == null) {
-                return !!allowNull;
-            }
-
-            if (tt === "function" && ((obj.constructor === type) || (Bridge.getType(obj).prototype instanceof type))) {
-                return true;
-            }
-            else if (type.$kind === "interface" && System.Array.contains(Bridge.Reflection.getInterfaces(Bridge.getType(obj)), type)) {
+            if (tt === "function" && (Bridge.getType(obj).prototype instanceof type)) {
                 return true;
             }
 
@@ -500,36 +533,16 @@
                     return type.$is(obj);
                 }
 
-                if (typeof (type.instanceOf) === "function") {
-                    return type.instanceOf(obj);
-                }
-
                 if (typeof (type.isAssignableFrom) === "function") {
                     return type.isAssignableFrom(Bridge.getType(obj));
                 }
             }
 
-            if (!(obj && obj.$kind && obj.$$name)) {
-                if (Bridge.isArray(obj)) {
-                    return System.Array.is(obj, type);
-                }
-
-                var to = typeof (obj);
-                if (to === "string") {
-                    return System.String.is(obj, type);
-                }
-
-                if (to === "boolean") {
-                    return System.Boolean.is(obj, type);
-                }
-
-                return tt === "object" && ((obj.constructor === type) || (obj instanceof type));
-            }
-            else if (obj.$isArrayEnumerator) {
+            if (Bridge.isArray(obj)) {
                 return System.Array.is(obj, type);
             }
 
-            return false;
+            return tt === "object" && ((ctor === type) || (obj instanceof type));
         },
 
         as: function (obj, type, allowNull) {
@@ -742,8 +755,8 @@
             return new (System.Collections.Generic.List$1(T || Object))(ienumerable);
         },
 
-        isArray: function (obj) {
-            var c = obj != null ? obj.constructor : null;
+        isArray: function (obj, ctor) {
+            var c = ctor || (obj != null ? obj.constructor : null);
 
             if (!c) {
                 return false;

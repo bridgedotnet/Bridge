@@ -410,114 +410,6 @@
         }
     });
 
-    Bridge.define("System.Threading.CancellationToken", {
-         $kind: "struct",
-
-        ctor: function (source) {
-            this.$initialize();
-
-            if (!Bridge.is(source, System.Threading.CancellationTokenSource)) {
-                source = source ? System.Threading.CancellationToken.sourceTrue : System.Threading.CancellationToken.sourceFalse;
-            }
-
-            this.source = source;
-        },
-
-        getCanBeCanceled: function () {
-            return !this.source.uncancellable;
-        },
-
-        getIsCancellationRequested: function () {
-            return this.source.isCancellationRequested;
-        },
-
-        throwIfCancellationRequested: function () {
-            if (this.source.isCancellationRequested) {
-                throw new System.OperationCanceledException(this);
-            }
-        },
-
-        register: function (cb, s) {
-            return this.source.register(cb, s);
-        },
-
-        getHashCode: function () {
-            return Bridge.getHashCode(this.source);
-        },
-
-        equals: function (other) {
-            return other.source === this.source;
-        },
-
-        equalsT: function (other) {
-            return other.source === this.source;
-        },
-
-        statics: {
-            sourceTrue: {
-                isCancellationRequested: true,
-                register: function (f, s) {
-                    f(s);
-
-                    return new System.Threading.CancellationTokenRegistration();
-                }
-            },
-            sourceFalse: {
-                uncancellable: true,
-                isCancellationRequested: false,
-                register: function () {
-                    return new System.Threading.CancellationTokenRegistration();
-                }
-            },
-            getDefaultValue: function () {
-                return new System.Threading.CancellationToken();
-            }
-        }
-    });
-
-    System.Threading.CancellationToken.none = new System.Threading.CancellationToken();
-
-    Bridge.define("System.Threading.CancellationTokenRegistration", {
-        inherits: function () {
-            return [System.IDisposable, System.IEquatable$1(System.Threading.CancellationTokenRegistration)];
-        },
-
-        $kind: "struct",
-
-        config: {
-            alias: [
-                "dispose", "System$IDisposable$dispose"
-            ]
-        },
-
-        ctor: function (cts, o) {
-            this.$initialize();
-            this.cts = cts;
-            this.o = o;
-        },
-
-        dispose: function () {
-            if (this.cts) {
-                this.cts.deregister(this.o);
-                this.cts = this.o = null;
-            }
-        },
-
-        equalsT: function (o) {
-            return this === o;
-        },
-
-        equals: function (o) {
-            return this === o;
-        },
-
-        statics: {
-            getDefaultValue: function () {
-                return new System.Threading.CancellationTokenRegistration();
-            }
-        }
-    });
-
     Bridge.define("System.Threading.CancellationTokenSource", {
         inherits: [System.IDisposable],
 
@@ -634,6 +526,114 @@
                 }
 
                 return cts;
+            }
+        }
+    });
+
+    Bridge.define("System.Threading.CancellationToken", {
+         $kind: "struct",
+
+        ctor: function (source) {
+            this.$initialize();
+
+            if (!Bridge.is(source, System.Threading.CancellationTokenSource)) {
+                source = source ? System.Threading.CancellationToken.sourceTrue : System.Threading.CancellationToken.sourceFalse;
+            }
+
+            this.source = source;
+        },
+
+        getCanBeCanceled: function () {
+            return !this.source.uncancellable;
+        },
+
+        getIsCancellationRequested: function () {
+            return this.source.isCancellationRequested;
+        },
+
+        throwIfCancellationRequested: function () {
+            if (this.source.isCancellationRequested) {
+                throw new System.OperationCanceledException(this);
+            }
+        },
+
+        register: function (cb, s) {
+            return this.source.register(cb, s);
+        },
+
+        getHashCode: function () {
+            return Bridge.getHashCode(this.source);
+        },
+
+        equals: function (other) {
+            return other.source === this.source;
+        },
+
+        equalsT: function (other) {
+            return other.source === this.source;
+        },
+
+        statics: {
+            sourceTrue: {
+                isCancellationRequested: true,
+                register: function (f, s) {
+                    f(s);
+
+                    return new System.Threading.CancellationTokenRegistration();
+                }
+            },
+            sourceFalse: {
+                uncancellable: true,
+                isCancellationRequested: false,
+                register: function () {
+                    return new System.Threading.CancellationTokenRegistration();
+                }
+            },
+            getDefaultValue: function () {
+                return new System.Threading.CancellationToken();
+            }
+        }
+    });
+
+    System.Threading.CancellationToken.none = new System.Threading.CancellationToken();
+
+    Bridge.define("System.Threading.CancellationTokenRegistration", {
+        inherits: function () {
+            return [System.IDisposable, System.IEquatable$1(System.Threading.CancellationTokenRegistration)];
+        },
+
+        $kind: "struct",
+
+        config: {
+            alias: [
+                "dispose", "System$IDisposable$dispose"
+            ]
+        },
+
+        ctor: function (cts, o) {
+            this.$initialize();
+            this.cts = cts;
+            this.o = o;
+        },
+
+        dispose: function () {
+            if (this.cts) {
+                this.cts.deregister(this.o);
+                this.cts = this.o = null;
+            }
+        },
+
+        equalsT: function (o) {
+            return this === o;
+        },
+
+        equals: function (o) {
+            return this === o;
+        },
+
+        statics: {
+            getDefaultValue: function () {
+                return new System.Threading.CancellationTokenRegistration();
             }
         }
     });

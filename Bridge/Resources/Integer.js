@@ -9,7 +9,7 @@
                     max: max,
                     precision: precision,
 
-                    instanceOf: function (instance) {
+                    $is: function (instance) {
                         return typeof (instance) === "number" && Math.floor(instance, 0) === instance && instance >= min && instance <= max;
                     },
                     getDefaultValue: function () {
@@ -44,7 +44,7 @@
         statics: {
             $number: true,
 
-            instanceOf: function (instance) {
+            $is: function (instance) {
                 return typeof (instance) === "number" && isFinite(instance) && Math.floor(instance, 0) === instance;
             },
 
@@ -690,7 +690,7 @@
                     return System.Decimal.toInt(x, type);
                 }
 
-                if (Bridge.isNumber(x) && !type.instanceOf(x)) {
+                if (Bridge.isNumber(x) && !type.$is(x)) {
                     throw new System.OverflowException();
                 }
 
@@ -765,7 +765,7 @@
 
             $number: true,
 
-            instanceOf: function (instance) {
+            $is: function (instance) {
                 return typeof (instance) === "number";
             },
 
@@ -801,7 +801,7 @@
 
             $number: true,
 
-            instanceOf: System.Double.instanceOf,
+            $is: System.Double.$is,
 
             getDefaultValue: System.Double.getDefaultValue,
 

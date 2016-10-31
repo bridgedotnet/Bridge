@@ -79,6 +79,7 @@
             var c = Bridge.define(className, gscope, prop);
 
             c.$kind = "interface";
+            c.$isInterface = true;
 
             return c;
         },
@@ -247,6 +248,7 @@
 
             Class.$baseInterfaces = baseInterfaces;
             Class.$interfaces = interfaces;
+            Class.$allInterfaces = interfaces.concat(baseInterfaces);
 
             var noBase = extend ? extend[0].$kind === "interface" : true;
 
@@ -379,15 +381,15 @@
             }
 
             if (Class.$kind === "enum") {
-                Class.instanceOf = function (instance) {
+                Class.$is = function (instance) {
                     var utype = Class.prototype.$utype;
 
                     if (utype === System.String) {
                         return typeof (instance) == "string";
                     }
 
-                    if (utype && utype.instanceOf) {
-                        return utype.instanceOf(instance);
+                    if (utype && utype.$is) {
+                        return utype.$is(instance);
                     }
 
                     return typeof (instance) == "number";
@@ -404,8 +406,12 @@
                 };
             }
 
-            if (Class.$kind === "interface" && Class.prototype.$variance) {
-                Class.isAssignableFrom = Bridge.Class.varianceAssignable;
+            if (Class.$kind === "interface") {
+                if (Class.prototype.$variance) {
+                    Class.isAssignableFrom = Bridge.Class.varianceAssignable;
+                }
+
+                Class.$isInterface = true;
             }
 
             return Class;
@@ -487,6 +493,8 @@
                     cls.$interfaces.push(scope);
                 }
             }
+
+            cls.$allInterfaces = cls.$interfaces.concat(cls.$baseInterfaces);
         },
 
         set: function (scope, className, cls, noDefineProp) {
