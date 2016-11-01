@@ -10,7 +10,7 @@ alert("I'm header 1.0.0-beta");
 
 // -- remark with no tokens
 
-    Bridge.define("TestIssue599.Issue599", {
+﻿    Bridge.define("TestIssue599.Issue599", {
         statics: {
             config: {
                 init: function () {
@@ -27,7 +27,7 @@ alert("I'm header 1.0.0-beta");
 
 // -- remark with no tokens
 
-    Bridge.define("TestIssue948.Issue948", {
+﻿    Bridge.define("TestIssue948.Issue948", {
         statics: {
             test: function () {
                 // A comment

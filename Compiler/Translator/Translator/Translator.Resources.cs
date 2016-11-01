@@ -90,32 +90,33 @@ namespace Bridge.Translator
                         continue;
                     }
 
-                    var resourceBuffer = new StringBuilder();
-
-                    this.GenerateResourseHeader(resourceBuffer, resource, projectPath);
-
-                    this.ReadResourseFiles(projectPath, resourceBuffer, resource);
-
-                    if (resourceBuffer.Length > 0)
+                    using (var resourceBuffer = new MemoryStream(500 * 1024))
                     {
-                        this.Log.Trace("Prepared files for resource " + resource.Name);
+                        this.GenerateResourseHeader(resourceBuffer, resource, projectPath);
 
-                        var code = OutputEncoding.GetBytes(resourceBuffer.ToString());
+                        this.ReadResourseFiles(projectPath, resourceBuffer, resource);
 
-                        var info = new BridgeResourceInfo
+                        if (resourceBuffer.Length > 0)
                         {
-                            Name = resource.Name,
-                            FileName = resource.Name,
-                            Path = string.IsNullOrWhiteSpace(resource.Output) ? null : resource.Output
-                        };
+                            this.Log.Trace("Prepared files for resource " + resource.Name);
 
-                        resourcesToEmbed.Add(info, code);
+                            var code = resourceBuffer.ToArray();
 
-                        this.ExtractResource(outputPath, projectPath, resource, code);
-                    }
-                    else
-                    {
-                        this.Log.Error("No files found for resource " + resource.Name);
+                            var info = new BridgeResourceInfo
+                            {
+                                Name = resource.Name,
+                                FileName = resource.Name,
+                                Path = string.IsNullOrWhiteSpace(resource.Output) ? null : resource.Output
+                            };
+
+                            resourcesToEmbed.Add(info, code);
+
+                            this.ExtractResource(outputPath, projectPath, resource, code);
+                        }
+                        else
+                        {
+                            this.Log.Error("No files found for resource " + resource.Name);
+                        }
                     }
 
                     this.Log.Trace("Done preparing resource " + resource.Name);
@@ -315,47 +316,49 @@ namespace Bridge.Translator
 
         private void ExtractResource(string outputPath, string projectPath, ResourceConfigItem resource, byte[] code)
         {
-            if (resource.Extract == true)
+            if (!resource.Extract.HasValue || !resource.Extract.Value)
             {
-                this.Log.Trace("Extracting resource " + resource.Name);
+                return;
+            }
 
-                string resourceOutputFileName = null;
-                string resourceOutputDirName = null;
+            this.Log.Trace("Extracting resource " + resource.Name);
 
-                if (resource.Output != null)
-                {
-                    this.GetResourceOutputPath(outputPath, resource, ref resourceOutputFileName, ref resourceOutputDirName);
-                }
+            string resourceOutputFileName = null;
+            string resourceOutputDirName = null;
 
-                if (resourceOutputDirName == null)
-                {
-                    resourceOutputDirName = outputPath;
-                    this.Log.Trace("Using project output path " + resourceOutputDirName);
-                }
+            if (resource.Output != null)
+            {
+                this.GetResourceOutputPath(outputPath, resource, ref resourceOutputFileName, ref resourceOutputDirName);
+            }
 
-                if (string.IsNullOrWhiteSpace(resourceOutputFileName))
-                {
-                    resourceOutputFileName = resource.Name;
-                    this.Log.Trace("Using resource name as file name " + resourceOutputFileName);
-                }
+            if (resourceOutputDirName == null)
+            {
+                resourceOutputDirName = outputPath;
+                this.Log.Trace("Using project output path " + resourceOutputDirName);
+            }
 
-                try
-                {
-                    var path = Path.Combine(resourceOutputDirName, resourceOutputFileName);
+            if (string.IsNullOrWhiteSpace(resourceOutputFileName))
+            {
+                resourceOutputFileName = resource.Name;
+                this.Log.Trace("Using resource name as file name " + resourceOutputFileName);
+            }
 
-                    this.Log.Trace("Writing resource " + resource.Name + " into " + path);
+            try
+            {
+                var path = Path.Combine(resourceOutputDirName, resourceOutputFileName);
 
-                    this.EnsureDirectoryExists(resourceOutputDirName);
+                this.Log.Trace("Writing resource " + resource.Name + " into " + path);
 
-                    File.WriteAllBytes(path, code);
+                this.EnsureDirectoryExists(resourceOutputDirName);
 
-                    this.Log.Trace("Done writing resource into file");
-                }
-                catch (Exception ex)
-                {
-                    this.Log.Error(ex.ToString());
-                    throw;
-                }
+                File.WriteAllBytes(path, code);
+
+                this.Log.Trace("Done writing resource into file");
+            }
+            catch (Exception ex)
+            {
+                this.Log.Error(ex.ToString());
+                throw;
             }
         }
 
@@ -461,7 +464,7 @@ namespace Bridge.Translator
             return s;
         }
 
-        private void GenerateResourseHeader(StringBuilder resourceBuffer, ResourceConfigItem resource, string basePath)
+        private void GenerateResourseHeader(MemoryStream resourceBuffer, ResourceConfigItem resource, string basePath)
         {
             if (resource.Header == null)
             {
@@ -479,8 +482,11 @@ namespace Bridge.Translator
 
             if (headerContent.Length > 0)
             {
-                resourceBuffer.Append(headerContent);
+                var b = OutputEncoding.GetBytes(headerContent.ToString());
+                resourceBuffer.Write(b, 0, b.Length);
+
                 NewLine(resourceBuffer);
+
                 this.Log.Trace("Wrote " + headerContent.Length + " symbols as a resource header");
             }
             else
@@ -608,7 +614,7 @@ namespace Bridge.Translator
             return new StringBuilder(resourceHeader);
         }
 
-        private void ReadResourseFiles(string outputPath, StringBuilder resourceBuffer, ResourceConfigItem item)
+        private void ReadResourseFiles(string outputPath, MemoryStream buffer, ResourceConfigItem item)
         {
             this.Log.Trace("Reading resource with " + item.Files.Length + " items");
 
@@ -649,16 +655,21 @@ namespace Bridge.Translator
                         throw new InvalidOperationException("Could not find any file in folder: " + directory.FullName + " for resource " + item.Name + " and location " + fileName);
                     }
 
+                    var needNewLine = files.Length > 0;
+
                     foreach (var file in files)
                     {
-                        NewLine(resourceBuffer);
+                        if (needNewLine)
+                        {
+                            NewLine(buffer);
+                        }
 
-                        GenerateResourceFileRemark(resourceBuffer, item, file, dirPathInFileName);
+                        GenerateResourceFileRemark(buffer, item, file, dirPathInFileName);
 
                         this.Log.Trace("Reading resource item at " + file.FullName);
 
-                        var content = File.ReadAllText(file.FullName);
-                        resourceBuffer.Append(content);
+                        var content = File.ReadAllBytes(file.FullName);
+                        buffer.Write(content, 0, content.Length);
 
                         this.Log.Trace("Read " + content.Length + " bytes");
                     }
@@ -671,7 +682,7 @@ namespace Bridge.Translator
             }
         }
 
-        private void GenerateResourceFileRemark(StringBuilder resourceBuffer, ResourceConfigItem item, FileInfo file, string dirPathInFileName)
+        private void GenerateResourceFileRemark(MemoryStream resourceBuffer, ResourceConfigItem item, FileInfo file, string dirPathInFileName)
         {
             if (item.Remark != null)
             {
@@ -693,7 +704,8 @@ namespace Bridge.Translator
                 var remarkLines = remarkBuffer.ToString().Split(new[] { Emitter.NEW_LINE }, StringSplitOptions.None);
                 foreach (var remarkLine in remarkLines)
                 {
-                    resourceBuffer.Append(remarkLine);
+                    var b = OutputEncoding.GetBytes(remarkLine);
+                    resourceBuffer.Write(b, 0, b.Length);
                     NewLine(resourceBuffer);
                 }
             }
@@ -873,6 +885,36 @@ namespace Bridge.Translator
             }
 
             return path.Replace('\\', '/');
+        }
+
+        protected byte[] ReadStream(Stream stream)
+        {
+            if (stream.Position != 0)
+            {
+                stream.Seek(0, SeekOrigin.Begin);
+                stream.Position = 0;
+            }
+
+            byte[] bytes = new byte[stream.Length];
+
+            int numBytesToRead = (int)stream.Length;
+            int numBytesRead = 0;
+
+            var chunkLength = 1 * 1024 * 1024;
+            if (chunkLength > numBytesToRead)
+            {
+                chunkLength = numBytesToRead;
+            }
+
+            do
+            {
+                int n = stream.Read(bytes, numBytesRead, chunkLength);
+
+                numBytesRead += n;
+                numBytesToRead -= n;
+            } while (numBytesToRead > 0);
+
+            return bytes;
         }
 
         //private string NormalizePath(string value)
