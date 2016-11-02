@@ -839,6 +839,7 @@
             QUnit.test("NullableTests - LiftedLessThanOrEqualWorksWithUserDefinedOperators", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_NullableTests.liftedLessThanOrEqualWorksWithUserDefinedOperators);
             QUnit.test("NullableTests - LiftedGreaterThanOrEqualWorksWithUserDefinedOperators", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_NullableTests.liftedGreaterThanOrEqualWorksWithUserDefinedOperators);
             QUnit.test("NullableTests - LiftedAdditionWorksWithUserDefinedOperators", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_NullableTests.liftedAdditionWorksWithUserDefinedOperators);
+            QUnit.test("NullableTests - LiftedUnaryMinusWorksWithUserDefinedOperators_SPI_1634", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_NullableTests.liftedUnaryMinusWorksWithUserDefinedOperators_SPI_1634);
             QUnit.test("NullableTests - LiftedBooleanAndWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_NullableTests.liftedBooleanAndWorks);
             QUnit.test("NullableTests - LiftedBooleanOrWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_NullableTests.liftedBooleanOrWorks);
             QUnit.test("NullableTests - LiftedBooleanXorWorks_SPI_1568", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_NullableTests.liftedBooleanXorWorks_SPI_1568);
@@ -5585,6 +5586,10 @@
             liftedAdditionWorksWithUserDefinedOperators: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.NullableTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_NullableTests);
                 t.getFixture().liftedAdditionWorksWithUserDefinedOperators();
+            },
+            liftedUnaryMinusWorksWithUserDefinedOperators_SPI_1634: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.NullableTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_NullableTests);
+                t.getFixture().liftedUnaryMinusWorksWithUserDefinedOperators_SPI_1634();
             },
             liftedBooleanAndWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.NullableTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_NullableTests);

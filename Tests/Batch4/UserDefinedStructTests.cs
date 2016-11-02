@@ -352,10 +352,10 @@ namespace Bridge.ClientTest.Batch4
         [Test]
         public void CanLiftUserDefinedUnaryOperator_SPI_1634()
         {
-            S7? a = new S7(42);//, b = null;
+            S7? a = new S7(42), b = null;
             Assert.AreEqual(-42, -a.Value.I, "#1");
             // #1634 #SPI
-            //Assert.Null(-b, "#2");
+            Assert.Null(-b, "#2");
         }
 
         [Test]
