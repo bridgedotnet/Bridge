@@ -8,7 +8,13 @@
     <AdditionalExplicitAssemblyReferences />
   </PropertyGroup>
 
-  <Target Name="AfterBuild">
+  <PropertyGroup>
+    <PrepareForRunDependsOn>$(PrepareForRunDependsOn);BridgeGenerateScript</PrepareForRunDependsOn>
+  </PropertyGroup>
+
+  <Target Name="BridgeGenerateScript">
+    <Message Text="------ BridgeGenerateScript task started: Project: $(MSBuildProjectName), Configuration: $(Configuration) $(Platform) ------" Importance="high" />
+
     <GenerateScript
       DefineConstants="$(DefineConstants)"
       OutputPath="$(OutputPath)"
@@ -16,5 +22,7 @@
       Assembly="@(IntermediateAssembly)"
       AssembliesPath="$(OutputPath)"
       ProjectPath="$(MSBuildProjectFullPath)" />
+
+    <Message Text="------ BridgeGenerateScript task done: Project: $(MSBuildProjectName), Configuration: $(Configuration) $(Platform) ------" Importance="high" />
   </Target>
 </Project>
