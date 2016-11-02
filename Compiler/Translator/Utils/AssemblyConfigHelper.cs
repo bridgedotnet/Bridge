@@ -1,11 +1,14 @@
 using Bridge.Contract;
 using Newtonsoft.Json;
+using System;
 using System.IO;
 
 namespace Bridge.Translator.Utils
 {
     public class AssemblyConfigHelper
     {
+        public const string OUTPUT_PATH_TOKEN = "$(OutputPath)";
+
         private const string CONFIG_FILE_NAME = "bridge.json";
 
         private ILogger Logger { get; set; }
@@ -60,6 +63,35 @@ namespace Bridge.Translator.Utils
         public static string ConfigToString(IAssemblyInfo config)
         {
             return JsonConvert.SerializeObject(config);
+        }
+
+        public void ApplyTokens(IAssemblyInfo config, string outputPathValue)
+        {
+            Logger.Trace("ApplyTokens ...");
+            Logger.Trace("outputPathValue:" + outputPathValue);
+
+            if (config == null)
+            {
+                throw new ArgumentNullException("config");
+            }
+
+            if (config.Resources != null)
+            {
+                foreach (var resourceItem in config.Resources.Items)
+                {
+                    var files = resourceItem.Files;
+
+                    if (files != null)
+                    {
+                        for (int i = 0; i < files.Length; i++)
+                        {
+                            files[i] = helper.ApplyPathToken(OUTPUT_PATH_TOKEN, outputPathValue, files[i]);
+                        }
+                    }
+                }
+            }
+
+            Logger.Trace("ApplyTokens done");
         }
 
         public void ConvertConfigPaths(IAssemblyInfo assemblyInfo)

@@ -13,6 +13,7 @@ namespace Bridge.Translator
         public bool Rebuild { get; set; }
         public bool ExtractCore { get; set; }
         public string Configuration { get; set; }
+        public string Platform { get; set; }
         public string Source { get; set; }
         public string Folder { get; set; }
         public bool Recursive { get; set; }

@@ -6,7 +6,6 @@ namespace Bridge.Translator
     public class AssemblyInfo : IAssemblyInfo
     {
         public const string DEFAULT_FILENAME = "---";
-        public const string JAVASCRIPT_EXTENSION = "js";
 
         public AssemblyInfo()
         {

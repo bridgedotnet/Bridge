@@ -9822,6 +9822,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.Assert.areStrictEqual(5, Bridge.Int.clip32(System.Nullable.lift(Bridge.ClientTest.Batch4.NullableTests.MyType.op_Addition, a, b)));
             Bridge.Test.Assert.areStrictEqual(null, Bridge.Int.clip32(System.Nullable.lift(Bridge.ClientTest.Batch4.NullableTests.MyType.op_Addition, a, c)));
         },
+        liftedUnaryMinusWorksWithUserDefinedOperators_SPI_1634: function () {
+            var a = Bridge.ClientTest.Batch4.NullableTests.MyType.op_Implicit(2), c = null;
+            // #1634
+            Bridge.Test.Assert.areStrictEqual(Bridge.Int.clip32(System.Nullable.lift(Bridge.ClientTest.Batch4.NullableTests.MyType.op_UnaryNegation, a)), -2);
+            Bridge.Test.Assert.areStrictEqual(Bridge.Int.clip32(System.Nullable.lift(Bridge.ClientTest.Batch4.NullableTests.MyType.op_UnaryNegation, c)), null);
+        },
         liftedBooleanAndWorks: function () {
             var a = true, b = true, c = false, d = false, e = null, f = null;
             Bridge.Test.Assert.areStrictEqual(true, System.Nullable.and(a, b));
@@ -23641,10 +23647,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.Assert.null$1((System.Nullable.lift(Bridge.ClientTest.Batch4.UserDefinedStructTests.S7.op_Addition, a, c)), "#2");
         },
         canLiftUserDefinedUnaryOperator_SPI_1634: function () {
-            var a = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S7.$ctor1(42); //, b = null;
+            var a = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S7.$ctor1(42), b = null;
             Bridge.Test.Assert.areEqual$1(-42, ((-System.Nullable.getValue(a).i) | 0), "#1");
             // #1634 #SPI
-            //Assert.Null(-b, "#2");
+            Bridge.Test.Assert.null$1(System.Nullable.lift(Bridge.ClientTest.Batch4.UserDefinedStructTests.S7.op_UnaryNegation, b), "#2");
         },
         canLiftUserDefinedConversionOperator_SPI_1611: function () {
             var a = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S7.$ctor1(42), b = null;

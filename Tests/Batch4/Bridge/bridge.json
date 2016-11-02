@@ -1,6 +1,6 @@
 ﻿{
   "output": "..\\Runner\\Batch4",
-  "cleanOutputFolderBeforeBuild": true,
+  "cleanOutputFolderBeforeBuildPattern": "*.*",
   "outputFormatting": "Formatted",
   "fileName": "code.js",
   "outputBy": "Project",
@@ -9,7 +9,6 @@
   },
   "resources": [
     {
-      "name": "bridge.js",
       "extract": false
     }
   ]

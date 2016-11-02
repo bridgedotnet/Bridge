@@ -28,7 +28,7 @@ namespace Bridge.Html5
         /// <param name="y">The y axis of the coordinate for the rectangle starting point.</param>
         /// <param name="width">The rectangle's width.</param>
         /// <param name="height">The rectangle's height.</param>
-        public virtual void ClearRect(Any<uint, int> x, Any<uint, int> y, Any<uint, int> width, Any<uint, int> height)
+        public virtual void ClearRect(Union<uint, int> x, Union<uint, int> y, Union<uint, int> width, Union<uint, int> height)
         {
             return;
         }
@@ -40,7 +40,7 @@ namespace Bridge.Html5
         /// <param name="y">The y axis of the coordinate for the rectangle starting point.</param>
         /// <param name="width">The rectangle's width.</param>
         /// <param name="height">The rectangle's height.</param>
-        public virtual void FillRect(Any<uint, int> x, Any<uint, int> y, Any<uint, int> width, Any<uint, int> height)
+        public virtual void FillRect(Union<uint, int> x, Union<uint, int> y, Union<uint, int> width, Union<uint, int> height)
         {
             return;
         }
@@ -53,7 +53,7 @@ namespace Bridge.Html5
         /// <param name="y">The y axis of the coordinate for the rectangle starting point.</param>
         /// <param name="width">The rectangle's width.</param>
         /// <param name="height">The rectangle's height.</param>
-        public virtual void StrokeRect(Any<uint, int> x, Any<uint, int> y, Any<uint, int> width, Any<uint, int> height)
+        public virtual void StrokeRect(Union<uint, int> x, Union<uint, int> y, Union<uint, int> width, Union<uint, int> height)
         {
             return;
         }
@@ -73,7 +73,7 @@ namespace Bridge.Html5
         /// </param>
         /// <param name="x">The x axis of the coordinate for the text starting point.</param>
         /// <param name="y">The y axis of the coordinate for the text starting point.</param>
-        public virtual void FillText(string text, Any<uint, int> x, Any<uint, int> y)
+        public virtual void FillText(string text, Union<uint, int> x, Union<uint, int> y)
         {
             return;
         }
@@ -92,7 +92,7 @@ namespace Bridge.Html5
         /// available or if a reasonably readable one can be synthesized by scaling the current
         /// font horizontally) or a smaller font.
         /// </param>
-        public virtual void FillText(string text, Any<uint, int> x, Any<uint, int> y, Any<uint?, int?> maxWidth)
+        public virtual void FillText(string text, Union<uint, int> x, Union<uint, int> y, Union<uint?, int?> maxWidth)
         {
             return;
         }
@@ -105,7 +105,7 @@ namespace Bridge.Html5
         /// </param>
         /// <param name="x">The x axis of the coordinate for the text starting point.</param>
         /// <param name="y">The y axis of the coordinate for the text starting point.</param>
-        public virtual void StrokeText(string text, Any<uint, int> x, Any<uint, int> y)
+        public virtual void StrokeText(string text, Union<uint, int> x, Union<uint, int> y)
         {
             return;
         }
@@ -124,7 +124,7 @@ namespace Bridge.Html5
         /// available or if a reasonably readable one can be synthesized by scaling the current
         /// font horizontally) or a smaller font.
         /// </param>
-        public virtual void StrokeText(string text, Any<uint, int> x, Any<uint, int> y, Any<uint?, int?> maxWidth)
+        public virtual void StrokeText(string text, Union<uint, int> x, Union<uint, int> y, Union<uint?, int?> maxWidth)
         {
             return;
         }
@@ -183,7 +183,7 @@ namespace Bridge.Html5
         /// of the array get copied and concatenated.
         /// For example, [5, 15, 25] will become [5, 15, 25, 5, 15, 25].
         /// </param>
-        public virtual void SetLineDash(Any<double[], uint[], int[], IEnumerable<Any<double, uint, int>>> segments)
+        public virtual void SetLineDash(Union<double[], uint[], int[], IEnumerable<Union<double, uint, int>>> segments)
         {
             return;
         }
@@ -230,12 +230,12 @@ namespace Bridge.Html5
         /// <summary>
         /// Color or style to use inside shapes. Default #000 (black).
         /// </summary>
-        public Any<string, CanvasGradient, CanvasPattern> FillStyle;
+        public Union<string, CanvasGradient, CanvasPattern> FillStyle;
 
         /// <summary>
         /// Color or style to use for the lines around shapes. Default #000 (black).
         /// </summary>
-        public Any<string, CanvasGradient, CanvasPattern> StrokeStyle;
+        public Union<string, CanvasGradient, CanvasPattern> StrokeStyle;
 
         #endregion Fill and Stroke Styles
 
@@ -249,8 +249,8 @@ namespace Bridge.Html5
         /// <param name="x1">The x axis of the coordinate of the end point.</param>
         /// <param name="y1">The y axis of the coordinate of the end point.</param>
         /// <returns>A linear CanvasGradient initialized with the specified line.</returns>
-        public virtual extern CanvasGradient CreateLinearGradient(Any<uint, int, double> x0, Any<uint, int, double> y0,
-                                                           Any<uint, int, double> x1, Any<uint, int, double> y1);
+        public virtual extern CanvasGradient CreateLinearGradient(Union<uint, int, double> x0, Union<uint, int, double> y0,
+                                                           Union<uint, int, double> x1, Union<uint, int, double> y1);
 
         /// <summary>
         /// Creates a radial gradient along the line given by the coordinates represented by the parameters.
@@ -263,8 +263,8 @@ namespace Bridge.Html5
         /// <param name="r1">The radius of the end circle.</param>
         /// <returns>A radial CanvasGradient initialized with the two specified circles.</returns>
         public virtual extern CanvasGradient CreateRadialGradient(
-            Any<uint, int, double> x0, Any<uint, int, double> y0, Any<uint, int, double> r0,
-            Any<uint, int, double> x1, Any<uint, int, double> y1, Any<uint, int, double> r1);
+            Union<uint, int, double> x0, Union<uint, int, double> y0, Union<uint, int, double> r0,
+            Union<uint, int, double> x1, Union<uint, int, double> y1, Union<uint, int, double> r1);
 
         /// <summary>
         /// Creates a pattern using the specified image (a CanvasImageSource). It repeats the source in the
@@ -287,7 +287,7 @@ namespace Bridge.Html5
         /// it defined inside.
         /// </remarks>
         public virtual extern CanvasPattern CreatePattern(
-            Any<HTMLImageElement, HTMLVideoElement, HTMLCanvasElement, CanvasRenderingContext2D, object, ImageData, Blob> image,
+            Union<HTMLImageElement, HTMLVideoElement, HTMLCanvasElement, CanvasRenderingContext2D, object, ImageData, Blob> image,
             CanvasTypes.CanvasRepetitionTypes repetition);
 
         #endregion Gradients and Patterns
@@ -467,7 +467,7 @@ namespace Bridge.Html5
         /// A Boolean, which is true if the specified point is contained in the current or specfied path,
         /// otherwise false.
         /// </returns>
-        public virtual extern bool IsPointInPath(Any<uint, int, double> x, Any<uint, int, double> y);
+        public virtual extern bool IsPointInPath(Union<uint, int, double> x, Union<uint, int, double> y);
 
         /// <summary>
         /// Reports whether or not the specified point is contained in the current path.
@@ -481,7 +481,7 @@ namespace Bridge.Html5
         /// A Boolean, which is true if the specified point is contained in the current or specfied path,
         /// otherwise false.
         /// </returns>
-        public virtual extern bool IsPointInPath(Any<uint, int, double> x, Any<uint, int, double> y,
+        public virtual extern bool IsPointInPath(Union<uint, int, double> x, Union<uint, int, double> y,
                                           CanvasTypes.CanvasFillRule? fillRule);
 
         /// <summary>
@@ -494,7 +494,7 @@ namespace Bridge.Html5
         /// A Boolean, which is true if the specified point is contained in the current or specfied path,
         /// otherwise false.
         /// </returns>
-        public virtual extern bool IsPointInPath(Path2D path, Any<uint, int, double> x, Any<uint, int, double> y);
+        public virtual extern bool IsPointInPath(Path2D path, Union<uint, int, double> x, Union<uint, int, double> y);
 
         /// <summary>
         /// Reports whether or not the specified point is contained in the current path.
@@ -509,7 +509,7 @@ namespace Bridge.Html5
         /// A Boolean, which is true if the specified point is contained in the current or specfied path,
         /// otherwise false.
         /// </returns>
-        public virtual extern bool IsPointInPath(Path2D path, Any<uint, int, double> x, Any<uint, int, double> y,
+        public virtual extern bool IsPointInPath(Path2D path, Union<uint, int, double> x, Union<uint, int, double> y,
                                           CanvasTypes.CanvasFillRule? fillRule);
 
         /// <summary>
@@ -521,7 +521,7 @@ namespace Bridge.Html5
         /// A Boolean, which is true if the point is inside the area contained by the stroking of a path,
         /// otherwise false.
         /// </returns>
-        public virtual extern bool IsPointInStroke(Any<uint, int, double> x, Any<uint, int, double> y);
+        public virtual extern bool IsPointInStroke(Union<uint, int, double> x, Union<uint, int, double> y);
 
         /// <summary>
         /// Reports whether or not the specified point is inside the area contained by the stroking of a path.
@@ -533,7 +533,7 @@ namespace Bridge.Html5
         /// A Boolean, which is true if the point is inside the area contained by the stroking of a path,
         /// otherwise false.
         /// </returns>
-        public virtual extern bool IsPointInStroke(Path2D path, Any<uint, int, double> x, Any<uint, int, double> y);
+        public virtual extern bool IsPointInStroke(Path2D path, Union<uint, int, double> x, Union<uint, int, double> y);
 
         #endregion Drawing Paths
 
@@ -569,7 +569,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="x">Scaling factor in the horizontal direction.</param>
         /// <param name="y">Scaling factor in the vertical direction.</param>
-        public virtual void Scale(Any<int, double> x, Any<int, double> y)
+        public virtual void Scale(Union<int, double> x, Union<int, double> y)
         {
             return;
         }
@@ -580,7 +580,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="x">Distance to move in the horizontal direction.</param>
         /// <param name="y">Distance to move in the vertical direction.</param>
-        public virtual void Translate(Any<int, double> x, Any<int, double> y)
+        public virtual void Translate(Union<int, double> x, Union<int, double> y)
         {
             return;
         }
@@ -602,8 +602,8 @@ namespace Bridge.Html5
         /// <param name="d">m22: Vertical scaling.</param>
         /// <param name="e">dx: Horizontal moving.</param>
         /// <param name="f">dy: Vertical moving.</param>
-        public virtual void Transform(Any<int, double> a, Any<int, double> b, Any<int, double> c,
-                                      Any<int, double> d, Any<int, double> e, Any<int, double> f)
+        public virtual void Transform(Union<int, double> a, Union<int, double> b, Union<int, double> c,
+                                      Union<int, double> d, Union<int, double> e, Union<int, double> f)
         {
             return;
         }
@@ -619,8 +619,8 @@ namespace Bridge.Html5
         /// <param name="d">m22: Vertical scaling.</param>
         /// <param name="e">dx: Horizontal moving.</param>
         /// <param name="f">dy: Vertical moving.</param>
-        public virtual void SetTransform(Any<int, double> a, Any<int, double> b, Any<int, double> c,
-                                         Any<int, double> d, Any<int, double> e, Any<int, double> f)
+        public virtual void SetTransform(Union<int, double> a, Union<int, double> b, Union<int, double> c,
+                                         Union<int, double> d, Union<int, double> e, Union<int, double> f)
         {
             return;
         }
@@ -666,8 +666,8 @@ namespace Bridge.Html5
         /// <param name="dy">
         /// The Y coordinate in the destination canvas at which to place the top-left corner of the source image.
         /// </param>
-        public virtual void DrawImage(Any<HTMLImageElement, HTMLVideoElement, HTMLCanvasElement, CanvasRenderingContext2D> image,
-                                      Any<int, uint, float, double> dx, Any<int, uint, float, double> dy)
+        public virtual void DrawImage(Union<HTMLImageElement, HTMLVideoElement, HTMLCanvasElement, CanvasRenderingContext2D> image,
+                                      Union<int, uint, float, double> dx, Union<int, uint, float, double> dy)
         {
             return;
         }
@@ -693,9 +693,9 @@ namespace Bridge.Html5
         /// The height to draw the image in the destination canvas. This allows scaling of the drawn image.
         /// If null, the image is not scaled in height when drawn.
         /// </param>
-        public virtual void DrawImage(Any<HTMLImageElement, HTMLVideoElement, HTMLCanvasElement, CanvasRenderingContext2D> image,
-                                      Any<int, uint, float, double> dx, Any<int, uint, float, double> dy,
-                                      Any<int?, uint?, float?, double?> dWidth, Any<int?, uint?, float?, double?> dHeight)
+        public virtual void DrawImage(Union<HTMLImageElement, HTMLVideoElement, HTMLCanvasElement, CanvasRenderingContext2D> image,
+                                      Union<int, uint, float, double> dx, Union<int, uint, float, double> dy,
+                                      Union<int?, uint?, float?, double?> dWidth, Union<int?, uint?, float?, double?> dHeight)
         {
             return;
         }
@@ -735,13 +735,13 @@ namespace Bridge.Html5
         /// The height to draw the image in the destination canvas. This allows scaling of the drawn image.
         /// If not specified or null, the image is not scaled in height when drawn.
         /// </param>
-        public virtual void DrawImage(Any<HTMLImageElement, HTMLVideoElement, HTMLCanvasElement, CanvasRenderingContext2D> image,
-                                      Any<int, uint, float, double> sx, Any<int, uint, float, double> sy,
-                                      Any<int?, uint?, float?, double?> sWidth,
-                                      Any<int?, uint?, float?, double?> sHeight,
-                                      Any<int, uint, float, double> dx, Any<int, uint, float, double> dy,
-                                      Any<int?, uint?, float?, double?> dWidth,
-                                      Any<int?, uint?, float?, double?> dHeight)
+        public virtual void DrawImage(Union<HTMLImageElement, HTMLVideoElement, HTMLCanvasElement, CanvasRenderingContext2D> image,
+                                      Union<int, uint, float, double> sx, Union<int, uint, float, double> sy,
+                                      Union<int?, uint?, float?, double?> sWidth,
+                                      Union<int?, uint?, float?, double?> sHeight,
+                                      Union<int, uint, float, double> dx, Union<int, uint, float, double> dy,
+                                      Union<int?, uint?, float?, double?> dWidth,
+                                      Union<int?, uint?, float?, double?> dHeight)
         {
             return;
         }
@@ -762,7 +762,7 @@ namespace Bridge.Html5
         /// A new ImageData object with the specified width and height. The new object is filled with
         /// transparent black pixels.
         /// </returns>
-        public virtual extern ImageData CreateImageData(Any<uint, int> width, Any<uint, int> height);
+        public virtual extern ImageData CreateImageData(Union<uint, int> width, Union<uint, int> height);
 
         /// <summary>
         /// Creates a new, blank ImageData object with the specified dimensions. All of the pixels in the
@@ -794,7 +794,7 @@ namespace Bridge.Html5
         /// The height of the rectangle from which the ImageData will be extracted.
         /// </param>
         /// <returns></returns>
-        public virtual extern ImageData GetImageData(Any<uint, int> sx, Any<uint, int> sy, Any<uint, int> sw, Any<uint, int> sh);
+        public virtual extern ImageData GetImageData(Union<uint, int> sx, Union<uint, int> sy, Union<uint, int> sw, Union<uint, int> sh);
 
         /// <summary>
         /// Paints data from the given ImageData object onto the bitmap. If a dirty rectangle is provided,
@@ -842,8 +842,8 @@ namespace Bridge.Html5
         /// Height of the rectangle to be painted, in the origin image data. Defaults to the height of the image data.
         /// </param>
         public virtual void PutImageData(ImageData imagedata, int dx, int dy,
-                                         Any<uint?, int?> dirtyX, Any<uint?, int?> dirtyY,
-                                         Any<uint?, int?> dirtyWidth, Any<uint?, int?> dirtyHeight)
+                                         Union<uint?, int?> dirtyX, Union<uint?, int?> dirtyY,
+                                         Union<uint?, int?> dirtyWidth, Union<uint?, int?> dirtyHeight)
         {
             return;
         }

@@ -17,7 +17,7 @@ namespace Bridge.Html5
         /// Creates a new Int16Array of the specified length.
         /// </summary>
         /// <param name="length">Length of array to create</param>
-        public Int16Array(Any<int, uint> length)
+        public Int16Array(Union<int, uint> length)
         {
         }
 
@@ -52,7 +52,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="i">Index position in the array.</param>
         /// <returns>The element in the specified position.</returns>
-        public short this[Any<int, uint> i]
+        public short this[Union<int, uint> i]
         {
             get
             {

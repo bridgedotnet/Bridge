@@ -28,7 +28,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="contextId">The context's id</param>
         /// <returns>A drawing context. A CanvasRenderingContext2D, IWebGLRenderingContext or IWebGL2RenderingContext object.</returns>
-        public virtual extern Any<CanvasRenderingContext2D, IWebGLRenderingContext> GetContext(string contextId);
+        public virtual extern Union<CanvasRenderingContext2D, IWebGLRenderingContext> GetContext(string contextId);
 
         /// <summary>
         /// Returns CanvasRenderingContext2D drawing context on the canvas, or null if the context ID is not supported.
