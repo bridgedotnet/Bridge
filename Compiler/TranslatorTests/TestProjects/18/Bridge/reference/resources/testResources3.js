@@ -1,5 +1,4 @@
 // Content header: 1.0.0-beta  {notdate} 2016 
-
 // ---
 // Content remark: Path: Bridge/output/testIssue434.js; name: testIssue434.js
 // ---
@@ -63,7 +62,6 @@
     });
 
 // Bottom
-
 // ---
 // Content remark: Path: Bridge/output/testIssue461.js; name: testIssue461.js
 // ---

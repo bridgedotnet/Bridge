@@ -7,7 +7,6 @@
 */
 
 alert("I'm header 1.0.0-beta");
-
 // -- remark with no tokens
 
 ﻿    Bridge.define("TestIssue599.Issue599", {
@@ -24,7 +23,6 @@ alert("I'm header 1.0.0-beta");
         $entryPoint: true,
         _something: "HI!"
     });
-
 // -- remark with no tokens
 
 ﻿    Bridge.define("TestIssue948.Issue948", {

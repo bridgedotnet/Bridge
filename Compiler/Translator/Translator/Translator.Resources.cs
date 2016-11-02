@@ -655,14 +655,14 @@ namespace Bridge.Translator
                         throw new InvalidOperationException("Could not find any file in folder: " + directory.FullName + " for resource " + item.Name + " and location " + fileName);
                     }
 
-                    var needNewLine = files.Length > 0;
+                    //var needNewLine = files.Length > 0;
 
                     foreach (var file in files)
                     {
-                        if (needNewLine)
-                        {
-                            NewLine(buffer);
-                        }
+                        //if (needNewLine)
+                        //{
+                        //    NewLine(buffer);
+                        //}
 
                         GenerateResourceFileRemark(buffer, item, file, dirPathInFileName);
 

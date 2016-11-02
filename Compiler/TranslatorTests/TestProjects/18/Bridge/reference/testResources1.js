@@ -1,4 +1,3 @@
-
 ﻿    Bridge.define("TestIssue1035.StructBridge1035", {
         $kind: "struct",
         statics: {
@@ -24,7 +23,6 @@
         },
         $clone: function (to) { return this; }
     });
-
 ﻿    Bridge.define("TestIssue379.Tests", {
         testDataIgnore: function () {
             var d1 = {  };
