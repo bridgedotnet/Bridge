@@ -70,13 +70,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "packages", "packages", "{0A
 		.build\packages\collect.bat = .build\packages\collect.bat
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "targets", "targets", "{169F0BA9-3B0A-43DD-98E2-C9DB1A89CAB0}"
-	ProjectSection(SolutionItems) = preProject
-		.build\targets\Bridge.targets = .build\targets\Bridge.targets
-		.build\targets\BridgeNoTask.targets = .build\targets\BridgeNoTask.targets
-		.build\targets\BridgeProjectRefs.targets = .build\targets\BridgeProjectRefs.targets
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{3E6E252D-69D8-4B9A-8E6C-E994697F8090}"
 	ProjectSection(SolutionItems) = preProject
 		.build\common\CommonAssemblyInfo.cs = .build\common\CommonAssemblyInfo.cs
@@ -243,7 +236,6 @@ Global
 		{E12E9F2A-984B-4340-A62E-E356C716358E} = {00CA952C-4292-47FC-8D03-B525B294B846}
 		{B83954AB-3E5F-4778-8BC0-F1CEEDE6F187} = {00CA952C-4292-47FC-8D03-B525B294B846}
 		{0A8F2D26-ED54-4A8C-A323-A8018F6DD742} = {00CA952C-4292-47FC-8D03-B525B294B846}
-		{169F0BA9-3B0A-43DD-98E2-C9DB1A89CAB0} = {00CA952C-4292-47FC-8D03-B525B294B846}
 		{3E6E252D-69D8-4B9A-8E6C-E994697F8090} = {00CA952C-4292-47FC-8D03-B525B294B846}
 		{DE1ED6BA-EEA3-4136-8732-C39F070CC7F2} = {E14B88A0-6D55-4C94-AF76-2B1BC4B4C775}
 		{306AD788-87E9-4DF9-A216-95948E024BC8} = {E14B88A0-6D55-4C94-AF76-2B1BC4B4C775}

@@ -86,6 +86,7 @@
     <Compile Include="AbstractPlugin.cs" />
     <Compile Include="BridgeType.cs" />
     <Compile Include="Config\VersionContext.cs" />
+    <Compile Include="Constants\Files.cs" />
     <Compile Include="HashHelper.cs" />
     <Compile Include="Config\ConfigHelper.cs" />
     <Compile Include="Config\AssemblyConfig.cs" />

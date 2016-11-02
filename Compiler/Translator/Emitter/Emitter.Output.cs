@@ -86,6 +86,8 @@ namespace Bridge.Translator
 
             this.AssemblyJsDocWritten = false;
 
+            var fileHelper = new FileHelper();
+
             foreach (var outputPair in this.Outputs)
             {
                 var fileName = outputPair.Key;
@@ -93,8 +95,7 @@ namespace Bridge.Translator
 
                 this.Log.Trace("File name " + (fileName ?? ""));
 
-                string extension = Path.GetExtension(fileName);
-                bool isJs = extension == ('.' + Bridge.Translator.AssemblyInfo.JAVASCRIPT_EXTENSION);
+                bool isJs = fileHelper.IsJS(fileName);
 
                 OutputModule(output);
 

@@ -52,7 +52,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="i">Index position in the array.</param>
         /// <returns>The element in the specified position.</returns>
-        public SByte this[Any<int, uint> i]
+        public SByte this[Union<int, uint> i]
         {
             get
             {

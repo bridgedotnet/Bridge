@@ -104,7 +104,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="name">The name to match the Elements' name and id</param>
         /// <returns>An Element or an HTMLCollection</returns>
-        public new virtual Any<HTMLElement, HTMLCollection> this[string name]
+        public new virtual Union<HTMLElement, HTMLCollection> this[string name]
         {
             get
             {
@@ -125,7 +125,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="name">The name to match the Elements' name and id</param>
         /// <returns>An Element or an HTMLCollection</returns>
-        public virtual extern Any<HTMLElement, HTMLCollection> NamedItem(string name);
+        public virtual extern Union<HTMLElement, HTMLCollection> NamedItem(string name);
 
         public virtual extern IEnumerator<HTMLElement> GetEnumerator();
 
