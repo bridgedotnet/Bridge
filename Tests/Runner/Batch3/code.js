@@ -6861,8 +6861,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -6892,7 +6890,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    };
+                                    }; /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -10791,6 +10789,69 @@ Bridge.$N1391Result =                 r;
             this.array = array;
         }
     });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011", {
+        statics: {
+            overloadedMethod: function (T, value) {
+                return 1;
+            },
+            overloadedMethod$1: function (T, valueUpdater) {
+                return 2;
+            }
+        },
+        testCase: function () {
+            var $t;
+            var nullableBool = false;
+            var varValue = ($t = nullableBool, $t != null ? Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(Boolean).op_Implicit($t) : Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(Boolean).getMissing());
+
+            var typedValue = varValue;
+            Bridge.Test.Assert.areStrictEqual(false, varValue.field);
+            Bridge.Test.Assert.areEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.overloadedMethod(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(Boolean), typedValue));
+            Bridge.Test.Assert.areEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.overloadedMethod(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(Boolean), varValue));
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1", function (T) { return {
+        inherits: function () { return [System.IEquatable$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(T))]; },
+        $kind: "struct",
+        statics: {
+            config: {
+                init: function () {
+                    this._missing = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(T))();
+                }
+            },
+            getMissing: function () {
+                return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(T)._missing;
+            },
+            op_Implicit: function (value) {
+                return new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(T))();
+            },
+            op_Equality: function (x, y) {
+                return x.equalsT(y);
+            },
+            op_Inequality: function (x, y) {
+                return !(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(T).op_Equality(x, y));
+            },
+            getDefaultValue: function () { return new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(T))(); }
+        },
+        field: Bridge.getDefaultValue(T),
+        config: {
+            alias: [
+            "equalsT", "System$IEquatable$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2011$Optional$1$" + Bridge.getTypeAlias(T) + "$equalsT"
+            ]
+        },
+        ctor: function () {
+            this.$initialize();
+        },
+        equalsT: function (other) {
+            return false;
+        },
+        getHashCode: function () {
+            var h = Bridge.addHash([3587563198, this.field]);
+            return h;
+        },
+        $clone: function (to) { return this; }
+    }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
