@@ -8271,7 +8271,7 @@
                 };
 
             if (formatStr) {
-                return formatStr.replace(/dd?|HH?|hh?|mm?|ss?|tt?/g,
+                return formatStr.replace(/dd?|HH?|hh?|mm?|ss?|tt?|f{1,3}?/g,
                     function (formatStr) {
                         switch (formatStr) {
                             case "d":
@@ -8298,6 +8298,11 @@
                                 return ((me.getHours() < 12) ? dtInfo.amDesignator : dtInfo.pmDesignator).substring(0, 1);
                             case "tt":
                                 return (me.getHours() < 12) ? dtInfo.amDesignator : dtInfo.pmDesignator;
+                            case "f":
+                                return me.getMilliseconds();
+                            case "ff":
+                            case "fff":
+                                return format(me.getMilliseconds());
                         }
                     }
                 );
