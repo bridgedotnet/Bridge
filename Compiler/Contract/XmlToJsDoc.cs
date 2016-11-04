@@ -71,7 +71,7 @@ namespace Bridge.Contract
             if (prop != null)
             {
                 var memberResolveResult = rr as MemberResolveResult;
-                var rProp = memberResolveResult.Member as DefaultResolvedProperty;
+                var rProp = memberResolveResult.Member as IProperty;
 
                 var comment = new JsDocComment();
                 InitMember(comment, rProp.Getter, block.Emitter, null);

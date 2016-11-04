@@ -2463,7 +2463,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         statics: {
             testEventNameCase: function () {
                 var wrong = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1199.NotWorking$1(System.Int32))();
-                wrong.IsNotWorking = Bridge.fn.combine(wrong.IsNotWorking, $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1199.f1);
+                wrong.addIsNotWorking($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1199.f1);
                 Bridge.Test.Assert.areEqual("somevalue", wrong.validate());
             }
         }
@@ -6861,8 +6861,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -6892,7 +6890,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    };
+                                    }; /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -10791,6 +10789,65 @@ Bridge.$N1391Result =                 r;
             this.array = array;
         }
     });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2013", {
+        statics: {
+            attachViaExtension: function (T, self) {
+                self["Bridge$ClientTest$Batch3$BridgeIssues$Bridge2013$IEvGen$1$" + Bridge.getTypeAlias(T) + "$addEv"]($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2013.f1);
+            }
+        },
+        testCase: function () {
+            var sut = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2013.EvGen$1(System.Int32))();
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge2013.attachViaExtension(System.Int32, sut);
+
+            Bridge.Test.Assert.true(sut.getHasListeners());
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2013", $_);
+
+    Bridge.apply($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2013, {
+        f1: function () {
+        }
+    });
+
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2013.IEvGen$1", function (T) { return {
+        $kind: "interface"
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2019", {
+        statics: {
+            process: function (T) {
+                var actionSet = function (c) {
+                    c["Bridge$ClientTest$Batch3$BridgeIssues$Bridge2019$ISome$1$" + Bridge.getTypeAlias(T) + "$setSomeProp"]((c["Bridge$ClientTest$Batch3$BridgeIssues$Bridge2019$ISome$1$" + Bridge.getTypeAlias(T) + "$getSomeProp"]() + 1) | 0);
+                };
+                var actionCall = function (c) {
+                    c["Bridge$ClientTest$Batch3$BridgeIssues$Bridge2019$ISome$1$" + Bridge.getTypeAlias(T) + "$someMethod"]();
+                };
+
+                var items = function (_o35) {
+                        _o35.add(Bridge.merge(new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2019.Some$1(T))(), {
+                            setSomeProp: 5
+                        } ));
+                        return _o35;
+                    }(new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2019.ISome$1(T)))());
+                Bridge.Linq.Enumerable.from(items).forEach(actionSet);
+                Bridge.Linq.Enumerable.from(items).forEach(actionCall);
+
+                return System.Linq.Enumerable.from(items).select(function (c) {
+                        return c["Bridge$ClientTest$Batch3$BridgeIssues$Bridge2019$ISome$1$" + Bridge.getTypeAlias(T) + "$getSomeProp"]();
+                    }).sum();
+            }
+        },
+        testCase: function () {
+            var res = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2019.process(String);
+            Bridge.Test.Assert.areEqual(17, res);
+        }
+    });
+
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2019.ISome$1", function (T) { return {
+        $kind: "interface"
+    }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
@@ -18245,30 +18302,30 @@ Bridge.$N1391Result =                 r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues", $_);
 
     Bridge.apply($_.Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues, {
-        f1: function (_o35) {
-            _o35.add(0);
-            _o35.add(1);
-            _o35.add(2);
-            _o35.add(3);
-            _o35.add(4);
-            return _o35;
-        },
-        f2: function (_o36) {
-            _o36.add(3, "b");
-            _o36.add(6, "z");
-            _o36.add(9, "x");
+        f1: function (_o36) {
+            _o36.add(0);
+            _o36.add(1);
+            _o36.add(2);
+            _o36.add(3);
+            _o36.add(4);
             return _o36;
+        },
+        f2: function (_o37) {
+            _o37.add(3, "b");
+            _o37.add(6, "z");
+            _o37.add(9, "x");
+            return _o37;
         },
         f3: function (i) {
             return ((i * 2) | 0);
         },
-        f4: function (_o37) {
-            _o37.add(0);
-            _o37.add(1);
-            _o37.add(2);
-            _o37.add(3);
-            _o37.add(4);
-            return _o37;
+        f4: function (_o38) {
+            _o38.add(0);
+            _o38.add(1);
+            _o38.add(2);
+            _o38.add(3);
+            _o38.add(4);
+            return _o38;
         }
     });
 
@@ -18888,6 +18945,39 @@ Bridge.$N1391Result =                 r;
             }
         }
     });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2013.EvGen$1", function (T) { return {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2013.IEvGen$1(T)],
+        config: {
+            events: {
+                Ev: null
+            },
+            alias: [
+            "addEv", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2013$IEvGen$1$" + Bridge.getTypeAlias(T) + "$addEv",
+            "removeEv", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2013$IEvGen$1$" + Bridge.getTypeAlias(T) + "$removeEv"
+            ]
+        },
+        getHasListeners: function () {
+            return !Bridge.staticEquals(this.Ev, null);
+        }
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2019.Some$1", function (T) { return {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2019.ISome$1(T)],
+        config: {
+            properties: {
+                SomeProp: 0
+            },
+            alias: [
+            "getSomeProp", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2019$ISome$1$" + Bridge.getTypeAlias(T) + "$getSomeProp",
+            "setSomeProp", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2019$ISome$1$" + Bridge.getTypeAlias(T) + "$setSomeProp",
+            "someMethod", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2019$ISome$1$" + Bridge.getTypeAlias(T) + "$someMethod"
+            ]
+        },
+        someMethod: function () {
+            this.setSomeProp((this.getSomeProp() + 11) | 0);
+        }
+    }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240B", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A],
