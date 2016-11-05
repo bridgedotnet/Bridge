@@ -135,8 +135,8 @@
             return braces.substr(0, (braces.length + (remove ? 0 : 1)) / 2);
         },
 
-        alignString: function (str, alignment, pad, dir) {
-            if (!alignment) {
+        alignString: function (str, alignment, pad, dir, cut) {
+            if (!str || !alignment) {
                 return str;
             }
 
@@ -153,6 +153,11 @@
             }
 
             alignment = Math.abs(alignment);
+
+            if (cut && (str.length > alignment))
+            {
+                str = str.substring(0, alignment);
+            }
 
             if (alignment + 1 >= str.length) {
                 switch (dir) {

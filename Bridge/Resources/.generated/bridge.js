@@ -1659,8 +1659,8 @@
             return braces.substr(0, (braces.length + (remove ? 0 : 1)) / 2);
         },
 
-        alignString: function (str, alignment, pad, dir) {
-            if (!alignment) {
+        alignString: function (str, alignment, pad, dir, cut) {
+            if (!str || !alignment) {
                 return str;
             }
 
@@ -1677,6 +1677,11 @@
             }
 
             alignment = Math.abs(alignment);
+
+            if (cut && (str.length > alignment))
+            {
+                str = str.substring(0, alignment);
+            }
 
             if (alignment + 1 >= str.length) {
                 switch (dir) {
@@ -8197,12 +8202,12 @@
                 result = "",
                 me = this,
                 dtInfo = (provider || System.Globalization.CultureInfo.getCurrentCulture()).getFormat(System.Globalization.DateTimeFormatInfo),
-                format = function (t, n) {
-                    return System.String.alignString((t | 0).toString(), n || 2, "0", 2);
+                format = function (t, n, dir, cut) {
+                    return System.String.alignString((t | 0).toString(), n || 2, "0", dir || 2, cut || false);
                 };
 
             if (formatStr) {
-                return formatStr.replace(/dd?|HH?|hh?|mm?|ss?|tt?|f{1,3}?/g,
+                return formatStr.replace(/dd?|HH?|hh?|mm?|ss?|tt?|f{1,7}/g,
                     function (formatStr) {
                         switch (formatStr) {
                             case "d":
@@ -8230,10 +8235,13 @@
                             case "tt":
                                 return (me.getHours() < 12) ? dtInfo.amDesignator : dtInfo.pmDesignator;
                             case "f":
-                                return me.getMilliseconds();
                             case "ff":
                             case "fff":
-                                return format(me.getMilliseconds());
+                            case "ffff":
+                            case "fffff":
+                            case "ffffff":
+                            case "fffffff":
+                                return format(me.getMilliseconds(), formatStr.length, 1, true);
                         }
                     }
                 );
