@@ -340,12 +340,17 @@ namespace Bridge.Contract
             set;
         }
 
-        Dictionary<string, OverloadsCollection> OverloadsCache
+        Dictionary<Tuple<AstNode, bool>, OverloadsCollection> OverloadsCacheNodes
+        {
+            get;
+        }
+ 
+        Dictionary<Tuple<IMember, bool, bool>, OverloadsCollection> OverloadsCacheMembers
         {
             get;
         }
 
-        string GetFieldName(FieldDeclaration field);
+    string GetFieldName(FieldDeclaration field);
 
         string GetEventName(EventDeclaration evt);
 
@@ -463,5 +468,6 @@ namespace Bridge.Contract
         } 
 
         void WriteIndented(string s, int? position = null);
+        string GetReflectionName(IType type);
     }
 }

@@ -449,8 +449,17 @@ namespace Bridge.Translator
             return null;
         }
 
+        Dictionary<Tuple<IEntity, bool, bool>, string> entityNameCache = new Dictionary<Tuple<IEntity, bool, bool>, string>();
         public virtual string GetEntityName(IEntity member, bool forcePreserveMemberCase = false, bool ignoreInterface = false)
         {
+            Tuple<IEntity, bool, bool> tuple = new Tuple<IEntity, bool, bool>(member, forcePreserveMemberCase, ignoreInterface);
+
+            string result;
+            if(this.entityNameCache.TryGetValue(tuple, out result))
+            {
+                return result;
+            }
+
             bool preserveMemberChange = !this.IsNativeMember(member.FullName) ? this.AssemblyInfo.PreserveMemberCase : false;
 
             int enumMode = -1;
@@ -481,6 +490,7 @@ namespace Bridge.Translator
                     {
                         name = Helpers.ChangeReservedWord(name);
                     }
+                    this.entityNameCache.Add(tuple, name);
                     return name;
                 }
 
@@ -519,6 +529,7 @@ namespace Bridge.Translator
                 name = Helpers.ChangeReservedWord(name);
             }
 
+            this.entityNameCache.Add(tuple, name);
             return name;
         }
 
@@ -702,7 +713,7 @@ namespace Bridge.Translator
 
         public virtual bool IsNativeMember(string fullName)
         {
-            return fullName.StartsWith(Bridge.Translator.Translator.Bridge_ASSEMBLY + ".") || fullName.StartsWith("System.");
+            return fullName.StartsWith(Bridge.Translator.Translator.Bridge_ASSEMBLY + ".", StringComparison.Ordinal) || fullName.StartsWith("System.", StringComparison.Ordinal);
         }
 
         public virtual bool IsMemberConst(IMember member)

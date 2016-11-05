@@ -52,6 +52,9 @@ namespace Bridge.Contract
 
     public class BridgeTypes : Dictionary<string, BridgeType>
     {
+        private Dictionary<IType, BridgeType> byType = new Dictionary<IType, BridgeType>();
+        private Dictionary<TypeReference, BridgeType> byTypeRef = new Dictionary<TypeReference, BridgeType>();
+        private Dictionary<ITypeInfo, BridgeType> byTypeInfo = new Dictionary<ITypeInfo, BridgeType>();
         public void InitItems(IEmitter emitter)
         {
             var logger = emitter.Log;
@@ -59,6 +62,7 @@ namespace Bridge.Contract
             logger.Trace("Initializing items for Bridge types...");
 
             this.Emitter = emitter;
+            byType = new Dictionary<IType, BridgeType>();
             foreach (var item in this)
             {
                 var type = item.Value;
@@ -111,26 +115,20 @@ namespace Bridge.Contract
 
         public BridgeType Get(TypeReference type, bool safe = false)
         {
+            BridgeType bType;
+
+            if (this.byTypeRef.TryGetValue(type, out bType))
+            {
+                return bType;
+            }
+
             var name = type.FullName;
             if (type.IsGenericInstance)
             {
-                /*try
+                if (this.byTypeRef.TryGetValue(type.GetElementType(), out bType))
                 {
-                    name = type.Resolve().FullName;
+                    return bType;
                 }
-                catch
-                {
-                    try
-                    {
-                        var elementType = type.GetElementType();
-
-                        name = elementType != null ? elementType.FullName : type.FullName;
-                    }
-                    catch
-                    {
-                        name = type.FullName;
-                    }
-                }*/
 
                 name = type.GetElementType().FullName;
             }
@@ -139,6 +137,12 @@ namespace Bridge.Contract
             {
                 if (item.Value.TypeDefinition.FullName == name)
                 {
+                    this.byTypeRef[type] = item.Value;
+                    if (type.IsGenericInstance && type != type.GetElementType())
+                    {
+                        this.byTypeRef[type.GetElementType()] = item.Value;
+                    }
+
                     return item.Value;
                 }
             }
@@ -153,6 +157,14 @@ namespace Bridge.Contract
 
         public BridgeType Get(IType type, bool safe = false)
         {
+            BridgeType bType;
+
+            if (this.byType.TryGetValue(type, out bType))
+            {
+                return bType;
+            }
+
+            var originalType = type;
             if (type.IsParameterized)
             {
                 type = ((ParameterizedTypeReference)type.ToTypeReference()).GenericType.Resolve(this.Emitter.Resolver.Resolver.TypeResolveContext);
@@ -163,10 +175,22 @@ namespace Bridge.Contract
                 type = ((ByReferenceType)type).ElementType;
             }
 
+            if (this.byType.TryGetValue(type, out bType))
+            {
+                return bType;
+            }
+
             foreach (var item in this)
             {
                 if (item.Value.Type.Equals(type))
                 {
+                    this.byType[type] = item.Value;
+
+                    if (!type.Equals(originalType))
+                    {
+                        this.byType[originalType] = item.Value;
+                    }
+
                     return item.Value;
                 }
             }
@@ -181,10 +205,18 @@ namespace Bridge.Contract
 
         public BridgeType Get(ITypeInfo type, bool safe = false)
         {
+            BridgeType bType;
+
+            if (this.byTypeInfo.TryGetValue(type, out bType))
+            {
+                return bType;
+            }
+
             foreach (var item in this)
             {
-                if (item.Value.Type.ReflectionName == type.Key)
+                if (this.Emitter.GetReflectionName(item.Value.Type) == type.Key)
                 {
+                    this.byTypeInfo[type] = item.Value;
                     return item.Value;
                 }
             }

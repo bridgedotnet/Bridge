@@ -240,6 +240,8 @@ namespace Bridge.Translator
             this.Emitter.Translator.Plugins.BeforeTypesEmit(this.Emitter, this.Emitter.Types);
             this.Emitter.ReflectableTypes = this.GetReflectableTypes();
             var reflectedTypes = this.Emitter.ReflectableTypes;
+            var tmpBuffer = new StringBuilder();
+            StringBuilder currentOutput = null;
 
             foreach (var type in this.Emitter.Types)
             {
@@ -289,13 +291,25 @@ namespace Bridge.Translator
                 this.Emitter.Output = this.GetOutputForType(typeInfo, null);
                 this.Emitter.TypeInfo = type;
 
+                if (this.Emitter.Output.Length > 0)
+                {
+                    this.WriteNewLine();
+                }
+
+                tmpBuffer.Length = 0;
+                currentOutput = this.Emitter.Output;
+                this.Emitter.Output = tmpBuffer;
+
                 if (this.Emitter.TypeInfo.Module != null)
                 {
                     this.Indent();
                 }
-
+                
                 new ClassBlock(this.Emitter, this.Emitter.TypeInfo).Emit();
                 this.Emitter.Translator.Plugins.AfterTypeEmit(this.Emitter, type);
+
+                currentOutput.Append(tmpBuffer.ToString());
+                this.Emitter.Output = currentOutput;
             }
 
             this.Emitter.NamespacesCache = new Dictionary<string, int>();

@@ -45,11 +45,11 @@ namespace Bridge.Translator
 
             var parseOptions = new CSharpParseOptions(LanguageVersion.CSharp6, Microsoft.CodeAnalysis.DocumentationMode.None, SourceCodeKind.Regular, translator.DefineConstants);
             var syntaxTrees = translator.SourceFiles.Select(s => ParseSourceFile(s, parseOptions)).Where(s => s != null).ToList();
-            var references = new List<MetadataReference>();
-
+            var references = new MetadataReference[this.translator.References.Count()];
+            var i = 0;
             foreach (var r in this.translator.References)
             {
-                references.Add(MetadataReference.CreateFromFile(r.MainModule.FullyQualifiedName, new MetadataReferenceProperties(MetadataImageKind.Assembly, ImmutableArray.Create("global"))));
+                references[i++] = MetadataReference.CreateFromFile(r.MainModule.FullyQualifiedName, new MetadataReferenceProperties(MetadataImageKind.Assembly, ImmutableArray.Create("global")));
             }
 
             return CSharpCompilation.Create(GetAssemblyName(), syntaxTrees, references, compilationOptions);

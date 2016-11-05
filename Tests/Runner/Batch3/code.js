@@ -6861,8 +6861,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -6892,7 +6890,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    };
+                                    }; /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -11850,6 +11848,58 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge537A", {
         id: 0
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge537B", {
+        inherits: [System.Collections.Generic.IEnumerable$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge537A)],
+        statics: {
+            testB2: function () {
+                var l = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge537B();
+
+                l.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge537A(), {
+                    id: 103
+                } ));
+
+                return Bridge.ClientTest.Batch3.BridgeIssues.Bridge537B.getCount(l);
+            },
+            getCount: function (l) {
+                return l.list.getCount();
+            },
+            testB1: function () {
+                var l = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge537B();
+
+                l.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge537A(), {
+                    id: 101
+                } ));
+                l.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge537A(), {
+                    id: 102
+                } ));
+
+                return l.getCount();
+            }
+        },
+        list: null,
+        config: {
+            alias: [
+            "getEnumerator", "System$Collections$Generic$IEnumerable$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge537A$getEnumerator"
+            ]
+        },
+        ctor: function () {
+            this.$initialize();
+            this.list = new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge537A))();
+        },
+        getCount: function () {
+            return this.list.getCount();
+        },
+        add: function (value) {
+            this.list.add(value);
+        },
+        getEnumerator: function () {
+            return this.list.getEnumerator();
+        },
+        System$Collections$IEnumerable$getEnumerator: function () {
+            return this.list.getEnumerator();
+        }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge538", {
@@ -18958,58 +19008,6 @@ Bridge.$N1391Result =                 r;
         ctor: function () {
             this.$initialize();
             Bridge.ClientTest.Batch3.BridgeIssues.Bridge522.BaseClass.ctor.call(this);
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge537B", {
-        inherits: [System.Collections.Generic.IEnumerable$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge537A)],
-        statics: {
-            testB2: function () {
-                var l = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge537B();
-
-                l.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge537A(), {
-                    id: 103
-                } ));
-
-                return Bridge.ClientTest.Batch3.BridgeIssues.Bridge537B.getCount(l);
-            },
-            getCount: function (l) {
-                return l.list.getCount();
-            },
-            testB1: function () {
-                var l = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge537B();
-
-                l.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge537A(), {
-                    id: 101
-                } ));
-                l.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge537A(), {
-                    id: 102
-                } ));
-
-                return l.getCount();
-            }
-        },
-        list: null,
-        config: {
-            alias: [
-            "getEnumerator", "System$Collections$Generic$IEnumerable$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge537A$getEnumerator"
-            ]
-        },
-        ctor: function () {
-            this.$initialize();
-            this.list = new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge537A))();
-        },
-        getCount: function () {
-            return this.list.getCount();
-        },
-        add: function (value) {
-            this.list.add(value);
-        },
-        getEnumerator: function () {
-            return this.list.getEnumerator();
-        },
-        System$Collections$IEnumerable$getEnumerator: function () {
-            return this.list.getEnumerator();
         }
     });
 
