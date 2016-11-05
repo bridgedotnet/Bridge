@@ -43235,22 +43235,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C8, function () { return {"members":[{"accessibility":2,"name":"M1","type":8,"paramsInfo":[{"name":"a","parameterType":String,"position":0},{"name":"b","parameterType":String,"position":1}],"sname":"M1","returnType":String,"params":[String,String]},{"accessibility":2,"name":"M2","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":String,"position":0},{"name":"b","parameterType":String,"position":1}],"sname":"M2","returnType":String,"params":[String,String]},{"accessibility":2,"name":"M3","type":8,"paramsInfo":[{"name":"a","parameterType":String,"position":0}],"tpcount":2,"sname":"M3","returnType":String,"params":[String]},{"accessibility":2,"name":"M4","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":String,"position":0}],"tpcount":2,"sname":"M4","returnType":String,"params":[String]}]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.C9$2, function (T1, T2) { return {"members":[{"accessibility":2,"name":"M","isStatic":true,"type":8,"paramsInfo":[{"name":"a","parameterType":String,"position":0}],"sname":"m","returnType":String,"params":[String]}]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.ReflectionTests.S1, function () { return {"members":[{"attr":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.ctor()],"accessibility":2,"name":"M2","type":8,"sname":"M2","returnType":Object},{"accessibility":2,"name":"M3","type":8,"sname":"M3","returnType":Object}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.SimpleTypes.EnumTests, function () { return {"members":[{"attr":[Bridge.merge(new Bridge.Test.IgnoreTest(), {
-        setUntil: null
-    } )],"accessibility":2,"name":"CreatingInstanceOfEnumTypeReturnsZero","type":8,"sname":"creatingInstanceOfEnumTypeReturnsZero","returnType":Object},{"attr":[Bridge.merge(new Bridge.Test.IgnoreTest(), {
-        setUntil: null
-    } )],"accessibility":2,"name":"DefaultConstructorOfEnumTypeReturnsZero","type":8,"sname":"defaultConstructorOfEnumTypeReturnsZero","returnType":Object},{"attr":[Bridge.merge(new Bridge.Test.IgnoreTest(), {
-        setUntil: null
-    } )],"accessibility":2,"name":"DefaultExpressionWithEnumReturnsZero","type":8,"sname":"defaultExpressionWithEnumReturnsZero","returnType":Object},{"attr":[Bridge.merge(new Bridge.Test.IgnoreTest(), {
-        setUntil: null
-    } )],"accessibility":2,"name":"DefaultValueOfEnumClassIsNull","type":8,"sname":"defaultValueOfEnumClassIsNull","returnType":Object},{"attr":[Bridge.merge(new Bridge.Test.IgnoreTest(), {
-        setUntil: null
-    } )],"accessibility":2,"name":"DefaultValueOfEnumTypeIsFirstValue","type":8,"sname":"defaultValueOfEnumTypeIsFirstValue","returnType":Object}]}; });
-    Bridge.setMetadata(Bridge.ClientTest.SimpleTypes.JsDateTimeTests, function () { return {"members":[{"attr":[Bridge.merge(new Bridge.Test.IgnoreTest(), {
-        setUntil: null
-    } )],"accessibility":2,"name":"IComparableCompareToWorks","type":8,"sname":"iComparableCompareToWorks","returnType":Object},{"attr":[Bridge.merge(new Bridge.Test.IgnoreTest(), {
-        setUntil: null
-    } )],"accessibility":2,"name":"IEquatableEqualsWorks","type":8,"sname":"iEquatableEqualsWorks","returnType":Object}]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.AttributeTests.C3, function () { return {"attr":[new Bridge.ClientTest.Reflection.AttributeTests.A3Attribute(3)]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.AttributeTests.C5, function () { return {"attr":[new Bridge.ClientTest.Reflection.AttributeTests.A1Attribute(5)]}; });
     Bridge.setMetadata(Bridge.ClientTest.Reflection.AttributeTests.C6, function () { return {"attr":[new Bridge.ClientTest.Reflection.AttributeTests.A2Attribute(6)]}; });
