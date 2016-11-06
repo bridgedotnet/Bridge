@@ -291,24 +291,22 @@ namespace Bridge.Translator
 
                     if (leftMemberResolveResult != null)
                     {
-                        isEvent = leftMemberResolveResult.Member is DefaultResolvedEvent;
+                        isEvent = leftMemberResolveResult.Member is DefaultResolvedEvent ||
+                             leftMemberResolveResult.Member is SpecializedEvent;
                     }
+                    
+                    this.Emitter.IsAssignment = true;
+                    this.Emitter.AssignmentType = AssignmentOperatorType.Assign;
+                    assignmentExpression.Left.AcceptVisitor(this.Emitter);
+                    this.Emitter.IsAssignment = false;
 
-                    if (!isEvent)
+                    if (this.Emitter.Writers.Count == initCount)
                     {
-                        this.Emitter.IsAssignment = true;
-                        this.Emitter.AssignmentType = AssignmentOperatorType.Assign;
-                        assignmentExpression.Left.AcceptVisitor(this.Emitter);
-                        this.Emitter.IsAssignment = false;
-
-                        if (this.Emitter.Writers.Count == initCount)
-                        {
-                            this.Write(" = ");
-                        }
-
-                        this.Write(add ? JS.Funcs.BRIDGE_COMBINE : JS.Funcs.BRIDGE_REMOVE);
-                        this.WriteOpenParentheses();
+                        this.Write(" = ");
                     }
+
+                    this.Write(add ? JS.Funcs.BRIDGE_COMBINE : JS.Funcs.BRIDGE_REMOVE);
+                    this.WriteOpenParentheses();
                 }
             }
 
@@ -318,7 +316,11 @@ namespace Bridge.Translator
             bool special = nullable;
 
             this.Emitter.IsAssignment = true;
-            this.Emitter.AssignmentType = assignmentExpression.Operator;
+            if (!isEvent && !delegateAssigment)
+            {
+                this.Emitter.AssignmentType = assignmentExpression.Operator;
+            }
+            
             var oldValue = this.Emitter.ReplaceAwaiterByVar;
             this.Emitter.ReplaceAwaiterByVar = true;
 
@@ -337,7 +339,10 @@ namespace Bridge.Translator
                 }
 
                 assignmentExpression.Left.AcceptVisitor(this.Emitter);
-
+                if (isEvent)
+                {
+                    this.Write(",");
+                }
                 if (delegateAssigment)
                 {
                     this.Emitter.IsAssignment = true;

@@ -49,6 +49,7 @@
     <Compile Include="BridgeIssues\N1204.cs" />
     <Compile Include="BridgeIssues\N1122.cs" />
     <Compile Include="BridgeIssues\N1499.cs" />
+    <Compile Include="BridgeIssues\N2013.cs" />
     <Compile Include="BridgeIssues\N772.cs" />
   </ItemGroup>
   <ItemGroup>

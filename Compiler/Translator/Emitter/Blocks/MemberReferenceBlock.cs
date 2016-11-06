@@ -144,10 +144,16 @@ namespace Bridge.Translator
                 return;
             }
 
-            this.WriteOpenBracket();
-            this.Write(OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(!nativeImplementation, prefix));
-            this.WriteCloseBracket();
-
+            if ((resolveResult.Member is SpecializedEvent || resolveResult.Member is DefaultResolvedEvent) && nativeImplementation)
+            {
+                this.Write(OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(true, prefix));
+            } else
+            {
+                this.WriteOpenBracket();
+                this.Write(OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(!nativeImplementation, prefix));
+                this.WriteCloseBracket();                
+            }
+            
             if (interfaceTempVar != null)
             {
                 this.WriteCloseParentheses();
@@ -1440,6 +1446,9 @@ namespace Bridge.Translator
                         }
 
                         this.WriteOpenParentheses();
+                    } else if (this.Emitter.IsAssignment && this.Emitter.AssignmentType == AssignmentOperatorType.Assign)
+                    {
+                        this.WriteInterfaceMember(interfaceTempVar ?? targetVar, member, false); 
                     }
                     else
                     {
@@ -1452,6 +1461,13 @@ namespace Bridge.Translator
                             this.Write(this.Emitter.GetEntityName(member.Member, true, ignoreInterface: !nativeImplementation));
                         }
                     }
+                } else if (member.Member is SpecializedEvent && this.Emitter.IsAssignment && isInterface)
+                {
+                    if (isInterfaceMember)
+                    {
+                        this.WriteDot();
+                    }
+                    this.WriteInterfaceMember(interfaceTempVar ?? targetVar, member, false);
                 }
                 else
                 {
