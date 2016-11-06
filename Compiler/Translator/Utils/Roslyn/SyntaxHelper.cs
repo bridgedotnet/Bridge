@@ -736,5 +736,34 @@ namespace Bridge.Translator
             return p as T;
         }
 
+        public static bool IsAccessableIn(this ITypeSymbol type, ITypeSymbol currentType)
+        {
+            var list = new List<ITypeSymbol>();
+
+            while (currentType != null && currentType.ContainingType != null)
+            {
+                var nested = currentType.GetTypeMembers();
+
+                if (nested != null && nested.Length > 0)
+                {
+                    list.AddRange(nested);
+                }
+
+                list.Add(currentType.ContainingType);
+                currentType = currentType.ContainingType;
+            }
+
+            if (currentType != null)
+            {
+                var nested1 = currentType.GetTypeMembers();
+
+                if (nested1 != null && nested1.Length > 0)
+                {
+                    list.AddRange(nested1);
+                }
+            }
+
+            return list.Contains(type);
+        }
     }
 }

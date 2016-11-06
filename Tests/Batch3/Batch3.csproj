@@ -399,6 +399,7 @@
     <Compile Include="BridgeIssues\1900\N1969.cs" />
     <Compile Include="BridgeIssues\1900\N1970.cs" />
     <Compile Include="BridgeIssues\1900\N1996.cs" />
+    <Compile Include="BridgeIssues\2000\N2024.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
     <Compile Include="Utilities\DecimalHelper.cs" />
