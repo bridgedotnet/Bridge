@@ -1424,7 +1424,7 @@ namespace Bridge.Translator
                         this.Write(OverloadsCollection.Create(this.Emitter, invocationResult.Member).GetOverloadName(!nativeImplementation));
                     }
                 }
-                else if (member.Member is DefaultResolvedEvent)
+                else if (member.Member is IEvent)
                 {
                     if (this.Emitter.IsAssignment &&
                         (this.Emitter.AssignmentType == AssignmentOperatorType.Add ||

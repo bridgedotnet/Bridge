@@ -432,7 +432,7 @@ namespace Bridge.Translator
                     this.Write("!!(");
                 }
 
-                this.WritePart(binaryOperatorExpression.Left, toStringForLeft, leftResolverResult);
+                this.WritePart(binaryOperatorExpression.Left, toStringForLeft, leftResolverResult, isCoalescing);
 
                 if (isCoalescing)
                 {
@@ -442,7 +442,11 @@ namespace Bridge.Translator
                     this.Write(strictNullChecks ? " !== null" : " != null");
 
                     this.Write(" ? ");
-                    this.Write(variable);
+
+                    ConversionBlock.expressionMap.Add(binaryOperatorExpression.Left, variable);
+                    //this.Write(variable);
+                    binaryOperatorExpression.Left.AcceptVisitor(this.Emitter);
+                    ConversionBlock.expressionMap.Remove(binaryOperatorExpression.Left);
                 }
                 else if (charToString == 0)
                 {
@@ -870,8 +874,13 @@ namespace Bridge.Translator
             this.HandleType(resolveOperator, isUint ? KnownTypeCode.UInt64 : KnownTypeCode.Int64, op_name, action);
         }
 
-        private void WritePart(Expression expression, bool toString, ResolveResult rr)
+        private void WritePart(Expression expression, bool toString, ResolveResult rr, bool isCoalescing = false)
         {
+            if (isCoalescing)
+            {
+                ConversionBlock.expressionInWork.Add(expression);
+            }
+
             if (toString)
             {
                 var toStringMethod = rr.Type.GetMembers().FirstOrDefault(m =>
@@ -928,6 +937,11 @@ namespace Bridge.Translator
             else
             {
                 expression.AcceptVisitor(this.Emitter);
+            }
+
+            if (isCoalescing)
+            {
+                ConversionBlock.expressionInWork.Remove(expression);
             }
         }
     }

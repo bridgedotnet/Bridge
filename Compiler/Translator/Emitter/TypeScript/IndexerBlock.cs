@@ -29,7 +29,7 @@ namespace Bridge.Translator.TypeScript
         {
             if (!accessor.IsNull && this.Emitter.GetInline(accessor) == null)
             {
-                XmlToJsDoc.EmitComment(this, this.IndexerDeclaration);
+                XmlToJsDoc.EmitComment(this, this.IndexerDeclaration, !setter);
                 string name = Helpers.GetPropertyRef(this.IndexerDeclaration, this.Emitter, setter, false, false);
                 this.Write(name);
 

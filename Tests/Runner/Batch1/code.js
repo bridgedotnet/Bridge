@@ -9605,6 +9605,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Constants", {
         statics: {
+            MODULE_HTML5: "HTML5",
             PREFIX_SYSTEM_CLASSES: "Simple types",
             PREFIX_SYSTEM_INTERFACES: "System interface",
             PREFIX_COLLECTIONS: "Collections",
@@ -19096,6 +19097,92 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.throws(function () {
                 arr.set([0, 0, -1], 0);
             });
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.MutationObserverTests", {
+        statics: {
+            TARGET: "qunit-fixture",
+            ATTRIBUTE: "SPAN",
+            TYPE: "childList"
+        },
+        config: {
+            properties: {
+                Records: null
+            }
+        },
+        testNewlyAttachedElements: function () {
+            this.setRecords(null);
+
+            var done = Bridge.Test.Assert.async();
+
+            var root = document.getElementById(Bridge.ClientTest.MutationObserverTests.TARGET);
+
+            //setup observer
+            var observer = new MutationObserver(Bridge.fn.bind(this, $_.Bridge.ClientTest.MutationObserverTests.f1));
+
+            observer.observe(root, Bridge.merge(new Object(), {
+                subtree: true,
+                childList: true
+            } ));
+
+            var task = new System.Threading.Tasks.Task(function () {
+                // mutate DOM
+                // observer will be invoked asynchronously
+                root.appendChild(document.createElement('span'));
+            });
+
+            var task1 = task.continueWith($_.Bridge.ClientTest.MutationObserverTests.f2);
+
+            task1.continueWith(Bridge.fn.bind(this, function (x) {
+                try {
+                    this.assertRecords(this.getRecords());
+                }
+                catch (ex) {
+                    ex = System.Exception.create(ex);
+                    Bridge.Console.log(ex.toString());
+                }
+
+                observer.disconnect();
+
+                done();
+            }));
+
+            task.start();
+        },
+        assertRecords: function (records) {
+            Bridge.Test.Assert.notNull$1(records, "records");
+            Bridge.Test.Assert.areEqual$1(1, records.length, "records.Length");
+
+            var record = records[0];
+
+            Bridge.Test.Assert.notNull$1(record, "record");
+
+            Bridge.Test.Assert.notNull$1(record.target, "Target");
+            Bridge.Test.Assert.areEqual$1(Bridge.ClientTest.MutationObserverTests.TARGET, record.target.id, "Target Id");
+
+            Bridge.Test.Assert.areEqual$1(Bridge.ClientTest.MutationObserverTests.TYPE, record.type, "Type");
+
+            Bridge.Test.Assert.areEqual$1(0, record.removedNodes.length, "RemovedNodes");
+            Bridge.Test.Assert.areEqual$1(1, record.addedNodes.length, "AddedNodes");
+
+            var added = record.addedNodes[0];
+            Bridge.Test.Assert.notNull$1(added, "added");
+            Bridge.Test.Assert.areEqual$1(Bridge.ClientTest.MutationObserverTests.ATTRIBUTE, added.nodeName.toUpperCase(), "added.NodeName");
+
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.MutationObserverTests", $_);
+
+    Bridge.apply($_.Bridge.ClientTest.MutationObserverTests, {
+        f1: function (changes, _) {
+            if (changes.length > 0) {
+                this.setRecords(changes);
+            }
+        },
+        f2: function (x) {
+            System.Threading.Tasks.Task.delay(10);
         }
     });
 

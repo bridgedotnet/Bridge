@@ -28,7 +28,15 @@ namespace Bridge.Translator
             {
                 if (!ConversionBlock.expressionIgnoreUserDefine.Contains(expression))
                 {
-                    this.EmitConversionExpression();
+                    if (ConversionBlock.expressionMap.ContainsKey(expression))
+                    {
+                        this.Write(ConversionBlock.expressionMap[expression]);
+                    }
+                    else
+                    {
+                        this.EmitConversionExpression();
+                    }
+                    
                     return;
                 }
             }
@@ -54,7 +62,14 @@ namespace Bridge.Translator
                 return;
             }
 
-            this.EmitConversionExpression();
+            if (expression != null && ConversionBlock.expressionMap.ContainsKey(expression))
+            {
+                this.Write(ConversionBlock.expressionMap[expression]);
+            }
+            else
+            {
+                this.EmitConversionExpression();
+            }
 
             if (expressionInWork.Contains(expression) && !ConversionBlock.expressionIgnoreUserDefine.Contains(expression))
             {
@@ -87,8 +102,9 @@ namespace Bridge.Translator
             set;
         }
 
-        private static List<Expression> expressionInWork = new List<Expression>();
-        private static List<Expression> expressionIgnoreUserDefine = new List<Expression>();
+        internal static List<Expression> expressionInWork = new List<Expression>();
+        internal static List<Expression> expressionIgnoreUserDefine = new List<Expression>();
+        internal static Dictionary<Expression, string> expressionMap = new Dictionary<Expression, string>(); 
 
         protected virtual bool DisableEmitConversionExpression
         {

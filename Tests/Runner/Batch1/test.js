@@ -949,6 +949,8 @@
             QUnit.test("Guid - ToStringWithFormatWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_GuidTests.toStringWithFormatWorks);
             QUnit.test("Guid - NewGuidWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_GuidTests.newGuidWorks);
             QUnit.test("Guid - ToByteArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_GuidTests.toByteArrayWorks);
+            QUnit.module("HTML5");
+            QUnit.test("MutationObserver - TestNewlyAttachedElements", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_MutationObserverTests.testNewlyAttachedElements);
             QUnit.module("LINQ");
             QUnit.test("Aggregate - Test", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Linq_TestLinqAggregateOperators.test);
             QUnit.test("Aggregate - Bridge315", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Linq_TestLinqAggregateOperators.bridge315);
@@ -8636,6 +8638,16 @@
             setValueWithIndexOutOfRangeThrowsAnException: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.MultidimArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_MultidimArrayTests);
                 t.getFixture().setValueWithIndexOutOfRangeThrowsAnException();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_MutationObserverTests", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.MutationObserverTests)],
+        statics: {
+            testNewlyAttachedElements: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.MutationObserverTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_MutationObserverTests, 10);
+                t.getFixture().testNewlyAttachedElements();
             }
         }
     });
