@@ -249,8 +249,8 @@
         },
 
         getInterfaces: function (type) {
-            if (type.$interfaces || type.$baseInterfaces) {
-                return (type.$interfaces || []).concat(type.$baseInterfaces || []);
+            if (type.$allInterfaces) {
+                return type.$allInterfaces;
             } else if (type === Date) {
                 return [System.IComparable$1(Date), System.IEquatable$1(Date), System.IComparable, System.IFormattable];
             } else if (type === Number) {

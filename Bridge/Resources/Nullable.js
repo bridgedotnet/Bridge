@@ -185,7 +185,7 @@
                     return null;
                 },
 
-                instanceOf: function(obj) {
+                $is: function(obj) {
                     return Bridge.is(obj, T);
                 }
             }

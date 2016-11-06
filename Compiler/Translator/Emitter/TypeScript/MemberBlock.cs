@@ -59,8 +59,8 @@ namespace Bridge.Translator.TypeScript
                         var name = ev.GetName(this.Emitter);
                         name = Helpers.ReplaceFirstDollar(name);
 
-                        this.WriteEvent(ev, Helpers.GetAddOrRemove(true, name));
-                        this.WriteEvent(ev, Helpers.GetAddOrRemove(false, name));
+                        this.WriteEvent(ev, Helpers.GetAddOrRemove(true, name), true);
+                        this.WriteEvent(ev, Helpers.GetAddOrRemove(false, name), false);
                     }
                 }
             }
@@ -83,9 +83,9 @@ namespace Bridge.Translator.TypeScript
             new MethodsBlock(this.Emitter, this.TypeInfo, this.StaticBlock).Emit();
         }
 
-        private void WriteEvent(TypeConfigItem ev, string name)
+        private void WriteEvent(TypeConfigItem ev, string name, bool adder)
         {
-            XmlToJsDoc.EmitComment(this, ev.Entity);
+            XmlToJsDoc.EmitComment(this, ev.Entity, adder);
             this.Write(name);
             this.WriteOpenParentheses();
             this.Write("value");
@@ -102,7 +102,7 @@ namespace Bridge.Translator.TypeScript
 
         private void WriteProp(TypeConfigItem ev, string name, bool getter)
         {
-            XmlToJsDoc.EmitComment(this, ev.Entity);
+            XmlToJsDoc.EmitComment(this, ev.Entity, getter);
             this.Write(Helpers.GetSetOrGet(!getter));
             this.Write(name);
             this.WriteOpenParentheses();

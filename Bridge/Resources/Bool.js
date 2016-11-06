@@ -12,7 +12,7 @@
             return false;
         },
 
-        instanceOf: function (instance) {
+        $is: function (instance) {
             return typeof (instance) === "boolean";
         },
 

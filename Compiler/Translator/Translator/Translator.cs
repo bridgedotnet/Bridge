@@ -267,6 +267,18 @@ namespace Bridge.Translator
             sb.Append(Emitter.NEW_LINE);
         }
 
+        private static void NewLine(MemoryStream sb, string line = null)
+        {
+            if (line != null)
+            {
+                var b = OutputEncoding.GetBytes(line);
+                sb.Write(b, 0, b.Length);
+            }
+
+            var nl = OutputEncoding.GetBytes(Emitter.NEW_LINE);
+            sb.Write(nl, 0, nl.Length);
+        }
+
         public virtual Dictionary<string, string> SaveTo(string path, string defaultFileName)
         {
             var logger = this.Log;
@@ -705,16 +717,30 @@ namespace Bridge.Translator
 
             var file = CreateFileDirectory(outputPath, fileName);
 
-            string resourcesStr = null;
+            string content = null;
+            byte[] binary = null;
+
             using (var resourcesStream = ((EmbeddedResource)res).GetResourceStream())
             {
-                using (StreamReader reader = new StreamReader(resourcesStream))
+                if (FileHelper.IsJS(file.FullName) || preHandler != null)
                 {
-                    resourcesStr = reader.ReadToEnd();
+                    using (var reader = new StreamReader(resourcesStream))
+                    {
+                        content = reader.ReadToEnd();
+                    }
+                }
+                else
+                {
+                    binary = ReadStream(resourcesStream);
                 }
             }
-            var content = preHandler != null ? preHandler(resourcesStr) : resourcesStr;
-            this.SaveToFile(file.FullName, content);
+
+            if (preHandler != null)
+            {
+                content = preHandler(content);
+            }
+
+            this.SaveToFile(file.FullName, content, binary);
         }
 
         private string Minify(Minifier minifier, string source, CodeSettings settings)
@@ -783,13 +809,23 @@ namespace Bridge.Translator
             return this.EmitNode != null ? new EmitterException(this.EmitNode) : null;
         }
 
-        protected virtual void SaveToFile(string fileName, string content)
+        protected virtual void SaveToFile(string fileName, string content, byte[] binary = null)
         {
+            if (content != null && binary != null)
+            {
+                this.Log.Error("Both content and binary are not null for " + fileName + ". Will use content.");
+            }
+
             bool isJs = FileHelper.IsJS(fileName);
 
             if (this.AssemblyInfo.CombineScripts && isJs)
             {
                 this.Log.Trace("Combining scripts...");
+
+                if (content == null)
+                {
+                    throw new InvalidOperationException("Content should not be null for JavaScript output with CombineScripts option (" + fileName + ").");
+                }
 
                 bool isMinJs = FileHelper.IsMinJS(fileName);
                 StringBuilder buffer;
@@ -831,9 +867,18 @@ namespace Bridge.Translator
                 this.Log.Trace("Combining scripts done");
             }
 
-            File.WriteAllText(fileName, content, OutputEncoding);
+            if (content != null)
+            {
+                File.WriteAllText(fileName, content, OutputEncoding);
+                this.Log.Trace("Saving content (string) into " + fileName + " ...");
+            }
+            else
+            {
+                File.WriteAllBytes(fileName, binary);
+                this.Log.Trace("Saving binary into " + fileName + " ...");
+            }
 
-            this.Log.Trace("Save file " + fileName);
+            this.Log.Trace("Saved file " + fileName);
         }
 
         public void Flush(string path, string defaultFileName)

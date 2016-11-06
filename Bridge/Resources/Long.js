@@ -60,11 +60,13 @@
 
     System.Int64.$$name = "System.Int64";
     System.Int64.prototype.$$name = "System.Int64";
+    System.Int64.$kind = "struct";
+    System.Int64.prototype.$kind = "struct";
 
     System.Int64.$$inherits = [];
     Bridge.Class.addExtend(System.Int64, [System.IComparable, System.IFormattable, System.IComparable$1(System.Int64), System.IEquatable$1(System.Int64)]);
 
-    System.Int64.instanceOf = function (instance) {
+    System.Int64.$is = function (instance) {
         return instance instanceof System.Int64;
     };
 
@@ -585,10 +587,12 @@
 
     System.UInt64.$$name = "System.UInt64";
     System.UInt64.prototype.$$name = "System.UInt64";
+    System.UInt64.$kind = "struct";
+    System.UInt64.prototype.$kind = "struct";
     System.UInt64.$$inherits = [];
     Bridge.Class.addExtend(System.UInt64, [System.IComparable, System.IFormattable, System.IComparable$1(System.UInt64), System.IEquatable$1(System.UInt64)]);
 
-    System.UInt64.instanceOf = function (instance) {
+    System.UInt64.$is = function (instance) {
         return instance instanceof System.UInt64;
     };
 

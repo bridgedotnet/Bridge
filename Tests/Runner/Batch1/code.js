@@ -9614,6 +9614,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Constants", {
         statics: {
+            MODULE_HTML5: "HTML5",
             PREFIX_SYSTEM_CLASSES: "Simple types",
             PREFIX_SYSTEM_INTERFACES: "System interface",
             PREFIX_COLLECTIONS: "Collections",
@@ -19096,6 +19097,92 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.throws(function () {
                 arr.set([0, 0, -1], 0);
             });
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.MutationObserverTests", {
+        statics: {
+            TARGET: "qunit-fixture",
+            ATTRIBUTE: "SPAN",
+            TYPE: "childList"
+        },
+        config: {
+            properties: {
+                Records: null
+            }
+        },
+        testNewlyAttachedElements: function () {
+            this.setRecords(null);
+
+            var done = Bridge.Test.Assert.async();
+
+            var root = document.getElementById(Bridge.ClientTest.MutationObserverTests.TARGET);
+
+            //setup observer
+            var observer = new MutationObserver(Bridge.fn.bind(this, $_.Bridge.ClientTest.MutationObserverTests.f1));
+
+            observer.observe(root, Bridge.merge(new Object(), {
+                subtree: true,
+                childList: true
+            } ));
+
+            var task = new System.Threading.Tasks.Task(function () {
+                // mutate DOM
+                // observer will be invoked asynchronously
+                root.appendChild(document.createElement('span'));
+            });
+
+            var task1 = task.continueWith($_.Bridge.ClientTest.MutationObserverTests.f2);
+
+            task1.continueWith(Bridge.fn.bind(this, function (x) {
+                try {
+                    this.assertRecords(this.getRecords());
+                }
+                catch (ex) {
+                    ex = System.Exception.create(ex);
+                    Bridge.Console.log(ex.toString());
+                }
+
+                observer.disconnect();
+
+                done();
+            }));
+
+            task.start();
+        },
+        assertRecords: function (records) {
+            Bridge.Test.Assert.notNull$1(records, "records");
+            Bridge.Test.Assert.areEqual$1(1, records.length, "records.Length");
+
+            var record = records[0];
+
+            Bridge.Test.Assert.notNull$1(record, "record");
+
+            Bridge.Test.Assert.notNull$1(record.target, "Target");
+            Bridge.Test.Assert.areEqual$1(Bridge.ClientTest.MutationObserverTests.TARGET, record.target.id, "Target Id");
+
+            Bridge.Test.Assert.areEqual$1(Bridge.ClientTest.MutationObserverTests.TYPE, record.type, "Type");
+
+            Bridge.Test.Assert.areEqual$1(0, record.removedNodes.length, "RemovedNodes");
+            Bridge.Test.Assert.areEqual$1(1, record.addedNodes.length, "AddedNodes");
+
+            var added = record.addedNodes[0];
+            Bridge.Test.Assert.notNull$1(added, "added");
+            Bridge.Test.Assert.areEqual$1(Bridge.ClientTest.MutationObserverTests.ATTRIBUTE, added.nodeName.toUpperCase(), "added.NodeName");
+
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.MutationObserverTests", $_);
+
+    Bridge.apply($_.Bridge.ClientTest.MutationObserverTests, {
+        f1: function (changes, _) {
+            if (changes.length > 0) {
+                this.setRecords(changes);
+            }
+        },
+        f2: function (x) {
+            System.Threading.Tasks.Task.delay(10);
         }
     });
 
@@ -43175,7 +43262,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     });
 
     var $m = Bridge.setMetadata,
-        $n = [System,Bridge.ClientTest.Linq.Expressions,Bridge.ClientTest.Reflection,Bridge.ClientTest.SimpleTypes];
+        $n = [System,Bridge.ClientTest.Linq.Expressions,Bridge.ClientTest.Reflection];
     $m($n[1].ExpressionTests.C, function () { return {"m":[{"a":2,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":".ctor","t":1,"p":[$n[0].Int32,$n[0].Int32],"pi":[{"n":"a","pt":$n[0].Int32,"ps":0},{"n":"b","pt":$n[0].Int32,"ps":1}],"sn":"$ctor1"},{"a":2,"n":"M1","t":8,"pi":[{"n":"a","pt":$n[0].Int32,"ps":0},{"n":"b","pt":String,"ps":1}],"sn":"M1","rt":$n[0].Int32,"p":[$n[0].Int32,String]},{"a":2,"n":"M2","is":true,"t":8,"pi":[{"n":"a","pt":$n[0].Int32,"ps":0},{"n":"b","pt":String,"ps":1}],"sn":"M2","rt":$n[0].Int32,"p":[$n[0].Int32,String]},{"a":2,"n":"M4","t":8,"pi":[{"n":"a","pt":$n[0].Int32,"ps":0}],"sn":"M4","rt":$n[0].Int32,"p":[$n[0].Int32]},{"a":2,"n":"op_Addition","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_Addition","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_BitwiseAnd","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_BitwiseAnd","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_BitwiseOr","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_BitwiseOr","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_Decrement","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0}],"sn":"op_Decrement","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C]},{"a":2,"n":"op_Division","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_Division","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_Equality","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_Equality","rt":Boolean,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_ExclusiveOr","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_ExclusiveOr","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_Explicit","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0}],"sn":"op_Explicit","rt":$n[0].Int32,"p":[$n[1].ExpressionTests.C]},{"a":2,"n":"op_False","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0}],"sn":"op_False","rt":Boolean,"p":[$n[1].ExpressionTests.C]},{"a":2,"n":"op_GreaterThan","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_GreaterThan","rt":Boolean,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_GreaterThanOrEqual","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_GreaterThanOrEqual","rt":Boolean,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_Increment","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0}],"sn":"op_Increment","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C]},{"a":2,"n":"op_Inequality","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_Inequality","rt":Boolean,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_LeftShift","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[0].Int32,"ps":1}],"sn":"op_LeftShift","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C,$n[0].Int32]},{"a":2,"n":"op_LessThan","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_LessThan","rt":Boolean,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_LessThanOrEqual","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_LessThanOrEqual","rt":Boolean,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_LogicalNot","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0}],"sn":"op_LogicalNot","rt":Boolean,"p":[$n[1].ExpressionTests.C]},{"a":2,"n":"op_Modulus","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_Modulus","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_Multiply","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_Multiply","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_OnesComplement","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0}],"sn":"op_OnesComplement","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C]},{"a":2,"n":"op_Power","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_Power","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_RightShift","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[0].Int32,"ps":1}],"sn":"op_RightShift","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C,$n[0].Int32]},{"a":2,"n":"op_Subtraction","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_Subtraction","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_True","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0}],"sn":"op_True","rt":Boolean,"p":[$n[1].ExpressionTests.C]},{"a":2,"n":"op_UnaryNegation","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0}],"sn":"op_UnaryNegation","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C]},{"a":2,"n":"op_UnaryPlus","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0}],"sn":"op_UnaryPlus","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C]},{"a":2,"n":"CP","t":16,"rt":$n[1].ExpressionTests.C,"g":{"a":2,"n":"get_CP","t":8,"sn":"getCP","rt":$n[1].ExpressionTests.C},"s":{"a":2,"n":"set_CP","t":8,"pi":[{"n":"value","pt":$n[1].ExpressionTests.C,"ps":0}],"sn":"setCP","rt":Object,"p":[$n[1].ExpressionTests.C]}},{"a":2,"n":"Item","t":16,"rt":String,"p":[$n[0].Int32,String],"i":true,"ipi":[{"n":"a","pt":$n[0].Int32,"ps":0},{"n":"b","pt":String,"ps":1}],"g":{"a":2,"n":"get_Item","t":8,"pi":[{"n":"a","pt":$n[0].Int32,"ps":0},{"n":"b","pt":String,"ps":1}],"sn":"getItem","rt":String,"p":[$n[0].Int32,String]}},{"a":2,"n":"LP","t":16,"rt":$n[1].ExpressionTests.MyList,"g":{"a":2,"n":"get_LP","t":8,"sn":"getLP","rt":$n[1].ExpressionTests.MyList},"s":{"a":2,"n":"set_LP","t":8,"pi":[{"n":"value","pt":$n[1].ExpressionTests.MyList,"ps":0}],"sn":"setLP","rt":Object,"p":[$n[1].ExpressionTests.MyList]}},{"a":2,"n":"P1","t":16,"rt":$n[0].Int32,"g":{"a":2,"n":"get_P1","t":8,"sn":"getP1","rt":$n[0].Int32},"s":{"a":2,"n":"set_P1","t":8,"pi":[{"n":"value","pt":$n[0].Int32,"ps":0}],"sn":"setP1","rt":Object,"p":[$n[0].Int32]}},{"a":2,"n":"CF","t":4,"rt":$n[1].ExpressionTests.C,"sn":"CF"},{"a":2,"n":"F1","t":4,"rt":$n[0].Int32,"sn":"F1"},{"a":2,"n":"LF","t":4,"rt":$n[1].ExpressionTests.MyList,"sn":"LF"}]}; });
     $m($n[1].ExpressionTests.MyList, function () { return {"m":[{"a":2,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Add","t":8,"pi":[{"n":"i","pt":$n[0].Int32,"ps":0}],"sn":"add","rt":Object,"p":[$n[0].Int32]},{"a":2,"n":"Add","t":8,"pi":[{"n":"i","pt":$n[0].Int32,"ps":0},{"n":"j","pt":$n[0].Int32,"ps":1}],"sn":"add$1","rt":Object,"p":[$n[0].Int32,$n[0].Int32]}]}; });
     $m($n[2].AttributeTests.A2Attribute, function () { return {"am":true}; });
@@ -43237,22 +43324,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     $m($n[2].ReflectionTests.C8, function () { return {"m":[{"a":2,"n":"M1","t":8,"pi":[{"n":"a","pt":String,"ps":0},{"n":"b","pt":String,"ps":1}],"sn":"M1","rt":String,"p":[String,String]},{"a":2,"n":"M2","is":true,"t":8,"pi":[{"n":"a","pt":String,"ps":0},{"n":"b","pt":String,"ps":1}],"sn":"M2","rt":String,"p":[String,String]},{"a":2,"n":"M3","t":8,"pi":[{"n":"a","pt":String,"ps":0}],"tpc":2,"sn":"M3","rt":String,"p":[String]},{"a":2,"n":"M4","is":true,"t":8,"pi":[{"n":"a","pt":String,"ps":0}],"tpc":2,"sn":"M4","rt":String,"p":[String]}]}; });
     $m($n[2].ReflectionTests.C9$2, function (T1, T2) { return {"m":[{"a":2,"n":"M","is":true,"t":8,"pi":[{"n":"a","pt":String,"ps":0}],"sn":"m","rt":String,"p":[String]}]}; });
     $m($n[2].ReflectionTests.S1, function () { return {"m":[{"at":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.ctor()],"a":2,"n":"M2","t":8,"sn":"M2","rt":Object},{"a":2,"n":"M3","t":8,"sn":"M3","rt":Object}]}; });
-    $m($n[3].EnumTests, function () { return {"m":[{"at":[Bridge.merge(new Bridge.Test.IgnoreTest(), {
-        setUntil: null
-    } )],"a":2,"n":"CreatingInstanceOfEnumTypeReturnsZero","t":8,"sn":"creatingInstanceOfEnumTypeReturnsZero","rt":Object},{"at":[Bridge.merge(new Bridge.Test.IgnoreTest(), {
-        setUntil: null
-    } )],"a":2,"n":"DefaultConstructorOfEnumTypeReturnsZero","t":8,"sn":"defaultConstructorOfEnumTypeReturnsZero","rt":Object},{"at":[Bridge.merge(new Bridge.Test.IgnoreTest(), {
-        setUntil: null
-    } )],"a":2,"n":"DefaultExpressionWithEnumReturnsZero","t":8,"sn":"defaultExpressionWithEnumReturnsZero","rt":Object},{"at":[Bridge.merge(new Bridge.Test.IgnoreTest(), {
-        setUntil: null
-    } )],"a":2,"n":"DefaultValueOfEnumClassIsNull","t":8,"sn":"defaultValueOfEnumClassIsNull","rt":Object},{"at":[Bridge.merge(new Bridge.Test.IgnoreTest(), {
-        setUntil: null
-    } )],"a":2,"n":"DefaultValueOfEnumTypeIsFirstValue","t":8,"sn":"defaultValueOfEnumTypeIsFirstValue","rt":Object}]}; });
-    $m($n[3].JsDateTimeTests, function () { return {"m":[{"at":[Bridge.merge(new Bridge.Test.IgnoreTest(), {
-        setUntil: null
-    } )],"a":2,"n":"IComparableCompareToWorks","t":8,"sn":"iComparableCompareToWorks","rt":Object},{"at":[Bridge.merge(new Bridge.Test.IgnoreTest(), {
-        setUntil: null
-    } )],"a":2,"n":"IEquatableEqualsWorks","t":8,"sn":"iEquatableEqualsWorks","rt":Object}]}; });
     $m($n[2].AttributeTests.C3, function () { return {"at":[new Bridge.ClientTest.Reflection.AttributeTests.A3Attribute(3)]}; });
     $m($n[2].AttributeTests.C5, function () { return {"at":[new Bridge.ClientTest.Reflection.AttributeTests.A1Attribute(5)]}; });
     $m($n[2].AttributeTests.C6, function () { return {"at":[new Bridge.ClientTest.Reflection.AttributeTests.A2Attribute(6)]}; });

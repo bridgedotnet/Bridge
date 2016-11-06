@@ -1246,6 +1246,32 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1081", {
+        statics: {
+            testTimeSpanMsFormat: function () {
+                Bridge.Test.Assert.areEqual$1("00:00.000", new System.TimeSpan(System.Int64(0)).toString("mm\\:ss\\.fff"), "Test case");
+
+                var ts = new System.TimeSpan(12, 23, 32, 43, 893);
+
+                Bridge.Test.Assert.areEqual$1("32:43.8", ts.toString("mm\\:ss\\.f"), "Escapeed by \\ f");
+                Bridge.Test.Assert.areEqual$1("32:43.89", ts.toString("mm\\:ss\\.ff"), "Escapeed by \\ ff");
+                Bridge.Test.Assert.areEqual$1("32:43.893", ts.toString("mm\\:ss\\.fff"), "Escapeed by \\ fff");
+                Bridge.Test.Assert.areEqual$1("32:43.8930", ts.toString("mm\\:ss\\.ffff"), "Escapeed by \\ ffff");
+                Bridge.Test.Assert.areEqual$1("32:43.89300", ts.toString("mm\\:ss\\.fffff"), "Escapeed by \\ fffff");
+                Bridge.Test.Assert.areEqual$1("32:43.893000", ts.toString("mm\\:ss\\.ffffff"), "Escapeed by \\ ffffff");
+                Bridge.Test.Assert.areEqual$1("32:43.8930000", ts.toString("mm\\:ss\\.fffffff"), "Escapeed by \\ fffffff");
+
+                Bridge.Test.Assert.areEqual$1("32:43.8", ts.toString("mm':'ss'.'f"), "Escapeed by '' f");
+                Bridge.Test.Assert.areEqual$1("32:43.89", ts.toString("mm':'ss'.'ff"), "Escapeed by '' ff");
+                Bridge.Test.Assert.areEqual$1("32:43.893", ts.toString("mm':'ss'.'fff"), "Escapeed by '' fff");
+                Bridge.Test.Assert.areEqual$1("32:43.8930", ts.toString("mm':'ss'.'ffff"), "Escapeed by '' ffff");
+                Bridge.Test.Assert.areEqual$1("32:43.89300", ts.toString("mm':'ss'.'fffff"), "Escapeed by '' fffff");
+                Bridge.Test.Assert.areEqual$1("32:43.893000", ts.toString("mm':'ss'.'ffffff"), "Escapeed by '' ffffff");
+                Bridge.Test.Assert.areEqual$1("32:43.8930000", ts.toString("mm':'ss'.'fffffff"), "Escapeed by '' fffffff");
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1083", {
         statics: {
             testExternalEnum: function () {
@@ -6861,6 +6887,8 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
+
+
                                     bar = function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -6890,7 +6918,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    }; /// Async method lacks 'await' operators and will run synchronously
+                                    };
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -10790,6 +10818,37 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2003", {
+        statics: {
+            testThisIsBindInTemplatedMemberMethods: function () {
+                var sut = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2003.Helper();
+                sut.setSomeProp(5);
+                sut.createAndCallLambda();
+                Bridge.Test.Assert.areEqual(6, sut.getSomeProp());
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2003.Helper", {
+        config: {
+            properties: {
+                SomeProp: 0
+            }
+        },
+        createAndCallLambda: function () {
+            var cb = Bridge.fn.bind(this, $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2003.Helper.f1);
+            cb();
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2003.Helper", $_);
+
+    Bridge.apply($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2003.Helper, {
+        f1: function () {
+            return this.setSomeProp(this.getSomeProp() + 1);
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011", {
         statics: {
             overloadedMethod: function (T, value) {
@@ -10802,12 +10861,12 @@ Bridge.$N1391Result =                 r;
         testCase: function () {
             var $t;
             var nullableBool = false;
-            var varValue = ($t = nullableBool, $t != null ? Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(Boolean).op_Implicit($t) : Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(Boolean).getMissing());
+            var varValue = ($t = nullableBool, $t != null ? $t : Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(Boolean).getMissing());
 
             var typedValue = varValue;
             Bridge.Test.Assert.areStrictEqual(false, varValue.field);
             Bridge.Test.Assert.areEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.overloadedMethod(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(Boolean), typedValue));
-            Bridge.Test.Assert.areEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.overloadedMethod(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(Boolean), varValue));
+            Bridge.Test.Assert.areEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.overloadedMethod$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(Boolean), varValue));
         }
     });
 

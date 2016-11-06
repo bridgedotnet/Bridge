@@ -2,6 +2,8 @@
 {
     public static class Constants
     {
+        public const string MODULE_HTML5 = "HTML5";
+
         public const string PREFIX_SYSTEM_CLASSES = "Simple types";
         public const string PREFIX_SYSTEM_INTERFACES = "System interface";
         public const string PREFIX_COLLECTIONS = "Collections";

@@ -21,6 +21,7 @@
 *.py text
 *.sln text
 *.sql text
+*.svg eol=lf
 *.d.ts eol=lf
 *.target text
 *.txt eol=lf
@@ -30,8 +31,12 @@
 *.bmp binary
 *.dat binary
 *.dll binary
+*.eot binary
 *.exe binary
 *.ico binary
 *.jar binary
 *.jpg binary
 *.png binary
+*.ttf binary
+*.woff binary
+*.woff2 binary

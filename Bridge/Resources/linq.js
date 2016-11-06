@@ -2929,6 +2929,9 @@
     };
     Grouping.prototype = new ArrayEnumerable();
 
+    Grouping.$$inherits = [];
+    Bridge.Class.addExtend(Grouping, [System.Collections.IEnumerable]);
+
     // module export
     if (typeof define === Types.Function && define.amd) { // AMD
         define("linqjs", [], function () { return Enumerable; });

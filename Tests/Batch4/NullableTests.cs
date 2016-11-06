@@ -400,14 +400,14 @@ namespace Bridge.ClientTest.Batch4
         }
 
         // #SPI
-        //[Test]
-        //public void LiftedUnaryMinusWorksWithUserDefinedOperators_SPI_1634()
-        //{
-        //    MyType? a = 2, c = null;
-        //    // #1634
-        //    Assert.AreStrictEqual(-a, -2);
-        //    Assert.AreStrictEqual(-c, null);
-        //}
+        [Test]
+        public void LiftedUnaryMinusWorksWithUserDefinedOperators_SPI_1634()
+        {
+            MyType? a = 2, c = null;
+            // #1634
+            Assert.AreStrictEqual(-a, -2);
+            Assert.AreStrictEqual(-c, null);
+        }
 
         [Test]
         public void LiftedBooleanAndWorks()

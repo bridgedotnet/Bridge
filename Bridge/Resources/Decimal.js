@@ -42,11 +42,12 @@
 
     System.Decimal.$$name = "System.Decimal";
     System.Decimal.prototype.$$name = "System.Decimal";
-
+    System.Decimal.$kind = "struct";
+    System.Decimal.prototype.$kind = "struct";
     System.Decimal.$$inherits = [];
     Bridge.Class.addExtend(System.Decimal, [System.IComparable, System.IFormattable, System.IComparable$1(System.Decimal), System.IEquatable$1(System.Decimal)]);
 
-    System.Decimal.instanceOf = function (instance) {
+    System.Decimal.$is = function (instance) {
         return instance instanceof System.Decimal;
     };
 
@@ -280,7 +281,7 @@
 
         var i = Bridge.Int.trunc(System.Decimal.getValue(v).toNumber());
 
-        if (!Bridge.Int.instanceOf(i)) {
+        if (!Bridge.Int.$is(i)) {
             throw new System.OverflowException();
         }
 

@@ -6,7 +6,7 @@
 
             max: 65535,
 
-            instanceOf: function (instance) {
+            $is: function (instance) {
                 return typeof (instance) === "number" && Math.round(instance, 0) == instance && instance >= System.Char.min && instance <= System.Char.max;
             },
 

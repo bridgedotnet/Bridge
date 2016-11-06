@@ -56,7 +56,7 @@
     <DownloadNuGet OutputFilename="$(NuGetExePath)" Condition=" '$(DownloadNuGetExe)' == 'true' AND !Exists('$(NuGetExePath)')" />
   </Target>
 
-  <Target Name="BuildPackage" DependsOnTargets="CheckPrerequisites">
+  <Target Name="BuildPackage" DependsOnTargets="CheckPrerequisites; AfterBuild">
     <PropertyGroup>
       <NuGetUseExplicitVersion Condition=" '$(NuGetUseExplicitVersion)' == '' ">false</NuGetUseExplicitVersion>
       <!-- Set default NuGetPackageOutputDir if not defined-->
