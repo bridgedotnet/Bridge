@@ -25,7 +25,7 @@ namespace Bridge.Contract
     {
         private const char newLine = Bridge.Contract.XmlToJSConstants.DEFAULT_LINE_SEPARATOR;
 
-        public static void EmitComment(IAbstractEmitterBlock block, AstNode node)
+        public static void EmitComment(IAbstractEmitterBlock block, AstNode node, bool? getter = null)
         {
             if (block.Emitter.AssemblyInfo.GenerateDocumentation == Bridge.Contract.DocumentationMode.None || node.Parent == null)
             {
@@ -41,6 +41,9 @@ namespace Bridge.Contract
             }
 
             object value = null;
+            var rr = block.Emitter.Resolver.ResolveNode(node, block.Emitter);
+            string source = BuildCommentString(visitor.Comments);
+
             if (node is FieldDeclaration)
             {
                 var fieldDecl = (FieldDeclaration)node;
@@ -55,17 +58,35 @@ namespace Bridge.Contract
             else if (node is EventDeclaration)
             {
                 var eventDecl = (EventDeclaration)node;
-                node = eventDecl.Variables.First();
-                var initializer = eventDecl.Variables.First().Initializer as PrimitiveExpression;
-
-                if (initializer != null)
+                foreach (var evVar in eventDecl.Variables)
                 {
-                    value = initializer.Value;
-                }
-            }
+                    var ev_rr = block.Emitter.Resolver.ResolveNode(evVar, block.Emitter);
+                    var memberResolveResult = ev_rr as MemberResolveResult;
+                    var ev = memberResolveResult.Member as IEvent;
 
-            var rr = block.Emitter.Resolver.ResolveNode(node, block.Emitter);
-            string source = BuildCommentString(visitor.Comments);
+                    if (!getter.HasValue || getter.Value)
+                    {
+                        var comment = new JsDocComment();
+                        InitMember(comment, ev.AddAccessor, block.Emitter, null);
+                        comment.Function = Helpers.GetEventRef(ev, block.Emitter, false);
+                        block.Write(
+                            block.WriteIndentToString(XmlToJsDoc.ReadComment(source, ev_rr, block.Emitter, comment)));
+                        block.WriteNewLine();
+                    }
+
+                    if (!getter.HasValue || !getter.Value)
+                    {
+                        var comment = new JsDocComment();
+                        InitMember(comment, ev.RemoveAccessor, block.Emitter, null);
+                        comment.Function = Helpers.GetEventRef(ev, block.Emitter, true);
+                        block.Write(
+                            block.WriteIndentToString(XmlToJsDoc.ReadComment(source, ev_rr, block.Emitter, comment)));
+                        block.WriteNewLine();
+                    }
+                }
+                
+                return;
+            }
 
             var prop = node as PropertyDeclaration;
             if (prop != null)
@@ -73,15 +94,34 @@ namespace Bridge.Contract
                 var memberResolveResult = rr as MemberResolveResult;
                 var rProp = memberResolveResult.Member as IProperty;
 
-                var comment = new JsDocComment();
-                InitMember(comment, rProp.Getter, block.Emitter, null);
-                comment.Function = Helpers.GetPropertyRef(rProp, block.Emitter, false);
-                block.Write(block.WriteIndentToString(XmlToJsDoc.ReadComment(source, rr, block.Emitter, comment)));
-                block.WriteNewLine();
+                if (!getter.HasValue || getter.Value)
+                {
+                    var comment = new JsDocComment();
+                    InitMember(comment, rProp.Getter, block.Emitter, null);
+                    comment.Function = Helpers.GetPropertyRef(rProp, block.Emitter, false);
+                    block.Write(block.WriteIndentToString(XmlToJsDoc.ReadComment(source, rr, block.Emitter, comment)));
+                    block.WriteNewLine();
+                }
 
-                comment = new JsDocComment();
-                InitMember(comment, rProp.Setter, block.Emitter, null);
-                comment.Function = Helpers.GetPropertyRef(rProp, block.Emitter, true);
+                if (!getter.HasValue || !getter.Value)
+                {
+                    var comment = new JsDocComment();
+                    InitMember(comment, rProp.Setter, block.Emitter, null);
+                    comment.Function = Helpers.GetPropertyRef(rProp, block.Emitter, true);
+                    block.Write(block.WriteIndentToString(XmlToJsDoc.ReadComment(source, rr, block.Emitter, comment)));
+                    block.WriteNewLine();
+                }
+                return;
+            }
+
+            var indexer = node as IndexerDeclaration;
+            if (indexer != null)
+            {
+                var memberResolveResult = rr as MemberResolveResult;
+                var rProp = memberResolveResult.Member as IProperty;
+
+                var comment = new JsDocComment();
+                InitMember(comment, getter.HasValue && getter.Value ? rProp.Getter : rProp.Setter, block.Emitter, null);
                 block.Write(block.WriteIndentToString(XmlToJsDoc.ReadComment(source, rr, block.Emitter, comment)));
                 block.WriteNewLine();
                 return;
@@ -249,14 +289,17 @@ namespace Bridge.Contract
                         param.Name = attr.Value.Trim();
                     }
 
-                    attr = node.Attributes["type"];
-                    if (attr != null)
+                    if (string.IsNullOrWhiteSpace(param.Type))
                     {
-                        param.Type = attr.Value.Trim();
-                    }
-                    else if (rr != null)
-                    {
-                        param.Type = XmlToJsDoc.GetParamTypeName(null, rr, emitter);
+                        attr = node.Attributes["type"];
+                        if (attr != null)
+                        {
+                            param.Type = attr.Value.Trim();
+                        }
+                        else if (rr != null)
+                        {
+                            param.Type = XmlToJsDoc.GetParamTypeName(null, rr, emitter);
+                        }
                     }
 
                     var text = HandleNode(node);

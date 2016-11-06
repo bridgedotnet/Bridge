@@ -73,6 +73,7 @@
     <Compile Include="GamepadMappingType.cs" />
     <Compile Include="Interfaces\Touch.cs" />
     <Compile Include="Interfaces\TouchList.cs" />
+    <Compile Include="MutationObserver.cs" />
     <Compile Include="String.cs" />
     <Compile Include="TypedArray\Float32Array.cs" />
     <Compile Include="TypedArray\Float64Array.cs" />

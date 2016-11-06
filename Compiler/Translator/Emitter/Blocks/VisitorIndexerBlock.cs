@@ -60,7 +60,7 @@ namespace Bridge.Translator
                     this.AddLocals(new ParameterDeclaration[0], accessor.Body);
                 }
 
-                XmlToJsDoc.EmitComment(this, this.IndexerDeclaration);
+                XmlToJsDoc.EmitComment(this, this.IndexerDeclaration, !setter);
 
                 string accName = null;
 
