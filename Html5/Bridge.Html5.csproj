@@ -73,6 +73,7 @@
     <Compile Include="GamepadMappingType.cs" />
     <Compile Include="Interfaces\Touch.cs" />
     <Compile Include="Interfaces\TouchList.cs" />
+    <Compile Include="MutationObserver.cs" />
     <Compile Include="String.cs" />
     <Compile Include="TypedArray\Float32Array.cs" />
     <Compile Include="TypedArray\Float64Array.cs" />
@@ -352,6 +353,9 @@
     <NuGetPackageSourcePath Include="$(SolutionDir).build\specs\Bridge.Html5.nuspec">
       <Path>$(SolutionDir).build\specs\Bridge.Html5.nuspec</Path>
     </NuGetPackageSourcePath>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
   </ItemGroup>
   <Import Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'" Project="$(SolutionDir).build\common\NuGet.Build.Package.targets" />
   <Target Name="CleanProjectNuGetOutput" BeforeTargets="Clean">

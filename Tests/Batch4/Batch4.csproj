@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="ActivatorTests.cs" />
     <Compile Include="Collections\JsDictionaryTests.cs" />
+    <Compile Include="MutationObserverTests.cs" />
     <Compile Include="TestHelper.cs" />
     <Compile Include="RefParameterTests.cs" />
     <Compile Include="ArgumentsTests.cs" />
