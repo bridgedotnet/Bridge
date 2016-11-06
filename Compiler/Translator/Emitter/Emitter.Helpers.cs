@@ -713,7 +713,7 @@ namespace Bridge.Translator
 
         public virtual bool IsNativeMember(string fullName)
         {
-            return fullName.StartsWith(Bridge.Translator.Translator.Bridge_ASSEMBLY + ".", StringComparison.Ordinal) || fullName.StartsWith("System.", StringComparison.Ordinal);
+            return fullName.StartsWith(Bridge.Translator.Translator.Bridge_ASSEMBLY_DOT, StringComparison.Ordinal) || fullName.StartsWith("System.", StringComparison.Ordinal);
         }
 
         public virtual bool IsMemberConst(IMember member)

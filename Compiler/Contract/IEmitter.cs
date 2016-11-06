@@ -344,13 +344,13 @@ namespace Bridge.Contract
         {
             get;
         }
- 
+
         Dictionary<Tuple<IMember, bool, bool>, OverloadsCollection> OverloadsCacheMembers
         {
             get;
         }
 
-    string GetFieldName(FieldDeclaration field);
+        string GetFieldName(FieldDeclaration field);
 
         string GetEventName(EventDeclaration evt);
 
@@ -465,7 +465,7 @@ namespace Bridge.Contract
         Dictionary<string, int> NamespacesCache
         {
             get; set;
-        } 
+        }
 
         void WriteIndented(string s, int? position = null);
         string GetReflectionName(IType type);

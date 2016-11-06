@@ -111,7 +111,7 @@ namespace Bridge.Translator
                 }
             }
 
-            var zeroPlaceholder = new TypeInfo() {Key = "0"};
+            var zeroPlaceholder = new TypeInfo() { Key = "0" };
             sortable.Add(zeroPlaceholder);
             sortable.Sort(this.CompareTypeInfosByPriority);
 
@@ -293,7 +293,7 @@ namespace Bridge.Translator
                         foreach (var process in processes)
                         {
                             hitCounters[1]++;
-                            
+
                             tInfo = this.Types.First(ti => GetReflectionName(ti.Type) == process.Name);
                             var reflectionName = GetReflectionName(tInfo.Type);
                             if (list.All(t => GetReflectionName(t.Type) != reflectionName))
@@ -420,7 +420,7 @@ namespace Bridge.Translator
             return sb.ToString();
         }
 
-        private Dictionary<TypeDefinition, int> priorityMap = new Dictionary<TypeDefinition, int>(); 
+        private Dictionary<TypeDefinition, int> priorityMap = new Dictionary<TypeDefinition, int>();
         public virtual int GetPriority(TypeDefinition type)
         {
             if (this.priorityMap.ContainsKey(type))
