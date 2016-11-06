@@ -10861,12 +10861,12 @@ Bridge.$N1391Result =                 r;
         testOverloadSelectionWhenNullCoalescingOperator: function () {
             var $t;
             var nullableBool = false;
-            var varValue = ($t = nullableBool, $t != null ? $t : Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(Boolean).getMissing());
+            var varValue = ($t = nullableBool, $t != null ? Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(Boolean).op_Implicit($t) : Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(Boolean).getMissing());
 
             var typedValue = varValue;
             Bridge.Test.Assert.areStrictEqual(false, varValue.field);
             Bridge.Test.Assert.areEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.overloadedMethod(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(Boolean), typedValue));
-            Bridge.Test.Assert.areEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.overloadedMethod$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(Boolean), varValue));
+            Bridge.Test.Assert.areEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.overloadedMethod(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(Boolean), varValue));
         }
     });
 
