@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Bridge.Test;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
@@ -13,7 +12,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public struct Optional<T> : IEquatable<Optional<T>>
 #pragma warning restore 660,661
         {
-            public static Optional<T> Missing { get { return _missing; } }
+            public static Optional<T> Missing
+            {
+                get
+                {
+                    return _missing;
+                }
+            }
             private static Optional<T> _missing = new Optional<T>();
             // implementations below of IEquatable are not real, and only exist to allow IEquatable to be applied.
             public static implicit operator Optional<T>(T value)
@@ -46,7 +51,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [Test]
-        public void TestCase()
+        public void TestOverloadSelectionWhenNullCoalescingOperator()
         {
             bool? nullableBool = false;
             var varValue = nullableBool ?? Optional<bool>.Missing;

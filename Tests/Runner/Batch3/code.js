@@ -10858,7 +10858,7 @@ Bridge.$N1391Result =                 r;
                 return 2;
             }
         },
-        testCase: function () {
+        testOverloadSelectionWhenNullCoalescingOperator: function () {
             var $t;
             var nullableBool = false;
             var varValue = ($t = nullableBool, $t != null ? $t : Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(Boolean).getMissing());
