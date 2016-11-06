@@ -10918,7 +10918,7 @@ Bridge.$N1391Result =                 r;
                 self["Bridge$ClientTest$Batch3$BridgeIssues$Bridge2013$IEvGen$1$" + Bridge.getTypeAlias(T) + "$addEv"]($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2013.f1);
             }
         },
-        testCase: function () {
+        testSubscriptionToEventDefinedInGenericInterfaceViaExtensionMethod: function () {
             var sut = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2013.EvGen$1(System.Int32))();
             Bridge.ClientTest.Batch3.BridgeIssues.Bridge2013.attachViaExtension(System.Int32, sut);
 
@@ -10961,7 +10961,7 @@ Bridge.$N1391Result =                 r;
                     }).sum();
             }
         },
-        testCase: function () {
+        testLambdaExpressionsInGenericMethod: function () {
             var res = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2019.process(String);
             Bridge.Test.Assert.areEqual(17, res);
         }

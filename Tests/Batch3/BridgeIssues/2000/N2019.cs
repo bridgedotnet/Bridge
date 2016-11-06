@@ -12,14 +12,20 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     {
         public interface ISome<T>
         {
-            int SomeProp { set; get; }
+            int SomeProp
+            {
+                set; get;
+            }
 
             void SomeMethod();
         }
 
         public class Some<T> : ISome<T>
         {
-            public int SomeProp { set; get; }
+            public int SomeProp
+            {
+                set; get;
+            }
 
             public void SomeMethod()
             {
@@ -42,7 +48,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
 
         [Test]
-        public void TestCase()
+        public void TestLambdaExpressionsInGenericMethod()
         {
             var res = Bridge2019.Process<string>();
             Assert.AreEqual(17, res);

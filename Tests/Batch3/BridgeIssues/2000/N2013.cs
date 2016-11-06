@@ -16,7 +16,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public class EvGen<T> : IEvGen<T>
         {
             public event Action Ev;
-            public bool HasListeners { get { return Ev != null; } }
+            public bool HasListeners
+            {
+                get
+                {
+                    return Ev != null;
+                }
+            }
         }
 
         public static void AttachViaExtension<T>(IEvGen<T> self)
@@ -26,7 +32,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
 
         [Test]
-        public void TestCase()
+        public void TestSubscriptionToEventDefinedInGenericInterfaceViaExtensionMethod()
         {
             var sut = new EvGen<int>();
             Bridge2013.AttachViaExtension(sut);
