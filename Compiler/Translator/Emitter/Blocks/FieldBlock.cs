@@ -138,7 +138,22 @@ namespace Bridge.Translator
                 {
                     isPrimitive = true;
                     constValue = primitiveExpr.Value;
-                    //writeScript = true;
+
+                    ResolveResult rr = null;
+                    if (member.VarInitializer != null)
+                    {
+                        rr = this.Emitter.Resolver.ResolveNode(member.VarInitializer, this.Emitter);
+                    }
+                    else
+                    {
+                        rr = this.Emitter.Resolver.ResolveNode(member.Entity, this.Emitter);
+                    }
+
+                    if (rr != null && rr.Type.Kind == TypeKind.Enum)
+                    {
+                        constValue = Helpers.GetEnumValue(this.Emitter, rr.Type, constValue);
+                        writeScript = true;
+                    }
                 }
 
                 if (constValue is RawValue)
@@ -157,6 +172,12 @@ namespace Bridge.Translator
                     {
                         isPrimitive = true;
                         constValue = constrr.ConstantValue;
+
+                        if (constrr.Type.Kind == TypeKind.Enum)
+                        {
+                            constValue = Helpers.GetEnumValue(this.Emitter, constrr.Type, constrr.ConstantValue);
+                        }
+
                         writeScript = true;
                     }
                 }
@@ -200,6 +221,10 @@ namespace Bridge.Translator
                         }
 
                         constValue = Inspector.GetDefaultFieldValue(rr.Type, astType);
+                        if (rr.Type.Kind == TypeKind.Enum)
+                        {
+                            constValue = Helpers.GetEnumValue(this.Emitter, rr.Type, constValue);
+                        }
                         isNullable = NullableType.IsNullable(rr.Type);
                         needContinue = constValue is IType;
                         writeScript = true;

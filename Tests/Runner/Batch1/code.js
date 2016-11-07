@@ -20275,7 +20275,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [System.Attribute],
         config: {
             properties: {
-                E: 0
+                E: "v1"
             }
         },
         ctor: function (e) {

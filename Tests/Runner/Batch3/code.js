@@ -6887,8 +6887,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -6918,7 +6916,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    };
+                                    }; /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -11019,6 +11017,27 @@ Bridge.$N1391Result =                 r;
         statics: {
             Whatever: 0
         }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2033", {
+        statics: {
+            state: "new",
+            state1: "new",
+            testCase: function () {
+                Bridge.Test.Assert.areEqual("new", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2033.state);
+                Bridge.Test.Assert.areEqual("new", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2033.state1);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2033.GameState", {
+        $kind: "enum",
+        statics: {
+            new: "new",
+            playing: "playing",
+            finished: "finished"
+        },
+        $utype: System.String
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
