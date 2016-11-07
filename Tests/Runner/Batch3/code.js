@@ -10973,7 +10973,7 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2024", {
         statics: {
-            testCase: function () {
+            testAccessEnumInAnotherClassUsingStatic: function () {
                 Bridge.Test.Assert.areEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2024.Class2.Options.Hello);
                 Bridge.Test.Assert.areEqual("Test", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2024.Class2.Inner.get$Name());
             }

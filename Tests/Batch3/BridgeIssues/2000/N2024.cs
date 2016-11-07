@@ -21,7 +21,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
-        public static void TestCase()
+        [Test]
+        public static void TestAccessEnumInAnotherClassUsingStatic()
         {
             Assert.AreEqual(0, Options.Hello);
             Assert.AreEqual("Test", Inner.Name);

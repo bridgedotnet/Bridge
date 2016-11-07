@@ -736,7 +736,7 @@ namespace Bridge.Translator
             return p as T;
         }
 
-        public static bool IsAccessableIn(this ITypeSymbol type, ITypeSymbol currentType)
+        public static bool IsAccessibleIn(this ITypeSymbol type, ITypeSymbol currentType)
         {
             var list = new List<ITypeSymbol>();
 
