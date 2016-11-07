@@ -51,9 +51,6 @@ declare module Bridge {
 
     var fn: fnMethods;
 
-    export class Attribute {
-    }
-
     export interface Array {
         get(arr: any[], indices: number[]): any;
         set(arr: any[], indices: number[], value: any);
@@ -222,6 +219,9 @@ declare module Bridge {
 }
 
 declare module System {
+    export class Attribute {
+    }
+
     export interface Nullable {
         hasValue(obj: any): boolean;
         getValue<T>(obj: T): T;

@@ -3,6 +3,8 @@ using Bridge.Contract.Constants;
 
 using ICSharpCode.NRefactory.CSharp;
 using System.Collections.Generic;
+using ICSharpCode.NRefactory.Semantics;
+using ICSharpCode.NRefactory.TypeSystem;
 
 namespace Bridge.Translator.TypeScript
 {
@@ -30,15 +32,17 @@ namespace Bridge.Translator.TypeScript
         {
             XmlToJsDoc.EmitComment(this, this.MethodDeclaration);
             var overloads = OverloadsCollection.Create(this.Emitter, methodDeclaration);
-
+            var memberResult = this.Emitter.Resolver.ResolveNode(methodDeclaration, this.Emitter) as MemberResolveResult;
+            var ignoreInterface = memberResult.Member.DeclaringType.Kind == TypeKind.Interface &&
+                                      memberResult.Member.DeclaringType.TypeParameterCount > 0;
             if (overloads.HasOverloads)
             {
-                string name = overloads.GetOverloadName();
+                string name = overloads.GetOverloadName(ignoreInterface);
                 this.Write(name);
             }
             else
             {
-                this.Write(this.Emitter.GetEntityName(methodDeclaration));
+                this.Write(this.Emitter.GetEntityName(methodDeclaration, ignoreInterface: ignoreInterface));
             }
 
             bool needComma = false;

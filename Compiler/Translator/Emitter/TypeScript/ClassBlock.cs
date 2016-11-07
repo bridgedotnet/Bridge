@@ -301,7 +301,7 @@ namespace Bridge.Translator.TypeScript
                 string name = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter);
                 if (name.IsEmpty())
                 {
-                    name = this.TypeInfo.Type.Name;
+                    name = BridgeTypes.ToJsName(this.TypeInfo.Type, this.Emitter, true, true);
                 }
 
                 this.Write("module ");

@@ -1,5 +1,7 @@
 ﻿using Bridge.Contract;
 using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.NRefactory.Semantics;
+using ICSharpCode.NRefactory.TypeSystem;
 
 namespace Bridge.Translator.TypeScript
 {
@@ -29,7 +31,10 @@ namespace Bridge.Translator.TypeScript
             if (!accessor.IsNull && this.Emitter.GetInline(accessor) == null)
             {
                 XmlToJsDoc.EmitComment(this, customEventDeclaration);
-                this.Write(Helpers.GetEventRef(customEventDeclaration, this.Emitter, remover, false, false));
+                var memberResult = this.Emitter.Resolver.ResolveNode(customEventDeclaration, this.Emitter) as MemberResolveResult;
+                var ignoreInterface = memberResult.Member.DeclaringType.Kind == TypeKind.Interface &&
+                                          memberResult.Member.DeclaringType.TypeParameterCount > 0;
+                this.Write(Helpers.GetEventRef(customEventDeclaration, this.Emitter, remover, false, ignoreInterface));
                 this.WriteOpenParentheses();
                 this.Write("value");
                 this.WriteColon();
