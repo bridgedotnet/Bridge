@@ -35,3 +35,12 @@ QUnit.test("#2030", function (assert) {
     var a = new (TypeScript.Issues.N2030Attribute)(true);
     assert.deepEqual(a.getIsUnspecified(), true);
 });
+QUnit.test("#2031", function (assert) {
+    var a = new (TypeScript.Issues.N2031DictionaryMap$2(String, Number).ctor)();
+    a.add("1", 1);
+    a.add("2", 2);
+    var f = a.getForward();
+    var r = a.getReverse();
+    assert.deepEqual(f.getItem("1"), 1, "1");
+    assert.deepEqual(f.getItem("2"), 2, "2");
+});
