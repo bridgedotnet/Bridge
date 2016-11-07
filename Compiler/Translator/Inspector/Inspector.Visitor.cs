@@ -754,7 +754,7 @@ namespace Bridge.Translator
                 this.ReadModuleInfo(attr, name, resolveResult);
                 this.ReadFileNameInfo(attr, name, resolveResult);
                 this.ReadOutputPathInfo(attr, name, resolveResult);
-                this.ReadFileHierarchyInfo(attr, name, resolveResult);
+                this.ReadOutputByInfo(attr, name, resolveResult);
                 this.ReadModuleDependency(attr, name, resolveResult);
                 this.ReadReflectionInfo(attr, name, resolveResult);
             }
@@ -893,10 +893,10 @@ namespace Bridge.Translator
             return false;
         }
 
-        protected virtual bool ReadFileHierarchyInfo(ICSharpCode.NRefactory.CSharp.Attribute attr, string name, ResolveResult resolveResult)
+        protected virtual bool ReadOutputByInfo(ICSharpCode.NRefactory.CSharp.Attribute attr, string name, ResolveResult resolveResult)
         {
-            if ((name == (Translator.Bridge_ASSEMBLY + ".FilesHierarchy")) ||
-                (resolveResult != null && resolveResult.Type != null && resolveResult.Type.FullName == (Translator.Bridge_ASSEMBLY + ".FilesHierarchyAttribute")))
+            if ((name == (Translator.Bridge_ASSEMBLY + ".OutputBy")) ||
+                (resolveResult != null && resolveResult.Type != null && resolveResult.Type.FullName == (Translator.Bridge_ASSEMBLY + ".OutputByAttribute")))
             {
                 if (attr.Arguments.Count > 0)
                 {

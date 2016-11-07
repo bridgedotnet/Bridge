@@ -27,7 +27,7 @@ namespace Bridge.Translator
         {
             if (captureOnly)
             {
-                var analyzer = new CaptureAnalyzer(this.emitter.Resolver.Resolver);
+                var analyzer = new CaptureAnalyzer(this.emitter);
                 analyzer.Analyze(anonymousMethodExpression.Body, anonymousMethodExpression.Parameters.Select(p => p.Name));
 
                 if (analyzer.UsedVariables.Count > 0)
@@ -47,7 +47,7 @@ namespace Bridge.Translator
         {
             if (captureOnly)
             {
-                var analyzer = new CaptureAnalyzer(this.emitter.Resolver.Resolver);
+                var analyzer = new CaptureAnalyzer(this.emitter);
                 analyzer.Analyze(lambdaExpression.Body, lambdaExpression.Parameters.Select(p => p.Name));
 
                 if (analyzer.UsedVariables.Count > 0)

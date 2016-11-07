@@ -400,6 +400,11 @@
     <Compile Include="BridgeIssues\1900\N1969.cs" />
     <Compile Include="BridgeIssues\1900\N1970.cs" />
     <Compile Include="BridgeIssues\1900\N1996.cs" />
+    <Compile Include="BridgeIssues\2000\N2003.cs" />
+    <Compile Include="BridgeIssues\2000\N2011.cs" />
+    <Compile Include="BridgeIssues\2000\N2013.cs" />
+    <Compile Include="BridgeIssues\2000\N2019.cs" />
+    <Compile Include="BridgeIssues\2000\N2024.cs" />
     <Compile Include="BridgeIssues\2000\N2027.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />

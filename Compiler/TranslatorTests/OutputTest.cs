@@ -82,7 +82,7 @@ namespace Bridge.Translator.Tests
         [TestCase("03", true, true, TestName = "OutputTest 03 - Bridge.json outputFormatting Minified")]
         [TestCase("04", true, true, TestName = "OutputTest 04 - Bridge.json outputBy Class ignoreCast fileNameCasing Lowercase")]
         [TestCase("05", true, true, TestName = "OutputTest 05 - Bridge.json outputBy Namespace ignoreCast default useTypedArrays default fileNameCasing CamelCase")]
-        [TestCase("06", true, true, TestName = "OutputTest 06 - Bridge.json outputBy Project useTypedArrays CheckForOverflowUnderflow")]
+        [TestCase("06", true, true, TestName = "OutputTest 06 - Attribute outputBy Project Bridge.json useTypedArrays CheckForOverflowUnderflow ")]
         [TestCase("07", true, true, TestName = "OutputTest 07 - Bridge.json module generateDocumentation Full")]
         [TestCase("10", true, true, TestName = "OutputTest 10 - Bridge.json fileNameCasing None generateDocumentation Basic")]
         [TestCase("11", true, true, TestName = "OutputTest 11 - Bridge.json generateTypeScript")]

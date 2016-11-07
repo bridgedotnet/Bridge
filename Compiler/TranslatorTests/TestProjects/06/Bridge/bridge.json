@@ -1,7 +1,7 @@
 {
   "output": "Bridge\\output",
   "cleanOutputFolderBeforeBuildPattern": "*.*",
-  "outputBy": "Project",
+  //"outputBy": "Project",
 
   "useTypedArrays": true
 }

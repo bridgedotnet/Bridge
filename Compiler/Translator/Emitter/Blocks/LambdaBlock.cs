@@ -148,7 +148,7 @@ namespace Bridge.Translator
         {
             var rr = this.Emitter.Resolver.ResolveNode(context, this.Emitter);
 
-            var analyzer = new CaptureAnalyzer(this.Emitter.Resolver.Resolver);
+            var analyzer = new CaptureAnalyzer(this.Emitter);
             analyzer.Analyze(this.Body, this.Parameters.Select(p => p.Name));
 
             var oldLevel = this.Emitter.Level;
