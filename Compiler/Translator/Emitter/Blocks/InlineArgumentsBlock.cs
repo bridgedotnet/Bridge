@@ -36,7 +36,10 @@ namespace Bridge.Translator
             get; set;
         }
 
-        public ResolveResult TargetResolveResult { get; set; }
+        public ResolveResult TargetResolveResult
+        {
+            get; set;
+        }
 
         public ArgumentsInfo ArgumentsInfo
         {
@@ -498,9 +501,10 @@ namespace Bridge.Translator
                         {
                             var rr = this.Emitter.Resolver.ResolveNode(node, this.Emitter);
                             var type = rr.Type;
-                            if (rr is MemberResolveResult)
+                            var mrr = rr as MemberResolveResult;
+                            if (mrr != null && mrr.Member.ReturnType.Kind != TypeKind.Enum)
                             {
-                                type = ((MemberResolveResult)rr).TargetResult.Type;
+                                type = mrr.TargetResult.Type;
                             }
 
                             bool needName = this.NeedName(type);
@@ -600,7 +604,7 @@ namespace Bridge.Translator
                             }
                             else
                             {
-                                version= this.Emitter.Translator.GetVersionContext().Compiler.Version;
+                                version = this.Emitter.Translator.GetVersionContext().Compiler.Version;
                             }
 
                             Write("\"", version, "\"");
