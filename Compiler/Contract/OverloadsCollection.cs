@@ -1,3 +1,4 @@
+using System;
 using Bridge.Contract.Constants;
 
 using ICSharpCode.NRefactory.CSharp;
@@ -16,10 +17,10 @@ namespace Bridge.Contract
     {
         public static OverloadsCollection Create(IEmitter emitter, FieldDeclaration fieldDeclaration)
         {
-            string key = fieldDeclaration.GetHashCode().ToString();
-            if (emitter.OverloadsCache.ContainsKey(key))
+            var key = new Tuple<AstNode, bool>(fieldDeclaration, false);
+            if (emitter.OverloadsCacheNodes.ContainsKey(key))
             {
-                return emitter.OverloadsCache[key];
+                return emitter.OverloadsCacheNodes[key];
             }
 
             return new OverloadsCollection(emitter, fieldDeclaration);
@@ -27,10 +28,10 @@ namespace Bridge.Contract
 
         public static OverloadsCollection Create(IEmitter emitter, EventDeclaration eventDeclaration)
         {
-            string key = eventDeclaration.GetHashCode().ToString();
-            if (emitter.OverloadsCache.ContainsKey(key))
+            var key = new Tuple<AstNode, bool>(eventDeclaration, false);
+            if (emitter.OverloadsCacheNodes.ContainsKey(key))
             {
-                return emitter.OverloadsCache[key];
+                return emitter.OverloadsCacheNodes[key];
             }
 
             return new OverloadsCollection(emitter, eventDeclaration);
@@ -38,10 +39,10 @@ namespace Bridge.Contract
 
         public static OverloadsCollection Create(IEmitter emitter, CustomEventDeclaration eventDeclaration, bool remove)
         {
-            string key = eventDeclaration.GetHashCode().ToString() + remove.GetHashCode().ToString();
-            if (emitter.OverloadsCache.ContainsKey(key))
+            var key = new Tuple<AstNode, bool>(eventDeclaration, remove);
+            if (emitter.OverloadsCacheNodes.ContainsKey(key))
             {
-                return emitter.OverloadsCache[key];
+                return emitter.OverloadsCacheNodes[key];
             }
 
             return new OverloadsCollection(emitter, eventDeclaration, remove);
@@ -49,10 +50,10 @@ namespace Bridge.Contract
 
         public static OverloadsCollection Create(IEmitter emitter, MethodDeclaration methodDeclaration)
         {
-            string key = methodDeclaration.GetHashCode().ToString();
-            if (emitter.OverloadsCache.ContainsKey(key))
+            var key = new Tuple<AstNode, bool>(methodDeclaration, false);
+            if (emitter.OverloadsCacheNodes.ContainsKey(key))
             {
-                return emitter.OverloadsCache[key];
+                return emitter.OverloadsCacheNodes[key];
             }
 
             return new OverloadsCollection(emitter, methodDeclaration);
@@ -60,10 +61,10 @@ namespace Bridge.Contract
 
         public static OverloadsCollection Create(IEmitter emitter, ConstructorDeclaration constructorDeclaration)
         {
-            string key = constructorDeclaration.GetHashCode().ToString();
-            if (emitter.OverloadsCache.ContainsKey(key))
+            var key = new Tuple<AstNode, bool>(constructorDeclaration, false);
+            if (emitter.OverloadsCacheNodes.ContainsKey(key))
             {
-                return emitter.OverloadsCache[key];
+                return emitter.OverloadsCacheNodes[key];
             }
 
             return new OverloadsCollection(emitter, constructorDeclaration);
@@ -71,10 +72,10 @@ namespace Bridge.Contract
 
         public static OverloadsCollection Create(IEmitter emitter, PropertyDeclaration propDeclaration, bool isSetter = false)
         {
-            string key = propDeclaration.GetHashCode().ToString() + isSetter.GetHashCode().ToString();
-            if (emitter.OverloadsCache.ContainsKey(key))
+            var key = new Tuple<AstNode, bool>(propDeclaration, isSetter);
+            if (emitter.OverloadsCacheNodes.ContainsKey(key))
             {
-                return emitter.OverloadsCache[key];
+                return emitter.OverloadsCacheNodes[key];
             }
 
             return new OverloadsCollection(emitter, propDeclaration, isSetter);
@@ -82,10 +83,10 @@ namespace Bridge.Contract
 
         public static OverloadsCollection Create(IEmitter emitter, IndexerDeclaration indexerDeclaration, bool isSetter = false)
         {
-            string key = indexerDeclaration.GetHashCode().ToString() + isSetter.GetHashCode().ToString();
-            if (emitter.OverloadsCache.ContainsKey(key))
+            var key = new Tuple<AstNode, bool>(indexerDeclaration, isSetter);
+            if (emitter.OverloadsCacheNodes.ContainsKey(key))
             {
-                return emitter.OverloadsCache[key];
+                return emitter.OverloadsCacheNodes[key];
             }
 
             return new OverloadsCollection(emitter, indexerDeclaration, isSetter);
@@ -93,10 +94,10 @@ namespace Bridge.Contract
 
         public static OverloadsCollection Create(IEmitter emitter, OperatorDeclaration operatorDeclaration)
         {
-            string key = operatorDeclaration.GetHashCode().ToString();
-            if (emitter.OverloadsCache.ContainsKey(key))
+            var key = new Tuple<AstNode, bool>(operatorDeclaration, false);
+            if (emitter.OverloadsCacheNodes.ContainsKey(key))
             {
-                return emitter.OverloadsCache[key];
+                return emitter.OverloadsCacheNodes[key];
             }
 
             return new OverloadsCollection(emitter, operatorDeclaration);
@@ -104,10 +105,11 @@ namespace Bridge.Contract
 
         public static OverloadsCollection Create(IEmitter emitter, IMember member, bool isSetter = false, bool includeInline = false)
         {
-            string key = (member.MemberDefinition != null ? member.MemberDefinition.GetHashCode().ToString() : member.GetHashCode().ToString()) + isSetter.GetHashCode().ToString();
-            if (emitter.OverloadsCache.ContainsKey(key))
+            var key = new Tuple<IMember, bool, bool>(member, isSetter, includeInline);
+
+            if (emitter.OverloadsCacheMembers.ContainsKey(key))
             {
-                return emitter.OverloadsCache[key];
+                return emitter.OverloadsCacheMembers[key];
             }
 
             return new OverloadsCollection(emitter, member, isSetter, includeInline);
@@ -214,7 +216,7 @@ namespace Bridge.Contract
             this.TypeDefinition = this.Member.DeclaringTypeDefinition;
             this.Type = this.Member.DeclaringType;
             this.InitMembers();
-            //this.Emitter.OverloadsCache[fieldDeclaration.GetHashCode().ToString()] = this;
+            this.Emitter.OverloadsCacheNodes[new Tuple<AstNode, bool>(fieldDeclaration, false)] = this;
         }
 
         private OverloadsCollection(IEmitter emitter, EventDeclaration eventDeclaration)
@@ -229,7 +231,7 @@ namespace Bridge.Contract
             this.TypeDefinition = this.Member.DeclaringTypeDefinition;
             this.Type = this.Member.DeclaringType;
             this.InitMembers();
-            //this.Emitter.OverloadsCache[eventDeclaration.GetHashCode().ToString()] = this;
+            this.Emitter.OverloadsCacheNodes[new Tuple<AstNode, bool>(eventDeclaration, false)] = this;
         }
 
         private OverloadsCollection(IEmitter emitter, CustomEventDeclaration eventDeclaration, bool remove)
@@ -248,7 +250,7 @@ namespace Bridge.Contract
             this.TypeDefinition = this.Member.DeclaringTypeDefinition;
             this.Type = this.Member.DeclaringType;
             this.InitMembers();
-            //this.Emitter.OverloadsCache[eventDeclaration.GetHashCode().ToString() + remove.GetHashCode().ToString()] = this;
+            this.Emitter.OverloadsCacheNodes[new Tuple<AstNode, bool>(eventDeclaration, remove)] = this;
         }
 
         private OverloadsCollection(IEmitter emitter, MethodDeclaration methodDeclaration)
@@ -262,7 +264,7 @@ namespace Bridge.Contract
             this.TypeDefinition = this.Member.DeclaringTypeDefinition;
             this.Type = this.Member.DeclaringType;
             this.InitMembers();
-            //this.Emitter.OverloadsCache[methodDeclaration.GetHashCode().ToString()] = this;
+            this.Emitter.OverloadsCacheNodes[new Tuple<AstNode, bool>(methodDeclaration, false)] = this;
         }
 
         private OverloadsCollection(IEmitter emitter, ConstructorDeclaration constructorDeclaration)
@@ -277,7 +279,7 @@ namespace Bridge.Contract
             this.TypeDefinition = this.Member.DeclaringTypeDefinition;
             this.Type = this.Member.DeclaringType;
             this.InitMembers();
-            //this.Emitter.OverloadsCache[constructorDeclaration.GetHashCode().ToString()] = this;
+            this.Emitter.OverloadsCacheNodes[new Tuple<AstNode, bool>(constructorDeclaration, false)] = this;
         }
 
         private OverloadsCollection(IEmitter emitter, PropertyDeclaration propDeclaration, bool isSetter)
@@ -297,7 +299,7 @@ namespace Bridge.Contract
             this.TypeDefinition = this.Member.DeclaringTypeDefinition;
             this.Type = this.Member.DeclaringType;
             this.InitMembers();
-            //this.Emitter.OverloadsCache[propDeclaration.GetHashCode().ToString() + isSetter.GetHashCode().ToString()] = this;
+            this.Emitter.OverloadsCacheNodes[new Tuple<AstNode, bool>(propDeclaration, isSetter)] = this;
         }
 
         private OverloadsCollection(IEmitter emitter, IndexerDeclaration indexerDeclaration, bool isSetter)
@@ -314,7 +316,7 @@ namespace Bridge.Contract
             this.TypeDefinition = this.Member.DeclaringTypeDefinition;
             this.Type = this.Member.DeclaringType;
             this.InitMembers();
-            //this.Emitter.OverloadsCache[indexerDeclaration.GetHashCode().ToString() + isSetter.GetHashCode().ToString()] = this;
+            this.Emitter.OverloadsCacheNodes[new Tuple<AstNode, bool>(indexerDeclaration, isSetter)] = this;
         }
 
         private OverloadsCollection(IEmitter emitter, OperatorDeclaration operatorDeclaration)
@@ -328,7 +330,7 @@ namespace Bridge.Contract
             this.TypeDefinition = this.Member.DeclaringTypeDefinition;
             this.Type = this.Member.DeclaringType;
             this.InitMembers();
-            //this.Emitter.OverloadsCache[operatorDeclaration.GetHashCode().ToString()] = this;
+            this.Emitter.OverloadsCacheNodes[new Tuple<AstNode, bool>(operatorDeclaration, false)] = this;
         }
 
         private OverloadsCollection(IEmitter emitter, IMember member, bool isSetter = false, bool includeInline = false)
@@ -376,6 +378,7 @@ namespace Bridge.Contract
             this.Type = this.Member.DeclaringType;
             this.IsSetter = isSetter;
             this.InitMembers();
+            this.Emitter.OverloadsCacheMembers[new Tuple<IMember, bool, bool>(member, isSetter, includeInline)] = this;
         }
 
         public List<IMethod> Methods
@@ -936,7 +939,7 @@ namespace Bridge.Contract
             return isTop ? list.Distinct().ToList() : list;
         }
 
-        private string overloadName;
+        private Dictionary<Tuple<bool, string, bool>, string> overloadName = new Dictionary<Tuple<bool, string, bool>, string>();
 
         public string GetOverloadName(bool skipInterfaceName = false, string prefix = null, bool withoutTypeParams = false)
         {
@@ -952,12 +955,20 @@ namespace Bridge.Contract
                 }
             }
 
-            if (this.overloadName == null && this.Member != null)
+            var key = new Tuple<bool, string, bool>(skipInterfaceName, prefix, withoutTypeParams);
+            string name = null;
+            var contains = this.overloadName.ContainsKey(key);
+            if (!contains && this.Member != null)
             {
-                this.overloadName = this.GetOverloadName(this.Member, skipInterfaceName, prefix, withoutTypeParams);
+                name = this.GetOverloadName(this.Member, skipInterfaceName, prefix, withoutTypeParams);
+                this.overloadName[key] = name;
+            }
+            else if(contains)
+            {
+                name = this.overloadName[key];
             }
 
-            return this.overloadName;
+            return name;
         }
 
         public static string NormalizeInterfaceName(string interfaceName)

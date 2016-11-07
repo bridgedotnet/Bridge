@@ -133,6 +133,7 @@
     <Compile Include="Linq\TestLinqQueryExecution.cs" />
     <Compile Include="Linq\TestLinqRestrictionOperators.cs" />
     <Compile Include="Linq\TestLinqSetOperators.cs" />
+    <Compile Include="MutationObserverTests.cs" />
     <Compile Include="ObjectLiteralTests.cs" />
     <Compile Include="Reflection\AssemblyTests.cs" />
     <Compile Include="Reflection\AttributeTests.cs" />

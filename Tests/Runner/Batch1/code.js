@@ -8,15 +8,6 @@
 Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resource1.bin":"AAECAwQFBgc=","Bridge.ClientTest.Batch1.Reflection.Resource2.bin":"EBESExQV"}, function ($asm, globals) {
     "use strict";
 
-    /** @namespace System */
-
-    /**
-     * @memberof System
-     * @callback System.Func
-     * @param   {TInput}     arg
-     * @return  {TOutput}
-     */
-
     Bridge.define("Bridge.ClientTest.ArgumentsTests", {
         lengthHelper0: function (args) {
             args = Array.prototype.slice.call(arguments, 0);
@@ -9614,6 +9605,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Constants", {
         statics: {
+            MODULE_HTML5: "HTML5",
             PREFIX_SYSTEM_CLASSES: "Simple types",
             PREFIX_SYSTEM_INTERFACES: "System interface",
             PREFIX_COLLECTIONS: "Collections",
@@ -9997,6 +9989,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             return Bridge.is(err, System.FormatException);
         }
     });
+
+    /** @namespace System */
+
+    /**
+     * @memberof System
+     * @callback System.Func
+     * @param   {TInput}     arg
+     * @return  {TOutput}
+     */
 
     Bridge.define("Bridge.ClientTest.ConvertTests.ConvertTestBase$1", function (TOutput) { return {
         /**
@@ -19096,6 +19097,92 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.throws(function () {
                 arr.set([0, 0, -1], 0);
             });
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.MutationObserverTests", {
+        statics: {
+            TARGET: "qunit-fixture",
+            ATTRIBUTE: "SPAN",
+            TYPE: "childList"
+        },
+        config: {
+            properties: {
+                Records: null
+            }
+        },
+        testNewlyAttachedElements: function () {
+            this.setRecords(null);
+
+            var done = Bridge.Test.Assert.async();
+
+            var root = document.getElementById(Bridge.ClientTest.MutationObserverTests.TARGET);
+
+            //setup observer
+            var observer = new MutationObserver(Bridge.fn.bind(this, $_.Bridge.ClientTest.MutationObserverTests.f1));
+
+            observer.observe(root, Bridge.merge(new Object(), {
+                subtree: true,
+                childList: true
+            } ));
+
+            var task = new System.Threading.Tasks.Task(function () {
+                // mutate DOM
+                // observer will be invoked asynchronously
+                root.appendChild(document.createElement('span'));
+            });
+
+            var task1 = task.continueWith($_.Bridge.ClientTest.MutationObserverTests.f2);
+
+            task1.continueWith(Bridge.fn.bind(this, function (x) {
+                try {
+                    this.assertRecords(this.getRecords());
+                }
+                catch (ex) {
+                    ex = System.Exception.create(ex);
+                    Bridge.Console.log(ex.toString());
+                }
+
+                observer.disconnect();
+
+                done();
+            }));
+
+            task.start();
+        },
+        assertRecords: function (records) {
+            Bridge.Test.Assert.notNull$1(records, "records");
+            Bridge.Test.Assert.areEqual$1(1, records.length, "records.Length");
+
+            var record = records[0];
+
+            Bridge.Test.Assert.notNull$1(record, "record");
+
+            Bridge.Test.Assert.notNull$1(record.target, "Target");
+            Bridge.Test.Assert.areEqual$1(Bridge.ClientTest.MutationObserverTests.TARGET, record.target.id, "Target Id");
+
+            Bridge.Test.Assert.areEqual$1(Bridge.ClientTest.MutationObserverTests.TYPE, record.type, "Type");
+
+            Bridge.Test.Assert.areEqual$1(0, record.removedNodes.length, "RemovedNodes");
+            Bridge.Test.Assert.areEqual$1(1, record.addedNodes.length, "AddedNodes");
+
+            var added = record.addedNodes[0];
+            Bridge.Test.Assert.notNull$1(added, "added");
+            Bridge.Test.Assert.areEqual$1(Bridge.ClientTest.MutationObserverTests.ATTRIBUTE, added.nodeName.toUpperCase(), "added.NodeName");
+
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.MutationObserverTests", $_);
+
+    Bridge.apply($_.Bridge.ClientTest.MutationObserverTests, {
+        f1: function (changes, _) {
+            if (changes.length > 0) {
+                this.setRecords(changes);
+            }
+        },
+        f2: function (x) {
+            System.Threading.Tasks.Task.delay(10);
         }
     });
 
@@ -43042,8 +43129,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y1$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.X1)]
     });
 
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y1X2", {
+        inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y1$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.X2)]
+    });
+
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y2X1", {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y2$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.X1)]
+    });
+
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y2X2", {
+        inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y2$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.X2)]
     });
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y3$2", function (T1, T2) { return {
@@ -43080,8 +43175,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y1$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.X1)]
     });
 
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y1X2", {
+        inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y1$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.X2)]
+    });
+
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2X1", {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.X1)]
+    });
+
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2X2", {
+        inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.X2)]
     });
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y3$2", function (T1, T2) { return {
@@ -43118,14 +43221,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C11$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.K)]
     });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y1X2", {
-        inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y1$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.X2)]
-    });
-
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y2X2", {
-        inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y2$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.X2)]
-    });
-
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y3X1X1", {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y3$2(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.X1,Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.X1)]
     });
@@ -43144,14 +43239,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.C", {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.B,Bridge.ClientTest.Reflection.TypeSystemTests.I4]
-    });
-
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y1X2", {
-        inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y1$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.X2)]
-    });
-
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2X2", {
-        inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.X2)]
     });
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y3X1X1", {

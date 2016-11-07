@@ -203,6 +203,11 @@ namespace Bridge.Translator
                             inlineScript = inlineScript.Substring(6);
                         }
 
+                        if (!noThis)
+                        {
+                            Emitter.ThisRefCounter++;
+                        }
+
                         if (!isStaticMethod && noThis)
                         {
                             this.WriteThis();

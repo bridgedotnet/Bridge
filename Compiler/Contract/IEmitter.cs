@@ -340,7 +340,12 @@ namespace Bridge.Contract
             set;
         }
 
-        Dictionary<string, OverloadsCollection> OverloadsCache
+        Dictionary<Tuple<AstNode, bool>, OverloadsCollection> OverloadsCacheNodes
+        {
+            get;
+        }
+
+        Dictionary<Tuple<IMember, bool, bool>, OverloadsCollection> OverloadsCacheMembers
         {
             get;
         }
@@ -460,8 +465,9 @@ namespace Bridge.Contract
         Dictionary<string, int> NamespacesCache
         {
             get; set;
-        } 
+        }
 
         void WriteIndented(string s, int? position = null);
+        string GetReflectionName(IType type);
     }
 }

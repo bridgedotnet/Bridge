@@ -291,7 +291,7 @@ namespace Bridge.Translator
 
                     if (leftMemberResolveResult != null)
                     {
-                        isEvent = leftMemberResolveResult.Member is DefaultResolvedEvent;
+                        isEvent = leftMemberResolveResult.Member is IEvent;
                     }
 
                     if (!isEvent)
