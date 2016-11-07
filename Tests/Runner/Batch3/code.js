@@ -6887,8 +6887,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -6918,7 +6916,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    };
+                                    }; /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -10815,6 +10813,29 @@ Bridge.$N1391Result =                 r;
         ctor: function (array) {
             this.$initialize();
             this.array = array;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027", {
+        statics: {
+            getStatus: function () {
+                return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options.Whatever;
+            },
+            testCase: function () {
+                var $t;
+                var value = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options.Whatever;
+                Bridge.Test.Assert.areEqual("Value: Whatever", "Value: " + System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options, value));
+                Bridge.Test.Assert.areEqual("Value: Whatever", System.String.concat("Value: ", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options, value)));
+                Bridge.Test.Assert.areEqual("Value: Whatever", "Value: " + System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.getStatus()));
+                Bridge.Test.Assert.areEqual("Value: Whatever", System.String.concat("Value: ", ($t=Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.getStatus(), System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options, $t))));
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options", {
+        $kind: "enum",
+        statics: {
+            Whatever: 0
         }
     });
 

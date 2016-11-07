@@ -498,9 +498,10 @@ namespace Bridge.Translator
                         {
                             var rr = this.Emitter.Resolver.ResolveNode(node, this.Emitter);
                             var type = rr.Type;
-                            if (rr is MemberResolveResult)
+                            var mrr = rr as MemberResolveResult;
+                            if (mrr != null && mrr.Member.ReturnType.Kind != TypeKind.Enum)
                             {
-                                type = ((MemberResolveResult)rr).TargetResult.Type;
+                                type = mrr.TargetResult.Type;
                             }
 
                             bool needName = this.NeedName(type);
