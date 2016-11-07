@@ -1,0 +1,20 @@
+﻿Bridge.assembly("TypeScriptTest", function ($asm, globals) {
+    "use strict";
+
+    Bridge.definei("TypeScript.Issues.N2029Interface$1", function (T) { return {
+        $kind: "interface"
+    }; });
+
+    Bridge.define("TypeScript.Issues.N2029", {
+        inherits: [TypeScript.Issues.N2029Interface$1(System.Int32)],
+        config: {
+            properties: {
+                Value1: 0
+            },
+            alias: [
+            "getValue1", "TypeScript$Issues$N2029Interface$1$System$Int32$getValue1",
+            "setValue1", "TypeScript$Issues$N2029Interface$1$System$Int32$setValue1"
+            ]
+        }
+    });
+});
