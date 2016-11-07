@@ -41,3 +41,9 @@ QUnit.test("#2029", function (assert) {
 
     assert.deepEqual(i.getValue1(), 25);
 });
+
+QUnit.test("#2030", function (assert) {
+    var a = new (TypeScript.Issues.N2030Attribute)(true);
+
+    assert.deepEqual(a.getIsUnspecified(), true);
+});
