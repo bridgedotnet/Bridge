@@ -20,7 +20,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [Test]
-        public static void TestCase()
+        public static void TestToStringForEnumWhenConcatWithString()
         {
             var value = Options.Whatever;
             Assert.AreEqual("Value: Whatever", "Value: " + value);

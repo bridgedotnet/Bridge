@@ -36,7 +36,10 @@ namespace Bridge.Translator
             get; set;
         }
 
-        public ResolveResult TargetResolveResult { get; set; }
+        public ResolveResult TargetResolveResult
+        {
+            get; set;
+        }
 
         public ArgumentsInfo ArgumentsInfo
         {
@@ -601,7 +604,7 @@ namespace Bridge.Translator
                             }
                             else
                             {
-                                version= this.Emitter.Translator.GetVersionContext().Compiler.Version;
+                                version = this.Emitter.Translator.GetVersionContext().Compiler.Version;
                             }
 
                             Write("\"", version, "\"");

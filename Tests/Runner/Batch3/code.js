@@ -11003,7 +11003,7 @@ Bridge.$N1391Result =                 r;
             getStatus: function () {
                 return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options.Whatever;
             },
-            testCase: function () {
+            testToStringForEnumWhenConcatWithString: function () {
                 var $t;
                 var value = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options.Whatever;
                 Bridge.Test.Assert.areEqual("Value: Whatever", "Value: " + System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options, value));
