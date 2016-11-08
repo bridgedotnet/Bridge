@@ -2,11 +2,58 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Bridge.Contract
 {
     public class ConfigHelper
     {
+        class PathChanger
+        {
+            //private Regex PathSchemaRegex = new Regex(@"(?<=(^\w+:)|^)[\\/]{2,}");
+            //private Regex PathNonSchemaRegex = new Regex(@"(?<!((^\w+:)|^)[\\/]*)[\\/]+");
+            private Regex PathRegex = new Regex(@"(?<schema>(?<=(^\w+:)|^)[\\/]{2,})|[\\/]+");
+
+            public string Separator
+            {
+                get; private set;
+            }
+
+            public string DoubleSeparator
+            {
+                get; private set;
+            }
+
+            public string Path
+            {
+                get; private set;
+            }
+
+            public PathChanger(string path, char separator)
+            {
+                Path = path;
+                Separator = separator.ToString();
+                DoubleSeparator = new string(separator, 2);
+            }
+
+            private string ReplaceSlashEvaluator(Match m)
+            {
+                if (m.Groups["schema"].Success)
+                {
+                    return DoubleSeparator;
+                }
+                return Separator;
+            }
+
+            public string ConvertPath()
+            {
+                //path = PathSchemaRegex.Replace(path, directorySeparator.ToString());
+                //path = PathNonSchemaRegex.Replace(path, directorySeparator.ToString());
+
+                return PathRegex.Replace(Path, ReplaceSlashEvaluator);
+            }
+        }
+
         public string ConvertPath(string path, char directorySeparator = char.MinValue)
         {
             if (path == null)
@@ -19,10 +66,7 @@ namespace Bridge.Contract
                 directorySeparator = Path.DirectorySeparatorChar;
             }
 
-            path = path.Replace("//", directorySeparator.ToString());
-            path = path.Replace('/', directorySeparator);
-            path = path.Replace("\\\\", directorySeparator.ToString());
-            path = path.Replace('\\', directorySeparator);
+            path = new PathChanger(path, directorySeparator).ConvertPath();
 
             return path;
         }
