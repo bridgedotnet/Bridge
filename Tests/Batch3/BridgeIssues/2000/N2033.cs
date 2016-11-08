@@ -18,7 +18,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 #pragma warning restore 649
 
         [Test]
-        public static void TestCase()
+        public static void TestClassEnumPropertiesInitialization()
         {
             Assert.AreEqual("new", Bridge2033.state);
             Assert.AreEqual("new", Bridge2033.state1);
