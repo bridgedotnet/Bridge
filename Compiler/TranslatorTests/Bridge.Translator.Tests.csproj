@@ -66,6 +66,7 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="OutputTest.cs" />
+    <Compile Include="ContractTests\ConfigHelperTests.cs" />
     <Compile Include="TranslatorRunner.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -84,7 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Build\" />
-    <Folder Include="TestProjects\Helpers\" />
+    <Folder Include="TestProjects\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
