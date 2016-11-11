@@ -8,6 +8,7 @@ using ICSharpCode.NRefactory.TypeSystem.Implementation;
 using Mono.Cecil;
 using Object.Net.Utilities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using ICustomAttributeProvider = Mono.Cecil.ICustomAttributeProvider;
@@ -41,8 +42,8 @@ namespace Bridge.Translator
             this.CheckObjectLiteral(type, translator);
             this.CheckConstructors(type, translator);
             this.CheckFields(type, translator);
-            this.CheckMethods(type, translator);
             this.CheckProperties(type, translator);
+            this.CheckMethods(type, translator);
             this.CheckEvents(type, translator);
             this.CheckFileName(type, translator);
             this.CheckModule(type, translator);
@@ -53,12 +54,29 @@ namespace Bridge.Translator
         {
             if (this.IsObjectLiteral(type))
             {
-                if (type.IsInterface && (type.HasMethods || type.HasProperties || type.HasEvents || type.HasFields))
-                {
-                    TranslatorException.Throw("ObjectLiteral interface doesn't support any contract members: {0}", type);
-                }
-
                 var objectCreateMode = this.GetObjectCreateMode(type);
+
+                if (type.IsInterface)
+                {
+                    if (type.HasMethods && type.Methods.GroupBy(m => m.Name).Any(g => g.Count() > 1))
+                    {
+                        TranslatorException.Throw("ObjectLiteral interface doesn't support overloaded methods: {0}",
+                            type);
+                    }
+
+                    if (type.HasEvents)
+                    {
+                        TranslatorException.Throw("ObjectLiteral interface doesn't support events: {0}", type);
+                    }
+                }
+                else
+                {
+                    if (type.Methods.Any(m => !m.IsRuntimeSpecialName && m.Name.Contains(".")) ||
+                        type.Properties.Any(m => !m.IsRuntimeSpecialName && m.Name.Contains(".")))
+                    {
+                        TranslatorException.Throw("ObjectLiteral doesn't support explicit interface member implementation: {0}", type);
+                    }
+                }
 
                 if (type.BaseType != null)
                 {
@@ -465,16 +483,6 @@ namespace Bridge.Translator
 
         public virtual void CheckProperties(TypeDefinition type, ITranslator translator)
         {
-            if (type.HasProperties && this.IsObjectLiteral(type))
-            {
-                foreach (PropertyDefinition prop in type.Properties)
-                {
-                    if ((prop.GetMethod != null && prop.GetMethod.IsVirtual) || (prop.SetMethod != null && prop.SetMethod.IsVirtual))
-                    {
-                        TranslatorException.Throw("ObjectLiteral type doesn't support virtual members: {0}", type);
-                    }
-                }
-            }
         }
 
         public virtual void CheckEvents(TypeDefinition type, ITranslator translator)
@@ -487,7 +495,6 @@ namespace Bridge.Translator
 
         public virtual void CheckMethods(TypeDefinition type, ITranslator translator)
         {
-            var methodsCount = 0;
             foreach (MethodDefinition method in type.Methods)
             {
                 if (method.HasCustomAttributes && method.CustomAttributes.Any(a => a.AttributeType.FullName == "System.Runtime.CompilerServices.CompilerGeneratedAttribute"))
@@ -496,16 +503,6 @@ namespace Bridge.Translator
                 }
 
                 this.CheckMethodArguments(method);
-
-                if (method.IsVirtual)
-                {
-                    methodsCount++;
-                }
-            }
-
-            if (this.IsObjectLiteral(type) && methodsCount > 0)
-            {
-                Bridge.Translator.TranslatorException.Throw("ObjectLiteral doesn't support virtual methods: {0}", type);
             }
         }
 
