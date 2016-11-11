@@ -20,7 +20,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [Test]
-        public void TestCase()
+        public void TestObjectLiteralFieldImplementingInterface()
         {
             Child c = new Child { Name = "name" };
             Parent p = c;
