@@ -17,10 +17,10 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void DefaultConstructorReturnsTodaysDate()
+        public void DefaultConstructorShouldNotReturnsTodaysDate()
         {
             var dt = new DateTime();
-            Assert.True(dt.Year > 2011);
+            Assert.True(dt.Year < 2016);
         }
 
         [Test]
