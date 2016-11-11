@@ -33,10 +33,11 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [Test]
-        public static void TestCase()
+        public static void TestIncrementAssignmentInStructs()
         {
             var ss = new SimpleStruct(5);
             ss.DoubleIncrement();
+
             Assert.AreEqual(7, ss.GetField());
         }
     }
