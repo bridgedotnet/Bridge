@@ -25910,9 +25910,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var o = new Date(-62135596800000);
             Bridge.Test.Assert.true$1(Bridge.is(o, Date), "o is DateTime");
         },
-        defaultConstructorReturnsTodaysDate: function () {
+        defaultConstructorShouldNotReturnsTodaysDate: function () {
             var dt = new Date(-62135596800000);
-            Bridge.Test.Assert.true(dt.getFullYear() > 2011);
+            Bridge.Test.Assert.true(dt.getFullYear() < 2016);
         },
         creatingInstanceReturnsDateZero: function () {
             var fullYear = Bridge.createInstance(Date).getFullYear();
