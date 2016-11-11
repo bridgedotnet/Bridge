@@ -5,7 +5,8 @@ before_install:
 # - mkdir -p .nuget
 # - wget -O .nuget/nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
 #- cd $TRAVIS_BUILD_DIR
-- mono .nuget/nuget.exe
+# The line below starts failing in travis-build version: 5ddd724fb Issue logged - https://github.com/travis-ci/travis-ci/issues/6854
+# - mono .nuget/nuget.exe
 install:
 - mono .nuget/nuget.exe restore Bridge.sln -Verbosity detailed
 env:
