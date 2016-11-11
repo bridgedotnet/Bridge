@@ -25898,11 +25898,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.areEqual("Date", Bridge.Reflection.getTypeFullName(Date));
-            var o = new Date();
+            var o = new Date(-62135596800000);
             Bridge.Test.Assert.true$1(Bridge.is(o, Date), "o is DateTime");
         },
         defaultConstructorReturnsTodaysDate: function () {
-            var dt = new Date();
+            var dt = new Date(-62135596800000);
             Bridge.Test.Assert.true(dt.getFullYear() > 2011);
         },
         creatingInstanceReturnsDateZero: function () {

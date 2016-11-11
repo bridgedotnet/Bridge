@@ -184,7 +184,7 @@
             } else if (type === Boolean) {
                 return false;
             } else if (type === Date) {
-                return new Date(0);
+                return new Date(-62135596800000);
             } else if (type === Number) {
                 return 0;
             } else if (type === String) {
@@ -432,7 +432,7 @@
             } else if (type === Boolean) {
                 return false;
             } else if (type === Date) {
-                return new Date(-864e13);
+                return new Date(-62135596800000);
             } else if (type === Number) {
                 return 0;
             }

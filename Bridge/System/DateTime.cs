@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Bridge;
 
 namespace System
@@ -11,6 +12,9 @@ namespace System
 
         [Template("new Date(-864e13)")]
         public static readonly DateTime MinValue;
+
+        [Template("new Date(-62135596800000)")]
+        private extern DateTime(DummyTypeUsedToAddAttributeToDefaultValueTypeConstructor _);
 
         /// <summary>
         /// Initializes a new instance of the DateTime structure to a specified number of ticks.
