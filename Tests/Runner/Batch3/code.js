@@ -11050,6 +11050,57 @@ Bridge.$N1391Result =                 r;
         $utype: System.String
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2038", {
+        statics: {
+            testIncrementAssignmentInStructs: function () {
+                var ss = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2038.SimpleStruct.$ctor1(5);
+                ss.doubleIncrement();
+
+                Bridge.Test.Assert.areEqual(7, ss.getField());
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2038.SimpleStruct", {
+        $kind: "struct",
+        statics: {
+            op_Addition: function (t, val) {
+                return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2038.SimpleStruct.$ctor1(((t.field1 + 1) | 0));
+            },
+            getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2038.SimpleStruct(); }
+        },
+        field1: 0,
+        $ctor1: function (f) {
+            this.$initialize();
+            this.field1 = f;
+        },
+        ctor: function () {
+            this.$initialize();
+        },
+        doubleIncrement: function () {
+            (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2038.SimpleStruct.op_Addition(this, 1)).$clone(this);
+            (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2038.SimpleStruct.op_Addition(this, 1)).$clone(this);
+        },
+        getField: function () {
+            return this.field1;
+        },
+        getHashCode: function () {
+            var h = Bridge.addHash([5790516273, this.field1]);
+            return h;
+        },
+        equals: function (o) {
+            if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2038.SimpleStruct)) {
+                return false;
+            }
+            return Bridge.equals(this.field1, o.field1);
+        },
+        $clone: function (to) {
+            var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2038.SimpleStruct();
+            s.field1 = this.field1;
+            return s;
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
@@ -13678,7 +13729,11 @@ Bridge.$N1391Result =                 r;
         getHashCode: function () {
             return Bridge.getHashCode(this.field);
         },
-        $clone: function (to) { return this; }
+        $clone: function (to) {
+            var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge608A();
+            s.field = this.field;
+            return s;
+        }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge615", {
@@ -14803,7 +14858,11 @@ Bridge.$N1391Result =                 r;
             }
             return Bridge.equals(this.field1, o.field1);
         },
-        $clone: function (to) { return this; }
+        $clone: function (to) {
+            var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge692.B1();
+            s.field1 = this.field1;
+            return s;
+        }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge692.B2", {
@@ -14832,7 +14891,11 @@ Bridge.$N1391Result =                 r;
             }
             return Bridge.equals(this.field1, o.field1);
         },
-        $clone: function (to) { return this; }
+        $clone: function (to) {
+            var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge692.B2();
+            s.field1 = this.field1;
+            return s;
+        }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge692.B3", {
