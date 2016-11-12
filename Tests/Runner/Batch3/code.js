@@ -6897,8 +6897,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -6928,7 +6926,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    };
+                                    }; /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -11100,6 +11098,20 @@ Bridge.$N1391Result =                 r;
             var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2038.SimpleStruct();
             s.field1 = this.field1;
             return s;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2046", {
+        statics: {
+            testCase: function () {
+                var $t;
+                var dt = new Date();
+                var ndt = Bridge.cast(dt, Date, true);
+                var s1 = !Bridge.equals(System.Nullable.getValue(ndt), null) ? Bridge.Date.format(System.Nullable.getValue(ndt), "yyyy-MM-dd HH:mm:ss") : null;
+                var s2 = !Bridge.equals(($t = Bridge.cast(dt, Date, true)), null) ? Bridge.Date.format($t, "yyyy-MM-dd HH:mm:ss") : null;
+
+                Bridge.Test.Assert.areEqual(s1, s2);
+            }
         }
     });
 

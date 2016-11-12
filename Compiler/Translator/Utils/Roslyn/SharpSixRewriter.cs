@@ -967,6 +967,13 @@ namespace Bridge.Translator
 
                 var expressionType = semanticModel.GetTypeInfo(node.Expression).Type;
                 ExpressionType = SyntaxFactory.ParseTypeName(expressionType.ToMinimalDisplayString(semanticModel, node.Expression.GetLocation().SourceSpan.Start));
+                this.IsNullable = expressionType.OriginalDefinition.SpecialType == SpecialType.System_Nullable_T;
+
+                if (this.IsNullable)
+                {
+                    UnderlyingNullableType = ((INamedTypeSymbol)expressionType).TypeArguments[0];
+                    ExpressionType = SyntaxFactory.ParseTypeName(UnderlyingNullableType.ToMinimalDisplayString(semanticModel, node.Expression.GetLocation().SourceSpan.Start));
+                }
 
                 var resultType = semanticModel.GetTypeInfo(node).Type;
                 ResultType = SyntaxFactory.ParseTypeName(resultType.ToMinimalDisplayString(semanticModel, node.GetLocation().SourceSpan.Start));
@@ -980,6 +987,8 @@ namespace Bridge.Translator
             public TypeSyntax ExpressionType;
             public bool IsResultVoid;
             public bool IsComplex;
+            public bool IsNullable;
+            public ITypeSymbol UnderlyingNullableType;
         }
 
         public override SyntaxNode VisitConditionalAccessExpression(ConditionalAccessExpressionSyntax node)
@@ -1034,7 +1043,7 @@ namespace Bridge.Translator
                 }
                 else
                 {
-                    leftForCondition = parentTarget != null ? SyntaxFactory.ParseExpression(parentTarget.ToString() + info.Node.Expression.WithoutTrivia().ToString()) : info.Node.Expression.WithoutTrivia();
+                    leftForCondition = SyntaxFactory.ParseExpression(parentTarget != null ? (parentTarget.ToString() + info.Node.Expression.WithoutTrivia().ToString() + (info.IsNullable ? ".Value" : "")) : (info.Node.Expression.WithoutTrivia().ToString() + (info.IsNullable ? ".Value" : "")));
                     parentTarget = leftForCondition;
                 }
 
