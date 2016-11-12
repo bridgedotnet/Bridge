@@ -6897,8 +6897,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -6928,7 +6926,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    };
+                                    }; /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -11100,6 +11098,23 @@ Bridge.$N1391Result =                 r;
             var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2038.SimpleStruct();
             s.field1 = this.field1;
             return s;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2048", {
+        statics: {
+            testCase: function () {
+                var a = !new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2048.Derived().getproperty();
+                Bridge.Test.Assert.true(a);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2048.Base", {
+        getproperty: function () {
+            return false;
+        },
+        setproperty: function (value) {
         }
     });
 
@@ -19296,6 +19311,12 @@ Bridge.$N1391Result =                 r;
             this.setSomeProp((this.getSomeProp() + 11) | 0);
         }
     }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2048.Derived", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2048.Base],
+        setproperty: function (value) {
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240B", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A],
