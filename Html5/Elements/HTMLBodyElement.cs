@@ -62,7 +62,7 @@ namespace Bridge.Html5
         /// Exposes the window.onerror event handler to call when the document fails to load properly. Note: This handler is triggered when the event reaches the window, not the body element. Use addEventListener() to attach an event listener to the body element.
         /// </summary>
         [Name("onerror")]
-        public new Action<Event> OnError;
+        public new ErrorEventHandler OnError;
 
         /// <summary>
         /// Exposes the window.onfocus event handler to call when the window gains focus. Note: This handler is triggered when the event reaches the window, not the body element. Use addEventListener() to attach an event listener to the body element.
