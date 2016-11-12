@@ -770,6 +770,7 @@
             return new (System.Collections.Generic.List$1(T || Object))(ienumerable);
         },
 
+        arrayTypes: [globals.Array, globals.Uint8Array, globals.Int8Array, globals.Int16Array, globals.Uint16Array, globals.Int32Array, globals.Uint32Array, globals.Float32Array, globals.Float64Array, globals.Uint8ClampedArray],
         isArray: function (obj, ctor) {
             var c = ctor || (obj != null ? obj.constructor : null);
 
@@ -777,16 +778,7 @@
                 return false;
             }
 
-            return c === Array ||
-                c === Uint8Array ||
-                c === Int8Array ||
-                c === Int16Array ||
-                c === Uint16Array ||
-                c === Int32Array ||
-                c === Uint32Array ||
-                c === Float32Array ||
-                c === Float64Array ||
-                c === Bridge.global["Uint8ClampedArray"];
+            return Bridge.arrayTypes.indexOf(c) >= 0;
         },
 
         isFunction: function (obj) {
