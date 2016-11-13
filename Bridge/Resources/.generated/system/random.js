@@ -13,7 +13,7 @@
             }
         },
         ctor: function () {
-            System.Random.$ctor1.call(this, System.Int64.clip32(System.Int64((new Date()).getTime()).mul(10000)));
+            System.Random.$ctor1.call(this, System.Int64.clip32(Bridge.Date.getTicks(new Date())));
         },
         $ctor1: function (seed) {
             this.$initialize();
