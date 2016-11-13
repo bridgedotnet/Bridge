@@ -7292,8 +7292,29 @@
     });
 
     var date = {
+        offset: 62135596800000,
+
+        fromTicks: function (value) {
+            if (System.Int64.is64Bit(value)) {
+                value = value.div(10000).toNumber();
+            } else {
+                value = value / 10000;
+            }
+
+            return new Date(value - Bridge.Date.offset);
+        },
+
+        getTicks: function(dt) {
+            return System.Int64(dt.getTime()).add(Bridge.Date.offset).mul(10000);
+        },
+
         getDefaultValue: function () {
             return new Date(-864e13);
+        },
+
+        utc: function(year, month, day, hours, minutes, seconds, ms) {
+            var utd = Date.UTC(year, month - 1, day || 0, hours || 0, minutes || 0, seconds || 0, ms || 0);
+            return System.Int64(utd).add(Bridge.Date.offset).mul(10000);
         },
 
         utcNow: function () {
@@ -8018,23 +8039,37 @@
         },
 
         toUTC: function (date) {
-            return new Date(date.getUTCFullYear(),
+            var year = date.getUTCFullYear(),
+                dt = new Date(year,
                 date.getUTCMonth(),
                 date.getUTCDate(),
                 date.getUTCHours(),
                 date.getUTCMinutes(),
                 date.getUTCSeconds(),
                 date.getUTCMilliseconds());
+
+            if (year < 100) {
+                dt.setFullYear(year);
+            }
+
+            return dt;
         },
 
         toLocal: function (date) {
-            return new Date(Date.UTC(date.getFullYear(),
+            var year = date.getFullYear(),
+                dt = new Date(Date.UTC(year,
                 date.getMonth(),
                 date.getDate(),
                 date.getHours(),
                 date.getMinutes(),
                 date.getSeconds(),
                 date.getMilliseconds()));
+
+            if (year < 100) {
+                dt.setFullYear(year);
+            }
+
+            return dt;
         },
 
         dateAddSubTimespan: function (d, t, direction) {
@@ -22896,7 +22931,7 @@
             }
         },
         ctor: function () {
-            System.Random.$ctor1.call(this, System.Int64.clip32(System.Int64((new Date()).getTime()).mul(10000)));
+            System.Random.$ctor1.call(this, System.Int64.clip32(Bridge.Date.getTicks(new Date())));
         },
         $ctor1: function (seed) {
             this.$initialize();

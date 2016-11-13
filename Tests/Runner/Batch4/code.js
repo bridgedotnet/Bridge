@@ -15876,7 +15876,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.Assert.areEqual(1, dt.getFullYear());
         },
         millisecondSinceEpochConstructorWorks: function () {
-            var dt = new Date(System.Int64([250327040,10]).toNumber()/10000);
+            var dt = Bridge.Date.fromTicks(System.Int64([250327040,10]));
             Bridge.Test.Assert.areEqual(1970, new Date(dt.valueOf() + Math.round((1) * 864e5)).getFullYear());
         },
         stringConstructorWorks: function () {
@@ -16015,43 +16015,43 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.Assert.areEqual(5, dt.getDay());
         },
         getTimeWorks: function () {
-            var dt = new Date(System.Int64(Date.UTC(1970, 1 - 1, 2)).mul(10000).toNumber()/10000);
-            Bridge.Test.Assert.areEqual(System.Int64(86400000), System.Int64((dt).getTime()));
+            var dt = Bridge.Date.fromTicks(Bridge.Date.utc(1970, 1, 2));
+            Bridge.Test.Assert.areEqual(System.Int64(86400000), System.Int64((dt).getTime() + Bridge.Date.offset));
         },
         valueOfWorks: function () {
-            var dt = new Date(System.Int64(Date.UTC(1970, 1 - 1, 2)).mul(10000).toNumber()/10000);
-            Bridge.Test.Assert.areEqual(86400000, dt.valueOf());
+            var dt = Bridge.Date.fromTicks(Bridge.Date.utc(1970, 1, 2));
+            Bridge.Test.Assert.areEqual(86400000, System.Int64((dt).valueOf() + Bridge.Date.offset));
         },
         getUtcFullYearWorks: function () {
-            var dt = new Date(System.Int64(Date.UTC(2011, 7 - 1, 12, 13, 42, 56, 345)).mul(10000).toNumber()/10000);
+            var dt = Bridge.Date.fromTicks(Bridge.Date.utc(2011, 7, 12, 13, 42, 56, 345));
             Bridge.Test.Assert.areEqual(2011, dt.getUTCFullYear());
         },
         getUtcMonthWorks: function () {
-            var dt = new Date(System.Int64(Date.UTC(2011, 7 - 1, 12, 13, 42, 56, 345)).mul(10000).toNumber()/10000);
+            var dt = Bridge.Date.fromTicks(Bridge.Date.utc(2011, 7, 12, 13, 42, 56, 345));
             Bridge.Test.Assert.areEqual(7, (dt.getUTCMonth() + 1));
         },
         getUtcDateWorks: function () {
-            var dt = new Date(System.Int64(Date.UTC(2011, 7 - 1, 12, 13, 42, 56, 345)).mul(10000).toNumber()/10000);
+            var dt = Bridge.Date.fromTicks(Bridge.Date.utc(2011, 7, 12, 13, 42, 56, 345));
             Bridge.Test.Assert.areEqual(12, dt.getUTCDate());
         },
         getUtcHoursWorks: function () {
-            var dt = new Date(System.Int64(Date.UTC(2011, 7 - 1, 12, 13, 42, 56, 345)).mul(10000).toNumber()/10000);
+            var dt = Bridge.Date.fromTicks(Bridge.Date.utc(2011, 7, 12, 13, 42, 56, 345));
             Bridge.Test.Assert.areEqual(13, dt.getUTCHours());
         },
         getUtcMinutesWorks: function () {
-            var dt = new Date(System.Int64(Date.UTC(2011, 7 - 1, 12, 13, 42, 56, 345)).mul(10000).toNumber()/10000);
+            var dt = Bridge.Date.fromTicks(Bridge.Date.utc(2011, 7, 12, 13, 42, 56, 345));
             Bridge.Test.Assert.areEqual(42, dt.getUTCMinutes());
         },
         getUtcSecondsWorks: function () {
-            var dt = new Date(System.Int64(Date.UTC(2011, 7 - 1, 12, 13, 42, 56, 345)).mul(10000).toNumber()/10000);
+            var dt = Bridge.Date.fromTicks(Bridge.Date.utc(2011, 7, 12, 13, 42, 56, 345));
             Bridge.Test.Assert.areEqual(56, dt.getUTCSeconds());
         },
         getUtcMillisecondsWorks: function () {
-            var dt = new Date(System.Int64(Date.UTC(2011, 7 - 1, 12, 13, 42, 56, 345)).mul(10000).toNumber()/10000);
+            var dt = Bridge.Date.fromTicks(Bridge.Date.utc(2011, 7, 12, 13, 42, 56, 345));
             Bridge.Test.Assert.areEqual(345, dt.getUTCMilliseconds());
         },
         getUtcDayWorks: function () {
-            var dt = new Date(System.Int64(Date.UTC(2011, 8 - 1, 12, 13, 42, 56, 345)).mul(10000).toNumber()/10000);
+            var dt = Bridge.Date.fromTicks(Bridge.Date.utc(2011, 8, 12, 13, 42, 56, 345));
             Bridge.Test.Assert.areEqual(5, dt.getUTCDay());
         },
         parseWorks: function () {
@@ -16139,19 +16139,19 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.Assert.areEqual(milliseconds, dt.getUTCMilliseconds());
         },
         utcYMDWorks: function () {
-            this.assertDateUtc(new Date(System.Int64(Date.UTC(2011, 7 - 1, 12)).mul(10000).toNumber()/10000), 2011, 7, 12, 0, 0, 0, 0);
+            this.assertDateUtc(Bridge.Date.fromTicks(Bridge.Date.utc(2011, 7, 12)), 2011, 7, 12, 0, 0, 0, 0);
         },
         utcYMDHWorks: function () {
-            this.assertDateUtc(new Date(System.Int64(Date.UTC(2011, 7 - 1, 12, 13)).mul(10000).toNumber()/10000), 2011, 7, 12, 13, 0, 0, 0);
+            this.assertDateUtc(Bridge.Date.fromTicks(Bridge.Date.utc(2011, 7, 12, 13)), 2011, 7, 12, 13, 0, 0, 0);
         },
         utcYMDHNWorks: function () {
-            this.assertDateUtc(new Date(System.Int64(Date.UTC(2011, 7 - 1, 12, 13, 42)).mul(10000).toNumber()/10000), 2011, 7, 12, 13, 42, 0, 0);
+            this.assertDateUtc(Bridge.Date.fromTicks(Bridge.Date.utc(2011, 7, 12, 13, 42)), 2011, 7, 12, 13, 42, 0, 0);
         },
         utcYMDHNSWorks: function () {
-            this.assertDateUtc(new Date(System.Int64(Date.UTC(2011, 7 - 1, 12, 13, 42, 56)).mul(10000).toNumber()/10000), 2011, 7, 12, 13, 42, 56, 0);
+            this.assertDateUtc(Bridge.Date.fromTicks(Bridge.Date.utc(2011, 7, 12, 13, 42, 56)), 2011, 7, 12, 13, 42, 56, 0);
         },
         utcYMDHNSUWorks: function () {
-            this.assertDateUtc(new Date(System.Int64(Date.UTC(2011, 7 - 1, 12, 13, 42, 56, 345)).mul(10000).toNumber()/10000), 2011, 7, 12, 13, 42, 56, 345);
+            this.assertDateUtc(Bridge.Date.fromTicks(Bridge.Date.utc(2011, 7, 12, 13, 42, 56, 345)), 2011, 7, 12, 13, 42, 56, 345);
         },
         subtractingDatesWorks: function () {
             Bridge.Test.Assert.areEqual(86400000, (Bridge.Date.subdd(new Date(2011, 7 - 1, 12), new Date(2011, 7 - 1, 11))).getTotalMilliseconds());
@@ -16211,49 +16211,49 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.Assert.areEqual(12, mdt.getDate());
         },
         getHashCodeWorks: function () {
-            Bridge.Test.Assert.areEqual(Bridge.getHashCode(new Date(System.Int64(0).toNumber()/10000)), Bridge.getHashCode(new Date(System.Int64(0).toNumber()/10000)));
-            Bridge.Test.Assert.areEqual(Bridge.getHashCode(new Date(System.Int64(10000).toNumber()/10000)), Bridge.getHashCode(new Date(System.Int64(10000).toNumber()/10000)));
-            Bridge.Test.Assert.areNotEqual(Bridge.getHashCode(new Date(System.Int64(10000).toNumber()/10000)), Bridge.getHashCode(new Date(System.Int64(0).toNumber()/10000)));
+            Bridge.Test.Assert.areEqual(Bridge.getHashCode(Bridge.Date.fromTicks(System.Int64(0))), Bridge.getHashCode(Bridge.Date.fromTicks(System.Int64(0))));
+            Bridge.Test.Assert.areEqual(Bridge.getHashCode(Bridge.Date.fromTicks(System.Int64(10000))), Bridge.getHashCode(Bridge.Date.fromTicks(System.Int64(10000))));
+            Bridge.Test.Assert.areNotEqual(Bridge.getHashCode(Bridge.Date.fromTicks(System.Int64(10000))), Bridge.getHashCode(Bridge.Date.fromTicks(System.Int64(0))));
             Bridge.Test.Assert.true(System.Int64(Bridge.getHashCode(new Date(3000, 1 - 1, 1))).lt(System.Int64([-1,0])));
         },
         equalsWorks: function () {
-            Bridge.Test.Assert.true(Bridge.equals(new Date(System.Int64(0).toNumber()/10000), new Date(System.Int64(0).toNumber()/10000)));
-            Bridge.Test.Assert.false(Bridge.equals(new Date(System.Int64(10000).toNumber()/10000), new Date(System.Int64(0).toNumber()/10000)));
-            Bridge.Test.Assert.false(Bridge.equals(new Date(System.Int64(0).toNumber()/10000), new Date(System.Int64(10000).toNumber()/10000)));
-            Bridge.Test.Assert.true(Bridge.equals(new Date(System.Int64(10000).toNumber()/10000), new Date(System.Int64(10000).toNumber()/10000)));
+            Bridge.Test.Assert.true(Bridge.equals(Bridge.Date.fromTicks(System.Int64(0)), Bridge.Date.fromTicks(System.Int64(0))));
+            Bridge.Test.Assert.false(Bridge.equals(Bridge.Date.fromTicks(System.Int64(10000)), Bridge.Date.fromTicks(System.Int64(0))));
+            Bridge.Test.Assert.false(Bridge.equals(Bridge.Date.fromTicks(System.Int64(0)), Bridge.Date.fromTicks(System.Int64(10000))));
+            Bridge.Test.Assert.true(Bridge.equals(Bridge.Date.fromTicks(System.Int64(10000)), Bridge.Date.fromTicks(System.Int64(10000))));
         },
         iEquatableEqualsWorks_SPI_1608: function () {
-            Bridge.Test.Assert.true(Bridge.equalsT(new Date(System.Int64(0).toNumber()/10000), new Date(System.Int64(0).toNumber()/10000)));
-            Bridge.Test.Assert.false(Bridge.equalsT(new Date(System.Int64(10000).toNumber()/10000), new Date(System.Int64(0).toNumber()/10000)));
-            Bridge.Test.Assert.false(Bridge.equalsT(new Date(System.Int64(0).toNumber()/10000), new Date(System.Int64(10000).toNumber()/10000)));
-            Bridge.Test.Assert.true(Bridge.equalsT(new Date(System.Int64(10000).toNumber()/10000), new Date(System.Int64(10000).toNumber()/10000)));
+            Bridge.Test.Assert.true(Bridge.equalsT(Bridge.Date.fromTicks(System.Int64(0)), Bridge.Date.fromTicks(System.Int64(0))));
+            Bridge.Test.Assert.false(Bridge.equalsT(Bridge.Date.fromTicks(System.Int64(10000)), Bridge.Date.fromTicks(System.Int64(0))));
+            Bridge.Test.Assert.false(Bridge.equalsT(Bridge.Date.fromTicks(System.Int64(0)), Bridge.Date.fromTicks(System.Int64(10000))));
+            Bridge.Test.Assert.true(Bridge.equalsT(Bridge.Date.fromTicks(System.Int64(10000)), Bridge.Date.fromTicks(System.Int64(10000))));
 
-            Bridge.Test.Assert.true(Bridge.equalsT(Bridge.cast(new Date(System.Int64(0).toNumber()/10000), System.IEquatable$1(Date)), new Date(System.Int64(0).toNumber()/10000), Date));
-            Bridge.Test.Assert.false(Bridge.equalsT(Bridge.cast(new Date(System.Int64(10000).toNumber()/10000), System.IEquatable$1(Date)), new Date(System.Int64(0).toNumber()/10000), Date));
-            Bridge.Test.Assert.false(Bridge.equalsT(Bridge.cast(new Date(System.Int64(0).toNumber()/10000), System.IEquatable$1(Date)), new Date(System.Int64(10000).toNumber()/10000), Date));
-            Bridge.Test.Assert.true(Bridge.equalsT(Bridge.cast(new Date(System.Int64(10000).toNumber()/10000), System.IEquatable$1(Date)), new Date(System.Int64(10000).toNumber()/10000), Date));
+            Bridge.Test.Assert.true(Bridge.equalsT(Bridge.cast(Bridge.Date.fromTicks(System.Int64(0)), System.IEquatable$1(Date)), Bridge.Date.fromTicks(System.Int64(0)), Date));
+            Bridge.Test.Assert.false(Bridge.equalsT(Bridge.cast(Bridge.Date.fromTicks(System.Int64(10000)), System.IEquatable$1(Date)), Bridge.Date.fromTicks(System.Int64(0)), Date));
+            Bridge.Test.Assert.false(Bridge.equalsT(Bridge.cast(Bridge.Date.fromTicks(System.Int64(0)), System.IEquatable$1(Date)), Bridge.Date.fromTicks(System.Int64(10000)), Date));
+            Bridge.Test.Assert.true(Bridge.equalsT(Bridge.cast(Bridge.Date.fromTicks(System.Int64(10000)), System.IEquatable$1(Date)), Bridge.Date.fromTicks(System.Int64(10000)), Date));
         },
         staticEqualsWorks: function () {
-            Bridge.Test.Assert.true(Bridge.equalsT(new Date(System.Int64(0).toNumber()/10000), new Date(System.Int64(0).toNumber()/10000)));
-            Bridge.Test.Assert.false(Bridge.equalsT(new Date(System.Int64(10000).toNumber()/10000), new Date(System.Int64(0).toNumber()/10000)));
-            Bridge.Test.Assert.false(Bridge.equalsT(new Date(System.Int64(0).toNumber()/10000), new Date(System.Int64(10000).toNumber()/10000)));
-            Bridge.Test.Assert.true(Bridge.equalsT(new Date(System.Int64(10000).toNumber()/10000), new Date(System.Int64(10000).toNumber()/10000)));
+            Bridge.Test.Assert.true(Bridge.equalsT(Bridge.Date.fromTicks(System.Int64(0)), Bridge.Date.fromTicks(System.Int64(0))));
+            Bridge.Test.Assert.false(Bridge.equalsT(Bridge.Date.fromTicks(System.Int64(10000)), Bridge.Date.fromTicks(System.Int64(0))));
+            Bridge.Test.Assert.false(Bridge.equalsT(Bridge.Date.fromTicks(System.Int64(0)), Bridge.Date.fromTicks(System.Int64(10000))));
+            Bridge.Test.Assert.true(Bridge.equalsT(Bridge.Date.fromTicks(System.Int64(10000)), Bridge.Date.fromTicks(System.Int64(10000))));
         },
         compareToWorks: function () {
-            Bridge.Test.Assert.true(Bridge.compare(new Date(System.Int64(0).toNumber()/10000), new Date(System.Int64(0).toNumber()/10000)) === 0);
-            Bridge.Test.Assert.true(Bridge.compare(new Date(System.Int64(10000).toNumber()/10000), new Date(System.Int64(0).toNumber()/10000)) > 0);
-            Bridge.Test.Assert.true(Bridge.compare(new Date(System.Int64(0).toNumber()/10000), new Date(System.Int64(10000).toNumber()/10000)) < 0);
+            Bridge.Test.Assert.true(Bridge.compare(Bridge.Date.fromTicks(System.Int64(0)), Bridge.Date.fromTicks(System.Int64(0))) === 0);
+            Bridge.Test.Assert.true(Bridge.compare(Bridge.Date.fromTicks(System.Int64(10000)), Bridge.Date.fromTicks(System.Int64(0))) > 0);
+            Bridge.Test.Assert.true(Bridge.compare(Bridge.Date.fromTicks(System.Int64(0)), Bridge.Date.fromTicks(System.Int64(10000))) < 0);
         },
         staticCompareWorks: function () {
-            Bridge.Test.Assert.true(Bridge.compare(new Date(System.Int64(0).toNumber()/10000), new Date(System.Int64(0).toNumber()/10000)) === 0);
-            Bridge.Test.Assert.true(Bridge.compare(new Date(System.Int64(10000).toNumber()/10000), new Date(System.Int64(0).toNumber()/10000)) > 0);
-            Bridge.Test.Assert.true(Bridge.compare(new Date(System.Int64(0).toNumber()/10000), new Date(System.Int64(10000).toNumber()/10000)) < 0);
+            Bridge.Test.Assert.true(Bridge.compare(Bridge.Date.fromTicks(System.Int64(0)), Bridge.Date.fromTicks(System.Int64(0))) === 0);
+            Bridge.Test.Assert.true(Bridge.compare(Bridge.Date.fromTicks(System.Int64(10000)), Bridge.Date.fromTicks(System.Int64(0))) > 0);
+            Bridge.Test.Assert.true(Bridge.compare(Bridge.Date.fromTicks(System.Int64(0)), Bridge.Date.fromTicks(System.Int64(10000))) < 0);
         },
         iComparableCompareToWorks_SPI_1609: function () {
             // #1609
-            Bridge.Test.Assert.true(Bridge.compare(Bridge.cast(new Date(System.Int64(0).toNumber()/10000), System.IComparable$1(Date)), new Date(System.Int64(0).toNumber()/10000), false, Date) === 0);
-            Bridge.Test.Assert.true(Bridge.compare(Bridge.cast(new Date(System.Int64(10000).toNumber()/10000), System.IComparable$1(Date)), new Date(System.Int64(0).toNumber()/10000), false, Date) > 0);
-            Bridge.Test.Assert.true(Bridge.compare(Bridge.cast(new Date(System.Int64(0).toNumber()/10000), System.IComparable$1(Date)), new Date(System.Int64(10000).toNumber()/10000), false, Date) < 0);
+            Bridge.Test.Assert.true(Bridge.compare(Bridge.cast(Bridge.Date.fromTicks(System.Int64(0)), System.IComparable$1(Date)), Bridge.Date.fromTicks(System.Int64(0)), false, Date) === 0);
+            Bridge.Test.Assert.true(Bridge.compare(Bridge.cast(Bridge.Date.fromTicks(System.Int64(10000)), System.IComparable$1(Date)), Bridge.Date.fromTicks(System.Int64(0)), false, Date) > 0);
+            Bridge.Test.Assert.true(Bridge.compare(Bridge.cast(Bridge.Date.fromTicks(System.Int64(0)), System.IComparable$1(Date)), Bridge.Date.fromTicks(System.Int64(10000)), false, Date) < 0);
         },
         datePropertyWorks: function () {
             var dt = new Date(2012, 8 - 1, 12, 13, 14, 15, 16);

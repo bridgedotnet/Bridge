@@ -20,7 +20,7 @@ namespace System
         /// Initializes a new instance of the DateTime structure to a specified number of ticks.
         /// </summary>
         /// <param name="value">A date and time expressed in the number of 100-nanosecond intervals that have elapsed since January 1, 0001 at 00:00:00.000 in the Gregorian calendar.</param>
-        [Template("new Date({value}.toNumber()/10000)")]
+        [Template("Bridge.Date.fromTicks({value})")]
         public extern DateTime(long value);
 
         /// <summary>
@@ -47,22 +47,22 @@ namespace System
         [Template("new Date({year}, {month} - 1, {day}, {hours}, {minutes}, {seconds}, {milliseconds})")]
         public extern DateTime(int year, int month, int day, int hours, int minutes, int seconds, int milliseconds);
 
-        [Template("System.Int64(Date.UTC({year}, {month} - 1, {day}, {hours}, {minutes}, {seconds}, {ms})).mul(10000)")]
+        [Template("Bridge.Date.utc({year}, {month}, {day}, {hours}, {minutes}, {seconds}, {ms})")]
         public static extern long Utc(int year, int month, int day, int hours, int minutes, int seconds, int ms);
 
-        [Template("System.Int64(Date.UTC({year}, {month} - 1, {day}, {hours}, {minutes}, {seconds})).mul(10000)")]
+        [Template("Bridge.Date.utc({year}, {month}, {day}, {hours}, {minutes}, {seconds})")]
         public static extern long Utc(int year, int month, int day, int hours, int minutes, int seconds);
 
-        [Template("System.Int64(Date.UTC({year}, {month} - 1, {day}, {hours}, {minutes})).mul(10000)")]
+        [Template("Bridge.Date.utc({year}, {month}, {day}, {hours}, {minutes})")]
         public static extern long Utc(int year, int month, int day, int hours, int minutes);
 
-        [Template("System.Int64(Date.UTC({year}, {month} - 1, {day}, {hours})).mul(10000)")]
+        [Template("Bridge.Date.utc({year}, {month}, {day}, {hours})")]
         public static extern long Utc(int year, int month, int day, int hours);
 
-        [Template("System.Int64(Date.UTC({year}, {month} - 1, {day})).mul(10000)")]
+        [Template("Bridge.Date.utc({year}, {month}, {day})")]
         public static extern long Utc(int year, int month, int day);
 
-        [Template("System.Int64(Date.UTC({year}, {month} - 1)).mul(10000)")]
+        [Template("Bridge.Date.utc({year}, {month})")]
         public static extern long Utc(int year, int month);
 
         public static extern DateTime Now
@@ -115,7 +115,10 @@ namespace System
 
         public extern int GetSeconds();
 
-        [Template("System.Int64(({this}).getTime())")]
+        [Template("System.Int64(({this}).valueOf() + Bridge.Date.offset)")]
+        public override extern object ValueOf();
+
+        [Template("System.Int64(({this}).getTime() + Bridge.Date.offset)")]
         public extern long GetTime();
 
         public extern int GetTimezoneOffset();
@@ -393,7 +396,7 @@ namespace System
 
         public extern long Ticks
         {
-            [Template("System.Int64(({this}).getTime()).mul(10000)")]
+            [Template("Bridge.Date.getTicks({this})")]
             get;
         }
     }
