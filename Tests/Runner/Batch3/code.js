@@ -11103,6 +11103,46 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2045", {
+        statics: {
+            testDoubleEscapingInterpolation: function () {
+                var s = System.String.format("Hello \"World!\"", null);
+                Bridge.Test.Assert.areEqual("Hello \"World!\"", s);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2046", {
+        statics: {
+            testSafeNavigationOperator: function () {
+                var $t;
+                var dt = new Date();
+                var ndt = Bridge.cast(dt, Date, true);
+                var s1 = !Bridge.equals(System.Nullable.getValue(ndt), null) ? Bridge.Date.format(System.Nullable.getValue(ndt), "yyyy-MM-dd HH:mm:ss") : null;
+                var s2 = !Bridge.equals(($t = Bridge.cast(dt, Date, true)), null) ? Bridge.Date.format($t, "yyyy-MM-dd HH:mm:ss") : null;
+
+                Bridge.Test.Assert.areEqual(s1, s2);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2048", {
+        statics: {
+            testUnaryOperatorBlockCompilationError: function () {
+                var a = !new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2048.Derived().getproperty();
+                Bridge.Test.Assert.true(a);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2048.Base", {
+        getproperty: function () {
+            return false;
+        },
+        setproperty: function (value) {
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
@@ -19296,6 +19336,12 @@ Bridge.$N1391Result =                 r;
             this.setSomeProp((this.getSomeProp() + 11) | 0);
         }
     }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2048.Derived", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2048.Base],
+        setproperty: function (value) {
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240B", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A],
