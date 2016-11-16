@@ -771,6 +771,7 @@
         },
 
         arrayTypes: [globals.Array, globals.Uint8Array, globals.Int8Array, globals.Int16Array, globals.Uint16Array, globals.Int32Array, globals.Uint32Array, globals.Float32Array, globals.Float64Array, globals.Uint8ClampedArray],
+
         isArray: function (obj, ctor) {
             var c = ctor || (obj != null ? obj.constructor : null);
 
