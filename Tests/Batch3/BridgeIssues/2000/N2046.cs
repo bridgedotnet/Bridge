@@ -8,7 +8,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge2046
     {
         [Test]
-        public static void TestCase()
+        public static void TestSafeNavigationOperator()
         {
             var dt = DateTime.Now;
             var ndt = (DateTime?)dt;

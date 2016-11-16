@@ -11114,7 +11114,7 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2046", {
         statics: {
-            testCase: function () {
+            testSafeNavigationOperator: function () {
                 var $t;
                 var dt = new Date();
                 var ndt = Bridge.cast(dt, Date, true);
