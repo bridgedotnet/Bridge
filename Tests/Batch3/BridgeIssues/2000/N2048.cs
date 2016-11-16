@@ -17,7 +17,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [Test]
-        public static void TestCase()
+        public static void TestUnaryOperatorBlockCompilationError()
         {
             var a = !new Derived().property;
             Assert.True(a);

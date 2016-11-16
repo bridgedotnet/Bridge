@@ -11128,7 +11128,7 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2048", {
         statics: {
-            testCase: function () {
+            testUnaryOperatorBlockCompilationError: function () {
                 var a = !new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2048.Derived().getproperty();
                 Bridge.Test.Assert.true(a);
             }
