@@ -158,7 +158,7 @@ namespace Bridge.Translator
 
             if (!immutable)
             {
-                var mutableFields = this.TypeInfo.Type.GetFields(f => !f.IsReadOnly && !f.IsConst, GetMemberOptions.IgnoreInheritedMembers);
+                var mutableFields = this.TypeInfo.Type.GetFields(f => !f.IsConst, GetMemberOptions.IgnoreInheritedMembers);
                 var autoProps = typeDef.Properties.Where(Helpers.IsAutoProperty);
                 var autoEvents = this.TypeInfo.Type.GetEvents(null, GetMemberOptions.IgnoreInheritedMembers);
                 immutable = !mutableFields.Any() && !autoProps.Any() && !autoEvents.Any();

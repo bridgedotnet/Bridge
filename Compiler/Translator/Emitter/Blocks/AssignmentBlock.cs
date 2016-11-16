@@ -33,7 +33,7 @@ namespace Bridge.Translator
             this.VisitAssignmentExpression();
         }
 
-        protected bool ResolveOperator(AssignmentExpression assignmentExpression, OperatorResolveResult orr, int initCount)
+        protected bool ResolveOperator(AssignmentExpression assignmentExpression, OperatorResolveResult orr, int initCount, bool thisAssignment)
         {
             var method = orr != null ? orr.UserDefinedOperatorMethod : null;
 
@@ -43,7 +43,7 @@ namespace Bridge.Translator
 
                 if (!string.IsNullOrWhiteSpace(inline))
                 {
-                    if (this.Emitter.Writers.Count == initCount)
+                    if (this.Emitter.Writers.Count == initCount && !thisAssignment)
                     {
                         this.Write("= ");
                     }
@@ -59,7 +59,7 @@ namespace Bridge.Translator
                 }
                 else if (!this.Emitter.Validator.IsIgnoreType(method.DeclaringTypeDefinition))
                 {
-                    if (this.Emitter.Writers.Count == initCount)
+                    if (this.Emitter.Writers.Count == initCount && !thisAssignment)
                     {
                         this.Write("= ");
                     }
@@ -425,9 +425,13 @@ namespace Bridge.Translator
                 return;
             }
 
-            if (this.ResolveOperator(assignmentExpression, orr, initCount))
+            if (this.ResolveOperator(assignmentExpression, orr, initCount, thisAssignment))
             {
-                if (needReturnValue)
+                if (thisAssignment)
+                {
+                    this.Write(")." + JS.Funcs.CLONE + "(this)");
+                }
+                else if (needReturnValue)
                 {
                     this.Write(")");
                 }
