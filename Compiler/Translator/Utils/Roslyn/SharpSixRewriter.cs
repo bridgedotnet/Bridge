@@ -306,7 +306,7 @@ namespace Bridge.Translator
                 var interpolatedStringTextSyntax = content as InterpolatedStringTextSyntax;
                 if (interpolatedStringTextSyntax != null)
                 {
-                    str += interpolatedStringTextSyntax.TextToken.Text;
+                    str += interpolatedStringTextSyntax.TextToken.ValueText;
                 }
                 else if (content is InterpolationSyntax)
                 {
