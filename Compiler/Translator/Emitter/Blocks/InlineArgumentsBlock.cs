@@ -502,7 +502,7 @@ namespace Bridge.Translator
                             var rr = this.Emitter.Resolver.ResolveNode(node, this.Emitter);
                             var type = rr.Type;
                             var mrr = rr as MemberResolveResult;
-                            if (mrr != null && mrr.Member.ReturnType.Kind != TypeKind.Enum)
+                            if (mrr != null && mrr.Member.ReturnType.Kind != TypeKind.Enum && mrr.TargetResult != null)
                             {
                                 type = mrr.TargetResult.Type;
                             }

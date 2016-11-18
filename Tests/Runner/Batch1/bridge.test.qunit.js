@@ -11,40 +11,40 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
                 return Bridge.Test.Assert.assert.async();
             },
             areEqual: function (expected, actual) {
-                Bridge.Test.Assert.assert.deepEqual(actual, expected);
+                Bridge.Test.Assert.assert.deepEqual(Bridge.unbox(actual), Bridge.unbox(expected));
             },
             areEqual$1: function (expected, actual, description) {
-                Bridge.Test.Assert.assert.deepEqual(actual, expected, description);
+                Bridge.Test.Assert.assert.deepEqual(Bridge.unbox(actual), Bridge.unbox(expected), description);
             },
             areDeepEqual: function (expected, actual) {
-                Bridge.Test.Assert.assert.deepEqual(actual, expected);
+                Bridge.Test.Assert.assert.deepEqual(Bridge.unbox(actual), Bridge.unbox(expected));
             },
             areDeepEqual$1: function (expected, actual, description) {
-                Bridge.Test.Assert.assert.deepEqual(actual, expected, description);
+                Bridge.Test.Assert.assert.deepEqual(Bridge.unbox(actual), Bridge.unbox(expected), description);
             },
             areStrictEqual: function (expected, actual) {
-                Bridge.Test.Assert.assert.strictEqual(actual, expected);
+                Bridge.Test.Assert.assert.strictEqual(Bridge.unbox(actual), Bridge.unbox(expected));
             },
             areStrictEqual$1: function (expected, actual, description) {
-                Bridge.Test.Assert.assert.strictEqual(actual, expected, description);
+                Bridge.Test.Assert.assert.strictEqual(Bridge.unbox(actual), Bridge.unbox(expected), description);
             },
             areNotEqual: function (expected, actual) {
-                Bridge.Test.Assert.assert.notDeepEqual(actual, expected);
+                Bridge.Test.Assert.assert.notDeepEqual(Bridge.unbox(actual), Bridge.unbox(expected));
             },
             areNotEqual$1: function (expected, actual, description) {
-                Bridge.Test.Assert.assert.notDeepEqual(actual, expected, description);
+                Bridge.Test.Assert.assert.notDeepEqual(Bridge.unbox(actual), Bridge.unbox(expected), description);
             },
             areNotDeepEqual: function (expected, actual) {
-                Bridge.Test.Assert.assert.notDeepEqual(actual, expected);
+                Bridge.Test.Assert.assert.notDeepEqual(Bridge.unbox(actual), Bridge.unbox(expected));
             },
             areNotDeepEqual$1: function (expected, actual, description) {
-                Bridge.Test.Assert.assert.notDeepEqual(actual, expected, description);
+                Bridge.Test.Assert.assert.notDeepEqual(Bridge.unbox(actual), Bridge.unbox(expected), description);
             },
             areNotStrictEqual: function (expected, actual) {
-                Bridge.Test.Assert.assert.notStrictEqual(actual, expected);
+                Bridge.Test.Assert.assert.notStrictEqual(Bridge.unbox(actual), Bridge.unbox(expected));
             },
             areNotStrictEqual$1: function (expected, actual, description) {
-                Bridge.Test.Assert.assert.notStrictEqual(actual, expected, description);
+                Bridge.Test.Assert.assert.notStrictEqual(Bridge.unbox(actual), Bridge.unbox(expected), description);
             },
             true: function (condition) {
                 Bridge.Test.Assert.assert.ok(condition);
@@ -92,10 +92,10 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
                 }
             },
             throws$3: function (block, expected) {
-                Bridge.Test.Assert.assert.throws(block, expected);
+                Bridge.Test.Assert.assert.throws(block, Bridge.unbox(expected));
             },
             throws$4: function (block, expected, message) {
-                Bridge.Test.Assert.assert.throws(block, expected, message);
+                Bridge.Test.Assert.assert.throws(block, Bridge.unbox(expected), message);
             },
             throws$1: function (block, expected) {
                 Bridge.Test.Assert.assert.throws(block, expected);

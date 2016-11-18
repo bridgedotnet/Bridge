@@ -12,8 +12,8 @@ namespace Bridge.ClientTest
         public void TestLogMessageObject()
         {
             AssertLogMessageObject("#0 - ", "Test Bridge Console Log Message Object", "Test Bridge Console Log Message Object");
-            AssertLogMessageObject("#1 - ", true, "true");
-            AssertLogMessageObject("#2 - ", false, "false");
+            AssertLogMessageObject("#1 - ", true, "True");
+            AssertLogMessageObject("#2 - ", false, "False");
             AssertLogMessageObject("#3 - ", -1, "-1");
             AssertLogMessageObject("#4 - ", 1, "1");
             AssertLogMessageObject("#5 - ", -12345678, "-12345678");
@@ -30,8 +30,8 @@ namespace Bridge.ClientTest
             AssertLogMessageObject("#16 - ", 12345678d, "12345678");
             AssertLogMessageObject("#17 - ", -1.12345678, "-1.12345678");
             AssertLogMessageObject("#18 - ", 1.12345678, "1.12345678");
-            AssertLogMessageObject("#19 - ", -12345678.12345678, "-12345678.12345678");
-            AssertLogMessageObject("#20 - ", 12345678.12345678, "12345678.12345678");
+            AssertLogMessageObject("#19 - ", -12345678.12345678, "-12345678.1234568");
+            AssertLogMessageObject("#20 - ", 12345678.12345678, "12345678.1234568");
             AssertLogMessageObject("#21 - ", -1m, "-1");
             AssertLogMessageObject("#22 - ", 1m, "1");
             AssertLogMessageObject("#23 - ", -12345678m, "-12345678");

@@ -19,7 +19,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         twoDimensionalArray: null,
         colorValue: 1,
         anyValueString: "AnyValueString",
-        anyValueInteger: 1,
+        anyValueInteger: Bridge.box(1, System.Int32),
         dynamicValueInteger: 7,
         undefinedValue: null,
         config: {

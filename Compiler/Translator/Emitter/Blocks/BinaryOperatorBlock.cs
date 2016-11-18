@@ -924,10 +924,6 @@ namespace Bridge.Translator
                         argsInfo.ArgumentsNames = new string[] { "this" };
                         argsInfo.ThisArgument = result;
                         new InlineArgumentsBlock(this.Emitter, argsInfo, writer.InlineCode).Emit();
-
-                        //result = writer.InlineCode.Replace("{this}", result);
-                        //this.Write(result);
-
                         return;
                     }
                 }

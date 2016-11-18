@@ -132,7 +132,7 @@ namespace Bridge.ClientTest.Linq
 
             var doubleNumbers = numbers.OfType<double>().ToArray();
 
-            Assert.AreDeepEqual(new[] { 1.0, 3, 5, 7.0 }, doubleNumbers, "Issue #218. OfType<double> should get only double type items");
+            Assert.AreDeepEqual(new[] { 1.0, 7.0 }, doubleNumbers, "Issue #218. OfType<double> should get only double type items");
         }
     }
 }

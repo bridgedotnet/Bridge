@@ -982,8 +982,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             EnsureNumber(DecimalZero, "0", "DecimalZero");
             EnsureNumber(DecimalOne, "1", "DecimalOne");
             EnsureNumber(DecimalMinusOne, "-1", "DecimalMinusOne");
-            EnsureNumber(DecimalMaxValue, "7.9228162514264337593543950335e+28", "DecimalMaxValue");
-            EnsureNumber(DecimalMinValue, "-7.9228162514264337593543950335e+28", "DecimalMinValue");
+            EnsureNumber(DecimalMaxValue, "79228162514264337593543950335", "DecimalMaxValue");
+            EnsureNumber(DecimalMinValue, "-79228162514264337593543950335", "DecimalMinValue");
 
             // Decimal consts in expressions
             decimal dz = 0m;
@@ -1000,8 +1000,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             EnsureNumber(DecimalZero, "0", "DecimalZeroin expression");
             EnsureNumber(DecimalOne, "1", "DecimalOnein expression");
             EnsureNumber(DecimalMinusOne, "-1", "DecimalMinusOnein expression");
-            EnsureNumber(DecimalMaxValue, "7.9228162514264337593543950335e+28", "DecimalMaxValuein expression");
-            EnsureNumber(DecimalMinValue, "-7.9228162514264337593543950335e+28", "DecimalMinValuein expression");
+            EnsureNumber(DecimalMaxValue, "79228162514264337593543950335", "DecimalMaxValuein expression");
+            EnsureNumber(DecimalMinValue, "-79228162514264337593543950335", "DecimalMinValuein expression");
 
             var numberPositiveInfinity = Script.Get<object>("Number.POSITIVE_INFINITY");
             var numberNegativeInfinity = Script.Get<object>("Number.NEGATIVE_INFINITY");
@@ -1015,9 +1015,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             var DoublePositiveInfinity = double.PositiveInfinity;
             var DoubleNaN = double.NaN;
 
-            EnsureNumber(DoubleMaxValue, "1.7976931348623157e+308", "DoubleMaxValue");
-            EnsureNumber(DoubleMinValue, "-1.7976931348623157e+308", "DoubleMinValue");
-            EnsureNumber(DoubleEpsilon, "5e-324", "DoubleEpsilon");
+            EnsureNumber(DoubleMaxValue, "1.79769313486232E+308", "DoubleMaxValue");
+            EnsureNumber(DoubleMinValue, "-1.79769313486232E+308", "DoubleMinValue");
+            EnsureNumber(DoubleEpsilon, "4.94065645841247E-324", "DoubleEpsilon");
             Assert.AreEqual(numberNegativeInfinity, DoubleNegativeInfinity, "DoubleNegativeInfinity");
             Assert.AreEqual(numberPositiveInfinity, DoublePositiveInfinity, "DoublePositiveInfinity");
             Assert.AreEqual(numberNaN, DoubleNaN, "DoubleNaN");
@@ -1031,9 +1031,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             DoublePositiveInfinity = double.PositiveInfinity + dblz;
             DoubleNaN = double.NaN + dblz;
 
-            EnsureNumber(DoubleMaxValue, "1.7976931348623157e+308", "DoubleMaxValuein expression");
-            EnsureNumber(DoubleMinValue, "-1.7976931348623157e+308", "DoubleMinValuein expression");
-            EnsureNumber(DoubleEpsilon, "5e-324", "DoubleEpsilonin expression");
+            EnsureNumber(DoubleMaxValue, "1.79769313486232E+308", "DoubleMaxValuein expression");
+            EnsureNumber(DoubleMinValue, "-1.79769313486232E+308", "DoubleMinValuein expression");
+            EnsureNumber(DoubleEpsilon, "4.94065645841247E-324", "DoubleEpsilonin expression");
             Assert.AreEqual(numberNegativeInfinity, DoubleNegativeInfinity, "DoubleNegativeInfinityin expression");
             Assert.AreEqual(numberPositiveInfinity, DoublePositiveInfinity, "DoublePositiveInfinityin expression");
             Assert.AreEqual(numberNaN, DoubleNaN, "DoubleNaNin expression");
@@ -1048,15 +1048,15 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             var MathSQRT1_2 = Math.SQRT1_2;
             var MathSQRT2 = Math.SQRT2;
 
-            EnsureNumber(MathE, "2.718281828459045", "MathE");
-            EnsureNumber(MathLN10, "2.302585092994046", "MathLN10");
-            EnsureNumber(MathLN2, "0.6931471805599453", "MathLN2");
+            EnsureNumber(MathE, "2.71828182845905", "MathE");
+            EnsureNumber(MathLN10, "2.30258509299405", "MathLN10");
+            EnsureNumber(MathLN2, "0.69314718055995", "MathLN2");
             //IE has Math.LOG2E defined as 1.4426950408889633 instead of standard 1.4426950408889634
             AssertAlmostEqual(MathLOG2E, 1.4426950408889634, "MathLOG2E");
-            EnsureNumber(MathLOG10E, "0.4342944819032518", "MathLOG10E");
-            EnsureNumber(MathPI, "3.141592653589793", "MathPI");
-            EnsureNumber(MathSQRT1_2, "0.7071067811865476", "MathSQRT1_2");
-            EnsureNumber(MathSQRT2, "1.4142135623730951", "MathSQRT2");
+            EnsureNumber(MathLOG10E, "0.43429448190325", "MathLOG10E");
+            EnsureNumber(MathPI, "3.14159265358979", "MathPI");
+            EnsureNumber(MathSQRT1_2, "0.70710678118655", "MathSQRT1_2");
+            EnsureNumber(MathSQRT2, "1.4142135623731", "MathSQRT2");
 
             // Math consts in expression
             MathE = Math.E + 0;
@@ -1068,15 +1068,15 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             MathSQRT1_2 = Math.SQRT1_2 + 0;
             MathSQRT2 = Math.SQRT2 + 0;
 
-            EnsureNumber(MathE, "2.718281828459045", "MathEin expression");
-            EnsureNumber(MathLN10, "2.302585092994046", "MathLN10in expression");
-            EnsureNumber(MathLN2, "0.6931471805599453", "MathLN2in expression");
+            EnsureNumber(MathE, "2.71828182845905", "MathEin expression");
+            EnsureNumber(MathLN10, "2.30258509299405", "MathLN10in expression");
+            EnsureNumber(MathLN2, "0.69314718055995", "MathLN2in expression");
             //IE has Math.LOG2E defined as 1.4426950408889633 instead of standard 1.4426950408889634
             AssertAlmostEqual(MathLOG2E, 1.4426950408889634, "MathLOG2Ein expression");
-            EnsureNumber(MathLOG10E, "0.4342944819032518", "MathLOG10Ein expression");
-            EnsureNumber(MathPI, "3.141592653589793", "MathPIin expression");
-            EnsureNumber(MathSQRT1_2, "0.7071067811865476", "MathSQRT1_2in expression");
-            EnsureNumber(MathSQRT2, "1.4142135623730951", "MathSQRT2in expression");
+            EnsureNumber(MathLOG10E, "0.43429448190325", "MathLOG10Ein expression");
+            EnsureNumber(MathPI, "3.14159265358979", "MathPIin expression");
+            EnsureNumber(MathSQRT1_2, "0.70710678118655", "MathSQRT1_2in expression");
+            EnsureNumber(MathSQRT2, "1.4142135623731", "MathSQRT2in expression");
 
             // Single consts
             var SingleMaxValue = float.MaxValue;
@@ -1086,9 +1086,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             var SingleNegativeInfinity = float.NegativeInfinity;
             var SinglePositiveInfinity = float.PositiveInfinity;
 
-            EnsureNumber(SingleMaxValue, "3.40282347e+38", "SingleMaxValue");
-            EnsureNumber(SingleMinValue, "-3.40282347e+38", "SingleMinValue");
-            EnsureNumber(SingleEpsilon, "1.401298e-45", "SingleEpsilon");
+            EnsureNumber(SingleMaxValue, "3.402823E+38", "SingleMaxValue");
+            EnsureNumber(SingleMinValue, "-3.402823E+38", "SingleMinValue");
+            EnsureNumber(SingleEpsilon, "1.401298E-45", "SingleEpsilon");
             Assert.AreEqual(numberNaN, SingleNaN, "SingleNaN");
             Assert.AreEqual(numberNegativeInfinity, SingleNegativeInfinity, "SingleNegativeInfinity");
             Assert.AreEqual(numberPositiveInfinity, SinglePositiveInfinity, "SinglePositiveInfinity");
@@ -1102,9 +1102,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             SingleNegativeInfinity = float.NegativeInfinity + fz;
             SinglePositiveInfinity = float.PositiveInfinity + fz;
 
-            EnsureNumber(SingleMaxValue, "3.40282347e+38", "SingleMaxValuein expression");
-            EnsureNumber(SingleMinValue, "-3.40282347e+38", "SingleMinValuein expression");
-            EnsureNumber(SingleEpsilon, "1.401298e-45", "SingleEpsilonin expression");
+            EnsureNumber(SingleMaxValue, "3.402823E+38", "SingleMaxValuein expression");
+            EnsureNumber(SingleMinValue, "-3.402823E+38", "SingleMinValuein expression");
+            EnsureNumber(SingleEpsilon, "1.401298E-45", "SingleEpsilonin expression");
             Assert.AreEqual(numberNaN, SingleNaN, "SingleNaNin expression");
             Assert.AreEqual(numberNegativeInfinity, SingleNegativeInfinity, "SingleNegativeInfinityin expression");
             Assert.AreEqual(numberPositiveInfinity, SinglePositiveInfinity, "SinglePositiveInfinityin expression");

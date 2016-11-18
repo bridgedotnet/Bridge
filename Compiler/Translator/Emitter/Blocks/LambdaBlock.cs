@@ -147,7 +147,8 @@ namespace Bridge.Translator
         protected virtual void EmitLambda(IEnumerable<ParameterDeclaration> parameters, AstNode body, AstNode context)
         {
             var rr = this.Emitter.Resolver.ResolveNode(context, this.Emitter);
-
+            var oldLifting = this.Emitter.ForbidLifting;
+            this.Emitter.ForbidLifting = false;
             var analyzer = new CaptureAnalyzer(this.Emitter);
             analyzer.Analyze(this.Body, this.Parameters.Select(p => p.Name));
 
@@ -236,23 +237,29 @@ namespace Bridge.Translator
 
             if (analyzer.UsedVariables.Count == 0)
             {
-                var name = "f" + (this.Emitter.NamedFunctions.Count + 1);
-                var code = this.Emitter.Output.ToString().Substring(savedPos);
-                var pair = this.Emitter.NamedFunctions.FirstOrDefault(p => p.Value == code);
-
-                if (pair.Key != null && pair.Value != null)
+                if (!this.Emitter.ForbidLifting)
                 {
-                    name = pair.Key;
-                }
-                else
-                {
-                    this.Emitter.NamedFunctions.Add(name, code);
-                }
+                    var name = "f" + (this.Emitter.NamedFunctions.Count + 1);
+                    var code = this.Emitter.Output.ToString().Substring(savedPos);
+                    var pair = this.Emitter.NamedFunctions.FirstOrDefault(p => p.Value == code);
 
-                this.Emitter.Output.Remove(savedPos, this.Emitter.Output.Length - savedPos);
-                this.Emitter.Output.Insert(savedPos, JS.Vars.D_ + "." + BridgeTypes.ToJsName(this.Emitter.TypeInfo.Type, this.Emitter, true) + "." + name);
+                    if (pair.Key != null && pair.Value != null)
+                    {
+                        name = pair.Key;
+                    }
+                    else
+                    {
+                        this.Emitter.NamedFunctions.Add(name, code);
+                    }
+
+                    this.Emitter.Output.Remove(savedPos, this.Emitter.Output.Length - savedPos);
+                    this.Emitter.Output.Insert(savedPos, JS.Vars.D_ + "." + BridgeTypes.ToJsName(this.Emitter.TypeInfo.Type, this.Emitter, true) + "." + name);
+                }
+                
                 this.Emitter.ResetLevel(oldLevel);
             }
+
+            this.Emitter.ForbidLifting = oldLifting;
 
             if (this.Emitter.ThisRefCounter > savedThisCount)
             {

@@ -10,7 +10,7 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void TypePropertiesAreInt32()
         {
-            Assert.True((object)0 is char);
+            Assert.False((object)0 is char);
             Assert.False((object)0.5 is char);
             Assert.False((object)-1 is char);
             Assert.False((object)65536 is char);

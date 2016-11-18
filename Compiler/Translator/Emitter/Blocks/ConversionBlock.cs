@@ -8,6 +8,8 @@ using ICSharpCode.NRefactory.TypeSystem.Implementation;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ICSharpCode.NRefactory.CSharp.Resolver;
+using Object.Net.Utilities;
 
 namespace Bridge.Translator
 {
@@ -21,7 +23,7 @@ namespace Bridge.Translator
         protected sealed override void DoEmit()
         {
             this.AfterOutput = "";
-            this.AfterExpressionOutput = "";
+            this.AfterOutput2 = "";
             var expression = this.GetExpression();
 
             if (expressionInWork.Contains(expression))
@@ -88,6 +90,11 @@ namespace Bridge.Translator
             {
                 this.Write(this.AfterOutput);
             }
+
+            if (this.AfterOutput2.Length > 0)
+            {
+                this.Write(this.AfterOutput2);
+            }
         }
 
         protected virtual string AfterOutput
@@ -96,7 +103,7 @@ namespace Bridge.Translator
             set;
         }
 
-        protected virtual string AfterExpressionOutput
+        protected virtual string AfterOutput2
         {
             get;
             set;
@@ -159,8 +166,89 @@ namespace Bridge.Translator
             return 0;
         }
 
+        private static string GetBoxedType(IType itype, IEmitter emitter)
+        {
+            if (NullableType.IsNullable(itype))
+            {
+                itype = NullableType.GetUnderlyingType(itype);
+            }
+
+            return BridgeTypes.ToJsName(itype, emitter);
+        }
+
+        private static string GetInlineMethod(IEmitter emitter, string name, IType returnType, ResolveResult rr, Expression expression)
+        {
+            if (emitter.NamedBoxedFunctions.ContainsKey(rr.Type) && emitter.NamedBoxedFunctions[rr.Type].ContainsKey(name) && emitter.NamedBoxedFunctions[rr.Type][name] != null)
+            {
+                return JS.Vars.DBOX_ + "." + BridgeTypes.ToJsName(rr.Type, emitter, true) + "." + name.ToLowerCamelCase();
+            }
+
+            var methodDef = rr.Type.GetMembers().FirstOrDefault(m =>
+            {
+                if (m.Name == name && !m.IsStatic && m.ReturnType.Equals(returnType) && m.IsOverride)
+                {
+                    var method = m as IMethod;
+
+                    if (method != null && method.Parameters.Count == 0 && method.TypeParameters.Count == 0)
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            });
+
+            if (methodDef != null)
+            {
+                var inline = emitter.GetInline(methodDef);
+
+                if (inline != null)
+                {
+                    var writer = new Writer
+                    {
+                        InlineCode = inline,
+                        Output = emitter.Output,
+                        IsNewLine = emitter.IsNewLine
+                    };
+                    emitter.IsNewLine = false;
+                    emitter.Output = new StringBuilder();
+
+                    var argsInfo = new ArgumentsInfo(emitter, expression, rr);
+                    argsInfo.ArgumentsExpressions = new Expression[] {expression};
+                    argsInfo.ArgumentsNames = new string[] {"this"};
+                    argsInfo.ThisArgument = "obj";
+                    new InlineArgumentsBlock(emitter, argsInfo, writer.InlineCode).Emit();
+
+                    var result = emitter.Output.ToString();
+                    emitter.Output = writer.Output;
+                    emitter.IsNewLine = writer.IsNewLine;
+
+                    Dictionary<string, string> fn = null;
+
+                    if (emitter.NamedBoxedFunctions.ContainsKey(rr.Type))
+                    {
+                        fn = emitter.NamedBoxedFunctions[rr.Type];
+                    }
+                    else
+                    {
+                        fn = new Dictionary<string, string>();
+                        emitter.NamedBoxedFunctions.Add(rr.Type, fn);
+                    }
+
+                    result = string.Format("function(obj) {{return {0};}}", result);
+
+                    fn.Add(name, result);
+
+                    return JS.Vars.DBOX_ + "." + BridgeTypes.ToJsName(rr.Type, emitter, true) + "." + name.ToLowerCamelCase();
+                }
+
+            }
+
+            return null;
+        }
+
         private static int DoConversion(ConversionBlock block, Expression expression, Conversion conversion, IType expectedType,
-            int level, ResolveResult rr, bool ignoreConversionResolveResult = false)
+            int level, ResolveResult rr, bool ignoreConversionResolveResult = false, bool ignoreBoxing = false)
         {
             if (ConversionBlock.expressionIgnoreUserDefine.Contains(expression) && conversion.IsUserDefined)
             {
@@ -170,6 +258,81 @@ namespace Bridge.Translator
             if (block.Emitter.IsAssignment)
             {
                 return level;
+            }
+
+            if (!ignoreBoxing && expectedType.Kind != TypeKind.Dynamic)
+            {
+                var inv = expression.Parent as InvocationExpression;
+                var isArgument = inv != null && inv.Arguments.Contains(expression);
+
+                if (isArgument)
+                {
+                    var inv_rr = block.Emitter.Resolver.ResolveNode(inv, block.Emitter);
+                    var parent_rr = inv_rr as InvocationResolveResult;
+                    if (parent_rr != null)
+                    {
+                        isArgument = block.Emitter.Validator.IsIgnoreType(parent_rr.Member.DeclaringTypeDefinition) || block.Emitter.Validator.IsIgnoreType(parent_rr.Member);
+
+                        var attr = parent_rr.Member.Attributes.FirstOrDefault(a => a.AttributeType.FullName == "Bridge.UnboxAttribute");
+
+                        if (attr != null)
+                        {
+                            isArgument = (bool)attr.PositionalArguments.First().ConstantValue;
+                        }
+                        else
+                        {
+                            attr = parent_rr.Member.DeclaringTypeDefinition.Attributes.FirstOrDefault(a => a.AttributeType.FullName == "Bridge.UnboxAttribute");
+
+                            if (attr != null)
+                            {
+                                isArgument = (bool)attr.PositionalArguments.First().ConstantValue;
+                            }
+                        }
+                    }
+                    else if (inv_rr is DynamicInvocationResolveResult)
+                    {
+                        isArgument = true;
+                    }
+                    
+                }
+
+                if (conversion.IsBoxingConversion && !isArgument)
+                {
+                    block.Write("Bridge.box(");
+                    block.AfterOutput2 += ", " + ConversionBlock.GetBoxedType(rr.Type, block.Emitter);
+
+                    var inlineMethod = ConversionBlock.GetInlineMethod(block.Emitter, "ToString",
+                        block.Emitter.Resolver.Compilation.FindType(KnownTypeCode.String), rr, expression);
+
+                    if (inlineMethod != null)
+                    {
+                        block.AfterOutput2 += ", " + inlineMethod ;
+                    }
+
+                    inlineMethod = ConversionBlock.GetInlineMethod(block.Emitter, "GetHashCode",
+                        block.Emitter.Resolver.Compilation.FindType(KnownTypeCode.String), rr, expression);
+
+                    if (inlineMethod != null)
+                    {
+                        block.AfterOutput2 += ", " + inlineMethod;
+                    }
+
+                    block.AfterOutput2 +=")";
+
+                    if (rr.Type.Kind == TypeKind.TypeParameter)
+                    {
+                        block.Emitter.ForbidLifting = true;
+                    }
+
+                    //return level;
+                }
+
+                if (conversion.IsUnboxingConversion || isArgument && expectedType.IsKnownType(KnownTypeCode.Object) && rr.Type.IsKnownType(KnownTypeCode.Object))
+                {
+                    block.Write("Bridge.unbox(");
+                    block.AfterOutput2 += ")";
+                    //return level;
+                }
             }
 
             if (expression is ParenthesizedExpression && ((ParenthesizedExpression) expression).Expression is CastExpression)
@@ -213,14 +376,14 @@ namespace Bridge.Translator
 
                         if (parentrr != null && parentrr.Type != expectedType || parentrr == null && expectedType != parentExpectedType)
                         {
-                            level = ConversionBlock.DoConversion(block, expression, conversion, expectedType, level, rr, true);
+                            level = ConversionBlock.DoConversion(block, expression, conversion, expectedType, level, rr, true, true);
                             afterUserDefined = block.AfterOutput;
                             block.AfterOutput = "";
                         }
                     }
                     else
                     {
-                        level = ConversionBlock.DoConversion(block, expression, conversion, expectedType, level, rr, true);
+                        level = ConversionBlock.DoConversion(block, expression, conversion, expectedType, level, rr, true, true);
                         afterUserDefined = block.AfterOutput;
                         block.AfterOutput = "";
                     }

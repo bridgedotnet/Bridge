@@ -15,7 +15,7 @@ QUnit.test("Fields of basic types", function (assert) {
     assert.deepEqual(instance.colorArray, [BasicTypes.Color.Blue, BasicTypes.Color.Green, BasicTypes.Color.Red], "colorArray");
     assert.deepEqual(instance.colorValue, BasicTypes.Color.Green, "colorValue");
     assert.deepEqual(instance.anyValueString, "AnyValueString", "anyValueString");
-    assert.deepEqual(instance.anyValueInteger, 1, "anyValueInteger");
+    assert.deepEqual(Bridge.unbox(instance.anyValueInteger), 1, "anyValueInteger");
     assert.deepEqual(instance.dynamicValueInteger, 7, "dynamicValueInteger");
     assert.deepEqual(instance.voidFunction(), instance.undefinedValue, "Void and undefined values");
 });

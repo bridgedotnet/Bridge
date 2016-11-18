@@ -419,6 +419,11 @@ namespace Bridge.Contract
             get; set;
         }
 
+        Dictionary<IType, Dictionary<string, string>> NamedBoxedFunctions
+        {
+            get; set;
+        }
+
         bool StaticBlock
         {
             get;
@@ -469,5 +474,7 @@ namespace Bridge.Contract
 
         void WriteIndented(string s, int? position = null);
         string GetReflectionName(IType type);
+
+        bool ForbidLifting { get; set; }
     }
 }

@@ -89,7 +89,7 @@
             }
 
             if (b.length !== 16) {
-                throw new System.ArgumentException(System.String.format(System.Guid.error1, 16));
+                throw new System.ArgumentException(System.String.format(System.Guid.error1, Bridge.box(16, System.Int32)));
             }
 
             this._a = (b[3] << 24) | (b[2] << 16) | (b[1] << 8) | b[0];
@@ -125,7 +125,7 @@
             }
 
             if (d.length !== 8) {
-                throw new System.ArgumentException(System.String.format(System.Guid.error1, 8));
+                throw new System.ArgumentException(System.String.format(System.Guid.error1, Bridge.box(8, System.Int32)));
             }
 
             this._a = a;
@@ -262,10 +262,10 @@
                     return s.replace(System.Guid.replace, "");
                 case "b": 
                 case "B": 
-                    return System.String.concat(String.fromCharCode(123), s, String.fromCharCode(125));
+                    return System.String.concat(String.fromCharCode(Bridge.box(123, System.Char, $box_.System.Char.toString)), s, String.fromCharCode(Bridge.box(125, System.Char, $box_.System.Char.toString)));
                 case "p": 
                 case "P": 
-                    return System.String.concat(String.fromCharCode(40), s, String.fromCharCode(41));
+                    return System.String.concat(String.fromCharCode(Bridge.box(40, System.Char, $box_.System.Char.toString)), s, String.fromCharCode(Bridge.box(41, System.Char, $box_.System.Char.toString)));
                 default: 
                     return s;
             }

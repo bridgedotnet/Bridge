@@ -57,6 +57,7 @@
     <AdditionalExplicitAssemblyReferences />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Attributes\UnboxAttribute.cs" />
     <Compile Include="Attributes\GlobalMethodsAttribute.cs" />
     <Compile Include="Attributes\MixinAttribute.cs" />
     <Compile Include="Attributes\ImmutableAttribute.cs" />

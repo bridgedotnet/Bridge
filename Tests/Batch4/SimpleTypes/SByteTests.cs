@@ -10,7 +10,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         [Test]
         public void TypePropertiesAreCorrect_SPI_1717()
         {
-            Assert.True((object)(byte)0 is sbyte);
+            Assert.False((object)(byte)0 is sbyte);
             Assert.False((object)0.5 is sbyte);
             Assert.False((object)-129 is sbyte);
             Assert.False((object)128 is sbyte);

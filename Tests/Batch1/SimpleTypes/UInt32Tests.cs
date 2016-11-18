@@ -10,7 +10,7 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.True((object)(int)0 is uint);
+            Assert.False((object)(int)0 is uint);
             Assert.False((object)0.5 is uint);
             Assert.False((object)-1 is uint);
             Assert.False((object)4294967296 is uint);

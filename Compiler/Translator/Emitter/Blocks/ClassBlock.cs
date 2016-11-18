@@ -340,11 +340,15 @@ namespace Bridge.Translator
                 var etype = this.TypeInfo.Type.GetDefinition().EnumUnderlyingType;
                 var enumMode = this.Emitter.Validator.EnumEmitMode(this.TypeInfo.Type);
                 var isString = enumMode >= 3 && enumMode <= 6;
-                if (!etype.IsKnownType(KnownTypeCode.Int32) || isString)
+                if (isString)
+                {
+                    etype = this.Emitter.Resolver.Compilation.FindType(KnownTypeCode.String);
+                }
+                if (!etype.IsKnownType(KnownTypeCode.Int32))
                 {
                     this.EnsureComma();
                     this.Write(JS.Fields.UNDERLYINGTYPE + ": ");
-                    this.Write(isString ? "System.String" : BridgeTypes.ToJsName(etype, this.Emitter));
+                    this.Write(BridgeTypes.ToJsName(etype, this.Emitter));
 
                     this.Emitter.Comma = true;
                 }

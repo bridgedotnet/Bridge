@@ -10,7 +10,7 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.True((object)(byte)0 is sbyte);
+            Assert.False((object)(byte)0 is sbyte);
             Assert.False((object)0.5 is sbyte);
             Assert.False((object)-129 is sbyte);
             Assert.False((object)128 is sbyte);

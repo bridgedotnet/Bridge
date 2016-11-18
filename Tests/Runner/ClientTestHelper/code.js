@@ -9,7 +9,7 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
     Bridge.define("Bridge.ClientTestHelper.Internal.ClassLibraryTest", {
         statics: {
             test: function (item) {
-                item.Bridge$ClientTestHelper$Internal$IWriteableItem$setValue(2);
+                item.Bridge$ClientTestHelper$Internal$IWriteableItem$setValue(Bridge.box(2, System.Int32));
             }
         }
     });

@@ -34,10 +34,10 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual(typeof(float), f.GetType());
 
             object o = b;
-            Assert.AreEqual(typeof(int), o.GetType());
+            Assert.AreEqual(typeof(byte), o.GetType());
 
             o = f;
-            Assert.AreEqual(typeof(double), o.GetType());
+            Assert.AreEqual(typeof(float), o.GetType());
         }
     }
 }

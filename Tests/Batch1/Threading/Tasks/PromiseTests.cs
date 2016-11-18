@@ -126,7 +126,7 @@ namespace Bridge.ClientTest.Threading
             public string S { get; set; }
             public int J { get; set; }
 
-            public delegate TaskResult TaskResultHandler(int i, string s, int j);
+            public delegate TaskResult TaskResultHandler(object i, object s, object j);
         }
 
         [Test(ExpectedCount = 7)]
@@ -166,7 +166,7 @@ namespace Bridge.ClientTest.Threading
         {
             var completeAsync = Assert.Async();
 
-            TaskResult.TaskResultHandler trh = (int i, string s, int j) => { return new TaskResult() { I = i, S = s, J = j }; };
+            TaskResult.TaskResultHandler trh = (object i, object s, object j) => { return new TaskResult() { I = (int)i, S = (string)s, J = (int)j }; };
 
             var promise = CreatePromise();
             var task = Task.FromPromise<TaskResult>(promise, trh);

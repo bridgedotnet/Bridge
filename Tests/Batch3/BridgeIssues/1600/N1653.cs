@@ -31,7 +31,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 var v1 = values.Select(value => value + " " + value.GetSomething());
                 var v2 = values.Select(value => value + " " + Bridge1653_Extensions.GetSomething(value));
                 var v3 = values.Select(value => value + " " + Bridge1653_Extensions.GetSomething1(value));
-                var v4 = values.Select(value => value + "_" + Bridge1653_Extensions.GetSomething1("v4"));
+                var v4 = values.Select(value => value.ToString() + "_" + Bridge1653_Extensions.GetSomething1("v4"));
             }
         }
 

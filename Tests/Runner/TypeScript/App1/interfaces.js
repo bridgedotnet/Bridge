@@ -65,11 +65,11 @@
             s.v = System.String.concat(s.v, "Method8");
         },
         method9: function (i, s) {
-            s.v = System.String.concat(s.v, i);
+            s.v = System.String.concat(s.v, Bridge.box(i, System.Int32));
         },
         method10: function (i, b, s) {
             b.v = true;
-            s.v = System.String.concat(s.v, i);
+            s.v = System.String.concat(s.v, Bridge.box(i, System.Int32));
         }
     });
 

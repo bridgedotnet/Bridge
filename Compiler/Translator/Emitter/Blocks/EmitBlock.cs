@@ -242,6 +242,7 @@ namespace Bridge.Translator
             var reflectedTypes = this.Emitter.ReflectableTypes;
             var tmpBuffer = new StringBuilder();
             StringBuilder currentOutput = null;
+            this.Emitter.NamedBoxedFunctions = new Dictionary<IType, Dictionary<string, string>>();
 
             foreach (var type in this.Emitter.Types)
             {
@@ -311,6 +312,8 @@ namespace Bridge.Translator
                 currentOutput.Append(tmpBuffer.ToString());
                 this.Emitter.Output = currentOutput;
             }
+
+            this.EmitNamedBoxedFunctions();
 
             this.Emitter.NamespacesCache = new Dictionary<string, int>();
             foreach (var type in this.Emitter.Types)
@@ -437,6 +440,51 @@ namespace Bridge.Translator
             //this.RemovePenultimateEmptyLines(true);
 
             this.Emitter.Translator.Plugins.AfterTypesEmit(this.Emitter, this.Emitter.Types);
+        }
+
+        protected virtual void EmitNamedBoxedFunctions()
+        {
+            if (this.Emitter.NamedBoxedFunctions.Count > 0)
+            {
+                this.Emitter.Comma = false;
+
+                this.WriteNewLine();
+                this.Write("var " + JS.Vars.DBOX_ + " = {};");
+
+                foreach (var boxedFunction in this.Emitter.NamedBoxedFunctions)
+                {
+                    var name = BridgeTypes.ToJsName(boxedFunction.Key, this.Emitter, true);
+
+                    this.WriteNewLine();
+                    this.WriteNewLine();
+                    this.Write(JS.Funcs.BRIDGE_NS);
+                    this.WriteOpenParentheses();
+                    this.WriteScript(name);
+                    this.Write(", " + JS.Vars.DBOX_ + ")");
+                    this.WriteSemiColon();
+
+                    this.WriteNewLine();
+                    this.WriteNewLine();
+                    this.Write(JS.Types.Bridge.APPLY + "(" + JS.Vars.DBOX_ + ".");
+                    this.Write(name);
+                    this.Write(", ");
+                    this.BeginBlock();
+
+                    this.Emitter.Comma = false;
+                    foreach (KeyValuePair<string, string> namedFunction in boxedFunction.Value)
+                    {
+                        this.EnsureComma();
+                        this.Write(namedFunction.Key.ToLowerCamelCase() + ": " + namedFunction.Value);
+                        this.Emitter.Comma = true;
+                    }
+
+                    this.WriteNewLine();
+                    this.EndBlock();
+                    this.WriteCloseParentheses();
+                    this.WriteSemiColon();
+                    this.WriteNewLine();
+                }
+            }
         }
 
         private IType[] GetReflectableTypes()

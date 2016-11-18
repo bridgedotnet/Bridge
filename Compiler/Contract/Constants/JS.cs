@@ -242,6 +242,7 @@
         {
             public const char D = '$';
             public const string D_ = "$_";
+            public const string DBOX_ = "$box_";
             public const string D_THIS = "$this";
 
             public const string T = "$t";

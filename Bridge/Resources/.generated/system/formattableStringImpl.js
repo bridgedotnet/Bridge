@@ -26,3 +26,11 @@
             return System.String.formatProvider.apply(System.String, [formatProvider, this.format].concat(this.args));
         }
     });
+
+    var $box_ = {};
+
+    Bridge.ns("System.Char", $box_);
+
+    Bridge.apply($box_.System.Char, {
+        toString: function(obj) {return String.fromCharCode(obj);}
+    });

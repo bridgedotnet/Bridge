@@ -117,10 +117,13 @@
                 value = "";
             }
 
-            if (formatStr && Bridge.is(value, System.IFormattable)) {
-                value = Bridge.format(value, formatStr, provider);
+            if (formatStr && value.$boxed && value.type.$kind === "enum") {
+                value = System.Enum.format(value.type, value.v, formatStr);
+            }
+            else if (formatStr && Bridge.is(value, System.IFormattable)) {
+                value = Bridge.format(Bridge.unbox(value), formatStr, provider);
             } else {
-                value = "" + value;
+                value = "" + value.toString();
             }
 
             if (alignment) {

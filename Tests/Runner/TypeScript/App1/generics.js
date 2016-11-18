@@ -69,7 +69,7 @@
                     this.simpleDoubleGenericIntString = new (Generics.SimpleDoubleGeneric$2(System.Int32,String)).ctor();
                     this.genericINamedEntity = new (Generics.GenericINamedEntity$1(Generics.INamedEntity))(new Generics.NamedEntity());
                     this.genericNamedEntity = new (Generics.GenericNamedEntity$1(Generics.NamedEntity))(new Generics.NamedEntity());
-                    this.genericClassObject = new (Generics.GenericClass$1(Object))(2);
+                    this.genericClassObject = new (Generics.GenericClass$1(Object))(Bridge.box(2, System.Int32));
                     this.genericClassNamedEntity = new (Generics.GenericClass$1(Generics.NamedEntity))(new Generics.NamedEntity());
                     this.genericNew = new (Generics.GenericNew$1(Generics.NewClass))(new Generics.NewClass());
                     this.genericNewAndClass = new (Generics.GenericNewAndClass$1(Generics.NewClass))(new Generics.NewClass());

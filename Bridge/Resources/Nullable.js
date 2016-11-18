@@ -2,6 +2,7 @@
         hasValue: Bridge.hasValue,
 
         getValue: function (obj) {
+            obj = Bridge.unbox(obj);
             if (!Bridge.hasValue(obj)) {
                 throw new System.InvalidOperationException("Nullable instance doesn't have a value.");
             }
@@ -181,6 +182,8 @@
             $kind: "struct",
 
             statics: {
+                $nullable: true,
+                $nullableType: T,
                 getDefaultValue: function () {
                     return null;
                 },

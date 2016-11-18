@@ -15,6 +15,51 @@
             return name2;
         },
 
+        box: function (v, T, toStr, hashCode) {
+            if (v && v.$boxed) {
+                return v;
+            }
+
+            if (v == null) {
+                return v;
+            }
+
+            return {
+                $boxed: true,
+                fn: {
+                    toString: toStr,
+                    getHashCode: hashCode
+                },
+                v: v,
+                type: T,
+                constructor: T,
+                getHashCode: function() {
+                    return this.fn.getHashCode ? this.fn.getHashCode(this.v) : Bridge.getHashCode(this.v);
+                },
+                equals: function (o) {
+                    var eq = this.equals;
+                    this.equals = null;
+                    var r = Bridge.equals(this.v, o);
+                    this.equals = eq;
+                    return r;
+                },
+                valueOf: function() {
+                    return this.v;
+                },
+                toString: function () {
+                    return this.fn.toString ? this.fn.toString(this.v) : this.v.toString();
+                }
+            };
+        },
+
+        unbox: function(o) {
+            if (o && o.$boxed) {
+                return o.v;
+            }
+
+            return o;
+        },
+
         isPlainObject: function (obj) {
             if (typeof obj == 'object' && obj !== null) {
                 if (typeof Object.getPrototypeOf == 'function') {
@@ -343,6 +388,8 @@
             //     for value types it returns deterministic values (f.e. for int 3 it returns 3)
             //     for reference types it returns random value
 
+            value = Bridge.unbox(value);
+
             if (Bridge.isEmpty(value, true)) {
                 if (safe) {
                     return 0;
@@ -451,7 +498,7 @@
         },
 
         hasValue: function (obj) {
-            return obj != null;
+            return Bridge.unbox(obj) != null;
         },
 
         hasValue$1: function () {
@@ -473,6 +520,25 @@
         is: function (obj, type, ignoreFn, allowNull) {
             if (obj == null) {
                 return !!allowNull;
+            }
+
+            if (obj.$boxed) {
+                if (obj.type.$kind === "enum" && (obj.type.prototype.$utype === type || type === System.Enum)) {
+                    return true;
+                }
+                else if (type.$kind !== "interface" && !type.$nullable) {
+                    return obj.type === type || type === Object;
+                }
+
+                if (ignoreFn !== true && type.$is) {
+                    return type.$is(Bridge.unbox(obj));
+                }
+
+                if (Bridge.Reflection.isAssignableFrom(type, obj.type)) {
+                    return true;
+                }
+
+                obj = Bridge.unbox(obj);
             }
 
             var ctor = obj.constructor;
@@ -546,7 +612,10 @@
         },
 
         as: function (obj, type, allowNull) {
-            return Bridge.is(obj, type, false, allowNull) ? obj : null;
+            if (Bridge.is(obj, type, false, allowNull)) {
+                return obj.$boxed && type !== Object ? obj.v : obj;
+            }
+            return null;
         },
 
         cast: function (obj, type, allowNull) {
@@ -558,6 +627,10 @@
 
             if (result === null) {
                 throw new System.InvalidCastException("Unable to cast type " + (obj ? Bridge.getTypeName(obj) : "'null'") + " to type " + Bridge.getTypeName(type));
+            }
+
+            if (obj.$boxed && type !== Object) {
+                return obj.v;
             }
 
             return result;
@@ -1011,6 +1084,10 @@
         },
 
         getType: function (instance) {
+            if (instance && instance.$boxed) {
+                return instance.type;
+            }
+
             if (instance == null) {
                 throw new System.NullReferenceException("instance is null");
             }

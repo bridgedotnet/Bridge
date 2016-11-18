@@ -28,7 +28,7 @@
             var intValue = {};
 
             if (System.Int32.tryParse(s, intValue)) {
-                return intValue.v;
+                return Bridge.box(intValue.v, enumType, function (obj) { return System.Enum.toString(enumType, obj); });
             }
 
             var values = enumType;
@@ -36,7 +36,7 @@
             if (!enumType.prototype || !enumType.prototype.$flags) {
                 for (var f in values) {
                     if (enumMethods.nameEquals(f, s, ignoreCase)) {
-                        return values[f];
+                        return Bridge.box(values[f], enumType, function (obj) { return System.Enum.toString(enumType, obj); });
                     }
                 }
             } else {
@@ -65,7 +65,7 @@
                 }
 
                 if (parsed) {
-                    return value;
+                    return Bridge.box(value, enumType, function (obj) { return System.Enum.toString(enumType, obj); });
                 }
             }
 
@@ -77,6 +77,12 @@
         },
 
         toString: function (enumType, value, forceFlags) {
+            if (value && value.$boxed && enumType === System.Enum) {
+                enumType = value.type;
+            }
+
+            value = Bridge.unbox(value);
+
             if (enumType === Number) {
                 return value.toString();
             }
@@ -174,7 +180,6 @@
             System.Enum.checkEnumType(enumType);
 
             var values = enumType;
-
             for (var i in values) {
                 if (values[i] === value) {
                     return i.charAt(0).toUpperCase() + i.slice(1);
@@ -205,7 +210,7 @@
 
         tryParse: function (enumType, value, result, ignoreCase) {
             result.v = 0;
-            result.v = enumMethods.parse(enumType, value, ignoreCase, true);
+            result.v = Bridge.unbox(enumMethods.parse(enumType, value, ignoreCase, true));
 
             if (result.v == null) {
                 return false;
