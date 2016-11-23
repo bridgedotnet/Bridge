@@ -16713,13 +16713,13 @@
     Bridge.Class.addExtend(Grouping, [System.Collections.IEnumerable]);
 
     // module export
-    if (typeof define === Types.Function && define.amd) { // AMD
+    /*if (typeof define === Types.Function && define.amd) { // AMD
         define("linqjs", [], function () { return Enumerable; });
     } else if (typeof module !== Types.Undefined && module.exports) { // Node
         module.exports = Enumerable;
     } else {
         root.Enumerable = Enumerable;
-    }
+    }*/
 
     Bridge.Linq = {};
     Bridge.Linq.Enumerable = Enumerable;
