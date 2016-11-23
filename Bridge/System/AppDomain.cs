@@ -9,7 +9,7 @@ namespace System
         private extern AppDomain();
 
         public extern Assembly[] GetAssemblies();
-        
+
         public static extern AppDomain CurrentDomain
         {
             [Template("System.AppDomain")]
