@@ -351,6 +351,7 @@
             QUnit.test("#2027 - TestToStringForEnumWhenConcatWithString", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2027.testToStringForEnumWhenConcatWithString);
             QUnit.test("#2033 - TestClassEnumPropertiesInitialization", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2033.testClassEnumPropertiesInitialization);
             QUnit.test("#2038 - TestIncrementAssignmentInStructs", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2038.testIncrementAssignmentInStructs);
+            QUnit.test("#2039 - TestNaNToString", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2039.testNaNToString);
             QUnit.test("#2045 - TestDoubleEscapingInterpolation", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2045.testDoubleEscapingInterpolation);
             QUnit.test("#2046 - TestSafeNavigationOperator", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2046.testSafeNavigationOperator);
             QUnit.test("#2048 - TestUnaryOperatorBlockCompilationError", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2048.testUnaryOperatorBlockCompilationError);
@@ -3363,6 +3364,16 @@
             testIncrementAssignmentInStructs: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2038).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2038);
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2038.testIncrementAssignmentInStructs();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2039", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2039)],
+        statics: {
+            testNaNToString: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2039).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2039);
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2039.testNaNToString();
             }
         }
     });
