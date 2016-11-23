@@ -274,6 +274,17 @@ namespace Bridge.Translator
 
             var parentBinary = binaryOperatorExpression.Parent as BinaryOperatorExpression;
             bool parentIsString = resultIsString && parentBinary != null && parentBinary.Operator == BinaryOperatorType.Add;
+
+            if (parentIsString)
+            {
+                var parentResolveOperator = this.Emitter.Resolver.ResolveNode(binaryOperatorExpression.Parent, this.Emitter) as OperatorResolveResult;
+
+                if (parentResolveOperator != null && parentResolveOperator.UserDefinedOperatorMethod != null)
+                {
+                    parentIsString = false;
+                }
+            }
+
             bool isSimpleConcat = isStringConcat && BinaryOperatorBlock.IsOperatorSimple(binaryOperatorExpression, this.Emitter);
 
             if (charToString == -1 && isStringConcat && !leftResolverResult.Type.IsKnownType(KnownTypeCode.String))
