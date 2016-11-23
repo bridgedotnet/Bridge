@@ -5,7 +5,7 @@ before_install:
 - if [ -z ${SKIP_CLIENT+x} ]; then echo "SETUP SKIP_CLIENT is unset"; else echo "SETUP SKIP_CLIENT is set to '$SKIP_CLIENT'"; fi
 - if [[ -z ${SKIP_CLIENT+x} && "${TRAVIS_COMMIT_MSG,,}" == *"[skip travis client]"* ]]; then echo "SETUP Commit message contains [skip travis client]"; export SKIP_CLIENT=true; fi
 - if [[ -z ${SKIP_CLIENT+x} && "${TRAVIS_COMMIT_MSG,,}" == *"[skip ci client]"* ]]; then echo "SETUP Commit message contains [skip ci client]"; export SKIP_CLIENT=true; fi
-- if [ ! "$SKIP_CLIENT" == "true" ]; then echo "Will run client tests"; else "Will not run client tests as either the skipping labels found ([skip travis client], [skip ci client]) or set SKIP_CLIENT=true"; fi
+- if [ ! "$SKIP_CLIENT" == "true" ]; then echo "Will run client tests"; else echo "Will not run client tests as either the skipping labels found ([skip travis client], [skip ci client]) or set SKIP_CLIENT=true"; fi
 # Below is a fix to for `package requires NuGet client version '3.0' or above, but the current NuGet version is '2.12.0.0'.`
 # according to https://github.com/travis-ci/travis-ci/issues/5932
 # We skip downloading and restoring latest nuget.exe as we have it in our solution
