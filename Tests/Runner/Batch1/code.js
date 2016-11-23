@@ -23225,13 +23225,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.areEqual(Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Reflection.TypeSystemTests.E1), null);
         },
         getGenericTypeDefinitionReturnsTheGenericTypeDefinitionForConstructedTypeOtherwiseNull: function () {
-            Bridge.Test.Assert.areEqual(Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Reflection.TypeSystemTests.G$2), null);
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Reflection.TypeSystemTests.G$2), Bridge.ClientTest.Reflection.TypeSystemTests.G$2);
             Bridge.Test.Assert.areEqual(Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Reflection.TypeSystemTests.G$2(System.Int32,String)), Bridge.ClientTest.Reflection.TypeSystemTests.G$2);
-            Bridge.Test.Assert.areEqual(Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Reflection.TypeSystemTests.C), null);
-            Bridge.Test.Assert.areEqual(Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1), null);
+            Bridge.Test.Assert.throws$6(System.InvalidOperationException, $_.Bridge.ClientTest.Reflection.TypeSystemTests.f2);
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1), Bridge.ClientTest.Reflection.TypeSystemTests.IG$1);
             Bridge.Test.Assert.areEqual(Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1(String)), Bridge.ClientTest.Reflection.TypeSystemTests.IG$1);
-            Bridge.Test.Assert.areEqual(Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Reflection.TypeSystemTests.I2), null);
-            Bridge.Test.Assert.areEqual(Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Reflection.TypeSystemTests.E1), null);
+            Bridge.Test.Assert.throws$6(System.InvalidOperationException, $_.Bridge.ClientTest.Reflection.TypeSystemTests.f3);
+            Bridge.Test.Assert.throws$6(System.InvalidOperationException, $_.Bridge.ClientTest.Reflection.TypeSystemTests.f4);
         },
         isAssignableFromWorks: function () {
             Bridge.Test.Assert.true$1(Bridge.Reflection.isAssignableFrom(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.C1, Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.C1), "#1");
@@ -23769,8 +23769,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.true$1(Bridge.is("firstValue", String), "#1");
             Bridge.Test.Assert.true$1(Bridge.is("firstValue", String), "#2");
             Bridge.Test.Assert.false$1(Bridge.is(0, String), "#3");
-            Bridge.Test.Assert.false$1(this.doesItThrow($_.Bridge.ClientTest.Reflection.TypeSystemTests.f2), "#4");
-            Bridge.Test.Assert.true$1(this.doesItThrow($_.Bridge.ClientTest.Reflection.TypeSystemTests.f3), "#5");
+            Bridge.Test.Assert.false$1(this.doesItThrow($_.Bridge.ClientTest.Reflection.TypeSystemTests.f5), "#4");
+            Bridge.Test.Assert.true$1(this.doesItThrow($_.Bridge.ClientTest.Reflection.TypeSystemTests.f6), "#5");
 
             Bridge.Test.Assert.notNull$1(Bridge.as("firstValue", String, true), "#6");
             Bridge.Test.Assert.notNull$1(Bridge.as("firstValue", String, true), "#7");
@@ -23784,8 +23784,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.true$1(Bridge.is("firstValue", String), "#1");
             Bridge.Test.Assert.true$1(Bridge.is("firstValue", String), "#2");
             Bridge.Test.Assert.false$1(Bridge.is(0, String), "#3");
-            Bridge.Test.Assert.false$1(this.doesItThrow($_.Bridge.ClientTest.Reflection.TypeSystemTests.f2), "#4");
-            Bridge.Test.Assert.true$1(this.doesItThrow($_.Bridge.ClientTest.Reflection.TypeSystemTests.f3), "#5");
+            Bridge.Test.Assert.false$1(this.doesItThrow($_.Bridge.ClientTest.Reflection.TypeSystemTests.f5), "#4");
+            Bridge.Test.Assert.true$1(this.doesItThrow($_.Bridge.ClientTest.Reflection.TypeSystemTests.f6), "#5");
 
             Bridge.Test.Assert.notNull$1(Bridge.as("firstValue", String, true), "#6");
             Bridge.Test.Assert.notNull$1(Bridge.as("firstValue", String, true), "#7");
@@ -23866,9 +23866,18 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             return _o5;
         },
         f2: function () {
-            var x = Bridge.cast("firstValue", String);
+            Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Reflection.TypeSystemTests.C);
         },
         f3: function () {
+            Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Reflection.TypeSystemTests.I2);
+        },
+        f4: function () {
+            Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Reflection.TypeSystemTests.E1);
+        },
+        f5: function () {
+            var x = Bridge.cast("firstValue", String);
+        },
+        f6: function () {
             var x = Bridge.cast(0, String);
         }
     });
