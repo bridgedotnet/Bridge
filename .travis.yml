@@ -1,7 +1,7 @@
 before_install:
 - "export TRAVIS_COMMIT_MSG=\"$(git log --format=%B --no-merges -n 1)\""
 - echo "$TRAVIS_COMMIT_MSG"
-- if [ "$TRAVIS_COMMIT_MSG" =~ "'\<\[skip travis\]\>'" ]; then echo "Commit message contains [skip travis], skipping the build" && exit; fi
+- if [[ "$TRAVIS_COMMIT_MSG" =~ "'\<\[skip travis\]\>'" ]]; then echo "Commit message contains [skip travis], skipping the build" && exit; fi
 # Below is a fix to for `package requires NuGet client version '3.0' or above, but the current NuGet version is '2.12.0.0'.`
 # according to https://github.com/travis-ci/travis-ci/issues/5932
 # We skip downloading and restoring latest nuget.exe as we have it in our solution
