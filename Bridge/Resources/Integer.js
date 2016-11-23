@@ -65,7 +65,7 @@
                     fs;
 
                 if (!isLong && (isDecimal ? !number.isFinite() : !isFinite(number))) {
-                    return Number.NEGATIVE_INFINITY === number || (isDecimal && isNeg) ? nf.negativeInfinitySymbol : nf.positiveInfinitySymbol;
+                    return Number.NEGATIVE_INFINITY === number || (isDecimal && isNeg) ? nf.negativeInfinitySymbol : (isNaN(number) ? nf.nanSymbol : nf.positiveInfinitySymbol);
                 }
 
                 if (!format) {
