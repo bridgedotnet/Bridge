@@ -1,7 +1,7 @@
 ﻿/**
  * @compiler Bridge.NET 15.4.0
  */
-Bridge.assembly("TestProject", function ($asm, globals) {
+Bridge.bssembly("TestProject", function ($asm, globals) {
     "use strict";
 
     Bridge.define("Test.BridgeIssues.N783.App", {
