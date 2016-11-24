@@ -9313,20 +9313,20 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1848", {
         testExternalInterfaceProperty: function () {
-            window.Bridge1848_ITest = {
-            	getNewId: function () { return 123; },
+            Bridge.Bridge1848_ITest = {
+                getNewId: function () { return 123; },
                 name: "editor"
             };
-            window.Bridge1848_ITest2 = {
-            	Bridge1848_ITest$getNewId: function () { return 123; },
+            Bridge.Bridge1848_ITest2 = {
+                Bridge1848_ITest$getNewId: function () { return 123; },
                 Bridge1848_ITest$name: "editor"
             };
 
-            var initialiser = window.Bridge1848_ITest;
+            var initialiser = Bridge.Bridge1848_ITest;
             Bridge.Test.Assert.areEqual(123, initialiser.getNewId());
             Bridge.Test.Assert.areEqual("editor", initialiser.name);
 
-            var initialiser2 = window.Bridge1848_ITest2;
+            var initialiser2 = Bridge.Bridge1848_ITest2;
             Bridge.Test.Assert.areEqual(123, initialiser2.Bridge1848_ITest$getNewId());
             Bridge.Test.Assert.areEqual("editor", initialiser2.Bridge1848_ITest$name);
         }
