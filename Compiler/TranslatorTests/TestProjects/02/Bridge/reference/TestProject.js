@@ -3053,7 +3053,15 @@
         },
 
         getGenericTypeDefinition: function (type) {
-            return type.$genericTypeDefinition || null;
+            if (type.$isGenericTypeDefinition) {
+                return type;
+            }
+
+            if (!type.$genericTypeDefinition) {
+                throw new System.InvalidOperationException("This operation is only valid on generic types.");
+            }
+
+            return type.$genericTypeDefinition;
         },
 
         getGenericParameterCount: function (type) {
@@ -16713,13 +16721,13 @@
     Bridge.Class.addExtend(Grouping, [System.Collections.IEnumerable]);
 
     // module export
-    if (typeof define === Types.Function && define.amd) { // AMD
+    /*if (typeof define === Types.Function && define.amd) { // AMD
         define("linqjs", [], function () { return Enumerable; });
     } else if (typeof module !== Types.Undefined && module.exports) { // Node
         module.exports = Enumerable;
     } else {
         root.Enumerable = Enumerable;
-    }
+    }*/
 
     Bridge.Linq = {};
     Bridge.Linq.Enumerable = Enumerable;
