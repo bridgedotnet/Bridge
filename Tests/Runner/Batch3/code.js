@@ -6897,6 +6897,8 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
+
+
                                     bar = function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -6926,7 +6928,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    }; /// Async method lacks 'await' operators and will run synchronously
+                                    };
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -11161,7 +11163,6 @@ Bridge.$N1391Result =                 r;
         statics: {
             testGetGenericTypeDefinition: function () {
                 Bridge.Test.Assert.throws$6(System.InvalidOperationException, $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2067.f1);
-                Bridge.Test.Assert.areEqual(Bridge.Reflection.getGenericTypeDefinition(System.Collections.Generic.List$1), System.Collections.Generic.List$1);
             }
         }
     });
@@ -11171,6 +11172,17 @@ Bridge.$N1391Result =                 r;
     Bridge.apply($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2067, {
         f1: function () {
             var t = Bridge.Reflection.getGenericTypeDefinition(System.Int32);
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2068", {
+        statics: {
+            testGetGenericTypeDefinition: function () {
+                var genericTypeDefinition = Bridge.Reflection.getGenericTypeDefinition(System.Collections.Generic.List$1);
+
+                Bridge.Test.Assert.areEqual(System.Collections.Generic.List$1, genericTypeDefinition);
+                Bridge.Test.Assert.areEqual("System.Collections.Generic.List$1", Bridge.Reflection.getTypeFullName(genericTypeDefinition));
+            }
         }
     });
 

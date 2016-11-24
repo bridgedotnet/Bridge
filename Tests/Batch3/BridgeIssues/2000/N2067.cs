@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Bridge.Test;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
@@ -15,7 +14,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             {
                 var t = typeof (int).GetGenericTypeDefinition();
             });
-            Assert.AreEqual(typeof(List<>).GetGenericTypeDefinition(), typeof(List<>));
         }
     }
 }
