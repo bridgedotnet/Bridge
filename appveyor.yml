@@ -102,7 +102,7 @@ before_test:
       #$ChutzpahPath = "${ChutzpahDir}" + "\chutzpah.console.exe"
       $ChutzpahPath = "c:\projects\Bridge\packages\Chutzpah.4.2.3\tools\chutzpah.console.exe"
       
-      $ChutzpahHtml = "c:\projects\" + "Bridge\Tests\Runner\index.html"
+      $ChutzpahHtml = "c:\projects\" + "Bridge\Tests\Runner\index.html?noglobals&hidepassed"
       
       $Exe = "${ChutzpahPath}"
       
