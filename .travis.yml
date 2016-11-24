@@ -28,8 +28,8 @@ before_script:
 - if [ ! "$SKIP_CLIENT" == "true" ]; then git submodule update --init --recursive; fi
 script:
 - xbuild /p:Configuration=Release Bridge.sln
-- if [ $TRAVIS_TEST_RESULT = 0 ] mono ./packages/NUnit.ConsoleRunner.*/tools/nunit*-console.exe ./Compiler/TranslatorTests/bin/Release/Bridge.Translator.Tests.dll
-- if [[ ! "$SKIP_CLIENT" == "true" && $TRAVIS_TEST_RESULT = 0 ]]; then npm test; fi
+- if [ $TRAVIS_TEST_RESULT = 0 ]; then mono ./packages/NUnit.ConsoleRunner.*/tools/nunit*-console.exe ./Compiler/TranslatorTests/bin/Release/Bridge.Translator.Tests.dll; else echo "Skipping NUnit tests as build failed"; fi
+- if [[ ! "$SKIP_CLIENT" == "true" && $TRAVIS_TEST_RESULT = 0 ]]; then npm test; else echo "Skipping sauce tests as SKIP_CLIENT or build failed"; fi
 cache:
   directories:
   - packages
