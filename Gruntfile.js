@@ -50,7 +50,7 @@ module.exports = function(grunt) {
         'saucelabs-qunit': {
             all: {
                 options: {
-                    urls: ["http://127.0.0.1:9999/Tests/Runner/index.html"],
+                    urls: ["http://127.0.0.1:9999/Tests/Runner/index.html?noglobals&hidepassed"],
                     tunnelTimeout: 5,
                     build: process.env.TRAVIS_BUILD_NUMBER,
                     concurrency: 3,
