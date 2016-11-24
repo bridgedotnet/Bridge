@@ -12,6 +12,7 @@ namespace System
 
         public static extern AppDomain CurrentDomain
         {
+            [Template("System.AppDomain")]
             get;
         }
     }
