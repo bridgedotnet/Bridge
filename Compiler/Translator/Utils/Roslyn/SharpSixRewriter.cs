@@ -152,7 +152,7 @@ namespace Bridge.Translator
                 if (list != null && invocation != null)
                 {
                     method = this.semanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-
+                    
                     if (method != null)
                     {
                         if (node.NameColon != null)
@@ -213,7 +213,7 @@ namespace Bridge.Translator
                     var name = SyntaxFactory.IdentifierName(pType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)).WithoutTrivia();
                     var expr = node.Expression;
 
-                    if (expr is LambdaExpressionSyntax || expr is AnonymousMethodExpressionSyntax)
+                    if (expr is LambdaExpressionSyntax || expr is AnonymousMethodExpressionSyntax || expr is QueryExpressionSyntax)
                     {
                         expr = SyntaxFactory.ParenthesizedExpression(expr);
                     }
