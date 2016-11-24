@@ -6897,8 +6897,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -6928,7 +6926,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    };
+                                    }; /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -11182,6 +11180,41 @@ Bridge.$N1391Result =                 r;
 
                 Bridge.Test.Assert.areEqual(System.Collections.Generic.List$1, genericTypeDefinition);
                 Bridge.Test.Assert.areEqual("System.Collections.Generic.List$1", Bridge.Reflection.getTypeFullName(genericTypeDefinition));
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080", {
+        statics: {
+            config: {
+                properties: {
+                    TestProperty1: false
+                }
+            },
+            testAssigmentOrWithProperty: function () {
+                var testVariable = true;
+                var newValue1 = false;
+                testVariable = !!(testVariable | newValue1);
+                Bridge.Test.Assert.true(testVariable);
+
+                var myTestClass = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080.TestClass();
+                myTestClass.setTestProperty(true);
+                var newValue2 = false;
+                myTestClass.setTestProperty(!!(myTestClass.getTestProperty() | newValue2));
+                Bridge.Test.Assert.true(myTestClass.getTestProperty());
+
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080.setTestProperty1(true);
+                var newValue3 = false;
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080.setTestProperty1(!!(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080.getTestProperty1() | newValue3));
+                Bridge.Test.Assert.true(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080.getTestProperty1());
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080.TestClass", {
+        config: {
+            properties: {
+                TestProperty: false
             }
         }
     });
