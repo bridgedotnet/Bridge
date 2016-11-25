@@ -654,7 +654,7 @@
             QUnit.test("DateTimeFormatInfo - GetFormatWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Format_DateTimeFormatInfoTests.getFormatWorks);
             QUnit.test("DateTimeFormatInfo - InvariantWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Format_DateTimeFormatInfoTests.invariantWorks);
             QUnit.test("DateTime - TypePropertiesAreCorrect", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests.typePropertiesAreCorrect);
-            QUnit.test("DateTime - DefaultConstructorReturnsTodaysDate", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests.defaultConstructorReturnsTodaysDate);
+            QUnit.test("DateTime - DefaultConstructorShouldNotReturnsTodaysDate", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests.defaultConstructorShouldNotReturnsTodaysDate);
             QUnit.test("DateTime - CreatingInstanceReturnsDateZero", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests.creatingInstanceReturnsDateZero);
             QUnit.test("DateTime - MillisecondSinceEpochConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests.millisecondSinceEpochConstructorWorks);
             QUnit.test("DateTime - StringConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests.stringConstructorWorks);
@@ -669,6 +669,7 @@
             QUnit.test("DateTime - ToLocalWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests.toLocalWorks);
             QUnit.test("DateTime - TodayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests.todayWorks);
             QUnit.test("DateTime - FormatWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests.formatWorks);
+            QUnit.test("DateTime - IFormattableToStringWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests.iFormattableToStringWorks);
             QUnit.test("DateTime - LocaleFormatWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests.localeFormatWorks);
             QUnit.test("DateTime - GetFullYearWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests.getFullYearWorks);
             QUnit.test("DateTime - GetMonthWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests.getMonthWorks);
@@ -10469,9 +10470,9 @@
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests);
                 t.getFixture().typePropertiesAreCorrect();
             },
-            defaultConstructorReturnsTodaysDate: function (assert) {
+            defaultConstructorShouldNotReturnsTodaysDate: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests);
-                t.getFixture().defaultConstructorReturnsTodaysDate();
+                t.getFixture().defaultConstructorShouldNotReturnsTodaysDate();
             },
             creatingInstanceReturnsDateZero: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests);
@@ -10528,6 +10529,10 @@
             formatWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests);
                 t.getFixture().formatWorks();
+            },
+            iFormattableToStringWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests);
+                t.getFixture().iFormattableToStringWorks();
             },
             localeFormatWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests);

@@ -6897,8 +6897,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -6928,7 +6926,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    };
+                                    }; /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -10232,8 +10230,8 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1904", {
         testDateTimeConstructorConvertsValueToMs: function () {
             var d1 = new Date();
-            var tickValue = System.Int64((d1).getTime()).mul(10000);
-            var d2 = new Date(tickValue.toNumber()/10000);
+            var tickValue = Bridge.Date.getTicks(d1);
+            var d2 = Bridge.Date.fromTicks(tickValue);
 
             Bridge.Test.Assert.true$1(Bridge.equals(d1, d2), System.String.concat("d1 (", Bridge.Date.format(d1), ") == d2(", Bridge.Date.format(d2), ")"));
         }
@@ -13454,7 +13452,7 @@ Bridge.$N1391Result =                 r;
             testTicks: function () {
                 var centuryBegin = new Date(2001, 1 - 1, 1);
                 var currentDate = new Date(2007, 12 - 1, 14, 15, 23);
-                var elapsedTicks = System.Int64((currentDate).getTime()).mul(10000).sub(System.Int64((centuryBegin).getTime()).mul(10000));
+                var elapsedTicks = Bridge.Date.getTicks(currentDate).sub(Bridge.Date.getTicks(centuryBegin));
                 var elapsedSpan = new System.TimeSpan(elapsedTicks);
 
                 Bridge.Test.Assert.areEqual$1(System.Int64([1836507648,510687]), elapsedTicks, "Bridge582 TestTicks ticks");
@@ -16449,9 +16447,9 @@ Bridge.$N1391Result =                 r;
             getTicksReturnsCorrectValue: function () {
                 var val = System.Int64([-57829376,2204230]);
 
-                var ticks = System.Int64((new Date(val.toNumber()/10000)).getTime()).mul(10000);
-                var ticksPlusOne = System.Int64((new Date(val.toNumber()/10000)).getTime()).mul(10000).add(System.Int64(1));
-                var ticksString = System.Int64((new Date(val.toNumber()/10000)).getTime()).mul(10000).toString();
+                var ticks = Bridge.Date.getTicks(Bridge.Date.fromTicks(val));
+                var ticksPlusOne = Bridge.Date.getTicks(Bridge.Date.fromTicks(val)).add(System.Int64(1));
+                var ticksString = Bridge.Date.getTicks(Bridge.Date.fromTicks(val)).toString();
 
                 Bridge.Test.Assert.areDeepEqual$1(val, ticks, "Ticks returning correct int value");
                 Bridge.Test.Assert.areDeepEqual$1(val.add(System.Int64(1)), ticksPlusOne, "Adding to a Tick value is correct");

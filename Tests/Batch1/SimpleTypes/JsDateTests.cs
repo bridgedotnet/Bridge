@@ -17,10 +17,10 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void DefaultConstructorReturnsTodaysDate()
+        public void DefaultConstructorShouldNotReturnsTodaysDate()
         {
             var dt = new DateTime();
-            Assert.True(dt.Year > 2011);
+            Assert.True(dt.Year < 2016);
         }
 
         [Test]
@@ -34,7 +34,7 @@ namespace Bridge.ClientTest.SimpleTypes
         public void MillisecondSinceEpochConstructorWorks()
         {
             var dt = new DateTime(1440L * 60 * 500 * 1000);
-            Assert.AreEqual(1970, dt.AddDays(1).Year);
+            Assert.AreEqual(1, dt.AddDays(1).Year);
         }
 
         [Test]
@@ -166,12 +166,13 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual("2011-07-12", dt.Format("yyyy-MM-dd"));
         }
 
-        //[Test]
-        //public void IFormattableToStringWorks() {
-        //    var dt = new DateTime(2011, 7, 12, 13);
-        //    Assert.AreEqual(dt.ToString("yyyy-MM-dd"), "2011-08-12");
-        //    Assert.AreEqual(((IFormattable)dt).ToString("yyyy-MM-dd"), "2011-08-12");
-        //}
+        [Test]
+        public void IFormattableToStringWorks()
+        {
+            var dt = new DateTime(2011, 7, 12, 13);
+            Assert.AreEqual(dt.ToString("yyyy-MM-dd"), "2011-07-12");
+            Assert.AreEqual(((IFormattable)dt).ToString("yyyy-MM-dd", CultureInfo.CurrentCulture), "2011-07-12");
+        }
 
         [Test]
         public void LocaleFormatWorks()
@@ -239,22 +240,27 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void GetTimeWorks()
         {
-            var dt = new DateTime(DateTime.Utc(1970, 1, 2));
+            var dt = new DateTime(DateTime.Utc(1, 1, 2));
+            Script.Write("dt.setFullYear(1);");
             Assert.True(1440 * 60 * 1000 == dt.GetTime());
         }
 
         [Test]
         public void ValueOfWorks()
         {
-            var dt = new DateTime(DateTime.Utc(1970, 1, 2));
-            Assert.AreEqual(1440 * 60 * 1000, dt.ValueOf());
+            var dt = new DateTime(DateTime.Utc(1, 1, 2));
+            Script.Write("dt.setFullYear(1);");
+            Assert.True(1440L * 60 * 1000 == (long)dt.ValueOf());
         }
 
         [Test]
         public void GetTimezoneOffsetWorks()
         {
+            var zdt = new DateTime(1, 1, 1);
+            Script.Write("zdt.setFullYear(1);");
+
             var dt = new DateTime(0);
-            Assert.AreEqual((int)(new DateTime(1970, 1, 1).ValueOf()) / 60000, dt.GetTimezoneOffset());
+            Assert.True(((long)(zdt.ValueOf()) / 60000) == dt.GetTimezoneOffset());
         }
 
         [Test]
