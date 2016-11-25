@@ -152,7 +152,7 @@ namespace Bridge.Translator
                 if (list != null && invocation != null)
                 {
                     method = this.semanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-                    
+
                     if (method != null)
                     {
                         if (node.NameColon != null)
@@ -258,7 +258,7 @@ namespace Bridge.Translator
                         var name = (IdentifierNameSyntax)expr;
                         var genericName = SyntaxHelper.GenerateGenericName(name.Identifier, method.TypeArguments);
                         genericName = genericName.WithLeadingTrivia(name.GetLeadingTrivia()).WithTrailingTrivia(name.GetTrailingTrivia());
-                        
+
                         if (method.MethodKind == MethodKind.ReducedExtension && node.GetParent<ConditionalAccessExpressionSyntax>() == null)
                         {
                             var target = ma.Expression;
@@ -270,7 +270,7 @@ namespace Bridge.Translator
                         {
                             ma = ma.WithName(genericName);
                         }
-                        
+
                         node = node.WithExpression(ma);
                     }
                 }
@@ -444,7 +444,7 @@ namespace Bridge.Translator
             {
                 parent = parent.Parent;
             }
-            
+
             ITypeSymbol thisType = null;
             if (parent is TypeDeclarationSyntax)
             {
@@ -537,7 +537,7 @@ namespace Bridge.Translator
             }
 
             var usingType = symbol as INamedTypeSymbol;
-            if (node.Expression is IdentifierNameSyntax && symbol != null && symbolNode != null && usingType != null && symbolNode.IsStatic && symbol.ContainingType != null && thisType != null && !thisType.InheritsFromOrEquals(usingType) && !usingType.IsAccessibleIn(thisType)  && (symbolNode is IMethodSymbol || symbolNode is IPropertySymbol || symbolNode is IFieldSymbol || symbolNode is IEventSymbol))
+            if (node.Expression is IdentifierNameSyntax && symbol != null && symbolNode != null && usingType != null && symbolNode.IsStatic && symbol.ContainingType != null && thisType != null && !thisType.InheritsFromOrEquals(usingType) && !usingType.IsAccessibleIn(thisType) && (symbolNode is IMethodSymbol || symbolNode is IPropertySymbol || symbolNode is IFieldSymbol || symbolNode is IEventSymbol))
             {
                 return SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.FullyQualifiedName(), node.GetTrailingTrivia())), node.OperatorToken, node.Name);
             }
@@ -724,7 +724,7 @@ namespace Bridge.Translator
                 if (ae?.Right is InitializerExpressionSyntax)
                 {
                     info.nested = new List<InitializerInfo>();
-                    if (NeedRewriteInitializer((InitializerExpressionSyntax) ae.Right, info.nested, ref extensionMethodExists, ref isImplicitElementAccessSyntax))
+                    if (NeedRewriteInitializer((InitializerExpressionSyntax)ae.Right, info.nested, ref extensionMethodExists, ref isImplicitElementAccessSyntax))
                     {
                         need = true;
                     }
@@ -768,7 +768,7 @@ namespace Bridge.Translator
             if (node.Initializer != null)
             {
                 initializerInfos = new List<InitializerInfo>();
-                needRewrite = NeedRewriteInitializer(node.Initializer, initializerInfos,ref extensionMethodExists, ref isImplicitElementAccessSyntax);
+                needRewrite = NeedRewriteInitializer(node.Initializer, initializerInfos, ref extensionMethodExists, ref isImplicitElementAccessSyntax);
             }
 
             node = (ObjectCreationExpressionSyntax)base.VisitObjectCreationExpression(node);
@@ -820,7 +820,7 @@ namespace Bridge.Translator
                         instance = "_o" + ++indexInstance;
                     }
                 }
-                
+
                 SharpSixRewriter.ConvertInitializers(initializers, instance, statements, initializerInfos);
 
                 statements.Add(SyntaxFactory.ReturnStatement(SyntaxFactory.IdentifierName(instance).WithLeadingTrivia(SyntaxFactory.Space)));
@@ -863,7 +863,7 @@ namespace Bridge.Translator
                         ArgumentSyntax[] arguments = null;
                         if (init.Kind() == SyntaxKind.ComplexElementInitializerExpression)
                         {
-                            var complexInit = (InitializerExpressionSyntax) init;
+                            var complexInit = (InitializerExpressionSyntax)init;
 
                             arguments = new ArgumentSyntax[complexInit.Expressions.Count];
                             for (int i = 0; i < complexInit.Expressions.Count; i++)
@@ -885,20 +885,20 @@ namespace Bridge.Translator
                 }
                 else
                 {
-                    var be = (AssignmentExpressionSyntax) init;
+                    var be = (AssignmentExpressionSyntax)init;
 
                     if (be.Right is InitializerExpressionSyntax)
                     {
                         string name = null;
                         if (be.Left is IdentifierNameSyntax)
                         {
-                            var identifier = (IdentifierNameSyntax) be.Left;
+                            var identifier = (IdentifierNameSyntax)be.Left;
                             name = instance + "." + identifier.Identifier.ValueText;
                         }
                         else if (be.Left is ImplicitElementAccessSyntax)
                         {
                             name = SyntaxFactory.ElementAccessExpression(SyntaxFactory.IdentifierName(instance),
-                                    ((ImplicitElementAccessSyntax) be.Left).ArgumentList.WithoutTrivia()).ToString();
+                                    ((ImplicitElementAccessSyntax)be.Left).ArgumentList.WithoutTrivia()).ToString();
                         }
                         else
                         {
