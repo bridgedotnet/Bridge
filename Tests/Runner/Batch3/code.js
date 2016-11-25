@@ -11224,6 +11224,58 @@ Bridge.$N1391Result =                 r;
         v: null
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079", {
+        statics: {
+            testQueryAsArgument: function () {
+                Bridge.Test.Assert.true$1(true, "Just check that Bridge2079Parsers is compiled ok");
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079.Result$1", function (TValue) { return {
+
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079.Source");
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079Parsers", {
+        statics: {
+            bad2: function (TValue1, TValue2, p, sep) {
+                return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079Parsers.selectMany(TValue1, System.Collections.Generic.IEnumerable$1(TValue1), System.Collections.Generic.IEnumerable$1(TValue1), p, function (head) {
+                    return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079Parsers.many(TValue1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079Parsers.selectMany(TValue2, TValue1, TValue1, sep, function (_) {
+                        return p;
+                    }, $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079Parsers.f1));
+                }, function (head, tail) {
+                    return Bridge.cast(System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079Parsers.toEnumerable(TValue1, head)).concat(tail), System.Collections.Generic.IEnumerable$1(TValue1));
+                });
+            },
+            selectMany: function (TValue, TIntermediate, TValue2, parser, selector, projector) {
+                return function (i) {
+                    var res = parser(i);
+                    return new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079.Result$1(TValue2))();
+                };
+            },
+            many: function (TValue, parser) {
+                return function (i) {
+                    return new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079.Result$1(System.Collections.Generic.IEnumerable$1(TValue)))();
+                };
+            },
+            toEnumerable: function (TValue, head) {
+                var $yield = [];
+                $yield.push(head);
+                return System.Array.toEnumerable($yield);
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079Parsers", $_);
+
+    Bridge.apply($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079Parsers, {
+        f1: function (_, t) {
+            return t;
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080", {
         statics: {
             config: {
