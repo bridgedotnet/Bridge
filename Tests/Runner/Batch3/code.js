@@ -6897,9 +6897,7 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
-                                    bar = function () {
+                                    bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
                                             $tcs = new System.Threading.Tasks.TaskCompletionSource(), 
@@ -6928,7 +6926,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    };
+                                    }); /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -9657,7 +9655,7 @@ Bridge.$N1391Result =                 r;
                             case 0: {
                                 done = Bridge.Test.Assert.async();
                                     task = new System.Threading.Tasks.Task(null);
-                                    window.setTimeout(function () {
+                                    window.setTimeout(Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $task1, 
                                             $jumpFromFinally, 
@@ -9684,7 +9682,7 @@ Bridge.$N1391Result =                 r;
                                             }, arguments);
 
                                         $asyncBody();
-                                    });
+                                    }));
 
                                     $task1 = task;
                                     $step = 1;

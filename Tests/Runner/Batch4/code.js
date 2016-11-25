@@ -1714,7 +1714,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]());
             }
 
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
         },
         prematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks_SPI_1555: function () {
             // #1555
@@ -1727,7 +1727,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             }
             enm.System$IDisposable$dispose();
 
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
         },
         exceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
             var sb = new System.Text.StringBuilder();
@@ -1751,7 +1751,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine("caught exception");
             }
 
-            this.assertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
+            this.assertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
         },
         typeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface_SPI_1554: function () {
             var enm = null;
@@ -1782,7 +1782,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine("got " + i1);
             }
 
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n-\r\nyielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n-\nyielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
         },
         prematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks_SPI_1555: function () {
             var $t;
@@ -1798,7 +1798,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 }
             }
 
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
         },
         exceptionInIEnumerableIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
             var sb = new System.Text.StringBuilder();
@@ -1823,7 +1823,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine("caught exception");
             }
 
-            this.assertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
+            this.assertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
         },
         enumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters: function () {
             var $t, $t1;
@@ -1841,7 +1841,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine(i1.toString());
             }
 
-            this.assertEqual(sb.toString(), "3\r\n2\r\n1\r\n3\r\n2\r\n1\r\n");
+            this.assertEqual(sb.toString(), "3\n2\n1\n3\n2\n1\n");
         },
         differentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals: function () {
             var sb = new System.Text.StringBuilder();
@@ -1856,7 +1856,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine(enm2[Bridge.geti(enm2, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]().toString());
             }
 
-            this.assertEqual(sb.toString(), "0\r\n0\r\n1\r\n1\r\n2\r\n2\r\n-1\r\n-1\r\n");
+            this.assertEqual(sb.toString(), "0\n0\n1\n1\n2\n2\n-1\n-1\n");
         }
     });
 
@@ -13105,8 +13105,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         statics: {
             canConvert: function (T, arg) {
                 try { /// The variable `x' is assigned but its value is never used
-
-
                     var x = Bridge.cast(arg, T);
                     return true;
                 }
@@ -20915,7 +20913,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var tcs = new System.Threading.Tasks.TaskCompletionSource();
             var task = tcs.task;
 
-            var someMethod = function () {
+            var someMethod = Bridge.fn.bind(this, function () {
                 var $step = 0,
                     $task1, 
                     $jumpFromFinally, 
@@ -20943,7 +20941,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     }, arguments);
 
                 $asyncBody();
-            };
+            });
 
             someMethod();
 
@@ -20965,7 +20963,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var tcs = new System.Threading.Tasks.TaskCompletionSource();
             var task = tcs.task;
 
-            var someMethod = function () {
+            var someMethod = Bridge.fn.bind(this, function () {
                 var $step = 0,
                     $task1, 
                     $jumpFromFinally, 
@@ -21004,7 +21002,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
                 $asyncBody();
                 return $tcs.task;
-            };
+            });
 
             var asyncTask = someMethod();
 
@@ -21032,7 +21030,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var task = tcs.task;
             var ex = new System.Exception("Some text");
 
-            var someMethod = function () {
+            var someMethod = Bridge.fn.bind(this, function () {
                 var $step = 0,
                     $task1, 
                     $jumpFromFinally, 
@@ -21072,7 +21070,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
                 $asyncBody();
                 return $tcs.task;
-            };
+            });
 
             var asyncTask = someMethod();
 
@@ -21101,7 +21099,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var task = tcs.task;
             var ex = new System.Exception("Some text");
 
-            var someMethod = function () {
+            var someMethod = Bridge.fn.bind(this, function () {
                 var $step = 0,
                     $task1, 
                     $jumpFromFinally, 
@@ -21140,7 +21138,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
                 $asyncBody();
                 return $tcs.task;
-            };
+            });
 
             var asyncTask = someMethod();
 
@@ -21171,7 +21169,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var ex = new System.Exception("Some text");
             tcs.setException(ex);
 
-            var someMethod = function () {
+            var someMethod = Bridge.fn.bind(this, function () {
                 var $step = 0,
                     $task1, 
                     $jumpFromFinally, 
@@ -21229,7 +21227,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
                 $asyncBody();
                 return $tcs.task;
-            };
+            });
 
             someMethod();
 
@@ -21246,7 +21244,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var tcs = new System.Threading.Tasks.TaskCompletionSource();
             var task = tcs.task;
 
-            var someMethod = function () {
+            var someMethod = Bridge.fn.bind(this, function () {
                 var $step = 0,
                     $task1, 
                     $jumpFromFinally, 
@@ -21285,7 +21283,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
                 $asyncBody();
                 return $tcs.task;
-            };
+            });
 
             var asyncTask = someMethod();
 
@@ -22325,7 +22323,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
             var caughtException = null;
 
-            var someMethod = function () {
+            var someMethod = Bridge.fn.bind(this, function () {
                 var $step = 0,
                     $task1, 
                     $taskResult1, 
@@ -22382,7 +22380,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     }, arguments);
 
                 $asyncBody();
-            };
+            });
 
             someMethod();
 

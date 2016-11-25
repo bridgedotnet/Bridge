@@ -29327,7 +29327,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var tcs = new System.Threading.Tasks.TaskCompletionSource();
             var task = tcs.task;
 
-            var someMethod = function () {
+            var someMethod = Bridge.fn.bind(this, function () {
                 var $step = 0,
                     $task1, 
                     $jumpFromFinally, 
@@ -29355,7 +29355,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     }, arguments);
 
                 $asyncBody();
-            };
+            });
 
             someMethod();
 
@@ -29377,7 +29377,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var tcs = new System.Threading.Tasks.TaskCompletionSource();
             var task = tcs.task;
 
-            var someMethod = function () {
+            var someMethod = Bridge.fn.bind(this, function () {
                 var $step = 0,
                     $task1, 
                     $jumpFromFinally, 
@@ -29416,7 +29416,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 $asyncBody();
                 return $tcs.task;
-            };
+            });
 
             var asyncTask = someMethod();
 
@@ -29444,7 +29444,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var task = tcs.task;
             var ex = new System.Exception("Some text");
 
-            var someMethod = function () {
+            var someMethod = Bridge.fn.bind(this, function () {
                 var $step = 0,
                     $task1, 
                     $jumpFromFinally, 
@@ -29484,7 +29484,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 $asyncBody();
                 return $tcs.task;
-            };
+            });
 
             var asyncTask = someMethod();
 
@@ -29513,7 +29513,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var task = tcs.task;
             var ex = new System.Exception("Some text");
 
-            var someMethod = function () {
+            var someMethod = Bridge.fn.bind(this, function () {
                 var $step = 0,
                     $task1, 
                     $jumpFromFinally, 
@@ -29552,7 +29552,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 $asyncBody();
                 return $tcs.task;
-            };
+            });
 
             var asyncTask = someMethod();
 
@@ -29583,7 +29583,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var ex = new System.Exception("Some text");
             tcs.setException(ex);
 
-            var someMethod = function () {
+            var someMethod = Bridge.fn.bind(this, function () {
                 var $step = 0,
                     $task1, 
                     $jumpFromFinally, 
@@ -29641,7 +29641,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 $asyncBody();
                 return $tcs.task;
-            };
+            });
 
             someMethod();
 
@@ -29658,7 +29658,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var tcs = new System.Threading.Tasks.TaskCompletionSource();
             var task = tcs.task;
 
-            var someMethod = function () {
+            var someMethod = Bridge.fn.bind(this, function () {
                 var $step = 0,
                     $task1, 
                     $jumpFromFinally, 
@@ -29697,7 +29697,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 $asyncBody();
                 return $tcs.task;
-            };
+            });
 
             var asyncTask = someMethod();
 
@@ -30737,7 +30737,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
             var caughtException = null;
 
-            var someMethod = function () {
+            var someMethod = Bridge.fn.bind(this, function () {
                 var $step = 0,
                     $task1, 
                     $taskResult1, 
@@ -30794,7 +30794,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     }, arguments);
 
                 $asyncBody();
-            };
+            });
 
             someMethod();
 

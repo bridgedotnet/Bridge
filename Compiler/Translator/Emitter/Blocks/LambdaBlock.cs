@@ -254,7 +254,9 @@ namespace Bridge.Translator
                 this.Emitter.ResetLevel(oldLevel);
             }
 
-            if (this.Emitter.ThisRefCounter > savedThisCount)
+            var methodDeclaration = this.Body.GetParent<MethodDeclaration>();
+
+            if (this.Emitter.ThisRefCounter > savedThisCount || this.IsAsync && methodDeclaration != null && !methodDeclaration.HasModifier(Modifiers.Static))
             {
                 this.Emitter.Output.Insert(savedPos, JS.Funcs.BRIDGE_BIND + "(this, ");
                 this.WriteCloseParentheses();
