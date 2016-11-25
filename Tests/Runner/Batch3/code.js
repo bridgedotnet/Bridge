@@ -6897,6 +6897,8 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
+
+
                                     bar = function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -6926,7 +6928,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    }; /// Async method lacks 'await' operators and will run synchronously
+                                    };
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -11182,6 +11184,44 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.Assert.areEqual("System.Collections.Generic.List$1", Bridge.Reflection.getTypeFullName(genericTypeDefinition));
             }
         }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073", {
+        statics: {
+            getString: function () {
+                return "m";
+            },
+            testUserDefinedWithStringConcat: function () {
+                var a = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit("a");
+                var b = "b";
+
+                var s = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Addition(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit(System.String.concat(b, b)), a));
+                Bridge.Test.Assert.areEqual("bba", s);
+
+                s = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Addition(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit(System.String.concat(b, b, b)), a));
+                Bridge.Test.Assert.areEqual("bbba", s);
+
+                s = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Addition(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit(System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.getString(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.getString())), a));
+                Bridge.Test.Assert.areEqual("mma", s);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj", {
+        statics: {
+            op_Implicit: function (s) {
+                return Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj(), {
+                    v: s
+                } );
+            },
+            op_Implicit$1: function (s) {
+                return s.v;
+            },
+            op_Addition: function (left, right) {
+                return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit(System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit$1(left), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit$1(right)));
+            }
+        },
+        v: null
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080", {
