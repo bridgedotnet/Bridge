@@ -78,15 +78,15 @@ namespace Bridge.Translator
 
                 if (finallyNode != null)
                 {
-                    var hashcode = finallyNode.GetHashCode();
+                    //var hashcode = finallyNode.GetHashCode();
                     this.Emitter.AsyncBlock.JumpLabels.Add(new AsyncJumpLabel
                     {
                         Node = finallyNode,
                         Output = this.Emitter.Output
                     });
-                    this.Write(JS.Vars.ASYNC_STEP + " = " + Helpers.PrefixDollar("{", hashcode, "};"));
+                    /*this.Write(JS.Vars.ASYNC_STEP + " = " + Helpers.PrefixDollar("{", hashcode, "};"));
                     this.WriteNewLine();
-                    this.Write("continue;");
+                    this.Write("continue;");*/
                 }
                 else
                 {
