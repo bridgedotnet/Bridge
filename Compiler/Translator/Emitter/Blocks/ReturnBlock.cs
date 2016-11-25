@@ -84,9 +84,9 @@ namespace Bridge.Translator
                         Node = finallyNode,
                         Output = this.Emitter.Output
                     });
-                    this.Write(JS.Vars.ASYNC_STEP + " = " + Helpers.PrefixDollar("{", hashcode, "};"));
+                    /*this.Write(JS.Vars.ASYNC_STEP + " = " + Helpers.PrefixDollar("{", hashcode, "};"));
                     this.WriteNewLine();
-                    this.Write("continue;");
+                    this.Write("continue;");*/
                 }
                 else
                 {
