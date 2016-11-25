@@ -3053,7 +3053,15 @@
         },
 
         getGenericTypeDefinition: function (type) {
-            return type.$genericTypeDefinition || null;
+            if (type.$isGenericTypeDefinition) {
+                return type;
+            }
+
+            if (!type.$genericTypeDefinition) {
+                throw new System.InvalidOperationException("This operation is only valid on generic types.");
+            }
+
+            return type.$genericTypeDefinition;
         },
 
         getGenericParameterCount: function (type) {

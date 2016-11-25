@@ -11159,6 +11159,186 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2067", {
+        statics: {
+            testGetGenericTypeDefinition: function () {
+                Bridge.Test.Assert.throws$6(System.InvalidOperationException, $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2067.f1);
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2067", $_);
+
+    Bridge.apply($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2067, {
+        f1: function () {
+            var t = Bridge.Reflection.getGenericTypeDefinition(System.Int32);
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2068", {
+        statics: {
+            testGetGenericTypeDefinition: function () {
+                var genericTypeDefinition = Bridge.Reflection.getGenericTypeDefinition(System.Collections.Generic.List$1);
+
+                Bridge.Test.Assert.areEqual(System.Collections.Generic.List$1, genericTypeDefinition);
+                Bridge.Test.Assert.areEqual("System.Collections.Generic.List$1", Bridge.Reflection.getTypeFullName(genericTypeDefinition));
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073", {
+        statics: {
+            getString: function () {
+                return "m";
+            },
+            testUserDefinedWithStringConcat: function () {
+                var a = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit("a");
+                var b = "b";
+
+                var s = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Addition(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit(System.String.concat(b, b)), a));
+                Bridge.Test.Assert.areEqual("bba", s);
+
+                s = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Addition(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit(System.String.concat(b, b, b)), a));
+                Bridge.Test.Assert.areEqual("bbba", s);
+
+                s = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Addition(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit(System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.getString(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.getString())), a));
+                Bridge.Test.Assert.areEqual("mma", s);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj", {
+        statics: {
+            op_Implicit: function (s) {
+                return Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj(), {
+                    v: s
+                } );
+            },
+            op_Implicit$1: function (s) {
+                return s.v;
+            },
+            op_Addition: function (left, right) {
+                return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit(System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit$1(left), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit$1(right)));
+            }
+        },
+        v: null
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079", {
+        statics: {
+            testQueryAsArgument: function () {
+                Bridge.Test.Assert.true$1(true, "Just check that Bridge2079Parsers is compiled ok");
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079.Result$1", function (TValue) { return {
+
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079.Source");
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079Parsers", {
+        statics: {
+            bad2: function (TValue1, TValue2, p, sep) {
+                return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079Parsers.selectMany(TValue1, System.Collections.Generic.IEnumerable$1(TValue1), System.Collections.Generic.IEnumerable$1(TValue1), p, function (head) {
+                    return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079Parsers.many(TValue1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079Parsers.selectMany(TValue2, TValue1, TValue1, sep, function (_) {
+                        return p;
+                    }, $_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079Parsers.f1));
+                }, function (head, tail) {
+                    return Bridge.cast(System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079Parsers.toEnumerable(TValue1, head)).concat(tail), System.Collections.Generic.IEnumerable$1(TValue1));
+                });
+            },
+            selectMany: function (TValue, TIntermediate, TValue2, parser, selector, projector) {
+                return function (i) {
+                    var res = parser(i);
+                    return new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079.Result$1(TValue2))();
+                };
+            },
+            many: function (TValue, parser) {
+                return function (i) {
+                    return new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079.Result$1(System.Collections.Generic.IEnumerable$1(TValue)))();
+                };
+            },
+            toEnumerable: function (TValue, head) {
+                var $yield = [];
+                $yield.push(head);
+                return System.Array.toEnumerable($yield);
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079Parsers", $_);
+
+    Bridge.apply($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079Parsers, {
+        f1: function (_, t) {
+            return t;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080", {
+        statics: {
+            config: {
+                properties: {
+                    TestProperty1: false
+                }
+            },
+            testAssigmentOrWithProperty: function () {
+                var testVariable = true;
+                var newValue1 = false;
+                testVariable = !!(testVariable | newValue1);
+                Bridge.Test.Assert.true(testVariable);
+
+                var myTestClass = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080.TestClass();
+                myTestClass.setTestProperty(true);
+                var newValue2 = false;
+                myTestClass.setTestProperty(!!(myTestClass.getTestProperty() | newValue2));
+                Bridge.Test.Assert.true(myTestClass.getTestProperty());
+
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080.setTestProperty1(true);
+                var newValue3 = false;
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080.setTestProperty1(!!(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080.getTestProperty1() | newValue3));
+                Bridge.Test.Assert.true(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080.getTestProperty1());
+            },
+            testAssigmentOrWithPropertyChangingCounter: function () {
+                var myTestClass = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080.TestClass2();
+
+                myTestClass.setTestProperty(true);
+                Bridge.Test.Assert.areEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080.TestClass2.getCount);
+
+                var newValue2 = false;
+                myTestClass.setTestProperty(!!(myTestClass.getTestProperty() | newValue2));
+                Bridge.Test.Assert.areEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080.TestClass2.getCount);
+
+                Bridge.Test.Assert.true(myTestClass.getTestProperty());
+                Bridge.Test.Assert.areEqual(2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080.TestClass2.getCount);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080.TestClass", {
+        config: {
+            properties: {
+                TestProperty: false
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080.TestClass2", {
+        statics: {
+            getCount: 0
+        },
+        b: false,
+        getTestProperty: function () {
+
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080.TestClass2.getCount = (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080.TestClass2.getCount + 1) | 0;
+            return this.b;
+        },
+        setTestProperty: function (value) {
+            this.b = value;
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {

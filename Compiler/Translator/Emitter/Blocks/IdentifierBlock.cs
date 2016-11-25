@@ -503,13 +503,32 @@ namespace Bridge.Translator
                         trg = "this";
                     }
 
-                    this.PushWriter(string.Concat(Helpers.GetPropertyRef(memberResult.Member, this.Emitter, true),
+                    bool isBool = memberResult != null && NullableType.IsNullable(memberResult.Member.ReturnType) ? NullableType.GetUnderlyingType(memberResult.Member.ReturnType).IsKnownType(KnownTypeCode.Boolean) : memberResult.Member.ReturnType.IsKnownType(KnownTypeCode.Boolean);
+                    bool skipGet = false;
+                    var orr = this.Emitter.Resolver.ResolveNode(identifierExpression.Parent, this.Emitter) as OperatorResolveResult;
+                    bool special = orr != null && orr.IsLiftedOperator;
+
+                    if (!special && isBool &&
+                        (this.Emitter.AssignmentType == AssignmentOperatorType.BitwiseAnd ||
+                         this.Emitter.AssignmentType == AssignmentOperatorType.BitwiseOr))
+                    {
+                        skipGet = true;
+                    }
+
+                    if (skipGet)
+                    {
+                        this.PushWriter(string.Concat(Helpers.GetPropertyRef(memberResult.Member, this.Emitter, true), "({0})"));
+                    }
+                    else
+                    {
+                        this.PushWriter(string.Concat(Helpers.GetPropertyRef(memberResult.Member, this.Emitter, true),
                         "(",
                         trg,
                         ".",
                         Helpers.GetPropertyRef(memberResult.Member, this.Emitter, false),
                         "()",
                         "{0})"));
+                    }
                 }
                 else
                 {
