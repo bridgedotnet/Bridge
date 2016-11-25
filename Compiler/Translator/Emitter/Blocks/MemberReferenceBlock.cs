@@ -1317,9 +1317,32 @@ namespace Bridge.Translator
                             getterMember = "." + Helpers.GetPropertyRef(member.Member, this.Emitter, false, ignoreInterface: !nativeImplementation);
                         }
 
+                        bool isBool = member != null && NullableType.IsNullable(member.Member.ReturnType) ? NullableType.GetUnderlyingType(member.Member.ReturnType).IsKnownType(KnownTypeCode.Boolean) : member.Member.ReturnType.IsKnownType(KnownTypeCode.Boolean);
+                        bool skipGet = false;
+                        var orr = this.Emitter.Resolver.ResolveNode(memberReferenceExpression.Parent, this.Emitter) as OperatorResolveResult;
+                        bool special = orr != null && orr.IsLiftedOperator;
+
+                        if (!special && isBool &&
+                            (this.Emitter.AssignmentType == AssignmentOperatorType.BitwiseAnd ||
+                             this.Emitter.AssignmentType == AssignmentOperatorType.BitwiseOr))
+                        {
+                            skipGet = true;
+                        }
+
                         if (targetVar != null)
                         {
-                            this.PushWriter(string.Concat(memberStr,
+                            if (skipGet)
+                            {
+                                this.PushWriter(string.Concat(memberStr,
+                                proto ? "." + JS.Funcs.CALL + "(this, " : "(",
+                                "{0})"), () =>
+                                {
+                                    this.RemoveTempVar(targetVar);
+                                });
+                            }
+                            else
+                            {
+                                this.PushWriter(string.Concat(memberStr,
                                 proto ? "." + JS.Funcs.CALL + "(this, " : "(",
                                 targetVar,
                                 getterMember,
@@ -1328,6 +1351,8 @@ namespace Bridge.Translator
                                 {
                                     this.RemoveTempVar(targetVar);
                                 });
+                            }
+                            
                         }
                         else
                         {
@@ -1342,12 +1367,22 @@ namespace Bridge.Translator
                             var trg = this.Emitter.Output.ToString();
 
                             this.RestoreWriter(oldWriter);
-                            this.PushWriter(string.Concat(memberStr,
-                                proto ? "." + JS.Funcs.CALL + "(this, " : "(",
-                                trg,
-                                getterMember,
-                                proto ? "." + JS.Funcs.CALL + "(this)" : "()",
-                                "{0})"));
+
+                            if (skipGet)
+                            {
+                                this.PushWriter(string.Concat(memberStr,
+                                    proto ? "." + JS.Funcs.CALL + "(this, " : "(",
+                                    "{0})"));
+                            }
+                            else
+                            {
+                                this.PushWriter(string.Concat(memberStr,
+                                    proto ? "." + JS.Funcs.CALL + "(this, " : "(",
+                                    trg,
+                                    getterMember,
+                                    proto ? "." + JS.Funcs.CALL + "(this)" : "()",
+                                    "{0})"));
+                            }
                         }
                     }
                     else
