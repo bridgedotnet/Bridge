@@ -104,7 +104,7 @@ before_build:
         write-host "SETUP Will run client tests"
     }
     
-    # Check if commit message contains label [skip appveyor server] to skip server tests
+    # Check if commit message contains labels [skip appveyor server] or [skip ci server] to skip server tests
     
     IF ($env:SKIP_SERVER_TESTS -eq $null) {
         write-host "SETUP SKIP_SERVER_TESTS is unset"
@@ -113,12 +113,16 @@ before_build:
             $env:SKIP_SERVER_TESTS=$true
         }
         
+        IF ($env:APPVEYOR_REPO_COMMIT_MESSAGE.ToLower().Contains("[skip ci server]")) {
+            write-host "SETUP Commit message contains [skip ci server]"
+            $env:SKIP_SERVER_TESTS=$true
+        }
     } ELSE {
         write-host "SETUP SKIP_SERVER_TESTS is set to $env:SKIP_SERVER_TESTS"
     }
     
     IF ($env:SKIP_SERVER_TESTS -eq $true) {
-        write-host "SETUP Will NOT run server tests as either the skipping labels found ([skip appveyor server]) or set SKIP_SERVER_TESTS=true"
+        write-host "SETUP Will NOT run server tests as either the skipping labels found (either [skip appveyor server] or [skip ci server]) or set SKIP_SERVER_TESTS=true"
     } ELSE {
         write-host "SETUP Will run server tests"
     }
@@ -137,11 +141,14 @@ before_test:
   # - echo script1
 - ps: >-
     IF ($env:SKIP_CLIENT_TESTS -eq $true) {
-        write-host "Skipping client tests"; 
+        write-host "Skipping client tests";
+        $env:CLIENT_TESTS_EXIT_CODE = 0
         # This does not work see https://github.com/appveyor/ci/issues/1090
         # So will use ELSE not exit
         # $host.SetShouldExit(0); exit 0;
     } ELSE {
+        $env:CLIENT_TESTS_EXIT_CODE = $null
+        
         try
         {
           #$ChutzpahDir = get-childitem chutzpah.console.exe -recurse | select-object -first 1 | select -expand Directory
@@ -188,11 +195,13 @@ before_test:
           
           if ($hasAtLeastOneTestRun -eq $FALSE) {
             write-host "There should be at least one test executed"
+            $env:CLIENT_TESTS_EXIT_CODE = 1 
             $host.SetShouldExit(1)
           }
           
           if ($anyFailures -eq $TRUE) {
             write-host "Failing build as there are broken tests"
+            $env:CLIENT_TESTS_EXIT_CODE = 2
             $host.SetShouldExit(1)
           }
         }
@@ -203,7 +212,12 @@ before_test:
             $FailedItem = $_.Exception.ItemName
             write-host $ErrorMessage
             write-host $FailedItem
+            $env:CLIENT_TESTS_EXIT_CODE = 3
             $host.SetShouldExit(1)
+        }
+        
+        IF ($env:CLIENT_TESTS_EXIT_CODE -eq $null) {
+            $env:CLIENT_TESTS_EXIT_CODE = 0
         }
     }
 # scripts to run after tests
@@ -218,6 +232,8 @@ test_script:
         # This does not work see https://github.com/appveyor/ci/issues/1090
         # So will use ELSE not exit
         # $host.SetShouldExit(0); exit 0;
+    } ELSEIF ($env:CLIENT_TESTS_EXIT_CODE -ne 0) {
+        write-host "Skipping server tests as CLIENT_TESTS_EXIT_CODE = $env:CLIENT_TESTS_EXIT_CODE"
     } ELSE {
         nunit3-console "c:\projects\Bridge\Compiler\TranslatorTests\bin\Release\Bridge.Translator.Tests.dll"
     }
