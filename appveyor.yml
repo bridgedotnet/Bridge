@@ -112,7 +112,7 @@ build_script:
 before_test:
   # - echo script1
 - ps: >-
-    IF ($env:SKIP_CLIENT_TESTS -eq $true) { write-host "Skipping client tests"; exit }
+    IF ($env:SKIP_CLIENT_TESTS -eq $true) { write-host "Skipping client tests"; $host.SetShouldExit(0); exit }
     try
     {
       #$ChutzpahDir = get-childitem chutzpah.console.exe -recurse | select-object -first 1 | select -expand Directory
