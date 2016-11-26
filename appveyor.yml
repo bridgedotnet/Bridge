@@ -115,9 +115,8 @@ before_test:
     IF ($env:SKIP_CLIENT_TESTS -eq $true) {
         write-host "Skipping client tests"; 
         # This does not work see https://github.com/appveyor/ci/issues/1090
-        # So will use ELSE
-        
-        $host.SetShouldExit(0); exit 0;
+        # So will use ELSE not exit
+        # $host.SetShouldExit(0); exit 0;
     } ELSE {
         try
         {
