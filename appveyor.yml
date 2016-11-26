@@ -51,7 +51,7 @@ init:
     } ELSE {
         write-host "SETUP Will run client tests"
     }
-
+    
 # clone directory
 clone_folder: c:\projects\Bridge
 
