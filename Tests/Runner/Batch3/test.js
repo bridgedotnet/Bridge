@@ -364,6 +364,7 @@
             QUnit.test("#2080 - TestAssigmentOrWithProperty", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2080.testAssigmentOrWithProperty);
             QUnit.test("#2080 - TestAssigmentOrWithPropertyChangingCounter", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2080.testAssigmentOrWithPropertyChangingCounter);
             QUnit.test("#2081 - TestReturnFromCatch", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2081.testReturnFromCatch);
+            QUnit.test("#2092 - TestIgnoreGenericForDelegate", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2092.testIgnoreGenericForDelegate);
             QUnit.test("#381 - TestUseCase", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge381.testUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge447.checkInlineExpression);
             QUnit.test("#447 - CheckInlineCalls", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge447.checkInlineCalls);
@@ -3497,6 +3498,16 @@
             testReturnFromCatch: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2081).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2081);
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2081.testReturnFromCatch();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2092", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2092)],
+        statics: {
+            testIgnoreGenericForDelegate: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2092).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2092);
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2092.testIgnoreGenericForDelegate();
             }
         }
     });
