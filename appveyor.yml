@@ -234,6 +234,7 @@ test_script:
         # $host.SetShouldExit(0); exit 0;
     } ELSEIF ($env:CLIENT_TESTS_EXIT_CODE -ne 0) {
         write-host "Skipping server tests as CLIENT_TESTS_EXIT_CODE = $env:CLIENT_TESTS_EXIT_CODE"
+        $host.SetShouldExit(1);
     } ELSE {
         nunit3-console "c:\projects\Bridge\Compiler\TranslatorTests\bin\Release\Bridge.Translator.Tests.dll"
     }
