@@ -112,71 +112,77 @@ build_script:
 before_test:
   # - echo script1
 - ps: >-
-    IF ($env:SKIP_CLIENT_TESTS -eq $true) { write-host "Skipping client tests"; $host.SetShouldExit(0); exit }
-    try
-    {
-      #$ChutzpahDir = get-childitem chutzpah.console.exe -recurse | select-object -first 1 | select -expand Directory
-      
-      #$ChutzpahPath = "${ChutzpahDir}" + "\chutzpah.console.exe"
-      $ChutzpahPath = "c:\projects\Bridge\packages\Chutzpah.4.2.3\tools\chutzpah.console.exe"
-      
-      $ChutzpahHtml = "c:\projects\" + "Bridge\Tests\Runner\index.html"
-      
-      $Exe = "${ChutzpahPath}"
-      
-      $Arguments = "${ChutzpahHtml}","/silent","/junit","chutzpah-results.xml"
-      
-      Write-Host "Running Chutzpah:"
-      
-      Write-Host $Exe $Arguments
-      
-      &$Exe $Arguments
-      
-      $testsuites = [xml](get-content chutzpah-results.xml)
-      
-      $anyFailures = $FALSE
-      
-      $hasAtLeastOneTestRun = $FALSE
-      
-      foreach ($testsuite in $testsuites.testsuites.testsuite) {
-        write-host " $($testsuite.name)"
-        foreach ($testcase in $testsuite.testcase) {
-          $failed = $testcase.failure
-          $time = $testsuite.time
-          if ($testcase.time) { $time = $testcase.time }
-          if ($failed) {
-            write-host "Failed   $($testcase.name) $($testcase.failure.message)"
-            Add-AppveyorTest $testcase.name -Outcome Failed -FileName $testsuite.name -ErrorMessage $testcase.failure.message -Duration $time
-            $anyFailures = $TRUE
-            $hasAtLeastOneTestRun = $TRUE
-          }else {
-            $hasAtLeastOneTestRun = $TRUE
-            write-host "Passed   $($testcase.name)"
-            Add-AppveyorTest $testcase.name -Outcome Passed -FileName $testsuite.name -Duration $time
+    IF ($env:SKIP_CLIENT_TESTS -eq $true) {
+        write-host "Skipping client tests"; 
+        # This does not work see https://github.com/appveyor/ci/issues/1090
+        # So will use ELSE
+        
+        $host.SetShouldExit(0); exit 0;
+    } ELSE {
+        try
+        {
+          #$ChutzpahDir = get-childitem chutzpah.console.exe -recurse | select-object -first 1 | select -expand Directory
+          
+          #$ChutzpahPath = "${ChutzpahDir}" + "\chutzpah.console.exe"
+          $ChutzpahPath = "c:\projects\Bridge\packages\Chutzpah.4.2.3\tools\chutzpah.console.exe"
+          
+          $ChutzpahHtml = "c:\projects\" + "Bridge\Tests\Runner\index.html"
+          
+          $Exe = "${ChutzpahPath}"
+          
+          $Arguments = "${ChutzpahHtml}","/silent","/junit","chutzpah-results.xml"
+          
+          Write-Host "Running Chutzpah:"
+          
+          Write-Host $Exe $Arguments
+          
+          &$Exe $Arguments
+          
+          $testsuites = [xml](get-content chutzpah-results.xml)
+          
+          $anyFailures = $FALSE
+          
+          $hasAtLeastOneTestRun = $FALSE
+          
+          foreach ($testsuite in $testsuites.testsuites.testsuite) {
+            write-host " $($testsuite.name)"
+            foreach ($testcase in $testsuite.testcase) {
+              $failed = $testcase.failure
+              $time = $testsuite.time
+              if ($testcase.time) { $time = $testcase.time }
+              if ($failed) {
+                write-host "Failed   $($testcase.name) $($testcase.failure.message)"
+                Add-AppveyorTest $testcase.name -Outcome Failed -FileName $testsuite.name -ErrorMessage $testcase.failure.message -Duration $time
+                $anyFailures = $TRUE
+                $hasAtLeastOneTestRun = $TRUE
+              }else {
+                $hasAtLeastOneTestRun = $TRUE
+                write-host "Passed   $($testcase.name)"
+                Add-AppveyorTest $testcase.name -Outcome Passed -FileName $testsuite.name -Duration $time
+              }
+            }
+          }
+          
+          if ($hasAtLeastOneTestRun -eq $FALSE) {
+            write-host "There should be at least one test executed"
+            $host.SetShouldExit(1)
+          }
+          
+          if ($anyFailures -eq $TRUE) {
+            write-host "Failing build as there are broken tests"
+            $host.SetShouldExit(1)
           }
         }
-      }
-      
-      if ($hasAtLeastOneTestRun -eq $FALSE) {
-        write-host "There should be at least one test executed"
-        $host.SetShouldExit(1)
-      }
-      
-      if ($anyFailures -eq $TRUE) {
-        write-host "Failing build as there are broken tests"
-        $host.SetShouldExit(1)
-      }
+        catch
+        {
+            write-host "Error occurred"
+            $ErrorMessage = $_.Exception.Message
+            $FailedItem = $_.Exception.ItemName
+            write-host $ErrorMessage
+            write-host $FailedItem
+            $host.SetShouldExit(1)
+        }
     }
-    catch
-    {
-        write-host "Error occurred"
-        $ErrorMessage = $_.Exception.Message
-        $FailedItem = $_.Exception.ItemName
-        write-host $ErrorMessage
-        write-host $FailedItem
-        $host.SetShouldExit(1)
-    }
-    
 # scripts to run after tests
 after_test:
 
