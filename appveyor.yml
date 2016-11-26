@@ -81,7 +81,7 @@ build:
 before_build:
 - nuget restore "c:\projects\Bridge\.nuget\packages.config" -PackagesDirectory "c:\projects\Bridge\packages"
 - ps: >-
-    # Check if commit message contains label [skip appveyor client] to skip client tests
+    # Check if commit message contains labels [skip appveyor client] or [skip ci client] to skip client tests
     
     IF ($env:SKIP_CLIENT_TESTS -eq $null) {
         write-host "SETUP SKIP_CLIENT_TESTS is unset"
@@ -89,12 +89,17 @@ before_build:
             write-host "SETUP Commit message contains [skip appveyor client]"
             $env:SKIP_CLIENT_TESTS=$true
         }
+        
+        IF ($env:APPVEYOR_REPO_COMMIT_MESSAGE.ToLower().Contains("[skip ci client]")) {
+            write-host "SETUP Commit message contains [skip ci client]"
+            $env:SKIP_CLIENT_TESTS=$true
+        }        
     } ELSE {
         write-host "SETUP SKIP_CLIENT_TESTS is set to $env:SKIP_CLIENT_TESTS"
     }
     
     IF ($env:SKIP_CLIENT_TESTS -eq $true) {
-        write-host "SETUP Will NOT run client tests as either the skipping labels found ([skip appveyor client]) or set SKIP_CLIENT_TESTS=true"
+        write-host "SETUP Will NOT run client tests as either the skipping labels found (either [skip appveyor client] or [skip ci client]) or set SKIP_CLIENT_TESTS=true"
     } ELSE {
         write-host "SETUP Will run client tests"
     }
