@@ -33,24 +33,23 @@ os: Visual Studio 2015 RC
 
 # scripts that are called at very beginning, before repo cloning
 init:
-  - git config --global core.autocrlf input
+- git config --global core.autocrlf input
 - ps: >-
     # Check if commit message contains label [skip appveyor client] to skip client tests
-        IF ($env:SKIP_CLIENT_TESTS -eq $null) {
-            write-host "SETUP SKIP_CLIENT_TESTS is unset"
-            IF ($env:APPVEYOR_REPO_COMMIT_MESSAGE.ToLower().Contains("[skip appveyor client]")) {
-                write-host "SETUP Commit message contains [skip appveyor client]"
-                $env:SKIP_CLIENT_TESTS=$true
-            }
+    IF ($env:SKIP_CLIENT_TESTS -eq $null) {
+        write-host "SETUP SKIP_CLIENT_TESTS is unset"
+        IF ($env:APPVEYOR_REPO_COMMIT_MESSAGE.ToLower().Contains("[skip appveyor client]")) {
+            write-host "SETUP Commit message contains [skip appveyor client]"
+            $env:SKIP_CLIENT_TESTS=$true
         }
-        ELSE {
-            write-host "SETUP SKIP_CLIENT_TESTS is set to $env:SKIP_CLIENT_TESTS"
-        }
-        IF ($env:SKIP_CLIENT_TESTS -eq $true) {
-            write-host "SETUP Will NOT run client tests as either the skipping labels found ([skip appveyor client]) or set SKIP_CLIENT_TESTS=true"
-        } ELSE {
-            write-host "SETUP Will run client tests"
-        }
+    } ELSE {
+        write-host "SETUP SKIP_CLIENT_TESTS is set to $env:SKIP_CLIENT_TESTS"
+    }
+    IF ($env:SKIP_CLIENT_TESTS -eq $true) {
+        write-host "SETUP Will NOT run client tests as either the skipping labels found ([skip appveyor client]) or set SKIP_CLIENT_TESTS=true"
+    } ELSE {
+        write-host "SETUP Will run client tests"
+    }
 # clone directory
 clone_folder: c:\projects\Bridge
 
