@@ -6897,8 +6897,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -6928,7 +6926,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    });
+                                    }); /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -11469,6 +11467,27 @@ Bridge.$N1391Result =                 r;
                     }, arguments);
 
                 $asyncBody();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2094", {
+        statics: {
+            outer1: function (T1, value) {
+                return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2094.doSomething(System.Int32, String, 123, function (value) { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2094.getName(System.Int32, value); });
+            },
+            outer2: function (T1, value) {
+                return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2094.doSomething(T1, String, value, function (value) { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2094.getName(T1, value); });
+            },
+            doSomething: function (T1, T2, value, work) {
+                return work(value);
+            },
+            getName: function (T, value) {
+                return Bridge.Reflection.getTypeName(Bridge.getType(value));
+            },
+            testGenericMethodAsDelegate: function () {
+                Bridge.Test.Assert.areEqual("Int32", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2094.outer1(System.Int32, 123));
+                Bridge.Test.Assert.areEqual("Int32", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2094.outer2(System.Int32, 123));
             }
         }
     });

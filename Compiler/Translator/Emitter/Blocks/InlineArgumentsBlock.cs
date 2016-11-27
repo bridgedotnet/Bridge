@@ -1098,7 +1098,7 @@ namespace Bridge.Translator
             }
         }
 
-        public virtual void EmitFunctionReference(bool? definition = null)
+        public virtual void EmitFunctionReference(bool? definition = false)
         {
             this.EmitInlineExpressionList(this.ArgumentsInfo, this.InlineCode, true, false, definition);
         }
