@@ -1016,6 +1016,10 @@
                 }
             }
 
+            if (instance.$getType) {
+                return instance.$getType();
+            }
+
             try {
                 return instance.constructor;
             } catch (ex) {

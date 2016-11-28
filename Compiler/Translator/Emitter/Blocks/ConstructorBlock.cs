@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Object.Net.Utilities;
 
 namespace Bridge.Translator
 {
@@ -366,6 +367,16 @@ namespace Bridge.Translator
                     }
 
                     this.WriteNewLine();
+
+                    string name = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter);
+                    if (name.IsEmpty())
+                    {
+                        name = BridgeTypes.DefinitionToJsName(this.TypeInfo.Type, this.Emitter);
+                    }
+
+                    this.Write(JS.Vars.D_THIS + "." + JS.Funcs.GET_TYPE + " = function() { return " + name + "; };");
+
+                    this.WriteNewLine();
                     this.Write("(function()");
                     this.BeginBlock();
                     requireNewLine = false;
@@ -494,7 +505,7 @@ namespace Bridge.Translator
                         this.WriteNewLine();
                     }
                     this.EndBlock();
-                    this.Write(").call(" + JS.Vars.D_THIS + ");");
+                    this.Write(")." + JS.Funcs.CALL + "(" + JS.Vars.D_THIS + ");");
                     this.WriteNewLine();
                     this.Write("return " + JS.Vars.D_THIS + ";");
                     this.WriteNewLine();
