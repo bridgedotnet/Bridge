@@ -1,5 +1,6 @@
 using Bridge.Translator.Logging;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -78,7 +79,7 @@ namespace Bridge.Translator.Tests
             }
         }
 
-        [TestCase("02", false, true, TestName = "OutputTest 02 - using GenerateScript Task Bridge.json outputFormatting Formatted, autoPropertyToField, combineScripts")]
+        [TestCase("02", false, true, "TestProject.js", TestName = "OutputTest 02 - using GenerateScript Task Bridge.json outputFormatting Formatted, autoPropertyToField, combineScripts")]
         [TestCase("03", true, true, TestName = "OutputTest 03 - Bridge.json outputFormatting Minified")]
         [TestCase("04", true, true, TestName = "OutputTest 04 - Bridge.json outputBy Class ignoreCast fileNameCasing Lowercase")]
         [TestCase("05", true, true, TestName = "OutputTest 05 - Bridge.json outputBy Namespace ignoreCast default useTypedArrays default fileNameCasing CamelCase")]
@@ -94,7 +95,7 @@ namespace Bridge.Translator.Tests
 #else
         [TestCase("19", true, true, TestName = "OutputTest 19 - Linked files feature #531 #562")]
 #endif
-        public void Test(string folder, bool isToTranslate, bool useSpecialFileCompare)
+        public void Test(string folder, bool isToTranslate, bool useSpecialFileCompare, string markedContentFiles = null)
         {
             var logDir = Path.GetDirectoryName(FileHelper.GetExecutingAssemblyPath());
 
@@ -128,7 +129,7 @@ namespace Bridge.Translator.Tests
 
             try
             {
-                CheckDifferenceBetweenReferenceAndOutput(folder, useSpecialFileCompare, logger);
+                CheckDifferenceBetweenReferenceAndOutput(folder, useSpecialFileCompare, markedContentFiles, logger);
             }
             catch (NUnit.Framework.AssertionException)
             {
@@ -143,11 +144,30 @@ namespace Bridge.Translator.Tests
             }
         }
 
-        private void CheckDifferenceBetweenReferenceAndOutput(string folder, bool useSpecialFileCompare, Logger logger)
+        private void CheckDifferenceBetweenReferenceAndOutput(string folder, bool useSpecialFileCompare, string markedContentFiles, Logger logger)
         {
             var folderComparer = new FolderComparer() { Logger = logger };
 
-            var comparence = folderComparer.CompareFolders(this.ReferenceFolder, this.OutputFolder, useSpecialFileCompare ? SpecialFiles : null);
+            var specialFiles = new Dictionary<string, CompareMode>();
+            if (useSpecialFileCompare)
+            {
+                foreach (var item in SpecialFiles)
+                {
+                    specialFiles.Add(item.Key, item.Value);
+                }
+            }
+
+            if (markedContentFiles != null)
+            {
+                var contentFiles = markedContentFiles.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (var fileName in contentFiles)
+                {
+                    specialFiles.Add(fileName, CompareMode.MarkedContent);
+                }
+            }
+
+            var comparence = folderComparer.CompareFolders(this.ReferenceFolder, this.OutputFolder, specialFiles);
 
             if (comparence.Any())
             {

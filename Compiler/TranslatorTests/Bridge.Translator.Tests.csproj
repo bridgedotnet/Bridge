@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code\Constansts.cs" />
     <Compile Include="Comparence.cs" />
     <Compile Include="DiffMatchPatch.cs" />
     <Compile Include="FileHelper.cs" />

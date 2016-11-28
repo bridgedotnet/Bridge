@@ -89,7 +89,8 @@ namespace Bridge.Translator.Tests
     {
         Default = 0,
         Presence = 1,
-        Content = 2
+        Content = 2,
+        MarkedContent = 3
     }
 
     internal enum CompareResult
@@ -202,21 +203,30 @@ namespace Bridge.Translator.Tests
             {
                 cd.File2FullPath = file2FullName;
 
-                if (specialFiles != null)
+                string contentMarker = null;
+
+                if (specialFiles != null && specialFiles.Count > 0)
                 {
                     CompareMode specialFileMode;
 
                     if (specialFiles.TryGetValue(file.Name, out specialFileMode))
                     {
-                        cd.Result = CompareResult.TheSame;
+                        if (specialFileMode == CompareMode.MarkedContent)
+                        {
+                            contentMarker = Constansts.CONTENT_MARKER;
+                        }
+                        else
+                        {
+                            cd.Result = CompareResult.TheSame;
 
-                        return;
+                            return;
+                        }
                     }
                 }
 
                 cd.Result = CompareResult.HasContentDifferences;
 
-                cd.Difference = AnyDifference(cd.File1FullPath, cd.File2FullPath);
+                cd.Difference = AnyDifference(cd.File1FullPath, cd.File2FullPath, contentMarker);
 
                 if (cd.Difference == null)
                 {
@@ -232,32 +242,54 @@ namespace Bridge.Translator.Tests
             comparence.Add(file.Name, cd);
         }
 
-        private static string AnyDifference(string file1, string file2)
+        private static string AnyDifference(string file1, string file2, string contentMarker = null)
         {
-            using (Stream s1 = new FileStream(file1, FileMode.Open, FileAccess.Read, FileShare.Read))
+            var s1 = File.ReadAllText(file1, Constansts.Encoding);
+            var s2 = File.ReadAllText(file2, Constansts.Encoding);
+
+            if (contentMarker != null)
             {
-                using (Stream s2 = new FileStream(file2, FileMode.Open, FileAccess.Read, FileShare.Read))
+                var markerPosition1 = s1.IndexOf(contentMarker);
+                if (markerPosition1 >= 0)
                 {
-                    if (s1.Length != s2.Length)
-                    {
-                        return string.Format("Length difference {0} vs {1}", s2.Length, s1.Length);
-                    }
-
-                    int i = 0;
-
-                    while (i < s1.Length)
-                    {
-                        var b1 = s1.ReadByte();
-                        var b2 = s2.ReadByte();
-
-                        if (b1 != b2)
-                        {
-                            return string.Format("Content difference found at {0} with {1} vs {2}", i, b2, b1);
-                        }
-
-                        i++;
-                    }
+                    s1 = s1.Remove(0, markerPosition1);
                 }
+
+                var markerPosition2 = s2.IndexOf(contentMarker);
+                if (markerPosition2 >= 0)
+                {
+                    s2 = s2.Remove(0, markerPosition2);
+                }
+
+                if (markerPosition1 < 0 || markerPosition2 < 0)
+                {
+                    var error = "Content marker position not found either for file1 or file2:";
+
+                    error += string.Format(" for file {0} at position {1}", file1, markerPosition1);
+                    error += string.Format(" for file {0} at position {1}", file2, markerPosition2);
+
+                    return error;
+                }
+            }
+
+            if (s1.Length != s2.Length)
+            {
+                return string.Format("Length difference {0} vs {1}", s2.Length, s1.Length);
+            }
+
+            int i = 0;
+
+            while (i < s1.Length)
+            {
+                var b1 = s1[i];
+                var b2 = s2[i];
+
+                if (b1 != b2)
+                {
+                    return string.Format("Content difference found at symbol {0} with `{1}` vs `{2}`", i, b2, b1);
+                }
+
+                i++;
             }
 
             return null;
