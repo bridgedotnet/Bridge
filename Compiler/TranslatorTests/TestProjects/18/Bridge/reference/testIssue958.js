@@ -1,4 +1,4 @@
-﻿    Bridge.define("TestIssue958.IMessage", {
+    Bridge.define("TestIssue958.IMessage", {
         $kind: "interface"
     });
 

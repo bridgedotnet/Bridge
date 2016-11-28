@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("es-PA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("es-PA", true), {
     englishName: "Spanish (Panama)",
     nativeName: "español (Panamá)",
 

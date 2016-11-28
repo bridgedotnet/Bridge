@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Bridge Test library - general C# language tests
  * @version 15.4.0
  * @author Object.NET, Inc.

@@ -1,4 +1,4 @@
-﻿/*!
+/*!
  * Bridge Test - North Theme v1.0.0
  * Copyright 2008-2016 Object.NET, Inc. (http://object.net) All Rights Reserved.
  */

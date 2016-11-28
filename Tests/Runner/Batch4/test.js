@@ -1,4 +1,4 @@
-﻿Bridge.assembly("Bridge_ClientTest_Batch4_Tests", function ($asm, globals) {
+Bridge.assembly("Bridge_ClientTest_Batch4_Tests", function ($asm, globals) {
     
 
     Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner", {

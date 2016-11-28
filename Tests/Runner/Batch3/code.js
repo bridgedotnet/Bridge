@@ -1,4 +1,4 @@
-﻿
+
 var SomeExternalNamespace = {
     SomeNonBridgeClass: function () {
     }

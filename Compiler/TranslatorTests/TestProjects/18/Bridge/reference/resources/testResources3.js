@@ -3,7 +3,7 @@
 // Content remark: Path: Bridge/output/testIssue434.js; name: testIssue434.js
 // ---
 
-﻿// Top
+// Top
 
     (function(){
         TestIssue434.Issue434A.doSomething(2);
@@ -66,7 +66,7 @@
 // Content remark: Path: Bridge/output/testIssue461.js; name: testIssue461.js
 // ---
 
-﻿    Bridge.define("TestIssue461.Issue461", {
+    Bridge.define("TestIssue461.Issue461", {
         statics: {
             test: function () {
                 var input = document.createElement('input');

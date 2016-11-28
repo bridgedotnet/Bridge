@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Bridge Test library - special tests with custom config options like useTypedArrays
  * @version 15.4.0
  * @author Object.NET, Inc.

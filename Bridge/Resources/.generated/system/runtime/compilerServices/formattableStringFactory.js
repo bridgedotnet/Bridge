@@ -1,4 +1,4 @@
-﻿    Bridge.define("System.Runtime.CompilerServices.FormattableStringFactory", {
+    Bridge.define("System.Runtime.CompilerServices.FormattableStringFactory", {
         statics: {
             create: function (format, args) {
                 if (args === void 0) { args = []; }

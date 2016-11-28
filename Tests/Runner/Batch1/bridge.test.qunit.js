@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @compiler Bridge.NET 15.4.0
  */
 Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {

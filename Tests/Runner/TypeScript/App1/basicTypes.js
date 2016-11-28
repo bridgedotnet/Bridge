@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Bridge Test library for TypeScript.
  * @version 15.4.0
  * @author Object.NET, Inc.

@@ -1,4 +1,4 @@
-﻿    Bridge.define("System.Version", {
+    Bridge.define("System.Version", {
         inherits: function () { return [System.ICloneable,System.IComparable$1(System.Version),System.IEquatable$1(System.Version)]; },
         statics: {
             separatorsArray: ".",

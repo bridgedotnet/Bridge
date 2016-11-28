@@ -1,4 +1,4 @@
-﻿    Bridge.define("System.Version.ParseFailureKind", {
+    Bridge.define("System.Version.ParseFailureKind", {
         $kind: "enum",
         statics: {
             ArgumentNullException: 0,

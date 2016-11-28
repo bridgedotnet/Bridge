@@ -1,4 +1,4 @@
-﻿    Bridge.define("System.Version.VersionResult", {
+    Bridge.define("System.Version.VersionResult", {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new System.Version.VersionResult(); }

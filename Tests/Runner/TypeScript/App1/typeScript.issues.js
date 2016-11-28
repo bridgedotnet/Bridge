@@ -1,4 +1,4 @@
-﻿Bridge.assembly("TypeScriptTest", function ($asm, globals) {
+Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     "use strict";
 
     Bridge.definei("TypeScript.Issues.N2029Interface$1", function (T) { return {

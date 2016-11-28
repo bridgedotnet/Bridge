@@ -1,4 +1,4 @@
-﻿/*!
+/*!
  * QUnit 2.0.1
  * https://qunitjs.com/
  *

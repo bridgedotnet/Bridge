@@ -1,4 +1,4 @@
-﻿// Top
+// Top
 
     (function(){
         TestIssue434.Issue434A.doSomething(2);

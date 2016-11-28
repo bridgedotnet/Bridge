@@ -1,4 +1,4 @@
-﻿/// <reference path="./bridge.d.ts" />
+/// <reference path="./bridge.d.ts" />
 
 declare module TestProject2 {
     export interface TestClassB {

@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("es-NI", true), {
+Bridge.merge(new System.Globalization.CultureInfo("es-NI", true), {
     englishName: "Spanish (Nicaragua)",
     nativeName: "español (Nicaragua)",
 

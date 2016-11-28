@@ -1,4 +1,4 @@
-﻿Bridge.assembly("TestProject", function ($asm, globals) {
+Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
 define("MyModule", ["bridge"], function (_) {

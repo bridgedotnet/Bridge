@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Bridge Test library - a common classes shared across all test Bathces
  * @version 1.2.3.4
  * @compiler Bridge.NET 15.4.0

@@ -1,4 +1,4 @@
-﻿    Bridge.define("TestIssue1230.Issue1230", {
+    Bridge.define("TestIssue1230.Issue1230", {
         statics: {
             testLong: function () {
                 // Conversions should not have duplicated Bridge.Long: Bridge.Long(Bridge.Long(v))
