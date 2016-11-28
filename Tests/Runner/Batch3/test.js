@@ -364,6 +364,7 @@
             QUnit.test("#2080 - TestAssigmentOrWithProperty", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2080.testAssigmentOrWithProperty);
             QUnit.test("#2080 - TestAssigmentOrWithPropertyChangingCounter", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2080.testAssigmentOrWithPropertyChangingCounter);
             QUnit.test("#2081 - TestReturnFromCatch", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2081.testReturnFromCatch);
+            QUnit.test("#2088 - TestObjectLiteralReflection", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2088.testObjectLiteralReflection);
             QUnit.test("#2092 - TestIgnoreGenericForDelegate", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2092.testIgnoreGenericForDelegate);
             QUnit.test("#381 - TestUseCase", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge381.testUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge447.checkInlineExpression);
@@ -3502,6 +3503,16 @@
         }
     });
 
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2088", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088)],
+        statics: {
+            testObjectLiteralReflection: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2088);
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.testObjectLiteralReflection();
+            }
+        }
+    });
+
     Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2092", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2092)],
         statics: {
@@ -5149,4 +5160,10 @@
             }
         }
     });
+
+    var $m = Bridge.setMetadata,
+        $n = [System,Bridge.ClientTest.Batch3.BridgeIssues];
+    $m($n[1].Bridge2088.T, function () { return {"m":[{"a":2,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"ShouldSeeThis","t":16,"rt":$n[0].Int32,"g":{"a":2,"n":"get_ShouldSeeThis","t":8,"sn":"getShouldSeeThis","rt":$n[0].Int32},"s":{"a":2,"n":"set_ShouldSeeThis","t":8,"pi":[{"n":"value","pt":$n[0].Int32,"ps":0}],"sn":"setShouldSeeThis","rt":Object,"p":[$n[0].Int32]}},{"a":1,"n":"<ShouldSeeThis>k__BackingField","t":4,"rt":$n[0].Int32,"sn":"<ShouldSeeThis>k__BackingField"}]}; });
+    $m($n[1].Bridge2088.OL1, function () { return {"m":[{"a":2,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"ShouldSeeThis1","t":16,"rt":$n[0].Int32,"g":{"a":2,"n":"get_ShouldSeeThis1","t":8,"rt":$n[0].Int32,"fg":"shouldSeeThis1"},"s":{"a":2,"n":"set_ShouldSeeThis1","t":8,"p":[$n[0].Int32],"rt":Object,"fs":"shouldSeeThis1"},"fn":"shouldSeeThis1"},{"a":1,"n":"<ShouldSeeThis1>k__BackingField","t":4,"rt":$n[0].Int32,"sn":"<ShouldSeeThis1>k__BackingField"}]}; });
+    $m($n[1].Bridge2088.OL2, function () { return {"m":[{"a":2,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"ShouldSeeThis2","t":16,"rt":$n[0].Int32,"g":{"a":2,"n":"get_ShouldSeeThis2","t":8,"rt":$n[0].Int32,"fg":"shouldSeeThis2"},"s":{"a":2,"n":"set_ShouldSeeThis2","t":8,"p":[$n[0].Int32],"rt":Object,"fs":"shouldSeeThis2"},"fn":"shouldSeeThis2"},{"a":1,"n":"<ShouldSeeThis2>k__BackingField","t":4,"rt":$n[0].Int32,"sn":"<ShouldSeeThis2>k__BackingField"}]}; });
 });

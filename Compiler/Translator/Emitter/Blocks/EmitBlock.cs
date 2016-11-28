@@ -322,6 +322,16 @@ namespace Bridge.Translator
                     isGlobal = typeDef.Attributes.Any(a => a.AttributeType.FullName == "Bridge.GlobalMethodsAttribute" || a.AttributeType.FullName == "Bridge.MixinAttribute");
                 }
 
+                if (typeDef.FullName != "System.Object")
+                {
+                    var name = BridgeTypes.ToJsName(typeDef, this.Emitter);
+
+                    if (name == "Object")
+                    {
+                        continue;
+                    }
+                }
+
                 if (reflectedTypes.Any(t => t == type.Type) || isGlobal)
                 {
                     continue;
@@ -491,6 +501,17 @@ namespace Bridge.Translator
                             a.AttributeType.FullName == "Bridge.GlobalMethodsAttribute" ||
                             a.AttributeType.FullName == "Bridge.NonScriptableAttribute" ||
                             a.AttributeType.FullName == "Bridge.MixinAttribute");
+
+                    if (!skip && typeDef.FullName != "System.Object")
+                    {
+                        var name = BridgeTypes.ToJsName(typeDef, this.Emitter);
+
+                        if (name == "Object")
+                        {
+                            skip = true;
+                        }
+                    }
+
                     if (skip)
                     {
                         continue;

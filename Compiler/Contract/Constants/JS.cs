@@ -73,6 +73,7 @@
             public const string GETDEFAULTVALUE = "getDefaultValue";
             public const string STRING_FROMCHARCODE = "String.fromCharCode";
             public const string TOJSON = "toJSON";
+            public const string GET_TYPE = "$getType";
 
             public const string ASYNC_BODY = "$asyncBody";
             public const string GET_AWAITED_RESULT = "getAwaitedResult";
