@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using Bridge.Test;
-using System.Threading.Tasks;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
