@@ -1524,23 +1524,26 @@ namespace Bridge.Translator
 
             bool needComma = false;
 
-            foreach (var typeArgument in method.TypeArguments)
+            if (!Helpers.IsIgnoreGeneric(method, emitter))
             {
-                if (needComma)
+                foreach (var typeArgument in method.TypeArguments)
                 {
-                    sb.Append(", ");
-                }
+                    if (needComma)
+                    {
+                        sb.Append(", ");
+                    }
 
-                needComma = true;
-                if (typeArgument.Kind == TypeKind.TypeParameter)
-                {
-                    sb.Append("{");
-                    sb.Append(typeArgument.Name);
-                    sb.Append("}");
-                }
-                else
-                {
-                    sb.Append(BridgeTypes.ToJsName(typeArgument, emitter));
+                    needComma = true;
+                    if (typeArgument.Kind == TypeKind.TypeParameter)
+                    {
+                        sb.Append("{");
+                        sb.Append(typeArgument.Name);
+                        sb.Append("}");
+                    }
+                    else
+                    {
+                        sb.Append(BridgeTypes.ToJsName(typeArgument, emitter));
+                    }
                 }
             }
 

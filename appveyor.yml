@@ -33,8 +33,7 @@ os: Visual Studio 2015 RC
 
 # scripts that are called at very beginning, before repo cloning
 init:
-  - git config --global core.autocrlf input
-
+- git config --global core.autocrlf input
 # clone directory
 clone_folder: c:\projects\Bridge
 
@@ -81,6 +80,52 @@ build:
 # scripts to run before build
 before_build:
 - nuget restore "c:\projects\Bridge\.nuget\packages.config" -PackagesDirectory "c:\projects\Bridge\packages"
+- ps: >-
+    # Check if commit message contains labels [skip appveyor client] or [skip ci client] to skip client tests
+    
+    IF ($env:SKIP_CLIENT_TESTS -eq $null) {
+        write-host "SETUP SKIP_CLIENT_TESTS is unset"
+        IF ($env:APPVEYOR_REPO_COMMIT_MESSAGE.ToLower().Contains("[skip appveyor client]")) {
+            write-host "SETUP Commit message contains [skip appveyor client]"
+            $env:SKIP_CLIENT_TESTS=$true
+        }
+        
+        IF ($env:APPVEYOR_REPO_COMMIT_MESSAGE.ToLower().Contains("[skip ci client]")) {
+            write-host "SETUP Commit message contains [skip ci client]"
+            $env:SKIP_CLIENT_TESTS=$true
+        }        
+    } ELSE {
+        write-host "SETUP SKIP_CLIENT_TESTS is set to $env:SKIP_CLIENT_TESTS"
+    }
+    
+    IF ($env:SKIP_CLIENT_TESTS -eq $true) {
+        write-host "SETUP Will NOT run client tests as either the skipping labels found (either [skip appveyor client] or [skip ci client]) or set SKIP_CLIENT_TESTS=true"
+    } ELSE {
+        write-host "SETUP Will run client tests"
+    }
+    
+    # Check if commit message contains labels [skip appveyor server] or [skip ci server] to skip server tests
+    
+    IF ($env:SKIP_SERVER_TESTS -eq $null) {
+        write-host "SETUP SKIP_SERVER_TESTS is unset"
+        IF ($env:APPVEYOR_REPO_COMMIT_MESSAGE.ToLower().Contains("[skip appveyor server]")) {
+            write-host "SETUP Commit message contains [skip appveyor server]"
+            $env:SKIP_SERVER_TESTS=$true
+        }
+        
+        IF ($env:APPVEYOR_REPO_COMMIT_MESSAGE.ToLower().Contains("[skip ci server]")) {
+            write-host "SETUP Commit message contains [skip ci server]"
+            $env:SKIP_SERVER_TESTS=$true
+        }
+    } ELSE {
+        write-host "SETUP SKIP_SERVER_TESTS is set to $env:SKIP_SERVER_TESTS"
+    }
+    
+    IF ($env:SKIP_SERVER_TESTS -eq $true) {
+        write-host "SETUP Will NOT run server tests as either the skipping labels found (either [skip appveyor server] or [skip ci server]) or set SKIP_SERVER_TESTS=true"
+    } ELSE {
+        write-host "SETUP Will run server tests"
+    }
 
 # scripts to run after build
 after_build:
@@ -95,77 +140,104 @@ build_script:
 before_test:
   # - echo script1
 - ps: >-
-    try
-    {
-      #$ChutzpahDir = get-childitem chutzpah.console.exe -recurse | select-object -first 1 | select -expand Directory
-      
-      #$ChutzpahPath = "${ChutzpahDir}" + "\chutzpah.console.exe"
-      $ChutzpahPath = "c:\projects\Bridge\packages\Chutzpah.4.2.3\tools\chutzpah.console.exe"
-      
-      $ChutzpahHtml = "c:\projects\" + "Bridge\Tests\Runner\index.html"
-      
-      $Exe = "${ChutzpahPath}"
-      
-      $Arguments = "${ChutzpahHtml}","/silent","/junit","chutzpah-results.xml"
-      
-      Write-Host "Running Chutzpah:"
-      
-      Write-Host $Exe $Arguments
-      
-      &$Exe $Arguments
-      
-      $testsuites = [xml](get-content chutzpah-results.xml)
-      
-      $anyFailures = $FALSE
-      
-      $hasAtLeastOneTestRun = $FALSE
-      
-      foreach ($testsuite in $testsuites.testsuites.testsuite) {
-        write-host " $($testsuite.name)"
-        foreach ($testcase in $testsuite.testcase) {
-          $failed = $testcase.failure
-          $time = $testsuite.time
-          if ($testcase.time) { $time = $testcase.time }
-          if ($failed) {
-            write-host "Failed   $($testcase.name) $($testcase.failure.message)"
-            Add-AppveyorTest $testcase.name -Outcome Failed -FileName $testsuite.name -ErrorMessage $testcase.failure.message -Duration $time
-            $anyFailures = $TRUE
-            $hasAtLeastOneTestRun = $TRUE
-          }else {
-            $hasAtLeastOneTestRun = $TRUE
-            write-host "Passed   $($testcase.name)"
-            Add-AppveyorTest $testcase.name -Outcome Passed -FileName $testsuite.name -Duration $time
+    IF ($env:SKIP_CLIENT_TESTS -eq $true) {
+        write-host "Skipping client tests";
+        $env:CLIENT_TESTS_EXIT_CODE = 0
+        # This does not work see https://github.com/appveyor/ci/issues/1090
+        # So will use ELSE not exit
+        # $host.SetShouldExit(0); exit 0;
+    } ELSE {
+        $env:CLIENT_TESTS_EXIT_CODE = $null
+        
+        try
+        {
+          #$ChutzpahDir = get-childitem chutzpah.console.exe -recurse | select-object -first 1 | select -expand Directory
+          
+          #$ChutzpahPath = "${ChutzpahDir}" + "\chutzpah.console.exe"
+          $ChutzpahPath = "c:\projects\Bridge\packages\Chutzpah.4.2.3\tools\chutzpah.console.exe"
+          
+          $ChutzpahHtml = "c:\projects\" + "Bridge\Tests\Runner\index.html"
+          
+          $Exe = "${ChutzpahPath}"
+          
+          $Arguments = "${ChutzpahHtml}","/silent","/junit","chutzpah-results.xml"
+          
+          Write-Host "Running Chutzpah:"
+          
+          Write-Host $Exe $Arguments
+          
+          &$Exe $Arguments
+          
+          $testsuites = [xml](get-content chutzpah-results.xml)
+          
+          $anyFailures = $FALSE
+          
+          $hasAtLeastOneTestRun = $FALSE
+          
+          foreach ($testsuite in $testsuites.testsuites.testsuite) {
+            write-host " $($testsuite.name)"
+            foreach ($testcase in $testsuite.testcase) {
+              $failed = $testcase.failure
+              $time = $testsuite.time
+              if ($testcase.time) { $time = $testcase.time }
+              if ($failed) {
+                write-host "Failed   $($testcase.name) $($testcase.failure.message)"
+                Add-AppveyorTest $testcase.name -Outcome Failed -FileName $testsuite.name -ErrorMessage $testcase.failure.message -Duration $time
+                $anyFailures = $TRUE
+                $hasAtLeastOneTestRun = $TRUE
+              }else {
+                $hasAtLeastOneTestRun = $TRUE
+                write-host "Passed   $($testcase.name)"
+                Add-AppveyorTest $testcase.name -Outcome Passed -FileName $testsuite.name -Duration $time
+              }
+            }
+          }
+          
+          if ($hasAtLeastOneTestRun -eq $FALSE) {
+            write-host "There should be at least one test executed"
+            $env:CLIENT_TESTS_EXIT_CODE = 1 
+            $host.SetShouldExit(1)
+          }
+          
+          if ($anyFailures -eq $TRUE) {
+            write-host "Failing build as there are broken tests"
+            $env:CLIENT_TESTS_EXIT_CODE = 2
+            $host.SetShouldExit(1)
           }
         }
-      }
-      
-      if ($hasAtLeastOneTestRun -eq $FALSE) {
-        write-host "There should be at least one test executed"
-        $host.SetShouldExit(1)
-      }
-      
-      if ($anyFailures -eq $TRUE) {
-        write-host "Failing build as there are broken tests"
-        $host.SetShouldExit(1)
-      }
+        catch
+        {
+            write-host "Error occurred"
+            $ErrorMessage = $_.Exception.Message
+            $FailedItem = $_.Exception.ItemName
+            write-host $ErrorMessage
+            write-host $FailedItem
+            $env:CLIENT_TESTS_EXIT_CODE = 3
+            $host.SetShouldExit(1)
+        }
+        
+        IF ($env:CLIENT_TESTS_EXIT_CODE -eq $null) {
+            $env:CLIENT_TESTS_EXIT_CODE = 0
+        }
     }
-    catch
-    {
-        write-host "Error occurred"
-        $ErrorMessage = $_.Exception.Message
-        $FailedItem = $_.Exception.ItemName
-        write-host $ErrorMessage
-        write-host $FailedItem
-        $host.SetShouldExit(1)
-    }
-    
 # scripts to run after tests
 after_test:
 
 # to run your custom scripts instead of automatic tests
 test_script:
   #- echo This is my custom test script
-  - nunit3-console "c:\projects\Bridge\Compiler\TranslatorTests\bin\Release\Bridge.Translator.Tests.dll"
+- ps: >-
+    IF ($env:SKIP_SERVER_TESTS -eq $true) {
+        write-host "Skipping server tests"; 
+        # This does not work see https://github.com/appveyor/ci/issues/1090
+        # So will use ELSE not exit
+        # $host.SetShouldExit(0); exit 0;
+    } ELSEIF ($env:CLIENT_TESTS_EXIT_CODE -ne 0) {
+        write-host "Skipping server tests as CLIENT_TESTS_EXIT_CODE = $env:CLIENT_TESTS_EXIT_CODE"
+        $host.SetShouldExit(1);
+    } ELSE {
+        nunit3-console "c:\projects\Bridge\Compiler\TranslatorTests\bin\Release\Bridge.Translator.Tests.dll"
+    }
 
 # to disable automatic tests 
 # test:

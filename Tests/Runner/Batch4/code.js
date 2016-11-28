@@ -1888,8 +1888,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 $yield.push(2);
                 this._sb.appendLine("throwing");
                 throw new System.Exception("test");
-                this._sb.appendLine("yielding 3");
-                $yield.push(3);
             }
             finally {
                 this._sb.appendLine("in finally");
@@ -1921,8 +1919,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 $yield.push(2);
                 this._sb.appendLine("throwing");
                 throw new System.Exception("test");
-                this._sb.appendLine("yielding 3");
-                $yield.push(3);
             }
             finally {
                 this._sb.appendLine("in finally");
@@ -6504,7 +6500,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         throwingAndCatchingExceptionsWorks: function () {
             try {
                 throw new Bridge.ClientTest.Batch4.ExceptionTests.E2("The message");
-                Bridge.Test.Assert.fail$1("Should not get to statement after throw");
             }
             catch ($e1) {
                 $e1 = System.Exception.create($e1);
@@ -6517,12 +6512,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     throw $e1;
                 }
             }
-            Bridge.Test.Assert.fail$1("Should not get to statement after catch");
         },
         exceptionOfWrongTypeIsNotCaught: function () {
             try {
                 throw new Bridge.ClientTest.Batch4.ExceptionTests.E1("The message");
-                Bridge.Test.Assert.fail$1("Should not get to statement after throw");
             }
             catch ($e1) {
                 $e1 = System.Exception.create($e1);
@@ -6542,7 +6535,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         canCatchExceptionAsBaseType: function () {
             try {
                 throw new Bridge.ClientTest.Batch4.ExceptionTests.E2("The message");
-                Bridge.Test.Assert.fail$1("Should not get to statement after throw");
             }
             catch ($e1) {
                 $e1 = System.Exception.create($e1);
@@ -6555,7 +6547,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     throw $e1;
                 }
             }
-            Bridge.Test.Assert.fail$1("Should not get to statement after catch");
         },
         canCatchStringAsException: function () {
             try {

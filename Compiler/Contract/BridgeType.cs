@@ -551,7 +551,7 @@ namespace Bridge.Contract
             var currentTypeInfo = emitter.TypeInfo;
             string module = null;
 
-            if (currentTypeInfo.Key != type.Key && type.TypeInfo != null)
+            if (currentTypeInfo != null && currentTypeInfo.Key != type.Key && type.TypeInfo != null)
             {
                 var typeInfo = type.TypeInfo;
                 module = typeInfo.Module;
