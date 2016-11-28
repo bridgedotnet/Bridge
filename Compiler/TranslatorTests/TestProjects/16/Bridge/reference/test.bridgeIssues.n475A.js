@@ -32,7 +32,7 @@
         statics: {
             N475: function () {
                 var b = new Test.BridgeIssues.N475A.Bridge475();
-                Test.BridgeIssues.N475A.Bridge475Extension1.keyDown(Test.BridgeIssues.N475A.Bridge475Event, b, $_.Test.BridgeIssues.N475A.Test.f1);
+                Test.BridgeIssues.N475A.Bridge475Extension1.keyDown(Test.BridgeIssues.N475A.Bridge475Event, b, $asm.$.Test.BridgeIssues.N475A.Test.f1);
 
                 b.keyDown(4);
 
@@ -41,11 +41,9 @@
         }
     });
 
-    var $_ = {};
+    Bridge.ns("Test.BridgeIssues.N475A.Test", $asm.$);
 
-    Bridge.ns("Test.BridgeIssues.N475A.Test", $_);
-
-    Bridge.apply($_.Test.BridgeIssues.N475A.Test, {
+    Bridge.apply($asm.$.Test.BridgeIssues.N475A.Test, {
         f1: function (ev) {
             ev.preventDefault();
         }

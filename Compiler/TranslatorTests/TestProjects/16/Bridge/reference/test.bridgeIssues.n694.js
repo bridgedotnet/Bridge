@@ -9,16 +9,14 @@
                 fruits[1] = "apple";
                 fruits[2] = "lemon";
 
-                var list = System.Linq.Enumerable.from(fruits).select(function(x) { return Bridge.cast(x, String); }).orderBy($_.Test.BridgeIssues.N694.Bridge694.f1).select($_.Test.BridgeIssues.N694.Bridge694.f1).toList(String);
+                var list = System.Linq.Enumerable.from(fruits).select(function(x) { return Bridge.cast(x, String); }).orderBy($asm.$.Test.BridgeIssues.N694.Bridge694.f1).select($asm.$.Test.BridgeIssues.N694.Bridge694.f1).toList(String);
             }
         }
     });
 
-    var $_ = {};
+    Bridge.ns("Test.BridgeIssues.N694.Bridge694", $asm.$);
 
-    Bridge.ns("Test.BridgeIssues.N694.Bridge694", $_);
-
-    Bridge.apply($_.Test.BridgeIssues.N694.Bridge694, {
+    Bridge.apply($asm.$.Test.BridgeIssues.N694.Bridge694, {
         f1: function (fruit) {
             return fruit;
         }

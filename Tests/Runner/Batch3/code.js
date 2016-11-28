@@ -6894,6 +6894,8 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
+
+
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -6923,7 +6925,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    }); /// Async method lacks 'await' operators and will run synchronously
+                                    });
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -11472,23 +11474,23 @@ Bridge.$N1391Result =                 r;
         statics: {
             testObjectLiteralReflection: function () {
                 var ol = {  };
-                var props = System.Linq.Enumerable.from(Bridge.Reflection.getMembers(Bridge.getType(ol), 16, 28)).select($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.f1).toArray();
+                var props = System.Linq.Enumerable.from(Bridge.Reflection.getMembers(Bridge.getType(ol), 16, 28)).select($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.f1).toArray();
                 Bridge.Test.Assert.areEqual(0, props.length);
 
                 var obj = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.T();
-                props = System.Linq.Enumerable.from(Bridge.Reflection.getMembers(Bridge.getType(obj), 16, 28)).select($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.f1).toArray();
+                props = System.Linq.Enumerable.from(Bridge.Reflection.getMembers(Bridge.getType(obj), 16, 28)).select($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.f1).toArray();
                 Bridge.Test.Assert.areEqual(1, props.length);
                 Bridge.Test.Assert.areEqual("ShouldSeeThis", props[0]);
 
                 var ol1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.OL1.ctor();
-                props = System.Linq.Enumerable.from(Bridge.Reflection.getMembers(Bridge.getType(ol1), 16, 28)).select($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.f1).toArray();
+                props = System.Linq.Enumerable.from(Bridge.Reflection.getMembers(Bridge.getType(ol1), 16, 28)).select($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.f1).toArray();
                 Bridge.Test.Assert.areEqual(1, props.length);
                 Bridge.Test.Assert.areEqual("ShouldSeeThis1", props[0]);
 
                 var ol2 = Bridge.merge(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.OL2.ctor(), {
                     shouldSeeThis2: 2
                 } );
-                props = System.Linq.Enumerable.from(Bridge.Reflection.getMembers(Bridge.getType(ol2), 16, 28)).select($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.f1).toArray();
+                props = System.Linq.Enumerable.from(Bridge.Reflection.getMembers(Bridge.getType(ol2), 16, 28)).select($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.f1).toArray();
                 Bridge.Test.Assert.areEqual(2, props.length);
                 Bridge.Test.Assert.areEqual("ShouldSeeThis1", props[0]);
                 Bridge.Test.Assert.areEqual("ShouldSeeThis2", props[1]);
@@ -11498,9 +11500,9 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088", $_);
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088", $asm.$);
 
-    Bridge.apply($_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088, {
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088, {
         f1: function (x) {
             return x.n;
         }

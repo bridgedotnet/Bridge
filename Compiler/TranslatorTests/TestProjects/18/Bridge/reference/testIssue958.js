@@ -10,16 +10,14 @@
             },
             processMessage: function (message) {
                 // The call should have generic type as function parameter
-                TestIssue958.MessageExtensions.if(TestIssue958.SetValue, TestIssue958.MessageExtensions.if(TestIssue958.SetName, message, $_.TestIssue958.Issue958.f1), $_.TestIssue958.Issue958.f2);
+                TestIssue958.MessageExtensions.if(TestIssue958.SetValue, TestIssue958.MessageExtensions.if(TestIssue958.SetName, message, $asm.$.TestIssue958.Issue958.f1), $asm.$.TestIssue958.Issue958.f2);
             }
         }
     });
 
-    var $_ = {};
+    Bridge.ns("TestIssue958.Issue958", $asm.$);
 
-    Bridge.ns("TestIssue958.Issue958", $_);
-
-    Bridge.apply($_.TestIssue958.Issue958, {
+    Bridge.apply($asm.$.TestIssue958.Issue958, {
         f1: function (action) {
             Bridge.Console.log(System.String.concat("Name: ", action.getName()));
         },

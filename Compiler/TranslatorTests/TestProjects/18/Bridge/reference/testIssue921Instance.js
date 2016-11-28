@@ -22,34 +22,34 @@
         },
         lambaLiftingWithReadOnlyField: function () {
             var localValue = 456;
-            return System.Linq.Enumerable.from([1, 2, 3]).select($_.TestIssue921Instance.Issue921Instance.f1).select($_.TestIssue921Instance.Issue921Instance.f1).select($_.TestIssue921Instance.Issue921Instance.f2).select(Bridge.fn.bind(this, $_.TestIssue921Instance.Issue921Instance.f3)).select(Bridge.fn.bind(this, $_.TestIssue921Instance.Issue921Instance.f4)).select(function (value) {
+            return System.Linq.Enumerable.from([1, 2, 3]).select($asm.$.TestIssue921Instance.Issue921Instance.f1).select($asm.$.TestIssue921Instance.Issue921Instance.f1).select($asm.$.TestIssue921Instance.Issue921Instance.f2).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f3)).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f4)).select(function (value) {
                 return ((value + localValue) | 0);
             });
         },
         lambaLiftingWithProperty: function () {
             var localValue = "What a name";
 
-            return System.Linq.Enumerable.from(["one", "two", "three"]).select($_.TestIssue921Instance.Issue921Instance.f5).select($_.TestIssue921Instance.Issue921Instance.f5).select($_.TestIssue921Instance.Issue921Instance.f6).select(Bridge.fn.bind(this, $_.TestIssue921Instance.Issue921Instance.f7)).select(Bridge.fn.bind(this, $_.TestIssue921Instance.Issue921Instance.f8)).select(function (value) {
+            return System.Linq.Enumerable.from(["one", "two", "three"]).select($asm.$.TestIssue921Instance.Issue921Instance.f5).select($asm.$.TestIssue921Instance.Issue921Instance.f5).select($asm.$.TestIssue921Instance.Issue921Instance.f6).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f7)).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f8)).select(function (value) {
                 return System.String.concat(value, localValue);
             });
         },
         lambaLiftingWithStaticProperty: function () {
             var localValue = "What a name";
 
-            return System.Linq.Enumerable.from(["one", "two", "three"]).select($_.TestIssue921Instance.Issue921Instance.f5).select($_.TestIssue921Instance.Issue921Instance.f5).select($_.TestIssue921Instance.Issue921Instance.f6).select(Bridge.fn.bind(this, $_.TestIssue921Instance.Issue921Instance.f7)).select($_.TestIssue921Instance.Issue921Instance.f9).select(function (value) {
+            return System.Linq.Enumerable.from(["one", "two", "three"]).select($asm.$.TestIssue921Instance.Issue921Instance.f5).select($asm.$.TestIssue921Instance.Issue921Instance.f5).select($asm.$.TestIssue921Instance.Issue921Instance.f6).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f7)).select($asm.$.TestIssue921Instance.Issue921Instance.f9).select(function (value) {
                 return System.String.concat(value, localValue);
             });
         },
         lambaLiftingWithInstanceMethod: function () {
             var localValue = System.Decimal(10.0);
 
-            return System.Linq.Enumerable.from([System.Decimal(1.0), System.Decimal(2.0), System.Decimal(3.0)]).select($_.TestIssue921Instance.Issue921Instance.f10).select($_.TestIssue921Instance.Issue921Instance.f10).select(Bridge.fn.bind(this, $_.TestIssue921Instance.Issue921Instance.f11)).select(Bridge.fn.bind(this, $_.TestIssue921Instance.Issue921Instance.f12)).select(Bridge.fn.bind(this, $_.TestIssue921Instance.Issue921Instance.f13)).select(function (value) {
+            return System.Linq.Enumerable.from([System.Decimal(1.0), System.Decimal(2.0), System.Decimal(3.0)]).select($asm.$.TestIssue921Instance.Issue921Instance.f10).select($asm.$.TestIssue921Instance.Issue921Instance.f10).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f11)).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f12)).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f13)).select(function (value) {
                 return value.add(localValue);
             });
         },
         lambaLiftingWithDelegate: function () {
             // Lift
-            var addThousand = $_.TestIssue921Instance.Issue921Instance.f14;
+            var addThousand = $asm.$.TestIssue921Instance.Issue921Instance.f14;
 
             var localValue = 123;
 
@@ -69,7 +69,7 @@
         },
         lambaLiftingWithDelegateChangingType: function () {
             // Lift
-            var toString = $_.TestIssue921Instance.Issue921Instance.f15;
+            var toString = $asm.$.TestIssue921Instance.Issue921Instance.f15;
 
             var localValue = 7;
 
@@ -89,11 +89,9 @@
         }
     });
 
-    var $_ = {};
+    Bridge.ns("TestIssue921Instance.Issue921Instance", $asm.$);
 
-    Bridge.ns("TestIssue921Instance.Issue921Instance", $_);
-
-    Bridge.apply($_.TestIssue921Instance.Issue921Instance, {
+    Bridge.apply($asm.$.TestIssue921Instance.Issue921Instance, {
         f1: function (value) {
             return ((value + 1) | 0);
         },
