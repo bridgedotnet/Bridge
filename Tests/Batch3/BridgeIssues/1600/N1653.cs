@@ -38,7 +38,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test]
         public void TestLiftedFunctionsWithGenericInvocation()
         {
-            dynamic scope = Script.Get("$_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1653.Table$2");
+            dynamic scope = Script.Get("$asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1653.Table$2");
             Assert.NotNull(scope.f1, "scope.f1 should exists");
             Assert.Null(scope.f2, "scope.f2 should be null");
             Assert.AreEqual(scope.f1(1), "1_v4", "scope.f1(1) should be 1_v4");

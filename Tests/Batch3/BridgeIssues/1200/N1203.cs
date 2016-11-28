@@ -22,7 +22,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test]
         public static void TestLiftedFunctionsInsideInitMethod()
         {
-            dynamic scope = Script.Get("$_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1203");
+            dynamic scope = Script.Get("$asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1203");
             Assert.Null(scope, "scope should not exists");
         }
     }

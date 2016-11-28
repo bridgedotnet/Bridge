@@ -41,7 +41,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 return string.Join(", ", new[] { 4, 5, 6 }.Select(value => value + offset2));
             };
 
-            dynamic scope = Script.Get("$_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge999");
+            dynamic scope = Script.Get("$asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge999");
 
             Assert.NotNull(scope.f1, "scope.f1 should exists");
             Assert.NotNull(scope.f2, "scope.f2 should exists");
@@ -82,7 +82,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             Assert.AreEqual(8, sum);
 
-            dynamic scope = Script.Get("$_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge999_1");
+            dynamic scope = Script.Get("$asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge999_1");
 
             Assert.NotNull(scope.f1, "scope.f1 should exists");
             Assert.Null(scope.f2, "scope.f2 should be null");

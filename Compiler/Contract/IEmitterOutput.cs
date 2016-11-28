@@ -42,11 +42,5 @@ namespace Bridge.Contract
             get;
             set;
         }
-
-        bool IsPrivateVarIntroduced
-        {
-            get;
-            set;
-        }
     }
 }

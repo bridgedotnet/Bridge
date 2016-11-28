@@ -121,8 +121,8 @@ namespace Bridge.Translator
             this.Write(JS.Funcs.BRIDGE_DEFINE);
             this.WriteOpenParentheses();
             this.WriteScript(config.Name);
-            config.Name = JS.Vars.D_ + "." + config.Name;
-            this.Write(", " + JS.Vars.D_ + ", ");
+            config.Name = JS.Vars.ASM + "." + config.Name;
+            this.Write(", " + JS.Vars.ASM + ", ");
             this.BeginBlock();
             this.Emitter.Comma = false;
             this.GenereateCtor(type);

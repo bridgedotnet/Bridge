@@ -426,8 +426,6 @@ namespace Bridge.Translator
             if (types.Any())
             {
                 this.Emitter.Comma = false;
-                this.IntroducePrivateVar();
-
                 foreach (IAnonymousTypeConfig type in types)
                 {
                     this.WriteNewLine();
@@ -444,8 +442,6 @@ namespace Bridge.Translator
             if (this.Emitter.NamedFunctions.Count > 0)
             {
                 this.Emitter.Comma = false;
-
-                this.IntroducePrivateVar();
 
                 var name = BridgeTypes.ToJsName(this.Emitter.TypeInfo.Type, this.Emitter, true);
 
@@ -475,17 +471,6 @@ namespace Bridge.Translator
                 this.EndBlock();
                 this.WriteCloseParentheses();
                 this.WriteSemiColon();
-            }
-        }
-
-        private void IntroducePrivateVar()
-        {
-            if (!this.Emitter.EmitterOutput.IsPrivateVarIntroduced)
-            {
-                this.WriteNewLine();
-                this.WriteNewLine();
-                this.Write("var " + JS.Vars.D_ + " = {};");
-                this.Emitter.EmitterOutput.IsPrivateVarIntroduced = true;
             }
         }
 

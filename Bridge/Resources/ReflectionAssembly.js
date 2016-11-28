@@ -32,7 +32,8 @@
             this.$initialize();
             this.name = name;
             this.res = res || {};
-            this.$types = {}
+            this.$types = {};
+            this.$ = {};
 
             System.Reflection.Assembly.assemblies[name] = this;
         },
@@ -88,3 +89,4 @@
     Bridge.SystemAssembly = Bridge.$currentAssembly;
     Bridge.SystemAssembly.$types["System.Reflection.Assembly"] = System.Reflection.Assembly;
     System.Reflection.Assembly.$assembly = Bridge.SystemAssembly;
+    var $asm = Bridge.$currentAssembly;

@@ -258,8 +258,8 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
             Bridge.Test.Assert.false(System.Array.contains(arr, new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(4), Bridge.ClientTest.Batch2.BridgeIssues.N772.C));
         },
         allWithArrayItemFilterCallbackWorks: function () {
-            Bridge.Test.Assert.true(System.Linq.Enumerable.from([1, 2, 3]).all($_.Bridge.ClientTest.Batch2.BridgeIssues.N772.f1));
-            Bridge.Test.Assert.false(System.Linq.Enumerable.from([1, 2, 3]).all($_.Bridge.ClientTest.Batch2.BridgeIssues.N772.f2));
+            Bridge.Test.Assert.true(System.Linq.Enumerable.from([1, 2, 3]).all($asm.$.Bridge.ClientTest.Batch2.BridgeIssues.N772.f1));
+            Bridge.Test.Assert.false(System.Linq.Enumerable.from([1, 2, 3]).all($asm.$.Bridge.ClientTest.Batch2.BridgeIssues.N772.f2));
         },
         sliceWithoutEndWorks: function () {
             Bridge.Test.Assert.areDeepEqual(["c", "d"], ["a", "b", "c", "d"].slice(2));
@@ -301,8 +301,8 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
             Bridge.Test.Assert.areDeepEqual([2, 3, 1, 4, 3, 1], arr);
         },
         anyWithArrayItemFilterCallbackWorks: function () {
-            Bridge.Test.Assert.true(System.Linq.Enumerable.from([1, 2, 3, 4]).any($_.Bridge.ClientTest.Batch2.BridgeIssues.N772.f3));
-            Bridge.Test.Assert.false(System.Linq.Enumerable.from([1, 2, 3, 4]).any($_.Bridge.ClientTest.Batch2.BridgeIssues.N772.f4));
+            Bridge.Test.Assert.true(System.Linq.Enumerable.from([1, 2, 3, 4]).any($asm.$.Bridge.ClientTest.Batch2.BridgeIssues.N772.f3));
+            Bridge.Test.Assert.false(System.Linq.Enumerable.from([1, 2, 3, 4]).any($asm.$.Bridge.ClientTest.Batch2.BridgeIssues.N772.f4));
         },
         binarySearch1Works: function () {
             var arr = [1, 2, 3, 3, 4, 5];
@@ -451,11 +451,9 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
         }
     });
 
-    var $_ = {};
+    Bridge.ns("Bridge.ClientTest.Batch2.BridgeIssues.N772", $asm.$);
 
-    Bridge.ns("Bridge.ClientTest.Batch2.BridgeIssues.N772", $_);
-
-    Bridge.apply($_.Bridge.ClientTest.Batch2.BridgeIssues.N772, {
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch2.BridgeIssues.N772, {
         f1: function (x) {
             return x > 0;
         },

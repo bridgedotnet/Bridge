@@ -28,7 +28,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             var test = new Bridge1003<int>();
 
-            dynamic scope = Script.Get("$_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1003$1");
+            dynamic scope = Script.Get("$asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1003$1");
             Assert.Null(scope);
             Assert.AreEqual(test.Test1(new[] { 1, 2, 3 }), new[] { 1, 2, 3 });
             Assert.AreEqual(test.Test2<string>(new[] { "1", "2", "3" }), new[] { "1", "2", "3" });

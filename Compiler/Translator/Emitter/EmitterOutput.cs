@@ -60,12 +60,6 @@ namespace Bridge.Translator
                 return this.FileName == AssemblyInfo.DEFAULT_FILENAME;
             }
         }
-
-        public bool IsPrivateVarIntroduced
-        {
-            get;
-            set;
-        }
     }
 
     public class EmitterOutputs : Dictionary<string, IEmitterOutput>, IEmitterOutputs
