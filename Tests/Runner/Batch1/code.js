@@ -14517,7 +14517,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         ctor: function () {
             var $this = {};
-            $this.$getType = function() {return Bridge.ClientTest.JsonTests.TestClass4 ;};
+            $this.$getType = function() { return Bridge.ClientTest.JsonTests.TestClass4; };
             (function(){
                 this.i = 0;
                 this.s = null;
@@ -19494,7 +19494,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         ctor: function () {
             var $this = {};
-            $this.$getType = function() {return Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS ;};
+            $this.$getType = function() { return Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS; };
             (function(){
                 this.field1 = 0;
                 this.field2 = null;
@@ -19525,7 +19525,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         $ctor1: function (i) {
             var $this = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.ctor();
-            $this.$getType = function() {return Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS ;};
+            $this.$getType = function() { return Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS; };
             (function(){
                 this.field1 = i;
             }).call($this);
@@ -19533,7 +19533,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         $ctor2: function (s) {
             var $this = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.ctor();
-            $this.$getType = function() {return Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS ;};
+            $this.$getType = function() { return Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS; };
             (function(){
                 this.field2 = s;
             }).call($this);
@@ -19592,7 +19592,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $literal: true,
         ctor: function () {
             var $this = {};
-            $this.$getType = function() {return Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config1 ;};
+            $this.$getType = function() { return Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config1; };
             (function(){
                 this.val1 = 1;
                 this.val2 = 0;
@@ -19606,7 +19606,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $literal: true,
         ctor: function () {
             var $this = {};
-            $this.$getType = function() {return Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config3 ;};
+            $this.$getType = function() { return Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config3; };
             (function(){
                 this.val1 = 3;
                 this.val2 = 0;
@@ -19620,7 +19620,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $literal: true,
         ctor: function () {
             var $this = {};
-            $this.$getType = function() {return Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config5 ;};
+            $this.$getType = function() { return Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config5; };
             (function(){
                 this.val1 = 5;
                 this.val2 = 0;
@@ -19658,7 +19658,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $literal: true,
         ctor: function () {
             var $this = {};
-            $this.$getType = function() {return Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config1 ;};
+            $this.$getType = function() { return Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config1; };
             (function(){
                 this.val1 = 1;
                 this.val2 = 0;
@@ -19672,7 +19672,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $literal: true,
         ctor: function () {
             var $this = {};
-            $this.$getType = function() {return Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config2 ;};
+            $this.$getType = function() { return Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config2; };
             (function(){
                 this.val1 = 2;
                 this.val2 = 0;
@@ -34403,7 +34403,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $literal: true,
         ctor: function () {
             var $this = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.ctor();
-            $this.$getType = function() {return Bridge.ClientTest.ObjectLiteralTests.Bridge1529.DS ;};
+            $this.$getType = function() { return Bridge.ClientTest.ObjectLiteralTests.Bridge1529.DS; };
             (function(){
                 this.field = 0;
             }).call($this);
@@ -34416,7 +34416,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $literal: true,
         ctor: function () {
             var $this = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.$ctor1(8);
-            $this.$getType = function() {return Bridge.ClientTest.ObjectLiteralTests.Bridge1529.TS ;};
+            $this.$getType = function() { return Bridge.ClientTest.ObjectLiteralTests.Bridge1529.TS; };
             (function(){
 
             }).call($this);

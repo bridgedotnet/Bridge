@@ -374,7 +374,7 @@ namespace Bridge.Translator
                         name = BridgeTypes.DefinitionToJsName(this.TypeInfo.Type, this.Emitter);
                     }
 
-                    this.Write(JS.Vars.D_THIS + ".$getType = function() {return " + name + " ;};");
+                    this.Write(JS.Vars.D_THIS + "." + JS.Funcs.GET_TYPE + " = function() { return " + name + "; };");
 
                     this.WriteNewLine();
                     this.Write("(function()");
@@ -505,7 +505,7 @@ namespace Bridge.Translator
                         this.WriteNewLine();
                     }
                     this.EndBlock();
-                    this.Write(").call(" + JS.Vars.D_THIS + ");");
+                    this.Write(")." + JS.Funcs.CALL + "(" + JS.Vars.D_THIS + ");");
                     this.WriteNewLine();
                     this.Write("return " + JS.Vars.D_THIS + ";");
                     this.WriteNewLine();
