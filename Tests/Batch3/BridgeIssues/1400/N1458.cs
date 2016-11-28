@@ -29,6 +29,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public static void ResetOutput()
         {
             Output = null;
+            Bridge.Utils.Console.Hide();
         }
 
         [Test(ExpectedCount = 1)]

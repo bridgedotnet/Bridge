@@ -8,6 +8,12 @@ namespace Bridge.ClientTest
     [TestFixture]
     public class BridgeConsoleTests
     {
+        [TearDown]
+        public static void HideConsole()
+        {
+            Bridge.Utils.Console.Hide();
+        }
+
         [Test]
         public void TestLogMessageObject()
         {

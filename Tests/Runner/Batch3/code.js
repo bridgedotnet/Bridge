@@ -3629,6 +3629,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             },
             resetOutput: function () {
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.setOutput(null);
+                Bridge.Console.hide();
             },
             testWriteFormatString: function () {
                 Bridge.Console.log(System.String.format("{0}", 1));
@@ -6016,6 +6017,7 @@ Bridge.$N1391Result =                 r;
             },
             resetOutput: function () {
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458.setOutput(null);
+                Bridge.Console.hide();
             },
             testConsoleWriteLineForLong: function () {
                 var v = System.Int64(1);
@@ -7242,6 +7244,7 @@ Bridge.$N1391Result =                 r;
             },
             resetOutput: function () {
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1698.setOutput(null);
+                Bridge.Console.hide();
             }
         },
         testReflectionForNativeTypes: function () {

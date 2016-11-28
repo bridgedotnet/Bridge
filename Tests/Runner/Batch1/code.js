@@ -3519,6 +3519,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     }; });
 
     Bridge.define("Bridge.ClientTest.BridgeConsoleTests", {
+        statics: {
+            hideConsole: function () {
+                Bridge.Console.hide();
+            }
+        },
         testLogMessageObject: function () {
             this.assertLogMessageObject("#0 - ", "Test Bridge Console Log Message Object", "Test Bridge Console Log Message Object");
             this.assertLogMessageObject("#1 - ", true, "true");

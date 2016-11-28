@@ -3253,24 +3253,52 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
         statics: {
             testLogMessageObject: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_BridgeConsoleTests);
-                t.getFixture().testLogMessageObject();
+                try {
+                    t.getFixture().testLogMessageObject();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             testLogMessageString: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_BridgeConsoleTests);
-                t.getFixture().testLogMessageString();
+                try {
+                    t.getFixture().testLogMessageString();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             testDebugMessageString: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_BridgeConsoleTests);
-                t.getFixture().testDebugMessageString();
+                try {
+                    t.getFixture().testDebugMessageString();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             testErrorMessageString: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_BridgeConsoleTests);
-                t.getFixture().testErrorMessageString();
+                try {
+                    t.getFixture().testErrorMessageString();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             testToggling: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_BridgeConsoleTests);
-                t.getFixture().testToggling();
+                try {
+                    t.getFixture().testToggling();
+                }
+                finally {
+                    t.tearDown();
+                }
             }
+        },
+        tearDown: function () {
+            Bridge.ClientTest.BridgeConsoleTests.hideConsole();
         }
     });
 
