@@ -19,7 +19,7 @@ The text after the content marked will be compared
  * @copyright Copyright 2008-2015 Object.NET, Inc.
  * @compiler Bridge.NET 15.4.0
  */
-Bridge.assembly("TestProject", function ($asm, globals) {
+Bridge.assembly("TestProject.I2096", function ($asm, globals) {
     "use strict";
 
     Bridge.define("Test.BridgeIssues.N1193.TopShouldbBOverAssemblyDescription");

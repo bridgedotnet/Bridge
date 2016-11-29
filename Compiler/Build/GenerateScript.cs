@@ -140,7 +140,7 @@ namespace Bridge.Build
             {
                 ProjectLocation = this.ProjectPath,
                 OutputLocation = this.OutputPath,
-                DefaultFileName = Path.GetFileNameWithoutExtension(this.Assembly.ItemSpec),
+                DefaultFileName = Path.GetFileName(this.Assembly.ItemSpec),
                 BridgeLocation = Path.Combine(this.AssembliesPath, "Bridge.dll"),
                 Rebuild = false,
                 ExtractCore = !NoCore,
