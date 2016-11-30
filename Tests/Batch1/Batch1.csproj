@@ -136,7 +136,7 @@
     <Compile Include="MutationObserverTests.cs" />
     <Compile Include="ObjectLiteralTests.cs" />
     <Compile Include="Reflection\AssemblyTests.cs" />
-    <Compile Include="Reflection\AttributeTests.cs" />
+    <Compile Include="Reflection\TypeAttributeTests.cs" />
     <Compile Include="Reflection\GetMembersTests.cs" />
     <Compile Include="Reflection\ReflectionTests.cs" />
     <Compile Include="Reflection\TypeSystemLanguageSupportTests.cs" />

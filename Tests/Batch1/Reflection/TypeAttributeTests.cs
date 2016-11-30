@@ -7,8 +7,8 @@ using System.Diagnostics;
 namespace Bridge.ClientTest.Reflection
 {
     [Category(Constants.MODULE_REFLECTION)]
-    [TestFixture(TestNameFormat = "Reflection - Attribute {0}")]
-    public class AttributeTests
+    [TestFixture(TestNameFormat = "Reflection - Type attributes {0}")]
+    public class TypeAttributeTests
     {
         private class A1Attribute : Attribute
         {
