@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("syr", true), {
+Bridge.merge(new System.Globalization.CultureInfo("syr", true), {
     englishName: "Syriac",
     nativeName: "ܣܘܪܝܝܐ",
 

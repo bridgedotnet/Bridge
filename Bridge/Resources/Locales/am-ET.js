@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("am-ET", true), {
+Bridge.merge(new System.Globalization.CultureInfo("am-ET", true), {
     englishName: "Amharic (Ethiopia)",
     nativeName: "አማርኛ (ኢትዮጵያ)",
 

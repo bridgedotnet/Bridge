@@ -1,4 +1,4 @@
-﻿    var base = {
+    var base = {
         _initialize: function () {
             if (this.$initialized) {
                 return;

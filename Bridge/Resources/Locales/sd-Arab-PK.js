@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sd-Arab-PK", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sd-Arab-PK", true), {
     englishName: "Sindhi (Pakistan)",
     nativeName: "سنڌي (پاکستان)",
 

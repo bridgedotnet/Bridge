@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("nqo", true), {
+Bridge.merge(new System.Globalization.CultureInfo("nqo", true), {
     englishName: "N'ko",
     nativeName: "ߒߞߏ",
 

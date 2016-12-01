@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ar-JO", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ar-JO", true), {
     englishName: "Arabic (Jordan)",
     nativeName: "العربية (الأردن)",
 

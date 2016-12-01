@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("chr-Cher", true), {
+Bridge.merge(new System.Globalization.CultureInfo("chr-Cher", true), {
     englishName: "Cherokee",
     nativeName: "ᏣᎳᎩ",
 

@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ts-ZA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ts-ZA", true), {
     englishName: "Tsonga (South Africa)",
     nativeName: "Xitsonga (South Africa)",
 

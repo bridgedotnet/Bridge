@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ky-KG", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ky-KG", true), {
     englishName: "Kyrgyz (Kyrgyzstan)",
     nativeName: "Кыргыз (Кыргызстан)",
 

@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("rm-CH", true), {
+Bridge.merge(new System.Globalization.CultureInfo("rm-CH", true), {
     englishName: "Romansh (Switzerland)",
     nativeName: "Rumantsch (Svizra)",
 

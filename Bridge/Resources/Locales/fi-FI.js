@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("fi-FI", true), {
+Bridge.merge(new System.Globalization.CultureInfo("fi-FI", true), {
     englishName: "Finnish (Finland)",
     nativeName: "suomi (Suomi)",
 

@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("iu-Cans", true), {
+Bridge.merge(new System.Globalization.CultureInfo("iu-Cans", true), {
     englishName: "Inuktitut (Syllabics)",
     nativeName: "ᐃᓄᒃᑎᑐᑦ",
 

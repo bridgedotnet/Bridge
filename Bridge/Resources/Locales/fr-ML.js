@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("fr-ML", true), {
+Bridge.merge(new System.Globalization.CultureInfo("fr-ML", true), {
     englishName: "French (Mali)",
     nativeName: "français (Mali)",
 

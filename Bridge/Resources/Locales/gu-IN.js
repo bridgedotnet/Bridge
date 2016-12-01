@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("gu-IN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("gu-IN", true), {
     englishName: "Gujarati (India)",
     nativeName: "ગુજરાતી (ભારત)",
 

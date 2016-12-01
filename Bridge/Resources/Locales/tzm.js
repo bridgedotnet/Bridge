@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("tzm", true), {
+Bridge.merge(new System.Globalization.CultureInfo("tzm", true), {
     englishName: "Tamazight",
     nativeName: "Tamazight",
 

@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("kk-KZ", true), {
+Bridge.merge(new System.Globalization.CultureInfo("kk-KZ", true), {
     englishName: "Kazakh (Kazakhstan)",
     nativeName: "Қазақ (Қазақстан)",
 

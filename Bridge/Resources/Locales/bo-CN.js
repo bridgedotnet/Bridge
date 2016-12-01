@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("bo-CN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("bo-CN", true), {
     englishName: "Tibetan (China)",
     nativeName: "བོད་ཡིག (ཀྲུང་ཧྭ་མི་དམངས་སྤྱི་མཐུན་རྒྱལ་ཁབ།)",
 

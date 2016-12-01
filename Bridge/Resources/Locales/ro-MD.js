@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ro-MD", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ro-MD", true), {
     englishName: "Romanian (Moldova)",
     nativeName: "română (Republica Moldova)",
 

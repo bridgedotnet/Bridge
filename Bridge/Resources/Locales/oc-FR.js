@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("oc-FR", true), {
+Bridge.merge(new System.Globalization.CultureInfo("oc-FR", true), {
     englishName: "Occitan (France)",
     nativeName: "Occitan (França)",
 

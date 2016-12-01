@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("fil-PH", true), {
+Bridge.merge(new System.Globalization.CultureInfo("fil-PH", true), {
     englishName: "Filipino (Philippines)",
     nativeName: "Filipino (Pilipinas)",
 

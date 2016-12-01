@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ur-PK", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ur-PK", true), {
     englishName: "Urdu (Pakistan)",
     nativeName: "اُردو (پاکستان)",
 

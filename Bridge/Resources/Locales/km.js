@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("km", true), {
+Bridge.merge(new System.Globalization.CultureInfo("km", true), {
     englishName: "Khmer",
     nativeName: "ភាសាខ្មែរ",
 

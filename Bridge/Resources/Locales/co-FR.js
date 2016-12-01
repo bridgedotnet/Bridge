@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("co-FR", true), {
+Bridge.merge(new System.Globalization.CultureInfo("co-FR", true), {
     englishName: "Corsican (France)",
     nativeName: "Corsu (Francia)",
 

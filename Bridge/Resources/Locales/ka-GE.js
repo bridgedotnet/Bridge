@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ka-GE", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ka-GE", true), {
     englishName: "Georgian (Georgia)",
     nativeName: "ქართული (საქართველო)",
 
@@ -15,7 +15,7 @@
         percentGroupSeparator: " ",
         percentPositivePattern: 0,
         percentNegativePattern: 0,
-        currencySymbol: "ლ.",
+        currencySymbol: "₾",
         currencyGroupSizes: [3],
         currencyDecimalDigits: 2,
         currencyDecimalSeparator: ",",

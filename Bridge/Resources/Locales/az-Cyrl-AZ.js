@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("az-Cyrl-AZ", true), {
+Bridge.merge(new System.Globalization.CultureInfo("az-Cyrl-AZ", true), {
     englishName: "Azerbaijani (Cyrillic, Azerbaijan)",
     nativeName: "Азәрбајҹан (Азәрбајҹан)",
 
@@ -15,7 +15,7 @@
         percentGroupSeparator: " ",
         percentPositivePattern: 1,
         percentNegativePattern: 1,
-        currencySymbol: "ман.",
+        currencySymbol: "₼",
         currencyGroupSizes: [3],
         currencyDecimalDigits: 2,
         currencyDecimalSeparator: ",",

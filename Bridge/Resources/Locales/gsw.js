@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("gsw", true), {
+Bridge.merge(new System.Globalization.CultureInfo("gsw", true), {
     englishName: "Alsatian",
     nativeName: "Elsässisch",
 

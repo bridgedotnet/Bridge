@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("mi", true), {
+Bridge.merge(new System.Globalization.CultureInfo("mi", true), {
     englishName: "Maori",
     nativeName: "Reo Māori",
 

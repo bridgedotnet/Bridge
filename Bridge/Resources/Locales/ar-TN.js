@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ar-TN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ar-TN", true), {
     englishName: "Arabic (Tunisia)",
     nativeName: "العربية (تونس)",
 

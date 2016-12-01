@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("fa", true), {
+Bridge.merge(new System.Globalization.CultureInfo("fa", true), {
     englishName: "Persian",
     nativeName: "فارسى",
 

@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sr-Latn-CS", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sr-Latn-CS", true), {
     englishName: "Serbian (Latin, Serbia and Montenegro (Former))",
     nativeName: "srpski (Srbija i Crna Gora (Bivša))",
 

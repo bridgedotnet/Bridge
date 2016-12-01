@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("rw-RW", true), {
+Bridge.merge(new System.Globalization.CultureInfo("rw-RW", true), {
     englishName: "Kinyarwanda (Rwanda)",
     nativeName: "Kinyarwanda (Rwanda)",
 

@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sr-Cyrl", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sr-Cyrl", true), {
     englishName: "Serbian (Cyrillic)",
     nativeName: "српски",
 

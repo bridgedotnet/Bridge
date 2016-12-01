@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("or-IN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("or-IN", true), {
     englishName: "Odia (India)",
     nativeName: "ଓଡ଼ିଆ (ଭାରତ)",
 

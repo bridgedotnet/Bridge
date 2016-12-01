@@ -1,4 +1,4 @@
-﻿    Bridge.define("System.Text.RegularExpressions.RegexRunner", {
+    Bridge.define("System.Text.RegularExpressions.RegexRunner", {
         statics: {},
 
         _runregex: null,

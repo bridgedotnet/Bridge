@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sr-Cyrl-CS", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sr-Cyrl-CS", true), {
     englishName: "Serbian (Cyrillic, Serbia and Montenegro (Former))",
     nativeName: "српски (Србија и Црна Гора (Бивша))",
 

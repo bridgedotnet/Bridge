@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ig-NG", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ig-NG", true), {
     englishName: "Igbo (Nigeria)",
     nativeName: "Igbo (Nigeria)",
 

@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("cy-GB", true), {
+Bridge.merge(new System.Globalization.CultureInfo("cy-GB", true), {
     englishName: "Welsh (United Kingdom)",
     nativeName: "Cymraeg (Y Deyrnas Unedig)",
 

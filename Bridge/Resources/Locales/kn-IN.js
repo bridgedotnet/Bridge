@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("kn-IN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("kn-IN", true), {
     englishName: "Kannada (India)",
     nativeName: "ಕನ್ನಡ (ಭಾರತ)",
 

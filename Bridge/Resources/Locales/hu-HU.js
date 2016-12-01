@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("hu-HU", true), {
+Bridge.merge(new System.Globalization.CultureInfo("hu-HU", true), {
     englishName: "Hungarian (Hungary)",
     nativeName: "magyar (Magyarország)",
 

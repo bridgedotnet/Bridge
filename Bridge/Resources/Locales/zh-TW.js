@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("zh-TW", true), {
+Bridge.merge(new System.Globalization.CultureInfo("zh-TW", true), {
     englishName: "Chinese (Traditional, Taiwan)",
     nativeName: "中文(台灣)",
 

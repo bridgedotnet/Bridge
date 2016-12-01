@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("dv-MV", true), {
+Bridge.merge(new System.Globalization.CultureInfo("dv-MV", true), {
     englishName: "Divehi (Maldives)",
     nativeName: "ދިވެހިބަސް (ދިވެހި ރާއްޖެ)",
 

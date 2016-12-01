@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("nqo-GN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("nqo-GN", true), {
     englishName: "N'ko (Guinea)",
     nativeName: "ߒߞߏ (ߖߌ߬ߣߍ߬ ߞߊ߲ߓߍ߲)",
 

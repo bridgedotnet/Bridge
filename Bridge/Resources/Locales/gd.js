@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("gd", true), {
+Bridge.merge(new System.Globalization.CultureInfo("gd", true), {
     englishName: "Scottish Gaelic",
     nativeName: "Gàidhlig",
 

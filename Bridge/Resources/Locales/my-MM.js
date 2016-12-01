@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("my-MM", true), {
+Bridge.merge(new System.Globalization.CultureInfo("my-MM", true), {
     englishName: "Burmese (Myanmar)",
     nativeName: "ဗမာ (မြန်မာ)",
 

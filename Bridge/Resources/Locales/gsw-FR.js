@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("gsw-FR", true), {
+Bridge.merge(new System.Globalization.CultureInfo("gsw-FR", true), {
     englishName: "Alsatian (France)",
     nativeName: "Elsässisch (Frànkrisch)",
 

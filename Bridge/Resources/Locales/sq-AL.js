@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sq-AL", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sq-AL", true), {
     englishName: "Albanian (Albania)",
     nativeName: "Shqip (Shqipëria)",
 

@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("te-IN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("te-IN", true), {
     englishName: "Telugu (India)",
     nativeName: "తెలుగు (భారత దేశం)",
 

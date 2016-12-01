@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("tzm-Latn-DZ", true), {
+Bridge.merge(new System.Globalization.CultureInfo("tzm-Latn-DZ", true), {
     englishName: "Central Atlas Tamazight (Latin, Algeria)",
     nativeName: "Tamazight (Djazaïr)",
 

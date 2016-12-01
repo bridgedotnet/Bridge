@@ -1,4 +1,4 @@
-﻿    Bridge.define("System.Attribute", {
+    Bridge.define("System.Attribute", {
         statics: {
             getCustomAttributes: function (o, t, b) {
                 if (o == null) {

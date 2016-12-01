@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sq", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sq", true), {
     englishName: "Albanian",
     nativeName: "Shqip",
 

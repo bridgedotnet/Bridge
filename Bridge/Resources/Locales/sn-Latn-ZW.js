@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sn-Latn-ZW", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sn-Latn-ZW", true), {
     englishName: "Shona (Latin, Zimbabwe)",
     nativeName: "chiShona (Latin, Zimbabwe)",
 

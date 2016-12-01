@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sms", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sms", true), {
     englishName: "Sami (Skolt)",
     nativeName: "sää´mǩiõll",
 

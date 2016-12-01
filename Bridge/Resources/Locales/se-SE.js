@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("se-SE", true), {
+Bridge.merge(new System.Globalization.CultureInfo("se-SE", true), {
     englishName: "Sami, Northern (Sweden)",
     nativeName: "davvisámegiella (Ruoŧŧa)",
 

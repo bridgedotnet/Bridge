@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("fr-CI", true), {
+Bridge.merge(new System.Globalization.CultureInfo("fr-CI", true), {
     englishName: "French (Ivory Coast)",
     nativeName: "français (Côte d’Ivoire)",
 

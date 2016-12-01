@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("st", true), {
+Bridge.merge(new System.Globalization.CultureInfo("st", true), {
     englishName: "Southern Sotho",
     nativeName: "Sesotho",
 

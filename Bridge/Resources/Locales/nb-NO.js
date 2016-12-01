@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("nb-NO", true), {
+Bridge.merge(new System.Globalization.CultureInfo("nb-NO", true), {
     englishName: "Norwegian, Bokmål (Norway)",
     nativeName: "norsk, bokmål (Norge)",
 

@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ar-SY", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ar-SY", true), {
     englishName: "Arabic (Syria)",
     nativeName: "العربية (سوريا)",
 

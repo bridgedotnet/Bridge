@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ms-BN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ms-BN", true), {
     englishName: "Malay (Brunei Darussalam)",
     nativeName: "Bahasa Melayu (Brunei Darussalam)",
 

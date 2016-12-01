@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("el-GR", true), {
+Bridge.merge(new System.Globalization.CultureInfo("el-GR", true), {
     englishName: "Greek (Greece)",
     nativeName: "Ελληνικά (Ελλάδα)",
 

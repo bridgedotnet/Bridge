@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("bg-BG", true), {
+Bridge.merge(new System.Globalization.CultureInfo("bg-BG", true), {
     englishName: "Bulgarian (Bulgaria)",
     nativeName: "български (България)",
 

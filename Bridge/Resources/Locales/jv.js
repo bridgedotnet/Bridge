@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("jv", true), {
+Bridge.merge(new System.Globalization.CultureInfo("jv", true), {
     englishName: "Javanese",
     nativeName: "Basa Jawa",
 

@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("si-LK", true), {
+Bridge.merge(new System.Globalization.CultureInfo("si-LK", true), {
     englishName: "Sinhala (Sri Lanka)",
     nativeName: "සිංහල (ශ්‍රී ලංකා)",
 
