@@ -1,5 +1,6 @@
 using Bridge.Test;
 using System;
+using Bridge.Html5;
 
 #pragma warning disable 184, 458, 1720
 
@@ -601,7 +602,7 @@ namespace Bridge.ClientTest.Reflection
         [Test]
         public void CastOperatorForSerializableTypeWithoutTypeCheckCodeAlwaysSucceedsGeneric()
         {
-            object o = new object();
+            object o = JSON.Parse<OL>("{}");
             var b = Cast<OL>(o);
             Assert.True(ReferenceEquals(o, b));
         }

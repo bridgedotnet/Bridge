@@ -30,6 +30,11 @@
             return name2;
         },
 
+        literal: function(type, obj) {
+            obj.$getType = function() {return type};
+            return obj;
+        },
+
         isPlainObject: function (obj) {
             if (typeof obj == 'object' && obj !== null) {
                 if (typeof Object.getPrototypeOf == 'function') {
@@ -204,7 +209,7 @@
                 return 0;
             } else if (type === String) {
                 return '';
-            } else if (type && type.prototype && type.prototype.$literal) {
+            } else if (type && type.$literal) {
                 return type.ctor();
             } else if (args && args.length > 0) {
                 return Bridge.Reflection.applyConstructor(type, args);
@@ -522,11 +527,17 @@
                     return type.$is(obj);
                 }
 
-                return false;
-            }
+                if (type.$literal) {
+                    if (Bridge.isPlainObject(obj)) {
+                        if (obj.$getType) {
+                            return Bridge.Reflection.isAssignableFrom(type, obj.$getType());
+                        }
+                    
+                        return true;
+                    }
+                }
 
-            if (type && type.prototype && type.prototype.$literal && Bridge.isPlainObject(obj)) {
-                return true;
+                return false;
             }
 
             var tt = typeof type;
@@ -2372,8 +2383,10 @@
 
             if (!cls) {
                 if (prop.$literal) {
-                    Class = function () {
-                        return {};
+                    Class = function (obj) {
+                        obj = obj || {};
+                        obj.$getType = function () { return Class };
+                        return obj;
                     };
                 } else {
                     Class = function () {
@@ -2390,6 +2403,19 @@
                 prop.ctor = Class;
             } else {
                 Class = cls;
+            }
+
+            if (prop.$literal) {
+                if ((!statics || !statics.getDefaultValue)) {
+                    Class.getDefaultValue = function() {
+                        var obj = {};
+                        obj.$getType = function() { return Class };
+                        return obj;
+                    };
+                }
+
+                Class.$literal = true;
+                delete prop.$literal;
             }
 
             if (!isGenericInstance) {

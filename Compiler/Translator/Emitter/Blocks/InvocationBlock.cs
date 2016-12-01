@@ -311,41 +311,57 @@ namespace Bridge.Translator
                                 else if (!isNative)
                                 {
                                     var overloads = OverloadsCollection.Create(this.Emitter, resolvedMethod);
-                                    string name = BridgeTypes.ToJsName(resolvedMethod.DeclaringType, this.Emitter) + ".";
-
-                                    if (isObjectLiteral && !resolvedMethod.IsStatic)
+                                    
+                                    if (isObjectLiteral && !resolvedMethod.IsStatic && resolvedMethod.DeclaringType.Kind == TypeKind.Interface)
                                     {
-                                        name += JS.Fields.PROTOTYPE + "." + overloads.GetOverloadName() + ".";
-                                        name += JS.Funcs.CALL;
+                                        this.Write("Bridge.getType(");
+                                        this.WriteThisExtension(invocationExpression.Target);
+                                        this.Write(").");
                                     }
                                     else
                                     {
-                                        name += overloads.GetOverloadName();
+                                        string name = BridgeTypes.ToJsName(resolvedMethod.DeclaringType, this.Emitter) + ".";
+                                        this.Write(name);
+                                    }
+
+                                    if (isObjectLiteral && !resolvedMethod.IsStatic)
+                                    {
+                                        this.Write(JS.Fields.PROTOTYPE + "." + overloads.GetOverloadName() + "." + JS.Funcs.CALL);
+                                    }
+                                    else
+                                    {
+                                        this.Write(overloads.GetOverloadName());
                                     }
 
                                     var isIgnoreClass = resolvedMethod.DeclaringTypeDefinition != null && this.Emitter.Validator.IsIgnoreType(resolvedMethod.DeclaringTypeDefinition);
-
-                                    this.Write(name);
                                     int openPos = this.Emitter.Output.Length;
                                     this.WriteOpenParentheses();
 
                                     this.Emitter.Comma = false;
 
-                                    if (!isIgnoreClass && !Helpers.IsIgnoreGeneric(resolvedMethod, this.Emitter) && argsInfo.HasTypeArguments)
-                                    {
-                                        new TypeExpressionListBlock(this.Emitter, argsInfo.TypeArguments).Emit();
-                                    }
-
-                                    this.EnsureComma(false);
-
-                                    if (!isObjectLiteral || !resolvedMethod.IsStatic)
+                                    if (isObjectLiteral && !resolvedMethod.IsStatic)
                                     {
                                         this.WriteThisExtension(invocationExpression.Target);
+                                        this.Emitter.Comma = true;
+                                    }
 
-                                        if (invocationExpression.Arguments.Count > 0)
-                                        {
-                                            this.WriteComma();
-                                        }
+                                    if (!isIgnoreClass && !Helpers.IsIgnoreGeneric(resolvedMethod, this.Emitter) && argsInfo.HasTypeArguments)
+                                    {
+                                        this.EnsureComma(false);
+                                        new TypeExpressionListBlock(this.Emitter, argsInfo.TypeArguments).Emit();
+                                        this.Emitter.Comma = true;
+                                    }
+
+                                    if (!isObjectLiteral && resolvedMethod.IsStatic)
+                                    {
+                                        this.EnsureComma(false);
+                                        this.WriteThisExtension(invocationExpression.Target);
+                                        this.Emitter.Comma = true;
+                                    }
+
+                                    if (invocationExpression.Arguments.Count > 0)
+                                    {
+                                        this.EnsureComma(false);
                                     }
 
                                     new ExpressionListBlock(this.Emitter, argsExpressions, paramsArg, invocationExpression, openPos).Emit();

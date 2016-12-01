@@ -276,10 +276,16 @@ namespace Bridge.Translator
             var baseType = this.Emitter.GetBaseTypeDefinition();
             var typeDef = this.Emitter.GetTypeDefinition();
             var isObjectLiteral = this.Emitter.Validator.IsObjectLiteral(typeDef);
+            var isPlainMode = this.Emitter.Validator.GetObjectCreateMode(typeDef) == 0;
 
             var ctorWrappers = isObjectLiteral ? new string[0] : this.EmitInitMembers().ToArray();
 
             if (!this.TypeInfo.HasRealInstantiable(this.Emitter) && ctorWrappers.Length == 0)
+            {
+                return;
+            }
+
+            if (isObjectLiteral && isPlainMode)
             {
                 return;
             }

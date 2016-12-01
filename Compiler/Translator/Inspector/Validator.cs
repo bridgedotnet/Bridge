@@ -433,11 +433,10 @@ namespace Bridge.Translator
 
             if (this.HasAttribute(type.CustomAttributes, Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute"))
             {
-                var mode = this.GetObjectCreateMode(type);
+                //var mode = this.GetObjectCreateMode(type);
+                //var ignore = mode == 0 && !type.Methods.Any(m => !m.IsConstructor && !m.IsGetter && !m.IsSetter && !m.IsRemoveOn && !m.IsAddOn);
 
-                var ignore = mode == 0 && !type.Methods.Any(m => !m.IsConstructor && !m.IsGetter && !m.IsSetter && !m.IsRemoveOn && !m.IsAddOn);
-
-                if (emitter.Validator.IsIgnoreType(type) || ignore)
+                if (emitter.Validator.IsIgnoreType(type))
                 {
                     return "Object";
                 }
