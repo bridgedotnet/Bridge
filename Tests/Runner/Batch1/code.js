@@ -3524,7 +3524,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         getCustomAttributesForAssemblyWorks: function () {
             var $t, $t1;
             var asm = $asm;
-            $t = Bridge.getEnumerator([asm.getCustomAttributes(), asm.getCustomAttributes(true), asm.getCustomAttributes(false)]);
+            $t = Bridge.getEnumerator([System.Attribute.getCustomAttributes$1(asm, false), System.Attribute.getCustomAttributes$1(asm, false, true), System.Attribute.getCustomAttributes$1(asm, false, false)]);
             while ($t.moveNext()) {
                 var a = $t.getCurrent();
                 Bridge.Test.Assert.false(a.some($asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f1));
@@ -3539,18 +3539,34 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.Assert.true(Bridge.cast(a3[0], Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A3Attribute).getP() === 45);
             }
 
-            $t1 = Bridge.getEnumerator([asm.getCustomAttributes(Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A2Attribute), asm.getCustomAttributes(Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A2Attribute, true), asm.getCustomAttributes(Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A2Attribute, false)]);
+            $t1 = Bridge.getEnumerator([System.Attribute.getCustomAttributes$1(asm, Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A2Attribute), System.Attribute.getCustomAttributes$1(asm, Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A2Attribute, true), System.Attribute.getCustomAttributes$1(asm, Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A2Attribute, false)]);
             while ($t1.moveNext()) {
                 var a1 = $t1.getCurrent();
                 Bridge.Test.Assert.areEqual(a1.length, 1);
                 Bridge.Test.Assert.true(Bridge.cast(a1[0], Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A2Attribute).getX() === 64);
                 Bridge.Test.Assert.true(Bridge.cast(a1[0], Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A2Attribute).getP() === 23);
             }
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f4);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f5);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f6);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f7);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f8);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f9);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, function () {
+                System.Attribute.getCustomAttributes$1(asm, null);
+            });
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, function () {
+                System.Attribute.getCustomAttributes$1(asm, null, false);
+            });
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, function () {
+                System.Attribute.getCustomAttributes$1(asm, null, true);
+            });
         },
         getCustomAttributesForMemberInfoWorks: function () {
             var member1 = Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 31, 28, "DoSomething")[0];
 
-            var attributes1 = System.Attribute.getCustomAttributes(member1);
+            var attributes1 = System.Attribute.getCustomAttributes(member1, false);
 
             var a1 = null;
             var a3 = null;
@@ -3562,11 +3578,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.notNull(a3);
             Bridge.Test.Assert.areEqual(1, a1.getV());
             Bridge.Test.Assert.areEqual(3, a3.getV());
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f10);
         },
         getCustomAttributesForMemberInfoInheritTrueWorks: function () {
             var member1 = Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 31, 28, "DoSomething")[0];
 
-            var attributes1 = System.Attribute.getCustomAttributes(member1, null, true);
+            var attributes1 = System.Attribute.getCustomAttributes(member1, false, true);
 
             var a1 = null;
             var a3 = null;
@@ -3578,11 +3596,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.notNull(a3);
             Bridge.Test.Assert.areEqual(1, a1.getV());
             Bridge.Test.Assert.areEqual(3, a3.getV());
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f11);
         },
         getCustomAttributesForMemberInfoInheritFalseWorks: function () {
             var member1 = Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 31, 28, "DoSomething")[0];
 
-            var attributes1 = System.Attribute.getCustomAttributes(member1, null, false);
+            var attributes1 = System.Attribute.getCustomAttributes(member1, false, false);
 
             var a1 = null;
             var a3 = null;
@@ -3594,6 +3614,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.notNull(a3);
             Bridge.Test.Assert.areEqual(1, a1.getV());
             Bridge.Test.Assert.areEqual(3, a3.getV());
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f12);
         },
         getCustomAttributesForMemberInfoTypeWorks: function () {
             var member1 = Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 31, 28, "KeepSomething")[0];
@@ -3614,6 +3636,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.areEqual(attributes2.length, 1);
             a2 = Bridge.as(attributes2[0], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A2);
             Bridge.Test.Assert.notNull(a2);
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f13);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, function () {
+                System.Attribute.getCustomAttributes(member1, null);
+            });
         },
         getCustomAttributesForMemberInfoTypeInheritFalseWorks: function () {
             var member1 = Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 31, 28, "DoSomething")[0];
@@ -3639,6 +3666,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             a3 = Bridge.as(attributes2[0], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A3);
             Bridge.Test.Assert.notNull(a3);
             Bridge.Test.Assert.areEqual(3, a3.getV());
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f14);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, function () {
+                System.Attribute.getCustomAttributes(member1, null, false);
+            });
         },
         getCustomAttributesForMemberInfoTypeInheritTrueWorks: function () {
             var member1 = Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 31, 28, "DoSomething")[0];
@@ -3664,13 +3696,18 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             a3 = Bridge.as(attributes2[0], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A3);
             Bridge.Test.Assert.notNull(a3);
             Bridge.Test.Assert.areEqual(3, a3.getV());
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f15);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, function () {
+                System.Attribute.getCustomAttributes(member1, null, true);
+            });
         },
         getCustomAttributesForParameterInfoWorks: function () {
             var t = Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1;
             var m = Bridge.Reflection.getMembers(t, 8, 284, "DoSomething");
             var parameter1 = (m.pi || [])[0];
 
-            var attributes1 = System.Attribute.getCustomAttributes(parameter1);
+            var attributes1 = System.Attribute.getCustomAttributes(parameter1, false);
 
             var a1 = null;
             var a3 = null;
@@ -3682,11 +3719,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.notNull(a3);
             Bridge.Test.Assert.areEqual(1000, a1.getV());
             Bridge.Test.Assert.areEqual(3000, a3.getV());
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f10);
         },
         getCustomAttributesForParameterInfoInheritTrueWorks: function () {
             var parameter1 = (Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 8, 284, "DoSomething").pi || [])[0];
 
-            var attributes1 = System.Attribute.getCustomAttributes(parameter1, null, true);
+            var attributes1 = System.Attribute.getCustomAttributes(parameter1, false, true);
 
             var a1 = null;
             var a3 = null;
@@ -3698,11 +3737,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.notNull(a3);
             Bridge.Test.Assert.areEqual(1000, a1.getV());
             Bridge.Test.Assert.areEqual(3000, a3.getV());
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f11);
         },
         getCustomAttributesForParameterInfoInheritFalseWorks: function () {
             var parameter1 = (Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 8, 284, "DoSomething").pi || [])[0];
 
-            var attributes1 = System.Attribute.getCustomAttributes(parameter1, null, false);
+            var attributes1 = System.Attribute.getCustomAttributes(parameter1, false, false);
 
             var a1 = null;
             var a3 = null;
@@ -3714,6 +3755,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.notNull(a3);
             Bridge.Test.Assert.areEqual(1000, a1.getV());
             Bridge.Test.Assert.areEqual(3000, a3.getV());
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f12);
         },
         getCustomAttributesForParameterInfoTypeWorks: function () {
             var parameter1 = (Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 8, 284, "KeepSomething").pi || [])[0];
@@ -3734,6 +3777,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.areEqual(attributes2.length, 1);
             a2 = Bridge.as(attributes2[0], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A2);
             Bridge.Test.Assert.notNull(a2);
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f13);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, function () {
+                System.Attribute.getCustomAttributes(parameter1, null);
+            });
         },
         getCustomAttributesForParameterInfoTypeInheritFalseWorks: function () {
             var parameter1 = (Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 8, 284, "DoSomething").pi || [])[0];
@@ -3759,6 +3807,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             a3 = Bridge.as(attributes2[0], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A3);
             Bridge.Test.Assert.notNull(a3);
             Bridge.Test.Assert.areEqual(3000, a3.getV());
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f14);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, function () {
+                System.Attribute.getCustomAttributes(parameter1, null, false);
+            });
         },
         getCustomAttributesForParameterInfoTypeInheritTrueWorks: function () {
             var parameter1 = (Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 8, 284, "DoSomething").pi || [])[0];
@@ -3784,6 +3837,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             a3 = Bridge.as(attributes2[0], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A3);
             Bridge.Test.Assert.notNull(a3);
             Bridge.Test.Assert.areEqual(3000, a3.getV());
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f15);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, function () {
+                System.Attribute.getCustomAttributes(parameter1, null, true);
+            });
         }
     });
 
@@ -3798,6 +3856,42 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         f3: function (x) {
             return Bridge.is(x, Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A3Attribute);
+        },
+        f4: function () {
+            System.Attribute.getCustomAttributes$1(null, false);
+        },
+        f5: function () {
+            System.Attribute.getCustomAttributes$1(null, false, true);
+        },
+        f6: function () {
+            System.Attribute.getCustomAttributes$1(null, false, false);
+        },
+        f7: function () {
+            System.Attribute.getCustomAttributes$1(null, null);
+        },
+        f8: function () {
+            System.Attribute.getCustomAttributes$1(null, null, false);
+        },
+        f9: function () {
+            System.Attribute.getCustomAttributes$1(null, null, true);
+        },
+        f10: function () {
+            System.Attribute.getCustomAttributes(null, false);
+        },
+        f11: function () {
+            System.Attribute.getCustomAttributes(null, false, true);
+        },
+        f12: function () {
+            System.Attribute.getCustomAttributes(null, false, false);
+        },
+        f13: function () {
+            System.Attribute.getCustomAttributes(null, null);
+        },
+        f14: function () {
+            System.Attribute.getCustomAttributes(null, null, false);
+        },
+        f15: function () {
+            System.Attribute.getCustomAttributes(null, null, true);
         }
     });
 
@@ -21850,13 +21944,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.areEqual$1(c15.v, "The_value", "Item.SetValue.value");
         },
         testMemberAttribute: function (member, expectedA1) {
-            var all = System.Attribute.getCustomAttributes(member);
+            var all = System.Attribute.getCustomAttributes(member, false);
             Bridge.Test.Assert.areEqual(all.length, 2);
             Bridge.Test.Assert.true(Bridge.is(all[0], Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute) || Bridge.is(all[1], Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute));
             Bridge.Test.Assert.true(Bridge.is(all[0], Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute) || Bridge.is(all[1], Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute));
             Bridge.Test.Assert.areEqual(Bridge.cast((Bridge.is(all[0], Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute) ? all[0] : all[1]), Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute).getX(), expectedA1);
 
-            all = System.Attribute.getCustomAttributes(member, null, true);
+            all = System.Attribute.getCustomAttributes(member, false, true);
             Bridge.Test.Assert.areEqual(all.length, 2);
             Bridge.Test.Assert.true(Bridge.is(all[0], Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute) || Bridge.is(all[1], Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute));
             Bridge.Test.Assert.true(Bridge.is(all[0], Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute) || Bridge.is(all[1], Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute));
@@ -21886,7 +21980,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             this.testMemberAttribute(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C18, 2, 284, "E").ad, 8);
             this.testMemberAttribute(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C18, 2, 284, "E").r, 9);
 
-            Bridge.Test.Assert.areEqual(System.Attribute.getCustomAttributes(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C2, 8, 284, "M1")).length, 0);
+            Bridge.Test.Assert.areEqual(System.Attribute.getCustomAttributes(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C2, 8, 284, "M1"), false).length, 0);
         },
         membersReflectableAttributeWorks: function () {
             var c25 = Bridge.ClientTest.Reflection.ReflectionTests.C25;

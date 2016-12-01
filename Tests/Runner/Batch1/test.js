@@ -3848,84 +3848,84 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
             getCustomAttributesForMemberInfoWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Batch1_Reflection_AttributeTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GetCustomAttributesForMemberInfoWorks()",
-                    line: "87"
+                    line: "97"
                 } ));
                 t.getFixture().getCustomAttributesForMemberInfoWorks();
             },
             getCustomAttributesForMemberInfoInheritTrueWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Batch1_Reflection_AttributeTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GetCustomAttributesForMemberInfoInheritTrueWorks()",
-                    line: "106"
+                    line: "118"
                 } ));
                 t.getFixture().getCustomAttributesForMemberInfoInheritTrueWorks();
             },
             getCustomAttributesForMemberInfoInheritFalseWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Batch1_Reflection_AttributeTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GetCustomAttributesForMemberInfoInheritFalseWorks()",
-                    line: "125"
+                    line: "139"
                 } ));
                 t.getFixture().getCustomAttributesForMemberInfoInheritFalseWorks();
             },
             getCustomAttributesForMemberInfoTypeWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Batch1_Reflection_AttributeTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GetCustomAttributesForMemberInfoTypeWorks()",
-                    line: "144"
+                    line: "160"
                 } ));
                 t.getFixture().getCustomAttributesForMemberInfoTypeWorks();
             },
             getCustomAttributesForMemberInfoTypeInheritFalseWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Batch1_Reflection_AttributeTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GetCustomAttributesForMemberInfoTypeInheritFalseWorks()",
-                    line: "167"
+                    line: "186"
                 } ));
                 t.getFixture().getCustomAttributesForMemberInfoTypeInheritFalseWorks();
             },
             getCustomAttributesForMemberInfoTypeInheritTrueWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Batch1_Reflection_AttributeTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GetCustomAttributesForMemberInfoTypeInheritTrueWorks()",
-                    line: "195"
+                    line: "217"
                 } ));
                 t.getFixture().getCustomAttributesForMemberInfoTypeInheritTrueWorks();
             },
             getCustomAttributesForParameterInfoWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Batch1_Reflection_AttributeTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GetCustomAttributesForParameterInfoWorks()",
-                    line: "223"
+                    line: "248"
                 } ));
                 t.getFixture().getCustomAttributesForParameterInfoWorks();
             },
             getCustomAttributesForParameterInfoInheritTrueWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Batch1_Reflection_AttributeTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GetCustomAttributesForParameterInfoInheritTrueWorks()",
-                    line: "244"
+                    line: "271"
                 } ));
                 t.getFixture().getCustomAttributesForParameterInfoInheritTrueWorks();
             },
             getCustomAttributesForParameterInfoInheritFalseWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Batch1_Reflection_AttributeTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GetCustomAttributesForParameterInfoInheritFalseWorks()",
-                    line: "263"
+                    line: "292"
                 } ));
                 t.getFixture().getCustomAttributesForParameterInfoInheritFalseWorks();
             },
             getCustomAttributesForParameterInfoTypeWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Batch1_Reflection_AttributeTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GetCustomAttributesForParameterInfoTypeWorks()",
-                    line: "282"
+                    line: "313"
                 } ));
                 t.getFixture().getCustomAttributesForParameterInfoTypeWorks();
             },
             getCustomAttributesForParameterInfoTypeInheritFalseWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Batch1_Reflection_AttributeTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GetCustomAttributesForParameterInfoTypeInheritFalseWorks()",
-                    line: "305"
+                    line: "339"
                 } ));
                 t.getFixture().getCustomAttributesForParameterInfoTypeInheritFalseWorks();
             },
             getCustomAttributesForParameterInfoTypeInheritTrueWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Batch1_Reflection_AttributeTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GetCustomAttributesForParameterInfoTypeInheritTrueWorks()",
-                    line: "333"
+                    line: "370"
                 } ));
                 t.getFixture().getCustomAttributesForParameterInfoTypeInheritTrueWorks();
             }

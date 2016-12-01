@@ -12461,13 +12461,13 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.Assert.areEqual$1("The_value", c15.v, "Item.SetValue.value");
         },
         testMemberAttribute: function (member, expectedA1) {
-            var all = System.Attribute.getCustomAttributes(member);
+            var all = System.Attribute.getCustomAttributes(member, false);
             Bridge.Test.Assert.areEqual(2, all.length);
             Bridge.Test.Assert.true(Bridge.is(all[0], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute) || Bridge.is(all[1], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute));
             Bridge.Test.Assert.true(Bridge.is(all[0], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A3Attribute) || Bridge.is(all[1], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A3Attribute));
             Bridge.Test.Assert.areEqual(expectedA1, Bridge.cast((Bridge.is(all[0], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute) ? all[0] : all[1]), Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute).getX());
 
-            all = System.Attribute.getCustomAttributes(member, null, true);
+            all = System.Attribute.getCustomAttributes(member, false, true);
             Bridge.Test.Assert.areEqual(2, all.length);
             Bridge.Test.Assert.true(Bridge.is(all[0], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute) || Bridge.is(all[1], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute));
             Bridge.Test.Assert.true(Bridge.is(all[0], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A3Attribute) || Bridge.is(all[1], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A3Attribute));
@@ -12497,7 +12497,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             this.testMemberAttribute(Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C18, 2, 284, "E").ad, 8);
             this.testMemberAttribute(Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C18, 2, 284, "E").r, 9);
 
-            Bridge.Test.Assert.areEqual(0, System.Attribute.getCustomAttributes(Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C2, 8, 284, "M1")).length);
+            Bridge.Test.Assert.areEqual(0, System.Attribute.getCustomAttributes(Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C2, 8, 284, "M1"), false).length);
         },
         membersReflectableAttributeWorks: function () {
             var c25 = Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C25;
