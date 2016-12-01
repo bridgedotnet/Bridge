@@ -572,7 +572,7 @@ namespace Bridge.Translator
                 }
             }
 
-            if (Helpers.IsReservedWord(name))
+            if (Helpers.IsReservedWord(this, name))
             {
                 name = Helpers.ChangeReservedWord(name);
             }

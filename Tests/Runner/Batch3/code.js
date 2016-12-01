@@ -5596,6 +5596,56 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1381", {
+        statics: {
+            value: 4,
+            testReservedWords: function () {
+                try {
+                    var $Date = 3;
+                    var m = (new Date().getMonth() + 1);
+                }
+                catch ($e1) {
+                    $e1 = System.Exception.create($e1);
+                    Bridge.Test.Assert.fail$1("Date variable");
+                }
+
+                try {
+                    var $String = 4;
+                    var s = String().charCodeAt(0);
+                }
+                catch ($e2) {
+                    $e2 = System.Exception.create($e2);
+                    Bridge.Test.Assert.fail$1("String variable");
+                }
+                try {
+                    var $Number = 7;
+                    Number();
+                    (0);
+                }
+                catch ($e3) {
+                    $e3 = System.Exception.create($e3);
+                    Bridge.Test.Assert.fail$1("Number variable");
+                }
+                try {
+                    var document = 7;
+                    var c = document.children;
+                }
+                catch ($e4) {
+                    $e4 = System.Exception.create($e4);
+                    Bridge.Test.Assert.fail$1("document variable");
+                }
+                try {
+                    var $Bridge = 7;
+                    Bridge.Test.Assert.areEqual(4, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1381.value);
+                }
+                catch ($e5) {
+                    $e5 = System.Exception.create($e5);
+                    Bridge.Test.Assert.fail$1("Bridge variable");
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1385", {
         statics: {
             testIsTypedArray: function () {
@@ -6896,8 +6946,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -6927,7 +6975,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    });
+                                    }); /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);

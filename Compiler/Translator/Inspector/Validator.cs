@@ -634,7 +634,7 @@ namespace Bridge.Translator
 
         public virtual void CheckIdentifier(string name, AstNode context)
         {
-            if (Helpers.IsReservedWord(name))
+            if (Helpers.IsReservedWord(null, name))
             {
                 throw new EmitterException(context, "Cannot use '" + name + "' as identifier");
             }
