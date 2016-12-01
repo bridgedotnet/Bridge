@@ -638,7 +638,7 @@
 
 
                     for (var i = 0; i < str.length; i++) {
-                        if (isLetetr(str[i])) {
+                        if (isLetter(str[i])) {
                             if (str[i].toLowerCase() === "e" && tokenCount(str.toLowerCase(), "e") === 1) {
                                 continue;
                             }
