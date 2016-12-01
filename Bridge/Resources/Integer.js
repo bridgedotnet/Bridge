@@ -561,10 +561,10 @@
                 var stringContains = function (str, value) {
                     for (var i = 0; i < str.length; i++) {
                         if (str[i] === value) {
-                            return false;
+                            return true;
                         }
                     }
-                    return true;
+                    return false;
                 };
 
                 if (!provider) {
