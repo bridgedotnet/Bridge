@@ -35,18 +35,15 @@ namespace Bridge.ClientTest.Batch1.Reflection
             }
         }
 
-
-
         private class C1
         {
             [A1(10), A2]
-            public int KeepSomething
+            public void KeepSomething([A1(100), A2] int i)
             {
-                get; set;
             }
 
             [A1(1), A3(3)]
-            public void DoSomething()
+            public void DoSomething([A1(1000), A3(3000)] int i)
             {
             }
         }
@@ -221,6 +218,144 @@ namespace Bridge.ClientTest.Batch1.Reflection
             a3 = attributes2[0] as A3;
             Assert.NotNull(a3);
             Assert.AreEqual(3, a3.V);
+        }
+
+        [Test]
+        public void GetCustomAttributesForParameterInfoWorks()
+        {
+            var t = typeof(C1);
+            var m = t.GetMethod("DoSomething");
+            var parameter1 = m.GetParameters()[0];
+
+            var attributes1 = Attribute.GetCustomAttributes(parameter1);
+
+            A1 a1 = null;
+            A3 a3 = null;
+
+            Assert.AreEqual(attributes1.Length, 2);
+            a1 = attributes1[0] as A1;
+            a3 = attributes1[1] as A3;
+            Assert.NotNull(a1);
+            Assert.NotNull(a3);
+            Assert.AreEqual(1000, a1.V);
+            Assert.AreEqual(3000, a3.V);
+        }
+
+        [Test]
+        public void GetCustomAttributesForParameterInfoInheritTrueWorks()
+        {
+            var parameter1 = new C1().GetType().GetMethod("DoSomething").GetParameters()[0];
+
+            var attributes1 = Attribute.GetCustomAttributes(parameter1, true);
+
+            A1 a1 = null;
+            A3 a3 = null;
+
+            Assert.AreEqual(attributes1.Length, 2);
+            a1 = attributes1[0] as A1;
+            a3 = attributes1[1] as A3;
+            Assert.NotNull(a1);
+            Assert.NotNull(a3);
+            Assert.AreEqual(1000, a1.V);
+            Assert.AreEqual(3000, a3.V);
+        }
+
+        [Test]
+        public void GetCustomAttributesForParameterInfoInheritFalseWorks()
+        {
+            var parameter1 = new C1().GetType().GetMethod("DoSomething").GetParameters()[0];
+
+            var attributes1 = Attribute.GetCustomAttributes(parameter1, false);
+
+            A1 a1 = null;
+            A3 a3 = null;
+
+            Assert.AreEqual(attributes1.Length, 2);
+            a1 = attributes1[0] as A1;
+            a3 = attributes1[1] as A3;
+            Assert.NotNull(a1);
+            Assert.NotNull(a3);
+            Assert.AreEqual(1000, a1.V);
+            Assert.AreEqual(3000, a3.V);
+        }
+
+        [Test]
+        public void GetCustomAttributesForParameterInfoTypeWorks()
+        {
+            var parameter1 = new C1().GetType().GetMethod("KeepSomething").GetParameters()[0];
+
+            var attributes1 = Attribute.GetCustomAttributes(parameter1, typeof(A1));
+
+            A1 a1 = null;
+
+            Assert.AreEqual(attributes1.Length, 1);
+            a1 = attributes1[0] as A1;
+            Assert.NotNull(a1);
+            Assert.AreEqual(100, a1.V);
+
+            var attributes2 = Attribute.GetCustomAttributes(parameter1, typeof(A2));
+
+            A2 a2 = null;
+
+            Assert.AreEqual(attributes2.Length, 1);
+            a2 = attributes2[0] as A2;
+            Assert.NotNull(a2);
+        }
+
+        [Test]
+        public void GetCustomAttributesForParameterInfoTypeInheritFalseWorks()
+        {
+            var parameter1 = new C1().GetType().GetMethod("DoSomething").GetParameters()[0];
+
+            var attributes1 = Attribute.GetCustomAttributes(parameter1, typeof(A1), false);
+
+            A1 a1 = null;
+            A3 a3 = null;
+
+            Assert.AreEqual(attributes1.Length, 2);
+            a1 = attributes1[0] as A1;
+            a3 = attributes1[1] as A3;
+            Assert.NotNull(a1);
+            Assert.NotNull(a3);
+            Assert.AreEqual(1000, a1.V);
+            Assert.AreEqual(3000, a3.V);
+
+            var attributes2 = Attribute.GetCustomAttributes(parameter1, typeof(A3), false);
+
+            a3 = null;
+
+            Assert.AreEqual(attributes2.Length, 1);
+            a3 = attributes2[0] as A3;
+            Assert.NotNull(a3);
+            Assert.AreEqual(3000, a3.V);
+        }
+
+        [Test]
+        public void GetCustomAttributesForParameterInfoTypeInheritTrueWorks()
+        {
+            var parameter1 = new C1().GetType().GetMethod("DoSomething").GetParameters()[0];
+
+            var attributes1 = Attribute.GetCustomAttributes(parameter1, typeof(A1), true);
+
+            A1 a1 = null;
+            A3 a3 = null;
+
+            Assert.AreEqual(attributes1.Length, 2);
+            a1 = attributes1[0] as A1;
+            a3 = attributes1[1] as A3;
+            Assert.NotNull(a1);
+            Assert.NotNull(a3);
+            Assert.AreEqual(1000, a1.V);
+            Assert.AreEqual(3000, a3.V);
+
+            var attributes2 = Attribute.GetCustomAttributes(parameter1, typeof(A3), true);
+
+            a3 = null;
+
+            Assert.AreEqual(attributes2.Length, 1);
+            a3 = attributes2[0] as A3;
+            Assert.NotNull(a3);
+            Assert.AreEqual(3000, a3.V);
         }
     }
 }

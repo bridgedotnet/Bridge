@@ -3664,6 +3664,126 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             a3 = Bridge.as(attributes2[0], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A3);
             Bridge.Test.Assert.notNull(a3);
             Bridge.Test.Assert.areEqual(3, a3.getV());
+        },
+        getCustomAttributesForParameterInfoWorks: function () {
+            var t = Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1;
+            var m = Bridge.Reflection.getMembers(t, 8, 284, "DoSomething");
+            var parameter1 = (m.pi || [])[0];
+
+            var attributes1 = System.Attribute.getCustomAttributes(parameter1);
+
+            var a1 = null;
+            var a3 = null;
+
+            Bridge.Test.Assert.areEqual(attributes1.length, 2);
+            a1 = Bridge.as(attributes1[0], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A1);
+            a3 = Bridge.as(attributes1[1], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A3);
+            Bridge.Test.Assert.notNull(a1);
+            Bridge.Test.Assert.notNull(a3);
+            Bridge.Test.Assert.areEqual(1000, a1.getV());
+            Bridge.Test.Assert.areEqual(3000, a3.getV());
+        },
+        getCustomAttributesForParameterInfoInheritTrueWorks: function () {
+            var parameter1 = (Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 8, 284, "DoSomething").pi || [])[0];
+
+            var attributes1 = System.Attribute.getCustomAttributes(parameter1, null, true);
+
+            var a1 = null;
+            var a3 = null;
+
+            Bridge.Test.Assert.areEqual(attributes1.length, 2);
+            a1 = Bridge.as(attributes1[0], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A1);
+            a3 = Bridge.as(attributes1[1], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A3);
+            Bridge.Test.Assert.notNull(a1);
+            Bridge.Test.Assert.notNull(a3);
+            Bridge.Test.Assert.areEqual(1000, a1.getV());
+            Bridge.Test.Assert.areEqual(3000, a3.getV());
+        },
+        getCustomAttributesForParameterInfoInheritFalseWorks: function () {
+            var parameter1 = (Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 8, 284, "DoSomething").pi || [])[0];
+
+            var attributes1 = System.Attribute.getCustomAttributes(parameter1, null, false);
+
+            var a1 = null;
+            var a3 = null;
+
+            Bridge.Test.Assert.areEqual(attributes1.length, 2);
+            a1 = Bridge.as(attributes1[0], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A1);
+            a3 = Bridge.as(attributes1[1], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A3);
+            Bridge.Test.Assert.notNull(a1);
+            Bridge.Test.Assert.notNull(a3);
+            Bridge.Test.Assert.areEqual(1000, a1.getV());
+            Bridge.Test.Assert.areEqual(3000, a3.getV());
+        },
+        getCustomAttributesForParameterInfoTypeWorks: function () {
+            var parameter1 = (Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 8, 284, "KeepSomething").pi || [])[0];
+
+            var attributes1 = System.Attribute.getCustomAttributes(parameter1, Bridge.ClientTest.Batch1.Reflection.AttributeTests.A1);
+
+            var a1 = null;
+
+            Bridge.Test.Assert.areEqual(attributes1.length, 1);
+            a1 = Bridge.as(attributes1[0], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A1);
+            Bridge.Test.Assert.notNull(a1);
+            Bridge.Test.Assert.areEqual(100, a1.getV());
+
+            var attributes2 = System.Attribute.getCustomAttributes(parameter1, Bridge.ClientTest.Batch1.Reflection.AttributeTests.A2);
+
+            var a2 = null;
+
+            Bridge.Test.Assert.areEqual(attributes2.length, 1);
+            a2 = Bridge.as(attributes2[0], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A2);
+            Bridge.Test.Assert.notNull(a2);
+        },
+        getCustomAttributesForParameterInfoTypeInheritFalseWorks: function () {
+            var parameter1 = (Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 8, 284, "DoSomething").pi || [])[0];
+
+            var attributes1 = System.Attribute.getCustomAttributes(parameter1, Bridge.ClientTest.Batch1.Reflection.AttributeTests.A1, false);
+
+            var a1 = null;
+            var a3 = null;
+
+            Bridge.Test.Assert.areEqual(attributes1.length, 2);
+            a1 = Bridge.as(attributes1[0], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A1);
+            a3 = Bridge.as(attributes1[1], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A3);
+            Bridge.Test.Assert.notNull(a1);
+            Bridge.Test.Assert.notNull(a3);
+            Bridge.Test.Assert.areEqual(1000, a1.getV());
+            Bridge.Test.Assert.areEqual(3000, a3.getV());
+
+            var attributes2 = System.Attribute.getCustomAttributes(parameter1, Bridge.ClientTest.Batch1.Reflection.AttributeTests.A3, false);
+
+            a3 = null;
+
+            Bridge.Test.Assert.areEqual(attributes2.length, 1);
+            a3 = Bridge.as(attributes2[0], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A3);
+            Bridge.Test.Assert.notNull(a3);
+            Bridge.Test.Assert.areEqual(3000, a3.getV());
+        },
+        getCustomAttributesForParameterInfoTypeInheritTrueWorks: function () {
+            var parameter1 = (Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 8, 284, "DoSomething").pi || [])[0];
+
+            var attributes1 = System.Attribute.getCustomAttributes(parameter1, Bridge.ClientTest.Batch1.Reflection.AttributeTests.A1, true);
+
+            var a1 = null;
+            var a3 = null;
+
+            Bridge.Test.Assert.areEqual(attributes1.length, 2);
+            a1 = Bridge.as(attributes1[0], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A1);
+            a3 = Bridge.as(attributes1[1], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A3);
+            Bridge.Test.Assert.notNull(a1);
+            Bridge.Test.Assert.notNull(a3);
+            Bridge.Test.Assert.areEqual(1000, a1.getV());
+            Bridge.Test.Assert.areEqual(3000, a3.getV());
+
+            var attributes2 = System.Attribute.getCustomAttributes(parameter1, Bridge.ClientTest.Batch1.Reflection.AttributeTests.A3, true);
+
+            a3 = null;
+
+            Bridge.Test.Assert.areEqual(attributes2.length, 1);
+            a3 = Bridge.as(attributes2[0], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A3);
+            Bridge.Test.Assert.notNull(a3);
+            Bridge.Test.Assert.areEqual(3000, a3.getV());
         }
     });
 
@@ -3700,12 +3820,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     });
 
     Bridge.define("Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1", {
-        config: {
-            properties: {
-                KeepSomething: 0
-            }
+        keepSomething: function (i) {
         },
-        doSomething: function () {
+        doSomething: function (i) {
         }
     });
 
@@ -43466,7 +43583,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     var $m = Bridge.setMetadata,
         $n = [System,Bridge.ClientTest.Linq.Expressions,Bridge.ClientTest.Batch1.Reflection,Bridge.ClientTest.Reflection];
     $m($n[2].AttributeTests.A2, function () { return {"ni":true}; });
-    $m($n[2].AttributeTests.C1, function () { return {"m":[{"at":[new Bridge.ClientTest.Batch1.Reflection.AttributeTests.A1(1),new Bridge.ClientTest.Batch1.Reflection.AttributeTests.A3(3)],"a":2,"n":"DoSomething","t":8,"sn":"doSomething","rt":Object},{"at":[new Bridge.ClientTest.Batch1.Reflection.AttributeTests.A1(10),new Bridge.ClientTest.Batch1.Reflection.AttributeTests.A2()],"a":2,"n":"KeepSomething","t":16,"rt":$n[0].Int32,"g":{"a":2,"n":"get_KeepSomething","t":8,"sn":"getKeepSomething","rt":$n[0].Int32},"s":{"a":2,"n":"set_KeepSomething","t":8,"pi":[{"n":"value","pt":$n[0].Int32,"ps":0}],"sn":"setKeepSomething","rt":Object,"p":[$n[0].Int32]}}]}; });
+    $m($n[2].AttributeTests.C1, function () { return {"m":[{"at":[new Bridge.ClientTest.Batch1.Reflection.AttributeTests.A1(1),new Bridge.ClientTest.Batch1.Reflection.AttributeTests.A3(3)],"a":2,"n":"DoSomething","t":8,"pi":[{"at":[new Bridge.ClientTest.Batch1.Reflection.AttributeTests.A1(1000),new Bridge.ClientTest.Batch1.Reflection.AttributeTests.A3(3000)],"n":"i","pt":$n[0].Int32,"ps":0}],"sn":"doSomething","rt":Object,"p":[$n[0].Int32]},{"at":[new Bridge.ClientTest.Batch1.Reflection.AttributeTests.A1(10),new Bridge.ClientTest.Batch1.Reflection.AttributeTests.A2()],"a":2,"n":"KeepSomething","t":8,"pi":[{"at":[new Bridge.ClientTest.Batch1.Reflection.AttributeTests.A1(100),new Bridge.ClientTest.Batch1.Reflection.AttributeTests.A2()],"n":"i","pt":$n[0].Int32,"ps":0}],"sn":"keepSomething","rt":Object,"p":[$n[0].Int32]}]}; });
     $m($n[1].ExpressionTests.C, function () { return {"m":[{"a":2,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":".ctor","t":1,"p":[$n[0].Int32,$n[0].Int32],"pi":[{"n":"a","pt":$n[0].Int32,"ps":0},{"n":"b","pt":$n[0].Int32,"ps":1}],"sn":"$ctor1"},{"a":2,"n":"M1","t":8,"pi":[{"n":"a","pt":$n[0].Int32,"ps":0},{"n":"b","pt":String,"ps":1}],"sn":"M1","rt":$n[0].Int32,"p":[$n[0].Int32,String]},{"a":2,"n":"M2","is":true,"t":8,"pi":[{"n":"a","pt":$n[0].Int32,"ps":0},{"n":"b","pt":String,"ps":1}],"sn":"M2","rt":$n[0].Int32,"p":[$n[0].Int32,String]},{"a":2,"n":"M4","t":8,"pi":[{"n":"a","pt":$n[0].Int32,"ps":0}],"sn":"M4","rt":$n[0].Int32,"p":[$n[0].Int32]},{"a":2,"n":"op_Addition","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_Addition","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_BitwiseAnd","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_BitwiseAnd","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_BitwiseOr","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_BitwiseOr","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_Decrement","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0}],"sn":"op_Decrement","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C]},{"a":2,"n":"op_Division","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_Division","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_Equality","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_Equality","rt":Boolean,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_ExclusiveOr","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_ExclusiveOr","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_Explicit","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0}],"sn":"op_Explicit","rt":$n[0].Int32,"p":[$n[1].ExpressionTests.C]},{"a":2,"n":"op_False","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0}],"sn":"op_False","rt":Boolean,"p":[$n[1].ExpressionTests.C]},{"a":2,"n":"op_GreaterThan","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_GreaterThan","rt":Boolean,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_GreaterThanOrEqual","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_GreaterThanOrEqual","rt":Boolean,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_Increment","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0}],"sn":"op_Increment","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C]},{"a":2,"n":"op_Inequality","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_Inequality","rt":Boolean,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_LeftShift","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[0].Int32,"ps":1}],"sn":"op_LeftShift","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C,$n[0].Int32]},{"a":2,"n":"op_LessThan","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_LessThan","rt":Boolean,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_LessThanOrEqual","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_LessThanOrEqual","rt":Boolean,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_LogicalNot","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0}],"sn":"op_LogicalNot","rt":Boolean,"p":[$n[1].ExpressionTests.C]},{"a":2,"n":"op_Modulus","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_Modulus","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_Multiply","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_Multiply","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_OnesComplement","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0}],"sn":"op_OnesComplement","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C]},{"a":2,"n":"op_Power","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_Power","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_RightShift","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[0].Int32,"ps":1}],"sn":"op_RightShift","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C,$n[0].Int32]},{"a":2,"n":"op_Subtraction","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0},{"n":"b","pt":$n[1].ExpressionTests.C,"ps":1}],"sn":"op_Subtraction","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C,$n[1].ExpressionTests.C]},{"a":2,"n":"op_True","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0}],"sn":"op_True","rt":Boolean,"p":[$n[1].ExpressionTests.C]},{"a":2,"n":"op_UnaryNegation","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0}],"sn":"op_UnaryNegation","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C]},{"a":2,"n":"op_UnaryPlus","is":true,"t":8,"pi":[{"n":"a","pt":$n[1].ExpressionTests.C,"ps":0}],"sn":"op_UnaryPlus","rt":$n[1].ExpressionTests.C,"p":[$n[1].ExpressionTests.C]},{"a":2,"n":"CP","t":16,"rt":$n[1].ExpressionTests.C,"g":{"a":2,"n":"get_CP","t":8,"sn":"getCP","rt":$n[1].ExpressionTests.C},"s":{"a":2,"n":"set_CP","t":8,"pi":[{"n":"value","pt":$n[1].ExpressionTests.C,"ps":0}],"sn":"setCP","rt":Object,"p":[$n[1].ExpressionTests.C]}},{"a":2,"n":"Item","t":16,"rt":String,"p":[$n[0].Int32,String],"i":true,"ipi":[{"n":"a","pt":$n[0].Int32,"ps":0},{"n":"b","pt":String,"ps":1}],"g":{"a":2,"n":"get_Item","t":8,"pi":[{"n":"a","pt":$n[0].Int32,"ps":0},{"n":"b","pt":String,"ps":1}],"sn":"getItem","rt":String,"p":[$n[0].Int32,String]}},{"a":2,"n":"LP","t":16,"rt":$n[1].ExpressionTests.MyList,"g":{"a":2,"n":"get_LP","t":8,"sn":"getLP","rt":$n[1].ExpressionTests.MyList},"s":{"a":2,"n":"set_LP","t":8,"pi":[{"n":"value","pt":$n[1].ExpressionTests.MyList,"ps":0}],"sn":"setLP","rt":Object,"p":[$n[1].ExpressionTests.MyList]}},{"a":2,"n":"P1","t":16,"rt":$n[0].Int32,"g":{"a":2,"n":"get_P1","t":8,"sn":"getP1","rt":$n[0].Int32},"s":{"a":2,"n":"set_P1","t":8,"pi":[{"n":"value","pt":$n[0].Int32,"ps":0}],"sn":"setP1","rt":Object,"p":[$n[0].Int32]}},{"a":2,"n":"CF","t":4,"rt":$n[1].ExpressionTests.C,"sn":"CF"},{"a":2,"n":"F1","t":4,"rt":$n[0].Int32,"sn":"F1"},{"a":2,"n":"LF","t":4,"rt":$n[1].ExpressionTests.MyList,"sn":"LF"}]}; });
     $m($n[1].ExpressionTests.MyList, function () { return {"m":[{"a":2,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Add","t":8,"pi":[{"n":"i","pt":$n[0].Int32,"ps":0}],"sn":"add","rt":Object,"p":[$n[0].Int32]},{"a":2,"n":"Add","t":8,"pi":[{"n":"i","pt":$n[0].Int32,"ps":0},{"n":"j","pt":$n[0].Int32,"ps":1}],"sn":"add$1","rt":Object,"p":[$n[0].Int32,$n[0].Int32]}]}; });
     $m($n[3].GetMembersTests.B1, function () { return {"m":[{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(101)],"a":2,"n":".ctor","t":1,"sn":"ctor"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(102)],"a":2,"n":".ctor","t":1,"p":[$n[0].Int32],"pi":[{"n":"x","pt":$n[0].Int32,"ps":0}],"sn":"$ctor1"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(103)],"a":2,"n":".ctor","t":1,"p":[$n[0].Int32,String],"pi":[{"n":"x","pt":$n[0].Int32,"ps":0},{"n":"y","pt":String,"ps":1}],"sn":"$ctor2"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(111)],"a":2,"n":"MB","t":8,"sn":"MB","rt":Object},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(112)],"a":2,"n":"MB","t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0}],"sn":"MB$1","rt":Object,"p":[$n[0].Int32]},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(113)],"a":2,"n":"MB","t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0},{"n":"y","pt":String,"ps":1}],"sn":"MB$2","rt":Object,"p":[$n[0].Int32,String]},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(114)],"a":2,"n":"MB2","t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0},{"n":"y","pt":String,"ps":1}],"sn":"MB2","rt":Object,"p":[$n[0].Int32,String]},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(121)],"a":2,"n":"MBS","is":true,"t":8,"sn":"MBS","rt":Object},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(122)],"a":2,"n":"MBS","is":true,"t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0}],"sn":"MBS$1","rt":Object,"p":[$n[0].Int32]},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(123)],"a":2,"n":"MBS","is":true,"t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0},{"n":"y","pt":String,"ps":1}],"sn":"MBS$2","rt":Object,"p":[$n[0].Int32,String]},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(124)],"a":2,"n":"MBS2","is":true,"t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0},{"n":"y","pt":String,"ps":1}],"sn":"MBS2","rt":Object,"p":[$n[0].Int32,String]},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(157)],"a":2,"n":"Item","t":16,"rt":$n[0].Int32,"p":[$n[0].Int32],"i":true,"ipi":[{"n":"x","pt":$n[0].Int32,"ps":0}],"g":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(158)],"a":2,"n":"get_Item","t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0}],"sn":"getItem","rt":$n[0].Int32,"p":[$n[0].Int32]},"s":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(159)],"a":2,"n":"set_Item","t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0},{"n":"value","pt":$n[0].Int32,"ps":1}],"sn":"setItem","rt":Object,"p":[$n[0].Int32,$n[0].Int32]}},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(151)],"a":2,"n":"PB1","t":16,"rt":$n[0].Int32,"g":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(152)],"a":2,"n":"get_PB1","t":8,"sn":"getPB1","rt":$n[0].Int32},"s":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(153)],"a":2,"n":"set_PB1","t":8,"pi":[{"n":"value","pt":$n[0].Int32,"ps":0}],"sn":"setPB1","rt":Object,"p":[$n[0].Int32]}},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(154)],"a":2,"n":"PB2","t":16,"rt":$n[0].Int32,"g":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(155)],"a":2,"n":"get_PB2","t":8,"sn":"getPB2","rt":$n[0].Int32},"s":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(156)],"a":2,"n":"set_PB2","t":8,"pi":[{"n":"value","pt":$n[0].Int32,"ps":0}],"sn":"setPB2","rt":Object,"p":[$n[0].Int32]}},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(161)],"a":2,"n":"PBS1","is":true,"t":16,"rt":$n[0].Int32,"g":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(162)],"a":2,"n":"get_PBS1","is":true,"t":8,"sn":"getPBS1","rt":$n[0].Int32},"s":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(163)],"a":2,"n":"set_PBS1","is":true,"t":8,"pi":[{"n":"value","pt":$n[0].Int32,"ps":0}],"sn":"setPBS1","rt":Object,"p":[$n[0].Int32]}},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(164)],"a":2,"n":"PBS2","is":true,"t":16,"rt":$n[0].Int32,"g":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(165)],"a":2,"n":"get_PBS2","is":true,"t":8,"sn":"getPBS2","rt":$n[0].Int32},"s":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(166)],"a":2,"n":"set_PBS2","is":true,"t":8,"pi":[{"n":"value","pt":$n[0].Int32,"ps":0}],"sn":"setPBS2","rt":Object,"p":[$n[0].Int32]}},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(131)],"a":2,"n":"FB1","t":4,"rt":$n[0].Int32,"sn":"FB1"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(132)],"a":2,"n":"FB2","t":4,"rt":$n[0].Int32,"sn":"FB2"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(141)],"a":2,"n":"FBS1","is":true,"t":4,"rt":$n[0].Int32,"sn":"FBS1"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(142)],"a":2,"n":"FBS2","is":true,"t":4,"rt":$n[0].Int32,"sn":"FBS2"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(171)],"a":2,"n":"EB1","t":2,"ad":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(172)],"a":2,"n":"add_EB1","t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"addEB1","rt":Object,"p":[Function]},"r":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(173)],"a":2,"n":"remove_EB1","t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"removeEB1","rt":Object,"p":[Function]}},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(174)],"a":2,"n":"EB2","t":2,"ad":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(175)],"a":2,"n":"add_EB2","t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"addEB2","rt":Object,"p":[Function]},"r":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(176)],"a":2,"n":"remove_EB2","t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"removeEB2","rt":Object,"p":[Function]}},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(181)],"a":2,"n":"EBS1","is":true,"t":2,"ad":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(182)],"a":2,"n":"add_EBS1","is":true,"t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"addEBS1","rt":Object,"p":[Function]},"r":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(183)],"a":2,"n":"remove_EBS1","is":true,"t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"removeEBS1","rt":Object,"p":[Function]}},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(184)],"a":2,"n":"EBS2","is":true,"t":2,"ad":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(185)],"a":2,"n":"add_EBS2","is":true,"t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"addEBS2","rt":Object,"p":[Function]},"r":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(186)],"a":2,"n":"remove_EBS2","is":true,"t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"removeEBS2","rt":Object,"p":[Function]}}]}; });
