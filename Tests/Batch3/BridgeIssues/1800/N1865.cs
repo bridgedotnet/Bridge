@@ -13,19 +13,28 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [ObjectLiteral]
         interface IContract
         {
-            int Value { get; set; }
+            int Value
+            {
+                get; set;
+            }
         }
 
         [ObjectLiteral]
         class Contract : IContract
         {
-            public int Value { get; set; }
+            public int Value
+            {
+                get; set;
+            }
         }
 
         [ObjectLiteral]
         class Contract2 : IContract
         {
-            public int Value { get; set; }
+            public int Value
+            {
+                get; set;
+            }
         }
 
         [Test]

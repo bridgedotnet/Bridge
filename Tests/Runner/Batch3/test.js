@@ -368,6 +368,7 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
             QUnit.test("#2088 - TestObjectLiteralReflection", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2088.testObjectLiteralReflection);
             QUnit.test("#2092 - TestIgnoreGenericForDelegate", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2092.testIgnoreGenericForDelegate);
             QUnit.test("#2094 - TestGenericMethodAsDelegate", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2094.testGenericMethodAsDelegate);
+            QUnit.test("#2106 - TestGenericMethodInObjectLiteral", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2106.testGenericMethodInObjectLiteral);
             QUnit.test("#381 - TestUseCase", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge381.testUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge447.checkInlineExpression);
             QUnit.test("#447 - CheckInlineCalls", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge447.checkInlineCalls);
@@ -5864,7 +5865,7 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
             testObjectLiteralInterface: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1865, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "TestObjectLiteralInterface()",
-                    line: "31"
+                    line: "40"
                 } ));
                 t.getFixture().testObjectLiteralInterface();
             }
@@ -7345,6 +7346,15 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2106", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2106)],
+        statics: {
+            testGenericMethodInObjectLiteral: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2106).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2106, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "TestGenericMethodInObjectLiteral()",
+                    line: "25"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2106.testGenericMethodInObjectLiteral();
+            }
+        },
         context: null,
         getContext: function () {
             if (this.context == null) {

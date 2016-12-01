@@ -4,7 +4,7 @@ using Bridge.Test;
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
     [Category(Constants.MODULE_ISSUES)]
-    [TestFixture(TestNameFormat = "#2003 - {0}")]
+    [TestFixture(TestNameFormat = "#2106 - {0}")]
     public class Bridge2106
     {
         [ObjectLiteral]
@@ -22,6 +22,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
+        [Test]
         public static void TestGenericMethodInObjectLiteral()
         {
             c1<string> o1 = new c1<string>();
