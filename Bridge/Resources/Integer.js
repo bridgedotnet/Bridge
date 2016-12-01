@@ -567,6 +567,24 @@
                     return false;
                 };
 
+                var allLetters = "abcdefghijklmnopqrstuvwxyz";
+
+                var isLetter = function (value) {
+                    return stringContains(allLetters, value.toLowerCase());
+                };
+
+                var tokenCount = function (input, value) {
+                    var count = 0;
+                    for(var i = 0; i < input.length; i++)
+                    {
+                        if (input[i] === value)
+                        {
+                            count += 1;
+                        }
+                    }
+                    return count;
+                };
+
                 if (!provider) {
 
                     var containsWhitespace = stringContains(str, " ");
@@ -617,6 +635,19 @@
                     // double.Parse("10,00") -> 1000
                     // double.Parse("10,10,2.5") -> 10102.5
                     str = strWithNoCommas;
+
+
+                    for (var i = 0; i < str.length; i++) {
+                        if (isLetetr(str[i])) {
+                            if (str[i].toLowerCase() === "e" && tokenCount(str.toLowerCase(), "e") === 1) {
+                                continue;
+                            }
+                            else {
+                                throw new Exception("Input string was not in a correct format.");
+                            }
+                        }
+                    }
+
                 }
 
                 var nfInfo = (provider || System.Globalization.CultureInfo.getCurrentCulture()).getFormat(System.Globalization.NumberFormatInfo),
