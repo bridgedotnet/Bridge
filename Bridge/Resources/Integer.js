@@ -558,6 +558,67 @@
                     throw new System.ArgumentNullException("str");
                 }
 
+                var stringContains = function (str, value) {
+                    for (var i = 0; i < str.length; i++) {
+                        if (str[i] === value) {
+                            return false;
+                        }
+                    }
+                    return true;
+                };
+
+                if (!provider) {
+
+                    var containsWhitespace = stringContains(str, " ");
+
+                    if (containsWhitespace) {
+                        throw new System.FormatException("Input string was not in a correct format.");
+                    }
+
+                    var containsDot = stringContains(str, ".");
+                    var containsComma = stringContains(str, ",");
+
+                    var containsDotWithComma = containsDot && containsComma;
+
+                    if (containsDotWithComma) {
+                        // dot before comma is not allowed
+                        // double.Parse("10,2.5") -> 102.5
+                        // double.Parse("10.2,5") -> FormatException
+                        if (str.indexOf(".") < str.indexOf(",")) {
+                            throw new System.FormatException("Input string was not in a correct format.");
+                        }
+                    }
+
+                    if (containsDot)
+                    {
+                        var dotCount = 0;
+                        for (var i = 0; i < str.length; i++) {
+                            if (str[i] === ".") {
+                                dotCount += 1;
+                            }
+                        }
+
+                        // only one dot is allowed
+                        if (dotCount > 1) {
+                            throw new System.FormatException("Input string was not in a correct format.");
+                        }
+                    }
+
+                    var strWithNoCommas = "";
+
+                    for (var i = 0; i < str.length; i++) {
+                        if (str[i] !== ",") {
+                            strWithNoCommas += str[i];
+                        }
+                    }
+
+                    // mutiple comma's are allowed, so we remove them before going furthur
+                    // double.Parse("1,1,1") -> 111
+                    // double.Parse("10,00") -> 1000
+                    // double.Parse("10,10,2.5") -> 10102.5
+                    str = strWithNoCommas;
+                }
+
                 var nfInfo = (provider || System.Globalization.CultureInfo.getCurrentCulture()).getFormat(System.Globalization.NumberFormatInfo),
                     result = parseFloat(str.replace(nfInfo.numberDecimalSeparator, "."));
 
