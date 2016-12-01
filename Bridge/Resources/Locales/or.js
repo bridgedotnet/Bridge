@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("or", true), {
+Bridge.merge(new System.Globalization.CultureInfo("or", true), {
     englishName: "Odia",
     nativeName: "ଓଡ଼ିଆ",
 

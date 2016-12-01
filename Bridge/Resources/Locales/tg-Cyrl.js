@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("tg-Cyrl", true), {
+Bridge.merge(new System.Globalization.CultureInfo("tg-Cyrl", true), {
     englishName: "Tajik (Cyrillic)",
     nativeName: "Тоҷикӣ",
 

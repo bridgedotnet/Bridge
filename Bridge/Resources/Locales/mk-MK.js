@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("mk-MK", true), {
+Bridge.merge(new System.Globalization.CultureInfo("mk-MK", true), {
     englishName: "Macedonian (Former Yugoslav Republic of Macedonia)",
     nativeName: "македонски јазик (Македонија)",
 

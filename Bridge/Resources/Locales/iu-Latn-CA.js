@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("iu-Latn-CA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("iu-Latn-CA", true), {
     englishName: "Inuktitut (Latin, Canada)",
     nativeName: "Inuktitut (Kanatami)",
 

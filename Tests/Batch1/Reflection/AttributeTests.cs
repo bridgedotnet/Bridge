@@ -82,6 +82,16 @@ namespace Bridge.ClientTest.Batch1.Reflection
                 Assert.True(((AssemblyAttributes.A2Attribute)a[0]).X == 64);
                 Assert.True(((AssemblyAttributes.A2Attribute)a[0]).P == 23);
             }
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((Assembly)null); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((Assembly)null, true); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((Assembly)null, false); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((Assembly)null, null); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((Assembly)null, null, false); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((Assembly)null, null, true); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes(asm, null); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes(asm, null, false); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes(asm, null, true); });
         }
 
         [Test]
@@ -101,6 +111,8 @@ namespace Bridge.ClientTest.Batch1.Reflection
             Assert.NotNull(a3);
             Assert.AreEqual(1, a1.V);
             Assert.AreEqual(3, a3.V);
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((MemberInfo)null); });
         }
 
         [Test]
@@ -120,6 +132,8 @@ namespace Bridge.ClientTest.Batch1.Reflection
             Assert.NotNull(a3);
             Assert.AreEqual(1, a1.V);
             Assert.AreEqual(3, a3.V);
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((MemberInfo)null, true); });
         }
 
         [Test]
@@ -139,6 +153,8 @@ namespace Bridge.ClientTest.Batch1.Reflection
             Assert.NotNull(a3);
             Assert.AreEqual(1, a1.V);
             Assert.AreEqual(3, a3.V);
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((MemberInfo)null, false); });
         }
 
         [Test]
@@ -162,6 +178,9 @@ namespace Bridge.ClientTest.Batch1.Reflection
             Assert.AreEqual(attributes2.Length, 1);
             a2 = attributes2[0] as A2;
             Assert.NotNull(a2);
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((MemberInfo)null, null); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes(member1, null); });
         }
 
         [Test]
@@ -190,6 +209,9 @@ namespace Bridge.ClientTest.Batch1.Reflection
             a3 = attributes2[0] as A3;
             Assert.NotNull(a3);
             Assert.AreEqual(3, a3.V);
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((MemberInfo)null, null, false); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes(member1, null, false); });
         }
 
         [Test]
@@ -218,6 +240,9 @@ namespace Bridge.ClientTest.Batch1.Reflection
             a3 = attributes2[0] as A3;
             Assert.NotNull(a3);
             Assert.AreEqual(3, a3.V);
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((MemberInfo)null, null, true); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes(member1, null, true); });
         }
 
         [Test]
@@ -239,6 +264,8 @@ namespace Bridge.ClientTest.Batch1.Reflection
             Assert.NotNull(a3);
             Assert.AreEqual(1000, a1.V);
             Assert.AreEqual(3000, a3.V);
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((ParameterInfo)null); });
         }
 
         [Test]
@@ -258,6 +285,8 @@ namespace Bridge.ClientTest.Batch1.Reflection
             Assert.NotNull(a3);
             Assert.AreEqual(1000, a1.V);
             Assert.AreEqual(3000, a3.V);
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((ParameterInfo)null, true); });
         }
 
         [Test]
@@ -277,6 +306,8 @@ namespace Bridge.ClientTest.Batch1.Reflection
             Assert.NotNull(a3);
             Assert.AreEqual(1000, a1.V);
             Assert.AreEqual(3000, a3.V);
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((ParameterInfo)null, false); });
         }
 
         [Test]
@@ -300,6 +331,9 @@ namespace Bridge.ClientTest.Batch1.Reflection
             Assert.AreEqual(attributes2.Length, 1);
             a2 = attributes2[0] as A2;
             Assert.NotNull(a2);
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((ParameterInfo)null, null); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes(parameter1, null); });
         }
 
         [Test]
@@ -328,6 +362,9 @@ namespace Bridge.ClientTest.Batch1.Reflection
             a3 = attributes2[0] as A3;
             Assert.NotNull(a3);
             Assert.AreEqual(3000, a3.V);
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((ParameterInfo)null, null, false); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes(parameter1, null, false); });
         }
 
         [Test]
@@ -356,6 +393,9 @@ namespace Bridge.ClientTest.Batch1.Reflection
             a3 = attributes2[0] as A3;
             Assert.NotNull(a3);
             Assert.AreEqual(3000, a3.V);
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((ParameterInfo)null, null, true); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes(parameter1, null, true); });
         }
     }
 }

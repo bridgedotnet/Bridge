@@ -129,6 +129,22 @@ namespace Bridge.Translator
 
             if (inlineCode == null && isPlainObjectCtor && isPlainMode)
             {
+                if (isObjectLiteral)
+                {
+                    if (this.Emitter.Validator.IsIgnoreType(type))
+                    {
+                        this.Write("Bridge.literal(");
+                        objectCreateExpression.Type.AcceptVisitor(this.Emitter);
+                        this.Write(", ");
+                    }
+                    else
+                    {
+                        objectCreateExpression.Type.AcceptVisitor(this.Emitter);
+                        this.Write(".ctor");
+                        this.WriteOpenParentheses();
+                    }
+                }
+
                 this.WriteOpenBrace();
                 this.WriteSpace();
 
@@ -136,6 +152,11 @@ namespace Bridge.Translator
                 this.WriteSpace();
 
                 this.WriteCloseBrace();
+
+                if (isObjectLiteral)
+                {
+                    this.WriteCloseParentheses();
+                }
             }
             else
             {

@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ko", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ko", true), {
     englishName: "Korean",
     nativeName: "한국어",
 

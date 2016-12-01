@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sv-SE", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sv-SE", true), {
     englishName: "Swedish (Sweden)",
     nativeName: "svenska (Sverige)",
 

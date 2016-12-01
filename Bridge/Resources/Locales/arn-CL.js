@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("arn-CL", true), {
+Bridge.merge(new System.Globalization.CultureInfo("arn-CL", true), {
     englishName: "Mapudungun (Chile)",
     nativeName: "Mapudungun (Chile)",
 

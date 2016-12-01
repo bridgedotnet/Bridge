@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("qut-GT", true), {
+Bridge.merge(new System.Globalization.CultureInfo("qut-GT", true), {
     englishName: "K'iche' (Guatemala)",
     nativeName: "K'iche' (Guatemala)",
 

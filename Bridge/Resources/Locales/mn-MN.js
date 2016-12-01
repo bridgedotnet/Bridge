@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("mn-MN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("mn-MN", true), {
     englishName: "Mongolian (Cyrillic, Mongolia)",
     nativeName: "Монгол хэл (Монгол улс)",
 

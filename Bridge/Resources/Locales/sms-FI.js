@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sms-FI", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sms-FI", true), {
     englishName: "Sami, Skolt (Finland)",
     nativeName: "sää´mǩiõll (Lää´ddjânnam)",
 

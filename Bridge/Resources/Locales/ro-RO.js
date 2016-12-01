@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ro-RO", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ro-RO", true), {
     englishName: "Romanian (Romania)",
     nativeName: "română (România)",
 

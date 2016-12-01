@@ -1,4 +1,4 @@
-﻿    var array = {
+    var array = {
         toIndex: function (arr, indices) {
             if (indices.length !== (arr.$s ? arr.$s.length : 1)) {
                 throw new System.ArgumentException("Invalid number of indices");

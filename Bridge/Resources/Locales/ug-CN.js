@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ug-CN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ug-CN", true), {
     englishName: "Uyghur (China)",
     nativeName: "ئۇيغۇرچە (جۇڭخۇا خەلق جۇمھۇرىيىتى)",
 

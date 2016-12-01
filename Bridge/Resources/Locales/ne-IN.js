@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ne-IN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ne-IN", true), {
     englishName: "Nepali (India)",
     nativeName: "नेपाली (भारत)",
 

@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ar-YE", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ar-YE", true), {
     englishName: "Arabic (Yemen)",
     nativeName: "العربية (اليمن)",
 

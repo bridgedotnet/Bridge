@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("smj", true), {
+Bridge.merge(new System.Globalization.CultureInfo("smj", true), {
     englishName: "Sami (Lule)",
     nativeName: "julevusámegiella",
 

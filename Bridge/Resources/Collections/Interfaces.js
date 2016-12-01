@@ -1,4 +1,4 @@
-﻿    Bridge.define('System.Collections.IEnumerable', {
+    Bridge.define('System.Collections.IEnumerable', {
         $kind: "interface"
     });
     Bridge.define('System.Collections.IEnumerator', {

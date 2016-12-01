@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("zu-ZA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("zu-ZA", true), {
     englishName: "isiZulu (South Africa)",
     nativeName: "isiZulu (iNingizimu Afrika)",
 

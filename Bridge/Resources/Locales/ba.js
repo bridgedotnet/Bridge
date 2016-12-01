@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ba", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ba", true), {
     englishName: "Bashkir",
     nativeName: "Башҡорт",
 

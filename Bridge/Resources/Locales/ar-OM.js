@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ar-OM", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ar-OM", true), {
     englishName: "Arabic (Oman)",
     nativeName: "العربية (عمان)",
 

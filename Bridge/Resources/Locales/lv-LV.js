@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("lv-LV", true), {
+Bridge.merge(new System.Globalization.CultureInfo("lv-LV", true), {
     englishName: "Latvian (Latvia)",
     nativeName: "latviešu (Latvija)",
 

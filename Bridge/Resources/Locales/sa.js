@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sa", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sa", true), {
     englishName: "Sanskrit",
     nativeName: "संस्कृत",
 

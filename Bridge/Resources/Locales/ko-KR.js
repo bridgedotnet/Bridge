@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ko-KR", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ko-KR", true), {
     englishName: "Korean (Korea)",
     nativeName: "한국어(대한민국)",
 

@@ -1,4 +1,4 @@
-﻿    Bridge.define('System.Collections.Generic.KeyValuePair$2', function (TKey, TValue) {
+    Bridge.define('System.Collections.Generic.KeyValuePair$2', function (TKey, TValue) {
         return {
             $kind: "struct",
 

@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("uz", true), {
+Bridge.merge(new System.Globalization.CultureInfo("uz", true), {
     englishName: "Uzbek",
     nativeName: "O'zbekcha",
 

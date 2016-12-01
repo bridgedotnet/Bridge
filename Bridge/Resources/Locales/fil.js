@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("fil", true), {
+Bridge.merge(new System.Globalization.CultureInfo("fil", true), {
     englishName: "Filipino",
     nativeName: "Filipino",
 

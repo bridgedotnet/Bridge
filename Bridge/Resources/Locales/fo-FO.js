@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("fo-FO", true), {
+Bridge.merge(new System.Globalization.CultureInfo("fo-FO", true), {
     englishName: "Faroese (Faroe Islands)",
     nativeName: "føroyskt (Føroyar)",
 

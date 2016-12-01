@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sk-SK", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sk-SK", true), {
     englishName: "Slovak (Slovakia)",
     nativeName: "slovenčina (Slovenská republika)",
 

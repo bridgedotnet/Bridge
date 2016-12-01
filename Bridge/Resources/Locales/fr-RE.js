@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("fr-RE", true), {
+Bridge.merge(new System.Globalization.CultureInfo("fr-RE", true), {
     englishName: "French (Réunion)",
     nativeName: "français (Réunion)",
 

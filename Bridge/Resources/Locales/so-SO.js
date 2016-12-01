@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("so-SO", true), {
+Bridge.merge(new System.Globalization.CultureInfo("so-SO", true), {
     englishName: "Somali (Somalia)",
     nativeName: "Soomaali (Soomaaliya)",
 

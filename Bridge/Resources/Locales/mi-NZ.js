@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("mi-NZ", true), {
+Bridge.merge(new System.Globalization.CultureInfo("mi-NZ", true), {
     englishName: "Maori (New Zealand)",
     nativeName: "Reo Māori (Aotearoa)",
 

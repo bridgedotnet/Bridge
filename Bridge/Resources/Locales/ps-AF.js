@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ps-AF", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ps-AF", true), {
     englishName: "Pashto (Afghanistan)",
     nativeName: "پښتو (افغانستان)",
 

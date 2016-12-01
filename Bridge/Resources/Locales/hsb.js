@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("hsb", true), {
+Bridge.merge(new System.Globalization.CultureInfo("hsb", true), {
     englishName: "Upper Sorbian",
     nativeName: "hornjoserbšćina",
 

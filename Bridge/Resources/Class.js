@@ -1,4 +1,4 @@
-﻿    var base = {
+    var base = {
         _initialize: function () {
             if (this.$initialized) {
                 return;
@@ -171,8 +171,10 @@
 
             if (!cls) {
                 if (prop.$literal) {
-                    Class = function () {
-                        return {};
+                    Class = function (obj) {
+                        obj = obj || {};
+                        obj.$getType = function () { return Class };
+                        return obj;
                     };
                 } else {
                     Class = function () {
@@ -189,6 +191,19 @@
                 prop.ctor = Class;
             } else {
                 Class = cls;
+            }
+
+            if (prop.$literal) {
+                if ((!statics || !statics.getDefaultValue)) {
+                    Class.getDefaultValue = function() {
+                        var obj = {};
+                        obj.$getType = function() { return Class };
+                        return obj;
+                    };
+                }
+
+                Class.$literal = true;
+                delete prop.$literal;
             }
 
             if (!isGenericInstance) {

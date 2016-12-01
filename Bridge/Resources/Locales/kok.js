@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("kok", true), {
+Bridge.merge(new System.Globalization.CultureInfo("kok", true), {
     englishName: "Konkani",
     nativeName: "कोंकणी",
 

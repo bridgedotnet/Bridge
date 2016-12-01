@@ -1,4 +1,4 @@
-﻿    Bridge.define("System.Text.RegularExpressions.RegexEngine", {
+    Bridge.define("System.Text.RegularExpressions.RegexEngine", {
         _pattern: "",
         _patternInfo: null,
 

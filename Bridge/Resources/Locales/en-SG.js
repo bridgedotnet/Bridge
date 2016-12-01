@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("en-SG", true), {
+Bridge.merge(new System.Globalization.CultureInfo("en-SG", true), {
     englishName: "English (Singapore)",
     nativeName: "English (Singapore)",
 

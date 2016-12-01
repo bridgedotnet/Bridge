@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("fr-LU", true), {
+Bridge.merge(new System.Globalization.CultureInfo("fr-LU", true), {
     englishName: "French (Luxembourg)",
     nativeName: "français (Luxembourg)",
 

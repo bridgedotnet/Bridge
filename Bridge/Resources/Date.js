@@ -1,4 +1,4 @@
-﻿    Bridge.define("System.DayOfWeek", {
+    Bridge.define("System.DayOfWeek", {
         $kind: "enum",
         $statics: {
             Sunday: 0,

@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("is-IS", true), {
+Bridge.merge(new System.Globalization.CultureInfo("is-IS", true), {
     englishName: "Icelandic (Iceland)",
     nativeName: "íslenska (Ísland)",
 

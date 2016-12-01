@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("prs-AF", true), {
+Bridge.merge(new System.Globalization.CultureInfo("prs-AF", true), {
     englishName: "Dari (Afghanistan)",
     nativeName: "درى (افغانستان)",
 

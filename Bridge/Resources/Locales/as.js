@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("as", true), {
+Bridge.merge(new System.Globalization.CultureInfo("as", true), {
     englishName: "Assamese",
     nativeName: "অসমীয়া",
 

@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("prs", true), {
+Bridge.merge(new System.Globalization.CultureInfo("prs", true), {
     englishName: "Dari",
     nativeName: "درى",
 

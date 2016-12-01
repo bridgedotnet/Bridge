@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("zgh-Tfng-MA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("zgh-Tfng-MA", true), {
     englishName: "Standard Morrocan Tamazight (Tifinagh, Morocco)",
     nativeName: "ⵜⴰⵎⴰⵣⵉⵖⵜ (ⵍⵎⵖⵔⵉⴱ)",
 

@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ca-ES", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ca-ES", true), {
     englishName: "Catalan (Catalan)",
     nativeName: "Català (Català)",
 

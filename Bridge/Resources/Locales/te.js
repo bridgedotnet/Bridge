@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("te", true), {
+Bridge.merge(new System.Globalization.CultureInfo("te", true), {
     englishName: "Telugu",
     nativeName: "తెలుగు",
 

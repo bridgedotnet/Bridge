@@ -14,7 +14,7 @@ namespace System
         /// </summary>
         /// <param name="element">An object derived from the Assembly class that describes a reusable collection of modules.</param>
         /// <returns>An Attribute array that contains the custom attributes applied to element, or an empty array if no such custom attributes exist.</returns>
-        [Template("{element}.getCustomAttributes()")]
+        [Template("System.Attribute.getCustomAttributes$1({element}, false)")]
         public static extern Attribute[] GetCustomAttributes(Assembly element);
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace System
         /// <param name="element">An object derived from the Assembly class that describes a reusable collection of modules.</param>
         /// <param name="inherit">This parameter is ignored, and does not affect the operation of this method.</param>
         /// <returns>An Attribute array that contains the custom attributes applied to element, or an empty array if no such custom attributes exist.</returns>
-        [Template("{element}.getCustomAttributes({inherit})")]
+        [Template("System.Attribute.getCustomAttributes$1({element}, false, {inherit})")]
         public static extern Attribute[] GetCustomAttributes(Assembly element, bool inherit);
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace System
         /// <param name="element">An object derived from the Assembly class that describes a reusable collection of modules.</param>
         /// <param name="attributeType">The type, or a base type, of the custom attribute to search for.</param>
         /// <returns>An Attribute array that contains the custom attributes of type attributeType applied to element, or an empty array if no such custom attributes exist.</returns>
-        [Template("{element}.getCustomAttributes({attributeType})")]
+        [Template("System.Attribute.getCustomAttributes$1({element}, {attributeType})")]
         public static extern Attribute[] GetCustomAttributes(Assembly element, Type attributeType);
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace System
         /// <param name="attributeType">The type, or a base type, of the custom attribute to search for.</param>
         /// <param name="inherit">This parameter is ignored, and does not affect the operation of this method.</param>
         /// <returns>An Attribute array that contains the custom attributes of type attributeType applied to element, or an empty array if no such custom attributes exist.</returns>
-        [Template("{element}.getCustomAttributes({attributeType}, {inherit})")]
+        [Template("System.Attribute.getCustomAttributes$1({element}, {attributeType}, {inherit})")]
         public static extern Attribute[] GetCustomAttributes(Assembly element, Type attributeType, bool inherit);
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace System
         /// </summary>
         /// <param name="element">An object derived from the MemberInfo class that describes a constructor, event, field, method, or property member of a class.</param>
         /// <returns>An Attribute array that contains the custom attributes applied to element, or an empty array if no such custom attributes exist.</returns>
-        [Template("System.Attribute.getCustomAttributes({element})")]
+        [Template("System.Attribute.getCustomAttributes({element}, false)")]
         public static extern Attribute[] GetCustomAttributes(MemberInfo element);
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace System
         /// <param name="element">An object derived from the MemberInfo class that describes a constructor, event, field, method, or property member of a class.</param>
         /// <param name="inherit">If true, specifies to also search the ancestors of element for custom attributes.</param>
         /// <returns>An Attribute array that contains the custom attributes applied to element, or an empty array if no such custom attributes exist.</returns>
-        [Template("System.Attribute.getCustomAttributes({element}, null, {inherit})")]
+        [Template("System.Attribute.getCustomAttributes({element}, false, {inherit})")]
         public static extern Attribute[] GetCustomAttributes(MemberInfo element, bool inherit);
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace System
         /// </summary>
         /// <param name="element">An object derived from the ParameterInfo class that describes a parameter of a member of a class.</param>
         /// <returns>An Attribute array that contains the custom attributes applied to element, or an empty array if no such custom attributes exist.</returns>
-        [Template("System.Attribute.getCustomAttributes({element})")]
+        [Template("System.Attribute.getCustomAttributes({element}, false)")]
         public static extern Attribute[] GetCustomAttributes(ParameterInfo element);
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace System
         /// <param name="element">An object derived from the ParameterInfo class that describes a parameter of a member of a class.</param>
         /// <param name="inherit">If true, specifies to also search the ancestors of element for custom attributes.</param>
         /// <returns>An Attribute array that contains the custom attributes applied to element, or an empty array if no such custom attributes exist.</returns>
-        [Template("System.Attribute.getCustomAttributes({element}, null, {inherit})")]
+        [Template("System.Attribute.getCustomAttributes({element}, false, {inherit})")]
         public static extern Attribute[] GetCustomAttributes(ParameterInfo element, bool inherit);
 
         /// <summary>

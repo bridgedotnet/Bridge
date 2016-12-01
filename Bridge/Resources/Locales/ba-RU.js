@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ba-RU", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ba-RU", true), {
     englishName: "Bashkir (Russia)",
     nativeName: "Башҡорт (Рәсәй)",
 

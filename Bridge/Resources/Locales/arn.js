@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("arn", true), {
+Bridge.merge(new System.Globalization.CultureInfo("arn", true), {
     englishName: "Mapudungun",
     nativeName: "Mapudungun",
 

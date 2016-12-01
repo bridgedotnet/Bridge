@@ -3524,7 +3524,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         getCustomAttributesForAssemblyWorks: function () {
             var $t, $t1;
             var asm = $asm;
-            $t = Bridge.getEnumerator([asm.getCustomAttributes(), asm.getCustomAttributes(true), asm.getCustomAttributes(false)]);
+            $t = Bridge.getEnumerator([System.Attribute.getCustomAttributes$1(asm, false), System.Attribute.getCustomAttributes$1(asm, false, true), System.Attribute.getCustomAttributes$1(asm, false, false)]);
             while ($t.moveNext()) {
                 var a = $t.getCurrent();
                 Bridge.Test.Assert.false(a.some($asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f1));
@@ -3539,18 +3539,34 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.Assert.true(Bridge.cast(a3[0], Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A3Attribute).getP() === 45);
             }
 
-            $t1 = Bridge.getEnumerator([asm.getCustomAttributes(Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A2Attribute), asm.getCustomAttributes(Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A2Attribute, true), asm.getCustomAttributes(Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A2Attribute, false)]);
+            $t1 = Bridge.getEnumerator([System.Attribute.getCustomAttributes$1(asm, Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A2Attribute), System.Attribute.getCustomAttributes$1(asm, Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A2Attribute, true), System.Attribute.getCustomAttributes$1(asm, Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A2Attribute, false)]);
             while ($t1.moveNext()) {
                 var a1 = $t1.getCurrent();
                 Bridge.Test.Assert.areEqual(a1.length, 1);
                 Bridge.Test.Assert.true(Bridge.cast(a1[0], Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A2Attribute).getX() === 64);
                 Bridge.Test.Assert.true(Bridge.cast(a1[0], Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A2Attribute).getP() === 23);
             }
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f4);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f5);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f6);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f7);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f8);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f9);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, function () {
+                System.Attribute.getCustomAttributes$1(asm, null);
+            });
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, function () {
+                System.Attribute.getCustomAttributes$1(asm, null, false);
+            });
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, function () {
+                System.Attribute.getCustomAttributes$1(asm, null, true);
+            });
         },
         getCustomAttributesForMemberInfoWorks: function () {
             var member1 = Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 31, 28, "DoSomething")[0];
 
-            var attributes1 = System.Attribute.getCustomAttributes(member1);
+            var attributes1 = System.Attribute.getCustomAttributes(member1, false);
 
             var a1 = null;
             var a3 = null;
@@ -3562,11 +3578,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.notNull(a3);
             Bridge.Test.Assert.areEqual(1, a1.getV());
             Bridge.Test.Assert.areEqual(3, a3.getV());
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f10);
         },
         getCustomAttributesForMemberInfoInheritTrueWorks: function () {
             var member1 = Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 31, 28, "DoSomething")[0];
 
-            var attributes1 = System.Attribute.getCustomAttributes(member1, null, true);
+            var attributes1 = System.Attribute.getCustomAttributes(member1, false, true);
 
             var a1 = null;
             var a3 = null;
@@ -3578,11 +3596,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.notNull(a3);
             Bridge.Test.Assert.areEqual(1, a1.getV());
             Bridge.Test.Assert.areEqual(3, a3.getV());
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f11);
         },
         getCustomAttributesForMemberInfoInheritFalseWorks: function () {
             var member1 = Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 31, 28, "DoSomething")[0];
 
-            var attributes1 = System.Attribute.getCustomAttributes(member1, null, false);
+            var attributes1 = System.Attribute.getCustomAttributes(member1, false, false);
 
             var a1 = null;
             var a3 = null;
@@ -3594,6 +3614,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.notNull(a3);
             Bridge.Test.Assert.areEqual(1, a1.getV());
             Bridge.Test.Assert.areEqual(3, a3.getV());
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f12);
         },
         getCustomAttributesForMemberInfoTypeWorks: function () {
             var member1 = Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 31, 28, "KeepSomething")[0];
@@ -3614,6 +3636,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.areEqual(attributes2.length, 1);
             a2 = Bridge.as(attributes2[0], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A2);
             Bridge.Test.Assert.notNull(a2);
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f13);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, function () {
+                System.Attribute.getCustomAttributes(member1, null);
+            });
         },
         getCustomAttributesForMemberInfoTypeInheritFalseWorks: function () {
             var member1 = Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 31, 28, "DoSomething")[0];
@@ -3639,6 +3666,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             a3 = Bridge.as(attributes2[0], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A3);
             Bridge.Test.Assert.notNull(a3);
             Bridge.Test.Assert.areEqual(3, a3.getV());
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f14);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, function () {
+                System.Attribute.getCustomAttributes(member1, null, false);
+            });
         },
         getCustomAttributesForMemberInfoTypeInheritTrueWorks: function () {
             var member1 = Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 31, 28, "DoSomething")[0];
@@ -3664,13 +3696,18 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             a3 = Bridge.as(attributes2[0], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A3);
             Bridge.Test.Assert.notNull(a3);
             Bridge.Test.Assert.areEqual(3, a3.getV());
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f15);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, function () {
+                System.Attribute.getCustomAttributes(member1, null, true);
+            });
         },
         getCustomAttributesForParameterInfoWorks: function () {
             var t = Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1;
             var m = Bridge.Reflection.getMembers(t, 8, 284, "DoSomething");
             var parameter1 = (m.pi || [])[0];
 
-            var attributes1 = System.Attribute.getCustomAttributes(parameter1);
+            var attributes1 = System.Attribute.getCustomAttributes(parameter1, false);
 
             var a1 = null;
             var a3 = null;
@@ -3682,11 +3719,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.notNull(a3);
             Bridge.Test.Assert.areEqual(1000, a1.getV());
             Bridge.Test.Assert.areEqual(3000, a3.getV());
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f10);
         },
         getCustomAttributesForParameterInfoInheritTrueWorks: function () {
             var parameter1 = (Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 8, 284, "DoSomething").pi || [])[0];
 
-            var attributes1 = System.Attribute.getCustomAttributes(parameter1, null, true);
+            var attributes1 = System.Attribute.getCustomAttributes(parameter1, false, true);
 
             var a1 = null;
             var a3 = null;
@@ -3698,11 +3737,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.notNull(a3);
             Bridge.Test.Assert.areEqual(1000, a1.getV());
             Bridge.Test.Assert.areEqual(3000, a3.getV());
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f11);
         },
         getCustomAttributesForParameterInfoInheritFalseWorks: function () {
             var parameter1 = (Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 8, 284, "DoSomething").pi || [])[0];
 
-            var attributes1 = System.Attribute.getCustomAttributes(parameter1, null, false);
+            var attributes1 = System.Attribute.getCustomAttributes(parameter1, false, false);
 
             var a1 = null;
             var a3 = null;
@@ -3714,6 +3755,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.notNull(a3);
             Bridge.Test.Assert.areEqual(1000, a1.getV());
             Bridge.Test.Assert.areEqual(3000, a3.getV());
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f12);
         },
         getCustomAttributesForParameterInfoTypeWorks: function () {
             var parameter1 = (Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 8, 284, "KeepSomething").pi || [])[0];
@@ -3734,6 +3777,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.areEqual(attributes2.length, 1);
             a2 = Bridge.as(attributes2[0], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A2);
             Bridge.Test.Assert.notNull(a2);
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f13);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, function () {
+                System.Attribute.getCustomAttributes(parameter1, null);
+            });
         },
         getCustomAttributesForParameterInfoTypeInheritFalseWorks: function () {
             var parameter1 = (Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 8, 284, "DoSomething").pi || [])[0];
@@ -3759,6 +3807,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             a3 = Bridge.as(attributes2[0], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A3);
             Bridge.Test.Assert.notNull(a3);
             Bridge.Test.Assert.areEqual(3000, a3.getV());
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f14);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, function () {
+                System.Attribute.getCustomAttributes(parameter1, null, false);
+            });
         },
         getCustomAttributesForParameterInfoTypeInheritTrueWorks: function () {
             var parameter1 = (Bridge.Reflection.getMembers(Bridge.getType(new Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1()), 8, 284, "DoSomething").pi || [])[0];
@@ -3784,6 +3837,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             a3 = Bridge.as(attributes2[0], Bridge.ClientTest.Batch1.Reflection.AttributeTests.A3);
             Bridge.Test.Assert.notNull(a3);
             Bridge.Test.Assert.areEqual(3000, a3.getV());
+
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch1.Reflection.AttributeTests.f15);
+            Bridge.Test.Assert.throws$6(System.ArgumentNullException, function () {
+                System.Attribute.getCustomAttributes(parameter1, null, true);
+            });
         }
     });
 
@@ -3798,6 +3856,42 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         f3: function (x) {
             return Bridge.is(x, Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A3Attribute);
+        },
+        f4: function () {
+            System.Attribute.getCustomAttributes$1(null, false);
+        },
+        f5: function () {
+            System.Attribute.getCustomAttributes$1(null, false, true);
+        },
+        f6: function () {
+            System.Attribute.getCustomAttributes$1(null, false, false);
+        },
+        f7: function () {
+            System.Attribute.getCustomAttributes$1(null, null);
+        },
+        f8: function () {
+            System.Attribute.getCustomAttributes$1(null, null, false);
+        },
+        f9: function () {
+            System.Attribute.getCustomAttributes$1(null, null, true);
+        },
+        f10: function () {
+            System.Attribute.getCustomAttributes(null, false);
+        },
+        f11: function () {
+            System.Attribute.getCustomAttributes(null, false, true);
+        },
+        f12: function () {
+            System.Attribute.getCustomAttributes(null, false, false);
+        },
+        f13: function () {
+            System.Attribute.getCustomAttributes(null, null);
+        },
+        f14: function () {
+            System.Attribute.getCustomAttributes(null, null, false);
+        },
+        f15: function () {
+            System.Attribute.getCustomAttributes(null, null, true);
         }
     });
 
@@ -14620,7 +14714,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.true$1(Bridge.isPlainObject(o), "IsPlainObject");
         },
         genericParseWorks: function () {
-            var o = Bridge.merge(Bridge.createInstance(Object), JSON.parse("{ \"i\": 3, \"s\": \"test\" }"));
+            var o = Bridge.merge(Bridge.createInstance(Bridge.ClientTest.JsonTests.TestClass2), JSON.parse("{ \"i\": 3, \"s\": \"test\" }"));
             Bridge.Test.Assert.areEqual(3, o.i);
             Bridge.Test.Assert.areEqual("test", o.s);
             Bridge.Test.Assert.true$1(Bridge.isPlainObject(o), "IsPlainObject");
@@ -14632,7 +14726,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.true$1(Bridge.isPlainObject(o), "IsPlainObject");
         },
         genericParseWithCallbackWorks: function () {
-            var o = Bridge.merge(Bridge.createInstance(Object), JSON.parse("{ \"i\": 3, \"s\": \"test\" }", $asm.$.Bridge.ClientTest.JsonTests.f1));
+            var o = Bridge.merge(Bridge.createInstance(Bridge.ClientTest.JsonTests.TestClass2), JSON.parse("{ \"i\": 3, \"s\": \"test\" }", $asm.$.Bridge.ClientTest.JsonTests.f1));
             Bridge.Test.Assert.areEqual(100, o.i);
             Bridge.Test.Assert.areEqual("test", o.s);
             Bridge.Test.Assert.true$1(Bridge.isPlainObject(o), "IsPlainObject");
@@ -14702,43 +14796,43 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.true$1(Bridge.isPlainObject(o), "IsPlainObject");
         },
         stringifyWorks: function () {
-            Bridge.Test.Assert.areEqual("{\"i\":3}", JSON.stringify({ i: 3 }));
+            Bridge.Test.Assert.areEqual("{\"i\":3}", JSON.stringify(Bridge.ClientTest.JsonTests.TestClass1.ctor({ i: 3 })));
         },
         stringifyWithSerializableMembersArrayWorks: function () {
-            Bridge.Test.Assert.areEqual("{\"i\":3}", JSON.stringify({ i: 3, s: "test" }, ["i"]));
+            Bridge.Test.Assert.areEqual("{\"i\":3}", JSON.stringify(Bridge.ClientTest.JsonTests.TestClass2.ctor({ i: 3, s: "test" }), ["i"]));
         },
         stringifyWithSerializableMembersArrayAndIntentCountWorks: function () {
-            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify({ i: 3, s: "test" }, ["i"], 4));
+            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify(Bridge.ClientTest.JsonTests.TestClass2.ctor({ i: 3, s: "test" }), ["i"], 4));
         },
         stringifyWithSerializableMembersArrayAndIntentTextWorks: function () {
-            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify({ i: 3, s: "test" }, ["i"], "    "));
+            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify(Bridge.ClientTest.JsonTests.TestClass2.ctor({ i: 3, s: "test" }), ["i"], "    "));
         },
         stringifyWithCallbackWorks: function () {
-            Bridge.Test.Assert.areEqual("{\"i\":3}", JSON.stringify({ i: 3, s: "test" }, $asm.$.Bridge.ClientTest.JsonTests.f2));
+            Bridge.Test.Assert.areEqual("{\"i\":3}", JSON.stringify(Bridge.ClientTest.JsonTests.TestClass2.ctor({ i: 3, s: "test" }), $asm.$.Bridge.ClientTest.JsonTests.f2));
         },
         stringifyWithCallbackAndIndentCountWorks: function () {
-            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify({ i: 3, s: "test" }, $asm.$.Bridge.ClientTest.JsonTests.f2, 4));
+            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify(Bridge.ClientTest.JsonTests.TestClass2.ctor({ i: 3, s: "test" }), $asm.$.Bridge.ClientTest.JsonTests.f2, 4));
         },
         stringifyWithCallbackAndIndentTextWorks: function () {
-            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify({ i: 3, s: "test" }, $asm.$.Bridge.ClientTest.JsonTests.f2, "    "));
+            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify(Bridge.ClientTest.JsonTests.TestClass2.ctor({ i: 3, s: "test" }), $asm.$.Bridge.ClientTest.JsonTests.f2, "    "));
         },
         stringifyWithSerializableMembersArrayWorks3: function () {
-            Bridge.Test.Assert.areEqual("{\"i\":3}", JSON.stringify({ i: 3, s: "test" }, ["i"]));
+            Bridge.Test.Assert.areEqual("{\"i\":3}", JSON.stringify(Bridge.ClientTest.JsonTests.TestClass3.ctor({ i: 3, s: "test" }), ["i"]));
         },
         stringifyWithSerializableMembersArrayAndIntentCountWorks3: function () {
-            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify({ i: 3, s: "test" }, ["i"], 4));
+            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify(Bridge.ClientTest.JsonTests.TestClass3.ctor({ i: 3, s: "test" }), ["i"], 4));
         },
         stringifyWithSerializableMembersArrayAndIntentTextWorks3: function () {
-            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify({ i: 3, s: "test" }, ["i"], "    "));
+            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify(Bridge.ClientTest.JsonTests.TestClass3.ctor({ i: 3, s: "test" }), ["i"], "    "));
         },
         stringifyWithCallbackWorks3: function () {
-            Bridge.Test.Assert.areEqual("{\"i\":3}", JSON.stringify({ i: 3, s: "test" }, $asm.$.Bridge.ClientTest.JsonTests.f2));
+            Bridge.Test.Assert.areEqual("{\"i\":3}", JSON.stringify(Bridge.ClientTest.JsonTests.TestClass3.ctor({ i: 3, s: "test" }), $asm.$.Bridge.ClientTest.JsonTests.f2));
         },
         stringifyWithCallbackAndIndentCountWorks3: function () {
-            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify({ i: 3, s: "test" }, $asm.$.Bridge.ClientTest.JsonTests.f2, 4));
+            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify(Bridge.ClientTest.JsonTests.TestClass3.ctor({ i: 3, s: "test" }), $asm.$.Bridge.ClientTest.JsonTests.f2, 4));
         },
         stringifyWithCallbackAndIndentTextWorks3: function () {
-            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify({ i: 3, s: "test" }, $asm.$.Bridge.ClientTest.JsonTests.f2, "    "));
+            Bridge.Test.Assert.areEqual("{\n    \"i\": 3\n}", JSON.stringify(Bridge.ClientTest.JsonTests.TestClass3.ctor({ i: 3, s: "test" }), $asm.$.Bridge.ClientTest.JsonTests.f2, "    "));
         },
         stringifyWithSerializableMembersArrayWorks4: function () {
             Bridge.Test.Assert.areEqual("{\"i\":3}", JSON.stringify(Bridge.merge(Bridge.ClientTest.JsonTests.TestClass4.ctor(), {
@@ -14784,6 +14878,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         f2: function (key, value) {
             return Bridge.referenceEquals(key, "s") ? undefined : value;
         }
+    });
+
+    Bridge.define("Bridge.ClientTest.JsonTests.TestClass1", {
+        $literal: true
+    });
+
+    Bridge.define("Bridge.ClientTest.JsonTests.TestClass2", {
+        $literal: true
     });
 
     Bridge.define("Bridge.ClientTest.JsonTests.TestClass3", {
@@ -19720,11 +19822,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.ObjectLiteralTests.Bridge1529", {
         testObjectLiteral: function () {
-            var c = { temp: "Frank" };
-            var tempFrank = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.Config.prototype.getTmp.call({  }, c);
+            var c = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.Config.ctor({ temp: "Frank" });
+            var tempFrank = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.Config.prototype.getTmp.call(Bridge.ClientTest.ObjectLiteralTests.Bridge1529.Config.ctor({  }), c);
             Bridge.Test.Assert.areEqual$1("1: Frank", tempFrank, "Check call works");
 
-            var options = { data: { name: c.temp } };
+            var options = Bridge.literal(Object, { data: { name: c.temp } });
             Bridge.Test.Assert.areEqual$1("Frank", options.data.name, "External referenced default ObjectLiteral works");
 
             var bs = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.ctor();
@@ -19851,7 +19953,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.areEqual$1(1, config1.val1, "config1 Val1");
             Bridge.Test.Assert.areEqual$1(11, config1.val2, "config1 Val2");
 
-            var config2 = { val1: 2, val2: 0 };
+            var config2 = Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config2.ctor({ val1: 2, val2: 0 });
             Bridge.Test.Assert.notNull$1(config2, "DefaultValue and Plain Modes config2 created");
             Bridge.Test.Assert.areEqual$1(2, config2.val1, "config2 Val1");
             Bridge.Test.Assert.areEqual$1(0, config2.val2, "config2 Val2");
@@ -19861,7 +19963,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.areEqual$1(3, config3.val1, "config3 Val1");
             Bridge.Test.Assert.areEqual$1(13, config3.val2, "config3 Val2");
 
-            var config4 = {  };
+            var config4 = Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config4.ctor({  });
             Bridge.Test.Assert.notNull$1(config4, "Ignore and Plain Modes config4 created");
             Bridge.Test.Assert.null$1(config4.val1, "config4 Val1");
             Bridge.Test.Assert.null$1(config4.val2, "config4 Val2");
@@ -19871,7 +19973,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.areEqual$1(5, config5.val1, "config5 Val1");
             Bridge.Test.Assert.areEqual$1(15, config5.val2, "config5 Val2");
 
-            var config6 = { val1: 6 };
+            var config6 = Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config6.ctor({ val1: 6 });
             Bridge.Test.Assert.notNull$1(config6, "Initializer and Plain Modes config6 created");
             Bridge.Test.Assert.areEqual$1(6, config6.val1, "config6 Val1");
             Bridge.Test.Assert.null$1(config6.val2, "config6 Val2");
@@ -19892,6 +19994,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
+    Bridge.define("Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config2", {
+        $literal: true
+    });
+
     Bridge.define("Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config3", {
         $literal: true,
         ctor: function () {
@@ -19904,6 +20010,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             }).call($this);
             return $this;
         }
+    });
+
+    Bridge.define("Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config4", {
+        $literal: true
     });
 
     Bridge.define("Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config5", {
@@ -19920,6 +20030,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
+    Bridge.define("Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config6", {
+        $literal: true
+    });
+
     Bridge.define("Bridge.ClientTest.ObjectLiteralTests.CreateModeTests", {
         test: function () {
             var config1 = Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config1.ctor();
@@ -19932,12 +20046,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.areEqual$1(2, config2.val1, "config2 Val1");
             Bridge.Test.Assert.areEqual$1(12, config2.val2, "config2 Val2");
 
-            var config3 = {  };
+            var config3 = Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config3.ctor({  });
             Bridge.Test.Assert.notNull$1(config3, "Plain Mode config3 created");
             Bridge.Test.Assert.null$1(config3.val1, "config3 Val1");
             Bridge.Test.Assert.null$1(config3.val2, "config3 Val2");
 
-            var config4 = {  };
+            var config4 = Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config4.ctor({  });
             Bridge.Test.Assert.notNull$1(config4, "Plain Mode config4 created");
             Bridge.Test.Assert.null$1(config4.val1, "config4 Val1");
             Bridge.Test.Assert.null$1(config4.val2, "config4 Val2");
@@ -19972,28 +20086,52 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
+    Bridge.define("Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config3", {
+        $literal: true
+    });
+
+    Bridge.define("Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config4", {
+        $literal: true
+    });
+
     Bridge.define("Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests", {
         test: function () {
-            var config1 = {  };
+            var config1 = Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config1.ctor({  });
             Bridge.Test.Assert.notNull$1(config1, "Default Mode config1 created");
             Bridge.Test.Assert.null$1(config1.val1, "config1 Val1");
             Bridge.Test.Assert.null$1(config1.val2, "config1 Val2");
 
-            var config2 = { val1: 2, val2: 0 };
+            var config2 = Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config2.ctor({ val1: 2, val2: 0 });
             Bridge.Test.Assert.notNull$1(config2, "DefaultValue Mode config2 created");
             Bridge.Test.Assert.areEqual$1(2, config2.val1, "config2 Val1");
             Bridge.Test.Assert.areEqual$1(0, config2.val2, "config2 Val2");
 
-            var config3 = { val1: 3 };
+            var config3 = Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config3.ctor({ val1: 3 });
             Bridge.Test.Assert.notNull$1(config3, "Initializer Mode config3 created");
             Bridge.Test.Assert.areEqual$1(3, config3.val1, "config3 Val1");
             Bridge.Test.Assert.null$1(config3.val2, "config3 Val2");
 
-            var config4 = {  };
+            var config4 = Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config4.ctor({  });
             Bridge.Test.Assert.notNull$1(config4, "Ignore Mode config4 created");
             Bridge.Test.Assert.null$1(config4.val1, "config4 Val1");
             Bridge.Test.Assert.null$1(config4.val2, "config4 Val2");
         }
+    });
+
+    Bridge.define("Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config1", {
+        $literal: true
+    });
+
+    Bridge.define("Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config2", {
+        $literal: true
+    });
+
+    Bridge.define("Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config3", {
+        $literal: true
+    });
+
+    Bridge.define("Bridge.ClientTest.ObjectLiteralTests.InitializationModeTests.Config4", {
+        $literal: true
     });
 
     Bridge.define("Bridge.ClientTest.PropertyAccessorTests", {
@@ -21850,13 +21988,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.areEqual$1(c15.v, "The_value", "Item.SetValue.value");
         },
         testMemberAttribute: function (member, expectedA1) {
-            var all = System.Attribute.getCustomAttributes(member);
+            var all = System.Attribute.getCustomAttributes(member, false);
             Bridge.Test.Assert.areEqual(all.length, 2);
             Bridge.Test.Assert.true(Bridge.is(all[0], Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute) || Bridge.is(all[1], Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute));
             Bridge.Test.Assert.true(Bridge.is(all[0], Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute) || Bridge.is(all[1], Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute));
             Bridge.Test.Assert.areEqual(Bridge.cast((Bridge.is(all[0], Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute) ? all[0] : all[1]), Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute).getX(), expectedA1);
 
-            all = System.Attribute.getCustomAttributes(member, null, true);
+            all = System.Attribute.getCustomAttributes(member, false, true);
             Bridge.Test.Assert.areEqual(all.length, 2);
             Bridge.Test.Assert.true(Bridge.is(all[0], Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute) || Bridge.is(all[1], Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute));
             Bridge.Test.Assert.true(Bridge.is(all[0], Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute) || Bridge.is(all[1], Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute));
@@ -21886,7 +22024,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             this.testMemberAttribute(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C18, 2, 284, "E").ad, 8);
             this.testMemberAttribute(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C18, 2, 284, "E").r, 9);
 
-            Bridge.Test.Assert.areEqual(System.Attribute.getCustomAttributes(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C2, 8, 284, "M1")).length, 0);
+            Bridge.Test.Assert.areEqual(System.Attribute.getCustomAttributes(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C2, 8, 284, "M1"), false).length, 0);
         },
         membersReflectableAttributeWorks: function () {
             var c25 = Bridge.ClientTest.Reflection.ReflectionTests.C25;
@@ -23336,8 +23474,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             return Bridge.cast(o, T);
         },
         castOperatorForSerializableTypeWithoutTypeCheckCodeAlwaysSucceedsGeneric: function () {
-            var o = {  };
-            var b = this.cast(Object, o);
+            var o = Bridge.merge(Bridge.createInstance(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.OL), JSON.parse("{}"));
+            var b = this.cast(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.OL, o);
             Bridge.Test.Assert.true(Bridge.referenceEquals(o, b));
         },
         typeCheckForSubTypeOfGenericType: function () {
@@ -23410,6 +23548,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $kind: "interface",
         $variance: [0,1]
     }; });
+
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.OL", {
+        $literal: true
+    });
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests", {
         getAssemblyName: function () {

@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("be-BY", true), {
+Bridge.merge(new System.Globalization.CultureInfo("be-BY", true), {
     englishName: "Belarusian (Belarus)",
     nativeName: "Беларуская (Беларусь)",
 

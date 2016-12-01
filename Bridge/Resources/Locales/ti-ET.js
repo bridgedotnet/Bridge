@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ti-ET", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ti-ET", true), {
     englishName: "Tigrinya (Ethiopia)",
     nativeName: "ትግርኛ (ኢትዮጵያ)",
 

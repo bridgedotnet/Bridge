@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("gl-ES", true), {
+Bridge.merge(new System.Globalization.CultureInfo("gl-ES", true), {
     englishName: "Galician (Galician)",
     nativeName: "galego (galego)",
 

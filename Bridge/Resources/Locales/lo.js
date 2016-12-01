@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("lo", true), {
+Bridge.merge(new System.Globalization.CultureInfo("lo", true), {
     englishName: "Lao",
     nativeName: "ພາສາລາວ",
 

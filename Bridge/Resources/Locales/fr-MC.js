@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("fr-MC", true), {
+Bridge.merge(new System.Globalization.CultureInfo("fr-MC", true), {
     englishName: "French (Monaco)",
     nativeName: "français (Principauté de Monaco)",
 

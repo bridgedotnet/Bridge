@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ii-CN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ii-CN", true), {
     englishName: "Yi (China)",
     nativeName: "ꆈꌠꁱꂷ (ꍏꉸꏓꂱꇭꉼꇩ)",
 

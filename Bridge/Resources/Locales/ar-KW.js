@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ar-KW", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ar-KW", true), {
     englishName: "Arabic (Kuwait)",
     nativeName: "العربية (الكويت)",
 

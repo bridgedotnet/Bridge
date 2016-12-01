@@ -1,4 +1,4 @@
-﻿    Bridge.define("System.Text.RegularExpressions.RegexEngineParser", {
+    Bridge.define("System.Text.RegularExpressions.RegexEngineParser", {
         statics: {
             _hexSymbols: "0123456789abcdefABCDEF",
             _octSymbols: "01234567",

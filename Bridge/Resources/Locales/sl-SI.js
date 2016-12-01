@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sl-SI", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sl-SI", true), {
     englishName: "Slovenian (Slovenia)",
     nativeName: "slovenščina (Slovenija)",
 

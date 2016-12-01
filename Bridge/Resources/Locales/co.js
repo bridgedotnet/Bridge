@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("co", true), {
+Bridge.merge(new System.Globalization.CultureInfo("co", true), {
     englishName: "Corsican",
     nativeName: "Corsu",
 

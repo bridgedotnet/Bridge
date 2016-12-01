@@ -123,11 +123,6 @@ namespace Bridge.Translator
             bool isCastAttr;
             string castCode = this.GetCastCode(expression, type, out isCastAttr);
 
-            if (itype != null && castCode == null && method != CS.Ops.CAST && itype.GetDefinition() != null && this.Emitter.Validator.IsObjectLiteral(itype.GetDefinition()))
-            {
-                throw new EmitterException(expression, "The type " + itype.FullName + " cannot be used in cast operation because there is no way to check its type");
-            }
-
             var enumType = itype;
             if (NullableType.IsNullable(enumType))
             {

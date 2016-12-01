@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("kl", true), {
+Bridge.merge(new System.Globalization.CultureInfo("kl", true), {
     englishName: "Greenlandic",
     nativeName: "kalaallisut",
 

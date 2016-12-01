@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("tg", true), {
+Bridge.merge(new System.Globalization.CultureInfo("tg", true), {
     englishName: "Tajik",
     nativeName: "Тоҷикӣ",
 

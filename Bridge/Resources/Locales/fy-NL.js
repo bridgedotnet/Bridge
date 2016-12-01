@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("fy-NL", true), {
+Bridge.merge(new System.Globalization.CultureInfo("fy-NL", true), {
     englishName: "Frisian (Netherlands)",
     nativeName: "Frysk (Nederlân)",
 
