@@ -5603,6 +5603,8 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 try {
                     var $Date = 3;
                     var m = (new Date().getMonth() + 1);
+
+                    Bridge.Test.Assert.areEqual$1(3, $Date, "Date");
                 }
                 catch ($e1) {
                     $e1 = System.Exception.create($e1);
@@ -5612,31 +5614,41 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 try {
                     var $String = 4;
                     var s = String().charCodeAt(0);
+
+                    Bridge.Test.Assert.areEqual$1(4, $String, "String");
                 }
                 catch ($e2) {
                     $e2 = System.Exception.create($e2);
                     Bridge.Test.Assert.fail$1("String variable");
                 }
+
                 try {
                     var $Number = 7;
                     Number();
                     (0);
+
+                    Bridge.Test.Assert.areEqual$1(7, $Number, "Number");
                 }
                 catch ($e3) {
                     $e3 = System.Exception.create($e3);
                     Bridge.Test.Assert.fail$1("Number variable");
                 }
+
                 try {
-                    var document = 7;
+                    var document = 8;
                     var c = document.children;
+
+                    Bridge.Test.Assert.areEqual$1(8, document, "document");
                 }
                 catch ($e4) {
                     $e4 = System.Exception.create($e4);
                     Bridge.Test.Assert.fail$1("document variable");
                 }
+
                 try {
-                    var $Bridge = 7;
-                    Bridge.Test.Assert.areEqual(4, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1381.value);
+                    var $Bridge = 9;
+                    Bridge.Test.Assert.areEqual$1(4, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1381.value, "value");
+                    Bridge.Test.Assert.areEqual$1(9, $Bridge, "Bridge");
                 }
                 catch ($e5) {
                     $e5 = System.Exception.create($e5);

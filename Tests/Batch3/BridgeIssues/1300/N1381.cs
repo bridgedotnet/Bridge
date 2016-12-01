@@ -19,6 +19,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 int Date = 3;
 #pragma warning restore 219
                 var m = new DateTime().Month;
+
+                Assert.AreEqual(3, Date, "Date");
             }
             catch (Exception)
             {
@@ -31,11 +33,14 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 int String = 4;
 #pragma warning restore 219
                 var s = new System.String()[0];
+
+                Assert.AreEqual(4, String, "String");
             }
             catch (Exception)
             {
                 Assert.Fail("String variable");
             }
+
             try
             {
 #pragma warning disable 219
@@ -43,28 +48,35 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 #pragma warning restore 219
                 new Double();
                 new Float();
+
+                Assert.AreEqual(7, Number, "Number");
             }
             catch (Exception)
             {
                 Assert.Fail("Number variable");
             }
+
             try
             {
 #pragma warning disable 219
-                int document = 7;
+                int document = 8;
 #pragma warning restore 219
                 var c = Document.Children;
+
+                Assert.AreEqual(8, document, "document");
             }
             catch (Exception)
             {
                 Assert.Fail("document variable");
             }
+
             try
             {
 #pragma warning disable 219
-                int Bridge = 7;
+                int Bridge = 9;
 #pragma warning restore 219
-                Assert.AreEqual(4, value);
+                Assert.AreEqual(4, value, "value");
+                Assert.AreEqual(9, Bridge, "Bridge");
             }
             catch (Exception)
             {
