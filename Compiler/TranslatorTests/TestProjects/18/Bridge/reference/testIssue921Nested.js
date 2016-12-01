@@ -132,22 +132,22 @@
         },
         lambaLiftingWithDelegateChangingType: function () {
             // Lift
-            var toString = $asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f19;
+            var $toString = $asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f19;
 
             var localValue = 7;
 
             return System.Linq.Enumerable.from([1, 2, 3]).select(function (value) {
-                    return toString(((value + 1) | 0));
+                    return $toString(((value + 1) | 0));
                 }).select(function (value) {
-                return toString(value.length);
+                return $toString(value.length);
             }).select(function (value, index) {
-                return toString(((value.length + index) | 0));
+                return $toString(((value.length + index) | 0));
             }).select(Bridge.fn.bind(this, function (value) {
-                return System.String.concat(toString(value.length), this._offset);
+                return System.String.concat($toString(value.length), this._offset);
             })).select(Bridge.fn.bind(this, function (value, index) {
-                return System.String.concat(toString(value.length), index, this._offset);
+                return System.String.concat($toString(value.length), index, this._offset);
             })).select(function (value) {
-                return toString(((value.length + toString(localValue).length) | 0));
+                return $toString(((value.length + $toString(localValue).length) | 0));
             });
         }
     });
