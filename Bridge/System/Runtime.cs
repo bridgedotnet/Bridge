@@ -9,13 +9,6 @@ using System.Threading.Tasks;
 namespace System
 {
     [External]
-    [Name("System.Attribute")]
-    public class Attribute : IBridgeClass
-    {
-        protected extern Attribute();
-    }
-
-    [External]
     [Flags]
     [NonScriptable]
     public enum AttributeTargets

@@ -6,84 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-[assembly: Bridge.ClientTest.Batch1.Reflection.AssemblyTests.A1(41, P = 10)]
-[assembly: Bridge.ClientTest.Batch1.Reflection.AssemblyTests.A2(64, P = 23)]
-[assembly: Bridge.ClientTest.Batch1.Reflection.AssemblyTests.A3(15, P = 45)]
-
 namespace Bridge.ClientTest.Batch1.Reflection
 {
     [Category(Constants.MODULE_REFLECTION)]
     [TestFixture(TestNameFormat = "Reflection - Assembly {0}")]
     public class AssemblyTests
     {
-        [NonScriptable]
-        [External]
-        public class A1Attribute : Attribute
-        {
-            public int X
-            {
-                get; private set;
-            }
-
-            public int P
-            {
-                get; set;
-            }
-
-            public A1Attribute()
-            {
-            }
-
-            public A1Attribute(int x)
-            {
-                this.X = x;
-            }
-        }
-
-        public class A2Attribute : Attribute
-        {
-            public int X
-            {
-                get; private set;
-            }
-
-            public int P
-            {
-                get; set;
-            }
-
-            public A2Attribute()
-            {
-            }
-
-            public A2Attribute(int x)
-            {
-                this.X = x;
-            }
-        }
-
-        public class A3Attribute : Attribute
-        {
-            public int X
-            {
-                get; private set;
-            }
-
-            public int P
-            {
-                get; set;
-            }
-
-            public A3Attribute()
-            {
-            }
-
-            public A3Attribute(int x)
-            {
-                this.X = x;
-            }
-        }
-
         private class C
         {
         }
@@ -255,22 +183,22 @@ namespace Bridge.ClientTest.Batch1.Reflection
             foreach (var a in new[] { asm.GetCustomAttributes(), asm.GetCustomAttributes(true), asm.GetCustomAttributes(false) })
             {
                 Assert.False(a.Some(x => x.GetType().Name == "A1Attribute"));
-                var a2 = a.Filter(x => x is A2Attribute);
+                var a2 = a.Filter(x => x is AssemblyAttributes.A2Attribute);
                 Assert.AreEqual(a2.Length, 1);
-                Assert.True(((A2Attribute)a2[0]).X == 64);
-                Assert.True(((A2Attribute)a2[0]).P == 23);
+                Assert.True(((AssemblyAttributes.A2Attribute)a2[0]).X == 64);
+                Assert.True(((AssemblyAttributes.A2Attribute)a2[0]).P == 23);
 
-                var a3 = a.Filter(x => x is A3Attribute);
+                var a3 = a.Filter(x => x is AssemblyAttributes.A3Attribute);
                 Assert.AreEqual(a3.Length, 1);
-                Assert.True(((A3Attribute)a3[0]).X == 15);
-                Assert.True(((A3Attribute)a3[0]).P == 45);
+                Assert.True(((AssemblyAttributes.A3Attribute)a3[0]).X == 15);
+                Assert.True(((AssemblyAttributes.A3Attribute)a3[0]).P == 45);
             }
 
-            foreach (var a in new[] { asm.GetCustomAttributes(typeof(A2Attribute)), asm.GetCustomAttributes(typeof(A2Attribute), true), asm.GetCustomAttributes(typeof(A2Attribute), false) })
+            foreach (var a in new[] { asm.GetCustomAttributes(typeof(AssemblyAttributes.A2Attribute)), asm.GetCustomAttributes(typeof(AssemblyAttributes.A2Attribute), true), asm.GetCustomAttributes(typeof(AssemblyAttributes.A2Attribute), false) })
             {
                 Assert.AreEqual(a.Length, 1);
-                Assert.True(((A2Attribute)a[0]).X == 64);
-                Assert.True(((A2Attribute)a[0]).P == 23);
+                Assert.True(((AssemblyAttributes.A2Attribute)a[0]).X == 64);
+                Assert.True(((AssemblyAttributes.A2Attribute)a[0]).P == 23);
             }
         }
 

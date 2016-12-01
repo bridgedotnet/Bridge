@@ -1,653 +1,401 @@
-#define THE_SYMBOL
-
 using Bridge.Test;
 using System;
-using System.Diagnostics;
+using System.Reflection;
 
-namespace Bridge.ClientTest.Reflection
+namespace Bridge.ClientTest.Batch1.Reflection
 {
     [Category(Constants.MODULE_REFLECTION)]
     [TestFixture(TestNameFormat = "Reflection - Attribute {0}")]
     public class AttributeTests
     {
-        private class A1Attribute : Attribute
+        private class A1 : Attribute
         {
             public int V
             {
                 get;
-                private set;
+                protected set;
             }
 
-            public A1Attribute(int v)
-            {
-                this.V = v;
-            }
-        }
-
-        [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
-        private class A2Attribute : Attribute
-        {
-            public int V
-            {
-                get;
-                private set;
-            }
-
-            public A2Attribute(int v)
-            {
-                this.V = v;
-            }
-        }
-
-        private class A3Attribute : Attribute
-        {
-            public int V
-            {
-                get;
-                private set;
-            }
-
-            public A3Attribute(int v)
-            {
-                this.V = v;
-            }
-        }
-
-        private class A4Attribute : Attribute
-        {
-            public int V
-            {
-                get;
-                private set;
-            }
-
-            public A4Attribute(int v)
+            public A1(int v)
             {
                 this.V = v;
             }
         }
 
         [AttributeUsage(AttributeTargets.All, Inherited = false)]
-        private class A5Attribute : Attribute
+        private class A2: Attribute
         {
         }
 
-        private class A6Attribute : Attribute
+        private class A3 : A1
         {
-            public bool B
+            public A3(int v): base(v)
             {
-                get;
-                private set;
+                this.V = v;
             }
-
-            public byte Y
-            {
-                get;
-                private set;
-            }
-
-            public char C
-            {
-                get;
-                private set;
-            }
-
-            public double D
-            {
-                get;
-                private set;
-            }
-
-            public float F
-            {
-                get;
-                private set;
-            }
-
-            public int I
-            {
-                get;
-                private set;
-            }
-
-            public long L
-            {
-                get;
-                private set;
-            }
-
-            public short H
-            {
-                get;
-                private set;
-            }
-
-            public E1 E
-            {
-                get;
-                private set;
-            }
-
-            public string S
-            {
-                get;
-                private set;
-            }
-
-            public object O
-            {
-                get;
-                private set;
-            }
-
-            public Type T
-            {
-                get;
-                private set;
-            }
-
-            public A6Attribute(bool b, byte y, char c, double d, float f, int i, long l, short h, E1 e, string s, object o, Type t)
-            {
-                this.B = b;
-                this.Y = y;
-                this.C = c;
-                this.D = d;
-                this.F = f;
-                this.I = i;
-                this.L = l;
-                this.H = h;
-                this.E = e;
-                this.S = s;
-                this.O = o;
-                this.T = t;
-            }
-        }
-
-        private class A7Attribute : Attribute
-        {
-            public int[] I
-            {
-                get;
-                private set;
-            }
-
-            public string[] S
-            {
-                get;
-                private set;
-            }
-
-            public A7Attribute(int[] i, string[] s)
-            {
-                this.I = i;
-                this.S = s;
-            }
-        }
-
-        private class A8Attribute : Attribute
-        {
-            public E2 E
-            {
-                get;
-                private set;
-            }
-
-            public A8Attribute(E2 e)
-            {
-                this.E = e;
-            }
-        }
-
-        private class A9Attribute : Attribute
-        {
-            public int P1
-            {
-                get;
-                set;
-            }
-
-            public int P2
-            {
-                [Template("{this}.$$XX$$")]
-                get;
-                [Template("{this}.$$XX$$ = {value}")]
-                set;
-            }
-
-            [FieldProperty]
-            public int P3
-            {
-                get;
-                set;
-            }
-
-            [NonScriptable]
-            public int P4
-            {
-                get;
-                set;
-            }
-
-            public int F1
-            {
-                get;
-                set;
-            }
-
-            [NonScriptable]
-            public int F2
-            {
-                get;
-                set;
-            }
-        }
-
-        [NonScriptable]
-        [External]
-        private class A10Attribute : Attribute
-        {
-        }
-
-        private class A11Attribute : Attribute
-        {
-            public int i;
-
-            public A11Attribute()
-            {
-            }
-
-            public A11Attribute(int i)
-            {
-                this.i = i;
-            }
-
-            [Template("{ i: {i} }")]
-            public A11Attribute(int i, string _)
-            {
-            }
-        }
-
-        [Conditional("THE_SYMBOL")]
-        private class A12Attribute : Attribute
-        {
-        }
-
-        [Conditional("THE_SYMBOL"), Conditional("OTHER_SYMBOL")]
-        private class A13Attribute : Attribute
-        {
-        }
-
-        [Conditional("OTHER_SYMBOL")]
-        private class A14Attribute : Attribute
-        {
         }
 
         private class C1
         {
-        }
+            [A1(10), A2]
+            public void KeepSomething([A1(100), A2] int i)
+            {
+            }
 
-        [A1(1), A2(2)]
-        private class C2
-        {
-        }
-
-        [A1(1), A2(2)]
-        private interface I1
-        {
-        }
-
-        [A1(1), A2(2)]
-        private enum E1
-        {
-            V1 = 1,
-            V2 = 2
-        }
-
-        [Enum(Emit.StringName)]
-        private enum E2
-        {
-            V1,
-            V2
-        }
-
-        [A3(3)]
-        private class C3 : C2
-        {
-        }
-
-        [A4(4)]
-        private class C4 : C3
-        {
-        }
-
-        [A1(5)]
-        private class C5 : C2
-        {
-        }
-
-        [A2(6)]
-        private class C6 : C2
-        {
-        }
-
-        [A5]
-        private class C7
-        {
-        }
-
-        private class C8 : C7
-        {
-        }
-
-        [A1(7), A2(8), A2(9), A3(10)]
-        private class C9
-        {
-        }
-
-        [A1(11)]
-        private class C10<T1, T2>
-        {
-        }
-
-        [A1(12)]
-        private class I2<T1, T2>
-        {
-        }
-
-        [A6(true, 43, '\x44', 45.5, 46.5f, 47, 48, 49, E1.V1, "Test_string", null, typeof(string))]
-        private class C11
-        {
-        }
-
-        [A7(new[] { 42, 17, 31 }, new[] { "X", "Y2", "Z3" })]
-        private class C12
-        {
-        }
-
-        [A8(E2.V2)]
-        private class C13
-        {
-        }
-
-        [A9(P1 = 42)]
-        private class C14
-        {
-        }
-
-        [A9(P2 = 18)]
-        private class C15
-        {
-        }
-
-        [A9(P3 = 43)]
-        private class C16
-        {
-        }
-
-        [A9(F1 = 13)]
-        private class C18
-        {
-        }
-
-        [A10, A1(12)]
-        private class C19
-        {
-        }
-
-        [A11(42)]
-        private class C20
-        {
-        }
-
-        [A11(18, "X")]
-        private class C21
-        {
-        }
-
-        [A12, A13, A14]
-        private class C22
-        {
-            [A12, A13, A14]
-            public void M()
+            [A1(1), A3(3)]
+            public void DoSomething([A1(1000), A3(3000)] int i)
             {
             }
         }
 
         [Test]
-        public void CanGetCustomTypeAttributesForTypeWithNoAttributes()
+        public void GetCustomAttributesForAssemblyWorks()
         {
-            var arr = typeof(C1).GetCustomAttributes(false);
-            Assert.AreEqual(arr.Length, 0, "Should have no attributes");
+            var asm = Assembly.GetExecutingAssembly();
+            foreach (var a in new[]
+                {
+                    Attribute.GetCustomAttributes(asm),
+                    Attribute.GetCustomAttributes(asm, true),
+                    Attribute.GetCustomAttributes(asm, false)
+                })
+            {
+                Assert.False(a.Some(x => x.GetType().Name == "A1Attribute"));
+                var a2 = a.Filter(x => x is AssemblyAttributes.A2Attribute);
+                Assert.AreEqual(a2.Length, 1);
+                Assert.True(((AssemblyAttributes.A2Attribute)a2[0]).X == 64);
+                Assert.True(((AssemblyAttributes.A2Attribute)a2[0]).P == 23);
+
+                var a3 = a.Filter(x => x is AssemblyAttributes.A3Attribute);
+                Assert.AreEqual(a3.Length, 1);
+                Assert.True(((AssemblyAttributes.A3Attribute)a3[0]).X == 15);
+                Assert.True(((AssemblyAttributes.A3Attribute)a3[0]).P == 45);
+            }
+
+            foreach (var a in new[]
+                {
+                    Attribute.GetCustomAttributes(asm, typeof(AssemblyAttributes.A2Attribute)),
+                    Attribute.GetCustomAttributes(asm, typeof(AssemblyAttributes.A2Attribute), true),
+                    Attribute.GetCustomAttributes(asm, typeof(AssemblyAttributes.A2Attribute), false)
+                })
+            {
+                Assert.AreEqual(a.Length, 1);
+                Assert.True(((AssemblyAttributes.A2Attribute)a[0]).X == 64);
+                Assert.True(((AssemblyAttributes.A2Attribute)a[0]).P == 23);
+            }
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((Assembly)null); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((Assembly)null, true); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((Assembly)null, false); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((Assembly)null, null); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((Assembly)null, null, false); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((Assembly)null, null, true); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes(asm, null); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes(asm, null, false); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes(asm, null, true); });
         }
 
         [Test]
-        public void CanGetCustomTypeAttributesForClassWithAttributes()
+        public void GetCustomAttributesForMemberInfoWorks()
         {
-            var arr = typeof(C2).GetCustomAttributes(false);
-            Assert.AreEqual(arr.Length, 2, "Should have two attributes");
-            Assert.True(arr[0] is A1Attribute || arr[1] is A1Attribute, "A1 should exist");
-            Assert.True(arr[0] is A2Attribute || arr[1] is A2Attribute, "A2 should exist");
-            var a1 = (A1Attribute)(arr[0] is A1Attribute ? arr[0] : arr[1]);
-            Assert.AreEqual(a1.V, 1);
-            var a2 = (A2Attribute)(arr[0] is A2Attribute ? arr[0] : arr[1]);
-            Assert.AreEqual(a2.V, 2);
+            var member1 = new C1().GetType().GetMember("DoSomething")[0];
+
+            var attributes1 = Attribute.GetCustomAttributes(member1);
+
+            A1 a1 = null;
+            A3 a3 = null;
+
+            Assert.AreEqual(attributes1.Length, 2);
+            a1 = attributes1[0] as A1;
+            a3 = attributes1[1] as A3;
+            Assert.NotNull(a1);
+            Assert.NotNull(a3);
+            Assert.AreEqual(1, a1.V);
+            Assert.AreEqual(3, a3.V);
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((MemberInfo)null); });
         }
 
         [Test]
-        public void NonScriptableAttributesAreNotIncluded()
+        public void GetCustomAttributesForMemberInfoInheritTrueWorks()
         {
-            var arr = typeof(C19).GetCustomAttributes(false);
-            Assert.AreEqual(arr.Length, 1, "Should have one attribute");
-            Assert.True(arr[0] is A1Attribute, "A1 should exist");
+            var member1 = new C1().GetType().GetMember("DoSomething")[0];
+
+            var attributes1 = Attribute.GetCustomAttributes(member1, true);
+
+            A1 a1 = null;
+            A3 a3 = null;
+
+            Assert.AreEqual(attributes1.Length, 2);
+            a1 = attributes1[0] as A1;
+            a3 = attributes1[1] as A3;
+            Assert.NotNull(a1);
+            Assert.NotNull(a3);
+            Assert.AreEqual(1, a1.V);
+            Assert.AreEqual(3, a3.V);
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((MemberInfo)null, true); });
         }
 
         [Test]
-        public void CanGetCustomTypeAttributesForInterfaceWithAttributes()
+        public void GetCustomAttributesForMemberInfoInheritFalseWorks()
         {
-            var arr = typeof(I1).GetCustomAttributes(false);
-            Assert.AreEqual(arr.Length, 2, "Should have two attributes");
-            Assert.True(arr[0] is A1Attribute || arr[1] is A1Attribute, "A1 should exist");
-            Assert.True(arr[0] is A2Attribute || arr[1] is A2Attribute, "A2 should exist");
-            var a1 = (A1Attribute)(arr[0] is A1Attribute ? arr[0] : arr[1]);
-            Assert.AreEqual(a1.V, 1);
-            var a2 = (A2Attribute)(arr[0] is A2Attribute ? arr[0] : arr[1]);
-            Assert.AreEqual(a2.V, 2);
+            var member1 = new C1().GetType().GetMember("DoSomething")[0];
+
+            var attributes1 = Attribute.GetCustomAttributes(member1, false);
+
+            A1 a1 = null;
+            A3 a3 = null;
+
+            Assert.AreEqual(attributes1.Length, 2);
+            a1 = attributes1[0] as A1;
+            a3 = attributes1[1] as A3;
+            Assert.NotNull(a1);
+            Assert.NotNull(a3);
+            Assert.AreEqual(1, a1.V);
+            Assert.AreEqual(3, a3.V);
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((MemberInfo)null, false); });
         }
 
         [Test]
-        public void CanGetCustomTypeAttributesForEnumWithAttributes()
+        public void GetCustomAttributesForMemberInfoTypeWorks()
         {
-            var arr = typeof(E1).GetCustomAttributes(false);
-            Assert.AreEqual(arr.Length, 2, "Should have two attributes");
-            Assert.True(arr[0] is A1Attribute || arr[1] is A1Attribute, "A1 should exist");
-            Assert.True(arr[0] is A2Attribute || arr[1] is A2Attribute, "A2 should exist");
-            var a1 = (A1Attribute)(arr[0] is A1Attribute ? arr[0] : arr[1]);
-            Assert.AreEqual(a1.V, 1);
-            var a2 = (A2Attribute)(arr[0] is A2Attribute ? arr[0] : arr[1]);
-            Assert.AreEqual(a2.V, 2);
+            var member1 = new C1().GetType().GetMember("KeepSomething")[0];
+
+            var attributes1 = Attribute.GetCustomAttributes(member1, typeof(A1));
+
+            A1 a1 = null;
+
+            Assert.AreEqual(attributes1.Length, 1);
+            a1 = attributes1[0] as A1;
+            Assert.NotNull(a1);
+            Assert.AreEqual(10, a1.V);
+
+            var attributes2 = Attribute.GetCustomAttributes(member1, typeof(A2));
+
+            A2 a2 = null;
+
+            Assert.AreEqual(attributes2.Length, 1);
+            a2 = attributes2[0] as A2;
+            Assert.NotNull(a2);
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((MemberInfo)null, null); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes(member1, null); });
         }
 
         [Test]
-        public void InheritedFlagToGetCustomAttributesWorks()
+        public void GetCustomAttributesForMemberInfoTypeInheritFalseWorks()
         {
-            var arr = typeof(C3).GetCustomAttributes(false);
-            Assert.AreEqual(arr.Length, 1, "Should have one non-inherited attribute");
-            Assert.True(arr[0] is A3Attribute);
+            var member1 = new C1().GetType().GetMember("DoSomething")[0];
 
-            arr = typeof(C3).GetCustomAttributes(true);
-            Assert.AreEqual(arr.Length, 3, "Should have three inherited attributes");
-            Assert.True(arr[0] is A1Attribute || arr[1] is A1Attribute || arr[2] is A1Attribute, "A1 should exist");
-            Assert.True(arr[0] is A2Attribute || arr[1] is A2Attribute || arr[2] is A2Attribute, "A2 should exist");
-            Assert.True(arr[0] is A3Attribute || arr[1] is A3Attribute || arr[2] is A3Attribute, "A3 should exist");
+            var attributes1 = Attribute.GetCustomAttributes(member1, typeof(A1), false);
+
+            A1 a1 = null;
+            A3 a3 = null;
+
+            Assert.AreEqual(attributes1.Length, 2);
+            a1 = attributes1[0] as A1;
+            a3 = attributes1[1] as A3;
+            Assert.NotNull(a1);
+            Assert.NotNull(a3);
+            Assert.AreEqual(1, a1.V);
+            Assert.AreEqual(3, a3.V);
+
+            var attributes2 = Attribute.GetCustomAttributes(member1, typeof(A3), false);
+
+            a3 = null;
+
+            Assert.AreEqual(attributes2.Length, 1);
+            a3 = attributes2[0] as A3;
+            Assert.NotNull(a3);
+            Assert.AreEqual(3, a3.V);
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((MemberInfo)null, null, false); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes(member1, null, false); });
         }
 
         [Test]
-        public void DeepInheritanceWorks()
+        public void GetCustomAttributesForMemberInfoTypeInheritTrueWorks()
         {
-            var arr = typeof(C4).GetCustomAttributes(true);
-            Assert.AreEqual(arr.Length, 4, "Should have 4 attributes");
-            Assert.True(arr[0] is A1Attribute || arr[1] is A1Attribute || arr[2] is A1Attribute || arr[3] is A1Attribute, "A1 should exist");
-            Assert.True(arr[0] is A2Attribute || arr[1] is A2Attribute || arr[2] is A2Attribute || arr[3] is A2Attribute, "A2 should exist");
-            Assert.True(arr[0] is A3Attribute || arr[1] is A3Attribute || arr[2] is A3Attribute || arr[3] is A3Attribute, "A3 should exist");
-            Assert.True(arr[0] is A4Attribute || arr[1] is A4Attribute || arr[2] is A4Attribute || arr[3] is A4Attribute, "A4 should exist");
+            var member1 = new C1().GetType().GetMember("DoSomething")[0];
+
+            var attributes1 = Attribute.GetCustomAttributes(member1, typeof(A1), true);
+
+            A1 a1 = null;
+            A3 a3 = null;
+
+            Assert.AreEqual(attributes1.Length, 2);
+            a1 = attributes1[0] as A1;
+            a3 = attributes1[1] as A3;
+            Assert.NotNull(a1);
+            Assert.NotNull(a3);
+            Assert.AreEqual(1, a1.V);
+            Assert.AreEqual(3, a3.V);
+
+            var attributes2 = Attribute.GetCustomAttributes(member1, typeof(A3), true);
+
+            a3 = null;
+
+            Assert.AreEqual(attributes2.Length, 1);
+            a3 = attributes2[0] as A3;
+            Assert.NotNull(a3);
+            Assert.AreEqual(3, a3.V);
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((MemberInfo)null, null, true); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes(member1, null, true); });
         }
 
         [Test]
-        public void OverridingSingleUseAttributeReplacesTheAttributeOnTheBaseClass()
+        public void GetCustomAttributesForParameterInfoWorks()
         {
-            var arr = typeof(C5).GetCustomAttributes(true);
-            Assert.AreEqual(arr.Length, 2, "Should have 2 attributes");
-            Assert.True(arr[0] is A1Attribute || arr[1] is A1Attribute, "A1 should exist");
-            Assert.True(arr[0] is A2Attribute || arr[1] is A2Attribute, "A2 should exist");
-            var a1 = (A1Attribute)(arr[0] is A1Attribute ? arr[0] : arr[1]);
-            Assert.AreEqual(a1.V, 5);
+            var t = typeof(C1);
+            var m = t.GetMethod("DoSomething");
+            var parameter1 = m.GetParameters()[0];
+
+            var attributes1 = Attribute.GetCustomAttributes(parameter1);
+
+            A1 a1 = null;
+            A3 a3 = null;
+
+            Assert.AreEqual(attributes1.Length, 2);
+            a1 = attributes1[0] as A1;
+            a3 = attributes1[1] as A3;
+            Assert.NotNull(a1);
+            Assert.NotNull(a3);
+            Assert.AreEqual(1000, a1.V);
+            Assert.AreEqual(3000, a3.V);
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((ParameterInfo)null); });
         }
 
         [Test]
-        public void ApplyingNewInstanceOfMultipleUseAttributeAddsTheAttribute()
+        public void GetCustomAttributesForParameterInfoInheritTrueWorks()
         {
-            var arr = typeof(C6).GetCustomAttributes(true);
-            Assert.AreEqual(arr.Length, 3, "Should have 2 attributes");
-            Assert.AreEqual(1, arr.Filter(a => a is A1Attribute).Length, "Should have one A1");
-            Assert.AreEqual(2, arr.Filter(a => a is A2Attribute).Length, "Should have two A2");
-            var a2 = (A2Attribute[])arr.Filter(a => a is A2Attribute);
-            Assert.True(a2[0].V == 2 || a2[1].V == 2);
-            Assert.True(a2[0].V == 6 || a2[1].V == 6);
+            var parameter1 = new C1().GetType().GetMethod("DoSomething").GetParameters()[0];
+
+            var attributes1 = Attribute.GetCustomAttributes(parameter1, true);
+
+            A1 a1 = null;
+            A3 a3 = null;
+
+            Assert.AreEqual(attributes1.Length, 2);
+            a1 = attributes1[0] as A1;
+            a3 = attributes1[1] as A3;
+            Assert.NotNull(a1);
+            Assert.NotNull(a3);
+            Assert.AreEqual(1000, a1.V);
+            Assert.AreEqual(3000, a3.V);
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((ParameterInfo)null, true); });
         }
 
         [Test]
-        public void NonInheritedAttributeIsNotInherited()
+        public void GetCustomAttributesForParameterInfoInheritFalseWorks()
         {
-            var arr = typeof(C8).GetCustomAttributes(true);
-            Assert.AreEqual(arr.Length, 0, "Should not have any attributes");
+            var parameter1 = new C1().GetType().GetMethod("DoSomething").GetParameters()[0];
+
+            var attributes1 = Attribute.GetCustomAttributes(parameter1, false);
+
+            A1 a1 = null;
+            A3 a3 = null;
+
+            Assert.AreEqual(attributes1.Length, 2);
+            a1 = attributes1[0] as A1;
+            a3 = attributes1[1] as A3;
+            Assert.NotNull(a1);
+            Assert.NotNull(a3);
+            Assert.AreEqual(1000, a1.V);
+            Assert.AreEqual(3000, a3.V);
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((ParameterInfo)null, false); });
         }
 
         [Test]
-        public void GetCustomAttributesTypeFilterWorks()
+        public void GetCustomAttributesForParameterInfoTypeWorks()
         {
-            var arr = typeof(C9).GetCustomAttributes(typeof(A2Attribute), true);
-            Assert.AreEqual(arr.Length, 2, "Should have 2 A2 attributes");
-            Assert.True(arr[0] is A2Attribute && arr[1] is A2Attribute, "Should only return A2 attributes");
-            Assert.True(((A2Attribute)arr[0]).V == 8 || ((A2Attribute)arr[0]).V == 9, "Attribute members should be correct");
-            Assert.True(((A2Attribute)arr[1]).V == 8 || ((A2Attribute)arr[1]).V == 9, "Attribute members should be correct");
+            var parameter1 = new C1().GetType().GetMethod("KeepSomething").GetParameters()[0];
+
+            var attributes1 = Attribute.GetCustomAttributes(parameter1, typeof(A1));
+
+            A1 a1 = null;
+
+            Assert.AreEqual(attributes1.Length, 1);
+            a1 = attributes1[0] as A1;
+            Assert.NotNull(a1);
+            Assert.AreEqual(100, a1.V);
+
+            var attributes2 = Attribute.GetCustomAttributes(parameter1, typeof(A2));
+
+            A2 a2 = null;
+
+            Assert.AreEqual(attributes2.Length, 1);
+            a2 = attributes2[0] as A2;
+            Assert.NotNull(a2);
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((ParameterInfo)null, null); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes(parameter1, null); });
         }
 
         [Test]
-        public void GetCustomAttributesWorksForOpenGenericClass()
+        public void GetCustomAttributesForParameterInfoTypeInheritFalseWorks()
         {
-            var arr = typeof(C10<,>).GetCustomAttributes(true);
-            Assert.AreEqual(arr.Length, 1, "Should have one attribute");
-            Assert.True(arr[0] is A1Attribute, "Should be A1");
+            var parameter1 = new C1().GetType().GetMethod("DoSomething").GetParameters()[0];
+
+            var attributes1 = Attribute.GetCustomAttributes(parameter1, typeof(A1), false);
+
+            A1 a1 = null;
+            A3 a3 = null;
+
+            Assert.AreEqual(attributes1.Length, 2);
+            a1 = attributes1[0] as A1;
+            a3 = attributes1[1] as A3;
+            Assert.NotNull(a1);
+            Assert.NotNull(a3);
+            Assert.AreEqual(1000, a1.V);
+            Assert.AreEqual(3000, a3.V);
+
+            var attributes2 = Attribute.GetCustomAttributes(parameter1, typeof(A3), false);
+
+            a3 = null;
+
+            Assert.AreEqual(attributes2.Length, 1);
+            a3 = attributes2[0] as A3;
+            Assert.NotNull(a3);
+            Assert.AreEqual(3000, a3.V);
+
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((ParameterInfo)null, null, false); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes(parameter1, null, false); });
         }
 
         [Test]
-        public void GetCustomAttributesWorksForConstructedGenericClass()
+        public void GetCustomAttributesForParameterInfoTypeInheritTrueWorks()
         {
-            var arr = typeof(C10<int, string>).GetCustomAttributes(true);
-            Assert.AreEqual(arr.Length, 1, "Should have one attribute");
-            Assert.True(arr[0] is A1Attribute, "Should be A1");
-        }
+            var parameter1 = new C1().GetType().GetMethod("DoSomething").GetParameters()[0];
 
-        [Test]
-        public void GetCustomAttributesWorksForOpenGenericInterface()
-        {
-            var arr = typeof(I2<,>).GetCustomAttributes(true);
-            Assert.AreEqual(arr.Length, 1, "Should have one attribute");
-            Assert.True(arr[0] is A1Attribute, "Should be A1");
-        }
+            var attributes1 = Attribute.GetCustomAttributes(parameter1, typeof(A1), true);
 
-        [Test]
-        public void GetCustomAttributesWorksForConstructedGenericInterface()
-        {
-            var arr = typeof(I2<int, string>).GetCustomAttributes(true);
-            Assert.AreEqual(arr.Length, 1, "Should have one attribute");
-            Assert.True(arr[0] is A1Attribute, "Should be A1");
-        }
+            A1 a1 = null;
+            A3 a3 = null;
 
-        [Test]
-        public void AllSupportedScalarTypesCanBeUsedAsAttributeArguments()
-        {
-            var a6 = (A6Attribute)typeof(C11).GetCustomAttributes(false)[0];
-            Assert.AreEqual(a6.B, true, "B");
-            Assert.AreEqual(a6.Y, 43, "Y");
-            Assert.AreEqual((int)a6.C, 0x44, "C");
-            Assert.AreEqual(a6.D, 45.5, "D");
-            Assert.AreEqual(a6.F, 46.5, "F");
-            Assert.AreEqual(a6.I, 47, "I");
-            Assert.True(a6.L == 48, "L");
-            Assert.AreEqual(a6.H, 49, "H");
-            Assert.AreEqual(a6.E, E1.V1, "E");
-            Assert.AreEqual(a6.S, "Test_string", "S");
-            Assert.AreEqual(a6.O, null, "O");
-            Assert.AreEqual(a6.T, typeof(string), "T");
-        }
+            Assert.AreEqual(attributes1.Length, 2);
+            a1 = attributes1[0] as A1;
+            a3 = attributes1[1] as A3;
+            Assert.NotNull(a1);
+            Assert.NotNull(a3);
+            Assert.AreEqual(1000, a1.V);
+            Assert.AreEqual(3000, a3.V);
 
-        [Test]
-        public void ArraysCanBeUsedAsAttributeArguments()
-        {
-            var a7 = (A7Attribute)typeof(C12).GetCustomAttributes(false)[0];
-            Assert.AreEqual(a7.I, new[] { 42, 17, 31 }, "I");
-            Assert.AreEqual(a7.S, new[] { "X", "Y2", "Z3" }, "S");
-        }
+            var attributes2 = Attribute.GetCustomAttributes(parameter1, typeof(A3), true);
 
-        [Test]
-        public void NamedValuesEnumCanBeUsedAsAttributeArgument()
-        {
-            var a8 = (A8Attribute)typeof(C13).GetCustomAttributes(false)[0];
-            Assert.AreEqual(a8.E, "v2", "E");
-        }
+            a3 = null;
 
-        [Test]
-        public void PropertiesWithSetMethodsImplementedAsNormalMethodsCanBeSetInAttributeDeclaration()
-        {
-            var a = (A9Attribute)typeof(C14).GetCustomAttributes(false)[0];
-            Assert.AreEqual(a.P1, 42);
-        }
+            Assert.AreEqual(attributes2.Length, 1);
+            a3 = attributes2[0] as A3;
+            Assert.NotNull(a3);
+            Assert.AreEqual(3000, a3.V);
 
-        [Test]
-        public void PropertiesWithSetMethodsImplementedAsInlineCodeCanBeSetInAttributeDeclaration()
-        {
-            var a = (A9Attribute)typeof(C15).GetCustomAttributes(false)[0];
-            Assert.AreEqual(a.P2, 18);
-        }
-
-        [Test]
-        public void PropertiesImplementedAsFieldsCanBeAssignedInAttributeDeclaration()
-        {
-            var a = (A9Attribute)typeof(C16).GetCustomAttributes(false)[0];
-            Assert.AreEqual(a.P3, 43);
-        }
-
-        [Test]
-        public void FieldsCanBeAssignedInAttributeDeclaration()
-        {
-            var a = (A9Attribute)typeof(C18).GetCustomAttributes(false)[0];
-            Assert.AreEqual(a.F1, 13);
-        }
-
-        [Test]
-        public void CreatingAttributeWithNamedConstructorWorks()
-        {
-            var a = (A11Attribute)typeof(C20).GetCustomAttributes(false)[0];
-            Assert.AreEqual(a.i, 42);
-        }
-
-        [Test]
-        public void CreatingAttributeWithInlineCodeConstructorWorks()
-        {
-            dynamic a = typeof(C21).GetCustomAttributes(false)[0];
-            Assert.AreEqual(a.i, 18);
-        }
-
-        [Test]
-        public void ConditionalAttributesWhoseSymbolsAreNotDefinedAreRemoved()
-        {
-            Assert.AreEqual(typeof(C22).GetCustomAttributes(typeof(A12Attribute), false).Length, 1, "A12");
-            Assert.AreEqual(typeof(C22).GetCustomAttributes(typeof(A13Attribute), false).Length, 1, "A13");
-            Assert.AreEqual(typeof(C22).GetCustomAttributes(typeof(A14Attribute), false).Length, 0, "A14");
-            Assert.AreEqual(typeof(C22).GetMethod("M").GetCustomAttributes(typeof(A12Attribute), false).Length, 1, "A12");
-            Assert.AreEqual(typeof(C22).GetMethod("M").GetCustomAttributes(typeof(A13Attribute), false).Length, 1, "A13");
-            Assert.AreEqual(typeof(C22).GetMethod("M").GetCustomAttributes(typeof(A14Attribute), false).Length, 0, "A14");
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((ParameterInfo)null, null, true); });
+            Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes(parameter1, null, true); });
         }
     }
 }

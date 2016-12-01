@@ -76,7 +76,7 @@ namespace System.Reflection
 		/// </summary>
 		/// <param name="inherit">Ignored for members. Base members will never be considered.</param>
 		/// <returns>An array that contains all the custom attributes applied to this member, or an array with zero elements if no attributes are defined. </returns>
-		[Template("({this}.at || [])")]
+		[Template("System.Attribute.getCustomAttributes({this}, false, {inherit})")]
         public extern object[] GetCustomAttributes(bool inherit);
 
         /// <summary>
@@ -85,14 +85,14 @@ namespace System.Reflection
         /// <param name="attributeType">The type of attribute to search for. Only attributes that are assignable to this type are returned. </param>
         /// <param name="inherit">Ignored for members. Base members will never be considered.</param>
         /// <returns>An array that contains all the custom attributes applied to this member, or an array with zero elements if no attributes are defined.</returns>
-        [Template("({this}.at || []).filter(function(a) { return Bridge.is(a, {attributeType}); })")]
+        [Template("System.Attribute.getCustomAttributes({this}, {attributeType}, {inherit})")]
         public extern object[] GetCustomAttributes(Type attributeType, bool inherit);
 
         /// <summary>
         /// Returns an array of all custom attributes applied to this member.
         /// </summary>
         /// <returns>An array that contains all the custom attributes applied to this member, or an array with zero elements if no attributes are defined. </returns>
-        [Template("({this}.at || [])")]
+        [Template("System.Attribute.getCustomAttributes({this}, false)")]
         public extern object[] GetCustomAttributes();
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace System.Reflection
         /// </summary>
         /// <param name="attributeType">The type of attribute to search for. Only attributes that are assignable to this type are returned. </param>
         /// <returns>An array that contains all the custom attributes applied to this member, or an array with zero elements if no attributes are defined.</returns>
-        [Template("({this}.at || []).filter(function(a) { return Bridge.is(a, {attributeType}); })")]
+        [Template("System.Attribute.getCustomAttributes({this}, {attributeType})")]
         public extern object[] GetCustomAttributes(Type attributeType);
     }
 }
