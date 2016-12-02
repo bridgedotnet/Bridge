@@ -21,16 +21,5 @@
 
             return blable;
         }
-
-        // [#2113] Please consider single-line comment JavaScript inlining
-        public static string Test3()
-        {
-            //@ var tmp1;
-            //@ var  tmp2;
-            //@ var tmp3; // test
-            //@ var tmp4; //@ test
-
-            return "";
-        }
     }
 }

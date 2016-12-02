@@ -18,14 +18,6 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             
 
                 return blable;
-            },
-            test3: function () {
-                var tmp1;
-                var  tmp2;
-                var tmp3; // test
-                var tmp4; //@ test
-
-                return "";
             }
         }
     });
