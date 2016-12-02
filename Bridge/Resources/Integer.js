@@ -558,21 +558,6 @@
                     throw new System.ArgumentNullException("str");
                 }
 
-                var stringContains = function (str, value) {
-                    for (var i = 0; i < str.length; i++) {
-                        if (str[i] === value) {
-                            return true;
-                        }
-                    }
-                    return false;
-                };
-
-                var allLetters = "abcdefghijklmnopqrstuvwxyz";
-
-                var isLetter = function (value) {
-                    return stringContains(allLetters, value.toLowerCase());
-                };
-
                 var tokenCount = function (input, value) {
                     var count = 0;
                     for(var i = 0; i < input.length; i++)
@@ -587,14 +572,14 @@
 
                 if (!provider) {
 
-                    var containsWhitespace = stringContains(str, " ");
+                    var containsWhitespace = str.indexOf(" ") > -1;
 
                     if (containsWhitespace) {
                         throw new System.FormatException("Input string was not in a correct format.");
                     }
 
-                    var containsDot = stringContains(str, ".");
-                    var containsComma = stringContains(str, ",");
+                    var containsDot = str.indexOf(".") > -1;
+                    var containsComma = str.indexOf(",") > -1;
 
                     var containsDotWithComma = containsDot && containsComma;
 
@@ -636,9 +621,8 @@
                     // double.Parse("10,10,2.5") -> 10102.5
                     str = strWithNoCommas;
 
-
                     for (var i = 0; i < str.length; i++) {
-                        if (isLetter(str[i])) {
+                        if (System.Char.isLetter(str[i])) {
                             if (str[i].toLowerCase() === "e" && tokenCount(str.toLowerCase(), "e") === 1) {
                                 continue;
                             }
@@ -647,7 +631,6 @@
                             }
                         }
                     }
-
                 }
 
                 var nfInfo = (provider || System.Globalization.CultureInfo.getCurrentCulture()).getFormat(System.Globalization.NumberFormatInfo),

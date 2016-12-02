@@ -5777,6 +5777,81 @@
                     throw new System.ArgumentNullException("str");
                 }
 
+                var tokenCount = function (input, value) {
+                    var count = 0;
+                    for(var i = 0; i < input.length; i++)
+                    {
+                        if (input[i] === value)
+                        {
+                            count += 1;
+                        }
+                    }
+                    return count;
+                };
+
+                if (!provider) {
+
+                    var containsWhitespace = str.indexOf(" ") > -1;
+
+                    if (containsWhitespace) {
+                        throw new System.FormatException("Input string was not in a correct format.");
+                    }
+
+                    var containsDot = str.indexOf(".") > -1;
+                    var containsComma = str.indexOf(",") > -1;
+
+                    var containsDotWithComma = containsDot && containsComma;
+
+                    if (containsDotWithComma) {
+                        // dot before comma is not allowed
+                        // double.Parse("10,2.5") -> 102.5
+                        // double.Parse("10.2,5") -> FormatException
+                        if (str.indexOf(".") < str.indexOf(",")) {
+                            throw new System.FormatException("Input string was not in a correct format.");
+                        }
+                    }
+
+                    if (containsDot)
+                    {
+                        var dotCount = 0;
+                        for (var i = 0; i < str.length; i++) {
+                            if (str[i] === ".") {
+                                dotCount += 1;
+                            }
+                        }
+
+                        // only one dot is allowed
+                        if (dotCount > 1) {
+                            throw new System.FormatException("Input string was not in a correct format.");
+                        }
+                    }
+
+                    var strWithNoCommas = "";
+
+                    for (var i = 0; i < str.length; i++) {
+                        if (str[i] !== ",") {
+                            strWithNoCommas += str[i];
+                        }
+                    }
+
+                    // mutiple comma's are allowed, so we remove them before going furthur
+                    // double.Parse("1,1,1") -> 111
+                    // double.Parse("10,00") -> 1000
+                    // double.Parse("10,10,2.5") -> 10102.5
+                    str = strWithNoCommas;
+
+                    for (var i = 0; i < str.length; i++) {
+                        if (System.Char.isLetter(str[i])) {
+                            if (str[i].toLowerCase() === "e" && tokenCount(str.toLowerCase(), "e") === 1) {
+                                continue;
+                            }
+                            else {
+                                throw new Exception("Input string was not in a correct format.");
+                            }
+                        }
+                    }
+                }
+
                 var nfInfo = (provider || System.Globalization.CultureInfo.getCurrentCulture()).getFormat(System.Globalization.NumberFormatInfo),
                     result = parseFloat(str.replace(nfInfo.numberDecimalSeparator, "."));
 
