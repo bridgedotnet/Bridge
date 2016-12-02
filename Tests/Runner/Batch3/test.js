@@ -182,7 +182,8 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
             QUnit.test("#1378 - TestAssigmentWithConditionalPlusOperator", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1378.testAssigmentWithConditionalPlusOperator);
             QUnit.test("#1378 - TestAssigmentWithConditionalMinusOperator", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1378.testAssigmentWithConditionalMinusOperator);
             QUnit.test("#1379 - TestNanFiniteType", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1379.testNanFiniteType);
-            QUnit.test("#1381 - TestReservedWords", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1381.testReservedWords);
+            QUnit.test("#1381 - TestReservedWordsUseCase", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1381.testReservedWordsUseCase);
+            QUnit.test("#1381 - TestReservedWordsNewBatch", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1381.testReservedWordsNewBatch);
             QUnit.test("#1385 - TestIsTypedArray", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1385.testIsTypedArray);
             QUnit.test("#1389 - TestParamsIndexer", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1389.testParamsIndexer);
             QUnit.test("#1391 - TestStaticCtorOrder", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1391.testStaticCtorOrder);
@@ -3389,12 +3390,19 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
     Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1381", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1381)],
         statics: {
-            testReservedWords: function (assert) {
+            testReservedWordsUseCase: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1381).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1381, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestReservedWords()",
+                    method: "TestReservedWordsUseCase()",
                     line: "13"
                 } ));
-                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1381.testReservedWords();
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1381.testReservedWordsUseCase();
+            },
+            testReservedWordsNewBatch: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1381).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1381, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "TestReservedWordsNewBatch()",
+                    line: "82"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1381.testReservedWordsNewBatch();
             }
         },
         context: null,

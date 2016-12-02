@@ -5599,9 +5599,10 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1381", {
         statics: {
             value: 4,
-            testReservedWords: function () {
+            testReservedWordsUseCase: function () {
                 try {
                     var $Date = 3;
+
                     var m = (new Date().getMonth() + 1);
 
                     Bridge.Test.Assert.areEqual$1(3, $Date, "Date");
@@ -5613,6 +5614,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                 try {
                     var $String = 4;
+
                     var s = String().charCodeAt(0);
 
                     Bridge.Test.Assert.areEqual$1(4, $String, "String");
@@ -5624,6 +5626,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                 try {
                     var $Number = 7;
+
                     Number();
                     (0);
 
@@ -5636,6 +5639,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                 try {
                     var document = 8;
+
                     var c = document.children;
 
                     Bridge.Test.Assert.areEqual$1(8, document, "document");
@@ -5647,12 +5651,191 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                 try {
                     var $Bridge = 9;
+
                     Bridge.Test.Assert.areEqual$1(4, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1381.value, "value");
                     Bridge.Test.Assert.areEqual$1(9, $Bridge, "Bridge");
                 }
                 catch ($e5) {
                     $e5 = System.Exception.create($e5);
                     Bridge.Test.Assert.fail$1("Bridge variable");
+                }
+            },
+            testReservedWordsNewBatch: function () {
+                // Covers next batch of reserved words (except Date, Number, String that covered in TestReservedWordsUseCase test)
+                try {
+                    var $Array = 2;
+
+                    var m = [0, 2, 1];
+                    var i = System.Array.indexOfT(m, 1);
+
+                    Bridge.Test.Assert.areEqual$1(2, $Array, "Array");
+                }
+                catch ($e1) {
+                    $e1 = System.Exception.create($e1);
+                    Bridge.Test.Assert.fail$1("Array variable");
+                }
+
+                try {
+                    var $eval = 3;
+
+                    eval("");
+
+                    Bridge.Test.Assert.areEqual$1(3, $eval, "eval");
+                }
+                catch ($e2) {
+                    $e2 = System.Exception.create($e2);
+                    Bridge.Test.Assert.fail$1("eval variable");
+                }
+
+                try {
+                    var $hasOwnProperty = 4;
+
+                    var o = {  };
+                    o.hasOwnProperty("v");
+
+                    Bridge.Test.Assert.areEqual$1(4, $hasOwnProperty, "hasOwnProperty");
+                }
+                catch ($e3) {
+                    $e3 = System.Exception.create($e3);
+                    Bridge.Test.Assert.fail$1("hasOwnProperty variable");
+                }
+
+                try {
+                    var $Infinity = 5;
+
+                    var o1 = Infinity;
+
+                    Bridge.Test.Assert.areEqual$1(5, $Infinity, "Infinity");
+                }
+                catch ($e4) {
+                    $e4 = System.Exception.create($e4);
+                    Bridge.Test.Assert.fail$1("Infinity variable");
+                }
+
+                try {
+                    var $isFinite = 6;
+
+                    var o2 = isFinite(null);
+
+                    Bridge.Test.Assert.areEqual$1(6, $isFinite, "isFinite");
+                }
+                catch ($e5) {
+                    $e5 = System.Exception.create($e5);
+                    Bridge.Test.Assert.fail$1("isFinite variable");
+                }
+
+                try {
+                    var $isNaN = 6;
+
+                    var o3 = isNaN(null);
+
+                    Bridge.Test.Assert.areEqual$1(6, $isNaN, "isNaN");
+                }
+                catch ($e6) {
+                    $e6 = System.Exception.create($e6);
+                    Bridge.Test.Assert.fail$1("isNaN variable");
+                }
+
+                try {
+                    var $isPrototypeOf = 7;
+
+                    var o4 = {  }.isPrototypeOf(null);
+
+                    Bridge.Test.Assert.areEqual$1(7, $isPrototypeOf, "isPrototypeOf");
+                }
+                catch ($e7) {
+                    $e7 = System.Exception.create($e7);
+                    Bridge.Test.Assert.fail$1("isPrototypeOf variable");
+                }
+
+                try {
+                    var $Math = 8;
+
+                    var o5 = Math.abs(0);
+
+                    Bridge.Test.Assert.areEqual$1(8, $Math, "Math");
+                }
+                catch ($e8) {
+                    $e8 = System.Exception.create($e8);
+                    Bridge.Test.Assert.fail$1("Math variable");
+                }
+
+                try {
+                    var $NaN = 9;
+
+                    var o6 = NaN;
+
+                    Bridge.Test.Assert.areEqual$1(9, $NaN, "NaN");
+                    Bridge.Test.Assert.areNotEqual$1(o6, $NaN, "Not NaN");
+                }
+                catch ($e9) {
+                    $e9 = System.Exception.create($e9);
+                    Bridge.Test.Assert.fail$1("NaN variable");
+                }
+
+                try {
+                    var $Object = 10;
+
+                    var o7 = {  };
+
+                    Bridge.Test.Assert.areEqual$1(10, $Object, "Object");
+                    Bridge.Test.Assert.areNotEqual$1(o7, $Object, "Not Object");
+                }
+                catch ($e10) {
+                    $e10 = System.Exception.create($e10);
+                    Bridge.Test.Assert.fail$1("Object variable");
+                }
+
+                try {
+                    var $prototype = 11;
+
+                    var o8 = System.Int32.prototype;
+
+                    Bridge.Test.Assert.areEqual$1(11, $prototype, "prototype");
+                    Bridge.Test.Assert.areNotEqual$1(o8, $prototype, "Not prototype");
+                }
+                catch ($e11) {
+                    $e11 = System.Exception.create($e11);
+                    Bridge.Test.Assert.fail$1("prototype variable");
+                }
+
+                try {
+                    var $toString = 12;
+
+                    var o9 = {  }.toString();
+
+                    Bridge.Test.Assert.areEqual$1(12, $toString, "toString");
+                    Bridge.Test.Assert.areNotEqual$1(o9, $toString, "Not toString");
+                }
+                catch ($e12) {
+                    $e12 = System.Exception.create($e12);
+                    Bridge.Test.Assert.fail$1("toString variable");
+                }
+
+                try {
+                    var $undefined = 13;
+
+                    var o10 = undefined;
+
+                    Bridge.Test.Assert.areEqual$1(13, $undefined, "undefined");
+                    Bridge.Test.Assert.areNotEqual$1(o10, $undefined, "Not undefined");
+                }
+                catch ($e13) {
+                    $e13 = System.Exception.create($e13);
+                    Bridge.Test.Assert.fail$1("undefined variable");
+                }
+
+                try {
+                    var $valueOf = 14;
+
+                    var o11 = {  }.valueOf();
+
+                    Bridge.Test.Assert.areEqual$1(14, $valueOf, "valueOf");
+                    Bridge.Test.Assert.areNotEqual$1(o11, $valueOf, "Not valueOf");
+                }
+                catch ($e14) {
+                    $e14 = System.Exception.create($e14);
+                    Bridge.Test.Assert.fail$1("valueOf variable");
                 }
             }
         }
