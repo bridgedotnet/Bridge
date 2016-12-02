@@ -7150,8 +7150,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7181,7 +7179,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    });
+                                    }); /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -11873,6 +11871,24 @@ Bridge.$N1391Result =                 r;
             return Bridge.is(oThis, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2106.c1$1(TA));
         }
     }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2121", {
+        statics: {
+            testLongAsDictionaryKey: function () {
+                var dict = new (System.Collections.Generic.Dictionary$2(System.Int64,String))();
+                var i = 0;
+                dict.set(System.Int64(i), "test");
+
+                var l = System.Int64(0);
+                Bridge.Test.Assert.areEqual("test", dict.get(System.Int64(i)));
+                Bridge.Test.Assert.areEqual("test", dict.get(l));
+
+                var s = ["test"];
+                Bridge.Test.Assert.areEqual("test", s[System.Int64.toNumber(l)]);
+                Bridge.Test.Assert.areEqual("test", s[System.Int64.toNumber(System.Int64(i))]);
+            }
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
