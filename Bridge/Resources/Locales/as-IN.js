@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("as-IN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("as-IN", true), {
     englishName: "Assamese (India)",
     nativeName: "অসমীয়া (ভাৰত)",
 

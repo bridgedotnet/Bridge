@@ -435,7 +435,7 @@ namespace Bridge.Translator
                 if (value is string)
                 {
                     var name = value.ToString();
-                    if (Helpers.IsReservedWord(name))
+                    if (Helpers.IsReservedWord(emitter, name))
                     {
                         name = Helpers.ChangeReservedWord(name);
                     }

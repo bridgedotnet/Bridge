@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("quz-EC", true), {
+Bridge.merge(new System.Globalization.CultureInfo("quz-EC", true), {
     englishName: "Quichua (Ecuador)",
     nativeName: "runa shimi (Ecuador Suyu)",
 

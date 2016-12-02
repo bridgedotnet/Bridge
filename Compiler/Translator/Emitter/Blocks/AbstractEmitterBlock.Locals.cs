@@ -80,7 +80,7 @@ namespace Bridge.Translator
                 if (lrr != null && ((identifierExpression = expr as IdentifierExpression) != null))
                 {
                     var name = identifierExpression.Identifier;
-                    if (Helpers.IsReservedWord(name))
+                    if (Helpers.IsReservedWord(this.Emitter, name))
                     {
                         name = Helpers.ChangeReservedWord(name);
                     }
@@ -96,7 +96,7 @@ namespace Bridge.Translator
             name = name.StartsWith(JS.Vars.FIX_ARGUMENT_NAME) ? name.Substring(JS.Vars.FIX_ARGUMENT_NAME.Length) : name;
             string vName = valueName ?? name;
 
-            if (Helpers.IsReservedWord(vName))
+            if (Helpers.IsReservedWord(this.Emitter, vName))
             {
                 vName = Helpers.ChangeReservedWord(vName);
             }
@@ -221,7 +221,7 @@ namespace Bridge.Translator
                                 if (prm.IsOptional)
                                 {
                                     var name = prm.Name;
-                                    if (Helpers.IsReservedWord(name))
+                                    if (Helpers.IsReservedWord(this.Emitter, name))
                                     {
                                         name = Helpers.ChangeReservedWord(name);
                                     }
@@ -242,7 +242,7 @@ namespace Bridge.Translator
                                 else if (prm.IsParams)
                                 {
                                     var name = prm.Name;
-                                    if (Helpers.IsReservedWord(name))
+                                    if (Helpers.IsReservedWord(this.Emitter, name))
                                     {
                                         name = Helpers.ChangeReservedWord(name);
                                     }

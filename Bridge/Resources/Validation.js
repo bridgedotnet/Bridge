@@ -1,4 +1,4 @@
-﻿    var validation = {
+    var validation = {
         isNull: function (value) {
             return !Bridge.isDefined(value, true);
         },

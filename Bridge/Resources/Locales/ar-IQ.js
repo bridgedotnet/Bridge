@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ar-IQ", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ar-IQ", true), {
     englishName: "Arabic (Iraq)",
     nativeName: "العربية (العراق)",
 

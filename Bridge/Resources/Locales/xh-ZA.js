@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("xh-ZA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("xh-ZA", true), {
     englishName: "isiXhosa (South Africa)",
     nativeName: "isiXhosa (uMzantsi Afrika)",
 

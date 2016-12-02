@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("om-ET", true), {
+Bridge.merge(new System.Globalization.CultureInfo("om-ET", true), {
     englishName: "Oromo (Ethiopia)",
     nativeName: "Oromoo (Itoophiyaa)",
 

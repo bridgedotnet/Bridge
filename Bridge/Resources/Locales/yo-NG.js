@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("yo-NG", true), {
+Bridge.merge(new System.Globalization.CultureInfo("yo-NG", true), {
     englishName: "Yoruba (Nigeria)",
     nativeName: "Yoruba (Nigeria)",
 

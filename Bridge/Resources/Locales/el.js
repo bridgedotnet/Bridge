@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("el", true), {
+Bridge.merge(new System.Globalization.CultureInfo("el", true), {
     englishName: "Greek",
     nativeName: "Ελληνικά",
 

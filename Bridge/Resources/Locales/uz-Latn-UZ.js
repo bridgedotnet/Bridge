@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("uz-Latn-UZ", true), {
+Bridge.merge(new System.Globalization.CultureInfo("uz-Latn-UZ", true), {
     englishName: "Uzbek (Latin, Uzbekistan)",
     nativeName: "O'zbekcha (O'zbekiston Respublikasi)",
 

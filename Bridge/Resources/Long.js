@@ -1,4 +1,4 @@
-﻿/* long.js https://github.com/dcodeIO/long.js/blob/master/LICENSE */
+/* long.js https://github.com/dcodeIO/long.js/blob/master/LICENSE */
 (function (b) {
     function d(a, b, c) { this.low = a | 0; this.high = b | 0; this.unsigned = !!c } function g(a) { return !0 === (a && a.__isLong__) } function m(a, b) { var c, u; if (b) { a >>>= 0; if (u = 0 <= a && 256 > a) if (c = A[a]) return c; c = e(a, 0 > (a | 0) ? -1 : 0, !0); u && (A[a] = c) } else { a |= 0; if (u = -128 <= a && 128 > a) if (c = B[a]) return c; c = e(a, 0 > a ? -1 : 0, !1); u && (B[a] = c) } return c } function n(a, b) {
         if (isNaN(a) || !isFinite(a)) return b ? p : k; if (b) { if (0 > a) return p; if (a >= C) return D } else { if (a <= -E) return l; if (a + 1 >= E) return F } return 0 > a ? n(-a, b).neg() : e(a % 4294967296 | 0, a / 4294967296 |

@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("nso-ZA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("nso-ZA", true), {
     englishName: "Sesotho sa Leboa (South Africa)",
     nativeName: "Sesotho sa Leboa (Afrika Borwa)",
 

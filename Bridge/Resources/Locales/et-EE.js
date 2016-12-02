@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("et-EE", true), {
+Bridge.merge(new System.Globalization.CultureInfo("et-EE", true), {
     englishName: "Estonian (Estonia)",
     nativeName: "eesti (Eesti)",
 

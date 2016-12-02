@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("hr-BA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("hr-BA", true), {
     englishName: "Croatian (Latin, Bosnia and Herzegovina)",
     nativeName: "hrvatski (Bosna i Hercegovina)",
 

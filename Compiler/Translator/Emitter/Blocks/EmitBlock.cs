@@ -259,11 +259,10 @@ namespace Bridge.Translator
 
                 if (type.IsObjectLiteral)
                 {
-                    var mode = this.Emitter.Validator.GetObjectCreateMode(this.Emitter.GetTypeDefinition(type.Type));
+                    //var mode = this.Emitter.Validator.GetObjectCreateMode(this.Emitter.GetTypeDefinition(type.Type));
+                    //var ignore = mode == 0 && !type.Type.GetMethods(null, GetMemberOptions.IgnoreInheritedMembers).Any(m => !m.IsConstructor && !m.IsAccessor);
 
-                    var ignore = mode == 0 && !type.Type.GetMethods(null, GetMemberOptions.IgnoreInheritedMembers).Any(m => !m.IsConstructor && !m.IsAccessor);
-
-                    if (this.Emitter.Validator.IsIgnoreType(typeDef) || ignore)
+                    if (this.Emitter.Validator.IsIgnoreType(typeDef))
                     {
                         this.Emitter.Translator.Plugins.AfterTypeEmit(this.Emitter, type);
                         continue;
@@ -290,6 +289,7 @@ namespace Bridge.Translator
 
                 this.Emitter.Output = this.GetOutputForType(typeInfo, null);
                 this.Emitter.TypeInfo = type;
+                type.JsName = BridgeTypes.ToJsName(type.Type, this.Emitter, true);
 
                 if (this.Emitter.Output.Length > 0)
                 {

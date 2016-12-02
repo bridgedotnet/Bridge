@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ku", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ku", true), {
     englishName: "Central Kurdish",
     nativeName: "کوردیی ناوەڕاست",
 

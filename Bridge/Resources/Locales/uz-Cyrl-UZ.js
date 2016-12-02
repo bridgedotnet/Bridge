@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("uz-Cyrl-UZ", true), {
+Bridge.merge(new System.Globalization.CultureInfo("uz-Cyrl-UZ", true), {
     englishName: "Uzbek (Cyrillic, Uzbekistan)",
     nativeName: "Ўзбекча (Ўзбекистон Республикаси)",
 

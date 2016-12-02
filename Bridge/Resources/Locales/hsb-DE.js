@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("hsb-DE", true), {
+Bridge.merge(new System.Globalization.CultureInfo("hsb-DE", true), {
     englishName: "Upper Sorbian (Germany)",
     nativeName: "hornjoserbšćina (Němska)",
 

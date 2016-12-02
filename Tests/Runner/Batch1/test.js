@@ -15623,49 +15623,49 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
             typeIsWorksForReferenceTypes: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemLanguageSupportTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "TypeIsWorksForReferenceTypes()",
-                    line: "145"
+                    line: "146"
                 } ));
                 t.getFixture().typeIsWorksForReferenceTypes();
             },
             typeAsWorksForReferenceTypes: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemLanguageSupportTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "TypeAsWorksForReferenceTypes()",
-                    line: "288"
+                    line: "289"
                 } ));
                 t.getFixture().typeAsWorksForReferenceTypes();
             },
             castWorksForReferenceTypes: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemLanguageSupportTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "CastWorksForReferenceTypes()",
-                    line: "431"
+                    line: "432"
                 } ));
                 t.getFixture().castWorksForReferenceTypes();
             },
             getTypeWorksOnObjects: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemLanguageSupportTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GetTypeWorksOnObjects()",
-                    line: "574"
+                    line: "575"
                 } ));
                 t.getFixture().getTypeWorksOnObjects();
             },
             getTypeOnNullInstanceThrowsException: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemLanguageSupportTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GetTypeOnNullInstanceThrowsException()",
-                    line: "588"
+                    line: "589"
                 } ));
                 t.getFixture().getTypeOnNullInstanceThrowsException();
             },
             castOperatorForSerializableTypeWithoutTypeCheckCodeAlwaysSucceedsGeneric: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemLanguageSupportTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "CastOperatorForSerializableTypeWithoutTypeCheckCodeAlwaysSucceedsGeneric()",
-                    line: "601"
+                    line: "602"
                 } ));
                 t.getFixture().castOperatorForSerializableTypeWithoutTypeCheckCodeAlwaysSucceedsGeneric();
             },
             typeCheckForSubTypeOfGenericType: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemLanguageSupportTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "TypeCheckForSubTypeOfGenericType()",
-                    line: "643"
+                    line: "644"
                 } ));
                 t.getFixture().typeCheckForSubTypeOfGenericType();
             }

@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("tg-Cyrl-TJ", true), {
+Bridge.merge(new System.Globalization.CultureInfo("tg-Cyrl-TJ", true), {
     englishName: "Tajik (Cyrillic, Tajikistan)",
     nativeName: "Тоҷикӣ (Тоҷикистон)",
 

@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("moh-CA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("moh-CA", true), {
     englishName: "Mohawk (Mohawk)",
     nativeName: "Kanien'kéha",
 

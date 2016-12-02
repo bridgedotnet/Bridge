@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("br-FR", true), {
+Bridge.merge(new System.Globalization.CultureInfo("br-FR", true), {
     englishName: "Breton (France)",
     nativeName: "brezhoneg (Frañs)",
 

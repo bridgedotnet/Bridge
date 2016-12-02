@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sw-KE", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sw-KE", true), {
     englishName: "Kiswahili (Kenya)",
     nativeName: "Kiswahili (Kenya)",
 

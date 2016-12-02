@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("eu", true), {
+Bridge.merge(new System.Globalization.CultureInfo("eu", true), {
     englishName: "Basque",
     nativeName: "euskara",
 

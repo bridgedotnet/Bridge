@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("vi", true), {
+Bridge.merge(new System.Globalization.CultureInfo("vi", true), {
     englishName: "Vietnamese",
     nativeName: "Tiếng Việt",
 

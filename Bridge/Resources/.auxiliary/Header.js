@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @version   : {version} - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
  * @date      : 2016-11-08

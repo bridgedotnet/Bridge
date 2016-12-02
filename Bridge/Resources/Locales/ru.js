@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ru", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ru", true), {
     englishName: "Russian",
     nativeName: "русский",
 

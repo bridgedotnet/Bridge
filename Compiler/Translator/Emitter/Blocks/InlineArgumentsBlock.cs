@@ -204,7 +204,7 @@ namespace Bridge.Translator
                 }
             }
 
-            if (Helpers.IsReservedWord(name))
+            if (Helpers.IsReservedWord(this.Emitter, name))
             {
                 name = Helpers.ChangeReservedWord(name);
             }
@@ -1078,7 +1078,7 @@ namespace Bridge.Translator
             {
                 var name = p.Name;
 
-                if (Helpers.IsReservedWord(name))
+                if (Helpers.IsReservedWord(this.Emitter, name))
                 {
                     name = Helpers.ChangeReservedWord(name);
                 }

@@ -1,4 +1,4 @@
-﻿    Bridge.define("System.Text.RegularExpressions.RegexReplacement", {
+    Bridge.define("System.Text.RegularExpressions.RegexReplacement", {
         statics: {
             replace: function (evaluator, regex, input, count, startat) {
                 if (evaluator == null) {

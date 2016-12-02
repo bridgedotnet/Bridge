@@ -770,8 +770,12 @@ namespace Bridge.Contract
             return list;
         }
 
-        public static bool IsReservedWord(string word)
+        public static bool IsReservedWord(IEmitter emitter, string word)
         {
+            if (emitter != null && (emitter.TypeInfo.JsName == word || emitter.TypeInfo.JsName.StartsWith(word + ".")))
+            {
+                return true;
+            }
             return JS.Reserved.Words.Contains(word);
         }
 

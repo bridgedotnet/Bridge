@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sah-RU", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sah-RU", true), {
     englishName: "Sakha (Russia)",
     nativeName: "Саха (Россия)",
 

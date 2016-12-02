@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("quz-PE", true), {
+Bridge.merge(new System.Globalization.CultureInfo("quz-PE", true), {
     englishName: "Quechua (Peru)",
     nativeName: "runasimi (Peru)",
 

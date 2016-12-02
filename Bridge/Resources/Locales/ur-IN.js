@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ur-IN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ur-IN", true), {
     englishName: "Urdu (India)",
     nativeName: "اردو (بھارت)",
 

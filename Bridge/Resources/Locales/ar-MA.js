@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ar-MA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ar-MA", true), {
     englishName: "Arabic (Morocco)",
     nativeName: "العربية (المملكة المغربية)",
 

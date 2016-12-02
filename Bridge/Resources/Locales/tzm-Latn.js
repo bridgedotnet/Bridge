@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("tzm-Latn", true), {
+Bridge.merge(new System.Globalization.CultureInfo("tzm-Latn", true), {
     englishName: "Central Atlas Tamazight (Latin)",
     nativeName: "Tamazight",
 

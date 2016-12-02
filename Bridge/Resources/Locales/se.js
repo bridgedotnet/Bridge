@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("se", true), {
+Bridge.merge(new System.Globalization.CultureInfo("se", true), {
     englishName: "Sami (Northern)",
     nativeName: "davvisámegiella",
 

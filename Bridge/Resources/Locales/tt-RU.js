@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("tt-RU", true), {
+Bridge.merge(new System.Globalization.CultureInfo("tt-RU", true), {
     englishName: "Tatar (Russia)",
     nativeName: "Татар (Россия)",
 

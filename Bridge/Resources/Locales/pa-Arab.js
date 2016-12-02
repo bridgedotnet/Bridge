@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("pa-Arab", true), {
+Bridge.merge(new System.Globalization.CultureInfo("pa-Arab", true), {
     englishName: "Punjabi",
     nativeName: "پنجابی",
 

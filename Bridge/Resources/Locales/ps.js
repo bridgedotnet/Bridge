@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ps", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ps", true), {
     englishName: "Pashto",
     nativeName: "پښتو",
 

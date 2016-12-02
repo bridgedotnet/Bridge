@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ha-Latn-NG", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ha-Latn-NG", true), {
     englishName: "Hausa (Latin, Nigeria)",
     nativeName: "Hausa (Nijeriya)",
 

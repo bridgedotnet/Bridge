@@ -1,4 +1,4 @@
-﻿    Bridge.define("System.Text.RegularExpressions.RegexEngineBranch", {
+    Bridge.define("System.Text.RegularExpressions.RegexEngineBranch", {
         type: 0,
         value: 0,
         min: 0,

@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("fr-CD", true), {
+Bridge.merge(new System.Globalization.CultureInfo("fr-CD", true), {
     englishName: "French (Congo [DRC])",
     nativeName: "français (Congo [RDC])",
 

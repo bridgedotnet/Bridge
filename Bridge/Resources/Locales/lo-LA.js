@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("lo-LA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("lo-LA", true), {
     englishName: "Lao (Lao PDR)",
     nativeName: "ພາສາລາວ (ສປປ ລາວ)",
 

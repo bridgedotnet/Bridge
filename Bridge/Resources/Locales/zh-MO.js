@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("zh-MO", true), {
+Bridge.merge(new System.Globalization.CultureInfo("zh-MO", true), {
     englishName: "Chinese (Traditional, Macao SAR)",
     nativeName: "中文(澳門特別行政區)",
 

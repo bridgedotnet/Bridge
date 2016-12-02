@@ -1,4 +1,4 @@
-﻿    Bridge.define("System.Text.RegularExpressions.RegexNode", {
+    Bridge.define("System.Text.RegularExpressions.RegexNode", {
         statics: {
             One: 9, // char     a
             Multi: 12, // string   abcdef

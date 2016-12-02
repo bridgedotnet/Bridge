@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ti", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ti", true), {
     englishName: "Tigrinya",
     nativeName: "ትግርኛ",
 

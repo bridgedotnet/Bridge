@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ta-LK", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ta-LK", true), {
     englishName: "Tamil (Sri Lanka)",
     nativeName: "தமிழ் (இலங்கை)",
 

@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("tk", true), {
+Bridge.merge(new System.Globalization.CultureInfo("tk", true), {
     englishName: "Turkmen",
     nativeName: "Türkmen dili",
 

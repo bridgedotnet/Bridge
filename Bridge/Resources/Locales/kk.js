@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("kk", true), {
+Bridge.merge(new System.Globalization.CultureInfo("kk", true), {
     englishName: "Kazakh",
     nativeName: "Қазақ",
 

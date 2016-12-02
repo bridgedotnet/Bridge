@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("tzm-Tfng-MA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("tzm-Tfng-MA", true), {
     englishName: "Central Atlas Tamazight (Tifinagh, Morocco)",
     nativeName: "ⵜⴰⵎⴰⵣⵉⵖⵜ (ⵍⵎⵖⵔⵉⴱ)",
 

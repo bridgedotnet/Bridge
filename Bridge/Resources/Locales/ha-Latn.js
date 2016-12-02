@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ha-Latn", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ha-Latn", true), {
     englishName: "Hausa (Latin)",
     nativeName: "Hausa",
 

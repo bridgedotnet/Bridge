@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("bn-IN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("bn-IN", true), {
     englishName: "Bangla (India)",
     nativeName: "বাংলা (ভারত)",
 

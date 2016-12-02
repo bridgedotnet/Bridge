@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("lb-LU", true), {
+Bridge.merge(new System.Globalization.CultureInfo("lb-LU", true), {
     englishName: "Luxembourgish (Luxembourg)",
     nativeName: "Lëtzebuergesch (Lëtzebuerg)",
 

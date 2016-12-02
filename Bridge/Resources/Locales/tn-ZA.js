@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("tn-ZA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("tn-ZA", true), {
     englishName: "Setswana (South Africa)",
     nativeName: "Setswana (Aforika Borwa)",
 

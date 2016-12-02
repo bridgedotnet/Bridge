@@ -1,4 +1,4 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("nl-BE", true), {
+Bridge.merge(new System.Globalization.CultureInfo("nl-BE", true), {
     englishName: "Dutch (Belgium)",
     nativeName: "Nederlands (België)",
 

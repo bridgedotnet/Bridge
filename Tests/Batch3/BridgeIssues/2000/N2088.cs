@@ -42,7 +42,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             var ol = new CompletelyUnrelatedClass();
             var props = ol.GetType().GetProperties().Select(x => x.Name).ToArray();
-            Assert.AreEqual(0, props.Length);
+            Assert.AreEqual(1, props.Length);
+            Assert.AreEqual("ShouldNotSeeThis", props[0]);
 
             var obj = new T();
             props = obj.GetType().GetProperties().Select(x => x.Name).ToArray();

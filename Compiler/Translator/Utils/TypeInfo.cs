@@ -305,6 +305,12 @@ namespace Bridge.Translator
             set;
         }
 
+        public string JsName
+        {
+            get;
+            set;
+        }
+
         public AstType GetBaseClass(IEmitter emitter)
         {
             var types = this.GetBaseTypes(emitter);
