@@ -553,12 +553,29 @@
                 cfg.groupIndex = groupIndex;
             },
 
-            parseFloat: function (str, provider) {
-                if (str == null) {
-                    throw new System.ArgumentNullException("str");
+            parseFloat: function (s, provider) {
+                var res = { };
+
+                Bridge.Int.tryParseFloat(s, provider, res, false);
+
+                return res.v;
+            },
+
+            tryParseFloat: function (s, provider, result, safe) {
+                result.v = 0;
+
+                if (safe == null) {
+                    safe = true;
                 }
 
-                str = str.trim();
+                if (s == null) {
+                    if (safe) {
+                        return false;
+                    }
+                    throw new System.ArgumentNullException("s");
+                }
+
+                s = s.trim();
 
                 var nfInfo = (provider || System.Globalization.CultureInfo.getCurrentCulture()).getFormat(System.Globalization.NumberFormatInfo),
                     point = nfInfo.numberDecimalSeparator,
@@ -566,24 +583,27 @@
 
                 var errMsg = "Input string was not in a correct format.";
 
-                var pointIndex = str.indexOf(point);
-                var thousandIndex = thousands ? str.indexOf(thousands) : -1;
+                var pointIndex = s.indexOf(point);
+                var thousandIndex = thousands ? s.indexOf(thousands) : -1;
 
                 if (pointIndex > -1) {
                     // point before thousands is not allowed
                     // "10.2,5" -> FormatException
                     // "1,0.2,5" -> FormatException
-                    if ((pointIndex < thousandIndex) || ((thousandIndex > -1) && (pointIndex < str.indexOf(thousands, pointIndex)))) {
-                        throw new System.FormatException(errMsg);
-                    }
-
-                    // only one point is allowed
-                    if (str.indexOf(point, pointIndex + 1) > -1) {
+                    if (((pointIndex < thousandIndex) || ((thousandIndex > -1) && (pointIndex < s.indexOf(thousands, pointIndex))))
+                        // only one point is allowed
+                        || (s.indexOf(point, pointIndex + 1) > -1)) {
+                        if (safe) {
+                            return false;
+                        }
                         throw new System.FormatException(errMsg);
                     }
                 }
 
-                if ((point !== ".") && (thousands !== ".") && (str.indexOf(".") > -1)) {
+                if ((point !== ".") && (thousands !== ".") && (s.indexOf(".") > -1)) {
+                    if (safe) {
+                        return false;
+                    }
                     throw new System.FormatException(errMsg);
                 }
 
@@ -591,73 +611,58 @@
                     // mutiple thousands are allowed, so we remove them before going further
                     var tmpStr = "";
 
-                    for (var i = 0; i < str.length; i++) {
-                        if (str[i] !== thousands) {
-                            tmpStr += str[i];
+                    for (var i = 0; i < s.length; i++) {
+                        if (s[i] !== thousands) {
+                            tmpStr += s[i];
                         }
                     }
 
-                    str = tmpStr;
+                    s = tmpStr;
                 }
 
-                if (str === nfInfo.negativeInfinitySymbol) {
-                    return Number.NEGATIVE_INFINITY;
-                } else if (str === nfInfo.positiveInfinitySymbol) {
-                    return Number.POSITIVE_INFINITY;
-                } else if (str === nfInfo.nanSymbol) {
-                    return Number.NaN;
+                if (s === nfInfo.negativeInfinitySymbol) {
+                    result.v = Number.NEGATIVE_INFINITY;
+                    return true;
+                } else if (s === nfInfo.positiveInfinitySymbol) {
+                    result.v = Number.POSITIVE_INFINITY;
+                    return true;
+                } else if (s === nfInfo.nanSymbol) {
+                    result.v = Number.NaN;
+                    return true;
                 }
 
                 var countExp = 0;
 
-                for (var i = 0; i < str.length; i++) {
-                    if (System.Char.isLetter(str[i].charCodeAt(0))) {
-                        if (str[i].toLowerCase() === "e") {
+                for (var i = 0; i < s.length; i++) {
+                    if (System.Char.isLetter(s[i].charCodeAt(0))) {
+                        if (s[i].toLowerCase() === "e") {
                             countExp++;
                             if (countExp > 1) {
+                                if (safe) {
+                                    return false;
+                                }
                                 throw new System.FormatException(errMsg);
                             }
                         }
                         else {
+                            if (safe) {
+                                return false;
+                            }
                             throw new System.FormatException(errMsg);
                         }
                     }
                 }
 
-                var result = parseFloat(str.replace(point, "."));
+                var r = parseFloat(s.replace(point, "."));
 
-                if (isNaN(result)) {
+                if (isNaN(r)) {
+                    if (safe) {
+                        return false;
+                    }
                     throw new System.FormatException(errMsg);
                 }
 
-                return result;
-            },
-
-            tryParseFloat: function (str, provider, result) {
-                result.v = 0;
-
-                if (str == null) {
-                    return false;
-                }
-
-                var nfInfo = (provider || System.Globalization.CultureInfo.getCurrentCulture()).getFormat(System.Globalization.NumberFormatInfo);
-
-                result.v = parseFloat(str.replace(nfInfo.numberDecimalSeparator, "."));
-
-                if (isNaN(result.v) && str !== nfInfo.nanSymbol) {
-                    if (str === nfInfo.negativeInfinitySymbol) {
-                        result.v = Number.NEGATIVE_INFINITY;
-                        return true;
-                    }
-
-                    if (str === nfInfo.positiveInfinitySymbol) {
-                        result.v = Number.POSITIVE_INFINITY;
-                        return true;
-                    }
-
-                    return false;
-                }
-
+                result.v = r;
                 return true;
             },
 
