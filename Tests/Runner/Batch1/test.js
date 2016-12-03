@@ -17074,7 +17074,7 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
             parseCurrentCultureThrows: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ParseCurrentCultureThrows()",
-                    line: "234"
+                    line: "241"
                 } ));
                 try {
                     t.getFixture().parseCurrentCultureThrows();
@@ -17086,7 +17086,7 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
             parseRuCultureWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ParseRuCultureWorks()",
-                    line: "247"
+                    line: "259"
                 } ));
                 try {
                     t.getFixture().parseRuCultureWorks();
@@ -17098,7 +17098,7 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
             parseRuCultureThrows: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ParseRuCultureThrows()",
-                    line: "260"
+                    line: "279"
                 } ));
                 try {
                     t.getFixture().parseRuCultureThrows();
@@ -17110,7 +17110,7 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
             tryParseCurrentCultureWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "TryParseCurrentCultureWorks()",
-                    line: "279"
+                    line: "303"
                 } ));
                 try {
                     t.getFixture().tryParseCurrentCultureWorks();
@@ -17122,7 +17122,7 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
             tryParseRuCultureWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "TryParseRuCultureWorks()",
-                    line: "301"
+                    line: "338"
                 } ));
                 try {
                     t.getFixture().tryParseRuCultureWorks();
