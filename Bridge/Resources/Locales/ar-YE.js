@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ar-YE", true), {
     nativeName: "العربية (اليمن)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "ليس برقم",
+        nanSymbol: "ليس برقم",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-لا نهاية",

@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("mn-Mong-CN", true), {
     nativeName: "ᠮᠤᠨᠭᠭᠤᠯ ᠬᠡᠯᠡ (ᠪᠦᠭᠦᠳᠡ ᠨᠠᠢᠷᠠᠮᠳᠠᠬᠤ ᠳᠤᠮᠳᠠᠳᠤ ᠠᠷᠠᠳ ᠣᠯᠣᠰ)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "ᠲᠤᠭᠠᠠ ᠪᠤᠰᠤ",
+        nanSymbol: "ᠲᠤᠭᠠᠠ ᠪᠤᠰᠤ",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "ᠰᠦᠬᠡᠷᠬᠦ ᠬᠢᠵᠠᠭᠠᠷᠭᠦᠢ ᠶᠡᠬᠡ",

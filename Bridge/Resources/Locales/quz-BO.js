@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("quz-BO", true), {
     nativeName: "runasimi (Qullasuyu)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

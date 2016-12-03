@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("hsb-DE", true), {
     nativeName: "hornjoserbšćina (Němska)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "njedefinowane",
+        nanSymbol: "njedefinowane",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-njekónčne",

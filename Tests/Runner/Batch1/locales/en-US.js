@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("en-US", true), {
     nativeName: "English (United States)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",
@@ -36,7 +36,7 @@ Bridge.merge(new System.Globalization.CultureInfo("en-US", true), {
         amDesignator: "AM",
         dateSeparator: "/",
         dayNames: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-        firstDayOfWeek: 0,
+        firstDayOfWeek: 1,
         fullDateTimePattern: "dddd, MMMM d, yyyy h:mm:ss tt",
         longDatePattern: "dddd, MMMM d, yyyy",
         longTimePattern: "h:mm:ss tt",

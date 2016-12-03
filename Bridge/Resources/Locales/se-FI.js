@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("se-FI", true), {
     nativeName: "davvisámegiella (Suopma)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("zh-SG", true), {
     nativeName: "中文(新加坡)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

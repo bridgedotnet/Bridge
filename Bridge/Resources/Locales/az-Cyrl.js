@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("az-Cyrl", true), {
     nativeName: "Азәрбајҹан дили",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("de-LI", true), {
     nativeName: "Deutsch (Liechtenstein)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "n. def.",
+        nanSymbol: "n. def.",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-unendlich",

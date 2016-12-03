@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("km", true), {
     nativeName: "ភាសាខ្មែរ",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NAN",
+        nanSymbol: "NAN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-- អនន្ត",

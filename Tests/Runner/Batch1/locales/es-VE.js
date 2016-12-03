@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-VE", true), {
     nativeName: "español (Republica Bolivariana de Venezuela)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",

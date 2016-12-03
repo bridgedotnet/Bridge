@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("kok", true), {
     nativeName: "कोंकणी",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

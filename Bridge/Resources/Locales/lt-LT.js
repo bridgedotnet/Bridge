@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("lt-LT", true), {
     nativeName: "lietuvių (Lietuva)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-begalybė",

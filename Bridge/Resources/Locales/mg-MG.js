@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("mg-MG", true), {
     nativeName: "Malagasy (Madagasikara)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

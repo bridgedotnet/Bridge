@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("pa-Arab", true), {
     nativeName: "پنجابی",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "Nan",
+        nanSymbol: "Nan",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

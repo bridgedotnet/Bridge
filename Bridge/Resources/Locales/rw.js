@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("rw", true), {
     nativeName: "Kinyarwanda",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

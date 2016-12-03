@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("haw-US", true), {
     nativeName: "Hawaiʻi (ʻAmelika)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

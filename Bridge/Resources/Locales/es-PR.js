@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-PR", true), {
     nativeName: "español (Puerto Rico)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",

@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("as-IN", true), {
     nativeName: "অসমীয়া (ভাৰত)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "nan",
+        nanSymbol: "nan",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-infinity",

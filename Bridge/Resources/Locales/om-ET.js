@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("om-ET", true), {
     nativeName: "Oromoo (Itoophiyaa)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

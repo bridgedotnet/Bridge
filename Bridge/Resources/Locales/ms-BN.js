@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ms-BN", true), {
     nativeName: "Bahasa Melayu (Brunei Darussalam)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("tk-TM", true), {
     nativeName: "Türkmen dili (Türkmenistan)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-tükeniksizlik",

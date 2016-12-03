@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("sma-NO", true), {
     nativeName: "åarjelsaemiengïele (Nöörje)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("gd-GB", true), {
     nativeName: "Gàidhlig (An Rìoghachd Aonaichte)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

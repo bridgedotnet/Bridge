@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("xh", true), {
     nativeName: "isiXhosa",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ff", true), {
     nativeName: "Fulah",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "Non Numérique",
+        nanSymbol: "Non Numérique",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infini",
