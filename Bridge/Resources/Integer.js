@@ -583,6 +583,10 @@
                     }
                 }
 
+                if ((point !== ".") && (thousands !== ".") && (str.indexOf(".") > -1)) {
+                    throw new System.FormatException(errMsg);
+                }
+
                 if (thousandIndex > -1) {
                     // mutiple thousands are allowed, so we remove them before going further
                     var tmpStr = "";
