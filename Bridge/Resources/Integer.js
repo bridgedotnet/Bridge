@@ -558,94 +558,72 @@
                     throw new System.ArgumentNullException("str");
                 }
 
-                var tokenCount = function (input, value) {
-                    var count = 0;
-                    for(var i = 0; i < input.length; i++)
-                    {
-                        if (input[i] === value)
-                        {
-                            count += 1;
-                        }
-                    }
-                    return count;
-                };
+                str = str.trim();
 
-                if (!provider) {
+                var nfInfo = (provider || System.Globalization.CultureInfo.getCurrentCulture()).getFormat(System.Globalization.NumberFormatInfo),
+                    point = nfInfo.numberDecimalSeparator,
+                    thousands = nfInfo.numberGroupSeparator;
 
-                    var containsWhitespace = str.indexOf(" ") > -1;
+                var errMsg = "Input string was not in a correct format.";
 
-                    if (containsWhitespace) {
-                        throw new System.FormatException("Input string was not in a correct format.");
-                    }
+                var pointIndex = str.indexOf(point);
+                var thousandIndex = thousands ? str.indexOf(thousands) : -1;
 
-                    var containsDot = str.indexOf(".") > -1;
-                    var containsComma = str.indexOf(",") > -1;
-
-                    var containsDotWithComma = containsDot && containsComma;
-
-                    if (containsDotWithComma) {
-                        // dot before comma is not allowed
-                        // double.Parse("10,2.5") -> 102.5
-                        // double.Parse("10.2,5") -> FormatException
-                        if (str.indexOf(".") < str.indexOf(",")) {
-                            throw new System.FormatException("Input string was not in a correct format.");
-                        }
+                if (pointIndex > -1) {
+                    // point before thousands is not allowed
+                    // "10.2,5" -> FormatException
+                    // "1,0.2,5" -> FormatException
+                    if ((pointIndex < thousandIndex) || ((thousandIndex > -1) && (pointIndex < str.indexOf(thousands, pointIndex)))) {
+                        throw new System.FormatException(errMsg);
                     }
 
-                    if (containsDot)
-                    {
-                        var dotCount = 0;
-                        for (var i = 0; i < str.length; i++) {
-                            if (str[i] === ".") {
-                                dotCount += 1;
-                            }
-                        }
-
-                        // only one dot is allowed
-                        if (dotCount > 1) {
-                            throw new System.FormatException("Input string was not in a correct format.");
-                        }
+                    // only one point is allowed
+                    if (str.indexOf(point, pointIndex + 1) > -1) {
+                        throw new System.FormatException(errMsg);
                     }
+                }
 
-                    var strWithNoCommas = "";
+                if (thousandIndex > -1) {
+                    // mutiple thousands are allowed, so we remove them before going further
+                    var tmpStr = "";
 
                     for (var i = 0; i < str.length; i++) {
-                        if (str[i] !== ",") {
-                            strWithNoCommas += str[i];
+                        if (str[i] !== thousands) {
+                            tmpStr += str[i];
                         }
                     }
 
-                    // mutiple comma's are allowed, so we remove them before going furthur
-                    // double.Parse("1,1,1") -> 111
-                    // double.Parse("10,00") -> 1000
-                    // double.Parse("10,10,2.5") -> 10102.5
-                    str = strWithNoCommas;
+                    str = tmpStr;
+                }
 
-                    for (var i = 0; i < str.length; i++) {
-                        if (System.Char.isLetter(str[i])) {
-                            if (str[i].toLowerCase() === "e" && tokenCount(str.toLowerCase(), "e") === 1) {
-                                continue;
+                if (str === nfInfo.negativeInfinitySymbol) {
+                    return Number.NEGATIVE_INFINITY;
+                } else if (str === nfInfo.positiveInfinitySymbol) {
+                    return Number.POSITIVE_INFINITY;
+                } else if (str === nfInfo.nanSymbol) {
+                    return Number.NaN;
+                }
+
+                var countExp = 0;
+
+                for (var i = 0; i < str.length; i++) {
+                    if (System.Char.isLetter(str[i].charCodeAt(0))) {
+                        if (str[i].toLowerCase() === "e") {
+                            countExp++;
+                            if (countExp > 1) {
+                                throw new System.FormatException(errMsg);
                             }
-                            else {
-                                throw new Exception("Input string was not in a correct format.");
-                            }
+                        }
+                        else {
+                            throw new System.FormatException(errMsg);
                         }
                     }
                 }
 
-                var nfInfo = (provider || System.Globalization.CultureInfo.getCurrentCulture()).getFormat(System.Globalization.NumberFormatInfo),
-                    result = parseFloat(str.replace(nfInfo.numberDecimalSeparator, "."));
+                var result = parseFloat(str.replace(point, "."));
 
-                if (isNaN(result) && str !== nfInfo.nanSymbol) {
-                    if (str === nfInfo.negativeInfinitySymbol) {
-                        return Number.NEGATIVE_INFINITY;
-                    }
-
-                    if (str === nfInfo.positiveInfinitySymbol) {
-                        return Number.POSITIVE_INFINITY;
-                    }
-
-                    throw new System.FormatException("Input string was not in a correct format.");
+                if (isNaN(result)) {
+                    throw new System.FormatException(errMsg);
                 }
 
                 return result;
