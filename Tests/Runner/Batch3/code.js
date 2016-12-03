@@ -11874,6 +11874,17 @@ Bridge.$N1391Result =                 r;
         }
     }; });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2127", {
+        statics: {
+            testNumberFormatInfoNaNSymbol: function () {
+                var c = System.Globalization.CultureInfo.getCultureInfo("ru-RU");
+                var nanSymbol = c.numberFormat.nanSymbol;
+
+                Bridge.Test.Assert.areEqual("NaN", nanSymbol);
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
