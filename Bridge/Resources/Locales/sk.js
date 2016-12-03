@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("sk", true), {
     nativeName: "slovenčina",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "Nie je číslo",
+        nanSymbol: "Nie je číslo",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-nekonečno",

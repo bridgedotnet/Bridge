@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ps-AF", true), {
     nativeName: "پښتو (افغانستان)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "غ ع",
+        nanSymbol: "غ ع",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

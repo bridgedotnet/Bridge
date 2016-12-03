@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ka-GE", true), {
     nativeName: "ქართული (საქართველო)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "არ არის რიცხვი",
+        nanSymbol: "არ არის რიცხვი",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-უსასრულობა",

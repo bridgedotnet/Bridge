@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("oc-FR", true), {
     nativeName: "Occitan (França)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "Micca numericu",
+        nanSymbol: "Micca numericu",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinit",

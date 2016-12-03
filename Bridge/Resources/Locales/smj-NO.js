@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("smj-NO", true), {
     nativeName: "julevusámegiella (Vuodna)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ky-KG", true), {
     nativeName: "Кыргыз (Кыргызстан)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "терс чексиздик",

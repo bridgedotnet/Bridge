@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("nn", true), {
     nativeName: "norsk (nynorsk)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-INF",

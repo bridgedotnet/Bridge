@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("nso", true), {
     nativeName: "Sesotho sa Leboa",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

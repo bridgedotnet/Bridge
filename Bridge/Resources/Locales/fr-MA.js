@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("fr-MA", true), {
     nativeName: "français (Maroc)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

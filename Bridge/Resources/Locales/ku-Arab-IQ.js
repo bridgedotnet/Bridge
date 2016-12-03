@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ku-Arab-IQ", true), {
     nativeName: "کوردیی ناوەڕاست (کوردستان)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "ناژمارە",
+        nanSymbol: "ناژمارە",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

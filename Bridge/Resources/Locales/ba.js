@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ba", true), {
     nativeName: "Башҡорт",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

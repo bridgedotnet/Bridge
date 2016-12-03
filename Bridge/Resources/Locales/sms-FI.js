@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("sms-FI", true), {
     nativeName: "sää´mǩiõll (Lää´ddjânnam)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

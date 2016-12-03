@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ta-LK", true), {
     nativeName: "தமிழ் (இலங்கை)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "(-) முடிவிலி",

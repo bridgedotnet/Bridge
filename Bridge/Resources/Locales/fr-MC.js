@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("fr-MC", true), {
     nativeName: "français (Principauté de Monaco)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infini",

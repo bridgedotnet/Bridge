@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("br-FR", true), {
     nativeName: "brezhoneg (Frañs)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NkN",
+        nanSymbol: "NkN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Anfin",

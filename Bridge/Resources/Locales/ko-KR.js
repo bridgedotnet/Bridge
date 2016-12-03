@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ko-KR", true), {
     nativeName: "한국어(대한민국)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

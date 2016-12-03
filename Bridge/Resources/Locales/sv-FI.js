@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("sv-FI", true), {
     nativeName: "svenska (Finland)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-INF",

@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ts-ZA", true), {
     nativeName: "Xitsonga (South Africa)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

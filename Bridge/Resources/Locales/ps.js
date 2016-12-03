@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ps", true), {
     nativeName: "پښتو",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "غ ع",
+        nanSymbol: "غ ع",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

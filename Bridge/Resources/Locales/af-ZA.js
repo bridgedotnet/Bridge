@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("af-ZA", true), {
     nativeName: "Afrikaans (Suid-Afrika)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

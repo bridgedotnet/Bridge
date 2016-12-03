@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("bs-Latn-BA", true), {
     nativeName: "bosanski (Bosna i Hercegovina)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

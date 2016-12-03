@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("zu-ZA", true), {
     nativeName: "isiZulu (iNingizimu Afrika)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",
