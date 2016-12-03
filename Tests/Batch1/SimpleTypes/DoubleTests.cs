@@ -8,6 +8,25 @@ namespace Bridge.ClientTest.SimpleTypes
     [TestFixture(TestNameFormat = "Double - {0}")]
     public class DoubleTests
     {
+        private CultureInfo defaultCulture;
+
+        [SetUp]
+        public void SaveCurrentCulture()
+        {
+            defaultCulture = CultureInfo.CurrentCulture;
+        }
+
+        [TearDown]
+        public void RestoreCulture()
+        {
+            CultureInfo.CurrentCulture = defaultCulture;
+        }
+
+        private void SetRuCulture()
+        {
+            CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("ru-RU");
+        }
+
         [Test]
         public void TypePropertiesAreCorrect()
         {
@@ -223,6 +242,38 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.Throws<FormatException>(() => { double.Parse("10,2.5,0"); }, "6");
             Assert.Throws<FormatException>(() => { double.Parse("10,2.5,0.0"); }, "7");
             Assert.Throws<FormatException>(() => { double.Parse("1e10e"); }, "8");
+        }
+
+        [Test]
+        public void ParseRuCultureWorks()
+        {
+            SetRuCulture();
+
+            Assert.AreEqual(10.0, double.Parse("10"), "1");
+            Assert.AreEqual(10.1, double.Parse("  10,10  "), "2");
+            Assert.AreEqual(10.0, double.Parse("10,00"), "3");
+            Assert.AreEqual(double.NaN, double.Parse(CultureInfo.CurrentCulture.NumberFormat.NaNSymbol), "4" + CultureInfo.CurrentCulture.NumberFormat.NaNSymbol);
+            Assert.AreEqual(double.NegativeInfinity, double.Parse(CultureInfo.CurrentCulture.NumberFormat.NegativeInfinitySymbol), "5" + CultureInfo.CurrentCulture.NumberFormat.NegativeInfinitySymbol);
+            Assert.AreEqual(double.PositiveInfinity, double.Parse(CultureInfo.CurrentCulture.NumberFormat.PositiveInfinitySymbol), "6" + CultureInfo.CurrentCulture.NumberFormat.PositiveInfinitySymbol);
+        }
+
+        [Test]
+        public void ParseRuCultureThrows()
+        {
+            SetRuCulture();
+
+            Assert.Throws<FormatException>(() => { double.Parse(""); }, "1");
+            Assert.Throws<FormatException>(() => { double.Parse("b"); }, "2");
+            Assert.Throws<FormatException>(() => { double.Parse("10a"); }, "3");
+            Assert.Throws<FormatException>(() => { double.Parse("a10"); }, "4");
+            Assert.Throws<FormatException>(() => { double.Parse("10.2.10"); }, "5");
+            Assert.Throws<FormatException>(() => { double.Parse("10,2.5,0"); }, "6");
+            Assert.Throws<FormatException>(() => { double.Parse("10,2.5,0.0"); }, "7");
+            Assert.Throws<FormatException>(() => { double.Parse("1e10e"); }, "8");
+            Assert.Throws<FormatException>(() => { double.Parse("  10.10  "); }, "9");
+            Assert.Throws<FormatException>(() => { double.Parse("10,2,10"); }, "10");
+            Assert.Throws<FormatException>(() => { double.Parse("10,1,1,1,1,1"); }, "11");
+            Assert.Throws<FormatException>(() => { double.Parse("10,10,2.5"); }, "12");
         }
     }
 }
