@@ -275,5 +275,61 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.Throws<FormatException>(() => { double.Parse("10,1,1,1,1,1"); }, "11");
             Assert.Throws<FormatException>(() => { double.Parse("10,10,2.5"); }, "12");
         }
+
+        [Test]
+        public void TryParseCurrentCultureWorks()
+        {
+            AssertTryParse(true, 10.0, "10", "1");
+            AssertTryParse(true, 1010.0, "  10,10  ", "2");
+            AssertTryParse(true, 10210.0, "10,2,10", "3");
+            AssertTryParse(true, 1011111.0, "10,1,1,1,1,1", "4");
+            AssertTryParse(true, 1000.0, "10,00", "5");
+            AssertTryParse(true, 10102.5, "10,10,2.5", "6");
+            AssertTryParse(true, double.NaN, CultureInfo.CurrentCulture.NumberFormat.NaNSymbol, "7" + CultureInfo.CurrentCulture.NumberFormat.NaNSymbol);
+            AssertTryParse(true, double.NegativeInfinity, CultureInfo.CurrentCulture.NumberFormat.NegativeInfinitySymbol, "8" + CultureInfo.CurrentCulture.NumberFormat.NegativeInfinitySymbol);
+            AssertTryParse(true, double.PositiveInfinity, CultureInfo.CurrentCulture.NumberFormat.PositiveInfinitySymbol, "9" + CultureInfo.CurrentCulture.NumberFormat.PositiveInfinitySymbol);
+            AssertTryParse(false, 0.0, "", "10");
+            AssertTryParse(false, 0.0, "b", "11");
+            AssertTryParse(false, 0.0, "10a", "12");
+            AssertTryParse(false, 0.0, "a10", "13");
+            AssertTryParse(false, 0.0, "10.2.10", "14");
+            AssertTryParse(false, 0.0, "10,2.5,0", "15");
+            AssertTryParse(false, 0.0, "10,2.5,0.0", "16");
+            AssertTryParse(false, 0.0, "1e10e", "17");
+        }
+
+        [Test]
+        public void TryParseRuCultureWorks()
+        {
+            SetRuCulture();
+
+            AssertTryParse(true, 10.0, "10", "1");
+            AssertTryParse(true, 10.1, "  10,10  ", "2");
+            AssertTryParse(true, 10.0, "10,00", "3");
+            AssertTryParse(true, double.NaN, CultureInfo.CurrentCulture.NumberFormat.NaNSymbol, "4" + CultureInfo.CurrentCulture.NumberFormat.NaNSymbol);
+            AssertTryParse(true, double.NegativeInfinity, CultureInfo.CurrentCulture.NumberFormat.NegativeInfinitySymbol, "5" + CultureInfo.CurrentCulture.NumberFormat.NegativeInfinitySymbol);
+            AssertTryParse(true, double.PositiveInfinity, CultureInfo.CurrentCulture.NumberFormat.PositiveInfinitySymbol, "6" + CultureInfo.CurrentCulture.NumberFormat.PositiveInfinitySymbol);
+            AssertTryParse(false, 0.0, "", "7");
+            AssertTryParse(false, 0.0, "b", "8");
+            AssertTryParse(false, 0.0, "10a", "9");
+            AssertTryParse(false, 0.0, "a10", "10");
+            AssertTryParse(false, 0.0, "10.2.10", "11");
+            AssertTryParse(false, 0.0, "10,2.5,0", "12");
+            AssertTryParse(false, 0.0, "10,2.5,0.0", "13");
+            AssertTryParse(false, 0.0, "1e10e", "14");
+            AssertTryParse(false, 0.0, "  10.10  ", "15");
+            AssertTryParse(false, 0.0, "10,2,10", "16");
+            AssertTryParse(false, 0.0, "10,1,1,1,1,1", "17");
+            AssertTryParse(false, 0.0, "10,10,2.5", "18");
+        }
+
+        private void AssertTryParse(bool r, double expected, string s, string message)
+        {
+            double d;
+            var b = double.TryParse(s, out d);
+
+            Assert.AreEqual(r, b, message);
+            Assert.AreEqual(expected, d, message);
+        }
     }
 }
