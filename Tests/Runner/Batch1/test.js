@@ -1915,6 +1915,10 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
             QUnit.test("Double - DoubleEqualsWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests.doubleEqualsWorks);
             QUnit.test("Double - CompareToWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests.compareToWorks);
             QUnit.test("Double - IComparableCompareToWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests.iComparableCompareToWorks);
+            QUnit.test("Double - ParseCurrentCultureWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests.parseCurrentCultureWorks);
+            QUnit.test("Double - ParseCurrentCultureThrows", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests.parseCurrentCultureThrows);
+            QUnit.test("Double - ParseRuCultureWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests.parseRuCultureWorks);
+            QUnit.test("Double - ParseRuCultureThrows", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests.parseRuCultureThrows);
             QUnit.test("Int16 - TypePropertiesAreCorrect", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_Int16Tests.typePropertiesAreCorrect);
             QUnit.test("Int16 - CastsWork", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_Int16Tests.castsWork);
             QUnit.test("Int16 - DefaultValueIs0", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_Int16Tests.defaultValueIs0);
@@ -16768,170 +16772,338 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
             typePropertiesAreCorrect: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "TypePropertiesAreCorrect()",
-                    line: "10"
+                    line: "30"
                 } ));
-                t.getFixture().typePropertiesAreCorrect();
+                try {
+                    t.getFixture().typePropertiesAreCorrect();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             defaultValueIs0: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "DefaultValueIs0()",
-                    line: "25"
+                    line: "45"
                 } ));
-                t.getFixture().defaultValueIs0();
+                try {
+                    t.getFixture().defaultValueIs0();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             creatingInstanceReturnsZero: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "CreatingInstanceReturnsZero()",
-                    line: "31"
+                    line: "51"
                 } ));
-                t.getFixture().creatingInstanceReturnsZero();
+                try {
+                    t.getFixture().creatingInstanceReturnsZero();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             constantsWork: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ConstantsWork()",
-                    line: "37"
+                    line: "57"
                 } ));
-                t.getFixture().constantsWork();
+                try {
+                    t.getFixture().constantsWork();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             defaultConstructorReturnsZero: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "DefaultConstructorReturnsZero()",
-                    line: "48"
+                    line: "68"
                 } ));
-                t.getFixture().defaultConstructorReturnsZero();
+                try {
+                    t.getFixture().defaultConstructorReturnsZero();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             formatWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "FormatWorks()",
-                    line: "54"
+                    line: "74"
                 } ));
-                t.getFixture().formatWorks();
+                try {
+                    t.getFixture().formatWorks();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             iFormattableToStringWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IFormattableToStringWorks()",
-                    line: "60"
+                    line: "80"
                 } ));
-                t.getFixture().iFormattableToStringWorks();
+                try {
+                    t.getFixture().iFormattableToStringWorks();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             toStringWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ToStringWorks()",
-                    line: "66"
+                    line: "86"
                 } ));
-                t.getFixture().toStringWorks();
+                try {
+                    t.getFixture().toStringWorks();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             toExponentialWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ToExponentialWorks()",
-                    line: "72"
+                    line: "92"
                 } ));
-                t.getFixture().toExponentialWorks();
+                try {
+                    t.getFixture().toExponentialWorks();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             toExponentialWithFractionalDigitsWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ToExponentialWithFractionalDigitsWorks()",
-                    line: "78"
+                    line: "98"
                 } ));
-                t.getFixture().toExponentialWithFractionalDigitsWorks();
+                try {
+                    t.getFixture().toExponentialWithFractionalDigitsWorks();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             toFixed: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ToFixed()",
-                    line: "84"
+                    line: "104"
                 } ));
-                t.getFixture().toFixed();
+                try {
+                    t.getFixture().toFixed();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             toFixedWithFractionalDigitsWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ToFixedWithFractionalDigitsWorks()",
-                    line: "90"
+                    line: "110"
                 } ));
-                t.getFixture().toFixedWithFractionalDigitsWorks();
+                try {
+                    t.getFixture().toFixedWithFractionalDigitsWorks();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             toPrecisionWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ToPrecisionWorks()",
-                    line: "96"
+                    line: "116"
                 } ));
-                t.getFixture().toPrecisionWorks();
+                try {
+                    t.getFixture().toPrecisionWorks();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             toPrecisionWithPrecisionWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ToPrecisionWithPrecisionWorks()",
-                    line: "102"
+                    line: "122"
                 } ));
-                t.getFixture().toPrecisionWithPrecisionWorks();
+                try {
+                    t.getFixture().toPrecisionWithPrecisionWorks();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             isPositiveInfinityWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IsPositiveInfinityWorks()",
-                    line: "108"
+                    line: "128"
                 } ));
-                t.getFixture().isPositiveInfinityWorks();
+                try {
+                    t.getFixture().isPositiveInfinityWorks();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             isNegativeInfinityWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IsNegativeInfinityWorks()",
-                    line: "117"
+                    line: "137"
                 } ));
-                t.getFixture().isNegativeInfinityWorks();
+                try {
+                    t.getFixture().isNegativeInfinityWorks();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             isInfinityWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IsInfinityWorks()",
-                    line: "127"
+                    line: "147"
                 } ));
-                t.getFixture().isInfinityWorks();
+                try {
+                    t.getFixture().isInfinityWorks();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             isFiniteWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IsFiniteWorks()",
-                    line: "137"
+                    line: "157"
                 } ));
-                t.getFixture().isFiniteWorks();
+                try {
+                    t.getFixture().isFiniteWorks();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             isNaNWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IsNaNWorks()",
-                    line: "146"
+                    line: "166"
                 } ));
-                t.getFixture().isNaNWorks();
+                try {
+                    t.getFixture().isNaNWorks();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             getHashCodeWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GetHashCodeWorks()",
-                    line: "155"
+                    line: "175"
                 } ));
-                t.getFixture().getHashCodeWorks();
+                try {
+                    t.getFixture().getHashCodeWorks();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             objectEqualsWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ObjectEqualsWorks()",
-                    line: "164"
+                    line: "184"
                 } ));
-                t.getFixture().objectEqualsWorks();
+                try {
+                    t.getFixture().objectEqualsWorks();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             doubleEqualsWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "DoubleEqualsWorks()",
-                    line: "173"
+                    line: "193"
                 } ));
-                t.getFixture().doubleEqualsWorks();
+                try {
+                    t.getFixture().doubleEqualsWorks();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             compareToWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "CompareToWorks()",
-                    line: "182"
+                    line: "202"
                 } ));
-                t.getFixture().compareToWorks();
+                try {
+                    t.getFixture().compareToWorks();
+                }
+                finally {
+                    t.tearDown();
+                }
             },
             iComparableCompareToWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IComparableCompareToWorks()",
-                    line: "191"
+                    line: "211"
                 } ));
-                t.getFixture().iComparableCompareToWorks();
+                try {
+                    t.getFixture().iComparableCompareToWorks();
+                }
+                finally {
+                    t.tearDown();
+                }
+            },
+            parseCurrentCultureWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "ParseCurrentCultureWorks()",
+                    line: "220"
+                } ));
+                try {
+                    t.getFixture().parseCurrentCultureWorks();
+                }
+                finally {
+                    t.tearDown();
+                }
+            },
+            parseCurrentCultureThrows: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "ParseCurrentCultureThrows()",
+                    line: "234"
+                } ));
+                try {
+                    t.getFixture().parseCurrentCultureThrows();
+                }
+                finally {
+                    t.tearDown();
+                }
+            },
+            parseRuCultureWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "ParseRuCultureWorks()",
+                    line: "247"
+                } ));
+                try {
+                    t.getFixture().parseRuCultureWorks();
+                }
+                finally {
+                    t.tearDown();
+                }
+            },
+            parseRuCultureThrows: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.DoubleTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_DoubleTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "ParseRuCultureThrows()",
+                    line: "260"
+                } ));
+                try {
+                    t.getFixture().parseRuCultureThrows();
+                }
+                finally {
+                    t.tearDown();
+                }
             }
         },
         context: null,
@@ -16944,6 +17116,12 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
                 } );
             }
             return this.context;
+        },
+        setUp: function () {
+            this.getFixture().saveCurrentCulture();
+        },
+        tearDown: function () {
+            this.getFixture().restoreCulture();
         }
     });
 

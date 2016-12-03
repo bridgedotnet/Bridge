@@ -36,7 +36,7 @@ Bridge.merge(new System.Globalization.CultureInfo("en-US", true), {
         amDesignator: "AM",
         dateSeparator: "/",
         dayNames: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-        firstDayOfWeek: 1,
+        firstDayOfWeek: 0,
         fullDateTimePattern: "dddd, MMMM d, yyyy h:mm:ss tt",
         longDatePattern: "dddd, MMMM d, yyyy",
         longTimePattern: "h:mm:ss tt",
