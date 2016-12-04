@@ -489,6 +489,10 @@ namespace Bridge.Translator
                     {
                         new InlineArgumentsBlock(this.Emitter, new ArgumentsInfo(this.Emitter, memberReferenceExpression, resolveResult), oldInline, (IMethod)member.Member, targetrr).EmitFunctionReference();
                     }
+                    else if (member != null && member.Member is IField && inline.Contains("{0}"))
+                    {
+                        this.PushWriter(inline, null, thisArg, range);
+                    }
                     else
                     {
                         this.Write(inline);
@@ -543,7 +547,7 @@ namespace Bridge.Translator
             {
                 if (member != null && member.IsCompileTimeConstant && member.Member.DeclaringType.Kind == TypeKind.Enum)
                 {
-                    var typeDef = member.Member.DeclaringType as DefaultResolvedTypeDefinition;
+                    var typeDef = member.Member.DeclaringType as ITypeDefinition;
 
                     if (typeDef != null)
                     {
@@ -897,7 +901,23 @@ namespace Bridge.Translator
                         }
                         else
                         {
-                            this.Write(OverloadsCollection.Create(this.Emitter, member.Member).GetOverloadName(!nativeImplementation));
+                            var name = OverloadsCollection.Create(this.Emitter, member.Member).GetOverloadName(!nativeImplementation);
+                            var isValid = Helpers.IsValidIdentifier(name);
+
+                            if (isValid)
+                            {
+                                this.Write(name);
+                            }
+                            else
+                            {
+                                if (this.Emitter.Output[this.Emitter.Output.Length - 1] == '.')
+                                {
+                                    --this.Emitter.Output.Length;
+                                    this.Write("[");
+                                    this.WriteScript(name);
+                                    this.Write("]");
+                                }
+                            }
                         }
                     }
                     else if (!this.Emitter.IsAssignment)
@@ -1426,13 +1446,29 @@ namespace Bridge.Translator
                         else
                         {
                             var fieldName = OverloadsCollection.Create(this.Emitter, member.Member).GetOverloadName(!nativeImplementation);
+                            
                             if (isRefArg)
                             {
                                 this.WriteScript(fieldName);
                             }
                             else
                             {
-                                this.Write(fieldName);
+                                var isValid = Helpers.IsValidIdentifier(fieldName);
+
+                                if (isValid)
+                                {
+                                    this.Write(fieldName);
+                                }
+                                else
+                                {
+                                    if (this.Emitter.Output[this.Emitter.Output.Length - 1] == '.')
+                                    {
+                                        --this.Emitter.Output.Length;
+                                        this.Write("[");
+                                        this.WriteScript(fieldName);
+                                        this.Write("]");
+                                    }
+                                }
                             }
                         }
                     }

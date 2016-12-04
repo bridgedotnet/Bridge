@@ -7150,8 +7150,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7181,7 +7179,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    });
+                                    }); /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -11873,6 +11871,106 @@ Bridge.$N1391Result =                 r;
             return Bridge.is(oThis, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2106.c1$1(TA));
         }
     }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2114", {
+        statics: {
+            testNonStandardNames: function () {
+                var c1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2114.TestClass1(5);
+                Bridge.Test.Assert.areEqual(5, c1["0a"]);
+                Bridge.Test.Assert.areEqual(c1["0a"], c1["0a"]);
+
+                Bridge.Test.Assert.areEqual(5, c1["0p"]);
+                Bridge.Test.Assert.areEqual(c1["0p"], c1["0p"]);
+
+                Bridge.Test.Assert.areEqual(5, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2114.TestClass1["0p1"]);
+
+                Bridge.Test.Assert.true(System.Int64(7).equals(c1["0l"]));
+                Bridge.Test.Assert.true(System.Nullable.getValue(Bridge.cast(c1["0l"], System.Int64)).equals(c1["0l"]));
+
+                Bridge.Test.Assert.areEqual(2, c1["0a3"]);
+                Bridge.Test.Assert.areEqual(c1["0a3"], c1["0a3"]);
+
+                Bridge.Test.Assert.areEqual(0, c1["0a4"]);
+                Bridge.Test.Assert.areEqual(c1["0a4"], c1["0a4"]);
+            },
+            testFieldTemplates: function () {
+                var c2 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2114.TestClass2(5);
+                Bridge.Test.Assert.areEqual(5, c2["0a"]);
+                Bridge.Test.Assert.areEqual(5, c2.testMethod());
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2114.TestClass1", {
+        statics: {
+            sTestField: 1,
+            "0p1": 0
+        },
+        "0a": 0,
+        "0a3": 0,
+        "0l": System.Int64(0),
+        "0p": 0,
+        "0a4": 0,
+        config: {
+            init: function () {
+                this["0a3"] = (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2114.TestClass1.sTestField + 1) | 0;
+            }
+        },
+        ctor: function (value) {
+            this.$initialize();            var $t;
+
+            this["0a"] = value;
+            this["0a"] = value;
+            var v = this["0a"];
+            v = this["0a"];
+
+            this["0p"] = value;
+            this["0p"] = value;
+            v = this["0p"];
+            v = this["0p"];
+
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge2114.TestClass1["0p1"] = value;
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge2114.TestClass1["0p1"] = value;
+            v = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2114.TestClass1["0p1"];
+            v = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2114.TestClass1["0p1"];
+
+
+            this["0l"] = System.Int64(value);
+            this["0l"] = System.Int64(value);
+            v = System.Int64.clip32(this["0l"]);
+            v = System.Int64.clip32(this["0l"]);
+            var l = ($t = this["0l"], this["0l"] = this["0l"].inc(), $t);
+            l = ($t = this["0l"], this["0l"] = this["0l"].inc(), $t);
+    }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2114.TestClass2", {
+        f: 0,
+        config: {
+            init: function () {
+                this["0a"] = 0;
+                this.testMethod(0);
+            }
+        },
+        ctor: function (value) {
+            this.$initialize();
+            this["0a"] = value;
+            this["0a"] = value;
+            var v = this["0a"];
+            v = this["0a"];
+
+            this.testMethod(value);
+            this.testMethod(value);
+            v = this.testMethod();
+            v = this.testMethod();
+        },
+        testMethod: function () {
+            if (arguments.length > 0) {
+                this.f = System.Nullable.getValue(Bridge.cast(arguments[0], System.Int32));
+            }
+            return this.f;
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {

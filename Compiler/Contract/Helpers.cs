@@ -1248,5 +1248,11 @@ namespace Bridge.Contract
 
             return false;
         }
+
+        private static Regex validIdentifier = new Regex("^[$A-Z_][0-9A-Z_$]*$", RegexOptions.Compiled | RegexOptions.Singleline | RegexOptions.IgnoreCase);
+        public static bool IsValidIdentifier(string name)
+        {
+            return Helpers.validIdentifier.IsMatch(name);
+        }
     }
 }

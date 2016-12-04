@@ -87,23 +87,9 @@ Bridge.assembly("Bridge_ClientTest_Batch2_Tests", function ($asm, globals) {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.Bridge1385)],
         statics: {
             testIsTypedArrayForByte: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.Bridge1385).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_Bridge1385, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestIsTypedArrayForByte()",
-                    line: "9"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.Bridge1385).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_Bridge1385);
                 Bridge.ClientTest.Batch2.BridgeIssues.Bridge1385.testIsTypedArrayForByte();
             }
-        },
-        context: null,
-        getContext: function () {
-            if (this.context == null) {
-                this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
-                    project: "Batch2",
-                    className: "Bridge.ClientTest.Batch2.BridgeIssues.Bridge1385",
-                    file: "Batch2\\BridgeIssues\\N1385.cs"
-                } );
-            }
-            return this.context;
         }
     });
 
@@ -111,23 +97,9 @@ Bridge.assembly("Bridge_ClientTest_Batch2_Tests", function ($asm, globals) {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.Bridge1499)],
         statics: {
             testObjectStringCoalesceWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.Bridge1499).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_Bridge1499, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestObjectStringCoalesceWorks()",
-                    line: "9"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.Bridge1499).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_Bridge1499);
                 t.getFixture().testObjectStringCoalesceWorks();
             }
-        },
-        context: null,
-        getContext: function () {
-            if (this.context == null) {
-                this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
-                    project: "Batch2",
-                    className: "Bridge.ClientTest.Batch2.BridgeIssues.Bridge1499",
-                    file: "Batch2\\BridgeIssues\\N1499.cs"
-                } );
-            }
-            return this.context;
         }
     });
 
@@ -135,30 +107,13 @@ Bridge.assembly("Bridge_ClientTest_Batch2_Tests", function ($asm, globals) {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N1122)],
         statics: {
             testClippingInJavaScriptOverflowMode: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N1122).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N1122, 4, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestClippingInJavaScriptOverflowMode()",
-                    line: "12"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N1122).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N1122, 4);
                 Bridge.ClientTest.Batch2.BridgeIssues.N1122.testClippingInJavaScriptOverflowMode();
             },
             testIntegerDivisionInJavaScriptOverflowMode: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N1122).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N1122, 4, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestIntegerDivisionInJavaScriptOverflowMode()",
-                    line: "30"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N1122).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N1122, 4);
                 Bridge.ClientTest.Batch2.BridgeIssues.N1122.testIntegerDivisionInJavaScriptOverflowMode();
             }
-        },
-        context: null,
-        getContext: function () {
-            if (this.context == null) {
-                this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
-                    project: "Batch2",
-                    className: "Bridge.ClientTest.Batch2.BridgeIssues.N1122",
-                    file: "Batch2\\BridgeIssues\\N1122.cs"
-                } );
-            }
-            return this.context;
         }
     });
 
@@ -166,23 +121,9 @@ Bridge.assembly("Bridge_ClientTest_Batch2_Tests", function ($asm, globals) {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N1204)],
         statics: {
             testStrictNullChecksOptionForNulls: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N1204).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N1204, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestStrictNullChecksOptionForNulls()",
-                    line: "10"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N1204).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N1204);
                 Bridge.ClientTest.Batch2.BridgeIssues.N1204.testStrictNullChecksOptionForNulls();
             }
-        },
-        context: null,
-        getContext: function () {
-            if (this.context == null) {
-                this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
-                    project: "Batch2",
-                    className: "Bridge.ClientTest.Batch2.BridgeIssues.N1204",
-                    file: "Batch2\\BridgeIssues\\N1204.cs"
-                } );
-            }
-            return this.context;
         }
     });
 
@@ -190,366 +131,205 @@ Bridge.assembly("Bridge_ClientTest_Batch2_Tests", function ($asm, globals) {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772)],
         statics: {
             typePropertiesAreCorrect: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TypePropertiesAreCorrect()",
-                    line: "36"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().typePropertiesAreCorrect();
             },
             lengthWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "LengthWorks()",
-                    line: "50"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().lengthWorks();
             },
             rankIsOne: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "RankIsOne()",
-                    line: "58"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().rankIsOne();
             },
             getLengthWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "GetLengthWorks()",
-                    line: "64"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().getLengthWorks();
             },
             getLowerBound: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "GetLowerBound()",
-                    line: "72"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().getLowerBound();
             },
             getUpperBoundWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "GetUpperBoundWorks()",
-                    line: "80"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().getUpperBoundWorks();
             },
             gettingValueByIndexWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "GettingValueByIndexWorks()",
-                    line: "88"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().gettingValueByIndexWorks();
             },
             getValueWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "GetValueWorks()",
-                    line: "95"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().getValueWorks();
             },
             settingValueByIndexWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "SettingValueByIndexWorks()",
-                    line: "102"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().settingValueByIndexWorks();
             },
             setValueWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "SetValueWorks()",
-                    line: "112"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().setValueWorks();
             },
             foreachWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "ForeachWorks()",
-                    line: "122"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().foreachWorks();
             },
             cloneWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "CloneWorks()",
-                    line: "133"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().cloneWorks();
             },
             concatWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "ConcatWorks()",
-                    line: "142"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().concatWorks();
             },
             containsWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "ContainsWorks()",
-                    line: "151"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().containsWorks();
             },
             containsUsesEqualsMethod: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "ContainsUsesEqualsMethod()",
-                    line: "159"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().containsUsesEqualsMethod();
             },
             allWithArrayItemFilterCallbackWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "AllWithArrayItemFilterCallbackWorks()",
-                    line: "167"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().allWithArrayItemFilterCallbackWorks();
             },
             sliceWithoutEndWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "SliceWithoutEndWorks()",
-                    line: "174"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().sliceWithoutEndWorks();
             },
             foreachWithArrayItemCallbackWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "ForeachWithArrayItemCallbackWorks()",
-                    line: "181"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().foreachWithArrayItemCallbackWorks();
             },
             foreachWithArrayCallbackWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "ForeachWithArrayCallbackWorks()",
-                    line: "189"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().foreachWithArrayCallbackWorks();
             },
             indexOfWithoutStartIndexWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "IndexOfWithoutStartIndexWorks()",
-                    line: "197"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().indexOfWithoutStartIndexWorks();
             },
             indexOfWithoutStartIndexUsesEqualsMethod: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "IndexOfWithoutStartIndexUsesEqualsMethod()",
-                    line: "203"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().indexOfWithoutStartIndexUsesEqualsMethod();
             },
             indexOfWithStartIndexWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "IndexOfWithStartIndexWorks()",
-                    line: "211"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().indexOfWithStartIndexWorks();
             },
             joinWithoutDelimiterWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "JoinWithoutDelimiterWorks()",
-                    line: "217"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().joinWithoutDelimiterWorks();
             },
             reverseWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "ReverseWorks()",
-                    line: "225"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().reverseWorks();
             },
             anyWithArrayItemFilterCallbackWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "AnyWithArrayItemFilterCallbackWorks()",
-                    line: "233"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().anyWithArrayItemFilterCallbackWorks();
             },
             binarySearch1Works: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "BinarySearch1Works()",
-                    line: "240"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().binarySearch1Works();
             },
             binarySearch2Works: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "BinarySearch2Works()",
-                    line: "249"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().binarySearch2Works();
             },
             binarySearch3Works: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "BinarySearch3Works()",
-                    line: "266"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().binarySearch3Works();
             },
             binarySearch4Works: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "BinarySearch4Works()",
-                    line: "275"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().binarySearch4Works();
             },
             binarySearchExceptionsWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "BinarySearchExceptionsWorks()",
-                    line: "284"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().binarySearchExceptionsWorks();
             },
             sortWithDefaultCompareWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "SortWithDefaultCompareWorks()",
-                    line: "295"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().sortWithDefaultCompareWorks();
             },
             sort1Works: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "Sort1Works()",
-                    line: "303"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().sort1Works();
             },
             sort2Works: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "Sort2Works()",
-                    line: "311"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().sort2Works();
             },
             sort3Works: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "Sort3Works()",
-                    line: "319"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().sort3Works();
             },
             sort4Works: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "Sort4Works()",
-                    line: "327"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().sort4Works();
             },
             sortExceptionsWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "SortExceptionsWorks()",
-                    line: "335"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().sortExceptionsWorks();
             },
             foreachWhenCastToIListWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "ForeachWhenCastToIListWorks()",
-                    line: "343"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().foreachWhenCastToIListWorks();
             },
             iCollectionCountWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "ICollectionCountWorks()",
-                    line: "355"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().iCollectionCountWorks();
             },
             iCollectionAddWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "ICollectionAddWorks()",
-                    line: "362"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().iCollectionAddWorks();
             },
             iCollectionClearWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "ICollectionClearWorks()",
-                    line: "370"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().iCollectionClearWorks();
             },
             iCollectionContainsWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "ICollectionContainsWorks()",
-                    line: "381"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().iCollectionContainsWorks();
             },
             iCollectionContainsUsesEqualsMethod: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "ICollectionContainsUsesEqualsMethod()",
-                    line: "389"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().iCollectionContainsUsesEqualsMethod();
             },
             iCollectionRemoveWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "ICollectionRemoveWorks()",
-                    line: "397"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().iCollectionRemoveWorks();
             },
             iListIndexingWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "IListIndexingWorks()",
-                    line: "406"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().iListIndexingWorks();
             },
             iListIndexOfWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "IListIndexOfWorks()",
-                    line: "415"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().iListIndexOfWorks();
             },
             iListIndexOfUsesEqualsMethod: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "IListIndexOfUsesEqualsMethod()",
-                    line: "423"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().iListIndexOfUsesEqualsMethod();
             },
             iListInsertWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "IListInsertWorks()",
-                    line: "431"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().iListInsertWorks();
             },
             iListRemoveAtWorks: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "IListRemoveAtWorks()",
-                    line: "439"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().iListRemoveAtWorks();
             },
             issueSpecific: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "IssueSpecific()",
-                    line: "447"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772);
                 t.getFixture().issueSpecific();
             },
             testUseCase: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, 10, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestUseCase()",
-                    line: "455"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_BridgeIssues_N772, 10);
                 Bridge.ClientTest.Batch2.BridgeIssues.N772.testUseCase();
             }
-        },
-        context: null,
-        getContext: function () {
-            if (this.context == null) {
-                this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
-                    project: "Batch2",
-                    className: "Bridge.ClientTest.Batch2.BridgeIssues.N772",
-                    file: "Batch2\\BridgeIssues\\N772.cs"
-                } );
-            }
-            return this.context;
         }
     });
 
@@ -557,44 +337,21 @@ Bridge.assembly("Bridge_ClientTest_Batch2_Tests", function ($asm, globals) {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests)],
         statics: {
             testInt32: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestInt32()",
-                    line: "190"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests);
                 Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests.testInt32();
             },
             testUInt32: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestUInt32()",
-                    line: "234"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests);
                 Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests.testUInt32();
             },
             testLong: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestLong()",
-                    line: "276"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests);
                 Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests.testLong();
             },
             testULong: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestULong()",
-                    line: "320"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedInsideUncheckedTests);
                 Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests.testULong();
             }
-        },
-        context: null,
-        getContext: function () {
-            if (this.context == null) {
-                this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
-                    project: "Batch2",
-                    className: "Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests",
-                    file: "Batch2\\CheckedUncheckedTests.cs"
-                } );
-            }
-            return this.context;
         }
     });
 
@@ -602,44 +359,21 @@ Bridge.assembly("Bridge_ClientTest_Batch2_Tests", function ($asm, globals) {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests)],
         statics: {
             testInt32: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestInt32()",
-                    line: "25"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedTests);
                 Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests.testInt32();
             },
             testUInt32: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestUInt32()",
-                    line: "66"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedTests);
                 Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests.testUInt32();
             },
             testLong: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestLong()",
-                    line: "105"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedTests);
                 Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests.testLong();
             },
             testULong: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestULong()",
-                    line: "146"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_CheckedTests);
                 Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests.testULong();
             }
-        },
-        context: null,
-        getContext: function () {
-            if (this.context == null) {
-                this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
-                    project: "Batch2",
-                    className: "Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests",
-                    file: "Batch2\\CheckedUncheckedTests.cs"
-                } );
-            }
-            return this.context;
         }
     });
 
@@ -647,44 +381,21 @@ Bridge.assembly("Bridge_ClientTest_Batch2_Tests", function ($asm, globals) {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests)],
         statics: {
             testInt32: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedInsideCheckedTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestInt32()",
-                    line: "565"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedInsideCheckedTests);
                 Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests.testInt32();
             },
             testUInt32: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedInsideCheckedTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestUInt32()",
-                    line: "617"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedInsideCheckedTests);
                 Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests.testUInt32();
             },
             testLong: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedInsideCheckedTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestLong()",
-                    line: "669"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedInsideCheckedTests);
                 Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests.testLong();
             },
             testULong: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedInsideCheckedTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestULong()",
-                    line: "721"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedInsideCheckedTests);
                 Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests.testULong();
             }
-        },
-        context: null,
-        getContext: function () {
-            if (this.context == null) {
-                this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
-                    project: "Batch2",
-                    className: "Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests",
-                    file: "Batch2\\CheckedUncheckedTests.cs"
-                } );
-            }
-            return this.context;
         }
     });
 
@@ -692,44 +403,21 @@ Bridge.assembly("Bridge_ClientTest_Batch2_Tests", function ($asm, globals) {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests)],
         statics: {
             testInt32: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestInt32()",
-                    line: "367"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedTests);
                 Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests.testInt32();
             },
             testUInt32: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestUInt32()",
-                    line: "416"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedTests);
                 Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests.testUInt32();
             },
             testLong: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestLong()",
-                    line: "465"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedTests);
                 Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests.testLong();
             },
             testULong: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestULong()",
-                    line: "514"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_UncheckedTests);
                 Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests.testULong();
             }
-        },
-        context: null,
-        getContext: function () {
-            if (this.context == null) {
-                this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
-                    project: "Batch2",
-                    className: "Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests",
-                    file: "Batch2\\CheckedUncheckedTests.cs"
-                } );
-            }
-            return this.context;
         }
     });
 
@@ -737,44 +425,21 @@ Bridge.assembly("Bridge_ClientTest_Batch2_Tests", function ($asm, globals) {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests)],
         statics: {
             testInt32: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_WithNoUncheckedKeywordTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestInt32()",
-                    line: "775"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_WithNoUncheckedKeywordTests);
                 Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests.testInt32();
             },
             testUInt32: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_WithNoUncheckedKeywordTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestUInt32()",
-                    line: "821"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_WithNoUncheckedKeywordTests);
                 Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests.testUInt32();
             },
             testLong: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_WithNoUncheckedKeywordTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestLong()",
-                    line: "867"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_WithNoUncheckedKeywordTests);
                 Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests.testLong();
             },
             testULong: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_WithNoUncheckedKeywordTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "TestULong()",
-                    line: "913"
-                } ));
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch2_Tests_Runner.Bridge_ClientTest_Batch2_WithNoUncheckedKeywordTests);
                 Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests.testULong();
             }
-        },
-        context: null,
-        getContext: function () {
-            if (this.context == null) {
-                this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
-                    project: "Batch2",
-                    className: "Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests",
-                    file: "Batch2\\CheckedUncheckedTests.cs"
-                } );
-            }
-            return this.context;
         }
     });
 });
