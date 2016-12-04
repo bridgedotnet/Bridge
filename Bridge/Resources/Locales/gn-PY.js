@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("gn-PY", true), {
     nativeName: "Guarani (Paraguái)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "ndaha’éi papaha",
+        nanSymbol: "ndaha’éi papaha",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",

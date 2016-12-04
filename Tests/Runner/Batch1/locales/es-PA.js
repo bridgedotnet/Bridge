@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-PA", true), {
     nativeName: "español (Panamá)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",

@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ro-RO", true), {
     nativeName: "română (România)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN (nu este un număr)",
+        nanSymbol: "NaN (nu este un număr)",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinit",

@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("az-Latn", true), {
     nativeName: "Azərbaycan dili (Azərbaycan)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

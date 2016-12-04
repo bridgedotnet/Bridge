@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ti-ER", true), {
     nativeName: "ትግርኛ (ኤርትራ)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NAN",
+        nanSymbol: "NAN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

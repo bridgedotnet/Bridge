@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("lb-LU", true), {
     nativeName: "Lëtzebuergesch (Lëtzebuerg)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-onendlech",

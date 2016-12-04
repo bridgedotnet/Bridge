@@ -25439,6 +25439,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     });
 
     Bridge.define("Bridge.ClientTest.SimpleTypes.DoubleTests", {
+        defaultCulture: null,
+        saveCurrentCulture: function () {
+            this.defaultCulture = System.Globalization.CultureInfo.getCurrentCulture();
+        },
+        restoreCulture: function () {
+            System.Globalization.CultureInfo.setCurrentCulture(this.defaultCulture);
+        },
+        setRuCulture: function () {
+            System.Globalization.CultureInfo.setCurrentCulture(System.Globalization.CultureInfo.getCultureInfo("ru-RU"));
+        },
         typePropertiesAreCorrect: function () {
             Bridge.Test.Assert.true(Bridge.is(0.5, System.Double));
             Bridge.Test.Assert.areEqual("System.Double", Bridge.Reflection.getTypeFullName(System.Double));
@@ -25554,6 +25564,207 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.true(Bridge.compare(1.0, 0.0, false, System.Double) > 0);
             Bridge.Test.Assert.true(Bridge.compare(0.0, 0.5, false, System.Double) < 0);
             Bridge.Test.Assert.true(Bridge.compare(1.0, 1.0, false, System.Double) === 0);
+        },
+        parseCurrentCultureWorks: function () {
+            Bridge.Test.Assert.areEqual$1(10.0, System.Double.parse("10.0"), "1");
+            Bridge.Test.Assert.areEqual$1(1010.0, System.Double.parse("  10,10  "), "2");
+            Bridge.Test.Assert.areEqual$1(10210.0, System.Double.parse("10,2,10"), "3");
+            Bridge.Test.Assert.areEqual$1(1011111.0, System.Double.parse("10,1,1,1,1,1"), "4");
+            Bridge.Test.Assert.areEqual$1(1000.0, System.Double.parse("10,00"), "5");
+            Bridge.Test.Assert.areEqual$1(10102.5, System.Double.parse("10,10,2.5"), "6");
+            Bridge.Test.Assert.areEqual$1(Number.NaN, System.Double.parse(System.Globalization.CultureInfo.getCurrentCulture().numberFormat.nanSymbol), System.String.concat("7", System.Globalization.CultureInfo.getCurrentCulture().numberFormat.nanSymbol));
+            Bridge.Test.Assert.areEqual$1(Number.NEGATIVE_INFINITY, System.Double.parse(System.Globalization.CultureInfo.getCurrentCulture().numberFormat.negativeInfinitySymbol), System.String.concat("8", System.Globalization.CultureInfo.getCurrentCulture().numberFormat.negativeInfinitySymbol));
+            Bridge.Test.Assert.areEqual$1(Number.POSITIVE_INFINITY, System.Double.parse(System.Globalization.CultureInfo.getCurrentCulture().numberFormat.positiveInfinitySymbol), System.String.concat("9", System.Globalization.CultureInfo.getCurrentCulture().numberFormat.positiveInfinitySymbol));
+            Bridge.Test.Assert.areEqual$1(-123.0, System.Double.parse("-123"), "10");
+            Bridge.Test.Assert.areEqual$1(123.0, System.Double.parse("123"), "11");
+            Bridge.Test.Assert.areEqual$1(123.0, System.Double.parse("  123  "), "12");
+            Bridge.Test.Assert.areEqual$1(0.0, System.Double.parse("0"), "13");
+            Bridge.Test.Assert.areEqual$1(567.89, System.Double.parse("567.89"), "14");
+            Bridge.Test.Assert.areEqual$1(-567.89, System.Double.parse("-567.89"), "15");
+            Bridge.Test.Assert.areEqual$1(1E+23, System.Double.parse("1E23"), "16");
+        },
+        parseCurrentCultureThrows: function () {
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f1, "1");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f2, "2");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f3, "3");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f4, "4");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f5, "5");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f6, "6");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f7, "7");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f8, "8");
+            Bridge.Test.Assert.throws$7(System.ArgumentNullException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f9, "9");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f10, "10");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f11, "11");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f12, "12");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f13, "13");
+        },
+        parseRuCultureWorks: function () {
+            this.setRuCulture();
+
+            Bridge.Test.Assert.areEqual$1(10.0, System.Double.parse("10,0"), "1");
+            Bridge.Test.Assert.areEqual$1(10.1, System.Double.parse("  10,10  "), "2");
+            Bridge.Test.Assert.areEqual$1(10.0, System.Double.parse("10,00"), "3");
+            Bridge.Test.Assert.areEqual$1(Number.NaN, System.Double.parse(System.Globalization.CultureInfo.getCurrentCulture().numberFormat.nanSymbol), System.String.concat("4", System.Globalization.CultureInfo.getCurrentCulture().numberFormat.nanSymbol));
+            Bridge.Test.Assert.areEqual$1(Number.NEGATIVE_INFINITY, System.Double.parse(System.Globalization.CultureInfo.getCurrentCulture().numberFormat.negativeInfinitySymbol), System.String.concat("5", System.Globalization.CultureInfo.getCurrentCulture().numberFormat.negativeInfinitySymbol));
+            Bridge.Test.Assert.areEqual$1(Number.POSITIVE_INFINITY, System.Double.parse(System.Globalization.CultureInfo.getCurrentCulture().numberFormat.positiveInfinitySymbol), System.String.concat("6", System.Globalization.CultureInfo.getCurrentCulture().numberFormat.positiveInfinitySymbol));
+            Bridge.Test.Assert.areEqual$1(-123.0, System.Double.parse("-123"), "7");
+            Bridge.Test.Assert.areEqual$1(123.0, System.Double.parse("123"), "8");
+            Bridge.Test.Assert.areEqual$1(123.0, System.Double.parse("  123  "), "9");
+            Bridge.Test.Assert.areEqual$1(0.0, System.Double.parse("0"), "10");
+            Bridge.Test.Assert.areEqual$1(567.89, System.Double.parse("567,89"), "11");
+            Bridge.Test.Assert.areEqual$1(-567.89, System.Double.parse("-567,89"), "12");
+            Bridge.Test.Assert.areEqual$1(1E+23, System.Double.parse("1E23"), "13");
+        },
+        parseRuCultureThrows: function () {
+            this.setRuCulture();
+
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f1, "1");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f2, "2");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f3, "3");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f4, "4");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f5, "5");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f6, "6");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f7, "7");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f8, "8");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f14, "9");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f15, "10");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f16, "11");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f17, "12");
+            Bridge.Test.Assert.throws$7(System.ArgumentNullException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f9, "13");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f10, "14");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f11, "15");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f12, "16");
+            Bridge.Test.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests.f13, "17");
+        },
+        tryParseCurrentCultureWorks: function () {
+            this.assertTryParse(true, 10.0, "10", "t1");
+            this.assertTryParse(true, 1010.0, "  10,10  ", "t2");
+            this.assertTryParse(true, 10210.0, "10,2,10", "t3");
+            this.assertTryParse(true, 1011111.0, "10,1,1,1,1,1", "t4");
+            this.assertTryParse(true, 1000.0, "10,00", "t5");
+            this.assertTryParse(true, 10102.5, "10,10,2.5", "t6");
+            this.assertTryParse(true, Number.NaN, System.Globalization.CultureInfo.getCurrentCulture().numberFormat.nanSymbol, System.String.concat("t7", System.Globalization.CultureInfo.getCurrentCulture().numberFormat.nanSymbol));
+            this.assertTryParse(true, Number.NEGATIVE_INFINITY, System.Globalization.CultureInfo.getCurrentCulture().numberFormat.negativeInfinitySymbol, System.String.concat("t8", System.Globalization.CultureInfo.getCurrentCulture().numberFormat.negativeInfinitySymbol));
+            this.assertTryParse(true, Number.POSITIVE_INFINITY, System.Globalization.CultureInfo.getCurrentCulture().numberFormat.positiveInfinitySymbol, System.String.concat("t9", System.Globalization.CultureInfo.getCurrentCulture().numberFormat.positiveInfinitySymbol));
+            this.assertTryParse(true, -123.0, "-123", "t10");
+            this.assertTryParse(true, 123.0, "123", "t11");
+            this.assertTryParse(true, 123.0, "  123  ", "t12");
+            this.assertTryParse(true, 0.0, "0", "t13");
+            this.assertTryParse(true, 567.89, "567.89", "t14");
+            this.assertTryParse(true, -567.89, "-567.89", "t15");
+            this.assertTryParse(true, 1E+23, "1E23", "t16");
+
+            this.assertTryParse(false, 0.0, "", "f1");
+            this.assertTryParse(false, 0.0, "b", "f2");
+            this.assertTryParse(false, 0.0, "10a", "f3");
+            this.assertTryParse(false, 0.0, "a10", "f4");
+            this.assertTryParse(false, 0.0, "10.2.10", "f5");
+            this.assertTryParse(false, 0.0, "10,2.5,0", "f6");
+            this.assertTryParse(false, 0.0, "10,2.5,0.0", "f7");
+            this.assertTryParse(false, 0.0, "1e10e", "f8");
+            this.assertTryParse(false, 0.0, null, "f9");
+            this.assertTryParse(false, 0.0, " ", "f10");
+            this.assertTryParse(false, 0.0, "Garbage", "f11");
+            this.assertTryParse(false, 0.0, "(123)", "f12");
+            this.assertTryParse(false, 0.0, "$1000", "f13");
+        },
+        tryParseRuCultureWorks: function () {
+            this.setRuCulture();
+
+            this.assertTryParse(true, 10.0, "10", "t1");
+            this.assertTryParse(true, 10.1, "  10,10  ", "t2");
+            this.assertTryParse(true, 10.0, "10,00", "t3");
+            this.assertTryParse(true, Number.NaN, System.Globalization.CultureInfo.getCurrentCulture().numberFormat.nanSymbol, System.String.concat("t4", System.Globalization.CultureInfo.getCurrentCulture().numberFormat.nanSymbol));
+            this.assertTryParse(true, Number.NEGATIVE_INFINITY, System.Globalization.CultureInfo.getCurrentCulture().numberFormat.negativeInfinitySymbol, System.String.concat("t5", System.Globalization.CultureInfo.getCurrentCulture().numberFormat.negativeInfinitySymbol));
+            this.assertTryParse(true, Number.POSITIVE_INFINITY, System.Globalization.CultureInfo.getCurrentCulture().numberFormat.positiveInfinitySymbol, System.String.concat("t6", System.Globalization.CultureInfo.getCurrentCulture().numberFormat.positiveInfinitySymbol));
+            this.assertTryParse(true, -123.0, "-123", "t7");
+            this.assertTryParse(true, 123.0, "123", "t8");
+            this.assertTryParse(true, 123.0, "  123  ", "t9");
+            this.assertTryParse(true, 0.0, "0", "t10");
+            this.assertTryParse(true, 567.89, "567,89", "t11");
+            this.assertTryParse(true, -567.89, "-567,89", "t12");
+            this.assertTryParse(true, 1E+23, "1E23", "t13");
+
+            this.assertTryParse(false, 0.0, "", "f1");
+            this.assertTryParse(false, 0.0, "b", "f2");
+            this.assertTryParse(false, 0.0, "10a", "f3");
+            this.assertTryParse(false, 0.0, "a10", "f4");
+            this.assertTryParse(false, 0.0, "10.2.10", "f5");
+            this.assertTryParse(false, 0.0, "10,2.5,0", "f6");
+            this.assertTryParse(false, 0.0, "10,2.5,0.0", "f7");
+            this.assertTryParse(false, 0.0, "1e10e", "f8");
+            this.assertTryParse(false, 0.0, "  10.10  ", "f9");
+            this.assertTryParse(false, 0.0, "10,2,10", "f10");
+            this.assertTryParse(false, 0.0, "10,1,1,1,1,1", "f11");
+            this.assertTryParse(false, 0.0, "10,10,2.5", "f12");
+            this.assertTryParse(false, 0.0, null, "f13");
+            this.assertTryParse(false, 0.0, " ", "f14");
+            this.assertTryParse(false, 0.0, "Garbage", "f15");
+            this.assertTryParse(false, 0.0, "(123)", "f16");
+            this.assertTryParse(false, 0.0, "$1000", "f17");
+        },
+        assertTryParse: function (r, expected, s, message) {
+            var d = { };
+            var b = System.Double.tryParse(s, null, d);
+
+            Bridge.Test.Assert.areEqual$1(r, b, message);
+            Bridge.Test.Assert.areEqual$1(expected, d.v, message);
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.SimpleTypes.DoubleTests", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.SimpleTypes.DoubleTests, {
+        f1: function () {
+            System.Double.parse("");
+        },
+        f2: function () {
+            System.Double.parse("b");
+        },
+        f3: function () {
+            System.Double.parse("10a");
+        },
+        f4: function () {
+            System.Double.parse("a10");
+        },
+        f5: function () {
+            System.Double.parse("10.2.10");
+        },
+        f6: function () {
+            System.Double.parse("10,2.5,0");
+        },
+        f7: function () {
+            System.Double.parse("10,2.5,0.0");
+        },
+        f8: function () {
+            System.Double.parse("1e10e");
+        },
+        f9: function () {
+            System.Double.parse(null);
+        },
+        f10: function () {
+            System.Double.parse(" ");
+        },
+        f11: function () {
+            System.Double.parse("Garbage");
+        },
+        f12: function () {
+            System.Double.parse("(123)");
+        },
+        f13: function () {
+            System.Double.parse("$1000");
+        },
+        f14: function () {
+            System.Double.parse("  10.10  ");
+        },
+        f15: function () {
+            System.Double.parse("10,2,10");
+        },
+        f16: function () {
+            System.Double.parse("10,1,1,1,1,1");
+        },
+        f17: function () {
+            System.Double.parse("10,10,2.5");
         }
     });
 

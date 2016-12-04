@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("st-ZA", true), {
     nativeName: "Sesotho (South Africa)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

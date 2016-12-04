@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("pa-IN", true), {
     nativeName: "ਪੰਜਾਬੀ (ਭਾਰਤ)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("kl-GL", true), {
     nativeName: "kalaallisut (Kalaallit Nunaat)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-INF",

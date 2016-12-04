@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("rm-CH", true), {
     nativeName: "Rumantsch (Svizra)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "betg def.",
+        nanSymbol: "betg def.",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-infinit",

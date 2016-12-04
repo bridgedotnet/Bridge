@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ug", true), {
     nativeName: "ئۇيغۇرچە",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "سان ئەمەس",
+        nanSymbol: "سان ئەمەس",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "مەنپىي چەكسىزلىك",

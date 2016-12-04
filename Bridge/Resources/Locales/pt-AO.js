@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("pt-AO", true), {
     nativeName: "português (Angola)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

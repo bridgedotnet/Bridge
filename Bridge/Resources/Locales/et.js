@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("et", true), {
     nativeName: "eesti",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "avaldamatu",
+        nanSymbol: "avaldamatu",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "miinuslõpmatus",

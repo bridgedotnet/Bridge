@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("fo-FO", true), {
     nativeName: "føroyskt (Føroyar)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-INF",

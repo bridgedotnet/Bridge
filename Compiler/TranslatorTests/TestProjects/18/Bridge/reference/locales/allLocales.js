@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ru-RU", true), {
     nativeName: "русский (Россия)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",
@@ -62,7 +62,7 @@ Bridge.merge(new System.Globalization.CultureInfo("en-US", true), {
     nativeName: "English (United States)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",
@@ -121,7 +121,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-419", true), {
     nativeName: "español (Latinoamérica)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",
@@ -180,7 +180,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-AR", true), {
     nativeName: "español (Argentina)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NuN",
+        nanSymbol: "NuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",
@@ -239,7 +239,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-BO", true), {
     nativeName: "español (Bolivia)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",
@@ -298,7 +298,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-CL", true), {
     nativeName: "español (Chile)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",
@@ -357,7 +357,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-CO", true), {
     nativeName: "español (Colombia)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",
@@ -416,7 +416,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-CR", true), {
     nativeName: "español (Costa Rica)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",
@@ -475,7 +475,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-DO", true), {
     nativeName: "español (República Dominicana)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",
@@ -534,7 +534,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-EC", true), {
     nativeName: "español (Ecuador)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",
@@ -593,7 +593,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-ES", true), {
     nativeName: "español (España, alfabetización internacional)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",
@@ -652,7 +652,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-GT", true), {
     nativeName: "español (Guatemala)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",
@@ -711,7 +711,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-HN", true), {
     nativeName: "español (Honduras)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",
@@ -770,7 +770,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-MX", true), {
     nativeName: "español (México)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",
@@ -829,7 +829,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-NI", true), {
     nativeName: "español (Nicaragua)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",
@@ -888,7 +888,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-PA", true), {
     nativeName: "español (Panamá)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",
@@ -947,7 +947,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-PE", true), {
     nativeName: "español (Perú)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",
@@ -1006,7 +1006,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-PR", true), {
     nativeName: "español (Puerto Rico)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",
@@ -1065,7 +1065,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-PY", true), {
     nativeName: "español (Paraguay)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",
@@ -1124,7 +1124,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-SV", true), {
     nativeName: "español (El Salvador)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",
@@ -1183,7 +1183,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-US", true), {
     nativeName: "español (Estados Unidos)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",
@@ -1242,7 +1242,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-UY", true), {
     nativeName: "español (Uruguay)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",
@@ -1301,7 +1301,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-VE", true), {
     nativeName: "español (Republica Bolivariana de Venezuela)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",
@@ -1360,7 +1360,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es", true), {
     nativeName: "español",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",

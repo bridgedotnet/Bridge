@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("lv", true), {
     nativeName: "latviešu",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "Nav skaitlis",
+        nanSymbol: "Nav skaitlis",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

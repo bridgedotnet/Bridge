@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("uk", true), {
     nativeName: "українська",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

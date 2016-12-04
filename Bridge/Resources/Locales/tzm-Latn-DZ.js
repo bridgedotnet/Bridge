@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("tzm-Latn-DZ", true), {
     nativeName: "Tamazight (Djazaïr)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "war amdhan",
+        nanSymbol: "war amdhan",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-ifedh",

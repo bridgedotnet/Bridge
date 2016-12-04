@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ga-IE", true), {
     nativeName: "Gaeilge (Éire)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "nach uimhir",
+        nanSymbol: "nach uimhir",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "Éigríoch dhiúltach",

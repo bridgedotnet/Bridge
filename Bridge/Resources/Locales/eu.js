@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("eu", true), {
     nativeName: "euskara",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "EdZ",
+        nanSymbol: "EdZ",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinitu",

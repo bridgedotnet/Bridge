@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("lo", true), {
     nativeName: "ພາສາລາວ",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

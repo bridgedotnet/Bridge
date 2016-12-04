@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("dsb", true), {
     nativeName: "dolnoserbšćina",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "njedefinowane",
+        nanSymbol: "njedefinowane",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-njeskóńcnje",

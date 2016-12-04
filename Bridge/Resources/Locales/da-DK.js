@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("da-DK", true), {
     nativeName: "dansk (Danmark)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-INF",

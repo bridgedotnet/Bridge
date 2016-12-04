@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ar-SY", true), {
     nativeName: "العربية (سوريا)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "ليس برقم",
+        nanSymbol: "ليس برقم",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-لا نهاية",

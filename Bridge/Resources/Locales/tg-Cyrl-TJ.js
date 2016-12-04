@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("tg-Cyrl-TJ", true), {
     nativeName: "Тоҷикӣ (Тоҷикистон)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",
