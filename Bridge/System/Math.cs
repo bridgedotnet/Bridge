@@ -128,7 +128,7 @@ namespace System
         [Template("Bridge.Math.logWithBase({x}, {logBase})")]
         public static extern double Log(double x, double logBase);
 
-        [Template("Math.log10({x})")]
+        [Template("Bridge.Math.logWithBase({x}, 10.0)")]
         public static extern double Log10(double x);
 
         [Template("{x}.pow({y})")]
