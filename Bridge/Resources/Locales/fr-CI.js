@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("fr-CI", true), {
     nativeName: "français (Côte d’Ivoire)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("so-SO", true), {
     nativeName: "Soomaali (Soomaaliya)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

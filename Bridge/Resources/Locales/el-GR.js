@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("el-GR", true), {
     nativeName: "Ελληνικά (Ελλάδα)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "μη αριθμός",
+        nanSymbol: "μη αριθμός",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Άπειρο",

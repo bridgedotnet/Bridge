@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("moh-CA", true), {
     nativeName: "Kanien'kéha",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ml-IN", true), {
     nativeName: "മലയാളം (ഭാരതം)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

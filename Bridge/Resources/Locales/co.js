@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("co", true), {
     nativeName: "Corsu",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "Micca numericu",
+        nanSymbol: "Micca numericu",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinitu",

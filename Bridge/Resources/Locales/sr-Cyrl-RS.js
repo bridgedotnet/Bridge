@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("sr-Cyrl-RS", true), {
     nativeName: "српски (Србија)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-бесконачност",

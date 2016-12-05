@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("zh-CHT", true), {
     nativeName: "中文(繁體) 舊版",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "非數字",
+        nanSymbol: "非數字",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "負無窮大",

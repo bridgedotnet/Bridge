@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ts", true), {
     nativeName: "Xitsonga",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

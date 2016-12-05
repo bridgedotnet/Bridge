@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-HN", true), {
     nativeName: "español (Honduras)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",

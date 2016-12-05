@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("fil-PH", true), {
     nativeName: "Filipino (Pilipinas)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

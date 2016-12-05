@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("fy-NL", true), {
     nativeName: "Frysk (Nederlân)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

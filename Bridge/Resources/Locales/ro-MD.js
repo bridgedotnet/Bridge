@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ro-MD", true), {
     nativeName: "română (Republica Moldova)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

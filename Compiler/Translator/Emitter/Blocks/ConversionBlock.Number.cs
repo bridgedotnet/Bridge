@@ -52,6 +52,11 @@ namespace Bridge.Translator
                 IProperty member = null;
                 IndexerAccessor current = null;
 
+                if (memberResolveResult == null)
+                {
+                    memberResolveResult = block.Emitter.Resolver.ResolveNode(expression.Parent, block.Emitter) as MemberResolveResult;
+                }
+
                 if (memberResolveResult != null)
                 {
                     var resolvedMember = memberResolveResult.Member;

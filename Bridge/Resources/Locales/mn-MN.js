@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("mn-MN", true), {
     nativeName: "Монгол хэл (Монгол улс)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

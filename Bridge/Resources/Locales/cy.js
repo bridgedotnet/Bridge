@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("cy", true), {
     nativeName: "Cymraeg",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "Dim rhif",
+        nanSymbol: "Dim rhif",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Anfeidredd",

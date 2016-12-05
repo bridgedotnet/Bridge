@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ja-JP", true), {
     nativeName: "日本語 (日本)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN (非数値)",
+        nanSymbol: "NaN (非数値)",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

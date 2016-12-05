@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("am-ET", true), {
     nativeName: "አማርኛ (ኢትዮጵያ)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NAN",
+        nanSymbol: "NAN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

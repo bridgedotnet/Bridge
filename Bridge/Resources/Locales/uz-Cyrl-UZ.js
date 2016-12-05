@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("uz-Cyrl-UZ", true), {
     nativeName: "Ўзбекча (Ўзбекистон Республикаси)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

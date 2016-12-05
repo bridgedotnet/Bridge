@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("fr-HT", true), {
     nativeName: "français (Haïti)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

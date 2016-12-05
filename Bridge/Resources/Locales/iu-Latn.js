@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("iu-Latn", true), {
     nativeName: "Inuktitut",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

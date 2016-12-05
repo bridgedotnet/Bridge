@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ne-NP", true), {
     nativeName: "नेपाली (नेपाल)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "अंक नभएको",
+        nanSymbol: "अंक नभएको",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

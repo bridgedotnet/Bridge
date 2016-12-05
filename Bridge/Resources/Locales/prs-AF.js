@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("prs-AF", true), {
     nativeName: "درى (افغانستان)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "غ ع",
+        nanSymbol: "غ ع",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

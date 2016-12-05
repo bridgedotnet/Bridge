@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-DO", true), {
     nativeName: "español (República Dominicana)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",
