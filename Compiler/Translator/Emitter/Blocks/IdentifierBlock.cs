@@ -315,22 +315,7 @@ namespace Bridge.Translator
                 {
                     var name = Helpers.GetPropertyRef(memberResult.Member, this.Emitter);
 
-                    var isValid = Helpers.IsValidIdentifier(name);
-
-                    if (isValid)
-                    {
-                        this.Write(name);
-                    }
-                    else
-                    {
-                        if (this.Emitter.Output[this.Emitter.Output.Length - 1] == '.')
-                        {
-                            --this.Emitter.Output.Length;
-                            this.Write("[");
-                            this.WriteScript(name);
-                            this.Write("]");
-                        }
-                    }
+                    this.WriteIdentifier(name);
                 }
                 else if (!this.Emitter.IsAssignment)
                 {
@@ -607,22 +592,7 @@ namespace Bridge.Translator
                         }
                         else if (memberResult.Member is IField)
                         {
-                            var isValid = Helpers.IsValidIdentifier(name);
-
-                            if (isValid)
-                            {
-                                this.Write(name);
-                            }
-                            else
-                            {
-                                if (this.Emitter.Output[this.Emitter.Output.Length - 1] == '.')
-                                {
-                                    --this.Emitter.Output.Length;
-                                    this.Write("[");
-                                    this.WriteScript(name);
-                                    this.Write("]");
-                                }
-                            }
+                            this.WriteIdentifier(name);
                         }
                         else
                         {

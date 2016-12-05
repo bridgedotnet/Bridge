@@ -256,7 +256,9 @@ namespace Bridge.Translator
                     }
 
                     var name = member.GetName(this.Emitter);
+
                     bool isValidIdentifier = Helpers.IsValidIdentifier(name);
+
                     if (isProperty && isPrimitive)
                     {
                         constValue = "null";
@@ -272,7 +274,7 @@ namespace Bridge.Translator
                             {
                                 this.Write(string.Format("this[{0}] = {1};", AbstractEmitterBlock.ToJavaScript(name, this.Emitter), value));
                             }
-                            
+
                             this.WriteNewLine();
                         }
                         else
@@ -362,6 +364,7 @@ namespace Bridge.Translator
                 }
 
                 var mname = member.GetName(this.Emitter, true);
+
                 bool isValid = Helpers.IsValidIdentifier(mname);
                 if (!isValid)
                 {

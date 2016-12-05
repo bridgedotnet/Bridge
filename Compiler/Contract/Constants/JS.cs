@@ -246,7 +246,7 @@
             public const char D = '$';
             public const string D_ = ASM + ".$";
             public const string D_THIS = "$this";
-            
+
             public const string T = "$t";
             public const string E = "$e";
             public const string YIELD = "$yield";
