@@ -1,14 +1,13 @@
 /**
- * @version   : 15.4.0 - Bridge.NET
+ * @version   : 15.5.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2016-11-08
+ * @date      : 2016-12-05
  * @copyright : Copyright 2008-2016 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
 
 Here and below the content marker (see // @!!! etc) will be skipped for comparing
 The text after the content marked will be compared
- 
 
 // @!!! Content begin mark. Should be at the top (issue 1193). This is also required to mark beginning of the file part to compare to the reference without bridge.js content
 
@@ -17,7 +16,7 @@ The text after the content marked will be compared
  * @version 1.0.0.0
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2015 Object.NET, Inc.
- * @compiler Bridge.NET 15.4.0
+ * @compiler Bridge.NET 15.5.0
  */
 Bridge.assembly("TestProject.I2096", function ($asm, globals) {
     "use strict";
