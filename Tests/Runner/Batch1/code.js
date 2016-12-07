@@ -19826,7 +19826,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var tempFrank = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.Config.prototype.getTmp.call(Bridge.ClientTest.ObjectLiteralTests.Bridge1529.Config.ctor({  }), c);
             Bridge.Test.Assert.areEqual$1("1: Frank", tempFrank, "Check call works");
 
-            var options = Bridge.literal(Object, { data: { name: c.temp } });
+            var options = { data: { name: c.temp } };
             Bridge.Test.Assert.areEqual$1("Frank", options.data.name, "External referenced default ObjectLiteral works");
 
             var bs = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.ctor();

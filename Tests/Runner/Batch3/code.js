@@ -12101,6 +12101,17 @@ Bridge.$N1391Result =                 r;
         }
     }; });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2141", {
+        statics: {
+            testExternalObjectLiteral: function () {
+                var config = { name: "test" };
+
+                Bridge.Test.Assert.areEqual(1, Object.keys(config).length);
+                Bridge.Test.Assert.areEqual("test", config.name);
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
@@ -15059,10 +15070,10 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge647", {
         statics: {
             testUseCase: function () {
-                var a = Bridge.literal(Object, { bar: 1 });
+                var a = { bar: 1 };
                 Bridge.Test.Assert.areEqual$1(1, a.bar, "Bridge647 A");
 
-                var b = Bridge.literal(Object, { bar: 1, bar1: 12 });
+                var b = { bar: 1, bar1: 12 };
                 Bridge.Test.Assert.areEqual$1(1, b.bar, "Bridge647 B bar");
                 Bridge.Test.Assert.areEqual$1(12, b.bar1, "Bridge647 B bar1");
             }
