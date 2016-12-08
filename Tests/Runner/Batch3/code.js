@@ -7150,6 +7150,8 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
+
+
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7179,7 +7181,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    }); /// Async method lacks 'await' operators and will run synchronously
+                                    });
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -12035,6 +12037,106 @@ Bridge.$N1391Result =                 r;
             this.setE4(System.String.concat("_", this.getE3()));
         }
     });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138", {
+        statics: {
+            _test1Success: false,
+            _test2Success: false,
+            test1: function () {
+                var onSuccess = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.f1;
+                var el = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Elem$1(System.Int32))(function (_o36) {
+                        _o36.add(new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Something$1(System.Int32))(onSuccess));
+                        return _o36;
+                    }(new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Something$1(System.Int32)))()));
+
+                var hld = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Holder$1(System.Int32))(el);
+                hld.access1()();
+            },
+            test2: function () {
+                var onSuccess = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.f2;
+                var el = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Elem$1(System.Int32))(function (_o37) {
+                        _o37.add(new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Something$1(System.Int32))(onSuccess));
+                        return _o37;
+                    }(new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Something$1(System.Int32)))()));
+
+                var hld = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Holder$1(System.Int32))(el);
+                hld.access2()();
+            },
+            testGenericInterfaceIndexer: function () {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.test1();
+                Bridge.Test.Assert.true(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138._test1Success);
+
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.test2();
+                Bridge.Test.Assert.true(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138._test2Success);
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138, {
+        f1: function () {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138._test1Success = true;
+        },
+        f2: function () {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138._test2Success = true;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Elem$1", function (T) { return {
+        config: {
+            properties: {
+                Itms: null
+            }
+        },
+        ctor: function (itms) {
+            this.$initialize();
+            this.setItms(new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.SomeCollection$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Something$1(T)))(itms));
+        }
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Holder$1", function (RecordT) { return {
+        _itms: null,
+        ctor: function (itms) {
+            this.$initialize();
+            this._itms = itms;
+        },
+        access1: function () {
+            return Bridge.fn.bind(this, function () {
+                Bridge.Linq.Enumerable.from(this._itms.getItms()).forEach($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Holder$1.f1);
+
+                this._itms.getItms()["Bridge$ClientTest$Batch3$BridgeIssues$Bridge2138$ISomeCollection$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2138$Something$1$" + Bridge.getTypeAlias(RecordT) + "$getItem"](0).someAction();
+            });
+        },
+        access2: function () {
+            return Bridge.fn.bind(this, function () {
+                this._itms.getItms()["Bridge$ClientTest$Batch3$BridgeIssues$Bridge2138$ISomeCollection$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2138$Something$1$" + Bridge.getTypeAlias(RecordT) + "$getItem"](0).someAction();
+            });
+        }
+    }; });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Holder$1", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Holder$1, {
+        f1: function (x) {
+        }
+    });
+
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.ISomeCollection$1", function (T) { return {
+        inherits: [System.Collections.Generic.IEnumerable$1(T)],
+        $kind: "interface"
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Something$1", function (T) { return {
+        _action: null,
+        ctor: function (action) {
+            this.$initialize();
+            this._action = action;
+        },
+        someAction: function () {
+            this._action();
+        }
+    }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
@@ -19557,30 +19659,30 @@ Bridge.$N1391Result =                 r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues, {
-        f1: function (_o36) {
-            _o36.add(0);
-            _o36.add(1);
-            _o36.add(2);
-            _o36.add(3);
-            _o36.add(4);
-            return _o36;
-        },
-        f2: function (_o37) {
-            _o37.add(3, "b");
-            _o37.add(6, "z");
-            _o37.add(9, "x");
-            return _o37;
-        },
-        f3: function (i) {
-            return ((i * 2) | 0);
-        },
-        f4: function (_o38) {
+        f1: function (_o38) {
             _o38.add(0);
             _o38.add(1);
             _o38.add(2);
             _o38.add(3);
             _o38.add(4);
             return _o38;
+        },
+        f2: function (_o39) {
+            _o39.add(3, "b");
+            _o39.add(6, "z");
+            _o39.add(9, "x");
+            return _o39;
+        },
+        f3: function (i) {
+            return ((i * 2) | 0);
+        },
+        f4: function (_o40) {
+            _o40.add(0);
+            _o40.add(1);
+            _o40.add(2);
+            _o40.add(3);
+            _o40.add(4);
+            return _o40;
         }
     });
 
@@ -20277,6 +20379,33 @@ Bridge.$N1391Result =                 r;
             return $this;
         }
     });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.SomeCollection$1", function (T) { return {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.ISomeCollection$1(T)],
+        _items: null,
+        config: {
+            alias: [
+            "getItem", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2138$ISomeCollection$1$" + Bridge.getTypeAlias(T) + "$getItem",
+            "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"
+            ],
+            init: function () {
+                this._items = new (System.Collections.Generic.List$1(T))();
+            }
+        },
+        ctor: function (initialItems) {
+            this.$initialize();
+            this._items.addRange(initialItems);
+        },
+        getItem: function (pos) {
+            return this._items.getItem(pos);
+        },
+        getEnumerator: function () {
+            return this._items.getEnumerator();
+        },
+        System$Collections$IEnumerable$getEnumerator: function () {
+            return this._items.getEnumerator();
+        }
+    }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240B", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A],

@@ -183,6 +183,28 @@ namespace Bridge.Translator
             }
         }
 
+        public override void VisitIndexerExpression(IndexerExpression indexerExpression)
+        {
+            if (this._usedVariables.Count == 0)
+            {
+                var rr = this.emitter.Resolver.ResolveNode(indexerExpression, this.emitter);
+                var member = rr as MemberResolveResult;
+
+                bool isInterface = member != null && member.Member.DeclaringTypeDefinition != null && member.Member.DeclaringTypeDefinition.Kind == TypeKind.Interface;
+                var hasTypeParemeter = isInterface && Helpers.IsTypeParameterType(member.Member.DeclaringType);
+                if (isInterface && hasTypeParemeter)
+                {
+                    var ivar = new TypeVariable(member.Member.DeclaringType);
+                    if (!_usedVariables.Contains(ivar))
+                    {
+                        _usedVariables.Add(ivar);
+                    }
+                }
+            }
+
+            base.VisitIndexerExpression(indexerExpression);
+        }
+
         public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
         {
             if (this._usedVariables.Count == 0)

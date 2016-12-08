@@ -356,15 +356,18 @@ namespace Bridge.Translator
             bool isField = memberTargetrr != null && memberTargetrr.Member is IField &&
                            (memberTargetrr.TargetResult is ThisResolveResult ||
                             memberTargetrr.TargetResult is LocalResolveResult);
+            bool isSimple = targetrr is ThisResolveResult || targetrr is LocalResolveResult ||
+                            targetrr is ConstantResolveResult || isField;
+            bool needTemp = isExternalInterface && !nativeImplementation && !isSimple;
 
-            if (isInterfaceMember && (!this.Emitter.IsUnaryAccessor || isStatement) && !(targetrr is ThisResolveResult || targetrr is LocalResolveResult || targetrr is ConstantResolveResult || isField))
+            if (isInterfaceMember && (!this.Emitter.IsUnaryAccessor || isStatement) && needTemp)
             {
                 this.WriteOpenParentheses();
             }
 
             if (writeTargetVar)
             {
-                if (!(targetrr is ThisResolveResult || targetrr is LocalResolveResult || targetrr is ConstantResolveResult || isField))
+                if (needTemp)
                 {
                     targetVar = this.GetTempVarName();
                     this.Write(targetVar);
