@@ -24,7 +24,7 @@ namespace Bridge.Translator
         {
             if (!String.IsNullOrEmpty(this.Namespace))
             {
-                throw (EmitterException)this.CreateException(namespaceDeclaration, "Nested namespaces are not supported");
+                //throw (EmitterException)this.CreateException(namespaceDeclaration, "Nested namespaces are not supported");
             }
 
             if (!this.AssemblyInfo.Assembly.EnableReservedNamespaces)
