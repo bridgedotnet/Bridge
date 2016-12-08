@@ -2,19 +2,67 @@
         statics: {
             test: function () {
                 // #2141 Skip writing type information to [External] [ObjectLiteral]
+
                 // These below should NOT contain Bridge.literal call
-                var config1 = { name: "external1" };
+                var c1 = { id: "1" };
+                // These below should contain Bridge.literal call as [Name] used
+                var c1Name = Bridge.literal(Options1, { id: "1Name" });
 
-                var config2 = { id: 2, name: "external2" };
+                // These below should NOT contain Bridge.literal call
+                // .ctor({ id: "..." });
+                var c2 = TestIssue2141.Config2.ctor({ id: "2" });
+                var c2Name = Options2.ctor({ id: "2Name" });
 
-                // These below should contain Bridge.literal call
-                var config3 = TestIssue2141.ConfigPlain.ctor({ name: "plain3" });
+                // These below should NOT contain Bridge.literal call
+                // Bridge.merge(.ctor(), { id: "..." });
+                var c3 = Bridge.merge(TestIssue2141.Config3.ctor(), {
+                    id: "3"
+                } );
+                var c3Name = Bridge.merge(Options3.ctor(), {
+                    id: "3Name"
+                } );
 
-                var config4 = TestIssue2141.ConfigPlain.ctor({ id: 4, name: "plain4" });
+                // These below should NOT contain Bridge.literal call
+                // Bridge.merge(Object(), { id: "4" });
+                var c4 = Bridge.merge(Object(), {
+                    id: "4"
+                } );
+                // Bridge.merge(Options4(), { id: "4Name" });
+                var c4Name = Bridge.merge(Options4(), {
+                    id: "4Name"
+                } );
             }
         }
     });
 
-    Bridge.define("TestIssue2141.ConfigPlain", {
+    Bridge.define("TestIssue2141.Config2", {
         $literal: true
+    });
+
+    Bridge.define("Options2", {
+        $literal: true
+    });
+
+    Bridge.define("TestIssue2141.Config3", {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            $this.$getType = function() { return TestIssue2141.Config3; };
+            (function(){
+                this.id = null;
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.define("Options3", {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            $this.$getType = function() { return Options3; };
+            (function(){
+                this.id = null;
+            }).call($this);
+            return $this;
+        }
     });
