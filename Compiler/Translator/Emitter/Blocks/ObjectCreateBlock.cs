@@ -138,7 +138,7 @@ namespace Bridge.Translator
 
                         if (name != JS.Types.Object.NAME)
                         {
-                            this.Write("Bridge.literal(" + name + ", ");
+                            this.Write(JS.Funcs.BRIDGE_LITERAL + "(" + name + ", ");
                         }
                         else
                         {
@@ -148,7 +148,8 @@ namespace Bridge.Translator
                     else
                     {
                         objectCreateExpression.Type.AcceptVisitor(this.Emitter);
-                        this.Write(".ctor");
+                        this.Write(".");
+                        this.Write(JS.Funcs.CONSTRUCTOR);
                         this.WriteOpenParentheses();
                     }
                 }

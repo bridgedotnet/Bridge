@@ -7552,7 +7552,7 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
                 this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2141",
-                    file: "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch3/BridgeIssues/2100/N2141.cs"
+                    file: "Batch3\\BridgeIssues\\2100\\N2141.cs"
                 } );
             }
             return this.context;
