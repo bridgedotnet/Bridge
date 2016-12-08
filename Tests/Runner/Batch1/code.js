@@ -11340,8 +11340,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Prop2: null
             },
             init: function () {
-                Bridge.property(this, "Prop1", Bridge.ClientTest.CSharp6.TestAutoProps.Customer.staticField);
-                Bridge.property(this, "Prop2", System.String.concat(Bridge.ClientTest.CSharp6.TestAutoProps.Customer.staticField, "2"));
+                this.Prop1 = Bridge.ClientTest.CSharp6.TestAutoProps.Customer.staticField;
+                this.Prop2 = System.String.concat(Bridge.ClientTest.CSharp6.TestAutoProps.Customer.staticField, "2");
             }
         },
         ctor: function (first, last) {
