@@ -372,7 +372,7 @@ namespace Bridge.Contract
 
                 if (typeDef.IsNested && !excludens)
                 {
-                    name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.GetParentNames(typeDef);
+                    name = BridgeTypes.ToJsName(typeDef.DeclaringType, emitter, true);
                 }
 
                 name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.ConvertName(typeDef.Name);
@@ -381,12 +381,7 @@ namespace Bridge.Contract
             {
                 if (type.DeclaringType != null && !excludens)
                 {
-                    name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.GetParentNames(type);
-
-                    if (type.DeclaringType.TypeArguments.Count > 0)
-                    {
-                        name += Helpers.PrefixDollar(type.TypeArguments.Count);
-                    }
+                    name = BridgeTypes.ToJsName(type.DeclaringType, emitter, true);
                 }
 
                 name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.ConvertName(type.Name);
