@@ -97,7 +97,7 @@ namespace Bridge.Translator
 
             if (info.Properties.Count > 0)
             {
-                var hasProperties = this.WriteObject(JS.Fields.PROPERTIES, info.Properties, JS.Funcs.BRIDGE_PROPERTY + "(this, \"{0}\", {1});", JS.Funcs.BRIDGE_PROPERTY + "(this, {0}, {1});");
+                var hasProperties = this.WriteObject(JS.Fields.PROPERTIES, info.Properties, "this.{0} = {1};", "this[{0}] = {1};");
                 if (hasProperties)
                 {
                     this.Emitter.Comma = true;
@@ -478,9 +478,12 @@ namespace Bridge.Translator
                     return true;
                 }
 
-                if (!isPrimitive || (constValue is AstType && objectName != JS.Fields.PROPERTIES))
+                if (objectName != JS.Fields.PROPERTIES)
                 {
-                    continue;
+                    if (!isPrimitive || constValue is AstType)
+                    {
+                        continue;
+                    }
                 }
 
                 return true;

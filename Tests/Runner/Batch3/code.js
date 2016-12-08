@@ -7150,6 +7150,8 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
+
+
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7179,7 +7181,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    }); /// Async method lacks 'await' operators and will run synchronously
+                                    });
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -12001,6 +12003,41 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2137", {
+        statics: {
+            config: {
+                properties: {
+                    E1: null,
+                    E2: null
+                },
+                init: function () {
+                    this.E1 = System.String.fromCharCount(69, 3);
+                    this.E2 = System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2137.getE1(), System.String.fromCharCount(69, 3));
+                }
+            },
+            testPropertiesWithNonPrimitiveInitializers: function () {
+                var c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2137();
+                Bridge.Test.Assert.areEqual("EEE", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2137.getE1());
+                Bridge.Test.Assert.areEqual("EEEEEE", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2137.getE2());
+                Bridge.Test.Assert.areEqual("testEEE", c.getE3());
+                Bridge.Test.Assert.areEqual("_testEEE", c.getE4());
+            }
+        },
+        config: {
+            properties: {
+                E3: null,
+                E4: null
+            },
+            init: function () {
+                this.E3 = System.String.concat("test", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2137.getE1());
+            }
+        },
+        ctor: function () {
+            this.$initialize();
+            this.setE4(System.String.concat("_", this.getE3()));
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138", {
         statics: {
             _test1Success: false,
@@ -12100,6 +12137,17 @@ Bridge.$N1391Result =                 r;
             this._action();
         }
     }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2141", {
+        statics: {
+            testExternalObjectLiteral: function () {
+                var config = { name: "test" };
+
+                Bridge.Test.Assert.areEqual(1, Object.keys(config).length);
+                Bridge.Test.Assert.areEqual("test", config.name);
+            }
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143", {
         statics: {
@@ -15096,10 +15144,10 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge647", {
         statics: {
             testUseCase: function () {
-                var a = Bridge.literal(Object, { bar: 1 });
+                var a = { bar: 1 };
                 Bridge.Test.Assert.areEqual$1(1, a.bar, "Bridge647 A");
 
-                var b = Bridge.literal(Object, { bar: 1, bar1: 12 });
+                var b = { bar: 1, bar1: 12 };
                 Bridge.Test.Assert.areEqual$1(1, b.bar, "Bridge647 B bar");
                 Bridge.Test.Assert.areEqual$1(12, b.bar1, "Bridge647 B bar1");
             }

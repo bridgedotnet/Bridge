@@ -99,6 +99,20 @@ Interested in contributing to Bridge? Please see [CONTRIBUTING.md](https://githu
 
 We also flag some Issues as [up-for-grabs](https://github.com/bridgedotnet/Bridge/issues?q=is%3Aopen+is%3Aissue+label%3Aup-for-grabs). These are generally easy introductions to the inner workings of Bridge, although are items we just haven't had time to implement. Your help is always appreciated.
 
+## How to Help
+
+We need your help spreading the word about Bridge. Any of the following items will help:
+
+1. Leave a review on [Visual Studio Gallery](https://marketplace.visualstudio.com/items?itemName=BridgeNET.BridgeNET)
+2. Blog about Bridge.NET
+3. Tweet about [@bridgedotnet](https://twitter.com/bridgedotnet)
+4. Start a discussion on [Reddit](reddit.com/r/programming)
+5. Answer Bridge related questions on [StackOverflow](http://stackoverflow.com/questions/tagged/bridge.net)
+6. Give a local usergroup presentation on Bridge
+7. Give a conference talk on Bridge
+8. Provide feedback ([forums](http://forums.bridge.net), [GitHub](https://github.com/bridgedotnet/Bridge/issues) or [email](mailto:hello@bridge.net))
+9. Vote for Bridge.NET on [UserVoice](https://visualstudio.uservoice.com/forums/121579-visual-studio-ide/suggestions/17335078-support-bridge-net)
+
 ## Testing
 
 Bridge is continually tested and the full test runner is available at http://testing.bridge.net/. 
