@@ -6150,10 +6150,15 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1430", {
         statics: {
             testNestedNamespaceSupport: function () {
-                Bridge.Test.Assert.areEqual("Hi from inner namespace", Bridge.ClientTest.Batch3.BridgeIssues.InnerNamespace1430.Constants.TestConst);
+                Bridge.Test.Assert.areEqual("Hi from inner Level1", Bridge.ClientTest.Batch3.BridgeIssues.Inner1430_Level1.Constants.TestConst);
 
-                var d = new Bridge.ClientTest.Batch3.BridgeIssues.InnerNamespace1430.Do();
-                Bridge.Test.Assert.areEqual(4, d.getFour());
+                var d1 = new Bridge.ClientTest.Batch3.BridgeIssues.Inner1430_Level1.Do();
+                Bridge.Test.Assert.areEqual(4, d1.getFour());
+
+                Bridge.Test.Assert.areEqual("Hi from inner Level3", Bridge.ClientTest.Batch3.BridgeIssues.Inner1430_Level1.Inner1430_Level2.Constants.TestConst);
+
+                var d2 = new Bridge.ClientTest.Batch3.BridgeIssues.Inner1430_Level1.Inner1430_Level2.Do();
+                Bridge.Test.Assert.areEqual(5, d2.getFive());
             }
         }
     });
@@ -18848,15 +18853,27 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.InnerNamespace1430.Constants", {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Inner1430_Level1.Constants", {
         statics: {
-            TestConst: "Hi from inner namespace"
+            TestConst: "Hi from inner Level1"
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.InnerNamespace1430.Do", {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Inner1430_Level1.Do", {
         getFour: function () {
             return 4;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Inner1430_Level1.Inner1430_Level2.Constants", {
+        statics: {
+            TestConst: "Hi from inner Level3"
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Inner1430_Level1.Inner1430_Level2.Do", {
+        getFive: function () {
+            return 5;
         }
     });
 
