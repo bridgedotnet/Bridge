@@ -429,11 +429,11 @@
     <Compile Include="BridgeIssues\2100\N2114.cs" />
     <Compile Include="BridgeIssues\2100\N2106.cs" />
     <Compile Include="BridgeIssues\2100\N2121.cs" />
-    <Compile Include="BridgeIssues\2100\N2143.cs" />
     <Compile Include="BridgeIssues\2100\N2138.cs" />
     <Compile Include="BridgeIssues\2100\N2127.cs" />
     <Compile Include="BridgeIssues\2100\N2137.cs" />
     <Compile Include="BridgeIssues\2100\N2141.cs" />
+    <Compile Include="BridgeIssues\2100\N2143.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
     <Compile Include="Utilities\DecimalHelper.cs" />
