@@ -816,7 +816,7 @@ namespace Bridge.Translator
         internal static string GetTypeName(IType type, IEmitter emitter, bool isGenericSpecialization, bool asDefinition = false)
         {
             var typeParam = type as ITypeParameter;
-            if (typeParam != null && typeParam.OwnerType == SymbolKind.Method)
+            if (typeParam != null && (typeParam.OwnerType == SymbolKind.Method || Helpers.IsIgnoreGeneric(typeParam.Owner, emitter)))
             {
                 return "Object";
             }

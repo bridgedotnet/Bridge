@@ -205,12 +205,12 @@ namespace Bridge.Contract
 
         public static bool IsIgnoreGeneric(ITypeDefinition type)
         {
-            return type.Attributes.Any(a => a.AttributeType.FullName == "Bridge.IgnoreGenericAttribute");
+            return type.Attributes.Any(a => a.AttributeType.FullName == "Bridge.IgnoreGenericAttribute") || type.DeclaringTypeDefinition != null && Helpers.IsIgnoreGeneric(type.DeclaringTypeDefinition);
         }
 
         public static bool IsIgnoreGeneric(IType type, IEmitter emitter)
         {
-            return emitter.Validator.HasAttribute(type.GetDefinition().Attributes, "Bridge.IgnoreGenericAttribute");
+            return emitter.Validator.HasAttribute(type.GetDefinition().Attributes, "Bridge.IgnoreGenericAttribute") || type.DeclaringType != null && Helpers.IsIgnoreGeneric(type.DeclaringType, emitter);
         }
 
         public static bool IsIgnoreGeneric(IEntity member, IEmitter emitter)

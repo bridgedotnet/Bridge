@@ -356,9 +356,12 @@ namespace Bridge.Contract
             }
 
             var typeParam = type as ITypeParameter;
-            if (skipMethodTypeParam && typeParam != null && typeParam.OwnerType == SymbolKind.Method)
+            if (typeParam != null)
             {
-                return "Object";
+                if (skipMethodTypeParam && (typeParam.OwnerType == SymbolKind.Method) || Helpers.IsIgnoreGeneric(typeParam.Owner, emitter))
+                {
+                    return "Object";
+                }
             }
 
             BridgeType bridgeType = emitter.BridgeTypes.Get(type, true);

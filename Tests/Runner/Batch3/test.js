@@ -197,6 +197,7 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
             QUnit.test("#1411 - TestTemplateCtorGizmo", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1411.testTemplateCtorGizmo);
             QUnit.test("#1428 - TestEqOperatorWithNull", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1428.testEqOperatorWithNull);
             QUnit.test("#1429 - TestEqOperatorWithNull", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1429.testEqOperatorWithNull);
+            QUnit.test("#1430 - TestNestedNamespaceSupport", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1430.testNestedNamespaceSupport);
             QUnit.test("#1438 - TestJSONParse", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1438.testJSONParse);
             QUnit.test("#1438 - TestJSONParseAsArray", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1438.testJSONParseAsArray);
             QUnit.test("#1448 - TestPlainForNonAnonymous", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1448.testPlainForNonAnonymous);
@@ -379,6 +380,7 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
             QUnit.test("#2137 - TestPropertiesWithNonPrimitiveInitializers", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2137.testPropertiesWithNonPrimitiveInitializers);
             QUnit.test("#2138 - TestGenericInterfaceIndexer", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2138.testGenericInterfaceIndexer);
             QUnit.test("#2141 - TestExternalObjectLiteral", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2141.testExternalObjectLiteral);
+            QUnit.test("#2143 - TestIgnoreGenericForNestedClass", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2143.testIgnoreGenericForNestedClass);
             QUnit.test("#381 - TestUseCase", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge381.testUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge447.checkInlineExpression);
             QUnit.test("#447 - CheckInlineCalls", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge447.checkInlineCalls);
@@ -3664,6 +3666,30 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1429",
                     file: "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch3/BridgeIssues/1400/N1429.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1430", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1430)],
+        statics: {
+            testNestedNamespaceSupport: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1430).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge1430, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "TestNestedNamespaceSupport()",
+                    line: "9"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1430.testNestedNamespaceSupport();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1430",
+                    file: "Batch3\\BridgeIssues\\1400\\N1430.cs"
                 } );
             }
             return this.context;
@@ -7578,6 +7604,30 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2141",
                     file: "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch3/BridgeIssues/2100/N2141.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2143", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143)],
+        statics: {
+            testIgnoreGenericForNestedClass: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2143, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "TestIgnoreGenericForNestedClass()",
+                    line: "43"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.testIgnoreGenericForNestedClass();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143",
+                    file: "Batch3\\BridgeIssues\\2100\\N2143.cs"
                 } );
             }
             return this.context;

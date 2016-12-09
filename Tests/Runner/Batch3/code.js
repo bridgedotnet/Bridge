@@ -6147,6 +6147,22 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1430", {
+        statics: {
+            testNestedNamespaceSupport: function () {
+                Bridge.Test.Assert.areEqual("Hi from inner Level1", Bridge.ClientTest.Batch3.BridgeIssues.Inner1430_Level1.Constants.TestConst);
+
+                var d1 = new Bridge.ClientTest.Batch3.BridgeIssues.Inner1430_Level1.Do();
+                Bridge.Test.Assert.areEqual(4, d1.getFour());
+
+                Bridge.Test.Assert.areEqual("Hi from inner Level3", Bridge.ClientTest.Batch3.BridgeIssues.Inner1430_Level1.Inner1430_Level2.Constants.TestConst);
+
+                var d2 = new Bridge.ClientTest.Batch3.BridgeIssues.Inner1430_Level1.Inner1430_Level2.Do();
+                Bridge.Test.Assert.areEqual(5, d2.getFive());
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438", {
         statics: {
             testJSONParse: function () {
@@ -12190,6 +12206,43 @@ Bridge.$N1391Result =                 r;
             }
         }
     });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143", {
+        statics: {
+            testIgnoreGenericForNestedClass: function () {
+                Bridge.Test.Assert.false(Bridge.Reflection.isGenericTypeDefinition(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers$1));
+                Bridge.Test.Assert.false(Bridge.Reflection.isGenericTypeDefinition(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers$1.WrappedProps));
+                Bridge.Test.Assert.true(Bridge.Reflection.isGenericTypeDefinition(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers2$1));
+                // NRefactory incorrectly resolves ComponentPropsHelpers2<>.WrappedProps type
+                // It provides ComponentPropsHelpers2<TProps>.WrappedProps instead of definition
+                //Assert.True(typeof(ComponentPropsHelpers2<>.WrappedProps).IsGenericTypeDefinition);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers$1", {
+        statics: {
+            wrapProps: function (propsIfAny) {
+                return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers$1.WrappedProps.ctor({ value: propsIfAny });
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers$1.WrappedProps", {
+        $literal: true
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers2$1", function (TProps) { return {
+        statics: {
+            wrapProps: function (propsIfAny) {
+                return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers2$1.WrappedProps(TProps).ctor({ value: propsIfAny });
+            }
+        }
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers2$1.WrappedProps", function (TProps) { return {
+        $literal: true
+    }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
@@ -18839,6 +18892,30 @@ Bridge.$N1391Result =                 r;
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge999_1, {
         f1: function (x) {
             return x;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Inner1430_Level1.Constants", {
+        statics: {
+            TestConst: "Hi from inner Level1"
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Inner1430_Level1.Do", {
+        getFour: function () {
+            return 4;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Inner1430_Level1.Inner1430_Level2.Constants", {
+        statics: {
+            TestConst: "Hi from inner Level3"
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Inner1430_Level1.Inner1430_Level2.Do", {
+        getFive: function () {
+            return 5;
         }
     });
 

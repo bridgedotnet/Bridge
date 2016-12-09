@@ -80,6 +80,7 @@
     <Compile Include="BridgeIssues\2000\N1537.cs" />
     <Compile Include="BridgeIssues\2000\N1508.cs" />
     <Compile Include="BridgeIssues\2000\N1552.cs" />
+    <Compile Include="BridgeIssues\2000\N2143.cs" />
     <Compile Include="BridgeIssues\2000\N2113.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BridgeIssues\0500\N384.cs" />
