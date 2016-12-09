@@ -7,9 +7,12 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge1430
     {
         [Test]
-        public static void TestEqOperatorWithNull()
+        public static void TestNestedNamespaceSupport()
         {
-            Assert.AreEqual("test", InnerNamespace1430.Constants.TestConst);
+            Assert.AreEqual("Hi from inner namespace", InnerNamespace1430.Constants.TestConst);
+
+            var d = new InnerNamespace1430.Do();
+            Assert.AreEqual(4, d.GetFour());
         }
     }
 
@@ -17,7 +20,15 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     {
         public class Constants
         {
-            public const string TestConst = "test";
+            public const string TestConst = "Hi from inner namespace";
+        }
+
+        class Do
+        {
+            public int GetFour()
+            {
+                return 4;
+            }
         }
     }
 }

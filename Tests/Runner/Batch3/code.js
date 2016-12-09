@@ -6149,8 +6149,11 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1430", {
         statics: {
-            testEqOperatorWithNull: function () {
-                Bridge.Test.Assert.areEqual("test", Bridge.ClientTest.Batch3.BridgeIssues.InnerNamespace1430.Constants.TestConst);
+            testNestedNamespaceSupport: function () {
+                Bridge.Test.Assert.areEqual("Hi from inner namespace", Bridge.ClientTest.Batch3.BridgeIssues.InnerNamespace1430.Constants.TestConst);
+
+                var d = new Bridge.ClientTest.Batch3.BridgeIssues.InnerNamespace1430.Do();
+                Bridge.Test.Assert.areEqual(4, d.getFour());
             }
         }
     });
@@ -7158,6 +7161,8 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
+
+
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7187,7 +7192,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    }); /// Async method lacks 'await' operators and will run synchronously
+                                    });
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -18845,7 +18850,13 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.InnerNamespace1430.Constants", {
         statics: {
-            TestConst: "test"
+            TestConst: "Hi from inner namespace"
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.InnerNamespace1430.Do", {
+        getFour: function () {
+            return 4;
         }
     });
 
