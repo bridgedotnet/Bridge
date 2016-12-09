@@ -7166,6 +7166,8 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
+
+
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7195,7 +7197,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    }); /// Async method lacks 'await' operators and will run synchronously
+                                    });
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -12023,6 +12025,7 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.Assert.areEqual("_Bridge2135_1.Config", Bridge.Reflection.getTypeFullName(_Bridge2135_1.Config));
                 Bridge.Test.Assert.areEqual("_Bridge2135_2.Class2_1$1.Config", Bridge.Reflection.getTypeFullName(_Bridge2135_2.Class2_1$1.Config));
                 Bridge.Test.Assert.areEqual("_Bridge2135_3.Config$1", Bridge.Reflection.getTypeFullName(_Bridge2135_3.Config$1));
+                Bridge.Test.Assert.areEqual("_Bridge2135_4.Class4_1$1.Config[[Object]]", Bridge.Reflection.getTypeFullName(_Bridge2135_4.Class4_1$1.Config(Object)));
             }
         }
     });
@@ -12059,6 +12062,16 @@ Bridge.$N1391Result =                 r;
                 Msg: null
             }
         }
+    }; });
+
+    Bridge.define("_Bridge2135_4");
+
+    Bridge.define("_Bridge2135_4.Class4_1$1", function (T) { return {
+
+    }; });
+
+    Bridge.define("_Bridge2135_4.Class4_1$1.Config", function (T) { return {
+        $literal: true
     }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2137", {
