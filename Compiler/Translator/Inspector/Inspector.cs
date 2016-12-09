@@ -4,6 +4,7 @@ using Bridge.Contract.Constants;
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.TypeSystem;
 using System.Collections.Generic;
+using System.Linq;
 using NRAttribute = ICSharpCode.NRefactory.CSharp.Attribute;
 
 namespace Bridge.Translator
@@ -153,6 +154,13 @@ namespace Bridge.Translator
         {
             if (type.Kind == TypeKind.TypeParameter && astType != null)
             {
+                var parameter = type as ITypeParameter;
+                if (parameter != null && (
+                    parameter.Owner.Attributes.Any(a => a.AttributeType.FullName == "Bridge.IgnoreGenericAttribute") ||
+                    parameter.Owner.DeclaringTypeDefinition != null && parameter.Owner.DeclaringTypeDefinition.Attributes.Any(a => a.AttributeType.FullName == "Bridge.IgnoreGenericAttribute")))
+                {
+                    return null;
+                }
                 return new RawValue(JS.Funcs.BRIDGE_GETDEFAULTVALUE + "(" + astType.ToString() + ")");
             }
 

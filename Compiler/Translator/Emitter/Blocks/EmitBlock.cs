@@ -401,7 +401,7 @@ namespace Bridge.Translator
                     var metaData = meta.Value;
                     string typeArgs = "";
 
-                    if (meta.Key.TypeArguments.Count > 0)
+                    if (meta.Key.TypeArguments.Count > 0 && !Helpers.IsIgnoreGeneric(meta.Key, this.Emitter))
                     {
                         StringBuilder arr_sb = new StringBuilder();
                         var comma = false;

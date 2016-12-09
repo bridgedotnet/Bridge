@@ -59,6 +59,7 @@
             public const string BRIDGE_PROPERTY = "Bridge.property";
             public const string BRIDGE_TOPLAIN = "Bridge.toPlain";
             public const string BRIDGE_HASVALUE = "Bridge.hasValue";
+            public const string BRIDGE_LITERAL = "Bridge.literal";
 
             public const string INITIALIZE = "$initialize";
             public const string INIT = "init";
