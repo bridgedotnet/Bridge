@@ -10730,18 +10730,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             validOffsetIn: function () {
                 var input = "test";
                 var inputBytes = System.Convert.fromBase64String(input);
-                var resultChars = System.Array.init(4, function (){
-                    return new System.Char();
-                });
+                var resultChars = System.Array.init(4, 0);
                 var fillCharCount = System.Convert.toBase64CharArray(inputBytes, 0, ((inputBytes.length - 1) | 0), resultChars, 0, null);
                 Bridge.Test.Assert.areEqual(input.length, fillCharCount);
             },
             shortInputArray: function () {
                 // Regression test for bug where a short input array caused an exception to be thrown
                 var inputBuffer = [97, 98, 99];
-                var ouputBuffer = System.Array.init(4, function (){
-                    return new System.Char();
-                });
+                var ouputBuffer = System.Array.init(4, 0);
                 var c1 = System.Convert.toBase64CharArray(inputBuffer, 0, 3, ouputBuffer, 0, null);
                 Bridge.Test.Assert.areEqual(4, c1);
 
@@ -10779,9 +10775,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             invalidOffsetIn: function () {
                 var inputChars = System.String.toCharArray(("test"), 0, ("test").length);
                 var inputBytes = System.Convert.fromBase64CharArray(inputChars, 0, inputChars.length);
-                var outputBuffer = System.Array.init(4, function (){
-                    return new System.Char();
-                });
+                var outputBuffer = System.Array.init(4, 0);
 
                 Bridge.Test.Assert.throws$1(function () {
                     System.Convert.toBase64CharArray(inputBytes, -1, inputBytes.length, outputBuffer, 0, null);
@@ -10793,9 +10787,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             invalidOffsetOut: function () {
                 var inputChars = System.String.toCharArray(("test"), 0, ("test").length);
                 var inputBytes = System.Convert.fromBase64CharArray(inputChars, 0, inputChars.length);
-                var outputBuffer = System.Array.init(4, function (){
-                    return new System.Char();
-                });
+                var outputBuffer = System.Array.init(4, 0);
 
                 Bridge.Test.Assert.throws$1(function () {
                     System.Convert.toBase64CharArray(inputBytes, 0, inputBytes.length, outputBuffer, -1, null);
@@ -10807,9 +10799,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             invalidInputLength: function () {
                 var inputChars = System.String.toCharArray(("test"), 0, ("test").length);
                 var inputBytes = System.Convert.fromBase64CharArray(inputChars, 0, inputChars.length);
-                var outputBuffer = System.Array.init(4, function (){
-                    return new System.Char();
-                });
+                var outputBuffer = System.Array.init(4, 0);
 
                 Bridge.Test.Assert.throws$1(function () {
                     System.Convert.toBase64CharArray(inputBytes, 0, -1, outputBuffer, 0, null);
@@ -10828,9 +10818,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.apply($asm.$.Bridge.ClientTest.ConvertTests.ConvertToBase64CharArrayTests, {
         f1: function () {
-            System.Convert.toBase64CharArray(null, 0, 1, System.Array.init(1, function (){
-                    return new System.Char();
-                }), 0, null);
+            System.Convert.toBase64CharArray(null, 0, 1, System.Array.init(1, 0), 0, null);
         },
         f2: function (err) {
             return Bridge.is(err, System.ArgumentNullException);
@@ -22885,7 +22873,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             properties: {
                 B: false,
                 Y: 0,
-                C: null,
+                C: 0,
                 D: 0,
                 F: 0,
                 I: 0,
@@ -22895,9 +22883,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 S: null,
                 O: null,
                 T: null
-            },
-            init: function () {
-                this.C = new System.Char();
             }
         },
         ctor: function (b, y, c, d, f, i, l, h, e, s, o, t) {
@@ -27399,9 +27384,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var $t;
                 var a;
                 var i = 0;
-                var result = System.Array.init(5, function (){
-                    return new System.Char();
-                });
+                var result = System.Array.init(5, 0);
                 $t = Bridge.getEnumerator("danny");
                 while ($t.moveNext()) {
                     var c = $t.getCurrent();
@@ -29448,9 +29431,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 // Adjusted logic here. Will just reverse the value string.
 
                 var value = match.getValue();
-                var letters = System.Array.init(value.length, function (){
-                    return new System.Char();
-                });
+                var letters = System.Array.init(value.length, 0);
                 for (var i = 0; i < value.length; i = (i + 1) | 0) {
                     letters[i] = value.charCodeAt(((((value.length - i) | 0) - 1) | 0));
                 }
