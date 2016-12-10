@@ -75,7 +75,7 @@ namespace Bridge.Translator
             if (resolveResult is TypeResolveResult)
             {
                 this.Write(BridgeTypes.ToJsName(resolveResult.Type, this.Emitter));
-                /*if (this.Emitter.Validator.IsIgnoreType(resolveResult.Type.GetDefinition()) || resolveResult.Type.Kind == TypeKind.Enum)
+                /*if (this.Emitter.Validator.IsExternalType(resolveResult.Type.GetDefinition()) || resolveResult.Type.Kind == TypeKind.Enum)
                 {
                     this.Write(BridgeTypes.ToJsName(resolveResult.Type, this.Emitter));
                 }
@@ -142,7 +142,7 @@ namespace Bridge.Translator
                 if (memberResult.Member.IsStatic)
                 {
                     this.Write(BridgeTypes.ToJsName(memberResult.Member.DeclaringType, this.Emitter));
-                    /*if (!this.Emitter.Validator.IsIgnoreType(memberResult.Member.DeclaringTypeDefinition) && memberResult.Member.DeclaringTypeDefinition.Kind != TypeKind.Enum)
+                    /*if (!this.Emitter.Validator.IsExternalType(memberResult.Member.DeclaringTypeDefinition) && memberResult.Member.DeclaringTypeDefinition.Kind != TypeKind.Enum)
                     {
                         this.Write("(Bridge.get(" + BridgeTypes.ToJsName(memberResult.Member.DeclaringType, this.Emitter) + "))");
                     }

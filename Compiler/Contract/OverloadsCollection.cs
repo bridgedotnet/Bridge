@@ -750,8 +750,8 @@ namespace Bridge.Contract
                     bool? equalsByGetter = null;
                     if (p.IsStatic == this.Static)
                     {
-                        var getterIgnore = canGet && this.Emitter.Validator.IsIgnoreType(p.Getter);
-                        var setterIgnore = canSet && this.Emitter.Validator.IsIgnoreType(p.Setter);
+                        var getterIgnore = canGet && this.Emitter.Validator.IsExternalType(p.Getter);
+                        var setterIgnore = canSet && this.Emitter.Validator.IsExternalType(p.Setter);
                         var getterName = canGet ? Helpers.GetPropertyRef(p, this.Emitter, false, true, true) : null;
                         var setterName = canSet ? Helpers.GetPropertyRef(p, this.Emitter, true, true, true) : null;
                         var fieldName = Helpers.IsAutoProperty(p) ? (Helpers.IsFieldProperty(p, this.Emitter) ? this.Emitter.GetEntityName(p) : Helpers.GetPropertyRef(p, this.Emitter, true, true, true, false, true)) : null;
@@ -1074,7 +1074,7 @@ namespace Bridge.Contract
                 }
             }
 
-            if (attr != null || (definition.DeclaringTypeDefinition != null && definition.DeclaringTypeDefinition.Kind != TypeKind.Interface && this.Emitter.Validator.IsIgnoreType(definition.DeclaringTypeDefinition)))
+            if (attr != null || (definition.DeclaringTypeDefinition != null && definition.DeclaringTypeDefinition.Kind != TypeKind.Interface && this.Emitter.Validator.IsExternalType(definition.DeclaringTypeDefinition)))
             {
                 return prefix != null ? prefix + name : name;
             }
