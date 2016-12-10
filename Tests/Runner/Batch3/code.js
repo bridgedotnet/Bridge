@@ -7166,8 +7166,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7197,7 +7195,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    });
+                                    }); /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -12256,6 +12254,21 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers2$1.WrappedProps", function (TProps) { return {
         $literal: true
     }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2147", {
+        statics: {
+            testLinqExcept: function () {
+                var numbers1 = [2.0, 2.0, 2.1, 2.2, 2.3, 2.3, 2.4, 2.5];
+                var numbers2 = [2.2, 2.2];
+                var numbers = System.Linq.Enumerable.from(numbers1).except(numbers2).toArray();
+
+                Bridge.Test.Assert.areEqual(5, numbers.length);
+                Bridge.Test.Assert.false(System.Array.contains(numbers, 2.2, System.Double));
+                Bridge.Test.Assert.areEqual(2.0, numbers[0]);
+                Bridge.Test.Assert.areEqual(2.5, numbers[4]);
+            }
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {

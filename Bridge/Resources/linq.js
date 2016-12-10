@@ -1433,7 +1433,7 @@
                 function () {
                     enumerator = source.getEnumerator();
                     keys = new (System.Collections.Generic.Dictionary$2(Object, Object))(null, comparer);
-                    Enumerable.from(second).forEach(function (key) { keys.add(key); });
+                    Enumerable.from(second).forEach(function (key) { keys.set(key); });
                 },
                 function () {
                     while (enumerator.moveNext()) {
