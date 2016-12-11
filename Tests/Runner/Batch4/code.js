@@ -10730,7 +10730,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             properties: {
                 B: false,
                 Y: 0,
-                C: null,
+                C: 0,
                 D: 0,
                 F: 0,
                 I: 0,
@@ -10740,9 +10740,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 S: null,
                 O: null,
                 T: null
-            },
-            init: function () {
-                this.C = new System.Char();
             }
         },
         ctor: function (b, y, c, d, f, i, l, h, e, s, o, t) {

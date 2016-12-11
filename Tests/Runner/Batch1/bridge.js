@@ -15349,7 +15349,7 @@
                 function () {
                     enumerator = source.getEnumerator();
                     keys = new (System.Collections.Generic.Dictionary$2(Object, Object))(null, comparer);
-                    Enumerable.from(second).forEach(function (key) { keys.add(key); });
+                    Enumerable.from(second).forEach(function (key) { if (!keys.containsKey(key)) { keys.add(key); } });
                 },
                 function () {
                     while (enumerator.moveNext()) {
@@ -15380,7 +15380,7 @@
                     enumerator = source.getEnumerator();
 
                     keys = new (System.Collections.Generic.Dictionary$2(Object, Object))(null, comparer);
-                    Enumerable.from(second).forEach(function (key) { keys.add(key); });
+                    Enumerable.from(second).forEach(function (key) { if (!keys.containsKey(key)) { keys.add(key); } });
                     outs = new (System.Collections.Generic.Dictionary$2(Object, Object))(null, comparer);
                 },
                 function () {

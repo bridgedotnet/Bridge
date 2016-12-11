@@ -12255,6 +12255,161 @@ Bridge.$N1391Result =                 r;
         $literal: true
     }; });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2146", {
+        statics: {
+            config: {
+                properties: {
+                    TokenTerminator: 0
+                }
+            },
+            getDefault: function (T) {
+                return Bridge.getDefaultValue(T);
+            },
+            testCharDefaultValue: function () {
+                Bridge.Test.Assert.areEqual(0, Bridge.getDefaultValue(System.Char));
+                Bridge.Test.Assert.areEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2146.getDefault(System.Char));
+                Bridge.Test.Assert.areEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2146.getTokenTerminator());
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2147", {
+        statics: {
+            testLinqExcept: function () {
+                var $t, $t1, $t2, $t3, $t4;
+                var numbers1 = [2.0, 2.0, 2.1, 2.2, 2.3, 2.3, 2.4, 2.5];
+                var numbers2 = [2.2, 2.2];
+                var numbers = System.Linq.Enumerable.from(numbers1).except(numbers2).toArray();
+
+                Bridge.Test.Assert.areEqual(5, numbers.length);
+                Bridge.Test.Assert.false(System.Array.contains(numbers, 2.2, System.Double));
+                Bridge.Test.Assert.areEqual(2.0, numbers[0]);
+                Bridge.Test.Assert.areEqual(2.5, numbers[4]);
+
+                var numbers3 = [2.2];
+                var numbers4 = [2.2];
+                var count3 = 0;
+                $t = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers3).except(numbers4));
+                while ($t.moveNext()) {
+                    var item = $t.getCurrent();
+                    Bridge.Test.Assert.fail$1("numbers3.Except(numbers4) should be empty");
+                }
+                Bridge.Test.Assert.areEqual$1(0, count3, "numbers3.Except(numbers4) should be empty");
+
+                var numbers5 = [2.0];
+                var numbers6 = [2.2];
+                var count5 = 0;
+                $t1 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers5).except(numbers6));
+                while ($t1.moveNext()) {
+                    var item1 = $t1.getCurrent();
+                    Bridge.Test.Assert.areEqual(2.0, item1);
+                    count5 = (count5 + 1) | 0;
+                }
+                Bridge.Test.Assert.areEqual(1, count5);
+
+                var numbers7 = [];
+                var numbers8 = [2.0];
+                var count7 = 0;
+                $t2 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers7).except(numbers8));
+                while ($t2.moveNext()) {
+                    var item2 = $t2.getCurrent();
+                    Bridge.Test.Assert.fail$1("numbers7.Except(numbers8) should be empty");
+                    count7 = (count7 + 1) | 0;
+                }
+                Bridge.Test.Assert.areEqual$1(0, count7, "numbers7.Except(numbers8) should be empty");
+
+                var numbers9 = [7.0];
+                var numbers10 = [];
+                var count9 = 0;
+                $t3 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers9).except(numbers10));
+                while ($t3.moveNext()) {
+                    var item3 = $t3.getCurrent();
+                    Bridge.Test.Assert.areEqual(7.0, item3);
+                    count9 = (count9 + 1) | 0;
+                }
+                Bridge.Test.Assert.areEqual(1, count9);
+
+                var numbers11 = [];
+                var numbers12 = [];
+                var count11 = 0;
+                $t4 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers11).except(numbers12));
+                while ($t4.moveNext()) {
+                    var item4 = $t4.getCurrent();
+                    Bridge.Test.Assert.fail$1("numbers11.Except(numbers12) should be empty");
+                }
+                Bridge.Test.Assert.areEqual$1(0, count11, "numbers11.Except(numbers12) should be empty");
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2156", {
+        statics: {
+            testLinqIntersect: function () {
+                var $t, $t1, $t2, $t3, $t4;
+                var numbers1 = [2.0, 2.0, 2.1, 2.2, 2.3, 2.3, 2.4, 2.5];
+                var numbers2 = [2.2, 2.2, 2.4, 2.4, 2.7];
+                var numbers = System.Linq.Enumerable.from(numbers1).intersect(numbers2).toArray();
+
+                Bridge.Test.Assert.areEqual(2, numbers.length);
+                Bridge.Test.Assert.areEqual(2.2, numbers[0]);
+                Bridge.Test.Assert.areEqual(2.4, numbers[1]);
+
+                var numbers3 = [2.2];
+                var numbers4 = [2.4];
+                var count3 = 0;
+                $t = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers3).intersect(numbers4));
+                while ($t.moveNext()) {
+                    var item = $t.getCurrent();
+                    Bridge.Test.Assert.fail$1("numbers3.Intersect(numbers4) should be empty");
+                }
+                Bridge.Test.Assert.areEqual$1(0, count3, "numbers3.Intersect(numbers4) should be empty");
+
+                var numbers5 = [2.0];
+                var numbers6 = [2.0];
+                var count5 = 0;
+                $t1 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers5).intersect(numbers6));
+                while ($t1.moveNext()) {
+                    var item1 = $t1.getCurrent();
+                    Bridge.Test.Assert.areEqual(2.0, item1);
+                    count5 = (count5 + 1) | 0;
+                }
+                Bridge.Test.Assert.areEqual(1, count5);
+
+                var numbers7 = [];
+                var numbers8 = [2.0];
+                var count7 = 0;
+                $t2 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers7).intersect(numbers8));
+                while ($t2.moveNext()) {
+                    var item2 = $t2.getCurrent();
+                    Bridge.Test.Assert.fail$1("numbers7.Intersect(numbers8) should be empty");
+                    count7 = (count7 + 1) | 0;
+                }
+                Bridge.Test.Assert.areEqual$1(0, count7, "numbers7.Intersect(numbers8) should be empty");
+
+                var numbers9 = [7.0];
+                var numbers10 = [];
+                var count9 = 0;
+                $t3 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers9).intersect(numbers10));
+                while ($t3.moveNext()) {
+                    var item3 = $t3.getCurrent();
+                    Bridge.Test.Assert.fail$1("numbers9.Intersect(numbers10) should be empty");
+                    count9 = (count9 + 1) | 0;
+                }
+                Bridge.Test.Assert.areEqual(0, count9);
+
+                var numbers11 = [];
+                var numbers12 = [];
+                var count11 = 0;
+                $t4 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers11).intersect(numbers12));
+                while ($t4.moveNext()) {
+                    var item4 = $t4.getCurrent();
+                    Bridge.Test.Assert.fail$1("numbers11.Intersect(numbers12) should be empty");
+                }
+                Bridge.Test.Assert.areEqual$1(0, count11, "numbers11.Intersect(numbers12) should be empty");
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {

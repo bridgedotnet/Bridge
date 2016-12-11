@@ -179,7 +179,8 @@ namespace Bridge.Translator
                 return 0UL;
             }
 
-            if (type.IsKnownType(KnownTypeCode.Int16) ||
+            if (type.IsKnownType(KnownTypeCode.Char) ||
+                type.IsKnownType(KnownTypeCode.Int16) ||
                 type.IsKnownType(KnownTypeCode.Int32) ||
                 type.IsKnownType(KnownTypeCode.UInt16) ||
                 type.IsKnownType(KnownTypeCode.UInt32) ||
