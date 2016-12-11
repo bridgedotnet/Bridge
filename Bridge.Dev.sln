@@ -138,6 +138,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Batch3", "Tests\Batch3\Batch3.csproj", "{85F91198-C10C-47F4-94DF-E65EE65FA542}"
 	ProjectSection(ProjectDependencies) = postProject
 		{8DAF3989-FF37-470C-A55D-3E7868613AA5} = {8DAF3989-FF37-470C-A55D-3E7868613AA5}
+		{A9251B8F-D2E1-42E4-B7BE-09CD25A6D2F8} = {A9251B8F-D2E1-42E4-B7BE-09CD25A6D2F8}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Batch4", "Tests\Batch4\Batch4.csproj", "{BDD8354D-4691-4C8A-A7B3-9782042DA333}"
@@ -152,6 +153,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientTestHelper", "Tests\C
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientTestHelperExternal", "Tests\ClientTestHelperExternal\ClientTestHelperExternal.csproj", "{A9251B8F-D2E1-42E4-B7BE-09CD25A6D2F8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8DAF3989-FF37-470C-A55D-3E7868613AA5} = {8DAF3989-FF37-470C-A55D-3E7868613AA5}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
