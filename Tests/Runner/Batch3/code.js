@@ -7166,8 +7166,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7197,7 +7195,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    });
+                                    }); /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -12409,6 +12407,31 @@ Bridge.$N1391Result =                 r;
                 }
                 Bridge.Test.Assert.areEqual$1(0, count11, "numbers11.Intersect(numbers12) should be empty");
             }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2157", {
+        statics: {
+            testMethod: function (TType) {
+                return Bridge.merge(new TType(), {
+                    setTestProperty: 2
+                } );
+            },
+            testCreatingGenericInstanceWithInitializer: function () {
+                Bridge.Test.Assert.areEqual(2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2157.testMethod(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2157.TestClass).getTestProperty());
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2157.TestClass", {
+        config: {
+            properties: {
+                TestProperty: 0
+            }
+        },
+        ctor: function () {
+            this.$initialize();
+            this.setTestProperty(1);
         }
     });
 
