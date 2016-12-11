@@ -60,7 +60,7 @@ namespace Bridge.Translator
                 if (memberResolveResult != null)
                 {
                     var resolvedMember = memberResolveResult.Member;
-                    isIgnore = block.Emitter.Validator.IsIgnoreType(resolvedMember.DeclaringTypeDefinition);
+                    isIgnore = block.Emitter.Validator.IsExternalType(resolvedMember.DeclaringTypeDefinition);
                     isAccessorsIndexer = block.Emitter.Validator.IsAccessorsIndexer(resolvedMember);
 
                     var property = resolvedMember as IProperty;

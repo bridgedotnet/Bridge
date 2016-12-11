@@ -1,6 +1,5 @@
-﻿namespace Bridge.ClientTestHelper.External
+﻿namespace Bridge.ClientTestHelperExternal
 {
-    [External]
     [ObjectLiteral]
     public partial class AjaxOptions
     {

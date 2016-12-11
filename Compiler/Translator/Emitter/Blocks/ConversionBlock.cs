@@ -378,7 +378,7 @@ namespace Bridge.Translator
                 }
                 else
                 {
-                    if (method.DeclaringTypeDefinition != null && (block.Emitter.Validator.IsIgnoreType(method.DeclaringTypeDefinition) || Helpers.IsIgnoreCast(method.DeclaringTypeDefinition, block.Emitter)))
+                    if (method.DeclaringTypeDefinition != null && (block.Emitter.Validator.IsExternalType(method.DeclaringTypeDefinition) || Helpers.IsIgnoreCast(method.DeclaringTypeDefinition, block.Emitter)))
                     {
                         // Still returns true if Nullable.lift( was written.
                         return level;

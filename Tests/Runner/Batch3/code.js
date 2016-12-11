@@ -2457,7 +2457,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1193", {
         statics: {
             testAssemblyVersionMarker: function () {
-                Bridge.Test.Assert.areEqual("1.2.3.4", Bridge.ClientTestHelper.Internal.N1193.getClientTestHelperAssemblyVersion());
+                Bridge.Test.Assert.areEqual("1.2.3.4", Bridge.ClientTestHelper.N1193.getClientTestHelperAssemblyVersion());
             }
         }
     });
@@ -10654,19 +10654,19 @@ Bridge.$N1391Result =                 r;
             var item = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1915.LocalItem();
 
             Bridge.ClientTest.Batch3.BridgeIssues.Bridge1915.LocalTest.test(item);
-            Bridge.Test.Assert.areEqual(1, item.Bridge$ClientTestHelper$Internal$IItem$getValue());
-            Bridge.ClientTestHelper.Internal.ClassLibraryTest.test(item);
-            Bridge.Test.Assert.areEqual(2, item.Bridge$ClientTestHelper$Internal$IItem$getValue());
+            Bridge.Test.Assert.areEqual(1, item.Bridge$ClientTestHelper$IItem$getValue());
+            Bridge.ClientTestHelper.ClassLibraryTest.test(item);
+            Bridge.Test.Assert.areEqual(2, item.Bridge$ClientTestHelper$IItem$getValue());
         }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1915.LocalItem", {
-        inherits: [Bridge.ClientTestHelper.Internal.IWriteableItem],
+        inherits: [Bridge.ClientTestHelper.IWriteableItem],
         value: null,
         config: {
             alias: [
-            "getValue", "Bridge$ClientTestHelper$Internal$IItem$getValue",
-            "setValue", "Bridge$ClientTestHelper$Internal$IWriteableItem$setValue"
+            "getValue", "Bridge$ClientTestHelper$IItem$getValue",
+            "setValue", "Bridge$ClientTestHelper$IWriteableItem$setValue"
             ]
         },
         getValue: function () {
@@ -10681,7 +10681,7 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1915.LocalTest", {
         statics: {
             test: function (item) {
-                item.Bridge$ClientTestHelper$Internal$IWriteableItem$setValue(1);
+                item.Bridge$ClientTestHelper$IWriteableItem$setValue(1);
             }
         }
     });

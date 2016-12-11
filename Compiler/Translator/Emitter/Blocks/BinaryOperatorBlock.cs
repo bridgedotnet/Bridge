@@ -61,7 +61,7 @@ namespace Bridge.Translator
                         new ArgumentsInfo(this.Emitter, binaryOperatorExpression, orr, method), inline).Emit();
                     return true;
                 }
-                else if (!this.Emitter.Validator.IsIgnoreType(method.DeclaringTypeDefinition))
+                else if (!this.Emitter.Validator.IsExternalType(method.DeclaringTypeDefinition))
                 {
                     bool addClose = false;
                     string leftInterfaceTempVar = null;
@@ -678,7 +678,7 @@ namespace Bridge.Translator
                     new InlineArgumentsBlock(this.Emitter,
                         new ArgumentsInfo(this.Emitter, this.BinaryOperatorExpression, orr, method), inline).Emit();
                 }
-                else if (!this.Emitter.Validator.IsIgnoreType(method.DeclaringTypeDefinition))
+                else if (!this.Emitter.Validator.IsExternalType(method.DeclaringTypeDefinition))
                 {
                     this.Write(BridgeTypes.ToJsName(method.DeclaringType, this.Emitter));
                     this.WriteDot();

@@ -54,7 +54,7 @@ namespace Bridge.Translator
                     }
                     return true;
                 }
-                else if (!this.Emitter.Validator.IsIgnoreType(method.DeclaringTypeDefinition))
+                else if (!this.Emitter.Validator.IsExternalType(method.DeclaringTypeDefinition))
                 {
                     if (this.Emitter.Writers.Count == initCount && !thisAssignment)
                     {
@@ -107,7 +107,7 @@ namespace Bridge.Translator
                 {
                     return true;
                 }
-                else if (!this.Emitter.Validator.IsIgnoreType(method.DeclaringTypeDefinition))
+                else if (!this.Emitter.Validator.IsExternalType(method.DeclaringTypeDefinition))
                 {
                     return true;
                 }
@@ -723,7 +723,7 @@ namespace Bridge.Translator
                     new InlineArgumentsBlock(this.Emitter,
                         new ArgumentsInfo(this.Emitter, this.AssignmentExpression, orr, method), inline).Emit();
                 }
-                else if (!this.Emitter.Validator.IsIgnoreType(method.DeclaringTypeDefinition))
+                else if (!this.Emitter.Validator.IsExternalType(method.DeclaringTypeDefinition))
                 {
                     this.Write(BridgeTypes.ToJsName(method.DeclaringType, this.Emitter));
                     this.WriteDot();

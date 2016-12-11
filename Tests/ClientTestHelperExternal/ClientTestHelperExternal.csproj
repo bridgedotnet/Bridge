@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{847BF532-9724-44D0-96C5-9B393E698B7C}</ProjectGuid>
+    <ProjectGuid>{A9251B8F-D2E1-42E4-B7BE-09CD25A6D2F8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bridge.ClientTestHelper</RootNamespace>
-    <AssemblyName>Bridge.ClientTestHelper</AssemblyName>
+    <RootNamespace>Bridge.ClientTestHelperExternal</RootNamespace>
+    <AssemblyName>Bridge.ClientTestHelperExternal</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
@@ -45,8 +45,7 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Internal\N1193.cs" />
-    <Compile Include="Internal\N1915.cs" />
+    <Compile Include="External\AjaxOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Bridge\bridge.json" />
   </ItemGroup>

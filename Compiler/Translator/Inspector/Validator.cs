@@ -19,7 +19,7 @@ namespace Bridge.Translator
     {
         public virtual bool CanIgnoreType(TypeDefinition type)
         {
-            if (this.IsIgnoreType(type))
+            if (this.IsExternalType(type))
             {
                 return true;
             }
@@ -124,24 +124,30 @@ namespace Bridge.Translator
             }
         }
 
-        public virtual bool IsIgnoreType(ICustomAttributeProvider type, bool ignoreLiteral = false)
+        public virtual bool IsExternalType(TypeDefinition type, bool ignoreLiteral = false)
         {
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
             string nonScriptableAttr = Translator.Bridge_ASSEMBLY + ".NonScriptableAttribute";
 
-            return
-                this.HasAttribute(type.CustomAttributes, externalAttr)
-                || this.HasAttribute(type.CustomAttributes, nonScriptableAttr);
+            var has = this.HasAttribute(type.CustomAttributes, externalAttr)
+                      || this.HasAttribute(type.CustomAttributes, nonScriptableAttr);
+
+            if (!has)
+            {
+                has = this.HasAttribute(type.Module.Assembly.CustomAttributes, externalAttr);
+            }
+
+            return has;
         }
 
-        public virtual bool IsIgnoreType(IEntity enity, bool ignoreLiteral = false)
+        public virtual bool IsExternalType(IEntity entity, bool ignoreLiteral = false)
         {
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
             string nonScriptableAttr = Translator.Bridge_ASSEMBLY + ".NonScriptableAttribute";
 
             return
-                this.HasAttribute(enity.Attributes, externalAttr)
-                || this.HasAttribute(enity.Attributes, nonScriptableAttr);
+                this.HasAttribute(entity.Attributes, externalAttr)
+                || this.HasAttribute(entity.Attributes, nonScriptableAttr);
         }
 
         public virtual bool IsBridgeClass(TypeDefinition type)
@@ -157,11 +163,18 @@ namespace Bridge.Translator
             return false;
         }
 
-        public virtual bool IsIgnoreType(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition, bool ignoreLiteral = false)
+        public virtual bool IsExternalType(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition, bool ignoreLiteral = false)
         {
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
 
-            return typeDefinition.Attributes.Any(attr => attr.Constructor != null && attr.Constructor.DeclaringType.FullName == externalAttr);
+            var has = typeDefinition.Attributes.Any(attr => attr.Constructor != null && attr.Constructor.DeclaringType.FullName == externalAttr);
+
+            if (!has)
+            {
+                has = typeDefinition.ParentAssembly.AssemblyAttributes.Any(attr => attr.Constructor != null && attr.Constructor.DeclaringType.FullName == externalAttr);
+            }
+
+            return has;
         }
 
         public virtual bool IsExternalInterface(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition, out bool isNative)
@@ -172,7 +185,7 @@ namespace Bridge.Translator
 
             if (attr == null)
             {
-                isNative = typeDefinition.ParentAssembly.AssemblyName == "Bridge" || !this.IsIgnoreType(typeDefinition);
+                isNative = typeDefinition.ParentAssembly.AssemblyName == "Bridge" || !this.IsExternalType(typeDefinition);
             }
 
             return attr != null;
@@ -436,7 +449,7 @@ namespace Bridge.Translator
                 //var mode = this.GetObjectCreateMode(type);
                 //var ignore = mode == 0 && !type.Methods.Any(m => !m.IsConstructor && !m.IsGetter && !m.IsSetter && !m.IsRemoveOn && !m.IsAddOn);
 
-                if (emitter.Validator.IsIgnoreType(type))
+                if (emitter.Validator.IsExternalType(type))
                 {
                     return "Object";
                 }

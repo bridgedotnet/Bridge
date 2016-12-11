@@ -1,24 +1,24 @@
 /**
- * Bridge Test library - a common classes shared across all test Bathces
+ * Bridge Test library - a common classes shared across all test Batches
  * @version 1.2.3.4
  * @compiler Bridge.NET 15.5.0
  */
 Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
     "use strict";
 
-    Bridge.define("Bridge.ClientTestHelper.Internal.ClassLibraryTest", {
+    Bridge.define("Bridge.ClientTestHelper.ClassLibraryTest", {
         statics: {
             test: function (item) {
-                item.Bridge$ClientTestHelper$Internal$IWriteableItem$setValue(2);
+                item.Bridge$ClientTestHelper$IWriteableItem$setValue(2);
             }
         }
     });
 
-    Bridge.define("Bridge.ClientTestHelper.Internal.IItem", {
+    Bridge.define("Bridge.ClientTestHelper.IItem", {
         $kind: "interface"
     });
 
-    Bridge.define("Bridge.ClientTestHelper.Internal.N1193", {
+    Bridge.define("Bridge.ClientTestHelper.N1193", {
         statics: {
             getClientTestHelperAssemblyVersion: function () {
                 return "1.2.3.4";
@@ -26,8 +26,8 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
         }
     });
 
-    Bridge.define("Bridge.ClientTestHelper.Internal.IWriteableItem", {
-        inherits: [Bridge.ClientTestHelper.Internal.IItem],
+    Bridge.define("Bridge.ClientTestHelper.IWriteableItem", {
+        inherits: [Bridge.ClientTestHelper.IItem],
         $kind: "interface"
     });
 });

@@ -71,12 +71,12 @@ namespace Bridge.Translator
             return this.HasAttribute(declaration, Translator.Bridge_ASSEMBLY + ".NonScriptable");
         }
 
-        protected virtual bool HasIgnore(EntityDeclaration declaration)
+        protected virtual bool HasExternal(EntityDeclaration declaration)
         {
             return this.HasAttribute(declaration, Translator.Bridge_ASSEMBLY + ".External") || this.HasAttribute(declaration, Translator.Bridge_ASSEMBLY + ".Ignore");
         }
 
-        protected virtual bool HasInline(EntityDeclaration declaration)
+        protected virtual bool HasTemplate(EntityDeclaration declaration)
         {
             return this.HasAttribute(declaration, Translator.Bridge_ASSEMBLY + ".Template");
         }

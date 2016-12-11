@@ -119,7 +119,7 @@ namespace Bridge.Translator
             return attributes.Where(a =>
             {
                 var typeDef = a.AttributeType.GetDefinition();
-                return typeDef != null && !MetadataUtils.IsConditionallyRemoved(a, emitter.Translator, tree) && !emitter.Validator.IsIgnoreType(typeDef) &&
+                return typeDef != null && !MetadataUtils.IsConditionallyRemoved(a, emitter.Translator, tree) && !emitter.Validator.IsExternalType(typeDef) &&
                        !Helpers.IsNonScriptable(typeDef);
             });
         }

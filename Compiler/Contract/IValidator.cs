@@ -53,15 +53,15 @@ namespace Bridge.Contract
 
         bool IsDelegateOrLambda(ICSharpCode.NRefactory.Semantics.ResolveResult result);
 
-        bool IsIgnoreType(Mono.Cecil.ICustomAttributeProvider type, bool ignoreLiteral = false);
+        bool IsExternalType(TypeDefinition type, bool ignoreLiteral = false);
 
-        bool IsIgnoreType(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition, bool ignoreLiteral = false);
+        bool IsExternalType(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition, bool ignoreLiteral = false);
 
         bool IsExternalInterface(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition, out bool isNative);
 
         bool IsImmutableType(ICustomAttributeProvider type);
 
-        bool IsIgnoreType(IEntity enity, bool ignoreLiteral = false);
+        bool IsExternalType(IEntity enity, bool ignoreLiteral = false);
 
         bool IsBridgeClass(Mono.Cecil.TypeDefinition type);
 

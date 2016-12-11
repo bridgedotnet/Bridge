@@ -333,7 +333,7 @@ namespace Bridge.Translator
                                         this.Write(overloads.GetOverloadName());
                                     }
 
-                                    var isIgnoreClass = resolvedMethod.DeclaringTypeDefinition != null && this.Emitter.Validator.IsIgnoreType(resolvedMethod.DeclaringTypeDefinition);
+                                    var isIgnoreClass = resolvedMethod.DeclaringTypeDefinition != null && this.Emitter.Validator.IsExternalType(resolvedMethod.DeclaringTypeDefinition);
                                     int openPos = this.Emitter.Output.Length;
                                     this.WriteOpenParentheses();
 
@@ -441,7 +441,7 @@ namespace Bridge.Translator
             {
                 var baseType = this.Emitter.GetBaseMethodOwnerTypeDefinition(targetMember.MemberName, targetMember.TypeArguments.Count);
 
-                bool isIgnore = this.Emitter.Validator.IsIgnoreType(baseType);
+                bool isIgnore = this.Emitter.Validator.IsExternalType(baseType);
 
                 if (isIgnore)
                 {
@@ -547,7 +547,7 @@ namespace Bridge.Translator
                     return;
                 }
 
-                bool isIgnore = method != null && method.DeclaringTypeDefinition != null && this.Emitter.Validator.IsIgnoreType(method.DeclaringTypeDefinition);
+                bool isIgnore = method != null && method.DeclaringTypeDefinition != null && this.Emitter.Validator.IsExternalType(method.DeclaringTypeDefinition);
 
                 bool needExpand = false;
                 if (method != null)
@@ -679,7 +679,7 @@ namespace Bridge.Translator
         private bool IsNativeMethod(IMethod resolvedMethod)
         {
             return resolvedMethod.DeclaringTypeDefinition != null &&
-                   this.Emitter.Validator.IsIgnoreType(resolvedMethod.DeclaringTypeDefinition);
+                   this.Emitter.Validator.IsExternalType(resolvedMethod.DeclaringTypeDefinition);
         }
     }
 }

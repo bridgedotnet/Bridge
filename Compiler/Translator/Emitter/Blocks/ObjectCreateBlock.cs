@@ -132,7 +132,7 @@ namespace Bridge.Translator
                 bool close = isObjectLiteral;
                 if (isObjectLiteral)
                 {
-                    if (this.Emitter.Validator.IsIgnoreType(type))
+                    if (this.Emitter.Validator.IsExternalType(type))
                     {
                         var name = BridgeTypes.ToJsName(objectCreateExpression.Type, this.Emitter);
 
@@ -223,7 +223,7 @@ namespace Bridge.Translator
                         this.Write(customCtor);
                     }
 
-                    if (!isTypeParam && !this.Emitter.Validator.IsIgnoreType(type) && type.Methods.Count(m => m.IsConstructor && !m.IsStatic) > (type.IsValueType || isObjectLiteral ? 0 : 1))
+                    if (!isTypeParam && !this.Emitter.Validator.IsExternalType(type) && type.Methods.Count(m => m.IsConstructor && !m.IsStatic) > (type.IsValueType || isObjectLiteral ? 0 : 1))
                     {
                         this.WriteDot();
                         var name = OverloadsCollection.Create(this.Emitter, ((InvocationResolveResult)this.Emitter.Resolver.ResolveNode(objectCreateExpression, this.Emitter)).Member).GetOverloadName();
