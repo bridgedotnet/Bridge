@@ -69,7 +69,7 @@ namespace Bridge.Translator
                 }
             }
 
-            if ((ignored || external || this.IsNonScriptable(typeDeclaration)) && !this.IsObjectLiteral(typeDeclaration))
+            if ((external || ignored || this.IsNonScriptable(typeDeclaration)) && !this.IsObjectLiteral(typeDeclaration))
             {
                 if (partialType != null)
                 {
