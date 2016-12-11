@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Bridge client tests helper")]
 [assembly: AssemblyProduct("Bridge client tests helper")]
-[assembly: AssemblyDescription("Bridge Test library - a common classes shared across all test Bathces")]
+[assembly: AssemblyDescription("Bridge Test library - a common classes shared across all test Batches")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

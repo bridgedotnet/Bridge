@@ -265,6 +265,10 @@
       <Project>{99decd28-d3e3-4ea7-acae-ab5dfc9913bd}</Project>
       <Name>Bridge.Html5</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ClientTestHelperExternal\ClientTestHelperExternal.csproj">
+      <Project>{a9251b8f-d2e1-42e4-b7be-09cd25a6d2f8}</Project>
+      <Name>ClientTestHelperExternal</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ClientTestHelper\ClientTestHelper.csproj">
       <Project>{847bf532-9724-44d0-96c5-9b393e698b7c}</Project>
       <Name>ClientTestHelper</Name>
