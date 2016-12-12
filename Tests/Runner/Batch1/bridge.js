@@ -1,7 +1,7 @@
 /**
- * @version   : 15.5.0 - Bridge.NET
+ * @version   : 15.6.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2016-12-05
+ * @date      : 2016-12-12
  * @copyright : Copyright 2008-2016 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
@@ -3004,8 +3004,8 @@
     // @source systemAssemblyVersion.js
 
     (function(){
-        Bridge.SystemAssembly.version = "15.5.0";
-        Bridge.SystemAssembly.compiler = "15.5.0";
+        Bridge.SystemAssembly.version = "15.6.0";
+        Bridge.SystemAssembly.compiler = "15.6.0";
     })();
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
