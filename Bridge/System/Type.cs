@@ -62,9 +62,57 @@ namespace System
             get;
         }
 
+        public extern bool IsGenericType
+        {
+            [Template("Bridge.Reflection.isGenericType({this})")]
+            get;
+        }
+
         public extern int GenericParameterCount
         {
             [Template("Bridge.Reflection.getGenericParameterCount({this})")]
+            get;
+        }
+
+        public extern bool IsAbstract
+        {
+            [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 128)  != 0)")]
+            get;
+        }
+
+        public extern bool IsSealed
+        {
+            [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 256)  != 0)")]
+            get;
+        }
+
+        public extern Type DeclaringType
+        {
+            [Template("Bridge.Reflection.getMetaValue({this}, 'td', null)")]
+            get;
+        }
+
+        public extern bool IsNested
+        {
+            [Template("(Bridge.Reflection.getMetaValue({this}, 'td', null) != null)")]
+            get;
+        }
+
+        public extern TypeAttributes Attributes
+        {
+            [Template("Bridge.Reflection.getMetaValue({this}, 'att', 0)")]
+            get;
+        }
+
+        public extern bool ContainsGenericParameters
+        {
+            [Template("Bridge.Reflection.hasGenericParameters({this})")]
+            get;
+        }
+
+        public extern bool IsGenericParameter
+        {
+            [Template("{this}.$isTypeParameter")]
             get;
         }
 
@@ -103,7 +151,7 @@ namespace System
 
         public extern bool IsArray
         {
-            [Template("({this} === Array)")]
+            [Template("Bridge.Reflection.isArray({this})")]
             get;
         }
 
@@ -207,5 +255,29 @@ namespace System
         [Obsolete]
         [Template("Bridge.getTypeName({this})")]
         public override extern string GetClassName();
+
+        [Template("System.Enum.getNames({this})")]
+        public virtual extern string[] GetEnumNames();
+
+        [Template("System.Enum.getName({this}, {value})")]
+        public virtual extern string GetEnumName(object value);
+
+        [Template("System.Enum.getValues({this})")]
+        public virtual extern Array GetEnumValues();
+
+        [Template("System.Enum.getUnderlyingType({this})")]
+        public virtual extern Type GetEnumUnderlyingType();
+
+        public extern bool IsPublic
+        {
+            [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 7)  == 1)")]
+            get;
+        }
+
+        public extern bool IsNotPublic
+        {
+            [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 7)  != 1)")]
+            get;
+        }
     }
 }

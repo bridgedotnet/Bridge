@@ -17,9 +17,13 @@
             }
         },
 
+        getUnderlyingType: function(type) {
+            System.Enum.checkEnumType(type);
+            return Class.prototype.$utype || System.Int32;
+        },
+
         toName: function (name) {
             return name;
-            //return name.charAt(0).toUpperCase() + name.slice(1);
         },
 
         parse: function (enumType, s, ignoreCase, silent) {
@@ -177,7 +181,7 @@
 
             for (var i in values) {
                 if (values[i] === value) {
-                    return i.charAt(0).toUpperCase() + i.slice(1);
+                    return i;
                 }
             }
 

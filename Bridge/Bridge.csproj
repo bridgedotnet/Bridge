@@ -215,6 +215,7 @@
     <Compile Include="System\Reflection\MethodBase.cs" />
     <Compile Include="System\Reflection\MethodInfo.cs" />
     <Compile Include="System\Reflection\ParameterInfo.cs" />
+    <Compile Include="System\Reflection\TypeAttributes.cs" />
     <Compile Include="System\Reflection\PropertyInfo.cs" />
     <Compile Include="System\RegexMatchTimeoutException.cs" />
     <Compile Include="System\StringComparison.cs" />
@@ -764,6 +765,7 @@
   <ItemGroup>
     <Content Include="Resources\Bool.js" />
     <Content Include="Resources\ArraySegment.js" />
+    <Content Include="Resources\Collections\KeyValuePair.js" />
     <Content Include="Resources\Diagnostics.js" />
     <Content Include="Resources\Convert.js" />
     <Content Include="Resources\Enum.js" />

@@ -48,6 +48,7 @@
         "Resources/Diagnostics.js",
         "Resources/Array.js",
         "Resources/ArraySegment.js",
+        "Resources/Collections/KeyValuePair.js",
         "Resources/Collections/Interfaces.js",
         "Resources/Collections/CustomEnumerator.js",
         "Resources/Collections/ArrayEnumerator.js",

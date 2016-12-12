@@ -259,10 +259,10 @@ namespace Bridge.ClientTest.Reflection
         [Test]
         public void GetGenericArgumentsReturnsTheCorrectTypesForConstructedTypesOtherwiseNull()
         {
-            Assert.AreEqual(typeof(G<,>).GetGenericArguments(), null);
+            Assert.AreEqual(2, typeof(G<,>).GetGenericArguments().Length);
             Assert.AreEqual(typeof(G<int, string>).GetGenericArguments(), new[] { typeof(int), typeof(string) });
             Assert.AreEqual(typeof(C).GetGenericArguments(), null);
-            Assert.AreEqual(typeof(IG<>).GetGenericArguments(), null);
+            Assert.AreEqual(1, typeof(IG<>).GetGenericArguments().Length);
             Assert.AreEqual(typeof(IG<string>).GetGenericArguments(), new[] { typeof(string) });
             Assert.AreEqual(typeof(I2).GetGenericArguments(), null);
             Assert.AreEqual(typeof(E1).GetGenericArguments(), null);

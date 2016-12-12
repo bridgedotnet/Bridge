@@ -41,19 +41,16 @@
             var metadata = this.$metadata;
 
             if (typeof (metadata) === "function") {
-                if (this.$isGenericTypeDefinition) {
-                    var i,
-                        size = this.$typeArgumentCount,
-                        arr = new Array(size);
-
-                    for (i = 0; i < size; i++) {
-                        arr[i] = Object;
-                    }
-
+                if (this.$isGenericTypeDefinition && !this.$factoryMetadata) {
                     this.$factoryMetadata = this.$metadata;
-                    metadata = this.$metadata.apply(null, arr);
-                } else if (this.$typeArguments) {
+                }
+
+                if (this.$typeArguments) {
                     metadata = this.$metadata.apply(null, this.$typeArguments);
+                } else if (this.$isGenericTypeDefinition) {
+                    var arr = Bridge.Reflection.createTypeParams(this.$metadata);
+                    this.$typeArguments = arr;
+                    metadata = this.$metadata.apply(null, arr);
                 } else {
                     metadata = this.$metadata();
                 }
@@ -64,6 +61,26 @@
             }
 
             return metadata;
+        },
+
+        createTypeParams: function (fn) {
+            var args,
+                names = [],
+                fnStr = fn.toString();
+
+            args = fnStr.slice(fnStr.indexOf('(') + 1, fnStr.indexOf(')')).match(/([^\s,]+)/g) || [];
+            for (var i = 0; i < args.length; i++) {
+                names.push(Bridge.Reflection.createTypeParam(args[i]));
+            }
+
+            return names;
+        },
+
+        createTypeParam: function(name) {
+            var fn = function TypeParameter() { };
+            fn.$$name = name;
+            fn.$isTypeParameter = true;
+            return fn;
         },
 
         load: function (name) {
@@ -92,6 +109,10 @@
 
         isGenericTypeDefinition: function (type) {
             return type.$isGenericTypeDefinition || false;
+        },
+
+        isGenericType: function (type) {
+            return type.$genericTypeDefinition != null;
         },
 
         getBaseType: function (type) {
@@ -707,6 +728,27 @@
             } else {
                 return obj[fi.sn];
             }
+        },
+
+        getMetaValue: function(type, name, dv) {
+            var md = Bridge.getMetadata(type);
+            return md ? (md[name] || dv) : dv;
+        },
+
+        isArray: function(type) {
+            return Bridge.arrayTypes.indexOf(type) >= 0;
+        },
+
+        hasGenericParameters: function(type) {
+            if (type.$typeArguments) {
+                for (var i = 0; i < type.$typeArguments.length; i++) {
+                    if (type.$typeArguments[i].$isTypeParameter) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
     };
 
