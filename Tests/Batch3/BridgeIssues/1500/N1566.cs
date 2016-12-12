@@ -21,6 +21,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual(double.NaN, Math.Log10(double.NegativeInfinity));
         }
 
+        [Test]
         public void TestMathLogWithBase()
         {
             Assert.AreEqual(1.0, Math.Log(3.0, 3.0));
@@ -30,6 +31,17 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual(double.NaN, Math.Log(double.NaN, 3.0));
             Assert.AreEqual(double.PositiveInfinity, Math.Log(double.PositiveInfinity, 3.0));
             Assert.AreEqual(double.NaN, Math.Log(double.NegativeInfinity, 3.0));
+        }
+
+        [Test]
+        public void TestMathLog()
+        {
+            Assert.AreEqual(1.09861228866811, Math.Log(3.0));
+            Assert.AreEqual(double.NegativeInfinity, Math.Log(0.0));
+            Assert.AreEqual(double.NaN, Math.Log(-3.0));
+            Assert.AreEqual(double.NaN, Math.Log(double.NaN));
+            Assert.AreEqual(double.PositiveInfinity, Math.Log(double.PositiveInfinity));
+            Assert.AreEqual(double.NaN, Math.Log(double.NegativeInfinity));
         }
     }
 }
