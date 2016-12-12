@@ -18892,7 +18892,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             this.assertIsDecimalAndEqualTo(System.Decimal(-3.6).floor(), -4.0);
         },
         logWorks: function () {
-            this.assertAlmostEqual(Math.log(0.5), -0.69314718055994529);
+            this.assertAlmostEqual(Bridge.Math.log(0.5), -0.69314718055994529);
         },
         maxOfByteWorks: function () {
             Bridge.Test.Assert.areEqual(3.0, Math.max(1, 3));

@@ -9174,22 +9174,27 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             this.assertIsDecimalAndEqualTo(System.Decimal(3.0).floor(), 3);
         },
         logWorks: function () {
-            this.assertAlmostEqual(Math.log(0.5), -0.69314718055994529);
+            this.assertAlmostEqual(Bridge.Math.log(0.5), -0.69314718055994529);
         },
         logWithBaseWorks_SPI_1566: function () {
             // #1566
             // Test restructure to keep assertion count correct (prevent uncaught test exception)
-            var d1 = System.Decimal(0);
+            var d1 = 0.0;
             Bridge.ClientTest.Batch4.TestHelper.safe(function () {
-                d1 = System.Decimal(16).log(System.Decimal(2));
+                d1 = Bridge.Math.logWithBase(16, 2);
             });
             Bridge.Test.Assert.areEqual(4.0, d1);
 
-            var d2 = System.Decimal(0);
+            var d2 = 0.0;
             Bridge.ClientTest.Batch4.TestHelper.safe(function () {
-                d2 = System.Decimal(16).log(System.Decimal(4));
+                d2 = Bridge.Math.logWithBase(16, 4);
             });
             Bridge.Test.Assert.areEqual(2.0, d2);
+        },
+        log10Works_SPI_1629: function () {
+            // #1629
+            Bridge.Test.Assert.areEqual(Bridge.Math.logWithBase(10, 10.0), 1.0);
+            Bridge.Test.Assert.areEqual(Bridge.Math.logWithBase(100, 10.0), 2.0);
         },
         maxOfByteWorks: function () {
             Bridge.Test.Assert.areEqual(3.0, Math.max(1, 3));

@@ -5097,6 +5097,46 @@
             return Math.round(n) / m;
         },
 
+        logWithBase: function (x, newBase) {
+            if (isNaN(x)) {
+                return x;
+            }
+
+            if (isNaN(newBase)) {
+                return newBase;
+            }
+
+            if (newBase === 1) {
+                return NaN
+            }
+
+            if (x !== 1 && (newBase === 0 || newBase === Number.POSITIVE_INFINITY)) {
+                return NaN;
+            }
+
+            return Math.log10(x) / Math.log10(newBase);
+        },
+
+        log: function (x) {
+            if (x === 0.0) {
+                return Number.NEGATIVE_INFINITY;
+            }
+
+            if (x < 0.0 || isNaN(x)) {
+                return NaN;
+            }
+
+            if (x === Number.POSITIVE_INFINITY) {
+                return Number.POSITIVE_INFINITY;
+            }
+
+            if (x === Number.NEGATIVE_INFINITY) {
+                return NaN;
+            }
+
+            return Math.log(x);
+        },
+
         sinh: Math.sinh || function (x) {
             return (Math.exp(x) - Math.exp(-x)) / 2;
         },

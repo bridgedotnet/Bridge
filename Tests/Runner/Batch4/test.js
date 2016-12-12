@@ -748,6 +748,7 @@ Bridge.assembly("Bridge_ClientTest_Batch4_Tests", function ($asm, globals) {
             QUnit.test("MathTests - FloorOfDecimalWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_MathTests.floorOfDecimalWorks);
             QUnit.test("MathTests - LogWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_MathTests.logWorks);
             QUnit.test("MathTests - LogWithBaseWorks_SPI_1566", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_MathTests.logWithBaseWorks_SPI_1566);
+            QUnit.test("MathTests - Log10Works_SPI_1629", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_MathTests.log10Works_SPI_1629);
             QUnit.test("MathTests - MaxOfByteWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_MathTests.maxOfByteWorks);
             QUnit.test("MathTests - MaxOfDecimalWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_MathTests.maxOfDecimalWorks);
             QUnit.test("MathTests - MaxOfDoubleWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_MathTests.maxOfDoubleWorks);
@@ -8105,6 +8106,13 @@ Bridge.assembly("Bridge_ClientTest_Batch4_Tests", function ($asm, globals) {
                     line: "170"
                 } ));
                 t.getFixture().logWithBaseWorks_SPI_1566();
+            },
+            log10Works_SPI_1629: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.MathTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_MathTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "Log10Works_SPI_1629()",
+                    line: "185"
+                } ));
+                t.getFixture().log10Works_SPI_1629();
             },
             maxOfByteWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.MathTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_MathTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {

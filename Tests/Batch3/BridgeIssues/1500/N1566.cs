@@ -46,6 +46,15 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
         private void AssertAlmostEqual(double expected, double actual)
         {
+            var se = expected.ToString();
+            var sa = actual.ToString();
+
+            if (sa == se)
+            {
+                Assert.True(true, "Actual:" + actual + " vs Expected:" + expected);
+                return;
+            }
+
             var diff = actual - expected;
             if (diff < 0)
             {

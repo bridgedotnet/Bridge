@@ -7278,6 +7278,50 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1566", {
+        testMathLog10: function () {
+            this.assertAlmostEqual(0.477121254719662, Bridge.Math.logWithBase(3.0, 10.0));
+            this.assertAlmostEqual(Number.NEGATIVE_INFINITY, Bridge.Math.logWithBase(0.0, 10.0));
+            this.assertAlmostEqual(Number.NaN, Bridge.Math.logWithBase(-3.0, 10.0));
+            this.assertAlmostEqual(Number.NaN, Bridge.Math.logWithBase(Number.NaN, 10.0));
+            this.assertAlmostEqual(Number.POSITIVE_INFINITY, Bridge.Math.logWithBase(Number.POSITIVE_INFINITY, 10.0));
+            this.assertAlmostEqual(Number.NaN, Bridge.Math.logWithBase(Number.NEGATIVE_INFINITY, 10.0));
+        },
+        testMathLogWithBase: function () {
+            this.assertAlmostEqual(1.0, Bridge.Math.logWithBase(3.0, 3.0));
+            this.assertAlmostEqual(2.40217350273, Bridge.Math.logWithBase(14, 3.0));
+            this.assertAlmostEqual(Number.NEGATIVE_INFINITY, Bridge.Math.logWithBase(0.0, 3.0));
+            this.assertAlmostEqual(Number.NaN, Bridge.Math.logWithBase(-3.0, 3.0));
+            this.assertAlmostEqual(Number.NaN, Bridge.Math.logWithBase(Number.NaN, 3.0));
+            this.assertAlmostEqual(Number.POSITIVE_INFINITY, Bridge.Math.logWithBase(Number.POSITIVE_INFINITY, 3.0));
+            this.assertAlmostEqual(Number.NaN, Bridge.Math.logWithBase(Number.NEGATIVE_INFINITY, 3.0));
+        },
+        testMathLog: function () {
+            this.assertAlmostEqual(1.09861228866811, Bridge.Math.log(3.0));
+            this.assertAlmostEqual(Number.NEGATIVE_INFINITY, Bridge.Math.log(0.0));
+            this.assertAlmostEqual(Number.NaN, Bridge.Math.log(-3.0));
+            this.assertAlmostEqual(Number.NaN, Bridge.Math.log(Number.NaN));
+            this.assertAlmostEqual(Number.POSITIVE_INFINITY, Bridge.Math.log(Number.POSITIVE_INFINITY));
+            this.assertAlmostEqual(Number.NaN, Bridge.Math.log(Number.NEGATIVE_INFINITY));
+        },
+        assertAlmostEqual: function (expected, actual) {
+            var se = System.Double.format(expected, 'G');
+            var sa = System.Double.format(actual, 'G');
+
+            if (Bridge.referenceEquals(sa, se)) {
+                Bridge.Test.Assert.true$1(true, "Actual:" + System.Double.format(actual, 'G') + " vs Expected:" + System.Double.format(expected, 'G'));
+                return;
+            }
+
+            var diff = actual - expected;
+            if (diff < 0) {
+                diff = -diff;
+            }
+
+            Bridge.Test.Assert.true$1(diff < 1E-08, "Actual:" + System.Double.format(actual, 'G') + " vs Expected:" + System.Double.format(expected, 'G'));
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1599", {
         testCustomIEnumerableForStringJoin: function () {
             var intValues = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1599.MyEnumerable$1(System.Int32))([1, 5, 6]);
