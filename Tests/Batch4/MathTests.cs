@@ -172,23 +172,23 @@ namespace Bridge.ClientTest.Batch4
         {
             // #1566
             // Test restructure to keep assertion count correct (prevent uncaught test exception)
-            decimal d1 = 0;
+            var d1 = 0d;
             TestHelper.Safe(() => d1 = Math.Log(16, 2));
             Assert.AreEqual(4.0, d1);
 
-            decimal d2 = 0;
+            var d2 = 0d;
             TestHelper.Safe(() => d2 = Math.Log(16, 4));
             Assert.AreEqual(2.0, d2);
         }
 
         // #SPI
-        //[Test]
-        //public void Log10Works_SPI_1629()
-        //{
-        //    // #1629
-        //    Assert.AreEqual(Math.Log10(10), 1.0);
-        //    Assert.AreEqual(Math.Log10(100), 2.0);
-        //}
+        [Test]
+        public void Log10Works_SPI_1629()
+        {
+            // #1629
+            Assert.AreEqual(Math.Log10(10), 1.0);
+            Assert.AreEqual(Math.Log10(100), 2.0);
+        }
 
         [Test]
         public void MaxOfByteWorks()
