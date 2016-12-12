@@ -23,9 +23,7 @@
             return Math.round(n) / m;
         },
 
-        // according to this implementation https://referencesource.microsoft.com/#mscorlib/system/math.cs,506
-        logWithBase: function (x, newBase) { 
-
+        logWithBase: function (x, newBase) {
             if (isNaN(x)) {
                 return x;
             }
@@ -45,8 +43,7 @@
             return Math.log10(x) / Math.log10(newBase);
         },
 
-        // according to https://github.com/dotnet/corefx/blob/master/src/System.Runtime.Extensions/tests/System/Math.cs#L228
-        log: function (x) { 
+        log: function (x) {
             if (x === 0.0) {
                 return Number.NEGATIVE_INFINITY;
             }
@@ -64,7 +61,6 @@
             }
 
             return Math.log(x);
-
         },
 
         sinh: Math.sinh || function (x) {
