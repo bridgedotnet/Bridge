@@ -5097,6 +5097,10 @@
             return Math.round(n) / m;
         },
 
+        log10: Math.log10 || function (x) {
+            return Math.log(x) / Math.LN10;
+        },
+
         logWithBase: function (x, newBase) {
             if (isNaN(x)) {
                 return x;
@@ -5114,7 +5118,7 @@
                 return NaN;
             }
 
-            return Math.log10(x) / Math.log10(newBase);
+            return Bridge.Math.log10(x) / Bridge.Math.log10(newBase);
         },
 
         log: function (x) {
