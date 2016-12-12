@@ -718,5 +718,54 @@ namespace Bridge.ClientTest.SimpleTypes
 
             Assert.True(result1 == result2, "[#1901] DateTime to Timestamp back to DateTime is different");
         }
+
+        [Test(Name = "#2149 - {0}")]
+        public void ToShortDateStringWorks()
+        {
+            DateTime date = new DateTime(2009, 6, 1, 8, 42, 50);
+            var r = date.ToShortDateString();
+
+            Assert.AreEqual("06/01/2009", r, "Invariant culture");
+
+            var defaultCulture = CultureInfo.CurrentCulture;
+
+            try
+            {
+                CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("ru-RU");
+
+                date = new DateTime(2009, 6, 1, 8, 42, 50);
+                r = date.ToShortDateString();
+
+                Assert.AreEqual("01.06.2009", r, "ru-RU culture");
+            }
+            finally
+            {
+                CultureInfo.CurrentCulture = defaultCulture;
+            }
+        }
+
+        [Test(Name = "#2149 - {0}")]
+        public void ToShortTimeStringWorks()
+        {
+            DateTime date = new DateTime(2001, 5, 16, 3, 2, 15);
+            var r = date.ToShortTimeString();
+
+            Assert.AreEqual("03:02", r, "Invariant culture");
+
+            var defaultCulture = CultureInfo.CurrentCulture;
+
+            try
+            {
+                CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("ru-RU");
+
+                r = date.ToShortTimeString();
+
+                Assert.AreEqual("3:02", r, "ru-RU culture");
+            }
+            finally
+            {
+                CultureInfo.CurrentCulture = defaultCulture;
+            }
+        }
     }
 }

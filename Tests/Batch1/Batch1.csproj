@@ -244,7 +244,7 @@
     <Compile Include="SimpleTypes\DoubleTests.cs" />
     <Compile Include="SimpleTypes\DecimalTests.cs" />
     <Compile Include="SimpleTypes\StringTests.cs" />
-    <Compile Include="SimpleTypes\JsDateTests.cs" />
+    <Compile Include="SimpleTypes\DateTimeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />

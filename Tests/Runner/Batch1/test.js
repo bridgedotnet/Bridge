@@ -713,6 +713,8 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
             QUnit.test("DateTime - CompareToWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests.compareToWorks);
             QUnit.test("DateTime - DateTimes", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests.dateTimes);
             QUnit.test("DateTime - CreateUnixTimestampAndConvertBackToDateTime", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests.createUnixTimestampAndConvertBackToDateTime);
+            QUnit.test("#2149 - ToShortDateStringWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests.toShortDateStringWorks);
+            QUnit.test("#2149 - ToShortTimeStringWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests.toShortTimeStringWorks);
             QUnit.test("TimeSpan - TypePropertiesAreCorrect", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_TimeSpanTests.typePropertiesAreCorrect);
             QUnit.test("TimeSpan - DefaultConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_TimeSpanTests.defaultConstructorWorks);
             QUnit.test("TimeSpan - DefaultValueWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_TimeSpanTests.defaultValueWorks);
@@ -18110,6 +18112,20 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
                     line: "696"
                 } ));
                 t.getFixture().createUnixTimestampAndConvertBackToDateTime();
+            },
+            toShortDateStringWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "ToShortDateStringWorks()",
+                    line: "722"
+                } ));
+                t.getFixture().toShortDateStringWorks();
+            },
+            toShortTimeStringWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_SimpleTypes_JsDateTimeTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "ToShortTimeStringWorks()",
+                    line: "747"
+                } ));
+                t.getFixture().toShortTimeStringWorks();
             }
         },
         context: null,
@@ -18118,7 +18134,7 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
                 this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
                     project: "Batch1",
                     className: "Bridge.ClientTest.SimpleTypes.JsDateTimeTests",
-                    file: "Batch1\\SimpleTypes\\JsDateTests.cs"
+                    file: "Batch1\\SimpleTypes\\DateTimeTests.cs"
                 } );
             }
             return this.context;

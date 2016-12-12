@@ -26892,6 +26892,45 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var result2 = Bridge.Date.format(parsedUnixNow);
 
             Bridge.Test.Assert.true$1(Bridge.referenceEquals(result1, result2), "[#1901] DateTime to Timestamp back to DateTime is different");
+        },
+        toShortDateStringWorks: function () {
+            var date = new Date(2009, 6 - 1, 1, 8, 42, 50);
+            var r = Bridge.Date.format(date, 'd');
+
+            Bridge.Test.Assert.areEqual$1("06/01/2009", r, "Invariant culture");
+
+            var defaultCulture = System.Globalization.CultureInfo.getCurrentCulture();
+
+            try {
+                System.Globalization.CultureInfo.setCurrentCulture(System.Globalization.CultureInfo.getCultureInfo("ru-RU"));
+
+                date = new Date(2009, 6 - 1, 1, 8, 42, 50);
+                r = Bridge.Date.format(date, 'd');
+
+                Bridge.Test.Assert.areEqual$1("01.06.2009", r, "ru-RU culture");
+            }
+            finally {
+                System.Globalization.CultureInfo.setCurrentCulture(defaultCulture);
+            }
+        },
+        toShortTimeStringWorks: function () {
+            var date = new Date(2001, 5 - 1, 16, 3, 2, 15);
+            var r = Bridge.Date.format(date, 't');
+
+            Bridge.Test.Assert.areEqual$1("03:02", r, "Invariant culture");
+
+            var defaultCulture = System.Globalization.CultureInfo.getCurrentCulture();
+
+            try {
+                System.Globalization.CultureInfo.setCurrentCulture(System.Globalization.CultureInfo.getCultureInfo("ru-RU"));
+
+                r = Bridge.Date.format(date, 't');
+
+                Bridge.Test.Assert.areEqual$1("3:02", r, "ru-RU culture");
+            }
+            finally {
+                System.Globalization.CultureInfo.setCurrentCulture(defaultCulture);
+            }
         }
     });
 
