@@ -11,5 +11,7 @@ namespace Bridge
     [NonScriptable]
     public sealed class GlobalMethodsAttribute : Attribute
     {
+        public extern GlobalMethodsAttribute();
+        public extern GlobalMethodsAttribute(bool scoped);
     }
 }
