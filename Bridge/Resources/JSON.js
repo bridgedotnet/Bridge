@@ -60,14 +60,14 @@ Bridge.serialize = function(obj) {
             var fields = Bridge.Reflection.getMembers(type, 4, 4);
 
             for (var i = 0; i < fields.length; i++) {
-                raw[fields[i].name] = Bridge.serialize(Bridge.Reflection.fieldAccess(fields[i], obj));
+                raw[fields[i].n] = Bridge.serialize(Bridge.Reflection.fieldAccess(fields[i], obj));
             }
 
             var properties = Bridge.Reflection.getMembers(type, 16, 28);
 
             for (var i = 0; i < properties.length; i++) {
-                if (!!properties[i].getter) {
-                    raw[properties[i].name] = Bridge.serialize(Bridge.Reflection.midel(properties[i].getter, obj)());
+                if (!!properties[i].g) {
+                    raw[properties[i].n] = Bridge.serialize(Bridge.Reflection.midel(properties[i].g, obj)());
                 }
             }
 
@@ -328,7 +328,7 @@ Bridge.deserialize = function(raw, type) {
 
             for(var each in raw)
             {
-                dictionary.add(each, Bridge.deserialize(raw[each]));
+                dictionary.add(each, Bridge.deserialize(raw[each], typeValue));
             }
 
             return dictionary;
@@ -346,20 +346,20 @@ Bridge.deserialize = function(raw, type) {
             var fields = Bridge.Reflection.getMembers(type, 4, 4);
 
             for (var i = 0; i < fields.length; i++) {
-                var value = raw[fields[i].name];
+                var value = raw[fields[i].n];
 
                 if (value !== undefined) {
-                    Bridge.Reflection.fieldAccess(fields[i], o, Bridge.deserialize(value, fields[i].returnType));
+                    Bridge.Reflection.fieldAccess(fields[i], o, Bridge.deserialize(value, fields[i].rt));
                 }
             }
 
             var properties = Bridge.Reflection.getMembers(type, 16, 4);
 
             for (var i = 0; i < properties.length; i++) {
-                var value = raw[properties[i].name];
+                var value = raw[properties[i].n];
 
-                if (value !== undefined && !!properties[i].setter) {
-                    Bridge.Reflection.midel(properties[i].setter, o)(Bridge.deserialize(value, properties[i].returnType));
+                if (value !== undefined && !!properties[i].s) {
+                    Bridge.Reflection.midel(properties[i].s, o)(Bridge.deserialize(value, properties[i].rt));
                 }
             }
 
