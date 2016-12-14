@@ -1458,19 +1458,19 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1120", {
         statics: {
             testEnumDoesNotGenerateValuesAsPowerOfTwo: function () {
-                Bridge.Test.Assert.areEqual$1(-10, -10, "-10");
-                Bridge.Test.Assert.areEqual$1(-9, -9, "-9");
-                Bridge.Test.Assert.areEqual$1(-8, -8, "-8");
-                Bridge.Test.Assert.areEqual$1(1, 1, "1");
-                Bridge.Test.Assert.areEqual$1(-9, -9, "-9");
-                Bridge.Test.Assert.areEqual$1(0, 0, "0");
-                Bridge.Test.Assert.areEqual$1(1, 1, "1");
+                Bridge.Test.Assert.areEqual$1(-10, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1120.Test.M1, "-10");
+                Bridge.Test.Assert.areEqual$1(-9, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1120.Test.M2, "-9");
+                Bridge.Test.Assert.areEqual$1(-8, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1120.Test.M3, "-8");
+                Bridge.Test.Assert.areEqual$1(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1120.Test.M4, "1");
+                Bridge.Test.Assert.areEqual$1(-9, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1120.Test.M5, "-9");
+                Bridge.Test.Assert.areEqual$1(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1120.Test.M6, "0");
+                Bridge.Test.Assert.areEqual$1(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1120.Test.M7, "1");
             },
             testFlagEnumDoesNotGenerateValuesAsPowerOfTwo: function () {
-                Bridge.Test.Assert.areEqual$1(0, 0, "0");
-                Bridge.Test.Assert.areEqual$1(7, 7, "7");
-                Bridge.Test.Assert.areEqual$1(8, 8, "8");
-                Bridge.Test.Assert.areEqual$1(9, 9, "9");
+                Bridge.Test.Assert.areEqual$1(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1120.Baz.a, "0");
+                Bridge.Test.Assert.areEqual$1(7, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1120.Baz.b, "7");
+                Bridge.Test.Assert.areEqual$1(8, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1120.Baz.c, "8");
+                Bridge.Test.Assert.areEqual$1(9, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1120.Baz.d, "9");
             }
         }
     });
@@ -7166,8 +7166,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7197,7 +7195,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    });
+                                    }); /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);

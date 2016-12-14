@@ -152,7 +152,19 @@ namespace Bridge.Translator
                 return;
             }
 
-            if (method == CS.Ops.CAST)
+            var expressionrr = this.Emitter.Resolver.ResolveNode(expression, this.Emitter);
+            var typerr = this.Emitter.Resolver.ResolveNode(type, this.Emitter);
+
+            if (expressionrr.Type.Kind == TypeKind.Enum)
+            {
+                var enumMode = this.Emitter.Validator.EnumEmitMode(expressionrr.Type);
+                if (enumMode >= 3 && enumMode < 7 && Helpers.IsIntegerType(itype, this.Emitter.Resolver))
+                {
+                   throw new EmitterException(this.CastExpression, "Enum underlying type is string and cannot be casted to number");
+                }
+            }
+
+            if (method == CS.Ops.CAST && expressionrr.Type.Kind != TypeKind.Enum)
             {
                 var cast_rr = this.Emitter.Resolver.ResolveNode(this.CastExpression, this.Emitter);
 
@@ -186,9 +198,6 @@ namespace Bridge.Translator
                 this.Write(")");
                 return;
             }
-
-            var expressionrr = this.Emitter.Resolver.ResolveNode(expression, this.Emitter);
-            var typerr = this.Emitter.Resolver.ResolveNode(type, this.Emitter);
 
             if (expressionrr.Type.Equals(itype))
             {
