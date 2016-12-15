@@ -7166,8 +7166,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7197,7 +7195,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    });
+                                    }); /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -12486,6 +12484,39 @@ Bridge.$N1391Result =                 r;
             this.setTestIntProperty(1);
             this.setTestStringProperty("constructor");
             this.setTestObjectProperty(String.fromCharCode.apply(null, [99]));
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2176", {
+        statics: {
+            testExternalObjectLiteralConstructorMode: function () {
+                
+            // This emulates external Config1
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge2176.Config1 = function()
+            {
+                return { id: 1 };
+            };
+
+            // This emulates external Config2
+            var Config2 = function()
+            {
+                return { id: 2 };
+            };
+            
+
+                // Uses Object in Bridge.merge(Object(),...
+                var c1 = Bridge.merge(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2176.Config1(), {
+                    name: "Config1"
+                } );
+                Bridge.Test.Assert.areEqual("Config1", c1.name);
+                Bridge.Test.Assert.areEqual(1, c1.id);
+
+                var c2 = Bridge.merge(Config2(), {
+                    name: "Config2"
+                } );
+                Bridge.Test.Assert.areEqual("Config2", c2.name);
+                Bridge.Test.Assert.areEqual(2, c2.id);
+            }
         }
     });
 
