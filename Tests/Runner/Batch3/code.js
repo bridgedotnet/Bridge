@@ -7166,8 +7166,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7197,7 +7195,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    });
+                                    }); /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -12486,6 +12484,15 @@ Bridge.$N1391Result =                 r;
             this.setTestIntProperty(1);
             this.setTestStringProperty("constructor");
             this.setTestObjectProperty(String.fromCharCode.apply(null, [99]));
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2181", {
+        statics: {
+            testStringPad: function () {
+                Bridge.Test.Assert.areEqual("LLL", System.String.alignString((""), 3, 76));
+                Bridge.Test.Assert.areEqual("RRR", System.String.alignString((""), -3, 82));
+            }
         }
     });
 
