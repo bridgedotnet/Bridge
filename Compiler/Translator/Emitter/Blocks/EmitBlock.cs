@@ -523,13 +523,17 @@ namespace Bridge.Translator
                     {
                         if (attr.PositionalArguments.Count == 0)
                         {
-                            reflectTypes.Add(type);
+                            if (thisAssembly)
+                            {
+                                reflectTypes.Add(type);
+                            }
+                            
                             continue;
                         }
 
                         var value = attr.PositionalArguments.First().ConstantValue;
 
-                        if (!(value is bool) || (bool)value)
+                        if ((!(value is bool) || (bool)value) && thisAssembly)
                         {
                             reflectTypes.Add(type);
                         }
@@ -538,7 +542,7 @@ namespace Bridge.Translator
                     }
                 }
 
-                if (typeAccessibility.HasValue)
+                if (typeAccessibility.HasValue && thisAssembly)
                 {
                     result = false;
 
