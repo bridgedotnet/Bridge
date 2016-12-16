@@ -5919,7 +5919,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.ctor();
             var di = Bridge.cast(d, System.Collections.Generic.IDictionary$2(System.Int32,String));
 
-            d.add(5, "aa");
+            d.add$1(5, "aa");
             Bridge.Test.Assert.areEqual("aa", d.getItem(5));
             Bridge.Test.Assert.areEqual(1, d.getCount());
 
@@ -5929,10 +5929,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var s = { };
             di.System$Collections$Generic$IDictionary$2$System$Int32$String$tryGetValue(3, s);
             Bridge.Test.Assert.areEqual("bb", s.v);
-            Bridge.Test.Assert.areEqual(2, di.System$Collections$Generic$IDictionary$2$System$Int32$String$getCount());
+            Bridge.Test.Assert.areEqual(2, System.Array.getCount(di, System.Collections.Generic.KeyValuePair$2(System.Int32,String)));
 
             try {
-                d.add(5, "zz");
+                d.add$1(5, "zz");
                 Bridge.Test.Assert.fail$1("Should throw");
             }
             catch ($e1) {
@@ -5950,12 +5950,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var d = new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.$ctor1($asm.$.Bridge.ClientTest.Collections.Generic.IDictionaryTests.f8(new (System.Collections.Generic.Dictionary$2(System.Int32,String))()));
             var di = Bridge.cast(d, System.Collections.Generic.IDictionary$2(System.Int32,String));
 
-            Bridge.Test.Assert.areStrictEqual(true, d.remove(6));
+            Bridge.Test.Assert.areStrictEqual(true, d.remove$1(6));
             Bridge.Test.Assert.areEqual(3, d.getCount());
             Bridge.Test.Assert.false(d.containsKey(6));
 
             Bridge.Test.Assert.areStrictEqual(true, di.System$Collections$Generic$IDictionary$2$System$Int32$String$remove(3));
-            Bridge.Test.Assert.areEqual(2, di.System$Collections$Generic$IDictionary$2$System$Int32$String$getCount());
+            Bridge.Test.Assert.areEqual(2, System.Array.getCount(di, System.Collections.Generic.KeyValuePair$2(System.Int32,String)));
             Bridge.Test.Assert.false(di.System$Collections$Generic$IDictionary$2$System$Int32$String$containsKey(3));
 
             Bridge.Test.Assert.true(di.System$Collections$Generic$IDictionary$2$System$Int32$String$containsKey(13));
@@ -6043,11 +6043,17 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             "setItem", "System$Collections$Generic$IDictionary$2$System$Int32$String$setItem",
             "getKeys", "System$Collections$Generic$IDictionary$2$System$Int32$String$getKeys",
             "getValues", "System$Collections$Generic$IDictionary$2$System$Int32$String$getValues",
-            "getCount", "System$Collections$Generic$IDictionary$2$System$Int32$String$getCount",
-            "add", "System$Collections$Generic$IDictionary$2$System$Int32$String$add",
-            "remove", "System$Collections$Generic$IDictionary$2$System$Int32$String$remove",
+            "getCount", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$String$getCount",
+            "getIsReadOnly", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$String$getIsReadOnly",
+            "add", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$String$add",
+            "copyTo", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$String$copyTo",
+            "add$1", "System$Collections$Generic$IDictionary$2$System$Int32$String$add",
+            "remove$1", "System$Collections$Generic$IDictionary$2$System$Int32$String$remove",
             "containsKey", "System$Collections$Generic$IDictionary$2$System$Int32$String$containsKey",
-            "tryGetValue", "System$Collections$Generic$IDictionary$2$System$Int32$String$tryGetValue"
+            "tryGetValue", "System$Collections$Generic$IDictionary$2$System$Int32$String$tryGetValue",
+            "clear", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$String$clear",
+            "contains", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$String$contains",
+            "remove", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$String$remove"
             ]
         },
         ctor: function () {
@@ -6072,17 +6078,29 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         getCount: function () {
             return this._backingDictionary.getCount();
         },
+        getIsReadOnly: function () {
+            return this._backingDictionary.getIsReadOnly();
+        },
         System$Collections$IEnumerable$getEnumerator: function () {
             return this.getEnumerator();
         },
         getEnumerator: function () {
             return this._backingDictionary.getEnumerator();
         },
-        add: function (key, value) {
+        add: function (item) {
+            System.Array.add(Bridge.cast(this._backingDictionary, System.Collections.Generic.ICollection$1(System.Collections.Generic.KeyValuePair$2(System.Int32,String))), item, System.Collections.Generic.KeyValuePair$2(System.Int32,String));
+        },
+        add$1: function (key, value) {
             this._backingDictionary.add(key, value);
         },
-        remove: function (key) {
+        copyTo: function (array, arrayIndex) {
+            System.Array.copyTo(Bridge.cast(this._backingDictionary, System.Collections.Generic.ICollection$1(System.Collections.Generic.KeyValuePair$2(System.Int32,String))), array, arrayIndex, System.Collections.Generic.KeyValuePair$2(System.Int32,String));
+        },
+        remove$1: function (key) {
             return this._backingDictionary.remove(key);
+        },
+        remove: function (item) {
+            return System.Array.remove(Bridge.cast(this._backingDictionary, System.Collections.Generic.ICollection$1(System.Collections.Generic.KeyValuePair$2(System.Int32,String))), item, System.Collections.Generic.KeyValuePair$2(System.Int32,String));
         },
         containsKey: function (key) {
             return this._backingDictionary.containsKey(key);
@@ -6092,6 +6110,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         clear: function () {
             this._backingDictionary.clear();
+        },
+        contains: function (item) {
+            return System.Array.contains(Bridge.cast(this._backingDictionary, System.Collections.Generic.ICollection$1(System.Collections.Generic.KeyValuePair$2(System.Int32,String))), item, System.Collections.Generic.KeyValuePair$2(System.Int32,String));
         }
     });
 

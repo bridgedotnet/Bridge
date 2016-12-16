@@ -9176,9 +9176,9 @@
             var name;
             if (Bridge.isArray(obj)) {
                 return obj.length;
-            } else if (Bridge.isFunction(obj[name = "System$Collections$ICollection$getCount"])) {
-                return obj[name]();
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getCount"])) {
+                return obj[name]();
+            } else if (Bridge.isFunction(obj[name = "System$Collections$ICollection$getCount"])) {
                 return obj[name]();
             } else if (Bridge.isFunction(obj.getCount)) {
                 return obj.getCount();
@@ -9192,9 +9192,9 @@
 
             if (Bridge.isArray(obj)) {
                 return T ? true : false;
-            } else if (Bridge.isFunction(obj[name = "System$Collections$ICollection$getIsReadOnly"])) {
-                return obj[name]();
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getIsReadOnly"])) {
+                return obj[name]();
+            } else if (Bridge.isFunction(obj[name = "System$Collections$IList$getIsReadOnly"])) {
                 return obj[name]();
             } else if (Bridge.isFunction(obj.getIsReadOnly)) {
                 return obj.getIsReadOnly();
@@ -9210,6 +9210,8 @@
                 obj.push(item);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add"])) {
                 obj[name](item);
+            } else if (Bridge.isFunction(obj[name = "System$Collections$IList$add"])) {
+                obj[name](item);
             } else if (Bridge.isFunction(obj.add)) {
                 obj.add(item);
             }
@@ -9221,6 +9223,8 @@
             if (Bridge.isArray(obj)) {
                 System.Array.fill(obj, T ? (T.getDefaultValue || Bridge.getDefaultValue(T)) : null, 0, obj.length);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear"])) {
+                obj[name]();
+            } else if (Bridge.isFunction(obj[name = "System$Collections$IList$clear"])) {
                 obj[name]();
             } else if (Bridge.isFunction(obj.clear)) {
                 obj.clear();
@@ -9280,6 +9284,8 @@
                 obj.copyTo(dest, index);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo"])) {
                 obj[name](dest, index);
+            } else if (Bridge.isFunction(obj[name = "System$Collections$ICollection$copyTo"])) {
+                obj[name](dest, index);
             } else {
                 throw new System.NotImplementedException("copyTo");
             }
@@ -9306,6 +9312,8 @@
                 }
             } else if (T && Bridge.isFunction(arr[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf"])) {
                 return arr[name](item);
+            } else if (Bridge.isFunction(arr[name = "System$Collections$IList$indexOf"])) {
+                return arr[name](item);
             } else if (Bridge.isFunction(arr.indexOf)) {
                 return arr.indexOf(item);
             }
@@ -9319,6 +9327,8 @@
             if (Bridge.isArray(obj)) {
                 return System.Array.indexOf(obj, item) > -1;
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains"])) {
+                return obj[name](item);
+            } else if (Bridge.isFunction(obj[name = "System$Collections$IList$contains"])) {
                 return obj[name](item);
             } else if (Bridge.isFunction(obj.contains)) {
                 return obj.contains(item);
@@ -9340,6 +9350,8 @@
                 }
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$remove"])) {
                 return obj[name](item);
+            } else if (Bridge.isFunction(obj[name = "System$Collections$IList$remove"])) {
+                return obj[name](item);
             } else if (Bridge.isFunction(obj.remove)) {
                 return obj.remove(item);
             }
@@ -9354,6 +9366,8 @@
                 obj.splice(index, 0, item);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert"])) {
                 obj[name](index, item);
+            } else if (Bridge.isFunction(obj[name = "System$Collections$IList$insert"])) {
+                obj[name](index, item);
             } else if (Bridge.isFunction(obj.insert)) {
                 obj.insert(index, item);
             }
@@ -9365,6 +9379,8 @@
             if (Bridge.isArray(obj)) {
                 obj.splice(index, 1);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt"])) {
+                obj[name](index);
+            } else if (Bridge.isFunction(obj[name = "System$Collections$IList$removeAt"])) {
                 obj[name](index);
             } else if (Bridge.isFunction(obj.removeAt)) {
                 obj.removeAt(index);
@@ -9382,6 +9398,8 @@
                 return obj.getItem(idx);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem"])) {
                 return obj[name](idx);
+            } else if (Bridge.isFunction(obj[name = "System$Collections$IList$$getItem"])) {
+                return obj[name](idx);
             } else if (Bridge.isFunction(obj.get_Item)) {
                 return obj.get_Item(idx);
             }
@@ -9397,6 +9415,8 @@
             } else if (Bridge.isFunction(obj.setItem)) {
                 obj.setItem(idx, value);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem"])) {
+                return obj[name](idx, value);
+            } else if (T && Bridge.isFunction(obj[name = "System$Collections$IList$setItem"])) {
                 return obj[name](idx, value);
             } else if (Bridge.isFunction(obj.set_Item)) {
                 obj.set_Item(idx, value);
@@ -9869,6 +9889,14 @@
         inherits: [System.Collections.IEnumerable],
         $kind: "interface"
     });
+    Bridge.define('System.Collections.IList', {
+        inherits: [System.Collections.ICollection],
+        $kind: "interface"
+    });
+    Bridge.define('System.Collections.IDictionary', {
+        inherits: [System.Collections.ICollection],
+        $kind: "interface"
+    });
 
     Bridge.define('System.Collections.Generic.IEnumerator$1', function (T) {
         return {
@@ -10189,11 +10217,11 @@
 
     Bridge.define('System.Collections.Generic.Dictionary$2', function (TKey, TValue) {
         return {
-            inherits: [System.Collections.Generic.IDictionary$2(TKey, TValue)],
+            inherits: [System.Collections.Generic.IDictionary$2(TKey, TValue), System.Collections.IDictionary],
 
             config: {
                 alias: [
-                    "getCount", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getCount",
+                    "getCount", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(System.Collections.Generic.KeyValuePair$2(TKey, TValue)) + "$getCount",
                     "getKeys", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getKeys",
                     "getValues", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getValues",
                     "get", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getItem",
@@ -10202,7 +10230,22 @@
                     "containsKey", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$containsKey",
                     "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$Collections$Generic$KeyValuePair$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getEnumerator",
                     "remove", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$remove",
-                    "tryGetValue", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$tryGetValue"
+                    "tryGetValue", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$tryGetValue",
+                    "getIsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(System.Collections.Generic.KeyValuePair$2(TKey, TValue)) + "$getIsReadOnly",
+                    "addPair", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(System.Collections.Generic.KeyValuePair$2(TKey, TValue)) + "$add",
+                    "copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(System.Collections.Generic.KeyValuePair$2(TKey, TValue)) + "$copyTo",
+                    "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(System.Collections.Generic.KeyValuePair$2(TKey, TValue)) + "$clear",
+                    "containsPair", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(System.Collections.Generic.KeyValuePair$2(TKey, TValue)) + "$contains",
+                    "removePair", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(System.Collections.Generic.KeyValuePair$2(TKey, TValue)) + "$remove",
+                    "copyTo", "System$Collections$ICollection$copyTo",
+                    "get", "System$Collections$IDictionary$getItem",
+                    "set", "System$Collections$IDictionary$setItem",
+                    "getValues", "System$Collections$IDictionary$getValues",
+                    "containsKey", "System$Collections$IDictionary$containsKey",
+                    "add", "System$Collections$IDictionary$add",
+                    "remove", "System$Collections$IDictionary$remove",
+                    "getIsReadOnly", "System$Collections$IDictionary$getIsReadOnly",
+                    "getKeys", "System$Collections$IDictionary$getKeys"
                 ]
             },
 
@@ -10228,6 +10271,30 @@
                         this.add(name, obj[name]);
                     }
                 }
+            },
+
+            containsPair: function(pair) {
+                var entry = this.findEntry(pair.key);
+                return entry && this.comparer.equals2(entry.value, pair.value);
+            },
+
+            removePair: function (pair) {
+                var entry = this.findEntry(pair.key);
+                if (entry && this.comparer.equals2(entry.value, pair.value)) {
+                    this.remove(pair.key);
+                    return true;
+                }
+
+                return false;
+            },
+
+            copyTo: function (array, arrayIndex) {
+                var items = System.Linq.Enumerable.from(this).toArray();
+                System.Array.copy(items, 0, array, arrayIndex, items.length);
+            },
+
+            getIsReadOnly: function () {
+                return !!this.readOnly;
             },
 
             getKeys: function () {
@@ -10326,6 +10393,10 @@
 
             add: function (key, value) {
                 this.set(key, value, true);
+            },
+
+            addPair: function (pair) {
+                this.set(pair.key, pair.value, true);
             },
 
             remove: function (key) {
@@ -10460,23 +10531,36 @@
 
     Bridge.define('System.Collections.Generic.List$1', function (T) {
         return {
-            inherits: [System.Collections.Generic.ICollection$1(T), System.Collections.ICollection, System.Collections.Generic.IList$1(T)],
+            inherits: [System.Collections.Generic.IList$1(T), System.Collections.IList],
 
             config: {
                 alias: [
                 "getItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem",
+                "getItem", "System$Collections$IList$getItem",
                 "setItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem",
+                "setItem", "System$Collections$IList$setItem",
                 "getCount", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getCount",
+                "getCount", "System$Collections$ICollection$getCount",
                 "getIsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getIsReadOnly",
+                "getIsReadOnly", "System$Collections$IList$getIsReadOnly",
                 "add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
+                "add", "System$Collections$IList$add",
                 "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
+                "clear", "System$Collections$IList$clear",
                 "contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
+                "contains", "System$Collections$IList$contains",
                 "copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo",
+                "copyTo", "System$Collections$ICollection$copyTo",
                 "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
+                "getEnumerator", "System$Collections$IEnumerable$getEnumerator",
                 "indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
+                "indexOf", "System$Collections$IList$indexOf",
                 "insert", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert",
+                "insert", "System$Collections$IList$insert",
                 "remove", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$remove",
-                "removeAt", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt"
+                "remove", "System$Collections$IList$remove",
+                "removeAt", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt",
+                "removeAt", "System$Collections$IList$removeAt"
                 ]
             },
 

@@ -7166,8 +7166,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7197,7 +7195,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    });
+                                    }); /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -11493,6 +11491,50 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2050", {
+        statics: {
+            testIList: function () {
+                var list = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2050.f1(new (System.Collections.Generic.List$1(System.Int32))());
+                var l = list;
+                var o = list;
+
+                Bridge.Test.Assert.true(Bridge.is(o, System.Collections.IList));
+                Bridge.Test.Assert.true(Bridge.is(o, System.Collections.Generic.IList$1(System.Int32)));
+                Bridge.Test.Assert.areEqual(3, list.getCount());
+                Bridge.Test.Assert.areEqual(3, System.Array.getCount(l));
+                Bridge.Test.Assert.areEqual(2, list.getItem(1));
+                Bridge.Test.Assert.areEqual(2, System.Array.getItem(l, 1));
+            },
+            testIDictionary: function () {
+                var dict = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2050.f2(new (System.Collections.Generic.Dictionary$2(System.Int32,System.Int32))());
+                var d = dict;
+                var o = dict;
+                Bridge.Test.Assert.true(Bridge.is(o, System.Collections.IDictionary));
+                Bridge.Test.Assert.true(Bridge.is(o, System.Collections.Generic.IDictionary$2(System.Int32,System.Int32)));
+                Bridge.Test.Assert.areEqual(2, dict.getCount());
+                Bridge.Test.Assert.areEqual(2, System.Array.getCount(d));
+                Bridge.Test.Assert.areEqual(2, dict.get(1));
+                Bridge.Test.Assert.areEqual(2, d.System$Collections$IDictionary$getItem(1));
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2050", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2050, {
+        f1: function (_o36) {
+            _o36.add(1);
+            _o36.add(2);
+            _o36.add(3);
+            return _o36;
+        },
+        f2: function (_o37) {
+            _o37.add(1, 2);
+            _o37.add(2, 3);
+            return _o37;
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2067", {
         statics: {
             testGetGenericTypeDefinition: function () {
@@ -12159,9 +12201,9 @@ Bridge.$N1391Result =                 r;
             _test2Success: false,
             test1: function () {
                 var onSuccess = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.f1;
-                var el = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Elem$1(System.Int32))(function (_o36) {
-                        _o36.add(new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Something$1(System.Int32))(onSuccess));
-                        return _o36;
+                var el = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Elem$1(System.Int32))(function (_o38) {
+                        _o38.add(new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Something$1(System.Int32))(onSuccess));
+                        return _o38;
                     }(new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Something$1(System.Int32)))()));
 
                 var hld = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Holder$1(System.Int32))(el);
@@ -12169,9 +12211,9 @@ Bridge.$N1391Result =                 r;
             },
             test2: function () {
                 var onSuccess = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.f2;
-                var el = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Elem$1(System.Int32))(function (_o37) {
-                        _o37.add(new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Something$1(System.Int32))(onSuccess));
-                        return _o37;
+                var el = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Elem$1(System.Int32))(function (_o39) {
+                        _o39.add(new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Something$1(System.Int32))(onSuccess));
+                        return _o39;
                     }(new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Something$1(System.Int32)))()));
 
                 var hld = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Holder$1(System.Int32))(el);
@@ -12641,11 +12683,17 @@ Bridge.$N1391Result =                 r;
             "setItem", "System$Collections$Generic$IDictionary$2$System$Int32$String$setItem",
             "getKeys", "System$Collections$Generic$IDictionary$2$System$Int32$String$getKeys",
             "getValues", "System$Collections$Generic$IDictionary$2$System$Int32$String$getValues",
-            "getCount", "System$Collections$Generic$IDictionary$2$System$Int32$String$getCount",
-            "add", "System$Collections$Generic$IDictionary$2$System$Int32$String$add",
-            "remove", "System$Collections$Generic$IDictionary$2$System$Int32$String$remove",
+            "getCount", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$String$getCount",
+            "getIsReadOnly", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$String$getIsReadOnly",
+            "add", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$String$add",
+            "copyTo", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$String$copyTo",
+            "add$1", "System$Collections$Generic$IDictionary$2$System$Int32$String$add",
+            "remove$1", "System$Collections$Generic$IDictionary$2$System$Int32$String$remove",
             "containsKey", "System$Collections$Generic$IDictionary$2$System$Int32$String$containsKey",
-            "tryGetValue", "System$Collections$Generic$IDictionary$2$System$Int32$String$tryGetValue"
+            "tryGetValue", "System$Collections$Generic$IDictionary$2$System$Int32$String$tryGetValue",
+            "clear", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$String$clear",
+            "contains", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$String$contains",
+            "remove", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$String$remove"
             ]
         },
         ctor: function () {
@@ -12670,17 +12718,29 @@ Bridge.$N1391Result =                 r;
         getCount: function () {
             return this._backingDictionary.getCount();
         },
+        getIsReadOnly: function () {
+            return this._backingDictionary.getIsReadOnly();
+        },
         System$Collections$IEnumerable$getEnumerator: function () {
             return this.getEnumerator();
         },
         getEnumerator: function () {
             return this._backingDictionary.getEnumerator();
         },
-        add: function (key, value) {
+        add: function (item) {
+            System.Array.add(Bridge.cast(this._backingDictionary, System.Collections.Generic.ICollection$1(System.Collections.Generic.KeyValuePair$2(System.Int32,String))), item, System.Collections.Generic.KeyValuePair$2(System.Int32,String));
+        },
+        add$1: function (key, value) {
             this._backingDictionary.add(key, value);
         },
-        remove: function (key) {
+        copyTo: function (array, arrayIndex) {
+            System.Array.copyTo(Bridge.cast(this._backingDictionary, System.Collections.Generic.ICollection$1(System.Collections.Generic.KeyValuePair$2(System.Int32,String))), array, arrayIndex, System.Collections.Generic.KeyValuePair$2(System.Int32,String));
+        },
+        remove$1: function (key) {
             return this._backingDictionary.remove(key);
+        },
+        remove: function (item) {
+            return System.Array.remove(Bridge.cast(this._backingDictionary, System.Collections.Generic.ICollection$1(System.Collections.Generic.KeyValuePair$2(System.Int32,String))), item, System.Collections.Generic.KeyValuePair$2(System.Int32,String));
         },
         containsKey: function (key) {
             return this._backingDictionary.containsKey(key);
@@ -12690,6 +12750,9 @@ Bridge.$N1391Result =                 r;
         },
         clear: function () {
             this._backingDictionary.clear();
+        },
+        contains: function (item) {
+            return System.Array.contains(Bridge.cast(this._backingDictionary, System.Collections.Generic.ICollection$1(System.Collections.Generic.KeyValuePair$2(System.Int32,String))), item, System.Collections.Generic.KeyValuePair$2(System.Int32,String));
         }
     });
 
@@ -20034,30 +20097,30 @@ Bridge.$N1391Result =                 r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues, {
-        f1: function (_o38) {
-            _o38.add(0);
-            _o38.add(1);
-            _o38.add(2);
-            _o38.add(3);
-            _o38.add(4);
-            return _o38;
-        },
-        f2: function (_o39) {
-            _o39.add(3, "b");
-            _o39.add(6, "z");
-            _o39.add(9, "x");
-            return _o39;
-        },
-        f3: function (i) {
-            return ((i * 2) | 0);
-        },
-        f4: function (_o40) {
+        f1: function (_o40) {
             _o40.add(0);
             _o40.add(1);
             _o40.add(2);
             _o40.add(3);
             _o40.add(4);
             return _o40;
+        },
+        f2: function (_o41) {
+            _o41.add(3, "b");
+            _o41.add(6, "z");
+            _o41.add(9, "x");
+            return _o41;
+        },
+        f3: function (i) {
+            return ((i * 2) | 0);
+        },
+        f4: function (_o42) {
+            _o42.add(0);
+            _o42.add(1);
+            _o42.add(2);
+            _o42.add(3);
+            _o42.add(4);
+            return _o42;
         }
     });
 
