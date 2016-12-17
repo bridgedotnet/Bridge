@@ -337,6 +337,58 @@ namespace System.Runtime.Versioning
 
 namespace System.Runtime.CompilerServices
 {
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    [External]
+    [NonScriptable]
+    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true, Inherited = false)]
+    public sealed class InternalsVisibleToAttribute : Attribute
+    {
+        private string _assemblyName;
+        private bool _allInternalsVisible = true;
+
+        public InternalsVisibleToAttribute(string assemblyName)
+        {
+            this._assemblyName = assemblyName;
+        }
+
+        public string AssemblyName
+        {
+            get
+            {
+                return _assemblyName;
+            }
+        }
+
+        public bool AllInternalsVisible
+        {
+            get { return _allInternalsVisible; }
+            set { _allInternalsVisible = value; }
+        }
+    }
+
+    /// <summary>
+    ///     If AllInternalsVisible is not true for a friend assembly, the FriendAccessAllowed attribute
+    ///     indicates which internals are shared with that friend assembly.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Class |
+                    AttributeTargets.Constructor |
+                    AttributeTargets.Enum |
+                    AttributeTargets.Event |
+                    AttributeTargets.Field |
+                    AttributeTargets.Interface |
+                    AttributeTargets.Method |
+                    AttributeTargets.Property |
+                    AttributeTargets.Struct,
+        AllowMultiple = false,
+        Inherited = false)]
+    [FriendAccessAllowed]
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    [External]
+    [NonScriptable]
+    internal sealed class FriendAccessAllowedAttribute : Attribute
+    {
+    }
+
     /// <summary>
     /// If a constructor for a value type takes an instance of this type as a parameter, any attribute applied to that constructor will instead be applied to the default (undeclarable) constructor.
     /// </summary>
