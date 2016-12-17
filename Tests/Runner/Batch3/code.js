@@ -6,6 +6,11 @@ var SomeExternalNamespace = {
 SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
 
 
+Bridge.$MyPerson2189 = function(name){
+    this.name = name;
+};
+
+
 /**
  * Bridge Test library - test github issues up to #1999
  * @version 15.6.0
@@ -7166,8 +7171,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7197,7 +7200,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    });
+                                    }); /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -10937,6 +10940,7 @@ Bridge.$N1391Result =                 r;
         },
         ctor: function () {
             this.$initialize();
+            System.Collections.Generic.IEnumerable$1(System.Collections.Generic.KeyValuePair$2(String,Object)).call(this);
             this.dic = new (System.Collections.Generic.Dictionary$2(String,Object))();
         },
         add: function (key, value) {
@@ -12486,6 +12490,28 @@ Bridge.$N1391Result =                 r;
             this.setTestIntProperty(1);
             this.setTestStringProperty("constructor");
             this.setTestObjectProperty(String.fromCharCode.apply(null, [99]));
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2189", {
+        statics: {
+            testInheritanceFromExternalAndBaseCtor: function () {
+                var employee = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2189.Employee("John Doe", 100);
+                var o = employee;
+                Bridge.Test.Assert.true(Bridge.is(o, Bridge.$MyPerson2189));
+                Bridge.Test.Assert.areEqual("John Doe", employee.name);
+                Bridge.Test.Assert.areEqual(100, employee.salary);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2189.Employee", {
+        inherits: [Bridge.$MyPerson2189],
+        salary: 0,
+        ctor: function (name, salary) {
+            this.$initialize();
+            Bridge.$MyPerson2189.call(this, name);
+            this.salary = salary;
         }
     });
 
