@@ -100,7 +100,7 @@ Bridge.assembly("Bridge_ClientTest_Batch2_Tests", function ($asm, globals) {
                 this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
                     project: "Batch2",
                     className: "Bridge.ClientTest.Batch2.BridgeIssues.Bridge1385",
-                    file: "Batch2\\BridgeIssues\\N1385.cs"
+                    file: "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch2/BridgeIssues/N1385.cs"
                 } );
             }
             return this.context;
@@ -124,7 +124,7 @@ Bridge.assembly("Bridge_ClientTest_Batch2_Tests", function ($asm, globals) {
                 this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
                     project: "Batch2",
                     className: "Bridge.ClientTest.Batch2.BridgeIssues.Bridge1499",
-                    file: "Batch2\\BridgeIssues\\N1499.cs"
+                    file: "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch2/BridgeIssues/N1499.cs"
                 } );
             }
             return this.context;
@@ -155,7 +155,7 @@ Bridge.assembly("Bridge_ClientTest_Batch2_Tests", function ($asm, globals) {
                 this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
                     project: "Batch2",
                     className: "Bridge.ClientTest.Batch2.BridgeIssues.N1122",
-                    file: "Batch2\\BridgeIssues\\N1122.cs"
+                    file: "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch2/BridgeIssues/N1122.cs"
                 } );
             }
             return this.context;
@@ -179,7 +179,7 @@ Bridge.assembly("Bridge_ClientTest_Batch2_Tests", function ($asm, globals) {
                 this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
                     project: "Batch2",
                     className: "Bridge.ClientTest.Batch2.BridgeIssues.N1204",
-                    file: "Batch2\\BridgeIssues\\N1204.cs"
+                    file: "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch2/BridgeIssues/N1204.cs"
                 } );
             }
             return this.context;
@@ -546,7 +546,7 @@ Bridge.assembly("Bridge_ClientTest_Batch2_Tests", function ($asm, globals) {
                 this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
                     project: "Batch2",
                     className: "Bridge.ClientTest.Batch2.BridgeIssues.N772",
-                    file: "Batch2\\BridgeIssues\\N772.cs"
+                    file: "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch2/BridgeIssues/N772.cs"
                 } );
             }
             return this.context;
@@ -591,7 +591,7 @@ Bridge.assembly("Bridge_ClientTest_Batch2_Tests", function ($asm, globals) {
                 this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
                     project: "Batch2",
                     className: "Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests",
-                    file: "Batch2\\CheckedUncheckedTests.cs"
+                    file: "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch2/CheckedUncheckedTests.cs"
                 } );
             }
             return this.context;
@@ -636,7 +636,7 @@ Bridge.assembly("Bridge_ClientTest_Batch2_Tests", function ($asm, globals) {
                 this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
                     project: "Batch2",
                     className: "Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests",
-                    file: "Batch2\\CheckedUncheckedTests.cs"
+                    file: "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch2/CheckedUncheckedTests.cs"
                 } );
             }
             return this.context;
@@ -681,7 +681,7 @@ Bridge.assembly("Bridge_ClientTest_Batch2_Tests", function ($asm, globals) {
                 this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
                     project: "Batch2",
                     className: "Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests",
-                    file: "Batch2\\CheckedUncheckedTests.cs"
+                    file: "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch2/CheckedUncheckedTests.cs"
                 } );
             }
             return this.context;
@@ -726,7 +726,7 @@ Bridge.assembly("Bridge_ClientTest_Batch2_Tests", function ($asm, globals) {
                 this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
                     project: "Batch2",
                     className: "Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests",
-                    file: "Batch2\\CheckedUncheckedTests.cs"
+                    file: "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch2/CheckedUncheckedTests.cs"
                 } );
             }
             return this.context;
@@ -771,7 +771,7 @@ Bridge.assembly("Bridge_ClientTest_Batch2_Tests", function ($asm, globals) {
                 this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
                     project: "Batch2",
                     className: "Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests",
-                    file: "Batch2\\CheckedUncheckedTests.cs"
+                    file: "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch2/CheckedUncheckedTests.cs"
                 } );
             }
             return this.context;
