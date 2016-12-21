@@ -53,6 +53,7 @@ namespace Bridge.Translator
                 string typedArrayName = null;
                 if (this.Emitter.AssemblyInfo.UseTypedArrays && (typedArrayName = Helpers.GetTypedArrayName(at.ElementType)) != null)
                 {
+                    this.Write(JS.Types.SYSTEM_ARRAY + ".init(");
                     this.Write("new ", typedArrayName, "(");
                     if (this.ArrayCreateResolveResult != null)
                     {
@@ -62,7 +63,9 @@ namespace Bridge.Translator
                     {
                         arrayCreateExpression.Arguments.First().AcceptVisitor(this.Emitter);
                     }
-
+                    this.Write(")");
+                    this.Write(", ");
+                    this.Write(BridgeTypes.ToJsName(at.ElementType, this.Emitter));
                     this.Write(")");
                 }
                 else
@@ -103,6 +106,9 @@ namespace Bridge.Translator
                         this.WriteScript(def);
                     }
 
+                    this.Write(", ");
+                    this.Write(BridgeTypes.ToJsName(at.ElementType, this.Emitter));
+
                     this.Write(")");
                 }
                 return;
@@ -111,11 +117,13 @@ namespace Bridge.Translator
             if (at.Dimensions > 1)
             {
                 this.Write(JS.Types.SYSTEM_ARRAY + ".create(");
-                var defaultInitializer = new PrimitiveExpression(Inspector.GetDefaultFieldValue(at.ElementType, arrayCreateExpression.Type), "?");
+                var defaultInitializer =
+                    new PrimitiveExpression(Inspector.GetDefaultFieldValue(at.ElementType, arrayCreateExpression.Type),
+                        "?");
 
                 if (defaultInitializer.Value is IType)
                 {
-                    this.Write(Inspector.GetStructDefaultValue((IType)defaultInitializer.Value, this.Emitter));
+                    this.Write(Inspector.GetStructDefaultValue((IType) defaultInitializer.Value, this.Emitter));
                 }
                 else if (defaultInitializer.Value is RawValue)
                 {
@@ -127,6 +135,10 @@ namespace Bridge.Translator
                 }
 
                 this.WriteComma();
+            }
+            else
+            {
+                this.Write(JS.Types.SYSTEM_ARRAY + ".init(");
             }
 
             if (rr.InitializerElements != null && rr.InitializerElements.Count > 0)
@@ -165,6 +177,9 @@ namespace Bridge.Translator
                 this.Write("[]");
             }
 
+            this.Write(", ");
+            this.Write(BridgeTypes.ToJsName(at.ElementType, this.Emitter));
+
             if (at.Dimensions > 1)
             {
                 this.Emitter.Comma = true;
@@ -193,10 +208,10 @@ namespace Bridge.Translator
                     }
                     this.Emitter.Comma = true;
                 }
-
-                this.Write(")");
-                this.Emitter.Comma = false;
             }
+
+            this.Write(")");
+            this.Emitter.Comma = false;
         }
     }
 }

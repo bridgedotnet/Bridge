@@ -995,7 +995,7 @@ namespace Bridge.Translator
         private bool NeedName(IType type)
         {
             var def = type.GetDefinition();
-            return (def != null && def.IsSealed)
+            return (def != null && def.IsSealed && !Helpers.IsKnownType(KnownTypeCode.Array, type, this.Emitter.Resolver))
                    || type.Kind == TypeKind.Enum
                    || type.IsKnownType(KnownTypeCode.Enum)
                    || Helpers.IsIntegerType(type, this.Emitter.Resolver)
@@ -1003,7 +1003,6 @@ namespace Bridge.Translator
                    || Helpers.IsKnownType(KnownTypeCode.Enum, type, this.Emitter.Resolver)
                    || Helpers.IsKnownType(KnownTypeCode.Boolean, type, this.Emitter.Resolver)
                    || Helpers.IsKnownType(KnownTypeCode.Type, type, this.Emitter.Resolver)
-                   || Helpers.IsKnownType(KnownTypeCode.Array, type, this.Emitter.Resolver)
                    || Helpers.IsKnownType(KnownTypeCode.Char, type, this.Emitter.Resolver)
                    || Helpers.IsKnownType(KnownTypeCode.DateTime, type, this.Emitter.Resolver)
                    || Helpers.IsKnownType(KnownTypeCode.Delegate, type, this.Emitter.Resolver)

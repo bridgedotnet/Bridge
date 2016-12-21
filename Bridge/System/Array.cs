@@ -201,7 +201,7 @@ namespace System
         [Template("System.Array.clone({this})")]
         public extern object Clone();
 
-        [Template("System.Array.init({count}, {value})")]
+        [Template("System.Array.init({count}, {value}, {T})")]
         public static extern T[] Repeat<T>(T value, int count);
 
         [Template("System.Array.fill({dst}, {T:defaultFn}, {index}, {count})")]
@@ -251,6 +251,18 @@ namespace System
 
         [Template("System.Array.sort({array}, {comparer})")]
         public static extern void Sort<T>(T[] array, IComparer<T> comparer);
+
+        [Template("System.Array.init({length}, Bridge.getDefaultValue({elementType}), {elementType})")]
+        public static extern Array CreateInstance(Type elementType, int length);
+
+        [Template("System.Array.create(Bridge.getDefaultValue({elementType}), null, {elementType}, {length1}, {length2})")]
+        public static extern Array CreateInstance(Type elementType, int length1, int length2);
+
+        [Template("System.Array.create(Bridge.getDefaultValue({elementType}), null, {elementType}, {length1}, {length2}, {length3})")]
+        public static extern Array CreateInstance(Type elementType, int length1, int length2, int length3);
+
+        [Template("System.Array.create(Bridge.getDefaultValue({elementType}), null, {elementType}, {lengths:array})")]
+        public static extern Array CreateInstance(Type elementType, params int[] lengths);
     }
 
     [External]

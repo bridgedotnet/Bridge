@@ -76,9 +76,9 @@
             return 0;
         },
 
-        create: function (defvalue, initValues, sizes) {
+        create: function (defvalue, initValues, T, sizes) {
             var arr = [],
-                length = arguments.length > 2 ? 1 : 0,
+                length = arguments.length > 3 ? 1 : 0,
                 i, s, v,
                 idx,
                 indices,
@@ -89,9 +89,16 @@
             arr.get = System.Array.$get;
             arr.set = System.Array.$set;
 
-            for (i = 2; i < arguments.length; i++) {
-                length *= arguments[i];
-                arr.$s[i - 2] = arguments[i];
+            if (sizes && Bridge.isArray(sizes)) {
+                for (i = 0; i < sizes.length; i++) {
+                    length *= sizes[i];
+                    arr.$s[i] = sizes[i];
+                }
+            } else {
+                for (i = 3; i < arguments.length; i++) {
+                    length *= arguments[i];
+                    arr.$s[i - 3] = arguments[i];
+                }
             }
 
             arr.length = length;
@@ -117,10 +124,19 @@
                 }
             }
 
+            System.Array.init(arr, T, arr.$s.length);
+
             return arr;
         },
 
-        init: function (size, value, addFn) {
+        init: function (size, value, T, addFn) {
+            if (Bridge.isArray(size)) {
+                var elementType = value,
+                    rank = T || 1;
+                System.Array.type(elementType, rank, size);
+                return size;
+            }
+
             var arr = new Array(size),
                 isFn = addFn !== true && Bridge.isFunction(value);
 
@@ -128,7 +144,7 @@
                 arr[i] = isFn ? value() : value;
             }
 
-            return arr;
+            return System.Array.init(arr, T, 1);
         },
 
         toEnumerable: function (array) {
@@ -167,6 +183,14 @@
                 return false;
             }
 
+            if (type.$elementType && type.$isArray) {
+                var et = Bridge.getType(obj).$elementType;
+                if (et) {
+                    return System.Array.getRank(obj) === type.$rank && Bridge.Reflection.isAssignableFrom(type.$elementType, et);
+                }
+                type = Array;
+            }
+
             if ((obj.constructor === type) || (obj instanceof type)) {
                 return true;
             }
@@ -184,11 +208,14 @@
         },
 
         clone: function (arr) {
+            var newArr;
             if (arr.length === 1) {
-                return [arr[0]];
+                newArr = [arr[0]];
             } else {
-                return arr.slice(0);
+                newArr = arr.slice(0);
             }
+            newArr.$type = arr.$type;
+            return newArr;
         },
 
         getCount: function (obj, T) {
@@ -845,7 +872,72 @@
             }
 
             return true;
+        },
+
+        type: function (t, rank, arr) {
+            rank = rank || 1;
+
+            var typeCache = System.Array.$cache[rank],
+                result,
+                name;
+            
+            if (!typeCache) {
+                typeCache = [];
+                System.Array.$cache[rank] = typeCache;
+            }
+
+            for (var i = 0; i < typeCache.length; i++) {
+                if (typeCache[i].$elementType === t) {
+                    result = typeCache[i];
+                    break;
+                }
+            }
+
+            if (!result) {
+                name = Bridge.getTypeName(t) + "[" + System.String.fromCharCount(",".charCodeAt(0), rank - 1) + "]";
+                
+                result = Bridge.define(name, {
+                    $inherits: [Array, System.Collections.ICollection, System.ICloneable, System.Collections.Generic.IList$1(t)],
+                    $noRegister: true,
+                    statics: {
+                        $elementType: t,
+                        $rank: rank,
+                        $isArray: true,
+                        $is: function(obj) {
+                            return System.Array.is(obj, this);
+                        },
+                        getDefaultValue: function() {
+                            return null;
+                        },
+                        createInstance: function() {
+                            var arr;
+                            if (this.$rank === 1) {
+                                arr = [];
+                            } else {
+                                var args = [Bridge.getDefaultValue(this.$elementType), null, this.$elementType];
+                                for (var j = 0; j < this.$rank; j++) {
+                                    args.push(0);
+                                }
+                                arr = System.Array.create.apply(System.Array, args);
+                            }
+
+                            arr.$type = this;
+                            return arr;
+                        }
+                    }
+                });
+
+                typeCache.push(result);
+                Bridge.init();
+            }
+
+            if (arr) {
+                arr.$type = result;
+            }
+
+            return arr || result;
         }
     };
 
     System.Array = array;
+    System.Array.$cache = {};

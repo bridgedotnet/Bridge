@@ -199,7 +199,9 @@
                 return 0;
             }
 
-            if (typeof (type.getDefaultValue) === 'function') {
+            if (typeof (type.createInstance) === 'function') {
+                return type.createInstance();
+            } else if (typeof (type.getDefaultValue) === 'function') {
                 return type.getDefaultValue();
             } else if (type === Boolean) {
                 return false;
@@ -790,7 +792,7 @@
                 return false;
             }
 
-            return Bridge.arrayTypes.indexOf(c) >= 0;
+            return Bridge.arrayTypes.indexOf(c) >= 0 || c.$isArray;
         },
 
         isFunction: function (obj) {
@@ -1040,6 +1042,10 @@
                 } else {
                     return System.Double;
                 }
+            }
+
+            if (instance.$type) {
+                return instance.$type;
             }
 
             if (instance.$getType) {
@@ -2356,9 +2362,15 @@
                 v,
                 isCtor,
                 ctorName,
-                name;
+                name,
+                registerT = true;
 
             prop.$kind = prop.$kind || "class";
+
+            if (prop.$noRegister === true) {
+                registerT = false;
+                delete prop.$noRegister;
+            }
 
             if (prop.$inherits) {
                 delete prop.$inherits;
@@ -2418,7 +2430,7 @@
                 delete prop.$literal;
             }
 
-            if (!isGenericInstance) {
+            if (!isGenericInstance && registerT) {
                 scope = Bridge.Class.set(scope, className, Class);
             }
 
@@ -2599,7 +2611,7 @@
 
             Class.$staticInit = fn;
 
-            if (!isGenericInstance) {
+            if (!isGenericInstance && registerT) {
                 Bridge.Class.registerType(className, Class);
             }
 
@@ -3189,7 +3201,7 @@
         },
 
         getTypeAssembly: function (type) {
-            if (System.Array.contains([Date, Number, Boolean, String, Function, Array], type)) {
+            if (System.Array.contains([Date, Number, Boolean, String, Function, Array], type) || type.$isArray) {
                 return Bridge.SystemAssembly;
             } else {
                 return type.$assembly || Bridge.SystemAssembly;
@@ -3281,8 +3293,9 @@
                 return [System.IComparable$1(Boolean), System.IEquatable$1(Boolean), System.IComparable];
             } else if (type === String) {
                 return [System.IComparable$1(String), System.IEquatable$1(String), System.IComparable, System.ICloneable, System.Collections.IEnumerable, System.Collections.Generic.IEnumerable$1(System.Char)];
-            } else if (type === Array || System.Array._typedArrays[Bridge.getTypeName(type)]) {
-                return [System.Collections.IEnumerable, System.Collections.ICollection, System.ICloneable, System.Collections.Generic.IEnumerable$1(Object), System.Collections.Generic.ICollection$1(Object), System.Collections.Generic.IList$1(Object)];
+            } else if (type === Array || type.$isArray || System.Array._typedArrays[Bridge.getTypeName(type)]) {
+                var t = type.$elementType || Object;
+                return [System.Collections.IEnumerable, System.Collections.ICollection, System.ICloneable, System.Collections.Generic.IEnumerable$1(t), System.Collections.Generic.ICollection$1(t), System.Collections.Generic.IList$1(t)];
             } else {
                 return [];
             }
@@ -9057,9 +9070,9 @@
             return 0;
         },
 
-        create: function (defvalue, initValues, sizes) {
+        create: function (defvalue, initValues, T, sizes) {
             var arr = [],
-                length = arguments.length > 2 ? 1 : 0,
+                length = arguments.length > 3 ? 1 : 0,
                 i, s, v,
                 idx,
                 indices,
@@ -9070,9 +9083,16 @@
             arr.get = System.Array.$get;
             arr.set = System.Array.$set;
 
-            for (i = 2; i < arguments.length; i++) {
-                length *= arguments[i];
-                arr.$s[i - 2] = arguments[i];
+            if (sizes && Bridge.isArray(sizes)) {
+                for (i = 0; i < sizes.length; i++) {
+                    length *= sizes[i];
+                    arr.$s[i] = sizes[i];
+                }
+            } else {
+                for (i = 3; i < arguments.length; i++) {
+                    length *= arguments[i];
+                    arr.$s[i - 3] = arguments[i];
+                }
             }
 
             arr.length = length;
@@ -9098,10 +9118,19 @@
                 }
             }
 
+            System.Array.init(arr, T, arr.$s.length);
+
             return arr;
         },
 
-        init: function (size, value, addFn) {
+        init: function (size, value, T, addFn) {
+            if (Bridge.isArray(size)) {
+                var elementType = value,
+                    rank = T || 1;
+                System.Array.type(elementType, rank, size);
+                return size;
+            }
+
             var arr = new Array(size),
                 isFn = addFn !== true && Bridge.isFunction(value);
 
@@ -9109,7 +9138,7 @@
                 arr[i] = isFn ? value() : value;
             }
 
-            return arr;
+            return System.Array.init(arr, T, 1);
         },
 
         toEnumerable: function (array) {
@@ -9148,6 +9177,14 @@
                 return false;
             }
 
+            if (type.$elementType && type.$isArray) {
+                var et = Bridge.getType(obj).$elementType;
+                if (et) {
+                    return System.Array.getRank(obj) === type.$rank && Bridge.Reflection.isAssignableFrom(type.$elementType, et);
+                }
+                type = Array;
+            }
+
             if ((obj.constructor === type) || (obj instanceof type)) {
                 return true;
             }
@@ -9165,11 +9202,14 @@
         },
 
         clone: function (arr) {
+            var newArr;
             if (arr.length === 1) {
-                return [arr[0]];
+                newArr = [arr[0]];
             } else {
-                return arr.slice(0);
+                newArr = arr.slice(0);
             }
+            newArr.$type = arr.$type;
+            return newArr;
         },
 
         getCount: function (obj, T) {
@@ -9826,11 +9866,75 @@
             }
 
             return true;
+        },
+
+        type: function (t, rank, arr) {
+            rank = rank || 1;
+
+            var typeCache = System.Array.$cache[rank],
+                result,
+                name;
+            
+            if (!typeCache) {
+                typeCache = [];
+                System.Array.$cache[rank] = typeCache;
+            }
+
+            for (var i = 0; i < typeCache.length; i++) {
+                if (typeCache[i].$elementType === t) {
+                    result = typeCache[i];
+                    break;
+                }
+            }
+
+            if (!result) {
+                name = Bridge.getTypeName(t) + "[" + System.String.fromCharCount(",".charCodeAt(0), rank - 1) + "]";
+                
+                result = Bridge.define(name, {
+                    $inherits: [Array, System.Collections.ICollection, System.ICloneable, System.Collections.Generic.IList$1(t)],
+                    $noRegister: true,
+                    statics: {
+                        $elementType: t,
+                        $rank: rank,
+                        $isArray: true,
+                        $is: function(obj) {
+                            return System.Array.is(obj, this);
+                        },
+                        getDefaultValue: function() {
+                            return null;
+                        },
+                        createInstance: function() {
+                            var arr;
+                            if (this.$rank === 1) {
+                                arr = [];
+                            } else {
+                                var args = [Bridge.getDefaultValue(this.$elementType), null, this.$elementType];
+                                for (var j = 0; j < this.$rank; j++) {
+                                    args.push(0);
+                                }
+                                arr = System.Array.create.apply(System.Array, args);
+                            }
+
+                            arr.$type = this;
+                            return arr;
+                        }
+                    }
+                });
+
+                typeCache.push(result);
+                Bridge.init();
+            }
+
+            if (arr) {
+                arr.$type = result;
+            }
+
+            return arr || result;
         }
     };
 
     System.Array = array;
-
+    System.Array.$cache = {};
     // @source ArraySegment.js
 
     Bridge.define('System.ArraySegment', {
@@ -16946,7 +17050,7 @@
                 return result.v.parseInternal(input, format, false);
             },
             newGuid: function () {
-                var a = System.Array.init(16, 0);
+                var a = System.Array.init(16, 0, System.Byte);
 
                 System.Guid.rnd.nextBytes(a);
 
@@ -17089,7 +17193,7 @@
             return this.format$1(format);
         },
         toByteArray: function () {
-            var g = System.Array.init(16, 0);
+            var g = System.Array.init(16, 0, System.Byte);
 
             g[0] = (this._a) & 255;
             g[1] = ((this._a >> 8)) & 255;
@@ -17136,7 +17240,7 @@
                         input = m1.slice(1).join("-");
                     }
                 } else if (Bridge.referenceEquals(format, "B") || Bridge.referenceEquals(format, "P")) {
-                    var b = Bridge.referenceEquals(format, "B") ? [123, 125] : [40, 41];
+                    var b = Bridge.referenceEquals(format, "B") ? System.Array.init([123, 125], System.Char) : System.Array.init([40, 41], System.Char);
 
                     if ((input.charCodeAt(0) === b[0]) && (input.charCodeAt(((input.length - 1) | 0)) === b[1])) {
                         p = true;
@@ -17164,7 +17268,7 @@
         },
         format$1: function (format) {
             var s = System.String.concat(System.UInt32.format((this._a >>> 0), "x8"), System.UInt16.format((this._b & 65535), "x4"), System.UInt16.format((this._c & 65535), "x4"));
-            s = System.String.concat(s, ([this._d, this._e, this._f, this._g, this._h, this._i, this._j, this._k]).map(System.Guid.makeBinary).join(""));
+            s = System.String.concat(s, (System.Array.init([this._d, this._e, this._f, this._g, this._h, this._i, this._j, this._k], System.Byte)).map(System.Guid.makeBinary).join(""));
 
             s = System.Guid.split.exec(s).slice(1).join("-");
 
@@ -17189,7 +17293,7 @@
 
             s = s.replace(System.Guid.replace, "");
 
-            var r = System.Array.init(8, 0);
+            var r = System.Array.init(8, 0, System.Byte);
 
             this._a = (System.UInt32.parse(s.substr(0, 8), 16)) | 0;
             this._b = Bridge.Int.sxs((System.UInt16.parse(s.substr(8, 4), 16)) & 65535);
@@ -23064,7 +23168,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         seedArray: null,
         config: {
             init: function () {
-                this.seedArray = System.Array.init(56, 0);
+                this.seedArray = System.Array.init(56, 0, System.Int32);
             }
         },
         ctor: function () {

@@ -184,7 +184,9 @@
                 return 0;
             }
 
-            if (typeof (type.getDefaultValue) === 'function') {
+            if (typeof (type.createInstance) === 'function') {
+                return type.createInstance();
+            } else if (typeof (type.getDefaultValue) === 'function') {
                 return type.getDefaultValue();
             } else if (type === Boolean) {
                 return false;
@@ -775,7 +777,7 @@
                 return false;
             }
 
-            return Bridge.arrayTypes.indexOf(c) >= 0;
+            return Bridge.arrayTypes.indexOf(c) >= 0 || c.$isArray;
         },
 
         isFunction: function (obj) {
@@ -1025,6 +1027,10 @@
                 } else {
                     return System.Double;
                 }
+            }
+
+            if (instance.$type) {
+                return instance.$type;
             }
 
             if (instance.$getType) {

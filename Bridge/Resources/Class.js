@@ -144,9 +144,15 @@
                 v,
                 isCtor,
                 ctorName,
-                name;
+                name,
+                registerT = true;
 
             prop.$kind = prop.$kind || "class";
+
+            if (prop.$noRegister === true) {
+                registerT = false;
+                delete prop.$noRegister;
+            }
 
             if (prop.$inherits) {
                 delete prop.$inherits;
@@ -206,7 +212,7 @@
                 delete prop.$literal;
             }
 
-            if (!isGenericInstance) {
+            if (!isGenericInstance && registerT) {
                 scope = Bridge.Class.set(scope, className, Class);
             }
 
@@ -387,7 +393,7 @@
 
             Class.$staticInit = fn;
 
-            if (!isGenericInstance) {
+            if (!isGenericInstance && registerT) {
                 Bridge.Class.registerType(className, Class);
             }
 

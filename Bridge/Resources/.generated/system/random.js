@@ -9,7 +9,7 @@
         seedArray: null,
         config: {
             init: function () {
-                this.seedArray = System.Array.init(56, 0);
+                this.seedArray = System.Array.init(56, 0, System.Int32);
             }
         },
         ctor: function () {

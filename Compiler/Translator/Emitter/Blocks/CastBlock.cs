@@ -332,10 +332,10 @@ namespace Bridge.Translator
             {
                 this.Write(JS.Types.FUNCTION);
             }
-            else if (resolveResult.Type.Kind == TypeKind.Array)
+            /*else if (resolveResult.Type.Kind == TypeKind.Array)
             {
                 this.EmitArray(resolveResult.Type);
-            }
+            }*/
             else
             {
                 astType.AcceptVisitor(this.Emitter);
@@ -352,10 +352,10 @@ namespace Bridge.Translator
             {
                 this.Write(JS.Types.FUNCTION);
             }
-            else if (iType.Kind == TypeKind.Array)
+            /*else if (iType.Kind == TypeKind.Array)
             {
                 this.EmitArray(iType);
-            }
+            }*/
             else if (iType.Kind == TypeKind.Anonymous)
             {
                 this.Write(JS.Types.Object.NAME);

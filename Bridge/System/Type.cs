@@ -103,7 +103,7 @@ namespace System
 
         public extern bool IsArray
         {
-            [Template("({this} === Array)")]
+            [Template("Bridge.isArray(null, {this})")]
             get;
         }
 
@@ -196,6 +196,21 @@ namespace System
 
         [Template("Bridge.Reflection.getMembers({this}, 4, {bindingAttr} | 256, {name})")]
         public extern FieldInfo GetField(string name, BindingFlags bindingAttr);
+
+        [Template("({this}.$elementType || null)")]
+        public extern Type GetElementType();
+
+        public extern bool HasElementType
+        {
+            [Template("(!!{this}.$elementType)")]
+            get;
+        }
+
+        [Template("System.Array.type({this})")]
+        public extern Type MakeArrayType();
+
+        [Template("System.Array.type({this}, {rank})")]
+        public extern Type MakeArrayType(int rank);
 
         [FieldProperty]
         public extern object Prototype { get; }
