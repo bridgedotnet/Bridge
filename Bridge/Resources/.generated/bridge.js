@@ -3282,7 +3282,7 @@
             } else if (type === String) {
                 return [System.IComparable$1(String), System.IEquatable$1(String), System.IComparable, System.ICloneable, System.Collections.IEnumerable, System.Collections.Generic.IEnumerable$1(System.Char)];
             } else if (type === Array || System.Array._typedArrays[Bridge.getTypeName(type)]) {
-                return [System.Collections.IEnumerable, System.Collections.ICollection, System.ICloneable, System.Collections.Generic.IEnumerable$1(Object), System.Collections.Generic.ICollection$1(Object), System.Collections.Generic.IList$1(Object)];
+                return [System.Collections.IEnumerable, System.Collections.ICollection, System.ICloneable, System.Collections.IList, System.Collections.Generic.IEnumerable$1(Object), System.Collections.Generic.ICollection$1(Object), System.Collections.Generic.IList$1(Object)];
             } else {
                 return [];
             }
@@ -9155,6 +9155,7 @@
             if (type === System.Collections.IEnumerable ||
                 type === System.Collections.ICollection ||
                 type === System.ICloneable ||
+                type === System.Collections.IList ||
                 type.$$name && System.String.startsWith(type.$$name, "System.Collections.Generic.IEnumerable$1") ||
                 type.$$name && System.String.startsWith(type.$$name, "System.Collections.Generic.ICollection$1") ||
                 type.$$name && System.String.startsWith(type.$$name, "System.Collections.Generic.IList$1")) {

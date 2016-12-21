@@ -21,6 +21,18 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual(3, l.Count);
             Assert.AreEqual(2, list[1]);
             Assert.AreEqual(2, l[1]);
+
+
+            var arr = new int[] { 1, 2, 3 };
+            l = arr;
+            o = arr;
+
+            Assert.True(o is IList);
+            Assert.True(o is IList<int>);
+            Assert.AreEqual(3, arr.Length);
+            Assert.AreEqual(3, l.Count);
+            Assert.AreEqual(2, arr[1]);
+            Assert.AreEqual(2, l[1]);
         }
 
         [Test]

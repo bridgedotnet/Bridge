@@ -174,6 +174,7 @@
             if (type === System.Collections.IEnumerable ||
                 type === System.Collections.ICollection ||
                 type === System.ICloneable ||
+                type === System.Collections.IList ||
                 type.$$name && System.String.startsWith(type.$$name, "System.Collections.Generic.IEnumerable$1") ||
                 type.$$name && System.String.startsWith(type.$$name, "System.Collections.Generic.ICollection$1") ||
                 type.$$name && System.String.startsWith(type.$$name, "System.Collections.Generic.IList$1")) {

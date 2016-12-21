@@ -11504,6 +11504,18 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.Assert.areEqual(3, System.Array.getCount(l));
                 Bridge.Test.Assert.areEqual(2, list.getItem(1));
                 Bridge.Test.Assert.areEqual(2, System.Array.getItem(l, 1));
+
+
+                var arr = [1, 2, 3];
+                l = arr;
+                o = arr;
+
+                Bridge.Test.Assert.true(Bridge.is(o, System.Collections.IList));
+                Bridge.Test.Assert.true(Bridge.is(o, System.Collections.Generic.IList$1(System.Int32)));
+                Bridge.Test.Assert.areEqual(3, arr.length);
+                Bridge.Test.Assert.areEqual(3, System.Array.getCount(l));
+                Bridge.Test.Assert.areEqual(2, arr[1]);
+                Bridge.Test.Assert.areEqual(2, System.Array.getItem(l, 1));
             },
             testIDictionary: function () {
                 var dict = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2050.f2(new (System.Collections.Generic.Dictionary$2(System.Int32,System.Int32))());

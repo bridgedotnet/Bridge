@@ -7224,7 +7224,7 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
             testIDictionary: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2050).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2050, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "TestIDictionary()",
-                    line: "26"
+                    line: "38"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2050.testIDictionary();
             }
