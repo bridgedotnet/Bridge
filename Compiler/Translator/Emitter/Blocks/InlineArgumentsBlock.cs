@@ -520,6 +520,10 @@ namespace Bridge.Translator
 
                                 if (thisValue != null)
                                 {
+                                    if (type.Kind == TypeKind.TypeParameter)
+                                    {
+                                        thisValue = thisValue + ", " + type.Name;
+                                    }
                                     this.Write(JS.Funcs.BRIDGE_GET_TYPE + "(" + thisValue + ")");
                                 }
                             }
@@ -986,6 +990,11 @@ namespace Bridge.Translator
                 else
                 {
                     s = "null";
+                }
+
+                if (type.Kind == TypeKind.TypeParameter)
+                {
+                    s = s + ", " + type.Name;
                 }
 
                 this.Write(this.WriteIndentToString(JS.Funcs.BRIDGE_GET_TYPE + "(" + s + ")"));

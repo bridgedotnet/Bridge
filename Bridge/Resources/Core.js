@@ -1014,9 +1014,13 @@
             return obj.format(formatString, provider);
         },
 
-        getType: function (instance) {
+        getType: function (instance, T) {
             if (instance == null) {
                 throw new System.NullReferenceException("instance is null");
+            }
+
+            if (T && Bridge.Reflection.getBaseType(T) === Object) {
+                return T;
             }
 
             if (typeof (instance) === "number") {
