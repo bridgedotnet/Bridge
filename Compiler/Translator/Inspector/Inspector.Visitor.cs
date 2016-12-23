@@ -57,8 +57,19 @@ namespace Bridge.Translator
             var partialType = this.Types.FirstOrDefault(t => t.Key == fullName);
             var add = true;
             var ignored = this.IgnoredTypes.Contains(fullName);
+            var external = this.HasExternal(typeDeclaration);
 
-            if ((ignored || this.HasIgnore(typeDeclaration) || this.IsNonScriptable(typeDeclaration)) && !this.IsObjectLiteral(typeDeclaration))
+            if (!external)
+            {
+                var resolveResult = this.Resolver.ResolveNode(typeDeclaration, null);
+                if (resolveResult != null && resolveResult.Type != null)
+                {
+                    var def = resolveResult.Type.GetDefinition();
+                    external = def != null && def.ParentAssembly.AssemblyAttributes.Any(a => a.AttributeType.FullName == "Bridge.ExternalAttribute");
+                }
+            }
+
+            if ((external || ignored || this.IsNonScriptable(typeDeclaration)) && !this.IsObjectLiteral(typeDeclaration))
             {
                 if (partialType != null)
                 {
@@ -298,7 +309,7 @@ namespace Bridge.Translator
 
         public override void VisitConstructorDeclaration(ConstructorDeclaration constructorDeclaration)
         {
-            if (this.HasInline(constructorDeclaration) || constructorDeclaration.HasModifier(Modifiers.Extern) && !this.HasScript(constructorDeclaration))
+            if (this.HasTemplate(constructorDeclaration) || constructorDeclaration.HasModifier(Modifiers.Extern) && !this.HasScript(constructorDeclaration))
             {
                 return;
             }
@@ -319,7 +330,7 @@ namespace Bridge.Translator
 
         public override void VisitOperatorDeclaration(OperatorDeclaration operatorDeclaration)
         {
-            if (this.HasInline(operatorDeclaration))
+            if (this.HasTemplate(operatorDeclaration))
             {
                 return;
             }
@@ -371,7 +382,7 @@ namespace Bridge.Translator
 
         public override void VisitMethodDeclaration(MethodDeclaration methodDeclaration)
         {
-            if (methodDeclaration.HasModifier(Modifiers.Abstract) || this.HasInline(methodDeclaration))
+            if (methodDeclaration.HasModifier(Modifiers.Abstract) || this.HasTemplate(methodDeclaration))
             {
                 return;
             }
@@ -479,8 +490,8 @@ namespace Bridge.Translator
             CheckFieldProperty(propertyDeclaration, ref isResolvedProperty, ref resolvedProperty);
 
             if (!propertyDeclaration.Getter.IsNull
-                && !this.HasIgnore(propertyDeclaration)
-                && !this.HasInline(propertyDeclaration.Getter)
+                && !this.HasExternal(propertyDeclaration)
+                && !this.HasTemplate(propertyDeclaration.Getter)
                 && propertyDeclaration.Getter.Body.IsNull
                 && !this.HasScript(propertyDeclaration.Getter))
             {
@@ -543,19 +554,19 @@ namespace Bridge.Translator
 
         private void CheckFieldProperty(PropertyDeclaration propertyDeclaration, ref bool isResolvedProperty, ref MemberResolveResult resolvedProperty)
         {
-            if (this.HasIgnore(propertyDeclaration) || this.CurrentType.IsObjectLiteral)
+            if (this.HasExternal(propertyDeclaration) || this.CurrentType.IsObjectLiteral)
             {
                 return;
             }
 
             var possiblyWrongGetter = !propertyDeclaration.Getter.IsNull
                 && !propertyDeclaration.Getter.Body.IsNull
-                && !this.HasInline(propertyDeclaration.Getter)
+                && !this.HasTemplate(propertyDeclaration.Getter)
                 && !this.HasScript(propertyDeclaration.Getter);
 
             var possiblyWrongSetter = !propertyDeclaration.Setter.IsNull
                 && !propertyDeclaration.Setter.Body.IsNull
-                && !this.HasInline(propertyDeclaration.Setter)
+                && !this.HasTemplate(propertyDeclaration.Setter)
                 && !this.HasScript(propertyDeclaration.Setter);
 
             if (possiblyWrongGetter || possiblyWrongSetter)

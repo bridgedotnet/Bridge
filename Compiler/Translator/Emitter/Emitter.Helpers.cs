@@ -341,7 +341,7 @@ namespace Bridge.Translator
             string attrName = Bridge.Translator.Translator.Bridge_ASSEMBLY + ".NameAttribute";
             var attr = Helpers.GetInheritedAttribute(emitter, member, attrName);
 
-            bool isIgnore = this.Validator.IsIgnoreType(member.DeclaringType);
+            bool isIgnore = this.Validator.IsExternalType(member.DeclaringType);
             string name = member.Name;
             bool isStatic = false;
 
@@ -429,7 +429,7 @@ namespace Bridge.Translator
             }
 
             var attr = Helpers.GetInheritedAttribute(member, Bridge.Translator.Translator.Bridge_ASSEMBLY + ".NameAttribute");
-            bool isIgnore = member.DeclaringTypeDefinition != null && this.Validator.IsIgnoreType(member.DeclaringTypeDefinition);
+            bool isIgnore = member.DeclaringTypeDefinition != null && this.Validator.IsExternalType(member.DeclaringTypeDefinition);
             string name;
 
             if (attr != null)
@@ -473,7 +473,7 @@ namespace Bridge.Translator
                 preserveMemberChange = true;
             }
             var attr = Helpers.GetInheritedAttribute(member, Bridge.Translator.Translator.Bridge_ASSEMBLY + ".NameAttribute");
-            bool isIgnore = member.DeclaringTypeDefinition != null && this.Validator.IsIgnoreType(member.DeclaringTypeDefinition);
+            bool isIgnore = member.DeclaringTypeDefinition != null && this.Validator.IsExternalType(member.DeclaringTypeDefinition);
             string name = member.Name;
             if (member is IMethod && ((IMethod)member).IsConstructor)
             {

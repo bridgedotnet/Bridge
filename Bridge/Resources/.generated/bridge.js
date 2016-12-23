@@ -1,7 +1,7 @@
 /**
- * @version   : 15.5.0 - Bridge.NET
+ * @version   : 15.6.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2016-12-05
+ * @date      : 2016-12-12
  * @copyright : Copyright 2008-2016 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
@@ -3041,8 +3041,8 @@
     // @source systemAssemblyVersion.js
 
     (function(){
-        Bridge.SystemAssembly.version = "15.5.0";
-        Bridge.SystemAssembly.compiler = "15.5.0";
+        Bridge.SystemAssembly.version = "15.6.0";
+        Bridge.SystemAssembly.compiler = "15.6.0";
     })();
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
@@ -5174,6 +5174,50 @@
             }
 
             return Math.round(n) / m;
+        },
+
+        log10: Math.log10 || function (x) {
+            return Math.log(x) / Math.LN10;
+        },
+
+        logWithBase: function (x, newBase) {
+            if (isNaN(x)) {
+                return x;
+            }
+
+            if (isNaN(newBase)) {
+                return newBase;
+            }
+
+            if (newBase === 1) {
+                return NaN
+            }
+
+            if (x !== 1 && (newBase === 0 || newBase === Number.POSITIVE_INFINITY)) {
+                return NaN;
+            }
+
+            return Bridge.Math.log10(x) / Bridge.Math.log10(newBase);
+        },
+
+        log: function (x) {
+            if (x === 0.0) {
+                return Number.NEGATIVE_INFINITY;
+            }
+
+            if (x < 0.0 || isNaN(x)) {
+                return NaN;
+            }
+
+            if (x === Number.POSITIVE_INFINITY) {
+                return Number.POSITIVE_INFINITY;
+            }
+
+            if (x === Number.NEGATIVE_INFINITY) {
+                return NaN;
+            }
+
+            return Math.log(x);
         },
 
         sinh: Math.sinh || function (x) {
@@ -15429,7 +15473,7 @@
                 function () {
                     enumerator = source.getEnumerator();
                     keys = new (System.Collections.Generic.Dictionary$2(Object, Object))(null, comparer);
-                    Enumerable.from(second).forEach(function (key) { keys.add(key); });
+                    Enumerable.from(second).forEach(function (key) { if (!keys.containsKey(key)) { keys.add(key); } });
                 },
                 function () {
                     while (enumerator.moveNext()) {
@@ -15460,7 +15504,7 @@
                     enumerator = source.getEnumerator();
 
                     keys = new (System.Collections.Generic.Dictionary$2(Object, Object))(null, comparer);
-                    Enumerable.from(second).forEach(function (key) { keys.add(key); });
+                    Enumerable.from(second).forEach(function (key) { if (!keys.containsKey(key)) { keys.add(key); } });
                     outs = new (System.Collections.Generic.Dictionary$2(Object, Object))(null, comparer);
                 },
                 function () {

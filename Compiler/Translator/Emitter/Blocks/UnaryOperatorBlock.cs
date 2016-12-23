@@ -152,9 +152,9 @@ namespace Bridge.Translator
             if (memberArgResolverResult != null && memberArgResolverResult.Member is IProperty)
             {
                 var prop = (IProperty)memberArgResolverResult.Member;
-                var isIgnore = this.Emitter.Validator.IsIgnoreType(memberArgResolverResult.Member.DeclaringTypeDefinition);
+                var isIgnore = this.Emitter.Validator.IsExternalType(memberArgResolverResult.Member.DeclaringTypeDefinition);
                 var inlineAttr = prop.Getter != null ? this.Emitter.GetAttribute(prop.Getter.Attributes, Translator.Bridge_ASSEMBLY + ".TemplateAttribute") : null;
-                var ignoreAccessor = prop.Getter != null && this.Emitter.Validator.IsIgnoreType(prop.Getter);
+                var ignoreAccessor = prop.Getter != null && this.Emitter.Validator.IsExternalType(prop.Getter);
                 var isAccessorsIndexer = this.Emitter.Validator.IsAccessorsIndexer(memberArgResolverResult.Member);
 
                 isAccessor = true;
@@ -403,9 +403,9 @@ namespace Bridge.Translator
 
             if (memberArgResolverResult != null && memberArgResolverResult.Member is IProperty)
             {
-                var isIgnore = this.Emitter.Validator.IsIgnoreType(memberArgResolverResult.Member.DeclaringTypeDefinition);
+                var isIgnore = this.Emitter.Validator.IsExternalType(memberArgResolverResult.Member.DeclaringTypeDefinition);
                 var inlineAttr = this.Emitter.GetAttribute(memberArgResolverResult.Member.Attributes, Translator.Bridge_ASSEMBLY + ".TemplateAttribute");
-                var ignoreAccessor = this.Emitter.Validator.IsIgnoreType(((IProperty)memberArgResolverResult.Member).Getter);
+                var ignoreAccessor = this.Emitter.Validator.IsExternalType(((IProperty)memberArgResolverResult.Member).Getter);
                 var isAccessorsIndexer = this.Emitter.Validator.IsAccessorsIndexer(memberArgResolverResult.Member);
 
                 isAccessor = true;
@@ -677,7 +677,7 @@ namespace Bridge.Translator
                         new ArgumentsInfo(this.Emitter, this.UnaryOperatorExpression, orr, method), inline).Emit();
                     }
                 }
-                else if (!this.Emitter.Validator.IsIgnoreType(method.DeclaringTypeDefinition))
+                else if (!this.Emitter.Validator.IsExternalType(method.DeclaringTypeDefinition))
                 {
                     this.Write(BridgeTypes.ToJsName(method.DeclaringType, this.Emitter));
                     this.WriteDot();

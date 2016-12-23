@@ -196,7 +196,7 @@ namespace Bridge.Translator
 
         public override string VisitOperatorResolveResult(OperatorResolveResult rr, object data)
         {
-            bool isUserDefined = rr.UserDefinedOperatorMethod != null && !this._emitter.Validator.IsIgnoreType(rr.UserDefinedOperatorMethod.DeclaringTypeDefinition);
+            bool isUserDefined = rr.UserDefinedOperatorMethod != null && !this._emitter.Validator.IsExternalType(rr.UserDefinedOperatorMethod.DeclaringTypeDefinition);
             var arguments = new string[rr.Operands.Count + 1];
             for (int i = 0; i < rr.Operands.Count; i++)
                 arguments[i] = VisitResolveResult(rr.Operands[i], null);

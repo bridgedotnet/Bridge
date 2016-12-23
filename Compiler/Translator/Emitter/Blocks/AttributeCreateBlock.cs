@@ -84,7 +84,7 @@ namespace Bridge.Translator
                         this.Write(customCtor);
                     }
 
-                    if (!this.Emitter.Validator.IsIgnoreType(type) && type.Methods.Count(m => m.IsConstructor && !m.IsStatic) > (type.IsValueType ? 0 : 1))
+                    if (!this.Emitter.Validator.IsExternalType(type) && type.Methods.Count(m => m.IsConstructor && !m.IsStatic) > (type.IsValueType ? 0 : 1))
                     {
                         this.WriteDot();
                         var name = OverloadsCollection.Create(this.Emitter, attribute.Constructor).GetOverloadName();
@@ -205,7 +205,7 @@ namespace Bridge.Translator
                     {
                         var enumMode = block.Emitter.Validator.EnumEmitMode(typeDef);
 
-                        if ((block.Emitter.Validator.IsIgnoreType(typeDef) && enumMode == -1) || enumMode == 2)
+                        if ((block.Emitter.Validator.IsExternalType(typeDef) && enumMode == -1) || enumMode == 2)
                         {
                             block.WriteScript(mrr.ConstantValue);
 

@@ -262,7 +262,7 @@ namespace Bridge.Translator
                     //var mode = this.Emitter.Validator.GetObjectCreateMode(this.Emitter.GetTypeDefinition(type.Type));
                     //var ignore = mode == 0 && !type.Type.GetMethods(null, GetMemberOptions.IgnoreInheritedMembers).Any(m => !m.IsConstructor && !m.IsAccessor);
 
-                    if (this.Emitter.Validator.IsIgnoreType(typeDef))
+                    if (this.Emitter.Validator.IsExternalType(typeDef))
                     {
                         this.Emitter.Translator.Plugins.AfterTypeEmit(this.Emitter, type);
                         continue;

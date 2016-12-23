@@ -317,6 +317,7 @@
     <Compile Include="BridgeIssues\1500\N1535.cs" />
     <Compile Include="BridgeIssues\1500\N1536.cs" />
     <Compile Include="BridgeIssues\1500\N1538.cs" />
+    <Compile Include="BridgeIssues\1500\N1566.cs" />
     <Compile Include="BridgeIssues\1500\N1599.cs" />
     <Compile Include="BridgeIssues\1600\N1641.cs" />
     <Compile Include="BridgeIssues\1600\N1653.cs" />
@@ -427,17 +428,21 @@
     <Compile Include="BridgeIssues\2000\N2088.cs" />
     <Compile Include="BridgeIssues\2000\N2092.cs" />
     <Compile Include="BridgeIssues\2000\N2094.cs" />
-    <Compile Include="BridgeIssues\2100\N2114.cs" />
     <Compile Include="BridgeIssues\2100\N2106.cs" />
+    <Compile Include="BridgeIssues\2100\N2114.cs" />
     <Compile Include="BridgeIssues\2100\N2121.cs" />
-    <Compile Include="BridgeIssues\2100\N2138.cs" />
     <Compile Include="BridgeIssues\2100\N2127.cs" />
-    <Compile Include="BridgeIssues\2100\N2137.cs" />
     <Compile Include="BridgeIssues\2100\N2135.cs" />
+    <Compile Include="BridgeIssues\2100\N2137.cs" />
+    <Compile Include="BridgeIssues\2100\N2138.cs" />
     <Compile Include="BridgeIssues\2100\N2141.cs" />
     <Compile Include="BridgeIssues\2100\N2160.cs" />
     <Compile Include="BridgeIssues\2100\N2159.cs" />
     <Compile Include="BridgeIssues\2100\N2143.cs" />
+    <Compile Include="BridgeIssues\2100\N2146.cs" />
+    <Compile Include="BridgeIssues\2100\N2147.cs" />
+    <Compile Include="BridgeIssues\2100\N2157.cs" />
+    <Compile Include="BridgeIssues\2100\N2156.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
     <Compile Include="Utilities\DecimalHelper.cs" />
@@ -471,7 +476,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Bridge.Test, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Bridge.Testing.1.0.0\lib\net40\Bridge.Test.dll</HintPath>
+      <HintPath>..\..\packages\Bridge.Test.Core.1.0.0-beta1\lib\net40\Bridge.Test.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

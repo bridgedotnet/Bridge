@@ -1,7 +1,7 @@
 /**
- * @version   : 15.5.0 - Bridge.NET
+ * @version   : 15.6.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2016-12-05
+ * @date      : 2016-12-12
  * @copyright : Copyright 2008-2016 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
@@ -16,7 +16,7 @@ The text after the content marked will be compared
  * @version 1.0.0.0
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2015 Object.NET, Inc.
- * @compiler Bridge.NET 15.5.0
+ * @compiler Bridge.NET 15.6.0
  */
 Bridge.assembly("TestProject.I2096", function ($asm, globals) {
     "use strict";

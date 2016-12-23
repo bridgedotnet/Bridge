@@ -71,12 +71,12 @@ namespace Bridge.Translator
             return this.HasAttribute(declaration, Translator.Bridge_ASSEMBLY + ".NonScriptable");
         }
 
-        protected virtual bool HasIgnore(EntityDeclaration declaration)
+        protected virtual bool HasExternal(EntityDeclaration declaration)
         {
             return this.HasAttribute(declaration, Translator.Bridge_ASSEMBLY + ".External") || this.HasAttribute(declaration, Translator.Bridge_ASSEMBLY + ".Ignore");
         }
 
-        protected virtual bool HasInline(EntityDeclaration declaration)
+        protected virtual bool HasTemplate(EntityDeclaration declaration)
         {
             return this.HasAttribute(declaration, Translator.Bridge_ASSEMBLY + ".Template");
         }
@@ -179,7 +179,8 @@ namespace Bridge.Translator
                 return 0UL;
             }
 
-            if (type.IsKnownType(KnownTypeCode.Int16) ||
+            if (type.IsKnownType(KnownTypeCode.Char) ||
+                type.IsKnownType(KnownTypeCode.Int16) ||
                 type.IsKnownType(KnownTypeCode.Int32) ||
                 type.IsKnownType(KnownTypeCode.UInt16) ||
                 type.IsKnownType(KnownTypeCode.UInt32) ||

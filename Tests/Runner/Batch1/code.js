@@ -1,9 +1,9 @@
 /**
  * Bridge Test library - general C# language tests
- * @version 15.5.0
+ * @version 15.6.0
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2016 Object.NET, Inc.
- * @compiler Bridge.NET 15.5.0
+ * @compiler Bridge.NET 15.6.0
  */
 Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resource1.bin":"AAECAwQFBgc=","Bridge.ClientTest.Batch1.Reflection.Resource2.bin":"EBESExQV"}, function ($asm, globals) {
     "use strict";
@@ -10730,18 +10730,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             validOffsetIn: function () {
                 var input = "test";
                 var inputBytes = System.Convert.fromBase64String(input);
-                var resultChars = System.Array.init(4, function (){
-                    return new System.Char();
-                });
+                var resultChars = System.Array.init(4, 0);
                 var fillCharCount = System.Convert.toBase64CharArray(inputBytes, 0, ((inputBytes.length - 1) | 0), resultChars, 0, null);
                 Bridge.Test.Assert.areEqual(input.length, fillCharCount);
             },
             shortInputArray: function () {
                 // Regression test for bug where a short input array caused an exception to be thrown
                 var inputBuffer = [97, 98, 99];
-                var ouputBuffer = System.Array.init(4, function (){
-                    return new System.Char();
-                });
+                var ouputBuffer = System.Array.init(4, 0);
                 var c1 = System.Convert.toBase64CharArray(inputBuffer, 0, 3, ouputBuffer, 0, null);
                 Bridge.Test.Assert.areEqual(4, c1);
 
@@ -10779,9 +10775,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             invalidOffsetIn: function () {
                 var inputChars = System.String.toCharArray(("test"), 0, ("test").length);
                 var inputBytes = System.Convert.fromBase64CharArray(inputChars, 0, inputChars.length);
-                var outputBuffer = System.Array.init(4, function (){
-                    return new System.Char();
-                });
+                var outputBuffer = System.Array.init(4, 0);
 
                 Bridge.Test.Assert.throws$1(function () {
                     System.Convert.toBase64CharArray(inputBytes, -1, inputBytes.length, outputBuffer, 0, null);
@@ -10793,9 +10787,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             invalidOffsetOut: function () {
                 var inputChars = System.String.toCharArray(("test"), 0, ("test").length);
                 var inputBytes = System.Convert.fromBase64CharArray(inputChars, 0, inputChars.length);
-                var outputBuffer = System.Array.init(4, function (){
-                    return new System.Char();
-                });
+                var outputBuffer = System.Array.init(4, 0);
 
                 Bridge.Test.Assert.throws$1(function () {
                     System.Convert.toBase64CharArray(inputBytes, 0, inputBytes.length, outputBuffer, -1, null);
@@ -10807,9 +10799,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             invalidInputLength: function () {
                 var inputChars = System.String.toCharArray(("test"), 0, ("test").length);
                 var inputBytes = System.Convert.fromBase64CharArray(inputChars, 0, inputChars.length);
-                var outputBuffer = System.Array.init(4, function (){
-                    return new System.Char();
-                });
+                var outputBuffer = System.Array.init(4, 0);
 
                 Bridge.Test.Assert.throws$1(function () {
                     System.Convert.toBase64CharArray(inputBytes, 0, -1, outputBuffer, 0, null);
@@ -10828,9 +10818,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.apply($asm.$.Bridge.ClientTest.ConvertTests.ConvertToBase64CharArrayTests, {
         f1: function () {
-            System.Convert.toBase64CharArray(null, 0, 1, System.Array.init(1, function (){
-                    return new System.Char();
-                }), 0, null);
+            System.Convert.toBase64CharArray(null, 0, 1, System.Array.init(1, 0), 0, null);
         },
         f2: function (err) {
             return Bridge.is(err, System.ArgumentNullException);
@@ -18904,7 +18892,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             this.assertIsDecimalAndEqualTo(System.Decimal(-3.6).floor(), -4.0);
         },
         logWorks: function () {
-            this.assertAlmostEqual(Math.log(0.5), -0.69314718055994529);
+            this.assertAlmostEqual(Bridge.Math.log(0.5), -0.69314718055994529);
         },
         maxOfByteWorks: function () {
             Bridge.Test.Assert.areEqual(3.0, Math.max(1, 3));
@@ -22888,7 +22876,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             properties: {
                 B: false,
                 Y: 0,
-                C: null,
+                C: 0,
                 D: 0,
                 F: 0,
                 I: 0,
@@ -22898,9 +22886,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 S: null,
                 O: null,
                 T: null
-            },
-            init: function () {
-                this.C = new System.Char();
             }
         },
         ctor: function (b, y, c, d, f, i, l, h, e, s, o, t) {
@@ -26910,6 +26895,45 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var result2 = Bridge.Date.format(parsedUnixNow);
 
             Bridge.Test.Assert.true$1(Bridge.referenceEquals(result1, result2), "[#1901] DateTime to Timestamp back to DateTime is different");
+        },
+        toShortDateStringWorks: function () {
+            var date = new Date(2009, 6 - 1, 1, 8, 42, 50);
+            var r = Bridge.Date.format(date, 'd');
+
+            Bridge.Test.Assert.areEqual$1("06/01/2009", r, "Invariant culture");
+
+            var defaultCulture = System.Globalization.CultureInfo.getCurrentCulture();
+
+            try {
+                System.Globalization.CultureInfo.setCurrentCulture(System.Globalization.CultureInfo.getCultureInfo("ru-RU"));
+
+                date = new Date(2009, 6 - 1, 1, 8, 42, 50);
+                r = Bridge.Date.format(date, 'd');
+
+                Bridge.Test.Assert.areEqual$1("01.06.2009", r, "ru-RU culture");
+            }
+            finally {
+                System.Globalization.CultureInfo.setCurrentCulture(defaultCulture);
+            }
+        },
+        toShortTimeStringWorks: function () {
+            var date = new Date(2001, 5 - 1, 16, 3, 2, 15);
+            var r = Bridge.Date.format(date, 't');
+
+            Bridge.Test.Assert.areEqual$1("03:02", r, "Invariant culture");
+
+            var defaultCulture = System.Globalization.CultureInfo.getCurrentCulture();
+
+            try {
+                System.Globalization.CultureInfo.setCurrentCulture(System.Globalization.CultureInfo.getCultureInfo("ru-RU"));
+
+                r = Bridge.Date.format(date, 't');
+
+                Bridge.Test.Assert.areEqual$1("3:02", r, "ru-RU culture");
+            }
+            finally {
+                System.Globalization.CultureInfo.setCurrentCulture(defaultCulture);
+            }
         }
     });
 
@@ -27402,9 +27426,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var $t;
                 var a;
                 var i = 0;
-                var result = System.Array.init(5, function (){
-                    return new System.Char();
-                });
+                var result = System.Array.init(5, 0);
                 $t = Bridge.getEnumerator("danny");
                 while ($t.moveNext()) {
                     var c = $t.getCurrent();
@@ -29451,9 +29473,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 // Adjusted logic here. Will just reverse the value string.
 
                 var value = match.getValue();
-                var letters = System.Array.init(value.length, function (){
-                    return new System.Char();
-                });
+                var letters = System.Array.init(value.length, 0);
                 for (var i = 0; i < value.length; i = (i + 1) | 0) {
                     letters[i] = value.charCodeAt(((((value.length - i) | 0) - 1) | 0));
                 }

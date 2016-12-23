@@ -553,7 +553,7 @@ namespace Bridge.Translator
                     {
                         var enumMode = this.Emitter.Validator.EnumEmitMode(typeDef);
 
-                        if ((this.Emitter.Validator.IsIgnoreType(typeDef) && enumMode == -1) || enumMode == 2)
+                        if ((this.Emitter.Validator.IsExternalType(typeDef) && enumMode == -1) || enumMode == 2)
                         {
                             this.WriteScript(member.ConstantValue);
 

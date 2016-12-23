@@ -8,10 +8,10 @@ SomeExternalNamespace.SomeNonBridgeClass.prototype.foo = function(){return 1;};
 
 /**
  * Bridge Test library - test github issues up to #1999
- * @version 15.5.0
+ * @version 15.6.0
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2016 Object.NET, Inc.
- * @compiler Bridge.NET 15.5.0
+ * @compiler Bridge.NET 15.6.0
  */
 Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     "use strict";
@@ -2457,7 +2457,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1193", {
         statics: {
             testAssemblyVersionMarker: function () {
-                Bridge.Test.Assert.areEqual("1.2.3.4", Bridge.ClientTestHelper.Internal.N1193.getClientTestHelperAssemblyVersion());
+                Bridge.Test.Assert.areEqual("1.2.3.4", Bridge.ClientTestHelper.N1193.getClientTestHelperAssemblyVersion());
             }
         }
     });
@@ -7166,6 +7166,8 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
+
+
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7195,7 +7197,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    }); /// Async method lacks 'await' operators and will run synchronously
+                                    });
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -7273,6 +7275,50 @@ Bridge.$N1391Result =                 r;
         outMethod: function (i) {
             i.v = 7;
             return i.v;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1566", {
+        testMathLog10: function () {
+            this.assertAlmostEqual(0.477121254719662, Bridge.Math.logWithBase(3.0, 10.0));
+            this.assertAlmostEqual(Number.NEGATIVE_INFINITY, Bridge.Math.logWithBase(0.0, 10.0));
+            this.assertAlmostEqual(Number.NaN, Bridge.Math.logWithBase(-3.0, 10.0));
+            this.assertAlmostEqual(Number.NaN, Bridge.Math.logWithBase(Number.NaN, 10.0));
+            this.assertAlmostEqual(Number.POSITIVE_INFINITY, Bridge.Math.logWithBase(Number.POSITIVE_INFINITY, 10.0));
+            this.assertAlmostEqual(Number.NaN, Bridge.Math.logWithBase(Number.NEGATIVE_INFINITY, 10.0));
+        },
+        testMathLogWithBase: function () {
+            this.assertAlmostEqual(1.0, Bridge.Math.logWithBase(3.0, 3.0));
+            this.assertAlmostEqual(2.40217350273, Bridge.Math.logWithBase(14, 3.0));
+            this.assertAlmostEqual(Number.NEGATIVE_INFINITY, Bridge.Math.logWithBase(0.0, 3.0));
+            this.assertAlmostEqual(Number.NaN, Bridge.Math.logWithBase(-3.0, 3.0));
+            this.assertAlmostEqual(Number.NaN, Bridge.Math.logWithBase(Number.NaN, 3.0));
+            this.assertAlmostEqual(Number.POSITIVE_INFINITY, Bridge.Math.logWithBase(Number.POSITIVE_INFINITY, 3.0));
+            this.assertAlmostEqual(Number.NaN, Bridge.Math.logWithBase(Number.NEGATIVE_INFINITY, 3.0));
+        },
+        testMathLog: function () {
+            this.assertAlmostEqual(1.09861228866811, Bridge.Math.log(3.0));
+            this.assertAlmostEqual(Number.NEGATIVE_INFINITY, Bridge.Math.log(0.0));
+            this.assertAlmostEqual(Number.NaN, Bridge.Math.log(-3.0));
+            this.assertAlmostEqual(Number.NaN, Bridge.Math.log(Number.NaN));
+            this.assertAlmostEqual(Number.POSITIVE_INFINITY, Bridge.Math.log(Number.POSITIVE_INFINITY));
+            this.assertAlmostEqual(Number.NaN, Bridge.Math.log(Number.NEGATIVE_INFINITY));
+        },
+        assertAlmostEqual: function (expected, actual) {
+            var se = System.Double.format(expected, 'G');
+            var sa = System.Double.format(actual, 'G');
+
+            if (Bridge.referenceEquals(sa, se)) {
+                Bridge.Test.Assert.true$1(true, "Actual:" + System.Double.format(actual, 'G') + " vs Expected:" + System.Double.format(expected, 'G'));
+                return;
+            }
+
+            var diff = actual - expected;
+            if (diff < 0) {
+                diff = -diff;
+            }
+
+            Bridge.Test.Assert.true$1(diff < 1E-08, "Actual:" + System.Double.format(actual, 'G') + " vs Expected:" + System.Double.format(expected, 'G'));
         }
     });
 
@@ -10654,19 +10700,19 @@ Bridge.$N1391Result =                 r;
             var item = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1915.LocalItem();
 
             Bridge.ClientTest.Batch3.BridgeIssues.Bridge1915.LocalTest.test(item);
-            Bridge.Test.Assert.areEqual(1, item.Bridge$ClientTestHelper$Internal$IItem$getValue());
-            Bridge.ClientTestHelper.Internal.ClassLibraryTest.test(item);
-            Bridge.Test.Assert.areEqual(2, item.Bridge$ClientTestHelper$Internal$IItem$getValue());
+            Bridge.Test.Assert.areEqual(1, item.Bridge$ClientTestHelper$IItem$getValue());
+            Bridge.ClientTestHelper.ClassLibraryTest.test(item);
+            Bridge.Test.Assert.areEqual(2, item.Bridge$ClientTestHelper$IItem$getValue());
         }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1915.LocalItem", {
-        inherits: [Bridge.ClientTestHelper.Internal.IWriteableItem],
+        inherits: [Bridge.ClientTestHelper.IWriteableItem],
         value: null,
         config: {
             alias: [
-            "getValue", "Bridge$ClientTestHelper$Internal$IItem$getValue",
-            "setValue", "Bridge$ClientTestHelper$Internal$IWriteableItem$setValue"
+            "getValue", "Bridge$ClientTestHelper$IItem$getValue",
+            "setValue", "Bridge$ClientTestHelper$IWriteableItem$setValue"
             ]
         },
         getValue: function () {
@@ -10681,7 +10727,7 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1915.LocalTest", {
         statics: {
             test: function (item) {
-                item.Bridge$ClientTestHelper$Internal$IWriteableItem$setValue(1);
+                item.Bridge$ClientTestHelper$IWriteableItem$setValue(1);
             }
         }
     });
@@ -12254,6 +12300,194 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers2$1.WrappedProps", function (TProps) { return {
         $literal: true
     }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2146", {
+        statics: {
+            config: {
+                properties: {
+                    TokenTerminator: 0
+                }
+            },
+            getDefault: function (T) {
+                return Bridge.getDefaultValue(T);
+            },
+            testCharDefaultValue: function () {
+                Bridge.Test.Assert.areEqual(0, Bridge.getDefaultValue(System.Char));
+                Bridge.Test.Assert.areEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2146.getDefault(System.Char));
+                Bridge.Test.Assert.areEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2146.getTokenTerminator());
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2147", {
+        statics: {
+            testLinqExcept: function () {
+                var $t, $t1, $t2, $t3, $t4;
+                var numbers1 = [2.0, 2.0, 2.1, 2.2, 2.3, 2.3, 2.4, 2.5];
+                var numbers2 = [2.2, 2.2];
+                var numbers = System.Linq.Enumerable.from(numbers1).except(numbers2).toArray();
+
+                Bridge.Test.Assert.areEqual(5, numbers.length);
+                Bridge.Test.Assert.false(System.Array.contains(numbers, 2.2, System.Double));
+                Bridge.Test.Assert.areEqual(2.0, numbers[0]);
+                Bridge.Test.Assert.areEqual(2.5, numbers[4]);
+
+                var numbers3 = [2.2];
+                var numbers4 = [2.2];
+                var count3 = 0;
+                $t = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers3).except(numbers4));
+                while ($t.moveNext()) {
+                    var item = $t.getCurrent();
+                    Bridge.Test.Assert.fail$1("numbers3.Except(numbers4) should be empty");
+                }
+                Bridge.Test.Assert.areEqual$1(0, count3, "numbers3.Except(numbers4) should be empty");
+
+                var numbers5 = [2.0];
+                var numbers6 = [2.2];
+                var count5 = 0;
+                $t1 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers5).except(numbers6));
+                while ($t1.moveNext()) {
+                    var item1 = $t1.getCurrent();
+                    Bridge.Test.Assert.areEqual(2.0, item1);
+                    count5 = (count5 + 1) | 0;
+                }
+                Bridge.Test.Assert.areEqual(1, count5);
+
+                var numbers7 = [];
+                var numbers8 = [2.0];
+                var count7 = 0;
+                $t2 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers7).except(numbers8));
+                while ($t2.moveNext()) {
+                    var item2 = $t2.getCurrent();
+                    Bridge.Test.Assert.fail$1("numbers7.Except(numbers8) should be empty");
+                    count7 = (count7 + 1) | 0;
+                }
+                Bridge.Test.Assert.areEqual$1(0, count7, "numbers7.Except(numbers8) should be empty");
+
+                var numbers9 = [7.0];
+                var numbers10 = [];
+                var count9 = 0;
+                $t3 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers9).except(numbers10));
+                while ($t3.moveNext()) {
+                    var item3 = $t3.getCurrent();
+                    Bridge.Test.Assert.areEqual(7.0, item3);
+                    count9 = (count9 + 1) | 0;
+                }
+                Bridge.Test.Assert.areEqual(1, count9);
+
+                var numbers11 = [];
+                var numbers12 = [];
+                var count11 = 0;
+                $t4 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers11).except(numbers12));
+                while ($t4.moveNext()) {
+                    var item4 = $t4.getCurrent();
+                    Bridge.Test.Assert.fail$1("numbers11.Except(numbers12) should be empty");
+                }
+                Bridge.Test.Assert.areEqual$1(0, count11, "numbers11.Except(numbers12) should be empty");
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2156", {
+        statics: {
+            testLinqIntersect: function () {
+                var $t, $t1, $t2, $t3, $t4;
+                var numbers1 = [2.0, 2.0, 2.1, 2.2, 2.3, 2.3, 2.4, 2.5];
+                var numbers2 = [2.2, 2.2, 2.4, 2.4, 2.7];
+                var numbers = System.Linq.Enumerable.from(numbers1).intersect(numbers2).toArray();
+
+                Bridge.Test.Assert.areEqual(2, numbers.length);
+                Bridge.Test.Assert.areEqual(2.2, numbers[0]);
+                Bridge.Test.Assert.areEqual(2.4, numbers[1]);
+
+                var numbers3 = [2.2];
+                var numbers4 = [2.4];
+                var count3 = 0;
+                $t = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers3).intersect(numbers4));
+                while ($t.moveNext()) {
+                    var item = $t.getCurrent();
+                    Bridge.Test.Assert.fail$1("numbers3.Intersect(numbers4) should be empty");
+                }
+                Bridge.Test.Assert.areEqual$1(0, count3, "numbers3.Intersect(numbers4) should be empty");
+
+                var numbers5 = [2.0];
+                var numbers6 = [2.0];
+                var count5 = 0;
+                $t1 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers5).intersect(numbers6));
+                while ($t1.moveNext()) {
+                    var item1 = $t1.getCurrent();
+                    Bridge.Test.Assert.areEqual(2.0, item1);
+                    count5 = (count5 + 1) | 0;
+                }
+                Bridge.Test.Assert.areEqual(1, count5);
+
+                var numbers7 = [];
+                var numbers8 = [2.0];
+                var count7 = 0;
+                $t2 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers7).intersect(numbers8));
+                while ($t2.moveNext()) {
+                    var item2 = $t2.getCurrent();
+                    Bridge.Test.Assert.fail$1("numbers7.Intersect(numbers8) should be empty");
+                    count7 = (count7 + 1) | 0;
+                }
+                Bridge.Test.Assert.areEqual$1(0, count7, "numbers7.Intersect(numbers8) should be empty");
+
+                var numbers9 = [7.0];
+                var numbers10 = [];
+                var count9 = 0;
+                $t3 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers9).intersect(numbers10));
+                while ($t3.moveNext()) {
+                    var item3 = $t3.getCurrent();
+                    Bridge.Test.Assert.fail$1("numbers9.Intersect(numbers10) should be empty");
+                    count9 = (count9 + 1) | 0;
+                }
+                Bridge.Test.Assert.areEqual(0, count9);
+
+                var numbers11 = [];
+                var numbers12 = [];
+                var count11 = 0;
+                $t4 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers11).intersect(numbers12));
+                while ($t4.moveNext()) {
+                    var item4 = $t4.getCurrent();
+                    Bridge.Test.Assert.fail$1("numbers11.Intersect(numbers12) should be empty");
+                }
+                Bridge.Test.Assert.areEqual$1(0, count11, "numbers11.Intersect(numbers12) should be empty");
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2157", {
+        statics: {
+            testMethod: function (TType) {
+                return Bridge.merge(new TType(), {
+                    setTestIntProperty: 2,
+                    setTestStringProperty: "initializer",
+                    setTestObjectProperty: String.fromCharCode.apply(null, [105])
+                } );
+            },
+            testCreatingGenericInstanceWithInitializer: function () {
+                Bridge.Test.Assert.areEqual(2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2157.testMethod(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2157.TestClass).getTestIntProperty());
+                Bridge.Test.Assert.areEqual("initializer", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2157.testMethod(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2157.TestClass).getTestStringProperty());
+                Bridge.Test.Assert.areEqual("i", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2157.testMethod(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2157.TestClass).getTestObjectProperty());
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2157.TestClass", {
+        config: {
+            properties: {
+                TestIntProperty: 0,
+                TestStringProperty: null,
+                TestObjectProperty: null
+            }
+        },
+        ctor: function () {
+            this.$initialize();
+            this.setTestIntProperty(1);
+            this.setTestStringProperty("constructor");
+            this.setTestObjectProperty(String.fromCharCode.apply(null, [99]));
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2159", {
         statics: {

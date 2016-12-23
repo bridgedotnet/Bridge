@@ -395,7 +395,7 @@ namespace Bridge.Contract
             if (type.Kind == TypeKind.Struct)
             {
                 var typeDef = block.Emitter.GetTypeDefinition(type);
-                if (block.Emitter.Validator.IsIgnoreType(typeDef) || block.Emitter.Validator.IsImmutableType(typeDef))
+                if (block.Emitter.Validator.IsExternalType(typeDef) || block.Emitter.Validator.IsImmutableType(typeDef))
                 {
                     return;
                 }
@@ -496,7 +496,8 @@ namespace Bridge.Contract
             bool isAuto = propertyMember.Attributes.Any(a => a.AttributeType.FullName == "Bridge.FieldPropertyAttribute");
             if (!isAuto && assemblyInfo.AutoPropertyToField && propertyMember is IProperty)
             {
-                var isIgnore = propertyMember.DeclaringTypeDefinition.Attributes.Any(a => a.AttributeType.FullName == "Bridge.ExternalAttribute");
+                var isIgnore = propertyMember.DeclaringTypeDefinition.Attributes.Any(a => a.AttributeType.FullName == "Bridge.ExternalAttribute") ||
+                               propertyMember.DeclaringTypeDefinition.ParentAssembly.AssemblyAttributes.Any(a => a.AttributeType.FullName == "Bridge.ExternalAttribute");
                 if (isIgnore)
                 {
                     return false;
@@ -521,7 +522,7 @@ namespace Bridge.Contract
             if (!isAuto && emitter.AssemblyInfo.AutoPropertyToField)
             {
                 var typeDef = emitter.GetTypeDefinition(propertyMember.DeclaringType);
-                if (emitter.Validator.IsIgnoreType(typeDef))
+                if (emitter.Validator.IsExternalType(typeDef))
                 {
                     return false;
                 }
@@ -547,7 +548,7 @@ namespace Bridge.Contract
             if (!isAuto && emitter.AssemblyInfo.AutoPropertyToField)
             {
                 var typeDef = property.DeclaringType;
-                if (emitter.Validator.IsIgnoreType(typeDef))
+                if (emitter.Validator.IsExternalType(typeDef))
                 {
                     return false;
                 }
@@ -788,7 +789,7 @@ namespace Bridge.Contract
         {
             var enumMode = emitter.Validator.EnumEmitMode(type);
 
-            if ((emitter.Validator.IsIgnoreType(type.GetDefinition()) && enumMode == -1) || enumMode == 2)
+            if ((emitter.Validator.IsExternalType(type.GetDefinition()) && enumMode == -1) || enumMode == 2)
             {
                 return constantValue;
             }

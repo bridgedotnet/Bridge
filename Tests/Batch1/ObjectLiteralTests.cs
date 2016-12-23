@@ -133,7 +133,7 @@ namespace Bridge.ClientTest
                 var tempFrank = new Config { }.GetTmp(c);
                 Assert.AreEqual("1: Frank", tempFrank, "Check call works");
 
-                var options = new Bridge.ClientTestHelper.External.AjaxOptions { Data = new { Name = c.Temp } };
+                var options = new Bridge.ClientTestHelperExternal.AjaxOptions { Data = new { Name = c.Temp } };
                 Assert.AreEqual("Frank", options.Data["name"], "External referenced default ObjectLiteral works");
 
                 var bs = new BS();

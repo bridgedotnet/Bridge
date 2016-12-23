@@ -422,7 +422,7 @@ namespace Bridge.Translator
 
                         if (paramsArg == null && (parameters.Count > (i + shift)) && parameters[i + shift].IsParams)
                         {
-                            if (resolveResult.Member.DeclaringTypeDefinition == null || !this.Emitter.Validator.IsIgnoreType(resolveResult.Member.DeclaringTypeDefinition))
+                            if (resolveResult.Member.DeclaringTypeDefinition == null || !this.Emitter.Validator.IsExternalType(resolveResult.Member.DeclaringTypeDefinition))
                             {
                                 paramsArg = namedArg.Expression;
                             }
@@ -434,7 +434,7 @@ namespace Bridge.Translator
                     {
                         if (paramsArg == null && (parameters.Count > (i + shift)) && parameters[i + shift].IsParams)
                         {
-                            if (resolveResult.Member.DeclaringTypeDefinition == null || !this.Emitter.Validator.IsIgnoreType(resolveResult.Member.DeclaringTypeDefinition))
+                            if (resolveResult.Member.DeclaringTypeDefinition == null || !this.Emitter.Validator.IsExternalType(resolveResult.Member.DeclaringTypeDefinition))
                             {
                                 paramsArg = arg;
                             }

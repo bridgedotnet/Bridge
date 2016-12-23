@@ -94,7 +94,7 @@ namespace Bridge.Translator
             if (memberResolveResult != null)
             {
                 var resolvedMember = memberResolveResult.Member;
-                isIgnore = this.Emitter.Validator.IsIgnoreType(resolvedMember.DeclaringTypeDefinition);
+                isIgnore = this.Emitter.Validator.IsExternalType(resolvedMember.DeclaringTypeDefinition);
                 isAccessorsIndexer = this.Emitter.Validator.IsAccessorsIndexer(resolvedMember);
 
                 var property = resolvedMember as IProperty;
@@ -202,7 +202,7 @@ namespace Bridge.Translator
 
             var inlineAttr = emitter.GetAttribute(method.Attributes, Translator.Bridge_ASSEMBLY + ".TemplateAttribute");
 
-            var ignoreAccessor = emitter.Validator.IsIgnoreType(method);
+            var ignoreAccessor = emitter.Validator.IsExternalType(method);
 
             if (inlineAttr != null)
             {

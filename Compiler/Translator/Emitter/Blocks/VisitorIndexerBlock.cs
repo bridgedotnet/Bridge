@@ -28,7 +28,7 @@ namespace Bridge.Translator
             {
                 prop = rr.Member as IProperty;
 
-                if (prop != null && this.Emitter.Validator.IsIgnoreType(prop))
+                if (prop != null && this.Emitter.Validator.IsExternalType(prop))
                 {
                     return;
                 }
@@ -40,7 +40,7 @@ namespace Bridge.Translator
 
         protected virtual void EmitIndexerMethod(IndexerDeclaration indexerDeclaration, IProperty prop, Accessor accessor, IMethod propAccessor, bool setter)
         {
-            var isIgnore = propAccessor != null && this.Emitter.Validator.IsIgnoreType(propAccessor);
+            var isIgnore = propAccessor != null && this.Emitter.Validator.IsExternalType(propAccessor);
 
             if (!accessor.IsNull && this.Emitter.GetInline(accessor) == null && !isIgnore)
             {
