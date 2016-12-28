@@ -125,6 +125,9 @@ namespace System.Reflection
         [Template("System.Attribute.getCustomAttributes({this}, {attributeType})")]
         public extern object[] GetCustomAttributes(Type attributeType);
 
+        [Template("Bridge.Reflection.getGenericArguments({this})")]
+        public extern Type[] GetGenericArguments();
+
         internal extern MemberInfo();
     }
 }
