@@ -1336,6 +1336,20 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
             QUnit.test("Reflection - TypeSystem AccessingAStaticMemberInAGenericClassWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests.accessingAStaticMemberInAGenericClassWorks);
             QUnit.test("Reflection - TypeSystem TypeOfNestedGenericClassWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests.typeOfNestedGenericClassWorks);
             QUnit.test("Reflection - TypeSystem BaseTypeAndImplementedInterfacesForGenericTypeWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests.baseTypeAndImplementedInterfacesForGenericTypeWorks);
+            QUnit.test("Reflection - TypeSystem IsAbstractWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests.isAbstractWorks);
+            QUnit.test("Reflection - TypeSystem IsGenericTypeWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests.isGenericTypeWorks);
+            QUnit.test("Reflection - TypeSystem IsNestedWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests.isNestedWorks);
+            QUnit.test("Reflection - TypeSystem IsPublicWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests.isPublicWorks);
+            QUnit.test("Reflection - TypeSystem IsNotPublicWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests.isNotPublicWorks);
+            QUnit.test("Reflection - TypeSystem IsSealedWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests.isSealedWorks);
+            QUnit.test("Reflection - TypeSystem AttributesWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests.attributesWorks);
+            QUnit.test("Reflection - TypeSystem ContainsGenericParametersWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests.containsGenericParametersWorks);
+            QUnit.test("Reflection - TypeSystem DeclaringTypeWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests.declaringTypeWorks);
+            QUnit.test("Reflection - TypeSystem IsGenericParameterWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests.isGenericParameterWorks);
+            QUnit.test("Reflection - TypeSystem GetEnumNamesWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests.getEnumNamesWorks);
+            QUnit.test("Reflection - TypeSystem GetEnumNameWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests.getEnumNameWorks);
+            QUnit.test("Reflection - TypeSystem GetEnumValuesWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests.getEnumValuesWorks);
+            QUnit.test("Reflection - TypeSystem GetEnumUnderlyingTypeWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests.getEnumUnderlyingTypeWorks);
             QUnit.test("Reflection - TypeSystem IsGenericTypeDefinitionWorksAsExpected", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests.isGenericTypeDefinitionWorksAsExpected);
             QUnit.test("Reflection - TypeSystem GenericParameterCountReturnsZeroForConstructedTypesAndNonZeroForOpenOnes", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests.genericParameterCountReturnsZeroForConstructedTypesAndNonZeroForOpenOnes);
             QUnit.test("Reflection - TypeSystem GetGenericArgumentsReturnsTheCorrectTypesForConstructedTypesOtherwiseNull", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests.getGenericArgumentsReturnsTheCorrectTypesForConstructedTypesOtherwiseNull);
@@ -15697,364 +15711,462 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
             fullNamePropertyReturnsTheNameWithTheNamespace: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "FullNamePropertyReturnsTheNameWithTheNamespace()",
-                    line: "110"
+                    line: "224"
                 } ));
                 t.getFixture().fullNamePropertyReturnsTheNameWithTheNamespace();
             },
             assemblyQualifiedNameReturnsTheNameWithTheNamespaceAndAssemblyName: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "AssemblyQualifiedNameReturnsTheNameWithTheNamespaceAndAssemblyName()",
-                    line: "116"
+                    line: "230"
                 } ));
                 t.getFixture().assemblyQualifiedNameReturnsTheNameWithTheNamespaceAndAssemblyName();
             },
             assemblyPropertyWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "AssemblyPropertyWorks()",
-                    line: "124"
+                    line: "238"
                 } ));
                 t.getFixture().assemblyPropertyWorks();
             },
             namespacePropertyReturnsTheNamespaceWithoutTheName: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "NamespacePropertyReturnsTheNamespaceWithoutTheName()",
-                    line: "136"
+                    line: "250"
                 } ));
                 t.getFixture().namespacePropertyReturnsTheNamespaceWithoutTheName();
             },
             instantiatingClassWithConstructorThatNeedsToBeAppliedWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "InstantiatingClassWithConstructorThatNeedsToBeAppliedWorks()",
-                    line: "143"
+                    line: "257"
                 } ));
                 t.getFixture().instantiatingClassWithConstructorThatNeedsToBeAppliedWorks();
             },
             namePropertyRemovesTheNamespace: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "NamePropertyRemovesTheNamespace()",
-                    line: "153"
+                    line: "267"
                 } ));
                 t.getFixture().namePropertyRemovesTheNamespace();
             },
             gettingBaseTypeWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GettingBaseTypeWorks()",
-                    line: "161"
+                    line: "275"
                 } ));
                 t.getFixture().gettingBaseTypeWorks();
             },
             gettingImplementedInterfacesWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GettingImplementedInterfacesWorks()",
-                    line: "169"
+                    line: "283"
                 } ));
                 t.getFixture().gettingImplementedInterfacesWorks();
             },
             typeOfAnOpenGenericClassWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "TypeOfAnOpenGenericClassWorks()",
-                    line: "180"
+                    line: "294"
                 } ));
                 t.getFixture().typeOfAnOpenGenericClassWorks();
             },
             typeOfAnOpenGenericInterfaceWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "TypeOfAnOpenGenericInterfaceWorks()",
-                    line: "186"
+                    line: "300"
                 } ));
                 t.getFixture().typeOfAnOpenGenericInterfaceWorks();
             },
             typeOfInstantiatedGenericClassWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "TypeOfInstantiatedGenericClassWorks()",
-                    line: "192"
+                    line: "306"
                 } ));
                 t.getFixture().typeOfInstantiatedGenericClassWorks();
             },
             typeOfInstantiatedGenericInterfaceWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "TypeOfInstantiatedGenericInterfaceWorks()",
-                    line: "198"
+                    line: "312"
                 } ));
                 t.getFixture().typeOfInstantiatedGenericInterfaceWorks();
             },
             constructingAGenericTypeTwiceWithTheSameArgumentsReturnsTheSameInstance: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ConstructingAGenericTypeTwiceWithTheSameArgumentsReturnsTheSameInstance()",
-                    line: "204"
+                    line: "318"
                 } ));
                 t.getFixture().constructingAGenericTypeTwiceWithTheSameArgumentsReturnsTheSameInstance();
             },
             accessingAStaticMemberInAGenericClassWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "AccessingAStaticMemberInAGenericClassWorks()",
-                    line: "214"
+                    line: "328"
                 } ));
                 t.getFixture().accessingAStaticMemberInAGenericClassWorks();
             },
             typeOfNestedGenericClassWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "TypeOfNestedGenericClassWorks()",
-                    line: "222"
+                    line: "336"
                 } ));
                 t.getFixture().typeOfNestedGenericClassWorks();
             },
             baseTypeAndImplementedInterfacesForGenericTypeWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "BaseTypeAndImplementedInterfacesForGenericTypeWorks()",
-                    line: "228"
+                    line: "342"
                 } ));
                 t.getFixture().baseTypeAndImplementedInterfacesForGenericTypeWorks();
+            },
+            isAbstractWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "IsAbstractWorks()",
+                    line: "349"
+                } ));
+                t.getFixture().isAbstractWorks();
+            },
+            isGenericTypeWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "IsGenericTypeWorks()",
+                    line: "362"
+                } ));
+                t.getFixture().isGenericTypeWorks();
+            },
+            isNestedWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "IsNestedWorks()",
+                    line: "374"
+                } ));
+                Bridge.ClientTest.Reflection.TypeSystemTests.isNestedWorks();
+            },
+            isPublicWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "IsPublicWorks()",
+                    line: "383"
+                } ));
+                t.getFixture().isPublicWorks();
+            },
+            isNotPublicWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "IsNotPublicWorks()",
+                    line: "399"
+                } ));
+                t.getFixture().isNotPublicWorks();
+            },
+            isSealedWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "IsSealedWorks()",
+                    line: "416"
+                } ));
+                t.getFixture().isSealedWorks();
+            },
+            attributesWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "AttributesWorks()",
+                    line: "428"
+                } ));
+                t.getFixture().attributesWorks();
+            },
+            containsGenericParametersWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "ContainsGenericParametersWorks()",
+                    line: "443"
+                } ));
+                Bridge.ClientTest.Reflection.TypeSystemTests.containsGenericParametersWorks();
+            },
+            declaringTypeWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "DeclaringTypeWorks()",
+                    line: "461"
+                } ));
+                Bridge.ClientTest.Reflection.TypeSystemTests.declaringTypeWorks();
+            },
+            isGenericParameterWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, 58, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "IsGenericParameterWorks()",
+                    line: "489"
+                } ));
+                Bridge.ClientTest.Reflection.TypeSystemTests.isGenericParameterWorks();
+            },
+            getEnumNamesWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "GetEnumNamesWorks()",
+                    line: "534"
+                } ));
+                t.getFixture().getEnumNamesWorks();
+            },
+            getEnumNameWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "GetEnumNameWorks()",
+                    line: "546"
+                } ));
+                t.getFixture().getEnumNameWorks();
+            },
+            getEnumValuesWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "GetEnumValuesWorks()",
+                    line: "580"
+                } ));
+                t.getFixture().getEnumValuesWorks();
+            },
+            getEnumUnderlyingTypeWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "GetEnumUnderlyingTypeWorks()",
+                    line: "592"
+                } ));
+                t.getFixture().getEnumUnderlyingTypeWorks();
             },
             isGenericTypeDefinitionWorksAsExpected: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IsGenericTypeDefinitionWorksAsExpected()",
-                    line: "235"
+                    line: "605"
                 } ));
                 t.getFixture().isGenericTypeDefinitionWorksAsExpected();
             },
             genericParameterCountReturnsZeroForConstructedTypesAndNonZeroForOpenOnes: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GenericParameterCountReturnsZeroForConstructedTypesAndNonZeroForOpenOnes()",
-                    line: "247"
+                    line: "617"
                 } ));
                 t.getFixture().genericParameterCountReturnsZeroForConstructedTypesAndNonZeroForOpenOnes();
             },
             getGenericArgumentsReturnsTheCorrectTypesForConstructedTypesOtherwiseNull: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GetGenericArgumentsReturnsTheCorrectTypesForConstructedTypesOtherwiseNull()",
-                    line: "259"
+                    line: "629"
                 } ));
                 t.getFixture().getGenericArgumentsReturnsTheCorrectTypesForConstructedTypesOtherwiseNull();
             },
             getGenericTypeDefinitionReturnsTheGenericTypeDefinitionForConstructedTypeOtherwiseNull: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GetGenericTypeDefinitionReturnsTheGenericTypeDefinitionForConstructedTypeOtherwiseNull()",
-                    line: "271"
+                    line: "641"
                 } ));
                 t.getFixture().getGenericTypeDefinitionReturnsTheGenericTypeDefinitionForConstructedTypeOtherwiseNull();
             },
             isAssignableFromWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IsAssignableFromWorks()",
-                    line: "360"
+                    line: "730"
                 } ));
                 t.getFixture().isAssignableFromWorks();
             },
             isSubclassOfWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IsSubclassOfWorks()",
-                    line: "568"
+                    line: "938"
                 } ));
                 t.getFixture().isSubclassOfWorks();
             },
             isClassWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IsClassWorks()",
-                    line: "585"
+                    line: "955"
                 } ));
                 t.getFixture().isClassWorks();
             },
             isEnumWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IsEnumWorks()",
-                    line: "598"
+                    line: "968"
                 } ));
                 t.getFixture().isEnumWorks();
             },
             isArrayWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IsArrayWorks()",
-                    line: "611"
+                    line: "981"
                 } ));
                 t.getFixture().isArrayWorks();
             },
             isFlagsWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IsFlagsWorks()",
-                    line: "623"
+                    line: "993"
                 } ));
                 t.getFixture().isFlagsWorks();
             },
             isInterfaceWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IsInterfaceWorks()",
-                    line: "636"
+                    line: "1006"
                 } ));
                 t.getFixture().isInterfaceWorks();
             },
             isInstanceOfTypeWorksForReferenceTypes: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IsInstanceOfTypeWorksForReferenceTypes()",
-                    line: "649"
+                    line: "1019"
                 } ));
                 t.getFixture().isInstanceOfTypeWorksForReferenceTypes();
             },
             invokingBaseUnnamedConstructorWithoutArgumentsWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "InvokingBaseUnnamedConstructorWithoutArgumentsWorks()",
-                    line: "841"
+                    line: "1211"
                 } ));
                 t.getFixture().invokingBaseUnnamedConstructorWithoutArgumentsWorks();
             },
             invokingBaseUnnamedConstructorWithArgumentsWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "InvokingBaseUnnamedConstructorWithArgumentsWorks()",
-                    line: "871"
+                    line: "1241"
                 } ));
                 t.getFixture().invokingBaseUnnamedConstructorWithArgumentsWorks();
             },
             invokingBaseNamedConstructorWithoutArgumentsWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "InvokingBaseNamedConstructorWithoutArgumentsWorks()",
-                    line: "901"
+                    line: "1271"
                 } ));
                 t.getFixture().invokingBaseNamedConstructorWithoutArgumentsWorks();
             },
             invokingBaseNamedConstructorWithArgumentsWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "InvokingBaseNamedConstructorWithArgumentsWorks()",
-                    line: "931"
+                    line: "1301"
                 } ));
                 t.getFixture().invokingBaseNamedConstructorWithArgumentsWorks();
             },
             constructingInstanceWithNamedConstructorWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ConstructingInstanceWithNamedConstructorWorks()",
-                    line: "971"
+                    line: "1341"
                 } ));
                 t.getFixture().constructingInstanceWithNamedConstructorWorks();
             },
             constructingInstanceWithNamedConstructorWorks2: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ConstructingInstanceWithNamedConstructorWorks2()",
-                    line: "980"
+                    line: "1350"
                 } ));
                 t.getFixture().constructingInstanceWithNamedConstructorWorks2();
             },
             invokingBaseMethodWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "InvokingBaseMethodWorks()",
-                    line: "1031"
+                    line: "1401"
                 } ));
                 t.getFixture().invokingBaseMethodWorks();
             },
             invokingGenericBaseMethodWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "InvokingGenericBaseMethodWorks()",
-                    line: "1037"
+                    line: "1407"
                 } ));
                 t.getFixture().invokingGenericBaseMethodWorks();
             },
             methodGroupConversionWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "MethodGroupConversionWorks()",
-                    line: "1123"
+                    line: "1493"
                 } ));
                 t.getFixture().methodGroupConversionWorks();
             },
             methodGroupConversionOnGenericMethodWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "MethodGroupConversionOnGenericMethodWorks()",
-                    line: "1130"
+                    line: "1500"
                 } ));
                 t.getFixture().methodGroupConversionOnGenericMethodWorks();
             },
             methodGroupConversionOnBaseMethodWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "MethodGroupConversionOnBaseMethodWorks()",
-                    line: "1137"
+                    line: "1507"
                 } ));
                 t.getFixture().methodGroupConversionOnBaseMethodWorks();
             },
             methodGroupConversionOnGenericBaseMethodWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "MethodGroupConversionOnGenericBaseMethodWorks()",
-                    line: "1144"
+                    line: "1514"
                 } ));
                 t.getFixture().methodGroupConversionOnGenericBaseMethodWorks();
             },
             importedInterfaceAppearsAsObjectWhenUsedAsGenericArgument: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ImportedInterfaceAppearsAsObjectWhenUsedAsGenericArgument()",
-                    line: "1151"
+                    line: "1521"
                 } ));
                 t.getFixture().importedInterfaceAppearsAsObjectWhenUsedAsGenericArgument();
             },
             falseIsFunctionShouldReturnFalse: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "FalseIsFunctionShouldReturnFalse()",
-                    line: "1157"
+                    line: "1527"
                 } ));
                 t.getFixture().falseIsFunctionShouldReturnFalse();
             },
             castingUndefinedToOtherTypeShouldReturnUndefined: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "CastingUndefinedToOtherTypeShouldReturnUndefined()",
-                    line: "1163"
+                    line: "1533"
                 } ));
                 t.getFixture().castingUndefinedToOtherTypeShouldReturnUndefined();
             },
             nonSerializableTypeCanInheritFromSerializableType: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "NonSerializableTypeCanInheritFromSerializableType()",
-                    line: "1169"
+                    line: "1539"
                 } ));
                 t.getFixture().nonSerializableTypeCanInheritFromSerializableType();
             },
             inheritingFromRecordWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "InheritingFromRecordWorks()",
-                    line: "1177"
+                    line: "1547"
                 } ));
                 t.getFixture().inheritingFromRecordWorks();
             },
             instanceOfWorksForSerializableTypesWithCustomTypeCheckCode: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "InstanceOfWorksForSerializableTypesWithCustomTypeCheckCode()",
-                    line: "1184"
+                    line: "1554"
                 } ));
                 t.getFixture().instanceOfWorksForSerializableTypesWithCustomTypeCheckCode();
             },
             staticGetTypeMethodWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "StaticGetTypeMethodWorks()",
-                    line: "1193"
+                    line: "1563"
                 } ));
                 t.getFixture().staticGetTypeMethodWorks();
             },
             staticGetTypeMethodWithGenericsWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "StaticGetTypeMethodWithGenericsWorks()",
-                    line: "1203"
+                    line: "1573"
                 } ));
                 t.getFixture().staticGetTypeMethodWithGenericsWorks();
             },
             castingToNamedValuesEnumCastsToString: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "CastingToNamedValuesEnumCastsToString()",
-                    line: "1252"
+                    line: "1622"
                 } ));
                 t.getFixture().castingToNamedValuesEnumCastsToString();
             },
             castingToImportedNamedValuesEnumCastsToString: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "CastingToImportedNamedValuesEnumCastsToString()",
-                    line: "1272"
+                    line: "1642"
                 } ));
                 t.getFixture().castingToImportedNamedValuesEnumCastsToString();
             },
             defaultValueOfNamedValuesEnumIsNull: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "DefaultValueOfNamedValuesEnumIsNull()",
-                    line: "1288"
+                    line: "1658"
                 } ));
                 t.getFixture().defaultValueOfNamedValuesEnumIsNull();
             },
             defaultValueOfImportedNamedValuesEnumIsNull: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Reflection.TypeSystemTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Reflection_TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "DefaultValueOfImportedNamedValuesEnumIsNull()",
-                    line: "1295"
+                    line: "1665"
                 } ));
                 t.getFixture().defaultValueOfImportedNamedValuesEnumIsNull();
             }
