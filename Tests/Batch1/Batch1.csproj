@@ -276,7 +276,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Bridge.Test, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Bridge.Testing.1.0.0\lib\net40\Bridge.Test.dll</HintPath>
+      <HintPath>..\..\packages\Bridge.Test.Core.1.0.0-beta1\lib\net40\Bridge.Test.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
