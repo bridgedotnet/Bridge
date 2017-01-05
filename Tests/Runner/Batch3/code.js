@@ -12487,6 +12487,16 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2163", {
+        statics: {
+            testDecimalToFormat: function () {
+                var d1 = System.Decimal(1.0);
+                Bridge.Test.Assert.areEqual("1.00", d1.toFormat(2));
+                Bridge.Test.Assert.areEqual("1", d1.toFormat());
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
