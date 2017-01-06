@@ -41,7 +41,7 @@ echo f | xcopy /f /y "%root%Bridge\Compiler\Translator\bin\%build%\*.nupkg"     
 echo f | xcopy /f /y "%root%Aspect\Bridge.Aspect\bin\%build%\*.nupkg"               %output%
 
 :: Bridge.Test
-echo f | xcopy /f /y "%root%Test\Bridge.Test\bin\output\*.nupkg"                   	%output%
+echo f | xcopy /f /y "%root%Test\Bridge.Test\bin\%build%\*.nupkg"                   %output%
 
 ::------------------------------------------------------------------------------------------::
 :: Frameworks

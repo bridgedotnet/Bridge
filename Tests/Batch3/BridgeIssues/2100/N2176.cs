@@ -50,7 +50,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             };
             */
 
-            // Uses Object in Bridge.merge(Object(),...
             var c1 = new Config1() { Name = "Config1" };
             Assert.AreEqual("Config1", c1.Name);
             Assert.AreEqual(1, c1.Id);

@@ -267,14 +267,15 @@ namespace Bridge.Contract
             return names.Join(".");
         }
 
-        public static string GetGlobalTarget(ITypeDefinition typeDefinition, AstNode node)
+        public static string GetGlobalTarget(ITypeDefinition typeDefinition, AstNode node, bool removeGlobal = false)
         {
             string globalTarget = null;
             var globalMethods = typeDefinition.Attributes.FirstOrDefault(a => a.AttributeType.FullName == "Bridge.GlobalMethodsAttribute");
 
             if (globalMethods != null)
             {
-                globalTarget = "Bridge.global";
+                var value = globalMethods.PositionalArguments.Count > 0 && (bool)globalMethods.PositionalArguments.First().ConstantValue;
+                globalTarget = !removeGlobal || value ? "Bridge.global" : "";
             }
             else
             {
@@ -298,13 +299,13 @@ namespace Bridge.Contract
             return globalTarget;
         }
 
-        public static string ToJsName(IType type, IEmitter emitter, bool asDefinition = false, bool excludens = false, bool isAlias = false, bool skipMethodTypeParam = false)
+        public static string ToJsName(IType type, IEmitter emitter, bool asDefinition = false, bool excludens = false, bool isAlias = false, bool skipMethodTypeParam = false, bool removeScope = true)
         {
             var itypeDef = type.GetDefinition();
 
             if (itypeDef != null)
             {
-                string globalTarget = BridgeTypes.GetGlobalTarget(itypeDef, null);
+                string globalTarget = BridgeTypes.GetGlobalTarget(itypeDef, null, removeScope);
 
                 if (globalTarget != null)
                 {
