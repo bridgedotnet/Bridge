@@ -304,7 +304,7 @@ namespace Bridge.Translator
                 {
                     this.Indent();
                 }
-                
+
                 new ClassBlock(this.Emitter, this.Emitter.TypeInfo).Emit();
                 this.Emitter.Translator.Plugins.AfterTypeEmit(this.Emitter, type);
 
@@ -449,7 +449,7 @@ namespace Bridge.Translator
             this.Emitter.Translator.Plugins.AfterTypesEmit(this.Emitter, this.Emitter.Types);
         }
 
-        private IType[] GetReflectableTypes()
+        public IType[] GetReflectableTypes()
         {
             var config = this.Emitter.AssemblyInfo.Reflection;
             var configInternal = ((AssemblyInfo)this.Emitter.AssemblyInfo).ReflectionInternal;
@@ -527,7 +527,7 @@ namespace Bridge.Translator
                             {
                                 reflectTypes.Add(type);
                             }
-                            
+
                             continue;
                         }
 

@@ -19,31 +19,31 @@ namespace Bridge.Contract
             this.Key = key;
         }
 
-        public IEmitter Emitter
+        public virtual IEmitter Emitter
         {
             get;
             set;
         }
 
-        public string Key
+        public virtual string Key
         {
             get;
             private set;
         }
 
-        public TypeDefinition TypeDefinition
+        public virtual TypeDefinition TypeDefinition
         {
             get;
             set;
         }
 
-        public IType Type
+        public virtual IType Type
         {
             get;
             set;
         }
 
-        public ITypeInfo TypeInfo
+        public virtual ITypeInfo TypeInfo
         {
             get;
             set;
