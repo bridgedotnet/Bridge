@@ -12504,7 +12504,7 @@ Bridge.$N1391Result =                 r;
             testMerge: function () {
                 var o1 = new $asm.$AnonymousType$15(1);
 
-                var o2 = Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2167.c1(), {
+                var o2 = Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2167.Data(), {
                     setp1: System.Decimal(2.0),
                     setp2: System.Decimal(2.0)
                 } );
@@ -12546,7 +12546,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2167.c1", {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2167.Data", {
         config: {
             properties: {
                 p1: System.Decimal(0.0),
