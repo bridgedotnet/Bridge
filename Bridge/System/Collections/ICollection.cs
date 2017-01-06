@@ -13,7 +13,7 @@ namespace System.Collections
             [Template("System.Array.getCount({this})")]
             get;
         }
-        
+
         [Template("System.Array.copyTo({this}, {array}, {arrayIndex})")]
         void CopyTo(Array array, int arrayIndex);
     }

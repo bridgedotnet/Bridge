@@ -16,6 +16,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             object o = list;
 
             Assert.True(o is IList);
+            Assert.True(o is ICollection);
+            Assert.True(o is IEnumerable);
             Assert.True(o is IList<int>);
             Assert.AreEqual(3, list.Count);
             Assert.AreEqual(3, l.Count);
@@ -28,6 +30,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             o = arr;
 
             Assert.True(o is IList);
+            Assert.True(o is ICollection);
+            Assert.True(o is IEnumerable);
             Assert.True(o is IList<int>);
             Assert.AreEqual(3, arr.Length);
             Assert.AreEqual(3, l.Count);
@@ -41,6 +45,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             var dict = new Dictionary<int, int> { { 1, 2 }, { 2, 3 } };
             IDictionary d = dict;
             object o = dict;
+
+            Assert.True(o is ICollection);
+            Assert.True(o is IEnumerable);
             Assert.True(o is IDictionary);
             Assert.True(o is IDictionary<int, int>);
             Assert.AreEqual(2, dict.Count);

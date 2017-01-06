@@ -7166,6 +7166,8 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
+
+
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7195,7 +7197,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    }); /// Async method lacks 'await' operators and will run synchronously
+                                    });
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -11499,6 +11501,8 @@ Bridge.$N1391Result =                 r;
                 var o = list;
 
                 Bridge.Test.Assert.true(Bridge.is(o, System.Collections.IList));
+                Bridge.Test.Assert.true(Bridge.is(o, System.Collections.ICollection));
+                Bridge.Test.Assert.true(Bridge.is(o, System.Collections.IEnumerable));
                 Bridge.Test.Assert.true(Bridge.is(o, System.Collections.Generic.IList$1(System.Int32)));
                 Bridge.Test.Assert.areEqual(3, list.getCount());
                 Bridge.Test.Assert.areEqual(3, System.Array.getCount(l));
@@ -11511,6 +11515,8 @@ Bridge.$N1391Result =                 r;
                 o = arr;
 
                 Bridge.Test.Assert.true(Bridge.is(o, System.Collections.IList));
+                Bridge.Test.Assert.true(Bridge.is(o, System.Collections.ICollection));
+                Bridge.Test.Assert.true(Bridge.is(o, System.Collections.IEnumerable));
                 Bridge.Test.Assert.true(Bridge.is(o, System.Collections.Generic.IList$1(System.Int32)));
                 Bridge.Test.Assert.areEqual(3, arr.length);
                 Bridge.Test.Assert.areEqual(3, System.Array.getCount(l));
@@ -11521,6 +11527,9 @@ Bridge.$N1391Result =                 r;
                 var dict = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2050.f2(new (System.Collections.Generic.Dictionary$2(System.Int32,System.Int32))());
                 var d = dict;
                 var o = dict;
+
+                Bridge.Test.Assert.true(Bridge.is(o, System.Collections.ICollection));
+                Bridge.Test.Assert.true(Bridge.is(o, System.Collections.IEnumerable));
                 Bridge.Test.Assert.true(Bridge.is(o, System.Collections.IDictionary));
                 Bridge.Test.Assert.true(Bridge.is(o, System.Collections.Generic.IDictionary$2(System.Int32,System.Int32)));
                 Bridge.Test.Assert.areEqual(2, dict.getCount());

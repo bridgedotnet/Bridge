@@ -417,8 +417,8 @@
     <Compile Include="BridgeIssues\2000\N2042.cs" />
     <Compile Include="BridgeIssues\2000\N2045.cs" />
     <Compile Include="BridgeIssues\2000\N2046.cs" />
-    <Compile Include="BridgeIssues\2000\N2050.cs" />
     <Compile Include="BridgeIssues\2000\N2048.cs" />
+    <Compile Include="BridgeIssues\2000\N2050.cs" />
     <Compile Include="BridgeIssues\2000\N2067.cs" />
     <Compile Include="BridgeIssues\2000\N2068.cs" />
     <Compile Include="BridgeIssues\2000\N2073.cs" />

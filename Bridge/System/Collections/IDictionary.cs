@@ -4,7 +4,7 @@ using Bridge;
 namespace System.Collections
 {
     [External]
-    public interface IDictionary : ICollection, IBridgeClass
+    public interface IDictionary : ICollection, IEnumerable, IBridgeClass
     {
         [AccessorsIndexer]
         object this[object key]

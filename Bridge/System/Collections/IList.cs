@@ -3,7 +3,7 @@ using Bridge;
 namespace System.Collections
 {
     [External]
-    public interface IList : ICollection
+    public interface IList : ICollection, IEnumerable
     {
         [Template("System.Array.add({this}, {item})")]
         void Add(object item);
