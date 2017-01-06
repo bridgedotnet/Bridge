@@ -2,7 +2,7 @@
  * @version   : 15.6.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
  * @date      : 2016-12-12
- * @copyright : Copyright 2008-2016 Object.NET, Inc. http://object.net/
+ * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
 
@@ -7047,7 +7047,7 @@
     };
 
     System.Decimal.prototype.format = function (format, provider) {
-        return Bridge.Int.format(this.toFloat(), format, provider);
+        return Bridge.Int.format(this, format, provider);
     };
 
     System.Decimal.prototype.decimalPlaces = function () {
@@ -7378,30 +7378,81 @@
         return this.value.valueOf();
     };
 
+    System.Decimal.prototype._toFormat = function(dp, rm, f) {
+        var x = this.value;
+
+        if (!x.isFinite()) {
+            return x.toString();
+        }
+
+        var i,
+            isNeg = x.isNeg(),
+            groupSeparator = f.groupSeparator,
+            g1 = +f.groupSize,
+            g2 = +f.secondaryGroupSize,
+            arr = x.toFixed(dp, rm).split('.'),
+            intPart = arr[0],
+            fractionPart = arr[1],
+            intDigits = isNeg ? intPart.slice(1) : intPart,
+            len = intDigits.length;
+
+        if (g2) {
+            len -= (i = g1, g1 = g2, g2 = i);
+        }
+
+        if (g1 > 0 && len > 0) {
+            i = len % g1 || g1;
+            intPart = intDigits.substr(0, i);
+
+            for (; i < len; i += g1) {
+                intPart += groupSeparator + intDigits.substr(i, g1);
+            }
+
+            if (g2 > 0) {
+                intPart += groupSeparator + intDigits.slice(i);
+            }
+
+            if (isNeg) {
+                intPart = '-' + intPart;
+            }
+        }
+
+        return fractionPart
+            ? intPart + f.decimalSeparator + ((g2 = +f.fractionGroupSize)
+                ? fractionPart.replace(new RegExp('\\d{' + g2 + '}\\B', 'g'),
+                    '$&' + f.fractionGroupSeparator)
+                : fractionPart)
+            : intPart;
+    };
+
     System.Decimal.prototype.toFormat = function (dp, rm, provider) {
-        var old = Bridge.$Decimal.format,
+        var config = {
+                decimalSeparator : '.',
+                groupSeparator : ',',
+                groupSize : 3,
+                secondaryGroupSize : 0,
+                fractionGroupSeparator : '\xA0',
+                fractionGroupSize : 0
+            },
             d;
 
         if (provider && !provider.getFormat) {
-            var oldConfig = Bridge.merge({}, old || {});
-
-            Bridge.$Decimal.format = Bridge.merge(oldConfig, provider);
-            d = this.value.toFormat(dp, rm);
+            config = Bridge.merge(config, provider);
+            d = this._toFormat(dp, rm, config);
         } else {
             provider = provider || System.Globalization.CultureInfo.getCurrentCulture();
 
             var nfInfo = provider && provider.getFormat(System.Globalization.NumberFormatInfo);
 
             if (nfInfo) {
-                Bridge.$Decimal.format.decimalSeparator = nfInfo.numberDecimalSeparator;
-                Bridge.$Decimal.format.groupSeparator = nfInfo.numberGroupSeparator;
-                Bridge.$Decimal.format.groupSize = nfInfo.numberGroupSizes[0];
+                config.decimalSeparator = nfInfo.numberDecimalSeparator;
+                config.groupSeparator = nfInfo.numberGroupSeparator;
+                config.groupSize = nfInfo.numberGroupSizes[0];
             }
 
-            d = this.value.toFormat(dp, rm);
+            d = this._toFormat(dp, rm, config);
         }
 
-        Bridge.$Decimal.format = old;
         return d;
     };
 
