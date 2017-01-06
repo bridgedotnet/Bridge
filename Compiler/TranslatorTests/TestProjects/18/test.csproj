@@ -42,6 +42,7 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Issues\Issue2140.cs" />
     <Compile Include="Issues\Issue2141.cs" />
     <Compile Include="Issues\Issue1050.cs" />
     <Compile Include="Issues\Issue1230.cs" />
