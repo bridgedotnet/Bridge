@@ -82,9 +82,12 @@ namespace Bridge.Translator
                 this.MemberReferenceExpression.Target.AcceptVisitor(this.Emitter);
                 return;
             }
-
-            this.Write(BridgeTypes.ToJsName(member.Member.DeclaringType, this.Emitter));
+            var target = BridgeTypes.ToJsName(member.Member.DeclaringType, this.Emitter);
+            this.NoTarget = string.IsNullOrWhiteSpace(target);
+            this.Write(target);
         }
+
+        public bool NoTarget { get; set; }
 
         private void WriteInterfaceMember(string interfaceTempVar, MemberResolveResult resolveResult, bool isSetter, string prefix = null)
         {
@@ -824,7 +827,7 @@ namespace Bridge.Translator
                     {
                         this.WriteComma();
                     }
-                    else if (!isInterfaceMember)
+                    else if (!isInterfaceMember && !this.NoTarget)
                     {
                         this.WriteDot();
                     }

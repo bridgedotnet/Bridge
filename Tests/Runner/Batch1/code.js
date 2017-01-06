@@ -19315,8 +19315,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.MixinTests", {
         testGlobalMethods: function () {
-            Bridge.Test.Assert.true(Bridge.global.isNaN("a"));
-            Bridge.Test.Assert.false(Bridge.global.isNaN(3));
+            Bridge.Test.Assert.true(isNaN("a"));
+            Bridge.Test.Assert.false(isNaN(3));
         },
         testMixin: function () {
             Bridge.Test.Assert.areEqual(3, System.Byte.parse("3"));
