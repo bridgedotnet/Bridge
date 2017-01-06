@@ -4569,84 +4569,84 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
             typePropertiesAreCorrect: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.IDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IDictionaryTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "TypePropertiesAreCorrect()",
-                    line: "80"
+                    line: "104"
                 } ));
                 t.getFixture().typePropertiesAreCorrect();
             },
             classImplementsInterfaces: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.IDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IDictionaryTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ClassImplementsInterfaces()",
-                    line: "86"
+                    line: "110"
                 } ));
                 t.getFixture().classImplementsInterfaces();
             },
             countWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.IDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IDictionaryTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "CountWorks()",
-                    line: "92"
+                    line: "116"
                 } ));
                 t.getFixture().countWorks();
             },
             keysWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.IDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IDictionaryTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "KeysWorks()",
-                    line: "105"
+                    line: "129"
                 } ));
                 t.getFixture().keysWorks();
             },
             getItemWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.IDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IDictionaryTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GetItemWorks()",
-                    line: "123"
+                    line: "147"
                 } ));
                 t.getFixture().getItemWorks();
             },
             valuesWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.IDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IDictionaryTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ValuesWorks()",
-                    line: "152"
+                    line: "176"
                 } ));
                 t.getFixture().valuesWorks();
             },
             containsKeyWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.IDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IDictionaryTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ContainsKeyWorks()",
-                    line: "170"
+                    line: "194"
                 } ));
                 t.getFixture().containsKeyWorks();
             },
             tryGetValueWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.IDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IDictionaryTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "TryGetValueWorks()",
-                    line: "183"
+                    line: "207"
                 } ));
                 t.getFixture().tryGetValueWorks();
             },
             addWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.IDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IDictionaryTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "AddWorks()",
-                    line: "206"
+                    line: "230"
                 } ));
                 t.getFixture().addWorks();
             },
             clearWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.IDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IDictionaryTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ClearWorks()",
-                    line: "234"
+                    line: "258"
                 } ));
                 t.getFixture().clearWorks();
             },
             removeWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.IDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IDictionaryTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "RemoveWorks()",
-                    line: "244"
+                    line: "268"
                 } ));
                 t.getFixture().removeWorks();
             },
             setItemWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Collections.Generic.IDictionaryTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Collections_Generic_IDictionaryTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "SetItemWorks()",
-                    line: "261"
+                    line: "285"
                 } ));
                 t.getFixture().setItemWorks();
             }

@@ -14,13 +14,7 @@ namespace System.Collections
             get;
         }
 
-        /// <summary>
-        /// Gets a value indicating whether the ICollection is read-only.
-        /// </summary>
-        bool IsReadOnly
-        {
-            [Template("System.Array.getIsReadOnly({this})")]
-            get;
-        }
+        [Template("System.Array.copyTo({this}, {array}, {arrayIndex})")]
+        void CopyTo(Array array, int arrayIndex);
     }
 }

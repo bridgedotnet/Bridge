@@ -363,6 +363,8 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
             QUnit.test("#2045 - TestDoubleEscapingInterpolation", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2045.testDoubleEscapingInterpolation);
             QUnit.test("#2046 - TestSafeNavigationOperator", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2046.testSafeNavigationOperator);
             QUnit.test("#2048 - TestUnaryOperatorBlockCompilationError", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2048.testUnaryOperatorBlockCompilationError);
+            QUnit.test("#2050 - TestIList", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2050.testIList);
+            QUnit.test("#2050 - TestIDictionary", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2050.testIDictionary);
             QUnit.test("#2067 - TestGetGenericTypeDefinition", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2067.testGetGenericTypeDefinition);
             QUnit.test("#2068 - TestGetGenericTypeDefinition", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2068.testGetGenericTypeDefinition);
             QUnit.test("#2073 - TestUserDefinedWithStringConcat", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2073.testUserDefinedWithStringConcat);
@@ -388,6 +390,11 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
             QUnit.test("#2147 - TestLinqExcept", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2147.testLinqExcept);
             QUnit.test("#2156 - TestLinqIntersect", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2156.testLinqIntersect);
             QUnit.test("#2157 - TestCreatingGenericInstanceWithInitializer", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2157.testCreatingGenericInstanceWithInitializer);
+            QUnit.test("#2163 - TestDecimalToFormat", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2163.testDecimalToFormat);
+            QUnit.test("#2167 - TestMerge", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2167.testMerge);
+            QUnit.test("#2174 - TestGenericComparerDefault", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2174.testGenericComparerDefault);
+            QUnit.test("#2176 - TestExternalObjectLiteralConstructorMode", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2176.testExternalObjectLiteralConstructorMode);
+            QUnit.test("#2181 - TestStringPadForEmptyString", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2181.testStringPadForEmptyString);
             QUnit.test("#381 - TestUseCase", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge381.testUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge447.checkInlineExpression);
             QUnit.test("#447 - CheckInlineCalls", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge447.checkInlineCalls);
@@ -7209,6 +7216,37 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2050", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2050)],
+        statics: {
+            testIList: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2050).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2050, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "TestIList()",
+                    line: "11"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2050.testIList();
+            },
+            testIDictionary: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2050).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2050, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "TestIDictionary()",
+                    line: "42"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2050.testIDictionary();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2050",
+                    file: "Batch3\\BridgeIssues\\2000\\N2050.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
     Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2067", {
         inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2067)],
         statics: {
@@ -7769,6 +7807,126 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2157",
                     file: "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch3/BridgeIssues/2100/N2157.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2163", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2163)],
+        statics: {
+            testDecimalToFormat: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2163).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2163, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "TestDecimalToFormat()",
+                    line: "11"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2163.testDecimalToFormat();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2163",
+                    file: "Batch3\\BridgeIssues\\2100\\N2163.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2167", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2167)],
+        statics: {
+            testMerge: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2167).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2167, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "TestMerge()",
+                    line: "18"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2167.testMerge();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2167",
+                    file: "Batch3\\BridgeIssues\\2100\\N2167.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2174", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2174)],
+        statics: {
+            testGenericComparerDefault: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2174).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2174, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "TestGenericComparerDefault()",
+                    line: "35"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2174.testGenericComparerDefault();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2174",
+                    file: "Batch3\\BridgeIssues\\2100\\N2174.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2176", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2176)],
+        statics: {
+            testExternalObjectLiteralConstructorMode: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2176).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2176, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "TestExternalObjectLiteralConstructorMode()",
+                    line: "36"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2176.testExternalObjectLiteralConstructorMode();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2176",
+                    file: "Batch3\\BridgeIssues\\2100\\N2176.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2181", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2181)],
+        statics: {
+            testStringPadForEmptyString: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2181).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2181, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "TestStringPadForEmptyString()",
+                    line: "11"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2181.testStringPadForEmptyString();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2181",
+                    file: "Batch3\\BridgeIssues\\2100\\N2181.cs"
                 } );
             }
             return this.context;
@@ -11227,294 +11385,294 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
             N169: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 2, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N169()",
-                    line: "495"
+                    line: "520"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N169();
             },
             N240: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 3, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N240()",
-                    line: "508"
+                    line: "533"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N240();
             },
             N264: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 1, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N264()",
-                    line: "519"
+                    line: "544"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N264();
             },
             N266: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 1, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N266()",
-                    line: "530"
+                    line: "555"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N266();
             },
             N272: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 3, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N272()",
-                    line: "538"
+                    line: "563"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N272();
             },
             N273: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 4, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N273()",
-                    line: "548"
+                    line: "573"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N273();
             },
             N277: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 1, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N277()",
-                    line: "568"
+                    line: "593"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N277();
             },
             N294: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 2, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N294()",
-                    line: "575"
+                    line: "600"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N294();
             },
             N304: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 2, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N304()",
-                    line: "585"
+                    line: "610"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N304();
             },
             N305: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 1, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N305()",
-                    line: "599"
+                    line: "624"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N305();
             },
             N306: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 2, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N306()",
-                    line: "614"
+                    line: "639"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N306();
             },
             N329: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 5, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N329()",
-                    line: "630"
+                    line: "655"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N329();
             },
             N335: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 1, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N335()",
-                    line: "645"
+                    line: "670"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N335();
             },
             N336: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 2, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N336()",
-                    line: "653"
+                    line: "678"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N336();
             },
             N337: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 4, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N337()",
-                    line: "666"
+                    line: "691"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N337();
             },
             N338: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 1, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N338()",
-                    line: "681"
+                    line: "706"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N338();
             },
             N339: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 2, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N339()",
-                    line: "692"
+                    line: "717"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N339();
             },
             N340: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 6, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N340()",
-                    line: "702"
+                    line: "727"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N340();
             },
             N341: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 4, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N341()",
-                    line: "718"
+                    line: "743"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N341();
             },
             N342: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 2, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N342()",
-                    line: "761"
+                    line: "786"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N342();
             },
             N349: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 5, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N349()",
-                    line: "776"
+                    line: "801"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N349();
             },
             N377: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 6, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N377()",
-                    line: "792"
+                    line: "817"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N377();
             },
             N383: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 2, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N383()",
-                    line: "812"
+                    line: "837"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N383();
             },
             N393: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 2, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N393()",
-                    line: "833"
+                    line: "858"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N393();
             },
             N395: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 3, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N395()",
-                    line: "852"
+                    line: "877"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N395();
             },
             N406: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 1, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N406()",
-                    line: "877"
+                    line: "902"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N406();
             },
             N407: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 2, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N407()",
-                    line: "925"
+                    line: "950"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N407();
             },
             N409: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 2, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N409()",
-                    line: "945"
+                    line: "970"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N409();
             },
             N410: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 50, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N410()",
-                    line: "972"
+                    line: "997"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N410();
             },
             N418: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 1, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N418()",
-                    line: "1114"
+                    line: "1139"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N418();
             },
             N422: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 3, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N422()",
-                    line: "1125"
+                    line: "1150"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N422();
             },
             N428: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 1, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N428()",
-                    line: "1138"
+                    line: "1163"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N428();
             },
             N435: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 2, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N435()",
-                    line: "1148"
+                    line: "1173"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N435();
             },
             N436: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 3, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N436()",
-                    line: "1157"
+                    line: "1182"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N436();
             },
             N438: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 1, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N438()",
-                    line: "1171"
+                    line: "1196"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N438();
             },
             N439: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 2, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N439()",
-                    line: "1180"
+                    line: "1205"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N439();
             },
             N442: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 2, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N442()",
-                    line: "1198"
+                    line: "1223"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N442();
             },
             N460: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 1, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N460()",
-                    line: "1209"
+                    line: "1234"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N460();
             },
             N467: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 1, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N467()",
-                    line: "1219"
+                    line: "1244"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N467();
             },
             N469: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 1, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N469()",
-                    line: "1236"
+                    line: "1261"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N469();
             },
             N470: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 16, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N470()",
-                    line: "1256"
+                    line: "1281"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N470();
             },
             N499: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_TestBridgeIssues, 1, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "N499()",
-                    line: "1323"
+                    line: "1348"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.N499();
             }

@@ -44,11 +44,11 @@
 
     Bridge.define('System.Collections.Generic.Dictionary$2', function (TKey, TValue) {
         return {
-            inherits: [System.Collections.Generic.IDictionary$2(TKey, TValue)],
+            inherits: [System.Collections.Generic.IDictionary$2(TKey, TValue), System.Collections.IDictionary],
 
             config: {
                 alias: [
-                    "getCount", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getCount",
+                    "getCount", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(System.Collections.Generic.KeyValuePair$2(TKey, TValue)) + "$getCount",
                     "getKeys", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getKeys",
                     "getValues", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getValues",
                     "get", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getItem",
@@ -57,7 +57,22 @@
                     "containsKey", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$containsKey",
                     "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$Collections$Generic$KeyValuePair$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getEnumerator",
                     "remove", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$remove",
-                    "tryGetValue", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$tryGetValue"
+                    "tryGetValue", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$tryGetValue",
+                    "getIsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(System.Collections.Generic.KeyValuePair$2(TKey, TValue)) + "$getIsReadOnly",
+                    "addPair", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(System.Collections.Generic.KeyValuePair$2(TKey, TValue)) + "$add",
+                    "copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(System.Collections.Generic.KeyValuePair$2(TKey, TValue)) + "$copyTo",
+                    "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(System.Collections.Generic.KeyValuePair$2(TKey, TValue)) + "$clear",
+                    "containsPair", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(System.Collections.Generic.KeyValuePair$2(TKey, TValue)) + "$contains",
+                    "removePair", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(System.Collections.Generic.KeyValuePair$2(TKey, TValue)) + "$remove",
+                    "copyTo", "System$Collections$ICollection$copyTo",
+                    "get", "System$Collections$IDictionary$getItem",
+                    "set", "System$Collections$IDictionary$setItem",
+                    "getValues", "System$Collections$IDictionary$getValues",
+                    "containsKey", "System$Collections$IDictionary$containsKey",
+                    "add", "System$Collections$IDictionary$add",
+                    "remove", "System$Collections$IDictionary$remove",
+                    "getIsReadOnly", "System$Collections$IDictionary$getIsReadOnly",
+                    "getKeys", "System$Collections$IDictionary$getKeys"
                 ]
             },
 
@@ -83,6 +98,30 @@
                         this.add(name, obj[name]);
                     }
                 }
+            },
+
+            containsPair: function(pair) {
+                var entry = this.findEntry(pair.key);
+                return entry && this.comparer.equals2(entry.value, pair.value);
+            },
+
+            removePair: function (pair) {
+                var entry = this.findEntry(pair.key);
+                if (entry && this.comparer.equals2(entry.value, pair.value)) {
+                    this.remove(pair.key);
+                    return true;
+                }
+
+                return false;
+            },
+
+            copyTo: function (array, arrayIndex) {
+                var items = System.Linq.Enumerable.from(this).toArray();
+                System.Array.copy(items, 0, array, arrayIndex, items.length);
+            },
+
+            getIsReadOnly: function () {
+                return !!this.readOnly;
             },
 
             getKeys: function () {
@@ -181,6 +220,10 @@
 
             add: function (key, value) {
                 this.set(key, value, true);
+            },
+
+            addPair: function (pair) {
+                this.set(pair.key, pair.value, true);
             },
 
             remove: function (key) {

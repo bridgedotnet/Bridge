@@ -1283,16 +1283,16 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var d = new Bridge.ClientTest.Batch4.Collections.Generic.IDictionaryTests.MyDictionary.ctor();
             var di = Bridge.cast(d, System.Collections.Generic.IDictionary$2(System.Int32,String));
 
-            d.add(5, "aa");
+            d.add$1(5, "aa");
             Bridge.Test.Assert.areEqual("aa", d.getItem(5));
             Bridge.Test.Assert.areEqual(1, d.getCount());
 
             di.System$Collections$Generic$IDictionary$2$System$Int32$String$add(3, "bb");
             Bridge.Test.Assert.areEqual("bb", di.System$Collections$Generic$IDictionary$2$System$Int32$String$getItem(3));
-            Bridge.Test.Assert.areEqual(2, di.System$Collections$Generic$IDictionary$2$System$Int32$String$getCount());
+            Bridge.Test.Assert.areEqual(2, System.Array.getCount(di, System.Collections.Generic.KeyValuePair$2(System.Int32,String)));
 
             try {
-                d.add(5, "zz");
+                d.add$1(5, "zz");
                 Bridge.Test.Assert.fail$1("Should throw");
             }
             catch ($e1) {
@@ -1310,12 +1310,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var d = new Bridge.ClientTest.Batch4.Collections.Generic.IDictionaryTests.MyDictionary.$ctor1($asm.$.Bridge.ClientTest.Batch4.Collections.Generic.IDictionaryTests.f8(new (System.Collections.Generic.Dictionary$2(System.Int32,String))()));
             var di = Bridge.cast(d, System.Collections.Generic.IDictionary$2(System.Int32,String));
 
-            Bridge.Test.Assert.areStrictEqual(true, d.remove(6));
+            Bridge.Test.Assert.areStrictEqual(true, d.remove$1(6));
             Bridge.Test.Assert.areEqual(3, d.getCount());
             Bridge.Test.Assert.false(d.containsKey(6));
 
             Bridge.Test.Assert.areStrictEqual(true, di.System$Collections$Generic$IDictionary$2$System$Int32$String$remove(3));
-            Bridge.Test.Assert.areEqual(2, di.System$Collections$Generic$IDictionary$2$System$Int32$String$getCount());
+            Bridge.Test.Assert.areEqual(2, System.Array.getCount(di, System.Collections.Generic.KeyValuePair$2(System.Int32,String)));
             Bridge.Test.Assert.false(di.System$Collections$Generic$IDictionary$2$System$Int32$String$containsKey(3));
 
             Bridge.Test.Assert.true(di.System$Collections$Generic$IDictionary$2$System$Int32$String$containsKey(13));
@@ -1403,11 +1403,17 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             "setItem", "System$Collections$Generic$IDictionary$2$System$Int32$String$setItem",
             "getKeys", "System$Collections$Generic$IDictionary$2$System$Int32$String$getKeys",
             "getValues", "System$Collections$Generic$IDictionary$2$System$Int32$String$getValues",
-            "getCount", "System$Collections$Generic$IDictionary$2$System$Int32$String$getCount",
-            "add", "System$Collections$Generic$IDictionary$2$System$Int32$String$add",
-            "remove", "System$Collections$Generic$IDictionary$2$System$Int32$String$remove",
+            "getCount", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$String$getCount",
+            "getIsReadOnly", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$String$getIsReadOnly",
+            "add", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$String$add",
+            "copyTo", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$String$copyTo",
+            "add$1", "System$Collections$Generic$IDictionary$2$System$Int32$String$add",
+            "remove$1", "System$Collections$Generic$IDictionary$2$System$Int32$String$remove",
             "containsKey", "System$Collections$Generic$IDictionary$2$System$Int32$String$containsKey",
-            "tryGetValue", "System$Collections$Generic$IDictionary$2$System$Int32$String$tryGetValue"
+            "tryGetValue", "System$Collections$Generic$IDictionary$2$System$Int32$String$tryGetValue",
+            "clear", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$String$clear",
+            "contains", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$String$contains",
+            "remove", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$String$remove"
             ]
         },
         ctor: function () {
@@ -1432,17 +1438,29 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         getCount: function () {
             return this._backingDictionary.getCount();
         },
+        getIsReadOnly: function () {
+            return this._backingDictionary.getIsReadOnly();
+        },
         System$Collections$IEnumerable$getEnumerator: function () {
             return this.getEnumerator();
         },
         getEnumerator: function () {
             return this._backingDictionary.getEnumerator();
         },
-        add: function (key, value) {
+        add: function (item) {
+            System.Array.add(Bridge.cast(this._backingDictionary, System.Collections.Generic.ICollection$1(System.Collections.Generic.KeyValuePair$2(System.Int32,String))), item, System.Collections.Generic.KeyValuePair$2(System.Int32,String));
+        },
+        add$1: function (key, value) {
             this._backingDictionary.add(key, value);
         },
-        remove: function (key) {
+        copyTo: function (array, arrayIndex) {
+            System.Array.copyTo(Bridge.cast(this._backingDictionary, System.Collections.Generic.ICollection$1(System.Collections.Generic.KeyValuePair$2(System.Int32,String))), array, arrayIndex, System.Collections.Generic.KeyValuePair$2(System.Int32,String));
+        },
+        remove$1: function (key) {
             return this._backingDictionary.remove(key);
+        },
+        remove: function (item) {
+            return System.Array.remove(Bridge.cast(this._backingDictionary, System.Collections.Generic.ICollection$1(System.Collections.Generic.KeyValuePair$2(System.Int32,String))), item, System.Collections.Generic.KeyValuePair$2(System.Int32,String));
         },
         containsKey: function (key) {
             return this._backingDictionary.containsKey(key);
@@ -1452,6 +1470,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         clear: function () {
             this._backingDictionary.clear();
+        },
+        contains: function (item) {
+            return System.Array.contains(Bridge.cast(this._backingDictionary, System.Collections.Generic.ICollection$1(System.Collections.Generic.KeyValuePair$2(System.Int32,String))), item, System.Collections.Generic.KeyValuePair$2(System.Int32,String));
         }
     });
 
@@ -13735,13 +13756,20 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.Assert.areEqual(null, Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1));
         },
         getGenericTypeDefinitionReturnsTheGenericTypeDefinitionForConstructedTypeOtherwiseNull: function () {
-            Bridge.Test.Assert.areEqual(null, Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2));
-            Bridge.Test.Assert.areEqual(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2, Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(System.Int32,String)));
-            Bridge.Test.Assert.areEqual(null, Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C));
-            Bridge.Test.Assert.areEqual(null, Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1));
-            Bridge.Test.Assert.areEqual(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1, Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1(String)));
-            Bridge.Test.Assert.areEqual(null, Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.I2));
-            Bridge.Test.Assert.areEqual(null, Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1));
+            //Assert.AreEqual(null, typeof(G<,>).GetGenericTypeDefinition());
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2);
+            //Assert.AreEqual(typeof(G<,>), typeof(G<int, string>).GetGenericTypeDefinition());
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(System.Int32,String)), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2);
+            //Assert.AreEqual(null, typeof(C).GetGenericTypeDefinition());
+            Bridge.Test.Assert.throws$6(System.InvalidOperationException, $asm.$.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.f2);
+            //Assert.AreEqual(null, typeof(IG<>).GetGenericTypeDefinition());
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1);
+            //Assert.AreEqual(typeof(IG<>), typeof(IG<string>).GetGenericTypeDefinition());
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1(String)), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1);
+            //Assert.AreEqual(null, typeof(I2).GetGenericTypeDefinition());
+            Bridge.Test.Assert.throws$6(System.InvalidOperationException, $asm.$.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.f3);
+            //Assert.AreEqual(null, typeof(E1).GetGenericTypeDefinition());
+            Bridge.Test.Assert.throws$6(System.InvalidOperationException, $asm.$.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.f4);
         },
         isAssignableFromWorks: function () {
             Bridge.Test.Assert.true$1(Bridge.Reflection.isAssignableFrom(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.C1, Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.C1), "#1");
@@ -14279,8 +14307,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.Assert.true$1(Bridge.is("firstValue", String), "#1");
             Bridge.Test.Assert.true$1(Bridge.is("firstValue", String), "#2");
             Bridge.Test.Assert.false$1(Bridge.is(0, String), "#3");
-            Bridge.Test.Assert.false$1(this.doesItThrow($asm.$.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.f2), "#4");
-            Bridge.Test.Assert.true$1(this.doesItThrow($asm.$.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.f3), "#5");
+            Bridge.Test.Assert.false$1(this.doesItThrow($asm.$.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.f5), "#4");
+            Bridge.Test.Assert.true$1(this.doesItThrow($asm.$.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.f6), "#5");
 
             Bridge.Test.Assert.notNull$1(Bridge.as("firstValue", String, true), "#6");
             Bridge.Test.Assert.notNull$1(Bridge.as("firstValue", String, true), "#7");
@@ -14294,8 +14322,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.Assert.true$1(Bridge.is("firstValue", String), "#1");
             Bridge.Test.Assert.true$1(Bridge.is("firstValue", String), "#2");
             Bridge.Test.Assert.false$1(Bridge.is(0, String), "#3");
-            Bridge.Test.Assert.false$1(this.doesItThrow($asm.$.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.f2), "#4");
-            Bridge.Test.Assert.true$1(this.doesItThrow($asm.$.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.f3), "#5");
+            Bridge.Test.Assert.false$1(this.doesItThrow($asm.$.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.f5), "#4");
+            Bridge.Test.Assert.true$1(this.doesItThrow($asm.$.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.f6), "#5");
 
             Bridge.Test.Assert.notNull$1(Bridge.as("firstValue", String, true), "#6");
             Bridge.Test.Assert.notNull$1(Bridge.as("firstValue", String, true), "#7");
@@ -14376,9 +14404,18 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             return _o71;
         },
         f2: function () {
-            var x = Bridge.cast("firstValue", String);
+            Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C);
         },
         f3: function () {
+            Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.I2);
+        },
+        f4: function () {
+            Bridge.Reflection.getGenericTypeDefinition(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1);
+        },
+        f5: function () {
+            var x = Bridge.cast("firstValue", String);
+        },
+        f6: function () {
             var x = Bridge.cast(0, String);
         }
     });

@@ -3,7 +3,7 @@ using Bridge;
 namespace System.Collections.Generic
 {
     [External]
-    public interface IDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>, IBridgeClass
+    public interface IDictionary<TKey, TValue> : ICollection<KeyValuePair<TKey, TValue>>, IBridgeClass
     {
         [AccessorsIndexer]
         TValue this[TKey key]
@@ -20,11 +20,6 @@ namespace System.Collections.Generic
         }
 
         ICollection<TValue> Values
-        {
-            get;
-        }
-
-        int Count
         {
             get;
         }

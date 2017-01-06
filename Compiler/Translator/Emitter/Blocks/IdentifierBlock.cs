@@ -620,9 +620,12 @@ namespace Bridge.Translator
 
         protected void WriteTarget(MemberResolveResult memberResult)
         {
+            bool noTarget = false;
             if (memberResult.Member.IsStatic)
             {
-                this.Write(BridgeTypes.ToJsName(memberResult.Member.DeclaringType, this.Emitter));
+                var target = BridgeTypes.ToJsName(memberResult.Member.DeclaringType, this.Emitter);
+                noTarget = string.IsNullOrWhiteSpace(target);
+                this.Write(target);
             }
             else
             {
@@ -633,7 +636,7 @@ namespace Bridge.Translator
             {
                 this.WriteComma();
             }
-            else
+            else if(!noTarget)
             {
                 this.WriteDot();
             }

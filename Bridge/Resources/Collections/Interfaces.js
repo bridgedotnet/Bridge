@@ -11,6 +11,14 @@
         inherits: [System.Collections.IEnumerable],
         $kind: "interface"
     });
+    Bridge.define('System.Collections.IList', {
+        inherits: [System.Collections.ICollection],
+        $kind: "interface"
+    });
+    Bridge.define('System.Collections.IDictionary', {
+        inherits: [System.Collections.ICollection],
+        $kind: "interface"
+    });
 
     Bridge.define('System.Collections.Generic.IEnumerator$1', function (T) {
         return {
