@@ -46,6 +46,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="External\AjaxOptions.cs" />
+    <Compile Include="External\BridgeHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Bridge\bridge.json" />
   </ItemGroup>

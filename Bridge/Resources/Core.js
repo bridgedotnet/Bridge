@@ -592,6 +592,10 @@
         },
 
         merge: function (to, from, callback, elemFactory) {
+            if (to == null) {
+                return from;
+            }
+
             // Maps instance of plain JS value or Object into Bridge object.
             // Used for deserialization. Proper deserialization requires reflection that is currently not supported in Bridge.
             // It currently is only capable to deserialize:
@@ -658,15 +662,29 @@
                             to[key](value);
                         }
                     } else {
-                        var setter = "set" + key.charAt(0).toUpperCase() + key.slice(1);
+                        var setter1 = "set" + key.charAt(0).toUpperCase() + key.slice(1),
+							setter2 = "set" + key,
+							getter;
 
-                        if (typeof to[setter] === "function" && typeof value !== "function") {
-                            to[setter](value);
+                        if (typeof to[setter1] === "function" && typeof value !== "function") {
+                            getter = "g" + setter1.slice(1);
+                            if (typeof to[getter] === "function") {
+                                to[setter1](Bridge.merge(to[getter](), value));
+                            } else {
+                                to[setter1](value);
+                            }
+                        } else if (typeof to[setter2] === "function" && typeof value !== "function") {
+                            getter = "g" + setter2.slice(1);
+                            if (typeof to[getter] === "function") {
+                                to[setter2](Bridge.merge(to[getter](), value));
+                            } else {
+                                to[setter2](value);
+                            }
                         } else if (value && value.constructor === Object && to[key]) {
                             toValue = to[key];
                             Bridge.merge(toValue, value);
                         } else {
-                            to[key] = value;
+                            to[key] = Bridge.merge(to[key], value);
                         }
                     }
                 }
