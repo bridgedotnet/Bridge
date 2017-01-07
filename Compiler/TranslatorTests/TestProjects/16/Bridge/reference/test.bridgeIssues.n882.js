@@ -5,7 +5,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         ctor: function () {
             this.$initialize();            var $t;
 
-            var a = [1, 2, 3];
+            var a = System.Array.init([1, 2, 3], System.Int32);
 
             $t = Bridge.getEnumerator(a);
             while ($t.moveNext()) {
@@ -19,7 +19,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         ctor: function () {
             this.$initialize();            var $t;
 
-            var a = [5, 6, 7];
+            var a = System.Array.init([5, 6, 7], System.Int32);
 
             $t = Bridge.getEnumerator(a);
             while ($t.moveNext()) {
@@ -33,7 +33,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         statics: {
             ctor: function () {
                 var $t;
-                var a = [1, 2, 3];
+                var a = System.Array.init([1, 2, 3], System.Int32);
 
                 $t = Bridge.getEnumerator(a);
                 while ($t.moveNext()) {
@@ -48,7 +48,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         statics: {
             ctor: function () {
                 var $t;
-                var a = [5, 6, 7];
+                var a = System.Array.init([5, 6, 7], System.Int32);
 
                 $t = Bridge.getEnumerator(a);
                 while ($t.moveNext()) {

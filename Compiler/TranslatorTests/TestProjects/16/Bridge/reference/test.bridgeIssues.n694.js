@@ -4,7 +4,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     Bridge.define("Test.BridgeIssues.N694.Bridge694", {
         statics: {
             test1: function () {
-                var fruits = System.Array.init(3, null);
+                var fruits = System.Array.init(3, null, Object);
                 fruits[0] = "mango";
                 fruits[1] = "apple";
                 fruits[2] = "lemon";
