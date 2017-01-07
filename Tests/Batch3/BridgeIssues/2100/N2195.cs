@@ -20,13 +20,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             try
             {
                 i = Generic<string>();
+                Assert.AreEqual(1, i);
             }
             catch (ArgumentException ex)
             {
+                Assert.Fail("Should not get into catch. However the test is to check the try/catch compiles successfully");
                 Console.WriteLine(ex.Message);
             }
-
-            Assert.AreEqual(1, i);
         }
     }
 }
