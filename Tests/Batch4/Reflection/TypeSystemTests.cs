@@ -284,13 +284,20 @@ namespace Bridge.ClientTest.Batch4.Reflection
         [Test]
         public void GetGenericTypeDefinitionReturnsTheGenericTypeDefinitionForConstructedTypeOtherwiseNull()
         {
-            Assert.AreEqual(null, typeof(G<,>).GetGenericTypeDefinition());
-            Assert.AreEqual(typeof(G<,>), typeof(G<int, string>).GetGenericTypeDefinition());
-            Assert.AreEqual(null, typeof(C).GetGenericTypeDefinition());
-            Assert.AreEqual(null, typeof(IG<>).GetGenericTypeDefinition());
-            Assert.AreEqual(typeof(IG<>), typeof(IG<string>).GetGenericTypeDefinition());
-            Assert.AreEqual(null, typeof(I2).GetGenericTypeDefinition());
-            Assert.AreEqual(null, typeof(E1).GetGenericTypeDefinition());
+            //Assert.AreEqual(null, typeof(G<,>).GetGenericTypeDefinition());
+            Assert.AreEqual(typeof(G<,>).GetGenericTypeDefinition(), typeof(G<,>));
+            //Assert.AreEqual(typeof(G<,>), typeof(G<int, string>).GetGenericTypeDefinition());
+            Assert.AreEqual(typeof(G<int, string>).GetGenericTypeDefinition(), typeof(G<,>));
+            //Assert.AreEqual(null, typeof(C).GetGenericTypeDefinition());
+            Assert.Throws<InvalidOperationException>(() => typeof(C).GetGenericTypeDefinition());
+            //Assert.AreEqual(null, typeof(IG<>).GetGenericTypeDefinition());
+            Assert.AreEqual(typeof(IG<>).GetGenericTypeDefinition(), typeof(IG<>));
+            //Assert.AreEqual(typeof(IG<>), typeof(IG<string>).GetGenericTypeDefinition());
+            Assert.AreEqual(typeof(IG<string>).GetGenericTypeDefinition(), typeof(IG<>));
+            //Assert.AreEqual(null, typeof(I2).GetGenericTypeDefinition());
+            Assert.Throws<InvalidOperationException>(() => typeof(I2).GetGenericTypeDefinition());
+            //Assert.AreEqual(null, typeof(E1).GetGenericTypeDefinition());
+            Assert.Throws<InvalidOperationException>(() => typeof(E1).GetGenericTypeDefinition());
         }
 
         private class IsAssignableFromTypes

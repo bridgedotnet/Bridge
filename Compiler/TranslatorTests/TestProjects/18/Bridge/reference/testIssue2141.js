@@ -6,6 +6,7 @@
                 // These below should NOT contain Bridge.literal call
                 var c1 = { id: "1" };
                 // These below should contain Bridge.literal call as [Name] used
+                // Bridge.literal(Options1, { id: "1Name" })
                 var c1Name = Bridge.literal(Options1, { id: "1Name" });
 
                 // These below should NOT contain Bridge.literal call
@@ -23,8 +24,8 @@
                 } );
 
                 // These below should NOT contain Bridge.literal call
-                // Bridge.merge(Object(), { id: "4" });
-                var c4 = Bridge.merge(Object(), {
+                // Bridge.merge(Config4(), { id: "4" });
+                var c4 = Bridge.merge(TestIssue2141.Config4(), {
                     id: "4"
                 } );
                 // Bridge.merge(Options4(), { id: "4Name" });
