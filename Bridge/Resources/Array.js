@@ -198,6 +198,7 @@
             if (type === System.Collections.IEnumerable ||
                 type === System.Collections.ICollection ||
                 type === System.ICloneable ||
+                type === System.Collections.IList ||
                 type.$$name && System.String.startsWith(type.$$name, "System.Collections.Generic.IEnumerable$1") ||
                 type.$$name && System.String.startsWith(type.$$name, "System.Collections.Generic.ICollection$1") ||
                 type.$$name && System.String.startsWith(type.$$name, "System.Collections.Generic.IList$1")) {
@@ -222,9 +223,9 @@
             var name;
             if (Bridge.isArray(obj)) {
                 return obj.length;
-            } else if (Bridge.isFunction(obj[name = "System$Collections$ICollection$getCount"])) {
-                return obj[name]();
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getCount"])) {
+                return obj[name]();
+            } else if (Bridge.isFunction(obj[name = "System$Collections$ICollection$getCount"])) {
                 return obj[name]();
             } else if (Bridge.isFunction(obj.getCount)) {
                 return obj.getCount();
@@ -238,9 +239,9 @@
 
             if (Bridge.isArray(obj)) {
                 return T ? true : false;
-            } else if (Bridge.isFunction(obj[name = "System$Collections$ICollection$getIsReadOnly"])) {
-                return obj[name]();
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getIsReadOnly"])) {
+                return obj[name]();
+            } else if (Bridge.isFunction(obj[name = "System$Collections$IList$getIsReadOnly"])) {
                 return obj[name]();
             } else if (Bridge.isFunction(obj.getIsReadOnly)) {
                 return obj.getIsReadOnly();
@@ -256,6 +257,8 @@
                 obj.push(item);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add"])) {
                 obj[name](item);
+            } else if (Bridge.isFunction(obj[name = "System$Collections$IList$add"])) {
+                obj[name](item);
             } else if (Bridge.isFunction(obj.add)) {
                 obj.add(item);
             }
@@ -267,6 +270,8 @@
             if (Bridge.isArray(obj)) {
                 System.Array.fill(obj, T ? (T.getDefaultValue || Bridge.getDefaultValue(T)) : null, 0, obj.length);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear"])) {
+                obj[name]();
+            } else if (Bridge.isFunction(obj[name = "System$Collections$IList$clear"])) {
                 obj[name]();
             } else if (Bridge.isFunction(obj.clear)) {
                 obj.clear();
@@ -326,6 +331,8 @@
                 obj.copyTo(dest, index);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo"])) {
                 obj[name](dest, index);
+            } else if (Bridge.isFunction(obj[name = "System$Collections$ICollection$copyTo"])) {
+                obj[name](dest, index);
             } else {
                 throw new System.NotImplementedException("copyTo");
             }
@@ -352,6 +359,8 @@
                 }
             } else if (T && Bridge.isFunction(arr[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf"])) {
                 return arr[name](item);
+            } else if (Bridge.isFunction(arr[name = "System$Collections$IList$indexOf"])) {
+                return arr[name](item);
             } else if (Bridge.isFunction(arr.indexOf)) {
                 return arr.indexOf(item);
             }
@@ -365,6 +374,8 @@
             if (Bridge.isArray(obj)) {
                 return System.Array.indexOf(obj, item) > -1;
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains"])) {
+                return obj[name](item);
+            } else if (Bridge.isFunction(obj[name = "System$Collections$IList$contains"])) {
                 return obj[name](item);
             } else if (Bridge.isFunction(obj.contains)) {
                 return obj.contains(item);
@@ -386,6 +397,8 @@
                 }
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$remove"])) {
                 return obj[name](item);
+            } else if (Bridge.isFunction(obj[name = "System$Collections$IList$remove"])) {
+                return obj[name](item);
             } else if (Bridge.isFunction(obj.remove)) {
                 return obj.remove(item);
             }
@@ -400,6 +413,8 @@
                 obj.splice(index, 0, item);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert"])) {
                 obj[name](index, item);
+            } else if (Bridge.isFunction(obj[name = "System$Collections$IList$insert"])) {
+                obj[name](index, item);
             } else if (Bridge.isFunction(obj.insert)) {
                 obj.insert(index, item);
             }
@@ -411,6 +426,8 @@
             if (Bridge.isArray(obj)) {
                 obj.splice(index, 1);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt"])) {
+                obj[name](index);
+            } else if (Bridge.isFunction(obj[name = "System$Collections$IList$removeAt"])) {
                 obj[name](index);
             } else if (Bridge.isFunction(obj.removeAt)) {
                 obj.removeAt(index);
@@ -428,6 +445,8 @@
                 return obj.getItem(idx);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem"])) {
                 return obj[name](idx);
+            } else if (Bridge.isFunction(obj[name = "System$Collections$IList$$getItem"])) {
+                return obj[name](idx);
             } else if (Bridge.isFunction(obj.get_Item)) {
                 return obj.get_Item(idx);
             }
@@ -443,6 +462,8 @@
             } else if (Bridge.isFunction(obj.setItem)) {
                 obj.setItem(idx, value);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem"])) {
+                return obj[name](idx, value);
+            } else if (T && Bridge.isFunction(obj[name = "System$Collections$IList$setItem"])) {
                 return obj[name](idx, value);
             } else if (Bridge.isFunction(obj.set_Item)) {
                 obj.set_Item(idx, value);
