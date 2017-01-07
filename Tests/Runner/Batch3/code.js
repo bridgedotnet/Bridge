@@ -12738,6 +12738,14 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2190", {
+        statics: {
+            testInternalsVisibleTo: function () {
+                Bridge.Test.Assert.areEqual("Hi", Bridge.ClientTestHelper.N2190.greeting());
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
