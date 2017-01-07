@@ -7,7 +7,7 @@ namespace System
 {
     [External]
     [Name("Array")]
-    public sealed class Array : IEnumerable, ICloneable
+    public sealed class Array : IEnumerable, ICloneable, IList
     {
         public extern int Length
         {
@@ -251,6 +251,30 @@ namespace System
 
         [Template("System.Array.sort({array}, {comparer})")]
         public static extern void Sort<T>(T[] array, IComparer<T> comparer);
+
+        extern int ICollection.Count
+        {
+            get;
+        }
+
+        extern void IList.Add(object item);
+
+        extern void IList.Clear();
+
+        extern bool IList.Contains(object item);
+
+        extern int IList.IndexOf(object item);
+
+        extern void IList.Insert(int index, object item);
+
+        extern void IList.RemoveAt(int index);
+
+        extern bool IList.Remove(object item);
+
+        extern bool IList.IsReadOnly
+        {
+            get;
+        }
     }
 
     [External]

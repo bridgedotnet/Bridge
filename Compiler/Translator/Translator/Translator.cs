@@ -143,7 +143,7 @@ namespace Bridge.Translator
 
             this.BuildSyntaxTree();
 
-            var resolver = new MemberResolver(this.ParsedSourceFiles, Emitter.ToAssemblyReferences(references, logger));
+            var resolver = new MemberResolver(this.ParsedSourceFiles, Emitter.ToAssemblyReferences(references, logger), this.AssemblyDefinition);
             resolver = this.Preconvert(resolver);
 
             this.InspectTypes(resolver, config);
@@ -203,7 +203,7 @@ namespace Bridge.Translator
 
             if (needRecompile)
             {
-                return new MemberResolver(this.ParsedSourceFiles, resolver.Assemblies);
+                return new MemberResolver(this.ParsedSourceFiles, resolver.Assemblies, this.AssemblyDefinition);
             }
 
             return resolver;
