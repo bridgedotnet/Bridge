@@ -7713,7 +7713,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
             Bridge.Test.Assert.true$1(($t11 = e2.body, Bridge.is($t11, Bridge.hasValue($t11) && ($t11.ntype === 32 || $t11.ntype === 33))), "e2 is NewArrayExpression");
             Bridge.Test.Assert.areEqual$1(33, e2.body.ntype, "e2 node type");
-            Bridge.Test.Assert.areEqual$1(System.Array.type(System.Int32), e2.body.t, "e2 type");
+            Bridge.Test.Assert.areEqual$1(System.Array.type(System.Int32, 2), e2.body.t, "e2 type");
             Bridge.Test.Assert.areEqual$1(2, ($t11 = e2.body, Bridge.cast($t11, Bridge.hasValue($t11) && ($t11.ntype === 32 || $t11.ntype === 33))).expressions.getCount(), "e2 expression count");
             Bridge.Test.Assert.true$1(($t11 = ($t11 = e2.body, Bridge.cast($t11, Bridge.hasValue($t11) && ($t11.ntype === 32 || $t11.ntype === 33))).expressions.get(0), Bridge.is($t11, Bridge.hasValue($t11) && ($t11.ntype === 38))) && Bridge.referenceEquals(($t11 = ($t11 = e2.body, Bridge.cast($t11, Bridge.hasValue($t11) && ($t11.ntype === 32 || $t11.ntype === 33))).expressions.get(0), Bridge.cast($t11, Bridge.hasValue($t11) && ($t11.ntype === 38))).n, "a"), "e2 expression 0");
             Bridge.Test.Assert.true$1(($t11 = ($t11 = e2.body, Bridge.cast($t11, Bridge.hasValue($t11) && ($t11.ntype === 32 || $t11.ntype === 33))).expressions.get(1), Bridge.is($t11, Bridge.hasValue($t11) && ($t11.ntype === 38))) && Bridge.referenceEquals(($t11 = ($t11 = e2.body, Bridge.cast($t11, Bridge.hasValue($t11) && ($t11.ntype === 32 || $t11.ntype === 33))).expressions.get(1), Bridge.cast($t11, Bridge.hasValue($t11) && ($t11.ntype === 38))).n, "b"), "e2 expression 1");
@@ -7727,14 +7727,14 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
             Bridge.Test.Assert.true$1(Bridge.is(e4, Bridge.hasValue(e4) && (e4.ntype === 32 || e4.ntype === 33)), "e4 is NewArrayExpression");
             Bridge.Test.Assert.areEqual$1(33, e4.ntype, "e4 node type");
-            Bridge.Test.Assert.areEqual$1(System.Array.type(System.Int32), e4.t, "e4 type");
+            Bridge.Test.Assert.areEqual$1(System.Array.type(System.Int32, 2), e4.t, "e4 type");
             Bridge.Test.Assert.areEqual$1(2, Bridge.cast(e4, Bridge.hasValue(e4) && (e4.ntype === 32 || e4.ntype === 33)).expressions.getCount(), "e4 expression count");
             Bridge.Test.Assert.true$1(($t11 = Bridge.cast(e4, Bridge.hasValue(e4) && (e4.ntype === 32 || e4.ntype === 33)).expressions.get(0), Bridge.is($t11, Bridge.hasValue($t11) && ($t11.ntype === 38))) && Bridge.referenceEquals(($t11 = Bridge.cast(e4, Bridge.hasValue(e4) && (e4.ntype === 32 || e4.ntype === 33)).expressions.get(0), Bridge.cast($t11, Bridge.hasValue($t11) && ($t11.ntype === 38))).n, "a"), "e4 expression 0");
             Bridge.Test.Assert.true$1(($t11 = Bridge.cast(e4, Bridge.hasValue(e4) && (e4.ntype === 32 || e4.ntype === 33)).expressions.get(1), Bridge.is($t11, Bridge.hasValue($t11) && ($t11.ntype === 38))) && Bridge.referenceEquals(($t11 = Bridge.cast(e4, Bridge.hasValue(e4) && (e4.ntype === 32 || e4.ntype === 33)).expressions.get(1), Bridge.cast($t11, Bridge.hasValue($t11) && ($t11.ntype === 38))).n, "b"), "e4 expression 1");
 
             Bridge.Test.Assert.true$1(Bridge.is(e5, Bridge.hasValue(e5) && (e5.ntype === 32 || e5.ntype === 33)), "e5 is NewArrayExpression");
             Bridge.Test.Assert.areEqual$1(33, e5.ntype, "e5 node type");
-            Bridge.Test.Assert.areEqual$1(System.Array.type(System.Int32), e5.t, "e5 type");
+            Bridge.Test.Assert.areEqual$1(System.Array.type(System.Int32, 2), e5.t, "e5 type");
             Bridge.Test.Assert.areEqual$1(2, Bridge.cast(e5, Bridge.hasValue(e5) && (e5.ntype === 32 || e5.ntype === 33)).expressions.getCount(), "e5 expression count");
             Bridge.Test.Assert.true$1(($t11 = Bridge.cast(e5, Bridge.hasValue(e5) && (e5.ntype === 32 || e5.ntype === 33)).expressions.get(0), Bridge.is($t11, Bridge.hasValue($t11) && ($t11.ntype === 38))) && Bridge.referenceEquals(($t11 = Bridge.cast(e5, Bridge.hasValue(e5) && (e5.ntype === 32 || e5.ntype === 33)).expressions.get(0), Bridge.cast($t11, Bridge.hasValue($t11) && ($t11.ntype === 38))).n, "a"), "e5 expression 0");
             Bridge.Test.Assert.true$1(($t11 = Bridge.cast(e5, Bridge.hasValue(e5) && (e5.ntype === 32 || e5.ntype === 33)).expressions.get(1), Bridge.is($t11, Bridge.hasValue($t11) && ($t11.ntype === 38))) && Bridge.referenceEquals(($t11 = Bridge.cast(e5, Bridge.hasValue(e5) && (e5.ntype === 32 || e5.ntype === 33)).expressions.get(1), Bridge.cast($t11, Bridge.hasValue($t11) && ($t11.ntype === 38))).n, "b"), "e5 expression 1");
@@ -9460,7 +9460,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.MultidimArrayTests", {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.Assert.areEqual$1("Array", Bridge.Reflection.getTypeFullName(System.Array.type(System.Int32, 2)), "FullName should be Array");
+            Bridge.Test.Assert.areEqual$1("System.Int32[,]", Bridge.Reflection.getTypeFullName(System.Array.type(System.Int32, 2)), "FullName should be Array");
             Bridge.Test.Assert.true$1(Bridge.Reflection.isClass(System.Array.type(System.Int32, 2)), "IsClass should be true");
             var arr = System.Array.create(0, null, System.Int32, 1, 1);
             Bridge.Test.Assert.true$1(Bridge.is(arr, Array), "is Array should be true");
@@ -13561,7 +13561,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.Assert.areEqual("String", Bridge.Reflection.getTypeFullName(String));
             Bridge.Test.Assert.areEqual("Function", Bridge.Reflection.getTypeFullName(Function));
             Bridge.Test.Assert.areEqual("Object", Bridge.Reflection.getTypeFullName(Bridge.getType({  })));
-            Bridge.Test.Assert.areEqual("Array", Bridge.Reflection.getTypeFullName(Bridge.getType(System.Array.init([1, 2], System.Int32))));
+            Bridge.Test.Assert.areEqual("System.Int32[]", Bridge.Reflection.getTypeFullName(Bridge.getType(System.Array.init([1, 2], System.Int32))));
         },
         getTypeOnNullInstanceThrowsException: function () {
             Bridge.Test.Assert.throws($asm.$.Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.f2);

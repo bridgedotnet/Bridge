@@ -10,7 +10,7 @@ namespace Bridge.ClientTest.Batch4
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("Array", typeof(int[,]).FullName, "FullName should be Array");
+            Assert.AreEqual("System.Int32[,]", typeof(int[,]).FullName, "FullName should be Array");
             Assert.True(typeof(int[,]).IsClass, "IsClass should be true");
             object arr = new int[1, 1];
             Assert.True(arr is Array, "is Array should be true");
