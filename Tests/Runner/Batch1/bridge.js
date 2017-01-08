@@ -2,7 +2,7 @@
  * @version   : 15.6.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
  * @date      : 2016-12-12
- * @copyright : Copyright 2008-2016 Object.NET, Inc. http://object.net/
+ * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
 
@@ -1885,7 +1885,7 @@
 
         getUnderlyingType: function(type) {
             System.Enum.checkEnumType(type);
-            return Class.prototype.$utype || System.Int32;
+            return type.prototype.$utype || System.Int32;
         },
 
         toName: function (name) {
@@ -1995,7 +1995,9 @@
                 }
             }
 
-            return parts;
+            return parts.sort(function (i1, i2) {
+                return i1 - i2;
+            });
         },
 
         format: function (enumType, value, format) {
@@ -2033,14 +2035,26 @@
 
             for (var i in values) {
                 if (values.hasOwnProperty(i) && i.indexOf("$") < 0 && typeof values[i] !== "function") {
-                    parts.push(enumMethods.toName(i));
+                    parts.push([enumMethods.toName(i), values[i]]);
                 }
             }
 
-            return parts;
+            return parts.sort(function(i1, i2) {
+                return i1[1] - i2[1];
+            }).map(function(i) {
+                return i[0];
+            });
         },
 
         getName: function (enumType, value) {
+            if (value == null) {
+                throw new System.ArgumentNullException("value");
+            }
+
+            if (!(typeof (value) === "number" && Math.floor(value, 0) === value)) {
+                throw new System.ArgumentException("Argument must be integer", "value");
+            }
+
             System.Enum.checkEnumType(enumType);
 
             var values = enumType;
@@ -3077,6 +3091,12 @@
                     if (m.s) {
                         m.s.td = type;
                     }
+
+                    if (m.tprm && Bridge.isArray(m.tprm)) {
+                        for (var j = 0; j < m.tprm.length; j++) {
+                            m.tprm[j] = Bridge.Reflection.createTypeParam(m.tprm[j], type);
+                        }
+                    }
                 }
             }
 
@@ -3114,23 +3134,26 @@
             return metadata;
         },
 
-        createTypeParams: function (fn) {
+        createTypeParams: function (fn, t) {
             var args,
                 names = [],
                 fnStr = fn.toString();
 
             args = fnStr.slice(fnStr.indexOf('(') + 1, fnStr.indexOf(')')).match(/([^\s,]+)/g) || [];
             for (var i = 0; i < args.length; i++) {
-                names.push(Bridge.Reflection.createTypeParam(args[i]));
+                names.push(Bridge.Reflection.createTypeParam(args[i], t));
             }
 
             return names;
         },
 
-        createTypeParam: function(name) {
+        createTypeParam: function(name, t) {
             var fn = function TypeParameter() { };
             fn.$$name = name;
             fn.$isTypeParameter = true;
+            if (t) {
+                fn.td = t;
+            }
             return fn;
         },
 
@@ -3155,7 +3178,11 @@
         },
 
         getGenericArguments: function (type) {
-            return type.$typeArguments || null;
+            return type.$typeArguments || [];
+        },
+        
+        getMethodGenericArguments: function (m) {
+            return m.tprm || [];
         },
 
         isGenericTypeDefinition: function (type) {
@@ -3163,7 +3190,7 @@
         },
 
         isGenericType: function (type) {
-            return type.$genericTypeDefinition != null;
+            return type.$genericTypeDefinition != null || Bridge.Reflection.isGenericTypeDefinition(type);
         },
 
         getBaseType: function (type) {
@@ -3226,7 +3253,7 @@
                 bIndex = fullName.indexOf('['),
                 nsIndex = fullName.lastIndexOf('.', bIndex >= 0 ? bIndex : fullName.length);
 
-            return nsIndex > 0 ? fullName.substr(nsIndex + 1) : fullName;
+            return nsIndex > 0 ?  (bIndex >= 0 ? fullName.substring(nsIndex + 1, bIndex) : fullName.substr(nsIndex + 1)) : fullName;
         },
 
         getTypeNamespace: function (type) {
@@ -3782,7 +3809,7 @@
         },
 
         getMetaValue: function(type, name, dv) {
-            var md = Bridge.getMetadata(type);
+            var md = type.$isTypeParameter ? type : Bridge.getMetadata(type);
             return md ? (md[name] || dv) : dv;
         },
 

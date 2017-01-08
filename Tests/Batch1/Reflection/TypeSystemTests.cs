@@ -2,11 +2,14 @@ using Bridge.Test;
 using Bridge.Utils;
 using System;
 using System.Collections.Generic;
+using Bridge;
 
+[assembly:Reflectable("System.String;System.Int32")]
 namespace Bridge.ClientTest.Reflection
 {
     [Category(Constants.MODULE_REFLECTION)]
     [TestFixture(TestNameFormat = "Reflection - TypeSystem {0}")]
+    [Reflectable]
     public class TypeSystemTests
     {
         public class ClassWithExpandParamsCtor
@@ -20,13 +23,16 @@ namespace Bridge.ClientTest.Reflection
             }
         }
 
+        [Reflectable]
         public abstract class CA1
         {
 
         }
 
+        [Reflectable]
         public abstract class CA2 : CA1 { }
 
+        [Reflectable]
         public interface I1 { }
 
         public interface I2 : I1 { }
@@ -35,14 +41,18 @@ namespace Bridge.ClientTest.Reflection
 
         public interface I4 : I3 { }
 
+        [Reflectable]
         public class B : I2 { }
 
+        [Reflectable]
         public class C : B, I4 { }
 
+        [Reflectable]
         public interface IG<T> { }
 
         public class BX<T> { }
 
+        [Reflectable]
         public class G<T1, T2> : BX<G<T1, C>>, IG<G<T2, string>>
         {
             public static string field;
@@ -69,18 +79,22 @@ namespace Bridge.ClientTest.Reflection
         {
         }
 
+        [Reflectable]
         public sealed class CS1<T> : B
         {
         }
 
+        [Reflectable]
         private sealed class CS2<T, K> : I1
         {
         }
 
+        [Reflectable]
         internal sealed class CS3
         {
         }
 
+        [Reflectable]
         class L1
         {
             public int P
@@ -92,6 +106,7 @@ namespace Bridge.ClientTest.Reflection
             {
             }
 
+            [Reflectable]
             public class L2
             {
                 public int P
@@ -105,6 +120,7 @@ namespace Bridge.ClientTest.Reflection
             }
         }
 
+        [Reflectable]
         class L31<T> : L30
         {
             public void M2<K>(K a)
@@ -112,6 +128,7 @@ namespace Bridge.ClientTest.Reflection
             }
         }
 
+        [Reflectable]
         class L30
         {
             public void M1()
@@ -124,6 +141,7 @@ namespace Bridge.ClientTest.Reflection
             }
         }
 
+        [Reflectable]
         class L32 : L31<int>
         {
             public new void M1()
@@ -146,6 +164,7 @@ namespace Bridge.ClientTest.Reflection
             V1
         }
 
+        [Reflectable]
         public enum E1
         {
             V3 = 3,
@@ -268,8 +287,8 @@ namespace Bridge.ClientTest.Reflection
         public void NamePropertyRemovesTheNamespace()
         {
             Assert.AreEqual(typeof(TypeSystemTests).Name, "TypeSystemTests", "non-generic");
-            Assert.AreEqual(typeof(G<int, string>).Name, "G$2[[System.Int32, mscorlib],[String]]", "generic");
-            Assert.AreEqual(typeof(G<BX<double>, string>).Name, "G$2[[Bridge.ClientTest.Reflection.TypeSystemTests.BX$1[[System.Double, mscorlib]], Bridge.ClientTest],[String]]", "nested generic");
+            Assert.AreEqual(typeof(G<int, string>).Name, "G$2", "generic");
+            Assert.AreEqual(typeof(G<BX<double>, string>).Name, "G$2", "nested generic");
         }
 
         [Test]
@@ -482,8 +501,8 @@ namespace Bridge.ClientTest.Reflection
             Assert.AreEqual(null, typeof(L31<int>).GetGenericArguments()[0].DeclaringType);
             Assert.AreEqual("L30", typeof(L31<>).GetMethod("M1").DeclaringType.Name);
             Assert.AreEqual("L30", typeof(L31<object>).GetMethod("M1").DeclaringType.Name);
-            Assert.AreEqual("L31`1", typeof(L31<>).GetMethod("M2").DeclaringType.Name);
-            Assert.AreEqual("L31`1", typeof(L31<int>).GetMethod("M2").DeclaringType.Name);
+            Assert.AreEqual("L31$1", typeof(L31<>).GetMethod("M2").DeclaringType.Name);
+            Assert.AreEqual("L31$1", typeof(L31<int>).GetMethod("M2").DeclaringType.Name);
         }
 
         [Test(ExpectedCount = 58)] // #2161
@@ -631,11 +650,11 @@ namespace Bridge.ClientTest.Reflection
         {
             Assert.AreEqual(2, typeof(G<,>).GetGenericArguments().Length);
             Assert.AreEqual(typeof(G<int, string>).GetGenericArguments(), new[] { typeof(int), typeof(string) });
-            Assert.AreEqual(typeof(C).GetGenericArguments(), null);
+            Assert.AreEqual(0, typeof(C).GetGenericArguments().Length);
             Assert.AreEqual(1, typeof(IG<>).GetGenericArguments().Length);
             Assert.AreEqual(typeof(IG<string>).GetGenericArguments(), new[] { typeof(string) });
-            Assert.AreEqual(typeof(I2).GetGenericArguments(), null);
-            Assert.AreEqual(typeof(E1).GetGenericArguments(), null);
+            Assert.AreEqual(0, typeof(I2).GetGenericArguments().Length);
+            Assert.AreEqual(0, typeof(E1).GetGenericArguments().Length);
         }
 
         [Test]

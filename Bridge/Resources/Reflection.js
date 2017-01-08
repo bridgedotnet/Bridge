@@ -26,6 +26,12 @@
                     if (m.s) {
                         m.s.td = type;
                     }
+
+                    if (m.tprm && Bridge.isArray(m.tprm)) {
+                        for (var j = 0; j < m.tprm.length; j++) {
+                            m.tprm[j] = Bridge.Reflection.createTypeParam(m.tprm[j], type);
+                        }
+                    }
                 }
             }
 
@@ -63,23 +69,26 @@
             return metadata;
         },
 
-        createTypeParams: function (fn) {
+        createTypeParams: function (fn, t) {
             var args,
                 names = [],
                 fnStr = fn.toString();
 
             args = fnStr.slice(fnStr.indexOf('(') + 1, fnStr.indexOf(')')).match(/([^\s,]+)/g) || [];
             for (var i = 0; i < args.length; i++) {
-                names.push(Bridge.Reflection.createTypeParam(args[i]));
+                names.push(Bridge.Reflection.createTypeParam(args[i], t));
             }
 
             return names;
         },
 
-        createTypeParam: function(name) {
+        createTypeParam: function(name, t) {
             var fn = function TypeParameter() { };
             fn.$$name = name;
             fn.$isTypeParameter = true;
+            if (t) {
+                fn.td = t;
+            }
             return fn;
         },
 
@@ -104,7 +113,11 @@
         },
 
         getGenericArguments: function (type) {
-            return type.$typeArguments || null;
+            return type.$typeArguments || [];
+        },
+        
+        getMethodGenericArguments: function (m) {
+            return m.tprm || [];
         },
 
         isGenericTypeDefinition: function (type) {
@@ -112,7 +125,7 @@
         },
 
         isGenericType: function (type) {
-            return type.$genericTypeDefinition != null;
+            return type.$genericTypeDefinition != null || Bridge.Reflection.isGenericTypeDefinition(type);
         },
 
         getBaseType: function (type) {
@@ -175,7 +188,7 @@
                 bIndex = fullName.indexOf('['),
                 nsIndex = fullName.lastIndexOf('.', bIndex >= 0 ? bIndex : fullName.length);
 
-            return nsIndex > 0 ? fullName.substr(nsIndex + 1) : fullName;
+            return nsIndex > 0 ?  (bIndex >= 0 ? fullName.substring(nsIndex + 1, bIndex) : fullName.substr(nsIndex + 1)) : fullName;
         },
 
         getTypeNamespace: function (type) {
@@ -731,7 +744,7 @@
         },
 
         getMetaValue: function(type, name, dv) {
-            var md = Bridge.getMetadata(type);
+            var md = type.$isTypeParameter ? type : Bridge.getMetadata(type);
             return md ? (md[name] || dv) : dv;
         },
 

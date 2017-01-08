@@ -112,7 +112,7 @@ namespace System
 
         public extern bool IsGenericParameter
         {
-            [Template("{this}.$isTypeParameter")]
+            [Template("({this}.$isTypeParameter || false)")]
             get;
         }
 
@@ -276,7 +276,31 @@ namespace System
 
         public extern bool IsNotPublic
         {
-            [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 7)  != 1)")]
+            [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 7)  == 0)")]
+            get;
+        }
+
+        public extern bool IsNestedPublic
+        {
+            [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 7)  == 2)")]
+            get;
+        }
+
+        public extern bool IsNestedPrivate
+        {
+            [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 7)  == 3)")]
+            get;
+        }
+
+        public extern bool IsNestedFamily
+        {
+            [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 7)  == 4)")]
+            get;
+        }
+
+        public extern bool IsNestedAssembly
+        {
+            [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 7)  == 5)")]
             get;
         }
     }

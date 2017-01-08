@@ -529,6 +529,7 @@ namespace Bridge.Translator
                     if (MetadataUtils.IsJsGeneric(method, emitter))
                     {
                         properties.Add("tpc", method.TypeParameters.Count);
+                        properties.Add("tprm", new JArray(method.TypeParameters.Select(tp => tp.Name).ToArray()));
                     }
 
                     string sname;

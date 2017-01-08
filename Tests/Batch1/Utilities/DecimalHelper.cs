@@ -2,6 +2,7 @@ using Bridge.Test;
 
 namespace Bridge.ClientTest.Utilities
 {
+    [Reflectable]
     internal class DecimalHelper
     {
         public static void AssertIsDecimalAndEqualTo(object v, double d, string message = null)

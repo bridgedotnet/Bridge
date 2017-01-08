@@ -119,6 +119,9 @@ namespace System.Reflection
             private set;
         }
 
+        [Template("Bridge.Reflection.getMethodGenericArguments({this})")]
+        public extern Type[] GetGenericArguments();
+
         internal extern MethodInfo();
     }
 }
