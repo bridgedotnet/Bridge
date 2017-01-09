@@ -10,7 +10,7 @@
                 do {
                     reminder = num % 10;
                     num = (Bridge.Int.div(num, 10)) | 0;
-                    sb.insert(index, String.fromCharCode((((((System.Version.ZERO_CHAR_VALUE + reminder) | 0))) & 65535)));
+                    sb.insert(index, String.fromCharCode(((((System.Version.ZERO_CHAR_VALUE + reminder) | 0)) & 65535)));
                 } while (num > 0);
             },
             parse: function (input) {
@@ -214,10 +214,10 @@
             return this._Revision;
         },
         getMajorRevision: function () {
-            return Bridge.Int.sxs(((this._Revision >> 16)) & 65535);
+            return Bridge.Int.sxs((this._Revision >> 16) & 65535);
         },
         getMinorRevision: function () {
-            return Bridge.Int.sxs(((this._Revision & 65535)) & 65535);
+            return Bridge.Int.sxs((this._Revision & 65535) & 65535);
         },
         clone: function () {
             var v = new System.Version.ctor();

@@ -389,11 +389,8 @@ namespace Bridge.Translator
 
                 block.Write(JS.Types.System.Int64.NAME + ".");
                 block.Write(action);
-                if (!(expression is CastExpression && ((CastExpression)expression).Expression is ParenthesizedExpression))
-                {
-                    block.Write("(");
-                    block.AfterOutput += ")";
-                }
+                block.Write("(");
+                block.AfterOutput += ")";
             }
         }
 
@@ -487,11 +484,8 @@ namespace Bridge.Translator
 
                     block.Write(JS.Types.BRIDGE_INT + ".");
                     block.Write(action);
-                    if (!(expression is CastExpression && ((CastExpression)expression).Expression is ParenthesizedExpression))
-                    {
-                        block.Write("(");
-                        block.AfterOutput += ")";
-                    }
+                    block.Write("(");
+                    block.AfterOutput += ")";
                 }
                 else
                 {

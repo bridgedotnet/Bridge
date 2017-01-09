@@ -11620,7 +11620,7 @@
                 do {
                     reminder = num % 10;
                     num = (Bridge.Int.div(num, 10)) | 0;
-                    sb.insert(index, String.fromCharCode((((((System.Version.ZERO_CHAR_VALUE + reminder) | 0))) & 65535)));
+                    sb.insert(index, String.fromCharCode(((((System.Version.ZERO_CHAR_VALUE + reminder) | 0)) & 65535)));
                 } while (num > 0);
             },
             parse: function (input) {
@@ -11824,10 +11824,10 @@
             return this._Revision;
         },
         getMajorRevision: function () {
-            return Bridge.Int.sxs(((this._Revision >> 16)) & 65535);
+            return Bridge.Int.sxs((this._Revision >> 16) & 65535);
         },
         getMinorRevision: function () {
-            return Bridge.Int.sxs(((this._Revision & 65535)) & 65535);
+            return Bridge.Int.sxs((this._Revision & 65535) & 65535);
         },
         clone: function () {
             var v = new System.Version.ctor();
@@ -17001,8 +17001,8 @@
 
                 System.Guid.rnd.nextBytes(a);
 
-                a[7] = ((a[7] & 15 | 64)) & 255;
-                a[8] = ((a[8] & 191 | 128)) & 255;
+                a[7] = (a[7] & 15 | 64) & 255;
+                a[8] = (a[8] & 191 | 128) & 255;
 
                 return new System.Guid.$ctor1(a);
             },
@@ -17056,8 +17056,8 @@
             }
 
             this._a = (b[3] << 24) | (b[2] << 16) | (b[1] << 8) | b[0];
-            this._b = Bridge.Int.sxs((((b[5] << 8) | b[4])) & 65535);
-            this._c = Bridge.Int.sxs((((b[7] << 8) | b[6])) & 65535);
+            this._b = Bridge.Int.sxs(((b[5] << 8) | b[4]) & 65535);
+            this._c = Bridge.Int.sxs(((b[7] << 8) | b[6]) & 65535);
             this._d = b[8];
             this._e = b[9];
             this._f = b[10];
@@ -17142,14 +17142,14 @@
         toByteArray: function () {
             var g = System.Array.init(16, 0);
 
-            g[0] = (this._a) & 255;
-            g[1] = ((this._a >> 8)) & 255;
-            g[2] = ((this._a >> 16)) & 255;
-            g[3] = ((this._a >> 24)) & 255;
-            g[4] = (this._b) & 255;
-            g[5] = ((this._b >> 8)) & 255;
-            g[6] = (this._c) & 255;
-            g[7] = ((this._c >> 8)) & 255;
+            g[0] = this._a & 255;
+            g[1] = (this._a >> 8) & 255;
+            g[2] = (this._a >> 16) & 255;
+            g[3] = (this._a >> 24) & 255;
+            g[4] = this._b & 255;
+            g[5] = (this._b >> 8) & 255;
+            g[6] = this._c & 255;
+            g[7] = (this._c >> 8) & 255;
             g[8] = this._d;
             g[9] = this._e;
             g[10] = this._f;
@@ -23234,7 +23234,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 throw new System.ArgumentNullException("buffer");
             }
             for (var i = 0; i < buffer.length; i = (i + 1) | 0) {
-                buffer[i] = ((this.internalSample() % (256))) & 255;
+                buffer[i] = (this.internalSample() % (256)) & 255;
             }
         }
     });

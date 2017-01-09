@@ -38,8 +38,8 @@
 
                 System.Guid.rnd.nextBytes(a);
 
-                a[7] = ((a[7] & 15 | 64)) & 255;
-                a[8] = ((a[8] & 191 | 128)) & 255;
+                a[7] = (a[7] & 15 | 64) & 255;
+                a[8] = (a[8] & 191 | 128) & 255;
 
                 return new System.Guid.$ctor1(a);
             },
@@ -93,8 +93,8 @@
             }
 
             this._a = (b[3] << 24) | (b[2] << 16) | (b[1] << 8) | b[0];
-            this._b = Bridge.Int.sxs((((b[5] << 8) | b[4])) & 65535);
-            this._c = Bridge.Int.sxs((((b[7] << 8) | b[6])) & 65535);
+            this._b = Bridge.Int.sxs(((b[5] << 8) | b[4]) & 65535);
+            this._c = Bridge.Int.sxs(((b[7] << 8) | b[6]) & 65535);
             this._d = b[8];
             this._e = b[9];
             this._f = b[10];
@@ -179,14 +179,14 @@
         toByteArray: function () {
             var g = System.Array.init(16, 0);
 
-            g[0] = (this._a) & 255;
-            g[1] = ((this._a >> 8)) & 255;
-            g[2] = ((this._a >> 16)) & 255;
-            g[3] = ((this._a >> 24)) & 255;
-            g[4] = (this._b) & 255;
-            g[5] = ((this._b >> 8)) & 255;
-            g[6] = (this._c) & 255;
-            g[7] = ((this._c >> 8)) & 255;
+            g[0] = this._a & 255;
+            g[1] = (this._a >> 8) & 255;
+            g[2] = (this._a >> 16) & 255;
+            g[3] = (this._a >> 24) & 255;
+            g[4] = this._b & 255;
+            g[5] = (this._b >> 8) & 255;
+            g[6] = this._c & 255;
+            g[7] = (this._c >> 8) & 255;
             g[8] = this._d;
             g[9] = this._e;
             g[10] = this._f;

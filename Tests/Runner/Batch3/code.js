@@ -627,7 +627,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 var a = new Date(2015, 1 - 1, 1, 9);
                 var b = new Date(2015, 1 - 1, 1, 12, 52);
 
-                var value = System.Decimal(((Bridge.Date.subdd(b, a)).getTotalHours()), null, System.Double);
+                var value = System.Decimal((Bridge.Date.subdd(b, a)).getTotalHours(), null, System.Double);
 
                 Bridge.Test.Assert.areEqual("3.86666666666667", Bridge.Int.format(value, 'G'));
             }
@@ -7011,7 +7011,7 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1522", {
         testAssignIntToDecimal: function () {
             var x = System.Decimal(2.0);
-            x = System.Decimal(System.Decimal.toInt((x.mul(System.Decimal(60))), System.Int32));
+            x = System.Decimal(System.Decimal.toInt(x.mul(System.Decimal(60)), System.Int32));
             Bridge.Test.Assert.true(x.gt(System.Decimal(2.0)));
         }
     });
@@ -7020,7 +7020,7 @@ Bridge.$N1391Result =                 r;
         testAssignDecimalToInt: function () {
             var x = 0;
             var y = System.Decimal(2);
-            x = (x + System.Decimal.toInt((System.Nullable.getValue(y).mul(System.Decimal(60.0))), System.Int32)) | 0;
+            x = (x + System.Decimal.toInt(System.Nullable.getValue(y).mul(System.Decimal(60.0)), System.Int32)) | 0;
             Bridge.Test.Assert.areEqual(120, x);
         }
     });
@@ -7166,8 +7166,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7197,7 +7195,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    });
+                                    }); /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -14760,14 +14758,14 @@ Bridge.$N1391Result =                 r;
         statics: {
             testUseCase: function () {
                 var i8_1 = -2;
-                var i8_2 = Bridge.Int.sxb(((i8_1 >> 4)) & 255);
+                var i8_2 = Bridge.Int.sxb((i8_1 >> 4) & 255);
                 var u8_1 = 254;
-                var u8_2 = ((u8_1 >> 4)) & 255;
+                var u8_2 = (u8_1 >> 4) & 255;
 
                 var i16_1 = -2;
-                var i16_2 = Bridge.Int.sxs(((i16_1 >> 8)) & 65535);
+                var i16_2 = Bridge.Int.sxs((i16_1 >> 8) & 65535);
                 var u16_1 = 65534;
-                var u16_2 = ((u16_1 >> 8)) & 65535;
+                var u16_2 = (u16_1 >> 8) & 65535;
 
                 var i32_1 = -2;
                 var i32_2 = i32_1 >> 16;

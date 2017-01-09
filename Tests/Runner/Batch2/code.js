@@ -79,16 +79,16 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
             testIntegerDivisionInJavaScriptOverflowMode: function () {
                 var x = 1.1;
 
-                var y1 = (1 / x);
+                var y1 = 1 / x;
                 Bridge.Test.Assert.areEqual$1("0.9090909090909091", y1.toString(), "int");
 
-                var y2 = (1 / x);
+                var y2 = 1 / x;
                 Bridge.Test.Assert.areEqual$1("0.9090909090909091", y2.toString(), "uint");
 
-                var z1 = (1 / x);
+                var z1 = 1 / x;
                 Bridge.Test.Assert.areEqual$1("0.9090909090909091", z1.toString(), "long");
 
-                var z2 = (1 / x);
+                var z2 = 1 / x;
                 Bridge.Test.Assert.areEqual$1("0.9090909090909091", z2.toString(), "ulong");
             }
         }
