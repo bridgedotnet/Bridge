@@ -157,6 +157,16 @@ namespace Bridge.ClientTest.Reflection
             }
         }
 
+        [Reflectable]
+        protected internal class ProtectedInternalClass
+        {
+        }
+
+        [Reflectable]
+        protected class ProtectedClass
+        {
+        }
+
         public enum E0
         {
             V3,
@@ -413,6 +423,78 @@ namespace Bridge.ClientTest.Reflection
             Assert.False(typeof(C).IsPublic);
             Assert.False(typeof(E1).IsPublic);
             Assert.False(typeof(G<,>).IsPublic);
+        }
+
+        [Test] // #2161
+        public void IsNestedPublicWorks()
+        {
+            Assert.False(typeof(TypeSystemTests).IsNestedPublic);
+            Assert.True(typeof(CA1).IsNestedPublic);
+            Assert.True(typeof(CA2).IsNestedPublic);
+            Assert.True(typeof(I1).IsNestedPublic);
+            Assert.True(typeof(IG<>).IsNestedPublic);
+            Assert.True(typeof(CS1<>).IsNestedPublic);
+            Assert.False(typeof(CS2<,>).IsNestedPublic);
+            Assert.False(typeof(CS3).IsNestedPublic);
+            Assert.False(typeof(L1).IsNestedPublic);
+            Assert.True(typeof(C).IsNestedPublic);
+            Assert.True(typeof(E1).IsNestedPublic);
+            Assert.True(typeof(G<,>).IsNestedPublic);
+        }
+
+        [Test] // #2161
+        public void IsNestedPrivateWorks()
+        {
+            Assert.False(typeof(TypeSystemTests).IsNestedPrivate);
+            Assert.False(typeof(CA1).IsNestedPrivate);
+            Assert.False(typeof(CA2).IsNestedPrivate);
+            Assert.False(typeof(I1).IsNestedPrivate);
+            Assert.False(typeof(IG<>).IsNestedPrivate);
+            Assert.False(typeof(CS1<>).IsNestedPrivate);
+            Assert.True(typeof(CS2<,>).IsNestedPrivate);
+            Assert.False(typeof(CS3).IsNestedPrivate);
+            Assert.True(typeof(L1).IsNestedPrivate);
+            Assert.False(typeof(C).IsNestedPrivate);
+            Assert.False(typeof(E1).IsNestedPrivate);
+            Assert.False(typeof(G<,>).IsNestedPrivate);
+        }
+
+        [Test] // #2161
+        public void IsNestedFamilyWorks()
+        {
+            Assert.False(typeof(TypeSystemTests).IsNestedFamily);
+            Assert.False(typeof(CA1).IsNestedFamily);
+            Assert.False(typeof(CA2).IsNestedFamily);
+            Assert.False(typeof(I1).IsNestedFamily);
+            Assert.False(typeof(IG<>).IsNestedFamily);
+            Assert.False(typeof(CS1<>).IsNestedFamily);
+            Assert.False(typeof(CS2<,>).IsNestedFamily);
+            Assert.False(typeof(CS3).IsNestedFamily);
+            Assert.False(typeof(L1).IsNestedFamily);
+            Assert.False(typeof(C).IsNestedFamily);
+            Assert.False(typeof(E1).IsNestedFamily);
+            Assert.False(typeof(G<,>).IsNestedFamily);
+            Assert.True(typeof(ProtectedClass).IsNestedFamily);
+            Assert.False(typeof(ProtectedInternalClass).IsNestedFamily);
+        }
+
+        [Test] // #2161
+        public void IsNestedAssemblyWorks()
+        {
+            Assert.False(typeof(TypeSystemTests).IsNestedAssembly);
+            Assert.False(typeof(CA1).IsNestedAssembly);
+            Assert.False(typeof(CA2).IsNestedAssembly);
+            Assert.False(typeof(I1).IsNestedAssembly);
+            Assert.False(typeof(IG<>).IsNestedAssembly);
+            Assert.False(typeof(CS1<>).IsNestedAssembly);
+            Assert.False(typeof(CS2<,>).IsNestedAssembly);
+            Assert.True(typeof(CS3).IsNestedAssembly);
+            Assert.False(typeof(L1).IsNestedAssembly);
+            Assert.False(typeof(C).IsNestedAssembly);
+            Assert.False(typeof(E1).IsNestedAssembly);
+            Assert.False(typeof(G<,>).IsNestedAssembly);
+            Assert.False(typeof(ProtectedClass).IsNestedAssembly);
+            Assert.False(typeof(ProtectedInternalClass).IsNestedAssembly);
         }
 
         [Test] // #2161
