@@ -50,6 +50,20 @@ namespace Bridge.ClientTest.Collections.Generic
             }
 
             public int Count { get { return _backingDictionary.Count; } }
+            public bool IsReadOnly
+            {
+                get { return this._backingDictionary.IsReadOnly; }
+            }
+
+            public void Add(KeyValuePair<int, string> item)
+            {
+                ((ICollection<KeyValuePair<int, string>>)this._backingDictionary).Add(item);
+            }
+
+            public void CopyTo(KeyValuePair<int, string>[] array, int arrayIndex)
+            {
+                ((ICollection<KeyValuePair<int, string>>)this._backingDictionary).CopyTo(array, arrayIndex);
+            }
 
             public void Add(int key, string value)
             {
@@ -74,6 +88,16 @@ namespace Bridge.ClientTest.Collections.Generic
             public void Clear()
             {
                 _backingDictionary.Clear();
+            }
+
+            public bool Contains(KeyValuePair<int, string> item)
+            {
+                return ((ICollection<KeyValuePair<int, string>>)this._backingDictionary).Contains(item);
+            }
+
+            public bool Remove(KeyValuePair<int, string> item)
+            {
+                return ((ICollection<KeyValuePair<int, string>>)this._backingDictionary).Remove(item);
             }
         }
 

@@ -2,5 +2,6 @@
   "output": "Bridge\\output",
   "cleanOutputFolderBeforeBuildPattern": "*.*",
   "outputBy": "Namespace",
+  "outputFormatting": "Formatted",
   "fileNameCasing": "CamelCase"
 }

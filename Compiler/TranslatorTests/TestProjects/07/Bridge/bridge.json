@@ -2,5 +2,6 @@
   "output": "Bridge\\output",
   "cleanOutputFolderBeforeBuildPattern": "*.*",
   "module": "MyModule",
+  "outputFormatting": "Formatted",
   "generateDocumentation": "Full"
 }

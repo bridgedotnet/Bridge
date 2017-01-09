@@ -26,6 +26,14 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.ClientTestHelper.N2190", {
+        statics: {
+            greeting: function () {
+                return "Hi";
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTestHelper.IWriteableItem", {
         inherits: [Bridge.ClientTestHelper.IItem],
         $kind: "interface"
