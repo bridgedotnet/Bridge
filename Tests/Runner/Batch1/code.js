@@ -23842,16 +23842,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.true(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS3, 'att', 0)  & 256)  != 0));
         },
         attributesWorks: function () {
-            Bridge.Test.Assert.areEqual(1048706, (Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA1, 'att', 0)));
-            Bridge.Test.Assert.areEqual(1048706, (Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA2, 'att', 0)));
-            Bridge.Test.Assert.areEqual(1048577, (Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests, 'att', 0)));
-            Bridge.Test.Assert.areEqual(1048578, (Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.B, 'att', 0)));
-            Bridge.Test.Assert.areEqual(162, (Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.I1, 'att', 0)));
-            Bridge.Test.Assert.areEqual(162, (Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1, 'att', 0)));
-            Bridge.Test.Assert.areEqual(1048834, (Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS1$1, 'att', 0)));
-            Bridge.Test.Assert.areEqual(1048835, (Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS2$2, 'att', 0)));
-            Bridge.Test.Assert.areEqual(1048837, (Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS3, 'att', 0)));
-            Bridge.Test.Assert.areEqual(258, (Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.E1, 'att', 0)));
+            Bridge.Test.Assert.areEqual(1048706, Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA1, 'att', 0));
+            Bridge.Test.Assert.areEqual(1048706, Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA2, 'att', 0));
+            Bridge.Test.Assert.areEqual(1048577, Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests, 'att', 0));
+            Bridge.Test.Assert.areEqual(1048578, Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.B, 'att', 0));
+            Bridge.Test.Assert.areEqual(162, Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.I1, 'att', 0));
+            Bridge.Test.Assert.areEqual(162, Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1, 'att', 0));
+            Bridge.Test.Assert.areEqual(1048834, Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS1$1, 'att', 0));
+            Bridge.Test.Assert.areEqual(1048835, Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS2$2, 'att', 0));
+            Bridge.Test.Assert.areEqual(1048837, Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS3, 'att', 0));
+            Bridge.Test.Assert.areEqual(258, Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.E1, 'att', 0));
         },
         getEnumNamesWorks: function () {
             Bridge.Test.Assert.areEqual(System.Array.init(["V3", "V2", "V1"], String), System.Enum.getNames(Bridge.ClientTest.Reflection.TypeSystemTests.E0));
