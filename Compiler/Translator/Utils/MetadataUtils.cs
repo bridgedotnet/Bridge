@@ -17,7 +17,7 @@ namespace Bridge.Translator
     {
         public static JObject ConstructTypeMetadata(ITypeDefinition type, IEmitter emitter, bool ifHasAttribute, SyntaxTree tree)
         {
-            var properties = new JObject();
+            var properties = ifHasAttribute ? new JObject() : MetadataUtils.GetCommonTypeProperties(type, emitter);
             var scriptableAttributes = MetadataUtils.GetScriptableAttributes(type.Attributes, emitter, tree).ToList();
             if (scriptableAttributes.Count != 0)
             {
@@ -85,7 +85,7 @@ namespace Bridge.Translator
 
         public static JObject ConstructITypeMetadata(IType type, IEmitter emitter)
         {
-            var properties = new JObject();
+            var properties = MetadataUtils.GetCommonTypeProperties(type, emitter);
 
             if (type.Kind == TypeKind.Class || type.Kind == TypeKind.Anonymous)
             {
@@ -100,6 +100,35 @@ namespace Bridge.Translator
             }
 
             return properties.Count > 0 ? properties : null;
+        }
+
+        private static JObject GetCommonTypeProperties(IType type, IEmitter emitter)
+        {
+            var result = new JObject();
+            var typedef = type.GetDefinition();
+            var cecilType = emitter.GetTypeDefinition(type);
+
+            if (type.DeclaringType != null)
+            {
+                result.Add("td", new JRaw(MetadataUtils.GetTypeName(type.DeclaringType, emitter, false)));
+            }
+
+            if (cecilType != null)
+            {
+                result.Add("att", (int)cecilType.Attributes);
+            }
+
+            if (typedef.Accessibility != Accessibility.None)
+            {
+                result.Add("a", (int)typedef.Accessibility);
+            }
+
+            if (typedef.IsStatic)
+            {
+                result.Add("s", true);
+            }
+
+            return result;
         }
 
         public static JRaw ConstructAttribute(IAttribute attr, ITypeDefinition currentType, IEmitter emitter)
@@ -500,6 +529,7 @@ namespace Bridge.Translator
                     if (MetadataUtils.IsJsGeneric(method, emitter))
                     {
                         properties.Add("tpc", method.TypeParameters.Count);
+                        properties.Add("tprm", new JArray(method.TypeParameters.Select(tp => tp.Name).ToArray()));
                     }
 
                     string sname;

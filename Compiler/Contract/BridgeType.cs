@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using ArrayType = ICSharpCode.NRefactory.TypeSystem.ArrayType;
 using ByReferenceType = ICSharpCode.NRefactory.TypeSystem.ByReferenceType;
 
 namespace Bridge.Contract
@@ -19,31 +20,31 @@ namespace Bridge.Contract
             this.Key = key;
         }
 
-        public IEmitter Emitter
+        public virtual IEmitter Emitter
         {
             get;
             set;
         }
 
-        public string Key
+        public virtual string Key
         {
             get;
             private set;
         }
 
-        public TypeDefinition TypeDefinition
+        public virtual TypeDefinition TypeDefinition
         {
             get;
             set;
         }
 
-        public IType Type
+        public virtual IType Type
         {
             get;
             set;
         }
 
-        public ITypeInfo TypeInfo
+        public virtual ITypeInfo TypeInfo
         {
             get;
             set;
@@ -320,6 +321,17 @@ namespace Bridge.Contract
 
             if (type.Kind == TypeKind.Array)
             {
+                var arrayType = type as ArrayType;
+
+                if (arrayType != null && arrayType.ElementType != null)
+                {
+                    if (arrayType.Dimensions > 1)
+                    {
+                        return string.Format(JS.Types.System.Array.TYPE + "({0}, {1})", BridgeTypes.ToJsName(arrayType.ElementType, emitter, asDefinition, excludens, isAlias, skipMethodTypeParam), arrayType.Dimensions);
+                    }
+                    return string.Format(JS.Types.System.Array.TYPE + "({0})", BridgeTypes.ToJsName(arrayType.ElementType, emitter, asDefinition, excludens, isAlias, skipMethodTypeParam));
+                }
+
                 return JS.Types.ARRAY;
             }
 
@@ -522,12 +534,12 @@ namespace Bridge.Contract
                 return "Object";
             }
 
-            var composedType = astType as ComposedType;
+            /*var composedType = astType as ComposedType;
 
             if (composedType != null && composedType.ArraySpecifiers != null && composedType.ArraySpecifiers.Count > 0)
             {
                 return JS.Types.ARRAY;
-            }
+            }*/
 
             var simpleType = astType as SimpleType;
 

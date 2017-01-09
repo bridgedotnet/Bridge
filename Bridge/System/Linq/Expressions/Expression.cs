@@ -375,10 +375,10 @@ namespace System.Linq.Expressions
         [NonScriptable, EditorBrowsable(EditorBrowsableState.Never)]
         public static extern MethodCallExpression ArrayIndex(Expression array, params Expression[] indexes);
 
-        [Template("{ ntype: 6, t: {type}, obj: {array}, method: { t: 8, td: Array, n: 'Get', rt: {type}, p: System.Array.init({indexes:array}.length, System.Int32, true), def: function() { return System.Array.$get.call(this, arguments); } }, args: Bridge.toList({indexes:array}) }")]
+        [Template("{ ntype: 6, t: {type}, obj: {array}, method: { t: 8, td: System.Array.type({type}, {indexes:array}.length), n: 'Get', rt: {type}, p: System.Array.init({indexes:array}.length, System.Int32, {type}, true), def: function() { return System.Array.$get.call(this, arguments); } }, args: Bridge.toList({indexes:array}) }")]
         public static extern MethodCallExpression ArrayIndex(Type type, Expression array, params Expression[] indexes);
 
-        [Template("(function(a, b, c) { return { ntype: 6, t: a, obj: b, method: { t: 8, td: Array, n: 'Get', rt: a, p: System.Array.init(c.getCount(), System.Int32, true), def: function() { return System.Array.$get.call(this, arguments); } }, args: c }; })({type}, {array}, Bridge.toList({indexes}))")]
+        [Template("(function(a, b, c) { return { ntype: 6, t: a, obj: b, method: { t: 8, td: System.Array.type({type}, c.getCount()), n: 'Get', rt: a, p: System.Array.init(c.getCount(), System.Int32, {type}, true), def: function() { return System.Array.$get.call(this, arguments); } }, args: c }; })({type}, {array}, Bridge.toList({indexes}))")]
         public static extern MethodCallExpression ArrayIndex(Type type, Expression array, IEnumerable<Expression> indexes);
 
         [Template("{ ntype: 47, t: {expressions:array}[{expressions:array}.length - 1].t, expressions: Bridge.toList({expressions:array}) }")]
@@ -704,16 +704,16 @@ namespace System.Linq.Expressions
         [Template("{ ntype: 6, t: {method}.rt, obj: {instance}, method: {method}, args: Bridge.toList({arguments}) }")]
         public static extern MethodCallExpression Call(Expression instance, MethodInfo method, IEnumerable<Expression> arguments);
 
-        [Template("{ ntype: 32, t: Array, expressions: Bridge.toList({initializers:array}) }")]
+        [Template("{ ntype: 32, t: System.Array.type({type}), expressions: Bridge.toList({initializers:array}) }")]
         public static extern NewArrayExpression NewArrayInit(Type type, params Expression[] initializers);
 
-        [Template("{ ntype: 32, t: Array, expressions: Bridge.toList({initializers}) }")]
+        [Template("{ ntype: 32, t: System.Array.type({type}), expressions: Bridge.toList({initializers}) }")]
         public static extern NewArrayExpression NewArrayInit(Type type, IEnumerable<Expression> initializers);
 
-        [Template("{ ntype: 33, t: Array, expressions: Bridge.toList({bounds:array}) }")]
+        [Template("{ ntype: 33, t: System.Array.type({type}, {bounds:array}.length), expressions: Bridge.toList({bounds:array}) }")]
         public static extern NewArrayExpression NewArrayBounds(Type type, params Expression[] bounds);
 
-        [Template("{ ntype: 33, t: Array, expressions: Bridge.toList({bounds}) }")]
+        [Template("(function(l) { return { ntype: 33, t: System.Array.type({type}, l.getCount()), expressions: l };})(Bridge.toList({bounds}))")]
         public static extern NewArrayExpression NewArrayBounds(Type type, IEnumerable<Expression> bounds);
 
         [Template("{ ntype: 31, t: {type}, constructor: Bridge.Reflection.getMembers({type}, 1, 284, null, []), arguments: Bridge.toList([]) }")]

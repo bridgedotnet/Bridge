@@ -27,18 +27,18 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         statics: {
             main1: function () {
                 //These arrays depend on "useTypedArray" bridge.json option
-                var byteArray = new Uint8Array(1);
-                var sbyteArray = new Int8Array(2);
-                var shortArray = new Int16Array(3);
-                var ushortArray = new Uint16Array(4);
-                var intArray = new Int32Array(5);
-                var uintArray = new Uint32Array(6);
-                var floatArray = new Float32Array(7);
-                var doubleArray = new Float64Array(8);
+                var byteArray = System.Array.init(new Uint8Array(1), System.Byte);
+                var sbyteArray = System.Array.init(new Int8Array(2), System.SByte);
+                var shortArray = System.Array.init(new Int16Array(3), System.Int16);
+                var ushortArray = System.Array.init(new Uint16Array(4), System.UInt16);
+                var intArray = System.Array.init(new Int32Array(5), System.Int32);
+                var uintArray = System.Array.init(new Uint32Array(6), System.UInt32);
+                var floatArray = System.Array.init(new Float32Array(7), System.Single);
+                var doubleArray = System.Array.init(new Float64Array(8), System.Double);
 
                 //These arrays do not depend on "useTypedArray" bridge.json option
-                var stringArray = System.Array.init(9, null);
-                var decimalArray = System.Array.init(10, System.Decimal(0.0));
+                var stringArray = System.Array.init(9, null, String);
+                var decimalArray = System.Array.init(10, System.Decimal(0.0), System.Decimal);
 
                 byteArray[0] = 1;
                 sbyteArray[0] = 2;

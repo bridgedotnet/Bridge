@@ -139,7 +139,7 @@
         },
 
         alignString: function (str, alignment, pad, dir, cut) {
-            if (!str || !alignment) {
+            if (str == null || !alignment) {
                 return str;
             }
 

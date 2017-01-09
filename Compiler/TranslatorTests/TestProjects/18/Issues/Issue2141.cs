@@ -92,6 +92,7 @@ namespace TestIssue2141
             // These below should NOT contain Bridge.literal call
             var c1 = new Config1() { Id = "1" };
             // These below should contain Bridge.literal call as [Name] used
+            // Bridge.literal(Options1, { id: "1Name" })
             var c1Name = new Config1Name() { Id = "1Name" };
 
             // These below should NOT contain Bridge.literal call
@@ -105,7 +106,7 @@ namespace TestIssue2141
             var c3Name = new Config3Name() { Id = "3Name" };
 
             // These below should NOT contain Bridge.literal call
-            // Bridge.merge(Object(), { id: "4" });
+            // Bridge.merge(Config4(), { id: "4" });
             var c4 = new Config4() { Id = "4" };
             // Bridge.merge(Options4(), { id: "4Name" });
             var c4Name = new Config4Name() { Id = "4Name" };

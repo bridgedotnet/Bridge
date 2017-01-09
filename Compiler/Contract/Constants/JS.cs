@@ -64,8 +64,6 @@
             public const string INITIALIZE = "$initialize";
             public const string INIT = "init";
             public const string CLONE = "$clone";
-            public const string TO_ENUMERATOR = "toEnumerator";
-            public const string TO_ENUMERABLE = "toEnumerable";
             public const string MOVE_NEXT = "moveNext";
             public const string GET_CURRENT = "getCurrent";
             public const string TOSTIRNG = "toString";
@@ -144,10 +142,8 @@
         {
             public const string SYSTEM_UInt64 = "System.UInt64";
             public const string SYSTEM_DECIMAL = "System.Decimal";
-            public const string SYSTEM_ARRAY = "System.Array";
             public const string SYSTEM_NULLABLE = "System.Nullable";
             public const string TASK_COMPLETION_SOURCE = "System.Threading.Tasks.TaskCompletionSource";
-            public const string SYSTEM_EXCEPTION = "System.Exception";
             public const string BRIDGE_IBridgeClass = "Bridge.IBridgeClass";
             public const string BRIDGE_INT = "Bridge.Int";
             public const string BRIDGE_ANONYMOUS = "$AnonymousType$";
@@ -182,6 +178,26 @@
             public class System
             {
                 private const string DOTNAME = "System.";
+
+                public class Array
+                {
+                    private const string DOTNAME = System.DOTNAME + "Array.";
+
+                    public const string CREATE = DOTNAME + "create";
+                    public const string INIT = DOTNAME + "init";
+                    public const string MIN = DOTNAME + "min";
+                    public const string TYPE = DOTNAME + "type";
+                    public const string TO_ENUMERATOR = DOTNAME + "toEnumerator";
+                    public const string TO_ENUMERABLE = DOTNAME + "toEnumerable";
+                }
+
+                public class Exception
+                {
+                    public const string NAME = System.DOTNAME + "Exception";
+                    private const string DOTNAME = NAME + ".";
+
+                    public const string CREATE = DOTNAME + "create";
+                }
 
                 public class String
                 {

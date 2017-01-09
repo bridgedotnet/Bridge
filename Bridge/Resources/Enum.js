@@ -17,9 +17,13 @@
             }
         },
 
+        getUnderlyingType: function (type) {
+            System.Enum.checkEnumType(type);
+            return type.prototype.$utype || System.Int32;
+        },
+
         toName: function (name) {
             return name;
-            //return name.charAt(0).toUpperCase() + name.slice(1);
         },
 
         parse: function (enumType, s, ignoreCase, silent) {
@@ -125,7 +129,9 @@
                 }
             }
 
-            return parts;
+            return parts.sort(function (i1, i2) {
+                return i1 - i2;
+            });
         },
 
         format: function (enumType, value, format) {
@@ -163,21 +169,33 @@
 
             for (var i in values) {
                 if (values.hasOwnProperty(i) && i.indexOf("$") < 0 && typeof values[i] !== "function") {
-                    parts.push(enumMethods.toName(i));
+                    parts.push([enumMethods.toName(i), values[i]]);
                 }
             }
 
-            return parts;
+            return parts.sort(function (i1, i2) {
+                return i1[1] - i2[1];
+            }).map(function (i) {
+                return i[0];
+            });
         },
 
         getName: function (enumType, value) {
+            if (value == null) {
+                throw new System.ArgumentNullException("value");
+            }
+
+            if (!(typeof (value) === "number" && Math.floor(value, 0) === value)) {
+                throw new System.ArgumentException("Argument must be integer", "value");
+            }
+
             System.Enum.checkEnumType(enumType);
 
             var values = enumType;
 
             for (var i in values) {
                 if (values[i] === value) {
-                    return i.charAt(0).toUpperCase() + i.slice(1);
+                    return i;
                 }
             }
 

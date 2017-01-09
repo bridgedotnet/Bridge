@@ -917,8 +917,8 @@ namespace Bridge.ClientTest.Reflection
         public void TypeParametersAreReplacedWithObjectForReturnAndParameterTypesForOpenGenericTypes()
         {
             var m = typeof(C5<,>).GetMethod("M");
-            Assert.AreEqual(m.ReturnType, typeof(object), "Return type should be object");
-            Assert.AreDeepEqual(m.ParameterTypes, new[] { typeof(object), typeof(string) }, "Parameters should be correct");
+            Assert.AreEqual("T1", m.ReturnType.Name, "Return type should be object");
+            Assert.AreDeepEqual(m.ParameterTypes.Map(p => p.Name), new[] { "T2", "String" }, "Parameters should be correct");
         }
 
         [Test]

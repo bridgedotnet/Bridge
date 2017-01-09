@@ -15,8 +15,8 @@
             return name2;
         },
 
-        literal: function(type, obj) {
-            obj.$getType = function() {return type};
+        literal: function (type, obj) {
+            obj.$getType = function () { return type };
             return obj;
         },
 
@@ -184,7 +184,9 @@
                 return 0;
             }
 
-            if (typeof (type.getDefaultValue) === 'function') {
+            if (typeof (type.createInstance) === 'function') {
+                return type.createInstance();
+            } else if (typeof (type.getDefaultValue) === 'function') {
                 return type.getDefaultValue();
             } else if (type === Boolean) {
                 return false;
@@ -432,7 +434,9 @@
         },
 
         getDefaultValue: function (type) {
-            if ((type.getDefaultValue) && type.getDefaultValue.length === 0) {
+            if (type == null) {
+                throw new System.ArgumentNullException("type");
+            } else if ((type.getDefaultValue) && type.getDefaultValue.length === 0) {
                 return type.getDefaultValue();
             } else if (type === Boolean) {
                 return false;
@@ -517,7 +521,7 @@
                         if (obj.$getType) {
                             return Bridge.Reflection.isAssignableFrom(type, obj.$getType());
                         }
-                    
+
                         return true;
                     }
                 }
@@ -592,6 +596,10 @@
         },
 
         merge: function (to, from, callback, elemFactory) {
+            if (to == null) {
+                return from;
+            }
+
             // Maps instance of plain JS value or Object into Bridge object.
             // Used for deserialization. Proper deserialization requires reflection that is currently not supported in Bridge.
             // It currently is only capable to deserialize:
@@ -658,15 +666,29 @@
                             to[key](value);
                         }
                     } else {
-                        var setter = "set" + key.charAt(0).toUpperCase() + key.slice(1);
+                        var setter1 = "set" + key.charAt(0).toUpperCase() + key.slice(1),
+                            setter2 = "set" + key,
+                            getter;
 
-                        if (typeof to[setter] === "function" && typeof value !== "function") {
-                            to[setter](value);
+                        if (typeof to[setter1] === "function" && typeof value !== "function") {
+                            getter = "g" + setter1.slice(1);
+                            if (typeof to[getter] === "function") {
+                                to[setter1](Bridge.merge(to[getter](), value));
+                            } else {
+                                to[setter1](value);
+                            }
+                        } else if (typeof to[setter2] === "function" && typeof value !== "function") {
+                            getter = "g" + setter2.slice(1);
+                            if (typeof to[getter] === "function") {
+                                to[setter2](Bridge.merge(to[getter](), value));
+                            } else {
+                                to[setter2](value);
+                            }
                         } else if (value && value.constructor === Object && to[key]) {
                             toValue = to[key];
                             Bridge.merge(toValue, value);
                         } else {
-                            to[key] = value;
+                            to[key] = Bridge.merge(to[key], value);
                         }
                     }
                 }
@@ -775,7 +797,7 @@
                 return false;
             }
 
-            return Bridge.arrayTypes.indexOf(c) >= 0;
+            return Bridge.arrayTypes.indexOf(c) >= 0 || c.$isArray;
         },
 
         isFunction: function (obj) {
@@ -1014,9 +1036,13 @@
             return obj.format(formatString, provider);
         },
 
-        getType: function (instance) {
+        getType: function (instance, T) {
             if (instance == null) {
                 throw new System.NullReferenceException("instance is null");
+            }
+
+            if (T && Bridge.Reflection.getBaseType(T) === Object) {
+                return T;
             }
 
             if (typeof (instance) === "number") {
@@ -1025,6 +1051,10 @@
                 } else {
                     return System.Double;
                 }
+            }
+
+            if (instance.$type) {
+                return instance.$type;
             }
 
             if (instance.$getType) {

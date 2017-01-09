@@ -1100,7 +1100,7 @@ namespace Bridge.ClientTest.Batch4.Linq.Expressions
 
             Assert.True(e2.Body is NewArrayExpression, "e2 is NewArrayExpression");
             Assert.AreEqual(ExpressionType.NewArrayBounds, e2.Body.NodeType, "e2 node type");
-            Assert.AreEqual(typeof(int[]), e2.Body.Type, "e2 type");
+            Assert.AreEqual(typeof(int[,]), e2.Body.Type, "e2 type");
             Assert.AreEqual(2, ((NewArrayExpression)e2.Body).Expressions.Count, "e2 expression count");
             Assert.True(((NewArrayExpression)e2.Body).Expressions[0] is ParameterExpression && ((ParameterExpression)((NewArrayExpression)e2.Body).Expressions[0]).Name == "a", "e2 expression 0");
             Assert.True(((NewArrayExpression)e2.Body).Expressions[1] is ParameterExpression && ((ParameterExpression)((NewArrayExpression)e2.Body).Expressions[1]).Name == "b", "e2 expression 1");
@@ -1114,14 +1114,14 @@ namespace Bridge.ClientTest.Batch4.Linq.Expressions
 
             Assert.True(e4 is NewArrayExpression, "e4 is NewArrayExpression");
             Assert.AreEqual(ExpressionType.NewArrayBounds, e4.NodeType, "e4 node type");
-            Assert.AreEqual(typeof(int[]), e4.Type, "e4 type");
+            Assert.AreEqual(typeof(int[,]), e4.Type, "e4 type");
             Assert.AreEqual(2, ((NewArrayExpression)e4).Expressions.Count, "e4 expression count");
             Assert.True(((NewArrayExpression)e4).Expressions[0] is ParameterExpression && ((ParameterExpression)((NewArrayExpression)e4).Expressions[0]).Name == "a", "e4 expression 0");
             Assert.True(((NewArrayExpression)e4).Expressions[1] is ParameterExpression && ((ParameterExpression)((NewArrayExpression)e4).Expressions[1]).Name == "b", "e4 expression 1");
 
             Assert.True(e5 is NewArrayExpression, "e5 is NewArrayExpression");
             Assert.AreEqual(ExpressionType.NewArrayBounds, e5.NodeType, "e5 node type");
-            Assert.AreEqual(typeof(int[]), e5.Type, "e5 type");
+            Assert.AreEqual(typeof(int[,]), e5.Type, "e5 type");
             Assert.AreEqual(2, ((NewArrayExpression)e5).Expressions.Count, "e5 expression count");
             Assert.True(((NewArrayExpression)e5).Expressions[0] is ParameterExpression && ((ParameterExpression)((NewArrayExpression)e5).Expressions[0]).Name == "a", "e5 expression 0");
             Assert.True(((NewArrayExpression)e5).Expressions[1] is ParameterExpression && ((ParameterExpression)((NewArrayExpression)e5).Expressions[1]).Name == "b", "e5 expression 1");

@@ -119,6 +119,13 @@ namespace System.Reflection
             private set;
         }
 
+        /// <summary>
+        /// Returns an array of Type objects that represent the type arguments of a generic method or the type parameters of a generic method definition.
+        /// </summary>
+        /// <returns>An array of Type objects that represent the type arguments of a generic method or the type parameters of a generic method definition. Returns an empty array if the current method is not a generic method.</returns>
+        [Template("Bridge.Reflection.getMethodGenericArguments({this})")]
+        public extern Type[] GetGenericArguments();
+
         internal extern MethodInfo();
     }
 }

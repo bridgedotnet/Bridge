@@ -2,6 +2,6 @@
   "output": "Bridge\\output",
   "cleanOutputFolderBeforeBuildPattern": "*.*",
   //"outputBy": "Project",
-
+  "outputFormatting": "Formatted",
   "useTypedArrays": true
 }

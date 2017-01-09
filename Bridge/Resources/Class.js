@@ -125,7 +125,7 @@
 
                 fn.$cache = [];
 
-                return Bridge.Class.generic(className, gscope, fn, prop.length);
+                return Bridge.Class.generic(className, gscope, fn, prop);
             }
 
             if (!isGenericInstance) {
@@ -144,9 +144,15 @@
                 v,
                 isCtor,
                 ctorName,
-                name;
+                name,
+                registerT = true;
 
             prop.$kind = prop.$kind || "class";
+
+            if (prop.$noRegister === true) {
+                registerT = false;
+                delete prop.$noRegister;
+            }
 
             if (prop.$inherits) {
                 delete prop.$inherits;
@@ -206,7 +212,7 @@
                 delete prop.$literal;
             }
 
-            if (!isGenericInstance) {
+            if (!isGenericInstance && registerT) {
                 scope = Bridge.Class.set(scope, className, Class);
             }
 
@@ -239,31 +245,7 @@
                 extend = extend();
             }
 
-            var interfaces = [],
-                baseInterfaces = [];
-
-            if (extend) {
-                for (var j = 0; j < extend.length; j++) {
-                    var baseType = extend[j],
-                        baseI = (baseType.$interfaces || []).concat(baseType.$baseInterfaces || []);
-
-                    if (baseI.length > 0) {
-                        for (var k = 0; k < baseI.length; k++) {
-                            if (baseInterfaces.indexOf(baseI[k]) < 0) {
-                                baseInterfaces.push(baseI[k]);
-                            }
-                        }
-                    }
-
-                    if (baseType.$kind === "interface") {
-                        interfaces.push(baseType);
-                    }
-                }
-            }
-
-            Class.$baseInterfaces = baseInterfaces;
-            Class.$interfaces = interfaces;
-            Class.$allInterfaces = interfaces.concat(baseInterfaces);
+            Bridge.Class.createInheritors(Class, extend);
 
             var noBase = extend ? extend[0].$kind === "interface" : true;
 
@@ -352,20 +334,10 @@
             }
 
             if (!extend) {
-                extend = [Object].concat(interfaces);
+                extend = [Object].concat(Class.$interfaces);
             }
 
-            Class.$$inherits = extend;
-
-            for (i = 0; i < extend.length; i++) {
-                scope = extend[i];
-
-                if (!scope.$$inheritors) {
-                    scope.$$inheritors = [];
-                }
-
-                scope.$$inheritors.push(Class);
-            }
+            Bridge.Class.setInheritors(Class, extend);
 
             fn = function () {
                 if (Bridge.Class.staticInitAllow) {
@@ -387,7 +359,7 @@
 
             Class.$staticInit = fn;
 
-            if (!isGenericInstance) {
+            if (!isGenericInstance && registerT) {
                 Bridge.Class.registerType(className, Class);
             }
 
@@ -430,6 +402,48 @@
             }
 
             return Class;
+        },
+
+        createInheritors: function(cls, extend) {
+            var interfaces = [],
+                baseInterfaces = [];
+
+            if (extend) {
+                for (var j = 0; j < extend.length; j++) {
+                    var baseType = extend[j],
+                        baseI = (baseType.$interfaces || []).concat(baseType.$baseInterfaces || []);
+
+                    if (baseI.length > 0) {
+                        for (var k = 0; k < baseI.length; k++) {
+                            if (baseInterfaces.indexOf(baseI[k]) < 0) {
+                                baseInterfaces.push(baseI[k]);
+                            }
+                        }
+                    }
+
+                    if (baseType.$kind === "interface") {
+                        interfaces.push(baseType);
+                    }
+                }
+            }
+
+            cls.$baseInterfaces = baseInterfaces;
+            cls.$interfaces = interfaces;
+            cls.$allInterfaces = interfaces.concat(baseInterfaces);
+        },
+
+        setInheritors: function(cls, extend) {
+            cls.$$inherits = extend;
+
+            for (var i = 0; i < extend.length; i++) {
+                var scope = extend[i];
+
+                if (!scope.$$inheritors) {
+                    scope.$$inheritors = [];
+                }
+
+                scope.$$inheritors.push(cls);
+            }
         },
 
         varianceAssignable: function (source) {
@@ -647,16 +661,41 @@
             return null;
         },
 
-        generic: function (className, scope, fn, length) {
+        generic: function (className, scope, fn, prop) {
             fn.$$name = className;
             fn.$kind = "class";
 
             Bridge.Class.set(scope, className, fn, true);
             Bridge.Class.registerType(className, fn);
 
-            fn.$typeArgumentCount = length;
+            fn.$typeArgumentCount = prop.length;
             fn.$isGenericTypeDefinition = true;
             fn.$getMetadata = Bridge.Reflection.getMetadata;
+
+            fn.$staticInit = function() {
+                fn.$typeArguments = Bridge.Reflection.createTypeParams(prop);
+
+                var cfg = prop.apply(null, fn.$typeArguments),
+                    extend = cfg.$inherits || cfg.inherits;
+
+                if (extend && Bridge.isFunction(extend)) {
+                    extend = extend();
+                }
+
+                Bridge.Class.createInheritors(fn, extend);
+
+                if (!extend) {
+                    extend = [Object].concat(fn.$interfaces);
+                }
+
+                Bridge.Class.setInheritors(fn, extend);
+
+                var prototype = extend ? (extend[0].$$initCtor ? new extend[0].$$initCtor() : new extend[0]()) : new Object();
+                fn.prototype = prototype;
+                fn.prototype.constructor = fn;
+            };
+
+            Bridge.Class.$queue.push(fn);
 
             return fn;
         },
