@@ -14,6 +14,9 @@ namespace System
             get;
         }
 
+        /// <summary>
+        /// Gets the type from which the current Type directly inherits.
+        /// </summary>
         public extern Type BaseType
         {
             [Template("Bridge.Reflection.getBaseType({this})")]
@@ -62,6 +65,9 @@ namespace System
             get;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the current type is a generic type.
+        /// </summary>
         public extern bool IsGenericType
         {
             [Template("Bridge.Reflection.isGenericType({this})")]
@@ -74,48 +80,73 @@ namespace System
             get;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the Type is abstract and must be overridden.
+        /// </summary>
         public extern bool IsAbstract
         {
             [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 128)  != 0)")]
             get;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the Type is declared sealed.
+        /// </summary>
         public extern bool IsSealed
         {
             [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 256)  != 0)")]
             get;
         }
 
+        /// <summary>
+        /// Gets the type that declares the current nested type or generic type parameter.
+        /// </summary>
         public extern Type DeclaringType
         {
             [Template("Bridge.Reflection.getMetaValue({this}, 'td', null)")]
             get;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the current Type object represents a type whose definition is nested inside the definition of another type.
+        /// </summary>
         public extern bool IsNested
         {
             [Template("(Bridge.Reflection.getMetaValue({this}, 'td', null) != null)")]
             get;
         }
 
+        /// <summary>
+        /// Gets the attributes associated with the Type.
+        /// </summary>
         public extern TypeAttributes Attributes
         {
             [Template("Bridge.Reflection.getMetaValue({this}, 'att', 0)")]
             get;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the current Type object has type parameters that have not been replaced by specific types.
+        /// </summary>
         public extern bool ContainsGenericParameters
         {
             [Template("Bridge.Reflection.hasGenericParameters({this})")]
             get;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the current Type represents a type parameter in the definition of a generic type or method.
+        /// </summary>
         public extern bool IsGenericParameter
         {
             [Template("({this}.$isTypeParameter || false)")]
             get;
         }
 
+        /// <summary>
+        /// Returns an array of Type objects that represent the type arguments of a closed generic type or the type parameters of a generic type definition.
+        /// </summary>
+        /// <returns>An array of Type objects that represent the type arguments of a generic type. Returns an empty array if the current type is not a generic type.</returns>
         [Template("Bridge.Reflection.getGenericArguments({this})")]
         public extern Type[] GetGenericArguments();
 
@@ -287,48 +318,83 @@ namespace System
         [Template("Bridge.getTypeName({this})")]
         public override extern string GetClassName();
 
+        /// <summary>
+        /// Returns the names of the members of the current enumeration type.
+        /// </summary>
+        /// <returns>An array that contains the names of the members of the enumeration.</returns>
         [Template("System.Enum.getNames({this})")]
         public virtual extern string[] GetEnumNames();
 
+        /// <summary>
+        /// Returns the name of the constant that has the specified value, for the current enumeration type.
+        /// </summary>
+        /// <param name="value">The value whose name is to be retrieved.</param>
+        /// <returns>The name of the member of the current enumeration type that has the specified value, or null if no such constant is found.</returns>
         [Template("System.Enum.getName({this}, {value})")]
         public virtual extern string GetEnumName(object value);
 
+        /// <summary>
+        /// Returns an array of the values of the constants in the current enumeration type.
+        /// </summary>
+        /// <returns>An array that contains the values. The elements of the array are sorted by the binary values (that is, the unsigned values) of the enumeration constants.</returns>
         [Template("System.Enum.getValues({this})")]
         public virtual extern Array GetEnumValues();
 
+        /// <summary>
+        /// Returns the underlying type of the current enumeration type.
+        /// </summary>
+        /// <returns>The underlying type of the current enumeration.</returns>
         [Template("System.Enum.getUnderlyingType({this})")]
         public virtual extern Type GetEnumUnderlyingType();
 
+        /// <summary>
+        /// Gets a value indicating whether the Type is declared public.
+        /// </summary>
         public extern bool IsPublic
         {
             [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 7)  == 1)")]
             get;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the Type is not declared public.
+        /// </summary>
         public extern bool IsNotPublic
         {
             [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 7)  == 0)")]
             get;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether a class is nested and declared public.
+        /// </summary>
         public extern bool IsNestedPublic
         {
             [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 7)  == 2)")]
             get;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the Type is nested and declared private.
+        /// </summary>
         public extern bool IsNestedPrivate
         {
             [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 7)  == 3)")]
             get;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the Type is nested and visible only within its own family.
+        /// </summary>
         public extern bool IsNestedFamily
         {
             [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 7)  == 4)")]
             get;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the Type is nested and visible only within its own assembly.
+        /// </summary>
         public extern bool IsNestedAssembly
         {
             [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 7)  == 5)")]
