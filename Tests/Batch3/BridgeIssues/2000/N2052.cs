@@ -17,7 +17,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             {
                 my1DArray.SetValue(i + 1, i);
             }
-            
+
             Assert.AreEqual(typeof(int[]), my1DArray.GetType());
             Assert.AreEqual(5, my1DArray.Length);
             Assert.AreEqual(1, my1DArray[0]);
@@ -36,7 +36,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual(2, my2DArray.Rank);
             Assert.AreEqual(1, my2DArray.GetUpperBound(0));
             Assert.AreEqual(2, my2DArray.GetUpperBound(1));
-            Assert.AreEqual("abc00", my2DArray.GetValue(0,0));
+            Assert.AreEqual("abc00", my2DArray.GetValue(0, 0));
             Assert.AreEqual("abc12", my2DArray.GetValue(1, 2));
 
             Array my3DArray = Array.CreateInstance(typeof(object), 2, 3, 4);

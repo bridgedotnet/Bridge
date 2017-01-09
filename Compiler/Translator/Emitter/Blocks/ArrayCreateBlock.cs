@@ -53,7 +53,9 @@ namespace Bridge.Translator
                 string typedArrayName = null;
                 if (this.Emitter.AssemblyInfo.UseTypedArrays && (typedArrayName = Helpers.GetTypedArrayName(at.ElementType)) != null)
                 {
-                    this.Write(JS.Types.SYSTEM_ARRAY + ".init(");
+                    this.Write(JS.Types.System.Array.INIT);
+                    this.WriteOpenParentheses();
+
                     this.Write("new ", typedArrayName, "(");
                     if (this.ArrayCreateResolveResult != null)
                     {
@@ -70,7 +72,9 @@ namespace Bridge.Translator
                 }
                 else
                 {
-                    this.Write(JS.Types.SYSTEM_ARRAY + ".init(");
+                    this.Write(JS.Types.System.Array.INIT);
+                    this.WriteOpenParentheses();
+
                     if (this.ArrayCreateResolveResult != null)
                     {
                         AttributeCreateBlock.WriteResolveResult(this.ArrayCreateResolveResult.SizeArguments.First(), this);
@@ -116,7 +120,9 @@ namespace Bridge.Translator
 
             if (at.Dimensions > 1)
             {
-                this.Write(JS.Types.SYSTEM_ARRAY + ".create(");
+                this.Write(JS.Types.System.Array.CREATE);
+                this.WriteOpenParentheses();
+
                 var defaultInitializer =
                     new PrimitiveExpression(Inspector.GetDefaultFieldValue(at.ElementType, arrayCreateExpression.Type),
                         "?");
@@ -138,7 +144,8 @@ namespace Bridge.Translator
             }
             else
             {
-                this.Write(JS.Types.SYSTEM_ARRAY + ".init(");
+                this.Write(JS.Types.System.Array.INIT);
+                this.WriteOpenParentheses();
             }
 
             if (rr.InitializerElements != null && rr.InitializerElements.Count > 0)

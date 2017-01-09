@@ -327,9 +327,9 @@ namespace Bridge.Contract
                 {
                     if (arrayType.Dimensions > 1)
                     {
-                        return string.Format("System.Array.type({0}, {1})", BridgeTypes.ToJsName(arrayType.ElementType, emitter, asDefinition, excludens, isAlias, skipMethodTypeParam), arrayType.Dimensions);
+                        return string.Format(JS.Types.System.Array.TYPE + "({0}, {1})", BridgeTypes.ToJsName(arrayType.ElementType, emitter, asDefinition, excludens, isAlias, skipMethodTypeParam), arrayType.Dimensions);
                     }
-                    return string.Format("System.Array.type({0})", BridgeTypes.ToJsName(arrayType.ElementType, emitter, asDefinition, excludens, isAlias, skipMethodTypeParam));
+                    return string.Format(JS.Types.System.Array.TYPE + "({0})", BridgeTypes.ToJsName(arrayType.ElementType, emitter, asDefinition, excludens, isAlias, skipMethodTypeParam));
                 }
 
                 return JS.Types.ARRAY;

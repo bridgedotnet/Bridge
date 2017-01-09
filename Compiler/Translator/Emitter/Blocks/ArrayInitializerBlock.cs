@@ -35,9 +35,10 @@ namespace Bridge.Translator
             {
                 if (at != null)
                 {
-                    this.Write(JS.Types.SYSTEM_ARRAY + ".init(");
+                    this.Write(JS.Types.System.Array.INIT);
+                    this.WriteOpenParentheses();
                 }
-                
+
                 this.Write("[");
             }
             else
