@@ -303,6 +303,17 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.Assert.true(Bridge.Reflection.isAssignableFrom(System.Collections.Generic.ICollection$1(System.Int32), System.Array.type(System.Int32)));
             Bridge.Test.Assert.true(Bridge.Reflection.isAssignableFrom(System.Collections.Generic.IList$1(System.Int32), System.Array.type(System.Int32)));
         },
+        createWithNegativeLenghtShouldThrow: function () {
+            var size = -1;
+            Bridge.Test.Assert.throws$6(System.ArgumentOutOfRangeException, function () {
+                var a = System.Array.init(size, 0, System.Int32);
+            });
+
+            var lsize = System.Int64(-1);
+            Bridge.Test.Assert.throws$6(System.ArgumentOutOfRangeException, function () {
+                var a = System.Array.init(lsize, 0, System.Int32);
+            });
+        },
         lengthWorks: function () {
             Bridge.Test.Assert.areEqual(0, System.Array.init(0, 0, System.Int32).length);
             Bridge.Test.Assert.areEqual(1, System.Array.init(["x"], String).length);
@@ -5856,26 +5867,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.Assert.true$1(ex.getInnerException() == null, "InnerException");
             Bridge.Test.Assert.areEqual$1(42, ex.getActualValue(), "ActualValue");
             Bridge.Test.Assert.areEqual("The message", ex.getMessage());
-        },
-        rangeErrorIsConvertedToArgumentOutOfRangeException: function () {
-            var size = -1;
-            try {
-                var arr = System.Array.init(size, 0, System.Int32);
-                Bridge.Test.Assert.fail$1("Should throw");
-            }
-            catch ($e1) {
-                $e1 = System.Exception.create($e1);
-                var ex;
-                if (Bridge.is($e1, System.ArgumentOutOfRangeException)) {
-                    ex = $e1;
-                    var inner = ex.getInnerException();
-                    Bridge.Test.Assert.notNull$1(inner, "Inner Exception");
-                    Bridge.Test.Assert.true$1(Bridge.is(inner, Bridge.ErrorException), "Inner is ErrorException");
-                } else {
-                    ex = $e1;
-                    Bridge.Test.Assert.fail$1(System.String.concat("Expected ArgumentOutOfRangeException, got ", Bridge.getType(ex)));
-                }
-            }
         }
     });
 
@@ -11557,8 +11548,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         typeParametersAreReplacedWithObjectForReturnAndParameterTypesForOpenGenericTypes: function () {
             var m = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C5$2, 8, 284, "M");
-            Bridge.Test.Assert.areEqual$1(Object, m.rt, "Return type should be object");
-            Bridge.Test.Assert.areDeepEqual$1(System.Array.init([Object, String], Function), (m.p || []), "Parameters should be correct");
+            Bridge.Test.Assert.areEqual$1("T1", Bridge.Reflection.getTypeName(m.rt), "Return type should be object");
+            Bridge.Test.Assert.areDeepEqual$1((m.p || []).map($asm.$.Bridge.ClientTest.Batch4.Reflection.ReflectionTests.f2), System.Array.init(["T2", "String"], String), "Parameters should be correct");
         },
         typeParametersAreCorrectForReturnAndParameterTypesForConstructedGenericTypes: function () {
             var m = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C5$2(String,Date), 8, 284, "M");
@@ -11808,12 +11799,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.Assert.areEqual(System.Array.init([2, System.Array.init([17, 32], System.Int32)], Object), r2);
         },
         invokeWorksForAllKindsOfConstructors: function () {
-            var c1 = Bridge.cast(Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10, 31, 28).filter($asm.$.Bridge.ClientTest.Batch4.Reflection.ReflectionTests.f2)[0], System.Reflection.ConstructorInfo);
+            var c1 = Bridge.cast(Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10, 31, 28).filter($asm.$.Bridge.ClientTest.Batch4.Reflection.ReflectionTests.f3)[0], System.Reflection.ConstructorInfo);
             var o1 = Bridge.cast(Bridge.Reflection.invokeCI(c1, [42]), Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10);
             Bridge.Test.Assert.areEqual$1(42, o1.x, "o1.X");
             Bridge.Test.Assert.areEqual$1("X", o1.s, "o1.S");
 
-            var c2 = Bridge.cast(Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10, 31, 28).filter($asm.$.Bridge.ClientTest.Batch4.Reflection.ReflectionTests.f3)[0], System.Reflection.ConstructorInfo);
+            var c2 = Bridge.cast(Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10, 31, 28).filter($asm.$.Bridge.ClientTest.Batch4.Reflection.ReflectionTests.f4)[0], System.Reflection.ConstructorInfo);
             var o2 = Bridge.cast(Bridge.Reflection.invokeCI(c2, [14, "Hello"]), Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10);
             Bridge.Test.Assert.areEqual$1(14, o2.x, "o2.X");
             Bridge.Test.Assert.areEqual$1("Hello", o2.s, "o2.S");
@@ -12624,10 +12615,13 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         f1: function (m) {
             return Bridge.referenceEquals(m.n, "M");
         },
-        f2: function (m) {
-            return (Bridge.cast(m, System.Reflection.ConstructorInfo).p || []).length === 1;
+        f2: function (p) {
+            return Bridge.Reflection.getTypeName(p);
         },
         f3: function (m) {
+            return (Bridge.cast(m, System.Reflection.ConstructorInfo).p || []).length === 1;
+        },
+        f4: function (m) {
             return (Bridge.cast(m, System.Reflection.ConstructorInfo).p || []).length === 2;
         }
     });
@@ -13682,9 +13676,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.Assert.areEqual(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.ClassWithExpandParamsCtor, Bridge.getType(obj));
         },
         namePropertyRemovesTheNamespace: function () {
-            Bridge.Test.Assert.areEqual$1("TypeSystemTests", Bridge.Reflection.getTypeName(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests), "non-generic");
-            Bridge.Test.Assert.areEqual$1("G$2[[System.Int32, mscorlib],[String]]", Bridge.Reflection.getTypeName(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(System.Int32,String)), "generic");
-            Bridge.Test.Assert.areEqual$1("G$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BX$1[[System.Double, mscorlib]], Bridge.ClientTest.Batch4],[String]]", Bridge.Reflection.getTypeName(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BX$1(System.Double),String)), "nested generic");
+            Bridge.Test.Assert.areEqual$1(Bridge.Reflection.getTypeName(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests), "TypeSystemTests", "non-generic");
+            Bridge.Test.Assert.areEqual$1(Bridge.Reflection.getTypeName(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(System.Int32,String)), "G$2", "generic");
+            Bridge.Test.Assert.areEqual$1(Bridge.Reflection.getTypeName(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BX$1(System.Double),String)), "G$2", "nested generic");
         },
         gettingBaseTypeWorks: function () {
             Bridge.Test.Assert.areEqual(Object, Bridge.Reflection.getBaseType(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.B));
@@ -13749,13 +13743,13 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.Assert.areEqual(0, Bridge.Reflection.getGenericParameterCount(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1));
         },
         getGenericArgumentsReturnsTheCorrectTypesForConstructedTypesOtherwiseNull: function () {
-            Bridge.Test.Assert.areEqual(null, Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2));
-            Bridge.Test.Assert.areEqual(System.Array.init([System.Int32, String], Function), Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(System.Int32,String)));
-            Bridge.Test.Assert.areEqual(null, Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C));
-            Bridge.Test.Assert.areEqual(null, Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1));
-            Bridge.Test.Assert.areEqual(System.Array.init([String], Function), Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1(String)));
-            Bridge.Test.Assert.areEqual(null, Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.I2));
-            Bridge.Test.Assert.areEqual(null, Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1));
+            Bridge.Test.Assert.areEqual(2, Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2).length);
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(System.Int32,String)), System.Array.init([System.Int32, String], Function));
+            Bridge.Test.Assert.areEqual(0, Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C).length);
+            Bridge.Test.Assert.areEqual(1, Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1).length);
+            Bridge.Test.Assert.areEqual(Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1(String)), System.Array.init([String], Function));
+            Bridge.Test.Assert.areEqual(0, Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.I2).length);
+            Bridge.Test.Assert.areEqual(0, Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1).length);
         },
         getGenericTypeDefinitionReturnsTheGenericTypeDefinitionForConstructedTypeOtherwiseNull: function () {
             //Assert.AreEqual(null, typeof(G<,>).GetGenericTypeDefinition());

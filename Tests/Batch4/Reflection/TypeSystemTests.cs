@@ -166,9 +166,9 @@ namespace Bridge.ClientTest.Batch4.Reflection
         [Test]
         public void NamePropertyRemovesTheNamespace()
         {
-            Assert.AreEqual("TypeSystemTests", typeof(TypeSystemTests).Name, "non-generic");
-            Assert.AreEqual("G$2[[System.Int32, mscorlib],[String]]", typeof(G<int, string>).Name, "generic");
-            Assert.AreEqual("G$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BX$1[[System.Double, mscorlib]], Bridge.ClientTest.Batch4],[String]]", typeof(G<BX<double>, string>).Name, "nested generic");
+            Assert.AreEqual(typeof(TypeSystemTests).Name, "TypeSystemTests", "non-generic");
+            Assert.AreEqual(typeof(G<int, string>).Name, "G$2", "generic");
+            Assert.AreEqual(typeof(G<BX<double>, string>).Name, "G$2", "nested generic");
         }
 
         [Test]
@@ -272,13 +272,13 @@ namespace Bridge.ClientTest.Batch4.Reflection
         [Test]
         public void GetGenericArgumentsReturnsTheCorrectTypesForConstructedTypesOtherwiseNull()
         {
-            Assert.AreEqual(null, typeof(G<,>).GetGenericArguments());
-            Assert.AreEqual(new[] { typeof(int), typeof(string) }, typeof(G<int, string>).GetGenericArguments());
-            Assert.AreEqual(null, typeof(C).GetGenericArguments());
-            Assert.AreEqual(null, typeof(IG<>).GetGenericArguments());
-            Assert.AreEqual(new[] { typeof(string) }, typeof(IG<string>).GetGenericArguments());
-            Assert.AreEqual(null, typeof(I2).GetGenericArguments());
-            Assert.AreEqual(null, typeof(E1).GetGenericArguments());
+            Assert.AreEqual(2, typeof(G<,>).GetGenericArguments().Length);
+            Assert.AreEqual(typeof(G<int, string>).GetGenericArguments(), new[] { typeof(int), typeof(string) });
+            Assert.AreEqual(0, typeof(C).GetGenericArguments().Length);
+            Assert.AreEqual(1, typeof(IG<>).GetGenericArguments().Length);
+            Assert.AreEqual(typeof(IG<string>).GetGenericArguments(), new[] { typeof(string) });
+            Assert.AreEqual(0, typeof(I2).GetGenericArguments().Length);
+            Assert.AreEqual(0, typeof(E1).GetGenericArguments().Length);
         }
 
         [Test]

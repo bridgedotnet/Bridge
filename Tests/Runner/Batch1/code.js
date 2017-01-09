@@ -74,6 +74,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.throws$6(System.ArgumentOutOfRangeException, function () {
                 var a = System.Array.init(size, 0, System.Int32);
             });
+
+            var lsize = System.Int64(-1);
+            Bridge.Test.Assert.throws$6(System.ArgumentOutOfRangeException, function () {
+                var a = System.Array.init(lsize, 0, System.Int32);
+            });
         },
         lengthWorks: function () {
             Bridge.Test.Assert.areEqual(0, System.Array.init(0, 0, System.Int32).length);

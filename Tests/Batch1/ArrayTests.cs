@@ -55,6 +55,12 @@ namespace Bridge.ClientTest
                 {
                     var a = new int[size];
                 });
+
+                long lsize = -1;
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    var a = new int[lsize];
+                });
             }
 
             [Test]

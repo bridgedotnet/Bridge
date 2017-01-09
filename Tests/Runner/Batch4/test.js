@@ -24,6 +24,7 @@ Bridge.assembly("Bridge_ClientTest_Batch4_Tests", function ($asm, globals) {
             QUnit.test("ArrayTests - TypePropertiesAreCorrect_SPI_1546", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests.typePropertiesAreCorrect_SPI_1546);
             QUnit.test("ArrayTests - TypePropertiesAreCorrect_SPI_1548", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests.typePropertiesAreCorrect_SPI_1548);
             QUnit.test("ArrayTests - ArrayCanBeAssignedToTheCollectionInterfaces_SPI_1547", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests.arrayCanBeAssignedToTheCollectionInterfaces_SPI_1547);
+            QUnit.test("ArrayTests - CreateWithNegativeLenghtShouldThrow", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests.createWithNegativeLenghtShouldThrow);
             QUnit.test("ArrayTests - LengthWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests.lengthWorks);
             QUnit.test("ArrayTests - RankIsOne", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests.rankIsOne);
             QUnit.test("ArrayTests - GetLengthWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests.getLengthWorks);
@@ -566,7 +567,6 @@ Bridge.assembly("Bridge_ClientTest_Batch4_Tests", function ($asm, globals) {
             QUnit.test("ArgumentOutOfRangeExceptionTests - ConstructorWithParamNameAndMessageWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_ArgumentOutOfRangeExceptionTests.constructorWithParamNameAndMessageWorks);
             QUnit.test("ArgumentOutOfRangeExceptionTests - ConstructorWithMessageAndInnerExceptionWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_ArgumentOutOfRangeExceptionTests.constructorWithMessageAndInnerExceptionWorks);
             QUnit.test("ArgumentOutOfRangeExceptionTests - ConstructorWithParamNameAndActualValueAndMessageWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_ArgumentOutOfRangeExceptionTests.constructorWithParamNameAndActualValueAndMessageWorks);
-            QUnit.test("ArgumentOutOfRangeExceptionTests - RangeErrorIsConvertedToArgumentOutOfRangeException", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_ArgumentOutOfRangeExceptionTests.rangeErrorIsConvertedToArgumentOutOfRangeException);
             QUnit.test("ArithmeticExceptionTests - TypePropertiesAreCorrect", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_ArithmeticExceptionTests.typePropertiesAreCorrect);
             QUnit.test("ArithmeticExceptionTests - DefaultConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_ArithmeticExceptionTests.defaultConstructorWorks);
             QUnit.test("ArithmeticExceptionTests - ConstructorWithMessageWorks", Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_ArithmeticExceptionTests.constructorWithMessageWorks);
@@ -2070,297 +2070,304 @@ Bridge.assembly("Bridge_ClientTest_Batch4_Tests", function ($asm, globals) {
                 } ));
                 t.getFixture().arrayCanBeAssignedToTheCollectionInterfaces_SPI_1547();
             },
+            createWithNegativeLenghtShouldThrow: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "CreateWithNegativeLenghtShouldThrow()",
+                    line: "74"
+                } ));
+                t.getFixture().createWithNegativeLenghtShouldThrow();
+            },
             lengthWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "LengthWorks()",
-                    line: "74"
+                    line: "90"
                 } ));
                 t.getFixture().lengthWorks();
             },
             rankIsOne: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "RankIsOne()",
-                    line: "82"
+                    line: "98"
                 } ));
                 t.getFixture().rankIsOne();
             },
             getLengthWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GetLengthWorks()",
-                    line: "88"
+                    line: "104"
                 } ));
                 t.getFixture().getLengthWorks();
             },
             getLowerBound: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GetLowerBound()",
-                    line: "96"
+                    line: "112"
                 } ));
                 t.getFixture().getLowerBound();
             },
             getUpperBoundWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GetUpperBoundWorks()",
-                    line: "104"
+                    line: "120"
                 } ));
                 t.getFixture().getUpperBoundWorks();
             },
             gettingValueByIndexWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GettingValueByIndexWorks()",
-                    line: "112"
+                    line: "128"
                 } ));
                 t.getFixture().gettingValueByIndexWorks();
             },
             getValueWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "GetValueWorks()",
-                    line: "119"
+                    line: "135"
                 } ));
                 t.getFixture().getValueWorks();
             },
             settingValueByIndexWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "SettingValueByIndexWorks()",
-                    line: "126"
+                    line: "142"
                 } ));
                 t.getFixture().settingValueByIndexWorks();
             },
             setValueWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "SetValueWorks()",
-                    line: "136"
+                    line: "152"
                 } ));
                 t.getFixture().setValueWorks();
             },
             foreachWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ForeachWorks()",
-                    line: "146"
+                    line: "162"
                 } ));
                 t.getFixture().foreachWorks();
             },
             cloneWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "CloneWorks()",
-                    line: "157"
+                    line: "173"
                 } ));
                 t.getFixture().cloneWorks();
             },
             concatWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ConcatWorks()",
-                    line: "166"
+                    line: "182"
                 } ));
                 t.getFixture().concatWorks();
             },
             containsWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ContainsWorks()",
-                    line: "175"
+                    line: "191"
                 } ));
                 t.getFixture().containsWorks();
             },
             containsUsesEqualsMethod: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ContainsUsesEqualsMethod()",
-                    line: "184"
+                    line: "200"
                 } ));
                 t.getFixture().containsUsesEqualsMethod();
             },
             sliceWithoutEndWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "SliceWithoutEndWorks()",
-                    line: "223"
+                    line: "239"
                 } ));
                 t.getFixture().sliceWithoutEndWorks();
             },
             sliceWithEndWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "SliceWithEndWorks()",
-                    line: "229"
+                    line: "245"
                 } ));
                 t.getFixture().sliceWithEndWorks();
             },
             foreachWithArrayItemCallbackWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ForeachWithArrayItemCallbackWorks()",
-                    line: "250"
+                    line: "266"
                 } ));
                 t.getFixture().foreachWithArrayItemCallbackWorks();
             },
             indexOfWithoutStartIndexWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IndexOfWithoutStartIndexWorks()",
-                    line: "267"
+                    line: "283"
                 } ));
                 t.getFixture().indexOfWithoutStartIndexWorks();
             },
             indexOfWithoutStartIndexUsesEqualsMethod: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IndexOfWithoutStartIndexUsesEqualsMethod()",
-                    line: "274"
+                    line: "290"
                 } ));
                 t.getFixture().indexOfWithoutStartIndexUsesEqualsMethod();
             },
             indexOfWithStartIndexWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IndexOfWithStartIndexWorks()",
-                    line: "282"
+                    line: "298"
                 } ));
                 t.getFixture().indexOfWithStartIndexWorks();
             },
             indexOfWithStartIndexUsesEqualsMethod: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IndexOfWithStartIndexUsesEqualsMethod()",
-                    line: "289"
+                    line: "305"
                 } ));
                 t.getFixture().indexOfWithStartIndexUsesEqualsMethod();
             },
             joinWithoutDelimiterWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "JoinWithoutDelimiterWorks()",
-                    line: "296"
+                    line: "312"
                 } ));
                 t.getFixture().joinWithoutDelimiterWorks();
             },
             joinWithDelimiterWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "JoinWithDelimiterWorks()",
-                    line: "302"
+                    line: "318"
                 } ));
                 t.getFixture().joinWithDelimiterWorks();
             },
             reverseWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ReverseWorks()",
-                    line: "322"
+                    line: "338"
                 } ));
                 t.getFixture().reverseWorks();
             },
             sortWithDefaultCompareWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "SortWithDefaultCompareWorks()",
-                    line: "346"
+                    line: "362"
                 } ));
                 t.getFixture().sortWithDefaultCompareWorks();
             },
             sortWithCompareCallbackWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "SortWithCompareCallbackWorks()",
-                    line: "354"
+                    line: "370"
                 } ));
                 t.getFixture().sortWithCompareCallbackWorks();
             },
             foreachWhenCastToIListWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ForeachWhenCastToIListWorks()",
-                    line: "362"
+                    line: "378"
                 } ));
                 t.getFixture().foreachWhenCastToIListWorks();
             },
             iCollectionCountWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ICollectionCountWorks()",
-                    line: "374"
+                    line: "390"
                 } ));
                 t.getFixture().iCollectionCountWorks();
             },
             iCollectionAddWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ICollectionAddWorks()",
-                    line: "381"
+                    line: "397"
                 } ));
                 t.getFixture().iCollectionAddWorks();
             },
             iCollectionClearWorks_NDN_1548: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ICollectionClearWorks_NDN_1548()",
-                    line: "390"
+                    line: "406"
                 } ));
                 t.getFixture().iCollectionClearWorks_NDN_1548();
             },
             iCollectionContainsWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ICollectionContainsWorks()",
-                    line: "399"
+                    line: "415"
                 } ));
                 t.getFixture().iCollectionContainsWorks();
             },
             iCollectionContainsUsesEqualsMethod: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ICollectionContainsUsesEqualsMethod()",
-                    line: "408"
+                    line: "424"
                 } ));
                 t.getFixture().iCollectionContainsUsesEqualsMethod();
             },
             iCollectionRemoveWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ICollectionRemoveWorks()",
-                    line: "416"
+                    line: "432"
                 } ));
                 t.getFixture().iCollectionRemoveWorks();
             },
             iListIndexingWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IListIndexingWorks()",
-                    line: "443"
+                    line: "459"
                 } ));
                 t.getFixture().iListIndexingWorks();
             },
             iListIndexOfWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IListIndexOfWorks()",
-                    line: "452"
+                    line: "468"
                 } ));
                 t.getFixture().iListIndexOfWorks();
             },
             iListIndexOfUsesEqualsMethod: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IListIndexOfUsesEqualsMethod()",
-                    line: "461"
+                    line: "477"
                 } ));
                 t.getFixture().iListIndexOfUsesEqualsMethod();
             },
             iListInsertWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IListInsertWorks()",
-                    line: "469"
+                    line: "485"
                 } ));
                 t.getFixture().iListInsertWorks();
             },
             iListRemoveAtWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "IListRemoveAtWorks()",
-                    line: "478"
+                    line: "494"
                 } ));
                 t.getFixture().iListRemoveAtWorks();
             },
             repeatWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "RepeatWorks()",
-                    line: "495"
+                    line: "511"
                 } ));
                 t.getFixture().repeatWorks();
             },
             clearWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ClearWorks()",
-                    line: "503"
+                    line: "519"
                 } ));
                 t.getFixture().clearWorks();
             },
             copyWithDifferentArraysWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "CopyWithDifferentArraysWorks()",
-                    line: "519"
+                    line: "535"
                 } ));
                 t.getFixture().copyWithDifferentArraysWorks();
             },
             copyWithinArrayWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.ArrayTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_ArrayTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "CopyWithinArrayWorks()",
-                    line: "532"
+                    line: "548"
                 } ));
                 t.getFixture().copyWithinArrayWorks();
             }
@@ -6424,13 +6431,6 @@ Bridge.assembly("Bridge_ClientTest_Batch4_Tests", function ($asm, globals) {
                     line: "69"
                 } ));
                 t.getFixture().constructorWithParamNameAndActualValueAndMessageWorks();
-            },
-            rangeErrorIsConvertedToArgumentOutOfRangeException: function (assert) {
-                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch4.Exceptions.ArgumentOutOfRangeExceptionTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch4_Tests_Runner.Bridge_ClientTest_Batch4_Exceptions_ArgumentOutOfRangeExceptionTests, 2, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
-                    method: "RangeErrorIsConvertedToArgumentOutOfRangeException()",
-                    line: "80"
-                } ));
-                t.getFixture().rangeErrorIsConvertedToArgumentOutOfRangeException();
             }
         },
         context: null,
