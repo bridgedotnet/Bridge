@@ -7,7 +7,7 @@
                 l = System.Int64(v);
 
                 Bridge.Console.log(System.Int64(v).toString());
-                Bridge.Console.log(System.Int64((v)).toString());
+                Bridge.Console.log(System.Int64(v).toString());
                 Bridge.Console.log(System.Int64(2).toString());
                 Bridge.Console.log(System.Int64(2).toString());
                 Bridge.Console.log(System.Int64(7).toString());
@@ -27,7 +27,7 @@
                 l = System.Decimal(v);
 
                 Bridge.Console.log(System.Decimal(v).toString());
-                Bridge.Console.log(System.Decimal((v)).toString());
+                Bridge.Console.log(System.Decimal(v).toString());
                 Bridge.Console.log(System.Decimal(2.0).toString());
                 Bridge.Console.log(System.Decimal(2.0).toString());
                 Bridge.Console.log(System.Decimal(7.0).toString());
@@ -40,7 +40,7 @@
                 l = v;
 
                 Bridge.Console.log(v);
-                Bridge.Console.log((v));
+                Bridge.Console.log(v);
                 Bridge.Console.log(2);
                 Bridge.Console.log(2);
                 Bridge.Console.log(7);
