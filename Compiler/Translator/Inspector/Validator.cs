@@ -446,10 +446,8 @@ namespace Bridge.Translator
 
             if (this.HasAttribute(type.CustomAttributes, Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute"))
             {
-                //var mode = this.GetObjectCreateMode(type);
-                //var ignore = mode == 0 && !type.Methods.Any(m => !m.IsConstructor && !m.IsGetter && !m.IsSetter && !m.IsRemoveOn && !m.IsAddOn);
-
-                if (emitter.Validator.IsExternalType(type))
+                var mode = this.GetObjectCreateMode(type);
+                if (emitter.Validator.IsExternalType(type) && mode == 0)
                 {
                     return "Object";
                 }

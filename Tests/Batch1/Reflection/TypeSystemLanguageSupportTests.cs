@@ -583,7 +583,7 @@ namespace Bridge.ClientTest.Reflection
             Assert.AreEqual("X".GetType().FullName, "String");
             Assert.AreEqual(a.GetType().FullName, "Function");
             Assert.AreEqual(new object().GetType().FullName, "Object");
-            Assert.AreEqual(new[] { 1, 2 }.GetType().FullName, "Array");
+            Assert.AreEqual(new[] { 1, 2 }.GetType().FullName, "System.Int32[]");
         }
 
         [Test]

@@ -4,7 +4,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     Bridge.define("Test.BridgeIssues.N1508.App", {
         statics: {
             upTo: function (value) {
-                return [value];
+                return System.Array.init([value], System.Int32);
             },
             doIt: function () {
                 var $t, $t1, $t2;

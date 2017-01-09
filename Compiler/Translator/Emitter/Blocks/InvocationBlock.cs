@@ -665,7 +665,7 @@ namespace Bridge.Translator
 
                         new ExpressionListBlock(this.Emitter, argsExpressions, paramsArg, invocationExpression, openPos).Emit();
                     }
-
+                    this.Emitter.Comma = false;
                     this.WriteCloseParentheses();
                 }
             }

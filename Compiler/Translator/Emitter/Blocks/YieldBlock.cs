@@ -84,16 +84,16 @@ namespace Bridge.Translator
             {
                 if (returnType.TypeArguments.Count > 0)
                 {
-                    block.Write(JS.Types.SYSTEM_ARRAY + "." + JS.Funcs.TO_ENUMERATOR + "(" + JS.Vars.YIELD + ", " + BridgeTypes.ToJsName(returnType.TypeArguments.First(), block.Emitter) + ")");
+                    block.Write(JS.Types.System.Array.TO_ENUMERATOR + "(" + JS.Vars.YIELD + ", " + BridgeTypes.ToJsName(returnType.TypeArguments.First(), block.Emitter) + ")");
                 }
                 else
                 {
-                    block.Write(JS.Types.SYSTEM_ARRAY + "." + JS.Funcs.TO_ENUMERATOR + "(" + JS.Vars.YIELD + ")");
+                    block.Write(JS.Types.System.Array.TO_ENUMERATOR + "(" + JS.Vars.YIELD + ")");
                 }
             }
             else
             {
-                block.Write(JS.Types.SYSTEM_ARRAY + "." + JS.Funcs.TO_ENUMERABLE + "(" + JS.Vars.YIELD + ")");
+                block.Write(JS.Types.System.Array.TO_ENUMERABLE + "(" + JS.Vars.YIELD + ")");
             }
 
             block.WriteSemiColon();

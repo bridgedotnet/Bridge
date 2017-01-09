@@ -2,6 +2,7 @@
   "output": "Bridge\\output",
   "cleanOutputFolderBeforeBuildPattern": "*.*",
   "outputBy": "Class",
+  "outputFormatting": "Formatted",
   "ignoreCast": true,
   "fileNameCasing": "Lowercase"
 }

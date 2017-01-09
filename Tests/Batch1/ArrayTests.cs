@@ -48,6 +48,16 @@ namespace Bridge.ClientTest
             }
 
             [Test]
+            public void CreateWithNegativeLenghtShouldThrow()
+            {
+                int size = -1;
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    var a = new int[size];
+                });
+            }
+
+            [Test]
             public void LengthWorks()
             {
                 Assert.AreEqual(0, new int[0].Length);

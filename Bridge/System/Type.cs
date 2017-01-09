@@ -103,7 +103,7 @@ namespace System
 
         public extern bool IsArray
         {
-            [Template("({this} === Array)")]
+            [Template("Bridge.isArray(null, {this})")]
             get;
         }
 
@@ -196,6 +196,37 @@ namespace System
 
         [Template("Bridge.Reflection.getMembers({this}, 4, {bindingAttr} | 256, {name})")]
         public extern FieldInfo GetField(string name, BindingFlags bindingAttr);
+
+        /// <summary>
+        /// When overridden in a derived class, returns the Type of the object encompassed or referred to by the current array, pointer or reference type.
+        /// </summary>
+        /// <returns>The Type of the object encompassed or referred to by the current array, pointer, or reference type, or null if the current Type is not an array or a pointer, or is not passed by reference, or represents a generic type or a type parameter in the definition of a generic type or generic method.</returns>
+        [Template("({this}.$elementType || null)")]
+        public extern Type GetElementType();
+
+        /// <summary>
+        /// Gets a value indicating whether the current Type encompasses or refers to another type; that is, whether the current Type is an array, a pointer, or is passed by reference.
+        /// </summary>
+        public extern bool HasElementType
+        {
+            [Template("(!!{this}.$elementType)")]
+            get;
+        }
+
+        /// <summary>
+        /// Returns a Type object representing a one-dimensional array of the current type, with a lower bound of zero.
+        /// </summary>
+        /// <returns>A Type object representing a one-dimensional array of the current type, with a lower bound of zero.</returns>
+        [Template("System.Array.type({this})")]
+        public extern Type MakeArrayType();
+
+        /// <summary>
+        /// Returns a Type object representing an array of the current type, with the specified number of dimensions.
+        /// </summary>
+        /// <param name="rank">The number of dimensions for the array. This number must be less than or equal to 32.</param>
+        /// <returns>An object representing an array of the current type, with the specified number of dimensions.</returns>
+        [Template("System.Array.type({this}, {rank})")]
+        public extern Type MakeArrayType(int rank);
 
         [FieldProperty]
         public extern object Prototype { get; }

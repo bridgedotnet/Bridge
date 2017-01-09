@@ -7,7 +7,7 @@ namespace System
 {
     [External]
     [Name("Array")]
-    public sealed class Array : IEnumerable, ICloneable
+    public sealed class Array : IEnumerable, ICloneable, IList
     {
         public extern int Length
         {
@@ -201,7 +201,7 @@ namespace System
         [Template("System.Array.clone({this})")]
         public extern object Clone();
 
-        [Template("System.Array.init({count}, {value})")]
+        [Template("System.Array.init({count}, {value}, {T})")]
         public static extern T[] Repeat<T>(T value, int count);
 
         [Template("System.Array.fill({dst}, {T:defaultFn}, {index}, {count})")]
@@ -251,6 +251,69 @@ namespace System
 
         [Template("System.Array.sort({array}, {comparer})")]
         public static extern void Sort<T>(T[] array, IComparer<T> comparer);
+
+        /// <summary>
+        /// Creates a one-dimensional Array of the specified Type and length, with zero-based indexing.
+        /// </summary>
+        /// <param name="elementType">The Type of the Array to create.</param>
+        /// <param name="length">The size of the Array to create.</param>
+        /// <returns>A new one-dimensional Array of the specified Type with the specified length, using zero-based indexing.</returns>
+        [Template("System.Array.init({length}, Bridge.getDefaultValue({elementType}), {elementType})")]
+        public static extern Array CreateInstance(Type elementType, int length);
+
+        /// <summary>
+        /// Creates a two-dimensional Array of the specified Type and dimension lengths, with zero-based indexing.
+        /// </summary>
+        /// <param name="elementType">The Type of the Array to create.</param>
+        /// <param name="length1">The size of the first dimension of the Array to create.</param>
+        /// <param name="length2">The size of the second dimension of the Array to create.</param>
+        /// <returns>A new two-dimensional Array of the specified Type with the specified length for each dimension, using zero-based indexing.</returns>
+        [Template("System.Array.create(Bridge.getDefaultValue({elementType}), null, {elementType}, {length1}, {length2})")]
+        public static extern Array CreateInstance(Type elementType, int length1, int length2);
+
+        /// <summary>
+        /// Creates a three-dimensional Array of the specified Type and dimension lengths, with zero-based indexing.
+        /// </summary>
+        /// <param name="elementType">The Type of the Array to create.</param>
+        /// <param name="length1">The size of the first dimension of the Array to create.</param>
+        /// <param name="length2">The size of the second dimension of the Array to create.</param>
+        /// <param name="length3">The size of the third dimension of the Array to create.</param>
+        /// <returns>A new three-dimensional Array of the specified Type with the specified length for each dimension, using zero-based indexing.</returns>
+        [Template("System.Array.create(Bridge.getDefaultValue({elementType}), null, {elementType}, {length1}, {length2}, {length3})")]
+        public static extern Array CreateInstance(Type elementType, int length1, int length2, int length3);
+
+        /// <summary>
+        /// Creates a multidimensional Array of the specified Type and dimension lengths, with zero-based indexing. The dimension lengths are specified in an array of 32-bit integers.
+        /// </summary>
+        /// <param name="elementType">The Type of the Array to create.</param>
+        /// <param name="lengths">An array of 32-bit integers that represent the size of each dimension of the Array to create.</param>
+        /// <returns>A new multidimensional Array of the specified Type with the specified length for each dimension, using zero-based indexing.</returns>
+        [Template("System.Array.create(Bridge.getDefaultValue({elementType}), null, {elementType}, {lengths:array})")]
+        public static extern Array CreateInstance(Type elementType, params int[] lengths);
+
+        extern int ICollection.Count
+        {
+            get;
+        }
+
+        extern void IList.Add(object item);
+
+        extern void IList.Clear();
+
+        extern bool IList.Contains(object item);
+
+        extern int IList.IndexOf(object item);
+
+        extern void IList.Insert(int index, object item);
+
+        extern void IList.RemoveAt(int index);
+
+        extern bool IList.Remove(object item);
+
+        extern bool IList.IsReadOnly
+        {
+            get;
+        }
     }
 
     [External]
