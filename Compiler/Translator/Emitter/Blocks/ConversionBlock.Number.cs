@@ -91,11 +91,8 @@ namespace Bridge.Translator
                     if (be == null || be.Operator != BinaryOperatorType.Divide || be.Left != expression)
                     {
                         block.Write(JS.Types.System.Int64.TONUMBER);
-                        if (!(expression is CastExpression && ((CastExpression)expression).Expression is ParenthesizedExpression))
-                        {
-                            block.Write("(");
-                            block.AfterOutput += ")";
-                        }
+                        block.Write("(");
+                        block.AfterOutput += ")";
                     }
                 }
                 else if (Helpers.IsDecimalType(toType, block.Emitter.Resolver) && !Helpers.IsDecimalType(fromType, block.Emitter.Resolver))
@@ -137,11 +134,8 @@ namespace Bridge.Translator
                 if (be == null || be.Operator != BinaryOperatorType.Divide || be.Left != expression)
                 {
                     block.Write(JS.Types.System.Int64.TONUMBER);
-                    if (!(expression is CastExpression && ((CastExpression)expression).Expression is ParenthesizedExpression))
-                    {
-                        block.Write("(");
-                        block.AfterOutput += ")";
-                    }
+                    block.Write("(");
+                    block.AfterOutput += ")";
                 }
             }
             else if (((!Helpers.Is64Type(toType, block.Emitter.Resolver) && Helpers.IsIntegerType(toType, block.Emitter.Resolver)) ||
@@ -307,11 +301,8 @@ namespace Bridge.Translator
             if (toFloat || (block.Emitter.IsJavaScriptOverflowMode && !InsideOverflowContext(block.Emitter, expression)))
             {
                 block.Write(JS.Types.SYSTEM_DECIMAL + ".toFloat");
-                if (!(expression is CastExpression && ((CastExpression)expression).Expression is ParenthesizedExpression))
-                {
-                    block.Write("(");
-                    block.AfterOutput += ")";
-                }
+                block.Write("(");
+                block.AfterOutput += ")";
             }
             else
             {
