@@ -29,6 +29,16 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             char c = 'a';
             Bridge2199.AssertTypeName(c, typeof(char));
+
+            long l = 1;
+            Bridge2199.AssertTypeName(l, typeof(long));
+
+            decimal d = 10;
+            Bridge2199.AssertTypeName(d, typeof(decimal));
+
+            string s = "s";
+            Bridge2199.AssertTypeName(s, typeof(string));
+
         }
     }
 }

@@ -13030,6 +13030,16 @@ Bridge.$N1391Result =                 r;
 
                 var c = 97;
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2199.assertTypeName(System.Char, c, System.Char);
+
+                var l = System.Int64(1);
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2199.assertTypeName(System.Int64, l, System.Int64);
+
+                var d = System.Decimal(10);
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2199.assertTypeName(System.Decimal, d, System.Decimal);
+
+                var s = "s";
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2199.assertTypeName(String, s, String);
+
             }
         }
     });
