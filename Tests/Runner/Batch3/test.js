@@ -367,6 +367,7 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
             QUnit.test("#2050 - TestIDictionary", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2050.testIDictionary);
             QUnit.test("#2051 - TestGetElementType", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2051.testGetElementType);
             QUnit.test("#2052 - TestArrayCreateInstance", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2052.testArrayCreateInstance);
+            QUnit.test("#2052 - TestArrayCreateInstanceShouldThrow", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2052.testArrayCreateInstanceShouldThrow);
             QUnit.test("#2056 - TestArrayCasting", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2056.testArrayCasting);
             QUnit.test("#2056 - TestArrayTypeName", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2056.testArrayTypeName);
             QUnit.test("#2067 - TestGetGenericTypeDefinition", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2067.testGetGenericTypeDefinition);
@@ -7289,6 +7290,13 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
                     line: "12"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2052.testArrayCreateInstance();
+            },
+            testArrayCreateInstanceShouldThrow: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2052).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2052, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "TestArrayCreateInstanceShouldThrow()",
+                    line: "89"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2052.testArrayCreateInstanceShouldThrow();
             }
         },
         context: null,

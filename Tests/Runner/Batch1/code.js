@@ -69,6 +69,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.true$1(Bridge.is(arr, System.Collections.Generic.IEnumerable$1(System.Int32)), "is IEnumerable<int> should be true");
             Bridge.Test.Assert.true$1(Bridge.is(arr, System.Collections.Generic.IList$1(System.Int32)), "is IList<int> should be true");
         },
+        createWithNegativeLenghtShouldThrow: function () {
+            var size = -1;
+            Bridge.Test.Assert.throws$6(System.ArgumentOutOfRangeException, function () {
+                var a = System.Array.init(size, 0, System.Int32);
+            });
+        },
         lengthWorks: function () {
             Bridge.Test.Assert.areEqual(0, System.Array.init(0, 0, System.Int32).length);
             Bridge.Test.Assert.areEqual(1, System.Array.init(["x"], String).length);
@@ -12826,25 +12832,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.null$1(ex.getInnerException(), "InnerException");
             Bridge.Test.Assert.areEqual$1(42, ex.getActualValue(), "ActualValue");
             Bridge.Test.Assert.areEqual("The message", ex.getMessage());
-        },
-        rangeErrorIsConvertedToArgumentOutOfRangeException: function () {
-            var size = -1;
-            try {
-                var arr = System.Array.init(size, 0, System.Int32);
-                Bridge.Test.Assert.fail$1("Should throw");
-            }
-            catch ($e1) {
-                $e1 = System.Exception.create($e1);
-                var ex;
-                if (Bridge.is($e1, System.ArgumentOutOfRangeException)) {
-                    ex = $e1;
-                    var inner = ex.getInnerException();
-                    Bridge.Test.Assert.notNull$1(inner, "Inner Exception");
-                } else {
-                    ex = $e1;
-                    Bridge.Test.Assert.fail$1(System.String.concat("Expected ArgumentOutOfRangeException, got ", Bridge.getType(ex)));
-                }
-            }
         }
     });
 

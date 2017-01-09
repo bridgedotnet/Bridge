@@ -72,27 +72,5 @@ namespace Bridge.ClientTest.Exceptions
             Assert.AreEqual(42, ex.ActualValue, "ActualValue");
             Assert.AreEqual("The message", ex.Message);
         }
-
-        [Test(Name = "ArgumentOutOfRangeException - {0}", ExpectedCount = 1)]
-        public void RangeErrorIsConvertedToArgumentOutOfRangeException()
-        {
-            int size = -1;
-            try
-            {
-#pragma warning disable 219
-                var arr = new int[size];
-#pragma warning restore 219
-                Assert.Fail("Should throw");
-            }
-            catch (ArgumentOutOfRangeException ex)
-            {
-                Exception inner = ex.InnerException;
-                Assert.NotNull(inner, "Inner Exception");
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail("Expected ArgumentOutOfRangeException, got " + ex.GetType());
-            }
-        }
     }
 }

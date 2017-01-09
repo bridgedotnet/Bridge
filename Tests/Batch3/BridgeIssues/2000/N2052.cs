@@ -85,5 +85,20 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual("0000", my4DArray.GetValue(0, 0, 0, 0));
             Assert.AreEqual("1234", my4DArray.GetValue(1, 2, 3, 4));
         }
+
+        [Test]
+        public static void TestArrayCreateInstanceShouldThrow()
+        {
+            Assert.Throws<ArgumentNullException>(() => { Array.CreateInstance(null, 5); });
+            Assert.Throws<ArgumentNullException>(() => { Array.CreateInstance(null, 2, 3); });
+            Assert.Throws<ArgumentNullException>(() => { Array.CreateInstance(null, 2, 3, 4); });
+            Assert.Throws<ArgumentNullException>(() => { Array.CreateInstance(null, new int[4] { 2, 3, 4, 5 }); });
+            Assert.Throws<ArgumentNullException>(() => { Array.CreateInstance(typeof(int), null); });
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => { Array.CreateInstance(typeof(int), -1); });
+            Assert.Throws<ArgumentOutOfRangeException>(() => { Array.CreateInstance(typeof(int), 2, -1); });
+            Assert.Throws<ArgumentOutOfRangeException>(() => { Array.CreateInstance(typeof(int), 2, 3, -1); });
+            Assert.Throws<ArgumentOutOfRangeException>(() => { Array.CreateInstance(typeof(int), new int[4] { 2, 3, 4, -1 }); });
+        }
     }
 }

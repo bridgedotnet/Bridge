@@ -449,7 +449,9 @@
         },
 
         getDefaultValue: function (type) {
-            if ((type.getDefaultValue) && type.getDefaultValue.length === 0) {
+            if (type == null) {
+                throw new System.ArgumentNullException("type");
+            } else if ((type.getDefaultValue) && type.getDefaultValue.length === 0) {
                 return type.getDefaultValue();
             } else if (type === Boolean) {
                 return false;
@@ -534,7 +536,7 @@
                         if (obj.$getType) {
                             return Bridge.Reflection.isAssignableFrom(type, obj.$getType());
                         }
-                    
+
                         return true;
                     }
                 }
@@ -9139,9 +9141,13 @@
         },
 
         create: function (defvalue, initValues, T, sizes) {
+            if (sizes === null) {
+                throw new System.ArgumentNullException("length");
+            }
+
             var arr = [],
                 length = arguments.length > 3 ? 1 : 0,
-                i, s, v,
+                i, s, v, j,
                 idx,
                 indices,
                 flatIdx;
@@ -9153,13 +9159,21 @@
 
             if (sizes && Bridge.isArray(sizes)) {
                 for (i = 0; i < sizes.length; i++) {
-                    length *= sizes[i];
-                    arr.$s[i] = sizes[i];
+                    j = sizes[i];
+                    if (isNaN(j) || j < 0) {
+                        throw new System.ArgumentOutOfRangeException("length");
+                    }
+                    length *= j;
+                    arr.$s[i] = j;
                 }
             } else {
                 for (i = 3; i < arguments.length; i++) {
-                    length *= arguments[i];
-                    arr.$s[i - 3] = arguments[i];
+                    j = arguments[i];
+                    if (isNaN(j) || j < 0) {
+                        throw new System.ArgumentOutOfRangeException("length");
+                    }
+                    length *= j;
+                    arr.$s[i - 3] = j;
                 }
             }
 
@@ -9191,18 +9205,26 @@
             return arr;
         },
 
-        init: function (size, value, T, addFn) {
-            if (Bridge.isArray(size)) {
-                var elementType = value,
-                    rank = T || 1;
-                System.Array.type(elementType, rank, size);
-                return size;
+        init: function (length, value, T, addFn) {
+            if (length == null) {
+                throw new System.ArgumentNullException("length");
             }
 
-            var arr = new Array(size),
+            if (Bridge.isArray(length)) {
+                var elementType = value,
+                    rank = T || 1;
+                System.Array.type(elementType, rank, length);
+                return length;
+            }
+
+            if (isNaN(length) || length < 0) {
+                throw new System.ArgumentOutOfRangeException("length");
+            }
+
+            var arr = new Array(length),
                 isFn = addFn !== true && Bridge.isFunction(value);
 
-            for (var i = 0; i < size; i++) {
+            for (var i = 0; i < length; i++) {
                 arr[i] = isFn ? value() : value;
             }
 
@@ -9963,7 +9985,7 @@
             var typeCache = System.Array.$cache[rank],
                 result,
                 name;
-            
+
             if (!typeCache) {
                 typeCache = [];
                 System.Array.$cache[rank] = typeCache;
@@ -9978,7 +10000,7 @@
 
             if (!result) {
                 name = Bridge.getTypeName(t) + "[" + System.String.fromCharCount(",".charCodeAt(0), rank - 1) + "]";
-                
+
                 result = Bridge.define(name, {
                     $inherits: [Array, System.Collections.ICollection, System.ICloneable, System.Collections.Generic.IList$1(t)],
                     $noRegister: true,

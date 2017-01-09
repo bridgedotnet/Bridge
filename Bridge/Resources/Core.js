@@ -434,7 +434,9 @@
         },
 
         getDefaultValue: function (type) {
-            if ((type.getDefaultValue) && type.getDefaultValue.length === 0) {
+            if (type == null) {
+                throw new System.ArgumentNullException("type");
+            } else if ((type.getDefaultValue) && type.getDefaultValue.length === 0) {
                 return type.getDefaultValue();
             } else if (type === Boolean) {
                 return false;
@@ -519,7 +521,7 @@
                         if (obj.$getType) {
                             return Bridge.Reflection.isAssignableFrom(type, obj.$getType());
                         }
-                    
+
                         return true;
                     }
                 }
