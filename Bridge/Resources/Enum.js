@@ -17,7 +17,7 @@
             }
         },
 
-        getUnderlyingType: function(type) {
+        getUnderlyingType: function (type) {
             System.Enum.checkEnumType(type);
             return type.prototype.$utype || System.Int32;
         },
@@ -173,9 +173,9 @@
                 }
             }
 
-            return parts.sort(function(i1, i2) {
+            return parts.sort(function (i1, i2) {
                 return i1[1] - i2[1];
-            }).map(function(i) {
+            }).map(function (i) {
                 return i[0];
             });
         },

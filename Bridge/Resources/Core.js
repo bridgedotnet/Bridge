@@ -15,8 +15,8 @@
             return name2;
         },
 
-        literal: function(type, obj) {
-            obj.$getType = function() {return type};
+        literal: function (type, obj) {
+            obj.$getType = function () { return type };
             return obj;
         },
 
@@ -667,8 +667,8 @@
                         }
                     } else {
                         var setter1 = "set" + key.charAt(0).toUpperCase() + key.slice(1),
-							setter2 = "set" + key,
-							getter;
+                            setter2 = "set" + key,
+                            getter;
 
                         if (typeof to[setter1] === "function" && typeof value !== "function") {
                             getter = "g" + setter1.slice(1);

@@ -30,8 +30,8 @@
             return name2;
         },
 
-        literal: function(type, obj) {
-            obj.$getType = function() {return type};
+        literal: function (type, obj) {
+            obj.$getType = function () { return type };
             return obj;
         },
 
@@ -682,8 +682,8 @@
                         }
                     } else {
                         var setter1 = "set" + key.charAt(0).toUpperCase() + key.slice(1),
-							setter2 = "set" + key,
-							getter;
+                            setter2 = "set" + key,
+                            getter;
 
                         if (typeof to[setter1] === "function" && typeof value !== "function") {
                             getter = "g" + setter1.slice(1);
@@ -1913,7 +1913,7 @@
             }
         },
 
-        getUnderlyingType: function(type) {
+        getUnderlyingType: function (type) {
             System.Enum.checkEnumType(type);
             return type.prototype.$utype || System.Int32;
         },
@@ -2069,9 +2069,9 @@
                 }
             }
 
-            return parts.sort(function(i1, i2) {
+            return parts.sort(function (i1, i2) {
                 return i1[1] - i2[1];
-            }).map(function(i) {
+            }).map(function (i) {
                 return i[0];
             });
         },
@@ -3183,7 +3183,7 @@
             return names;
         },
 
-        createTypeParam: function(name, t) {
+        createTypeParam: function (name, t) {
             var fn = function TypeParameter() { };
             fn.$$name = name;
             fn.$isTypeParameter = true;
@@ -3216,7 +3216,7 @@
         getGenericArguments: function (type) {
             return type.$typeArguments || [];
         },
-        
+
         getMethodGenericArguments: function (m) {
             return m.tprm || [];
         },
@@ -3289,7 +3289,7 @@
                 bIndex = fullName.indexOf('['),
                 nsIndex = fullName.lastIndexOf('.', bIndex >= 0 ? bIndex : fullName.length);
 
-            return nsIndex > 0 ?  (bIndex >= 0 ? fullName.substring(nsIndex + 1, bIndex) : fullName.substr(nsIndex + 1)) : fullName;
+            return nsIndex > 0 ? (bIndex >= 0 ? fullName.substring(nsIndex + 1, bIndex) : fullName.substr(nsIndex + 1)) : fullName;
         },
 
         getTypeNamespace: function (type) {
@@ -3845,16 +3845,16 @@
             }
         },
 
-        getMetaValue: function(type, name, dv) {
+        getMetaValue: function (type, name, dv) {
             var md = type.$isTypeParameter ? type : Bridge.getMetadata(type);
             return md ? (md[name] || dv) : dv;
         },
 
-        isArray: function(type) {
+        isArray: function (type) {
             return Bridge.arrayTypes.indexOf(type) >= 0;
         },
 
-        hasGenericParameters: function(type) {
+        hasGenericParameters: function (type) {
             if (type.$typeArguments) {
                 for (var i = 0; i < type.$typeArguments.length; i++) {
                     if (type.$typeArguments[i].$isTypeParameter) {

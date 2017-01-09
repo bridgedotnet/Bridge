@@ -82,7 +82,7 @@
             return names;
         },
 
-        createTypeParam: function(name, t) {
+        createTypeParam: function (name, t) {
             var fn = function TypeParameter() { };
             fn.$$name = name;
             fn.$isTypeParameter = true;
@@ -115,7 +115,7 @@
         getGenericArguments: function (type) {
             return type.$typeArguments || [];
         },
-        
+
         getMethodGenericArguments: function (m) {
             return m.tprm || [];
         },
@@ -188,7 +188,7 @@
                 bIndex = fullName.indexOf('['),
                 nsIndex = fullName.lastIndexOf('.', bIndex >= 0 ? bIndex : fullName.length);
 
-            return nsIndex > 0 ?  (bIndex >= 0 ? fullName.substring(nsIndex + 1, bIndex) : fullName.substr(nsIndex + 1)) : fullName;
+            return nsIndex > 0 ? (bIndex >= 0 ? fullName.substring(nsIndex + 1, bIndex) : fullName.substr(nsIndex + 1)) : fullName;
         },
 
         getTypeNamespace: function (type) {
@@ -744,16 +744,16 @@
             }
         },
 
-        getMetaValue: function(type, name, dv) {
+        getMetaValue: function (type, name, dv) {
             var md = type.$isTypeParameter ? type : Bridge.getMetadata(type);
             return md ? (md[name] || dv) : dv;
         },
 
-        isArray: function(type) {
+        isArray: function (type) {
             return Bridge.arrayTypes.indexOf(type) >= 0;
         },
 
-        hasGenericParameters: function(type) {
+        hasGenericParameters: function (type) {
             if (type.$typeArguments) {
                 for (var i = 0; i < type.$typeArguments.length; i++) {
                     if (type.$typeArguments[i].$isTypeParameter) {
