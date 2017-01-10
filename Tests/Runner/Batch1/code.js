@@ -24892,7 +24892,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             return System.String.concat(((((x + y) | 0) + this.m) | 0), Bridge.Reflection.getTypeName(T));
         },
         getF: function () {
-            return Bridge.fn.bind(this, this.f);
+            return Bridge.fn.cacheBind(this, this.f);
         },
         getG: function () {
             return Bridge.fn.bind(this, function (x, y) { return this.g(String, x, y); });
@@ -31460,7 +31460,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var promise = this.createPromise();
 
             this.setPromiseProgress(-1);
-            var task = System.Threading.Tasks.Task.fromPromise(promise, null, null, Bridge.fn.bind(this, this.handleProgress));
+            var task = System.Threading.Tasks.Task.fromPromise(promise, null, null, Bridge.fn.cacheBind(this, this.handleProgress));
 
             Bridge.Test.Assert.areEqual$1(System.Threading.Tasks.TaskStatus.running, task.status, "Task should be running after being created");
 
@@ -33102,7 +33102,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                     done = Bridge.Test.Assert.async();
 
                                         ts = new Bridge.ClientTest.Threading.TimerTests.TimerState();
-                                        timer = new System.Threading.Timer.$ctor1(Bridge.fn.bind(ts, ts.handleTimer), "SomeState", 1, 1);
+                                        timer = new System.Threading.Timer.$ctor1(Bridge.fn.cacheBind(ts, ts.handleTimer), "SomeState", 1, 1);
 
                                         $task1 = System.Threading.Tasks.Task.delay(200);
                                         $step = 1;
@@ -33146,7 +33146,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         testTimerThrows: function () {
             var ts = new Bridge.ClientTest.Threading.TimerTests.TimerState();
-            var tc = Bridge.fn.bind(ts, ts.handleTimer);
+            var tc = Bridge.fn.cacheBind(ts, ts.handleTimer);
 
             var okSpan = System.TimeSpan.fromMilliseconds(1);
             var smallSpan = System.TimeSpan.fromMilliseconds(-2);
@@ -33278,7 +33278,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                                     copy = null;
 
-                                    timer = new System.Threading.Timer.$ctor1(Bridge.fn.bind(ts, ts.handleTimer), "SomeState", 1, 1);
+                                    timer = new System.Threading.Timer.$ctor1(Bridge.fn.cacheBind(ts, ts.handleTimer), "SomeState", 1, 1);
 
                                     copy = timer;
 
@@ -33341,7 +33341,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                                     ts = new Bridge.ClientTest.Threading.TimerTests.TimerState();
 
-                                    timer = new System.Threading.Timer.$ctor1(Bridge.fn.bind(ts, ts.handleTimer), null, -1, 1);
+                                    timer = new System.Threading.Timer.$ctor1(Bridge.fn.cacheBind(ts, ts.handleTimer), null, -1, 1);
                                     $task1 = System.Threading.Tasks.Task.delay(200);
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -35935,7 +35935,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             return System.String.concat(((((x - y) | 0) - this.m) | 0), Bridge.Reflection.getTypeName(T));
         },
         getF: function () {
-            return Bridge.fn.bind(this, Bridge.ClientTest.Reflection.TypeSystemTests.MethodGroupConversionTypes.B.prototype.f);
+            return Bridge.fn.cacheBind(this, Bridge.ClientTest.Reflection.TypeSystemTests.MethodGroupConversionTypes.B.prototype.f);
         },
         getG: function () {
             return Bridge.fn.bind(this, function (x, y) { return this.g(String, x, y); });

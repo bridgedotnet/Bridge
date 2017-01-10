@@ -1,4 +1,5 @@
 using System;
+using Bridge.Html5;
 using Bridge.Test;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
@@ -25,6 +26,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             Assert.AreEqual(fn1, fn2);
             Assert.AreNotEqual(fn1, fn3);
+            Assert.True(Script.StrictEquals(fn1, fn2));
+            Assert.False(Script.StrictEquals(fn1, fn3));
         }
     }
 }

@@ -1194,12 +1194,16 @@
                 }
             },
 
-            bind: function (obj, method, args, appendArgs) {
+            cacheBind: function (obj, method, args, appendArgs) {
+                return Bridge.fn.bind(obj, method, args, appendArgs, true);
+            },
+
+            bind: function (obj, method, args, appendArgs, cache) {
                 if (method && method.$method === method && method.$scope === obj) {
                     return method;
                 }
 
-                if (obj && obj.$$bind) {
+                if (obj && cache && obj.$$bind) {
                     for (var i = 0; i < obj.$$bind.length; i++) {
                         if (obj.$$bind[i].$method === method) {
                             return obj.$$bind[i];
@@ -1247,7 +1251,7 @@
                     }, method.length);
                 }
 
-                if (obj) {
+                if (obj && cache) {
                     obj.$$bind = obj.$$bind || [];
                     obj.$$bind.push(fn);
                 }

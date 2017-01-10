@@ -1209,12 +1209,16 @@
                 }
             },
 
-            bind: function (obj, method, args, appendArgs) {
+            cacheBind: function (obj, method, args, appendArgs) {
+                return Bridge.fn.bind(obj, method, args, appendArgs, true);
+            },
+
+            bind: function (obj, method, args, appendArgs, cache) {
                 if (method && method.$method === method && method.$scope === obj) {
                     return method;
                 }
 
-                if (obj && obj.$$bind) {
+                if (obj && cache && obj.$$bind) {
                     for (var i = 0; i < obj.$$bind.length; i++) {
                         if (obj.$$bind[i].$method === method) {
                             return obj.$$bind[i];
@@ -1262,7 +1266,7 @@
                     }, method.length);
                 }
 
-                if (obj) {
+                if (obj && cache) {
                     obj.$$bind = obj.$$bind || [];
                     obj.$$bind.push(fn);
                 }
@@ -23676,7 +23680,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
             if (period.ne(System.Int64(-1)) && !this.disposed) {
                 var p = period.toNumber();
-                this.id = Bridge.global.setTimeout(Bridge.fn.bind(this, this.handleCallback), p);
+                this.id = Bridge.global.setTimeout(Bridge.fn.cacheBind(this, this.handleCallback), p);
                 return true;
             }
 
@@ -23927,11 +23931,11 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 document.body.appendChild(this.consoleWrapper);
 
                 // Close console
-                this.closeBtn.addEventListener("click", Bridge.fn.bind(this, this.close));
+                this.closeBtn.addEventListener("click", Bridge.fn.cacheBind(this, this.close));
 
                 // Show/hide Tooltip
-                this.closeBtn.addEventListener("mouseover", Bridge.fn.bind(this, this.showTooltip));
-                this.closeBtn.addEventListener("mouseout", Bridge.fn.bind(this, this.hideTooltip));
+                this.closeBtn.addEventListener("mouseover", Bridge.fn.cacheBind(this, this.showTooltip));
+                this.closeBtn.addEventListener("mouseout", Bridge.fn.cacheBind(this, this.hideTooltip));
 
                 this.consoleDefined = Bridge.isDefined(Bridge.global) && Bridge.isDefined(Bridge.global.console);
                 this.consoleDebugDefined = this.consoleDefined && Bridge.isDefined(Bridge.global.console.debug);
