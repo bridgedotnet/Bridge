@@ -7171,8 +7171,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7202,7 +7200,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    });
+                                    }); /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -13073,6 +13071,58 @@ Bridge.$N1391Result =                 r;
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2199.assertTypeName(String, s, String);
 
             }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207", {
+        statics: {
+            someMethod: function (T, input) {
+                if (input === void 0) { input = Bridge.getDefaultValue(T); }
+                return input;
+            },
+            testDefaultOptionalParam: function () {
+                var first = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.someMethod(String);
+                Bridge.Test.Assert.null(first);
+
+                var second = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.someMethod(System.Int32);
+                Bridge.Test.Assert.areEqual(0, second);
+
+                var third = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.someMethod(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.SomeStruct).$clone();
+                Bridge.Test.Assert.true(third.isDefault());
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.SomeStruct", {
+        $kind: "struct",
+        statics: {
+            getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.SomeStruct(); }
+        },
+        i: null,
+        $ctor1: function (i) {
+            this.$initialize();
+            this.i = i;
+        },
+        ctor: function () {
+            this.$initialize();
+        },
+        isDefault: function () {
+            return this.i == null;
+        },
+        getHashCode: function () {
+            var h = Bridge.addHash([3672135689, this.i]);
+            return h;
+        },
+        equals: function (o) {
+            if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.SomeStruct)) {
+                return false;
+            }
+            return Bridge.equals(this.i, o.i);
+        },
+        $clone: function (to) {
+            var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.SomeStruct();
+            s.i = this.i;
+            return s;
         }
     });
 
