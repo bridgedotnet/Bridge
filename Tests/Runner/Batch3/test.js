@@ -406,6 +406,7 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
             QUnit.test("#2190 - TestInternalsVisibleTo", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2190.testInternalsVisibleTo);
             QUnit.test("#2195 - TestGenericInvocationInTryBlock", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2195.testGenericInvocationInTryBlock);
             QUnit.test("#2199 - TestTypeParameterName", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2199.testTypeParameterName);
+            QUnit.test("#2214 - TestCheckedULong", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2214.testCheckedULong);
             QUnit.test("#2220 - TestHasElementType", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2220.testHasElementType);
             QUnit.test("#2221 - TestMakeArrayType", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2221.testMakeArrayType);
             QUnit.test("#381 - TestUseCase", Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge381.testUseCase);
@@ -7726,7 +7727,7 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
             testPropertiesWithNonPrimitiveInitializers: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2137).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2137, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "TestPropertiesWithNonPrimitiveInitializers()",
-                    line: "21"
+                    line: "24"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2137.testPropertiesWithNonPrimitiveInitializers();
             }
@@ -8170,6 +8171,30 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2199",
                     file: "Batch3\\BridgeIssues\\2100\\N2199.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2214", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2214)],
+        statics: {
+            testCheckedULong: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2214).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2214, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "TestCheckedULong()",
+                    line: "11"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2214.testCheckedULong();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2214",
+                    file: "Batch3\\BridgeIssues\\2200\\N2214.cs"
                 } );
             }
             return this.context;
@@ -10039,7 +10064,7 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
             testFieldPropertyWithInitializer: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge706).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge706, 1, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "TestFieldPropertyWithInitializer()",
-                    line: "17"
+                    line: "18"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge706.testFieldPropertyWithInitializer();
             }

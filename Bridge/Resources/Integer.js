@@ -752,12 +752,21 @@
                     return System.Decimal.toInt(x, type);
                 }
 
-                if (Bridge.isNumber(x) && !type.$is(x)) {
-                    throw new System.OverflowException();
+                if (Bridge.isNumber(x)) {
+                    if (System.Int64.is64BitType(type)) {
+                        if (type === System.UInt64 && x < 0) {
+                            throw new System.OverflowException();
+                        }
+
+                        return type === System.Int64 ? System.Int64(x) : System.UInt64(x);
+                    }
+                    else if (!type.$is(x)) {
+                        throw new System.OverflowException();
+                    }
                 }
 
                 if (Bridge.Int.isInfinite(x)) {
-                    if (type === System.Int64 || type === System.UInt64) {
+                    if (System.Int64.is64BitType(type)) {
                         return type.MinValue;
                     }
 

@@ -7171,8 +7171,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7202,7 +7200,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    });
+                                    }); /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -13073,6 +13071,27 @@ Bridge.$N1391Result =                 r;
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2199.assertTypeName(String, s, String);
 
             }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2214", {
+        statics: {
+            testCheckedULong: function () {
+                var a = 0;
+                var b = Bridge.Int.check(a, System.UInt64);
+                Bridge.Test.Assert.true(b.equals(System.UInt64(0)));
+
+                Bridge.Test.Assert.throws$6(System.OverflowException, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2214.f1);
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2214", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2214, {
+        f1: function () {
+            var i = -1;
+            var ul = Bridge.Int.check(i, System.UInt64);
         }
     });
 
