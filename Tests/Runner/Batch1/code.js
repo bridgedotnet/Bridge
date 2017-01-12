@@ -1,9 +1,9 @@
 /**
  * Bridge Test library - general C# language tests
- * @version 15.6.0
+ * @version 15.7.0
  * @author Object.NET, Inc.
- * @copyright Copyright 2008-2016 Object.NET, Inc.
- * @compiler Bridge.NET 15.6.0
+ * @copyright Copyright 2008-2017 Object.NET, Inc.
+ * @compiler Bridge.NET 15.7.0
  */
 Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resource1.bin":"AAECAwQFBgc=","Bridge.ClientTest.Batch1.Reflection.Resource2.bin":"EBESExQV"}, function ($asm, globals) {
     "use strict";

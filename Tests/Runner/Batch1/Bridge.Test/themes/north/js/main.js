@@ -1,6 +1,7 @@
 /**
  * Bridge Test - North Theme v1.0.0
- * @author    : Object.NET, Inc. http://bridge.net/ * @copyright : Copyright 2008-2016 Object.NET, Inc. (http://object.net) All Rights Reserved.
+ * @author    : Object.NET, Inc. http://bridge.net/
+ * @copyright : Copyright 2008-2017 Object.NET, Inc. (http://object.net) All Rights Reserved.
  */
 QUnit.begin(function(details) {
     var bridgeVersion = Bridge && Bridge.SystemAssembly && Bridge.SystemAssembly.version ? Bridge.SystemAssembly.version : null;
