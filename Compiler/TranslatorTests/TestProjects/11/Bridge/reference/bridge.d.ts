@@ -1,11 +1,10 @@
 /*
- * @version   : 15.6.0 - Bridge.NET
+ * @version   : 15.7.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2016-12-12
+ * @date      : 2017-01-16
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge.NET/blob/master/LICENSE.
  */
-
 declare module Bridge {
     export function global<T>(): T;
     export function emptyFn(): Function;

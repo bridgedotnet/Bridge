@@ -445,6 +445,8 @@
     <Compile Include="BridgeIssues\2100\N2147.cs" />
     <Compile Include="BridgeIssues\2100\N2156.cs" />
     <Compile Include="BridgeIssues\2100\N2157.cs" />
+    <Compile Include="BridgeIssues\2100\N2159.cs" />
+    <Compile Include="BridgeIssues\2100\N2160.cs" />
     <Compile Include="BridgeIssues\2100\N2163.cs" />
     <Compile Include="BridgeIssues\2100\N2167.cs" />
     <Compile Include="BridgeIssues\2100\N2174.cs" />
@@ -454,11 +456,12 @@
     <Compile Include="BridgeIssues\2100\N2190.cs" />
     <Compile Include="BridgeIssues\2100\N2195.cs" />
     <Compile Include="BridgeIssues\2100\N2199.cs" />
+    <Compile Include="BridgeIssues\2200\N2207.cs" />
     <Compile Include="BridgeIssues\2200\N2212.cs" />
+    <Compile Include="BridgeIssues\2200\N2213.cs" />
+    <Compile Include="BridgeIssues\2200\N2214.cs" />
     <Compile Include="BridgeIssues\2200\N2220.cs" />
     <Compile Include="BridgeIssues\2200\N2221.cs" />
-    <Compile Include="BridgeIssues\2100\N2159.cs" />
-    <Compile Include="BridgeIssues\2100\N2160.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
     <Compile Include="Utilities\DecimalHelper.cs" />

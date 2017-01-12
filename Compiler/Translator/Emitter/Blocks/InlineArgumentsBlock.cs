@@ -141,54 +141,62 @@ namespace Bridge.Translator
 
         public static string ReplaceInlineArgs(AbstractEmitterBlock block, string inline, Expression[] args)
         {
-            var emitter = block.Emitter;
-            inline = _formatArg.Replace(inline, delegate (Match m)
+            if (args.Length > 0)
             {
-                int count = emitter.Writers.Count;
-                string key = m.Groups[2].Value;
-                string modifier = m.Groups[1].Success ? m.Groups[4].Value : null;
-
-                StringBuilder oldSb = emitter.Output;
-                emitter.Output = new StringBuilder();
-
-                Expression expr = null;
-
-                if (Regex.IsMatch(key, "^\\d+$"))
+                var emitter = block.Emitter;
+                inline = _formatArg.Replace(inline, delegate (Match m)
                 {
-                    expr = args.Skip(int.Parse(key)).FirstOrDefault();
-                }
-                else
-                {
-                    expr = args.FirstOrDefault(e => e.ToString() == key);
-                }
+                    int count = emitter.Writers.Count;
+                    string key = m.Groups[2].Value;
+                    string modifier = m.Groups[1].Success ? m.Groups[4].Value : null;
 
-                string s = "";
-                if (expr != null)
-                {
-                    var writer = block.SaveWriter();
-                    block.NewWriter();
-                    expr.AcceptVisitor(emitter);
-                    s = emitter.Output.ToString();
-                    block.RestoreWriter(writer);
-
-                    if (modifier == "raw")
+                    if (!string.IsNullOrWhiteSpace(modifier) && modifier != "raw")
                     {
-                        s = s.Trim('"');
+                        return m.Value;
                     }
-                }
 
-                block.Write(block.WriteIndentToString(s));
+                    StringBuilder oldSb = emitter.Output;
+                    emitter.Output = new StringBuilder();
 
-                if (emitter.Writers.Count != count)
-                {
-                    block.PopWriter();
-                }
+                    Expression expr = null;
 
-                string replacement = emitter.Output.ToString();
-                emitter.Output = oldSb;
+                    if (Regex.IsMatch(key, "^\\d+$"))
+                    {
+                        expr = args.Skip(int.Parse(key)).FirstOrDefault();
+                    }
+                    else
+                    {
+                        expr = args.FirstOrDefault(e => e.ToString() == key);
+                    }
 
-                return replacement;
-            });
+                    string s = "";
+                    if (expr != null)
+                    {
+                        var writer = block.SaveWriter();
+                        block.NewWriter();
+                        expr.AcceptVisitor(emitter);
+                        s = emitter.Output.ToString();
+                        block.RestoreWriter(writer);
+
+                        if (modifier == "raw")
+                        {
+                            s = s.Trim('"');
+                        }
+                    }
+
+                    block.Write(block.WriteIndentToString(s));
+
+                    if (emitter.Writers.Count != count)
+                    {
+                        block.PopWriter();
+                    }
+
+                    string replacement = emitter.Output.ToString();
+                    emitter.Output = oldSb;
+
+                    return replacement;
+                });
+            }
 
             return inline;
         }
@@ -211,6 +219,8 @@ namespace Bridge.Translator
 
             this.Write(name);
         }
+
+        private string[] allowedModifiers = new[] {"default", "defaultFn", "raw", "plain", "body", "gettmp", "version", "tmp", "type", "array", "module"};
 
         protected virtual void EmitInlineExpressionList(ArgumentsInfo argsInfo, string inline, bool asRef = false, bool isNull = false, bool? definition = null)
         {
@@ -383,6 +393,11 @@ namespace Bridge.Translator
                 if (tempMap.ContainsKey(tempKey))
                 {
                     return tempMap[tempKey];
+                }
+
+                if (!string.IsNullOrWhiteSpace(modifier) && !this.allowedModifiers.Contains(modifier))
+                {
+                    return m.Value;
                 }
 
                 if (modifier == "array")

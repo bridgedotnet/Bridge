@@ -1,7 +1,7 @@
 /**
- * @version   : 15.6.0 - Bridge.NET
+ * @version   : 15.7.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2016-12-12
+ * @date      : 2017-01-16
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
@@ -3095,8 +3095,8 @@
     // @source systemAssemblyVersion.js
 
     (function(){
-        Bridge.SystemAssembly.version = "15.6.0";
-        Bridge.SystemAssembly.compiler = "15.6.0";
+        Bridge.SystemAssembly.version = "15.7.0";
+        Bridge.SystemAssembly.compiler = "15.7.0";
     })();
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
@@ -6162,12 +6162,21 @@
                     return System.Decimal.toInt(x, type);
                 }
 
-                if (Bridge.isNumber(x) && !type.$is(x)) {
-                    throw new System.OverflowException();
+                if (Bridge.isNumber(x)) {
+                    if (System.Int64.is64BitType(type)) {
+                        if (type === System.UInt64 && x < 0) {
+                            throw new System.OverflowException();
+                        }
+
+                        return type === System.Int64 ? System.Int64(x) : System.UInt64(x);
+                    }
+                    else if (!type.$is(x)) {
+                        throw new System.OverflowException();
+                    }
                 }
 
                 if (Bridge.Int.isInfinite(x)) {
-                    if (type === System.Int64 || type === System.UInt64) {
+                    if (System.Int64.is64BitType(type)) {
                         return type.MinValue;
                     }
 
@@ -6366,6 +6375,10 @@
 
     System.Int64.is64Bit = function (instance) {
         return instance instanceof System.Int64 || instance instanceof System.UInt64;
+    };
+
+    System.Int64.is64BitType = function (type) {
+        return type === System.Int64 || type === System.UInt64;
     };
 
     System.Int64.getDefaultValue = function () {

@@ -7,6 +7,7 @@ using ICSharpCode.NRefactory.TypeSystem;
 using ICSharpCode.NRefactory.TypeSystem.Implementation;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Win32.SafeHandles;
 
 namespace Bridge.Translator
 {
@@ -230,6 +231,10 @@ namespace Bridge.Translator
                                     if (prm.ConstantValue == null && prm.Type.Kind == TypeKind.Struct && !prm.Type.IsKnownType(KnownTypeCode.NullableOfT))
                                     {
                                         this.Write(Inspector.GetStructDefaultValue(prm.Type, this.Emitter));
+                                    }
+                                    else if (prm.ConstantValue == null && prm.Type.Kind == TypeKind.TypeParameter)
+                                    {
+                                        this.Write(JS.Funcs.BRIDGE_GETDEFAULTVALUE + "(" + BridgeTypes.ToJsName(prm.Type, this.Emitter) + ")");
                                     }
                                     else
                                     {

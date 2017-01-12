@@ -1,3 +1,5 @@
+A description of the issue. 
+
 ### Expected
 
 ```js
@@ -12,7 +14,7 @@ Actual result here
 
 ### Steps To Reproduce
 
-[Deck](http://deck.net/REPLACE-WITH-YOUR-DECK-LINK)
+http://deck.net/ <-- Replace with a link to your Deck
 
 ```cs
 public class Program

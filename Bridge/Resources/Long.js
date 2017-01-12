@@ -74,6 +74,10 @@
         return instance instanceof System.Int64 || instance instanceof System.UInt64;
     };
 
+    System.Int64.is64BitType = function (type) {
+        return type === System.Int64 || type === System.UInt64;
+    };
+
     System.Int64.getDefaultValue = function () {
         return System.Int64.Zero;
     };
