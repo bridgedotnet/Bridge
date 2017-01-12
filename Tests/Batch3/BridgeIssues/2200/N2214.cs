@@ -13,13 +13,21 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             var a = 0;
             var b = checked((ulong)a);
+
             Assert.True(b == 0);
-            
             Assert.Throws<OverflowException>(() =>
             {
                 var i = -1;
                 var ul = checked((ulong)i);
             });
+
+            Assert.True(ULongChecked(0) == 0);
+            Assert.Throws<OverflowException>(() => { ULongChecked(-1); });
+        }
+
+        private static ulong ULongChecked(int n)
+        {
+            return checked((ulong)n);
         }
     }
 }
