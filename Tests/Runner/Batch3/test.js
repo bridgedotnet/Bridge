@@ -8210,7 +8210,7 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
             testDelegateBindCache: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2212).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2212, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "TestDelegateBindCache()",
-                    line: "30"
+                    line: "36"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2212.testDelegateBindCache();
             }
