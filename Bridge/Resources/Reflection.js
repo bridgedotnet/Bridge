@@ -450,6 +450,9 @@
         },
 
         getType: function (typeName, asm) {
+            if (typeName == null) {
+                throw new System.ArgumentNullException("typeName");
+            }
             return typeName ? Bridge.Reflection._getType(typeName, asm) : null;
         },
 
