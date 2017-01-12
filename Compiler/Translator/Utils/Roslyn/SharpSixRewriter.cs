@@ -363,8 +363,8 @@ namespace Bridge.Translator
         public override SyntaxNode VisitGenericName(GenericNameSyntax node)
         {
             var symbol = semanticModel.GetSymbolInfo(node).Symbol;
-
-            var parent = node.Parent;
+            var nodeParent = node.Parent;
+            var parent = nodeParent;
             while (parent != null && !(parent is TypeDeclarationSyntax))
             {
                 parent = parent.Parent;
@@ -382,8 +382,8 @@ namespace Bridge.Translator
                               thisType != null &&
                               !thisType.InheritsFromOrEquals(symbol.ContainingType) &&
                               !thisType.Equals(symbol);
-
-            var qns = node.Parent as QualifiedNameSyntax;
+            
+            var qns = nodeParent as QualifiedNameSyntax;
             if (qns != null && needHandle)
             {
                 SyntaxNode n = node;
@@ -401,7 +401,7 @@ namespace Bridge.Translator
 
             node = (GenericNameSyntax)base.VisitGenericName(node);
 
-            if (needHandle && !(node.Parent is MemberAccessExpressionSyntax))
+            if (needHandle && !(nodeParent is MemberAccessExpressionSyntax))
             {
                 INamedTypeSymbol namedType = symbol as INamedTypeSymbol;
                 if (namedType != null && namedType.IsGenericType && namedType.TypeArguments.Length > 0 && !namedType.TypeArguments.Any(SyntaxHelper.IsAnonymous))
@@ -416,7 +416,7 @@ namespace Bridge.Translator
 
             if (symbol != null && symbol.IsStatic && symbol.ContainingType != null
                 && thisType != null && !thisType.InheritsFromOrEquals(symbol.ContainingType)
-                && !(node.Parent is MemberAccessExpressionSyntax)
+                && !(nodeParent is MemberAccessExpressionSyntax)
                 && (
                     (methodSymbol = symbol as IMethodSymbol) != null
                     || symbol is IPropertySymbol

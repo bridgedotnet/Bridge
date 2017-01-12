@@ -7171,6 +7171,8 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
+
+
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7200,7 +7202,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    }); /// Async method lacks 'await' operators and will run synchronously
+                                    });
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -13123,6 +13125,59 @@ Bridge.$N1391Result =                 r;
             var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.SomeStruct();
             s.i = this.i;
             return s;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2213", {
+        statics: {
+            testCase: function () {
+                var t = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2213.UIUtils.DataTables.getTable();
+                Bridge.Test.Assert.areEqual(1, t.i);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2213.UIUtils");
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2213.UIUtils.DataTable", {
+        i: 0
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2213.UIUtils.DataTables", {
+        statics: {
+            getTable: function () {
+                return {i:1};
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2214", {
+        statics: {
+            testCheckedULong: function () {
+                var a = 0;
+                var b = Bridge.Int.check(a, System.UInt64);
+
+                Bridge.Test.Assert.true(b.equals(System.UInt64(0)));
+                Bridge.Test.Assert.throws$6(System.OverflowException, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2214.f1);
+
+                Bridge.Test.Assert.true(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2214.uLongChecked(0).equals(System.UInt64(0)));
+                Bridge.Test.Assert.throws$6(System.OverflowException, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2214.f2);
+            },
+            uLongChecked: function (n) {
+                return Bridge.Int.check(n, System.UInt64);
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2214", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2214, {
+        f1: function () {
+            var i = -1;
+            var ul = Bridge.Int.check(i, System.UInt64);
+        },
+        f2: function () {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge2214.uLongChecked(-1);
         }
     });
 
