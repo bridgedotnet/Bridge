@@ -257,7 +257,7 @@ namespace Bridge.Translator
                     if (!isStatic)
                     {
                         var isExtensionMethod = resolvedMethod.IsExtensionMethod;
-                        this.Write(isExtensionMethod ? JS.Funcs.BRIDGE_BIND_SCOPE : JS.Funcs.BRIDGE_BIND_CACHE);
+                        this.Write(isExtensionMethod ? JS.Funcs.BRIDGE_BIND_SCOPE : JS.Funcs.BRIDGE_CACHE_BIND);
                         this.WriteOpenParentheses();
                         this.WriteThis();
                         this.Write(", ");

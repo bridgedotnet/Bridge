@@ -35,7 +35,7 @@
         {
             public const string BRIDGE_AUTO_STARTUP_METHOD_TEMPLATE = "Bridge.ready(this.{0});";
             public const string BRIDGE_BIND = "Bridge.fn.bind";
-            public const string BRIDGE_BIND_CACHE = "Bridge.fn.cacheBind";
+            public const string BRIDGE_CACHE_BIND = "Bridge.fn.cacheBind";
             public const string BRIDGE_BIND_SCOPE = "Bridge.fn.bindScope";
             public const string BRIDGE_CAST = "Bridge.cast";
             public const string BRIDGE_CREATEINSTANCE = "Bridge.createInstance";

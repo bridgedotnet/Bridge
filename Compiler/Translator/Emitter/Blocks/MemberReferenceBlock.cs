@@ -647,7 +647,7 @@ namespace Bridge.Translator
 
                         if (!isStatic)
                         {
-                            this.Write(isExtensionMethod ? JS.Funcs.BRIDGE_BIND_SCOPE : JS.Funcs.BRIDGE_BIND_CACHE);
+                            this.Write(isExtensionMethod ? JS.Funcs.BRIDGE_BIND_SCOPE : JS.Funcs.BRIDGE_CACHE_BIND);
                             this.WriteOpenParentheses();
 
                             if (memberReferenceExpression.Target is BaseReferenceExpression)
