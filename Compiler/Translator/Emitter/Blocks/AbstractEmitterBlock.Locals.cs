@@ -104,7 +104,14 @@ namespace Bridge.Translator
 
             if (!this.Emitter.LocalsNamesMap.ContainsKey(name))
             {
-                this.Emitter.LocalsNamesMap.Add(name, vName);
+                if (this.Emitter.LocalsNamesMap.ContainsValue(name))
+                {
+                    this.Emitter.LocalsNamesMap.Add(name, this.GetUniqueNameByValue(vName));
+                }
+                else
+                {
+                    this.Emitter.LocalsNamesMap.Add(name, vName);
+                }
             }
             else
             {
@@ -126,6 +133,19 @@ namespace Bridge.Translator
             }
 
             return result;
+        }
+
+        protected virtual string GetUniqueNameByValue(string name)
+        {
+            int index = 1;
+            string tempName = name + index;
+
+            while (this.Emitter.LocalsNamesMap.ContainsValue(tempName))
+            {
+                tempName = name + ++index;
+            }
+
+            return tempName;
         }
 
         protected virtual string GetUniqueName(string name)
