@@ -7171,8 +7171,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7202,7 +7200,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    });
+                                    }); /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -13297,6 +13295,23 @@ Bridge.$N1391Result =                 r;
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2222, {
         f1: function () {
             Bridge.Reflection.getType(null);
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2225", {
+        statics: {
+            testVolatile: function () {
+                var c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2225.VolatileTest();
+                c.test(5);
+                Bridge.Test.Assert.areEqual(5, c.i);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2225.VolatileTest", {
+        i: 0,
+        test: function (_i) {
+            this.i = _i;
         }
     });
 
