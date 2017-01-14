@@ -7171,8 +7171,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7202,7 +7200,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    });
+                                    }); /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -13155,6 +13153,30 @@ Bridge.$N1391Result =                 r;
             var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.SomeStruct();
             s.i = this.i;
             return s;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2211", {
+        statics: {
+            testConditionAccess: function () {
+                Bridge.Test.Assert.false(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2211.A().getIsAssistantRoot());
+                Bridge.Test.Assert.false(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2211.A(), {
+                    parentNode: new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2211.A()
+                } ).getIsAssistantRoot());
+                var a = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2211.A();
+                a.parentNode = Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2211.A(), {
+                    assistantsRoot: a
+                } );
+                Bridge.Test.Assert.true(a.getIsAssistantRoot());
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2211.A", {
+        assistantsRoot: null,
+        parentNode: null,
+        getIsAssistantRoot: function () {
+            return Bridge.referenceEquals((this.parentNode != null ? this.parentNode.assistantsRoot : null), this);
         }
     });
 
