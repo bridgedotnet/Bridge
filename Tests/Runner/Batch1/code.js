@@ -3967,22 +3967,22 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             this.assertLogMessageObject("#26 - ", System.Decimal(1.12345678), "1.12345678");
             this.assertLogMessageObject("#27 - ", System.Decimal("-12345678.12345678"), "-12345678.12345678");
             this.assertLogMessageObject("#28 - ", System.Decimal("12345678.12345678"), "12345678.12345678");
-            this.assertLogMessageObject("#29 - ", null, "null");
+            this.assertLogMessageObject("#29 - ", null, "");
             this.assertLogMessageObject("#30 - ", {  }, "[object Object]");
             this.assertLogMessageObject("#31 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassA(), "I'm ClassA");
             this.assertLogMessageObject("#32 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassB(), "[object Object]");
         },
         testLogMessageString: function () {
             this.assertLogMessageObject("#1 - ", "Test Bridge Console Log Message String", "Test Bridge Console Log Message String");
-            this.assertLogMessageObject("#2 - ", null, "null");
+            this.assertLogMessageObject("#2 - ", null, "");
         },
         testDebugMessageString: function () {
             this.assertDebugMessageString("#1 - ", "Test Bridge Console Debug Message String", "Test Bridge Console Debug Message String");
-            this.assertDebugMessageString("#2 - ", null, "null");
+            this.assertDebugMessageString("#2 - ", null, "");
         },
         testErrorMessageString: function () {
             this.assertErrorMessageString("#1 - ", "Test Bridge Console Error Message String", "Test Bridge Console Error Message String");
-            this.assertErrorMessageString("#2 - ", null, "null");
+            this.assertErrorMessageString("#2 - ", null, "");
         },
         testToggling: function () {
             Bridge.Console.hide();
