@@ -7171,8 +7171,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7202,7 +7200,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    });
+                                    }); /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -13157,6 +13155,40 @@ Bridge.$N1391Result =                 r;
             return s;
         }
     });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210", {
+        statics: {
+            testTypeOrdering: function () {
+                Bridge.Test.Assert.notNull(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210.Hello);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210.Agent_Logic");
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210.GoSington$1", function (T) { return {
+        statics: {
+            instance: null,
+            getInstance: function () {
+                if (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210.GoSington$1(T).instance == null) {
+
+                }
+                return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210.GoSington$1(T).instance;
+            }
+        }
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210.ObjSingleton$1", function (T) { return {
+        statics: {
+            instance: null,
+            getInstance: function () {
+                if (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210.ObjSingleton$1(T).instance == null) {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210.ObjSingleton$1(T).instance = Bridge.createInstance(T);
+                }
+                return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210.ObjSingleton$1(T).instance;
+            }
+        }
+    }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2212", {
         statics: {
@@ -21625,6 +21657,14 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2160.Derived$1", function (V) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2160.Base$2(System.Int32,String)]
     }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210.Hello", {
+        inherits: function () { return [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210.ObjSingleton$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210.Hello)]; }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210.LoginAgent", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210.Agent_Logic]
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240B", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A],
