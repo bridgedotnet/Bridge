@@ -105,7 +105,7 @@
     <Compile Include="System\Collections\IList.cs" />
     <Compile Include="System\CompilerServices\CallerInformationAttributes.cs" />
     <Compile Include="System\CompilerServices\FormattableStringFactory.cs" />
-    <Compile Include="System\CompilerServices\RuntimeHelpers - Copy.cs" />
+    <Compile Include="System\CompilerServices\RuntimeHelpers.cs" />
     <Compile Include="System\CompilerServices\IsVolatile.cs" />
     <Compile Include="System\FormattableString.cs" />
     <Compile Include="System\Guid.cs" />
