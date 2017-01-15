@@ -245,6 +245,11 @@ namespace Bridge
         [Template("{o:plain}")]
         public static extern T ToObjectLiteral<T>(T o);
 
+        /// <summary>
+        /// Runs the function in a try/catch statement
+        /// </summary>
+        /// <param name="fn"></param>
+        /// <returns></returns>
         [Template("Bridge.safe({fn})")]
         public static extern bool SafeFunc(Func<bool> fn);
     }

@@ -1,4 +1,5 @@
 ﻿using Bridge.Contract;
+using Bridge.Contract.Constants;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -382,7 +383,7 @@ namespace Bridge.Translator
                               thisType != null &&
                               !thisType.InheritsFromOrEquals(symbol.ContainingType) &&
                               !thisType.Equals(symbol);
-            
+
             var qns = nodeParent as QualifiedNameSyntax;
             if (qns != null && needHandle)
             {
@@ -948,7 +949,7 @@ namespace Bridge.Translator
             }
 
             node = (TryStatementSyntax)base.VisitTryStatement(node);
-            
+
             List<CatchClauseSyntax> catches = new List<CatchClauseSyntax>();
 
             if (replace)
@@ -966,7 +967,7 @@ namespace Bridge.Translator
                 List<StatementSyntax> statements = new List<StatementSyntax>();
                 statements.Add(CreateIfForCatch(node.Catches, 0, instance));
 
-                var catchDeclaration = SyntaxFactory.CatchDeclaration(SyntaxFactory.ParseTypeName("System.Exception"), SyntaxFactory.Identifier(instance));
+                var catchDeclaration = SyntaxFactory.CatchDeclaration(SyntaxFactory.ParseTypeName(CS.Types.System.Exception.NAME), SyntaxFactory.Identifier(instance));
                 catches.Add(SyntaxFactory.CatchClause(catchDeclaration, null, SyntaxFactory.Block(statements)));
             }
 
@@ -996,12 +997,12 @@ namespace Bridge.Translator
             {
                 var variableStatement = SyntaxFactory.LocalDeclarationStatement(SyntaxFactory.VariableDeclaration(catchItem.Declaration.Type,
                     SyntaxFactory.SeparatedList<VariableDeclaratorSyntax>(new [] { SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(catchItem.Declaration.Identifier.Text)).WithInitializer(
-                        SyntaxFactory.EqualsValueClause(SyntaxFactory.CastExpression(catchItem.Declaration.Type, SyntaxFactory.IdentifierName(varName)))    
+                        SyntaxFactory.EqualsValueClause(SyntaxFactory.CastExpression(catchItem.Declaration.Type, SyntaxFactory.IdentifierName(varName)))
                     ) })));
 
                 block = block.WithStatements(block.Statements.Insert(0, variableStatement));
             }
-            
+
             var ifStatement = index < (catches.Count - 1) ?
                                 SyntaxFactory.IfStatement(condition, block, SyntaxFactory.ElseClause(CreateIfForCatch(catches, index + 1, varName))) :
                                 SyntaxFactory.IfStatement(condition, block, SyntaxFactory.ElseClause(SyntaxFactory.ThrowStatement()));

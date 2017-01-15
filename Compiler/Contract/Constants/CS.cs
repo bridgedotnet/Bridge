@@ -38,6 +38,17 @@
             public const string System_UInt32 = "System.UInt32";
             public const string System_Single = "System.Single";
             public const string System_Double = "System.Double";
+
+            public class System
+            {
+                private const string DOTNAME = "System.";
+
+                public class Exception
+                {
+                    public const string NAME = System.DOTNAME + "Exception";
+                    private const string DOTNAME = NAME + ".";
+                }
+            }
         }
 
         public class Wrappers

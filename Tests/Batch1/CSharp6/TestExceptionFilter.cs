@@ -52,8 +52,8 @@ namespace Bridge.ClientTest.CSharp6
             Assert.NotNull(LogParameter, "Log() parameter was MyException");
         }
 
-        [Test]
-        public static void TestMultipleCatchClauses()
+        [Test] // #2223
+        public static void TestMultipleCatchClauses_2223()
         {
             bool b = false;
             try
@@ -74,8 +74,8 @@ namespace Bridge.ClientTest.CSharp6
             }
         }
 
-        [Test]
-        public static void TestFailedFilter()
+        [Test] // #2223
+        public static void TestFailedFilter_2223()
         {
             int a = 7;
             int b = 0;
@@ -101,8 +101,8 @@ namespace Bridge.ClientTest.CSharp6
             }
         }
 
-        [Test]
-        public static void TestFailedFilter2()
+        [Test] // #2223
+        public static void TestFailedFilter2_2223()
         {
             int a = 7;
             int b = 0;
