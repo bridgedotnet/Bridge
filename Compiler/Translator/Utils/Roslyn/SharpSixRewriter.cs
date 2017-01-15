@@ -1007,6 +1007,10 @@ namespace Bridge.Translator
                 conditionNode = conditionNode.WhenNotNull as ConditionalAccessExpressionSyntax;
             }
 
+            bool needParenthesized = node.Parent is BinaryExpressionSyntax
+                                     || node.Parent is PostfixUnaryExpressionSyntax
+                                     || node.Parent is PrefixUnaryExpressionSyntax;
+
             node = (ConditionalAccessExpressionSyntax)base.VisitConditionalAccessExpression(node);
             var idx = 0;
             infos[idx++].Node = node;
@@ -1079,7 +1083,8 @@ namespace Bridge.Translator
 
             ExpressionSyntax whenFalse = lastInfo.IsResultVoid ? (ExpressionSyntax)SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression) : SyntaxFactory.CastExpression(lastInfo.ResultType, SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression));
 
-            return SyntaxFactory.ConditionalExpression(condition, whenTrue, whenFalse);
+            return needParenthesized ? SyntaxFactory.ParenthesizedExpression(SyntaxFactory.ConditionalExpression(condition, whenTrue, whenFalse)) :
+                                       (SyntaxNode)SyntaxFactory.ConditionalExpression(condition, whenTrue, whenFalse);
         }
     }
 }
