@@ -106,6 +106,7 @@
     <Compile Include="System\CompilerServices\CallerInformationAttributes.cs" />
     <Compile Include="System\CompilerServices\FormattableStringFactory.cs" />
     <Compile Include="System\CompilerServices\RuntimeHelpers.cs" />
+    <Compile Include="System\CompilerServices\IsVolatile.cs" />
     <Compile Include="System\FormattableString.cs" />
     <Compile Include="System\Guid.cs" />
     <Compile Include="System\Linq\Expressions\BinaryExpression.cs" />

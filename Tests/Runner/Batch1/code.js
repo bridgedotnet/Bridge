@@ -11530,7 +11530,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var strings = System.Array.init(1, null, String);
                 Bridge.Test.Assert.null(($t57 = Bridge.ClientTest.CSharp6.TestConditionAccess.getStrings(null)) != null ? $t57.length : null);
-                Bridge.Test.Assert.areEqual(1, strings != null ? strings.length : ($t58 = null, $t58 != null ? $t58 : 0));
+                Bridge.Test.Assert.areEqual(1, ($t58 = (strings != null ? strings.length : null), $t58 != null ? $t58 : 0));
                 Bridge.Test.Assert.null(strings != null ? strings[0] : null);
 
                 var action1 = $asm.$.Bridge.ClientTest.CSharp6.TestConditionAccess.f3;
