@@ -138,25 +138,23 @@ namespace Bridge.Translator
     {
         private string name;
         private ExpressionSyntax replacer;
-        private SemanticModel _semanticModel;
 
-        public IdentifierReplacer(SemanticModel semanticModel, string name, ExpressionSyntax replacer)
+        public IdentifierReplacer(string name, ExpressionSyntax replacer)
         {
             this.name = name;
             this.replacer = replacer;
-            this._semanticModel = semanticModel;
         }
 
         public ExpressionSyntax Replace(ExpressionSyntax expr)
         {
             return (ExpressionSyntax)Visit(expr);
         }
-        
+
         public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax syntax)
         {
             if (syntax.Identifier.Value.ToString() == name)
             {
-                return this.replacer;   
+                return this.replacer;
             }
 
             return syntax;

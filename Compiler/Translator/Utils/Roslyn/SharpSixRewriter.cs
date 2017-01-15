@@ -983,7 +983,7 @@ namespace Bridge.Translator
             if (catchItem.Filter != null)
             {
                 var methodIdentifier = SyntaxFactory.IdentifierName("Bridge.Script.SafeFunc");
-                var lambda = SyntaxFactory.ParenthesizedLambdaExpression(SyntaxFactory.ParameterList(), catchItem.Declaration.Identifier.Kind() != SyntaxKind.None ? new IdentifierReplacer(this.semanticModel, catchItem.Declaration.Identifier.Value.ToString(), SyntaxFactory.CastExpression(catchItem.Declaration.Type, SyntaxFactory.IdentifierName(varName))).Replace(catchItem.Filter.FilterExpression) : catchItem.Filter.FilterExpression);
+                var lambda = SyntaxFactory.ParenthesizedLambdaExpression(SyntaxFactory.ParameterList(), catchItem.Declaration.Identifier.Kind() != SyntaxKind.None ? new IdentifierReplacer(catchItem.Declaration.Identifier.Value.ToString(), SyntaxFactory.CastExpression(catchItem.Declaration.Type, SyntaxFactory.IdentifierName(varName))).Replace(catchItem.Filter.FilterExpression) : catchItem.Filter.FilterExpression);
                 var invocation = SyntaxFactory.InvocationExpression(methodIdentifier, SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(new [] { SyntaxFactory.Argument(
                     lambda
                     ) })));
