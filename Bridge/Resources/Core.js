@@ -15,6 +15,15 @@
             return name2;
         },
 
+        safe: function(fn) {
+            try {
+                return fn();
+            } catch (ex) {
+            }
+
+            return false;
+        },
+
         literal: function (type, obj) {
             obj.$getType = function () { return type };
             return obj;

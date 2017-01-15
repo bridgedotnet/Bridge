@@ -244,5 +244,8 @@ namespace Bridge
 
         [Template("{o:plain}")]
         public static extern T ToObjectLiteral<T>(T o);
+
+        [Template("Bridge.safe({fn})")]
+        public static extern bool SafeFunc(Func<bool> fn);
     }
 }
