@@ -18,9 +18,10 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public static void TestConditionAccess()
         {
             Assert.False(new A().IsAssistantRoot);
-            Assert.False(new A {ParentNode = new A()}.IsAssistantRoot);
+            Assert.False(new A { ParentNode = new A() }.IsAssistantRoot);
+
             var a = new A();
-            a.ParentNode = new A {AssistantsRoot = a};
+            a.ParentNode = new A { AssistantsRoot = a };
             Assert.True(a.IsAssistantRoot);
         }
     }

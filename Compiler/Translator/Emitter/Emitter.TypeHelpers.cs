@@ -255,7 +255,7 @@ namespace Bridge.Translator
                             dProcess = new TopologicalSorting.OrderedProcess(graph, reflectionName);
                         }
 
-                        if (dProcess.Predecessors.All(p => p.Name != tProcess.Name))
+                        if (tProcess != dProcess && dProcess.Predecessors.All(p => p.Name != tProcess.Name))
                         {
                             hitCounters[4]++;
                             tProcess.After(dProcess);
