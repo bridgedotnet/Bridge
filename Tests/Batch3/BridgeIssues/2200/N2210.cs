@@ -42,7 +42,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 {
                     if (instance == null)
                     {
-                        
+
                     }
                     return instance;
                 }
