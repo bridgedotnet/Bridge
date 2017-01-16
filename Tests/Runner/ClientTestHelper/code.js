@@ -14,6 +14,15 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.ClientTestHelper.HtmlHelper", {
+        statics: {
+            TEST_FIXTURE_ELEMENT: "qunit-fixture",
+            getFixtureElement: function () {
+                return document.getElementById(Bridge.ClientTestHelper.HtmlHelper.TEST_FIXTURE_ELEMENT);
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTestHelper.IItem", {
         $kind: "interface"
     });

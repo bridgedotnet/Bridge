@@ -1,5 +1,6 @@
 ﻿using Bridge.Html5;
 using Bridge.Test;
+using Bridge.ClientTestHelper;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -15,7 +16,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             textArea.Id = "textArea1";
             textArea.Value = "Test";
 
-            var root = Document.GetElementById("qunit-fixture");
+            var root = HtmlHelper.FixtureElement;
             root.AppendChild(textArea);
 
             var ta = Document.GetElementById("textArea1");

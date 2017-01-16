@@ -1,5 +1,6 @@
 ﻿using Bridge.Html5;
 using Bridge.Test;
+using Bridge.ClientTestHelper;
 
 using System;
 using System.Threading.Tasks;
@@ -10,7 +11,6 @@ namespace Bridge.ClientTest
     [TestFixture(TestNameFormat = "MutationObserver - {0}")]
     public class MutationObserverTests
     {
-        private const string TARGET = "qunit-fixture";
         private const string ATTRIBUTE = "SPAN";
         private const string TYPE = "childList";
 
@@ -26,7 +26,7 @@ namespace Bridge.ClientTest
 
             var done = Assert.Async();
 
-            var root = Document.GetElementById(TARGET);
+            var root = HtmlHelper.FixtureElement;
 
             //setup observer
             var observer = new MutationObserver((changes, _) =>
@@ -84,7 +84,7 @@ namespace Bridge.ClientTest
             Assert.NotNull(record, "record");
 
             Assert.NotNull(record.Target, "Target");
-            Assert.AreEqual(TARGET, record.Target.As<Element>().Id, "Target Id");
+            Assert.AreEqual(HtmlHelper.FixtureElement.Id, record.Target.As<Element>().Id, "Target Id");
 
             Assert.AreEqual(TYPE, record.Type, "Type");
 

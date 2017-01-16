@@ -48,7 +48,7 @@
     <Compile Include="External\AjaxOptions.cs" />
     <Compile Include="External\BridgeHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="Bridge\bridge.json" />
+    <None Include="bridge.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Bridge\Bridge.csproj">

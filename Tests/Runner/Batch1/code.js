@@ -19565,7 +19565,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.MutationObserverTests", {
         statics: {
-            TARGET: "qunit-fixture",
             ATTRIBUTE: "SPAN",
             TYPE: "childList"
         },
@@ -19579,7 +19578,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
             var done = Bridge.Test.Assert.async();
 
-            var root = document.getElementById(Bridge.ClientTest.MutationObserverTests.TARGET);
+            var root = Bridge.ClientTestHelper.HtmlHelper.getFixtureElement();
 
             //setup observer
             var observer = new MutationObserver(Bridge.fn.bind(this, $asm.$.Bridge.ClientTest.MutationObserverTests.f1));
@@ -19622,7 +19621,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.notNull$1(record, "record");
 
             Bridge.Test.Assert.notNull$1(record.target, "Target");
-            Bridge.Test.Assert.areEqual$1(Bridge.ClientTest.MutationObserverTests.TARGET, record.target.id, "Target Id");
+            Bridge.Test.Assert.areEqual$1(Bridge.ClientTestHelper.HtmlHelper.getFixtureElement().id, record.target.id, "Target Id");
 
             Bridge.Test.Assert.areEqual$1(Bridge.ClientTest.MutationObserverTests.TYPE, record.type, "Type");
 
