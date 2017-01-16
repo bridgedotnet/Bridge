@@ -7171,8 +7171,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7202,7 +7200,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    });
+                                    }); /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -13373,6 +13371,28 @@ Bridge.$N1391Result =                 r;
         i: 0,
         test: function (_i) {
             this.i = _i;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2246", {
+        statics: {
+            array: null,
+            isExecuted: false,
+            config: {
+                init: function () {
+                    this.array = System.Array.init(["string"], String);
+                }
+            },
+            testEntryPoint: function () {
+                Bridge.Test.Assert.true(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2246.isExecuted);
+            }
+        },
+        $main: function () {
+            if (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2246.isExecuted) {
+                throw new System.InvalidOperationException("Double entry point execution");
+            }
+
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge2246.isExecuted = true;
         }
     });
 
