@@ -13398,6 +13398,28 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2243", {
+        statics: {
+            testElementHiddenField: function () {
+                var d = document.createElement('div');
+                var root = Bridge.ClientTestHelper.HtmlHelper.getFixtureElement();
+                root.appendChild(d);
+
+                d.hidden = true;
+                Bridge.Test.Assert.true(d.hidden);
+
+                d.hidden = false;
+                Bridge.Test.Assert.false(d.hidden);
+
+                d.hidden = true;
+                Bridge.Test.Assert.true(d.hidden);
+
+                d.hidden = false;
+                Bridge.Test.Assert.false(d.hidden);
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
