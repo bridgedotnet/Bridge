@@ -77,6 +77,11 @@ namespace Bridge.Html5
         public readonly HTMLElement FirstElementChild;
 
         /// <summary>
+        /// The hidden global attribute is a Boolean attribute indicating that the element is not yet, or is no longer, relevant.
+        /// </summary>
+        public bool Hidden;
+
+        /// <summary>
         /// Gets or sets the element's identifier (attribute id).
         /// </summary>
         public string Id;

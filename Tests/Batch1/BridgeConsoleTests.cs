@@ -46,7 +46,7 @@ namespace Bridge.ClientTest
             AssertLogMessageObject("#26 - ", 1.12345678m, "1.12345678");
             AssertLogMessageObject("#27 - ", -12345678.12345678m, "-12345678.12345678");
             AssertLogMessageObject("#28 - ", 12345678.12345678m, "12345678.12345678");
-            AssertLogMessageObject("#29 - ", null, "null");
+            AssertLogMessageObject("#29 - ", null, "");
             AssertLogMessageObject("#30 - ", new object(), "[object Object]");
             AssertLogMessageObject("#31 - ", new ClassA(), "I'm ClassA");
             AssertLogMessageObject("#32 - ", new ClassB(), "[object Object]");
@@ -56,21 +56,21 @@ namespace Bridge.ClientTest
         public void TestLogMessageString()
         {
             AssertLogMessageObject("#1 - ", "Test Bridge Console Log Message String", "Test Bridge Console Log Message String");
-            AssertLogMessageObject("#2 - ", null, "null");
+            AssertLogMessageObject("#2 - ", null, "");
         }
 
         [Test]
         public void TestDebugMessageString()
         {
             AssertDebugMessageString("#1 - ", "Test Bridge Console Debug Message String", "Test Bridge Console Debug Message String");
-            AssertDebugMessageString("#2 - ", null, "null");
+            AssertDebugMessageString("#2 - ", null, "");
         }
 
         [Test]
         public void TestErrorMessageString()
         {
             AssertErrorMessageString("#1 - ", "Test Bridge Console Error Message String", "Test Bridge Console Error Message String");
-            AssertErrorMessageString("#2 - ", null, "null");
+            AssertErrorMessageString("#2 - ", null, "");
         }
 
         [Test]

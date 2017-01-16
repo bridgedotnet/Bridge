@@ -3967,22 +3967,22 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             this.assertLogMessageObject("#26 - ", System.Decimal(1.12345678), "1.12345678");
             this.assertLogMessageObject("#27 - ", System.Decimal("-12345678.12345678"), "-12345678.12345678");
             this.assertLogMessageObject("#28 - ", System.Decimal("12345678.12345678"), "12345678.12345678");
-            this.assertLogMessageObject("#29 - ", null, "null");
+            this.assertLogMessageObject("#29 - ", null, "");
             this.assertLogMessageObject("#30 - ", {  }, "[object Object]");
             this.assertLogMessageObject("#31 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassA(), "I'm ClassA");
             this.assertLogMessageObject("#32 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassB(), "[object Object]");
         },
         testLogMessageString: function () {
             this.assertLogMessageObject("#1 - ", "Test Bridge Console Log Message String", "Test Bridge Console Log Message String");
-            this.assertLogMessageObject("#2 - ", null, "null");
+            this.assertLogMessageObject("#2 - ", null, "");
         },
         testDebugMessageString: function () {
             this.assertDebugMessageString("#1 - ", "Test Bridge Console Debug Message String", "Test Bridge Console Debug Message String");
-            this.assertDebugMessageString("#2 - ", null, "null");
+            this.assertDebugMessageString("#2 - ", null, "");
         },
         testErrorMessageString: function () {
             this.assertErrorMessageString("#1 - ", "Test Bridge Console Error Message String", "Test Bridge Console Error Message String");
-            this.assertErrorMessageString("#2 - ", null, "null");
+            this.assertErrorMessageString("#2 - ", null, "");
         },
         testToggling: function () {
             Bridge.Console.hide();
@@ -19565,7 +19565,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.MutationObserverTests", {
         statics: {
-            TARGET: "qunit-fixture",
             ATTRIBUTE: "SPAN",
             TYPE: "childList"
         },
@@ -19579,7 +19578,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
             var done = Bridge.Test.Assert.async();
 
-            var root = document.getElementById(Bridge.ClientTest.MutationObserverTests.TARGET);
+            var root = Bridge.ClientTestHelper.HtmlHelper.getFixtureElement();
 
             //setup observer
             var observer = new MutationObserver(Bridge.fn.bind(this, $asm.$.Bridge.ClientTest.MutationObserverTests.f1));
@@ -19622,7 +19621,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.Assert.notNull$1(record, "record");
 
             Bridge.Test.Assert.notNull$1(record.target, "Target");
-            Bridge.Test.Assert.areEqual$1(Bridge.ClientTest.MutationObserverTests.TARGET, record.target.id, "Target Id");
+            Bridge.Test.Assert.areEqual$1(Bridge.ClientTestHelper.HtmlHelper.getFixtureElement().id, record.target.id, "Target Id");
 
             Bridge.Test.Assert.areEqual$1(Bridge.ClientTest.MutationObserverTests.TYPE, record.type, "Type");
 

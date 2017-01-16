@@ -2986,7 +2986,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1241", {
         statics: {
             testMarkElement: function () {
-                var root = document.getElementById("qunit-fixture");
+                var root = Bridge.ClientTestHelper.HtmlHelper.getFixtureElement();
 
                 var markElement1 = document.createElement('mark');
                 Bridge.Test.Assert.notNull$1(markElement1, "MarkElement created");
@@ -6302,7 +6302,7 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1459", {
         statics: {
             testHtmlElements: function () {
-                var root = document.getElementById("qunit-fixture");
+                var root = Bridge.ClientTestHelper.HtmlHelper.getFixtureElement();
 
                 var button = document.createElement('button');
                 root.appendChild(button);
@@ -7171,6 +7171,8 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
+
+
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7200,7 +7202,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    }); /// Async method lacks 'await' operators and will run synchronously
+                                    });
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -12988,6 +12990,28 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2186", {
+        statics: {
+            getOutput: function () {
+                return Bridge.Console.getInstance().bufferedOutput;
+            },
+            setOutput: function (value) {
+                Bridge.Console.getInstance().bufferedOutput = value;
+            },
+            clearOutput: function () {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2186.setOutput("");
+            },
+            resetOutput: function () {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2186.setOutput(null);
+                Bridge.Console.hide();
+            },
+            testConsoleWriteLineParameterless: function () {
+                Bridge.Console.log();
+                Bridge.Test.Assert.areEqual("", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2186.getOutput());
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2189", {
         statics: {
             testInheritanceFromExternalAndBaseCtor: function () {
@@ -13371,6 +13395,28 @@ Bridge.$N1391Result =                 r;
         i: 0,
         test: function (_i) {
             this.i = _i;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2243", {
+        statics: {
+            testElementHiddenField: function () {
+                var d = document.createElement('div');
+                var root = Bridge.ClientTestHelper.HtmlHelper.getFixtureElement();
+                root.appendChild(d);
+
+                d.hidden = true;
+                Bridge.Test.Assert.true(d.hidden);
+
+                d.hidden = false;
+                Bridge.Test.Assert.false(d.hidden);
+
+                d.hidden = true;
+                Bridge.Test.Assert.true(d.hidden);
+
+                d.hidden = false;
+                Bridge.Test.Assert.false(d.hidden);
+            }
         }
     });
 
@@ -13977,7 +14023,7 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge495", {
         statics: {
             testUseCase: function () {
-                var root = document.getElementById("qunit-fixture");
+                var root = Bridge.ClientTestHelper.HtmlHelper.getFixtureElement();
 
                 var button1 = document.createElement('button');
                 button1.innerHTML = "Button 1";
@@ -18323,7 +18369,7 @@ Bridge.$N1391Result =                 r;
                 textArea.id = "textArea1";
                 textArea.value = "Test";
 
-                var root = document.getElementById("qunit-fixture");
+                var root = Bridge.ClientTestHelper.HtmlHelper.getFixtureElement();
                 root.appendChild(textArea);
 
                 var ta = document.getElementById("textArea1");

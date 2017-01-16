@@ -23757,7 +23757,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 if (messageType === void 0) { messageType = 0; }
                 var self = Bridge.Console.getInstance();
 
-                var v = value != null ? value.toString() : "null";
+                var v = value != null ? value.toString() : "";
 
                 if (self.bufferedOutput != null) {
                     self.bufferedOutput = System.String.concat(self.bufferedOutput, v);

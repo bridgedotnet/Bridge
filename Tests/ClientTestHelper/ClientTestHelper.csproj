@@ -45,11 +45,12 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Internal\HtmlHelper.cs" />
     <Compile Include="Internal\N1193.cs" />
     <Compile Include="Internal\N2190.cs" />
     <Compile Include="Internal\N1915.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="Bridge\bridge.json" />
+    <None Include="bridge.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Bridge\Bridge.csproj">

@@ -1,5 +1,6 @@
 using Bridge.Html5;
 using Bridge.Test;
+using Bridge.ClientTestHelper;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -10,7 +11,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test]
         public static void TestHtmlElements()
         {
-            var root = Document.GetElementById("qunit-fixture");
+            var root = HtmlHelper.FixtureElement;
 
             var button = new HTMLButtonElement();
             root.AppendChild(button);
