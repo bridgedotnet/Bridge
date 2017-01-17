@@ -1,5 +1,6 @@
 ﻿using Bridge.Html5;
 using Bridge.Test;
+using Bridge.ClientTest.Utilities;
 using System;
 
 namespace Bridge.ClientTest
@@ -39,7 +40,15 @@ namespace Bridge.ClientTest
         {
             var parser = new DOMParser();
 
-            Assert.Throws(() => { parser.ParseFromString("<root></root>", "xml"); });
+            if (!BrowserHelper.IsPhantomJs())
+            {
+                Assert.Throws(() => { parser.ParseFromString("<root></root>", "xml"); });
+            }
+            else
+            {
+                var d = parser.ParseFromString("<root></root>", "xml");
+                Assert.Null(d);
+            }
         }
     }
 }

@@ -12585,9 +12585,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         xmlParsingShouldThrow: function () {
             var parser = new DOMParser();
 
-            Bridge.Test.Assert.throws(function () {
-                parser.parseFromString("<root></root>", "xml");
-            });
+            if (!Bridge.ClientTest.Utilities.BrowserHelper.isPhantomJs()) {
+                Bridge.Test.Assert.throws(function () {
+                    parser.parseFromString("<root></root>", "xml");
+                });
+            } else {
+                var d = parser.parseFromString("<root></root>", "xml");
+                Bridge.Test.Assert.null(d);
+            }
         }
     });
 

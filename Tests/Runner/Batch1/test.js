@@ -10724,21 +10724,21 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
             constructorWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.DOMParserTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_DOMParserTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "ConstructorWorks()",
-                    line: "11"
+                    line: "12"
                 } ));
                 t.getFixture().constructorWorks();
             },
             xmlParsingWorks: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.DOMParserTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_DOMParserTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "XmlParsingWorks()",
-                    line: "19"
+                    line: "20"
                 } ));
                 t.getFixture().xmlParsingWorks();
             },
             xmlParsingShouldThrow: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.DOMParserTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_DOMParserTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "XmlParsingShouldThrow()",
-                    line: "37"
+                    line: "38"
                 } ));
                 t.getFixture().xmlParsingShouldThrow();
             }
