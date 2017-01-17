@@ -7171,8 +7171,6 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7202,7 +7200,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    });
+                                    }); /// Async method lacks 'await' operators and will run synchronously
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -13096,6 +13094,31 @@ Bridge.$N1391Result =                 r;
                 var s = "s";
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2199.assertTypeName(String, s, String);
 
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2200", {
+        statics: {
+            testSequence: function () {
+                var seq = [1, "one"];
+                Bridge.Test.Assert.areEqual(1, seq[0]);
+                Bridge.Test.Assert.areEqual("one", seq[1]);
+
+                seq[0] = 2;
+                seq[1] = "two";
+                Bridge.Test.Assert.areEqual(2, seq[0]);
+                Bridge.Test.Assert.areEqual("two", seq[1]);
+
+                seq[0] = 3;
+                seq[1] = "three";
+                Bridge.Test.Assert.areEqual(3, seq[0]);
+                Bridge.Test.Assert.areEqual("three", seq[1]);
+
+                Bridge.Test.Assert.true(Bridge.is(seq, Array));
+                Bridge.Test.Assert.areEqual(2, seq.length);
+                Bridge.Test.Assert.areEqual(3, seq[0]);
+                Bridge.Test.Assert.areEqual("three", seq[1]);
             }
         }
     });
