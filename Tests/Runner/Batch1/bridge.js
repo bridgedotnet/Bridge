@@ -10907,9 +10907,13 @@
                 this.clear.$clearCallbacks = [];
             },
 
-            checkIndex: function (index) {
-                if (index < 0 || index > (this.items.length - 1)) {
-                    throw new System.ArgumentOutOfRangeException('Index out of range');
+            checkIndex: function (index, message) {
+                if (isNaN(index) || index < 0 || index > (this.items.length)) {
+                    if (!Bridge.isDefined(message)) {
+                        throw new System.ArgumentOutOfRangeException('Index out of range');
+                    } else {
+                        throw new System.ArgumentException(message);
+                    }
                 }
             },
 
@@ -11020,23 +11024,19 @@
             },
 
             getRange: function (index, count) {
-                if (!Bridge.isDefined(index)) {
-                    index = 0;
-                }
-
-                if (!Bridge.isDefined(count)) {
-                    count = this.items.length;
-                }
-
                 if (index !== 0) {
                     this.checkIndex(index);
                 }
 
-                this.checkIndex(index + count - 1);
+                if (isNaN(count) || count < 0) {
+                    throw new System.ArgumentOutOfRangeException('count out of range');
+                }
+
+                var maxIndex = index + count;
+                this.checkIndex(maxIndex, "Offset and length were out of bounds for the array or count is greater than the number of elements from index tothe end of the source collection.");
 
                 var result = [],
-                    i,
-                    maxIndex = index + count;
+                    i;
 
                 for (i = index; i < maxIndex; i++) {
                     result.push(this.items[i]);

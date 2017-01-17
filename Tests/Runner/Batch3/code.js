@@ -13506,6 +13506,38 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2251", {
+        statics: {
+            testListGetRange: function () {
+                var l = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2251.f1(new (System.Collections.Generic.List$1(System.Int32))());
+
+                Bridge.Test.Assert.areEqual(0, l.getRange(0, 0).getCount());
+
+                Bridge.Test.Assert.throws$6(System.ArgumentOutOfRangeException, function () {
+                    l.getRange(0, -1);
+                });
+
+                Bridge.Test.Assert.throws$6(System.ArgumentOutOfRangeException, function () {
+                    l.getRange(-1, 2);
+                });
+
+                Bridge.Test.Assert.throws$6(System.ArgumentException, function () {
+                    l.getRange(0, 3);
+                });
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2251", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2251, {
+        f1: function (_o40) {
+            _o40.add(1);
+            _o40.add(2);
+            return _o40;
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
@@ -21072,30 +21104,30 @@ Bridge.$N1391Result =                 r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues, {
-        f1: function (_o40) {
-            _o40.add(0);
-            _o40.add(1);
-            _o40.add(2);
-            _o40.add(3);
-            _o40.add(4);
-            return _o40;
-        },
-        f2: function (_o41) {
-            _o41.add(3, "b");
-            _o41.add(6, "z");
-            _o41.add(9, "x");
+        f1: function (_o41) {
+            _o41.add(0);
+            _o41.add(1);
+            _o41.add(2);
+            _o41.add(3);
+            _o41.add(4);
             return _o41;
+        },
+        f2: function (_o42) {
+            _o42.add(3, "b");
+            _o42.add(6, "z");
+            _o42.add(9, "x");
+            return _o42;
         },
         f3: function (i) {
             return ((i * 2) | 0);
         },
-        f4: function (_o42) {
-            _o42.add(0);
-            _o42.add(1);
-            _o42.add(2);
-            _o42.add(3);
-            _o42.add(4);
-            return _o42;
+        f4: function (_o43) {
+            _o43.add(0);
+            _o43.add(1);
+            _o43.add(2);
+            _o43.add(3);
+            _o43.add(4);
+            return _o43;
         }
     });
 
