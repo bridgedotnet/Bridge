@@ -59,8 +59,15 @@ namespace System.Collections.Generic
 
         public extern IEnumerator<T> GetEnumerator();
 
+        [Obsolete("This is not C# standard method. Please use GetRange(int, int)")]
         public extern List<T> GetRange(int index);
 
+        /// <summary>
+        /// Creates a shallow copy of a range of elements in the source <see cref="List{T}"/>.
+        /// </summary>
+        /// <param name="index">The zero-based <see cref="List{T}"/> index at which the range starts.</param>
+        /// <param name="count">The number of elements in the range.</param>
+        /// <returns>A shallow copy of a range of elements in the source <see cref="List{T}"/>.</returns>
         public extern List<T> GetRange(int index, int count);
 
         public extern int IndexOf(T item);
