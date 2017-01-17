@@ -55,6 +55,7 @@
     <Compile Include="ClientRect.cs" />
     <Compile Include="ClientRectList.cs" />
     <Compile Include="CompatMode.cs" />
+    <Compile Include="DOMParser.cs" />
     <Compile Include="DragDrop\DataTransferItem.cs" />
     <Compile Include="DragDrop\DropEffect.cs" />
     <Compile Include="DragDrop\EffectAllowed.cs" />
