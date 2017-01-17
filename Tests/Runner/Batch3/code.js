@@ -7171,6 +7171,8 @@ Bridge.$N1391Result =                 r;
                                 done = Bridge.Test.Assert.async();
 
                                     foo = null; /// Async method lacks 'await' operators and will run synchronously
+
+
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
@@ -7200,7 +7202,7 @@ Bridge.$N1391Result =                 r;
 
                                         $asyncBody();
                                         return $tcs.task;
-                                    }); /// Async method lacks 'await' operators and will run synchronously
+                                    });
                                     $task1 = bar();
                                     $step = 1;
                                     $task1.continueWith($asyncBody, true);
@@ -13037,6 +13039,45 @@ Bridge.$N1391Result =                 r;
             testInternalsVisibleTo: function () {
                 Bridge.Test.Assert.areEqual("Hi", Bridge.ClientTestHelper.N2190.greeting());
             }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2192", {
+        statics: {
+            getLoggablePerson: function (name, id) {
+                var person = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2192.Person(name);
+                var loggable = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2192.Loggable(id);
+
+                person.log = loggable.log;
+                person.id = loggable.id;
+
+                return person;
+            },
+            testIntersection: function () {
+                var person = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2192.getLoggablePerson("John Doe #1", 5);
+                Bridge.Test.Assert.areEqual("John Doe #1", person.name);
+                Bridge.Test.Assert.areEqual(5, person.log());
+                Bridge.Test.Assert.areEqual(5, person.id);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2192.Loggable", {
+        id: 0,
+        ctor: function (id) {
+            this.$initialize();
+            this.id = id;
+        },
+        log: function () {
+            return this.id;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2192.Person", {
+        name: null,
+        ctor: function (name) {
+            this.$initialize();
+            this.name = name;
         }
     });
 
