@@ -7,7 +7,6 @@ namespace Bridge.Html5
     /// DOMParser can parse XML or HTML source stored in a string into a DOM Document.
     /// </summary>
     [External]
-    [Namespace(false)]
     [Name("DOMParser")]
     public class DOMParser
     {
