@@ -30,7 +30,17 @@
             return name2;
         },
 
-        safe: function(fn) {
+        getInterface: function (name) {
+            var type = Bridge.unroll(name);
+
+            if (!type) {
+                type = Bridge.definei(name);
+            }
+
+            return type;
+        },
+
+        safe: function (fn) {
             try {
                 return fn();
             } catch (ex) {

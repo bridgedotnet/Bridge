@@ -23,6 +23,11 @@ namespace Bridge
     {
         public extern ExternalInterfaceAttribute();
         public extern ExternalInterfaceAttribute(bool nativeImplementation);
+
+        public bool IsVirtual
+        {
+            get; set;
+        }
     }
 
     /// <summary>

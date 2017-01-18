@@ -563,8 +563,8 @@ namespace Bridge.Translator
                     return false;
                 }
             }
-
-            if (member is IProperty)
+            
+            if (member is IProperty && !Helpers.IsFieldProperty(member, this.Emitter))
             {
                 var property = (IProperty)member;
                 if (property.CanGet)
