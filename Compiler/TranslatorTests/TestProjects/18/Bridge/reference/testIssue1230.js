@@ -26,11 +26,11 @@
                 var l = System.Decimal(v);
                 l = System.Decimal(v);
 
-                Bridge.Console.log(System.Decimal(v).toString());
-                Bridge.Console.log(System.Decimal(v).toString());
-                Bridge.Console.log(System.Decimal(2.0).toString());
-                Bridge.Console.log(System.Decimal(2.0).toString());
-                Bridge.Console.log(System.Decimal(7.0).toString());
+                Bridge.Console.log(System.Decimal(v).toString('G'));
+                Bridge.Console.log(System.Decimal(v).toString('G'));
+                Bridge.Console.log(System.Decimal(2.0).toString('G'));
+                Bridge.Console.log(System.Decimal(2.0).toString('G'));
+                Bridge.Console.log(System.Decimal(7.0).toString('G'));
                 TestIssue1230.Issue1230.methodDecimal(System.Decimal(v));
                 TestIssue1230.Issue1230.methodDecimal(System.Decimal(v));
             },
