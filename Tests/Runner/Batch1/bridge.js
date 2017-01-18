@@ -10896,7 +10896,10 @@
 
             ctor: function (obj) {
                 this.$initialize();
-                if (Object.prototype.toString.call(obj) === '[object Array]') {
+
+                if (!Bridge.isDefined(obj)) {
+                    this.items = [];
+                } else if (Object.prototype.toString.call(obj) === '[object Array]') {
                     this.items = System.Array.clone(obj);
                 } else if (Bridge.is(obj, System.Collections.IEnumerable)) {
                     this.items = Bridge.toArray(obj);
@@ -11038,7 +11041,10 @@
                     items[i] = this.items[index + i];
                 }
 
-                return new (System.Collections.Generic.List$1(T))(items);
+                var list = new (System.Collections.Generic.List$1(T))();
+                list.items = items;
+
+                return list;
             },
 
             insert: function (index, item) {
@@ -11113,9 +11119,10 @@
             slice: function (start, end) {
                 this.checkReadOnly();
 
-                var gName = this.$$name.substr(this.$$name.lastIndexOf('$') + 1);
+                var list = new (System.Collections.Generic.List$1(T))();
+                list.items = this.items.slice(start, end);
 
-                return new (System.Collections.Generic.List$1(Bridge.unroll(gName)))(this.items.slice(start, end));
+                return list;
             },
 
             sort: function (comparison) {
@@ -11176,7 +11183,7 @@
                     throw new System.ArgumentNullException("converter is null.");
                 }
 
-                var list = new (System.Collections.Generic.List$1(TOutput))(this.items.length);
+                var list = new (System.Collections.Generic.List$1(TOutput))();
                 for (var i = 0; i < this.items.length; i++) {
                     list.items[i] = converter(this.items[i]);
                 }
