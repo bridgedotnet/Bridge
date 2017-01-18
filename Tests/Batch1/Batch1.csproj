@@ -57,6 +57,7 @@
     <Compile Include="Collections\Native\Uint8ArrayTests.cs" />
     <Compile Include="Collections\Native\Uint8ClampedArrayTests.cs" />
     <Compile Include="Collections\ObjectModel\ReadOnlyCollectionTests.cs" />
+    <Compile Include="DOMParserTests.cs" />
     <Compile Include="FunctionTests.cs" />
     <Compile Include="BridgeConsoleTests.cs" />
     <Compile Include="Exceptions\AmbiguousMatchExceptionTests.cs" />

@@ -2,7 +2,7 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/nm2f0c0u1jx0sniq/branch/master?svg=true)](https://ci.appveyor.com/project/ObjectDotNet/bridge/branch/master)
 [![Build Status](https://travis-ci.org/bridgedotnet/Bridge.svg?branch=master)](https://travis-ci.org/bridgedotnet/Bridge)
-[![NuGet Status](https://img.shields.io/nuget/v/Bridge.svg?style=flat-square)](https://www.nuget.org/packages/Bridge)
+[![NuGet Status](https://img.shields.io/nuget/v/Bridge.svg)](https://www.nuget.org/packages/Bridge)
 [![Join the chat at https://gitter.im/bridgedotnet/Bridge](https://badges.gitter.im/bridgedotnet/Bridge.svg)](https://gitter.im/bridgedotnet/Bridge?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![CLA assistant](https://cla-assistant.io/readme/badge/bridgedotnet/Bridge)](https://cla-assistant.io/bridgedotnet/Bridge)
 
@@ -10,17 +10,37 @@
 
 Compile your C#...
 
-```csharp
-Window.Alert("Hello, World!");
+```cs
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        var msg = "Hello, world!";
+        
+        Console.WriteLine(msg);
+    }
+}
 ```
 
 into JavaScript
 
-```javascript
-window.alert("Hello, World!");
+```js
+Bridge.assembly("Demo", function ($asm, globals) {
+    "use strict";
+
+    Bridge.define("Program", {
+        $main: function (args) {
+            var msg = "Hello, world!";
+
+            Bridge.Console.log(msg);
+        }
+    });
+});
 ```
 
-Run the sample above at [Deck.NET](http://deck.net/3642cccab693782704ec59554522af98).
+Run the sample above at [Deck.NET](http://deck.net/5c58693ae7b44ac969f576545cac7f0c).
 
 ## TL;DR
 
@@ -107,11 +127,31 @@ Interested in contributing to Bridge? Please see [CONTRIBUTING.md](https://githu
 
 We also flag some Issues as [up-for-grabs](https://github.com/bridgedotnet/Bridge/issues?q=is%3Aopen+is%3Aissue+label%3Aup-for-grabs). These are generally easy introductions to the inner workings of Bridge, and are items we just haven't had time to implement. Your help is always appreciated.
 
+## Badges
+
+Show your support by adding a **built with Bridge.NET** badge to your projects README or website.
+
+[![Built with Bridge.NET](https://img.shields.io/badge/built%20with-Bridge.NET-blue.svg)](http://bridge.net/)
+
+#### Markdown
+
+```
+[![Built with Bridge.NET](https://img.shields.io/badge/built%20with-Bridge.NET-blue.svg)](http://bridge.net/)
+```
+
+#### HTML
+```
+<a href="http://bridge.net/">
+    <img src="https://img.shields.io/badge/built%20with-Bridge.NET-blue.svg" title="Built with Bridge.NET" />
+</a>
+```
+
 ## How to Help
 
 We need your help spreading the word about Bridge. Any of the following items will help:
 
-1. Star [bridge](https://github.com/bridgedotnet/Bridge/) project on GitHub
+1. Add a [Badge](#badges)
+1. Star **[Bridge](https://github.com/bridgedotnet/Bridge/)** project on GitHub
 1. Leave a review on [Visual Studio Gallery](https://marketplace.visualstudio.com/items?itemName=BridgeNET.BridgeNET)
 1. Blog about Bridge.NET
 1. Tweet about [@bridgedotnet](https://twitter.com/bridgedotnet)

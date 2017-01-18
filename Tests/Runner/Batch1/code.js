@@ -12561,6 +12561,41 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
+    Bridge.define("Bridge.ClientTest.DOMParserTests", {
+        constructorWorks: function () {
+            var parser = new DOMParser();
+
+            Bridge.Test.Assert.notNull(parser);
+        },
+        xmlParsingWorks: function () {
+            var parser = new DOMParser();
+
+            var d = parser.parseFromString("<root><customer name=\"John\" address=\"Chicago\"></customer></root>", "text/xml");
+
+            Bridge.Test.Assert.notNull(d);
+            Bridge.Test.Assert.areEqual(1, d.childNodes.length);
+            Bridge.Test.Assert.notNull(d.firstChild);
+            Bridge.Test.Assert.areEqual("root", d.firstChild.nodeName);
+            Bridge.Test.Assert.areEqual(1, d.firstChild.childNodes.length);
+
+            var c = d.firstChild.firstChild;
+            Bridge.Test.Assert.notNull(c);
+            Bridge.Test.Assert.areEqual("customer", c.nodeName);
+        },
+        xmlParsingShouldThrow: function () {
+            var parser = new DOMParser();
+
+            if (!Bridge.ClientTest.Utilities.BrowserHelper.isPhantomJs()) {
+                Bridge.Test.Assert.throws(function () {
+                    parser.parseFromString("<root></root>", "xml");
+                });
+            } else {
+                var d = parser.parseFromString("<root></root>", "xml");
+                Bridge.Test.Assert.null(d);
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.EnvironmentTests", {
         newLineIsAStringContainingOnlyTheNewLineChar: function () {
             Bridge.Test.Assert.areEqual("\n", '\n');
