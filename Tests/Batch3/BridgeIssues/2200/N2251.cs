@@ -14,6 +14,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             var l = new List<int>() { 1, 2 };
 
             Assert.AreEqual(0, l.GetRange(0, 0).Count);
+            Assert.AreEqual(0, l.GetRange(1, 0).Count);
+            Assert.AreEqual(0, l.GetRange(2, 0).Count);
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
@@ -25,9 +27,24 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 l.GetRange(-1, 2);
             });
 
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                l.GetRange(-1, 0);
+            });
+
             Assert.Throws<ArgumentException>(() =>
             {
                 l.GetRange(0, 3);
+            });
+
+            Assert.Throws<ArgumentException>(() =>
+            {
+                l.GetRange(1, 2);
+            });
+
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                var i = l[l.Count];
             });
         }
     }

@@ -13521,6 +13521,8 @@ Bridge.$N1391Result =                 r;
                 var l = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2251.f1(new (System.Collections.Generic.List$1(System.Int32))());
 
                 Bridge.Test.Assert.areEqual(0, l.getRange(0, 0).getCount());
+                Bridge.Test.Assert.areEqual(0, l.getRange(1, 0).getCount());
+                Bridge.Test.Assert.areEqual(0, l.getRange(2, 0).getCount());
 
                 Bridge.Test.Assert.throws$6(System.ArgumentOutOfRangeException, function () {
                     l.getRange(0, -1);
@@ -13530,8 +13532,20 @@ Bridge.$N1391Result =                 r;
                     l.getRange(-1, 2);
                 });
 
+                Bridge.Test.Assert.throws$6(System.ArgumentOutOfRangeException, function () {
+                    l.getRange(-1, 0);
+                });
+
                 Bridge.Test.Assert.throws$6(System.ArgumentException, function () {
                     l.getRange(0, 3);
+                });
+
+                Bridge.Test.Assert.throws$6(System.ArgumentException, function () {
+                    l.getRange(1, 2);
+                });
+
+                Bridge.Test.Assert.throws$6(System.ArgumentOutOfRangeException, function () {
+                    var i = l.getItem(l.getCount());
                 });
             }
         }

@@ -10908,12 +10908,8 @@
             },
 
             checkIndex: function (index, message) {
-                if (isNaN(index) || index < 0 || index > (this.items.length)) {
-                    if (!Bridge.isDefined(message)) {
-                        throw new System.ArgumentOutOfRangeException('Index out of range');
-                    } else {
-                        throw new System.ArgumentException(message);
-                    }
+                if (isNaN(index) || index < 0 || index >= this.items.length) {
+                    throw new System.ArgumentOutOfRangeException(message || 'Index out of range');
                 }
             },
 
@@ -11024,25 +11020,25 @@
             },
 
             getRange: function (index, count) {
-                if (index !== 0) {
-                    this.checkIndex(index);
+                if (isNaN(index) || index < 0) {
+                    throw new System.ArgumentOutOfRangeException("index out of range");
                 }
 
                 if (isNaN(count) || count < 0) {
-                    throw new System.ArgumentOutOfRangeException('count out of range');
+                    throw new System.ArgumentOutOfRangeException("count out of range");
                 }
 
-                var maxIndex = index + count;
-                this.checkIndex(maxIndex, "Offset and length were out of bounds for the array or count is greater than the number of elements from index tothe end of the source collection.");
-
-                var result = [],
-                    i;
-
-                for (i = index; i < maxIndex; i++) {
-                    result.push(this.items[i]);
+                if (this.items.length - index < count) {
+                    throw new System.ArgumentException("Offset and length were out of bounds for the array or count is greater than the number of elements from index tothe end of the source collection.");
                 }
 
-                return new (System.Collections.Generic.List$1(T))(result);
+                var items = [];
+
+                for (var i = 0; i < count; i++) {
+                    items[i] = this.items[index + i];
+                }
+
+                return new (System.Collections.Generic.List$1(T))(items);
             },
 
             insert: function (index, item) {
