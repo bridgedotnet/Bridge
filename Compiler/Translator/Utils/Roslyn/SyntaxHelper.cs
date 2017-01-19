@@ -737,6 +737,11 @@ namespace Bridge.Translator
             return p as T;
         }
 
+        public static SyntaxTriviaList ExcludeDirectivies(this SyntaxTriviaList list)
+        {
+            return SyntaxFactory.TriviaList(list.Where(t => !t.IsDirective));
+        }
+
         public static bool IsAccessibleIn(this ITypeSymbol type, ITypeSymbol currentType)
         {
             var list = new List<ITypeSymbol>();
