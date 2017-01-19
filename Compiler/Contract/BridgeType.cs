@@ -507,9 +507,9 @@ namespace Bridge.Contract
                 }
             }
 
-            if (!isAlias)
+            if (!isAlias && itypeDef != null && itypeDef.Kind == TypeKind.Interface)
             {
-                var externalInterface = itypeDef != null ? emitter.Validator.IsExternalInterface(itypeDef) : null;
+                var externalInterface = emitter.Validator.IsExternalInterface(itypeDef);
                 if (externalInterface != null && externalInterface.IsVirtual)
                 {
                     name = "Bridge.getInterface(\"" + name + "\")";

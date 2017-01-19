@@ -251,7 +251,7 @@ namespace Bridge.Translator
                 var typeDef = type.Type.GetDefinition();
 
                 bool isNative;
-                if (this.Emitter.Validator.IsExternalInterface(typeDef, out isNative))
+                if (typeDef.Kind == TypeKind.Interface && this.Emitter.Validator.IsExternalInterface(typeDef, out isNative))
                 {
                     this.Emitter.Translator.Plugins.AfterTypeEmit(this.Emitter, type);
                     continue;

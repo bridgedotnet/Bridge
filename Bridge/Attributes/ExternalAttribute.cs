@@ -17,7 +17,7 @@ namespace Bridge
     /// Applies to interface if it's implementation is done outside Bridge type system (class implementation doesn't provide aliases for interface members implementations)
     /// </summary>
     [External]
-    [AttributeUsage(AttributeTargets.Interface)]
+    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Interface)]
     [NonScriptable]
     public sealed class ExternalInterfaceAttribute : Attribute
     {
