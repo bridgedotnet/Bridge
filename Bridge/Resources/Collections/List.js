@@ -35,7 +35,10 @@
 
             ctor: function (obj) {
                 this.$initialize();
-                if (Object.prototype.toString.call(obj) === '[object Array]') {
+
+                if (!Bridge.isDefined(obj)) {
+                    this.items = [];
+                } else if (Object.prototype.toString.call(obj) === '[object Array]') {
                     this.items = System.Array.clone(obj);
                 } else if (Bridge.is(obj, System.Collections.IEnumerable)) {
                     this.items = Bridge.toArray(obj);
@@ -46,9 +49,9 @@
                 this.clear.$clearCallbacks = [];
             },
 
-            checkIndex: function (index) {
-                if (index < 0 || index > (this.items.length - 1)) {
-                    throw new System.ArgumentOutOfRangeException('Index out of range');
+            checkIndex: function (index, message) {
+                if (isNaN(index) || index < 0 || index >= this.items.length) {
+                    throw new System.ArgumentOutOfRangeException(message || 'Index out of range');
                 }
             },
 
@@ -159,29 +162,28 @@
             },
 
             getRange: function (index, count) {
-                if (!Bridge.isDefined(index)) {
-                    index = 0;
+                if (isNaN(index) || index < 0) {
+                    throw new System.ArgumentOutOfRangeException("index out of range");
                 }
 
-                if (!Bridge.isDefined(count)) {
-                    count = this.items.length;
+                if (isNaN(count) || count < 0) {
+                    throw new System.ArgumentOutOfRangeException("count out of range");
                 }
 
-                if (index !== 0) {
-                    this.checkIndex(index);
+                if (this.items.length - index < count) {
+                    throw new System.ArgumentException("Offset and length were out of bounds for the array or count is greater than the number of elements from index tothe end of the source collection.");
                 }
 
-                this.checkIndex(index + count - 1);
+                var items = [];
 
-                var result = [],
-                    i,
-                    maxIndex = index + count;
-
-                for (i = index; i < maxIndex; i++) {
-                    result.push(this.items[i]);
+                for (var i = 0; i < count; i++) {
+                    items[i] = this.items[index + i];
                 }
 
-                return new (System.Collections.Generic.List$1(T))(result);
+                var list = new (System.Collections.Generic.List$1(T))();
+                list.items = items;
+
+                return list;
             },
 
             insert: function (index, item) {
@@ -256,9 +258,10 @@
             slice: function (start, end) {
                 this.checkReadOnly();
 
-                var gName = this.$$name.substr(this.$$name.lastIndexOf('$') + 1);
+                var list = new (System.Collections.Generic.List$1(T))();
+                list.items = this.items.slice(start, end);
 
-                return new (System.Collections.Generic.List$1(Bridge.unroll(gName)))(this.items.slice(start, end));
+                return list;
             },
 
             sort: function (comparison) {
@@ -319,7 +322,7 @@
                     throw new System.ArgumentNullException("converter is null.");
                 }
 
-                var list = new (System.Collections.Generic.List$1(TOutput))(this.items.length);
+                var list = new (System.Collections.Generic.List$1(TOutput))();
                 for (var i = 0; i < this.items.length; i++) {
                     list.items[i] = converter(this.items[i]);
                 }

@@ -955,6 +955,9 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
             QUnit.test("Guid - NewGuidWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_GuidTests.newGuidWorks);
             QUnit.test("Guid - ToByteArrayWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_GuidTests.toByteArrayWorks);
             QUnit.module("HTML5");
+            QUnit.test("DOMParser #1728 - ConstructorWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_DOMParserTests.constructorWorks);
+            QUnit.test("DOMParser #1728 - XmlParsingWorks", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_DOMParserTests.xmlParsingWorks);
+            QUnit.test("DOMParser #1728 - XmlParsingShouldThrow", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_DOMParserTests.xmlParsingShouldThrow);
             QUnit.test("MutationObserver - TestNewlyAttachedElements", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_MutationObserverTests.testNewlyAttachedElements);
             QUnit.module("LINQ");
             QUnit.test("Aggregate - Test", Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_Linq_TestLinqAggregateOperators.test);
@@ -10709,6 +10712,44 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
                     project: "Batch1",
                     className: "Bridge.ClientTest.Diagnostics.StopwatchTests",
                     file: "Batch1\\Diagnostics\\StopwatchTests.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_DOMParserTests", {
+        inherits: [Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.DOMParserTests)],
+        statics: {
+            constructorWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.DOMParserTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_DOMParserTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "ConstructorWorks()",
+                    line: "12"
+                } ));
+                t.getFixture().constructorWorks();
+            },
+            xmlParsingWorks: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.DOMParserTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_DOMParserTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "XmlParsingWorks()",
+                    line: "20"
+                } ));
+                t.getFixture().xmlParsingWorks();
+            },
+            xmlParsingShouldThrow: function (assert) {
+                var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.DOMParserTests).beforeTest(true, assert, Bridge.Test.QUnit.Bridge_ClientTest_Tests_Runner.Bridge_ClientTest_DOMParserTests, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
+                    method: "XmlParsingShouldThrow()",
+                    line: "38"
+                } ));
+                t.getFixture().xmlParsingShouldThrow();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.QUnit.FixtureContext(), {
+                    project: "Batch1",
+                    className: "Bridge.ClientTest.DOMParserTests",
+                    file: "Batch1\\DOMParserTests.cs"
                 } );
             }
             return this.context;
