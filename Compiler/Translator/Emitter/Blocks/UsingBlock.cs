@@ -100,7 +100,9 @@ namespace Bridge.Translator
             this.Write("if (" + JS.Funcs.BRIDGE_HASVALUE + "(" + name + ")) ");
             this.BeginBlock();
             this.Write(name);
-            this.Write(".dispose();");
+            this.Write(".");
+            this.Write(JS.Funcs.DISPOSE);
+            this.Write("();");
             this.WriteNewLine();
             this.EndBlock();
             this.WriteNewLine();

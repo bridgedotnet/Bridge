@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
+using Bridge.Contract.Constants;
 using Bridge.Translator.Utils;
 
 namespace Bridge.Translator
@@ -94,7 +95,7 @@ namespace Bridge.Translator
             {
                 foreach (var tag in combined_tags)
                 {
-                    if (tag.Value == "Bridge")
+                    if (tag.Value == CS.NS.ROOT)
                     {
                         valid = false;
                         if (!failList.Contains(tag.Value))

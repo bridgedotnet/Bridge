@@ -242,14 +242,14 @@ namespace Bridge.Translator
 
                         if (needContinue && !(member.Initializer is ObjectCreateExpression))
                         {
-                            defValue = " || " + Inspector.GetStructDefaultValue((IType) constValue, this.Emitter);
+                            defValue = " || " + Inspector.GetStructDefaultValue((IType)constValue, this.Emitter);
                         }
                     }
-                    else if(constValue is AstType)
+                    else if (constValue is AstType)
                     {
                         value = isNullable
                             ? "null"
-                            : Inspector.GetStructDefaultValue((AstType) constValue, this.Emitter);
+                            : Inspector.GetStructDefaultValue((AstType)constValue, this.Emitter);
                         constValue = value;
                         write = true;
                         needContinue = !isProperty && !isNullable;
@@ -563,7 +563,7 @@ namespace Bridge.Translator
                     return false;
                 }
             }
-            
+
             if (member is IProperty && !Helpers.IsFieldProperty(member, this.Emitter))
             {
                 var property = (IProperty)member;

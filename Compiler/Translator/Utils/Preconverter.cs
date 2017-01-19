@@ -255,8 +255,12 @@ namespace Bridge.Translator
             }
 
             var finallyBlock = new BlockStatement();
-            var dispose = new InvocationExpression(new MemberReferenceExpression(new MemberReferenceExpression(new IdentifierExpression("Bridge"), "Script"), "Write"),
-                                                   new PrimitiveExpression(string.Format("if (" + JS.Funcs.BRIDGE_HASVALUE + "({0})) {0}.dispose();", name)));
+            var dispose = new InvocationExpression(
+                new MemberReferenceExpression(
+                    new MemberReferenceExpression(new IdentifierExpression(CS.NS.ROOT), "Script"), "Write"),
+                new PrimitiveExpression(
+                    string.Format("if (" + JS.Funcs.BRIDGE_HASVALUE + "({0})) {0}." + JS.Funcs.DISPOSE + "();", name))
+            );
 
             finallyBlock.Statements.Add(dispose);
 
@@ -319,7 +323,7 @@ namespace Bridge.Translator
 
                     if (isPost && !isStatement)
                     {
-                        return new InvocationExpression(new MemberReferenceExpression(new MemberReferenceExpression(new IdentifierExpression("Bridge"), "Script"), "Identity"), clonUnaryOperatorExpression.Expression.Clone(), ae);
+                        return new InvocationExpression(new MemberReferenceExpression(new MemberReferenceExpression(new IdentifierExpression(CS.NS.ROOT), "Script"), "Identity"), clonUnaryOperatorExpression.Expression.Clone(), ae);
                     }
                     else
                     {
@@ -365,7 +369,7 @@ namespace Bridge.Translator
 
                     if (isPost && !isStatement)
                     {
-                        return new InvocationExpression(new MemberReferenceExpression(new MemberReferenceExpression(new IdentifierExpression("Bridge"), "Script"), "Identity"), clonUnaryOperatorExpression.Expression.Clone(), ae);
+                        return new InvocationExpression(new MemberReferenceExpression(new MemberReferenceExpression(new IdentifierExpression(CS.NS.ROOT), "Script"), "Identity"), clonUnaryOperatorExpression.Expression.Clone(), ae);
                     }
                     else
                     {

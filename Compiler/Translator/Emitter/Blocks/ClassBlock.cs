@@ -124,11 +124,11 @@ namespace Bridge.Translator
 
             if (typeDef.IsInterface && typeDef.HasGenericParameters)
             {
-                this.Write(JS.Funcs.BRIDGE_DEFINEI);
+                this.Write(JS.Types.Bridge.DEFINE_I);
             }
             else
             {
-                this.Write(JS.Funcs.BRIDGE_DEFINE);
+                this.Write(JS.Types.Bridge.DEFINE);
             }
 
             this.WriteOpenParentheses();
