@@ -24,7 +24,7 @@ namespace Bridge.Contract
 
         private static bool CheckName(IType type, params string[] names)
         {
-            if (type == null && names == null)
+            if (type == null || names == null)
             {
                 return false;
             }
@@ -34,7 +34,7 @@ namespace Bridge.Contract
 
         private static bool CheckName(AstType type, params string[] names)
         {
-            if (type == null && names == null)
+            if (type == null || names == null)
             {
                 return false;
             }
@@ -45,7 +45,7 @@ namespace Bridge.Contract
 
         private static bool CheckName(ResolveResult resolveResult, params string[] names)
         {
-            if (resolveResult == null && names == null)
+            if (resolveResult == null || names == null)
             {
                 return false;
             }
@@ -63,14 +63,13 @@ namespace Bridge.Contract
             return attribute != null && names != null && names.Any(name => attribute.AttributeType.FullName == name);
         }
 
-
         #region Field attribute
 
         public static readonly string[] ATTRIBUTE_FIELD_ALL_NAMES =
             new string[]
             {
-                        CS.Attributes.FIELD_NAME, CS.Attributes.FIELD_PROPERTY_NAME,
-                        GetShortAttributeName(CS.Attributes.FIELD_NAME), GetShortAttributeName(CS.Attributes.FIELD_PROPERTY_NAME)
+                CS.Attributes.FIELD_NAME, CS.Attributes.FIELD_PROPERTY_NAME,
+                GetShortAttributeName(CS.Attributes.FIELD_NAME), GetShortAttributeName(CS.Attributes.FIELD_PROPERTY_NAME)
             };
 
         public static readonly string[] ATTRIBUTE_FIELD_LONG_NAMES =
