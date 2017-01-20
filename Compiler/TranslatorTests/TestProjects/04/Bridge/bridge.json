@@ -4,5 +4,8 @@
   "outputBy": "Class",
   "outputFormatting": "Formatted",
   "ignoreCast": true,
-  "fileNameCasing": "Lowercase"
+  "fileNameCasing": "Lowercase",
+  "logging": {
+    "level":  "Trace"
+  }
 }
