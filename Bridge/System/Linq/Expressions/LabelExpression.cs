@@ -7,11 +7,11 @@ namespace System.Linq.Expressions
     [Cast("{this}.ntype === 56")]
     public sealed class LabelExpression : Expression
     {
-        [FieldProperty]
+        [Field]
         [Name("dv")]
         public extern Expression DefaultValue { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern LabelTarget Target { get; private set; }
 
         internal extern LabelExpression();

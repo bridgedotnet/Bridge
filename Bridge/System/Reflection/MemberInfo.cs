@@ -7,21 +7,21 @@ namespace System.Reflection
     public class MemberInfo
     {
         [Name("t")]
-        [FieldProperty]
+        [Field]
         public extern MemberTypes MemberType
         {
             get;
         }
 
         [Name("n")]
-        [FieldProperty]
+        [Field]
         public extern string Name
         {
             get;
         }
 
         [Name("td")]
-        [FieldProperty]
+        [Field]
         public extern Type DeclaringType
         {
             get;

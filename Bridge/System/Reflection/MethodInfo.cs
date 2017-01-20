@@ -5,7 +5,7 @@ namespace System.Reflection
     [External]
     public class MethodInfo : MethodBase
     {
-        [FieldProperty]
+        [Field]
         [Name("rt")]
         public extern Type ReturnType
         {
@@ -14,11 +14,11 @@ namespace System.Reflection
         }
 
         /// <summary>
-		/// Returns an array of all custom attributes applied to this member.
-		/// </summary>
-		/// <param name="inherit">Ignored for members. Base members will never be considered.</param>
-		/// <returns>An array that contains all the custom attributes applied to this member, or an array with zero elements if no attributes are defined. </returns>
-		[Template("({this}.rta || [])")]
+        /// Returns an array of all custom attributes applied to this member.
+        /// </summary>
+        /// <param name="inherit">Ignored for members. Base members will never be considered.</param>
+        /// <returns>An array that contains all the custom attributes applied to this member, or an array with zero elements if no attributes are defined. </returns>
+        [Template("({this}.rta || [])")]
         public extern object[] GetReturnTypeCustomAttributes(bool inherit);
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace System.Reflection
         /// Script name of the method. Null if the method has a special implementation.
         /// </summary>
         [Name("sn")]
-        [FieldProperty]
+        [Field]
         public extern string ScriptName
         {
             get;
@@ -100,7 +100,7 @@ namespace System.Reflection
         /// For methods with a special implementation (eg. [Template]), contains a delegate that represents the method. Null for normal methods.
         /// </summary>
         [Name("def")]
-        [FieldProperty]
+        [Field]
         public extern Delegate SpecialImplementation
         {
             get;
@@ -108,9 +108,9 @@ namespace System.Reflection
         }
 
         /// <summary>
-		/// Whether the [ExpandParams] attribute was specified on the method.
-		/// </summary>
-		public extern bool IsExpandParams
+        /// Whether the [ExpandParams] attribute was specified on the method.
+        /// </summary>
+        public extern bool IsExpandParams
         {
             [Template("{this}.exp || false")]
             get;

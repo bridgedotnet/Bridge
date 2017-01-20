@@ -8,7 +8,7 @@ namespace System.Threading
     {
         public extern CancellationToken(bool canceled);
 
-        [FieldProperty]
+        [Field]
         public static extern CancellationToken None
         {
             get;

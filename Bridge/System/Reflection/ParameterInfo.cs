@@ -7,20 +7,20 @@ namespace System.Reflection
     public class ParameterInfo
     {
         [Name("sn")]
-        [FieldProperty]
+        [Field]
         public extern string ScriptName
         {
             get;
         }
 
-        [FieldProperty]
+        [Field]
         [Name("n")]
         public extern string Name
         {
             get;
         }
 
-        [FieldProperty]
+        [Field]
         [Name("dv")]
         public extern string DefaultValue
         {
@@ -57,14 +57,14 @@ namespace System.Reflection
             get;
         }
 
-        [FieldProperty]
+        [Field]
         [Name("pt")]
         public extern Type ParameterType
         {
             get;
         }
 
-        [FieldProperty]
+        [Field]
         [Name("ps")]
         public extern int Position
         {
@@ -72,11 +72,11 @@ namespace System.Reflection
         }
 
         /// <summary>
-		/// Returns an array of all custom attributes applied to this member.
-		/// </summary>
-		/// <param name="inherit">Ignored for members. Base members will never be considered.</param>
-		/// <returns>An array that contains all the custom attributes applied to this member, or an array with zero elements if no attributes are defined. </returns>
-		[Template("System.Attribute.getCustomAttributes({this}, false, {inherit})")]
+        /// Returns an array of all custom attributes applied to this member.
+        /// </summary>
+        /// <param name="inherit">Ignored for members. Base members will never be considered.</param>
+        /// <returns>An array that contains all the custom attributes applied to this member, or an array with zero elements if no attributes are defined. </returns>
+        [Template("System.Attribute.getCustomAttributes({this}, false, {inherit})")]
         public extern object[] GetCustomAttributes(bool inherit);
 
         /// <summary>

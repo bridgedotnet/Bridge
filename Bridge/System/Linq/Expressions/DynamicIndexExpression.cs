@@ -7,7 +7,7 @@ namespace System.Linq.Expressions
     [Cast("{this}.ntype == 50 && {this}.dtype === 2")]
     public sealed class DynamicIndexExpression : DynamicExpression
     {
-        [FieldProperty]
+        [Field]
         public extern Expression Argument { get; private set; }
 
         internal extern DynamicIndexExpression();

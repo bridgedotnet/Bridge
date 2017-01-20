@@ -11,6 +11,8 @@
         {
             public const string ACCESSORSINDEXER_ATTRIBUTE_NAME = "Bridge.AccessorsIndexerAttribute";
             public const string READY_ATTRIBUTE_NAME = "Bridge.Html5.ReadyAttribute";
+            public const string FIELD_NAME = "Bridge.FieldAttribute";
+            public const string FIELD_PROPERTY_NAME = "Bridge.FieldPropertyAttribute";
         }
 
         public class Methods

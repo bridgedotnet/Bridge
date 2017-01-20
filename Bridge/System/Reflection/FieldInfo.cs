@@ -7,14 +7,14 @@ namespace System.Reflection
     public class FieldInfo : MemberInfo
     {
         [Name("rt")]
-        [FieldProperty]
+        [Field]
         public extern Type FieldType
         {
             get;
             private set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern bool IsInitOnly
         {
             [Template("({this}.ro || false)")]
@@ -31,7 +31,7 @@ namespace System.Reflection
         /// Script name of the field
         /// </summary>
         [Name("sn")]
-        [FieldProperty]
+        [Field]
         public extern string ScriptName
         {
             get;

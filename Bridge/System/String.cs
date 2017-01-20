@@ -15,7 +15,7 @@ namespace System
     [Constructor("String")]
     public sealed class String : IEnumerable, ICloneable, IEnumerable<char>, IComparable<String>, IEquatable<String>
     {
-        [FieldProperty]
+        [Field]
         public extern int Length
         {
             get;

@@ -525,7 +525,7 @@ namespace Bridge.Translator
                 {
                     if (resolvedProperty != null && resolvedProperty.Member.ImplementedInterfaceMembers.Count > 0 && resolvedProperty.Member.ImplementedInterfaceMembers.Any(m => Helpers.IsFieldProperty(m, this.AssemblyInfo)))
                     {
-                        throw new EmitterException(propertyDeclaration, string.Format("The property {0} is not marked as FieldProperty but implemented interface member has such attribute", resolvedProperty.Member.ToString()));
+                        throw new EmitterException(propertyDeclaration, string.Format(Bridge.Translator.Constants.Messages.Exceptions.FIELD_PROPERTY_NOT_MARKED, resolvedProperty.Member.ToString()));
                     }
 
                     info.Properties.Add(new TypeConfigItem
@@ -539,7 +539,7 @@ namespace Bridge.Translator
                 {
                     if (resolvedProperty != null && resolvedProperty.Member.ImplementedInterfaceMembers.Count > 0 && !resolvedProperty.Member.ImplementedInterfaceMembers.All(m => Helpers.IsFieldProperty(m, this.AssemblyInfo)))
                     {
-                        throw new EmitterException(propertyDeclaration, string.Format("The property {0} is marked as FieldProperty but implemented interface member has no such attribute", resolvedProperty.Member.ToString()));
+                        throw new EmitterException(propertyDeclaration, string.Format(Bridge.Translator.Constants.Messages.Exceptions.FIELD_PROPERTY_MARKED, resolvedProperty.Member.ToString()));
                     }
 
                     info.Fields.Add(new TypeConfigItem
@@ -584,7 +584,7 @@ namespace Bridge.Translator
                     if (isField)
                     {
                         var message = string.Format(
-                            "{0} is marked with [FieldProperty] attribute but implements {1}{2}. To fix the problem either remove [FieldProperty] (swith off bridge.json option `autoPropertyToField`) or add [External]/[Template] attributes",
+                            Bridge.Translator.Constants.Messages.Exceptions.FIELD_PROPERTY_MARKED_ADVISE,
                             resolvedProperty.Member.ToString(),
                             possiblyWrongGetter ? "getter" : string.Empty,
                             possiblyWrongSetter ? (possiblyWrongGetter ? " and " : string.Empty) + "setter" : string.Empty

@@ -10,10 +10,10 @@ namespace System.Linq.Expressions
     public abstract class Expression
     {
         [Name("ntype")]
-        [FieldProperty]
+        [Field]
         public extern ExpressionType NodeType { get; private set; }
 
-        [FieldProperty]
+        [Field]
         [Name("t")]
         public extern Type Type { get; private set; }
 

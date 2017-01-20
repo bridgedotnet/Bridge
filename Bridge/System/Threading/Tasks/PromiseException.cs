@@ -18,7 +18,7 @@ namespace System.Threading.Tasks
         /// <summary>
         /// Arguments supplied to the promise onError() callback.
         /// </summary>
-        [FieldProperty]
+        [Field]
         public extern object[] Arguments
         {
             get;

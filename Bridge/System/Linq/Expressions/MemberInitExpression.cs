@@ -8,10 +8,10 @@ namespace System.Linq.Expressions
     [Cast("{this}.ntype === 24")]
     public sealed class MemberInitExpression : Expression
     {
-        [FieldProperty]
+        [Field]
         public extern NewExpression NewExpression { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern ReadOnlyCollection<MemberBinding> Bindings { get; private set; }
 
         internal extern MemberInitExpression();

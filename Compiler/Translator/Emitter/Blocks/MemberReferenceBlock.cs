@@ -894,7 +894,7 @@ namespace Bridge.Translator
                         {
                             throw new EmitterException(memberReferenceExpression,
                                 string.Format(
-                                    "The property {0} is marked as FieldProperty but implemented interface member has no such attribute",
+                                    Bridge.Translator.Constants.Messages.Exceptions.FIELD_PROPERTY_MARKED,
                                     member.Member.ToString()));
                         }
                     }
@@ -902,7 +902,7 @@ namespace Bridge.Translator
                     {
                         if (member.Member.ImplementedInterfaceMembers.Count > 0 && member.Member.ImplementedInterfaceMembers.Any(m => Helpers.IsFieldProperty(m, this.Emitter)))
                         {
-                            throw new EmitterException(memberReferenceExpression, string.Format("The property {0} is not marked as FieldProperty but implemented interface member has such attribute", member.Member.ToString()));
+                            throw new EmitterException(memberReferenceExpression, string.Format(Bridge.Translator.Constants.Messages.Exceptions.FIELD_PROPERTY_NOT_MARKED, member.Member.ToString()));
                         }
                     }
 

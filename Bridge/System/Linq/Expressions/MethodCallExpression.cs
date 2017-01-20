@@ -9,15 +9,15 @@ namespace System.Linq.Expressions
     [Cast("{this}.ntype === 6")]
     public sealed class MethodCallExpression : Expression
     {
-        [FieldProperty]
+        [Field]
         public extern MethodInfo Method { get; private set; }
 
         [Name("obj")]
-        [FieldProperty]
+        [Field]
         public extern Expression Object { get; private set; }
 
         [Name("args")]
-        [FieldProperty]
+        [Field]
         public extern ReadOnlyCollection<Expression> Arguments { get; private set; }
 
         internal extern MethodCallExpression();

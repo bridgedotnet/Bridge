@@ -493,7 +493,7 @@ namespace Bridge.Contract
                 return true;
             }
 
-            bool isAuto = propertyMember.Attributes.Any(a => a.AttributeType.FullName == "Bridge.FieldPropertyAttribute");
+            bool isAuto = AttributeHelper.HasFieldAttribute(propertyMember);
             if (!isAuto && assemblyInfo.AutoPropertyToField && propertyMember is IProperty)
             {
                 var isIgnore = propertyMember.DeclaringTypeDefinition.Attributes.Any(a => a.AttributeType.FullName == "Bridge.ExternalAttribute") ||
@@ -518,7 +518,7 @@ namespace Bridge.Contract
                 return true;
             }
 
-            bool isAuto = propertyMember.Attributes.Any(a => a.AttributeType.FullName == "Bridge.FieldPropertyAttribute");
+            bool isAuto = AttributeHelper.HasFieldAttribute(propertyMember);
             if (!isAuto && emitter.AssemblyInfo.AutoPropertyToField)
             {
                 var typeDef = emitter.GetTypeDefinition(propertyMember.DeclaringType);
@@ -544,7 +544,7 @@ namespace Bridge.Contract
                 return true;
             }
 
-            bool isAuto = property.CustomAttributes.Any(a => a.AttributeType.FullName == "Bridge.FieldPropertyAttribute");
+            bool isAuto = AttributeHelper.HasFieldAttribute(property);
             if (!isAuto && emitter.AssemblyInfo.AutoPropertyToField)
             {
                 var typeDef = property.DeclaringType;
@@ -565,22 +565,9 @@ namespace Bridge.Contract
                 return Helpers.IsFieldProperty(((MemberResolveResult)resolveResult).Member, emitter);
             }
 
-            string name = "Bridge.FieldProperty";
-            string name1 = name + "Attribute";
-            foreach (var i in property.Attributes)
+            if (AttributeHelper.HasFieldAttribute(property, emitter))
             {
-                foreach (var j in i.Attributes)
-                {
-                    if (j.Type.ToString() == name || j.Type.ToString() == name1)
-                    {
-                        return true;
-                    }
-                    resolveResult = emitter.Resolver.ResolveNode(j, emitter);
-                    if (resolveResult != null && resolveResult.Type != null && resolveResult.Type.FullName == name1)
-                    {
-                        return true;
-                    }
-                }
+                return true;
             }
 
             if (!emitter.AssemblyInfo.AutoPropertyToField)

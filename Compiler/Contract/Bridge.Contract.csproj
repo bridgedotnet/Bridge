@@ -97,6 +97,7 @@
     <Compile Include="Config\ResourceConfig.cs" />
     <Compile Include="Constants\CS.cs" />
     <Compile Include="Constants\JS.cs" />
+    <Compile Include="AttributeHelper.cs" />
     <Compile Include="IAnonymousType.cs" />
     <Compile Include="Config\IReflectionConfig.cs" />
     <Compile Include="IWriter.cs" />
