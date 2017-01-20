@@ -208,9 +208,23 @@ namespace Bridge.Contract
             return type.Attributes.Any(a => a.AttributeType.FullName == "Bridge.IgnoreGenericAttribute") || type.DeclaringTypeDefinition != null && Helpers.IsIgnoreGeneric(type.DeclaringTypeDefinition);
         }
 
-        public static bool IsIgnoreGeneric(IType type, IEmitter emitter)
+        public static bool IsIgnoreGeneric(IType type, IEmitter emitter, bool allowInTypeScript = false)
         {
-            return emitter.Validator.HasAttribute(type.GetDefinition().Attributes, "Bridge.IgnoreGenericAttribute") || type.DeclaringType != null && Helpers.IsIgnoreGeneric(type.DeclaringType, emitter);
+            var attr = type.GetDefinition().Attributes.FirstOrDefault(a => a.AttributeType.FullName == "Bridge.IgnoreGenericAttribute");
+
+            if (attr != null)
+            {
+                var member = allowInTypeScript ? attr.NamedArguments.FirstOrDefault(arg => arg.Key.Name == "AllowInTypeScript").Value : null;
+
+                if (member != null)
+                {
+                    return !(bool) member.ConstantValue;
+                }
+
+                return true;
+            }
+
+            return type.DeclaringType != null && Helpers.IsIgnoreGeneric(type.DeclaringType, emitter, allowInTypeScript);
         }
 
         public static bool IsIgnoreGeneric(IEntity member, IEmitter emitter)
