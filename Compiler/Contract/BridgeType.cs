@@ -512,7 +512,7 @@ namespace Bridge.Contract
                 var externalInterface = emitter.Validator.IsExternalInterface(itypeDef);
                 if (externalInterface != null && externalInterface.IsVirtual)
                 {
-                    name = "Bridge.getInterface(\"" + name + "\")";
+                    name = JS.Types.Bridge.GET_INTERFACE +  "(\"" + name + "\")";
                 }
             }
 
