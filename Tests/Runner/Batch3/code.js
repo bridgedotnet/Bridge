@@ -7170,9 +7170,7 @@ Bridge.$N1391Result =                 r;
                             case 0: {
                                 done = Bridge.Test.Assert.async();
 
-                                    foo = null; /// Async method lacks 'await' operators and will run synchronously
-
-
+                                    foo = null;
                                     bar = Bridge.fn.bind(this, function () {
                                         var $step = 0,
                                             $jumpFromFinally, 
