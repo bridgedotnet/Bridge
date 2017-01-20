@@ -1,8 +1,8 @@
 ﻿**Please note**
-The test project should have a dependency on **Bridge.Transpiled** project (the project that triggers Bridge Core JavaScript generation).
+The test project should have a dependency on **Bridge.PostBuild** project (the project that triggers Bridge Core JavaScript generation).
 The dependency can be set in **Solution Properties** -> **Project Dependencies**.
 This is required in order to get NUnit Test Adapter not triggering **Bridge** and **Bridge.Html5** projects compilation
-afterwards or instead of **Bridge.Transpiled** project.
+afterwards or instead of **Bridge.PostBuild** project.
 
 
 
@@ -28,7 +28,7 @@ Basically, there are two reasons why a test can fail:
        - See the test error description to check the difference between actual and expected outputs;
        - Copy actual output from *Bridge\output* folder into *Bridge\reference* folder and use any Diff tool to check all the differences. Please note there is a utility located at https://github.com/bridgedotnet/Bridge/blob/master/Compiler/TranslatorTests/CopyOutputToReference/CopyOutputToReference.sln
          The utility copies `actual` output into corresponding `reference` folder for each Bridge test project (do not forget to run test before running the copy utility to generate output before copying).         
-    2) Corresponding `Bridge test project` cannot be compiled and (or) transpiled:
+    2) Corresponding `Bridge test project` cannot be compiled neither C# compiler nor Bridge compiler:
        - open the corresponding Bridge test *test.csproj* project file in Visual Studio and rebuild it to see the underlying errors
 
 

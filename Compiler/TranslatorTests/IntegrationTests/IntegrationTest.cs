@@ -9,7 +9,7 @@ using System.Text;
 namespace Bridge.Translator.Tests
 {
     [TestFixture]
-    internal class OutputTest
+    internal class IntegrationTest
     {
         private const string LogFileNameWithoutExtention = "testProjectsBuild";
 
@@ -79,21 +79,21 @@ namespace Bridge.Translator.Tests
             }
         }
 
-        [TestCase("02", false, true, "TestProject.I2096.js", TestName = "OutputTest 02 - using GenerateScript Task Bridge.json outputFormatting Formatted, autoPropertyToField, combineScripts")]
-        [TestCase("03", true, true, TestName = "OutputTest 03 - Bridge.json outputFormatting Minified")]
-        [TestCase("04", true, true, TestName = "OutputTest 04 - Bridge.json outputBy Class ignoreCast fileNameCasing Lowercase")]
-        [TestCase("05", true, true, TestName = "OutputTest 05 - Bridge.json outputBy Namespace ignoreCast default useTypedArrays default fileNameCasing CamelCase")]
-        [TestCase("06", true, true, TestName = "OutputTest 06 - Attribute outputBy Project Bridge.json useTypedArrays CheckForOverflowUnderflow ")]
-        [TestCase("07", true, true, TestName = "OutputTest 07 - Bridge.json module generateDocumentation Full")]
-        [TestCase("10", true, true, TestName = "OutputTest 10 - Bridge.json fileNameCasing None generateDocumentation Basic")]
-        [TestCase("11", true, true, TestName = "OutputTest 11 - Bridge.json generateTypeScript")]
-        [TestCase("15", true, true, TestName = "OutputTest 15 - Bridge.json filename Define project constant #375")]
-        [TestCase("16", true, true, TestName = "OutputTest 16 - Issues")]
-        [TestCase("18", true, true, TestName = "OutputTest 18 - Features")]
+        [TestCase("02", false, true, "TestProject.I2096.js", TestName = "IntegrationTest 02 - using GenerateScript Task Bridge.json outputFormatting Formatted, autoPropertyToField, combineScripts")]
+        [TestCase("03", true, true, TestName = "IntegrationTest 03 - Bridge.json outputFormatting Minified")]
+        [TestCase("04", true, true, TestName = "IntegrationTest 04 - Bridge.json outputBy Class ignoreCast fileNameCasing Lowercase")]
+        [TestCase("05", true, true, TestName = "IntegrationTest 05 - Bridge.json outputBy Namespace ignoreCast default useTypedArrays default fileNameCasing CamelCase")]
+        [TestCase("06", true, true, TestName = "IntegrationTest 06 - Attribute outputBy Project Bridge.json useTypedArrays CheckForOverflowUnderflow ")]
+        [TestCase("07", true, true, TestName = "IntegrationTest 07 - Bridge.json module generateDocumentation Full")]
+        [TestCase("10", true, true, TestName = "IntegrationTest 10 - Bridge.json fileNameCasing None generateDocumentation Basic")]
+        [TestCase("11", true, true, TestName = "IntegrationTest 11 - Bridge.json generateTypeScript")]
+        [TestCase("15", true, true, TestName = "IntegrationTest 15 - Bridge.json filename Define project constant #375")]
+        [TestCase("16", true, true, TestName = "IntegrationTest 16 - Issues")]
+        [TestCase("18", true, true, TestName = "IntegrationTest 18 - Features")]
 #if UNIX
-        [TestCase("19", true, true, TestName = "OutputTest 19 - Linked files feature #531 #562", Ignore = "It is not supported in Mono (Mono issue logged as #38224 at Mono's official BugZilla)")]
+        [TestCase("19", true, true, TestName = "IntegrationTest 19 - Linked files feature #531 #562", Ignore = "It is not supported in Mono (Mono issue logged as #38224 at Mono's official BugZilla)")]
 #else
-        [TestCase("19", true, true, TestName = "OutputTest 19 - Linked files feature #531 #562")]
+        [TestCase("19", true, true, TestName = "IntegrationTest 19 - Linked files feature #531 #562")]
 #endif
         public void Test(string folder, bool isToTranslate, bool useSpecialFileCompare, string markedContentFiles = null)
         {
@@ -190,7 +190,7 @@ namespace Bridge.Translator.Tests
             {
                 Logger = logger,
                 ProjectLocation = ProjectFilePath,
-                BuildArguments = OutputTest.BuildArguments
+                BuildArguments = IntegrationTest.BuildArguments
             };
 
             if (isToTranslate)
