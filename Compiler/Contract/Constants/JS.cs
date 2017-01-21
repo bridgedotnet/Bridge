@@ -159,6 +159,7 @@
             public const string Uint32Array = "Uint32Array";
             public const string Float32Array = "Float32Array";
             public const string Float64Array = "Float64Array";
+            public const string TypeRef = "Bridge.TypeRef";
 
             public class Number
             {

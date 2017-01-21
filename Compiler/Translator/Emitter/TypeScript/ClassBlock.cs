@@ -184,14 +184,12 @@ namespace Bridge.Translator.TypeScript
                         {
                             this.WriteComma();
                         }
-                        this.Write(p.Name);
+                        this.Write(JS.Vars.D + p.Name);
                         this.WriteColon();
-                        this.WriteOpenBrace();
-                        this.Write(JS.Fields.PROTOTYPE);
-                        this.WriteColon();
+                        this.Write(JS.Types.TypeRef);
+                        this.Write("<");
                         this.Write(p.Name);
-
-                        this.WriteCloseBrace();
+                        this.Write(">");
                         comma = true;
                     }
 
