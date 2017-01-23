@@ -30,6 +30,7 @@
     <TypeScriptCompile Include="1_BasicTypes.ts" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="readme.md" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
