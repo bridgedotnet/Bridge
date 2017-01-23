@@ -10,7 +10,6 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <TypeScriptToolsVersion>2.1</TypeScriptToolsVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -30,7 +29,6 @@
     <TypeScriptCompile Include="1_BasicTypes.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="readme.md" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
