@@ -633,7 +633,7 @@ declare module System {
                 new (obj: Dictionary$2<TKey, TValue>, comparer?: IEqualityComparer$1<TKey>): Dictionary$2<TKey, TValue>;
                 new (obj: any, comparer?: IEqualityComparer$1<TKey>): Dictionary$2<TKey, TValue>;
             }
-            
+
             export interface List$1<T> extends ICollection$1<T>, IList$1<T> {
                 getCount(): number;
                 get(index: number): T;
