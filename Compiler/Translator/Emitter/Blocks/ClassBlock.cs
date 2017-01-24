@@ -297,32 +297,45 @@ namespace Bridge.Translator
 
         protected virtual void EmitStaticBlock()
         {
-            if (this.TypeInfo.HasRealStatic(this.Emitter))
+            int pos = this.Emitter.Output.Length;
+            bool comma = this.Emitter.Comma;
+            bool newLine = this.Emitter.IsNewLine;
+
+            this.Emitter.StaticBlock = true;
+            this.EnsureComma();
+
+            if (this.TypeInfo.InstanceMethods.Any(m => m.Value.Any(subm => this.Emitter.GetEntityName(subm) == JS.Fields.STATICS)) ||
+                this.TypeInfo.InstanceConfig.Fields.Any(m => m.GetName(this.Emitter) == JS.Fields.STATICS))
             {
-                this.Emitter.StaticBlock = true;
-                this.EnsureComma();
-
-                if (this.TypeInfo.InstanceMethods.Any(m => m.Value.Any(subm => this.Emitter.GetEntityName(subm) == JS.Fields.STATICS)) ||
-                    this.TypeInfo.InstanceConfig.Fields.Any(m => m.GetName(this.Emitter) == JS.Fields.STATICS))
-                {
-                    this.Write(JS.Vars.D);
-                }
-
-                this.Write(JS.Fields.STATICS);
-                this.WriteColon();
-                this.BeginBlock();
-
-                var ctorBlock = new ConstructorBlock(this.Emitter, this.TypeInfo, true);
-                ctorBlock.Emit();
-                this.HasEntryPoint = ctorBlock.HasEntryPoint;
-
-                new MethodBlock(this.Emitter, this.TypeInfo, true).Emit();
-
-                this.WriteNewLine();
-                this.EndBlock();
-                this.Emitter.Comma = true;
-                this.Emitter.StaticBlock = false;
+                this.Write(JS.Vars.D);
             }
+
+            this.Write(JS.Fields.STATICS);
+            this.WriteColon();
+            this.BeginBlock();
+            int checkOutputPos = this.Emitter.Output.Length;
+
+            var ctorBlock = new ConstructorBlock(this.Emitter, this.TypeInfo, true);
+            ctorBlock.Emit();
+            this.HasEntryPoint = ctorBlock.HasEntryPoint;
+
+            new MethodBlock(this.Emitter, this.TypeInfo, true).Emit();
+            var clear = checkOutputPos == this.Emitter.Output.Length;
+            this.WriteNewLine();
+            this.EndBlock();
+
+            if (clear)
+            {
+                this.Emitter.Output.Length = pos;
+                this.Emitter.Comma = comma;
+                this.Emitter.IsNewLine = newLine;
+            }
+            else
+            {
+                this.Emitter.Comma = true;
+            }
+            
+            this.Emitter.StaticBlock = false;
         }
 
         protected virtual void EmitInstantiableBlock()

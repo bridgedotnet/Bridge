@@ -2637,6 +2637,7 @@
             };
 
             if (isEntryPoint || Bridge.isFunction(prototype.$main)) {
+                Class.main = prototype.$main;
                 Bridge.Class.$queueEntry.push(Class);
             }
 
@@ -2998,7 +2999,7 @@
                 }
 
                 if (t.prototype.$main) {
-                    Bridge.ready(t.prototype.$main);
+                    Bridge.ready(t.main);
                 }
             }
 
@@ -12512,7 +12513,7 @@
     // @source INotifyPropertyChanged.js
 
     Bridge.define("System.ComponentModel.INotifyPropertyChanged", {
-        $kind: "interface",
+        $kind: "interface"
     });
 
     Bridge.define("System.ComponentModel.PropertyChangedEventArgs", {

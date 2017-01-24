@@ -15766,11 +15766,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge586A", {
-        statics: {
-
-        }
-    });
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge586A");
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge588", {
         statics: {
