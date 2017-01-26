@@ -249,8 +249,7 @@
                 public const string DEFINE = DOTNAME + "define";
                 public const string DEFINE_I = DOTNAME + "definei";
                 public const string GET_INTERFACE = DOTNAME + "getInterface";
-
-
+                public const string INIT = DOTNAME + "init";
 
                 public class Reflection
                 {

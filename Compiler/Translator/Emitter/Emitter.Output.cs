@@ -319,7 +319,7 @@ namespace Bridge.Translator
                     this.WriteNewLine(tmp, ") {");
 
                     this.WriteIndent(endOutput, level);
-                    this.WriteNewLine(endOutput, "Bridge.init();");
+                    this.WriteNewLine(endOutput, JS.Types.Bridge.INIT + "();");
                     this.WriteIndent(endOutput, level);
                     this.WriteNewLine(endOutput, "});");
                     level++;
