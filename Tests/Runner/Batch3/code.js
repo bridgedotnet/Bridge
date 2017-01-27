@@ -13590,6 +13590,32 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2279", {
+        statics: {
+            testPropertyWithInitializerAndNestedClass: function () {
+                Bridge.Test.Assert.areEqual("test1", new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2279.NestedClass().getValue());
+                Bridge.Test.Assert.areEqual("test2", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2279.NestedClass.getValue2());
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2279.NestedClass", {
+        statics: {
+            config: {
+                properties: {
+                    Value2: "test2"
+                }
+            }
+        },
+        config: {
+            properties: {
+                Value: "test1"
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2279.NestedClass.Config");
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
