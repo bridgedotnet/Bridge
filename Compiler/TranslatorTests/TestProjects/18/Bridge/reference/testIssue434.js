@@ -50,10 +50,6 @@
     Bridge.init(function() { TestIssue434.Issue434B.method3(); });
     Bridge.init(function() { TestIssue434.Issue434B.method4(); });
 
-    Bridge.define("TestIssue434.Issue434C", {
-        statics: {
-
-        }
-    });
+    Bridge.define("TestIssue434.Issue434C");
 
 // Bottom
