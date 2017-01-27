@@ -2649,10 +2649,10 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
-    (function(){
+    Bridge.init(function(){
         var Bridge1203_a2 = function () {
         };
-    })();
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1203", {
         statics: {
@@ -2667,7 +2667,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
-    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1203.initMethod1();
+    Bridge.init(function() { Bridge.ClientTest.Batch3.BridgeIssues.Bridge1203.initMethod1(); });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1206", {
         statics: {

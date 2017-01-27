@@ -13,5 +13,10 @@ namespace Bridge.Contract
             get;
             set;
         }
+
+        ModuleType? Type
+        {
+            get; set;
+        }
     }
 }

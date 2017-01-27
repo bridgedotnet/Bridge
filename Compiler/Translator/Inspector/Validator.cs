@@ -619,19 +619,85 @@ namespace Bridge.Translator
 
                 if (attr != null)
                 {
-                    var typeInfo = this.EnsureTypeInfo(type, translator);
-
-                    if (attr.ConstructorArguments.Count > 0)
-                    {
-                        var obj = this.GetAttributeArgumentValue(attr, 0);
-                        typeInfo.Module = obj is string ? obj.ToString() : "";
-                    }
-                    else
-                    {
-                        typeInfo.Module = "";
-                    }
+                    this.ReadModuleFromAttribute(type, translator, attr);
                 }
             }
+
+            if (type.Module.Assembly.HasCustomAttributes)
+            {
+                var attr = this.GetAttribute(type.Module.Assembly.CustomAttributes, Translator.Bridge_ASSEMBLY + ".ModuleAttribute");
+
+                if (attr != null)
+                {
+                    this.ReadModuleFromAttribute(type, translator, attr);
+                }
+            }
+        }
+
+        private void ReadModuleFromAttribute(TypeDefinition type, ITranslator translator, CustomAttribute attr)
+        {
+            var typeInfo = this.EnsureTypeInfo(type, translator);
+            Module module = null;
+
+            if (attr.ConstructorArguments.Count == 1)
+            {
+                var obj = attr.ConstructorArguments[0].Value;
+
+                if (obj is bool)
+                {
+                    module = new Module((bool)obj);
+                }
+                else if (obj is string)
+                {
+                    module = new Module(obj.ToString());
+                }
+                else if (obj is int)
+                {
+                    module = new Module("", (ModuleType)(int)obj);
+                }
+                else
+                {
+                    module = new Module();
+                }
+            }
+            else if (attr.ConstructorArguments.Count == 2)
+            {
+                if (attr.ConstructorArguments[0].Value is string)
+                {
+                    var name = attr.ConstructorArguments[0].Value;
+                    var preventName = attr.ConstructorArguments[1].Value;
+
+                    module = new Module(name != null ? name.ToString() : "", (bool)preventName);
+                }
+                else if (attr.ConstructorArguments[1].Value is bool)
+                {
+                    var mtype = attr.ConstructorArguments[0].Value;
+                    var preventName = attr.ConstructorArguments[1].Value;
+
+                    module = new Module("", (ModuleType)(int)mtype, (bool)preventName);
+                }
+                else
+                {
+                    var mtype = attr.ConstructorArguments[0].Value;
+                    var name = attr.ConstructorArguments[1].Value;
+
+                    module = new Module(name != null ? name.ToString() : "", (ModuleType)(int)mtype);
+                }
+            }
+            else if (attr.ConstructorArguments.Count == 3)
+            {
+                var mtype = attr.ConstructorArguments[0].Value;
+                var name = attr.ConstructorArguments[1].Value;
+                var preventName = attr.ConstructorArguments[2].Value;
+
+                module = new Module(name != null ? name.ToString() : "", (ModuleType)(int)mtype, (bool)preventName);
+            }
+            else
+            {
+                module = new Module();
+            }
+
+            typeInfo.Module = module;
         }
 
         public virtual void CheckModuleDependenies(TypeDefinition type, ITranslator translator)

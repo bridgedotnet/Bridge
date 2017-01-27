@@ -159,6 +159,7 @@
             public const string Uint32Array = "Uint32Array";
             public const string Float32Array = "Float32Array";
             public const string Float64Array = "Float64Array";
+            public const string TypeRef = "Bridge.TypeRef";
 
             public class Number
             {
@@ -248,8 +249,7 @@
                 public const string DEFINE = DOTNAME + "define";
                 public const string DEFINE_I = DOTNAME + "definei";
                 public const string GET_INTERFACE = DOTNAME + "getInterface";
-
-
+                public const string INIT = DOTNAME + "init";
 
                 public class Reflection
                 {
@@ -272,7 +272,7 @@
             public const string T = "$t";
             public const string E = "$e";
             public const string YIELD = "$yield";
-            public const string EXPORTS = "exports";
+            public const string EXPORTS = "$exports";
             public const string SCOPE = "$scope";
             public const string ITERATOR = "$i";
 

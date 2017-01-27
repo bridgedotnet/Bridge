@@ -119,7 +119,7 @@ namespace Bridge.Translator
 
             if (name.IsEmpty())
             {
-                name = BridgeTypes.DefinitionToJsName(this.TypeInfo.Type, this.Emitter);
+                name = BridgeTypes.ToJsName(this.TypeInfo.Type, this.Emitter, true, nomodule: true);
             }
 
             if (typeDef.IsInterface && typeDef.HasGenericParameters)
@@ -267,7 +267,7 @@ namespace Bridge.Translator
             this.EnsureComma();
             this.Write(JS.Vars.SCOPE);
             this.WriteColon();
-            this.Write(JS.Vars.EXPORTS);
+            this.Write(this.TypeInfo.Module.Name);
             this.Emitter.Comma = true;
         }
 
@@ -611,7 +611,7 @@ namespace Bridge.Translator
             return this.GetDefineMethods("Before",
                 (method, rrMethod) =>
                 {
-                    this.PushWriter("(function(){0})();");
+                    this.PushWriter(JS.Types.Bridge.INIT + "(function(){0});");
                     this.ResetLocals();
                     var prevMap = this.BuildLocalsMap();
                     var prevNamesMap = this.BuildLocalsNamesMap();
@@ -663,9 +663,11 @@ namespace Bridge.Translator
         protected virtual IEnumerable<string> GetAfterDefineMethods()
         {
             return this.GetDefineMethods("After",
-                (method, rrMethod) =>
-                    BridgeTypes.ToJsName(rrMethod.DeclaringTypeDefinition, this.Emitter) + "." +
-                    this.Emitter.GetEntityName(method) + "();");
+                delegate(MethodDeclaration method, IMethod rrMethod)
+                {
+                    return JS.Types.Bridge.INIT + "(function() { " + BridgeTypes.ToJsName(rrMethod.DeclaringTypeDefinition, this.Emitter) + "." +
+                           this.Emitter.GetEntityName(method) + "(); });";
+                });
         }
     }
 }
