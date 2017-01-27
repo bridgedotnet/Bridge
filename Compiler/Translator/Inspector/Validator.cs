@@ -65,9 +65,13 @@ namespace Bridge.Translator
                     {
                         foreach (var parameter in ctor.Parameters)
                         {
+                            if (parameter.ParameterType.FullName == "Bridge.ObjectCreateMode")
+                            {
+                                TranslatorException.Throw("ObjectLiteral classs (plain mode) doesn't support Bridge.ObjectCreateMode parameter in a custom constructor: {0}", type);
+                            }
+
                             if (parameter.ParameterType.FullName == "Bridge.DefaultValueMode" ||
-                                parameter.ParameterType.FullName == "Bridge.ObjectInitializationMode" ||
-                                parameter.ParameterType.FullName == "Bridge.ObjectCreateMode")
+                                parameter.ParameterType.FullName == "Bridge.ObjectInitializationMode")
                             {
                                 continue;
                             }
