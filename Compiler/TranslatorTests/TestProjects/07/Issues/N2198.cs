@@ -5,7 +5,7 @@ using System.Text;
 
 using Bridge;
 
-namespace TestProject.Issues
+namespace TestProject.Issues.N2198
 {
     // #2198
     [Module("Module1")]

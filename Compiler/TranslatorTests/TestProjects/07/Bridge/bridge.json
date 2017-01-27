@@ -1,7 +1,7 @@
 {
   "output": "Bridge\\output",
   "cleanOutputFolderBeforeBuildPattern": "*.*",
-  "outputBy": "project",
+  "outputBy": "namespace",
   "module": {
     "name": "MyModule"
   },
