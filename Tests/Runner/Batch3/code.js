@@ -13593,10 +13593,20 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278", {
         statics: {
             testGenericInterface: function () {
-                var item = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278.Item$1(String))();
+                var itemString = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278.Item$1(String))();
                 var s = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278.Something$1(String))();
 
-                Bridge.Test.Assert.areEqual(item, s.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$ISomething$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$Item$1$String$doSomething(item));
+                Bridge.Test.Assert.areEqual(itemString, s.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$ISomething$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$Item$1$String$doSomething(itemString));
+
+                var itemLong = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278.Item$1(System.Int64))();
+                var sLong = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278.Something$1(System.Int64))();
+
+                Bridge.Test.Assert.areEqual(itemLong, sLong.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$ISomething$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$Item$1$System$Int64$doSomething(itemLong));
+
+                var itemDecimal = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278.Item$1(System.Decimal))();
+                var sDecimal = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278.Something$1(System.Decimal))();
+
+                Bridge.Test.Assert.areEqual(itemDecimal, sDecimal.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$ISomething$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$Item$1$System$Decimal$doSomething(itemDecimal));
             }
         }
     });

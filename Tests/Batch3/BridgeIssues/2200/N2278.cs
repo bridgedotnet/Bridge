@@ -8,7 +8,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#2278 - {0}")]
     public class Bridge2278
     {
-        public class Item<T> { }
+        public class Item<T>
+        {
+        }
 
         public interface ISomething<T>
         {
@@ -26,10 +28,20 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test]
         public static void TestGenericInterface()
         {
-            var item = new Item<string>();
+            var itemString = new Item<string>();
             ISomething<Item<string>> s = new Something<string>();
 
-            Assert.AreEqual(item, s.DoSomething(item));
+            Assert.AreEqual(itemString, s.DoSomething(itemString));
+
+            var itemLong = new Item<long>();
+            ISomething<Item<long>> sLong = new Something<long>();
+
+            Assert.AreEqual(itemLong, sLong.DoSomething(itemLong));
+
+            var itemDecimal = new Item<decimal>();
+            ISomething<Item<decimal>> sDecimal = new Something<decimal>();
+
+            Assert.AreEqual(itemDecimal, sDecimal.DoSomething(itemDecimal));
         }
     }
 }
