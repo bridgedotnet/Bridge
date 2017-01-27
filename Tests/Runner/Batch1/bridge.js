@@ -3025,6 +3025,14 @@
         },
 
         init: function (fn) {
+            if (fn) {
+                var old = Bridge.Class.staticInitAllow;
+                Bridge.Class.staticInitAllow = true;
+                fn();
+                Bridge.Class.staticInitAllow = old;
+                return;
+            }
+
             Bridge.Class.staticInitAllow = true;
 
             var queue = Bridge.Class.$queue.concat(Bridge.Class.$queueEntry);
@@ -3040,11 +3048,8 @@
 
                 if (t.prototype.$main) {
                     Bridge.ready(t.prototype.$main);
+                    t.prototype.$main = null;
                 }
-            }
-
-            if (fn) {
-                fn();
             }
         }
     };
@@ -3153,10 +3158,10 @@
 
     // @source systemAssemblyVersion.js
 
-    (function(){
+    Bridge.init(function(){
         Bridge.SystemAssembly.version = "15.7.0";
         Bridge.SystemAssembly.compiler = "15.7.0";
-    })();
+    });
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
 

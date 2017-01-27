@@ -1,8 +1,8 @@
 // Top
 
-    (function(){
+    Bridge.init(function(){
         TestIssue434.Issue434A.doSomething(2);
-    })();
+    });
 
     Bridge.define("TestIssue434.Issue434A", {
         statics: {
@@ -21,13 +21,13 @@
         }
     });
 
-    TestIssue434.Issue434A.method1();
-    TestIssue434.Issue434A.method3();
-    TestIssue434.Issue434A.method4();
+    Bridge.init(function() { TestIssue434.Issue434A.method1(); });
+    Bridge.init(function() { TestIssue434.Issue434A.method3(); });
+    Bridge.init(function() { TestIssue434.Issue434A.method4(); });
 
-    (function(){
+    Bridge.init(function(){
         TestIssue434.Issue434B.doSomething(2);
-    })();
+    });
 
     Bridge.define("TestIssue434.Issue434B", {
         statics: {
@@ -46,9 +46,9 @@
         }
     });
 
-    TestIssue434.Issue434B.method1();
-    TestIssue434.Issue434B.method3();
-    TestIssue434.Issue434B.method4();
+    Bridge.init(function() { TestIssue434.Issue434B.method1(); });
+    Bridge.init(function() { TestIssue434.Issue434B.method3(); });
+    Bridge.init(function() { TestIssue434.Issue434B.method4(); });
 
     Bridge.define("TestIssue434.Issue434C", {
         statics: {
