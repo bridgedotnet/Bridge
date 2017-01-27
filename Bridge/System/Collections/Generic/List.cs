@@ -59,7 +59,7 @@ namespace System.Collections.Generic
 
         public extern IEnumerator<T> GetEnumerator();
 
-        [Obsolete("This is not C# standard method, use GetRange(int, int). See Issue #2255 for more information.")]
+        [Obsolete("This is not a C# standard method, please use .GetRange(int, int) Method instead. See Issue #2255 for more information.")]
         public extern List<T> GetRange(int index);
 
         /// <summary>
