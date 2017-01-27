@@ -160,7 +160,7 @@ Bridge.assembly("Bridge_ClientTest_Tests", function ($asm, globals) {
         }
     });
 
-    Bridge.define("Bridge.Test.QUnit.TestFixture$1", function (T) { return {
+    Bridge.define("Bridge.Test.QUnit.TestFixture$1(T)", function (T) { return {
         statics: {
             instanceFabric: null,
             fixtureFabric: Bridge.getDefaultValue(T),

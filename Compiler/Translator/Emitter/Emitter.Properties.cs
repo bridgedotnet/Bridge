@@ -501,5 +501,10 @@ namespace Bridge.Translator
         {
             get; set;
         }
+
+        public bool DisableDependencyTracking
+        {
+            get; set;
+        }
     }
 }

@@ -24,6 +24,22 @@ namespace Bridge.Translator
             argsInfo.AddExtensionParam();
             this.Method = method;
             this.TargetResolveResult = targetResolveResult;
+
+            if (argsInfo.Expression != null)
+            {
+                var rr = emitter.Resolver.ResolveNode(argsInfo.Expression, emitter) as MemberResolveResult;
+
+                if (rr != null)
+                {
+                    BridgeType bridgeType = emitter.BridgeTypes.Get(rr.Member.DeclaringType, true);
+
+                    if (bridgeType != null)
+                    {
+                        bool isCustomName;
+                        BridgeTypes.AddModule(null, bridgeType, out isCustomName);
+                    }
+                }
+            }
         }
 
         public int[] IgnoreRange
@@ -408,7 +424,92 @@ namespace Bridge.Translator
                 StringBuilder oldSb = this.Emitter.Output;
                 this.Emitter.Output = new StringBuilder();
 
-                if (asRef)
+                if (modifier == "module")
+                {
+                    IList<Expression> exprs = this.GetExpressionsByKey(expressions, key);
+
+                    if (exprs.Count > 0)
+                    {
+                        var amd = new List<string>();
+                        var cjs = new List<string>();
+                        foreach (var expr in exprs)
+                        {
+                            var rr = this.Emitter.Resolver.ResolveNode(expr, this.Emitter) as TypeOfResolveResult;
+
+                            if (rr == null)
+                            {
+                                throw new EmitterException(expr, "Module.Load supports typeof expression only");
+                            }
+
+                            var bridgeType = this.Emitter.BridgeTypes.Get(rr.ReferencedType, true);
+                            Module module = null;
+
+                            if (bridgeType.TypeInfo == null)
+                            {
+                                BridgeTypes.EnsureModule(bridgeType);
+                                module = bridgeType.Module;
+                            }
+                            else
+                            {
+                                module = bridgeType.TypeInfo.Module;
+                            }
+
+                            if (module != null)
+                            {
+                                if (module.Type == ModuleType.AMD ||
+                                    (module.Type == ModuleType.UMD &&
+                                     this.Emitter.AssemblyInfo.Loader.Type == ModuleLoaderType.AMD))
+                                {
+                                    amd.Add(module.Name);
+                                }
+                                else
+                                {
+                                    cjs.Add(module.Name);
+                                }
+                            }
+                        }
+
+                        this.Write("{");
+
+                        if (amd.Count > 0)
+                        {
+                            this.Write("amd: ");
+                            this.Write(this.Emitter.ToJavaScript(amd.ToArray()));
+                            if (cjs.Count > 0)
+                            {
+                                this.Write(", ");
+                            }
+                        }
+
+                        if (cjs.Count > 0)
+                        {
+                            this.Write("cjs: ");
+                            this.Write(this.Emitter.ToJavaScript(cjs.ToArray()));
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(this.Emitter.AssemblyInfo.Loader.FunctionName))
+                        {
+                            this.Write(", ");
+                            this.Write(this.Emitter.ToJavaScript(this.Emitter.AssemblyInfo.Loader.FunctionName));
+                        }
+
+                        this.Write("}, function () { ");
+
+                        var idx = 0;
+                        var list = amd.Concat(cjs);
+
+                        foreach (var moduleName in list)
+                        {
+                            this.Write(moduleName);
+                            this.Write(" = arguments[");
+                            this.Write(idx++);
+                            this.Write("];");
+                        }
+
+                        this.Write(" }");
+                    }
+                }
+                else if (asRef)
                 {
                     if (Regex.IsMatch(key, "^\\d+$"))
                     {

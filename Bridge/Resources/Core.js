@@ -1402,6 +1402,46 @@
             var m = t.$getMetadata ? t.$getMetadata() : t.$metadata;
 
             return m;
+        },
+
+        loadModule: function (config, callback) {
+            var amd = config.amd,
+                cjs = config.cjs,
+                fnName = config.fn;
+
+            var tcs = new System.Threading.Tasks.TaskCompletionSource(),
+                fn = Bridge.global[fnName || "require"];
+
+            if (amd && amd.length > 0) {
+                fn(amd, function() {
+                    var loads = Array.prototype.slice.call(arguments, 0);
+                    if (cjs && cjs.length > 0) {
+                        for (var i = 0; i < cjs.length; i++) {
+                            loads.push(fn(cjs[i]));
+                        }
+                    }
+
+                    callback.apply(Bridge.global, loads);
+                    tcs.setResult();
+                });
+            } else if (cjs && cjs.length > 0) {
+                var t = new System.Threading.Tasks.Task();
+                t.status = System.Threading.Tasks.TaskStatus.ranToCompletion;
+
+                var loads = [];
+                for (var j = 0; j < cjs.length; j++) {
+                    loads.push(fn(cjs[j]));
+                }
+
+                callback.apply(Bridge.global, loads);
+                return t;
+            } else {
+                var t = new System.Threading.Tasks.Task();
+                t.status = System.Threading.Tasks.TaskStatus.ranToCompletion;
+                return t;
+            }
+
+            return tcs.task;
         }
     };
 

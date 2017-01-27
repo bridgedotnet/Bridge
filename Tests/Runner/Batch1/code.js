@@ -3527,7 +3527,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Batch1.Reflection.AssemblyTests.C");
 
-    Bridge.define("Bridge.ClientTest.Batch1.Reflection.AssemblyTests.G$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch1.Reflection.AssemblyTests.G$2(T1,T2)", function (T1, T2) { return {
 
     }; });
 
@@ -10420,7 +10420,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
      * @return  {TOutput}
      */
 
-    Bridge.define("Bridge.ClientTest.ConvertTests.ConvertTestBase$1", function (TOutput) { return {
+    Bridge.define("Bridge.ClientTest.ConvertTests.ConvertTestBase$1(TOutput)", function (TOutput) { return {
         /**
          * Verify that the provided convert delegate produces expectedValues given testValues.
          *
@@ -10728,7 +10728,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
      * @class Bridge.ClientTest.ConvertTests.ConvertTestBase$1.TestFormatProvider
      * @implements  System.IFormatProvider
      */
-    Bridge.define("Bridge.ClientTest.ConvertTests.ConvertTestBase$1.TestFormatProvider", function (TOutput) { return {
+    Bridge.define("Bridge.ClientTest.ConvertTests.ConvertTestBase$1.TestFormatProvider(TOutput)", function (TOutput) { return {
         inherits: [System.IFormatProvider],
         statics: {
             s_instance: null,
@@ -14985,7 +14985,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
-    Bridge.define("Bridge.ClientTest.JsonTests.TestClass3", {
+    Bridge.define("Object", {
         $literal: true,
         statics: {
             inc: function (i) {
@@ -17019,7 +17019,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(T)", function (T) { return {
         data: Bridge.getDefaultValue(T),
         ctor: function (data) {
             this.$initialize();
@@ -17030,7 +17030,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyEnumerable$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyEnumerable$1(T)", function (T) { return {
         inherits: [System.Collections.Generic.IEnumerable$1(T)],
         _hasEnumerated: false,
         _items: null,
@@ -20035,7 +20035,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
-    Bridge.define("Bridge.ClientTest.ObjectLiteralTests.Bridge1529.Config", {
+    Bridge.define("Object", {
         $literal: true,
         getTmp: function (config) {
             return System.String.concat("1: ", config.temp);
@@ -20301,7 +20301,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
-    Bridge.define("Bridge.ClientTest.PropertyAccessorTests.B4$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.PropertyAccessorTests.B4$1(T)", function (T) { return {
         F1: Bridge.getDefaultValue(T),
         F2: Bridge.getDefaultValue(T),
         F3: Bridge.getDefaultValue(T),
@@ -20354,7 +20354,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
-    Bridge.define("Bridge.ClientTest.PropertyAccessorTests.C2$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.PropertyAccessorTests.C2$1(T)", function (T) { return {
         statics: {
             FS1: Bridge.getDefaultValue(T),
             FS2: Bridge.getDefaultValue(T),
@@ -22597,7 +22597,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Reflection.ReflectionTests.C5$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.ReflectionTests.C5$2(T1,T2)", function (T1, T2) { return {
         m: function (t2, s) {
             return Bridge.getDefaultValue(T1);
         },
@@ -22653,7 +22653,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Reflection.ReflectionTests.C9$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.ReflectionTests.C9$2(T1,T2)", function (T1, T2) { return {
         statics: {
             m: function (a) {
                 return System.String.concat(Bridge.Reflection.getTypeFullName(T1), " ", Bridge.Reflection.getTypeFullName(T2), " ", a);
@@ -23023,7 +23023,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeAttributeTests.C1");
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeAttributeTests.C10$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeAttributeTests.C10$2(T1,T2)", function (T1, T2) { return {
 
     }; });
 
@@ -23079,7 +23079,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $kind: "interface"
     });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeAttributeTests.I2$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeAttributeTests.I2$2(T1,T2)", function (T1, T2) { return {
 
     }; });
 
@@ -23568,7 +23568,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.K");
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C2$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C2$1(T)", function (T) { return {
 
     }; });
 
@@ -23578,7 +23578,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $kind: "interface"
     });
 
-    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I2$1", function (T1) { return {
+    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I2$1(T1)", function (T1) { return {
         $kind: "interface"
     }; });
 
@@ -23594,17 +23594,17 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $kind: "enum"
     });
 
-    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I7$1", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I7$1(T)", function (T) { return {
         $kind: "interface",
         $variance: [2]
     }; });
 
-    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I6$1", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I6$1(T)", function (T) { return {
         $kind: "interface",
         $variance: [1]
     }; });
 
-    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I9$2", function (T1, T2) { return {
+    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I9$2(T1,T2)", function (T1, T2) { return {
         $kind: "interface",
         $variance: [0,1]
     }; });
@@ -24760,7 +24760,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.BX$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.BX$1(T)", function (T) { return {
 
     }; });
 
@@ -24832,7 +24832,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $utype: System.Int64
     });
 
-    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemTests.IG$1", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemTests.IG$1(T)", function (T) { return {
         $kind: "interface"
     }; });
 
@@ -24849,7 +24849,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.C1");
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.C2$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.C2$1(T)", function (T) { return {
 
     }; });
 
@@ -24857,7 +24857,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $kind: "interface"
     });
 
-    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I2$1", function (T1) { return {
+    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I2$1(T1)", function (T1) { return {
         $kind: "interface"
     }; });
 
@@ -24865,17 +24865,17 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $kind: "interface"
     });
 
-    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I7$1", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I7$1(T)", function (T) { return {
         $kind: "interface",
         $variance: [2]
     }; });
 
-    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I6$1", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I6$1(T)", function (T) { return {
         $kind: "interface",
         $variance: [1]
     }; });
 
-    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I9$2", function (T1, T2) { return {
+    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I9$2(T1,T2)", function (T1, T2) { return {
         $kind: "interface",
         $variance: [0,1]
     }; });
@@ -24884,7 +24884,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1");
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1(T)", function (T) { return {
 
     }; });
 
@@ -28497,7 +28497,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
-    Bridge.define("Bridge.ClientTest.SimpleTypes.StringTests.MyEnumerable$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.SimpleTypes.StringTests.MyEnumerable$1(T)", function (T) { return {
         inherits: [System.Collections.Generic.IEnumerable$1(T)],
         _items: null,
         config: {
@@ -33501,7 +33501,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.TypeSystemTests.AssignableTypes.C1");
 
-    Bridge.define("Bridge.ClientTest.TypeSystemTests.AssignableTypes.C2$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.TypeSystemTests.AssignableTypes.C2$1(T)", function (T) { return {
 
     }; });
 
@@ -33509,7 +33509,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $kind: "interface"
     });
 
-    Bridge.definei("Bridge.ClientTest.TypeSystemTests.AssignableTypes.I2$1", function (T1) { return {
+    Bridge.definei("Bridge.ClientTest.TypeSystemTests.AssignableTypes.I2$1(T1)", function (T1) { return {
         $kind: "interface"
     }; });
 
@@ -33517,17 +33517,17 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $kind: "interface"
     });
 
-    Bridge.definei("Bridge.ClientTest.TypeSystemTests.AssignableTypes.I7$1", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.TypeSystemTests.AssignableTypes.I7$1(T)", function (T) { return {
         $kind: "interface",
         $variance: [2]
     }; });
 
-    Bridge.definei("Bridge.ClientTest.TypeSystemTests.AssignableTypes.I6$1", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.TypeSystemTests.AssignableTypes.I6$1(T)", function (T) { return {
         $kind: "interface",
         $variance: [1]
     }; });
 
-    Bridge.definei("Bridge.ClientTest.TypeSystemTests.AssignableTypes.I9$2", function (T1, T2) { return {
+    Bridge.definei("Bridge.ClientTest.TypeSystemTests.AssignableTypes.I9$2(T1,T2)", function (T1, T2) { return {
         $kind: "interface",
         $variance: [0,1]
     }; });
@@ -35563,7 +35563,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
-    Bridge.define("Bridge.ClientTest.PropertyAccessorTests.D4$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.PropertyAccessorTests.D4$1(T)", function (T) { return {
         inherits: [Bridge.ClientTest.PropertyAccessorTests.B4$1(T)],
         getP1: function () {
             return Bridge.ClientTest.PropertyAccessorTests.B4$1(T).prototype.getP1.call(this) + 1;
@@ -35739,7 +35739,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Reflection.TypeAttributeTests.C7]
     });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C10$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C10$1(T)", function (T) { return {
 
     }; });
 
@@ -35747,7 +35747,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C1,Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I1]
     });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.D2$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.D2$1(T)", function (T) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C2$1(T),Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I2$1(T),Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I1]
     }; });
 
@@ -35768,13 +35768,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
-    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I8$2", function (T1, T2) { return {
+    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I8$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I6$1(T1),Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I7$1(T2)],
         $kind: "interface",
         $variance: [1,2]
     }; });
 
-    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I5$1", function (T1) { return {
+    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I5$1(T1)", function (T1) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I2$1(T1)],
         $kind: "interface"
     }; });
@@ -35783,15 +35783,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I1]
     });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y1$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y1$1(T)", function (T) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I6$1(T)]
     }; });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y2$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y2$1(T)", function (T) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I7$1(T)]
     }; });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y4$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y4$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I9$2(T1,T2)]
     }; });
 
@@ -35878,7 +35878,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.CS2$2", function (T, K) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.CS2$2(T,K)", function (T, K) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.I1]
     }; });
 
@@ -35901,7 +35901,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.G$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.G$2(T1,T2)", function (T1, T2) { return {
         inherits: function () { return [Bridge.ClientTest.Reflection.TypeSystemTests.BX$1(Bridge.ClientTest.Reflection.TypeSystemTests.G$2(T1,Bridge.ClientTest.Reflection.TypeSystemTests.C)),Bridge.ClientTest.Reflection.TypeSystemTests.IG$1(Bridge.ClientTest.Reflection.TypeSystemTests.G$2(T2,String))]; },
         statics: {
             ctor: function () {
@@ -35911,7 +35911,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.G2$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.G2$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.BX$1(System.Int32)]
     }; });
 
@@ -35919,7 +35919,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.C1,Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I1]
     });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.D2$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.D2$1(T)", function (T) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.C2$1(T),Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I2$1(T),Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I1]
     }; });
 
@@ -35932,13 +35932,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $kind: "interface"
     });
 
-    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I8$2", function (T1, T2) { return {
+    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I8$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I6$1(T1),Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I7$1(T2)],
         $kind: "interface",
         $variance: [1,2]
     }; });
 
-    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I5$1", function (T1) { return {
+    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I5$1(T1)", function (T1) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I2$1(T1)],
         $kind: "interface"
     }; });
@@ -35947,15 +35947,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I1]
     });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y1$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y1$1(T)", function (T) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I6$1(T)]
     }; });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2$1(T)", function (T) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I7$1(T)]
     }; });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y4$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y4$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I9$2(T1,T2)]
     }; });
 
@@ -35963,7 +35963,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C1]
     });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D2$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.D2$1(T)", function (T) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1(T)]
     }; });
 
@@ -35971,7 +35971,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1(System.Int32)]
     });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.L31$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.L31$1(T)", function (T) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.L30],
         M2: function (K, a) {
         }
@@ -44038,7 +44038,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.TypeSystemTests.AssignableTypes.C1,Bridge.ClientTest.TypeSystemTests.AssignableTypes.I1]
     });
 
-    Bridge.define("Bridge.ClientTest.TypeSystemTests.AssignableTypes.D2$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.TypeSystemTests.AssignableTypes.D2$1(T)", function (T) { return {
         inherits: [Bridge.ClientTest.TypeSystemTests.AssignableTypes.C2$1(T),Bridge.ClientTest.TypeSystemTests.AssignableTypes.I2$1(T),Bridge.ClientTest.TypeSystemTests.AssignableTypes.I1]
     }; });
 
@@ -44051,13 +44051,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $kind: "interface"
     });
 
-    Bridge.definei("Bridge.ClientTest.TypeSystemTests.AssignableTypes.I8$2", function (T1, T2) { return {
+    Bridge.definei("Bridge.ClientTest.TypeSystemTests.AssignableTypes.I8$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.TypeSystemTests.AssignableTypes.I6$1(T1),Bridge.ClientTest.TypeSystemTests.AssignableTypes.I7$1(T2)],
         $kind: "interface",
         $variance: [1,2]
     }; });
 
-    Bridge.definei("Bridge.ClientTest.TypeSystemTests.AssignableTypes.I5$1", function (T1) { return {
+    Bridge.definei("Bridge.ClientTest.TypeSystemTests.AssignableTypes.I5$1(T1)", function (T1) { return {
         inherits: [Bridge.ClientTest.TypeSystemTests.AssignableTypes.I2$1(T1)],
         $kind: "interface"
     }; });
@@ -44268,7 +44268,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Reflection.TypeAttributeTests.C3]
     });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C11$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C11$1(T)", function (T) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C10$1(T)]
     }; });
 
@@ -44276,7 +44276,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I3,Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I4]
     });
 
-    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I10$2", function (T1, T2) { return {
+    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I10$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I8$2(T1,T2)],
         $kind: "interface",
         $variance: [1,2]
@@ -44302,15 +44302,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y2$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.X2)]
     });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y3$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y3$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I8$2(T1,T2)]
     }; });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y5$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y5$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I6$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I8$2(T1,T2))]
     }; });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y6$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y6$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I7$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.I8$2(T1,T2))]
     }; });
 
@@ -44318,11 +44318,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.I2]
     });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.G3$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.G3$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.G2$2(T1,T2)]
     }; });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.G4$1", function (T1) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.G4$1(T1)", function (T1) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.G2$2(T1,String)]
     }; });
 
@@ -44330,7 +44330,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I3,Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I4]
     });
 
-    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I10$2", function (T1, T2) { return {
+    Bridge.definei("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I10$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I8$2(T1,T2)],
         $kind: "interface",
         $variance: [1,2]
@@ -44356,15 +44356,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.X2)]
     });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y3$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y3$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I8$2(T1,T2)]
     }; });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y5$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y5$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I6$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I8$2(T1,T2))]
     }; });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y6$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y6$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I7$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.I8$2(T1,T2))]
     }; });
 
@@ -44382,7 +44382,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.TypeSystemTests.AssignableTypes.I3,Bridge.ClientTest.TypeSystemTests.AssignableTypes.I4]
     });
 
-    Bridge.definei("Bridge.ClientTest.TypeSystemTests.AssignableTypes.I10$2", function (T1, T2) { return {
+    Bridge.definei("Bridge.ClientTest.TypeSystemTests.AssignableTypes.I10$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.TypeSystemTests.AssignableTypes.I8$2(T1,T2)],
         $kind: "interface",
         $variance: [1,2]
@@ -44420,7 +44420,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.B,Bridge.ClientTest.Reflection.TypeSystemTests.I4]
     });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.CS1$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.CS1$1(T)", function (T) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.B]
     }; });
 

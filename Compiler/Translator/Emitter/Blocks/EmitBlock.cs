@@ -29,7 +29,7 @@ namespace Bridge.Translator
 
         protected virtual StringBuilder GetOutputForType(ITypeInfo typeInfo, string name)
         {
-            string module = null;
+            Module module = null;
 
             if (typeInfo != null && typeInfo.Module != null)
             {
@@ -55,7 +55,7 @@ namespace Bridge.Translator
                         break;
 
                     case OutputBy.Module:
-                        fileName = module;
+                        fileName = module != null ? module.Name : null;
                         break;
 
                     case OutputBy.NamespacePath:
@@ -173,24 +173,29 @@ namespace Bridge.Translator
 
             if (module == null)
             {
+                if (output.NonModuleDependencies == null)
+                {
+                    output.NonModuleDependencies = new List<IPluginDependency>();
+                }
+                this.Emitter.CurrentDependencies = output.NonModuleDependencies;
                 return output.NonModuletOutput;
             }
 
-            if (module == "")
+            if (module.Name == "")
             {
-                module = Bridge.Translator.AssemblyInfo.DEFAULT_FILENAME;
+                module.Name = Bridge.Translator.AssemblyInfo.DEFAULT_FILENAME;
             }
 
             if (output.ModuleOutput.ContainsKey(module))
             {
-                this.Emitter.CurrentDependencies = output.ModuleDependencies[module];
+                this.Emitter.CurrentDependencies = output.ModuleDependencies[module.Name];
                 return output.ModuleOutput[module];
             }
 
             StringBuilder moduleOutput = new StringBuilder();
             output.ModuleOutput.Add(module, moduleOutput);
             var dependencies = new List<IPluginDependency>();
-            output.ModuleDependencies.Add(module, dependencies);
+            output.ModuleDependencies.Add(module.Name, dependencies);
 
             if (typeInfo != null && typeInfo.Dependencies.Count > 0)
             {
@@ -312,6 +317,7 @@ namespace Bridge.Translator
                 this.Emitter.Output = currentOutput;
             }
 
+            this.Emitter.DisableDependencyTracking = true;
             this.Emitter.NamespacesCache = new Dictionary<string, int>();
             foreach (var type in this.Emitter.Types)
             {
@@ -334,7 +340,7 @@ namespace Bridge.Translator
 
                 var isObjectLiteral = this.Emitter.Validator.IsObjectLiteral(typeDef);
                 var isPlainMode = isObjectLiteral && this.Emitter.Validator.GetObjectCreateMode(this.Emitter.BridgeTypes.Get(type.Key).TypeDefinition) == 0;
-                
+
                 if (isPlainMode)
                 {
                     continue;
@@ -495,7 +501,7 @@ namespace Bridge.Translator
                 var result = false;
                 var type = bridgeType.Value.Type;
                 var thisAssembly = bridgeType.Value.TypeInfo != null;
-                
+
                 if (enable.HasValue && enable.Value && !hasSettings && thisAssembly)
                 {
                     result = true;

@@ -1,28 +1,28 @@
 Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-define("Bridge528_A", ["bridge","dep1"], function (_, dep1) {
-    var exports = { };
+    define("Bridge528_A", ["dep1"], function (dep1) {
+        var Bridge528_A = { };
         Bridge.define("Test.BridgeIssues.N528.Bridge528_A", {
-            $scope: exports
+            $scope: Bridge528_A
         });
-    return exports;
-});
+        return Bridge528_A;
+    });
 
-define("Bridge528_B", ["bridge","dep2"], function (_, dep2) {
-    var exports = { };
+    define("Bridge528_B", ["dep2"], function (dep2) {
+        var Bridge528_B = { };
         Bridge.define("Test.BridgeIssues.N528.Bridge528_B", {
-            $scope: exports
+            $scope: Bridge528_B
         });
-    return exports;
-});
+        return Bridge528_B;
+    });
 
-define("Bridge528_C", ["bridge","dep1"], function (_, dep1) {
-    var exports = { };
+    define("Bridge528_C", ["dep1"], function (dep1) {
+        var Bridge528_C = { };
         Bridge.define("Test.BridgeIssues.N528.Bridge528_C", {
-            $scope: exports
+            $scope: Bridge528_C
         });
-    return exports;
-});
+        return Bridge528_C;
+    });
 
 });

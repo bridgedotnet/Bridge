@@ -191,7 +191,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.ActivatorTests.C8$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.ActivatorTests.C8$1(T)", function (T) { return {
         i: 0,
         ctor: function () {
             this.$initialize();
@@ -1744,7 +1744,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]());
             }
 
-            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
+            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
         },
         prematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks_SPI_1555: function () {
             // #1555
@@ -1757,7 +1757,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             }
             enm.System$IDisposable$dispose();
 
-            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
+            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
         },
         exceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
             var sb = new System.Text.StringBuilder();
@@ -1781,7 +1781,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine("caught exception");
             }
 
-            this.assertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
+            this.assertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
         },
         typeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface_SPI_1554: function () {
             var enm = null;
@@ -1812,7 +1812,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine("got " + i1);
             }
 
-            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n-\nyielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
+            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n-\r\nyielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
         },
         prematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks_SPI_1555: function () {
             var $t;
@@ -1828,7 +1828,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 }
             }
 
-            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
+            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
         },
         exceptionInIEnumerableIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
             var sb = new System.Text.StringBuilder();
@@ -1853,7 +1853,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine("caught exception");
             }
 
-            this.assertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
+            this.assertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
         },
         enumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters: function () {
             var $t, $t1;
@@ -1871,7 +1871,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine(i1.toString());
             }
 
-            this.assertEqual(sb.toString(), "3\n2\n1\n3\n2\n1\n");
+            this.assertEqual(sb.toString(), "3\r\n2\r\n1\r\n3\r\n2\r\n1\r\n");
         },
         differentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals: function () {
             var sb = new System.Text.StringBuilder();
@@ -1886,7 +1886,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine(enm2[Bridge.geti(enm2, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]().toString());
             }
 
-            this.assertEqual(sb.toString(), "0\n0\n1\n1\n2\n2\n-1\n-1\n");
+            this.assertEqual(sb.toString(), "0\r\n0\r\n1\r\n1\r\n2\r\n2\r\n-1\r\n-1\r\n");
         }
     });
 
@@ -9029,7 +9029,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(T)", function (T) { return {
         data: Bridge.getDefaultValue(T),
         ctor: function (data) {
             this.$initialize();
@@ -9040,7 +9040,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests.MyEnumerable$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests.MyEnumerable$1(T)", function (T) { return {
         inherits: [System.Collections.Generic.IEnumerable$1(T)],
         _hasEnumerated: false,
         _items: null,
@@ -10125,7 +10125,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.PropertyAccessorTests.B4$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.PropertyAccessorTests.B4$1(T)", function (T) { return {
         F1: Bridge.getDefaultValue(T),
         F2: Bridge.getDefaultValue(T),
         F3: Bridge.getDefaultValue(T),
@@ -10178,7 +10178,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.PropertyAccessorTests.C2$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.PropertyAccessorTests.C2$1(T)", function (T) { return {
         statics: {
             FS1: Bridge.getDefaultValue(T),
             FS2: Bridge.getDefaultValue(T),
@@ -10471,7 +10471,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.AssemblyTests.C");
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AssemblyTests.G$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AssemblyTests.G$2(T1,T2)", function (T1, T2) { return {
 
     }; });
 
@@ -10818,7 +10818,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C1");
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C10$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C10$2(T1,T2)", function (T1, T2) { return {
 
     }; });
 
@@ -10874,7 +10874,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         $kind: "interface"
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.I2$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.I2$2(T1,T2)", function (T1, T2) { return {
 
     }; });
 
@@ -13024,7 +13024,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C5$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C5$2(T1,T2)", function (T1, T2) { return {
         m: function (t2, s) {
             return Bridge.getDefaultValue(T1);
         },
@@ -13080,7 +13080,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C9$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C9$2(T1,T2)", function (T1, T2) { return {
         statics: {
             m: function (a) {
                 return System.String.concat(Bridge.Reflection.getTypeFullName(T1), " ", Bridge.Reflection.getTypeFullName(T2), " ", a);
@@ -13111,6 +13111,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         statics: {
             canConvert: function (T, arg) {
                 try { /// The variable `x' is assigned but its value is never used
+
+
                     var x = Bridge.cast(arg, T);
                     return true;
                 }
@@ -13592,7 +13594,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.K");
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C2$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C2$1(T)", function (T) { return {
 
     }; });
 
@@ -13602,7 +13604,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         $kind: "interface"
     });
 
-    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I2$1", function (T1) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I2$1(T1)", function (T1) { return {
         $kind: "interface"
     }; });
 
@@ -13618,17 +13620,17 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         $kind: "enum"
     });
 
-    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I7$1", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I7$1(T)", function (T) { return {
         $kind: "interface",
         $variance: [2]
     }; });
 
-    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I6$1", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I6$1(T)", function (T) { return {
         $kind: "interface",
         $variance: [1]
     }; });
 
-    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I9$2", function (T1, T2) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I9$2(T1,T2)", function (T1, T2) { return {
         $kind: "interface",
         $variance: [0,1]
     }; });
@@ -14469,7 +14471,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BX$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BX$1(T)", function (T) { return {
 
     }; });
 
@@ -14513,7 +14515,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         $flags: true
     });
 
-    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1(T)", function (T) { return {
         $kind: "interface"
     }; });
 
@@ -14530,7 +14532,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.C1");
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.C2$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.C2$1(T)", function (T) { return {
 
     }; });
 
@@ -14538,7 +14540,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         $kind: "interface"
     });
 
-    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I2$1", function (T1) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I2$1(T1)", function (T1) { return {
         $kind: "interface"
     }; });
 
@@ -14546,17 +14548,17 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         $kind: "interface"
     });
 
-    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I7$1", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I7$1(T)", function (T) { return {
         $kind: "interface",
         $variance: [2]
     }; });
 
-    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I6$1", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I6$1(T)", function (T) { return {
         $kind: "interface",
         $variance: [1]
     }; });
 
-    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I9$2", function (T1, T2) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I9$2(T1,T2)", function (T1, T2) { return {
         $kind: "interface",
         $variance: [0,1]
     }; });
@@ -14565,7 +14567,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsSubclassOfTypes.C1");
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1(T)", function (T) { return {
 
     }; });
 
@@ -19729,7 +19731,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.StringTests.MyEnumerable$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.StringTests.MyEnumerable$1(T)", function (T) { return {
         inherits: [System.Collections.Generic.IEnumerable$1(T)],
         _items: null,
         config: {
@@ -23864,7 +23866,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.MS3$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.MS3$1(T)", function (T) { return {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new (Bridge.ClientTest.Batch4.UserDefinedStructTests.MS3$1(T))(); }
@@ -23987,7 +23989,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.S2G$1", function (TT) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.S2G$1(TT)", function (TT) { return {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new (Bridge.ClientTest.Batch4.UserDefinedStructTests.S2G$1(TT))(); }
@@ -24144,7 +24146,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.S6G$1", function (TT) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.UserDefinedStructTests.S6G$1(TT)", function (TT) { return {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new (Bridge.ClientTest.Batch4.UserDefinedStructTests.S6G$1(TT))(); }
@@ -24233,7 +24235,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.PropertyAccessorTests.D4$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.PropertyAccessorTests.D4$1(T)", function (T) { return {
         inherits: [Bridge.ClientTest.Batch4.PropertyAccessorTests.B4$1(T)],
         getP1: function () {
             return Bridge.ClientTest.Batch4.PropertyAccessorTests.B4$1(T).prototype.getP1.call(this) + 1;
@@ -24409,7 +24411,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         $kind: "interface"
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C10$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C10$1(T)", function (T) { return {
 
     }; });
 
@@ -24417,7 +24419,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C1,Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I1]
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.D2$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.D2$1(T)", function (T) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C2$1(T),Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I2$1(T),Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I1]
     }; });
 
@@ -24438,13 +24440,13 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         }
     });
 
-    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I8$2", function (T1, T2) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I8$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I6$1(T1),Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I7$1(T2)],
         $kind: "interface",
         $variance: [1,2]
     }; });
 
-    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I5$1", function (T1) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I5$1(T1)", function (T1) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I2$1(T1)],
         $kind: "interface"
     }; });
@@ -24453,15 +24455,15 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I1]
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y1$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y1$1(T)", function (T) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I6$1(T)]
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y2$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y2$1(T)", function (T) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I7$1(T)]
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y4$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y4$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I9$2(T1,T2)]
     }; });
 
@@ -24563,7 +24565,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(T1,T2)", function (T1, T2) { return {
         inherits: function () { return [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BX$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(T1,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C)),Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(T2,String))]; },
         statics: {
             ctor: function () {
@@ -24577,7 +24579,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.C1,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I1]
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.D2$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.D2$1(T)", function (T) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.C2$1(T),Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I2$1(T),Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I1]
     }; });
 
@@ -24590,13 +24592,13 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         $kind: "interface"
     });
 
-    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I8$2", function (T1, T2) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I8$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I6$1(T1),Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I7$1(T2)],
         $kind: "interface",
         $variance: [1,2]
     }; });
 
-    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I5$1", function (T1) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I5$1(T1)", function (T1) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I2$1(T1)],
         $kind: "interface"
     }; });
@@ -24605,15 +24607,15 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I1]
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y1$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y1$1(T)", function (T) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I6$1(T)]
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2$1(T)", function (T) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I7$1(T)]
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y4$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y4$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I9$2(T1,T2)]
     }; });
 
@@ -24621,7 +24623,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsSubclassOfTypes.C1]
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsSubclassOfTypes.D2$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsSubclassOfTypes.D2$1(T)", function (T) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsSubclassOfTypes.C2$1(T)]
     }; });
 
@@ -24837,7 +24839,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C11$1", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C11$1(T)", function (T) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C10$1(T)]
     }; });
 
@@ -24845,7 +24847,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I3,Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I4]
     });
 
-    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I10$2", function (T1, T2) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I10$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I8$2(T1,T2)],
         $kind: "interface",
         $variance: [1,2]
@@ -24871,15 +24873,15 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y2$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.X2)]
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y3$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y3$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I8$2(T1,T2)]
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y5$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y5$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I6$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I8$2(T1,T2))]
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y6$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.Y6$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I7$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.I8$2(T1,T2))]
     }; });
 
@@ -24891,7 +24893,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I3,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I4]
     });
 
-    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I10$2", function (T1, T2) { return {
+    Bridge.definei("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I10$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I8$2(T1,T2)],
         $kind: "interface",
         $variance: [1,2]
@@ -24917,15 +24919,15 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.X2)]
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y3$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y3$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I8$2(T1,T2)]
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y5$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y5$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I6$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I8$2(T1,T2))]
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y6$2", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y6$2(T1,T2)", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I7$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I8$2(T1,T2))]
     }; });
 

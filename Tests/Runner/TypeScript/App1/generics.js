@@ -1,7 +1,7 @@
 Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     "use strict";
 
-    Bridge.define("Generics.GenericClass$1", function (T) { return {
+    Bridge.define("Generics.GenericClass$1(T)", function (T) { return {
         instance: Bridge.getDefaultValue(T),
         ctor: function (instance) {
             this.$initialize();
@@ -20,7 +20,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         }
     });
 
-    Bridge.define("Generics.GenericNew$1", function (T) { return {
+    Bridge.define("Generics.GenericNew$1(T)", function (T) { return {
         instance: Bridge.getDefaultValue(T),
         ctor: function (instance) {
             this.$initialize();
@@ -31,7 +31,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         }
     }; });
 
-    Bridge.define("Generics.GenericNewAndClass$1", function (T) { return {
+    Bridge.define("Generics.GenericNewAndClass$1(T)", function (T) { return {
         instance: Bridge.getDefaultValue(T),
         ctor: function (instance) {
             this.$initialize();
@@ -42,7 +42,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         }
     }; });
 
-    Bridge.define("Generics.GenericStruct$1", function (T) { return {
+    Bridge.define("Generics.GenericStruct$1(T)", function (T) { return {
         instance: Bridge.getDefaultValue(T),
         ctor: function (instance) {
             this.$initialize();
@@ -86,7 +86,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         }
     });
 
-    Bridge.define("Generics.SimpleDoubleGeneric$2", function (T, K) { return {
+    Bridge.define("Generics.SimpleDoubleGeneric$2(T,K)", function (T, K) { return {
         instanceT: Bridge.getDefaultValue(T),
         instanceK: Bridge.getDefaultValue(K),
         ctor: function () {
@@ -105,7 +105,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         }
     }; });
 
-    Bridge.define("Generics.SimpleGeneric$1", function (T) { return {
+    Bridge.define("Generics.SimpleGeneric$1(T)", function (T) { return {
         instance: Bridge.getDefaultValue(T),
         ctor: function (instance) {
             this.$initialize();
@@ -116,7 +116,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         }
     }; });
 
-    Bridge.define("Generics.GenericINamedEntity$1", function (T) { return {
+    Bridge.define("Generics.GenericINamedEntity$1(T)", function (T) { return {
         instance: Bridge.getDefaultValue(T),
         ctor: function (instance) {
             this.$initialize();
@@ -136,7 +136,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         }
     });
 
-    Bridge.define("Generics.GenericNamedEntity$1", function (T) { return {
+    Bridge.define("Generics.GenericNamedEntity$1(T)", function (T) { return {
         instance: Bridge.getDefaultValue(T),
         ctor: function (instance) {
             this.$initialize();

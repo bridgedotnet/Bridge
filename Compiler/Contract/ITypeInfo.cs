@@ -123,7 +123,7 @@ namespace Bridge.Contract
             set;
         }
 
-        string Module
+        Module Module
         {
             get;
             set;

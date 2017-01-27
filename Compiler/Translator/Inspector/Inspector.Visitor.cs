@@ -844,15 +844,70 @@ namespace Bridge.Translator
             if ((name == (Translator.Bridge_ASSEMBLY + ".Module")) ||
                 (resolveResult != null && resolveResult.Type != null && resolveResult.Type.FullName == (Translator.Bridge_ASSEMBLY + ".ModuleAttribute")))
             {
-                if (attr.Arguments.Count > 0)
+                Module module = null;
+
+                if (attr.Arguments.Count == 1)
                 {
-                    object nameObj = this.GetAttributeArgumentValue(attr, resolveResult, 0);
-                    this.AssemblyInfo.Module = nameObj != null ? nameObj.ToString() : "";
+                    var obj = this.GetAttributeArgumentValue(attr, resolveResult, 0);
+
+                    if (obj is bool)
+                    {
+                        module = new Module((bool)obj);
+                    }
+                    else if (obj is string)
+                    {
+                        module = new Module(obj.ToString());
+                    }
+                    else if (obj is int)
+                    {
+                        module = new Module("", (ModuleType)(int)obj);
+                    }
+                    else
+                    {
+                        module = new Module();
+                    }
+                }
+                else if (attr.Arguments.Count == 2)
+                {
+                    var first = this.GetAttributeArgumentValue(attr, resolveResult, 0);
+                    var second = this.GetAttributeArgumentValue(attr, resolveResult, 1);
+
+                    if (first is string)
+                    {
+                        var mname = first;
+                        var preventName = second;
+
+                        module = new Module(mname != null ? mname.ToString() : "", (bool)preventName);
+                    }
+                    else if (second is bool)
+                    {
+                        var mtype = first;
+                        var preventName = second;
+
+                        module = new Module("", (ModuleType)(int)mtype, (bool)preventName);
+                    }
+                    else
+                    {
+                        var mtype = first;
+                        var mname = second;
+
+                        module = new Module(mname != null ? mname.ToString() : "", (ModuleType)(int)mtype);
+                    }
+                }
+                else if (attr.Arguments.Count == 3)
+                {
+                    var mtype = this.GetAttributeArgumentValue(attr, resolveResult, 0);
+                    var mname = this.GetAttributeArgumentValue(attr, resolveResult, 1);
+                    var preventName = this.GetAttributeArgumentValue(attr, resolveResult, 2);
+
+                    module = new Module(mname != null ? mname.ToString() : "", (ModuleType)(int)mtype, (bool)preventName);
                 }
                 else
                 {
-                    this.AssemblyInfo.Module = "";
+                    module = new Module();
                 }
+
+                this.AssemblyInfo.Module = module;
 
                 return true;
             }
