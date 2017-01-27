@@ -7720,7 +7720,7 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
             testNestedTypesNames: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2135).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2135, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "TestNestedTypesNames()",
-                    line: "57"
+                    line: "56"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2135.testNestedTypesNames();
             }
@@ -7744,7 +7744,7 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
             testPropertiesWithNonPrimitiveInitializers: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2137).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2137, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "TestPropertiesWithNonPrimitiveInitializers()",
-                    line: "21"
+                    line: "24"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2137.testPropertiesWithNonPrimitiveInitializers();
             }
@@ -8643,7 +8643,7 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
             testPropertyInitializerWithDirective: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2249).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge2249, void 0, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "TestPropertyInitializerWithDirective()",
-                    line: "19"
+                    line: "20"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2249.testPropertyInitializerWithDirective();
             }
@@ -10500,7 +10500,7 @@ Bridge.assembly("Bridge_ClientTest_Batch3_Tests", function ($asm, globals) {
             testFieldPropertyWithInitializer: function (assert) {
                 var t = Bridge.Test.QUnit.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge706).beforeTest(false, assert, Bridge.Test.QUnit.Bridge_ClientTest_Batch3_Tests_Runner.Bridge_ClientTest_Batch3_BridgeIssues_Bridge706, 1, Bridge.merge(new Bridge.Test.QUnit.TestContext(), {
                     method: "TestFieldPropertyWithInitializer()",
-                    line: "17"
+                    line: "18"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge706.testFieldPropertyWithInitializer();
             }

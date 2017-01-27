@@ -19,7 +19,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
-        [ObjectLiteral]
+        [ObjectLiteral(ObjectCreateMode.Constructor)]
         class Contract : IContract
         {
             public int Value
@@ -28,7 +28,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
-        [ObjectLiteral]
+        [ObjectLiteral(ObjectCreateMode.Constructor)]
         class Contract2 : IContract
         {
             public int Value

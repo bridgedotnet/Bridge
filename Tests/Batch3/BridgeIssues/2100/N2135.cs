@@ -43,7 +43,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             public class Class4_1<T>
             {
-                [ObjectLiteral]
                 public class Config
                 {
                     public string Msg

@@ -11,6 +11,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Mono.Cecil.Rocks;
 using ICustomAttributeProvider = Mono.Cecil.ICustomAttributeProvider;
 
 namespace Bridge.Translator
@@ -55,6 +56,26 @@ namespace Bridge.Translator
             if (this.IsObjectLiteral(type))
             {
                 var objectCreateMode = this.GetObjectCreateMode(type);
+
+                if (objectCreateMode == 0)
+                {
+                    var ctors = type.GetConstructors();
+
+                    foreach (var ctor in ctors)
+                    {
+                        foreach (var parameter in ctor.Parameters)
+                        {
+                            if (parameter.ParameterType.FullName == "Bridge.DefaultValueMode" ||
+                                parameter.ParameterType.FullName == "Bridge.ObjectInitializationMode" ||
+                                parameter.ParameterType.FullName == "Bridge.ObjectCreateMode")
+                            {
+                                continue;
+                            }
+
+                            TranslatorException.Throw("ObjectLiteral classs (plain mode) doesn't support custom constructors with parameters other than with ObjectLiteralAttribute properties: {0}", type);
+                        }
+                    }
+                }
 
                 if (type.IsInterface)
                 {
@@ -540,6 +561,20 @@ namespace Bridge.Translator
 
         public virtual void CheckProperties(TypeDefinition type, ITranslator translator)
         {
+            /*if (type.HasProperties && this.IsObjectLiteral(type))
+            {
+                var objectCreateMode = this.GetObjectCreateMode(type);
+                if (objectCreateMode == 0)
+                {
+                    foreach (PropertyDefinition prop in type.Properties)
+                    {
+                        if ((prop.GetMethod != null && prop.GetMethod.IsVirtual) || (prop.SetMethod != null && prop.SetMethod.IsVirtual))
+                        {
+                            TranslatorException.Throw("ObjectLiteral type doesn't support virtual members: {0}", type);
+                        }
+                    }
+                }
+            }*/
         }
 
         public virtual void CheckEvents(TypeDefinition type, ITranslator translator)
@@ -552,6 +587,8 @@ namespace Bridge.Translator
 
         public virtual void CheckMethods(TypeDefinition type, ITranslator translator)
         {
+            var methodsCount = 0;
+
             foreach (MethodDefinition method in type.Methods)
             {
                 if (method.HasCustomAttributes && method.CustomAttributes.Any(a => a.AttributeType.FullName == "System.Runtime.CompilerServices.CompilerGeneratedAttribute"))
@@ -560,6 +597,21 @@ namespace Bridge.Translator
                 }
 
                 this.CheckMethodArguments(method);
+
+                if (method.IsVirtual && !(method.IsSetter || method.IsGetter))
+                {
+                    methodsCount++;
+                }
+            }
+            
+            if (this.IsObjectLiteral(type) && methodsCount > 0)
+            {
+                var objectCreateMode = this.GetObjectCreateMode(type);
+
+                if (objectCreateMode == 0)
+                {
+                    Bridge.Translator.TranslatorException.Throw("ObjectLiteral doesn't support virtual methods: {0}", type);
+                }
             }
         }
 

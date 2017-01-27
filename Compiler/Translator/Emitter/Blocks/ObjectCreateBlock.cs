@@ -129,7 +129,15 @@ namespace Bridge.Translator
 
             if (inlineCode == null && isPlainObjectCtor && isPlainMode)
             {
-                bool close = isObjectLiteral;
+                this.WriteOpenBrace();
+                this.WriteSpace();
+
+                this.WriteObjectInitializer(objectCreateExpression.Initializer.Elements, type, invocationResolveResult, false);
+
+                this.WriteSpace();
+                this.WriteCloseBrace();
+
+                /*bool close = isObjectLiteral;
                 if (isObjectLiteral)
                 {
                     if (this.Emitter.Validator.IsExternalType(type))
@@ -165,7 +173,7 @@ namespace Bridge.Translator
                 if (close)
                 {
                     this.WriteCloseParentheses();
-                }
+                }*/
             }
             else
             {
