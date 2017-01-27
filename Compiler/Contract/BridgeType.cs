@@ -451,7 +451,7 @@ namespace Bridge.Contract
                             sb.Append("\" + " + JS.Types.Bridge.GET_TYPE_ALIAS + "(");
                         }
 
-                        var typeArgName = BridgeTypes.ToJsName(typeArg, emitter, false, false, true, skipMethodTypeParam);
+                        var typeArgName = BridgeTypes.ToJsName(typeArg, emitter, asDefinition, false, true, skipMethodTypeParam);
 
                         if (!needGet && typeArgName.StartsWith("\""))
                         {
