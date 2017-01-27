@@ -1,7 +1,7 @@
 Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     "use strict";
 
-    Bridge.definei("TypeScript.Issues.N2029Interface$1(T)", function (T) { return {
+    Bridge.definei("TypeScript.Issues.N2029Interface$1", function (T) { return {
         $kind: "interface"
     }; });
 
@@ -18,7 +18,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         }
     });
 
-    Bridge.define("TypeScript.Issues.N2031DictionaryMap$2(T1,T2)", function (T1, T2) { return {
+    Bridge.define("TypeScript.Issues.N2031DictionaryMap$2", function (T1, T2) { return {
         _forward: null,
         _reverse: null,
         config: {
@@ -53,7 +53,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     }
     }; });
 
-    Bridge.define("TypeScript.Issues.N2031DictionaryMap$2.Indexer$2(T1,T2,T3,T4)", function (T1, T2, T3, T4) { return {
+    Bridge.define("TypeScript.Issues.N2031DictionaryMap$2.Indexer$2", function (T1, T2, T3, T4) { return {
         _dictionary: null,
         ctor: function (dictionary) {
             this.$initialize();

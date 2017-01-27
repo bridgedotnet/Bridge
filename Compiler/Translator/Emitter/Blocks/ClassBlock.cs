@@ -119,7 +119,8 @@ namespace Bridge.Translator
 
             if (name.IsEmpty())
             {
-                name = BridgeTypes.ToJsName(this.TypeInfo.Type, this.Emitter, false, nomodule: true);
+                
+                name = BridgeTypes.ToJsName(this.TypeInfo.Type, this.Emitter, asDefinition: true, nomodule: true, ignoreLiteralName: false);
             }
 
             if (typeDef.IsInterface && typeDef.HasGenericParameters)

@@ -77,7 +77,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1000.TestFixture$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1000.TestFixture$1", function (T) { return {
         statics: {
             run: function () {
                 return "Test";
@@ -135,7 +135,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1003$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1003$1", function (T) { return {
         test1: function (list) {
             return System.Linq.Enumerable.from(list).select(function (item) {
                     return Bridge.cast(item, T);
@@ -508,11 +508,11 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
-    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I7$3(T1,T2,T3)", function (T1, T2, T3) { return {
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I7$3", function (T1, T2, T3) { return {
         $kind: "interface"
     }; });
 
-    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I5$1(T)", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I5$1", function (T) { return {
         $kind: "interface"
     }; });
 
@@ -560,7 +560,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         $kind: "interface"
     });
 
-    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I6$1(T)", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I6$1", function (T) { return {
         $kind: "interface"
     }; });
 
@@ -2185,7 +2185,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1176.Item$1(TValue)", function (TValue) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1176.Item$1", function (TValue) { return {
         statics: {
             op_Implicit: function (item) {
                 return "Item";
@@ -2506,7 +2506,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1199.NotWorking$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1199.NotWorking$1", function (T) { return {
         config: {
             events: {
                 IsNotWorking: null
@@ -2784,7 +2784,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1220.Class1$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1220.Class1$1", function (T) { return {
         statics: {
             Const1: 1
         }
@@ -2869,7 +2869,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
     }; });
 
-    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1231.I1$1(T)", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1231.I1$1", function (T) { return {
         $kind: "interface"
     }; });
 
@@ -4110,7 +4110,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1328.Optional2$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1328.Optional2$1", function (T) { return {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1328.Optional2$1(T))(); }
@@ -4118,7 +4118,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         $clone: function (to) { return this; }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1328.Optional3$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1328.Optional3$1", function (T) { return {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1328.Optional3$1(T))(); }
@@ -4545,7 +4545,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.Data$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.Data$1", function (T) { return {
         $kind: "struct",
         statics: {
             array: null,
@@ -4595,7 +4595,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.Data$2(T,K)", function (T, K) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.Data$2", function (T, K) { return {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.Data$2(T,K))(); }
@@ -4627,7 +4627,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.DataClass$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.DataClass$1", function (T) { return {
         value2: Bridge.getDefaultValue(T),
         config: {
             properties: {
@@ -4636,7 +4636,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.DataClass$2(T,K)", function (T, K) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.DataClass$2", function (T, K) { return {
         value2: Bridge.getDefaultValue(K),
         config: {
             properties: {
@@ -4645,7 +4645,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.StaticDataClass$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.StaticDataClass$1", function (T) { return {
         statics: {
             value2: Bridge.getDefaultValue(T),
             config: {
@@ -4656,7 +4656,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.StaticDataClass$2(T,K)", function (T, K) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.StaticDataClass$2", function (T, K) { return {
         statics: {
             value2: Bridge.getDefaultValue(K),
             config: {
@@ -6922,7 +6922,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1518.TestClass$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1518.TestClass$1", function (T) { return {
         value: null,
         config: {
             init: function () {
@@ -7323,7 +7323,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1599.MyEnumerable$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1599.MyEnumerable$1", function (T) { return {
         inherits: [System.Collections.Generic.IEnumerable$1(T)],
         _items: null,
         config: {
@@ -7439,7 +7439,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1653.Table$2(U,V)", function (U, V) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1653.Table$2", function (U, V) { return {
         test: function () {
             var values = System.Array.init([Bridge.getDefaultValue(U)], U);
 
@@ -7489,7 +7489,7 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1684.MessageEditState2");
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1684.Set$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1684.Set$1", function (T) { return {
         statics: {
             _empty: null,
             config: {
@@ -7512,7 +7512,7 @@ Bridge.$N1391Result =                 r;
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1684.PureComponent$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1684.PureComponent$1", function (T) { return {
 
     }; });
 
@@ -7625,7 +7625,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1702.Set$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1702.Set$1", function (T) { return {
         inherits: [System.Collections.Generic.IEnumerable$1(T)],
         statics: {
             _empty: null,
@@ -7681,7 +7681,7 @@ Bridge.$N1391Result =                 r;
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1702.Set$1.Node(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1702.Set$1.Node", function (T) { return {
         count: 0,
         item: Bridge.getDefaultValue(T),
         nextIfAny: null
@@ -8153,7 +8153,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1737.Something$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1737.Something$1", function (T) { return {
 
     }; });
 
@@ -8256,7 +8256,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1767.Base$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1767.Base$1", function (T) { return {
         getItem: function (i) {
             return i;
         },
@@ -8324,11 +8324,11 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.I1$1(T)", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.I1$1", function (T) { return {
         $kind: "interface"
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.List1$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.List1$1", function (T) { return {
         inherits: [System.Collections.Generic.IList$1(T)],
         config: {
             alias: [
@@ -8387,7 +8387,7 @@ Bridge.$N1391Result =                 r;
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.List2$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.List2$1", function (T) { return {
         inherits: [System.Collections.Generic.IList$1(T)],
         config: {
             alias: [
@@ -9180,7 +9180,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1810.C$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1810.C$1", function (T) { return {
         inherits: [System.Collections.Generic.IList$1(T)],
         config: {
             alias: [
@@ -9342,11 +9342,11 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.IBar$1(T)", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.IBar$1", function (T) { return {
         $kind: "interface"
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.TT$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.TT$1", function (T) { return {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.TT$1(T))(); }
@@ -9369,7 +9369,7 @@ Bridge.$N1391Result =                 r;
         $clone: function (to) { return this; }
     }; });
 
-    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.IInterface$1(T)", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.IInterface$1", function (T) { return {
         $kind: "interface"
     }; });
 
@@ -9651,7 +9651,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1850.LookupOptions$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1850.LookupOptions$1", function (T) { return {
         inherits: [System.Collections.Generic.IEnumerable$1(System.Collections.Generic.KeyValuePair$2(T,String))],
         config: {
             alias: [
@@ -9715,7 +9715,7 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852DispatcherMessageExtensions.Class1.Class2.Class3.Class4");
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852Test1$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852Test1$1", function (T) { return {
         statics: {
             test1Method: function () {
             },
@@ -9725,19 +9725,19 @@ Bridge.$N1391Result =                 r;
         field: null
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852Test1$1.Aux1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852Test1$1.Aux1", function (T) { return {
 
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852Test1$1.Aux1.Aux2$1(T,T1)", function (T, T1) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852Test1$1.Aux1.Aux2$1", function (T, T1) { return {
 
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852Test1$1.Aux2$1(T,T1)", function (T, T1) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852Test1$1.Aux2$1", function (T, T1) { return {
 
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852Test1$1.Aux2$1.Aux1(T,T1)", function (T, T1) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852Test1$1.Aux2$1.Aux1", function (T, T1) { return {
 
     }; });
 
@@ -9779,11 +9779,11 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1854.IRead$1(T)", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1854.IRead$1", function (T) { return {
         $kind: "interface"
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1854.UseReader$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1854.UseReader$1", function (T) { return {
         config: {
             properties: {
                 Reader: null,
@@ -9806,7 +9806,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.Collection$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.Collection$1", function (T) { return {
         changed: null,
         getChanged: function () {
             return this.changed || ((this.changed = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.Signal$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.CollectionChangeArgs$1(T)))("Collection<T>.Changed")));
@@ -9815,7 +9815,7 @@ Bridge.$N1391Result =                 r;
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.CollectionChangeArgs$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.CollectionChangeArgs$1", function (T) { return {
 
     }; });
 
@@ -9833,7 +9833,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.IObservable$1(T)", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.IObservable$1", function (T) { return {
         $kind: "interface"
     }; });
 
@@ -9947,7 +9947,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869.Foo$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869.Foo$1", function (T) { return {
 
     }; });
 
@@ -10210,7 +10210,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.MVCArray$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.MVCArray$1", function (T) { return {
         ctor: function () {
             this.$initialize();
         }
@@ -10597,7 +10597,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1910.Item$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1910.Item$1", function (T) { return {
         value: null,
         ctor: function (value) {
             this.$initialize();
@@ -10638,7 +10638,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1911_BaseItem$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1911_BaseItem$1", function (T) { return {
 
     }; });
 
@@ -11208,7 +11208,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1", function (T) { return {
         inherits: function () { return [System.IEquatable$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(T))]; },
         $kind: "struct",
         statics: {
@@ -11271,7 +11271,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2013.IEvGen$1(T)", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2013.IEvGen$1", function (T) { return {
         $kind: "interface"
     }; });
 
@@ -11305,7 +11305,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2019.ISome$1(T)", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2019.ISome$1", function (T) { return {
         $kind: "interface"
     }; });
 
@@ -11844,7 +11844,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079.Result$1(TValue)", function (TValue) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079.Result$1", function (TValue) { return {
 
     }; });
 
@@ -12187,7 +12187,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Object", function (TA) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2106.c1$1", function (TA) { return {
         $literal: true,
         m1: function (TB, p1) {
             return Bridge.getDefaultValue(TB);
@@ -12350,7 +12350,7 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("_Bridge2135_2");
 
-    Bridge.define("_Bridge2135_2.Class2_1$1(T)", function (T) { return {
+    Bridge.define("_Bridge2135_2.Class2_1$1", function (T) { return {
 
     }; });
 
@@ -12364,7 +12364,7 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("_Bridge2135_3");
 
-    Bridge.define("_Bridge2135_3.Config$1(T)", function (T) { return {
+    Bridge.define("_Bridge2135_3.Config$1", function (T) { return {
         config: {
             properties: {
                 Msg: null
@@ -12374,11 +12374,11 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("_Bridge2135_4");
 
-    Bridge.define("_Bridge2135_4.Class4_1$1(T)", function (T) { return {
+    Bridge.define("_Bridge2135_4.Class4_1$1", function (T) { return {
 
     }; });
 
-    Bridge.define("_Bridge2135_4.Class4_1$1.Config(T)", function (T) { return {
+    Bridge.define("_Bridge2135_4.Class4_1$1.Config", function (T) { return {
         config: {
             properties: {
                 Msg: null
@@ -12466,7 +12466,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Elem$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Elem$1", function (T) { return {
         config: {
             properties: {
                 Itms: null
@@ -12478,7 +12478,7 @@ Bridge.$N1391Result =                 r;
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Holder$1(RecordT)", function (RecordT) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Holder$1", function (RecordT) { return {
         _itms: null,
         ctor: function (itms) {
             this.$initialize();
@@ -12505,12 +12505,12 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.ISomeCollection$1(T)", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.ISomeCollection$1", function (T) { return {
         inherits: [System.Collections.Generic.IEnumerable$1(T)],
         $kind: "interface"
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Something$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Something$1", function (T) { return {
         _action: null,
         ctor: function (action) {
             this.$initialize();
@@ -12553,7 +12553,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers2$1(TProps)", function (TProps) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers2$1", function (TProps) { return {
         statics: {
             wrapProps: function (propsIfAny) {
                 return { value: propsIfAny };
@@ -12758,7 +12758,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2159.Base$2(T,U)", function (T, U) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2159.Base$2", function (T, U) { return {
 
     }; });
 
@@ -12777,7 +12777,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2160.Base$2(T,U)", function (T, U) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2160.Base$2", function (T, U) { return {
 
     }; });
 
@@ -12897,7 +12897,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2174.CustomCmp$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2174.CustomCmp$1", function (T) { return {
         inherits: [System.Collections.Generic.IComparer$1(T)],
         config: {
             alias: [
@@ -12909,7 +12909,7 @@ Bridge.$N1391Result =                 r;
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2174.WrappingCmp$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2174.WrappingCmp$1", function (T) { return {
         inherits: [System.Collections.Generic.IComparer$1(T)],
         _wrapped: null,
         config: {
@@ -13240,7 +13240,7 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210.Agent_Logic");
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210.GoSington$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210.GoSington$1", function (T) { return {
         statics: {
             instance: null,
             getInstance: function () {
@@ -13252,7 +13252,7 @@ Bridge.$N1391Result =                 r;
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210.ObjSingleton$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210.ObjSingleton$1", function (T) { return {
         statics: {
             instance: null,
             getInstance: function () {
@@ -13667,7 +13667,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge306Component$1(TProps)", function (TProps) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge306Component$1", function (TProps) { return {
         statics: {
             new: function (TComponent, props) {
                 return System.String.concat(Bridge.Reflection.getTypeFullName(Bridge.getType(props, TProps)), ":", props);
@@ -16150,7 +16150,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge607A$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge607A$1", function (T) { return {
         inherits: function () { return [System.IEquatable$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge607A$1(T))]; },
         config: {
             alias: [
@@ -16418,31 +16418,31 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1", function (T) { return {
 
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested", function (T) { return {
 
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested.SubNested(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested.SubNested", function (T) { return {
 
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested.SubNested$1(T,T1)", function (T, T1) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested.SubNested$1", function (T, T1) { return {
 
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested$1(T,T1)", function (T, T1) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested$1", function (T, T1) { return {
 
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested$1.SubNested(T,T1)", function (T, T1) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested$1.SubNested", function (T, T1) { return {
 
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested$1.SubNested$1(T,T1,T2)", function (T, T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested$1.SubNested$1", function (T, T1, T2) { return {
 
     }; });
 
@@ -16480,19 +16480,19 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested.SubNested");
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested.SubNested$1(T1)", function (T1) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested.SubNested$1", function (T1) { return {
 
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested$1(T1)", function (T1) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested$1", function (T1) { return {
 
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested$1.SubNested(T1)", function (T1) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested$1.SubNested", function (T1) { return {
 
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested$1.SubNested$1(T1,T2)", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634C.Nested$1.SubNested$1", function (T1, T2) { return {
 
     }; });
 
@@ -16603,7 +16603,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge652.Bridge652C$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge652.Bridge652C$1", function (T) { return {
         bar: Bridge.getDefaultValue(T),
         ctor: function () {
             this.$initialize();
@@ -16627,7 +16627,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge652.Bridge652D$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge652.Bridge652D$1", function (T) { return {
         bar: Bridge.getDefaultValue(T),
         ctor: function () {
             this.$initialize();
@@ -16744,7 +16744,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge660Optional$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge660Optional$1", function (T) { return {
         $kind: "struct",
         statics: {
             config: {
@@ -17504,7 +17504,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge693A$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge693A$1", function (T) { return {
         ctor: function (props) {
             this.$initialize();
         }
@@ -21246,7 +21246,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C11$3(T1,T2,T3)", function (T1, T2, T3) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C11$3", function (T1, T2, T3) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I7$3(T1,T2,T3)],
         config: {
             alias: [
@@ -21258,7 +21258,7 @@ Bridge.$N1391Result =                 r;
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C12$3(T1,T2,T3)", function (T1, T2, T3) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C12$3", function (T1, T2, T3) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I7$3(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I5$1(T1),Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I5$1(T2),Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I5$1(T3))],
         config: {
             alias: [
@@ -21270,7 +21270,7 @@ Bridge.$N1391Result =                 r;
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C13$3(T1,T2,T3)", function (T1, T2, T3) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C13$3", function (T1, T2, T3) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I7$3(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I5$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I5$1(T1)),Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I5$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I5$1(T2)),Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I5$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I5$1(T3)))],
         config: {
             alias: [
@@ -21317,7 +21317,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I9$1(T)", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I9$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I8],
         $kind: "interface"
     }; });
@@ -21431,7 +21431,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C9$2(T1,T2)", function (T1, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C9$2", function (T1, T2) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I5$1(T1),Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I6$1(T2)],
         flag: null,
         config: {
@@ -21450,7 +21450,7 @@ Bridge.$N1391Result =                 r;
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1071.A$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1071.A$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1071.A],
         ctor: function (b) {
             this.$initialize();
@@ -21458,7 +21458,7 @@ Bridge.$N1391Result =                 r;
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1071.A$2(T,T2)", function (T, T2) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1071.A$2", function (T, T2) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1071.A],
         ctor: function (b) {
             this.$initialize();
@@ -21529,11 +21529,11 @@ Bridge.$N1391Result =                 r;
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1339.FooBase]
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.DataClass1$2(T,K)", function (T, K) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.DataClass1$2", function (T, K) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.DataClass$2(T,K)]
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.StaticDataClass1$2(T,K)", function (T, K) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.StaticDataClass1$2", function (T, K) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.StaticDataClass$2(T,K)]
     }; });
 
@@ -21583,7 +21583,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.C1$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.C1$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.I1$1(T)],
         config: {
             alias: [
@@ -21606,7 +21606,7 @@ Bridge.$N1391Result =                 r;
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.C2$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.C2$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.I1$1(T)],
         config: {
             alias: [
@@ -21629,7 +21629,7 @@ Bridge.$N1391Result =                 r;
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.Bar$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.Bar$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.IBar$1(T)],
         v: Bridge.getDefaultValue(T),
         config: {
@@ -21646,12 +21646,12 @@ Bridge.$N1391Result =                 r;
         }
     }; });
 
-    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.IClass$1(T)", function (T) { return {
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.IClass$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.IInterface$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.TT$1(T))],
         $kind: "interface"
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1834.Test1$1(TValues)", function (TValues) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1834.Test1$1", function (TValues) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1834.ITest1$1],
         config: {
             alias: [
@@ -21674,7 +21674,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1854.SomeReader$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1854.SomeReader$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1854.IRead$1(T),Object(T)],
         _param: null,
         config: {
@@ -21692,7 +21692,7 @@ Bridge.$N1391Result =                 r;
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.Signal$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.Signal$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.IObservable$1(T)],
         config: {
             alias: [
@@ -21777,7 +21777,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1911_DerivedItem$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1911_DerivedItem$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1911_BaseItem$1(T)],
         statics: {
             getValue: function (T1) {
@@ -21795,7 +21795,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2013.EvGen$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2013.EvGen$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2013.IEvGen$1(T)],
         config: {
             events: {
@@ -21811,7 +21811,7 @@ Bridge.$N1391Result =                 r;
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2019.Some$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2019.Some$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2019.ISome$1(T)],
         config: {
             properties: {
@@ -21851,7 +21851,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.SomeCollection$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.SomeCollection$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.ISomeCollection$1(T)],
         _items: null,
         config: {
@@ -21878,11 +21878,11 @@ Bridge.$N1391Result =                 r;
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2159.Derived$1(V)", function (V) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2159.Derived$1", function (V) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2159.Base$2(System.Int32,String)]
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2160.Derived$1(V)", function (V) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2160.Derived$1", function (V) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2160.Base$2(System.Int32,String)]
     }; });
 
@@ -22122,15 +22122,15 @@ Bridge.$N1391Result =                 r;
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1339.Foo1]
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.DataClass2$2(T,K)", function (T, K) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.DataClass2$2", function (T, K) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.DataClass1$2(System.Int32,String)]
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.StaticDataClass2$2(T,K)", function (T, K) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.StaticDataClass2$2", function (T, K) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.StaticDataClass1$2(System.Int32,String)]
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.CClass$1(T)", function (T) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.CClass$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.IClass$1(T)],
         config: {
             alias: [
@@ -22193,7 +22193,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.DataClass3$2(T,K)", function (T, K) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.DataClass3$2", function (T, K) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.DataClass2$2(System.Int32,String)],
         value4: Bridge.getDefaultValue(K),
         config: {
@@ -22203,7 +22203,7 @@ Bridge.$N1391Result =                 r;
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.StaticDataClass3$2(T,K)", function (T, K) { return {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.StaticDataClass3$2", function (T, K) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340.StaticDataClass2$2(System.Int32,String)],
         statics: {
             value4: Bridge.getDefaultValue(K),
