@@ -314,7 +314,7 @@ namespace System
         [NonScriptable]
         public static extern Type GetTypeFromHandle(RuntimeTypeHandle typeHandle);
 
-        [Obsolete]
+        [Obsolete("Use FullName. See Issue #1749 for more information.", true)]
         [Template("Bridge.getTypeName({this})")]
         public override extern string GetClassName();
 

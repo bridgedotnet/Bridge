@@ -6,7 +6,7 @@ namespace Bridge
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
-    [Obsolete("Please use Union class")]
+    [Obsolete("Use Union class. See Issue #1977 for more information.", true)]
     public class Any<T1, T2>
     {
         protected extern Any();
@@ -28,7 +28,7 @@ namespace Bridge
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
-    [Obsolete("Please use Union class")]
+    [Obsolete("Use Union class. See Issue #1977 for more information.", true)]
     public class Any<T1, T2, T3>
     {
         protected extern Any();
@@ -54,7 +54,7 @@ namespace Bridge
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
-    [Obsolete("Please use Union class")]
+    [Obsolete("Use Union class. See Issue #1977 for more information.", true)]
     public class Any<T1, T2, T3, T4>
     {
         protected extern Any();
@@ -84,7 +84,7 @@ namespace Bridge
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
-    [Obsolete("Please use Union class")]
+    [Obsolete("Use Union class. See Issue #1977 for more information.", true)]
     public class Any<T1, T2, T3, T4, T5>
     {
         protected extern Any();
@@ -118,7 +118,7 @@ namespace Bridge
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
-    [Obsolete("Please use Union class")]
+    [Obsolete("Use Union class. See Issue #1977 for more information.", true)]
     public class Any<T1, T2, T3, T4, T5, T6>
     {
         protected extern Any();
@@ -156,7 +156,7 @@ namespace Bridge
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
-    [Obsolete("Please use Union class")]
+    [Obsolete("Use Union class. See Issue #1977 for more information.", true)]
     public class Any<T1, T2, T3, T4, T5, T6, T7>
     {
         protected extern Any();
@@ -198,7 +198,7 @@ namespace Bridge
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
-    [Obsolete("Please use Union class")]
+    [Obsolete("Use Union class. See Issue #1977 for more information.", true)]
     public class Any<T1, T2, T3, T4, T5, T6, T7, T8>
     {
         protected extern Any();
