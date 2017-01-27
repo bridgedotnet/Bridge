@@ -1,7 +1,4 @@
     Bridge.define("System.Text.RegularExpressions.Regex", {
-        statics: {
-
-        },
         config: {
             properties: {
                 MatchTimeout: null,

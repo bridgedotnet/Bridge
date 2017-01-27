@@ -39,7 +39,7 @@ namespace Bridge.Contract
             get; set;
         }
 
-        string Module
+        Module Module
         {
             get; set;
         }
@@ -179,6 +179,11 @@ namespace Bridge.Contract
         }
 
         ResourceConfig Resources
+        {
+            get; set;
+        }
+
+        IModuleLoader Loader
         {
             get; set;
         }

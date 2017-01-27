@@ -59,7 +59,7 @@ namespace System
         [Template("{this}")]
         public virtual extern dynamic ToDynamic();
 
-        [Obsolete]
+        [Obsolete("Please use typeof(<object>).FullName or <object>.GetType().FullName. See Issue #1749 for more information.", true)]
         [Template("Bridge.getTypeName(Bridge.getType({this}))")]
         public virtual extern string GetClassName();
     }
