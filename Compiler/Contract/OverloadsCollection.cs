@@ -69,15 +69,15 @@ namespace Bridge.Contract
             return new OverloadsCollection(emitter, constructorDeclaration);
         }
 
-        public static OverloadsCollection Create(IEmitter emitter, PropertyDeclaration propDeclaration, bool isSetter = false)
+        public static OverloadsCollection Create(IEmitter emitter, PropertyDeclaration propDeclaration, bool isSetter = false, bool isField = false)
         {
             var key = new Tuple<AstNode, bool>(propDeclaration, isSetter);
-            if (emitter.OverloadsCacheNodes.ContainsKey(key))
+            if (!isField && emitter.OverloadsCacheNodes.ContainsKey(key))
             {
                 return emitter.OverloadsCacheNodes[key];
             }
 
-            return new OverloadsCollection(emitter, propDeclaration, isSetter);
+            return new OverloadsCollection(emitter, propDeclaration, isSetter, isField);
         }
 
         public static OverloadsCollection Create(IEmitter emitter, IndexerDeclaration indexerDeclaration, bool isSetter = false)
@@ -281,9 +281,10 @@ namespace Bridge.Contract
             this.Emitter.OverloadsCacheNodes[new Tuple<AstNode, bool>(constructorDeclaration, false)] = this;
         }
 
-        private OverloadsCollection(IEmitter emitter, PropertyDeclaration propDeclaration, bool isSetter)
+        private OverloadsCollection(IEmitter emitter, PropertyDeclaration propDeclaration, bool isSetter, bool isField)
         {
             this.Emitter = emitter;
+            this.IsField = isField;
             this.Name = propDeclaration.Name;
             this.JsName = Helpers.GetPropertyRef(propDeclaration, emitter, isSetter, true, true);
             this.AltJsName = Helpers.GetPropertyRef(propDeclaration, emitter, !isSetter, true, true);
@@ -332,7 +333,7 @@ namespace Bridge.Contract
             this.Emitter.OverloadsCacheNodes[new Tuple<AstNode, bool>(operatorDeclaration, false)] = this;
         }
 
-        private OverloadsCollection(IEmitter emitter, IMember member, bool isSetter = false, bool includeInline = false)
+        private OverloadsCollection(IEmitter emitter, IMember member, bool isSetter = false, bool includeInline = false, bool isField = false)
         {
             if (member is IMethod)
             {
@@ -350,6 +351,7 @@ namespace Bridge.Contract
 
             this.Emitter = emitter;
             this.Name = member.Name;
+            this.IsField = isField;
 
             if (member is IProperty)
             {
@@ -378,6 +380,12 @@ namespace Bridge.Contract
             this.IsSetter = isSetter;
             this.InitMembers();
             this.Emitter.OverloadsCacheMembers[new Tuple<IMember, bool, bool>(member, isSetter, includeInline)] = this;
+        }
+
+        public bool IsField
+        {
+            get;
+            set;
         }
 
         public List<IMethod> Methods
@@ -1042,7 +1050,7 @@ namespace Bridge.Contract
 
             var attr = Helpers.GetInheritedAttribute(definition, "Bridge.NameAttribute");
 
-            if (attr == null && definition is IProperty)
+            if (attr == null && definition is IProperty && !IsField)
             {
                 var prop = (IProperty)definition;
                 var acceessor = this.IsSetter ? prop.Setter : prop.Getter;
@@ -1061,7 +1069,10 @@ namespace Bridge.Contract
                     name = value.ToString();
                 }
 
-                prefix = null;
+                if (!(definition is IProperty || definition is IEvent))
+                {
+                    prefix = null;
+                }
             }
 
             if (attr != null && definition.ImplementedInterfaceMembers.Count > 0)

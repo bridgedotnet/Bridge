@@ -13619,6 +13619,43 @@ Bridge.$N1391Result =                 r;
 
     }; });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2284", {
+        statics: {
+            testNameAttrOnProperty: function () {
+                var p = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2284.Person();
+                var v = null;
+
+                p.setNAME("Frank");
+                v = p.getNAME();
+                Bridge.Test.Assert.areEqual("Frank", v);
+                p.setNAME("John");
+                Bridge.Test.Assert.areEqual("John", p.getNAME());
+
+                p.setN2("Frank");
+                v = p.getN2();
+                Bridge.Test.Assert.areEqual("Frank", v);
+                p.setN2("John");
+                Bridge.Test.Assert.areEqual("John", p.getN2());
+
+                p.nm3("Frank");
+                v = p.nm3();
+                Bridge.Test.Assert.areEqual("Frank", v);
+                p.nm3("John");
+                Bridge.Test.Assert.areEqual("John", p.nm3());
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2284.Person", {
+        config: {
+            properties: {
+                NAME: null,
+                Name2: { getter:'getN2', setter: 'setN2', value: null },
+                Name3: { getter:'nm3', setter: 'nm3', value: null }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {

@@ -107,39 +107,77 @@
         },
 
         property: function (scope, name, v, statics) {
+            var getName,
+                setName,
+                cfg = null;
+
+            if (v && Bridge.isDefined(v.value) && (v.setter || v.getter)) {
+                getName = v.getter;
+                setName = v.setter;
+                cfg = v;
+                v = v.value;
+            }
+
             scope[name] = v;
 
             var rs = name.charAt(0) === "$",
                 cap = rs ? name.slice(1) : name,
-                getName = "get" + cap,
-                setName = "set" + cap,
                 lastSep = name.lastIndexOf("$"),
                 endsNum = lastSep > 0 && ((name.length - lastSep - 1) > 0) && !isNaN(parseInt(name.substr(lastSep + 1)));
+
+            if (!cfg || !cfg.getter) {
+                getName = "get" + cap;
+            }
+
+            if (!cfg || !cfg.setter) {
+                setName = "set" + cap;
+            }
 
             if (endsNum) {
                 lastSep = name.substring(0, lastSep - 1).lastIndexOf("$");
             }
 
             if (lastSep > 0 && lastSep !== (name.length - 1)) {
-                getName = name.substring(0, lastSep) + "get" + name.substr(lastSep + 1);
-                setName = name.substring(0, lastSep) + "set" + name.substr(lastSep + 1);
+                if (!cfg || !cfg.getter) {
+                    getName = name.substring(0, lastSep) + "get" + name.substr(lastSep + 1);
+                }
+
+                if (!cfg || !cfg.setter) {
+                    setName = name.substring(0, lastSep) + "set" + name.substr(lastSep + 1);
+                }
             }
 
-            scope[getName] = (function (name, scope, statics) {
-                return statics ? function () {
-                    return scope[name];
-                } : function () {
-                    return this[name];
-                };
-            })(name, scope, statics);
+            if (getName === setName) {
+                scope[getName] = (function (name, scope, statics) {
+                    return statics ? function (value) {
+                        if (arguments.length === 0) {
+                            return scope[name];
+                        }
+                        scope[name] = value;
+                    } : function (value) {
+                        if (arguments.length === 0) {
+                            return this[name];
+                        }
+                        this[name] = value;
+                    };
+                })(name, scope, statics);
+            } else {
+                scope[getName] = (function (name, scope, statics) {
+                    return statics ? function () {
+                        return scope[name];
+                    } : function () {
+                        return this[name];
+                    };
+                })(name, scope, statics);
 
-            scope[setName] = (function (name, scope, statics) {
-                return statics ? function (value) {
-                    scope[name] = value;
-                } : function (value) {
-                    this[name] = value;
-                };
-            })(name, scope, statics);
+                scope[setName] = (function (name, scope, statics) {
+                    return statics ? function (value) {
+                        scope[name] = value;
+                    } : function (value) {
+                        this[name] = value;
+                    };
+                })(name, scope, statics);
+            }
         },
 
         event: function (scope, name, v, statics) {
