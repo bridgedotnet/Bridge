@@ -91,7 +91,6 @@
     <Compile Include="Bridge\ObjectLiteral.cs" />
     <Compile Include="Bridge\Any.cs" />
     <Compile Include="Bridge\Intersection.cs" />
-    <Compile Include="Bridge\Module.cs" />
     <Compile Include="Bridge\Sequence.cs" />
     <Compile Include="Bridge\Utils\SystemAssembly.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -777,6 +776,7 @@
     <Content Include="Resources\Convert.js" />
     <Content Include="Resources\Enum.js" />
     <Content Include="Resources\.lib\LongLib.js" />
+    <Content Include="Resources\Generator.js" />
     <Content Include="Resources\Long.js" />
     <Content Include="Resources\Math.js" />
     <Content Include="Resources\ReflectionAssembly.js" />
