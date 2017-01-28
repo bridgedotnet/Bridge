@@ -146,6 +146,7 @@
     <Compile Include="Emitter\Blocks\ConstructorBlock.Events.cs" />
     <Compile Include="Emitter\Blocks\EmitBlock.cs" />
     <Compile Include="Emitter\Blocks\AttributeCreateBlock.cs" />
+    <Compile Include="Emitter\Blocks\GeneratorBlock.cs" />
     <Compile Include="Emitter\Blocks\TypeOfExpressionBlock.cs" />
     <Compile Include="Emitter\Blocks\UsingBlock.cs" />
     <Compile Include="Emitter\Blocks\YieldBlock.cs" />
