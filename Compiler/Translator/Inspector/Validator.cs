@@ -67,7 +67,7 @@ namespace Bridge.Translator
                         {
                             if (parameter.ParameterType.FullName == "Bridge.ObjectCreateMode")
                             {
-                                TranslatorException.Throw("ObjectLiteral classs (plain mode) doesn't support Bridge.ObjectCreateMode parameter in a custom constructor: {0}", type);
+                                TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_NO_CREATE_MODE_CUSTOM_CONSTRUCTOR, type);
                             }
 
                             if (parameter.ParameterType.FullName == "Bridge.DefaultValueMode" ||
@@ -76,7 +76,7 @@ namespace Bridge.Translator
                                 continue;
                             }
 
-                            TranslatorException.Throw("ObjectLiteral classs (plain mode) doesn't support custom constructors with parameters other than with ObjectLiteralAttribute properties: {0}", type);
+                            TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_CUSTOM_CONSTRUCTOR, type);
                         }
                     }
                 }
@@ -85,13 +85,12 @@ namespace Bridge.Translator
                 {
                     if (type.HasMethods && type.Methods.GroupBy(m => m.Name).Any(g => g.Count() > 1))
                     {
-                        TranslatorException.Throw("ObjectLiteral interface doesn't support overloaded methods: {0}",
-                            type);
+                        TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_OVERLOAD_METHODS, type);
                     }
 
                     if (type.HasEvents)
                     {
-                        TranslatorException.Throw("ObjectLiteral interface doesn't support events: {0}", type);
+                        TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EVENTS, type);
                     }
                 }
                 else
@@ -99,7 +98,7 @@ namespace Bridge.Translator
                     if (type.Methods.Any(m => !m.IsRuntimeSpecialName && m.Name.Contains(".")) ||
                         type.Properties.Any(m => !m.IsRuntimeSpecialName && m.Name.Contains(".")))
                     {
-                        TranslatorException.Throw("ObjectLiteral doesn't support explicit interface member implementation: {0}", type);
+                        TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EXPLICIT_IMPLIMENTATION, type);
                     }
                 }
 
@@ -117,12 +116,12 @@ namespace Bridge.Translator
 
                     if (objectCreateMode == 1 && baseType != null && baseType.FullName != "System.Object" && this.GetObjectCreateMode(baseType) == 0)
                     {
-                        TranslatorException.Throw("[ObjectLiteral] with Constructor mode should be inherited from class with same options: {0}", type);
+                        TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_CONSTRUCTOR_INHERITANCE, type);
                     }
 
                     if (objectCreateMode == 0 && baseType != null && this.GetObjectCreateMode(baseType) == 1)
                     {
-                        TranslatorException.Throw("[ObjectLiteral] with Plain mode cannot be inherited from [ObjectLiteral] with Constructor mode: {0}", type);
+                        TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_INHERITANCE, type);
                     }
                 }
 
@@ -142,7 +141,7 @@ namespace Bridge.Translator
 
                         if (iDef != null && iDef.FullName != "System.Object" && !this.IsObjectLiteral(iDef))
                         {
-                            TranslatorException.Throw("[ObjectLiteral] should implement an interface which must be object literal also: {0}", type);
+                            TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_INHERITANCE, type);
                         }
                     }
                 }
@@ -574,7 +573,7 @@ namespace Bridge.Translator
                     {
                         if ((prop.GetMethod != null && prop.GetMethod.IsVirtual) || (prop.SetMethod != null && prop.SetMethod.IsVirtual))
                         {
-                            TranslatorException.Throw("ObjectLiteral type doesn't support virtual members: {0}", type);
+                            TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_NO_VIRTUAL_METHODS, type);
                         }
                     }
                 }
@@ -585,7 +584,7 @@ namespace Bridge.Translator
         {
             if (type.HasEvents && this.IsObjectLiteral(type))
             {
-                TranslatorException.Throw("ObjectLiteral type doesn't support events: {0}", type);
+                TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EVENTS, type);
             }
         }
 
@@ -607,14 +606,14 @@ namespace Bridge.Translator
                     methodsCount++;
                 }
             }
-            
+
             if (this.IsObjectLiteral(type) && methodsCount > 0)
             {
                 var objectCreateMode = this.GetObjectCreateMode(type);
 
                 if (objectCreateMode == 0)
                 {
-                    Bridge.Translator.TranslatorException.Throw("ObjectLiteral doesn't support virtual methods: {0}", type);
+                    Bridge.Translator.TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_NO_VIRTUAL_METHODS, type);
                 }
             }
         }
