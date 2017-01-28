@@ -269,7 +269,7 @@ namespace Bridge.Translator
             set;
         }
 
-        public string Module
+        public Module Module
         {
             get;
             set;

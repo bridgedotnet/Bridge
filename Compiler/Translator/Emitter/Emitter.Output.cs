@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Bridge.Contract;
 
 namespace Bridge.Translator
 {
@@ -97,8 +98,6 @@ namespace Bridge.Translator
 
                 bool isJs = fileHelper.IsJS(fileName);
 
-                OutputModule(output);
-
                 var tmp = new StringBuilder(output.TopOutput.Length + output.BottomOutput.Length + output.NonModuletOutput.Length + 1000);
 
                 OutputTop(output, tmp);
@@ -169,14 +168,6 @@ namespace Bridge.Translator
             this.AssemblyJsDocWritten = true;
         }
 
-        private void OutputModule(Contract.IEmitterOutput output)
-        {
-            foreach (var moduleOutput in output.ModuleOutput)
-            {
-                WriteNewLine(output.NonModuletOutput, moduleOutput.Value.ToString());
-            }
-        }
-
         private void OutputTop(Contract.IEmitterOutput output, StringBuilder tmp)
         {
             if (output.TopOutput.Length > 0)
@@ -191,8 +182,9 @@ namespace Bridge.Translator
             bool metaDataWritten = false;
 
             var level = this.InitialLevel;
+            StringBuilder endOutput = new StringBuilder();
 
-            if (output.NonModuletOutput.Length > 0)
+            if (output.NonModuletOutput.Length > 0 || output.ModuleOutput.Count > 0)
             {
                 if (isJs)
                 {
@@ -230,11 +222,34 @@ namespace Bridge.Translator
                         WriteNewLine(tmp);
                         WriteNewLine(tmp);
                     }
+
+                    level = this.AddDependencies(level, output, tmp, endOutput);
                 }
 
                 var code = output.NonModuletOutput.ToString();
 
-                tmp.Append(code);
+                if (code.Length > 0)
+                {
+                    tmp.Append(level > this.InitialLevel ? Emitter.INDENT + code.Replace(Emitter.NEW_LINE, Emitter.NEW_LINE + Emitter.INDENT) : code);
+                }
+
+                if (endOutput.Length > 0)
+                {
+                    tmp.Append(endOutput.ToString());
+                }
+
+                if (output.ModuleOutput.Any())
+                {
+                    if (code.Length > 0)
+                    {
+                        this.WriteNewLine(tmp);
+                    }
+
+                    foreach (var moduleOutput in output.ModuleOutput)
+                    {
+                        WriteNewLine(tmp, moduleOutput.Value.ToString());
+                    }
+                }
 
                 if (isJs && !disableAsm)
                 {
@@ -244,6 +259,100 @@ namespace Bridge.Translator
             }
 
             return metaDataWritten;
+        }
+
+        private int AddDependencies(int level, Contract.IEmitterOutput output, StringBuilder tmp, StringBuilder endOutput)
+        {
+            var loader = this.AssemblyInfo.Loader;
+            var dependencies = output.NonModuleDependencies;
+            if (dependencies != null && dependencies.Count > 0)
+            {
+                var disabledDependecies = dependencies.Where(d => loader.IsManual(d.DependencyName)).ToList();
+                dependencies = dependencies.Where(d => !loader.IsManual(d.DependencyName)).ToList();
+
+                if (disabledDependecies.Count > 0 && !loader.SkipManualVariables)
+                {
+                    this.WriteIndent(tmp, level);
+                    this.Write(tmp, "var ");
+                    for (int i = 0; i < disabledDependecies.Count; i++)
+                    {
+                        var d = disabledDependecies[i];
+                        if (i != 0)
+                        {
+                            this.WriteIndent(tmp, level + 1);
+                        }
+
+                        this.Write(tmp, d.VariableName.IsNotEmpty() ? d.VariableName : d.DependencyName);
+                        this.Write(tmp, i == (disabledDependecies.Count - 1) ? ";" : ",");
+                        this.WriteNewLine(tmp);
+                    }
+
+                    this.WriteNewLine(tmp);
+                }
+
+                var type = loader.Type;
+                var amd = dependencies.Where(d => d.Type == ModuleType.AMD || ((d.Type == null || d.Type == ModuleType.UMD) && type == ModuleLoaderType.AMD)).ToList();
+                var cjs = dependencies.Where(d => d.Type == ModuleType.CommonJS || ((d.Type == null || d.Type == ModuleType.UMD) && type == ModuleLoaderType.CommonJS)).ToList();
+                var es6 = dependencies.Where(d => d.Type == ModuleType.ES6 || (d.Type == null && type == ModuleLoaderType.ES6)).ToList();
+
+                if (amd.Count > 0)
+                {
+                    this.WriteIndent(tmp, level);
+                    tmp.Append(loader.FunctionName ?? "require");
+                    tmp.Append("([");
+
+                    amd.Each(md =>
+                    {
+                        tmp.Append(this.ToJavaScript(md.DependencyName));
+                        tmp.Append(",");
+                    });
+                    tmp.Remove(tmp.Length - 1, 1); // remove trailing comma
+                    tmp.Append("], function (");
+
+                    amd.Each(md =>
+                    {
+                        tmp.Append(md.VariableName.IsNotEmpty() ? md.VariableName : md.DependencyName);
+                        tmp.Append(",");
+                    });
+                    tmp.Remove(tmp.Length - 1, 1); // remove trailing comma
+
+                    this.WriteNewLine(tmp, ") {");
+
+                    this.WriteIndent(endOutput, level);
+                    this.WriteNewLine(endOutput, JS.Types.Bridge.INIT + "();");
+                    this.WriteIndent(endOutput, level);
+                    this.WriteNewLine(endOutput, "});");
+                    level++;
+                }
+
+                if (cjs.Count > 0)
+                {
+                    cjs.Each(md =>
+                    {
+                        this.WriteIndent(tmp, level);
+                        tmp.AppendFormat("var {0} = require('{1}');", md.VariableName.IsNotEmpty() ? md.VariableName : md.DependencyName, md.DependencyName);
+                        this.WriteNewLine(tmp);
+                    });
+
+                    if (es6.Count == 0)
+                    {
+                        this.WriteNewLine(tmp);
+                    }
+                }
+
+                if (es6.Count > 0)
+                {
+                    es6.Each(md =>
+                    {
+                        this.WriteIndent(tmp, level);
+                        this.WriteNewLine(tmp, "import " + (md.VariableName.IsNotEmpty() ? md.VariableName : md.DependencyName) + " from " + this.ToJavaScript(md.DependencyName) + ";");
+                    });
+
+                    this.WriteNewLine(tmp);
+                }
+            }
+
+            return level;
         }
 
         private void OutputBottom(Contract.IEmitterOutput output, StringBuilder tmp)
@@ -286,78 +395,6 @@ namespace Bridge.Translator
             }
 
             return "\"use strict\";";
-        }
-
-        protected virtual void WrapToModules()
-        {
-            this.Log.Trace("Wrapping to modules...");
-
-            foreach (var outputPair in this.Outputs)
-            {
-                var output = outputPair.Value;
-
-                foreach (var moduleOutputPair in output.ModuleOutput)
-                {
-                    var moduleName = moduleOutputPair.Key;
-                    var moduleOutput = moduleOutputPair.Value;
-
-                    this.Log.Trace("Module " + (moduleName ?? "") + " ...");
-
-                    AbstractEmitterBlock.RemovePenultimateEmptyLines(moduleOutput, true);
-                    var str = moduleOutput.ToString();
-                    moduleOutput.Length = 0;
-
-                    moduleOutput.Append(JS.Funcs.DEFINE + "(");
-
-                    if (moduleName != Bridge.Translator.AssemblyInfo.DEFAULT_FILENAME)
-                    {
-                        moduleOutput.Append(this.ToJavaScript(moduleName));
-                        moduleOutput.Append(", ");
-                    }
-
-                    moduleOutput.Append("[\"bridge\",");
-                    if (output.ModuleDependencies.ContainsKey(moduleName) && output.ModuleDependencies[moduleName].Count > 0)
-                    {
-                        output.ModuleDependencies[moduleName].Each(md =>
-                        {
-                            moduleOutput.Append(this.ToJavaScript(md.DependencyName));
-                            moduleOutput.Append(",");
-                        });
-                    }
-                    moduleOutput.Remove(moduleOutput.Length - 1, 1); // remove trailing comma
-                    moduleOutput.Append("], ");
-
-                    moduleOutput.Append("function (_");
-
-                    if (output.ModuleDependencies.ContainsKey(moduleName) && output.ModuleDependencies[moduleName].Count > 0)
-                    {
-                        moduleOutput.Append(", ");
-                        output.ModuleDependencies[moduleName].Each(md =>
-                        {
-                            moduleOutput.Append(md.VariableName.IsNotEmpty() ? md.VariableName : md.DependencyName);
-                            moduleOutput.Append(",");
-                        });
-                        moduleOutput.Remove(moduleOutput.Length - 1, 1); // remove trailing comma
-                    }
-
-                    WriteNewLine(moduleOutput, ") {");
-
-                    string indent = str.StartsWith(INDENT) ? "" : INDENT;
-                    moduleOutput.Append(INDENT);
-                    WriteNewLine(moduleOutput, "var " + JS.Vars.EXPORTS + " = { };");
-                    moduleOutput.Append(indent + str.Replace(NEW_LINE, NEW_LINE + indent));
-
-                    if (!str.Trim().EndsWith(NEW_LINE))
-                    {
-                        WriteNewLine(moduleOutput);
-                    }
-
-                    WriteNewLine(moduleOutput, INDENT + "return " + JS.Vars.EXPORTS + ";");
-                    WriteNewLine(moduleOutput, "});");
-                }
-            }
-
-            this.Log.Trace("Wrapping to modules done");
         }
     }
 }
