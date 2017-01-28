@@ -13569,6 +13569,61 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278", {
+        statics: {
+            testGenericInterface: function () {
+                var itemString = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278.Item$1(String))();
+                var s = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278.Something$1(String))();
+
+                Bridge.Test.Assert.areEqual(itemString, s.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$ISomething$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$Item$1$String$doSomething(itemString));
+
+                var itemLong = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278.Item$1(System.Int64))();
+                var sLong = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278.Something$1(System.Int64))();
+
+                Bridge.Test.Assert.areEqual(itemLong, sLong.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$ISomething$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$Item$1$System$Int64$doSomething(itemLong));
+
+                var itemDecimal = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278.Item$1(System.Decimal))();
+                var sDecimal = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278.Something$1(System.Decimal))();
+
+                Bridge.Test.Assert.areEqual(itemDecimal, sDecimal.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$ISomething$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$Item$1$System$Decimal$doSomething(itemDecimal));
+            }
+        }
+    });
+
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278.ISomething$1", function (T) { return {
+        $kind: "interface"
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278.Item$1", function (T) { return {
+
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2279", {
+        statics: {
+            testPropertyWithInitializerAndNestedClass: function () {
+                Bridge.Test.Assert.areEqual("test1", new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2279.NestedClass().getValue());
+                Bridge.Test.Assert.areEqual("test2", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2279.NestedClass.getValue2());
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2279.NestedClass", {
+        statics: {
+            config: {
+                properties: {
+                    Value2: "test2"
+                }
+            }
+        },
+        config: {
+            properties: {
+                Value: "test1"
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2279.NestedClass.Config");
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
@@ -21911,6 +21966,18 @@ Bridge.$N1391Result =                 r;
             return System.String.format("This is {0}", this.name);
         }
     });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278.Something$1", function (T) { return {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278.ISomething$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278.Item$1(T))],
+        config: {
+            alias: [
+            "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$ISomething$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$Item$1$T$doSomething", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$ISomething$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$Item$1$" + Bridge.getTypeAlias(T) + "$doSomething"
+            ]
+        },
+        Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$ISomething$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$Item$1$T$doSomething: function (t) {
+            return t;
+        }
+    }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240B", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A],

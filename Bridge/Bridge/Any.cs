@@ -6,7 +6,7 @@ namespace Bridge
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
-    [Obsolete("Please use Union class")]
+    [Obsolete("Please use Union class. See Issue #1977 for more information.", true)]
     public class Any<T1, T2>
     {
         protected extern Any();
@@ -21,6 +21,7 @@ namespace Bridge
 
         // Make the transition from Any to Union easier until Any is finally removed
         public static extern implicit operator Union<T1, T2>(Any<T1, T2> value);
+
         public static extern implicit operator Any<T1, T2>(Union<T1, T2> value);
     }
 
@@ -28,7 +29,7 @@ namespace Bridge
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
-    [Obsolete("Please use Union class")]
+    [Obsolete("Please use Union class. See Issue #1977 for more information.", true)]
     public class Any<T1, T2, T3>
     {
         protected extern Any();
@@ -47,6 +48,7 @@ namespace Bridge
 
         // Make the transition from Any to Union easier until Any is finally removed
         public static extern implicit operator Union<T1, T2, T3>(Any<T1, T2, T3> value);
+
         public static extern implicit operator Any<T1, T2, T3>(Union<T1, T2, T3> value);
     }
 
@@ -54,7 +56,7 @@ namespace Bridge
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
-    [Obsolete("Please use Union class")]
+    [Obsolete("Please use Union class. See Issue #1977 for more information.", true)]
     public class Any<T1, T2, T3, T4>
     {
         protected extern Any();
@@ -77,6 +79,7 @@ namespace Bridge
 
         // Make the transition from Any to Union easier until Any is finally removed
         public static extern implicit operator Union<T1, T2, T3, T4>(Any<T1, T2, T3, T4> value);
+
         public static extern implicit operator Any<T1, T2, T3, T4>(Union<T1, T2, T3, T4> value);
     }
 
@@ -84,7 +87,7 @@ namespace Bridge
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
-    [Obsolete("Please use Union class")]
+    [Obsolete("Please use Union class. See Issue #1977 for more information.", true)]
     public class Any<T1, T2, T3, T4, T5>
     {
         protected extern Any();
@@ -111,6 +114,7 @@ namespace Bridge
 
         // Make the transition from Any to Union easier until Any is finally removed
         public static extern implicit operator Union<T1, T2, T3, T4, T5>(Any<T1, T2, T3, T4, T5> value);
+
         public static extern implicit operator Any<T1, T2, T3, T4, T5>(Union<T1, T2, T3, T4, T5> value);
     }
 
@@ -118,7 +122,7 @@ namespace Bridge
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
-    [Obsolete("Please use Union class")]
+    [Obsolete("Please use Union class. See Issue #1977 for more information.", true)]
     public class Any<T1, T2, T3, T4, T5, T6>
     {
         protected extern Any();
@@ -149,6 +153,7 @@ namespace Bridge
 
         // Make the transition from Any to Union easier until Any is finally removed
         public static extern implicit operator Union<T1, T2, T3, T4, T5, T6>(Any<T1, T2, T3, T4, T5, T6> value);
+
         public static extern implicit operator Any<T1, T2, T3, T4, T5, T6>(Union<T1, T2, T3, T4, T5, T6> value);
     }
 
@@ -156,7 +161,7 @@ namespace Bridge
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
-    [Obsolete("Please use Union class")]
+    [Obsolete("Please use Union class. See Issue #1977 for more information.", true)]
     public class Any<T1, T2, T3, T4, T5, T6, T7>
     {
         protected extern Any();
@@ -191,6 +196,7 @@ namespace Bridge
 
         // Make the transition from Any to Union easier until Any is finally removed
         public static extern implicit operator Union<T1, T2, T3, T4, T5, T6, T7>(Any<T1, T2, T3, T4, T5, T6, T7> value);
+
         public static extern implicit operator Any<T1, T2, T3, T4, T5, T6, T7>(Union<T1, T2, T3, T4, T5, T6, T7> value);
     }
 
@@ -198,7 +204,7 @@ namespace Bridge
     [IgnoreGeneric]
     [IgnoreCast]
     [Name("Object")]
-    [Obsolete("Please use Union class")]
+    [Obsolete("Please use Union class. See Issue #1977 for more information.", true)]
     public class Any<T1, T2, T3, T4, T5, T6, T7, T8>
     {
         protected extern Any();
@@ -237,6 +243,7 @@ namespace Bridge
 
         // Make the transition from Any to Union easier until Any is finally removed
         public static extern implicit operator Union<T1, T2, T3, T4, T5, T6, T7, T8>(Any<T1, T2, T3, T4, T5, T6, T7, T8> value);
+
         public static extern implicit operator Any<T1, T2, T3, T4, T5, T6, T7, T8>(Union<T1, T2, T3, T4, T5, T6, T7, T8> value);
     }
 }
