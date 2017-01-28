@@ -91,6 +91,7 @@
     <Compile Include="Bridge\ObjectLiteral.cs" />
     <Compile Include="Bridge\Any.cs" />
     <Compile Include="Bridge\Intersection.cs" />
+    <Compile Include="Bridge\Module.cs" />
     <Compile Include="Bridge\Sequence.cs" />
     <Compile Include="Bridge\Utils\SystemAssembly.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
