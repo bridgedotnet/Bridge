@@ -13619,6 +13619,24 @@ Bridge.$N1391Result =                 r;
 
     }; });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2280", {
+        statics: {
+            test: function (source) {
+                return Bridge.Reflection.getTypeFullName(Bridge.getType(source));
+            },
+            test1: function (T, source) {
+                return Bridge.Reflection.getTypeFullName(Bridge.getType(source, T));
+            },
+            testGetTypeInIgnoreGenericMethod: function () {
+                Bridge.Test.Assert.areEqual("String", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2280.test("abc"));
+                Bridge.Test.Assert.areEqual("String", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2280.test("xyz"));
+
+                Bridge.Test.Assert.areEqual("String", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2280.test1(String, "abc"));
+                Bridge.Test.Assert.areEqual("String", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2280.test1(String, "xyz"));
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
