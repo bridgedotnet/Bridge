@@ -13619,6 +13619,63 @@ Bridge.$N1391Result =                 r;
 
     }; });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281", {
+        statics: {
+            testFieldMerge: function () {
+                var item = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281.Optional$1(String)).$ctor1("abc");
+                Bridge.Test.Assert.areEqual("abc", item.getValue());
+
+                var node = Bridge.merge(new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281.Node$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281.Optional$1(String)))(), {
+                    item: item
+                } );
+                Bridge.Test.Assert.areEqual(item, node.item);
+                Bridge.Test.Assert.areEqual("abc", node.item.getValue());
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281.Node$1", function (T) { return {
+        item: Bridge.getDefaultValue(T)
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281.Optional$1", function (T) { return {
+        $kind: "struct",
+        statics: {
+            getDefaultValue: function () { return new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281.Optional$1(T))(); }
+        },
+        config: {
+            properties: {
+                IsDefined: false,
+                Value: Bridge.getDefaultValue(T)
+            }
+        },
+        $ctor1: function (value) {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281.Optional$1(T).$ctor2.call(this, value, value != null);
+        },
+        $ctor2: function (value, isDefined) {
+            this.$initialize();
+            this.setIsDefined(isDefined && (value != null));
+            this.setValue(value);
+        },
+        ctor: function () {
+            this.$initialize();
+        },
+        toString: function () {
+            return this.getIsDefined() ? this.getValue().toString() : "{Missing}";
+        },
+        getHashCode: function () {
+            var h = Bridge.addHash([3587563198, this.IsDefined, this.Value]);
+            return h;
+        },
+        equals: function (o) {
+            if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281.Optional$1(T))) {
+                return false;
+            }
+            return Bridge.equals(this.IsDefined, o.IsDefined) && Bridge.equals(this.Value, o.Value);
+        },
+        $clone: function (to) { return this; }
+    }; });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {

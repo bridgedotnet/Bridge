@@ -707,7 +707,19 @@
                             toValue = to[key];
                             Bridge.merge(toValue, value);
                         } else {
-                            to[key] = Bridge.merge(to[key], value);
+                            if (to[key] instanceof System.Decimal && Bridge.isNumber(from)) {
+                                return new System.Decimal(from);
+                            }
+
+                            if (to[key] instanceof System.Int64 && Bridge.isNumber(from)) {
+                                return new System.Int64(from);
+                            }
+
+                            if (to[key] instanceof System.UInt64 && Bridge.isNumber(from)) {
+                                return new System.UInt64(from);
+                            }
+
+                            to[key] = value;
                         }
                     }
                 }
