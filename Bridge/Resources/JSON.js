@@ -1,6 +1,11 @@
+//TODO: Remove when issues are fixed.
+System.Object = Object; // https://github.com/bridgedotnet/Bridge/issues/2069
+System.Boolean = Boolean; // https://github.com/bridgedotnet/Bridge/issues/2062
+System.String = String; // https://github.com/bridgedotnet/Bridge/issues/2066
+System.DateTime = Date; // https://github.com/bridgedotnet/Bridge/issues/2064
+// ---
+
 Bridge.serialize = function(obj) {
-    //TODO: Check for Serializable and other attributes when https://github.com/bridgedotnet/Bridge/issues/2043 is fixed.
-    
     if (obj === null) {
         return null;
     } else if (obj === false) {
@@ -14,26 +19,25 @@ Bridge.serialize = function(obj) {
     } else if (typeof obj === "object") {
         var type = Bridge.getType(obj);
 
-        if (type === Object) {
-            return obj;
-        } else if (type === System.Int64) {
+        if (type === System.Int64) {
             return obj.toString();
         } else if (type === System.UInt64) {
             return obj.toString();
         } else if (type === System.Decimal) {
             return obj.toString();
-        } else if (type === Date) { //TODO: Change to System.DateTime when https://github.com/bridgedotnet/Bridge/issues/2064 is fixed.
+        } else if (type === System.DateTime) {
             return obj.toJSON();
-        } else if (type === Array) {
-            //TODO: Implement when the following issues are fixed:
-            // - https://github.com/bridgedotnet/Bridge/issues/2051
-            // - https://github.com/bridgedotnet/Bridge/issues/2052
-            // - https://github.com/bridgedotnet/Bridge/issues/2056
+        } else if (Bridge.isArray(null, type)) {
+            var arr = [];
+
+            for(var i = 0; i < obj.length; i++) {
+                arr.push(Bridge.serialize(obj[i]));
+            }
+
             return obj;
         } else if (Bridge.Reflection.isEnum(type)) {
             return obj.toString();
-        } else if (Bridge.Reflection.getGenericTypeDefinition(type) === System.Collections.Generic.List$1) {
-            //TODO: Check if type inherits IList when https://github.com/bridgedotnet/Bridge/issues/2050 is fixed.
+        } else if (Bridge.Reflection.isAssignableFrom(System.Collections.IList, type)) {
             var arr = [];
 
             for(var i = 0; i < obj.getCount(); i++) {
@@ -41,8 +45,7 @@ Bridge.serialize = function(obj) {
             }
 
             return arr;
-        } else if (Bridge.Reflection.getGenericTypeDefinition(type) === System.Collections.Generic.Dictionary$2) {
-            //TODO: Check if type inherits IList when https://github.com/bridgedotnet/Bridge/issues/2050 is fixed.
+        } else if (Bridge.Reflection.isAssignableFrom(System.Collections.IDictionary, type)) {
             var dict = {};
 
             for(var each in dict.entries) {
@@ -53,8 +56,8 @@ Bridge.serialize = function(obj) {
         } else {
             var raw = {};
 
-            if (Bridge.Reflection.getBaseType(type) !== Object) {
-                raw["@type"] = Bridge.serialize(type);
+            if (Bridge.Reflection.getBaseType(type) !== System.Object) {
+                raw["$type"] = Bridge.getTypeName();
             }
 
             var fields = Bridge.Reflection.getMembers(type, 4, 4);
@@ -78,9 +81,87 @@ Bridge.serialize = function(obj) {
     }
 };
 
+Bridge.populate = function(obj, raw) {
+    if (obj === null) {
+        return;
+    } else if (obj === false) {
+        return;
+    } else if (obj === true) {
+        return;
+    } else if (typeof obj === "number") {
+        return;
+    } else if (typeof obj === "string") {
+        return;
+    } else if (typeof obj === "object") {
+        var type = Bridge.getType(obj);
+
+        if (Bridge.isArray(null, type)) {
+            obj.length = 0;
+            
+            if(raw.length === undefined) {
+                return;
+            }
+            
+            for(var i = 0; i < raw.length; i++) {
+                obj.push(Bridge.deserialize(raw[i], type.$typeElement));
+            }
+        } else if (Bridge.Reflection.isAssignableFrom(System.Collections.IList, type)) {
+            var typeElement = Bridge.Reflection.getGenericArguments(type)[0];
+
+            obj.clear();
+            
+            if(raw.length === undefined) {
+                return;
+            }
+
+            for(var i = 0; i < raw.length; i++) {
+                obj.add(Bridge.deserialize(raw[i], typeElement));
+            }
+        } else if (Bridge.Reflection.isAssignableFrom(System.Collections.IDictionary, type)) {
+            var typesGeneric = Bridge.Reflection.getGenericArguments(type);
+            var typeKey = typesGeneric[0];
+            var typeValue = typesGeneric[1];
+
+            obj.clear();
+
+            for(var each in raw) {
+                obj.add(each, Bridge.deserialize(raw[each], typeValue));
+            }
+        } else {
+            if (raw["$type"] !== undefined) {
+                type = Bridge.Reflection.getType(raw["$type"].split(",")[0]);
+            }
+
+            if (type === null) {
+                throw TypeError(System.String.concat("Cannot find type: ", raw["$type"]));
+            }
+
+            var fields = Bridge.Reflection.getMembers(type, 4, 4);
+
+            for (var i = 0; i < fields.length; i++) {
+                var value = raw[fields[i].n];
+
+                if (value !== undefined) {
+                    Bridge.Reflection.fieldAccess(fields[i], obj, Bridge.deserialize(value, fields[i].rt));
+                }
+            }
+
+            var properties = Bridge.Reflection.getMembers(type, 16, 4);
+
+            for (var i = 0; i < properties.length; i++) {
+                var value = raw[properties[i].n];
+
+                if (value !== undefined && !!properties[i].s) {
+                    Bridge.Reflection.midel(properties[i].s, obj)(Bridge.deserialize(value, properties[i].rt));
+                }
+            }
+        }
+    }
+};
+
 Bridge.deserialize = function(raw, type) {
     if (raw === null) {
-        if (type === Boolean) { //TODO: Change to System.Boolean when https://github.com/bridgedotnet/Bridge/issues/2062 is fixed.
+        if (type === System.Boolean) {
             return false;
         } else if (type === System.SByte) {
             return 0;
@@ -106,17 +187,17 @@ Bridge.deserialize = function(raw, type) {
             return System.Decimal(0.0);
         } else if (type === System.Char) {
             return 0;
-        } else if (type === String) { //TODO: Change to System.String when https://github.com/bridgedotnet/Bridge/issues/2066 is fixed.
+        } else if (type === System.String) {
             return null;
-        } else if (type === Date) { //TODO: Change to System.DateTime when https://github.com/bridgedotnet/Bridge/issues/2064 is fixed.
-            return new Date(-62135596800000);
+        } else if (type === System.DateTime) {
+            return new System.DateTime(-62135596800000); //TODO: Change to suit the newer version of DateTime.
         } else if (Bridge.Reflection.isEnum(type)) {
             return System.Enum.parse(type, 0);
         } else {
             return null;
         }
     } else if (raw === false) {
-        if (type === Boolean) { //TODO: Change to System.Boolean when https://github.com/bridgedotnet/Bridge/issues/2062 is fixed.
+        if (type === System.Boolean) {
             return false;
         } else if (type === System.SByte) {
             return 0;
@@ -142,17 +223,17 @@ Bridge.deserialize = function(raw, type) {
             return System.Decimal(0.0);
         } else if (type === System.Char) {
             return 0;
-        } else if (type === String) { //TODO: Change to System.String when https://github.com/bridgedotnet/Bridge/issues/2066 is fixed.
+        } else if (type === System.String) {
             return "false";
-        } else if (type === Date) { //TODO: Change to System.DateTime when https://github.com/bridgedotnet/Bridge/issues/2064 is fixed.
-            return new Date(-62135596800000);
+        } else if (type === System.DateTime) {
+            return new System.DateTime(-62135596800000); //TODO: Change to suit the newer version of DateTime.
         } else if (Bridge.Reflection.isEnum(type)) {
             return System.Enum.parse(type, 0);
         } else {
             return null;
         }
     } else if (raw === true) {
-        if (type === Boolean) { //TODO: Change to System.Boolean when https://github.com/bridgedotnet/Bridge/issues/2062 is fixed.
+        if (type === System.Boolean) {
             return true;
         } else if (type === System.SByte) {
             return 1;
@@ -178,17 +259,17 @@ Bridge.deserialize = function(raw, type) {
             return System.Decimal(1.0);
         } else if (type === System.Char) {
             return 1;
-        } else if (type === String) { //TODO: Change to System.String when https://github.com/bridgedotnet/Bridge/issues/2066 is fixed.
+        } else if (type === System.String) {
             return "true";
-        } else if (type === Date) { //TODO: Change to System.DateTime when https://github.com/bridgedotnet/Bridge/issues/2064 is fixed.
-            return new Date(-62135596800000 + 1);
+        } else if (type === System.DateTime) {
+            return new System.DateTime(-62135596800000 + 1); //TODO: Change to suit the newer version of DateTime.
         } else if (Bridge.Reflection.isEnum(type)) {
             return System.Enum.parse(type, 1);
         } else {
             return null;
         }
     } else if (typeof raw === "number") {
-        if (type === Boolean) { //TODO: Change to System.Boolean when https://github.com/bridgedotnet/Bridge/issues/2062 is fixed.
+        if (type === System.Boolean) {
             return raw !== 0;
         } else if (type === System.SByte) {
             return raw | 0;
@@ -214,15 +295,15 @@ Bridge.deserialize = function(raw, type) {
             return System.Decimal(raw);
         } else if (type === System.Char) {
             return raw | 0;
-        } else if (type === String) { //TODO: Change to System.String when https://github.com/bridgedotnet/Bridge/issues/2066 is fixed.
+        } else if (type === System.String) {
             return raw.toString();
-        } else if (type === Date) { //TODO: Change to System.DateTime when https://github.com/bridgedotnet/Bridge/issues/2064 is fixed.
-            return new Date(-62135596800000 + System.Int64(raw | 0).div(10000));
+        } else if (type === System.DateTime) {
+            return new System.DateTime(-62135596800000 + System.Int64(raw | 0).div(10000)); //TODO: Change to suit the newer version of DateTime.
         } else {
             return null;
         }
     } else if (typeof raw === "string") {
-        if (type === Boolean) { //TODO: Change to System.Boolean when https://github.com/bridgedotnet/Bridge/issues/2062 is fixed.
+        if (type === System.Boolean) {
             return raw !== "";
         } else if (type === System.SByte) {
             return raw | 0;
@@ -256,17 +337,17 @@ Bridge.deserialize = function(raw, type) {
             }
 
             return raw.charCodeAt(0);
-        } else if (type === String) { //TODO: Change to System.String when https://github.com/bridgedotnet/Bridge/issues/2066 is fixed.
+        } else if (type === System.String) {
             return raw;
-        } else if (type === Date) { //TODO: Change to System.DateTime when https://github.com/bridgedotnet/Bridge/issues/2064 is fixed.
-            return new Date(raw);
+        } else if (type === System.DateTime) {
+            return new System.DateTime(raw); //TODO: Change to suit the newer version of DateTime.
         } else if (Bridge.Reflection.isEnum(type)) {
             return System.Enum.parse(type, raw);
         } else {
             return null;
         }
     } else if (typeof raw === "object") {
-        if (type == Boolean) { //TODO: Change to System.Boolean when https://github.com/bridgedotnet/Bridge/issues/2062 is fixed.
+        if (type == System.Boolean) {
             return false;
         } else if (type === System.SByte) {
             return 0;
@@ -292,20 +373,26 @@ Bridge.deserialize = function(raw, type) {
             return System.Decimal(0.0);
         } else if (type === System.Char) {
             return 0;
-        } else if (type === String) { //TODO: Change to System.String when https://github.com/bridgedotnet/Bridge/issues/2066 is fixed.
+        } else if (type === System.String) {
             return raw.toString();
-        } else if (type === Date) { //TODO: Change to System.DateTime when https://github.com/bridgedotnet/Bridge/issues/2064 is fixed.
-            return new Date(-62135596800000);
+        } else if (type === System.DateTime) {
+            return new System.DateTime(-62135596800000); //TODO: Change to suit the newer version of DateTime.
         } else if (Bridge.Reflection.isEnum(type)) {
             return System.Enum.parse(type, 0);
-        } else if (type === Array) {
+        } else if (Bridge.isArray(null, type)) {
             if (raw.length === undefined) {
                 return [ ];
             }
 
+            var arr = new Array();
+            System.Array.type(type.$elementType, type.$elementType || 1, arr);
+
+            for(var i = 0; i < raw.length; i++) {
+                arr[i] = Bridge.deserialize(raw[i], type.$elementType);
+            }
+
             return raw;
-        } else if (Bridge.Reflection.getGenericTypeDefinition(type) === System.Collections.Generic.List$1) {
-            //TODO: Check if type inherits IList when https://github.com/bridgedotnet/Bridge/issues/2050 is fixed.
+        } else if (Bridge.Reflection.isAssignableFrom(System.Collections.IList, type)) {
             var typeElement = Bridge.Reflection.getGenericArguments(type)[0];
             var list = Bridge.createInstance(type);
 
@@ -318,8 +405,7 @@ Bridge.deserialize = function(raw, type) {
             }
 
             return list;
-        } else if (Bridge.Reflection.getGenericTypeDefinition(type) === System.Collections.Generic.Dictionary$2) {
-            //TODO: Check if type inherits IList when https://github.com/bridgedotnet/Bridge/issues/2050 is fixed.
+        } else if (Bridge.Reflection.isAssignableFrom(System.Collections.IDictionary, type)) {
             var typesGeneric = Bridge.Reflection.getGenericArguments(type);
             var typeKey = typesGeneric[0];
             var typeValue = typesGeneric[1];
@@ -333,12 +419,12 @@ Bridge.deserialize = function(raw, type) {
 
             return dictionary;
         } else {
-            if (raw["@type"] !== undefined) {
-                type = Bridge.Reflection.getType(raw["@type"], Bridge.Reflection.getTypeAssembly(type));
+            if (raw["$type"] !== undefined) {
+                type = Bridge.Reflection.getType(raw["$type"].split(",")[0]);
             }
 
             if (type === null) {
-                throw TypeError(System.String.concat("Cannot find type: ", raw["@type"]));
+                throw TypeError(System.String.concat("Cannot find type: ", raw["$type"]));
             }
 
             var o = Bridge.createInstance(type);
