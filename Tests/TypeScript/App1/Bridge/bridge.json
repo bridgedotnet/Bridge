@@ -8,6 +8,10 @@
     {
       "name": "bridge.js",
       "extract": false
+    },
+    {
+      "name": "qunit.js",
+      "files": [ "Lib/qunit.js"]
     }
   ]
 }
