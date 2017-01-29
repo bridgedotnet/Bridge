@@ -465,7 +465,14 @@ namespace Bridge.Contract
 
                         if (!needGet && typeArgName.StartsWith("\""))
                         {
-                            sb.Append(typeArgName.Substring(1));
+                            var tName = typeArgName.Substring(1);
+
+                            if (tName.EndsWith("\""))
+                            {
+                                tName = tName.Remove(tName.Length - 1);
+                            }
+
+                            sb.Append(tName);
 
                             if (!isStr)
                             {
