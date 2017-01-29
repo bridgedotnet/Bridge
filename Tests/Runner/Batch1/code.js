@@ -1,9 +1,9 @@
 /**
  * Bridge Test library - general C# language tests
- * @version 15.7.0
+ * @version 15.8.0
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2017 Object.NET, Inc.
- * @compiler Bridge.NET 15.7.0
+ * @compiler Bridge.NET 15.8.0
  */
 Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resource1.bin":"AAECAwQFBgc=","Bridge.ClientTest.Batch1.Reflection.Resource2.bin":"EBESExQV"}, function ($asm, globals) {
     "use strict";
@@ -19666,7 +19666,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var added = record.addedNodes[0];
             Bridge.Test.NUnit.Assert.notNull$1(added, "added");
             Bridge.Test.NUnit.Assert.areEqual$1(Bridge.ClientTest.MutationObserverTests.ATTRIBUTE, added.nodeName.toUpperCase(), "added.NodeName");
-
         }
     });
 
@@ -35589,7 +35588,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var $this = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.$ctor1(8);
             $this.$getType = function() { return Bridge.ClientTest.ObjectLiteralTests.Bridge1529.TS; };
             (function(){
-
             }).call($this);
             return $this;
         }
