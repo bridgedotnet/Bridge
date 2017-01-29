@@ -1,5 +1,5 @@
 /*
- * @version   : 15.7.0 - Bridge.NET
+ * @version   : 15.8.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
  * @date      : 2017-01-16
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
