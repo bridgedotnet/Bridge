@@ -1,6 +1,5 @@
-using Bridge.Test;
-
 using System;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.BasicCSharp
 {
