@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -12,9 +12,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             New, Playing, Finished
         }
 
-        static GameState state = GameState.New;
+        private static GameState state = GameState.New;
 #pragma warning disable 649
-        static GameState state1;
+        private static GameState state1;
 #pragma warning restore 649
 
         [Test]

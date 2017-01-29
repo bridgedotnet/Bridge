@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -34,6 +34,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public class Person
         {
             public string Name;
+
             public Person(string name)
             {
                 Name = name;

@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -6,7 +6,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#1526 - {0}")]
     public class Bridge1526
     {
-
         [Test]
         public static void TestOutInClassMembers()
         {
@@ -95,7 +94,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
-        int RefMethod(ref int i)
+        private int RefMethod(ref int i)
         {
             return i;
         }

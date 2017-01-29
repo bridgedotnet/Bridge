@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 
 namespace Bridge.ClientTest.Batch4.Exceptions
@@ -77,28 +77,28 @@ namespace Bridge.ClientTest.Batch4.Exceptions
             Assert.AreEqual("The message", ex.Message);
         }
 
-//        NDN
-//        [Test(ExpectedCount = 2)]
-//        public void RangeErrorIsConvertedToArgumentOutOfRangeException()
-//        {
-//            int size = -1;
-//            try
-//            {
-//#pragma warning disable 219
-//                var arr = new int[size];
-//#pragma warning restore 219
-//                Assert.Fail("Should throw");
-//            }
-//            catch (ArgumentOutOfRangeException ex)
-//            {
-//                Exception inner = ex.InnerException;
-//                Assert.NotNull(inner, "Inner Exception");
-//                Assert.True(inner is ErrorException, "Inner is ErrorException");
-//            }
-//            catch (Exception ex)
-//            {
-//                Assert.Fail("Expected ArgumentOutOfRangeException, got " + ex.GetType());
-//            }
-//        }
+        //        NDN
+        //        [Test(ExpectedCount = 2)]
+        //        public void RangeErrorIsConvertedToArgumentOutOfRangeException()
+        //        {
+        //            int size = -1;
+        //            try
+        //            {
+        //#pragma warning disable 219
+        //                var arr = new int[size];
+        //#pragma warning restore 219
+        //                Assert.Fail("Should throw");
+        //            }
+        //            catch (ArgumentOutOfRangeException ex)
+        //            {
+        //                Exception inner = ex.InnerException;
+        //                Assert.NotNull(inner, "Inner Exception");
+        //                Assert.True(inner is ErrorException, "Inner is ErrorException");
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                Assert.Fail("Expected ArgumentOutOfRangeException, got " + ex.GetType());
+        //            }
+        //        }
     }
 }

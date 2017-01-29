@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -13,7 +13,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             get; set;
         }
 
-        class TestClass
+        private class TestClass
         {
             public bool TestProperty
             {
@@ -41,16 +41,16 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.True(TestProperty1);
         }
 
-        class TestClass2
+        private class TestClass2
         {
             public static int GetCount = 0;
 
             private bool b = false;
+
             public bool TestProperty
             {
                 get
                 {
-
                     GetCount++;
                     return b;
                 }

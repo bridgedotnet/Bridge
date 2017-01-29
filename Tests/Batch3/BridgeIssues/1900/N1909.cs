@@ -1,5 +1,5 @@
 ﻿using System;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -15,7 +15,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test]
         public void TestActivatorEnumCreation()
         {
-            var et = Activator.CreateInstance(typeof (EnumType));
+            var et = Activator.CreateInstance(typeof(EnumType));
             Assert.AreEqual(0, et);
             Assert.True(et is EnumType);
         }

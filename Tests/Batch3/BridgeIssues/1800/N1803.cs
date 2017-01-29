@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -11,6 +11,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public class Test1
         {
             public const string s = "Const";
+
             public static List<string> GetList()
             {
                 return new List<string> { s };
@@ -20,6 +21,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public class Test2
         {
             public static int s = 1;
+
             public static List<int> GetList()
             {
                 return new List<int> { s };
@@ -29,6 +31,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public class Test3
         {
             public int s = 1;
+
             public List<int> GetList()
             {
                 return new List<int> { s };

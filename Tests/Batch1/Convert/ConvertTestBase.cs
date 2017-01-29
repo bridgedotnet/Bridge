@@ -2,7 +2,7 @@
 // https://github.com/dotnet/corefx/blob/master/src/System.Runtime.Extensions/tests/System/Convert.TestBase.cs
 // https://github.com/dotnet/corefx/blob/master/LICENSE
 
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 
 namespace Bridge.ClientTest.ConvertTests

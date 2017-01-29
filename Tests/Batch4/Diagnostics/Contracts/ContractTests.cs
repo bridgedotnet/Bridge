@@ -1,6 +1,6 @@
 #define CONTRACTS_FULL
 
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 using System.Diagnostics.Contracts;
 

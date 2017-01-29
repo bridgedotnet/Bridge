@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -12,6 +12,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public class CLS
         {
             public string status;
+
             protected CLS()
             {
                 status = "Not ok";

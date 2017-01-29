@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using static Bridge.Test.Assert;
 using static System.DayOfWeek;
 using static System.Linq.Enumerable;

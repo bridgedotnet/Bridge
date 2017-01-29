@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 using System;
 using System.Collections;
@@ -26,7 +26,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual(0, a[0], "CopyTo()");
         }
 
-        class C<T> : IList<T>
+        private class C<T> : IList<T>
         {
             T IList<T>.this[int index]
             {
@@ -37,7 +37,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
                 set
                 {
-
                 }
             }
 
