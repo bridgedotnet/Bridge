@@ -38,23 +38,23 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             var p = new Person();
             string v = null;
 
-            //@ p.setNAME("Frank");
+            //@ p.setNAME("Frank1");
             //@ v = p.getNAME();
-            Assert.AreEqual("Frank", v);
-            p.Name = "John";
-            Assert.AreEqual("John", p.Name);
+            Assert.AreEqual("Frank1", v);
+            p.Name = "John1";
+            Assert.AreEqual("John1", p.Name);
 
-            //@ p.setN2("Frank");
+            //@ p.setN2("Frank2");
             //@ v = p.getN2();
-            Assert.AreEqual("Frank", v);
-            p.Name2 = "John";
-            Assert.AreEqual("John", p.Name2);
+            Assert.AreEqual("Frank2", v);
+            p.Name2 = "John2";
+            Assert.AreEqual("John2", p.Name2);
 
-            //@ p.nm3("Frank");
+            //@ p.nm3("Frank3");
             //@ v = p.nm3();
-            Assert.AreEqual("Frank", v);
-            p.Name3 = "John";
-            Assert.AreEqual("John", p.Name3);
+            Assert.AreEqual("Frank3", v);
+            p.Name3 = "John3";
+            Assert.AreEqual("John3", p.Name3);
         }
     }
 }
