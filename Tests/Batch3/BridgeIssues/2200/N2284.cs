@@ -30,6 +30,21 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 [Name("nm3")]
                 set;
             }
+            
+            public string Name4
+            {
+                get;
+
+                [Name("nm4")]
+                set;
+            }
+            
+            public string Name5
+            {
+                [Name("nm5")]
+                get;                
+                set;
+            }
         }
 
         [Test]
@@ -55,6 +70,18 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual("Frank3", v);
             p.Name3 = "John3";
             Assert.AreEqual("John3", p.Name3);
+            
+            //@ p.nm4("Frank4");
+            //@ v = p.getName4();
+            Assert.AreEqual("Frank4", v);
+            p.Name4 = "John4";
+            Assert.AreEqual("John4", p.Name4);
+                        
+            //@ p.setName5("Frank5");
+            //@ v = p.nm5();
+            Assert.AreEqual("Frank5", v);
+            p.Name5 = "John5";
+            Assert.AreEqual("John5", p.Name5);
         }
     }
 }
