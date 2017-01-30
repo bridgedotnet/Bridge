@@ -1,6 +1,6 @@
 using System;
 using Bridge.Html5;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -167,7 +167,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             {
                 var isPrototypeOf = 7;
 
-                var o =  new object().IsPrototypeOf(null);
+                var o = new object().IsPrototypeOf(null);
 
                 Assert.AreEqual(7, isPrototypeOf, "isPrototypeOf");
             }

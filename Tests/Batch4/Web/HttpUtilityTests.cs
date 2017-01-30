@@ -1,5 +1,5 @@
 // #1625
-//using Bridge.Test;
+//using Bridge.Test.NUnit;
 //using System.Web;
 
 //namespace Bridge.ClientTest.Batch4.Web

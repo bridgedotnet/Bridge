@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -9,7 +9,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#2199 - {0}")]
     public class Bridge2199
     {
-        static void AssertTypeName<T>(T value, Type realType)
+        private static void AssertTypeName<T>(T value, Type realType)
         {
             Assert.AreEqual(realType, value.GetType());
             Assert.AreEqual(realType, typeof(T));
@@ -38,7 +38,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             string s = "s";
             Bridge2199.AssertTypeName(s, typeof(string));
-
         }
     }
 }

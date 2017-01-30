@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -54,6 +54,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public class Collection : IEnumerable
         {
             public List<int> list = new List<int>();
+
             public IEnumerator GetEnumerator()
             {
                 return this.list.GetEnumerator();

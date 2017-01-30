@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -8,7 +8,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     {
         public class _Object
         {
-            int value;
+            private int value;
+
             public _Object(int value)
             {
                 this.value = value;

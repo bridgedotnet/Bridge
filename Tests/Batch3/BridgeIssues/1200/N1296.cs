@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
@@ -9,7 +9,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     {
         public struct MessageStructId
         {
-            public static implicit operator int (MessageStructId id)
+            public static implicit operator int(MessageStructId id)
             {
                 return 123;
             }
@@ -76,7 +76,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 return new MessageId { Value = value };
             }
 
-            public static implicit operator int (MessageId id)
+            public static implicit operator int(MessageId id)
             {
                 return id.Value;
             }

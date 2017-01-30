@@ -1,5 +1,5 @@
 // #1626
-//using Bridge.Test;
+//using Bridge.Test.NUnit;
 //using System.Collections;
 //using System.Collections.Generic;
 

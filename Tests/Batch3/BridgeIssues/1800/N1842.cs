@@ -1,5 +1,5 @@
 using System;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -10,6 +10,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public class Class
         {
             private Type type;
+
             static public implicit operator Class(Type t)
             {
                 return new Class() { type = t };

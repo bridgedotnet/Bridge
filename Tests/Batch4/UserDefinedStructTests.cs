@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 using System.Runtime.CompilerServices;
 
@@ -123,7 +123,7 @@ namespace Bridge.ClientTest.Batch4
                 return new S7(-s.I);
             }
 
-            public static explicit operator int (S7 s)
+            public static explicit operator int(S7 s)
             {
                 return s.I;
             }

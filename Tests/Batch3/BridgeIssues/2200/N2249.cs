@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -11,8 +11,10 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public class c1
         {
             #region properties
+
             public string p1 { get; set; } = "test";
-            #endregion
+
+            #endregion properties
         }
 
         [Test]

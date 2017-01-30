@@ -5,5 +5,8 @@
   "fileName": "code.js",
   "outputBy": "Project",
   "localesOutput": "locales",
-  "locales": "ru-RU;en-US;es*"
+  "locales": "ru-RU;en-US;es*",
+  "test": {
+    "skipCombine":  true
+  }
 }

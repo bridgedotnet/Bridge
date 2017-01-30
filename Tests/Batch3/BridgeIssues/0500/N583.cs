@@ -1,5 +1,5 @@
 using Bridge.ClientTest.Batch3.Utilities;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues

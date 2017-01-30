@@ -1,5 +1,5 @@
 using Bridge.Html5;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 using System.Collections.Generic;
 
@@ -273,7 +273,6 @@ namespace Bridge.ClientTest.Collections.Native
             }
             Assert.AreEqual(l.ToArray(), new[] { 3, 6, 2, 9, 5 });
         }
-
 
         [Test]
         public void ICollectionMethodsWork_SPI_1559_1560()
