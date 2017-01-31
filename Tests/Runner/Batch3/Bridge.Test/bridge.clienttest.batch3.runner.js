@@ -8772,7 +8772,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testFieldMerge: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2281, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestFieldMerge()",
-                    line: "34"
+                    line: "42"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281.testFieldMerge();
             }

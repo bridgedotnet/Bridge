@@ -22,8 +22,14 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 Value = value;
             }
 
-            public bool IsDefined { get; }
-            public T Value { get; }
+            public bool IsDefined
+            {
+                get;
+            }
+            public T Value
+            {
+                get;
+            }
 
             public override string ToString()
             {
