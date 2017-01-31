@@ -697,6 +697,7 @@
             var key,
                 i,
                 value,
+                toValue,
                 fn;
 
             if (Bridge.isArray(from) && Bridge.isFunction(to.add || to.push)) {
@@ -714,13 +715,12 @@
             } else {
                 for (key in from) {
                     value = from[key];
-                    var toKey = to[key];
 
-                    if (typeof toKey === "function") {
+                    if (typeof to[key] === "function") {
                         if (key.match(/^\s*get[A-Z]/)) {
-                            Bridge.merge(toKey(), value);
+                            Bridge.merge(to[key](), value);
                         } else {
-                            toKey(value);
+                            to[key](value);
                         }
                     } else {
                         var setter1 = "set" + key.charAt(0).toUpperCase() + key.slice(1),
@@ -741,18 +741,19 @@
                             } else {
                                 to[setter2](value);
                             }
-                        } else if (value && value.constructor === Object && toKey) {
-                            Bridge.merge(toKey, value);
+                        } else if (value && value.constructor === Object && to[key]) {
+                            toValue = to[key];
+                            Bridge.merge(toValue, value);
                         } else {
-                            if (toKey instanceof System.Decimal && Bridge.isNumber(from)) {
+                            if (to[key] instanceof System.Decimal && Bridge.isNumber(from)) {
                                 return new System.Decimal(from);
                             }
 
-                            if (toKey instanceof System.Int64 && Bridge.isNumber(from)) {
+                            if (to[key] instanceof System.Int64 && Bridge.isNumber(from)) {
                                 return new System.Int64(from);
                             }
 
-                            if (toKey instanceof System.UInt64 && Bridge.isNumber(from)) {
+                            if (to[key] instanceof System.UInt64 && Bridge.isNumber(from)) {
                                 return new System.UInt64(from);
                             }
 
