@@ -575,7 +575,7 @@
             var i = 0;
 
             for (i; i < arguments.length; i++) {
-                if (arguments[i] == null) {
+                if (Bridge.unbox(arguments[i]) == null) {
                     return false;
                 }
             }
