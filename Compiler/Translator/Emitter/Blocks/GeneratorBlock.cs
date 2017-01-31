@@ -304,7 +304,7 @@ namespace Bridge.Translator
             this.WriteReturn(true);
             this.Write("$enumerator");
             this.WriteSemiColon();
-			this.WriteNewLine();
+            this.WriteNewLine();
 
             this.EndBlock();
             this.WriteCloseParentheses();
