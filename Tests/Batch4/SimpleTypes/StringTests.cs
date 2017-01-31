@@ -928,8 +928,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
             IEnumerable<string> stringValues = new MyEnumerable<string>(new[] { "a", "ab", "abc", "abcd" });
             Assert.AreEqual("a, ab, abc, abcd", String.Join(", ", stringValues));
 
-            // TODO: c# makes it False but js false
-            Assert.AreEqual("a, 1, abc, false", String.Join(", ", new Object[] { "a", 1, "abc", false }));// False");
+            Assert.AreEqual("a, 1, abc, False", String.Join(", ", new Object[] { "a", 1, "abc", false }));// False");
         }
 
         [Test]

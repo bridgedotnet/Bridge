@@ -10,7 +10,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         [Test]
         public void TypePropertiesAreCorrect_SPI_1717()
         {
-            Assert.True((object)(int)0 is uint);
+            Assert.False((object)(int)0 is uint);
             Assert.False((object)0.5 is uint);
             Assert.False((object)-1 is uint);
             Assert.False((object)4294967296 is uint);

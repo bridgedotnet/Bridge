@@ -9,7 +9,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         [Test]
         public void TypePropertiesAreInt32_SPI_1603()
         {
-            Assert.True((object)0 is char);
+            Assert.False((object)0 is char);
             Assert.False((object)0.5 is char);
             Assert.False((object)-1 is char);
             Assert.False((object)65536 is char);

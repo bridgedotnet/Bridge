@@ -15335,7 +15335,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.CharTests", {
         typePropertiesAreInt32_SPI_1603: function () {
-            Bridge.Test.NUnit.Assert.true(Bridge.is(Bridge.box(0, System.Int32), System.Char));
+            Bridge.Test.NUnit.Assert.false(Bridge.is(Bridge.box(0, System.Int32), System.Char));
             Bridge.Test.NUnit.Assert.false(Bridge.is(Bridge.box(0.5, System.Double, $box_.System.Double.toString), System.Char));
             Bridge.Test.NUnit.Assert.false(Bridge.is(Bridge.box(-1, System.Int32), System.Char));
             Bridge.Test.NUnit.Assert.false(Bridge.is(Bridge.box(65536, System.Int32), System.Char));
@@ -19716,8 +19716,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var stringValues = new (Bridge.ClientTest.Batch4.SimpleTypes.StringTests.MyEnumerable$1(String))(System.Array.init(["a", "ab", "abc", "abcd"], String));
             Bridge.Test.NUnit.Assert.areEqual("a, ab, abc, abcd", Bridge.toArray(stringValues).join(", "));
 
-            // TODO: c# makes it False but js false
-            Bridge.Test.NUnit.Assert.areEqual("a, 1, abc, false", System.Array.init(["a", Bridge.box(1, System.Int32), "abc", Bridge.box(false, Boolean, $box_.Boolean.toString)], Object).join(", ")); // False");
+            Bridge.Test.NUnit.Assert.areEqual("a, 1, abc, False", System.Array.init(["a", Bridge.box(1, System.Int32), "abc", Bridge.box(false, Boolean, $box_.Boolean.toString)], Object).join(", ")); // False");
         },
         containsWorks: function () {
             var text = "Lorem ipsum dolor sit amet";
@@ -20295,7 +20294,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.UInt32Tests", {
         typePropertiesAreCorrect_SPI_1717: function () {
-            Bridge.Test.NUnit.Assert.true(Bridge.is(Bridge.box(0, System.Int32), System.UInt32));
+            Bridge.Test.NUnit.Assert.false(Bridge.is(Bridge.box(0, System.Int32), System.UInt32));
             Bridge.Test.NUnit.Assert.false(Bridge.is(Bridge.box(0.5, System.Double, $box_.System.Double.toString), System.UInt32));
             Bridge.Test.NUnit.Assert.false(Bridge.is(Bridge.box(-1, System.Int32), System.UInt32));
             Bridge.Test.NUnit.Assert.false(Bridge.is(Bridge.box(System.Int64([0,1]), System.Int64), System.UInt32));

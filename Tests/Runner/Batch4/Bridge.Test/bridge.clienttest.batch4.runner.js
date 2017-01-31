@@ -14088,14 +14088,14 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             containsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.StringTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ContainsWorks()",
-                    line: "935"
+                    line: "934"
                 } ));
                 t.getFixture().containsWorks();
             },
             toCharArrayWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.StringTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ToCharArrayWorks()",
-                    line: "944"
+                    line: "943"
                 } ));
                 t.getFixture().toCharArrayWorks();
             }
