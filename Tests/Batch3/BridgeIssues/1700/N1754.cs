@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -52,8 +52,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
 
             public event EventHandler SOME_EVENT;
-            public event EventHandler ANOTHER_EVENt;
 
+            public event EventHandler ANOTHER_EVENt;
 
             // Just to prevent compiler warning
             private void UseEvents()

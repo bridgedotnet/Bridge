@@ -9,7 +9,7 @@
 #---------------------------------#
 
 # version format
-version: 15.7.{build}-{branch}
+version: 15.8.{build}-{branch}
 
 # branches to build
 #branches:

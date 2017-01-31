@@ -69,15 +69,15 @@ namespace Bridge.Contract
             return new OverloadsCollection(emitter, constructorDeclaration);
         }
 
-        public static OverloadsCollection Create(IEmitter emitter, PropertyDeclaration propDeclaration, bool isSetter = false)
+        public static OverloadsCollection Create(IEmitter emitter, PropertyDeclaration propDeclaration, bool isSetter = false, bool isField = false)
         {
             var key = new Tuple<AstNode, bool>(propDeclaration, isSetter);
-            if (emitter.OverloadsCacheNodes.ContainsKey(key))
+            if (!isField && emitter.OverloadsCacheNodes.ContainsKey(key))
             {
                 return emitter.OverloadsCacheNodes[key];
             }
 
-            return new OverloadsCollection(emitter, propDeclaration, isSetter);
+            return new OverloadsCollection(emitter, propDeclaration, isSetter, isField);
         }
 
         public static OverloadsCollection Create(IEmitter emitter, IndexerDeclaration indexerDeclaration, bool isSetter = false)
@@ -281,9 +281,10 @@ namespace Bridge.Contract
             this.Emitter.OverloadsCacheNodes[new Tuple<AstNode, bool>(constructorDeclaration, false)] = this;
         }
 
-        private OverloadsCollection(IEmitter emitter, PropertyDeclaration propDeclaration, bool isSetter)
+        private OverloadsCollection(IEmitter emitter, PropertyDeclaration propDeclaration, bool isSetter, bool isField)
         {
             this.Emitter = emitter;
+            this.IsField = isField;
             this.Name = propDeclaration.Name;
             this.JsName = Helpers.GetPropertyRef(propDeclaration, emitter, isSetter, true, true);
             this.AltJsName = Helpers.GetPropertyRef(propDeclaration, emitter, !isSetter, true, true);
@@ -332,7 +333,7 @@ namespace Bridge.Contract
             this.Emitter.OverloadsCacheNodes[new Tuple<AstNode, bool>(operatorDeclaration, false)] = this;
         }
 
-        private OverloadsCollection(IEmitter emitter, IMember member, bool isSetter = false, bool includeInline = false)
+        private OverloadsCollection(IEmitter emitter, IMember member, bool isSetter = false, bool includeInline = false, bool isField = false)
         {
             if (member is IMethod)
             {
@@ -350,6 +351,7 @@ namespace Bridge.Contract
 
             this.Emitter = emitter;
             this.Name = member.Name;
+            this.IsField = isField;
 
             if (member is IProperty)
             {
@@ -378,6 +380,12 @@ namespace Bridge.Contract
             this.IsSetter = isSetter;
             this.InitMembers();
             this.Emitter.OverloadsCacheMembers[new Tuple<IMember, bool, bool>(member, isSetter, includeInline)] = this;
+        }
+
+        public bool IsField
+        {
+            get;
+            set;
         }
 
         public List<IMethod> Methods
@@ -448,7 +456,6 @@ namespace Bridge.Contract
                 this.Events = this.GetEventOverloads();
                 this.Methods = this.GetMethodOverloads();
                 this.Fields = this.GetFieldOverloads();
-                
 
                 this.members = new List<IMember>();
                 this.members.AddRange(this.Methods);
@@ -1035,17 +1042,18 @@ namespace Bridge.Contract
             }
 
             string name = this.Emitter.GetEntityName(definition, this.CancelChangeCase);
-            if (name.StartsWith(".ctor"))
+            if (name.StartsWith("." + JS.Funcs.CONSTRUCTOR))
             {
                 name = JS.Funcs.CONSTRUCTOR;
             }
 
             var attr = Helpers.GetInheritedAttribute(definition, "Bridge.NameAttribute");
 
-            if (attr == null && definition is IProperty)
+            var iProperty = definition as IProperty;
+
+            if (attr == null && iProperty != null && !IsField)
             {
-                var prop = (IProperty)definition;
-                var acceessor = this.IsSetter ? prop.Setter : prop.Getter;
+                var acceessor = this.IsSetter ? iProperty.Setter : iProperty.Getter;
 
                 if (acceessor != null)
                 {
@@ -1061,7 +1069,10 @@ namespace Bridge.Contract
                     name = value.ToString();
                 }
 
-                prefix = null;
+                if (!(iProperty != null || definition is IEvent))
+                {
+                    prefix = null;
+                }
             }
 
             if (attr != null && definition.ImplementedInterfaceMembers.Count > 0)
@@ -1078,7 +1089,9 @@ namespace Bridge.Contract
                 return prefix != null ? prefix + name : name;
             }
 
-            var isCtor = definition is IMethod && ((IMethod)definition).IsConstructor;
+            var iDefinition = definition as IMethod;
+            var isCtor = iDefinition != null && iDefinition.IsConstructor;
+
             if (isCtor)
             {
                 name = JS.Funcs.CONSTRUCTOR;

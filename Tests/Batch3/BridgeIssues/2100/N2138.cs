@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using Bridge.Linq;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -77,8 +77,10 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             public Action Access1()
             {
-                return () => {
-                    _itms.Itms.ForEach(x => {
+                return () =>
+                {
+                    _itms.Itms.ForEach(x =>
+                    {
                     });
 
                     _itms.Itms[0].SomeAction();
@@ -87,7 +89,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             public Action Access2()
             {
-                return () => {
+                return () =>
+                {
                     _itms.Itms[0].SomeAction();
                 };
             }

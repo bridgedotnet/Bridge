@@ -1,4 +1,4 @@
-﻿using Bridge.Test;
+﻿using Bridge.Test.NUnit;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -189,7 +189,7 @@ namespace Bridge.ClientTest.Linq.Expressions
             }
 
             [Reflectable]
-            public static explicit operator int (C a)
+            public static explicit operator int(C a)
             {
                 return 0;
             }

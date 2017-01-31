@@ -476,7 +476,11 @@
     <Compile Include="BridgeIssues\2200\N2246.cs" />
     <Compile Include="BridgeIssues\2200\N2249.cs" />
     <Compile Include="BridgeIssues\2200\N2251.cs" />
+    <Compile Include="BridgeIssues\2200\N2281.cs" />
     <Compile Include="BridgeIssues\2200\N2278.cs" />
+    <Compile Include="BridgeIssues\2200\N2279.cs" />
+    <Compile Include="BridgeIssues\2200\N2280.cs" />
+    <Compile Include="BridgeIssues\2200\N2284.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
     <Compile Include="Utilities\DecimalHelper.cs" />
@@ -514,7 +518,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Bridge.Test, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Bridge.Test.Core.1.0.0-beta1\lib\net40\Bridge.Test.dll</HintPath>
+      <HintPath>..\..\packages\Bridge.Test.Core.1.0.0\lib\net40\Bridge.Test.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

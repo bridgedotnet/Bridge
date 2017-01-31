@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -9,7 +9,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#1467 - {0}")]
     public class Bridge1467
     {
-        class SomeClass1
+        private class SomeClass1
         {
             public int Value
             {
@@ -17,18 +17,17 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
-        class SomeClass2 : SomeClass1
+        private class SomeClass2 : SomeClass1
         {
         }
 
-        class AnotherClass
+        private class AnotherClass
         {
             public int Value
             {
                 get; set;
             }
         }
-
 
         [Test(ExpectedCount = 7)]
         public static void TestForeachTypeChecking()
@@ -59,7 +58,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 Assert.AreEqual("j", z2, "string z2 in (IEnumerable)new[] { \"j\" } foreach var");
             }
 
-            foreach (SomeClass1 c in (IEnumerable)new[] { new SomeClass1 { Value = 1} })
+            foreach (SomeClass1 c in (IEnumerable)new[] { new SomeClass1 { Value = 1 } })
             {
                 Assert.AreEqual(1, c.Value, "(IEnumerable)new[] { new SomeClass1 { Value = 1} } foreach SomeClass1");
             }

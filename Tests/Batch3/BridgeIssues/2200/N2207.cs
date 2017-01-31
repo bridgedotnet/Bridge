@@ -1,6 +1,6 @@
 using System;
 using System.Reflection;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -8,9 +8,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#2207 - {0}")]
     public class Bridge2207
     {
-        struct SomeStruct
+        private struct SomeStruct
         {
-            int? i;
+            private int? i;
 
             public SomeStruct(int i)
             {
@@ -23,7 +23,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
-        static T SomeMethod<T>(T input = default(T))
+        private static T SomeMethod<T>(T input = default(T))
         {
             return input;
         }

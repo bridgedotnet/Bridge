@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.CSharp6
 {
@@ -46,7 +46,7 @@ namespace Bridge.ClientTest.CSharp6
             public string First { get; } = "Jane";
             public string Last { get; } = "Doe";
 
-            public static implicit operator string (Person p) => p.First + " " + p.Last;
+            public static implicit operator string(Person p) => p.First + " " + p.Last;
 
             public string Name => First + " " + Last;
             public Person this[int id] => id > 0 ? new Person() : null;

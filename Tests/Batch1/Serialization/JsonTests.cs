@@ -1,5 +1,5 @@
 ﻿using Bridge.Html5;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest
 {
@@ -8,7 +8,7 @@ namespace Bridge.ClientTest
     public class JsonTests
     {
         [ObjectLiteral]
-        class TestClass1
+        private class TestClass1
         {
 #pragma warning disable 414
             public int i;
@@ -16,14 +16,14 @@ namespace Bridge.ClientTest
         }
 
         [ObjectLiteral]
-        class TestClass2
+        private class TestClass2
         {
             public int i;
             public string s;
         }
 
         [ObjectLiteral]
-        class TestClass3
+        private class TestClass3
         {
             public int i;
             public string s;
@@ -40,7 +40,7 @@ namespace Bridge.ClientTest
         }
 
         [ObjectLiteral(ObjectCreateMode.Constructor)]
-        class TestClass4
+        private class TestClass4
         {
             public int i;
             public string s;
@@ -57,8 +57,10 @@ namespace Bridge.ClientTest
         }
 
 #pragma warning disable CS0626 // Method, operator, or accessor is marked external and has no attributes on it
+
         [Template("Bridge.isPlainObject({o})")]
         public static extern bool IsPlainObject(object o);
+
 #pragma warning restore CS0626 // Method, operator, or accessor is marked external and has no attributes on it
 
         [Test]

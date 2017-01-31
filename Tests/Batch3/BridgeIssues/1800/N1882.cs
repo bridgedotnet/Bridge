@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -19,7 +19,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public class MVCArrayExternal<T>
         {
 #pragma warning disable 824
+
             public extern MVCArrayExternal();
+
 #pragma warning restore 824
         }
 

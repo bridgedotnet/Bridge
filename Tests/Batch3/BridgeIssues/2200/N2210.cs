@@ -1,5 +1,5 @@
 using System;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -10,17 +10,19 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public class LoginAgent : Agent_Logic
         {
         }
+
         public class Agent_Logic
         {
-
         }
+
         public class Hello : ObjSingleton<Hello>
         {
-
         }
+
         public class ObjSingleton<T> where T : class, new()
         {
-            static T instance = null;
+            private static T instance = null;
+
             public static T Instance
             {
                 get
@@ -33,16 +35,17 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 }
             }
         }
+
         public class GoSington<T> : object where T : GoSington<T>
         {
-            static T instance = null;
+            private static T instance = null;
+
             public static T Instance
             {
                 get
                 {
                     if (instance == null)
                     {
-
                     }
                     return instance;
                 }
