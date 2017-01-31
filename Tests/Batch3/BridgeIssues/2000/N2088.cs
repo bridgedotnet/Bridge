@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System.Threading.Tasks;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
@@ -11,28 +11,28 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge2088
     {
         [Reflectable]
-        class T
+        private class T
         {
             public int ShouldSeeThis { get; set; }
         }
 
         [Reflectable]
         [ObjectLiteral]
-        class CompletelyUnrelatedClass
+        private class CompletelyUnrelatedClass
         {
             public int ShouldNotSeeThis { get; set; }
         }
 
         [Reflectable]
         [ObjectLiteral(ObjectCreateMode.Constructor)]
-        class OL1
+        private class OL1
         {
             public int ShouldSeeThis1 { get; set; }
         }
 
         [Reflectable]
         [ObjectLiteral(ObjectCreateMode.Constructor)]
-        class OL2 : OL1
+        private class OL2 : OL1
         {
             public int ShouldSeeThis2 { get; set; }
         }

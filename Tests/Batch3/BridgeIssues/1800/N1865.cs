@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -11,7 +11,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge1865
     {
         [ObjectLiteral]
-        interface IContract
+        private interface IContract
         {
             int Value
             {
@@ -20,7 +20,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [ObjectLiteral]
-        class Contract : IContract
+        private class Contract : IContract
         {
             public int Value
             {
@@ -29,7 +29,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [ObjectLiteral]
-        class Contract2 : IContract
+        private class Contract2 : IContract
         {
             public int Value
             {

@@ -1,5 +1,5 @@
 using Bridge;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace SomeExternalNamespace
 {

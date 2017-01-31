@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -7,7 +7,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#1813 - {0}")]
     public class Bridge1813
     {
-        private List<object> list = new List<object>(); 
+        private List<object> list = new List<object>();
+
         public void Add(params object[] obj)
         {
             this.list.AddRange(obj);

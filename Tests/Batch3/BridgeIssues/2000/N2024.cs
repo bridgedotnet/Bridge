@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using static Bridge.ClientTest.Batch3.BridgeIssues.Bridge2024.Class2;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues

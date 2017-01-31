@@ -1,6 +1,6 @@
 using System;
 using System.Reflection;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {

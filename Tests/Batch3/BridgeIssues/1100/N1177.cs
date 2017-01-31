@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -23,7 +23,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 this.value = value;
             }
 
-            public static implicit operator string (Item item)
+            public static implicit operator string(Item item)
             {
                 return item.value;
             }

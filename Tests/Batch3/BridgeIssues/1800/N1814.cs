@@ -1,6 +1,5 @@
 using ContentManagerBase = content.ContentManagerBase;
-using Bridge.Test;
-
+using Bridge.Test.NUnit;
 
 namespace achievements.content
 {

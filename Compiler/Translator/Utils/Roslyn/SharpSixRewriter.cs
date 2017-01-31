@@ -610,14 +610,17 @@ namespace Bridge.Translator
 
         public override SyntaxNode VisitClassDeclaration(ClassDeclarationSyntax node)
         {
+            var old = this.fields;
             this.fields = new List<MemberDeclarationSyntax>();
 
             var c = base.VisitClassDeclaration(node) as ClassDeclarationSyntax;
 
-            if (c != null && fields.Count > 0)
+            if (c != null && this.fields.Count > 0)
             {
                 c = c.AddMembers(this.fields.ToArray());
             }
+
+            this.fields = old;
 
             return c;
         }

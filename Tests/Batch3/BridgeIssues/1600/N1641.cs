@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;

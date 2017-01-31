@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 using System.ComponentModel;
 
@@ -21,9 +21,14 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             private static readonly Set<T> _empty = new Set<T>();
             public static Set<T> Empty { get { return _empty; } }
 
-            private Set() { }
+            private Set()
+            {
+            }
 
-            public Set<T> Add(T value) { return this; }
+            public Set<T> Add(T value)
+            {
+                return this;
+            }
 
             public int Count { get { return 1; } }
         }

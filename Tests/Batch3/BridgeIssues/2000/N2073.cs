@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -9,6 +9,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public class Obj
         {
             public string v;
+
             public static implicit operator Obj(string s)
             {
                 return new Obj { v = s };

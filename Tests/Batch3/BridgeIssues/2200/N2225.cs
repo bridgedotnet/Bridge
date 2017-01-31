@@ -1,5 +1,5 @@
 using System;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -7,7 +7,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#2225 - {0}")]
     public class Bridge2225
     {
-        class VolatileTest
+        private class VolatileTest
         {
             public volatile int i;
 

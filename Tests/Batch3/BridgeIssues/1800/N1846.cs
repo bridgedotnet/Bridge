@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -12,6 +12,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public class Obj
         {
             public string s;
+
             public static implicit operator Obj(string str)
             {
                 return new Obj() { s = str };

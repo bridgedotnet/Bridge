@@ -59,7 +59,7 @@ namespace Bridge.Contract
             }
             else if (this.Entity is PropertyDeclaration)
             {
-                fieldName = OverloadsCollection.Create(emitter, (PropertyDeclaration)this.Entity).GetOverloadName(false, null, withoutTypeParams);
+                fieldName = OverloadsCollection.Create(emitter, (PropertyDeclaration)this.Entity, isField: true).GetOverloadName(false, null, withoutTypeParams);
             }
             else
             {

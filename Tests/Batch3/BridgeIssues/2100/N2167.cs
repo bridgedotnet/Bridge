@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using Bridge.ClientTestHelperExternal;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
