@@ -13783,6 +13783,27 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2293", {
+        testAttributeUsage: function () {
+            var cd = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2293.f1;
+
+            // Just check that [Custom] can be applied with no [AttributeUsage(AttributeTargets.All)] required
+            Bridge.Test.NUnit.Assert.areEqual(5, cd(5));
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2293", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2293, {
+        f1: function (sender) {
+            return sender;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2293.CustomAttribute", {
+        inherits: [System.Attribute]
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
