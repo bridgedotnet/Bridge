@@ -46,6 +46,22 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             var node = new Node<Optional<string>> { Item = item };
             Assert.AreEqual(item, node.Item);
             Assert.AreEqual("abc", node.Item.Value);
+
+            FieldMerge("xyz");
+            FieldMerge(5);
+            FieldMerge(6m);
+            FieldMerge(7L);
+            FieldMerge(8UL);
+        }
+
+        private static void FieldMerge<T>(T value)
+        {
+            var item = new Optional<T>(value);
+            Assert.AreEqual(value, item.Value);
+
+            var node = new Node<Optional<T>> { Item = item };
+            Assert.AreEqual(item, node.Item);
+            Assert.AreEqual(value, node.Item.Value);
         }
     }
 }

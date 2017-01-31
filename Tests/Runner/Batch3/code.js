@@ -13663,6 +13663,22 @@ Bridge.$N1391Result =                 r;
                 } );
                 Bridge.Test.NUnit.Assert.areEqual(item, node.item);
                 Bridge.Test.NUnit.Assert.areEqual("abc", node.item.getValue());
+
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281.fieldMerge(String, "xyz");
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281.fieldMerge(System.Int32, 5);
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281.fieldMerge(System.Decimal, System.Decimal(6.0));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281.fieldMerge(System.Int64, System.Int64(7));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281.fieldMerge(System.UInt64, System.UInt64(8));
+            },
+            fieldMerge: function (T, value) {
+                var item = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281.Optional$1(T)).$ctor1(value);
+                Bridge.Test.NUnit.Assert.areEqual(value, item.getValue());
+
+                var node = Bridge.merge(new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281.Node$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281.Optional$1(T)))(), {
+                    item: item
+                } );
+                Bridge.Test.NUnit.Assert.areEqual(item, node.item);
+                Bridge.Test.NUnit.Assert.areEqual(value, node.item.getValue());
             }
         }
     });
