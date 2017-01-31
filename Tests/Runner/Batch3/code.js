@@ -13652,6 +13652,64 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2284", {
+        statics: {
+            testNameAttrOnProperty: function () {
+                var p = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2284.Person();
+                var v = null;
+
+                p.setNAME("Frank1");
+                v = p.getNAME();
+                Bridge.Test.NUnit.Assert.areEqual("Frank1", v);
+                p.setNAME("John1");
+                Bridge.Test.NUnit.Assert.areEqual("John1", p.getNAME());
+
+                p.setN2("Frank2");
+                v = p.getN2();
+                Bridge.Test.NUnit.Assert.areEqual("Frank2", v);
+                p.setN2("John2");
+                Bridge.Test.NUnit.Assert.areEqual("John2", p.getN2());
+
+                p.nm3("Frank3");
+                v = p.nm3();
+                Bridge.Test.NUnit.Assert.areEqual("Frank3", v);
+                p.nm3("John3");
+                Bridge.Test.NUnit.Assert.areEqual("John3", p.nm3());
+
+                p.nm4("Frank4");
+                v = p.getName4();
+                Bridge.Test.NUnit.Assert.areEqual("Frank4", v);
+                p.nm4("John4");
+                Bridge.Test.NUnit.Assert.areEqual("John4", p.getName4());
+
+                p.setName5("Frank5");
+                v = p.nm5();
+                Bridge.Test.NUnit.Assert.areEqual("Frank5", v);
+                p.setName5("John5");
+                Bridge.Test.NUnit.Assert.areEqual("John5", p.nm5());
+
+                p.nm6_s("Frank6");
+                v = p.nm6_g();
+                Bridge.Test.NUnit.Assert.areEqual("Frank6", v);
+                p.nm6_s("John6");
+                Bridge.Test.NUnit.Assert.areEqual("John6", p.nm6_g());
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2284.Person", {
+        config: {
+            properties: {
+                NAME: null,
+                Name2: { getter:'getN2', setter: 'setN2', value: null },
+                Name3: { getter:'nm3', setter: 'nm3', value: null },
+                Name4: { setter: 'nm4', value: null },
+                Name5: { getter: 'nm5', value: null },
+                NAME6: { getter:'nm6_g', setter: 'nm6_s', value: null }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {

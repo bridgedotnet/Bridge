@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -30,7 +30,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 [Name("nm3")]
                 set;
             }
-            
+
             public string Name4
             {
                 get;
@@ -38,11 +38,21 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 [Name("nm4")]
                 set;
             }
-            
+
             public string Name5
             {
                 [Name("nm5")]
-                get;                
+                get;
+                set;
+            }
+
+            [Name("NAME6")]
+            public string Name6
+            {
+                [Name("nm6_g")]
+                get;
+
+                [Name("nm6_s")]
                 set;
             }
         }
@@ -70,18 +80,24 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual("Frank3", v);
             p.Name3 = "John3";
             Assert.AreEqual("John3", p.Name3);
-            
+
             //@ p.nm4("Frank4");
             //@ v = p.getName4();
             Assert.AreEqual("Frank4", v);
             p.Name4 = "John4";
             Assert.AreEqual("John4", p.Name4);
-                        
+
             //@ p.setName5("Frank5");
             //@ v = p.nm5();
             Assert.AreEqual("Frank5", v);
             p.Name5 = "John5";
             Assert.AreEqual("John5", p.Name5);
+
+            //@ p.nm6_s("Frank6");
+            //@ v = p.nm6_g();
+            Assert.AreEqual("Frank6", v);
+            p.Name6 = "John6";
+            Assert.AreEqual("John6", p.Name6);
         }
     }
 }
