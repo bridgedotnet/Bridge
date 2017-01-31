@@ -433,6 +433,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#2278 - TestGenericInterface", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2278.testGenericInterface);
             QUnit.test("#2279 - TestPropertyWithInitializerAndNestedClass", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2279.testPropertyWithInitializerAndNestedClass);
             QUnit.test("#2280 - TestGetTypeInIgnoreGenericMethod", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2280.testGetTypeInIgnoreGenericMethod);
+            QUnit.test("#2281 - TestFieldMerge", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2281.testFieldMerge);
             QUnit.test("#2284 - TestNameAttrOnProperty", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2284.testNameAttrOnProperty);
             QUnit.test("#381 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge381.testUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.checkInlineExpression);
@@ -8759,6 +8760,30 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2280",
                     file: "Batch3\\BridgeIssues\\2200\\N2280.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2281", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281)],
+        statics: {
+            testFieldMerge: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2281, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestFieldMerge()",
+                    line: "34"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281.testFieldMerge();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281",
+                    file: "Batch3\\BridgeIssues\\2200\\N2281.cs"
                 } );
             }
             return this.context;
