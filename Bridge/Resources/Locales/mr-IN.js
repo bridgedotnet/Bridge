@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("mr-IN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("mr-IN", true), {
     englishName: "Marathi (India)",
     nativeName: "मराठी (भारत)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

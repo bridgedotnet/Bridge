@@ -1,4 +1,4 @@
-﻿    var scope = {};
+    var scope = {};
 
     scope.convert = {
         typeCodes: {

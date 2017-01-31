@@ -1,6 +1,9 @@
 using Bridge.Contract;
 using ICSharpCode.NRefactory.CSharp;
 using System.Linq;
+using Bridge.Contract.Constants;
+using ICSharpCode.NRefactory.Semantics;
+using ICSharpCode.NRefactory.TypeSystem;
 
 namespace Bridge.Translator
 {
@@ -25,9 +28,17 @@ namespace Bridge.Translator
             var first = elements.Count > 0 ? elements.First() : null;
 
             var isObjectInitializer = first is NamedExpression || first is NamedArgumentExpression;
+            var rr = this.Emitter.Resolver.ResolveNode(this.ArrayInitializerExpression, this.Emitter) as ArrayCreateResolveResult;
+            var at = rr != null ? (ArrayType)rr.Type : null;
 
             if (!isObjectInitializer || this.ArrayInitializerExpression.IsSingleElement)
             {
+                if (at != null)
+                {
+                    this.Write(JS.Types.System.Array.INIT);
+                    this.WriteOpenParentheses();
+                }
+
                 this.Write("[");
             }
             else
@@ -40,6 +51,12 @@ namespace Bridge.Translator
             if (!isObjectInitializer || this.ArrayInitializerExpression.IsSingleElement)
             {
                 this.Write("]");
+                if (at != null)
+                {
+                    this.Write(", ");
+                    this.Write(BridgeTypes.ToJsName(at.ElementType, this.Emitter));
+                    this.Write(")");
+                }
             }
             else
             {

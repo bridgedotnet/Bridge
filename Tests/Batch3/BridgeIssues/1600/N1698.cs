@@ -1,8 +1,9 @@
 using System;
 using Bridge;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 [assembly: Reflectable("System.Console")]
+
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
     [Category(Constants.MODULE_ISSUES)]
@@ -32,6 +33,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public static void ResetOutput()
         {
             Output = null;
+            Bridge.Utils.Console.Hide();
         }
 
         [Test(ExpectedCount = 14)]

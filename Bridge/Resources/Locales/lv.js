@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("lv", true), {
+Bridge.merge(new System.Globalization.CultureInfo("lv", true), {
     englishName: "Latvian",
     nativeName: "latviešu",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "Nav skaitlis",
+        nanSymbol: "Nav skaitlis",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

@@ -1,4 +1,4 @@
-﻿Bridge.assembly("TypeScriptTest", function ($asm, globals) {
+Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     "use strict";
 
     Bridge.definei("TypeScript.Issues.N2029Interface$1", function (T) { return {
@@ -69,6 +69,20 @@
             return this._dictionary.containsKey(index);
         }
     }; });
+
+    Bridge.define("TypeScript.Issues.N2264", {
+        config: {
+            properties: {
+                Values: null
+            }
+        },
+        ctor: function (queryParameters) {
+            if (queryParameters === void 0) { queryParameters = null; }
+
+            this.$initialize();
+            this.setValues(queryParameters);
+        }
+    });
 
     Bridge.define("TypeScript.Issues.N2029", {
         inherits: [TypeScript.Issues.N2029Interface$1(System.Int32)],

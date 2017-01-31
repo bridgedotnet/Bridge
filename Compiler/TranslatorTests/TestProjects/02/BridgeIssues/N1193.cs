@@ -7,7 +7,7 @@ namespace Test.BridgeIssues.N1193
         [Init(InitPosition.Top)]
         public static void Top()
         {
-            Script.Write("// Should be at the top");
+            Script.Write("// @!!! Content begin mark. Should be at the top (issue 1193). This is also required to mark beginning of the file part to compare to the reference without bridge.js content");
         }
     }
 }

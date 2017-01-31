@@ -1,4 +1,4 @@
-﻿/*
+/*
  Copyright 2013 Daniel Wirtz <dcode@dcode.io>
  Copyright 2009 The Closure Library Authors. All Rights Reserved.
  Licensed under the Apache License, Version 2.0 (the "License");

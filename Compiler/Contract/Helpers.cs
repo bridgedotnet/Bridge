@@ -205,12 +205,12 @@ namespace Bridge.Contract
 
         public static bool IsIgnoreGeneric(ITypeDefinition type)
         {
-            return type.Attributes.Any(a => a.AttributeType.FullName == "Bridge.IgnoreGenericAttribute");
+            return type.Attributes.Any(a => a.AttributeType.FullName == "Bridge.IgnoreGenericAttribute") || type.DeclaringTypeDefinition != null && Helpers.IsIgnoreGeneric(type.DeclaringTypeDefinition);
         }
 
         public static bool IsIgnoreGeneric(IType type, IEmitter emitter)
         {
-            return emitter.Validator.HasAttribute(type.GetDefinition().Attributes, "Bridge.IgnoreGenericAttribute");
+            return emitter.Validator.HasAttribute(type.GetDefinition().Attributes, "Bridge.IgnoreGenericAttribute") || type.DeclaringType != null && Helpers.IsIgnoreGeneric(type.DeclaringType, emitter);
         }
 
         public static bool IsIgnoreGeneric(IEntity member, IEmitter emitter)
@@ -395,7 +395,7 @@ namespace Bridge.Contract
             if (type.Kind == TypeKind.Struct)
             {
                 var typeDef = block.Emitter.GetTypeDefinition(type);
-                if (block.Emitter.Validator.IsIgnoreType(typeDef) || block.Emitter.Validator.IsImmutableType(typeDef))
+                if (block.Emitter.Validator.IsExternalType(typeDef) || block.Emitter.Validator.IsImmutableType(typeDef))
                 {
                     return;
                 }
@@ -493,10 +493,11 @@ namespace Bridge.Contract
                 return true;
             }
 
-            bool isAuto = propertyMember.Attributes.Any(a => a.AttributeType.FullName == "Bridge.FieldPropertyAttribute");
+            bool isAuto = AttributeHelper.HasFieldAttribute(propertyMember);
             if (!isAuto && assemblyInfo.AutoPropertyToField && propertyMember is IProperty)
             {
-                var isIgnore = propertyMember.DeclaringTypeDefinition.Attributes.Any(a => a.AttributeType.FullName == "Bridge.ExternalAttribute");
+                var isIgnore = propertyMember.DeclaringTypeDefinition.Attributes.Any(a => a.AttributeType.FullName == "Bridge.ExternalAttribute") ||
+                               propertyMember.DeclaringTypeDefinition.ParentAssembly.AssemblyAttributes.Any(a => a.AttributeType.FullName == "Bridge.ExternalAttribute");
                 if (isIgnore)
                 {
                     return false;
@@ -517,11 +518,11 @@ namespace Bridge.Contract
                 return true;
             }
 
-            bool isAuto = propertyMember.Attributes.Any(a => a.AttributeType.FullName == "Bridge.FieldPropertyAttribute");
+            bool isAuto = AttributeHelper.HasFieldAttribute(propertyMember);
             if (!isAuto && emitter.AssemblyInfo.AutoPropertyToField)
             {
                 var typeDef = emitter.GetTypeDefinition(propertyMember.DeclaringType);
-                if (emitter.Validator.IsIgnoreType(typeDef))
+                if (emitter.Validator.IsExternalType(typeDef))
                 {
                     return false;
                 }
@@ -543,11 +544,11 @@ namespace Bridge.Contract
                 return true;
             }
 
-            bool isAuto = property.CustomAttributes.Any(a => a.AttributeType.FullName == "Bridge.FieldPropertyAttribute");
+            bool isAuto = AttributeHelper.HasFieldAttribute(property);
             if (!isAuto && emitter.AssemblyInfo.AutoPropertyToField)
             {
                 var typeDef = property.DeclaringType;
-                if (emitter.Validator.IsIgnoreType(typeDef))
+                if (emitter.Validator.IsExternalType(typeDef))
                 {
                     return false;
                 }
@@ -564,22 +565,9 @@ namespace Bridge.Contract
                 return Helpers.IsFieldProperty(((MemberResolveResult)resolveResult).Member, emitter);
             }
 
-            string name = "Bridge.FieldProperty";
-            string name1 = name + "Attribute";
-            foreach (var i in property.Attributes)
+            if (AttributeHelper.HasFieldAttribute(property, emitter))
             {
-                foreach (var j in i.Attributes)
-                {
-                    if (j.Type.ToString() == name || j.Type.ToString() == name1)
-                    {
-                        return true;
-                    }
-                    resolveResult = emitter.Resolver.ResolveNode(j, emitter);
-                    if (resolveResult != null && resolveResult.Type != null && resolveResult.Type.FullName == name1)
-                    {
-                        return true;
-                    }
-                }
+                return true;
             }
 
             if (!emitter.AssemblyInfo.AutoPropertyToField)
@@ -770,8 +758,12 @@ namespace Bridge.Contract
             return list;
         }
 
-        public static bool IsReservedWord(string word)
+        public static bool IsReservedWord(IEmitter emitter, string word)
         {
+            if (emitter != null && (emitter.TypeInfo.JsName == word || emitter.TypeInfo.JsName.StartsWith(word + ".")))
+            {
+                return true;
+            }
             return JS.Reserved.Words.Contains(word);
         }
 
@@ -784,7 +776,7 @@ namespace Bridge.Contract
         {
             var enumMode = emitter.Validator.EnumEmitMode(type);
 
-            if ((emitter.Validator.IsIgnoreType(type.GetDefinition()) && enumMode == -1) || enumMode == 2)
+            if ((emitter.Validator.IsExternalType(type.GetDefinition()) && enumMode == -1) || enumMode == 2)
             {
                 return constantValue;
             }
@@ -1243,6 +1235,12 @@ namespace Bridge.Contract
             }
 
             return false;
+        }
+
+        private static Regex validIdentifier = new Regex("^[$A-Z_][0-9A-Z_$]*$", RegexOptions.Compiled | RegexOptions.Singleline | RegexOptions.IgnoreCase);
+        public static bool IsValidIdentifier(string name)
+        {
+            return Helpers.validIdentifier.IsMatch(name);
         }
     }
 }

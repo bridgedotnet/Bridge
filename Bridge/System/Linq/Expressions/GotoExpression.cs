@@ -7,13 +7,13 @@ namespace System.Linq.Expressions
     [Cast("{this}.ntype === 53")]
     public sealed class GotoExpression : Expression
     {
-        [FieldProperty]
+        [Field]
         public extern GotoExpressionKind Kind { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern Expression Value { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern LabelTarget Target { get; private set; }
 
         internal extern GotoExpression();

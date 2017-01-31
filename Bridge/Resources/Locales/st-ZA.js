@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("st-ZA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("st-ZA", true), {
     englishName: "Southern Sotho (South Africa)",
     nativeName: "Sesotho (South Africa)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

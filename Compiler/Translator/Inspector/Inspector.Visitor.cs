@@ -24,7 +24,7 @@ namespace Bridge.Translator
         {
             if (!String.IsNullOrEmpty(this.Namespace))
             {
-                throw (EmitterException)this.CreateException(namespaceDeclaration, "Nested namespaces are not supported");
+                //throw (EmitterException)this.CreateException(namespaceDeclaration, "Nested namespaces are not supported");
             }
 
             if (!this.AssemblyInfo.Assembly.EnableReservedNamespaces)
@@ -57,8 +57,19 @@ namespace Bridge.Translator
             var partialType = this.Types.FirstOrDefault(t => t.Key == fullName);
             var add = true;
             var ignored = this.IgnoredTypes.Contains(fullName);
+            var external = this.HasExternal(typeDeclaration);
 
-            if ((ignored || this.HasIgnore(typeDeclaration) || this.IsNonScriptable(typeDeclaration)) && !this.IsObjectLiteral(typeDeclaration))
+            if (!external)
+            {
+                var resolveResult = this.Resolver.ResolveNode(typeDeclaration, null);
+                if (resolveResult != null && resolveResult.Type != null)
+                {
+                    var def = resolveResult.Type.GetDefinition();
+                    external = def != null && def.ParentAssembly.AssemblyAttributes.Any(a => a.AttributeType.FullName == "Bridge.ExternalAttribute");
+                }
+            }
+
+            if ((external || ignored || this.IsNonScriptable(typeDeclaration)) && !this.IsObjectLiteral(typeDeclaration))
             {
                 if (partialType != null)
                 {
@@ -298,7 +309,7 @@ namespace Bridge.Translator
 
         public override void VisitConstructorDeclaration(ConstructorDeclaration constructorDeclaration)
         {
-            if (this.HasInline(constructorDeclaration) || constructorDeclaration.HasModifier(Modifiers.Extern) && !this.HasScript(constructorDeclaration))
+            if (this.HasTemplate(constructorDeclaration) || constructorDeclaration.HasModifier(Modifiers.Extern) && !this.HasScript(constructorDeclaration))
             {
                 return;
             }
@@ -319,7 +330,7 @@ namespace Bridge.Translator
 
         public override void VisitOperatorDeclaration(OperatorDeclaration operatorDeclaration)
         {
-            if (this.HasInline(operatorDeclaration))
+            if (this.HasTemplate(operatorDeclaration))
             {
                 return;
             }
@@ -371,7 +382,7 @@ namespace Bridge.Translator
 
         public override void VisitMethodDeclaration(MethodDeclaration methodDeclaration)
         {
-            if (methodDeclaration.HasModifier(Modifiers.Abstract) || this.HasInline(methodDeclaration))
+            if (methodDeclaration.HasModifier(Modifiers.Abstract) || this.HasTemplate(methodDeclaration))
             {
                 return;
             }
@@ -479,8 +490,8 @@ namespace Bridge.Translator
             CheckFieldProperty(propertyDeclaration, ref isResolvedProperty, ref resolvedProperty);
 
             if (!propertyDeclaration.Getter.IsNull
-                && !this.HasIgnore(propertyDeclaration)
-                && !this.HasInline(propertyDeclaration.Getter)
+                && !this.HasExternal(propertyDeclaration)
+                && !this.HasTemplate(propertyDeclaration.Getter)
                 && propertyDeclaration.Getter.Body.IsNull
                 && !this.HasScript(propertyDeclaration.Getter))
             {
@@ -514,7 +525,7 @@ namespace Bridge.Translator
                 {
                     if (resolvedProperty != null && resolvedProperty.Member.ImplementedInterfaceMembers.Count > 0 && resolvedProperty.Member.ImplementedInterfaceMembers.Any(m => Helpers.IsFieldProperty(m, this.AssemblyInfo)))
                     {
-                        throw new EmitterException(propertyDeclaration, string.Format("The property {0} is not marked as FieldProperty but implemented interface member has such attribute", resolvedProperty.Member.ToString()));
+                        throw new EmitterException(propertyDeclaration, string.Format(Bridge.Translator.Constants.Messages.Exceptions.FIELD_PROPERTY_NOT_MARKED, resolvedProperty.Member.ToString()));
                     }
 
                     info.Properties.Add(new TypeConfigItem
@@ -528,7 +539,7 @@ namespace Bridge.Translator
                 {
                     if (resolvedProperty != null && resolvedProperty.Member.ImplementedInterfaceMembers.Count > 0 && !resolvedProperty.Member.ImplementedInterfaceMembers.All(m => Helpers.IsFieldProperty(m, this.AssemblyInfo)))
                     {
-                        throw new EmitterException(propertyDeclaration, string.Format("The property {0} is marked as FieldProperty but implemented interface member has no such attribute", resolvedProperty.Member.ToString()));
+                        throw new EmitterException(propertyDeclaration, string.Format(Bridge.Translator.Constants.Messages.Exceptions.FIELD_PROPERTY_MARKED, resolvedProperty.Member.ToString()));
                     }
 
                     info.Fields.Add(new TypeConfigItem
@@ -543,19 +554,19 @@ namespace Bridge.Translator
 
         private void CheckFieldProperty(PropertyDeclaration propertyDeclaration, ref bool isResolvedProperty, ref MemberResolveResult resolvedProperty)
         {
-            if (this.HasIgnore(propertyDeclaration) || this.CurrentType.IsObjectLiteral)
+            if (this.HasExternal(propertyDeclaration) || this.CurrentType.IsObjectLiteral)
             {
                 return;
             }
 
             var possiblyWrongGetter = !propertyDeclaration.Getter.IsNull
                 && !propertyDeclaration.Getter.Body.IsNull
-                && !this.HasInline(propertyDeclaration.Getter)
+                && !this.HasTemplate(propertyDeclaration.Getter)
                 && !this.HasScript(propertyDeclaration.Getter);
 
             var possiblyWrongSetter = !propertyDeclaration.Setter.IsNull
                 && !propertyDeclaration.Setter.Body.IsNull
-                && !this.HasInline(propertyDeclaration.Setter)
+                && !this.HasTemplate(propertyDeclaration.Setter)
                 && !this.HasScript(propertyDeclaration.Setter);
 
             if (possiblyWrongGetter || possiblyWrongSetter)
@@ -573,7 +584,7 @@ namespace Bridge.Translator
                     if (isField)
                     {
                         var message = string.Format(
-                            "{0} is marked with [FieldProperty] attribute but implements {1}{2}. To fix the problem either remove [FieldProperty] (swith off bridge.json option `autoPropertyToField`) or add [External]/[Template] attributes",
+                            Bridge.Translator.Constants.Messages.Exceptions.FIELD_PROPERTY_MARKED_ADVISE,
                             resolvedProperty.Member.ToString(),
                             possiblyWrongGetter ? "getter" : string.Empty,
                             possiblyWrongSetter ? (possiblyWrongGetter ? " and " : string.Empty) + "setter" : string.Empty
@@ -833,15 +844,70 @@ namespace Bridge.Translator
             if ((name == (Translator.Bridge_ASSEMBLY + ".Module")) ||
                 (resolveResult != null && resolveResult.Type != null && resolveResult.Type.FullName == (Translator.Bridge_ASSEMBLY + ".ModuleAttribute")))
             {
-                if (attr.Arguments.Count > 0)
+                Module module = null;
+
+                if (attr.Arguments.Count == 1)
                 {
-                    object nameObj = this.GetAttributeArgumentValue(attr, resolveResult, 0);
-                    this.AssemblyInfo.Module = nameObj != null ? nameObj.ToString() : "";
+                    var obj = this.GetAttributeArgumentValue(attr, resolveResult, 0);
+
+                    if (obj is bool)
+                    {
+                        module = new Module((bool)obj);
+                    }
+                    else if (obj is string)
+                    {
+                        module = new Module(obj.ToString());
+                    }
+                    else if (obj is int)
+                    {
+                        module = new Module("", (ModuleType)(int)obj);
+                    }
+                    else
+                    {
+                        module = new Module();
+                    }
+                }
+                else if (attr.Arguments.Count == 2)
+                {
+                    var first = this.GetAttributeArgumentValue(attr, resolveResult, 0);
+                    var second = this.GetAttributeArgumentValue(attr, resolveResult, 1);
+
+                    if (first is string)
+                    {
+                        var mname = first;
+                        var preventName = second;
+
+                        module = new Module(mname != null ? mname.ToString() : "", (bool)preventName);
+                    }
+                    else if (second is bool)
+                    {
+                        var mtype = first;
+                        var preventName = second;
+
+                        module = new Module("", (ModuleType)(int)mtype, (bool)preventName);
+                    }
+                    else
+                    {
+                        var mtype = first;
+                        var mname = second;
+
+                        module = new Module(mname != null ? mname.ToString() : "", (ModuleType)(int)mtype);
+                    }
+                }
+                else if (attr.Arguments.Count == 3)
+                {
+                    var mtype = this.GetAttributeArgumentValue(attr, resolveResult, 0);
+                    var mname = this.GetAttributeArgumentValue(attr, resolveResult, 1);
+                    var preventName = this.GetAttributeArgumentValue(attr, resolveResult, 2);
+
+                    module = new Module(mname != null ? mname.ToString() : "", (ModuleType)(int)mtype, (bool)preventName);
                 }
                 else
                 {
-                    this.AssemblyInfo.Module = "";
+                    module = new Module();
                 }
+
+                this.AssemblyInfo.Module = module;
 
                 return true;
             }

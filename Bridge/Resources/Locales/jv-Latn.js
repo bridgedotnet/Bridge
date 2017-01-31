@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("jv-Latn", true), {
+Bridge.merge(new System.Globalization.CultureInfo("jv-Latn", true), {
     englishName: "Javanese",
     nativeName: "Basa Jawa",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

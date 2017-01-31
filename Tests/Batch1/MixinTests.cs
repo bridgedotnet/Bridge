@@ -1,4 +1,4 @@
-﻿using Bridge.Test;
+﻿using Bridge.Test.NUnit;
 
 #pragma warning disable 626	// CS0626  Method, operator, or accessor 'MixinTests.GlobalWrapper.IsNaN(object)' is marked external and has no attributes on it. Consider adding a DllImport attribute to specify the external implementation.
 

@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -9,7 +9,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test]
         public static void TestAssemblyVersionMarker()
         {
-            Assert.AreEqual("1.2.3.4", ClientTestHelper.Internal.N1193.ClientTestHelperAssemblyVersion);
+            Assert.AreEqual("1.2.3.4", ClientTestHelper.N1193.ClientTestHelperAssemblyVersion);
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sah-RU", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sah-RU", true), {
     englishName: "Sakha (Russia)",
     nativeName: "Саха (Россия)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NAN",
+        nanSymbol: "NAN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

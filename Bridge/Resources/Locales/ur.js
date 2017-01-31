@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ur", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ur", true), {
     englishName: "Urdu",
     nativeName: "اُردو",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

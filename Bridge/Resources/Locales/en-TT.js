@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("en-TT", true), {
+Bridge.merge(new System.Globalization.CultureInfo("en-TT", true), {
     englishName: "English (Trinidad and Tobago)",
     nativeName: "English (Trinidad and Tobago)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

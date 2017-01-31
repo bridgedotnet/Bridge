@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ku-Arab-IQ", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ku-Arab-IQ", true), {
     englishName: "Central Kurdish (Iraq)",
     nativeName: "کوردیی ناوەڕاست (کوردستان)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "ناژمارە",
+        nanSymbol: "ناژمارە",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

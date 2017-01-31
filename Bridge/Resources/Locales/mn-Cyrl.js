@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("mn-Cyrl", true), {
+Bridge.merge(new System.Globalization.CultureInfo("mn-Cyrl", true), {
     englishName: "Mongolian (Cyrillic)",
     nativeName: "Монгол хэл",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

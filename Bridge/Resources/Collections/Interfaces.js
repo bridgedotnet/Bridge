@@ -1,4 +1,4 @@
-﻿    Bridge.define('System.Collections.IEnumerable', {
+    Bridge.define('System.Collections.IEnumerable', {
         $kind: "interface"
     });
     Bridge.define('System.Collections.IEnumerator', {
@@ -9,6 +9,14 @@
     });
     Bridge.define('System.Collections.ICollection', {
         inherits: [System.Collections.IEnumerable],
+        $kind: "interface"
+    });
+    Bridge.define('System.Collections.IList', {
+        inherits: [System.Collections.ICollection],
+        $kind: "interface"
+    });
+    Bridge.define('System.Collections.IDictionary', {
+        inherits: [System.Collections.ICollection],
         $kind: "interface"
     });
 

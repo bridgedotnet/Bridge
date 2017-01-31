@@ -1,9 +1,9 @@
-﻿/**
+/**
  * Bridge Test library for TypeScript.
- * @version 15.4.0
+ * @version 15.8.0
  * @author Object.NET, Inc.
- * @copyright Copyright 2008-2016 Object.NET, Inc.
- * @compiler Bridge.NET 15.4.0
+ * @copyright Copyright 2008-2017 Object.NET, Inc.
+ * @compiler Bridge.NET 15.8.0
  */
 Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     "use strict";
@@ -24,10 +24,10 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         undefinedValue: null,
         config: {
             init: function () {
-                this.integerArray = [1, 2, 3];
-                this.stringArray = ["1", "2", "3"];
-                this.colorArray = [BasicTypes.Color.Blue, BasicTypes.Color.Green, BasicTypes.Color.Red];
-                this.twoDimensionalArray = [[1, 2, 3], [5, 8]];
+                this.integerArray = System.Array.init([1, 2, 3], System.Int32);
+                this.stringArray = System.Array.init(["1", "2", "3"], String);
+                this.colorArray = System.Array.init([BasicTypes.Color.Blue, BasicTypes.Color.Green, BasicTypes.Color.Red], BasicTypes.Color);
+                this.twoDimensionalArray = System.Array.init([System.Array.init([1, 2, 3], System.Int32), System.Array.init([5, 8], System.Int32)], System.Array.type(System.Int32));
                 this.undefinedValue = undefined;
             }
         },

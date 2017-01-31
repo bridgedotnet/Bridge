@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("en-HK", true), {
+Bridge.merge(new System.Globalization.CultureInfo("en-HK", true), {
     englishName: "English (Hong Kong)",
     nativeName: "English (Hong Kong)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

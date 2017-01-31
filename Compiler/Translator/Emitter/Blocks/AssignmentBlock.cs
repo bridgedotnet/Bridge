@@ -1,13 +1,10 @@
 using Bridge.Contract;
 using Bridge.Contract.Constants;
 using Bridge.Translator.Utils;
-
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.CSharp.Resolver;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
-using ICSharpCode.NRefactory.TypeSystem.Implementation;
-
 using System;
 using System.Linq;
 
@@ -57,7 +54,7 @@ namespace Bridge.Translator
                     }
                     return true;
                 }
-                else if (!this.Emitter.Validator.IsIgnoreType(method.DeclaringTypeDefinition))
+                else if (!this.Emitter.Validator.IsExternalType(method.DeclaringTypeDefinition))
                 {
                     if (this.Emitter.Writers.Count == initCount && !thisAssignment)
                     {
@@ -110,7 +107,7 @@ namespace Bridge.Translator
                 {
                     return true;
                 }
-                else if (!this.Emitter.Validator.IsIgnoreType(method.DeclaringTypeDefinition))
+                else if (!this.Emitter.Validator.IsExternalType(method.DeclaringTypeDefinition))
                 {
                     return true;
                 }
@@ -726,7 +723,7 @@ namespace Bridge.Translator
                     new InlineArgumentsBlock(this.Emitter,
                         new ArgumentsInfo(this.Emitter, this.AssignmentExpression, orr, method), inline).Emit();
                 }
-                else if (!this.Emitter.Validator.IsIgnoreType(method.DeclaringTypeDefinition))
+                else if (!this.Emitter.Validator.IsExternalType(method.DeclaringTypeDefinition))
                 {
                     this.Write(BridgeTypes.ToJsName(method.DeclaringType, this.Emitter));
                     this.WriteDot();

@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("uz-Cyrl-UZ", true), {
+Bridge.merge(new System.Globalization.CultureInfo("uz-Cyrl-UZ", true), {
     englishName: "Uzbek (Cyrillic, Uzbekistan)",
     nativeName: "Ўзбекча (Ўзбекистон Республикаси)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

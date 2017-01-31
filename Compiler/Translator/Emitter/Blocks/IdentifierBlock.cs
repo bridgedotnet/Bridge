@@ -75,7 +75,7 @@ namespace Bridge.Translator
             if (resolveResult is TypeResolveResult)
             {
                 this.Write(BridgeTypes.ToJsName(resolveResult.Type, this.Emitter));
-                /*if (this.Emitter.Validator.IsIgnoreType(resolveResult.Type.GetDefinition()) || resolveResult.Type.Kind == TypeKind.Enum)
+                /*if (this.Emitter.Validator.IsExternalType(resolveResult.Type.GetDefinition()) || resolveResult.Type.Kind == TypeKind.Enum)
                 {
                     this.Write(BridgeTypes.ToJsName(resolveResult.Type, this.Emitter));
                 }
@@ -142,7 +142,7 @@ namespace Bridge.Translator
                 if (memberResult.Member.IsStatic)
                 {
                     this.Write(BridgeTypes.ToJsName(memberResult.Member.DeclaringType, this.Emitter));
-                    /*if (!this.Emitter.Validator.IsIgnoreType(memberResult.Member.DeclaringTypeDefinition) && memberResult.Member.DeclaringTypeDefinition.Kind != TypeKind.Enum)
+                    /*if (!this.Emitter.Validator.IsExternalType(memberResult.Member.DeclaringTypeDefinition) && memberResult.Member.DeclaringTypeDefinition.Kind != TypeKind.Enum)
                     {
                         this.Write("(Bridge.get(" + BridgeTypes.ToJsName(memberResult.Member.DeclaringType, this.Emitter) + "))");
                     }
@@ -184,6 +184,10 @@ namespace Bridge.Translator
                         }
 
                         new InlineArgumentsBlock(this.Emitter, new ArgumentsInfo(this.Emitter, this.IdentifierExpression, resolveResult), oldInline, (IMethod)memberResult.Member, targetrr).EmitFunctionReference();
+                    }
+                    else if (memberResult != null && memberResult.Member is IField && inlineCode.Contains("{0}"))
+                    {
+                        this.PushWriter(inlineCode, null, thisArg, range);
                     }
                     else
                     {
@@ -253,7 +257,7 @@ namespace Bridge.Translator
                     if (!isStatic)
                     {
                         var isExtensionMethod = resolvedMethod.IsExtensionMethod;
-                        this.Write(isExtensionMethod ? JS.Funcs.BRIDGE_BIND_SCOPE : JS.Funcs.BRIDGE_BIND);
+                        this.Write(isExtensionMethod ? JS.Funcs.BRIDGE_BIND_SCOPE : JS.Funcs.BRIDGE_CACHE_BIND);
                         this.WriteOpenParentheses();
                         this.WriteThis();
                         this.Write(", ");
@@ -309,7 +313,9 @@ namespace Bridge.Translator
                 }
                 else if (Helpers.IsFieldProperty(memberResult.Member, this.Emitter))
                 {
-                    this.Write(Helpers.GetPropertyRef(memberResult.Member, this.Emitter));
+                    var name = Helpers.GetPropertyRef(memberResult.Member, this.Emitter);
+
+                    this.WriteIdentifier(name);
                 }
                 else if (!this.Emitter.IsAssignment)
                 {
@@ -503,20 +509,39 @@ namespace Bridge.Translator
                         trg = "this";
                     }
 
-                    this.PushWriter(string.Concat(Helpers.GetPropertyRef(memberResult.Member, this.Emitter, true),
+                    bool isBool = memberResult != null && NullableType.IsNullable(memberResult.Member.ReturnType) ? NullableType.GetUnderlyingType(memberResult.Member.ReturnType).IsKnownType(KnownTypeCode.Boolean) : memberResult.Member.ReturnType.IsKnownType(KnownTypeCode.Boolean);
+                    bool skipGet = false;
+                    var orr = this.Emitter.Resolver.ResolveNode(identifierExpression.Parent, this.Emitter) as OperatorResolveResult;
+                    bool special = orr != null && orr.IsLiftedOperator;
+
+                    if (!special && isBool &&
+                        (this.Emitter.AssignmentType == AssignmentOperatorType.BitwiseAnd ||
+                         this.Emitter.AssignmentType == AssignmentOperatorType.BitwiseOr))
+                    {
+                        skipGet = true;
+                    }
+
+                    if (skipGet)
+                    {
+                        this.PushWriter(string.Concat(Helpers.GetPropertyRef(memberResult.Member, this.Emitter, true), "({0})"));
+                    }
+                    else
+                    {
+                        this.PushWriter(string.Concat(Helpers.GetPropertyRef(memberResult.Member, this.Emitter, true),
                         "(",
                         trg,
                         ".",
                         Helpers.GetPropertyRef(memberResult.Member, this.Emitter, false),
                         "()",
                         "{0})"));
+                    }
                 }
                 else
                 {
                     this.PushWriter(Helpers.GetPropertyRef(memberResult.Member, this.Emitter, true) + "({0})");
                 }
             }
-            else if (memberResult != null && memberResult.Member is DefaultResolvedEvent)
+            else if (memberResult != null && memberResult.Member is IEvent)
             {
                 if (this.Emitter.IsAssignment &&
                     (this.Emitter.AssignmentType == AssignmentOperatorType.Add ||
@@ -565,6 +590,10 @@ namespace Bridge.Translator
                         {
                             this.WriteScript(name);
                         }
+                        else if (memberResult.Member is IField)
+                        {
+                            this.WriteIdentifier(name);
+                        }
                         else
                         {
                             this.Write(name);
@@ -591,9 +620,12 @@ namespace Bridge.Translator
 
         protected void WriteTarget(MemberResolveResult memberResult)
         {
+            bool noTarget = false;
             if (memberResult.Member.IsStatic)
             {
-                this.Write(BridgeTypes.ToJsName(memberResult.Member.DeclaringType, this.Emitter));
+                var target = BridgeTypes.ToJsName(memberResult.Member.DeclaringType, this.Emitter);
+                noTarget = string.IsNullOrWhiteSpace(target);
+                this.Write(target);
             }
             else
             {
@@ -604,7 +636,7 @@ namespace Bridge.Translator
             {
                 this.WriteComma();
             }
-            else
+            else if(!noTarget)
             {
                 this.WriteDot();
             }

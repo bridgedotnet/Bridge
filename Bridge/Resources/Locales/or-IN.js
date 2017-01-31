@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("or-IN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("or-IN", true), {
     englishName: "Odia (India)",
     nativeName: "ଓଡ଼ିଆ (ଭାରତ)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

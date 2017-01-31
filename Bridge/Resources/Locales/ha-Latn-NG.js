@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ha-Latn-NG", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ha-Latn-NG", true), {
     englishName: "Hausa (Latin, Nigeria)",
     nativeName: "Hausa (Nijeriya)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ur-IN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ur-IN", true), {
     englishName: "Urdu (India)",
     nativeName: "اردو (بھارت)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

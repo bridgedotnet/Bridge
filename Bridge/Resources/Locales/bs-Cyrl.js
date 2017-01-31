@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("bs-Cyrl", true), {
+Bridge.merge(new System.Globalization.CultureInfo("bs-Cyrl", true), {
     englishName: "Bosnian (Cyrillic)",
     nativeName: "босански",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-бесконачност",

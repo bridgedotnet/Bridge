@@ -6,16 +6,16 @@ namespace System.Linq.Expressions
     [Name("Object")]
     public sealed class CatchBlock
     {
-        [FieldProperty]
+        [Field]
         public extern ParameterExpression Variable { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern Type Test { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern Expression Body { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern Expression Filter { get; private set; }
 
         internal extern CatchBlock();

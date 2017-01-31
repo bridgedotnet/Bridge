@@ -1,13 +1,13 @@
-// Content header: 1.0.0-beta  {notdate} 2016 
+// Content header: 1.0.0-beta  {notdate} 2017 
 // ---
 // Content remark: Path: Bridge/output/testIssue434.js; name: testIssue434.js
 // ---
 
-﻿// Top
+// Top
 
-    (function(){
+    Bridge.init(function(){
         TestIssue434.Issue434A.doSomething(2);
-    })();
+    });
 
     Bridge.define("TestIssue434.Issue434A", {
         statics: {
@@ -26,13 +26,13 @@
         }
     });
 
-    TestIssue434.Issue434A.method1();
-    TestIssue434.Issue434A.method3();
-    TestIssue434.Issue434A.method4();
+    Bridge.init(function() { TestIssue434.Issue434A.method1(); });
+    Bridge.init(function() { TestIssue434.Issue434A.method3(); });
+    Bridge.init(function() { TestIssue434.Issue434A.method4(); });
 
-    (function(){
+    Bridge.init(function(){
         TestIssue434.Issue434B.doSomething(2);
-    })();
+    });
 
     Bridge.define("TestIssue434.Issue434B", {
         statics: {
@@ -51,31 +51,27 @@
         }
     });
 
-    TestIssue434.Issue434B.method1();
-    TestIssue434.Issue434B.method3();
-    TestIssue434.Issue434B.method4();
+    Bridge.init(function() { TestIssue434.Issue434B.method1(); });
+    Bridge.init(function() { TestIssue434.Issue434B.method3(); });
+    Bridge.init(function() { TestIssue434.Issue434B.method4(); });
 
-    Bridge.define("TestIssue434.Issue434C", {
-        statics: {
-
-        }
-    });
+    Bridge.define("TestIssue434.Issue434C");
 
 // Bottom
 // ---
 // Content remark: Path: Bridge/output/testIssue461.js; name: testIssue461.js
 // ---
 
-﻿    Bridge.define("TestIssue461.Issue461", {
+    Bridge.define("TestIssue461.Issue461", {
         statics: {
             test: function () {
                 var input = document.createElement('input');
 
-                input.onchange = Bridge.fn.combine(input.onchange, $_.TestIssue461.Issue461.f1);
+                input.onchange = Bridge.fn.combine(input.onchange, $asm.$.TestIssue461.Issue461.f1);
 
                 var anchor = document.createElement('a');
 
-                anchor.onclick = Bridge.fn.combine(anchor.onclick, $_.TestIssue461.Issue461.f2);
+                anchor.onclick = Bridge.fn.combine(anchor.onclick, $asm.$.TestIssue461.Issue461.f2);
 
                 // Test if Document.GetElementById<>() compiles
                 var div = document.getElementById("div1");
@@ -89,11 +85,9 @@
         }
     });
 
-    var $_ = {};
+    Bridge.ns("TestIssue461.Issue461", $asm.$);
 
-    Bridge.ns("TestIssue461.Issue461", $_);
-
-    Bridge.apply($_.TestIssue461.Issue461, {
+    Bridge.apply($asm.$.TestIssue461.Issue461, {
         f1: function (ev) {
             // Tests if ev.CurrentTarget.Value compiles
             Bridge.Console.log(System.String.concat("ev.CurrentTarget.Value: ", ev.currentTarget.value));

@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("es-NI", true), {
+Bridge.merge(new System.Globalization.CultureInfo("es-NI", true), {
     englishName: "Spanish (Nicaragua)",
     nativeName: "español (Nicaragua)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",

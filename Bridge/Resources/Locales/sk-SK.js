@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sk-SK", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sk-SK", true), {
     englishName: "Slovak (Slovakia)",
     nativeName: "slovenčina (Slovenská republika)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "Nie je číslo",
+        nanSymbol: "Nie je číslo",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-nekonečno",

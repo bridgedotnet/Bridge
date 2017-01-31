@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("hu", true), {
+Bridge.merge(new System.Globalization.CultureInfo("hu", true), {
     englishName: "Hungarian",
     nativeName: "magyar",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "nem szám",
+        nanSymbol: "nem szám",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "mínusz végtelen",

@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("es-DO", true), {
+Bridge.merge(new System.Globalization.CultureInfo("es-DO", true), {
     englishName: "Spanish (Dominican Republic)",
     nativeName: "español (República Dominicana)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",

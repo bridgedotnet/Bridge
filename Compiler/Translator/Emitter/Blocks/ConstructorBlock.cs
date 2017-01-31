@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Object.Net.Utilities;
 
 namespace Bridge.Translator
 {
@@ -275,10 +276,16 @@ namespace Bridge.Translator
             var baseType = this.Emitter.GetBaseTypeDefinition();
             var typeDef = this.Emitter.GetTypeDefinition();
             var isObjectLiteral = this.Emitter.Validator.IsObjectLiteral(typeDef);
+            var isPlainMode = this.Emitter.Validator.GetObjectCreateMode(typeDef) == 0;
 
             var ctorWrappers = isObjectLiteral ? new string[0] : this.EmitInitMembers().ToArray();
 
             if (!this.TypeInfo.HasRealInstantiable(this.Emitter) && ctorWrappers.Length == 0)
+            {
+                return;
+            }
+
+            if (isObjectLiteral && isPlainMode)
             {
                 return;
             }
@@ -350,7 +357,7 @@ namespace Bridge.Translator
                     this.Write("var " + JS.Vars.D_THIS + " = ");
 
                     var isBaseObjectLiteral = baseType != null && this.Emitter.Validator.IsObjectLiteral(baseType);
-                    if (isBaseObjectLiteral && baseType != null && (!this.Emitter.Validator.IsIgnoreType(baseType) || this.Emitter.Validator.IsBridgeClass(baseType)) ||
+                    if (isBaseObjectLiteral && baseType != null && (!this.Emitter.Validator.IsExternalType(baseType) || this.Emitter.Validator.IsBridgeClass(baseType)) ||
                     (ctor.Initializer != null && ctor.Initializer.ConstructorInitializerType == ConstructorInitializerType.This))
                     {
                         this.EmitBaseConstructor(ctor, ctorName, true);
@@ -358,12 +365,22 @@ namespace Bridge.Translator
                     else if (isBaseObjectLiteral && baseType != null && ctor.Initializer != null &&
                              ctor.Initializer.ConstructorInitializerType == ConstructorInitializerType.Base)
                     {
-                        this.CheckBaseCtorTemplate(ctor, ref requireNewLine);
+                        this.EmitExternalBaseCtor(ctor, ref requireNewLine);
                     }
                     else
                     {
                         this.Write("{};");
                     }
+
+                    this.WriteNewLine();
+
+                    string name = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter);
+                    if (name.IsEmpty())
+                    {
+                        name = BridgeTypes.DefinitionToJsName(this.TypeInfo.Type, this.Emitter);
+                    }
+
+                    this.Write(JS.Vars.D_THIS + "." + JS.Funcs.GET_TYPE + " = function() { return " + name + "; };");
 
                     this.WriteNewLine();
                     this.Write("(function()");
@@ -431,7 +448,7 @@ namespace Bridge.Translator
 
                 if (!isObjectLiteral)
                 {
-                    if (baseType != null && (!this.Emitter.Validator.IsIgnoreType(baseType) || this.Emitter.Validator.IsBridgeClass(baseType)) ||
+                    if (baseType != null && (!this.Emitter.Validator.IsExternalType(baseType) || this.Emitter.Validator.IsBridgeClass(baseType)) ||
                     (ctor.Initializer != null && ctor.Initializer.ConstructorInitializerType == ConstructorInitializerType.This))
                     {
                         if (requireNewLine)
@@ -444,7 +461,7 @@ namespace Bridge.Translator
                     else if (baseType != null && ctor.Initializer != null &&
                              ctor.Initializer.ConstructorInitializerType == ConstructorInitializerType.Base)
                     {
-                        this.CheckBaseCtorTemplate(ctor, ref requireNewLine);
+                        this.EmitExternalBaseCtor(ctor, ref requireNewLine);
                     }
                 }
 
@@ -494,7 +511,7 @@ namespace Bridge.Translator
                         this.WriteNewLine();
                     }
                     this.EndBlock();
-                    this.Write(").call(" + JS.Vars.D_THIS + ");");
+                    this.Write(")." + JS.Funcs.CALL + "(" + JS.Vars.D_THIS + ");");
                     this.WriteNewLine();
                     this.Write("return " + JS.Vars.D_THIS + ";");
                     this.WriteNewLine();
@@ -507,7 +524,7 @@ namespace Bridge.Translator
             }
         }
 
-        private void CheckBaseCtorTemplate(ConstructorDeclaration ctor, ref bool requireNewLine)
+        private void EmitExternalBaseCtor(ConstructorDeclaration ctor, ref bool requireNewLine)
         {
             if (ctor.Initializer != null && !ctor.Initializer.IsNull)
             {
@@ -529,6 +546,45 @@ namespace Bridge.Translator
                     this.Write("this, ");
                     var argsInfo = new ArgumentsInfo(this.Emitter, ctor.Initializer);
                     new InlineArgumentsBlock(this.Emitter, argsInfo, inlineCode).Emit();
+                    this.WriteCloseParentheses();
+                    this.WriteSemiColon();
+                    this.WriteNewLine();
+                }
+                else
+                {
+                    if (requireNewLine)
+                    {
+                        this.WriteNewLine();
+                        requireNewLine = false;
+                    }
+
+                    var baseType = this.Emitter.GetBaseTypeDefinition();
+                    string name = null;
+                    if (this.TypeInfo.GetBaseTypes(this.Emitter).Any())
+                    {
+                        name = BridgeTypes.ToJsName(this.TypeInfo.GetBaseClass(this.Emitter), this.Emitter);
+                    }
+                    else
+                    {
+                        name = BridgeTypes.ToJsName(baseType, this.Emitter);
+                    }
+
+                    this.Write(name);
+                    this.WriteCall();
+                    int openPos = this.Emitter.Output.Length;
+                    this.WriteOpenParentheses();
+                    this.Write("this");
+
+                    if (ctor.Initializer.Arguments.Count > 0)
+                    {
+                        this.Write(", ");
+                        var argsInfo = new ArgumentsInfo(this.Emitter, ctor.Initializer);
+                        var argsExpressions = argsInfo.ArgumentsExpressions;
+                        var paramsArg = argsInfo.ParamsExpression;
+
+                        new ExpressionListBlock(this.Emitter, argsExpressions, paramsArg, ctor.Initializer, openPos).Emit();
+                    }
+
                     this.WriteCloseParentheses();
                     this.WriteSemiColon();
                     this.WriteNewLine();

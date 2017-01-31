@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("tn-BW", true), {
+Bridge.merge(new System.Globalization.CultureInfo("tn-BW", true), {
     englishName: "Setswana (Botswana)",
     nativeName: "Setswana (Botswana)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

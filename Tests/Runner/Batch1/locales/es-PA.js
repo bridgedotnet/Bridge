@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("es-PA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("es-PA", true), {
     englishName: "Spanish (Panama)",
     nativeName: "español (Panamá)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",

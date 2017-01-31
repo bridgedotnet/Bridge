@@ -1,28 +1,44 @@
     Bridge.define('System.Collections.Generic.List$1', function (T) {
         return {
-            inherits: [System.Collections.Generic.ICollection$1(T), System.Collections.ICollection, System.Collections.Generic.IList$1(T)],
+            inherits: [System.Collections.Generic.IList$1(T), System.Collections.IList],
 
             config: {
                 alias: [
                 "getItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem",
+                "getItem", "System$Collections$IList$getItem",
                 "setItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem",
+                "setItem", "System$Collections$IList$setItem",
                 "getCount", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getCount",
+                "getCount", "System$Collections$ICollection$getCount",
                 "getIsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getIsReadOnly",
+                "getIsReadOnly", "System$Collections$IList$getIsReadOnly",
                 "add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
+                "add", "System$Collections$IList$add",
                 "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
+                "clear", "System$Collections$IList$clear",
                 "contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
+                "contains", "System$Collections$IList$contains",
                 "copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo",
+                "copyTo", "System$Collections$ICollection$copyTo",
                 "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
+                "getEnumerator", "System$Collections$IEnumerable$getEnumerator",
                 "indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
+                "indexOf", "System$Collections$IList$indexOf",
                 "insert", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert",
+                "insert", "System$Collections$IList$insert",
                 "remove", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$remove",
-                "removeAt", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt"
+                "remove", "System$Collections$IList$remove",
+                "removeAt", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt",
+                "removeAt", "System$Collections$IList$removeAt"
                 ]
             },
 
             ctor: function (obj) {
                 this.$initialize();
-                if (Object.prototype.toString.call(obj) === '[object Array]') {
+
+                if (!Bridge.isDefined(obj)) {
+                    this.items = [];
+                } else if (Object.prototype.toString.call(obj) === '[object Array]') {
                     this.items = System.Array.clone(obj);
                 } else if (Bridge.is(obj, System.Collections.IEnumerable)) {
                     this.items = Bridge.toArray(obj);
@@ -33,9 +49,9 @@
                 this.clear.$clearCallbacks = [];
             },
 
-            checkIndex: function (index) {
-                if (index < 0 || index > (this.items.length - 1)) {
-                    throw new System.ArgumentOutOfRangeException('Index out of range');
+            checkIndex: function (index, message) {
+                if (isNaN(index) || index < 0 || index >= this.items.length) {
+                    throw new System.ArgumentOutOfRangeException(message || 'Index out of range');
                 }
             },
 
@@ -146,29 +162,28 @@
             },
 
             getRange: function (index, count) {
-                if (!Bridge.isDefined(index)) {
-                    index = 0;
+                if (isNaN(index) || index < 0) {
+                    throw new System.ArgumentOutOfRangeException("index out of range");
                 }
 
-                if (!Bridge.isDefined(count)) {
-                    count = this.items.length;
+                if (isNaN(count) || count < 0) {
+                    throw new System.ArgumentOutOfRangeException("count out of range");
                 }
 
-                if (index !== 0) {
-                    this.checkIndex(index);
+                if (this.items.length - index < count) {
+                    throw new System.ArgumentException("Offset and length were out of bounds for the array or count is greater than the number of elements from index tothe end of the source collection.");
                 }
 
-                this.checkIndex(index + count - 1);
+                var items = [];
 
-                var result = [],
-                    i,
-                    maxIndex = index + count;
-
-                for (i = index; i < maxIndex; i++) {
-                    result.push(this.items[i]);
+                for (var i = 0; i < count; i++) {
+                    items[i] = this.items[index + i];
                 }
 
-                return new (System.Collections.Generic.List$1(T))(result);
+                var list = new (System.Collections.Generic.List$1(T))();
+                list.items = items;
+
+                return list;
             },
 
             insert: function (index, item) {
@@ -243,9 +258,10 @@
             slice: function (start, end) {
                 this.checkReadOnly();
 
-                var gName = this.$$name.substr(this.$$name.lastIndexOf('$') + 1);
+                var list = new (System.Collections.Generic.List$1(T))();
+                list.items = this.items.slice(start, end);
 
-                return new (System.Collections.Generic.List$1(Bridge.unroll(gName)))(this.items.slice(start, end));
+                return list;
             },
 
             sort: function (comparison) {
@@ -306,7 +322,7 @@
                     throw new System.ArgumentNullException("converter is null.");
                 }
 
-                var list = new (System.Collections.Generic.List$1(TOutput))(this.items.length);
+                var list = new (System.Collections.Generic.List$1(TOutput))();
                 for (var i = 0; i < this.items.length; i++) {
                     list.items[i] = converter(this.items[i]);
                 }

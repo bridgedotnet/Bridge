@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("dv-MV", true), {
+Bridge.merge(new System.Globalization.CultureInfo("dv-MV", true), {
     englishName: "Divehi (Maldives)",
     nativeName: "ދިވެހިބަސް (ދިވެހި ރާއްޖެ)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

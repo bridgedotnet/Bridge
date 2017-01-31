@@ -1,5 +1,6 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
+using Bridge.Html5;
 
 #pragma warning disable 184, 458, 1720
 
@@ -582,7 +583,7 @@ namespace Bridge.ClientTest.Reflection
             Assert.AreEqual("X".GetType().FullName, "String");
             Assert.AreEqual(a.GetType().FullName, "Function");
             Assert.AreEqual(new object().GetType().FullName, "Object");
-            Assert.AreEqual(new[] { 1, 2 }.GetType().FullName, "Array");
+            Assert.AreEqual(new[] { 1, 2 }.GetType().FullName, "System.Int32[]");
         }
 
         [Test]
@@ -601,7 +602,7 @@ namespace Bridge.ClientTest.Reflection
         [Test]
         public void CastOperatorForSerializableTypeWithoutTypeCheckCodeAlwaysSucceedsGeneric()
         {
-            object o = new object();
+            object o = JSON.Parse<OL>("{}");
             var b = Cast<OL>(o);
             Assert.True(ReferenceEquals(o, b));
         }

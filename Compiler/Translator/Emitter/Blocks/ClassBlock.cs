@@ -119,16 +119,16 @@ namespace Bridge.Translator
 
             if (name.IsEmpty())
             {
-                name = BridgeTypes.DefinitionToJsName(this.TypeInfo.Type, this.Emitter);
+                name = BridgeTypes.ToJsName(this.TypeInfo.Type, this.Emitter, true, nomodule: true);
             }
 
             if (typeDef.IsInterface && typeDef.HasGenericParameters)
             {
-                this.Write(JS.Funcs.BRIDGE_DEFINEI);
+                this.Write(JS.Types.Bridge.DEFINE_I);
             }
             else
             {
-                this.Write(JS.Funcs.BRIDGE_DEFINE);
+                this.Write(JS.Types.Bridge.DEFINE);
             }
 
             this.WriteOpenParentheses();
@@ -267,7 +267,7 @@ namespace Bridge.Translator
             this.EnsureComma();
             this.Write(JS.Vars.SCOPE);
             this.WriteColon();
-            this.Write(JS.Vars.EXPORTS);
+            this.Write(this.TypeInfo.Module.Name);
             this.Emitter.Comma = true;
         }
 
@@ -297,32 +297,45 @@ namespace Bridge.Translator
 
         protected virtual void EmitStaticBlock()
         {
-            if (this.TypeInfo.HasRealStatic(this.Emitter))
+            int pos = this.Emitter.Output.Length;
+            bool comma = this.Emitter.Comma;
+            bool newLine = this.Emitter.IsNewLine;
+
+            this.Emitter.StaticBlock = true;
+            this.EnsureComma();
+
+            if (this.TypeInfo.InstanceMethods.Any(m => m.Value.Any(subm => this.Emitter.GetEntityName(subm) == JS.Fields.STATICS)) ||
+                this.TypeInfo.InstanceConfig.Fields.Any(m => m.GetName(this.Emitter) == JS.Fields.STATICS))
             {
-                this.Emitter.StaticBlock = true;
-                this.EnsureComma();
-
-                if (this.TypeInfo.InstanceMethods.Any(m => m.Value.Any(subm => this.Emitter.GetEntityName(subm) == JS.Fields.STATICS)) ||
-                    this.TypeInfo.InstanceConfig.Fields.Any(m => m.GetName(this.Emitter) == JS.Fields.STATICS))
-                {
-                    this.Write(JS.Vars.D);
-                }
-
-                this.Write(JS.Fields.STATICS);
-                this.WriteColon();
-                this.BeginBlock();
-
-                var ctorBlock = new ConstructorBlock(this.Emitter, this.TypeInfo, true);
-                ctorBlock.Emit();
-                this.HasEntryPoint = ctorBlock.HasEntryPoint;
-
-                new MethodBlock(this.Emitter, this.TypeInfo, true).Emit();
-
-                this.WriteNewLine();
-                this.EndBlock();
-                this.Emitter.Comma = true;
-                this.Emitter.StaticBlock = false;
+                this.Write(JS.Vars.D);
             }
+
+            this.Write(JS.Fields.STATICS);
+            this.WriteColon();
+            this.BeginBlock();
+            int checkOutputPos = this.Emitter.Output.Length;
+
+            var ctorBlock = new ConstructorBlock(this.Emitter, this.TypeInfo, true);
+            ctorBlock.Emit();
+            this.HasEntryPoint = ctorBlock.HasEntryPoint;
+
+            new MethodBlock(this.Emitter, this.TypeInfo, true).Emit();
+            var clear = checkOutputPos == this.Emitter.Output.Length;
+            this.WriteNewLine();
+            this.EndBlock();
+
+            if (clear)
+            {
+                this.Emitter.Output.Length = pos;
+                this.Emitter.Comma = comma;
+                this.Emitter.IsNewLine = newLine;
+            }
+            else
+            {
+                this.Emitter.Comma = true;
+            }
+            
+            this.Emitter.StaticBlock = false;
         }
 
         protected virtual void EmitInstantiableBlock()
@@ -430,8 +443,6 @@ namespace Bridge.Translator
             if (types.Any())
             {
                 this.Emitter.Comma = false;
-                this.IntroducePrivateVar();
-
                 foreach (IAnonymousTypeConfig type in types)
                 {
                     this.WriteNewLine();
@@ -448,8 +459,6 @@ namespace Bridge.Translator
             if (this.Emitter.NamedFunctions.Count > 0)
             {
                 this.Emitter.Comma = false;
-
-                this.IntroducePrivateVar();
 
                 var name = BridgeTypes.ToJsName(this.Emitter.TypeInfo.Type, this.Emitter, true);
 
@@ -479,17 +488,6 @@ namespace Bridge.Translator
                 this.EndBlock();
                 this.WriteCloseParentheses();
                 this.WriteSemiColon();
-            }
-        }
-
-        private void IntroducePrivateVar()
-        {
-            if (!this.Emitter.EmitterOutput.IsPrivateVarIntroduced)
-            {
-                this.WriteNewLine();
-                this.WriteNewLine();
-                this.Write("var " + JS.Vars.D_ + " = {};");
-                this.Emitter.EmitterOutput.IsPrivateVarIntroduced = true;
             }
         }
 
@@ -617,7 +615,7 @@ namespace Bridge.Translator
             return this.GetDefineMethods("Before",
                 (method, rrMethod) =>
                 {
-                    this.PushWriter("(function(){0})();");
+                    this.PushWriter(JS.Types.Bridge.INIT + "(function(){0});");
                     this.ResetLocals();
                     var prevMap = this.BuildLocalsMap();
                     var prevNamesMap = this.BuildLocalsNamesMap();
@@ -669,9 +667,11 @@ namespace Bridge.Translator
         protected virtual IEnumerable<string> GetAfterDefineMethods()
         {
             return this.GetDefineMethods("After",
-                (method, rrMethod) =>
-                    BridgeTypes.ToJsName(rrMethod.DeclaringTypeDefinition, this.Emitter) + "." +
-                    this.Emitter.GetEntityName(method) + "();");
+                delegate(MethodDeclaration method, IMethod rrMethod)
+                {
+                    return JS.Types.Bridge.INIT + "(function() { " + BridgeTypes.ToJsName(rrMethod.DeclaringTypeDefinition, this.Emitter) + "." +
+                           this.Emitter.GetEntityName(method) + "(); });";
+                });
         }
     }
 }

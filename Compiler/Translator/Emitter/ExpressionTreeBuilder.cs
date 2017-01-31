@@ -196,7 +196,7 @@ namespace Bridge.Translator
 
         public override string VisitOperatorResolveResult(OperatorResolveResult rr, object data)
         {
-            bool isUserDefined = rr.UserDefinedOperatorMethod != null && !this._emitter.Validator.IsIgnoreType(rr.UserDefinedOperatorMethod.DeclaringTypeDefinition);
+            bool isUserDefined = rr.UserDefinedOperatorMethod != null && !this._emitter.Validator.IsExternalType(rr.UserDefinedOperatorMethod.DeclaringTypeDefinition);
             var arguments = new string[rr.Operands.Count + 1];
             for (int i = 0; i < rr.Operands.Count; i++)
                 arguments[i] = VisitResolveResult(rr.Operands[i], null);
@@ -498,12 +498,13 @@ namespace Bridge.Translator
 
         public override string VisitArrayCreateResolveResult(ArrayCreateResolveResult rr, object data)
         {
+            var arrayType = rr.Type as ArrayType;
             if (rr.InitializerElements != null)
             {
-                return CompileFactoryCall("NewArrayInit", new[] { typeof(Type), typeof(Expression[]) }, new[] { ExpressionTreeBuilder.GetTypeName(rr.Type, this._emitter), this._emitter.ToJavaScript(rr.InitializerElements.Select(e => new JRaw(this.VisitResolveResult(e, null))).ToArray()) });
+                return CompileFactoryCall("NewArrayInit", new[] { typeof(Type), typeof(Expression[]) }, new[] { ExpressionTreeBuilder.GetTypeName(arrayType != null ? arrayType.ElementType : rr.Type, this._emitter), this._emitter.ToJavaScript(rr.InitializerElements.Select(e => new JRaw(this.VisitResolveResult(e, null))).ToArray()) });
             }
 
-            return CompileFactoryCall("NewArrayBounds", new[] { typeof(Type), typeof(Expression[]) }, new[] { ExpressionTreeBuilder.GetTypeName(rr.Type, this._emitter), this._emitter.ToJavaScript(rr.SizeArguments.Select(a => new JRaw(VisitResolveResult(a, null))).ToArray()) });
+            return CompileFactoryCall("NewArrayBounds", new[] { typeof(Type), typeof(Expression[]) }, new[] { ExpressionTreeBuilder.GetTypeName(arrayType != null ? arrayType.ElementType : rr.Type, this._emitter), this._emitter.ToJavaScript(rr.SizeArguments.Select(a => new JRaw(VisitResolveResult(a, null))).ToArray()) });
         }
 
         public override string VisitThisResolveResult(ThisResolveResult rr, object data)

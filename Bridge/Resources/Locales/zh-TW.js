@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("zh-TW", true), {
+Bridge.merge(new System.Globalization.CultureInfo("zh-TW", true), {
     englishName: "Chinese (Traditional, Taiwan)",
     nativeName: "中文(台灣)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "不是一個數字",
+        nanSymbol: "不是一個數字",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "負無窮大",

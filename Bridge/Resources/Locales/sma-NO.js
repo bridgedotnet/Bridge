@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sma-NO", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sma-NO", true), {
     englishName: "Sami, Southern (Norway)",
     nativeName: "åarjelsaemiengïele (Nöörje)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

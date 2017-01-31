@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sma", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sma", true), {
     englishName: "Sami (Southern)",
     nativeName: "åarjelsaemiengïele",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

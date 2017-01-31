@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("quz-BO", true), {
+Bridge.merge(new System.Globalization.CultureInfo("quz-BO", true), {
     englishName: "Quechua (Bolivia)",
     nativeName: "runasimi (Qullasuyu)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("et-EE", true), {
+Bridge.merge(new System.Globalization.CultureInfo("et-EE", true), {
     englishName: "Estonian (Estonia)",
     nativeName: "eesti (Eesti)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "avaldamatu",
+        nanSymbol: "avaldamatu",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "miinuslõpmatus",

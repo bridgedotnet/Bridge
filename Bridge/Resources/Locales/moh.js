@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("moh", true), {
+Bridge.merge(new System.Globalization.CultureInfo("moh", true), {
     englishName: "Mohawk",
     nativeName: "Kanien'kéha",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

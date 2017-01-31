@@ -1,5 +1,5 @@
 ﻿using System;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -16,18 +16,19 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
     }
 
-    class MyType : MyOtherType
+    internal class MyType : MyOtherType
     {
     }
 
-    class MyOtherType
+    internal class MyOtherType
     {
         public int Value;
     }
 
-    class Test
+    internal class Test
     {
         public MyType MyType;
+
         public MyOtherType MyOtherType
         {
             get

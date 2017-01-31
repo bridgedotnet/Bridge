@@ -36,7 +36,7 @@ namespace Bridge
         /// <summary>
         /// Gets the number of parameters expected by the function.
         /// </summary>
-        [FieldProperty]
+        [Field]
         public extern int Length { get; }
 
         /// <summary>

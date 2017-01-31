@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("zh-HK", true), {
+Bridge.merge(new System.Globalization.CultureInfo("zh-HK", true), {
     englishName: "Chinese (Traditional, Hong Kong SAR)",
     nativeName: "中文(香港特別行政區)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "非數字",
+        nanSymbol: "非數字",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "負無窮大",

@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("my-MM", true), {
+Bridge.merge(new System.Globalization.CultureInfo("my-MM", true), {
     englishName: "Burmese (Myanmar)",
     nativeName: "ဗမာ (မြန်မာ)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

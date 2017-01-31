@@ -60,6 +60,30 @@
             return o;
         },
 
+        getInterface: function (name) {
+            var type = Bridge.unroll(name);
+
+            if (!type) {
+                type = Bridge.definei(name);
+            }
+
+            return type;
+        },
+
+        safe: function (fn) {
+            try {
+                return fn();
+            } catch (ex) {
+            }
+
+            return false;
+        },
+
+        literal: function (type, obj) {
+            obj.$getType = function () { return type };
+            return obj;
+        },
+
         isPlainObject: function (obj) {
             if (typeof obj == 'object' && obj !== null) {
                 if (typeof Object.getPrototypeOf == 'function') {
@@ -128,39 +152,77 @@
         },
 
         property: function (scope, name, v, statics) {
+            var getName,
+                setName,
+                cfg = null;
+
+            if (v && Bridge.isDefined(v.value) && (v.setter || v.getter)) {
+                getName = v.getter;
+                setName = v.setter;
+                cfg = v;
+                v = v.value;
+            }
+
             scope[name] = v;
 
             var rs = name.charAt(0) === "$",
                 cap = rs ? name.slice(1) : name,
-                getName = "get" + cap,
-                setName = "set" + cap,
                 lastSep = name.lastIndexOf("$"),
                 endsNum = lastSep > 0 && ((name.length - lastSep - 1) > 0) && !isNaN(parseInt(name.substr(lastSep + 1)));
+
+            if (!cfg || !cfg.getter) {
+                getName = "get" + cap;
+            }
+
+            if (!cfg || !cfg.setter) {
+                setName = "set" + cap;
+            }
 
             if (endsNum) {
                 lastSep = name.substring(0, lastSep - 1).lastIndexOf("$");
             }
 
             if (lastSep > 0 && lastSep !== (name.length - 1)) {
-                getName = name.substring(0, lastSep) + "get" + name.substr(lastSep + 1);
-                setName = name.substring(0, lastSep) + "set" + name.substr(lastSep + 1);
+                if (!cfg || !cfg.getter) {
+                    getName = name.substring(0, lastSep) + "get" + name.substr(lastSep + 1);
+                }
+
+                if (!cfg || !cfg.setter) {
+                    setName = name.substring(0, lastSep) + "set" + name.substr(lastSep + 1);
+                }
             }
 
-            scope[getName] = (function (name, scope, statics) {
-                return statics ? function () {
-                    return scope[name];
-                } : function () {
-                    return this[name];
-                };
-            })(name, scope, statics);
+            if (getName === setName) {
+                scope[getName] = (function (name, scope, statics) {
+                    return statics ? function (value) {
+                        if (arguments.length === 0) {
+                            return scope[name];
+                        }
+                        scope[name] = value;
+                    } : function (value) {
+                        if (arguments.length === 0) {
+                            return this[name];
+                        }
+                        this[name] = value;
+                    };
+                })(name, scope, statics);
+            } else {
+                scope[getName] = (function (name, scope, statics) {
+                    return statics ? function () {
+                        return scope[name];
+                    } : function () {
+                        return this[name];
+                    };
+                })(name, scope, statics);
 
-            scope[setName] = (function (name, scope, statics) {
-                return statics ? function (value) {
-                    scope[name] = value;
-                } : function (value) {
-                    this[name] = value;
-                };
-            })(name, scope, statics);
+                scope[setName] = (function (name, scope, statics) {
+                    return statics ? function (value) {
+                        scope[name] = value;
+                    } : function (value) {
+                        this[name] = value;
+                    };
+                })(name, scope, statics);
+            }
         },
 
         event: function (scope, name, v, statics) {
@@ -224,7 +286,9 @@
                 return 0;
             }
 
-            if (typeof (type.getDefaultValue) === 'function') {
+            if (typeof (type.createInstance) === 'function') {
+                return type.createInstance();
+            } else if (typeof (type.getDefaultValue) === 'function') {
                 return type.getDefaultValue();
             } else if (type === Boolean) {
                 return false;
@@ -234,7 +298,7 @@
                 return 0;
             } else if (type === String) {
                 return '';
-            } else if (type && type.prototype && type.prototype.$literal) {
+            } else if (type && type.$literal) {
                 return type.ctor();
             } else if (args && args.length > 0) {
                 return Bridge.Reflection.applyConstructor(type, args);
@@ -474,7 +538,9 @@
         },
 
         getDefaultValue: function (type) {
-            if ((type.getDefaultValue) && type.getDefaultValue.length === 0) {
+            if (type == null) {
+                throw new System.ArgumentNullException("type");
+            } else if ((type.getDefaultValue) && type.getDefaultValue.length === 0) {
                 return type.getDefaultValue();
             } else if (type === Boolean) {
                 return false;
@@ -573,11 +639,17 @@
                     return type.$is(obj);
                 }
 
-                return false;
-            }
+                if (type.$literal) {
+                    if (Bridge.isPlainObject(obj)) {
+                        if (obj.$getType) {
+                            return Bridge.Reflection.isAssignableFrom(type, obj.$getType());
+                        }
 
-            if (type && type.prototype && type.prototype.$literal && Bridge.isPlainObject(obj)) {
-                return true;
+                        return true;
+                    }
+                }
+
+                return false;
             }
 
             var tt = typeof type;
@@ -654,6 +726,10 @@
         },
 
         merge: function (to, from, callback, elemFactory) {
+            if (to == null) {
+                return from;
+            }
+
             // Maps instance of plain JS value or Object into Bridge object.
             // Used for deserialization. Proper deserialization requires reflection that is currently not supported in Bridge.
             // It currently is only capable to deserialize:
@@ -720,14 +796,42 @@
                             to[key](value);
                         }
                     } else {
-                        var setter = "set" + key.charAt(0).toUpperCase() + key.slice(1);
+                        var setter1 = "set" + key.charAt(0).toUpperCase() + key.slice(1),
+                            setter2 = "set" + key,
+                            getter;
 
-                        if (typeof to[setter] === "function" && typeof value !== "function") {
-                            to[setter](value);
+                        if (typeof to[setter1] === "function" && typeof value !== "function") {
+                            getter = "g" + setter1.slice(1);
+                            if (typeof to[getter] === "function") {
+                                to[setter1](Bridge.merge(to[getter](), value));
+                            } else {
+                                to[setter1](value);
+                            }
+                        } else if (typeof to[setter2] === "function" && typeof value !== "function") {
+                            getter = "g" + setter2.slice(1);
+                            if (typeof to[getter] === "function") {
+                                to[setter2](Bridge.merge(to[getter](), value));
+                            } else {
+                                to[setter2](value);
+                            }
                         } else if (value && value.constructor === Object && to[key]) {
                             toValue = to[key];
                             Bridge.merge(toValue, value);
                         } else {
+                            var isNumber = Bridge.isNumber(from);
+
+                            if (to[key] instanceof System.Decimal && isNumber) {
+                                return new System.Decimal(from);
+                            }
+
+                            if (to[key] instanceof System.Int64 && isNumber) {
+                                return new System.Int64(from);
+                            }
+
+                            if (to[key] instanceof System.UInt64 && isNumber) {
+                                return new System.UInt64(from);
+                            }
+
                             to[key] = value;
                         }
                     }
@@ -828,6 +932,8 @@
             return new (System.Collections.Generic.List$1(T || Object))(ienumerable);
         },
 
+        arrayTypes: [globals.Array, globals.Uint8Array, globals.Int8Array, globals.Int16Array, globals.Uint16Array, globals.Int32Array, globals.Uint32Array, globals.Float32Array, globals.Float64Array, globals.Uint8ClampedArray],
+
         isArray: function (obj, ctor) {
             var c = ctor || (obj != null ? obj.constructor : null);
 
@@ -835,16 +941,7 @@
                 return false;
             }
 
-            return c === Array ||
-                c === Uint8Array ||
-                c === Int8Array ||
-                c === Int16Array ||
-                c === Uint16Array ||
-                c === Int32Array ||
-                c === Uint32Array ||
-                c === Float32Array ||
-                c === Float64Array ||
-                c === Bridge.global["Uint8ClampedArray"];
+            return Bridge.arrayTypes.indexOf(c) >= 0 || c.$isArray;
         },
 
         isFunction: function (obj) {
@@ -1083,7 +1180,7 @@
             return obj.format(formatString, provider);
         },
 
-        getType: function (instance) {
+        getType: function (instance, T) {
             if (instance && instance.$boxed) {
                 return instance.type;
             }
@@ -1092,12 +1189,24 @@
                 throw new System.NullReferenceException("instance is null");
             }
 
+            if (T && Bridge.Reflection.getBaseType(T) === Object) {
+                return T;
+            }
+
             if (typeof (instance) === "number") {
                 if (!isNaN(instance) && isFinite(instance) && Math.floor(instance, 0) === instance) {
                     return System.Int32;
                 } else {
                     return System.Double;
                 }
+            }
+
+            if (instance.$type) {
+                return instance.$type;
+            }
+
+            if (instance.$getType) {
+                return instance.$getType();
             }
 
             try {
@@ -1233,12 +1342,16 @@
                 }
             },
 
-            bind: function (obj, method, args, appendArgs) {
+            cacheBind: function (obj, method, args, appendArgs) {
+                return Bridge.fn.bind(obj, method, args, appendArgs, true);
+            },
+
+            bind: function (obj, method, args, appendArgs, cache) {
                 if (method && method.$method === method && method.$scope === obj) {
                     return method;
                 }
 
-                if (obj && obj.$$bind) {
+                if (obj && cache && obj.$$bind) {
                     for (var i = 0; i < obj.$$bind.length; i++) {
                         if (obj.$$bind[i].$method === method) {
                             return obj.$$bind[i];
@@ -1286,7 +1399,7 @@
                     }, method.length);
                 }
 
-                if (obj) {
+                if (obj && cache) {
                     obj.$$bind = obj.$$bind || [];
                     obj.$$bind.push(fn);
                 }
@@ -1418,6 +1531,46 @@
             var m = t.$getMetadata ? t.$getMetadata() : t.$metadata;
 
             return m;
+        },
+
+        loadModule: function (config, callback) {
+            var amd = config.amd,
+                cjs = config.cjs,
+                fnName = config.fn;
+
+            var tcs = new System.Threading.Tasks.TaskCompletionSource(),
+                fn = Bridge.global[fnName || "require"];
+
+            if (amd && amd.length > 0) {
+                fn(amd, function() {
+                    var loads = Array.prototype.slice.call(arguments, 0);
+                    if (cjs && cjs.length > 0) {
+                        for (var i = 0; i < cjs.length; i++) {
+                            loads.push(fn(cjs[i]));
+                        }
+                    }
+
+                    callback.apply(Bridge.global, loads);
+                    tcs.setResult();
+                });
+            } else if (cjs && cjs.length > 0) {
+                var t = new System.Threading.Tasks.Task();
+                t.status = System.Threading.Tasks.TaskStatus.ranToCompletion;
+
+                var loads = [];
+                for (var j = 0; j < cjs.length; j++) {
+                    loads.push(fn(cjs[j]));
+                }
+
+                callback.apply(Bridge.global, loads);
+                return t;
+            } else {
+                var t = new System.Threading.Tasks.Task();
+                t.status = System.Threading.Tasks.TaskStatus.ranToCompletion;
+                return t;
+            }
+
+            return tcs.task;
         }
     };
 

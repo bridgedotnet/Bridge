@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ca-ES-valencia", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ca-ES-valencia", true), {
     englishName: "Valencian (Spain)",
     nativeName: "Valencià (Espanya)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinit",

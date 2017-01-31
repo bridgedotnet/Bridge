@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ms-MY", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ms-MY", true), {
     englishName: "Malay (Malaysia)",
     nativeName: "Bahasa Melayu (Malaysia)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

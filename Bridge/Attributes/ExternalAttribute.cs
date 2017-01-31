@@ -7,7 +7,7 @@ namespace Bridge
     /// Useful for stubbed out code to match JavaScript.
     /// </summary>
     [External]
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum | AttributeTargets.Delegate | AttributeTargets.Interface | AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum | AttributeTargets.Delegate | AttributeTargets.Interface | AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = true)]
     [NonScriptable]
     public sealed class ExternalAttribute : Attribute
     {
@@ -17,12 +17,17 @@ namespace Bridge
     /// Applies to interface if it's implementation is done outside Bridge type system (class implementation doesn't provide aliases for interface members implementations)
     /// </summary>
     [External]
-    [AttributeUsage(AttributeTargets.Interface)]
+    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Interface)]
     [NonScriptable]
     public sealed class ExternalInterfaceAttribute : Attribute
     {
         public extern ExternalInterfaceAttribute();
         public extern ExternalInterfaceAttribute(bool nativeImplementation);
+
+        public bool IsVirtual
+        {
+            get; set;
+        }
     }
 
     /// <summary>

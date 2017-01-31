@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,6 +69,22 @@ namespace Bridge.ClientTest.Batch4
             Assert.True(typeof(IEnumerable<int>).IsAssignableFrom(typeof(int[])));
             Assert.True(typeof(ICollection<int>).IsAssignableFrom(typeof(int[])));
             Assert.True(typeof(IList<int>).IsAssignableFrom(typeof(int[])));
+        }
+
+        [Test]
+        public void CreateWithNegativeLenghtShouldThrow()
+        {
+            int size = -1;
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                var a = new int[size];
+            });
+
+            long lsize = -1;
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                var a = new int[lsize];
+            });
         }
 
         [Test]

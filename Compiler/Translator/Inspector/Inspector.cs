@@ -4,6 +4,7 @@ using Bridge.Contract.Constants;
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.TypeSystem;
 using System.Collections.Generic;
+using System.Linq;
 using NRAttribute = ICSharpCode.NRefactory.CSharp.Attribute;
 
 namespace Bridge.Translator
@@ -70,12 +71,12 @@ namespace Bridge.Translator
             return this.HasAttribute(declaration, Translator.Bridge_ASSEMBLY + ".NonScriptable");
         }
 
-        protected virtual bool HasIgnore(EntityDeclaration declaration)
+        protected virtual bool HasExternal(EntityDeclaration declaration)
         {
             return this.HasAttribute(declaration, Translator.Bridge_ASSEMBLY + ".External") || this.HasAttribute(declaration, Translator.Bridge_ASSEMBLY + ".Ignore");
         }
 
-        protected virtual bool HasInline(EntityDeclaration declaration)
+        protected virtual bool HasTemplate(EntityDeclaration declaration)
         {
             return this.HasAttribute(declaration, Translator.Bridge_ASSEMBLY + ".Template");
         }
@@ -153,6 +154,13 @@ namespace Bridge.Translator
         {
             if (type.Kind == TypeKind.TypeParameter && astType != null)
             {
+                var parameter = type as ITypeParameter;
+                if (parameter != null && (
+                    parameter.Owner.Attributes.Any(a => a.AttributeType.FullName == "Bridge.IgnoreGenericAttribute") ||
+                    parameter.Owner.DeclaringTypeDefinition != null && parameter.Owner.DeclaringTypeDefinition.Attributes.Any(a => a.AttributeType.FullName == "Bridge.IgnoreGenericAttribute")))
+                {
+                    return null;
+                }
                 return new RawValue(JS.Funcs.BRIDGE_GETDEFAULTVALUE + "(" + astType.ToString() + ")");
             }
 
@@ -171,7 +179,8 @@ namespace Bridge.Translator
                 return 0UL;
             }
 
-            if (type.IsKnownType(KnownTypeCode.Int16) ||
+            if (type.IsKnownType(KnownTypeCode.Char) ||
+                type.IsKnownType(KnownTypeCode.Int16) ||
                 type.IsKnownType(KnownTypeCode.Int32) ||
                 type.IsKnownType(KnownTypeCode.UInt16) ||
                 type.IsKnownType(KnownTypeCode.UInt32) ||

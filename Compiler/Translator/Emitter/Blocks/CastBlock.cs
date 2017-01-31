@@ -123,11 +123,6 @@ namespace Bridge.Translator
             bool isCastAttr;
             string castCode = this.GetCastCode(expression, type, out isCastAttr);
 
-            if (itype != null && castCode == null && method != CS.Ops.CAST && itype.GetDefinition() != null && this.Emitter.Validator.IsObjectLiteral(itype.GetDefinition()))
-            {
-                throw new EmitterException(expression, "The type " + itype.FullName + " cannot be used in cast operation because there is no way to check its type");
-            }
-
             var enumType = itype;
             if (NullableType.IsNullable(enumType))
             {
@@ -157,7 +152,19 @@ namespace Bridge.Translator
                 return;
             }
 
-            if (method == CS.Ops.CAST)
+            var expressionrr = this.Emitter.Resolver.ResolveNode(expression, this.Emitter);
+            var typerr = this.Emitter.Resolver.ResolveNode(type, this.Emitter);
+
+            if (expressionrr.Type.Kind == TypeKind.Enum)
+            {
+                var enumMode = this.Emitter.Validator.EnumEmitMode(expressionrr.Type);
+                if (enumMode >= 3 && enumMode < 7 && Helpers.IsIntegerType(itype, this.Emitter.Resolver))
+                {
+                   throw new EmitterException(this.CastExpression, "Enum underlying type is string and cannot be casted to number");
+                }
+            }
+
+            if (method == CS.Ops.CAST && expressionrr.Type.Kind != TypeKind.Enum)
             {
                 var cast_rr = this.Emitter.Resolver.ResolveNode(this.CastExpression, this.Emitter);
 
@@ -191,9 +198,6 @@ namespace Bridge.Translator
                 this.Write(")");
                 return;
             }
-
-            var expressionrr = this.Emitter.Resolver.ResolveNode(expression, this.Emitter);
-            var typerr = this.Emitter.Resolver.ResolveNode(type, this.Emitter);
 
             if (expressionrr.Type.Equals(itype))
             {
@@ -337,10 +341,10 @@ namespace Bridge.Translator
             {
                 this.Write(JS.Types.FUNCTION);
             }
-            else if (resolveResult.Type.Kind == TypeKind.Array)
+            /*else if (resolveResult.Type.Kind == TypeKind.Array)
             {
                 this.EmitArray(resolveResult.Type);
-            }
+            }*/
             else
             {
                 astType.AcceptVisitor(this.Emitter);
@@ -357,10 +361,10 @@ namespace Bridge.Translator
             {
                 this.Write(JS.Types.FUNCTION);
             }
-            else if (iType.Kind == TypeKind.Array)
+            /*else if (iType.Kind == TypeKind.Array)
             {
                 this.EmitArray(iType);
-            }
+            }*/
             else if (iType.Kind == TypeKind.Anonymous)
             {
                 this.Write(JS.Types.Object.NAME);

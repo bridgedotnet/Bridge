@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ar-EG", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ar-EG", true), {
     englishName: "Arabic (Egypt)",
     nativeName: "العربية (مصر)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "ليس برقم",
+        nanSymbol: "ليس برقم",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-لا نهاية",

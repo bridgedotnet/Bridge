@@ -1,5 +1,5 @@
-﻿    Bridge.define("System.ComponentModel.INotifyPropertyChanged", {
-        $kind: "interface",
+    Bridge.define("System.ComponentModel.INotifyPropertyChanged", {
+        $kind: "interface"
     });
 
     Bridge.define("System.ComponentModel.PropertyChangedEventArgs", {

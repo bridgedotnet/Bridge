@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("br-FR", true), {
+Bridge.merge(new System.Globalization.CultureInfo("br-FR", true), {
     englishName: "Breton (France)",
     nativeName: "brezhoneg (Frañs)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NkN",
+        nanSymbol: "NkN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Anfin",

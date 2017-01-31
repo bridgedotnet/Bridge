@@ -1,4 +1,4 @@
-﻿/*--------------------------------------------------------------------------
+/*--------------------------------------------------------------------------
  * linq.js - LINQ for JavaScript
  * ver 3.0.4-Beta5 (Jun. 20th, 2013)
  *
@@ -1433,7 +1433,7 @@
                 function () {
                     enumerator = source.getEnumerator();
                     keys = new (System.Collections.Generic.Dictionary$2(Object, Object))(null, comparer);
-                    Enumerable.from(second).forEach(function (key) { keys.add(key); });
+                    Enumerable.from(second).forEach(function (key) { if (!keys.containsKey(key)) { keys.add(key); } });
                 },
                 function () {
                     while (enumerator.moveNext()) {
@@ -1464,7 +1464,7 @@
                     enumerator = source.getEnumerator();
 
                     keys = new (System.Collections.Generic.Dictionary$2(Object, Object))(null, comparer);
-                    Enumerable.from(second).forEach(function (key) { keys.add(key); });
+                    Enumerable.from(second).forEach(function (key) { if (!keys.containsKey(key)) { keys.add(key); } });
                     outs = new (System.Collections.Generic.Dictionary$2(Object, Object))(null, comparer);
                 },
                 function () {
@@ -2933,13 +2933,13 @@
     Bridge.Class.addExtend(Grouping, [System.Collections.IEnumerable]);
 
     // module export
-    if (typeof define === Types.Function && define.amd) { // AMD
+    /*if (typeof define === Types.Function && define.amd) { // AMD
         define("linqjs", [], function () { return Enumerable; });
     } else if (typeof module !== Types.Undefined && module.exports) { // Node
         module.exports = Enumerable;
     } else {
         root.Enumerable = Enumerable;
-    }
+    }*/
 
     Bridge.Linq = {};
     Bridge.Linq.Enumerable = Enumerable;

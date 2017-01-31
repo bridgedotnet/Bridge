@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("rm", true), {
+Bridge.merge(new System.Globalization.CultureInfo("rm", true), {
     englishName: "Romansh",
     nativeName: "Rumantsch",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "betg def.",
+        nanSymbol: "betg def.",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-infinit",

@@ -11,6 +11,7 @@ namespace Bridge.Translator
         {
             private bool _usesThis;
             private readonly HashSet<ISymbol> _usedVariables = new HashSet<ISymbol>();
+            private readonly List<string> _usedVariablesNames = new List<string>();
             private readonly SemanticModel _semanticModel;
 
             public bool UsesThis
@@ -26,6 +27,14 @@ namespace Bridge.Translator
                 get
                 {
                     return _usedVariables;
+                }
+            }
+
+            public List<string> UsedVariablesNames
+            {
+                get
+                {
+                    return _usedVariablesNames;
                 }
             }
 
@@ -81,6 +90,18 @@ namespace Bridge.Translator
                 }
             }
 
+            public override void VisitVariableDeclarator(VariableDeclaratorSyntax node)
+            {
+                var name = node.Identifier.Value.ToString();
+
+                if (!this.UsedVariablesNames.Contains(name))
+                {
+                    this.UsedVariablesNames.Add(name);
+                }
+
+                base.VisitVariableDeclarator(node);
+            }
+
             public override void VisitNameEquals(NameEqualsSyntax node)
             {
             }
@@ -109,7 +130,34 @@ namespace Bridge.Translator
         {
             var analyzer = new Analyzer(semanticModel);
             analyzer.Analyze(node);
-            return new LocalUsageData(analyzer.UsesThis, analyzer.UsedVariables);
+            return new LocalUsageData(analyzer.UsesThis, analyzer.UsedVariables, analyzer.UsedVariablesNames);
+        }
+    }
+
+    public class IdentifierReplacer : CSharpSyntaxRewriter
+    {
+        private string name;
+        private ExpressionSyntax replacer;
+
+        public IdentifierReplacer(string name, ExpressionSyntax replacer)
+        {
+            this.name = name;
+            this.replacer = replacer;
+        }
+
+        public ExpressionSyntax Replace(ExpressionSyntax expr)
+        {
+            return (ExpressionSyntax)Visit(expr);
+        }
+
+        public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax syntax)
+        {
+            if (syntax.Identifier.Value.ToString() == name)
+            {
+                return this.replacer;
+            }
+
+            return syntax;
         }
     }
 
@@ -127,10 +175,17 @@ namespace Bridge.Translator
             private set;
         }
 
-        public LocalUsageData(bool directlyOrIndirectlyUsesThis, ISet<ISymbol> directlyOrIndirectlyUsedVariables)
+        public IList<string> Names
+        {
+            get;
+            private set;
+        }
+
+        public LocalUsageData(bool directlyOrIndirectlyUsesThis, ISet<ISymbol> directlyOrIndirectlyUsedVariables, IList<string> names)
         {
             DirectlyOrIndirectlyUsesThis = directlyOrIndirectlyUsesThis;
             DirectlyOrIndirectlyUsedLocals = new HashSet<ISymbol>(directlyOrIndirectlyUsedVariables);
+            this.Names = new List<string>(names);
         }
     }
 }

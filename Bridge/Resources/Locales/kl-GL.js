@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("kl-GL", true), {
+Bridge.merge(new System.Globalization.CultureInfo("kl-GL", true), {
     englishName: "Greenlandic (Greenland)",
     nativeName: "kalaallisut (Kalaallit Nunaat)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-INF",

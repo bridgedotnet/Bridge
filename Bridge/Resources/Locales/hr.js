@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("hr", true), {
+Bridge.merge(new System.Globalization.CultureInfo("hr", true), {
     englishName: "Croatian",
     nativeName: "hrvatski",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

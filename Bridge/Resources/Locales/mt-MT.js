@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("mt-MT", true), {
+Bridge.merge(new System.Globalization.CultureInfo("mt-MT", true), {
     englishName: "Maltese (Malta)",
     nativeName: "Malti (Malta)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

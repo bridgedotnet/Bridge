@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ar-LY", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ar-LY", true), {
     englishName: "Arabic (Libya)",
     nativeName: "العربية (ليبيا)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "ليس برقم",
+        nanSymbol: "ليس برقم",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-لا نهاية",

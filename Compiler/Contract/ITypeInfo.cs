@@ -117,7 +117,13 @@ namespace Bridge.Contract
             set;
         }
 
-        string Module
+        string JsName
+        {
+            get;
+            set;
+        }
+
+        Module Module
         {
             get;
             set;

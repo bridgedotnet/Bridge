@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sl-SI", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sl-SI", true), {
     englishName: "Slovenian (Slovenia)",
     nativeName: "slovenščina (Slovenija)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-neskončnost",

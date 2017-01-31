@@ -1,4 +1,4 @@
-﻿    Bridge.define("System.Exception", {
+    Bridge.define("System.Exception", {
         ctor: function (message, innerException) {
             this.$initialize();
             this.message = message ? message : ("Exception of type '" + Bridge.getTypeName(this) + "' was thrown.");

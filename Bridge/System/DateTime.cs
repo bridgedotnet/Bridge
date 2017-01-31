@@ -372,6 +372,12 @@ namespace System
         [Template("Bridge.Date.toLocal({this})")]
         public extern DateTime ToLocalTime();
 
+        [Template("Bridge.Date.format({this}, 'd')")]
+        public extern string ToShortDateString();
+
+        [Template("Bridge.Date.format({this}, 't')")]
+        public extern string ToShortTimeString();
+
         [Template("new Date(({this}).getTime() + (({value}).ticks.div(10000).toNumber()))")]
         public extern DateTime Add(TimeSpan value);
 

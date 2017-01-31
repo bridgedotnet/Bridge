@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("tr", true), {
+Bridge.merge(new System.Globalization.CultureInfo("tr", true), {
     englishName: "Turkish",
     nativeName: "Türkçe",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Sonsuz",

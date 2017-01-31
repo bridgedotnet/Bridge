@@ -11,6 +11,8 @@
         {
             public const string ACCESSORSINDEXER_ATTRIBUTE_NAME = "Bridge.AccessorsIndexerAttribute";
             public const string READY_ATTRIBUTE_NAME = "Bridge.Html5.ReadyAttribute";
+            public const string FIELD_NAME = "Bridge.FieldAttribute";
+            public const string FIELD_PROPERTY_NAME = "Bridge.FieldPropertyAttribute";
         }
 
         public class Methods
@@ -38,6 +40,17 @@
             public const string System_UInt32 = "System.UInt32";
             public const string System_Single = "System.Single";
             public const string System_Double = "System.Double";
+
+            public class System
+            {
+                private const string DOTNAME = "System.";
+
+                public class Exception
+                {
+                    public const string NAME = System.DOTNAME + "Exception";
+                    private const string DOTNAME = NAME + ".";
+                }
+            }
         }
 
         public class Wrappers

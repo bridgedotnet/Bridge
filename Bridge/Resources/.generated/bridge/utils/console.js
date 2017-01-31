@@ -1,4 +1,4 @@
-﻿    Bridge.define("Bridge.Console", {
+    Bridge.define("Bridge.Console", {
         statics: {
             BODY_WRAPPER_ID: "bridge-body-wrapper",
             CONSOLE_MESSAGES_ID: "bridge-console-messages",
@@ -15,7 +15,7 @@
                 if (messageType === void 0) { messageType = 0; }
                 var self = Bridge.Console.getInstance();
 
-                var v = value != null ? value.toString() : "null";
+                var v = value != null ? value.toString() : "";
 
                 if (self.bufferedOutput != null) {
                     self.bufferedOutput = System.String.concat(self.bufferedOutput, v);
@@ -106,16 +106,16 @@
             if (reinit === void 0) { reinit = false; }
             this.hidden = false;
 
-            var consoleWrapperStyles = Bridge.fn.bind(this, $_.Bridge.Console.f1)(new (System.Collections.Generic.Dictionary$2(String,String))());
+            var consoleWrapperStyles = Bridge.fn.bind(this, $asm.$.Bridge.Console.f1)(new (System.Collections.Generic.Dictionary$2(String,String))());
 
-            var consoleHeaderStyles = $_.Bridge.Console.f2(new (System.Collections.Generic.Dictionary$2(String,String))());
+            var consoleHeaderStyles = $asm.$.Bridge.Console.f2(new (System.Collections.Generic.Dictionary$2(String,String))());
 
-            var consoleBodyStyles = $_.Bridge.Console.f3(new (System.Collections.Generic.Dictionary$2(String,String))());
+            var consoleBodyStyles = $asm.$.Bridge.Console.f3(new (System.Collections.Generic.Dictionary$2(String,String))());
 
             // Bridge Icon
             this.bridgeIcon = this.bridgeIcon || document.createElementNS(this.svgNS, "svg");
 
-            var items = Bridge.fn.bind(this, $_.Bridge.Console.f4)(new (System.Collections.Generic.Dictionary$2(String,String))());
+            var items = Bridge.fn.bind(this, $asm.$.Bridge.Console.f4)(new (System.Collections.Generic.Dictionary$2(String,String))());
 
             this.setAttributes(this.bridgeIcon, items);
 
@@ -137,13 +137,13 @@
 
             this.closeIcon = this.closeIcon || document.createElementNS(this.svgNS, "svg");
 
-            var items3 = Bridge.fn.bind(this, $_.Bridge.Console.f5)(new (System.Collections.Generic.Dictionary$2(String,String))());
+            var items3 = Bridge.fn.bind(this, $asm.$.Bridge.Console.f5)(new (System.Collections.Generic.Dictionary$2(String,String))());
 
             this.setAttributes(this.closeIcon, items3);
 
             this.closeIconPath = this.closeIconPath || document.createElementNS(this.svgNS, "path");
 
-            var items4 = $_.Bridge.Console.f6(new (System.Collections.Generic.Dictionary$2(String,String))());
+            var items4 = $asm.$.Bridge.Console.f6(new (System.Collections.Generic.Dictionary$2(String,String))());
 
             this.setAttributes(this.closeIconPath, items4);
 
@@ -213,11 +213,11 @@
                 document.body.appendChild(this.consoleWrapper);
 
                 // Close console
-                this.closeBtn.addEventListener("click", Bridge.fn.bind(this, this.close));
+                this.closeBtn.addEventListener("click", Bridge.fn.cacheBind(this, this.close));
 
                 // Show/hide Tooltip
-                this.closeBtn.addEventListener("mouseover", Bridge.fn.bind(this, this.showTooltip));
-                this.closeBtn.addEventListener("mouseout", Bridge.fn.bind(this, this.hideTooltip));
+                this.closeBtn.addEventListener("mouseover", Bridge.fn.cacheBind(this, this.showTooltip));
+                this.closeBtn.addEventListener("mouseout", Bridge.fn.cacheBind(this, this.hideTooltip));
 
                 this.consoleDefined = Bridge.isDefined(Bridge.global) && Bridge.isDefined(Bridge.global.console);
                 this.consoleDebugDefined = this.consoleDefined && Bridge.isDefined(Bridge.unbox(Bridge.global.console.debug));
@@ -293,7 +293,7 @@
 
             var messageIcon = document.createElementNS(this.svgNS, "svg");
 
-            var items5 = Bridge.fn.bind(this, $_.Bridge.Console.f7)(new (System.Collections.Generic.Dictionary$2(String,String))());
+            var items5 = Bridge.fn.bind(this, $asm.$.Bridge.Console.f7)(new (System.Collections.Generic.Dictionary$2(String,String))());
 
             this.setAttributes(messageIcon, items5);
 
@@ -318,7 +318,7 @@
 
             var messageContainer = document.createElement("span");
             messageContainer.innerHTML = message;
-            messageContainer.style.color = color;
+            messageContainer.setAttribute("style", System.String.concat("color: ", color, "; white-space: pre;"));
 
             messageItem.appendChild(messageIcon);
             messageItem.appendChild(messageContainer);
@@ -347,11 +347,9 @@
         }
     });
 
-    var $_ = {};
+    Bridge.ns("Bridge.Console", $asm.$);
 
-    Bridge.ns("Bridge.Console", $_);
-
-    Bridge.apply($_.Bridge.Console, {
+    Bridge.apply($asm.$.Bridge.Console, {
         f1: function (_o1) {
             _o1.add("position", "fixed");
             _o1.add("left", "0");

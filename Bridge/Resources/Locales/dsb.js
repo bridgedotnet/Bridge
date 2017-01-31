@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("dsb", true), {
+Bridge.merge(new System.Globalization.CultureInfo("dsb", true), {
     englishName: "Lower Sorbian",
     nativeName: "dolnoserbšćina",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "njedefinowane",
+        nanSymbol: "njedefinowane",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-njeskóńcnje",

@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("gl", true), {
+Bridge.merge(new System.Globalization.CultureInfo("gl", true), {
     englishName: "Galician",
     nativeName: "galego",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NéN",
+        nanSymbol: "NéN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",

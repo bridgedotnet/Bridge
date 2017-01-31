@@ -1,4 +1,4 @@
-﻿    Bridge.define("System.Threading.Timer", {
+    Bridge.define("System.Threading.Timer", {
         inherits: [System.IDisposable],
         statics: {
             MAX_SUPPORTED_TIMEOUT: 4294967294,
@@ -98,7 +98,7 @@
 
             if (period.ne(System.Int64(-1)) && !this.disposed) {
                 var p = period.toNumber();
-                this.id = Bridge.global.setTimeout(Bridge.fn.bind(this, this.handleCallback), p);
+                this.id = Bridge.global.setTimeout(Bridge.fn.cacheBind(this, this.handleCallback), p);
                 return true;
             }
 

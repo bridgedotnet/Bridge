@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("bs-Latn", true), {
+Bridge.merge(new System.Globalization.CultureInfo("bs-Latn", true), {
     englishName: "Bosnian (Latin)",
     nativeName: "bosanski",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

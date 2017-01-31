@@ -8,17 +8,17 @@ namespace System.Linq.Expressions
     [Cast("{this}.ntype === 61")]
     public sealed class TryExpression : Expression
     {
-        [FieldProperty]
+        [Field]
         public extern Expression Body { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern ReadOnlyCollection<CatchBlock> Handlers { get; private set; }
 
         [Name("finallyExpr")]
-        [FieldProperty]
+        [Field]
         public extern Expression Finally { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern Expression Fault { get; private set; }
 
         internal extern TryExpression();

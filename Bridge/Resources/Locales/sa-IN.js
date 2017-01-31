@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sa-IN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sa-IN", true), {
     englishName: "Sanskrit (India)",
     nativeName: "संस्कृत (भारतम्)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

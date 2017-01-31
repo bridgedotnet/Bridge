@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("zh-MO", true), {
+Bridge.merge(new System.Globalization.CultureInfo("zh-MO", true), {
     englishName: "Chinese (Traditional, Macao SAR)",
     nativeName: "中文(澳門特別行政區)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "非數字",
+        nanSymbol: "非數字",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "負無窮大",

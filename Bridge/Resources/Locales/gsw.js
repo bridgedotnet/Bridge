@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("gsw", true), {
+Bridge.merge(new System.Globalization.CultureInfo("gsw", true), {
     englishName: "Alsatian",
     nativeName: "Elsässisch",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "Ohne Nummer",
+        nanSymbol: "Ohne Nummer",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Unendlich",

@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("th-TH", true), {
+Bridge.merge(new System.Globalization.CultureInfo("th-TH", true), {
     englishName: "Thai (Thailand)",
     nativeName: "ไทย (ไทย)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

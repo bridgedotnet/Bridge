@@ -12,14 +12,14 @@ namespace System.Threading
         [Template("new System.Threading.CancellationTokenSource({delay}.ticks / 10000)")]
         public extern CancellationTokenSource(TimeSpan delay);
 
-        [FieldProperty]
+        [Field]
         public extern bool IsCancellationRequested
         {
             get;
             private set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern CancellationToken Token
         {
             get;

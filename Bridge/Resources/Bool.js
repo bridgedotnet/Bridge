@@ -1,4 +1,4 @@
-﻿    var _boolean = {
+    var _boolean = {
         trueString: "True",
         falseString: "False",
 

@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -16,7 +16,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             return new Bridge826A(val);
         }
 
-        public static implicit operator decimal (Bridge826A val)
+        public static implicit operator decimal(Bridge826A val)
         {
             return val != null ? val._val : 0;
         }
@@ -36,7 +36,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             return new Bridge826B(val);
         }
 
-        public static implicit operator int (Bridge826B val)
+        public static implicit operator int(Bridge826B val)
         {
             return val != null ? val._val : 0;
         }

@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sr-Latn", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sr-Latn", true), {
     englishName: "Serbian (Latin)",
     nativeName: "srpski",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-beskonačnost",

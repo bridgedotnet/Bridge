@@ -19,7 +19,13 @@ namespace Bridge.Contract
             set;
         }
 
-        System.Collections.Generic.Dictionary<string, System.Text.StringBuilder> ModuleOutput
+        System.Collections.Generic.List<IPluginDependency> NonModuleDependencies
+        {
+            get;
+            set;
+        }
+
+        System.Collections.Generic.Dictionary<Module, System.Text.StringBuilder> ModuleOutput
         {
             get;
             set;
@@ -38,12 +44,6 @@ namespace Bridge.Contract
         }
 
         System.Text.StringBuilder BottomOutput
-        {
-            get;
-            set;
-        }
-
-        bool IsPrivateVarIntroduced
         {
             get;
             set;

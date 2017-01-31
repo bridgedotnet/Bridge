@@ -1082,7 +1082,7 @@ namespace Bridge.Html5
         /// An event handler property for errors raised on the window
         /// </summary>
         [Name("onerror")]
-        public Action<Event> OnError;
+        public ErrorEventHandler OnError;
 
         /// <summary>
         /// An event handler property for focus events on the window

@@ -15,6 +15,7 @@ namespace Bridge.Translator
             this.ReflectionInternal = new ReflectionConfig();
             this.Assembly = new AssemblyConfig();
             this.Resources = new ResourceConfig();
+            this.Loader = new ModuleLoader();
         }
 
         /// <summary>
@@ -55,10 +56,11 @@ namespace Bridge.Translator
         {
             get
             {
-                if (this.CombineScripts)
+                if (this.CombineScripts || !string.IsNullOrEmpty(this.FileName))
                 {
                     return OutputBy.Project;
                 }
+
                 return this.outputBy;
             }
             set
@@ -116,7 +118,7 @@ namespace Bridge.Translator
         /// The global Module setting. The entire project is considered as one Module.
         /// Though, you are still able to define a Module attribute on the class level.
         /// </summary>
-        public string Module
+        public Module Module
         {
             get; set;
         }
@@ -283,6 +285,11 @@ namespace Bridge.Translator
         }
 
         public ResourceConfig Resources
+        {
+            get; set;
+        }
+
+        public IModuleLoader Loader
         {
             get; set;
         }

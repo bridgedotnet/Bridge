@@ -7,168 +7,168 @@ namespace System.Globalization
     {
         public extern NumberFormatInfo();
 
-        [FieldProperty]
+        [Field]
         public static extern NumberFormatInfo InvariantInfo
         {
             get;
         }
 
         [Name("nanSymbol")]
-        [FieldProperty]
+        [Field]
         public extern string NaNSymbol
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string NegativeSign
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string PositiveSign
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string NegativeInfinitySymbol
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string PositiveInfinitySymbol
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string PercentSymbol
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern int[] PercentGroupSizes
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern int PercentDecimalDigits
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string PercentDecimalSeparator
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string PercentGroupSeparator
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern int PercentPositivePattern
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern int PercentNegativePattern
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string CurrencySymbol
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern int[] CurrencyGroupSizes
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern int CurrencyDecimalDigits
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string CurrencyDecimalSeparator
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string CurrencyGroupSeparator
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern int CurrencyPositivePattern
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern int CurrencyNegativePattern
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern int[] NumberGroupSizes
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern int NumberDecimalDigits
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string NumberDecimalSeparator
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string NumberGroupSeparator
         {
             get;
@@ -179,7 +179,7 @@ namespace System.Globalization
 
         public extern object Clone();
 
-        [FieldProperty]
+        [Field]
         public static extern NumberFormatInfo CurrentInfo
         {
             get;

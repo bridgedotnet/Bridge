@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ro", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ro", true), {
     englishName: "Romanian",
     nativeName: "română",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN (nu este un număr)",
+        nanSymbol: "NaN (nu este un număr)",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinit",

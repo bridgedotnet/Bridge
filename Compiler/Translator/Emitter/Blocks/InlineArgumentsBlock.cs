@@ -24,6 +24,22 @@ namespace Bridge.Translator
             argsInfo.AddExtensionParam();
             this.Method = method;
             this.TargetResolveResult = targetResolveResult;
+
+            if (argsInfo.Expression != null)
+            {
+                var rr = emitter.Resolver.ResolveNode(argsInfo.Expression, emitter) as MemberResolveResult;
+
+                if (rr != null)
+                {
+                    BridgeType bridgeType = emitter.BridgeTypes.Get(rr.Member.DeclaringType, true);
+
+                    if (bridgeType != null)
+                    {
+                        bool isCustomName;
+                        BridgeTypes.AddModule(null, bridgeType, out isCustomName);
+                    }
+                }
+            }
         }
 
         public int[] IgnoreRange
@@ -141,54 +157,62 @@ namespace Bridge.Translator
 
         public static string ReplaceInlineArgs(AbstractEmitterBlock block, string inline, Expression[] args)
         {
-            var emitter = block.Emitter;
-            inline = _formatArg.Replace(inline, delegate (Match m)
+            if (args.Length > 0)
             {
-                int count = emitter.Writers.Count;
-                string key = m.Groups[2].Value;
-                string modifier = m.Groups[1].Success ? m.Groups[4].Value : null;
-
-                StringBuilder oldSb = emitter.Output;
-                emitter.Output = new StringBuilder();
-
-                Expression expr = null;
-
-                if (Regex.IsMatch(key, "^\\d+$"))
+                var emitter = block.Emitter;
+                inline = _formatArg.Replace(inline, delegate (Match m)
                 {
-                    expr = args.Skip(int.Parse(key)).FirstOrDefault();
-                }
-                else
-                {
-                    expr = args.FirstOrDefault(e => e.ToString() == key);
-                }
+                    int count = emitter.Writers.Count;
+                    string key = m.Groups[2].Value;
+                    string modifier = m.Groups[1].Success ? m.Groups[4].Value : null;
 
-                string s = "";
-                if (expr != null)
-                {
-                    var writer = block.SaveWriter();
-                    block.NewWriter();
-                    expr.AcceptVisitor(emitter);
-                    s = emitter.Output.ToString();
-                    block.RestoreWriter(writer);
-
-                    if (modifier == "raw")
+                    if (!string.IsNullOrWhiteSpace(modifier) && modifier != "raw")
                     {
-                        s = s.Trim('"');
+                        return m.Value;
                     }
-                }
 
-                block.Write(block.WriteIndentToString(s));
+                    StringBuilder oldSb = emitter.Output;
+                    emitter.Output = new StringBuilder();
 
-                if (emitter.Writers.Count != count)
-                {
-                    block.PopWriter();
-                }
+                    Expression expr = null;
 
-                string replacement = emitter.Output.ToString();
-                emitter.Output = oldSb;
+                    if (Regex.IsMatch(key, "^\\d+$"))
+                    {
+                        expr = args.Skip(int.Parse(key)).FirstOrDefault();
+                    }
+                    else
+                    {
+                        expr = args.FirstOrDefault(e => e.ToString() == key);
+                    }
 
-                return replacement;
-            });
+                    string s = "";
+                    if (expr != null)
+                    {
+                        var writer = block.SaveWriter();
+                        block.NewWriter();
+                        expr.AcceptVisitor(emitter);
+                        s = emitter.Output.ToString();
+                        block.RestoreWriter(writer);
+
+                        if (modifier == "raw")
+                        {
+                            s = s.Trim('"');
+                        }
+                    }
+
+                    block.Write(block.WriteIndentToString(s));
+
+                    if (emitter.Writers.Count != count)
+                    {
+                        block.PopWriter();
+                    }
+
+                    string replacement = emitter.Output.ToString();
+                    emitter.Output = oldSb;
+
+                    return replacement;
+                });
+            }
 
             return inline;
         }
@@ -204,13 +228,15 @@ namespace Bridge.Translator
                 }
             }
 
-            if (Helpers.IsReservedWord(name))
+            if (Helpers.IsReservedWord(this.Emitter, name))
             {
                 name = Helpers.ChangeReservedWord(name);
             }
 
             this.Write(name);
         }
+
+        private string[] allowedModifiers = new[] {"default", "defaultFn", "raw", "plain", "body", "gettmp", "version", "tmp", "type", "array", "module"};
 
         protected virtual void EmitInlineExpressionList(ArgumentsInfo argsInfo, string inline, bool asRef = false, bool isNull = false, bool? definition = null)
         {
@@ -385,6 +411,11 @@ namespace Bridge.Translator
                     return tempMap[tempKey];
                 }
 
+                if (!string.IsNullOrWhiteSpace(modifier) && !this.allowedModifiers.Contains(modifier))
+                {
+                    return m.Value;
+                }
+
                 if (modifier == "array")
                 {
                     ignoreArray = false;
@@ -393,7 +424,92 @@ namespace Bridge.Translator
                 StringBuilder oldSb = this.Emitter.Output;
                 this.Emitter.Output = new StringBuilder();
 
-                if (asRef)
+                if (modifier == "module")
+                {
+                    IList<Expression> exprs = this.GetExpressionsByKey(expressions, key);
+
+                    if (exprs.Count > 0)
+                    {
+                        var amd = new List<string>();
+                        var cjs = new List<string>();
+                        foreach (var expr in exprs)
+                        {
+                            var rr = this.Emitter.Resolver.ResolveNode(expr, this.Emitter) as TypeOfResolveResult;
+
+                            if (rr == null)
+                            {
+                                throw new EmitterException(expr, "Module.Load supports typeof expression only");
+                            }
+
+                            var bridgeType = this.Emitter.BridgeTypes.Get(rr.ReferencedType, true);
+                            Module module = null;
+
+                            if (bridgeType.TypeInfo == null)
+                            {
+                                BridgeTypes.EnsureModule(bridgeType);
+                                module = bridgeType.Module;
+                            }
+                            else
+                            {
+                                module = bridgeType.TypeInfo.Module;
+                            }
+
+                            if (module != null)
+                            {
+                                if (module.Type == ModuleType.AMD ||
+                                    (module.Type == ModuleType.UMD &&
+                                     this.Emitter.AssemblyInfo.Loader.Type == ModuleLoaderType.AMD))
+                                {
+                                    amd.Add(module.Name);
+                                }
+                                else
+                                {
+                                    cjs.Add(module.Name);
+                                }
+                            }
+                        }
+
+                        this.Write("{");
+
+                        if (amd.Count > 0)
+                        {
+                            this.Write("amd: ");
+                            this.Write(this.Emitter.ToJavaScript(amd.ToArray()));
+                            if (cjs.Count > 0)
+                            {
+                                this.Write(", ");
+                            }
+                        }
+
+                        if (cjs.Count > 0)
+                        {
+                            this.Write("cjs: ");
+                            this.Write(this.Emitter.ToJavaScript(cjs.ToArray()));
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(this.Emitter.AssemblyInfo.Loader.FunctionName))
+                        {
+                            this.Write(", ");
+                            this.Write(this.Emitter.ToJavaScript(this.Emitter.AssemblyInfo.Loader.FunctionName));
+                        }
+
+                        this.Write("}, function () { ");
+
+                        var idx = 0;
+                        var list = amd.Concat(cjs);
+
+                        foreach (var moduleName in list)
+                        {
+                            this.Write(moduleName);
+                            this.Write(" = arguments[");
+                            this.Write(idx++);
+                            this.Write("];");
+                        }
+
+                        this.Write(" }");
+                    }
+                }
+                else if (asRef)
                 {
                     if (Regex.IsMatch(key, "^\\d+$"))
                     {
@@ -520,6 +636,10 @@ namespace Bridge.Translator
 
                                 if (thisValue != null)
                                 {
+                                    if (type.Kind == TypeKind.TypeParameter && !Helpers.IsIgnoreGeneric(((ITypeParameter)type).Owner, this.Emitter))
+                                    {
+                                        thisValue = thisValue + ", " + type.Name;
+                                    }
                                     this.Write(JS.Funcs.BRIDGE_GET_TYPE + "(" + thisValue + ")");
                                 }
                             }
@@ -988,6 +1108,11 @@ namespace Bridge.Translator
                     s = "null";
                 }
 
+                if (type.Kind == TypeKind.TypeParameter && !Helpers.IsIgnoreGeneric(((ITypeParameter)type).Owner, this.Emitter))
+                {
+                    s = s + ", " + type.Name;
+                }
+
                 this.Write(this.WriteIndentToString(JS.Funcs.BRIDGE_GET_TYPE + "(" + s + ")"));
             }
         }
@@ -995,7 +1120,7 @@ namespace Bridge.Translator
         private bool NeedName(IType type)
         {
             var def = type.GetDefinition();
-            return (def != null && def.IsSealed)
+            return (def != null && def.IsSealed && !Helpers.IsKnownType(KnownTypeCode.Array, type, this.Emitter.Resolver))
                    || type.Kind == TypeKind.Enum
                    || type.IsKnownType(KnownTypeCode.Enum)
                    || Helpers.IsIntegerType(type, this.Emitter.Resolver)
@@ -1003,7 +1128,6 @@ namespace Bridge.Translator
                    || Helpers.IsKnownType(KnownTypeCode.Enum, type, this.Emitter.Resolver)
                    || Helpers.IsKnownType(KnownTypeCode.Boolean, type, this.Emitter.Resolver)
                    || Helpers.IsKnownType(KnownTypeCode.Type, type, this.Emitter.Resolver)
-                   || Helpers.IsKnownType(KnownTypeCode.Array, type, this.Emitter.Resolver)
                    || Helpers.IsKnownType(KnownTypeCode.Char, type, this.Emitter.Resolver)
                    || Helpers.IsKnownType(KnownTypeCode.DateTime, type, this.Emitter.Resolver)
                    || Helpers.IsKnownType(KnownTypeCode.Delegate, type, this.Emitter.Resolver)
@@ -1078,7 +1202,7 @@ namespace Bridge.Translator
             {
                 var name = p.Name;
 
-                if (Helpers.IsReservedWord(name))
+                if (Helpers.IsReservedWord(this.Emitter, name))
                 {
                     name = Helpers.ChangeReservedWord(name);
                 }
@@ -1098,7 +1222,7 @@ namespace Bridge.Translator
             }
         }
 
-        public virtual void EmitFunctionReference(bool? definition = null)
+        public virtual void EmitFunctionReference(bool? definition = false)
         {
             this.EmitInlineExpressionList(this.ArgumentsInfo, this.InlineCode, true, false, definition);
         }

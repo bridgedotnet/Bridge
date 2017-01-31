@@ -2,6 +2,7 @@ using Bridge.Contract;
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.TypeSystem;
 using System.Linq;
+using ICSharpCode.NRefactory.CSharp.Analysis;
 
 namespace Bridge.Translator
 {
@@ -286,7 +287,17 @@ namespace Bridge.Translator
                 this.Emitter.BeforeBlock = null;
             }
 
-            this.BlockStatement.Children.ToList().ForEach(child => child.AcceptVisitor(this.Emitter));
+            var ra = ReachabilityAnalysis.Create(this.BlockStatement, this.Emitter.Resolver.Resolver);
+            this.BlockStatement.Children.ToList().ForEach(child =>
+            {
+                var statement = child as Statement;
+                if (statement != null && !ra.IsReachable(statement))
+                {
+                    return;
+                }
+
+                child.AcceptVisitor(this.Emitter);
+            });
         }
 
         public void EndEmitBlock()

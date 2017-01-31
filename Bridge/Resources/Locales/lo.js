@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("lo", true), {
+Bridge.merge(new System.Globalization.CultureInfo("lo", true), {
     englishName: "Lao",
     nativeName: "ພາສາລາວ",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

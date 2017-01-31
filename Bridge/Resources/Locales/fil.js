@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("fil", true), {
+Bridge.merge(new System.Globalization.CultureInfo("fil", true), {
     englishName: "Filipino",
     nativeName: "Filipino",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

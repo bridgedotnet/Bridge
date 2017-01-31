@@ -7,6 +7,7 @@ using ICSharpCode.NRefactory.TypeSystem;
 using ICSharpCode.NRefactory.TypeSystem.Implementation;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Win32.SafeHandles;
 
 namespace Bridge.Translator
 {
@@ -80,7 +81,7 @@ namespace Bridge.Translator
                 if (lrr != null && ((identifierExpression = expr as IdentifierExpression) != null))
                 {
                     var name = identifierExpression.Identifier;
-                    if (Helpers.IsReservedWord(name))
+                    if (Helpers.IsReservedWord(this.Emitter, name))
                     {
                         name = Helpers.ChangeReservedWord(name);
                     }
@@ -96,14 +97,21 @@ namespace Bridge.Translator
             name = name.StartsWith(JS.Vars.FIX_ARGUMENT_NAME) ? name.Substring(JS.Vars.FIX_ARGUMENT_NAME.Length) : name;
             string vName = valueName ?? name;
 
-            if (Helpers.IsReservedWord(vName))
+            if (Helpers.IsReservedWord(this.Emitter, vName))
             {
                 vName = Helpers.ChangeReservedWord(vName);
             }
 
             if (!this.Emitter.LocalsNamesMap.ContainsKey(name))
             {
-                this.Emitter.LocalsNamesMap.Add(name, vName);
+                if (this.Emitter.LocalsNamesMap.ContainsValue(name))
+                {
+                    this.Emitter.LocalsNamesMap.Add(name, this.GetUniqueNameByValue(vName));
+                }
+                else
+                {
+                    this.Emitter.LocalsNamesMap.Add(name, vName);
+                }
             }
             else
             {
@@ -125,6 +133,19 @@ namespace Bridge.Translator
             }
 
             return result;
+        }
+
+        protected virtual string GetUniqueNameByValue(string name)
+        {
+            int index = 1;
+            string tempName = name + index;
+
+            while (this.Emitter.LocalsNamesMap.ContainsValue(tempName))
+            {
+                tempName = name + ++index;
+            }
+
+            return tempName;
         }
 
         protected virtual string GetUniqueName(string name)
@@ -221,7 +242,7 @@ namespace Bridge.Translator
                                 if (prm.IsOptional)
                                 {
                                     var name = prm.Name;
-                                    if (Helpers.IsReservedWord(name))
+                                    if (Helpers.IsReservedWord(this.Emitter, name))
                                     {
                                         name = Helpers.ChangeReservedWord(name);
                                     }
@@ -230,6 +251,10 @@ namespace Bridge.Translator
                                     if (prm.ConstantValue == null && prm.Type.Kind == TypeKind.Struct && !prm.Type.IsKnownType(KnownTypeCode.NullableOfT))
                                     {
                                         this.Write(Inspector.GetStructDefaultValue(prm.Type, this.Emitter));
+                                    }
+                                    else if (prm.ConstantValue == null && prm.Type.Kind == TypeKind.TypeParameter)
+                                    {
+                                        this.Write(JS.Funcs.BRIDGE_GETDEFAULTVALUE + "(" + BridgeTypes.ToJsName(prm.Type, this.Emitter) + ")");
                                     }
                                     else
                                     {
@@ -242,7 +267,7 @@ namespace Bridge.Translator
                                 else if (prm.IsParams)
                                 {
                                     var name = prm.Name;
-                                    if (Helpers.IsReservedWord(name))
+                                    if (Helpers.IsReservedWord(this.Emitter, name))
                                     {
                                         name = Helpers.ChangeReservedWord(name);
                                     }

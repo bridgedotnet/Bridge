@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ar-SA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ar-SA", true), {
     englishName: "Arabic (Saudi Arabia)",
     nativeName: "العربية (المملكة العربية السعودية)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "ليس برقم",
+        nanSymbol: "ليس برقم",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-لا نهاية",

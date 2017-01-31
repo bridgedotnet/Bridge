@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("iu", true), {
+Bridge.merge(new System.Globalization.CultureInfo("iu", true), {
     englishName: "Inuktitut",
     nativeName: "Inuktitut",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

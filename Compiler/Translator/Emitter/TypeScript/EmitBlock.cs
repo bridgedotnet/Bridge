@@ -161,6 +161,8 @@ namespace Bridge.Translator.TypeScript
                 }
 
                 this.Emitter.TypeInfo = type;
+                type.JsName = BridgeTypes.ToJsName(type.Type, this.Emitter, true);
+
                 this.Emitter.Output = this.GetOutputForType(typeInfo);
                 var nestedTypes = types.Where(t => t.ParentType == type);
                 new ClassBlock(this.Emitter, this.Emitter.TypeInfo, nestedTypes, types).Emit();

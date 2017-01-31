@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sv-SE", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sv-SE", true), {
     englishName: "Swedish (Sweden)",
     nativeName: "svenska (Sverige)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-INF",

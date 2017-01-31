@@ -1,5 +1,5 @@
 ﻿using Bridge.Linq;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -45,6 +45,22 @@ namespace Bridge.ClientTest
                 Assert.True(arr is ICollection<int>, "is ICollection<int> should be true");
                 Assert.True(arr is IEnumerable<int>, "is IEnumerable<int> should be true");
                 Assert.True(arr is IList<int>, "is IList<int> should be true");
+            }
+
+            [Test]
+            public void CreateWithNegativeLenghtShouldThrow()
+            {
+                int size = -1;
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    var a = new int[size];
+                });
+
+                long lsize = -1;
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    var a = new int[lsize];
+                });
             }
 
             [Test]

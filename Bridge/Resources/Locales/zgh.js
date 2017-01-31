@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("zgh", true), {
+Bridge.merge(new System.Globalization.CultureInfo("zgh", true), {
     englishName: "Standard Morrocan Tamazight",
     nativeName: "Standard Morrocan Tamazight",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "ⵡⴰⵔ ⴰⵎⴹⴰⵏ",
+        nanSymbol: "ⵡⴰⵔ ⴰⵎⴹⴰⵏ",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

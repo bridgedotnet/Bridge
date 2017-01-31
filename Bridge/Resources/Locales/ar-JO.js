@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ar-JO", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ar-JO", true), {
     englishName: "Arabic (Jordan)",
     nativeName: "العربية (الأردن)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "ليس برقم",
+        nanSymbol: "ليس برقم",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-لا نهاية",

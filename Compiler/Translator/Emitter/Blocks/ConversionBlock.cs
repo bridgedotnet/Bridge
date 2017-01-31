@@ -38,7 +38,7 @@ namespace Bridge.Translator
                     {
                         this.EmitConversionExpression();
                     }
-                    
+
                     return;
                 }
             }
@@ -111,7 +111,7 @@ namespace Bridge.Translator
 
         internal static List<Expression> expressionInWork = new List<Expression>();
         internal static List<Expression> expressionIgnoreUserDefine = new List<Expression>();
-        internal static Dictionary<Expression, string> expressionMap = new Dictionary<Expression, string>(); 
+        internal static Dictionary<Expression, string> expressionMap = new Dictionary<Expression, string>();
 
         protected virtual bool DisableEmitConversionExpression
         {
@@ -271,7 +271,7 @@ namespace Bridge.Translator
                     var parent_rr = inv_rr as InvocationResolveResult;
                     if (parent_rr != null)
                     {
-                        isArgument = block.Emitter.Validator.IsIgnoreType(parent_rr.Member.DeclaringTypeDefinition) || block.Emitter.Validator.IsIgnoreType(parent_rr.Member);
+                        isArgument = block.Emitter.Validator.IsExternalType(parent_rr.Member.DeclaringTypeDefinition) || block.Emitter.Validator.IsExternalType(parent_rr.Member);
 
                         var attr = parent_rr.Member.Attributes.FirstOrDefault(a => a.AttributeType.FullName == "Bridge.UnboxAttribute");
 
@@ -293,7 +293,7 @@ namespace Bridge.Translator
                     {
                         isArgument = true;
                     }
-                    
+
                 }
 
                 if (conversion.IsBoxingConversion && !isArgument)
@@ -541,7 +541,7 @@ namespace Bridge.Translator
                 }
                 else
                 {
-                    if (method.DeclaringTypeDefinition != null && (block.Emitter.Validator.IsIgnoreType(method.DeclaringTypeDefinition) || Helpers.IsIgnoreCast(method.DeclaringTypeDefinition, block.Emitter)))
+                    if (method.DeclaringTypeDefinition != null && (block.Emitter.Validator.IsExternalType(method.DeclaringTypeDefinition) || Helpers.IsIgnoreCast(method.DeclaringTypeDefinition, block.Emitter)))
                     {
                         // Still returns true if Nullable.lift( was written.
                         return level;

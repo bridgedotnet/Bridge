@@ -7,13 +7,13 @@ namespace System.Linq.Expressions
     [Cast("{this}.ntype === 8")]
     public sealed class ConditionalExpression : Expression
     {
-        [FieldProperty]
+        [Field]
         public extern Expression Test { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern Expression IfTrue { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern Expression IfFalse { get; private set; }
 
         internal extern ConditionalExpression();

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <ProjectGuid>{16777B9C-A3B6-4E0B-B5A2-AA933A2F54D3}</ProjectGuid>
     <RootNamespace>TestProject</RootNamespace>
-    <AssemblyName>TestProject</AssemblyName>
+    <AssemblyName>TestProject.I2096</AssemblyName>
     <UseBridgeTask>true</UseBridgeTask>
   </PropertyGroup>
   <PropertyGroup>

@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("tg-Cyrl", true), {
+Bridge.merge(new System.Globalization.CultureInfo("tg-Cyrl", true), {
     englishName: "Tajik (Cyrillic)",
     nativeName: "Тоҷикӣ",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

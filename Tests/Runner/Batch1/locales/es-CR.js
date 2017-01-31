@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("es-CR", true), {
+Bridge.merge(new System.Globalization.CultureInfo("es-CR", true), {
     englishName: "Spanish (Costa Rica)",
     nativeName: "español (Costa Rica)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",

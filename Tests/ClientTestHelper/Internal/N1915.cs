@@ -1,4 +1,4 @@
-﻿namespace Bridge.ClientTestHelper.Internal
+﻿namespace Bridge.ClientTestHelper
 {
     public interface IItem
     {

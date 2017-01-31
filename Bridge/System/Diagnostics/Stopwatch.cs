@@ -28,7 +28,7 @@ namespace System.Diagnostics
             get;
         }
 
-        [FieldProperty]
+        [Field]
         public extern bool IsRunning
         {
             get;

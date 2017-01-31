@@ -345,7 +345,7 @@ namespace Bridge.Utils
         {
             var self = Instance;
 
-            var v = value != null ? value.ToString() : "null";
+            var v = value != null ? value.ToString() : "";
 
             if (self.BufferedOutput != null)
             {
@@ -591,7 +591,7 @@ namespace Bridge.Utils
 
             var messageContainer = Document.CreateElement("span");
             messageContainer.InnerHTML = message;
-            messageContainer.Style.Color = color;
+            messageContainer.SetAttribute("style", "color: " + color +"; white-space: pre;");
 
             messageItem.AppendChild(messageIcon);
             messageItem.AppendChild(messageContainer);

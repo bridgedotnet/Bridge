@@ -19,7 +19,7 @@ namespace Bridge.Translator
     {
         public virtual bool CanIgnoreType(TypeDefinition type)
         {
-            if (this.IsIgnoreType(type))
+            if (this.IsExternalType(type))
             {
                 return true;
             }
@@ -124,24 +124,30 @@ namespace Bridge.Translator
             }
         }
 
-        public virtual bool IsIgnoreType(ICustomAttributeProvider type, bool ignoreLiteral = false)
+        public virtual bool IsExternalType(TypeDefinition type, bool ignoreLiteral = false)
         {
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
             string nonScriptableAttr = Translator.Bridge_ASSEMBLY + ".NonScriptableAttribute";
 
-            return
-                this.HasAttribute(type.CustomAttributes, externalAttr)
-                || this.HasAttribute(type.CustomAttributes, nonScriptableAttr);
+            var has = this.HasAttribute(type.CustomAttributes, externalAttr)
+                      || this.HasAttribute(type.CustomAttributes, nonScriptableAttr);
+
+            if (!has)
+            {
+                has = this.HasAttribute(type.Module.Assembly.CustomAttributes, externalAttr);
+            }
+
+            return has;
         }
 
-        public virtual bool IsIgnoreType(IEntity enity, bool ignoreLiteral = false)
+        public virtual bool IsExternalType(IEntity entity, bool ignoreLiteral = false)
         {
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
             string nonScriptableAttr = Translator.Bridge_ASSEMBLY + ".NonScriptableAttribute";
 
             return
-                this.HasAttribute(enity.Attributes, externalAttr)
-                || this.HasAttribute(enity.Attributes, nonScriptableAttr);
+                this.HasAttribute(entity.Attributes, externalAttr)
+                || this.HasAttribute(entity.Attributes, nonScriptableAttr);
         }
 
         public virtual bool IsBridgeClass(TypeDefinition type)
@@ -157,25 +163,79 @@ namespace Bridge.Translator
             return false;
         }
 
-        public virtual bool IsIgnoreType(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition, bool ignoreLiteral = false)
+        public virtual bool IsExternalType(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition, bool ignoreLiteral = false)
         {
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
 
-            return typeDefinition.Attributes.Any(attr => attr.Constructor != null && attr.Constructor.DeclaringType.FullName == externalAttr);
+            var has = typeDefinition.Attributes.Any(attr => attr.Constructor != null && attr.Constructor.DeclaringType.FullName == externalAttr);
+
+            if (!has)
+            {
+                has = typeDefinition.ParentAssembly.AssemblyAttributes.Any(attr => attr.Constructor != null && attr.Constructor.DeclaringType.FullName == externalAttr);
+            }
+
+            return has;
         }
 
         public virtual bool IsExternalInterface(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition, out bool isNative)
         {
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalInterfaceAttribute";
             var attr = typeDefinition.Attributes.FirstOrDefault(a => a.Constructor != null && (a.Constructor.DeclaringType.FullName == externalAttr));
+
+            if (attr == null)
+            {
+                attr = typeDefinition.ParentAssembly.AssemblyAttributes.FirstOrDefault(a => a.Constructor != null && (a.Constructor.DeclaringType.FullName == externalAttr));
+            }
+
             isNative = attr != null && attr.PositionalArguments.Count == 1 && (bool)attr.PositionalArguments[0].ConstantValue;
 
             if (attr == null)
             {
-                isNative = typeDefinition.ParentAssembly.AssemblyName == "Bridge" || !this.IsIgnoreType(typeDefinition);
+                isNative = typeDefinition.ParentAssembly.AssemblyName == CS.NS.ROOT || !this.IsExternalType(typeDefinition);
             }
 
             return attr != null;
+        }
+
+        public virtual IExternalInterface IsExternalInterface(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition)
+        {
+            string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalInterfaceAttribute";
+            var attr = typeDefinition.Attributes.FirstOrDefault(a => a.Constructor != null && (a.Constructor.DeclaringType.FullName == externalAttr));
+
+            if (attr == null)
+            {
+                attr = typeDefinition.ParentAssembly.AssemblyAttributes.FirstOrDefault(a => a.Constructor != null && (a.Constructor.DeclaringType.FullName == externalAttr));
+            }
+
+            if (attr != null)
+            {
+                var ei = new ExternalInterface();
+                if (attr.PositionalArguments.Count == 1)
+                {
+                    bool isNative = (bool)attr.PositionalArguments[0].ConstantValue;
+
+                    if (isNative)
+                    {
+                        ei.IsNativeImplementation = true;
+                    }
+                    else
+                    {
+                        ei.IsSimpleImplementation = true;
+                    }
+                }
+
+                if (attr.NamedArguments.Count == 1)
+                {
+                    if (attr.NamedArguments[0].Key.Name == "IsVirtual")
+                    {
+                        ei.IsVirtual = (bool)attr.NamedArguments[0].Value.ConstantValue;
+                    }
+                }
+
+                return ei;
+            }
+
+            return null;
         }
 
         public virtual bool IsImmutableType(ICustomAttributeProvider type)
@@ -434,10 +494,7 @@ namespace Bridge.Translator
             if (this.HasAttribute(type.CustomAttributes, Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute"))
             {
                 var mode = this.GetObjectCreateMode(type);
-
-                var ignore = mode == 0 && !type.Methods.Any(m => !m.IsConstructor && !m.IsGetter && !m.IsSetter && !m.IsRemoveOn && !m.IsAddOn);
-
-                if (emitter.Validator.IsIgnoreType(type) || ignore)
+                if (emitter.Validator.IsExternalType(type) && mode == 0)
                 {
                     return "Object";
                 }
@@ -562,19 +619,85 @@ namespace Bridge.Translator
 
                 if (attr != null)
                 {
-                    var typeInfo = this.EnsureTypeInfo(type, translator);
-
-                    if (attr.ConstructorArguments.Count > 0)
-                    {
-                        var obj = this.GetAttributeArgumentValue(attr, 0);
-                        typeInfo.Module = obj is string ? obj.ToString() : "";
-                    }
-                    else
-                    {
-                        typeInfo.Module = "";
-                    }
+                    this.ReadModuleFromAttribute(type, translator, attr);
                 }
             }
+
+            if (type.Module.Assembly.HasCustomAttributes)
+            {
+                var attr = this.GetAttribute(type.Module.Assembly.CustomAttributes, Translator.Bridge_ASSEMBLY + ".ModuleAttribute");
+
+                if (attr != null)
+                {
+                    this.ReadModuleFromAttribute(type, translator, attr);
+                }
+            }
+        }
+
+        private void ReadModuleFromAttribute(TypeDefinition type, ITranslator translator, CustomAttribute attr)
+        {
+            var typeInfo = this.EnsureTypeInfo(type, translator);
+            Module module = null;
+
+            if (attr.ConstructorArguments.Count == 1)
+            {
+                var obj = attr.ConstructorArguments[0].Value;
+
+                if (obj is bool)
+                {
+                    module = new Module((bool)obj);
+                }
+                else if (obj is string)
+                {
+                    module = new Module(obj.ToString());
+                }
+                else if (obj is int)
+                {
+                    module = new Module("", (ModuleType)(int)obj);
+                }
+                else
+                {
+                    module = new Module();
+                }
+            }
+            else if (attr.ConstructorArguments.Count == 2)
+            {
+                if (attr.ConstructorArguments[0].Value is string)
+                {
+                    var name = attr.ConstructorArguments[0].Value;
+                    var preventName = attr.ConstructorArguments[1].Value;
+
+                    module = new Module(name != null ? name.ToString() : "", (bool)preventName);
+                }
+                else if (attr.ConstructorArguments[1].Value is bool)
+                {
+                    var mtype = attr.ConstructorArguments[0].Value;
+                    var preventName = attr.ConstructorArguments[1].Value;
+
+                    module = new Module("", (ModuleType)(int)mtype, (bool)preventName);
+                }
+                else
+                {
+                    var mtype = attr.ConstructorArguments[0].Value;
+                    var name = attr.ConstructorArguments[1].Value;
+
+                    module = new Module(name != null ? name.ToString() : "", (ModuleType)(int)mtype);
+                }
+            }
+            else if (attr.ConstructorArguments.Count == 3)
+            {
+                var mtype = attr.ConstructorArguments[0].Value;
+                var name = attr.ConstructorArguments[1].Value;
+                var preventName = attr.ConstructorArguments[2].Value;
+
+                module = new Module(name != null ? name.ToString() : "", (ModuleType)(int)mtype, (bool)preventName);
+            }
+            else
+            {
+                module = new Module();
+            }
+
+            typeInfo.Module = module;
         }
 
         public virtual void CheckModuleDependenies(TypeDefinition type, ITranslator translator)
@@ -634,7 +757,7 @@ namespace Bridge.Translator
 
         public virtual void CheckIdentifier(string name, AstNode context)
         {
-            if (Helpers.IsReservedWord(name))
+            if (Helpers.IsReservedWord(null, name))
             {
                 throw new EmitterException(context, "Cannot use '" + name + "' as identifier");
             }

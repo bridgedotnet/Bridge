@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("he", true), {
+Bridge.merge(new System.Globalization.CultureInfo("he", true), {
     englishName: "Hebrew",
     nativeName: "עברית",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "לא מספר",
+        nanSymbol: "לא מספר",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "אינסוף שלילי",

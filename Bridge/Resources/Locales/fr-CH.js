@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("fr-CH", true), {
+Bridge.merge(new System.Globalization.CultureInfo("fr-CH", true), {
     englishName: "French (Switzerland)",
     nativeName: "français (Suisse)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "Non Numérique",
+        nanSymbol: "Non Numérique",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

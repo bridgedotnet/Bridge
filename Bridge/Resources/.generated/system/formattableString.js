@@ -1,4 +1,4 @@
-﻿    Bridge.define("System.FormattableString", {
+    Bridge.define("System.FormattableString", {
         inherits: [System.IFormattable],
         statics: {
             invariant: function (formattable) {

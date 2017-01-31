@@ -9,13 +9,13 @@ namespace System.Linq.Expressions
     public abstract class LambdaExpression : Expression
     {
         [Name("p")]
-        [FieldProperty]
+        [Field]
         public extern ReadOnlyCollection<ParameterExpression> Parameters { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern Expression Body { get; private set; }
 
-        [FieldProperty]
+        [Field]
         [Name("rt")]
         public extern Expression ReturnType { get; private set; }
 

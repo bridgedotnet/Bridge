@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("arn-CL", true), {
+Bridge.merge(new System.Globalization.CultureInfo("arn-CL", true), {
     englishName: "Mapudungun (Chile)",
     nativeName: "Mapudungun (Chile)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",

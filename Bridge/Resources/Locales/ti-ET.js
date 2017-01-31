@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ti-ET", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ti-ET", true), {
     englishName: "Tigrinya (Ethiopia)",
     nativeName: "ትግርኛ (ኢትዮጵያ)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NAN",
+        nanSymbol: "NAN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

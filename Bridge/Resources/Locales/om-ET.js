@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("om-ET", true), {
+Bridge.merge(new System.Globalization.CultureInfo("om-ET", true), {
     englishName: "Oromo (Ethiopia)",
     nativeName: "Oromoo (Itoophiyaa)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

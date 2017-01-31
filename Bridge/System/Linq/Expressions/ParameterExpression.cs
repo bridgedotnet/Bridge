@@ -7,7 +7,7 @@ namespace System.Linq.Expressions
     [Cast("{this}.ntype === 38")]
     public sealed class ParameterExpression : Expression
     {
-        [FieldProperty]
+        [Field]
         [Name("n")]
         public extern string Name { get; private set; }
 

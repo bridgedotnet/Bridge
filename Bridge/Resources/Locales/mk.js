@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("mk", true), {
+Bridge.merge(new System.Globalization.CultureInfo("mk", true), {
     englishName: "Macedonian (Former Yugoslav Republic of Macedonia)",
     nativeName: "македонски јазик",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

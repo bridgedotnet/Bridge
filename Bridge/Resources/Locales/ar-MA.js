@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ar-MA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ar-MA", true), {
     englishName: "Arabic (Morocco)",
     nativeName: "العربية (المملكة المغربية)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "ليس برقم",
+        nanSymbol: "ليس برقم",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-لا نهاية",

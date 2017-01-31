@@ -50,8 +50,9 @@ namespace Bridge.Translator
 
             bool isTypeParam = resolveResult != null && resolveResult.Type.Kind == TypeKind.TypeParameter;
             var invocationResolveResult = this.Emitter.Resolver.ResolveNode(objectCreateExpression, this.Emitter) as InvocationResolveResult;
+            var hasInitializer = !objectCreateExpression.Initializer.IsNull && objectCreateExpression.Initializer.Elements.Count > 0;
 
-            if (isTypeParam && invocationResolveResult != null && invocationResolveResult.Member.Parameters.Count == 0)
+            if (isTypeParam && invocationResolveResult != null && invocationResolveResult.Member.Parameters.Count == 0 && !hasInitializer)
             {
                 this.Write(JS.Funcs.BRIDGE_CREATEINSTANCE);
                 this.WriteOpenParentheses();
@@ -113,7 +114,6 @@ namespace Bridge.Translator
             }
 
             var customCtor = isTypeParam ? "" : (this.Emitter.Validator.GetCustomConstructor(type) ?? "");
-            var hasInitializer = !objectCreateExpression.Initializer.IsNull && objectCreateExpression.Initializer.Elements.Count > 0;
 
             bool isCollectionInitializer = false;
             AstNodeCollection<Expression> elements = null;
@@ -125,10 +125,35 @@ namespace Bridge.Translator
             }
 
             var isPlainObjectCtor = Regex.Match(customCtor, @"\s*\{\s*\}\s*").Success;
-            var isPlainMode = this.Emitter.Validator.GetObjectCreateMode(type) == 0;
+            var isPlainMode = type != null && this.Emitter.Validator.GetObjectCreateMode(type) == 0;
 
             if (inlineCode == null && isPlainObjectCtor && isPlainMode)
             {
+                bool close = isObjectLiteral;
+                if (isObjectLiteral)
+                {
+                    if (this.Emitter.Validator.IsExternalType(type))
+                    {
+                        var name = BridgeTypes.ToJsName(objectCreateExpression.Type, this.Emitter);
+
+                        if (name != JS.Types.Object.NAME)
+                        {
+                            this.Write(JS.Funcs.BRIDGE_LITERAL + "(" + name + ", ");
+                        }
+                        else
+                        {
+                            close = false;
+                        }
+                    }
+                    else
+                    {
+                        objectCreateExpression.Type.AcceptVisitor(this.Emitter);
+                        this.Write(".");
+                        this.Write(JS.Funcs.CONSTRUCTOR);
+                        this.WriteOpenParentheses();
+                    }
+                }
+
                 this.WriteOpenBrace();
                 this.WriteSpace();
 
@@ -136,6 +161,11 @@ namespace Bridge.Translator
                 this.WriteSpace();
 
                 this.WriteCloseBrace();
+
+                if (close)
+                {
+                    this.WriteCloseParentheses();
+                }
             }
             else
             {
@@ -193,7 +223,7 @@ namespace Bridge.Translator
                         this.Write(customCtor);
                     }
 
-                    if (!isTypeParam && !this.Emitter.Validator.IsIgnoreType(type) && type.Methods.Count(m => m.IsConstructor && !m.IsStatic) > (type.IsValueType || isObjectLiteral ? 0 : 1))
+                    if (!isTypeParam && !this.Emitter.Validator.IsExternalType(type) && type.Methods.Count(m => m.IsConstructor && !m.IsStatic) > (type.IsValueType || isObjectLiteral ? 0 : 1))
                     {
                         this.WriteDot();
                         var name = OverloadsCollection.Create(this.Emitter, ((InvocationResolveResult)this.Emitter.Resolver.ResolveNode(objectCreateExpression, this.Emitter)).Member).GetOverloadName();

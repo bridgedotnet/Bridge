@@ -15,7 +15,7 @@ namespace Bridge.Translator
 {
     public partial class Translator : ITranslator
     {
-        public const string Bridge_ASSEMBLY = "Bridge";
+        public const string Bridge_ASSEMBLY = CS.NS.ROOT;
         public const string Bridge_ASSEMBLY_DOT = Bridge_ASSEMBLY + ".";
         public const string BridgeResourcesPlusSeparatedFormatList = "Bridge.Resources.list";
         public const string BridgeResourcesJsonFormatList = "Bridge.Resources.json";
@@ -23,7 +23,7 @@ namespace Bridge.Translator
         public const string SupportedProjectType = "Library";
         public const string DefaultRootNamespace = "ClassLibrary";
 
-        private static readonly Encoding OutputEncoding = Encoding.UTF8;
+        private static readonly Encoding OutputEncoding = new UTF8Encoding(false);
         private static readonly string[] MinifierCodeSettingsInternalFileNames = new string[] { "bridge.js", "bridge.min.js", "bridge.collections.js", "bridge.collections.min.js" };
 
         private char[] invalidPathChars;
@@ -143,7 +143,7 @@ namespace Bridge.Translator
 
             this.BuildSyntaxTree();
 
-            var resolver = new MemberResolver(this.ParsedSourceFiles, Emitter.ToAssemblyReferences(references, logger));
+            var resolver = new MemberResolver(this.ParsedSourceFiles, Emitter.ToAssemblyReferences(references, logger), this.AssemblyDefinition);
             resolver = this.Preconvert(resolver);
 
             this.InspectTypes(resolver, config);
@@ -203,7 +203,7 @@ namespace Bridge.Translator
 
             if (needRecompile)
             {
-                return new MemberResolver(this.ParsedSourceFiles, resolver.Assemblies);
+                return new MemberResolver(this.ParsedSourceFiles, resolver.Assemblies, this.AssemblyDefinition);
             }
 
             return resolver;
@@ -216,12 +216,12 @@ namespace Bridge.Translator
             var list = this.References.ToList();
             list.Sort((r1, r2) =>
             {
-                if (r1.Name.Name == "Bridge")
+                if (r1.Name.Name == CS.NS.ROOT)
                 {
                     return -1;
                 }
 
-                if (r2.Name.Name == "Bridge")
+                if (r2.Name.Name == CS.NS.ROOT)
                 {
                     return 1;
                 }
@@ -296,7 +296,7 @@ namespace Bridge.Translator
 
                 if (fileName.Contains(Bridge.Translator.AssemblyInfo.DEFAULT_FILENAME))
                 {
-                    fileName = fileName.Replace(Bridge.Translator.AssemblyInfo.DEFAULT_FILENAME, Path.GetFileNameWithoutExtension(defaultFileName));
+                    fileName = fileName.Replace(Bridge.Translator.AssemblyInfo.DEFAULT_FILENAME, defaultFileName);
                 }
 
                 // Ensure filename contains no ":". It could be used like "c:/absolute/path"
@@ -578,7 +578,7 @@ namespace Bridge.Translator
                 bufferjsmin = new StringBuilder();
             }
 
-            var bridgeAssembly = this.References.FirstOrDefault(r => r.Name.Name == "Bridge");
+            var bridgeAssembly = this.References.FirstOrDefault(r => r.Name.Name == CS.NS.ROOT);
             var localesRes = bridgeAssembly.MainModule.Resources.Where(r => r.Name.StartsWith(Translator.LocalesPrefix)).Cast<EmbeddedResource>();
             var locales = this.AssemblyInfo.Locales.Split(';');
             foreach (var locale in locales)

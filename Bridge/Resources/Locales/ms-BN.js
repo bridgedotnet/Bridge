@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ms-BN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ms-BN", true), {
     englishName: "Malay (Brunei Darussalam)",
     nativeName: "Bahasa Melayu (Brunei Darussalam)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

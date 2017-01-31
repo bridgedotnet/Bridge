@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("syr-SY", true), {
+Bridge.merge(new System.Globalization.CultureInfo("syr-SY", true), {
     englishName: "Syriac (Syria)",
     nativeName: "ܣܘܪܝܝܐ (ܣܘܪܝܐ)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

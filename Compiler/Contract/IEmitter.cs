@@ -472,6 +472,8 @@ namespace Bridge.Contract
             get; set;
         }
 
+        bool DisableDependencyTracking { get; set; }
+
         void WriteIndented(string s, int? position = null);
         string GetReflectionName(IType type);
 

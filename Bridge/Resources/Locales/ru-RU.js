@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ru-RU", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ru-RU", true), {
     englishName: "Russian (Russia)",
     nativeName: "русский (Россия)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",
