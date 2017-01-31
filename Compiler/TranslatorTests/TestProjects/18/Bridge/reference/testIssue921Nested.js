@@ -143,9 +143,9 @@
             }).select(function (value, index) {
                 return $toString(((value.length + index) | 0));
             }).select(Bridge.fn.bind(this, function (value) {
-                return System.String.concat($toString(value.length), this._offset);
+                return System.String.concat($toString(value.length), Bridge.box(this._offset, System.Int32));
             })).select(Bridge.fn.bind(this, function (value, index) {
-                return System.String.concat($toString(value.length), index, this._offset);
+                return System.String.concat($toString(value.length), Bridge.box(index, System.Int32), Bridge.box(this._offset, System.Int32));
             })).select(function (value) {
                 return $toString(((value.length + $toString(localValue).length) | 0));
             });
@@ -180,19 +180,19 @@
             return ((((value + index) | 0) + this._offset) | 0);
         },
         f9: function (value) {
-            return System.String.concat(value, 1);
+            return System.String.concat(value, Bridge.box(1, System.Int32));
         },
         f10: function (value, index) {
-            return System.String.concat(value, index);
+            return System.String.concat(value, Bridge.box(index, System.Int32));
         },
         f11: function (value) {
             return System.String.concat(value, this.getName());
         },
         f12: function (value, index) {
-            return System.String.concat(value, index, this.getName());
+            return System.String.concat(value, Bridge.box(index, System.Int32), this.getName());
         },
         f13: function (value, index) {
-            return System.String.concat(value, index, TestIssue921Nested.Issue921NestedOuter.Issue921Nested.getNameStatic());
+            return System.String.concat(value, Bridge.box(index, System.Int32), TestIssue921Nested.Issue921NestedOuter.Issue921Nested.getNameStatic());
         },
         f14: function (value) {
             return value.add(System.Decimal(1));

@@ -9,14 +9,14 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             }
         },
         method: function () {
-            return 2;
+            return Bridge.box(2, System.Int32);
         },
         useWithSimpleCall: function () {
             // The method checks that local variales used as a parameter in a method with multiple keys in a [Template]
             // will NOT be wrapped with temp variable
             // DoSomethingTemplate(localVar, localVar);
             var localVar = {  };
-            DoSomethingTemplate(localVar, localVar);
+            DoSomethingTemplate(Bridge.unbox(localVar), Bridge.unbox(localVar));
         },
         useWithField: function () {
             // The method checks that a field used as a parameter in a method with multiple keys in a [Template]
@@ -36,7 +36,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             // The method checks that a method used as a parameter in a method with multiple keys in a [Template]
             // will BE wrapped with temp variable
             // ($t=this.method(), DoSomethingTemplate($t, $t));
-            ($t=this.method(), DoSomethingTemplate($t, $t));
+            ($t=Bridge.unbox(this.method()), DoSomethingTemplate($t, $t));
         }
     });
 });

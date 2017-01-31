@@ -9,6 +9,8 @@ declare module Bridge {
     export type TypeRef<T> = { prototype: { valueOf(): T } | T };
     export function global<T>(): T;
     export function emptyFn(): Function;
+    export function box<T>(v: T, type: { prototype: T }): { v: T, type: { prototype: T } };
+    export function unbox(obj:any): any;
     export function property(scope: any, name: string, defaultValue: any): void;
     export function event(scope: any, name: string, defaultValue: any): void;
     export function copy<T>(to: T, from: T, keys: string[], toIf?: boolean): T;
