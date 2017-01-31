@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -10,6 +10,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge1853
     {
 #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
+
         public class Test
         {
             public override bool Equals(object a)
@@ -17,6 +18,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 return false;
             }
         }
+
 #pragma warning restore CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
 
         [Test]

@@ -1,5 +1,5 @@
 // #1622
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 using System.Globalization;
 using System.Runtime.CompilerServices;

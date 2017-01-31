@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System.Collections.Generic;
 
 namespace Bridge.ClientTest.Batch4.Collections.Generic

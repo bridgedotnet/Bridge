@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -29,7 +29,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             public T this[int index]
             {
                 get { return default(T); }
-                set {  }
+                set { }
             }
 
             public int Add(T item)
@@ -79,7 +79,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
                 set
                 {
-
                 }
             }
 
@@ -157,7 +156,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
                 set
                 {
-
                 }
             }
 

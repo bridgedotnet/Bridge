@@ -1,5 +1,5 @@
 ﻿using System.Text.RegularExpressions;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -10,7 +10,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test]
         public void TestEscapeSequencesInRegex()
         {
-            var patterns = new[] {@"\\", @"\@", @"\<", @"\>"};
+            var patterns = new[] { @"\\", @"\@", @"\<", @"\>" };
             var inputs = new[] { @"\", "@", "<", ">" };
             var expResults = new[] { true, true, true, true };
 

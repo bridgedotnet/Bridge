@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -40,16 +40,15 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
-        interface IBar<T>
+        private interface IBar<T>
         {
-
             T Value { get; }
         }
 
-
-        class Bar<T> : IBar<T>
+        private class Bar<T> : IBar<T>
         {
-            T v;
+            private T v;
+
             public T Value
             {
                 get
@@ -64,7 +63,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
-        struct Xxx
+        private struct Xxx
         {
             public int field;
 
@@ -74,7 +73,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
-        class Foo
+        private class Foo
         {
             public IBar<Xxx?> A { get { return new Bar<Xxx?>(new Xxx(5)); } }
         }

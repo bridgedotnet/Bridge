@@ -1,4 +1,4 @@
-﻿using Bridge.Test;
+﻿using Bridge.Test.NUnit;
 using System;
 using System.Reflection;
 
@@ -220,10 +220,10 @@ namespace Bridge.ClientTest.Reflection
             public static event Action E2;
 
             [Reflectable]
-            public event Action E3 {[Template("{this}.addedE3Handler = {value}")] add { }[Template("{this}.removedE3Handler = {value}")] remove { } }
+            public event Action E3 { [Template("{this}.addedE3Handler = {value}")] add { } [Template("{this}.removedE3Handler = {value}")] remove { } }
 
             [Reflectable]
-            public static event Action E4 {[Template("Bridge.ClientTest.Reflection.ReflectionTests.C13.addedE4Handler = {value}")] add { }[Template("Bridge.ClientTest.Reflection.ReflectionTests.C13.removedE4Handler = {value}")] remove { } }
+            public static event Action E4 { [Template("Bridge.ClientTest.Reflection.ReflectionTests.C13.addedE4Handler = {value}")] add { } [Template("Bridge.ClientTest.Reflection.ReflectionTests.C13.removedE4Handler = {value}")] remove { } }
 
             public void RaiseE1()
             {
@@ -281,10 +281,10 @@ namespace Bridge.ClientTest.Reflection
             public static double P12 { get; set; }
 
             [Reflectable]
-            public int P13 {[Template("{this}.p13Field")] get;[Template("{this}.p13Field = {value}")] set; }
+            public int P13 { [Template("{this}.p13Field")] get; [Template("{this}.p13Field = {value}")] set; }
 
             [Reflectable]
-            public static int P14 {[Template("Bridge.ClientTest.Reflection.ReflectionTests.C14.p14Field")] get;[Template("Bridge.ClientTest.Reflection.ReflectionTests.C14.p14Field = {value}")] set; }
+            public static int P14 { [Template("Bridge.ClientTest.Reflection.ReflectionTests.C14.p14Field")] get; [Template("Bridge.ClientTest.Reflection.ReflectionTests.C14.p14Field = {value}")] set; }
         }
 
         public class C15
@@ -321,10 +321,10 @@ namespace Bridge.ClientTest.Reflection
             public int F;
 
             [A1(4), A3]
-            public int P {[A1(5), A3] get;[A1(6), A3] set; }
+            public int P { [A1(5), A3] get; [A1(6), A3] set; }
 
             [A1(7), A3]
-            public event Action E {[A1(8), A3] add { }[A1(9), A3] remove { } }
+            public event Action E { [A1(8), A3] add { } [A1(9), A3] remove { } }
         }
 
         [Constructor("{ }")]
@@ -452,7 +452,7 @@ namespace Bridge.ClientTest.Reflection
             public string v;
 
             [Reflectable]
-            public string this[int x, string s] {[Template("{this}.v + ' ' + {x} + ' ' + {s}")] get { return null; }[Template("(function(t, x, s) { t.x = x; t.s = s; t.v = {value}; })({this}, {x}, {s})")] set { } }
+            public string this[int x, string s] { [Template("{this}.v + ' ' + {x} + ' ' + {s}")] get { return null; } [Template("(function(t, x, s) { t.x = x; t.s = s; t.v = {value}; })({this}, {x}, {s})")] set { } }
         }
 
         [Reflectable(MemberAccessibility.None)]

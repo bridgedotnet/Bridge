@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -19,7 +19,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             public void Add(int i, int j)
             {
-                buffer += "Add(" + i + ", " + j +");";
+                buffer += "Add(" + i + ", " + j + ");";
             }
 
             public MyList()

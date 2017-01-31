@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -19,7 +19,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual("test", dict[i]);
             Assert.AreEqual("test", dict[l]);
 
-            string[] s = new []{"test"};
+            string[] s = new[] { "test" };
             Assert.AreEqual("test", s[l]);
             Assert.AreEqual("test", s[(long)i]);
         }

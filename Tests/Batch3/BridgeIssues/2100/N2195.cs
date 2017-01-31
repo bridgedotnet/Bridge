@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -8,7 +8,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#2195 - {0}")]
     public class Bridge2195
     {
-        static int Generic<T>()
+        private static int Generic<T>()
         {
             return 1;
         }
