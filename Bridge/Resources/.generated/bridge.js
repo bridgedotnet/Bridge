@@ -14442,6 +14442,7 @@
     {
         this.$initialize();
         this.getEnumerator = action;
+        this.System$Collections$IEnumerable$getEnumerator = action;
     },
     getEnumerator: function()
     {
@@ -14464,6 +14465,7 @@ Bridge.define("Bridge.GeneratorEnumerator", {
     {
         this.$initialize();
         this.moveNext = action;
+        this.System$Collections$IEnumerator$moveNext = action;
     },
     getCurrent: function()
     {

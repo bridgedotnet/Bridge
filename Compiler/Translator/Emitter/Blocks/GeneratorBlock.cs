@@ -258,11 +258,6 @@ namespace Bridge.Translator
 
         protected void EmitGeneratorBlock()
         {
-            IWriterInfo writerInfo = this.SaveWriter();
-            StringBuilder body = this.NewWriter();
-            this.EmitGeneratorBody();
-            this.RestoreWriter(writerInfo);
-
             this.BeginBlock();
 
             this.WriteReturn(true);
@@ -276,8 +271,13 @@ namespace Bridge.Translator
 
             this.WriteVar(true);
             this.Write(JS.Vars.ASYNC_STEP + " = 0,");
-            this.WriteNewLine();
             this.Indent();
+
+            IWriterInfo writerInfo = this.SaveWriter();
+            StringBuilder body = this.NewWriter();
+            Emitter.ResetLevel(writerInfo.Level);
+            this.EmitGeneratorBody();
+            this.RestoreWriter(writerInfo);
 
             foreach(var localVar in this.Emitter.AsyncVariables)
             {
@@ -286,6 +286,7 @@ namespace Bridge.Translator
                 this.WriteComma();
             }
 
+            this.WriteNewLine();
             this.Write("$enumerator = new Bridge.GeneratorEnumerator");
             this.WriteOpenParentheses();
             this.WriteFunction();
@@ -299,6 +300,11 @@ namespace Bridge.Translator
             this.WriteNewLine();
 
             this.Outdent();
+
+            this.WriteReturn(true);
+            this.Write("$enumerator");
+            this.WriteSemiColon();
+			this.WriteNewLine();
 
             this.EndBlock();
             this.WriteCloseParentheses();
