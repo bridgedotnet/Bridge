@@ -13804,6 +13804,78 @@ Bridge.$N1391Result =                 r;
         inherits: [System.Attribute]
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298", {
+        statics: {
+            testGenericInterfaceWithNestedTypeParameters: function () {
+                var b = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.BugTest$1(String))();
+                b._MyThing = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.MyThing$1(String))();
+
+                Bridge.Test.NUnit.Assert.areEqual("MyThing", b.doStuff());
+
+
+                var m = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.DecimalBugTest$1(System.Decimal))();
+                m._MyThing = Bridge.merge(new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.DecimalThing$1(System.Decimal))(), {
+                    setA: Bridge.merge(new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.V2$2(System.Decimal,System.Decimal))(), {
+                        a: System.Decimal(1.1),
+                        b: System.Decimal(2.2)
+                    } ),
+                    setB: Bridge.merge(new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.V2$2(System.Decimal,System.Int64))(), {
+                        a: System.Decimal(3.3),
+                        b: System.Int64(4)
+                    } )
+                } );
+
+                Bridge.Test.NUnit.Assert.areEqual("1.1|2.2|3.3|4", m.doStuff());
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.BugTest$1", function (TX) { return {
+        _MyThing: null,
+        doStuff: function () {
+            return this._MyThing["Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$IThing$2$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$V2$2$" + Bridge.getTypeAlias(TX) + "$System$Double$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$V2$2$System$Double$System$Double$myMethod"]();
+        }
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.DecimalBugTest$1", function (TX) { return {
+        _MyThing: null,
+        doStuff: function () {
+            return this._MyThing["Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$IThing$2$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$V2$2$" + Bridge.getTypeAlias(TX) + "$System$Decimal$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$V2$2$System$Decimal$System$Int64$myMethod"]();
+        }
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.V2$2", function (TA, TB) { return {
+        $kind: "struct",
+        statics: {
+            getDefaultValue: function () { return new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.V2$2(TA,TB))(); }
+        },
+        a: Bridge.getDefaultValue(TA),
+        b: Bridge.getDefaultValue(TB),
+        ctor: function () {
+            this.$initialize();
+        },
+        getHashCode: function () {
+            var h = Bridge.addHash([12886, this.a, this.b]);
+            return h;
+        },
+        equals: function (o) {
+            if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.V2$2(TA,TB))) {
+                return false;
+            }
+            return Bridge.equals(this.a, o.a) && Bridge.equals(this.b, o.b);
+        },
+        $clone: function (to) {
+            var s = to || new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.V2$2(TA,TB))();
+            s.a = this.a;
+            s.b = this.b;
+            return s;
+        }
+    }; });
+
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.IThing$2", function (TC, TD) { return {
+        $kind: "interface"
+    }; });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
@@ -22159,6 +22231,38 @@ Bridge.$N1391Result =                 r;
         },
         Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$ISomething$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$Item$1$T$doSomething: function (t) {
             return t;
+        }
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.DecimalThing$1", function (TX) { return {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.IThing$2(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.V2$2(TX,System.Decimal),Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.V2$2(System.Decimal,System.Int64))],
+        config: {
+            properties: {
+                A: null,
+                B: null
+            },
+            alias: [
+            "myMethod", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$IThing$2$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$V2$2$" + Bridge.getTypeAlias(TX) + "$System$Decimal$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$V2$2$System$Decimal$System$Int64$myMethod"
+            ],
+            init: function () {
+                this.A = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.V2$2(TX,System.Decimal))();
+                this.B = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.V2$2(System.Decimal,System.Int64))();
+            }
+        },
+        myMethod: function () {
+            return System.Array.init([this.getA().a.toString(), Bridge.Int.format(this.getA().b, 'G'), Bridge.Int.format(this.getB().a, 'G'), this.getB().b.toString()], String).join("|");
+        }
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.MyThing$1", function (TX) { return {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.IThing$2(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.V2$2(TX,System.Double),Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.V2$2(System.Double,System.Double))],
+        config: {
+            alias: [
+            "myMethod", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$IThing$2$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$V2$2$" + Bridge.getTypeAlias(TX) + "$System$Double$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$V2$2$System$Double$System$Double$myMethod"
+            ]
+        },
+        myMethod: function () {
+            return "MyThing";
         }
     }; });
 
