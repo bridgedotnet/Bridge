@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -23,7 +23,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual(3, l.Count);
             Assert.AreEqual(2, list[1]);
             Assert.AreEqual(2, l[1]);
-
 
             var arr = new int[] { 1, 2, 3 };
             l = arr;

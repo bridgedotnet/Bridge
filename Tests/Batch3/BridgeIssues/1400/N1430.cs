@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -28,7 +28,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             public const string TestConst = "Hi from inner Level1";
         }
 
-        class Do
+        internal class Do
         {
             public int GetFour()
             {
@@ -43,7 +43,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 public const string TestConst = "Hi from inner Level3";
             }
 
-            class Do
+            internal class Do
             {
                 public int GetFive()
                 {

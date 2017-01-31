@@ -1,5 +1,5 @@
 ﻿using Bridge.Linq;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 using System;
 using System.Collections.Generic;

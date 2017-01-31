@@ -1,6 +1,6 @@
 using System;
 using Bridge.Html5;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {

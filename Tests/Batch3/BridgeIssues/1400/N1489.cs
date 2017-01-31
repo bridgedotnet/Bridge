@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -6,7 +6,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#1489 - {0}")]
     public class Bridge1489
     {
-        enum Enum : long
+        private enum Enum : long
         {
             A = 1L,
             B = 2L
@@ -20,7 +20,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual("B", (++@enum).ToString());
         }
 
-        enum IntEnum : int
+        private enum IntEnum : int
         {
             C = 3,
             D = 4

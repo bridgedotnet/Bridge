@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -37,13 +37,15 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge2079
     {
         public class Result<TValue> { }
+
         public class Source { }
+
         public delegate Result<TValue> Parser<TValue>(Source input);
-        
+
         [Test]
         public static void TestQueryAsArgument()
         {
-            Assert.True(true, "Just check that Bridge2079Parsers is compiled ok");    
+            Assert.True(true, "Just check that Bridge2079Parsers is compiled ok");
         }
     }
 }

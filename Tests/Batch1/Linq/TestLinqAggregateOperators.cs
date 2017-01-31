@@ -1,6 +1,6 @@
 using Bridge.ClientTest.Utilities;
 using Bridge.Html5;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System.Linq;
 
 namespace Bridge.ClientTest.Linq

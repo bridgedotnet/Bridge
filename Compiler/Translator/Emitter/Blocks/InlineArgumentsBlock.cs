@@ -636,7 +636,7 @@ namespace Bridge.Translator
 
                                 if (thisValue != null)
                                 {
-                                    if (type.Kind == TypeKind.TypeParameter)
+                                    if (type.Kind == TypeKind.TypeParameter && !Helpers.IsIgnoreGeneric(((ITypeParameter)type).Owner, this.Emitter))
                                     {
                                         thisValue = thisValue + ", " + type.Name;
                                     }
@@ -1108,7 +1108,7 @@ namespace Bridge.Translator
                     s = "null";
                 }
 
-                if (type.Kind == TypeKind.TypeParameter)
+                if (type.Kind == TypeKind.TypeParameter && !Helpers.IsIgnoreGeneric(((ITypeParameter)type).Owner, this.Emitter))
                 {
                     s = s + ", " + type.Name;
                 }

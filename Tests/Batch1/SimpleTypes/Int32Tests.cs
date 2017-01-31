@@ -1,4 +1,4 @@
-﻿using Bridge.Test;
+﻿using Bridge.Test.NUnit;
 using System;
 
 #pragma warning disable 184, 219, 458

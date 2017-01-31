@@ -1,4 +1,4 @@
-﻿using Bridge.Test;
+﻿using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -14,6 +14,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             {
                 Value = 7;
             }
+
             public SomeClass1(int a = 0, int b = 0)
             {
                 Value = 130 + a + b;
@@ -70,7 +71,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             var o13 = new SomeClass1(1, 2);
             Assert.AreEqual(133, o13.Value, "o1 #3");
 
-            var o14 = new SomeClass1(a:2);
+            var o14 = new SomeClass1(a: 2);
             Assert.AreEqual(132, o14.Value, "o1 #4");
 
             var o15 = new SomeClass1(a: 2, b: 3);

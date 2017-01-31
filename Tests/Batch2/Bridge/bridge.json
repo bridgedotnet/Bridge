@@ -16,5 +16,10 @@
 
   "useTypedArrays": true,
   "overflowMode": "Javascript",
-  "strictNullChecks": true
+  "strictNullChecks": true,
+
+  "test": {
+    "skipResources": true,
+    "skipAuxiliary": true
+  }
 }

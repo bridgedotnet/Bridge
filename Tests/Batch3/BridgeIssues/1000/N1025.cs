@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
@@ -305,7 +305,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public interface I11
         {
             [AccessorsIndexer]
-            int this[string index] {[Name("get")] get;[Name("set")] set; }
+            int this[string index] { [Name("get")] get; [Name("set")] set; }
 
             string this[int index] { get; set; }
 

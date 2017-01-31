@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Bridge.Linq;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -13,6 +13,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge2160
     {
         public class Base<T, U> { }
+
         public class Derived<V> : Base<int, string> { }
 
         [Test]
@@ -25,7 +26,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.True(args[0].IsGenericParameter);
 
             var baseArgs = derivedType.BaseType.GetGenericArguments();
-            Assert.AreEqual(new [] {typeof(int), typeof(string)}, baseArgs);
+            Assert.AreEqual(new[] { typeof(int), typeof(string) }, baseArgs);
         }
     }
 }

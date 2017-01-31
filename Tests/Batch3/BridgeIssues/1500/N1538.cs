@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -23,7 +23,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
-        int OutMethod(out int i)
+        private int OutMethod(out int i)
         {
             i = 7;
             return i;

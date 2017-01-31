@@ -1,10 +1,11 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using Bridge.Utils;
 using System;
 using System.Collections.Generic;
 using Bridge;
 
-[assembly:Reflectable("System.String;System.Int32")]
+[assembly: Reflectable("System.String;System.Int32")]
+
 namespace Bridge.ClientTest.Reflection
 {
     [Category(Constants.MODULE_REFLECTION)]
@@ -26,7 +27,6 @@ namespace Bridge.ClientTest.Reflection
         [Reflectable]
         public abstract class CA1
         {
-
         }
 
         [Reflectable]
@@ -95,7 +95,7 @@ namespace Bridge.ClientTest.Reflection
         }
 
         [Reflectable]
-        class L1
+        private class L1
         {
             public int P
             {
@@ -121,7 +121,7 @@ namespace Bridge.ClientTest.Reflection
         }
 
         [Reflectable]
-        class L31<T> : L30
+        private class L31<T> : L30
         {
             public void M2<K>(K a)
             {
@@ -129,7 +129,7 @@ namespace Bridge.ClientTest.Reflection
         }
 
         [Reflectable]
-        class L30
+        private class L30
         {
             public void M1()
             {
@@ -142,7 +142,7 @@ namespace Bridge.ClientTest.Reflection
         }
 
         [Reflectable]
-        class L32 : L31<int>
+        private class L32 : L31<int>
         {
             public new void M1()
             {

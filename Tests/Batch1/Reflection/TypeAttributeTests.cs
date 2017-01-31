@@ -1,6 +1,6 @@
 #define THE_SYMBOL
 
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 using System.Diagnostics;
 

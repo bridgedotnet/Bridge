@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -7,13 +7,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge1530
     {
         [ObjectLiteral]
-        class Child : Parent
+        private class Child : Parent
         {
             public string Name { get; set; }
         }
 
         [ObjectLiteral]
-        interface Parent
+        private interface Parent
         {
             [FieldProperty]
             string Name { get; set; }

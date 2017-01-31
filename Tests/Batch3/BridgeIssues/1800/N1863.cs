@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -15,6 +15,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public class Obj
         {
             private string _v;
+
             public string v
             {
                 get
@@ -33,13 +34,11 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 Bridge1863.sb.Append("c:" + v + ";");
             }
 
-
             public static bool operator false(Obj o)
             {
                 Bridge1863.sb.Append("f:" + o.v + ";");
                 return o == null;
             }
-
 
             public static bool operator true(Obj o)
             {
