@@ -456,7 +456,6 @@ namespace Bridge.Contract
                 this.Events = this.GetEventOverloads();
                 this.Methods = this.GetMethodOverloads();
                 this.Fields = this.GetFieldOverloads();
-                
 
                 this.members = new List<IMember>();
                 this.members.AddRange(this.Methods);
@@ -1043,17 +1042,18 @@ namespace Bridge.Contract
             }
 
             string name = this.Emitter.GetEntityName(definition, this.CancelChangeCase);
-            if (name.StartsWith(".ctor"))
+            if (name.StartsWith("." + JS.Funcs.CONSTRUCTOR))
             {
                 name = JS.Funcs.CONSTRUCTOR;
             }
 
             var attr = Helpers.GetInheritedAttribute(definition, "Bridge.NameAttribute");
 
-            if (attr == null && definition is IProperty && !IsField)
+            var iProperty = definition as IProperty;
+
+            if (attr == null && iProperty != null && !IsField)
             {
-                var prop = (IProperty)definition;
-                var acceessor = this.IsSetter ? prop.Setter : prop.Getter;
+                var acceessor = this.IsSetter ? iProperty.Setter : iProperty.Getter;
 
                 if (acceessor != null)
                 {
@@ -1069,7 +1069,7 @@ namespace Bridge.Contract
                     name = value.ToString();
                 }
 
-                if (!(definition is IProperty || definition is IEvent))
+                if (!(iProperty != null || definition is IEvent))
                 {
                     prefix = null;
                 }
@@ -1089,7 +1089,9 @@ namespace Bridge.Contract
                 return prefix != null ? prefix + name : name;
             }
 
-            var isCtor = definition is IMethod && ((IMethod)definition).IsConstructor;
+            var iDefinition = definition as IMethod;
+            var isCtor = iDefinition != null && iDefinition.IsConstructor;
+
             if (isCtor)
             {
                 name = JS.Funcs.CONSTRUCTOR;
