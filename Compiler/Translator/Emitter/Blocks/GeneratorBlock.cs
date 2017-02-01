@@ -36,6 +36,13 @@ namespace Bridge.Translator
             this.AnonymousMethodExpression = anonymousMethodExpression;
         }
 
+        public GeneratorBlock(IEmitter emitter, Accessor accessor)
+             : base(emitter, accessor)
+         {
+             this.Emitter = emitter;
+             this.Accessor = accessor;
+         }
+
         public AstNode Node
         {
             get
@@ -55,6 +62,11 @@ namespace Bridge.Translator
                     return this.LambdaExpression;
                 }
 
+                if(this.Accessor != null)
+                {
+                    return this.Accessor;
+                }
+
                 return null;
             }
         }
@@ -72,6 +84,12 @@ namespace Bridge.Translator
         }
 
         public AnonymousMethodExpression AnonymousMethodExpression
+        {
+            get;
+            set;
+        }
+
+        public Accessor Accessor
         {
             get;
             set;
@@ -100,6 +118,11 @@ namespace Bridge.Translator
                 if(this.AnonymousMethodExpression != null)
                 {
                     return this.AnonymousMethodExpression.Body;
+                }
+
+                if(this.Accessor != null)
+                {
+                    return this.Accessor.Body;
                 }
 
                 return null;
@@ -208,28 +231,24 @@ namespace Bridge.Translator
 
         protected void DetectReturnType()
         {
-            AstNode node = this.MethodDeclaration != null ? this.MethodDeclaration.ReturnType : null;
-
-            if(node == null)
+            if(this.MethodDeclaration != null)
             {
-                node = this.AnonymousMethodExpression;
+                this.ReturnType = this.Emitter.Resolver.ResolveNode(this.MethodDeclaration.ReturnType, this.Emitter).Type;
             }
-
-            if(node == null)
+            else if(this.LambdaExpression != null)
             {
-                node = this.LambdaExpression;
+                this.ReturnType = ((LambdaResolveResult)this.Emitter.Resolver.ResolveNode(this.LambdaExpression, this.Emitter)).ReturnType;
             }
-
-            var resolveResult = this.Emitter.Resolver.ResolveNode(node, this.Emitter);
-
-            if(resolveResult is LambdaResolveResult)
+            else if(this.AnonymousMethodExpression != null)
             {
-                this.ReturnType = ((LambdaResolveResult)resolveResult).ReturnType;
+                this.ReturnType = ((LambdaResolveResult)this.Emitter.Resolver.ResolveNode(this.AnonymousMethodExpression, this.Emitter)).ReturnType;
             }
-            else if(resolveResult is TypeResolveResult)
+            else if(this.Accessor != null)
             {
-                this.ReturnType = ((TypeResolveResult)resolveResult).Type;
+                this.ReturnType = this.Emitter.Resolver.ResolveNode(((EntityDeclaration)this.Accessor.Parent).ReturnType, this.Emitter).Type;
             }
+            
+            IsEnumeratorReturn = this.ReturnType.Name == "IEnumerator";
         }
 
         protected void FinishGeneratorBlock()
@@ -260,14 +279,27 @@ namespace Bridge.Translator
         {
             this.BeginBlock();
 
-            this.WriteReturn(true);
-            this.Write("new Bridge.GeneratorEnumerable");
-            this.WriteOpenParentheses();
-            this.WriteFunction();
-            this.WriteOpenCloseParentheses();
-            this.WriteSpace();
+            if(!IsEnumeratorReturn)
+            {
+                this.WriteReturn(true);
+                this.Write("new ");
 
-            this.BeginBlock();
+                if(this.ReturnType.IsParameterized)
+                {
+                    this.Write("(Bridge.GeneratorEnumerable$1(" + this.ReturnType.TypeArguments[0].FullName + "))");
+                }
+                else
+                {
+                    this.Write("Bridge.GeneratorEnumerable");
+                }
+
+                this.WriteOpenParentheses();
+                this.WriteFunction();
+                this.WriteOpenCloseParentheses();
+                this.WriteSpace();
+            
+                this.BeginBlock();
+            }
 
             this.WriteVar(true);
             this.Write(JS.Vars.ASYNC_STEP + " = 0,");
@@ -287,7 +319,17 @@ namespace Bridge.Translator
             }
 
             this.WriteNewLine();
-            this.Write("$enumerator = new Bridge.GeneratorEnumerator");
+            this.Write("$enumerator = new ");
+
+            if(this.ReturnType.IsParameterized)
+            {
+                this.Write("(Bridge.GeneratorEnumerator$1(" + this.ReturnType.TypeArguments[0].FullName + "))");
+            }
+            else
+            {
+                this.Write("Bridge.GeneratorEnumerator");
+            }
+
             this.WriteOpenParentheses();
             this.WriteFunction();
             this.WriteOpenCloseParentheses();
@@ -304,12 +346,15 @@ namespace Bridge.Translator
             this.WriteReturn(true);
             this.Write("$enumerator");
             this.WriteSemiColon();
-			this.WriteNewLine();
-
-            this.EndBlock();
-            this.WriteCloseParentheses();
-            this.WriteSemiColon();
             this.WriteNewLine();
+
+            if(!IsEnumeratorReturn)
+            {
+                this.EndBlock();
+                this.WriteCloseParentheses();
+                this.WriteSemiColon();
+                this.WriteNewLine();
+            }
 
             this.EndBlock();
         }
