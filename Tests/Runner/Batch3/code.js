@@ -7365,12 +7365,18 @@ Bridge.$N1391Result =                 r;
     }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1600", {
-        testOutInAsync: function () {
-            var inf = Infinity;
-            Bridge.Test.NUnit.Assert.true((inf === Number.POSITIVE_INFINITY));
+        testPositiveInfinity: function () {
+            var inf1 = Infinity;
+            Bridge.Test.NUnit.Assert.true((inf1 === Number.POSITIVE_INFINITY));
 
-            var dinf = Infinity;
-            Bridge.Test.NUnit.Assert.true((dinf === Number.POSITIVE_INFINITY));
+            var inf2 = -Infinity;
+            Bridge.Test.NUnit.Assert.false((inf2 === Number.POSITIVE_INFINITY));
+
+            var dinf1 = Infinity;
+            Bridge.Test.NUnit.Assert.true((dinf1 === Number.POSITIVE_INFINITY));
+
+            var dinf2 = -Infinity;
+            Bridge.Test.NUnit.Assert.false((dinf2 === Number.POSITIVE_INFINITY));
         }
     });
 
@@ -11911,6 +11917,68 @@ Bridge.$N1391Result =                 r;
                 var val2 = Bridge.box(true, Boolean, $box_.Boolean.toString);
                 Bridge.Test.NUnit.Assert.true(Bridge.referenceEquals(val2.toString(), System.Boolean.trueString));
             }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312", {
+        statics: {
+            testStringFormatForEnums: function () {
+                var r1 = System.String.format("{0} {1} {2}", Bridge.box(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.SimpleEnum.A, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.SimpleEnum, $box_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.SimpleEnum.toString), Bridge.box(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.SimpleEnum.B, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.SimpleEnum, $box_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.SimpleEnum.toString), Bridge.box(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.SimpleEnum.C, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.SimpleEnum, $box_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.SimpleEnum.toString));
+                Bridge.Test.NUnit.Assert.areEqual("A B C", r1);
+
+                var r2 = System.String.format("{0} {1}", Bridge.box(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.ByteEnum.A, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.ByteEnum, $box_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.ByteEnum.toString), Bridge.box(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.ByteEnum.B, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.ByteEnum, $box_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.ByteEnum.toString));
+                Bridge.Test.NUnit.Assert.areEqual("A B", r2);
+
+                var r3 = System.String.format("{0} {1} {2}", Bridge.box(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.SimpleEnum.A, System.Int32), Bridge.box(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.SimpleEnum.B, System.Int32), Bridge.box(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.SimpleEnum.C, System.Int32));
+                Bridge.Test.NUnit.Assert.areEqual("0 3 4", r3);
+
+                var r4 = System.String.format("{0} {1}", Bridge.box(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.ByteEnum.A, System.Int32), Bridge.box(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.ByteEnum.B, System.Int32));
+                Bridge.Test.NUnit.Assert.areEqual("0 3", r4);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.ByteEnum", {
+        $kind: "enum",
+        statics: {
+            A: 0,
+            B: 3
+        },
+        $utype: System.Byte
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.SimpleEnum", {
+        $kind: "enum",
+        statics: {
+            A: 0,
+            B: 3,
+            C: 4,
+            D: 10
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1317", {
+        statics: {
+            testStringFormatForEnums: function () {
+                Bridge.Console.getInstance().bufferedOutput = "";
+
+                try {
+                    Bridge.Console.log("Language: " + System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1317.Enum, Bridge.box(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1317.Enum.English, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1317.Enum, $box_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1317.Enum.toString)));
+
+                    Bridge.Test.NUnit.Assert.areEqual("Language: English", Bridge.Console.getInstance().bufferedOutput);
+                }
+                finally {
+                    Bridge.Console.getInstance().bufferedOutput = null;
+                    Bridge.Console.hide();
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1317.Enum", {
+        $kind: "enum",
+        statics: {
+            English: 0
         }
     });
 
@@ -22801,6 +22869,27 @@ Bridge.$N1391Result =                 r;
 
     Bridge.apply($box_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options, {
         toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options, obj);}
+    });
+
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.SimpleEnum", $box_);
+
+    Bridge.apply($box_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.SimpleEnum, {
+        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.SimpleEnum, obj);}
+    });
+
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.ByteEnum", $box_);
+
+    Bridge.apply($box_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.ByteEnum, {
+        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.ByteEnum, obj);}
+    });
+
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1317.Enum", $box_);
+
+    Bridge.apply($box_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1317.Enum, {
+        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1317.Enum, obj);}
     });
 
 

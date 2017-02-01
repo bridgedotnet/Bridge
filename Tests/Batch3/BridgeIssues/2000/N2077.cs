@@ -47,6 +47,69 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [Category(Constants.MODULE_ISSUES)]
+        [TestFixture(TestNameFormat = "#1312 - {0}")]
+        public class Bridge1312
+        {
+            public enum SimpleEnum
+            {
+                A,
+                B = 3,
+                C,
+                D = 10
+            }
+
+            public enum ByteEnum : byte
+            {
+                A,
+                B = 3,
+            }
+
+            [Test]
+            public static void TestStringFormatForEnums()
+            {
+                var r1 = string.Format("{0} {1} {2}", SimpleEnum.A, SimpleEnum.B, SimpleEnum.C);
+                Assert.AreEqual("A B C", r1);
+
+                var r2 = string.Format("{0} {1}", ByteEnum.A, ByteEnum.B);
+                Assert.AreEqual("A B", r2);
+
+                var r3 = string.Format("{0} {1} {2}", (int)SimpleEnum.A, (int)SimpleEnum.B, (int)SimpleEnum.C);
+                Assert.AreEqual("0 3 4", r3);
+
+                var r4 = string.Format("{0} {1}", (int)ByteEnum.A, (int)ByteEnum.B);
+                Assert.AreEqual("0 3", r4);
+            }
+        }
+
+        [Category(Constants.MODULE_ISSUES)]
+        [TestFixture(TestNameFormat = "#1317 - {0}")]
+        public class Bridge1317
+        {
+            enum Enum
+            {
+                English
+            }
+
+            [Test]
+            public static void TestStringFormatForEnums()
+            {
+                Bridge.Utils.Console.Instance.BufferedOutput = string.Empty;
+
+                try
+                {
+                    Console.WriteLine("Language: " + Enum.English);
+
+                    Assert.AreEqual("Language: English", Bridge.Utils.Console.Instance.BufferedOutput);
+                }
+                finally
+                {
+                    Bridge.Utils.Console.Instance.BufferedOutput = null;
+                    Bridge.Utils.Console.Hide();
+                }
+            }
+        }
+
+        [Category(Constants.MODULE_ISSUES)]
         [TestFixture(TestNameFormat = "#1357 - {0}")]
         public class Bridge1357
         {

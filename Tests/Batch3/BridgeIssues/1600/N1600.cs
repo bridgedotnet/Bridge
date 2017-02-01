@@ -12,13 +12,19 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge1600
     {
         [Test]
-        public void TestOutInAsync()
+        public void TestPositiveInfinity()
         {
-            float inf = 1.0f / 0.0f;
-            Assert.True(float.IsPositiveInfinity(inf));
+            float inf1 = 1.0f / 0.0f;
+            Assert.True(float.IsPositiveInfinity(inf1));
 
-            double dinf = 1.0 / 0.0;
-            Assert.True(double.IsPositiveInfinity(dinf));
+            float inf2 = -1.0f / 0.0f;
+            Assert.False(float.IsPositiveInfinity(inf2));
+
+            double dinf1 = 1.0 / 0.0;
+            Assert.True(double.IsPositiveInfinity(dinf1));
+
+            double dinf2 = -1.0 / 0.0;
+            Assert.False(double.IsPositiveInfinity(dinf2));
         }
     }
 }
