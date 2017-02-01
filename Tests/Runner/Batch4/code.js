@@ -23695,7 +23695,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             });
             Bridge.Test.NUnit.Assert.areEqual$1(42, d1, "#1");
             // #1611
-            var d2 = null;
+            var d2 = 1;
             Bridge.ClientTest.Batch4.TestHelper.safe(function () {
                 d2 = Bridge.ClientTest.Batch4.UserDefinedStructTests.S7.op_Explicit(b);
             });

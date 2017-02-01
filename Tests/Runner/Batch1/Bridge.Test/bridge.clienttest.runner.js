@@ -12964,413 +12964,413 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             defaultConstructorWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DefaultConstructorWorks()",
-                    line: "44"
+                    line: "46"
                 } ));
                 t.getFixture().defaultConstructorWorks();
             },
             constructorWithCapacityWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ConstructorWithCapacityWorks()",
-                    line: "51"
+                    line: "53"
                 } ));
                 t.getFixture().constructorWithCapacityWorks();
             },
             constructingFromArrayWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ConstructingFromArrayWorks()",
-                    line: "58"
+                    line: "60"
                 } ));
                 t.getFixture().constructingFromArrayWorks();
             },
             constructingFromListWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ConstructingFromListWorks()",
-                    line: "67"
+                    line: "69"
                 } ));
                 t.getFixture().constructingFromListWorks();
             },
             constructingFromIEnumerableWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ConstructingFromIEnumerableWorks()",
-                    line: "76"
+                    line: "78"
                 } ));
                 t.getFixture().constructingFromIEnumerableWorks();
             },
             countWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "CountWorks()",
-                    line: "85"
+                    line: "87"
                 } ));
                 t.getFixture().countWorks();
             },
             indexingWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IndexingWorks()",
-                    line: "93"
+                    line: "95"
                 } ));
                 t.getFixture().indexingWorks();
             },
             foreachWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ForeachWorks()",
-                    line: "100"
+                    line: "102"
                 } ));
                 t.getFixture().foreachWorks();
             },
             getEnumeratorWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetEnumeratorWorks()",
-                    line: "111"
+                    line: "113"
                 } ));
                 t.getFixture().getEnumeratorWorks();
             },
             addWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "AddWorks()",
-                    line: "122"
+                    line: "124"
                 } ));
                 t.getFixture().addWorks();
             },
             addRangeWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "AddRangeWorks()",
-                    line: "130"
+                    line: "132"
                 } ));
                 t.getFixture().addRangeWorks();
             },
             binarySearch1Works: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "BinarySearch1Works()",
-                    line: "138"
+                    line: "140"
                 } ));
                 t.getFixture().binarySearch1Works();
             },
             binarySearch2Works: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "BinarySearch2Works()",
-                    line: "147"
+                    line: "149"
                 } ));
                 t.getFixture().binarySearch2Works();
             },
             binarySearch3Works: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "BinarySearch3Works()",
-                    line: "164"
+                    line: "166"
                 } ));
                 t.getFixture().binarySearch3Works();
             },
             binarySearch4Works: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "BinarySearch4Works()",
-                    line: "173"
+                    line: "175"
                 } ));
                 t.getFixture().binarySearch4Works();
             },
             clearWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ClearWorks()",
-                    line: "182"
+                    line: "184"
                 } ));
                 t.getFixture().clearWorks();
             },
             containsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ContainsWorks()",
-                    line: "190"
+                    line: "192"
                 } ));
                 t.getFixture().containsWorks();
             },
             containsUsesEqualsMethod: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ContainsUsesEqualsMethod()",
-                    line: "198"
+                    line: "200"
                 } ));
                 t.getFixture().containsUsesEqualsMethod();
             },
             copyToMethodSameBound: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "CopyToMethodSameBound()",
-                    line: "206"
+                    line: "208"
                 } ));
                 t.getFixture().copyToMethodSameBound();
             },
             copyToMethodOffsetBound: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "CopyToMethodOffsetBound()",
-                    line: "219"
+                    line: "221"
                 } ));
                 t.getFixture().copyToMethodOffsetBound();
             },
             copyToMethodIllegalBound: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "CopyToMethodIllegalBound()",
-                    line: "234"
+                    line: "236"
                 } ));
                 t.getFixture().copyToMethodIllegalBound();
             },
             sliceWithoutEndWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SliceWithoutEndWorks()",
-                    line: "250"
+                    line: "252"
                 } ));
                 t.getFixture().sliceWithoutEndWorks();
             },
             sliceWithEndWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SliceWithEndWorks()",
-                    line: "256"
+                    line: "258"
                 } ));
                 t.getFixture().sliceWithEndWorks();
             },
             foreachWithListItemCallbackWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ForeachWithListItemCallbackWorks()",
-                    line: "262"
+                    line: "264"
                 } ));
                 t.getFixture().foreachWithListItemCallbackWorks();
             },
             foreachWithListCallbackWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ForeachWithListCallbackWorks()",
-                    line: "270"
+                    line: "272"
                 } ));
                 t.getFixture().foreachWithListCallbackWorks();
             },
             indexOfWithoutStartIndexWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IndexOfWithoutStartIndexWorks()",
-                    line: "278"
+                    line: "280"
                 } ));
                 t.getFixture().indexOfWithoutStartIndexWorks();
             },
             indexOfWithoutStartIndexUsesEqualsMethod: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IndexOfWithoutStartIndexUsesEqualsMethod()",
-                    line: "284"
+                    line: "286"
                 } ));
                 t.getFixture().indexOfWithoutStartIndexUsesEqualsMethod();
             },
             indexOfWithStartIndexWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IndexOfWithStartIndexWorks()",
-                    line: "292"
+                    line: "294"
                 } ));
                 t.getFixture().indexOfWithStartIndexWorks();
             },
             indexOfWithStartIndexUsesEqualsMethod: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IndexOfWithStartIndexUsesEqualsMethod()",
-                    line: "298"
+                    line: "300"
                 } ));
                 t.getFixture().indexOfWithStartIndexUsesEqualsMethod();
             },
             insertWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "InsertWorks()",
-                    line: "304"
+                    line: "306"
                 } ));
                 t.getFixture().insertWorks();
             },
             insertRangeWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "InsertRangeWorks()",
-                    line: "312"
+                    line: "314"
                 } ));
                 t.getFixture().insertRangeWorks();
             },
             joinWithoutDelimiterWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "JoinWithoutDelimiterWorks()",
-                    line: "324"
+                    line: "326"
                 } ));
                 t.getFixture().joinWithoutDelimiterWorks();
             },
             joinWithDelimiterWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "JoinWithDelimiterWorks()",
-                    line: "330"
+                    line: "332"
                 } ));
                 t.getFixture().joinWithDelimiterWorks();
             },
             removeWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "RemoveWorks()",
-                    line: "336"
+                    line: "338"
                 } ));
                 t.getFixture().removeWorks();
             },
             removeReturnsFalseIfTheElementWasNotFound: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "RemoveReturnsFalseIfTheElementWasNotFound()",
-                    line: "344"
+                    line: "346"
                 } ));
                 t.getFixture().removeReturnsFalseIfTheElementWasNotFound();
             },
             removeCanRemoveNullItem: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "RemoveCanRemoveNullItem()",
-                    line: "352"
+                    line: "354"
                 } ));
                 t.getFixture().removeCanRemoveNullItem();
             },
             removeUsesEqualsMethod: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "RemoveUsesEqualsMethod()",
-                    line: "360"
+                    line: "362"
                 } ));
                 t.getFixture().removeUsesEqualsMethod();
             },
             removeAtWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "RemoveAtWorks()",
-                    line: "370"
+                    line: "372"
                 } ));
                 t.getFixture().removeAtWorks();
             },
             removeRangeWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "RemoveRangeWorks()",
-                    line: "378"
+                    line: "380"
                 } ));
                 t.getFixture().removeRangeWorks();
             },
             reverseWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ReverseWorks()",
-                    line: "386"
+                    line: "388"
                 } ));
                 t.getFixture().reverseWorks();
             },
             sortWithDefaultCompareWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SortWithDefaultCompareWorks()",
-                    line: "394"
+                    line: "396"
                 } ));
                 t.getFixture().sortWithDefaultCompareWorks();
             },
             sortWithCompareCallbackWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SortWithCompareCallbackWorks()",
-                    line: "402"
+                    line: "404"
                 } ));
                 t.getFixture().sortWithCompareCallbackWorks();
             },
             sortWithIComparerWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SortWithIComparerWorks()",
-                    line: "410"
+                    line: "412"
                 } ));
                 t.getFixture().sortWithIComparerWorks();
             },
             foreachWhenCastToIEnumerableWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ForeachWhenCastToIEnumerableWorks()",
-                    line: "418"
+                    line: "420"
                 } ));
                 t.getFixture().foreachWhenCastToIEnumerableWorks();
             },
             iEnumerableGetEnumeratorWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IEnumerableGetEnumeratorWorks()",
-                    line: "430"
+                    line: "432"
                 } ));
                 t.getFixture().iEnumerableGetEnumeratorWorks();
             },
             iCollectionCountWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ICollectionCountWorks()",
-                    line: "442"
+                    line: "444"
                 } ));
                 t.getFixture().iCollectionCountWorks();
             },
             iCollectionAddWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ICollectionAddWorks()",
-                    line: "449"
+                    line: "451"
                 } ));
                 t.getFixture().iCollectionAddWorks();
             },
             iCollectionClearWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ICollectionClearWorks()",
-                    line: "457"
+                    line: "459"
                 } ));
                 t.getFixture().iCollectionClearWorks();
             },
             iCollectionContainsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ICollectionContainsWorks()",
-                    line: "465"
+                    line: "467"
                 } ));
                 t.getFixture().iCollectionContainsWorks();
             },
             iCollectionContainsUsesEqualsMethod: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ICollectionContainsUsesEqualsMethod()",
-                    line: "473"
+                    line: "475"
                 } ));
                 t.getFixture().iCollectionContainsUsesEqualsMethod();
             },
             iCollectionRemoveWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ICollectionRemoveWorks()",
-                    line: "481"
+                    line: "483"
                 } ));
                 t.getFixture().iCollectionRemoveWorks();
             },
             iCollectionRemoveCanRemoveNullItem: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ICollectionRemoveCanRemoveNullItem()",
-                    line: "492"
+                    line: "494"
                 } ));
                 t.getFixture().iCollectionRemoveCanRemoveNullItem();
             },
             iCollectionRemoveUsesEqualsMethod: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ICollectionRemoveUsesEqualsMethod()",
-                    line: "500"
+                    line: "502"
                 } ));
                 t.getFixture().iCollectionRemoveUsesEqualsMethod();
             },
             iListIndexingWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IListIndexingWorks()",
-                    line: "510"
+                    line: "512"
                 } ));
                 t.getFixture().iListIndexingWorks();
             },
             iListIndexOfWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IListIndexOfWorks()",
-                    line: "519"
+                    line: "521"
                 } ));
                 t.getFixture().iListIndexOfWorks();
             },
             iListIndexOfUsesEqualsMethod: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IListIndexOfUsesEqualsMethod()",
-                    line: "527"
+                    line: "529"
                 } ));
                 t.getFixture().iListIndexOfUsesEqualsMethod();
             },
             iListInsertWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IListInsertWorks()",
-                    line: "535"
+                    line: "537"
                 } ));
                 t.getFixture().iListInsertWorks();
             },
             iListRemoveAtWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IListRemoveAtWorks()",
-                    line: "543"
+                    line: "545"
                 } ));
                 t.getFixture().iListRemoveAtWorks();
             },
             toArrayWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.ListTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ListTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ToArrayWorks()",
-                    line: "551"
+                    line: "553"
                 } ));
                 t.getFixture().toArrayWorks();
             }

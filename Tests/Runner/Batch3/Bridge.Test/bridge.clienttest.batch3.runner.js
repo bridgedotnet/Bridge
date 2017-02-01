@@ -126,13 +126,10 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#1260 - TestStringTrimEnd", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1260.testStringTrimEnd);
             QUnit.test("#1264 - TestDefaultGetHashCodeIsRepeatable", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1264.testDefaultGetHashCodeIsRepeatable);
             QUnit.test("#1266 - TestArrayToEnumerable", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1266.testArrayToEnumerable);
-            QUnit.test("#1290 - TestBoxedChar", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1290.testBoxedChar);
-            QUnit.test("#1292 - TestBoxedChar", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1292.testBoxedChar);
             QUnit.test("#1296 - TestImplicitOperator", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1296.testImplicitOperator);
             QUnit.test("#1296 - TestIgnoreCast", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1296.testIgnoreCast);
             QUnit.test("#1296 - TestExternalImplicit", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1296.testExternalImplicit);
             QUnit.test("#1298 - TestLongSwitch", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1298.testLongSwitch);
-            QUnit.test("#1301 - TestBoxedNumbers", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1301.testBoxedNumbers);
             QUnit.test("#1304 - TestWriteFormatString", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1304.testWriteFormatString);
             QUnit.test("#1304 - TestWriteLineFormatString", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1304.testWriteLineFormatString);
             QUnit.test("#1305 - TestAsyncIntReturnWithAssigmentFromResult", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1305.testAsyncIntReturnWithAssigmentFromResult);
@@ -177,7 +174,6 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#1344 - TestLocalVariableWithNameProto", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1344.testLocalVariableWithNameProto);
             QUnit.test("#1348 - TestVoidTypeOf", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1348.testVoidTypeOf);
             QUnit.test("#1355 - TestLocalVariableWithNameWindow", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1355.testLocalVariableWithNameWindow);
-            QUnit.test("#1357 - TestBoxedValueType", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1357.testBoxedValueType);
             QUnit.test("#1374 - TestConvertAllForIntListStaticMethod", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1374.testConvertAllForIntListStaticMethod);
             QUnit.test("#1374 - TestConvertAllForIntListInstanceMethod", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1374.testConvertAllForIntListInstanceMethod);
             QUnit.test("#1374 - TestConvertAllForIntListLambda", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1374.testConvertAllForIntListLambda);
@@ -257,7 +253,9 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#1566 - TestMathLog10", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1566.testMathLog10);
             QUnit.test("#1566 - TestMathLogWithBase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1566.testMathLogWithBase);
             QUnit.test("#1566 - TestMathLog", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1566.testMathLog);
+            QUnit.test("#1579 - TestNullableDecimalToFloatDouble", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1579.testNullableDecimalToFloatDouble);
             QUnit.test("#1599 - TestCustomIEnumerableForStringJoin", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1599.testCustomIEnumerableForStringJoin);
+            QUnit.test("#1600 - TestOutInAsync", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1600.testOutInAsync);
             QUnit.test("#1641 - TestOutInAsync", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1641.testOutInAsync);
             QUnit.test("#1653 - TestLiftedFunctionsWithGenericInvocation", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1653.testLiftedFunctionsWithGenericInvocation);
             QUnit.test("#1684 - TestStaticInitializationForGenericClass", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1684.testStaticInitializationForGenericClass);
@@ -378,11 +376,18 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#2052 - TestArrayCreateInstanceShouldThrow", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2052.testArrayCreateInstanceShouldThrow);
             QUnit.test("#2056 - TestArrayCasting", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2056.testArrayCasting);
             QUnit.test("#2056 - TestArrayTypeName", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2056.testArrayTypeName);
-            QUnit.test("#2065 - TestBoxedEnum", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2065.testBoxedEnum);
             QUnit.test("#2067 - TestGetGenericTypeDefinition", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2067.testGetGenericTypeDefinition);
             QUnit.test("#2068 - TestGetGenericTypeDefinition", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2068.testGetGenericTypeDefinition);
             QUnit.test("#2073 - TestUserDefinedWithStringConcat", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2073.testUserDefinedWithStringConcat);
             QUnit.test("#2076 - TestLinqGlobalPollution", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2076.testLinqGlobalPollution);
+            QUnit.test("#1290 - TestBoxedChar", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1290.testBoxedChar);
+            QUnit.test("#1292 - TestBoxedChar", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1292.testBoxedChar);
+            QUnit.test("#1248 #1301 #2055 - TestBoxedNumbers", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1301.testBoxedNumbers);
+            QUnit.test("#1309 - TestBoxedBooleans", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1309.testBoxedBooleans);
+            QUnit.test("#1347 - TestFixed", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1347.testFixed);
+            QUnit.test("#1357 - TestBoxedValueType", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1357.testBoxedValueType);
+            QUnit.test("#1514 - TestBoxedChar", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1514.testBoxedChar);
+            QUnit.test("#2065 - TestBoxedEnum", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2065.testBoxedEnum);
             QUnit.test("#2079 - TestQueryAsArgument", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2079.testQueryAsArgument);
             QUnit.test("#2080 - TestAssigmentOrWithProperty", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2080.testAssigmentOrWithProperty);
             QUnit.test("#2080 - TestAssigmentOrWithPropertyChangingCounter", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2080.testAssigmentOrWithPropertyChangingCounter);
@@ -2717,14 +2722,14 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
     });
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1290", {
-        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1290)],
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1290)],
         statics: {
             testBoxedChar: function (assert) {
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1290).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1290, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1290).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1290, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestBoxedChar()",
-                    line: "62"
+                    line: "83"
                 } ));
-                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1290.testBoxedChar();
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1290.testBoxedChar();
             }
         },
         context: null,
@@ -2732,7 +2737,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             if (this.context == null) {
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
-                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1290",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1290",
                     file: "Batch3\\BridgeIssues\\2000\\N2077.cs"
                 } );
             }
@@ -2741,14 +2746,14 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
     });
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1292", {
-        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1292)],
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1292)],
         statics: {
             testBoxedChar: function (assert) {
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1292).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1292, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1292).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1292, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestBoxedChar()",
-                    line: "50"
+                    line: "71"
                 } ));
-                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1292.testBoxedChar();
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1292.testBoxedChar();
             }
         },
         context: null,
@@ -2756,7 +2761,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             if (this.context == null) {
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
-                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1292",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1292",
                     file: "Batch3\\BridgeIssues\\2000\\N2077.cs"
                 } );
             }
@@ -2827,14 +2832,14 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
     });
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1301", {
-        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1301)],
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1301)],
         statics: {
             testBoxedNumbers: function (assert) {
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1301).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1301, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1301).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1301, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestBoxedNumbers()",
-                    line: "74"
+                    line: "95"
                 } ));
-                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1301.testBoxedNumbers();
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1301.testBoxedNumbers();
             }
         },
         context: null,
@@ -2842,7 +2847,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             if (this.context == null) {
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
-                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1301",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1301",
                     file: "Batch3\\BridgeIssues\\2000\\N2077.cs"
                 } );
             }
@@ -2929,6 +2934,30 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305",
                     file: "Batch3\\BridgeIssues\\1300\\N1305.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1309", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1309)],
+        statics: {
+            testBoxedBooleans: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1309).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1309, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestBoxedBooleans()",
+                    line: "38"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1309.testBoxedBooleans();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1309",
+                    file: "Batch3\\BridgeIssues\\2000\\N2077.cs"
                 } );
             }
             return this.context;
@@ -3347,6 +3376,30 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
         }
     });
 
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1347", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1347)],
+        statics: {
+            testFixed: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1347).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1347, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestFixed()",
+                    line: "136"
+                } ));
+                t.getFixture().testFixed();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1347",
+                    file: "Batch3\\BridgeIssues\\2000\\N2077.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1348", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1348)],
         statics: {
@@ -3396,14 +3449,14 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
     });
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1357", {
-        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1357)],
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1357)],
         statics: {
             testBoxedValueType: function (assert) {
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1357).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1357, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1357).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1357, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestBoxedValueType()",
-                    line: "32"
+                    line: "53"
                 } ));
-                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1357.testBoxedValueType();
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1357.testBoxedValueType();
             }
         },
         context: null,
@@ -3411,7 +3464,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             if (this.context == null) {
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
-                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1357",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1357",
                     file: "Batch3\\BridgeIssues\\2000\\N2077.cs"
                 } );
             }
@@ -4400,6 +4453,30 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
         }
     });
 
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1514", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1514)],
+        statics: {
+            testBoxedChar: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1514).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1514, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestBoxedChar()",
+                    line: "122"
+                } ));
+                t.getFixture().testBoxedChar();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1514",
+                    file: "Batch3\\BridgeIssues\\2000\\N2077.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1517", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1517)],
         statics: {
@@ -4833,6 +4910,30 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
         }
     });
 
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1579", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1579)],
+        statics: {
+            testNullableDecimalToFloatDouble: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1579).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1579, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestNullableDecimalToFloatDouble()",
+                    line: "12"
+                } ));
+                t.getFixture().testNullableDecimalToFloatDouble();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1579",
+                    file: "Batch3\\BridgeIssues\\1500\\N1579.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1599", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1599)],
         statics: {
@@ -4851,6 +4952,30 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1599",
                     file: "Batch3\\BridgeIssues\\1500\\N1599.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1600", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1600)],
+        statics: {
+            testOutInAsync: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1600).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1600, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestOutInAsync()",
+                    line: "14"
+                } ));
+                t.getFixture().testOutInAsync();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1600",
+                    file: "Batch3\\BridgeIssues\\1600\\N1600.cs"
                 } );
             }
             return this.context;
@@ -7477,14 +7602,14 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
     });
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2065", {
-        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2065)],
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065)],
         statics: {
             testBoxedEnum: function (assert) {
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2065).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2065, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2065, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestBoxedEnum()",
-                    line: "16"
+                    line: "22"
                 } ));
-                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2065.testBoxedEnum();
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065.testBoxedEnum();
             }
         },
         context: null,
@@ -7492,7 +7617,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             if (this.context == null) {
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
-                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2065",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065",
                     file: "Batch3\\BridgeIssues\\2000\\N2077.cs"
                 } );
             }

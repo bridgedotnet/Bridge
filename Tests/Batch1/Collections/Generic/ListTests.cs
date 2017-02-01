@@ -33,7 +33,9 @@ namespace Bridge.ClientTest.Collections.Generic
         [Test]
         public void TypePropertiesAreCorrect()
         {
+            // #1294
             Assert.AreEqual("System.Collections.Generic.List$1[[System.Int32, mscorlib]]", typeof(List<int>).FullName, "FullName");
+
             object list = new List<int>();
             Assert.True(list is List<int>, "is int[] should be true");
             Assert.True(list is IList<int>, "is IList<int> should be true");
