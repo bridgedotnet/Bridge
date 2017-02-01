@@ -1,7 +1,6 @@
 //TODO: Remove when issues are fixed.
 System.Object = Object; // https://github.com/bridgedotnet/Bridge/issues/2069
 System.Boolean = Boolean; // https://github.com/bridgedotnet/Bridge/issues/2062
-System.String = String; // https://github.com/bridgedotnet/Bridge/issues/2066
 System.DateTime = Date; // https://github.com/bridgedotnet/Bridge/issues/2064
 // ---
 
@@ -187,7 +186,7 @@ Bridge.deserialize = function(raw, type) {
             return System.Decimal(0.0);
         } else if (type === System.Char) {
             return 0;
-        } else if (type === System.String) {
+        } else if (type === String) { // TODO: https://github.com/bridgedotnet/Bridge/issues/2066
             return null;
         } else if (type === System.DateTime) {
             return new System.DateTime(-62135596800000); //TODO: Change to suit the newer version of DateTime.
@@ -223,7 +222,7 @@ Bridge.deserialize = function(raw, type) {
             return System.Decimal(0.0);
         } else if (type === System.Char) {
             return 0;
-        } else if (type === System.String) {
+        } else if (type === String) { // TODO: https://github.com/bridgedotnet/Bridge/issues/2066
             return "false";
         } else if (type === System.DateTime) {
             return new System.DateTime(-62135596800000); //TODO: Change to suit the newer version of DateTime.
@@ -259,7 +258,7 @@ Bridge.deserialize = function(raw, type) {
             return System.Decimal(1.0);
         } else if (type === System.Char) {
             return 1;
-        } else if (type === System.String) {
+        } else if (type === String) { // TODO: https://github.com/bridgedotnet/Bridge/issues/2066
             return "true";
         } else if (type === System.DateTime) {
             return new System.DateTime(-62135596800000 + 1); //TODO: Change to suit the newer version of DateTime.
@@ -295,7 +294,7 @@ Bridge.deserialize = function(raw, type) {
             return System.Decimal(raw);
         } else if (type === System.Char) {
             return raw | 0;
-        } else if (type === System.String) {
+        } else if (type === String) { // TODO: https://github.com/bridgedotnet/Bridge/issues/2066
             return raw.toString();
         } else if (type === System.DateTime) {
             return new System.DateTime(-62135596800000 + System.Int64(raw | 0).div(10000)); //TODO: Change to suit the newer version of DateTime.
@@ -337,7 +336,7 @@ Bridge.deserialize = function(raw, type) {
             }
 
             return raw.charCodeAt(0);
-        } else if (type === System.String) {
+        } else if (type === String) { // TODO: https://github.com/bridgedotnet/Bridge/issues/2066
             return raw;
         } else if (type === System.DateTime) {
             return new System.DateTime(raw); //TODO: Change to suit the newer version of DateTime.
@@ -373,7 +372,7 @@ Bridge.deserialize = function(raw, type) {
             return System.Decimal(0.0);
         } else if (type === System.Char) {
             return 0;
-        } else if (type === System.String) {
+        } else if (type === String) { // TODO: https://github.com/bridgedotnet/Bridge/issues/2066
             return raw.toString();
         } else if (type === System.DateTime) {
             return new System.DateTime(-62135596800000); //TODO: Change to suit the newer version of DateTime.
