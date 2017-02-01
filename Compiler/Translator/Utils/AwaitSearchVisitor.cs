@@ -9,16 +9,16 @@ namespace Bridge.Translator
     {
         public AwaitSearchVisitor()
         {
-            this.AwaitExpressions = new List<Tuple<int, Expression>>();
+            this.AwaitExpressions = new List<Tuple<int, AstNode>>();
         }
 
-        private List<Tuple<int, Expression>> AwaitExpressions
+        private List<Tuple<int, AstNode>> AwaitExpressions
         {
             get;
             set;
         }
 
-        public List<Expression> GetAwaitExpressions()
+        public List<AstNode> GetAwaitExpressions()
         {
             this.AwaitExpressions.Sort((t1, t2) => t2.Item1.CompareTo(t1.Item1));
             return this.AwaitExpressions.Select(t => t.Item2).ToList();
@@ -45,11 +45,25 @@ namespace Bridge.Translator
             this.InvocationLevel--;
         }
 
+        public override void VisitYieldReturnStatement(YieldReturnStatement yieldReturnStatement)
+        {
+            this.AwaitExpressions.Add(new Tuple<int, AstNode>(this.InvocationLevel, yieldReturnStatement));
+
+            base.VisitYieldReturnStatement(yieldReturnStatement);
+        }
+
+        public override void VisitYieldBreakStatement(YieldBreakStatement yieldBreakStatement)
+        {
+            this.AwaitExpressions.Add(new Tuple<int, AstNode>(this.InvocationLevel, yieldBreakStatement));
+
+            base.VisitYieldBreakStatement(yieldBreakStatement);
+        }
+        
         public override void VisitUnaryOperatorExpression(UnaryOperatorExpression unaryOperatorExpression)
         {
             if (unaryOperatorExpression.Operator == UnaryOperatorType.Await)
             {
-                this.AwaitExpressions.Add(new Tuple<int, Expression>(this.InvocationLevel, unaryOperatorExpression.Expression));
+                this.AwaitExpressions.Add(new Tuple<int, AstNode>(this.InvocationLevel, unaryOperatorExpression.Expression));
             }
 
             base.VisitUnaryOperatorExpression(unaryOperatorExpression);
