@@ -703,7 +703,7 @@ namespace Bridge.Contract
                     moduleName = module.Name;
                 }
                 
-                if (!emitter.DisableDependencyTracking && currentTypeInfo.Key != type.Key && !Module.Equals(currentTypeInfo.Module, module) && !emitter.CurrentDependencies.Any(d => d.DependencyName == moduleName))
+                if (!emitter.DisableDependencyTracking && currentTypeInfo.Key != type.Key && !Module.Equals(currentTypeInfo.Module, module) && !emitter.CurrentDependencies.Any(d => d.DependencyName == module.Name))
                 {
                     emitter.CurrentDependencies.Add(new ModuleDependency
                     {
