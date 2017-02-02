@@ -456,15 +456,19 @@ namespace Bridge.Translator
 
                             if (module != null)
                             {
-                                if (module.Type == ModuleType.AMD ||
+                                if (!(module.Type == ModuleType.UMD &&
+                                     this.Emitter.AssemblyInfo.Loader.Type == ModuleLoaderType.Global))
+                                {
+                                    if (module.Type == ModuleType.AMD ||
                                     (module.Type == ModuleType.UMD &&
                                      this.Emitter.AssemblyInfo.Loader.Type == ModuleLoaderType.AMD))
-                                {
-                                    amd.Add(module.Name);
-                                }
-                                else
-                                {
-                                    cjs.Add(module.Name);
+                                    {
+                                        amd.Add(module.Name);
+                                    }
+                                    else
+                                    {
+                                        cjs.Add(module.Name);
+                                    }
                                 }
                             }
                         }
