@@ -94,6 +94,8 @@ namespace Bridge.Translator
 
             if (hasNameAttribute)
             {
+				// If a method has a [Name] attribute then create a named function for this method property, rather than leaving it as an anonymous function (there are occasions that
+				// external libraries will use a function name for debugging purposes and the presence of a [Name] attribute seems like a good indicator that this might be the case)
                 this.Write(name);
             }
 
