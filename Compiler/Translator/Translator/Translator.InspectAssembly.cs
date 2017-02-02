@@ -211,8 +211,6 @@ namespace Bridge.Translator
 
         protected virtual List<AssemblyDefinition> InspectReferences()
         {
-            System.Diagnostics.Debugger.Launch();
-
             this.Log.Info("Inspecting references...");
 
             this.TypeInfoDefinitions = new Dictionary<string, ITypeInfo>();
