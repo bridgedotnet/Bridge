@@ -14582,7 +14582,7 @@
 
     // @source Generator.js
 
-﻿Bridge.define("Bridge.GeneratorEnumerable", {
+Bridge.define("Bridge.GeneratorEnumerable", {
     inherits: [System.Collections.IEnumerable],
     config: {
         alias: [
