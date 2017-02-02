@@ -29,6 +29,7 @@ namespace Bridge.Translator
 
         protected void VisitMethodDeclaration(MethodDeclaration methodDeclaration)
         {
+            var hasNameAttribute = false;
             foreach (var attrSection in methodDeclaration.Attributes)
             {
                 foreach (var attr in attrSection.Attributes)
@@ -60,6 +61,10 @@ namespace Bridge.Translator
                             return;
                         }
                     }
+                    else if (rr.Type.FullName == "Bridge.NameAttribute")
+                    {
+                        hasNameAttribute = true;
+                    }
                 }
             }
 
@@ -86,6 +91,11 @@ namespace Bridge.Translator
             this.WriteColon();
 
             this.WriteFunction();
+
+            if (hasNameAttribute)
+            {
+                this.Write(name);
+            }
 
             this.EmitMethodParameters(methodDeclaration.Parameters, methodDeclaration.TypeParameters.Count > 0 && Helpers.IsIgnoreGeneric(methodDeclaration, this.Emitter) ? null : methodDeclaration.TypeParameters, methodDeclaration);
 
