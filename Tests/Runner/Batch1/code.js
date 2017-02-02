@@ -13613,7 +13613,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var args = System.Array.init(["a", Bridge.box(1, System.Int32)], Object);
             var ex = new Bridge.PromiseException(args);
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(ex, Bridge.PromiseException), "is PromiseException");
-            Bridge.Test.NUnit.Assert.areEqual$1(args, ex.arguments, "Arguments");
+            Bridge.Test.NUnit.Assert.areEqual$1(Bridge.unbox(args), Bridge.unbox(ex.arguments), "Arguments");
             Bridge.Test.NUnit.Assert.true$1(ex.getInnerException() == null, "InnerException");
             // #1528
             Bridge.Test.NUnit.Assert.areEqual$1("Promise exception: [a, 1]", ex.getMessage(), "Message");
@@ -13623,7 +13623,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var ex = new Bridge.PromiseException(args, "Some message");
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(ex, Bridge.PromiseException), "is PromiseException");
             Bridge.Test.NUnit.Assert.true$1(ex.getInnerException() == null, "InnerException");
-            Bridge.Test.NUnit.Assert.areEqual$1(args, ex.arguments, "Arguments");
+            Bridge.Test.NUnit.Assert.areEqual$1(Bridge.unbox(args), Bridge.unbox(ex.arguments), "Arguments");
             Bridge.Test.NUnit.Assert.areEqual$1("Some message", ex.getMessage(), "Message");
         },
         argumentsAndMessageAndInnerExceptionConstructorWorks: function () {
@@ -13632,7 +13632,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var ex = new Bridge.PromiseException(args, "Some message", inner);
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(ex, Bridge.PromiseException), "is PromiseException");
             Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(ex.getInnerException(), inner), "InnerException");
-            Bridge.Test.NUnit.Assert.areEqual$1(args, ex.arguments, "Arguments");
+            Bridge.Test.NUnit.Assert.areEqual$1(Bridge.unbox(args), Bridge.unbox(ex.arguments), "Arguments");
             Bridge.Test.NUnit.Assert.areEqual$1("Some message", ex.getMessage(), "Message");
         }
     });
@@ -14648,7 +14648,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.NUnit.Assert.areNotEqual$1(g.compareTo(new System.Guid.$ctor4("E4C221BE-9B39-4398-B82A-48BA4648CAE0")), 0, "not equal");
         },
         iComparableCompareToWorks: function () {
-            var g = Bridge.cast(Bridge.box(new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C"), System.Guid), System.IComparable$1(System.Guid));
+            var g = Bridge.cast(new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C"), System.IComparable$1(System.Guid));
             Bridge.Test.NUnit.Assert.areEqual$1(Bridge.compare(g, new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C"), false, System.Guid), 0, "Equal");
             Bridge.Test.NUnit.Assert.areNotEqual$1(Bridge.compare(g, new System.Guid.$ctor4("E4C221BE-9B39-4398-B82A-48BA4648CAE0"), false, System.Guid), 0, "Not equal");
         },
@@ -14664,7 +14664,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.NUnit.Assert.false$1(g.equalsT(new System.Guid.$ctor4("E4C221BE-9B39-4398-B82A-48BA4648CAE0")), "Not equal");
         },
         iEquatableEqualsWorks: function () {
-            var g = Bridge.cast(Bridge.box(new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C"), System.Guid), System.IEquatable$1(System.Guid));
+            var g = Bridge.cast(new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C"), System.IEquatable$1(System.Guid));
             Bridge.Test.NUnit.Assert.true$1(Bridge.equalsT(g, new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C"), System.Guid), "Equal");
             Bridge.Test.NUnit.Assert.false$1(Bridge.equalsT(g, new System.Guid.$ctor4("E4C221BE-9B39-4398-B82A-48BA4648CAE0"), System.Guid), "Not equal");
         },
@@ -17111,14 +17111,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var groupJoinExpected = System.Array.init([new $asm.$AnonymousType$7("A", 1), new $asm.$AnonymousType$7("B", 4), new $asm.$AnonymousType$7("C", 2), new $asm.$AnonymousType$7("D", 0)], Object);
 
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(groupJoinExpected, groupJoin, "Count() within joint collections");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(Bridge.unbox(groupJoinExpected), groupJoin, "Count() within joint collections");
 
                 // TEST
                 var grouped = (System.Linq.Enumerable.from(Bridge.ClientTest.Utilities.Person.getPersons()).groupBy($asm.$.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f3).select($asm.$.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f5)).toArray();
 
                 var groupedExpected = System.Array.init([new $asm.$AnonymousType$7("A", 1), new $asm.$AnonymousType$7("C", 2), new $asm.$AnonymousType$7("B", 4), new $asm.$AnonymousType$7(null, 1)], Object);
 
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(groupedExpected, grouped, "Count() within group");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(Bridge.unbox(groupedExpected), grouped, "Count() within group");
 
                 // TEST
                 var numSum = System.Linq.Enumerable.from(numbers).sum();
@@ -17133,7 +17133,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var groupedSumExpected = System.Array.init([new $asm.$AnonymousType$8("A", 300), new $asm.$AnonymousType$8("C", 600), new $asm.$AnonymousType$8("B", 2000), new $asm.$AnonymousType$8(null, 3000)], Object);
 
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(groupedSumExpected, groupedSum, "Sum() within group");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(Bridge.unbox(groupedSumExpected), groupedSum, "Sum() within group");
 
                 // TEST
                 var minNum = System.Linq.Enumerable.from(numbers).min();
@@ -17148,14 +17148,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var groupedMinExpected = System.Array.init([new $asm.$AnonymousType$9("A", 300), new $asm.$AnonymousType$9("C", 100), new $asm.$AnonymousType$9("B", 50), new $asm.$AnonymousType$9(null, 3000)], Object);
 
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(groupedMinExpected, groupedMin, "Min() within group");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(Bridge.unbox(groupedMinExpected), groupedMin, "Min() within group");
 
                 // TEST
                 var groupedMinWithLet = (System.Linq.Enumerable.from(Bridge.ClientTest.Utilities.Person.getPersons()).groupBy($asm.$.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f3).select($asm.$.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f10).select($asm.$.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f12)).toArray();
 
                 var groupedMinWithLetExpected = System.Array.init([new $asm.$AnonymousType$11("A", System.Array.init(["Frank"], String)), new $asm.$AnonymousType$11("C", System.Array.init(["Zeppa"], String)), new $asm.$AnonymousType$11("B", System.Array.init(["Dora"], String)), new $asm.$AnonymousType$11(null, System.Array.init(["Nemo"], String))], Object);
 
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(groupedMinWithLetExpected, groupedMinWithLet, "Min() within group with let");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(Bridge.unbox(groupedMinWithLetExpected), groupedMinWithLet, "Min() within group with let");
 
                 // TEST
                 var maxNum = System.Linq.Enumerable.from(numbers).max();
@@ -17170,14 +17170,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var groupedMaxExpected = System.Array.init([new $asm.$AnonymousType$12("A", 300), new $asm.$AnonymousType$12("C", 500), new $asm.$AnonymousType$12("B", 700), new $asm.$AnonymousType$12(null, 3000)], Object);
 
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(groupedMaxExpected, groupedMax, "Max() within group");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(Bridge.unbox(groupedMaxExpected), groupedMax, "Max() within group");
 
                 // TEST
                 var groupedMaxWithLet = (System.Linq.Enumerable.from(Bridge.ClientTest.Utilities.Person.getPersons()).groupBy($asm.$.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f3).select($asm.$.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f14).select($asm.$.Bridge.ClientTest.Linq.TestLinqAggregateOperators.f15)).toArray();
 
                 var groupedMaxWithLetExpected = System.Array.init([new $asm.$AnonymousType$11("A", System.Array.init(["Frank"], String)), new $asm.$AnonymousType$11("C", System.Array.init(["Billy"], String)), new $asm.$AnonymousType$11("B", System.Array.init(["John", "Mary"], String)), new $asm.$AnonymousType$11(null, System.Array.init(["Nemo"], String))], Object);
 
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(groupedMaxWithLetExpected, groupedMaxWithLet, "Max() within group with let");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(Bridge.unbox(groupedMaxWithLetExpected), groupedMaxWithLet, "Max() within group with let");
 
                 // TEST
                 var averageNum = System.Linq.Enumerable.from(numbers).average();
@@ -17193,7 +17193,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var groupedAverageExpected = System.Array.init([{ group: "A", average: 300 }, { group: "C", average: 300 }, { group: "B", average: 500 }, { group: null, average: 3000 }], Object);
 
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(groupedAverageExpected, groupedAverage, "Average() within group");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(Bridge.unbox(groupedAverageExpected), groupedAverage, "Average() within group");
 
                 // TEST
                 var doublesForAggregate = System.Array.init([1.0, 2.0, 3.0, 4.0, 5.0], System.Double);
@@ -17748,7 +17748,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var numbers = (System.Linq.Enumerable.range(0, 6).select($asm.$.Bridge.ClientTest.Linq.TestLinqGenerationOperators.f1)).toArray();
                 var numbersExpected = System.Array.init([new $asm.$AnonymousType$14(0, false), new $asm.$AnonymousType$14(1, true), new $asm.$AnonymousType$14(2, false), new $asm.$AnonymousType$14(3, true), new $asm.$AnonymousType$14(4, false), new $asm.$AnonymousType$14(5, true)], Object);
 
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(numbersExpected, numbers, "Range() 6 items from 0");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(Bridge.unbox(numbersExpected), numbers, "Range() 6 items from 0");
 
                 // TEST
                 var repeatNumbers = System.Linq.Enumerable.repeat(-3, 4).toArray();
@@ -17822,7 +17822,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var personGroupsExpected = System.Array.init([new $asm.$AnonymousType$17("A", System.Array.init(["Frank"], String)), new $asm.$AnonymousType$17("C", System.Array.init(["Zeppa", "Billy"], String)), new $asm.$AnonymousType$17("B", System.Array.init(["John", "Dora", "Ian", "Mary"], String)), new $asm.$AnonymousType$17(null, System.Array.init(["Nemo"], String))], Object);
 
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(personGroupsExpected, personGroups, "Person group by Group field");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(Bridge.unbox(personGroupsExpected), personGroups, "Person group by Group field");
             },
             testComplexGrouping: function () {
                 // TEST
@@ -18034,35 +18034,35 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var personsExpected = System.Array.init([new $asm.$AnonymousType$19("Frank", 1000), new $asm.$AnonymousType$19("Zeppa", 800), new $asm.$AnonymousType$19("John", 400), new $asm.$AnonymousType$19("Billy", 800), new $asm.$AnonymousType$19("Dora", 400), new $asm.$AnonymousType$19("Ian", 400), new $asm.$AnonymousType$19("Mary", 400)], Object);
 
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(personsExpected, persons, "Join Persons and Groups");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(Bridge.unbox(personsExpected), persons, "Join Persons and Groups");
 
                 // TEST
                 var personsByLambda = System.Linq.Enumerable.from(Bridge.ClientTest.Utilities.Person.getPersons()).join(Bridge.ClientTest.Utilities.Group.getGroups(), $asm.$.Bridge.ClientTest.Linq.TestLinqJoinOperators.f1, $asm.$.Bridge.ClientTest.Linq.TestLinqJoinOperators.f2, $asm.$.Bridge.ClientTest.Linq.TestLinqJoinOperators.f3).toArray();
 
                 var personsByLambdaExpected = System.Array.init([new $asm.$AnonymousType$19("Frank", 1000), new $asm.$AnonymousType$19("Zeppa", 800), new $asm.$AnonymousType$19("John", 400), new $asm.$AnonymousType$19("Billy", 800), new $asm.$AnonymousType$19("Dora", 400), new $asm.$AnonymousType$19("Ian", 400), new $asm.$AnonymousType$19("Mary", 400)], Object);
 
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(personsByLambdaExpected, personsByLambda, "Join Persons and Groups by lambda");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(Bridge.unbox(personsByLambdaExpected), personsByLambda, "Join Persons and Groups by lambda");
 
                 // TEST
                 var groupJoin = (System.Linq.Enumerable.from(Bridge.ClientTest.Utilities.Group.getGroups()).groupJoin(Bridge.ClientTest.Utilities.Person.getPersons(), $asm.$.Bridge.ClientTest.Linq.TestLinqJoinOperators.f2, $asm.$.Bridge.ClientTest.Linq.TestLinqJoinOperators.f1, $asm.$.Bridge.ClientTest.Linq.TestLinqJoinOperators.f5)).toArray();
 
                 var groupJoinExpected = System.Array.init([new $asm.$AnonymousType$17("A", System.Array.init(["Frank"], String)), new $asm.$AnonymousType$17("B", System.Array.init(["John", "Dora", "Ian", "Mary"], String)), new $asm.$AnonymousType$17("C", System.Array.init(["Zeppa", "Billy"], String)), new $asm.$AnonymousType$17("D", System.Array.init([], String))], Object);
 
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(groupJoinExpected, groupJoin, "Grouped join Persons and Groups");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(Bridge.unbox(groupJoinExpected), groupJoin, "Grouped join Persons and Groups");
 
                 // TEST
                 var groupJoinWithDefault = (System.Linq.Enumerable.from(Bridge.ClientTest.Utilities.Group.getGroups()).groupJoin(Bridge.ClientTest.Utilities.Person.getPersons(), $asm.$.Bridge.ClientTest.Linq.TestLinqJoinOperators.f2, $asm.$.Bridge.ClientTest.Linq.TestLinqJoinOperators.f1, $asm.$.Bridge.ClientTest.Linq.TestLinqJoinOperators.f6).selectMany($asm.$.Bridge.ClientTest.Linq.TestLinqJoinOperators.f7, $asm.$.Bridge.ClientTest.Linq.TestLinqJoinOperators.f8)).toArray();
 
                 var groupJoinWithDefaultExpected = System.Array.init([new $asm.$AnonymousType$21("A", "Frank"), new $asm.$AnonymousType$21("B", "John"), new $asm.$AnonymousType$21("B", "Dora"), new $asm.$AnonymousType$21("B", "Ian"), new $asm.$AnonymousType$21("B", "Mary"), new $asm.$AnonymousType$21("C", "Zeppa"), new $asm.$AnonymousType$21("C", "Billy"), new $asm.$AnonymousType$21("D", "")], Object);
 
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(groupJoinWithDefaultExpected, groupJoinWithDefault, "Grouped join Persons and Groups with DefaultIfEmpty");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(Bridge.unbox(groupJoinWithDefaultExpected), groupJoinWithDefault, "Grouped join Persons and Groups with DefaultIfEmpty");
 
                 // TEST
                 var groupJoinWithDefaultAndComplexEquals = (System.Linq.Enumerable.from(Bridge.ClientTest.Utilities.Group.getGroups()).groupJoin(Bridge.ClientTest.Utilities.Person.getPersons(), $asm.$.Bridge.ClientTest.Linq.TestLinqJoinOperators.f9, $asm.$.Bridge.ClientTest.Linq.TestLinqJoinOperators.f10, $asm.$.Bridge.ClientTest.Linq.TestLinqJoinOperators.f6).selectMany($asm.$.Bridge.ClientTest.Linq.TestLinqJoinOperators.f11, $asm.$.Bridge.ClientTest.Linq.TestLinqJoinOperators.f12).orderByDescending($asm.$.Bridge.ClientTest.Linq.TestLinqJoinOperators.f13).select($asm.$.Bridge.ClientTest.Linq.TestLinqJoinOperators.f14)).toArray();
 
                 var groupJoinWithDefaultAndComplexEqualsExpected = System.Array.init([new $asm.$AnonymousType$21("C", "Zeppa"), new $asm.$AnonymousType$21("B", "Mary"), new $asm.$AnonymousType$21("B", "John"), new $asm.$AnonymousType$21("B", "Ian"), new $asm.$AnonymousType$21("A", "Frank"), new $asm.$AnonymousType$21("B", "Dora"), new $asm.$AnonymousType$21("C", "Billy"), new $asm.$AnonymousType$21("D", null)], Object);
 
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(groupJoinWithDefaultAndComplexEqualsExpected, groupJoinWithDefaultAndComplexEquals, "Issue #209. Grouped join Persons and Groups with DefaultIfEmpty, complex equals and ordering");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(Bridge.unbox(groupJoinWithDefaultAndComplexEqualsExpected), groupJoinWithDefaultAndComplexEquals, "Issue #209. Grouped join Persons and Groups with DefaultIfEmpty, complex equals and ordering");
             }
         }
     });
@@ -18459,7 +18459,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var anonimNamesToCompare = System.Array.init([new $asm.$AnonymousType$24("Frank"), new $asm.$AnonymousType$24("Zeppa"), new $asm.$AnonymousType$24("John"), new $asm.$AnonymousType$24("Billy"), new $asm.$AnonymousType$24("Dora"), new $asm.$AnonymousType$24("Ian"), new $asm.$AnonymousType$24("Mary"), new $asm.$AnonymousType$24("Nemo")], Object);
 
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(anonimNamesToCompare, anonimNames, "Selects names as an anonymous type");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(Bridge.unbox(anonimNamesToCompare), anonimNames, "Selects names as an anonymous type");
 
                 // TEST
                 numbers = System.Array.init([0, 1, 3, 3], System.Int32);
@@ -18468,7 +18468,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var anonimNumbersToCompare = System.Array.init([new $asm.$AnonymousType$25(0, true), new $asm.$AnonymousType$25(1, true), new $asm.$AnonymousType$25(3, false), new $asm.$AnonymousType$25(3, true)], Object);
 
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(anonimNumbersToCompare, numberssInPlace, "Selects numbers as an anonymous type");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(Bridge.unbox(anonimNumbersToCompare), numberssInPlace, "Selects numbers as an anonymous type");
 
                 // TEST
                 var numbersA = System.Array.init([1, 5, 2], System.Int32);
@@ -18479,7 +18479,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var expectedSimplePairs = System.Array.init([new $asm.$AnonymousType$5(1, 3), new $asm.$AnonymousType$5(1, 4), new $asm.$AnonymousType$5(1, 2), new $asm.$AnonymousType$5(2, 3), new $asm.$AnonymousType$5(2, 4)], Object);
 
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(expectedSimplePairs, simplePairs, "Join two numeric arrays with one where clause");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(Bridge.unbox(expectedSimplePairs), simplePairs, "Join two numeric arrays with one where clause");
 
                 // TEST
                 numbersA = System.Array.init([1, 5, 2, 4, 3], System.Int32);
@@ -18491,7 +18491,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var expectedPairs = System.Array.init([new $asm.$AnonymousType$26(8), new $asm.$AnonymousType$26(7), new $asm.$AnonymousType$26(6), new $asm.$AnonymousType$26(3), new $asm.$AnonymousType$26(7), new $asm.$AnonymousType$26(6), new $asm.$AnonymousType$26(5), new $asm.$AnonymousType$26(5), new $asm.$AnonymousType$26(4)], Object);
 
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(expectedPairs, pairs, "Join two numeric arrays with two where clauses");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(Bridge.unbox(expectedPairs), pairs, "Join two numeric arrays with two where clauses");
 
                 // TEST
                 numbersA = System.Array.init([1, 5, 2, 4, 3], System.Int32);
@@ -18507,7 +18507,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var expectedManyNumbers = System.Array.init([new $asm.$AnonymousType$27(1, 1, 0), new $asm.$AnonymousType$27(5, 5, 1), new $asm.$AnonymousType$27(4, 4, 3)], Object);
 
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(expectedManyNumbers, manyNumbers, "SelectMany() two number arrays");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(Bridge.unbox(expectedManyNumbers), manyNumbers, "SelectMany() two number arrays");
             }
         }
     });
@@ -18685,7 +18685,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var productGroupsExpected = System.Array.init([new $asm.$AnonymousType$28("C", System.Array.init(["Zeppa", "Billy"], String)), new $asm.$AnonymousType$28("B", System.Array.init(["John", "Dora", "Ian", "Mary"], String)), new $asm.$AnonymousType$28(null, System.Array.init(["Nemo"], String))], Object);
 
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(productGroupsExpected, productGroups, "Any() to return a grouped array of names only for groups having any item with Count > 500");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(Bridge.unbox(productGroupsExpected), productGroups, "Any() to return a grouped array of names only for groups having any item with Count > 500");
             }
         }
     });
@@ -21406,11 +21406,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         invokeWorksForExpandParamsMethods: function () {
             var m1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C22, 8, 284, "M2");
             var r1 = Bridge.cast(Bridge.Reflection.midel(m1, new Bridge.ClientTest.Reflection.ReflectionTests.C22.ctor(0, null)).apply(null, System.Array.init([Bridge.box(2, System.Int32), System.Array.init([17, 31], System.Int32)], Object)), System.Array.type(Object));
-            Bridge.Test.NUnit.Assert.areEqual(r1, System.Array.init([Bridge.box(2, System.Int32), System.Array.init([17, 31], System.Int32)], Object));
+            Bridge.Test.NUnit.Assert.areEqual(Bridge.unbox(r1), System.Array.init([Bridge.box(2, System.Int32), System.Array.init([17, 31], System.Int32)], Object));
 
             var m2 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C23, 8, 284, "M2");
             var r2 = Bridge.cast(Bridge.Reflection.midel(m2, new Bridge.ClientTest.Reflection.ReflectionTests.C23.ctor(0, null)).apply(null, System.Array.init([Bridge.box(2, System.Int32), System.Array.init([17, 32], System.Int32)], Object)), System.Array.type(Object));
-            Bridge.Test.NUnit.Assert.areEqual(r2, System.Array.init([Bridge.box(2, System.Int32), System.Array.init([17, 32], System.Int32)], Object));
+            Bridge.Test.NUnit.Assert.areEqual(Bridge.unbox(r2), System.Array.init([Bridge.box(2, System.Int32), System.Array.init([17, 32], System.Int32)], Object));
         },
         invokeWorksForAllKindsOfConstructors: function () {
             var c1 = Bridge.cast(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C10, 31, 28).filter($asm.$.Bridge.ClientTest.Reflection.ReflectionTests.f3)[0], System.Reflection.ConstructorInfo);
@@ -23778,7 +23778,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var args = $asm.$.Bridge.ClientTest.Reflection.TypeSystemTests.f1(new (System.Collections.Generic.List$1(Object))());
             var obj = Bridge.Reflection.applyConstructor(Bridge.ClientTest.Reflection.TypeSystemTests.ClassWithExpandParamsCtor, args.toArray());
 
-            Bridge.Test.NUnit.Assert.areEqual(obj.ctorArgs, args.toArray());
+            Bridge.Test.NUnit.Assert.areEqual(Bridge.unbox(obj.ctorArgs), Bridge.unbox(args.toArray()));
             Bridge.Test.NUnit.Assert.areEqual(Bridge.getType(obj), Bridge.ClientTest.Reflection.TypeSystemTests.ClassWithExpandParamsCtor);
         },
         namePropertyRemovesTheNamespace: function () {
@@ -27355,10 +27355,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.NUnit.Assert.true(Bridge.equalsT(new Date(System.Int64(10000).toNumber()/10000), new Date(System.Int64(10000).toNumber()/10000)));
         },
         iEquatableEqualsWorks: function () {
-            Bridge.Test.NUnit.Assert.true(Bridge.equalsT(Bridge.cast(Bridge.box(new Date(System.Int64(0).toNumber()/10000), Date, $box_.Date.toString), System.IEquatable$1(Date)), new Date(System.Int64(0).toNumber()/10000), Date));
-            Bridge.Test.NUnit.Assert.false(Bridge.equalsT(Bridge.cast(Bridge.box(new Date(System.Int64(10000).toNumber()/10000), Date, $box_.Date.toString), System.IEquatable$1(Date)), new Date(System.Int64(0).toNumber()/10000), Date));
-            Bridge.Test.NUnit.Assert.false(Bridge.equalsT(Bridge.cast(Bridge.box(new Date(System.Int64(0).toNumber()/10000), Date, $box_.Date.toString), System.IEquatable$1(Date)), new Date(System.Int64(10000).toNumber()/10000), Date));
-            Bridge.Test.NUnit.Assert.true(Bridge.equalsT(Bridge.cast(Bridge.box(new Date(System.Int64(10000).toNumber()/10000), Date, $box_.Date.toString), System.IEquatable$1(Date)), new Date(System.Int64(10000).toNumber()/10000), Date));
+            Bridge.Test.NUnit.Assert.true(Bridge.equalsT(Bridge.cast(new Date(System.Int64(0).toNumber()/10000), System.IEquatable$1(Date)), new Date(System.Int64(0).toNumber()/10000), Date));
+            Bridge.Test.NUnit.Assert.false(Bridge.equalsT(Bridge.cast(new Date(System.Int64(10000).toNumber()/10000), System.IEquatable$1(Date)), new Date(System.Int64(0).toNumber()/10000), Date));
+            Bridge.Test.NUnit.Assert.false(Bridge.equalsT(Bridge.cast(new Date(System.Int64(0).toNumber()/10000), System.IEquatable$1(Date)), new Date(System.Int64(10000).toNumber()/10000), Date));
+            Bridge.Test.NUnit.Assert.true(Bridge.equalsT(Bridge.cast(new Date(System.Int64(10000).toNumber()/10000), System.IEquatable$1(Date)), new Date(System.Int64(10000).toNumber()/10000), Date));
         },
         compareToWorks: function () {
             Bridge.Test.NUnit.Assert.true(Bridge.compare(new Date(System.Int64(0).toNumber()/10000), new Date(System.Int64(0).toNumber()/10000)) === 0);
@@ -27366,9 +27366,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.NUnit.Assert.true(Bridge.compare(new Date(System.Int64(0).toNumber()/10000), new Date(System.Int64(10000).toNumber()/10000)) < 0);
         },
         iComparableCompareToWorks: function () {
-            Bridge.Test.NUnit.Assert.true(Bridge.compare(Bridge.cast(Bridge.box(new Date(System.Int64(0).toNumber()/10000), Date, $box_.Date.toString), System.IComparable$1(Date)), new Date(System.Int64(0).toNumber()/10000), false, Date) === 0);
-            Bridge.Test.NUnit.Assert.true(Bridge.compare(Bridge.cast(Bridge.box(new Date(System.Int64(10000).toNumber()/10000), Date, $box_.Date.toString), System.IComparable$1(Date)), new Date(System.Int64(0).toNumber()/10000), false, Date) > 0);
-            Bridge.Test.NUnit.Assert.true(Bridge.compare(Bridge.cast(Bridge.box(new Date(System.Int64(0).toNumber()/10000), Date, $box_.Date.toString), System.IComparable$1(Date)), new Date(System.Int64(10000).toNumber()/10000), false, Date) < 0);
+            Bridge.Test.NUnit.Assert.true(Bridge.compare(Bridge.cast(new Date(System.Int64(0).toNumber()/10000), System.IComparable$1(Date)), new Date(System.Int64(0).toNumber()/10000), false, Date) === 0);
+            Bridge.Test.NUnit.Assert.true(Bridge.compare(Bridge.cast(new Date(System.Int64(10000).toNumber()/10000), System.IComparable$1(Date)), new Date(System.Int64(0).toNumber()/10000), false, Date) > 0);
+            Bridge.Test.NUnit.Assert.true(Bridge.compare(Bridge.cast(new Date(System.Int64(0).toNumber()/10000), System.IComparable$1(Date)), new Date(System.Int64(10000).toNumber()/10000), false, Date) < 0);
         },
         createUnixTimestampAndConvertBackToDateTime: function () {
             var now = new Date();
@@ -28900,8 +28900,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var time2 = new System.TimeSpan(14, 10, 20, 5, 14);
             var time3 = new System.TimeSpan(15, 10, 20, 5, 14);
 
-            Bridge.Test.NUnit.Assert.false(Bridge.equalsT(Bridge.cast(Bridge.box(time1, System.TimeSpan), System.IEquatable$1(System.TimeSpan)), time2, System.TimeSpan));
-            Bridge.Test.NUnit.Assert.true(Bridge.equalsT(Bridge.cast(Bridge.box(time1, System.TimeSpan), System.IEquatable$1(System.TimeSpan)), time3, System.TimeSpan));
+            Bridge.Test.NUnit.Assert.false(Bridge.equalsT(Bridge.cast(time1, System.IEquatable$1(System.TimeSpan)), time2, System.TimeSpan));
+            Bridge.Test.NUnit.Assert.true(Bridge.equalsT(Bridge.cast(time1, System.IEquatable$1(System.TimeSpan)), time3, System.TimeSpan));
         },
         toStringWorks: function () {
             var time1 = new System.TimeSpan(15, 10, 20, 5, 14);
@@ -31342,7 +31342,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             task1.continueWith(function (x) {
                 Bridge.Test.NUnit.Assert.areEqual$1(System.Threading.Tasks.TaskStatus.ranToCompletion, task.status, "Task should be completed after promise");
                 Bridge.Test.NUnit.Assert.true$1(continuationRun, "Continuation should have been run after promise was completed.");
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(System.Array.init([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)], Object), task.getResult(), "The result should be correct");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(System.Array.init([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)], Object), Bridge.unbox(task.getResult()), "The result should be correct");
 
                 completeAsync();
             });
@@ -31405,7 +31405,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.true$1(Bridge.is(task.exception, System.AggregateException), "Exception should be an AggregateException");
                 Bridge.Test.NUnit.Assert.areEqual$1(1, task.exception.innerExceptions.getCount(), "Exception should have one inner exception");
                 Bridge.Test.NUnit.Assert.true$1(Bridge.is(task.exception.innerExceptions.get(0), Bridge.PromiseException), "Inner exception should be a PromiseException");
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(System.Array.init([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)], Object), Bridge.cast(task.exception.innerExceptions.get(0), Bridge.PromiseException).arguments, "The PromiseException arguments should be correct");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(System.Array.init([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)], Object), Bridge.unbox(Bridge.cast(task.exception.innerExceptions.get(0), Bridge.PromiseException).arguments), "The PromiseException arguments should be correct");
 
                 completeAsync();
             });
@@ -31445,7 +31445,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                 $taskResult1 = $task1.getAwaitedResult();
                                 result = $taskResult1;
 
-                                    Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)], Object), result, "The result should be correct");
+                                    Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)], Object), Bridge.unbox(result), "The result should be correct");
                                     completeAsync();
                                 return;
                             }
@@ -31507,7 +31507,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                 }
                                 case 3: {
                                     continuationRun = true;
-                                        Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)], Object), ex.arguments, "The PromiseException arguments should be correct");
+                                        Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)], Object), Bridge.unbox(ex.arguments), "The PromiseException arguments should be correct");
                                         $async_e = null;
                                     $step = 5;
                                     continue;

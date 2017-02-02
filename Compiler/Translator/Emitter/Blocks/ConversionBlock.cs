@@ -247,6 +247,26 @@ namespace Bridge.Translator
             return null;
         }
 
+        private static bool IsUnpackGenericArrayInterfaceObject(IType interfaceType)
+        {
+            ParameterizedType pt = interfaceType as ParameterizedType;
+            if (pt != null)
+            {
+                KnownTypeCode tc = pt.GetDefinition().KnownTypeCode;
+                if (tc == KnownTypeCode.IListOfT || tc == KnownTypeCode.ICollectionOfT || tc == KnownTypeCode.IEnumerableOfT || tc == KnownTypeCode.IReadOnlyListOfT)
+                {
+                    return pt.GetTypeArgument(0).IsKnownType(KnownTypeCode.Object);
+                }
+            }
+
+            if (interfaceType is TypeWithElementType)
+            {
+                return ((TypeWithElementType) interfaceType).ElementType.IsKnownType(KnownTypeCode.Object);
+            }
+
+            return false;
+        }
+
         private static int DoConversion(ConversionBlock block, Expression expression, Conversion conversion, IType expectedType,
             int level, ResolveResult rr, bool ignoreConversionResolveResult = false, bool ignoreBoxing = false)
         {
@@ -296,7 +316,7 @@ namespace Bridge.Translator
 
                 }
 
-                if (conversion.IsBoxingConversion && !isArgument)
+                if (conversion.IsBoxingConversion && !isArgument && expectedType.Kind != TypeKind.Interface)
                 {
                     block.Write("Bridge.box(");
                     block.AfterOutput2 += ", " + ConversionBlock.GetBoxedType(rr.Type, block.Emitter);
@@ -327,7 +347,7 @@ namespace Bridge.Translator
                     //return level;
                 }
 
-                if (conversion.IsUnboxingConversion || isArgument && expectedType.IsKnownType(KnownTypeCode.Object) && rr.Type.IsKnownType(KnownTypeCode.Object))
+                if (conversion.IsUnboxingConversion || isArgument && expectedType.IsKnownType(KnownTypeCode.Object) && (rr.Type.IsKnownType(KnownTypeCode.Object) || IsUnpackGenericArrayInterfaceObject(rr.Type)))
                 {
                     block.Write("Bridge.unbox(");
                     block.AfterOutput2 += ")";

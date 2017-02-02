@@ -52,9 +52,16 @@
             };
         },
 
-        unbox: function(o) {
+        unbox: function (o) {
             if (o && o.$boxed) {
                 return o.v;
+            }
+
+            if (Bridge.isArray(o)) {
+                for (var i = 0; i < o.length; i++) {
+                    var item = o[i];
+                    o[i] = (item && item.$boxed) ? item.v : item;
+                }
             }
 
             return o;
