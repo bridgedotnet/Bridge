@@ -41,14 +41,16 @@
             "reset", "System$Collections$IEnumerator$reset"
             ]
         },
-        ctor: function(action)
-        {
+        ctor: function(action){
             this.$initialize();
             this.moveNext = action;
             this.System$Collections$IEnumerator$moveNext = action;
         },
         getCurrent: function()
         {
+            return this.current;
+        },
+        getCurrent$1: function () {
             return this.current;
         },
         reset: function()
@@ -60,7 +62,7 @@
     Bridge.define("Bridge.GeneratorEnumerator$1", function(T)
     {
         return {
-            inherits: [System.Collections.Generic.IEnumerator$1(T)],
+            inherits: [System.Collections.Generic.IEnumerator$1(T), System.IDisposable],
             current: null,
             config: {
                 alias: [
@@ -70,14 +72,18 @@
                 "reset", "System$Collections$IEnumerator$reset"
                 ]
             },
-            ctor: function(action)
+            ctor: function (action, final)
             {
                 this.$initialize();
                 this.moveNext = action;
                 this.System$Collections$IEnumerator$moveNext = action;
+                this.final = final;
             },
             getCurrent: function()
             {
+                return this.current;
+            },
+            getCurrent$1: function () {
                 return this.current;
             },
             System$Collections$IEnumerator$getCurrent: function()
@@ -86,7 +92,9 @@
             },
             dispose: function()
             {
-                //Empty
+                if (this.final) {
+                    this.final();
+                }
             },
             reset: function()
             {

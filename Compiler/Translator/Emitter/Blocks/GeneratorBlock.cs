@@ -1,6 +1,5 @@
 ﻿using Bridge.Contract;
 using Bridge.Contract.Constants;
-
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.CSharp.Resolver;
 using ICSharpCode.NRefactory.Semantics;
@@ -129,7 +128,67 @@ namespace Bridge.Translator
             }
         }
 
+        public List<string> Parameters
+        {
+            get
+            {
+                AstNodeCollection<ParameterDeclaration> prms = null;
+                AstNodeCollection<TypeParameterDeclaration> tprms = null;
+
+                if (this.MethodDeclaration != null)
+                {
+                    prms = this.MethodDeclaration.Parameters;
+
+                    if (this.MethodDeclaration.TypeParameters.Count > 0 &&
+                        !Helpers.IsIgnoreGeneric(this.MethodDeclaration, this.Emitter))
+                    {
+                        tprms = this.MethodDeclaration.TypeParameters;
+                    }
+                }
+                else if (this.LambdaExpression != null)
+                {
+                    prms = this.LambdaExpression.Parameters;
+                }
+                else if (this.AnonymousMethodExpression != null)
+                {
+                    prms = this.AnonymousMethodExpression.Parameters;
+                }
+
+                var result = new List<string>();
+
+                if (tprms != null)
+                {
+                    foreach (var typeParameterDeclaration in tprms)
+                    {
+                        result.Add(typeParameterDeclaration.Name);
+                    }
+                }
+
+                if (prms != null)
+                {
+                    foreach (var parameterDeclaration in prms)
+                    {
+                        var name = this.Emitter.GetEntityName(parameterDeclaration);
+                        if (this.Emitter.LocalsNamesMap != null && this.Emitter.LocalsNamesMap.ContainsKey(name))
+                        {
+                            name = this.Emitter.LocalsNamesMap[name];
+                        }
+
+                        result.Add(name);
+                    }
+                }
+
+                return result;
+            }
+        }
+
         protected bool PreviousIsAync
+        {
+            get;
+            set;
+        }
+
+        protected bool PreviousIsYield
         {
             get;
             set;
@@ -210,7 +269,9 @@ namespace Bridge.Translator
         public void InitAsyncBlock()
         {
             this.PreviousIsAync = this.Emitter.IsAsync;
+            this.PreviousIsYield = this.Emitter.IsYield;
             this.Emitter.IsAsync = true;
+            this.Emitter.IsYield = true;
 
             this.PreviousAsyncVariables = this.Emitter.AsyncVariables;
             this.Emitter.AsyncVariables = new List<string>();
@@ -254,6 +315,7 @@ namespace Bridge.Translator
         protected void FinishGeneratorBlock()
         {
             this.Emitter.IsAsync = this.PreviousIsAync;
+            this.Emitter.IsYield = this.PreviousIsYield;
             this.Emitter.AsyncVariables = this.PreviousAsyncVariables;
             this.Emitter.AsyncBlock = this.PreviousAsyncBlock;
             this.Emitter.ReplaceAwaiterByVar = this.ReplaceAwaiterByVar;
@@ -278,8 +340,9 @@ namespace Bridge.Translator
         protected void EmitGeneratorBlock()
         {
             this.BeginBlock();
+            var args = this.Parameters;
 
-            if(!IsEnumeratorReturn)
+            if (!IsEnumeratorReturn)
             {
                 this.WriteReturn(true);
                 this.Write("new ");
@@ -294,8 +357,30 @@ namespace Bridge.Translator
                 }
 
                 this.WriteOpenParentheses();
+
+                this.Write(JS.Funcs.BRIDGE_BIND + "(this, ");
                 this.WriteFunction();
-                this.WriteOpenCloseParentheses();
+                if (args.Count > 0)
+                {
+                    this.WriteOpenParentheses();
+
+                    for (int i = 0; i < args.Count; i++)
+                    {
+                        this.Write(args[i]);
+
+                        if (i < args.Count - 1)
+                        {
+                            this.Write(", ");
+                        }
+                    }
+
+                    this.WriteCloseParentheses();
+                }
+                else
+                {
+                    this.WriteOpenCloseParentheses(true);
+                }
+
                 this.WriteSpace();
 
                 this.BeginBlock();
@@ -339,11 +424,14 @@ namespace Bridge.Translator
             }
 
             this.WriteOpenParentheses();
+            this.Write(JS.Funcs.BRIDGE_BIND + "(this, ");
             this.WriteFunction();
             this.WriteOpenCloseParentheses(true);
 
             this.Write(body);
 
+            this.WriteCloseParentheses();
+            this.EmitFinallyHandler();
             this.WriteCloseParentheses();
             this.WriteSemiColon();
             this.WriteNewLine();
@@ -356,6 +444,11 @@ namespace Bridge.Translator
             if(!IsEnumeratorReturn)
             {
                 this.EndBlock();
+                if (args.Count > 0)
+                {
+                    this.Write(", arguments");
+                }
+                this.WriteCloseParentheses();
                 this.WriteCloseParentheses();
                 this.WriteSemiColon();
                 this.WriteNewLine();
@@ -370,11 +463,10 @@ namespace Bridge.Translator
 
             var asyncTryVisitor = new AsyncTryVisitor();
             this.Node.AcceptChildren(asyncTryVisitor);
-            var needTry = asyncTryVisitor.Found;
+            var needTry = true;
 
             this.Emitter.AsyncVariables.Add(JS.Vars.ASYNC_JUMP);
-
-            if(needTry)
+            if (needTry)
             {
                 this.Emitter.AsyncVariables.Add(JS.Vars.ASYNC_RETURN_VALUE);
 
@@ -463,7 +555,7 @@ namespace Bridge.Translator
                             this.Write(JS.Vars.ASYNC_STEP + " = " + step + ";");
 
                             this.WriteNewLine();
-                            this.Write(JS.Funcs.ASYNC_BODY + "();");
+                            this.Write(JS.Funcs.ASYNC_YIELD_BODY + "();");
                             this.WriteNewLine();
                             this.Write("return;");
                         }
@@ -497,7 +589,7 @@ namespace Bridge.Translator
                             this.Write(JS.Vars.ASYNC_STEP + " = " + step + ";");
 
                             this.WriteNewLine();
-                            this.Write(JS.Funcs.ASYNC_BODY + "();");
+                            this.Write(JS.Funcs.ASYNC_YIELD_BODY + "();");
                             this.WriteNewLine();
                             this.Write("return;");
                             this.WriteNewLine();
@@ -528,7 +620,7 @@ namespace Bridge.Translator
                     this.Write(JS.Vars.ASYNC_STEP + " = " + info.FinallyStep + ";");
 
                     this.WriteNewLine();
-                    this.Write(JS.Funcs.ASYNC_BODY + "();");
+                    this.Write(JS.Funcs.ASYNC_YIELD_BODY + "();");
                     this.WriteNewLine();
                     this.Write("return;");
 
@@ -539,6 +631,56 @@ namespace Bridge.Translator
             }
 
             this.Write("throw " + JS.Vars.ASYNC_E + ";");
+        }
+
+        protected bool EmitFinallyHandler()
+        {
+            var infos = this.TryInfos;
+            bool needHeader = true;
+
+            foreach (var info in infos)
+            {
+                if (info.FinallyStep > 0)
+                {
+                    if (!this.Emitter.Locals.ContainsKey(JS.Vars.ASYNC_E))
+                    {
+                        this.AddLocal(JS.Vars.ASYNC_E, null, AstType.Null);
+                    }
+
+                    if (needHeader)
+                    {
+                        this.Write(", function () ");
+                        this.BeginBlock();
+                        needHeader = false;
+                    }
+
+                    this.WriteIf();
+                    this.WriteOpenParentheses();
+                    this.Write(string.Format(JS.Vars.ASYNC_STEP + " >= {0} && " + JS.Vars.ASYNC_STEP + " <= {1}", info.StartStep, info.CatchBlocks.Count > 0 ? info.CatchBlocks.Last().Item4 : info.EndStep));
+                    this.WriteCloseParentheses();
+                    this.BeginBlock();
+
+                    this.WriteNewLine();
+                    this.Write(JS.Vars.ASYNC_STEP + " = " + info.FinallyStep + ";");
+
+                    this.WriteNewLine();
+                    this.Write(JS.Funcs.ASYNC_YIELD_BODY + "();");
+                    this.WriteNewLine();
+                    this.Write("return;");
+
+                    this.WriteNewLine();
+                    this.EndBlock();
+                    this.WriteNewLine();
+                }
+            }
+
+            if (!needHeader)
+            {
+                this.WriteNewLine();
+                this.EndBlock();
+            }
+
+            return !needHeader;
         }
 
         protected void InjectSteps()

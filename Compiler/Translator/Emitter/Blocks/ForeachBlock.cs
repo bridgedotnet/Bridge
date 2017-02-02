@@ -332,6 +332,9 @@ namespace Bridge.Translator
             this.WriteSemiColon();
             this.WriteNewLine();
 
+
+            this.WriteTry();
+            this.BeginBlock();
             this.WriteWhile();
             this.WriteOpenParentheses();
             this.Write(iteratorName);
@@ -414,6 +417,17 @@ namespace Bridge.Translator
 
             this.EndBlock();
             this.WriteNewLine();
+
+            this.EndBlock();
+            this.Write("finally");
+            this.BeginBlock();
+            this.Write($"if (Bridge.is({iteratorName}, System.IDisposable)) ");
+            this.BeginBlock();
+            this.Write($"{iteratorName}.System$IDisposable$dispose();");
+            this.WriteNewLine();
+            this.EndBlock();
+            this.WriteNewLine();
+            this.EndBlock();
         }
 
         protected virtual string GetCastCode(IType fromType, IType toType)

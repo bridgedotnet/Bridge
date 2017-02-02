@@ -138,7 +138,7 @@ namespace Bridge.ClientTest.Collections.Generic
                 sb.AppendLine("got " + enm.Current);
             }
 
-            AssertEqual(sb.ToString(), "yielding 0\nyielding 1\nyielding -1\nin finally\ngot 0\ngot 1\ngot -1\n");
+            AssertEqual(sb.ToString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
         }
 
         [Test]
@@ -156,7 +156,7 @@ namespace Bridge.ClientTest.Collections.Generic
             }
             enm.Dispose();
 
-            AssertEqual(sb.ToString(), "yielding 0\nyielding 1\nyielding 2\nyielding 3\nyielding 4\nyielding -1\nin finally\ngot 0\ngot 1\n");
+            AssertEqual(sb.ToString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
         }
 
         [Test(Name = "IteratorBlock - {0} Exception thrown not caught")]
@@ -181,7 +181,7 @@ namespace Bridge.ClientTest.Collections.Generic
                 sb.AppendLine("caught exception");
             }
 
-            AssertEqual(sb.ToString(), "yielding 1\nyielding 2\nthrowing\nin finally\ncaught exception\n");
+            AssertEqual(sb.ToString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
         }
 
         [Test]
@@ -211,7 +211,8 @@ namespace Bridge.ClientTest.Collections.Generic
                 sb.AppendLine("got " + i);
             }
 
-            AssertEqual(sb.ToString(), "yielding 0\nyielding 1\nyielding -1\nin finally\ngot 0\ngot 1\ngot -1\n-\ngot 0\ngot 1\ngot -1\n");
+            string result = "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n";
+            AssertEqual(sb.ToString(), result + "-\n" + result);
         }
 
         [Test]
@@ -230,7 +231,7 @@ namespace Bridge.ClientTest.Collections.Generic
                 }
             }
 
-            AssertEqual(sb.ToString(), "yielding 0\nyielding 1\nyielding 2\nyielding 3\nyielding 4\nyielding -1\nin finally\ngot 0\ngot 1\n");
+            AssertEqual(sb.ToString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
         }
 
         [Test(Name = "IteratorBlock - {0} exception thrown not caught")]
@@ -257,7 +258,7 @@ namespace Bridge.ClientTest.Collections.Generic
                 sb.AppendLine("caught exception");
             }
 
-            AssertEqual(sb.ToString(), "yielding 1\nyielding 2\nthrowing\nin finally\ncaught exception\n");
+            AssertEqual(sb.ToString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
         }
 
         [Test]

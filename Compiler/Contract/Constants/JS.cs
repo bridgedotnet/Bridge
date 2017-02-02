@@ -75,6 +75,7 @@
             public const string GET_TYPE = "$getType";
 
             public const string ASYNC_BODY = "$asyncBody";
+            public const string ASYNC_YIELD_BODY = "$enumerator.moveNext";
             public const string GET_AWAITED_RESULT = "getAwaitedResult";
             public const string CONTINUE_WITH = "continueWith";
             public const string SET_RESULT = "setResult";
