@@ -7706,44 +7706,45 @@ Bridge.$N1391Result =                 r;
         },
         getEnumerator: function () {
             var $step = 0,
-                $jumpFromFinally, 
-                node, 
-                $enumerator = new (Bridge.GeneratorEnumerator$1(T))(function () {
-                    for (;;) {
-                        switch ($step) {
-                            case 0: {
-                                node = this._headIfAny;
+                $jumpFromFinally,
+                node;
+
+            var $enumerator = new (Bridge.GeneratorEnumerator$1(T))(function () {
+                for (;;) {
+                    switch ($step) {
+                        case 0: {
+                            node = this._headIfAny;
+                            $step = 1;
+                            continue;
+                        }
+                        case 1: {
+                            if ( node != null ) {
+                                    $step = 2;
+                                    continue;
+                                } 
+                                $step = 4;
+                                continue;
+                        }
+                        case 2: {
+                            $enumerator.current = node.item;
+                                $step = 3;
+                                return true;
+                        }
+                        case 3: {
+                            node = node.nextIfAny;
+
                                 $step = 1;
                                 continue;
-                            }
-                            case 1: {
-                                if ( node != null ) {
-                                        $step = 2;
-                                        continue;
-                                    } 
-                                    $step = 4;
-                                    continue;
-                            }
-                            case 2: {
-                                $enumerator.current = node.item;
-                                    $step = 3;
-                                    return true;
-                            }
-                            case 3: {
-                                node = node.nextIfAny;
+                        }
+                        case 4: {
 
-                                    $step = 1;
-                                    continue;
-                            }
-                            case 4: {
-
-                            }
-                            default: {
-                                return false;
-                            }
+                        }
+                        default: {
+                            return false;
                         }
                     }
-                });
+                }
+            });
             return $enumerator;
         },
         System$Collections$IEnumerable$getEnumerator: function () {
@@ -12161,24 +12162,25 @@ Bridge.$N1391Result =                 r;
             toEnumerable: function (TValue, head) {
                 return new (Bridge.GeneratorEnumerable$1(TValue))(function () {
                     var $step = 0,
-                        $jumpFromFinally, 
-                        $enumerator = new (Bridge.GeneratorEnumerator$1(TValue))(function () {
-                            for (;;) {
-                                switch ($step) {
-                                    case 0: {
-                                        $enumerator.current = head;
-                                            $step = 1;
-                                            return true;
-                                    }
-                                    case 1: {
+                        $jumpFromFinally;
 
-                                    }
-                                    default: {
-                                        return false;
-                                    }
+                    var $enumerator = new (Bridge.GeneratorEnumerator$1(TValue))(function () {
+                        for (;;) {
+                            switch ($step) {
+                                case 0: {
+                                    $enumerator.current = head;
+                                        $step = 1;
+                                        return true;
+                                }
+                                case 1: {
+
+                                }
+                                default: {
+                                    return false;
                                 }
                             }
-                        });
+                        }
+                    });
                     return $enumerator;
                 });
             }
@@ -19708,45 +19710,46 @@ Bridge.$N1391Result =                 r;
             makeEnumerable: function (T, arr) {
                 return new (Bridge.GeneratorEnumerable$1(T))(function () {
                     var $step = 0,
-                        $jumpFromFinally, 
-                        $t, 
-                        x, 
-                        $enumerator = new (Bridge.GeneratorEnumerator$1(T))(function () {
-                            for (;;) {
-                                switch ($step) {
-                                    case 0: {
-                                        if (arr === void 0) { arr = []; }
-                                            $t = Bridge.getEnumerator(arr);
-                                            $step = 1;
-                                            continue;
-                                    }
-                                    case 1: {
-                                        if ($t.moveNext()) {
-                                                x = $t.getCurrent();
-                                                $step = 2;
-                                                continue;
-                                            }
-                                        $step = 4;
-                                        continue;
-                                    }
-                                    case 2: {
-                                        $enumerator.current = x;
-                                            $step = 3;
-                                            return true;
-                                    }
-                                    case 3: {
+                        $jumpFromFinally,
+                        $t,
+                        x;
+
+                    var $enumerator = new (Bridge.GeneratorEnumerator$1(T))(function () {
+                        for (;;) {
+                            switch ($step) {
+                                case 0: {
+                                    if (arr === void 0) { arr = []; }
+                                        $t = Bridge.getEnumerator(arr);
                                         $step = 1;
                                         continue;
-                                    }
-                                    case 4: {
+                                }
+                                case 1: {
+                                    if ($t.moveNext()) {
+                                            x = $t.getCurrent();
+                                            $step = 2;
+                                            continue;
+                                        }
+                                    $step = 4;
+                                    continue;
+                                }
+                                case 2: {
+                                    $enumerator.current = x;
+                                        $step = 3;
+                                        return true;
+                                }
+                                case 3: {
+                                    $step = 1;
+                                    continue;
+                                }
+                                case 4: {
 
-                                    }
-                                    default: {
-                                        return false;
-                                    }
+                                }
+                                default: {
+                                    return false;
                                 }
                             }
-                        });
+                        }
+                    });
                     return $enumerator;
                 });
             },

@@ -302,23 +302,31 @@ namespace Bridge.Translator
             }
 
             this.WriteVar(true);
-            this.Write(JS.Vars.ASYNC_STEP + " = 0,");
+            this.Write(JS.Vars.ASYNC_STEP + " = 0");
+            this.Emitter.Comma = true;
             this.Indent();
 
+            // This is required to add async variables into Emitter.AsyncVariables and emit them prior to body
             IWriterInfo writerInfo = this.SaveWriter();
             StringBuilder body = this.NewWriter();
-            Emitter.ResetLevel(writerInfo.Level);
+            Emitter.ResetLevel(writerInfo.Level - 1);
             this.EmitGeneratorBody();
             this.RestoreWriter(writerInfo);
 
-            foreach(var localVar in this.Emitter.AsyncVariables)
+            foreach (var localVar in this.Emitter.AsyncVariables)
             {
-                this.WriteNewLine();
+                this.EnsureComma(true);
                 this.Write(localVar);
-                this.WriteComma();
+                this.Emitter.Comma = true;
             }
 
+            this.Emitter.Comma = false;
+            this.WriteSemiColon();
+            this.Outdent();
             this.WriteNewLine();
+            this.WriteNewLine();
+
+            this.WriteVar(true);
             this.Write(JS.Vars.ENUMERATOR + " = new ");
 
             if(this.ReturnType.IsParameterized)
@@ -332,16 +340,13 @@ namespace Bridge.Translator
 
             this.WriteOpenParentheses();
             this.WriteFunction();
-            this.WriteOpenCloseParentheses();
-            this.WriteSpace();
+            this.WriteOpenCloseParentheses(true);
 
             this.Write(body);
 
             this.WriteCloseParentheses();
             this.WriteSemiColon();
             this.WriteNewLine();
-
-            this.Outdent();
 
             this.WriteReturn(true);
             this.Write(JS.Vars.ENUMERATOR);
