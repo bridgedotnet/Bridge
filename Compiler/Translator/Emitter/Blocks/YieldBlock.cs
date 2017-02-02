@@ -34,7 +34,7 @@ namespace Bridge.Translator
             get;
             set;
         }
-        
+
         public List<IAsyncStep> EmittedAsyncSteps
         {
             get;
@@ -48,7 +48,7 @@ namespace Bridge.Translator
 
             if(this.YieldReturnStatement != null)
             {
-                this.Write("$enumerator.current = ");
+                this.Write(JS.Vars.ENUMERATOR + "." + JS.Fields.CURRENT + " = ");
                 this.YieldReturnStatement.Expression.AcceptVisitor(this.Emitter);
                 this.WriteSemiColon();
                 this.WriteNewLine();

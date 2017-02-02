@@ -29,6 +29,7 @@
 
             public const string ASYNC_TASK = "task";
             public const string PROTOTYPE = "prototype";
+            public const string CURRENT = "current";
         }
 
         public class Funcs
@@ -251,6 +252,14 @@
                 public const string GET_INTERFACE = DOTNAME + "getInterface";
                 public const string INIT = DOTNAME + "init";
 
+                public class Generator
+                {
+                    public const string NAME = Bridge.DOTNAME + "GeneratorEnumerator";
+                    public const string NAME_GENERIC = NAME + "$1";
+                    private const string DOTNAME = NAME + ".";
+                    private const string DOTNAME_GENERIC = NAME_GENERIC + ".";
+                }
+
                 public class Reflection
                 {
                     public const string NAME = Bridge.DOTNAME + "Reflection";
@@ -273,6 +282,7 @@
             public const string T = "$t";
             public const string E = "$e";
             public const string YIELD = "$yield";
+            public const string ENUMERATOR = "$enumerator";
             public const string EXPORTS = "$exports";
             public const string SCOPE = "$scope";
             public const string ITERATOR = "$i";

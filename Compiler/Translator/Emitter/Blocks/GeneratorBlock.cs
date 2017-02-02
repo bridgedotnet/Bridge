@@ -247,7 +247,7 @@ namespace Bridge.Translator
             {
                 this.ReturnType = this.Emitter.Resolver.ResolveNode(((EntityDeclaration)this.Accessor.Parent).ReturnType, this.Emitter).Type;
             }
-            
+
             IsEnumeratorReturn = this.ReturnType.Name == "IEnumerator";
         }
 
@@ -297,7 +297,7 @@ namespace Bridge.Translator
                 this.WriteFunction();
                 this.WriteOpenCloseParentheses();
                 this.WriteSpace();
-            
+
                 this.BeginBlock();
             }
 
@@ -319,15 +319,15 @@ namespace Bridge.Translator
             }
 
             this.WriteNewLine();
-            this.Write("$enumerator = new ");
+            this.Write(JS.Vars.ENUMERATOR + " = new ");
 
             if(this.ReturnType.IsParameterized)
             {
-                this.Write("(Bridge.GeneratorEnumerator$1(" + this.ReturnType.TypeArguments[0].FullName + "))");
+                this.Write("(" + JS.Types.Bridge.Generator.NAME_GENERIC +"(" + this.ReturnType.TypeArguments[0].FullName + "))");
             }
             else
             {
-                this.Write("Bridge.GeneratorEnumerator");
+                this.Write(JS.Types.Bridge.Generator.NAME);
             }
 
             this.WriteOpenParentheses();
@@ -344,7 +344,7 @@ namespace Bridge.Translator
             this.Outdent();
 
             this.WriteReturn(true);
-            this.Write("$enumerator");
+            this.Write(JS.Vars.ENUMERATOR);
             this.WriteSemiColon();
             this.WriteNewLine();
 
