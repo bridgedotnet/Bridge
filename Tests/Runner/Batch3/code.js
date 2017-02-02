@@ -7705,13 +7705,46 @@ Bridge.$N1391Result =                 r;
             } ));
         },
         getEnumerator: function () {
-            var $yield = [];
-            var node = this._headIfAny;
-            while (node != null) {
-                $yield.push(node.item);
-                node = node.nextIfAny;
-            }
-            return System.Array.toEnumerator($yield, T);
+            var $step = 0,
+                $jumpFromFinally, 
+                node, 
+                $enumerator = new (Bridge.GeneratorEnumerator$1(T))(function () {
+                    for (;;) {
+                        switch ($step) {
+                            case 0: {
+                                node = this._headIfAny;
+                                $step = 1;
+                                continue;
+                            }
+                            case 1: {
+                                if ( node != null ) {
+                                        $step = 2;
+                                        continue;
+                                    } 
+                                    $step = 4;
+                                    continue;
+                            }
+                            case 2: {
+                                $enumerator.current = node.item;
+                                    $step = 3;
+                                    return true;
+                            }
+                            case 3: {
+                                node = node.nextIfAny;
+
+                                    $step = 1;
+                                    continue;
+                            }
+                            case 4: {
+
+                            }
+                            default: {
+                                return false;
+                            }
+                        }
+                    }
+                });
+            return $enumerator;
         },
         System$Collections$IEnumerable$getEnumerator: function () {
             return this.getEnumerator();
@@ -12126,9 +12159,28 @@ Bridge.$N1391Result =                 r;
                 };
             },
             toEnumerable: function (TValue, head) {
-                var $yield = [];
-                $yield.push(head);
-                return System.Array.toEnumerable($yield);
+                return new (Bridge.GeneratorEnumerable$1(TValue))(function () {
+                    var $step = 0,
+                        $jumpFromFinally, 
+                        $enumerator = new (Bridge.GeneratorEnumerator$1(TValue))(function () {
+                            for (;;) {
+                                switch ($step) {
+                                    case 0: {
+                                        $enumerator.current = head;
+                                            $step = 1;
+                                            return true;
+                                    }
+                                    case 1: {
+
+                                    }
+                                    default: {
+                                        return false;
+                                    }
+                                }
+                            }
+                        });
+                    return $enumerator;
+                });
             }
         }
     });
@@ -19654,15 +19706,49 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.NUnit.Assert.areEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge889.count());
             },
             makeEnumerable: function (T, arr) {
-                var $t;
-                if (arr === void 0) { arr = []; }
-                var $yield = [];
-                $t = Bridge.getEnumerator(arr);
-                while ($t.moveNext()) {
-                    var x = $t.getCurrent();
-                    $yield.push(x);
-                }
-                return System.Array.toEnumerable($yield);
+                return new (Bridge.GeneratorEnumerable$1(T))(function () {
+                    var $step = 0,
+                        $jumpFromFinally, 
+                        $t, 
+                        x, 
+                        $enumerator = new (Bridge.GeneratorEnumerator$1(T))(function () {
+                            for (;;) {
+                                switch ($step) {
+                                    case 0: {
+                                        if (arr === void 0) { arr = []; }
+                                            $t = Bridge.getEnumerator(arr);
+                                            $step = 1;
+                                            continue;
+                                    }
+                                    case 1: {
+                                        if ($t.moveNext()) {
+                                                x = $t.getCurrent();
+                                                $step = 2;
+                                                continue;
+                                            }
+                                        $step = 4;
+                                        continue;
+                                    }
+                                    case 2: {
+                                        $enumerator.current = x;
+                                            $step = 3;
+                                            return true;
+                                    }
+                                    case 3: {
+                                        $step = 1;
+                                        continue;
+                                    }
+                                    case 4: {
+
+                                    }
+                                    default: {
+                                        return false;
+                                    }
+                                }
+                            }
+                        });
+                    return $enumerator;
+                });
             },
             testMakeEnumerable: function () {
                 Bridge.Test.NUnit.Assert.areEqual$1(0, System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge889.makeEnumerable(Object)).count(), "MakeEnumerable object 0");

@@ -1547,11 +1547,36 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             ]
         },
         getEnumerator: function () {
-            var $yield = [];
-            $yield.push("x");
-            $yield.push("y");
-            $yield.push("z");
-            return System.Array.toEnumerator($yield, String);
+            var $step = 0,
+                $jumpFromFinally, 
+                $enumerator = new (Bridge.GeneratorEnumerator$1(System.String))(function () {
+                    for (;;) {
+                        switch ($step) {
+                            case 0: {
+                                $enumerator.current = "x";
+                                    $step = 1;
+                                    return true;
+                            }
+                            case 1: {
+                                $enumerator.current = "y";
+                                    $step = 2;
+                                    return true;
+                            }
+                            case 2: {
+                                $enumerator.current = "z";
+                                    $step = 3;
+                                    return true;
+                            }
+                            case 3: {
+
+                            }
+                            default: {
+                                return false;
+                            }
+                        }
+                    }
+                });
+            return $enumerator;
         },
         System$Collections$IEnumerable$getEnumerator: function () {
             return this.getEnumerator();
@@ -1901,80 +1926,373 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             this._sb = sb;
         },
         getEnumerator: function (n) {
-            var $yield = [];
-            try {
-                for (var i = 0; i < n; i = (i + 1) | 0) {
-                    this._sb.appendLine("yielding " + Bridge.box(i, System.Int32));
-                    $yield.push(i);
-                }
-                this._sb.appendLine("yielding -1");
-                $yield.push(-1);
-            }
-            finally {
-                this._sb.appendLine("in finally");
-            }
-            return System.Array.toEnumerator($yield, System.Int32);
+            var $step = 0,
+                $jumpFromFinally, 
+                i, 
+                $async_e, 
+                $enumerator = new (Bridge.GeneratorEnumerator$1(System.Int32))(function () {
+                    for (;;) {
+                        switch ($step) {
+                            case 0: {
+                                $step = 1;
+                                continue;
+                            }
+                            case 1: {
+                                i = 0;
+                                    $step = 2;
+                                    continue;
+                            }
+                            case 2: {
+                                if ( i < n ) {
+                                        $step = 3;
+                                        continue;
+                                    }
+                                $step = 6;
+                                continue;
+                            }
+                            case 3: {
+                                this._sb.appendLine("yielding " + Bridge.box(i, System.Int32));
+                                    $enumerator.current = i;
+                                    $step = 4;
+                                    return true;
+                            }
+                            case 4: {
+                                $step = 5;
+                                continue;
+                            }
+                            case 5: {
+                                i = (i + 1) | 0;
+                                $step = 2;
+                                continue;
+                            }
+                            case 6: {
+                                this._sb.appendLine("yielding -1");
+                                    $enumerator.current = -1;
+                                    $step = 7;
+                                    return true;
+                            }
+                            case 7: {
+                                $step = 8;
+                                continue;
+                            }
+                            case 8: {
+                                this._sb.appendLine("in finally");
+
+                                    if ($jumpFromFinally > -1) {
+                                        $step = $jumpFromFinally;
+                                        $jumpFromFinally = null;
+                                    } else if ($async_e) {
+                                        throw $async_e;
+                                        return;
+                                    } else if (Bridge.isDefined($returnValue)) {
+                                        $tcs.setResult($returnValue);
+                                        return;
+                                    }
+                                $step = 9;
+                                continue;
+                            }
+                            case 9: {
+
+                            }
+                            default: {
+                                return false;
+                            }
+                        }
+                    }
+                });
+            return $enumerator;
         },
         getEnumeratorThrows: function () {
-            var $yield = [];
-            try {
-                this._sb.appendLine("yielding 1");
-                $yield.push(1);
-                this._sb.appendLine("yielding 2");
-                $yield.push(2);
-                this._sb.appendLine("throwing");
-                throw new System.Exception("test");
-            }
-            finally {
-                this._sb.appendLine("in finally");
-            }
-            return System.Array.toEnumerator($yield, System.Int32);
+            var $step = 0,
+                $jumpFromFinally, 
+                $async_e, 
+                $enumerator = new (Bridge.GeneratorEnumerator$1(System.Int32))(function () {
+                    for (;;) {
+                        switch ($step) {
+                            case 0: {
+                                $step = 1;
+                                continue;
+                            }
+                            case 1: {
+                                this._sb.appendLine("yielding 1");
+                                    $enumerator.current = 1;
+                                    $step = 2;
+                                    return true;
+                            }
+                            case 2: {
+                                this._sb.appendLine("yielding 2");
+                                    $enumerator.current = 2;
+                                    $step = 3;
+                                    return true;
+                            }
+                            case 3: {
+                                this._sb.appendLine("throwing");
+                                    throw new System.Exception("test");
+                                $step = 4;
+                                continue;
+                            }
+                            case 4: {
+                                this._sb.appendLine("in finally");
+
+                                    if ($jumpFromFinally > -1) {
+                                        $step = $jumpFromFinally;
+                                        $jumpFromFinally = null;
+                                    } else if ($async_e) {
+                                        throw $async_e;
+                                        return;
+                                    } else if (Bridge.isDefined($returnValue)) {
+                                        $tcs.setResult($returnValue);
+                                        return;
+                                    }
+                                $step = 5;
+                                continue;
+                            }
+                            case 5: {
+
+                            }
+                            default: {
+                                return false;
+                            }
+                        }
+                    }
+                });
+            return $enumerator;
         },
         getEnumerable: function (n) {
-            var $yield = [];
-            try {
-                for (var i = 0; i < n; i = (i + 1) | 0) {
-                    this._sb.appendLine("yielding " + Bridge.box(i, System.Int32));
-                    $yield.push(i);
-                }
-                this._sb.appendLine("yielding -1");
-                $yield.push(-1);
-            }
-            finally {
-                this._sb.appendLine("in finally");
-            }
-            n = 0; // Just to verify that the value of 'n' is not reused in the next call
-            return System.Array.toEnumerable($yield);
+            return new (Bridge.GeneratorEnumerable$1(System.Int32))(function () {
+                var $step = 0,
+                    $jumpFromFinally, 
+                    i, 
+                    $async_e, 
+                    $enumerator = new (Bridge.GeneratorEnumerator$1(System.Int32))(function () {
+                        for (;;) {
+                            switch ($step) {
+                                case 0: {
+                                    $step = 1;
+                                    continue;
+                                }
+                                case 1: {
+                                    i = 0;
+                                        $step = 2;
+                                        continue;
+                                }
+                                case 2: {
+                                    if ( i < n ) {
+                                            $step = 3;
+                                            continue;
+                                        }
+                                    $step = 6;
+                                    continue;
+                                }
+                                case 3: {
+                                    this._sb.appendLine("yielding " + Bridge.box(i, System.Int32));
+                                        $enumerator.current = i;
+                                        $step = 4;
+                                        return true;
+                                }
+                                case 4: {
+                                    $step = 5;
+                                    continue;
+                                }
+                                case 5: {
+                                    i = (i + 1) | 0;
+                                    $step = 2;
+                                    continue;
+                                }
+                                case 6: {
+                                    this._sb.appendLine("yielding -1");
+                                        $enumerator.current = -1;
+                                        $step = 7;
+                                        return true;
+                                }
+                                case 7: {
+                                    $step = 8;
+                                    continue;
+                                }
+                                case 8: {
+                                    this._sb.appendLine("in finally");
+
+                                        if ($jumpFromFinally > -1) {
+                                            $step = $jumpFromFinally;
+                                            $jumpFromFinally = null;
+                                        } else if ($async_e) {
+                                            throw $async_e;
+                                            return;
+                                        } else if (Bridge.isDefined($returnValue)) {
+                                            $tcs.setResult($returnValue);
+                                            return;
+                                        }
+                                    $step = 9;
+                                    continue;
+                                }
+                                case 9: {
+                                    n = 0; // Just to verify that the value of 'n' is not reused in the next call
+
+                                }
+                                default: {
+                                    return false;
+                                }
+                            }
+                        }
+                    });
+                return $enumerator;
+            });
         },
         getEnumerableThrows: function (n) {
-            var $yield = [];
-            try {
-                this._sb.appendLine("yielding 1");
-                $yield.push(1);
-                this._sb.appendLine("yielding 2");
-                $yield.push(2);
-                this._sb.appendLine("throwing");
-                throw new System.Exception("test");
-            }
-            finally {
-                this._sb.appendLine("in finally");
-            }
-            return System.Array.toEnumerable($yield);
+            return new (Bridge.GeneratorEnumerable$1(System.Int32))(function () {
+                var $step = 0,
+                    $jumpFromFinally, 
+                    $async_e, 
+                    $enumerator = new (Bridge.GeneratorEnumerator$1(System.Int32))(function () {
+                        for (;;) {
+                            switch ($step) {
+                                case 0: {
+                                    $step = 1;
+                                    continue;
+                                }
+                                case 1: {
+                                    this._sb.appendLine("yielding 1");
+                                        $enumerator.current = 1;
+                                        $step = 2;
+                                        return true;
+                                }
+                                case 2: {
+                                    this._sb.appendLine("yielding 2");
+                                        $enumerator.current = 2;
+                                        $step = 3;
+                                        return true;
+                                }
+                                case 3: {
+                                    this._sb.appendLine("throwing");
+                                        throw new System.Exception("test");
+                                    $step = 4;
+                                    continue;
+                                }
+                                case 4: {
+                                    this._sb.appendLine("in finally");
+
+                                        if ($jumpFromFinally > -1) {
+                                            $step = $jumpFromFinally;
+                                            $jumpFromFinally = null;
+                                        } else if ($async_e) {
+                                            throw $async_e;
+                                            return;
+                                        } else if (Bridge.isDefined($returnValue)) {
+                                            $tcs.setResult($returnValue);
+                                            return;
+                                        }
+                                    $step = 5;
+                                    continue;
+                                }
+                                case 5: {
+
+                                }
+                                default: {
+                                    return false;
+                                }
+                            }
+                        }
+                    });
+                return $enumerator;
+            });
         },
         getEnumerableMutateParameter: function (n) {
-            var $yield = [];
-            for (; n > 0; n = (n - 1) | 0) {
-                $yield.push(n);
-            }
-            return System.Array.toEnumerable($yield);
+            return new (Bridge.GeneratorEnumerable$1(System.Int32))(function () {
+                var $step = 0,
+                    $jumpFromFinally, 
+                    $enumerator = new (Bridge.GeneratorEnumerator$1(System.Int32))(function () {
+                        for (;;) {
+                            switch ($step) {
+                                case 0: {
+                                    
+                                        $step = 1;
+                                        continue;
+                                }
+                                case 1: {
+                                    if ( n > 0 ) {
+                                            $step = 2;
+                                            continue;
+                                        }
+                                    $step = 5;
+                                    continue;
+                                }
+                                case 2: {
+                                    $enumerator.current = n;
+                                        $step = 3;
+                                        return true;
+                                }
+                                case 3: {
+                                    $step = 4;
+                                    continue;
+                                }
+                                case 4: {
+                                    n = (n - 1) | 0;
+                                    $step = 1;
+                                    continue;
+                                }
+                                case 5: {
+
+                                }
+                                default: {
+                                    return false;
+                                }
+                            }
+                        }
+                    });
+                return $enumerator;
+            });
         },
         getEnumerableSimple: function (n) {
-            var $yield = [];
-            for (var i = 0; i < n; i = (i + 1) | 0) {
-                $yield.push(i);
-            }
-            $yield.push(-1);
-            return System.Array.toEnumerable($yield);
+            return new (Bridge.GeneratorEnumerable$1(System.Int32))(function () {
+                var $step = 0,
+                    $jumpFromFinally, 
+                    i, 
+                    $enumerator = new (Bridge.GeneratorEnumerator$1(System.Int32))(function () {
+                        for (;;) {
+                            switch ($step) {
+                                case 0: {
+                                    i = 0;
+                                        $step = 1;
+                                        continue;
+                                }
+                                case 1: {
+                                    if ( i < n ) {
+                                            $step = 2;
+                                            continue;
+                                        }
+                                    $step = 5;
+                                    continue;
+                                }
+                                case 2: {
+                                    $enumerator.current = i;
+                                        $step = 3;
+                                        return true;
+                                }
+                                case 3: {
+                                    $step = 4;
+                                    continue;
+                                }
+                                case 4: {
+                                    i = (i + 1) | 0;
+                                    $step = 1;
+                                    continue;
+                                }
+                                case 5: {
+                                    $enumerator.current = -1;
+                                        $step = 6;
+                                        return true;
+                                }
+                                case 6: {
+
+                                }
+                                default: {
+                                    return false;
+                                }
+                            }
+                        }
+                    });
+                return $enumerator;
+            });
         }
     });
 
@@ -5516,15 +5834,49 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             DefaultMessage: "One or more errors occurred."
         },
         makeEnumerable: function (T, arr) {
-            var $t;
-            if (arr === void 0) { arr = []; }
-            var $yield = [];
-            $t = Bridge.getEnumerator(arr);
-            while ($t.moveNext()) {
-                var x = $t.getCurrent();
-                $yield.push(x);
-            }
-            return System.Array.toEnumerable($yield);
+            return new (Bridge.GeneratorEnumerable$1(T))(function () {
+                var $step = 0,
+                    $jumpFromFinally, 
+                    $t, 
+                    x, 
+                    $enumerator = new (Bridge.GeneratorEnumerator$1(T))(function () {
+                        for (;;) {
+                            switch ($step) {
+                                case 0: {
+                                    if (arr === void 0) { arr = []; }
+                                        $t = Bridge.getEnumerator(arr);
+                                        $step = 1;
+                                        continue;
+                                }
+                                case 1: {
+                                    if ($t.moveNext()) {
+                                            x = $t.getCurrent();
+                                            $step = 2;
+                                            continue;
+                                        }
+                                    $step = 4;
+                                    continue;
+                                }
+                                case 2: {
+                                    $enumerator.current = x;
+                                        $step = 3;
+                                        return true;
+                                }
+                                case 3: {
+                                    $step = 1;
+                                    continue;
+                                }
+                                case 4: {
+
+                                }
+                                default: {
+                                    return false;
+                                }
+                            }
+                        }
+                    });
+                return $enumerator;
+            });
         },
         typePropertiesAreCorrect: function () {
             Bridge.Test.NUnit.Assert.areEqual$1("System.AggregateException", Bridge.Reflection.getTypeFullName(System.AggregateException), "Name");
@@ -22173,15 +22525,49 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Threading.TaskTests", {
         makeEnumerable: function (T, args) {
-            var $t;
-            if (args === void 0) { args = []; }
-            var $yield = [];
-            $t = Bridge.getEnumerator(args);
-            while ($t.moveNext()) {
-                var a = $t.getCurrent();
-                $yield.push(a);
-            }
-            return System.Array.toEnumerable($yield);
+            return new (Bridge.GeneratorEnumerable$1(T))(function () {
+                var $step = 0,
+                    $jumpFromFinally, 
+                    $t, 
+                    a, 
+                    $enumerator = new (Bridge.GeneratorEnumerator$1(T))(function () {
+                        for (;;) {
+                            switch ($step) {
+                                case 0: {
+                                    if (args === void 0) { args = []; }
+                                        $t = Bridge.getEnumerator(args);
+                                        $step = 1;
+                                        continue;
+                                }
+                                case 1: {
+                                    if ($t.moveNext()) {
+                                            a = $t.getCurrent();
+                                            $step = 2;
+                                            continue;
+                                        }
+                                    $step = 4;
+                                    continue;
+                                }
+                                case 2: {
+                                    $enumerator.current = a;
+                                        $step = 3;
+                                        return true;
+                                }
+                                case 3: {
+                                    $step = 1;
+                                    continue;
+                                }
+                                case 4: {
+
+                                }
+                                default: {
+                                    return false;
+                                }
+                            }
+                        }
+                    });
+                return $enumerator;
+            });
         },
         taskCompletionSourceTypePropertiesAreCorrect: function () {
             Bridge.Test.NUnit.Assert.areEqual$1("System.Threading.Tasks.TaskCompletionSource", Bridge.Reflection.getTypeFullName(System.Threading.Tasks.TaskCompletionSource), "FullName should be correct");
