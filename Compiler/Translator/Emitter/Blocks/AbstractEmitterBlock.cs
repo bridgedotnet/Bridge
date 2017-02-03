@@ -97,7 +97,7 @@ namespace Bridge.Translator
             return true;
         }
 
-        protected Expression[] GetAwaiters(AstNode node)
+        protected AstNode[] GetAwaiters(AstNode node)
         {
             var awaitSearch = new AwaitSearchVisitor();
             node.AcceptVisitor(awaitSearch);
