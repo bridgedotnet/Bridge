@@ -3269,7 +3269,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     x: 5,
                     y: 7
                 } );
-                var c = b.test2(a.$clone()).$clone();
+                var c = b.test2(a.$clone());
 
                 Bridge.Test.NUnit.Assert.areEqual$1(305, c.x, "c.x 305");
                 Bridge.Test.NUnit.Assert.areEqual$1(407, c.y, "c.y 407");

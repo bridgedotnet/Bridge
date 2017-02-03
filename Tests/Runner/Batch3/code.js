@@ -13713,7 +13713,7 @@ Bridge.$N1391Result =                 r;
                 var second = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.someMethod(System.Int32);
                 Bridge.Test.NUnit.Assert.areEqual(0, second);
 
-                var third = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.someMethod(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.SomeStruct).$clone();
+                var third = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.someMethod(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.SomeStruct);
                 Bridge.Test.NUnit.Assert.true(third.isDefault());
             }
         }
@@ -14386,6 +14386,60 @@ Bridge.$N1391Result =                 r;
     Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.IThing$2", function (TC, TD) { return {
         $kind: "interface"
     }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2322", {
+        statics: {
+            testSequence: function () {
+                var x1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2322.MyStruct.$ctor1(1.0);
+                var x2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2322.MyStruct.add(x1.$clone(), new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2322.MyStruct.$ctor1(2.0));
+                Bridge.Test.NUnit.Assert.areEqual(1, x1.value);
+                Bridge.Test.NUnit.Assert.areEqual(3, x2.value);
+
+                var y1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2322.MyStruct.$ctor1(1.0);
+                var y2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2322.MyStruct.op_Addition(y1.$clone(), new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2322.MyStruct.$ctor1(2.0));
+                Bridge.Test.NUnit.Assert.areEqual(1, y1.value);
+                Bridge.Test.NUnit.Assert.areEqual(3, y2.value);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2322.MyStruct", {
+        $kind: "struct",
+        statics: {
+            add: function (a, b) {
+                a.value += b.value;
+                return a.$clone();
+            },
+            op_Addition: function (a, b) {
+                a.value += b.value;
+                return a.$clone();
+            },
+            getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2322.MyStruct(); }
+        },
+        value: 0,
+        $ctor1: function (value) {
+            this.$initialize();
+            this.value = value;
+        },
+        ctor: function () {
+            this.$initialize();
+        },
+        getHashCode: function () {
+            var h = Bridge.addHash([3904302783, this.value]);
+            return h;
+        },
+        equals: function (o) {
+            if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2322.MyStruct)) {
+                return false;
+            }
+            return Bridge.equals(this.value, o.value);
+        },
+        $clone: function (to) {
+            var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2322.MyStruct();
+            s.value = this.value;
+            return s;
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
@@ -16320,7 +16374,7 @@ Bridge.$N1391Result =                 r;
                 var a = Bridge.ClientTest.Batch3.BridgeIssues.Bridge577.someMethodA(1);
                 Bridge.Test.NUnit.Assert.notNull$1(a, "#577 Bridge577UnitA created");
 
-                var b = Bridge.ClientTest.Batch3.BridgeIssues.Bridge577.someMethodB(7).$clone();
+                var b = Bridge.ClientTest.Batch3.BridgeIssues.Bridge577.someMethodB(7);
                 Bridge.Test.NUnit.Assert.areEqual$1(7, b.getNumber(), "#577 Bridge577UnitB created");
             }
         }
@@ -18827,7 +18881,7 @@ Bridge.$N1391Result =                 r;
 
                 var value1 = System.Nullable.getValueOrDefault(test1, 0);
                 var value2 = System.Nullable.getValueOrDefault(test2, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge762A());
-                var value3 = System.Nullable.getValueOrDefault(test3, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge762B()).$clone();
+                var value3 = System.Nullable.getValueOrDefault(test3, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge762B());
 
                 Bridge.Test.NUnit.Assert.areEqual$1(0, value1, "Bridge762 int");
                 Bridge.Test.NUnit.Assert.areNotEqual$1(null, value2, "Bridge762A struct");
@@ -19088,7 +19142,7 @@ Bridge.$N1391Result =                 r;
         statics: {
             testUseCase: function () {
                 Bridge.Test.NUnit.Assert.areNotEqual(null, Bridge.ClientTest.Batch3.BridgeIssues.Bridge789.method1());
-                Bridge.Test.NUnit.Assert.areNotEqual(null, Bridge.ClientTest.Batch3.BridgeIssues.Bridge789.method2().$clone());
+                Bridge.Test.NUnit.Assert.areNotEqual(null, Bridge.ClientTest.Batch3.BridgeIssues.Bridge789.method2());
                 Bridge.Test.NUnit.Assert.areEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge789.method2().field1);
             },
             method1: function (dt) {
@@ -19157,7 +19211,7 @@ Bridge.$N1391Result =                 r;
         statics: {
             testUseCase: function () {
                 var wrappedValue = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge795A.$ctor1(1);
-                var wrappedValueIsNull = (System.Nullable.lifteq(Bridge.ClientTest.Batch3.BridgeIssues.Bridge795A.op_Equality, wrappedValue, null));
+                var wrappedValueIsNull = (System.Nullable.lifteq(Bridge.ClientTest.Batch3.BridgeIssues.Bridge795A.op_Equality, wrappedValue.$clone(), null));
 
                 Bridge.Test.NUnit.Assert.areEqual$1(false, wrappedValueIsNull, "Bridge795");
             },
@@ -19166,22 +19220,22 @@ Bridge.$N1391Result =                 r;
                 var v2 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.$ctor1(2);
                 var v3 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.$ctor1(1);
 
-                Bridge.Test.NUnit.Assert.areEqual$1(false, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_Equality(v1, v2), "Bridge795 lift == 12");
-                Bridge.Test.NUnit.Assert.areEqual$1(true, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_Equality(v1, v3), "Bridge795 lift == 13");
-                Bridge.Test.NUnit.Assert.areEqual$1(true, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_Inequality(v1, v2), "Bridge795 lift != 12");
-                Bridge.Test.NUnit.Assert.areEqual$1(false, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_Inequality(v1, v3), "Bridge795 lift != 13");
-                Bridge.Test.NUnit.Assert.areEqual$1(false, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_GreaterThanOrEqual(v1, v2), "Bridge795 lift >= 12");
-                Bridge.Test.NUnit.Assert.areEqual$1(true, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_GreaterThanOrEqual(v2, v1), "Bridge795 lift >= 21");
-                Bridge.Test.NUnit.Assert.areEqual$1(true, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_GreaterThanOrEqual(v1, v3), "Bridge795 lift >= 13");
-                Bridge.Test.NUnit.Assert.areEqual$1(false, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_GreaterThan(v1, v2), "Bridge795 lift > 12");
-                Bridge.Test.NUnit.Assert.areEqual$1(true, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_GreaterThan(v2, v1), "Bridge795 lift > 21");
-                Bridge.Test.NUnit.Assert.areEqual$1(false, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_GreaterThan(v1, v3), "Bridge795 lift > 13");
-                Bridge.Test.NUnit.Assert.areEqual$1(true, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_LessThanOrEqual(v1, v2), "Bridge795 lift <= 12");
-                Bridge.Test.NUnit.Assert.areEqual$1(false, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_LessThanOrEqual(v2, v1), "Bridge795 lift <= 21");
-                Bridge.Test.NUnit.Assert.areEqual$1(true, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_LessThanOrEqual(v1, v3), "Bridge795 lift <= 13");
-                Bridge.Test.NUnit.Assert.areEqual$1(true, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_LessThan(v1, v2), "Bridge795 lift < 12");
-                Bridge.Test.NUnit.Assert.areEqual$1(false, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_LessThan(v2, v1), "Bridge795 lift < 21");
-                Bridge.Test.NUnit.Assert.areEqual$1(false, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_LessThan(v1, v3), "Bridge795 lift < 13");
+                Bridge.Test.NUnit.Assert.areEqual$1(false, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_Equality(v1.$clone(), v2.$clone()), "Bridge795 lift == 12");
+                Bridge.Test.NUnit.Assert.areEqual$1(true, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_Equality(v1.$clone(), v3.$clone()), "Bridge795 lift == 13");
+                Bridge.Test.NUnit.Assert.areEqual$1(true, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_Inequality(v1.$clone(), v2.$clone()), "Bridge795 lift != 12");
+                Bridge.Test.NUnit.Assert.areEqual$1(false, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_Inequality(v1.$clone(), v3.$clone()), "Bridge795 lift != 13");
+                Bridge.Test.NUnit.Assert.areEqual$1(false, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_GreaterThanOrEqual(v1.$clone(), v2.$clone()), "Bridge795 lift >= 12");
+                Bridge.Test.NUnit.Assert.areEqual$1(true, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_GreaterThanOrEqual(v2.$clone(), v1.$clone()), "Bridge795 lift >= 21");
+                Bridge.Test.NUnit.Assert.areEqual$1(true, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_GreaterThanOrEqual(v1.$clone(), v3.$clone()), "Bridge795 lift >= 13");
+                Bridge.Test.NUnit.Assert.areEqual$1(false, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_GreaterThan(v1.$clone(), v2.$clone()), "Bridge795 lift > 12");
+                Bridge.Test.NUnit.Assert.areEqual$1(true, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_GreaterThan(v2.$clone(), v1.$clone()), "Bridge795 lift > 21");
+                Bridge.Test.NUnit.Assert.areEqual$1(false, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_GreaterThan(v1.$clone(), v3.$clone()), "Bridge795 lift > 13");
+                Bridge.Test.NUnit.Assert.areEqual$1(true, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_LessThanOrEqual(v1.$clone(), v2.$clone()), "Bridge795 lift <= 12");
+                Bridge.Test.NUnit.Assert.areEqual$1(false, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_LessThanOrEqual(v2.$clone(), v1.$clone()), "Bridge795 lift <= 21");
+                Bridge.Test.NUnit.Assert.areEqual$1(true, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_LessThanOrEqual(v1.$clone(), v3.$clone()), "Bridge795 lift <= 13");
+                Bridge.Test.NUnit.Assert.areEqual$1(true, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_LessThan(v1.$clone(), v2.$clone()), "Bridge795 lift < 12");
+                Bridge.Test.NUnit.Assert.areEqual$1(false, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_LessThan(v2.$clone(), v1.$clone()), "Bridge795 lift < 21");
+                Bridge.Test.NUnit.Assert.areEqual$1(false, Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_LessThan(v1.$clone(), v3.$clone()), "Bridge795 lift < 13");
             }
         }
     });
@@ -19193,7 +19247,7 @@ Bridge.$N1391Result =                 r;
                 return x.equals(Bridge.box(y.$clone(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge795A));
             },
             op_Inequality: function (x, y) {
-                return !(Bridge.ClientTest.Batch3.BridgeIssues.Bridge795A.op_Equality(x, y));
+                return !(Bridge.ClientTest.Batch3.BridgeIssues.Bridge795A.op_Equality(x.$clone(), y.$clone()));
             },
             getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge795A(); }
         },
@@ -19232,7 +19286,7 @@ Bridge.$N1391Result =                 r;
                 return x.getValue() === y.getValue();
             },
             op_Inequality: function (x, y) {
-                return !(Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_Equality(x, y));
+                return !(Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B.op_Equality(x.$clone(), y.$clone()));
             },
             op_GreaterThanOrEqual: function (x, y) {
                 return x.getValue() >= y.getValue();
