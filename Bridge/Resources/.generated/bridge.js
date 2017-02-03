@@ -2814,7 +2814,10 @@
             };
 
             if (isEntryPoint || Bridge.isFunction(prototype.$main)) {
-                Class.main = prototype.$main;
+                if (!Class.main && prototype.$main) {
+                    Class.main = prototype.$main;
+                }
+                
                 Bridge.Class.$queueEntry.push(Class);
             }
 
