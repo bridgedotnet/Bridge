@@ -555,7 +555,7 @@ namespace Bridge.Translator
                             this.Write(JS.Vars.ASYNC_STEP + " = " + step + ";");
 
                             this.WriteNewLine();
-                            this.Write(JS.Funcs.ASYNC_YIELD_BODY + "();");
+                            this.Write(JS.Vars.ENUMERATOR + "." + JS.Funcs.ASYNC_YIELD_BODY + "();");
                             this.WriteNewLine();
                             this.Write("return;");
                         }
@@ -571,7 +571,7 @@ namespace Bridge.Translator
                             {
                                 this.WriteIf();
                                 this.WriteOpenParentheses();
-                                this.Write(JS.Funcs.BRIDGE_IS + "(" + JS.Vars.ASYNC_E + ", " + exceptionType + ")");
+                                this.Write(JS.Types.Bridge.IS + "(" + JS.Vars.ASYNC_E + ", " + exceptionType + ")");
                                 this.WriteCloseParentheses();
                                 this.WriteSpace();
                             }
@@ -589,7 +589,7 @@ namespace Bridge.Translator
                             this.Write(JS.Vars.ASYNC_STEP + " = " + step + ";");
 
                             this.WriteNewLine();
-                            this.Write(JS.Funcs.ASYNC_YIELD_BODY + "();");
+                            this.Write(JS.Vars.ENUMERATOR + "." + JS.Funcs.ASYNC_YIELD_BODY + "();");
                             this.WriteNewLine();
                             this.Write("return;");
                             this.WriteNewLine();
@@ -620,7 +620,7 @@ namespace Bridge.Translator
                     this.Write(JS.Vars.ASYNC_STEP + " = " + info.FinallyStep + ";");
 
                     this.WriteNewLine();
-                    this.Write(JS.Funcs.ASYNC_YIELD_BODY + "();");
+                    this.Write(JS.Vars.ENUMERATOR + "." + JS.Funcs.ASYNC_YIELD_BODY + "();");
                     this.WriteNewLine();
                     this.Write("return;");
 
@@ -664,7 +664,7 @@ namespace Bridge.Translator
                     this.Write(JS.Vars.ASYNC_STEP + " = " + info.FinallyStep + ";");
 
                     this.WriteNewLine();
-                    this.Write(JS.Funcs.ASYNC_YIELD_BODY + "();");
+                    this.Write(JS.Vars.ENUMERATOR + "." + JS.Funcs.ASYNC_YIELD_BODY + "();");
                     this.WriteNewLine();
                     this.Write("return;");
 

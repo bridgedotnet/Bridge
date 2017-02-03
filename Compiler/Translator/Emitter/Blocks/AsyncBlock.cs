@@ -513,7 +513,7 @@ namespace Bridge.Translator
                             {
                                 this.WriteIf();
                                 this.WriteOpenParentheses();
-                                this.Write(JS.Funcs.BRIDGE_IS + "(" + JS.Vars.ASYNC_E + ", " + exceptionType + ")");
+                                this.Write(JS.Types.Bridge.IS + "(" + JS.Vars.ASYNC_E + ", " + exceptionType + ")");
                                 this.WriteCloseParentheses();
                                 this.WriteSpace();
                             }

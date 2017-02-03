@@ -368,7 +368,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     var s = $t.getCurrent();
                     result = System.String.concat(result, s);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -455,7 +455,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     var s = $t.getCurrent();
                     result = System.String.concat(result, s);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -805,7 +805,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     }
                     count = (count + 1) | 0;
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -832,7 +832,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     }
                     count = (count + 1) | 0;
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -914,7 +914,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     }
                     count = (count + 1) | 0;
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -1225,7 +1225,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     Bridge.Test.NUnit.Assert.areEqual(actualKeys[i], key);
                     i = (i + 1) | 0;
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -1280,7 +1280,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     Bridge.Test.NUnit.Assert.areEqual(actualValues[i], val);
                     i = (i + 1) | 0;
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -1816,7 +1816,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine("got " + Bridge.box(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")](), System.Int32));
             }
 
-            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
+            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
         },
         prematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks_SPI_1555: function () {
             // #1555
@@ -1829,7 +1829,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             }
             enm.System$IDisposable$dispose();
 
-            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
+            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
         },
         exceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
             var sb = new System.Text.StringBuilder();
@@ -1853,7 +1853,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine("caught exception");
             }
 
-            this.assertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
+            this.assertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
         },
         typeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface_SPI_1554: function () {
             var enm = null;
@@ -1878,7 +1878,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     var i = $t.getCurrent();
                     sb.appendLine("got " + Bridge.box(i, System.Int32));
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -1889,12 +1889,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     var i1 = $t1.getCurrent();
                     sb.appendLine("got " + Bridge.box(i1, System.Int32));
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t1, System.IDisposable)) {
                     $t1.System$IDisposable$dispose();
                 }
             }
-            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n-\nyielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
+            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n-\r\nyielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
         },
         prematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks_SPI_1555: function () {
             var $t;
@@ -1910,12 +1910,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                         break;
                     }
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
             }
-            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
+            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
         },
         exceptionInIEnumerableIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
             var sb = new System.Text.StringBuilder();
@@ -1940,7 +1940,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine("caught exception");
             }
 
-            this.assertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
+            this.assertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
         },
         enumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters: function () {
             var $t, $t1;
@@ -1953,7 +1953,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     var i = $t.getCurrent();
                     sb.appendLine(i.toString());
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -1963,12 +1963,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     var i1 = $t1.getCurrent();
                     sb.appendLine(i1.toString());
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t1, System.IDisposable)) {
                     $t1.System$IDisposable$dispose();
                 }
             }
-            this.assertEqual(sb.toString(), "3\n2\n1\n3\n2\n1\n");
+            this.assertEqual(sb.toString(), "3\r\n2\r\n1\r\n3\r\n2\r\n1\r\n");
         },
         differentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals: function () {
             var sb = new System.Text.StringBuilder();
@@ -1983,7 +1983,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine(enm2[Bridge.geti(enm2, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]().toString());
             }
 
-            this.assertEqual(sb.toString(), "0\n0\n1\n1\n2\n2\n-1\n-1\n");
+            this.assertEqual(sb.toString(), "0\r\n0\r\n1\r\n1\r\n2\r\n2\r\n-1\r\n-1\r\n");
         }
     });
 
@@ -2577,7 +2577,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     var s = $t.getCurrent();
                     result = System.String.concat(result, s);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -2721,7 +2721,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     var s = $t.getCurrent();
                     result = System.String.concat(result, s);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -3172,7 +3172,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     var s = $t.getCurrent();
                     result = System.String.concat(result, s);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -3210,7 +3210,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     var s = $t.getCurrent();
                     result = System.String.concat(result, s);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -3652,7 +3652,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     var i = $t.getCurrent();
                     l.add(i);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -3871,7 +3871,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     var i = $t.getCurrent();
                     l.add(i);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -4089,7 +4089,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     var i = $t.getCurrent();
                     l.add(i);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -4306,7 +4306,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     var i = $t.getCurrent();
                     l.add(i);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -4523,7 +4523,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     var i = $t.getCurrent();
                     l.add(i);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -4740,7 +4740,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     var i = $t.getCurrent();
                     l.add(i);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -4957,7 +4957,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     var i = $t.getCurrent();
                     l.add(i);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -5174,7 +5174,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     var i = $t.getCurrent();
                     l.add(i);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -5404,7 +5404,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     var i = $t.getCurrent();
                     l.add(i);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -10142,7 +10142,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     var i = $t.getCurrent();
                     actual.add(i);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -10924,7 +10924,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     var t = $t.getCurrent();
                     types.add(Bridge.Reflection.getTypeFullName(t));
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -10986,7 +10986,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     Bridge.Test.NUnit.Assert.true(Bridge.cast(a3[0], Bridge.ClientTest.Batch4.Reflection.AssemblyTests.A3Attribute).getX() === 15);
                     Bridge.Test.NUnit.Assert.true(Bridge.cast(a3[0], Bridge.ClientTest.Batch4.Reflection.AssemblyTests.A3Attribute).getP() === 45);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -10999,7 +10999,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     Bridge.Test.NUnit.Assert.true(Bridge.cast(a1[0], Bridge.ClientTest.Batch4.Reflection.AssemblyTests.A2Attribute).getX() === 64);
                     Bridge.Test.NUnit.Assert.true(Bridge.cast(a1[0], Bridge.ClientTest.Batch4.Reflection.AssemblyTests.A2Attribute).getP() === 23);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t1, System.IDisposable)) {
                     $t1.System$IDisposable$dispose();
                 }
@@ -13732,6 +13732,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         statics: {
             canConvert: function (T, arg) {
                 try { /// The variable `x' is assigned but its value is never used
+
+
                     var x = Bridge.cast(Bridge.unbox(arg), T);
                     return true;
                 }

@@ -332,7 +332,6 @@ namespace Bridge.Translator
             this.WriteSemiColon();
             this.WriteNewLine();
 
-
             this.WriteTry();
             this.BeginBlock();
             this.WriteWhile();
@@ -419,11 +418,11 @@ namespace Bridge.Translator
             this.WriteNewLine();
 
             this.EndBlock();
-            this.Write("finally");
+            this.WriteFinally();
             this.BeginBlock();
-            this.Write($"if (Bridge.is({iteratorName}, System.IDisposable)) ");
+            this.Write($"if ({JS.Types.Bridge.IS}({iteratorName}, {JS.Types.System.IDisposable.NAME})) ");
             this.BeginBlock();
-            this.Write($"{iteratorName}.System$IDisposable$dispose();");
+            this.Write($"{iteratorName}.{JS.Types.System.IDisposable.INTERFACE_DISPOSE}();");
             this.WriteNewLine();
             this.EndBlock();
             this.WriteNewLine();

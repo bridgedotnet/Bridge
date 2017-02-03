@@ -129,7 +129,7 @@ namespace Bridge.ClientTest.Collections.Generic
         [Test]
         public void EnumeratingIEnumeratorIteratorToEndWorks()
         {
-            //TODO expected for v1: yield iterator works with no state machine
+            // #1329 Yield support
             var sb = new StringBuilder();
             var enm = new C(sb).GetEnumerator(2);
 
@@ -144,7 +144,7 @@ namespace Bridge.ClientTest.Collections.Generic
         [Test]
         public void PrematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks()
         {
-            //TODO expected for v1: yield iterator works with no state machine
+            // #1329 Yield support
 
             var sb = new StringBuilder();
             var enm = new C(sb).GetEnumerator(5);
@@ -162,7 +162,7 @@ namespace Bridge.ClientTest.Collections.Generic
         [Test(Name = "IteratorBlock - {0} Exception thrown not caught")]
         public void ExceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks()
         {
-            //TODO expected for v1: yield iterator works with no state machine
+            // #1329 Yield support
 
             var sb = new StringBuilder();
 
@@ -194,7 +194,7 @@ namespace Bridge.ClientTest.Collections.Generic
         [Test]
         public void EnumeratingIEnumerableIteratorToEndWorks()
         {
-            //TODO expected for v1: yield iterator works with no state machine
+            // #1329 Yield support
 
             var sb = new StringBuilder();
             var enm = new C(sb).GetEnumerable(2);
@@ -218,7 +218,7 @@ namespace Bridge.ClientTest.Collections.Generic
         [Test]
         public void PrematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks()
         {
-            //TODO expected for v1: yield iterator works with no state machine
+            // #1329 Yield support
 
             var sb = new StringBuilder();
             int n = 0;
@@ -237,7 +237,7 @@ namespace Bridge.ClientTest.Collections.Generic
         [Test(Name = "IteratorBlock - {0} exception thrown not caught")]
         public void ExceptionInIEnumerableIteratorBodyExecutesFinallyBlocks()
         {
-            //TODO expected for v1: yield iterator works with no state machine
+            // #1329 Yield support
 
             var sb = new StringBuilder();
 

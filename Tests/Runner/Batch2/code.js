@@ -234,7 +234,7 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
                     var s = $t.getCurrent();
                     result = System.String.concat(result, s);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -389,7 +389,7 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
                     var s = $t.getCurrent();
                     result = System.String.concat(result, s);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }

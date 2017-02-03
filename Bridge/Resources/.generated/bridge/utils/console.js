@@ -333,7 +333,7 @@
                     var item = $t.getCurrent();
                     el.setAttribute(item.key, item.value);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -348,7 +348,7 @@
                     var item = $t.getCurrent();
                     str = System.String.concat(str, (System.String.concat(item.key.toLowerCase(), ":", item.value, ";")));
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }

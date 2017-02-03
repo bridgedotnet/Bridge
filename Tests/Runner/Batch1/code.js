@@ -134,7 +134,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var s = $t.getCurrent();
                     result = System.String.concat(result, s);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -334,7 +334,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var s = $t.getCurrent();
                     result = System.String.concat(result, s);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -3419,7 +3419,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var t = $t.getCurrent();
                     types.add(Bridge.Reflection.getTypeFullName(t));
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -3481,7 +3481,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.Test.NUnit.Assert.true(Bridge.cast(a3[0], Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A3Attribute).getX() === 15);
                     Bridge.Test.NUnit.Assert.true(Bridge.cast(a3[0], Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A3Attribute).getP() === 45);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -3494,7 +3494,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.Test.NUnit.Assert.true(Bridge.cast(a1[0], Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A2Attribute).getX() === 64);
                     Bridge.Test.NUnit.Assert.true(Bridge.cast(a1[0], Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A2Attribute).getP() === 23);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t1, System.IDisposable)) {
                     $t1.System$IDisposable$dispose();
                 }
@@ -3575,7 +3575,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.Test.NUnit.Assert.true(Bridge.cast(a3[0], Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A3Attribute).getX() === 15);
                     Bridge.Test.NUnit.Assert.true(Bridge.cast(a3[0], Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A3Attribute).getP() === 45);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -3588,7 +3588,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.Test.NUnit.Assert.true(Bridge.cast(a1[0], Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A2Attribute).getX() === 64);
                     Bridge.Test.NUnit.Assert.true(Bridge.cast(a1[0], Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A2Attribute).getP() === 23);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t1, System.IDisposable)) {
                     $t1.System$IDisposable$dispose();
                 }
@@ -5416,7 +5416,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     }
                     count = (count + 1) | 0;
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -5443,7 +5443,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     }
                     count = (count + 1) | 0;
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -5525,7 +5525,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     }
                     count = (count + 1) | 0;
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -5904,7 +5904,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.Test.NUnit.Assert.areEqual(actualKeys[i], key);
                     i = (i + 1) | 0;
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -5950,7 +5950,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.Test.NUnit.Assert.areEqual(actualValues[i], val);
                     i = (i + 1) | 0;
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -6550,7 +6550,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.NUnit.Assert.true(Bridge.is(enm, System.Collections.IEnumerator));
         },
         enumeratingIEnumeratorIteratorToEndWorks: function () {
-            //TODO expected for v1: yield iterator works with no state machine
+            // #1329 Yield support
             var sb = new System.Text.StringBuilder();
             var enm = new Bridge.ClientTest.Collections.Generic.IteratorBlockTests.C(sb).getEnumerator(2);
 
@@ -6561,7 +6561,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
         },
         prematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks: function () {
-            //TODO expected for v1: yield iterator works with no state machine
+            // #1329 Yield support
 
             var sb = new System.Text.StringBuilder();
             var enm = new Bridge.ClientTest.Collections.Generic.IteratorBlockTests.C(sb).getEnumerator(5);
@@ -6575,7 +6575,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
         },
         exceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks: function () {
-            //TODO expected for v1: yield iterator works with no state machine
+            // #1329 Yield support
 
             var sb = new System.Text.StringBuilder();
 
@@ -6600,7 +6600,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         enumeratingIEnumerableIteratorToEndWorks: function () {
             var $t, $t1;
-            //TODO expected for v1: yield iterator works with no state machine
+            // #1329 Yield support
 
             var sb = new System.Text.StringBuilder();
             var enm = new Bridge.ClientTest.Collections.Generic.IteratorBlockTests.C(sb).getEnumerable(2);
@@ -6611,7 +6611,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var i = $t.getCurrent();
                     sb.appendLine("got " + Bridge.box(i, System.Int32));
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -6624,7 +6624,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var i1 = $t1.getCurrent();
                     sb.appendLine("got " + Bridge.box(i1, System.Int32));
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t1, System.IDisposable)) {
                     $t1.System$IDisposable$dispose();
                 }
@@ -6634,7 +6634,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         prematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks: function () {
             var $t;
-            //TODO expected for v1: yield iterator works with no state machine
+            // #1329 Yield support
 
             var sb = new System.Text.StringBuilder();
             var n = 0;
@@ -6647,7 +6647,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         break;
                     }
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -6655,7 +6655,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
         },
         exceptionInIEnumerableIteratorBodyExecutesFinallyBlocks: function () {
-            //TODO expected for v1: yield iterator works with no state machine
+            // #1329 Yield support
 
             var sb = new System.Text.StringBuilder();
 
@@ -6687,7 +6687,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var i = $t.getCurrent();
                     sb.appendLine(i.toString());
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -6697,7 +6697,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var i1 = $t1.getCurrent();
                     sb.appendLine(i1.toString());
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t1, System.IDisposable)) {
                     $t1.System$IDisposable$dispose();
                 }
@@ -7257,7 +7257,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var s = $t.getCurrent();
                     result = System.String.concat(result, s);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -7482,7 +7482,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var s = $t.getCurrent();
                     result = System.String.concat(result, s);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -7990,7 +7990,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var s = $t.getCurrent();
                     result = System.String.concat(result, s);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -8163,7 +8163,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var s = $t.getCurrent();
                     result = System.String.concat(result, s);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -8644,7 +8644,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var i = $t.getCurrent();
                     l.add(i);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -8877,7 +8877,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var i = $t.getCurrent();
                     l.add(i);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -9110,7 +9110,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var i = $t.getCurrent();
                     l.add(i);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -9343,7 +9343,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var i = $t.getCurrent();
                     l.add(i);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -9576,7 +9576,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var i = $t.getCurrent();
                     l.add(i);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -9809,7 +9809,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var i = $t.getCurrent();
                     l.add(i);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -10042,7 +10042,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var i = $t.getCurrent();
                     l.add(i);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -10275,7 +10275,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var i = $t.getCurrent();
                     l.add(i);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -10520,7 +10520,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var i = $t.getCurrent();
                     l.add(i);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -10938,7 +10938,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         System.String.insert(1, builder, addingStr);
                         Bridge.ClientTest.ConvertTests.ConvertFromBase64Tests.verifyInvalidInput(builder);
                     }
-                }finally{
+                }finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -14799,7 +14799,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                     Bridge.Test.NUnit.Assert.areEqual(result[Bridge.identity(i, (i = (i + 1) | 0))], System.String.format(formatString, Bridge.box(dblValue, System.Double, $box_.System.Double.toString)));
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -20182,7 +20182,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var i = $t.getCurrent();
                     actual.add(i);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -28528,7 +28528,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                             Bridge.ClientTest.SimpleTypes.StringTests.test(0, 2, sc, threeIs, expected, Bridge.identity(expectedIndex, (expectedIndex = (expectedIndex + 1) | 0)));
                             Bridge.ClientTest.SimpleTypes.StringTests.test(1, 2, sc, threeIs, expected, Bridge.identity(expectedIndex, (expectedIndex = (expectedIndex + 1) | 0)));
                         }
-                    }finally{
+                    }finally {
                         if (Bridge.is($t, System.IDisposable)) {
                             $t.System$IDisposable$dispose();
                         }
@@ -28576,7 +28576,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                         i = (i + 1) | 0;
                     }
-                }finally{
+                }finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -36805,7 +36805,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     this.capturesAreEqual(captures.get(i), capture, "Captures[" + Bridge.box(i, System.Int32) + "]");
                     i = (i + 1) | 0;
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -37085,7 +37085,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         }
                     }).call(this);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -37198,7 +37198,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.Test.NUnit.Assert.areEqual$1(expected.getItem(i), group.getValue(), "Group[" + Bridge.box(i, System.Int32) + "].Value is correct");
                     i = (i + 1) | 0;
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -37375,7 +37375,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     this.groupsAreEqual(groups.get(i), group, "Groups[" + Bridge.box(i, System.Int32) + "]");
                     i = (i + 1) | 0;
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -37512,7 +37512,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     this.matchesAreEqual(expected[i], match, "Matches[" + Bridge.box(i, System.Int32) + "]");
                     i = (i + 1) | 0;
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -37679,7 +37679,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var result = match.result(replacement);
                     actual.add(result);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -37858,7 +37858,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var match = Bridge.cast($t.getCurrent(), System.Text.RegularExpressions.Match);
                     actual1.add(match.getValue());
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -37872,7 +37872,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var match1 = Bridge.cast($t1.getCurrent(), System.Text.RegularExpressions.Match);
                     actual2.add(match1.getValue());
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t1, System.IDisposable)) {
                     $t1.System$IDisposable$dispose();
                 }
@@ -37902,7 +37902,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         Bridge.Test.NUnit.Assert.false$1(true, "Char must be escapable: " + String.fromCharCode(Bridge.box(ch, System.Char, $box_.System.Char.toString)));
                     }
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -37921,7 +37921,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         }, "Char must not be escapable: " + String.fromCharCode(Bridge.box(ch, System.Char, $box_.System.Char.toString)));
                     }).call(this);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -37950,7 +37950,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     actualMatchValues.add(match.getValue());
                     actualMatchIndexes.add(match.getIndex());
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -37982,7 +37982,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     actualMatchValues.add(m.getValue());
                     actualMatchIndexes.add(m.getIndex());
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -38008,7 +38008,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     actualMatchValues.add(match.getValue());
                     actualMatchIndexes.add(match.getIndex());
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -38039,7 +38039,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     actualMatchValues1.add(match.getValue());
                     actualMatchIndexes1.add(match.getIndex());
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -38051,7 +38051,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     actualMatchValues2.add(match1.getValue());
                     actualMatchIndexes2.add(match1.getIndex());
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t1, System.IDisposable)) {
                     $t1.System$IDisposable$dispose();
                 }
@@ -38085,7 +38085,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     actualMatchValues1.add(match.getValue());
                     actualMatchIndexes1.add(match.getIndex());
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -38097,7 +38097,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     actualMatchValues2.add(match1.getValue());
                     actualMatchIndexes2.add(match1.getIndex());
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t1, System.IDisposable)) {
                     $t1.System$IDisposable$dispose();
                 }
@@ -39062,7 +39062,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                             var capture = Bridge.cast($t.getCurrent(), System.Text.RegularExpressions.Capture);
                             actual = System.String.concat(actual, capture.getValue());
                         }
-                    }finally{
+                    }finally {
                         if (Bridge.is($t, System.IDisposable)) {
                             $t.System$IDisposable$dispose();
                         }
@@ -39099,7 +39099,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                             var capture = Bridge.cast($t.getCurrent(), System.Text.RegularExpressions.Capture);
                             actual = System.String.concat(actual, capture.getValue());
                         }
-                    }finally{
+                    }finally {
                         if (Bridge.is($t, System.IDisposable)) {
                             $t.System$IDisposable$dispose();
                         }
@@ -39141,7 +39141,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                             var capture = Bridge.cast($t.getCurrent(), System.Text.RegularExpressions.Capture);
                             actual = System.String.concat(actual, capture.getValue());
                         }
-                    }finally{
+                    }finally {
                         if (Bridge.is($t, System.IDisposable)) {
                             $t.System$IDisposable$dispose();
                         }
@@ -39190,7 +39190,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                 var capture = Bridge.cast($t1.getCurrent(), System.Text.RegularExpressions.Capture);
                                 actual = System.String.concat(actual, capture.getValue());
                             }
-                        }finally{
+                        }finally {
                             if (Bridge.is($t1, System.IDisposable)) {
                                 $t1.System$IDisposable$dispose();
                             }
@@ -39198,7 +39198,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         actuals.add(actual);
                     }
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -39230,7 +39230,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                             var capture = Bridge.cast($t.getCurrent(), System.Text.RegularExpressions.Capture);
                             actual = System.String.concat(actual, capture.getValue());
                         }
-                    }finally{
+                    }finally {
                         if (Bridge.is($t, System.IDisposable)) {
                             $t.System$IDisposable$dispose();
                         }
@@ -39274,7 +39274,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                             var capture = Bridge.cast($t.getCurrent(), System.Text.RegularExpressions.Capture);
                             actual = System.String.concat(actual, capture.getValue());
                         }
-                    }finally{
+                    }finally {
                         if (Bridge.is($t, System.IDisposable)) {
                             $t.System$IDisposable$dispose();
                         }
@@ -39312,7 +39312,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                             var capture = Bridge.cast($t.getCurrent(), System.Text.RegularExpressions.Capture);
                             actual = System.String.concat(actual, capture.getValue());
                         }
-                    }finally{
+                    }finally {
                         if (Bridge.is($t, System.IDisposable)) {
                             $t.System$IDisposable$dispose();
                         }
@@ -39348,7 +39348,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var match = System.Text.RegularExpressions.Regex.match(input, pattern);
                     actuals.add(match.getSuccess());
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -39373,7 +39373,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var match = System.Text.RegularExpressions.Regex.match(input, pattern);
                     actuals.add(match.getSuccess());
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -39410,7 +39410,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var match = Bridge.cast($t.getCurrent(), System.Text.RegularExpressions.Match);
                     actuals.add(System.String.format("{0}_{1}", match.getValue(), Bridge.box(match.getIndex(), System.Int32)));
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
@@ -39431,7 +39431,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var match = Bridge.cast($t.getCurrent(), System.Text.RegularExpressions.Match);
                     actuals.add(System.String.format("{0}_{1}", match.getValue(), Bridge.box(match.getIndex(), System.Int32)));
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }

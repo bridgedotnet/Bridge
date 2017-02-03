@@ -47,7 +47,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
                     var value = $t.getCurrent();
                     this.add(value.key, value.value);
                 }
-            }finally{
+            }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
