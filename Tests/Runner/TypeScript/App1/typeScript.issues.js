@@ -42,11 +42,16 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
             TypeScript.Issues.N2031DictionaryMap$2(T1,T2).ctor.call(this);
             var $t;
             $t = Bridge.getEnumerator(initialValues);
-            while ($t.moveNext()) {
-                var value = $t.getCurrent();
-                this.add(value.key, value.value);
-            }
-    },
+            try {
+                while ($t.moveNext()) {
+                    var value = $t.getCurrent();
+                    this.add(value.key, value.value);
+                }
+            }finally {
+                if (Bridge.is($t, System.IDisposable)) {
+                    $t.System$IDisposable$dispose();
+                }
+            }},
     add: function (t1, t2) {
         this._forward.add(t1, t2);
         this._reverse.add(t2, t1);

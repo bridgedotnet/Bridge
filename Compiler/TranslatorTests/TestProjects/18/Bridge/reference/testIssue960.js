@@ -40,3 +40,11 @@
             this.setName(name);
         }
     });
+
+    var $box_ = {};
+
+    Bridge.ns("Boolean", $box_);
+
+    Bridge.apply($box_.Boolean, {
+        toString: function(obj) {return System.Boolean.toString(obj);}
+    });

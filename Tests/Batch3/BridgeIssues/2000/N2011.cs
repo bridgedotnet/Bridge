@@ -1,5 +1,5 @@
 ﻿using System;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -19,20 +19,25 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                     return _missing;
                 }
             }
+
             private static Optional<T> _missing = new Optional<T>();
+
             // implementations below of IEquatable are not real, and only exist to allow IEquatable to be applied.
             public static implicit operator Optional<T>(T value)
             {
                 return new Optional<T>();
             }
+
             public static bool operator ==(Optional<T> x, Optional<T> y)
             {
                 return x.Equals(y);
             }
+
             public static bool operator !=(Optional<T> x, Optional<T> y)
             {
                 return !(x == y);
             }
+
             public bool Equals(Optional<T> other)
             {
                 return false;
@@ -45,6 +50,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             return 1;
         }
+
         public static int OverloadedMethod<T>(Func<T, T> valueUpdater)
         {
             return 2;

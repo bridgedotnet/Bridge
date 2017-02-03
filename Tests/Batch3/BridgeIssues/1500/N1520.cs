@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -39,7 +39,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.True(19 == item.value, "19");
         }
 
-        class CustomList
+        private class CustomList
         {
             public List<int> ranges = new List<int>();
             public decimal value = 7;

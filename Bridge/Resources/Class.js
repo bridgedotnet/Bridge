@@ -369,10 +369,13 @@
             }
 
             if (Class.$kind === "enum") {
+                if (!Class.prototype.$utype) {
+                    Class.prototype.$utype = System.Int32;
+                }
                 Class.$is = function (instance) {
                     var utype = Class.prototype.$utype;
 
-                    if (utype === System.String) {
+                    if (utype === String) {
                         return typeof (instance) == "string";
                     }
 
@@ -386,7 +389,7 @@
                 Class.getDefaultValue = function () {
                     var utype = Class.prototype.$utype;
 
-                    if (utype === System.String) {
+                    if (utype === String) {
                         return null;
                     }
 

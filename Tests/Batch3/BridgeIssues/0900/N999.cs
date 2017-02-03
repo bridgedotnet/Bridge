@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 using System;
 using System.Collections.Generic;
@@ -66,13 +66,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test(ExpectedCount = 5)]
         public static void TestNestedLambdasToLiftingInForeach()
         {
-            var one = new List<int>(new []{1}).Select(x => x);
+            var one = new List<int>(new[] { 1 }).Select(x => x);
 
             int sum = 0;
 
             one.ForEach(el =>
             {
-                var list = new List<int>(new [] {3,5}).Select(x => x);
+                var list = new List<int>(new[] { 3, 5 }).Select(x => x);
 
                 list.ForEach(el2 =>
                 {

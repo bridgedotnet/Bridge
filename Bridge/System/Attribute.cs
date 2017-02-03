@@ -5,6 +5,7 @@ namespace System
 {
     [External]
     [Name("System.Attribute")]
+    [AttributeUsageAttribute(AttributeTargets.All, Inherited = true, AllowMultiple = false)]
     public class Attribute : IBridgeClass
     {
         protected extern Attribute();

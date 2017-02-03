@@ -1,5 +1,5 @@
 ﻿using System;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -7,7 +7,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#2114 - {0}")]
     public class Bridge2114
     {
-        class TestClass1
+        private class TestClass1
         {
             [Name("0a")]
             public int TestField;
@@ -31,6 +31,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 #pragma warning disable 169
 #pragma warning disable 649
             public int TestField4;
+
 #pragma warning restore 649
 #pragma warning restore 169
 
@@ -58,7 +59,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 v = TestClass1.TespProp1;
                 v = TespProp1;
 
-
                 TestField2 = value;
                 this.TestField2 = value;
                 v = (int)this.TestField2;
@@ -68,7 +68,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
-        class TestClass2
+        private class TestClass2
         {
             [Template("{this}[\"0a\"]")]
             public int TestField;
@@ -77,6 +77,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             public int TestField2;
 
             private int f;
+
             public int testMethod()
             {
                 if (Arguments.Length > 0)

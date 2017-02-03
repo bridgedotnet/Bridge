@@ -1,5 +1,5 @@
 // #1631
-//using Bridge.Test;
+//using Bridge.Test.NUnit;
 //using System;
 //using Bridge;
 

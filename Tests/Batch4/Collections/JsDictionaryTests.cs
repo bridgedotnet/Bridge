@@ -1,5 +1,5 @@
 // Not C# API
-//using Bridge.Test;
+//using Bridge.Test.NUnit;
 //using System.Collections;
 //using System.Collections.Generic;
 

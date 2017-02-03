@@ -15,6 +15,51 @@
             return name2;
         },
 
+        box: function (v, T, toStr, hashCode) {
+            if (v && v.$boxed) {
+                return v;
+            }
+
+            if (v == null) {
+                return v;
+            }
+
+            return {
+                $boxed: true,
+                fn: {
+                    toString: toStr,
+                    getHashCode: hashCode
+                },
+                v: v,
+                type: T,
+                constructor: T,
+                getHashCode: function() {
+                    return this.fn.getHashCode ? this.fn.getHashCode(this.v) : Bridge.getHashCode(this.v);
+                },
+                equals: function (o) {
+                    var eq = this.equals;
+                    this.equals = null;
+                    var r = Bridge.equals(this.v, o);
+                    this.equals = eq;
+                    return r;
+                },
+                valueOf: function() {
+                    return this.v;
+                },
+                toString: function () {
+                    return this.fn.toString ? this.fn.toString(this.v) : this.v.toString();
+                }
+            };
+        },
+
+        unbox: function(o) {
+            if (o && o.$boxed) {
+                return o.v;
+            }
+
+            return o;
+        },
+
         getInterface: function (name) {
             var type = Bridge.unroll(name);
 
@@ -107,39 +152,77 @@
         },
 
         property: function (scope, name, v, statics) {
+            var getName,
+                setName,
+                cfg = null;
+
+            if (v && Bridge.isDefined(v.value) && (v.setter || v.getter)) {
+                getName = v.getter;
+                setName = v.setter;
+                cfg = v;
+                v = v.value;
+            }
+
             scope[name] = v;
 
             var rs = name.charAt(0) === "$",
                 cap = rs ? name.slice(1) : name,
-                getName = "get" + cap,
-                setName = "set" + cap,
                 lastSep = name.lastIndexOf("$"),
                 endsNum = lastSep > 0 && ((name.length - lastSep - 1) > 0) && !isNaN(parseInt(name.substr(lastSep + 1)));
+
+            if (!cfg || !cfg.getter) {
+                getName = "get" + cap;
+            }
+
+            if (!cfg || !cfg.setter) {
+                setName = "set" + cap;
+            }
 
             if (endsNum) {
                 lastSep = name.substring(0, lastSep - 1).lastIndexOf("$");
             }
 
             if (lastSep > 0 && lastSep !== (name.length - 1)) {
-                getName = name.substring(0, lastSep) + "get" + name.substr(lastSep + 1);
-                setName = name.substring(0, lastSep) + "set" + name.substr(lastSep + 1);
+                if (!cfg || !cfg.getter) {
+                    getName = name.substring(0, lastSep) + "get" + name.substr(lastSep + 1);
+                }
+
+                if (!cfg || !cfg.setter) {
+                    setName = name.substring(0, lastSep) + "set" + name.substr(lastSep + 1);
+                }
             }
 
-            scope[getName] = (function (name, scope, statics) {
-                return statics ? function () {
-                    return scope[name];
-                } : function () {
-                    return this[name];
-                };
-            })(name, scope, statics);
+            if (getName === setName) {
+                scope[getName] = (function (name, scope, statics) {
+                    return statics ? function (value) {
+                        if (arguments.length === 0) {
+                            return scope[name];
+                        }
+                        scope[name] = value;
+                    } : function (value) {
+                        if (arguments.length === 0) {
+                            return this[name];
+                        }
+                        this[name] = value;
+                    };
+                })(name, scope, statics);
+            } else {
+                scope[getName] = (function (name, scope, statics) {
+                    return statics ? function () {
+                        return scope[name];
+                    } : function () {
+                        return this[name];
+                    };
+                })(name, scope, statics);
 
-            scope[setName] = (function (name, scope, statics) {
-                return statics ? function (value) {
-                    scope[name] = value;
-                } : function (value) {
-                    this[name] = value;
-                };
-            })(name, scope, statics);
+                scope[setName] = (function (name, scope, statics) {
+                    return statics ? function (value) {
+                        scope[name] = value;
+                    } : function (value) {
+                        this[name] = value;
+                    };
+                })(name, scope, statics);
+            }
         },
 
         event: function (scope, name, v, statics) {
@@ -369,6 +452,8 @@
             //     for value types it returns deterministic values (f.e. for int 3 it returns 3)
             //     for reference types it returns random value
 
+            value = Bridge.unbox(value);
+
             if (Bridge.isEmpty(value, true)) {
                 if (safe) {
                     return 0;
@@ -479,7 +564,7 @@
         },
 
         hasValue: function (obj) {
-            return obj != null;
+            return Bridge.unbox(obj) != null;
         },
 
         hasValue$1: function () {
@@ -490,7 +575,7 @@
             var i = 0;
 
             for (i; i < arguments.length; i++) {
-                if (arguments[i] == null) {
+                if (Bridge.unbox(arguments[i]) == null) {
                     return false;
                 }
             }
@@ -501,6 +586,25 @@
         is: function (obj, type, ignoreFn, allowNull) {
             if (obj == null) {
                 return !!allowNull;
+            }
+
+            if (obj.$boxed) {
+                if (obj.type.$kind === "enum" && (obj.type.prototype.$utype === type || type === System.Enum)) {
+                    return true;
+                }
+                else if (type.$kind !== "interface" && !type.$nullable) {
+                    return obj.type === type || type === Object;
+                }
+
+                if (ignoreFn !== true && type.$is) {
+                    return type.$is(Bridge.unbox(obj));
+                }
+
+                if (Bridge.Reflection.isAssignableFrom(type, obj.type)) {
+                    return true;
+                }
+
+                obj = Bridge.unbox(obj);
             }
 
             var ctor = obj.constructor;
@@ -580,7 +684,10 @@
         },
 
         as: function (obj, type, allowNull) {
-            return Bridge.is(obj, type, false, allowNull) ? obj : null;
+            if (Bridge.is(obj, type, false, allowNull)) {
+                return obj.$boxed && type !== Object ? obj.v : obj;
+            }
+            return null;
         },
 
         cast: function (obj, type, allowNull) {
@@ -592,6 +699,10 @@
 
             if (result === null) {
                 throw new System.InvalidCastException("Unable to cast type " + (obj ? Bridge.getTypeName(obj) : "'null'") + " to type " + Bridge.getTypeName(type));
+            }
+
+            if (obj.$boxed && type !== Object) {
+                return obj.v;
             }
 
             return result;
@@ -707,7 +818,21 @@
                             toValue = to[key];
                             Bridge.merge(toValue, value);
                         } else {
-                            to[key] = Bridge.merge(to[key], value);
+                            var isNumber = Bridge.isNumber(from);
+
+                            if (to[key] instanceof System.Decimal && isNumber) {
+                                return new System.Decimal(from);
+                            }
+
+                            if (to[key] instanceof System.Int64 && isNumber) {
+                                return new System.Int64(from);
+                            }
+
+                            if (to[key] instanceof System.UInt64 && isNumber) {
+                                return new System.UInt64(from);
+                            }
+
+                            to[key] = value;
                         }
                     }
                 }
@@ -1056,6 +1181,10 @@
         },
 
         getType: function (instance, T) {
+            if (instance && instance.$boxed) {
+                return instance.type;
+            }
+
             if (instance == null) {
                 throw new System.NullReferenceException("instance is null");
             }
@@ -1236,9 +1365,12 @@
                     fn = Bridge.fn.makeFn(function () {
                         Bridge.caller.unshift(this);
 
-                        var result = method.apply(obj, arguments);
-
-                        Bridge.caller.shift(this);
+                        var result = null;
+                        try {
+                            result = method.apply(obj, arguments);
+                        } finally {
+                            Bridge.caller.shift(this);
+                        }
 
                         return result;
                     }, method.length);
@@ -1262,9 +1394,12 @@
                         }
                         Bridge.caller.unshift(this);
 
-                        var result = method.apply(obj, callArgs);
-
-                        Bridge.caller.shift(this);
+                        var result = null;
+                        try {
+                            result = method.apply(obj, callArgs);
+                        } finally {
+                            Bridge.caller.shift(this);
+                        }
 
                         return result;
                     }, method.length);
@@ -1290,9 +1425,12 @@
 
                     Bridge.caller.unshift(this);
 
-                    var result = method.apply(obj, callArgs);
-
-                    Bridge.caller.shift(this);
+                    var result = null;
+                    try {
+                        result = method.apply(obj, callArgs);
+                    } finally {
+                        Bridge.caller.shift(this);
+                    }
 
                     return result;
                 }, method.length);

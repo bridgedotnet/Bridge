@@ -618,7 +618,7 @@ namespace Bridge.Translator
                             var rr = this.Emitter.Resolver.ResolveNode(node, this.Emitter);
                             var type = rr.Type;
                             var mrr = rr as MemberResolveResult;
-                            if (mrr != null && mrr.Member.ReturnType.Kind != TypeKind.Enum)
+                            if (mrr != null && mrr.Member.ReturnType.Kind != TypeKind.Enum && mrr.TargetResult != null)
                             {
                                 type = mrr.TargetResult.Type;
                             }
@@ -636,7 +636,7 @@ namespace Bridge.Translator
 
                                 if (thisValue != null)
                                 {
-                                    if (type.Kind == TypeKind.TypeParameter)
+                                    if (type.Kind == TypeKind.TypeParameter && !Helpers.IsIgnoreGeneric(((ITypeParameter)type).Owner, this.Emitter))
                                     {
                                         thisValue = thisValue + ", " + type.Name;
                                     }
@@ -1108,7 +1108,7 @@ namespace Bridge.Translator
                     s = "null";
                 }
 
-                if (type.Kind == TypeKind.TypeParameter)
+                if (type.Kind == TypeKind.TypeParameter && !Helpers.IsIgnoreGeneric(((ITypeParameter)type).Owner, this.Emitter))
                 {
                     s = s + ", " + type.Name;
                 }

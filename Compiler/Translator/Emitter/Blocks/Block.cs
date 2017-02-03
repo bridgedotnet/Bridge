@@ -272,7 +272,6 @@ namespace Bridge.Translator
             if (this.IsMethodBlock && YieldBlock.HasYield(this.BlockStatement))
             {
                 this.IsYield = true;
-                YieldBlock.EmitYield(this, this.ReturnType);
             }
 
             if (this.IsMethodBlock)
@@ -302,11 +301,6 @@ namespace Bridge.Translator
 
         public void EndEmitBlock()
         {
-            if (this.IsYield)
-            {
-                YieldBlock.EmitYieldReturn(this, this.ReturnType);
-            }
-
             if (this.IsMethodBlock)
             {
                 this.Emitter.ReturnType = this.OldReturnType;

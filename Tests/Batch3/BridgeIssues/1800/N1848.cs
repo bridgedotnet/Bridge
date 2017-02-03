@@ -1,5 +1,5 @@
 using System;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -11,6 +11,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public interface ITest
         {
             int GetNewId();
+
             [FieldProperty]
             string Name { get; }
         }
@@ -20,6 +21,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public interface ITest2
         {
             int GetNewId();
+
             [FieldProperty]
             string Name { get; }
         }
@@ -37,7 +39,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             };*/
 
             var initialiser = Script.Write<ITest>("Bridge.Bridge1848_ITest");
-            Assert.AreEqual(123,initialiser.GetNewId());
+            Assert.AreEqual(123, initialiser.GetNewId());
             Assert.AreEqual("editor", initialiser.Name);
 
             var initialiser2 = Script.Write<ITest2>("Bridge.Bridge1848_ITest2");

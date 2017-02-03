@@ -66,6 +66,7 @@
         "Resources/Convert.js",
         "Resources/ClientWebSocket.js",
         "Resources/Uri.js",
+        "Resources/Generator.js",
         "Resources/linq.js",
         "Resources/.generated/system/guid.js",
         "Resources/Text/RegularExpressions/Regex.js",
