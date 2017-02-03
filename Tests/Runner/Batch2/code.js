@@ -275,7 +275,7 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
         foreachWithArrayCallbackWorks: function () {
             var result = "";
             Bridge.Linq.Enumerable.from(System.Array.init(["a", "b", "c"], String)).forEach(function (s, i) {
-                    result = System.String.concat(result, (System.String.concat(s, Bridge.box(i, System.Int32))));
+                    result = System.String.concat(result, (System.String.concat(s, i)));
                 });
             Bridge.Test.NUnit.Assert.areEqual("a0b1c2", result);
         },

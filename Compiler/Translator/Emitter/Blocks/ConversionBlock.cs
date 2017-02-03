@@ -316,7 +316,17 @@ namespace Bridge.Translator
 
                 }
 
-                if (conversion.IsBoxingConversion && !isArgument && expectedType.Kind != TypeKind.Interface)
+                var isStringConcat = false;
+                var binaryOperatorExpression = expression.Parent as BinaryOperatorExpression;
+                if (binaryOperatorExpression != null)
+                {
+                    var resolveOperator = block.Emitter.Resolver.ResolveNode(binaryOperatorExpression, block.Emitter);
+                    var expectedParentType = block.Emitter.Resolver.Resolver.GetExpectedType(binaryOperatorExpression);
+                    var resultIsString = expectedParentType.IsKnownType(KnownTypeCode.String) || resolveOperator.Type.IsKnownType(KnownTypeCode.String);
+                    isStringConcat = resultIsString && binaryOperatorExpression.Operator == BinaryOperatorType.Add;
+                }
+
+                if (conversion.IsBoxingConversion && !isArgument && expectedType.Kind != TypeKind.Interface && !isStringConcat)
                 {
                     block.Write("Bridge.box(");
                     block.AfterOutput2 += ", " + ConversionBlock.GetBoxedType(rr.Type, block.Emitter);
