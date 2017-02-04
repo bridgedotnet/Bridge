@@ -582,10 +582,6 @@ namespace Bridge.Translator
 
         public virtual void CheckEvents(TypeDefinition type, ITranslator translator)
         {
-            if (type.HasEvents && this.IsObjectLiteral(type))
-            {
-                TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EVENTS, type);
-            }
         }
 
         public virtual void CheckMethods(TypeDefinition type, ITranslator translator)

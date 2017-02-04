@@ -12,14 +12,37 @@ namespace Bridge.Translator.Tests.Helpers
 {
     class TestAssemblyHelper
     {
+        /// <summary>
+        /// Contains classes names contained in Bridge.Translator.Tests.Assembly.dll with types to be tested
+        /// </summary>
         public class TestClassNames
         {
             private const string PREFIX = "Bridge.Translator.Tests.Assembly.";
 
-            /// <summary>
-            /// ObjectLiteral tests
-            /// </summary>
-            public const string ISSUES_N2276_SHOULD_FAIL = PREFIX + "Issues.N2276.ShouldFail";
+            public class Issues
+            {
+                private const string PREFIX = TestClassNames.PREFIX + "Issues.";
+
+                public class N2276
+                {
+                    private const string PREFIX = Issues.PREFIX + "N2276.";
+
+                    public class ShouldFail
+                    {
+                        private const string PREFIX = N2276.PREFIX + "ShouldFail.";
+
+                        public const string NO_VIRTUAL_METHODS = PREFIX + "NoVirtualMethods";
+                        public const string PLAIN_NO_CREATE_MODE_CUSTOM_CONSTRUCTOR = PREFIX + "PlainNoCreateModeCustomConstructor";
+                        public const string PLAIN_CUSTOM_CONSTRUCTOR = PREFIX + "PlainCustomConstructor";
+                        public const string PLAIN_INHERITANCE = PREFIX + "PlainInheritance";
+                        public const string CONSTRUCTOR_INHERITANCE = PREFIX + "ConstructorInheritance";
+                        public const string INTERFACE_NO_OVERLOAD_METHODS = PREFIX + "InterfaceNoOverloadMethods";
+                        public const string INTERFACE_NO_EVENTS = PREFIX + "InterfaceNoEvents";
+                        public const string INTERFACE_NO_EXPLICIT_IMPLEMENTATION = PREFIX + "InterfaceNoExplicitImplementation";
+                        public const string INTERFACE_INHERITANCE = PREFIX + "InterfaceInheritance";
+                    }
+                }
+            }
         }
     }
 }
