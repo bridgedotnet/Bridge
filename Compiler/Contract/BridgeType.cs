@@ -419,9 +419,18 @@ namespace Bridge.Contract
                 name = BridgeTypes.AddModule(name, bridgeType, out isCustomName);
             }
 
-            if (!hasTypeDef && !isCustomName && type.TypeArguments.Count > 0)
+            var tDef = type.GetDefinition();
+            var skipSuffix = tDef != null && tDef.ParentAssembly.AssemblyName != CS.NS.ROOT && emitter.Validator.IsExternalType(tDef) && Helpers.IsIgnoreGeneric(tDef);
+
+            if (!hasTypeDef && !isCustomName && type.TypeArguments.Count > 0 && !skipSuffix)
             {
                 name += Helpers.PrefixDollar(type.TypeArguments.Count);
+            }
+
+            var genericSuffix = "$" + type.TypeArguments.Count;
+            if (skipSuffix && !isCustomName && type.TypeArguments.Count > 0 && name.EndsWith(genericSuffix))
+            {
+                name = name.Substring(0, name.Length - genericSuffix.Length);
             }
 
             if (isAlias)

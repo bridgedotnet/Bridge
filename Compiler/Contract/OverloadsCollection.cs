@@ -1084,7 +1084,21 @@ namespace Bridge.Contract
                 }
             }
 
-            if (attr != null || (definition.DeclaringTypeDefinition != null && definition.DeclaringTypeDefinition.Kind != TypeKind.Interface && this.Emitter.Validator.IsExternalType(definition.DeclaringTypeDefinition)))
+            bool skipSuffix = false;
+            if (definition.DeclaringTypeDefinition != null &&
+                this.Emitter.Validator.IsExternalType(definition.DeclaringTypeDefinition))
+            {
+                if (definition.DeclaringTypeDefinition.Kind == TypeKind.Interface)
+                {
+                    skipSuffix = definition.DeclaringTypeDefinition.ParentAssembly.AssemblyName != CS.NS.ROOT;
+                }
+                else
+                {
+                    skipSuffix = true;
+                }
+            }
+
+            if (attr != null || skipSuffix)
             {
                 return prefix != null ? prefix + name : name;
             }
