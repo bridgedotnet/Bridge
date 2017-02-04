@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bridge.Translator.Constants
 {
-    internal class Messages
+    public class Messages
     {
         public class Exceptions
         {
