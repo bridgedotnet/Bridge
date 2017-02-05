@@ -326,7 +326,10 @@ namespace Bridge.Translator
                     isStringConcat = resultIsString && binaryOperatorExpression.Operator == BinaryOperatorType.Add;
                 }
 
-                if (conversion.IsBoxingConversion && !isArgument && expectedType.Kind != TypeKind.Interface && !isStringConcat)
+                bool needBox = ConversionBlock.IsBoxable(rr.Type)
+                    || rr.Type.IsKnownType(KnownTypeCode.NullableOfT) && ConversionBlock.IsBoxable(NullableType.GetUnderlyingType(rr.Type));
+
+                if (conversion.IsBoxingConversion && needBox && !isArgument && !isStringConcat)
                 {
                     block.Write("Bridge.box(");
                     block.AfterOutput2 += ", " + ConversionBlock.GetBoxedType(rr.Type, block.Emitter);
@@ -523,6 +526,23 @@ namespace Bridge.Translator
 
             block.AfterOutput = block.AfterOutput + afterUserDefined;
             return level;
+        }
+
+        private static bool IsBoxable(IType type)
+        {
+            return type.Kind == TypeKind.Enum
+                   || type.IsKnownType(KnownTypeCode.Enum)
+                   || type.IsKnownType(KnownTypeCode.Boolean)
+                   || type.IsKnownType(KnownTypeCode.DateTime)
+                   || type.IsKnownType(KnownTypeCode.Char)
+                   || type.IsKnownType(KnownTypeCode.Byte)
+                   || type.IsKnownType(KnownTypeCode.Double)
+                   || type.IsKnownType(KnownTypeCode.Single)
+                   || type.IsKnownType(KnownTypeCode.Int16)
+                   || type.IsKnownType(KnownTypeCode.Int32)
+                   || type.IsKnownType(KnownTypeCode.SByte)
+                   || type.IsKnownType(KnownTypeCode.UInt16)
+                   || type.IsKnownType(KnownTypeCode.UInt32);
         }
 
         private static int CheckUserDefinedConversion(ConversionBlock block, Expression expression, Conversion conversion, int level, ResolveResult rr, IType expectedType)
