@@ -3,7 +3,7 @@ using Bridge;
 namespace System.Linq.Expressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     [Cast("{this}.ntype === 51")]
     public sealed class DefaultExpression : Expression
     {

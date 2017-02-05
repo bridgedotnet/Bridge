@@ -578,11 +578,11 @@ namespace Bridge.ClientTest.Reflection
             Action a = () => { };
             Assert.AreEqual(new C1().GetType().FullName, "Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C1");
             Assert.AreEqual(new C2<int>().GetType().FullName, "Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C2$1[[System.Int32, mscorlib]]");
-            Assert.AreEqual(new C2<string>().GetType().FullName, "Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C2$1[[String]]");
+            Assert.AreEqual(new C2<string>().GetType().FullName, "Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C2$1[[System.String, mscorlib]]");
             Assert.AreEqual((1).GetType().FullName, "System.Int32");
-            Assert.AreEqual("X".GetType().FullName, "String");
+            Assert.AreEqual("X".GetType().FullName, "System.String");
             Assert.AreEqual(a.GetType().FullName, "Function");
-            Assert.AreEqual(new object().GetType().FullName, "Object");
+            Assert.AreEqual(new object().GetType().FullName, "System.Object");
             Assert.AreEqual(new[] { 1, 2 }.GetType().FullName, "System.Int32[]");
         }
 

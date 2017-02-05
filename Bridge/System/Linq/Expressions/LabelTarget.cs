@@ -3,7 +3,7 @@ using Bridge;
 namespace System.Linq.Expressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class LabelTarget
     {
         [Field]

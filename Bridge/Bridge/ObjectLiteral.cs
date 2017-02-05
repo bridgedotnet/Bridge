@@ -1,7 +1,7 @@
 ﻿namespace Bridge
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class ObjectLiteral
     {
         [Template("{o:plain}")]

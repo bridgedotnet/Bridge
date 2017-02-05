@@ -23,7 +23,7 @@ namespace Bridge.ClientTest.SimpleTypes
         public void TypePropertiesAreCorrect()
         {
             Assert.True((object)true is bool);
-            Assert.AreEqual("Boolean", typeof(bool).FullName);
+            Assert.AreEqual("System.Boolean", typeof(bool).FullName);
         }
 
         private T GetDefaultValue<T>()

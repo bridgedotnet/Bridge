@@ -4,7 +4,7 @@ using System.Reflection;
 namespace System.Linq.Expressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     public abstract class MemberBinding
     {
         [Name("btype")]

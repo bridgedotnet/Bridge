@@ -181,6 +181,11 @@
             {
                 private const string DOTNAME = "System.";
 
+                public class Object
+                {
+                    public const string NAME = System.DOTNAME + "Object";
+                }
+
                 public class IDisposable
                 {
                     private const string DOTNAME = NAME + ".";
