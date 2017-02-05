@@ -604,7 +604,7 @@
             }
 
             if (obj.$boxed) {
-                if (obj.type.$kind === "enum" && (obj.type.prototype.$utype === type || type === System.Enum)) {
+                if (obj.type.$kind === "enum" && (obj.type.prototype.$utype === type || type === System.Enum || type === System.IFormattable || type === System.IComparable)) {
                     return true;
                 }
                 else if (type.$kind !== "interface" && !type.$nullable) {
@@ -1108,6 +1108,14 @@
         },
 
         compare: function (a, b, safe, T) {
+            if (a && a.$boxed) {
+                a = Bridge.unbox(a);
+            }
+
+            if (b && b.$boxed) {
+                b = Bridge.unbox(b);
+            }
+
             if (!Bridge.isDefined(a, true)) {
                 if (safe) {
                     return 0;
@@ -1158,6 +1166,14 @@
         },
 
         equalsT: function (a, b, T) {
+            if (a && a.$boxed) {
+                a = Bridge.unbox(a);
+            }
+
+            if (b && b.$boxed) {
+                b = Bridge.unbox(b);
+            }
+
             if (!Bridge.isDefined(a, true)) {
                 throw new System.NullReferenceException();
             } else if (Bridge.isNumber(a) || Bridge.isString(a) || Bridge.isBoolean(a)) {
@@ -1180,6 +1196,14 @@
         },
 
         format: function (obj, formatString, provider) {
+            if (obj && obj.$boxed && Bridge.Reflection.isEnum(obj.type)) {
+                return System.Enum.format(obj.type, Bridge.unbox(obj), formatString);
+            }
+
+            if (obj && obj.$boxed && obj.type === System.Char) {
+                return System.Enum.format(Bridge.unbox(obj), formatString, provider);
+            }
+
             if (Bridge.isNumber(obj)) {
                 return Bridge.Int.format(obj, formatString, provider);
             } else if (Bridge.isDate(obj)) {
