@@ -14366,6 +14366,37 @@ Bridge.$N1391Result =                 r;
         $kind: "interface"
     }; });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2330", {
+        statics: {
+            testMultipleTryCatchBlocks: function () {
+                var catched = false;
+                try {
+                    try {
+                    }
+                    catch (e) {
+                        e = System.Exception.create(e);
+                        throw e;
+                    }
+
+                    try {
+                        throw new System.Exception("Second try block");
+                    }
+                    catch (e1) {
+                        e1 = System.Exception.create(e1);
+                        throw e1;
+                    }
+                }
+                catch (e2) {
+                    e2 = System.Exception.create(e2);
+                    Bridge.Test.NUnit.Assert.areEqual("Second try block", e2.getMessage());
+                    catched = true;
+                }
+
+                Bridge.Test.NUnit.Assert.true(catched);
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {

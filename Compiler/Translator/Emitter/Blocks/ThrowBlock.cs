@@ -44,16 +44,6 @@ namespace Bridge.Translator
                 var isBaseException = exceptionType == null || exceptionType == JS.Types.System.Exception.NAME;
 
                 string name = this.Emitter.CatchBlockVariable ?? JS.Vars.ASYNC_E;
-                if (count == 1 && isBaseException)
-                {
-                    var clause = tryStatement.CatchClauses.First();
-
-                    if (!String.IsNullOrEmpty(clause.VariableName))
-                    {
-                        name = clause.VariableName;
-                    }
-                }
-
                 this.Write(name);
             }
             else
