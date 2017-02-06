@@ -23,6 +23,10 @@ namespace Bridge.Translator.Tests.Helpers
 
             emitter.BridgeTypes = bridgeTypes;
 
+            emitter.DisableDependencyTracking = false;
+
+            emitter.CurrentDependencies = new List<IPluginDependency>();
+
             return emitter;
         }
     }

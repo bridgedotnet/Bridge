@@ -713,16 +713,8 @@ namespace Bridge.Contract
                 {
                     moduleName = module.Name;
                 }
-                
-                if (!emitter.DisableDependencyTracking && currentTypeInfo.Key != type.Key && !Module.Equals(currentTypeInfo.Module, module) && !emitter.CurrentDependencies.Any(d => d.DependencyName == module.Name))
-                {
-                    emitter.CurrentDependencies.Add(new ModuleDependency
-                    {
-                        DependencyName = module.Name,
-                        Type = module.Type,
-                        PreventName = module.PreventModuleName
-                    });
-                }
+
+                EnsureDependencies(type, emitter, currentTypeInfo, module);
             }
 
             var customName = emitter.Validator.GetCustomTypeName(type.TypeDefinition, emitter);
@@ -739,6 +731,22 @@ namespace Bridge.Contract
             }
 
             return name;
+        }
+
+        public static void EnsureDependencies(BridgeType type, IEmitter emitter, ITypeInfo currentTypeInfo, Module module)
+        {
+            if (!emitter.DisableDependencyTracking
+                && currentTypeInfo.Key != type.Key
+                && !Module.Equals(currentTypeInfo.Module, module)
+                && !emitter.CurrentDependencies.Any(d => d.DependencyName == module.Name))
+            {
+                emitter.CurrentDependencies.Add(new ModuleDependency
+                {
+                    DependencyName = module.Name,
+                    Type = module.Type,
+                    PreventName = module.PreventModuleName
+                });
+            }
         }
 
         private static System.Collections.Generic.Dictionary<string, string> replacements;
