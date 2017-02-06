@@ -215,7 +215,7 @@ namespace Bridge.Translator
             this.Write(JS.Funcs.EQUALS + ": function (o) ");
             this.BeginBlock();
 
-            this.Write("if (!" + JS.Funcs.BRIDGE_IS + "(o, ");
+            this.Write("if (!" + JS.Types.Bridge.IS + "(o, ");
             this.Write(config.Name);
             this.Write(")) ");
             this.BeginBlock();

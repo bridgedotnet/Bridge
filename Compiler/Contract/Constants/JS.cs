@@ -29,6 +29,7 @@
 
             public const string ASYNC_TASK = "task";
             public const string PROTOTYPE = "prototype";
+            public const string CURRENT = "current";
         }
 
         public class Funcs
@@ -42,7 +43,6 @@
             public const string BRIDGE_COMBINE = "Bridge.fn.combine";
             public const string BRIDGE_REMOVE = "Bridge.fn.remove";
             public const string BRIDGE_MERGE = "Bridge.merge";
-            public const string BRIDGE_IS = "Bridge.is";
             public const string BRIDGE_IS_DEFINED = "Bridge.isDefined";
             public const string BRIDGE_GET_ENUMERATOR = "Bridge.getEnumerator";
             public const string BRIDGE_GET_TYPE = "Bridge.getType";
@@ -74,6 +74,7 @@
             public const string GET_TYPE = "$getType";
 
             public const string ASYNC_BODY = "$asyncBody";
+            public const string ASYNC_YIELD_BODY = "moveNext";
             public const string GET_AWAITED_RESULT = "getAwaitedResult";
             public const string CONTINUE_WITH = "continueWith";
             public const string SET_RESULT = "setResult";
@@ -180,6 +181,15 @@
             {
                 private const string DOTNAME = "System.";
 
+                public class IDisposable
+                {
+                    private const string DOTNAME = NAME + ".";
+                    public const string NAME = System.DOTNAME + "IDisposable";
+
+                    public const string DISPOSE = "dispose";
+                    public const string INTERFACE_DISPOSE = "System$IDisposable$dispose";
+                }
+
                 public class Array
                 {
                     private const string DOTNAME = System.DOTNAME + "Array.";
@@ -244,12 +254,21 @@
 
                 public const string APPLY = DOTNAME + "apply";
                 public const string ASSEMBLY = DOTNAME + "assembly";
+                public const string IS = DOTNAME + "is";
                 public const string SET_METADATA = DOTNAME + "setMetadata";
                 public const string GET_TYPE_ALIAS = DOTNAME + "getTypeAlias";
                 public const string DEFINE = DOTNAME + "define";
                 public const string DEFINE_I = DOTNAME + "definei";
                 public const string GET_INTERFACE = DOTNAME + "getInterface";
                 public const string INIT = DOTNAME + "init";
+
+                public class Generator
+                {
+                    public const string NAME = Bridge.DOTNAME + "GeneratorEnumerator";
+                    public const string NAME_GENERIC = NAME + "$1";
+                    private const string DOTNAME = NAME + ".";
+                    private const string DOTNAME_GENERIC = NAME_GENERIC + ".";
+                }
 
                 public class Reflection
                 {
@@ -273,6 +292,7 @@
             public const string T = "$t";
             public const string E = "$e";
             public const string YIELD = "$yield";
+            public const string ENUMERATOR = "$enumerator";
             public const string EXPORTS = "$exports";
             public const string SCOPE = "$scope";
             public const string ITERATOR = "$i";

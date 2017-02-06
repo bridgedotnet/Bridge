@@ -8031,7 +8031,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testNestedTypesNames: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2135).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2135, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestNestedTypesNames()",
-                    line: "57"
+                    line: "56"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2135.testNestedTypesNames();
             }

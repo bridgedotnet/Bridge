@@ -161,6 +161,7 @@
             }
         };
 
+        this.System$IDisposable$dispose = this.dispose;
         this.getCurrent$1 = this.getCurrent;
         this.System$Collections$IEnumerator$getCurrent = this.getCurrent;
         this.System$Collections$IEnumerator$moveNext = this.moveNext;

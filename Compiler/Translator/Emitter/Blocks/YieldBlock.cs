@@ -2,6 +2,7 @@ using Bridge.Contract;
 using Bridge.Contract.Constants;
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.TypeSystem;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Bridge.Translator
@@ -34,31 +35,45 @@ namespace Bridge.Translator
             set;
         }
 
+        public List<IAsyncStep> EmittedAsyncSteps
+        {
+            get;
+            set;
+        }
+
         protected override void DoEmit()
         {
-            if (this.YieldReturnStatement != null)
+            this.EmittedAsyncSteps = this.Emitter.AsyncBlock.EmittedAsyncSteps;
+            this.Emitter.AsyncBlock.EmittedAsyncSteps = new List<IAsyncStep>();
+
+            if(this.YieldReturnStatement != null)
             {
-                this.Write(JS.Vars.YIELD + ".push");
-                this.WriteOpenParentheses();
+                this.Write(JS.Vars.ENUMERATOR + "." + JS.Fields.CURRENT + " = ");
                 this.YieldReturnStatement.Expression.AcceptVisitor(this.Emitter);
-                this.WriteCloseParentheses();
+                this.WriteSemiColon();
+                this.WriteNewLine();
+
+                this.Write(JS.Vars.ASYNC_STEP + " = " + this.Emitter.AsyncBlock.Step);
+                this.WriteSemiColon();
+                this.WriteNewLine();
+
+                this.WriteReturn(true);
+                this.Write("true");
+                this.WriteSemiColon();
+                this.WriteNewLine();
+
+                this.Emitter.AsyncBlock.AddAsyncStep();
+            }
+            else if(this.YieldBreakStatement != null)
+            {
+                this.WriteReturn(true);
+                this.Write("false");
+
                 this.WriteSemiColon();
                 this.WriteNewLine();
             }
-            else
-            {
-                if (this.YieldBreakStatement.GetParent<ForStatement>() == null &&
-                    this.YieldBreakStatement.GetParent<ForeachStatement>() == null &&
-                    this.YieldBreakStatement.GetParent<WhileStatement>() == null &&
-                    this.YieldBreakStatement.GetParent<DoWhileStatement>() == null)
-                {
-                    YieldBlock.EmitYieldReturn(this, this.Emitter.ReturnType);
-                }
-                else
-                {
-                    new BreakBlock(this.Emitter, this.YieldBreakStatement).Emit();
-                }
-            }
+
+            this.Emitter.AsyncBlock.EmittedAsyncSteps = this.EmittedAsyncSteps;
         }
 
         public static bool HasYield(AstNode node)
@@ -66,38 +81,6 @@ namespace Bridge.Translator
             var visitor = new YieldSearchVisitor();
             node.AcceptVisitor(visitor);
             return visitor.Found;
-        }
-
-        public static void EmitYield(AbstractEmitterBlock block, IType returnType)
-        {
-            block.Write("var " + JS.Vars.YIELD + " = []");
-
-            block.WriteSemiColon();
-            block.WriteNewLine();
-        }
-
-        public static void EmitYieldReturn(AbstractEmitterBlock block, IType returnType)
-        {
-            block.WriteReturn(true);
-
-            if (returnType != null && returnType.Name == "IEnumerator")
-            {
-                if (returnType.TypeArguments.Count > 0)
-                {
-                    block.Write(JS.Types.System.Array.TO_ENUMERATOR + "(" + JS.Vars.YIELD + ", " + BridgeTypes.ToJsName(returnType.TypeArguments.First(), block.Emitter) + ")");
-                }
-                else
-                {
-                    block.Write(JS.Types.System.Array.TO_ENUMERATOR + "(" + JS.Vars.YIELD + ")");
-                }
-            }
-            else
-            {
-                block.Write(JS.Types.System.Array.TO_ENUMERABLE + "(" + JS.Vars.YIELD + ")");
-            }
-
-            block.WriteSemiColon();
-            block.WriteNewLine();
         }
     }
 }
