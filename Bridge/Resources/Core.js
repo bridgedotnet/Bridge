@@ -1189,8 +1189,9 @@
                 throw new System.NullReferenceException("instance is null");
             }
 
-            if (T && Bridge.Reflection.getBaseType(T) === Object) {
-                return T;
+            if (T) {
+                var type = Bridge.getType(instance);
+                return Bridge.Reflection.isAssignableFrom(T, type) ? type : T;
             }
 
             if (typeof (instance) === "number") {
