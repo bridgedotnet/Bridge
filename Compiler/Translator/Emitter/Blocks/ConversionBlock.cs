@@ -247,6 +247,11 @@ namespace Bridge.Translator
             return null;
         }
 
+        private static bool IsUnpackGenericInterfaceObject(IType interfaceType)
+        {
+            return interfaceType.Kind == TypeKind.Interface && interfaceType.Namespace == "System" && (interfaceType.Name == "IComparable" || interfaceType.Name == "IEquatable" || interfaceType.Name == "IFormattable");
+        }
+
         private static bool IsUnpackGenericArrayInterfaceObject(IType interfaceType)
         {
             ParameterizedType pt = interfaceType as ParameterizedType;
@@ -255,13 +260,15 @@ namespace Bridge.Translator
                 KnownTypeCode tc = pt.GetDefinition().KnownTypeCode;
                 if (tc == KnownTypeCode.IListOfT || tc == KnownTypeCode.ICollectionOfT || tc == KnownTypeCode.IEnumerableOfT || tc == KnownTypeCode.IReadOnlyListOfT)
                 {
-                    return pt.GetTypeArgument(0).IsKnownType(KnownTypeCode.Object);
+                    var type = pt.GetTypeArgument(0);
+                    return type.IsKnownType(KnownTypeCode.Object) || ConversionBlock.IsUnpackGenericInterfaceObject(type);
                 }
             }
 
             if (interfaceType is TypeWithElementType)
             {
-                return ((TypeWithElementType) interfaceType).ElementType.IsKnownType(KnownTypeCode.Object);
+                var type = ((TypeWithElementType) interfaceType).ElementType;
+                return type.IsKnownType(KnownTypeCode.Object) || ConversionBlock.IsUnpackGenericInterfaceObject(type);
             }
 
             return false;
@@ -360,7 +367,7 @@ namespace Bridge.Translator
                     //return level;
                 }
 
-                if (conversion.IsUnboxingConversion || isArgument && expectedType.IsKnownType(KnownTypeCode.Object) && (rr.Type.IsKnownType(KnownTypeCode.Object) || IsUnpackGenericArrayInterfaceObject(rr.Type)))
+                if (conversion.IsUnboxingConversion || isArgument && expectedType.IsKnownType(KnownTypeCode.Object) && (rr.Type.IsKnownType(KnownTypeCode.Object) || ConversionBlock.IsUnpackGenericInterfaceObject(rr.Type) || ConversionBlock.IsUnpackGenericArrayInterfaceObject(rr.Type)))
                 {
                     block.Write("Bridge.unbox(");
                     block.AfterOutput2 += ")";

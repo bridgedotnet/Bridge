@@ -14124,6 +14124,41 @@ Bridge.$N1391Result =                 r;
         $kind: "interface"
     }; });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2318", {
+        statics: {
+            testBoxing: function () {
+                var o1 = Bridge.box(1, System.Int32);
+                var o2 = Bridge.box(1, System.Int32);
+                var o3 = System.Array.init([Bridge.box(1, System.Int32), Bridge.box(true, Boolean, $box_.Boolean.toString)], Object);
+                var o4 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2318.MyStruct();
+                var o5 = System.Decimal(1.0);
+                var o6 = System.Int64(1);
+
+                Bridge.Test.NUnit.Assert.areEqual(true, Bridge.unbox(o1.$boxed));
+                Bridge.Test.NUnit.Assert.areEqual(true, Bridge.unbox(o2.$boxed));
+                Bridge.Test.NUnit.Assert.areEqual(true, Bridge.unbox(o3[0].$boxed));
+                Bridge.Test.NUnit.Assert.areEqual(true, Bridge.unbox(o3[1].$boxed));
+                Bridge.Test.NUnit.Assert.null(Bridge.unbox(o4.$boxed));
+                Bridge.Test.NUnit.Assert.null(Bridge.unbox(o5.$boxed));
+                Bridge.Test.NUnit.Assert.null(Bridge.unbox(o6.$boxed));
+
+                var c = null;
+                c = {isBoxed: function (o) {return o.$boxed;}, isBoxedArray: function (o) {return o[0].$boxed;}};
+                Bridge.Test.NUnit.Assert.false(c.isBoxed(Bridge.unbox(o1)));
+                Bridge.Test.NUnit.Assert.false(c.isBoxed(Bridge.unbox(o2)));
+                Bridge.Test.NUnit.Assert.false(c.isBoxedArray(Bridge.unbox(o3)));
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2318.MyStruct", {
+        $kind: "struct",
+        statics: {
+            getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2318.MyStruct(); }
+        },
+        $clone: function (to) { return this; }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
