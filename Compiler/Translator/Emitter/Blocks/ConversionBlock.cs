@@ -370,7 +370,7 @@ namespace Bridge.Translator
                 }
             }
 
-            if (expression is ParenthesizedExpression && ((ParenthesizedExpression) expression).Expression is CastExpression)
+            if (expression is ParenthesizedExpression && ((ParenthesizedExpression)expression).Expression is CastExpression)
             {
                 return level;
             }
