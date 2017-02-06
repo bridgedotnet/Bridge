@@ -68,6 +68,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The set of options that are selected.
         /// </summary>
+        [Obsolete("This property is not supported by IE11 or earlier, you might want to use the Options property and check the Selected property on each item")]
         public OptionsCollection SelectedOptions;
 
         /// <summary>
