@@ -90,7 +90,14 @@ namespace Bridge.Translator
 
                 if (script == null)
                 {
-                    accessor.Body.AcceptVisitor(this.Emitter);
+                    if(YieldBlock.HasYield(accessor.Body))
+                    {
+                        new GeneratorBlock(this.Emitter, accessor).Emit();
+                    }
+                    else
+                    {
+                        accessor.Body.AcceptVisitor(this.Emitter);
+                    }
                 }
                 else
                 {

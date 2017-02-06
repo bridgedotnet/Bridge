@@ -144,6 +144,12 @@ namespace Bridge.Contract
             set;
         }
 
+        bool IsYield
+        {
+            get;
+            set;
+        }
+
         bool IsInlineConst(ICSharpCode.NRefactory.TypeSystem.IMember member);
 
         bool IsMemberConst(ICSharpCode.NRefactory.TypeSystem.IMember member);

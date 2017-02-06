@@ -319,6 +319,12 @@ namespace Bridge.Translator
             set;
         }
 
+        public bool IsYield
+        {
+            get;
+            set;
+        }
+
         public List<string> AsyncVariables
         {
             get;

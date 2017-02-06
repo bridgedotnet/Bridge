@@ -26,11 +26,16 @@
             var n = new TestIssue921Nested.Issue921NestedOuter.Issue921Nested(400);
 
             $t = Bridge.getEnumerator(System.Array.init([1, 2, 3], System.Int32));
-            while ($t.moveNext()) {
-                var item = $t.getCurrent();
-                n.doWithNumbers(item, item, item);
-            }
-        },
+            try {
+                while ($t.moveNext()) {
+                    var item = $t.getCurrent();
+                    n.doWithNumbers(item, item, item);
+                }
+            }finally {
+                if (Bridge.is($t, System.IDisposable)) {
+                    $t.System$IDisposable$dispose();
+                }
+            }},
         useNestedFunOneIntStatic: function () {
             var n = new TestIssue921Nested.Issue921NestedOuter.Issue921Nested(500);
             System.Linq.Enumerable.from(System.Array.init([1, 2, 3], System.Int32)).select($asm.$.TestIssue921Nested.Issue921NestedOuter.f2);

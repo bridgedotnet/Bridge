@@ -12,11 +12,16 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
             if (animationComp != null) {
                 $t = Bridge.getEnumerator(animationComp);
-                while ($t.moveNext()) {
-                    var state = $t.getCurrent();
+                try {
+                    while ($t.moveNext()) {
+                        var state = $t.getCurrent();
 
-                }
-            }
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
         }
     });
 });

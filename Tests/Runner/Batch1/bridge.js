@@ -1380,9 +1380,12 @@
                     fn = Bridge.fn.makeFn(function () {
                         Bridge.caller.unshift(this);
 
-                        var result = method.apply(obj, arguments);
-
-                        Bridge.caller.shift(this);
+                        var result = null;
+                        try {
+                            result = method.apply(obj, arguments);
+                        } finally {
+                            Bridge.caller.shift(this);
+                        }
 
                         return result;
                     }, method.length);
@@ -1406,9 +1409,12 @@
                         }
                         Bridge.caller.unshift(this);
 
-                        var result = method.apply(obj, callArgs);
-
-                        Bridge.caller.shift(this);
+                        var result = null;
+                        try {
+                            result = method.apply(obj, callArgs);
+                        } finally {
+                            Bridge.caller.shift(this);
+                        }
 
                         return result;
                     }, method.length);
@@ -1434,9 +1440,12 @@
 
                     Bridge.caller.unshift(this);
 
-                    var result = method.apply(obj, callArgs);
-
-                    Bridge.caller.shift(this);
+                    var result = null;
+                    try {
+                        result = method.apply(obj, callArgs);
+                    } finally {
+                        Bridge.caller.shift(this);
+                    }
 
                     return result;
                 }, method.length);
@@ -14580,6 +14589,120 @@
         }
     });
 
+    // @source Generator.js
+
+    Bridge.define("Bridge.GeneratorEnumerable", {
+        inherits: [System.Collections.IEnumerable],
+
+        config: {
+            alias: [
+            "getEnumerator", "System$Collections$IEnumerable$getEnumerator"
+            ]
+        },
+
+        ctor: function (action) {
+            this.$initialize();
+            this.getEnumerator = action;
+            this.System$Collections$IEnumerable$getEnumerator = action;
+        }
+    });
+
+    Bridge.define("Bridge.GeneratorEnumerable$1", function(T)
+    {
+        return {
+            inherits: [System.Collections.Generic.IEnumerable$1(T)],
+
+            config: {
+                alias: [
+                "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"
+                ]
+            },
+
+            ctor: function(action) {
+                this.$initialize();
+                this.getEnumerator = action;
+                this["System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"] = action;
+            }
+        };
+    });
+
+    Bridge.define("Bridge.GeneratorEnumerator", {
+        inherits: [System.Collections.IEnumerator],
+
+        current: null,
+
+        config: {
+            alias: [
+            "getCurrent", "System$Collections$IEnumerator$getCurrent",
+            "moveNext", "System$Collections$IEnumerator$moveNext",
+            "reset", "System$Collections$IEnumerator$reset"
+            ]
+        },
+
+        ctor: function (action) {
+            this.$initialize();
+            this.moveNext = action;
+            this.System$Collections$IEnumerator$moveNext = action;
+        },
+
+        getCurrent: function () {
+            return this.current;
+        },
+
+        getCurrent$1: function () {
+            return this.current;
+        },
+
+        reset: function () {
+            throw new System.NotSupportedException();
+        }
+    });
+
+    Bridge.define("Bridge.GeneratorEnumerator$1", function (T) {
+        return {
+            inherits: [System.Collections.Generic.IEnumerator$1(T), System.IDisposable],
+
+            current: null,
+
+            config: {
+                alias: [
+                "getCurrent", "System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$getCurrent$1",
+                "dispose", "System$IDisposable$dispose",
+                "moveNext", "System$Collections$IEnumerator$moveNext",
+                "reset", "System$Collections$IEnumerator$reset"
+                ]
+            },
+
+            ctor: function (action, final) {
+                this.$initialize();
+                this.moveNext = action;
+                this.System$Collections$IEnumerator$moveNext = action;
+                this.final = final;
+            },
+
+            getCurrent: function () {
+                return this.current;
+            },
+
+            getCurrent$1: function () {
+                return this.current;
+            },
+
+            System$Collections$IEnumerator$getCurrent: function () {
+                return this.current;
+            },
+
+            dispose: function () {
+                if (this.final) {
+                    this.final();
+                }
+            },
+
+            reset: function () {
+                throw new System.NotSupportedException();
+            }
+        };
+    });
     // @source linq.js
 
 /*--------------------------------------------------------------------------
@@ -14745,6 +14868,7 @@
             }
         };
 
+        this.System$IDisposable$dispose = this.dispose;
         this.getCurrent$1 = this.getCurrent;
         this.System$Collections$IEnumerator$getCurrent = this.getCurrent;
         this.System$Collections$IEnumerator$moveNext = this.moveNext;
@@ -24280,21 +24404,31 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         setAttributes: function (el, attrs) {
             var $t;
             $t = Bridge.getEnumerator(attrs);
-            while ($t.moveNext()) {
-                var item = $t.getCurrent();
-                el.setAttribute(item.key, item.value);
-            }
-        },
+            try {
+                while ($t.moveNext()) {
+                    var item = $t.getCurrent();
+                    el.setAttribute(item.key, item.value);
+                }
+            }finally {
+                if (Bridge.is($t, System.IDisposable)) {
+                    $t.System$IDisposable$dispose();
+                }
+            }},
         obj2Css: function (obj) {
             var $t;
             var str = "";
 
             $t = Bridge.getEnumerator(obj);
-            while ($t.moveNext()) {
-                var item = $t.getCurrent();
-                str = System.String.concat(str, (System.String.concat(item.key.toLowerCase(), ":", item.value, ";")));
+            try {
+                while ($t.moveNext()) {
+                    var item = $t.getCurrent();
+                    str = System.String.concat(str, (System.String.concat(item.key.toLowerCase(), ":", item.value, ";")));
+                }
+            }finally {
+                if (Bridge.is($t, System.IDisposable)) {
+                    $t.System$IDisposable$dispose();
+                }
             }
-
             return str;
         }
     });
