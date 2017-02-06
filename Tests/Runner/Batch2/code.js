@@ -229,11 +229,16 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
             var $t;
             var result = "";
             $t = Bridge.getEnumerator(System.Array.init(["x", "y"], String));
-            while ($t.moveNext()) {
-                var s = $t.getCurrent();
-                result = System.String.concat(result, s);
-            }
-            Bridge.Test.NUnit.Assert.areEqual("xy", result);
+            try {
+                while ($t.moveNext()) {
+                    var s = $t.getCurrent();
+                    result = System.String.concat(result, s);
+                }
+            }finally {
+                if (Bridge.is($t, System.IDisposable)) {
+                    $t.System$IDisposable$dispose();
+                }
+            }Bridge.Test.NUnit.Assert.areEqual("xy", result);
         },
         cloneWorks: function () {
             var arr = System.Array.init(["x", "y"], String);
@@ -379,11 +384,16 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
             var list = System.Array.init(["x", "y"], String);
             var result = "";
             $t = Bridge.getEnumerator(list, String);
-            while ($t.moveNext()) {
-                var s = $t.getCurrent();
-                result = System.String.concat(result, s);
-            }
-            Bridge.Test.NUnit.Assert.areEqual("xy", result);
+            try {
+                while ($t.moveNext()) {
+                    var s = $t.getCurrent();
+                    result = System.String.concat(result, s);
+                }
+            }finally {
+                if (Bridge.is($t, System.IDisposable)) {
+                    $t.System$IDisposable$dispose();
+                }
+            }Bridge.Test.NUnit.Assert.areEqual("xy", result);
         },
         iCollectionCountWorks: function () {
             var l = System.Array.init(["x", "y", "z"], String);

@@ -2120,11 +2120,16 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 Bridge.Test.NUnit.Assert.areEqual(1, query.count());
 
                 $t = Bridge.getEnumerator(query);
-                while ($t.moveNext()) {
-                    var key = $t.getCurrent();
-                    Bridge.Test.NUnit.Assert.areEqual(1, new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1171.ObjectA))(key).getCount());
-                }
-            }
+                try {
+                    while ($t.moveNext()) {
+                        var key = $t.getCurrent();
+                        Bridge.Test.NUnit.Assert.areEqual(1, new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1171.ObjectA))(key).getCount());
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
         }
     });
 
@@ -2480,11 +2485,16 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 Bridge.Test.NUnit.Assert.areEqual(0, dict.getCount());
 
                 $t = Bridge.getEnumerator(dict);
-                while ($t.moveNext()) {
-                    var item = $t.getCurrent();
-                    Bridge.Test.NUnit.Assert.fail$1("Dictionary should be empty");
-                }
-            }
+                try {
+                    while ($t.moveNext()) {
+                        var item = $t.getCurrent();
+                        Bridge.Test.NUnit.Assert.fail$1("Dictionary should be empty");
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
         }
     });
 
@@ -3075,11 +3085,16 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 }
 
                 $t = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1256.reservedWords);
-                while ($t.moveNext()) {
-                    var name = $t.getCurrent();
-                    Bridge.Test.NUnit.Assert.areEqual$1(true, Bridge.unbox(o[name]), System.String.concat("Expected true for property ", name));
-                }
-            },
+                try {
+                    while ($t.moveNext()) {
+                        var name = $t.getCurrent();
+                        Bridge.Test.NUnit.Assert.areEqual$1(true, Bridge.unbox(o[name]), System.String.concat("Expected true for property ", name));
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }},
             testMethods: function (o) {
                 var $t;
                 if (o == null) {
@@ -3088,11 +3103,16 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 }
 
                 $t = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1256.reservedWords);
-                while ($t.moveNext()) {
-                    var name = $t.getCurrent();
-                    Bridge.Test.NUnit.Assert.notNull$1(Bridge.unbox(o[name]), System.String.concat("Member ", name, " exists"));
-                }
-            },
+                try {
+                    while ($t.moveNext()) {
+                        var name = $t.getCurrent();
+                        Bridge.Test.NUnit.Assert.notNull$1(Bridge.unbox(o[name]), System.String.concat("Member ", name, " exists"));
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }},
             let: function () {
                 return 5;
             },
@@ -3465,11 +3485,16 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 var x = System.Array.toEnumerable(System.Linq.Enumerable.from(arr).toArray());
                 var index = 0;
                 $t = Bridge.getEnumerator(x);
-                while ($t.moveNext()) {
-                    var i = $t.getCurrent();
-                    Bridge.Test.NUnit.Assert.areEqual(arr[Bridge.identity(index, (index = (index + 1) | 0))], Bridge.unbox(i));
-                }
-            }
+                try {
+                    while ($t.moveNext()) {
+                        var i = $t.getCurrent();
+                        Bridge.Test.NUnit.Assert.areEqual(arr[Bridge.identity(index, (index = (index + 1) | 0))], Bridge.unbox(i));
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
         }
     });
 
@@ -3592,32 +3617,37 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 var $t;
                 var a = System.Array.init([System.Int64(1), System.Int64(2), System.Int64.MaxValue], System.Int64);
                 $t = Bridge.getEnumerator(a);
-                while ($t.moveNext()) {
-                    var v = $t.getCurrent();
-                    switch (v.toString()) {
-                        case "1": 
-                            {
-                                Bridge.Test.NUnit.Assert.true(v.equals(System.Int64(1)));
-                                break;
-                            }
-                        case "2": 
-                            {
-                                Bridge.Test.NUnit.Assert.true(v.equals(System.Int64(2)));
-                                break;
-                            }
-                        case System.Int64.MaxValue.toString(): 
-                            {
-                                Bridge.Test.NUnit.Assert.true(v.equals(System.Int64.MaxValue));
-                                break;
-                            }
-                        default: 
-                            {
-                                Bridge.Test.NUnit.Assert.fail();
-                                break;
-                            }
+                try {
+                    while ($t.moveNext()) {
+                        var v = $t.getCurrent();
+                        switch (v.toString()) {
+                            case "1": 
+                                {
+                                    Bridge.Test.NUnit.Assert.true(v.equals(System.Int64(1)));
+                                    break;
+                                }
+                            case "2": 
+                                {
+                                    Bridge.Test.NUnit.Assert.true(v.equals(System.Int64(2)));
+                                    break;
+                                }
+                            case System.Int64.MaxValue.toString(): 
+                                {
+                                    Bridge.Test.NUnit.Assert.true(v.equals(System.Int64.MaxValue));
+                                    break;
+                                }
+                            default: 
+                                {
+                                    Bridge.Test.NUnit.Assert.fail();
+                                    break;
+                                }
+                        }
                     }
-                }
-            }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
         }
     });
 
@@ -6238,7 +6268,7 @@ Bridge.$N1391Result =                 r;
                     data: 5
                 } );
 
-                var l = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1448.Literal.ctor({ v: { data: 5 } });
+                var l = { v: { data: 5 } };
 
                 var plainee = l.v;
 
@@ -6269,10 +6299,6 @@ Bridge.$N1391Result =                 r;
         doSomething: function () {
             return this.data;
         }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1448.Literal", {
-        $literal: true
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1448.Plainer");
@@ -6331,59 +6357,94 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.NUnit.Assert.throws$7(System.InvalidCastException, function () {
                     var $t;
                     $t = Bridge.getEnumerator(Bridge.cast(System.Array.init(["h"], String), System.Collections.IEnumerable));
-                    while ($t.moveNext()) {
-                        var z = Bridge.cast($t.getCurrent(), System.Int32);
-                        Bridge.Console.log(z);
-                    }
-                }, "(IEnumerable)new[] { \"h\" } foreach int");
+                    try {
+                        while ($t.moveNext()) {
+                            var z = Bridge.cast($t.getCurrent(), System.Int32);
+                            Bridge.Console.log(z);
+                        }
+                    }finally {
+                        if (Bridge.is($t, System.IDisposable)) {
+                            $t.System$IDisposable$dispose();
+                        }
+                    }}, "(IEnumerable)new[] { \"h\" } foreach int");
 
                 Bridge.Test.NUnit.Assert.throws$7(System.InvalidCastException, function () {
                     var $t;
                     $t = Bridge.getEnumerator(Bridge.cast(System.Array.init(["g"], String), System.Collections.IEnumerable));
-                    while ($t.moveNext()) {
-                        var y = Bridge.cast($t.getCurrent(), System.Char);
-                        Bridge.Console.log(String.fromCharCode(y));
-                    }
-                }, "(IEnumerable)new[] { \"g\" } foreach char");
+                    try {
+                        while ($t.moveNext()) {
+                            var y = Bridge.cast($t.getCurrent(), System.Char);
+                            Bridge.Console.log(String.fromCharCode(y));
+                        }
+                    }finally {
+                        if (Bridge.is($t, System.IDisposable)) {
+                            $t.System$IDisposable$dispose();
+                        }
+                    }}, "(IEnumerable)new[] { \"g\" } foreach char");
 
                 $t = Bridge.getEnumerator(Bridge.cast(System.Array.init(["k"], String), System.Collections.IEnumerable));
-                while ($t.moveNext()) {
-                    var z1 = Bridge.cast($t.getCurrent(), String);
-                    Bridge.Test.NUnit.Assert.areEqual$1("k", z1, "string z1 in (IEnumerable)new[] { \"k\" } foreach string");
+                try {
+                    while ($t.moveNext()) {
+                        var z1 = Bridge.cast($t.getCurrent(), String);
+                        Bridge.Test.NUnit.Assert.areEqual$1("k", z1, "string z1 in (IEnumerable)new[] { \"k\" } foreach string");
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
                 }
-
                 $t1 = Bridge.getEnumerator(Bridge.cast(System.Array.init(["j"], String), System.Collections.IEnumerable));
-                while ($t1.moveNext()) {
-                    var z2 = $t1.getCurrent();
-                    Bridge.Test.NUnit.Assert.areEqual$1("j", Bridge.unbox(z2), "string z2 in (IEnumerable)new[] { \"j\" } foreach var");
+                try {
+                    while ($t1.moveNext()) {
+                        var z2 = $t1.getCurrent();
+                        Bridge.Test.NUnit.Assert.areEqual$1("j", Bridge.unbox(z2), "string z2 in (IEnumerable)new[] { \"j\" } foreach var");
+                    }
+                }finally {
+                    if (Bridge.is($t1, System.IDisposable)) {
+                        $t1.System$IDisposable$dispose();
+                    }
                 }
-
                 $t2 = Bridge.getEnumerator(Bridge.cast(System.Array.init([Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1467.SomeClass1(), {
                     setValue: 1
                 } )], Bridge.ClientTest.Batch3.BridgeIssues.Bridge1467.SomeClass1), System.Collections.IEnumerable));
-                while ($t2.moveNext()) {
-                    var c = Bridge.cast($t2.getCurrent(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1467.SomeClass1);
-                    Bridge.Test.NUnit.Assert.areEqual$1(1, c.getValue(), "(IEnumerable)new[] { new SomeClass1 { Value = 1} } foreach SomeClass1");
+                try {
+                    while ($t2.moveNext()) {
+                        var c = Bridge.cast($t2.getCurrent(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1467.SomeClass1);
+                        Bridge.Test.NUnit.Assert.areEqual$1(1, c.getValue(), "(IEnumerable)new[] { new SomeClass1 { Value = 1} } foreach SomeClass1");
+                    }
+                }finally {
+                    if (Bridge.is($t2, System.IDisposable)) {
+                        $t2.System$IDisposable$dispose();
+                    }
                 }
-
                 $t3 = Bridge.getEnumerator(Bridge.cast(System.Array.init([Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1467.SomeClass2(), {
                     setValue: 2
                 } )], Bridge.ClientTest.Batch3.BridgeIssues.Bridge1467.SomeClass2), System.Collections.IEnumerable));
-                while ($t3.moveNext()) {
-                    var d = Bridge.cast($t3.getCurrent(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1467.SomeClass1);
-                    Bridge.Test.NUnit.Assert.areEqual$1(2, d.getValue(), "(IEnumerable)new[] { new SomeClass2 { Value = 1} } foreach SomeClass1");
+                try {
+                    while ($t3.moveNext()) {
+                        var d = Bridge.cast($t3.getCurrent(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1467.SomeClass1);
+                        Bridge.Test.NUnit.Assert.areEqual$1(2, d.getValue(), "(IEnumerable)new[] { new SomeClass2 { Value = 1} } foreach SomeClass1");
+                    }
+                }finally {
+                    if (Bridge.is($t3, System.IDisposable)) {
+                        $t3.System$IDisposable$dispose();
+                    }
                 }
-
                 Bridge.Test.NUnit.Assert.throws$7(System.InvalidCastException, function () {
                     var $t4;
                     $t4 = Bridge.getEnumerator(Bridge.cast(System.Array.init([Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1467.AnotherClass(), {
                         setValue: 3
                     } )], Bridge.ClientTest.Batch3.BridgeIssues.Bridge1467.AnotherClass), System.Collections.IEnumerable));
-                    while ($t4.moveNext()) {
-                        var d1 = Bridge.cast($t4.getCurrent(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1467.SomeClass1);
-                        Bridge.Console.log(d1);
-                    }
-                }, "(IEnumerable)new[] { new AnotherClass { Value = 3 } } foreach SomeClass1");
+                    try {
+                        while ($t4.moveNext()) {
+                            var d1 = Bridge.cast($t4.getCurrent(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1467.SomeClass1);
+                            Bridge.Console.log(d1);
+                        }
+                    }finally {
+                        if (Bridge.is($t4, System.IDisposable)) {
+                            $t4.System$IDisposable$dispose();
+                        }
+                    }}, "(IEnumerable)new[] { new AnotherClass { Value = 3 } } foreach SomeClass1");
             }
         }
     });
@@ -6955,11 +7016,16 @@ Bridge.$N1391Result =                 r;
 
             var i = 0;
             $t = Bridge.getEnumerator(dic.getValues(), System.Int32);
-            while ($t.moveNext()) {
-                var sameVal1 = $t.getCurrent();
-                Bridge.Test.NUnit.Assert.areEqual$1(((i = (i + 1) | 0)), sameVal1, "Inside foreach scope");
-            }
-        }
+            try {
+                while ($t.moveNext()) {
+                    var sameVal1 = $t.getCurrent();
+                    Bridge.Test.NUnit.Assert.areEqual$1(((i = (i + 1) | 0)), sameVal1, "Inside foreach scope");
+                }
+            }finally {
+                if (Bridge.is($t, System.IDisposable)) {
+                    $t.System$IDisposable$dispose();
+                }
+            }}
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1520", {
@@ -7127,17 +7193,12 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1530", {
         testObjectLiteralFieldImplementingInterface: function () {
-            var c = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1530.Child.ctor({ name: "name" });
+            var c = { name: "name" };
             var p = c;
 
             Bridge.Test.NUnit.Assert.areEqual("name", p.name);
             Bridge.Test.NUnit.Assert.areEqual("name", c.name);
         }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1530.Parent", {
-        $kind: "interface",
-        $literal: true
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1533", {
@@ -7655,11 +7716,16 @@ Bridge.$N1391Result =                 r;
 
             var idx = 0;
             $t = Bridge.getEnumerator(set);
-            while ($t.moveNext()) {
-                var i = $t.getCurrent();
-                Bridge.Test.NUnit.Assert.areEqual(((idx = (idx + 1) | 0)), i);
-            }
-        }
+            try {
+                while ($t.moveNext()) {
+                    var i = $t.getCurrent();
+                    Bridge.Test.NUnit.Assert.areEqual(((idx = (idx + 1) | 0)), i);
+                }
+            }finally {
+                if (Bridge.is($t, System.IDisposable)) {
+                    $t.System$IDisposable$dispose();
+                }
+            }}
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1702.Set$1", function (T) { return {
@@ -7705,13 +7771,54 @@ Bridge.$N1391Result =                 r;
             } ));
         },
         getEnumerator: function () {
-            var $yield = [];
-            var node = this._headIfAny;
-            while (node != null) {
-                $yield.push(node.item);
-                node = node.nextIfAny;
-            }
-            return System.Array.toEnumerator($yield, T);
+            var $step = 0,
+                $jumpFromFinally,
+                $returnValue,
+                node,
+                $async_e;
+
+            var $enumerator = new (Bridge.GeneratorEnumerator$1(T))(Bridge.fn.bind(this, function () {
+                try {
+                    for (;;) {
+                        switch ($step) {
+                            case 0: {
+                                node = this._headIfAny;
+                                $step = 1;
+                                continue;
+                            }
+                            case 1: {
+                                if ( node != null ) {
+                                        $step = 2;
+                                        continue;
+                                    } 
+                                    $step = 4;
+                                    continue;
+                            }
+                            case 2: {
+                                $enumerator.current = node.item;
+                                    $step = 3;
+                                    return true;
+                            }
+                            case 3: {
+                                node = node.nextIfAny;
+
+                                    $step = 1;
+                                    continue;
+                            }
+                            case 4: {
+
+                            }
+                            default: {
+                                return false;
+                            }
+                        }
+                    }
+                } catch($async_e1) {
+                    $async_e = System.Exception.create($async_e1);
+                    throw $async_e;
+                }
+            }));
+            return $enumerator;
         },
         System$Collections$IEnumerable$getEnumerator: function () {
             return this.getEnumerator();
@@ -7796,11 +7903,16 @@ Bridge.$N1391Result =                 r;
 
             var i = 4;
             $t = Bridge.getEnumerator(collection2);
-            while ($t.moveNext()) {
-                var item = Bridge.cast($t.getCurrent(), System.Int32);
-                Bridge.Test.NUnit.Assert.areEqual(Bridge.identity(i, (i = (i + 1) | 0)), item);
-            }
-        },
+            try {
+                while ($t.moveNext()) {
+                    var item = Bridge.cast($t.getCurrent(), System.Int32);
+                    Bridge.Test.NUnit.Assert.areEqual(Bridge.identity(i, (i = (i + 1) | 0)), item);
+                }
+            }finally {
+                if (Bridge.is($t, System.IDisposable)) {
+                    $t.System$IDisposable$dispose();
+                }
+            }},
         testCollectionWithAdd_BeforeCS6: function () {
             Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712.setBuffer("");
             var collection = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712.f2(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712.MSDNCollectionWithAdd());
@@ -9341,7 +9453,7 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1819", {
         testObjectLiteralWithInheritance: function () {
-            var x = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1819.Attributes.ctor({ name: "test" });
+            var x = { name: "test" };
             Bridge.Test.NUnit.Assert.areEqual("test", x.name);
             Bridge.Test.NUnit.Assert.true(Bridge.isPlainObject(x));
         }
@@ -9473,7 +9585,7 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1833", {
         testInheritedPropertyInLiteral: function () {
-            var x = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1833.Attributes.ctor({ id: 12, name: "test" });
+            var x = { id: 12, name: "test" };
             Bridge.Test.NUnit.Assert.areEqual(12, x.id);
             Bridge.Test.NUnit.Assert.areEqual(12, Bridge.unbox(x.id));
             Bridge.Test.NUnit.Assert.areEqual("test", x.name);
@@ -9618,11 +9730,16 @@ Bridge.$N1391Result =                 r;
             var arr = System.Array.init(["a", "b"], String);
             var i = 0;
             $t = Bridge.getEnumerator(arr);
-            while ($t.moveNext()) {
-                var o = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1846.Obj.op_Implicit($t.getCurrent());
-                Bridge.Test.NUnit.Assert.areEqual(arr[Bridge.identity(i, (i = (i + 1) | 0))], o.s);
-            }
-        }
+            try {
+                while ($t.moveNext()) {
+                    var o = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1846.Obj.op_Implicit($t.getCurrent());
+                    Bridge.Test.NUnit.Assert.areEqual(arr[Bridge.identity(i, (i = (i + 1) | 0))], o.s);
+                }
+            }finally {
+                if (Bridge.is($t, System.IDisposable)) {
+                    $t.System$IDisposable$dispose();
+                }
+            }}
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1846.Obj", {
@@ -9940,22 +10057,19 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865", {
         testObjectLiteralInterface: function () {
-            var contract = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.Contract.ctor({ value: 5 });
+            var contract = Bridge.merge(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.Contract.ctor(), {
+                value: 5
+            } );
             var icontract = contract;
             var o = contract;
 
-            Bridge.Test.NUnit.Assert.true(Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.IContract));
+            Bridge.Test.NUnit.Assert.true(Bridge.is(o, Object));
             Bridge.Test.NUnit.Assert.true(Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.Contract));
             Bridge.Test.NUnit.Assert.false(Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.Contract2));
 
             Bridge.Test.NUnit.Assert.areEqual(5, contract.value);
             Bridge.Test.NUnit.Assert.areEqual(5, icontract.value);
         }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.IContract", {
-        $kind: "interface",
-        $literal: true
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869", {
@@ -10194,55 +10308,95 @@ Bridge.$N1391Result =                 r;
         testGenericClassCastForArray: function () {
             var $t, $t1, $t2, $t3;
             $t = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.getArray());
-            while ($t.moveNext()) {
-                var i = $t.getCurrent();
-                Bridge.Test.NUnit.Assert.true$1(true, "No cast for array of generic elements works");
+            try {
+                while ($t.moveNext()) {
+                    var i = $t.getCurrent();
+                    Bridge.Test.NUnit.Assert.true$1(true, "No cast for array of generic elements works");
+                }
+            }finally {
+                if (Bridge.is($t, System.IDisposable)) {
+                    $t.System$IDisposable$dispose();
+                }
             }
-
             $t1 = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.getArray());
-            while ($t1.moveNext()) {
-                var i1 = $t1.getCurrent();
-                Bridge.Test.NUnit.Assert.true$1(true, "Cast for array of generic elements works");
+            try {
+                while ($t1.moveNext()) {
+                    var i1 = $t1.getCurrent();
+                    Bridge.Test.NUnit.Assert.true$1(true, "Cast for array of generic elements works");
+                }
+            }finally {
+                if (Bridge.is($t1, System.IDisposable)) {
+                    $t1.System$IDisposable$dispose();
+                }
             }
-
             $t2 = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.getArrayExternal());
-            while ($t2.moveNext()) {
-                var i2 = $t2.getCurrent();
-                Bridge.Test.NUnit.Assert.true$1(true, "No cast for array of external generic elements works");
+            try {
+                while ($t2.moveNext()) {
+                    var i2 = $t2.getCurrent();
+                    Bridge.Test.NUnit.Assert.true$1(true, "No cast for array of external generic elements works");
+                }
+            }finally {
+                if (Bridge.is($t2, System.IDisposable)) {
+                    $t2.System$IDisposable$dispose();
+                }
             }
-
             $t3 = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.getArrayExternal());
-            while ($t3.moveNext()) {
-                var i3 = $t3.getCurrent();
-                Bridge.Test.NUnit.Assert.true$1(true, "Cast for array of external generic elements works");
-            }
-        },
+            try {
+                while ($t3.moveNext()) {
+                    var i3 = $t3.getCurrent();
+                    Bridge.Test.NUnit.Assert.true$1(true, "Cast for array of external generic elements works");
+                }
+            }finally {
+                if (Bridge.is($t3, System.IDisposable)) {
+                    $t3.System$IDisposable$dispose();
+                }
+            }},
         testGenericClassCastForList: function () {
             var $t, $t1, $t2, $t3;
             $t = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.getList());
-            while ($t.moveNext()) {
-                var i = $t.getCurrent();
-                Bridge.Test.NUnit.Assert.true$1(true, "No cast for List of generic elements works");
+            try {
+                while ($t.moveNext()) {
+                    var i = $t.getCurrent();
+                    Bridge.Test.NUnit.Assert.true$1(true, "No cast for List of generic elements works");
+                }
+            }finally {
+                if (Bridge.is($t, System.IDisposable)) {
+                    $t.System$IDisposable$dispose();
+                }
             }
-
             $t1 = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.getList());
-            while ($t1.moveNext()) {
-                var i1 = $t1.getCurrent();
-                Bridge.Test.NUnit.Assert.true$1(true, "Cast for List of generic elements works");
+            try {
+                while ($t1.moveNext()) {
+                    var i1 = $t1.getCurrent();
+                    Bridge.Test.NUnit.Assert.true$1(true, "Cast for List of generic elements works");
+                }
+            }finally {
+                if (Bridge.is($t1, System.IDisposable)) {
+                    $t1.System$IDisposable$dispose();
+                }
             }
-
             $t2 = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.getListExternal());
-            while ($t2.moveNext()) {
-                var i2 = $t2.getCurrent();
-                Bridge.Test.NUnit.Assert.true$1(true, "No cast for List of external generic elements works");
+            try {
+                while ($t2.moveNext()) {
+                    var i2 = $t2.getCurrent();
+                    Bridge.Test.NUnit.Assert.true$1(true, "No cast for List of external generic elements works");
+                }
+            }finally {
+                if (Bridge.is($t2, System.IDisposable)) {
+                    $t2.System$IDisposable$dispose();
+                }
             }
-
             $t3 = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.getListExternal());
-            while ($t3.moveNext()) {
-                var i3 = $t3.getCurrent();
-                Bridge.Test.NUnit.Assert.true$1(true, "Cast for List of external generic elements works");
-            }
-        }
+            try {
+                while ($t3.moveNext()) {
+                    var i3 = $t3.getCurrent();
+                    Bridge.Test.NUnit.Assert.true$1(true, "Cast for List of external generic elements works");
+                }
+            }finally {
+                if (Bridge.is($t3, System.IDisposable)) {
+                    $t3.System$IDisposable$dispose();
+                }
+            }}
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882.MVCArray$1", function (T) { return {
@@ -10891,36 +11045,51 @@ Bridge.$N1391Result =                 r;
         testCollectionLikeInitialization: function () {
             var $t, $t1, $t2, $t3;
             $t = Bridge.getEnumerator(System.Array.init([new $asm.$AnonymousType$14()], Object));
-            while ($t.moveNext()) {
-                $t1 = (function () {
-                    var item = $t.getCurrent();
-                    if (false) {
-                        return {jump:1};
-                    }
+            try {
+                while ($t.moveNext()) {
+                    $t1 = (function () {
+                        var item = $t.getCurrent();
+                        if (false) {
+                            return {jump:1};
+                        }
 
-                    var newJObj1 = function (_o33) {
-                            _o33.add("name", item);
-                            return _o33;
-                        }(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.AddObj());
+                        var newJObj1 = function (_o33) {
+                                _o33.add("name", item);
+                                return _o33;
+                            }(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.AddObj());
 
-                    $t2 = Bridge.getEnumerator(newJObj1);
-                    while ($t2.moveNext()) {
-                        var jObj = $t2.getCurrent();
-                    }
-                    Bridge.Test.NUnit.Assert.areEqual(false, newJObj1.isGeneric);
-                    Bridge.Test.NUnit.Assert.areEqual(1, newJObj1.dic.getCount());
+                        $t2 = Bridge.getEnumerator(newJObj1);
+                        try {
+                            while ($t2.moveNext()) {
+                                var jObj = $t2.getCurrent();
+                            }
+                        }finally {
+                            if (Bridge.is($t2, System.IDisposable)) {
+                                $t2.System$IDisposable$dispose();
+                            }
+                        }Bridge.Test.NUnit.Assert.areEqual(false, newJObj1.isGeneric);
+                        Bridge.Test.NUnit.Assert.areEqual(1, newJObj1.dic.getCount());
 
-                    var newJObj2 = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.f1(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.AddObj());
-                    $t3 = Bridge.getEnumerator(newJObj2, System.Collections.Generic.KeyValuePair$2(String,Object));
-                    while ($t3.moveNext()) {
-                        var jObj1 = $t3.getCurrent();
-                    }
-                    Bridge.Test.NUnit.Assert.areEqual(true, Bridge.cast(newJObj2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.AddObj).isGeneric);
-                    Bridge.Test.NUnit.Assert.areEqual(1, Bridge.cast(newJObj2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.AddObj).dic.getCount());
-                }).call(this) || {};
-                if($t1.jump == 1) continue;
-            }
-        }
+                        var newJObj2 = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.f1(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.AddObj());
+                        $t3 = Bridge.getEnumerator(newJObj2, System.Collections.Generic.KeyValuePair$2(String,Object));
+                        try {
+                            while ($t3.moveNext()) {
+                                var jObj1 = $t3.getCurrent();
+                            }
+                        }finally {
+                            if (Bridge.is($t3, System.IDisposable)) {
+                                $t3.System$IDisposable$dispose();
+                            }
+                        }Bridge.Test.NUnit.Assert.areEqual(true, Bridge.cast(newJObj2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.AddObj).isGeneric);
+                        Bridge.Test.NUnit.Assert.areEqual(1, Bridge.cast(newJObj2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.AddObj).dic.getCount());
+                    }).call(this) || {};
+                    if($t1.jump == 1) continue;
+                }
+            }finally {
+                if (Bridge.is($t, System.IDisposable)) {
+                    $t.System$IDisposable$dispose();
+                }
+            }}
     });
 
     Bridge.define("$AnonymousType$14", $asm, {
@@ -11174,11 +11343,16 @@ Bridge.$N1391Result =                 r;
 
             var i = 0;
             $t = new Bridge.ArrayEnumerator(holder.array);
-            while ($t.moveNext()) {
-                var item = $t.getCurrent();
-                Bridge.Test.NUnit.Assert.areEqual(((i = (i + 1) | 0)), Bridge.unbox(item));
-            }
-        }
+            try {
+                while ($t.moveNext()) {
+                    var item = $t.getCurrent();
+                    Bridge.Test.NUnit.Assert.areEqual(((i = (i + 1) | 0)), Bridge.unbox(item));
+                }
+            }finally {
+                if (Bridge.is($t, System.IDisposable)) {
+                    $t.System$IDisposable$dispose();
+                }
+            }}
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1996.ArrayHolder", {
@@ -12126,9 +12300,36 @@ Bridge.$N1391Result =                 r;
                 };
             },
             toEnumerable: function (TValue, head) {
-                var $yield = [];
-                $yield.push(head);
-                return System.Array.toEnumerable($yield);
+                return new (Bridge.GeneratorEnumerable$1(TValue))(Bridge.fn.bind(this, function (TValue, head) {
+                    var $step = 0,
+                        $jumpFromFinally,
+                        $returnValue,
+                        $async_e;
+
+                    var $enumerator = new (Bridge.GeneratorEnumerator$1(TValue))(Bridge.fn.bind(this, function () {
+                        try {
+                            for (;;) {
+                                switch ($step) {
+                                    case 0: {
+                                        $enumerator.current = head;
+                                            $step = 1;
+                                            return true;
+                                    }
+                                    case 1: {
+
+                                    }
+                                    default: {
+                                        return false;
+                                    }
+                                }
+                            }
+                        } catch($async_e1) {
+                            $async_e = System.Exception.create($async_e1);
+                            throw $async_e;
+                        }
+                    }));
+                    return $enumerator;
+                }, arguments));
             }
         }
     });
@@ -12331,10 +12532,9 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088", {
         statics: {
             testObjectLiteralReflection: function () {
-                var ol = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.CompletelyUnrelatedClass.ctor({  });
+                var ol = {  };
                 var props = System.Linq.Enumerable.from(Bridge.Reflection.getMembers(Bridge.getType(ol), 16, 28)).select($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.f1).toArray();
-                Bridge.Test.NUnit.Assert.areEqual(1, props.length);
-                Bridge.Test.NUnit.Assert.areEqual("ShouldNotSeeThis", props[0]);
+                Bridge.Test.NUnit.Assert.areEqual(0, props.length);
 
                 var obj = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.T();
                 props = System.Linq.Enumerable.from(Bridge.Reflection.getMembers(Bridge.getType(obj), 16, 28)).select($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.f1).toArray();
@@ -12365,10 +12565,6 @@ Bridge.$N1391Result =                 r;
         f1: function (x) {
             return x.n;
         }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.CompletelyUnrelatedClass", {
-        $literal: true
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.OL1", {
@@ -12433,12 +12629,12 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2106", {
         statics: {
             testGenericMethodInObjectLiteral: function () {
-                var o1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2106.c1$1(String).ctor({  });
+                var o1 = {  };
                 var o2 = {  };
                 var o3 = Bridge.box(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2106.c1$1(String).prototype.m1.call(o1, System.Int32, o2), System.Int32);
 
                 Bridge.Test.NUnit.Assert.areEqual(0, Bridge.unbox(o3));
-                Bridge.Test.NUnit.Assert.true(Bridge.is(o1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2106.c1$1(String)));
+                Bridge.Test.NUnit.Assert.true(Bridge.is(o1, Object));
                 Bridge.Test.NUnit.Assert.true(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2106.c1$1(String).prototype.m2.call(o1, System.Int32, o2));
             }
         }
@@ -12451,7 +12647,7 @@ Bridge.$N1391Result =                 r;
         },
         m2: function (TB, p1) {
             var oThis = this;
-            return Bridge.is(oThis, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2106.c1$1(TA));
+            return Bridge.is(oThis, Object);
         }
     }; });
 
@@ -12635,7 +12831,11 @@ Bridge.$N1391Result =                 r;
     }; });
 
     Bridge.define("_Bridge2135_4.Class4_1$1.Config", function (T) { return {
-        $literal: true
+        config: {
+            properties: {
+                Msg: null
+            }
+        }
     }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2137", {
@@ -12788,7 +12988,7 @@ Bridge.$N1391Result =                 r;
         statics: {
             testIgnoreGenericForNestedClass: function () {
                 Bridge.Test.NUnit.Assert.false(Bridge.Reflection.isGenericTypeDefinition(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers$1));
-                Bridge.Test.NUnit.Assert.false(Bridge.Reflection.isGenericTypeDefinition(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers$1.WrappedProps));
+                Bridge.Test.NUnit.Assert.false(Bridge.Reflection.isGenericTypeDefinition(Object));
                 Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isGenericTypeDefinition(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers2$1));
                 // NRefactory incorrectly resolves ComponentPropsHelpers2<>.WrappedProps type
                 // It provides ComponentPropsHelpers2<TProps>.WrappedProps instead of definition
@@ -12800,25 +13000,17 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers$1", {
         statics: {
             wrapProps: function (propsIfAny) {
-                return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers$1.WrappedProps.ctor({ value: propsIfAny });
+                return { value: propsIfAny };
             }
         }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers$1.WrappedProps", {
-        $literal: true
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers2$1", function (TProps) { return {
         statics: {
             wrapProps: function (propsIfAny) {
-                return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers2$1.WrappedProps(TProps).ctor({ value: propsIfAny });
+                return { value: propsIfAny };
             }
         }
-    }; });
-
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers2$1.WrappedProps", function (TProps) { return {
-        $literal: true
     }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2146", {
@@ -12856,54 +13048,79 @@ Bridge.$N1391Result =                 r;
                 var numbers4 = System.Array.init([2.2], System.Double);
                 var count3 = 0;
                 $t = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers3).except(numbers4));
-                while ($t.moveNext()) {
-                    var item = $t.getCurrent();
-                    Bridge.Test.NUnit.Assert.fail$1("numbers3.Except(numbers4) should be empty");
-                }
-                Bridge.Test.NUnit.Assert.areEqual$1(0, count3, "numbers3.Except(numbers4) should be empty");
+                try {
+                    while ($t.moveNext()) {
+                        var item = $t.getCurrent();
+                        Bridge.Test.NUnit.Assert.fail$1("numbers3.Except(numbers4) should be empty");
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }Bridge.Test.NUnit.Assert.areEqual$1(0, count3, "numbers3.Except(numbers4) should be empty");
 
                 var numbers5 = System.Array.init([2.0], System.Double);
                 var numbers6 = System.Array.init([2.2], System.Double);
                 var count5 = 0;
                 $t1 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers5).except(numbers6));
-                while ($t1.moveNext()) {
-                    var item1 = $t1.getCurrent();
-                    Bridge.Test.NUnit.Assert.areEqual(2.0, item1);
-                    count5 = (count5 + 1) | 0;
-                }
-                Bridge.Test.NUnit.Assert.areEqual(1, count5);
+                try {
+                    while ($t1.moveNext()) {
+                        var item1 = $t1.getCurrent();
+                        Bridge.Test.NUnit.Assert.areEqual(2.0, item1);
+                        count5 = (count5 + 1) | 0;
+                    }
+                }finally {
+                    if (Bridge.is($t1, System.IDisposable)) {
+                        $t1.System$IDisposable$dispose();
+                    }
+                }Bridge.Test.NUnit.Assert.areEqual(1, count5);
 
                 var numbers7 = System.Array.init([], System.Double);
                 var numbers8 = System.Array.init([2.0], System.Double);
                 var count7 = 0;
                 $t2 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers7).except(numbers8));
-                while ($t2.moveNext()) {
-                    var item2 = $t2.getCurrent();
-                    Bridge.Test.NUnit.Assert.fail$1("numbers7.Except(numbers8) should be empty");
-                    count7 = (count7 + 1) | 0;
-                }
-                Bridge.Test.NUnit.Assert.areEqual$1(0, count7, "numbers7.Except(numbers8) should be empty");
+                try {
+                    while ($t2.moveNext()) {
+                        var item2 = $t2.getCurrent();
+                        Bridge.Test.NUnit.Assert.fail$1("numbers7.Except(numbers8) should be empty");
+                        count7 = (count7 + 1) | 0;
+                    }
+                }finally {
+                    if (Bridge.is($t2, System.IDisposable)) {
+                        $t2.System$IDisposable$dispose();
+                    }
+                }Bridge.Test.NUnit.Assert.areEqual$1(0, count7, "numbers7.Except(numbers8) should be empty");
 
                 var numbers9 = System.Array.init([7.0], System.Double);
                 var numbers10 = System.Array.init([], System.Double);
                 var count9 = 0;
                 $t3 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers9).except(numbers10));
-                while ($t3.moveNext()) {
-                    var item3 = $t3.getCurrent();
-                    Bridge.Test.NUnit.Assert.areEqual(7.0, item3);
-                    count9 = (count9 + 1) | 0;
-                }
-                Bridge.Test.NUnit.Assert.areEqual(1, count9);
+                try {
+                    while ($t3.moveNext()) {
+                        var item3 = $t3.getCurrent();
+                        Bridge.Test.NUnit.Assert.areEqual(7.0, item3);
+                        count9 = (count9 + 1) | 0;
+                    }
+                }finally {
+                    if (Bridge.is($t3, System.IDisposable)) {
+                        $t3.System$IDisposable$dispose();
+                    }
+                }Bridge.Test.NUnit.Assert.areEqual(1, count9);
 
                 var numbers11 = System.Array.init([], System.Double);
                 var numbers12 = System.Array.init([], System.Double);
                 var count11 = 0;
                 $t4 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers11).except(numbers12));
-                while ($t4.moveNext()) {
-                    var item4 = $t4.getCurrent();
-                    Bridge.Test.NUnit.Assert.fail$1("numbers11.Except(numbers12) should be empty");
-                }
-                Bridge.Test.NUnit.Assert.areEqual$1(0, count11, "numbers11.Except(numbers12) should be empty");
+                try {
+                    while ($t4.moveNext()) {
+                        var item4 = $t4.getCurrent();
+                        Bridge.Test.NUnit.Assert.fail$1("numbers11.Except(numbers12) should be empty");
+                    }
+                }finally {
+                    if (Bridge.is($t4, System.IDisposable)) {
+                        $t4.System$IDisposable$dispose();
+                    }
+                }Bridge.Test.NUnit.Assert.areEqual$1(0, count11, "numbers11.Except(numbers12) should be empty");
             }
         }
     });
@@ -12924,54 +13141,79 @@ Bridge.$N1391Result =                 r;
                 var numbers4 = System.Array.init([2.4], System.Double);
                 var count3 = 0;
                 $t = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers3).intersect(numbers4));
-                while ($t.moveNext()) {
-                    var item = $t.getCurrent();
-                    Bridge.Test.NUnit.Assert.fail$1("numbers3.Intersect(numbers4) should be empty");
-                }
-                Bridge.Test.NUnit.Assert.areEqual$1(0, count3, "numbers3.Intersect(numbers4) should be empty");
+                try {
+                    while ($t.moveNext()) {
+                        var item = $t.getCurrent();
+                        Bridge.Test.NUnit.Assert.fail$1("numbers3.Intersect(numbers4) should be empty");
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }Bridge.Test.NUnit.Assert.areEqual$1(0, count3, "numbers3.Intersect(numbers4) should be empty");
 
                 var numbers5 = System.Array.init([2.0], System.Double);
                 var numbers6 = System.Array.init([2.0], System.Double);
                 var count5 = 0;
                 $t1 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers5).intersect(numbers6));
-                while ($t1.moveNext()) {
-                    var item1 = $t1.getCurrent();
-                    Bridge.Test.NUnit.Assert.areEqual(2.0, item1);
-                    count5 = (count5 + 1) | 0;
-                }
-                Bridge.Test.NUnit.Assert.areEqual(1, count5);
+                try {
+                    while ($t1.moveNext()) {
+                        var item1 = $t1.getCurrent();
+                        Bridge.Test.NUnit.Assert.areEqual(2.0, item1);
+                        count5 = (count5 + 1) | 0;
+                    }
+                }finally {
+                    if (Bridge.is($t1, System.IDisposable)) {
+                        $t1.System$IDisposable$dispose();
+                    }
+                }Bridge.Test.NUnit.Assert.areEqual(1, count5);
 
                 var numbers7 = System.Array.init([], System.Double);
                 var numbers8 = System.Array.init([2.0], System.Double);
                 var count7 = 0;
                 $t2 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers7).intersect(numbers8));
-                while ($t2.moveNext()) {
-                    var item2 = $t2.getCurrent();
-                    Bridge.Test.NUnit.Assert.fail$1("numbers7.Intersect(numbers8) should be empty");
-                    count7 = (count7 + 1) | 0;
-                }
-                Bridge.Test.NUnit.Assert.areEqual$1(0, count7, "numbers7.Intersect(numbers8) should be empty");
+                try {
+                    while ($t2.moveNext()) {
+                        var item2 = $t2.getCurrent();
+                        Bridge.Test.NUnit.Assert.fail$1("numbers7.Intersect(numbers8) should be empty");
+                        count7 = (count7 + 1) | 0;
+                    }
+                }finally {
+                    if (Bridge.is($t2, System.IDisposable)) {
+                        $t2.System$IDisposable$dispose();
+                    }
+                }Bridge.Test.NUnit.Assert.areEqual$1(0, count7, "numbers7.Intersect(numbers8) should be empty");
 
                 var numbers9 = System.Array.init([7.0], System.Double);
                 var numbers10 = System.Array.init([], System.Double);
                 var count9 = 0;
                 $t3 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers9).intersect(numbers10));
-                while ($t3.moveNext()) {
-                    var item3 = $t3.getCurrent();
-                    Bridge.Test.NUnit.Assert.fail$1("numbers9.Intersect(numbers10) should be empty");
-                    count9 = (count9 + 1) | 0;
-                }
-                Bridge.Test.NUnit.Assert.areEqual(0, count9);
+                try {
+                    while ($t3.moveNext()) {
+                        var item3 = $t3.getCurrent();
+                        Bridge.Test.NUnit.Assert.fail$1("numbers9.Intersect(numbers10) should be empty");
+                        count9 = (count9 + 1) | 0;
+                    }
+                }finally {
+                    if (Bridge.is($t3, System.IDisposable)) {
+                        $t3.System$IDisposable$dispose();
+                    }
+                }Bridge.Test.NUnit.Assert.areEqual(0, count9);
 
                 var numbers11 = System.Array.init([], System.Double);
                 var numbers12 = System.Array.init([], System.Double);
                 var count11 = 0;
                 $t4 = Bridge.getEnumerator(System.Linq.Enumerable.from(numbers11).intersect(numbers12));
-                while ($t4.moveNext()) {
-                    var item4 = $t4.getCurrent();
-                    Bridge.Test.NUnit.Assert.fail$1("numbers11.Intersect(numbers12) should be empty");
-                }
-                Bridge.Test.NUnit.Assert.areEqual$1(0, count11, "numbers11.Intersect(numbers12) should be empty");
+                try {
+                    while ($t4.moveNext()) {
+                        var item4 = $t4.getCurrent();
+                        Bridge.Test.NUnit.Assert.fail$1("numbers11.Intersect(numbers12) should be empty");
+                    }
+                }finally {
+                    if (Bridge.is($t4, System.IDisposable)) {
+                        $t4.System$IDisposable$dispose();
+                    }
+                }Bridge.Test.NUnit.Assert.areEqual$1(0, count11, "numbers11.Intersect(numbers12) should be empty");
             }
         }
     });
@@ -14349,10 +14591,6 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge377", {
-        $literal: true
-    });
-
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge381", {
         statics: {
             testUseCase: function () {
@@ -14799,29 +15037,49 @@ Bridge.$N1391Result =                 r;
                 var sum = 0;
 
                 $t = Bridge.getEnumerator(numbers);
-                while ($t.moveNext()) {
-                    var a = $t.getCurrent();
-                    sum = (sum + a) | 0;
+                try {
+                    while ($t.moveNext()) {
+                        var a = $t.getCurrent();
+                        sum = (sum + a) | 0;
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
                 }
-
                 $t1 = Bridge.getEnumerator(numbers);
-                while ($t1.moveNext()) {
-                    var a1 = $t1.getCurrent();
-                    sum = (sum + a1) | 0;
+                try {
+                    while ($t1.moveNext()) {
+                        var a1 = $t1.getCurrent();
+                        sum = (sum + a1) | 0;
+                    }
+                }finally {
+                    if (Bridge.is($t1, System.IDisposable)) {
+                        $t1.System$IDisposable$dispose();
+                    }
                 }
-
                 $t2 = Bridge.getEnumerator(numbers);
-                while ($t2.moveNext()) {
-                    var a2 = $t2.getCurrent();
-                    sum = (sum + a2) | 0;
+                try {
+                    while ($t2.moveNext()) {
+                        var a2 = $t2.getCurrent();
+                        sum = (sum + a2) | 0;
+                    }
+                }finally {
+                    if (Bridge.is($t2, System.IDisposable)) {
+                        $t2.System$IDisposable$dispose();
+                    }
                 }
-
                 $t3 = Bridge.getEnumerator(numbers);
-                while ($t3.moveNext()) {
-                    var a3 = $t3.getCurrent();
-                    sum = (sum + a3) | 0;
+                try {
+                    while ($t3.moveNext()) {
+                        var a3 = $t3.getCurrent();
+                        sum = (sum + a3) | 0;
+                    }
+                }finally {
+                    if (Bridge.is($t3, System.IDisposable)) {
+                        $t3.System$IDisposable$dispose();
+                    }
                 }
-
                 Bridge.Test.NUnit.Assert.areEqual$1(24, sum, "Bridge502 sum");
             }
         }
@@ -15889,42 +16147,62 @@ Bridge.$N1391Result =                 r;
                 var result = "";
 
                 $t = Bridge.getEnumerator(keys);
-                while ($t.moveNext()) {
-                    (function () {
-                        var itm = $t.getCurrent();
-                        handlers[((i++) | 0)] = function () {
-                            result += itm;
-                        };
-                    }).call(this);
+                try {
+                    while ($t.moveNext()) {
+                        (function () {
+                            var itm = $t.getCurrent();
+                            handlers[((i++) | 0)] = function () {
+                                result += itm;
+                            };
+                        }).call(this);
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
                 }
-
                 $t1 = Bridge.getEnumerator(handlers);
-                while ($t1.moveNext()) {
-                    var handler = $t1.getCurrent();
-                    handler();
+                try {
+                    while ($t1.moveNext()) {
+                        var handler = $t1.getCurrent();
+                        handler();
+                    }
+                }finally {
+                    if (Bridge.is($t1, System.IDisposable)) {
+                        $t1.System$IDisposable$dispose();
+                    }
                 }
-
                 Bridge.Test.NUnit.Assert.areEqual$1("123", result, "Bridge563 No block foreach loop");
 
                 i = 0;
                 result = "";
 
                 $t2 = Bridge.getEnumerator(keys);
-                while ($t2.moveNext()) {
-                    (function () {
-                        var itm1 = $t2.getCurrent();
-                        handlers[((i++) | 0)] = function () {
-                            result += itm1;
-                        };
-                    }).call(this);
+                try {
+                    while ($t2.moveNext()) {
+                        (function () {
+                            var itm1 = $t2.getCurrent();
+                            handlers[((i++) | 0)] = function () {
+                                result += itm1;
+                            };
+                        }).call(this);
+                    }
+                }finally {
+                    if (Bridge.is($t2, System.IDisposable)) {
+                        $t2.System$IDisposable$dispose();
+                    }
                 }
-
                 $t3 = Bridge.getEnumerator(handlers);
-                while ($t3.moveNext()) {
-                    var handler1 = $t3.getCurrent();
-                    handler1();
+                try {
+                    while ($t3.moveNext()) {
+                        var handler1 = $t3.getCurrent();
+                        handler1();
+                    }
+                }finally {
+                    if (Bridge.is($t3, System.IDisposable)) {
+                        $t3.System$IDisposable$dispose();
+                    }
                 }
-
                 Bridge.Test.NUnit.Assert.areEqual$1("123", result, "Bridge563 block foreach loop");
             },
             tesFor: function () {
@@ -15944,11 +16222,16 @@ Bridge.$N1391Result =                 r;
                 }
 
                 $t = Bridge.getEnumerator(handlers);
-                while ($t.moveNext()) {
-                    var handler = $t.getCurrent();
-                    handler();
+                try {
+                    while ($t.moveNext()) {
+                        var handler = $t.getCurrent();
+                        handler();
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
                 }
-
                 Bridge.Test.NUnit.Assert.areEqual$1("123", result, "Bridge563 For loop");
             }
         }
@@ -17422,23 +17705,33 @@ Bridge.$N1391Result =                 r;
                 var numbers = System.Array.init([1, 2, 3], System.Int32);
 
                 $t = Bridge.getEnumerator(numbers);
-                while ($t.moveNext()) {
-                    (function () {
-                        var n = $t.getCurrent();
-                        var func = function (i) {
-                            var $t1;
-                            var bigNumbers = System.Array.init([10, 20, 30], System.Int32);
-                            $t1 = Bridge.getEnumerator(bigNumbers);
-                            while ($t1.moveNext()) {
-                                var bn = $t1.getCurrent();
-                                sum = (sum + ((i * bn) | 0)) | 0;
-                            }
-                        };
+                try {
+                    while ($t.moveNext()) {
+                        (function () {
+                            var n = $t.getCurrent();
+                            var func = function (i) {
+                                var $t1;
+                                var bigNumbers = System.Array.init([10, 20, 30], System.Int32);
+                                $t1 = Bridge.getEnumerator(bigNumbers);
+                                try {
+                                    while ($t1.moveNext()) {
+                                        var bn = $t1.getCurrent();
+                                        sum = (sum + ((i * bn) | 0)) | 0;
+                                    }
+                                }finally {
+                                    if (Bridge.is($t1, System.IDisposable)) {
+                                        $t1.System$IDisposable$dispose();
+                                    }
+                                }};
 
-                        func(n);
-                    }).call(this);
+                            func(n);
+                        }).call(this);
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
                 }
-
                 return sum;
             }
         }
@@ -18153,16 +18446,21 @@ Bridge.$N1391Result =                 r;
                 var f = function () {
                     var $t;
                     $t = Bridge.getEnumerator(System.Array.init([1, 2, 3], System.Int32));
-                    while ($t.moveNext()) {
-                        (function () {
-                            var n = $t.getCurrent();
-                            var g = function (i) {
-                                sum = (sum + i) | 0;
-                            };
-                            g(n);
-                        }).call(this);
-                    }
-                    var h = function () {
+                    try {
+                        while ($t.moveNext()) {
+                            (function () {
+                                var n = $t.getCurrent();
+                                var g = function (i) {
+                                    sum = (sum + i) | 0;
+                                };
+                                g(n);
+                            }).call(this);
+                        }
+                    }finally {
+                        if (Bridge.is($t, System.IDisposable)) {
+                            $t.System$IDisposable$dispose();
+                        }
+                    }var h = function () {
                         sum = (sum * 2) | 0;
                     };
                     h();
@@ -18314,11 +18612,16 @@ Bridge.$N1391Result =                 r;
                 var sum = 0;
                 if (b) {
                     $t = Bridge.getEnumerator(t);
-                    while ($t.moveNext()) {
-                        var i = $t.getCurrent();
-                        sum = (sum + i) | 0;
-                    }
-                }
+                    try {
+                        while ($t.moveNext()) {
+                            var i = $t.getCurrent();
+                            sum = (sum + i) | 0;
+                        }
+                    }finally {
+                        if (Bridge.is($t, System.IDisposable)) {
+                            $t.System$IDisposable$dispose();
+                        }
+                    }}
 
                 Bridge.Test.NUnit.Assert.areEqual$1(6, sum, "Bridge726");
             }
@@ -18416,11 +18719,16 @@ Bridge.$N1391Result =                 r;
                 var $t;
                 var result = new (System.Collections.Generic.List$1(T2))();
                 $t = Bridge.getEnumerator(value, T);
-                while ($t.moveNext()) {
-                    var item = $t.getCurrent();
-                    result.add($function(item));
-                }
-                return result;
+                try {
+                    while ($t.moveNext()) {
+                        var item = $t.getCurrent();
+                        result.add($function(item));
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }return result;
             }
         }
     });
@@ -19346,20 +19654,25 @@ Bridge.$N1391Result =                 r;
 
                 var result = 0;
                 $t = Bridge.getEnumerator(testListA);
-                while ($t.moveNext()) {
-                    var item = $t.getCurrent();
-                    var fn = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge841.f2;
+                try {
+                    while ($t.moveNext()) {
+                        var item = $t.getCurrent();
+                        var fn = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge841.f2;
 
-                    switch (item) {
-                        case 1: 
-                            result = (result + 1) | 0;
-                            break;
-                        case 2: 
-                            result = (result + 2) | 0;
-                            break;
+                        switch (item) {
+                            case 1: 
+                                result = (result + 1) | 0;
+                                break;
+                            case 2: 
+                                result = (result + 2) | 0;
+                                break;
+                        }
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
                     }
                 }
-
                 Bridge.Test.NUnit.Assert.areEqual$1(3, result, "Bridge841");
             }
         }
@@ -19584,11 +19897,16 @@ Bridge.$N1391Result =                 r;
 
                 var s = 0;
                 $t = Bridge.getEnumerator(a);
-                while ($t.moveNext()) {
-                    var v = $t.getCurrent();
-                    s = (s + v) | 0;
+                try {
+                    while ($t.moveNext()) {
+                        var v = $t.getCurrent();
+                        s = (s + v) | 0;
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
                 }
-
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge882_Static.setSum(s);
         },
         config: {
@@ -19607,11 +19925,16 @@ Bridge.$N1391Result =                 r;
 
                 var s = 0;
                 $t = Bridge.getEnumerator(a);
-                while ($t.moveNext()) {
-                    var v = $t.getCurrent();
-                    s = (s + v) | 0;
+                try {
+                    while ($t.moveNext()) {
+                        var v = $t.getCurrent();
+                        s = (s + v) | 0;
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
                 }
-
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge882_Static.Bridge882_A_Static.setSum(s);
         },
         config: {
@@ -19654,15 +19977,57 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.NUnit.Assert.areEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge889.count());
             },
             makeEnumerable: function (T, arr) {
-                var $t;
-                if (arr === void 0) { arr = []; }
-                var $yield = [];
-                $t = Bridge.getEnumerator(arr);
-                while ($t.moveNext()) {
-                    var x = $t.getCurrent();
-                    $yield.push(x);
-                }
-                return System.Array.toEnumerable($yield);
+                return new (Bridge.GeneratorEnumerable$1(T))(Bridge.fn.bind(this, function (T, arr) {
+                    var $step = 0,
+                        $jumpFromFinally,
+                        $returnValue,
+                        $t,
+                        x,
+                        $async_e;
+
+                    var $enumerator = new (Bridge.GeneratorEnumerator$1(T))(Bridge.fn.bind(this, function () {
+                        try {
+                            for (;;) {
+                                switch ($step) {
+                                    case 0: {
+                                        if (arr === void 0) { arr = []; }
+                                            $t = Bridge.getEnumerator(arr);
+                                            $step = 1;
+                                            continue;
+                                    }
+                                    case 1: {
+                                        if ($t.moveNext()) {
+                                                x = $t.getCurrent();
+                                                $step = 2;
+                                                continue;
+                                            }
+                                        $step = 4;
+                                        continue;
+                                    }
+                                    case 2: {
+                                        $enumerator.current = x;
+                                            $step = 3;
+                                            return true;
+                                    }
+                                    case 3: {
+                                        $step = 1;
+                                        continue;
+                                    }
+                                    case 4: {
+
+                                    }
+                                    default: {
+                                        return false;
+                                    }
+                                }
+                            }
+                        } catch($async_e1) {
+                            $async_e = System.Exception.create($async_e1);
+                            throw $async_e;
+                        }
+                    }));
+                    return $enumerator;
+                }, arguments));
             },
             testMakeEnumerable: function () {
                 Bridge.Test.NUnit.Assert.areEqual$1(0, System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge889.makeEnumerable(Object)).count(), "MakeEnumerable object 0");
@@ -19831,13 +20196,18 @@ Bridge.$N1391Result =                 r;
                                     $task1.getAwaitedResult();
                                     
                                         $t = Bridge.getEnumerator(myvar);
-                                        while ($t.moveNext()) {
-                                            d = $t.getCurrent();
-                                            if (d.value > 0) {
-                                                sum = (sum + d.value) | 0;
+                                        try {
+                                            while ($t.moveNext()) {
+                                                d = $t.getCurrent();
+                                                if (d.value > 0) {
+                                                    sum = (sum + d.value) | 0;
+                                                }
+                                            }
+                                        }finally {
+                                            if (Bridge.is($t, System.IDisposable)) {
+                                                $t.System$IDisposable$dispose();
                                             }
                                         }
-
                                         $task2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge906.myfunc();
                                         $step = 2;
                                         $task2.continueWith($asyncBody, true);
@@ -19888,15 +20258,20 @@ Bridge.$N1391Result =                 r;
                                     $task1.getAwaitedResult();
                                     
                                         $t = Bridge.getEnumerator(myvar);
-                                        while ($t.moveNext()) {
-                                            d = $t.getCurrent();
-                                            if (d.value > 0) {
-                                                sum = (sum + d.value) | 0;
-                                            } else {
-                                                sum = (sum - d.value) | 0;
+                                        try {
+                                            while ($t.moveNext()) {
+                                                d = $t.getCurrent();
+                                                if (d.value > 0) {
+                                                    sum = (sum + d.value) | 0;
+                                                } else {
+                                                    sum = (sum - d.value) | 0;
+                                                }
+                                            }
+                                        }finally {
+                                            if (Bridge.is($t, System.IDisposable)) {
+                                                $t.System$IDisposable$dispose();
                                             }
                                         }
-
                                         $task2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge906.myfunc();
                                         $step = 2;
                                         $task2.continueWith($asyncBody, true);
@@ -21096,11 +21471,16 @@ Bridge.$N1391Result =                 r;
 
                 var result = "";
                 $t = Bridge.getEnumerator(c);
-                while ($t.moveNext()) {
-                    var item = $t.getCurrent();
-                    result = System.String.concat(result, item);
+                try {
+                    while ($t.moveNext()) {
+                        var item = $t.getCurrent();
+                        result = System.String.concat(result, item);
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
                 }
-
                 Bridge.Test.NUnit.Assert.areEqual$1("123", result, "IEnumerator works");
             },
             N306: function () {
@@ -21226,7 +21606,7 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.NUnit.Assert.areEqual$1(22, date.v.getDate(), "TryParse works Day");
             },
             N377: function () {
-                var objectLiteralInstance = Bridge.ClientTest.Batch3.BridgeIssues.Bridge377.ctor({ field1: "field1 value", field3: 7 });
+                var objectLiteralInstance = { field1: "field1 value", field3: 7 };
 
                 Bridge.Test.NUnit.Assert.areEqual$1(true, objectLiteralInstance.hasOwnProperty("field1"), "ObjectLiteral's field with an explicit value is emitted");
                 Bridge.Test.NUnit.Assert.areEqual$1("field1 value", objectLiteralInstance.field1, "ObjectLiteral's field with an explicit value is emitted correctly");
@@ -21278,13 +21658,18 @@ Bridge.$N1391Result =                 r;
                 } )], Bridge.ClientTest.Batch3.BridgeIssues.Bridge395);
 
                 $t = Bridge.getEnumerator(tests);
-                while ($t.moveNext()) {
-                    var item = $t.getCurrent();
-                    if (!_dictOfTests.containsKey(item.getId())) {
-                        _dictOfTests.set(item.getId(), item);
+                try {
+                    while ($t.moveNext()) {
+                        var item = $t.getCurrent();
+                        if (!_dictOfTests.containsKey(item.getId())) {
+                            _dictOfTests.set(item.getId(), item);
+                        }
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
                     }
                 }
-
                 Bridge.Test.NUnit.Assert.areEqual$1(2, _dictOfTests.getCount(), "All items added");
                 Bridge.Test.NUnit.Assert.areEqual$1("a", _dictOfTests.get("a").getId(), "First element is a");
                 Bridge.Test.NUnit.Assert.areEqual$1("b", _dictOfTests.get("b").getId(), "Second element is b");
@@ -22116,11 +22501,6 @@ Bridge.$N1391Result =                 r;
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1467.SomeClass1]
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1530.Child", {
-        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1530.Parent],
-        $literal: true
-    });
-
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1684.MessageTable", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1684.PureComponent$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1684.Set$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1684.MessageEditState))]
     });
@@ -22193,11 +22573,6 @@ Bridge.$N1391Result =                 r;
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1819.Attributes", {
-        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1819.AttributeBase],
-        $literal: true
-    });
-
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.Bar$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.IBar$1(T)],
         v: Bridge.getDefaultValue(T),
@@ -22219,11 +22594,6 @@ Bridge.$N1391Result =                 r;
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.IInterface$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.TT$1(T))],
         $kind: "interface"
     }; });
-
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1833.Attributes", {
-        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1833.AttributeBase],
-        $literal: true
-    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1834.Test1$1", function (TValues) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1834.ITest1$1],
@@ -22281,13 +22651,27 @@ Bridge.$N1391Result =                 r;
     }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.Contract", {
-        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.IContract],
-        $literal: true
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            $this.$getType = function() { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.Contract; };
+            (function(){
+                this.value = 0;
+            }).call($this);
+            return $this;
+        }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.Contract2", {
-        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.IContract],
-        $literal: true
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            $this.$getType = function() { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.Contract2; };
+            (function(){
+                this.value = 0;
+            }).call($this);
+            return $this;
+        }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899.B", {
@@ -22920,7 +23304,6 @@ Bridge.$N1391Result =                 r;
     $m($n[2].Bridge2051, function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"TestGetElementType","is":true,"t":8,"sn":"testGetElementType","rt":Object}]}; });
     $m($n[2].Bridge2052, function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"TestArrayCreateInstance","is":true,"t":8,"sn":"testArrayCreateInstance","rt":Object},{"a":2,"n":"TestArrayCreateInstanceShouldThrow","is":true,"t":8,"sn":"testArrayCreateInstanceShouldThrow","rt":Object}]}; });
     $m($n[2].Bridge2088.T, function () { return {"td":$n[2].Bridge2088,"att":1048579,"a":1,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"ShouldSeeThis","t":16,"rt":$n[1].Int32,"g":{"a":2,"n":"get_ShouldSeeThis","t":8,"sn":"getShouldSeeThis","rt":$n[1].Int32},"s":{"a":2,"n":"set_ShouldSeeThis","t":8,"pi":[{"n":"value","pt":$n[1].Int32,"ps":0}],"sn":"setShouldSeeThis","rt":Object,"p":[$n[1].Int32]}}]}; });
-    $m($n[2].Bridge2088.CompletelyUnrelatedClass, function () { return {"td":$n[2].Bridge2088,"att":1048579,"a":1,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"ShouldNotSeeThis","t":16,"rt":$n[1].Int32,"g":{"a":2,"n":"get_ShouldNotSeeThis","t":8,"rt":$n[1].Int32,"fg":"shouldNotSeeThis"},"s":{"a":2,"n":"set_ShouldNotSeeThis","t":8,"p":[$n[1].Int32],"rt":Object,"fs":"shouldNotSeeThis"},"fn":"shouldNotSeeThis"}]}; });
     $m($n[2].Bridge2088.OL1, function () { return {"td":$n[2].Bridge2088,"att":1048579,"a":1,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"ShouldSeeThis1","t":16,"rt":$n[1].Int32,"g":{"a":2,"n":"get_ShouldSeeThis1","t":8,"rt":$n[1].Int32,"fg":"shouldSeeThis1"},"s":{"a":2,"n":"set_ShouldSeeThis1","t":8,"p":[$n[1].Int32],"rt":Object,"fs":"shouldSeeThis1"},"fn":"shouldSeeThis1"}]}; });
     $m($n[2].Bridge2088.OL2, function () { return {"td":$n[2].Bridge2088,"att":1048579,"a":1,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"ShouldSeeThis2","t":16,"rt":$n[1].Int32,"g":{"a":2,"n":"get_ShouldSeeThis2","t":8,"rt":$n[1].Int32,"fg":"shouldSeeThis2"},"s":{"a":2,"n":"set_ShouldSeeThis2","t":8,"p":[$n[1].Int32],"rt":Object,"fs":"shouldSeeThis2"},"fn":"shouldSeeThis2"}]}; });
     $m($n[2].Bridge2212, function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":1,"n":"Run","t":8,"sn":"run","rt":Object},{"a":2,"n":"TestDelegateBindCache","is":true,"t":8,"sn":"testDelegateBindCache","rt":Object},{"a":2,"n":"runCounter","t":4,"rt":$n[1].Int32,"sn":"runCounter"},{"a":1,"n":"test","t":4,"rt":$n[1].Int32,"sn":"test"}]}; });

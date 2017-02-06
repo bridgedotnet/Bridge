@@ -1372,9 +1372,12 @@
                     fn = Bridge.fn.makeFn(function () {
                         Bridge.caller.unshift(this);
 
-                        var result = method.apply(obj, arguments);
-
-                        Bridge.caller.shift(this);
+                        var result = null;
+                        try {
+                            result = method.apply(obj, arguments);
+                        } finally {
+                            Bridge.caller.shift(this);
+                        }
 
                         return result;
                     }, method.length);
@@ -1398,9 +1401,12 @@
                         }
                         Bridge.caller.unshift(this);
 
-                        var result = method.apply(obj, callArgs);
-
-                        Bridge.caller.shift(this);
+                        var result = null;
+                        try {
+                            result = method.apply(obj, callArgs);
+                        } finally {
+                            Bridge.caller.shift(this);
+                        }
 
                         return result;
                     }, method.length);
@@ -1426,9 +1432,12 @@
 
                     Bridge.caller.unshift(this);
 
-                    var result = method.apply(obj, callArgs);
-
-                    Bridge.caller.shift(this);
+                    var result = null;
+                    try {
+                        result = method.apply(obj, callArgs);
+                    } finally {
+                        Bridge.caller.shift(this);
+                    }
 
                     return result;
                 }, method.length);

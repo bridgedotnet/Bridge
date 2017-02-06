@@ -147,7 +147,7 @@ namespace Bridge.Translator
                 {
                     expression = ((ParenthesizedExpression) expression).Expression;
                 }
-                
+
                 expression.AcceptVisitor(this.Emitter);
                 return;
             }
@@ -191,7 +191,8 @@ namespace Bridge.Translator
 
             if (method == CS.Ops.IS && castToEnum)
             {
-                this.Write("Bridge.is(");
+                this.Write(JS.Types.Bridge.IS);
+                this.WriteOpenParentheses();
                 expression.AcceptVisitor(this.Emitter);
                 this.Write(", ");
                 this.Write(BridgeTypes.ToJsName(itype, this.Emitter));
@@ -214,7 +215,7 @@ namespace Bridge.Translator
 
                 return;
             }
-            
+
             bool isResultNullable = NullableType.IsNullable(typerr.Type);
 
             if (castCode != null)
@@ -446,7 +447,6 @@ namespace Bridge.Translator
             }
         }
 
-        
 
         protected virtual void EmitInlineCast(ResolveResult expressionrr, Expression expression, AstType astType, string castCode, bool isCastAttr, string method)
         {

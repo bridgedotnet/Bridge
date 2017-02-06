@@ -12182,28 +12182,28 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             prematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "PrematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks()",
-                    line: "217"
+                    line: "218"
                 } ));
                 t.getFixture().prematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks();
             },
             exceptionInIEnumerableIteratorBodyExecutesFinallyBlocks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ExceptionInIEnumerableIteratorBodyExecutesFinallyBlocks()",
-                    line: "236"
+                    line: "237"
                 } ));
                 t.getFixture().exceptionInIEnumerableIteratorBodyExecutesFinallyBlocks();
             },
             enumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "EnumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters()",
-                    line: "263"
+                    line: "264"
                 } ));
                 t.getFixture().enumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters();
             },
             differentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DifferentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals()",
-                    line: "277"
+                    line: "278"
                 } ));
                 t.getFixture().differentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals();
             }
@@ -20785,7 +20785,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             testBasic: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestAutoProps).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestAutoProps, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestBasic()",
-                    line: "33"
+                    line: "29"
                 } ));
                 Bridge.ClientTest.CSharp6.TestAutoProps.testBasic();
             }
@@ -21127,7 +21127,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             testBasic: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestInterpolatedStrings).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestInterpolatedStrings, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestBasic()",
-                    line: "37"
+                    line: "35"
                 } ));
                 Bridge.ClientTest.CSharp6.TestInterpolatedStrings.testBasic();
             }
