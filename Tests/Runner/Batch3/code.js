@@ -14366,6 +14366,21 @@ Bridge.$N1391Result =                 r;
         $kind: "interface"
     }; });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2344", {
+        statics: {
+            testHtmlElementName: function () {
+                var instance = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2344.Foo();
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2344.Foo.someMethod(HTMLElement, String, instance);
+
+                Bridge.Test.NUnit.Assert.areEqual("zzz", instance.getSecond());
+            }
+        }
+    });
+
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2344.IFoo$2", function (T, V) { return {
+        $kind: "interface"
+    }; });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
@@ -22897,6 +22912,43 @@ Bridge.$N1391Result =                 r;
             return "MyThing";
         }
     }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2344.Foo", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2344.IFoo$2(HTMLElement,String)],
+        statics: {
+            someMethod: function (T, V, instance) {
+                instance["Bridge$ClientTest$Batch3$BridgeIssues$Bridge2344$IFoo$2$" + Bridge.getTypeAlias(T) + "$" + Bridge.getTypeAlias(V) + "$addEv"](function (x) {
+                    x["Bridge$ClientTest$Batch3$BridgeIssues$Bridge2344$IFoo$2$" + Bridge.getTypeAlias(T) + "$" + Bridge.getTypeAlias(V) + "$something"]();
+                });
+                instance["Bridge$ClientTest$Batch3$BridgeIssues$Bridge2344$IFoo$2$" + Bridge.getTypeAlias(T) + "$" + Bridge.getTypeAlias(V) + "$doInvoke"]();
+            }
+        },
+        config: {
+            events: {
+                Ev: null
+            },
+            properties: {
+                First: null,
+                Second: null
+            },
+            alias: [
+            "getFirst", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2344$IFoo$2$HTMLElement$String$getFirst",
+            "setFirst", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2344$IFoo$2$HTMLElement$String$setFirst",
+            "getSecond", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2344$IFoo$2$HTMLElement$String$getSecond",
+            "setSecond", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2344$IFoo$2$HTMLElement$String$setSecond",
+            "addEv", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2344$IFoo$2$HTMLElement$String$addEv",
+            "removeEv", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2344$IFoo$2$HTMLElement$String$removeEv",
+            "something", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2344$IFoo$2$HTMLElement$String$something",
+            "doInvoke", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2344$IFoo$2$HTMLElement$String$doInvoke"
+            ]
+        },
+        something: function () {
+            this.setSecond("zzz");
+        },
+        doInvoke: function () {
+            !Bridge.staticEquals(this.Ev, null) ? this.Ev(this) : null;
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240B", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A],

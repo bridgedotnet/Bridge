@@ -164,10 +164,14 @@
                 return obj.$$name;
             }
 
-            if ((obj).constructor === Function) {
-                str = (obj).toString();
+            if (obj.constructor === Object) {
+                str = obj.toString();
+                var match = (/\[object (.{1,})\]/).exec(str);
+                return (match && match.length > 1) ? match[1] : "Object";
+            } else if (obj.constructor === Function) {
+                str = obj.toString();
             } else {
-                str = (obj).constructor.toString();
+                str = obj.constructor.toString();
             }
 
             var results = (/function (.{1,})\(/).exec(str);
