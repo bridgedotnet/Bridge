@@ -88,7 +88,8 @@
                 format = format.charAt(1);
             }
 
-            return format.replace(/(\\.|'[^']*'|"[^"]*"|d{1,4}|M{1,4}|yyyy|yy|y|HH?|hh?|mm?|ss?|tt?|f{1,3}|z{1,3}|\:|\/)/g,
+            var needRemoveDot = false;
+            format = format.replace(/(\\.|'[^']*'|"[^"]*"|d{1,4}|M{1,4}|yyyy|yy|y|HH?|hh?|mm?|ss?|tt?|f{1,7}|F{1,7}|z{1,3}|\:|\/)/g,
                 function (match, group, index) {
                     var part = match;
 
@@ -203,20 +204,40 @@
                             }
 
                             break;
+                        case "F":
+                        case "FF":
+                        case "FFF":
+                        case "FFFF":
+                        case "FFFFF":
+                        case "FFFFFF":
+                        case "FFFFFFF":
+                            part = millisecond.toString();
+                            if (part.length < 3) {
+                                part = Array(4 - part.length).join("0") + part;
+                            }
+
+                            part = part.substr(0, match.length);
+
+                            var c = '0';
+                            var i = part.length - 1;
+                            for (; i >= 0 && part.charAt(i) === c; i--);
+                            part = part.substring(0, i + 1);
+                            needRemoveDot = part.length == 0;
+                            break;
                         case "f":
                         case "ff":
                         case "fff":
+                        case "ffff":
+                        case "fffff":
+                        case "ffffff":
+                        case "fffffff":
                             part = millisecond.toString();
 
                             if (part.length < 3) {
-                                part = Array(3 - part.length).join("0") + part;
+                                part = Array(4 - part.length).join("0") + part;
                             }
 
-                            if (match === "ff") {
-                                part = part.substr(0, 2);
-                            } else if (match === "f") {
-                                part = part.charAt(0);
-                            }
+                            part = part.substr(0, match.length);
 
                             break;
                         case "z":
@@ -250,6 +271,12 @@
 
                     return part;
                 });
+
+            if (needRemoveDot && System.String.endsWith(format, ".")) {
+                format = format.substring(0, format.length - 1);
+            }
+
+            return format;
         },
 
         parse: function (value, provider, utc, silent) {

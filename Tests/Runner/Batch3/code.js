@@ -14366,6 +14366,92 @@ Bridge.$N1391Result =                 r;
         $kind: "interface"
     }; });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2337", {
+        statics: {
+            testFDateModifier: function () {
+                var date = new Date(2017, 2 - 1, 6, 10, 42, 52, 0);
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.000", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.fffffff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.000", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.ffffff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFFFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.000", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.fffff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.000", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.ffff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.000", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.fff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.00", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.ff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.F"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.0", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.f"));
+
+                date = new Date(2017, 2 - 1, 6, 10, 42, 52, 1);
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.001", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.001", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.fffffff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.001", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.001", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.ffffff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.001", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFFFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.001", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.fffff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.001", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.001", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.ffff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.001", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.001", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.fff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.00", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.ff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.F"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.0", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.f"));
+
+                date = new Date(2017, 2 - 1, 6, 10, 42, 52, 10);
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.01", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.010", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.fffffff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.01", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.010", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.ffffff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.01", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFFFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.010", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.fffff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.01", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.010", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.ffff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.01", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.010", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.fff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.01", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.01", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.ff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.F"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.0", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.f"));
+
+                date = new Date(2017, 2 - 1, 6, 10, 42, 52, 100);
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.1", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.100", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.fffffff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.1", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.100", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.ffffff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.1", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFFFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.100", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.fffff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.1", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.100", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.ffff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.1", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.100", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.fff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.1", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.10", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.ff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.1", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.F"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.1", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.f"));
+
+                date = new Date(2017, 2 - 1, 6, 10, 42, 52, 999);
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.999", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.999", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.fffffff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.999", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.999", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.ffffff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.999", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFFFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.999", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.fffff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.999", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.999", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.ffff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.999", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FFF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.999", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.fff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.99", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.FF"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.99", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.ff"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.9", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.F"));
+                Bridge.Test.NUnit.Assert.areEqual("2017-02-06 10:42:52.9", Bridge.Date.format(date, "yyyy-MM-dd HH:mm:ss.f"));
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
