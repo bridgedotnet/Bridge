@@ -331,7 +331,8 @@ namespace Bridge.Translator
 
                 if (conversion.IsBoxingConversion && needBox && !isArgument && !isStringConcat)
                 {
-                    block.Write("Bridge.box(");
+                    block.Write(JS.Types.Bridge.BOX);
+                    block.WriteOpenParentheses();
                     block.AfterOutput2 += ", " + ConversionBlock.GetBoxedType(rr.Type, block.Emitter);
 
                     var inlineMethod = ConversionBlock.GetInlineMethod(block.Emitter, "ToString",
@@ -362,7 +363,8 @@ namespace Bridge.Translator
 
                 if (conversion.IsUnboxingConversion || isArgument && expectedType.IsKnownType(KnownTypeCode.Object) && (rr.Type.IsKnownType(KnownTypeCode.Object) || IsUnpackGenericArrayInterfaceObject(rr.Type)))
                 {
-                    block.Write("Bridge.unbox(");
+                    block.Write(JS.Types.Bridge.UNBOX);
+                    block.WriteOpenParentheses();
                     block.AfterOutput2 += ")";
                     //return level;
                 }
