@@ -58,10 +58,12 @@
             }
 
             if (Bridge.isArray(o)) {
+                var arr = [];
                 for (var i = 0; i < o.length; i++) {
                     var item = o[i];
-                    o[i] = (item && item.$boxed) ? item.v : item;
+                    arr[i] = (item && item.$boxed) ? item.v : item;
                 }
+                o = arr;
             }
 
             return o;
