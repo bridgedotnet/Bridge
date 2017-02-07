@@ -118,9 +118,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var c2 = Bridge.createInstance(Object);
             var c3 = this.instantiate(Object);
 
-            Bridge.Test.NUnit.Assert.areEqual(System.Object, c1.constructor);
-            Bridge.Test.NUnit.Assert.areEqual(System.Object, c2.constructor);
-            Bridge.Test.NUnit.Assert.areEqual(System.Object, c3.constructor);
+            Bridge.Test.NUnit.Assert.areEqual(Object, c1.constructor);
+            Bridge.Test.NUnit.Assert.areEqual(Object, c2.constructor);
+            Bridge.Test.NUnit.Assert.areEqual(Object, c3.constructor);
         },
         createInstanceWithNoArgumentsWorksForGenericClassWithNamedDefaultConstructor: function () {
             var c1 = Bridge.createInstance(Bridge.ClientTest.Batch4.ActivatorTests.C8$1(System.Int32));
@@ -585,7 +585,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areStrictEqual$1(System.Object, Bridge.Reflection.getBaseType(System.Collections.Generic.Comparer$1(System.Object)), "BaseType should be correct");
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.NUnit.Assert.areEqual$1("System.Collections.Generic.Comparer$1[[Object]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.Comparer$1(System.Object)), "FullName should be correct");
+            Bridge.Test.NUnit.Assert.areEqual$1("System.Collections.Generic.Comparer$1[[System.Object, mscorlib]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.Comparer$1(System.Object)), "FullName should be correct");
             Bridge.Test.NUnit.Assert.true$1(Bridge.Reflection.isClass(System.Collections.Generic.Comparer$1(System.Object)), "IsClass should be true");
 
             var comparer = new (System.Collections.Generic.Comparer$1(System.Object))(System.Collections.Generic.Comparer$1.$default.fn);
@@ -646,7 +646,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areStrictEqual$1(System.Object, Bridge.Reflection.getBaseType(System.Collections.Generic.EqualityComparer$1(System.Object)), "BaseType should be correct");
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.NUnit.Assert.areEqual$1("System.Collections.Generic.EqualityComparer$1[[Object]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.EqualityComparer$1(System.Object)), "FullName should be correct");
+            Bridge.Test.NUnit.Assert.areEqual$1("System.Collections.Generic.EqualityComparer$1[[System.Object, mscorlib]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.EqualityComparer$1(System.Object)), "FullName should be correct");
             Bridge.Test.NUnit.Assert.true$1(Bridge.Reflection.isClass(System.Collections.Generic.EqualityComparer$1(System.Object)), "IsClass should be true");
 
             var dict = System.Collections.Generic.EqualityComparer$1(System.Object).def;
@@ -707,7 +707,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.GenericDictionaryTests", {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.NUnit.Assert.areEqual$1("System.Collections.Generic.Dictionary$2[[System.Int32, mscorlib],[String]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.Dictionary$2(System.Int32,System.String)), "FullName should be correct");
+            Bridge.Test.NUnit.Assert.areEqual$1("System.Collections.Generic.Dictionary$2[[System.Int32, mscorlib],[System.String, mscorlib]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.Dictionary$2(System.Int32,System.String)), "FullName should be correct");
             Bridge.Test.NUnit.Assert.true$1(Bridge.Reflection.isClass(System.Collections.Generic.Dictionary$2(System.Int32,System.String)), "IsClass should be true");
             var dict = new (System.Collections.Generic.Dictionary$2(System.Int32,System.String))();
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(dict, System.Collections.Generic.Dictionary$2(System.Int32,System.String)), "is Dictionary<int,string> should be true");
@@ -1042,7 +1042,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.ICollectionTests", {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.NUnit.Assert.areEqual$1("System.Collections.Generic.ICollection$1[[Object]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.ICollection$1(System.Object)), "FullName should be correct");
+            Bridge.Test.NUnit.Assert.areEqual$1("System.Collections.Generic.ICollection$1[[System.Object, mscorlib]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.ICollection$1(System.Object)), "FullName should be correct");
             Bridge.Test.NUnit.Assert.true$1(Bridge.Reflection.isInterface(System.Collections.Generic.ICollection$1(System.Object)), "IsInterface should be true");
 
             var interfaces = Bridge.Reflection.getInterfaces(System.Collections.Generic.ICollection$1(System.Object));
@@ -1183,7 +1183,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.IDictionaryTests", {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.NUnit.Assert.areEqual$1("System.Collections.Generic.IDictionary$2[[Object],[Object]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.IDictionary$2(System.Object,System.Object)), "FullName should be correct");
+            Bridge.Test.NUnit.Assert.areEqual$1("System.Collections.Generic.IDictionary$2[[System.Object, mscorlib],[System.Object, mscorlib]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.IDictionary$2(System.Object,System.Object)), "FullName should be correct");
             Bridge.Test.NUnit.Assert.true$1(Bridge.Reflection.isInterface(System.Collections.Generic.IDictionary$2(System.Object,System.Object)), "IsInterface should be true");
 
             var interfaces = Bridge.Reflection.getInterfaces(System.Collections.Generic.IDictionary$2(System.Object,System.Object));
@@ -1624,7 +1624,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.IListTests", {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.NUnit.Assert.areEqual$1("System.Collections.Generic.IList$1[[Object]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.IList$1(System.Object)), "FullName should be correct");
+            Bridge.Test.NUnit.Assert.areEqual$1("System.Collections.Generic.IList$1[[System.Object, mscorlib]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.IList$1(System.Object)), "FullName should be correct");
             Bridge.Test.NUnit.Assert.true$1(Bridge.Reflection.isInterface(System.Collections.Generic.IList$1(System.Object)), "IsInterface should be true");
 
             var interfaces = Bridge.Reflection.getInterfaces(System.Collections.Generic.IList$1(System.Object));
@@ -12269,13 +12269,13 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         createDelegateWorksNonGenericStaticMethodOfGenericType: function () {
             var m = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C9$2(System.Int32,System.String), 8, 284, "M");
             var f = Bridge.Reflection.midel(m);
-            Bridge.Test.NUnit.Assert.areEqual$1("System.Int32 String a", f("a"), "Delegate should return correct results");
+            Bridge.Test.NUnit.Assert.areEqual$1("System.Int32 System.String a", f("a"), "Delegate should return correct results");
         },
         createDelegateWorksForGenericInstanceMethods: function () {
             var m = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C8, 8, 284, "M3");
             var c = new Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C8("X");
             var f = Bridge.Reflection.midel(m, c, System.Array.init([System.Int32, System.String], Function));
-            Bridge.Test.NUnit.Assert.areEqual$1("X System.Int32 String a", f("a"), "Result of invoking delegate should be correct");
+            Bridge.Test.NUnit.Assert.areEqual$1("X System.Int32 System.String a", f("a"), "Result of invoking delegate should be correct");
             Bridge.Test.NUnit.Assert.throws$5(function () {
                 Bridge.Reflection.midel(m, Bridge.unbox(null), System.Array.init([System.Int32, System.String], Function));
             }, "Null target with correct type arguments should throw");
@@ -12295,7 +12295,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         createDelegateWorksForGenericStaticMethods: function () {
             var m = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C8, 8, 284, "M4");
             var f = Bridge.Reflection.midel(m, Bridge.unbox(null), System.Array.init([System.Int32, System.String], Function));
-            Bridge.Test.NUnit.Assert.areEqual$1("System.Int32 String a", f("a"), "Result of invoking delegate should be correct");
+            Bridge.Test.NUnit.Assert.areEqual$1("System.Int32 System.String a", f("a"), "Result of invoking delegate should be correct");
             Bridge.Test.NUnit.Assert.throws$5(function () {
                 Bridge.Reflection.midel(m, new Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C8(""), System.Array.init([System.Int32, System.String], Function));
             }, "Target with correct type arguments should throw");
@@ -12353,14 +12353,14 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         invokeWorksForGenericInlineCodeMethods: function () {
             var m = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C21, 8, 284, "M3");
-            Bridge.Test.NUnit.Assert.areEqual$1("42StringWorld", Bridge.unbox(Bridge.Reflection.midel(m, new Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C21(42), System.Array.init([System.String], Function))("World")), "Invoke should work");
+            Bridge.Test.NUnit.Assert.areEqual$1("42System.StringWorld", Bridge.unbox(Bridge.Reflection.midel(m, new Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C21(42), System.Array.init([System.String], Function))("World")), "Invoke should work");
         },
         invokeWorksForGenericInstanceMethod: function () {
             var m = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C8, 8, 284, "M3");
             var argsArr = System.Array.init(["x"], System.Object);
             var c = new Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C8("X");
-            Bridge.Test.NUnit.Assert.areEqual$1("X System.Int32 String a", Bridge.unbox(Bridge.Reflection.midel(m, c, System.Array.init([System.Int32, System.String], Function))("a")), "Result of invoking delegate should be correct");
-            Bridge.Test.NUnit.Assert.areEqual$1("X System.Int32 String x", Bridge.unbox(Bridge.Reflection.midel(m, c, System.Array.init([System.Int32, System.String], Function)).apply(null, argsArr)), "Result of invoking delegate should be correct");
+            Bridge.Test.NUnit.Assert.areEqual$1("X System.Int32 System.String a", Bridge.unbox(Bridge.Reflection.midel(m, c, System.Array.init([System.Int32, System.String], Function))("a")), "Result of invoking delegate should be correct");
+            Bridge.Test.NUnit.Assert.areEqual$1("X System.Int32 System.String x", Bridge.unbox(Bridge.Reflection.midel(m, c, System.Array.init([System.Int32, System.String], Function)).apply(null, argsArr)), "Result of invoking delegate should be correct");
             Bridge.Test.NUnit.Assert.throws$5(function () {
                 Bridge.Reflection.midel(m, null, System.Array.init([System.Int32, System.String], Function))("a");
             }, "Null target with correct type arguments should throw");
@@ -12379,7 +12379,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         invokeWorksForGenericStaticMethod: function () {
             var m = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C8, 8, 284, "M4");
-            Bridge.Test.NUnit.Assert.areEqual$1("System.Int32 String a", Bridge.unbox(Bridge.Reflection.midel(m, null, System.Array.init([System.Int32, System.String], Function))("a")), "Result of invoking delegate should be correct");
+            Bridge.Test.NUnit.Assert.areEqual$1("System.Int32 System.String a", Bridge.unbox(Bridge.Reflection.midel(m, null, System.Array.init([System.Int32, System.String], Function))("a")), "Result of invoking delegate should be correct");
             Bridge.Test.NUnit.Assert.throws$5(function () {
                 Bridge.Reflection.midel(m, new Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C8(""), System.Array.init([System.Int32, System.String], Function))("a");
             }, "Target with correct type arguments should throw");
@@ -12398,7 +12398,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         invokeWorksForGenericInstanceMethodsOnSerializableTypes: function () {
             var m = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C7, 8, 284, "M3");
-            Bridge.Test.NUnit.Assert.areEqual$1("13 System.Int32 String Suffix", Bridge.unbox(Bridge.Reflection.midel(m, Bridge.merge(new Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C7(), {
+            Bridge.Test.NUnit.Assert.areEqual$1("13 System.Int32 System.String Suffix", Bridge.unbox(Bridge.Reflection.midel(m, Bridge.merge(new Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C7(), {
                     x: 13
                 } ), System.Array.init([System.Int32, System.String], Function))("Suffix")), "Invoke should work");
         },
@@ -14163,11 +14163,11 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var a = $asm.$.Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.f1;
             Bridge.Test.NUnit.Assert.areEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C1", Bridge.Reflection.getTypeFullName(Bridge.getType(new Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C1())));
             Bridge.Test.NUnit.Assert.areEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C2$1[[System.Int32, mscorlib]]", Bridge.Reflection.getTypeFullName(Bridge.getType(new (Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C2$1(System.Int32))())));
-            Bridge.Test.NUnit.Assert.areEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C2$1[[String]]", Bridge.Reflection.getTypeFullName(Bridge.getType(new (Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C2$1(System.String))())));
+            Bridge.Test.NUnit.Assert.areEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C2$1[[System.String, mscorlib]]", Bridge.Reflection.getTypeFullName(Bridge.getType(new (Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C2$1(System.String))())));
             Bridge.Test.NUnit.Assert.areEqual("System.Int32", Bridge.Reflection.getTypeFullName(System.Int32));
-            Bridge.Test.NUnit.Assert.areEqual("String", Bridge.Reflection.getTypeFullName(System.String));
+            Bridge.Test.NUnit.Assert.areEqual("System.String", Bridge.Reflection.getTypeFullName(System.String));
             Bridge.Test.NUnit.Assert.areEqual("Function", Bridge.Reflection.getTypeFullName(Function));
-            Bridge.Test.NUnit.Assert.areEqual("Object", Bridge.Reflection.getTypeFullName(Bridge.getType({  })));
+            Bridge.Test.NUnit.Assert.areEqual("System.Object", Bridge.Reflection.getTypeFullName(Bridge.getType({  })));
             Bridge.Test.NUnit.Assert.areEqual("System.Int32[]", Bridge.Reflection.getTypeFullName(Bridge.getType(System.Array.init([1, 2], System.Int32))));
         },
         getTypeOnNullInstanceThrowsException: function () {
@@ -14324,14 +14324,14 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         accessingAStaticMemberInAGenericClassWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual("System.Int32 Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C", Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(System.Int32,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C).field);
             Bridge.Test.NUnit.Assert.areEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C System.Int32", Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C,System.Int32).field);
-            Bridge.Test.NUnit.Assert.areEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C, Bridge.ClientTest.Batch4],[System.Int32, mscorlib]] Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[String],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C, Bridge.ClientTest.Batch4]]", Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C,System.Int32),Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(System.String,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C)).field);
+            Bridge.Test.NUnit.Assert.areEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C, Bridge.ClientTest.Batch4],[System.Int32, mscorlib]] Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[System.String, mscorlib],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C, Bridge.ClientTest.Batch4]]", Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C,System.Int32),Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(System.String,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C)).field);
         },
         typeOfNestedGenericClassWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[System.Int32, mscorlib],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C, Bridge.ClientTest.Batch4],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1[[String]], Bridge.ClientTest.Batch4]], Bridge.ClientTest.Batch4]]", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(System.Int32,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1(System.String)))));
+            Bridge.Test.NUnit.Assert.areEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[System.Int32, mscorlib],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C, Bridge.ClientTest.Batch4],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1[[System.String, mscorlib]], Bridge.ClientTest.Batch4]], Bridge.ClientTest.Batch4]]", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(System.Int32,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1(System.String)))));
         },
         baseTypeAndImplementedInterfacesForGenericTypeWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BX$1[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[System.Int32, mscorlib],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C, Bridge.ClientTest.Batch4]], Bridge.ClientTest.Batch4]]", Bridge.Reflection.getTypeFullName(Bridge.Reflection.getBaseType(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(System.Int32,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1(System.String))))));
-            Bridge.Test.NUnit.Assert.areEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C, Bridge.ClientTest.Batch4],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1[[String]], Bridge.ClientTest.Batch4]], Bridge.ClientTest.Batch4],[String]], Bridge.ClientTest.Batch4]]", Bridge.Reflection.getTypeFullName(Bridge.Reflection.getInterfaces(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(System.Int32,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1(System.String))))[0]));
+            Bridge.Test.NUnit.Assert.areEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C, Bridge.ClientTest.Batch4],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1[[System.String, mscorlib]], Bridge.ClientTest.Batch4]], Bridge.ClientTest.Batch4],[System.String, mscorlib]], Bridge.ClientTest.Batch4]]", Bridge.Reflection.getTypeFullName(Bridge.Reflection.getInterfaces(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(System.Int32,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1(System.String))))[0]));
         },
         isGenericTypeDefinitionWorksAsExpected: function () {
             Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isGenericTypeDefinition(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2));
@@ -14851,7 +14851,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual("12String", g(5, 3));
         },
         importedInterfaceAppearsAsObjectWhenUsedAsGenericArgument: function () {
-            Bridge.Test.NUnit.Assert.areEqual(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BX$1(System.Object), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BX$1(Object));
+            Bridge.Test.NUnit.Assert.areEqual(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BX$1(System.Object), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BX$1(System.Object));
         },
         falseIsFunctionShouldReturnFalse: function () {
             Bridge.Test.NUnit.Assert.false(Bridge.is(Bridge.box(false, System.Boolean, $box_.System.Boolean.toString), Function));
@@ -14884,13 +14884,13 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual$1(null, Bridge.Reflection.getType("System.Collections.Generic.Dictionary$2, NotLoaded.Assembly"), "#5");
         },
         staticGetTypeMethodWithGenericsWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual$1(System.Collections.Generic.Dictionary$2(System.String,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests), Bridge.Reflection.getType("System.Collections.Generic.Dictionary$2[[String],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests, Bridge.ClientTest.Batch4]]"), "#1");
-            Bridge.Test.NUnit.Assert.areEqual$1(System.Collections.Generic.Dictionary$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests,System.String), Bridge.Reflection.getType("System.Collections.Generic.Dictionary$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests, Bridge.ClientTest.Batch4],[String]]"), "#2");
+            Bridge.Test.NUnit.Assert.areEqual$1(System.Collections.Generic.Dictionary$2(System.String,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests), Bridge.Reflection.getType("System.Collections.Generic.Dictionary$2[[System.String],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests, Bridge.ClientTest.Batch4]]"), "#1");
+            Bridge.Test.NUnit.Assert.areEqual$1(System.Collections.Generic.Dictionary$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests,System.String), Bridge.Reflection.getType("System.Collections.Generic.Dictionary$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests, Bridge.ClientTest.Batch4],[System.String]]"), "#2");
             Bridge.Test.NUnit.Assert.areEqual$1(System.Collections.Generic.Dictionary$2(System.Int32,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests), Bridge.Reflection.getType("System.Collections.Generic.Dictionary$2[[System.Int32, mscorlib],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests, Bridge.ClientTest.Batch4]]"), "#3");
-            Bridge.Test.NUnit.Assert.areEqual$1(System.Collections.Generic.Dictionary$2(System.String,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests), Bridge.Reflection.getType("System.Collections.Generic.Dictionary$2[[String],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests, Bridge.ClientTest.Batch4]], mscorlib"), "#4");
-            Bridge.Test.NUnit.Assert.areEqual$1(System.Collections.Generic.Dictionary$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests,System.String), Bridge.Reflection.getType("System.Collections.Generic.Dictionary$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests, Bridge.ClientTest.Batch4],[String]], mscorlib"), "#5");
+            Bridge.Test.NUnit.Assert.areEqual$1(System.Collections.Generic.Dictionary$2(System.String,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests), Bridge.Reflection.getType("System.Collections.Generic.Dictionary$2[[System.String],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests, Bridge.ClientTest.Batch4]], mscorlib"), "#4");
+            Bridge.Test.NUnit.Assert.areEqual$1(System.Collections.Generic.Dictionary$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests,System.String), Bridge.Reflection.getType("System.Collections.Generic.Dictionary$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests, Bridge.ClientTest.Batch4],[System.String]], mscorlib"), "#5");
             Bridge.Test.NUnit.Assert.areEqual$1(System.Collections.Generic.Dictionary$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests), Bridge.Reflection.getType("System.Collections.Generic.Dictionary$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests, Bridge.ClientTest.Batch4],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests, Bridge.ClientTest.Batch4]], mscorlib"), "#6");
-            Bridge.Test.NUnit.Assert.areEqual$1(System.Collections.Generic.Dictionary$2(System.String,System.Collections.Generic.Dictionary$2(System.Collections.Generic.Dictionary$2(System.Int32,System.DateTime),System.Collections.Generic.Dictionary$2(System.Int32,System.Double))), Bridge.Reflection.getType("System.Collections.Generic.Dictionary$2[[String],[System.Collections.Generic.Dictionary$2[[System.Collections.Generic.Dictionary$2[[System.Int32, mscorlib],[Date]], mscorlib],[System.Collections.Generic.Dictionary$2[[System.Int32, mscorlib],[System.Double]], mscorlib]], mscorlib]], mscorlib"), "#7");
+            Bridge.Test.NUnit.Assert.areEqual$1(System.Collections.Generic.Dictionary$2(System.String,System.Collections.Generic.Dictionary$2(System.Collections.Generic.Dictionary$2(System.Int32,System.DateTime),System.Collections.Generic.Dictionary$2(System.Int32,System.Double))), Bridge.Reflection.getType("System.Collections.Generic.Dictionary$2[[System.String],[System.Collections.Generic.Dictionary$2[[System.Collections.Generic.Dictionary$2[[System.Int32, mscorlib],[System.DateTime]], mscorlib],[System.Collections.Generic.Dictionary$2[[System.Int32, mscorlib],[System.Double]], mscorlib]], mscorlib]], mscorlib"), "#7");
         },
         doesItThrow: function (a) {
             try {
@@ -15672,7 +15672,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.BooleanTests", {
         typePropertiesAreCorrect_SPI_1575: function () {
             Bridge.Test.NUnit.Assert.true(Bridge.is(Bridge.box(true, System.Boolean, $box_.System.Boolean.toString), System.Boolean));
-            Bridge.Test.NUnit.Assert.areEqual("Boolean", Bridge.Reflection.getTypeFullName(System.Boolean));
+            Bridge.Test.NUnit.Assert.areEqual("System.Boolean", Bridge.Reflection.getTypeFullName(System.Boolean));
             // #1575
             Bridge.Test.NUnit.Assert.areEqual(System.Object, Bridge.Reflection.getBaseType(System.Boolean));
             Bridge.Test.NUnit.Assert.false(Bridge.Reflection.isClass(System.Boolean));
@@ -16479,7 +16479,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.DateTimeTests", {
         typePropertiesAreCorrect_SPI_1607_1608_1609: function () {
-            Bridge.Test.NUnit.Assert.areEqual("Date", Bridge.Reflection.getTypeFullName(System.DateTime));
+            Bridge.Test.NUnit.Assert.areEqual("System.DateTime", Bridge.Reflection.getTypeFullName(System.DateTime));
             Bridge.Test.NUnit.Assert.false(Bridge.Reflection.isClass(System.DateTime));
             // #1607 #1608 #1609
             Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isAssignableFrom(System.IComparable$1(System.DateTime), System.DateTime));
@@ -19468,7 +19468,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.ObjectTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.NUnit.Assert.true(Bridge.hasValue({  }));
-            Bridge.Test.NUnit.Assert.areEqual("Object", Bridge.Reflection.getTypeFullName(System.Object));
+            Bridge.Test.NUnit.Assert.areEqual("System.Object", Bridge.Reflection.getTypeFullName(System.Object));
             Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isClass(System.Object));
         },
         canGetHashCodeForObject: function () {
@@ -19855,7 +19855,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.StringTests", {
         typePropertiesAreCorrect_SPI_1597: function () {
-            Bridge.Test.NUnit.Assert.areEqual("String", Bridge.Reflection.getTypeFullName(System.String));
+            Bridge.Test.NUnit.Assert.areEqual("System.String", Bridge.Reflection.getTypeFullName(System.String));
             Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isClass(System.String));
             // #1597
             Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isAssignableFrom(System.IComparable$1(System.String), System.String));
@@ -21297,7 +21297,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         constantsWorks: function () {
             Bridge.Test.NUnit.Assert.true$1(System.Diagnostics.Stopwatch.frequency.gt(System.Int64(1000)), "Frequency");
-            Bridge.Test.NUnit.Assert.areEqual$1("Boolean", Bridge.Reflection.getTypeFullName(System.Boolean), "IsHighResolution");
+            Bridge.Test.NUnit.Assert.areEqual$1("System.Boolean", Bridge.Reflection.getTypeFullName(System.Boolean), "IsHighResolution");
         },
         startNewWorks: function () {
             var watch = System.Diagnostics.Stopwatch.startNew();
@@ -22428,9 +22428,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 Bridge.Test.NUnit.Assert.areEqual$1(System.Threading.Tasks.TaskStatus.ranToCompletion, task.status, "Task should be completed after promise");
                 Bridge.Test.NUnit.Assert.true$1(continuationRun, "Continuation should have been run after promise was completed.");
                 Bridge.Test.NUnit.Assert.areDeepEqual(Bridge.merge(new Bridge.ClientTest.Batch4.Threading.PromiseTests.TaskResult(), {
-                    setI: 42,
+                    setI: Bridge.box(42, System.Int32),
                     setS: "result 123",
-                    setJ: 101
+                    setJ: Bridge.box(101, System.Int32)
                 } ), task.getResult());
 
                 completeAsync();
@@ -22654,9 +22654,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.apply($asm.$.Bridge.ClientTest.Batch4.Threading.PromiseTests, {
         f1: function (i, s, j) {
             return Bridge.merge(new Bridge.ClientTest.Batch4.Threading.PromiseTests.TaskResult(), {
-                setI: i,
-                setS: s,
-                setJ: j
+                setI: Bridge.box(System.Nullable.getValue(Bridge.cast(Bridge.unbox(i), System.Int32)), System.Int32),
+                setS: Bridge.cast(s, System.String),
+                setJ: Bridge.box(System.Nullable.getValue(Bridge.cast(Bridge.unbox(j), System.Int32)), System.Int32)
             } );
         }
     });
@@ -22773,9 +22773,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Threading.PromiseTests.TaskResult", {
         config: {
             properties: {
-                I: 0,
+                I: null,
                 S: null,
-                J: 0
+                J: null
             }
         }
     });

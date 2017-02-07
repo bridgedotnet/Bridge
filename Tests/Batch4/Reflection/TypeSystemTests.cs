@@ -72,7 +72,7 @@ namespace Bridge.ClientTest.Batch4.Reflection
         }
 
         [External]
-        [Name("Object")]
+        [Name("System.Object")]
         public interface IImported
         {
         }
@@ -229,20 +229,20 @@ namespace Bridge.ClientTest.Batch4.Reflection
         {
             Assert.AreEqual("System.Int32 Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C", G<int, C>.field);
             Assert.AreEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C System.Int32", G<C, int>.field);
-            Assert.AreEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C, Bridge.ClientTest.Batch4],[System.Int32, mscorlib]] Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[String],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C, Bridge.ClientTest.Batch4]]", G<G<C, int>, G<string, C>>.field);
+            Assert.AreEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C, Bridge.ClientTest.Batch4],[System.Int32, mscorlib]] Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[System.String, mscorlib],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C, Bridge.ClientTest.Batch4]]", G<G<C, int>, G<string, C>>.field);
         }
 
         [Test]
         public void TypeOfNestedGenericClassWorks()
         {
-            Assert.AreEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[System.Int32, mscorlib],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C, Bridge.ClientTest.Batch4],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1[[String]], Bridge.ClientTest.Batch4]], Bridge.ClientTest.Batch4]]", typeof(G<int, G<C, IG<string>>>).FullName);
+            Assert.AreEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[System.Int32, mscorlib],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C, Bridge.ClientTest.Batch4],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1[[System.String, mscorlib]], Bridge.ClientTest.Batch4]], Bridge.ClientTest.Batch4]]", typeof(G<int, G<C, IG<string>>>).FullName);
         }
 
         [Test]
         public void BaseTypeAndImplementedInterfacesForGenericTypeWorks()
         {
             Assert.AreEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BX$1[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[System.Int32, mscorlib],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C, Bridge.ClientTest.Batch4]], Bridge.ClientTest.Batch4]]", typeof(G<int, G<C, IG<string>>>).BaseType.FullName);
-            Assert.AreEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C, Bridge.ClientTest.Batch4],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1[[String]], Bridge.ClientTest.Batch4]], Bridge.ClientTest.Batch4],[String]], Bridge.ClientTest.Batch4]]", typeof(G<int, G<C, IG<string>>>).GetInterfaces()[0].FullName);
+            Assert.AreEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C, Bridge.ClientTest.Batch4],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1[[System.String, mscorlib]], Bridge.ClientTest.Batch4]], Bridge.ClientTest.Batch4],[System.String, mscorlib]], Bridge.ClientTest.Batch4]]", typeof(G<int, G<C, IG<string>>>).GetInterfaces()[0].FullName);
         }
 
         [Test]
@@ -1287,13 +1287,13 @@ namespace Bridge.ClientTest.Batch4.Reflection
         [Test]
         public void StaticGetTypeMethodWithGenericsWorks()
         {
-            Assert.AreEqual(typeof(Dictionary<string, TypeSystemTests>), Type.GetType("System.Collections.Generic.Dictionary$2[[String],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests, Bridge.ClientTest.Batch4]]"), "#1");
-            Assert.AreEqual(typeof(Dictionary<TypeSystemTests, string>), Type.GetType("System.Collections.Generic.Dictionary$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests, Bridge.ClientTest.Batch4],[String]]"), "#2");
+            Assert.AreEqual(typeof(Dictionary<string, TypeSystemTests>), Type.GetType("System.Collections.Generic.Dictionary$2[[System.String],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests, Bridge.ClientTest.Batch4]]"), "#1");
+            Assert.AreEqual(typeof(Dictionary<TypeSystemTests, string>), Type.GetType("System.Collections.Generic.Dictionary$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests, Bridge.ClientTest.Batch4],[System.String]]"), "#2");
             Assert.AreEqual(typeof(Dictionary<int, TypeSystemTests>), Type.GetType("System.Collections.Generic.Dictionary$2[[System.Int32, mscorlib],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests, Bridge.ClientTest.Batch4]]"), "#3");
-            Assert.AreEqual(typeof(Dictionary<string, TypeSystemTests>), Type.GetType("System.Collections.Generic.Dictionary$2[[String],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests, Bridge.ClientTest.Batch4]], mscorlib"), "#4");
-            Assert.AreEqual(typeof(Dictionary<TypeSystemTests, string>), Type.GetType("System.Collections.Generic.Dictionary$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests, Bridge.ClientTest.Batch4],[String]], mscorlib"), "#5");
+            Assert.AreEqual(typeof(Dictionary<string, TypeSystemTests>), Type.GetType("System.Collections.Generic.Dictionary$2[[System.String],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests, Bridge.ClientTest.Batch4]], mscorlib"), "#4");
+            Assert.AreEqual(typeof(Dictionary<TypeSystemTests, string>), Type.GetType("System.Collections.Generic.Dictionary$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests, Bridge.ClientTest.Batch4],[System.String]], mscorlib"), "#5");
             Assert.AreEqual(typeof(Dictionary<TypeSystemTests, TypeSystemTests>), Type.GetType("System.Collections.Generic.Dictionary$2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests, Bridge.ClientTest.Batch4],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests, Bridge.ClientTest.Batch4]], mscorlib"), "#6");
-            Assert.AreEqual(typeof(Dictionary<string, Dictionary<Dictionary<int, DateTime>, Dictionary<int, double>>>), Type.GetType("System.Collections.Generic.Dictionary$2[[String],[System.Collections.Generic.Dictionary$2[[System.Collections.Generic.Dictionary$2[[System.Int32, mscorlib],[Date]], mscorlib],[System.Collections.Generic.Dictionary$2[[System.Int32, mscorlib],[System.Double]], mscorlib]], mscorlib]], mscorlib"), "#7");
+            Assert.AreEqual(typeof(Dictionary<string, Dictionary<Dictionary<int, DateTime>, Dictionary<int, double>>>), Type.GetType("System.Collections.Generic.Dictionary$2[[System.String],[System.Collections.Generic.Dictionary$2[[System.Collections.Generic.Dictionary$2[[System.Int32, mscorlib],[System.DateTime]], mscorlib],[System.Collections.Generic.Dictionary$2[[System.Int32, mscorlib],[System.Double]], mscorlib]], mscorlib]], mscorlib"), "#7");
         }
 
         [Enum(Emit.StringName)]
