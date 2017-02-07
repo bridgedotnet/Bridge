@@ -320,7 +320,7 @@ namespace Bridge.Translator
                                     }
                                     else
                                     {
-                                        string name = BridgeTypes.ToJsName(resolvedMethod.DeclaringType, this.Emitter) + ".";
+                                        string name = BridgeTypes.ToJsName(resolvedMethod.DeclaringType, this.Emitter, ignoreLiteralName: false) + ".";
                                         this.Write(name);
                                     }
 

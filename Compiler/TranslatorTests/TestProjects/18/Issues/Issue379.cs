@@ -2,7 +2,7 @@
 
 namespace TestIssue379
 {
-    [ObjectLiteral(ObjectInitializationMode.Ignore)]
+    [ObjectLiteral(ObjectInitializationMode.Ignore, ObjectCreateMode.Constructor)]
     public class DataIgnore
     {
         public DataIgnore()
@@ -25,7 +25,7 @@ namespace TestIssue379
     }
 
 
-    [ObjectLiteral(ObjectInitializationMode.DefaultValue)]
+    [ObjectLiteral(ObjectInitializationMode.DefaultValue, ObjectCreateMode.Constructor)]
     public class DataDefaultValue
     {
         public DataDefaultValue()
@@ -47,7 +47,7 @@ namespace TestIssue379
         public decimal Decimal8 = 8;
     }
 
-    [ObjectLiteral(ObjectInitializationMode.Initializer)]
+    [ObjectLiteral(ObjectInitializationMode.Initializer, ObjectCreateMode.Constructor)]
     public class DataInitializer
     {
         public DataInitializer()
