@@ -262,10 +262,10 @@
                     return s.replace(System.Guid.replace, "");
                 case "b": 
                 case "B": 
-                    return System.String.concat(String.fromCharCode(Bridge.box(123, System.Char, $box_.System.Char.toString)), s, String.fromCharCode(Bridge.box(125, System.Char, $box_.System.Char.toString)));
+                    return System.String.concat(String.fromCharCode(123), s, String.fromCharCode(125));
                 case "p": 
                 case "P": 
-                    return System.String.concat(String.fromCharCode(Bridge.box(40, System.Char, $box_.System.Char.toString)), s, String.fromCharCode(Bridge.box(41, System.Char, $box_.System.Char.toString)));
+                    return System.String.concat(String.fromCharCode(40), s, String.fromCharCode(41));
                 default: 
                     return s;
             }
