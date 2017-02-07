@@ -14368,17 +14368,70 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310", {
         statics: {
-            testConfigField: function () {
+            testBridgeFields: function () {
                 var c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component();
-                Bridge.Test.NUnit.Assert.notNull(Bridge.unbox(c.any));
+                Bridge.Test.NUnit.Assert.notNull(Bridge.unbox(c.instanceField));
+                Bridge.Test.NUnit.Assert.notNull(Bridge.unbox(c.getInstanceProperty()));
+                Bridge.Test.NUnit.Assert.notNull(Bridge.unbox(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component.staticField));
+                Bridge.Test.NUnit.Assert.notNull(Bridge.unbox(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component.getStaticProperty()));
+
+                c.ctor$2 = Bridge.box(6, System.Int32);
+                c.config = Bridge.box(1, System.Int32);
+                c.events = Bridge.box(2, System.Int32);
+                c.inherits = Bridge.box(3, System.Int32);
+                c.properties = Bridge.box(4, System.Int32);
+                c.statics = Bridge.box(5, System.Int32);
+
+                Bridge.Test.NUnit.Assert.areEqual(6, Bridge.unbox(c.ctor$2));
+                Bridge.Test.NUnit.Assert.areEqual(1, Bridge.unbox(c.config));
+                Bridge.Test.NUnit.Assert.areEqual(2, Bridge.unbox(c.events));
+                Bridge.Test.NUnit.Assert.areEqual(3, Bridge.unbox(c.inherits));
+                Bridge.Test.NUnit.Assert.areEqual(4, Bridge.unbox(c.properties));
+                Bridge.Test.NUnit.Assert.areEqual(5, Bridge.unbox(c.statics));
+
+                Bridge.Test.NUnit.Assert.areEqual(1, c.instanceEventResult);
+                Bridge.Test.NUnit.Assert.areEqual(2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component.staticEventResult);
+
+                var c1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component1();
+                Bridge.Test.NUnit.Assert.notNull(Bridge.unbox(c1.any));
+
+                var c2 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component2();
+                Bridge.Test.NUnit.Assert.notNull(Bridge.unbox(c2.any));
+
+                var c3 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component3();
+                Bridge.Test.NUnit.Assert.notNull(Bridge.unbox(c3.any));
             }
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component", {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.BaseComponent");
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component1", {
         config: null,
         any: null,
         $config: {
+            init: function () {
+                this.any = {  };
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component2", {
+        config: null,
+        any: null,
+        $config: {
+            init: function () {
+                this.any = {  };
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component3", {
+        any: null,
+        config: {
+            properties: {
+                config: null
+            },
             init: function () {
                 this.any = {  };
             }
@@ -23016,6 +23069,64 @@ Bridge.$N1391Result =                 r;
             return "MyThing";
         }
     }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component", {
+        $inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.BaseComponent],
+        $statics: {
+            ctor: function () {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component.addStaticEvent(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component.component_StaticEvent);
+
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component.StaticEvent(null, 2);
+            },
+            staticField: null,
+            staticEventResult: 0,
+            config: {
+                events: {
+                    StaticEvent: null
+                },
+                properties: {
+                    StaticProperty: null
+                },
+                init: function () {
+                    this.staticField = {  };
+                    this.StaticProperty = {  };
+                }
+            },
+            component_StaticEvent: function (sender, e) {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component.staticEventResult = e;
+            }
+        },
+        ctor$2: null,
+        config: null,
+        events: null,
+        inherits: null,
+        properties: null,
+        statics: null,
+        instanceField: null,
+        instanceEventResult: 0,
+        $config: {
+            events: {
+                InstanceEvent: null
+            },
+            properties: {
+                InstanceProperty: null
+            },
+            init: function () {
+                this.instanceField = {  };
+                this.InstanceProperty = {  };
+            }
+        },
+        ctor: function () {
+            this.$initialize();
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.BaseComponent.ctor.call(this);
+            this.addInstanceEvent(Bridge.fn.cacheBind(this, this.component_InstanceEvent));
+
+            this.InstanceEvent(null, 1);
+        },
+        component_InstanceEvent: function (sender, e) {
+            this.instanceEventResult = e;
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240B", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A],
