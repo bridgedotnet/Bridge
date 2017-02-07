@@ -14368,18 +14368,36 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313", {
         statics: {
-            testExternalInterfaceMembers: function () {
-                var log = null;
-                log = {log: function (msg) {return msg || "[Empty]";}};
+            testExternalInterfaceOverloadedMembers: function () {
+                var log1 = null;
+                log1 = {log: function (msg) {return msg || "[Empty1]";}};
 
-                Bridge.Test.NUnit.Assert.areEqual("[Empty]", log.log());
-                Bridge.Test.NUnit.Assert.areEqual("[Msg]", log.log("[Msg]"));
+                Bridge.Test.NUnit.Assert.areEqual("[Empty1]", log1.log());
+                Bridge.Test.NUnit.Assert.areEqual("[Msg1]", log1.log("[Msg1]"));
             },
-            testExternalGnericClass: function () {
-                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Logger = function () {this.field = 10;};
-                var logger = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Logger();
+            testExternalClassInheritingInterface: function () {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Consoler = { };
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Consoler.console = {log: function (msg) {return msg || "[Empty]";}};
 
-                Bridge.Test.NUnit.Assert.areEqual(10, logger.field);
+                Bridge.Test.NUnit.Assert.areEqual("[Empty]", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Consoler.console.log());
+                Bridge.Test.NUnit.Assert.areEqual("[Msg]", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Consoler.console.log("[Msg]"));
+            },
+            testExternalInheritingInterfaces: function () {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.IBaseContainer = function() { };
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.IContainer = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.IBaseContainer;
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Container = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.IBaseContainer;
+
+                var baseCnt = Bridge.cast(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Container(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.IBaseContainer);
+                baseCnt.value = 1;
+                var r1 = 0;
+                r1 = baseCnt.value;
+                Bridge.Test.NUnit.Assert.areEqual(1, r1);
+
+                var cnt = Bridge.cast(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Container(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.IContainer);
+                cnt.value = 2;
+                var r2 = 0;
+                r2 = cnt.value;
+                Bridge.Test.NUnit.Assert.areEqual(2, r2);
             }
         }
     });
@@ -14417,6 +14435,17 @@ Bridge.$N1391Result =                 r;
             getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2318.MyStruct(); }
         },
         $clone: function (to) { return this; }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2349", {
+        statics: {
+            testExternalIgnoreGenericClass: function () {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2349.Logger = function () { this.field = 10; };
+                var logger = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2349.Logger();
+
+                Bridge.Test.NUnit.Assert.areEqual(10, logger.field);
+            }
+        }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
