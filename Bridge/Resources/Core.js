@@ -52,9 +52,18 @@
             };
         },
 
-        unbox: function(o) {
+        unbox: function (o) {
             if (o && o.$boxed) {
                 return o.v;
+            }
+
+            if (Bridge.isArray(o)) {
+                var arr = [];
+                for (var i = 0; i < o.length; i++) {
+                    var item = o[i];
+                    arr[i] = (item && item.$boxed) ? item.v : item;
+                }
+                o = arr;
             }
 
             return o;
@@ -1365,9 +1374,12 @@
                     fn = Bridge.fn.makeFn(function () {
                         Bridge.caller.unshift(this);
 
-                        var result = method.apply(obj, arguments);
-
-                        Bridge.caller.shift(this);
+                        var result = null;
+                        try {
+                            result = method.apply(obj, arguments);
+                        } finally {
+                            Bridge.caller.shift(this);
+                        }
 
                         return result;
                     }, method.length);
@@ -1391,9 +1403,12 @@
                         }
                         Bridge.caller.unshift(this);
 
-                        var result = method.apply(obj, callArgs);
-
-                        Bridge.caller.shift(this);
+                        var result = null;
+                        try {
+                            result = method.apply(obj, callArgs);
+                        } finally {
+                            Bridge.caller.shift(this);
+                        }
 
                         return result;
                     }, method.length);
@@ -1419,9 +1434,12 @@
 
                     Bridge.caller.unshift(this);
 
-                    var result = method.apply(obj, callArgs);
-
-                    Bridge.caller.shift(this);
+                    var result = null;
+                    try {
+                        result = method.apply(obj, callArgs);
+                    } finally {
+                        Bridge.caller.shift(this);
+                    }
 
                     return result;
                 }, method.length);

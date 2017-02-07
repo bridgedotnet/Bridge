@@ -328,21 +328,31 @@
         setAttributes: function (el, attrs) {
             var $t;
             $t = Bridge.getEnumerator(attrs);
-            while ($t.moveNext()) {
-                var item = $t.getCurrent();
-                el.setAttribute(item.key, item.value);
-            }
-        },
+            try {
+                while ($t.moveNext()) {
+                    var item = $t.getCurrent();
+                    el.setAttribute(item.key, item.value);
+                }
+            }finally {
+                if (Bridge.is($t, System.IDisposable)) {
+                    $t.System$IDisposable$dispose();
+                }
+            }},
         obj2Css: function (obj) {
             var $t;
             var str = "";
 
             $t = Bridge.getEnumerator(obj);
-            while ($t.moveNext()) {
-                var item = $t.getCurrent();
-                str = System.String.concat(str, (System.String.concat(item.key.toLowerCase(), ":", item.value, ";")));
+            try {
+                while ($t.moveNext()) {
+                    var item = $t.getCurrent();
+                    str = System.String.concat(str, (System.String.concat(item.key.toLowerCase(), ":", item.value, ";")));
+                }
+            }finally {
+                if (Bridge.is($t, System.IDisposable)) {
+                    $t.System$IDisposable$dispose();
+                }
             }
-
             return str;
         }
     });

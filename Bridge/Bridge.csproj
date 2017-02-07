@@ -58,6 +58,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Attributes\FieldAttribute.cs" />
+    <Compile Include="System\SerializableAttribute.cs" />
     <Compile Include="Attributes\UnboxAttribute.cs" />
     <Compile Include="Attributes\GlobalMethodsAttribute.cs" />
     <Compile Include="Attributes\MixinAttribute.cs" />
@@ -778,6 +779,7 @@
     <Content Include="Resources\Convert.js" />
     <Content Include="Resources\Enum.js" />
     <Content Include="Resources\.lib\LongLib.js" />
+    <Content Include="Resources\Generator.js" />
     <Content Include="Resources\Long.js" />
     <Content Include="Resources\Math.js" />
     <Content Include="Resources\ReflectionAssembly.js" />
