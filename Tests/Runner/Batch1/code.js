@@ -25609,7 +25609,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.SimpleTypes.BooleanTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.NUnit.Assert.true(Bridge.is(Bridge.box(true, System.Boolean, $box_.System.Boolean.toString), System.Boolean));
-            Bridge.Test.NUnit.Assert.areEqual("System.Boolean", Bridge.Reflection.getTypeFullName(System.Boolean));
+            Bridge.Test.NUnit.Assert.areEqual$1("System.Boolean", Bridge.Reflection.getTypeFullName(System.Boolean), "#2062");
         },
         getDefaultValue: function (T) {
             return Bridge.getDefaultValue(T);
@@ -27633,7 +27633,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             }
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.NUnit.Assert.areEqual("System.DateTime", Bridge.Reflection.getTypeFullName(System.DateTime));
+            Bridge.Test.NUnit.Assert.areEqual$1("System.DateTime", Bridge.Reflection.getTypeFullName(System.DateTime), "#2064");
             var o = Bridge.box(new Date(), System.DateTime, $box_.System.DateTime.toString);
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(o, System.DateTime), "o is DateTime");
         },
@@ -28027,7 +28027,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.SimpleTypes.ObjectTests", {
         typePropertiesAreCorrect: function () {
             Bridge.Test.NUnit.Assert.true(Bridge.hasValue({  }));
-            Bridge.Test.NUnit.Assert.areEqual("System.Object", Bridge.Reflection.getTypeFullName(System.Object));
+            Bridge.Test.NUnit.Assert.areEqual$1("System.Object", Bridge.Reflection.getTypeFullName(System.Object), "#2069");
         },
         canGetHashCodeForObject: function () {
             var o = {  };
@@ -28541,7 +28541,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             }
         },
         typePropertiesAreCorrect: function () {
-            Bridge.Test.NUnit.Assert.areEqual("System.String", Bridge.Reflection.getTypeFullName(System.String));
+            Bridge.Test.NUnit.Assert.areEqual$1("System.String", Bridge.Reflection.getTypeFullName(System.String), "#2066");
             var s = "X";
             Bridge.Test.NUnit.Assert.true(Bridge.is(s, System.String));
         },
