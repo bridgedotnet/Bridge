@@ -5,8 +5,8 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         statics: {
             main1: function () {
                 var $t, $t1, $t2, $t3;
-                var TestArray1 = System.Array.init(["TestA", "TestB", "TestC"], String);
-                var TestArray2 = System.Array.init(["TestA", "TestB", "TestC"], String);
+                var TestArray1 = System.Array.init(["TestA", "TestB", "TestC"], System.String);
+                var TestArray2 = System.Array.init(["TestA", "TestB", "TestC"], System.String);
 
                 var doSomething = false;
                 $t = Bridge.getEnumerator(TestArray1);

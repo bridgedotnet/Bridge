@@ -20,8 +20,8 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
             // The code below SHOULD contain box calls for standart primitives (except custim long, ulong, decimal) and enums #2318
             o = Bridge.box(box1, Test.BridgeIssues.N2318.N2318.JustEnum, $box_.Test.BridgeIssues.N2318.N2318.JustEnum.toString);
-            o = Bridge.box(box2, Boolean, $box_.Boolean.toString);
-            o = Bridge.box(box3, Date, $box_.Date.toString);
+            o = Bridge.box(box2, System.Boolean, $box_.System.Boolean.toString);
+            o = Bridge.box(box3, System.DateTime, $box_.System.DateTime.toString);
             o = Bridge.box(box4, System.Char, $box_.System.Char.toString);
             o = Bridge.box(box5, System.Byte);
             o = Bridge.box(box6, System.Double, $box_.System.Double.toString);
@@ -54,14 +54,14 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             var s3 = System.String.concat(s1, 2);
         },
         shouldUnbox: function () {
-            var objectArray = System.Array.init([Bridge.box(1, System.Int32)], Object);
-            var objectList = new (System.Collections.Generic.List$1(Object))(System.Array.init([Bridge.box(1, System.Int32)], Object));
+            var objectArray = System.Array.init([Bridge.box(1, System.Int32)], System.Object);
+            var objectList = new (System.Collections.Generic.List$1(System.Object))(System.Array.init([Bridge.box(1, System.Int32)], System.Object));
 
             // The code below SHOULD contain box calls for standart primitives (except custim long, ulong, decimal) and enums #2318
             var unboxArray1 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectArray[0]), System.Int32));
             var unboxArray2 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectArray[0]), System.Int32));
             var unboxArray3 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectArray[0]), Test.BridgeIssues.N2318.N2318.JustStruct));
-            var unboxArray4 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectArray[0]), Date));
+            var unboxArray4 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectArray[0]), System.DateTime));
             var unboxArray5 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectArray[0]), System.Int64));
             var unboxArray6 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectArray[0]), System.UInt64));
             var unboxArray7 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectArray[0]), System.Decimal));
@@ -69,7 +69,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             var unboxList1 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectList.getItem(0)), System.Int32));
             var unboxList2 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectList.getItem(0)), System.Int32));
             var unboxList3 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectList.getItem(0)), Test.BridgeIssues.N2318.N2318.JustStruct));
-            var unboxList4 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectList.getItem(0)), Date));
+            var unboxList4 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectList.getItem(0)), System.DateTime));
             var unboxList5 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectList.getItem(0)), System.Int64));
             var unboxList6 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectList.getItem(0)), System.UInt64));
             var unboxList7 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectList.getItem(0)), System.Decimal));
