@@ -14401,6 +14401,17 @@ Bridge.$N1391Result =                 r;
         $clone: function (to) { return this; }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2347", {
+        statics: {
+            testBoxing: function () {
+                var d = 36.099999999999994;
+                Bridge.Test.NUnit.Assert.areEqual("36.099999999999994", System.Double.format(d, "G17"));
+                Bridge.Test.NUnit.Assert.areEqual("36.09999999999999", System.Double.format(d, "G16"));
+                Bridge.Test.NUnit.Assert.areEqual("36.1", System.Double.format(d, "G15"));
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
