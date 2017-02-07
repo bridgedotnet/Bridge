@@ -4,7 +4,8 @@ namespace Bridge.Contract
     {
         AMD,
         CommonJS,
-        ES6
+        ES6,
+        Global
     }
 
     public interface IModuleLoader

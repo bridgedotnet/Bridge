@@ -11,6 +11,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Mono.Cecil.Rocks;
 using ICustomAttributeProvider = Mono.Cecil.ICustomAttributeProvider;
 
 namespace Bridge.Translator
@@ -56,17 +57,40 @@ namespace Bridge.Translator
             {
                 var objectCreateMode = this.GetObjectCreateMode(type);
 
+                if (objectCreateMode == 0)
+                {
+                    var ctors = type.GetConstructors();
+
+                    foreach (var ctor in ctors)
+                    {
+                        foreach (var parameter in ctor.Parameters)
+                        {
+                            if (parameter.ParameterType.FullName == "Bridge.ObjectCreateMode")
+                            {
+                                TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_NO_CREATE_MODE_CUSTOM_CONSTRUCTOR, type);
+                            }
+
+                            if (parameter.ParameterType.FullName == "Bridge.DefaultValueMode" ||
+                                parameter.ParameterType.FullName == "Bridge.ObjectInitializationMode")
+                            {
+                                continue;
+                            }
+
+                            TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_CUSTOM_CONSTRUCTOR, type);
+                        }
+                    }
+                }
+
                 if (type.IsInterface)
                 {
                     if (type.HasMethods && type.Methods.GroupBy(m => m.Name).Any(g => g.Count() > 1))
                     {
-                        TranslatorException.Throw("ObjectLiteral interface doesn't support overloaded methods: {0}",
-                            type);
+                        TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_OVERLOAD_METHODS, type);
                     }
 
                     if (type.HasEvents)
                     {
-                        TranslatorException.Throw("ObjectLiteral interface doesn't support events: {0}", type);
+                        TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EVENTS, type);
                     }
                 }
                 else
@@ -74,7 +98,7 @@ namespace Bridge.Translator
                     if (type.Methods.Any(m => !m.IsRuntimeSpecialName && m.Name.Contains(".")) ||
                         type.Properties.Any(m => !m.IsRuntimeSpecialName && m.Name.Contains(".")))
                     {
-                        TranslatorException.Throw("ObjectLiteral doesn't support explicit interface member implementation: {0}", type);
+                        TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EXPLICIT_IMPLIMENTATION, type);
                     }
                 }
 
@@ -92,12 +116,12 @@ namespace Bridge.Translator
 
                     if (objectCreateMode == 1 && baseType != null && baseType.FullName != "System.Object" && this.GetObjectCreateMode(baseType) == 0)
                     {
-                        TranslatorException.Throw("[ObjectLiteral] with Constructor mode should be inherited from class with same options: {0}", type);
+                        TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_CONSTRUCTOR_INHERITANCE, type);
                     }
 
                     if (objectCreateMode == 0 && baseType != null && this.GetObjectCreateMode(baseType) == 1)
                     {
-                        TranslatorException.Throw("[ObjectLiteral] with Plain mode cannot be inherited from [ObjectLiteral] with Constructor mode: {0}", type);
+                        TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_INHERITANCE, type);
                     }
                 }
 
@@ -117,7 +141,7 @@ namespace Bridge.Translator
 
                         if (iDef != null && iDef.FullName != "System.Object" && !this.IsObjectLiteral(iDef))
                         {
-                            TranslatorException.Throw("[ObjectLiteral] should implement an interface which must be object literal also: {0}", type);
+                            TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_INHERITANCE, type);
                         }
                     }
                 }
@@ -540,18 +564,30 @@ namespace Bridge.Translator
 
         public virtual void CheckProperties(TypeDefinition type, ITranslator translator)
         {
+            /*if (type.HasProperties && this.IsObjectLiteral(type))
+            {
+                var objectCreateMode = this.GetObjectCreateMode(type);
+                if (objectCreateMode == 0)
+                {
+                    foreach (PropertyDefinition prop in type.Properties)
+                    {
+                        if ((prop.GetMethod != null && prop.GetMethod.IsVirtual) || (prop.SetMethod != null && prop.SetMethod.IsVirtual))
+                        {
+                            TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_NO_VIRTUAL_METHODS, type);
+                        }
+                    }
+                }
+            }*/
         }
 
         public virtual void CheckEvents(TypeDefinition type, ITranslator translator)
         {
-            if (type.HasEvents && this.IsObjectLiteral(type))
-            {
-                TranslatorException.Throw("ObjectLiteral type doesn't support events: {0}", type);
-            }
         }
 
         public virtual void CheckMethods(TypeDefinition type, ITranslator translator)
         {
+            var methodsCount = 0;
+
             foreach (MethodDefinition method in type.Methods)
             {
                 if (method.HasCustomAttributes && method.CustomAttributes.Any(a => a.AttributeType.FullName == "System.Runtime.CompilerServices.CompilerGeneratedAttribute"))
@@ -560,6 +596,21 @@ namespace Bridge.Translator
                 }
 
                 this.CheckMethodArguments(method);
+
+                if (method.IsVirtual && !(method.IsSetter || method.IsGetter))
+                {
+                    methodsCount++;
+                }
+            }
+
+            if (this.IsObjectLiteral(type) && methodsCount > 0)
+            {
+                var objectCreateMode = this.GetObjectCreateMode(type);
+
+                if (objectCreateMode == 0)
+                {
+                    Bridge.Translator.TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_NO_VIRTUAL_METHODS, type);
+                }
             }
         }
 

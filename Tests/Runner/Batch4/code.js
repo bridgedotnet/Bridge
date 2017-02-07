@@ -1,9 +1,9 @@
 /**
  * Bridge Test library - general C# language tests for Portarelle
- * @version 15.8.0
+ * @version 16.0.0
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2017 Object.NET, Inc.
- * @compiler Bridge.NET 15.8.0
+ * @compiler Bridge.NET 16.0.0
  */
 Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflection.Resource2.bin":"EBESExQV","Bridge.ClientTest.Batch4.Reflection.Resource1.bin":"AAECAwQFBgc="}, function ($asm, globals) {
     "use strict";
@@ -114,9 +114,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual(42, c3.i);
         },
         createInstanceWithNoArgumentsWorksForClassWithJsonDefaultConstructor: function () {
-            var c1 = Bridge.createInstance(Bridge.ClientTest.Batch4.ActivatorTests.C7);
-            var c2 = Bridge.createInstance(Bridge.ClientTest.Batch4.ActivatorTests.C7);
-            var c3 = this.instantiate(Bridge.ClientTest.Batch4.ActivatorTests.C7);
+            var c1 = Bridge.createInstance(Object);
+            var c2 = Bridge.createInstance(Object);
+            var c3 = this.instantiate(Object);
 
             Bridge.Test.NUnit.Assert.areEqual(System.Object, c1.constructor);
             Bridge.Test.NUnit.Assert.areEqual(System.Object, c2.constructor);
@@ -189,10 +189,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             this.$initialize();
             this.i = 42;
         }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch4.ActivatorTests.C7", {
-        $literal: true
     });
 
     Bridge.define("Bridge.ClientTest.Batch4.ActivatorTests.C8$1", function (T) { return {
@@ -1813,10 +1809,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var enm = new Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests.C(sb).getEnumerator(2);
 
             while (enm.System$Collections$IEnumerator$moveNext()) {
-                sb.appendLine("got " + Bridge.box(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")](), System.Int32));
+                sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]());
             }
 
-            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
+            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
         },
         prematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks_SPI_1555: function () {
             // #1555
@@ -1825,11 +1821,11 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
             for (var i = 0; i < 2; i = (i + 1) | 0) {
                 enm.System$Collections$IEnumerator$moveNext();
-                sb.appendLine("got " + Bridge.box(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")](), System.Int32));
+                sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]());
             }
             enm.System$IDisposable$dispose();
 
-            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
+            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
         },
         exceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
             var sb = new System.Text.StringBuilder();
@@ -1844,7 +1840,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             try {
                 for (var i = 0; i < 100; i = (i + 1) | 0) {
                     enm.System$Collections$IEnumerator$moveNext();
-                    sb.appendLine("got " + Bridge.box(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")](), System.Int32));
+                    sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]());
                 }
                 Bridge.Test.NUnit.Assert.fail$1("Should have thrown an exception in the loop");
             }
@@ -1853,7 +1849,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine("caught exception");
             }
 
-            this.assertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
+            this.assertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
         },
         typeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface_SPI_1554: function () {
             var enm = null;
@@ -1876,7 +1872,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             try {
                 while ($t.moveNext()) {
                     var i = $t.getCurrent();
-                    sb.appendLine("got " + Bridge.box(i, System.Int32));
+                    sb.appendLine("got " + i);
                 }
             }finally {
                 if (Bridge.is($t, System.IDisposable)) {
@@ -1887,14 +1883,14 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             try {
                 while ($t1.moveNext()) {
                     var i1 = $t1.getCurrent();
-                    sb.appendLine("got " + Bridge.box(i1, System.Int32));
+                    sb.appendLine("got " + i1);
                 }
             }finally {
                 if (Bridge.is($t1, System.IDisposable)) {
                     $t1.System$IDisposable$dispose();
                 }
             }
-            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n-\nyielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
+            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n-\r\nyielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
         },
         prematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks_SPI_1555: function () {
             var $t;
@@ -1905,7 +1901,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             try {
                 while ($t.moveNext()) {
                     var i = $t.getCurrent();
-                    sb.appendLine("got " + Bridge.box(i, System.Int32));
+                    sb.appendLine("got " + i);
                     if (((n = (n + 1) | 0)) === 2) {
                         break;
                     }
@@ -1915,7 +1911,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     $t.System$IDisposable$dispose();
                 }
             }
-            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
+            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
         },
         exceptionInIEnumerableIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
             var sb = new System.Text.StringBuilder();
@@ -1931,7 +1927,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var enumerator = Bridge.getEnumerator(enumerable, System.Int32);
                 for (var i = 0; i < 100; i = (i + 1) | 0) {
                     enumerator.System$Collections$IEnumerator$moveNext();
-                    sb.appendLine("got " + Bridge.box(enumerator[Bridge.geti(enumerator, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")](), System.Int32));
+                    sb.appendLine("got " + enumerator[Bridge.geti(enumerator, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]());
                 }
                 Bridge.Test.NUnit.Assert.fail$1("Should have thrown");
             }
@@ -1940,7 +1936,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine("caught exception");
             }
 
-            this.assertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
+            this.assertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
         },
         enumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters: function () {
             var $t, $t1;
@@ -1968,7 +1964,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     $t1.System$IDisposable$dispose();
                 }
             }
-            this.assertEqual(sb.toString(), "3\n2\n1\n3\n2\n1\n");
+            this.assertEqual(sb.toString(), "3\r\n2\r\n1\r\n3\r\n2\r\n1\r\n");
         },
         differentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals: function () {
             var sb = new System.Text.StringBuilder();
@@ -1983,7 +1979,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine(enm2[Bridge.geti(enm2, "System$Collections$Generic$IEnumerator$1$System$Int32$getCurrent$1", "getCurrent$1")]().toString());
             }
 
-            this.assertEqual(sb.toString(), "0\n0\n1\n1\n2\n2\n-1\n-1\n");
+            this.assertEqual(sb.toString(), "0\r\n0\r\n1\r\n1\r\n2\r\n2\r\n-1\r\n-1\r\n");
         }
     });
 
@@ -2023,7 +2019,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                                 continue;
                             }
                             case 3: {
-                                this._sb.appendLine("yielding " + Bridge.box(i, System.Int32));
+                                this._sb.appendLine("yielding " + i);
                                     $enumerator.current = i;
                                     $step = 4;
                                     return true;
@@ -2201,7 +2197,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                                     continue;
                                 }
                                 case 3: {
-                                    this._sb.appendLine("yielding " + Bridge.box(i, System.Int32));
+                                    this._sb.appendLine("yielding " + i);
                                         $enumerator.current = i;
                                         $step = 4;
                                         return true;
@@ -2484,7 +2480,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         typeTestWorksGeneric_SPI_1556: function () {
             // #1556
-            Bridge.Test.NUnit.Assert.true$1(this.runCheck(System.Collections.Generic.KeyValuePair$2(System.Int32,System.String), Bridge.box(new (System.Collections.Generic.KeyValuePair$2(System.Int32,System.String))(), System.Collections.Generic.KeyValuePair$2(System.Int32,System.String))), "#1");
+            Bridge.Test.NUnit.Assert.true$1(this.runCheck(System.Collections.Generic.KeyValuePair$2(System.Int32,System.String), new (System.Collections.Generic.KeyValuePair$2(System.Int32,System.String))()), "#1");
             Bridge.Test.NUnit.Assert.false$1(this.runCheck(System.Collections.Generic.KeyValuePair$2(System.Int32,System.String), Bridge.box(5, System.Int32)), "#2");
         },
         theDefaultConstructorCanBeUsed_SPI_1556: function () {
@@ -3496,12 +3492,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Float32ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
-                Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Expected length ", Bridge.box(expected.length, System.Int32), ", actual: ", Bridge.box(actual.length, System.Int32)));
+                Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Expected length ", expected.length, ", actual: ", actual.length));
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
                 if (actual[i] !== expected[i]) {
-                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", Bridge.box(i, System.Int32), ": expected ", Bridge.box(expected[i], System.Int32), ", actual: ", System.Single.format(Bridge.box(actual[i], System.Single, $box_.System.Single.toString), 'G')));
+                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", System.Single.format(actual[i], 'G')));
                     return;
                 }
             }
@@ -3714,12 +3710,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Float64ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
-                Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Expected length ", Bridge.box(expected.length, System.Int32), ", actual: ", Bridge.box(actual.length, System.Int32)));
+                Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Expected length ", expected.length, ", actual: ", actual.length));
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
                 if (actual[i] !== expected[i]) {
-                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", Bridge.box(i, System.Int32), ": expected ", Bridge.box(expected[i], System.Int32), ", actual: ", System.Double.format(Bridge.box(actual[i], System.Double, $box_.System.Double.toString), 'G')));
+                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", System.Double.format(actual[i], 'G')));
                     return;
                 }
             }
@@ -3933,12 +3929,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Int16ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
-                Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Expected length ", Bridge.box(expected.length, System.Int32), ", actual: ", Bridge.box(actual.length, System.Int32)));
+                Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Expected length ", expected.length, ", actual: ", actual.length));
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
                 if (actual[i] !== expected[i]) {
-                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", Bridge.box(i, System.Int32), ": expected ", Bridge.box(expected[i], System.Int32), ", actual: ", Bridge.box(actual[i], System.Int16)));
+                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", actual[i]));
                     return;
                 }
             }
@@ -4151,12 +4147,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Int32ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
-                Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Expected length ", Bridge.box(expected.length, System.Int32), ", actual: ", Bridge.box(actual.length, System.Int32)));
+                Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Expected length ", expected.length, ", actual: ", actual.length));
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
                 if (actual[i] !== expected[i]) {
-                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", Bridge.box(i, System.Int32), ": expected ", Bridge.box(expected[i], System.Int32), ", actual: ", Bridge.box(actual[i], System.Int32)));
+                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", actual[i]));
                     return;
                 }
             }
@@ -4368,12 +4364,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Int8ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
-                Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Expected length ", Bridge.box(expected.length, System.Int32), ", actual: ", Bridge.box(actual.length, System.Int32)));
+                Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Expected length ", expected.length, ", actual: ", actual.length));
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
                 if (actual[i] !== expected[i]) {
-                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", Bridge.box(i, System.Int32), ": expected ", Bridge.box(expected[i], System.Int32), ", actual: ", Bridge.box(actual[i], System.SByte)));
+                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", actual[i]));
                     return;
                 }
             }
@@ -4585,12 +4581,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint16ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
-                Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Expected length ", Bridge.box(expected.length, System.Int32), ", actual: ", Bridge.box(actual.length, System.Int32)));
+                Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Expected length ", expected.length, ", actual: ", actual.length));
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
                 if (actual[i] !== expected[i]) {
-                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", Bridge.box(i, System.Int32), ": expected ", Bridge.box(expected[i], System.Int32), ", actual: ", Bridge.box(actual[i], System.UInt16)));
+                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", actual[i]));
                     return;
                 }
             }
@@ -4802,12 +4798,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint32ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
-                Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Expected length ", Bridge.box(expected.length, System.Int32), ", actual: ", Bridge.box(actual.length, System.Int32)));
+                Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Expected length ", expected.length, ", actual: ", actual.length));
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
                 if (System.Int64(actual[i]).ne(System.Int64(expected[i]))) {
-                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", Bridge.box(i, System.Int32), ": expected ", Bridge.box(expected[i], System.Int32), ", actual: ", Bridge.box(actual[i], System.UInt32)));
+                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", actual[i]));
                     return;
                 }
             }
@@ -5019,12 +5015,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint8ArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
-                Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Expected length ", Bridge.box(expected.length, System.Int32), ", actual: ", Bridge.box(actual.length, System.Int32)));
+                Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Expected length ", expected.length, ", actual: ", actual.length));
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
                 if (actual[i] !== expected[i]) {
-                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", Bridge.box(i, System.Int32), ": expected ", Bridge.box(expected[i], System.Int32), ", actual: ", Bridge.box(actual[i], System.Byte)));
+                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", actual[i]));
                     return;
                 }
             }
@@ -5236,12 +5232,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint8ClampedArrayTests", {
         assertContent: function (actual, expected, message) {
             if (actual.length !== expected.length) {
-                Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Expected length ", Bridge.box(expected.length, System.Int32), ", actual: ", Bridge.box(actual.length, System.Int32)));
+                Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Expected length ", expected.length, ", actual: ", actual.length));
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
                 if (actual[i] !== expected[i]) {
-                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", Bridge.box(i, System.Int32), ": expected ", Bridge.box(expected[i], System.Int32), ", actual: ", Bridge.box(actual[i], System.Byte)));
+                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", actual[i]));
                     return;
                 }
             }
@@ -7036,7 +7032,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var args = System.Array.init(["a", Bridge.box(1, System.Int32)], System.Object);
             var ex = new Bridge.PromiseException(args);
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(ex, Bridge.PromiseException), "is PromiseException");
-            Bridge.Test.NUnit.Assert.areEqual$1(args, ex.arguments, "Arguments");
+            Bridge.Test.NUnit.Assert.areEqual$1(Bridge.unbox(args), Bridge.unbox(ex.arguments), "Arguments");
             Bridge.Test.NUnit.Assert.true$1(ex.getInnerException() == null, "InnerException");
             //#1528
             Bridge.Test.NUnit.Assert.areEqual$1("Promise exception: [a, 1]", ex.getMessage(), "Message");
@@ -7046,7 +7042,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var ex = new Bridge.PromiseException(args, "Some message");
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(ex, Bridge.PromiseException), "is PromiseException");
             Bridge.Test.NUnit.Assert.true$1(ex.getInnerException() == null, "InnerException");
-            Bridge.Test.NUnit.Assert.areEqual$1(args, ex.arguments, "Arguments");
+            Bridge.Test.NUnit.Assert.areEqual$1(Bridge.unbox(args), Bridge.unbox(ex.arguments), "Arguments");
             Bridge.Test.NUnit.Assert.areEqual$1("Some message", ex.getMessage(), "Message");
         },
         argumentsAndMessageAndInnerExceptionConstructorWorks: function () {
@@ -7055,7 +7051,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var ex = new Bridge.PromiseException(args, "Some message", inner);
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(ex, Bridge.PromiseException), "is PromiseException");
             Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(ex.getInnerException(), inner), "InnerException");
-            Bridge.Test.NUnit.Assert.areEqual$1(args, ex.arguments, "Arguments");
+            Bridge.Test.NUnit.Assert.areEqual$1(Bridge.unbox(args), Bridge.unbox(ex.arguments), "Arguments");
             Bridge.Test.NUnit.Assert.areEqual$1("Some message", ex.getMessage(), "Message");
         }
     });
@@ -7297,7 +7293,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.false(Bridge.Reflection.isClass(System.Guid));
             Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isAssignableFrom(System.IComparable$1(System.Guid), System.Guid));
             Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isAssignableFrom(System.IEquatable$1(System.Guid), System.Guid));
-            var o = Bridge.box(new System.Guid.ctor(), System.Guid);
+            var o = new System.Guid.ctor();
             Bridge.Test.NUnit.Assert.true(Bridge.is(o, System.Guid));
             Bridge.Test.NUnit.Assert.true(Bridge.is(o, System.IComparable$1(System.Guid)));
             Bridge.Test.NUnit.Assert.true(Bridge.is(o, System.IEquatable$1(System.Guid)));
@@ -7317,12 +7313,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual("00000000-0000-0000-0000-000000000000", result.toString());
         },
         createInstanceWorks: function () {
-            var result = Bridge.box(Bridge.createInstance(System.Guid), System.Guid);
+            var result = Bridge.createInstance(System.Guid);
             Bridge.Test.NUnit.Assert.true(Bridge.is(result, System.Guid));
             Bridge.Test.NUnit.Assert.areEqual("00000000-0000-0000-0000-000000000000", result.toString());
         },
         defaultConstructorWorks: function () {
-            var result = Bridge.box(new System.Guid.ctor(), System.Guid);
+            var result = new System.Guid.ctor();
             Bridge.Test.NUnit.Assert.true(Bridge.is(result, System.Guid));
             Bridge.Test.NUnit.Assert.areEqual("00000000-0000-0000-0000-000000000000", result.toString());
         },
@@ -7335,30 +7331,30 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         byteArrayConstructorWorks: function () {
             var g = new System.Guid.$ctor1(System.Array.init([120, 149, 98, 168, 38, 122, 69, 97, 144, 50, 217, 26, 61, 84, 189, 104], System.Byte));
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(g, System.Guid), System.Guid), "Should be Guid");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(g, System.Guid), "Should be Guid");
             Bridge.Test.NUnit.Assert.areEqual$1("a8629578-7a26-6145-9032-d91a3d54bd68", g.toString(), "value");
             Bridge.Test.NUnit.Assert.throws$4($asm.$.Bridge.ClientTest.Batch4.GuidTests.f1, System.ArgumentException, "Invalid array should throw");
         },
         int32Int16Int16ByteArrayConstructorWorks: function () {
             var g = new System.Guid.$ctor3(2023056040, 9850, 17761, System.Array.init([144, 50, 217, 26, 61, 84, 189, 104], System.Byte));
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(g, System.Guid), System.Guid), "Should be Guid");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(g, System.Guid), "Should be Guid");
             Bridge.Test.NUnit.Assert.areEqual$1("789562a8-267a-4561-9032-d91a3d54bd68", g.toString(), "value");
         },
         int32Int16Int16BytesConstructorWorks: function () {
             var g = new System.Guid.$ctor2(2023056040, 9850, 17761, 144, 50, 217, 26, 61, 84, 189, 104);
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(g, System.Guid), System.Guid), "Should be Guid");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(g, System.Guid), "Should be Guid");
             Bridge.Test.NUnit.Assert.areEqual$1("789562a8-267a-4561-9032-d91a3d54bd68", g.toString(), "value");
         },
         uInt32UInt16UInt16BytesConstructorWorks: function () {
             var g = new System.Guid.$ctor5(2023056040, 9850, 17761, 144, 50, 217, 26, 61, 84, 189, 104);
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(g, System.Guid), System.Guid), "Should be Guid");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(g, System.Guid), "Should be Guid");
             Bridge.Test.NUnit.Assert.areEqual$1("789562a8-267a-4561-9032-d91a3d54bd68", g.toString(), "value");
         },
         stringConstructorWorks: function () {
-            var g1 = Bridge.box(new System.Guid.$ctor4("A6993C0A-A8CB-45D9-994B-90E7203E4FC6"), System.Guid);
-            var g2 = Bridge.box(new System.Guid.$ctor4("{A6993C0A-A8CB-45D9-994B-90E7203E4FC6}"), System.Guid);
-            var g3 = Bridge.box(new System.Guid.$ctor4("(A6993C0A-A8CB-45D9-994B-90E7203E4FC6)"), System.Guid);
-            var g4 = Bridge.box(new System.Guid.$ctor4("A6993C0AA8CB45D9994B90E7203E4FC6"), System.Guid);
+            var g1 = new System.Guid.$ctor4("A6993C0A-A8CB-45D9-994B-90E7203E4FC6");
+            var g2 = new System.Guid.$ctor4("{A6993C0A-A8CB-45D9-994B-90E7203E4FC6}");
+            var g3 = new System.Guid.$ctor4("(A6993C0A-A8CB-45D9-994B-90E7203E4FC6)");
+            var g4 = new System.Guid.$ctor4("A6993C0AA8CB45D9994B90E7203E4FC6");
             Bridge.Test.NUnit.Assert.true(Bridge.is(g1, System.Guid));
             Bridge.Test.NUnit.Assert.true(Bridge.is(g2, System.Guid));
             Bridge.Test.NUnit.Assert.true(Bridge.is(g3, System.Guid));
@@ -7370,10 +7366,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.throws$4($asm.$.Bridge.ClientTest.Batch4.GuidTests.f2, System.FormatException, "Invalid should throw");
         },
         parseWorks: function () {
-            var g1 = Bridge.box(System.Guid.parse("A6993C0A-A8CB-45D9-994B-90E7203E4FC6"), System.Guid);
-            var g2 = Bridge.box(System.Guid.parse("{A6993C0A-A8CB-45D9-994B-90E7203E4FC6}"), System.Guid);
-            var g3 = Bridge.box(System.Guid.parse("(A6993C0A-A8CB-45D9-994B-90E7203E4FC6)"), System.Guid);
-            var g4 = Bridge.box(System.Guid.parse("A6993C0AA8CB45D9994B90E7203E4FC6"), System.Guid);
+            var g1 = System.Guid.parse("A6993C0A-A8CB-45D9-994B-90E7203E4FC6");
+            var g2 = System.Guid.parse("{A6993C0A-A8CB-45D9-994B-90E7203E4FC6}");
+            var g3 = System.Guid.parse("(A6993C0A-A8CB-45D9-994B-90E7203E4FC6)");
+            var g4 = System.Guid.parse("A6993C0AA8CB45D9994B90E7203E4FC6");
             Bridge.Test.NUnit.Assert.true(Bridge.is(g1, System.Guid));
             Bridge.Test.NUnit.Assert.true(Bridge.is(g2, System.Guid));
             Bridge.Test.NUnit.Assert.true(Bridge.is(g3, System.Guid));
@@ -7385,10 +7381,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.throws$4($asm.$.Bridge.ClientTest.Batch4.GuidTests.f3, System.FormatException, "Invalid should throw");
         },
         parseExactWorks: function () {
-            var g1 = Bridge.box(System.Guid.parseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "D"), System.Guid);
-            var g2 = Bridge.box(System.Guid.parseExact("{A6993C0A-A8CB-45D9-994B-90E7203E4FC6}", "B"), System.Guid);
-            var g3 = Bridge.box(System.Guid.parseExact("(A6993C0A-A8CB-45D9-994B-90E7203E4FC6)", "P"), System.Guid);
-            var g4 = Bridge.box(System.Guid.parseExact("A6993C0AA8CB45D9994B90E7203E4FC6", "N"), System.Guid);
+            var g1 = System.Guid.parseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "D");
+            var g2 = System.Guid.parseExact("{A6993C0A-A8CB-45D9-994B-90E7203E4FC6}", "B");
+            var g3 = System.Guid.parseExact("(A6993C0A-A8CB-45D9-994B-90E7203E4FC6)", "P");
+            var g4 = System.Guid.parseExact("A6993C0AA8CB45D9994B90E7203E4FC6", "N");
             Bridge.Test.NUnit.Assert.true(Bridge.is(g1, System.Guid));
             Bridge.Test.NUnit.Assert.true(Bridge.is(g2, System.Guid));
             Bridge.Test.NUnit.Assert.true(Bridge.is(g3, System.Guid));
@@ -7409,11 +7405,11 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true$1(System.Guid.tryParse("(A6993C0A-A8CB-45D9-994B-90E7203E4FC6)", g3), "g3 result");
             Bridge.Test.NUnit.Assert.true$1(System.Guid.tryParse("A6993C0AA8CB45D9994B90E7203E4FC6", g4), "g4 result");
             Bridge.Test.NUnit.Assert.false$1(System.Guid.tryParse("x", g5), "Invalid should throw");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(g1.v, System.Guid), System.Guid), "g1 is Guid");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(g2.v, System.Guid), System.Guid), "g2 is Guid");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(g3.v, System.Guid), System.Guid), "g3 is Guid");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(g4.v, System.Guid), System.Guid), "g4 is Guid");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(g5.v, System.Guid), System.Guid), "g5 is Guid");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(g1.v, System.Guid), "g1 is Guid");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(g2.v, System.Guid), "g2 is Guid");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(g3.v, System.Guid), "g3 is Guid");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(g4.v, System.Guid), "g4 is Guid");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(g5.v, System.Guid), "g5 is Guid");
             Bridge.Test.NUnit.Assert.areEqual$1("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g1.v.toString(), "g1");
             Bridge.Test.NUnit.Assert.areEqual$1("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g2.v.toString(), "g2");
             Bridge.Test.NUnit.Assert.areEqual$1("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g3.v.toString(), "g3");
@@ -7430,14 +7426,14 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.false$1(System.Guid.tryParseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "P", g6), "g6 result");
             Bridge.Test.NUnit.Assert.false$1(System.Guid.tryParseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "N", g7), "g7 result");
             Bridge.Test.NUnit.Assert.false$1(System.Guid.tryParseExact("A6993C0AA8CB45D9994B90E7203E4FC6", "D", g8), "g8 result");
-            Bridge.Test.NUnit.Assert.true(Bridge.is(Bridge.box(g1.v, System.Guid), System.Guid));
-            Bridge.Test.NUnit.Assert.true(Bridge.is(Bridge.box(g2.v, System.Guid), System.Guid));
-            Bridge.Test.NUnit.Assert.true(Bridge.is(Bridge.box(g3.v, System.Guid), System.Guid));
-            Bridge.Test.NUnit.Assert.true(Bridge.is(Bridge.box(g4.v, System.Guid), System.Guid));
-            Bridge.Test.NUnit.Assert.true(Bridge.is(Bridge.box(g5.v, System.Guid), System.Guid));
-            Bridge.Test.NUnit.Assert.true(Bridge.is(Bridge.box(g6.v, System.Guid), System.Guid));
-            Bridge.Test.NUnit.Assert.true(Bridge.is(Bridge.box(g7.v, System.Guid), System.Guid));
-            Bridge.Test.NUnit.Assert.true(Bridge.is(Bridge.box(g8.v, System.Guid), System.Guid));
+            Bridge.Test.NUnit.Assert.true(Bridge.is(g1.v, System.Guid));
+            Bridge.Test.NUnit.Assert.true(Bridge.is(g2.v, System.Guid));
+            Bridge.Test.NUnit.Assert.true(Bridge.is(g3.v, System.Guid));
+            Bridge.Test.NUnit.Assert.true(Bridge.is(g4.v, System.Guid));
+            Bridge.Test.NUnit.Assert.true(Bridge.is(g5.v, System.Guid));
+            Bridge.Test.NUnit.Assert.true(Bridge.is(g6.v, System.Guid));
+            Bridge.Test.NUnit.Assert.true(Bridge.is(g7.v, System.Guid));
+            Bridge.Test.NUnit.Assert.true(Bridge.is(g8.v, System.Guid));
             Bridge.Test.NUnit.Assert.areEqual$1("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g1.v.toString(), "g1");
             Bridge.Test.NUnit.Assert.areEqual$1("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g2.v.toString(), "g2");
             Bridge.Test.NUnit.Assert.areEqual$1("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g3.v.toString(), "g3");
@@ -7453,14 +7449,14 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areNotEqual$1(0, g.compareTo(new System.Guid.$ctor4("E4C221BE-9B39-4398-B82A-48BA4648CAE0")), "not equal");
         },
         iComparableCompareToWorks: function () {
-            var g = Bridge.cast(Bridge.box(new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C"), System.Guid), System.IComparable$1(System.Guid));
+            var g = Bridge.cast(new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C"), System.IComparable$1(System.Guid));
             Bridge.Test.NUnit.Assert.areEqual$1(0, Bridge.compare(g, new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C"), false, System.Guid), "Equal");
             Bridge.Test.NUnit.Assert.areNotEqual$1(0, Bridge.compare(g, new System.Guid.$ctor4("E4C221BE-9B39-4398-B82A-48BA4648CAE0"), false, System.Guid), "Not equal");
         },
         equalsObjectWorks: function () {
             var g = new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.equals(g, Bridge.unbox(Bridge.box(new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C"), System.Guid))), "Equal");
-            Bridge.Test.NUnit.Assert.false$1(Bridge.equals(g, Bridge.unbox(Bridge.box(new System.Guid.$ctor4("E4C221BE-9B39-4398-B82A-48BA4648CAE0"), System.Guid))), "Not equal");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.equals(g, Bridge.unbox(new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C"))), "Equal");
+            Bridge.Test.NUnit.Assert.false$1(Bridge.equals(g, Bridge.unbox(new System.Guid.$ctor4("E4C221BE-9B39-4398-B82A-48BA4648CAE0"))), "Not equal");
             Bridge.Test.NUnit.Assert.false$1(Bridge.equals(g, "X"), "Not equal");
         },
         equalsGuidWorks: function () {
@@ -7469,7 +7465,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.false$1(g.equalsT(new System.Guid.$ctor4("E4C221BE-9B39-4398-B82A-48BA4648CAE0")), "Not equal");
         },
         iEquatableEqualsWorks: function () {
-            var g = Bridge.cast(Bridge.box(new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C"), System.Guid), System.IEquatable$1(System.Guid));
+            var g = Bridge.cast(new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C"), System.IEquatable$1(System.Guid));
             Bridge.Test.NUnit.Assert.true$1(Bridge.equalsT(g, new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C"), System.Guid), "Equal");
             Bridge.Test.NUnit.Assert.false$1(Bridge.equalsT(g, new System.Guid.$ctor4("E4C221BE-9B39-4398-B82A-48BA4648CAE0"), System.Guid), "Not equal");
         },
@@ -7498,7 +7494,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var d = new (System.Collections.Generic.Dictionary$2(System.String,System.Object))();
             for (var i = 0; i < 1000; i = (i + 1) | 0) {
                 var g = System.Guid.newGuid();
-                Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(g, System.Guid), System.Guid), "Generated Guid should be Guid");
+                Bridge.Test.NUnit.Assert.true$1(Bridge.is(g, System.Guid), "Generated Guid should be Guid");
                 var s = g.toString$1("N");
                 Bridge.Test.NUnit.Assert.true$1(s.charCodeAt(16) === 56 || s.charCodeAt(16) === 57 || s.charCodeAt(16) === 97 || s.charCodeAt(16) === 98, "Should be standard guid");
                 Bridge.Test.NUnit.Assert.true$1(s.charCodeAt(12) === 52, "Should be type 4 guid");
@@ -9338,9 +9334,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual$1(returnType, expr.rt, System.String.concat(title, " return type"));
             Bridge.Test.NUnit.Assert.areEqual$1(parmTypes.length, expr.p.getCount(), System.String.concat(title, " param count"));
             for (var i = 0; i < expr.p.getCount(); i = (i + 1) | 0) {
-                Bridge.Test.NUnit.Assert.areEqual$1(38, expr.p.get(i).ntype, System.String.concat(title, " parameter ", Bridge.box(i, System.Int32), " node type"));
-                Bridge.Test.NUnit.Assert.areEqual$1(parmNames[i], expr.p.get(i).n, System.String.concat(title, " parameter ", Bridge.box(i, System.Int32), " name"));
-                Bridge.Test.NUnit.Assert.areEqual$1(parmTypes[i], expr.p.get(i).t, System.String.concat(title, " parameter ", Bridge.box(i, System.Int32), " type"));
+                Bridge.Test.NUnit.Assert.areEqual$1(38, expr.p.get(i).ntype, System.String.concat(title, " parameter ", i, " node type"));
+                Bridge.Test.NUnit.Assert.areEqual$1(parmNames[i], expr.p.get(i).n, System.String.concat(title, " parameter ", i, " name"));
+                Bridge.Test.NUnit.Assert.areEqual$1(parmTypes[i], expr.p.get(i).t, System.String.concat(title, " parameter ", i, " type"));
             }
         },
         f2: function (expr, nodeType, type, method, title) {
@@ -9438,11 +9434,11 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual$1(Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests.C, ne.t, System.String.concat(title, " type"));
             Bridge.Test.NUnit.Assert.areEqual$1(argTypes.length, ne.arguments.getCount(), System.String.concat(title, " argument count"));
             for (var i = 0; i < ne.arguments.getCount(); i = (i + 1) | 0) {
-                Bridge.Test.NUnit.Assert.true$1(($t = ne.arguments.get(i), Bridge.is($t, Bridge.hasValue($t) && ($t.ntype === 38))) && Bridge.referenceEquals(($t = ne.arguments.get(i), Bridge.cast($t, Bridge.hasValue($t) && ($t.ntype === 38))).n, String.fromCharCode(((((97 + i) | 0)) & 65535))), System.String.concat(title, " argument ", Bridge.box(i, System.Int32)));
+                Bridge.Test.NUnit.Assert.true$1(($t = ne.arguments.get(i), Bridge.is($t, Bridge.hasValue($t) && ($t.ntype === 38))) && Bridge.referenceEquals(($t = ne.arguments.get(i), Bridge.cast($t, Bridge.hasValue($t) && ($t.ntype === 38))).n, String.fromCharCode(((((97 + i) | 0)) & 65535))), System.String.concat(title, " argument ", i));
             }
             Bridge.Test.NUnit.Assert.areEqual$1(argTypes.length, (ne.constructor.p || []).length, System.String.concat(title, " constructor argument length"));
             for (var i1 = 0; i1 < (ne.constructor.p || []).length; i1 = (i1 + 1) | 0) {
-                Bridge.Test.NUnit.Assert.areEqual$1(argTypes[i1], (ne.constructor.p || [])[i1], System.String.concat(title, " constructor parameter type ", Bridge.box(i1, System.Int32)));
+                Bridge.Test.NUnit.Assert.areEqual$1(argTypes[i1], (ne.constructor.p || [])[i1], System.String.concat(title, " constructor parameter type ", i1));
             }
             if (checkReference) {
                 var $ctor = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests.C, 1, 284, null, argTypes);
@@ -9496,7 +9492,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(se.defaultBody, defaultBody), System.String.concat(title, " default value"));
             Bridge.Test.NUnit.Assert.areEqual$1(cases.length, se.cases.getCount(), System.String.concat(title, " cases count"));
             for (var i = 0; i < se.cases.getCount(); i = (i + 1) | 0) {
-                Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(se.cases.get(i), cases[i]), System.String.concat(title, " case ", Bridge.box(i, System.Int32)));
+                Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(se.cases.get(i), cases[i]), System.String.concat(title, " case ", i));
             }
         }
     });
@@ -9611,7 +9607,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             this.$initialize();
         },
         getItem: function (a, b) {
-            return System.String.concat(Bridge.box(this.F1, System.Int32) + " " + Bridge.box(a, System.Int32) + " ", b);
+            return System.String.concat(this.F1 + " " + a + " ", b);
         },
         M1: function (a, b) {
             return 0;
@@ -9733,9 +9729,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual(17.5, Math.abs(-17.5));
         },
         absOfDecimalWorks: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(10.5).abs(), System.Decimal, $box_.System.Decimal.toString), 10.5);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(-10.5).abs(), System.Decimal, $box_.System.Decimal.toString), 10.5);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(0.0).abs(), System.Decimal, $box_.System.Decimal.toString), 0);
+            this.assertIsDecimalAndEqualTo(System.Decimal(10.5).abs(), 10.5);
+            this.assertIsDecimalAndEqualTo(System.Decimal(-10.5).abs(), 10.5);
+            this.assertIsDecimalAndEqualTo(System.Decimal(0.0).abs(), 0);
         },
         acosWorks: function () {
             this.assertAlmostEqual(Math.acos(0.5), 1.0471975511965979);
@@ -9754,9 +9750,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual(-3.0, Math.ceil(-3.2));
         },
         ceilingOfDecimalWorks: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(3.1).ceil(), System.Decimal, $box_.System.Decimal.toString), 4);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(-3.9).ceil(), System.Decimal, $box_.System.Decimal.toString), -3);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(3.0).ceil(), System.Decimal, $box_.System.Decimal.toString), 3);
+            this.assertIsDecimalAndEqualTo(System.Decimal(3.1).ceil(), 4);
+            this.assertIsDecimalAndEqualTo(System.Decimal(-3.9).ceil(), -3);
+            this.assertIsDecimalAndEqualTo(System.Decimal(3.0).ceil(), 3);
         },
         cosWorks: function () {
             this.assertAlmostEqual(Math.cos(0.5), 0.87758256189037276);
@@ -9778,9 +9774,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual(-4.0, Math.floor(-3.6));
         },
         floorOfDecimalWorks: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(3.9).floor(), System.Decimal, $box_.System.Decimal.toString), 3);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(-3.1).floor(), System.Decimal, $box_.System.Decimal.toString), -4);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(3.0).floor(), System.Decimal, $box_.System.Decimal.toString), 3);
+            this.assertIsDecimalAndEqualTo(System.Decimal(3.9).floor(), 3);
+            this.assertIsDecimalAndEqualTo(System.Decimal(-3.1).floor(), -4);
+            this.assertIsDecimalAndEqualTo(System.Decimal(3.0).floor(), 3);
         },
         logWorks: function () {
             this.assertAlmostEqual(Bridge.Math.log(0.5), -0.69314718055994529);
@@ -9810,8 +9806,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual(5.0, Math.max(5, 3));
         },
         maxOfDecimalWorks: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.max(System.Decimal(-14.5), System.Decimal(3.0)), System.Decimal, $box_.System.Decimal.toString), 3.0);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.max(System.Decimal(5.4), System.Decimal(3.0)), System.Decimal, $box_.System.Decimal.toString), 5.4);
+            this.assertIsDecimalAndEqualTo(System.Decimal.max(System.Decimal(-14.5), System.Decimal(3.0)), 3.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.max(System.Decimal(5.4), System.Decimal(3.0)), 5.4);
         },
         maxOfDoubleWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual(3.0, Math.max(1.0, 3.0));
@@ -9854,8 +9850,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual(3.0, Math.min(5, 3));
         },
         minOfDecimalWorks: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.min(System.Decimal(-14.5), System.Decimal(3.0)), System.Decimal, $box_.System.Decimal.toString), -14.5);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.min(System.Decimal(5.4), System.Decimal(3.0)), System.Decimal, $box_.System.Decimal.toString), 3.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.min(System.Decimal(-14.5), System.Decimal(3.0)), -14.5);
+            this.assertIsDecimalAndEqualTo(System.Decimal.min(System.Decimal(5.4), System.Decimal(3.0)), 3.0);
         },
         minOfDoubleWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual(1.0, Math.min(1.0, 3.0));
@@ -9912,12 +9908,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual(-4.0, Bridge.Math.round(-4.5, 0, 6));
         },
         roundOfDecimalWorks: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.round(System.Decimal(3.432), 6), System.Decimal, $box_.System.Decimal.toString), 3.0);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.round(System.Decimal(3.6), 6), System.Decimal, $box_.System.Decimal.toString), 4.0);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.round(System.Decimal(3.5), 6), System.Decimal, $box_.System.Decimal.toString), 4.0);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.round(System.Decimal(4.5), 6), System.Decimal, $box_.System.Decimal.toString), 4.0);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.round(System.Decimal(-3.5), 6), System.Decimal, $box_.System.Decimal.toString), -4.0);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.round(System.Decimal(-4.5), 6), System.Decimal, $box_.System.Decimal.toString), -4.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(3.432), 6), 3.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(3.6), 6), 4.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(3.5), 6), 4.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(4.5), 6), 4.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(-3.5), 6), -4.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(-4.5), 6), -4.0);
         },
         jsRoundOfDoubleWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual(3.0, Math.round(3.432));
@@ -9936,12 +9932,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual(-3.4, Bridge.Math.round(-3.45, 1, 6));
         },
         roundOfDecimalWithDigitsWorks: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(3.432), 2, 6), System.Decimal, $box_.System.Decimal.toString), 3.43);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(3.6), 0, 6), System.Decimal, $box_.System.Decimal.toString), 4.0);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(3.35), 1, 6), System.Decimal, $box_.System.Decimal.toString), 3.4);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(3.45), 1, 6), System.Decimal, $box_.System.Decimal.toString), 3.4);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(-3.35), 1, 6), System.Decimal, $box_.System.Decimal.toString), -3.4);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(-3.45), 1, 6), System.Decimal, $box_.System.Decimal.toString), -3.4);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(3.432), 2, 6), 3.43);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(3.6), 0, 6), 4.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(3.35), 1, 6), 3.4);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(3.45), 1, 6), 3.4);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(-3.35), 1, 6), -3.4);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(-3.45), 1, 6), -3.4);
         },
         signWithDecimalWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual(-1, System.Decimal(-0.5).sign());
@@ -9972,8 +9968,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual(-3.0, Bridge.Int.trunc(-3.9));
         },
         truncateWithDecimalWorks: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(3.9).trunc(), System.Decimal, $box_.System.Decimal.toString), 3.0);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(-3.9).trunc(), System.Decimal, $box_.System.Decimal.toString), -3.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal(3.9).trunc(), 3.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal(-3.9).trunc(), -3.0);
         },
         iEEERemainderWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual(-1.0, 3.0 - (2.0 * Math.round(3.0 / 2.0)));
@@ -10001,16 +9997,16 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual(-2.0, Bridge.Math.round(-2.5, 0, 6));
         },
         roundOfDecimalWithMidpointRoundingWorks: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.round(System.Decimal(3.432), 4), System.Decimal, $box_.System.Decimal.toString), 3.0);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.round(System.Decimal(3.432), 6), System.Decimal, $box_.System.Decimal.toString), 3.0);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.round(System.Decimal(3.5), 4), System.Decimal, $box_.System.Decimal.toString), 4.0);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.round(System.Decimal(3.5), 6), System.Decimal, $box_.System.Decimal.toString), 4.0);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.round(System.Decimal(3.64), 4), System.Decimal, $box_.System.Decimal.toString), 4.0);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.round(System.Decimal(3.64), 6), System.Decimal, $box_.System.Decimal.toString), 4.0);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.round(System.Decimal(2.5), 4), System.Decimal, $box_.System.Decimal.toString), 3.0);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.round(System.Decimal(2.5), 6), System.Decimal, $box_.System.Decimal.toString), 2.0);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.round(System.Decimal(-2.5), 4), System.Decimal, $box_.System.Decimal.toString), -3.0);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.round(System.Decimal(-2.5), 6), System.Decimal, $box_.System.Decimal.toString), -2.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(3.432), 4), 3.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(3.432), 6), 3.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(3.5), 4), 4.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(3.5), 6), 4.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(3.64), 4), 4.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(3.64), 6), 4.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(2.5), 4), 3.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(2.5), 6), 2.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(-2.5), 4), -3.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(-2.5), 6), -2.0);
         },
         roundOfDoubleWithDigitsAndMidpointRoundingWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual(3.5, Bridge.Math.round(3.45, 1, 4));
@@ -10025,16 +10021,16 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual(-2.5, Bridge.Math.round(-2.5, 1, 6));
         },
         roundOfDecimalWithDigitsAndMidpointRoundingWorks: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(3.45), 1, 4), System.Decimal, $box_.System.Decimal.toString), 3.5);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(3.45), 1, 6), System.Decimal, $box_.System.Decimal.toString), 3.4);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(3.5), 0, 4), System.Decimal, $box_.System.Decimal.toString), 4.0);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(3.5), 0, 6), System.Decimal, $box_.System.Decimal.toString), 4.0);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(3.645), 2, 4), System.Decimal, $box_.System.Decimal.toString), 3.65);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(3.645), 2, 6), System.Decimal, $box_.System.Decimal.toString), 3.64);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(2.5), 0, 4), System.Decimal, $box_.System.Decimal.toString), 3.0);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(2.5), 0, 6), System.Decimal, $box_.System.Decimal.toString), 2.0);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(-2.5), 1, 4), System.Decimal, $box_.System.Decimal.toString), -2.5);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(-2.5), 1, 6), System.Decimal, $box_.System.Decimal.toString), -2.5);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(3.45), 1, 4), 3.5);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(3.45), 1, 6), 3.4);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(3.5), 0, 4), 4.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(3.5), 0, 6), 4.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(3.645), 2, 4), 3.65);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(3.645), 2, 6), 3.64);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(2.5), 0, 4), 3.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(2.5), 0, 6), 2.0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(-2.5), 1, 4), -2.5);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(-2.5), 1, 6), -2.5);
         },
         divRemWorks: function () {
             var result = { };
@@ -10221,7 +10217,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
             Bridge.Test.NUnit.Assert.true$1(this.isOfType(System.Nullable$1(System.Int32), Bridge.box(3, System.Int32)), "IsOfType #1");
             Bridge.Test.NUnit.Assert.false$1(this.isOfType(System.Nullable$1(System.Int32), Bridge.box(3.14, System.Double, $box_.System.Double.toString)), "IsOfType #2");
-            Bridge.Test.NUnit.Assert.true$1(this.isOfType(System.Nullable$1(System.TimeSpan), Bridge.box(new System.TimeSpan(System.Int64(1)), System.TimeSpan)), "IsOfType #3");
+            Bridge.Test.NUnit.Assert.true$1(this.isOfType(System.Nullable$1(System.TimeSpan), new System.TimeSpan(System.Int64(1))), "IsOfType #3");
             Bridge.Test.NUnit.Assert.false$1(this.isOfType(System.Nullable$1(System.TimeSpan), Bridge.box(3.14, System.Double, $box_.System.Double.toString)), "IsOfType #4");
         },
         convertingToNullableWorks: function () {
@@ -10836,32 +10832,32 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var rand = new System.Random.ctor();
             for (var i = 0; i < 10; i = (i + 1) | 0) {
                 var randomNumber = rand.next();
-                Bridge.Test.NUnit.Assert.true$1(randomNumber >= 0, Bridge.box(randomNumber, System.Int32) + " is greater or equal to 0");
-                Bridge.Test.NUnit.Assert.true$1(randomNumber <= 2147483647, Bridge.box(randomNumber, System.Int32) + " is less than or equal to int.MaxValue");
+                Bridge.Test.NUnit.Assert.true$1(randomNumber >= 0, randomNumber + " is greater or equal to 0");
+                Bridge.Test.NUnit.Assert.true$1(randomNumber <= 2147483647, randomNumber + " is less than or equal to int.MaxValue");
             }
         },
         nextWithMaxWorks: function () {
             var rand = new System.Random.ctor();
             for (var i = 0; i < 10; i = (i + 1) | 0) {
                 var randomNumber = rand.next$1(5);
-                Bridge.Test.NUnit.Assert.true$1(randomNumber >= 0, Bridge.box(randomNumber, System.Int32) + " is greater or equal to 0");
-                Bridge.Test.NUnit.Assert.true$1(randomNumber < 5, Bridge.box(randomNumber, System.Int32) + " is smaller than 5");
+                Bridge.Test.NUnit.Assert.true$1(randomNumber >= 0, randomNumber + " is greater or equal to 0");
+                Bridge.Test.NUnit.Assert.true$1(randomNumber < 5, randomNumber + " is smaller than 5");
             }
         },
         nextWithMinAndMaxWorks: function () {
             var rand = new System.Random.ctor();
             for (var i = 0; i < 10; i = (i + 1) | 0) {
                 var randomNumber = rand.next$2(5, 10);
-                Bridge.Test.NUnit.Assert.true$1(randomNumber >= 5, Bridge.box(randomNumber, System.Int32) + " is greater or equal to 5");
-                Bridge.Test.NUnit.Assert.true$1(randomNumber < 10, Bridge.box(randomNumber, System.Int32) + " is smaller than 10");
+                Bridge.Test.NUnit.Assert.true$1(randomNumber >= 5, randomNumber + " is greater or equal to 5");
+                Bridge.Test.NUnit.Assert.true$1(randomNumber < 10, randomNumber + " is smaller than 10");
             }
         },
         nextDoubleWorks: function () {
             var rand = new System.Random.ctor();
             for (var i = 0; i < 10; i = (i + 1) | 0) {
                 var randomNumber = rand.nextDouble();
-                Bridge.Test.NUnit.Assert.true$1(randomNumber >= 0.0, System.Double.format(Bridge.box(randomNumber, System.Double, $box_.System.Double.toString), 'G') + " is greater or equal to 0.0");
-                Bridge.Test.NUnit.Assert.true$1(randomNumber < 1.0, System.Double.format(Bridge.box(randomNumber, System.Double, $box_.System.Double.toString), 'G') + " is smaller than 1.0");
+                Bridge.Test.NUnit.Assert.true$1(randomNumber >= 0.0, System.Double.format(randomNumber, 'G') + " is greater or equal to 0.0");
+                Bridge.Test.NUnit.Assert.true$1(randomNumber < 1.0, System.Double.format(randomNumber, 'G') + " is smaller than 1.0");
             }
         },
         nextBytesWorks: function () {
@@ -10869,8 +10865,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var bytes = System.Array.init(150, 0, System.Byte);
             rand.nextBytes(bytes);
             for (var i = 0; i < bytes.length; i = (i + 1) | 0) {
-                Bridge.Test.NUnit.Assert.true$1(bytes[i] >= 0, "a: " + Bridge.box(bytes[i], System.Byte) + " is greater or equal to " + Bridge.box(0, System.Byte));
-                Bridge.Test.NUnit.Assert.true$1(bytes[i] <= 255, "a: " + Bridge.box(bytes[i], System.Byte) + " is smaller than or equal to " + Bridge.box(255, System.Byte));
+                Bridge.Test.NUnit.Assert.true$1(bytes[i] >= 0, "a: " + bytes[i] + " is greater or equal to " + 0);
+                Bridge.Test.NUnit.Assert.true$1(bytes[i] <= 255, "a: " + bytes[i] + " is smaller than or equal to " + 255);
             }
         }
     });
@@ -12409,11 +12405,11 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         invokeWorksForExpandParamsMethods: function () {
             var m1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C22, 8, 284, "M2");
             var r1 = Bridge.cast(Bridge.Reflection.midel(m1, new Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C22.ctor(0, null)).apply(null, System.Array.init([Bridge.box(2, System.Int32), System.Array.init([17, 31], System.Int32)], System.Object)), System.Array.type(System.Object));
-            Bridge.Test.NUnit.Assert.areEqual(System.Array.init([Bridge.box(2, System.Int32), System.Array.init([17, 31], System.Int32)], System.Object), r1);
+            Bridge.Test.NUnit.Assert.areEqual(System.Array.init([Bridge.box(2, System.Int32), System.Array.init([17, 31], System.Int32)], System.Object), Bridge.unbox(r1));
 
             var m2 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C23, 8, 284, "M2");
             var r2 = Bridge.cast(Bridge.Reflection.midel(m2, new Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C23.ctor(0, null)).apply(null, System.Array.init([Bridge.box(2, System.Int32), System.Array.init([17, 32], System.Int32)], System.Object)), System.Array.type(System.Object));
-            Bridge.Test.NUnit.Assert.areEqual(System.Array.init([Bridge.box(2, System.Int32), System.Array.init([17, 32], System.Int32)], System.Object), r2);
+            Bridge.Test.NUnit.Assert.areEqual(System.Array.init([Bridge.box(2, System.Int32), System.Array.init([17, 32], System.Int32)], System.Object), Bridge.unbox(r2));
         },
         invokeWorksForAllKindsOfConstructors: function () {
             var c1 = Bridge.cast(Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10, 31, 28).filter($asm.$.Bridge.ClientTest.Batch4.Reflection.ReflectionTests.f3)[0], System.Reflection.ConstructorInfo);
@@ -13397,7 +13393,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         s: null,
         v: null,
         getItem: function (x, s) {
-            return System.String.concat(this.v, " ", Bridge.box(x, System.Int32), " ", s);
+            return System.String.concat(this.v, " ", x, " ", s);
         },
         setItem: function (x, s, value) {
             this.x = x;
@@ -13732,6 +13728,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         statics: {
             canConvert: function (T, arg) {
                 try { /// The variable `x' is assigned but its value is never used
+
+
                     var x = Bridge.cast(Bridge.unbox(arg), T);
                     return true;
                 }
@@ -14180,7 +14178,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         castOperatorForSerializableTypeWithoutTypeCheckCodeAlwaysSucceedsGeneric: function () {
             var o = {  };
-            var b = this.cast(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.OL, o);
+            var b = this.cast(Object, o);
             Bridge.Test.NUnit.Assert.true(Bridge.referenceEquals(Bridge.unbox(o), b));
         },
         typeCheckForSubTypeOfGenericType: function () {
@@ -14254,10 +14252,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         $variance: [0,1]
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.OL", {
-        $literal: true
-    });
-
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests", {
         getAssemblyWithVersion: function () {
             return "Bridge.ClientTest.Batch4";
@@ -14287,7 +14281,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var args = $asm.$.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.f1(new (System.Collections.Generic.List$1(System.Object))());
             var obj = Bridge.Reflection.applyConstructor(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.ClassWithExpandParamsCtor, args.toArray());
 
-            Bridge.Test.NUnit.Assert.areEqual(args.toArray(), obj.ctorArgs);
+            Bridge.Test.NUnit.Assert.areEqual(Bridge.unbox(args.toArray()), Bridge.unbox(obj.ctorArgs));
             Bridge.Test.NUnit.Assert.areEqual(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.ClassWithExpandParamsCtor, Bridge.getType(obj));
         },
         namePropertyRemovesTheNamespace: function () {
@@ -15052,7 +15046,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         messageB: null,
         ctor: function (x, y) {
             this.$initialize();
-            this.messageB = Bridge.box(x, System.Int32) + " " + Bridge.box(y, System.Int32);
+            this.messageB = x + " " + y;
         }
     });
 
@@ -15072,7 +15066,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         messageB: null,
         ctor: function (x, y) {
             this.$initialize();
-            this.messageB = Bridge.box(x, System.Int32) + " " + Bridge.box(y, System.Int32);
+            this.messageB = x + " " + y;
         }
     });
 
@@ -15206,7 +15200,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             return ((((x + y) | 0) + this.m) | 0);
         },
         g: function (T, x, y) {
-            return System.String.concat(Bridge.box(((((x + y) | 0) + this.m) | 0), System.Int32), Bridge.Reflection.getTypeName(T));
+            return System.String.concat(((((x + y) | 0) + this.m) | 0), Bridge.Reflection.getTypeName(T));
         }
     });
 
@@ -15220,7 +15214,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             return ((((x + y) | 0) + this.m) | 0);
         },
         g: function (T, x, y) {
-            return System.String.concat(Bridge.box(((((x + y) | 0) + this.m) | 0), System.Int32), Bridge.Reflection.getTypeName(T));
+            return System.String.concat(((((x + y) | 0) + this.m) | 0), Bridge.Reflection.getTypeName(T));
         },
         getF: function () {
             return Bridge.fn.cacheBind(this, this.f);
@@ -16158,7 +16152,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         creatingInstanceReturnsTodaysDate_SPI_1604: function () {
             var fullYear = Bridge.createInstance(Date).getFullYear();
-            Bridge.Test.NUnit.Assert.true$1(fullYear > 2011, Bridge.box(fullYear, System.Int32) + " > 2011");
+            Bridge.Test.NUnit.Assert.true$1(fullYear > 2011, fullYear + " > 2011");
         },
         millisecondSinceEpochConstructorWorks: function () {
             var dt = new Date(43200000000.0);
@@ -17026,13 +17020,13 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.DecimalTests", {
         typePropertiesAreCorrect_SPI_1717: function () {
-            Bridge.Test.NUnit.Assert.true(Bridge.is(Bridge.box(System.Decimal(0.5), System.Decimal, $box_.System.Decimal.toString), System.Decimal));
+            Bridge.Test.NUnit.Assert.true(Bridge.is(System.Decimal(0.5), System.Decimal));
             Bridge.Test.NUnit.Assert.areEqual("System.Decimal", Bridge.Reflection.getTypeFullName(System.Decimal));
             Bridge.Test.NUnit.Assert.false(Bridge.Reflection.isClass(System.Decimal));
             Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isAssignableFrom(System.IComparable$1(System.Decimal), System.Decimal));
             Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isAssignableFrom(System.IEquatable$1(System.Decimal), System.Decimal));
             Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isAssignableFrom(System.IFormattable, System.Decimal));
-            var d = Bridge.box(System.Decimal(0.0), System.Decimal, $box_.System.Decimal.toString);
+            var d = System.Decimal(0.0);
             Bridge.Test.NUnit.Assert.true(Bridge.is(d, System.Decimal));
             Bridge.Test.NUnit.Assert.true(Bridge.is(d, System.IComparable$1(System.Decimal)));
             Bridge.Test.NUnit.Assert.true(Bridge.is(d, System.IEquatable$1(System.Decimal)));
@@ -17056,37 +17050,37 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areStrictEqual(s, v.toString());
         },
         defaultValueIsDecimal0: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(this.getDefaultValue(System.Decimal), System.Decimal, $box_.System.Decimal.toString), 0);
+            this.assertIsDecimalAndEqualTo(this.getDefaultValue(System.Decimal), 0);
         },
         creatingInstanceReturnsZero: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(Bridge.createInstance(System.Decimal), System.Decimal, $box_.System.Decimal.toString), 0);
+            this.assertIsDecimalAndEqualTo(Bridge.createInstance(System.Decimal), 0);
         },
         literalDecimalsWork_SPI_1590: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(1.0), System.Decimal, $box_.System.Decimal.toString), 1);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(-1.0), System.Decimal, $box_.System.Decimal.toString), -1);
+            this.assertIsDecimalAndEqualTo(System.Decimal(1.0), 1);
+            this.assertIsDecimalAndEqualTo(System.Decimal(-1.0), -1);
 
             // #1590
-            this.assertIsDecimalAndEqualTo$1(Bridge.box(System.Decimal("7922816251426433759354395033"), System.Decimal, $box_.System.Decimal.toString), "7922816251426433759354395033");
-            this.assertIsDecimalAndEqualTo$1(Bridge.box(System.Decimal("-7922816251426433759354395033"), System.Decimal, $box_.System.Decimal.toString), "-7922816251426433759354395033");
+            this.assertIsDecimalAndEqualTo$1(System.Decimal("7922816251426433759354395033"), "7922816251426433759354395033");
+            this.assertIsDecimalAndEqualTo$1(System.Decimal("-7922816251426433759354395033"), "-7922816251426433759354395033");
         },
         constantsWork_SPI_1590: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.One, System.Decimal, $box_.System.Decimal.toString), 1);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.Zero, System.Decimal, $box_.System.Decimal.toString), 0);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.MinusOne, System.Decimal, $box_.System.Decimal.toString), -1);
+            this.assertIsDecimalAndEqualTo(System.Decimal.One, 1);
+            this.assertIsDecimalAndEqualTo(System.Decimal.Zero, 0);
+            this.assertIsDecimalAndEqualTo(System.Decimal.MinusOne, -1);
             // #1590
-            this.assertIsDecimalAndEqualTo$1(Bridge.box(System.Decimal.MinValue, System.Decimal, $box_.System.Decimal.toString), "-79228162514264337593543950335");
-            this.assertIsDecimalAndEqualTo$1(Bridge.box(System.Decimal.MaxValue, System.Decimal, $box_.System.Decimal.toString), "79228162514264337593543950335");
+            this.assertIsDecimalAndEqualTo$1(System.Decimal.MinValue, "-79228162514264337593543950335");
+            this.assertIsDecimalAndEqualTo$1(System.Decimal.MaxValue, "79228162514264337593543950335");
         },
         defaultConstructorReturnsZero: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(0), System.Decimal, $box_.System.Decimal.toString), 0);
+            this.assertIsDecimalAndEqualTo(System.Decimal(0), 0);
         },
         convertingConstructorsWork: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(0.5), System.Decimal, $box_.System.Decimal.toString), 0.5);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(1.5), System.Decimal, $box_.System.Decimal.toString), 1.5);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(2), System.Decimal, $box_.System.Decimal.toString), 2);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(System.Int64(3)), System.Decimal, $box_.System.Decimal.toString), 3);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(4), System.Decimal, $box_.System.Decimal.toString), 4);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(System.UInt64(5)), System.Decimal, $box_.System.Decimal.toString), 5);
+            this.assertIsDecimalAndEqualTo(System.Decimal(0.5), 0.5);
+            this.assertIsDecimalAndEqualTo(System.Decimal(1.5), 1.5);
+            this.assertIsDecimalAndEqualTo(System.Decimal(2), 2);
+            this.assertIsDecimalAndEqualTo(System.Decimal(System.Int64(3)), 3);
+            this.assertIsDecimalAndEqualTo(System.Decimal(4), 4);
+            this.assertIsDecimalAndEqualTo(System.Decimal(System.UInt64(5)), 5);
         },
         formatWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual("123", Bridge.Int.format(System.Decimal(291.0), "x"));
@@ -17101,21 +17095,21 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual("291", Bridge.format(System.Decimal(291.0), "", System.Globalization.CultureInfo.invariantCulture));
         },
         toStringWithoutRadixWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual("123", Bridge.box(System.Decimal(123.0), System.Decimal, $box_.System.Decimal.toString).toString());
+            Bridge.Test.NUnit.Assert.areEqual("123", System.Decimal(123.0).toString());
         },
         conversionsToDecimalWork_SPI_1580: function () {
             var x = 0;
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(Bridge.Int.sxb((((x + 1) | 0)) & 255)), System.Decimal, $box_.System.Decimal.toString), 1);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(((((x + 2) | 0)) & 255)), System.Decimal, $box_.System.Decimal.toString), 2);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(Bridge.Int.sxs((((x + 3) | 0)) & 65535)), System.Decimal, $box_.System.Decimal.toString), 3);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(((((x + 4) | 0)) & 65535)), System.Decimal, $box_.System.Decimal.toString), 4);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(((((x + 5) | 0)) & 65535)), System.Decimal, $box_.System.Decimal.toString), 5);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(((x + 6) | 0)), System.Decimal, $box_.System.Decimal.toString), 6);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(((((x + 7) | 0)) >>> 0)), System.Decimal, $box_.System.Decimal.toString), 7);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(System.Int64(((x + 8) | 0))), System.Decimal, $box_.System.Decimal.toString), 8);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(Bridge.Int.clipu64(((x + 9) | 0))), System.Decimal, $box_.System.Decimal.toString), 9);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(x + 10.5, null, System.Single), System.Decimal, $box_.System.Decimal.toString), 10.5);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(x + 11.5, null, System.Double), System.Decimal, $box_.System.Decimal.toString), 11.5);
+            this.assertIsDecimalAndEqualTo(System.Decimal(Bridge.Int.sxb((((x + 1) | 0)) & 255)), 1);
+            this.assertIsDecimalAndEqualTo(System.Decimal(((((x + 2) | 0)) & 255)), 2);
+            this.assertIsDecimalAndEqualTo(System.Decimal(Bridge.Int.sxs((((x + 3) | 0)) & 65535)), 3);
+            this.assertIsDecimalAndEqualTo(System.Decimal(((((x + 4) | 0)) & 65535)), 4);
+            this.assertIsDecimalAndEqualTo(System.Decimal(((((x + 5) | 0)) & 65535)), 5);
+            this.assertIsDecimalAndEqualTo(System.Decimal(((x + 6) | 0)), 6);
+            this.assertIsDecimalAndEqualTo(System.Decimal(((((x + 7) | 0)) >>> 0)), 7);
+            this.assertIsDecimalAndEqualTo(System.Decimal(System.Int64(((x + 8) | 0))), 8);
+            this.assertIsDecimalAndEqualTo(System.Decimal(Bridge.Int.clipu64(((x + 9) | 0))), 9);
+            this.assertIsDecimalAndEqualTo(System.Decimal(x + 10.5, null, System.Single), 10.5);
+            this.assertIsDecimalAndEqualTo(System.Decimal(x + 11.5, null, System.Double), 11.5);
 
             // #1580
             Bridge.Test.NUnit.Assert.throws$6(System.OverflowException, function () {
@@ -17133,17 +17127,17 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         nullableConversionsToDecimalWork_SPI_1580_1581_1587: function () {
             var x1 = 0, x2 = null;
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.lift(Bridge.Int.clip8(Bridge.Int.clip32(System.Nullable.add(x1, 1)))), System.Decimal, $box_.System.Nullable$1.toString), 1);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.lift(Bridge.Int.clipu8(Bridge.Int.clip32(System.Nullable.add(x1, 2)))), System.Decimal, $box_.System.Nullable$1.toString), 2);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.lift(Bridge.Int.clip16(Bridge.Int.clip32(System.Nullable.add(x1, 3)))), System.Decimal, $box_.System.Nullable$1.toString), 3);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.lift(Bridge.Int.clipu16(Bridge.Int.clip32(System.Nullable.add(x1, 4)))), System.Decimal, $box_.System.Nullable$1.toString), 4);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.lift(Bridge.Int.clipu16(Bridge.Int.clip32(System.Nullable.add(x1, 5)))), System.Decimal, $box_.System.Nullable$1.toString), 5);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.lift(Bridge.Int.clip32(System.Nullable.add(x1, 6))), System.Decimal, $box_.System.Nullable$1.toString), 6);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.lift(Bridge.Int.clipu32(Bridge.Int.clip32(System.Nullable.add(x1, 7)))), System.Decimal, $box_.System.Nullable$1.toString), 7);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.lift(System.Int64.lift(Bridge.Int.clip32(System.Nullable.add(x1, 8)))), System.Decimal, $box_.System.Nullable$1.toString), 8);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.lift(Bridge.Int.clipu64(Bridge.Int.clip32(System.Nullable.add(x1, 9)))), System.Decimal, $box_.System.Nullable$1.toString), 9);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(System.Nullable.add(x1, 10.5), null, System.Nullable$1(System.Single)), System.Decimal, $box_.System.Nullable$1.toString), 10.5);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(System.Nullable.add(x1, 11.5), null, System.Nullable$1(System.Double)), System.Decimal, $box_.System.Nullable$1.toString), 11.5);
+            this.assertIsDecimalAndEqualTo(System.Decimal.lift(Bridge.Int.clip8(Bridge.Int.clip32(System.Nullable.add(x1, 1)))), 1);
+            this.assertIsDecimalAndEqualTo(System.Decimal.lift(Bridge.Int.clipu8(Bridge.Int.clip32(System.Nullable.add(x1, 2)))), 2);
+            this.assertIsDecimalAndEqualTo(System.Decimal.lift(Bridge.Int.clip16(Bridge.Int.clip32(System.Nullable.add(x1, 3)))), 3);
+            this.assertIsDecimalAndEqualTo(System.Decimal.lift(Bridge.Int.clipu16(Bridge.Int.clip32(System.Nullable.add(x1, 4)))), 4);
+            this.assertIsDecimalAndEqualTo(System.Decimal.lift(Bridge.Int.clipu16(Bridge.Int.clip32(System.Nullable.add(x1, 5)))), 5);
+            this.assertIsDecimalAndEqualTo(System.Decimal.lift(Bridge.Int.clip32(System.Nullable.add(x1, 6))), 6);
+            this.assertIsDecimalAndEqualTo(System.Decimal.lift(Bridge.Int.clipu32(Bridge.Int.clip32(System.Nullable.add(x1, 7)))), 7);
+            this.assertIsDecimalAndEqualTo(System.Decimal.lift(System.Int64.lift(Bridge.Int.clip32(System.Nullable.add(x1, 8)))), 8);
+            this.assertIsDecimalAndEqualTo(System.Decimal.lift(Bridge.Int.clipu64(Bridge.Int.clip32(System.Nullable.add(x1, 9)))), 9);
+            this.assertIsDecimalAndEqualTo(System.Decimal(System.Nullable.add(x1, 10.5), null, System.Nullable$1(System.Single)), 10.5);
+            this.assertIsDecimalAndEqualTo(System.Decimal(System.Nullable.add(x1, 11.5), null, System.Nullable$1(System.Double)), 11.5);
             Bridge.Test.NUnit.Assert.areEqual(null, System.Decimal.lift(Bridge.Int.clip8(x2)));
             Bridge.Test.NUnit.Assert.areEqual(null, System.Decimal.lift(Bridge.Int.clipu8(x2)));
             Bridge.Test.NUnit.Assert.areEqual(null, System.Decimal.lift(Bridge.Int.clip16(x2)));
@@ -17648,26 +17642,26 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         operatorsWork_SPI_1583: function () {
             var $t;
             var x = System.Decimal(3);
-            this.assertIsDecimalAndEqualTo(Bridge.box(x.clone(), System.Decimal, $box_.System.Decimal.toString), 3);
-            this.assertIsDecimalAndEqualTo(Bridge.box(x.neg(), System.Decimal, $box_.System.Decimal.toString), -3);
-            this.assertIsDecimalAndEqualTo(Bridge.box(x.add(System.Decimal(4.0)), System.Decimal, $box_.System.Decimal.toString), 7);
-            this.assertIsDecimalAndEqualTo(Bridge.box(x.sub(System.Decimal(2.0)), System.Decimal, $box_.System.Decimal.toString), 1);
-            this.assertIsDecimalAndEqualTo(Bridge.box(($t = x, x = x.inc(), $t), System.Decimal, $box_.System.Decimal.toString), 3);
-            this.assertIsDecimalAndEqualTo(Bridge.box(x, System.Decimal, $box_.System.Decimal.toString), 4);
-            this.assertIsDecimalAndEqualTo(Bridge.box((x = x.inc()), System.Decimal, $box_.System.Decimal.toString), 5);
-            this.assertIsDecimalAndEqualTo(Bridge.box(x, System.Decimal, $box_.System.Decimal.toString), 5);
-            this.assertIsDecimalAndEqualTo(Bridge.box(($t = x, x = x.dec(), $t), System.Decimal, $box_.System.Decimal.toString), 5);
-            this.assertIsDecimalAndEqualTo(Bridge.box(x, System.Decimal, $box_.System.Decimal.toString), 4);
-            this.assertIsDecimalAndEqualTo(Bridge.box((x = x.dec()), System.Decimal, $box_.System.Decimal.toString), 3);
-            this.assertIsDecimalAndEqualTo(Bridge.box(x, System.Decimal, $box_.System.Decimal.toString), 3);
-            this.assertIsDecimalAndEqualTo(Bridge.box(x.mul(System.Decimal(3.0)), System.Decimal, $box_.System.Decimal.toString), 9);
-            this.assertIsDecimalAndEqualTo(Bridge.box(x.div(System.Decimal(2.0)), System.Decimal, $box_.System.Decimal.toString), 1.5);
+            this.assertIsDecimalAndEqualTo(x.clone(), 3);
+            this.assertIsDecimalAndEqualTo(x.neg(), -3);
+            this.assertIsDecimalAndEqualTo(x.add(System.Decimal(4.0)), 7);
+            this.assertIsDecimalAndEqualTo(x.sub(System.Decimal(2.0)), 1);
+            this.assertIsDecimalAndEqualTo(($t = x, x = x.inc(), $t), 3);
+            this.assertIsDecimalAndEqualTo(x, 4);
+            this.assertIsDecimalAndEqualTo((x = x.inc()), 5);
+            this.assertIsDecimalAndEqualTo(x, 5);
+            this.assertIsDecimalAndEqualTo(($t = x, x = x.dec(), $t), 5);
+            this.assertIsDecimalAndEqualTo(x, 4);
+            this.assertIsDecimalAndEqualTo((x = x.dec()), 3);
+            this.assertIsDecimalAndEqualTo(x, 3);
+            this.assertIsDecimalAndEqualTo(x.mul(System.Decimal(3.0)), 9);
+            this.assertIsDecimalAndEqualTo(x.div(System.Decimal(2.0)), 1.5);
 
             // #1583
             Bridge.Test.NUnit.Assert.throws$6(System.DivideByZeroException, function () {
                 var _ = x.div(System.Decimal(0.0));
             });
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(14.0).mod(x), System.Decimal, $box_.System.Decimal.toString), 2);
+            this.assertIsDecimalAndEqualTo(System.Decimal(14.0).mod(x), 2);
             Bridge.Test.NUnit.Assert.throws$6(System.DivideByZeroException, function () {
                 var _ = x.mod(System.Decimal(0.0));
             });
@@ -17688,26 +17682,26 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         liftedOperatorsWork_SPI_1583: function () {
             var $t;
             var x1 = System.Decimal(3), x2 = System.Decimal.lift(null);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Nullable.lift1("clone", x1), System.Decimal, $box_.System.Nullable$1.toString), 3);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Nullable.lift1("neg", x1), System.Decimal, $box_.System.Nullable$1.toString), -3);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Nullable.lift2("add", x1, System.Decimal(4.0)), System.Decimal, $box_.System.Nullable$1.toString), 7);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Nullable.lift2("sub", x1, System.Decimal(2.0)), System.Decimal, $box_.System.Nullable$1.toString), 1);
-            this.assertIsDecimalAndEqualTo(Bridge.box(Bridge.hasValue(x1) ? ($t = x1, x1 = System.Nullable.lift1('inc', x1), $t) : null, System.Decimal, $box_.System.Nullable$1.toString), 3);
-            this.assertIsDecimalAndEqualTo(Bridge.box(x1, System.Decimal, $box_.System.Nullable$1.toString), 4);
-            this.assertIsDecimalAndEqualTo(Bridge.box(Bridge.hasValue(x1) ? (x1 = System.Nullable.lift1('inc', x1)) : null, System.Decimal, $box_.System.Nullable$1.toString), 5);
-            this.assertIsDecimalAndEqualTo(Bridge.box(x1, System.Decimal, $box_.System.Nullable$1.toString), 5);
-            this.assertIsDecimalAndEqualTo(Bridge.box(Bridge.hasValue(x1) ? ($t = x1, x1 = System.Nullable.lift1('dec', x1), $t) : null, System.Decimal, $box_.System.Nullable$1.toString), 5);
-            this.assertIsDecimalAndEqualTo(Bridge.box(x1, System.Decimal, $box_.System.Nullable$1.toString), 4);
-            this.assertIsDecimalAndEqualTo(Bridge.box(Bridge.hasValue(x1) ? (x1 = System.Nullable.lift1('dec', x1)) : null, System.Decimal, $box_.System.Nullable$1.toString), 3);
-            this.assertIsDecimalAndEqualTo(Bridge.box(x1, System.Decimal, $box_.System.Nullable$1.toString), 3);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Nullable.lift2("mul", x1, System.Decimal(3.0)), System.Decimal, $box_.System.Nullable$1.toString), 9);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Nullable.lift2("div", x1, System.Decimal(2.0)), System.Decimal, $box_.System.Nullable$1.toString), 1.5);
+            this.assertIsDecimalAndEqualTo(System.Nullable.lift1("clone", x1), 3);
+            this.assertIsDecimalAndEqualTo(System.Nullable.lift1("neg", x1), -3);
+            this.assertIsDecimalAndEqualTo(System.Nullable.lift2("add", x1, System.Decimal(4.0)), 7);
+            this.assertIsDecimalAndEqualTo(System.Nullable.lift2("sub", x1, System.Decimal(2.0)), 1);
+            this.assertIsDecimalAndEqualTo(Bridge.hasValue(x1) ? ($t = x1, x1 = System.Nullable.lift1('inc', x1), $t) : null, 3);
+            this.assertIsDecimalAndEqualTo(x1, 4);
+            this.assertIsDecimalAndEqualTo(Bridge.hasValue(x1) ? (x1 = System.Nullable.lift1('inc', x1)) : null, 5);
+            this.assertIsDecimalAndEqualTo(x1, 5);
+            this.assertIsDecimalAndEqualTo(Bridge.hasValue(x1) ? ($t = x1, x1 = System.Nullable.lift1('dec', x1), $t) : null, 5);
+            this.assertIsDecimalAndEqualTo(x1, 4);
+            this.assertIsDecimalAndEqualTo(Bridge.hasValue(x1) ? (x1 = System.Nullable.lift1('dec', x1)) : null, 3);
+            this.assertIsDecimalAndEqualTo(x1, 3);
+            this.assertIsDecimalAndEqualTo(System.Nullable.lift2("mul", x1, System.Decimal(3.0)), 9);
+            this.assertIsDecimalAndEqualTo(System.Nullable.lift2("div", x1, System.Decimal(2.0)), 1.5);
 
             // #1583
             Bridge.Test.NUnit.Assert.throws$6(System.DivideByZeroException, function () {
                 var _ = System.Nullable.lift2("div", x1, System.Decimal(0.0));
             });
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Nullable.lift2("mod", System.Decimal(14.0), x1), System.Decimal, $box_.System.Nullable$1.toString), 2);
+            this.assertIsDecimalAndEqualTo(System.Nullable.lift2("mod", System.Decimal(14.0), x1), 2);
             Bridge.Test.NUnit.Assert.throws$6(System.DivideByZeroException, function () {
                 var _ = System.Nullable.lift2("mod", x1, System.Decimal(0.0));
             });
@@ -17772,36 +17766,36 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.false(System.Nullable.liftcmp("lte", x2, System.Decimal.lift(null)));
         },
         addWorks: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(3.0).add(System.Decimal(4.0)), System.Decimal, $box_.System.Decimal.toString), 7);
+            this.assertIsDecimalAndEqualTo(System.Decimal(3.0).add(System.Decimal(4.0)), 7);
         },
         ceilingWorks: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(3.1).ceil(), System.Decimal, $box_.System.Decimal.toString), 4);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(-3.9).ceil(), System.Decimal, $box_.System.Decimal.toString), -3);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(3.0).ceil(), System.Decimal, $box_.System.Decimal.toString), 3);
+            this.assertIsDecimalAndEqualTo(System.Decimal(3.1).ceil(), 4);
+            this.assertIsDecimalAndEqualTo(System.Decimal(-3.9).ceil(), -3);
+            this.assertIsDecimalAndEqualTo(System.Decimal(3.0).ceil(), 3);
         },
         divideWorks: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(3.0).div(System.Decimal(4.0)), System.Decimal, $box_.System.Decimal.toString), 0.75);
+            this.assertIsDecimalAndEqualTo(System.Decimal(3.0).div(System.Decimal(4.0)), 0.75);
         },
         floorWorks: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(3.9).floor(), System.Decimal, $box_.System.Decimal.toString), 3);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(-3.1).floor(), System.Decimal, $box_.System.Decimal.toString), -4);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(3.0).floor(), System.Decimal, $box_.System.Decimal.toString), 3);
+            this.assertIsDecimalAndEqualTo(System.Decimal(3.9).floor(), 3);
+            this.assertIsDecimalAndEqualTo(System.Decimal(-3.1).floor(), -4);
+            this.assertIsDecimalAndEqualTo(System.Decimal(3.0).floor(), 3);
         },
         remainderWorks: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(14.0).mod(System.Decimal(3.0)), System.Decimal, $box_.System.Decimal.toString), 2);
+            this.assertIsDecimalAndEqualTo(System.Decimal(14.0).mod(System.Decimal(3.0)), 2);
         },
         multiplyWorks: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(3.0).mul(System.Decimal(2.0)), System.Decimal, $box_.System.Decimal.toString), 6);
+            this.assertIsDecimalAndEqualTo(System.Decimal(3.0).mul(System.Decimal(2.0)), 6);
         },
         negateWorks: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(0).sub(System.Decimal(3.0)), System.Decimal, $box_.System.Decimal.toString), -3);
+            this.assertIsDecimalAndEqualTo(System.Decimal(0).sub(System.Decimal(3.0)), -3);
         },
         parseWorks_SPI_1586: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal("123"), System.Decimal, $box_.System.Decimal.toString), 123);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal("0.123"), System.Decimal, $box_.System.Decimal.toString), 0.123);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(".123"), System.Decimal, $box_.System.Decimal.toString), 0.123);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal("123.456"), System.Decimal, $box_.System.Decimal.toString), 123.456);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal("-123.456"), System.Decimal, $box_.System.Decimal.toString), -123.456);
+            this.assertIsDecimalAndEqualTo(System.Decimal("123"), 123);
+            this.assertIsDecimalAndEqualTo(System.Decimal("0.123"), 0.123);
+            this.assertIsDecimalAndEqualTo(System.Decimal(".123"), 0.123);
+            this.assertIsDecimalAndEqualTo(System.Decimal("123.456"), 123.456);
+            this.assertIsDecimalAndEqualTo(System.Decimal("-123.456"), -123.456);
 
             // #1586
             // Test restructure to keep assertion count correct (prevent uncaught test exception)
@@ -17809,12 +17803,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.ClientTest.Batch4.TestHelper.safe(function () {
                 d1 = System.Decimal("+123.456");
             });
-            this.assertIsDecimalAndEqualTo(Bridge.box(d1, System.Decimal, $box_.System.Decimal.toString), 123.456);
+            this.assertIsDecimalAndEqualTo(d1, 123.456);
             var d2 = System.Decimal(0);
             Bridge.ClientTest.Batch4.TestHelper.safe(function () {
                 d2 = System.Decimal("  +123.456  ");
             });
-            this.assertIsDecimalAndEqualTo(Bridge.box(d2, System.Decimal, $box_.System.Decimal.toString), 123.456);
+            this.assertIsDecimalAndEqualTo(d2, 123.456);
 
             Bridge.Test.NUnit.Assert.throws$6(System.FormatException, $asm.$.Bridge.ClientTest.Batch4.SimpleTypes.DecimalTests.f1);
             Bridge.Test.NUnit.Assert.throws$6(System.FormatException, $asm.$.Bridge.ClientTest.Batch4.SimpleTypes.DecimalTests.f2);
@@ -17826,81 +17820,81 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var b;
             b = System.Decimal.tryParse("123", null, d);
             Bridge.Test.NUnit.Assert.true(b);
-            this.assertIsDecimalAndEqualTo(Bridge.box(d.v, System.Decimal, $box_.System.Decimal.toString), 123);
+            this.assertIsDecimalAndEqualTo(d.v, 123);
 
             b = System.Decimal.tryParse("0.123", null, d);
             Bridge.Test.NUnit.Assert.true(b);
-            this.assertIsDecimalAndEqualTo(Bridge.box(d.v, System.Decimal, $box_.System.Decimal.toString), 0.123);
+            this.assertIsDecimalAndEqualTo(d.v, 0.123);
 
             b = System.Decimal.tryParse(".123", null, d);
             Bridge.Test.NUnit.Assert.true(b);
-            this.assertIsDecimalAndEqualTo(Bridge.box(d.v, System.Decimal, $box_.System.Decimal.toString), 0.123);
+            this.assertIsDecimalAndEqualTo(d.v, 0.123);
 
             b = System.Decimal.tryParse("123.456", null, d);
             Bridge.Test.NUnit.Assert.true(b);
-            this.assertIsDecimalAndEqualTo(Bridge.box(d.v, System.Decimal, $box_.System.Decimal.toString), 123.456);
+            this.assertIsDecimalAndEqualTo(d.v, 123.456);
 
             b = System.Decimal.tryParse("-123.456", null, d);
             Bridge.Test.NUnit.Assert.true(b);
-            this.assertIsDecimalAndEqualTo(Bridge.box(d.v, System.Decimal, $box_.System.Decimal.toString), -123.456);
+            this.assertIsDecimalAndEqualTo(d.v, -123.456);
 
             // #1586
             b = System.Decimal.tryParse("+123.456", null, d);
             Bridge.Test.NUnit.Assert.true(b);
-            this.assertIsDecimalAndEqualTo(Bridge.box(d.v, System.Decimal, $box_.System.Decimal.toString), 123.456);
+            this.assertIsDecimalAndEqualTo(d.v, 123.456);
 
             b = System.Decimal.tryParse("  +123.456  ", null, d);
             Bridge.Test.NUnit.Assert.true(b);
-            this.assertIsDecimalAndEqualTo(Bridge.box(d.v, System.Decimal, $box_.System.Decimal.toString), 123.456);
+            this.assertIsDecimalAndEqualTo(d.v, 123.456);
 
             b = System.Decimal.tryParse("A123", null, d);
             Bridge.Test.NUnit.Assert.false(b);
-            this.assertIsDecimalAndEqualTo(Bridge.box(d.v, System.Decimal, $box_.System.Decimal.toString), 0);
+            this.assertIsDecimalAndEqualTo(d.v, 0);
 
             b = System.Decimal.tryParse("12.34.56", null, d);
             Bridge.Test.NUnit.Assert.false(b);
-            this.assertIsDecimalAndEqualTo(Bridge.box(d.v, System.Decimal, $box_.System.Decimal.toString), 0);
+            this.assertIsDecimalAndEqualTo(d.v, 0);
 
             b = System.Decimal.tryParse("12.", null, d);
             Bridge.Test.NUnit.Assert.true(b);
-            this.assertIsDecimalAndEqualTo(Bridge.box(d.v, System.Decimal, $box_.System.Decimal.toString), 12);
+            this.assertIsDecimalAndEqualTo(d.v, 12);
 
             //b = decimal.TryParse("999999999999999999999999999999", out d);
             //Assert.False(b);
             //AssertIsDecimalAndEqualTo(d, 0);
         },
         roundWorks: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.round(System.Decimal(3.2), 6), System.Decimal, $box_.System.Decimal.toString), 3);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.round(System.Decimal(4.5), 6), System.Decimal, $box_.System.Decimal.toString), 4);
+            this.assertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(3.2), 6), 3);
+            this.assertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(4.5), 6), 4);
         },
         roundWithDecimalsWorks: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(3.2209), 2, 6), System.Decimal, $box_.System.Decimal.toString), 3.22);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(0.2209), 2, 6), System.Decimal, $box_.System.Decimal.toString), 0.22);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(3.225), 2, 6), System.Decimal, $box_.System.Decimal.toString), 3.22);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(3.2209), 2, 6), 3.22);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(0.2209), 2, 6), 0.22);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(3.225), 2, 6), 3.22);
         },
         roundWithMidpointRoundingWorks: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.round(System.Decimal(4.5), 4), System.Decimal, $box_.System.Decimal.toString), 5);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.round(System.Decimal(-4.5), 4), System.Decimal, $box_.System.Decimal.toString), -5);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.round(System.Decimal(4.5), 6), System.Decimal, $box_.System.Decimal.toString), 4);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.round(System.Decimal(-4.5), 6), System.Decimal, $box_.System.Decimal.toString), -4);
+            this.assertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(4.5), 4), 5);
+            this.assertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(-4.5), 4), -5);
+            this.assertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(4.5), 6), 4);
+            this.assertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(-4.5), 6), -4);
         },
         roundWithDecimalsAndMidpointRoundingWorks: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(4.225), 2, 4), System.Decimal, $box_.System.Decimal.toString), 4.23);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(-4.225), 2, 4), System.Decimal, $box_.System.Decimal.toString), -4.23);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(4.2249), 2, 4), System.Decimal, $box_.System.Decimal.toString), 4.22);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(-4.2249), 2, 4), System.Decimal, $box_.System.Decimal.toString), -4.22);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(4.225), 2, 6), System.Decimal, $box_.System.Decimal.toString), 4.22);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(-4.225), 2, 6), System.Decimal, $box_.System.Decimal.toString), -4.22);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(4.2251), 2, 6), System.Decimal, $box_.System.Decimal.toString), 4.23);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal.toDecimalPlaces(System.Decimal(-4.2251), 2, 6), System.Decimal, $box_.System.Decimal.toString), -4.23);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(4.225), 2, 4), 4.23);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(-4.225), 2, 4), -4.23);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(4.2249), 2, 4), 4.22);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(-4.2249), 2, 4), -4.22);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(4.225), 2, 6), 4.22);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(-4.225), 2, 6), -4.22);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(4.2251), 2, 6), 4.23);
+            this.assertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(-4.2251), 2, 6), -4.23);
         },
         truncateWorks: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(3.9).trunc(), System.Decimal, $box_.System.Decimal.toString), 3);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(-3.9).trunc(), System.Decimal, $box_.System.Decimal.toString), -3);
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(3.0).trunc(), System.Decimal, $box_.System.Decimal.toString), 3);
+            this.assertIsDecimalAndEqualTo(System.Decimal(3.9).trunc(), 3);
+            this.assertIsDecimalAndEqualTo(System.Decimal(-3.9).trunc(), -3);
+            this.assertIsDecimalAndEqualTo(System.Decimal(3.0).trunc(), 3);
         },
         subtractWorks: function () {
-            this.assertIsDecimalAndEqualTo(Bridge.box(System.Decimal(7.0).sub(System.Decimal(3.0)), System.Decimal, $box_.System.Decimal.toString), 4);
+            this.assertIsDecimalAndEqualTo(System.Decimal(7.0).sub(System.Decimal(3.0)), 4);
         },
         getHashCodeWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual(Bridge.getHashCode((System.Decimal(0.0))), Bridge.getHashCode((System.Decimal(0.0))));
@@ -17909,10 +17903,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areNotEqual(Bridge.getHashCode((System.Decimal(0.5))), Bridge.getHashCode((System.Decimal(0.0))));
         },
         equalsWorks: function () {
-            Bridge.Test.NUnit.Assert.true(Bridge.equals((System.Decimal(0.0)), Bridge.unbox(Bridge.box(System.Decimal(0.0), System.Decimal, $box_.System.Decimal.toString))));
-            Bridge.Test.NUnit.Assert.false(Bridge.equals((System.Decimal(1.0)), Bridge.unbox(Bridge.box(System.Decimal(0.0), System.Decimal, $box_.System.Decimal.toString))));
-            Bridge.Test.NUnit.Assert.false(Bridge.equals((System.Decimal(0.0)), Bridge.unbox(Bridge.box(System.Decimal(0.5), System.Decimal, $box_.System.Decimal.toString))));
-            Bridge.Test.NUnit.Assert.true(Bridge.equals((System.Decimal(1.0)), Bridge.unbox(Bridge.box(System.Decimal(1.0), System.Decimal, $box_.System.Decimal.toString))));
+            Bridge.Test.NUnit.Assert.true(Bridge.equals((System.Decimal(0.0)), Bridge.unbox(System.Decimal(0.0))));
+            Bridge.Test.NUnit.Assert.false(Bridge.equals((System.Decimal(1.0)), Bridge.unbox(System.Decimal(0.0))));
+            Bridge.Test.NUnit.Assert.false(Bridge.equals((System.Decimal(0.0)), Bridge.unbox(System.Decimal(0.5))));
+            Bridge.Test.NUnit.Assert.true(Bridge.equals((System.Decimal(1.0)), Bridge.unbox(System.Decimal(1.0))));
         },
         staticEqualsWorks: function () {
             Bridge.Test.NUnit.Assert.true(System.Decimal(0).equals(System.Decimal(0)));
@@ -19029,7 +19023,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         typePropertiesAreCorrect_SPI_1717: function () {
             Bridge.Test.NUnit.Assert.true(Bridge.is(Bridge.box(0, System.Int32), System.Int32));
             Bridge.Test.NUnit.Assert.false(Bridge.is(Bridge.box(0.5, System.Double, $box_.System.Double.toString), System.Int32));
-            Bridge.Test.NUnit.Assert.false(Bridge.is(Bridge.box(System.Int64([2147483647,-1]), System.Int64), System.Int32));
+            Bridge.Test.NUnit.Assert.false(Bridge.is(System.Int64([2147483647,-1]), System.Int32));
             Bridge.Test.NUnit.Assert.false(Bridge.is(Bridge.box(2147483648, System.UInt32), System.Int32));
             Bridge.Test.NUnit.Assert.areEqual("System.Int32", Bridge.Reflection.getTypeFullName(System.Int32));
             Bridge.Test.NUnit.Assert.false(Bridge.Reflection.isClass(System.Int32));
@@ -19282,7 +19276,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.Int64Tests", {
         typePropertiesAreCorrect_SPI_1717: function () {
-            Bridge.Test.NUnit.Assert.true(Bridge.is(Bridge.box(System.Int64(0), System.Int64), System.Int64));
+            Bridge.Test.NUnit.Assert.true(Bridge.is(System.Int64(0), System.Int64));
             Bridge.Test.NUnit.Assert.false(Bridge.is(Bridge.box(0.5, System.Double, $box_.System.Double.toString), System.Int64));
             Bridge.Test.NUnit.Assert.false(Bridge.is(Bridge.box(1E+100, System.Double, $box_.System.Double.toString), System.Int64));
             Bridge.Test.NUnit.Assert.areEqual("System.Int64", Bridge.Reflection.getTypeFullName(System.Int64));
@@ -19290,7 +19284,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isAssignableFrom(System.IComparable$1(System.Int64), System.Int64));
             Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isAssignableFrom(System.IEquatable$1(System.Int64), System.Int64));
             Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isAssignableFrom(System.IFormattable, System.Int64));
-            var l = Bridge.box(System.Int64(0), System.Int64);
+            var l = System.Int64(0);
             Bridge.Test.NUnit.Assert.true(Bridge.is(l, System.Int64));
             Bridge.Test.NUnit.Assert.true(Bridge.is(l, System.IComparable$1(System.Int64)));
             Bridge.Test.NUnit.Assert.true(Bridge.is(l, System.IEquatable$1(System.Int64)));
@@ -19420,10 +19414,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true(System.Int64(Bridge.getHashCode(System.Int64([0,1]))).lte(System.Int64([-1,0])));
         },
         equalsWorks: function () {
-            Bridge.Test.NUnit.Assert.true(Bridge.equals((System.Int64(0)), Bridge.unbox(Bridge.box(System.Int64(0), System.Int64))));
-            Bridge.Test.NUnit.Assert.false(Bridge.equals((System.Int64(1)), Bridge.unbox(Bridge.box(System.Int64(0), System.Int64))));
-            Bridge.Test.NUnit.Assert.false(Bridge.equals((System.Int64(0)), Bridge.unbox(Bridge.box(System.Int64(1), System.Int64))));
-            Bridge.Test.NUnit.Assert.true(Bridge.equals((System.Int64(1)), Bridge.unbox(Bridge.box(System.Int64(1), System.Int64))));
+            Bridge.Test.NUnit.Assert.true(Bridge.equals((System.Int64(0)), Bridge.unbox(System.Int64(0))));
+            Bridge.Test.NUnit.Assert.false(Bridge.equals((System.Int64(1)), Bridge.unbox(System.Int64(0))));
+            Bridge.Test.NUnit.Assert.false(Bridge.equals((System.Int64(0)), Bridge.unbox(System.Int64(1))));
+            Bridge.Test.NUnit.Assert.true(Bridge.equals((System.Int64(1)), Bridge.unbox(System.Int64(1))));
         },
         iEquatableEqualsWorks: function () {
             Bridge.Test.NUnit.Assert.true((System.Int64(0)).equalsT(System.Int64(0)));
@@ -20403,7 +20397,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.false(Bridge.Reflection.isClass(System.TimeSpan));
             Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isAssignableFrom(System.IComparable$1(System.TimeSpan), System.TimeSpan));
             Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isAssignableFrom(System.IEquatable$1(System.TimeSpan), System.TimeSpan));
-            var d = Bridge.box(new System.TimeSpan(), System.TimeSpan);
+            var d = new System.TimeSpan();
             Bridge.Test.NUnit.Assert.true(Bridge.is(d, System.TimeSpan));
             Bridge.Test.NUnit.Assert.true(Bridge.is(d, System.IComparable$1(System.TimeSpan)));
             Bridge.Test.NUnit.Assert.true(Bridge.is(d, System.IEquatable$1(System.TimeSpan)));
@@ -20431,44 +20425,44 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         parameterConstructorsWorks: function () {
             var time = new System.TimeSpan(System.Int64(34567));
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(time, System.TimeSpan), System.TimeSpan), "ticks type");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(time, System.TimeSpan), "ticks type");
             Bridge.Test.NUnit.Assert.areEqual$1(System.Int64(34567), time.getTicks(), "ticks value");
 
             time = new System.TimeSpan(10, 20, 5);
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(time, System.TimeSpan), System.TimeSpan), "h, m, s type");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(time, System.TimeSpan), "h, m, s type");
             Bridge.Test.NUnit.Assert.areEqual$1(System.Int64([-1612154752,86]), time.getTicks(), "h, m, s value");
 
             time = new System.TimeSpan(15, 10, 20, 5);
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(time, System.TimeSpan), System.TimeSpan), "d, h, m, s type");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(time, System.TimeSpan), "d, h, m, s type");
             Bridge.Test.NUnit.Assert.areEqual$1(System.Int64([471513216,3104]), time.getTicks(), "d, h, m, s value");
 
             time = new System.TimeSpan(15, 10, 20, 5, 14);
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(time, System.TimeSpan), System.TimeSpan), "full type");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(time, System.TimeSpan), "full type");
             Bridge.Test.NUnit.Assert.areEqual$1(System.Int64([471653216,3104]), time.getTicks(), "full value");
         },
         factoryMethodsWork: function () {
             var time = System.TimeSpan.fromDays(3);
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(time, System.TimeSpan), System.TimeSpan), "FromDays type");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(time, System.TimeSpan), "FromDays type");
             Bridge.Test.NUnit.Assert.areEqual$1(System.Int64([2134720512,603]), time.getTicks(), "FromDays value");
 
             time = System.TimeSpan.fromHours(3);
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(time, System.TimeSpan), System.TimeSpan), "FromHours type");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(time, System.TimeSpan), "FromHours type");
             Bridge.Test.NUnit.Assert.areEqual$1(System.Int64([625817600,25]), time.getTicks(), "FromHours value");
 
             time = System.TimeSpan.fromMinutes(3);
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(time, System.TimeSpan), System.TimeSpan), "FromMinutes type");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(time, System.TimeSpan), "FromMinutes type");
             Bridge.Test.NUnit.Assert.areEqual$1(System.Int64(1800000000), time.getTicks(), "FromMinutes value");
 
             time = System.TimeSpan.fromSeconds(3);
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(time, System.TimeSpan), System.TimeSpan), "FromSeconds type");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(time, System.TimeSpan), "FromSeconds type");
             Bridge.Test.NUnit.Assert.areEqual$1(System.Int64(30000000), time.getTicks(), "FromSeconds value");
 
             time = System.TimeSpan.fromMilliseconds(3);
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(time, System.TimeSpan), System.TimeSpan), "FromMilliseconds type");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(time, System.TimeSpan), "FromMilliseconds type");
             Bridge.Test.NUnit.Assert.areEqual$1(System.Int64(30000), time.getTicks(), "FromMilliseconds value");
 
             time = System.TimeSpan.fromTicks(System.Int64(3));
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(time, System.TimeSpan), System.TimeSpan), "FromTicks type");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(time, System.TimeSpan), "FromTicks type");
             Bridge.Test.NUnit.Assert.areEqual$1(System.Int64(3), time.getTicks(), "FromTicks value");
         },
         propertiesWork: function () {
@@ -20526,8 +20520,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var time2 = new System.TimeSpan(14, 10, 20, 5, 14);
             var time3 = new System.TimeSpan(15, 10, 20, 5, 14);
 
-            Bridge.Test.NUnit.Assert.false(Bridge.equalsT(Bridge.cast(Bridge.box(time1, System.TimeSpan), System.IEquatable$1(System.TimeSpan)), time2, System.TimeSpan));
-            Bridge.Test.NUnit.Assert.true(Bridge.equalsT(Bridge.cast(Bridge.box(time1, System.TimeSpan), System.IEquatable$1(System.TimeSpan)), time3, System.TimeSpan));
+            Bridge.Test.NUnit.Assert.false(Bridge.equalsT(Bridge.cast(time1, System.IEquatable$1(System.TimeSpan)), time2, System.TimeSpan));
+            Bridge.Test.NUnit.Assert.true(Bridge.equalsT(Bridge.cast(time1, System.IEquatable$1(System.TimeSpan)), time3, System.TimeSpan));
         },
         toStringWorks: function () {
             var time1 = new System.TimeSpan(15, 10, 20, 5, 14);
@@ -20543,14 +20537,14 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var time1 = new System.TimeSpan(2, 3, 4, 5, 6);
             var time2 = new System.TimeSpan(3, 4, 5, 6, 7);
             var actual = time1.add(time2);
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(actual, System.TimeSpan), System.TimeSpan), "Should be TimeSpan");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(actual, System.TimeSpan), "Should be TimeSpan");
             Bridge.Test.NUnit.Assert.areEqual$1(457751013, actual.getTotalMilliseconds(), "TotalMilliseconds should be correct");
         },
         subtractWorks: function () {
             var time1 = new System.TimeSpan(4, 3, 7, 2, 6);
             var time2 = new System.TimeSpan(3, 4, 5, 6, 7);
             var actual = time1.subtract(time2);
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(actual, System.TimeSpan), System.TimeSpan), "Should be TimeSpan");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(actual, System.TimeSpan), "Should be TimeSpan");
             Bridge.Test.NUnit.Assert.areEqual$1(82915999, actual.getTotalMilliseconds(), "TotalMilliseconds should be correct");
         },
         durationWorks: function () {
@@ -20558,14 +20552,14 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var time2 = new System.TimeSpan(2, 1, 5, 4, 3);
             var actual1 = time1.duration();
             var actual2 = time2.duration();
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(time1, System.TimeSpan), System.TimeSpan), "Should be TimeSpan");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(time1, System.TimeSpan), "Should be TimeSpan");
             Bridge.Test.NUnit.Assert.areEqual$1(266465004, actual1.getTotalMilliseconds(), "Negative should be negated");
             Bridge.Test.NUnit.Assert.areEqual$1(176704003, actual2.getTotalMilliseconds(), "Positive should be preserved");
         },
         negateWorks: function () {
             var time = new System.TimeSpan(-3, 2, -1, 5, -4);
             var actual = time.negate();
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(actual, System.TimeSpan), System.TimeSpan), "Should be TimeSpan");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(actual, System.TimeSpan), "Should be TimeSpan");
             Bridge.Test.NUnit.Assert.areEqual$1(252055004, actual.getTotalMilliseconds(), "Ticks should be correct");
         },
         assertAlmostEqual: function (d1, d2) {
@@ -20611,26 +20605,26 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var time1 = new System.TimeSpan(2, 3, 4, 5, 6);
             var time2 = new System.TimeSpan(3, 4, 5, 6, 7);
             var actual = System.TimeSpan.add(time1, time2);
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(actual, System.TimeSpan), System.TimeSpan), "Should be TimeSpan");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(actual, System.TimeSpan), "Should be TimeSpan");
             Bridge.Test.NUnit.Assert.areEqual$1(457751013, actual.getTotalMilliseconds(), "TotalMilliseconds should be correct");
         },
         subtractionOperatorWorks: function () {
             var time1 = new System.TimeSpan(4, 3, 7, 2, 6);
             var time2 = new System.TimeSpan(3, 4, 5, 6, 7);
             var actual = System.TimeSpan.sub(time1, time2);
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(actual, System.TimeSpan), System.TimeSpan), "Should be TimeSpan");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(actual, System.TimeSpan), "Should be TimeSpan");
             Bridge.Test.NUnit.Assert.areEqual$1(82915999, actual.getTotalMilliseconds(), "TotalMilliseconds should be correct");
         },
         unaryPlusWorks: function () {
             var time = new System.TimeSpan(-3, 2, -1, 5, -4);
             var actual = System.TimeSpan.plus(time);
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(actual, System.TimeSpan), System.TimeSpan), "Should be TimeSpan");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(actual, System.TimeSpan), "Should be TimeSpan");
             Bridge.Test.NUnit.Assert.areEqual$1(-252055004, actual.getTotalMilliseconds(), "Ticks should be correct");
         },
         unaryMinusWorks: function () {
             var time = new System.TimeSpan(-3, 2, -1, 5, -4);
             var actual = System.TimeSpan.neg(time);
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(actual, System.TimeSpan), System.TimeSpan), "Should be TimeSpan");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(actual, System.TimeSpan), "Should be TimeSpan");
             Bridge.Test.NUnit.Assert.areEqual$1(252055004, actual.getTotalMilliseconds(), "Ticks should be correct");
         }
     });
@@ -20912,7 +20906,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.false(Bridge.is(Bridge.box(0, System.Int32), System.UInt32));
             Bridge.Test.NUnit.Assert.false(Bridge.is(Bridge.box(0.5, System.Double, $box_.System.Double.toString), System.UInt32));
             Bridge.Test.NUnit.Assert.false(Bridge.is(Bridge.box(-1, System.Int32), System.UInt32));
-            Bridge.Test.NUnit.Assert.false(Bridge.is(Bridge.box(System.Int64([0,1]), System.Int64), System.UInt32));
+            Bridge.Test.NUnit.Assert.false(Bridge.is(System.Int64([0,1]), System.UInt32));
             Bridge.Test.NUnit.Assert.areEqual("System.UInt32", Bridge.Reflection.getTypeFullName(System.UInt32));
             Bridge.Test.NUnit.Assert.false(Bridge.Reflection.isClass(System.UInt32));
             Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isAssignableFrom(System.IComparable$1(System.UInt32), System.UInt32));
@@ -21098,14 +21092,14 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.UInt64Tests", {
         typePropertiesAreCorrect_SPI_1717: function () {
-            Bridge.Test.NUnit.Assert.true(Bridge.is(Bridge.box(System.UInt64(0), System.UInt64), System.UInt64));
+            Bridge.Test.NUnit.Assert.true(Bridge.is(System.UInt64(0), System.UInt64));
             Bridge.Test.NUnit.Assert.false(Bridge.is(Bridge.box(0.5, System.Double, $box_.System.Double.toString), System.UInt64));
             Bridge.Test.NUnit.Assert.areEqual("System.UInt64", Bridge.Reflection.getTypeFullName(System.UInt64));
             Bridge.Test.NUnit.Assert.false(Bridge.Reflection.isClass(System.UInt64));
             Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isAssignableFrom(System.IComparable$1(System.UInt64), System.UInt64));
             Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isAssignableFrom(System.IEquatable$1(System.UInt64), System.UInt64));
             Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isAssignableFrom(System.IFormattable, System.UInt64));
-            var l = Bridge.box(System.UInt64(0), System.UInt64);
+            var l = System.UInt64(0);
             Bridge.Test.NUnit.Assert.true(Bridge.is(l, System.UInt64));
             Bridge.Test.NUnit.Assert.true(Bridge.is(l, System.IComparable$1(System.UInt64)));
             Bridge.Test.NUnit.Assert.true(Bridge.is(l, System.IEquatable$1(System.UInt64)));
@@ -21236,10 +21230,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areNotEqual(Bridge.getHashCode((System.UInt64(1))), Bridge.getHashCode((System.UInt64(0))));
         },
         equalsWorks: function () {
-            Bridge.Test.NUnit.Assert.true(Bridge.equals((System.UInt64(0)), Bridge.unbox(Bridge.box(System.UInt64(0), System.UInt64))));
-            Bridge.Test.NUnit.Assert.false(Bridge.equals((System.UInt64(1)), Bridge.unbox(Bridge.box(System.UInt64(0), System.UInt64))));
-            Bridge.Test.NUnit.Assert.false(Bridge.equals((System.UInt64(0)), Bridge.unbox(Bridge.box(System.UInt64(1), System.UInt64))));
-            Bridge.Test.NUnit.Assert.true(Bridge.equals((System.UInt64(1)), Bridge.unbox(Bridge.box(System.UInt64(1), System.UInt64))));
+            Bridge.Test.NUnit.Assert.true(Bridge.equals((System.UInt64(0)), Bridge.unbox(System.UInt64(0))));
+            Bridge.Test.NUnit.Assert.false(Bridge.equals((System.UInt64(1)), Bridge.unbox(System.UInt64(0))));
+            Bridge.Test.NUnit.Assert.false(Bridge.equals((System.UInt64(0)), Bridge.unbox(System.UInt64(1))));
+            Bridge.Test.NUnit.Assert.true(Bridge.equals((System.UInt64(1)), Bridge.unbox(System.UInt64(1))));
         },
         iEquatableEqualsWorks: function () {
             Bridge.Test.NUnit.Assert.true((System.UInt64(0)).equalsT(System.UInt64(0)));
@@ -21340,7 +21334,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         getTimestampWorks: function () {
             var t1 = System.Diagnostics.Stopwatch.getTimestamp();
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(Bridge.box(t1, System.Int64), System.Int64), "is long");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(t1, System.Int64), "is long");
 
             var before = new Date();
             while ((System.DateTime.subdd(new Date(), before)).getMilliseconds() < 50) {
@@ -21969,7 +21963,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         typePropertiesForCancellationTokenRegistrationAreCorrect: function () {
             Bridge.Test.NUnit.Assert.areEqual$1("System.Threading.CancellationTokenRegistration", Bridge.Reflection.getTypeFullName(System.Threading.CancellationTokenRegistration), "FullName");
 
-            var ctr = Bridge.box(new System.Threading.CancellationTokenRegistration(), System.Threading.CancellationTokenRegistration);
+            var ctr = new System.Threading.CancellationTokenRegistration();
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(ctr, System.Threading.CancellationTokenRegistration), "CancellationTokenRegistration");
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(ctr, System.IDisposable), "IDisposable");
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(ctr, System.IEquatable$1(System.Threading.CancellationTokenRegistration)), "IEquatable<CancellationTokenRegistration>");
@@ -22273,8 +22267,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
             Bridge.Test.NUnit.Assert.true$1(ctr1.equalsT(ctr1), "#1");
             Bridge.Test.NUnit.Assert.false$1(ctr1.equalsT(ctr2), "#2");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.equals(ctr1, Bridge.unbox(Bridge.box(ctr1, System.Threading.CancellationTokenRegistration))), "#3");
-            Bridge.Test.NUnit.Assert.false$1(Bridge.equals(ctr1, Bridge.unbox(Bridge.box(ctr2, System.Threading.CancellationTokenRegistration))), "#4");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.equals(ctr1, Bridge.unbox(ctr1)), "#3");
+            Bridge.Test.NUnit.Assert.false$1(Bridge.equals(ctr1, Bridge.unbox(ctr2)), "#4");
 
             Bridge.Test.NUnit.Assert.true$1(Bridge.equals(ctr1, ctr1), "#5");
             Bridge.Test.NUnit.Assert.false$1(Bridge.equals(ctr1, ctr2), "#6");
@@ -22404,7 +22398,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             task1.continueWith(function (x) {
                 Bridge.Test.NUnit.Assert.areEqual$1(System.Threading.Tasks.TaskStatus.ranToCompletion, task.status, "Task should be completed after promise");
                 Bridge.Test.NUnit.Assert.true$1(continuationRun, "Continuation should have been run after promise was completed.");
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(System.Array.init([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)], System.Object), task.getResult(), "The result should be correct");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(System.Array.init([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)], System.Object), Bridge.unbox(task.getResult()), "The result should be correct");
 
                 completeAsync();
             });
@@ -22467,7 +22461,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 Bridge.Test.NUnit.Assert.true$1(Bridge.is(task.exception, System.AggregateException), "Exception should be an AggregateException");
                 Bridge.Test.NUnit.Assert.areEqual$1(1, task.exception.innerExceptions.getCount(), "Exception should have one inner exception");
                 Bridge.Test.NUnit.Assert.true$1(Bridge.is(task.exception.innerExceptions.get(0), Bridge.PromiseException), "Inner exception should be a PromiseException");
-                Bridge.Test.NUnit.Assert.areDeepEqual$1(System.Array.init([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)], System.Object), Bridge.cast(task.exception.innerExceptions.get(0), Bridge.PromiseException).arguments, "The PromiseException arguments should be correct");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1(System.Array.init([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)], System.Object), Bridge.unbox(Bridge.cast(task.exception.innerExceptions.get(0), Bridge.PromiseException).arguments), "The PromiseException arguments should be correct");
 
                 completeAsync();
             });
@@ -22507,7 +22501,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                                 $taskResult1 = $task1.getAwaitedResult();
                                 result = $taskResult1;
 
-                                    Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)], System.Object), result, "The result should be correct");
+                                    Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)], System.Object), Bridge.unbox(result), "The result should be correct");
                                     completeAsync();
                                 return;
                             }
@@ -22569,7 +22563,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                                 }
                                 case 3: {
                                     continuationRun = true;
-                                        Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)], System.Object), ex.arguments, "The PromiseException arguments should be correct");
+                                        Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)], System.Object), Bridge.unbox(ex.arguments), "The PromiseException arguments should be correct");
                                         $async_e = null;
                                     $step = 5;
                                     continue;
@@ -23354,7 +23348,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 Bridge.Test.NUnit.Assert.areEqual$1(null, task.exception, "task should not have an exception");
                 Bridge.Test.NUnit.Assert.areEqual$1(System.Threading.Tasks.TaskStatus.running, continuedTask.status, "continuedTask should be running at point 2");
 
-                return Bridge.box(t.getResult(), System.Int32) + "_";
+                return t.getResult() + "_";
             });
 
             Bridge.Test.NUnit.Assert.false$1(Bridge.referenceEquals(task, continuedTask), "task and continuedTask should not be the same");
@@ -24330,8 +24324,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var s1 = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S5.$ctor1(42);
             var s2 = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S5.$ctor1(43);
             var s3 = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S5.$ctor1(44);
-            Bridge.Test.NUnit.Assert.true$1(s1.equals(Bridge.box(s2, Bridge.ClientTest.Batch4.UserDefinedStructTests.S5)), "#1");
-            Bridge.Test.NUnit.Assert.false$1(s1.equals(Bridge.box(s3, Bridge.ClientTest.Batch4.UserDefinedStructTests.S5)), "#2");
+            Bridge.Test.NUnit.Assert.true$1(s1.equals(s2), "#1");
+            Bridge.Test.NUnit.Assert.false$1(s1.equals(s3), "#2");
         },
         canLiftUserDefinedBinaryOperator: function () {
             var a = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S7.$ctor1(42), b = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S7.$ctor1(32), c = null;
@@ -24363,7 +24357,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 i: 42
             } );
             var s2 = s1.$clone();
-            Bridge.Test.NUnit.Assert.true(Bridge.is(Bridge.box(s2, Bridge.ClientTest.Batch4.UserDefinedStructTests.MS1), Bridge.ClientTest.Batch4.UserDefinedStructTests.MS1));
+            Bridge.Test.NUnit.Assert.true(Bridge.is(s2, Bridge.ClientTest.Batch4.UserDefinedStructTests.MS1));
         },
         fieldsAreClonedWhenValueTypeIsCopied: function () {
             var s1 = Bridge.merge(new Bridge.ClientTest.Batch4.UserDefinedStructTests.MS1(), {
@@ -24433,7 +24427,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var s2 = s1.$clone();
             Bridge.Test.NUnit.Assert.areEqual(42, s2.t);
             s2.t = 43;
-            Bridge.Test.NUnit.Assert.true(Bridge.is(Bridge.box(s2, Bridge.ClientTest.Batch4.UserDefinedStructTests.MS3$1(System.Int32)), Bridge.ClientTest.Batch4.UserDefinedStructTests.MS3$1(System.Int32)));
+            Bridge.Test.NUnit.Assert.true(Bridge.is(s2, Bridge.ClientTest.Batch4.UserDefinedStructTests.MS3$1(System.Int32)));
             Bridge.Test.NUnit.Assert.areEqual(42, s1.t);
             Bridge.Test.NUnit.Assert.areEqual(43, s2.t);
         },
@@ -24444,7 +24438,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var s2 = s1.$clone();
             s1.i = 10;
             Bridge.Test.NUnit.Assert.areEqual(42, s2.i);
-            Bridge.Test.NUnit.Assert.true(Bridge.is(Bridge.box(s2, Bridge.ClientTest.Batch4.UserDefinedStructTests.MS1), Bridge.ClientTest.Batch4.UserDefinedStructTests.MS1));
+            Bridge.Test.NUnit.Assert.true(Bridge.is(s2, Bridge.ClientTest.Batch4.UserDefinedStructTests.MS1));
         },
         cloningNullableValueTypesWorks: function () {
             var s1 = null;
@@ -25158,7 +25152,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         ctor: function (x, y) {
             this.$initialize();
             Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseNamedConstructorWithArgumentsTypes.B.ctor.call(this, ((x + 1) | 0), ((y + 1) | 0));
-            this.messageD = Bridge.box(x, System.Int32) + " " + Bridge.box(y, System.Int32);
+            this.messageD = x + " " + y;
         }
     });
 
@@ -25178,7 +25172,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         ctor: function (x, y) {
             this.$initialize();
             Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.BaseUnnamedConstructorWithArgumentsTypes.B.ctor.call(this, ((x + 1) | 0), ((y + 1) | 0));
-            this.messageD = Bridge.box(x, System.Int32) + " " + Bridge.box(y, System.Int32);
+            this.messageD = x + " " + y;
         }
     });
 
@@ -25305,7 +25299,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             return ((((x - y) | 0) - this.m) | 0);
         },
         g: function (T, x, y) {
-            return System.String.concat(Bridge.box(((((x - y) | 0) - this.m) | 0), System.Int32), Bridge.Reflection.getTypeName(T));
+            return System.String.concat(((((x - y) | 0) - this.m) | 0), Bridge.Reflection.getTypeName(T));
         },
         getF: function () {
             return Bridge.fn.cacheBind(this, Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.MethodGroupConversionTypes.B.prototype.f);
@@ -25637,10 +25631,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     var $box_ = {};
 
-    Bridge.ns("System.Single", $box_);
+    Bridge.ns("System.Nullable$1", $box_);
 
-    Bridge.apply($box_.System.Single, {
-        toString: function(obj) {return System.Single.format(obj, 'G');}
+    Bridge.apply($box_.System.Nullable$1, {
+        toString: function(obj) {return System.Nullable.toString(obj);}
     });
 
 
@@ -25648,20 +25642,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.apply($box_.System.Double, {
         toString: function(obj) {return System.Double.format(obj, 'G');}
-    });
-
-
-    Bridge.ns("System.Decimal", $box_);
-
-    Bridge.apply($box_.System.Decimal, {
-        toString: function(obj) {return Bridge.Int.format(obj, 'G');}
-    });
-
-
-    Bridge.ns("System.Nullable$1", $box_);
-
-    Bridge.apply($box_.System.Nullable$1, {
-        toString: function(obj) {return System.Nullable.toString(obj);}
     });
 
 
@@ -25707,17 +25687,17 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     });
 
 
-    Bridge.ns("System.Nullable$1", $box_);
-
-    Bridge.apply($box_.System.Nullable$1, {
-        toString: function(obj) {return System.Nullable.toString(obj);}
-    });
-
-
     Bridge.ns("Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.TestEnum", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.TestEnum, {
         toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.TestEnum, obj);}
+    });
+
+
+    Bridge.ns("System.Single", $box_);
+
+    Bridge.apply($box_.System.Single, {
+        toString: function(obj) {return System.Single.format(obj, 'G');}
     });
 
     var $m = Bridge.setMetadata,

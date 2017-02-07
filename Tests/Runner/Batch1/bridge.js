@@ -1,5 +1,5 @@
 /**
- * @version   : 15.8.0 - Bridge.NET
+ * @version   : 16.0.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
  * @date      : 2017-01-16
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
@@ -67,9 +67,18 @@
             };
         },
 
-        unbox: function(o) {
+        unbox: function (o) {
             if (o && o.$boxed) {
                 return o.v;
+            }
+
+            if (Bridge.isArray(o)) {
+                var arr = [];
+                for (var i = 0; i < o.length; i++) {
+                    var item = o[i];
+                    arr[i] = (item && item.$boxed) ? item.v : item;
+                }
+                o = arr;
             }
 
             return o;
@@ -2358,7 +2367,10 @@
             };
 
             if (isEntryPoint || Bridge.isFunction(prototype.$main)) {
-                Class.main = prototype.$main;
+                if (!Class.main && prototype.$main) {
+                    Class.main = prototype.$main;
+                }
+                
                 Bridge.Class.$queueEntry.push(Class);
             }
 
@@ -2849,8 +2861,8 @@
     // @source systemAssemblyVersion.js
 
     Bridge.init(function(){
-        Bridge.SystemAssembly.version = "15.8.0";
-        Bridge.SystemAssembly.compiler = "15.8.0";
+        Bridge.SystemAssembly.version = "16.0.0";
+        Bridge.SystemAssembly.compiler = "16.0.0";
     });
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
@@ -4127,14 +4139,6 @@
         toString$1: function (formatProvider) {
             return System.String.formatProvider.apply(System.String, [formatProvider, this.format].concat(this.args));
         }
-    });
-
-    var $box_ = {};
-
-    Bridge.ns("System.Char", $box_);
-
-    Bridge.apply($box_.System.Char, {
-        toString: function(obj) {return String.fromCharCode(obj);}
     });
 
     // @source formattableStringFactory.js
@@ -6956,11 +6960,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
     };
 
     System.Decimal.prototype.toString = function (format, provider) {
-        if (!format && !provider) {
-            return this.value.toString();
-        }
-
-        return Bridge.Int.format(this, format, provider);
+        return Bridge.Int.format(this, format || "G", provider);
     };
 
     System.Decimal.prototype.toFloat = function () {
@@ -17950,10 +17950,10 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                     return s.replace(System.Guid.replace, "");
                 case "b": 
                 case "B": 
-                    return System.String.concat(String.fromCharCode(Bridge.box(123, System.Char, $box_.System.Char.toString)), s, String.fromCharCode(Bridge.box(125, System.Char, $box_.System.Char.toString)));
+                    return System.String.concat(String.fromCharCode(123), s, String.fromCharCode(125));
                 case "p": 
                 case "P": 
-                    return System.String.concat(String.fromCharCode(Bridge.box(40, System.Char, $box_.System.Char.toString)), s, String.fromCharCode(Bridge.box(41, System.Char, $box_.System.Char.toString)));
+                    return System.String.concat(String.fromCharCode(40), s, String.fromCharCode(41));
                 default: 
                     return s;
             }

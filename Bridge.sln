@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bridge", "Bridge", "{32B4E540-81E6-4E3F-8383-5813786DC899}"
 EndProject
@@ -37,6 +37,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bridge.Translator.Tests", "
 	ProjectSection(ProjectDependencies) = postProject
 		{243BB709-3912-4C65-82D4-787A5E2201D7} = {243BB709-3912-4C65-82D4-787A5E2201D7}
 		{28703D12-116A-4968-BD85-F26D7F7E7DA4} = {28703D12-116A-4968-BD85-F26D7F7E7DA4}
+		{55DAE049-E2A3-4935-B2BE-63BD1E91D387} = {55DAE049-E2A3-4935-B2BE-63BD1E91D387}
 		{8DAF3989-FF37-470C-A55D-3E7868613AA5} = {8DAF3989-FF37-470C-A55D-3E7868613AA5}
 	EndProjectSection
 EndProject
@@ -89,6 +90,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bridge.PostBuild", "PostBui
 		{DE78B8B7-C0F5-415B-A70B-02194433F450} = {DE78B8B7-C0F5-415B-A70B-02194433F450}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bridge.Translator.Tests.Assembly", "Compiler\TranslatorTestsAssembly\Bridge.Translator.Tests.Assembly.csproj", "{55DAE049-E2A3-4935-B2BE-63BD1E91D387}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8DAF3989-FF37-470C-A55D-3E7868613AA5} = {8DAF3989-FF37-470C-A55D-3E7868613AA5}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -127,6 +133,10 @@ Global
 		{8DAF3989-FF37-470C-A55D-3E7868613AA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DAF3989-FF37-470C-A55D-3E7868613AA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DAF3989-FF37-470C-A55D-3E7868613AA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55DAE049-E2A3-4935-B2BE-63BD1E91D387}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55DAE049-E2A3-4935-B2BE-63BD1E91D387}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55DAE049-E2A3-4935-B2BE-63BD1E91D387}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55DAE049-E2A3-4935-B2BE-63BD1E91D387}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -145,5 +155,6 @@ Global
 		{169F0BA9-3B0A-43DD-98E2-C9DB1A89CAB0} = {00CA952C-4292-47FC-8D03-B525B294B846}
 		{3E6E252D-69D8-4B9A-8E6C-E994697F8090} = {00CA952C-4292-47FC-8D03-B525B294B846}
 		{8DAF3989-FF37-470C-A55D-3E7868613AA5} = {32B4E540-81E6-4E3F-8383-5813786DC899}
+		{55DAE049-E2A3-4935-B2BE-63BD1E91D387} = {47D6D365-36CE-43C2-91D0-5A071928C62A}
 	EndGlobalSection
 EndGlobal

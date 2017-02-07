@@ -8,6 +8,7 @@ using Mono.Cecil;
 
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -428,7 +429,16 @@ namespace Bridge.Contract
                     return;
                 }
 
-                if (expression == null ||
+                var isOperator = false;
+                if (expression != null &&
+                    (expression.Parent is BinaryOperatorExpression || expression.Parent is UnaryOperatorExpression))
+                {
+                    var orr = block.Emitter.Resolver.ResolveNode(expression.Parent, block.Emitter) as OperatorResolveResult;
+
+                    isOperator = orr != null && orr.UserDefinedOperatorMethod != null;
+                }
+
+                if (expression == null || isOperator ||
                     expression.Parent is NamedExpression ||
                     expression.Parent is ObjectCreateExpression ||
                     expression.Parent is ArrayInitializerExpression ||

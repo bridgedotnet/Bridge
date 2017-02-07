@@ -129,7 +129,15 @@ namespace Bridge.Translator
 
             if (inlineCode == null && isPlainObjectCtor && isPlainMode)
             {
-                bool close = isObjectLiteral;
+                this.WriteOpenBrace();
+                this.WriteSpace();
+
+                this.WriteObjectInitializer(objectCreateExpression.Initializer.Elements, type, invocationResolveResult, false);
+
+                this.WriteSpace();
+                this.WriteCloseBrace();
+
+                /*bool close = isObjectLiteral;
                 if (isObjectLiteral)
                 {
                     if (this.Emitter.Validator.IsExternalType(type))
@@ -165,7 +173,7 @@ namespace Bridge.Translator
                 if (close)
                 {
                     this.WriteCloseParentheses();
-                }
+                }*/
             }
             else
             {
@@ -566,7 +574,7 @@ namespace Bridge.Translator
                                 return prmIndex == rr.Arguments.IndexOf(a);
                             });
 
-                            if (arg != null && arg.ConstantValue != null && (int)arg.ConstantValue == 1)
+                            if (arg != null && arg.ConstantValue != null && arg.ConstantValue is int)
                             {
                                 mode = (int)arg.ConstantValue;
                             }
@@ -606,16 +614,31 @@ namespace Bridge.Translator
                             needComma = true;
 
                             this.Write(name, ": ");
-
                             var primitiveExpr = member.Initializer as PrimitiveExpression;
 
-                            if (primitiveExpr != null && primitiveExpr.Value is AstType)
+                            if (mode == 2 && primitiveExpr == null)
                             {
-                                this.Write(Inspector.GetStructDefaultValue((AstType)primitiveExpr.Value, this.Emitter));
+                                var argType = this.Emitter.Resolver.ResolveNode(member.VarInitializer, this.Emitter).Type;
+                                var defValue = Inspector.GetDefaultFieldValue(argType, null);
+                                if (defValue == argType)
+                                {
+                                    this.Write(Inspector.GetStructDefaultValue(argType, this.Emitter));
+                                }
+                                else
+                                {
+                                    this.Write(defValue);
+                                }
                             }
                             else
                             {
-                                member.Initializer.AcceptVisitor(this.Emitter);
+                                if (primitiveExpr != null && primitiveExpr.Value is AstType)
+                                {
+                                    this.Write(Inspector.GetStructDefaultValue((AstType)primitiveExpr.Value, this.Emitter));
+                                }
+                                else
+                                {
+                                    member.Initializer.AcceptVisitor(this.Emitter);
+                                }
                             }
                         }
                     }

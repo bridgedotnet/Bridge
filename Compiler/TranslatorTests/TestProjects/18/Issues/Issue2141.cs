@@ -91,12 +91,12 @@ namespace TestIssue2141
 
             // These below should NOT contain Bridge.literal call
             var c1 = new Config1() { Id = "1" };
-            // These below should contain Bridge.literal call as [Name] used
-            // Bridge.literal(Options1, { id: "1Name" })
+            // These below should NOT contain Bridge.literal call as [Name] used
+            // { id: "1Name" }
             var c1Name = new Config1Name() { Id = "1Name" };
 
             // These below should NOT contain Bridge.literal call
-            // .ctor({ id: "..." });
+            // ({ id: "..." });
             var c2 = new Config2() { Id = "2" };
             var c2Name = new Config2Name() { Id = "2Name" };
 
