@@ -80,9 +80,9 @@
             }).select(function (value, index) {
                 return $toString(((value.length + index) | 0));
             }).select(Bridge.fn.bind(this, function (value) {
-                return System.String.concat($toString(value.length), Bridge.box(this._offset, System.Int32));
+                return System.String.concat($toString(value.length), this._offset);
             })).select(Bridge.fn.bind(this, function (value, index) {
-                return System.String.concat($toString(value.length), Bridge.box(index, System.Int32), Bridge.box(this._offset, System.Int32));
+                return System.String.concat($toString(value.length), index, this._offset);
             })).select(function (value) {
                 return $toString(((value.length + $toString(localValue).length) | 0));
             });
@@ -105,19 +105,19 @@
             return ((((value + index) | 0) + this._offset) | 0);
         },
         f5: function (value) {
-            return System.String.concat(value, Bridge.box(1, System.Int32));
+            return System.String.concat(value, 1);
         },
         f6: function (value, index) {
-            return System.String.concat(value, Bridge.box(index, System.Int32));
+            return System.String.concat(value, index);
         },
         f7: function (value) {
             return System.String.concat(value, this.getName());
         },
         f8: function (value, index) {
-            return System.String.concat(value, Bridge.box(index, System.Int32), this.getName());
+            return System.String.concat(value, index, this.getName());
         },
         f9: function (value, index) {
-            return System.String.concat(value, Bridge.box(index, System.Int32), TestIssue921Instance.Issue921Instance.getNameStatic());
+            return System.String.concat(value, index, TestIssue921Instance.Issue921Instance.getNameStatic());
         },
         f10: function (value) {
             return value.add(System.Decimal(1));

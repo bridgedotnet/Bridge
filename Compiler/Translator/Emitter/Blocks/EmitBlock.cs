@@ -265,10 +265,10 @@ namespace Bridge.Translator
 
                 if (type.IsObjectLiteral)
                 {
-                    //var mode = this.Emitter.Validator.GetObjectCreateMode(this.Emitter.GetTypeDefinition(type.Type));
-                    //var ignore = mode == 0 && !type.Type.GetMethods(null, GetMemberOptions.IgnoreInheritedMembers).Any(m => !m.IsConstructor && !m.IsAccessor);
+                    var mode = this.Emitter.Validator.GetObjectCreateMode(this.Emitter.GetTypeDefinition(type.Type));
+                    var ignore = mode == 0 && !type.Type.GetMethods(null, GetMemberOptions.IgnoreInheritedMembers).Any(m => !m.IsConstructor && !m.IsAccessor);
 
-                    if (this.Emitter.Validator.IsExternalType(typeDef))
+                    if (this.Emitter.Validator.IsExternalType(typeDef) || ignore)
                     {
                         this.Emitter.Translator.Plugins.AfterTypeEmit(this.Emitter, type);
                         continue;
@@ -341,7 +341,15 @@ namespace Bridge.Translator
                     }
                 }
 
-                if (reflectedTypes.Any(t => t == type.Type) || isGlobal)
+                var isObjectLiteral = this.Emitter.Validator.IsObjectLiteral(typeDef);
+                var isPlainMode = isObjectLiteral && this.Emitter.Validator.GetObjectCreateMode(this.Emitter.BridgeTypes.Get(type.Key).TypeDefinition) == 0;
+
+                if (isPlainMode)
+                {
+                    continue;
+                }
+
+                if (isGlobal || reflectedTypes.Any(t => t == type.Type))
                 {
                     continue;
                 }
@@ -551,6 +559,14 @@ namespace Bridge.Translator
 
                 if (typeDef != null)
                 {
+                    var isObjectLiteral = this.Emitter.Validator.IsObjectLiteral(typeDef);
+                    var isPlainMode = isObjectLiteral && this.Emitter.Validator.GetObjectCreateMode(bridgeType.Value.TypeDefinition) == 0;
+
+                    if (isPlainMode)
+                    {
+                        continue;
+                    }
+
                     var skip = typeDef.Attributes.Any(a =>
                             a.AttributeType.FullName == "Bridge.GlobalMethodsAttribute" ||
                             a.AttributeType.FullName == "Bridge.NonScriptableAttribute" ||
