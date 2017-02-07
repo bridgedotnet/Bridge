@@ -1,9 +1,9 @@
 /**
  * Bridge Test library - special tests with custom config options like useTypedArrays
- * @version 15.8.0
+ * @version 16.0.0
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2017 Object.NET, Inc.
- * @compiler Bridge.NET 15.8.0
+ * @compiler Bridge.NET 16.0.0
  */
 Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
     "use strict";
