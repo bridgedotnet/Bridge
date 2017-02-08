@@ -1221,11 +1221,14 @@
         },
 
         format: function (obj, formatString, provider) {
-            if (obj && obj.$boxed && obj.type.format) {
+            if (obj && obj.$boxed) {
                 if (obj.type.$kind === "enum") {
                     return System.Enum.format(obj.type, obj.v, formatString);
+                } else if (obj.type === System.Char) {
+                    return System.Char.format(Bridge.unbox(obj), formatString, provider);
+                } else if (obj.type.format) {
+                    return obj.type.format(Bridge.unbox(obj), formatString, provider);
                 }
-                return obj.type.format(Bridge.unbox(obj), formatString, provider);
             }
 
             if (Bridge.isNumber(obj)) {
