@@ -14757,6 +14757,11 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2344", {
         statics: {
             testHtmlElementName: function () {
+                if (Bridge.ClientTest.Batch3.Utilities.BrowserHelper.isPhantomJs()) {
+                    Bridge.Test.NUnit.Assert.true$1(true, "The test is excluded on PhantomJS engine");
+                    return;
+                }
+
                 var instance = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2344.Foo();
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2344.Foo.someMethod(HTMLElement, System.String, instance);
 
@@ -16019,55 +16024,55 @@ Bridge.$N1391Result =                 r;
                 var v1 = new Float32Array(1);
                 var thisType = "Float32Array";
                 Bridge.Test.NUnit.Assert.true$1(v1 != null, System.String.concat(thisType, " created"));
-                var thisName = isSpecialTypeName ? "Object" : thisType;
+                var thisName = isSpecialTypeName ? System.String.concat(thisType, "Constructor") : thisType;
                 Bridge.Test.NUnit.Assert.areEqual$1(thisName, Bridge.Reflection.getTypeFullName(Bridge.getType(v1)), System.String.concat(thisType, " class name"));
 
                 var v2 = new Float64Array(1);
                 thisType = "Float64Array";
                 Bridge.Test.NUnit.Assert.true$1(v2 != null, System.String.concat(thisType, " created"));
-                thisName = isSpecialTypeName ? "Object" : thisType;
+                thisName = isSpecialTypeName ? System.String.concat(thisType, "Constructor") : thisType;
                 Bridge.Test.NUnit.Assert.areEqual$1(thisName, Bridge.Reflection.getTypeFullName(Bridge.getType(v2)), System.String.concat(thisType, " class name"));
 
                 var v3 = new Int16Array(1);
                 thisType = "Int16Array";
                 Bridge.Test.NUnit.Assert.true$1(v3 != null, System.String.concat(thisType, " created"));
-                thisName = isSpecialTypeName ? "Object" : thisType;
+                thisName = isSpecialTypeName ? System.String.concat(thisType, "Constructor") : thisType;
                 Bridge.Test.NUnit.Assert.areEqual$1(thisName, Bridge.Reflection.getTypeFullName(Bridge.getType(v3)), System.String.concat(thisType, " class name"));
 
                 var v4 = new Int32Array(1);
                 thisType = "Int32Array";
                 Bridge.Test.NUnit.Assert.true$1(v4 != null, System.String.concat(thisType, " created"));
-                thisName = isSpecialTypeName ? "Object" : thisType;
+                thisName = isSpecialTypeName ? System.String.concat(thisType, "Constructor") : thisType;
                 Bridge.Test.NUnit.Assert.areEqual$1(thisName, Bridge.Reflection.getTypeFullName(Bridge.getType(v4)), System.String.concat(thisType, " class name"));
 
                 var v5 = new Int8Array(1);
                 thisType = "Int8Array";
                 Bridge.Test.NUnit.Assert.true$1(v5 != null, System.String.concat(thisType, " created"));
-                thisName = isSpecialTypeName ? "Object" : thisType;
+                thisName = isSpecialTypeName ? System.String.concat(thisType, "Constructor") : thisType;
                 Bridge.Test.NUnit.Assert.areEqual$1(thisName, Bridge.Reflection.getTypeFullName(Bridge.getType(v5)), System.String.concat(thisType, " class name"));
 
                 var v6 = new Uint16Array(1);
                 thisType = "Uint16Array";
                 Bridge.Test.NUnit.Assert.true$1(v6 != null, System.String.concat(thisType, " created"));
-                thisName = isSpecialTypeName ? "Object" : thisType;
+                thisName = isSpecialTypeName ? System.String.concat(thisType, "Constructor") : thisType;
                 Bridge.Test.NUnit.Assert.areEqual$1(thisName, Bridge.Reflection.getTypeFullName(Bridge.getType(v6)), System.String.concat(thisType, " class name"));
 
                 var v7 = new Uint32Array(1);
                 thisType = "Uint32Array";
                 Bridge.Test.NUnit.Assert.true$1(v7 != null, System.String.concat(thisType, " created"));
-                thisName = isSpecialTypeName ? "Object" : thisType;
+                thisName = isSpecialTypeName ? System.String.concat(thisType, "Constructor") : thisType;
                 Bridge.Test.NUnit.Assert.areEqual$1(thisName, Bridge.Reflection.getTypeFullName(Bridge.getType(v7)), System.String.concat(thisType, " class name"));
 
                 var v8 = new Uint8Array(1);
                 thisType = "Uint8Array";
                 Bridge.Test.NUnit.Assert.true$1(v8 != null, System.String.concat(thisType, " created"));
-                thisName = isSpecialTypeName ? "Object" : thisType;
+                thisName = isSpecialTypeName ? System.String.concat(thisType, "Constructor") : thisType;
                 Bridge.Test.NUnit.Assert.areEqual$1(thisName, Bridge.Reflection.getTypeFullName(Bridge.getType(v8)), System.String.concat(thisType, " class name"));
 
                 var v9 = new Uint8ClampedArray(1);
                 thisType = "Uint8ClampedArray";
                 Bridge.Test.NUnit.Assert.true$1(v9 != null, System.String.concat(thisType, " created"));
-                thisName = isSpecialTypeName ? "Object" : thisType;
+                thisName = isSpecialTypeName ? System.String.concat(thisType, "Constructor") : thisType;
                 Bridge.Test.NUnit.Assert.areEqual$1(thisName, Bridge.Reflection.getTypeFullName(Bridge.getType(v9)), System.String.concat(thisType, " class name"));
             }
         }

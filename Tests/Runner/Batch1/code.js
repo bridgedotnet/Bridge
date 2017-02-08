@@ -8288,7 +8288,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             if (!Bridge.ClientTest.Utilities.BrowserHelper.isPhantomJs()) {
                 Bridge.Test.NUnit.Assert.areEqual$1("ArrayBuffer", Bridge.Reflection.getTypeFullName(ArrayBuffer), "FullName");
             } else {
-                Bridge.Test.NUnit.Assert.areEqual$1("Object", Bridge.Reflection.getTypeFullName(ArrayBuffer), "FullName");
+                Bridge.Test.NUnit.Assert.areEqual$1("ArrayBufferConstructor", Bridge.Reflection.getTypeFullName(ArrayBuffer), "FullName");
             }
 
             var interfaces = Bridge.Reflection.getInterfaces(DataView);
@@ -8317,7 +8317,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             if (!Bridge.ClientTest.Utilities.BrowserHelper.isPhantomJs()) {
                 Bridge.Test.NUnit.Assert.areEqual$1("DataView", Bridge.Reflection.getTypeFullName(DataView), "FullName");
             } else {
-                Bridge.Test.NUnit.Assert.areEqual$1("Object", Bridge.Reflection.getTypeFullName(DataView), "FullName");
+                Bridge.Test.NUnit.Assert.areEqual$1("DataViewConstructor", Bridge.Reflection.getTypeFullName(DataView), "FullName");
             }
 
             var interfaces = Bridge.Reflection.getInterfaces(DataView);

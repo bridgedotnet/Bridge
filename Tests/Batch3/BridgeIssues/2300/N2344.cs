@@ -42,9 +42,15 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
-        [Test]
+        [Test(ExpectedCount = 1)]
         public static void TestHtmlElementName()
         {
+            if (Utilities.BrowserHelper.IsPhantomJs())
+            {
+                Assert.True(true, "The test is excluded on PhantomJS engine");
+                return;
+            }
+
             var instance = new Foo();
             Foo.SomeMethod(instance);
 

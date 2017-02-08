@@ -25,7 +25,7 @@ namespace Bridge.ClientTest.Collections.Native
             }
             else
             {
-                Assert.AreEqual("Object", typeof(ArrayBuffer).FullName, "FullName");
+                Assert.AreEqual("ArrayBufferConstructor", typeof(ArrayBuffer).FullName, "FullName");
             }
 
             var interfaces = typeof(DataView).GetInterfaces();
