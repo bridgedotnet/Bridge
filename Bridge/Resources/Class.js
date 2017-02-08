@@ -134,6 +134,10 @@
 
             prop = prop || {};
 
+            if (prop.$kind == "enum" && !prop.inherits) {
+                prop.inherits = [System.IComparable, System.IFormattable]
+            }
+
             var extend = prop.$inherits || prop.inherits,
                 statics = prop.$statics || prop.statics,
                 isEntryPoint = prop.$entryPoint,
@@ -358,7 +362,7 @@
                 if (!Class.main && prototype.$main) {
                     Class.main = prototype.$main;
                 }
-                
+
                 Bridge.Class.$queueEntry.push(Class);
             }
 
