@@ -5,7 +5,7 @@ namespace System
     [External]
     //[Name("System.Enum")]
 #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
-    public abstract class Enum : ValueType
+    public abstract class Enum : ValueType, IComparable, IFormattable
     {
         public static extern Enum Parse(Type enumType, string value);
 
@@ -43,6 +43,9 @@ namespace System
 
         [Template("System.Enum.equals({this}, {other}, {this:type})")]
         public override extern bool Equals(object other);
+
+        [Template("System.Enum.format({this:type}, {this}, {format})")]
+        public extern string ToString(string format, IFormatProvider formatProvider);
     }
 #pragma warning restore CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
 }

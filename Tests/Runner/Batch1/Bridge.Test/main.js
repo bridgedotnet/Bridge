@@ -87,7 +87,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 assert[Bridge.Test.Runtime.ContextHelper.contextName] = ctx;
             },
             getTestId: function (details) {
-                return Bridge.as(details.testId, String);
+                return Bridge.as(details.testId, System.String);
             },
             getAssert: function () {
                 var a = QUnit.config.current.assert;

@@ -27,17 +27,17 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     });
 
 
-    Bridge.ns("Boolean", $box_);
+    Bridge.ns("System.Boolean", $box_);
 
-    Bridge.apply($box_.Boolean, {
+    Bridge.apply($box_.System.Boolean, {
         toString: function(obj) {return System.Boolean.toString(obj);}
     });
 
 
-    Bridge.ns("Date", $box_);
+    Bridge.ns("System.DateTime", $box_);
 
-    Bridge.apply($box_.Date, {
-        toString: function(obj) {return Bridge.Date.format(obj);}
+    Bridge.apply($box_.System.DateTime, {
+        toString: function(obj) {return System.DateTime.format(obj);}
     });
 
 

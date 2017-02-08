@@ -1,9 +1,9 @@
 /**
  * Bridge Test library - special tests with custom config options like useTypedArrays
- * @version 15.8.0
+ * @version 16.0.0
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2017 Object.NET, Inc.
- * @compiler Bridge.NET 15.8.0
+ * @compiler Bridge.NET 16.0.0
  */
 Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
     "use strict";
@@ -141,7 +141,7 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
                 var doubleArray = System.Array.init(new Float64Array(8), System.Double);
 
                 //These arrays do not depend on "useTypedArray" bridge.json option
-                var stringArray = System.Array.init(9, null, String);
+                var stringArray = System.Array.init(9, null, System.String);
                 var decimalArray = System.Array.init(10, System.Decimal(0.0), System.Decimal);
 
                 byteArray[0] = 1;
@@ -182,44 +182,44 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
         },
         lengthWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual(0, System.Array.init(new Int32Array(0), System.Int32).length);
-            Bridge.Test.NUnit.Assert.areEqual(1, System.Array.init(["x"], String).length);
-            Bridge.Test.NUnit.Assert.areEqual(2, System.Array.init(["x", "y"], String).length);
+            Bridge.Test.NUnit.Assert.areEqual(1, System.Array.init(["x"], System.String).length);
+            Bridge.Test.NUnit.Assert.areEqual(2, System.Array.init(["x", "y"], System.String).length);
         },
         rankIsOne: function () {
             Bridge.Test.NUnit.Assert.areEqual(1, System.Array.getRank(System.Array.init(new Int32Array(0), System.Int32)));
         },
         getLengthWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual(0, System.Array.getLength(System.Array.init(new Int32Array(0), System.Int32), 0));
-            Bridge.Test.NUnit.Assert.areEqual(1, System.Array.getLength(System.Array.init(["x"], String), 0));
-            Bridge.Test.NUnit.Assert.areEqual(2, System.Array.getLength(System.Array.init(["x", "y"], String), 0));
+            Bridge.Test.NUnit.Assert.areEqual(1, System.Array.getLength(System.Array.init(["x"], System.String), 0));
+            Bridge.Test.NUnit.Assert.areEqual(2, System.Array.getLength(System.Array.init(["x", "y"], System.String), 0));
         },
         getLowerBound: function () {
             Bridge.Test.NUnit.Assert.areEqual(0, System.Array.getLower(System.Array.init(new Int32Array(0), System.Int32), 0));
-            Bridge.Test.NUnit.Assert.areEqual(0, System.Array.getLower(System.Array.init(["x"], String), 0));
-            Bridge.Test.NUnit.Assert.areEqual(0, System.Array.getLower(System.Array.init(["x", "y"], String), 0));
+            Bridge.Test.NUnit.Assert.areEqual(0, System.Array.getLower(System.Array.init(["x"], System.String), 0));
+            Bridge.Test.NUnit.Assert.areEqual(0, System.Array.getLower(System.Array.init(["x", "y"], System.String), 0));
         },
         getUpperBoundWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual(-1, (System.Array.getLength(System.Array.init(new Int32Array(0), System.Int32), 0) - 1));
-            Bridge.Test.NUnit.Assert.areEqual(0, (System.Array.getLength(System.Array.init(["x"], String), 0) - 1));
-            Bridge.Test.NUnit.Assert.areEqual(1, (System.Array.getLength(System.Array.init(["x", "y"], String), 0) - 1));
+            Bridge.Test.NUnit.Assert.areEqual(0, (System.Array.getLength(System.Array.init(["x"], System.String), 0) - 1));
+            Bridge.Test.NUnit.Assert.areEqual(1, (System.Array.getLength(System.Array.init(["x", "y"], System.String), 0) - 1));
         },
         gettingValueByIndexWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual("x", System.Array.init(["x", "y"], String)[0]);
-            Bridge.Test.NUnit.Assert.areEqual("y", System.Array.init(["x", "y"], String)[1]);
+            Bridge.Test.NUnit.Assert.areEqual("x", System.Array.init(["x", "y"], System.String)[0]);
+            Bridge.Test.NUnit.Assert.areEqual("y", System.Array.init(["x", "y"], System.String)[1]);
         },
         getValueWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual("x", Bridge.unbox(System.Array.get(System.Array.init(["x", "y"], String), 0)));
-            Bridge.Test.NUnit.Assert.areEqual("y", Bridge.unbox(System.Array.get(System.Array.init(["x", "y"], String), 1)));
+            Bridge.Test.NUnit.Assert.areEqual("x", Bridge.unbox(System.Array.get(System.Array.init(["x", "y"], System.String), 0)));
+            Bridge.Test.NUnit.Assert.areEqual("y", Bridge.unbox(System.Array.get(System.Array.init(["x", "y"], System.String), 1)));
         },
         settingValueByIndexWorks: function () {
-            var arr = System.Array.init(2, null, String);
+            var arr = System.Array.init(2, null, System.String);
             arr[0] = "x";
             arr[1] = "y";
             Bridge.Test.NUnit.Assert.areEqual("x", arr[0]);
             Bridge.Test.NUnit.Assert.areEqual("y", arr[1]);
         },
         setValueWorks: function () {
-            var arr = System.Array.init(2, null, String);
+            var arr = System.Array.init(2, null, System.String);
             System.Array.set(arr, "x", 0);
             System.Array.set(arr, "y", 1);
             Bridge.Test.NUnit.Assert.areEqual("x", arr[0]);
@@ -228,7 +228,7 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
         foreachWorks: function () {
             var $t;
             var result = "";
-            $t = Bridge.getEnumerator(System.Array.init(["x", "y"], String));
+            $t = Bridge.getEnumerator(System.Array.init(["x", "y"], System.String));
             try {
                 while ($t.moveNext()) {
                     var s = $t.getCurrent();
@@ -241,21 +241,21 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
             }Bridge.Test.NUnit.Assert.areEqual("xy", result);
         },
         cloneWorks: function () {
-            var arr = System.Array.init(["x", "y"], String);
+            var arr = System.Array.init(["x", "y"], System.String);
             var arr2 = System.Array.clone(arr);
             Bridge.Test.NUnit.Assert.false(arr === arr2);
             Bridge.Test.NUnit.Assert.areDeepEqual(Bridge.unbox(arr2), arr);
         },
         concatWorks: function () {
-            var arr = System.Array.init(["a", "b"], String);
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["a", "b", "c"], String), arr.concat("c"));
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["a", "b", "c", "d"], String), arr.concat("c", "d"));
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["a", "b"], String), arr);
+            var arr = System.Array.init(["a", "b"], System.String);
+            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["a", "b", "c"], System.String), arr.concat("c"));
+            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["a", "b", "c", "d"], System.String), arr.concat("c", "d"));
+            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["a", "b"], System.String), arr);
         },
         containsWorks: function () {
-            var arr = System.Array.init(["x", "y"], String);
-            Bridge.Test.NUnit.Assert.true(System.Array.contains(arr, "x", String));
-            Bridge.Test.NUnit.Assert.false(System.Array.contains(arr, "z", String));
+            var arr = System.Array.init(["x", "y"], System.String);
+            Bridge.Test.NUnit.Assert.true(System.Array.contains(arr, "x", System.String));
+            Bridge.Test.NUnit.Assert.false(System.Array.contains(arr, "z", System.String));
         },
         containsUsesEqualsMethod: function () {
             var arr = System.Array.init([new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(1), new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(2), new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(3)], Bridge.ClientTest.Batch2.BridgeIssues.N772.C);
@@ -267,25 +267,25 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
             Bridge.Test.NUnit.Assert.false(System.Linq.Enumerable.from(System.Array.init([1, 2, 3], System.Int32)).all($asm.$.Bridge.ClientTest.Batch2.BridgeIssues.N772.f2));
         },
         sliceWithoutEndWorks: function () {
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["c", "d"], String), System.Array.init(["a", "b", "c", "d"], String).slice(2));
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["b", "c"], String), System.Array.init(["a", "b", "c", "d"], String).slice(1, 3));
+            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["c", "d"], System.String), System.Array.init(["a", "b", "c", "d"], System.String).slice(2));
+            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["b", "c"], System.String), System.Array.init(["a", "b", "c", "d"], System.String).slice(1, 3));
         },
         foreachWithArrayItemCallbackWorks: function () {
             var result = "";
-            System.Array.init(["a", "b", "c"], String).forEach(function (s) {
+            System.Array.init(["a", "b", "c"], System.String).forEach(function (s) {
                     result = System.String.concat(result, s);
                 });
             Bridge.Test.NUnit.Assert.areEqual("abc", result);
         },
         foreachWithArrayCallbackWorks: function () {
             var result = "";
-            Bridge.Linq.Enumerable.from(System.Array.init(["a", "b", "c"], String)).forEach(function (s, i) {
+            Bridge.Linq.Enumerable.from(System.Array.init(["a", "b", "c"], System.String)).forEach(function (s, i) {
                     result = System.String.concat(result, (System.String.concat(s, i)));
                 });
             Bridge.Test.NUnit.Assert.areEqual("a0b1c2", result);
         },
         indexOfWithoutStartIndexWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual(1, System.Array.init(["a", "b", "c", "b"], String).indexOf("b"));
+            Bridge.Test.NUnit.Assert.areEqual(1, System.Array.init(["a", "b", "c", "b"], System.String).indexOf("b"));
         },
         indexOfWithoutStartIndexUsesEqualsMethod: function () {
             var arr = System.Array.init([new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(1), new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(2), new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(3)], Bridge.ClientTest.Batch2.BridgeIssues.N772.C);
@@ -293,12 +293,12 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
             Bridge.Test.NUnit.Assert.areEqual(-1, Bridge.Linq.Enumerable.from(arr).indexOf(new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(4)));
         },
         indexOfWithStartIndexWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual(3, System.Array.init(["a", "b", "c", "b"], String).indexOf("b", 2));
+            Bridge.Test.NUnit.Assert.areEqual(3, System.Array.init(["a", "b", "c", "b"], System.String).indexOf("b", 2));
         },
         joinWithoutDelimiterWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual("a,b,c,b", System.Array.init(["a", "b", "c", "b"], String).join(","));
+            Bridge.Test.NUnit.Assert.areEqual("a,b,c,b", System.Array.init(["a", "b", "c", "b"], System.String).join(","));
 
-            Bridge.Test.NUnit.Assert.areEqual("a|b|c|b", System.Array.init(["a", "b", "c", "b"], String).join("|"));
+            Bridge.Test.NUnit.Assert.areEqual("a|b|c|b", System.Array.init(["a", "b", "c", "b"], System.String).join("|"));
         },
         reverseWorks: function () {
             var arr = System.Array.init([1, 3, 4, 1, 3, 2], System.Int32);
@@ -381,9 +381,9 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
         },
         foreachWhenCastToIListWorks: function () {
             var $t;
-            var list = System.Array.init(["x", "y"], String);
+            var list = System.Array.init(["x", "y"], System.String);
             var result = "";
-            $t = Bridge.getEnumerator(list, String);
+            $t = Bridge.getEnumerator(list, System.String);
             try {
                 while ($t.moveNext()) {
                     var s = $t.getCurrent();
@@ -396,26 +396,26 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
             }Bridge.Test.NUnit.Assert.areEqual("xy", result);
         },
         iCollectionCountWorks: function () {
-            var l = System.Array.init(["x", "y", "z"], String);
-            Bridge.Test.NUnit.Assert.areEqual(3, System.Array.getCount(l, String));
+            var l = System.Array.init(["x", "y", "z"], System.String);
+            Bridge.Test.NUnit.Assert.areEqual(3, System.Array.getCount(l, System.String));
         },
         iCollectionAddWorks: function () {
-            var l = System.Array.init(["x", "y", "z"], String);
-            System.Array.add(l, "a", String);
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "y", "z", "a"], String), l);
+            var l = System.Array.init(["x", "y", "z"], System.String);
+            System.Array.add(l, "a", System.String);
+            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "y", "z", "a"], System.String), l);
         },
         iCollectionClearWorks: function () {
-            var l = System.Array.init(["x", "y", "z"], String);
-            System.Array.clear(l, String);
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(3, null, String), l);
-            Bridge.Test.NUnit.Assert.areDeepEqual(null, System.Array.getItem(l, 0, String));
-            Bridge.Test.NUnit.Assert.areDeepEqual(null, System.Array.getItem(l, 1, String));
-            Bridge.Test.NUnit.Assert.areDeepEqual(null, System.Array.getItem(l, 2, String));
+            var l = System.Array.init(["x", "y", "z"], System.String);
+            System.Array.clear(l, System.String);
+            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(3, null, System.String), l);
+            Bridge.Test.NUnit.Assert.areDeepEqual(null, System.Array.getItem(l, 0, System.String));
+            Bridge.Test.NUnit.Assert.areDeepEqual(null, System.Array.getItem(l, 1, System.String));
+            Bridge.Test.NUnit.Assert.areDeepEqual(null, System.Array.getItem(l, 2, System.String));
         },
         iCollectionContainsWorks: function () {
-            var l = System.Array.init(["x", "y", "z"], String);
-            Bridge.Test.NUnit.Assert.true(System.Array.contains(l, "y", String));
-            Bridge.Test.NUnit.Assert.false(System.Array.contains(l, "a", String));
+            var l = System.Array.init(["x", "y", "z"], System.String);
+            Bridge.Test.NUnit.Assert.true(System.Array.contains(l, "y", System.String));
+            Bridge.Test.NUnit.Assert.false(System.Array.contains(l, "a", System.String));
         },
         iCollectionContainsUsesEqualsMethod: function () {
             var l = System.Array.init([new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(1), new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(2), new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(3)], Bridge.ClientTest.Batch2.BridgeIssues.N772.C);
@@ -423,21 +423,21 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
             Bridge.Test.NUnit.Assert.false(System.Array.contains(l, new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(4), Bridge.ClientTest.Batch2.BridgeIssues.N772.C));
         },
         iCollectionRemoveWorks: function () {
-            var l = System.Array.init(["x", "y", "z"], String);
-            Bridge.Test.NUnit.Assert.true(System.Array.remove(l, "y", String));
-            Bridge.Test.NUnit.Assert.false(System.Array.remove(l, "a", String));
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "z"], String), l);
+            var l = System.Array.init(["x", "y", "z"], System.String);
+            Bridge.Test.NUnit.Assert.true(System.Array.remove(l, "y", System.String));
+            Bridge.Test.NUnit.Assert.false(System.Array.remove(l, "a", System.String));
+            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "z"], System.String), l);
         },
         iListIndexingWorks: function () {
-            var l = System.Array.init(["x", "y", "z"], String);
-            Bridge.Test.NUnit.Assert.areEqual("y", System.Array.getItem(l, 1, String));
-            System.Array.setItem(l, 1, "a", String);
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "a", "z"], String), l);
+            var l = System.Array.init(["x", "y", "z"], System.String);
+            Bridge.Test.NUnit.Assert.areEqual("y", System.Array.getItem(l, 1, System.String));
+            System.Array.setItem(l, 1, "a", System.String);
+            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "a", "z"], System.String), l);
         },
         iListIndexOfWorks: function () {
-            var l = System.Array.init(["x", "y", "z"], String);
-            Bridge.Test.NUnit.Assert.areEqual(1, System.Array.indexOf(l, "y", 0, null, String));
-            Bridge.Test.NUnit.Assert.areEqual(-1, System.Array.indexOf(l, "a", 0, null, String));
+            var l = System.Array.init(["x", "y", "z"], System.String);
+            Bridge.Test.NUnit.Assert.areEqual(1, System.Array.indexOf(l, "y", 0, null, System.String));
+            Bridge.Test.NUnit.Assert.areEqual(-1, System.Array.indexOf(l, "a", 0, null, System.String));
         },
         iListIndexOfUsesEqualsMethod: function () {
             var arr = System.Array.init([new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(1), new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(2), new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(3)], Bridge.ClientTest.Batch2.BridgeIssues.N772.C);
@@ -445,19 +445,19 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
             Bridge.Test.NUnit.Assert.areEqual(-1, Bridge.Linq.Enumerable.from(arr).indexOf(new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(4)));
         },
         iListInsertWorks: function () {
-            var l = System.Array.init(["x", "y", "z"], String);
-            System.Array.insert(l, 1, "a", String);
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "a", "y", "z"], String), l);
+            var l = System.Array.init(["x", "y", "z"], System.String);
+            System.Array.insert(l, 1, "a", System.String);
+            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "a", "y", "z"], System.String), l);
         },
         iListRemoveAtWorks: function () {
-            var l = System.Array.init(["x", "y", "z"], String);
-            System.Array.removeAt(l, 1, String);
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "z"], String), l);
+            var l = System.Array.init(["x", "y", "z"], System.String);
+            System.Array.removeAt(l, 1, System.String);
+            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "z"], System.String), l);
         },
         issueSpecific: function () {
-            var l = System.Array.init(["x", "y", "z"], String);
-            System.Array.removeAt(l, 1, String);
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "z"], String), l);
+            var l = System.Array.init(["x", "y", "z"], System.String);
+            System.Array.removeAt(l, 1, System.String);
+            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "z"], System.String), l);
         }
     });
 

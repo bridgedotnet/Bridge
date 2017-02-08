@@ -379,7 +379,7 @@ namespace System
         public override extern int GetHashCode();
     }
 
-    [Name("Object")]
+    [Name("System.Object")]
     [Constructor("{ }")]
     [External]
     public class DecimalConfig
@@ -436,7 +436,7 @@ namespace System
         public DecimalFormatConfig Format;
     }
 
-    [Name("Object")]
+    [Name("System.Object")]
     [Constructor("{ }")]
     [External]
     public class DecimalFormatConfig

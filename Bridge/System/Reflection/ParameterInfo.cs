@@ -3,7 +3,7 @@ using Bridge;
 namespace System.Reflection
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     public class ParameterInfo
     {
         [Name("sn")]

@@ -3,7 +3,7 @@ using Bridge;
 namespace System
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     public static class Environment
     {
         public static extern string NewLine

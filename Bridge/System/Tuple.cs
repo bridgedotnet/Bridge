@@ -5,7 +5,7 @@ namespace System
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Tuple<T1>
     {
         [Template("{ item1: {item1} }")]
@@ -27,7 +27,7 @@ namespace System
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Tuple<T1, T2>
     {
         [Template("{ item1: {item1}, item2: {item2} }")]
@@ -55,7 +55,7 @@ namespace System
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Tuple<T1, T2, T3>
     {
         [Template("{ item1: {item1}, item2: {item2}, item3: {item3} }")]
@@ -89,7 +89,7 @@ namespace System
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Tuple<T1, T2, T3, T4>
     {
         [Template("{ item1: {item1}, item2: {item2}, item3: {item3}, item4: {item4} }")]
@@ -129,7 +129,7 @@ namespace System
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Tuple<T1, T2, T3, T4, T5>
     {
         [Template("{ item1: {item1}, item2: {item2}, item3: {item3}, item4: {item4}, item5: {item5} }")]
@@ -175,7 +175,7 @@ namespace System
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Tuple<T1, T2, T3, T4, T5, T6>
     {
         [Template("{ item1: {item1}, item2: {item2}, item3: {item3}, item4: {item4}, item5: {item5}, item6: {item6} }")]
@@ -227,7 +227,7 @@ namespace System
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Tuple<T1, T2, T3, T4, T5, T6, T7>
     {
         [Template("{ item1: {item1}, item2: {item2}, item3: {item3}, item4: {item4}, item5: {item5}, item6: {item6}, item7: {item7} }")]
@@ -285,7 +285,7 @@ namespace System
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Tuple<T1, T2, T3, T4, T5, T6, T7, TRest>
     {
         [Template("{ item1: {item1}, item2: {item2}, item3: {item3}, item4: {item4}, item5: {item5}, item6: {item6}, item7: {item7}, rest: {rest} }")]
@@ -349,7 +349,7 @@ namespace System
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public static class Tuple
     {
         [Template("{ item1: {item1} }")]

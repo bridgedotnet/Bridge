@@ -97,14 +97,14 @@
         lambaLiftingWithProperty: function () {
             var localValue = "What a name";
 
-            return System.Linq.Enumerable.from(System.Array.init(["one", "two", "three"], String)).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f9).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f9).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f10).select(Bridge.fn.bind(this, $asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f11)).select(Bridge.fn.bind(this, $asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f12)).select(function (value) {
+            return System.Linq.Enumerable.from(System.Array.init(["one", "two", "three"], System.String)).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f9).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f9).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f10).select(Bridge.fn.bind(this, $asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f11)).select(Bridge.fn.bind(this, $asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f12)).select(function (value) {
                 return System.String.concat(value, localValue);
             });
         },
         lambaLiftingWithStaticProperty: function () {
             var localValue = "What a name";
 
-            return System.Linq.Enumerable.from(System.Array.init(["one", "two", "three"], String)).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f9).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f9).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f10).select(Bridge.fn.bind(this, $asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f11)).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f13).select(function (value) {
+            return System.Linq.Enumerable.from(System.Array.init(["one", "two", "three"], System.String)).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f9).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f9).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f10).select(Bridge.fn.bind(this, $asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f11)).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f13).select(function (value) {
                 return System.String.concat(value, localValue);
             });
         },
