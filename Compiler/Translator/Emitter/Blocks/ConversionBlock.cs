@@ -1,6 +1,5 @@
 using Bridge.Contract;
 using Bridge.Contract.Constants;
-
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
@@ -298,7 +297,9 @@ namespace Bridge.Translator
                     var parent_rr = inv_rr as InvocationResolveResult;
                     if (parent_rr != null)
                     {
-                        isArgument = block.Emitter.Validator.IsExternalType(parent_rr.Member.DeclaringTypeDefinition) || block.Emitter.Validator.IsExternalType(parent_rr.Member);
+                        var memberDeclaringTypeDefinition = parent_rr.Member.DeclaringTypeDefinition;
+                        isArgument = (block.Emitter.Validator.IsExternalType(memberDeclaringTypeDefinition) || block.Emitter.Validator.IsExternalType(parent_rr.Member)) 
+                                     && !(memberDeclaringTypeDefinition.Namespace == CS.NS.System || memberDeclaringTypeDefinition.Namespace.StartsWith(CS.NS.System + "."));
 
                         var attr = parent_rr.Member.Attributes.FirstOrDefault(a => a.AttributeType.FullName == "Bridge.UnboxAttribute");
 
@@ -308,7 +309,7 @@ namespace Bridge.Translator
                         }
                         else
                         {
-                            attr = parent_rr.Member.DeclaringTypeDefinition.Attributes.FirstOrDefault(a => a.AttributeType.FullName == "Bridge.UnboxAttribute");
+                            attr = memberDeclaringTypeDefinition.Attributes.FirstOrDefault(a => a.AttributeType.FullName == "Bridge.UnboxAttribute");
 
                             if (attr != null)
                             {
@@ -316,11 +317,6 @@ namespace Bridge.Translator
                             }
                         }
                     }
-                    else if (inv_rr is DynamicInvocationResolveResult)
-                    {
-                        isArgument = true;
-                    }
-
                 }
 
                 var isStringConcat = false;

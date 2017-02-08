@@ -1140,7 +1140,7 @@ namespace Bridge.ClientTest.Reflection
             Assert.True(Type.IsInstanceOfType(new IsAssignableFromTypes.D4(), typeof(IsAssignableFromTypes.I4)), "#18");
             Assert.True(Type.IsInstanceOfType(new IsAssignableFromTypes.X2(), typeof(IsAssignableFromTypes.I1)), "#19");
             Assert.False(Type.IsInstanceOfType(new IsAssignableFromTypes.D3(), typeof(IsAssignableFromTypes.C2<>)), "#10");
-            Assert.True(Type.IsInstanceOfType(new E2(), typeof(E1)), "#21");
+            Assert.False(Type.IsInstanceOfType(new E2(), typeof(E1)), "#21");
             Assert.True(Type.IsInstanceOfType(new E1(), typeof(int)), "#22");
             Assert.True(Type.IsInstanceOfType(new E1(), typeof(object)), "#23");
             Assert.False(Type.IsInstanceOfType(null, typeof(object)), "#24");
@@ -1165,7 +1165,7 @@ namespace Bridge.ClientTest.Reflection
             Assert.True(typeof(IsAssignableFromTypes.I4).IsInstanceOfType(new IsAssignableFromTypes.D4()), "#42");
             Assert.True(typeof(IsAssignableFromTypes.I1).IsInstanceOfType(new IsAssignableFromTypes.X2()), "#43");
             Assert.False(typeof(IsAssignableFromTypes.C2<>).IsInstanceOfType(new IsAssignableFromTypes.D3()), "#44");
-            Assert.True(typeof(E1).IsInstanceOfType(new E2()), "#45");
+            Assert.False(typeof(E1).IsInstanceOfType(new E2()), "#45");
             Assert.True(typeof(int).IsInstanceOfType(new E1()), "#46");
             Assert.True(typeof(object).IsInstanceOfType(new E1()), "#47");
             Assert.False(typeof(IsAssignableFromTypes.I7<IsAssignableFromTypes.X1>).IsInstanceOfType(new IsAssignableFromTypes.Y1<IsAssignableFromTypes.X1>()), "#48");

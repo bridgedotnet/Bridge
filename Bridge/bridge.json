@@ -39,6 +39,7 @@
         "Resources/Math.js",
         "Resources/Bool.js",
         "Resources/Integer.js",
+        "Resources/Double.js",
         "Resources/Long.js",
         "Resources/Decimal.js",
         "Resources/Date.js",

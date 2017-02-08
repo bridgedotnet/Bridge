@@ -5,6 +5,7 @@ namespace System
     [External]
     //[Name("System.UInt32")]
     [Constructor("Number")]
+#pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     public struct UInt32 : IComparable, IComparable<UInt32>, IEquatable<UInt32>, IFormattable
     {
         private extern UInt32(int i);
@@ -49,5 +50,9 @@ namespace System
 
         [Template("{this} === {other}")]
         public extern bool Equals(uint other);
+
+        [Template("System.UInt32.equals({this}, {other})")]
+        public override extern bool Equals(object other);
     }
+#pragma warning restore CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
 }

@@ -476,6 +476,10 @@
             //     for value types it returns deterministic values (f.e. for int 3 it returns 3)
             //     for reference types it returns random value
 
+            if (value && value.$boxed && value.type.getHashCode) {
+                return value.type.getHashCode(Bridge.unbox(value));
+            }
+
             value = Bridge.unbox(value);
 
             if (Bridge.isEmpty(value, true)) {
@@ -1025,6 +1029,14 @@
                 return true;
             }
 
+            if (a && a.$boxed && a.type.equals && a.type.equals.length === 2) {
+                return a.type.equals(a, b);
+            }
+
+            if (b && b.$boxed && b.type.equals && b.type.equals.length === 2) {
+                return b.type.equals(b, a);
+            }
+
             if (a && Bridge.isFunction(a.equals) && a.equals.length === 1) {
                 return a.equals(b);
             }
@@ -1117,6 +1129,9 @@
         },
 
         compare: function (a, b, safe, T) {
+            a = Bridge.unbox(a);
+            b = Bridge.unbox(b);
+
             if (!Bridge.isDefined(a, true)) {
                 if (safe) {
                     return 0;
@@ -1167,6 +1182,14 @@
         },
 
         equalsT: function (a, b, T) {
+            if (a && a.$boxed && a.type.equalsT && a.type.equalsT.length === 2) {
+                return a.type.equalsT(a, b);
+            }
+
+            if (b && b.$boxed && b.type.equalsT && b.type.equalsT.length === 2) {
+                return b.type.equalsT(b, a);
+            }
+
             if (!Bridge.isDefined(a, true)) {
                 throw new System.NullReferenceException();
             } else if (Bridge.isNumber(a) || Bridge.isString(a) || Bridge.isBoolean(a)) {
@@ -1189,6 +1212,13 @@
         },
 
         format: function (obj, formatString, provider) {
+            if (obj && obj.$boxed && obj.type.format) {
+                if (obj.type.$kind === "enum") {
+                    return System.Enum.format(obj.type, obj.v, formatString);
+                }
+                return obj.type.format(Bridge.unbox(obj), formatString, provider);
+            }
+
             if (Bridge.isNumber(obj)) {
                 return Bridge.Int.format(obj, formatString, provider);
             } else if (Bridge.isDate(obj)) {
@@ -1738,9 +1768,14 @@
 
             if (formatStr && value.$boxed && value.type.$kind === "enum") {
                 value = System.Enum.format(value.type, value.v, formatStr);
-            }
-            else if (formatStr && Bridge.is(value, System.IFormattable)) {
+            } else if (formatStr && value.$boxed && value.type.format) {
+                value = value.type.format(Bridge.unbox(value), formatStr, provider);
+            } else if (formatStr && Bridge.is(value, System.IFormattable)) {
                 value = Bridge.format(Bridge.unbox(value), formatStr, provider);
+            } if (Bridge.isNumber(value)) {
+                value = Bridge.Int.format(value, formatStr, provider);
+            } else if (Bridge.isDate(value)) {
+                value = Bridge.Date.format(value, formatStr, provider);
             } else {
                 value = "" + value.toString();
             }
@@ -2258,6 +2293,8 @@
                 throw new System.ArgumentNullException(name);
             }
 
+            value = Bridge.unbox(value);
+
             switch (format) {
                 case "G":
                 case "g":
@@ -2296,6 +2333,8 @@
         },
 
         getName: function (enumType, value) {
+            value = Bridge.unbox(value);
+
             if (value == null) {
                 throw new System.ArgumentNullException("value");
             }
@@ -2321,6 +2360,8 @@
         },
 
         isDefined: function (enumType, value) {
+            value = Bridge.unbox(value);
+
             System.Enum.checkEnumType(enumType);
 
             var values = enumType,
@@ -2344,6 +2385,20 @@
             }
 
             return true;
+        },
+
+        equals: function (v1, v2, T) {
+            if (v2 && v2.$boxed && (v1 && v1.$boxed || T)) {
+                if (v2.type !== (v1.type || T)) {
+                    return false;
+                }
+            }
+
+            return Bridge.unbox(v1) === Bridge.unbox(v2);
+        },
+
+        equalsT: function (v1, v2) {
+            return Bridge.unbox(v1) === Bridge.unbox(v2);
         }
     };
 
@@ -4543,6 +4598,22 @@
                 }
 
                 return new RegExp("[\u0000-\u001F\u007F\u0080-\u009F]").test(String.fromCharCode(value));
+            },
+
+            equals: function (v1, v2) {
+                if (Bridge.is(v1, System.Char) && Bridge.is(v2, System.Char)) {
+                    return Bridge.unbox(v1) === Bridge.unbox(v2);
+                }
+
+                return false;
+            },
+
+            equalsT: function (v1, v2) {
+                return Bridge.unbox(v1) === Bridge.unbox(v2);
+            },
+
+            getHashCode: function(v) {
+                return v | (v << 16);
             }
         }
     });
@@ -5661,6 +5732,16 @@
                     },
                     format: function (number, format, provider) {
                         return Bridge.Int.format(number, format, provider, type);
+                    },
+                    equals: function (v1, v2) {
+                        if (Bridge.is(v1, type) && Bridge.is(v2, type)) {
+                            return Bridge.unbox(v1) === Bridge.unbox(v2);
+                        }
+
+                        return false;
+                    },
+                    equalsT: function (v1, v2) {
+                        return Bridge.unbox(v1) === Bridge.unbox(v2);
                     }
                 }
             });
@@ -6463,6 +6544,8 @@
     Bridge.Int.$kind = "";
     Bridge.Class.addExtend(Bridge.Int, [System.IComparable$1(Bridge.Int), System.IEquatable$1(Bridge.Int)]);
 
+    // @source Double.js
+
     Bridge.define("System.Double", {
         inherits: [System.IComparable, System.IFormattable],
         statics: {
@@ -6492,6 +6575,30 @@
 
             format: function (number, format, provider) {
                 return Bridge.Int.format(number, format, provider, System.Double);
+            },
+
+            equals: function (v1, v2) {
+                if (Bridge.is(v1, System.Double) && Bridge.is(v2, System.Double)) {
+                    return Bridge.unbox(v1) === Bridge.unbox(v2);
+                }
+
+                return false;
+            },
+
+            equalsT: function (v1, v2) {
+                return Bridge.unbox(v1) === Bridge.unbox(v2);
+            },
+
+            getHashCode: function (v) {
+                var value = Bridge.unbox(v);
+                if (value === Number.POSITIVE_INFINITY) {
+                    return 0x7FF00000;
+                }
+
+                if (value === Number.NEGATIVE_INFINITY) {
+                    return 0xFFF00000;
+                }
+                return value.toExponential();
             }
         }
     });
@@ -6520,7 +6627,21 @@
 
             format: function (number, format, provider) {
                 return Bridge.Int.format(number, format, provider, System.Single);
-            }
+            },
+
+            equals: function (v1, v2) {
+                if (Bridge.is(v1, System.Single) && Bridge.is(v2, System.Single)) {
+                    return Bridge.unbox(v1) === Bridge.unbox(v2);
+                }
+
+                return false;
+            },
+
+            equalsT: function (v1, v2) {
+                return Bridge.unbox(v1) === Bridge.unbox(v2);
+            },
+
+            getHashCode: System.Double.getHashCode
         }
     });
 
@@ -7550,7 +7671,11 @@
     };
 
     System.Decimal.prototype.equals = function (v) {
-        return !this.compareTo(v);
+        if (v instanceof System.Decimal) {
+            return !this.compareTo(v);
+        }
+
+        return false;
     };
 
     System.Decimal.prototype.equalsT = function (v) {
@@ -10707,7 +10832,7 @@
                 } else if (Bridge.isDefined(y, true)) {
                     var isBridge = x && x.$$name;
 
-                    if (!isBridge) {
+                    if (!isBridge || x && x.$boxed || y && y.$boxed) {
                         return Bridge.equals(x, y);
                     }
                     else if (Bridge.isFunction(x.equalsT)) {
@@ -12754,6 +12879,8 @@
         },
 
         toBoolean: function (value, formatProvider) {
+            value = Bridge.unbox(value);
+
             switch (typeof (value)) {
                 case "boolean":
                     return value;
@@ -12798,6 +12925,8 @@
 
         toChar: function (value, formatProvider, valueTypeCode) {
             var typeCodes = scope.convert.typeCodes;
+
+            value = Bridge.unbox(value);
 
             if (value instanceof System.Decimal) {
                 value = value.toFloat();
@@ -12914,6 +13043,8 @@
         toDateTime: function (value, formatProvider) {
             var typeCodes = scope.convert.typeCodes;
 
+            value = Bridge.unbox(value);
+
             switch (typeof (value)) {
                 case "boolean":
                     scope.internal.throwInvalidCastEx(typeCodes.Boolean, typeCodes.DateTime);
@@ -12961,6 +13092,10 @@
         },
 
         toString: function (value, formatProvider, valueTypeCode) {
+            if (value && value.$boxed) {
+                return value.toString();
+            }
+
             var typeCodes = scope.convert.typeCodes,
                 type = typeof (value);
 
@@ -13171,7 +13306,7 @@
 
         toStringInBase: function (value, toBase, typeCode) {
             var typeCodes = scope.convert.typeCodes;
-
+            value = Bridge.unbox(value);
             if (toBase !== 2 && toBase !== 8 && toBase !== 10 && toBase !== 16) {
                 throw new System.ArgumentException("Invalid Base.");
             }
@@ -13596,6 +13731,8 @@
         },
 
         toNumber: function (value, formatProvider, typeCode, valueTypeCode) {
+            value = Bridge.unbox(value);
+
             var typeCodes = scope.convert.typeCodes,
                 type = typeof (value),
                 isFloating = scope.internal.isFloatingType(typeCode);

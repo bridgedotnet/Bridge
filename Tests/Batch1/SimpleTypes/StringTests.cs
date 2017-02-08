@@ -1020,7 +1020,7 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual("Hello Bridge.NET234", s, "string.Concat()");
 
             s = string.Concat(null, true, 3, false);
-            Assert.AreEqual("true3false", s, "string.Concat()");
+            Assert.AreEqual("True3False", s, "string.Concat()");
 
             s = string.Concat(new string[] { "1", "2", "3", "4", "5" });
             Assert.AreEqual("12345", s, "string.Concat()");

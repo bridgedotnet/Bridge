@@ -461,6 +461,10 @@
             //     for value types it returns deterministic values (f.e. for int 3 it returns 3)
             //     for reference types it returns random value
 
+            if (value && value.$boxed && value.type.getHashCode) {
+                return value.type.getHashCode(Bridge.unbox(value));
+            }
+
             value = Bridge.unbox(value);
 
             if (Bridge.isEmpty(value, true)) {
@@ -1010,6 +1014,14 @@
                 return true;
             }
 
+            if (a && a.$boxed && a.type.equals && a.type.equals.length === 2) {
+                return a.type.equals(a, b);
+            }
+
+            if (b && b.$boxed && b.type.equals && b.type.equals.length === 2) {
+                return b.type.equals(b, a);
+            }
+
             if (a && Bridge.isFunction(a.equals) && a.equals.length === 1) {
                 return a.equals(b);
             }
@@ -1102,6 +1114,9 @@
         },
 
         compare: function (a, b, safe, T) {
+            a = Bridge.unbox(a);
+            b = Bridge.unbox(b);
+
             if (!Bridge.isDefined(a, true)) {
                 if (safe) {
                     return 0;
@@ -1152,6 +1167,14 @@
         },
 
         equalsT: function (a, b, T) {
+            if (a && a.$boxed && a.type.equalsT && a.type.equalsT.length === 2) {
+                return a.type.equalsT(a, b);
+            }
+
+            if (b && b.$boxed && b.type.equalsT && b.type.equalsT.length === 2) {
+                return b.type.equalsT(b, a);
+            }
+
             if (!Bridge.isDefined(a, true)) {
                 throw new System.NullReferenceException();
             } else if (Bridge.isNumber(a) || Bridge.isString(a) || Bridge.isBoolean(a)) {
@@ -1174,6 +1197,13 @@
         },
 
         format: function (obj, formatString, provider) {
+            if (obj && obj.$boxed && obj.type.format) {
+                if (obj.type.$kind === "enum") {
+                    return System.Enum.format(obj.type, obj.v, formatString);
+                }
+                return obj.type.format(Bridge.unbox(obj), formatString, provider);
+            }
+
             if (Bridge.isNumber(obj)) {
                 return Bridge.Int.format(obj, formatString, provider);
             } else if (Bridge.isDate(obj)) {

@@ -219,7 +219,11 @@
     };
 
     System.Decimal.prototype.equals = function (v) {
-        return !this.compareTo(v);
+        if (v instanceof System.Decimal) {
+            return !this.compareTo(v);
+        }
+
+        return false;
     };
 
     System.Decimal.prototype.equalsT = function (v) {

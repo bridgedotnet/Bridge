@@ -136,10 +136,10 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void EqualsWorks()
         {
-            Assert.True('0'.Equals((int)'0'));
+            Assert.False('0'.Equals((int)'0'));
             Assert.False('1'.Equals((int)'0'));
             Assert.False('0'.Equals((int)'1'));
-            Assert.True('1'.Equals((int)'1'));
+            Assert.False('1'.Equals((int)'1'));
         }
 
         [Test]

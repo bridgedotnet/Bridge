@@ -5,6 +5,7 @@
         public class NS
         {
             public const string ROOT = "Bridge";
+            public const string System = "System";
         }
 
         public class Attributes

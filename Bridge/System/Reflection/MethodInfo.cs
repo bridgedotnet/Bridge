@@ -3,6 +3,7 @@ using Bridge;
 namespace System.Reflection
 {
     [External]
+    [Unbox(true)]
     public class MethodInfo : MethodBase
     {
         [Field]
