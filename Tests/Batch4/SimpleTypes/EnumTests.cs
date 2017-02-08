@@ -29,7 +29,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("Object", typeof(Enum).FullName);
+            Assert.AreEqual("System.Enum", typeof(Enum).FullName);
             Assert.AreEqual("Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.TestEnum", typeof(TestEnum).FullName);
             Assert.True(typeof(TestEnum).IsEnum);
             Assert.False(typeof(TestEnum).IsFlags);

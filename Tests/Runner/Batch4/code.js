@@ -18727,7 +18727,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.EnumTests", {
         typePropertiesAreCorrect: function () {
-            Bridge.Test.NUnit.Assert.areEqual("Object", Bridge.Reflection.getTypeFullName(System.Enum));
+            Bridge.Test.NUnit.Assert.areEqual("System.Enum", Bridge.Reflection.getTypeFullName(System.Enum));
             Bridge.Test.NUnit.Assert.areEqual("Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.TestEnum", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.TestEnum));
             Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isEnum(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.TestEnum));
             Bridge.Test.NUnit.Assert.false(Bridge.Reflection.isFlags(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.TestEnum));
