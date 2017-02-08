@@ -8674,84 +8674,84 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             defaultValueOfEnumClassIsNull: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.EnumTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DefaultValueOfEnumClassIsNull()",
-                    line: "53"
+                    line: "52"
                 } ));
                 t.getFixture().defaultValueOfEnumClassIsNull();
             },
             defaultValueOfEnumTypeIsFirstValue: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.EnumTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DefaultValueOfEnumTypeIsFirstValue()",
-                    line: "60"
+                    line: "58"
                 } ));
                 t.getFixture().defaultValueOfEnumTypeIsFirstValue();
             },
             defaultConstructorOfEnumTypeReturnsZero: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.EnumTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DefaultConstructorOfEnumTypeReturnsZero()",
-                    line: "67"
+                    line: "64"
                 } ));
                 t.getFixture().defaultConstructorOfEnumTypeReturnsZero();
             },
             firstValueOfEnumIsZero: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.EnumTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "FirstValueOfEnumIsZero()",
-                    line: "73"
+                    line: "70"
                 } ));
                 t.getFixture().firstValueOfEnumIsZero();
             },
             creatingInstanceOfEnumTypeReturnsZero: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.EnumTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "CreatingInstanceOfEnumTypeReturnsZero()",
-                    line: "80"
+                    line: "76"
                 } ));
                 t.getFixture().creatingInstanceOfEnumTypeReturnsZero();
             },
             defaultExpressionWithEnumReturnsZero: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.EnumTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DefaultExpressionWithEnumReturnsZero()",
-                    line: "87"
+                    line: "82"
                 } ));
                 t.getFixture().defaultExpressionWithEnumReturnsZero();
             },
             getHashCodeWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.EnumTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetHashCodeWorks()",
-                    line: "93"
+                    line: "88"
                 } ));
                 t.getFixture().getHashCodeWorks();
             },
             equalsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.EnumTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "EqualsWorks()",
-                    line: "100"
+                    line: "95"
                 } ));
                 t.getFixture().equalsWorks();
             },
             parseWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.EnumTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ParseWorks()",
-                    line: "108"
+                    line: "103"
                 } ));
                 t.getFixture().parseWorks();
             },
             staticToStringWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.EnumTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "StaticToStringWorks()",
-                    line: "116"
+                    line: "111"
                 } ));
                 t.getFixture().staticToStringWorks();
             },
             conversionsToEnumAreTreatedAsConversionsToTheUnderlyingType: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.EnumTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ConversionsToEnumAreTreatedAsConversionsToTheUnderlyingType()",
-                    line: "125"
+                    line: "120"
                 } ));
                 t.getFixture().conversionsToEnumAreTreatedAsConversionsToTheUnderlyingType();
             },
             getValuesWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.EnumTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetValuesWorks()",
-                    line: "133"
+                    line: "128"
                 } ));
                 t.getFixture().getValuesWorks();
             }

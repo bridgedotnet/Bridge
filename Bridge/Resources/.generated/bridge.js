@@ -1247,7 +1247,6 @@
         },
 
         getType: function (instance, T) {
-            var bt;
             if (instance && instance.$boxed) {
                 return instance.type;
             }
@@ -1256,7 +1255,7 @@
                 throw new System.NullReferenceException("instance is null");
             }
 
-            if (T && ((bt = Bridge.Reflection.getBaseType(T)) === Object || bt === System.Object)) {
+            if (T) {
                 var type = Bridge.getType(instance);
                 return Bridge.Reflection.isAssignableFrom(T, type) ? type : T;
             }
