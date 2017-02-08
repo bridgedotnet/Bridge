@@ -279,7 +279,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#1735 - TestTryGetValueOutDelegateParameter", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1735.testTryGetValueOutDelegateParameter);
             QUnit.test("#1735 - TestOutDelegateParameter", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1735.testOutDelegateParameter);
             QUnit.test("#1735 - TestReferenceDelegateParameter", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1735.testReferenceDelegateParameter);
-            QUnit.test("#1737 - TestGetClassName_FullName", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1737.testGetClassName_FullName);
+            QUnit.test("#1737 - TestTypeFullName", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1737.testTypeFullName);
             QUnit.test("#1741 - TestNumbersHashCode", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1741.testNumbersHashCode);
             QUnit.test("#1744 - TestMethodInvocationWithParams", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1744.testMethodInvocationWithParams);
             QUnit.test("#1754 - TestAllUpperCaseNames", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1754.testAllUpperCaseNames);
@@ -5493,12 +5493,12 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1737", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1737)],
         statics: {
-            testGetClassName_FullName: function (assert) {
+            testTypeFullName: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1737).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1737, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
-                    method: "TestGetClassName_FullName()",
+                    method: "TestTypeFullName()",
                     line: "17"
                 } ));
-                t.getFixture().testGetClassName_FullName();
+                t.getFixture().testTypeFullName();
             }
         },
         context: null,

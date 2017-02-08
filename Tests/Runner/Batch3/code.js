@@ -8294,7 +8294,7 @@ Bridge.$N1391Result =                 r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1737", {
-        testGetClassName_FullName: function () {
+        testTypeFullName: function () {
             var x = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1737.SomethingOfSomethingElse();
             Bridge.Test.NUnit.Assert.areEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1737.SomethingOfSomethingElse", Bridge.Reflection.getTypeFullName(Bridge.getType(x)));
             Bridge.Test.NUnit.Assert.true(Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(x)), Bridge.Reflection.getTypeFullName(Bridge.getType(x))));
