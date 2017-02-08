@@ -26093,39 +26093,39 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var i1 = -1, i2 = 0, i3 = 234, i4 = 65535, i5 = 65536;
             var ni1 = -1, ni2 = 0, ni3 = 234, ni4 = 65535, ni5 = 65536, ni6 = null;
 
-            Bridge.Test.NUnit.Assert.areStrictEqual$1(65535, (i1 & 65535), "-1 unchecked");
-            Bridge.Test.NUnit.Assert.areStrictEqual$1(0, (i2 & 65535), "0 unchecked");
-            Bridge.Test.NUnit.Assert.areStrictEqual$1(234, (i3 & 65535), "234 unchecked");
-            Bridge.Test.NUnit.Assert.areStrictEqual$1(65535, (i4 & 65535), "65535 unchecked");
-            Bridge.Test.NUnit.Assert.areStrictEqual$1(0, (i5 & 65535), "65536 unchecked");
+            Bridge.Test.NUnit.Assert.areEqual$1(65535, (i1 & 65535), "-1 unchecked");
+            Bridge.Test.NUnit.Assert.areEqual$1(0, (i2 & 65535), "0 unchecked");
+            Bridge.Test.NUnit.Assert.areEqual$1(234, (i3 & 65535), "234 unchecked");
+            Bridge.Test.NUnit.Assert.areEqual$1(65535, (i4 & 65535), "65535 unchecked");
+            Bridge.Test.NUnit.Assert.areEqual$1(0, (i5 & 65535), "65536 unchecked");
 
-            Bridge.Test.NUnit.Assert.areStrictEqual$1(65535, Bridge.Int.clipu16(ni1), "nullable -1 unchecked");
-            Bridge.Test.NUnit.Assert.areStrictEqual$1(0, Bridge.Int.clipu16(ni2), "nullable 0 unchecked");
-            Bridge.Test.NUnit.Assert.areStrictEqual$1(234, Bridge.Int.clipu16(ni3), "nullable 234 unchecked");
-            Bridge.Test.NUnit.Assert.areStrictEqual$1(65535, Bridge.Int.clipu16(ni4), "nullable 65535 unchecked");
-            Bridge.Test.NUnit.Assert.areStrictEqual$1(0, Bridge.Int.clipu16(ni5), "nullable 65536 unchecked");
-            Bridge.Test.NUnit.Assert.areStrictEqual$1(null, Bridge.Int.clipu16(ni6), "null unchecked");
+            Bridge.Test.NUnit.Assert.areEqual$1(65535, Bridge.Int.clipu16(ni1), "nullable -1 unchecked");
+            Bridge.Test.NUnit.Assert.areEqual$1(0, Bridge.Int.clipu16(ni2), "nullable 0 unchecked");
+            Bridge.Test.NUnit.Assert.areEqual$1(234, Bridge.Int.clipu16(ni3), "nullable 234 unchecked");
+            Bridge.Test.NUnit.Assert.areEqual$1(65535, Bridge.Int.clipu16(ni4), "nullable 65535 unchecked");
+            Bridge.Test.NUnit.Assert.areEqual$1(0, Bridge.Int.clipu16(ni5), "nullable 65536 unchecked");
+            Bridge.Test.NUnit.Assert.areEqual$1(null, Bridge.Int.clipu16(ni6), "null unchecked");
 
-            Bridge.Test.NUnit.Assert.throws$1(function () {
+            Bridge.Test.NUnit.Assert.throws$6(System.OverflowException, function () {
                 var b = Bridge.Int.check(i1, System.Char);
-            }, $asm.$.Bridge.ClientTest.SimpleTypes.CharTests.f1);
-            Bridge.Test.NUnit.Assert.areStrictEqual$1(0, Bridge.Int.check(i2, System.Char), "0 checked");
-            Bridge.Test.NUnit.Assert.areStrictEqual$1(234, Bridge.Int.check(i3, System.Char), "234 checked");
-            Bridge.Test.NUnit.Assert.areStrictEqual$1(65535, Bridge.Int.check(i4, System.Char), "65535 checked");
-            Bridge.Test.NUnit.Assert.throws$1(function () {
+            });
+            Bridge.Test.NUnit.Assert.areEqual$1(0, Bridge.Int.check(i2, System.Char), "0 checked");
+            Bridge.Test.NUnit.Assert.areEqual$1(234, Bridge.Int.check(i3, System.Char), "234 checked");
+            Bridge.Test.NUnit.Assert.areEqual$1(65535, Bridge.Int.check(i4, System.Char), "65535 checked");
+            Bridge.Test.NUnit.Assert.throws$6(System.OverflowException, function () {
                 var b = Bridge.Int.check(i5, System.Char);
-            }, $asm.$.Bridge.ClientTest.SimpleTypes.CharTests.f1);
+            });
 
-            Bridge.Test.NUnit.Assert.throws$1(function () {
+            Bridge.Test.NUnit.Assert.throws$6(System.OverflowException, function () {
                 var b = Bridge.Int.check(ni1, System.Char);
-            }, $asm.$.Bridge.ClientTest.SimpleTypes.CharTests.f1);
-            Bridge.Test.NUnit.Assert.areStrictEqual$1(0, Bridge.Int.check(ni2, System.Char), "nullable 0 checked");
-            Bridge.Test.NUnit.Assert.areStrictEqual$1(234, Bridge.Int.check(ni3, System.Char), "nullable 234 checked");
-            Bridge.Test.NUnit.Assert.areStrictEqual$1(65535, Bridge.Int.check(ni4, System.Char), "nullable 65535 checked");
-            Bridge.Test.NUnit.Assert.throws$1(function () {
+            });
+            Bridge.Test.NUnit.Assert.areEqual$1(0, Bridge.Int.check(ni2, System.Char), "nullable 0 checked");
+            Bridge.Test.NUnit.Assert.areEqual$1(234, Bridge.Int.check(ni3, System.Char), "nullable 234 checked");
+            Bridge.Test.NUnit.Assert.areEqual$1(65535, Bridge.Int.check(ni4, System.Char), "nullable 65535 checked");
+            Bridge.Test.NUnit.Assert.throws$6(System.OverflowException, function () {
                 var b = Bridge.Int.check(ni5, System.Char);
-            }, $asm.$.Bridge.ClientTest.SimpleTypes.CharTests.f1);
-            Bridge.Test.NUnit.Assert.areStrictEqual$1(null, Bridge.Int.check(ni6, System.Char), "null checked");
+            });
+            Bridge.Test.NUnit.Assert.areEqual$1(null, Bridge.Int.check(ni6, System.Char), "null checked");
         },
         getDefaultValue: function (T) {
             return Bridge.getDefaultValue(T);
@@ -26134,10 +26134,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.NUnit.Assert.areEqual(0, this.getDefaultValue(System.Char));
         },
         defaultConstructorReturnsZero: function () {
-            Bridge.Test.NUnit.Assert.areStrictEqual(0, Number());
+            Bridge.Test.NUnit.Assert.areEqual(0, Number());
         },
         creatingInstanceReturnsZero: function () {
-            Bridge.Test.NUnit.Assert.areStrictEqual(0, Bridge.createInstance(System.Char));
+            Bridge.Test.NUnit.Assert.areEqual(0, Bridge.createInstance(System.Char));
         },
         constantsWork: function () {
             Bridge.Test.NUnit.Assert.areEqual(0, 0);
@@ -26154,9 +26154,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         parseWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual$1(97, System.Char.charCodeAt("a", 0), "Parse 1");
-            Bridge.Test.NUnit.Assert.throws$5($asm.$.Bridge.ClientTest.SimpleTypes.CharTests.f2, "Parse 2");
-            Bridge.Test.NUnit.Assert.throws$5($asm.$.Bridge.ClientTest.SimpleTypes.CharTests.f3, "Parse 3");
-            Bridge.Test.NUnit.Assert.throws$5($asm.$.Bridge.ClientTest.SimpleTypes.CharTests.f4, "Parse 4");
+            Bridge.Test.NUnit.Assert.throws$7(System.ArgumentNullException, $asm.$.Bridge.ClientTest.SimpleTypes.CharTests.f1, "Parse 2");
+            Bridge.Test.NUnit.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.CharTests.f2, "Parse 3");
+            Bridge.Test.NUnit.Assert.throws$7(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.CharTests.f3, "Parse 4");
         },
         formatWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual("0023", System.Char.format((35), "x4"));
@@ -26243,16 +26243,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.ns("Bridge.ClientTest.SimpleTypes.CharTests", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.SimpleTypes.CharTests, {
-        f1: function (err) {
-            return Bridge.is(err, System.OverflowException);
-        },
-        f2: function () {
+        f1: function () {
             System.Char.charCodeAt(null, 0);
         },
-        f3: function () {
+        f2: function () {
             System.Char.charCodeAt("", 0);
         },
-        f4: function () {
+        f3: function () {
             System.Char.charCodeAt("ab", 0);
         }
     });
