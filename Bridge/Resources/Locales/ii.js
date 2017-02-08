@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ii", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ii", true), {
     englishName: "Yi",
     nativeName: "ꆈꌠꁱꂷ",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "ꌗꂷꀋꉬ",
+        nanSymbol: "ꌗꂷꀋꉬ",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "ꀄꊭꌐꀋꉆ",

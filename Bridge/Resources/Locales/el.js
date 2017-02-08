@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("el", true), {
+Bridge.merge(new System.Globalization.CultureInfo("el", true), {
     englishName: "Greek",
     nativeName: "Ελληνικά",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "μη αριθμός",
+        nanSymbol: "μη αριθμός",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Άπειρο",

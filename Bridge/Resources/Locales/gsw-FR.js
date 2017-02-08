@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("gsw-FR", true), {
+Bridge.merge(new System.Globalization.CultureInfo("gsw-FR", true), {
     englishName: "Alsatian (France)",
     nativeName: "Elsässisch (Frànkrisch)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "Ohne Nummer",
+        nanSymbol: "Ohne Nummer",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Unendlich",

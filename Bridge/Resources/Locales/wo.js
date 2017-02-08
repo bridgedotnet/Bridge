@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("wo", true), {
+Bridge.merge(new System.Globalization.CultureInfo("wo", true), {
     englishName: "Wolof",
     nativeName: "Wolof",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "Non Numérique",
+        nanSymbol: "Non Numérique",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infini",

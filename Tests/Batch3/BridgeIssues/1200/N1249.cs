@@ -1,5 +1,5 @@
 using Bridge.Html5;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -7,11 +7,10 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#1249 - {0}")]
     public class Bridge1249
     {
-        enum b : byte
+        private enum b : byte
         {
             a,
             b
-
         }
 
         [Test(ExpectedCount = 2)]

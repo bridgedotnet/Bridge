@@ -1,4 +1,4 @@
-﻿    Bridge.define("System.Text.RegularExpressions.RegexEnginePass", {
+    Bridge.define("System.Text.RegularExpressions.RegexEnginePass", {
         index: 0,
         tokens: null,
         probe: null,

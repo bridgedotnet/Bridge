@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("kok", true), {
+Bridge.merge(new System.Globalization.CultureInfo("kok", true), {
     englishName: "Konkani",
     nativeName: "कोंकणी",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

@@ -1,4 +1,4 @@
-﻿Bridge.assembly("TypeScriptTest", function ($asm, globals) {
+Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     "use strict";
 
     Bridge.define("Classes.Animal", {
@@ -34,7 +34,7 @@
             }
         },
         move: function (dx, dy) {
-            this.setPoint(Classes.MovePoint.move(this.getPoint().$clone(), dx, dy).$clone());
+            this.setPoint(Classes.MovePoint.move(this.getPoint().$clone(), dx, dy));
         }
     });
 

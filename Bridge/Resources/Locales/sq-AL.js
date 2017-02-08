@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sq-AL", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sq-AL", true), {
     englishName: "Albanian (Albania)",
     nativeName: "Shqip (Shqipëria)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-infinit",

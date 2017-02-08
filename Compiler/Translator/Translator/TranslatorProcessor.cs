@@ -97,7 +97,7 @@ namespace Bridge.Translator
                 logger.Info("No extracting core scripts option enabled");
             }
 
-            var fileName = bridgeOptions.DefaultFileName;
+            var fileName = GetDefaultFileName(bridgeOptions);
 
             var files = translator.SaveTo(outputPath, fileName);
 
@@ -114,6 +114,16 @@ namespace Bridge.Translator
             logger.Info("Done post processing");
 
             return outputPath;
+        }
+
+        private string GetDefaultFileName(BridgeOptions bridgeOptions)
+        {
+            if (bridgeOptions.DefaultFileName == null)
+            {
+                return AssemblyInfo.DEFAULT_FILENAME;
+            }
+
+            return Path.GetFileNameWithoutExtension(bridgeOptions.DefaultFileName);
         }
 
         private string GetOutputFolder(bool basePathOnly = false, bool strict = false)

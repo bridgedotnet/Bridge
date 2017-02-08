@@ -11,11 +11,10 @@ namespace System
     /// The String global object is a constructor for strings, or a sequence of characters.
     /// </summary>
     [External]
-    [Name("String")]
     [Constructor("String")]
     public sealed class String : IEnumerable, ICloneable, IEnumerable<char>, IComparable<String>, IEquatable<String>
     {
-        [FieldProperty]
+        [Field]
         public extern int Length
         {
             get;
@@ -30,6 +29,7 @@ namespace System
         /// <summary>
         /// The String global object is a constructor for strings, or a sequence of characters.
         /// </summary>
+        [Template("\"\"")]
         public extern String();
 
         /// <summary>
@@ -63,6 +63,7 @@ namespace System
         /// The static String.fromCharCode() method returns a string created by using the specified sequence of Unicode values.
         /// </summary>
         /// <returns>String.Empty</returns>
+        [Template("String.fromCharCode()")]
         public static extern string FromCharCode();
 
         /// <summary>
@@ -70,6 +71,7 @@ namespace System
         /// </summary>
         /// <param name="numbers">A sequence of numbers that are Unicode values.</param>
         /// <returns></returns>
+        [Template("String.fromCharCode({numbers})")]
         public static extern string FromCharCode(params int[] numbers);
 
         /// <summary>
@@ -697,6 +699,7 @@ namespace System
         ///     of the corresponding objects in args.
         ///
         [Template("System.String.format({format}, {args})")]
+        [Unbox(false)]
         public static extern string Format(string format, params object[] args);
 
         ///
@@ -715,6 +718,7 @@ namespace System
         ///     A copy of format in which any format items are replaced by the string representation
         ///     of arg0.
         [Template("System.String.format({format}, {arg0})")]
+        [Unbox(false)]
         public static extern String Format(String format, object arg0);
 
         ///
@@ -737,6 +741,7 @@ namespace System
         ///     A copy of format in which the format items have been replaced by the string representation
         ///     of the corresponding objects in args.
         [Template("System.String.formatProvider({provider}, {format}, {args})")]
+        [Unbox(false)]
         public static extern String Format(IFormatProvider provider, String format, params object[] args);
 
         ///
@@ -758,6 +763,7 @@ namespace System
         ///     A copy of format in which format items are replaced by the string representations
         ///     of arg0 and arg1.
         [Template("System.String.format({format}, {arg0}, {arg1})")]
+        [Unbox(false)]
         public static extern String Format(String format, object arg0, object arg1);
 
         ///
@@ -782,6 +788,7 @@ namespace System
         ///     A copy of format in which the format items have been replaced by the string representations
         ///     of arg0, arg1, and arg2.
         [Template("System.String.format({format}, {arg0}, {arg1}, {arg2})")]
+        [Unbox(false)]
         public static extern String Format(String format, object arg0, object arg1, object arg2);
 
         [Template("System.String.indexOfAny({this}, {anyOf})")]
@@ -830,12 +837,14 @@ namespace System
         public static extern string Join(string separator, params string[] args);
 
         [Template("{args:array}.join({separator})")]
+        [Unbox(false)]
         public static extern string Join(string separator, params object[] args);
 
         [Template("Bridge.toArray({args}).join({separator})")]
         public static extern string Join(string separator, IEnumerable<string> args);
 
         [Template("Bridge.toArray({args}).join({separator})")]
+        [Unbox(false)]
         public static extern string Join<T>(string separator, IEnumerable<T> args);
 
         [Template("{args}.slice({startIndex}, {startIndex} + {count}).join({separator})")]

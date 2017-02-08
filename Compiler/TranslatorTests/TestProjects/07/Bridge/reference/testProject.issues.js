@@ -1,11 +1,11 @@
-﻿/**
- * @compiler Bridge.NET 15.4.0
+/**
+ * @compiler Bridge.NET 16.0.0
  */
 Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-define("MyModule", ["bridge"], function (_) {
-    var exports = { };
+    define(function () {
+        var MyModule = { };
     /** @namespace System */
 
     /**
@@ -72,7 +72,7 @@ define("MyModule", ["bridge"], function (_) {
             }
         }
     });
-    return exports;
-});
+        return MyModule;
+    });
 
 });

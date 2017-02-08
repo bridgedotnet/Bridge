@@ -1,4 +1,4 @@
-﻿using Bridge.Test;
+﻿using Bridge.Test.NUnit;
 using System;
 
 namespace Bridge.ClientTest.SimpleTypes
@@ -23,7 +23,7 @@ namespace Bridge.ClientTest.SimpleTypes
         public void TypePropertiesAreCorrect()
         {
             Assert.True((object)true is bool);
-            Assert.AreEqual("Boolean", typeof(bool).FullName);
+            Assert.AreEqual("System.Boolean", typeof(bool).FullName, "#2062");
         }
 
         private T GetDefaultValue<T>()

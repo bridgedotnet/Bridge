@@ -1,4 +1,4 @@
-﻿    var base = {
+    var base = {
         _initialize: function () {
             if (this.$initialized) {
                 return;
@@ -125,7 +125,7 @@
 
                 fn.$cache = [];
 
-                return Bridge.Class.generic(className, gscope, fn, prop.length);
+                return Bridge.Class.generic(className, gscope, fn, prop);
             }
 
             if (!isGenericInstance) {
@@ -134,19 +134,30 @@
 
             prop = prop || {};
 
+            if (prop.$kind == "enum" && !prop.inherits) {
+                prop.inherits = [System.IComparable, System.IFormattable]
+            }
+
             var extend = prop.$inherits || prop.inherits,
                 statics = prop.$statics || prop.statics,
                 isEntryPoint = prop.$entryPoint,
                 base,
                 prototype,
                 scope = prop.$scope || gscope || Bridge.global,
+                objectType = Bridge.global.System && Bridge.global.System.Object || Object,
                 i,
                 v,
                 isCtor,
                 ctorName,
-                name;
+                name,
+                registerT = true;
 
             prop.$kind = prop.$kind || "class";
+
+            if (prop.$noRegister === true) {
+                registerT = false;
+                delete prop.$noRegister;
+            }
 
             if (prop.$inherits) {
                 delete prop.$inherits;
@@ -171,8 +182,10 @@
 
             if (!cls) {
                 if (prop.$literal) {
-                    Class = function () {
-                        return {};
+                    Class = function (obj) {
+                        obj = obj || {};
+                        obj.$getType = function () { return Class };
+                        return obj;
                     };
                 } else {
                     Class = function () {
@@ -191,7 +204,20 @@
                 Class = cls;
             }
 
-            if (!isGenericInstance) {
+            if (prop.$literal) {
+                if ((!statics || !statics.getDefaultValue)) {
+                    Class.getDefaultValue = function() {
+                        var obj = {};
+                        obj.$getType = function() { return Class };
+                        return obj;
+                    };
+                }
+
+                Class.$literal = true;
+                delete prop.$literal;
+            }
+
+            if (!isGenericInstance && registerT) {
                 scope = Bridge.Class.set(scope, className, Class);
             }
 
@@ -224,31 +250,7 @@
                 extend = extend();
             }
 
-            var interfaces = [],
-                baseInterfaces = [];
-
-            if (extend) {
-                for (var j = 0; j < extend.length; j++) {
-                    var baseType = extend[j],
-                        baseI = (baseType.$interfaces || []).concat(baseType.$baseInterfaces || []);
-
-                    if (baseI.length > 0) {
-                        for (var k = 0; k < baseI.length; k++) {
-                            if (baseInterfaces.indexOf(baseI[k]) < 0) {
-                                baseInterfaces.push(baseI[k]);
-                            }
-                        }
-                    }
-
-                    if (baseType.$kind === "interface") {
-                        interfaces.push(baseType);
-                    }
-                }
-            }
-
-            Class.$baseInterfaces = baseInterfaces;
-            Class.$interfaces = interfaces;
-            Class.$allInterfaces = interfaces.concat(baseInterfaces);
+            Bridge.Class.createInheritors(Class, extend);
 
             var noBase = extend ? extend[0].$kind === "interface" : true;
 
@@ -258,7 +260,7 @@
 
             base = extend ? extend[0].prototype : this.prototype;
             Class.$base = base;
-            prototype = extend ? (extend[0].$$initCtor ? new extend[0].$$initCtor() : new extend[0]()) : new Object();
+            prototype = extend ? (extend[0].$$initCtor ? new extend[0].$$initCtor() : new extend[0]()) : (objectType.$$initCtor ? new objectType.$$initCtor() : new objectType());
 
             Class.$$initCtor = function () { };
             Class.$$initCtor.prototype = prototype;
@@ -337,20 +339,10 @@
             }
 
             if (!extend) {
-                extend = [Object].concat(interfaces);
+                extend = [objectType].concat(Class.$interfaces);
             }
 
-            Class.$$inherits = extend;
-
-            for (i = 0; i < extend.length; i++) {
-                scope = extend[i];
-
-                if (!scope.$$inheritors) {
-                    scope.$$inheritors = [];
-                }
-
-                scope.$$inheritors.push(Class);
-            }
+            Bridge.Class.setInheritors(Class, extend);
 
             fn = function () {
                 if (Bridge.Class.staticInitAllow) {
@@ -367,12 +359,16 @@
             };
 
             if (isEntryPoint || Bridge.isFunction(prototype.$main)) {
+                if (!Class.main && prototype.$main) {
+                    Class.main = prototype.$main;
+                }
+
                 Bridge.Class.$queueEntry.push(Class);
             }
 
             Class.$staticInit = fn;
 
-            if (!isGenericInstance) {
+            if (!isGenericInstance && registerT) {
                 Bridge.Class.registerType(className, Class);
             }
 
@@ -381,10 +377,13 @@
             }
 
             if (Class.$kind === "enum") {
+                if (!Class.prototype.$utype) {
+                    Class.prototype.$utype = System.Int32;
+                }
                 Class.$is = function (instance) {
                     var utype = Class.prototype.$utype;
 
-                    if (utype === System.String) {
+                    if (utype === String) {
                         return typeof (instance) == "string";
                     }
 
@@ -398,7 +397,7 @@
                 Class.getDefaultValue = function () {
                     var utype = Class.prototype.$utype;
 
-                    if (utype === System.String) {
+                    if (utype === String || utype === System.String) {
                         return null;
                     }
 
@@ -415,6 +414,48 @@
             }
 
             return Class;
+        },
+
+        createInheritors: function(cls, extend) {
+            var interfaces = [],
+                baseInterfaces = [];
+
+            if (extend) {
+                for (var j = 0; j < extend.length; j++) {
+                    var baseType = extend[j],
+                        baseI = (baseType.$interfaces || []).concat(baseType.$baseInterfaces || []);
+
+                    if (baseI.length > 0) {
+                        for (var k = 0; k < baseI.length; k++) {
+                            if (baseInterfaces.indexOf(baseI[k]) < 0) {
+                                baseInterfaces.push(baseI[k]);
+                            }
+                        }
+                    }
+
+                    if (baseType.$kind === "interface") {
+                        interfaces.push(baseType);
+                    }
+                }
+            }
+
+            cls.$baseInterfaces = baseInterfaces;
+            cls.$interfaces = interfaces;
+            cls.$allInterfaces = interfaces.concat(baseInterfaces);
+        },
+
+        setInheritors: function(cls, extend) {
+            cls.$$inherits = extend;
+
+            for (var i = 0; i < extend.length; i++) {
+                var scope = extend[i];
+
+                if (!scope.$$inheritors) {
+                    scope.$$inheritors = [];
+                }
+
+                scope.$$inheritors.push(cls);
+            }
         },
 
         varianceAssignable: function (source) {
@@ -632,24 +673,59 @@
             return null;
         },
 
-        generic: function (className, scope, fn, length) {
+        generic: function (className, scope, fn, prop) {
             fn.$$name = className;
             fn.$kind = "class";
 
             Bridge.Class.set(scope, className, fn, true);
             Bridge.Class.registerType(className, fn);
 
-            fn.$typeArgumentCount = length;
+            fn.$typeArgumentCount = prop.length;
             fn.$isGenericTypeDefinition = true;
             fn.$getMetadata = Bridge.Reflection.getMetadata;
+
+            fn.$staticInit = function() {
+                fn.$typeArguments = Bridge.Reflection.createTypeParams(prop);
+
+                var cfg = prop.apply(null, fn.$typeArguments),
+                    extend = cfg.$inherits || cfg.inherits;
+
+                if (extend && Bridge.isFunction(extend)) {
+                    extend = extend();
+                }
+
+                Bridge.Class.createInheritors(fn, extend);
+                var objectType = Bridge.global.System && Bridge.global.System.Object || Object;
+                if (!extend) {
+                    extend = [objectType].concat(fn.$interfaces);
+                }
+
+                Bridge.Class.setInheritors(fn, extend);
+
+                var prototype = extend ? (extend[0].$$initCtor ? new extend[0].$$initCtor() : new extend[0]()) : new objectType();
+                fn.prototype = prototype;
+                fn.prototype.constructor = fn;
+            };
+
+            Bridge.Class.$queue.push(fn);
 
             return fn;
         },
 
         init: function (fn) {
+            if (fn) {
+                var old = Bridge.Class.staticInitAllow;
+                Bridge.Class.staticInitAllow = true;
+                fn();
+                Bridge.Class.staticInitAllow = old;
+                return;
+            }
+
             Bridge.Class.staticInitAllow = true;
 
             var queue = Bridge.Class.$queue.concat(Bridge.Class.$queueEntry);
+            Bridge.Class.$queue.length = 0;
+            Bridge.Class.$queueEntry.length = 0;
 
             for (var i = 0; i < queue.length; i++) {
                 var t = queue[i];
@@ -659,15 +735,9 @@
                 }
 
                 if (t.prototype.$main) {
-                    Bridge.ready(t.prototype.$main);
+                    Bridge.ready(t.main);
+                    t.prototype.$main = null;
                 }
-            }
-
-            Bridge.Class.$queue.length = 0;
-            Bridge.Class.$queueEntry.length = 0;
-
-            if (fn) {
-                fn();
             }
         }
     };

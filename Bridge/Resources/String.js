@@ -1,22 +1,9 @@
-    var string = {
-        is: function (obj, type) {
-            if (!Bridge.isString(obj)) {
-                return false;
-            }
+Bridge.define("System.String", {
+    inherits: [System.IComparable, System.ICloneable, System.Collections.IEnumerable, System.Collections.Generic.IEnumerable$1(System.Char)],
 
-            if ((obj.constructor === type) || (obj instanceof type)) {
-                return true;
-            }
-
-            if (type === System.ICloneable ||
-                type === System.Collections.IEnumerable ||
-                type === System.Collections.Generic.IEnumerable$1(System.Char) ||
-                type === System.IComparable$1(String) ||
-                type === System.IEquatable$1(String)) {
-                return true;
-            }
-
-            return false;
+    statics: {
+        $is: function (instance) {
+            return typeof (instance) === "string";
         },
 
         lastIndexOf: function (s, search, startIndex, count) {
@@ -117,10 +104,18 @@
                 value = "";
             }
 
-            if (formatStr && Bridge.is(value, System.IFormattable)) {
-                value = Bridge.format(value, formatStr, provider);
+            if (formatStr && value.$boxed && value.type.$kind === "enum") {
+                value = System.Enum.format(value.type, value.v, formatStr);
+            } else if (formatStr && value.$boxed && value.type.format) {
+                value = value.type.format(Bridge.unbox(value), formatStr, provider);
+            } else if (formatStr && Bridge.is(value, System.IFormattable)) {
+                value = Bridge.format(Bridge.unbox(value), formatStr, provider);
+            } if (Bridge.isNumber(value)) {
+                value = Bridge.Int.format(value, formatStr, provider);
+            } else if (Bridge.isDate(value)) {
+                value = System.DateTime.format(value, formatStr, provider);
             } else {
-                value = "" + value;
+                value = "" + value.toString();
             }
 
             if (alignment) {
@@ -139,7 +134,7 @@
         },
 
         alignString: function (str, alignment, pad, dir, cut) {
-            if (!str || !alignment) {
+            if (str == null || !alignment) {
                 return str;
             }
 
@@ -157,8 +152,7 @@
 
             alignment = Math.abs(alignment);
 
-            if (cut && (str.length > alignment))
-            {
+            if (cut && (str.length > alignment)) {
                 str = str.substring(0, alignment);
             }
 
@@ -437,7 +431,7 @@
                 m,
                 i;
 
-            for (i = 0;; i = re.lastIndex) {
+            for (i = 0; ; i = re.lastIndex) {
                 if (m = re.exec(s)) {
                     if (options !== 1 || m.index > i) {
                         if (res.length === limit - 1) {
@@ -479,6 +473,7 @@
 
             return s;
         }
-    };
+    }
+});
 
-    System.String = string;
+Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), System.IEquatable$1(System.String)]);

@@ -4,6 +4,7 @@ namespace System
 {
     [External]
     [Constructor("Number")]
+#pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     public struct Byte : IComparable, IComparable<Byte>, IEquatable<Byte>, IFormattable
     {
         private extern Byte(int i);
@@ -48,5 +49,9 @@ namespace System
 
         [Template("{this} === {other}")]
         public extern bool Equals(byte other);
+
+        [Template("System.Byte.equals({this}, {other})")]
+        public override extern bool Equals(object other);
     }
+#pragma warning restore CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
 }

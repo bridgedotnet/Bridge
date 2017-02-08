@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("es-PR", true), {
+Bridge.merge(new System.Globalization.CultureInfo("es-PR", true), {
     englishName: "Spanish (Puerto Rico)",
     nativeName: "español (Puerto Rico)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",

@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("bg-BG", true), {
+Bridge.merge(new System.Globalization.CultureInfo("bg-BG", true), {
     englishName: "Bulgarian (Bulgaria)",
     nativeName: "български (България)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "- безкрайност",

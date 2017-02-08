@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("tn-ZA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("tn-ZA", true), {
     englishName: "Setswana (South Africa)",
     nativeName: "Setswana (Aforika Borwa)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

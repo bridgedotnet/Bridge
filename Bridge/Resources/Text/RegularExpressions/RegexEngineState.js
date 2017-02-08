@@ -1,4 +1,4 @@
-﻿    Bridge.define("System.Text.RegularExpressions.RegexEngineState", {
+    Bridge.define("System.Text.RegularExpressions.RegexEngineState", {
         txtIndex: 0, // current index
         capIndex: null, // first index of captured text
         capLength: 0, // current length

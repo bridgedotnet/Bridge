@@ -5,13 +5,13 @@ using System.Reflection;
 namespace System.Linq.Expressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class ElementInit
     {
-        [FieldProperty]
+        [Field]
         public extern MethodInfo AddMethod { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern ReadOnlyCollection<Expression> Arguments { get; private set; }
 
         internal extern ElementInit();

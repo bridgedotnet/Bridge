@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("cy", true), {
+Bridge.merge(new System.Globalization.CultureInfo("cy", true), {
     englishName: "Welsh",
     nativeName: "Cymraeg",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "Dim rhif",
+        nanSymbol: "Dim rhif",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Anfeidredd",

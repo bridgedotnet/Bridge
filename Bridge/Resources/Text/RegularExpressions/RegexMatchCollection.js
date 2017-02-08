@@ -1,4 +1,4 @@
-﻿    Bridge.define("System.Text.RegularExpressions.MatchCollection", {
+    Bridge.define("System.Text.RegularExpressions.MatchCollection", {
         inherits: function () {
             return [System.Collections.ICollection];
         },

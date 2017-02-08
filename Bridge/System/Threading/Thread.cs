@@ -5,7 +5,6 @@ using System.ComponentModel;
 namespace System.Threading
 {
     [External]
-    [EditorBrowsable(EditorBrowsableState.Never)]
     public sealed class Thread
     {
         //public extern int ManagedThreadId

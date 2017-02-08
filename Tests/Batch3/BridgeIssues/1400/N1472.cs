@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 using System.Text.RegularExpressions;
 
@@ -8,7 +8,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#1472 - {0}")]
     public class Bridge1472
     {
-        static bool time = true;
+        private static bool time = true;
 
         public static int[] GetArray()
         {

@@ -6,6 +6,7 @@ namespace System
     /// Represents the standard input, output, and error streams for console applications.
     /// </summary>
     [External]
+    [Unbox(false)]
     [Name("console")]
     public sealed partial class Console
     {
@@ -61,7 +62,7 @@ namespace System
         /// Writes the text representation of the specified Decimal value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("Bridge.Console.log({value}.toString())")]
+        [Template("Bridge.Console.log({value}.toString('G'))")]
         public static extern void Write(Decimal value);
 
         /// <summary>
@@ -200,7 +201,7 @@ namespace System
         /// Writes the text representation of the specified Decimal value, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("Bridge.Console.log({value}.toString())")]
+        [Template("Bridge.Console.log({value}.toString('G'))")]
         public static extern void WriteLine(Decimal value);
 
         /// <summary>
@@ -322,7 +323,7 @@ namespace System
         /// Writes the text representation of the specified nullable decimal, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("Bridge.Console.log({value} && {value}.toString())")]
+        [Template("Bridge.Console.log({value} && {value}.toString('G'))")]
         public static extern void WriteLine(decimal? value);
 
         /// <summary>

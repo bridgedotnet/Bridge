@@ -52,10 +52,15 @@ namespace Bridge.Translator
                 IProperty member = null;
                 IndexerAccessor current = null;
 
+                if (memberResolveResult == null)
+                {
+                    memberResolveResult = block.Emitter.Resolver.ResolveNode(expression.Parent, block.Emitter) as MemberResolveResult;
+                }
+
                 if (memberResolveResult != null)
                 {
                     var resolvedMember = memberResolveResult.Member;
-                    isIgnore = block.Emitter.Validator.IsIgnoreType(resolvedMember.DeclaringTypeDefinition);
+                    isIgnore = block.Emitter.Validator.IsExternalType(resolvedMember.DeclaringTypeDefinition);
                     isAccessorsIndexer = block.Emitter.Validator.IsAccessorsIndexer(resolvedMember);
 
                     var property = resolvedMember as IProperty;
@@ -86,11 +91,8 @@ namespace Bridge.Translator
                     if (be == null || be.Operator != BinaryOperatorType.Divide || be.Left != expression)
                     {
                         block.Write(JS.Types.System.Int64.TONUMBER);
-                        if (!(expression is CastExpression && ((CastExpression)expression).Expression is ParenthesizedExpression))
-                        {
-                            block.Write("(");
-                            block.AfterOutput += ")";
-                        }
+                        block.Write("(");
+                        block.AfterOutput += ")";
                     }
                 }
                 else if (Helpers.IsDecimalType(toType, block.Emitter.Resolver) && !Helpers.IsDecimalType(fromType, block.Emitter.Resolver))
@@ -132,11 +134,8 @@ namespace Bridge.Translator
                 if (be == null || be.Operator != BinaryOperatorType.Divide || be.Left != expression)
                 {
                     block.Write(JS.Types.System.Int64.TONUMBER);
-                    if (!(expression is CastExpression && ((CastExpression)expression).Expression is ParenthesizedExpression))
-                    {
-                        block.Write("(");
-                        block.AfterOutput += ")";
-                    }
+                    block.Write("(");
+                    block.AfterOutput += ")";
                 }
             }
             else if (((!Helpers.Is64Type(toType, block.Emitter.Resolver) && Helpers.IsIntegerType(toType, block.Emitter.Resolver)) ||
@@ -302,11 +301,8 @@ namespace Bridge.Translator
             if (toFloat || (block.Emitter.IsJavaScriptOverflowMode && !InsideOverflowContext(block.Emitter, expression)))
             {
                 block.Write(JS.Types.SYSTEM_DECIMAL + ".toFloat");
-                if (!(expression is CastExpression && ((CastExpression)expression).Expression is ParenthesizedExpression))
-                {
-                    block.Write("(");
-                    block.AfterOutput += ")";
-                }
+                block.Write("(");
+                block.AfterOutput += ")";
             }
             else
             {
@@ -384,11 +380,8 @@ namespace Bridge.Translator
 
                 block.Write(JS.Types.System.Int64.NAME + ".");
                 block.Write(action);
-                if (!(expression is CastExpression && ((CastExpression)expression).Expression is ParenthesizedExpression))
-                {
-                    block.Write("(");
-                    block.AfterOutput += ")";
-                }
+                block.Write("(");
+                block.AfterOutput += ")";
             }
         }
 
@@ -482,11 +475,8 @@ namespace Bridge.Translator
 
                     block.Write(JS.Types.BRIDGE_INT + ".");
                     block.Write(action);
-                    if (!(expression is CastExpression && ((CastExpression)expression).Expression is ParenthesizedExpression))
-                    {
-                        block.Write("(");
-                        block.AfterOutput += ")";
-                    }
+                    block.Write("(");
+                    block.AfterOutput += ")";
                 }
                 else
                 {

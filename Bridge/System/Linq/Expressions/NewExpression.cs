@@ -5,17 +5,17 @@ using System.Reflection;
 namespace System.Linq.Expressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     [Cast("{this}.ntype === 31")]
     public sealed class NewExpression : Expression
     {
-        [FieldProperty]
+        [Field]
         public new extern ConstructorInfo Constructor { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern ReadOnlyCollection<Expression> Arguments { get; private set; }
 
-        [FieldProperty]
+        [Field]
         [Name("m")]
         public extern ReadOnlyCollection<MemberInfo> Members { get; private set; }
 

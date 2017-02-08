@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sn-Latn", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sn-Latn", true), {
     englishName: "Shona (Latin)",
     nativeName: "chiShona (Latin)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

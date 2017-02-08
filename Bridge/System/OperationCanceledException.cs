@@ -22,7 +22,7 @@ namespace System
         [Template("new System.OperationCanceledException({message}, {token}, {innerException})")]
         public extern OperationCanceledException(string message, Exception innerException, CancellationToken token);
 
-        [FieldProperty]
+        [Field]
         public extern CancellationToken CancellationToken
         {
             get;

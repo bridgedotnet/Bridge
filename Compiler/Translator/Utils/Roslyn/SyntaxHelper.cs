@@ -607,7 +607,7 @@ namespace Bridge.Translator
                 }
 
                 var nameAttr = SyntaxHelper.GetInheritedAttribute(symbol, Bridge.Translator.Translator.Bridge_ASSEMBLY + ".NameAttribute");
-                bool isIgnore = symbol.ContainingType != null && SyntaxHelper.IsIgnoreType(symbol.ContainingType);
+                bool isIgnore = symbol.ContainingType != null && SyntaxHelper.IsExternalType(symbol.ContainingType);
 
                 name = symbol.Name;
 
@@ -658,13 +658,14 @@ namespace Bridge.Translator
             return name;
         }
 
-        private static bool IsIgnoreType(ISymbol symbol)
+        private static bool IsExternalType(ISymbol symbol)
         {
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
             string objectLiteralAttr = Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute";
 
             return SyntaxHelper.HasAttribute(symbol.GetAttributes(), externalAttr)
-                   || SyntaxHelper.HasAttribute(symbol.GetAttributes(), objectLiteralAttr);
+                   || SyntaxHelper.HasAttribute(symbol.GetAttributes(), objectLiteralAttr)
+                   || SyntaxHelper.HasAttribute(symbol.ContainingAssembly.GetAttributes(), externalAttr);
         }
 
         private static bool HasAttribute(ImmutableArray<AttributeData> attributes, string attrName)
@@ -734,6 +735,11 @@ namespace Bridge.Translator
             }
 
             return p as T;
+        }
+
+        public static SyntaxTriviaList ExcludeDirectivies(this SyntaxTriviaList list)
+        {
+            return SyntaxFactory.TriviaList(list.Where(t => !t.IsDirective));
         }
 
         public static bool IsAccessibleIn(this ITypeSymbol type, ITypeSymbol currentType)

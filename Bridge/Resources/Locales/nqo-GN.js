@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("nqo-GN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("nqo-GN", true), {
     englishName: "N'ko (Guinea)",
     nativeName: "ߒߞߏ (ߖߌ߬ߣߍ߬ ߞߊ߲ߓߍ߲)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "ߝߙߍߕߍ߫ ߕߍ߫",
+        nanSymbol: "ߝߙߍߕߍ߫ ߕߍ߫",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "ߘߊ߲߬ߒߕߊ߲߫-",

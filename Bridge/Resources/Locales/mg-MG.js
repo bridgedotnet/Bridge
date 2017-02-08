@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("mg-MG", true), {
+Bridge.merge(new System.Globalization.CultureInfo("mg-MG", true), {
     englishName: "Malagasy (Madagascar)",
     nativeName: "Malagasy (Madagasikara)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

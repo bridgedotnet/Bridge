@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("iu-Latn-CA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("iu-Latn-CA", true), {
     englishName: "Inuktitut (Latin, Canada)",
     nativeName: "Inuktitut (Kanatami)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

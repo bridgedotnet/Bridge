@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("am-ET", true), {
+Bridge.merge(new System.Globalization.CultureInfo("am-ET", true), {
     englishName: "Amharic (Ethiopia)",
     nativeName: "አማርኛ (ኢትዮጵያ)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NAN",
+        nanSymbol: "NAN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

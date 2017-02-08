@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ar-SY", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ar-SY", true), {
     englishName: "Arabic (Syria)",
     nativeName: "العربية (سوريا)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "ليس برقم",
+        nanSymbol: "ليس برقم",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-لا نهاية",

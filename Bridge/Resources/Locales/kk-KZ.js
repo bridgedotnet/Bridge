@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("kk-KZ", true), {
+Bridge.merge(new System.Globalization.CultureInfo("kk-KZ", true), {
     englishName: "Kazakh (Kazakhstan)",
     nativeName: "Қазақ (Қазақстан)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

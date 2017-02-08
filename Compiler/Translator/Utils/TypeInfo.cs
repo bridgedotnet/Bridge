@@ -269,7 +269,7 @@ namespace Bridge.Translator
             set;
         }
 
-        public string Module
+        public Module Module
         {
             get;
             set;
@@ -300,6 +300,12 @@ namespace Bridge.Translator
         }
 
         public IType Type
+        {
+            get;
+            set;
+        }
+
+        public string JsName
         {
             get;
             set;

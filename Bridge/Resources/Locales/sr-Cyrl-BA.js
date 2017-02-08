@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sr-Cyrl-BA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sr-Cyrl-BA", true), {
     englishName: "Serbian (Cyrillic, Bosnia and Herzegovina)",
     nativeName: "српски (Босна и Херцеговина)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "није број",
+        nanSymbol: "није број",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-бесконачност",

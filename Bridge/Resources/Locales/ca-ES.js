@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ca-ES", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ca-ES", true), {
     englishName: "Catalan (Catalan)",
     nativeName: "Català (Català)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinit",

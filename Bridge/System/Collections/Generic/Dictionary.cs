@@ -3,7 +3,7 @@ using Bridge;
 namespace System.Collections.Generic
 {
     [External]
-    public class Dictionary<TKey, TValue> : IDictionary<TKey, TValue>, IBridgeClass
+    public class Dictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary, IBridgeClass
     {
         public extern Dictionary();
 
@@ -34,7 +34,7 @@ namespace System.Collections.Generic
             get;
         }
 
-        public extern new ICollection<TKey> Keys
+        new public extern ICollection<TKey> Keys
         {
             get;
         }
@@ -62,7 +62,7 @@ namespace System.Collections.Generic
         private extern TValue Items(TKey key);
 
         public extern void Clear();
-
+        
         public extern bool ContainsKey(TKey key);
 
         public extern bool ContainsValue(TValue value);
@@ -74,5 +74,45 @@ namespace System.Collections.Generic
         public extern bool Remove(TKey key);
 
         public extern bool TryGetValue(TKey key, out TValue value);
+
+        public extern bool IsReadOnly
+        {
+            get;
+        }
+
+        extern void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item);
+
+        extern void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex);
+
+        extern bool ICollection<KeyValuePair<TKey, TValue>>.Contains(KeyValuePair<TKey, TValue> item);
+
+        extern bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item);
+
+        extern void ICollection.CopyTo(Array array, int arrayIndex);
+
+        [AccessorsIndexer]
+        extern object IDictionary.this[object key]
+        {
+            [Name("get")]
+            get;
+            [Name("set")]
+            set;
+        }
+
+        extern ICollection IDictionary.Values
+        {
+            get;
+        }
+
+        extern bool IDictionary.ContainsKey(object key);
+
+        extern void IDictionary.Add(object key, object value);
+
+        extern bool IDictionary.Remove(object key);
+
+        extern ICollection IDictionary.Keys
+        {
+            get;
+        }
     }
 }

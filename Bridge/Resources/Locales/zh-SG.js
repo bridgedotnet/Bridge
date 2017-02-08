@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("zh-SG", true), {
+Bridge.merge(new System.Globalization.CultureInfo("zh-SG", true), {
     englishName: "Chinese (Simplified, Singapore)",
     nativeName: "中文(新加坡)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("be-BY", true), {
+Bridge.merge(new System.Globalization.CultureInfo("be-BY", true), {
     englishName: "Belarusian (Belarus)",
     nativeName: "Беларуская (Беларусь)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

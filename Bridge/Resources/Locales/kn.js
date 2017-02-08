@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("kn", true), {
+Bridge.merge(new System.Globalization.CultureInfo("kn", true), {
     englishName: "Kannada",
     nativeName: "ಕನ್ನಡ",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

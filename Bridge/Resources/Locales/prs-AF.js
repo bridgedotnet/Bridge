@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("prs-AF", true), {
+Bridge.merge(new System.Globalization.CultureInfo("prs-AF", true), {
     englishName: "Dari (Afghanistan)",
     nativeName: "درى (افغانستان)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "غ ع",
+        nanSymbol: "غ ع",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

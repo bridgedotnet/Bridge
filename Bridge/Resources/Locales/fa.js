@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("fa", true), {
+Bridge.merge(new System.Globalization.CultureInfo("fa", true), {
     englishName: "Persian",
     nativeName: "فارسى",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "مبهم",
+        nanSymbol: "مبهم",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "منهای بی نهایت",

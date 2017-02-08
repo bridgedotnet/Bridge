@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ro-MD", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ro-MD", true), {
     englishName: "Romanian (Moldova)",
     nativeName: "română (Republica Moldova)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

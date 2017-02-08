@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("tk-TM", true), {
+Bridge.merge(new System.Globalization.CultureInfo("tk-TM", true), {
     englishName: "Turkmen (Turkmenistan)",
     nativeName: "Türkmen dili (Türkmenistan)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-tükeniksizlik",

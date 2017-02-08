@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("az-Cyrl", true), {
+Bridge.merge(new System.Globalization.CultureInfo("az-Cyrl", true), {
     englishName: "Azerbaijani (Cyrillic)",
     nativeName: "Азәрбајҹан дили",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",
@@ -15,7 +15,7 @@
         percentGroupSeparator: " ",
         percentPositivePattern: 1,
         percentNegativePattern: 1,
-        currencySymbol: "ман.",
+        currencySymbol: "₼",
         currencyGroupSizes: [3],
         currencyDecimalDigits: 2,
         currencyDecimalSeparator: ",",

@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("nl-NL", true), {
+Bridge.merge(new System.Globalization.CultureInfo("nl-NL", true), {
     englishName: "Dutch (Netherlands)",
     nativeName: "Nederlands (Nederland)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

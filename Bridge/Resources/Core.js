@@ -15,6 +15,84 @@
             return name2;
         },
 
+        box: function (v, T, toStr, hashCode) {
+            if (v && v.$boxed) {
+                return v;
+            }
+
+            if (v == null) {
+                return v;
+            }
+
+            return {
+                $boxed: true,
+                fn: {
+                    toString: toStr,
+                    getHashCode: hashCode
+                },
+                v: v,
+                type: T,
+                constructor: T,
+                getHashCode: function() {
+                    return this.fn.getHashCode ? this.fn.getHashCode(this.v) : Bridge.getHashCode(this.v);
+                },
+                equals: function (o) {
+                    var eq = this.equals;
+                    this.equals = null;
+                    var r = Bridge.equals(this.v, o);
+                    this.equals = eq;
+                    return r;
+                },
+                valueOf: function() {
+                    return this.v;
+                },
+                toString: function () {
+                    return this.fn.toString ? this.fn.toString(this.v) : this.v.toString();
+                }
+            };
+        },
+
+        unbox: function (o) {
+            if (o && o.$boxed) {
+                return o.v;
+            }
+
+            if (Bridge.isArray(o)) {
+                var arr = [];
+                for (var i = 0; i < o.length; i++) {
+                    var item = o[i];
+                    arr[i] = (item && item.$boxed) ? item.v : item;
+                }
+                o = arr;
+            }
+
+            return o;
+        },
+
+        getInterface: function (name) {
+            var type = Bridge.unroll(name);
+
+            if (!type) {
+                type = Bridge.definei(name);
+            }
+
+            return type;
+        },
+
+        safe: function (fn) {
+            try {
+                return fn();
+            } catch (ex) {
+            }
+
+            return false;
+        },
+
+        literal: function (type, obj) {
+            obj.$getType = function () { return type };
+            return obj;
+        },
+
         isPlainObject: function (obj) {
             if (typeof obj == 'object' && obj !== null) {
                 if (typeof Object.getPrototypeOf == 'function') {
@@ -83,39 +161,77 @@
         },
 
         property: function (scope, name, v, statics) {
+            var getName,
+                setName,
+                cfg = null;
+
+            if (v && Bridge.isDefined(v.value) && (v.setter || v.getter)) {
+                getName = v.getter;
+                setName = v.setter;
+                cfg = v;
+                v = v.value;
+            }
+
             scope[name] = v;
 
             var rs = name.charAt(0) === "$",
                 cap = rs ? name.slice(1) : name,
-                getName = "get" + cap,
-                setName = "set" + cap,
                 lastSep = name.lastIndexOf("$"),
                 endsNum = lastSep > 0 && ((name.length - lastSep - 1) > 0) && !isNaN(parseInt(name.substr(lastSep + 1)));
+
+            if (!cfg || !cfg.getter) {
+                getName = "get" + cap;
+            }
+
+            if (!cfg || !cfg.setter) {
+                setName = "set" + cap;
+            }
 
             if (endsNum) {
                 lastSep = name.substring(0, lastSep - 1).lastIndexOf("$");
             }
 
             if (lastSep > 0 && lastSep !== (name.length - 1)) {
-                getName = name.substring(0, lastSep) + "get" + name.substr(lastSep + 1);
-                setName = name.substring(0, lastSep) + "set" + name.substr(lastSep + 1);
+                if (!cfg || !cfg.getter) {
+                    getName = name.substring(0, lastSep) + "get" + name.substr(lastSep + 1);
+                }
+
+                if (!cfg || !cfg.setter) {
+                    setName = name.substring(0, lastSep) + "set" + name.substr(lastSep + 1);
+                }
             }
 
-            scope[getName] = (function (name, scope, statics) {
-                return statics ? function () {
-                    return scope[name];
-                } : function () {
-                    return this[name];
-                };
-            })(name, scope, statics);
+            if (getName === setName) {
+                scope[getName] = (function (name, scope, statics) {
+                    return statics ? function (value) {
+                        if (arguments.length === 0) {
+                            return scope[name];
+                        }
+                        scope[name] = value;
+                    } : function (value) {
+                        if (arguments.length === 0) {
+                            return this[name];
+                        }
+                        this[name] = value;
+                    };
+                })(name, scope, statics);
+            } else {
+                scope[getName] = (function (name, scope, statics) {
+                    return statics ? function () {
+                        return scope[name];
+                    } : function () {
+                        return this[name];
+                    };
+                })(name, scope, statics);
 
-            scope[setName] = (function (name, scope, statics) {
-                return statics ? function (value) {
-                    scope[name] = value;
-                } : function (value) {
-                    this[name] = value;
-                };
-            })(name, scope, statics);
+                scope[setName] = (function (name, scope, statics) {
+                    return statics ? function (value) {
+                        scope[name] = value;
+                    } : function (value) {
+                        this[name] = value;
+                    };
+                })(name, scope, statics);
+            }
         },
 
         event: function (scope, name, v, statics) {
@@ -179,17 +295,19 @@
                 return 0;
             }
 
-            if (typeof (type.getDefaultValue) === 'function') {
+            if (typeof (type.createInstance) === 'function') {
+                return type.createInstance();
+            } else if (typeof (type.getDefaultValue) === 'function') {
                 return type.getDefaultValue();
-            } else if (type === Boolean) {
+            } else if (type === Boolean || type === System.Boolean) {
                 return false;
-            } else if (type === Date) {
+            } else if (type === Date || type === System.DateTime) {
                 return new Date(-62135596800000);
             } else if (type === Number) {
                 return 0;
-            } else if (type === String) {
+            } else if (type === String || type === System.String) {
                 return '';
-            } else if (type && type.prototype && type.prototype.$literal) {
+            } else if (type && type.$literal) {
                 return type.ctor();
             } else if (args && args.length > 0) {
                 return Bridge.Reflection.applyConstructor(type, args);
@@ -343,6 +461,12 @@
             //     for value types it returns deterministic values (f.e. for int 3 it returns 3)
             //     for reference types it returns random value
 
+            if (value && value.$boxed && value.type.getHashCode) {
+                return value.type.getHashCode(Bridge.unbox(value));
+            }
+
+            value = Bridge.unbox(value);
+
             if (Bridge.isEmpty(value, true)) {
                 if (safe) {
                     return 0;
@@ -427,11 +551,13 @@
         },
 
         getDefaultValue: function (type) {
-            if ((type.getDefaultValue) && type.getDefaultValue.length === 0) {
+            if (type == null) {
+                throw new System.ArgumentNullException("type");
+            } else if ((type.getDefaultValue) && type.getDefaultValue.length === 0) {
                 return type.getDefaultValue();
-            } else if (type === Boolean) {
+            } else if (type === Boolean || type === System.Boolean) {
                 return false;
-            } else if (type === Date) {
+            } else if (type === Date || type === System.DateTime) {
                 return new Date(-62135596800000);
             } else if (type === Number) {
                 return 0;
@@ -451,7 +577,7 @@
         },
 
         hasValue: function (obj) {
-            return obj != null;
+            return Bridge.unbox(obj) != null;
         },
 
         hasValue$1: function () {
@@ -462,7 +588,7 @@
             var i = 0;
 
             for (i; i < arguments.length; i++) {
-                if (arguments[i] == null) {
+                if (Bridge.unbox(arguments[i]) == null) {
                     return false;
                 }
             }
@@ -470,9 +596,36 @@
             return true;
         },
 
+        isObject: function(type) {
+            return type === Object || type === System.Object;
+        },
+
         is: function (obj, type, ignoreFn, allowNull) {
             if (obj == null) {
                 return !!allowNull;
+            }
+
+            if (type === System.Object) {
+                type = Object;
+            }
+
+            if (obj.$boxed) {
+                if (obj.type.$kind === "enum" && (obj.type.prototype.$utype === type || type === System.Enum || type === System.IFormattable || type === System.IComparable)) {
+                    return true;
+                }
+                else if (type.$kind !== "interface" && !type.$nullable) {
+                    return obj.type === type || Bridge.isObject(type);
+                }
+
+                if (ignoreFn !== true && type.$is) {
+                    return type.$is(Bridge.unbox(obj));
+                }
+
+                if (Bridge.Reflection.isAssignableFrom(type, obj.type)) {
+                    return true;
+                }
+
+                obj = Bridge.unbox(obj);
             }
 
             var ctor = obj.constructor;
@@ -497,21 +650,23 @@
                     if (Bridge.isArray(obj, ctor)) {
                         return System.Array.is(obj, type);
                     }
-
-                    if (ctor === String) {
-                        return System.String.is(obj, type);
-                    }
                 }
 
                 if (ignoreFn !== true && type.$is) {
                     return type.$is(obj);
                 }
 
-                return false;
-            }
+                if (type.$literal) {
+                    if (Bridge.isPlainObject(obj)) {
+                        if (obj.$getType) {
+                            return Bridge.Reflection.isAssignableFrom(type, obj.$getType());
+                        }
 
-            if (type && type.prototype && type.prototype.$literal && Bridge.isPlainObject(obj)) {
-                return true;
+                        return true;
+                    }
+                }
+
+                return false;
             }
 
             var tt = typeof type;
@@ -546,7 +701,10 @@
         },
 
         as: function (obj, type, allowNull) {
-            return Bridge.is(obj, type, false, allowNull) ? obj : null;
+            if (Bridge.is(obj, type, false, allowNull)) {
+                return obj.$boxed && type !== Object && type !== System.Object ? obj.v : obj;
+            }
+            return null;
         },
 
         cast: function (obj, type, allowNull) {
@@ -558,6 +716,10 @@
 
             if (result === null) {
                 throw new System.InvalidCastException("Unable to cast type " + (obj ? Bridge.getTypeName(obj) : "'null'") + " to type " + Bridge.getTypeName(type));
+            }
+
+            if (obj.$boxed && type !== Object && type !== System.Object) {
+                return obj.v;
             }
 
             return result;
@@ -581,6 +743,10 @@
         },
 
         merge: function (to, from, callback, elemFactory) {
+            if (to == null) {
+                return from;
+            }
+
             // Maps instance of plain JS value or Object into Bridge object.
             // Used for deserialization. Proper deserialization requires reflection that is currently not supported in Bridge.
             // It currently is only capable to deserialize:
@@ -647,14 +813,42 @@
                             to[key](value);
                         }
                     } else {
-                        var setter = "set" + key.charAt(0).toUpperCase() + key.slice(1);
+                        var setter1 = "set" + key.charAt(0).toUpperCase() + key.slice(1),
+                            setter2 = "set" + key,
+                            getter;
 
-                        if (typeof to[setter] === "function" && typeof value !== "function") {
-                            to[setter](value);
+                        if (typeof to[setter1] === "function" && typeof value !== "function") {
+                            getter = "g" + setter1.slice(1);
+                            if (typeof to[getter] === "function") {
+                                to[setter1](Bridge.merge(to[getter](), value));
+                            } else {
+                                to[setter1](value);
+                            }
+                        } else if (typeof to[setter2] === "function" && typeof value !== "function") {
+                            getter = "g" + setter2.slice(1);
+                            if (typeof to[getter] === "function") {
+                                to[setter2](Bridge.merge(to[getter](), value));
+                            } else {
+                                to[setter2](value);
+                            }
                         } else if (value && value.constructor === Object && to[key]) {
                             toValue = to[key];
                             Bridge.merge(toValue, value);
                         } else {
+                            var isNumber = Bridge.isNumber(from);
+
+                            if (to[key] instanceof System.Decimal && isNumber) {
+                                return new System.Decimal(from);
+                            }
+
+                            if (to[key] instanceof System.Int64 && isNumber) {
+                                return new System.Int64(from);
+                            }
+
+                            if (to[key] instanceof System.UInt64 && isNumber) {
+                                return new System.UInt64(from);
+                            }
+
                             to[key] = value;
                         }
                     }
@@ -752,7 +946,7 @@
         },
 
         toList: function (ienumerable, T) {
-            return new (System.Collections.Generic.List$1(T || Object))(ienumerable);
+            return new (System.Collections.Generic.List$1(T || System.Object))(ienumerable);
         },
 
         arrayTypes: [globals.Array, globals.Uint8Array, globals.Int8Array, globals.Int16Array, globals.Uint16Array, globals.Int32Array, globals.Uint32Array, globals.Float32Array, globals.Float64Array, globals.Uint8ClampedArray],
@@ -764,7 +958,7 @@
                 return false;
             }
 
-            return Bridge.arrayTypes.indexOf(c) >= 0;
+            return Bridge.arrayTypes.indexOf(c) >= 0 || c.$isArray;
         },
 
         isFunction: function (obj) {
@@ -822,6 +1016,14 @@
         equals: function (a, b) {
             if (a == null && b == null) {
                 return true;
+            }
+
+            if (a && a.$boxed && a.type.equals && a.type.equals.length === 2) {
+                return a.type.equals(a, b);
+            }
+
+            if (b && b.$boxed && b.type.equals && b.type.equals.length === 2) {
+                return b.type.equals(b, a);
             }
 
             if (a && Bridge.isFunction(a.equals) && a.equals.length === 1) {
@@ -916,6 +1118,14 @@
         },
 
         compare: function (a, b, safe, T) {
+            if (a && a.$boxed) {
+                a = Bridge.unbox(a);
+            }
+
+            if (b && b.$boxed) {
+                b = Bridge.unbox(b);
+            }
+
             if (!Bridge.isDefined(a, true)) {
                 if (safe) {
                     return 0;
@@ -966,6 +1176,14 @@
         },
 
         equalsT: function (a, b, T) {
+            if (a && a.$boxed && a.type.equalsT && a.type.equalsT.length === 2) {
+                return a.type.equalsT(a, b);
+            }
+
+            if (b && b.$boxed && b.type.equalsT && b.type.equalsT.length === 2) {
+                return b.type.equalsT(b, a);
+            }
+
             if (!Bridge.isDefined(a, true)) {
                 throw new System.NullReferenceException();
             } else if (Bridge.isNumber(a) || Bridge.isString(a) || Bridge.isBoolean(a)) {
@@ -988,10 +1206,20 @@
         },
 
         format: function (obj, formatString, provider) {
+            if (obj && obj.$boxed) {
+                if (obj.type.$kind === "enum") {
+                    return System.Enum.format(obj.type, obj.v, formatString);
+                } else if (obj.type === System.Char) {
+                    return System.Char.format(Bridge.unbox(obj), formatString, provider);
+                } else if (obj.type.format) {
+                    return obj.type.format(Bridge.unbox(obj), formatString, provider);
+                }
+            }
+
             if (Bridge.isNumber(obj)) {
                 return Bridge.Int.format(obj, formatString, provider);
             } else if (Bridge.isDate(obj)) {
-                return Bridge.Date.format(obj, formatString, provider);
+                return System.DateTime.format(obj, formatString, provider);
             }
 
             var name;
@@ -1003,9 +1231,18 @@
             return obj.format(formatString, provider);
         },
 
-        getType: function (instance) {
+        getType: function (instance, T) {
+            if (instance && instance.$boxed) {
+                return instance.type;
+            }
+
             if (instance == null) {
                 throw new System.NullReferenceException("instance is null");
+            }
+
+            if (T) {
+                var type = Bridge.getType(instance);
+                return Bridge.Reflection.isAssignableFrom(T, type) ? type : T;
             }
 
             if (typeof (instance) === "number") {
@@ -1016,11 +1253,38 @@
                 }
             }
 
-            try {
-                return instance.constructor;
-            } catch (ex) {
-                return Object;
+            if (instance.$type) {
+                return instance.$type;
             }
+
+            if (instance.$getType) {
+                return instance.$getType();
+            }
+
+            var result = null;
+            try {
+                result = instance.constructor;
+            } catch (ex) {
+                result = Object;
+            }
+
+            if (result === Boolean) {
+                return System.Boolean;
+            }
+
+            if (result === String) {
+                return System.String;
+            }
+
+            if (result === Object) {
+                return System.Object;
+            }
+
+            if (result === Date) {
+                return System.DateTime;
+            }
+
+            return result;
         },
 
         isLower: function (c) {
@@ -1149,12 +1413,16 @@
                 }
             },
 
-            bind: function (obj, method, args, appendArgs) {
+            cacheBind: function (obj, method, args, appendArgs) {
+                return Bridge.fn.bind(obj, method, args, appendArgs, true);
+            },
+
+            bind: function (obj, method, args, appendArgs, cache) {
                 if (method && method.$method === method && method.$scope === obj) {
                     return method;
                 }
 
-                if (obj && obj.$$bind) {
+                if (obj && cache && obj.$$bind) {
                     for (var i = 0; i < obj.$$bind.length; i++) {
                         if (obj.$$bind[i].$method === method) {
                             return obj.$$bind[i];
@@ -1168,9 +1436,12 @@
                     fn = Bridge.fn.makeFn(function () {
                         Bridge.caller.unshift(this);
 
-                        var result = method.apply(obj, arguments);
-
-                        Bridge.caller.shift(this);
+                        var result = null;
+                        try {
+                            result = method.apply(obj, arguments);
+                        } finally {
+                            Bridge.caller.shift(this);
+                        }
 
                         return result;
                     }, method.length);
@@ -1194,15 +1465,18 @@
                         }
                         Bridge.caller.unshift(this);
 
-                        var result = method.apply(obj, callArgs);
-
-                        Bridge.caller.shift(this);
+                        var result = null;
+                        try {
+                            result = method.apply(obj, callArgs);
+                        } finally {
+                            Bridge.caller.shift(this);
+                        }
 
                         return result;
                     }, method.length);
                 }
 
-                if (obj) {
+                if (obj && cache) {
                     obj.$$bind = obj.$$bind || [];
                     obj.$$bind.push(fn);
                 }
@@ -1222,9 +1496,12 @@
 
                     Bridge.caller.unshift(this);
 
-                    var result = method.apply(obj, callArgs);
-
-                    Bridge.caller.shift(this);
+                    var result = null;
+                    try {
+                        result = method.apply(obj, callArgs);
+                    } finally {
+                        Bridge.caller.shift(this);
+                    }
 
                     return result;
                 }, method.length);
@@ -1334,6 +1611,46 @@
             var m = t.$getMetadata ? t.$getMetadata() : t.$metadata;
 
             return m;
+        },
+
+        loadModule: function (config, callback) {
+            var amd = config.amd,
+                cjs = config.cjs,
+                fnName = config.fn;
+
+            var tcs = new System.Threading.Tasks.TaskCompletionSource(),
+                fn = Bridge.global[fnName || "require"];
+
+            if (amd && amd.length > 0) {
+                fn(amd, function() {
+                    var loads = Array.prototype.slice.call(arguments, 0);
+                    if (cjs && cjs.length > 0) {
+                        for (var i = 0; i < cjs.length; i++) {
+                            loads.push(fn(cjs[i]));
+                        }
+                    }
+
+                    callback.apply(Bridge.global, loads);
+                    tcs.setResult();
+                });
+            } else if (cjs && cjs.length > 0) {
+                var t = new System.Threading.Tasks.Task();
+                t.status = System.Threading.Tasks.TaskStatus.ranToCompletion;
+
+                var loads = [];
+                for (var j = 0; j < cjs.length; j++) {
+                    loads.push(fn(cjs[j]));
+                }
+
+                callback.apply(Bridge.global, loads);
+                return t;
+            } else {
+                var t = new System.Threading.Tasks.Task();
+                t.status = System.Threading.Tasks.TaskStatus.ranToCompletion;
+                return t;
+            }
+
+            return tcs.task;
         }
     };
 

@@ -41,6 +41,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BridgeIssues\N783.cs" />
+    <Compile Include="Issues\N2262.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestClassB.cs" />
     <Compile Include="TestClassA.cs" />
@@ -67,7 +68,7 @@
   <PropertyGroup Condition="$(UseBridgeTask) != true">
     <PostBuildEvent Condition="$(OS) != Unix">"$(ProjectDir)..\..\..\Builder\$(OutDir)Bridge.Builder.exe" -p "$(ProjectPath)" -b "$(ProjectDir)$(OutDir)Bridge.dll" -cfg "$(Configuration)"</PostBuildEvent>
     <PostBuildEvent Condition="$(OS) == Unix">mono "$(ProjectDir)../../../Builder/$(OutDir)Bridge.Builder.exe" -p "$(ProjectDir)/$(MSBuildProjectFile)" -b "$(ProjectDir)$(OutDir)Bridge.dll"  -cfg "$(Configuration)"</PostBuildEvent>
-  </PropertyGroup>  
+  </PropertyGroup>
   <UsingTask Condition="$(UseBridgeTask) == true" TaskName="GenerateScript" AssemblyFile="$(ProjectDir)..\..\..\Build\$(OutDir)Bridge.Build.dll" />
   <Target Condition="$(UseBridgeTask) == true" Name="AfterBuild">
     <Message Text="Using Bridge Task" Importance="high" />

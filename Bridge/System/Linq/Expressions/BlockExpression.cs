@@ -4,11 +4,11 @@ using System.Collections.ObjectModel;
 namespace System.Linq.Expressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     [Cast("{this}.ntype === 47")]
     public sealed class BlockExpression : Expression
     {
-        [FieldProperty]
+        [Field]
         public extern ReadOnlyCollection<Expression> Expressions { get; private set; }
 
         public extern ReadOnlyCollection<ParameterExpression> Variables

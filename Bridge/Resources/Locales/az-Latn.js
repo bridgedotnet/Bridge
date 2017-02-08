@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("az-Latn", true), {
+Bridge.merge(new System.Globalization.CultureInfo("az-Latn", true), {
     englishName: "Azerbaijani (Latin)",
     nativeName: "Azərbaycan dili (Azərbaycan)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",
@@ -15,7 +15,7 @@
         percentGroupSeparator: " ",
         percentPositivePattern: 1,
         percentNegativePattern: 1,
-        currencySymbol: "man.",
+        currencySymbol: "₼",
         currencyGroupSizes: [3],
         currencyDecimalDigits: 2,
         currencyDecimalSeparator: ",",

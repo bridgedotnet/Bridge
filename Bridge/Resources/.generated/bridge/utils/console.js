@@ -1,4 +1,4 @@
-﻿    Bridge.define("Bridge.Console", {
+    Bridge.define("Bridge.Console", {
         statics: {
             BODY_WRAPPER_ID: "bridge-body-wrapper",
             CONSOLE_MESSAGES_ID: "bridge-console-messages",
@@ -15,7 +15,7 @@
                 if (messageType === void 0) { messageType = 0; }
                 var self = Bridge.Console.getInstance();
 
-                var v = value != null ? value.toString() : "null";
+                var v = value != null ? value.toString() : "";
 
                 if (self.bufferedOutput != null) {
                     self.bufferedOutput = System.String.concat(self.bufferedOutput, v);
@@ -106,22 +106,22 @@
             if (reinit === void 0) { reinit = false; }
             this.hidden = false;
 
-            var consoleWrapperStyles = Bridge.fn.bind(this, $_.Bridge.Console.f1)(new (System.Collections.Generic.Dictionary$2(String,String))());
+            var consoleWrapperStyles = Bridge.fn.bind(this, $asm.$.Bridge.Console.f1)(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
 
-            var consoleHeaderStyles = $_.Bridge.Console.f2(new (System.Collections.Generic.Dictionary$2(String,String))());
+            var consoleHeaderStyles = $asm.$.Bridge.Console.f2(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
 
-            var consoleBodyStyles = $_.Bridge.Console.f3(new (System.Collections.Generic.Dictionary$2(String,String))());
+            var consoleBodyStyles = $asm.$.Bridge.Console.f3(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
 
             // Bridge Icon
             this.bridgeIcon = this.bridgeIcon || document.createElementNS(this.svgNS, "svg");
 
-            var items = Bridge.fn.bind(this, $_.Bridge.Console.f4)(new (System.Collections.Generic.Dictionary$2(String,String))());
+            var items = Bridge.fn.bind(this, $asm.$.Bridge.Console.f4)(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
 
             this.setAttributes(this.bridgeIcon, items);
 
             this.bridgeIconPath = this.bridgeIconPath || document.createElementNS(this.svgNS, "path");
 
-            var items2 = new (System.Collections.Generic.Dictionary$2(String,String))();
+            var items2 = new (System.Collections.Generic.Dictionary$2(System.String,System.String))();
             items2.set("d", "M19 14.4h2.2V9.6L19 7.1v7.3zm4.3-2.5v2.5h2.2l-2.2-2.5zm-8.5 2.5H17V4.8l-2.2-2.5v12.1zM0 14.4h3l7.5-8.5v8.5h2.2V0L0 14.4z");
             items2.set("fill", "#555");
 
@@ -137,13 +137,13 @@
 
             this.closeIcon = this.closeIcon || document.createElementNS(this.svgNS, "svg");
 
-            var items3 = Bridge.fn.bind(this, $_.Bridge.Console.f5)(new (System.Collections.Generic.Dictionary$2(String,String))());
+            var items3 = Bridge.fn.bind(this, $asm.$.Bridge.Console.f5)(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
 
             this.setAttributes(this.closeIcon, items3);
 
             this.closeIconPath = this.closeIconPath || document.createElementNS(this.svgNS, "path");
 
-            var items4 = $_.Bridge.Console.f6(new (System.Collections.Generic.Dictionary$2(String,String))());
+            var items4 = $asm.$.Bridge.Console.f6(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
 
             this.setAttributes(this.closeIconPath, items4);
 
@@ -213,15 +213,15 @@
                 document.body.appendChild(this.consoleWrapper);
 
                 // Close console
-                this.closeBtn.addEventListener("click", Bridge.fn.bind(this, this.close));
+                this.closeBtn.addEventListener("click", Bridge.fn.cacheBind(this, this.close));
 
                 // Show/hide Tooltip
-                this.closeBtn.addEventListener("mouseover", Bridge.fn.bind(this, this.showTooltip));
-                this.closeBtn.addEventListener("mouseout", Bridge.fn.bind(this, this.hideTooltip));
+                this.closeBtn.addEventListener("mouseover", Bridge.fn.cacheBind(this, this.showTooltip));
+                this.closeBtn.addEventListener("mouseout", Bridge.fn.cacheBind(this, this.hideTooltip));
 
                 this.consoleDefined = Bridge.isDefined(Bridge.global) && Bridge.isDefined(Bridge.global.console);
-                this.consoleDebugDefined = this.consoleDefined && Bridge.isDefined(Bridge.global.console.debug);
-                this.operaPostErrorDefined = Bridge.isDefined(Bridge.global.opera) && Bridge.isDefined(Bridge.global.opera.postError);
+                this.consoleDebugDefined = this.consoleDefined && Bridge.isDefined(Bridge.unbox(Bridge.global.console.debug));
+                this.operaPostErrorDefined = Bridge.isDefined(Bridge.global.opera) && Bridge.isDefined(Bridge.unbox(Bridge.global.opera.postError));
             }
         },
         showTooltip: function () {
@@ -293,7 +293,7 @@
 
             var messageIcon = document.createElementNS(this.svgNS, "svg");
 
-            var items5 = Bridge.fn.bind(this, $_.Bridge.Console.f7)(new (System.Collections.Generic.Dictionary$2(String,String))());
+            var items5 = Bridge.fn.bind(this, $asm.$.Bridge.Console.f7)(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
 
             this.setAttributes(messageIcon, items5);
 
@@ -307,7 +307,7 @@
 
             var messageIconPath = document.createElementNS(this.svgNS, "path");
 
-            var items6 = new (System.Collections.Generic.Dictionary$2(String,String))();
+            var items6 = new (System.Collections.Generic.Dictionary$2(System.String,System.String))();
 
             items6.set("d", "M3.8 3.5L.7 6.6s-.1.1-.2.1-.1 0-.2-.1l-.2-.3C0 6.2 0 6.2 0 6.1c0 0 0-.1.1-.1l2.6-2.6L.1.7C0 .7 0 .6 0 .6 0 .5 0 .5.1.4L.4.1c0-.1.1-.1.2-.1s.1 0 .2.1l3.1 3.1s.1.1.1.2-.1.1-.2.1z");
             items6.set("fill", color);
@@ -328,30 +328,38 @@
         setAttributes: function (el, attrs) {
             var $t;
             $t = Bridge.getEnumerator(attrs);
-            while ($t.moveNext()) {
-                var item = $t.getCurrent();
-                el.setAttribute(item.key, item.value);
-            }
-        },
+            try {
+                while ($t.moveNext()) {
+                    var item = $t.getCurrent();
+                    el.setAttribute(item.key, item.value);
+                }
+            }finally {
+                if (Bridge.is($t, System.IDisposable)) {
+                    $t.System$IDisposable$dispose();
+                }
+            }},
         obj2Css: function (obj) {
             var $t;
             var str = "";
 
             $t = Bridge.getEnumerator(obj);
-            while ($t.moveNext()) {
-                var item = $t.getCurrent();
-                str = System.String.concat(str, (System.String.concat(item.key.toLowerCase(), ":", item.value, ";")));
+            try {
+                while ($t.moveNext()) {
+                    var item = $t.getCurrent();
+                    str = System.String.concat(str, (System.String.concat(item.key.toLowerCase(), ":", item.value, ";")));
+                }
+            }finally {
+                if (Bridge.is($t, System.IDisposable)) {
+                    $t.System$IDisposable$dispose();
+                }
             }
-
             return str;
         }
     });
 
-    var $_ = {};
+    Bridge.ns("Bridge.Console", $asm.$);
 
-    Bridge.ns("Bridge.Console", $_);
-
-    Bridge.apply($_.Bridge.Console, {
+    Bridge.apply($asm.$.Bridge.Console, {
         f1: function (_o1) {
             _o1.add("position", "fixed");
             _o1.add("left", "0");

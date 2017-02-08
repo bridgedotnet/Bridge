@@ -5,20 +5,20 @@ using System.Reflection;
 namespace System.Linq.Expressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     [Cast("{this}.ntype === 59")]
     public sealed class SwitchExpression : Expression
     {
-        [FieldProperty]
+        [Field]
         public extern Expression SwitchValue { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern ReadOnlyCollection<SwitchCase> Cases { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern Expression DefaultBody { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern MethodInfo Comparison { get; private set; }
 
         internal extern SwitchExpression();

@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("eu-ES", true), {
+Bridge.merge(new System.Globalization.CultureInfo("eu-ES", true), {
     englishName: "Basque (Basque)",
     nativeName: "euskara (euskara)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "EdZ",
+        nanSymbol: "EdZ",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinitu",

@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ka", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ka", true), {
     englishName: "Georgian",
     nativeName: "ქართული",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "არ არის რიცხვი",
+        nanSymbol: "არ არის რიცხვი",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-უსასრულობა",
@@ -15,7 +15,7 @@
         percentGroupSeparator: " ",
         percentPositivePattern: 0,
         percentNegativePattern: 0,
-        currencySymbol: "ლ.",
+        currencySymbol: "₾",
         currencyGroupSizes: [3],
         currencyDecimalDigits: 2,
         currencyDecimalSeparator: ",",

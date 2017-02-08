@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch4.SimpleTypes
 {
@@ -21,7 +21,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         public void TypePropertiesAreCorrect()
         {
             Assert.True(new object() is object);
-            Assert.AreEqual("Object", typeof(object).FullName);
+            Assert.AreEqual("System.Object", typeof(object).FullName);
             Assert.True(typeof(object).IsClass);
         }
 

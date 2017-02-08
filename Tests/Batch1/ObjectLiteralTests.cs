@@ -1,4 +1,4 @@
-﻿using Bridge.Test;
+﻿using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest
 {
@@ -117,13 +117,14 @@ namespace Bridge.ClientTest
             {
                 public TS() : base(8)
                 {
-
                 }
             }
 
 #pragma warning disable CS0626 // Method, operator, or accessor is marked external and has no attributes on it
+
             [Template("Bridge.isPlainObject({o})")]
             public static extern bool IsPlainObject(object o);
+
 #pragma warning restore CS0626 // Method, operator, or accessor is marked external and has no attributes on it
 
             [Test]
@@ -133,7 +134,7 @@ namespace Bridge.ClientTest
                 var tempFrank = new Config { }.GetTmp(c);
                 Assert.AreEqual("1: Frank", tempFrank, "Check call works");
 
-                var options = new Bridge.ClientTestHelper.External.AjaxOptions { Data = new { Name = c.Temp } };
+                var options = new Bridge.ClientTestHelperExternal.AjaxOptions { Data = new { Name = c.Temp } };
                 Assert.AreEqual("Frank", options.Data["name"], "External referenced default ObjectLiteral works");
 
                 var bs = new BS();
@@ -265,7 +266,6 @@ namespace Bridge.ClientTest
                 public int Val2;
             }
 
-
             [ObjectLiteral(ObjectInitializationMode.DefaultValue)]
             public class Config2
             {
@@ -387,7 +387,6 @@ namespace Bridge.ClientTest
                     this.Val2 = 16;
                 }
             }
-
 
             [Test]
             public void Test()

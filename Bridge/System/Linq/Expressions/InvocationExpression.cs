@@ -4,15 +4,15 @@ using System.Collections.ObjectModel;
 namespace System.Linq.Expressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     [Cast("{this}.ntype === 17")]
     public sealed class InvocationExpression : Expression
     {
-        [FieldProperty]
+        [Field]
         public extern Expression Expression { get; private set; }
 
         [Name("args")]
-        [FieldProperty]
+        [Field]
         public extern ReadOnlyCollection<Expression> Arguments { get; private set; }
 
         internal extern InvocationExpression();

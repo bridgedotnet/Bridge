@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("gd", true), {
+Bridge.merge(new System.Globalization.CultureInfo("gd", true), {
     englishName: "Scottish Gaelic",
     nativeName: "Gàidhlig",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

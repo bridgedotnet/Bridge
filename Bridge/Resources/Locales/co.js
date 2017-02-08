@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("co", true), {
+Bridge.merge(new System.Globalization.CultureInfo("co", true), {
     englishName: "Corsican",
     nativeName: "Corsu",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "Micca numericu",
+        nanSymbol: "Micca numericu",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinitu",

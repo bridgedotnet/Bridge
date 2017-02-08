@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("chr", true), {
+Bridge.merge(new System.Globalization.CultureInfo("chr", true), {
     englishName: "Cherokee",
     nativeName: "ᏣᎳᎩ",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "Nan",
+        nanSymbol: "Nan",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

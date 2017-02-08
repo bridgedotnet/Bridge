@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("en-ZW", true), {
+Bridge.merge(new System.Globalization.CultureInfo("en-ZW", true), {
     englishName: "English (Zimbabwe)",
     nativeName: "English (Zimbabwe)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

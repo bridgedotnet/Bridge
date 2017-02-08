@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("iu-Cans-CA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("iu-Cans-CA", true), {
     englishName: "Inuktitut (Syllabics, Canada)",
     nativeName: "ᐃᓄᒃᑎᑐᑦ (ᑲᓇᑕᒥ)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

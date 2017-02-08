@@ -1,20 +1,10 @@
-### Expected
-
-```js
-Expected result here
-```
-
-### Actual
-
-```js
-Actual result here
-```
+A description of the issue.
 
 ### Steps To Reproduce
 
-[Deck](http://deck.net/REPLACE-WITH-YOUR-DECK-LINK)
+http://deck.net/ <-- Replace with a link to your Deck
 
-```cs
+```c#
 public class Program
 {
     public static void Main()
@@ -22,4 +12,16 @@ public class Program
         // Place code required to reproduce here
     }
 }
+```
+
+### Expected Result
+
+```js
+Expected result here
+```
+
+### Actual Result
+
+```js
+Actual result here
 ```

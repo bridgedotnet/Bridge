@@ -12,7 +12,7 @@ namespace Bridge.Text.RegularExpressions
         {
         }
 
-        [FieldProperty]
+        [Field]
         [Name("lastIndex")]
         public int LastIndex
         {
@@ -25,7 +25,7 @@ namespace Bridge.Text.RegularExpressions
             }
         }
 
-        [FieldProperty]
+        [Field]
         [Name("global")]
         public bool Global
         {
@@ -35,7 +35,7 @@ namespace Bridge.Text.RegularExpressions
             }
         }
 
-        [FieldProperty]
+        [Field]
         [Name("ignoreCase")]
         public bool IgnoreCase
         {
@@ -45,7 +45,7 @@ namespace Bridge.Text.RegularExpressions
             }
         }
 
-        [FieldProperty]
+        [Field]
         [Name("multiline")]
         public bool Multiline
         {
@@ -55,7 +55,7 @@ namespace Bridge.Text.RegularExpressions
             }
         }
 
-        [FieldProperty]
+        [Field]
         [Name("source")]
         public string Pattern
         {
@@ -65,7 +65,7 @@ namespace Bridge.Text.RegularExpressions
             }
         }
 
-        [FieldProperty]
+        [Field]
         [Name("source")]
         public string Source
         {

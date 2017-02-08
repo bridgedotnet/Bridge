@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("uk-UA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("uk-UA", true), {
     englishName: "Ukrainian (Ukraine)",
     nativeName: "українська (Україна)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("prs", true), {
+Bridge.merge(new System.Globalization.CultureInfo("prs", true), {
     englishName: "Dari",
     nativeName: "درى",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "غ ع",
+        nanSymbol: "غ ع",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

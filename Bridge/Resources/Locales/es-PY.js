@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("es-PY", true), {
+Bridge.merge(new System.Globalization.CultureInfo("es-PY", true), {
     englishName: "Spanish (Paraguay)",
     nativeName: "español (Paraguay)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",

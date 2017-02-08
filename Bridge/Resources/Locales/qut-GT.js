@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("qut-GT", true), {
+Bridge.merge(new System.Globalization.CultureInfo("qut-GT", true), {
     englishName: "K'iche' (Guatemala)",
     nativeName: "K'iche' (Guatemala)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",

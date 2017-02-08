@@ -181,7 +181,7 @@ namespace Bridge.Translator
 
             if (similar)
             {
-                s = emitter.ToJavaScript((double)value);
+                s = emitter.ToJavaScript(value);
                 if (CultureInfo.InstalledUICulture.CompareInfo.IndexOf(s, "e", CompareOptions.IgnoreCase) > -1)
                 {
                     s = emitter.ToJavaScript(s);

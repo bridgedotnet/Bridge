@@ -5,18 +5,18 @@ using System.Reflection;
 namespace System.Linq.Expressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     [Cast("{this}.ntype === 55")]
     public sealed class IndexExpression : Expression
     {
         [Name("obj")]
-        [FieldProperty]
+        [Field]
         public extern Expression Object { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern PropertyInfo Indexer { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern ReadOnlyCollection<Expression> Arguments { get; private set; }
 
         internal extern IndexExpression();

@@ -3,11 +3,11 @@ using Bridge;
 namespace System.Linq.Expressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     [Cast("{this}.ntype == 50 && {this}.dtype === 0")]
     public sealed class DynamicMemberExpression : DynamicExpression
     {
-        [FieldProperty]
+        [Field]
         public extern string Member { get; private set; }
 
         internal extern DynamicMemberExpression();

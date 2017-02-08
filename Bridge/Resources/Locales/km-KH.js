@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("km-KH", true), {
+Bridge.merge(new System.Globalization.CultureInfo("km-KH", true), {
     englishName: "Khmer (Cambodia)",
     nativeName: "ភាសាខ្មែរ (កម្ពុជា)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NAN",
+        nanSymbol: "NAN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-- អនន្ត",

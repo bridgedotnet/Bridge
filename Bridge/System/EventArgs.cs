@@ -6,7 +6,7 @@ namespace System
     /// System.EventArgs is the base class for classes containing event data.
     /// </summary>
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     public class EventArgs
     {
         /// <summary>

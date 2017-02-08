@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("fr-RE", true), {
+Bridge.merge(new System.Globalization.CultureInfo("fr-RE", true), {
     englishName: "French (Réunion)",
     nativeName: "français (Réunion)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

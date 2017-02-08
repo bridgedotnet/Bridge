@@ -2,6 +2,7 @@ using Bridge.Contract;
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.TypeSystem;
 using System.Linq;
+using ICSharpCode.NRefactory.CSharp.Analysis;
 
 namespace Bridge.Translator
 {
@@ -271,7 +272,6 @@ namespace Bridge.Translator
             if (this.IsMethodBlock && YieldBlock.HasYield(this.BlockStatement))
             {
                 this.IsYield = true;
-                YieldBlock.EmitYield(this, this.ReturnType);
             }
 
             if (this.IsMethodBlock)
@@ -286,16 +286,21 @@ namespace Bridge.Translator
                 this.Emitter.BeforeBlock = null;
             }
 
-            this.BlockStatement.Children.ToList().ForEach(child => child.AcceptVisitor(this.Emitter));
+            var ra = ReachabilityAnalysis.Create(this.BlockStatement, this.Emitter.Resolver.Resolver);
+            this.BlockStatement.Children.ToList().ForEach(child =>
+            {
+                var statement = child as Statement;
+                if (statement != null && !ra.IsReachable(statement))
+                {
+                    return;
+                }
+
+                child.AcceptVisitor(this.Emitter);
+            });
         }
 
         public void EndEmitBlock()
         {
-            if (this.IsYield)
-            {
-                YieldBlock.EmitYieldReturn(this, this.ReturnType);
-            }
-
             if (this.IsMethodBlock)
             {
                 this.Emitter.ReturnType = this.OldReturnType;

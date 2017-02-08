@@ -1,4 +1,4 @@
-﻿    Bridge.define("TestIssue1035.StructBridge1035", {
+    Bridge.define("TestIssue1035.StructBridge1035", {
         $kind: "struct",
         statics: {
             getDefaultValue: function () { return new TestIssue1035.StructBridge1035(); }

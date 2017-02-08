@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ne-IN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ne-IN", true), {
     englishName: "Nepali (India)",
     nativeName: "नेपाली (भारत)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

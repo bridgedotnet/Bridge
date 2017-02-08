@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("nso", true), {
+Bridge.merge(new System.Globalization.CultureInfo("nso", true), {
     englishName: "Sesotho sa Leboa",
     nativeName: "Sesotho sa Leboa",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

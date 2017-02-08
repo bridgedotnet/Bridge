@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("uz-Latn-UZ", true), {
+Bridge.merge(new System.Globalization.CultureInfo("uz-Latn-UZ", true), {
     englishName: "Uzbek (Latin, Uzbekistan)",
     nativeName: "O'zbekcha (O'zbekiston Respublikasi)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

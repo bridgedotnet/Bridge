@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sd-Arab-PK", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sd-Arab-PK", true), {
     englishName: "Sindhi (Pakistan)",
     nativeName: "سنڌي (پاکستان)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "Infinity-",

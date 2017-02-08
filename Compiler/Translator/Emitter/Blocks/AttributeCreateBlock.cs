@@ -84,7 +84,7 @@ namespace Bridge.Translator
                         this.Write(customCtor);
                     }
 
-                    if (!this.Emitter.Validator.IsIgnoreType(type) && type.Methods.Count(m => m.IsConstructor && !m.IsStatic) > (type.IsValueType ? 0 : 1))
+                    if (!this.Emitter.Validator.IsExternalType(type) && type.Methods.Count(m => m.IsConstructor && !m.IsStatic) > (type.IsValueType ? 0 : 1))
                     {
                         this.WriteDot();
                         var name = OverloadsCollection.Create(this.Emitter, attribute.Constructor).GetOverloadName();
@@ -205,7 +205,7 @@ namespace Bridge.Translator
                     {
                         var enumMode = block.Emitter.Validator.EnumEmitMode(typeDef);
 
-                        if ((block.Emitter.Validator.IsIgnoreType(typeDef) && enumMode == -1) || enumMode == 2)
+                        if ((block.Emitter.Validator.IsExternalType(typeDef) && enumMode == -1) || enumMode == 2)
                         {
                             block.WriteScript(mrr.ConstantValue);
 
@@ -404,16 +404,7 @@ namespace Bridge.Translator
                 var mode = 0;
                 if (attr.Constructor != null)
                 {
-                    if (attr.Constructor.Parameters.Count == 1 &&
-                        attr.Constructor.Parameters.First().Type.FullName == "Bridge.DefaultValueMode")
-                    {
-                        var arg = attr.PositionalArguments.FirstOrDefault();
-                        if (arg != null && arg.ConstantValue != null)
-                        {
-                            mode = (int)arg.ConstantValue;
-                        }
-                    }
-                    else if (itype != null)
+                    if (itype != null)
                     {
                         var oattr = this.Emitter.Validator.GetAttribute(itype.Attributes, Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute");
                         if (oattr.PositionalArguments.Count > 0)

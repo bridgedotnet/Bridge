@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ta-IN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ta-IN", true), {
     englishName: "Tamil (India)",
     nativeName: "தமிழ் (இந்தியா)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

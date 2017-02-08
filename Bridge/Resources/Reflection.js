@@ -26,6 +26,12 @@
                     if (m.s) {
                         m.s.td = type;
                     }
+
+                    if (m.tprm && Bridge.isArray(m.tprm)) {
+                        for (var j = 0; j < m.tprm.length; j++) {
+                            m.tprm[j] = Bridge.Reflection.createTypeParam(m.tprm[j], type);
+                        }
+                    }
                 }
             }
 
@@ -41,19 +47,16 @@
             var metadata = this.$metadata;
 
             if (typeof (metadata) === "function") {
-                if (this.$isGenericTypeDefinition) {
-                    var i,
-                        size = this.$typeArgumentCount,
-                        arr = new Array(size);
-
-                    for (i = 0; i < size; i++) {
-                        arr[i] = Object;
-                    }
-
+                if (this.$isGenericTypeDefinition && !this.$factoryMetadata) {
                     this.$factoryMetadata = this.$metadata;
-                    metadata = this.$metadata.apply(null, arr);
-                } else if (this.$typeArguments) {
+                }
+
+                if (this.$typeArguments) {
                     metadata = this.$metadata.apply(null, this.$typeArguments);
+                } else if (this.$isGenericTypeDefinition) {
+                    var arr = Bridge.Reflection.createTypeParams(this.$metadata);
+                    this.$typeArguments = arr;
+                    metadata = this.$metadata.apply(null, arr);
                 } else {
                     metadata = this.$metadata();
                 }
@@ -64,6 +67,29 @@
             }
 
             return metadata;
+        },
+
+        createTypeParams: function (fn, t) {
+            var args,
+                names = [],
+                fnStr = fn.toString();
+
+            args = fnStr.slice(fnStr.indexOf('(') + 1, fnStr.indexOf(')')).match(/([^\s,]+)/g) || [];
+            for (var i = 0; i < args.length; i++) {
+                names.push(Bridge.Reflection.createTypeParam(args[i], t));
+            }
+
+            return names;
+        },
+
+        createTypeParam: function (name, t) {
+            var fn = function TypeParameter() { };
+            fn.$$name = name;
+            fn.$isTypeParameter = true;
+            if (t) {
+                fn.td = t;
+            }
+            return fn;
         },
 
         load: function (name) {
@@ -87,15 +113,23 @@
         },
 
         getGenericArguments: function (type) {
-            return type.$typeArguments || null;
+            return type.$typeArguments || [];
+        },
+
+        getMethodGenericArguments: function (m) {
+            return m.tprm || [];
         },
 
         isGenericTypeDefinition: function (type) {
             return type.$isGenericTypeDefinition || false;
         },
 
+        isGenericType: function (type) {
+            return type.$genericTypeDefinition != null || Bridge.Reflection.isGenericTypeDefinition(type);
+        },
+
         getBaseType: function (type) {
-            if (type === Object || type.$kind === "interface" || type.prototype == null) {
+            if (Bridge.isObject(type) || type.$kind === "interface" || type.prototype == null) {
                 return null;
             } else if (Object.getPrototypeOf) {
                 return Object.getPrototypeOf(type.prototype).constructor;
@@ -130,15 +164,19 @@
                 return obj.$$name;
             }
 
-            if ((obj).constructor === Function) {
-                str = (obj).toString();
+            if (obj.constructor === Object) {
+                str = obj.toString();
+                var match = (/\[object (.{1,})\]/).exec(str);
+                return (match && match.length > 1) ? match[1] : "Object";
+            } else if (obj.constructor === Function) {
+                str = obj.toString();
             } else {
-                str = (obj).constructor.toString();
+                str = obj.constructor.toString();
             }
 
             var results = (/function (.{1,})\(/).exec(str);
 
-            return (results && results.length > 1) ? results[1] : "Object";
+            return (results && results.length > 1) ? results[1] : "System.Object";
         },
 
         _makeQName: function (name, asm) {
@@ -154,7 +192,7 @@
                 bIndex = fullName.indexOf('['),
                 nsIndex = fullName.lastIndexOf('.', bIndex >= 0 ? bIndex : fullName.length);
 
-            return nsIndex > 0 ? fullName.substr(nsIndex + 1) : fullName;
+            return nsIndex > 0 ? (bIndex >= 0 ? fullName.substring(nsIndex + 1, bIndex) : fullName.substr(nsIndex + 1)) : fullName;
         },
 
         getTypeNamespace: function (type) {
@@ -175,7 +213,7 @@
         },
 
         getTypeAssembly: function (type) {
-            if (System.Array.contains([Date, Number, Boolean, String, Function, Array], type)) {
+            if (System.Array.contains([Date, Number, Boolean, String, Function, Array], type) || type.$isArray) {
                 return Bridge.SystemAssembly;
             } else {
                 return type.$assembly || Bridge.SystemAssembly;
@@ -267,8 +305,9 @@
                 return [System.IComparable$1(Boolean), System.IEquatable$1(Boolean), System.IComparable];
             } else if (type === String) {
                 return [System.IComparable$1(String), System.IEquatable$1(String), System.IComparable, System.ICloneable, System.Collections.IEnumerable, System.Collections.Generic.IEnumerable$1(System.Char)];
-            } else if (type === Array || System.Array._typedArrays[Bridge.getTypeName(type)]) {
-                return [System.Collections.IEnumerable, System.Collections.ICollection, System.ICloneable, System.Collections.Generic.IEnumerable$1(Object), System.Collections.Generic.ICollection$1(Object), System.Collections.Generic.IList$1(Object)];
+            } else if (type === Array || type.$isArray || System.Array._typedArrays[Bridge.getTypeName(type)]) {
+                var t = type.$elementType || System.Object;
+                return [System.Collections.IEnumerable, System.Collections.ICollection, System.ICloneable, System.Collections.IList, System.Collections.Generic.IEnumerable$1(t), System.Collections.Generic.ICollection$1(t), System.Collections.Generic.IList$1(t)];
             } else {
                 return [];
             }
@@ -287,7 +326,7 @@
                 return false;
             }
 
-            if (baseType === type || baseType === Object) {
+            if (baseType === type || Bridge.isObject(baseType)) {
                 return true;
             }
 
@@ -415,6 +454,9 @@
         },
 
         getType: function (typeName, asm) {
+            if (typeName == null) {
+                throw new System.ArgumentNullException("typeName");
+            }
             return typeName ? Bridge.Reflection._getType(typeName, asm) : null;
         },
 
@@ -707,6 +749,27 @@
             } else {
                 return obj[fi.sn];
             }
+        },
+
+        getMetaValue: function (type, name, dv) {
+            var md = type.$isTypeParameter ? type : Bridge.getMetadata(type);
+            return md ? (md[name] || dv) : dv;
+        },
+
+        isArray: function (type) {
+            return Bridge.arrayTypes.indexOf(type) >= 0;
+        },
+
+        hasGenericParameters: function (type) {
+            if (type.$typeArguments) {
+                for (var i = 0; i < type.$typeArguments.length; i++) {
+                    if (type.$typeArguments[i].$isTypeParameter) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
     };
 

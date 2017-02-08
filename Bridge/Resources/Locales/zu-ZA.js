@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("zu-ZA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("zu-ZA", true), {
     englishName: "isiZulu (South Africa)",
     nativeName: "isiZulu (iNingizimu Afrika)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("lt", true), {
+Bridge.merge(new System.Globalization.CultureInfo("lt", true), {
     englishName: "Lithuanian",
     nativeName: "lietuvių",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-begalybė",

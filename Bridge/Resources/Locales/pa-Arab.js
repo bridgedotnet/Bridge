@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("pa-Arab", true), {
+Bridge.merge(new System.Globalization.CultureInfo("pa-Arab", true), {
     englishName: "Punjabi",
     nativeName: "پنجابی",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "Nan",
+        nanSymbol: "Nan",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

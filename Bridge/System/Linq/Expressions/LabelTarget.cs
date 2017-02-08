@@ -3,14 +3,14 @@ using Bridge;
 namespace System.Linq.Expressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class LabelTarget
     {
-        [FieldProperty]
+        [Field]
         [Name("n")]
         public extern string Name { get; }
 
-        [FieldProperty]
+        [Field]
         [Name("t")]
         public extern Type Type { get; }
 

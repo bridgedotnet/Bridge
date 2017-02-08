@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("pt-PT", true), {
+Bridge.merge(new System.Globalization.CultureInfo("pt-PT", true), {
     englishName: "Portuguese (Portugal)",
     nativeName: "português (Portugal)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN (Não numérico)",
+        nanSymbol: "NaN (Não numérico)",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",

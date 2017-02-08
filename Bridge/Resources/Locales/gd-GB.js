@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("gd-GB", true), {
+Bridge.merge(new System.Globalization.CultureInfo("gd-GB", true), {
     englishName: "Scottish Gaelic (United Kingdom)",
     nativeName: "Gàidhlig (An Rìoghachd Aonaichte)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

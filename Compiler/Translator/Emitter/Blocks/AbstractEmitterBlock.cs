@@ -97,7 +97,7 @@ namespace Bridge.Translator
             return true;
         }
 
-        protected Expression[] GetAwaiters(AstNode node)
+        protected AstNode[] GetAwaiters(AstNode node)
         {
             var awaitSearch = new AwaitSearchVisitor();
             node.AcceptVisitor(awaitSearch);
@@ -259,6 +259,26 @@ namespace Bridge.Translator
             });
 
             return insideTryFinally ? ((TryCatchStatement)target).FinallyBlock : null;
+        }
+
+        public void WriteIdentifier(string name)
+        {
+            var isValid = Helpers.IsValidIdentifier(name);
+
+            if (isValid)
+            {
+                this.Write(name);
+            }
+            else
+            {
+                if (this.Emitter.Output[this.Emitter.Output.Length - 1] == '.')
+                {
+                    --this.Emitter.Output.Length;
+                    this.Write("[");
+                    this.WriteScript(name);
+                    this.Write("]");
+                }
+            }
         }
     }
 }

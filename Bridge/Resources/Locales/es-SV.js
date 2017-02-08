@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("es-SV", true), {
+Bridge.merge(new System.Globalization.CultureInfo("es-SV", true), {
     englishName: "Spanish (El Salvador)",
     nativeName: "español (El Salvador)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",

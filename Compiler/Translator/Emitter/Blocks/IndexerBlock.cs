@@ -1,10 +1,8 @@
 using Bridge.Contract;
 using Bridge.Contract.Constants;
-
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
-
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -94,7 +92,7 @@ namespace Bridge.Translator
             if (memberResolveResult != null)
             {
                 var resolvedMember = memberResolveResult.Member;
-                isIgnore = this.Emitter.Validator.IsIgnoreType(resolvedMember.DeclaringTypeDefinition);
+                isIgnore = this.Emitter.Validator.IsExternalType(resolvedMember.DeclaringTypeDefinition);
                 isAccessorsIndexer = this.Emitter.Validator.IsAccessorsIndexer(resolvedMember);
 
                 var property = resolvedMember as IProperty;
@@ -129,11 +127,10 @@ namespace Bridge.Translator
                 this.Write(interfaceTempVar);
             }
 
-            bool nativeImplementation;
-            var externalInterface = this.Emitter.Validator.IsExternalInterface(resolveResult.Member.DeclaringTypeDefinition, out nativeImplementation);
+            var externalInterface = this.Emitter.Validator.IsExternalInterface(resolveResult.Member.DeclaringTypeDefinition);
 
             this.WriteOpenBracket();
-            if (externalInterface && !nativeImplementation)
+            if (externalInterface != null && externalInterface.IsDualImplementation)
             {
                 this.Write(JS.Funcs.BRIDGE_GET_I);
                 this.WriteOpenParentheses();
@@ -173,7 +170,7 @@ namespace Bridge.Translator
 
                 this.Write(")");
             }
-            else if (nativeImplementation)
+            else if (externalInterface == null || externalInterface.IsNativeImplementation)
             {
                 this.Write(OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(false, prefix));
             }
@@ -202,7 +199,7 @@ namespace Bridge.Translator
 
             var inlineAttr = emitter.GetAttribute(method.Attributes, Translator.Bridge_ASSEMBLY + ".TemplateAttribute");
 
-            var ignoreAccessor = emitter.Validator.IsIgnoreType(method);
+            var ignoreAccessor = emitter.Validator.IsExternalType(method);
 
             if (inlineAttr != null)
             {
@@ -318,15 +315,32 @@ namespace Bridge.Translator
             var oldIsAssignment = this.Emitter.IsAssignment;
             var oldUnary = this.Emitter.IsUnaryAccessor;
             var isInterfaceMember = false;
-            bool nativeImplementation;
-            var isExternalInterface = this.Emitter.Validator.IsExternalInterface(memberResolveResult.Member.DeclaringTypeDefinition, out nativeImplementation);
+            bool nativeImplementation = true;
             var hasTypeParemeter = Helpers.IsTypeParameterType(memberResolveResult.Member.DeclaringType);
+            var isExternalInterface = false;
 
-            if (memberResolveResult != null && memberResolveResult.Member.DeclaringTypeDefinition != null &&
-                memberResolveResult.Member.DeclaringTypeDefinition.Kind == TypeKind.Interface &&
-                (isExternalInterface || hasTypeParemeter))
+            if (memberResolveResult.Member.DeclaringTypeDefinition != null &&
+                memberResolveResult.Member.DeclaringTypeDefinition.Kind == TypeKind.Interface)
             {
-                if (hasTypeParemeter || !nativeImplementation)
+                var ei = this.Emitter.Validator.IsExternalInterface(memberResolveResult.Member.DeclaringTypeDefinition);
+
+                if (ei != null)
+                {
+                    nativeImplementation = ei.IsNativeImplementation;
+                    isExternalInterface = true;
+                }
+                else
+                {
+                    nativeImplementation = memberResolveResult.Member.DeclaringTypeDefinition.ParentAssembly.AssemblyName == CS.NS.ROOT ||
+                                           !this.Emitter.Validator.IsExternalType(memberResolveResult.Member.DeclaringTypeDefinition);
+                }
+
+                if (ei != null && ei.IsSimpleImplementation)
+                {
+                    nativeImplementation = false;
+                    isExternalInterface = false;
+                }
+                else if (hasTypeParemeter || ei != null && !nativeImplementation)
                 {
                     isInterfaceMember = true;
                     writeTargetVar = true;
@@ -356,15 +370,18 @@ namespace Bridge.Translator
             bool isField = memberTargetrr != null && memberTargetrr.Member is IField &&
                            (memberTargetrr.TargetResult is ThisResolveResult ||
                             memberTargetrr.TargetResult is LocalResolveResult);
+            bool isSimple = targetrr is ThisResolveResult || targetrr is LocalResolveResult ||
+                            targetrr is ConstantResolveResult || isField;
+            bool needTemp = isExternalInterface && !nativeImplementation && !isSimple;
 
-            if (isInterfaceMember && (!this.Emitter.IsUnaryAccessor || isStatement) && !(targetrr is ThisResolveResult || targetrr is LocalResolveResult || targetrr is ConstantResolveResult || isField))
+            if (isInterfaceMember && (!this.Emitter.IsUnaryAccessor || isStatement) && needTemp)
             {
                 this.WriteOpenParentheses();
             }
 
             if (writeTargetVar)
             {
-                if (!(targetrr is ThisResolveResult || targetrr is LocalResolveResult || targetrr is ConstantResolveResult || isField))
+                if (needTemp)
                 {
                     targetVar = this.GetTempVarName();
                     this.Write(targetVar);

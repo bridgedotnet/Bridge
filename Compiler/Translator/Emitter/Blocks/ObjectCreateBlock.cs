@@ -50,8 +50,9 @@ namespace Bridge.Translator
 
             bool isTypeParam = resolveResult != null && resolveResult.Type.Kind == TypeKind.TypeParameter;
             var invocationResolveResult = this.Emitter.Resolver.ResolveNode(objectCreateExpression, this.Emitter) as InvocationResolveResult;
+            var hasInitializer = !objectCreateExpression.Initializer.IsNull && objectCreateExpression.Initializer.Elements.Count > 0;
 
-            if (isTypeParam && invocationResolveResult != null && invocationResolveResult.Member.Parameters.Count == 0)
+            if (isTypeParam && invocationResolveResult != null && invocationResolveResult.Member.Parameters.Count == 0 && !hasInitializer)
             {
                 this.Write(JS.Funcs.BRIDGE_CREATEINSTANCE);
                 this.WriteOpenParentheses();
@@ -113,7 +114,6 @@ namespace Bridge.Translator
             }
 
             var customCtor = isTypeParam ? "" : (this.Emitter.Validator.GetCustomConstructor(type) ?? "");
-            var hasInitializer = !objectCreateExpression.Initializer.IsNull && objectCreateExpression.Initializer.Elements.Count > 0;
 
             bool isCollectionInitializer = false;
             AstNodeCollection<Expression> elements = null;
@@ -125,7 +125,7 @@ namespace Bridge.Translator
             }
 
             var isPlainObjectCtor = Regex.Match(customCtor, @"\s*\{\s*\}\s*").Success;
-            var isPlainMode = this.Emitter.Validator.GetObjectCreateMode(type) == 0;
+            var isPlainMode = type != null && this.Emitter.Validator.GetObjectCreateMode(type) == 0;
 
             if (inlineCode == null && isPlainObjectCtor && isPlainMode)
             {
@@ -133,9 +133,47 @@ namespace Bridge.Translator
                 this.WriteSpace();
 
                 this.WriteObjectInitializer(objectCreateExpression.Initializer.Elements, type, invocationResolveResult, false);
+
+                this.WriteSpace();
+                this.WriteCloseBrace();
+
+                /*bool close = isObjectLiteral;
+                if (isObjectLiteral)
+                {
+                    if (this.Emitter.Validator.IsExternalType(type))
+                    {
+                        var name = BridgeTypes.ToJsName(objectCreateExpression.Type, this.Emitter);
+
+                        if (name != JS.Types.System.Object.NAME)
+                        {
+                            this.Write(JS.Funcs.BRIDGE_LITERAL + "(" + name + ", ");
+                        }
+                        else
+                        {
+                            close = false;
+                        }
+                    }
+                    else
+                    {
+                        objectCreateExpression.Type.AcceptVisitor(this.Emitter);
+                        this.Write(".");
+                        this.Write(JS.Funcs.CONSTRUCTOR);
+                        this.WriteOpenParentheses();
+                    }
+                }
+
+                this.WriteOpenBrace();
+                this.WriteSpace();
+
+                this.WriteObjectInitializer(objectCreateExpression.Initializer.Elements, type, invocationResolveResult, false);
                 this.WriteSpace();
 
                 this.WriteCloseBrace();
+
+                if (close)
+                {
+                    this.WriteCloseParentheses();
+                }*/
             }
             else
             {
@@ -193,7 +231,7 @@ namespace Bridge.Translator
                         this.Write(customCtor);
                     }
 
-                    if (!isTypeParam && !this.Emitter.Validator.IsIgnoreType(type) && type.Methods.Count(m => m.IsConstructor && !m.IsStatic) > (type.IsValueType || isObjectLiteral ? 0 : 1))
+                    if (!isTypeParam && !this.Emitter.Validator.IsExternalType(type) && type.Methods.Count(m => m.IsConstructor && !m.IsStatic) > (type.IsValueType || isObjectLiteral ? 0 : 1))
                     {
                         this.WriteDot();
                         var name = OverloadsCollection.Create(this.Emitter, ((InvocationResolveResult)this.Emitter.Resolver.ResolveNode(objectCreateExpression, this.Emitter)).Member).GetOverloadName();
@@ -437,8 +475,7 @@ namespace Bridge.Translator
                     var p = rr.Member.Parameters[i < rr.Member.Parameters.Count ? i : (rr.Member.Parameters.Count - 1)];
                     var name = p.Name;
 
-                    if (p.Type.FullName == "Bridge.DefaultValueMode" ||
-                        p.Type.FullName == "Bridge.ObjectInitializationMode" ||
+                    if (p.Type.FullName == "Bridge.ObjectInitializationMode" ||
                         p.Type.FullName == "Bridge.ObjectCreateMode")
                     {
                         continue;
@@ -536,7 +573,7 @@ namespace Bridge.Translator
                                 return prmIndex == rr.Arguments.IndexOf(a);
                             });
 
-                            if (arg != null && arg.ConstantValue != null && (int)arg.ConstantValue == 1)
+                            if (arg != null && arg.ConstantValue != null && arg.ConstantValue is int)
                             {
                                 mode = (int)arg.ConstantValue;
                             }
@@ -576,16 +613,31 @@ namespace Bridge.Translator
                             needComma = true;
 
                             this.Write(name, ": ");
-
                             var primitiveExpr = member.Initializer as PrimitiveExpression;
 
-                            if (primitiveExpr != null && primitiveExpr.Value is AstType)
+                            if (mode == 2 && primitiveExpr == null)
                             {
-                                this.Write(Inspector.GetStructDefaultValue((AstType)primitiveExpr.Value, this.Emitter));
+                                var argType = this.Emitter.Resolver.ResolveNode(member.VarInitializer, this.Emitter).Type;
+                                var defValue = Inspector.GetDefaultFieldValue(argType, null);
+                                if (defValue == argType)
+                                {
+                                    this.Write(Inspector.GetStructDefaultValue(argType, this.Emitter));
+                                }
+                                else
+                                {
+                                    this.Write(defValue);
+                                }
                             }
                             else
                             {
-                                member.Initializer.AcceptVisitor(this.Emitter);
+                                if (primitiveExpr != null && primitiveExpr.Value is AstType)
+                                {
+                                    this.Write(Inspector.GetStructDefaultValue((AstType)primitiveExpr.Value, this.Emitter));
+                                }
+                                else
+                                {
+                                    member.Initializer.AcceptVisitor(this.Emitter);
+                                }
                             }
                         }
                     }

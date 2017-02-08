@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("jv-Latn-ID", true), {
+Bridge.merge(new System.Globalization.CultureInfo("jv-Latn-ID", true), {
     englishName: "Javanese (Indonesia)",
     nativeName: "Basa Jawa (Indonesia)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

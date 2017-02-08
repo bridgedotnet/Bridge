@@ -4,16 +4,16 @@ So, you’ve developed something interesting or fixed a defect and want to have 
 
 ## About Rights
 
-The Bridge.NET project is [licensed](https://github.com/bridgedotnet/Bridge/blob/master/LICENSE) as [Apache v2.0 License](http://www.apache.org/licenses/LICENSE-2.0). If you provide any code to us and your code is added to Bridge.NET, the code you provide will automatically inherit the same Apache License, Version 2.0.
+The [Bridge](https://github.com/bridgedotnet/Bridge) project is [licensed](https://github.com/bridgedotnet/Bridge/blob/master/LICENSE) as [Apache v2.0 License](http://www.apache.org/licenses/LICENSE-2.0). If you provide any code to us and your code is added to the project, the code you provide will automatically inherit the same Apache License, Version 2.0.
 
-Your contribution will be subject to license’s Clause #5.
+Your contribution will be subject to license Clause #5.
 
 > **5. Submission of Contributions.** Unless You explicitly state otherwise, any Contribution intentionally submitted for inclusion in the Work by You to the Licensor shall be under the terms and conditions of this License, without any additional terms or conditions. Notwithstanding the above, nothing herein shall supersede or modify the terms of any separate license agreement you may have executed with Licensor regarding such Contributions.
 
 ## Getting Started
 
 1. Make sure you have a GitHub account
-2. **IMPORTANT:** Start a thread in the Bridge.NET [Community Forums](http://forums.bridge.net) related to your issue
+2. **IMPORTANT** - Start a thread in the Bridge.NET [Community Forums](http://forums.bridge.net) related to your issue
  - Start the conversation regarding this defect or feature
  - Please provide a simplified code sample demonstrating how to reproduce the feature or issue
  - Clearly describe the issue, including steps to reproduce when it is a bug
@@ -30,11 +30,10 @@ You can fork our project from GitHub, develop/merge your feature or bugfix, then
 
 ## Submitting Changes
 
-1. **IMPORTANT:** Please read the [Contributor License Agreement](http://bridge.net/cla/)
-2. **IMPORTANT:** Complete the [Contributor License Agreement Form](http://goo.gl/forms/CvDFLA3EPO)
-3. Push your changes to a branch in your fork of the repository
-4. Submit a pull request to the related Bridge.NET project
-5. Update your forum thread with a link to your Pull Request
+1. Push your changes to a branch in **your fork** of the repository
+1. Submit a pull request to the related Bridge.NET project
+1. Check the Status of the Pull Request for acceptance of the [Contributor License Agreement](https://gist.github.com/geoffreymcgill/0993c60bf570ff6a3ec3121070bac801)
+1. Update your forum thread with a link to your Pull Request
 
 Your Pull Request will be reviewed by the Object.NET team. We will analyze your change and if it fits the coding standards and feature demand, we’ll add it to the main project.
 
@@ -56,15 +55,15 @@ We've also created an [up-for-grabs](https://github.com/bridgedotnet/Bridge/issu
 
 ## Will I Get Paid For Bugs Or Features?
 
-Your reward is sweet karma and that warm fuzzy feeling knowing you’ve helped the Bridge.NET community.
+Your reward is the sweet karma in knowing you’ve helped the community.
 
 If you turn out to be a **bug squashing** and **feature adding** wizard... we would like to get to know you better. There’s always an open seat at Object.NET for a talented engineer.
 
-We are a fully distributed company with [team members](http://object.net/#team) spread across Earth. All positions are Remote.
+We are a fully distributed company with team members spread across Earth. All positions are Remote.
 
 ## Additional Resources
 
-1. [Contributor License Agreement](http://bridge.net/cla)
+1. [Contributor License Agreement](https://gist.github.com/geoffreymcgill/0993c60bf570ff6a3ec3121070bac801)
 2. [Code of Conduct](https://github.com/bridgedotnet/Bridge/blob/master/.github/CODE_OF_CONDUCT.md)
 3. [Issue tracker](https://github.com/bridgedotnet/Bridge/issues)
 4. [Community Forums](http://forums.bridge.net/)

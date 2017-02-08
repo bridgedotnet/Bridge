@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ar-IQ", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ar-IQ", true), {
     englishName: "Arabic (Iraq)",
     nativeName: "العربية (العراق)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "ليس برقم",
+        nanSymbol: "ليس برقم",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-لا نهاية",

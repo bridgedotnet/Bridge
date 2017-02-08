@@ -1,5 +1,5 @@
 using System;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -10,6 +10,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public class Obj
         {
             private object value;
+
             public int length
             {
                 get; set;
@@ -24,7 +25,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 return o == null;
             }
 
-
             static public bool operator true(Obj o)
             {
                 return o != null;
@@ -35,12 +35,12 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 return new Obj() { value = v };
             }
 
-            static public implicit operator bool (Obj v)
+            static public implicit operator bool(Obj v)
             {
                 return v.value.As<bool>();
             }
 
-            static public implicit operator int (Obj v)
+            static public implicit operator int(Obj v)
             {
                 return v.value.As<int>();
             }

@@ -43,6 +43,16 @@ namespace Bridge.Translator
 
         protected bool IgnoreParentheses(Expression expression)
         {
+            if (this.ParenthesizedExpression.Parent is CastExpression)
+            {
+                var conversion = this.Emitter.Resolver.Resolver.GetConversion(this.ParenthesizedExpression);
+
+                if (conversion.IsNumericConversion || conversion.IsEnumerationConversion || conversion.IsIdentityConversion)
+                {
+                    return true;
+                }
+            }
+
             if (expression is CastExpression)
             {
                 var rr = this.Emitter.Resolver.ResolveNode(expression, this.Emitter);

@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("cs", true), {
+Bridge.merge(new System.Globalization.CultureInfo("cs", true), {
     englishName: "Czech",
     nativeName: "čeština",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "Není číslo",
+        nanSymbol: "Není číslo",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-nekonečno",

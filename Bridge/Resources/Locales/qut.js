@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("qut", true), {
+Bridge.merge(new System.Globalization.CultureInfo("qut", true), {
     englishName: "K'iche'",
     nativeName: "K'iche'",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",

@@ -4,14 +4,14 @@ using System.Reflection;
 namespace System.Linq.Expressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     public abstract class MemberBinding
     {
         [Name("btype")]
-        [FieldProperty]
+        [Field]
         public extern MemberBindingType BindingType { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern MemberInfo Member { get; private set; }
 
         internal extern MemberBinding();

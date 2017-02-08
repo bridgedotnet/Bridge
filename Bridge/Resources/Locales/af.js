@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("af", true), {
+Bridge.merge(new System.Globalization.CultureInfo("af", true), {
     englishName: "Afrikaans",
     nativeName: "Afrikaans",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

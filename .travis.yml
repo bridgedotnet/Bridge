@@ -1,4 +1,20 @@
 before_install:
+# Gets commit message
+- "export TRAVIS_COMMIT_MSG=\"$(git log --format=%B --no-merges -n 1)\""
+- echo "$TRAVIS_COMMIT_MSG"
+# Check if commit message contains label [skip travis] and exit if any
+# [skip ci] label is standard for AppVeyor so there should be another one that deos not exists https://github.com/travis-ci/travis-ci/issues/5032
+- if [[ "${TRAVIS_COMMIT_MSG,,}" == *"[skip travis]"* ]]; then echo "SETUP Commit message contains [skip travis], skipping the build" && exit; else echo "SETUP No skipping commit message labels found [skip travis], countinue building"; fi
+# Check if commit message contains labels [skip travis client] or [skip ci client] to skip client tests
+- if [ -z ${SKIP_CLIENT_TESTS+x} ]; then echo "SETUP SKIP_CLIENT_TESTS is unset"; else echo "SETUP SKIP_CLIENT_TESTS is set to '$SKIP_CLIENT_TESTS'"; fi
+- if [[ -z ${SKIP_CLIENT_TESTS+x} && "${TRAVIS_COMMIT_MSG,,}" == *"[skip travis client]"* ]]; then echo "SETUP Commit message contains [skip travis client]"; export SKIP_CLIENT_TESTS=true; fi
+- if [[ -z ${SKIP_CLIENT_TESTS+x} && "${TRAVIS_COMMIT_MSG,,}" == *"[skip ci client]"* ]]; then echo "SETUP Commit message contains [skip ci client]"; export SKIP_CLIENT_TESTS=true; fi
+- if [ ! "$SKIP_CLIENT_TESTS" == "true" ]; then echo "SETUP Will run client tests"; else echo "SETUP Will not run client tests as either the skipping labels found ([skip travis client], [skip ci client]) or set SKIP_CLIENT_TESTS=true"; fi
+# Check if commit message contains labels [skip travis server] or [skip ci server] to skip server tests
+- if [ -z ${SKIP_SERVER_TESTS+x} ]; then echo "SETUP SKIP_SERVER_TESTS is unset"; else echo "SETUP SKIP_SERVER_TESTS is set to '$SKIP_SERVER_TESTS'"; fi
+- if [[ -z ${SKIP_SERVER_TESTS+x} && "${TRAVIS_COMMIT_MSG,,}" == *"[skip travis server]"* ]]; then echo "SETUP Commit message contains [skip travis server]"; export SKIP_SERVER_TESTS=true; fi
+- if [[ -z ${SKIP_SERVER_TESTS+x} && "${TRAVIS_COMMIT_MSG,,}" == *"[skip ci server]"* ]]; then echo "SETUP Commit message contains [skip ci server]"; export SKIP_SERVER_TESTS=true; fi
+- if [ ! "$SKIP_SERVER_TESTS" == "true" ]; then echo "SETUP Will run server tests"; else echo "SETUP Will not run server tests as either the skipping labels found ([skip travis server], [skip ci server]) or set SKIP_SERVER_TESTS=true"; fi
 # Below is a fix to for `package requires NuGet client version '3.0' or above, but the current NuGet version is '2.12.0.0'.`
 # according to https://github.com/travis-ci/travis-ci/issues/5932
 # We skip downloading and restoring latest nuget.exe as we have it in our solution
@@ -16,13 +32,13 @@ env:
 language: csharp
 solution: Bridge.sln
 before_script:
-- npm install
-- npm install -g grunt-cli
-- git submodule update --init --recursive
+- if [ ! "$SKIP_CLIENT_TESTS" == "true" ]; then npm install; fi
+- if [ ! "$SKIP_CLIENT_TESTS" == "true" ]; then npm install -g grunt-cli; fi
+- if [ ! "$SKIP_CLIENT_TESTS" == "true" ]; then git submodule update --init --recursive; fi
 script:
 - xbuild /p:Configuration=Release Bridge.sln
-- mono ./packages/NUnit.ConsoleRunner.*/tools/nunit*-console.exe ./Compiler/TranslatorTests/bin/Release/Bridge.Translator.Tests.dll
-- npm test
+- if [[ ! "$SKIP_SERVER_TESTS" == "true" && $TRAVIS_TEST_RESULT = 0 ]]; then mono ./packages/NUnit.ConsoleRunner.*/tools/nunit*-console.exe ./Compiler/TranslatorTests/bin/Release/Bridge.Translator.Tests.dll; else echo "Skipping NUnit tests as SKIP_SERVER_TESTS or build failed"; fi
+- if [[ ! "$SKIP_CLIENT_TESTS" == "true" && $TRAVIS_TEST_RESULT = 0 ]]; then npm test; else echo "Skipping sauce tests as SKIP_CLIENT_TESTS or build failed"; fi
 cache:
   directories:
   - packages

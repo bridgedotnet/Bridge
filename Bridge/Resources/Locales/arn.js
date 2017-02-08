@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("arn", true), {
+Bridge.merge(new System.Globalization.CultureInfo("arn", true), {
     englishName: "Mapudungun",
     nativeName: "Mapudungun",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NeuN",
+        nanSymbol: "NeuN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinito",

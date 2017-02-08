@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ff-Latn-SN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ff-Latn-SN", true), {
     englishName: "Fulah (Latin, Senegal)",
     nativeName: "Fulah (Sénégal)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "Non Numérique",
+        nanSymbol: "Non Numérique",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infini",

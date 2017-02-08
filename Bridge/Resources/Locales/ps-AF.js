@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ps-AF", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ps-AF", true), {
     englishName: "Pashto (Afghanistan)",
     nativeName: "پښتو (افغانستان)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "غ ع",
+        nanSymbol: "غ ع",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

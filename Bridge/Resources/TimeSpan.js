@@ -1,4 +1,4 @@
-﻿    Bridge.define("System.TimeSpan", {
+    Bridge.define("System.TimeSpan", {
         inherits: [System.IComparable],
 
         config: {

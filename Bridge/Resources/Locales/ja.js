@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ja", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ja", true), {
     englishName: "Japanese",
     nativeName: "日本語",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN (非数値)",
+        nanSymbol: "NaN (非数値)",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

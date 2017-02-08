@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("fr-SN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("fr-SN", true), {
     englishName: "French (Senegal)",
     nativeName: "français (Sénégal)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

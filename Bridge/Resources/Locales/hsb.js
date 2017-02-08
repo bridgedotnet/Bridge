@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("hsb", true), {
+Bridge.merge(new System.Globalization.CultureInfo("hsb", true), {
     englishName: "Upper Sorbian",
     nativeName: "hornjoserbšćina",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "njedefinowane",
+        nanSymbol: "njedefinowane",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-njekónčne",

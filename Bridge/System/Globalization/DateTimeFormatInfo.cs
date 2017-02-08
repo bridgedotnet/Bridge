@@ -7,13 +7,13 @@ namespace System.Globalization
     {
         public extern DateTimeFormatInfo();
 
-        [FieldProperty]
+        [Field]
         public static extern DateTimeFormatInfo InvariantInfo
         {
             get;
         }
 
-        [FieldProperty]
+        [Field]
         [Name("amDesignator")]
         public extern string AMDesignator
         {
@@ -21,7 +21,7 @@ namespace System.Globalization
             set;
         }
 
-        [FieldProperty]
+        [Field]
         [Name("pmDesignator")]
         public extern string PMDesignator
         {
@@ -29,133 +29,133 @@ namespace System.Globalization
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string DateSeparator
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string TimeSeparator
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string UniversalSortableDateTimePattern
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string SortableDateTimePattern
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string FullDateTimePattern
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string LongDatePattern
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string ShortDatePattern
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string LongTimePattern
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string ShortTimePattern
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern int FirstDayOfWeek
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string[] DayNames
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string[] AbbreviatedDayNames
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string[] ShortestDayNames
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string[] MonthNames
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string[] MonthGenitiveNames
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string[] AbbreviatedMonthNames
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string[] AbbreviatedMonthGenitiveNames
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string MonthDayPattern
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         [Name("rfc1123Pattern")]
         public extern string RFC1123Pattern
         {
@@ -163,14 +163,14 @@ namespace System.Globalization
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string YearMonthPattern
         {
             get;
             set;
         }
 
-        [FieldProperty]
+        [Field]
         public extern string RoundtripFormat
         {
             get;
@@ -181,7 +181,7 @@ namespace System.Globalization
 
         public extern object Clone();
 
-        [FieldProperty]
+        [Field]
         public static extern DateTimeFormatInfo CurrentInfo
         {
             get;

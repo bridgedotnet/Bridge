@@ -1,8 +1,9 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Utilities
 {
-    public class DecimalHelper
+    [Reflectable]
+    internal class DecimalHelper
     {
         public static void AssertIsDecimalAndEqualTo(object v, double d, string message = null)
         {

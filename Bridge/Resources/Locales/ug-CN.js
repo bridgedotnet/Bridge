@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ug-CN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ug-CN", true), {
     englishName: "Uyghur (China)",
     nativeName: "ئۇيغۇرچە (جۇڭخۇا خەلق جۇمھۇرىيىتى)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "سان ئەمەس",
+        nanSymbol: "سان ئەمەس",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "مەنپىي چەكسىزلىك",

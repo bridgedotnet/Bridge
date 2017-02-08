@@ -4,7 +4,7 @@ namespace System.Diagnostics.CodeAnalysis
 {
     [AttributeUsage(AttributeTargets.All, Inherited = false, AllowMultiple = true)]
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class SuppressMessageAttribute : Attribute
     {
         public extern SuppressMessageAttribute(string category, string checkId);

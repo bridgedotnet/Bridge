@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ii-CN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ii-CN", true), {
     englishName: "Yi (China)",
     nativeName: "ꆈꌠꁱꂷ (ꍏꉸꏓꂱꇭꉼꇩ)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "ꌗꂷꀋꉬ",
+        nanSymbol: "ꌗꂷꀋꉬ",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "ꀄꊭꌐꀋꉆ",

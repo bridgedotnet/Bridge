@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sd-Arab", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sd-Arab", true), {
     englishName: "Sindhi",
     nativeName: "سنڌي",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "Infinity-",

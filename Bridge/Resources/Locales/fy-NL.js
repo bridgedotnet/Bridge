@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("fy-NL", true), {
+Bridge.merge(new System.Globalization.CultureInfo("fy-NL", true), {
     englishName: "Frisian (Netherlands)",
     nativeName: "Frysk (Nederlân)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

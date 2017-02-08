@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("uz", true), {
+Bridge.merge(new System.Globalization.CultureInfo("uz", true), {
     englishName: "Uzbek",
     nativeName: "O'zbekcha",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

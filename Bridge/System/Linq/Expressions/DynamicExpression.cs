@@ -3,15 +3,15 @@ using Bridge;
 namespace System.Linq.Expressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     [Cast("{this}.ntype == 50")]
     public abstract class DynamicExpression : Expression
     {
         [Name("dtype")]
-        [FieldProperty]
+        [Field]
         public extern DynamicExpressionType DynamicType { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern Expression Expression { get; private set; }
 
         internal extern DynamicExpression();

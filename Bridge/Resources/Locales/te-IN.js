@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("te-IN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("te-IN", true), {
     englishName: "Telugu (India)",
     nativeName: "తెలుగు (భారత దేశం)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

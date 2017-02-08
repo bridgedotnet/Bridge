@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("quz", true), {
+Bridge.merge(new System.Globalization.CultureInfo("quz", true), {
     englishName: "Quechua",
     nativeName: "runasimi",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

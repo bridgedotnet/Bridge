@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ar-TN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ar-TN", true), {
     englishName: "Arabic (Tunisia)",
     nativeName: "العربية (تونس)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "ليس برقم",
+        nanSymbol: "ليس برقم",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-لا نهاية",

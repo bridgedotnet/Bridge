@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("smn-FI", true), {
+Bridge.merge(new System.Globalization.CultureInfo("smn-FI", true), {
     englishName: "Sami, Inari (Finland)",
     nativeName: "sämikielâ (Suomâ)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

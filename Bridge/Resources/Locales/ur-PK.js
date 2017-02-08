@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("ur-PK", true), {
+Bridge.merge(new System.Globalization.CultureInfo("ur-PK", true), {
     englishName: "Urdu (Pakistan)",
     nativeName: "اُردو (پاکستان)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

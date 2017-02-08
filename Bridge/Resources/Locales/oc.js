@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("oc", true), {
+Bridge.merge(new System.Globalization.CultureInfo("oc", true), {
     englishName: "Occitan",
     nativeName: "Occitan",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "Micca numericu",
+        nanSymbol: "Micca numericu",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinit",

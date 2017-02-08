@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("fr-HT", true), {
+Bridge.merge(new System.Globalization.CultureInfo("fr-HT", true), {
     englishName: "French (Haiti)",
     nativeName: "français (Haïti)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

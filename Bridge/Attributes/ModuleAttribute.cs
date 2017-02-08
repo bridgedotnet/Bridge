@@ -14,8 +14,41 @@ namespace Bridge
         {
         }
 
+        public ModuleAttribute(bool preventModuleName)
+        {
+        }
+
         public ModuleAttribute(string moduleName)
         {
         }
+
+        public ModuleAttribute(string moduleName, bool preventModuleName)
+        {
+        }
+
+        public ModuleAttribute(ModuleType type)
+        {
+        }
+
+        public ModuleAttribute(ModuleType type, bool preventModuleName)
+        {
+        }
+
+        public ModuleAttribute(ModuleType type, string moduleName)
+        {
+        }
+
+        public ModuleAttribute(ModuleType type, string moduleName, bool preventModuleName)
+        {
+        }
+    }
+
+    [NonScriptable]
+    public enum ModuleType
+    {
+        AMD,
+        CommonJS,
+        UMD,
+        ES6
     }
 }

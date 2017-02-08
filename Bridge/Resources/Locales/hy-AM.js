@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("hy-AM", true), {
+Bridge.merge(new System.Globalization.CultureInfo("hy-AM", true), {
     englishName: "Armenian (Armenia)",
     nativeName: "Հայերեն (Հայաստան)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

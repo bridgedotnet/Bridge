@@ -4,7 +4,6 @@ using Bridge;
 namespace System
 {
     [External]
-    [Name("Date")]
     public struct DateTime : IComparable, IComparable<DateTime>, IEquatable<DateTime>, IFormattable
     {
         [Template("new Date(864e13)")]
@@ -20,13 +19,14 @@ namespace System
         /// Initializes a new instance of the DateTime structure to a specified number of ticks.
         /// </summary>
         /// <param name="value">A date and time expressed in the number of 100-nanosecond intervals that have elapsed since January 1, 0001 at 00:00:00.000 in the Gregorian calendar.</param>
-        [Template("Bridge.Date.fromTicks({value})")]
+        [Template("System.DateTime.fromTicks({value})")]
         public extern DateTime(long value);
 
         /// <summary>
         /// String value representing a date. The string should be in a format recognized by the Date.parse() method (IETF-compliant RFC 2822 timestamps and also a version of ISO8601).
         /// </summary>
         /// <param name="dateString"></param>
+        [Template("new Date({dateString})")]
         public extern DateTime(string dateString);
 
         [Template("new Date({year}, {month} - 1)")]
@@ -47,22 +47,22 @@ namespace System
         [Template("new Date({year}, {month} - 1, {day}, {hours}, {minutes}, {seconds}, {milliseconds})")]
         public extern DateTime(int year, int month, int day, int hours, int minutes, int seconds, int milliseconds);
 
-        [Template("Bridge.Date.utc({year}, {month}, {day}, {hours}, {minutes}, {seconds}, {ms})")]
+        [Template("System.DateTime.utc({year}, {month}, {day}, {hours}, {minutes}, {seconds}, {ms})")]
         public static extern long Utc(int year, int month, int day, int hours, int minutes, int seconds, int ms);
 
-        [Template("Bridge.Date.utc({year}, {month}, {day}, {hours}, {minutes}, {seconds})")]
+        [Template("System.DateTime.utc({year}, {month}, {day}, {hours}, {minutes}, {seconds})")]
         public static extern long Utc(int year, int month, int day, int hours, int minutes, int seconds);
 
-        [Template("Bridge.Date.utc({year}, {month}, {day}, {hours}, {minutes})")]
+        [Template("System.DateTime.utc({year}, {month}, {day}, {hours}, {minutes})")]
         public static extern long Utc(int year, int month, int day, int hours, int minutes);
 
-        [Template("Bridge.Date.utc({year}, {month}, {day}, {hours})")]
+        [Template("System.DateTime.utc({year}, {month}, {day}, {hours})")]
         public static extern long Utc(int year, int month, int day, int hours);
 
-        [Template("Bridge.Date.utc({year}, {month}, {day})")]
+        [Template("System.DateTime.utc({year}, {month}, {day})")]
         public static extern long Utc(int year, int month, int day);
 
-        [Template("Bridge.Date.utc({year}, {month})")]
+        [Template("System.DateTime.utc({year}, {month})")]
         public static extern long Utc(int year, int month);
 
         public static extern DateTime Now
@@ -73,29 +73,29 @@ namespace System
 
         public static extern DateTime UtcNow
         {
-            [Template("Bridge.Date.utcNow()")]
+            [Template("System.DateTime.utcNow()")]
             get;
         }
 
         public static extern DateTime Today
         {
-            [Template("Bridge.Date.today()")]
+            [Template("System.DateTime.today()")]
             get;
         }
 
-        [Template("Bridge.Date.format({this}, {format})")]
+        [Template("System.DateTime.format({this}, {format})")]
         public extern string Format(string format);
 
-        [Template("Bridge.Date.format({this}, {format}, {provider})")]
+        [Template("System.DateTime.format({this}, {format}, {provider})")]
         public extern string Format(string format, IFormatProvider provider);
 
-        [Template("Bridge.Date.format({this})")]
+        [Template("System.DateTime.format({this})")]
         public override extern string ToString();
 
-        [Template("Bridge.Date.format({this}, {format})")]
+        [Template("System.DateTime.format({this}, {format})")]
         public extern string ToString(string format);
 
-        [Template("Bridge.Date.format({this}, {format}, {provider})")]
+        [Template("System.DateTime.format({this}, {format}, {provider})")]
         public extern string ToString(string format, IFormatProvider provider);
 
         public extern int GetDate();
@@ -115,10 +115,10 @@ namespace System
 
         public extern int GetSeconds();
 
-        [Template("System.Int64(({this}).valueOf() + Bridge.Date.offset)")]
+        [Template("System.Int64(({this}).valueOf() + System.DateTime.offset)")]
         public override extern object ValueOf();
 
-        [Template("System.Int64(({this}).getTime() + Bridge.Date.offset)")]
+        [Template("System.Int64(({this}).getTime() + System.DateTime.offset)")]
         public extern long GetTime();
 
         public extern int GetTimezoneOffset();
@@ -147,76 +147,76 @@ namespace System
         [Name("getUTCSeconds")]
         public extern int GetUtcSeconds();
 
-        [Template("Bridge.Date.parse({value})")]
+        [Template("System.DateTime.parse({value})")]
         public static extern DateTime Parse(string value);
 
-        [Template("Bridge.Date.parse({value}, {provider})")]
+        [Template("System.DateTime.parse({value}, {provider})")]
         public static extern DateTime Parse(string value, IFormatProvider provider);
 
-        [Template("Bridge.Date.parse({value}, {provider}, {utc})")]
+        [Template("System.DateTime.parse({value}, {provider}, {utc})")]
         public static extern DateTime Parse(string value, IFormatProvider provider, bool utc);
 
-        [Template("Bridge.Date.parse({value}, null, {utc})")]
+        [Template("System.DateTime.parse({value}, null, {utc})")]
         public static extern DateTime Parse(string value, bool utc);
 
-        [Template("Bridge.Date.tryParse({value}, null, {result})")]
+        [Template("System.DateTime.tryParse({value}, null, {result})")]
         public static extern bool TryParse(string value, out DateTime result);
 
-        [Template("Bridge.Date.tryParse({value}, null, {result}, {utc})")]
+        [Template("System.DateTime.tryParse({value}, null, {result}, {utc})")]
         public static extern bool TryParse(string value, out DateTime result, bool utc);
 
-        [Template("Bridge.Date.tryParse({value}, {provider}, {result})")]
+        [Template("System.DateTime.tryParse({value}, {provider}, {result})")]
         public static extern bool TryParse(string value, IFormatProvider provider, out DateTime result);
 
-        [Template("Bridge.Date.tryParse({value}, {provider}, {result}, {utc})")]
+        [Template("System.DateTime.tryParse({value}, {provider}, {result}, {utc})")]
         public static extern bool TryParse(string value, IFormatProvider provider, out DateTime result, bool utc);
 
-        [Template("Bridge.Date.parseExact({value}, {format})")]
+        [Template("System.DateTime.parseExact({value}, {format})")]
         public static extern DateTime ParseExact(string value, string format);
 
-        [Template("Bridge.Date.parseExact({value}, {format}, null, {utc})")]
+        [Template("System.DateTime.parseExact({value}, {format}, null, {utc})")]
         public static extern DateTime ParseExact(string value, string format, bool utc);
 
-        [Template("Bridge.Date.parseExact({value}, {formats})")]
+        [Template("System.DateTime.parseExact({value}, {formats})")]
         public static extern DateTime ParseExact(string value, string[] formats);
 
-        [Template("Bridge.Date.parseExact({value}, {formats}, null, {utc})")]
+        [Template("System.DateTime.parseExact({value}, {formats}, null, {utc})")]
         public static extern DateTime ParseExact(string value, string[] formats, bool utc);
 
-        [Template("Bridge.Date.parseExact({value}, {format}, {provider})")]
+        [Template("System.DateTime.parseExact({value}, {format}, {provider})")]
         public static extern DateTime ParseExact(string value, string format, IFormatProvider provider);
 
-        [Template("Bridge.Date.parseExact({value}, {format}, {provider}, {utc})")]
+        [Template("System.DateTime.parseExact({value}, {format}, {provider}, {utc})")]
         public static extern DateTime ParseExact(string value, string format, IFormatProvider provider, bool utc);
 
-        [Template("Bridge.Date.parseExact({value}, {formats}, {provider})")]
+        [Template("System.DateTime.parseExact({value}, {formats}, {provider})")]
         public static extern DateTime ParseExact(string value, string[] formats, IFormatProvider provider);
 
-        [Template("Bridge.Date.parseExact({value}, {formats}, {provider}, {utc})")]
+        [Template("System.DateTime.parseExact({value}, {formats}, {provider}, {utc})")]
         public static extern DateTime ParseExact(string value, string[] formats, IFormatProvider provider, bool utc);
 
-        [Template("Bridge.Date.tryParseExact({value}, {format}, null, {result})")]
+        [Template("System.DateTime.tryParseExact({value}, {format}, null, {result})")]
         public static extern bool TryParseExact(string value, string format, out DateTime result);
 
-        [Template("Bridge.Date.tryParseExact({value}, {format}, null, {result}, {utc})")]
+        [Template("System.DateTime.tryParseExact({value}, {format}, null, {result}, {utc})")]
         public static extern bool TryParseExact(string value, string format, out DateTime result, bool utc);
 
-        [Template("Bridge.Date.tryParseExact({value}, {formats}, null, {result})")]
+        [Template("System.DateTime.tryParseExact({value}, {formats}, null, {result})")]
         public static extern bool TryParseExact(string value, string[] formats, out DateTime result);
 
-        [Template("Bridge.Date.tryParseExact({value}, {formats}, null, {result}, {utc})")]
+        [Template("System.DateTime.tryParseExact({value}, {formats}, null, {result}, {utc})")]
         public static extern bool TryParseExact(string value, string[] formats, out DateTime result, bool utc);
 
-        [Template("Bridge.Date.tryParseExact({value}, {format}, {provider}, {result})")]
+        [Template("System.DateTime.tryParseExact({value}, {format}, {provider}, {result})")]
         public static extern bool TryParseExact(string value, string format, IFormatProvider provider, out DateTime result);
 
-        [Template("Bridge.Date.tryParseExact({value}, {format}, {provider}, {result}, {utc})")]
+        [Template("System.DateTime.tryParseExact({value}, {format}, {provider}, {result}, {utc})")]
         public static extern bool TryParseExact(string value, string format, IFormatProvider provider, out DateTime result, bool utc);
 
-        [Template("Bridge.Date.tryParseExact({value}, {formats}, {provider}, {result})")]
+        [Template("System.DateTime.tryParseExact({value}, {formats}, {provider}, {result})")]
         public static extern bool TryParseExact(string value, string[] formats, IFormatProvider provider, out DateTime result);
 
-        [Template("Bridge.Date.tryParseExact({value}, {formats}, {provider}, {result}, {utc})")]
+        [Template("System.DateTime.tryParseExact({value}, {formats}, {provider}, {result}, {utc})")]
         public static extern bool TryParseExact(string value, string[] formats, IFormatProvider provider, out DateTime result, bool utc);
 
         public extern string ToDateString();
@@ -232,16 +232,16 @@ namespace System
 
         public extern string ToISOString();
 
-        [Template("Bridge.Date.subdt({d}, {t})")]
+        [Template("System.DateTime.subdt({d}, {t})")]
         public static extern DateTime operator -(DateTime d, TimeSpan t);
 
-        [Template("Bridge.Date.adddt({d}, {t})")]
+        [Template("System.DateTime.adddt({d}, {t})")]
         public static extern DateTime operator +(DateTime d, TimeSpan t);
 
-        [Template("Bridge.Date.subdd({a}, {b})")]
+        [Template("System.DateTime.subdd({a}, {b})")]
         public static extern TimeSpan operator -(DateTime a, DateTime b);
 
-        [Template("Bridge.Date.subdd({this}, {value})")]
+        [Template("System.DateTime.subdd({this}, {value})")]
         public extern TimeSpan Subtract(DateTime value);
 
         [Template("Bridge.equals({a}, {b})")]
@@ -250,16 +250,16 @@ namespace System
         [Template("!Bridge.equals({a}, {b})")]
         public static extern bool operator !=(DateTime a, DateTime b);
 
-        [Template("Bridge.Date.lt({a}, {b})")]
+        [Template("System.DateTime.lt({a}, {b})")]
         public static extern bool operator <(DateTime a, DateTime b);
 
-        [Template("Bridge.Date.gt({a}, {b})")]
+        [Template("System.DateTime.gt({a}, {b})")]
         public static extern bool operator >(DateTime a, DateTime b);
 
-        [Template("Bridge.Date.lte({a}, {b})")]
+        [Template("System.DateTime.lte({a}, {b})")]
         public static extern bool operator <=(DateTime a, DateTime b);
 
-        [Template("Bridge.Date.gte({a}, {b})")]
+        [Template("System.DateTime.gte({a}, {b})")]
         public static extern bool operator >=(DateTime a, DateTime b);
 
         [Template("new Date({this}.valueOf())")]
@@ -370,14 +370,20 @@ namespace System
         [Template("Bridge.equalsT({t1}, {t2})")]
         public static extern bool Equals(DateTime t1, DateTime t2);
 
-        [Template("Bridge.Date.isDaylightSavingTime({this})")]
+        [Template("System.DateTime.isDaylightSavingTime({this})")]
         public extern bool IsDaylightSavingTime();
 
-        [Template("Bridge.Date.toUTC({this})")]
+        [Template("System.DateTime.toUTC({this})")]
         public extern DateTime ToUniversalTime();
 
-        [Template("Bridge.Date.toLocal({this})")]
+        [Template("System.DateTime.toLocal({this})")]
         public extern DateTime ToLocalTime();
+
+        [Template("System.DateTime.format({this}, 'd')")]
+        public extern string ToShortDateString();
+
+        [Template("System.DateTime.format({this}, 't')")]
+        public extern string ToShortTimeString();
 
         [Template("new Date(({this}).getTime() + (({value}).ticks.div(10000).toNumber()))")]
         public extern DateTime Add(TimeSpan value);
@@ -390,13 +396,13 @@ namespace System
 
         public extern TimeSpan TimeOfDay
         {
-            [Template("Bridge.Date.timeOfDay({this})")]
+            [Template("System.DateTime.timeOfDay({this})")]
             get;
         }
 
         public extern long Ticks
         {
-            [Template("Bridge.Date.getTicks({this})")]
+            [Template("System.DateTime.getTicks({this})")]
             get;
         }
     }

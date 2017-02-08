@@ -1,5 +1,5 @@
-﻿using Bridge.Test;
-using Bridge.ClientTestHelper.Internal;
+﻿using Bridge.Test.NUnit;
+using Bridge.ClientTestHelper;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {

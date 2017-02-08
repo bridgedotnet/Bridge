@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("xh-ZA", true), {
+Bridge.merge(new System.Globalization.CultureInfo("xh-ZA", true), {
     englishName: "isiXhosa (South Africa)",
     nativeName: "isiXhosa (uMzantsi Afrika)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

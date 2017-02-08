@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("gu-IN", true), {
+Bridge.merge(new System.Globalization.CultureInfo("gu-IN", true), {
     englishName: "Gujarati (India)",
     nativeName: "ગુજરાતી (ભારત)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

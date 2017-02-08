@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("nn", true), {
+Bridge.merge(new System.Globalization.CultureInfo("nn", true), {
     englishName: "Norwegian (Nynorsk)",
     nativeName: "norsk (nynorsk)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-INF",

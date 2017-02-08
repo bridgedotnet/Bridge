@@ -1,4 +1,4 @@
-﻿    Bridge.define("TestIssue960.Example", {
+    Bridge.define("TestIssue960.Example", {
         getName: function (x) {
             return x.TestIssue960$IHaveNamed$getName();
         }

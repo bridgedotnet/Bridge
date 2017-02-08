@@ -10,7 +10,7 @@ namespace System.Reflection
         /// <summary>
         /// Gets the display name of the assembly.
         /// </summary>
-        [FieldProperty]
+        [Field]
         [Name("name")]
         public extern string FullName
         {

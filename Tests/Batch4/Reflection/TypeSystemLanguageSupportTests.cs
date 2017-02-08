@@ -1,5 +1,5 @@
 // #15
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 
 #pragma warning disable 184, 458, 1720
@@ -638,12 +638,12 @@ namespace Bridge.ClientTest.Batch4.Reflection
             Action a = () => { };
             Assert.AreEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C1", new C1().GetType().FullName);
             Assert.AreEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C2$1[[System.Int32, mscorlib]]", new C2<int>().GetType().FullName);
-            Assert.AreEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C2$1[[String]]", new C2<string>().GetType().FullName);
+            Assert.AreEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C2$1[[System.String, mscorlib]]", new C2<string>().GetType().FullName);
             Assert.AreEqual("System.Int32", (1).GetType().FullName);
-            Assert.AreEqual("String", "X".GetType().FullName);
+            Assert.AreEqual("System.String", "X".GetType().FullName);
             Assert.AreEqual("Function", a.GetType().FullName);
-            Assert.AreEqual("Object", new object().GetType().FullName);
-            Assert.AreEqual("Array", new[] { 1, 2 }.GetType().FullName);
+            Assert.AreEqual("System.Object", new object().GetType().FullName);
+            Assert.AreEqual("System.Int32[]", new[] { 1, 2 }.GetType().FullName);
         }
 
         [Test]

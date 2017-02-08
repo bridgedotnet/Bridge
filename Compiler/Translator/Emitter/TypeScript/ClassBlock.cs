@@ -116,7 +116,7 @@ namespace Bridge.Translator.TypeScript
                 list.Add(name);
             }
 
-            if (list.Count > 0 && list[0] == JS.Types.Object.NAME)
+            if (list.Count > 0 && list[0] == JS.Types.System.Object.NAME)
             {
                 list.RemoveAt(0);
             }
@@ -184,14 +184,12 @@ namespace Bridge.Translator.TypeScript
                         {
                             this.WriteComma();
                         }
-                        this.Write(p.Name);
+                        this.Write(JS.Vars.D + p.Name);
                         this.WriteColon();
-                        this.WriteOpenBrace();
-                        this.Write(JS.Fields.PROTOTYPE);
-                        this.WriteColon();
+                        this.Write(JS.Types.TypeRef);
+                        this.Write("<");
                         this.Write(p.Name);
-
-                        this.WriteCloseBrace();
+                        this.Write(">");
                         comma = true;
                     }
 

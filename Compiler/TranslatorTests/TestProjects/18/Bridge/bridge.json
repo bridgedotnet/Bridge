@@ -4,6 +4,7 @@
   // The combineScripts setting is incorrect in this file.
   // To test #1033 the correct combineScripts is set in bridge.release.json and bridge.debug.json
   "combineScripts": true,
+  "outputFormatting": "Formatted",
   "localesOutput": "locales",
   "combineLocales": true,
   "localesFileName": "allLocales.js",

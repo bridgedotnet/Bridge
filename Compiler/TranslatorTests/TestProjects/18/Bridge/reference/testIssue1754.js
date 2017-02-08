@@ -1,4 +1,4 @@
-﻿    Bridge.define("TestIssue1754.Issue1754", {
+    Bridge.define("TestIssue1754.Issue1754", {
         statics: {
             F_STATIC_S1: null,
             f_STaTIC_S2: null,

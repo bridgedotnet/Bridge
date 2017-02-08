@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("de-LI", true), {
+Bridge.merge(new System.Globalization.CultureInfo("de-LI", true), {
     englishName: "German (Liechtenstein)",
     nativeName: "Deutsch (Liechtenstein)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "n. def.",
+        nanSymbol: "n. def.",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-unendlich",

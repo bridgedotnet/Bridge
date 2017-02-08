@@ -3,17 +3,17 @@ using Bridge;
 namespace System.Linq.Expressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     [Cast("{this}.ntype === 53")]
     public sealed class GotoExpression : Expression
     {
-        [FieldProperty]
+        [Field]
         public extern GotoExpressionKind Kind { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern Expression Value { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern LabelTarget Target { get; private set; }
 
         internal extern GotoExpression();

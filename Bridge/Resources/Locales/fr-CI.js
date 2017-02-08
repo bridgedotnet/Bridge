@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("fr-CI", true), {
+Bridge.merge(new System.Globalization.CultureInfo("fr-CI", true), {
     englishName: "French (Ivory Coast)",
     nativeName: "français (Côte d’Ivoire)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",

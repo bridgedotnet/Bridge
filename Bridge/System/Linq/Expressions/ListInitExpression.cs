@@ -4,14 +4,14 @@ using System.Collections.ObjectModel;
 namespace System.Linq.Expressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     [Cast("{this}.ntype === 22")]
     public sealed class ListInitExpression : Expression
     {
-        [FieldProperty]
+        [Field]
         public extern NewExpression NewExpression { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern ReadOnlyCollection<ElementInit> Initializers { get; private set; }
 
         internal extern ListInitExpression();

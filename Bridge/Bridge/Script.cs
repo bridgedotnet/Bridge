@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Bridge
 {
@@ -182,8 +183,11 @@ namespace Bridge
         [Template("encodeURIComponent({0})")]
         public static extern string EncodeURIComponent(string component);
 
-        [Template("typeof {0}")]
+        [Template("(typeof {0})")]
         public static extern string TypeOf(object obj);
+
+        [Template("({obj} instanceof {type})")]
+        public static extern bool InstanceOf(object obj, Type type);
 
         [Template("this")]
         public static extern T This<T>();
@@ -244,5 +248,13 @@ namespace Bridge
 
         [Template("{o:plain}")]
         public static extern T ToObjectLiteral<T>(T o);
+
+        /// <summary>
+        /// Runs the function in a try/catch statement
+        /// </summary>
+        /// <param name="fn">Function to run</param>
+        /// <returns>Return either function result or false in case of catch</returns>
+        [Template("Bridge.safe({fn})")]
+        public static extern bool SafeFunc(Func<bool> fn);
     }
 }

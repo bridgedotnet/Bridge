@@ -60,3 +60,21 @@ QUnit.test("#2031", function (assert) {
     assert.deepEqual(f.getItem("1"), 1, "1");
     assert.deepEqual(f.getItem("2"), 2, "2");
 });
+
+QUnit.test("#2264", function (assert) {
+    var a = new TypeScript.Issues.N2264(new (System.Collections.Generic.List$1<string>(String))())
+
+    assert.notEqual(a.getValues(), null);
+
+    var list = new (System.Collections.Generic.List$1<string>(String));
+    list.add("first");
+
+    var b = new TypeScript.Issues.N2264(list);
+
+    assert.notEqual(b.getValues(), null);
+
+    var enumerator = b.getValues().getEnumerator();
+    enumerator.moveNext();
+
+    assert.deepEqual(enumerator.getCurrent(), "first");
+});

@@ -122,19 +122,20 @@ namespace System
         [Template("{x}.exponential()")]
         public static extern decimal Exp(decimal x);
 
-        [Template("{x}.ln()")]
-        public static extern decimal Ln(decimal x);
+        [Template("Bridge.Math.log({x})")]
+        public static extern double Log(double x);
 
-        [Template("{x}.log({logBase})")]
-        public static extern decimal Log(decimal x, decimal logBase);
+        [Template("Bridge.Math.logWithBase({x}, {logBase})")]
+        public static extern double Log(double x, double logBase);
+
+        [Template("Bridge.Math.logWithBase({x}, 10.0)")]
+        public static extern double Log10(double x);
 
         [Template("{x}.pow({y})")]
         public static extern decimal Pow(decimal x, decimal y);
 
         [Template("{x}.sqrt()")]
         public static extern decimal Sqrt(decimal x);
-
-        public static extern double Log(double x);
 
         public static extern double Pow(double x, double y);
 

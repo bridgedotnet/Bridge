@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("zh-Hans", true), {
+Bridge.merge(new System.Globalization.CultureInfo("zh-Hans", true), {
     englishName: "Chinese (Simplified)",
     nativeName: "中文(简体)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "非数字",
+        nanSymbol: "非数字",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "负无穷大",

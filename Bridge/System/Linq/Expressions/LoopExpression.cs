@@ -3,17 +3,17 @@ using Bridge;
 namespace System.Linq.Expressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     [Cast("{this}.ntype === 58")]
     public sealed class LoopExpression : Expression
     {
-        [FieldProperty]
+        [Field]
         public extern Expression Body { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern LabelTarget BreakLabel { get; private set; }
 
-        [FieldProperty]
+        [Field]
         public extern LabelTarget ContinueLabel { get; private set; }
 
         internal extern LoopExpression();

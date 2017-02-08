@@ -1,4 +1,4 @@
-﻿Bridge.assembly("TestProject", function ($asm, globals) {
+Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
     Bridge.define("Test.BridgeIssues.N1023.Optional$1", function (T) { return {
@@ -41,7 +41,7 @@
                 Name: null
             },
             init: function () {
-                this.Name = new (Test.BridgeIssues.N1023.Optional$1(String))();
+                this.Name = new (Test.BridgeIssues.N1023.Optional$1(System.String))();
             }
         },
         ctor: function (name) {

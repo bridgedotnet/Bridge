@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("si-LK", true), {
+Bridge.merge(new System.Globalization.CultureInfo("si-LK", true), {
     englishName: "Sinhala (Sri Lanka)",
     nativeName: "සිංහල (ශ්‍රී ලංකා)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-අනන්තය",

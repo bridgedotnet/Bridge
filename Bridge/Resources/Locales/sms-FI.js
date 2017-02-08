@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("sms-FI", true), {
+Bridge.merge(new System.Globalization.CultureInfo("sms-FI", true), {
     englishName: "Sami, Skolt (Finland)",
     nativeName: "sää´mǩiõll (Lää´ddjânnam)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

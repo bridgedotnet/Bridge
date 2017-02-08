@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -68,6 +68,21 @@ namespace Bridge.ClientTest.Batch4.Collections.Generic
                 }
             }
 
+            public bool IsReadOnly
+            {
+                get { return this._backingDictionary.IsReadOnly; }
+            }
+
+            public void Add(KeyValuePair<int, string> item)
+            {
+                ((ICollection<KeyValuePair<int, string>>)this._backingDictionary).Add(item);
+            }
+
+            public void CopyTo(KeyValuePair<int, string>[] array, int arrayIndex)
+            {
+                ((ICollection<KeyValuePair<int, string>>)this._backingDictionary).CopyTo(array, arrayIndex);
+            }
+
             public void Add(int key, string value)
             {
                 _backingDictionary.Add(key, value);
@@ -92,12 +107,22 @@ namespace Bridge.ClientTest.Batch4.Collections.Generic
             {
                 _backingDictionary.Clear();
             }
+
+            public bool Contains(KeyValuePair<int, string> item)
+            {
+                return ((ICollection<KeyValuePair<int, string>>)this._backingDictionary).Contains(item);
+            }
+
+            public bool Remove(KeyValuePair<int, string> item)
+            {
+                return ((ICollection<KeyValuePair<int, string>>)this._backingDictionary).Remove(item);
+            }
         }
 
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.Collections.Generic.IDictionary$2[[Object],[Object]]", typeof(IDictionary<object, object>).FullName, "FullName should be correct");
+            Assert.AreEqual("System.Collections.Generic.IDictionary$2[[System.Object, mscorlib],[System.Object, mscorlib]]", typeof(IDictionary<object, object>).FullName, "FullName should be correct");
             Assert.True(typeof(IDictionary<object, object>).IsInterface, "IsInterface should be true");
 
             var interfaces = typeof(IDictionary<object, object>).GetInterfaces();

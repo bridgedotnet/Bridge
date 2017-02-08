@@ -3,10 +3,11 @@ using Bridge;
 namespace System.Reflection
 {
     [External]
+    [Unbox(true)]
     public class PropertyInfo : MemberInfo
     {
         [Name("rt")]
-        [FieldProperty]
+        [Field]
         public extern Type PropertyType
         {
             get;
@@ -27,7 +28,7 @@ namespace System.Reflection
             get;
         }
 
-        [FieldProperty]
+        [Field]
         public extern bool IsIndexer
         {
             [Template("({this}.i || false)")]
@@ -41,14 +42,14 @@ namespace System.Reflection
         }
 
         [Name("g")]
-        [FieldProperty]
+        [Field]
         public extern MethodInfo GetMethod
         {
             get;
         }
 
         [Name("s")]
-        [FieldProperty]
+        [Field]
         public extern MethodInfo SetMethod
         {
             get;
@@ -70,7 +71,7 @@ namespace System.Reflection
         /// For properties implemented as fields, contains the name of the field. Null for properties implemented as get and set methods.
         /// </summary>
         [Name("fn")]
-        [FieldProperty]
+        [Field]
         public extern string ScriptFieldName
         {
             get;

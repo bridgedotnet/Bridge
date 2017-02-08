@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("yo-NG", true), {
+Bridge.merge(new System.Globalization.CultureInfo("yo-NG", true), {
     englishName: "Yoruba (Nigeria)",
     nativeName: "Yoruba (Nigeria)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

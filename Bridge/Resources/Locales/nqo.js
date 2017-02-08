@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("nqo", true), {
+Bridge.merge(new System.Globalization.CultureInfo("nqo", true), {
     englishName: "N'ko",
     nativeName: "ߒߞߏ",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "ߝߙߍߕߍ߫ ߕߍ߫",
+        nanSymbol: "ߝߙߍߕߍ߫ ߕߍ߫",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "ߘߊ߲߬ߒߕߊ߲߫-",

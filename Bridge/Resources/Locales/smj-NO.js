@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("smj-NO", true), {
+Bridge.merge(new System.Globalization.CultureInfo("smj-NO", true), {
     englishName: "Sami, Lule (Norway)",
     nativeName: "julevusámegiella (Vuodna)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-Infinity",

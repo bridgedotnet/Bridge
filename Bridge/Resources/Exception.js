@@ -1,10 +1,10 @@
-﻿    Bridge.define("System.Exception", {
+    Bridge.define("System.Exception", {
         ctor: function (message, innerException) {
             this.$initialize();
             this.message = message ? message : ("Exception of type '" + Bridge.getTypeName(this) + "' was thrown.");
             this.innerException = innerException ? innerException : null;
             this.errorStack = new Error();
-            this.data = new(System.Collections.Generic.Dictionary$2(Object, Object))();
+            this.data = new(System.Collections.Generic.Dictionary$2(System.Object, System.Object))();
         },
 
         getMessage: function () {

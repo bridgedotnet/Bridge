@@ -37,7 +37,7 @@ namespace Bridge.Translator.TypeScript
             var memberResult = this.Emitter.Resolver.ResolveNode(propertyDeclaration, this.Emitter) as MemberResolveResult;
 
             if (memberResult != null &&
-                (memberResult.Member.Attributes.Any(a => a.AttributeType.FullName == "Bridge.FieldPropertyAttribute") ||
+                (AttributeHelper.HasFieldAttribute(memberResult.Member) ||
                 (propertyDeclaration.Getter.IsNull && propertyDeclaration.Setter.IsNull)))
             {
                 return;

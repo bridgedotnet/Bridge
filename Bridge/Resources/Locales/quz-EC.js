@@ -1,9 +1,9 @@
-﻿Bridge.merge(new System.Globalization.CultureInfo("quz-EC", true), {
+Bridge.merge(new System.Globalization.CultureInfo("quz-EC", true), {
     englishName: "Quichua (Ecuador)",
     nativeName: "runa shimi (Ecuador Suyu)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        naNSymbol: "NaN",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-ifedh",
