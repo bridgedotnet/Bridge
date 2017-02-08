@@ -461,7 +461,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#2337 - TestFDateModifier", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2337.testFDateModifier);
             QUnit.test("#2338 - TestGenericGetType", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2338.testGenericGetType);
             QUnit.test("#2344 - TestHtmlElementName", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2344.testHtmlElementName);
-            QUnit.test("#2347 - TestBoxing", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2347.testBoxing);
+            QUnit.test("#2347 - TestG17FormatSpecifier", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2347.testG17FormatSpecifier);
             QUnit.test("#2349 - TestExternalIgnoreGenericClass", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2349.testExternalIgnoreGenericClass);
             QUnit.test("#381 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge381.testUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.checkInlineExpression);
@@ -9435,12 +9435,12 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2347", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2347)],
         statics: {
-            testBoxing: function (assert) {
+            testG17FormatSpecifier: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2347).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2347, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
-                    method: "TestBoxing()",
+                    method: "TestG17FormatSpecifier()",
                     line: "10"
                 } ));
-                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2347.testBoxing();
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2347.testG17FormatSpecifier();
             }
         },
         context: null,

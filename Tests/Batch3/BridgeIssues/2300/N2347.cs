@@ -8,7 +8,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge2347
     {
         [Test]
-        public static void TestBoxing()
+        public static void TestG17FormatSpecifier()
         {
             double d = 36.099999999999994d;
             Assert.AreEqual("36.099999999999994", d.ToString("G17"));

@@ -14776,7 +14776,7 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2347", {
         statics: {
-            testBoxing: function () {
+            testG17FormatSpecifier: function () {
                 var d = 36.099999999999994;
                 Bridge.Test.NUnit.Assert.areEqual("36.099999999999994", System.Double.format(d, "G17"));
                 Bridge.Test.NUnit.Assert.areEqual("36.09999999999999", System.Double.format(d, "G16"));
