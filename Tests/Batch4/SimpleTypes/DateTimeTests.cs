@@ -10,7 +10,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         [Test]
         public void TypePropertiesAreCorrect_SPI_1607_1608_1609()
         {
-            Assert.AreEqual("Date", typeof(DateTime).FullName);
+            Assert.AreEqual("System.DateTime", typeof(DateTime).FullName);
             Assert.False(typeof(DateTime).IsClass);
             // #1607 #1608 #1609
             Assert.True(typeof(IComparable<DateTime>).IsAssignableFrom(typeof(DateTime)));

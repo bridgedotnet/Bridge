@@ -102,13 +102,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             var a5 = new Bridge634A<string>.Nested<int>.SubNested();
             var a6 = new Bridge634A<string>.Nested<int>.SubNested<int>();
 
-            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1[[String]]", a.GetType().FullName, "Bridge634 A a");
-            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested[[String]]", a1.GetType().FullName, "Bridge634 A a1");
-            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested$1[[String],[System.Int32, mscorlib]]", a2.GetType().FullName, "Bridge634 A a2");
-            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested.SubNested[[String]]", a3.GetType().FullName, "Bridge634 A a3");
-            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested.SubNested$1[[String],[System.Int32, mscorlib]]", a4.GetType().FullName, "Bridge634 A a4");
-            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested$1.SubNested[[String],[System.Int32, mscorlib]]", a5.GetType().FullName, "Bridge634 A a5");
-            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested$1.SubNested$1[[String],[System.Int32, mscorlib],[System.Int32, mscorlib]]", a6.GetType().FullName, "Bridge634 A a6");
+            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1[[System.String, mscorlib]]", a.GetType().FullName, "Bridge634 A a");
+            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested[[System.String, mscorlib]]", a1.GetType().FullName, "Bridge634 A a1");
+            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested$1[[System.String, mscorlib],[System.Int32, mscorlib]]", a2.GetType().FullName, "Bridge634 A a2");
+            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested.SubNested[[System.String, mscorlib]]", a3.GetType().FullName, "Bridge634 A a3");
+            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested.SubNested$1[[System.String, mscorlib],[System.Int32, mscorlib]]", a4.GetType().FullName, "Bridge634 A a4");
+            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested$1.SubNested[[System.String, mscorlib],[System.Int32, mscorlib]]", a5.GetType().FullName, "Bridge634 A a5");
+            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested$1.SubNested$1[[System.String, mscorlib],[System.Int32, mscorlib],[System.Int32, mscorlib]]", a6.GetType().FullName, "Bridge634 A a6");
 
             var b = new Bridge634B<string>();
             var b1 = new Bridge634B<string>.Nested();
@@ -118,13 +118,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             var b5 = new Bridge634B<string>.Nested<int>.SubNested();
             var b6 = new Bridge634B<string>.Nested<int>.SubNested<int>();
 
-            Assert.AreEqual("ClientTestLibraryCustom.Bridge634B$1[[String]]", b.GetType().FullName, "Bridge634 B b");
-            Assert.AreEqual("ClientTestLibraryCustom.Bridge634B$1.Nested[[String]]", b1.GetType().FullName, "Bridge634 B b1");
-            Assert.AreEqual("ClientTestLibraryCustom.Bridge634B$1.Nested$1[[String],[System.Int32, mscorlib]]", b2.GetType().FullName, "Bridge634 B b2");
-            Assert.AreEqual("ClientTestLibraryCustom.Bridge634B$1.Nested.SubNested[[String]]", b3.GetType().FullName, "Bridge634 B b3");
-            Assert.AreEqual("ClientTestLibraryCustom.Bridge634B$1.Nested.SubNested$1[[String],[System.Int32, mscorlib]]", b4.GetType().FullName, "Bridge634 B b4");
-            Assert.AreEqual("ClientTestLibraryCustom.Bridge634B$1.Nested$1.SubNested[[String],[System.Int32, mscorlib]]", b5.GetType().FullName, "Bridge634 B b5");
-            Assert.AreEqual("ClientTestLibraryCustom.Bridge634B$1.Nested$1.SubNested$1[[String],[System.Int32, mscorlib],[System.Int32, mscorlib]]", b6.GetType().FullName, "Bridge634 B b6");
+            Assert.AreEqual("ClientTestLibraryCustom.Bridge634B$1[[System.String, mscorlib]]", b.GetType().FullName, "Bridge634 B b");
+            Assert.AreEqual("ClientTestLibraryCustom.Bridge634B$1.Nested[[System.String, mscorlib]]", b1.GetType().FullName, "Bridge634 B b1");
+            Assert.AreEqual("ClientTestLibraryCustom.Bridge634B$1.Nested$1[[System.String, mscorlib],[System.Int32, mscorlib]]", b2.GetType().FullName, "Bridge634 B b2");
+            Assert.AreEqual("ClientTestLibraryCustom.Bridge634B$1.Nested.SubNested[[System.String, mscorlib]]", b3.GetType().FullName, "Bridge634 B b3");
+            Assert.AreEqual("ClientTestLibraryCustom.Bridge634B$1.Nested.SubNested$1[[System.String, mscorlib],[System.Int32, mscorlib]]", b4.GetType().FullName, "Bridge634 B b4");
+            Assert.AreEqual("ClientTestLibraryCustom.Bridge634B$1.Nested$1.SubNested[[System.String, mscorlib],[System.Int32, mscorlib]]", b5.GetType().FullName, "Bridge634 B b5");
+            Assert.AreEqual("ClientTestLibraryCustom.Bridge634B$1.Nested$1.SubNested$1[[System.String, mscorlib],[System.Int32, mscorlib],[System.Int32, mscorlib]]", b6.GetType().FullName, "Bridge634 B b6");
 
             var c = new Bridge634C();
             var c1 = new Bridge634C.Nested();

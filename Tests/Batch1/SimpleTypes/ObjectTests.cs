@@ -20,7 +20,7 @@ namespace Bridge.ClientTest.SimpleTypes
         public void TypePropertiesAreCorrect()
         {
             Assert.True(new object() is object);
-            Assert.AreEqual("Object", typeof(object).FullName);
+            Assert.AreEqual("System.Object", typeof(object).FullName, "#2069");
         }
 
         [Test]

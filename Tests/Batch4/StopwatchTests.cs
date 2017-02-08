@@ -30,7 +30,7 @@ namespace Bridge.ClientTest.Batch4
         public void ConstantsWorks()
         {
             Assert.True(Stopwatch.Frequency > 1000, "Frequency");
-            Assert.AreEqual("Boolean", Stopwatch.IsHighResolution.GetType().FullName, "IsHighResolution");
+            Assert.AreEqual("System.Boolean", Stopwatch.IsHighResolution.GetType().FullName, "IsHighResolution");
         }
 
         [Test]

@@ -4,7 +4,7 @@ namespace System
 {
     [External]
     //[Name("System.Enum")]
-    public abstract class Enum : ValueType
+    public abstract class Enum : ValueType, IComparable, IFormattable
     {
         public static extern Enum Parse(Type enumType, string value);
 
@@ -39,5 +39,8 @@ namespace System
 
         [Template("System.Enum.format({this:type}, {this}, {format})")]
         public extern string ToString(string format);
+
+        [Template("System.Enum.format({this:type}, {this}, {format})")]
+        public extern string ToString(string format, IFormatProvider formatProvider);
     }
 }

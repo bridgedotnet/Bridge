@@ -23,7 +23,7 @@ namespace Bridge.ClientTest.Batch4.Collections.Generic
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.Collections.Generic.Dictionary$2[[System.Int32, mscorlib],[String]]", typeof(Dictionary<int, string>).FullName, "FullName should be correct");
+            Assert.AreEqual("System.Collections.Generic.Dictionary$2[[System.Int32, mscorlib],[System.String, mscorlib]]", typeof(Dictionary<int, string>).FullName, "FullName should be correct");
             Assert.True(typeof(Dictionary<int, string>).IsClass, "IsClass should be true");
             object dict = new Dictionary<int, string>();
             Assert.True(dict is Dictionary<int, string>, "is Dictionary<int,string> should be true");

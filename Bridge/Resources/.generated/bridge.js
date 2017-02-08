@@ -1,5 +1,5 @@
 /**
- * @version   : 15.8.0 - Bridge.NET
+ * @version   : 16.0.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
  * @date      : 2017-01-16
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
@@ -67,9 +67,18 @@
             };
         },
 
-        unbox: function(o) {
+        unbox: function (o) {
             if (o && o.$boxed) {
                 return o.v;
+            }
+
+            if (Bridge.isArray(o)) {
+                var arr = [];
+                for (var i = 0; i < o.length; i++) {
+                    var item = o[i];
+                    arr[i] = (item && item.$boxed) ? item.v : item;
+                }
+                o = arr;
             }
 
             return o;
@@ -305,13 +314,13 @@
                 return type.createInstance();
             } else if (typeof (type.getDefaultValue) === 'function') {
                 return type.getDefaultValue();
-            } else if (type === Boolean) {
+            } else if (type === Boolean || type === System.Boolean) {
                 return false;
-            } else if (type === Date) {
+            } else if (type === Date || type === System.DateTime) {
                 return new Date(0);
             } else if (type === Number) {
                 return 0;
-            } else if (type === String) {
+            } else if (type === String || type === System.String) {
                 return '';
             } else if (type && type.$literal) {
                 return type.ctor();
@@ -557,9 +566,9 @@
                 throw new System.ArgumentNullException("type");
             } else if ((type.getDefaultValue) && type.getDefaultValue.length === 0) {
                 return type.getDefaultValue();
-            } else if (type === Boolean) {
+            } else if (type === Boolean || type === System.Boolean) {
                 return false;
-            } else if (type === Date) {
+            } else if (type === Date || type === System.DateTime) {
                 return new Date(-864e13);
             } else if (type === Number) {
                 return 0;
@@ -598,17 +607,25 @@
             return true;
         },
 
+        isObject: function(type) {
+            return type === Object || type === System.Object;
+        },
+
         is: function (obj, type, ignoreFn, allowNull) {
             if (obj == null) {
                 return !!allowNull;
             }
 
+            if (type === System.Object) {
+                type = Object;
+            }
+
             if (obj.$boxed) {
-                if (obj.type.$kind === "enum" && (obj.type.prototype.$utype === type || type === System.Enum)) {
+                if (obj.type.$kind === "enum" && (obj.type.prototype.$utype === type || type === System.Enum || type === System.IFormattable || type === System.IComparable)) {
                     return true;
                 }
                 else if (type.$kind !== "interface" && !type.$nullable) {
-                    return obj.type === type || type === Object;
+                    return obj.type === type || Bridge.isObject(type);
                 }
 
                 if (ignoreFn !== true && type.$is) {
@@ -643,10 +660,6 @@
 
                     if (Bridge.isArray(obj, ctor)) {
                         return System.Array.is(obj, type);
-                    }
-
-                    if (ctor === String) {
-                        return System.String.is(obj, type);
                     }
                 }
 
@@ -700,7 +713,7 @@
 
         as: function (obj, type, allowNull) {
             if (Bridge.is(obj, type, false, allowNull)) {
-                return obj.$boxed && type !== Object ? obj.v : obj;
+                return obj.$boxed && type !== Object && type !== System.Object ? obj.v : obj;
             }
             return null;
         },
@@ -716,7 +729,7 @@
                 throw new System.InvalidCastException("Unable to cast type " + (obj ? Bridge.getTypeName(obj) : "'null'") + " to type " + Bridge.getTypeName(type));
             }
 
-            if (obj.$boxed && type !== Object) {
+            if (obj.$boxed && type !== Object && type !== System.Object) {
                 return obj.v;
             }
 
@@ -944,7 +957,7 @@
         },
 
         toList: function (ienumerable, T) {
-            return new (System.Collections.Generic.List$1(T || Object))(ienumerable);
+            return new (System.Collections.Generic.List$1(T || System.Object))(ienumerable);
         },
 
         arrayTypes: [globals.Array, globals.Uint8Array, globals.Int8Array, globals.Int16Array, globals.Uint16Array, globals.Int32Array, globals.Uint32Array, globals.Float32Array, globals.Float64Array, globals.Uint8ClampedArray],
@@ -1108,6 +1121,14 @@
         },
 
         compare: function (a, b, safe, T) {
+            if (a && a.$boxed) {
+                a = Bridge.unbox(a);
+            }
+
+            if (b && b.$boxed) {
+                b = Bridge.unbox(b);
+            }
+
             if (!Bridge.isDefined(a, true)) {
                 if (safe) {
                     return 0;
@@ -1158,6 +1179,14 @@
         },
 
         equalsT: function (a, b, T) {
+            if (a && a.$boxed) {
+                a = Bridge.unbox(a);
+            }
+
+            if (b && b.$boxed) {
+                b = Bridge.unbox(b);
+            }
+
             if (!Bridge.isDefined(a, true)) {
                 throw new System.NullReferenceException();
             } else if (Bridge.isNumber(a) || Bridge.isString(a) || Bridge.isBoolean(a)) {
@@ -1180,10 +1209,18 @@
         },
 
         format: function (obj, formatString, provider) {
+            if (obj && obj.$boxed && Bridge.Reflection.isEnum(obj.type)) {
+                return System.Enum.format(obj.type, Bridge.unbox(obj), formatString);
+            }
+
+            if (obj && obj.$boxed && obj.type === System.Char) {
+                return System.Enum.format(Bridge.unbox(obj), formatString, provider);
+            }
+
             if (Bridge.isNumber(obj)) {
                 return Bridge.Int.format(obj, formatString, provider);
             } else if (Bridge.isDate(obj)) {
-                return Bridge.Date.format(obj, formatString, provider);
+                return System.DateTime.format(obj, formatString, provider);
             }
 
             var name;
@@ -1196,6 +1233,7 @@
         },
 
         getType: function (instance, T) {
+            var bt;
             if (instance && instance.$boxed) {
                 return instance.type;
             }
@@ -1204,8 +1242,9 @@
                 throw new System.NullReferenceException("instance is null");
             }
 
-            if (T && Bridge.Reflection.getBaseType(T) === Object) {
-                return T;
+            if (T && ((bt = Bridge.Reflection.getBaseType(T)) === Object || bt === System.Object)) {
+                var type = Bridge.getType(instance);
+                return Bridge.Reflection.isAssignableFrom(T, type) ? type : T;
             }
 
             if (typeof (instance) === "number") {
@@ -1224,11 +1263,30 @@
                 return instance.$getType();
             }
 
+            var result = null;
             try {
-                return instance.constructor;
+                result = instance.constructor;
             } catch (ex) {
-                return Object;
+                result = Object;
             }
+
+            if (result === Boolean) {
+                return System.Boolean;
+            }
+
+            if (result === String) {
+                return System.String;
+            }
+
+            if (result === Object) {
+                return System.Object;
+            }
+
+            if (result === Date) {
+                return System.DateTime;
+            }
+
+            return result;
         },
 
         isLower: function (c) {
@@ -1605,496 +1663,6 @@
     globals.System.Diagnostics = {};
     globals.System.Diagnostics.Contracts = {};
     globals.System.Threading = {};
-
-    // @source String.js
-
-    var string = {
-        is: function (obj, type) {
-            if (!Bridge.isString(obj)) {
-                return false;
-            }
-
-            if ((obj.constructor === type) || (obj instanceof type)) {
-                return true;
-            }
-
-            if (type === System.ICloneable ||
-                type === System.Collections.IEnumerable ||
-                type === System.Collections.Generic.IEnumerable$1(System.Char) ||
-                type === System.IComparable$1(String) ||
-                type === System.IEquatable$1(String)) {
-                return true;
-            }
-
-            return false;
-        },
-
-        lastIndexOf: function (s, search, startIndex, count) {
-            var index = s.lastIndexOf(search, startIndex);
-
-            return (index < (startIndex - count + 1)) ? -1 : index;
-        },
-
-        lastIndexOfAny: function (s, chars, startIndex, count) {
-            var length = s.length;
-
-            if (!length) {
-                return -1;
-            }
-
-            chars = String.fromCharCode.apply(null, chars);
-            startIndex = startIndex || length - 1;
-            count = count || length;
-
-            var endIndex = startIndex - count + 1;
-
-            if (endIndex < 0) {
-                endIndex = 0;
-            }
-
-            for (var i = startIndex; i >= endIndex; i--) {
-                if (chars.indexOf(s.charAt(i)) >= 0) {
-                    return i;
-                }
-            }
-
-            return -1;
-        },
-
-        isNullOrWhiteSpace: function (s) {
-            if (!s) {
-                return true;
-            }
-
-            return System.Char.isWhiteSpace(s);
-        },
-
-        isNullOrEmpty: function (s) {
-            return !s;
-        },
-
-        fromCharCount: function (c, count) {
-            if (count >= 0) {
-                return String(Array(count + 1).join(String.fromCharCode(c)));
-            } else {
-                throw new System.ArgumentOutOfRangeException("count", "cannot be less than zero");
-            }
-        },
-
-        format: function (format) {
-            return System.String._format(System.Globalization.CultureInfo.getCurrentCulture(), format, Array.prototype.slice.call(arguments, 1));
-        },
-
-        formatProvider: function (provider, format) {
-            return System.String._format(provider, format, Array.prototype.slice.call(arguments, 2));
-        },
-
-        _format: function (provider, format, values) {
-            var me = this,
-                _formatRe = /(\{+)((\d+|[a-zA-Z_$]\w+(?:\.[a-zA-Z_$]\w+|\[\d+\])*)(?:\,(-?\d*))?(?:\:([^\}]*))?)(\}+)|(\{+)|(\}+)/g,
-                args = values,
-                fn = this.decodeBraceSequence;
-
-            return format.replace(_formatRe, function (m, openBrace, elementContent, index, align, format, closeBrace, repeatOpenBrace, repeatCloseBrace) {
-                if (repeatOpenBrace) {
-                    return fn(repeatOpenBrace);
-                }
-
-                if (repeatCloseBrace) {
-                    return fn(repeatCloseBrace);
-                }
-
-                if (openBrace.length % 2 === 0 || closeBrace.length % 2 === 0) {
-                    return fn(openBrace) + elementContent + fn(closeBrace);
-                }
-
-                return fn(openBrace, true) + me.handleElement(provider, index, align, format, args) + fn(closeBrace, true);
-            });
-        },
-
-        handleElement: function (provider, index, alignment, formatStr, args) {
-            var value;
-
-            index = parseInt(index, 10);
-
-            if (index > args.length - 1) {
-                throw new System.FormatException("Input string was not in a correct format.");
-            }
-
-            value = args[index];
-
-            if (value == null) {
-                value = "";
-            }
-
-            if (formatStr && value.$boxed && value.type.$kind === "enum") {
-                value = System.Enum.format(value.type, value.v, formatStr);
-            }
-            else if (formatStr && Bridge.is(value, System.IFormattable)) {
-                value = Bridge.format(Bridge.unbox(value), formatStr, provider);
-            } else {
-                value = "" + value.toString();
-            }
-
-            if (alignment) {
-                alignment = parseInt(alignment, 10);
-
-                if (!Bridge.isNumber(alignment)) {
-                    alignment = null;
-                }
-            }
-
-            return System.String.alignString(value.toString(), alignment);
-        },
-
-        decodeBraceSequence: function (braces, remove) {
-            return braces.substr(0, (braces.length + (remove ? 0 : 1)) / 2);
-        },
-
-        alignString: function (str, alignment, pad, dir, cut) {
-            if (str == null || !alignment) {
-                return str;
-            }
-
-            if (!pad) {
-                pad = " ";
-            }
-
-            if (Bridge.isNumber(pad)) {
-                pad = String.fromCharCode(pad);
-            }
-
-            if (!dir) {
-                dir = alignment < 0 ? 1 : 2;
-            }
-
-            alignment = Math.abs(alignment);
-
-            if (cut && (str.length > alignment))
-            {
-                str = str.substring(0, alignment);
-            }
-
-            if (alignment + 1 >= str.length) {
-                switch (dir) {
-                    case 2:
-                        str = Array(alignment + 1 - str.length).join(pad) + str;
-                        break;
-
-                    case 3:
-                        var padlen = alignment - str.length,
-                            right = Math.ceil(padlen / 2),
-                            left = padlen - right;
-
-                        str = Array(left + 1).join(pad) + str + Array(right + 1).join(pad);
-                        break;
-
-                    case 1:
-                    default:
-                        str = str + Array(alignment + 1 - str.length).join(pad);
-                        break;
-                }
-            }
-
-            return str;
-        },
-
-        startsWith: function (str, prefix) {
-            if (!prefix.length) {
-                return true;
-            }
-
-            if (prefix.length > str.length) {
-                return false;
-            }
-
-            prefix = System.String.escape(prefix);
-
-            return str.match("^" + prefix) !== null;
-        },
-
-        endsWith: function (str, suffix) {
-            if (!suffix.length) {
-                return true;
-            }
-
-            if (suffix.length > str.length) {
-                return false;
-            }
-
-            suffix = System.String.escape(suffix);
-
-            return str.match(suffix + "$") !== null;
-        },
-
-        contains: function (str, value) {
-            if (value == null) {
-                throw new System.ArgumentNullException();
-            }
-
-            if (str == null) {
-                return false;
-            }
-
-            return str.indexOf(value) > -1;
-        },
-
-        indexOfAny: function (str, anyOf) {
-            if (anyOf == null) {
-                throw new System.ArgumentNullException();
-            }
-
-            if (str == null || str === "") {
-                return -1;
-            }
-
-            var startIndex = (arguments.length > 2) ? arguments[2] : 0;
-
-            if (startIndex < 0) {
-                throw new System.ArgumentOutOfRangeException("startIndex", "startIndex cannot be less than zero");
-            }
-
-            var length = (arguments.length > 3) ? arguments[3] : str.length - startIndex;
-
-            if (length < 0) {
-                throw new System.ArgumentOutOfRangeException("length", "must be non-negative");
-            }
-
-            if (length > str.length - startIndex) {
-                throw new System.ArgumentOutOfRangeException("Index and length must refer to a location within the string");
-            }
-
-            var s = str.substr(startIndex, length);
-
-            for (var i = 0; i < anyOf.length; i++) {
-                var c = String.fromCharCode(anyOf[i]),
-                    index = s.indexOf(c);
-
-                if (index > -1) {
-                    return index + startIndex;
-                }
-            }
-
-            return -1;
-        },
-
-        indexOf: function (str, value) {
-            if (value == null) {
-                throw new System.ArgumentNullException();
-            }
-
-            if (str == null || str === "") {
-                return -1;
-            }
-
-            var startIndex = (arguments.length > 2) ? arguments[2] : 0;
-
-            if (startIndex < 0 || startIndex > str.length) {
-                throw new System.ArgumentOutOfRangeException("startIndex", "startIndex cannot be less than zero and must refer to a location within the string");
-            }
-
-            if (value === "") {
-                return (arguments.length > 2) ? startIndex : 0;
-            }
-
-            var length = (arguments.length > 3) ? arguments[3] : str.length - startIndex;
-
-            if (length < 0) {
-                throw new System.ArgumentOutOfRangeException("length", "must be non-negative");
-            }
-
-            if (length > str.length - startIndex) {
-                throw new System.ArgumentOutOfRangeException("Index and length must refer to a location within the string");
-            }
-
-            var s = str.substr(startIndex, length),
-                index = (arguments.length === 5 && arguments[4] % 2 !== 0) ? s.toLocaleUpperCase().indexOf(value.toLocaleUpperCase()) : s.indexOf(value);
-
-            if (index > -1) {
-                if (arguments.length === 5) {
-                    // StringComparison
-                    return (System.String.compare(value, s.substr(index, value.length), arguments[4]) === 0) ? index + startIndex : -1;
-                } else {
-                    return index + startIndex;
-                }
-            }
-
-            return -1;
-        },
-
-        equals: function () {
-            return System.String.compare.apply(this, arguments) === 0;
-        },
-
-        compare: function (strA, strB) {
-            if (strA == null) {
-                return (strB == null) ? 0 : -1;
-            }
-
-            if (strB == null) {
-                return 1;
-            }
-
-            if (arguments.length >= 3) {
-                if (!Bridge.isBoolean(arguments[2])) {
-                    // StringComparison
-                    switch (arguments[2]) {
-                        case 1: // CurrentCultureIgnoreCase
-                            return strA.localeCompare(strB, System.Globalization.CultureInfo.getCurrentCulture().name, {
-                                sensitivity: "accent"
-                            });
-                        case 2: // InvariantCulture
-                            return strA.localeCompare(strB, System.Globalization.CultureInfo.invariantCulture.name);
-                        case 3: // InvariantCultureIgnoreCase
-                            return strA.localeCompare(strB, System.Globalization.CultureInfo.invariantCulture.name, {
-                                sensitivity: "accent"
-                            });
-                        case 4: // Ordinal
-                            return (strA === strB) ? 0 : ((strA > strB) ? 1 : -1);
-                        case 5: // OrdinalIgnoreCase
-                            return (strA.toUpperCase() === strB.toUpperCase()) ? 0 : ((strA.toUpperCase() > strB.toUpperCase()) ? 1 : -1);
-                        case 0: // CurrentCulture
-                        default:
-                            break;
-                    }
-                } else {
-                    // ignoreCase
-                    if (arguments[2]) {
-                        strA = strA.toLocaleUpperCase();
-                        strB = strB.toLocaleUpperCase();
-                    }
-
-                    if (arguments.length === 4) {
-                        // CultureInfo
-                        return strA.localeCompare(strB, arguments[3].name);
-                    }
-                }
-            }
-
-            return strA.localeCompare(strB);
-        },
-
-        toCharArray: function (str, startIndex, length) {
-            if (startIndex < 0 || startIndex > str.length || startIndex > str.length - length) {
-                throw new System.ArgumentOutOfRangeException("startIndex", "startIndex cannot be less than zero and must refer to a location within the string");
-            }
-
-            if (length < 0) {
-                throw new System.ArgumentOutOfRangeException("length", "must be non-negative");
-            }
-
-            if (!Bridge.hasValue(startIndex)) {
-                startIndex = 0;
-            }
-
-            if (!Bridge.hasValue(length)) {
-                length = str.length;
-            }
-
-            var arr = [];
-
-            for (var i = startIndex; i < startIndex + length; i++) {
-                arr.push(str.charCodeAt(i));
-            }
-
-            return arr;
-        },
-
-        escape: function (str) {
-            return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-        },
-
-        replaceAll: function (str, a, b) {
-            var reg = new RegExp(System.String.escape(a), "g");
-
-            return str.replace(reg, b);
-        },
-
-        insert: function (index, strA, strB) {
-            return index > 0 ? (strA.substring(0, index) + strB + strA.substring(index, strA.length)) : (strB + strA);
-        },
-
-        remove: function (s, index, count) {
-            if (s == null) {
-                throw new System.NullReferenceException();
-            }
-
-            if (index < 0) {
-                throw new System.ArgumentOutOfRangeException("startIndex", "StartIndex cannot be less than zero");
-            }
-
-            if (count != null) {
-                if (count < 0) {
-                    throw new System.ArgumentOutOfRangeException("count", "Count cannot be less than zero");
-                }
-
-                if (count > s.length - index) {
-                    throw new System.ArgumentOutOfRangeException("count", "Index and count must refer to a location within the string");
-                }
-            } else {
-                if (index >= s.length) {
-                    throw new System.ArgumentOutOfRangeException("startIndex", "startIndex must be less than length of string");
-                }
-            }
-
-            if (count == null || ((index + count) > s.length)) {
-                return s.substr(0, index);
-            }
-
-            return s.substr(0, index) + s.substr(index + count);
-        },
-
-        split: function (s, strings, limit, options) {
-            var re = (!Bridge.hasValue(strings) || strings.length === 0) ? new RegExp("\\s", "g") : new RegExp(strings.map(System.String.escape).join('|'), 'g'),
-                res = [],
-                m,
-                i;
-
-            for (i = 0;; i = re.lastIndex) {
-                if (m = re.exec(s)) {
-                    if (options !== 1 || m.index > i) {
-                        if (res.length === limit - 1) {
-                            res.push(s.substr(i));
-
-                            return res;
-                        } else {
-                            res.push(s.substring(i, m.index));
-                        }
-                    }
-                } else {
-                    if (options !== 1 || i !== s.length) {
-                        res.push(s.substr(i));
-                    }
-
-                    return res;
-                }
-            }
-        },
-
-        trimEnd: function (s, chars) {
-            return s.replace(chars ? new RegExp('[' + System.String.escape(String.fromCharCode.apply(null, chars)) + ']+$') : /\s*$/, '');
-        },
-
-        trimStart: function (s, chars) {
-            return s.replace(chars ? new RegExp('^[' + System.String.escape(String.fromCharCode.apply(null, chars)) + ']+') : /^\s*/, '');
-        },
-
-        trim: function (s, chars) {
-            return System.String.trimStart(System.String.trimEnd(s, chars), chars);
-        },
-
-        concat: function () {
-            var s = "";
-            for (var i = 0; i < arguments.length; i++) {
-                var tmp = arguments[i];
-                s += tmp == null ? "" : tmp;
-            }
-
-            return s;
-        }
-    };
-
-    System.String = string;
 
     // @source Enum.js
 
@@ -2609,6 +2177,7 @@
                 base,
                 prototype,
                 scope = prop.$scope || gscope || Bridge.global,
+                objectType = Bridge.global.System && Bridge.global.System.Object || Object,
                 i,
                 v,
                 isCtor,
@@ -2724,7 +2293,7 @@
 
             base = extend ? extend[0].prototype : this.prototype;
             Class.$base = base;
-            prototype = extend ? (extend[0].$$initCtor ? new extend[0].$$initCtor() : new extend[0]()) : new Object();
+            prototype = extend ? (extend[0].$$initCtor ? new extend[0].$$initCtor() : new extend[0]()) : (objectType.$$initCtor ? new objectType.$$initCtor() : new objectType());
 
             Class.$$initCtor = function () { };
             Class.$$initCtor.prototype = prototype;
@@ -2803,7 +2372,7 @@
             }
 
             if (!extend) {
-                extend = [Object].concat(Class.$interfaces);
+                extend = [objectType].concat(Class.$interfaces);
             }
 
             Bridge.Class.setInheritors(Class, extend);
@@ -2823,7 +2392,10 @@
             };
 
             if (isEntryPoint || Bridge.isFunction(prototype.$main)) {
-                Class.main = prototype.$main;
+                if (!Class.main && prototype.$main) {
+                    Class.main = prototype.$main;
+                }
+                
                 Bridge.Class.$queueEntry.push(Class);
             }
 
@@ -2858,7 +2430,7 @@
                 Class.getDefaultValue = function () {
                     var utype = Class.prototype.$utype;
 
-                    if (utype === String) {
+                    if (utype === String || utype === System.String) {
                         return null;
                     }
 
@@ -3156,14 +2728,14 @@
                 }
 
                 Bridge.Class.createInheritors(fn, extend);
-
+                var objectType = Bridge.global.System && Bridge.global.System.Object || Object;
                 if (!extend) {
-                    extend = [Object].concat(fn.$interfaces);
+                    extend = [objectType].concat(fn.$interfaces);
                 }
 
                 Bridge.Class.setInheritors(fn, extend);
 
-                var prototype = extend ? (extend[0].$$initCtor ? new extend[0].$$initCtor() : new extend[0]()) : new Object();
+                var prototype = extend ? (extend[0].$$initCtor ? new extend[0].$$initCtor() : new extend[0]()) : new objectType();
                 fn.prototype = prototype;
                 fn.prototype.constructor = fn;
             };
@@ -3305,11 +2877,17 @@
     System.Reflection.Assembly.$assembly = Bridge.SystemAssembly;
     var $asm = Bridge.$currentAssembly;
 
+    // @source Object.js
+
+    Bridge.define("System.Object", {
+        
+    });
+
     // @source systemAssemblyVersion.js
 
     Bridge.init(function(){
-        Bridge.SystemAssembly.version = "15.8.0";
-        Bridge.SystemAssembly.compiler = "15.8.0";
+        Bridge.SystemAssembly.version = "16.0.0";
+        Bridge.SystemAssembly.compiler = "16.0.0";
     });
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
@@ -3447,7 +3025,7 @@
         },
 
         getBaseType: function (type) {
-            if (type === Object || type.$kind === "interface" || type.prototype == null) {
+            if (Bridge.isObject(type) || type.$kind === "interface" || type.prototype == null) {
                 return null;
             } else if (Object.getPrototypeOf) {
                 return Object.getPrototypeOf(type.prototype).constructor;
@@ -3490,7 +3068,7 @@
 
             var results = (/function (.{1,})\(/).exec(str);
 
-            return (results && results.length > 1) ? results[1] : "Object";
+            return (results && results.length > 1) ? results[1] : "System.Object";
         },
 
         _makeQName: function (name, asm) {
@@ -3620,7 +3198,7 @@
             } else if (type === String) {
                 return [System.IComparable$1(String), System.IEquatable$1(String), System.IComparable, System.ICloneable, System.Collections.IEnumerable, System.Collections.Generic.IEnumerable$1(System.Char)];
             } else if (type === Array || type.$isArray || System.Array._typedArrays[Bridge.getTypeName(type)]) {
-                var t = type.$elementType || Object;
+                var t = type.$elementType || System.Object;
                 return [System.Collections.IEnumerable, System.Collections.ICollection, System.ICloneable, System.Collections.IList, System.Collections.Generic.IEnumerable$1(t), System.Collections.Generic.ICollection$1(t), System.Collections.Generic.IList$1(t)];
             } else {
                 return [];
@@ -3640,7 +3218,7 @@
                 return false;
             }
 
-            if (baseType === type || baseType === Object) {
+            if (baseType === type || Bridge.isObject(baseType)) {
                 return true;
             }
 
@@ -4174,7 +3752,7 @@
 
             statics: {
                 $is: function (obj) {
-                    if (Bridge.isNumber(obj) && T.$number && T.$is(obj) || Bridge.isDate(obj) && T === Date || Bridge.isBoolean(obj) && T === Boolean || Bridge.isString(obj) && T === String) {
+                    if (Bridge.isNumber(obj) && T.$number && T.$is(obj) || Bridge.isDate(obj) && (T === Date || T === System.DateTime) || Bridge.isBoolean(obj) && (T === Boolean || T === System.Boolean) || Bridge.isString(obj) && (T === String || T === System.String)) {
                         return true;
                     }
 
@@ -4190,7 +3768,7 @@
 
             statics: {
                 $is: function (obj) {
-                    if (Bridge.isNumber(obj) && T.$number && T.$is(obj) || Bridge.isDate(obj) && T === Date || Bridge.isBoolean(obj) && T === Boolean || Bridge.isString(obj) && T === String) {
+                    if (Bridge.isNumber(obj) && T.$number && T.$is(obj) || Bridge.isDate(obj) && (T === Date || T === System.DateTime) || Bridge.isBoolean(obj) && (T === Boolean || T === System.Boolean) || Bridge.isString(obj) && (T === String || T === System.String)) {
                         return true;
                     }
 
@@ -4588,14 +4166,6 @@
         }
     });
 
-    var $box_ = {};
-
-    Bridge.ns("System.Char", $box_);
-
-    Bridge.apply($box_.System.Char, {
-        toString: function(obj) {return String.fromCharCode(obj);}
-    });
-
     // @source formattableStringFactory.js
 
     Bridge.define("System.Runtime.CompilerServices.FormattableStringFactory", {
@@ -4615,7 +4185,7 @@
             this.message = message ? message : ("Exception of type '" + Bridge.getTypeName(this) + "' was thrown.");
             this.innerException = innerException ? innerException : null;
             this.errorStack = new Error();
-            this.data = new(System.Collections.Generic.Dictionary$2(Object, Object))();
+            this.data = new(System.Collections.Generic.Dictionary$2(System.Object, System.Object))();
         },
 
         getMessage: function () {
@@ -5537,25 +5107,22 @@
 
     // @source Bool.js
 
-    var _boolean = {
+Bridge.define("System.Boolean", {
+    inherits: [System.IComparable],
+
+    statics: {
         trueString: "True",
         falseString: "False",
-
-        is: function (obj, type) {
-            if (type === System.IComparable ||
-                type === System.IEquatable$1(Boolean) ||
-                type === System.IComparable$1(Boolean)) {
-                return true;
-            }
-
-            return false;
-        },
 
         $is: function (instance) {
             return typeof (instance) === "boolean";
         },
 
         getDefaultValue: function () {
+            return false;
+        },
+
+        createInstance: function () {
             return false;
         },
 
@@ -5629,10 +5196,11 @@
 
             return false;
         }
-    };
+    }
+});
 
-    System.Boolean = _boolean;
-
+System.Boolean.$kind = "";
+Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), System.IEquatable$1(System.Boolean)]);
     // @source Integer.js
 
     (function () {
@@ -7417,11 +6985,7 @@
     };
 
     System.Decimal.prototype.toString = function (format, provider) {
-        if (!format && !provider) {
-            return this.value.toString();
-        }
-
-        return Bridge.Int.format(this, format, provider);
+        return Bridge.Int.format(this, format || "G", provider);
     };
 
     System.Decimal.prototype.toFloat = function () {
@@ -7866,821 +7430,836 @@
         }
     });
 
-    var date = {
-        getDefaultValue: function () {
-            return new Date(-864e13);
-        },
+    Bridge.define("System.DateTime", {
+        inherits: [System.IComparable, System.IFormattable],
 
-        utcNow: function () {
-            var d = new Date();
+        statics: {
+            $is: function (instance) {
+                return Bridge.isDate(instance);
+            },
 
-            return new Date(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds(), d.getUTCMilliseconds());
-        },
+            createInstance: function () {
+                return new Date(0);
+            },
 
-        today: function () {
-            var d = new Date();
+            getDefaultValue: function () {
+                return new Date(-864e13);
+            },
 
-            return new Date(d.getFullYear(), d.getMonth(), d.getDate());
-        },
+            utcNow: function () {
+                var d = new Date();
 
-        timeOfDay: function (dt) {
-            return new System.TimeSpan((dt - new Date(dt.getFullYear(), dt.getMonth(), dt.getDate())) * 10000);
-        },
+                return new Date(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds(), d.getUTCMilliseconds());
+            },
 
-        isUseGenitiveForm: function (format, index, tokenLen, patternToMatch) {
-            var i,
-                repeat = 0;
+            today: function () {
+                var d = new Date();
 
-            for (i = index - 1; i >= 0 && format[i] !== patternToMatch; i--) {}
+                return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+            },
 
-            if (i >= 0) {
-                while (--i >= 0 && format[i] === patternToMatch) {
-                    repeat++;
-                }
+            timeOfDay: function (dt) {
+                return new System.TimeSpan((dt - new Date(dt.getFullYear(), dt.getMonth(), dt.getDate())) * 10000);
+            },
 
-                if (repeat <= 1) {
-                    return true;
-                }
-            }
+            isUseGenitiveForm: function (format, index, tokenLen, patternToMatch) {
+                var i,
+                    repeat = 0;
 
-            for (i = index + tokenLen; i < format.length && format[i] !== patternToMatch; i++) {}
+                for (i = index - 1; i >= 0 && format[i] !== patternToMatch; i--) { }
 
-            if (i < format.length) {
-                repeat = 0;
-
-                while (++i < format.length && format[i] === patternToMatch) {
-                    repeat++;
-                }
-
-                if (repeat <= 1) {
-                    return true;
-                }
-            }
-
-            return false;
-        },
-
-        format: function (date, format, provider) {
-            var me = this,
-                df = (provider || System.Globalization.CultureInfo.getCurrentCulture()).getFormat(System.Globalization.DateTimeFormatInfo),
-                year = date.getFullYear(),
-                month = date.getMonth(),
-                dayOfMonth = date.getDate(),
-                dayOfWeek = date.getDay(),
-                hour = date.getHours(),
-                minute = date.getMinutes(),
-                second = date.getSeconds(),
-                millisecond = date.getMilliseconds(),
-                timezoneOffset = date.getTimezoneOffset(),
-                formats;
-
-            format = format || "G";
-
-            if (format.length === 1) {
-                formats = df.getAllDateTimePatterns(format, true);
-                format = formats ? formats[0] : format;
-            } else if (format.length === 2 && format.charAt(0) === "%") {
-                format = format.charAt(1);
-            }
-
-            var needRemoveDot = false;
-            format = format.replace(/(\\.|'[^']*'|"[^"]*"|d{1,4}|M{1,4}|yyyy|yy|y|HH?|hh?|mm?|ss?|tt?|f{1,7}|F{1,7}|z{1,3}|\:|\/)/g,
-                function (match, group, index) {
-                    var part = match;
-
-                    switch (match) {
-                        case "dddd":
-                            part = df.dayNames[dayOfWeek];
-
-                            break;
-                        case "ddd":
-                            part = df.abbreviatedDayNames[dayOfWeek];
-
-                            break;
-                        case "dd":
-                            part = dayOfMonth < 10 ? "0" + dayOfMonth : dayOfMonth;
-
-                            break;
-                        case "d":
-                            part = dayOfMonth;
-
-                            break;
-                        case "MMMM":
-                            if (me.isUseGenitiveForm(format, index, 4, "d")) {
-                                part = df.monthGenitiveNames[month];
-                            } else {
-                                part = df.monthNames[month];
-                            }
-
-                            break;
-                        case "MMM":
-                            if (me.isUseGenitiveForm(format, index, 3, "d")) {
-                                part = df.abbreviatedMonthGenitiveNames[month];
-                            } else {
-                                part = df.abbreviatedMonthNames[month];
-                            }
-
-                            break;
-                        case "MM":
-                            part = (month + 1) < 10 ? "0" + (month + 1) : (month + 1);
-
-                            break;
-                        case "M":
-                            part = month + 1;
-
-                            break;
-                        case "yyyy":
-                            part = year;
-
-                            break;
-                        case "yy":
-                            part = (year % 100).toString();
-
-                            if (part.length === 1) {
-                                part = "0" + part;
-                            }
-
-                            break;
-                        case "y":
-                            part = year % 100;
-
-                            break;
-                        case "h":
-                        case "hh":
-                            part = hour % 12;
-
-                            if (!part) {
-                                part = "12";
-                            } else if (match === "hh" && part.length === 1) {
-                                part = "0" + part;
-                            }
-
-                            break;
-                        case "HH":
-                            part = hour.toString();
-
-                            if (part.length === 1) {
-                                part = "0" + part;
-                            }
-
-                            break;
-                        case "H":
-                            part = hour;
-                            break;
-                        case "mm":
-                            part = minute.toString();
-
-                            if (part.length === 1) {
-                                part = "0" + part;
-                            }
-
-                            break;
-                        case "m":
-                            part = minute;
-
-                            break;
-                        case "ss":
-                            part = second.toString();
-
-                            if (part.length === 1) {
-                                part = "0" + part;
-                            }
-
-                            break;
-                        case "s":
-                            part = second;
-                            break;
-                        case "t":
-                        case "tt":
-                            part = (hour < 12) ? df.amDesignator : df.pmDesignator;
-
-                            if (match === "t") {
-                                part = part.charAt(0);
-                            }
-
-                            break;
-                        case "F":
-                        case "FF":
-                        case "FFF":
-                        case "FFFF":
-                        case "FFFFF":
-                        case "FFFFFF":
-                        case "FFFFFFF":
-                            part = millisecond.toString();
-                            if (part.length < 3) {
-                                part = Array(4 - part.length).join("0") + part;
-                            }
-
-                            part = part.substr(0, match.length);
-
-                            var c = '0';
-                            var i = part.length - 1;
-                            for (; i >= 0 && part.charAt(i) === c; i--);
-                            part = part.substring(0, i + 1);
-                            needRemoveDot = part.length == 0;
-                            break;
-                        case "f":
-                        case "ff":
-                        case "fff":
-                        case "ffff":
-                        case "fffff":
-                        case "ffffff":
-                        case "fffffff":
-                            part = millisecond.toString();
-
-                            if (part.length < 3) {
-                                part = Array(4 - part.length).join("0") + part;
-                            }
-
-                            part = part.substr(0, match.length);
-
-                            break;
-                        case "z":
-                            part = timezoneOffset / 60;
-                            part = ((part >= 0) ? "-" : "+") + Math.floor(Math.abs(part));
-
-                            break;
-                        case "zz":
-                        case "zzz":
-                            part = timezoneOffset / 60;
-                            part = ((part >= 0) ? "-" : "+") + System.String.alignString(Math.floor(Math.abs(part)).toString(), 2, "0", 2);
-
-                            if (match === "zzz") {
-                                part += df.timeSeparator + System.String.alignString(Math.floor(Math.abs(timezoneOffset % 60)).toString(), 2, "0", 2);
-                            }
-
-                            break;
-                        case ":":
-                            part = df.timeSeparator;
-
-                            break;
-                        case "/":
-                            part = df.dateSeparator;
-
-                            break;
-                        default:
-                            part = match.substr(1, match.length - 1 - (match.charAt(0) !== "\\"));
-
-                            break;
+                if (i >= 0) {
+                    while (--i >= 0 && format[i] === patternToMatch) {
+                        repeat++;
                     }
 
-                    return part;
-                });
-
-            if (needRemoveDot && System.String.endsWith(format, ".")) {
-                format = format.substring(0, format.length - 1);
-            }
-
-            return format;
-        },
-
-        parse: function (value, provider, utc, silent) {
-            var dt = this.parseExact(value, null, provider, utc, true);
-
-            if (dt !== null) {
-                return dt;
-            }
-
-            dt = Date.parse(value);
-
-            if (!isNaN(dt)) {
-                return new Date(dt);
-            } else if (!silent) {
-                throw new System.FormatException("String does not contain a valid string representation of a date and time.");
-            }
-        },
-
-        parseExact: function (str, format, provider, utc, silent) {
-            if (!format) {
-                format = ["G", "g", "F", "f", "D", "d", "R", "r", "s", "S", "U", "u", "O", "o", "Y", "y", "M", "m", "T", "t"];
-            }
-
-            if (Bridge.isArray(format)) {
-                var j = 0,
-                    d;
-
-                for (j; j < format.length; j++) {
-                    d = Bridge.Date.parseExact(str, format[j], provider, utc, true);
-
-                    if (d != null) {
-                        return d;
+                    if (repeat <= 1) {
+                        return true;
                     }
                 }
 
-                if (silent) {
-                    return null;
-                }
+                for (i = index + tokenLen; i < format.length && format[i] !== patternToMatch; i++) { }
 
-                throw new System.FormatException("String does not contain a valid string representation of a date and time.");
-            }
+                if (i < format.length) {
+                    repeat = 0;
 
-            var df = (provider || System.Globalization.CultureInfo.getCurrentCulture()).getFormat(System.Globalization.DateTimeFormatInfo),
-                am = df.amDesignator,
-                pm = df.pmDesignator,
-                idx = 0,
-                index = 0,
-                i = 0,
-                c,
-                token,
-                year = 0,
-                month = 1,
-                date = 1,
-                hh = 0,
-                mm = 0,
-                ss = 0,
-                ff = 0,
-                tt = "",
-                zzh = 0,
-                zzm = 0,
-                zzi,
-                sign,
-                neg,
-                names,
-                name,
-                invalid = false,
-                inQuotes = false,
-                tokenMatched,
-                formats;
+                    while (++i < format.length && format[i] === patternToMatch) {
+                        repeat++;
+                    }
 
-            if (str == null) {
-                throw new System.ArgumentNullException("str");
-            }
-
-            format = format || "G";
-
-            if (format.length === 1) {
-                formats = df.getAllDateTimePatterns(format, true);
-                format = formats ? formats[0] : format;
-            } else if (format.length === 2 && format.charAt(0) === "%") {
-                format = format.charAt(1);
-            }
-
-            while (index < format.length) {
-                c = format.charAt(index);
-                token = "";
-
-                if (inQuotes === "\\") {
-                    token += c;
-                    index++;
-                } else {
-                    while ((format.charAt(index) === c) && (index < format.length)) {
-                        token += c;
-                        index++;
+                    if (repeat <= 1) {
+                        return true;
                     }
                 }
 
-                tokenMatched = true;
+                return false;
+            },
 
-                if (!inQuotes) {
-                    if (token === "yyyy" || token === "yy" || token === "y") {
-                        if (token === "yyyy") {
-                            year = this.subparseInt(str, idx, 4, 4);
-                        } else if (token === "yy") {
-                            year = this.subparseInt(str, idx, 2, 2);
-                        } else if (token === "y") {
-                            year = this.subparseInt(str, idx, 2, 4);
-                        }
+            format: function (date, format, provider) {
+                var me = this,
+                    df = (provider || System.Globalization.CultureInfo.getCurrentCulture()).getFormat(System.Globalization.DateTimeFormatInfo),
+                    year = date.getFullYear(),
+                    month = date.getMonth(),
+                    dayOfMonth = date.getDate(),
+                    dayOfWeek = date.getDay(),
+                    hour = date.getHours(),
+                    minute = date.getMinutes(),
+                    second = date.getSeconds(),
+                    millisecond = date.getMilliseconds(),
+                    timezoneOffset = date.getTimezoneOffset(),
+                    formats;
 
-                        if (year == null) {
-                            invalid = true;
-                            break;
-                        }
+                format = format || "G";
 
-                        idx += year.length;
+                if (format.length === 1) {
+                    formats = df.getAllDateTimePatterns(format, true);
+                    format = formats ? formats[0] : format;
+                } else if (format.length === 2 && format.charAt(0) === "%") {
+                    format = format.charAt(1);
+                }
 
-                        if (year.length === 2) {
-                            year = ~~year;
-                            year = (year > 30 ? 1900 : 2000) + year;
-                        }
-                    } else if (token === "MMM" || token === "MMMM") {
-                        month = 0;
+                var needRemoveDot = false;
 
-                        if (token === "MMM") {
-                            if (this.isUseGenitiveForm(format, index, 3, "d")) {
-                                names = df.abbreviatedMonthGenitiveNames;
-                            } else {
-                                names = df.abbreviatedMonthNames;
-                            }
-                        } else {
-                            if (this.isUseGenitiveForm(format, index, 4, "d")) {
-                                names = df.monthGenitiveNames;
-                            } else {
-                                names = df.monthNames;
-                            }
-                        }
+                format = format.replace(/(\\.|'[^']*'|"[^"]*"|d{1,4}|M{1,4}|yyyy|yy|y|HH?|hh?|mm?|ss?|tt?|f{1,7}|F{1,7}|z{1,3}|\:|\/)/g,
+                    function (match, group, index) {
+                        var part = match;
 
-                        for (i = 0; i < names.length; i++) {
-                            name = names[i];
-
-                            if (str.substring(idx, idx + name.length).toLowerCase() === name.toLowerCase()) {
-                                month = (i % 12) + 1;
-                                idx += name.length;
+                        switch (match) {
+                            case "dddd":
+                                part = df.dayNames[dayOfWeek];
 
                                 break;
-                            }
-                        }
-
-                        if ((month < 1) || (month > 12)) {
-                            invalid = true;
-
-                            break;
-                        }
-                    } else if (token === "MM" || token === "M") {
-                        month = this.subparseInt(str, idx, token.length, 2);
-
-                        if (month == null || month < 1 || month > 12) {
-                            invalid = true;
-
-                            break;
-                        }
-
-                        idx += month.length;
-                    } else if (token === "dddd" || token === "ddd") {
-                        names = token === "ddd" ? df.abbreviatedDayNames : df.dayNames;
-
-                        for (i = 0; i < names.length; i++) {
-                            name = names[i];
-
-                            if (str.substring(idx, idx + name.length).toLowerCase() === name.toLowerCase()) {
-                                idx += name.length;
+                            case "ddd":
+                                part = df.abbreviatedDayNames[dayOfWeek];
 
                                 break;
-                            }
-                        }
-                    } else if (token === "dd" || token === "d") {
-                        date = this.subparseInt(str, idx, token.length, 2);
+                            case "dd":
+                                part = dayOfMonth < 10 ? "0" + dayOfMonth : dayOfMonth;
 
-                        if (date == null || date < 1 || date > 31) {
-                            invalid = true;
+                                break;
+                            case "d":
+                                part = dayOfMonth;
 
-                            break;
-                        }
+                                break;
+                            case "MMMM":
+                                if (me.isUseGenitiveForm(format, index, 4, "d")) {
+                                    part = df.monthGenitiveNames[month];
+                                } else {
+                                    part = df.monthNames[month];
+                                }
 
-                        idx += date.length;
-                    } else if (token === "hh" || token === "h") {
-                        hh = this.subparseInt(str, idx, token.length, 2);
+                                break;
+                            case "MMM":
+                                if (me.isUseGenitiveForm(format, index, 3, "d")) {
+                                    part = df.abbreviatedMonthGenitiveNames[month];
+                                } else {
+                                    part = df.abbreviatedMonthNames[month];
+                                }
 
-                        if (hh == null || hh < 1 || hh > 12) {
-                            invalid = true;
+                                break;
+                            case "MM":
+                                part = (month + 1) < 10 ? "0" + (month + 1) : (month + 1);
 
-                            break;
-                        }
+                                break;
+                            case "M":
+                                part = month + 1;
 
-                        idx += hh.length;
-                    } else if (token === "HH" || token === "H") {
-                        hh = this.subparseInt(str, idx, token.length, 2);
+                                break;
+                            case "yyyy":
+                                part = year;
 
-                        if (hh == null || hh < 0 || hh > 23) {
-                            invalid = true;
+                                break;
+                            case "yy":
+                                part = (year % 100).toString();
 
-                            break;
-                        }
+                                if (part.length === 1) {
+                                    part = "0" + part;
+                                }
 
-                        idx += hh.length;
-                    } else if (token === "mm" || token === "m") {
-                        mm = this.subparseInt(str, idx, token.length, 2);
+                                break;
+                            case "y":
+                                part = year % 100;
 
-                        if (mm == null || mm < 0 || mm > 59) {
-                            return null;
-                        }
+                                break;
+                            case "h":
+                            case "hh":
+                                part = hour % 12;
 
-                        idx += mm.length;
-                    } else if (token === "ss" || token === "s") {
-                        ss = this.subparseInt(str, idx, token.length, 2);
+                                if (!part) {
+                                    part = "12";
+                                } else if (match === "hh" && part.length === 1) {
+                                    part = "0" + part;
+                                }
 
-                        if (ss == null || ss < 0 || ss > 59) {
-                            invalid = true;
+                                break;
+                            case "HH":
+                                part = hour.toString();
 
-                            break;
-                        }
+                                if (part.length === 1) {
+                                    part = "0" + part;
+                                }
 
-                        idx += ss.length;
-                    } else if (token === "u") {
-                        ff = this.subparseInt(str, idx, 1, 7);
+                                break;
+                            case "H":
+                                part = hour;
+                                break;
+                            case "mm":
+                                part = minute.toString();
 
-                        if (ff == null) {
-                            invalid = true;
+                                if (part.length === 1) {
+                                    part = "0" + part;
+                                }
 
-                            break;
-                        }
+                                break;
+                            case "m":
+                                part = minute;
 
-                        idx += ff.length;
+                                break;
+                            case "ss":
+                                part = second.toString();
 
-                        if (ff.length > 3) {
-                            ff = ff.substring(0, 3);
-                        }
-                    } else if (token === "fffffff" || token === "ffffff" || token === "fffff" || token === "ffff" || token === "fff" || token === "ff" || token === "f") {
-                        ff = this.subparseInt(str, idx, token.length, 7);
+                                if (part.length === 1) {
+                                    part = "0" + part;
+                                }
 
-                        if (ff == null) {
-                            invalid = true;
+                                break;
+                            case "s":
+                                part = second;
+                                break;
+                            case "t":
+                            case "tt":
+                                part = (hour < 12) ? df.amDesignator : df.pmDesignator;
 
-                            break;
-                        }
+                                if (match === "t") {
+                                    part = part.charAt(0);
+                                }
 
-                        idx += ff.length;
+                                break;
+                             case "F":
+                             case "FF":
+                             case "FFF":
+                             case "FFFF":
+                             case "FFFFF":
+                             case "FFFFFF":
+                             case "FFFFFFF":
+                                 part = millisecond.toString();
+                                 if (part.length < 3) {
+                                     part = Array(4 - part.length).join("0") + part;
+                                 }
 
-                        if (ff.length > 3) {
-                            ff = ff.substring(0, 3);
-                        }
-                    } else if (token === "t") {
-                        if (str.substring(idx, idx + 1).toLowerCase() === am.charAt(0).toLowerCase()) {
-                            tt = am;
-                        } else if (str.substring(idx, idx + 1).toLowerCase() === pm.charAt(0).toLowerCase()) {
-                            tt = pm;
-                        } else {
-                            invalid = true;
+                                 part = part.substr(0, match.length);
 
-                            break;
-                        }
+                                 var c = '0';
+                                 var i = part.length - 1;
+                                 for (; i >= 0 && part.charAt(i) === c; i--);
+                                 part = part.substring(0, i + 1);
+                                 needRemoveDot = part.length == 0;
 
-                        idx += 1;
-                    } else if (token === "tt") {
-                        if (str.substring(idx, idx + 2).toLowerCase() === am.toLowerCase()) {
-                            tt = am;
-                        } else if (str.substring(idx, idx + 2).toLowerCase() === pm.toLowerCase()) {
-                            tt = pm;
-                        } else {
-                            invalid = true;
+                                 break;
+                            case "f":
+                            case "ff":
+                            case "fff":
+                            case "ffff":
+                            case "fffff":
+                            case "ffffff":
+                            case "fffffff":
+                                part = millisecond.toString();
 
-                            break;
-                        }
+                                if (part.length < 3) {
+                                     part = Array(4 - part.length).join("0") + part;
+                                }
 
-                        idx += 2;
-                    } else if (token === "z" || token === "zz") {
-                        sign = str.charAt(idx);
+                                part = part.substr(0, match.length);
 
-                        if (sign === "-") {
-                            neg = true;
-                        } else if (sign === "+") {
-                            neg = false;
-                        } else {
-                            invalid = true;
+                                break;
+                            case "z":
+                                part = timezoneOffset / 60;
+                                part = ((part >= 0) ? "-" : "+") + Math.floor(Math.abs(part));
 
-                            break;
-                        }
+                                break;
+                            case "zz":
+                            case "zzz":
+                                part = timezoneOffset / 60;
+                                part = ((part >= 0) ? "-" : "+") + System.String.alignString(Math.floor(Math.abs(part)).toString(), 2, "0", 2);
 
-                        idx++;
+                                if (match === "zzz") {
+                                    part += df.timeSeparator + System.String.alignString(Math.floor(Math.abs(timezoneOffset % 60)).toString(), 2, "0", 2);
+                                }
 
-                        zzh = this.subparseInt(str, idx, 1, 2);
+                                break;
+                            case ":":
+                                part = df.timeSeparator;
 
-                        if (zzh == null || zzh > 14) {
-                            invalid = true;
+                                break;
+                            case "/":
+                                part = df.dateSeparator;
 
-                            break;
-                        }
+                                break;
+                            default:
+                                part = match.substr(1, match.length - 1 - (match.charAt(0) !== "\\"));
 
-                        idx += zzh.length;
-
-                        if (neg) {
-                            zzh = -zzh;
-                        }
-                    } else if (token === "zzz") {
-                        name = str.substring(idx, idx + 6);
-                        idx += 6;
-
-                        if (name.length !== 6) {
-                            invalid = true;
-
-                            break;
-                        }
-
-                        sign = name.charAt(0);
-
-                        if (sign === "-") {
-                            neg = true;
-                        } else if (sign === "+") {
-                            neg = false;
-                        } else {
-                            invalid = true;
-
-                            break;
-                        }
-
-                        zzi = 1;
-                        zzh = this.subparseInt(name, zzi, 1, 2);
-
-                        if (zzh == null || zzh > 14) {
-                            invalid = true;
-
-                            break;
-                        }
-
-                        zzi += zzh.length;
-
-                        if (neg) {
-                            zzh = -zzh;
-                        }
-
-                        if (name.charAt(zzi) !== df.timeSeparator) {
-                            invalid = true;
-
-                            break;
+                                break;
                         }
 
-                        zzi++;
+                        return part;
+                    });
 
-                        zzm = this.subparseInt(name, zzi, 1, 2);
-
-                        if (zzm == null || zzh > 59) {
-                            invalid = true;
-
-                            break;
-                        }
-                    } else {
-                        tokenMatched = false;
-                    }
+                if (needRemoveDot && System.String.endsWith(format, ".")) {
+                    format = format.substring(0, format.length - 1);
                 }
 
-                if (inQuotes || !tokenMatched) {
-                    name = str.substring(idx, idx + token.length);
+                return format;
+            },
 
-                    if ((!inQuotes && ((token === ":" && name !== df.timeSeparator) ||
-                        (token === "/" && name !== df.dateSeparator))) ||
-                        (name !== token && token !== "'" && token !== '"' && token !== "\\")) {
-                        invalid = true;
+            parse: function (value, provider, utc, silent) {
+                var dt = this.parseExact(value, null, provider, utc, true);
 
-                        break;
+                if (dt !== null) {
+                    return dt;
+                }
+
+                dt = Date.parse(value);
+
+                if (!isNaN(dt)) {
+                    return new Date(dt);
+                } else if (!silent) {
+                    throw new System.FormatException("String does not contain a valid string representation of a date and time.");
+                }
+            },
+
+            parseExact: function (str, format, provider, utc, silent) {
+                if (!format) {
+                    format = ["G", "g", "F", "f", "D", "d", "R", "r", "s", "S", "U", "u", "O", "o", "Y", "y", "M", "m", "T", "t"];
+                }
+
+                if (Bridge.isArray(format)) {
+                    var j = 0,
+                        d;
+
+                    for (j; j < format.length; j++) {
+                        d = System.DateTime.parseExact(str, format[j], provider, utc, true);
+
+                        if (d != null) {
+                            return d;
+                        }
                     }
+
+                    if (silent) {
+                        return null;
+                    }
+
+                    throw new System.FormatException("String does not contain a valid string representation of a date and time.");
+                }
+
+                var df = (provider || System.Globalization.CultureInfo.getCurrentCulture()).getFormat(System.Globalization.DateTimeFormatInfo),
+                    am = df.amDesignator,
+                    pm = df.pmDesignator,
+                    idx = 0,
+                    index = 0,
+                    i = 0,
+                    c,
+                    token,
+                    year = 0,
+                    month = 1,
+                    date = 1,
+                    hh = 0,
+                    mm = 0,
+                    ss = 0,
+                    ff = 0,
+                    tt = "",
+                    zzh = 0,
+                    zzm = 0,
+                    zzi,
+                    sign,
+                    neg,
+                    names,
+                    name,
+                    invalid = false,
+                    inQuotes = false,
+                    tokenMatched,
+                    formats;
+
+                if (str == null) {
+                    throw new System.ArgumentNullException("str");
+                }
+
+                format = format || "G";
+
+                if (format.length === 1) {
+                    formats = df.getAllDateTimePatterns(format, true);
+                    format = formats ? formats[0] : format;
+                } else if (format.length === 2 && format.charAt(0) === "%") {
+                    format = format.charAt(1);
+                }
+
+                while (index < format.length) {
+                    c = format.charAt(index);
+                    token = "";
 
                     if (inQuotes === "\\") {
-                        inQuotes = false;
+                        token += c;
+                        index++;
+                    } else {
+                        while ((format.charAt(index) === c) && (index < format.length)) {
+                            token += c;
+                            index++;
+                        }
                     }
 
-                    if (token !== "'" && token !== '"' && token !== "\\") {
-                        idx += token.length;
-                    } else {
-                        if (inQuotes === false) {
-                            inQuotes = token;
-                        } else {
-                            if (inQuotes !== token) {
+                    tokenMatched = true;
+
+                    if (!inQuotes) {
+                        if (token === "yyyy" || token === "yy" || token === "y") {
+                            if (token === "yyyy") {
+                                year = this.subparseInt(str, idx, 4, 4);
+                            } else if (token === "yy") {
+                                year = this.subparseInt(str, idx, 2, 2);
+                            } else if (token === "y") {
+                                year = this.subparseInt(str, idx, 2, 4);
+                            }
+
+                            if (year == null) {
                                 invalid = true;
                                 break;
                             }
 
+                            idx += year.length;
+
+                            if (year.length === 2) {
+                                year = ~~year;
+                                year = (year > 30 ? 1900 : 2000) + year;
+                            }
+                        } else if (token === "MMM" || token === "MMMM") {
+                            month = 0;
+
+                            if (token === "MMM") {
+                                if (this.isUseGenitiveForm(format, index, 3, "d")) {
+                                    names = df.abbreviatedMonthGenitiveNames;
+                                } else {
+                                    names = df.abbreviatedMonthNames;
+                                }
+                            } else {
+                                if (this.isUseGenitiveForm(format, index, 4, "d")) {
+                                    names = df.monthGenitiveNames;
+                                } else {
+                                    names = df.monthNames;
+                                }
+                            }
+
+                            for (i = 0; i < names.length; i++) {
+                                name = names[i];
+
+                                if (str.substring(idx, idx + name.length).toLowerCase() === name.toLowerCase()) {
+                                    month = (i % 12) + 1;
+                                    idx += name.length;
+
+                                    break;
+                                }
+                            }
+
+                            if ((month < 1) || (month > 12)) {
+                                invalid = true;
+
+                                break;
+                            }
+                        } else if (token === "MM" || token === "M") {
+                            month = this.subparseInt(str, idx, token.length, 2);
+
+                            if (month == null || month < 1 || month > 12) {
+                                invalid = true;
+
+                                break;
+                            }
+
+                            idx += month.length;
+                        } else if (token === "dddd" || token === "ddd") {
+                            names = token === "ddd" ? df.abbreviatedDayNames : df.dayNames;
+
+                            for (i = 0; i < names.length; i++) {
+                                name = names[i];
+
+                                if (str.substring(idx, idx + name.length).toLowerCase() === name.toLowerCase()) {
+                                    idx += name.length;
+
+                                    break;
+                                }
+                            }
+                        } else if (token === "dd" || token === "d") {
+                            date = this.subparseInt(str, idx, token.length, 2);
+
+                            if (date == null || date < 1 || date > 31) {
+                                invalid = true;
+
+                                break;
+                            }
+
+                            idx += date.length;
+                        } else if (token === "hh" || token === "h") {
+                            hh = this.subparseInt(str, idx, token.length, 2);
+
+                            if (hh == null || hh < 1 || hh > 12) {
+                                invalid = true;
+
+                                break;
+                            }
+
+                            idx += hh.length;
+                        } else if (token === "HH" || token === "H") {
+                            hh = this.subparseInt(str, idx, token.length, 2);
+
+                            if (hh == null || hh < 0 || hh > 23) {
+                                invalid = true;
+
+                                break;
+                            }
+
+                            idx += hh.length;
+                        } else if (token === "mm" || token === "m") {
+                            mm = this.subparseInt(str, idx, token.length, 2);
+
+                            if (mm == null || mm < 0 || mm > 59) {
+                                return null;
+                            }
+
+                            idx += mm.length;
+                        } else if (token === "ss" || token === "s") {
+                            ss = this.subparseInt(str, idx, token.length, 2);
+
+                            if (ss == null || ss < 0 || ss > 59) {
+                                invalid = true;
+
+                                break;
+                            }
+
+                            idx += ss.length;
+                        } else if (token === "u") {
+                            ff = this.subparseInt(str, idx, 1, 7);
+
+                            if (ff == null) {
+                                invalid = true;
+
+                                break;
+                            }
+
+                            idx += ff.length;
+
+                            if (ff.length > 3) {
+                                ff = ff.substring(0, 3);
+                            }
+                        } else if (token === "fffffff" || token === "ffffff" || token === "fffff" || token === "ffff" || token === "fff" || token === "ff" || token === "f") {
+                            ff = this.subparseInt(str, idx, token.length, 7);
+
+                            if (ff == null) {
+                                invalid = true;
+
+                                break;
+                            }
+
+                            idx += ff.length;
+
+                            if (ff.length > 3) {
+                                ff = ff.substring(0, 3);
+                            }
+                        } else if (token === "t") {
+                            if (str.substring(idx, idx + 1).toLowerCase() === am.charAt(0).toLowerCase()) {
+                                tt = am;
+                            } else if (str.substring(idx, idx + 1).toLowerCase() === pm.charAt(0).toLowerCase()) {
+                                tt = pm;
+                            } else {
+                                invalid = true;
+
+                                break;
+                            }
+
+                            idx += 1;
+                        } else if (token === "tt") {
+                            if (str.substring(idx, idx + 2).toLowerCase() === am.toLowerCase()) {
+                                tt = am;
+                            } else if (str.substring(idx, idx + 2).toLowerCase() === pm.toLowerCase()) {
+                                tt = pm;
+                            } else {
+                                invalid = true;
+
+                                break;
+                            }
+
+                            idx += 2;
+                        } else if (token === "z" || token === "zz") {
+                            sign = str.charAt(idx);
+
+                            if (sign === "-") {
+                                neg = true;
+                            } else if (sign === "+") {
+                                neg = false;
+                            } else {
+                                invalid = true;
+
+                                break;
+                            }
+
+                            idx++;
+
+                            zzh = this.subparseInt(str, idx, 1, 2);
+
+                            if (zzh == null || zzh > 14) {
+                                invalid = true;
+
+                                break;
+                            }
+
+                            idx += zzh.length;
+
+                            if (neg) {
+                                zzh = -zzh;
+                            }
+                        } else if (token === "zzz") {
+                            name = str.substring(idx, idx + 6);
+                            idx += 6;
+
+                            if (name.length !== 6) {
+                                invalid = true;
+
+                                break;
+                            }
+
+                            sign = name.charAt(0);
+
+                            if (sign === "-") {
+                                neg = true;
+                            } else if (sign === "+") {
+                                neg = false;
+                            } else {
+                                invalid = true;
+
+                                break;
+                            }
+
+                            zzi = 1;
+                            zzh = this.subparseInt(name, zzi, 1, 2);
+
+                            if (zzh == null || zzh > 14) {
+                                invalid = true;
+
+                                break;
+                            }
+
+                            zzi += zzh.length;
+
+                            if (neg) {
+                                zzh = -zzh;
+                            }
+
+                            if (name.charAt(zzi) !== df.timeSeparator) {
+                                invalid = true;
+
+                                break;
+                            }
+
+                            zzi++;
+
+                            zzm = this.subparseInt(name, zzi, 1, 2);
+
+                            if (zzm == null || zzh > 59) {
+                                invalid = true;
+
+                                break;
+                            }
+                        } else {
+                            tokenMatched = false;
+                        }
+                    }
+
+                    if (inQuotes || !tokenMatched) {
+                        name = str.substring(idx, idx + token.length);
+
+                        if ((!inQuotes && ((token === ":" && name !== df.timeSeparator) ||
+                            (token === "/" && name !== df.dateSeparator))) ||
+                            (name !== token && token !== "'" && token !== '"' && token !== "\\")) {
+                            invalid = true;
+
+                            break;
+                        }
+
+                        if (inQuotes === "\\") {
                             inQuotes = false;
                         }
+
+                        if (token !== "'" && token !== '"' && token !== "\\") {
+                            idx += token.length;
+                        } else {
+                            if (inQuotes === false) {
+                                inQuotes = token;
+                            } else {
+                                if (inQuotes !== token) {
+                                    invalid = true;
+                                    break;
+                                }
+
+                                inQuotes = false;
+                            }
+                        }
                     }
                 }
-            }
 
-            if (inQuotes) {
-                invalid = true;
-            }
-
-            if (!invalid) {
-                if (idx !== str.length) {
+                if (inQuotes) {
                     invalid = true;
-                } else if (month === 2) {
-                    if (((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0)) {
-                        if (date > 29) {
+                }
+
+                if (!invalid) {
+                    if (idx !== str.length) {
+                        invalid = true;
+                    } else if (month === 2) {
+                        if (((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0)) {
+                            if (date > 29) {
+                                invalid = true;
+                            }
+                        } else if (date > 28) {
                             invalid = true;
                         }
-                    } else if (date > 28) {
-                        invalid = true;
-                    }
-                } else if ((month === 4) || (month === 6) || (month === 9) || (month === 11)) {
-                    if (date > 30) {
-                        invalid = true;
+                    } else if ((month === 4) || (month === 6) || (month === 9) || (month === 11)) {
+                        if (date > 30) {
+                            invalid = true;
+                        }
                     }
                 }
-            }
 
-            if (invalid) {
-                if (silent) {
-                    return null;
+                if (invalid) {
+                    if (silent) {
+                        return null;
+                    }
+
+                    throw new System.FormatException("String does not contain a valid string representation of a date and time.");
                 }
 
-                throw new System.FormatException("String does not contain a valid string representation of a date and time.");
-            }
-
-            if (hh < 12 && tt === pm) {
-                hh = hh - 0 + 12;
-            } else if (hh > 11 && tt === am) {
-                hh -= 12;
-            }
-
-            if (zzh === 0 && zzm === 0 && !utc) {
-                return new Date(year, month - 1, date, hh, mm, ss, ff);
-            }
-
-            return new Date(Date.UTC(year, month - 1, date, hh - zzh, mm - zzm, ss, ff));
-        },
-
-        subparseInt: function (str, index, min, max) {
-            var x,
-                token;
-
-            for (x = max; x >= min; x--) {
-                token = str.substring(index, index + x);
-
-                if (token.length < min) {
-                    return null;
+                if (hh < 12 && tt === pm) {
+                    hh = hh - 0 + 12;
+                } else if (hh > 11 && tt === am) {
+                    hh -= 12;
                 }
 
-                if (/^\d+$/.test(token)) {
-                    return token;
+                if (zzh === 0 && zzm === 0 && !utc) {
+                    return new Date(year, month - 1, date, hh, mm, ss, ff);
                 }
+
+                return new Date(Date.UTC(year, month - 1, date, hh - zzh, mm - zzm, ss, ff));
+            },
+
+            subparseInt: function (str, index, min, max) {
+                var x,
+                    token;
+
+                for (x = max; x >= min; x--) {
+                    token = str.substring(index, index + x);
+
+                    if (token.length < min) {
+                        return null;
+                    }
+
+                    if (/^\d+$/.test(token)) {
+                        return token;
+                    }
+                }
+
+                return null;
+            },
+
+            tryParse: function (value, provider, result, utc) {
+                result.v = this.parse(value, provider, utc, true);
+
+                if (result.v == null) {
+                    result.v = new Date(-864e13);
+
+                    return false;
+                }
+
+                return true;
+            },
+
+            tryParseExact: function (value, format, provider, result, utc) {
+                result.v = this.parseExact(value, format, provider, utc, true);
+
+                if (result.v == null) {
+                    result.v = new Date(-864e13);
+
+                    return false;
+                }
+
+                return true;
+            },
+
+            isDaylightSavingTime: function (dt) {
+                var temp = System.DateTime.today();
+
+                temp.setMonth(0);
+                temp.setDate(1);
+
+                return temp.getTimezoneOffset() !== dt.getTimezoneOffset();
+            },
+
+            toUTC: function (date) {
+                return new Date(date.getUTCFullYear(),
+                    date.getUTCMonth(),
+                    date.getUTCDate(),
+                    date.getUTCHours(),
+                    date.getUTCMinutes(),
+                    date.getUTCSeconds(),
+                    date.getUTCMilliseconds());
+            },
+
+            toLocal: function (date) {
+                return new Date(Date.UTC(date.getFullYear(),
+                    date.getMonth(),
+                    date.getDate(),
+                    date.getHours(),
+                    date.getMinutes(),
+                    date.getSeconds(),
+                    date.getMilliseconds()));
+            },
+
+            dateAddSubTimespan: function (d, t, direction) {
+                var result = new Date(d.getTime());
+
+                result.setDate(result.getDate() + (direction * t.getDays()));
+                result.setHours(result.getHours() + (direction * t.getHours()));
+                result.setMinutes(result.getMinutes() + (direction * t.getMinutes()));
+                result.setSeconds(result.getSeconds() + (direction * t.getSeconds()));
+                result.setMilliseconds(result.getMilliseconds() + (direction * t.getMilliseconds()));
+
+                return result;
+            },
+
+            subdt: function (d, t) {
+                return Bridge.hasValue$1(d, t) ? this.dateAddSubTimespan(d, t, -1) : null;
+            },
+
+            adddt: function (d, t) {
+                return Bridge.hasValue$1(d, t) ? this.dateAddSubTimespan(d, t, 1) : null;
+            },
+
+            subdd: function (a, b) {
+                return Bridge.hasValue$1(a, b) ? (new System.TimeSpan((a - b) * 10000)) : null;
+            },
+
+            gt: function (a, b) {
+                return Bridge.hasValue$1(a, b) ? (a > b) : false;
+            },
+
+            gte: function (a, b) {
+                return Bridge.hasValue$1(a, b) ? (a >= b) : false;
+            },
+
+            lt: function (a, b) {
+                return Bridge.hasValue$1(a, b) ? (a < b) : false;
+            },
+
+            lte: function (a, b) {
+                return Bridge.hasValue$1(a, b) ? (a <= b) : false;
             }
-
-            return null;
-        },
-
-        tryParse: function (value, provider, result, utc) {
-            result.v = this.parse(value, provider, utc, true);
-
-            if (result.v == null) {
-                result.v = new Date(-864e13);
-
-                return false;
-            }
-
-            return true;
-        },
-
-        tryParseExact: function (value, format, provider, result, utc) {
-            result.v = this.parseExact(value, format, provider, utc, true);
-
-            if (result.v == null) {
-                result.v = new Date(-864e13);
-
-                return false;
-            }
-
-            return true;
-        },
-
-        isDaylightSavingTime: function (dt) {
-            var temp = Bridge.Date.today();
-
-            temp.setMonth(0);
-            temp.setDate(1);
-
-            return temp.getTimezoneOffset() !== dt.getTimezoneOffset();
-        },
-
-        toUTC: function (date) {
-            return new Date(date.getUTCFullYear(),
-                date.getUTCMonth(),
-                date.getUTCDate(),
-                date.getUTCHours(),
-                date.getUTCMinutes(),
-                date.getUTCSeconds(),
-                date.getUTCMilliseconds());
-        },
-
-        toLocal: function (date) {
-            return new Date(Date.UTC(date.getFullYear(),
-                date.getMonth(),
-                date.getDate(),
-                date.getHours(),
-                date.getMinutes(),
-                date.getSeconds(),
-                date.getMilliseconds()));
-        },
-
-        dateAddSubTimespan: function (d, t, direction) {
-            var result = new Date(d.getTime());
-
-            result.setDate(result.getDate() + (direction * t.getDays()));
-            result.setHours(result.getHours() + (direction * t.getHours()));
-            result.setMinutes(result.getMinutes() + (direction * t.getMinutes()));
-            result.setSeconds(result.getSeconds() + (direction * t.getSeconds()));
-            result.setMilliseconds(result.getMilliseconds() + (direction * t.getMilliseconds()));
-
-            return result;
-        },
-
-        subdt: function (d, t) {
-            return Bridge.hasValue$1(d, t) ? this.dateAddSubTimespan(d, t, -1) : null;
-        },
-
-        adddt: function (d, t) {
-            return Bridge.hasValue$1(d, t) ? this.dateAddSubTimespan(d, t, 1) : null;
-        },
-
-        subdd: function (a, b) {
-            return Bridge.hasValue$1(a, b) ? (new System.TimeSpan((a - b) * 10000)) : null;
-        },
-
-        gt: function (a, b) {
-            return Bridge.hasValue$1(a, b) ? (a > b) : false;
-        },
-
-        gte: function (a, b) {
-            return Bridge.hasValue$1(a, b) ? (a >= b) : false;
-        },
-
-        lt: function (a, b) {
-            return Bridge.hasValue$1(a, b) ? (a < b) : false;
-        },
-
-        lte: function (a, b) {
-            return Bridge.hasValue$1(a, b) ? (a <= b) : false;
         }
-    };
+    });
 
-    Bridge.Date = date;
+    System.DateTime.$kind = "";
+    Bridge.Class.addExtend(System.DateTime, [System.IComparable$1(System.DateTime), System.IEquatable$1(System.DateTime)]);
 
     // @source TimeSpan.js
 
@@ -10759,7 +10338,7 @@
         };
     });
 
-    System.Collections.Generic.EqualityComparer$1.$default = new (System.Collections.Generic.EqualityComparer$1(Object))();
+    System.Collections.Generic.EqualityComparer$1.$default = new (System.Collections.Generic.EqualityComparer$1(System.Object))();
 
     // @source Comparer.js
 
@@ -10776,7 +10355,7 @@
         }
     });
 
-    System.Collections.Generic.Comparer$1.$default = new (System.Collections.Generic.Comparer$1(Object))(function (x, y) {
+    System.Collections.Generic.Comparer$1.$default = new (System.Collections.Generic.Comparer$1(System.Object))(function (x, y) {
         if (!Bridge.hasValue(x)) {
             return !Bridge.hasValue(y) ? 0 : -1;
         } else if (!Bridge.hasValue(y)) {
@@ -11463,6 +11042,482 @@
         };
     });
 
+    // @source String.js
+
+Bridge.define("System.String", {
+    inherits: [System.IComparable, System.ICloneable, System.Collections.IEnumerable, System.Collections.Generic.IEnumerable$1(System.Char)],
+
+    statics: {
+        $is: function (instance) {
+            return typeof (instance) === "string";
+        },
+
+        lastIndexOf: function (s, search, startIndex, count) {
+            var index = s.lastIndexOf(search, startIndex);
+
+            return (index < (startIndex - count + 1)) ? -1 : index;
+        },
+
+        lastIndexOfAny: function (s, chars, startIndex, count) {
+            var length = s.length;
+
+            if (!length) {
+                return -1;
+            }
+
+            chars = String.fromCharCode.apply(null, chars);
+            startIndex = startIndex || length - 1;
+            count = count || length;
+
+            var endIndex = startIndex - count + 1;
+
+            if (endIndex < 0) {
+                endIndex = 0;
+            }
+
+            for (var i = startIndex; i >= endIndex; i--) {
+                if (chars.indexOf(s.charAt(i)) >= 0) {
+                    return i;
+                }
+            }
+
+            return -1;
+        },
+
+        isNullOrWhiteSpace: function (s) {
+            if (!s) {
+                return true;
+            }
+
+            return System.Char.isWhiteSpace(s);
+        },
+
+        isNullOrEmpty: function (s) {
+            return !s;
+        },
+
+        fromCharCount: function (c, count) {
+            if (count >= 0) {
+                return String(Array(count + 1).join(String.fromCharCode(c)));
+            } else {
+                throw new System.ArgumentOutOfRangeException("count", "cannot be less than zero");
+            }
+        },
+
+        format: function (format) {
+            return System.String._format(System.Globalization.CultureInfo.getCurrentCulture(), format, Array.prototype.slice.call(arguments, 1));
+        },
+
+        formatProvider: function (provider, format) {
+            return System.String._format(provider, format, Array.prototype.slice.call(arguments, 2));
+        },
+
+        _format: function (provider, format, values) {
+            var me = this,
+                _formatRe = /(\{+)((\d+|[a-zA-Z_$]\w+(?:\.[a-zA-Z_$]\w+|\[\d+\])*)(?:\,(-?\d*))?(?:\:([^\}]*))?)(\}+)|(\{+)|(\}+)/g,
+                args = values,
+                fn = this.decodeBraceSequence;
+
+            return format.replace(_formatRe, function (m, openBrace, elementContent, index, align, format, closeBrace, repeatOpenBrace, repeatCloseBrace) {
+                if (repeatOpenBrace) {
+                    return fn(repeatOpenBrace);
+                }
+
+                if (repeatCloseBrace) {
+                    return fn(repeatCloseBrace);
+                }
+
+                if (openBrace.length % 2 === 0 || closeBrace.length % 2 === 0) {
+                    return fn(openBrace) + elementContent + fn(closeBrace);
+                }
+
+                return fn(openBrace, true) + me.handleElement(provider, index, align, format, args) + fn(closeBrace, true);
+            });
+        },
+
+        handleElement: function (provider, index, alignment, formatStr, args) {
+            var value;
+
+            index = parseInt(index, 10);
+
+            if (index > args.length - 1) {
+                throw new System.FormatException("Input string was not in a correct format.");
+            }
+
+            value = args[index];
+
+            if (value == null) {
+                value = "";
+            }
+
+            if (formatStr && value.$boxed && value.type.$kind === "enum") {
+                value = System.Enum.format(value.type, value.v, formatStr);
+            }
+            else if (formatStr && Bridge.is(value, System.IFormattable)) {
+                value = Bridge.format(Bridge.unbox(value), formatStr, provider);
+            } else {
+                value = "" + value.toString();
+            }
+
+            if (alignment) {
+                alignment = parseInt(alignment, 10);
+
+                if (!Bridge.isNumber(alignment)) {
+                    alignment = null;
+                }
+            }
+
+            return System.String.alignString(value.toString(), alignment);
+        },
+
+        decodeBraceSequence: function (braces, remove) {
+            return braces.substr(0, (braces.length + (remove ? 0 : 1)) / 2);
+        },
+
+        alignString: function (str, alignment, pad, dir, cut) {
+            if (str == null || !alignment) {
+                return str;
+            }
+
+            if (!pad) {
+                pad = " ";
+            }
+
+            if (Bridge.isNumber(pad)) {
+                pad = String.fromCharCode(pad);
+            }
+
+            if (!dir) {
+                dir = alignment < 0 ? 1 : 2;
+            }
+
+            alignment = Math.abs(alignment);
+
+            if (cut && (str.length > alignment)) {
+                str = str.substring(0, alignment);
+            }
+
+            if (alignment + 1 >= str.length) {
+                switch (dir) {
+                    case 2:
+                        str = Array(alignment + 1 - str.length).join(pad) + str;
+                        break;
+
+                    case 3:
+                        var padlen = alignment - str.length,
+                            right = Math.ceil(padlen / 2),
+                            left = padlen - right;
+
+                        str = Array(left + 1).join(pad) + str + Array(right + 1).join(pad);
+                        break;
+
+                    case 1:
+                    default:
+                        str = str + Array(alignment + 1 - str.length).join(pad);
+                        break;
+                }
+            }
+
+            return str;
+        },
+
+        startsWith: function (str, prefix) {
+            if (!prefix.length) {
+                return true;
+            }
+
+            if (prefix.length > str.length) {
+                return false;
+            }
+
+            prefix = System.String.escape(prefix);
+
+            return str.match("^" + prefix) !== null;
+        },
+
+        endsWith: function (str, suffix) {
+            if (!suffix.length) {
+                return true;
+            }
+
+            if (suffix.length > str.length) {
+                return false;
+            }
+
+            suffix = System.String.escape(suffix);
+
+            return str.match(suffix + "$") !== null;
+        },
+
+        contains: function (str, value) {
+            if (value == null) {
+                throw new System.ArgumentNullException();
+            }
+
+            if (str == null) {
+                return false;
+            }
+
+            return str.indexOf(value) > -1;
+        },
+
+        indexOfAny: function (str, anyOf) {
+            if (anyOf == null) {
+                throw new System.ArgumentNullException();
+            }
+
+            if (str == null || str === "") {
+                return -1;
+            }
+
+            var startIndex = (arguments.length > 2) ? arguments[2] : 0;
+
+            if (startIndex < 0) {
+                throw new System.ArgumentOutOfRangeException("startIndex", "startIndex cannot be less than zero");
+            }
+
+            var length = (arguments.length > 3) ? arguments[3] : str.length - startIndex;
+
+            if (length < 0) {
+                throw new System.ArgumentOutOfRangeException("length", "must be non-negative");
+            }
+
+            if (length > str.length - startIndex) {
+                throw new System.ArgumentOutOfRangeException("Index and length must refer to a location within the string");
+            }
+
+            var s = str.substr(startIndex, length);
+
+            for (var i = 0; i < anyOf.length; i++) {
+                var c = String.fromCharCode(anyOf[i]),
+                    index = s.indexOf(c);
+
+                if (index > -1) {
+                    return index + startIndex;
+                }
+            }
+
+            return -1;
+        },
+
+        indexOf: function (str, value) {
+            if (value == null) {
+                throw new System.ArgumentNullException();
+            }
+
+            if (str == null || str === "") {
+                return -1;
+            }
+
+            var startIndex = (arguments.length > 2) ? arguments[2] : 0;
+
+            if (startIndex < 0 || startIndex > str.length) {
+                throw new System.ArgumentOutOfRangeException("startIndex", "startIndex cannot be less than zero and must refer to a location within the string");
+            }
+
+            if (value === "") {
+                return (arguments.length > 2) ? startIndex : 0;
+            }
+
+            var length = (arguments.length > 3) ? arguments[3] : str.length - startIndex;
+
+            if (length < 0) {
+                throw new System.ArgumentOutOfRangeException("length", "must be non-negative");
+            }
+
+            if (length > str.length - startIndex) {
+                throw new System.ArgumentOutOfRangeException("Index and length must refer to a location within the string");
+            }
+
+            var s = str.substr(startIndex, length),
+                index = (arguments.length === 5 && arguments[4] % 2 !== 0) ? s.toLocaleUpperCase().indexOf(value.toLocaleUpperCase()) : s.indexOf(value);
+
+            if (index > -1) {
+                if (arguments.length === 5) {
+                    // StringComparison
+                    return (System.String.compare(value, s.substr(index, value.length), arguments[4]) === 0) ? index + startIndex : -1;
+                } else {
+                    return index + startIndex;
+                }
+            }
+
+            return -1;
+        },
+
+        equals: function () {
+            return System.String.compare.apply(this, arguments) === 0;
+        },
+
+        compare: function (strA, strB) {
+            if (strA == null) {
+                return (strB == null) ? 0 : -1;
+            }
+
+            if (strB == null) {
+                return 1;
+            }
+
+            if (arguments.length >= 3) {
+                if (!Bridge.isBoolean(arguments[2])) {
+                    // StringComparison
+                    switch (arguments[2]) {
+                        case 1: // CurrentCultureIgnoreCase
+                            return strA.localeCompare(strB, System.Globalization.CultureInfo.getCurrentCulture().name, {
+                                sensitivity: "accent"
+                            });
+                        case 2: // InvariantCulture
+                            return strA.localeCompare(strB, System.Globalization.CultureInfo.invariantCulture.name);
+                        case 3: // InvariantCultureIgnoreCase
+                            return strA.localeCompare(strB, System.Globalization.CultureInfo.invariantCulture.name, {
+                                sensitivity: "accent"
+                            });
+                        case 4: // Ordinal
+                            return (strA === strB) ? 0 : ((strA > strB) ? 1 : -1);
+                        case 5: // OrdinalIgnoreCase
+                            return (strA.toUpperCase() === strB.toUpperCase()) ? 0 : ((strA.toUpperCase() > strB.toUpperCase()) ? 1 : -1);
+                        case 0: // CurrentCulture
+                        default:
+                            break;
+                    }
+                } else {
+                    // ignoreCase
+                    if (arguments[2]) {
+                        strA = strA.toLocaleUpperCase();
+                        strB = strB.toLocaleUpperCase();
+                    }
+
+                    if (arguments.length === 4) {
+                        // CultureInfo
+                        return strA.localeCompare(strB, arguments[3].name);
+                    }
+                }
+            }
+
+            return strA.localeCompare(strB);
+        },
+
+        toCharArray: function (str, startIndex, length) {
+            if (startIndex < 0 || startIndex > str.length || startIndex > str.length - length) {
+                throw new System.ArgumentOutOfRangeException("startIndex", "startIndex cannot be less than zero and must refer to a location within the string");
+            }
+
+            if (length < 0) {
+                throw new System.ArgumentOutOfRangeException("length", "must be non-negative");
+            }
+
+            if (!Bridge.hasValue(startIndex)) {
+                startIndex = 0;
+            }
+
+            if (!Bridge.hasValue(length)) {
+                length = str.length;
+            }
+
+            var arr = [];
+
+            for (var i = startIndex; i < startIndex + length; i++) {
+                arr.push(str.charCodeAt(i));
+            }
+
+            return arr;
+        },
+
+        escape: function (str) {
+            return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+        },
+
+        replaceAll: function (str, a, b) {
+            var reg = new RegExp(System.String.escape(a), "g");
+
+            return str.replace(reg, b);
+        },
+
+        insert: function (index, strA, strB) {
+            return index > 0 ? (strA.substring(0, index) + strB + strA.substring(index, strA.length)) : (strB + strA);
+        },
+
+        remove: function (s, index, count) {
+            if (s == null) {
+                throw new System.NullReferenceException();
+            }
+
+            if (index < 0) {
+                throw new System.ArgumentOutOfRangeException("startIndex", "StartIndex cannot be less than zero");
+            }
+
+            if (count != null) {
+                if (count < 0) {
+                    throw new System.ArgumentOutOfRangeException("count", "Count cannot be less than zero");
+                }
+
+                if (count > s.length - index) {
+                    throw new System.ArgumentOutOfRangeException("count", "Index and count must refer to a location within the string");
+                }
+            } else {
+                if (index >= s.length) {
+                    throw new System.ArgumentOutOfRangeException("startIndex", "startIndex must be less than length of string");
+                }
+            }
+
+            if (count == null || ((index + count) > s.length)) {
+                return s.substr(0, index);
+            }
+
+            return s.substr(0, index) + s.substr(index + count);
+        },
+
+        split: function (s, strings, limit, options) {
+            var re = (!Bridge.hasValue(strings) || strings.length === 0) ? new RegExp("\\s", "g") : new RegExp(strings.map(System.String.escape).join('|'), 'g'),
+                res = [],
+                m,
+                i;
+
+            for (i = 0; ; i = re.lastIndex) {
+                if (m = re.exec(s)) {
+                    if (options !== 1 || m.index > i) {
+                        if (res.length === limit - 1) {
+                            res.push(s.substr(i));
+
+                            return res;
+                        } else {
+                            res.push(s.substring(i, m.index));
+                        }
+                    }
+                } else {
+                    if (options !== 1 || i !== s.length) {
+                        res.push(s.substr(i));
+                    }
+
+                    return res;
+                }
+            }
+        },
+
+        trimEnd: function (s, chars) {
+            return s.replace(chars ? new RegExp('[' + System.String.escape(String.fromCharCode.apply(null, chars)) + ']+$') : /\s*$/, '');
+        },
+
+        trimStart: function (s, chars) {
+            return s.replace(chars ? new RegExp('^[' + System.String.escape(String.fromCharCode.apply(null, chars)) + ']+') : /^\s*/, '');
+        },
+
+        trim: function (s, chars) {
+            return System.String.trimStart(System.String.trimEnd(s, chars), chars);
+        },
+
+        concat: function () {
+            var s = "";
+            for (var i = 0; i < arguments.length; i++) {
+                var tmp = arguments[i];
+                s += tmp == null ? "" : tmp;
+            }
+
+            return s;
+        }
+    }
+});
+
+Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), System.IEquatable$1(System.String)]);
     // @source Task.js
 
     Bridge.define("System.Threading.Tasks.Task", {
@@ -12953,7 +13008,7 @@
                     scope.internal.throwInvalidCastEx(fromType, typeCodes.DateTime);
 
                 case "string":
-                    value = Bridge.Date.parse(value, formatProvider || null);
+                    value = System.DateTime.parse(value, formatProvider || null);
 
                     return value;
 
@@ -13022,7 +13077,7 @@
                     }
 
                     if (Bridge.isDate(value)) {
-                        return Bridge.Date.format(value, null, formatProvider || null);
+                        return System.DateTime.format(value, null, formatProvider || null);
                     }
 
                     if (value instanceof System.Decimal) {
@@ -16167,7 +16222,7 @@
             return new IEnumerator(
                 function () {
                     enumerator = source.getEnumerator();
-                    keys = new (System.Collections.Generic.Dictionary$2(Object, Object))(null, comparer);
+                    keys = new (System.Collections.Generic.Dictionary$2(System.Object, System.Object))(null, comparer);
                     Enumerable.from(second).forEach(function (key) { if (!keys.containsKey(key)) { keys.add(key); } });
                 },
                 function () {
@@ -16198,9 +16253,9 @@
                 function () {
                     enumerator = source.getEnumerator();
 
-                    keys = new (System.Collections.Generic.Dictionary$2(Object, Object))(null, comparer);
+                    keys = new (System.Collections.Generic.Dictionary$2(System.Object, System.Object))(null, comparer);
                     Enumerable.from(second).forEach(function (key) { if (!keys.containsKey(key)) { keys.add(key); } });
-                    outs = new (System.Collections.Generic.Dictionary$2(Object, Object))(null, comparer);
+                    outs = new (System.Collections.Generic.Dictionary$2(System.Object, System.Object))(null, comparer);
                 },
                 function () {
                     while (enumerator.moveNext()) {
@@ -16255,7 +16310,7 @@
             return new IEnumerator(
                 function () {
                     firstEnumerator = source.getEnumerator();
-                    keys = new (System.Collections.Generic.Dictionary$2(Object, Object))(null, comparer);
+                    keys = new (System.Collections.Generic.Dictionary$2(System.Object, System.Object))(null, comparer);
                 },
                 function () {
                     var current;
@@ -16988,7 +17043,7 @@
     Enumerable.prototype.toList = function (T) {
         var array = [];
         this.forEach(function (x) { array.push(x); });
-        return new (System.Collections.Generic.List$1(T || Object))(array);
+        return new (System.Collections.Generic.List$1(T || System.Object))(array);
     };
 
     // Overload:function (keySelector)
@@ -16998,7 +17053,7 @@
         keySelector = Utils.createLambda(keySelector);
         elementSelector = Utils.createLambda(elementSelector);
 
-        var dict = new (System.Collections.Generic.Dictionary$2(Object, Object))(null, comparer);
+        var dict = new (System.Collections.Generic.Dictionary$2(System.Object, System.Object))(null, comparer);
         var order = [];
         this.forEach(function (x) {
             var key = keySelector(x);
@@ -17949,10 +18004,10 @@
                     return s.replace(System.Guid.replace, "");
                 case "b": 
                 case "B": 
-                    return System.String.concat(String.fromCharCode(Bridge.box(123, System.Char, $box_.System.Char.toString)), s, String.fromCharCode(Bridge.box(125, System.Char, $box_.System.Char.toString)));
+                    return System.String.concat(String.fromCharCode(123), s, String.fromCharCode(125));
                 case "p": 
                 case "P": 
-                    return System.String.concat(String.fromCharCode(Bridge.box(40, System.Char, $box_.System.Char.toString)), s, String.fromCharCode(Bridge.box(41, System.Char, $box_.System.Char.toString)));
+                    return System.String.concat(String.fromCharCode(40), s, String.fromCharCode(41));
                 default: 
                     return s;
             }
@@ -24209,22 +24264,22 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             if (reinit === void 0) { reinit = false; }
             this.hidden = false;
 
-            var consoleWrapperStyles = Bridge.fn.bind(this, $asm.$.Bridge.Console.f1)(new (System.Collections.Generic.Dictionary$2(String,String))());
+            var consoleWrapperStyles = Bridge.fn.bind(this, $asm.$.Bridge.Console.f1)(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
 
-            var consoleHeaderStyles = $asm.$.Bridge.Console.f2(new (System.Collections.Generic.Dictionary$2(String,String))());
+            var consoleHeaderStyles = $asm.$.Bridge.Console.f2(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
 
-            var consoleBodyStyles = $asm.$.Bridge.Console.f3(new (System.Collections.Generic.Dictionary$2(String,String))());
+            var consoleBodyStyles = $asm.$.Bridge.Console.f3(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
 
             // Bridge Icon
             this.bridgeIcon = this.bridgeIcon || document.createElementNS(this.svgNS, "svg");
 
-            var items = Bridge.fn.bind(this, $asm.$.Bridge.Console.f4)(new (System.Collections.Generic.Dictionary$2(String,String))());
+            var items = Bridge.fn.bind(this, $asm.$.Bridge.Console.f4)(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
 
             this.setAttributes(this.bridgeIcon, items);
 
             this.bridgeIconPath = this.bridgeIconPath || document.createElementNS(this.svgNS, "path");
 
-            var items2 = new (System.Collections.Generic.Dictionary$2(String,String))();
+            var items2 = new (System.Collections.Generic.Dictionary$2(System.String,System.String))();
             items2.set("d", "M19 14.4h2.2V9.6L19 7.1v7.3zm4.3-2.5v2.5h2.2l-2.2-2.5zm-8.5 2.5H17V4.8l-2.2-2.5v12.1zM0 14.4h3l7.5-8.5v8.5h2.2V0L0 14.4z");
             items2.set("fill", "#555");
 
@@ -24240,13 +24295,13 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
             this.closeIcon = this.closeIcon || document.createElementNS(this.svgNS, "svg");
 
-            var items3 = Bridge.fn.bind(this, $asm.$.Bridge.Console.f5)(new (System.Collections.Generic.Dictionary$2(String,String))());
+            var items3 = Bridge.fn.bind(this, $asm.$.Bridge.Console.f5)(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
 
             this.setAttributes(this.closeIcon, items3);
 
             this.closeIconPath = this.closeIconPath || document.createElementNS(this.svgNS, "path");
 
-            var items4 = $asm.$.Bridge.Console.f6(new (System.Collections.Generic.Dictionary$2(String,String))());
+            var items4 = $asm.$.Bridge.Console.f6(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
 
             this.setAttributes(this.closeIconPath, items4);
 
@@ -24396,7 +24451,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
             var messageIcon = document.createElementNS(this.svgNS, "svg");
 
-            var items5 = Bridge.fn.bind(this, $asm.$.Bridge.Console.f7)(new (System.Collections.Generic.Dictionary$2(String,String))());
+            var items5 = Bridge.fn.bind(this, $asm.$.Bridge.Console.f7)(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
 
             this.setAttributes(messageIcon, items5);
 
@@ -24410,7 +24465,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
             var messageIconPath = document.createElementNS(this.svgNS, "path");
 
-            var items6 = new (System.Collections.Generic.Dictionary$2(String,String))();
+            var items6 = new (System.Collections.Generic.Dictionary$2(System.String,System.String))();
 
             items6.set("d", "M3.8 3.5L.7 6.6s-.1.1-.2.1-.1 0-.2-.1l-.2-.3C0 6.2 0 6.2 0 6.1c0 0 0-.1.1-.1l2.6-2.6L.1.7C0 .7 0 .6 0 .6 0 .5 0 .5.1.4L.4.1c0-.1.1-.1.2-.1s.1 0 .2.1l3.1 3.1s.1.1.1.2-.1.1-.2.1z");
             items6.set("fill", color);
