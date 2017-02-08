@@ -1704,6 +1704,8 @@
             return type.prototype.$utype || System.Int32;
         },
 
+        $$name: "System.Enum",
+
         toName: function (name) {
             return name;
         },
@@ -1763,6 +1765,10 @@
         },
 
         toString: function (enumType, value, forceFlags) {
+            if (arguments.length == 0) {
+                return "System.Enum";
+            }
+
             if (value && value.$boxed && enumType === System.Enum) {
                 enumType = value.type;
             }
