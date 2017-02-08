@@ -49,21 +49,18 @@ namespace Bridge.ClientTest.SimpleTypes
             return default(T);
         }
 
-        [IgnoreTest(Until = Constants.IGNORE_DATE)]
         [Test]
         public void DefaultValueOfEnumClassIsNull()
         {
             Assert.AreStrictEqual(null, GetDefaultValue<Enum>());
         }
 
-        [IgnoreTest(Until = Constants.IGNORE_DATE)]
         [Test]
         public void DefaultValueOfEnumTypeIsFirstValue()
         {
             Assert.AreStrictEqual(TestEnum.FirstValue, GetDefaultValue<TestEnum>());
         }
 
-        [IgnoreTest(Until = Constants.IGNORE_DATE)]
         [Test]
         public void DefaultConstructorOfEnumTypeReturnsZero()
         {
@@ -76,14 +73,12 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreStrictEqual(TestEnum.FirstValue, TestEnum.FirstValue);
         }
 
-        [IgnoreTest(Until = Constants.IGNORE_DATE)]
         [Test]
         public void CreatingInstanceOfEnumTypeReturnsZero()
         {
             Assert.AreStrictEqual(TestEnum.FirstValue, Activator.CreateInstance<TestEnum>());
         }
 
-        [IgnoreTest(Until = Constants.IGNORE_DATE)]
         [Test]
         public void DefaultExpressionWithEnumReturnsZero()
         {
@@ -105,44 +100,46 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         // Feature #347
-        //[Test]
-        //public void ParseWorks()
-        //{
-        //    Assert.AreEqual((TestEnum)Enum.Parse(typeof(TestEnum), "FirstValue"), TestEnum.FirstValue);
-        //    Assert.AreEqual((TestEnum)Enum.Parse(typeof(FlagsEnum), "FirstValue | ThirdValue"), FlagsEnum.FirstValue | FlagsEnum.ThirdValue);
-        //}
+        [Test]
+        public void ParseWorks()
+        {
+            Assert.AreEqual(TestEnum.FirstValue, (TestEnum)Enum.Parse(typeof(TestEnum), "FirstValue"));
+            Assert.AreEqual((int)(FlagsEnum.FirstValue | FlagsEnum.ThirdValue), (TestEnum)Enum.Parse(typeof(FlagsEnum), "FirstValue, ThirdValue"));
+        }
 
         // Feature #347
-        //[Test]
-        //public void StaticToStringWorks()
-        //{
-        //    Assert.AreEqual(Enum.ToString(typeof(TestEnum), TestEnum.FirstValue), "FirstValue");
-        //    Assert.AreEqual(Enum.ToString(typeof(FlagsEnum), FlagsEnum.FirstValue | FlagsEnum.ThirdValue), "FirstValue | ThirdValue");
-        //}
+        [Test]
+        public void StaticToStringWorks()
+        {
+            Assert.AreEqual("FirstValue", Enum.ToString(typeof(TestEnum), TestEnum.FirstValue));
+            Assert.AreEqual("FirstValue, ThirdValue", Enum.ToString(typeof(FlagsEnum), FlagsEnum.FirstValue | FlagsEnum.ThirdValue));
+        }
+
 
         // Feature #347
-        //[Test]
-        //public void ConversionsToEnumAreTreatedAsConversionsToTheUnderlyingType() {
-        //    Assert.AreEqual((TestEnum)(object)0, 0);
-        //    Assert.Throws(() => { var _ = (TestEnum)(object)0.5; });
-        //}
+        [Test]
+        public void ConversionsToEnumAreTreatedAsConversionsToTheUnderlyingType()
+        {
+            Assert.AreEqual((TestEnum)(object)0, 0);
+            Assert.Throws(() => { var _ = (TestEnum)(object)0.5; });
+        }
 
         // Feature #347
-        //[Test]
-        //public void GetValuesWorks()
-        //{
-        //    Array values = Enum.GetValues(typeof(TestEnum));
-        //    Assert.AreEqual(values.Length, 3);
-        //    Assert.AreEqual(values.GetValue(0), TestEnum.FirstValue);
-        //    Assert.AreEqual(values.GetValue(1), TestEnum.SecondValue);
-        //    Assert.AreEqual(values.GetValue(2), TestEnum.ThirdValue);
+        [Test]
+        public void GetValuesWorks()
+        {
+            Array values = Enum.GetValues(typeof(TestEnum));
+            Assert.AreEqual(values.Length, 3);
+            Assert.AreEqual(values.GetValue(0), TestEnum.FirstValue);
+            Assert.AreEqual(values.GetValue(1), TestEnum.SecondValue);
+            Assert.AreEqual(values.GetValue(2), TestEnum.ThirdValue);
 
-        //    values = Enum.GetValues(typeof(FlagsEnum));
-        //    Assert.AreEqual(values.Length, 4);
-        //    Assert.AreEqual(values.GetValue(0), FlagsEnum.None);
-        //    Assert.AreEqual(values.GetValue(1), FlagsEnum.FirstValue);
-        //    Assert.AreEqual(values.GetValue(2), FlagsEnum.SecondValue);
-        //    Assert.AreEqual(values.GetValue(3), FlagsEnum.ThirdValue);
-        //}
+            values = Enum.GetValues(typeof(FlagsEnum));
+            Assert.AreEqual(values.Length, 4);
+            Assert.AreEqual(values.GetValue(0), FlagsEnum.None);
+            Assert.AreEqual(values.GetValue(1), FlagsEnum.FirstValue);
+            Assert.AreEqual(values.GetValue(2), FlagsEnum.SecondValue);
+            Assert.AreEqual(values.GetValue(3), FlagsEnum.ThirdValue);
+        }
     }
 }

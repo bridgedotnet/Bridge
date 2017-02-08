@@ -26892,6 +26892,32 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var $t, $t1;
             Bridge.Test.NUnit.Assert.true(($t=Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.FirstValue, System.Enum.equals($t, Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.FirstValue, Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum, $box_.Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.toString), Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum)));
             Bridge.Test.NUnit.Assert.false(($t1=Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.FirstValue, System.Enum.equals($t1, Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.SecondValue, Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum, $box_.Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.toString), Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum)));
+        },
+        parseWorks: function () {
+            Bridge.Test.NUnit.Assert.areEqual(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.FirstValue, System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum, "FirstValue")), System.Int32)));
+            Bridge.Test.NUnit.Assert.areEqual(5, System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum, "FirstValue, ThirdValue")), System.Int32)));
+        },
+        staticToStringWorks: function () {
+            Bridge.Test.NUnit.Assert.areEqual("FirstValue", System.Enum.toString(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum, Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.FirstValue, Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum, $box_.Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.toString)));
+            Bridge.Test.NUnit.Assert.areEqual("FirstValue, ThirdValue", System.Enum.toString(Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum, Bridge.box(5, Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum, $box_.Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum.toString)));
+        },
+        conversionsToEnumAreTreatedAsConversionsToTheUnderlyingType: function () {
+            Bridge.Test.NUnit.Assert.areEqual(System.Nullable.getValue(Bridge.cast(Bridge.unbox(Bridge.box(0, System.Int32)), System.Int32)), 0);
+            Bridge.Test.NUnit.Assert.throws($asm.$.Bridge.ClientTest.SimpleTypes.EnumTests.f3);
+        },
+        getValuesWorks: function () {
+            var values = System.Enum.getValues(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum);
+            Bridge.Test.NUnit.Assert.areEqual(values.length, 3);
+            Bridge.Test.NUnit.Assert.areEqual(Bridge.unbox(System.Array.get(values, 0)), Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.FirstValue);
+            Bridge.Test.NUnit.Assert.areEqual(Bridge.unbox(System.Array.get(values, 1)), Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.SecondValue);
+            Bridge.Test.NUnit.Assert.areEqual(Bridge.unbox(System.Array.get(values, 2)), Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.ThirdValue);
+
+            values = System.Enum.getValues(Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum);
+            Bridge.Test.NUnit.Assert.areEqual(values.length, 4);
+            Bridge.Test.NUnit.Assert.areEqual(Bridge.unbox(System.Array.get(values, 0)), Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum.None);
+            Bridge.Test.NUnit.Assert.areEqual(Bridge.unbox(System.Array.get(values, 1)), Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum.FirstValue);
+            Bridge.Test.NUnit.Assert.areEqual(Bridge.unbox(System.Array.get(values, 2)), Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum.SecondValue);
+            Bridge.Test.NUnit.Assert.areEqual(Bridge.unbox(System.Array.get(values, 3)), Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum.ThirdValue);
         }
     });
 
@@ -26903,6 +26929,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         f2: function (x) {
             return Bridge.is(x, System.IFormattable);
+        },
+        f3: function () {
+            var _ = System.Nullable.getValue(Bridge.cast(Bridge.unbox(Bridge.box(0.5, System.Double, $box_.System.Double.toString)), System.Int32));
         }
     });
 
@@ -45441,6 +45470,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.apply($box_.Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum, {
         toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum, obj);}
+    });
+
+
+    Bridge.ns("Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum", $box_);
+
+    Bridge.apply($box_.Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum, {
+        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum, obj);}
     });
 
     var $m = Bridge.setMetadata,
