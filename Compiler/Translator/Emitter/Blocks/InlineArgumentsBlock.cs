@@ -454,19 +454,7 @@ namespace Bridge.Translator
                                 module = bridgeType.TypeInfo.Module;
                             }
 
-                            if (module != null)
-                            {
-                                if (module.Type == ModuleType.AMD ||
-                                    (module.Type == ModuleType.UMD &&
-                                     this.Emitter.AssemblyInfo.Loader.Type == ModuleLoaderType.AMD))
-                                {
-                                    amd.Add(module.Name);
-                                }
-                                else
-                                {
-                                    cjs.Add(module.Name);
-                                }
-                            }
+                            AddModuleByType(amd, cjs, module);
                         }
 
                         this.Write("{");
@@ -1077,6 +1065,26 @@ namespace Bridge.Translator
                 if (addClose)
                 {
                     this.Write(")");
+                }
+            }
+        }
+
+        public void AddModuleByType(List<string> amd, List<string> cjs, Module module)
+        {
+            if (module != null)
+            {
+                if (!(module.Type == ModuleType.UMD &&
+                     this.Emitter.AssemblyInfo.Loader.Type == ModuleLoaderType.Global))
+                {
+                    if (module.Type == ModuleType.AMD
+                        || (module.Type == ModuleType.UMD && this.Emitter.AssemblyInfo.Loader.Type == ModuleLoaderType.AMD))
+                    {
+                        amd.Add(module.Name);
+                    }
+                    else
+                    {
+                        cjs.Add(module.Name);
+                    }
                 }
             }
         }

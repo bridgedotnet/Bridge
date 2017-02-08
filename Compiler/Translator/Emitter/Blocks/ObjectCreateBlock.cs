@@ -144,7 +144,7 @@ namespace Bridge.Translator
                     {
                         var name = BridgeTypes.ToJsName(objectCreateExpression.Type, this.Emitter);
 
-                        if (name != JS.Types.Object.NAME)
+                        if (name != JS.Types.System.Object.NAME)
                         {
                             this.Write(JS.Funcs.BRIDGE_LITERAL + "(" + name + ", ");
                         }

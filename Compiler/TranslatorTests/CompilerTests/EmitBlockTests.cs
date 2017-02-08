@@ -29,20 +29,17 @@ namespace Bridge.Translator.Tests
                 TypeSystem.AddBridgeType(bridgeTypes, type);
             }
 
-            var emitter = Substitute.For<IEmitter>();
-
-            emitter.Log = Substitute.For<ILogger>();
-
-            emitter.AssemblyInfo = new AssemblyInfo()
-            {
-                Reflection = new ReflectionConfig()
+            var emitter = EmitterHelper.GetEmitter(
+                bridgeTypes: bridgeTypes,
+                assemblyInfo: new AssemblyInfo()
                 {
-                    Enabled = configEnabled,
-                    TypeAccessibility = typeAccessibility
+                    Reflection = new ReflectionConfig()
+                    {
+                        Enabled = configEnabled,
+                        TypeAccessibility = typeAccessibility
+                    }
                 }
-            };
-
-            emitter.BridgeTypes = bridgeTypes;
+            );
 
             var block = new EmitBlock(emitter);
             return block;

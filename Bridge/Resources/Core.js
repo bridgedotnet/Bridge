@@ -52,9 +52,18 @@
             };
         },
 
-        unbox: function(o) {
+        unbox: function (o) {
             if (o && o.$boxed) {
                 return o.v;
+            }
+
+            if (Bridge.isArray(o)) {
+                var arr = [];
+                for (var i = 0; i < o.length; i++) {
+                    var item = o[i];
+                    arr[i] = (item && item.$boxed) ? item.v : item;
+                }
+                o = arr;
             }
 
             return o;
@@ -290,13 +299,13 @@
                 return type.createInstance();
             } else if (typeof (type.getDefaultValue) === 'function') {
                 return type.getDefaultValue();
-            } else if (type === Boolean) {
+            } else if (type === Boolean || type === System.Boolean) {
                 return false;
-            } else if (type === Date) {
+            } else if (type === Date || type === System.DateTime) {
                 return new Date(0);
             } else if (type === Number) {
                 return 0;
-            } else if (type === String) {
+            } else if (type === String || type === System.String) {
                 return '';
             } else if (type && type.$literal) {
                 return type.ctor();
@@ -542,9 +551,9 @@
                 throw new System.ArgumentNullException("type");
             } else if ((type.getDefaultValue) && type.getDefaultValue.length === 0) {
                 return type.getDefaultValue();
-            } else if (type === Boolean) {
+            } else if (type === Boolean || type === System.Boolean) {
                 return false;
-            } else if (type === Date) {
+            } else if (type === Date || type === System.DateTime) {
                 return new Date(-864e13);
             } else if (type === Number) {
                 return 0;
@@ -583,17 +592,25 @@
             return true;
         },
 
+        isObject: function(type) {
+            return type === Object || type === System.Object;
+        },
+
         is: function (obj, type, ignoreFn, allowNull) {
             if (obj == null) {
                 return !!allowNull;
             }
 
+            if (type === System.Object) {
+                type = Object;
+            }
+
             if (obj.$boxed) {
-                if (obj.type.$kind === "enum" && (obj.type.prototype.$utype === type || type === System.Enum)) {
+                if (obj.type.$kind === "enum" && (obj.type.prototype.$utype === type || type === System.Enum || type === System.IFormattable || type === System.IComparable)) {
                     return true;
                 }
                 else if (type.$kind !== "interface" && !type.$nullable) {
-                    return obj.type === type || type === Object;
+                    return obj.type === type || Bridge.isObject(type);
                 }
 
                 if (ignoreFn !== true && type.$is) {
@@ -628,10 +645,6 @@
 
                     if (Bridge.isArray(obj, ctor)) {
                         return System.Array.is(obj, type);
-                    }
-
-                    if (ctor === String) {
-                        return System.String.is(obj, type);
                     }
                 }
 
@@ -685,7 +698,7 @@
 
         as: function (obj, type, allowNull) {
             if (Bridge.is(obj, type, false, allowNull)) {
-                return obj.$boxed && type !== Object ? obj.v : obj;
+                return obj.$boxed && type !== Object && type !== System.Object ? obj.v : obj;
             }
             return null;
         },
@@ -701,7 +714,7 @@
                 throw new System.InvalidCastException("Unable to cast type " + (obj ? Bridge.getTypeName(obj) : "'null'") + " to type " + Bridge.getTypeName(type));
             }
 
-            if (obj.$boxed && type !== Object) {
+            if (obj.$boxed && type !== Object && type !== System.Object) {
                 return obj.v;
             }
 
@@ -929,7 +942,7 @@
         },
 
         toList: function (ienumerable, T) {
-            return new (System.Collections.Generic.List$1(T || Object))(ienumerable);
+            return new (System.Collections.Generic.List$1(T || System.Object))(ienumerable);
         },
 
         arrayTypes: [globals.Array, globals.Uint8Array, globals.Int8Array, globals.Int16Array, globals.Uint16Array, globals.Int32Array, globals.Uint32Array, globals.Float32Array, globals.Float64Array, globals.Uint8ClampedArray],
@@ -1093,6 +1106,14 @@
         },
 
         compare: function (a, b, safe, T) {
+            if (a && a.$boxed) {
+                a = Bridge.unbox(a);
+            }
+
+            if (b && b.$boxed) {
+                b = Bridge.unbox(b);
+            }
+
             if (!Bridge.isDefined(a, true)) {
                 if (safe) {
                     return 0;
@@ -1143,6 +1164,14 @@
         },
 
         equalsT: function (a, b, T) {
+            if (a && a.$boxed) {
+                a = Bridge.unbox(a);
+            }
+
+            if (b && b.$boxed) {
+                b = Bridge.unbox(b);
+            }
+
             if (!Bridge.isDefined(a, true)) {
                 throw new System.NullReferenceException();
             } else if (Bridge.isNumber(a) || Bridge.isString(a) || Bridge.isBoolean(a)) {
@@ -1165,10 +1194,18 @@
         },
 
         format: function (obj, formatString, provider) {
+            if (obj && obj.$boxed && Bridge.Reflection.isEnum(obj.type)) {
+                return System.Enum.format(obj.type, Bridge.unbox(obj), formatString);
+            }
+
+            if (obj && obj.$boxed && obj.type === System.Char) {
+                return System.Enum.format(Bridge.unbox(obj), formatString, provider);
+            }
+
             if (Bridge.isNumber(obj)) {
                 return Bridge.Int.format(obj, formatString, provider);
             } else if (Bridge.isDate(obj)) {
-                return Bridge.Date.format(obj, formatString, provider);
+                return System.DateTime.format(obj, formatString, provider);
             }
 
             var name;
@@ -1181,6 +1218,7 @@
         },
 
         getType: function (instance, T) {
+            var bt;
             if (instance && instance.$boxed) {
                 return instance.type;
             }
@@ -1189,7 +1227,7 @@
                 throw new System.NullReferenceException("instance is null");
             }
 
-            if (T) {
+            if (T && ((bt = Bridge.Reflection.getBaseType(T)) === Object || bt === System.Object)) {
                 var type = Bridge.getType(instance);
                 return Bridge.Reflection.isAssignableFrom(T, type) ? type : T;
             }
@@ -1210,11 +1248,30 @@
                 return instance.$getType();
             }
 
+            var result = null;
             try {
-                return instance.constructor;
+                result = instance.constructor;
             } catch (ex) {
-                return Object;
+                result = Object;
             }
+
+            if (result === Boolean) {
+                return System.Boolean;
+            }
+
+            if (result === String) {
+                return System.String;
+            }
+
+            if (result === Object) {
+                return System.Object;
+            }
+
+            if (result === Date) {
+                return System.DateTime;
+            }
+
+            return result;
         },
 
         isLower: function (c) {

@@ -90,6 +90,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Code\Constansts.cs" />
+    <Compile Include="ContractTests\BridgeTypeTests.cs" />
+    <Compile Include="Helpers\EmitterHelper.cs" />
+    <Compile Include="CompilerTests\InlineArgumentsBlockTests.cs" />
     <Compile Include="CompilerTests\ValidatorTests.cs" />
     <Compile Include="Helpers\TestAssemblyHelper.cs" />
     <Compile Include="Helpers\MonoCecilTypeSystemHelper.cs" />

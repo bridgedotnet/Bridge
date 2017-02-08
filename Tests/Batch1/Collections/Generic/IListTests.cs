@@ -104,7 +104,7 @@ namespace Bridge.ClientTest.Collections.Generic
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.Collections.Generic.IList$1[[Object]]", typeof(IList<object>).FullName, "FullName should be correct");
+            Assert.AreEqual("System.Collections.Generic.IList$1[[System.Object, mscorlib]]", typeof(IList<object>).FullName, "FullName should be correct");
 
             IList<object> iList = new List<object>();
 

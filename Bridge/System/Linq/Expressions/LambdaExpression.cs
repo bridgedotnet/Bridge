@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 namespace System.Linq.Expressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     [Cast("{this}.ntype === 18")]
     public abstract class LambdaExpression : Expression
     {

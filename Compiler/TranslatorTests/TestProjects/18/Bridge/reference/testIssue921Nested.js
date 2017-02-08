@@ -97,14 +97,14 @@
         lambaLiftingWithProperty: function () {
             var localValue = "What a name";
 
-            return System.Linq.Enumerable.from(System.Array.init(["one", "two", "three"], String)).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f9).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f9).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f10).select(Bridge.fn.bind(this, $asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f11)).select(Bridge.fn.bind(this, $asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f12)).select(function (value) {
+            return System.Linq.Enumerable.from(System.Array.init(["one", "two", "three"], System.String)).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f9).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f9).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f10).select(Bridge.fn.bind(this, $asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f11)).select(Bridge.fn.bind(this, $asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f12)).select(function (value) {
                 return System.String.concat(value, localValue);
             });
         },
         lambaLiftingWithStaticProperty: function () {
             var localValue = "What a name";
 
-            return System.Linq.Enumerable.from(System.Array.init(["one", "two", "three"], String)).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f9).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f9).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f10).select(Bridge.fn.bind(this, $asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f11)).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f13).select(function (value) {
+            return System.Linq.Enumerable.from(System.Array.init(["one", "two", "three"], System.String)).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f9).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f9).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f10).select(Bridge.fn.bind(this, $asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f11)).select($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested.f13).select(function (value) {
                 return System.String.concat(value, localValue);
             });
         },
@@ -148,9 +148,9 @@
             }).select(function (value, index) {
                 return $toString(((value.length + index) | 0));
             }).select(Bridge.fn.bind(this, function (value) {
-                return System.String.concat($toString(value.length), Bridge.box(this._offset, System.Int32));
+                return System.String.concat($toString(value.length), this._offset);
             })).select(Bridge.fn.bind(this, function (value, index) {
-                return System.String.concat($toString(value.length), Bridge.box(index, System.Int32), Bridge.box(this._offset, System.Int32));
+                return System.String.concat($toString(value.length), index, this._offset);
             })).select(function (value) {
                 return $toString(((value.length + $toString(localValue).length) | 0));
             });
@@ -185,19 +185,19 @@
             return ((((value + index) | 0) + this._offset) | 0);
         },
         f9: function (value) {
-            return System.String.concat(value, Bridge.box(1, System.Int32));
+            return System.String.concat(value, 1);
         },
         f10: function (value, index) {
-            return System.String.concat(value, Bridge.box(index, System.Int32));
+            return System.String.concat(value, index);
         },
         f11: function (value) {
             return System.String.concat(value, this.getName());
         },
         f12: function (value, index) {
-            return System.String.concat(value, Bridge.box(index, System.Int32), this.getName());
+            return System.String.concat(value, index, this.getName());
         },
         f13: function (value, index) {
-            return System.String.concat(value, Bridge.box(index, System.Int32), TestIssue921Nested.Issue921NestedOuter.Issue921Nested.getNameStatic());
+            return System.String.concat(value, index, TestIssue921Nested.Issue921NestedOuter.Issue921Nested.getNameStatic());
         },
         f14: function (value) {
             return value.add(System.Decimal(1));
