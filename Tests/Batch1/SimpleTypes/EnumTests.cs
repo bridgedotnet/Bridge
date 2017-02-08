@@ -1,5 +1,6 @@
 ﻿using Bridge.Test.NUnit;
 using System;
+using System.Linq;
 
 #pragma warning disable 219
 
@@ -28,9 +29,19 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            //Assert.AreEqual("System.Enum", typeof(Enum).FullName);
             Assert.AreEqual("Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum", typeof(TestEnum).FullName);
+            Assert.True(typeof(TestEnum).IsEnum);
+            Assert.False(typeof(TestEnum).IsFlags);
+            Assert.True(typeof(FlagsEnum).IsEnum);
+            Assert.True(typeof(FlagsEnum).IsFlags);
             Assert.True((object)TestEnum.FirstValue is TestEnum);
+
+            var interfaces = typeof(TestEnum).GetInterfaces();
+            Assert.AreEqual(2, interfaces.Length);
+            Assert.NotNull(interfaces.FirstOrDefault(x => x is IComparable));
+            Assert.NotNull(interfaces.FirstOrDefault(x => x is IFormattable));
+
+            Assert.AreEqual("System.Enum", typeof(Enum).FullName);
         }
 
         private T GetDefaultValue<T>()

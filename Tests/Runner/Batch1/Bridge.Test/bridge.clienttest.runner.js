@@ -8658,28 +8658,28 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             typePropertiesAreCorrect: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.EnumTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TypePropertiesAreCorrect()",
-                    line: "28"
+                    line: "29"
                 } ));
                 t.getFixture().typePropertiesAreCorrect();
             },
             firstValueOfEnumIsZero: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.EnumTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "FirstValueOfEnumIsZero()",
-                    line: "62"
+                    line: "73"
                 } ));
                 t.getFixture().firstValueOfEnumIsZero();
             },
             getHashCodeWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.EnumTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetHashCodeWorks()",
-                    line: "82"
+                    line: "93"
                 } ));
                 t.getFixture().getHashCodeWorks();
             },
             equalsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.EnumTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "EqualsWorks()",
-                    line: "89"
+                    line: "100"
                 } ));
                 t.getFixture().equalsWorks();
             }

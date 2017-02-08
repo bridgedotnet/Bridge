@@ -26849,9 +26849,19 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.SimpleTypes.EnumTests", {
         typePropertiesAreCorrect: function () {
-            //Assert.AreEqual("System.Enum", typeof(Enum).FullName);
             Bridge.Test.NUnit.Assert.areEqual("Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum));
+            Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isEnum(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum));
+            Bridge.Test.NUnit.Assert.false(Bridge.Reflection.isFlags(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum));
+            Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isEnum(Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum));
+            Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isFlags(Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum));
             Bridge.Test.NUnit.Assert.true(Bridge.is(Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.FirstValue, Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum, $box_.Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.toString), System.Int32));
+
+            var interfaces = Bridge.Reflection.getInterfaces(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum);
+            Bridge.Test.NUnit.Assert.areEqual(2, interfaces.length);
+            Bridge.Test.NUnit.Assert.notNull(System.Linq.Enumerable.from(interfaces).firstOrDefault($asm.$.Bridge.ClientTest.SimpleTypes.EnumTests.f1, null));
+            Bridge.Test.NUnit.Assert.notNull(System.Linq.Enumerable.from(interfaces).firstOrDefault($asm.$.Bridge.ClientTest.SimpleTypes.EnumTests.f2, null));
+
+            Bridge.Test.NUnit.Assert.areEqual("System.Enum", Bridge.Reflection.getTypeFullName(System.Enum));
         },
         getDefaultValue: function (T) {
             return Bridge.getDefaultValue(T);
@@ -26882,6 +26892,17 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var $t, $t1;
             Bridge.Test.NUnit.Assert.true(($t=Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.FirstValue, System.Enum.equals($t, Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.FirstValue, Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum, $box_.Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.toString), Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum)));
             Bridge.Test.NUnit.Assert.false(($t1=Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.FirstValue, System.Enum.equals($t1, Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.SecondValue, Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum, $box_.Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.toString), Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum)));
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.SimpleTypes.EnumTests", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.SimpleTypes.EnumTests, {
+        f1: function (x) {
+            return Bridge.is(x, System.IComparable);
+        },
+        f2: function (x) {
+            return Bridge.is(x, System.IFormattable);
         }
     });
 
