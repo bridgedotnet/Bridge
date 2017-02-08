@@ -92,9 +92,9 @@
 
             var range = System.Int64(maxValue).sub(System.Int64(minValue));
             if (range.lte(System.Int64(2147483647))) {
-                return (((Bridge.Int.clip32(this.sample() * System.Int64.toNumber(range)) + minValue) | 0));
+                return (((Bridge.Int.clip32((this.sample() * System.Int64.toNumber(range))) + minValue) | 0));
             } else {
-                return System.Int64.clip32(Bridge.Int.clip64(this.getSampleForLargeRange() * System.Int64.toNumber(range)).add(System.Int64(minValue)));
+                return System.Int64.clip32(Bridge.Int.clip64((this.getSampleForLargeRange() * System.Int64.toNumber(range))).add(System.Int64(minValue)));
             }
         },
         next$1: function (maxValue) {
