@@ -129,7 +129,7 @@
         },
 
         getBaseType: function (type) {
-            if (type === Object || type.$kind === "interface" || type.prototype == null) {
+            if (Bridge.isObject(type) || type.$kind === "interface" || type.prototype == null) {
                 return null;
             } else if (Object.getPrototypeOf) {
                 return Object.getPrototypeOf(type.prototype).constructor;
@@ -172,7 +172,7 @@
 
             var results = (/function (.{1,})\(/).exec(str);
 
-            return (results && results.length > 1) ? results[1] : "Object";
+            return (results && results.length > 1) ? results[1] : "System.Object";
         },
 
         _makeQName: function (name, asm) {
@@ -302,7 +302,7 @@
             } else if (type === String) {
                 return [System.IComparable$1(String), System.IEquatable$1(String), System.IComparable, System.ICloneable, System.Collections.IEnumerable, System.Collections.Generic.IEnumerable$1(System.Char)];
             } else if (type === Array || type.$isArray || System.Array._typedArrays[Bridge.getTypeName(type)]) {
-                var t = type.$elementType || Object;
+                var t = type.$elementType || System.Object;
                 return [System.Collections.IEnumerable, System.Collections.ICollection, System.ICloneable, System.Collections.IList, System.Collections.Generic.IEnumerable$1(t), System.Collections.Generic.ICollection$1(t), System.Collections.Generic.IList$1(t)];
             } else {
                 return [];
@@ -322,7 +322,7 @@
                 return false;
             }
 
-            if (baseType === type || baseType === Object) {
+            if (baseType === type || Bridge.isObject(baseType)) {
                 return true;
             }
 

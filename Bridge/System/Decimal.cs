@@ -372,7 +372,7 @@ namespace System
         public extern string ToFormat(DecimalFormatConfig config);
     }
 
-    [Name("Object")]
+    [Name("System.Object")]
     [Constructor("{ }")]
     [External]
     public class DecimalConfig
@@ -429,7 +429,7 @@ namespace System
         public DecimalFormatConfig Format;
     }
 
-    [Name("Object")]
+    [Name("System.Object")]
     [Constructor("{ }")]
     [External]
     public class DecimalFormatConfig

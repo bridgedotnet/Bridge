@@ -368,7 +368,7 @@ namespace Bridge.Translator
             }*/
             else if (iType.Kind == TypeKind.Anonymous)
             {
-                this.Write(JS.Types.Object.NAME);
+                this.Write(JS.Types.System.Object.NAME);
             }
             else
             {

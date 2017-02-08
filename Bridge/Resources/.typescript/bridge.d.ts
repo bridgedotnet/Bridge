@@ -68,23 +68,6 @@ declare module Bridge {
 
     var Array: Array;
 
-    export interface String {
-        isNullOrWhiteSpace(value: string): boolean;
-        isNullOrEmpty(value: string): boolean;
-        fromCharCount(c: number, count: number): string;
-        format(str: string, ...args: any[]): string;
-        alignString(str: string, alignment: number, pad: string, dir: number): string;
-        startsWith(str: string, prefix: string): boolean;
-        endsWith(str: string, suffix: string): boolean;
-        contains(str: string, value: string): string;
-        indexOfAny(str: string, anyOf: number[], startIndex?: number, length?: number): number;
-        indexOf(str: string, value: string): number;
-        compare(strA: string, strB: string): number;
-        toCharArray(str: string, startIndex: number, length: number): number[];
-    }
-
-    var String: String;
-
     export interface Class {
         define(className: string, props: any): Function;
         define(className: string, scope: any, props: any): Function;
@@ -222,6 +205,9 @@ declare module Bridge {
 }
 
 declare module System {
+    export class Object {
+    }
+
     export class Attribute {
     }
 
@@ -271,6 +257,23 @@ declare module System {
     }
 
     var Char: Char;
+
+    export interface String {
+        isNullOrWhiteSpace(value: string): boolean;
+        isNullOrEmpty(value: string): boolean;
+        fromCharCount(c: number, count: number): string;
+        format(str: string, ...args: any[]): string;
+        alignString(str: string, alignment: number, pad: string, dir: number): string;
+        startsWith(str: string, prefix: string): boolean;
+        endsWith(str: string, suffix: string): boolean;
+        contains(str: string, value: string): string;
+        indexOfAny(str: string, anyOf: number[], startIndex?: number, length?: number): number;
+        indexOf(str: string, value: string): number;
+        compare(strA: string, strB: string): number;
+        toCharArray(str: string, startIndex: number, length: number): number[];
+    }
+
+    var String: String;
 
     export class Exception {
         constructor(message: string, innerException?: Exception);
@@ -400,7 +403,7 @@ declare module System {
         toUTC(dt: Date): Date;
         toLocal(dt: Date): Date;
     }
-    var Date: DateTime;
+    var DateTime: DateTime;
 
     export interface Guid extends System.IEquatable$1<System.Guid>, System.IComparable$1<System.Guid>, System.IFormattable {
         equalsT(o: System.Guid): boolean;
