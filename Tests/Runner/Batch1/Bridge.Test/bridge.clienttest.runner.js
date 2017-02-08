@@ -4792,70 +4792,70 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             iEquatableEqualsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IEquatableEqualsWorks()",
-                    line: "145"
+                    line: "152"
                 } ));
                 t.getFixture().iEquatableEqualsWorks();
             },
             compareToWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "CompareToWorks()",
-                    line: "154"
+                    line: "161"
                 } ));
                 t.getFixture().compareToWorks();
             },
             isLowerWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IsLowerWorks()",
-                    line: "163"
+                    line: "170"
                 } ));
                 t.getFixture().isLowerWorks();
             },
             isUpperWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IsUpperWorks()",
-                    line: "171"
+                    line: "178"
                 } ));
                 t.getFixture().isUpperWorks();
             },
             toLowerWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ToLowerWorks()",
-                    line: "179"
+                    line: "186"
                 } ));
                 t.getFixture().toLowerWorks();
             },
             toUpperWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ToUpperWorks()",
-                    line: "187"
+                    line: "194"
                 } ));
                 t.getFixture().toUpperWorks();
             },
             isDigitWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IsDigitWorks()",
-                    line: "195"
+                    line: "202"
                 } ));
                 t.getFixture().isDigitWorks();
             },
             isWhiteSpaceWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IsWhiteSpaceWorks()",
-                    line: "203"
+                    line: "210"
                 } ));
                 t.getFixture().isWhiteSpaceWorks();
             },
             isDigitWithStringAndIndexWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IsDigitWithStringAndIndexWorks()",
-                    line: "211"
+                    line: "218"
                 } ));
                 t.getFixture().isDigitWithStringAndIndexWorks();
             },
             isWhiteSpaceWithStringAndIndexWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IsWhiteSpaceWithStringAndIndexWorks()",
-                    line: "223"
+                    line: "230"
                 } ));
                 t.getFixture().isWhiteSpaceWithStringAndIndexWorks();
             }

@@ -26177,6 +26177,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.NUnit.Assert.false(System.Char.equals((49), Bridge.box(48, System.Int32)));
             Bridge.Test.NUnit.Assert.false(System.Char.equals((48), Bridge.box(49, System.Int32)));
             Bridge.Test.NUnit.Assert.false(System.Char.equals((49), Bridge.box(49, System.Int32)));
+
+            var charZero = Bridge.box(48, System.Char, $box_.System.Char.toString);
+            var charOne = Bridge.box(49, System.Char, $box_.System.Char.toString);
+            Bridge.Test.NUnit.Assert.true(System.Char.equals((48), charZero));
+            Bridge.Test.NUnit.Assert.false(System.Char.equals((49), charZero));
+            Bridge.Test.NUnit.Assert.false(System.Char.equals((48), charOne));
+            Bridge.Test.NUnit.Assert.true(System.Char.equals((49), charOne));
         },
         iEquatableEqualsWorks: function () {
             Bridge.Test.NUnit.Assert.true((48) === 48);
@@ -45402,17 +45409,17 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     });
 
 
-    Bridge.ns("Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum", $box_);
-
-    Bridge.apply($box_.Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum, {
-        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum, obj);}
-    });
-
-
     Bridge.ns("System.Char", $box_);
 
     Bridge.apply($box_.System.Char, {
         toString: function(obj) {return String.fromCharCode(obj);}
+    });
+
+
+    Bridge.ns("Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum", $box_);
+
+    Bridge.apply($box_.Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum, {
+        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum, obj);}
     });
 
     var $m = Bridge.setMetadata,

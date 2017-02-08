@@ -140,6 +140,13 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.False('1'.Equals((int)'0'));
             Assert.False('0'.Equals((int)'1'));
             Assert.False('1'.Equals((int)'1'));
+
+            object charZero = '0';
+            object charOne = '1';
+            Assert.True('0'.Equals(charZero));
+            Assert.False('1'.Equals(charZero));
+            Assert.False('0'.Equals(charOne));
+            Assert.True('1'.Equals(charOne));
         }
 
         [Test]
