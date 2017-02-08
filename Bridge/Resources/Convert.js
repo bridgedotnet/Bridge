@@ -192,7 +192,7 @@
                     scope.internal.throwInvalidCastEx(fromType, typeCodes.DateTime);
 
                 case "string":
-                    value = Bridge.Date.parse(value, formatProvider || null);
+                    value = System.DateTime.parse(value, formatProvider || null);
 
                     return value;
 
@@ -261,7 +261,7 @@
                     }
 
                     if (Bridge.isDate(value)) {
-                        return Bridge.Date.format(value, null, formatProvider || null);
+                        return System.DateTime.format(value, null, formatProvider || null);
                     }
 
                     if (value instanceof System.Decimal) {

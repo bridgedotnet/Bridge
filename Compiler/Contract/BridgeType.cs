@@ -354,7 +354,7 @@ namespace Bridge.Contract
 
             if (type.Kind == TypeKind.Dynamic)
             {
-                return JS.Types.Object.NAME;
+                return JS.Types.System.Object.NAME;
             }
 
             /*if (NullableType.IsNullable(type))
@@ -387,7 +387,7 @@ namespace Bridge.Contract
                 }
                 else
                 {
-                    return "Object";
+                    return JS.Types.System.Object.NAME;
                 }
             }
 
@@ -396,7 +396,7 @@ namespace Bridge.Contract
             {
                 if (skipMethodTypeParam && (typeParam.OwnerType == SymbolKind.Method) || Helpers.IsIgnoreGeneric(typeParam.Owner, emitter))
                 {
-                    return "Object";
+                    return JS.Types.System.Object.NAME;
                 }
             }
 
@@ -430,9 +430,18 @@ namespace Bridge.Contract
                 name = BridgeTypes.AddModule(name, bridgeType, out isCustomName);
             }
 
-            if (!hasTypeDef && !isCustomName && type.TypeArguments.Count > 0)
+            var tDef = type.GetDefinition();
+            var skipSuffix = tDef != null && tDef.ParentAssembly.AssemblyName != CS.NS.ROOT && emitter.Validator.IsExternalType(tDef) && Helpers.IsIgnoreGeneric(tDef);
+
+            if (!hasTypeDef && !isCustomName && type.TypeArguments.Count > 0 && !skipSuffix)
             {
                 name += Helpers.PrefixDollar(type.TypeArguments.Count);
+            }
+
+            var genericSuffix = "$" + type.TypeArguments.Count;
+            if (skipSuffix && !isCustomName && type.TypeArguments.Count > 0 && name.EndsWith(genericSuffix))
+            {
+                name = name.Substring(0, name.Length - genericSuffix.Length);
             }
 
             if (isAlias)
@@ -568,7 +577,7 @@ namespace Bridge.Contract
 
             if (primitive != null && primitive.KnownTypeCode == KnownTypeCode.Void)
             {
-                return "Object";
+                return JS.Types.System.Object.NAME;
             }
 
             /*var composedType = astType as ComposedType;
@@ -582,7 +591,7 @@ namespace Bridge.Contract
 
             if (simpleType != null && simpleType.Identifier == "dynamic")
             {
-                return JS.Types.Object.NAME;
+                return JS.Types.System.Object.NAME;
             }
 
             var resolveResult = emitter.Resolver.ResolveNode(astType, emitter);

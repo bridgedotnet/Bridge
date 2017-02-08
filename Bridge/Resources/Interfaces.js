@@ -39,7 +39,7 @@
 
             statics: {
                 $is: function (obj) {
-                    if (Bridge.isNumber(obj) && T.$number && T.$is(obj) || Bridge.isDate(obj) && T === Date || Bridge.isBoolean(obj) && T === Boolean || Bridge.isString(obj) && T === String) {
+                    if (Bridge.isNumber(obj) && T.$number && T.$is(obj) || Bridge.isDate(obj) && (T === Date || T === System.DateTime) || Bridge.isBoolean(obj) && (T === Boolean || T === System.Boolean) || Bridge.isString(obj) && (T === String || T === System.String)) {
                         return true;
                     }
 
@@ -55,7 +55,7 @@
 
             statics: {
                 $is: function (obj) {
-                    if (Bridge.isNumber(obj) && T.$number && T.$is(obj) || Bridge.isDate(obj) && T === Date || Bridge.isBoolean(obj) && T === Boolean || Bridge.isString(obj) && T === String) {
+                    if (Bridge.isNumber(obj) && T.$number && T.$is(obj) || Bridge.isDate(obj) && (T === Date || T === System.DateTime) || Bridge.isBoolean(obj) && (T === Boolean || T === System.Boolean) || Bridge.isString(obj) && (T === String || T === System.String)) {
                         return true;
                     }
 

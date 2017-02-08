@@ -5,7 +5,7 @@ using System.Reflection;
 namespace System.Linq.Expressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class ElementInit
     {
         [Field]

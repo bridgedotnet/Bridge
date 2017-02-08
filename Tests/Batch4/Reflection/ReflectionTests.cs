@@ -1196,7 +1196,7 @@ namespace Bridge.ClientTest.Batch4.Reflection
         {
             var m = typeof(C9<int, string>).GetMethod("M");
             var f = (Func<string, string>)m.CreateDelegate();
-            Assert.AreEqual("System.Int32 String a", f("a"), "Delegate should return correct results");
+            Assert.AreEqual("System.Int32 System.String a", f("a"), "Delegate should return correct results");
         }
 
         [Test]
@@ -1205,7 +1205,7 @@ namespace Bridge.ClientTest.Batch4.Reflection
             var m = typeof(C8).GetMethod("M3");
             var c = new C8("X");
             var f = (Func<string, string>)m.CreateDelegate(c, new[] { typeof(int), typeof(string) });
-            Assert.AreEqual("X System.Int32 String a", f("a"), "Result of invoking delegate should be correct");
+            Assert.AreEqual("X System.Int32 System.String a", f("a"), "Result of invoking delegate should be correct");
             Assert.Throws(() => m.CreateDelegate((object)null, new[] { typeof(int), typeof(string) }), "Null target with correct type arguments should throw");
             Assert.Throws(() => m.CreateDelegate(c), "No type arguments with target should throw");
             Assert.Throws(() => m.CreateDelegate(c, new Type[0]), "0 type arguments with target should throw");
@@ -1218,7 +1218,7 @@ namespace Bridge.ClientTest.Batch4.Reflection
         {
             var m = typeof(C8).GetMethod("M4");
             var f = (Func<string, string>)m.CreateDelegate((object)null, new[] { typeof(int), typeof(string) });
-            Assert.AreEqual("System.Int32 String a", f("a"), "Result of invoking delegate should be correct");
+            Assert.AreEqual("System.Int32 System.String a", f("a"), "Result of invoking delegate should be correct");
             Assert.Throws(() => m.CreateDelegate(new C8(""), new[] { typeof(int), typeof(string) }), "Target with correct type arguments should throw");
             Assert.Throws(() => m.CreateDelegate((object)null), "No type arguments without target should throw");
             Assert.Throws(() => m.CreateDelegate((object)null, new Type[0]), "0 type arguments without target should throw");
@@ -1267,7 +1267,7 @@ namespace Bridge.ClientTest.Batch4.Reflection
         public void InvokeWorksForGenericInlineCodeMethods()
         {
             var m = typeof(C21).GetMethod("M3");
-            Assert.AreEqual("42StringWorld", m.Invoke(new C21(42), new[] { typeof(string) }, "World"), "Invoke should work");
+            Assert.AreEqual("42System.StringWorld", m.Invoke(new C21(42), new[] { typeof(string) }, "World"), "Invoke should work");
         }
 
         [Test]
@@ -1276,8 +1276,8 @@ namespace Bridge.ClientTest.Batch4.Reflection
             var m = typeof(C8).GetMethod("M3");
             var argsArr = new object[] { "x" };
             var c = new C8("X");
-            Assert.AreEqual("X System.Int32 String a", m.Invoke(c, new[] { typeof(int), typeof(string) }, "a"), "Result of invoking delegate should be correct");
-            Assert.AreEqual("X System.Int32 String x", m.Invoke(c, new[] { typeof(int), typeof(string) }, argsArr), "Result of invoking delegate should be correct");
+            Assert.AreEqual("X System.Int32 System.String a", m.Invoke(c, new[] { typeof(int), typeof(string) }, "a"), "Result of invoking delegate should be correct");
+            Assert.AreEqual("X System.Int32 System.String x", m.Invoke(c, new[] { typeof(int), typeof(string) }, argsArr), "Result of invoking delegate should be correct");
             Assert.Throws(() => m.Invoke(null, new[] { typeof(int), typeof(string) }, "a"), "Null target with correct type arguments should throw");
             Assert.Throws(() => m.Invoke(c, "a"), "No type arguments with target should throw");
             Assert.Throws(() => m.Invoke(c, new Type[0], "a"), "0 type arguments with target should throw");
@@ -1289,7 +1289,7 @@ namespace Bridge.ClientTest.Batch4.Reflection
         public void InvokeWorksForGenericStaticMethod()
         {
             var m = typeof(C8).GetMethod("M4");
-            Assert.AreEqual("System.Int32 String a", m.Invoke(null, new[] { typeof(int), typeof(string) }, "a"), "Result of invoking delegate should be correct");
+            Assert.AreEqual("System.Int32 System.String a", m.Invoke(null, new[] { typeof(int), typeof(string) }, "a"), "Result of invoking delegate should be correct");
             Assert.Throws(() => m.Invoke(new C8(""), new[] { typeof(int), typeof(string) }, "a"), "Target with correct type arguments should throw");
             Assert.Throws(() => m.Invoke(null, "a"), "No type arguments without target should throw");
             Assert.Throws(() => m.Invoke(null, new Type[0], "a"), "0 type arguments without target should throw");
@@ -1301,7 +1301,7 @@ namespace Bridge.ClientTest.Batch4.Reflection
         public void InvokeWorksForGenericInstanceMethodsOnSerializableTypes()
         {
             var m = typeof(C7).GetMethod("M3");
-            Assert.AreEqual("13 System.Int32 String Suffix", m.Invoke(new C7 { x = 13 }, new[] { typeof(int), typeof(string) }, "Suffix"), "Invoke should work");
+            Assert.AreEqual("13 System.Int32 System.String Suffix", m.Invoke(new C7 { x = 13 }, new[] { typeof(int), typeof(string) }, "Suffix"), "Invoke should work");
         }
 
         [Test]

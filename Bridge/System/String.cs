@@ -11,7 +11,6 @@ namespace System
     /// The String global object is a constructor for strings, or a sequence of characters.
     /// </summary>
     [External]
-    [Name("String")]
     [Constructor("String")]
     public sealed class String : IEnumerable, ICloneable, IEnumerable<char>, IComparable<String>, IEquatable<String>
     {
@@ -30,6 +29,7 @@ namespace System
         /// <summary>
         /// The String global object is a constructor for strings, or a sequence of characters.
         /// </summary>
+        [Template("\"\"")]
         public extern String();
 
         /// <summary>
@@ -63,6 +63,7 @@ namespace System
         /// The static String.fromCharCode() method returns a string created by using the specified sequence of Unicode values.
         /// </summary>
         /// <returns>String.Empty</returns>
+        [Template("String.fromCharCode()")]
         public static extern string FromCharCode();
 
         /// <summary>
@@ -70,6 +71,7 @@ namespace System
         /// </summary>
         /// <param name="numbers">A sequence of numbers that are Unicode values.</param>
         /// <returns></returns>
+        [Template("String.fromCharCode({numbers})")]
         public static extern string FromCharCode(params int[] numbers);
 
         /// <summary>

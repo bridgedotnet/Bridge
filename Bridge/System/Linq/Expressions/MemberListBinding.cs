@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 namespace System.Linq.Expressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     [Cast("{this}.btype === 2")]
     public sealed class MemberListBinding : MemberBinding
     {
