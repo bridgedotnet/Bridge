@@ -91,7 +91,6 @@
     <Compile Include="Bridge\Linq\Enumerable.cs" />
     <Compile Include="Bridge\IBridgeClass.cs" />
     <Compile Include="Bridge\ObjectLiteral.cs" />
-    <Compile Include="Bridge\Any.cs" />
     <Compile Include="Bridge\Intersection.cs" />
     <Compile Include="Bridge\Module.cs" />
     <Compile Include="Bridge\Sequence.cs" />
