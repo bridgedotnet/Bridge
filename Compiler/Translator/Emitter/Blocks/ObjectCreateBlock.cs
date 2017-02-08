@@ -475,8 +475,7 @@ namespace Bridge.Translator
                     var p = rr.Member.Parameters[i < rr.Member.Parameters.Count ? i : (rr.Member.Parameters.Count - 1)];
                     var name = p.Name;
 
-                    if (p.Type.FullName == "Bridge.DefaultValueMode" ||
-                        p.Type.FullName == "Bridge.ObjectInitializationMode" ||
+                    if (p.Type.FullName == "Bridge.ObjectInitializationMode" ||
                         p.Type.FullName == "Bridge.ObjectCreateMode")
                     {
                         continue;

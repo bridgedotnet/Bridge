@@ -11,11 +11,6 @@ namespace Bridge
         {
         }
 
-        [Obsolete("Please use ObjectInitializationMode property. See Issue #1756 for more information.", true)]
-        public ObjectLiteralAttribute(DefaultValueMode mode)
-        {
-        }
-
         public ObjectLiteralAttribute(ObjectInitializationMode initializationMode)
         {
         }
@@ -27,16 +22,6 @@ namespace Bridge
         public ObjectLiteralAttribute(ObjectInitializationMode initializationMode, ObjectCreateMode createMode)
         {
         }
-    }
-
-    [External]
-    [Enum(Bridge.Emit.Value)]
-    [Obsolete("Please use ObjectInitializationMode property. See Issue #1756 for more information.", true)]
-    public enum DefaultValueMode
-    {
-        Ignore = 0,
-        Initializer = 1,
-        DefaultValue = 2
     }
 
     [External]

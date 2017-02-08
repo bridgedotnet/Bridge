@@ -70,8 +70,7 @@ namespace Bridge.Translator
                                 TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_NO_CREATE_MODE_CUSTOM_CONSTRUCTOR, type);
                             }
 
-                            if (parameter.ParameterType.FullName == "Bridge.DefaultValueMode" ||
-                                parameter.ParameterType.FullName == "Bridge.ObjectInitializationMode")
+                            if (parameter.ParameterType.FullName == "Bridge.ObjectInitializationMode")
                             {
                                 continue;
                             }
@@ -392,10 +391,6 @@ namespace Bridge.Translator
                     if (args[0].Type.FullName == Translator.Bridge_ASSEMBLY + ".ObjectInitializationMode")
                     {
                         return (int) args[0].Value;
-                    }
-                    else if (args[0].Type.FullName == Translator.Bridge_ASSEMBLY + ".DefaultValueMode")
-                    {
-                        return (int)args[0].Value;
                     }
                 }
             }
