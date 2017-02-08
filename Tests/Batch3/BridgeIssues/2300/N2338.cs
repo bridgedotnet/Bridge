@@ -31,6 +31,10 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             char c = '1';
             type = Foo<char>(c);
             Assert.AreEqual("Char", type.Name);
+
+            object o = new object();
+            type = Foo<object>(o);
+            Assert.AreEqual("Object", type.Name);
         }
     }
 }

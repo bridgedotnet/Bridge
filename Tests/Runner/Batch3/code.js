@@ -14656,6 +14656,10 @@ Bridge.$N1391Result =                 r;
                 var c = 49;
                 type = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2338.foo(System.Char, c);
                 Bridge.Test.NUnit.Assert.areEqual("Char", Bridge.Reflection.getTypeName(type));
+
+                var o = {  };
+                type = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2338.foo(System.Object, o);
+                Bridge.Test.NUnit.Assert.areEqual("Object", Bridge.Reflection.getTypeName(type));
             }
         }
     });
