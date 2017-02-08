@@ -26925,10 +26925,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.apply($asm.$.Bridge.ClientTest.SimpleTypes.EnumTests, {
         f1: function (x) {
-            return Bridge.is(x, System.IComparable);
+            return Bridge.referenceEquals(x, System.IComparable);
         },
         f2: function (x) {
-            return Bridge.is(x, System.IFormattable);
+            return Bridge.referenceEquals(x, System.IFormattable);
         },
         f3: function () {
             var _ = System.Nullable.getValue(Bridge.cast(Bridge.unbox(Bridge.box(0.5, System.Double, $box_.System.Double.toString)), System.Int32));

@@ -38,7 +38,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
             Assert.True((object)TestEnum.FirstValue is TestEnum);
 
             var interfaces = typeof(TestEnum).GetInterfaces();
-            Assert.AreEqual(0, interfaces.Length);
+            Assert.AreEqual(2, interfaces.Length);
         }
 
         private T GetDefaultValue<T>()

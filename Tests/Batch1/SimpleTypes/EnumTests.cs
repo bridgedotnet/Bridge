@@ -38,8 +38,8 @@ namespace Bridge.ClientTest.SimpleTypes
 
             var interfaces = typeof(TestEnum).GetInterfaces();
             Assert.AreEqual(2, interfaces.Length);
-            Assert.NotNull(interfaces.FirstOrDefault(x => x is IComparable));
-            Assert.NotNull(interfaces.FirstOrDefault(x => x is IFormattable));
+            Assert.NotNull(interfaces.FirstOrDefault(x => x == typeof(IComparable)));
+            Assert.NotNull(interfaces.FirstOrDefault(x => x == typeof(IFormattable)));
 
             Assert.AreEqual("System.Enum", typeof(Enum).FullName);
         }

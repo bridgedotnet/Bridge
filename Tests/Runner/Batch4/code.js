@@ -18736,7 +18736,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true(Bridge.is(Bridge.box(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.TestEnum.FirstValue, Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.TestEnum, $box_.Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.TestEnum.toString), System.Int32));
 
             var interfaces = Bridge.Reflection.getInterfaces(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.TestEnum);
-            Bridge.Test.NUnit.Assert.areEqual(0, interfaces.length);
+            Bridge.Test.NUnit.Assert.areEqual(2, interfaces.length);
         },
         getDefaultValue: function (T) {
             return Bridge.getDefaultValue(T);
