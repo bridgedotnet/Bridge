@@ -37,11 +37,6 @@ namespace Bridge.Translator
 
             if (this.ThrowStatement.Expression.IsNull)
             {
-                var tryStatement = this.ThrowStatement.GetParent<TryCatchStatement>();
-                var count = tryStatement.CatchClauses.Count;
-                var firstClause = tryStatement.CatchClauses.Count == 1 ? tryStatement.CatchClauses.First() : null;
-                var exceptionType = (firstClause == null || firstClause.Type.IsNull) ? null : BridgeTypes.ToJsName(firstClause.Type, this.Emitter);
-
                 string name = this.Emitter.CatchBlockVariable ?? JS.Vars.ASYNC_E;
                 this.Write(name);
             }
