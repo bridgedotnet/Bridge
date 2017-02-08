@@ -93,7 +93,7 @@
             Bridge.Console.log(System.String.concat("ev.CurrentTarget.Value: ", ev.currentTarget.value));
 
             // Tests if ev.IsMouseEvent() compiles
-            Bridge.Console.log("IsMouseEvent: " + System.Boolean.toString(Bridge.box(Bridge.is(ev, MouseEvent), Boolean, $box_.Boolean.toString)));
+            Bridge.Console.log("IsMouseEvent: " + System.Boolean.toString(Bridge.is(ev, MouseEvent)));
         },
         f2: function (ev) {
             // Tests if ev.CurrentTarget.Href compiles

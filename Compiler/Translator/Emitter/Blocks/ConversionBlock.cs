@@ -247,6 +247,33 @@ namespace Bridge.Translator
             return null;
         }
 
+        private static bool IsUnpackGenericInterfaceObject(IType interfaceType)
+        {
+            return interfaceType.Kind == TypeKind.Interface && interfaceType.Namespace == "System" && (interfaceType.Name == "IComparable" || interfaceType.Name == "IEquatable" || interfaceType.Name == "IFormattable");
+        }
+
+        private static bool IsUnpackGenericArrayInterfaceObject(IType interfaceType)
+        {
+            ParameterizedType pt = interfaceType as ParameterizedType;
+            if (pt != null)
+            {
+                KnownTypeCode tc = pt.GetDefinition().KnownTypeCode;
+                if (tc == KnownTypeCode.IListOfT || tc == KnownTypeCode.ICollectionOfT || tc == KnownTypeCode.IEnumerableOfT || tc == KnownTypeCode.IReadOnlyListOfT)
+                {
+                    var type = pt.GetTypeArgument(0);
+                    return type.IsKnownType(KnownTypeCode.Object) || ConversionBlock.IsUnpackGenericInterfaceObject(type);
+                }
+            }
+
+            if (interfaceType is TypeWithElementType)
+            {
+                var type = ((TypeWithElementType) interfaceType).ElementType;
+                return type.IsKnownType(KnownTypeCode.Object) || ConversionBlock.IsUnpackGenericInterfaceObject(type);
+            }
+
+            return false;
+        }
+
         private static int DoConversion(ConversionBlock block, Expression expression, Conversion conversion, IType expectedType,
             int level, ResolveResult rr, bool ignoreConversionResolveResult = false, bool ignoreBoxing = false)
         {
@@ -296,9 +323,23 @@ namespace Bridge.Translator
 
                 }
 
-                if (conversion.IsBoxingConversion && !isArgument)
+                var isStringConcat = false;
+                var binaryOperatorExpression = expression.Parent as BinaryOperatorExpression;
+                if (binaryOperatorExpression != null)
                 {
-                    block.Write("Bridge.box(");
+                    var resolveOperator = block.Emitter.Resolver.ResolveNode(binaryOperatorExpression, block.Emitter);
+                    var expectedParentType = block.Emitter.Resolver.Resolver.GetExpectedType(binaryOperatorExpression);
+                    var resultIsString = expectedParentType.IsKnownType(KnownTypeCode.String) || resolveOperator.Type.IsKnownType(KnownTypeCode.String);
+                    isStringConcat = resultIsString && binaryOperatorExpression.Operator == BinaryOperatorType.Add;
+                }
+
+                bool needBox = ConversionBlock.IsBoxable(rr.Type)
+                    || rr.Type.IsKnownType(KnownTypeCode.NullableOfT) && ConversionBlock.IsBoxable(NullableType.GetUnderlyingType(rr.Type));
+
+                if (conversion.IsBoxingConversion && needBox && !isArgument && !isStringConcat)
+                {
+                    block.Write(JS.Types.Bridge.BOX);
+                    block.WriteOpenParentheses();
                     block.AfterOutput2 += ", " + ConversionBlock.GetBoxedType(rr.Type, block.Emitter);
 
                     var inlineMethod = ConversionBlock.GetInlineMethod(block.Emitter, "ToString",
@@ -327,15 +368,16 @@ namespace Bridge.Translator
                     //return level;
                 }
 
-                if (conversion.IsUnboxingConversion || isArgument && expectedType.IsKnownType(KnownTypeCode.Object) && rr.Type.IsKnownType(KnownTypeCode.Object))
+                if (conversion.IsUnboxingConversion || isArgument && expectedType.IsKnownType(KnownTypeCode.Object) && (rr.Type.IsKnownType(KnownTypeCode.Object) || ConversionBlock.IsUnpackGenericInterfaceObject(rr.Type) || ConversionBlock.IsUnpackGenericArrayInterfaceObject(rr.Type)))
                 {
-                    block.Write("Bridge.unbox(");
+                    block.Write(JS.Types.Bridge.UNBOX);
+                    block.WriteOpenParentheses();
                     block.AfterOutput2 += ")";
                     //return level;
                 }
             }
 
-            if (expression is ParenthesizedExpression && ((ParenthesizedExpression) expression).Expression is CastExpression)
+            if (expression is ParenthesizedExpression && ((ParenthesizedExpression)expression).Expression is CastExpression)
             {
                 return level;
             }
@@ -493,6 +535,23 @@ namespace Bridge.Translator
 
             block.AfterOutput = block.AfterOutput + afterUserDefined;
             return level;
+        }
+
+        private static bool IsBoxable(IType type)
+        {
+            return type.Kind == TypeKind.Enum
+                   || type.IsKnownType(KnownTypeCode.Enum)
+                   || type.IsKnownType(KnownTypeCode.Boolean)
+                   || type.IsKnownType(KnownTypeCode.DateTime)
+                   || type.IsKnownType(KnownTypeCode.Char)
+                   || type.IsKnownType(KnownTypeCode.Byte)
+                   || type.IsKnownType(KnownTypeCode.Double)
+                   || type.IsKnownType(KnownTypeCode.Single)
+                   || type.IsKnownType(KnownTypeCode.Int16)
+                   || type.IsKnownType(KnownTypeCode.Int32)
+                   || type.IsKnownType(KnownTypeCode.SByte)
+                   || type.IsKnownType(KnownTypeCode.UInt16)
+                   || type.IsKnownType(KnownTypeCode.UInt32);
         }
 
         private static int CheckUserDefinedConversion(ConversionBlock block, Expression expression, Conversion conversion, int level, ResolveResult rr, IType expectedType)

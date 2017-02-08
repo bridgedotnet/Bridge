@@ -49,7 +49,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         [Test]
         public void TypePropertiesAreCorrect_SPI_1597()
         {
-            Assert.AreEqual("String", typeof(string).FullName);
+            Assert.AreEqual("System.String", typeof(string).FullName);
             Assert.True(typeof(string).IsClass);
             // #1597
             Assert.True(typeof(IComparable<string>).IsAssignableFrom(typeof(string)));

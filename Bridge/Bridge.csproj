@@ -803,6 +803,7 @@
     <Content Include="Resources\Text\RegularExpressions\RegexRunner.js" />
     <Content Include="Resources\Reflection.js" />
     <Content Include="Resources\ClientWebSocket.js" />
+    <Content Include="Resources\Object.js" />
     <Content Include="Resources\Uri.js" />
     <Content Include="Resources\Array.js" />
     <Content Include="Resources\Collections\Comparer.js" />

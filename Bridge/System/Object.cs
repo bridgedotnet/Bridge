@@ -3,7 +3,6 @@ using Bridge;
 namespace System
 {
     [External]
-    [Name("Object")]
     [IgnoreCast]
     [Constructor("{ }")]
     public class Object
@@ -43,8 +42,10 @@ namespace System
         [Template("Bridge.getHashCode({this})")]
         public virtual extern int GetHashCode();
 
+        [Template("Object.keys({obj})")]
         public static extern string[] Keys(object obj);
 
+        [Template("Object.getOwnPropertyNames({obj})")]
         public static extern string[] GetOwnPropertyNames(object obj);
 
         [Template("{T}.prototype")]

@@ -249,9 +249,9 @@ namespace Bridge.ClientTest.Batch4
             var c2 = (C7)Activator.CreateInstance(typeof(C7));
             var c3 = Instantiate<C7>();
 
-            Assert.AreEqual(typeof(object), ((dynamic)c1).constructor);
-            Assert.AreEqual(typeof(object), ((dynamic)c2).constructor);
-            Assert.AreEqual(typeof(object), ((dynamic)c3).constructor);
+            Assert.AreEqual(Script.ToDynamic().Object, ((dynamic)c1).constructor);
+            Assert.AreEqual(Script.ToDynamic().Object, ((dynamic)c2).constructor);
+            Assert.AreEqual(Script.ToDynamic().Object, ((dynamic)c3).constructor);
         }
 
         [Test]

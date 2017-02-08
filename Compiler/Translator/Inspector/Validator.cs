@@ -520,7 +520,7 @@ namespace Bridge.Translator
                 var mode = this.GetObjectCreateMode(type);
                 if (emitter.Validator.IsExternalType(type) && mode == 0)
                 {
-                    return "Object";
+                    return JS.Types.System.Object.NAME;
                 }
             }
 

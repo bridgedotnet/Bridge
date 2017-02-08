@@ -5,7 +5,7 @@ using System.Reflection;
 namespace System.Linq.Expressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     [Cast("{this}.ntype === 31")]
     public sealed class NewExpression : Expression
     {

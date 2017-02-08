@@ -181,6 +181,11 @@
             {
                 private const string DOTNAME = "System.";
 
+                public class Object
+                {
+                    public const string NAME = System.DOTNAME + "Object";
+                }
+
                 public class IDisposable
                 {
                     private const string DOTNAME = NAME + ".";
@@ -261,6 +266,8 @@
                 public const string DEFINE_I = DOTNAME + "definei";
                 public const string GET_INTERFACE = DOTNAME + "getInterface";
                 public const string INIT = DOTNAME + "init";
+                public const string BOX = DOTNAME + "box";
+                public const string UNBOX = DOTNAME + "unbox";
 
                 public class Generator
                 {

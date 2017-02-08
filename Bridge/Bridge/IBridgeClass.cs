@@ -1,6 +1,6 @@
 namespace Bridge
 {
-    [Name("Object")]
+    [Name("System.Object")]
     [External]
     public interface IBridgeClass
     {
