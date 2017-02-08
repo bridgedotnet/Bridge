@@ -17,24 +17,37 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void DefaultConstructorShouldNotReturnsTodaysDate()
+        public void DefaultConstructorWorks_SPI_1606()
         {
             var dt = new DateTime();
-            Assert.True(dt.Year < 2016);
+            // #1606
+            Assert.AreEqual(1, dt.Year);
         }
 
         [Test]
-        public void CreatingInstanceReturnsDateZero()
+        public void DefaultValueWorks_SPI_1606()
         {
-            var fullYear = Activator.CreateInstance<DateTime>().Year;
-            Assert.True(1971 >= fullYear, "1971 >= " + fullYear);
+            var dt = default(DateTime);
+            // #1606
+            Assert.AreEqual(1, dt.Year);
         }
 
         [Test]
-        public void MillisecondSinceEpochConstructorWorks()
+        public void CreatingInstanceReturnsDateWithZeroValue_SPI_1606()
+        {
+            var dt = Activator.CreateInstance<DateTime>();
+            // #1606
+            Assert.AreEqual(1, dt.Year);
+        }
+
+        [Test]
+        public void LongConstructorWorks()
         {
             var dt = new DateTime(1440L * 60 * 500 * 1000);
             Assert.AreEqual(1, dt.AddDays(1).Year);
+
+            var dt1 = new DateTime(0);
+            Assert.AreEqual(1, dt1.Year);
         }
 
         [Test]
@@ -102,10 +115,25 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
+        public void MinWorks()
+        {
+            var dt = DateTime.MinValue;
+            Assert.AreEqual(1, dt.Year);
+        }
+
+        [Test]
+        public void MaxWorks()
+        {
+            var dt = DateTime.MaxValue;
+            Assert.AreEqual(9999, dt.Year);
+        }
+
+        [Test]
         public void NowWorks()
         {
             var dt = DateTime.Now;
-            Assert.True(dt.GetFullYear() > 2011);
+            var year = dt.GetFullYear();
+            Assert.True(year > 2016, year + " > 2016");
         }
 
         [Test]
@@ -240,27 +268,27 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void GetTimeWorks()
         {
-            var dt = new DateTime(DateTime.Utc(1, 1, 2));
-            Script.Write("dt.setFullYear(1);");
-            Assert.True(1440 * 60 * 1000 == dt.GetTime());
+            var dt = new DateTime(DateTime.Utc(1000, 1, 2));
+            //Script.Write("dt.setFullYear(1);");
+            Assert.AreEqual((31525459200000L).ToString(), dt.GetTime().ToString());
         }
 
         [Test]
         public void ValueOfWorks()
         {
-            var dt = new DateTime(DateTime.Utc(1, 1, 2));
-            Script.Write("dt.setFullYear(1);");
-            Assert.True(1440L * 60 * 1000 == (long)dt.ValueOf());
+            var dt = new DateTime(DateTime.Utc(1000, 1, 2));
+            //Script.Write("dt.setFullYear(1);");
+            Assert.AreEqual((31525459200000L).ToString(), ((long)dt.ValueOf()).ToString());
         }
 
         [Test]
         public void GetTimezoneOffsetWorks()
         {
-            var zdt = new DateTime(1, 1, 1);
-            Script.Write("zdt.setFullYear(1);");
+            var zdt = new DateTime(1000, 1, 1);
+            //Script.Write("zdt.setFullYear(1);");
 
             var dt = new DateTime(0);
-            Assert.True(((long)(zdt.ValueOf()) / 60000) == dt.GetTimezoneOffset());
+            Assert.AreEqual((-180).ToString(), dt.GetTimezoneOffset().ToString());
         }
 
         [Test]

@@ -22,11 +22,11 @@
             },
 
             createInstance: function () {
-                return new Date(-864e13);
+                return new Date(-System.DateTime.offset);
             },
 
             getDefaultValue: function () {
-                return new Date(-864e13);
+                return new Date(-System.DateTime.offset);
             },
 
             fromTicks: function (value) {
@@ -769,7 +769,7 @@
                 result.v = this.parse(value, provider, utc, true);
 
                 if (result.v == null) {
-                    result.v = new Date(-864e13);
+                    result.v = System.DateTime.getDefaultValue();
 
                     return false;
                 }
@@ -781,7 +781,7 @@
                 result.v = this.parseExact(value, format, provider, utc, true);
 
                 if (result.v == null) {
-                    result.v = new Date(-864e13);
+                    result.v = System.DateTime.getDefaultValue();
 
                     return false;
                 }

@@ -207,6 +207,16 @@
                     public const string TO_ENUMERABLE = DOTNAME + "toEnumerable";
                 }
 
+                public class DateTime
+                {
+                    public const string NAME = System.DOTNAME + "DateTime";
+                    private const string DOTNAME = NAME + ".";
+
+                    public const string OFFSET = "62135596800000";
+                    public const string GET_DEFAULT_VALUE = DOTNAME + "getDefaultValue";
+
+                }
+
                 public class Exception
                 {
                     public const string NAME = System.DOTNAME + "Exception";

@@ -317,7 +317,7 @@
             } else if (type === Boolean || type === System.Boolean) {
                 return false;
             } else if (type === Date || type === System.DateTime) {
-                return new Date(-62135596800000);
+                return System.DateTime.getDefaultValue();
             } else if (type === Number) {
                 return 0;
             } else if (type === String || type === System.String) {
@@ -573,7 +573,7 @@
             } else if (type === Boolean || type === System.Boolean) {
                 return false;
             } else if (type === Date || type === System.DateTime) {
-                return new Date(-62135596800000);
+                return System.DateTime.getDefaultValue();
             } else if (type === Number) {
                 return 0;
             }
@@ -7558,11 +7558,11 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             },
 
             createInstance: function () {
-                return new Date(-864e13);
+                return new Date(-System.DateTime.offset);
             },
 
             getDefaultValue: function () {
-                return new Date(-864e13);
+                return new Date(-System.DateTime.offset);
             },
 
             fromTicks: function (value) {
@@ -8305,7 +8305,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 result.v = this.parse(value, provider, utc, true);
 
                 if (result.v == null) {
-                    result.v = new Date(-864e13);
+                    result.v = System.DateTime.getDefaultValue();
 
                     return false;
                 }
@@ -8317,7 +8317,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 result.v = this.parseExact(value, format, provider, utc, true);
 
                 if (result.v == null) {
-                    result.v = new Date(-864e13);
+                    result.v = System.DateTime.getDefaultValue();
 
                     return false;
                 }

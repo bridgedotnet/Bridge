@@ -19103,13 +19103,13 @@ Bridge.$N1391Result =                 r;
                     DateA: null
                 },
                 init: function () {
-                    this.dateb = new Date(-864e13);
-                    this.DateA = new Date(-864e13);
+                    this.dateb = System.DateTime.getDefaultValue();
+                    this.DateA = System.DateTime.getDefaultValue();
                 }
             },
             testUseCase: function () {
-                Bridge.Test.NUnit.Assert.true$1(Bridge.equals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.getDateA(), new Date(-864e13)), "Bridge733 DateA");
-                Bridge.Test.NUnit.Assert.true$1(Bridge.equals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.dateb, new Date(-864e13)), "Bridge733 dateb");
+                Bridge.Test.NUnit.Assert.true$1(Bridge.equals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.getDateA(), new Date(-62135596800000)), "Bridge733 DateA");
+                Bridge.Test.NUnit.Assert.true$1(Bridge.equals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.dateb, new Date(-62135596800000)), "Bridge733 dateb");
 
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.dateb = new Date(); // to prevent warning that dateb is never assigned
             }
@@ -19522,7 +19522,7 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.NUnit.Assert.areEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge789.method2().field1);
             },
             method1: function (dt) {
-                if (dt === void 0) { dt = new Date(-864e13); }
+                if (dt === void 0) { dt = System.DateTime.getDefaultValue(); }
                 return dt;
             },
             method2: function (s) {

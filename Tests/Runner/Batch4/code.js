@@ -13294,7 +13294,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C11", {
         config: {
             init: function () {
-                this.D = new Date(-864e13);
+                this.D = System.DateTime.getDefaultValue();
             }
         },
         ctor: function (dt) {
@@ -13310,7 +13310,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         F1: 0,
         config: {
             init: function () {
-                this.renamedF2 = new Date(-864e13);
+                this.renamedF2 = System.DateTime.getDefaultValue();
             }
         }
     });
@@ -13363,7 +13363,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     P3: null
                 },
                 init: function () {
-                    this.P3 = new Date(-864e13);
+                    this.P3 = System.DateTime.getDefaultValue();
                 }
             },
             getP7: function () {
@@ -16518,7 +16518,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         millisecondSinceEpochConstructorWorks: function () {
             var dt = System.DateTime.fromTicks(System.Int64([250327040,10]));
-            Bridge.Test.NUnit.Assert.areEqual(1970, new Date(dt.valueOf() + Math.round((1) * 864e5)).getFullYear());
+            Bridge.Test.NUnit.Assert.areEqual(1, new Date(dt.valueOf() + Math.round((1) * 864e5)).getFullYear());
         },
         stringConstructorWorks: function () {
             var dt = new Date("Aug 12, 2012");
@@ -16656,12 +16656,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual(5, dt.getDay());
         },
         getTimeWorks: function () {
-            var dt = System.DateTime.fromTicks(System.DateTime.utc(1970, 1, 2));
-            Bridge.Test.NUnit.Assert.areEqual(System.Int64(86400000), System.Int64((dt).getTime() + System.DateTime.offset));
+            var dt = System.DateTime.fromTicks(System.DateTime.utc(1000, 1, 2));
+            Bridge.Test.NUnit.Assert.areEqual((System.Int64([399247360,7340])).toString(), System.Int64((dt).getTime() + System.DateTime.offset).toString());
         },
         valueOfWorks: function () {
-            var dt = System.DateTime.fromTicks(System.DateTime.utc(1970, 1, 2));
-            Bridge.Test.NUnit.Assert.areEqual(86400000, Bridge.unbox(System.Int64((dt).valueOf() + System.DateTime.offset)));
+            var dt = System.DateTime.fromTicks(System.DateTime.utc(1000, 1, 2));
+            Bridge.Test.NUnit.Assert.areEqual((System.Int64([399247360,7340])).toString(), System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Int64((dt).valueOf() + System.DateTime.offset)), System.Int64)).toString());
         },
         getUtcFullYearWorks: function () {
             var dt = System.DateTime.fromTicks(System.DateTime.utc(2011, 7, 12, 13, 42, 56, 345));
@@ -24621,7 +24621,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         t: 0,
         config: {
             init: function () {
-                this.DT = new Date(-864e13);
+                this.DT = System.DateTime.getDefaultValue();
             }
         },
         ctor: function () {
@@ -24659,7 +24659,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         t: Bridge.getDefaultValue(TT),
         config: {
             init: function () {
-                this.DT = new Date(-864e13);
+                this.DT = System.DateTime.getDefaultValue();
             }
         },
         ctor: function () {
