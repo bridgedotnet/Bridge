@@ -5,7 +5,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     [Obsolete("Please use Union class. See Issue #1977 for more information.", true)]
     public class Any<T1, T2>
     {
@@ -28,7 +28,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     [Obsolete("Please use Union class. See Issue #1977 for more information.", true)]
     public class Any<T1, T2, T3>
     {
@@ -55,7 +55,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     [Obsolete("Please use Union class. See Issue #1977 for more information.", true)]
     public class Any<T1, T2, T3, T4>
     {
@@ -86,7 +86,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     [Obsolete("Please use Union class. See Issue #1977 for more information.", true)]
     public class Any<T1, T2, T3, T4, T5>
     {
@@ -121,7 +121,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     [Obsolete("Please use Union class. See Issue #1977 for more information.", true)]
     public class Any<T1, T2, T3, T4, T5, T6>
     {
@@ -160,7 +160,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     [Obsolete("Please use Union class. See Issue #1977 for more information.", true)]
     public class Any<T1, T2, T3, T4, T5, T6, T7>
     {
@@ -203,7 +203,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     [Obsolete("Please use Union class. See Issue #1977 for more information.", true)]
     public class Any<T1, T2, T3, T4, T5, T6, T7, T8>
     {

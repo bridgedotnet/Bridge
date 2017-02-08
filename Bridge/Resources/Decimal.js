@@ -87,11 +87,7 @@
     };
 
     System.Decimal.prototype.toString = function (format, provider) {
-        if (!format && !provider) {
-            return this.value.toString();
-        }
-
-        return Bridge.Int.format(this, format, provider);
+        return Bridge.Int.format(this, format || "G", provider);
     };
 
     System.Decimal.prototype.toFloat = function () {

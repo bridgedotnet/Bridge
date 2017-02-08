@@ -145,13 +145,13 @@ namespace Bridge.Translator
             obj["expression"] = expression;
 
             var member = new JObject();
-            member["td"] = new JRaw("Object");
+            member["td"] = new JRaw("System.Object");
             member["n"] = name;
             member["t"] = (int)MemberTypes.Property;
             member["rt"] = new JRaw(scriptType);
 
             var getter = new JObject();
-            getter["td"] = new JRaw("Object");
+            getter["td"] = new JRaw("System.Object");
             getter["n"] = "get" + name;
             getter["t"] = (int)MemberTypes.Method;
             getter["rt"] = new JRaw(scriptType);
@@ -160,10 +160,10 @@ namespace Bridge.Translator
             member["g"] = getter;
 
             var setter = new JObject();
-            setter["td"] = new JRaw("Object");
+            setter["td"] = new JRaw("System.Object");
             setter["n"] = "set" + name;
             setter["t"] = (int)MemberTypes.Method;
-            setter["rt"] = new JRaw("Object");
+            setter["rt"] = new JRaw("System.Object");
             setter["p"] = new JRaw("[" + scriptType + "]");
             setter["def"] = new JRaw(setterDefinition);
             member["s"] = setter;

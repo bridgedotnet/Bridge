@@ -4,7 +4,7 @@ using System.ComponentModel;
 namespace System.Reflection
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     public class MethodBase : MemberInfo
     {
         public extern Type[] ParameterTypes

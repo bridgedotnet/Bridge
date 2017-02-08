@@ -3,7 +3,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2>
     {
         protected extern Union();
@@ -20,7 +20,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3>
     {
         protected extern Union();
@@ -41,7 +41,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4>
     {
         protected extern Union();
@@ -66,7 +66,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5>
     {
         protected extern Union();
@@ -95,7 +95,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6>
     {
         protected extern Union();
@@ -128,7 +128,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7>
     {
         protected extern Union();
@@ -165,7 +165,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8>
     {
         protected extern Union();
@@ -206,7 +206,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9>
     {
         protected extern Union();
@@ -251,7 +251,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>
     {
         protected extern Union();
@@ -300,7 +300,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>
     {
         protected extern Union();
@@ -353,7 +353,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>
     {
         protected extern Union();
@@ -410,7 +410,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>
     {
         protected extern Union();
@@ -471,7 +471,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>
     {
         protected extern Union();
@@ -536,7 +536,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>
     {
         protected extern Union();
@@ -605,7 +605,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>
     {
         protected extern Union();
@@ -678,7 +678,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>
     {
         protected extern Union();
@@ -755,7 +755,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>
     {
         protected extern Union();
@@ -836,7 +836,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>
     {
         protected extern Union();
@@ -921,7 +921,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>
     {
         protected extern Union();
@@ -1010,7 +1010,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>
     {
         protected extern Union();
@@ -1103,7 +1103,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22>
     {
         protected extern Union();
@@ -1200,7 +1200,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23>
     {
         protected extern Union();
@@ -1301,7 +1301,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24>
     {
         protected extern Union();
@@ -1406,7 +1406,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25>
     {
         protected extern Union();
@@ -1515,7 +1515,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26>
     {
         protected extern Union();
@@ -1628,7 +1628,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27>
     {
         protected extern Union();
@@ -1745,7 +1745,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28>
     {
         protected extern Union();
@@ -1866,7 +1866,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29>
     {
         protected extern Union();
@@ -1991,7 +1991,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30>
     {
         protected extern Union();
@@ -2120,7 +2120,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31>
     {
         protected extern Union();
@@ -2253,7 +2253,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32>
     {
         protected extern Union();
@@ -2390,7 +2390,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33>
     {
         protected extern Union();
@@ -2531,7 +2531,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34>
     {
         protected extern Union();
@@ -2676,7 +2676,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35>
     {
         protected extern Union();
@@ -2825,7 +2825,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36>
     {
         protected extern Union();
@@ -2978,7 +2978,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37>
     {
         protected extern Union();
@@ -3135,7 +3135,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38>
     {
         protected extern Union();
@@ -3296,7 +3296,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39>
     {
         protected extern Union();
@@ -3461,7 +3461,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40>
     {
         protected extern Union();
@@ -3630,7 +3630,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41>
     {
         protected extern Union();
@@ -3803,7 +3803,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42>
     {
         protected extern Union();
@@ -3980,7 +3980,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43>
     {
         protected extern Union();
@@ -4161,7 +4161,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44>
     {
         protected extern Union();
@@ -4346,7 +4346,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45>
     {
         protected extern Union();
@@ -4535,7 +4535,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46>
     {
         protected extern Union();
@@ -4728,7 +4728,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47>
     {
         protected extern Union();
@@ -4925,7 +4925,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48>
     {
         protected extern Union();
@@ -5126,7 +5126,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49>
     {
         protected extern Union();
@@ -5331,7 +5331,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50>
     {
         protected extern Union();
@@ -5540,7 +5540,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51>
     {
         protected extern Union();
@@ -5753,7 +5753,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52>
     {
         protected extern Union();
@@ -5970,7 +5970,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53>
     {
         protected extern Union();
@@ -6191,7 +6191,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54>
     {
         protected extern Union();
@@ -6416,7 +6416,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55>
     {
         protected extern Union();
@@ -6645,7 +6645,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56>
     {
         protected extern Union();
@@ -6878,7 +6878,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57>
     {
         protected extern Union();
@@ -7115,7 +7115,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58>
     {
         protected extern Union();
@@ -7356,7 +7356,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59>
     {
         protected extern Union();
@@ -7601,7 +7601,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60>
     {
         protected extern Union();
@@ -7850,7 +7850,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61>
     {
         protected extern Union();
@@ -8103,7 +8103,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62>
     {
         protected extern Union();
@@ -8360,7 +8360,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63>
     {
         protected extern Union();
@@ -8621,7 +8621,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64>
     {
         protected extern Union();
@@ -8886,7 +8886,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65>
     {
         protected extern Union();
@@ -9155,7 +9155,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66>
     {
         protected extern Union();
@@ -9428,7 +9428,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67>
     {
         protected extern Union();
@@ -9705,7 +9705,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68>
     {
         protected extern Union();
@@ -9986,7 +9986,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69>
     {
         protected extern Union();
@@ -10271,7 +10271,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70>
     {
         protected extern Union();
@@ -10560,7 +10560,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71>
     {
         protected extern Union();
@@ -10853,7 +10853,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72>
     {
         protected extern Union();
@@ -11150,7 +11150,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73>
     {
         protected extern Union();
@@ -11451,7 +11451,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74>
     {
         protected extern Union();
@@ -11756,7 +11756,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75>
     {
         protected extern Union();
@@ -12065,7 +12065,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76>
     {
         protected extern Union();
@@ -12378,7 +12378,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77>
     {
         protected extern Union();
@@ -12695,7 +12695,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78>
     {
         protected extern Union();
@@ -13016,7 +13016,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79>
     {
         protected extern Union();
@@ -13341,7 +13341,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80>
     {
         protected extern Union();
@@ -13670,7 +13670,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81>
     {
         protected extern Union();
@@ -14003,7 +14003,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82>
     {
         protected extern Union();
@@ -14340,7 +14340,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83>
     {
         protected extern Union();
@@ -14681,7 +14681,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84>
     {
         protected extern Union();
@@ -15026,7 +15026,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85>
     {
         protected extern Union();
@@ -15375,7 +15375,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86>
     {
         protected extern Union();
@@ -15728,7 +15728,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87>
     {
         protected extern Union();
@@ -16085,7 +16085,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88>
     {
         protected extern Union();
@@ -16446,7 +16446,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89>
     {
         protected extern Union();
@@ -16811,7 +16811,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89, T90>
     {
         protected extern Union();
@@ -17180,7 +17180,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89, T90, T91>
     {
         protected extern Union();
@@ -17553,7 +17553,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89, T90, T91, T92>
     {
         protected extern Union();
@@ -17930,7 +17930,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89, T90, T91, T92, T93>
     {
         protected extern Union();
@@ -18311,7 +18311,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89, T90, T91, T92, T93, T94>
     {
         protected extern Union();
@@ -18696,7 +18696,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89, T90, T91, T92, T93, T94, T95>
     {
         protected extern Union();
@@ -19085,7 +19085,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89, T90, T91, T92, T93, T94, T95, T96>
     {
         protected extern Union();
@@ -19478,7 +19478,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89, T90, T91, T92, T93, T94, T95, T96, T97>
     {
         protected extern Union();
@@ -19875,7 +19875,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89, T90, T91, T92, T93, T94, T95, T96, T97, T98>
     {
         protected extern Union();
@@ -20276,7 +20276,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89, T90, T91, T92, T93, T94, T95, T96, T97, T98, T99>
     {
         protected extern Union();
@@ -20681,7 +20681,7 @@ namespace Bridge
     [External]
     [IgnoreGeneric]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public class Union<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89, T90, T91, T92, T93, T94, T95, T96, T97, T98, T99, T100>
     {
         protected extern Union();
