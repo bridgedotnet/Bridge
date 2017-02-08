@@ -14588,6 +14588,7 @@ Bridge.$N1391Result =                 r;
                 var formattable = e;
 
                 Bridge.Test.NUnit.Assert.areEqual(-1, Bridge.compare(comparable, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2327.Foo.Baz));
+                Bridge.Test.NUnit.Assert.areEqual(0, Bridge.compare(comparable, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2327.Foo.Bar));
                 Bridge.Test.NUnit.Assert.areEqual("Bar", Bridge.format(formattable, "G", null));
                 Bridge.Test.NUnit.Assert.true(Bridge.is(e, System.IFormattable));
                 Bridge.Test.NUnit.Assert.true(Bridge.is(e, System.IComparable));

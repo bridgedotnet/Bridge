@@ -20,6 +20,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             IFormattable formattable = e;
 
             Assert.AreEqual(-1, comparable.CompareTo(Foo.Baz));
+            Assert.AreEqual(0, comparable.CompareTo(Foo.Bar));
             Assert.AreEqual("Bar", formattable.ToString("G", null));
             Assert.True(e is IFormattable);
             Assert.True(e is IComparable);
