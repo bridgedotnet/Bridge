@@ -13,6 +13,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
 #pragma warning disable 0168
             bool catched = false;
+            string message = null;
+
             try
             {
                 try
@@ -34,11 +36,12 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
             catch (Exception e)
             {
-                Assert.AreEqual("Second try block", e.Message);
+                message = e.Message;
                 catched = true;
             }
-            
+
             Assert.True(catched);
+            Assert.AreEqual("Second try block", message);
 #pragma warning restore 0168
         }
     }

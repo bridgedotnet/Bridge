@@ -14584,6 +14584,8 @@ Bridge.$N1391Result =                 r;
         statics: {
             testMultipleTryCatchBlocks: function () {
                 var catched = false;
+                var message = null;
+
                 try {
                     try {
                     }
@@ -14602,11 +14604,12 @@ Bridge.$N1391Result =                 r;
                 }
                 catch (e2) {
                     e2 = System.Exception.create(e2);
-                    Bridge.Test.NUnit.Assert.areEqual("Second try block", e2.getMessage());
+                    message = e2.getMessage();
                     catched = true;
                 }
 
                 Bridge.Test.NUnit.Assert.true(catched);
+                Bridge.Test.NUnit.Assert.areEqual("Second try block", message);
             }
         }
     });
