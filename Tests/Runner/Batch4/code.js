@@ -14652,7 +14652,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true$1(Bridge.Reflection.isInstanceOfType(new Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.D4(), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I4), "#18");
             Bridge.Test.NUnit.Assert.true$1(Bridge.Reflection.isInstanceOfType(new Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.X2(), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I1), "#19");
             Bridge.Test.NUnit.Assert.false$1(Bridge.Reflection.isInstanceOfType(new Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.D3(), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.C2$1), "#10");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.Reflection.isInstanceOfType(Bridge.box((0), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E2, $box_.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E2.toString), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1), "#21");
+            Bridge.Test.NUnit.Assert.false$1(Bridge.Reflection.isInstanceOfType(Bridge.box((0), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E2, $box_.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E2.toString), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1), "#21");
             Bridge.Test.NUnit.Assert.true$1(Bridge.Reflection.isInstanceOfType(Bridge.box((0), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1, $box_.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1.toString), System.Int32), "#22");
             Bridge.Test.NUnit.Assert.true$1(Bridge.Reflection.isInstanceOfType(Bridge.box((0), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1, $box_.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1.toString), System.Object), "#23");
             Bridge.Test.NUnit.Assert.false$1(Bridge.Reflection.isInstanceOfType(null, System.Object), "#24");
@@ -14677,7 +14677,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true$1(Bridge.Reflection.isInstanceOfType(new Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.D4(), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I4), "#42");
             Bridge.Test.NUnit.Assert.true$1(Bridge.Reflection.isInstanceOfType(new Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.X2(), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I1), "#43");
             Bridge.Test.NUnit.Assert.false$1(Bridge.Reflection.isInstanceOfType(new Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.D3(), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.C2$1), "#44");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.Reflection.isInstanceOfType(Bridge.box((0), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E2, $box_.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E2.toString), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1), "#45");
+            Bridge.Test.NUnit.Assert.false$1(Bridge.Reflection.isInstanceOfType(Bridge.box((0), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E2, $box_.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E2.toString), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1), "#45");
             Bridge.Test.NUnit.Assert.true$1(Bridge.Reflection.isInstanceOfType(Bridge.box((0), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1, $box_.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1.toString), System.Int32), "#46");
             Bridge.Test.NUnit.Assert.true$1(Bridge.Reflection.isInstanceOfType(Bridge.box((0), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1, $box_.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1.toString), System.Object), "#47");
             Bridge.Test.NUnit.Assert.false$1(Bridge.Reflection.isInstanceOfType(new (Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.Y1$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.X1))(), Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.I7$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IsAssignableFromTypes.X1)), "#48");
@@ -16044,10 +16044,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areNotEqual(System.Char.getHashCode((49)), System.Char.getHashCode((48)));
         },
         equalsWorks: function () {
-            Bridge.Test.NUnit.Assert.true(System.Char.equals((48), Bridge.box(48, System.Int32)));
+            Bridge.Test.NUnit.Assert.false(System.Char.equals((48), Bridge.box(48, System.Int32)));
             Bridge.Test.NUnit.Assert.false(System.Char.equals((49), Bridge.box(48, System.Int32)));
             Bridge.Test.NUnit.Assert.false(System.Char.equals((48), Bridge.box(49, System.Int32)));
-            Bridge.Test.NUnit.Assert.true(System.Char.equals((49), Bridge.box(49, System.Int32)));
+            Bridge.Test.NUnit.Assert.false(System.Char.equals((49), Bridge.box(49, System.Int32)));
         },
         iEquatableEqualsWorks: function () {
             Bridge.Test.NUnit.Assert.true((48) === 48);
