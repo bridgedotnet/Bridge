@@ -14821,6 +14821,102 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355", {
+        statics: {
+            testLinqGrouping: function () {
+                var $t;
+                var query = System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants.getFlowers()).groupBy($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.f1);
+
+                $t = Bridge.getEnumerator(query);
+                try {
+                    while ($t.moveNext()) {
+                        var grp = Bridge.cast($t.getCurrent(), System.Linq.IGrouping$2);
+                        Bridge.Test.NUnit.Assert.true(Bridge.is(grp, System.Linq.Grouping$2));
+                        Bridge.Test.NUnit.Assert.true(Bridge.is(grp, System.Linq.IGrouping$2));
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }},
+            testLinqLookup: function () {
+                var query = System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants.getFlowers()).toLookup($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.f1);
+
+                Bridge.Test.NUnit.Assert.true(Bridge.is(query, System.Linq.Lookup$2));
+                Bridge.Test.NUnit.Assert.true(Bridge.is(query, System.Linq.ILookup$2));
+                Bridge.Test.NUnit.Assert.areEqual(2, query.get("Shade").count());
+            },
+            testLinqOrderedEnumerable: function () {
+                var query = System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants.getFlowers()).orderBy($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.f2);
+
+                Bridge.Test.NUnit.Assert.true(Bridge.is(query, System.Linq.OrderedEnumerable$1));
+                Bridge.Test.NUnit.Assert.true(Bridge.is(query, System.Linq.IOrderedEnumerable$1));
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355, {
+        f1: function (flower) {
+            return flower.getLight();
+        },
+        f2: function (flower) {
+            return flower.getCommon();
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant", {
+        config: {
+            properties: {
+                Common: null,
+                Light: null,
+                Indoor: false
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants", {
+        statics: {
+            getFlowers: function () {
+                return $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants.f1(new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant))());
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants, {
+        f1: function (_o42) {
+            _o42.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), {
+                setCommon: "Anemone",
+                setLight: "Shade",
+                setIndoor: true
+            } ));
+            _o42.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), {
+                setCommon: "Columbine",
+                setLight: "Shade",
+                setIndoor: true
+            } ));
+            _o42.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), {
+                setCommon: "Marsh Marigold",
+                setLight: "Sunny",
+                setIndoor: false
+            } ));
+            _o42.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), {
+                setCommon: "Gential",
+                setLight: "Sun or Shade",
+                setIndoor: false
+            } ));
+            _o42.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), {
+                setCommon: "Woodland",
+                setLight: "Sun or Shade",
+                setIndoor: false
+            } ));
+            return _o42;
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
@@ -22526,30 +22622,30 @@ Bridge.$N1391Result =                 r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues, {
-        f1: function (_o42) {
-            _o42.add(0);
-            _o42.add(1);
-            _o42.add(2);
-            _o42.add(3);
-            _o42.add(4);
-            return _o42;
-        },
-        f2: function (_o43) {
-            _o43.add(3, "b");
-            _o43.add(6, "z");
-            _o43.add(9, "x");
+        f1: function (_o43) {
+            _o43.add(0);
+            _o43.add(1);
+            _o43.add(2);
+            _o43.add(3);
+            _o43.add(4);
             return _o43;
+        },
+        f2: function (_o44) {
+            _o44.add(3, "b");
+            _o44.add(6, "z");
+            _o44.add(9, "x");
+            return _o44;
         },
         f3: function (i) {
             return ((i * 2) | 0);
         },
-        f4: function (_o44) {
-            _o44.add(0);
-            _o44.add(1);
-            _o44.add(2);
-            _o44.add(3);
-            _o44.add(4);
-            return _o44;
+        f4: function (_o45) {
+            _o45.add(0);
+            _o45.add(1);
+            _o45.add(2);
+            _o45.add(3);
+            _o45.add(4);
+            return _o45;
         }
     });
 

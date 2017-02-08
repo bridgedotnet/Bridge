@@ -17503,6 +17503,10 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         this.parent = parent;
     };
     OrderedEnumerable.prototype = new Enumerable();
+    OrderedEnumerable.prototype.constructor = OrderedEnumerable;
+    Bridge.definei("System.Linq.IOrderedEnumerable$1");
+    OrderedEnumerable.$$inherits = [];
+    Bridge.Class.addExtend(OrderedEnumerable, [System.Collections.IEnumerable, System.Linq.IOrderedEnumerable$1]);
 
     OrderedEnumerable.prototype.createOrderedEnumerable = function (keySelector, comparer, descending) {
         return new OrderedEnumerable(this.source, keySelector, comparer, descending, this);
@@ -17843,8 +17847,9 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         };
     };
 
+    Bridge.definei("System.Linq.ILookup$2");
     Lookup.$$inherits = [];
-    Bridge.Class.addExtend(Lookup, [System.Collections.IEnumerable]);
+    Bridge.Class.addExtend(Lookup, [System.Collections.IEnumerable, System.Linq.ILookup$2]);
 
     var Grouping = function (groupKey, elements) {
         this.key = function () {
@@ -17853,9 +17858,11 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         ArrayEnumerable.call(this, elements);
     };
     Grouping.prototype = new ArrayEnumerable();
+    Bridge.definei("System.Linq.IGrouping$2");
+    Grouping.prototype.constructor = Grouping;
 
     Grouping.$$inherits = [];
-    Bridge.Class.addExtend(Grouping, [System.Collections.IEnumerable]);
+    Bridge.Class.addExtend(Grouping, [System.Collections.IEnumerable, System.Linq.IGrouping$2]);
 
     // module export
     /*if (typeof define === Types.Function && define.amd) { // AMD
@@ -17869,8 +17876,11 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
     Bridge.Linq = {};
     Bridge.Linq.Enumerable = Enumerable;
 
-    System.Linq = {};
+    System.Linq = System.Linq || {};
     System.Linq.Enumerable = Enumerable;
+    System.Linq.Grouping$2 = Grouping;
+    System.Linq.Lookup$2 = Lookup;
+    System.Linq.OrderedEnumerable$1 = OrderedEnumerable;
 })(Bridge.global);
 
     // @source guid.js
