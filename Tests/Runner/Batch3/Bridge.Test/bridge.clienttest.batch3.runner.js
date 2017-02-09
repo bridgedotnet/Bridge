@@ -462,10 +462,14 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#2330 - TestMultipleTryCatchBlocks", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2330.testMultipleTryCatchBlocks);
             QUnit.test("#2337 - TestFDateModifier", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2337.testFDateModifier);
             QUnit.test("#2338 - TestGenericGetType", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2338.testGenericGetType);
+            QUnit.test("#2342 - TestCastParanthesize", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2342.testCastParanthesize);
             QUnit.test("#2343 - TestBoxedEqualsAndGetHashCode", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2343.testBoxedEqualsAndGetHashCode);
             QUnit.test("#2344 - TestHtmlElementName", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2344.testHtmlElementName);
             QUnit.test("#2347 - TestG17FormatSpecifier", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2347.testG17FormatSpecifier);
             QUnit.test("#2349 - TestExternalIgnoreGenericClass", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2349.testExternalIgnoreGenericClass);
+            QUnit.test("#2355 - TestLinqGrouping", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2355.testLinqGrouping);
+            QUnit.test("#2355 - TestLinqLookup", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2355.testLinqLookup);
+            QUnit.test("#2355 - TestLinqOrderedEnumerable", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2355.testLinqOrderedEnumerable);
             QUnit.test("#381 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge381.testUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.checkInlineExpression);
             QUnit.test("#447 - CheckInlineCalls", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.checkInlineCalls);
@@ -9442,6 +9446,30 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
         }
     });
 
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2342", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2342)],
+        statics: {
+            testCastParanthesize: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2342).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2342, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestCastParanthesize()",
+                    line: "10"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2342.testCastParanthesize();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2342",
+                    file: "Batch3\\BridgeIssues\\2300\\N2342.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2343", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2343)],
         statics: {
@@ -9532,6 +9560,44 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2349",
                     file: "Batch3\\BridgeIssues\\2300\\N2349.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2355", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355)],
+        statics: {
+            testLinqGrouping: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2355, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestLinqGrouping()",
+                    line: "50"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.testLinqGrouping();
+            },
+            testLinqLookup: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2355, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestLinqLookup()",
+                    line: "62"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.testLinqLookup();
+            },
+            testLinqOrderedEnumerable: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2355, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestLinqOrderedEnumerable()",
+                    line: "72"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.testLinqOrderedEnumerable();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355",
+                    file: "Batch3\\BridgeIssues\\2300\\N2355.cs"
                 } );
             }
             return this.context;

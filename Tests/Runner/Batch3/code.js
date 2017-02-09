@@ -5640,7 +5640,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 try {
                     var $Date = 3;
 
-                    var m = (new Date().getMonth() + 1);
+                    var m = (System.DateTime.getDefaultValue().getMonth() + 1);
 
                     Bridge.Test.NUnit.Assert.areEqual$1(3, $Date, "Date");
                 }
@@ -10747,8 +10747,8 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1904", {
         testDateTimeConstructorConvertsValueToMs: function () {
             var d1 = new Date();
-            var tickValue = System.Int64((d1).getTime()).mul(10000);
-            var d2 = new Date(tickValue.toNumber()/10000);
+            var tickValue = System.DateTime.getTicks(d1);
+            var d2 = System.DateTime.fromTicks(tickValue);
 
             Bridge.Test.NUnit.Assert.true$1(Bridge.equals(d1, d2), System.String.concat("d1 (", System.DateTime.format(d1), ") == d2(", System.DateTime.format(d2), ")"));
         }
@@ -14853,6 +14853,20 @@ Bridge.$N1391Result =                 r;
         inherits: [System.Exception]
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2342", {
+        statics: {
+            testCastParanthesize: function () {
+                var bar = 2.0;
+
+                var foo1 = 1.0 / (Math.abs(bar) / Math.abs(bar));
+                Bridge.Test.NUnit.Assert.areEqual(1, foo1);
+
+                var foo2 = 1.0 / (Math.abs(bar) / Math.abs(bar));
+                Bridge.Test.NUnit.Assert.areEqual(1, foo2);
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2343", {
         statics: {
             testBoxedEqualsAndGetHashCode: function () {
@@ -14917,6 +14931,102 @@ Bridge.$N1391Result =                 r;
 
                 Bridge.Test.NUnit.Assert.areEqual(10, logger.field);
             }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355", {
+        statics: {
+            testLinqGrouping: function () {
+                var $t;
+                var query = System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants.getFlowers()).groupBy($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.f1);
+
+                $t = Bridge.getEnumerator(query);
+                try {
+                    while ($t.moveNext()) {
+                        var grp = Bridge.cast($t.getCurrent(), System.Linq.IGrouping$2);
+                        Bridge.Test.NUnit.Assert.true(Bridge.is(grp, System.Linq.Grouping$2));
+                        Bridge.Test.NUnit.Assert.true(Bridge.is(grp, System.Linq.IGrouping$2));
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }},
+            testLinqLookup: function () {
+                var query = System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants.getFlowers()).toLookup($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.f1);
+
+                Bridge.Test.NUnit.Assert.true(Bridge.is(query, System.Linq.Lookup$2));
+                Bridge.Test.NUnit.Assert.true(Bridge.is(query, System.Linq.ILookup$2));
+                Bridge.Test.NUnit.Assert.areEqual(2, query.get("Shade").count());
+            },
+            testLinqOrderedEnumerable: function () {
+                var query = System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants.getFlowers()).orderBy($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.f2);
+
+                Bridge.Test.NUnit.Assert.true(Bridge.is(query, System.Linq.OrderedEnumerable$1));
+                Bridge.Test.NUnit.Assert.true(Bridge.is(query, System.Linq.IOrderedEnumerable$1));
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355, {
+        f1: function (flower) {
+            return flower.getLight();
+        },
+        f2: function (flower) {
+            return flower.getCommon();
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant", {
+        config: {
+            properties: {
+                Common: null,
+                Light: null,
+                Indoor: false
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants", {
+        statics: {
+            getFlowers: function () {
+                return $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants.f1(new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant))());
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants, {
+        f1: function (_o42) {
+            _o42.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), {
+                setCommon: "Anemone",
+                setLight: "Shade",
+                setIndoor: true
+            } ));
+            _o42.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), {
+                setCommon: "Columbine",
+                setLight: "Shade",
+                setIndoor: true
+            } ));
+            _o42.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), {
+                setCommon: "Marsh Marigold",
+                setLight: "Sunny",
+                setIndoor: false
+            } ));
+            _o42.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), {
+                setCommon: "Gential",
+                setLight: "Sun or Shade",
+                setIndoor: false
+            } ));
+            _o42.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), {
+                setCommon: "Woodland",
+                setLight: "Sun or Shade",
+                setIndoor: false
+            } ));
+            return _o42;
         }
     });
 
@@ -16976,7 +17086,7 @@ Bridge.$N1391Result =                 r;
             testTicks: function () {
                 var centuryBegin = new Date(2001, 1 - 1, 1);
                 var currentDate = new Date(2007, 12 - 1, 14, 15, 23);
-                var elapsedTicks = System.Int64((currentDate).getTime()).mul(10000).sub(System.Int64((centuryBegin).getTime()).mul(10000));
+                var elapsedTicks = System.DateTime.getTicks(currentDate).sub(System.DateTime.getTicks(centuryBegin));
                 var elapsedSpan = new System.TimeSpan(elapsedTicks);
 
                 Bridge.Test.NUnit.Assert.areEqual$1(System.Int64([1836507648,510687]), elapsedTicks, "Bridge582 TestTicks ticks");
@@ -19202,13 +19312,13 @@ Bridge.$N1391Result =                 r;
                     DateA: null
                 },
                 init: function () {
-                    this.dateb = new Date(-864e13);
-                    this.DateA = new Date(-864e13);
+                    this.dateb = System.DateTime.getDefaultValue();
+                    this.DateA = System.DateTime.getDefaultValue();
                 }
             },
             testUseCase: function () {
-                Bridge.Test.NUnit.Assert.true$1(Bridge.equals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.getDateA(), new Date(-864e13)), "Bridge733 DateA");
-                Bridge.Test.NUnit.Assert.true$1(Bridge.equals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.dateb, new Date(-864e13)), "Bridge733 dateb");
+                Bridge.Test.NUnit.Assert.true$1(Bridge.equals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.getDateA(), System.DateTime.getDefaultValue()), "Bridge733 DateA");
+                Bridge.Test.NUnit.Assert.true$1(Bridge.equals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.dateb, System.DateTime.getDefaultValue()), "Bridge733 dateb");
 
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.dateb = new Date(); // to prevent warning that dateb is never assigned
             }
@@ -19621,7 +19731,7 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.NUnit.Assert.areEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge789.method2().field1);
             },
             method1: function (dt) {
-                if (dt === void 0) { dt = new Date(-864e13); }
+                if (dt === void 0) { dt = System.DateTime.getDefaultValue(); }
                 return dt;
             },
             method2: function (s) {
@@ -19992,9 +20102,9 @@ Bridge.$N1391Result =                 r;
             getTicksReturnsCorrectValue: function () {
                 var val = System.Int64([-57829376,2204230]);
 
-                var ticks = System.Int64((new Date(val.toNumber()/10000)).getTime()).mul(10000);
-                var ticksPlusOne = System.Int64((new Date(val.toNumber()/10000)).getTime()).mul(10000).add(System.Int64(1));
-                var ticksString = System.Int64((new Date(val.toNumber()/10000)).getTime()).mul(10000).toString();
+                var ticks = System.DateTime.getTicks(System.DateTime.fromTicks(val));
+                var ticksPlusOne = System.DateTime.getTicks(System.DateTime.fromTicks(val)).add(System.Int64(1));
+                var ticksString = System.DateTime.getTicks(System.DateTime.fromTicks(val)).toString();
 
                 Bridge.Test.NUnit.Assert.areDeepEqual$1(val, ticks, "Ticks returning correct int value");
                 Bridge.Test.NUnit.Assert.areDeepEqual$1(val.add(System.Int64(1)), ticksPlusOne, "Adding to a Tick value is correct");
@@ -22625,30 +22735,30 @@ Bridge.$N1391Result =                 r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues, {
-        f1: function (_o42) {
-            _o42.add(0);
-            _o42.add(1);
-            _o42.add(2);
-            _o42.add(3);
-            _o42.add(4);
-            return _o42;
-        },
-        f2: function (_o43) {
-            _o43.add(3, "b");
-            _o43.add(6, "z");
-            _o43.add(9, "x");
+        f1: function (_o43) {
+            _o43.add(0);
+            _o43.add(1);
+            _o43.add(2);
+            _o43.add(3);
+            _o43.add(4);
             return _o43;
+        },
+        f2: function (_o44) {
+            _o44.add(3, "b");
+            _o44.add(6, "z");
+            _o44.add(9, "x");
+            return _o44;
         },
         f3: function (i) {
             return ((i * 2) | 0);
         },
-        f4: function (_o44) {
-            _o44.add(0);
-            _o44.add(1);
-            _o44.add(2);
-            _o44.add(3);
-            _o44.add(4);
-            return _o44;
+        f4: function (_o45) {
+            _o45.add(0);
+            _o45.add(1);
+            _o45.add(2);
+            _o45.add(3);
+            _o45.add(4);
+            return _o45;
         }
     });
 
