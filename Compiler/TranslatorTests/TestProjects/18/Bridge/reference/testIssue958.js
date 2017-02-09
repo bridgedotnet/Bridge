@@ -30,7 +30,7 @@
         statics: {
             if: function (T, source, work) {
                 if (Bridge.is(source, T)) {
-                    work(Bridge.cast(source, T));
+                    work(Bridge.cast(Bridge.unbox(source), T));
                 }
                 return source;
             }

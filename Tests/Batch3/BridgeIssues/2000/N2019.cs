@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Bridge.Linq;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -45,7 +45,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             return items.Select(c => c.SomeProp).Sum();
         }
-
 
         [Test]
         public void TestLambdaExpressionsInGenericMethod()

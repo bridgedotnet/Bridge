@@ -454,19 +454,7 @@ namespace Bridge.Translator
                                 module = bridgeType.TypeInfo.Module;
                             }
 
-                            if (module != null)
-                            {
-                                if (module.Type == ModuleType.AMD ||
-                                    (module.Type == ModuleType.UMD &&
-                                     this.Emitter.AssemblyInfo.Loader.Type == ModuleLoaderType.AMD))
-                                {
-                                    amd.Add(module.Name);
-                                }
-                                else
-                                {
-                                    cjs.Add(module.Name);
-                                }
-                            }
+                            AddModuleByType(amd, cjs, module);
                         }
 
                         this.Write("{");
@@ -618,7 +606,7 @@ namespace Bridge.Translator
                             var rr = this.Emitter.Resolver.ResolveNode(node, this.Emitter);
                             var type = rr.Type;
                             var mrr = rr as MemberResolveResult;
-                            if (mrr != null && mrr.Member.ReturnType.Kind != TypeKind.Enum)
+                            if (mrr != null && mrr.Member.ReturnType.Kind != TypeKind.Enum && mrr.TargetResult != null)
                             {
                                 type = mrr.TargetResult.Type;
                             }
@@ -636,7 +624,7 @@ namespace Bridge.Translator
 
                                 if (thisValue != null)
                                 {
-                                    if (type.Kind == TypeKind.TypeParameter)
+                                    if (type.Kind == TypeKind.TypeParameter && !Helpers.IsIgnoreGeneric(((ITypeParameter)type).Owner, this.Emitter))
                                     {
                                         thisValue = thisValue + ", " + type.Name;
                                     }
@@ -1081,6 +1069,26 @@ namespace Bridge.Translator
             }
         }
 
+        public void AddModuleByType(List<string> amd, List<string> cjs, Module module)
+        {
+            if (module != null)
+            {
+                if (!(module.Type == ModuleType.UMD &&
+                     this.Emitter.AssemblyInfo.Loader.Type == ModuleLoaderType.Global))
+                {
+                    if (module.Type == ModuleType.AMD
+                        || (module.Type == ModuleType.UMD && this.Emitter.AssemblyInfo.Loader.Type == ModuleLoaderType.AMD))
+                    {
+                        amd.Add(module.Name);
+                    }
+                    else
+                    {
+                        cjs.Add(module.Name);
+                    }
+                }
+            }
+        }
+
         private void WriteGetType(bool needName, IType type, AstNode node, string modifier)
         {
             if (needName)
@@ -1108,7 +1116,7 @@ namespace Bridge.Translator
                     s = "null";
                 }
 
-                if (type.Kind == TypeKind.TypeParameter)
+                if (type.Kind == TypeKind.TypeParameter && !Helpers.IsIgnoreGeneric(((ITypeParameter)type).Owner, this.Emitter))
                 {
                     s = s + ", " + type.Name;
                 }

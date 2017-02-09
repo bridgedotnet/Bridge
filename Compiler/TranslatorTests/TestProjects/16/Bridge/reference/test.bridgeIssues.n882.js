@@ -8,11 +8,16 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             var a = System.Array.init([1, 2, 3], System.Int32);
 
             $t = Bridge.getEnumerator(a);
-            while ($t.moveNext()) {
-                var v = $t.getCurrent();
+            try {
+                while ($t.moveNext()) {
+                    var v = $t.getCurrent();
 
-            }
-    }
+                }
+            }finally {
+                if (Bridge.is($t, System.IDisposable)) {
+                    $t.System$IDisposable$dispose();
+                }
+            }}
     });
 
     Bridge.define("Test.BridgeIssues.N882.Bridge882_Instance.Bridge882_A_Instance", {
@@ -22,11 +27,16 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             var a = System.Array.init([5, 6, 7], System.Int32);
 
             $t = Bridge.getEnumerator(a);
-            while ($t.moveNext()) {
-                var v = $t.getCurrent();
+            try {
+                while ($t.moveNext()) {
+                    var v = $t.getCurrent();
 
-            }
-    }
+                }
+            }finally {
+                if (Bridge.is($t, System.IDisposable)) {
+                    $t.System$IDisposable$dispose();
+                }
+            }}
     });
 
     Bridge.define("Test.BridgeIssues.N882.Bridge882_Static", {
@@ -36,11 +46,16 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                 var a = System.Array.init([1, 2, 3], System.Int32);
 
                 $t = Bridge.getEnumerator(a);
-                while ($t.moveNext()) {
-                    var v = $t.getCurrent();
+                try {
+                    while ($t.moveNext()) {
+                        var v = $t.getCurrent();
 
-                }
-        }
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
     }
     });
 
@@ -51,11 +66,16 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                 var a = System.Array.init([5, 6, 7], System.Int32);
 
                 $t = Bridge.getEnumerator(a);
-                while ($t.moveNext()) {
-                    var v = $t.getCurrent();
+                try {
+                    while ($t.moveNext()) {
+                        var v = $t.getCurrent();
 
-                }
-        }
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
     }
     });
 });

@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -6,7 +6,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#1492 - {0}")]
     public class Bridge1492
     {
-        enum Enum : long
+        private enum Enum : long
         {
             A = 0L
         }

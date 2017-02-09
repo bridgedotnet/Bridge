@@ -1,4 +1,4 @@
-﻿using Bridge.Test;
+﻿using Bridge.Test.NUnit;
 using System;
 using System.Reflection;
 
@@ -87,31 +87,31 @@ namespace Bridge.ClientTest.Reflection
             public static int FBS2;
 
             [A1(151)]
-            public int PB1 {[A1(152)] get;[A1(153)] set; }
+            public int PB1 { [A1(152)] get; [A1(153)] set; }
 
             [A1(154)]
-            public int PB2 {[A1(155)] get;[A1(156)] set; }
+            public int PB2 { [A1(155)] get; [A1(156)] set; }
 
             [A1(157)]
-            public int this[int x] {[A1(158)] get { return 0; }[A1(159)] set { } }
+            public int this[int x] { [A1(158)] get { return 0; } [A1(159)] set { } }
 
             [A1(161)]
-            public static int PBS1 {[A1(162)] get;[A1(163)] set; }
+            public static int PBS1 { [A1(162)] get; [A1(163)] set; }
 
             [A1(164)]
-            public static int PBS2 {[A1(165)] get;[A1(166)] set; }
+            public static int PBS2 { [A1(165)] get; [A1(166)] set; }
 
             [A1(171)]
-            public event Action EB1 {[A1(172)] add { }[A1(173)] remove { } }
+            public event Action EB1 { [A1(172)] add { } [A1(173)] remove { } }
 
             [A1(174)]
-            public event Action EB2 {[A1(175)] add { }[A1(176)] remove { } }
+            public event Action EB2 { [A1(175)] add { } [A1(176)] remove { } }
 
             [A1(181)]
-            public static event Action EBS1 {[A1(182)] add { }[A1(183)] remove { } }
+            public static event Action EBS1 { [A1(182)] add { } [A1(183)] remove { } }
 
             [A1(184)]
-            public static event Action EBS2 {[A1(185)] add { }[A1(186)] remove { } }
+            public static event Action EBS2 { [A1(185)] add { } [A1(186)] remove { } }
         }
 
 #pragma warning disable CS0114 // Member hides inherited member; missing override keyword
@@ -164,31 +164,31 @@ namespace Bridge.ClientTest.Reflection
             public static int FCS2;
 
             [A1(251)]
-            public int PC1 {[A1(252)] get;[A1(253)] set; }
+            public int PC1 { [A1(252)] get; [A1(253)] set; }
 
             [A1(254)]
-            public int PC2 {[A1(255)] get;[A1(256)] set; }
+            public int PC2 { [A1(255)] get; [A1(256)] set; }
 
             [A1(257)]
-            public int this[string x] {[A1(258)] get { return 0; }[A1(259)] set { } }
+            public int this[string x] { [A1(258)] get { return 0; } [A1(259)] set { } }
 
             [A1(261)]
-            public static int PCS1 {[A1(262)] get;[A1(263)] set; }
+            public static int PCS1 { [A1(262)] get; [A1(263)] set; }
 
             [A1(264)]
-            public static int PCS2 {[A1(265)] get;[A1(266)] set; }
+            public static int PCS2 { [A1(265)] get; [A1(266)] set; }
 
             [A1(271)]
-            public event Action EC1 {[A1(272)] add { }[A1(273)] remove { } }
+            public event Action EC1 { [A1(272)] add { } [A1(273)] remove { } }
 
             [A1(274)]
-            public event Action EC2 {[A1(275)] add { }[A1(276)] remove { } }
+            public event Action EC2 { [A1(275)] add { } [A1(276)] remove { } }
 
             [A1(281)]
-            public static event Action ECS1 {[A1(282)] add { }[A1(283)] remove { } }
+            public static event Action ECS1 { [A1(282)] add { } [A1(283)] remove { } }
 
             [A1(284)]
-            public static event Action ECS2 {[A1(285)] add { }[A1(286)] remove { } }
+            public static event Action ECS2 { [A1(285)] add { } [A1(286)] remove { } }
         }
 
         private class D1 : C1, I1
@@ -239,31 +239,31 @@ namespace Bridge.ClientTest.Reflection
             public static int FDS2;
 
             [A1(351)]
-            public int PD1 {[A1(352)] get;[A1(353)] set; }
+            public int PD1 { [A1(352)] get; [A1(353)] set; }
 
             [A1(354)]
-            public int PD2 {[A1(355)] get;[A1(356)] set; }
+            public int PD2 { [A1(355)] get; [A1(356)] set; }
 
             [A1(357)]
-            public int this[double x] {[A1(358)] get { return 0; }[A1(359)] set { } }
+            public int this[double x] { [A1(358)] get { return 0; } [A1(359)] set { } }
 
             [A1(361)]
-            public static int PDS1 {[A1(362)] get;[A1(363)] set; }
+            public static int PDS1 { [A1(362)] get; [A1(363)] set; }
 
             [A1(364)]
-            public static int PDS2 {[A1(365)] get;[A1(366)] set; }
+            public static int PDS2 { [A1(365)] get; [A1(366)] set; }
 
             [A1(371)]
-            public event Action ED1 {[A1(372)] add { }[A1(373)] remove { } }
+            public event Action ED1 { [A1(372)] add { } [A1(373)] remove { } }
 
             [A1(374)]
-            public event Action ED2 {[A1(375)] add { }[A1(376)] remove { } }
+            public event Action ED2 { [A1(375)] add { } [A1(376)] remove { } }
 
             [A1(381)]
-            public static event Action EDS1 {[A1(382)] add { }[A1(383)] remove { } }
+            public static event Action EDS1 { [A1(382)] add { } [A1(383)] remove { } }
 
             [A1(384)]
-            public static event Action EDS2 {[A1(385)] add { }[A1(386)] remove { } }
+            public static event Action EDS2 { [A1(385)] add { } [A1(386)] remove { } }
 
             void I1.MI1()
             {
@@ -577,13 +577,13 @@ namespace Bridge.ClientTest.Reflection
             void MI12(int x, string y);
 
             [A1(451)]
-            int PI11 {[A1(452)] get;[A1(453)] set; }
+            int PI11 { [A1(452)] get; [A1(453)] set; }
 
             [A1(454)]
-            int PI12 {[A1(455)] get;[A1(456)] set; }
+            int PI12 { [A1(455)] get; [A1(456)] set; }
 
             [A1(457)]
-            int this[int x] {[A1(458), Name("get_i1item")] get;[A1(459), Name("set_i1item")] set; }
+            int this[int x] { [A1(458), Name("get_i1item")] get; [A1(459), Name("set_i1item")] set; }
 
             [A1(471)]
             event Action EI11;
@@ -607,13 +607,13 @@ namespace Bridge.ClientTest.Reflection
             void MI22(int x, string y);
 
             [A1(551)]
-            int PI21 {[A1(552)] get;[A1(553)] set; }
+            int PI21 { [A1(552)] get; [A1(553)] set; }
 
             [A1(554)]
-            int PI22 {[A1(555)] get;[A1(556)] set; }
+            int PI22 { [A1(555)] get; [A1(556)] set; }
 
             [A1(557)]
-            int this[string x] {[A1(558), Name("get_item2")] get;[A1(559), Name("set_item2")] set; }
+            int this[string x] { [A1(558), Name("get_item2")] get; [A1(559), Name("set_item2")] set; }
 
             [A1(571)]
             event Action EI21;

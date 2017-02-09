@@ -1,4 +1,4 @@
-﻿using Bridge.Test;
+﻿using Bridge.Test.NUnit;
 
 using System.Globalization;
 

@@ -3,7 +3,7 @@ using Bridge;
 namespace System.Linq.Expressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     [Cast("{this}.ntype === 45 || {this}.ntype === 81")]
     public sealed class TypeBinaryExpression : Expression
     {

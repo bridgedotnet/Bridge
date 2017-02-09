@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -9,11 +9,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge1737
     {
         public class Something<T> { }
+
         public class SomethingElse { }
+
         public class SomethingOfSomethingElse : Something<SomethingElse> { }
 
         [Test]
-        public void TestGetClassName_FullName()
+        public void TestTypeFullName()
         {
             var x = new SomethingOfSomethingElse();
             Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1737.SomethingOfSomethingElse", x.GetType().FullName);

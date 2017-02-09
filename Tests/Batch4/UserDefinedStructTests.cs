@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 using System.Runtime.CompilerServices;
 
@@ -123,7 +123,7 @@ namespace Bridge.ClientTest.Batch4
                 return new S7(-s.I);
             }
 
-            public static explicit operator int (S7 s)
+            public static explicit operator int(S7 s)
             {
                 return s.I;
             }
@@ -366,7 +366,7 @@ namespace Bridge.ClientTest.Batch4
             TestHelper.Safe(() => d1 = (double?)a);
             Assert.AreEqual(42, d1, "#1");
             // #1611
-            double? d2 = null;
+            double? d2 = 1;
             TestHelper.Safe(() => d2 = (double?)b);
             Assert.Null(d2, "#2");
         }

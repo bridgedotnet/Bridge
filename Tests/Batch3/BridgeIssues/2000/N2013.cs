@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -16,6 +16,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public class EvGen<T> : IEvGen<T>
         {
             public event Action Ev;
+
             public bool HasListeners
             {
                 get
@@ -29,7 +30,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             self.Ev += () => { };
         }
-
 
         [Test]
         public void TestSubscriptionToEventDefinedInGenericInterfaceViaExtensionMethod()

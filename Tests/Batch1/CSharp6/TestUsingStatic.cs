@@ -1,5 +1,5 @@
-using Bridge.Test;
-using static Bridge.Test.Assert;
+using Bridge.Test.NUnit;
+using static Bridge.Test.NUnit.Assert;
 using static System.DayOfWeek;
 using static System.Linq.Enumerable;
 using static System.Math;

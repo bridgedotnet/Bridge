@@ -1,5 +1,5 @@
 // #1623
-//using Bridge.Test;
+//using Bridge.Test.NUnit;
 //using System;
 
 //namespace Bridge.ClientTest.Batch4

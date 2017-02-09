@@ -1,6 +1,6 @@
 using System;
 using System.Reflection;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -9,16 +9,18 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [Reflectable]
     public class Bridge2212
     {
-        int test = 0;
+        private int test = 0;
         public int runCounter = 0;
 
-        void Run()
+        private void Run()
         {
             runCounter = 0;
 
             var mytest = 1;
-            Func<Action> a = () => {
-                Action b = () => {
+            Func<Action> a = () =>
+            {
+                Action b = () =>
+                {
                     test = mytest;
                 };
 

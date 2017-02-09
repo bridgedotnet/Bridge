@@ -1,5 +1,5 @@
 using Bridge.Html5;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 using System.Collections.Generic;
 
@@ -26,7 +26,7 @@ namespace Bridge.ClientTest.Collections.Native
             }
             else
             {
-                Assert.AreEqual("Object", typeof(DataView).FullName, "FullName");
+                Assert.AreEqual("DataViewConstructor", typeof(DataView).FullName, "FullName");
             }
 
             var interfaces = typeof(DataView).GetInterfaces();

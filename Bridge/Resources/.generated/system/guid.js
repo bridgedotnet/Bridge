@@ -89,7 +89,7 @@
             }
 
             if (b.length !== 16) {
-                throw new System.ArgumentException(System.String.format(System.Guid.error1, 16));
+                throw new System.ArgumentException(System.String.format(System.Guid.error1, Bridge.box(16, System.Int32)));
             }
 
             this._a = (b[3] << 24) | (b[2] << 16) | (b[1] << 8) | b[0];
@@ -125,7 +125,7 @@
             }
 
             if (d.length !== 8) {
-                throw new System.ArgumentException(System.String.format(System.Guid.error1, 8));
+                throw new System.ArgumentException(System.String.format(System.Guid.error1, Bridge.box(8, System.Int32)));
             }
 
             this._a = a;

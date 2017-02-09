@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 
 namespace Bridge.ClientTest.Batch4.SimpleTypes
@@ -10,7 +10,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         public void TypePropertiesAreCorrect_SPI_1575()
         {
             Assert.True((object)true is bool);
-            Assert.AreEqual("Boolean", typeof(bool).FullName);
+            Assert.AreEqual("System.Boolean", typeof(bool).FullName);
             // #1575
             Assert.AreEqual(typeof(object), typeof(bool).BaseType);
             Assert.False(typeof(bool).IsClass);

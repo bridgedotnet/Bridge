@@ -1,4 +1,4 @@
-﻿using Bridge.Test;
+﻿using Bridge.Test.NUnit;
 using Bridge.ClientTestHelper;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues

@@ -1,5 +1,5 @@
 ﻿using Bridge.Html5;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using Bridge.Text.RegularExpressions;
 
 using System;
@@ -35,7 +35,7 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("String", typeof(string).FullName);
+            Assert.AreEqual("System.String", typeof(string).FullName, "#2066");
             object s = "X";
             Assert.True(s is string);
         }
@@ -884,9 +884,7 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual("1, 5, 6", String.Join(", ", intValues));
             IEnumerable<string> stringValues = new MyEnumerable<string>(new[] { "a", "ab", "abc", "abcd" });
             Assert.AreEqual("a, ab, abc, abcd", String.Join(", ", stringValues));
-
-            // TODO: c# makes it False but js false
-            Assert.AreEqual("a, 1, abc, false", String.Join(", ", new Object[] { "a", 1, "abc", false }));// False");
+            Assert.AreEqual("a, 1, abc, False", String.Join(", ", new Object[] { "a", 1, "abc", false }));
         }
 
         [Test]
@@ -1022,7 +1020,7 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual("Hello Bridge.NET234", s, "string.Concat()");
 
             s = string.Concat(null, true, 3, false);
-            Assert.AreEqual("true3false", s, "string.Concat()");
+            Assert.AreEqual("True3False", s, "string.Concat()");
 
             s = string.Concat(new string[] { "1", "2", "3", "4", "5" });
             Assert.AreEqual("12345", s, "string.Concat()");

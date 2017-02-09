@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 using System.Reflection;
 
@@ -23,13 +23,13 @@ namespace Bridge.ClientTest.Batch1.Reflection
         }
 
         [AttributeUsage(AttributeTargets.All, Inherited = false)]
-        private class A2: Attribute
+        private class A2 : Attribute
         {
         }
 
         private class A3 : A1
         {
-            public A3(int v): base(v)
+            public A3(int v) : base(v)
             {
                 this.V = v;
             }
