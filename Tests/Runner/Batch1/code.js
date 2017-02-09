@@ -27701,31 +27701,31 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             if (second === void 0) { second = null; }
             if (ms === void 0) { ms = null; }
             if (System.Nullable.hasValue(year)) {
-                Bridge.Test.NUnit.Assert.areEqual(System.Nullable.getValue(year), dt.getFullYear());
+                Bridge.Test.NUnit.Assert.areEqual$1(System.Nullable.getValue(year), dt.getFullYear(), "Year");
             }
 
             if (System.Nullable.hasValue(month)) {
-                Bridge.Test.NUnit.Assert.areEqual(System.Nullable.getValue(month), (dt.getMonth() + 1));
+                Bridge.Test.NUnit.Assert.areEqual$1(System.Nullable.getValue(month), (dt.getMonth() + 1), "Month");
             }
 
             if (System.Nullable.hasValue(day)) {
-                Bridge.Test.NUnit.Assert.areEqual(System.Nullable.getValue(day), dt.getDate());
+                Bridge.Test.NUnit.Assert.areEqual$1(System.Nullable.getValue(day), dt.getDate(), "Day");
             }
 
             if (System.Nullable.hasValue(hour)) {
-                Bridge.Test.NUnit.Assert.areEqual(System.Nullable.getValue(hour), dt.getHours());
+                Bridge.Test.NUnit.Assert.areEqual$1(System.Nullable.getValue(hour), dt.getHours(), "Hour");
             }
 
             if (System.Nullable.hasValue(minute)) {
-                Bridge.Test.NUnit.Assert.areEqual(System.Nullable.getValue(minute), dt.getMinutes());
+                Bridge.Test.NUnit.Assert.areEqual$1(System.Nullable.getValue(minute), dt.getMinutes(), "Minute");
             }
 
             if (System.Nullable.hasValue(second)) {
-                Bridge.Test.NUnit.Assert.areEqual(System.Nullable.getValue(second), dt.getSeconds());
+                Bridge.Test.NUnit.Assert.areEqual$1(System.Nullable.getValue(second), dt.getSeconds(), "Second");
             }
 
             if (System.Nullable.hasValue(ms)) {
-                Bridge.Test.NUnit.Assert.areEqual(System.Nullable.getValue(ms), dt.getMilliseconds());
+                Bridge.Test.NUnit.Assert.areEqual$1(System.Nullable.getValue(ms), dt.getMilliseconds(), "Millisecond");
             }
 
         },

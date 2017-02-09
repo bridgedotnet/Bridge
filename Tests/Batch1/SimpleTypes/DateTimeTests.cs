@@ -20,37 +20,37 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             if (year.HasValue)
             {
-                Assert.AreEqual(year.Value, dt.Year);
+                Assert.AreEqual(year.Value, dt.Year, "Year");
             }
 
             if (month.HasValue)
             {
-                Assert.AreEqual(month.Value, dt.Month);
+                Assert.AreEqual(month.Value, dt.Month, "Month");
             }
 
             if (day.HasValue)
             {
-                Assert.AreEqual(day.Value, dt.Day);
+                Assert.AreEqual(day.Value, dt.Day, "Day");
             }
 
             if (hour.HasValue)
             {
-                Assert.AreEqual(hour.Value, dt.Hour);
+                Assert.AreEqual(hour.Value, dt.Hour, "Hour");
             }
 
             if (minute.HasValue)
             {
-                Assert.AreEqual(minute.Value, dt.Minute);
+                Assert.AreEqual(minute.Value, dt.Minute, "Minute");
             }
 
             if (second.HasValue)
             {
-                Assert.AreEqual(second.Value, dt.Second);
+                Assert.AreEqual(second.Value, dt.Second, "Second");
             }
 
             if (ms.HasValue)
             {
-                Assert.AreEqual(ms.Value, dt.Millisecond);
+                Assert.AreEqual(ms.Value, dt.Millisecond, "Millisecond");
             }
 
         }
