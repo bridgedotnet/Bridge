@@ -280,14 +280,14 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         public void GetTimeWorks()
         {
             var dt = new DateTime(DateTime.Utc(1000, 1, 2));
-            Assert.AreEqual((31525459200000L).ToString(), dt.GetTime().ToString());
+            Assert.AreEqual((-30610137600000).ToString(), dt.GetTime().ToString());
         }
 
         [Test]
         public void ValueOfWorks()
         {
             var dt = new DateTime(DateTime.Utc(1000, 1, 2));
-            Assert.AreEqual((31525459200000L).ToString(), ((long)dt.ValueOf()).ToString());
+            Assert.AreEqual((-30610137600000).ToString(), dt.ValueOf().ToString());
         }
 
         // Not C# API

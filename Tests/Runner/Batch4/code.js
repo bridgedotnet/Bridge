@@ -16657,11 +16657,11 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         getTimeWorks: function () {
             var dt = System.DateTime.fromTicks(System.DateTime.utc(1000, 1, 2));
-            Bridge.Test.NUnit.Assert.areEqual((System.Int64([399247360,7340])).toString(), dt.getTime().toString());
+            Bridge.Test.NUnit.Assert.areEqual((System.Int64([94318592,-7127])).toString(), dt.getTime().toString());
         },
         valueOfWorks: function () {
             var dt = System.DateTime.fromTicks(System.DateTime.utc(1000, 1, 2));
-            Bridge.Test.NUnit.Assert.areEqual((System.Int64([399247360,7340])).toString(), System.Nullable.getValue(Bridge.cast(Bridge.unbox(dt.valueOf()), System.Int64)).toString());
+            Bridge.Test.NUnit.Assert.areEqual((System.Int64([94318592,-7127])).toString(), dt.valueOf().toString());
         },
         getUtcFullYearWorks: function () {
             var dt = System.DateTime.fromTicks(System.DateTime.utc(2011, 7, 12, 13, 42, 56, 345));
