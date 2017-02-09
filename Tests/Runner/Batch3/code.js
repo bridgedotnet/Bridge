@@ -14821,6 +14821,42 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2369", {
+        statics: {
+            testArrayTypeAlias: function () {
+                var foo = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2369.G1$1(System.Array.type(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2369.IBar)))();
+                Bridge.Test.NUnit.Assert.areEqual(1, foo.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2369$IFoo$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2369$IBar$Array$foo(null));
+
+                var foo1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2369.G2();
+                Bridge.Test.NUnit.Assert.areEqual(2, foo1.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2369$IFoo$1$System$String$foo(null));
+
+                var g3 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2369.G3();
+                var ibar = g3;
+                var istr = g3;
+
+                g3.tracker = 0;
+                g3.equalsT(System.Array.init(0, null, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2369.IBar));
+                Bridge.Test.NUnit.Assert.areEqual(1, g3.tracker);
+
+                g3.tracker = 0;
+                Bridge.equalsT(ibar, System.Array.init(0, null, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2369.IBar), System.Array.type(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2369.IBar));
+                Bridge.Test.NUnit.Assert.areEqual(1, g3.tracker);
+
+                g3.tracker = 0;
+                Bridge.equalsT(istr, System.Array.init(0, null, System.String), System.Array.type(System.String));
+                Bridge.Test.NUnit.Assert.areEqual(2, g3.tracker);
+            }
+        }
+    });
+
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2369.IFoo$1", function (T) { return {
+        $kind: "interface"
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2369.IBar", {
+        $kind: "interface"
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
@@ -23447,6 +23483,48 @@ Bridge.$N1391Result =                 r;
         },
         doInvoke: function () {
             !Bridge.staticEquals(this.Ev, null) ? this.Ev(this) : null;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2369.G1$1", function (T) { return {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2369.IFoo$1(T)],
+        config: {
+            alias: [
+            "foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2369$IFoo$1$" + Bridge.getTypeAlias(T) + "$foo"
+            ]
+        },
+        foo: function (t) {
+            return 1;
+        }
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2369.G2", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2369.IFoo$1(System.String)],
+        config: {
+            alias: [
+            "foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2369$IFoo$1$System$String$foo"
+            ]
+        },
+        foo: function (t) {
+            return 2;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2369.G3", {
+        inherits: [System.IEquatable$1(System.Array.type(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2369.IBar)),System.IEquatable$1(System.Array.type(System.String))],
+        tracker: 0,
+        config: {
+            alias: [
+            "equalsT", "System$IEquatable$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2369$IBar$Array$equalsT"
+            ]
+        },
+        equalsT: function (other) {
+            this.tracker = 1;
+            return true;
+        },
+        System$IEquatable$1$System$String$Array$equalsT: function (other) {
+            this.tracker = 2;
+            return true;
         }
     });
 

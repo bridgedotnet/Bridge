@@ -567,6 +567,13 @@
         },
 
         getTypeAlias: function (obj) {
+            var type = obj.$$name ? obj : Bridge.getType(obj);
+            if (type.$isArray) {
+                var elementName = Bridge.getTypeAlias(type.$elementType);
+
+                return elementName + "$Array" + (type.$rank > 1 ? ("$" + type.$rank) : "");
+            }
+
             var name = obj.$$name || Bridge.getTypeName(obj);
 
             return name.replace(/[\.\(\)\,]/g, "$");

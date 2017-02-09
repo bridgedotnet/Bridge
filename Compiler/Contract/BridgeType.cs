@@ -337,11 +337,18 @@ namespace Bridge.Contract
 
                 if (arrayType != null && arrayType.ElementType != null)
                 {
+                    var elementAlias = BridgeTypes.ToJsName(arrayType.ElementType, emitter, asDefinition, excludens, isAlias, skipMethodTypeParam);
+
+                    if (isAlias)
+                    {
+                        return $"{elementAlias}$Array{(arrayType.Dimensions > 1 ? "$" + arrayType.Dimensions : "")}";
+                    }
+
                     if (arrayType.Dimensions > 1)
                     {
-                        return string.Format(JS.Types.System.Array.TYPE + "({0}, {1})", BridgeTypes.ToJsName(arrayType.ElementType, emitter, asDefinition, excludens, isAlias, skipMethodTypeParam), arrayType.Dimensions);
+                        return string.Format(JS.Types.System.Array.TYPE + "({0}, {1})", elementAlias, arrayType.Dimensions);
                     }
-                    return string.Format(JS.Types.System.Array.TYPE + "({0})", BridgeTypes.ToJsName(arrayType.ElementType, emitter, asDefinition, excludens, isAlias, skipMethodTypeParam));
+                    return string.Format(JS.Types.System.Array.TYPE + "({0})", elementAlias);
                 }
 
                 return JS.Types.ARRAY;
@@ -356,11 +363,6 @@ namespace Bridge.Contract
             {
                 return JS.Types.System.Object.NAME;
             }
-
-            /*if (NullableType.IsNullable(type))
-            {
-                return BridgeTypes.ToJsName(NullableType.GetUnderlyingType(type), emitter, asDefinition, excludens, isAlias, skipMethodTypeParam);
-            }*/
 
             if (type is ByReferenceType)
             {
@@ -579,13 +581,6 @@ namespace Bridge.Contract
             {
                 return JS.Types.System.Object.NAME;
             }
-
-            /*var composedType = astType as ComposedType;
-
-            if (composedType != null && composedType.ArraySpecifiers != null && composedType.ArraySpecifiers.Count > 0)
-            {
-                return JS.Types.ARRAY;
-            }*/
 
             var simpleType = astType as SimpleType;
 
