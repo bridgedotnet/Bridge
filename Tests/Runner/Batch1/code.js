@@ -27733,6 +27733,32 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var dt = new Date(-62135596800000);
             // #1606
             this.assertDate(dt, 1, 1, 1);
+
+            var vof = "";
+
+            vof = dt.valueOf().toString();
+
+            Bridge.Test.NUnit.Assert.areEqual$1("", vof, System.String.concat("Resulting valueOf for ", System.DateTime.format(dt), ": ", vof));
+
+            var d = new Date();
+            d.setFullYear(1);
+            d.setMonth(0);
+            d.setDate(1);
+            d.setHours(0);
+            d.setMinutes(0);
+            d.setSeconds(0);
+
+            Bridge.Test.NUnit.Assert.areEqual$1("", d.valueOf().toString(), System.String.concat("Custom NON UTC valueOf:", d.toString(), ": ", d.valueOf().toString()));
+
+            var d2 = new Date();
+            d2.setUTCFullYear(1);
+            d2.setUTCMonth(0);
+            d2.setUTCDate(1);
+            d2.setUTCHours(0);
+            d2.setUTCMinutes(0);
+            d2.setUTCSeconds(0);
+
+            Bridge.Test.NUnit.Assert.areEqual$1("", d2.valueOf().toString(), System.String.concat("Custom UTC valueOf:", d2.toString(), ": ", d2.valueOf().toString()));
         },
         defaultValueWorks_SPI_1606: function () {
             var dt = Bridge.getDefaultValue(System.DateTime);

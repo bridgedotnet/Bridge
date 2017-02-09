@@ -61,6 +61,32 @@ namespace Bridge.ClientTest.SimpleTypes
             var dt = new DateTime();
             // #1606
             AssertDate(dt, 1, 1, 1);
+
+            string vof = "";
+
+            //@ vof = dt.valueOf().toString();
+
+            Assert.AreEqual("", vof, "Resulting valueOf for " + dt.ToString() +": " + vof);
+
+            var d = new Date();
+            d.SetFullYear(1);
+            d.SetMonth(0);
+            d.SetDate(1);
+            d.SetHours(0);
+            d.SetMinutes(0);
+            d.SetSeconds(0);
+
+            Assert.AreEqual("", d.ValueOf().ToString(), "Custom NON UTC valueOf:" + d.ToString() + ": " + d.ValueOf().ToString());
+
+            var d2 = new Date();
+            d2.SetUTCFullYear(1);
+            d2.SetUTCMonth(0);
+            d2.SetUTCDate(1);
+            d2.SetUTCHours(0);
+            d2.SetUTCMinutes(0);
+            d2.SetUTCSeconds(0);
+
+            Assert.AreEqual("", d2.ValueOf().ToString(), "Custom UTC valueOf:" + d2.ToString() + ": " + d2.ValueOf().ToString());
         }
 
         [Test]
