@@ -270,8 +270,16 @@
             return 0;
         },
 
+        checkReadOnly: function(obj, T, msg) {
+            if (System.Array.getIsReadOnly(obj, T)) {
+                throw new System.NotSupportedException(msg || "Collection was of a fixed size.");
+            }
+        },
+
         add: function (obj, item, T) {
             var name;
+
+            System.Array.checkReadOnly(obj, T);
 
             if (Bridge.isArray(obj)) {
                 obj.push(item);
@@ -286,6 +294,8 @@
 
         clear: function (obj, T) {
             var name;
+
+            System.Array.checkReadOnly(obj, T, "Collection is read-only.");
 
             if (Bridge.isArray(obj)) {
                 System.Array.fill(obj, T ? (T.getDefaultValue || Bridge.getDefaultValue(T)) : null, 0, obj.length);
@@ -407,6 +417,8 @@
         remove: function (obj, item, T) {
             var name;
 
+            System.Array.checkReadOnly(obj, T);
+
             if (Bridge.isArray(obj)) {
                 var index = System.Array.indexOf(obj, item);
 
@@ -429,6 +441,8 @@
         insert: function (obj, index, item, T) {
             var name;
 
+            System.Array.checkReadOnly(obj, T);
+
             if (Bridge.isArray(obj)) {
                 obj.splice(index, 0, item);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert"])) {
@@ -442,6 +456,8 @@
 
         removeAt: function (obj, index, T) {
             var name;
+
+            System.Array.checkReadOnly(obj, T);
 
             if (Bridge.isArray(obj)) {
                 obj.splice(index, 1);
@@ -474,6 +490,8 @@
 
         setItem: function (obj, idx, value, T) {
             var name;
+
+            System.Array.checkReadOnly(obj, T);
 
             if (Bridge.isArray(obj)) {
                 obj[idx] = value;

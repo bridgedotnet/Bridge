@@ -34,7 +34,7 @@ namespace Bridge.ClientTest.Collections.Generic
             {
                 get
                 {
-                    return true;
+                    return false;
                 }
             }
 
@@ -146,14 +146,6 @@ namespace Bridge.ClientTest.Collections.Generic
         }
 
         [Test]
-        public void ArrayCastToIListSetItemWorks()
-        {
-            IList<string> l = new[] { "x", "y", "z" };
-            l[1] = "a";
-            Assert.AreEqual("a", l[1]);
-        }
-
-        [Test]
         public void ClassImplementingIListSetItemWorks()
         {
             MyList l = new MyList(new[] { "x", "y", "z" });
@@ -180,14 +172,14 @@ namespace Bridge.ClientTest.Collections.Generic
         public void ClassImplementingIListIsReadOnlyWorks()
         {
             MyList c = new MyList(new[] { "x", "y" });
-            Assert.AreEqual(true, c.IsReadOnly);
+            Assert.AreEqual(false, c.IsReadOnly);
         }
 
         [Test]
         public void ClassImplementingIListCastToIListIsReadOnlyWorks()
         {
             IList<string> l = new MyList(new[] { "x", "y" });
-            Assert.AreEqual(true, l.IsReadOnly);
+            Assert.AreEqual(false, l.IsReadOnly);
         }
 
         [Test]

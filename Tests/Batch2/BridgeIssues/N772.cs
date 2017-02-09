@@ -360,25 +360,6 @@ namespace Bridge.ClientTest.Batch2.BridgeIssues
         }
 
         [Test]
-        public void ICollectionAddWorks()
-        {
-            IList<string> l = new[] { "x", "y", "z" };
-            l.Add("a");
-            Assert.AreDeepEqual(new[] { "x", "y", "z", "a" }, l);
-        }
-
-        [Test]
-        public void ICollectionClearWorks()
-        {
-            IList<string> l = new[] { "x", "y", "z" };
-            l.Clear();
-            Assert.AreDeepEqual(new string[3], l);
-            Assert.AreDeepEqual(null, l[0]);
-            Assert.AreDeepEqual(null, l[1]);
-            Assert.AreDeepEqual(null, l[2]);
-        }
-
-        [Test]
         public void ICollectionContainsWorks()
         {
             IList<string> l = new[] { "x", "y", "z" };
@@ -395,21 +376,10 @@ namespace Bridge.ClientTest.Batch2.BridgeIssues
         }
 
         [Test]
-        public void ICollectionRemoveWorks()
-        {
-            IList<string> l = new[] { "x", "y", "z" };
-            Assert.True(l.Remove("y"));
-            Assert.False(l.Remove("a"));
-            Assert.AreDeepEqual(new[] { "x", "z" }, l);
-        }
-
-        [Test]
         public void IListIndexingWorks()
         {
             IList<string> l = new[] { "x", "y", "z" };
             Assert.AreEqual("y", l[1]);
-            l[1] = "a";
-            Assert.AreDeepEqual(new[] { "x", "a", "z" }, l);
         }
 
         [Test]
@@ -426,30 +396,6 @@ namespace Bridge.ClientTest.Batch2.BridgeIssues
             var arr = new[] { new C(1), new C(2), new C(3) };
             Assert.AreEqual(1, arr.IndexOf(new C(2)));
             Assert.AreEqual(-1, arr.IndexOf(new C(4)));
-        }
-
-        [Test]
-        public void IListInsertWorks()
-        {
-            IList<string> l = new[] { "x", "y", "z" };
-            l.Insert(1, "a");
-            Assert.AreDeepEqual(new[] { "x", "a", "y", "z" }, l);
-        }
-
-        [Test]
-        public void IListRemoveAtWorks()
-        {
-            IList<string> l = new[] { "x", "y", "z" };
-            l.RemoveAt(1);
-            Assert.AreDeepEqual(new[] { "x", "z" }, l);
-        }
-
-        [Test]
-        public void IssueSpecific()
-        {
-            IList<string> l = new[] { "x", "y", "z" };
-            l.RemoveAt(1);
-            Assert.AreDeepEqual(new[] { "x", "z" }, l);
         }
 
         [Test(ExpectedCount = 10)]

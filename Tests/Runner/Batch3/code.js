@@ -8436,7 +8436,7 @@ Bridge.$N1391Result =                 r;
             Bridge.Test.NUnit.Assert.areEqual(0, System.Array.getItem(list, 0, System.Int32));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(list, 0, System.Int32));
             Bridge.Test.NUnit.Assert.areEqual(100, System.Array.getCount(list, System.Int32));
-            Bridge.Test.NUnit.Assert.true(System.Array.getIsReadOnly(list, System.Int32));
+            Bridge.Test.NUnit.Assert.false(System.Array.getIsReadOnly(list, System.Int32));
             Bridge.Test.NUnit.Assert.null(Bridge.getEnumerator(list, System.Int32));
             Bridge.Test.NUnit.Assert.areEqual(200, System.Array.indexOf(list, 0, 0, null, System.Int32));
             Bridge.Test.NUnit.Assert.true(System.Array.remove(list, 0, System.Int32));
@@ -8504,7 +8504,7 @@ Bridge.$N1391Result =                 r;
             return 100;
         },
         getIsReadOnly: function () {
-            return true;
+            return false;
         },
         System$Collections$Generic$ICollection$1$T$add: function (item) {
         },
