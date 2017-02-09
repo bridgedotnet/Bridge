@@ -27863,13 +27863,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             //Script.Write("dt.setFullYear(1);");
             Bridge.Test.NUnit.Assert.areEqual((System.Int64([399247360,7340])).toString(), System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Int64((dt).valueOf() + System.DateTime.offset)), System.Int64)).toString());
         },
-        getTimezoneOffsetWorks: function () {
-            var zdt = new Date(1000, 1 - 1, 1);
-            //Script.Write("zdt.setFullYear(1);");
-
-            var dt = System.DateTime.fromTicks(System.Int64(0));
-            Bridge.Test.NUnit.Assert.areEqual((-180).toString(), dt.getTimezoneOffset().toString());
-        },
         getUTCFullYearWorks: function () {
             var dt = System.DateTime.fromTicks(System.DateTime.utc(2011, 7, 12, 13, 42, 56, 345));
             Bridge.Test.NUnit.Assert.areEqual(2011, dt.getUTCFullYear());

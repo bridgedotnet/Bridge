@@ -281,15 +281,19 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual((31525459200000L).ToString(), ((long)dt.ValueOf()).ToString());
         }
 
-        [Test]
-        public void GetTimezoneOffsetWorks()
-        {
-            var zdt = new DateTime(1000, 1, 1);
-            //Script.Write("zdt.setFullYear(1);");
+        // Not C# API
+        //[Test]
+        //public void GetTimezoneOffsetWorks()
+        //{
+        //    var zdt = new DateTime(1000, 1, 1);
+        //    //Script.Write("zdt.setFullYear(1);");
+        //    var dt = new DateTime(0);
+        //    // UTC +3
+        //    Assert.AreEqual((-180).ToString(), dt.GetTimezoneOffset().ToString());
 
-            var dt = new DateTime(0);
-            Assert.AreEqual((-180).ToString(), dt.GetTimezoneOffset().ToString());
-        }
+        //    //var off = (long)(zdt.ValueOf());
+        //    //Assert.AreEqual((off / 60000).ToString(), dt.GetTimezoneOffset().ToString());
+        //}
 
         [Test]
         public void GetUTCFullYearWorks()
