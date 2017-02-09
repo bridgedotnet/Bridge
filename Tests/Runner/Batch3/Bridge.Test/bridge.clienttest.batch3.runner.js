@@ -12771,14 +12771,14 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             dateTimeToISOStringWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge989).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge989, 1, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DateTimeToISOStringWorks()",
-                    line: "11"
+                    line: "12"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge989.dateTimeToISOStringWorks();
             },
             dateToISOStringWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge989).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge989, 1, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DateToISOStringWorks()",
-                    line: "26"
+                    line: "27"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge989.dateToISOStringWorks();
             }

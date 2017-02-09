@@ -317,7 +317,6 @@
     <Compile Include="System\InvalidOperationException.cs" />
     <Compile Include="System\LocaleOptions.cs" />
     <Compile Include="System\Func.cs" />
-    <Compile Include="Bridge\Date.cs" />
     <Compile Include="System\Exception.cs" />
     <Compile Include="System\Delegate.cs" />
     <Compile Include="System\Math.cs" />
