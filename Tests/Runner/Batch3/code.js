@@ -5640,7 +5640,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 try {
                     var $Date = 3;
 
-                    var m = (new Date().getMonth() + 1);
+                    var m = (System.DateTime.getDefaultValue().getMonth() + 1);
 
                     Bridge.Test.NUnit.Assert.areEqual$1(3, $Date, "Date");
                 }
@@ -10747,8 +10747,8 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1904", {
         testDateTimeConstructorConvertsValueToMs: function () {
             var d1 = new Date();
-            var tickValue = System.Int64((d1).getTime()).mul(10000);
-            var d2 = new Date(tickValue.toNumber()/10000);
+            var tickValue = System.DateTime.getTicks(d1);
+            var d2 = System.DateTime.fromTicks(tickValue);
 
             Bridge.Test.NUnit.Assert.true$1(Bridge.equals(d1, d2), System.String.concat("d1 (", System.DateTime.format(d1), ") == d2(", System.DateTime.format(d2), ")"));
         }
@@ -16973,7 +16973,7 @@ Bridge.$N1391Result =                 r;
             testTicks: function () {
                 var centuryBegin = new Date(2001, 1 - 1, 1);
                 var currentDate = new Date(2007, 12 - 1, 14, 15, 23);
-                var elapsedTicks = System.Int64((currentDate).getTime()).mul(10000).sub(System.Int64((centuryBegin).getTime()).mul(10000));
+                var elapsedTicks = System.DateTime.getTicks(currentDate).sub(System.DateTime.getTicks(centuryBegin));
                 var elapsedSpan = new System.TimeSpan(elapsedTicks);
 
                 Bridge.Test.NUnit.Assert.areEqual$1(System.Int64([1836507648,510687]), elapsedTicks, "Bridge582 TestTicks ticks");
@@ -19199,13 +19199,13 @@ Bridge.$N1391Result =                 r;
                     DateA: null
                 },
                 init: function () {
-                    this.dateb = new Date(-864e13);
-                    this.DateA = new Date(-864e13);
+                    this.dateb = System.DateTime.getDefaultValue();
+                    this.DateA = System.DateTime.getDefaultValue();
                 }
             },
             testUseCase: function () {
-                Bridge.Test.NUnit.Assert.true$1(Bridge.equals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.getDateA(), new Date(-864e13)), "Bridge733 DateA");
-                Bridge.Test.NUnit.Assert.true$1(Bridge.equals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.dateb, new Date(-864e13)), "Bridge733 dateb");
+                Bridge.Test.NUnit.Assert.true$1(Bridge.equals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.getDateA(), System.DateTime.getDefaultValue()), "Bridge733 DateA");
+                Bridge.Test.NUnit.Assert.true$1(Bridge.equals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.dateb, System.DateTime.getDefaultValue()), "Bridge733 dateb");
 
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.dateb = new Date(); // to prevent warning that dateb is never assigned
             }
@@ -19618,7 +19618,7 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.NUnit.Assert.areEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge789.method2().field1);
             },
             method1: function (dt) {
-                if (dt === void 0) { dt = new Date(-864e13); }
+                if (dt === void 0) { dt = System.DateTime.getDefaultValue(); }
                 return dt;
             },
             method2: function (s) {
@@ -19989,9 +19989,9 @@ Bridge.$N1391Result =                 r;
             getTicksReturnsCorrectValue: function () {
                 var val = System.Int64([-57829376,2204230]);
 
-                var ticks = System.Int64((new Date(val.toNumber()/10000)).getTime()).mul(10000);
-                var ticksPlusOne = System.Int64((new Date(val.toNumber()/10000)).getTime()).mul(10000).add(System.Int64(1));
-                var ticksString = System.Int64((new Date(val.toNumber()/10000)).getTime()).mul(10000).toString();
+                var ticks = System.DateTime.getTicks(System.DateTime.fromTicks(val));
+                var ticksPlusOne = System.DateTime.getTicks(System.DateTime.fromTicks(val)).add(System.Int64(1));
+                var ticksString = System.DateTime.getTicks(System.DateTime.fromTicks(val)).toString();
 
                 Bridge.Test.NUnit.Assert.areDeepEqual$1(val, ticks, "Ticks returning correct int value");
                 Bridge.Test.NUnit.Assert.areDeepEqual$1(val.add(System.Int64(1)), ticksPlusOne, "Adding to a Tick value is correct");
