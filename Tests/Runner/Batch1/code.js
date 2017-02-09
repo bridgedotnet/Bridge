@@ -27757,6 +27757,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             d2.setUTCHours(0);
             d2.setUTCMinutes(0);
             d2.setUTCSeconds(0);
+            d2.setUTCMilliseconds(0);
 
             Bridge.Test.NUnit.Assert.areEqual$1("", d2.valueOf().toString(), System.String.concat("Custom UTC valueOf:", d2.toString(), ": ", d2.valueOf().toString()));
         },

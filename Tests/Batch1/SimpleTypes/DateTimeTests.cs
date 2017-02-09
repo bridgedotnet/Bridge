@@ -85,6 +85,7 @@ namespace Bridge.ClientTest.SimpleTypes
             d2.SetUTCHours(0);
             d2.SetUTCMinutes(0);
             d2.SetUTCSeconds(0);
+            d2.SetUTCMilliseconds(0);
 
             Assert.AreEqual("", d2.ValueOf().ToString(), "Custom UTC valueOf:" + d2.ToString() + ": " + d2.ValueOf().ToString());
         }
