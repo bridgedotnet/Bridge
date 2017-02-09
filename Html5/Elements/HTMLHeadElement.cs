@@ -8,8 +8,6 @@ namespace Bridge.Html5
     public sealed class HTMLHeadElement : HTMLElement<HTMLHeadElement>
     {
         [Template("document.createElement('head')")]
-        public HTMLHeadElement()
-        {
-        }
+        public extern HTMLHeadElement();
     }
 }

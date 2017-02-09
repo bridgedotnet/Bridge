@@ -8,9 +8,7 @@ namespace Bridge.Html5
     public sealed class HTMLMetaElement : HTMLElement<HTMLMetaElement>
     {
         [Template("document.createElement('meta')")]
-        public HTMLMetaElement()
-        {
-        }
+        public extern HTMLMetaElement();
 
         /// <summary>
         /// Gets or sets the value of meta-data property.

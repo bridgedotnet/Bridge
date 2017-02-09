@@ -8,9 +8,7 @@ namespace Bridge.Html5
     public sealed class HTMLBRElement : HTMLElement<HTMLBRElement>
     {
         [Template("document.createElement('br')")]
-        public HTMLBRElement()
-        {
-        }
+        public extern HTMLBRElement();
 
         /// <summary>
         /// Indicates flow of text around floating objects.

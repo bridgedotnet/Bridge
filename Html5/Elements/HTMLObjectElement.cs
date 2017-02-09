@@ -9,9 +9,7 @@ namespace Bridge.Html5
     public sealed class HTMLObjectElement : HTMLElement<HTMLObjectElement>
     {
         [Template("document.createElement('object')")]
-        public HTMLObjectElement()
-        {
-        }
+        public extern HTMLObjectElement();
 
         /// <summary>
         /// The active document of the object element's nested browsing context, if any; otherwise null.

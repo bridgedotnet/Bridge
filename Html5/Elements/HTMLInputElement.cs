@@ -10,9 +10,7 @@ namespace Bridge.Html5
     public sealed class HTMLInputElement : HTMLElement<HTMLInputElement>
     {
         [Template("document.createElement('input')")]
-        public HTMLInputElement()
-        {
-        }
+        public extern HTMLInputElement();
 
         /// <summary>
         /// If the value of the type attribute is file, this attribute indicates the types of files that the server accepts; otherwise it is ignored. The value must be a comma-separated list of unique content type specifiers:

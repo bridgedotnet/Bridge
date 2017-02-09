@@ -8,9 +8,7 @@ namespace Bridge.Html5
     public sealed class HTMLBaseElement : HTMLElement<HTMLBaseElement>
     {
         [Template("document.createElement('base')")]
-        public HTMLBaseElement()
-        {
-        }
+        public extern HTMLBaseElement();
 
         /// <summary>
         /// Is a DOMString that reflects the href HTML attribute, containing a base URL for relative URLs in the document.

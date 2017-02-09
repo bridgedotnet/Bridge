@@ -8,9 +8,7 @@ namespace Bridge.Html5
     public sealed class HTMLMapElement : HTMLElement<HTMLMapElement>
     {
         [Template("document.createElement('map')")]
-        public HTMLMapElement()
-        {
-        }
+        public extern HTMLMapElement();
 
         /// <summary>
         /// Is a DOMString representing the &lt;map&gt; element for referencing it other context. If the id attribute is set, this must have the same value; and it cannot be null or empty.

@@ -8,9 +8,7 @@ namespace Bridge.Html5
     public sealed class HTMLFieldSetElement : HTMLElement<HTMLFieldSetElement>
     {
         [Template("document.createElement('fieldset')")]
-        public HTMLFieldSetElement()
-        {
-        }
+        public extern HTMLFieldSetElement();
 
         /// <summary>
         /// Reflects the disabled HTML attribute, indicating whether the user can interact with the control.

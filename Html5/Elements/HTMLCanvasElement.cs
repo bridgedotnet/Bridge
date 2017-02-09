@@ -9,9 +9,7 @@ namespace Bridge.Html5
     public sealed class HTMLCanvasElement : HTMLElement<HTMLCanvasElement>
     {
         [Template("document.createElement('canvas')")]
-        public HTMLCanvasElement()
-        {
-        }
+        public extern HTMLCanvasElement();
 
         /// <summary>
         /// Reflects the height HTML attribute, specifying the height of the coordinate space in CSS pixels.

@@ -8,9 +8,7 @@ namespace Bridge.Html5
     public sealed class HTMLLinkElement : HTMLElement<HTMLLinkElement>
     {
         [Template("document.createElement('link')")]
-        public HTMLLinkElement()
-        {
-        }
+        public extern HTMLLinkElement();
 
         /// <summary>
         /// Gets or sets whether the link is disabled; currently only used with style sheet links.

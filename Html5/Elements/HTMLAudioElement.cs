@@ -13,9 +13,7 @@ namespace Bridge.Html5
         /// Constructor for audio elements. The preload property of the returned object is set to auto and the src property is set to the argument value. The browser begins asynchronously selecting the resource before returning the object.
         /// </summary>
         [Template("new Audio()")]
-        public HTMLAudioElement()
-        {
-        }
+        public extern HTMLAudioElement();
 
         /// <summary>
         /// Constructor for audio elements. The preload property of the returned object is set to auto and the src property is set to the argument value. The browser begins asynchronously selecting the resource before returning the object.

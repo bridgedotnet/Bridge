@@ -8,9 +8,7 @@ namespace Bridge.Html5
     public sealed class HTMLTitleElement : HTMLElement<HTMLTitleElement>
     {
         [Template("document.createElement('title')")]
-        public HTMLTitleElement()
-        {
-        }
+        public extern HTMLTitleElement();
 
         /// <summary>
         /// The string representing the text of the document's title.

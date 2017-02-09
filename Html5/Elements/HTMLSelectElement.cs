@@ -8,9 +8,7 @@ namespace Bridge.Html5
     public sealed class HTMLSelectElement : HTMLElement<HTMLSelectElement>
     {
         [Template("document.createElement('select')")]
-        public HTMLSelectElement()
-        {
-        }
+        public extern HTMLSelectElement();
 
         /// <summary>
         /// Reflects the autofocus HTML attribute, which indicates whether the control should have input focus when the page loads, unless the user overrides it, for example by typing in a different control. Only one form-associated element in a document can have this attribute specified.

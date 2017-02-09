@@ -8,9 +8,7 @@ namespace Bridge.Html5
     public sealed class HTMLMeterElement : HTMLElement<HTMLMeterElement>
     {
         [Template("document.createElement('meter')")]
-        public HTMLMeterElement()
-        {
-        }
+        public extern HTMLMeterElement();
 
         /// <summary>
         /// It returns the value of the high boundary, reflecting the high &lt;meter&gt; attribute.

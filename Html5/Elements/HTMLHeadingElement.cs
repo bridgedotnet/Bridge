@@ -10,17 +10,13 @@ namespace Bridge.Html5
     public sealed class HTMLHeadingElement : HTMLElement<HTMLHeadingElement>
     {
         [Template("document.createElement('h1')")]
-        public HTMLHeadingElement()
-        {
-        }
+        public extern HTMLHeadingElement();
 
         /// <summary>
         /// Creates a heading element of the specified type
         /// </summary>
         [Template("document.createElement({0})")]
-        public HTMLHeadingElement(HeadingType h)
-        {
-        }
+        public extern HTMLHeadingElement(HeadingType h);
     }
 
     /// <summary>

@@ -8,19 +8,13 @@ namespace Bridge.Html5
     public sealed class HTMLImageElement : HTMLElement<HTMLImageElement>
     {
         [Template("new Image()")]
-        public HTMLImageElement()
-        {
-        }
+        public extern HTMLImageElement();
 
         [Template("new Image({0})")]
-        public HTMLImageElement(int width)
-        {
-        }
+        public extern HTMLImageElement(int width);
 
         [Template("new Image({0},{1})")]
-        public HTMLImageElement(int width, int height)
-        {
-        }
+        public extern HTMLImageElement(int width, int height);
 
         /// <summary>
         /// True if the browser has fetched the image, and it is in a supported image type that was decoded without errors.

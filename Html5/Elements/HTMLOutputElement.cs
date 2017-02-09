@@ -8,9 +8,7 @@ namespace Bridge.Html5
     public sealed class HTMLOutputElement : HTMLElement<HTMLOutputElement>
     {
         [Template("document.createElement('output')")]
-        public HTMLOutputElement()
-        {
-        }
+        public extern HTMLOutputElement();
 
         /// <summary>
         /// The default value of the element, initially the empty string.

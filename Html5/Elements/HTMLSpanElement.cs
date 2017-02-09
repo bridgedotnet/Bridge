@@ -8,8 +8,6 @@ namespace Bridge.Html5
     public sealed class HTMLSpanElement : HTMLElement<HTMLSpanElement>
     {
         [Template("document.createElement('span')")]
-        public HTMLSpanElement()
-        {
-        }
+        public extern HTMLSpanElement();
     }
 }

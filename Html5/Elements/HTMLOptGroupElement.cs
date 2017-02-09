@@ -8,9 +8,7 @@ namespace Bridge.Html5
     public sealed class HTMLOptGroupElement : HTMLElement<HTMLOptGroupElement>
     {
         [Template("document.createElement('optgroup')")]
-        public HTMLOptGroupElement()
-        {
-        }
+        public extern HTMLOptGroupElement();
 
         /// <summary>
         /// If true, the whole list of children &lt;option&gt; is disabled.

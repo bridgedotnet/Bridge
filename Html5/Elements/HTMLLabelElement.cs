@@ -8,9 +8,7 @@ namespace Bridge.Html5
     public sealed class HTMLLabelElement : HTMLElement<HTMLLabelElement>
     {
         [Template("document.createElement('label')")]
-        public HTMLLabelElement()
-        {
-        }
+        public extern HTMLLabelElement();
 
         /// <summary>
         /// The labeled control.

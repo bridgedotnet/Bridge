@@ -11,9 +11,7 @@ namespace Bridge.Html5
     public sealed class HTMLFormElement : HTMLElement<HTMLFormElement>, IEnumerable<HTMLElement>
     {
         [Template("document.createElement('form')")]
-        public HTMLFormElement()
-        {
-        }
+        public extern HTMLFormElement();
 
         /// <summary>
         /// Reflects the accept-charset HTML attribute, containing a list of character encodings that the server accepts.

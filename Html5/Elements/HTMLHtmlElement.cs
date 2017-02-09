@@ -9,8 +9,6 @@ namespace Bridge.Html5
     public sealed class HTMLHtmlElement : HTMLElement<HTMLHtmlElement>
     {
         [Template("document.createElement('html')")]
-        public HTMLHtmlElement()
-        {
-        }
+        public extern HTMLHtmlElement();
     }
 }

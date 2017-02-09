@@ -10,9 +10,7 @@ namespace Bridge.Html5
     public sealed class HTMLQuoteElement : HTMLElement<HTMLQuoteElement>
     {
         [Template("document.createElement('blockquote')")]
-        public HTMLQuoteElement()
-        {
-        }
+        public extern HTMLQuoteElement();
 
         [Template("document.createElement({0})")]
         public HTMLQuoteElement(QuoteType type)

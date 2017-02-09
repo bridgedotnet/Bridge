@@ -7,8 +7,6 @@ namespace Bridge.Html5
     public sealed class MarkElement : HTMLElement<MarkElement>
     {
         [Template("document.createElement('mark')")]
-        public MarkElement()
-        {
-        }
+        public extern MarkElement();
     }
 }

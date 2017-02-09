@@ -10,9 +10,7 @@ namespace Bridge.Html5
     public sealed class HTMLModElement : HTMLElement<HTMLModElement>
     {
         [Template("document.createElement({0})")]
-        public HTMLModElement(ModElementType type)
-        {
-        }
+        public extern HTMLModElement(ModElementType type);
 
         /// <summary>
         /// Reflects the cite HTML attribute, containing a URI of a resource explaining the change.

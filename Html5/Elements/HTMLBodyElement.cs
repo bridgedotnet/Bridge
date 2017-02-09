@@ -10,9 +10,7 @@ namespace Bridge.Html5
     public sealed class HTMLBodyElement : HTMLElement<HTMLBodyElement>
     {
         [Template("document.createElement('body')")]
-        public HTMLBodyElement()
-        {
-        }
+        public extern HTMLBodyElement();
 
         /// <summary>
         /// Color of active hyperlinks.

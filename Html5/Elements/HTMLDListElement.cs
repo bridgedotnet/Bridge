@@ -8,9 +8,7 @@ namespace Bridge.Html5
     public sealed class HTMLDListElement : HTMLElement<HTMLDListElement>
     {
         [Template("document.createElement('dl')")]
-        public HTMLDListElement()
-        {
-        }
+        public extern HTMLDListElement();
 
         /// <summary>
         /// Indicates that spacing between list items should be reduced.

@@ -11,14 +11,10 @@ namespace Bridge.Html5
     public sealed class HTMLTableColElement : HTMLElement<HTMLTableColElement>
     {
         [Template("document.createElement('col')")]
-        public HTMLTableColElement()
-        {
-        }
+        public extern HTMLTableColElement();
 
         [Template("document.createElement({0})")]
-        public HTMLTableColElement(TableColumnType type)
-        {
-        }
+        public extern HTMLTableColElement(TableColumnType type);
 
         /// <summary>
         /// Reflects the span HTML attribute, indicating the number of columns to apply this object's attributes to. Must be a positive integer.

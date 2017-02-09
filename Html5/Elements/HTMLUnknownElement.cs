@@ -9,8 +9,6 @@ namespace Bridge.Html5
     public sealed class HTMLUnknownElement : HTMLElement<HTMLUnknownElement>
     {
         [Template("document.createElement({0})")]
-        public HTMLUnknownElement(string tagName)
-        {
-        }
+        public extern HTMLUnknownElement(string tagName);
     }
 }

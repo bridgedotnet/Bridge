@@ -8,8 +8,6 @@ namespace Bridge.Html5
     public sealed class HTMLParagraphElement : HTMLElement<HTMLParagraphElement>
     {
         [Template("document.createElement('p')")]
-        public HTMLParagraphElement()
-        {
-        }
+        public extern HTMLParagraphElement();
     }
 }

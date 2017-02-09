@@ -10,9 +10,7 @@ namespace Bridge.Html5
     public sealed class HTMLTextAreaElement : HTMLElement<HTMLTextAreaElement>
     {
         [Template("document.createElement('textarea')")]
-        public HTMLTextAreaElement()
-        {
-        }
+        public extern HTMLTextAreaElement();
 
         /// <summary>
         /// Reflects the autofocus HTML attribute, which specifies that a form control should have input focus when the page loads, unless the user overrides it, for example by typing in a different control. Only one form element in a document can have the autofocus attribute. It cannot be applied if the type attribute is set to hidden (that is, you cannot automatically set focus to a hidden control).

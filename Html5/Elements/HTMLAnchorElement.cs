@@ -8,9 +8,7 @@ namespace Bridge.Html5
     public sealed class HTMLAnchorElement : HTMLElement<HTMLAnchorElement>
     {
         [Template("document.createElement('a')")]
-        public HTMLAnchorElement()
-        {
-        }
+        public extern HTMLAnchorElement();
 
         /// <summary>
         /// Is a DOMString representing the character encoding of the linked resource.

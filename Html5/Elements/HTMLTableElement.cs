@@ -8,9 +8,7 @@ namespace Bridge.Html5
     public sealed class HTMLTableElement : HTMLElement<HTMLTableElement>
     {
         [Template("document.createElement('table')")]
-        public HTMLTableElement()
-        {
-        }
+        public extern HTMLTableElement();
 
         /// <summary>
         /// Is an HTMLTableCaptionElement representing the first &lt;caption&gt; that is a child of the element, or null if none is found. When set, if the object doesn't represent a &lt;caption&gt;, a DOMException with the HierarchyRequestError name is thrown. If a correct object is given, it is inserted in the tree as the first child of this element and the first &lt;caption&gt; that is a child of this element is removed from the tree, if any.

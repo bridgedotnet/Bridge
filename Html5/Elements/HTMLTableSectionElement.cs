@@ -11,14 +11,10 @@ namespace Bridge.Html5
     public sealed class HTMLTableSectionElement : HTMLElement<HTMLTableSectionElement>
     {
         [Template("document.createElement('tbody')")]
-        public HTMLTableSectionElement()
-        {
-        }
+        public extern HTMLTableSectionElement();
 
         [Template("document.createElement({0})")]
-        public HTMLTableSectionElement(TableSectionType type)
-        {
-        }
+        public extern HTMLTableSectionElement(TableSectionType type);
 
         /// <summary>
         /// Returns a live HTMLCollection containing the rows in the section. The HTMLCollection is live and is automatically updated when rows are added or removed.

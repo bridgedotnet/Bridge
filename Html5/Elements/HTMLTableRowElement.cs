@@ -8,9 +8,7 @@ namespace Bridge.Html5
     public sealed class HTMLTableRowElement : HTMLElement<HTMLTableRowElement>
     {
         [Template("document.createElement('tr')")]
-        public HTMLTableRowElement()
-        {
-        }
+        public extern HTMLTableRowElement();
 
         /// <summary>
         /// Returns a live HTMLCollection containing the cells in the row. The HTMLCollection is live and is automatically updated when cells are added or removed.
