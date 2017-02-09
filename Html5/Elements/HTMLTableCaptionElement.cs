@@ -5,11 +5,9 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLTableCaptionElement")]
-    public class HTMLTableCaptionElement : HTMLElement<HTMLTableCaptionElement>
+    public sealed class HTMLTableCaptionElement : HTMLElement<HTMLTableCaptionElement>
     {
         [Template("document.createElement('caption')")]
-        public HTMLTableCaptionElement()
-        {
-        }
+        public extern HTMLTableCaptionElement();
     }
 }

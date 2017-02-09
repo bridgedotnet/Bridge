@@ -5,12 +5,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLProgressElement")]
-    public class HTMLProgressElement : HTMLElement<HTMLProgressElement>
+    public sealed class HTMLProgressElement : HTMLElement<HTMLProgressElement>
     {
         [Template("document.createElement('progress')")]
-        public HTMLProgressElement()
-        {
-        }
+        public extern HTMLProgressElement();
 
         /// <summary>
         /// Is a double value reflecting the content attribute of the same name, limited to numbers greater than zero. Its default value is 1.0.

@@ -5,12 +5,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLButtonElement")]
-    public class HTMLButtonElement : HTMLElement<HTMLButtonElement>
+    public sealed class HTMLButtonElement : HTMLElement<HTMLButtonElement>
     {
         [Template("document.createElement('button')")]
-        public HTMLButtonElement()
-        {
-        }
+        public extern HTMLButtonElement();
 
         /// <summary>
         /// The control should have input focus when the page loads, unless the user overrides it, for example by typing in a different control. Only one form-associated element in a document can have this attribute specified.

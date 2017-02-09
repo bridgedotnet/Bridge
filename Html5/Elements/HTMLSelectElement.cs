@@ -5,12 +5,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLSelectElement")]
-    public class HTMLSelectElement : HTMLElement<HTMLSelectElement>
+    public sealed class HTMLSelectElement : HTMLElement<HTMLSelectElement>
     {
         [Template("document.createElement('select')")]
-        public HTMLSelectElement()
-        {
-        }
+        public extern HTMLSelectElement();
 
         /// <summary>
         /// Reflects the autofocus HTML attribute, which indicates whether the control should have input focus when the page loads, unless the user overrides it, for example by typing in a different control. Only one form-associated element in a document can have this attribute specified.
@@ -109,27 +107,27 @@ namespace Bridge.Html5
         /// Adds an element to the collection of option elements for this select element.
         /// <param name="element">An item to add to the collection of options.</param>
         /// </summary>
-        public virtual extern void Add(HTMLElement element);
+        public extern void Add(HTMLElement element);
 
         /// <summary>
         /// Adds an element to the collection of option elements for this select element.
         /// <param name="element">An item to add to the collection of options.</param>
         /// <param name="beforeElement">An item that the new item should be inserted before. If this parameter is null, the new element is appended to the end of the collection.</param>
         /// </summary>
-        public virtual extern void Add(HTMLElement element, HTMLElement beforeElement);
+        public extern void Add(HTMLElement element, HTMLElement beforeElement);
 
         /// <summary>
         /// Adds an element to the collection of option elements for this select element.
         /// <param name="element">An item to add to the collection of options.</param>
         /// <param name="beforeIndex">An index of an item that the new item should be inserted before. If the index does not exist, the new element is appended to the end of the collection.</param>
         /// </summary>
-        public virtual extern void Add(HTMLElement element, int beforeIndex);
+        public extern void Add(HTMLElement element, int beforeIndex);
 
         /// <summary>
         /// Checks whether the element has any constraints and whether it satisfies them. If the element fails its constraints, the browser fires a cancelable invalid event at the element (and returns false).
         /// </summary>
         /// <returns>A false value if the select element is a candidate for constraint evaluation and it does not satisfy its constraints. Returns true if the element is not constrained, or if it satisfies its constraints.</returns>
-        public virtual extern bool CheckValidity();
+        public extern bool CheckValidity();
 
         /// <summary>
         /// Gets an item from the options collection for this select element. You can also access an item by specifying the index in array-style brackets or parentheses, without calling this method explicitly.
@@ -137,7 +135,7 @@ namespace Bridge.Html5
         /// <returns>The node at the specified index, or null if such a node does not exist in the collection.</returns>
         /// </summary>
         [Name("item")]
-        public virtual extern HTMLOptionElement GetItem(int index);
+        public extern HTMLOptionElement GetItem(int index);
 
         /// <summary>
         /// Gets the item in the options collection with the specified name. The name string can match either the id or the name attribute of an option node. You can also access an item by specifying the name in array-style brackets or parentheses, without calling this method explicitly.
@@ -147,18 +145,18 @@ namespace Bridge.Html5
         ///     - An OptionElement, if there is exactly one match.
         ///     - null if there are no matches.
         ///     - An OptionsCollection in tree order of nodes whose name or id attributes match the specified name.</returns>
-        public virtual extern Union<HTMLOptionElement, OptionsCollection> NamedItem(string name);
+        public extern Union<HTMLOptionElement, OptionsCollection> NamedItem(string name);
 
         /// <summary>
         /// Removes the element at the specified index from the options collection for this select element.
         /// <param name="index">The zero-based index of the option element to remove from the collection.</param>
         /// </summary>
-        public virtual extern void Remove(int index);
+        public extern void Remove(int index);
 
         /// <summary>
         /// Sets the custom validity message for the selection element to the specified message. Use the empty string to indicate that the element does not have a custom validity error.
         /// </summary>
         /// <param name="error">The string to use for the custom validity message.</param>
-        public virtual extern void SetCustomValidity(string error);
+        public extern void SetCustomValidity(string error);
     }
 }

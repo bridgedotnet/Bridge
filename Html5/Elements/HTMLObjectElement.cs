@@ -6,12 +6,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLObjectElement")]
-    public class HTMLObjectElement : HTMLElement<HTMLObjectElement>
+    public sealed class HTMLObjectElement : HTMLElement<HTMLObjectElement>
     {
         [Template("document.createElement('object')")]
-        public HTMLObjectElement()
-        {
-        }
+        public extern HTMLObjectElement();
 
         /// <summary>
         /// The active document of the object element's nested browsing context, if any; otherwise null.
@@ -87,7 +85,7 @@ namespace Bridge.Html5
         /// Always returns true, because object objects are never candidates for constraint validation.
         /// </summary>
         /// <returns>Always returns true</returns>
-        public virtual bool CheckValidity()
+        public bool CheckValidity()
         {
             return true;
         }
@@ -96,6 +94,6 @@ namespace Bridge.Html5
         /// Sets a custom validity message for the element. If this message is not the empty string, then the element is suffering from a custom validity error, and does not validate.
         /// </summary>
         /// <param name="error">The custom validity message</param>
-        public virtual extern void SetCustomValidity(string error);
+        public extern void SetCustomValidity(string error);
     }
 }

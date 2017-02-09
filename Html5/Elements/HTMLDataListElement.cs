@@ -5,12 +5,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLDataListElement")]
-    public class HTMLDataListElement : HTMLElement<HTMLDataListElement>
+    public sealed class HTMLDataListElement : HTMLElement<HTMLDataListElement>
     {
         [Template("document.createElement('datalist')")]
-        public HTMLDataListElement()
-        {
-        }
+        public extern HTMLDataListElement();
 
         /// <summary>
         /// A collection of the contained option elements.

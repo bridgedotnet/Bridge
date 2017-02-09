@@ -7,12 +7,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLHRElement")]
-    public class HTMLHRElement : HTMLElement<HTMLHRElement>
+    public sealed class HTMLHRElement : HTMLElement<HTMLHRElement>
     {
         [Template("document.createElement('hr')")]
-        public HTMLHRElement()
-        {
-        }
+        public extern HTMLHRElement();
 
         /// <summary>
         /// The name of the color of the rule.
@@ -23,7 +21,7 @@ namespace Bridge.Html5
         /// Sets the rule to have no shading.
         /// </summary>
         [Name("noshade")]
-        public Boolean NoShade;
+        public bool NoShade;
 
         /// <summary>
         /// The height of the rule.
