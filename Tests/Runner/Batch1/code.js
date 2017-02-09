@@ -27689,7 +27689,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         typePropertiesAreCorrect: function () {
             Bridge.Test.NUnit.Assert.areEqual$1("System.DateTime", Bridge.Reflection.getTypeFullName(System.DateTime), "#2064");
-            var o = Bridge.box(new Date(-62135596800000), System.DateTime, $box_.System.DateTime.toString);
+            var o = Bridge.box(System.DateTime.getDefaultValue(), System.DateTime, $box_.System.DateTime.toString);
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(o, System.DateTime), "o is DateTime");
         },
         assertDate: function (dt, year, month, day, hour, minute, second, ms) {
@@ -27730,36 +27730,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
         },
         defaultConstructorWorks_SPI_1606: function () {
-            var dt = new Date(-62135596800000);
+            var dt = System.DateTime.getDefaultValue();
             // #1606
             this.assertDate(dt, 1, 1, 1);
-
-            var vof = "";
-
-            vof = dt.valueOf().toString();
-
-            Bridge.Test.NUnit.Assert.areEqual$1("", vof, System.String.concat("Resulting valueOf for ", System.DateTime.format(dt), ": ", vof));
-
-            var d = new Date();
-            d.setFullYear(1);
-            d.setMonth(0);
-            d.setDate(1);
-            d.setHours(0);
-            d.setMinutes(0);
-            d.setSeconds(0);
-
-            Bridge.Test.NUnit.Assert.areEqual$1("", d.valueOf().toString(), System.String.concat("Custom NON UTC valueOf:", d.toString(), ": ", d.valueOf().toString()));
-
-            var d2 = new Date();
-            d2.setUTCFullYear(1);
-            d2.setUTCMonth(0);
-            d2.setUTCDate(1);
-            d2.setUTCHours(0);
-            d2.setUTCMinutes(0);
-            d2.setUTCSeconds(0);
-            d2.setUTCMilliseconds(0);
-
-            Bridge.Test.NUnit.Assert.areEqual$1("", d2.valueOf().toString(), System.String.concat("Custom UTC valueOf:", d2.toString(), ": ", d2.valueOf().toString()));
         },
         defaultValueWorks_SPI_1606: function () {
             var dt = Bridge.getDefaultValue(System.DateTime);
@@ -27777,6 +27750,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
             var dt1 = System.DateTime.fromTicks(System.Int64(0));
             this.assertDate(dt, 1, 1, 1);
+
+            var dt2 = System.DateTime.fromTicks(System.Int64([-1486618624,232830643]));
+            this.assertDate(dt2, 3169, 11, 16);
         },
         stringConstructorWorks: function () {
             var dt = new Date("Aug 12, 2012");
@@ -27803,11 +27779,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             this.assertDate(dt, 2011, 7, 12, 13, 42, 56, 345);
         },
         minWorks: function () {
-            var dt = new Date(-62135596800000);
+            var dt = System.DateTime.getDefaultValue();
             this.assertDate(dt, 1, 1, 1);
         },
         maxWorks: function () {
-            var dt = new Date(253402289999000);
+            var dt = System.DateTime.getMaxValue();
             this.assertDate(dt, 9999, 12, 31);
         },
         nowWorks: function () {

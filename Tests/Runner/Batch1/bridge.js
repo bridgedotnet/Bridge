@@ -7552,17 +7552,31 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
         statics: {
             offset: 62135596800000,
+            timezoneOffset: null,
+            getTimezoneOffset: function () {
+                System.DateTime.timezoneOffset = (new Date()).getTimezoneOffset() * 60 * 1000;
+
+                System.DateTime.getTimezoneOffset = function() {
+                    return System.DateTime.timezoneOffset;
+                };
+
+                return System.DateTime.timezoneOffset;
+            },
 
             $is: function (instance) {
                 return Bridge.isDate(instance);
             },
 
             createInstance: function () {
-                return new Date(-System.DateTime.offset);
+                return System.DateTime.getDefaultValue();
             },
 
             getDefaultValue: function () {
-                return new Date(-System.DateTime.offset);
+                return new Date(-System.DateTime.offset + System.DateTime.getTimezoneOffset());
+            },
+
+            getMaxValue: function () {
+                return new Date(253402289999000 + System.DateTime.getTimezoneOffset());
             },
 
             fromTicks: function (value) {

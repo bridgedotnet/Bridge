@@ -6,13 +6,13 @@ namespace System
     [External]
     public struct DateTime : IComparable, IComparable<DateTime>, IEquatable<DateTime>, IFormattable
     {
-        [Template("new Date(253402289999000)")]
+        [Template("System.DateTime.getMaxValue()")]
         public static readonly DateTime MaxValue;
 
-        [Template("new Date(-62135596800000)")]
+        [Template("System.DateTime.getDefaultValue()")]
         public static readonly DateTime MinValue;
 
-        [Template("new Date(-62135596800000)")]
+        [Template("System.DateTime.getDefaultValue()")]
         private extern DateTime(DummyTypeUsedToAddAttributeToDefaultValueTypeConstructor _);
 
         /// <summary>

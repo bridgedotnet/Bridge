@@ -5640,7 +5640,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 try {
                     var $Date = 3;
 
-                    var m = (new Date(-62135596800000).getMonth() + 1);
+                    var m = (System.DateTime.getDefaultValue().getMonth() + 1);
 
                     Bridge.Test.NUnit.Assert.areEqual$1(3, $Date, "Date");
                 }
@@ -19108,8 +19108,8 @@ Bridge.$N1391Result =                 r;
                 }
             },
             testUseCase: function () {
-                Bridge.Test.NUnit.Assert.true$1(Bridge.equals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.getDateA(), new Date(-62135596800000)), "Bridge733 DateA");
-                Bridge.Test.NUnit.Assert.true$1(Bridge.equals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.dateb, new Date(-62135596800000)), "Bridge733 dateb");
+                Bridge.Test.NUnit.Assert.true$1(Bridge.equals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.getDateA(), System.DateTime.getDefaultValue()), "Bridge733 DateA");
+                Bridge.Test.NUnit.Assert.true$1(Bridge.equals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.dateb, System.DateTime.getDefaultValue()), "Bridge733 dateb");
 
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.dateb = new Date(); // to prevent warning that dateb is never assigned
             }

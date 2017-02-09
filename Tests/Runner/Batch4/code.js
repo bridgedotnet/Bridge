@@ -16486,7 +16486,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isAssignableFrom(System.IEquatable$1(System.DateTime), System.DateTime));
             Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isAssignableFrom(System.IFormattable, System.DateTime));
 
-            var d = Bridge.box(new Date(-62135596800000), System.DateTime, $box_.System.DateTime.toString);
+            var d = Bridge.box(System.DateTime.getDefaultValue(), System.DateTime, $box_.System.DateTime.toString);
             Bridge.Test.NUnit.Assert.true(Bridge.is(d, System.DateTime));
             // #1609
             Bridge.Test.NUnit.Assert.true(Bridge.is(d, System.IComparable$1(System.DateTime)));
@@ -16502,7 +16502,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IFormattable, Function));
         },
         defaultConstructorWorks_SPI_1606: function () {
-            var dt = new Date(-62135596800000);
+            var dt = System.DateTime.getDefaultValue();
             // #1606
             Bridge.Test.NUnit.Assert.areEqual(1, dt.getFullYear());
         },
