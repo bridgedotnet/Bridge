@@ -11,8 +11,12 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public static void TestCastParanthesize()
         {
             double bar = 2.0;
-            double foo = 1.0 / (float)(Math.Abs(bar) / Math.Abs(bar));
-            Assert.AreEqual(1, foo);
+
+            double foo1 = 1.0 / (float)(Math.Abs(bar) / Math.Abs(bar));
+            Assert.AreEqual(1, foo1);
+
+            double foo2 = 1.0 / (Math.Abs(bar) / Math.Abs(bar));
+            Assert.AreEqual(1, foo2);
         }
     }
 }

@@ -14758,8 +14758,12 @@ Bridge.$N1391Result =                 r;
         statics: {
             testCastParanthesize: function () {
                 var bar = 2.0;
-                var foo = 1.0 / (Math.abs(bar) / Math.abs(bar));
-                Bridge.Test.NUnit.Assert.areEqual(1, foo);
+
+                var foo1 = 1.0 / (Math.abs(bar) / Math.abs(bar));
+                Bridge.Test.NUnit.Assert.areEqual(1, foo1);
+
+                var foo2 = 1.0 / (Math.abs(bar) / Math.abs(bar));
+                Bridge.Test.NUnit.Assert.areEqual(1, foo2);
             }
         }
     });

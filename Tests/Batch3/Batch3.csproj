@@ -495,10 +495,10 @@
     <Compile Include="BridgeIssues\2300\N2330.cs" />
     <Compile Include="BridgeIssues\2300\N2337.cs" />
     <Compile Include="BridgeIssues\2300\N2338.cs" />
+    <Compile Include="BridgeIssues\2300\N2342.cs" />
     <Compile Include="BridgeIssues\2300\N2343.cs" />
     <Compile Include="BridgeIssues\2300\N2344.cs" />
     <Compile Include="BridgeIssues\2300\N2347.cs" />
-    <Compile Include="BridgeIssues\2300\N2342.cs" />
     <Compile Include="BridgeIssues\2300\N2349.cs" />
     <Compile Include="BridgeIssues\2300\N2355.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
