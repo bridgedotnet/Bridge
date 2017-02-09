@@ -147,21 +147,26 @@ namespace Bridge.Translator
             }
 
             bool isAccessor = false;
+
             var memberArgResolverResult = argResolverResult as MemberResolveResult;
 
-            if (memberArgResolverResult != null && memberArgResolverResult.Member is IProperty)
+            if (memberArgResolverResult != null)
             {
-                var prop = (IProperty)memberArgResolverResult.Member;
-                var isIgnore = this.Emitter.Validator.IsExternalType(memberArgResolverResult.Member.DeclaringTypeDefinition);
-                var inlineAttr = prop.Getter != null ? this.Emitter.GetAttribute(prop.Getter.Attributes, Translator.Bridge_ASSEMBLY + ".TemplateAttribute") : null;
-                var ignoreAccessor = prop.Getter != null && this.Emitter.Validator.IsExternalType(prop.Getter);
-                var isAccessorsIndexer = this.Emitter.Validator.IsAccessorsIndexer(memberArgResolverResult.Member);
+                var prop = memberArgResolverResult.Member as IProperty;
 
-                isAccessor = true;
-
-                if (inlineAttr == null && (isIgnore || ignoreAccessor) && !isAccessorsIndexer)
+                if (prop != null)
                 {
-                    isAccessor = false;
+                    var isIgnore = memberArgResolverResult.Member.DeclaringTypeDefinition != null && this.Emitter.Validator.IsExternalType(memberArgResolverResult.Member.DeclaringTypeDefinition);
+                    var inlineAttr = prop.Getter != null ? this.Emitter.GetAttribute(prop.Getter.Attributes, Translator.Bridge_ASSEMBLY + ".TemplateAttribute") : null;
+                    var ignoreAccessor = prop.Getter != null && this.Emitter.Validator.IsExternalType(prop.Getter);
+                    var isAccessorsIndexer = this.Emitter.Validator.IsAccessorsIndexer(memberArgResolverResult.Member);
+
+                    isAccessor = true;
+
+                    if (inlineAttr == null && (isIgnore || ignoreAccessor) && !isAccessorsIndexer)
+                    {
+                        isAccessor = false;
+                    }
                 }
             }
             else if (argResolverResult is ArrayAccessResolveResult)
