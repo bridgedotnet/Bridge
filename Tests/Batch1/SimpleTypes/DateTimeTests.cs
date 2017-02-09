@@ -289,16 +289,21 @@ namespace Bridge.ClientTest.SimpleTypes
         public void GetTimeWorks()
         {
             var dt = new DateTime(DateTime.Utc(1000, 1, 2));
-            //Script.Write("dt.setFullYear(1);");
-            Assert.AreEqual((31525459200000L).ToString(), dt.GetTime().ToString());
+            Assert.AreEqual((-30610137600000).ToString(), dt.GetTime().ToString());
         }
 
         [Test]
         public void ValueOfWorks()
         {
             var dt = new DateTime(DateTime.Utc(1000, 1, 2));
-            //Script.Write("dt.setFullYear(1);");
-            Assert.AreEqual((31525459200000L).ToString(), ((long)dt.ValueOf()).ToString());
+            Assert.AreEqual((-30610137600000).ToString(), dt.ValueOf().ToString());
+        }
+
+        [Test]
+        public void TicksWorks()
+        {
+            var dt = new DateTime(1000, 1, 2);
+            Assert.AreEqual(315254592000000000.ToString(), dt.Ticks.ToString());
         }
 
         // Not C# API

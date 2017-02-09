@@ -115,10 +115,8 @@ namespace System
 
         public extern int GetSeconds();
 
-        [Template("System.Int64(({this}).valueOf() + System.DateTime.offset)")]
         public override extern object ValueOf();
 
-        [Template("System.Int64(({this}).getTime() + System.DateTime.offset)")]
         public extern long GetTime();
 
         public extern int GetTimezoneOffset();

@@ -27873,13 +27873,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         getTimeWorks: function () {
             var dt = System.DateTime.fromTicks(System.DateTime.utc(1000, 1, 2));
-            //Script.Write("dt.setFullYear(1);");
-            Bridge.Test.NUnit.Assert.areEqual((System.Int64([399247360,7340])).toString(), System.Int64((dt).getTime() + System.DateTime.offset).toString());
+            Bridge.Test.NUnit.Assert.areEqual((System.Int64([94318592,-7127])).toString(), dt.getTime().toString());
         },
         valueOfWorks: function () {
             var dt = System.DateTime.fromTicks(System.DateTime.utc(1000, 1, 2));
-            //Script.Write("dt.setFullYear(1);");
-            Bridge.Test.NUnit.Assert.areEqual((System.Int64([399247360,7340])).toString(), System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Int64((dt).valueOf() + System.DateTime.offset)), System.Int64)).toString());
+            Bridge.Test.NUnit.Assert.areEqual((System.Int64([94318592,-7127])).toString(), dt.valueOf().toString());
+        },
+        ticksWorks: function () {
+            var dt = new Date(1000, 1 - 1, 2);
+            Bridge.Test.NUnit.Assert.areEqual(System.Int64([-1845985280,73400929]).toString(), System.DateTime.getTicks(dt).toString());
         },
         getUTCFullYearWorks: function () {
             var dt = System.DateTime.fromTicks(System.DateTime.utc(2011, 7, 12, 13, 42, 56, 345));

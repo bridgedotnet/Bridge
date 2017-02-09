@@ -7553,6 +7553,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
         statics: {
             offset: 62135596800000,
             timezoneOffset: null,
+
             getTimezoneOffset: function () {
                 System.DateTime.timezoneOffset = (new Date()).getTimezoneOffset() * 60 * 1000;
 
@@ -7561,6 +7562,16 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 };
 
                 return System.DateTime.timezoneOffset;
+            },
+
+            getOffset: function () {
+                System.DateTime.offset = System.DateTime.offset - System.DateTime.getTimezoneOffset();
+
+                System.DateTime.getOffset = function () {
+                    return System.DateTime.offset;
+                };
+
+                return System.DateTime.offset;
             },
 
             $is: function (instance) {
@@ -7572,7 +7583,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             },
 
             getDefaultValue: function () {
-                return new Date(-System.DateTime.offset + System.DateTime.getTimezoneOffset());
+                return new Date(-System.DateTime.getOffset());
             },
 
             getMaxValue: function () {
@@ -7586,16 +7597,16 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                    value = value / 10000;
                }
 
-               return new Date(value - System.DateTime.offset);
+               return new Date(value - System.DateTime.getOffset());
             },
 
             getTicks: function(dt) {
-               return System.Int64(dt.getTime()).add(System.DateTime.offset).mul(10000);
+               return System.Int64(dt.getTime()).add(System.DateTime.getOffset()).mul(10000);
             },
 
             utc: function(year, month, day, hours, minutes, seconds, ms) {
                 var utd = Date.UTC(year, month - 1, day || 0, hours || 0, minutes || 0, seconds || 0, ms || 0);
-                return System.Int64(utd).add(System.DateTime.offset).mul(10000);
+                return System.Int64(utd).add(System.DateTime.getOffset()).mul(10000);
             },
 
             utcNow: function () {
