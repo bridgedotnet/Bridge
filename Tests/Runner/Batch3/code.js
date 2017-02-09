@@ -11701,83 +11701,7 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.NUnit.Assert.areEqual(null, System.Nullable.getUnderlyingType(System.Int32));
                 Bridge.Test.NUnit.Assert.areEqual(null, System.Nullable.getUnderlyingType(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2049.G$1(System.Int32)));
                 Bridge.Test.NUnit.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2049.f1);
-            },
-            compare_Equals_TestData: function () {
-                return new (Bridge.GeneratorEnumerable$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function ()  {
-                    var $step = 0,
-                        $jumpFromFinally,
-                        $returnValue,
-                        $async_e;
-
-                    var $enumerator = new (Bridge.GeneratorEnumerator$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function () {
-                        try {
-                            for (;;) {
-                                switch ($step) {
-                                    case 0: {
-                                        $enumerator.current = System.Array.init([null, null, Bridge.box(0, System.Int32)], System.Object);
-                                            $step = 1;
-                                            return true;
-                                    }
-                                    case 1: {
-                                        $enumerator.current = System.Array.init([Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), null, Bridge.box(1, System.Int32)], System.Object);
-                                            $step = 2;
-                                            return true;
-                                    }
-                                    case 2: {
-                                        $enumerator.current = System.Array.init([null, Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(-1, System.Int32)], System.Object);
-                                            $step = 3;
-                                            return true;
-                                    }
-                                    case 3: {
-                                        $enumerator.current = System.Array.init([Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(0, System.Int32)], System.Object);
-                                            $step = 4;
-                                            return true;
-                                    }
-                                    case 4: {
-                                        $enumerator.current = System.Array.init([Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(5, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(1, System.Int32)], System.Object);
-                                            $step = 5;
-                                            return true;
-                                    }
-                                    case 5: {
-                                        $enumerator.current = System.Array.init([Bridge.box(5, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(-1, System.Int32)], System.Object);
-                                            $step = 6;
-                                            return true;
-                                    }
-                                    case 6: {
-
-                                    }
-                                    default: {
-                                        return false;
-                                    }
-                                }
-                            }
-                        } catch($async_e1) {
-                            $async_e = System.Exception.create($async_e1);
-                            throw $async_e;
-                        }
-                    }));
-                    return $enumerator;
-                }));
-            },
-            testNullableCompareEquals: function () {
-                var $t;
-                $t = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2049.compare_Equals_TestData(), System.Array.type(System.Object));
-                try {
-                    while ($t.moveNext()) {
-                        var data = $t.getCurrent();
-                        var n1 = Bridge.cast(Bridge.unbox(data[0]), System.Int32, true);
-                        var n2 = Bridge.cast(Bridge.unbox(data[1]), System.Int32, true);
-                        var expected = System.Nullable.getValue(Bridge.cast(Bridge.unbox(data[2]), System.Int32));
-
-                        Bridge.Test.NUnit.Assert.areEqual(expected === 0, System.Nullable.equals(n1, n2));
-                        Bridge.Test.NUnit.Assert.areEqual(expected === 0, System.Nullable.equals(n1, Bridge.box(n2, System.Int32, $box_.System.Nullable$1.toString), function ($t, other) { return System.Int32.equals($t, other); }));
-                        Bridge.Test.NUnit.Assert.areEqual(expected, System.Nullable.compare(n1, n2));
-                    }
-                }finally {
-                    if (Bridge.is($t, System.IDisposable)) {
-                        $t.System$IDisposable$dispose();
-                    }
-                }}
+            }
         }
     });
 
@@ -11842,16 +11766,16 @@ Bridge.$N1391Result =                 r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2050", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2050, {
-        f1: function (_o37) {
-            _o37.add(1);
-            _o37.add(2);
-            _o37.add(3);
-            return _o37;
+        f1: function (_o36) {
+            _o36.add(1);
+            _o36.add(2);
+            _o36.add(3);
+            return _o36;
         },
-        f2: function (_o38) {
-            _o38.add(1, 2);
-            _o38.add(2, 3);
-            return _o38;
+        f2: function (_o37) {
+            _o37.add(1, 2);
+            _o37.add(2, 3);
+            return _o37;
         }
     });
 
@@ -12297,11 +12221,11 @@ Bridge.$N1391Result =                 r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1347", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1347, {
-        f1: function (_o36) {
-            _o36.add(1);
-            _o36.add(2);
-            _o36.add(3);
-            return _o36;
+        f1: function (_o38) {
+            _o38.add(1);
+            _o38.add(2);
+            _o38.add(3);
+            return _o38;
         },
         f2: function (v) {
             return Bridge.Reflection.getTypeFullName(Bridge.getType(v));
@@ -15027,6 +14951,87 @@ Bridge.$N1391Result =                 r;
                 setIndoor: false
             } ));
             return _o42;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2359", {
+        statics: {
+            compare_Equals_TestData: function () {
+                return new (Bridge.GeneratorEnumerable$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function ()  {
+                    var $step = 0,
+                        $jumpFromFinally,
+                        $returnValue,
+                        $async_e;
+
+                    var $enumerator = new (Bridge.GeneratorEnumerator$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function () {
+                        try {
+                            for (;;) {
+                                switch ($step) {
+                                    case 0: {
+                                        $enumerator.current = System.Array.init([null, null, Bridge.box(0, System.Int32)], System.Object);
+                                            $step = 1;
+                                            return true;
+                                    }
+                                    case 1: {
+                                        $enumerator.current = System.Array.init([Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), null, Bridge.box(1, System.Int32)], System.Object);
+                                            $step = 2;
+                                            return true;
+                                    }
+                                    case 2: {
+                                        $enumerator.current = System.Array.init([null, Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(-1, System.Int32)], System.Object);
+                                            $step = 3;
+                                            return true;
+                                    }
+                                    case 3: {
+                                        $enumerator.current = System.Array.init([Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(0, System.Int32)], System.Object);
+                                            $step = 4;
+                                            return true;
+                                    }
+                                    case 4: {
+                                        $enumerator.current = System.Array.init([Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(5, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(1, System.Int32)], System.Object);
+                                            $step = 5;
+                                            return true;
+                                    }
+                                    case 5: {
+                                        $enumerator.current = System.Array.init([Bridge.box(5, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(-1, System.Int32)], System.Object);
+                                            $step = 6;
+                                            return true;
+                                    }
+                                    case 6: {
+
+                                    }
+                                    default: {
+                                        return false;
+                                    }
+                                }
+                            }
+                        } catch($async_e1) {
+                            $async_e = System.Exception.create($async_e1);
+                            throw $async_e;
+                        }
+                    }));
+                    return $enumerator;
+                }));
+            },
+            testNullableCompareEquals: function () {
+                var $t;
+                $t = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2359.compare_Equals_TestData(), System.Array.type(System.Object));
+                try {
+                    while ($t.moveNext()) {
+                        var data = $t.getCurrent();
+                        var n1 = Bridge.cast(Bridge.unbox(data[0]), System.Int32, true);
+                        var n2 = Bridge.cast(Bridge.unbox(data[1]), System.Int32, true);
+                        var expected = System.Nullable.getValue(Bridge.cast(Bridge.unbox(data[2]), System.Int32));
+
+                        Bridge.Test.NUnit.Assert.areEqual(expected === 0, System.Nullable.equals(n1, n2));
+                        Bridge.Test.NUnit.Assert.areEqual(expected === 0, System.Nullable.equals(n1, Bridge.box(n2, System.Int32, $box_.System.Nullable$1.toString), function ($t, other) { return System.Int32.equals($t, other); }));
+                        Bridge.Test.NUnit.Assert.areEqual(expected, System.Nullable.compare(n1, n2));
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
         }
     });
 
