@@ -5,7 +5,7 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLDListElement")]
-    public class HTMLDListElement : HTMLElement<HTMLDListElement>
+    public sealed class HTMLDListElement : HTMLElement<HTMLDListElement>
     {
         [Template("document.createElement('dl')")]
         public HTMLDListElement()

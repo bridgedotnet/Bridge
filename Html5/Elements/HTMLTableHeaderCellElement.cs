@@ -7,7 +7,7 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLTableHeaderCellElement")]
-    public class HTMLTableHeaderCellElement : HTMLTableCellElement<HTMLTableHeaderCellElement>
+    public sealed class HTMLTableHeaderCellElement : HTMLTableCellElement<HTMLTableHeaderCellElement>
     {
         [Template("document.createElement('th')")]
         public HTMLTableHeaderCellElement()

@@ -5,7 +5,7 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLLabelElement")]
-    public class HTMLLabelElement : HTMLElement<HTMLLabelElement>
+    public sealed class HTMLLabelElement : HTMLElement<HTMLLabelElement>
     {
         [Template("document.createElement('label')")]
         public HTMLLabelElement()

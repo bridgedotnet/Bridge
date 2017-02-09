@@ -6,7 +6,7 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLTrackElement")]
-    public class HTMLTrackElement : HTMLElement<HTMLTrackElement>
+    public sealed class HTMLTrackElement : HTMLElement<HTMLTrackElement>
     {
         [Template("document.createElement('track')")]
         public HTMLTrackElement()

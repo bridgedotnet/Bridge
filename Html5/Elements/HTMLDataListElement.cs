@@ -5,7 +5,7 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLDataListElement")]
-    public class HTMLDataListElement : HTMLElement<HTMLDataListElement>
+    public sealed class HTMLDataListElement : HTMLElement<HTMLDataListElement>
     {
         [Template("document.createElement('datalist')")]
         public HTMLDataListElement()

@@ -5,7 +5,7 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLImageElement")]
-    public class HTMLImageElement : HTMLElement<HTMLImageElement>
+    public sealed class HTMLImageElement : HTMLElement<HTMLImageElement>
     {
         [Template("new Image()")]
         public HTMLImageElement()

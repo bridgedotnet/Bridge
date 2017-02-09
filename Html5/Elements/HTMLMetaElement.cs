@@ -5,7 +5,7 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLMetaElement")]
-    public class HTMLMetaElement : HTMLElement<HTMLMetaElement>
+    public sealed class HTMLMetaElement : HTMLElement<HTMLMetaElement>
     {
         [Template("document.createElement('meta')")]
         public HTMLMetaElement()

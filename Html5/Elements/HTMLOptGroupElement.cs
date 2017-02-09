@@ -5,7 +5,7 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLOptGroupElement")]
-    public class HTMLOptGroupElement : HTMLElement<HTMLOptGroupElement>
+    public sealed class HTMLOptGroupElement : HTMLElement<HTMLOptGroupElement>
     {
         [Template("document.createElement('optgroup')")]
         public HTMLOptGroupElement()

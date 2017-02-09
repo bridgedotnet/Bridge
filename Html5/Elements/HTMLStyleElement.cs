@@ -6,7 +6,7 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLStyleElement")]
-    public class HTMLStyleElement : HTMLElement<HTMLStyleElement>
+    public sealed class HTMLStyleElement : HTMLElement<HTMLStyleElement>
     {
         [Template("document.createElement('style')")]
         public HTMLStyleElement()

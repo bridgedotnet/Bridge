@@ -5,7 +5,7 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLKeygenElement")]
-    public class HTMLKeygenElement : HTMLElement<HTMLKeygenElement>
+    public sealed class HTMLKeygenElement : HTMLElement<HTMLKeygenElement>
     {
         [Template("document.createElement('keygen')")]
         public HTMLKeygenElement()
@@ -72,18 +72,18 @@ namespace Bridge.Html5
         /// <summary>
         /// Removes focus from input; keystrokes will subsequently go nowhere.
         /// </summary>
-        public new virtual extern void Blur();
+        public new extern void Blur();
 
         /// <summary>
         /// Always returns true because keygen objects are never candidates for constraint validation.
         /// </summary>
         /// <returns></returns>
-        public virtual extern bool CheckValidity();
+        public extern bool CheckValidity();
 
         /// <summary>
         /// Sets a custom validity message for the element. If this message is not the empty string, then the element is suffering from a custom validity error, and does not validate.
         /// </summary>
         /// <param name="error"></param>
-        public virtual extern void SetCustomValidity(string error);
+        public extern void SetCustomValidity(string error);
     }
 }

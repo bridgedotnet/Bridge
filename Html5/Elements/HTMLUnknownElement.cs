@@ -6,7 +6,7 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLUnknownElement")]
-    public class HTMLUnknownElement : HTMLElement<HTMLUnknownElement>
+    public sealed class HTMLUnknownElement : HTMLElement<HTMLUnknownElement>
     {
         [Template("document.createElement({0})")]
         public HTMLUnknownElement(string tagName)

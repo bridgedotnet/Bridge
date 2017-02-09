@@ -5,7 +5,7 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLMeterElement")]
-    public class HTMLMeterElement : HTMLElement<HTMLMeterElement>
+    public sealed class HTMLMeterElement : HTMLElement<HTMLMeterElement>
     {
         [Template("document.createElement('meter')")]
         public HTMLMeterElement()

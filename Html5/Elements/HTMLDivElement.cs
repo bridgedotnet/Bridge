@@ -5,7 +5,7 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLDivElement")]
-    public class HTMLDivElement : HTMLElement<HTMLDivElement>
+    public sealed class HTMLDivElement : HTMLElement<HTMLDivElement>
     {
         [Template("document.createElement('div')")]
         public HTMLDivElement()

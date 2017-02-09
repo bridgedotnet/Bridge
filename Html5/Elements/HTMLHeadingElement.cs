@@ -7,7 +7,7 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLHeadingElement")]
-    public class HTMLHeadingElement : HTMLElement<HTMLHeadingElement>
+    public sealed class HTMLHeadingElement : HTMLElement<HTMLHeadingElement>
     {
         [Template("document.createElement('h1')")]
         public HTMLHeadingElement()
