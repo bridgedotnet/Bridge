@@ -15,16 +15,62 @@
         inherits: [System.IComparable, System.IFormattable],
 
         statics: {
+            offset: 62135596800000,
+            timezoneOffset: null,
+
+            getTimezoneOffset: function () {
+                System.DateTime.timezoneOffset = (new Date()).getTimezoneOffset() * 60 * 1000;
+
+                System.DateTime.getTimezoneOffset = function() {
+                    return System.DateTime.timezoneOffset;
+                };
+
+                return System.DateTime.timezoneOffset;
+            },
+
+            getOffset: function () {
+                System.DateTime.offset = System.DateTime.offset - System.DateTime.getTimezoneOffset();
+
+                System.DateTime.getOffset = function () {
+                    return System.DateTime.offset;
+                };
+
+                return System.DateTime.offset;
+            },
+
             $is: function (instance) {
                 return Bridge.isDate(instance);
             },
 
             createInstance: function () {
-                return new Date(0);
+                return System.DateTime.getDefaultValue();
             },
 
             getDefaultValue: function () {
-                return new Date(-864e13);
+                return new Date(-System.DateTime.getOffset());
+            },
+
+            getMaxValue: function () {
+                return new Date(253402289999000 + System.DateTime.getTimezoneOffset());
+            },
+
+            fromTicks: function (value) {
+               if (System.Int64.is64Bit(value)) {
+                   value = value.div(10000).toNumber();
+               } else {
+                   value = value / 10000;
+               }
+
+               return new Date(value - System.DateTime.getOffset());
+            },
+
+            getTicks: function(dt) {
+               return System.Int64(dt.getTime()).add(System.DateTime.getOffset()).mul(10000);
+            },
+
+            utc: function(year, month, day, hours, minutes, seconds, ms) {
+                var utd = Date.UTC(year, month - 1, day || 0, hours || 0, minutes || 0, seconds || 0, ms || 0);
+                return System.Int64(utd).add(System.DateTime.getOffset()).mul(10000);
             },
 
             utcNow: function () {
@@ -748,7 +794,7 @@
                 result.v = this.parse(value, provider, utc, true);
 
                 if (result.v == null) {
-                    result.v = new Date(-864e13);
+                    result.v = System.DateTime.getDefaultValue();
 
                     return false;
                 }
@@ -760,7 +806,7 @@
                 result.v = this.parseExact(value, format, provider, utc, true);
 
                 if (result.v == null) {
-                    result.v = new Date(-864e13);
+                    result.v = System.DateTime.getDefaultValue();
 
                     return false;
                 }
@@ -777,24 +823,40 @@
                 return temp.getTimezoneOffset() !== dt.getTimezoneOffset();
             },
 
-            toUTC: function (date) {
-                return new Date(date.getUTCFullYear(),
-                    date.getUTCMonth(),
-                    date.getUTCDate(),
-                    date.getUTCHours(),
-                    date.getUTCMinutes(),
-                    date.getUTCSeconds(),
-                    date.getUTCMilliseconds());
-            },
+             toUTC: function (date) {
+                var year = date.getUTCFullYear(),
+                    dt = new Date(year,
+                        date.getUTCMonth(),
+                        date.getUTCDate(),
+                        date.getUTCHours(),
+                        date.getUTCMinutes(),
+                        date.getUTCSeconds(),
+                        date.getUTCMilliseconds()
+                    );
+
+                if (year < 100) {
+                    dt.setFullYear(year);
+                }
+
+                return dt;
+             },
 
             toLocal: function (date) {
-                return new Date(Date.UTC(date.getFullYear(),
-                    date.getMonth(),
-                    date.getDate(),
-                    date.getHours(),
-                    date.getMinutes(),
-                    date.getSeconds(),
-                    date.getMilliseconds()));
+                var year = date.getFullYear(),
+                    dt = new Date(Date.UTC(year,
+                        date.getMonth(),
+                        date.getDate(),
+                        date.getHours(),
+                        date.getMinutes(),
+                        date.getSeconds(),
+                        date.getMilliseconds())
+                    );
+
+                if (year < 100) {
+                    dt.setFullYear(year);
+                }
+
+                return dt;
             },
 
             dateAddSubTimespan: function (d, t, direction) {

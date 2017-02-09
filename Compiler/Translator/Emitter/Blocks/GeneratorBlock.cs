@@ -349,7 +349,7 @@ namespace Bridge.Translator
 
                 if(this.ReturnType.IsParameterized)
                 {
-                    this.Write("(Bridge.GeneratorEnumerable$1(" + this.ReturnType.TypeArguments[0].FullName + "))");
+                    this.Write("(Bridge.GeneratorEnumerable$1(" + BridgeTypes.ToJsName(this.ReturnType.TypeArguments[0], this.Emitter) + "))");
                 }
                 else
                 {
@@ -416,7 +416,7 @@ namespace Bridge.Translator
 
             if(this.ReturnType.IsParameterized)
             {
-                this.Write("(" + JS.Types.Bridge.Generator.NAME_GENERIC +"(" + this.ReturnType.TypeArguments[0].FullName + "))");
+                this.Write("(" + JS.Types.Bridge.Generator.NAME_GENERIC +"(" + BridgeTypes.ToJsName(this.ReturnType.TypeArguments[0], this.Emitter) + "))");
             }
             else
             {

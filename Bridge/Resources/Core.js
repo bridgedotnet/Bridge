@@ -302,7 +302,7 @@
             } else if (type === Boolean || type === System.Boolean) {
                 return false;
             } else if (type === Date || type === System.DateTime) {
-                return new Date(0);
+                return System.DateTime.getDefaultValue();
             } else if (type === Number) {
                 return 0;
             } else if (type === String || type === System.String) {
@@ -558,7 +558,7 @@
             } else if (type === Boolean || type === System.Boolean) {
                 return false;
             } else if (type === Date || type === System.DateTime) {
-                return new Date(-864e13);
+                return System.DateTime.getDefaultValue();
             } else if (type === Number) {
                 return 0;
             }
