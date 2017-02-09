@@ -14862,8 +14862,12 @@ Bridge.$N1391Result =                 r;
         statics: {
             testOperatorOnAnonymousType: function () {
                 var anonymous = new $asm.$AnonymousType$17(false);
+
                 Bridge.Test.NUnit.Assert.true(!anonymous.isTrue);
                 Bridge.Test.NUnit.Assert.true(anonymous.isTrue === false);
+
+                var b = anonymous.isTrue === false; // Works
+                Bridge.Test.NUnit.Assert.true(b);
             }
         }
     });

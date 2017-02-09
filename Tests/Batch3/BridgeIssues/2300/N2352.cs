@@ -11,8 +11,12 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public static void TestOperatorOnAnonymousType()
         {
             var anonymous = new { IsTrue = false };
+
             Assert.True(!anonymous.IsTrue);
             Assert.True(anonymous.IsTrue == false);
+
+            bool b = anonymous.IsTrue == false; // Works
+            Assert.True(b);
         }
     }
 }
