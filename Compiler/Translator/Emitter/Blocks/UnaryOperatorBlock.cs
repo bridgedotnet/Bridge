@@ -152,7 +152,7 @@ namespace Bridge.Translator
             if (memberArgResolverResult != null && memberArgResolverResult.Member is IProperty)
             {
                 var prop = (IProperty)memberArgResolverResult.Member;
-                var isIgnore = this.Emitter.Validator.IsExternalType(memberArgResolverResult.Member.DeclaringTypeDefinition);
+                var isIgnore = memberArgResolverResult.Member.DeclaringTypeDefinition != null && this.Emitter.Validator.IsExternalType(memberArgResolverResult.Member.DeclaringTypeDefinition);
                 var inlineAttr = prop.Getter != null ? this.Emitter.GetAttribute(prop.Getter.Attributes, Translator.Bridge_ASSEMBLY + ".TemplateAttribute") : null;
                 var ignoreAccessor = prop.Getter != null && this.Emitter.Validator.IsExternalType(prop.Getter);
                 var isAccessorsIndexer = this.Emitter.Validator.IsAccessorsIndexer(memberArgResolverResult.Member);
