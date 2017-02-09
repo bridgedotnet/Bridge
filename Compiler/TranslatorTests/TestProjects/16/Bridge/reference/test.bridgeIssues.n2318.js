@@ -7,7 +7,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
             var box1 = Test.BridgeIssues.N2318.N2318.JustEnum.Value;
             var box2 = true;
-            var box3 = new Date();
+            var box3 = System.DateTime.getDefaultValue();
             var box4 = 97;
             var box5 = 0;
             var box6 = System.Double.min;

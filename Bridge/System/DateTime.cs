@@ -6,21 +6,21 @@ namespace System
     [External]
     public struct DateTime : IComparable, IComparable<DateTime>, IEquatable<DateTime>, IFormattable
     {
-        [Template("new Date(864e13)")]
+        [Template("System.DateTime.getMaxValue()")]
         public static readonly DateTime MaxValue;
 
-        [Template("new Date(-864e13)")]
+        [Template("System.DateTime.getDefaultValue()")]
         public static readonly DateTime MinValue;
+
+        [Template("System.DateTime.getDefaultValue()")]
+        private extern DateTime(DummyTypeUsedToAddAttributeToDefaultValueTypeConstructor _);
 
         /// <summary>
         /// Initializes a new instance of the DateTime structure to a specified number of ticks.
         /// </summary>
         /// <param name="value">A date and time expressed in the number of 100-nanosecond intervals that have elapsed since January 1, 0001 at 00:00:00.000 in the Gregorian calendar.</param>
-        [Template("new Date({value}.toNumber()/10000)")]
+        [Template("System.DateTime.fromTicks({value})")]
         public extern DateTime(long value);
-
-        [Template("new Date()")]
-        private extern DateTime(DummyTypeUsedToAddAttributeToDefaultValueTypeConstructor _);
 
         /// <summary>
         /// String value representing a date. The string should be in a format recognized by the Date.parse() method (IETF-compliant RFC 2822 timestamps and also a version of ISO8601).
@@ -47,22 +47,22 @@ namespace System
         [Template("new Date({year}, {month} - 1, {day}, {hours}, {minutes}, {seconds}, {milliseconds})")]
         public extern DateTime(int year, int month, int day, int hours, int minutes, int seconds, int milliseconds);
 
-        [Template("System.Int64(Date.UTC({year}, {month} - 1, {day}, {hours}, {minutes}, {seconds}, {ms})).mul(10000)")]
+        [Template("System.DateTime.utc({year}, {month}, {day}, {hours}, {minutes}, {seconds}, {ms})")]
         public static extern long Utc(int year, int month, int day, int hours, int minutes, int seconds, int ms);
 
-        [Template("System.Int64(Date.UTC({year}, {month} - 1, {day}, {hours}, {minutes}, {seconds})).mul(10000)")]
+        [Template("System.DateTime.utc({year}, {month}, {day}, {hours}, {minutes}, {seconds})")]
         public static extern long Utc(int year, int month, int day, int hours, int minutes, int seconds);
 
-        [Template("System.Int64(Date.UTC({year}, {month} - 1, {day}, {hours}, {minutes})).mul(10000)")]
+        [Template("System.DateTime.utc({year}, {month}, {day}, {hours}, {minutes})")]
         public static extern long Utc(int year, int month, int day, int hours, int minutes);
 
-        [Template("System.Int64(Date.UTC({year}, {month} - 1, {day}, {hours})).mul(10000)")]
+        [Template("System.DateTime.utc({year}, {month}, {day}, {hours})")]
         public static extern long Utc(int year, int month, int day, int hours);
 
-        [Template("System.Int64(Date.UTC({year}, {month} - 1, {day})).mul(10000)")]
+        [Template("System.DateTime.utc({year}, {month}, {day})")]
         public static extern long Utc(int year, int month, int day);
 
-        [Template("System.Int64(Date.UTC({year}, {month} - 1)).mul(10000)")]
+        [Template("System.DateTime.utc({year}, {month})")]
         public static extern long Utc(int year, int month);
 
         public static extern DateTime Now
@@ -115,7 +115,8 @@ namespace System
 
         public extern int GetSeconds();
 
-        [Template("System.Int64(({this}).getTime())")]
+        public override extern object ValueOf();
+
         public extern long GetTime();
 
         public extern int GetTimezoneOffset();
@@ -399,7 +400,7 @@ namespace System
 
         public extern long Ticks
         {
-            [Template("System.Int64(({this}).getTime()).mul(10000)")]
+            [Template("System.DateTime.getTicks({this})")]
             get;
         }
     }

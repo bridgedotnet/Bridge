@@ -61,7 +61,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         public void MillisecondSinceEpochConstructorWorks()
         {
             var dt = new DateTime(1440L * 60 * 500 * 1000);
-            Assert.AreEqual(1970, dt.AddDays(1).Year);
+            Assert.AreEqual(1, dt.AddDays(1).Year);
         }
 
         [Test]
@@ -279,15 +279,15 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         [Test]
         public void GetTimeWorks()
         {
-            var dt = new DateTime(DateTime.Utc(1970, 1, 2));
-            Assert.AreEqual(1440L * 60 * 1000, dt.GetTime());
+            var dt = new DateTime(DateTime.Utc(1000, 1, 2));
+            Assert.AreEqual((-30610137600000).ToString(), dt.GetTime().ToString());
         }
 
         [Test]
         public void ValueOfWorks()
         {
-            var dt = new DateTime(DateTime.Utc(1970, 1, 2));
-            Assert.AreEqual(1440 * 60 * 1000, dt.ValueOf());
+            var dt = new DateTime(DateTime.Utc(1000, 1, 2));
+            Assert.AreEqual((-30610137600000).ToString(), dt.ValueOf().ToString());
         }
 
         // Not C# API

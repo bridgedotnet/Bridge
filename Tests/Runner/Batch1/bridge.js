@@ -317,7 +317,7 @@
             } else if (type === Boolean || type === System.Boolean) {
                 return false;
             } else if (type === Date || type === System.DateTime) {
-                return new Date(0);
+                return System.DateTime.getDefaultValue();
             } else if (type === Number) {
                 return 0;
             } else if (type === String || type === System.String) {
@@ -573,7 +573,7 @@
             } else if (type === Boolean || type === System.Boolean) {
                 return false;
             } else if (type === Date || type === System.DateTime) {
-                return new Date(-864e13);
+                return System.DateTime.getDefaultValue();
             } else if (type === Number) {
                 return 0;
             }
@@ -7551,16 +7551,62 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
         inherits: [System.IComparable, System.IFormattable],
 
         statics: {
+            offset: 62135596800000,
+            timezoneOffset: null,
+
+            getTimezoneOffset: function () {
+                System.DateTime.timezoneOffset = (new Date()).getTimezoneOffset() * 60 * 1000;
+
+                System.DateTime.getTimezoneOffset = function() {
+                    return System.DateTime.timezoneOffset;
+                };
+
+                return System.DateTime.timezoneOffset;
+            },
+
+            getOffset: function () {
+                System.DateTime.offset = System.DateTime.offset - System.DateTime.getTimezoneOffset();
+
+                System.DateTime.getOffset = function () {
+                    return System.DateTime.offset;
+                };
+
+                return System.DateTime.offset;
+            },
+
             $is: function (instance) {
                 return Bridge.isDate(instance);
             },
 
             createInstance: function () {
-                return new Date(0);
+                return System.DateTime.getDefaultValue();
             },
 
             getDefaultValue: function () {
-                return new Date(-864e13);
+                return new Date(-System.DateTime.getOffset());
+            },
+
+            getMaxValue: function () {
+                return new Date(253402289999000 + System.DateTime.getTimezoneOffset());
+            },
+
+            fromTicks: function (value) {
+               if (System.Int64.is64Bit(value)) {
+                   value = value.div(10000).toNumber();
+               } else {
+                   value = value / 10000;
+               }
+
+               return new Date(value - System.DateTime.getOffset());
+            },
+
+            getTicks: function(dt) {
+               return System.Int64(dt.getTime()).add(System.DateTime.getOffset()).mul(10000);
+            },
+
+            utc: function(year, month, day, hours, minutes, seconds, ms) {
+                var utd = Date.UTC(year, month - 1, day || 0, hours || 0, minutes || 0, seconds || 0, ms || 0);
+                return System.Int64(utd).add(System.DateTime.getOffset()).mul(10000);
             },
 
             utcNow: function () {
@@ -8284,7 +8330,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 result.v = this.parse(value, provider, utc, true);
 
                 if (result.v == null) {
-                    result.v = new Date(-864e13);
+                    result.v = System.DateTime.getDefaultValue();
 
                     return false;
                 }
@@ -8296,7 +8342,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 result.v = this.parseExact(value, format, provider, utc, true);
 
                 if (result.v == null) {
-                    result.v = new Date(-864e13);
+                    result.v = System.DateTime.getDefaultValue();
 
                     return false;
                 }
@@ -8313,24 +8359,40 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 return temp.getTimezoneOffset() !== dt.getTimezoneOffset();
             },
 
-            toUTC: function (date) {
-                return new Date(date.getUTCFullYear(),
-                    date.getUTCMonth(),
-                    date.getUTCDate(),
-                    date.getUTCHours(),
-                    date.getUTCMinutes(),
-                    date.getUTCSeconds(),
-                    date.getUTCMilliseconds());
-            },
+             toUTC: function (date) {
+                var year = date.getUTCFullYear(),
+                    dt = new Date(year,
+                        date.getUTCMonth(),
+                        date.getUTCDate(),
+                        date.getUTCHours(),
+                        date.getUTCMinutes(),
+                        date.getUTCSeconds(),
+                        date.getUTCMilliseconds()
+                    );
+
+                if (year < 100) {
+                    dt.setFullYear(year);
+                }
+
+                return dt;
+             },
 
             toLocal: function (date) {
-                return new Date(Date.UTC(date.getFullYear(),
-                    date.getMonth(),
-                    date.getDate(),
-                    date.getHours(),
-                    date.getMinutes(),
-                    date.getSeconds(),
-                    date.getMilliseconds()));
+                var year = date.getFullYear(),
+                    dt = new Date(Date.UTC(year,
+                        date.getMonth(),
+                        date.getDate(),
+                        date.getHours(),
+                        date.getMinutes(),
+                        date.getSeconds(),
+                        date.getMilliseconds())
+                    );
+
+                if (year < 100) {
+                    dt.setFullYear(year);
+                }
+
+                return dt;
             },
 
             dateAddSubTimespan: function (d, t, direction) {
@@ -17503,6 +17565,10 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         this.parent = parent;
     };
     OrderedEnumerable.prototype = new Enumerable();
+    OrderedEnumerable.prototype.constructor = OrderedEnumerable;
+    Bridge.definei("System.Linq.IOrderedEnumerable$1");
+    OrderedEnumerable.$$inherits = [];
+    Bridge.Class.addExtend(OrderedEnumerable, [System.Collections.IEnumerable, System.Linq.IOrderedEnumerable$1]);
 
     OrderedEnumerable.prototype.createOrderedEnumerable = function (keySelector, comparer, descending) {
         return new OrderedEnumerable(this.source, keySelector, comparer, descending, this);
@@ -17843,8 +17909,9 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         };
     };
 
+    Bridge.definei("System.Linq.ILookup$2");
     Lookup.$$inherits = [];
-    Bridge.Class.addExtend(Lookup, [System.Collections.IEnumerable]);
+    Bridge.Class.addExtend(Lookup, [System.Collections.IEnumerable, System.Linq.ILookup$2]);
 
     var Grouping = function (groupKey, elements) {
         this.key = function () {
@@ -17853,9 +17920,11 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         ArrayEnumerable.call(this, elements);
     };
     Grouping.prototype = new ArrayEnumerable();
+    Bridge.definei("System.Linq.IGrouping$2");
+    Grouping.prototype.constructor = Grouping;
 
     Grouping.$$inherits = [];
-    Bridge.Class.addExtend(Grouping, [System.Collections.IEnumerable]);
+    Bridge.Class.addExtend(Grouping, [System.Collections.IEnumerable, System.Linq.IGrouping$2]);
 
     // module export
     /*if (typeof define === Types.Function && define.amd) { // AMD
@@ -17869,8 +17938,11 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
     Bridge.Linq = {};
     Bridge.Linq.Enumerable = Enumerable;
 
-    System.Linq = {};
+    System.Linq = System.Linq || {};
     System.Linq.Enumerable = Enumerable;
+    System.Linq.Grouping$2 = Grouping;
+    System.Linq.Lookup$2 = Lookup;
+    System.Linq.OrderedEnumerable$1 = OrderedEnumerable;
 })(Bridge.global);
 
     // @source guid.js
@@ -24033,7 +24105,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             }
         },
         ctor: function () {
-            System.Random.$ctor1.call(this, System.Int64.clip32(System.Int64((new Date()).getTime()).mul(10000)));
+            System.Random.$ctor1.call(this, System.Int64.clip32(System.DateTime.getTicks(new Date())));
         },
         $ctor1: function (seed) {
             this.$initialize();
