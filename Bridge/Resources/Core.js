@@ -301,8 +301,10 @@
                 return type.getDefaultValue();
             } else if (type === Boolean || type === System.Boolean) {
                 return false;
-            } else if (type === Date || type === System.DateTime) {
+            } else if (type === System.DateTime) {
                 return System.DateTime.getDefaultValue();
+            } else if (type === Date) {
+                return new Date();
             } else if (type === Number) {
                 return 0;
             } else if (type === String || type === System.String) {
