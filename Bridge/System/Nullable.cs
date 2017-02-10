@@ -40,4 +40,14 @@ namespace System
         [Template("System.Nullable.toString({this})")]
         public override extern string ToString();
     }
+
+    [External]
+    public static class Nullable
+    {
+        public static extern int Compare<T>(Nullable<T> n1, Nullable<T> n2) where T : struct;
+
+        public static extern bool Equals<T>(Nullable<T> n1, Nullable<T> n2) where T : struct;
+
+        public static extern Type GetUnderlyingType(Type nullableType);
+    }
 }

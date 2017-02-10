@@ -302,7 +302,7 @@
             } else if (type === Boolean || type === System.Boolean) {
                 return false;
             } else if (type === Date || type === System.DateTime) {
-                return new Date(0);
+                return System.DateTime.getDefaultValue();
             } else if (type === Number) {
                 return 0;
             } else if (type === String || type === System.String) {
@@ -558,7 +558,7 @@
             } else if (type === Boolean || type === System.Boolean) {
                 return false;
             } else if (type === Date || type === System.DateTime) {
-                return new Date(-864e13);
+                return System.DateTime.getDefaultValue();
             } else if (type === Number) {
                 return 0;
             }
@@ -567,6 +567,13 @@
         },
 
         getTypeAlias: function (obj) {
+            var type = obj.$$name ? obj : Bridge.getType(obj);
+            if (type.$isArray) {
+                var elementName = Bridge.getTypeAlias(type.$elementType);
+
+                return elementName + "$Array" + (type.$rank > 1 ? ("$" + type.$rank) : "");
+            }
+
             var name = obj.$$name || Bridge.getTypeName(obj);
 
             return name.replace(/[\.\(\)\,]/g, "$");

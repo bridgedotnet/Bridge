@@ -7,12 +7,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLVideoElement")]
-    public class HTMLVideoElement : HTMLMediaElement<HTMLVideoElement>
+    public sealed class HTMLVideoElement : HTMLMediaElement<HTMLVideoElement>
     {
         [Template("document.createElement('video')")]
-        public HTMLVideoElement()
-        {
-        }
+        public extern HTMLVideoElement();
 
         /// <summary>
         /// Reflects the height HTML attribute, which specifies the height of the display area, in CSS pixels.

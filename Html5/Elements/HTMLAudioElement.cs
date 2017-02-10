@@ -7,15 +7,13 @@ namespace Bridge.Html5
     [External]
     [Name("HTMLAudioElement")]
     [Constructor("Audio")]
-    public class HTMLAudioElement : HTMLMediaElement<HTMLAudioElement>
+    public sealed class HTMLAudioElement : HTMLMediaElement<HTMLAudioElement>
     {
         /// <summary>
         /// Constructor for audio elements. The preload property of the returned object is set to auto and the src property is set to the argument value. The browser begins asynchronously selecting the resource before returning the object.
         /// </summary>
         [Template("new Audio()")]
-        public HTMLAudioElement()
-        {
-        }
+        public extern HTMLAudioElement();
 
         /// <summary>
         /// Constructor for audio elements. The preload property of the returned object is set to auto and the src property is set to the argument value. The browser begins asynchronously selecting the resource before returning the object.

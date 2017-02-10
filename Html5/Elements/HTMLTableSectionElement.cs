@@ -8,17 +8,13 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLTableSectionElement")]
-    public class HTMLTableSectionElement : HTMLElement<HTMLTableSectionElement>
+    public sealed class HTMLTableSectionElement : HTMLElement<HTMLTableSectionElement>
     {
         [Template("document.createElement('tbody')")]
-        public HTMLTableSectionElement()
-        {
-        }
+        public extern HTMLTableSectionElement();
 
         [Template("document.createElement({0})")]
-        public HTMLTableSectionElement(TableSectionType type)
-        {
-        }
+        public extern HTMLTableSectionElement(TableSectionType type);
 
         /// <summary>
         /// Returns a live HTMLCollection containing the rows in the section. The HTMLCollection is live and is automatically updated when rows are added or removed.
@@ -29,7 +25,7 @@ namespace Bridge.Html5
         /// Removes the cell at the given position in the section. If the given position is greater (or equal as it starts at zero) than the amount of rows in the section, or is smaller than 0, it raises a DOMException with the IndexSizeError value.
         /// </summary>
         /// <param name="index">The position of the row to delete</param>
-        public virtual extern void DeleteRow(int index);
+        public extern void DeleteRow(int index);
 
         /// <summary>
         /// Inserts a new row just before the given position in the section.
@@ -38,7 +34,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="index">The possition of a new row to insert</param>
         /// <returns>Returns a TableRowElement object that represents a new row added to a table element.</returns>
-        public virtual extern HTMLTableRowElement InsertRow(int index = -1); // update docs
+        public extern HTMLTableRowElement InsertRow(int index = -1); // update docs
     }
 
     /// <summary>

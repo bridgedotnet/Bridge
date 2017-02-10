@@ -5,12 +5,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLIFrameElement")]
-    public class HTMLIFrameElement : HTMLElement<HTMLIFrameElement>
+    public sealed class HTMLIFrameElement : HTMLElement<HTMLIFrameElement>
     {
         [Template("document.createElement('iframe')")]
-        public HTMLIFrameElement()
-        {
-        }
+        public extern HTMLIFrameElement();
 
         /// <summary>
         /// Indicates whether or not the inline frame is willing to be placed into full screen mode. See Using full-screen mode for details.
