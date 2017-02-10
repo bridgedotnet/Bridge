@@ -23,7 +23,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
             Assert.True(d is IFormattable);
 
             var interfaces = typeof(decimal).GetInterfaces();
-            Assert.AreEqual(3, interfaces.Length);
+            Assert.AreEqual(4, interfaces.Length);
             Assert.True(interfaces.Contains(typeof(IComparable<decimal>)));
             Assert.True(interfaces.Contains(typeof(IEquatable<decimal>)));
             Assert.True(interfaces.Contains(typeof(IFormattable)));
