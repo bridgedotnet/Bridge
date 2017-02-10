@@ -491,8 +491,6 @@
         setItem: function (obj, idx, value, T) {
             var name;
 
-            System.Array.checkReadOnly(obj, T);
-
             if (Bridge.isArray(obj)) {
                 obj[idx] = value;
             } else if (Bridge.isFunction(obj.set)) {
