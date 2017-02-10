@@ -136,7 +136,7 @@ namespace Bridge.ClientTest.Batch2.BridgeIssues
             var arr = new[] { "x", "y" };
             var arr2 = arr.Clone();
             Assert.False(arr == arr2);
-            Assert.AreDeepEqual(arr2, arr);
+            Assert.AreEqual(arr2, arr);
         }
 
         [Test]
@@ -227,7 +227,7 @@ namespace Bridge.ClientTest.Batch2.BridgeIssues
         {
             var arr = new[] { 1, 3, 4, 1, 3, 2 };
             arr.Reverse();
-            Assert.AreDeepEqual(new[] { 2, 3, 1, 4, 3, 1 }, arr);
+            Assert.AreEqual(new[] { 2, 3, 1, 4, 3, 1 }, arr);
         }
 
         [Test]
@@ -297,7 +297,7 @@ namespace Bridge.ClientTest.Batch2.BridgeIssues
         {
             var arr = new[] { 1, 6, 6, 4, 2 };
             arr.JsSort();
-            Assert.AreDeepEqual(new[] { 1, 2, 4, 6, 6 }, arr);
+            Assert.AreEqual(new[] { 1, 2, 4, 6, 6 }, arr);
         }
 
         [Test]
@@ -305,7 +305,7 @@ namespace Bridge.ClientTest.Batch2.BridgeIssues
         {
             var arr = new[] { 1, 6, 6, 4, 2 };
             Array.Sort(arr);
-            Assert.AreDeepEqual(new[] { 1, 2, 4, 6, 6 }, arr);
+            Assert.AreEqual(new[] { 1, 2, 4, 6, 6 }, arr);
         }
 
         [Test]
@@ -313,7 +313,7 @@ namespace Bridge.ClientTest.Batch2.BridgeIssues
         {
             var arr = new[] { 1, 6, 6, 4, 2 };
             Array.Sort(arr, 2, 3);
-            Assert.AreDeepEqual(new[] { 1, 6, 2, 4, 6 }, arr);
+            Assert.AreEqual(new[] { 1, 6, 2, 4, 6 }, arr);
         }
 
         [Test]
@@ -321,7 +321,7 @@ namespace Bridge.ClientTest.Batch2.BridgeIssues
         {
             var arr = new[] { 1, 2, 6, 3, 6, 7 };
             Array.Sort(arr, 2, 3, new TestReverseComparer());
-            Assert.AreDeepEqual(new[] { 1, 2, 6, 6, 3, 7 }, arr);
+            Assert.AreEqual(new[] { 1, 2, 6, 6, 3, 7 }, arr);
         }
 
         [Test]
@@ -329,7 +329,7 @@ namespace Bridge.ClientTest.Batch2.BridgeIssues
         {
             var arr = new[] { 1, 6, 6, 4, 2 };
             Array.Sort(arr, new TestReverseComparer());
-            Assert.AreDeepEqual(new[] { 6, 6, 4, 2, 1 }, arr);
+            Assert.AreEqual(new[] { 6, 6, 4, 2, 1 }, arr);
         }
 
         [Test]
@@ -360,6 +360,20 @@ namespace Bridge.ClientTest.Batch2.BridgeIssues
         }
 
         [Test]
+        public void ICollectionAddWorks()
+        {
+            IList<string> l = new[] { "x", "y", "z" };
+            Assert.Throws<NotSupportedException>(() => { l.Add("a"); });
+        }
+
+        [Test]
+        public void ICollectionClearWorks()
+        {
+            IList<string> l = new[] { "x", "y", "z" };
+            Assert.Throws<NotSupportedException>(() => { l.Clear(); });
+        }
+
+        [Test]
         public void ICollectionContainsWorks()
         {
             IList<string> l = new[] { "x", "y", "z" };
@@ -376,10 +390,19 @@ namespace Bridge.ClientTest.Batch2.BridgeIssues
         }
 
         [Test]
+        public void ICollectionRemoveWorks()
+        {
+            IList<string> l = new[] { "x", "y", "z" };
+            Assert.Throws<NotSupportedException>(() => { l.Remove("y"); });
+        }
+
+        [Test]
         public void IListIndexingWorks()
         {
             IList<string> l = new[] { "x", "y", "z" };
             Assert.AreEqual("y", l[1]);
+            l[1] = "a";
+            Assert.AreEqual(new[] { "x", "a", "z" }, l.ToArray());
         }
 
         [Test]
@@ -396,6 +419,20 @@ namespace Bridge.ClientTest.Batch2.BridgeIssues
             var arr = new[] { new C(1), new C(2), new C(3) };
             Assert.AreEqual(1, arr.IndexOf(new C(2)));
             Assert.AreEqual(-1, arr.IndexOf(new C(4)));
+        }
+
+        [Test]
+        public void IListInsertWorks()
+        {
+            IList<string> l = new[] { "x", "y", "z" };
+            Assert.Throws<NotSupportedException>(() => { l.Insert(1, "a"); });
+        }
+
+        [Test]
+        public void IListRemoveAtWorks()
+        {
+            IList<string> l = new[] { "x", "y", "z" };
+            Assert.Throws<NotSupportedException>(() => { l.RemoveAt(1); });
         }
 
         [Test(ExpectedCount = 10)]

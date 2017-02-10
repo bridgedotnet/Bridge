@@ -295,8 +295,9 @@ namespace Bridge.ClientTest.Collections.Native
             Assert.AreEqual(1, list.IndexOf(6), "IndexOf(6)");
             Assert.AreEqual(-1, list.IndexOf(1), "IndexOf(1)");
             Assert.AreEqual(9, list[3], "Get item");
+            list[3] = 4;
+            Assert.AreEqual(4, list[3], "Set item");
 
-            Assert.Throws<NotSupportedException>(() => list[3] = 4, "Item");
             Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
             Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
         }
