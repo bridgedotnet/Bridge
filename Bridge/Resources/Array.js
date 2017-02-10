@@ -176,15 +176,15 @@
         },
 
         _typedArrays: {
-            Float32Array: true,
-            Float64Array: true,
-            Int8Array: true,
-            Int16Array: true,
-            Int32Array: true,
-            Uint8Array: true,
-            Uint8ClampedArray: true,
-            Uint16Array: true,
-            Uint32Array: true
+            Float32Array: System.Single,
+            Float64Array: System.Double,
+            Int8Array: System.SByte,
+            Int16Array: System.Int16,
+            Int32Array: System.Int32,
+            Uint8Array: System.Byte,
+            Uint8ClampedArray: System.Byte,
+            Uint16Array: System.UInt16,
+            Uint32Array: System.UInt32
         },
 
         is: function (obj, type) {
