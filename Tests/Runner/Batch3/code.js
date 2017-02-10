@@ -5640,7 +5640,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 try {
                     var $Date = 3;
 
-                    var m = (new Date().getMonth() + 1);
+                    var m = (System.DateTime.getDefaultValue().getMonth() + 1);
 
                     Bridge.Test.NUnit.Assert.areEqual$1(3, $Date, "Date");
                 }
@@ -10747,8 +10747,8 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1904", {
         testDateTimeConstructorConvertsValueToMs: function () {
             var d1 = new Date();
-            var tickValue = System.Int64((d1).getTime()).mul(10000);
-            var d2 = new Date(tickValue.toNumber()/10000);
+            var tickValue = System.DateTime.getTicks(d1);
+            var d2 = System.DateTime.fromTicks(tickValue);
 
             Bridge.Test.NUnit.Assert.true$1(Bridge.equals(d1, d2), System.String.concat("d1 (", System.DateTime.format(d1), ") == d2(", System.DateTime.format(d2), ")"));
         }
@@ -11694,6 +11694,29 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2049", {
+        statics: {
+            testNullableGetUnderlyingType: function () {
+                Bridge.Test.NUnit.Assert.areEqual(System.Int32, System.Nullable.getUnderlyingType(System.Nullable$1(System.Int32)));
+                Bridge.Test.NUnit.Assert.areEqual(null, System.Nullable.getUnderlyingType(System.Int32));
+                Bridge.Test.NUnit.Assert.areEqual(null, System.Nullable.getUnderlyingType(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2049.G$1(System.Int32)));
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2049.f1);
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2049", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2049, {
+        f1: function () {
+            System.Nullable.getUnderlyingType(null);
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2049.G$1", function (T) { return {
+
+    }; });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2050", {
         statics: {
             testIList: function () {
@@ -11743,16 +11766,16 @@ Bridge.$N1391Result =                 r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2050", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2050, {
-        f1: function (_o37) {
-            _o37.add(1);
-            _o37.add(2);
-            _o37.add(3);
-            return _o37;
+        f1: function (_o36) {
+            _o36.add(1);
+            _o36.add(2);
+            _o36.add(3);
+            return _o36;
         },
-        f2: function (_o38) {
-            _o38.add(1, 2);
-            _o38.add(2, 3);
-            return _o38;
+        f2: function (_o37) {
+            _o37.add(1, 2);
+            _o37.add(2, 3);
+            return _o37;
         }
     });
 
@@ -12198,11 +12221,11 @@ Bridge.$N1391Result =                 r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1347", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1347, {
-        f1: function (_o36) {
-            _o36.add(1);
-            _o36.add(2);
-            _o36.add(3);
-            return _o36;
+        f1: function (_o38) {
+            _o38.add(1);
+            _o38.add(2);
+            _o38.add(3);
+            return _o38;
         },
         f2: function (v) {
             return Bridge.Reflection.getTypeFullName(Bridge.getType(v));
@@ -14754,6 +14777,20 @@ Bridge.$N1391Result =                 r;
         inherits: [System.Exception]
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2342", {
+        statics: {
+            testCastParanthesize: function () {
+                var bar = 2.0;
+
+                var foo1 = 1.0 / (Math.abs(bar) / Math.abs(bar));
+                Bridge.Test.NUnit.Assert.areEqual(1, foo1);
+
+                var foo2 = 1.0 / (Math.abs(bar) / Math.abs(bar));
+                Bridge.Test.NUnit.Assert.areEqual(1, foo2);
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2343", {
         statics: {
             testBoxedEqualsAndGetHashCode: function () {
@@ -14818,6 +14855,222 @@ Bridge.$N1391Result =                 r;
 
                 Bridge.Test.NUnit.Assert.areEqual(10, logger.field);
             }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2352", {
+        statics: {
+            testOperatorOnAnonymousType: function () {
+                var anonymous = new $asm.$AnonymousType$17(false);
+
+                Bridge.Test.NUnit.Assert.true(!anonymous.isTrue);
+                Bridge.Test.NUnit.Assert.true(anonymous.isTrue === false);
+
+                var b = anonymous.isTrue === false; // Works
+                Bridge.Test.NUnit.Assert.true(b);
+            }
+        }
+    });
+
+    Bridge.define("$AnonymousType$17", $asm, {
+        $kind: "anonymous",
+        ctor: function (isTrue) {
+            this.isTrue = isTrue;
+        },
+        getIsTrue : function () {
+            return this.isTrue;
+        },
+        equals: function (o) {
+            if (!Bridge.is(o, $asm.$AnonymousType$17)) {
+                return false;
+            }
+            return Bridge.equals(this.isTrue, o.isTrue);
+        },
+        getHashCode: function () {
+            var h = Bridge.addHash([7550210266, this.isTrue]);
+            return h;
+        },
+        toJSON: function () {
+            return {
+                isTrue : this.isTrue
+            };
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355", {
+        statics: {
+            testLinqGrouping: function () {
+                var $t;
+                var query = System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants.getFlowers()).groupBy($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.f1);
+
+                $t = Bridge.getEnumerator(query);
+                try {
+                    while ($t.moveNext()) {
+                        var grp = Bridge.cast($t.getCurrent(), System.Linq.IGrouping$2);
+                        Bridge.Test.NUnit.Assert.true(Bridge.is(grp, System.Linq.Grouping$2));
+                        Bridge.Test.NUnit.Assert.true(Bridge.is(grp, System.Linq.IGrouping$2));
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }},
+            testLinqLookup: function () {
+                var query = System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants.getFlowers()).toLookup($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.f1);
+
+                Bridge.Test.NUnit.Assert.true(Bridge.is(query, System.Linq.Lookup$2));
+                Bridge.Test.NUnit.Assert.true(Bridge.is(query, System.Linq.ILookup$2));
+                Bridge.Test.NUnit.Assert.areEqual(2, query.get("Shade").count());
+            },
+            testLinqOrderedEnumerable: function () {
+                var query = System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants.getFlowers()).orderBy($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.f2);
+
+                Bridge.Test.NUnit.Assert.true(Bridge.is(query, System.Linq.OrderedEnumerable$1));
+                Bridge.Test.NUnit.Assert.true(Bridge.is(query, System.Linq.IOrderedEnumerable$1));
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355, {
+        f1: function (flower) {
+            return flower.getLight();
+        },
+        f2: function (flower) {
+            return flower.getCommon();
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant", {
+        config: {
+            properties: {
+                Common: null,
+                Light: null,
+                Indoor: false
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants", {
+        statics: {
+            getFlowers: function () {
+                return $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants.f1(new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant))());
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants, {
+        f1: function (_o42) {
+            _o42.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), {
+                setCommon: "Anemone",
+                setLight: "Shade",
+                setIndoor: true
+            } ));
+            _o42.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), {
+                setCommon: "Columbine",
+                setLight: "Shade",
+                setIndoor: true
+            } ));
+            _o42.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), {
+                setCommon: "Marsh Marigold",
+                setLight: "Sunny",
+                setIndoor: false
+            } ));
+            _o42.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), {
+                setCommon: "Gential",
+                setLight: "Sun or Shade",
+                setIndoor: false
+            } ));
+            _o42.add(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), {
+                setCommon: "Woodland",
+                setLight: "Sun or Shade",
+                setIndoor: false
+            } ));
+            return _o42;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2359", {
+        statics: {
+            compare_Equals_TestData: function () {
+                return new (Bridge.GeneratorEnumerable$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function ()  {
+                    var $step = 0,
+                        $jumpFromFinally,
+                        $returnValue,
+                        $async_e;
+
+                    var $enumerator = new (Bridge.GeneratorEnumerator$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function () {
+                        try {
+                            for (;;) {
+                                switch ($step) {
+                                    case 0: {
+                                        $enumerator.current = System.Array.init([null, null, Bridge.box(0, System.Int32)], System.Object);
+                                            $step = 1;
+                                            return true;
+                                    }
+                                    case 1: {
+                                        $enumerator.current = System.Array.init([Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), null, Bridge.box(1, System.Int32)], System.Object);
+                                            $step = 2;
+                                            return true;
+                                    }
+                                    case 2: {
+                                        $enumerator.current = System.Array.init([null, Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(-1, System.Int32)], System.Object);
+                                            $step = 3;
+                                            return true;
+                                    }
+                                    case 3: {
+                                        $enumerator.current = System.Array.init([Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(0, System.Int32)], System.Object);
+                                            $step = 4;
+                                            return true;
+                                    }
+                                    case 4: {
+                                        $enumerator.current = System.Array.init([Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(5, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(1, System.Int32)], System.Object);
+                                            $step = 5;
+                                            return true;
+                                    }
+                                    case 5: {
+                                        $enumerator.current = System.Array.init([Bridge.box(5, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(-1, System.Int32)], System.Object);
+                                            $step = 6;
+                                            return true;
+                                    }
+                                    case 6: {
+
+                                    }
+                                    default: {
+                                        return false;
+                                    }
+                                }
+                            }
+                        } catch($async_e1) {
+                            $async_e = System.Exception.create($async_e1);
+                            throw $async_e;
+                        }
+                    }));
+                    return $enumerator;
+                }));
+            },
+            testNullableCompareEquals: function () {
+                var $t;
+                $t = Bridge.getEnumerator(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2359.compare_Equals_TestData(), System.Array.type(System.Object));
+                try {
+                    while ($t.moveNext()) {
+                        var data = $t.getCurrent();
+                        var n1 = Bridge.cast(Bridge.unbox(data[0]), System.Int32, true);
+                        var n2 = Bridge.cast(Bridge.unbox(data[1]), System.Int32, true);
+                        var expected = System.Nullable.getValue(Bridge.cast(Bridge.unbox(data[2]), System.Int32));
+
+                        Bridge.Test.NUnit.Assert.areEqual(expected === 0, System.Nullable.equals(n1, n2));
+                        Bridge.Test.NUnit.Assert.areEqual(expected === 0, System.Nullable.equals(n1, Bridge.box(n2, System.Int32, $box_.System.Nullable$1.toString), function ($t, other) { return System.Int32.equals($t, other); }));
+                        Bridge.Test.NUnit.Assert.areEqual(expected, System.Nullable.compare(n1, n2));
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
         }
     });
 
@@ -15375,11 +15628,11 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge485", {
         statics: {
             testUseCase: function () {
-                var list = System.Linq.Enumerable.from(System.Array.init([new $asm.$AnonymousType$17("", "")], $asm.$AnonymousType$17)).skip(1).toList(System.Object);
-                list.add(new $asm.$AnonymousType$17("Ruth", "Babe"));
-                list.add(new $asm.$AnonymousType$17("Johnson", "Walter"));
-                list.add(new $asm.$AnonymousType$17("Cobb", "Ty"));
-                list.add(new $asm.$AnonymousType$17("Schmidt", "Mike"));
+                var list = System.Linq.Enumerable.from(System.Array.init([new $asm.$AnonymousType$18("", "")], $asm.$AnonymousType$18)).skip(1).toList(System.Object);
+                list.add(new $asm.$AnonymousType$18("Ruth", "Babe"));
+                list.add(new $asm.$AnonymousType$18("Johnson", "Walter"));
+                list.add(new $asm.$AnonymousType$18("Cobb", "Ty"));
+                list.add(new $asm.$AnonymousType$18("Schmidt", "Mike"));
 
                 var query = System.Linq.Enumerable.from(list).where($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge485.f1).select($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge485.f2);
 
@@ -15390,7 +15643,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("$AnonymousType$17", $asm, {
+    Bridge.define("$AnonymousType$18", $asm, {
         $kind: "anonymous",
         ctor: function (lastName, firstName) {
             this.lastName = lastName;
@@ -15403,13 +15656,13 @@ Bridge.$N1391Result =                 r;
             return this.firstName;
         },
         equals: function (o) {
-            if (!Bridge.is(o, $asm.$AnonymousType$17)) {
+            if (!Bridge.is(o, $asm.$AnonymousType$18)) {
                 return false;
             }
             return Bridge.equals(this.lastName, o.lastName) && Bridge.equals(this.firstName, o.firstName);
         },
         getHashCode: function () {
-            var h = Bridge.addHash([7550210266, this.lastName, this.firstName]);
+            var h = Bridge.addHash([7550210522, this.lastName, this.firstName]);
             return h;
         },
         toJSON: function () {
@@ -15427,7 +15680,7 @@ Bridge.$N1391Result =                 r;
             return p.lastName.length === 4;
         },
         f2: function (p) {
-            return new $asm.$AnonymousType$17(p.lastName, p.firstName);
+            return new $asm.$AnonymousType$18(p.lastName, p.firstName);
         }
     });
 
@@ -16913,7 +17166,7 @@ Bridge.$N1391Result =                 r;
             testTicks: function () {
                 var centuryBegin = new Date(2001, 1 - 1, 1);
                 var currentDate = new Date(2007, 12 - 1, 14, 15, 23);
-                var elapsedTicks = System.Int64((currentDate).getTime()).mul(10000).sub(System.Int64((centuryBegin).getTime()).mul(10000));
+                var elapsedTicks = System.DateTime.getTicks(currentDate).sub(System.DateTime.getTicks(centuryBegin));
                 var elapsedSpan = new System.TimeSpan(elapsedTicks);
 
                 Bridge.Test.NUnit.Assert.areEqual$1(System.Int64([1836507648,510687]), elapsedTicks, "Bridge582 TestTicks ticks");
@@ -19139,13 +19392,13 @@ Bridge.$N1391Result =                 r;
                     DateA: null
                 },
                 init: function () {
-                    this.dateb = new Date(-864e13);
-                    this.DateA = new Date(-864e13);
+                    this.dateb = System.DateTime.getDefaultValue();
+                    this.DateA = System.DateTime.getDefaultValue();
                 }
             },
             testUseCase: function () {
-                Bridge.Test.NUnit.Assert.true$1(Bridge.equals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.getDateA(), new Date(-864e13)), "Bridge733 DateA");
-                Bridge.Test.NUnit.Assert.true$1(Bridge.equals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.dateb, new Date(-864e13)), "Bridge733 dateb");
+                Bridge.Test.NUnit.Assert.true$1(Bridge.equals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.getDateA(), System.DateTime.getDefaultValue()), "Bridge733 DateA");
+                Bridge.Test.NUnit.Assert.true$1(Bridge.equals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.dateb, System.DateTime.getDefaultValue()), "Bridge733 dateb");
 
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.dateb = new Date(); // to prevent warning that dateb is never assigned
             }
@@ -19558,7 +19811,7 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.NUnit.Assert.areEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge789.method2().field1);
             },
             method1: function (dt) {
-                if (dt === void 0) { dt = new Date(-864e13); }
+                if (dt === void 0) { dt = System.DateTime.getDefaultValue(); }
                 return dt;
             },
             method2: function (s) {
@@ -19929,9 +20182,9 @@ Bridge.$N1391Result =                 r;
             getTicksReturnsCorrectValue: function () {
                 var val = System.Int64([-57829376,2204230]);
 
-                var ticks = System.Int64((new Date(val.toNumber()/10000)).getTime()).mul(10000);
-                var ticksPlusOne = System.Int64((new Date(val.toNumber()/10000)).getTime()).mul(10000).add(System.Int64(1));
-                var ticksString = System.Int64((new Date(val.toNumber()/10000)).getTime()).mul(10000).toString();
+                var ticks = System.DateTime.getTicks(System.DateTime.fromTicks(val));
+                var ticksPlusOne = System.DateTime.getTicks(System.DateTime.fromTicks(val)).add(System.Int64(1));
+                var ticksString = System.DateTime.getTicks(System.DateTime.fromTicks(val)).toString();
 
                 Bridge.Test.NUnit.Assert.areDeepEqual$1(val, ticks, "Ticks returning correct int value");
                 Bridge.Test.NUnit.Assert.areDeepEqual$1(val.add(System.Int64(1)), ticksPlusOne, "Adding to a Tick value is correct");
@@ -20676,7 +20929,7 @@ Bridge.$N1391Result =                 r;
                                 case 0: {
                                     asyncComplete = Bridge.Test.NUnit.Assert.async();
 
-                                        myvar = System.Array.init([new $asm.$AnonymousType$18(1), new $asm.$AnonymousType$18(2)], $asm.$AnonymousType$18);
+                                        myvar = System.Array.init([new $asm.$AnonymousType$19(1), new $asm.$AnonymousType$19(2)], $asm.$AnonymousType$19);
                                         sum = 0;
                                         $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge906.myfunc();
                                         $step = 1;
@@ -20738,7 +20991,7 @@ Bridge.$N1391Result =                 r;
                                 case 0: {
                                     asyncComplete = Bridge.Test.NUnit.Assert.async();
 
-                                        myvar = System.Array.init([new $asm.$AnonymousType$18(-3), new $asm.$AnonymousType$18(2)], $asm.$AnonymousType$18);
+                                        myvar = System.Array.init([new $asm.$AnonymousType$19(-3), new $asm.$AnonymousType$19(2)], $asm.$AnonymousType$19);
                                         sum = 0;
                                         $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge906.myfunc();
                                         $step = 1;
@@ -20788,7 +21041,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("$AnonymousType$18", $asm, {
+    Bridge.define("$AnonymousType$19", $asm, {
         $kind: "anonymous",
         ctor: function (value) {
             this.value = value;
@@ -20797,13 +21050,13 @@ Bridge.$N1391Result =                 r;
             return this.value;
         },
         equals: function (o) {
-            if (!Bridge.is(o, $asm.$AnonymousType$18)) {
+            if (!Bridge.is(o, $asm.$AnonymousType$19)) {
                 return false;
             }
             return Bridge.equals(this.value, o.value);
         },
         getHashCode: function () {
-            var h = Bridge.addHash([7550210522, this.value]);
+            var h = Bridge.addHash([7550210778, this.value]);
             return h;
         },
         toJSON: function () {
@@ -22051,8 +22304,8 @@ Bridge.$N1391Result =                 r;
                 var b1 = System.Collections.Generic.EqualityComparer$1(System.Object).def.equals2(o11, o12);
                 Bridge.Test.NUnit.Assert.false$1(b1, "EqualityComparer<object>.Default.Equals(o11, o12) works");
 
-                var o21 = new $asm.$AnonymousType$19(7);
-                var o22 = new $asm.$AnonymousType$19(7);
+                var o21 = new $asm.$AnonymousType$20(7);
+                var o22 = new $asm.$AnonymousType$20(7);
                 var b2 = System.Collections.Generic.EqualityComparer$1(System.Object).def.equals2(o21, o22);
                 Bridge.Test.NUnit.Assert.true$1(b2, "EqualityComparer<object>.Default.Equals(o21, o22) works");
 
@@ -22534,7 +22787,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("$AnonymousType$19", $asm, {
+    Bridge.define("$AnonymousType$20", $asm, {
         $kind: "anonymous",
         ctor: function (i) {
             this.i = i;
@@ -22543,13 +22796,13 @@ Bridge.$N1391Result =                 r;
             return this.i;
         },
         equals: function (o) {
-            if (!Bridge.is(o, $asm.$AnonymousType$19)) {
+            if (!Bridge.is(o, $asm.$AnonymousType$20)) {
                 return false;
             }
             return Bridge.equals(this.i, o.i);
         },
         getHashCode: function () {
-            var h = Bridge.addHash([7550210778, this.i]);
+            var h = Bridge.addHash([7550208475, this.i]);
             return h;
         },
         toJSON: function () {
@@ -22562,30 +22815,30 @@ Bridge.$N1391Result =                 r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues, {
-        f1: function (_o42) {
-            _o42.add(0);
-            _o42.add(1);
-            _o42.add(2);
-            _o42.add(3);
-            _o42.add(4);
-            return _o42;
-        },
-        f2: function (_o43) {
-            _o43.add(3, "b");
-            _o43.add(6, "z");
-            _o43.add(9, "x");
+        f1: function (_o43) {
+            _o43.add(0);
+            _o43.add(1);
+            _o43.add(2);
+            _o43.add(3);
+            _o43.add(4);
             return _o43;
+        },
+        f2: function (_o44) {
+            _o44.add(3, "b");
+            _o44.add(6, "z");
+            _o44.add(9, "x");
+            return _o44;
         },
         f3: function (i) {
             return ((i * 2) | 0);
         },
-        f4: function (_o44) {
-            _o44.add(0);
-            _o44.add(1);
-            _o44.add(2);
-            _o44.add(3);
-            _o44.add(4);
-            return _o44;
+        f4: function (_o45) {
+            _o45.add(0);
+            _o45.add(1);
+            _o45.add(2);
+            _o45.add(3);
+            _o45.add(4);
+            return _o45;
         }
     });
 

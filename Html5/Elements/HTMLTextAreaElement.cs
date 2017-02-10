@@ -7,12 +7,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLTextAreaElement")]
-    public class HTMLTextAreaElement : HTMLElement<HTMLTextAreaElement>
+    public sealed class HTMLTextAreaElement : HTMLElement<HTMLTextAreaElement>
     {
         [Template("document.createElement('textarea')")]
-        public HTMLTextAreaElement()
-        {
-        }
+        public extern HTMLTextAreaElement();
 
         /// <summary>
         /// Reflects the autofocus HTML attribute, which specifies that a form control should have input focus when the page loads, unless the user overrides it, for example by typing in a different control. Only one form element in a document can have the autofocus attribute. It cannot be applied if the type attribute is set to hidden (that is, you cannot automatically set focus to a hidden control).
@@ -124,25 +122,25 @@ namespace Bridge.Html5
         /// Returns false if the button is a candidate for constraint validation, and it does not satisfy its constraints. In this case, it also fires an invalid event at the control. It returns true if the control is not a candidate for constraint validation, or if it satisfies its constraints.
         /// </summary>
         /// <returns></returns>
-        public virtual extern bool CheckValidity();
+        public extern bool CheckValidity();
 
         /// <summary>
         /// Selects the contents of the control.
         /// </summary>
-        public virtual extern void Select();
+        public extern void Select();
 
         /// <summary>
         /// Sets a custom validity message for the element. If this message is not the empty string, then the element is suffering from a custom validity error, and does not validate.
         /// </summary>
         /// <param name="error"></param>
-        public virtual extern void SetCustomValidity(string error);
+        public extern void SetCustomValidity(string error);
 
         /// <summary>
         /// Selects a range of text in the element (but does not focus it). The optional selectionDirection parameter may be "forward" or "backward" to establish the direction in which selection was set, or "none" if the direction is unknown or not relevant. The default is "none". Specifying a selectionDirection parameter sets the value of the selectionDirection property.
         /// </summary>
         /// <param name="start"></param>
         /// <param name="end"></param>
-        public virtual extern void SetSelectionRange(int start, int end);
+        public extern void SetSelectionRange(int start, int end);
 
         /// <summary>
         /// Selects a range of text in the element (but does not focus it). The optional selectionDirection parameter may be "forward" or "backward" to establish the direction in which selection was set, or "none" if the direction is unknown or not relevant. The default is "none". Specifying a selectionDirection parameter sets the value of the selectionDirection property.
@@ -150,13 +148,13 @@ namespace Bridge.Html5
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <param name="direction"></param>
-        public virtual extern void SetSelectionRange(int start, int end, string direction);
+        public extern void SetSelectionRange(int start, int end, string direction);
 
         /// <summary>
         /// Replaces a range of text with the new text. Supported input types: text, search, url, tel, password.
         /// </summary>
         /// <param name="replacement"></param>
-        public virtual extern void SetRangeText(string replacement);
+        public extern void SetRangeText(string replacement);
 
         /// <summary>
         /// Replaces a range of text with the new text. Supported input types: text, search, url, tel, password.
@@ -164,7 +162,7 @@ namespace Bridge.Html5
         /// <param name="replacement"></param>
         /// <param name="start"></param>
         /// <param name="end"></param>
-        public virtual extern void SetRangeText(string replacement, int start, int end);
+        public extern void SetRangeText(string replacement, int start, int end);
 
         /// <summary>
         /// Replaces a range of text with the new text. Supported input types: text, search, url, tel, password.
@@ -173,7 +171,7 @@ namespace Bridge.Html5
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <param name="selectMode"></param>
-        public virtual extern void SetRangeText(string replacement, int start, int end, string selectMode);
+        public extern void SetRangeText(string replacement, int start, int end, string selectMode);
 
         #endregion Methods
     }

@@ -5,11 +5,9 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLPreElement")]
-    public class HTMLPreElement : HTMLElement<HTMLPreElement>
+    public sealed class HTMLPreElement : HTMLElement<HTMLPreElement>
     {
         [Template("document.createElement('pre')")]
-        public HTMLPreElement()
-        {
-        }
+        public extern HTMLPreElement();
     }
 }

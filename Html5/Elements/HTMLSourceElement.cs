@@ -5,12 +5,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLSourceElement")]
-    public class HTMLSourceElement : HTMLElement<HTMLSourceElement>
+    public sealed class HTMLSourceElement : HTMLElement<HTMLSourceElement>
     {
         [Template("document.createElement('source')")]
-        public HTMLSourceElement()
-        {
-        }
+        public extern HTMLSourceElement();
 
         /// <summary>
         /// Reflects the media HTML attribute, containing the intended type of the media resource.

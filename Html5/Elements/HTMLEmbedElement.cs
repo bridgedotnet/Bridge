@@ -5,12 +5,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLEmbedElement")]
-    public class HTMLEmbedElement : HTMLElement<HTMLEmbedElement>
+    public sealed class HTMLEmbedElement : HTMLElement<HTMLEmbedElement>
     {
         [Template("document.createElement('embed')")]
-        public HTMLEmbedElement()
-        {
-        }
+        public extern HTMLEmbedElement();
 
         /// <summary>
         /// Reflects the height HTML attribute, containing the displayed height of the resource.

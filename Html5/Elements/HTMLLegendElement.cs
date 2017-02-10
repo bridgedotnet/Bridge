@@ -5,12 +5,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLLegendElement")]
-    public class HTMLLegendElement : HTMLElement<HTMLLegendElement>
+    public sealed class HTMLLegendElement : HTMLElement<HTMLLegendElement>
     {
         [Template("document.createElement('legend')")]
-        public HTMLLegendElement()
-        {
-        }
+        public extern HTMLLegendElement();
 
         /// <summary>
         /// The form that this legend belongs to. If the legend has a fieldset element as its parent, then this attribute returns the same value as the form attribute on the parent fieldset element. Otherwise, it returns null.
