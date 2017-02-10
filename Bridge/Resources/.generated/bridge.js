@@ -11763,6 +11763,16 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                 return tcs.task;
             },
 
+            yield: function (state) {
+                var tcs = new System.Threading.Tasks.TaskCompletionSource();
+
+                setTimeout(function() {
+                    tcs.setResult(state);
+                }, 0);
+
+                return tcs.task;
+            },
+
             fromResult: function (result) {
                 var t = new System.Threading.Tasks.Task();
 

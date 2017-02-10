@@ -28,12 +28,10 @@
                 return tcs.task;
             },
 
-            yield: function (state)
-            {
+            yield: function (state) {
                 var tcs = new System.Threading.Tasks.TaskCompletionSource();
 
-                setTimeout(function()
-                {
+                setTimeout(function() {
                     tcs.setResult(state);
                 }, 0);
 
