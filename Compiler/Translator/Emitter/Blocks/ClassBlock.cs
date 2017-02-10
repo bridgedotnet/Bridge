@@ -119,7 +119,8 @@ namespace Bridge.Translator
 
             if (name.IsEmpty())
             {
-                name = BridgeTypes.ToJsName(this.TypeInfo.Type, this.Emitter, true, nomodule: true);
+                
+                name = BridgeTypes.ToJsName(this.TypeInfo.Type, this.Emitter, asDefinition: true, nomodule: true, ignoreLiteralName: false);
             }
 
             if (typeDef.IsInterface && typeDef.HasGenericParameters)
@@ -334,7 +335,7 @@ namespace Bridge.Translator
             {
                 this.Emitter.Comma = true;
             }
-            
+
             this.Emitter.StaticBlock = false;
         }
 
@@ -353,11 +354,15 @@ namespace Bridge.Translator
                 var etype = this.TypeInfo.Type.GetDefinition().EnumUnderlyingType;
                 var enumMode = this.Emitter.Validator.EnumEmitMode(this.TypeInfo.Type);
                 var isString = enumMode >= 3 && enumMode <= 6;
-                if (!etype.IsKnownType(KnownTypeCode.Int32) || isString)
+                if (isString)
+                {
+                    etype = this.Emitter.Resolver.Compilation.FindType(KnownTypeCode.String);
+                }
+                if (!etype.IsKnownType(KnownTypeCode.Int32))
                 {
                     this.EnsureComma();
                     this.Write(JS.Fields.UNDERLYINGTYPE + ": ");
-                    this.Write(isString ? "System.String" : BridgeTypes.ToJsName(etype, this.Emitter));
+                    this.Write(BridgeTypes.ToJsName(etype, this.Emitter));
 
                     this.Emitter.Comma = true;
                 }

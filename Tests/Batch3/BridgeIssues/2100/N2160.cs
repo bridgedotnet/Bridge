@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using Bridge.Linq;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -12,6 +12,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge2159
     {
         public class Base<T, U> { }
+
         public class Derived<V> : Base<int, string> { }
 
         [Test]

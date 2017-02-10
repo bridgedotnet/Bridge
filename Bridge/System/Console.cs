@@ -6,6 +6,7 @@ namespace System
     /// Represents the standard input, output, and error streams for console applications.
     /// </summary>
     [External]
+    [Unbox(false)]
     [Name("console")]
     public sealed partial class Console
     {

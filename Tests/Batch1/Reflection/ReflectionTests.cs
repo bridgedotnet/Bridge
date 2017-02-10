@@ -1,4 +1,4 @@
-﻿using Bridge.Test;
+﻿using Bridge.Test.NUnit;
 using System;
 using System.Reflection;
 
@@ -220,10 +220,10 @@ namespace Bridge.ClientTest.Reflection
             public static event Action E2;
 
             [Reflectable]
-            public event Action E3 {[Template("{this}.addedE3Handler = {value}")] add { }[Template("{this}.removedE3Handler = {value}")] remove { } }
+            public event Action E3 { [Template("{this}.addedE3Handler = {value}")] add { } [Template("{this}.removedE3Handler = {value}")] remove { } }
 
             [Reflectable]
-            public static event Action E4 {[Template("Bridge.ClientTest.Reflection.ReflectionTests.C13.addedE4Handler = {value}")] add { }[Template("Bridge.ClientTest.Reflection.ReflectionTests.C13.removedE4Handler = {value}")] remove { } }
+            public static event Action E4 { [Template("Bridge.ClientTest.Reflection.ReflectionTests.C13.addedE4Handler = {value}")] add { } [Template("Bridge.ClientTest.Reflection.ReflectionTests.C13.removedE4Handler = {value}")] remove { } }
 
             public void RaiseE1()
             {
@@ -281,10 +281,10 @@ namespace Bridge.ClientTest.Reflection
             public static double P12 { get; set; }
 
             [Reflectable]
-            public int P13 {[Template("{this}.p13Field")] get;[Template("{this}.p13Field = {value}")] set; }
+            public int P13 { [Template("{this}.p13Field")] get; [Template("{this}.p13Field = {value}")] set; }
 
             [Reflectable]
-            public static int P14 {[Template("Bridge.ClientTest.Reflection.ReflectionTests.C14.p14Field")] get;[Template("Bridge.ClientTest.Reflection.ReflectionTests.C14.p14Field = {value}")] set; }
+            public static int P14 { [Template("Bridge.ClientTest.Reflection.ReflectionTests.C14.p14Field")] get; [Template("Bridge.ClientTest.Reflection.ReflectionTests.C14.p14Field = {value}")] set; }
         }
 
         public class C15
@@ -321,10 +321,10 @@ namespace Bridge.ClientTest.Reflection
             public int F;
 
             [A1(4), A3]
-            public int P {[A1(5), A3] get;[A1(6), A3] set; }
+            public int P { [A1(5), A3] get; [A1(6), A3] set; }
 
             [A1(7), A3]
-            public event Action E {[A1(8), A3] add { }[A1(9), A3] remove { } }
+            public event Action E { [A1(8), A3] add { } [A1(9), A3] remove { } }
         }
 
         [Constructor("{ }")]
@@ -452,7 +452,7 @@ namespace Bridge.ClientTest.Reflection
             public string v;
 
             [Reflectable]
-            public string this[int x, string s] {[Template("{this}.v + ' ' + {x} + ' ' + {s}")] get { return null; }[Template("(function(t, x, s) { t.x = x; t.s = s; t.v = {value}; })({this}, {x}, {s})")] set { } }
+            public string this[int x, string s] { [Template("{this}.v + ' ' + {x} + ' ' + {s}")] get { return null; } [Template("(function(t, x, s) { t.x = x; t.s = s; t.v = {value}; })({this}, {x}, {s})")] set { } }
         }
 
         [Reflectable(MemberAccessibility.None)]
@@ -1037,7 +1037,7 @@ namespace Bridge.ClientTest.Reflection
         {
             var m = typeof(C9<int, string>).GetMethod("M");
             var f = (Func<string, string>)m.CreateDelegate();
-            Assert.AreEqual(f("a"), "System.Int32 String a", "Delegate should return correct results");
+            Assert.AreEqual(f("a"), "System.Int32 System.String a", "Delegate should return correct results");
         }
 
         [Test]
@@ -1046,7 +1046,7 @@ namespace Bridge.ClientTest.Reflection
             var m = typeof(C8).GetMethod("M3");
             var c = new C8("X");
             var f = (Func<string, string>)m.CreateDelegate(c, new[] { typeof(int), typeof(string) });
-            Assert.AreEqual(f("a"), "X System.Int32 String a", "Result of invoking delegate should be correct");
+            Assert.AreEqual(f("a"), "X System.Int32 System.String a", "Result of invoking delegate should be correct");
             Assert.Throws(() => m.CreateDelegate((object)null, new[] { typeof(int), typeof(string) }), "Null target with correct type arguments should throw");
             Assert.Throws(() => m.CreateDelegate(c), "No type arguments with target should throw");
             Assert.Throws(() => m.CreateDelegate(c, new Type[0]), "0 type arguments with target should throw");
@@ -1059,7 +1059,7 @@ namespace Bridge.ClientTest.Reflection
         {
             var m = typeof(C8).GetMethod("M4");
             var f = (Func<string, string>)m.CreateDelegate((object)null, new[] { typeof(int), typeof(string) });
-            Assert.AreEqual(f("a"), "System.Int32 String a", "Result of invoking delegate should be correct");
+            Assert.AreEqual(f("a"), "System.Int32 System.String a", "Result of invoking delegate should be correct");
             Assert.Throws(() => m.CreateDelegate(new C8(""), new[] { typeof(int), typeof(string) }), "Target with correct type arguments should throw");
             Assert.Throws(() => m.CreateDelegate((object)null), "No type arguments without target should throw");
             Assert.Throws(() => m.CreateDelegate((object)null, new Type[0]), "0 type arguments without target should throw");
@@ -1108,7 +1108,7 @@ namespace Bridge.ClientTest.Reflection
         public void InvokeWorksForGenericInlineCodeMethods()
         {
             var m = typeof(C21).GetMethod("M3");
-            Assert.AreEqual(m.Invoke(new C21(42), new[] { typeof(string) }, "World"), "42StringWorld", "Invoke should work");
+            Assert.AreEqual(m.Invoke(new C21(42), new[] { typeof(string) }, "World"), "42System.StringWorld", "Invoke should work");
         }
 
         [Test]
@@ -1117,8 +1117,8 @@ namespace Bridge.ClientTest.Reflection
             var m = typeof(C8).GetMethod("M3");
             var argsArr = new object[] { "x" };
             var c = new C8("X");
-            Assert.AreEqual(m.Invoke(c, new[] { typeof(int), typeof(string) }, "a"), "X System.Int32 String a", "Result of invoking delegate should be correct");
-            Assert.AreEqual(m.Invoke(c, new[] { typeof(int), typeof(string) }, argsArr), "X System.Int32 String x", "Result of invoking delegate should be correct");
+            Assert.AreEqual(m.Invoke(c, new[] { typeof(int), typeof(string) }, "a"), "X System.Int32 System.String a", "Result of invoking delegate should be correct");
+            Assert.AreEqual(m.Invoke(c, new[] { typeof(int), typeof(string) }, argsArr), "X System.Int32 System.String x", "Result of invoking delegate should be correct");
             Assert.Throws(() => m.Invoke(null, new[] { typeof(int), typeof(string) }, "a"), "Null target with correct type arguments should throw");
             Assert.Throws(() => m.Invoke(c, "a"), "No type arguments with target should throw");
             Assert.Throws(() => m.Invoke(c, new Type[0], "a"), "0 type arguments with target should throw");
@@ -1130,7 +1130,7 @@ namespace Bridge.ClientTest.Reflection
         public void InvokeWorksForGenericStaticMethod()
         {
             var m = typeof(C8).GetMethod("M4");
-            Assert.AreEqual(m.Invoke(null, new[] { typeof(int), typeof(string) }, "a"), "System.Int32 String a", "Result of invoking delegate should be correct");
+            Assert.AreEqual(m.Invoke(null, new[] { typeof(int), typeof(string) }, "a"), "System.Int32 System.String a", "Result of invoking delegate should be correct");
             Assert.Throws(() => m.Invoke(new C8(""), new[] { typeof(int), typeof(string) }, "a"), "Target with correct type arguments should throw");
             Assert.Throws(() => m.Invoke(null, "a"), "No type arguments without target should throw");
             Assert.Throws(() => m.Invoke(null, new Type[0], "a"), "0 type arguments without target should throw");
@@ -1142,7 +1142,7 @@ namespace Bridge.ClientTest.Reflection
         public void InvokeWorksForGenericInstanceMethodsOnSerializableTypes()
         {
             var m = typeof(C7).GetMethod("M3");
-            Assert.AreEqual(m.Invoke(new C7 { x = 13 }, new[] { typeof(int), typeof(string) }, "Suffix"), "13 System.Int32 String Suffix", "Invoke should work");
+            Assert.AreEqual(m.Invoke(new C7 { x = 13 }, new[] { typeof(int), typeof(string) }, "Suffix"), "13 System.Int32 System.String Suffix", "Invoke should work");
         }
 
         [Test]

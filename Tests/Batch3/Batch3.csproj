@@ -318,7 +318,9 @@
     <Compile Include="BridgeIssues\1500\N1536.cs" />
     <Compile Include="BridgeIssues\1500\N1538.cs" />
     <Compile Include="BridgeIssues\1500\N1566.cs" />
+    <Compile Include="BridgeIssues\1500\N1579.cs" />
     <Compile Include="BridgeIssues\1500\N1599.cs" />
+    <Compile Include="BridgeIssues\1600\N1600.cs" />
     <Compile Include="BridgeIssues\1600\N1641.cs" />
     <Compile Include="BridgeIssues\1600\N1653.cs" />
     <Compile Include="BridgeIssues\1600\N1684.cs" />
@@ -418,6 +420,7 @@
     <Compile Include="BridgeIssues\2000\N2045.cs" />
     <Compile Include="BridgeIssues\2000\N2046.cs" />
     <Compile Include="BridgeIssues\2000\N2048.cs" />
+    <Compile Include="BridgeIssues\2000\N2049.cs" />
     <Compile Include="BridgeIssues\2000\N2050.cs" />
     <Compile Include="BridgeIssues\2000\N2051.cs" />
     <Compile Include="BridgeIssues\2000\N2052.cs" />
@@ -426,6 +429,7 @@
     <Compile Include="BridgeIssues\2000\N2068.cs" />
     <Compile Include="BridgeIssues\2000\N2073.cs" />
     <Compile Include="BridgeIssues\2000\N2076.cs" />
+    <Compile Include="BridgeIssues\2000\N2077.cs" />
     <Compile Include="BridgeIssues\2000\N2079.cs" />
     <Compile Include="BridgeIssues\2000\N2080.cs" />
     <Compile Include="BridgeIssues\2000\N2081.cs" />
@@ -476,7 +480,31 @@
     <Compile Include="BridgeIssues\2200\N2246.cs" />
     <Compile Include="BridgeIssues\2200\N2249.cs" />
     <Compile Include="BridgeIssues\2200\N2251.cs" />
+    <Compile Include="BridgeIssues\2200\N2281.cs" />
     <Compile Include="BridgeIssues\2200\N2278.cs" />
+    <Compile Include="BridgeIssues\2200\N2279.cs" />
+    <Compile Include="BridgeIssues\2200\N2280.cs" />
+    <Compile Include="BridgeIssues\2200\N2284.cs" />
+    <Compile Include="BridgeIssues\2200\N2293.cs" />
+    <Compile Include="BridgeIssues\2200\N2298.cs" />
+    <Compile Include="BridgeIssues\2300\N2310.cs" />
+    <Compile Include="BridgeIssues\2300\N2313.cs" />
+    <Compile Include="BridgeIssues\2300\N2318.cs" />
+    <Compile Include="BridgeIssues\2300\N2320.cs" />
+    <Compile Include="BridgeIssues\2300\N2322.cs" />
+    <Compile Include="BridgeIssues\2300\N2327.cs" />
+    <Compile Include="BridgeIssues\2300\N2330.cs" />
+    <Compile Include="BridgeIssues\2300\N2337.cs" />
+    <Compile Include="BridgeIssues\2300\N2338.cs" />
+    <Compile Include="BridgeIssues\2300\N2342.cs" />
+    <Compile Include="BridgeIssues\2300\N2343.cs" />
+    <Compile Include="BridgeIssues\2300\N2344.cs" />
+    <Compile Include="BridgeIssues\2300\N2347.cs" />
+    <Compile Include="BridgeIssues\2300\N2349.cs" />
+    <Compile Include="BridgeIssues\2300\N2352.cs" />
+    <Compile Include="BridgeIssues\2300\N2355.cs" />
+    <Compile Include="BridgeIssues\2300\N2359.cs" />
+    <Compile Include="BridgeIssues\2300\N2369.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
     <Compile Include="Utilities\DecimalHelper.cs" />
@@ -514,7 +542,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Bridge.Test, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Bridge.Test.Core.1.0.0-beta1\lib\net40\Bridge.Test.dll</HintPath>
+      <HintPath>..\..\packages\Bridge.Test.Core.1.0.0\lib\net40\Bridge.Test.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

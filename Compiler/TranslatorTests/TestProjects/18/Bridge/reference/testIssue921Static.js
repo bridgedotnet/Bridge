@@ -21,7 +21,7 @@
             lambaLiftingWithProperty: function () {
                 var localValue = "What a name";
 
-                return System.Linq.Enumerable.from(System.Array.init(["one", "two", "three"], String)).select($asm.$.TestIssue921Static.Issue921Static.f5).select($asm.$.TestIssue921Static.Issue921Static.f5).select($asm.$.TestIssue921Static.Issue921Static.f6).select($asm.$.TestIssue921Static.Issue921Static.f7).select($asm.$.TestIssue921Static.Issue921Static.f8).select(function (value) {
+                return System.Linq.Enumerable.from(System.Array.init(["one", "two", "three"], System.String)).select($asm.$.TestIssue921Static.Issue921Static.f5).select($asm.$.TestIssue921Static.Issue921Static.f5).select($asm.$.TestIssue921Static.Issue921Static.f6).select($asm.$.TestIssue921Static.Issue921Static.f7).select($asm.$.TestIssue921Static.Issue921Static.f8).select(function (value) {
                     return System.String.concat(value, localValue);
                 });
             },

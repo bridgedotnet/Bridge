@@ -332,6 +332,8 @@ namespace Bridge.Translator
             this.WriteSemiColon();
             this.WriteNewLine();
 
+            this.WriteTry();
+            this.BeginBlock();
             this.WriteWhile();
             this.WriteOpenParentheses();
             this.Write(iteratorName);
@@ -414,6 +416,17 @@ namespace Bridge.Translator
 
             this.EndBlock();
             this.WriteNewLine();
+
+            this.EndBlock();
+            this.WriteFinally();
+            this.BeginBlock();
+            this.Write($"if ({JS.Types.Bridge.IS}({iteratorName}, {JS.Types.System.IDisposable.NAME})) ");
+            this.BeginBlock();
+            this.Write($"{iteratorName}.{JS.Types.System.IDisposable.INTERFACE_DISPOSE}();");
+            this.WriteNewLine();
+            this.EndBlock();
+            this.WriteNewLine();
+            this.EndBlock();
         }
 
         protected virtual string GetCastCode(IType fromType, IType toType)

@@ -58,6 +58,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Attributes\FieldAttribute.cs" />
+    <Compile Include="System\SerializableAttribute.cs" />
+    <Compile Include="Attributes\UnboxAttribute.cs" />
     <Compile Include="Attributes\GlobalMethodsAttribute.cs" />
     <Compile Include="Attributes\MixinAttribute.cs" />
     <Compile Include="Attributes\ImmutableAttribute.cs" />
@@ -89,7 +91,6 @@
     <Compile Include="Bridge\Linq\Enumerable.cs" />
     <Compile Include="Bridge\IBridgeClass.cs" />
     <Compile Include="Bridge\ObjectLiteral.cs" />
-    <Compile Include="Bridge\Any.cs" />
     <Compile Include="Bridge\Intersection.cs" />
     <Compile Include="Bridge\Module.cs" />
     <Compile Include="Bridge\Sequence.cs" />
@@ -777,6 +778,8 @@
     <Content Include="Resources\Convert.js" />
     <Content Include="Resources\Enum.js" />
     <Content Include="Resources\.lib\LongLib.js" />
+    <Content Include="Resources\Generator.js" />
+    <Content Include="Resources\Double.js" />
     <Content Include="Resources\Long.js" />
     <Content Include="Resources\Math.js" />
     <Content Include="Resources\ReflectionAssembly.js" />
@@ -800,6 +803,7 @@
     <Content Include="Resources\Text\RegularExpressions\RegexRunner.js" />
     <Content Include="Resources\Reflection.js" />
     <Content Include="Resources\ClientWebSocket.js" />
+    <Content Include="Resources\Object.js" />
     <Content Include="Resources\Uri.js" />
     <Content Include="Resources\Array.js" />
     <Content Include="Resources\Collections\Comparer.js" />

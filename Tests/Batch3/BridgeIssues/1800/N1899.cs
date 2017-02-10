@@ -1,4 +1,4 @@
-﻿using Bridge.Test;
+﻿using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -12,6 +12,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             {
                 get;
             }
+
             void SetValue();
         }
 
@@ -32,7 +33,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             public void SetValue()
             {
-
             }
         }
 
@@ -57,12 +57,12 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
 
             private int value;
+
             private int Value
             {
                 get { return value; }
                 set
                 {
-
                     this.value = value;
                 }
             }
@@ -91,6 +91,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
 
             private int getValue;
+
             private int Value
             {
                 get { return getValue; }
@@ -114,6 +115,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public class Item2
         {
             private int value;
+
             private int Value
             {
                 get { return value; }
@@ -152,6 +154,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public class Item3
         {
             private int value;
+
             private int Value
             {
                 get;

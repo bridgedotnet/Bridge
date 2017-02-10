@@ -1,11 +1,9 @@
 using Bridge.Contract.Constants;
-
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
 using ICSharpCode.NRefactory.TypeSystem.Implementation;
 using Mono.Cecil;
-
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -109,6 +107,27 @@ namespace Bridge.Contract
             }
 
             return false;
+        }
+
+        #endregion Field attribute
+
+        #region Serializable attribute
+
+        public static readonly string[] ATTRIBUTE_SERIALIZABLE_ALL_NAMES =
+            new string[]
+            {
+                CS.Attributes.SERIALIZABLE_NAME, GetShortAttributeName(CS.Attributes.SERIALIZABLE_NAME)
+            };
+
+        public static readonly string[] ATTRIBUTE_SERIALIZABLE_LONG_NAMES =
+            new string[]
+            {
+                CS.Attributes.SERIALIZABLE_NAME
+            };
+
+        public static bool HasSerializableAttribute(ITypeDefinition type)
+        {
+            return type != null && type.Attributes.Any(a => CheckName(a, ATTRIBUTE_SERIALIZABLE_LONG_NAMES));
         }
 
         #endregion Field attribute

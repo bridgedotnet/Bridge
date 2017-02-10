@@ -144,6 +144,12 @@ namespace Bridge.Contract
             set;
         }
 
+        bool IsYield
+        {
+            get;
+            set;
+        }
+
         bool IsInlineConst(ICSharpCode.NRefactory.TypeSystem.IMember member);
 
         bool IsMemberConst(ICSharpCode.NRefactory.TypeSystem.IMember member);
@@ -419,6 +425,11 @@ namespace Bridge.Contract
             get; set;
         }
 
+        Dictionary<IType, Dictionary<string, string>> NamedBoxedFunctions
+        {
+            get; set;
+        }
+
         bool StaticBlock
         {
             get;
@@ -471,5 +482,7 @@ namespace Bridge.Contract
 
         void WriteIndented(string s, int? position = null);
         string GetReflectionName(IType type);
+
+        bool ForbidLifting { get; set; }
     }
 }

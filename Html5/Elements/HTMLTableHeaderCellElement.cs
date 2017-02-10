@@ -7,12 +7,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLTableHeaderCellElement")]
-    public class HTMLTableHeaderCellElement : HTMLTableCellElement<HTMLTableHeaderCellElement>
+    public sealed class HTMLTableHeaderCellElement : HTMLTableCellElement<HTMLTableHeaderCellElement>
     {
         [Template("document.createElement('th')")]
-        public HTMLTableHeaderCellElement()
-        {
-        }
+        public extern HTMLTableHeaderCellElement();
 
         /// <summary>
         /// Is a DOMString containing a name used to refer to this cell in other context. It reflects the abbr attribute.

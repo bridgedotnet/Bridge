@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -17,8 +17,10 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
 #pragma warning disable CS0626 // Method, operator, or accessor is marked external and has no attributes on it
+
         [Template("Bridge.isPlainObject({o})")]
         public static extern bool IsPlainObject(object o);
+
 #pragma warning restore CS0626 // Method, operator, or accessor is marked external and has no attributes on it
 
         [Test]

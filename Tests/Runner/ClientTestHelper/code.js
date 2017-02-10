@@ -1,7 +1,7 @@
 /**
  * Bridge Test library - a common classes shared across all test Batches
  * @version 1.2.3.4
- * @compiler Bridge.NET 15.7.0
+ * @compiler Bridge.NET 16.0.0
  */
 Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
     "use strict";
@@ -9,7 +9,7 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
     Bridge.define("Bridge.ClientTestHelper.ClassLibraryTest", {
         statics: {
             test: function (item) {
-                item.Bridge$ClientTestHelper$IWriteableItem$setValue(2);
+                item.Bridge$ClientTestHelper$IWriteableItem$setValue(Bridge.box(2, System.Int32));
             }
         }
     });

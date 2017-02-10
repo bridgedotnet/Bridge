@@ -6,12 +6,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLTrackElement")]
-    public class HTMLTrackElement : HTMLElement<HTMLTrackElement>
+    public sealed class HTMLTrackElement : HTMLElement<HTMLTrackElement>
     {
         [Template("document.createElement('track')")]
-        public HTMLTrackElement()
-        {
-        }
+        public extern HTMLTrackElement();
 
         /// <summary>
         /// Reflects the kind HTML attribute, indicating how the text track is meant to be used. Possible values are: subtitles, captions, descriptions, chapters, metadata. See kind attribute documentation for details.

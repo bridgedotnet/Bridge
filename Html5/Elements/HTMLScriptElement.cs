@@ -5,12 +5,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLScriptElement")]
-    public class HTMLScriptElement : HTMLElement<HTMLScriptElement>
+    public sealed class HTMLScriptElement : HTMLElement<HTMLScriptElement>
     {
         [Template("document.createElement('script')")]
-        public HTMLScriptElement()
-        {
-        }
+        public extern HTMLScriptElement();
 
         /// <summary>
         /// The async and defer attributes are boolean attributes that indicate how the script should be executed. The defer and async attributes must not be specified if the src attribute is not present.

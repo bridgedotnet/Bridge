@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -13,6 +13,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             public Dictionary<string, object> dic;
             public bool isGeneric;
+
             public AddObj() : base()
             {
                 this.dic = new Dictionary<string, object>();
@@ -54,7 +55,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 Assert.AreEqual(false, newJObj1.isGeneric);
                 Assert.AreEqual(1, newJObj1.dic.Count);
 
-                IEnumerable<KeyValuePair<string, object>>  newJObj2 = new AddObj { { "name", 1 } };
+                IEnumerable<KeyValuePair<string, object>> newJObj2 = new AddObj { { "name", 1 } };
                 foreach (var jObj in newJObj2)
                 {
                 }

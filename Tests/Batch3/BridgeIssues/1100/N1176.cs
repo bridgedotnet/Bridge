@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -32,7 +32,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
         public class Item<TValue>
         {
-            public static implicit operator string (Item<TValue> item)
+            public static implicit operator string(Item<TValue> item)
             {
                 return "Item";
             }

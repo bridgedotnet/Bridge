@@ -183,8 +183,11 @@ namespace Bridge
         [Template("encodeURIComponent({0})")]
         public static extern string EncodeURIComponent(string component);
 
-        [Template("typeof {0}")]
+        [Template("(typeof {0})")]
         public static extern string TypeOf(object obj);
+
+        [Template("({obj} instanceof {type})")]
+        public static extern bool InstanceOf(object obj, Type type);
 
         [Template("this")]
         public static extern T This<T>();

@@ -314,10 +314,6 @@ namespace System
         [NonScriptable]
         public static extern Type GetTypeFromHandle(RuntimeTypeHandle typeHandle);
 
-        [Obsolete("Please use .FullName property. See Issue #1749 for more information.", true)]
-        [Template("Bridge.getTypeName({this})")]
-        public override extern string GetClassName();
-
         /// <summary>
         /// Returns the names of the members of the current enumeration type.
         /// </summary>

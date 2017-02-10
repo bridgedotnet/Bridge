@@ -4,7 +4,6 @@ using System.Runtime.CompilerServices;
 namespace System
 {
     [External]
-    [Name("Boolean")]
     public struct Boolean : IComparable, IComparable<bool>, IEquatable<bool>
     {
         [Template("System.Boolean.trueString")]
@@ -13,6 +12,7 @@ namespace System
         [Template("System.Boolean.falseString")]
         public static readonly string FalseString = "False";
 
+        [Template("false")]
         private extern Boolean(DummyTypeUsedToAddAttributeToDefaultValueTypeConstructor _);
 
         [Template("Bridge.compare({this}, {other})")]

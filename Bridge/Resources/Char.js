@@ -124,6 +124,22 @@
                 }
 
                 return new RegExp("[\u0000-\u001F\u007F\u0080-\u009F]").test(String.fromCharCode(value));
+            },
+
+            equals: function (v1, v2) {
+                if (Bridge.is(v1, System.Char) && Bridge.is(v2, System.Char)) {
+                    return Bridge.unbox(v1) === Bridge.unbox(v2);
+                }
+
+                return false;
+            },
+
+            equalsT: function (v1, v2) {
+                return Bridge.unbox(v1) === Bridge.unbox(v2);
+            },
+
+            getHashCode: function(v) {
+                return v | (v << 16);
             }
         }
     });

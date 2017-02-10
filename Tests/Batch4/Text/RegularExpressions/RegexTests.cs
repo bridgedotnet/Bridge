@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using Bridge.Text.RegularExpressions;
 
 namespace Bridge.ClientTest.Batch4.Text.RegularExpressions

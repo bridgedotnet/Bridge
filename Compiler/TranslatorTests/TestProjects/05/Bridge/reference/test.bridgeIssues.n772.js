@@ -1,5 +1,5 @@
 /**
- * @compiler Bridge.NET 15.7.0
+ * @compiler Bridge.NET 16.0.0
  */
 Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
@@ -18,7 +18,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                 var doubleArray = System.Array.init(8, 0, System.Double);
 
                 //These arrays do not depend on "useTypedArray" bridge.json option
-                var stringArray = System.Array.init(9, null, String);
+                var stringArray = System.Array.init(9, null, System.String);
                 var decimalArray = System.Array.init(10, System.Decimal(0.0), System.Decimal);
 
                 byteArray[0] = 1;

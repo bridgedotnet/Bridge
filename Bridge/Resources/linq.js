@@ -161,6 +161,7 @@
             }
         };
 
+        this.System$IDisposable$dispose = this.dispose;
         this.getCurrent$1 = this.getCurrent;
         this.System$Collections$IEnumerator$getCurrent = this.getCurrent;
         this.System$Collections$IEnumerator$moveNext = this.moveNext;
@@ -1432,7 +1433,7 @@
             return new IEnumerator(
                 function () {
                     enumerator = source.getEnumerator();
-                    keys = new (System.Collections.Generic.Dictionary$2(Object, Object))(null, comparer);
+                    keys = new (System.Collections.Generic.Dictionary$2(System.Object, System.Object))(null, comparer);
                     Enumerable.from(second).forEach(function (key) { if (!keys.containsKey(key)) { keys.add(key); } });
                 },
                 function () {
@@ -1463,9 +1464,9 @@
                 function () {
                     enumerator = source.getEnumerator();
 
-                    keys = new (System.Collections.Generic.Dictionary$2(Object, Object))(null, comparer);
+                    keys = new (System.Collections.Generic.Dictionary$2(System.Object, System.Object))(null, comparer);
                     Enumerable.from(second).forEach(function (key) { if (!keys.containsKey(key)) { keys.add(key); } });
-                    outs = new (System.Collections.Generic.Dictionary$2(Object, Object))(null, comparer);
+                    outs = new (System.Collections.Generic.Dictionary$2(System.Object, System.Object))(null, comparer);
                 },
                 function () {
                     while (enumerator.moveNext()) {
@@ -1520,7 +1521,7 @@
             return new IEnumerator(
                 function () {
                     firstEnumerator = source.getEnumerator();
-                    keys = new (System.Collections.Generic.Dictionary$2(Object, Object))(null, comparer);
+                    keys = new (System.Collections.Generic.Dictionary$2(System.Object, System.Object))(null, comparer);
                 },
                 function () {
                     var current;
@@ -2253,7 +2254,7 @@
     Enumerable.prototype.toList = function (T) {
         var array = [];
         this.forEach(function (x) { array.push(x); });
-        return new (System.Collections.Generic.List$1(T || Object))(array);
+        return new (System.Collections.Generic.List$1(T || System.Object))(array);
     };
 
     // Overload:function (keySelector)
@@ -2263,7 +2264,7 @@
         keySelector = Utils.createLambda(keySelector);
         elementSelector = Utils.createLambda(elementSelector);
 
-        var dict = new (System.Collections.Generic.Dictionary$2(Object, Object))(null, comparer);
+        var dict = new (System.Collections.Generic.Dictionary$2(System.Object, System.Object))(null, comparer);
         var order = [];
         this.forEach(function (x) {
             var key = keySelector(x);
@@ -2578,6 +2579,10 @@
         this.parent = parent;
     };
     OrderedEnumerable.prototype = new Enumerable();
+    OrderedEnumerable.prototype.constructor = OrderedEnumerable;
+    Bridge.definei("System.Linq.IOrderedEnumerable$1");
+    OrderedEnumerable.$$inherits = [];
+    Bridge.Class.addExtend(OrderedEnumerable, [System.Collections.IEnumerable, System.Linq.IOrderedEnumerable$1]);
 
     OrderedEnumerable.prototype.createOrderedEnumerable = function (keySelector, comparer, descending) {
         return new OrderedEnumerable(this.source, keySelector, comparer, descending, this);
@@ -2918,8 +2923,9 @@
         };
     };
 
+    Bridge.definei("System.Linq.ILookup$2");
     Lookup.$$inherits = [];
-    Bridge.Class.addExtend(Lookup, [System.Collections.IEnumerable]);
+    Bridge.Class.addExtend(Lookup, [System.Collections.IEnumerable, System.Linq.ILookup$2]);
 
     var Grouping = function (groupKey, elements) {
         this.key = function () {
@@ -2928,9 +2934,11 @@
         ArrayEnumerable.call(this, elements);
     };
     Grouping.prototype = new ArrayEnumerable();
+    Bridge.definei("System.Linq.IGrouping$2");
+    Grouping.prototype.constructor = Grouping;
 
     Grouping.$$inherits = [];
-    Bridge.Class.addExtend(Grouping, [System.Collections.IEnumerable]);
+    Bridge.Class.addExtend(Grouping, [System.Collections.IEnumerable, System.Linq.IGrouping$2]);
 
     // module export
     /*if (typeof define === Types.Function && define.amd) { // AMD
@@ -2944,6 +2952,9 @@
     Bridge.Linq = {};
     Bridge.Linq.Enumerable = Enumerable;
 
-    System.Linq = {};
+    System.Linq = System.Linq || {};
     System.Linq.Enumerable = Enumerable;
+    System.Linq.Grouping$2 = Grouping;
+    System.Linq.Lookup$2 = Lookup;
+    System.Linq.OrderedEnumerable$1 = OrderedEnumerable;
 })(Bridge.global);

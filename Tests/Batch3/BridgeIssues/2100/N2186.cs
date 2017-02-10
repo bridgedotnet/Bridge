@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
@@ -20,13 +20,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
-        [Bridge.Test.SetUp]
+        [SetUp]
         public static void ClearOutput()
         {
             Output = "";
         }
 
-        [Bridge.Test.TearDown]
+        [TearDown]
         public static void ResetOutput()
         {
             Output = null;

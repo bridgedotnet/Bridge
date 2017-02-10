@@ -362,7 +362,7 @@ namespace Bridge.Translator
                 {
                     this.WriteIf();
                     this.WriteOpenParentheses();
-                    this.Write(string.Format(JS.Funcs.BRIDGE_IS + "({0}, {1})", varName, exceptionType));
+                    this.Write(string.Format(JS.Types.Bridge.IS + "({0}, {1})", varName, exceptionType));
                     this.WriteCloseParentheses();
                     this.WriteSpace();
                 }

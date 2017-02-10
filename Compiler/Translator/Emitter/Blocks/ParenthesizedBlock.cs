@@ -46,8 +46,9 @@ namespace Bridge.Translator
             if (this.ParenthesizedExpression.Parent is CastExpression)
             {
                 var conversion = this.Emitter.Resolver.Resolver.GetConversion(this.ParenthesizedExpression);
-
-                if (conversion.IsNumericConversion || conversion.IsEnumerationConversion || conversion.IsIdentityConversion)
+                bool isOperator = this.ParenthesizedExpression.Parent.Parent is BinaryOperatorExpression ||
+                                  this.ParenthesizedExpression.Parent.Parent is UnaryOperatorExpression;
+                if (!isOperator && (conversion.IsNumericConversion || conversion.IsEnumerationConversion || conversion.IsIdentityConversion))
                 {
                     return true;
                 }

@@ -5,14 +5,14 @@
 
                 // These below should NOT contain Bridge.literal call
                 var c1 = { id: "1" };
-                // These below should contain Bridge.literal call as [Name] used
-                // Bridge.literal(Options1, { id: "1Name" })
-                var c1Name = Bridge.literal(Options1, { id: "1Name" });
+                // These below should NOT contain Bridge.literal call as [Name] used
+                // { id: "1Name" }
+                var c1Name = { id: "1Name" };
 
                 // These below should NOT contain Bridge.literal call
-                // .ctor({ id: "..." });
-                var c2 = TestIssue2141.Config2.ctor({ id: "2" });
-                var c2Name = Options2.ctor({ id: "2Name" });
+                // ({ id: "..." });
+                var c2 = { id: "2" };
+                var c2Name = { id: "2Name" };
 
                 // These below should NOT contain Bridge.literal call
                 // Bridge.merge(.ctor(), { id: "..." });
@@ -34,14 +34,6 @@
                 } );
             }
         }
-    });
-
-    Bridge.define("TestIssue2141.Config2", {
-        $literal: true
-    });
-
-    Bridge.define("Options2", {
-        $literal: true
     });
 
     Bridge.define("TestIssue2141.Config3", {

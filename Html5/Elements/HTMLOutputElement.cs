@@ -5,12 +5,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLOutputElement")]
-    public class HTMLOutputElement : HTMLElement<HTMLOutputElement>
+    public sealed class HTMLOutputElement : HTMLElement<HTMLOutputElement>
     {
         [Template("document.createElement('output')")]
-        public HTMLOutputElement()
-        {
-        }
+        public extern HTMLOutputElement();
 
         /// <summary>
         /// The default value of the element, initially the empty string.
@@ -60,12 +58,12 @@ namespace Bridge.Html5
         /// The proposed new behavior, implemented in Firefox since Gecko 2.0 is to return false if the element is a candidate for constraint validation, and it does not satisfy its constraints. In this case, it also fires an "invalid" event at the element. It returns true if the element is not a candidate for constraint validation, or if it satisfies its constraints (See bug 604673 (https://bugzilla.mozilla.org/show_bug.cgi?id=604673)).
         /// </summary>
         /// <returns></returns>
-        public virtual extern bool CheckValidity();
+        public extern bool CheckValidity();
 
         /// <summary>
         /// Sets a custom validity message for the element. If this message is not the empty string, then the element is suffering from a custom validity error, and does not validate.
         /// </summary>
         /// <param name="error">The custom validity message</param>
-        public virtual extern void SetCustomValidity(string error);
+        public extern void SetCustomValidity(string error);
     }
 }

@@ -5,12 +5,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLFieldSetElement")]
-    public class HTMLFieldSetElement : HTMLElement<HTMLFieldSetElement>
+    public sealed class HTMLFieldSetElement : HTMLElement<HTMLFieldSetElement>
     {
         [Template("document.createElement('fieldset')")]
-        public HTMLFieldSetElement()
-        {
-        }
+        public extern HTMLFieldSetElement();
 
         /// <summary>
         /// Reflects the disabled HTML attribute, indicating whether the user can interact with the control.
@@ -56,12 +54,12 @@ namespace Bridge.Html5
         /// <summary>
         /// Always returns true because &lt;fieldset&gt; objects are never candidates for constraint validation.
         /// </summary>
-        public virtual extern bool CheckValidity();
+        public extern bool CheckValidity();
 
         /// <summary>
         /// Sets a custom validity message for the field set. If this message is not the empty string, then the field set is suffering from a custom validity error, and does not validate.
         /// </summary>
         /// <param name="error"></param>
-        public virtual extern void SetCustomValidity(string error);
+        public extern void SetCustomValidity(string error);
     }
 }

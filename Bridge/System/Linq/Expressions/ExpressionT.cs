@@ -4,8 +4,9 @@ using System.Collections.Generic;
 namespace System.Linq.Expressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     [Cast("{this}.ntype === 18")]
+    [IgnoreGeneric]
     public sealed class Expression<TDelegate> : LambdaExpression
     {
         public extern Expression<TDelegate> Update(Expression body, IEnumerable<ParameterExpression> parameters);
