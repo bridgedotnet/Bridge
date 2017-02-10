@@ -316,8 +316,10 @@
                 return type.getDefaultValue();
             } else if (type === Boolean || type === System.Boolean) {
                 return false;
-            } else if (type === Date || type === System.DateTime) {
+            } else if (type === System.DateTime) {
                 return System.DateTime.getDefaultValue();
+            } else if (type === Date) {
+                return new Date();
             } else if (type === Number) {
                 return 0;
             } else if (type === String || type === System.String) {
@@ -572,8 +574,10 @@
                 return type.getDefaultValue();
             } else if (type === Boolean || type === System.Boolean) {
                 return false;
-            } else if (type === Date || type === System.DateTime) {
+            } else if (type === System.DateTime) {
                 return System.DateTime.getDefaultValue();
+            } else if (type === Date) {
+                return new Date();
             } else if (type === Number) {
                 return 0;
             }
@@ -3241,6 +3245,8 @@
         },
 
         getInterfaces: function (type) {
+            var t;
+
             if (type.$allInterfaces) {
                 return type.$allInterfaces;
             } else if (type === Date) {
@@ -3251,8 +3257,8 @@
                 return [System.IComparable$1(Boolean), System.IEquatable$1(Boolean), System.IComparable];
             } else if (type === String) {
                 return [System.IComparable$1(String), System.IEquatable$1(String), System.IComparable, System.ICloneable, System.Collections.IEnumerable, System.Collections.Generic.IEnumerable$1(System.Char)];
-            } else if (type === Array || type.$isArray || System.Array._typedArrays[Bridge.getTypeName(type)]) {
-                var t = type.$elementType || System.Object;
+            } else if (type === Array || type.$isArray || (t = System.Array._typedArrays[Bridge.getTypeName(type)])) {
+                t = t || type.$elementType || System.Object;
                 return [System.Collections.IEnumerable, System.Collections.ICollection, System.ICloneable, System.Collections.IList, System.Collections.Generic.IEnumerable$1(t), System.Collections.Generic.ICollection$1(t), System.Collections.Generic.IList$1(t)];
             } else {
                 return [];
@@ -9407,15 +9413,15 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
         },
 
         _typedArrays: {
-            Float32Array: true,
-            Float64Array: true,
-            Int8Array: true,
-            Int16Array: true,
-            Int32Array: true,
-            Uint8Array: true,
-            Uint8ClampedArray: true,
-            Uint16Array: true,
-            Uint32Array: true
+            Float32Array: System.Single,
+            Float64Array: System.Double,
+            Int8Array: System.SByte,
+            Int16Array: System.Int16,
+            Int32Array: System.Int32,
+            Uint8Array: System.Byte,
+            Uint8ClampedArray: System.Byte,
+            Uint16Array: System.UInt16,
+            Uint32Array: System.UInt32
         },
 
         is: function (obj, type) {
@@ -9721,8 +9727,6 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
         setItem: function (obj, idx, value, T) {
             var name;
-
-            System.Array.checkReadOnly(obj, T);
 
             if (Bridge.isArray(obj)) {
                 obj[idx] = value;
