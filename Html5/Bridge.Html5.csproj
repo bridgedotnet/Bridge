@@ -70,6 +70,7 @@
     <Compile Include="Events\MessageEvent.cs" />
     <Compile Include="Events\CloseEvent.cs" />
     <Compile Include="Events\TouchEvent.cs" />
+    <Compile Include="Function.cs" />
     <Compile Include="Gamepad.cs" />
     <Compile Include="GamepadButton.cs" />
     <Compile Include="GamepadMappingType.cs" />
