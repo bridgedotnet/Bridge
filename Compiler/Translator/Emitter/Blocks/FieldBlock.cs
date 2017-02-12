@@ -240,10 +240,10 @@ namespace Bridge.Translator
                         needContinue = constValue is IType;
                         writeScript = true;
 
-                        if (needContinue && !(member.Initializer is ObjectCreateExpression))
+                        /*if (needContinue && !(member.Initializer is ObjectCreateExpression))
                         {
                             defValue = " || " + Inspector.GetStructDefaultValue((IType)constValue, this.Emitter);
-                        }
+                        }*/
                     }
                     else if (constValue is AstType)
                     {
@@ -346,6 +346,13 @@ namespace Bridge.Translator
                             else
                             {
                                 this.Injectors.Add(string.Format(name.StartsWith("\"") ? interfaceFormat : format, name, value + defValue));
+                            }
+
+                            if (isProperty)
+                            {
+                                needContinue = false;
+                                constValue = "null";
+                                write = true;
                             }
                         }
                     }

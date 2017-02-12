@@ -15110,6 +15110,28 @@ Bridge.$N1391Result =                 r;
         $kind: "interface"
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2374", {
+        statics: {
+            testPropertyInitializer: function () {
+                var p = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2374.Person();
+
+                Bridge.Test.NUnit.Assert.true(Bridge.is(Bridge.box(p.getCreatedOn(), System.DateTime, $box_.System.DateTime.toString), System.DateTime));
+                Bridge.Test.NUnit.Assert.areEqual(new Date().getFullYear(), p.getCreatedOn().getFullYear());
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2374.Person", {
+        config: {
+            properties: {
+                CreatedOn: null
+            },
+            init: function () {
+                this.CreatedOn = new Date();
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
@@ -24150,6 +24172,13 @@ Bridge.$N1391Result =                 r;
 
     Bridge.apply($box_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2327.Foo, {
         toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2327.Foo, obj);}
+    });
+
+
+    Bridge.ns("System.DateTime", $box_);
+
+    Bridge.apply($box_.System.DateTime, {
+        toString: function(obj) {return System.DateTime.format(obj);}
     });
 
 
