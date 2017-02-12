@@ -77,8 +77,8 @@ namespace Bridge.ClientTest.Batch4
         {
             int? a = 3, b = null;
             // #1567
-            Assert.AreEqual("System.Nullable$System.Double", typeof(Nullable<double>).FullName, "Open FullName");
-            Assert.AreEqual("System.Nullable$System.Int32", typeof(int?).FullName, "Instantiated FullName");
+            Assert.AreEqual("System.Nullable$1[[System.Double, mscorlib]]", typeof(Nullable<double>).FullName, "Open FullName");
+            Assert.AreEqual("System.Nullable$1[[System.Int32, mscorlib]]", typeof(int?).FullName, "Instantiated FullName");
             Assert.True(typeof(Nullable<>).IsGenericTypeDefinition, "IsGenericTypeDefinition");
             Assert.AreEqual(typeof(Nullable<>), typeof(int?).GetGenericTypeDefinition(), "GetGenericTypeDefinition");
             // Test restructure to keep assertion count correct (prevent uncaught test exception)

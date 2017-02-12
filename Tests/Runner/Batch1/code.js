@@ -350,16 +350,17 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         iCollectionAddWorks: function () {
             var l = System.Array.init(["x", "y", "z"], System.String);
-            System.Array.add(l, "a", System.String);
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "y", "z", "a"], System.String), l);
+            Bridge.Test.NUnit.Assert.throws$6(System.NotSupportedException, function () {
+                System.Array.add(l, "a", System.String);
+            });
+            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "y", "z"], System.String), l);
         },
         iCollectionClearWorks: function () {
             var l = System.Array.init(["x", "y", "z"], System.String);
-            System.Array.clear(l, System.String);
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(3, null, System.String), l);
-            Bridge.Test.NUnit.Assert.areDeepEqual(null, System.Array.getItem(l, 0, System.String));
-            Bridge.Test.NUnit.Assert.areDeepEqual(null, System.Array.getItem(l, 1, System.String));
-            Bridge.Test.NUnit.Assert.areDeepEqual(null, System.Array.getItem(l, 2, System.String));
+            Bridge.Test.NUnit.Assert.throws$6(System.NotSupportedException, function () {
+                System.Array.clear(l, System.String);
+            });
+            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "y", "z"], System.String), l);
         },
         iCollectionContainsWorks: function () {
             var l = System.Array.init(["x", "y", "z"], System.String);
@@ -418,9 +419,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         iCollectionRemoveWorks: function () {
             var l = System.Array.init(["x", "y", "z"], System.String);
-            Bridge.Test.NUnit.Assert.true(System.Array.remove(l, "y", System.String));
-            Bridge.Test.NUnit.Assert.false(System.Array.remove(l, "a", System.String));
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "z"], System.String), l);
+            Bridge.Test.NUnit.Assert.throws$6(System.NotSupportedException, function () {
+                System.Array.remove(l, "y", System.String);
+            });
+            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "y", "z"], System.String), l);
         },
         iListIsReadOnlyWorks: function () {
             var l = System.Array.init(["x", "y", "z"], System.String);
@@ -444,13 +446,17 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         iListInsertWorks: function () {
             var l = System.Array.init(["x", "y", "z"], System.String);
-            System.Array.insert(l, 1, "a", System.String);
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "a", "y", "z"], System.String), l);
+            Bridge.Test.NUnit.Assert.throws$6(System.NotSupportedException, function () {
+                System.Array.insert(l, 1, "a", System.String);
+            });
+            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "y", "z"], System.String), l);
         },
         iListRemoveAtWorks: function () {
             var l = System.Array.init(["x", "y", "z"], System.String);
-            System.Array.removeAt(l, 1, System.String);
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "z"], System.String), l);
+            Bridge.Test.NUnit.Assert.throws$6(System.NotSupportedException, function () {
+                System.Array.removeAt(l, 1, System.String);
+            });
+            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "y", "z"], System.String), l);
         }
     });
 
@@ -616,6 +622,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.areEqual(Bridge.unbox(v), 2);
                 v = Bridge.box(System.Array.getItem(il, 2, System.Int32), System.Int32);
                 Bridge.Test.NUnit.Assert.areEqual(Bridge.unbox(v), 3);
+
                 System.Array.setItem(il, 2, 42, System.Int32);
                 Bridge.Test.NUnit.Assert.areEqual(Bridge.cast(a, System.Array.type(System.Int32))[2], 42);
 
@@ -759,11 +766,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.areEqual(idirect[2], 0);
 
                 idirect = System.Array.init([7, 8, 9], System.Int32);
-
-                System.Array.clear(Bridge.cast(idirect, System.Collections.Generic.IList$1(System.Int32)), System.Int32);
-                Bridge.Test.NUnit.Assert.areEqual(idirect[0], 0);
-                Bridge.Test.NUnit.Assert.areEqual(idirect[1], 0);
-                Bridge.Test.NUnit.Assert.areEqual(idirect[2], 0);
+                Bridge.Test.NUnit.Assert.throws(function () {
+                    System.Array.clear(Bridge.cast(idirect, System.Collections.Generic.IList$1(System.Int32)), System.Int32);
+                });
 
                 idirect = System.Array.init([19088743, 2023406814, 573785173, 1719109785, 288576887, 574908040], System.Int32);
                 System.Array.fill(idirect, 0, 2, 3);
@@ -813,12 +818,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.null(sdirect[1]);
                 Bridge.Test.NUnit.Assert.null(sdirect[2]);
 
-                sdirect = System.Array.init(["7", "8", "9"], System.String);
-
-                System.Array.clear(Bridge.cast(sdirect, System.Collections.Generic.IList$1(System.String)), System.String);
-                Bridge.Test.NUnit.Assert.null(sdirect[0]);
-                Bridge.Test.NUnit.Assert.null(sdirect[1]);
-                Bridge.Test.NUnit.Assert.null(sdirect[2]);
+                Bridge.Test.NUnit.Assert.throws(function () {
+                    System.Array.clear(Bridge.cast(sdirect, System.Collections.Generic.IList$1(System.String)), System.String);
+                });
 
                 sdirect = System.Array.init(["0x1234567", "0x789abcde", "0x22334455", "0x66778899", "0x11335577", "0x22446688"], System.String);
                 System.Array.fill(sdirect, null, 2, 3);
@@ -5675,10 +5677,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.NUnit.Assert.areEqual(true, System.Array.getIsReadOnly(Bridge.cast(System.Array.init(["x", "y", "z"], System.String), System.Collections.Generic.ICollection$1(System.String)), System.String));
         },
         classImplementingICollectionIsReadOnlyWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual(true, new Bridge.ClientTest.Collections.Generic.ICollectionTests.MyCollection(System.Array.init(["x", "y"], System.String)).getIsReadOnly());
+            Bridge.Test.NUnit.Assert.areEqual(false, new Bridge.ClientTest.Collections.Generic.ICollectionTests.MyCollection(System.Array.init(["x", "y"], System.String)).getIsReadOnly());
         },
         classImplementingICollectionCastToICollectionIsReadOnlyWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual(true, System.Array.getIsReadOnly(Bridge.cast(new Bridge.ClientTest.Collections.Generic.ICollectionTests.MyCollection(System.Array.init(["x", "y", "z"], System.String)), System.Collections.Generic.ICollection$1(System.String)), System.String));
+            Bridge.Test.NUnit.Assert.areEqual(false, System.Array.getIsReadOnly(Bridge.cast(new Bridge.ClientTest.Collections.Generic.ICollectionTests.MyCollection(System.Array.init(["x", "y", "z"], System.String)), System.Collections.Generic.ICollection$1(System.String)), System.String));
         },
         classImplementingICollectionAddWorks: function () {
             var c = new Bridge.ClientTest.Collections.Generic.ICollectionTests.MyCollection(System.Array.init(["x", "y"], System.String));
@@ -5846,7 +5848,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             return this.getItems().getCount();
         },
         getIsReadOnly: function () {
-            return true;
+            return false;
         },
         System$Collections$IEnumerable$getEnumerator: function () {
             return this.getEnumerator();
@@ -6310,6 +6312,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var l = System.Array.init(["x", "y", "z"], System.String);
             Bridge.Test.NUnit.Assert.areEqual("y", System.Array.getItem(l, 1, System.String));
         },
+        arrayCastToIListSetItemWorks: function () {
+            var l = System.Array.init(["x", "y", "z"], System.String);
+            System.Array.setItem(l, 1, "a", System.String);
+            Bridge.Test.NUnit.Assert.areEqual("a", System.Array.getItem(l, 1, System.String));
+        },
         classImplementingIListGetItemWorks: function () {
             var l = new Bridge.ClientTest.Collections.Generic.IListTests.MyList(System.Array.init(["x", "y", "z"], System.String));
             Bridge.Test.NUnit.Assert.areEqual("y", l.getItem(1));
@@ -6317,11 +6324,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         classImplementingIListCastToIListGetItemWorks: function () {
             var l = new Bridge.ClientTest.Collections.Generic.IListTests.MyList(System.Array.init(["x", "y", "z"], System.String));
             Bridge.Test.NUnit.Assert.areEqual("y", System.Array.getItem(l, 1, System.String));
-        },
-        arrayCastToIListSetItemWorks: function () {
-            var l = System.Array.init(["x", "y", "z"], System.String);
-            System.Array.setItem(l, 1, "a", System.String);
-            Bridge.Test.NUnit.Assert.areEqual("a", System.Array.getItem(l, 1, System.String));
         },
         classImplementingIListSetItemWorks: function () {
             var l = new Bridge.ClientTest.Collections.Generic.IListTests.MyList(System.Array.init(["x", "y", "z"], System.String));
@@ -6339,11 +6341,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         classImplementingIListIsReadOnlyWorks: function () {
             var c = new Bridge.ClientTest.Collections.Generic.IListTests.MyList(System.Array.init(["x", "y"], System.String));
-            Bridge.Test.NUnit.Assert.areEqual(true, c.getIsReadOnly());
+            Bridge.Test.NUnit.Assert.areEqual(false, c.getIsReadOnly());
         },
         classImplementingIListCastToIListIsReadOnlyWorks: function () {
             var l = new Bridge.ClientTest.Collections.Generic.IListTests.MyList(System.Array.init(["x", "y"], System.String));
-            Bridge.Test.NUnit.Assert.areEqual(true, System.Array.getIsReadOnly(l, System.String));
+            Bridge.Test.NUnit.Assert.areEqual(false, System.Array.getIsReadOnly(l, System.String));
         },
         arrayCastToIListIndexOfWorks: function () {
             var arr = System.Array.init([new Bridge.ClientTest.Collections.Generic.IListTests.C(1), new Bridge.ClientTest.Collections.Generic.IListTests.C(2), new Bridge.ClientTest.Collections.Generic.IListTests.C(3)], Bridge.ClientTest.Collections.Generic.IListTests.C);
@@ -6363,22 +6365,22 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         classImplementingIListInsertWorks: function () {
             var l = new Bridge.ClientTest.Collections.Generic.IListTests.MyList(System.Array.init(["x", "y"], System.String));
             l.insert(1, "z");
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "z", "y"], System.String), l.getItems().toArray());
+            Bridge.Test.NUnit.Assert.areEqual(System.Array.init(["x", "z", "y"], System.String), l.getItems().toArray());
         },
         classImplementingIListCastToIListInsertWorks: function () {
             var l = new Bridge.ClientTest.Collections.Generic.IListTests.MyList(System.Array.init(["x", "y"], System.String));
             System.Array.insert(l, 1, "z", System.String);
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "z", "y"], System.String), Bridge.cast(l, Bridge.ClientTest.Collections.Generic.IListTests.MyList).getItems().toArray());
+            Bridge.Test.NUnit.Assert.areEqual(System.Array.init(["x", "z", "y"], System.String), Bridge.cast(l, Bridge.ClientTest.Collections.Generic.IListTests.MyList).getItems().toArray());
         },
         classImplementingIListRemoveAtWorks: function () {
             var l = new Bridge.ClientTest.Collections.Generic.IListTests.MyList(System.Array.init(["x", "y", "z"], System.String));
             l.removeAt(1);
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "z"], System.String), l.getItems().toArray());
+            Bridge.Test.NUnit.Assert.areEqual(System.Array.init(["x", "z"], System.String), l.getItems().toArray());
         },
         classImplementingIListCastToIListRemoveAtWorks: function () {
             var l = new Bridge.ClientTest.Collections.Generic.IListTests.MyList(System.Array.init(["x", "y", "z"], System.String));
             System.Array.removeAt(l, 1, System.String);
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "z"], System.String), Bridge.cast(l, Bridge.ClientTest.Collections.Generic.IListTests.MyList).getItems().toArray());
+            Bridge.Test.NUnit.Assert.areEqual(System.Array.init(["x", "z"], System.String), Bridge.cast(l, Bridge.ClientTest.Collections.Generic.IListTests.MyList).getItems().toArray());
         },
         classImplementingIListCopyToWorks: function () {
             var l = new Bridge.ClientTest.Collections.Generic.IListTests.MyList(System.Array.init(["x", "y"], System.String));
@@ -6500,7 +6502,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             return this.getItems().getCount();
         },
         getIsReadOnly: function () {
-            return true;
+            return false;
         },
         getItem: function (index) {
             return this.getItems().getItem(index);
@@ -8675,9 +8677,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.NUnit.Assert.areEqual$1(5, System.Array.getCount(coll, System.Single), "Count");
             Bridge.Test.NUnit.Assert.true$1(System.Array.contains(coll, 6, System.Single), "Contains(6)");
             Bridge.Test.NUnit.Assert.false$1(System.Array.contains(coll, 1, System.Single), "Contains(1)");
-            //Assert.Throws<NotSupportedException>(() => coll.Add(2), "Add");
-            //Assert.Throws<NotSupportedException>(() => coll.Clear(), "Clear");
-            //Assert.Throws<NotSupportedException>(() => coll.Remove(2), "Remove");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.add(coll, 2, System.Single);
+            }, "Add");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.clear(coll, System.Single);
+            }, "Clear");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.remove(coll, 2, System.Single);
+            }, "Remove");
         },
         iListMethodsWork_SPI_1559: function () {
             // #1559
@@ -8688,8 +8696,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             System.Array.setItem(list, 3, 4, System.Single);
             Bridge.Test.NUnit.Assert.areEqual$1(4, System.Array.getItem(list, 3, System.Single), "Set item");
 
-            //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
-            //Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.insert(list, 2, 2, System.Single);
+            }, "Insert");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.removeAt(list, 2, System.Single);
+            }, "RemoveAt");
         },
         iListIsReadOnlyWorks: function () {
             var list = Bridge.cast(new Float32Array(System.Array.init(0, 0, System.Single)), System.Collections.Generic.IList$1(System.Single));
@@ -8908,9 +8920,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.NUnit.Assert.areEqual$1(5, System.Array.getCount(coll, System.Double), "Count");
             Bridge.Test.NUnit.Assert.true$1(System.Array.contains(coll, 6, System.Double), "Contains(6)");
             Bridge.Test.NUnit.Assert.false$1(System.Array.contains(coll, 1, System.Double), "Contains(1)");
-            //Assert.Throws<NotSupportedException>(() => coll.Add(2), "Add");
-            //Assert.Throws<NotSupportedException>(() => coll.Clear(), "Clear");
-            //Assert.Throws<NotSupportedException>(() => coll.Remove(2), "Remove");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.add(coll, 2, System.Double);
+            }, "Add");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.clear(coll, System.Double);
+            }, "Clear");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.remove(coll, 2, System.Double);
+            }, "Remove");
         },
         iListMethodsWork_SPI_1559: function () {
             // #1559
@@ -8921,8 +8939,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             System.Array.setItem(list, 3, 4, System.Double);
             Bridge.Test.NUnit.Assert.areEqual$1(4, System.Array.getItem(list, 3, System.Double), "Set item");
 
-            //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
-            //Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.insert(list, 2, 2, System.Double);
+            }, "Insert");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.removeAt(list, 2, System.Double);
+            }, "RemoveAt");
         },
         iListIsReadOnlyWorks: function () {
             var list = Bridge.cast(new Float64Array(System.Array.init(0, 0, System.Single)), System.Collections.Generic.IList$1(System.Single));
@@ -9141,9 +9163,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.NUnit.Assert.areEqual$1(5, System.Array.getCount(coll, System.Int16), "Count");
             Bridge.Test.NUnit.Assert.true$1(System.Array.contains(coll, 6, System.Int16), "Contains(6)");
             Bridge.Test.NUnit.Assert.false$1(System.Array.contains(coll, 1, System.Int16), "Contains(1)");
-            //Assert.Throws<NotSupportedException>(() => coll.Add(2), "Add");
-            //Assert.Throws<NotSupportedException>(() => coll.Clear(), "Clear");
-            //Assert.Throws<NotSupportedException>(() => coll.Remove(2), "Remove");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.add(coll, 2, System.Int16);
+            }, "Add");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.clear(coll, System.Int16);
+            }, "Clear");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.remove(coll, 2, System.Int16);
+            }, "Remove");
         },
         iListMethodsWork_SPI_1559: function () {
             // #1559
@@ -9154,8 +9182,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             System.Array.setItem(list, 3, 4, System.Int16);
             Bridge.Test.NUnit.Assert.areEqual$1(4, System.Array.getItem(list, 3, System.Int16), "Set item");
 
-            //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
-            //Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.insert(list, 2, 2, System.Int16);
+            }, "Insert");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.removeAt(list, 2, System.Int16);
+            }, "RemoveAt");
         },
         iListIsReadOnlyWorks: function () {
             var list = Bridge.cast(new Int16Array(System.Array.init(0, 0, System.Single)), System.Collections.Generic.IList$1(System.Single));
@@ -9374,9 +9406,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.NUnit.Assert.areEqual$1(5, System.Array.getCount(coll, System.Int32), "Count");
             Bridge.Test.NUnit.Assert.true$1(System.Array.contains(coll, 6, System.Int32), "Contains(6)");
             Bridge.Test.NUnit.Assert.false$1(System.Array.contains(coll, 1, System.Int32), "Contains(1)");
-            //Assert.Throws<NotSupportedException>(() => coll.Add(2), "Add");
-            //Assert.Throws<NotSupportedException>(() => coll.Clear(), "Clear");
-            //Assert.Throws<NotSupportedException>(() => coll.Remove(2), "Remove");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.add(coll, 2, System.Int32);
+            }, "Add");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.clear(coll, System.Int32);
+            }, "Clear");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.remove(coll, 2, System.Int32);
+            }, "Remove");
         },
         iListMethodsWork_SPI_1559: function () {
             // #1559
@@ -9387,8 +9425,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             System.Array.setItem(list, 3, 4, System.Int32);
             Bridge.Test.NUnit.Assert.areEqual$1(4, System.Array.getItem(list, 3, System.Int32), "Set item");
 
-            //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
-            //Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.insert(list, 2, 2, System.Int32);
+            }, "Insert");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.removeAt(list, 2, System.Int32);
+            }, "RemoveAt");
         },
         iListIsReadOnlyWorks: function () {
             var list = Bridge.cast(new Int32Array(System.Array.init(0, 0, System.Single)), System.Collections.Generic.IList$1(System.Single));
@@ -9607,9 +9649,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.NUnit.Assert.areEqual$1(5, System.Array.getCount(coll, System.SByte), "Count");
             Bridge.Test.NUnit.Assert.true$1(System.Array.contains(coll, 6, System.SByte), "Contains(6)");
             Bridge.Test.NUnit.Assert.false$1(System.Array.contains(coll, 1, System.SByte), "Contains(1)");
-            //Assert.Throws<NotSupportedException>(() => coll.Add(2), "Add");
-            //Assert.Throws<NotSupportedException>(() => coll.Clear(), "Clear");
-            //Assert.Throws<NotSupportedException>(() => coll.Remove(2), "Remove");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.add(coll, 2, System.SByte);
+            }, "Add");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.clear(coll, System.SByte);
+            }, "Clear");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.remove(coll, 2, System.SByte);
+            }, "Remove");
         },
         iListMethodsWork_SPI_1559: function () {
             // #1559
@@ -9620,8 +9668,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             System.Array.setItem(list, 3, 4, System.SByte);
             Bridge.Test.NUnit.Assert.areEqual$1(4, System.Array.getItem(list, 3, System.SByte), "Set item");
 
-            //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
-            //Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.insert(list, 2, 2, System.SByte);
+            }, "Insert");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.removeAt(list, 2, System.SByte);
+            }, "RemoveAt");
         },
         iListIsReadOnlyWorks: function () {
             var list = Bridge.cast(new Int8Array(System.Array.init(0, 0, System.Single)), System.Collections.Generic.IList$1(System.Single));
@@ -9840,9 +9892,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.NUnit.Assert.areEqual$1(5, System.Array.getCount(coll, System.UInt16), "Count");
             Bridge.Test.NUnit.Assert.true$1(System.Array.contains(coll, 6, System.UInt16), "Contains(6)");
             Bridge.Test.NUnit.Assert.false$1(System.Array.contains(coll, 1, System.UInt16), "Contains(1)");
-            //Assert.Throws<NotSupportedException>(() => coll.Add(2), "Add");
-            //Assert.Throws(() => coll.Clear(), "Clear");
-            //Assert.Throws(() => coll.Remove(2), "Remove");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.add(coll, 2, System.UInt16);
+            }, "Add");
+            Bridge.Test.NUnit.Assert.throws$5(function () {
+                System.Array.clear(coll, System.UInt16);
+            }, "Clear");
+            Bridge.Test.NUnit.Assert.throws$5(function () {
+                System.Array.remove(coll, 2, System.UInt16);
+            }, "Remove");
         },
         iListMethodsWork_SPI_1559: function () {
             // #1559
@@ -9853,8 +9911,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             System.Array.setItem(list, 3, 4, System.UInt16);
             Bridge.Test.NUnit.Assert.areEqual$1(4, System.Array.getItem(list, 3, System.UInt16), "Set item");
 
-            //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
-            //Assert.Throws(() => list.RemoveAt(2), "RemoveAt");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.insert(list, 2, 2, System.UInt16);
+            }, "Insert");
+            Bridge.Test.NUnit.Assert.throws$5(function () {
+                System.Array.removeAt(list, 2, System.UInt16);
+            }, "RemoveAt");
         },
         iListIsReadOnlyWorks: function () {
             var list = Bridge.cast(new Uint16Array(System.Array.init(0, 0, System.Single)), System.Collections.Generic.IList$1(System.Single));
@@ -10073,9 +10135,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.NUnit.Assert.areEqual$1(5, System.Array.getCount(coll, System.UInt32), "Count");
             Bridge.Test.NUnit.Assert.true$1(System.Array.contains(coll, 6, System.UInt32), "Contains(6)");
             Bridge.Test.NUnit.Assert.false$1(System.Array.contains(coll, 1, System.UInt32), "Contains(1)");
-            //Assert.Throws<NotSupportedException>(() => coll.Add(2), "Add");
-            //Assert.Throws<NotSupportedException>(() => coll.Clear(), "Clear");
-            //Assert.Throws<NotSupportedException>(() => coll.Remove(2), "Remove");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.add(coll, 2, System.UInt32);
+            }, "Add");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.clear(coll, System.UInt32);
+            }, "Clear");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.remove(coll, 2, System.UInt32);
+            }, "Remove");
         },
         iListMethodsWork_SPI_1559: function () {
             // #1559
@@ -10086,8 +10154,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             System.Array.setItem(list, 3, 4, System.UInt32);
             Bridge.Test.NUnit.Assert.areEqual$1(4, System.Array.getItem(list, 3, System.UInt32), "Set item");
 
-            //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
-            //Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.insert(list, 2, 2, System.UInt32);
+            }, "Insert");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.removeAt(list, 2, System.UInt32);
+            }, "RemoveAt");
         },
         iListIsReadOnlyWorks: function () {
             var list = Bridge.cast(new Uint32Array(System.Array.init(0, 0, System.Single)), System.Collections.Generic.IList$1(System.Single));
@@ -10306,9 +10378,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.NUnit.Assert.areEqual$1(5, System.Array.getCount(coll, System.SByte), "Count");
             Bridge.Test.NUnit.Assert.true$1(System.Array.contains(coll, 6, System.SByte), "Contains(6)");
             Bridge.Test.NUnit.Assert.false$1(System.Array.contains(coll, 1, System.SByte), "Contains(1)");
-            //Assert.Throws<NotSupportedException>(() => coll.Add(2), "Add");
-            //Assert.Throws(() => coll.Clear(), "Clear");
-            //Assert.Throws(() => coll.Remove(2), "Remove");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.add(coll, 2, System.SByte);
+            }, "Add");
+            Bridge.Test.NUnit.Assert.throws$5(function () {
+                System.Array.clear(coll, System.SByte);
+            }, "Clear");
+            Bridge.Test.NUnit.Assert.throws$5(function () {
+                System.Array.remove(coll, 2, System.SByte);
+            }, "Remove");
         },
         iListMethodsWork_SPI_1559: function () {
             // #1559
@@ -10319,8 +10397,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             System.Array.setItem(list, 3, 4, System.SByte);
             Bridge.Test.NUnit.Assert.areEqual$1(4, System.Array.getItem(list, 3, System.SByte), "Set item");
 
-            //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
-            //Assert.Throws(() => list.RemoveAt(2), "RemoveAt");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.insert(list, 2, 2, System.SByte);
+            }, "Insert");
+            Bridge.Test.NUnit.Assert.throws$5(function () {
+                System.Array.removeAt(list, 2, System.SByte);
+            }, "RemoveAt");
         },
         iListIsReadOnlyWorks: function () {
             var list = Bridge.cast(new Uint8Array(System.Array.init(0, 0, System.Single)), System.Collections.Generic.IList$1(System.Single));
@@ -10542,9 +10624,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.NUnit.Assert.areEqual$1(5, System.Array.getCount(coll, System.SByte), "Count");
             Bridge.Test.NUnit.Assert.true$1(System.Array.contains(coll, 6, System.SByte), "Contains(6)");
             Bridge.Test.NUnit.Assert.false$1(System.Array.contains(coll, 1, System.SByte), "Contains(1)");
-            //Assert.Throws<NotSupportedException>(() => coll.Add(2), "Add");
-            //Assert.Throws<NotSupportedException>(() => coll.Clear(), "Clear");
-            //Assert.Throws<NotSupportedException>(() => coll.Remove(2), "Remove");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.add(coll, 2, System.SByte);
+            }, "Add");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.clear(coll, System.SByte);
+            }, "Clear");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.remove(coll, 2, System.SByte);
+            }, "Remove");
         },
         iListMethodsWork_SPI_1559_1560: function () {
             // #1559 #1560
@@ -10555,8 +10643,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             System.Array.setItem(list, 3, 4, System.SByte);
             Bridge.Test.NUnit.Assert.areEqual$1(4, System.Array.getItem(list, 3, System.SByte), "Set item");
 
-            //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
-            //Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.insert(list, 2, 2, System.SByte);
+            }, "Insert");
+            Bridge.Test.NUnit.Assert.throws$7(System.NotSupportedException, function () {
+                System.Array.removeAt(list, 2, System.SByte);
+            }, "RemoveAt");
         },
         iListIsReadOnlyWorks: function () {
             var list = Bridge.cast(new Uint8ClampedArray(System.Array.init(0, 0, System.Single)), System.Collections.Generic.IList$1(System.Single));

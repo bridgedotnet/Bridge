@@ -267,10 +267,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.ArrayTests", {
         typePropertiesAreCorrect_SPI_1546: function () {
             // #1546
-            Bridge.Test.NUnit.Assert.areEqual$1(System.Object, Bridge.Reflection.getBaseType(Array), "BaseType of Array should be object");
+            Bridge.Test.NUnit.Assert.areEqual$1(Bridge.Reflection.getTypeName(System.Object), Bridge.Reflection.getTypeName(Bridge.Reflection.getBaseType(Array)), "BaseType of Array should be object");
         },
         typePropertiesAreCorrect_SPI_1548: function () {
-            Bridge.Test.NUnit.Assert.areEqual$1("Array", Bridge.Reflection.getTypeFullName(System.Array.type(System.Int32)), "FullName should be Array");
+            Bridge.Test.NUnit.Assert.areEqual$1("System.Int32[]", Bridge.Reflection.getTypeFullName(System.Array.type(System.Int32)), "FullName should be Array");
             Bridge.Test.NUnit.Assert.true$1(Bridge.Reflection.isClass(Array), "IsClass should be true");
             Bridge.Test.NUnit.Assert.true$1(Bridge.Reflection.isClass(System.Array.type(System.Int32)), "IsClass should be true");
 
@@ -464,14 +464,17 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         iCollectionAddWorks: function () {
             // #1548
             var l = System.Array.init(["x", "y", "z"], System.String);
-            System.Array.add(l, "a", System.String);
-            Bridge.Test.NUnit.Assert.areEqual(System.Array.init(["x", "y", "z", "a"], System.String), l);
+            Bridge.Test.NUnit.Assert.throws$6(System.NotSupportedException, function () {
+                System.Array.add(l, "a", System.String);
+            });
         },
         iCollectionClearWorks_NDN_1548: function () {
             // #1548
             var l = System.Array.init(["x", "y", "z"], System.String);
-            System.Array.clear(l, System.String);
-            Bridge.Test.NUnit.Assert.areEqual(System.Array.init(0, null, System.String), l);
+            Bridge.Test.NUnit.Assert.throws$6(System.NotSupportedException, function () {
+                System.Array.clear(l, System.String);
+            });
+            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "y", "z"], System.String), l);
         },
         iCollectionContainsWorks: function () {
             var l = System.Array.init(["x", "y", "z"], System.String);
@@ -486,9 +489,11 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         iCollectionRemoveWorks: function () {
             // #1548
             var l = System.Array.init(["x", "y", "z"], System.String);
-            Bridge.Test.NUnit.Assert.true(System.Array.remove(l, "y", System.String));
-            Bridge.Test.NUnit.Assert.false(System.Array.remove(l, "a", System.String));
-            Bridge.Test.NUnit.Assert.areEqual(System.Array.init(["x", "z"], System.String), l);
+            Bridge.Test.NUnit.Assert.throws$6(System.NotSupportedException, function () {
+                System.Array.remove(l, "y", System.String);
+            });
+            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "y", "z"], System.String), l);
+            Bridge.Test.NUnit.Assert.true(true); // adjust to keep count after rewriting
         },
         iListIndexingWorks: function () {
             var l = System.Array.init(["x", "y", "z"], System.String);
@@ -509,14 +514,19 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         iListInsertWorks: function () {
             // #1548
             var l = System.Array.init(["x", "y", "z"], System.String);
-            System.Array.insert(l, 1, "a", System.String);
-            Bridge.Test.NUnit.Assert.areEqual(System.Array.init(["x", "a", "y", "z"], System.String), l);
+            Bridge.Test.NUnit.Assert.throws$6(System.NotSupportedException, function () {
+                System.Array.insert(l, 1, "a", System.String);
+            });
+            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "y", "z"], System.String), l);
         },
         iListRemoveAtWorks: function () {
             // #1548
             var l = System.Array.init(["x", "y", "z"], System.String);
-            System.Array.removeAt(l, 1, System.String);
-            Bridge.Test.NUnit.Assert.areEqual(System.Array.init(["x", "z"], System.String), l);
+            Bridge.Test.NUnit.Assert.throws$6(System.NotSupportedException, function () {
+                System.Array.removeAt(l, 1, System.String);
+            });
+            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "y", "z"], System.String), l);
+
         },
         repeatWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual(System.Array.init(0, 0, System.Int32), System.Array.init(0, 10, System.Int32));
@@ -1156,7 +1166,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             return this.getItems().getCount();
         },
         getIsReadOnly: function () {
-            return true;
+            return false;
         },
         System$Collections$IEnumerable$getEnumerator: function () {
             return this.getEnumerator();
@@ -1746,7 +1756,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             return this.getItems().getCount();
         },
         getIsReadOnly: function () {
-            return true;
+            return false;
         },
         getItem: function (index) {
             return this.getItems().getItem(index);
@@ -3507,11 +3517,11 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual$1("Float32Array", Bridge.Reflection.getTypeFullName(Float32Array), "FullName");
 
             var interfaces = Bridge.Reflection.getInterfaces(Float32Array);
-            Bridge.Test.NUnit.Assert.areEqual$1(1, interfaces.length, "Interface count should be 1");
+            Bridge.Test.NUnit.Assert.areEqual$1(7, interfaces.length, "Interface count should be 7");
             // #1559
             Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.IEnumerable$1(System.Single), Function), "Interfaces should contain IEnumerable<float>");
-            Bridge.Test.NUnit.Assert.false$1(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.Single), Function), "Interfaces should contain ICollection<float>");
-            Bridge.Test.NUnit.Assert.false$1(System.Array.contains(interfaces, System.Collections.Generic.IList$1(System.Single), Function), "Interfaces should contain IList<float>");
+            Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.Single), Function), "Interfaces should contain ICollection<float>");
+            Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.IList$1(System.Single), Function), "Interfaces should contain IList<float>");
             // Not JS API
             //Assert.False(interfaces.Contains(typeof(IReadOnlyCollection<float>)), "Interfaces should contain IReadOnlyCollection<float>");
             //Assert.False(interfaces.Contains(typeof(IReadOnlyList<float>)), "Interfaces should contain IReadOnlyList<float>");
@@ -3519,8 +3529,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var arr = new Float32Array(0);
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, Float32Array), "Is Float32Array");
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.IEnumerable$1(System.Single)), "Is IEnumerable<float>");
-            Bridge.Test.NUnit.Assert.false$1(Bridge.is(arr, System.Collections.Generic.ICollection$1(System.Single)), "Is ICollection<float>");
-            Bridge.Test.NUnit.Assert.false$1(Bridge.is(arr, System.Collections.Generic.IList$1(System.Single)), "Is IList<float>");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.ICollection$1(System.Single)), "Is ICollection<float>");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.IList$1(System.Single)), "Is IList<float>");
             // Not JS API
             //Assert.False(arr is IReadOnlyCollection<float>, "Is IReadOnlyCollection<float>");
             //Assert.False(arr is IReadOnlyList<float>, "Is IReadOnlyList<float>");
@@ -3725,10 +3735,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual$1("Float64Array", Bridge.Reflection.getTypeFullName(Float64Array), "FullName");
 
             var interfaces = Bridge.Reflection.getInterfaces(Float64Array);
-            Bridge.Test.NUnit.Assert.areEqual$1(1, interfaces.length, "Interface count should be 5");
+            Bridge.Test.NUnit.Assert.areEqual$1(7, interfaces.length, "Interface count should be 7");
             Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.IEnumerable$1(System.Double), Function), "Interfaces should contain IEnumerable<double>");
-            Bridge.Test.NUnit.Assert.false$1(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.Double), Function), "Interfaces should contain ICollection<double>");
-            Bridge.Test.NUnit.Assert.false$1(System.Array.contains(interfaces, System.Collections.Generic.IList$1(System.Double), Function), "Interfaces should contain IList<double>");
+            Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.Double), Function), "Interfaces should contain ICollection<double>");
+            Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.IList$1(System.Double), Function), "Interfaces should contain IList<double>");
 
             // Not JS API
             //Assert.True(interfaces.Contains(typeof(IReadOnlyCollection<double>)), "Interfaces should contain IReadOnlyCollection<double>");
@@ -3737,8 +3747,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var arr = new Float64Array(0);
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, Float64Array), "Is Float64Array");
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.IEnumerable$1(System.Double)), "Is IEnumerable<double>");
-            Bridge.Test.NUnit.Assert.false$1(Bridge.is(arr, System.Collections.Generic.ICollection$1(System.Double)), "Is ICollection<double>");
-            Bridge.Test.NUnit.Assert.false$1(Bridge.is(arr, System.Collections.Generic.IList$1(System.Double)), "Is IList<double>");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.ICollection$1(System.Double)), "Is ICollection<double>");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.IList$1(System.Double)), "Is IList<double>");
 
             // Not JS API
             //Assert.True(arr is IReadOnlyCollection<double>, "Is IReadOnlyCollection<double>");
@@ -3944,10 +3954,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual$1("Int16Array", Bridge.Reflection.getTypeFullName(Int16Array), "FullName");
 
             var interfaces = Bridge.Reflection.getInterfaces(Int16Array);
-            Bridge.Test.NUnit.Assert.areEqual$1(1, interfaces.length, "Interface count should be 5");
+            Bridge.Test.NUnit.Assert.areEqual$1(7, interfaces.length, "Interface count should be 7");
             Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.IEnumerable$1(System.Int16), Function), "Interfaces should contain IEnumerable<short>");
-            Bridge.Test.NUnit.Assert.false$1(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.Int16), Function), "Interfaces should contain ICollection<short>");
-            Bridge.Test.NUnit.Assert.false$1(System.Array.contains(interfaces, System.Collections.Generic.IList$1(System.Int16), Function), "Interfaces should contain IList<short>");
+            Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.Int16), Function), "Interfaces should contain ICollection<short>");
+            Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.IList$1(System.Int16), Function), "Interfaces should contain IList<short>");
             // Not JS API
             //Assert.True(interfaces.Contains(typeof(IReadOnlyCollection<short>)), "Interfaces should contain IReadOnlyCollection<short>");
             //Assert.True(interfaces.Contains(typeof(IReadOnlyList<short>)), "Interfaces should contain IReadOnlyList<short>");
@@ -3955,8 +3965,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var arr = new Int16Array(0);
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, Int16Array), "Is Int16Array");
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.IEnumerable$1(System.Int16)), "Is IEnumerable<short>");
-            Bridge.Test.NUnit.Assert.false$1(Bridge.is(arr, System.Collections.Generic.ICollection$1(System.Int16)), "Is ICollection<short>");
-            Bridge.Test.NUnit.Assert.false$1(Bridge.is(arr, System.Collections.Generic.IList$1(System.Int16)), "Is IList<short>");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.ICollection$1(System.Int16)), "Is ICollection<short>");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.IList$1(System.Int16)), "Is IList<short>");
 
             // Not JS API
             //Assert.True(arr is IReadOnlyCollection<short>, "Is IReadOnlyCollection<short>");
@@ -4162,10 +4172,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual$1("Int32Array", Bridge.Reflection.getTypeFullName(Int32Array), "FullName");
 
             var interfaces = Bridge.Reflection.getInterfaces(Int32Array);
-            Bridge.Test.NUnit.Assert.areEqual$1(1, interfaces.length, "Interface count should be 5");
+            Bridge.Test.NUnit.Assert.areEqual$1(7, interfaces.length, "Interface count should be 7");
             Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.IEnumerable$1(System.Int32), Function), "Interfaces should contain IEnumerable<int>");
-            Bridge.Test.NUnit.Assert.false$1(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.Int32), Function), "Interfaces should contain ICollection<int>");
-            Bridge.Test.NUnit.Assert.false$1(System.Array.contains(interfaces, System.Collections.Generic.IList$1(System.Int32), Function), "Interfaces should contain IList<int>");
+            Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.Int32), Function), "Interfaces should contain ICollection<int>");
+            Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.IList$1(System.Int32), Function), "Interfaces should contain IList<int>");
             // Not JS API
             //Assert.True(interfaces.Contains(typeof(IReadOnlyCollection<int>)), "Interfaces should contain IReadOnlyCollection<int>");
             //Assert.True(interfaces.Contains(typeof(IReadOnlyList<int>)), "Interfaces should contain IReadOnlyList<int>");
@@ -4173,8 +4183,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var arr = new Int32Array(0);
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, Int32Array), "Is Int32Array");
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.IEnumerable$1(System.Int32)), "Is IEnumerable<int>");
-            Bridge.Test.NUnit.Assert.false$1(Bridge.is(arr, System.Collections.Generic.ICollection$1(System.Int32)), "Is ICollection<int>");
-            Bridge.Test.NUnit.Assert.false$1(Bridge.is(arr, System.Collections.Generic.IList$1(System.Int32)), "Is IList<int>");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.ICollection$1(System.Int32)), "Is ICollection<int>");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.IList$1(System.Int32)), "Is IList<int>");
             // Not JS API
             //Assert.True(arr is IReadOnlyCollection<int>, "Is IReadOnlyCollection<int>");
             //Assert.True(arr is IReadOnlyList<int>, "Is IReadOnlyList<int>");
@@ -4379,10 +4389,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual$1("Int8Array", Bridge.Reflection.getTypeFullName(Int8Array), "FullName");
 
             var interfaces = Bridge.Reflection.getInterfaces(Int8Array);
-            Bridge.Test.NUnit.Assert.areEqual$1(1, interfaces.length, "Interface count should be 5");
+            Bridge.Test.NUnit.Assert.areEqual$1(7, interfaces.length, "Interface count should be 7");
             Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.IEnumerable$1(System.SByte), Function), "Interfaces should contain IEnumerable<sbyte>");
-            Bridge.Test.NUnit.Assert.false$1(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.SByte), Function), "Interfaces should contain ICollection<sbyte>");
-            Bridge.Test.NUnit.Assert.false$1(System.Array.contains(interfaces, System.Collections.Generic.IList$1(System.SByte), Function), "Interfaces should contain IList<sbyte>");
+            Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.SByte), Function), "Interfaces should contain ICollection<sbyte>");
+            Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.IList$1(System.SByte), Function), "Interfaces should contain IList<sbyte>");
             // Not JS API
             //Assert.True(interfaces.Contains(typeof(IReadOnlyCollection<sbyte>)), "Interfaces should contain IReadOnlyCollection<sbyte>");
             //Assert.True(interfaces.Contains(typeof(IReadOnlyList<sbyte>)), "Interfaces should contain IReadOnlyList<sbyte>");
@@ -4390,8 +4400,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var arr = new Int8Array(0);
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, Int8Array), "Is Int8Array");
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.IEnumerable$1(System.SByte)), "Is IEnumerable<sbyte>");
-            Bridge.Test.NUnit.Assert.false$1(Bridge.is(arr, System.Collections.Generic.ICollection$1(System.SByte)), "Is ICollection<sbyte>");
-            Bridge.Test.NUnit.Assert.false$1(Bridge.is(arr, System.Collections.Generic.IList$1(System.SByte)), "Is IList<sbyte>");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.ICollection$1(System.SByte)), "Is ICollection<sbyte>");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.IList$1(System.SByte)), "Is IList<sbyte>");
             // Not JS API
             //Assert.True(arr is IReadOnlyCollection<sbyte>, "Is IReadOnlyCollection<sbyte>");
             //Assert.True(arr is IReadOnlyList<sbyte>, "Is IReadOnlyList<sbyte>");
@@ -4596,10 +4606,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual$1("Uint16Array", Bridge.Reflection.getTypeFullName(Uint16Array), "FullName");
 
             var interfaces = Bridge.Reflection.getInterfaces(Uint16Array);
-            Bridge.Test.NUnit.Assert.areEqual$1(1, interfaces.length, "Interface count should be 5");
+            Bridge.Test.NUnit.Assert.areEqual$1(7, interfaces.length, "Interface count should be 7");
             Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.IEnumerable$1(System.UInt16), Function), "Interfaces should contain IEnumerable<ushort>");
-            Bridge.Test.NUnit.Assert.false$1(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.UInt16), Function), "Interfaces should contain ICollection<ushort>");
-            Bridge.Test.NUnit.Assert.false$1(System.Array.contains(interfaces, System.Collections.Generic.IList$1(System.UInt16), Function), "Interfaces should contain IList<ushort>");
+            Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.UInt16), Function), "Interfaces should contain ICollection<ushort>");
+            Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.IList$1(System.UInt16), Function), "Interfaces should contain IList<ushort>");
             // Not JS API
             //Assert.True(interfaces.Contains(typeof(IReadOnlyCollection<ushort>)), "Interfaces should contain IReadOnlyCollection<ushort>");
             //Assert.True(interfaces.Contains(typeof(IReadOnlyList<ushort>)), "Interfaces should contain IReadOnlyList<ushort>");
@@ -4607,8 +4617,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var arr = new Uint16Array(0);
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, Uint16Array), "Is Uint16Array");
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.IEnumerable$1(System.UInt16)), "Is IEnumerable<ushort>");
-            Bridge.Test.NUnit.Assert.false$1(Bridge.is(arr, System.Collections.Generic.ICollection$1(System.UInt16)), "Is ICollection<ushort>");
-            Bridge.Test.NUnit.Assert.false$1(Bridge.is(arr, System.Collections.Generic.IList$1(System.UInt16)), "Is IList<ushort>");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.ICollection$1(System.UInt16)), "Is ICollection<ushort>");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.IList$1(System.UInt16)), "Is IList<ushort>");
             // Not JS API
             //Assert.True(arr is IReadOnlyCollection<short>, "Is IReadOnlyCollection<ushort>");
             //Assert.True(arr is IReadOnlyList<ushort>, "Is IReadOnlyList<ushort>");
@@ -4813,10 +4823,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual$1("Uint32Array", Bridge.Reflection.getTypeFullName(Uint32Array), "FullName");
 
             var interfaces = Bridge.Reflection.getInterfaces(Uint32Array);
-            Bridge.Test.NUnit.Assert.areEqual$1(1, interfaces.length, "Interface count should be 5");
+            Bridge.Test.NUnit.Assert.areEqual$1(7, interfaces.length, "Interface count should be 7");
             Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.IEnumerable$1(System.UInt32), Function), "Interfaces should contain IEnumerable<uint>");
-            Bridge.Test.NUnit.Assert.false$1(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.UInt32), Function), "Interfaces should contain ICollection<uint>");
-            Bridge.Test.NUnit.Assert.false$1(System.Array.contains(interfaces, System.Collections.Generic.IList$1(System.UInt32), Function), "Interfaces should contain IList<uint>");
+            Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.UInt32), Function), "Interfaces should contain ICollection<uint>");
+            Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.IList$1(System.UInt32), Function), "Interfaces should contain IList<uint>");
             // Not JS API
             //Assert.True(interfaces.Contains(typeof(IReadOnlyCollection<uint>)), "Interfaces should contain IReadOnlyCollection<uint>");
             //Assert.True(interfaces.Contains(typeof(IReadOnlyList<uint>)), "Interfaces should contain IReadOnlyList<uint>");
@@ -4824,8 +4834,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var arr = new Uint32Array(0);
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, Uint32Array), "Is Uint32Array");
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.IEnumerable$1(System.UInt32)), "Is IEnumerable<uint>");
-            Bridge.Test.NUnit.Assert.false$1(Bridge.is(arr, System.Collections.Generic.ICollection$1(System.UInt32)), "Is ICollection<uint>");
-            Bridge.Test.NUnit.Assert.false$1(Bridge.is(arr, System.Collections.Generic.IList$1(System.UInt32)), "Is IList<uint>");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.ICollection$1(System.UInt32)), "Is ICollection<uint>");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.IList$1(System.UInt32)), "Is IList<uint>");
             // Not JS API
             //Assert.True(arr is IReadOnlyCollection<uint>, "Is IReadOnlyCollection<uint>");
             //Assert.True(arr is IReadOnlyList<uint>, "Is IReadOnlyList<uint>");
@@ -5030,10 +5040,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual$1("Uint8Array", Bridge.Reflection.getTypeFullName(Uint8Array), "FullName");
 
             var interfaces = Bridge.Reflection.getInterfaces(Uint8Array);
-            Bridge.Test.NUnit.Assert.areEqual$1(1, interfaces.length, "Interface count should be 5");
+            Bridge.Test.NUnit.Assert.areEqual$1(7, interfaces.length, "Interface count should be 7");
             Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.IEnumerable$1(System.Byte), Function), "Interfaces should contain IEnumerable<byte>");
-            Bridge.Test.NUnit.Assert.false$1(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.Byte), Function), "Interfaces should contain ICollection<byte>");
-            Bridge.Test.NUnit.Assert.false$1(System.Array.contains(interfaces, System.Collections.Generic.IList$1(System.Byte), Function), "Interfaces should contain IList<byte>");
+            Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.Byte), Function), "Interfaces should contain ICollection<byte>");
+            Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.IList$1(System.Byte), Function), "Interfaces should contain IList<byte>");
             // Not JS API
             //Assert.True(interfaces.Contains(typeof(IReadOnlyCollection<byte>)), "Interfaces should contain IReadOnlyCollection<byte>");
             //Assert.True(interfaces.Contains(typeof(IReadOnlyList<byte>)), "Interfaces should contain IReadOnlyList<byte>");
@@ -5041,8 +5051,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var arr = new Uint8Array(0);
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, Uint8Array), "Is Uint8Array");
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.IEnumerable$1(System.Byte)), "Is IEnumerable<byte>");
-            Bridge.Test.NUnit.Assert.false$1(Bridge.is(arr, System.Collections.Generic.ICollection$1(System.Byte)), "Is ICollection<byte>");
-            Bridge.Test.NUnit.Assert.false$1(Bridge.is(arr, System.Collections.Generic.IList$1(System.Byte)), "Is IList<byte>");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.ICollection$1(System.Byte)), "Is ICollection<byte>");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.IList$1(System.Byte)), "Is IList<byte>");
             // Not JS API
             //Assert.True(arr is IReadOnlyCollection<byte>, "Is IReadOnlyCollection<byte>");
             //Assert.True(arr is IReadOnlyList<byte>, "Is IReadOnlyList<byte>");
@@ -5252,10 +5262,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual$1("Uint8ClampedArray", Bridge.Reflection.getTypeFullName(Uint8ClampedArray), "FullName");
 
             var interfaces = Bridge.Reflection.getInterfaces(Uint8ClampedArray);
-            Bridge.Test.NUnit.Assert.areEqual$1(1, interfaces.length, "Interface count should be 5");
+            Bridge.Test.NUnit.Assert.areEqual$1(7, interfaces.length, "Interface count should be 7");
             Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.IEnumerable$1(System.Byte), Function), "Interfaces should contain IEnumerable<byte>");
-            Bridge.Test.NUnit.Assert.false$1(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.Byte), Function), "Interfaces should contain ICollection<byte>");
-            Bridge.Test.NUnit.Assert.false$1(System.Array.contains(interfaces, System.Collections.Generic.IList$1(System.Byte), Function), "Interfaces should contain IList<byte>");
+            Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.Byte), Function), "Interfaces should contain ICollection<byte>");
+            Bridge.Test.NUnit.Assert.true$1(System.Array.contains(interfaces, System.Collections.Generic.IList$1(System.Byte), Function), "Interfaces should contain IList<byte>");
             // Not JS API
             //Assert.True(interfaces.Contains(typeof(IReadOnlyCollection<byte>)), "Interfaces should contain IReadOnlyCollection<byte>");
             //Assert.True(interfaces.Contains(typeof(IReadOnlyList<byte>)), "Interfaces should contain IReadOnlyList<byte>");
@@ -5264,8 +5274,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, Uint8ClampedArray), "Is Uint8ClampedArray");
             // #1560
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.IEnumerable$1(System.Byte)), "Is IEnumerable<byte>");
-            Bridge.Test.NUnit.Assert.false$1(Bridge.is(arr, System.Collections.Generic.ICollection$1(System.Byte)), "Is ICollection<byte>");
-            Bridge.Test.NUnit.Assert.false$1(Bridge.is(arr, System.Collections.Generic.IList$1(System.Byte)), "Is IList<byte>");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.ICollection$1(System.Byte)), "Is ICollection<byte>");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr, System.Collections.Generic.IList$1(System.Byte)), "Is IList<byte>");
             // Not JS API
             //Assert.True(arr is IReadOnlyCollection<byte>, "Is IReadOnlyCollection<byte>");
             //Assert.True(arr is IReadOnlyList<byte>, "Is IReadOnlyList<byte>");
@@ -10201,8 +10211,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         typePropertiesAreCorrect_SPI_1567: function () {
             var a = 3, b = null;
             // #1567
-            Bridge.Test.NUnit.Assert.areEqual$1("System.Nullable$System.Double", Bridge.Reflection.getTypeFullName(System.Nullable$1(System.Double)), "Open FullName");
-            Bridge.Test.NUnit.Assert.areEqual$1("System.Nullable$System.Int32", Bridge.Reflection.getTypeFullName(System.Nullable$1(System.Int32)), "Instantiated FullName");
+            Bridge.Test.NUnit.Assert.areEqual$1("System.Nullable$1[[System.Double, mscorlib]]", Bridge.Reflection.getTypeFullName(System.Nullable$1(System.Double)), "Open FullName");
+            Bridge.Test.NUnit.Assert.areEqual$1("System.Nullable$1[[System.Int32, mscorlib]]", Bridge.Reflection.getTypeFullName(System.Nullable$1(System.Int32)), "Instantiated FullName");
             Bridge.Test.NUnit.Assert.true$1(Bridge.Reflection.isGenericTypeDefinition(System.Nullable$1), "IsGenericTypeDefinition");
             Bridge.Test.NUnit.Assert.areEqual$1(System.Nullable$1, Bridge.Reflection.getGenericTypeDefinition(System.Nullable$1(System.Int32)), "GetGenericTypeDefinition");
             // Test restructure to keep assertion count correct (prevent uncaught test exception)
@@ -15766,7 +15776,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true(Bridge.is(b, System.IFormattable));
 
             var interfaces = Bridge.Reflection.getInterfaces(System.Byte);
-            Bridge.Test.NUnit.Assert.areEqual(3, interfaces.length);
+            Bridge.Test.NUnit.Assert.areEqual(4, interfaces.length);
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IComparable$1(System.Byte), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IEquatable$1(System.Byte), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IFormattable, Function));
@@ -15955,7 +15965,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             // #1603
             Bridge.Test.NUnit.Assert.false(Bridge.Reflection.isAssignableFrom(System.IFormattable, System.Char));
             var interfaces = Bridge.Reflection.getInterfaces(System.Char);
-            Bridge.Test.NUnit.Assert.areEqual(5, interfaces.length);
+            Bridge.Test.NUnit.Assert.areEqual(4, interfaces.length);
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IComparable$1(System.Char), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IEquatable$1(System.Char), Function));
             Bridge.Test.NUnit.Assert.false(System.Array.contains(interfaces, System.IFormattable, Function));
@@ -17033,7 +17043,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true(Bridge.is(d, System.IFormattable));
 
             var interfaces = Bridge.Reflection.getInterfaces(System.Decimal);
-            Bridge.Test.NUnit.Assert.areEqual(3, interfaces.length);
+            Bridge.Test.NUnit.Assert.areEqual(4, interfaces.length);
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IComparable$1(System.Decimal), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IEquatable$1(System.Decimal), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IFormattable, Function));
@@ -18592,7 +18602,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true(Bridge.is(d, System.IFormattable));
 
             var interfaces = Bridge.Reflection.getInterfaces(System.Double);
-            Bridge.Test.NUnit.Assert.areEqual(3, interfaces.length);
+            Bridge.Test.NUnit.Assert.areEqual(4, interfaces.length);
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IComparable$1(System.Double), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IEquatable$1(System.Double), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IFormattable, Function));
@@ -18844,7 +18854,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true(Bridge.is(s, System.IFormattable));
 
             var interfaces = Bridge.Reflection.getInterfaces(System.Int16);
-            Bridge.Test.NUnit.Assert.areEqual(3, interfaces.length);
+            Bridge.Test.NUnit.Assert.areEqual(4, interfaces.length);
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IComparable$1(System.Int16), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IEquatable$1(System.Int16), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IFormattable, Function));
@@ -19038,7 +19048,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true(Bridge.is(i, System.IFormattable));
 
             var interfaces = Bridge.Reflection.getInterfaces(System.Int32);
-            Bridge.Test.NUnit.Assert.areEqual(3, interfaces.length);
+            Bridge.Test.NUnit.Assert.areEqual(4, interfaces.length);
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IComparable$1(System.Int32), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IEquatable$1(System.Int32), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IFormattable, Function));
@@ -19292,7 +19302,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true(Bridge.is(l, System.IFormattable));
 
             var interfaces = Bridge.Reflection.getInterfaces(System.Int64);
-            Bridge.Test.NUnit.Assert.areEqual(3, interfaces.length);
+            Bridge.Test.NUnit.Assert.areEqual(4, interfaces.length);
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IComparable$1(System.Int64), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IEquatable$1(System.Int64), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IFormattable, Function));
@@ -19536,7 +19546,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true(Bridge.is(b, System.IFormattable));
 
             var interfaces = Bridge.Reflection.getInterfaces(System.SByte);
-            Bridge.Test.NUnit.Assert.areEqual(3, interfaces.length);
+            Bridge.Test.NUnit.Assert.areEqual(4, interfaces.length);
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IComparable$1(System.SByte), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IEquatable$1(System.SByte), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IFormattable, Function));
@@ -19723,7 +19733,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true(Bridge.is(f, System.IFormattable));
 
             var interfaces = Bridge.Reflection.getInterfaces(System.Single);
-            Bridge.Test.NUnit.Assert.areEqual(3, interfaces.length);
+            Bridge.Test.NUnit.Assert.areEqual(4, interfaces.length);
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IComparable$1(System.Single), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IEquatable$1(System.Single), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IFormattable, Function));
@@ -19867,7 +19877,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true(Bridge.is(s, System.IEquatable$1(System.String)));
 
             var interfaces = Bridge.Reflection.getInterfaces(System.String);
-            Bridge.Test.NUnit.Assert.areEqual(6, interfaces.length);
+            Bridge.Test.NUnit.Assert.areEqual(7, interfaces.length);
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IComparable$1(System.String), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IEquatable$1(System.String), Function));
         },
@@ -20404,7 +20414,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true(Bridge.is(d, System.IEquatable$1(System.TimeSpan)));
 
             var interfaces = Bridge.Reflection.getInterfaces(System.TimeSpan);
-            Bridge.Test.NUnit.Assert.areEqual(2, interfaces.length);
+            Bridge.Test.NUnit.Assert.areEqual(3, interfaces.length);
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IComparable$1(System.TimeSpan), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IEquatable$1(System.TimeSpan), Function));
         },
@@ -20727,7 +20737,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true(Bridge.is(s, System.IFormattable));
 
             var interfaces = Bridge.Reflection.getInterfaces(System.UInt16);
-            Bridge.Test.NUnit.Assert.areEqual(3, interfaces.length);
+            Bridge.Test.NUnit.Assert.areEqual(4, interfaces.length);
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IComparable$1(System.UInt16), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IEquatable$1(System.UInt16), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IFormattable, Function));
@@ -20920,7 +20930,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true(Bridge.is(i, System.IFormattable));
 
             var interfaces = Bridge.Reflection.getInterfaces(System.UInt32);
-            Bridge.Test.NUnit.Assert.areEqual(3, interfaces.length);
+            Bridge.Test.NUnit.Assert.areEqual(4, interfaces.length);
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IComparable$1(System.UInt32), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IEquatable$1(System.UInt32), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IFormattable, Function));
@@ -21107,7 +21117,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true(Bridge.is(l, System.IFormattable));
 
             var interfaces = Bridge.Reflection.getInterfaces(System.UInt64);
-            Bridge.Test.NUnit.Assert.areEqual(3, interfaces.length);
+            Bridge.Test.NUnit.Assert.areEqual(4, interfaces.length);
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IComparable$1(System.UInt64), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IEquatable$1(System.UInt64), Function));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(interfaces, System.IFormattable, Function));

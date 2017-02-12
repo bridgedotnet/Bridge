@@ -257,9 +257,9 @@ namespace Bridge.ClientTest.Collections.Native
             Assert.AreEqual(5, coll.Count, "Count");
             Assert.True(coll.Contains(6), "Contains(6)");
             Assert.False(coll.Contains(1), "Contains(1)");
-            //Assert.Throws<NotSupportedException>(() => coll.Add(2), "Add");
-            //Assert.Throws<NotSupportedException>(() => coll.Clear(), "Clear");
-            //Assert.Throws<NotSupportedException>(() => coll.Remove(2), "Remove");
+            Assert.Throws<NotSupportedException>(() => coll.Add(2), "Add");
+            Assert.Throws<NotSupportedException>(() => coll.Clear(), "Clear");
+            Assert.Throws<NotSupportedException>(() => coll.Remove(2), "Remove");
         }
 
         [Test]
@@ -273,8 +273,8 @@ namespace Bridge.ClientTest.Collections.Native
             list[3] = 4;
             Assert.AreEqual(4, list[3], "Set item");
 
-            //Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
-            //Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
+            Assert.Throws<NotSupportedException>(() => list.Insert(2, 2), "Insert");
+            Assert.Throws<NotSupportedException>(() => list.RemoveAt(2), "RemoveAt");
         }
 
         // Not JS API

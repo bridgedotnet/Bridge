@@ -244,7 +244,7 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
             var arr = System.Array.init(["x", "y"], System.String);
             var arr2 = System.Array.clone(arr);
             Bridge.Test.NUnit.Assert.false(arr === arr2);
-            Bridge.Test.NUnit.Assert.areDeepEqual(Bridge.unbox(arr2), arr);
+            Bridge.Test.NUnit.Assert.areEqual(Bridge.unbox(arr2), arr);
         },
         concatWorks: function () {
             var arr = System.Array.init(["a", "b"], System.String);
@@ -303,7 +303,7 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
         reverseWorks: function () {
             var arr = System.Array.init([1, 3, 4, 1, 3, 2], System.Int32);
             arr.reverse();
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init([2, 3, 1, 4, 3, 1], System.Int32), arr);
+            Bridge.Test.NUnit.Assert.areEqual(System.Array.init([2, 3, 1, 4, 3, 1], System.Int32), arr);
         },
         anyWithArrayItemFilterCallbackWorks: function () {
             Bridge.Test.NUnit.Assert.true(System.Linq.Enumerable.from(System.Array.init([1, 2, 3, 4], System.Int32)).any($asm.$.Bridge.ClientTest.Batch2.BridgeIssues.N772.f3));
@@ -350,27 +350,27 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
         sortWithDefaultCompareWorks: function () {
             var arr = System.Array.init([1, 6, 6, 4, 2], System.Int32);
             arr.sort();
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init([1, 2, 4, 6, 6], System.Int32), arr);
+            Bridge.Test.NUnit.Assert.areEqual(System.Array.init([1, 2, 4, 6, 6], System.Int32), arr);
         },
         sort1Works: function () {
             var arr = System.Array.init([1, 6, 6, 4, 2], System.Int32);
             System.Array.sort(arr);
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init([1, 2, 4, 6, 6], System.Int32), arr);
+            Bridge.Test.NUnit.Assert.areEqual(System.Array.init([1, 2, 4, 6, 6], System.Int32), arr);
         },
         sort2Works: function () {
             var arr = System.Array.init([1, 6, 6, 4, 2], System.Int32);
             System.Array.sort(arr, 2, 3);
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init([1, 6, 2, 4, 6], System.Int32), arr);
+            Bridge.Test.NUnit.Assert.areEqual(System.Array.init([1, 6, 2, 4, 6], System.Int32), arr);
         },
         sort3Works: function () {
             var arr = System.Array.init([1, 2, 6, 3, 6, 7], System.Int32);
             System.Array.sort(arr, 2, 3, new Bridge.ClientTest.Batch2.BridgeIssues.N772.TestReverseComparer());
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init([1, 2, 6, 6, 3, 7], System.Int32), arr);
+            Bridge.Test.NUnit.Assert.areEqual(System.Array.init([1, 2, 6, 6, 3, 7], System.Int32), arr);
         },
         sort4Works: function () {
             var arr = System.Array.init([1, 6, 6, 4, 2], System.Int32);
             System.Array.sort(arr, new Bridge.ClientTest.Batch2.BridgeIssues.N772.TestReverseComparer());
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init([6, 6, 4, 2, 1], System.Int32), arr);
+            Bridge.Test.NUnit.Assert.areEqual(System.Array.init([6, 6, 4, 2, 1], System.Int32), arr);
         },
         sortExceptionsWorks: function () {
             var arr1 = null;
@@ -401,16 +401,15 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
         },
         iCollectionAddWorks: function () {
             var l = System.Array.init(["x", "y", "z"], System.String);
-            System.Array.add(l, "a", System.String);
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "y", "z", "a"], System.String), l);
+            Bridge.Test.NUnit.Assert.throws$6(System.NotSupportedException, function () {
+                System.Array.add(l, "a", System.String);
+            });
         },
         iCollectionClearWorks: function () {
             var l = System.Array.init(["x", "y", "z"], System.String);
-            System.Array.clear(l, System.String);
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(3, null, System.String), l);
-            Bridge.Test.NUnit.Assert.areDeepEqual(null, System.Array.getItem(l, 0, System.String));
-            Bridge.Test.NUnit.Assert.areDeepEqual(null, System.Array.getItem(l, 1, System.String));
-            Bridge.Test.NUnit.Assert.areDeepEqual(null, System.Array.getItem(l, 2, System.String));
+            Bridge.Test.NUnit.Assert.throws$6(System.NotSupportedException, function () {
+                System.Array.clear(l, System.String);
+            });
         },
         iCollectionContainsWorks: function () {
             var l = System.Array.init(["x", "y", "z"], System.String);
@@ -424,15 +423,15 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
         },
         iCollectionRemoveWorks: function () {
             var l = System.Array.init(["x", "y", "z"], System.String);
-            Bridge.Test.NUnit.Assert.true(System.Array.remove(l, "y", System.String));
-            Bridge.Test.NUnit.Assert.false(System.Array.remove(l, "a", System.String));
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "z"], System.String), l);
+            Bridge.Test.NUnit.Assert.throws$6(System.NotSupportedException, function () {
+                System.Array.remove(l, "y", System.String);
+            });
         },
         iListIndexingWorks: function () {
             var l = System.Array.init(["x", "y", "z"], System.String);
             Bridge.Test.NUnit.Assert.areEqual("y", System.Array.getItem(l, 1, System.String));
             System.Array.setItem(l, 1, "a", System.String);
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "a", "z"], System.String), l);
+            Bridge.Test.NUnit.Assert.areEqual(System.Array.init(["x", "a", "z"], System.String), System.Linq.Enumerable.from(l).toArray());
         },
         iListIndexOfWorks: function () {
             var l = System.Array.init(["x", "y", "z"], System.String);
@@ -446,18 +445,15 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
         },
         iListInsertWorks: function () {
             var l = System.Array.init(["x", "y", "z"], System.String);
-            System.Array.insert(l, 1, "a", System.String);
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "a", "y", "z"], System.String), l);
+            Bridge.Test.NUnit.Assert.throws$6(System.NotSupportedException, function () {
+                System.Array.insert(l, 1, "a", System.String);
+            });
         },
         iListRemoveAtWorks: function () {
             var l = System.Array.init(["x", "y", "z"], System.String);
-            System.Array.removeAt(l, 1, System.String);
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "z"], System.String), l);
-        },
-        issueSpecific: function () {
-            var l = System.Array.init(["x", "y", "z"], System.String);
-            System.Array.removeAt(l, 1, System.String);
-            Bridge.Test.NUnit.Assert.areDeepEqual(System.Array.init(["x", "z"], System.String), l);
+            Bridge.Test.NUnit.Assert.throws$6(System.NotSupportedException, function () {
+                System.Array.removeAt(l, 1, System.String);
+            });
         }
     });
 

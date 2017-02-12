@@ -43,7 +43,7 @@ namespace Bridge.ClientTest.Batch4.Collections.Generic
             {
                 get
                 {
-                    return true;
+                    return false;
                 }
             }
 

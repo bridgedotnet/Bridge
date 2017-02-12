@@ -301,8 +301,10 @@
                 return type.getDefaultValue();
             } else if (type === Boolean || type === System.Boolean) {
                 return false;
-            } else if (type === Date || type === System.DateTime) {
+            } else if (type === System.DateTime) {
                 return System.DateTime.getDefaultValue();
+            } else if (type === Date) {
+                return new Date();
             } else if (type === Number) {
                 return 0;
             } else if (type === String || type === System.String) {
@@ -557,8 +559,10 @@
                 return type.getDefaultValue();
             } else if (type === Boolean || type === System.Boolean) {
                 return false;
-            } else if (type === Date || type === System.DateTime) {
+            } else if (type === System.DateTime) {
                 return System.DateTime.getDefaultValue();
+            } else if (type === Date) {
+                return new Date();
             } else if (type === Number) {
                 return 0;
             }
@@ -567,6 +571,13 @@
         },
 
         getTypeAlias: function (obj) {
+            var type = obj.$$name ? obj : Bridge.getType(obj);
+            if (type.$isArray) {
+                var elementName = Bridge.getTypeAlias(type.$elementType);
+
+                return elementName + "$Array" + (type.$rank > 1 ? ("$" + type.$rank) : "");
+            }
+
             var name = obj.$$name || Bridge.getTypeName(obj);
 
             return name.replace(/[\.\(\)\,]/g, "$");

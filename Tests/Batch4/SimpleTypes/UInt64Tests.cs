@@ -24,7 +24,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
             Assert.True(l is IFormattable);
 
             var interfaces = typeof(ulong).GetInterfaces();
-            Assert.AreEqual(3, interfaces.Length);
+            Assert.AreEqual(4, interfaces.Length);
             Assert.True(interfaces.Contains(typeof(IComparable<ulong>)));
             Assert.True(interfaces.Contains(typeof(IEquatable<ulong>)));
             Assert.True(interfaces.Contains(typeof(IFormattable)));

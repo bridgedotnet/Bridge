@@ -430,19 +430,16 @@ namespace Bridge.ClientTest
             public void ICollectionAddWorks()
             {
                 IList<string> l = new[] { "x", "y", "z" };
-                l.Add("a");
-                Assert.AreDeepEqual(new[] { "x", "y", "z", "a" }, l);
+                Assert.Throws<NotSupportedException>(() => l.Add("a"));
+                Assert.AreDeepEqual(new[] { "x", "y", "z" }, l);
             }
 
             [Test]
             public void ICollectionClearWorks()
             {
                 IList<string> l = new[] { "x", "y", "z" };
-                l.Clear();
-                Assert.AreDeepEqual(new string[3], l);
-                Assert.AreDeepEqual(null, l[0]);
-                Assert.AreDeepEqual(null, l[1]);
-                Assert.AreDeepEqual(null, l[2]);
+                Assert.Throws<NotSupportedException>(() => l.Clear());
+                Assert.AreDeepEqual(new[] { "x", "y", "z" }, l);
             }
 
             [Test]
@@ -509,9 +506,8 @@ namespace Bridge.ClientTest
             public void ICollectionRemoveWorks()
             {
                 IList<string> l = new[] { "x", "y", "z" };
-                Assert.True(l.Remove("y"));
-                Assert.False(l.Remove("a"));
-                Assert.AreDeepEqual(new[] { "x", "z" }, l);
+                Assert.Throws<NotSupportedException>(() => l.Remove("y"));
+                Assert.AreDeepEqual(new[] { "x", "y", "z" }, l);
             }
 
             [Test]
@@ -550,16 +546,16 @@ namespace Bridge.ClientTest
             public void IListInsertWorks()
             {
                 IList<string> l = new[] { "x", "y", "z" };
-                l.Insert(1, "a");
-                Assert.AreDeepEqual(new[] { "x", "a", "y", "z" }, l);
+                Assert.Throws<NotSupportedException>(() => l.Insert(1, "a"));
+                Assert.AreDeepEqual(new[] { "x", "y", "z" }, l);
             }
 
             [Test]
             public void IListRemoveAtWorks()
             {
                 IList<string> l = new[] { "x", "y", "z" };
-                l.RemoveAt(1);
-                Assert.AreDeepEqual(new[] { "x", "z" }, l);
+                Assert.Throws<NotSupportedException>(() => l.RemoveAt(1));
+                Assert.AreDeepEqual(new[] { "x", "y", "z" }, l);
             }
         }
 
@@ -655,6 +651,7 @@ namespace Bridge.ClientTest
                 Assert.AreEqual(v, 2);
                 v = il[2];
                 Assert.AreEqual(v, 3);
+
                 il[2] = 42;
                 Assert.AreEqual(((int[])a)[2], 42);
 
@@ -848,11 +845,7 @@ namespace Bridge.ClientTest
                 Assert.AreEqual(idirect[2], 0);
 
                 idirect = new int[] { 7, 8, 9 };
-
-                ((IList<int>)idirect).Clear();
-                Assert.AreEqual(idirect[0], 0);
-                Assert.AreEqual(idirect[1], 0);
-                Assert.AreEqual(idirect[2], 0);
+                Assert.Throws(() => { ((IList<int>)idirect).Clear(); });
 
                 idirect = new int[] { 0x1234567, 0x789abcde, 0x22334455, 0x66778899, 0x11335577, 0x22446688 };
                 Array.Clear(idirect, 2, 3);
@@ -902,12 +895,7 @@ namespace Bridge.ClientTest
                 Assert.Null(sdirect[1]);
                 Assert.Null(sdirect[2]);
 
-                sdirect = new string[] { "7", "8", "9" };
-
-                ((IList<string>)sdirect).Clear();
-                Assert.Null(sdirect[0]);
-                Assert.Null(sdirect[1]);
-                Assert.Null(sdirect[2]);
+                Assert.Throws(() => { ((IList<string>)sdirect).Clear(); });
 
                 sdirect = new string[] { "0x1234567", "0x789abcde", "0x22334455", "0x66778899", "0x11335577", "0x22446688" };
                 Array.Clear(sdirect, 2, 3);

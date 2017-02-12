@@ -32,10 +32,10 @@ namespace Bridge.ClientTest.Batch4.Collections.TypedArrays
             Assert.AreEqual("Float64Array", typeof(Float64Array).FullName, "FullName");
 
             var interfaces = typeof(Float64Array).GetInterfaces();
-            Assert.AreEqual(1, interfaces.Length, "Interface count should be 5");
+            Assert.AreEqual(7, interfaces.Length, "Interface count should be 7");
             Assert.True(interfaces.Contains(typeof(IEnumerable<double>)), "Interfaces should contain IEnumerable<double>");
-            Assert.False(interfaces.Contains(typeof(ICollection<double>)), "Interfaces should contain ICollection<double>");
-            Assert.False(interfaces.Contains(typeof(IList<double>)), "Interfaces should contain IList<double>");
+            Assert.True(interfaces.Contains(typeof(ICollection<double>)), "Interfaces should contain ICollection<double>");
+            Assert.True(interfaces.Contains(typeof(IList<double>)), "Interfaces should contain IList<double>");
 
             // Not JS API
             //Assert.True(interfaces.Contains(typeof(IReadOnlyCollection<double>)), "Interfaces should contain IReadOnlyCollection<double>");
@@ -44,8 +44,8 @@ namespace Bridge.ClientTest.Batch4.Collections.TypedArrays
             object arr = new Float64Array(0);
             Assert.True(arr is Float64Array, "Is Float64Array");
             Assert.True(arr is IEnumerable<double>, "Is IEnumerable<double>");
-            Assert.False(arr is ICollection<double>, "Is ICollection<double>");
-            Assert.False(arr is IList<double>, "Is IList<double>");
+            Assert.True(arr is ICollection<double>, "Is ICollection<double>");
+            Assert.True(arr is IList<double>, "Is IList<double>");
 
             // Not JS API
             //Assert.True(arr is IReadOnlyCollection<double>, "Is IReadOnlyCollection<double>");

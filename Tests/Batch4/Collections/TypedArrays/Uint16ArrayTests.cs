@@ -32,10 +32,10 @@ namespace Bridge.ClientTest.Batch4.Collections.TypedArrays
             Assert.AreEqual("Uint16Array", typeof(Uint16Array).FullName, "FullName");
 
             var interfaces = typeof(Uint16Array).GetInterfaces();
-            Assert.AreEqual(1, interfaces.Length, "Interface count should be 5");
+            Assert.AreEqual(7, interfaces.Length, "Interface count should be 7");
             Assert.True(interfaces.Contains(typeof(IEnumerable<ushort>)), "Interfaces should contain IEnumerable<ushort>");
-            Assert.False(interfaces.Contains(typeof(ICollection<ushort>)), "Interfaces should contain ICollection<ushort>");
-            Assert.False(interfaces.Contains(typeof(IList<ushort>)), "Interfaces should contain IList<ushort>");
+            Assert.True(interfaces.Contains(typeof(ICollection<ushort>)), "Interfaces should contain ICollection<ushort>");
+            Assert.True(interfaces.Contains(typeof(IList<ushort>)), "Interfaces should contain IList<ushort>");
             // Not JS API
             //Assert.True(interfaces.Contains(typeof(IReadOnlyCollection<ushort>)), "Interfaces should contain IReadOnlyCollection<ushort>");
             //Assert.True(interfaces.Contains(typeof(IReadOnlyList<ushort>)), "Interfaces should contain IReadOnlyList<ushort>");
@@ -43,8 +43,8 @@ namespace Bridge.ClientTest.Batch4.Collections.TypedArrays
             object arr = new Uint16Array(0);
             Assert.True(arr is Uint16Array, "Is Uint16Array");
             Assert.True(arr is IEnumerable<ushort>, "Is IEnumerable<ushort>");
-            Assert.False(arr is ICollection<ushort>, "Is ICollection<ushort>");
-            Assert.False(arr is IList<ushort>, "Is IList<ushort>");
+            Assert.True(arr is ICollection<ushort>, "Is ICollection<ushort>");
+            Assert.True(arr is IList<ushort>, "Is IList<ushort>");
             // Not JS API
             //Assert.True(arr is IReadOnlyCollection<short>, "Is IReadOnlyCollection<ushort>");
             //Assert.True(arr is IReadOnlyList<ushort>, "Is IReadOnlyList<ushort>");

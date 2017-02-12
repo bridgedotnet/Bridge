@@ -32,10 +32,10 @@ namespace Bridge.ClientTest.Batch4.Collections.TypedArrays
             Assert.AreEqual("Int16Array", typeof(Int16Array).FullName, "FullName");
 
             var interfaces = typeof(Int16Array).GetInterfaces();
-            Assert.AreEqual(1, interfaces.Length, "Interface count should be 5");
+            Assert.AreEqual(7, interfaces.Length, "Interface count should be 7");
             Assert.True(interfaces.Contains(typeof(IEnumerable<short>)), "Interfaces should contain IEnumerable<short>");
-            Assert.False(interfaces.Contains(typeof(ICollection<short>)), "Interfaces should contain ICollection<short>");
-            Assert.False(interfaces.Contains(typeof(IList<short>)), "Interfaces should contain IList<short>");
+            Assert.True(interfaces.Contains(typeof(ICollection<short>)), "Interfaces should contain ICollection<short>");
+            Assert.True(interfaces.Contains(typeof(IList<short>)), "Interfaces should contain IList<short>");
             // Not JS API
             //Assert.True(interfaces.Contains(typeof(IReadOnlyCollection<short>)), "Interfaces should contain IReadOnlyCollection<short>");
             //Assert.True(interfaces.Contains(typeof(IReadOnlyList<short>)), "Interfaces should contain IReadOnlyList<short>");
@@ -43,8 +43,8 @@ namespace Bridge.ClientTest.Batch4.Collections.TypedArrays
             object arr = new Int16Array(0);
             Assert.True(arr is Int16Array, "Is Int16Array");
             Assert.True(arr is IEnumerable<short>, "Is IEnumerable<short>");
-            Assert.False(arr is ICollection<short>, "Is ICollection<short>");
-            Assert.False(arr is IList<short>, "Is IList<short>");
+            Assert.True(arr is ICollection<short>, "Is ICollection<short>");
+            Assert.True(arr is IList<short>, "Is IList<short>");
 
             // Not JS API
             //Assert.True(arr is IReadOnlyCollection<short>, "Is IReadOnlyCollection<short>");
