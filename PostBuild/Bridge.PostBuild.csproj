@@ -97,5 +97,15 @@ mono "$(SolutionDir)Compiler/Builder/$(OutDir)Bridge.Builder.exe" -p "$(Solution
     <Message Text="Cleaning NuGet packages in $(ProjectDir)$(OutDir)" Importance="high" />
     <Delete Files="@(FilesToDelete)" ContinueOnError="true" />
   </Target>
+  <PropertyGroup>
+    <PreBuildEvent>
+REM Run Bridge Compiler for the project
+"$(SolutionDir)Compiler\Builder\$(OutDir)bridge.exe" -p "$(SolutionDir)Bridge\Bridge.csproj" -b "$(SolutionDir)Bridge\$(OutDir)Bridge.dll" -cfg "$(Configuration)"
+</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- NuGet packaging finishes -->
 </Project>
