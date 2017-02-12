@@ -7453,25 +7453,25 @@ Bridge.$N1391Result =                 r;
             var d = new Date(2017, 1, 11, 21, 36, 55, 255);
             var year = d.getUTCFullYear(); // 2017
             var month = d.getUTCMonth(); // 1
-            var day = d.getUTCDate(); // 12
-            var hour = d.getUTCHours(); // 4
-            var minute = d.getUTCMinutes(); // 36
-            var second = d.getUTCSeconds(); // 55
-            var millisecond = d.getUTCMilliseconds(); // 255
+            //var day = d.GetUTCDate(); // 12
+            //var hour = d.GetUTCHours(); // 4
+            //var minute = d.GetUTCMinutes(); // 36
+            //var second = d.GetUTCSeconds(); // 55
+            //var millisecond = d.GetUTCMilliseconds(); // 255
 
             var utc1 = Date.UTC(year, month); // 1485907200000
-            var utc2 = Date.UTC(year, month, day); // 1486857600000
-            var utc3 = Date.UTC(year, month, day, hour); // 1486872000000
-            var utc4 = Date.UTC(year, month, day, hour, minute); // 1486874160000
-            var utc5 = Date.UTC(year, month, day, hour, minute, second); // 1486874215000
-            var utc6 = Date.UTC(year, month, day, hour, minute, second, millisecond); // 1486874215255
+            //var utc2 = Date.UTC(year, month, day); // 1486857600000
+            //var utc3 = Date.UTC(year, month, day, hour); // 1486872000000
+            //var utc4 = Date.UTC(year, month, day, hour, minute); // 1486874160000
+            //var utc5 = Date.UTC(year, month, day, hour, minute, second); // 1486874215000
+            //var utc6 = Date.UTC(year, month, day, hour, minute, second, millisecond); // 1486874215255
 
             Bridge.Test.NUnit.Assert.areEqual("1485907200000", System.Double.format(utc1, 'G'));
-            Bridge.Test.NUnit.Assert.areEqual("1486857600000", System.Double.format(utc2, 'G'));
-            Bridge.Test.NUnit.Assert.areEqual("1486872000000", System.Double.format(utc3, 'G'));
-            Bridge.Test.NUnit.Assert.areEqual("1486874160000", System.Double.format(utc4, 'G'));
-            Bridge.Test.NUnit.Assert.areEqual("1486874215000", System.Double.format(utc5, 'G'));
-            Bridge.Test.NUnit.Assert.areEqual("1486874215255", System.Double.format(utc6, 'G'));
+            //Assert.AreEqual("1486857600000", utc2.ToString());
+            //Assert.AreEqual("1486872000000", utc3.ToString());
+            //Assert.AreEqual("1486874160000", utc4.ToString());
+            //Assert.AreEqual("1486874215000", utc5.ToString());
+            //Assert.AreEqual("1486874215255", utc6.ToString());
         },
         toLocaleDateStringIsWorking: function () {
             var d1 = new Date(Date.UTC(2012, 11, 12, 3, 0, 0));
