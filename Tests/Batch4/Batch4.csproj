@@ -221,4 +221,11 @@ ECHO "$(ProjectDir)..\..\Compiler\Builder\$(OutDir)Bridge.Builder.exe" -p "$(Pro
 mono "$(ProjectDir)../../Compiler/Builder/$(OutDir)Bridge.Builder.exe" -p "$(ProjectDir)/$(MSBuildProjectFile)" -b "$(ProjectDir)$(OutDir)Bridge.dll" -cfg "$(Configuration)"
     </PostBuildEvent>
   </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+REM Run Bridge Compiler for the project
+ECHO "$(ProjectDir)..\..\Compiler\Builder\$(OutDir)bridge.exe" -p "$(ProjectPath)" -b "$(ProjectDir)$(OutDir)Bridge.dll" -cfg "$(Configuration)"
+"$(ProjectDir)..\..\Compiler\Builder\$(OutDir)bridge.exe" -p "$(ProjectPath)" -b "$(ProjectDir)$(OutDir)Bridge.dll" -cfg "$(Configuration)"
+</PostBuildEvent>
+  </PropertyGroup>
 </Project>
