@@ -7440,6 +7440,87 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1624", {
+        dateNowIsWorking: function () {
+            var now = Date.now();
+            var d1 = new Date().getTime();
+            var d2 = new Date(Date.now());
+
+            Bridge.Test.NUnit.Assert.areEqual(d1, now);
+            Bridge.Test.NUnit.Assert.areEqual(d2.getTime(), now);
+        },
+        dateUTCIsWorking: function () {
+            var d = new Date(2017, 1, 11, 21, 36, 55, 255);
+            var year = d.getUTCFullYear(); // 2017
+            var month = d.getUTCMonth(); // 1
+            var day = d.getUTCDate(); // 12
+            var hour = d.getUTCHours(); // 4
+            var minute = d.getUTCMinutes(); // 36
+            var second = d.getUTCSeconds(); // 55
+            var millisecond = d.getUTCMilliseconds(); // 255
+
+            var utc1 = Date.UTC(year, month); // 1485907200000
+            var utc2 = Date.UTC(year, month, day); // 1486857600000
+            var utc3 = Date.UTC(year, month, day, hour); // 1486872000000
+            var utc4 = Date.UTC(year, month, day, hour, minute); // 1486874160000
+            var utc5 = Date.UTC(year, month, day, hour, minute, second); // 1486874215000
+            var utc6 = Date.UTC(year, month, day, hour, minute, second, millisecond); // 1486874215255
+
+            Bridge.Test.NUnit.Assert.areEqual("1485907200000", System.Double.format(utc1, 'G'));
+            Bridge.Test.NUnit.Assert.areEqual("1486857600000", System.Double.format(utc2, 'G'));
+            Bridge.Test.NUnit.Assert.areEqual("1486872000000", System.Double.format(utc3, 'G'));
+            Bridge.Test.NUnit.Assert.areEqual("1486874160000", System.Double.format(utc4, 'G'));
+            Bridge.Test.NUnit.Assert.areEqual("1486874215000", System.Double.format(utc5, 'G'));
+            Bridge.Test.NUnit.Assert.areEqual("1486874215255", System.Double.format(utc6, 'G'));
+        },
+        toLocaleDateStringIsWorking: function () {
+            var d1 = new Date(Date.UTC(2012, 11, 12, 3, 0, 0));
+
+            // Tough to test because varies by timezone/location
+            // Just testing that a string is generated
+            Bridge.Test.NUnit.Assert.true(!System.String.isNullOrEmpty(d1.toLocaleDateString()));
+
+            //var d2 = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
+
+
+            //Assert.AreEqual("12/19/2012", d2.ToLocaleDateString("en-US")); // → "12/19/2012"
+
+            //Assert.AreEqual("20/12/2012", d2.ToLocaleDateString("en-GB")); // → "20/12/2012"
+
+            //Assert.AreEqual("2012. 12. 20.", d2.ToLocaleDateString("ko-KR")); // → "2012. 12. 20."
+
+            //Assert.AreEqual("24/12/20", d2.ToLocaleDateString("ja-JP-u-ca-japanese")); // → "24/12/20"
+
+            //Assert.AreEqual("20/12/2012", d2.ToLocaleDateString(new string[] { "ban", "id" })); // → "20/12/2012"
+
+            //var d3 = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
+
+            //var options = new Date.ToLocaleStringOptions
+            //{
+            //    Weekday = "long",
+            //    Year = "numeric",
+            //    Month = "long",
+            //    Day = "numeric"
+            //};
+
+            //Assert.AreEqual("Donnerstag, 20. Dezember 2012", d3.ToLocaleDateString("de-DE", options)); // → "Donnerstag, 20. Dezember 2012"
+
+            //options.TimeZone = "UTC";
+            //options.TimeZoneName = "short";
+
+            //Assert.AreEqual("Thursday, December 20, 2012, GMT", d3.ToLocaleDateString("en-US", options)); // → "Thursday, December 20, 2012, GMT"
+        },
+        valueOfIsWorking: function () {
+            var d1 = Date.UTC(2017, 1, 12, 4, 36, 55, 255); // 1486874215255
+            var d2 = new Date(d1);
+
+            var d3 = new Date();
+
+            Bridge.Test.NUnit.Assert.areEqual("1486874215255", System.Double.format(d2.valueOf(), 'G'));
+            Bridge.Test.NUnit.Assert.areEqual(System.Double.format(d3.getTime(), 'G'), System.Double.format(d3.valueOf(), 'G'));
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1641", {
         statics: {
             _Foo: null,

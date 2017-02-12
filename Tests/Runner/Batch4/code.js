@@ -16254,11 +16254,11 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         valueOfWorks: function () {
             var dt = new Date(1970, 0, 2);
             dt = Bridge.ClientTest.Batch4.SimpleTypes.DateTests.addTimezoneMinutesOffset(dt);
-            Bridge.Test.NUnit.Assert.areEqual(86400000, Bridge.unbox(dt.valueOf()));
+            Bridge.Test.NUnit.Assert.areEqual(86400000, dt.valueOf());
         },
         getTimezoneOffsetWorks: function () {
             var dt = new Date(0);
-            Bridge.Test.NUnit.Assert.areEqual(System.Nullable.getValue(Bridge.cast(Bridge.unbox((new Date(1970, 0, 1).valueOf())), System.Double)) / 60000, dt.getTimezoneOffset());
+            Bridge.Test.NUnit.Assert.areEqual((new Date(1970, 0, 1).valueOf()) / 60000, dt.getTimezoneOffset());
         },
         getUtcFullYearWorks: function () {
             var dt = new Date(2011, 7, 12, 13, 42, 56, 345);
@@ -16292,6 +16292,20 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         getUtcDayWorks: function () {
             var dt = new Date(2011, 7, 12, 13, 42, 56, 345);
             Bridge.Test.NUnit.Assert.areEqual(5, dt.getUTCDay());
+        },
+        parseWorks_SPI_1624: function () {
+            // #1624
+            var d1 = Date.parse("Aug 12, 2012"); // 1344751200000
+            var d2 = Date.parse("1970-01-01"); // 0
+            var d3 = Date.parse("March 7, 2014"); // 1394175600000
+            var d4 = Date.parse("Wed, 09 Aug 1995 00:00:00 GMT"); // 807926400000
+            var d5 = Date.parse("Thu, 01 Jan 1970 00:00:00 GMT-0400"); // 14400000
+
+            Bridge.Test.NUnit.Assert.areEqual(d1, System.Int64([426436352,313]));
+            Bridge.Test.NUnit.Assert.areEqual(d2, 0);
+            Bridge.Test.NUnit.Assert.areEqual(d3, System.Int64([-1688771200,324]));
+            Bridge.Test.NUnit.Assert.areEqual(d4, System.Int64([472548352,188]));
+            Bridge.Test.NUnit.Assert.areEqual(d5, 14400000);
         },
         toDateStringWorks: function () {
             var dt = new Date(2011, 7, 12, 13, 42);

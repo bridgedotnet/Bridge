@@ -256,6 +256,10 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#1579 - TestNullableDecimalToFloatDouble", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1579.testNullableDecimalToFloatDouble);
             QUnit.test("#1599 - TestCustomIEnumerableForStringJoin", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1599.testCustomIEnumerableForStringJoin);
             QUnit.test("#1600 - TestPositiveInfinity", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1600.testPositiveInfinity);
+            QUnit.test("#1624 - DateNowIsWorking", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1624.dateNowIsWorking);
+            QUnit.test("#1624 - DateUTCIsWorking", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1624.dateUTCIsWorking);
+            QUnit.test("#1624 - ToLocaleDateStringIsWorking", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1624.toLocaleDateStringIsWorking);
+            QUnit.test("#1624 - ValueOfIsWorking", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1624.valueOfIsWorking);
             QUnit.test("#1641 - TestOutInAsync", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1641.testOutInAsync);
             QUnit.test("#1653 - TestLiftedFunctionsWithGenericInvocation", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1653.testLiftedFunctionsWithGenericInvocation);
             QUnit.test("#1684 - TestStaticInitializationForGenericClass", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1684.testStaticInitializationForGenericClass);
@@ -5049,6 +5053,51 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1600",
                     file: "Batch3\\BridgeIssues\\1600\\N1600.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1624", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1624)],
+        statics: {
+            dateNowIsWorking: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1624).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1624, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "DateNowIsWorking()",
+                    line: "10"
+                } ));
+                t.getFixture().dateNowIsWorking();
+            },
+            dateUTCIsWorking: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1624).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1624, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "DateUTCIsWorking()",
+                    line: "21"
+                } ));
+                t.getFixture().dateUTCIsWorking();
+            },
+            toLocaleDateStringIsWorking: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1624).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1624, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "ToLocaleDateStringIsWorking()",
+                    line: "48"
+                } ));
+                t.getFixture().toLocaleDateStringIsWorking();
+            },
+            valueOfIsWorking: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1624).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1624, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "ValueOfIsWorking()",
+                    line: "99"
+                } ));
+                t.getFixture().valueOfIsWorking();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1624",
+                    file: "Batch3\\BridgeIssues\\1600\\N1624.cs"
                 } );
             }
             return this.context;

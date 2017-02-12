@@ -347,15 +347,22 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         }
 
         // #SPI
-        //[Test]
-        //public void ParseWorks_SPI_1624()
-        //{
-        //    // #1624
-        //    var dt = Date.Parse("Aug 12, 2012");
-        //    Assert.AreEqual(dt.GetFullYear(), 2012);
-        //    Assert.AreEqual(dt.GetMonth(), 7);
-        //    Assert.AreEqual(dt.GetDate(), 12);
-        //}
+        [Test]
+        public void ParseWorks_SPI_1624()
+        {
+            // #1624
+            var d1 = Date.Parse("Aug 12, 2012"); // 1344751200000
+            var d2 = Date.Parse("1970-01-01"); // 0
+            var d3 = Date.Parse("March 7, 2014"); // 1394175600000
+            var d4 = Date.Parse("Wed, 09 Aug 1995 00:00:00 GMT"); // 807926400000
+            var d5 = Date.Parse("Thu, 01 Jan 1970 00:00:00 GMT-0400"); // 14400000
+
+            Assert.AreEqual(d1, 1344751200000);
+            Assert.AreEqual(d2, 0);
+            Assert.AreEqual(d3, 1394175600000);
+            Assert.AreEqual(d4, 807926400000);
+            Assert.AreEqual(d5, 14400000);
+        }
 
         // Not JS API
         //[Test]
