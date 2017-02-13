@@ -99,12 +99,12 @@
   <PropertyGroup Condition="'$(OS)' != 'Unix'">
     <PostBuildEvent>
 REM Run Bridge Compiler for the project
-"$(ProjectDir)..\..\Compiler\Builder\$(OutDir)Bridge.Builder.exe" -p "$(ProjectPath)" -b "$(ProjectDir)$(OutDir)Bridge.dll" -cfg "$(Configuration)"
+"$(ProjectDir)..\..\Compiler\Builder\$(OutDir)bridge.exe" -p "$(ProjectPath)" -b "$(ProjectDir)$(OutDir)Bridge.dll" -cfg "$(Configuration)"
     </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(OS)' == 'Unix'">
     <PostBuildEvent>
-mono "$(ProjectDir)../../Compiler/Builder/$(OutDir)Bridge.Builder.exe" -p "$(ProjectDir)/$(MSBuildProjectFile)" -b "$(ProjectDir)$(OutDir)Bridge.dll" -cfg "$(Configuration)"
+mono "$(ProjectDir)../../Compiler/Builder/$(OutDir)bridge.exe" -p "$(ProjectDir)/$(MSBuildProjectFile)" -b "$(ProjectDir)$(OutDir)Bridge.dll" -cfg "$(Configuration)"
     </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
