@@ -31,6 +31,7 @@ echo f | xcopy /f /y "%root%Bridge\Compiler\Build\bin\%build%\*.nupkg"          
 echo f | xcopy /f /y "%root%Bridge\Compiler\Contract\bin\%build%\*.nupkg"           %output%
 
 :: Bridge.Compiler
+echo f | xcopy /f /y "%root%Bridge\Compiler\Builder\bin\%build%\*.exe" 				%output%
 echo f | xcopy /f /y "%root%Bridge\Compiler\Translator\bin\%build%\*.nupkg"         %output%
 
 ::------------------------------------------------------------------------------------------::
@@ -70,3 +71,5 @@ echo f | xcopy /f /y "%root%Frameworks\WebGL\bin\%build%\*.nupkg"               
 
 :: Bridge.QUnit.Sample
 echo f | xcopy /f /y "%root%Samples\QUnit\Bridge.QUnit.Sample\bin\%build%\*.nupkg"  %output%
+
+:: PAUSE
