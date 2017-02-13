@@ -581,13 +581,6 @@ ECHO "$(ProjectDir)..\..\Compiler\Builder\$(OutDir)bridge.exe" -p "$(ProjectPath
 mono "$(ProjectDir)../../Compiler/Builder/$(OutDir)bridge.exe" -p "$(ProjectDir)/$(MSBuildProjectFile)" -b "$(ProjectDir)$(OutDir)Bridge.dll" -cfg "$(Configuration)"
     </PostBuildEvent>
   </PropertyGroup>
-  <PropertyGroup>
-    <PostBuildEvent>
-REM Run Bridge Compiler for the project
-ECHO "$(ProjectDir)..\..\Compiler\Builder\$(OutDir)bridge.exe" -p "$(ProjectPath)" -b "$(ProjectDir)$(OutDir)Bridge.dll" -cfg "$(Configuration)"
-"$(ProjectDir)..\..\Compiler\Builder\$(OutDir)bridge.exe" -p "$(ProjectPath)" -b "$(ProjectDir)$(OutDir)Bridge.dll" -cfg "$(Configuration)"
-</PostBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
