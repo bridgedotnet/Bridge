@@ -12188,9 +12188,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.null(customers2 != null && ($t38 = customers2[0].getOrders()) != null && ($t39 = $t38.concat.apply($t38, null).concat.apply($t38.concat.apply($t38, null), null)) != null ? $t39.length : null);
                 Bridge.Test.NUnit.Assert.areEqual(2, customers2 != null && ($t40 = customers2[1].getOrders()) != null && ($t41 = $t40.concat.apply($t40, null).concat.apply($t40.concat.apply($t40, null), null)) != null ? $t41.length : null);
 
-                Bridge.Test.NUnit.Assert.null(customers1 != null ? customers1[0].method1("getStrings") : null);
-                Bridge.Test.NUnit.Assert.null(($t42 = customers2[2]) != null ? $t42.method1("getStrings") : null);
-                Bridge.Test.NUnit.Assert.areEqual("getStrings", customers2 != null ? customers2[1].method1("getStrings") : null);
+                Bridge.Test.NUnit.Assert.null(customers1 != null ? customers1[0].method1("GetStrings") : null);
+                Bridge.Test.NUnit.Assert.null(($t42 = customers2[2]) != null ? $t42.method1("GetStrings") : null);
+                Bridge.Test.NUnit.Assert.areEqual("GetStrings", customers2 != null ? customers2[1].method1("GetStrings") : null);
 
                 Bridge.Test.NUnit.Assert.null(($t43 = Bridge.ClientTest.CSharp6.TestConditionAccess.getCustomers(customers1)) != null && ($t44 = System.Linq.Enumerable.from($t43).select($asm.$.Bridge.ClientTest.CSharp6.TestConditionAccess.f1)) != null && ($t45 = $t44.select($asm.$.Bridge.ClientTest.CSharp6.TestConditionAccess.f2)) != null ? $t45.count() : null);
                 Bridge.Test.NUnit.Assert.areEqual(3, ($t46 = Bridge.ClientTest.CSharp6.TestConditionAccess.getCustomers(customers2)) != null && ($t47 = System.Linq.Enumerable.from($t46).select($asm.$.Bridge.ClientTest.CSharp6.TestConditionAccess.f1)) != null && ($t48 = $t47.select($asm.$.Bridge.ClientTest.CSharp6.TestConditionAccess.f2)) != null ? $t48.count() : null);
@@ -12613,10 +12613,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var c = new Bridge.ClientTest.CSharp6.TestNameOf.C();
 
                 Bridge.Test.NUnit.Assert.areEqual("C", "C");
-                Bridge.Test.NUnit.Assert.areEqual("method1", "method1");
-                Bridge.Test.NUnit.Assert.areEqual("method2", "method2");
-                Bridge.Test.NUnit.Assert.areEqual("method1", "method1");
-                Bridge.Test.NUnit.Assert.areEqual("method2", "method2");
+                Bridge.Test.NUnit.Assert.areEqual("Method1", "Method1");
+                Bridge.Test.NUnit.Assert.areEqual("Method2", "Method2");
+                Bridge.Test.NUnit.Assert.areEqual("Method1", "Method1");
+                Bridge.Test.NUnit.Assert.areEqual("Method2", "Method2");
                 Bridge.Test.NUnit.Assert.areEqual("x", Bridge.ClientTest.CSharp6.TestNameOf.C.method1("", 0));
                 Bridge.Test.NUnit.Assert.areEqual("Y", Bridge.ClientTest.CSharp6.TestNameOf.C.method1$1("", ""));
                 Bridge.Test.NUnit.Assert.areEqual("z", c.method2(0));

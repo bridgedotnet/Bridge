@@ -644,10 +644,10 @@ namespace Bridge.Translator
                             break;
                     }
                 }
-                else
+                /*else
                 {
                     name = !preserveMemberChange ? Object.Net.Utilities.StringUtils.ToLowerCamelCase(name) : name;
-                }
+                }*/
 
                 if (!isIgnore && symbol.IsStatic && Emitter.IsReservedStaticName(name))
                 {
