@@ -44961,8 +44961,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             longText: null,
             config: {
                 init: function () {
-                    this.shortTimeoutMs = System.TimeSpan.fromMilliseconds(1) || new System.TimeSpan();
-                    this.longTimeoutMs = System.TimeSpan.fromMilliseconds(3000) || new System.TimeSpan();
+                    this.shortTimeoutMs = System.TimeSpan.fromMilliseconds(1);
+                    this.longTimeoutMs = System.TimeSpan.fromMilliseconds(3000);
                 }
             }
         },

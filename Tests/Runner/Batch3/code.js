@@ -15110,6 +15110,33 @@ Bridge.$N1391Result =                 r;
         $kind: "interface"
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2374", {
+        statics: {
+            testPropertyInitializer: function () {
+                var p = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2374.Person();
+
+                Bridge.Test.NUnit.Assert.areEqual(Bridge.Reflection.getTypeFullName(System.DateTime), Bridge.Reflection.getTypeFullName(Bridge.getType(Bridge.box(p.getCreatedOn(), System.DateTime, $box_.System.DateTime.toString))));
+                Bridge.Test.NUnit.Assert.areEqual(new Date().getFullYear(), p.getCreatedOn().getFullYear());
+
+                Bridge.Test.NUnit.Assert.areEqual(Bridge.Reflection.getTypeFullName(System.DateTime), Bridge.Reflection.getTypeFullName(Bridge.getType(Bridge.box(p.getCreatedOnNullable(), System.DateTime, $box_.System.Nullable$1.toString))));
+                Bridge.Test.NUnit.Assert.areEqual(new Date().getFullYear(), System.Nullable.getValue(p.getCreatedOnNullable()).getFullYear());
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2374.Person", {
+        config: {
+            properties: {
+                CreatedOn: null,
+                CreatedOnNullable: null
+            },
+            init: function () {
+                this.CreatedOn = new Date();
+                this.CreatedOnNullable = new Date();
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2375", {
         statics: {
             testNameofWithReflection: function () {
@@ -24168,6 +24195,20 @@ Bridge.$N1391Result =                 r;
 
     Bridge.apply($box_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2327.Foo, {
         toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2327.Foo, obj);}
+    });
+
+
+    Bridge.ns("System.DateTime", $box_);
+
+    Bridge.apply($box_.System.DateTime, {
+        toString: function(obj) {return System.DateTime.format(obj);}
+    });
+
+
+    Bridge.ns("System.Nullable$1", $box_);
+
+    Bridge.apply($box_.System.Nullable$1, {
+        toString: function(obj) {return System.Nullable.toString(obj);}
     });
 
 
