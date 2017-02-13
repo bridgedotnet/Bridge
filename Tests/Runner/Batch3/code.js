@@ -15115,8 +15115,11 @@ Bridge.$N1391Result =                 r;
             testPropertyInitializer: function () {
                 var p = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2374.Person();
 
-                Bridge.Test.NUnit.Assert.true(Bridge.is(Bridge.box(p.getCreatedOn(), System.DateTime, $box_.System.DateTime.toString), System.DateTime));
+                Bridge.Test.NUnit.Assert.areEqual(Bridge.Reflection.getTypeFullName(System.DateTime), Bridge.Reflection.getTypeFullName(Bridge.getType(Bridge.box(p.getCreatedOn(), System.DateTime, $box_.System.DateTime.toString))));
                 Bridge.Test.NUnit.Assert.areEqual(new Date().getFullYear(), p.getCreatedOn().getFullYear());
+
+                Bridge.Test.NUnit.Assert.areEqual(Bridge.Reflection.getTypeFullName(System.DateTime), Bridge.Reflection.getTypeFullName(Bridge.getType(Bridge.box(p.getCreatedOnNullable(), System.DateTime, $box_.System.Nullable$1.toString))));
+                Bridge.Test.NUnit.Assert.areEqual(new Date().getFullYear(), System.Nullable.getValue(p.getCreatedOnNullable()).getFullYear());
             }
         }
     });
@@ -15124,10 +15127,12 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2374.Person", {
         config: {
             properties: {
-                CreatedOn: null
+                CreatedOn: null,
+                CreatedOnNullable: null
             },
             init: function () {
                 this.CreatedOn = new Date();
+                this.CreatedOnNullable = new Date();
             }
         }
     });
@@ -24179,6 +24184,13 @@ Bridge.$N1391Result =                 r;
 
     Bridge.apply($box_.System.DateTime, {
         toString: function(obj) {return System.DateTime.format(obj);}
+    });
+
+
+    Bridge.ns("System.Nullable$1", $box_);
+
+    Bridge.apply($box_.System.Nullable$1, {
+        toString: function(obj) {return System.Nullable.toString(obj);}
     });
 
 
